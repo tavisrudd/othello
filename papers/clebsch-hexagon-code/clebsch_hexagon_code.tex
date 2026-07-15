@@ -129,7 +129,9 @@ of $\PG(2,11)$. Its real-projective antecedent goes back to
 Clebsch~\cite[p.~336]{Clebsch1871}; Edge constructed the finite-plane
 configuration, named it a Clebsch hexagon, and determined its order-$60$
 stabilizer~\cite[\S\S29--32]{Edge1956}. Dye developed its synthetic geometry
-over a general field~\cite{Dye1991}, and Storme and Van~Maldeghem identified
+over a general field, proved its projective uniqueness, and determined its
+stabilizer~\cite[Theorems~1 and 3, pp.~275--278]{Dye1991}; Storme and
+Van~Maldeghem identified
 the corresponding six-arc in their finite-plane classification~\cite{SVM1995}.
 
 That such an arc exists, and that its projective deep-hole syndrome locus is
@@ -157,10 +159,12 @@ census is retained as independent exact verification.
 \paragraph{What is new and what is not.} The six-arc itself, its
 real-projective ancestry, and its finite conic geometry are classical:
 Clebsch~\cite{Clebsch1871}, Edge~\cite{Edge1956}, and
-Dye~\cite{Dye1991}. The projective-uniqueness and incompleteness statements
-used here appear in Storme and Van~Maldeghem \cite{SVM1995}. In the later terminology
+Dye~\cite{Dye1991}. Projective uniqueness already follows from
+Dye's Theorem~1; Storme and Van~Maldeghem independently place the arc in the
+finite-plane catalogue and establish the incompleteness statement used here
+\cite{SVM1995}. In the later terminology
 of Blokhuis, Seress, and Wilbrink, the same configuration is a complete
-exterior set of a conic~\cite{BSW1992}; their broader sets-without-tangents
+exterior set of a conic~\cite[pp.~143, 146]{BSW1992}; their broader sets-without-tangents
 work and Van de Voorde's account give the adjacent literature
 \cite{BSW1991,VanDeVoorde2011}. The six-arc census in $\PG(2,11)$ is due to
 Sadeh~\cite{HirschfeldSadeh1984,SadehThesis1984}; see also the tables in
@@ -209,7 +213,7 @@ constructs exactly this $q=11$ hexagon: its six vertices are external points,
 all fifteen joins are external lines, and the joins concur three at a time at
 ten internal Brianchon points~\cite[\S\S29--32]{Edge1956}. In the terminology
 of Blokhuis, Seress, and Wilbrink, it is the six-point complete exterior set
-of $\cC$~\cite{BSW1992}; see Van de Voorde~\cite{VanDeVoorde2011} for the
+of $\cC$~\cite[pp.~143, 146]{BSW1992}; see Van de Voorde~\cite{VanDeVoorde2011} for the
 later exterior-set context. This exterior-set condition says only that the
 joins avoid $\cC$. Proposition~\ref{prop:deep-holes-conic} is the strictly
 stronger covering statement that those joins cover every point outside the
@@ -237,17 +241,21 @@ covering-radius or deep-hole identification.
 
 This is projectively the arc $K_2$ of Storme and
 Van~Maldeghem~\cite[Prop.~11]{SVM1995} at $q=11$, and the hexagon studied
-synthetically by Dye~\cite{Dye1991} under the existence condition $5$ a
-square in the base field. By~\cite[Prop.~12]{SVM1995} it is the unique
-$\mathrm{PGL}(3,11)$-orbit of six-arcs with stabilizer $A_5$; by
-Dye's classification its five self-polar triangles are self-polar with
-respect to the same conic $\cC$, and it lies on no conic.\footnote{The
-covering statement does not occur in Edge's $q=11$ construction or in Van de
-Voorde's accessible account of exterior sets, and it is not among the stated
-results in Dye's author-written zbMATH summary (Zbl 0698.20032) or his 1997
-self-recap. The two original Blokhuis--Seress--Wilbrink papers remain the
-priority check to be completed before submission; until then, our priority
-claim for the covering statement is conditional.} The arcs of
+synthetically by Dye under the existence condition $5$ a square in the base
+field~\cite[Theorem~1]{Dye1991}. Dye's Theorems~1 and 3 give projective
+uniqueness and stabilizer $A_5$ directly; Storme and Van~Maldeghem's
+Proposition~12 gives the corresponding finite-plane catalogue statement.
+Dye's unique-polarity theorem identifies the same conic $\cC$, and his orbit
+criterion shows that the six vertices lie on no conic in characteristic
+$11$~\cite[Theorem~2, pp.~276--277; Theorem~6(i), p.~281]{Dye1991}.\footnote{The
+primary texts separate two statements that are easy to conflate. Dye proves
+that, over $\F_{11}$, every edge is external to the associated conic
+\cite[Theorem~6(iv), p.~281]{Dye1991}, and
+Blokhuis--Seress--Wilbrink call the resulting six-arc a complete exterior
+set; thus the conic is contained in the uncovered locus. Neither source
+states the converse covering assertion that every off-conic point lies on an
+edge, which is the equality in Proposition~\ref{prop:deep-holes-conic}.}
+The arcs of
 $\PG(n,q)$ fixed by a \emph{primitive} $A_5$ or $A_6$ were catalogued more
 generally by O'Keefe and Storme~\cite{OKeefeStorme1996}, of which the present
 arc is the planar $A_5$ case (its stabilizer is $2$-transitive on the six
@@ -309,18 +317,23 @@ locus $\mathcal D_{\mathrm{proj}}(C)$ --- the set of directions $x\notin A$
 on no secant of $A$ --- is exactly the twelve points of $\cC$.
 \end{proposition}
 
-\begin{proof}[Computer-assisted proof]
-A direct finite computation over the $133$ points of $\PG(2,11)$: for each
-of the $\binom{6}{2}=15$ secants of $A$, mark the $q-1=10$ points it carries
-other than its two arc points. The marked set is
-$\PG(2,11)\setminus(A\cup\cC)$ --- all $115$ points off the arc except the
-twelve points of $\cC$, each of which has secant index zero. By the
-dictionary above, this uncovered locus is exactly the projective deep-hole
-syndrome locus, and its nonemptiness gives covering radius three rather than
-two.
+\begin{proof}
+Dye's edge criterion at $q=11$, equivalently the complete-exterior-set
+description of Blokhuis--Seress--Wilbrink, shows that all fifteen edges of
+$A$ miss $\cC$~\cite[Theorem~6(iv), p.~281]{Dye1991}
+\cite[pp.~143, 146]{BSW1992}. Hence
+$\cC(\F_{11})\subseteq\cU(A)$. Dye's Clebsch classification gives exactly
+ten Brianchon points, while the chord-defect identity of
+Lemma~\ref{lem:chord-defect} gives
+\[
+ |\cU(A)|=22-c(A)=22-10=12.
+\]
+Since $|\cC(\F_{11})|=12$, the inclusion is equality. By the dictionary
+above this is exactly the projective deep-hole syndrome locus, and its
+nonemptiness gives covering radius three rather than two.
 \end{proof}
 
-The computation is reproduced independently by
+The conclusion and full $133$-point incidence table are reproduced independently by
 \path{check_rigidity_degenerate_conic.py} as the $|\cU(A)|=12$ entry
 of the census of Section~\ref{sec:rigidity}.
 
@@ -433,7 +446,7 @@ consequence of the $[6,3,4]$ parameters and is recorded here only to
 connect the code to the design-theoretic framing this venue expects.
 \item \textbf{Five self-polar triangles.} Edge's finite-plane construction
 \cite[\S\S30.2--31]{Edge1956} and Dye's general-field synthetic theory
-\cite{Dye1991} exhibit five triangles on the six vertices,
+\cite[Theorem~2, pp.~276--277]{Dye1991} exhibit five triangles on the six vertices,
 each self-polar with respect to the unique conic $\cC$ stabilized by the
 hexagon's projective stabilizer --- the same conic as the projective
 deep-hole syndrome locus of Proposition~\ref{prop:deep-holes-conic}. In the
@@ -505,6 +518,40 @@ and forces $A_5$, that this containment is rigid rather than merely
 typical, and that for the singled-out class the complete projective
 deep-hole syndrome locus is the full set of $\F_{11}$-points of a conic.
 
+We first isolate the geometric input that removes degenerate conics from the
+computer-assisted part of the argument.
+
+\begin{lemma}[Six-arc line bound]
+\label{lem:six-arc-line-bound}
+Let $A$ be a six-arc in $\PG(2,q)$, where $q$ is odd. Every line contains at
+most $q-5$ points of $\cU(A)$.
+\end{lemma}
+
+\begin{proof}
+A chord contains no point of $\cU(A)$. If a non-chord line $\ell$ contains
+one vertex, the ten chords on the other five vertices meet $\ell$ in at
+least five distinct points: their intersections give a proper edge-colouring
+of $K_5$, whose chromatic index is five. Together with the vertex, at least
+six of the $q+1$ points of $\ell$ are therefore outside $\cU(A)$.
+
+It remains to consider $\ell\cap A=\varnothing$. The fifteen chords meet
+$\ell$ in covered points, and at most three chords pass through any one of
+them, because their endpoint pairs are disjoint. Hence there are at least
+five covered points. Equality would give a proper five-edge-colouring of
+$K_6$, necessarily a one-factorization. After relabelling, three factors
+are
+\[
+  01|23|45,\qquad 02|14|35,\qquad 03|15|24.
+\]
+Send $\ell$ to infinity and normalize the first two directions to horizontal
+and vertical. Put $p_0=(0,0)$, $p_1=(x,0)$ and $p_2=(0,y)$, where
+$xy\ne0$. Writing $p_3=(a,y)$, the first two factors force
+$p_4=(x,b)$ and $p_5=(a,b)$. Parallelism of $03$ with $15$ and with $24$
+gives two determinant equations whose difference is $2xy=0$, impossible
+for odd $q$. Thus a disjoint line has at least six covered points, and in
+all cases at most $(q+1)-6=q-5$ points of $\cU(A)$ remain.
+\end{proof}
+
 \begin{theorem}[Rigidity theorem]
 \label{thm:rigidity}
 For a six-arc $A\subset\PG(2,11)$, the following are equivalent:
@@ -519,60 +566,43 @@ conic;
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}[Computer-assisted proof]
-Every four points of a six-arc, no three collinear, form a projective
-frame; normalizing that frame to $e_1,e_2,e_3,(1,1,1)$ and sweeping the
-remaining two points over all legal completions meets every
-projective class of six-arc at least once, giving $1548$ frame-normalized
-representatives. The enumeration is by representatives, not by classes: a
-class with stabilizer $S$ appears $360/|S|$ times among them, so the class
-count is $\sum_{\text{reps}}|S|/360=15$. Exhaustiveness
-is what the argument needs, and representatives supply it; the multiplicities
-are an artifact of the normalization and carry no projective meaning. For each representative, $\cU(A)$ and its conic
-membership are computed by exact linear algebra (secant coverage by direct
-enumeration; conic containment by the nullspace of the $6\times6$
-quadratic-monomial evaluation matrix restricted to $\cU(A)$, allowing
-degenerate quadrics). This yields the extension-count histogram
+\begin{proof}
+Suppose first that $\cU(A)$ lies on a conic $Q$. If $Q$ is nonsingular then
+$|\cU(A)|\le q+1=12$. If $Q$ is degenerate, its rational points lie on one
+or two rational lines when it splits; in the nonsplit rank-two case its
+only rational point is the singular point. Thus
+Lemma~\ref{lem:six-arc-line-bound} again gives $|\cU(A)|\le12$. On the
+other hand, the chord-defect identity
+of Lemma~\ref{lem:chord-defect} says
+\[
+ |\cU(A)|=22-c(A),
+\]
+where $c(A)$ is the number of nonvertex triple-edge concurrences. In Dye's
+terminology these are precisely the Brianchon points of the hexagon $A$.
+Over a field of characteristic different from two, Dye proves that a
+hexagon has at most ten Brianchon points and that the equality cases form a
+single $\mathrm{PGL}_3(K)$-orbit~\cite[\S2.2--2.3, Theorem~1,
+pp.~275--276]{Dye1991}. Hence $c(A)\le10$, so $|\cU(A)|\ge12$; equality
+holds throughout, $c(A)=10$, and $A$ is a Clebsch hexagon. This proves
+(i)$\Rightarrow$(iv). Proposition~\ref{prop:deep-holes-conic} and
+projective equivariance give (iv)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
+stabilizer theorem gives (iv)$\Rightarrow$(v), and Storme and
+Van~Maldeghem's finite-plane classification gives the converse.
+
+It remains only to connect the numerical condition (iii). Normalize a
+projective frame in every six-arc and sweep the two remaining vertices.
+This gives $1548$ representatives meeting every projective class. Exact
+secant enumeration yields
 \[
  |\cU(A)|\in\{12,16,18,19,20,21,22\},
- \qquad\text{with multiplicities } \{6,30,150,300,630,360,72\}
+ \qquad\text{with representative multiplicities }
+ \{6,30,150,300,630,360,72\}.
 \]
-over the $1548$ normalized representatives (summing to $1548$); the
-multiplicities are an artifact of the frame-normalized enumeration, and the
-projective invariant is the value-set itself together with its
-per-class assignment, which we grant outright to the Hirschfeld--Sadeh
-classification. The minimum, $|\cU(A)|=12$, is attained by exactly six of
-the $1548$ representatives, all in a single $\mathrm{PGL}(3,11)$-orbit
-(multiplicity $6=360/60$, consistent with a stabilizer of order $60$); this
-orbit is the Clebsch hexagon class, and on it $\cU(A)$ is exactly the
-twelve points of the $A_5$-invariant conic $\cC$. No other class has
-$\cU(A)$ contained in \emph{any} conic --- every one of the remaining
-classes, including the concyclic six-arcs (those whose own six points lie on
-a conic, $252$ of the $1548$ representatives), has
-$|\cU(A)|\ge16$ with $\cU(A)$ off every conic. This gives
-(iii)$\Leftrightarrow$(iv)$\Leftrightarrow$(v), and (ii)$\Rightarrow$(i) is
-immediate. On that concyclic slice there is a useful independent check: if
-$t(H)$ counts concurrent triples among the fifteen chords of $H$, with
-multiplicity and including the sixty triples forced at $H$, then the
-six-arc chord--extension identity gives
-$t(H)+|\cU(H)|=82$: indeed, Lemma~\ref{lem:chord-defect} gives
-$|\cU(H)|=22-c(H)$, while $t(H)=60+c(H)$. Thus the four
-on-conic values $|\cU(H)|\in\{18,19,20,22\}$ correspond to
-$t(H)\in\{64,63,62,60\}$. We use only this counting identity here; the
-separate Mathieu-hexad characterization of its extremal stratum is not part
-of the present paper.
-
-For (i)$\Rightarrow$(ii) we exclude the degenerate case, since
-condition~(i) as stated permits a degenerate conic (a line-pair or double
-line): the conic-containment test above is the rank over $\F_{11}$ of the
-$|\cU(A)|\times6$ quadratic-monomial evaluation matrix, which detects
-\emph{any} nonzero quadratic form vanishing on $\cU(A)$, degenerate or not.
-The exhaustive computation shows that exactly the six Clebsch-class
-representatives have this rank below $6$; for each, the kernel is
-one-dimensional and its quadratic form is nonsingular (nonzero $3\times3$
-determinant), with $\cU(A)$ equal to all twelve $\F_{11}$-points of that
-conic; and \emph{no} six-arc has $\cU(A)$ supported on a degenerate conic.
-Hence (i)$\Rightarrow$(ii), completing the equivalence.
+The six representatives attaining $12$ form the single Clebsch orbit
+($6=360/60$); every other class has at least $16$ extension points. Thus
+(iii)$\Leftrightarrow$(iv), completing the equivalence. The exhaustive
+calculation is therefore used for the size-gap clause, not for the conic-
+containment implication.
 \end{proof}
 
 The standalone artifact \texttt{check\_rigidity\_degenerate\_conic.py}
@@ -821,6 +851,11 @@ Edge's two systems of eleven Clebsch hexagons over a fixed conic, exchanged
 by the operations outside $\Omega^+(3,11)$~\cite[\S\S29,32]{Edge1956}, are a
 classical antecedent of the same two-class motif. They are classes of
 hexagons, however, not the support-orbit bipartition proved below.
+Blokhuis--Seress--Wilbrink report another, distinct Petersen appearance at
+$q=31$: a sixteen-point complete exterior set split into a six-arc and a
+ten-set whose shared $2$-secants carry a Petersen graph
+\cite[p.~146]{BSW1992}. That configuration is neither the present
+$q=11$ support graph nor a chirality assertion.
 
 \begin{proposition}[Invariant support chirality]
 \label{prop:chirality}
@@ -1065,7 +1100,8 @@ in the script rather than assume it.
 
 The shape of the failure is instructive. The twenty conic directions remain
 in the projective deep-hole syndrome locus --- $\cC\subset\cU(A)$ still ---
-but they no longer exhaust $\cU(A)$:
+by the same classical edge criterion~\cite[p.~281]{Dye1991}, but they no
+longer exhaust $\cU(A)$:
 $120$ further points of $\PG(2,19)$ escape all fifteen secants, and
 $\cU(A)$ lies on no conic (the quadratic-monomial evaluation matrix of
 $\cU(A)$ has full rank six). The deficit itself is forced by

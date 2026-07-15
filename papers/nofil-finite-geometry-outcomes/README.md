@@ -39,6 +39,9 @@ from the `dihedral-schreier-node-kayles` catalogue.
   certify the expected octahedral `q=5` seeded residual and compare it with the proved icosahedral
   `q=11` seed. This is not yet a manuscript theorem, does not exclude proper conic-contained
   extension loci, and does not change the odd-plane conjecture or `(ON)`.
+  The q=11 Clebsch seed, associated conic, and complete-exterior geometry are classical
+  (Dye; Blokhuis--Seress--Wilbrink); `arcs` supplies the exact uncovered-locus/coding certificate,
+  while this paper claims only the residual-game interpretation.
 
 ## Elsewhere (not symlinked)
 

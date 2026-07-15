@@ -139,23 +139,24 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
 - **C146 `[clebsch]` [REPORTED 2026-07-14]** — re-based the manuscript onto the
   Clebsch→Edge→Dye/BSW→SVM lineage; added exterior-point/line/set vocabulary, the prior LDPC
   stopping-set connection, and Edge's five-triangle/two-system antecedents; separated the classical
-  exterior-set condition from the stronger covering/deep-hole statement and made the latter's
-  priority explicitly conditional on C153 → `notes/2026-07-14-c146-edge-bsw-prior-art.md`.
-- **C153 `[clebsch]` [QUEUED 2026-07-14 — EXPOSURE; ILL]** — obtain and read the two BSW originals,
-  then confirm or retract the covering fact as ours →
-  `notes/2026-07-14-c153-bsw-originals.md`. **This is the last live way our headline can be taken.**
-  Every "ours" verdict from the 2026-07-14 sweeps (the covering fact ⇒ `arcs` Prop 8.7(i) ⇒ `clebsch`
-  Prop 3.1) is conditioned on two papers nobody has read, one of which is titled *Characterization of
-  complete exterior sets of conics*.
-  **Lit steps:** (1) ILL both — Blokhuis–Seress–Wilbrink, *Mitt. Math. Sem. Giessen* **201** (1991)
-  39–44 (same series as the open Hirschfeld–Sadeh request — one batch), and BSW, *Combinatorica*
-  **12** (1992) 143–147, doi:10.1007/BF01204717 (paywalled; try institutional access, the authors'
-  homepages, and Seress's memorial/collected pages first). (2) The one question: **does either state
+  exterior-set condition from the stronger covering/deep-hole statement. Its then-conditional
+  priority boundary is now settled against BSW 1992 by C153 →
+  `notes/2026-07-14-c146-edge-bsw-prior-art.md`.
+- **C153 `[clebsch]` [IN PROGRESS 2026-07-15 — BSW 1992 READ; BSW 1991 ILL]** — BSW 1992 is now
+  read from the primary text. It defines and computationally classifies the q=11 complete exterior
+  six-arc, hence owns `C subset U`, but does not state the reverse inclusion or exact equality
+  `U=C`. Dye plus the chord-defect count makes equality an apparently unrecorded short synthesis.
+  The separate 1991 sets-without-tangents paper remains unread →
+  `notes/2026-07-15-dye-bsw-primary-source-audit.md`.
+  **Remaining lit step:** ILL Blokhuis–Seress–Wilbrink, *Mitt. Math. Sem. Giessen* **201** (1991)
+  39–44 (same series as the open Hirschfeld–Sadeh request — one batch). The 1992 *Combinatorica*
+  paper and reconstructed text are archived under `/tmp/persistent/tavis/lit-search/bsw-1992/`.
+  For the 1991 paper the one question remains: **does it state
   that the exterior set's joins miss exactly the conic** — i.e. that the uncovered locus is the
-  conic's full F_q-point set? Search their text for: uncovered, missed, covered, "not on any", the
-  complement, 0-secant, skew. (3) Also extract: the exact conjecture statement and its scope (which q,
+  conic's full F_q-point set? Search its text for: uncovered, missed, covered, "not on any", the
+  complement, 0-secant, skew. Also extract the exact conjecture statement and its scope (which q,
   which sizes, external-only or mixed-type — the mixed-type gap is ours only if they never consider
-  internal points); whether they cite Edge 1956. (4) If either states the covering fact, say so
+  internal points), and whether it cites Edge 1956. If it states the covering fact, say so
   immediately and loudly — it forces a rewrite of both manuscripts, and `arcs` ships first.
 - **C163 `[clebsch]` [REPORTED 2026-07-14]** — repaired the manuscript's
   coding semantics end to end: distinguish received-word deep holes, affine syndromes/deep-hole

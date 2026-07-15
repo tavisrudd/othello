@@ -2,11 +2,11 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **ALL TRANSPORT LEAN COMPLETE; FIBER PARTITION + SOURCE GATES OPEN** — the
-generic incidence spine, `K6` normal form, projective normalization, and division-free odd-field
-contradiction pass Lean. The remaining formal seam is exactly proving that the five index-three
-fibers partition the 15 labelled chords as a one-factorization; manuscript integration also waits
-for Dye 1991.
+**Status**: **INTERNAL LEAN PROOF AND DYE SOURCE GATE COMPLETE; MANUSCRIPT OPEN** — the
+generic incidence spine, proper five-edge-colouring, `K6` prism extraction, projective
+normalization, and division-free odd-field contradiction pass Lean. Dye 1991 pp.270--276 has now
+been read directly and supplies the exact ground-field bound and equality classification needed at
+`K=F_11`.
 
 ## Target
 
@@ -28,26 +28,30 @@ by two short geometric arguments. The exact census remains a valuable independen
 
 ## Source checkpoint
 
-Dye's open 1997 self-recap was read directly. It states both:
+Dye 1991 has now been inspected directly. The exact chain is:
 
-- “a hexagon can have at most 10 Brianchon points,” citing Dye 1991, p. 275; and
-- “All hexagons with 10 Brianchon points are projectively equivalent,” again citing Dye 1991.
+- p.270: a hexagon is a set of six points, no three collinear, and its edges are their fifteen
+  pairwise joins;
+- p.271: a Brianchon point is a nonvertex point through which three edges pass, and a Clebsch
+  hexagon is a hexagon with exactly ten Brianchon points;
+- pp.274--275 (§2.2): in characteristic different from two, no edge can contain three Brianchon
+  points, because these would be the three collinear diagonal points of the quadrangle on the four
+  remaining vertices; hence double counting edge--Brianchon incidence gives at most
+  `15*2/3=10` distinct Brianchon points;
+- p.275, Theorem 1(i): Clebsch hexagons exist in `PG(2,K)` exactly when `char(K)!=2` and `5` is a
+  square in `K`;
+- p.275, Theorem 1(ii), proved through p.276: `PGL_3(K)` is transitive on the Clebsch hexagons when
+  they occur. This is a ground-field statement and removes the suspected descent issue.
 
-The 1997 paper works over complex projective space. It is strong author-written triangulation, not
-yet a license to apply the theorem in characteristic 11. C180 must read Dye 1991, p. 275 and record
-the exact field, characteristic, nondegeneracy, and definition hypotheses. In particular it must
-verify that Dye's distinct Brianchon points agree with C174's distinct off-arc perfect-matching
-triple concurrences.
-
-Open source: R. H. Dye, *Space sextic curves with six bitangents, and some geometry of the diagonal
-cubic surface*, Proc. Edinburgh Math. Soc. 40 (1997), 85--97,
-<https://doi.org/10.1017/S0013091500023452>.
+For `K=F_11`, the hypotheses hold because `char(K)=11` and `4^2=5`. Dye's definition agrees with
+C174's `c(A)`: at a nonvertex point, concurrent chords have disjoint endpoint pairs, so three such
+chords are exactly one perfect matching of the six vertices; conversely every counted accidental
+perfect-matching concurrence is a Dye Brianchon point. Thus Dye proves both `c(A)<=10` and that
+`c(A)=10` places `A` in the unique `PGL_3(11)` Clebsch orbit.
 
 ## Proof obligations
 
-- obtain or legally inspect Dye 1991 p. 275;
-- pin the equality statement to the manuscript's projective-equivalence conclusion;
-- prove the line-pair exclusion without enumerating the 1548 normalized arcs;
+- integrate the direct Dye theorem chain and conceptual line-pair proof into the manuscript;
 - keep nonsingular and degenerate arguments separate;
 - retain `check_rigidity_degenerate_conic.py` as an independent finite verification and regression
   test rather than deleting it.
@@ -127,28 +131,15 @@ build fresh with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facin
 contain only `propext`, `Classical.choice`, and `Quot.sound`.
 
 The nonsingular case is even shorter: conic containment already gives `|U(A)|<=12`, so the same
-equality argument applies. Once Dye's exact field/descent statement is pinned, these two arguments
-replace both census branches while leaving the checker as independent confirmation.
+equality argument applies. Dye's directly checked bound supplies `|U(A)|>=12`, and his
+ground-field transitivity theorem classifies equality. These two arguments can therefore replace
+both census branches while leaving the checker as independent confirmation.
 
-An `asg` audit found no earlier session that directly read Dye 1991; every internal assertion of its
-field scope ultimately traces to the 1997 self-recap or later summaries. The p.275 source gate is
-therefore real, not merely missing from the current handoff.
-
-The proxy chain is nevertheless strong. Dye's own zbMATH review says that the 1991 paper does not
-restrict `K` to be finite, defines a Clebsch hexagon by its ten nonvertex triple-edge concurrences,
-proves existence exactly when `char(K)!=2` and `5` is a square, and states that `PGL3(K)` is
-transitive on them. Thus `F_11` satisfies the advertised hypotheses. Storme--Van Maldeghem
-independently define the ten Brianchon points as points on exactly three bisecants in the odd
-`q ≡ +/-1 (mod 10)` case. This also matches C174's `c(A)` exactly: three chords concurrent away
-from a six-arc have pairwise disjoint endpoints and hence form one perfect matching, and the
-matching attached to a concurrence point is unique.
-
-Dye's open 1997 self-recap is even more specific: it attributes both “at most ten” and “all
-ten-point hexagons are projectively equivalent” directly to the 1991 paper, p.275. Together with
-the signed review's ground-field transitivity statement, this gives very high confidence that the
-two inputs are valid over `F_11` and that there is no hidden algebraic-closure descent step. The
-adversarial confidence is approximately 0.97, but that is not a substitute for reading the cited
-page; the primary-source gate remains open.
+The primary text confirms the earlier proxy chain and removes its residual uncertainty.
+Storme--Van Maldeghem independently define the ten Brianchon points as points on exactly three
+bisecants in the odd `q ≡ +/-1 (mod 10)` case, while Dye's own 1997 self-recap attributes both the
+upper bound and projective uniqueness to the same 1991 page. These are now corroborating sources,
+not substitutes for the primary theorem.
 
 No source found a separate concurrency-count gap such as `c>=8 => c=10`. C180 does not need one:
 the new line-pair lemma already gives `|U|<=12`, hence `c>=10`, and Dye's bound gives equality.
@@ -159,9 +150,9 @@ Access ledger:
 - Dye's zbMATH review: <https://api.zbmath.org/v1/document/_search?search_string=Dye%20hexagons%20conics>;
 - Storme--Van Maldeghem author PDF: <https://cage.ugent.be/~hvm/artikels/41.pdf>.
 
-No legal open full text was found through OUP/Wiley, OpenAlex, Semantic Scholar, or repository
-searches. The practical routes are an institutional Wiley/OUP login, ILL for pp.270--286, or an
-author-copy request through Newcastle Mathematics (`maths.physics@ncl.ac.uk`).
+Primary OCR inspected locally from the user's authorized copy: `dye-1991.txt`. Because equations
+(4)--(12) are badly OCR-corrupted, manuscript use should quote the theorem statements and
+combinatorial proof only; any displayed coordinates must be checked against page images.
 
 ## Grade impact
 

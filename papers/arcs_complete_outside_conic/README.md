@@ -82,7 +82,10 @@ two-extensions, and twenty maximal three-extensions; a named theorem upgrades ev
 set to an ordinary complete arc. The six near-perfect chord classes augment by six distinct
 antipodal edges to a certified one-factorization. This six-set is a classical Clebsch hexagon and
 its all-secants-exterior property overlaps the classical exterior-set setting of
-Blokhuis--Seress--Wilbrink (1992);
+Blokhuis--Seress--Wilbrink (1992). In modern uncovered-locus notation BSW and Dye supply
+`C(F_11) subset U(A)`; Dye's ten-concurrence theorem plus the chord-defect count gives the
+reverse inclusion by cardinality. Thus the equality is an apparently unrecorded short synthesis,
+not a newly discovered classical configuration;
 the exact code/extension conjunction is presented as a checked synthesis, not a novelty claim.
 
 In the auxiliary cap-game reading, all twelve conic points are initially live and their antipodal

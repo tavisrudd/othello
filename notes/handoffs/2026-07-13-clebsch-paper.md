@@ -48,8 +48,7 @@ C186's finite A₅ action bridge now pass Lean; C184's manuscript disposition an
 source argument remain open. The proved
 q=11 defect bridge plus a two-axiom Dye interface now kernel-check the conic-rigidity implication;
 C187's actual projective small-`k` mathematics is also complete in Lean.
-It is not submission-ready until C153
-settles BSW priority, C131/C161 settle ownership, these new tails close, and C168 runs
+It is not submission-ready until C131/C161 settle ownership, the remaining new tails close, and C168 runs
 the clean-source/PDF closeout.
 
 **Authority note.** The repair map immediately below is the current route and supersedes every lower
@@ -73,12 +72,12 @@ append-only; promote scoped findings to C items rather than routing work directl
 | Priority | Task | Current failure | Exit condition |
 |---|---|---|---|
 | 1 | **C163 — REPORTED** | exact `12/120/159720/2400` semantics, `U(A)` boundary, and projective/monomial/pure group dictionary landed | closed → [C163 report](../2026-07-14-c163-clebsch-coding-semantics.md) |
-| 2 | **C146 — REPORTED; C153 OPEN** | the Clebsch/Edge/BSW rebase and exterior-set vocabulary landed; two BSW originals remain unread | C146 closed → [report](../2026-07-14-c146-edge-bsw-prior-art.md); C153 settles the residual priority exposure |
+| 2 | **C146/C153 — REPORTED** | the Clebsch/Edge/BSW rebase and exterior-set vocabulary landed; BSW 1992 primary text proves only the exterior inclusion, not exact covering | C146 report → [prior art](../2026-07-14-c146-edge-bsw-prior-art.md); primary-source verdict is recorded in the discovery track |
 | 3 | **C164 — REPORTED** | two support orbits, Petersen graph, `S5` normalizer, `10+10` per coset, `1200+1200` globally, and 1.44M coefficient-equivariance cases are tracked and cited | closed → [C164 report](../2026-07-14-c164-clebsch-chirality.md) |
 | 3a | **C173 — REPORTED** | the five self-polar triangles pair to the ten complementary supports by alternating-cycle bipartition; Petersen=`KG(5,2)` and all displayed self-polarities are certified | closed → [C173 report](../2026-07-14-c173-dye-triangles-petersen.md) |
 | 3b | **C176 — REPORTED** | the triangle-pair/Brianchon/support dictionary, complete chord-intersection ledger, exact equivariance, and manuscript proposition are tracked | closed → [C176 report](../2026-07-15-c176-brianchon-petersen-dictionary.md) |
 | 3c | **C179 — REPORTED** | the direct fixed-conic binary incidence and orbit-conic code lineage is now cited and distinguished at the object and parameter levels | closed → [C179 report](../2026-07-15-c179-conic-ldpc-literature.md) |
-| 3d | **C180 — INTERNAL LEAN PROOF COMPLETE; SOURCE/MANUSCRIPT GATES OPEN** | the five chord directions now form a certified proper five-edge-colouring, the prism factors are extracted, and odd characteristic rules out the five-covered-point equality case with standard axioms only | verify Dye 1991 p.275 and integrate the conceptual rigidity proof → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
+| 3d | **C180 — LEAN/SOURCE COMPLETE; MANUSCRIPT OPEN** | the five chord directions form a certified proper five-edge-colouring, the prism factors are extracted, odd characteristic rules out the five-covered-point equality case, and Dye 1991 pp.270--276 directly supplies the sharp bound plus ground-field equality classification | integrate the conceptual rigidity proof and retain the census as independent verification → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
 | 3e | **C181 — REPORTED** | the universal `c<=15` matching bound reduces all characteristics to `q=4,5,9,11`; the first two are excluded geometrically and the q=9 internal graph is Sylvester with published `eq_2=5`, independently checked from scratch | closed; manuscript now uses the conceptual proof and retains both exact checkers as verification → [C181 report](../2026-07-15-c181-classification-free-why11.md) |
 | 3f | **C182 — QUEUED; EXTERNAL ARCHIVE GATE** | all cited computations are indexed and manifested locally, but the PDF gives no immutable public artifact location | after C168 clean-HEAD closeout, publish/replay a versioned archive and cite its DOI in a data/code-availability paragraph → [C182 report](../2026-07-15-c182-clebsch-artifact-archive.md) |
 | 3g | **C183 — IN PROGRESS** | decoding synthesis, actual small-`k` projective mathematics, `u+c=22`, explicit Dye consequences, leaf-split A₅ point action, and C180's full odd-characteristic prism exclusion pass their Lean gates | finish manuscript synthesis and record the final theorem gallery → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
@@ -102,7 +101,7 @@ gap `delta>=12` off the Clebsch class and eight local `A₅` move orbits. C173 i
 five-triangles/Petersen explanation. Dependencies are encoded in the queue rows.
 
 **Current execution order:** C176, C179, and the finite/checker portions of C184, C185, and C187 are
-reported. C180's internal Lean proof is complete and retains only its source/manuscript tail; C181 is independent of C180 and its conceptual
+reported. C180's internal Lean proof and Dye primary-source audit are complete and retain only manuscript integration; C181 is independent of C180 and its conceptual
 all-field proof is integrated. C184/C185/C187 retain the exact manuscript/Lean tails recorded in
 the table, and C186 retains both its conceptual proof and source gate. C188 (`relconic`) and C189
 (`cap`, consuming the Nofil implication) are downstream queued consumers, not Clebsch-owned result
@@ -147,10 +146,9 @@ The sharp global nearest-conic gap and local move-orbit decomposition are in
   deep-hole/covering reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for
   the spectrum; (c) mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. Hirschfeld–Sadeh,
   Giessen 164 (1984) 245–257 is the faster, citable public version (ILL/GDZ).
-- **Dye 1991 ILL** — optional. C129's verdict (Dye does NOT state the q=11 0-bisecant/conic
-  identification) stands on three independent proxies: risk **LOW but not zero** without the full
-  text. The residual risk is a finite-field aside in the body. Nothing depends on it; the ILL would
-  only upgrade LOW to zero.
+- **Dye 1991 primary text — read.** At q=11 Dye proves that every hexagon edge is non-secant to
+  the associated conic, hence the conic is contained in the ordinary uncovered locus. He does not
+  state or prove that the edges cover every off-conic point.
 - **DMP AMC-numbering residual** — we cite Thm 6.3 / (6.4) / Thm 7.7 by **arXiv v2** numbering and the
   bibliography says so. The published AMC 17(5) numbering is unverified (paywalled). **Chronology is
   unfavorable, not favorable:** v2 is stamped 30 Jun 2021 and AMC 17(5) is 2023, so v2 *predates*
@@ -167,9 +165,11 @@ The sharp global nearest-conic gap and local move-orbit decomposition are in
 [novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md),
 [gem-program vet](../2026-07-14-gem-program-vet.md) §2.1 (a row-by-row map of the `.tex`),
 [exterior sets](../2026-07-14-gem-lit-exterior-sets.md). A TODO is planted at the §2 site in the tex.
-**C153 is the lane's exposure item** — the covering fact is ours only conditional on two unread BSW
-papers, one titled *Characterization of complete exterior sets of conics*; see the
-[C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md) for its search directions.
+**C153 is settled from the BSW 1992 primary text.** Their definition of a complete exterior set is
+a set of `(q+1)/2` exterior points whose pair-joins all miss the conic. At q=11 they explicitly list,
+up to isomorphism, one such six-arc (and one Pasch configuration). This owns the relative
+six-arc/exterior-conic configuration and proves `C subset U(A)`, but the paper nowhere asserts the
+reverse inclusion `U(A) subset C` or exact covering `U(A)=C`.
 The rigidity and gap theorems are under their first-ever literature check
 (`../2026-07-14-gem-lit-rigidity-gap.md`).
 
@@ -186,9 +186,9 @@ The rigidity and gap theorems are under their first-ever literature check
   occurrence of "external point", "external line", or "exterior set" anywhere** — so C146 is a
   vocabulary job, not a citation patch: without that sentence the new citations have nothing to
   attach to.
-- **What survives as ours:** the covering fact (`U(A)` = exactly the conic) appears in **neither**
-  Edge nor Van de Voorde, both read in full — conditioned only on the two BSW originals, which are
-  ILL-only and unread. The deep-hole "first" is audited and survives
+- **What survives as ours:** the covering fact (`U(A)` = exactly the conic) appears in **none of**
+  Edge, Dye, BSW 1992, or Van de Voorde, now all read in primary/full text. Dye and BSW establish
+  only the inclusion of the conic in the uncovered locus. The deep-hole "first" is audited and survives
   ([deep holes](../2026-07-14-gem-lit-deep-holes.md)), with Reed–Muller deep holes marked NOT
   SEARCHED rather than cleared.
 - **Chirality Prop 5.1 — the proposition survives, its surroundings do not.** The

@@ -129,8 +129,11 @@ Clebsch's "first identification of a deep-hole set with a named variety" therefo
 
 **Ruling — the split stands, the seam moves:**
 
-1. **`arcs` submits first and owns the identification.** It is near submission-ready, holds the
-   certificate, and already states the fact.
+1. **`arcs` submits first and owns publication of the exact identification and certificate.** This
+   is an internal paper-allocation ruling, not a historical-priority claim: Dye and
+   Blokhuis--Seress--Wilbrink already give the classical inclusion of the conic in the uncovered
+   locus, and equality is an apparently unrecorded short consequence of that inclusion, Dye's ten
+   concurrences, and the chord-defect identity.
 2. **`clebsch` claims only the reading** — the rigidity TFAE, the gap theorem, the chirality `ℤ/2`,
    why-11. None of that appears in `arcs`; all of it is the actual paper. Cor 3.2's "first" is
    demoted from novelty-carrier to setup, and the abstract/intro now name the companion.

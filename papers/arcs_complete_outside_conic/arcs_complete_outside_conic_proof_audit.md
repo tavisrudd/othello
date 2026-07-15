@@ -180,6 +180,10 @@ exact \(q=16\) value; the paper proves that this route is too weak and uses
 - No unconditional novelty claim for the q=11 conjunction of conic deep-hole locus, refined coset
   distribution, coloured chord partition, and extension polynomial. The bounded search did not
   locate that exact conjunction, so it is presented only as a checked synthesis.
+- No claim that the q=11 exterior six-arc or the inclusion of its conic in the ordinary uncovered
+  locus is new. Dye 1991, Theorem 6(iv), and Blokhuis--Seress--Wilbrink 1992, pp. 143 and 146,
+  supply that classical input. Exact equality follows after adjoining the elementary chord-defect
+  count and Dye's ten Brianchon concurrences; it is described as an apparently unrecorded synthesis.
 - No unconditional priority claim for the uncovered-locus quadratic
   obstruction, its `2630+3` profile, or the exact relative value. A targeted
   comparison found no predecessor, but it is not an exhaustive priority

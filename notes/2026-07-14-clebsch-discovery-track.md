@@ -915,3 +915,40 @@ published open problems and questions newly posed by this project.
   even arcs. For six vertices, five colours force the unique one-factorization orbit; for `2m`
   vertices, equality cases should be controlled by one-factorizations of `K_{2m}` together with
   which factor subfamilies admit projective direction realizations.
+
+## 2026-07-15 — Dye primary theorem recovered
+
+- Dye's original pp.270--276 removes the remaining classification ambiguity. His “hexagon” is
+  exactly a six-arc, a Brianchon point is a nonvertex triple-edge concurrence, and equality at ten
+  defines a Clebsch hexagon. In characteristic different from two he proves the sharp ten-point
+  bound by the complementary-quadrangle diagonal-point argument.
+- The equality result is stronger and cleaner than the proxy summaries suggested: Theorem 1(ii)
+  states directly that `PGL_3(K)` is transitive on the Clebsch hexagons when they occur, and its
+  coordinate proof stays over `K`. There is no algebraic-closure descent issue at `F_11`.
+- The upper bound needs only `char(K) != 2`; the “5 is a square” condition is forced by equality
+  and characterizes existence. At `F_11`, `4^2=5`, so both the bound and classification apply.
+- **Manuscript discipline:** do not conflate Dye's basic Clebsch hexagon with his later, stronger
+  “Clebsch hexagon of a conic,” defined using five self-polar triangles. C180 uses only the basic
+  equality classification.
+
+## 2026-07-15 — BSW 1992 primary text closes the exterior-set priority gate
+
+- Blokhuis--Seress--Wilbrink define a complete exterior set of a nonsingular conic in
+  `PG(2,q)` to be exactly `(q+1)/2` exterior points such that every pair-join is a passant. Thus
+  their condition says that every chord of the point set misses the conic: in the uncovered-locus
+  notation, `C(F_q) subset U(A)`.
+- Their final remarks explicitly report all computer-found examples for `q=7,11,19,23,27,31`.
+  At `q=11` there are, up to isomorphism, two complete exterior configurations: one six-arc and
+  one Pasch configuration. They credit the `q=7` four-arc and `q=11` six-arc to Korchmaros and the
+  isomorphism classification to Andries Brouwer.
+- The paper does **not** state that the fifteen joins of the `q=11` six-arc cover every point off
+  the conic. “Complete” is part of their fixed-cardinality exterior-set definition, not a chord-cover
+  maximality assertion. Consequently BSW owns the six-arc relative to the conic and the inclusion
+  `C subset U(A)`, but not the reverse inclusion or equality `U(A)=C` used for the deep-hole theorem.
+- Together with Dye's q=11 non-secant-edge statement, the priority ledger is now unconditional:
+  the classical sources supply `C subset U(A)`; the companion computation supplies the genuinely
+  additional off-conic coverage `U(A) subset C`.
+- BSW conjecture that for `q>31` no nonlinear complete exterior sets exist and report Brouwer's
+  nonexistence search through `q=131`. This is adjacent to, but does not settle, either the fixed
+  six-arc conic-filling problem or the odd-q Nofil conjecture: their set size is `(q+1)/2`, so it is
+  six specifically at `q=11`.
