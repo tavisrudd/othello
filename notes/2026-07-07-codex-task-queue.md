@@ -404,6 +404,8 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
 - **C192 `[gem-mining]` [CLOSED 2026-07-15 — NOT A FIND]** — Clebsch hexagon systems and the Paley
   biplane; the result is Edge 1956 §32's own (6,6)/(5,5) correspondence →
   `notes/2026-07-15-c192-hexagon-biplane.md`.
+- **C193 `[gem-mining]` [REPORTED 2026-07-15 — ILL GATE OPEN]** — BSW 1992 read; the exceptional
+  census and what it opens → `notes/2026-07-15-c193-bsw-exceptional-census.md`.
 
 **Relative-conic arcs lane (`relconic`) — sweep fallout (2026-07-14):** see
 [handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md). The `arcs` manuscript was edited
