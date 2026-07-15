@@ -114,10 +114,12 @@ the two BSW originals remain unread.
 
 ## Open frontiers
 
-- **C147 — the hexad characterization.** *A 6-subset of the conic in PG(2,11) is a hexad of
-  S(5,6,12) iff no three of its chords are concurrent off it.* Computed, with a gap in its spectrum
-  (61 never occurs), the t=60 stratum being exactly the two Steiner systems. Gated on the literature
-  sweep; the natural extension is octads of S(5,8,24) on the conic of PG(2,23).
+- **C147 — the hexad characterization: fully verified, and singular.** *A 6-subset of the conic in
+  PG(2,11) is a hexad of one of the two S(5,6,12) systems iff no three of its chords are concurrent
+  off it.* Machine-checked end to end; literature verdict ABSENT at full-text level. **The octad
+  analogue at q=23 is DEAD** (minimum t = 295 against a null of 280 — the condition is unattainable,
+  so there is no stratum to select), which removes the family and settles the result as a note rather
+  than a paper. Left: a proof, and an explanation of the spectrum gap at 61.
 - **ω_arc growth** — DOWNGRADED. The all-external half is a recomputation inside BSW's checked range
   (above); the residue is the mixed-type invariant and the uninspected extremal-witness stabilizers
   at q = 23–37. Lowest-ranked item in this lane, not the second-place bet an earlier pass called it.

@@ -33,9 +33,9 @@ ID is computed, so an invented ID in prose silently burns that number.)
 
 **Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-alternate-orbit-repair.md). The certificate-free `s ≥ 7` theorem is
-reported; the uniform Q25 certificate closure is running, and C148 has begun as arithmetic-only
-development outside that build graph. C149–C152 are paper-upgrade tasks ordered by EV and their
-explicit decision gates.
+reported; the uniform Q25 certificate closure is running, and C148's arithmetic and semantic
+theorem sources are drafted outside that build graph pending a one-worker validation window.
+C149–C152 are paper-upgrade tasks ordered by EV and their explicit decision gates.
 - **C142 `[alt-orbit-repair]` [REPORTED 2026-07-14]** — kernel-checked alternate-orbit repair for
   invariant ten-arcs over every prime-power base order `s ≥ 7`, with at least eight alternatives,
   and package the existing Q25 nonexceptional-profile repair bounds →
@@ -44,9 +44,10 @@ explicit decision gates.
   exceptional-profile leaf for two distinct legal pairs; if feasible, regenerate and build the
   full two-witness `f=2` certificate, transport distinctness, and prove uniform Q25 alternate-orbit
   repair → `notes/2026-07-14-c143-q25-alternate-orbit-repair.md`.
-- **C148 `[alt-orbit-repair]` [ACTIVE 2026-07-14 — BUILD-WINDOW GATED]** — kernel-check the exact
-  general-`s` five-profile lower-bound envelope, its crossover profiles, and the uniform
-  318-alternative corollary → `notes/2026-07-14-c148-general-s-profile-envelope.md`.
+- **C148 `[alt-orbit-repair]` [ACTIVE 2026-07-14 — SOURCE DRAFTED; BUILD-WINDOW GATED]** —
+  kernel-check the exact general-`s` five-profile lower-bound envelope, its crossover profiles, and
+  the uniform 318-alternative corollary →
+  `notes/2026-07-14-c148-general-s-profile-envelope.md`.
 - **C149 `[alt-orbit-repair]` [QUEUED 2026-07-14 — AFTER C148 PHASE-DIAGRAM GATE]** — generalize
   deletion/repair from `10→8` to a parameterized invariant `(k+2)→k` robust equivariant exchange
   theorem with a nontrivial `(s,k,f,e)` range →
@@ -125,7 +126,8 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   `notes/2026-07-14-c147-hexad-polarity-characterization.md`. The claim is fully machine-checked
   (both systems Steiner-verified, swapped by every outer map, t=60 stratum = their union exactly,
   gap at 61). Open tail is mathematics, not verification: a proof, an explanation of the missing
-  t=61, and the q=23 octad analogue before it is claimable.
+  t=61. The q=23 octad analogue is DEAD (min t=295 vs null 280), so the result is singular and
+  note-sized, not the first rung of a Mathieu-designs-from-polarity family.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

@@ -106,14 +106,60 @@ This also re-derives, from a second code path, the chirality motif the vet found
 (two systems exchanged exactly by the non-PSL operations) — the same ℤ/2 that the `clebsch` paper's
 Prop 5.1 carries on the leader side.
 
+## The octad analogue at q=23 — DEAD, and the mechanism is q=11-only
+
+`notes/2026-07-14-c147-octad-q23.rs` (Rust; `rustc -O`, runs in ~2 s over all C(24,8) = 735471
+subsets). Same invariant, next Mathieu design: the 24 conic points of PG(2,23) = P¹(F₂₃), the 759
+octads of S(5,8,24) realized via the extended QR(23) Golay code, null `t ≥ 8·C(7,3) = 280`.
+
+**Result: the null is never attained. Minimum `t` = 295.** No 8-subset of the conic at q=23 avoids
+accidental concurrences, so there is no stratum for the characterization to select. The prediction
+recorded in the script's header — that the outer coset would give `|{t = 280}| = 2 × 759 = 1518`, the
+direct analogue of the q=11 result — is refuted.
+
+Verified along the way, because each was a trap:
+
+- **The octads' t-constancy is forced, not a finding.** All 759 octads of both systems sit at
+  `t = 304`; but PSL(2,23) is transitive on the octads (orbit of one = all 759, computed) and `t` is
+  PSL-invariant, so constancy is automatic. Reporting it as structure would have been an artifact.
+- **`t` does not separate the octads.** The `t = 304` stratum holds 65274 subsets, of which 1518 are
+  octads.
+- **The 759-at-maximum is numerology.** `t = 320` has exactly 759 subsets and `t = 316` exactly 1518
+  — octad-sized numbers at the top of the spectrum. Neither is a Steiner system, and both are
+  **disjoint from the Golay octads**. `759 = |PGL₂(23)|/16` is a PGL-orbit with stabilizer of order
+  16; the coincidence is two index-divisors of one group order — the same `|config| = |space|`
+  pattern the fill-signature detector was retired for.
+
+**The failure is geometric, not arithmetic — the third instance of this program's signature
+pattern.** Counting permits `t = 280` at q=23. Pairs of chords number C(28,2) = 378, of which
+8·C(7,2) = 168 share an endpoint in H, leaving 210 disjoint pairs that must meet off the conic; with
+every `m_P ≤ 2` that needs 210 points at `m_P = 2` and 196 at `m_P = 1`, using 406 of the 529
+available off-conic points. Feasible, and not realized. The identical computation at q=11 needs 105
+of 121 points — also feasible, and there it *is* realized, by exactly the hexads. So capacity does
+not explain either outcome. This is the same shape as the healthy census (arc-cliques of
+covering-capable size exist for every q ≥ 13, yet none covers) and as "why 11" itself: the counting
+permits, the geometry decides, and no structural cause is known.
+
+**Consequence for the write-up.** The mechanism does not generalize to S(5,8,24); the q=11 hexad
+characterization is singular, not rung one of a tower. This removes the upside that would have made
+it a paper rather than a note — and it fits the program's established character (an anti-robust,
+sharp isolated point at q=11 rather than a robust basin), which is itself the reason to state it
+plainly rather than hunt for a family that is not there.
+
 ## Remaining work before this is claimable
 
+Verification is done; what is left is mathematics.
+
 1. **A proof.** This is a 924-case verification, and the appeal of the statement is that it is
-   synthetic. A referee will ask.
-3. **Explain the missing 61.** One accidental concurrence being impossible means concurrences are
-   forced to arrive in pairs. That reason is probably the content.
-4. **The octad analogue** at q=23 (8-subsets of the conic, S(5,8,24), null `t ≥ 8·C(7,3) = 280`).
-   This decides between an elegant note and a real paper: a hit makes the mechanism uniform across
-   both Mathieu designs rather than a fact about one. Note M₂₄ does not embed in PGL₂(23) the way
-   M₁₂ does in PGL₂(11) — PSL₂(23) is maximal in M₂₄ — so a hit would be more surprising, and a
-   structured miss is informative about what the mechanism depends on.
+   synthetic. A referee will ask, and the octad negative makes the demand sharper: with no family to
+   appeal to, the q=11 case has to carry itself.
+2. **Explain the missing 61.** One accidental concurrence being impossible means concurrences are
+   forced to arrive in pairs. That reason is probably the content of the result, and it is now the
+   most likely route to (1).
+3. **Why does q=23 fail?** Capacity permits `t = 280` there and the geometry refuses it. The same
+   gap — counting permits, geometry decides — is open for the healthy census past q=11 and for
+   "why 11" itself. A single mechanism explaining all three would be worth more than any of them.
+
+Venue, given the octad negative: a short note (*Discrete Math.* / *J. Combinatorial Designs* /
+*Designs, Codes and Cryptography*), or a *Monthly*-style piece if written for elegance — not a
+Mathieu-designs-from-conic-polarity paper, which is what a hit at q=23 would have supported.
