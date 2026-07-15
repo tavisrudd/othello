@@ -13,6 +13,10 @@ external specialist citation-chain review remains a submission preflight gate, n
 **Follow-up:** the twisted-cubic transversal spectrum spun off to
 [C115–C120](2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in
 the [companion archive](done/2026-07-13-projective-completion-repaircodes-archive.md).
+Two bounded expert-review follow-ups are queued without reopening C111–C114: C202 classifies the
+q=9 extremal blockers/disjoint repair families up to automorphism, and C203 tests whether retaining
+repair coefficients yields an exact access, bandwidth, or availability consequence. See the
+[expert-question portfolio](../2026-07-15-expert-questions-upgrade-portfolio.md).
 
 ## Goal and claim ledger
 

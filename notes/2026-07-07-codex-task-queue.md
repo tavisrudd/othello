@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C198.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C204.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -454,6 +454,11 @@ from outside the lane (commit `cfd8537`, Edge 1956 + DMP Thm 7.7 re-pin) and shi
   `C(F_7) subsetneq U(A)`, with `8<20`; use it as the smallest concrete warning that complete
   exteriority is weaker than relative completeness, without claiming the BSW configuration anew →
   `notes/2026-07-15-c196-q7-exterior-strict-containment.md`.
+- **C201 `[relconic]` [QUEUED 2026-07-15 — EVEN-FIELD STRUCTURAL UPGRADE]** — test whether the q=16
+  quadratic evaluation-rank obstruction extends to an infinite even-field family: derive the
+  symbolic rank criterion, run a bounded q=64 gate, and classify equality/first-excess orbits in
+  the tested cells; report either a theorem route or the precise failing obstruction →
+  `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
 
 **Twisted-cubic lane (`cubic`) — the k-tower probe (2026-07-14):** see
 [handoff](handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
@@ -482,6 +487,11 @@ from outside the lane (commit `cfd8537`, Edge 1956 + DMP Thm 7.7 re-pin) and shi
   `C(n,3)(q²+q+1) ≥ q³+q²+q − n` gives n ≥ 5 at q=11; compute the plane-pencil ceiling before
   searching. ~1300 off-cubic points at q=11, symmetry order 1320 — **Rust from the start**, not a
   Python prototype.
+- **C204 `[cubic]` [QUEUED 2026-07-15 — N1 GRAPH-RECOGNITION GATE]** — for the continuation N1
+  graph, compute exact automorphism groups, spectra, orbitals, and coherent-configuration data over
+  a bounded small-q range; compare with cross-ratio and known finite-geometry graph families, then
+  formulate the general automorphism theorem or list the exact exceptional cells →
+  `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
@@ -536,6 +546,16 @@ transfer and the second asymptotic rate–distance point; C114 owns exact-claim 
 adversarial review, and synchronized publication. No proposed formula or novelty claim enters the
 paper before its Lean, axiom, computation, and citation gates pass. Start with the
 [projective-completion handoff](handoffs/2026-07-13-projective-completion-repaircodes.md).
+
+- **C202 `[repaircodes]` [QUEUED 2026-07-15 — BOUNDED EXTREMIZER CLASSIFICATION]** — for the q=9
+  completed cubic-axis seed, classify minimum blockers and maximum disjoint repair families up to
+  monomial automorphism, with an independent ILP/orbit certificate; then test which optimizer
+  types admit a symbolic q=3^h proof → `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
+- **C203 `[repaircodes]` [QUEUED 2026-07-15 — OPERATIONAL COEFFICIENT SCOUT]** — retain the actual
+  coefficients in every local repair equation and determine whether complete support hypergraphs
+  imply a new exact helper-access, bandwidth, or availability guarantee; a scoped negative boundary
+  is an acceptable result, but a support-only restatement is not →
+  `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
 
 **TWISTED-CUBIC CROSS-LANE / DISCOVERY-TRACK FOLLOW-UP (2026-07-13): C115–C120.** Grew out of the
 Discovery-Track triage. One object — the twisted cubic in `PG(3,q)` under `PGL(2,q)` — ties coding
@@ -652,6 +672,16 @@ fixed-locus / quadric-Witt dichotomy leap).
   involution, or P-position. Strict stop: this is a cheap scout, not manuscript scope unless it
   yields a clean certified game statement; distinguish it from C189's exact q=5 conic-filling seed →
   `notes/2026-07-15-c198-q7-exterior-residual-scout.md`.
+- **C199 `[cap]` [QUEUED 2026-07-15 — SCHREIER STRATEGY EXTRACTION]** — for every value used in the
+  dihedral/S4/A5 submission catalogue, turn zero nimbers into direct pairing/symmetry strategies
+  where possible and nonzero nimbers into canonical winning-move rules; explicitly mark any row
+  whose only proof remains Grundy decomposition →
+  `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
+- **C200 `[cap]` [QUEUED 2026-07-15 — SCHREIER GRAPH RECOGNITION]** — compute automorphism groups,
+  spectra, and orbital/coherent-configuration data for the bounded tame template catalogue and
+  compare it with known Möbius-ladder, dihedral-Cayley, cross-ratio, and Schreier families; promote
+  only a structural identification or a genuinely new family →
+  `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
 
 - **C84 `[cap]` [ACTIVE 2026-07-12 — abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:

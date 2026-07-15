@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-13
 **Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun, C188 q=5 import, and C195–C196 exterior-set framing remain
-**Tasks:** C106–C110, C188, C195–C196
+**Tasks:** C106–C110, C188, C195–C196, C201
 
 ## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
 
@@ -165,6 +165,7 @@ not make a new abstract `A5` isomorphism or full orbit formalization a completio
 | **C109 [REPORTED 2026-07-13]** | Formalize T3 in downstream `Q11Coding.lean`. | Non-GRS `[6,3,4]₁₁` code, exact covering radius/deep-hole locus, syndrome/leader distributions, tangent-antipode matchings, and complete extension spectrum build under strict trust; no abstract `A5` library is required. |
 | **C110 [IN PROGRESS; SHARED AGGREGATE ONLY]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; two hostile-review rounds, the post-audit actual-leader and affine-distance/conic bridges, final source checklist, focused rebuild, axiom audit, and PDF rebuild pass. Only the shared aggregate rerun remains. |
 | **C188 [QUEUED 2026-07-15]** | Import C187's `q=5` four-frame witness and derive `rho_C(5)=L_2(5)=4`; cite the broader small-`k` classification without migrating it. | Relative-conic semantic theorem and `Results` entry pass strict-kernel checks; manuscript, result table, proof audit, TRUST manifest, and paper index are synchronized. |
+| **C201 [QUEUED 2026-07-15]** | Derive the symbolic form of the q=16 quadratic-rank obstruction, test q=64, and classify equality/first-excess orbits in the bounded cells. | Either an infinite even-field theorem route or a precise obstruction failure, with independently replayable orbit/rank evidence. |
 
 ## Cheap refutation gates
 

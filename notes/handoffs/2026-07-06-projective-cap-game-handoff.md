@@ -543,6 +543,12 @@ task list.  Current high-value items:
   a clean symmetry, involution, or certified P-position appears. This is a scout beside C189, not a
   reformulation of `(ON)`. [Scout](../2026-07-15-c198-q7-exterior-residual-scout.md).
 
+- **C199–C200 [QUEUED] — dihedral-paper expert upgrades.** Extract direct pairing/winning-move
+  strategies from every published Schreier-template value, then identify the bounded template
+  graphs through automorphism, spectrum, orbital, and coherent-configuration data. These strengthen
+  the standalone dihedral paper and do not change C84's abundance-first game frontier. See the
+  [expert-question portfolio](../2026-07-15-expert-questions-upgrade-portfolio.md).
+
 - **C100 [REPORTED] — relative-conic sealing review.** Exact game localization, q=9 terminal P,
   and the actual q=11 icosahedral seeded P position are Lean-proved. The tested descent and
   defect-to-C80 levers were negative; static existence was not promoted into an (ON) or root-value

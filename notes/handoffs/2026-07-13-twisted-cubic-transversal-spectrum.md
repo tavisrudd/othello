@@ -125,6 +125,12 @@ symmetric instances. Pins/guards the C115 forms against exponent-parity effects.
   move-to-fixed-point recursion (impartial, not strategy-stealing); target the elliptic `Q⁻`
   boundary as a Witt/type invariant. B+→A on the nofil flagship.
 
+**Continuation-paper recognition follow-up:** C204 computes automorphism groups, spectra,
+orbitals, and coherent-configuration data for bounded N1 continuation graphs, then tests whether
+they are known cross-ratio/finite-geometry families or support a general new automorphism theorem.
+It is pegged `cubic` but does not displace C116 as this handoff's next step. See the
+[expert-question portfolio](../2026-07-15-expert-questions-upgrade-portfolio.md).
+
 ## Reproduction notes (scratchpad scripts are ephemeral)
 
 Constructions used (regenerate in `rust/` or `uv run --with galois`): cubic
