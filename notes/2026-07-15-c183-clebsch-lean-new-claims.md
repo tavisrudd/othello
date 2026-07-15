@@ -6,8 +6,9 @@
 synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
 narrow elaboration and axiom audit. C186's finite A₅ point-action bridge also passes its full
 serial build, freshness, generator, and standard-axiom gates. C180's entire incidence reduction
-and finite `K6` triangular-prism normal form also pass; only its projective coordinate bridge
-remains. Remaining work is that bridge, C186's conceptual/source argument, and manuscript synthesis.
+and normalized affine triangular-prism obstruction also pass; only extraction and projective
+normalization into that interface remain. Remaining work is that bridge, C186's conceptual/source
+argument, and manuscript synthesis.
 
 ## Live subagent roster
 
@@ -61,6 +62,8 @@ The same strict-kernel verdict now holds for:
 - `SixVertexOneFactorization.lean`: a six-witness strict-kernel certificate that every labelled
   `K6` one-factorization has the triangular-prism normal form required by C180; its tracked `uv`
   replay independently confirms the `15` matchings and `6` labelled totals.
+- `OddSixArcAffinePrism.lean`: the common-point-at-infinity direction determinant lemma and the
+  normalized triangular-prism impossibility over every field with `(2 : K) != 0`.
 
 ## Dye source and formalization boundary
 
@@ -84,9 +87,9 @@ alternative, not a formalization of Dye's conceptual proof.
 
 1. use the certified C186 point-action bridge for the remaining chirality action layer and write
    the conceptual/source argument;
-2. close C180's remaining projective-to-affine normalization and parallelism bridge; the incidence
-   reduction, finite prism normal form, and conditional conic-rigidity implication below Dye are
-   already kernel-checked;
+2. close C180's remaining extraction/projective-normalization bridge into the affine prism
+   interface; the incidence reduction, finite normal form, affine contradiction, and conditional
+   conic-rigidity implication below Dye are already kernel-checked;
 3. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
    is stable.
 

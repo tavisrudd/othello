@@ -886,3 +886,8 @@ published open problems and questions newly posed by this project.
   extraction a transparent six-witness kernel certificate rather than a large search. **Disposition
   — answer in this paper:** use the normal form in the conceptual proof; keep the labelled count in
   the verification note unless it improves exposition.
+- The affine obstruction itself is field-generic and sharper than the q=11 application: a common
+  point at infinity converts projective concurrence directly into a zero direction determinant,
+  and the prism then forces `2=0`. **Question — follow-on:** in characteristic two, classify the
+  realizable five-direction equality configurations rather than treating failure of the odd proof
+  as merely exceptional.

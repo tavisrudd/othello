@@ -2,10 +2,10 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **INCIDENCE + FINITE PRISM LEAN COMPLETE; COORDINATE + SOURCE GATES OPEN** — the generic
-projective-plane incidence spine, complete case split, and `K6` one-factorization normal form pass
-Lean. The remaining formal seam is the projective-to-affine normalization and parallelism argument;
-manuscript integration also waits for the exact Dye 1991 source check.
+**Status**: **INCIDENCE + PRISM OBSTRUCTION LEAN COMPLETE; NORMALIZATION + SOURCE GATES OPEN** — the
+generic incidence spine, `K6` normal form, common-infinity direction lemma, and normalized odd-field
+contradiction pass Lean. The remaining formal seam is extracting and projectively normalizing the
+prism from the equality case; manuscript integration also waits for the Dye 1991 source check.
 
 ## Target
 
@@ -107,10 +107,12 @@ tracked `uv` generator independently enumerates 15 perfect matchings and exactly
 one-factorizations with explicit relabelling witnesses. Lean checks the six-witness table and the
 semantic completeness claim with ordinary kernel reduction.
 
-The sole remaining internal bridge uses the existing projective/affine coordinate API to send the
-exceptional line to infinity and derive the two equations. Both focused Lake targets build fresh
-with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports contain only
-`propext`, `Classical.choice`, and `Quot.sound`.
+`lean/RelativeConicArcs/OddSixArcAffinePrism.lean` also proves that affine lines through a common
+point at infinity have parallel direction vectors, and rules out the normalized triangular prism
+in odd characteristic. The sole remaining internal bridge extracts the prism directions from the
+five equality fibers and projectively normalizes them into that interface. All focused targets
+build fresh with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports
+contain only `propext`, `Classical.choice`, and `Quot.sound`.
 
 The nonsingular case is even shorter: conic containment already gives `|U(A)|<=12`, so the same
 equality argument applies. Once Dye's exact field/descent statement is pinned, these two arguments
