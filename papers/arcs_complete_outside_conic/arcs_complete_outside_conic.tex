@@ -525,14 +525,20 @@ For calculation, the corrected capacity has the parity-dependent forms
 \end{equation}
 For comparison, some values are
 \[
-\begin{array}{c|rrrrrrr}
-q&8&9&11&13&16&17&19\\ \hline
-L_1(q)&5&5&6&6&7&7&7\\
-L_2(q)&6&6&6&7&8&8&8
+\begin{array}{c|rrrrrrrr}
+q&5&8&9&11&13&16&17&19\\ \hline
+L_1(q)&4&5&5&6&6&7&7&7\\
+L_2(q)&4&6&6&6&7&8&8&8
 \end{array}
 \]
 Thus the second-moment correction alone proves, for example, that a
 $\cC$-complete arc in $\PG(2,16)$ has at least eight points.
+At $q=5$, the matching lower bound $L_2(5)=4$ has a four-frame witness:
+the companion Clebsch analysis checks that its ordinary-uncovered locus is
+the full rational point set of a nonsingular conic.  A queued follow-up will
+import that witness into the present formal semantics and promote the derived
+target $\rhoC(5)=4$ into the verified small-value theorem; the companion owns
+the broader classification for arcs of sizes four through seven.
 
 \begin{theorem}[Explicit additive lower bound]
 \label{thm:asymptotic}
@@ -762,7 +768,7 @@ inequality.
 \section{Verified finite-field examples}
 \label{sec:examples}
 
-The values at $q=8,9,11$ use the lower bound $L_2(q)$ and explicit
+The verified values at $q=8,9,11$ use the lower bound $L_2(q)$ and explicit
 coordinates.  At $q=16$, the same ingredients give $8\le\rhoC(16)\le9$;
 a checked projective classification excludes eight.
 

@@ -159,6 +159,7 @@ print(f"\nt-spectrum over all {sum(spectrum.values())} 6-subsets: {dict(sorted(s
 # ---- the claim ----------------------------------------------------------------
 assert min(spectrum) == 60, "the forced lower bound t >= 60 FAILS"
 assert 61 not in spectrum, "t = 61 occurs -- the spectrum gap is not real"
+assert spectrum == Counter({60: 264, 62: 330, 63: 220, 64: 110}), spectrum
 assert len(t60) == 264, len(t60)
 assert t60 == (sys1 | sys2), "the t=60 stratum is NOT the union of the two systems"
 

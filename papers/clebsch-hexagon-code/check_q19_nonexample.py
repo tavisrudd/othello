@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Prints the EXACT deep-hole count of the icosahedral six-arc at q=19 (Section 6).
+Prints the exact projective weight-three syndrome-direction count of the
+icosahedral six-arc at q=19 (Section 6).
 
 The paper's q=19 non-example is quoted from a counting bound (381 points - 15 secants
 x 18 covered points each - 6 arc points >= 105), which is only a lower bound. This
-script builds the arc and enumerates its deep-hole locus directly.
+script builds the arc and enumerates its extension locus directly. Since it is
+nonempty, the covering radius is three and this is also the projective deep-hole
+syndrome locus.
 
 Construction (the q=11 Definition 2.1 recipe, transplanted):
   * conic C: XZ = Y^2 in PG(2,19), parametrized by [u:v] -> (u^2, uv, v^2);
@@ -181,7 +184,7 @@ def fixed_points(m3):
     return [p for p in PTS if apply3(m3, p) == p]
 
 
-def deep_hole_locus(arc):
+def extension_locus(arc):
     covered = set(arc)
     n = len(arc)
     for i in range(n):
@@ -222,6 +225,7 @@ def main():
     print("=== The icosahedral six-arc at q=19 (Definition 2.1 recipe, transplanted) ===")
     a5 = find_a5()
     print(f"  found A5 < PSL2(19): |A5| = {len(a5)}")
+    assert len(a5) == 60
 
     ord5 = [m for m in a5 if pgl2_order(m) == 5]
     print(f"  elements of order 5: {len(ord5)} (expected 24, in 6 cyclic subgroups)")
@@ -245,26 +249,41 @@ def main():
     print(f"  poles of the six 5-fold axes: {arc}")
     print(f"  distinct poles: {len(arc)}")
     assert len(arc) == 6
+    assert arc == [
+        (1, 2, 2), (1, 4, 2), (1, 6, 5),
+        (1, 7, 8), (1, 10, 16), (1, 16, 10),
+    ]
 
-    print(f"  is a six-arc (no 3 collinear): {is_arc(arc)}")
-    assert is_arc(arc)
-    print(f"  disjoint from the conic XZ=Y^2: {all(not on_conic(p) for p in arc)}")
+    arc_ok = is_arc(arc)
+    disjoint_from_conic = all(not on_conic(p) for p in arc)
+    print(f"  is a six-arc (no 3 collinear): {arc_ok}")
+    assert arc_ok
+    print(f"  disjoint from the conic XZ=Y^2: {disjoint_from_conic}")
+    assert disjoint_from_conic
 
-    U = deep_hole_locus(arc)
+    U = extension_locus(arc)
     print()
-    print("=== Deep-hole locus ===")
+    print("=== Extension / projective weight-three syndrome locus ===")
     print(f"  |PG(2,19)| = {len(PTS)}, |conic| = {len(CONIC)}")
     print(f"  EXACT |U| = {len(U)}")
     print(f"  counting lower bound 381 - 6 - 15*18 = {381 - 6 - 15 * 18}")
-    print(f"  |U n conic| = {sum(1 for p in U if on_conic(p))}")
+    conic_intersection = sum(1 for p in U if on_conic(p))
+    print(f"  |U n conic| = {conic_intersection}")
     rank = conic_containment_rank(U)
     print(f"  quadratic-monomial rank of U = {rank}/6 -> U lies on a conic: {rank < 6}")
+    assert len(U) == 140
+    assert conic_intersection == 20
+    assert set(CONIC) <= set(U)
+    assert len(set(U) - set(CONIC)) == 120
+    assert rank == 6
 
     print()
     print("=== VERDICT ===")
-    print(f"  At q=19 the icosahedral six-arc has exactly {len(U)} deep holes, versus the")
-    print(f"  {Q + 1} points of any conic of PG(2,19); U lies on no conic at all.")
+    print(f"  At q=19 the icosahedral six-arc has exactly {len(U)} projective")
+    print(f"  weight-three syndrome directions, versus the {Q + 1} points of any conic;")
+    print("  U lies on no conic at all.")
     print("  The phenomenon does not survive past q=11, as Theorem 6.2 requires.")
+    print("all assertions passed")
 
 
 if __name__ == "__main__":

@@ -125,7 +125,11 @@ for H in combinations(labels, 6):
     if t - 60 != n_fpf:
         bad += 1
     spectrum[t] += 1
-    tvals[H] = t
+    tvals[frozenset(H)] = t
+
+assert maxm_global <= 3, maxm_global
+assert bad == 0, bad
+assert spectrum == Counter({60: 264, 62: 330, 63: 220, 64: 110}), spectrum
 
 print(f"\nmax m_P over off-conic points, all H: {maxm_global}   (claim: <= 3)")
 print(f"identity  t(H) - 60 == #fpf involutions stabilising H:  {'HOLDS for all 924' if bad == 0 else f'FAILS for {bad}'}")
@@ -146,14 +150,25 @@ for H in combinations(labels, 6):
     orbits.append(orb)
 
 print(f"\nPGL(2,11)-orbits on the 924 six-subsets: {len(orbits)}")
+assert len(orbits) == 4, len(orbits)
+observed_orbits = set()
 for orb in sorted(orbits, key=len, reverse=True):
     rep = tuple(sorted(next(iter(orb)), key=str))
     stab = 1320 // len(orb)
-    t = tvals[tuple(sorted(rep, key=str))] if tuple(sorted(rep, key=str)) in tvals else None
+    t = tvals[frozenset(rep)]
     nf = len(fpf_involutions(rep))
     # involutions in the stabiliser (fpf or not)
     hs = set(rep)
     n_inv_stab = sum(1 for m in involutions
                      if {perms[m][idx[x]] for x in hs} == hs)
+    observed_orbits.add((len(orb), stab, t, n_inv_stab, nf))
     print(f"  orbit size {len(orb):3}  |Stab| = {stab:2}  t = {t}  "
           f"involutions in Stab: {n_inv_stab}  of which fpf on H: {nf}")
+
+assert observed_orbits == {
+    (264, 5, 60, 0, 0),
+    (330, 4, 62, 3, 2),
+    (220, 6, 63, 3, 3),
+    (110, 12, 64, 7, 4),
+}, observed_orbits
+print("all involution identities, spectra, and orbit rows passed")

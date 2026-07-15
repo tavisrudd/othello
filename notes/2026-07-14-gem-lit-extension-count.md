@@ -1,8 +1,10 @@
 # Literature exposure check — extension-count form of the hexad characterization
 
 **Date**: 2026-07-14
-**Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: COMPLETE for Q1 (the priority); Q2 partial, Q3 answered. Gaps listed under Limitations.
+**Lane**: `gem-mining` — see CLAUDE.md § Lane routing. (The Clebsch manuscript may consume the
+`t+|U|` identity only through its C167 cross-lane seam.)
+**Status**: COMPLETE for the open-access Q1 priority check; C155 is clear to draft. C169 owns the
+remaining inaccessible-source gate listed under Limitations and must close before submission.
 
 ## Scope
 

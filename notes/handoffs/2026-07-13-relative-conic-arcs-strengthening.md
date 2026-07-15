@@ -3,8 +3,8 @@
 **Lane**: `relconic` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-13
-**Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun remains
-**Tasks:** C106–C110
+**Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun and C188 q=5 import remain
+**Tasks:** C106–C110, C188
 
 ## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
 
@@ -49,6 +49,11 @@ downstream theorem packages:
 2. a projective arc–MDS/deep-hole/extension bridge; and
 3. the exceptional `q=11` syndrome and exact MDS-extension structure, with its classical
    Clebsch-hexagon/icosahedral interpretation.
+
+The queued C188 follow-up imports only Clebsch C187's `q=5` four-frame witness to prove and
+strict-kernel formalize `rho_C(5)=L_2(5)=4`. The broader `4<=k<=7` conic-filling classification
+stays in the `clebsch` lane and is cited rather than migrated; see the
+[C188 report](../2026-07-15-c188-rhoc5-frame.md).
 
 The work is a continuation of the finished
 [C89–C96 formalization](done/2026-07-12-arcs-complete-outside-conic-formalization.md), not a reopening
@@ -154,6 +159,7 @@ not make a new abstract `A5` isomorphism or full orbit formalization a completio
 | **C108 [REPORTED 2026-07-13]** | Formalize the thin T2 semantic bridge and coding restatement of the prescribed-hole defect theorem in `SyndromeGeometry.lean` and `CodingBridge.lean`. | Arc, syndrome-distance and exact affine leader counts, confined distance-three locus, leader moments/defect, general conflict-hypergraph extensions, and the arc-confined graph/maximal-completion specialization are kernel-checked without importing this spinoff into existing consumers. |
 | **C109 [REPORTED 2026-07-13]** | Formalize T3 in downstream `Q11Coding.lean`. | Non-GRS `[6,3,4]₁₁` code, exact covering radius/deep-hole locus, syndrome/leader distributions, tangent-antipode matchings, and complete extension spectrum build under strict trust; no abstract `A5` library is required. |
 | **C110 [IN PROGRESS; SHARED AGGREGATE ONLY]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; two hostile-review rounds, the post-audit actual-leader and affine-distance/conic bridges, final source checklist, focused rebuild, axiom audit, and PDF rebuild pass. Only the shared aggregate rerun remains. |
+| **C188 [QUEUED 2026-07-15]** | Import C187's `q=5` four-frame witness and derive `rho_C(5)=L_2(5)=4`; cite the broader small-`k` classification without migrating it. | Relative-conic semantic theorem and `Results` entry pass strict-kernel checks; manuscript, result table, proof audit, TRUST manifest, and paper index are synchronized. |
 
 ## Cheap refutation gates
 

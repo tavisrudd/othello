@@ -5,7 +5,7 @@ independently recomputes the |U| extension-count histogram of PG(2,11) 6-arcs.
 
 Condition (i) of the TFAE allows a DEGENERATE conic (line-pair / double line).
 To conclude (i) => (ii) we must verify that:
-  - the ONLY 6-arcs whose deep-hole locus U lies on ANY conic (degenerate
+  - the ONLY 6-arcs whose extension locus U lies on ANY conic (degenerate
     allowed) are the Clebsch class (|U| = 12), and
   - for that class the conic is NONDEGENERATE and U is exactly its 12 points,
     i.e. no 6-arc has U supported on a degenerate conic only.
@@ -13,13 +13,21 @@ To conclude (i) => (ii) we must verify that:
 Enumeration: every 6-arc has an ordered 4-subset in general position; the
 unique PGL(3,11) mapping it to the standard frame (e1,e2,e3,e4=(1,1,1)) sends
 the other two points to (p5,p6). Sweeping (p5,p6) over all legal completions
-therefore meets every projective class of 6-arc. "Conic through U" is decided
-by the rank over F_11 of the |U| x 6 quadratic-monomial evaluation matrix.
+therefore meets every projective class of 6-arc.  The resulting 1548 point
+sets are frame-normalized representatives, NOT 1548 projective classes: one
+PGL class generally occurs through several choices of ordered frame.
+"Conic through U" is decided by the rank over F_11 of the |U| x 6
+quadratic-monomial evaluation matrix.
 
 Run: uv run python check_rigidity_degenerate_conic.py    (no third-party deps)
 """
 
 P = 11
+
+EXPECTED_U_HISTOGRAM = {
+    12: 6, 16: 30, 18: 150, 19: 300, 20: 630, 21: 360, 22: 72,
+}
+EXPECTED_CONCYCLIC_U_HISTOGRAM = {18: 30, 19: 60, 20: 90, 22: 72}
 
 def points():
     """Canonical reps of PG(2,11): first nonzero coordinate = 1. (133 points)"""
@@ -140,7 +148,7 @@ def is_six_arc(pts6):
                     return False
     return True
 
-def deep_hole_locus(arc):
+def extension_locus(arc):
     covered = set(map(tuple, arc))
     for i in range(6):
         for j in range(i+1, 6):
@@ -151,7 +159,10 @@ def deep_hole_locus(arc):
 def main():
     from collections import Counter
     hist = Counter()
-    concyclic = []          # (arc, |U|, degenerate?, U==full conic?)
+    # (arc, |U|, evaluation rank, degenerate?, U==full conic?, conic size)
+    u_conic = []
+    concyclic_hist = Counter()
+    concyclic_degenerate = 0
     seen = set()
     frameset = set(map(tuple, FRAME))
 
@@ -168,34 +179,67 @@ def main():
             if not is_six_arc(arc):
                 continue
             seen.add(key)
-            U = deep_hole_locus(arc)
+            U = extension_locus(arc)
             hist[len(U)] += 1
             M = [monomial(u) for u in U]
-            if rank_mod_p(M, 6) < 6:          # some conic (degenerate allowed) contains U
+            rank_u = rank_mod_p(M, 6)
+            if rank_u < 6:          # some conic (degenerate allowed) contains U
                 cvec = kernel_vec(M, 6)
                 sym = conic_matrix_of_coeffs(cvec)
                 degenerate = (det3x3(sym) % P == 0)
                 # does U equal the full F_11 point set of that conic?
                 on_conic = [p for p in PTS
                             if sum(monomial(p)[t]*cvec[t] for t in range(6)) % P == 0]
-                concyclic.append((arc, len(U), degenerate, set(map(tuple,U)) == set(map(tuple,on_conic)), len(on_conic)))
+                u_conic.append((
+                    arc, len(U), rank_u, degenerate,
+                    set(map(tuple,U)) == set(map(tuple,on_conic)), len(on_conic),
+                ))
 
-    print("=== |U| histogram over frame-normalized 6-arcs (independent recompute) ===")
-    for k in sorted(hist):
-        print(f"  |U| = {k:2d} : {hist[k]}")
-    print(f"  total classes enumerated: {sum(hist.values())}")
-    print()
-    print("=== 6-arcs whose U lies on ANY conic (degenerate allowed) ===")
-    print(f"  count: {len(concyclic)}")
-    anydeg = [c for c in concyclic if c[2]]
-    print(f"  of those, on a DEGENERATE conic (line-pair/double line): {len(anydeg)}")
-    Usizes = sorted(set(c[1] for c in concyclic))
-    print(f"  |U| values among concyclic arcs: {Usizes}")
-    allnondeg_full = all((not c[2]) and c[3] and c[4] == 12 for c in concyclic)
-    print()
-    print("=== VERDICT (closes (i) => (ii)) ===")
-    print(f"  every concyclic arc has |U|=12, a NONDEGENERATE conic, U = all 12 pts: {allnondeg_full}")
-    print(f"  no arc has U on a degenerate-only conic: {len(anydeg) == 0}")
+            # This is a distinct condition: the six vertices of A, rather
+            # than its extension locus U(A), lie on a conic.  A six-arc cannot
+            # lie on a line-pair or double line (each line contains at most two
+            # arc vertices), and the exact rank/determinant checks below make
+            # that geometric observation durable.
+            arc_matrix = [monomial(point) for point in arc]
+            arc_rank = rank_mod_p(arc_matrix, 6)
+            if arc_rank < 6:
+                arc_conic = kernel_vec(arc_matrix, 6)
+                arc_degenerate = (
+                    det3x3(conic_matrix_of_coeffs(arc_conic)) % P == 0
+                )
+                assert arc_rank == 5       # unique projective conic
+                concyclic_degenerate += int(arc_degenerate)
+                concyclic_hist[len(U)] += 1
+
+    assert len(seen) == 1548
+    assert sum(hist.values()) == 1548
+    assert hist == Counter(EXPECTED_U_HISTOGRAM)
+
+    # Exactly six normalized representatives have U contained in any
+    # quadratic.  Rank five makes that containing conic unique; its determinant
+    # is nonzero and its full 12-point locus is exactly U.
+    assert len(u_conic) == 6
+    assert all(record[1] == 12 for record in u_conic)
+    assert all(record[2] == 5 for record in u_conic)
+    assert all(not record[3] for record in u_conic)
+    assert all(record[4] and record[5] == 12 for record in u_conic)
+
+    assert sum(concyclic_hist.values()) == 252
+    assert concyclic_hist == Counter(EXPECTED_CONCYCLIC_U_HISTOGRAM)
+    assert concyclic_degenerate == 0
+
+    print("enumeration_unit=frame-normalized_representatives_not_classes")
+    print(f"normalized_representatives={sum(hist.values())}")
+    print(f"U_histogram={dict(sorted(hist.items()))}")
+    print(f"U_on_any_conic_representatives={len(u_conic)}")
+    print("U_containing_conic_ranks={5: 6}")
+    print("U_degenerate_containing_conics=0")
+    print("U_full_nonsingular_conic_representatives=6")
+    print(f"concyclic_normalized_representatives={sum(concyclic_hist.values())}")
+    print(f"concyclic_U_histogram={dict(sorted(concyclic_hist.items()))}")
+    print(f"concyclic_U_size_spectrum={sorted(concyclic_hist)}")
+    print(f"concyclic_degenerate_conics={concyclic_degenerate}")
+    print("all assertions passed")
 
 if __name__ == "__main__":
     main()

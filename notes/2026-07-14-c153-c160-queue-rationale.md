@@ -22,8 +22,8 @@ report `2026-07-14-c147-hexad-polarity-characterization.md`.
 | C156 | `gem-mining` | **A source for the 132+132 PSL/PGL split** | CO-TR §8 needs p > 23, so it cannot support it. The "two systems" form of the theorem depends on this | **Do it** — small, folds into C155 |
 | C157 | `gem-mining` | **Verify Hirschfeld / Semple–Kneebone theorem numbers** | Inferred, never verified; neither book was accessible | **Only if C155 proceeds** |
 | C158 | `cubic` | **k=4 / twisted-cubic healthy search** at q=11, 13 | The one direction where a hit is a new *kind*, not a sibling | **User's call.** Highest upside left; most speculative |
-| C159 | `gem-mining` | **U-atlas, first cell**, elliptic targets admitted | C132's genus-0 restriction was a fiat. The deep-hole sweep found no variety-equality of *any* kind, so any exact fill is new | **User's call.** Most generative, least targeted |
-| C160 | `gem-mining` | **q=5 frame sibling** — structure or degeneracy? | Unaudited; sits in the census as a positive | **Do it.** Ten minutes |
+| C159 | `gem-mining` | **U-atlas, first cell**, elliptic targets admitted | C184 has completed the q11 six-arc low-degree cell; the atlas now imports that table and computes the missing q<=11 cells | **Do it without rerunning q11 six-arcs.** Most generative, least targeted |
+| C160 | `gem-mining` | **q=5 frame sibling priority** | C187 proves the frame's uncovered locus is its nonsingular invariant conic; only folklore/priority remains | **Literature only.** Do not recompute |
 
 ## Why every research row carries search directions
 
@@ -100,13 +100,27 @@ codes"; use the Hasse window `|U| = q+1−a`, `|a| ≤ 2√q` as a sanity null. 
 `2026-07-14-gem-lit-deep-holes.md` first — its Q1 verdict is the baseline any new fill must be
 checked against, and its Reed–Muller residual (C154) is still open.
 
+**2026-07-15 import boundary:** [C184](2026-07-15-c184-low-degree-uncovered-loci.md) is the
+authoritative q11 six-arc seed: all fifteen six-arc classes have exact degree-one through degree-six
+rank/nullity rows; exact loci are exhausted through degree five and for C12's six-dimensional
+minimum sextic kernel. Import those rows and class labels rather than regenerating them. Do not
+convert C184's unexamined larger degree-six kernels into negative results. New C159 computation
+begins with the other q<=11 cells and the cross-q comparison.
+
 ### C160 — the q=5 frame
 
-Search "complete quadrangle" + PG(2,5), "projective frame" + conic, "diagonal triangle" + conic, and
-**Edge's own §19** (q=5, on-conic Brianchon — the vet found this is Edge's only on-conic statement, so
-he may already have it). Check `[4,1,4]₅` covering radius in the coding tables. All 4-arcs of PG(2,q)
-are projectively equivalent, so this is a statement about PG(2,5) itself and is probably folklore. If
-it is, it is a one-sentence remark in C155, not a finding — say so plainly rather than dressing it up.
+[C187](2026-07-15-c187-general-k-arc-conic-filling.md) now settles the finite claim: the standard
+frame in `PG(2,5)` has uncovered locus exactly the nonsingular conic
+`X²+Y²+Z²+XY+XZ+YZ=0`, and it is the `(k,q)=(4,5)` member of the classification through `k=7`.
+Do not rerun that calculation under C160.
+
+The residual is attribution. Search "complete quadrangle" + PG(2,5), "projective frame" + conic,
+"diagonal triangle" + conic, and **Edge's own §19** (q=5, on-conic Brianchon — the vet found this is
+Edge's only on-conic statement, so he may already have it). Check `[4,1,4]₅` covering radius in the
+coding tables. All 4-arcs of PG(2,q) are projectively equivalent, so this is a statement about
+PG(2,5) itself and is probably folklore. If it is, it is a one-sentence remark in C155, not a finding
+— say so plainly rather than dressing it up. Until this search lands, the equality is verified and
+its novelty is unclaimed.
 
 ## Deliberately not queued
 

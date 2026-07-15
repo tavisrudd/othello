@@ -19,11 +19,11 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C161.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C190.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
-are `alt-orbit-repair`, `baer`, `cap`, `clebsch`, `cubic`, `gem-mining`, `kayles`, `queens`,
+are `alt-orbit-repair`, `baer`, `build-sys`, `cap`, `clebsch`, `cubic`, `gem-mining`, `kayles`, `queens`,
 `relconic`, `repaircodes` (`hexagon` is a spoken synonym for `clebsch` and is never written as a peg). Exactly one lane per
 item; peg in the same edit that allocates the ID; an unpegged row is a bug. The section groupings
 below are presentation only — **the tag is the fact, and wins when they disagree**. Re-pegging is a
@@ -31,28 +31,39 @@ lane switch and needs explicit approval. All rows were pegged 2026-07-14.
 (Never write a concrete unallocated ID in an example — always `C<id>`. `max(CNN)+1` is how the next
 ID is computed, so an invented ID in prose silently burns that number.)
 
+**Lean build-system lane (`build-sys`, 2026-07-14):** see
+[handoff](handoffs/2026-07-14-lean-build-system.md). This lane owns trace-aware restart tooling,
+large-tree import blast-radius analysis, stable checker interfaces, and build-artifact isolation;
+it does not own mathematical proofs or any running lane's build process.
+- **C162 `[build-sys]` [QUEUED 2026-07-14 — AFTER THE C143 BUILD WINDOW]** — harden and exercise the
+  trace-sentinel restart guard, map high-fan-out Lean imports, design stable/versioned generated
+  checker boundaries, and validate a disk-backed per-lane artifact-isolation and recovery protocol
+  → `notes/2026-07-14-c162-lean-build-system.md`.
+
 **Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-alternate-orbit-repair.md). The certificate-free `s ≥ 7` theorem is
-reported; the uniform Q25 certificate closure is running, and C148's arithmetic and semantic
-theorem sources are drafted outside that build graph pending a one-worker validation window.
-C149–C152 are paper-upgrade tasks ordered by EV and their explicit decision gates.
+reported; the uniform Q25 two-witness certificate and arbitrary-deletion repair theorem passed
+their full kernel build, trace replay, source trust audit, backup, and manuscript/PDF gates. C148's
+exact profile envelope and uniform 318-repair theorem are reported. C149's exact parameter phase
+and semantic `(k+2)→k` repair theorem are reported. C150 is the active decision gate; C150–C152
+remain ordered by EV and their explicit gates.
 - **C142 `[alt-orbit-repair]` [REPORTED 2026-07-14]** — kernel-checked alternate-orbit repair for
   invariant ten-arcs over every prime-power base order `s ≥ 7`, with at least eight alternatives,
   and package the existing Q25 nonexceptional-profile repair bounds →
   `notes/2026-07-14-c142-alternate-orbit-repair.md`.
-- **C143 `[alt-orbit-repair]` [ACTIVE 2026-07-14 — KERNEL CLOSURE RUNNING]** — test a representative
-  exceptional-profile leaf for two distinct legal pairs; if feasible, regenerate and build the
-  full two-witness `f=2` certificate, transport distinctness, and prove uniform Q25 alternate-orbit
-  repair → `notes/2026-07-14-c143-q25-alternate-orbit-repair.md`.
-- **C148 `[alt-orbit-repair]` [ACTIVE 2026-07-14 — SOURCE DRAFTED; BUILD-WINDOW GATED]** —
-  kernel-check the exact general-`s` five-profile lower-bound envelope, its crossover profiles, and
-  the uniform 318-alternative corollary →
+- **C143 `[alt-orbit-repair]` [REPORTED 2026-07-15]** — the two-witness `f=2` certificate and
+  uniform Q25 alternate-orbit repair theorem passed their full 10,604-job kernel build, trace-only
+  replay, source trust audit, verified recovery backup, and manuscript/PDF gates →
+  `notes/2026-07-14-c143-q25-alternate-orbit-repair.md`.
+- **C148 `[alt-orbit-repair]` [REPORTED 2026-07-15]** — kernel-checked the exact general-`s`
+  five-profile lower-bound envelope, its crossover profiles, the semantic 319-pair theorem, and the
+  uniform 318-alternative corollary; trust and manuscript/PDF gates passed →
   `notes/2026-07-14-c148-general-s-profile-envelope.md`.
-- **C149 `[alt-orbit-repair]` [QUEUED 2026-07-14 — AFTER C148 PHASE-DIAGRAM GATE]** — generalize
-  deletion/repair from `10→8` to a parameterized invariant `(k+2)→k` robust equivariant exchange
-  theorem with a nontrivial `(s,k,f,e)` range →
+- **C149 `[alt-orbit-repair]` [REPORTED 2026-07-15]** — kernel-checked the exact obstruction phase
+  `floor((k-1)^2/4)+r+1≤s(s-1)/2`, the parameterized semantic `(k+2)→k` robust exchange theorem,
+  and the sharp `s≥4`, `k≤s+1` rectangle; trust and manuscript/PDF gates passed →
   `notes/2026-07-14-c149-parameterized-robust-exchange.md`.
-- **C150 `[alt-orbit-repair]` [QUEUED 2026-07-14 — STRUCTURAL SCOUT]** — seek a moment/collision or
+- **C150 `[alt-orbit-repair]` [ACTIVE 2026-07-15 — STRUCTURAL SCOUT]** — seek a moment/collision or
   small integer-LP explanation of the exceptional Q25 legal-pair multiplicity, with `L≥32` as the
   high target and a strict stop before census-sized formalization →
   `notes/2026-07-14-c150-q25-multiplicity-structure.md`.
@@ -96,7 +107,10 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
 **Clebsch hexagon paper lane (`clebsch`, 2026-07-13):** see
 [handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the
 *icosahedral MDS / deep-holes* lane; same lane, renamed 2026-07-14.)
-- **C128 `[clebsch]`** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
+- **C128 `[clebsch]` [REPORTED 2026-07-14]** — kernel-checked the exact integer and mod-11
+  icosahedral syzygies, certified the three canonical reduced forms and trust boundary, audited the
+  scratchpad-only group/diagonal provenance, and removed the non-load-bearing Klein section under
+  C167 → `notes/2026-07-14-c128-icosahedral-syzygy.md`.
 - **C161 `[clebsch]` [QUEUED 2026-07-14 — FOLLOW-UP TO THE RIGIDITY SWEEP]** — settle who owns
   (iv)⟺(v) of the rigidity TFAE ("PGL(3,11)-equivalent to the Clebsch hexagon ⟺ stabilizer contains
   A₅") → `notes/2026-07-14-c161-tfae-iv-v-priority.md`. Acted on already: §4 Remark
@@ -122,17 +136,11 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
   audit + handoff §Open-lit.
-- **C146 `[clebsch]` [QUEUED 2026-07-14 — BLOCKS SUBMISSION]** — re-base the manuscript's prior art
-  onto the Clebsch 1871 → Edge 1956 → Blokhuis–Seress–Wilbrink 1991/1992 lineage, none of which it
-  cites. Edge §§29–32 (read: `notes/2026-07-14-gem-lit-exterior-sets.md`) constructs the q=11 object
-  outright — 6 external points, 15 joins skew to the conic, named "Clebsch hexagons" — and BSW's
-  complete exterior set of size (q+1)/2 *is* that object renamed. Settled by the lit sweep: the
-  covering fact appears in neither Edge nor Van de Voorde, so the deep-hole reading stays ours; also
-  cite Van de Voorde's sets-without-tangents → LDPC stopping-set link as the one existing coding
-  connection. Open: the two BSW originals are ILL-only and unread; rewrite the §2 priority footnote,
-  which currently argues against Dye 1991, the wrong paper →
-  `notes/2026-07-14-c146-edge-bsw-prior-art.md`. TODO planted at the §2 site in
-  `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.
+- **C146 `[clebsch]` [REPORTED 2026-07-14]** — re-based the manuscript onto the
+  Clebsch→Edge→Dye/BSW→SVM lineage; added exterior-point/line/set vocabulary, the prior LDPC
+  stopping-set connection, and Edge's five-triangle/two-system antecedents; separated the classical
+  exterior-set condition from the stronger covering/deep-hole statement and made the latter's
+  priority explicitly conditional on C153 → `notes/2026-07-14-c146-edge-bsw-prior-art.md`.
 - **C153 `[clebsch]` [QUEUED 2026-07-14 — EXPOSURE; ILL]** — obtain and read the two BSW originals,
   then confirm or retract the covering fact as ours →
   `notes/2026-07-14-c153-bsw-originals.md`. **This is the last live way our headline can be taken.**
@@ -149,6 +157,131 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   which sizes, external-only or mixed-type — the mixed-type gap is ours only if they never consider
   internal points); whether they cite Edge 1956. (4) If either states the covering fact, say so
   immediately and loudly — it forces a rewrite of both manuscripts, and `arcs` ships first.
+- **C163 `[clebsch]` [REPORTED 2026-07-14]** — repaired the manuscript's
+  coding semantics end to end: distinguish received-word deep holes, affine syndromes/deep-hole
+  cosets, projective syndrome directions, minimum-weight leaders, and support triples; correct the
+  counts `12 / 120 / 159720 / 2400`; fix the definition of a deep hole, the parity-check ambient
+  projective dimension, and every title/abstract/corollary “deep holes = conic” claim; and state the
+  precise monomial/projective automorphism group rather than silently identifying it with the pure
+  permutation group → `notes/2026-07-14-c163-clebsch-coding-semantics.md`.
+- **C164 `[clebsch]` [REPORTED 2026-07-14]** — rebuilt the chirality proposition on the
+  correct objects: prove the `10+10` split of support patterns in every deep-hole coset and the
+  induced invariant on all `2400` minimum-weight leaders, verify coefficient equivariance under the
+  code's monomial automorphisms, ship a durable checker for the `A₅` orbits and exotic-`S₅` swap, and
+  remove the current support/leader conflation and non sequitur through `Hom(A₅,ℤ/2)` →
+  `notes/2026-07-14-c164-clebsch-chirality.md`.
+- **C165 `[clebsch]` [REPORTED 2026-07-14]** — preserved the independently
+  confirmed local theorem and ship its missing checker: there are exactly `252` legal one-point
+  replacements (`42` for each deleted vertex), with spectrum
+  `{18:30,19:60,20:90,22:42,24:30}` and at most seven conic points surviving. Define the
+  one-point-replacement graph and symmetric-difference metric, and delete or explicitly localize the
+  global “nearest other six-arc” sentence: it is false literally, since a conic-preserving
+  projectivity produces a distinct Clebsch six-arc with the same deep-hole conic and distance zero →
+  `notes/2026-07-14-c165-clebsch-gap-theorem.md`.
+- **C166 `[clebsch]` [REPORTED 2026-07-14]** — audited “Why q=11” and removed its unsupported q=9
+  subgroup-conjugacy step; the stronger C170 exhaustive theorem supersedes the conditional `A₅`
+  route → `notes/2026-07-14-c166-clebsch-why11.md`.
+- **C167 `[clebsch]` [REPORTED 2026-07-14 — SINGLE-SPINE REWRITE]** — refocused the manuscript on
+  projective-syndrome rigidity; removed the standalone Klein and Further remarks sections, scoped
+  novelty/priority claims, retained only the same-recipe q=19 foil, and imported C174's q=11
+  `t(H)+|U(H)|=82` identity without the separate hexad theorem →
+  `notes/2026-07-14-c167-clebsch-manuscript-scope.md`.
+- **C168 `[clebsch]` [QUEUED 2026-07-14 — FINAL GATE]** — run the submission closeout only after the
+  correctness, prior-art, and reproducibility tasks settle: inventory every computation cited or
+  relied on by the manuscript; require its script/Lean source to pass `git ls-files --error-unmatch`
+  (no scratchpad-, session-, or untracked-only evidence); record path, blob/SHA-256, exact command,
+  and expected output in a checker manifest; replay the manifest; then run the manuscript/PDF build,
+  citation and cross-paper-number audit, theorem/proof/trust ledger, adversarial reread, and cleanup
+  of the live handoff by moving its retained exploration history to the companion archive →
+  `notes/2026-07-14-c168-clebsch-submission-closeout.md`.
+- **C170 `[clebsch]` [REPORTED 2026-07-14]** — shipped the Git-tracked exact four-frame census over
+  every prime power `q≤14`; only six normalized q=11 representatives have a full nonsingular-conic
+  extension locus, yielding unconditional uniqueness and closing the non-`A₅` residue →
+  `notes/2026-07-14-c170-unconditional-q11-uniqueness.md`.
+- **C171 `[clebsch]` [REPORTED 2026-07-14]** — replaced the false global gloss by the PGL-invariant
+  nearest-conic discrepancy: the Clebsch class is its unique zero and every non-Clebsch class has
+  sharp gap `δ≥12`, with exact 15-class histogram; the 252 local moves split into eight certified
+  `A₅` orbits recovering both fixed-conic histograms →
+  `notes/2026-07-14-c171-global-conic-gap.md`.
+- **C172 `[clebsch]` [REPORTED 2026-07-14]** — translated rigidity into uniqueness up to monomial
+  code equivalence; proved the 120 cosets are one monomial orbit and all 159720 received-word deep
+  holes one orbit after code translations; certified that the 2400 leaders form four free
+  600-orbits, two per chirality, rather than two 1200-orbits →
+  `notes/2026-07-14-c172-clebsch-monomial-orbits.md`.
+- **C173 `[clebsch]` [REPORTED 2026-07-14 — CONCEPTUAL CHIRALITY UPGRADE]** — constructed the
+  explicit `A₅`-equivariant bijection: two of the five self-polar triangles form an alternating
+  six-cycle, whose bipartition is one complementary support pair; certified the actual displayed
+  self-polarities, full-normalizer equivariance, and Petersen=`KG(5,2)` adjacency without orienting
+  chirality → `notes/2026-07-14-c173-dye-triangles-petersen.md`.
+- **C176 `[clebsch]` [REPORTED 2026-07-15 — BRIANCHON/PETERSEN UPGRADE]** — completed C173's missing
+  classical dictionary: each pair of self-polar triangles maps through its alternating-cycle
+  antipodes to one of the ten distinct Brianchon points; the full `10×` multiplicity-three plus
+  `15×` multiplicity-one cross-intersection ledger, equivariance, and the resulting triangle-pair
+  ↔ Brianchon-point ↔ complementary-support proposition are tracked →
+  `notes/2026-07-15-c176-brianchon-petersen-dictionary.md`.
+- **C179 `[clebsch]` [REPORTED 2026-07-15 — CONIC-LDPC LITERATURE REBASE]** — read and positioned the
+  Droms--Mellinger--Meyer, Madison--Wu, Wu internal-conic, and external-conic binary-code lineage;
+  added a bounded related-work paragraph distinguishing their length-`q(q-1)/2` binary incidence
+  nullspaces (at q=11, dimensions 25 and 31 for the two relevant codes) from the present length-six
+  `F_11` MDS code. The report records direct-source versus abstract-only coverage and limits the
+  no-collision verdict to the checked claims rather than outrunning unread bodies →
+  `notes/2026-07-15-c179-conic-ldpc-literature.md`.
+- **C180 `[clebsch]` [PROOF FOUND 2026-07-15 — DYE SOURCE GATE OPEN]** — replace the
+  nonsingular-conic half of the 1548-representative rigidity census by the exact chord identity
+  `|U(A)|=22-c`, Dye's `c<=10` Brianchon extremality and equality classification, with the field
+  hypotheses checked from Dye 1991. An odd-characteristic edge-colouring/parallel-direction lemma
+  now proves every line contains at most six uncovered points at q=11, closing the degenerate
+  line-pair branch without the census. Retain the census as verification, not as the theorem's
+  explanatory spine →
+  `notes/2026-07-15-c180-conceptual-clebsch-rigidity.md`.
+- **C181 `[clebsch]` [REPORTED 2026-07-15 — CLASSIFICATION-FREE WHY 11]** — from a
+  conic-filling uncovered locus derive `c=(q-6)(q-9)`, combine the universal matching bound `c<=15` with
+  the prime-power restriction, and give geometric exclusions at `q=4,5,9`. The first two are now
+  closed; `q=9` reduces to `eq_2(Sylvester)=5`, now pinned to Abiad--Jabal Ameli--Reijnders (2025),
+  and the q=9 conjugacy graph is now identified with the Sylvester graph, whose published
+  exact-distance-two clique number is five. A tracked from-scratch q=9 checker verifies the full
+  array, distance relation and clique bound. The elementary `c<=15` bound rules out every `q>=12`
+  in all characteristics, so C181 no longer depends on Dye or C180. The manuscript now uses the
+  conceptual proof and retains its checker/table as independent verification →
+  `notes/2026-07-15-c181-classification-free-why11.md`.
+- **C182 `[clebsch]` [QUEUED 2026-07-15 — IMMUTABLE ARTIFACT/DOI GATE]** — answer the PDF-only
+  referee's reproducibility objection by releasing the exact eight-source computation manifest,
+  cited Lean root/closure, environment, expected outputs and final manuscript at an immutable
+  versioned archive, preferably a GitHub release mirrored to Zenodo; independently replay the
+  downloaded archive and cite its DOI in a data/code-availability paragraph. Minting the DOI is an
+  external action and follows C168's clean-HEAD closeout →
+  `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
+- **C183 `[clebsch]` [QUEUED 2026-07-15 — LEAN NEW-CLAIM COVERAGE]** — the existing strict-kernel
+  development certifies the base code/conic/deep-hole/icosahedral facts but not C176, C180, or
+  C181. Formalize the cheap shared combinatorial spine first (C174 chord defect and the finite C176
+  dictionary), then a reflected `F_9` Sylvester/exact-distance-two clique certificate and the small
+  q=4/q=5 leaves. Treat C180's line-pair implication conditional on a precisely stated Dye theorem;
+  a formalization of Dye's equality classification is a separate major-project decision →
+  `notes/2026-07-15-c183-clebsch-lean-new-claims.md`.
+- **C184 `[clebsch]` [IN PROGRESS 2026-07-15 — CHECKER/SINGULAR COMPLETE; MANUSCRIPT/LEAN OPEN]** —
+  the fail-closed checker and Singular replay now certify the complete degree-one-through-six
+  rank table, Clebsch's unique containment in a cubic, and the exact C02 quartic, C04 nodal
+  quintic, and displayed C12 smooth sextic loci. Decide the concise manuscript disposition and
+  formalize only the claims retained there →
+  `notes/2026-07-15-c184-low-degree-uncovered-loci.md`.
+- **C185 `[clebsch]` [IN PROGRESS 2026-07-15 — CHECKER COMPLETE; LEAN/MANUSCRIPT OPEN]** — the
+  hardened checker certifies the complete distance oracle, ambiguity enumerator, Brianchon
+  triple-ambiguity locus, and exact distinction between size-five equivariant decoders and the
+  two support-determined size-ten chirality choices. Root-elaborate the drafted
+  `Q11DecodingSynthesis.lean`, then integrate the bounded fixed-code statement without asymptotic
+  complexity hype → `notes/2026-07-15-c185-clebsch-decoding.md`.
+- **C186 `[clebsch]` [IN PROGRESS 2026-07-15 — FINITE BRIDGE DRAFTED; CONCEPTUAL PROOF OPEN]** —
+  root-elaborate the drafted `Q11A5PointOrbits.lean` finite certificate, but use it only as a bridge:
+  still derive the unique off-arc 12-orbit from the `A5` representation/order-five fixed points and
+  write the source-backed argument from Edge's invariant Brianchon ten-orbit to `c=10` and the
+  conic locus →
+  `notes/2026-07-15-c186-a5-orbit-conic-proof.md`.
+- **C187 `[clebsch]` [IN PROGRESS 2026-07-15 — CHECKER COMPLETE; LEAN/PRIORITY/MANUSCRIPT OPEN]** —
+  the hardened checker closes both seven-arc leaves at `q=11,13` and certifies the q=5 frame's exact
+  conic, completing the computed `4<=k<=7` classification. Root-elaborate the drafted
+  `SmallKChordMoments.lean`, close its geometric moment seam, literature-check the classical
+  `(4,5)` sibling, and integrate the theorem without displacing the paper's rigidity spine →
+  `notes/2026-07-15-c187-general-k-arc-conic-filling.md`.
 
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem
@@ -166,24 +299,57 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   table), so the converse closes by citation plus a short involution-content argument. The q=23 octad analogue is
   DEAD (min t=295 vs null 280) and the reduction says why -- it needs |H|=2x3 so that a concurrent
   triple is a perfect matching. Singular and note-sized, not a Mathieu tower.
-- **C155 `[gem-mining]` [QUEUED 2026-07-14 — GATED ON THE RIGIDITY/GAP AND EXTENSION-COUNT CHECKS]** —
-  **New gate 2026-07-14:** the hexad result has a second, equivalent form — `t + |U| = 82` identically
+- **C169 `[gem-mining]` [QUEUED 2026-07-14 — SUBMISSION GATE FOR C155]** — close the remaining
+  extension-count priority exposure after the open-access sweep found the Bartoli–Davydov–Marcugini–
+  Pambianco near miss: obtain Hirschfeld PGOFF §§8/14, Korchmáros–Storme–Szőnyi 1997, and the relevant
+  Sadeh material (coordinated with C131); determine whether any source prints the q=11 on-conic
+  six-subset extension spectrum or its maximal class; and pin the exact claim boundary and required
+  BDMP positioning for the hexad note → `notes/2026-07-14-gem-lit-extension-count.md`.
+- **C174 `[gem-mining]` [REPORTED 2026-07-14 — STRONGER SIX-ARC FORM; FOLDS INTO C155]** — proved
+  `t(H)+|U(H)|=q²-14q+115` for every six-arc in every finite projective plane, without a conic or
+  characteristic hypothesis; shipped a tracked q=5,7,11,13 checker and presented the q=11 value 82
+  and maximal-extension hexad specialization →
+  `notes/2026-07-14-c174-general-six-subset-identity.md`.
+- **C175 `[gem-mining]` [QUEUED 2026-07-14 — SEPARATE FOLLOW-UP; NOT A C155 GATE]** — determine for
+  which small prime powers a conic has a six-subset with no accidental concurrent perfect matching;
+  explain the diagnostic nonmonotonicity (264 at q=11, none at q=13) by an orbit/existence theorem
+  if possible, and keep it outside C155 unless a concise result lands →
+  `notes/2026-07-14-c175-concurrency-free-sixsets.md`.
+- **C177 `[gem-mining]` [QUEUED 2026-07-15 — GENERALIZED-HEXAGON FOLLOW-UP; NOT A C155 GATE]** — test
+  whether the two local Mathieu hexad systems on each point-regulus conic in De Wispelaere's
+  `D_Hex(11)` glue equivariantly: first prove independence from the three point-regulus
+  representatives of a repeated `B₂` block, then determine whether `PSU₃(11)` preserves or swaps
+  the two systems. A positive unoriented result gives a simple `2-(1332,6,240)` design; an
+  equivariant choice of one system gives `2-(1332,6,120)` →
+  `notes/2026-07-15-c177-regulus-hexad-gluing.md`.
+- **C178 `[gem-mining]` [REPORTED 2026-07-15 — WU INTERNAL-CONIC FIRST CELL; NOT A C155 GATE]** —
+  reconstructed Wu's `q=11` twelve-point conics arising as length-12 orbits of an internal-point
+  stabilizer in `PSL₂(11)`, verified their all-internal and passant-line `0/2` properties, and
+  computed the maximum subset whose pairwise joins are all passant to the fixed conic. The two
+  conic orbits have passant-join clique numbers 4 and 3, so no six-set exists →
+  `notes/2026-07-15-c178-wu-internal-conic-cliques.md`.
+- **C155 `[gem-mining]` [DRAFTED 2026-07-14 — SUBMISSION GATED ON C156/C157/C169]** —
+  **C174 closed the identity gate:** the hexad result has a second, equivalent form —
+  `t + |U| = 82` identically
   on 6-subsets of the conic, so *the hexads are exactly the on-conic 6-arcs with maximal extension
   count `|U| = 22`*. The sweep cleared the **concurrency** framing; the **extension-count** framing was
   never searched and is the likelier of the two to be classical (extension counts are the
   arc-classification school's standard invariant, and six points on a conic is the hexagrammum
-  mysticum). Under check: `notes/2026-07-14-gem-lit-extension-count.md`. If it is taken there, the
-  result is taken. Write the hexad note:
+  mysticum). The open-access check in `notes/2026-07-14-gem-lit-extension-count.md` found no collision
+  and a mandatory BDMP near miss; C169 owns the remaining inaccessible sources. Write the hexad note:
   the `t(H) = 60 + #fpf involutions` identity (synthetic, computer-free), the four-orbit table by
   citation to CO-TR, the short involution-content argument, and the q=23 impossibility →
-  `notes/2026-07-14-c155-hexad-note.md`. Consumes C156/C157. Venue: *Discrete Math.* / *J. Comb.
-  Designs* / *DCC*, or Monthly-style. **Gated** on the rigidity/gap check
-  (`notes/2026-07-14-gem-lit-rigidity-gap.md`), which may change what the paper should be.
+  draft and exact computation manifest → `notes/2026-07-14-c155-hexad-note.md`. Consumes C156/C157.
+  Venue: *Discrete Math.* / *J. Comb.
+  Designs* / *DCC*, or Monthly-style. The rigidity/gap check is complete and does not block drafting.
   **Do not claim** the stabilizer-parity form as a new phenomenon — it is a repackaging of CO-TR's
   table; the bridge to chord concurrency is what is ours. Cite Halbeisen–Hungerbühler (J. Geometry
   2024) for the char-0 floor (no-accidental-concurrency is *generic* over ℝ, so this is a
   finiteness phenomenon), and Havlicek/Coxeter/Pellegrino (arXiv:1210.2055) as the nearest rival
   characterization.
+  Before C155 can report, its computation manifest must likewise prove with
+  `git ls-files --error-unmatch` that every cited script is Git-tracked and record each path, hash,
+  command, and expected output; ephemeral session artifacts are not evidence.
 - **C156 `[gem-mining]` [QUEUED 2026-07-14 — FOLDS INTO C155]** — find a citable source for the
   132+132 PSL/PGL split of the S(5,6,12) hexads on P¹(F₁₁) →
   `notes/2026-07-14-c156-two-systems-split.md`. **CO-TR §8 cannot be used — it requires p > 23.** The
@@ -229,6 +395,10 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   only on-conic statement is exactly there, so he may already have this). Also check `[4,1,4]₅`
   covering radius in the coding tables. If folklore, it is a one-sentence remark in C155, not a
   finding; say so plainly rather than dressing it up.
+- **C190 `[gem-mining]` [REPORTED 2026-07-15 — ROUTING COMPLETE]** — C159 now consumes C184's
+  complete q=11 rank/locus table as seed data, while C160's finite calculation is superseded by
+  C187 and retains only its q=5 literature/priority tail; C155 and the BSW conjecture are unchanged →
+  `notes/2026-07-15-c190-gem-clebsch-routing.md`.
 
 **Relative-conic arcs lane (`relconic`) — sweep fallout (2026-07-14):** see
 [handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md). The `arcs` manuscript was edited
@@ -249,6 +419,11 @@ from outside the lane (commit `cfd8537`, Edge 1956 + DMP Thm 7.7 re-pin) and shi
   from the *explicit description* strand, as in the main sweep. (4) Also sweep generalized RM
   (GRM) over F_q and projective RM. (5) If a variety-equality exists anywhere in RM, the "first"
   must be narrowed to MDS codes or dropped — report it loudly.
+- **C188 `[relconic]` [QUEUED 2026-07-15 — Q5 EXACT VALUE]** — import Clebsch C187's projective-frame
+  witness into the relative-conic paper, prove and strict-kernel formalize
+  `rho_C(5)=L2(5)=4`, add it to `RelativeConicArcs.Results` and the small-value/result tables, and
+  cite (rather than migrate) the full `4<=k<=7` conic-filling classification →
+  `notes/2026-07-15-c188-rhoc5-frame.md`.
 
 **Twisted-cubic lane (`cubic`) — the k-tower probe (2026-07-14):** see
 [handoff](handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
@@ -432,6 +607,15 @@ fixed-locus / quadric-Witt dichotomy leap).
   relconic closure excludes the churn entirely. Unblocks C107/C110 without weakening validation.
   Do not start while another lane is building or regenerating. Design, options, and migration path:
   [`2026-07-14-c144-shared-library-gate-architecture.md`](2026-07-14-c144-shared-library-gate-architecture.md).
+
+- **C189 `[cap]` [QUEUED 2026-07-15 — Q5 OCTAHEDRAL BRIDGE]** — consume Clebsch C187's q=5
+  projective-frame sibling on the game side: certify that its six conic continuations have conflict
+  graph `K6` minus a perfect matching (the octahedral graph), derive the antipodal-copycat P-position,
+  and cross-reference it with the existing q=11 icosahedral seeded P-position. Record explicitly
+  that, for `4<=k<=7` and `q>=13`, C187 excludes only equality `U(A)=C(F_q)`; it does not exclude
+  proper-subset containment `U(A)⊂C(F_q)` or another localization, and does not advance or
+  reformulate `(ON)` →
+  `notes/2026-07-15-c189-q5-octahedral-frame.md`.
 
 - **C84 `[cap]` [ACTIVE 2026-07-12 — abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:

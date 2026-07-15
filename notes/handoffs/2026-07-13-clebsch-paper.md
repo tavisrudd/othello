@@ -40,29 +40,95 @@ setup instead of a working paper, and move 3 becomes optional rather than necess
 a decision, not an artifact of which paper finishes first.
 
 **Date**: 2026-07-13
-**Status**: CONVERGED after C121–C127 + four adversarial/Tao passes (red-team, dual-variety exam,
-Thread A rigidity, Thread B loop-back). Scoped to a **modest single-spine finite-geometry paper**.
-Headline = the **RIGIDITY THEOREM** (Clebsch hexagon is the unique 6-arc in PG(2,11) whose deep
-holes lie on a conic, recovering A₅) + p=11 uniqueness (now with a 2-line counting proof) + the
-certified chirality-Z/2 proposition. **Klein two-spine "because" struck** (false by C126); **dual-
-variety conjecture / C123 DEAD** (2 independent passes, q=19 counterexample + k=4 impossibility);
-j-function + 11-cell-*gluing* decorative, but the **hemi-icosahedron face-lattice + edge-level
-Schreier=icosahedron witness is KEPT as a `decide`-grade proposition** (§loop-back) — not demoted. Loop-back: this is the extremal instance of the **parent conic-
-involution Schreier program**.
-**DRAFT WRITTEN (2026-07-14):** full working-draft manuscript + 5 executable verification scripts at
-[`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/) (commit 4b6aa8e). All proof gaps
-closed (degenerate-conic exclusion + secant-covering counting lemma + q=9), all companion runs done &
-verified (|U| recompute; dual code = again Clebsch up to orbit; hexads transverse to S(5,6,12);
-10-arc empty-deep-hole foil). C132's four-target negative is adversarially corrected; it is not a
-global structural-uniqueness theorem (§6 .tex paragraph already softened to "Why the tested
-generalizations fail" — heuristic, does not exclude an isolated example). Citations fixed (Guruswami–Vardy 2005
-initiated the deep-hole complexity study, not Cheng–Murray; Storme–Thas verified; lock updated);
-Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH@sussex.ac.uk).
+**Status**: **MAJOR REVISION — INTERNAL REPAIRS LANDED; EXTERNAL GATES OPEN.** C128, C146, and
+C163–C173 have repaired the mathematics, terminology, prior-art framing, reproducibility,
+quantitative gaps, unconditional q=11 theorem, and manuscript scope. The draft builds warning-free
+with one rigidity spine. C184/C185/C187 now have hardened computation artifacts, but their
+manuscript dispositions and Lean tails remain open; C186 has only a drafted, unelaborated finite
+bridge and still needs the conceptual source-backed proof. It is not submission-ready until C153
+settles BSW priority, C131/C161 settle ownership, these new tails close, and C168 runs
+the clean-source/PDF closeout.
+
+**Authority note.** The repair map immediately below is the current route and supersedes every lower
+“CONVERGED”, “all gaps closed”, or speculative-framing claim. This file still contains retained
+exploration history below the live map; C168 must move it to the companion archive and leave this
+handoff crisp. Until then, do not route work from the historical sections when they disagree with the
+map.
+
+**Allowed paths for this lane:** `papers/clebsch-hexagon-code/**`, this handoff and its companion,
+`notes/2026-07-14-c1*.md` and `notes/2026-07-15-c176-*.md`/`notes/2026-07-15-c179-*.md`/`notes/2026-07-15-c180-*.md`/`notes/2026-07-15-c181-*.md`/`notes/2026-07-15-c182-*.md`/`notes/2026-07-15-c183-*.md` reports pegged `clebsch`, the explicit `clebsch` rows of the global queue,
+and the Q11/Q9 Lean modules needed by C128/C164/C183. The `arcs` companion manuscript, gem-mining scripts,
+and other lanes remain read-only unless the user switches or expands scope.
+
+## Adversarial takeover repair map (authoritative, 2026-07-14)
+
+Full issue ledger: [Clebsch + gem takeover audit](../2026-07-14-clebsch-gem-adversarial-takeover.md).
+Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsch-gem-cheap-upgrades.md).
+Incidental observations: [Clebsch discovery track](../2026-07-14-clebsch-discovery-track.md) —
+append-only; promote scoped findings to C items rather than routing work directly from the log.
+
+| Priority | Task | Current failure | Exit condition |
+|---|---|---|---|
+| 1 | **C163 — REPORTED** | exact `12/120/159720/2400` semantics, `U(A)` boundary, and projective/monomial/pure group dictionary landed | closed → [C163 report](../2026-07-14-c163-clebsch-coding-semantics.md) |
+| 2 | **C146 — REPORTED; C153 OPEN** | the Clebsch/Edge/BSW rebase and exterior-set vocabulary landed; two BSW originals remain unread | C146 closed → [report](../2026-07-14-c146-edge-bsw-prior-art.md); C153 settles the residual priority exposure |
+| 3 | **C164 — REPORTED** | two support orbits, Petersen graph, `S5` normalizer, `10+10` per coset, `1200+1200` globally, and 1.44M coefficient-equivariance cases are tracked and cited | closed → [C164 report](../2026-07-14-c164-clebsch-chirality.md) |
+| 3a | **C173 — REPORTED** | the five self-polar triangles pair to the ten complementary supports by alternating-cycle bipartition; Petersen=`KG(5,2)` and all displayed self-polarities are certified | closed → [C173 report](../2026-07-14-c173-dye-triangles-petersen.md) |
+| 3b | **C176 — REPORTED** | the triangle-pair/Brianchon/support dictionary, complete chord-intersection ledger, exact equivariance, and manuscript proposition are tracked | closed → [C176 report](../2026-07-15-c176-brianchon-petersen-dictionary.md) |
+| 3c | **C179 — REPORTED** | the direct fixed-conic binary incidence and orbit-conic code lineage is now cited and distinguished at the object and parameter levels | closed → [C179 report](../2026-07-15-c179-conic-ldpc-literature.md) |
+| 3d | **C180 — PROOF FOUND; SOURCE GATE OPEN** | an odd-characteristic edge-colouring lemma bounds every line by six uncovered points and closes the degenerate line-pair case once Dye's `c<=10` equality theorem is licensed over `F_11` | verify Dye 1991 p.275 field/descent hypotheses, then integrate the conceptual proof → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
+| 3e | **C181 — REPORTED** | the universal `c<=15` matching bound reduces all characteristics to `q=4,5,9,11`; the first two are excluded geometrically and the q=9 internal graph is Sylvester with published `eq_2=5`, independently checked from scratch | closed; manuscript now uses the conceptual proof and retains both exact checkers as verification → [C181 report](../2026-07-15-c181-classification-free-why11.md) |
+| 3f | **C182 — QUEUED; EXTERNAL ARCHIVE GATE** | all cited computations are indexed and manifested locally, but the PDF gives no immutable public artifact location | after C168 clean-HEAD closeout, publish/replay a versioned archive and cite its DOI in a data/code-availability paragraph → [C182 report](../2026-07-15-c182-clebsch-artifact-archive.md) |
+| 3g | **C183 — IN PROGRESS** | C174/C176 and the q4/q5/q9 leaves pass narrow elaboration and axiom audit; the action, decoding, small-`k`, and conditional Dye layers remain | root-elaborate the three drafted synthesis modules, then close C180 with an explicit Dye seam rather than formalizing Dye in full → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
+| 3h | **C184 — CHECKERS COMPLETE; DISPOSITION OPEN** | the tracked checker and Singular replay certify the complete low-degree table, unique cubic containment, and exact C02/C04/C12 companions | decide a concise manuscript disposition; Lean only what survives that decision → [C184 report](../2026-07-15-c184-low-degree-uncovered-loci.md) |
+| 3i | **C185 — CHECKER COMPLETE; LEAN/MANUSCRIPT OPEN** | the complete oracle, ambiguity enumerator, Brianchon locus, and corrected support-determined chirality statement are fail-closed | root-elaborate `Q11DecodingSynthesis.lean` and integrate the fixed-code corollaries → [C185 report](../2026-07-15-c185-clebsch-decoding.md) |
+| 3j | **C186 — FINITE BRIDGE DRAFTED; CONCEPTUAL PROOF OPEN** | `Q11A5PointOrbits.lean` is drafted but unelaborated; it verifies rather than replaces the desired representation-theoretic argument | root-elaborate the bridge, then derive the unique 12-orbit and source the Brianchon-ten-orbit argument forcing `c=10` → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
+| 3k | **C187 — CHECKER COMPLETE; LEAN/PRIORITY/MANUSCRIPT OPEN** | the hardened q5/q11/q13 checker completes the finite leaves of the `4<=k<=7` classification | root-elaborate `SmallKChordMoments.lean`, close its geometric seam, literature-check `(4,5)`, and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
+
+C183's live report contains the compaction-safe subagent roster. C185's worker is active on Lean
+synthesis; C187's checker is complete and its worker has moved to
+C186's finite `A5` point-action bridge; C184 is complete and its worker owns C187's Lean moments.
+Root owns integration, the Dye axiom/source audit, and all validation.
+| 4 | **C165 — REPORTED** | 42-per-vertex/252-neighbour theorem, both histograms, no-conic result, and distance-zero global counterexample are tracked and cited | closed → [C165 report](../2026-07-14-c165-clebsch-gap-theorem.md) |
+| 5 | **C166 + C170 — REPORTED** | unconditional q≤14 exact census leaves q=11 alone; old q=9 conjugacy claim removed | closed → [C166 scope audit](../2026-07-14-c166-clebsch-why11.md), [C170 theorem](../2026-07-14-c170-unconditional-q11-uniqueness.md) |
+| 6 | **C128 + C167 — REPORTED** | exact syzygy certified; unsupported group provenance isolated; Klein/Further remarks removed; C174 seam landed | closed → [C128](../2026-07-14-c128-icosahedral-syzygy.md), [C167](../2026-07-14-c167-clebsch-manuscript-scope.md) |
+| 7 | **C131 + C161** | Sadeh ownership and earliest `(iv)⟺(v)` source unresolved | exact priority ledger from primary sources |
+| 8 | **C168** | all current named scripts are hardened and Git-indexed; C128 closed; C167 removed decorative executables | replay clean-source manifest; audit PDF/citations; prune handoff → [preflight](../2026-07-14-c168-clebsch-computation-source-preflight.md) |
+
+**Positive upgrades:** C170 and C172 are reported, giving unconditional q≤14 uniqueness and the
+monomial/affine deep-hole orbit statements. C171 is reported with a sharp PGL-invariant global
+gap `delta>=12` off the Clebsch class and eight local `A₅` move orbits. C173 is reported with the
+five-triangles/Petersen explanation. Dependencies are encoded in the queue rows.
+
+**Current execution order:** C176, C179, and the finite/checker portions of C184, C185, and C187 are
+reported. C180 is the live proof/source upgrade; C181 is independent of C180 and its conceptual
+all-field proof is integrated. C184/C185/C187 retain the exact manuscript/Lean tails recorded in
+the table, and C186 retains both its conceptual proof and source gate. C188 (`relconic`) and C189
+(`cap`, consuming the Nofil implication) are downstream queued consumers, not Clebsch-owned result
+work; C190 records the completed gem-mining routing seam. C153 and C131/C161 remain the live
+external-source gates; C168 is the last local closeout after their claim boundaries settle.
+The C163 boundary and completed validation are in
+[coding-semantics repair](../2026-07-14-c163-clebsch-coding-semantics.md).
+The C165 local metric, exact replay, and counterexample are in
+[one-point perturbation gap](../2026-07-14-c165-clebsch-gap-theorem.md).
+The unconditional q=11 theorem and nine-field replay are in
+[small-field uniqueness](../2026-07-14-c170-unconditional-q11-uniqueness.md).
+The monomial code characterization and four-level orbit ledger are in
+[coding-level orbits](../2026-07-14-c172-clebsch-monomial-orbits.md).
+The sharp global nearest-conic gap and local move-orbit decomposition are in
+[global and local gaps](../2026-07-14-c171-global-conic-gap.md).
 **Lean gallery (plan A = small `decide` pieces first):**
 - ✅ **Schreier = icosahedron DONE** — `residual_graph_icosahedral` in `Q11Coding.lean` (commit
   3b75a04): 5-regular, 30 edges, every vertex link a 5-cycle (Whitney ⇒ icosahedron). Pure `decide`,
   standard axioms, **no `native_decide`** — strict-trust clean. (Deep-holes=conic / covering-radius-3 /
   20-leader facts were already Lean-certified in `Q11Coding`/`Q11Semantic*`.)
+- ✅ **Klein syzygy DONE** — `Q11KleinSyzygy.lean` proves the exact integer identity, canonical
+  mod-11 reductions, and reduced syzygy; standard axioms, no `native_decide`. It deliberately does
+  not certify the removed group/resolvent/diagonal claims.
+- ✅ **C174/C176 and small-field finite spine DONE** — narrow elaboration and axiom audit pass for
+  `ClebschChordDefect.lean`, `Q11BrianchonPetersen.lean`, `ClebschSmallFields.lean`,
+  `Q5SixArcExclusion.lean`, and `Q9Sylvester.lean`; all expose only the standard axioms recorded in
+  C183. `Q11DecodingSynthesis.lean`, `Q11A5PointOrbits.lean`, and `SmallKChordMoments.lean` are
+  drafted but unelaborated and are not counted as certified.
 - ⏳ **Chirality ℤ/2 — NEXT, needs new infra:** no A₅-on-columns action exists in Lean; must derive the
   60 column permutations (Fin 6) from Stab(arc)⊂PGL(3,11) — the 60 matrices are in
   `papers/clebsch-hexagon-code/check_ten_arc_foil.py` — then act on the 20 triples and `decide` the two
@@ -260,12 +326,16 @@ genre nearby or it reads as informal. Note Thas lists "second largest complete a
   (§7). C125 verified it in Python (`notes/2026-07-13-c125-klein-resolvent.md`), but the Lean
   kernel-check is open and the task sits only in the queue. NB the handoff previously said the C125
   reduction facts were "all certified" — that oversells while C128 is open.
-- **Checker-coverage gap.** Three finite claims ship with no checker: the gap theorem's
-  252-perturbation spectrum (§4 Thm 4.3 — 4.1 is rigidity, 4.2 the corollary), the chirality orbit computation (§5 Prop 5.1), and the
-  syzygy (§7). All three were independently re-derived in the review and hold exactly as stated
-  (spectrum `{18:30,19:60,20:90,22:42,24:30}`, min 18, ≤7 conic points surviving; `#Stab`=60, orbits
-  `[10,10]` complementary) — so this is a reproducibility gap, not a math gap. Cheapest fix: two
-  small scripts, mirroring the existing six.
+- **Checker-coverage gap.** Three finite computations ship with no checker: the gap theorem's
+  252-perturbation spectrum (§4 Thm 4.3 — 4.1 is rigidity, 4.2 the corollary), the chirality orbit
+  computation (§5 Prop 5.1), and the syzygy (§7). The finite clauses were independently re-derived:
+  the local perturbation calculation has `42` legal moves per deleted vertex and spectrum
+  `{18:30,19:60,20:90,22:42,24:30}` (min 18, ≤7 conic points surviving); chirality has
+  `#Stab=60`, orbits `[10,10]` complementary; and the syzygy holds. The gap theorem's final global
+  “nearest other six-arc” gloss does **not** follow and is false literally: a conic-preserving
+  projectivity yields another six-arc with the same deep-hole conic. C165 preserves the valid local
+  theorem, removes/localizes that gloss, and commits the checker. Every cited computation must be
+  backed by a Git-tracked artifact; C168 rejects scratchpad-, session-, and untracked-only evidence.
 - **Sequencing/novelty seam vs the `arcs` paper — see §Paper sequencing below.**
 
 **Closed 2026-07-14 (were the outline's blocking research items):**
@@ -486,7 +556,8 @@ Exhaustive classification of **all 1548 frame-normalized 6-arcs in PG(2,11)** up
   exactly 6 arcs, all PGL-equivalent to the Clebsch witness (mult 6 = 360/60 ⇒ |Aut|=60=A₅). **Gap
   12→16.**
 - **U ⊆ a conic (degenerate allowed) for the Clebsch class ONLY**, and there U = the *full* 12-point
-  conic. Zero other arcs (incl. all 252 on-conic arcs — which give |U|=18–22 junk) qualify.
+  conic. Zero other classes qualify. The `252` here counts concyclic representatives within the
+  `1548` frame-normalized sweep, not all conic six-subsets; the latter count is `C(12,6)=924`.
 
 **RIGIDITY THEOREM (exhaustive at q=11, `decide`-grade Lean-able):** for a 6-arc A in PG(2,11), TFAE
 — (i) deep-hole locus ⊆ some conic; (ii) = all F₁₁-points of a nondegenerate conic; (iii) |U(A)|≤15
@@ -496,8 +567,9 @@ RECOVERED from the coding condition, not assumed.**
 
 **Thread B — RIGID not stable, as a GAP theorem:** all 252 one-point perturbations keep radius 3
 (deep holes never vanish) but shatter the conic instantly — |U Δ conic| ∈ {18,19,20,22,24}, min 18;
-≤7 of 12 conic points survive; zero perturbations land U on any conic. So the correct quantitative
-statement is a **deficiency/gap theorem** (distance-to-phenomenon jumps 0→≥18, nothing between),
+≤7 of 12 conic points survive; zero perturbations land U on any conic. Thus the correct quantitative
+statement is a **local deficiency/gap theorem on the one-point neighbourhood** (there the distance
+jumps 0→≥18),
 replacing the impossible stability theorem. The 5-arc's U has 43 pts ⊇ conic; the Clebsch 6th point
 uniquely prunes it to exactly the conic.
 

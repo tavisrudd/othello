@@ -5,7 +5,8 @@ Closes the q=9 exclusion step of the "why q=11" counting lemma (Section 6).
 q=9=3^2 passes the icosahedral-rationality filter (9 = -1 mod 10), so the counting
 bound q<=14 alone does not exclude it; SVM 1995 Prop.13 records, by computer search,
 that the analogous A5-invariant six-arc at q=9 is COMPLETE (unlike at q=11), so its
-deep-hole locus is empty and the phenomenon is vacuous there. This script verifies
+extension/weight-three syndrome locus U is empty. Its deep holes still exist at
+covering distance two. This script verifies
 that completeness independently, using the q=9 witness arc already frozen in the Lean
 formalization (RelativeConicArcs/Examples.lean: q9Witness), over the GF9 field whose
 add/mul/inv tables are the ones certified in RelativeConicArcs/FiniteFields.lean
@@ -79,7 +80,7 @@ def is_six_arc(pts6):
 def line_points(a, b):
     return [p for p in PTS if collinear(a, b, p)]
 
-def deep_hole_locus(arc):
+def extension_locus(arc):
     covered = set(map(tuple, arc))
     n = len(arc)
     for i in range(n):
@@ -115,17 +116,18 @@ def main():
     off_conic = all(not on_conic(p) for p in arc)
     print(f"  disjoint from the conic XZ=Y^2: {off_conic}")
 
-    U = deep_hole_locus(arc)
+    U = extension_locus(arc)
     print(f"  |PG(2,9)| = {len(PTS)}")
-    print(f"  deep-hole locus U (points off arc and off all 15 secants): |U| = {len(U)}")
+    print(f"  extension/weight-three syndrome locus U: |U| = {len(U)}")
     if U:
         print(f"    U = {U}")
 
     print()
     print("=== VERDICT ===")
     if len(U) == 0:
-        print("  U is EMPTY: the q=9 six-arc is COMPLETE, so it has no deep holes at all.")
-        print("  The phenomenon ('deep holes = a conic') is vacuous at q=9, confirming")
+        print("  U is EMPTY: the q=9 six-arc is COMPLETE and has covering radius two.")
+        print("  Its deep holes have distance two; no weight-three syndrome direction exists.")
+        print("  Thus the phenomenon U = a conic fails at q=9, confirming")
         print("  SVM 1995 Prop.13 and excluding q=9 from Theorem (Uniqueness of q=11).")
     else:
         print("  U is NONEMPTY -- this does NOT match the expected q=9 completeness claim;")

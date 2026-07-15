@@ -87,6 +87,26 @@ The reservoir bound `q − k − C(k,2) − 1` (vacuous by `k = 7` at `q = 23`) 
 *availability* of legal off-conic cells in base layers; it does not by itself prove that an
 available cell returns to `Good`.  That closure is the missing mining/proof target.
 
+### Full-conic equality is now isolated from `(ON)`
+
+C187 classifies arcs of sizes `4 <= k <= 7` whose entire one-point extension locus is the rational
+point set of a nonsingular conic. The only cases are `(k,q)=(4,5)` and `(6,11)`. Consequently, for
+`q>=13` and `4 <= k <= 7`, it excludes exactly `U(A)=C(F_q)`. It does not exclude `U(A)` being a
+proper subset of `C(F_q)`, a different conic-localized seed, or a more general sealed hole set.
+C189 queues the game interpretation of the smaller equality case: the six continuations of the
+`PG(2,5)` frame are expected to have octahedral conflict graph `K6` minus a perfect matching, with
+an antipodal copycat strategy, parallel to the already proved q=11 icosahedral seeded P-position.
+
+This is not a new falsification mode or a change in the conjecture's status. For `q>=13`, the
+classification rules out only a shortcut whose premise is `U(A)=C(F_q)` with
+`4 <= |A| <= 7`; proper conic-contained loci and other localization mechanisms remain open. The
+active `(ON)` obligation asks only for one P-valued on-conic child of each size-three residual
+position. It does not ask for `U(A)` to equal the conic and does not require later play to remain
+on it. Every row of the intruder-regime table and the positive-live-conic steering program is
+unchanged. See
+[`C189`](2026-07-15-c189-q5-octahedral-frame.md) and the imported
+[`C187`](2026-07-15-c187-general-k-arc-conic-filling.md).
+
 ## 4. The two categories of failure
 
 ### A. The math is genuinely false (a counterexample odd `q`)

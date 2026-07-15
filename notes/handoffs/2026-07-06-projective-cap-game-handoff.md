@@ -303,6 +303,15 @@ terminal regions in an odd-q certificate search, but it supplies no move, descen
 minimax response by itself; review it only where C80/C84 already produces a candidate sealed
 state.
 
+C187 classifies equality `U(A)=C(F_q)` for `4 <= |A| <= 7`: its only cases are the projective frame
+in `PG(2,5)` and the Clebsch hexagon in `PG(2,11)`. For `q>=13` it excludes only that exact equality,
+not a proper conic-contained extension locus, another conic-localized seed, or a more general
+sealing argument. It does not touch `(ON)`, which needs only one P-valued on-conic child. C189 is
+the queued game-side consumer: certify that the six `q=5` frame continuations have octahedral
+conflict graph `K6` minus a perfect matching, derive the antipodal copycat P-position, and pair it
+with the existing q=11 icosahedral seed. See the
+[`C189 bridge`](../2026-07-15-c189-q5-octahedral-frame.md).
+
 C110's consumer review adds three proved tools worth testing only at matching pressure points:
 
 - `EvaluationDichotomy.feature_evaluation_avoidance_iff` decides when one degree-`d` form can
@@ -522,6 +531,12 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
 task list.  Current high-value items:
+
+- **C189 [QUEUED] — q=5 octahedral frame bridge.** Import C187's exact six-point conic extension
+  locus, certify the expected `K6`-minus-a-perfect-matching conflict graph and antipodal-copycat
+  P-position, then place it beside the q=11 icosahedral seeded P-position. This is a finite
+  polyhedral base-case comparison, not progress on `(ON)` or a uniform odd-q law.
+  [Proof obligations](../2026-07-15-c189-q5-octahedral-frame.md).
 
 - **C100 [REPORTED] — relative-conic sealing review.** Exact game localization, q=9 terminal P,
   and the actual q=11 icosahedral seeded P position are Lean-proved. The tested descent and

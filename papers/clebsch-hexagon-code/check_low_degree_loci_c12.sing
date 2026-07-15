@@ -1,0 +1,62 @@
+// Exact F_11 geometry replay for the normalized C02, C04, and C12 forms
+// printed by check_low_degree_loci.py.  Singular 4.4.1 returns a unit and one
+// factor of multiplicity one exactly when the C12 sextic is irreducible.  The
+// Jacobian ideals also certify smoothness of C02/C12 and the unique geometric
+// singular point of C04.
+ring r=11,(x,y,z),dp;
+poly f4=
+  z^4+6*y^2*z^2+5*y^3*z+8*y^4
+  +3*x*z^3+4*x*y*z^2+3*x*y^2*z+8*x*y^3
+  +6*x^2*z^2+10*x^2*y*z+9*x^2*y^2+10*x^3*z+8*x^3*y+8*x^4;
+poly f5=
+  z^5+3*y*z^4+5*y^3*z^2+7*y^4*z+y^5
+  +5*x*z^4+6*x*y*z^3+5*x*y^2*z^2+8*x*y^3*z+6*x*y^4
+  +3*x^2*z^3+7*x^2*y*z^2+6*x^2*y^2*z
+  +6*x^3*y*z+7*x^3*y^2+9*x^4*z+2*x^4*y+10*x^5;
+poly f6=
+  z^6+4*y^2*z^4+y^3*z^3+6*y^4*z^2+4*y^5*z+3*y^6
+  +7*x*z^5+4*x*y*z^4+10*x*y^2*z^3+x*y^3*z^2+9*x*y^4*z+3*x*y^5
+  +2*x^2*z^4+5*x^2*y*z^3+10*x^2*y^2*z^2+5*x^2*y^3*z+9*x^2*y^4
+  +7*x^3*z^3+7*x^3*y^2*z+4*x^3*y^3
+  +x^4*z^2+4*x^4*y*z+10*x^4*y^2+6*x^5*y+8*x^6;
+list factors=factorize(f6);
+if (size(factors[1])!=2)
+{
+  "ASSERTION FAILED: unexpected factor count";
+}
+if (factors[2][1]!=1 || factors[2][2]!=1)
+{
+  "ASSERTION FAILED: unexpected factor multiplicity";
+}
+if (deg(factors[1][2])!=6)
+{
+  "ASSERTION FAILED: unexpected proper factor";
+}
+if (size(factors[1])==2 && factors[2][1]==1 && factors[2][2]==1 && deg(factors[1][2])==6)
+{
+  "C12_sextic_irreducible_over_F11=True";
+}
+ideal j4=jacob(f4);
+ideal j5=jacob(f5);
+ideal j6=jacob(f6);
+if (dim(std(j4))!=0 || vdim(std(j4))!=27)
+{
+  "ASSERTION FAILED: C02 quartic is not smooth";
+}
+if (dim(std(j5))!=1 || mult(std(j5))!=1)
+{
+  "ASSERTION FAILED: C04 quintic singular scheme is not one geometric point";
+}
+if (dim(std(j6))!=0 || vdim(std(j6))!=125)
+{
+  "ASSERTION FAILED: C12 sextic is not smooth";
+}
+if (dim(std(j4))==0 && vdim(std(j4))==27 && dim(std(j5))==1
+    && mult(std(j5))==1 && dim(std(j6))==0 && vdim(std(j6))==125)
+{
+  "C02_smooth_genus=3";
+  "C04_unique_geometric_singularity=True";
+  "C12_smooth_genus=10";
+  "all assertions passed";
+}
+quit;

@@ -3,8 +3,9 @@
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-14
 **Status**: REPORTED. Scripts promoted and re-run; literature verdict settled as ABSENT at
-full-text level; the headline claim is fully machine-checked. What remains before it is claimable is
-mathematics, not verification: a proof, an explanation of the spectrum gap, and the octad analogue.
+full-text level; the headline claim is fully machine-checked; the proof structure and spectrum-gap
+explanation are complete; and the q=23 octad analogue is closed-negative with its failure mechanism
+identified. C155 owns the note, with C156/C157/C169 as its remaining citation/priority gates.
 
 ## The claim
 
@@ -77,6 +78,14 @@ Re-run on promotion (primes 3–19; the full sweep to 37 takes minutes):
 `notes/2026-07-14-c147-hexad-characterization.py` — a standalone verifier of the whole statement,
 written rather than patched into `mathieu-poles.py` so the census artifacts keep their hash
 correspondence. Every assertion below is an `assert`; the script exits nonzero on any failure.
+
+**Post-report fail-closed hardening (2026-07-14).** Manifest replay found that the proof-structure
+script printed rather than asserted its headline identity and used an order-sensitive lookup that
+could print `t=None` for an arbitrary orbit representative. It now asserts `m≤3`, zero identity
+failures, the complete spectrum, and the exact four orbit rows with a `frozenset` key. The
+standalone characterization script now also asserts the complete spectrum. Current hashes are
+`0ae35b1a...b0d2` (characterization) and `a14e4a23...b96b` (proof structure); both replay with
+deterministic tables and fail-closed sentinels.
 
 ```
 python3 notes/2026-07-14-c147-hexad-characterization.py

@@ -323,6 +323,16 @@ on paths, cycles, and isolated vertices; deeper layers can have degree greater t
 path/cycle description is not a recursive invariant.  This is a forward pointer to D3, not a proof
 of Conjecture 7.1.
 
+**Queued finite illustration [COMPUTED INPUT; GAME PROOF OPEN].** C187 classifies equality
+`U(A)=C(F_q)` for `4 <= |A| <= 7`: the only cases are the four-point frame in `PG(2,5)` and the
+six-point Clebsch seed in `PG(2,11)`. C189 will test and certify the expected octahedral conflict
+graph `K6-M3` and antipodal-copycat P-strategy for the former, then compare it with the already
+proved icosahedral seeded P-position for the latter. Do not promote the q=5 graph or value from this
+stub until C189's finite and sealing-transport gates pass. Even after they do, the pair illustrates
+two exact-equality small-field base cases only: for `q>=13`, C187 does not exclude
+`U(A)` being a proper subset of `C(F_q)`, other conic-localized seeds, or other sealed hole sets.
+`(ON)` remains the weaker, value-sensitive demand for one P-valued on-conic child.
+
 **Segre guard [PRIOR ART].** Segre's 1955 oval theorem is relevant odd-plane background, but the
 localization step here uses uniqueness of the conic through a five-arc.  Do not claim that Segre's
 oval theorem itself performs this reduction.

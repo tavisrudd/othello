@@ -37,6 +37,16 @@ and a semantic bridge from a generic rules-only coordinate checker to relative c
 finite checks use kernel `decide`, never `native_decide`; the theorem and axiom manifest is
 [`lean/RelativeConicArcs/TRUST.md`](../../lean/RelativeConicArcs/TRUST.md).
 
+**Queued q=5 follow-up (C188).** Clebsch C187's hardened checker verifies by exhaustive exact
+computation that the ordinary-uncovered locus of the standard four-frame in `PG(2,5)` is exactly
+the six points of the nonsingular conic
+`X²+Y²+Z²+XY+XZ+YZ=0`. Together with this paper's `L₂(5)=4` lower bound, that yields the target
+`ρ_𝒞(5)=L₂(5)=4`. C188 will import the witness into the relative-conic semantics, add the theorem to
+the strict-kernel result registry, and then promote it into the verified small-value table. The
+broader `4≤k≤7` conic-filling classification remains owned by
+[`C187`](../../notes/2026-07-15-c187-general-k-arc-conic-filling.md) and will be cited rather than
+duplicated here.
+
 **Exact q=16 classification.** Every projective eight-arc is normalized to the standard
 four-frame and extended through checked class lists of sizes 4, 61, 454, and 2633. The final
 count independently reproduces Al-Seraji--Al-Ogali (2018), so that count is prior art. Every

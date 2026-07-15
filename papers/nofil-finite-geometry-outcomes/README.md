@@ -34,6 +34,11 @@ from the `dihedral-schreier-node-kayles` catalogue.
 - `2026-07-08-codex-projective-nofil-novelty-audit.md` — novelty guards / prior-art overlaps
 - `2026-07-06-escape-count-lemma.md`, `2026-07-07-conic-localization-onconic-escape.md` —
   the **open odd-plane kernel** (frontier/open-problems material, not a finished result)
+- [`../../notes/2026-07-15-c189-q5-octahedral-frame.md`](../../notes/2026-07-15-c189-q5-octahedral-frame.md)
+  — queued cross-paper bridge from the Clebsch `U(A)=C(F_q)`, `4 <= |A| <= 7`, classification:
+  certify the expected octahedral `q=5` seeded residual and compare it with the proved icosahedral
+  `q=11` seed. This is not yet a manuscript theorem, does not exclude proper conic-contained
+  extension loci, and does not change the odd-plane conjecture or `(ON)`.
 
 ## Elsewhere (not symlinked)
 
@@ -47,5 +52,9 @@ from the `dihedral-schreier-node-kayles` catalogue.
   airtight (parabolic + Hermitian negatives are already rigorous).
 - **Novelty admin:** verify the Clark–Mancini–Van Hook full text before hardening any "first"
   language; HHS's STS(7)=PG(2,2) / STS(9)=AG(2,3) instances are prior art.
+- **Polyhedral seeded positions (C189):** check all fifteen pairs of the six `PG(2,5)` frame
+  continuations, prove the conflict graph is `K6-M3`, transport its antipodal-copycat P-value
+  through the sealing bridge, and decide whether the octahedral/icosahedral pair belongs in this
+  paper or only its outlook.
 
 See `../papers-index.md` for the registry and `../papers-planning.md` for cross-paper strategy.

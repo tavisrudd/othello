@@ -53,11 +53,14 @@ def quadratic_residues(p):
 def main():
     QR = quadratic_residues(P)
     print(f"QR(11) = {QR}")
+    assert QR == [1, 3, 4, 5, 9]
     H0 = frozenset([INF] + QR)
     print(f"base hexad H0 = {sorted(H0, key=lambda x: (x == INF, x))}")
+    assert len(H0) == 6
 
     G = sl2_11()
     print(f"|SL(2,11)| = {len(G)} (expect 1320; image in PGL(2,11) is PSL(2,11), order 660)")
+    assert len(G) == 1320
 
     orbit = set()
     for (a, b, c, d) in G:
@@ -65,6 +68,8 @@ def main():
         orbit.add(img)
 
     print(f"orbit of H0 under PSL(2,11): {len(orbit)} distinct hexads (expect 132)")
+    assert len(orbit) == 132
+    assert all(len(block) == 6 for block in orbit)
 
     # Sanity: S(5,6,12) design property -- every 5-subset of the 12 points lies in
     # exactly one block.
@@ -80,20 +85,26 @@ def main():
     print(f"S(5,6,12) design check (every 5-subset in exactly one block): {count_ok}")
     if not count_ok:
         print(f"  counterexamples (first 5): {bad[:5]}")
+    assert count_ok, f"Steiner design check failed: {bad[:5]}"
 
     # The six antipodal chords (Q11Residual.lean `antipode`), in t-value form:
     # (idx11 == point at infinity).
     pairs = [(0, 9), (1, 7), (2, INF), (3, 4), (5, 8), (6, 10)]
     hexadA = frozenset(p[0] for p in pairs)
     hexadB = frozenset(p[1] for p in pairs)
+    assert hexadA == frozenset({0, 1, 2, 3, 5, 6})
+    assert hexadB == frozenset({4, 7, 8, 9, 10, INF})
     print(f"\nhexadA (one point per antipodal chord)      = {sorted(hexadA, key=lambda x: (x == INF, x))}")
     print(f"hexadB (the complementary chord partners)   = {sorted(hexadB, key=lambda x: (x == INF, x))}")
-    print(f"hexadA and hexadB partition the 12 points: {hexadA | hexadB == frozenset(points12) and hexadA & hexadB == frozenset()}")
+    partition = hexadA | hexadB == frozenset(points12) and hexadA & hexadB == frozenset()
+    print(f"hexadA and hexadB partition the 12 points: {partition}")
+    assert partition
 
     inA = hexadA in orbit
     inB = hexadB in orbit
     print(f"\nhexadA is one of the 132 Mathieu hexads: {inA}")
     print(f"hexadB is one of the 132 Mathieu hexads: {inB}")
+    assert not inA and not inB
 
     def overlap_histogram(hexad):
         from collections import Counter
@@ -103,6 +114,9 @@ def main():
     histB = overlap_histogram(hexadB)
     print(f"\nintersection-size histogram, hexadA vs all 132 blocks: {dict(sorted(histA.items()))}")
     print(f"intersection-size histogram, hexadB vs all 132 blocks: {dict(sorted(histB.items()))}")
+    expected_histogram = {1: 6, 2: 30, 3: 60, 4: 30, 5: 6}
+    assert dict(histA) == expected_histogram
+    assert dict(histB) == expected_histogram
 
     print("\n=== VERDICT ===")
     if inA or inB:
@@ -117,6 +131,7 @@ def main():
         print("  icosahedral transversal hexads are TRANSVERSE to the Steiner system --")
         print("  they meet its blocks only in the intersection sizes tabulated above,")
         print("  never achieving the full size-6 agreement a block would require.")
+    print("all assertions passed")
 
 if __name__ == "__main__":
     main()

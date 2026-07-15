@@ -2,6 +2,46 @@
 
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-14
+**Status**: C147 and C174 are reported. The hexad theorem is fully machine-checked and
+proof-structured; its q=23 octad analogue is closed-negative; the chord--extension identity now
+holds for every six-arc in every finite projective plane. C155 is drafted with an exact computation
+manifest, and submission remains gated on C156/C157/C169. C159 is seeded by Clebsch C184's complete
+q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch C187 and only its q5
+folklore/priority check remains.
+
+**Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190 reports and
+scripts, this handoff and its companion, and the `gem-mining` rows of the global queue. Changes to the
+Clebsch manuscript belong to `clebsch` (C167), even when they cite a gem result.
+
+## Adversarial takeover map (2026-07-14)
+
+Full cross-lane issue ledger: [Clebsch + gem takeover audit](../2026-07-14-clebsch-gem-adversarial-takeover.md).
+Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsch-gem-cheap-upgrades.md).
+
+| Task | State | Trust boundary / next action |
+|---|---|---|
+| **C147** | reported | theorem, two-system verifier, orbit proof, and octad negative are durable; stale report header corrected |
+| **C169** | queued, submission gate | obtain PGOFF §§8/14 and Korchmáros–Storme–Szőnyi; coordinate Sadeh with C131; settle whether the on-conic extension spectrum was printed |
+| **C155** | drafted, gated | theorem spine, novelty posture, q=23 negative, and exact Git-indexed manifest are in [the draft](../2026-07-14-c155-hexad-note.md); C156/C157/C169 remain |
+| **C156/C157** | citation gates | source the two-system split and replace inferred textbook theorem numbers |
+| **C159** | queued, independent | consume C184's complete q11 six-arc degree/rank table; begin with the missing q<=11 atlas cells, not a q11 six-arc rerun |
+| **C160** | priority residue only | C187 settles the q5 frame/conic calculation; check Edge/frame folklore and coding tables |
+| **C190** | reported | Clebsch-to-gem ownership and citation seams fixed → [report](../2026-07-15-c190-gem-clebsch-routing.md) |
+| **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
+| **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
+| **C177** | queued, independent | test whether local Mathieu systems on the point-regulus conics of `D_Hex(11)` glue to a `2-(1332,6,240)` or oriented `2-(1332,6,120)` design; not a C155 gate |
+| **C178** | reported, closed-negative and independent | exact reconstruction gives 110 Wu conics in two orbits; their passant-join clique numbers are 4 and 3, hence no six-set → [report](../2026-07-15-c178-wu-internal-conic-cliques.md) |
+
+**Cross-lane seam:** C155 owns the hexad theorem and C174 owns the general identity, whose q=11
+specialization is `t(H)+|U(H)|=82`. Clebsch C167 may cite that identity to explain its on-conic
+spectrum, but must not absorb the hexad theorem or claim it twice.
+The Clebsch transversality aside is not a substitute for C155 and should be cut or reduced there.
+
+Clebsch C184/C187 now supply two additional one-way imports: C159 uses C184's q11 low-degree atlas
+as seed data, and C160 uses C187's q5 equality as settled computation. Neither import expands C155.
+C187 also does not advance the BSW exterior-set conjecture: joins missing the conic is weaker than
+covering every off-conic point, and BSW's external-only hypothesis is not C187's classification
+problem. See [C190](../2026-07-15-c190-gem-clebsch-routing.md).
 
 **Entry doc for the lane.** This handoff is the map: what the lane owns, what is settled, what is
 open. Read alongside it:
@@ -136,10 +176,10 @@ the two BSW originals remain unread.
 
 ## Queued work
 
-C155–C157, C159, C160 are this lane's; C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
+C155–C157, C159, C160, C169, C174, C175, C177, C178, C190 are this lane's; C178 and C190 are reported. C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
 of the same sweep. Rationale, search directions, and what was deliberately left unqueued:
 [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md). **Only C153 and the running
-rigidity/gap check can cost us anything** — the rest is upside.
+external-source gates can cost the current novelty posture; the rigidity/gap checks are complete.
 
 ## Open frontiers
 
@@ -172,7 +212,9 @@ rigidity/gap check can cost us anything** — the rest is upside.
   (the parent analysis says the family runs through k, not p). Plausibly pegs `cubic` when opened.
 - **The U-atlas** — all n-arcs of PG(2,q) up to PGL₃(q) for small q, invariant = curve-fit of the
   deep-hole locus. Drops C132's genus-0 prescription, which was a restriction by fiat: elliptic-curve
-  targets are the cheapest route to a new kind of gem.
+  targets are the cheapest route to a new kind of gem. Its q11 seed is already complete through the
+  C184 degree/rank table, including the exact quartic/quintic/sextic companions; C159 starts with the
+  missing cells and must preserve C184's exhaustion boundary.
 
 ## Trust boundary
 
@@ -181,10 +223,21 @@ The census scripts are promoted and re-run: `notes/2026-07-14-c147-gem-sweep.py`
 numbers (hashes in `2026-07-14-c147-hexad-polarity-characterization.md`). The census corroborates at
 three independent points: the repo's own `check_q19_nonexample.py` (|U|=140), BSW's published q=7 and
 q=11 extremal sizes, and Edge's 22 = 1320/60 hexagon count against the stabilizer-60 claim.
+All five computation artifacts currently cited by the C147 report/handoff — those two scripts plus
+`2026-07-14-c147-hexad-characterization.py`, `2026-07-14-c147-proof-structure.py`, and
+`2026-07-14-c147-octad-q23.rs` — pass `git ls-files --error-unmatch`. C155 must retain this invariant:
+no numerical claim may depend only on a session scratchpad or an untracked file, and its final
+manifest records paths, hashes, commands, and expected outputs.
+
+C174's additional verifier is
+`notes/2026-07-14-c174-general-six-subset-identity.py`; it freezes the full q=5,7,11,13 joint
+`(t,|U|)` tables and must likewise remain Git-tracked in the C155 manifest.
 
 **The hexad claim is fully machine-checked** by `notes/2026-07-14-c147-hexad-characterization.py`:
 both S(5,6,12) systems built and Steiner-verified, disjoint, swapped by every one of the 660 outer
 maps, and the t=60 stratum equals their union exactly (264 = 132+132) with the gap at 61 confirmed.
+The characterization and proof-structure scripts are fail-closed on their full spectra and orbit
+tables; the latter uses order-independent representative keys.
 The two-system form is forced — a polarity-defined invariant cannot separate systems that PGL₂(11)
 exchanges — so it is a coherence check, not a weakness. The pencil bounds, the degenerate-conic
 impossibility, and the torus-clique collinearity remain reasoned, not machine-checked.

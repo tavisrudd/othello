@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Companion run 3 (Section 8): Storme-Van Maldeghem's other A5-orbit at q=11
-(Prop.11), a 10-arc that is complete-outside its conic with EMPTY deep-hole locus --
+(Prop.11), a 10-arc with EMPTY extension/weight-three syndrome locus --
 the clean foil to the Clebsch hexagon's exact 12-point conic phenomenon.
 
 Method: rather than re-derive Dye/SVM's explicit icosahedral coordinates for the
@@ -62,7 +62,7 @@ def is_arc(pts):
 def line_points(a, b):
     return [p for p in PTS if collinear(a, b, p)]
 
-def deep_hole_locus(arc):
+def extension_locus(arc):
     covered = set(map(tuple, arc))
     n = len(arc)
     for i in range(n):
@@ -154,16 +154,32 @@ def main():
     remaining = set(PTS)
     orbits = []
     while remaining:
-        p = next(iter(remaining))
+        p = min(remaining)
         orb = set(apply_mat(g, p) for g in stab)
         orbits.append(orb)
         remaining -= orb
 
     sizes = sorted(len(o) for o in orbits)
     print(f"orbit sizes of Stab(A)=A5 on PG(2,11) (133 points): {sizes}")
+    assert sizes == [6, 10, 12, 15, 30, 30, 30]
+
+    standard_conic = {p for p in PTS if (p[0] * p[2] - p[1] * p[1]) % P == 0}
+    assert len(standard_conic) == 12
+    assert any(orb == A_set for orb in orbits)
+    assert any(orb == standard_conic for orb in orbits)
 
     ten_orbits = [o for o in orbits if len(o) == 10]
     print(f"number of size-10 orbits: {len(ten_orbits)}")
+    assert len(ten_orbits) == 1
+
+    expected_ten_arc = {
+        (1, 0, 3), (1, 0, 9), (1, 3, 3), (1, 3, 7), (1, 5, 4),
+        (1, 5, 7), (1, 6, 4), (1, 6, 6), (1, 7, 9), (1, 7, 10),
+    }
+    assert ten_orbits[0] == expected_ten_arc
+    assert is_arc(sorted(ten_orbits[0]))
+    assert ten_orbits[0].isdisjoint(standard_conic)
+    assert extension_locus(sorted(ten_orbits[0])) == []
 
     def on_standard_conic(p):
         x, y, z = p
@@ -178,8 +194,8 @@ def main():
         on_c = [p for p in pts if on_standard_conic(p)]
         print(f"  points on the standard conic XZ=Y^2: {len(on_c)} of 10")
         if arc_ok:
-            U = deep_hole_locus(pts)
-            print(f"  deep-hole locus size |U| = {len(U)}")
+            U = extension_locus(pts)
+            print(f"  extension/weight-three syndrome locus size |U| = {len(U)}")
             if U:
                 print(f"    U = {U}")
 
@@ -189,14 +205,15 @@ def main():
         print("  realized by the SAME concrete A5 (stabilizer of the hexagon) acting on the")
         print("  ambient plane in this way -- reporting as an open discrepancy, not forcing a match.")
     else:
-        clean = [o for o in ten_orbits if is_arc(sorted(o)) and len(deep_hole_locus(sorted(o))) == 0]
+        clean = [o for o in ten_orbits if is_arc(sorted(o)) and len(extension_locus(sorted(o))) == 0]
         if clean:
-            print(f"  Found {len(clean)} size-10 A5-orbit(s) that ARE ten-arcs with EMPTY deep-hole")
-            print("  locus: a clean complete-outside-conic foil, confirming SVM's Prop.11 companion")
-            print("  result (covering radius 2, no deep holes) via the same concrete A5.")
+            print(f"  Found {len(clean)} size-10 A5-orbit(s) that ARE ten-arcs with EMPTY")
+            print("  extension locus: a clean complete-arc foil, confirming SVM's Prop.11")
+            print("  companion result (covering radius 2; deep holes have distance 2).")
         else:
             print("  Size-10 orbit(s) exist but are not both a clean arc and complete; reporting")
             print("  the per-orbit data above rather than forcing the foil claim.")
+    print("all assertions passed")
 
 if __name__ == "__main__":
     main()
