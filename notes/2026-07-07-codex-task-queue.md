@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C152.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C160.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -115,6 +115,22 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   which currently argues against Dye 1991, the wrong paper →
   `notes/2026-07-14-c146-edge-bsw-prior-art.md`. TODO planted at the §2 site in
   `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.
+- **C153 `[clebsch]` [QUEUED 2026-07-14 — EXPOSURE; ILL]** — obtain and read the two BSW originals,
+  then confirm or retract the covering fact as ours →
+  `notes/2026-07-14-c153-bsw-originals.md`. **This is the last live way our headline can be taken.**
+  Every "ours" verdict from the 2026-07-14 sweeps (the covering fact ⇒ `arcs` Prop 8.7(i) ⇒ `clebsch`
+  Prop 3.1) is conditioned on two papers nobody has read, one of which is titled *Characterization of
+  complete exterior sets of conics*.
+  **Lit steps:** (1) ILL both — Blokhuis–Seress–Wilbrink, *Mitt. Math. Sem. Giessen* **201** (1991)
+  39–44 (same series as the open Hirschfeld–Sadeh request — one batch), and BSW, *Combinatorica*
+  **12** (1992) 143–147, doi:10.1007/BF01204717 (paywalled; try institutional access, the authors'
+  homepages, and Seress's memorial/collected pages first). (2) The one question: **does either state
+  that the exterior set's joins miss exactly the conic** — i.e. that the uncovered locus is the
+  conic's full F_q-point set? Search their text for: uncovered, missed, covered, "not on any", the
+  complement, 0-secant, skew. (3) Also extract: the exact conjecture statement and its scope (which q,
+  which sizes, external-only or mixed-type — the mixed-type gap is ours only if they never consider
+  internal points); whether they cite Edge 1956. (4) If either states the covering fact, say so
+  immediately and loudly — it forces a rewrite of both manuscripts, and `arcs` ships first.
 
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem
@@ -132,6 +148,110 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   table), so the converse closes by citation plus a short involution-content argument. The q=23 octad analogue is
   DEAD (min t=295 vs null 280) and the reduction says why -- it needs |H|=2x3 so that a concurrent
   triple is a perfect matching. Singular and note-sized, not a Mathieu tower.
+- **C155 `[gem-mining]` [QUEUED 2026-07-14 — AFTER THE RIGIDITY/GAP CHECK]** — write the hexad note:
+  the `t(H) = 60 + #fpf involutions` identity (synthetic, computer-free), the four-orbit table by
+  citation to CO-TR, the short involution-content argument, and the q=23 impossibility →
+  `notes/2026-07-14-c155-hexad-note.md`. Consumes C156/C157. Venue: *Discrete Math.* / *J. Comb.
+  Designs* / *DCC*, or Monthly-style. **Gated** on the rigidity/gap check
+  (`notes/2026-07-14-gem-lit-rigidity-gap.md`), which may change what the paper should be.
+  **Do not claim** the stabilizer-parity form as a new phenomenon — it is a repackaging of CO-TR's
+  table; the bridge to chord concurrency is what is ours. Cite Halbeisen–Hungerbühler (J. Geometry
+  2024) for the char-0 floor (no-accidental-concurrency is *generic* over ℝ, so this is a
+  finiteness phenomenon), and Havlicek/Coxeter/Pellegrino (arXiv:1210.2055) as the nearest rival
+  characterization.
+- **C156 `[gem-mining]` [QUEUED 2026-07-14 — FOLDS INTO C155]** — find a citable source for the
+  132+132 PSL/PGL split of the S(5,6,12) hexads on P¹(F₁₁) →
+  `notes/2026-07-14-c156-two-systems-split.md`. **CO-TR §8 cannot be used — it requires p > 23.** The
+  "one of the *two* systems" form of our theorem depends on this, so it is load-bearing, not a
+  detail.
+  **Lit steps:** vary vocabulary across schools. Design theory: "two Steiner systems S(5,6,12)",
+  "the two S(5,6,12) on the projective line", PSL(2,11)-invariant hexad systems, Curtis's kitten,
+  Conway–Sloane SPLAG ch. 10–11, Beth–Jungnickel–Lenz. Group theory: PSL(2,11) has two orbits on
+  hexads / PGL(2,11) fuses them, M₁₂ and its two classes, "the outer automorphism of M₁₂". Coding:
+  the two ternary Golay-related hexad systems. Also Edge §§29/32, which has the same
+  two-systems-swapped-by-non-PSL motif for the *external-point* hexagons — if he states the on-conic
+  version too, that is the citation.
+- **C157 `[gem-mining]` [QUEUED 2026-07-14 — ONLY IF C155 PROCEEDS]** — verify or replace the
+  unverified textbook citations → `notes/2026-07-14-c157-textbook-citations.md`. The
+  point↔involution correspondence on a conic and the pencil↔involution correspondence were attributed
+  to **Hirschfeld, *Projective Geometries over Finite Fields* 2nd ed. Ch. 8** and **Semple–Kneebone**
+  on inference only — **neither book was accessible and no theorem number is verified**.
+  **Lit steps:** obtain a copy of each (ILL/library) and pin exact theorem numbers, or drop them for
+  sources already verified: CO-TR Thm 1 + Thm 2(i) gives the 66-external/55-internal counts, and
+  Nguyen arXiv:1912.12200 §3–4 gives pencil↔involution over any field of char ≠ 2. Also acceptable:
+  Coxeter, *Projective Geometry*, or Hirschfeld–Thas for the Desargues involution theorem. **Do not
+  ship an unverified theorem number.**
+- **C159 `[gem-mining]` [QUEUED 2026-07-14 — FIRST CELL ONLY]** — the U-atlas, first cell: all n-arcs
+  of PG(2,q) up to PGL₃(q) for q ≤ 11, invariant = curve-fit of the deep-hole locus `U(A)`, with
+  **C132's genus-0 restriction dropped** (it was a fiat, not a finding) so elliptic targets are
+  admitted → `notes/2026-07-14-c159-u-atlas-first-cell.md`. Null: generic `U` fits no curve of degree
+  ≤ 3 once `|U| > 9`; exact fills should essentially never happen by chance. The deep-hole sweep found
+  **no variety-equality instance of any kind** in the literature, so any exact fill found is new.
+  Enumeration technique already exists in `papers/clebsch-hexagon-code/check_rigidity_degenerate_conic.py`.
+  **Lit steps** (before claiming any hit): for an elliptic target, search "deep holes" + "elliptic
+  curve", "covering radius" + "elliptic curve codes", and check the Hasse window `|U| = q+1-a`,
+  `|a| ≤ 2√q` as a sanity null; re-read `notes/2026-07-14-gem-lit-deep-holes.md` first — its Q1
+  verdict is the baseline any new fill must be checked against, and its **Reed–Muller residual is
+  still open** (C154).
+- **C160 `[gem-mining]` [QUEUED 2026-07-14 — CHEAP]** — settle the q=5 frame sibling: is the fact
+  that the deep holes of the projective frame in PG(2,5) form a conic real structure or a degeneracy?
+  → `notes/2026-07-14-c160-q5-frame-sibling.md`. It currently sits in the healthy census as a
+  positive (all-internal, stabilizer S₄, a k=1 sibling of the k=3 Clebsch case) and is **unaudited**.
+  All 4-arcs of PG(2,q) are projectively equivalent, so this is a statement about PG(2,5) itself and
+  is probably folklore.
+  **Lit steps:** search "complete quadrangle" + PG(2,5), "the frame" / "projective frame" + conic,
+  "diagonal triangle" + conic, and Edge's own §19 (q=5, on-conic Brianchon — the vet found Edge's
+  only on-conic statement is exactly there, so he may already have this). Also check `[4,1,4]₅`
+  covering radius in the coding tables. If folklore, it is a one-sentence remark in C155, not a
+  finding; say so plainly rather than dressing it up.
+
+**Relative-conic arcs lane (`relconic`) — sweep fallout (2026-07-14):** see
+[handoff](handoffs/2026-07-13-relative-conic-arcs-strengthening.md). The `arcs` manuscript was edited
+from outside the lane (commit `cfd8537`, Edge 1956 + DMP Thm 7.7 re-pin) and ships first.
+- **C154 `[relconic]` [QUEUED 2026-07-14 — LAST HOLE IN A LOAD-BEARING CLAIM]** — close the
+  Reed–Muller residual on "first identification of a complete deep-hole set with the full
+  F_q-point set of a named variety" → `notes/2026-07-14-c154-reed-muller-deep-holes.md`. The
+  2026-07-14 deep-holes sweep (`notes/2026-07-14-gem-lit-deep-holes.md`) audited that claim and it
+  **survives**, but its Q5 is marked **NOT SEARCHED, not cleared** — Reed–Muller codes have a
+  deep-hole literature of their own and rich geometric structure, so it is the one place a
+  counterexample could still sit. `arcs` owns the claim and submits first.
+  **Lit steps:** (1) "deep holes of Reed–Muller codes" — Kaufman, Lovett, Porat; Dumer;
+  Abbe–Shpilka–Wigderson; search both "deep holes" and "covering radius of RM(r,m)", which is the
+  older and larger literature. (2) The specific question: **does any RM deep-hole description
+  identify the set with the rational points of a variety** — as opposed to a coset/weight
+  description? RM codes are evaluation codes on AG(m,2)/PG, so a variety-shaped answer is more
+  plausible here than anywhere else. (3) Distinguish the *complexity* strand (deciding deep-hole-ness)
+  from the *explicit description* strand, as in the main sweep. (4) Also sweep generalized RM
+  (GRM) over F_q and projective RM. (5) If a variety-equality exists anywhere in RM, the "first"
+  must be narrowed to MDS codes or dropped — report it loudly.
+
+**Twisted-cubic lane (`cubic`) — the k-tower probe (2026-07-14):** see
+[handoff](handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
+- **C158 `[cubic]` [QUEUED 2026-07-14 — HIGHEST UPSIDE, MOST SPECULATIVE]** — the k=4 healthy search:
+  is there an arc in PG(3,q) (no 4 coplanar) whose `[n,n−4]` MDS code has deep-hole locus = the q+1
+  rational points of a **twisted cubic**? → `notes/2026-07-14-c158-k4-twisted-cubic.md`. A hit is a
+  new *kind* of object (the first deep-holes-fill-a-curve instance beyond the plane, rung 2 of the
+  k-tower) rather than a sibling; a miss is exhaustive-per-cell and closes the `clebsch` paper's one
+  open forward question with a census instead of a shrug. This is the lane's own "the family runs
+  through k, not p" thesis.
+  **Do first — the dictionary, not the search.** Re-derive DMP's R=4 coset correspondence from
+  arXiv:**1909.00207** (Bartoli–Davydov–Marcugini–Pambianco; fetched and read during the deep-holes
+  sweep) before writing any code: deep holes should be the points on **no trisecant plane** of the
+  arc. The strategy note flags this as unverified, and the red team already killed the
+  deep-holes-on-the-*developable* and chord-locus versions — only "= the curve itself" survives as an
+  open question.
+  **Lit steps:** the deep-holes sweep's Q4 was the lightest of five and found no prior statement of
+  this question — treat that as weak, not settled. Search "points on no trisecant plane", "trisecant
+  planes of an arc in PG(3,q)", the k=4 arc↔coset dictionary, DMP arXiv:1909.00207 Thm 3.1 +
+  Tables 1–2 and Def 7.1(M2)/Thms 7.2–7.3; twisted cubics in PG(3,q) — Hirschfeld, *Finite
+  Projective Spaces of Three Dimensions* Ch. 21, and the recent Bartoli–Marcugini–Pambianco
+  twisted-cubic series. Also re-read ZWK arXiv:1901.05445 Thms I.4–I.7 (the tangent-developable /
+  quadratic-extension stratification) — it is the precursor to any dual-variety talk and it already
+  subsumes and refutes the GRS shadow.
+  **Then:** DFS with plane-masks up to Stab(twisted cubic) = PGL₂(q), q = 11 and 13. Capacity null
+  `C(n,3)(q²+q+1) ≥ q³+q²+q − n` gives n ≥ 5 at q=11; compute the plane-pencil ceiling before
+  searching. ~1300 off-cubic points at q=11, symmetry order 1320 — **Rust from the start**, not a
+  Python prototype.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
