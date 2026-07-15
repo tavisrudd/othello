@@ -10,8 +10,9 @@ q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch
 folklore/priority check remains.
 
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190 reports and
-scripts, this handoff and its companion, and the `gem-mining` rows of the global queue. Changes to the
-Clebsch manuscript belong to `clebsch` (C167), even when they cite a gem result.
+scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`, this handoff and its companion, and the
+`gem-mining` rows of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167),
+even when they cite a gem result.
 
 ## Adversarial takeover map (2026-07-14)
 
@@ -46,6 +47,11 @@ problem. See [C190](../2026-07-15-c190-gem-clebsch-routing.md).
 **Entry doc for the lane.** This handoff is the map: what the lane owns, what is settled, what is
 open. Read alongside it:
 
+- [gap-mining method](../2026-07-15-gems-theory-gaps-method.md) — the method for mining **questions**
+  rather than objects: transport triples, the earned/composed/free dictionary tiers, and the
+  move-ordering ladder (forced-empty > thin seam > empty seam > dense seam). Its point is to
+  front-load novelty by entering regions whose emptiness is *provable*, inverting the back-loaded
+  literature gate that blocks C155. No cells mined yet; its ledger is the record.
 - [gem mining next steps](../2026-07-14-gem-mining-next-steps-fable.md) (§1–§12) — the strategy and
   the computed census. **Carries known errors**, corrected inline; the vet supersedes it where they
   disagree.
