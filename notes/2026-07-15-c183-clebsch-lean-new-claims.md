@@ -64,6 +64,8 @@ The same strict-kernel verdict now holds for:
   replay independently confirms the `15` matchings and `6` labelled totals.
 - `OddSixArcAffinePrism.lean`: the common-point-at-infinity direction determinant lemma and the
   normalized triangular-prism impossibility over every field with `(2 : K) != 0`.
+- `ProjectiveTripleNormalization.lean`: ordered noncollinear-triple projective normalization and
+  the diagonal affine rescaling needed to put the first two prism directions in standard form.
 
 ## Dye source and formalization boundary
 

@@ -110,7 +110,8 @@ semantic completeness claim with ordinary kernel reduction.
 `lean/RelativeConicArcs/OddSixArcAffinePrism.lean` also proves that affine lines through a common
 point at infinity have parallel direction vectors, and rules out the normalized triangular prism
 in odd characteristic. The sole remaining internal bridge extracts the prism directions from the
-five equality fibers and projectively normalizes them into that interface. All focused targets
+five equality fibers and threads them through the now-certified ordered-triple normalizer and
+diagonal affine rescaling in `ProjectiveTripleNormalization.lean`. All focused targets
 build fresh with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports
 contain only `propext`, `Classical.choice`, and `Quot.sound`.
 
