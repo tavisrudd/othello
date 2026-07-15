@@ -114,12 +114,21 @@ the two BSW originals remain unread.
 
 ## Open frontiers
 
-- **C147 — the hexad characterization: fully verified, and singular.** *A 6-subset of the conic in
-  PG(2,11) is a hexad of one of the two S(5,6,12) systems iff no three of its chords are concurrent
-  off it.* Machine-checked end to end; literature verdict ABSENT at full-text level. **The octad
-  analogue at q=23 is DEAD** (minimum t = 295 against a null of 280 — the condition is unattainable,
-  so there is no stratum to select), which removes the family and settles the result as a note rather
-  than a paper. Left: a proof, and an explanation of the spectrum gap at 61.
+- **C147 — the hexad characterization: verified, explained, and singular.** *A 6-subset of the conic
+  in PG(2,11) is a hexad of one of the two S(5,6,12) systems iff no three of its chords are concurrent
+  off it.* Machine-checked end to end; literature verdict ABSENT at full-text level.
+  **Proof structure found** (`notes/2026-07-14-c147-proof-structure.py`): a concurrent triple of
+  chords is a perfect matching of H, hence an involution stabilising H with no fixed point in it, so
+  `t(H) = 60 + #{such involutions}` — verified for all 924. PGL₂(11) has exactly four orbits on
+  6-subsets, stabilisers C₅/V₄/S₃/D₁₂ contributing 0/2/3/4, and **the hexads are the orbit whose
+  stabiliser has odd order**. This explains the gap at 61 (no stabiliser has exactly one such
+  involution) and re-derives the classical `{0} ∪ QR` seed as `{fixed point} ∪ {5-orbit}`,
+  66×2×2 = 264. Open: the converse rests on the four-orbit classification, which is a finite check,
+  not yet an argument — look for the PGL₂(q)-orbit classification on 6-subsets in the literature.
+  **The octad analogue at q=23 is DEAD** and the reduction explains why: the mechanism needs
+  `|H| = 2×3`, so that a concurrent *triple* is a *perfect* matching. At `|H| = 8` a triple covers
+  only 6 of 8 points, determines no involution, and there are 420 triples to avoid instead of 15
+  (minimum t = 295 against a null of 280). Not a Mathieu tower — a coincidence of small numbers.
 - **ω_arc growth** — DOWNGRADED. The all-external half is a recomputation inside BSW's checked range
   (above); the residue is the mixed-type invariant and the uninspected extremal-witness stabilizers
   at q = 23–37. Lowest-ranked item in this lane, not the second-place bet an earlier pass called it.

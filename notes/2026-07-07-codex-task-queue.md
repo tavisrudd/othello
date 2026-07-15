@@ -125,9 +125,12 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   hexad scripts are promoted, hash-matched, and re-run →
   `notes/2026-07-14-c147-hexad-polarity-characterization.md`. The claim is fully machine-checked
   (both systems Steiner-verified, swapped by every outer map, t=60 stratum = their union exactly,
-  gap at 61). Open tail is mathematics, not verification: a proof, an explanation of the missing
-  t=61. The q=23 octad analogue is DEAD (min t=295 vs null 280), so the result is singular and
-  note-sized, not the first rung of a Mathieu-designs-from-polarity family.
+  gap at 61). Proof structure found: t(H) = 60 + #{involutions stabilising H with no fixed point in
+  it} (verified for all 924), PGL(2,11) has four orbits on 6-subsets, and the hexads are the orbit
+  whose stabiliser has odd order -- which also explains the gap at 61. Open: the converse rests on
+  the four-orbit classification, a finite check rather than an argument. The q=23 octad analogue is
+  DEAD (min t=295 vs null 280) and the reduction says why -- it needs |H|=2x3 so that a concurrent
+  triple is a perfect matching. Singular and note-sized, not a Mathieu tower.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

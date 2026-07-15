@@ -146,19 +146,103 @@ it a paper rather than a note — and it fits the program's established characte
 sharp isolated point at q=11 rather than a robust basin), which is itself the reason to state it
 plainly rather than hunt for a family that is not there.
 
-## Remaining work before this is claimable
+## Proof structure — found, and verified at every step
 
-Verification is done; what is left is mathematics.
+Script: `notes/2026-07-14-c147-proof-structure.py`. This replaces the 924-case check with a
+statement about four group orbits, and it explains the whole spectrum including the gap at 61.
 
-1. **A proof.** This is a 924-case verification, and the appeal of the statement is that it is
-   synthetic. A referee will ask, and the octad negative makes the demand sharper: with no family to
-   appeal to, the q=11 case has to carry itself.
-2. **Explain the missing 61.** One accidental concurrence being impossible means concurrences are
-   forced to arrive in pairs. That reason is probably the content of the result, and it is now the
-   most likely route to (1).
-3. **Why does q=23 fail?** Capacity permits `t = 280` there and the geometry refuses it. The same
-   gap — counting permits, geometry decides — is open for the healthy census past q=11 and for
-   "why 11" itself. A single mechanism explaining all three would be worth more than any of them.
+**Step 1. `m_P ≤ 3` for every point `P` off the conic.** Two chords meeting at an off-conic point are
+disjoint as pairs (chords sharing an endpoint meet at that endpoint, which is on the conic). Four
+pairwise-disjoint chords would need eight points of `H`, and `|H| = 6`. Verified: the maximum `m_P`
+over all 924 subsets is exactly 3.
+
+**Step 2. Concurrent triples are of exactly two kinds.** Either all three chords pass through a
+common point of `H` — forced, and contributing `6·C(5,3) = 60` — or the three chords are pairwise
+disjoint, i.e. a perfect matching of `H`. Mixed cases are impossible: if two chords share an
+endpoint they meet only there, so a third concurrent chord must contain that point too. Hence
+`t(H) = 60 + #{concurrent perfect matchings}`, and a 6-set has only 15 matchings, so `t ≤ 75`.
+
+**Step 3. Concurrence = an involution.** The chords through an off-conic point `P` cut out the
+involution `σ_P` on the conic. A matching is concurrent at `P` exactly when its three pairs are pairs
+of `σ_P`, i.e. `σ_P(H) = H` with no fixed point of `σ_P` inside `H`. This is the repo's own
+point↔involution correspondence, confirmed here independently: PGL₂(11) has **121 involutions, 66
+with two fixed points on the conic and 55 with none**, matching the **66 external and 55 internal**
+off-conic points exactly.
+
+**Step 4. The identity.** Combining,
+
+> `t(H) = 60 + #{ involutions τ ∈ PGL₂(11) : τ(H) = H and τ has no fixed point in H }`
+
+**Verified for all 924 subsets, no exceptions.**
+
+**Step 5. Four orbits.** PGL₂(11) has exactly four orbits on the 6-subsets, and `t` is constant on
+each because the identity in step 4 is manifestly PGL-invariant:
+
+| orbit size | \|Stab\| | Stab type | involutions in Stab | fpf on H | `t` |
+|-----------|---------|-----------|---------------------|----------|-----|
+| 264       | 5       | C₅        | 0                   | 0        | 60  |
+| 330       | 4       | V₄        | 3                   | 2        | 62  |
+| 220       | 6       | S₃        | 3                   | 3        | 63  |
+| 110       | 12      | D₁₂       | 7                   | 4        | 64  |
+
+`264 + 330 + 220 + 110 = 924`, and each orbit size is `1320/|Stab|`.
+
+**Step 6. The theorem.** The hexads are the 264-orbit, and it is *the orbit whose stabilizer has odd
+order*. A group of odd order contains no involutions, so `t = 60` there by step 4 — and every other
+orbit has an fpf involution, so `t > 60`. Hence
+
+> **H is a hexad of one of the two S(5,6,12) systems ⟺ Stab_{PGL₂(11)}(H) has odd order ⟺ t(H) = 60.**
+
+**The gap at 61 is explained.** `t − 60` counts fpf involutions in the stabilizer, and the four
+stabilizers supply 0, 2, 3, 4. Nothing supplies exactly one. The spectrum is not a curiosity — it is
+the orbit decomposition.
+
+**The hexads, explicitly.** An order-5 element of PGL₂(11) fixes two points of P¹(F₁₁) and splits the
+remaining ten into two 5-orbits, so an invariant 6-set must be **{a fixed point} ∪ {one 5-orbit}**.
+Counting: 66 split tori × 2 fixed points × 2 orbits = **264** — exactly the hexad count. This derives
+the classical `{0} ∪ QR(11)` seed rather than assuming it.
+
+**Independent counting check.** Summing `t − 60` over all subsets two ways: by involution, each of
+the 66 two-fixed-point involutions has 5 pairs and admits `C(5,3) = 10` invariant fpf 6-sets, each of
+the 55 fixed-point-free ones has 6 pairs and admits `C(6,3) = 20`, giving `66·10 + 55·20 = 1760`; by
+orbit, `2·330 + 3·220 + 4·110 = 1760`. Agree.
+
+### What is still missing
+
+Steps 1–4 are a complete synthetic proof of the identity and need no computer. Step 6's forward
+direction (hexad ⟹ t = 60) needs only that PGL₂(11) is transitive on the 264 hexads with stabilizer
+C₅ — classical, and re-derived above from the `{fixed point} ∪ {5-orbit}` description.
+
+**The converse still rests on the orbit classification** — that there are exactly four orbits and the
+other three all contain an fpf involution. That is a finite check over four orbits rather than 924
+subsets, which is a real improvement, but it is not yet an argument. Two ways to close it: find the
+PGL₂(q)-orbit classification on 6-subsets of the projective line in the literature (it is the kind of
+thing that should be known, and was not searched), or prove directly that any 6-set with even-order
+stabilizer admits an fpf involution.
+
+### Why q=23 fails: the reduction does not transfer, and that is the reason
+
+The identity in step 4 is **not** a general fact about conics — it depends on `|H| = 6 = 2 × 3`. A
+concurrent triple is three pairwise-disjoint chords, covering `3 × 2 = 6` points. When `|H| = 6` those
+six points are *all* of `H`, so a concurrent triple is a **perfect** matching, hence an involution
+stabilising `H` fixed-point-freely. That is the whole mechanism.
+
+At `|H| = 8` it breaks in both directions:
+
+- Three disjoint chords cover only 6 of the 8 points, leaving two over. The triple is a *partial*
+  matching and determines no involution of `H`. There are `C(8,6) × 15 = 420` such triples to avoid
+  rather than 15.
+- `m_P` can reach 4 (four disjoint chords fit in 8 points), so `C(m_P,3) = 4` is possible and the
+  contributions are no longer 0/1.
+
+So `t(H) = 280 + #{fpf involutions}` is **false** at q=23, and the group-theoretic characterization has
+no analogue there. The octad negative is not bad luck: 28 chords must avoid 420 concurrences with no
+involution-theoretic reason to, and the computation confirms none manages it (minimum `t` = 295).
+
+This also settles what the q=11 result *is*. It is not the first rung of a Mathieu tower. It is a
+coincidence of small numbers — concurrence is a relation among **three** lines, and three pairs make
+**six** points — and the hexads are the 6-sets whose stabiliser has odd order. Nothing about
+S(5,8,24) is implicated, and no amount of searching at larger q will produce a sibling.
 
 Venue, given the octad negative: a short note (*Discrete Math.* / *J. Combinatorial Designs* /
 *Designs, Codes and Cryptography*), or a *Monthly*-style piece if written for elegance — not a
