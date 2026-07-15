@@ -98,6 +98,11 @@ Sadeh request email drafted (`notes/2026-07-14-sadeh-thesis-request.md`, to JWPH
 [novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md),
 [gem-program vet](../2026-07-14-gem-program-vet.md) §2.1 (a row-by-row map of the `.tex`),
 [exterior sets](../2026-07-14-gem-lit-exterior-sets.md). A TODO is planted at the §2 site in the tex.
+**C153 is the lane's exposure item** — the covering fact is ours only conditional on two unread BSW
+papers, one titled *Characterization of complete exterior sets of conics*; see the
+[C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md) for its search directions.
+The rigidity and gap theorems are under their first-ever literature check
+(`../2026-07-14-gem-lit-rigidity-gap.md`).
 
 - **Dye 1991 is NOT the nearest prior art. Edge 1956 is, by 35 years.** W. L. Edge, "Conics and
   orthogonal projectivities in a finite plane", *Canad. J. Math.* **8** (1956) 362–382, §§29–32 (read

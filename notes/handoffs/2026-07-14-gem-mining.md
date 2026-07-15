@@ -3,9 +3,26 @@
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-14
 
-**Entry doc for the lane.** The strategy and all computed results live in
-[gem mining next steps](../2026-07-14-gem-mining-next-steps-fable.md) (numbered §1–§12); read it
-first. This handoff is the map: what the lane owns, what is settled, what is open.
+**Entry doc for the lane.** This handoff is the map: what the lane owns, what is settled, what is
+open. Read alongside it:
+
+- [gem mining next steps](../2026-07-14-gem-mining-next-steps-fable.md) (§1–§12) — the strategy and
+  the computed census. **Carries known errors**, corrected inline; the vet supersedes it where they
+  disagree.
+- [gem-program vet](../2026-07-14-gem-program-vet.md) — the adversarial audit. **§2.1 is a row-by-row
+  impact map of the `clebsch` `.tex`**; §3 is the abandon/downgrade list; §4 the gem list.
+- [novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md) — what may still be
+  novel, what the literature gives us as infrastructure, what we thought was novel and isn't, and the
+  do-not-cite list. **Start here for the current state of any claim.**
+- [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md) — why each queued item
+  exists, its search directions, and what was deliberately not queued.
+- Literature sweeps: [hexad](../2026-07-14-gem-lit-hexad.md),
+  [exterior sets](../2026-07-14-gem-lit-exterior-sets.md),
+  [ω_arc](../2026-07-14-gem-lit-omega-arc.md) (⚠ known errors — banner in file),
+  [deep holes](../2026-07-14-gem-lit-deep-holes.md),
+  [orbit classification](../2026-07-14-gem-lit-orbit-classification.md).
+- [C147 report](../2026-07-14-c147-hexad-polarity-characterization.md) — the hexad result, its proof
+  structure, and the q=23 negative.
 
 ## What this lane is
 
@@ -111,6 +128,13 @@ set being identified with the full rational-point set of a named positive-dimens
 combinatorial families, not a variety-equality; in DMP's own examples the uncovered locus tied to a
 named object is a single point or empty. Residual: Reed–Muller deep holes marked NOT SEARCHED, and
 the two BSW originals remain unread.
+
+## Queued work
+
+C155–C157, C159, C160 are this lane's; C153 (`clebsch`), C154 (`relconic`), C158 (`cubic`) came out
+of the same sweep. Rationale, search directions, and what was deliberately left unqueued:
+[C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md). **Only C153 and the running
+rigidity/gap check can cost us anything** — the rest is upside.
 
 ## Open frontiers
 

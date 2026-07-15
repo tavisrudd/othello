@@ -32,7 +32,11 @@ carry:
   no prior instance of a complete deep-hole set identified with the full rational-point set of a
   named variety. ZWK's redundancy-4 result is a disjoint union of three combinatorial families, not
   a variety-equality. **Residual: Reed–Muller deep holes marked NOT SEARCHED, not cleared** — this
-  paper owns that claim and ships first, so the residual is this lane's.
+  paper owns that claim and ships first, so the residual is this lane's. Queued as **C154**; search
+  directions in the [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md), and the
+  current state of every claim is in the
+  [novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md) (this lane has no
+  false-novelty rows).
 - **Prop 8.7** is what `clebsch` cites as its companion reference (it had gone stale as "Prop 4.6");
   re-sync if this paper renumbers again.
 
