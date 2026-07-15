@@ -93,14 +93,24 @@ the wrong ancestors; our coding reading of them is unclaimed.**
 - **The one existing coding link**: Van de Voorde connects sets-without-tangents to LDPC stopping
   sets. Nobody connects this object to MDS codes, covering radius, or deep holes.
 
-**Gate before pitching ω_arc against BSW.** Van de Voorde's paper contradicts itself on BSW's
-computational range: "checked by computer for q < 131" (p.1) versus "for 11 < q ≤ 31" (§3), for the
-same claim. If 131 is right, a census to q=37 says nothing new about the conjecture and only the
-mixed-type half survives as a contribution. Settle this before spending Rust effort on the sweep.
+**The census contributes nothing to the BSW conjecture — decided, not open.** Van de Voorde reports
+the conjecture machine-checked for **q < 131**. Her two range statements are different claims, not a
+contradiction: p.1 concerns the existence of non-linear (q+1)/2-exterior sets, checked to q < 131;
+§3 states that within 11 < q ≤ 31 every such set contains three collinear points. A sweep to q=37
+therefore recomputes inside an already-checked range. What remains of this lane's contribution is
+the **mixed-type invariant** (absent from the literature, which is keyed to external points
+throughout), the possibility of exact maxima, and the uninspected extremal-witness stabilizers. Do
+not pitch the census as extending their range, and do not spend Rust effort on the sweep for that
+reason. The correct citation for Van de Voorde is **Discrete Math. 311(20) (2011) 2253–2258** —
+the arXiv journal-ref field for 1201.0484 is itself wrong, and the conjecture is **Combinatorica
+1992**, not Giessen 1991.
 
-**Unaudited**: whether any prior work identifies a code's complete deep-hole set with the full
-rational-point set of a named variety — the manuscript's load-bearing "first". A first attempt at
-this search failed without producing findings.
+**The deep-hole "first" is audited and survives.** No prior instance of a code's complete deep-hole
+set being identified with the full rational-point set of a named positive-dimensional variety
+(`2026-07-14-gem-lit-deep-holes.md`). ZWK's redundancy-4 result is a disjoint union of three
+combinatorial families, not a variety-equality; in DMP's own examples the uncovered locus tied to a
+named object is a single point or empty. Residual: Reed–Muller deep holes marked NOT SEARCHED, and
+the two BSW originals remain unread.
 
 ## Open frontiers
 
@@ -108,9 +118,9 @@ this search failed without producing findings.
   S(5,6,12) iff no three of its chords are concurrent off it.* Computed, with a gap in its spectrum
   (61 never occurs), the t=60 stratum being exactly the two Steiner systems. Gated on the literature
   sweep; the natural extension is octads of S(5,8,24) on the conic of PG(2,23).
-- **ω_arc growth as a BSW strengthening** — the all-external restriction *is* their conjecture; the
-  mixed-type curve is new. Gated on the range question above. The extremal witnesses at q = 23–37 are
-  uninspected: compute their stabilizers.
+- **ω_arc growth** — DOWNGRADED. The all-external half is a recomputation inside BSW's checked range
+  (above); the residue is the mixed-type invariant and the uninspected extremal-witness stabilizers
+  at q = 23–37. Lowest-ranked item in this lane, not the second-place bet an earlier pass called it.
 - **k=4 / twisted cubic** — the one direction where a hit is a new *kind* rather than a sibling
   (the parent analysis says the family runs through k, not p). Plausibly pegs `cubic` when opened.
 - **The U-atlas** — all n-arcs of PG(2,q) up to PGL₃(q) for small q, invariant = curve-fit of the
@@ -119,10 +129,16 @@ this search failed without producing findings.
 
 ## Trust boundary
 
-The census scripts (`gem_sweep.py`, `mathieu_poles.py`) were written in a session scratchpad and are
-**not in git**; their SHA-256 prefixes are recorded in the strategy note's header. Nothing here is
-durable until they are promoted to repo verifiers under C147. The pencil bounds, the
-degenerate-conic impossibility, and the torus-clique collinearity are reasoned, not machine-checked.
+The census scripts are promoted and re-run: `notes/2026-07-14-c147-gem-sweep.py` and
+`notes/2026-07-14-c147-mathieu-poles.py`, byte-identical to the artifacts that produced the reported
+numbers (hashes in `2026-07-14-c147-hexad-polarity-characterization.md`). The census corroborates at
+three independent points: the repo's own `check_q19_nonexample.py` (|U|=140), BSW's published q=7 and
+q=11 extremal sizes, and Edge's 22 = 1320/60 hexagon count against the stabilizer-60 claim.
+
+**The hexad verifier does not close the headline claim**: it Steiner-verifies one S(5,6,12) system
+and confirms its hexads sit at t=60, but never checks that the other 132 subsets at t=60 form the
+second system. See the C147 report. The pencil bounds, the degenerate-conic impossibility, and the
+torus-clique collinearity are reasoned, not machine-checked.
 
 **Companion log**: append dated riffs to `done/2026-07-14-gem-mining-archive.md` (create on first
 archive).

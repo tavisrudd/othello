@@ -142,7 +142,11 @@ theorem's exhaustive search, and we cite that classification for it rather
 than claim any priority on the numbers. The identification of this code's
 deep-hole locus with the $A_5$-invariant conic
 (Proposition~\ref{prop:deep-holes-conic}) is recorded, with a kernel-checked
-certificate, in the companion arcs paper~\cite[Prop.~4.6]{ArcsCompleteOutsideConic};
+% NB: the three \cite[Prop.~8.7]{ArcsCompleteOutsideConic} references (here, §3,
+% §8) were 4.6 and are re-pinned to the companion's current numbering, verified
+% 2026-07-14: prop:q11-code is the 7th numbered environment of its §8. That
+% paper is in another lane and ships first, so re-verify these before submission.
+certificate, in the companion arcs paper~\cite[Prop.~8.7]{ArcsCompleteOutsideConic};
 we reprove it here to keep the present paper self-contained and claim no
 priority for it either. What we claim as new is the \emph{reading} of that
 geometry: that the conic-containment condition characterizes the Clebsch
@@ -174,24 +178,46 @@ antipodal pair fixed by a Sylow $5$-subgroup of $\A$.
 
 % TODO(C146) --- PRIOR-ART RE-BASE. Dye 1991 is NOT the nearest prior art;
 % Edge 1956 is, by 35 years. W. L. Edge, "Conics and orthogonal projectivities
-% in a finite plane", Canad. J. Math. 8 (1956), describes at p=11 "the
-% distribution of the points external to chi in sets of 6, the 15 joins of
-% points of such a set being all skew to chi and concurrent in threes at 10
-% different points all internal to chi", and writes "we may say, with Clebsch,
-% that the points of chi form a hexagon endowed 10 times over with the
-% Brianchon property". Separately, Blokhuis--Seress--Wilbrink (Mitt. Math. Sem.
-% Giessen 201 (1991) 39--44; Combinatorica 12 (1992) 143--147) have this exact
-% six-point set as one of two known extremal *exterior sets* of a conic, with a
-% conjecture (open) that no analogue exists for q > 31. Neither is cited
-% anywhere in this manuscript.
-% Required before submission: (1) cite Edge 1956 and BSW here; (2) re-base the
-% priority footnote below onto Edge, not Dye --- it currently argues against the
-% wrong paper; (3) read Edge sections 18--32 in full FIRST and settle whether he
-% states the covering fact (that the joins miss exactly the conic), which is the
-% claim Prop.~\ref{prop:deep-holes-conic} rests on; (4) decide how to frame our
-% exhaustive census against the open BSW conjecture, which it supports past
-% their computational range.
-% See notes/2026-07-14-gem-mining-next-steps-fable.md section 7.
+% in a finite plane", Canad. J. Math. 8 (1956) 362--382, sections 29--32 (read
+% from the primary text) constructs this exact object at p=11: six external
+% points with all fifteen joins skew to the conic, named "Clebsch hexagons",
+% crediting Clebsch (Math. Ann. 4 (1871) 284--345) for the real-plane
+% antecedent. He gives 22 such hexagons over a fixed conic, each external point
+% on exactly 2, forming two systems of 11 that each partition the 66 external
+% points, and the order-60 stabilizer (22 = 1320/60). He also has the five
+% self-polar triangles and the synthematic total (sections 30.2--31), so the
+% Dye attribution at section 3.1 needs Edge added alongside.
+% Blokhuis--Seress--Wilbrink (Mitt. Math. Sem. Giessen 201 (1991) 39--44;
+% Combinatorica 12 (1992) 143--147) have the same six-point set as a *complete
+% exterior set* of size (q+1)/2 --- BSW's object IS Edge's hexagon renamed.
+% Their conjecture (no such set for q>31) is Combinatorica 1992, NOT Giessen
+% 1991, and is open.
+% SETTLED by the sweep, do not re-litigate: the covering fact (that the joins
+% miss exactly the conic) appears in NEITHER Edge (full-file grep) nor Van de
+% Voorde, so Prop.~\ref{prop:deep-holes-conic} stands as ours --- conditioned
+% only on the two BSW originals, which are ILL-only and unread.
+% Required before submission:
+%  (1) cite Edge 1956, BSW 1991/1992, and Clebsch 1871 here; add all four plus
+%      Van de Voorde to the bibliography.
+%  (2) re-base the priority footnote below onto Edge, not Dye --- it currently
+%      argues at length against the wrong paper. Keep the Dye-gate content as a
+%      secondary note; its evidence is unrefuted.
+%  (3) ADD THE VOCABULARY. This paper contains no occurrence of "external
+%      point", "external line", or "exterior set" anywhere (grep). Without one
+%      sentence in this section saying the arc points are external points of C
+%      and all fifteen secants are external lines --- i.e. the arc is a complete
+%      exterior set in the BSW sense --- the new citations have nothing to
+%      attach to. This is a vocabulary job, not a citation patch.
+%  (4) Van de Voorde's journal version is Discrete Math. 311(20) (2011)
+%      2253--2258, doi:10.1016/j.disc.2011.07.010. Do NOT copy the journal-ref
+%      field from arXiv:1201.0484 --- it is itself wrong and points at a
+%      different paper of hers.
+% DO NOT CLAIM the census extends BSW's computational range: Van de Voorde
+% reports the conjecture machine-checked for q < 131, so a sweep to q=37
+% recomputes inside a checked range. (Her "q < 131" and "11 < q <= 31" are
+% different claims, not a contradiction.) If the census is mentioned at all
+% here, frame it as recomputation plus a new mixed-type invariant.
+% See notes/2026-07-14-gem-program-vet.md sections 1.1--1.4, 2.1 (rows C--G, U).
 This is projectively the arc $K_2$ of Storme and
 Van~Maldeghem~\cite[Prop.~11]{SVM1995} at $q=11$, and the hexagon studied
 synthetically by Dye~\cite{Dye1991} under the existence condition $5$ a
@@ -283,7 +309,7 @@ the $|\cU(A)|=12$ entry of the census of Section~\ref{sec:rigidity}.
 
 This identification, together with its coset data and a kernel-checked Lean
 certificate, is also recorded in the companion arcs
-paper~\cite[Prop.~4.6]{ArcsCompleteOutsideConic}, where it arises as one
+paper~\cite[Prop.~8.7]{ArcsCompleteOutsideConic}, where it arises as one
 instance of that paper's secant-index spectrum; we restate it here, with a
 self-contained proof, because it is the starting point of the rigidity
 theorem that is the present paper's subject. The results of
@@ -731,7 +757,7 @@ kernel-checked in the
 companion Lean development (the adjacency, the explicit isomorphism, the
 antipodal non-edges, and the one-factorization), and both the chord
 partition and the icosahedral identification are recorded in the companion
-arcs paper~\cite[Prop.~4.6(iv)]{ArcsCompleteOutsideConic};
+arcs paper~\cite[Prop.~8.7(iv)]{ArcsCompleteOutsideConic};
 we do not build any further claim on it here.
 
 \paragraph{An open question: higher $k$.} The present phenomenon is for

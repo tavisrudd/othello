@@ -118,11 +118,14 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem
 hunt; the Clebsch paper's own findings stay pegged `clebsch`.
-- **C147 `[gem-mining]` [QUEUED 2026-07-14]** — settle the polarity-defect characterization of
-  Mathieu hexads (*a 6-subset of the conic in PG(2,11) is a hexad of S(5,6,12) iff no three of its
-  chords are concurrent off it*) against the literature sweep, and promote the session's E_q
-  healthy-census and hexad scripts to durable verifiers →
-  `notes/2026-07-14-c147-hexad-polarity-characterization.md`.
+- **C147 `[gem-mining]` [REPORTED 2026-07-14]** — polarity-defect characterization of Mathieu hexads
+  (*a 6-subset of the conic in PG(2,11) is a hexad of S(5,6,12) iff no three of its chords are
+  concurrent off it*): literature verdict ABSENT at full-text level, and the E_q healthy-census and
+  hexad scripts are promoted, hash-matched, and re-run →
+  `notes/2026-07-14-c147-hexad-polarity-characterization.md`. Open tail: the verifier Steiner-checks
+  only one of the two S(5,6,12) systems, so the headline claim's second half rests on an
+  unreproduced computation; and the result needs a proof, an explanation of the missing t=61, and
+  the q=23 octad analogue before it is claimable.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.
