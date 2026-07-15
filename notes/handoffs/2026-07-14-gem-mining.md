@@ -10,7 +10,8 @@ q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch
 folklore/priority check remains.
 
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190 reports and
-scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`, this handoff and its companion, and the
+scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`, `notes/2026-07-15-gem-discovery-track.md`, this
+handoff and its companion, and the
 `gem-mining` rows of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167),
 even when they cite a gem result.
 
@@ -48,10 +49,16 @@ problem. See [C190](../2026-07-15-c190-gem-clebsch-routing.md).
 open. Read alongside it:
 
 - [gap-mining method](../2026-07-15-gems-theory-gaps-method.md) — the method for mining **questions**
-  rather than objects: transport triples, the earned/composed/free dictionary tiers, and the
-  move-ordering ladder (forced-empty > thin seam > empty seam > dense seam). Its point is to
-  front-load novelty by entering regions whose emptiness is *provable*, inverting the back-loaded
-  literature gate that blocks C155. No cells mined yet; its ledger is the record.
+  rather than objects: transport triples, dictionary tiers, and a move ordering that prices novelty
+  per region instead of per claim, to invert the back-loaded literature gate that blocks C155. Its
+  product is a reading budget, not a reading exemption. Adversarially reviewed in
+  [the Fable pass](../2026-07-15-gems-theory-gaps-method-fable.md), which the method incorporates;
+  read the method's § Overturned claims before re-proposing anything it rules out. No cells mined
+  yet — the ledger and the backfill gate in § First steps are the record.
+- [discovery track](../2026-07-15-gem-discovery-track.md) — append-only log of incidental findings
+  thrown off by mining probes, against a declared null. A killed cell's computation is not wasted,
+  only its verdict is; this is where the byproducts land and where question-mining feeds back into
+  the object generator.
 - [gem mining next steps](../2026-07-14-gem-mining-next-steps-fable.md) (§1–§12) — the strategy and
   the computed census. **Carries known errors**, corrected inline; the vet supersedes it where they
   disagree.

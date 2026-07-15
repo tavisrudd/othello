@@ -2,42 +2,34 @@
 
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-15
-**Status**: method only — no cells mined against it yet.
+**Status**: method only — no cells mined against it yet. First pass is the backfill in § First steps.
 
 **Terminology.** A *theory gap* here is an un-asked question — a region of question-space nobody has
-entered. It has nothing to do with the **gap theorem** of C165/C171, which is a statement about
-conic gaps. Do not let the word merge.
+entered. It has nothing to do with the **gap theorem** of C165/C171, which is a statement about conic
+gaps. Do not let the word merge.
 
 The generator in [gem mining](handoffs/2026-07-14-gem-mining.md) § The method mines **objects**: fix
 a question, census a domain, evaluate an invariant valued in another classified category, look for
 the anomaly. This doc is its analogue for mining **questions** — the un-asked ones whose opening
-would be worth a major journal.
+would be worth a major journal. Reviewed adversarially in
+[the Fable pass](2026-07-15-gems-theory-gaps-method-fable.md), which this revision incorporates.
 
-## The bottleneck this inverts
+## What this method buys, stated exactly
 
 Novelty gating is this lane's slowest step, and it is a *back*-loaded cost: find the object, then pay
 an unbounded reading bill to learn whether it was Edge's all along. C155 is drafted and blocked on
 C156/C157/C169. The covering fact is still conditioned on two ILL-only BSW originals after six
 independent sweeps.
 
-The fix is **move ordering**, not exhaustion. A game-tree search does not avoid leaf evaluation; it
-spends its budget on lines a cheap static eval promoted. Here the expensive leaf is the L3/L4 read
-plus the mathematics; the static eval is a region's *cause of emptiness*, which is cheap, structural,
-and computed once per region rather than once per question.
+The fix is **move ordering**. A game-tree search does not avoid leaf evaluation; it spends its budget
+on lines a cheap static eval promoted. Here the expensive leaf is the L3/L4 read plus the
+mathematics; the static eval is cheap, and it is computed once per region rather than once per
+question.
 
-The lane has already validated this by accident. Two of its most durable novelty claims did not come
-from sweeping:
-
-- **The well-posedness inversion.** Over ℝ/ℚ, no-accidental-concurrency is generic
-  (Halbeisen–Hungerbühler); over F₁₁ it inverts and the exceptions are exactly the Mathieu hexads.
-  The question is not well-posed over an infinite field, so no classical corpus *can* contain it.
-- **The definitional blind spot.** The exterior-set literature is keyed to external points
-  throughout, so it structurally cannot see the all-internal q = 3, 5, 19 configurations.
-
-Neither is search-negative. Both are proofs of absence obtained by argument, and both are closed.
-The covering fact, by contrast, was established by reading and is still hanging on an unread source.
-**The durable novelty claims are the structural ones; the stuck ones are the read ones.** This method
-makes that deliberate instead of lucky.
+**The product is a reading budget, not a reading exemption.** Structure does not make reading
+unnecessary — it makes reading *finite*, bounded in advance, and priced before it is spent. Every
+claim below that sounds like "this is free" has been checked against that standard, because the
+first draft of this doc failed it repeatedly in one direction (§ Overturned claims).
 
 ## What is mined
 
@@ -47,204 +39,428 @@ pullback `q(D(O))` is a question about `O` that our own vocabulary cannot state.
 
 **The dictionary is the scarce resource, not the question.** A question cannot be transported to an
 object — only along a dictionary that maps that object. This is what stops the domain from exploding
-to `vocabularies × objects × questions`, nearly all of which is nonsense. The real domain is
-`(dictionaries we have earned) × (their far-side question lists)`: small enough to exhaust, large
-enough to matter.
+to `vocabularies × objects × questions`, nearly all of which is nonsense.
 
-Dictionaries come in three tiers, and the tier fixes how much trust the cell inherits:
+**Ledger by triples; budget and schedule by `(dictionary, survey)`.** One survey read prices every `q`
+on its question list, for every `O` that dictionary carries. This is where the amortization actually
+lives, and per-cell accounting quietly recreates the per-claim bottleneck the method exists to kill.
 
-| Tier | Source | Rigor | Use |
-|---------|-------------------------------------------------|-----------------------------------|--------------------|
-| earned  | read off our own invariants' target categories  | forced by our own results         | safe, same neighbourhood |
-| composed| `A→B` earned, `B→C` documented inside B          | both legs citable                 | **primary mine** |
-| free    | universal machines that accept any object       | none — the dictionary is automatic| needs the void test |
+## Dictionaries
+
+| Tier     | Source                                         | What is established       | What is *not* established |
+|----------|------------------------------------------------|---------------------------|---------------------------|
+| earned   | read off our own invariants' target categories | validity, by our results  | that any cell is unwalked |
+| composed | `A→B` earned, `B→C` documented inside B        | validity, by citable legs | that any cell is unwalked |
+| free     | universal machines that accept any object      | nothing — automatic       | everything                |
+
+**Validity is not virginity.** A dictionary's tier says whether the translation is real. Whether a
+*cell* on it is unwalked is an absence claim about a literature and needs its own evidence, at the
+same L-level as anything else. The tier grants no trust to the cell.
 
 **Earned** dictionaries are not chosen; they are read off results we already have. Stabilizer A₅ and
 PGL₂(11) name group theory; deep-hole locus = a conic names algebraic geometry; hexads name design
 theory and the sporadic groups; arcs name MDS codes.
 
-**Composed** is where the yield is. If `A→B` is earned and `B→C` is documented inside B's own
-community, then `A→C` is real by composition and essentially nobody has walked it. The mechanism is
-social: one-hop dictionaries eventually get walked because someone knows both fields, but two-hop
-composites do not, because **no one person knows all three vocabularies**. Rigor survives because
-each leg is separately citable — we compose documented connections rather than propose a new one.
-The census is available too: **B's own survey has a connections/applications section, and that
-section is the enumeration of B's outgoing dictionaries.**
+**Composed.** If `A→B` is earned and `B→C` is documented inside B's own community, `A→C` is real by
+composition. Cautions, each load-bearing:
+
+- **Citable legs do not imply a composable dictionary on `O`.** `B→C` is documented for B's objects
+  generically and may be degenerate or empty on the image `D₁(O)`. Before a composed cell enters the
+  ledger as live, compute the composite image of `O` at the smallest non-degenerate instance and
+  check it is not a degenerate case of C.
+- **Hop count is not a yield mechanism.** The tempting story — two-hop composites go unwalked because
+  nobody knows three vocabularies — is contradicted by this lane's own founding example: arcs ↔ MDS
+  is one hop, maximally famous, and sat unwalked for seventy years; Edge→BSW is a thirty-five-year
+  naming gap *inside a single field*. The operative mechanism is **vocabulary opacity**, which is
+  hop-count-independent. That composed cells are richer is a hypothesis for the ledger to test, not a
+  reason to weight the tier a priori.
 
 **Free** machines — matroids, association schemes, complexity, model theory, tropical, homology —
 accept any object, so the dictionary costs nothing. That is the warning: "nobody pointed a matroid at
-this" is usually because the answer is boring. These survive only on the void test below.
+this" is usually because the answer is boring. These survive only on the void test.
 
-## The spine: name the cause of the emptiness
+**A survey's connections section is a generator, not a census.** It is a curated highlight reel with
+editorial bias toward the fashionable. Use it to *propose* outgoing dictionaries; never read a link's
+absence from it as absence from B's research literature. It is a lower bound.
 
-Every candidate region reduces to one question: **can you name why it is empty?** The answer *is* the
-move ordering.
+## Promotion runs on two axes, scored before any gate is opened
 
-| Tier | Region      | Cause of emptiness                            | Novelty gate                    | Priority |
-|------|-------------|-----------------------------------------------|---------------------------------|----------|
-| 1    | forced-empty| structural — the corpus *cannot* contain it   | pre-paid by argument            | mine first |
-| 2    | thin seam   | social — people crossed and swerved           | bounded: read the seam papers   | mine next  |
-| 3    | empty seam  | none nameable                                 | unbounded, and probably a void  | defer      |
-| 4    | dense seam  | not empty                                     | this is the current bottleneck  | skip       |
+Cause-nameability (an argument) and seam thickness (a citation measurement) are independent and cross
+freely: an empty seam can have a nameable social cause (genuinely disjoint venues and MSC subtrees —
+nameable, but no swerves to read), and a thin seam can have none. Collapsing them into one ordinal
+scale hides that.
 
-Two consequences worth stating plainly, because both are counterintuitive:
+**Promotion ranks regions, not cells.** A region is a `(dictionary, survey)` pair — the unit the gate
+amortizes over. The kill order below runs **per cell inside an already-promoted region**, and its
+bounded reads are charged to the region that promoted it, not to promotion itself. Confusing the two
+is how the per-claim bottleneck grows back.
 
-**A thin seam beats an empty one.** An empty seam is ambiguous — nobody crossed because there is
-nothing there, or because they couldn't see it, and the two look identical. A thin seam carries its
-own proof of interest: people *did* cross, and swerved. Those few papers are simultaneously the
-novelty gate (bounded, and identified in advance) and the near-miss cluster that shows the gap is
-real. Edge had the six points, the conic, and Brianchon and never asked the on-conic question;
-Halbeisen–Hungerbühler asked the exact question over the wrong field; Van de Voorde reached stopping
-sets but not MDS. Three near-misses, one nameable swerve each.
+**Promotion score** — no factor alone promotes:
 
-**Absence is invisible to search and visible in structure.** A genuine gap is a question with no name
-in the target vocabulary, so keyword search returns nothing whether the gap is real or imaginary —
-the null result is confirmatory noise, not evidence. Absence only shows up where it is *printed*: the
-handbook chapter with no such section, the classification with no such row, the definition list where
-the case is not. **Gap mining is a reading exercise over authoritative structure, not a searching
-exercise.**
+```
+(cause of emptiness named, with its out-of-sample prediction confirmed)
+  × (value predicates pass)
+  × (seam thinness)
+  × (gate accessibility)
+```
 
-## Generating tier 1 — the sources of forced emptiness
+**Value is a promotion factor, not a post-filter.** Forced-empty + novel + worthless is a live
+combination, and this lane already owns the exhibit: the mixed-type invariant is forced-empty by
+definitional keying and genuinely novel, and it is ranked *last* in the lane because nobody is forced
+to care. A ranking function that runs value last cannot see that.
 
-Each source is a proof-shaped absence argument with its own census. This is the top of the move
-ordering because the novelty gate is paid by an argument, and arguments are cheap and durable.
+**Gate accessibility is a first-class factor.** "Bounded: read the seam papers" assumes the seam
+papers are obtainable. The covering fact is thin **and** ILL-dark (BSW 1991/1992, unread ledger) —
+which is exactly why it is the stuck claim. **Thin-and-dark is the worst cell on the board, not the
+second-best.** A structural-cause claim with a dark near-container is equally stuck. The general
+signal: **prefer regions whose plausible containers are enumerable AND obtainable.** Open-access
+status arrives in the same query that measures the seam.
+
+**A named cause must over-predict, or it is a just-so story.** Cause-naming is the cheapest thing a
+language model does, and the evidence ladder does not bind it, because a cause is not an absence
+claim. Require one out-of-sample prediction per cause, checkable in minutes:
+
+- *definitional keying* predicts every sampled paper in the corpus exhibits the keying — sample
+  three; one treating internal points kills the cause;
+- *a social two-community cause* predicts near-zero cross-citation at the **object** level;
+- *a well-posedness cause* predicts the classical statement degenerates in a specific checkable way.
+
+This is rule 3's move — declare the null — applied to causes.
+
+## The cause of emptiness: what each class buys, and what it leaves to pay
+
+**Cause class** is the emptiness scale, and it is the ledger's ranking key. It is unrelated to the
+dictionary tiers above; "tier" means earned/composed/free and nothing else.
+
+| Cause class       | What the argument buys                                     | Residual reading bill                            |
+|-------------------|------------------------------------------------------------|--------------------------------------------------|
+| structural        | forecloses a wing of the corpus; secures non-specializable | the corpus premise, L-graded; any wing left open |
+| social-thin       | the seam papers are identified in advance                  | read them — bounded **if** obtainable            |
+| unnamed           | nothing                                                    | unbounded; probably a void                       |
+| dense (not empty) | —                                                          | skip; this is where the bottleneck lives         |
+
+**Structural-cause arguments are discounted, not pre-paid.** Every structural argument decomposes
+into two premises, and only one is free:
+
+- **The mathematical premise** — *not well-posed over infinite fields*; *the ambient spaces differ*;
+  *the invariant postdates the corpus* — is provable and ladder-exempt.
+- **The corpus premise** — *all prior work on this object is char-0*; *the definitions are keyed one
+  way throughout* — is a claim about a literature and carries an L-level like any other.
+
+Both flagship exemplars bought their corpus premises with sweep reading. Halbeisen–Hungerbühler
+entered the lane through the 2026-07-14 sweeps [in-repo L3, handoff § Literature]; without that read
+the lane does not know the char-0 question exists. And the inversion forecloses only the char-0 wing —
+nothing stopped a finite geometer from asking the concurrency question over F_q directly, and that
+wing was closed by reading Lord 1988 and Edge 1965a/1955b at full text [in-repo L3/L4, vet §1.6].
+"Keyed to external points throughout" is likewise reading output wearing an argument's clothes
+[in-repo L2/L3, vet §3 — the underlying sweep file carries an errors banner].
+
+What the inversion genuinely secures is the **non-specializable value predicate** — it forecloses
+"corollary of a classical fact", which is real and durable — not the novelty claim. Exempt the
+deduction; never the premises.
+
+**Blindness and judgment are different causes.** Definitional keying has two, and the doc must not
+conflate them: *blindness* (the field structurally cannot see the case — a gap) and *judgment* (the
+founders saw the case and dropped it as trivial — a void with a WLOG for a tombstone). A "we may
+assume" is more often a considered act than a silent omission. The out-of-sample prediction
+discriminates them.
+
+## Sources of forced emptiness
+
+Each is an absence argument with its own census. Each decomposes per the split above.
 
 1. **Field or characteristic inversion.** The phenomenon exists only in finite characteristic, or the
    generic/measure-zero relation inverts against the classical regime. Census: the genericity and
-   char-0 hypotheses of the classical theorems. This is the Halbeisen–Hungerbühler template.
+   char-0 hypotheses of the classical theorems. Halbeisen–Hungerbühler is the template. *Corpus
+   premise: that all prior work on the object is char-0.*
 2. **Definitional keying.** Every field's definitions make a symmetry-breaking choice — external vs
-   internal, ordered vs unordered, one class of a dichotomy, a normalization. The unchosen side is
-   forced-empty unless a symmetry exchanges the cases. Census: the definitions and the WLOGs of the
-   seed papers. This is the mixed internal/external template.
+   internal, ordered vs unordered, one class of a dichotomy, a normalization. Census: the definitions
+   and the WLOGs of the seed papers. *Corpus premise: that the keying holds throughout — and that it
+   is blindness, not judgment.*
 3. **Ambient mismatch.** Results about the object in a different ambient space cannot be about ours.
    Census: the object's known incarnations. Havlicek/Coxeter/Pellegrino's 12-cap in PG(5,3) is this.
-4. **Fame asymmetry.** `O` is classical in A, `q` is standard in B, `D` is documented, and **`O` has
-   no name in B**. B's corpus cannot contain `q(D(O))` — not because they tried and failed, but
-   because `O` is not in their object list. Census: B's object taxonomy, i.e. its survey's definition
-   list. This is why the Clebsch hit was available at one hop: coding theorists do compute covering
-   radius, but for *their* objects, and Edge's hexagon was never one.
+   *Corpus premise: that the object's known incarnations are all in other ambient spaces — L-graded
+   like any other. Closing this wing for the hexad required obtaining and reading Lord 1988 at full
+   text* [in-repo L3/L4, vet §1.6].
+4. **Fame asymmetry.** `O` is classical in A, `q` is standard in B, `D` is documented, and `O` has no
+   name in B. Census: B's object taxonomy. **Guarded by the factoring check below** — this source
+   fails exactly when the transported question factors through a coarsening B already studies.
 5. **Parameter regime.** The object lives outside the range anyone computed or cared about. Weakest
-   source — verify against printed ranges, since the range is often wider than assumed (Van de
-   Voorde's q < 131).
+   source — verify against printed ranges, which are often wider than assumed (Van de Voorde's
+   q < 131).
 6. **The corpus predates the compute.** A census-derived fact cannot be in Clebsch 1871 or Edge 1956.
-   This prunes only the pre-computational half — and note that our actual live gate is BSW 1991/92,
-   the post-computational half. Use this to stop over-fearing the classical corpus, never to skip the
+   This prunes only the pre-computational half — and our live gate is BSW 1991/92, the
+   post-computational half. Use it to stop over-fearing the classical corpus, never to skip the
    modern one.
+7. **The invariant postdates the corpus.** If the invariant is ours and days old, no corpus can
+   contain a question phrased in it. Source 6's sibling, and the rare case that genuinely *is*
+   pre-paid: the corpus premise is a date. This is what licenses the internal detectors below.
 
-## Seam measurement — the cheap static eval
+## Internal detectors — our own censuses, confabulation-proof
 
-For tiers 2–4, the ordering signal is whether two literatures touch at all. This is a citation-graph
-measurement, not a semantic read, and it defeats the unsearchability problem: **we cannot search for
-a nameless question, but we can measure that two named literatures do not cite each other.** Look at
-the seam, not at the thing.
+These transport nothing and need no far side. Their **census** is our own work, which makes it the
+only census in the method that is fully owned, fully readable, and immune to confabulated literature.
 
-Instruments, cheapest first: arXiv cross-listing counts between category pairs (a paper cross-listed
-math.CO + cs.IT *is* a seam edge); OpenAlex or Semantic Scholar citation-graph queries; MSC
-co-occurrence in zbMATH/MathSciNet; the citation closure of a seed paper, forward and backward.
+**The licence covers the census, not the cell.** Source 7 licenses only questions phrased in an
+invariant that postdates the corpus. A deformation that lands back in classical vocabulary — the
+Mathieu-tower axis below is one — is not licensed, and takes the ladder like any other cell.
 
-**What this proves: nothing.** It is a static eval and it is allowed to be wrong. Its known failure
-mode is parallel discovery without citation — two communities solving the same problem under
-different names and never meeting, which is precisely what Edge/BSW did *within* one field. Seam
-emptiness is a prior, never a novelty claim. Move ordering does not need to be sound, only
-correlated; the leaf evaluation still happens before any claim. What changes is that we read a
-handful of promoted papers instead of sweeping a field, and we read them at the *end* of a promoted
-line rather than at the start of every line.
+- **Mechanism-deformation.** Take the mechanism of one of our own proofs, not its statement, and
+  enumerate the axes along which the *mechanism* deforms. The q=23 octad negative is the lesson: the
+  mechanism needed |H| = 2×3 so that a concurrent triple is a *perfect* matching, so the Mathieu-tower
+  axis (q=11→23) was never the right one. Census: our proofs' hypothesis lists — owned, and un-asked
+  by construction, because the proofs are new. The *cells* it generates still take the ladder unless
+  source 7 covers them.
+- **Bound-shape.** A bound whose *shape* differs from the data's shape means the bound's mechanism is
+  not the truth's mechanism, and the true one is unnamed. Live instance, flagged unexplained in the
+  handoff: the pencil bound is linear in q while the ω_arc data look sublinear.
+
+## Instruments — the static eval
+
+**Lead with object-level citation closure.** One query per seed object returns the seam edges, the
+near-miss candidate list, and open-access status — several of the method's needed quantities at once,
+in a sub-second call.
+
+**Category cross-listing is demoted; it is anti-correlated in this lane's regime.** Measured
+2026-07-15 [L2, metadata level]: `cat:math.CO AND cat:cs.IT` returns ≈1850 papers and
+`cat:math.AG AND cat:cs.IT` ≈327 — finite-geometry↔coding is one of the densest seams on the arXiv,
+so at category resolution the region containing the Clebsch hit reads **"dense — skip."** At object
+resolution the same cell is sharp: works citing Edge 1956 number seven indexed citers, not one in a
+coding venue, latest 1988 (Geometriae Dedicata, Camb. Phil. Soc., Archiv der Mathematik, J. Algebra,
+Annals of Discrete Mathematics, Amer. Math. Monthly). A dense field-pair seam is *why* the far side's
+question list exists at all, and says nothing about whether it ever touched `O`.
+
+**Calibrate the replacement before the ordering rests on it.** OpenAlex under-indexes mid-century
+citations, so an object-level closure on a classical seed can read empty for a real gap and for an
+indexing artifact alike — the same confirmatory-noise disease this method diagnoses in keyword search,
+relocated into its replacement.
+
+**The calibration must be non-circular, and the obvious seed is not.** The vet's BSW 1992 citer
+enumeration is itself an OpenAlex live query [in-repo, vet §1.5 and its source list], so it cannot be
+ground truth for OpenAlex; and a 1992 seed does not probe mid-century under-indexing in any case. The
+at-risk seed is Edge 1956. Calibrate by a route that does not pass through OpenAlex — Edge 1956's
+citers from MathSciNet or zbMATH, diffed against the OpenAlex closure. Until that diff exists,
+object-level emptiness on a classical seed is a lead, not a reading.
 
 ## The rules
 
-Analogues of the four rules in the [gem mining](handoffs/2026-07-14-gem-mining.md) handoff, plus one
+Analogues of the rules in the [gem mining](handoffs/2026-07-14-gem-mining.md) handoff, plus one
 with no analogue.
 
 1. **Census = the literature's own structure, never a search result.** The test survives verbatim:
-   *what does a miss buy?* A missing section in a handbook's classification is a fact. A null result
+   *what does a miss buy?* A missing section in a handbook's classification is a fact; a null result
    from a search engine is noise. Enumerable structures: handbook and survey tables of contents, the
-   MSC tree, citation closures, a community's definition list, a survey's connections section.
-2. **The question must arrive through a dictionary.** A question posed in our own vocabulary is a
-   conjecture — already asked, or askable by the community, hence explored. Only imported questions
-   are structurally invisible. Operational predicate: **fame asymmetry** (source 4 above). If `O` is
-   famous on both sides, the cell is probably already filled.
+   MSC tree, citation closures, a community's definition list.
+2. **The question must arrive through a dictionary — or through an invariant that postdates the
+   corpus.** A question posed in *classical* vocabulary is a conjecture: already asked, or askable by
+   the community, hence explored. This does **not** apply to vocabulary that is ours and days old —
+   ω_arc, t(H), the mixed-type invariant have no community to have asked them, and the internal
+   detectors above are admitted on exactly that ground (source 7).
 3. **Declare the null before investigating.** State the boring answer and why it would be boring. If
-   you cannot state it, you do not understand the question well enough to ask it — drop the cell.
-   This kills the most, costs nothing, and therefore goes first.
-4. **Upgrade protocol on a candidate, immediately.** Smallest computable instance; the *neighbouring
-   parameter*, because coincidence-of-small-numbers is the default hypothesis (the q=23 octad lesson:
-   the mechanism needed |H| = 2×3 so that a concurrent triple is a *perfect* matching); name the
+   you cannot state it, you do not understand the question well enough to ask it — drop the cell. The
+   taxonomy of nulls, all of which must be refuted: **trivial** / **vacuous** /
+   **known-under-another-name** / **tried-and-failed-silently**.
+4. **Upgrade protocol on a candidate, immediately.** Smallest *non-degenerate* instance; the
+   neighbouring parameter, because coincidence-of-small-numbers is the default hypothesis; name the
    mechanism; name who is forced to care.
 5. **Dictionaries are earned or composed, never chosen by taste.** Object mining gets its domain for
    free — PG(2,q) is given. Question mining *chooses* its domain, and the choice is the method, so it
-   is the failure point. Earned = read off our own invariants. Composed = two citable legs. Anything
-   else is analogy, and analogy is how this degenerates into a brainstorm.
+   is the failure point. Earned = read off our own invariants. Composed = two citable legs, with the
+   composite image checked on `O`. Anything else is analogy, and analogy is how this degenerates into
+   a brainstorm.
 
-## Kill order — compute to kill, read to claim
+## Un-asked question ≠ unknown answer
 
-Order by cost. This lane inverts the usual order, because at q=11 a computation is minutes while a
-survey section is an hour plus ILL risk.
+Forced emptiness is vocabulary-local; mathematical content is vocabulary-global. B provably lacking
+the *question* does not mean the *answer* is absent from every corpus under a different question.
+This lane has paid for this lesson repeatedly — the four-orbit classification, the stabilizer-parity
+form, the point↔involution machinery, and the chirality motif were each "ours" until a sweep found
+them under another name. It is **the most realized failure class in this program's history**, and the
+guard is mechanical rather than vigilant:
 
-1. **Statable null** — free. Kills the meaningless.
-2. **Naturality on the far side** — free. Is `q` load-bearing in B's own survey, or did we invent it?
-3. **Void test** — free. Can the emptiness be named (tier 1 or 2)? For a free/universal machine: has
-   it ever paid off on an object adjacent to ours? If never anywhere nearby, it is a void.
-4. **Smallest-instance computation** — minutes to hours. A cheap *negative* filter.
-5. **The literature** — expensive, L3/L4 only, and only for survivors.
+**The factoring check.** Does `q(D(O))` depend on the structure the far side cannot name? The parity
+form factored through the 6-subsets of P¹(F₁₁) — the conic embedding that made `O` nameless in B was
+not load-bearing for that fragment, so permutation group theory had already answered it. **If the
+question factors through a coarsening B already studies, assume B answers it and search the coarsened
+form first.**
 
-Computation can never establish novelty, so the reading gate stays mandatory before any claim; it
-just moves from per-candidate to per-promoted-line. **Compute to kill, read to claim.**
+Calibration consequence, stated plainly: because the factoring guard will fire often, expect
+gap-mined hits to skew **bridge-grade** — the sentence connecting two literatures rather than a new
+phenomenon. The Clebsch hit was object + question + computation, not a pure transport. Transport
+finds where an A+ result could *live*; the mathematics still has to be grown there, and the mined
+question's answer being partially known elsewhere is the default, not the exception.
 
-## Value belongs in the detector
+## Kill order — priced, not free
+
+Order by cost. Only the first step is free; the rest are bounded reads or bounded compute, and saying
+so is what keeps the economics defensible.
+
+1. **Statable null** — free. Kills the meaningless. Every null type must be refuted.
+2. **Factoring check** — free. Does `q(D(O))` survive forgetting the structure B cannot name? If it
+   factors through a coarsening B already studies, assume B answers it and go straight to step 4 on
+   the **coarsened form**. This runs early because it is cheap and because it guards the failure this
+   lane has hit most.
+3. **Naturality on the far side** — bounded read, charged to the promoted region. Is `q` load-bearing
+   in B's own survey, or did we invent it?
+4. **Search to kill** — conjunctive, over the dictionary-translated vocabulary. A hit is an immediate,
+   cheap, decisive death for the cell. The negative is worth close to nothing; do not record it as
+   absence support.
+5. **Void test and degeneracy check** — can the emptiness be named, with its out-of-sample prediction?
+   For a free machine: has it ever paid off on an object adjacent to ours?
+6. **Smallest non-degenerate instance** — compute. **Not** the smallest instance: a hexad cannot lie
+   on a conic in PG(2,4) [in-repo L4, Edge 1965a via vet §1.6], and at q=5 the conic has exactly six
+   points so the 6-subset question is trivial. A smallest-first probe of the hexad question dies twice
+   before q=11 — naive compute-to-kill would have killed this lane's flagship. Treat degeneracy of the
+   probe as information: it is source-1 material, since the phenomenon may not be statable below some
+   parameter.
+7. **Search the answer** — the question is unsearchable; the **computed answer is searchable**.
+   Sequences, orbit counts, group orders, design parameters are vocabulary-independent keys that every
+   community indexes the same way. OEIS on ω_arc, the 759-numerology check, and the CO-TR table match
+   are all this move. Another cheap decisive kill.
+8. **Read to claim** — L3/L4, survivors only.
+
+**Compute to kill, read to claim** still holds, with step 5's degeneracy guard attached. Search is
+mis-aimed rather than useless: single-vocabulary search returning confident negatives was the sweeps'
+actual failure mode, and sweep #5 — a transported question posed in the far side's vocabulary — is
+what stopped the lane shipping "we characterized S(5,6,12)". Search is a first-class *kill* step; it
+is never novelty evidence.
+
+## Value predicates
 
 Novelty is free and worthless on its own — there are unlimited un-asked questions and almost all of
-them change nobody's belief. The value predicates run inside the detector, not after it:
+them change nobody's belief. These run *inside* promotion, before any gate is opened:
 
-- **Does answering it re-key an existing corpus?** This is the A+ signature — not difficulty, not
-  novelty. The Clebsch hit's worth is that *Edge 1956 becomes a coding theorem*. An isolated new fact
-  is a note; a reinterpretation of a classical body of work is a paper.
-- **Forced dual audience.** Both communities must update. Cross-vocabulary transport gives this by
-  construction; a question only one community cares about is a specialty note.
+- **Does answering it re-key an existing corpus?** The A+ signature — not difficulty, not novelty. The
+  Clebsch hit's worth is that *Edge 1956 becomes a coding theorem*. An isolated new fact is a note; a
+  reinterpretation of a classical body of work is a paper.
+- **Forced dual audience.** Both communities must update. Note this cuts *against* long composites:
+  two hops means a forced triple audience, and it is unclear which corpus a two-hop answer re-keys.
+  Expect composed hits to skew note-grade unless the far side is large.
 - **Non-specializable.** If it is a special case of something known over ℝ/ℂ or generically, it is a
-  corollary. Source 1 is the check, and it is decidable by argument.
+  corollary. Source 1 is the check, decidable by argument.
+- **Survives the factoring check** (kill step 2). A question that factors through a coarsening B
+  studies is answered elsewhere under another name.
 - **The mechanism deforms.** Answerable only at q=11 by exhaustion is a curiosity; a mechanism with a
   parameter is a program.
 
 ## Failure modes
 
-| Failure                                   | Guard                                              |
-|-------------------------------------------|----------------------------------------------------|
-| Confabulated absence                      | evidence ladder below; absence claims carry their level |
-| Void mistaken for a gap                   | name the cause of emptiness; near-miss cluster; neighbourhood precedent |
-| Dictionary chosen by analogy              | rule 5 — earned or composed only                   |
-| Unstatable null                           | rule 3 — drop the cell                             |
-| Coincidence of small numbers              | rule 4 — neighbouring parameter, always            |
-| Seam emptiness read as proof              | it is a prior; the leaf read is still mandatory    |
-| Search-negative read as evidence          | a real gap is unsearchable; only structure shows absence |
+| Failure                      | Guard                                                          |
+|------------------------------|----------------------------------------------------------------|
+| Confabulated absence         | evidence ladder; absence claims carry their level              |
+| **Known-under-another-name** | factoring check (step 2); answer-keyed search (step 7)         |
+| **Degenerate kill**          | kill at the smallest *non-degenerate* instance only            |
+| **Dark seam**                | OA/ILL status before promotion; thin-and-dark is worst         |
+| **Unfalsifiable cause**      | one out-of-sample prediction per named cause                   |
+| Void mistaken for a gap      | name the cause; blindness vs judgment; neighbourhood precedent |
+| Tried-and-failed-silently    | unprinted by construction; a thin seam can be a graveyard      |
+| Dictionary chosen by analogy | rule 5 — earned or composed only, composite image checked      |
+| Unstatable null              | rule 3 — drop the cell                                         |
+| Coincidence of small numbers | rule 4 — neighbouring parameter, always                        |
+| Seam emptiness read as proof | it is a prior; the leaf read is still mandatory                |
+| Tier read as cell trust      | validity is not virginity                                      |
 
 ## Trust boundary
 
 The instrument for absence is a language model, which will produce a fluent and plausible literature
-if permitted. This is the same hazard the lane already fences on the computational side — *no
-numerical claim may depend only on a session scratchpad* — and it binds harder here, because a
-confabulated absence is indistinguishable from a real one at the point of use.
+if permitted. This is the same hazard the lane fences on the computational side — *no numerical claim
+may depend only on a session scratchpad* — and it binds harder here, because a confabulated absence
+is indistinguishable from a real one at the point of use.
 
-Every absence claim carries its level:
+**The ladder prices negatives only.** Absence support is what needs grading; a search *positive* is
+not on the ladder at all — it is an immediate cheap kill.
 
 - **L0** — believed. Worthless; this is what the model emits for free.
-- **L1** — search sweep, no hits. Near-worthless: a real gap is unsearchable, so the null result
-  arrives identically in both worlds.
+- **L1** — search sweep, no hits. Near-worthless as absence support: for an un-named question the null
+  result arrives identically whether the gap is real or imaginary.
 - **L2** — citation closure enumerated, titles and abstracts screened.
 - **L3** — the survey or handbook section that *would have to contain it* was read, and does not.
 - **L4** — the near-miss papers read in full, swerve point identified and named.
 
-**Only L3/L4 support a novelty claim.** Tier-1 forced-empty arguments are exempt from the ladder but
-not from scrutiny: they must be stated as a structural argument that a reader could refute, not as a
-report of not having found something. This pairs with the unread ledger in
-[consolidated literature report](2026-07-14-literature-sweep-consolidated.md) — an absence
-conditioned on an unopened source is an open gate, not a result.
+**Only L3/L4 support a novelty claim.** A structural-cause argument's *mathematical* premise is
+exempt; its *corpus* premise is not, and must be stated as a refutable structural argument rather than
+a report of not having found something. This pairs with the unread ledger in
+[consolidated literature report](2026-07-14-literature-sweep-consolidated.md) — an absence conditioned
+on an unopened source is an open gate, not a result.
+
+**The near-miss cluster is retrospective.** A swerve is visible only relative to a formulated
+question, and the exemplar near-misses were identified after the hit existed. Prospectively, seam
+thinness is measurable and swerves are not: the cluster is a post-formulation confirmation and a
+gate-bounder, never a mining signal.
 
 ## Ledger of mined cells
 
 Closed cells are lane assets, exactly as C178 is: recording that a question was transported and the
-answer is boring prevents re-mining it, and the record is cheap. Every cell entered here, whatever
-the verdict.
+answer is boring prevents re-mining it. Every cell entered here, whatever the verdict.
 
-| Cell `(O, D, q)` | Tier | Null | Verdict | Evidence level |
-|------------------|------|------|---------|----------------|
-| *(none yet)*     |      |      |         |                |
+**This method declares its own null: cause classes are uncorrelated with yield.** The schema exists to
+let a batch of cells refute that. A ledger that records only verdicts cannot distinguish "the ordering
+works" from "we believed the ordering", and the ordering generalizes from a single hit until it does.
+
+| Cell `(O, D, q)` | Cause class at entry | Cause as named | Value predicates | Kill stage reached | Gate cost paid | Verdict | Evidence level |
+|------------------|----------------------|----------------|------------------|--------------------|----------------|---------|----------------|
+| *(none yet)*     |                      |                |                  |                    |                |         |                |
+
+## First steps
+
+1. **Backfill before mining.** Populate the ledger with already-decided cells, scored *as-if
+   prospective*: the Clebsch hit, C147, the mixed-type invariant, C177, C178, the octad negative.
+   Cheap, zero new reading, and it calibrates the machine on known ground — the mixed-type row exposes
+   the value problem, the octad row exercises the neighbouring-parameter guard, and the Clebsch row
+   tests whether the static eval would have promoted the one cell that mattered. **If the method
+   mis-ranks its own history, no new cell should trust it.** This is the method's validation gate and
+   it is a hard gate, not a warm-up.
+2. **Calibrate the instrument, non-circularly.** Diff Edge 1956's citers from MathSciNet or zbMATH
+   against the OpenAlex closure — a mid-century seed, by a route that does not pass through the
+   instrument under test. Do **not** use the vet's BSW 1992 list: it is an OpenAlex query itself, and
+   1992 is the wrong regime for the risk. Until the diff exists, no ordering claim rests on
+   object-level emptiness.
+3. **First live cell: C177**, already queued. A transport triple with a computable verdict
+   (design-theoretic question, geometric object, glue-or-not answer). Running it through the full kill
+   order makes it the ledger's first prospective datum at near-zero marginal cost.
+4. **First new dictionary: conic-hexads → S(5,6,12) → ternary Golay / M₁₂.** Leg 1 is earned (C147).
+   Leg 2 is believed documented inside design theory and coding **[L0 — model memory; this is
+   precisely what the leg-2 read must establish, and it carries no weight until it does]**. The fame
+   asymmetry runs the required way and is in the sweep record [in-repo L3, hexad sweep]: Curtis's
+   kitten, Conway–Sloane, and Bailey use the same P¹(F₁₁) point set and never embed it as a conic. The
+   transpose cell — geometry's question list (chord concurrency, polarity, t(H), secant structure)
+   pulled onto the Golay code's standard objects (cosets, weight classes, the two systems) — has a
+   computable smallest instance sitting on C147's promoted scripts, and the leg-2 read is the bounded
+   gate. **Gate accessibility is unmeasured**: run the object-level call for OA status before promoting
+   this cell — asserting the seam papers are obtainable without ILL is the one quantity that made the
+   covering fact stuck, and it has not been queried here. Run the factoring check first: much of the
+   hexad structure factors through the 6-subsets of P¹(F₁₁), which is exactly where this lane has been
+   scooped before.
+
+The first pass (backfill + calibration + C177) is task-shaped and takes a C-ID at allocation, pegged
+`gem-mining`. This doc stays infrastructure.
+
+## Overturned claims
+
+Recorded because this doc's first version was committed with them, and each is the kind of error that
+grows back. Do not slip back to:
+
+- **"Structural causes are pre-paid by argument."** They are discounted. Both exemplars bought their
+  corpus premises with sweep reading. Exempt the deduction, never the premises.
+- **"The durable novelty claims are the structural ones; the stuck ones are the read ones."** The
+  headline of the first draft, and false: both durable exemplars were paid for by reading. What
+  structure buys is a *bounded* bill, not no bill.
+- **"A question posed in our own vocabulary is askable by the community, hence explored."** False for
+  vocabulary that is ours and days old. Rule 2 is now scoped to classical vocabulary, and the internal
+  detectors are admitted on that ground.
+- **"Lead with arXiv category cross-listing."** Measured anti-correlated at cell level: the region
+  containing the founding hit reads "dense — skip". Object-level closure resolves the same cell
+  correctly at the same cost.
+- **"A real gap is unsearchable, so gap mining is not a searching exercise."** True for generic
+  un-asked questions, false for transport triples — which are the only candidates this method
+  produces, and which arrive with the far side's vocabulary attached. Search is a first-class kill
+  step.
+- **"A thin seam beats an empty one."** Only when the seam is *obtainable*. Thin-and-dark is the worst
+  cell on the board; the covering fact is the proof.
+- **"One-hop dictionaries get walked because someone knows both fields."** Arcs ↔ MDS is one hop,
+  famous, and went unwalked for seventy years. The mechanism is vocabulary opacity, not hop count.
+- **"A survey's connections section is the enumeration of B's outgoing dictionaries."** It is a
+  curated highlight reel — a generator and a lower bound.
+- **"The spine reduces to one question: can you name why it is empty?"** Cause-nameability and seam
+  thickness are orthogonal axes that cross freely, and value is a promotion factor rather than a
+  post-filter. The evidence ladder is untouched by this and is still relied on throughout.
