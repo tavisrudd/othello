@@ -39,6 +39,41 @@ working role is to find**: mine cells, run the kill order, run the searches, wri
 it provisional, stop. Leaving output at the gate is the job done right, not a loose end; "awaiting
 vet" is a status to report, never a task to pick up.
 
+## ⚠ Dye 1991/1988 — the largest standing warning to this lane (2026-07-15)
+
+**Dye 1991 was obtained today** (page scans at `/tmp/persistent/tavis/lit-search/dye-1991/`, with an
+OCR reconstruction beside them) and it is not a near-miss — it is the same geometry. Warning relayed
+from the agent doing the paper citation updates, whose lane owns the manuscript side:
+
+> Five triangles, polarity, orbit sizes, double-six structures, A₆-related phenomena, and several
+> attractive graph configurations are already in Dye. These can still yield new coding
+> interpretations, but should not be advertised as newly discovered geometry.
+
+**R. H. Dye, "Hexagons, conics, A₅ and PSL₂(K)"** (scans pp. 270–286). Its stated aim is to make
+hexagons account for `A₅ ≤ PSL₂(K)` over **any** field of characteristic ≠ 2 in which 5 is a square —
+not just q=11. It cites Edge 1956 as its ref [6].
+
+Two open frontiers of this lane are named in Dye's §1.4 [in-repo L3, OCR reconstruction — verify
+exact statements against the PNGs before citing]:
+
+- **The q=5 frame — "unaudited" in the novelty tables — is in Dye.** *"When K is GF(5) then PSΩ(5)
+  is A₅, and 𝒞 has six points which form a hexagon. Through each of the 10 internal points passes
+  three chords; these are just the edges of the hexagon."* The "cheap check: structure or degeneracy?"
+  has an answer in print.
+- **q=9 — the unswept prime power this lane says "matters" — is Dye 1988.** Dye's ref [5]:
+  *R. H. Dye, "Twelve hexagons associated with the 10-point conic and the isomorphism PSL₂(9) ≅ A₆",
+  J. London Math. Soc. (2) 37 (1988) 437–446* — twelve hexagons with **internal** vertices, two
+  PSΩ(9)-orbits of six, A₆ acting inequivalently on each. **Get this paper before sweeping q=9.**
+
+**What this does not touch.** The `[6,3,4]₁₁` MDS code, the deep-hole/covering reading, and the
+coding interpretation are not Dye's subject. The E_q reduction and the healthy census remain this
+lane's framing. **What is at risk is any claim that the geometry is new** — the internal-vertex
+hexagons, the A₅/A₆ stabilizers, the self-polar triangles, and the Brianchon concurrency are Dye's.
+
+**Do not route this into `clebsch`.** Another agent owns the manuscript's citations and priority
+footnote; this section records only what it means for *this* lane's frontiers. Dye also states a
+**sequel** exists ("the details will form a sequel") — unlocated.
+
 ## Adversarial takeover map (2026-07-14)
 
 Full cross-lane issue ledger: [Clebsch + gem takeover audit](../2026-07-14-clebsch-gem-adversarial-takeover.md).
@@ -146,6 +181,10 @@ as the record of a closed spike.
   q=11 is the Clebsch hexagon (all-external, stabilizer A₅); q=5 is the projective frame
   (all-internal, stabilizer S₄, a k=1 sibling the C126 family tree missed by testing the wrong
   orbit); q=3 is degenerate. Prime powers q = 9, 25, 27, 49 are unswept — q=9 matters.
+  **Two of these are in Dye and are not open geometry** (2026-07-15, see § Dye warning above): the
+  **q=5** frame is Dye 1991 §1.4, and **q=9** is Dye 1988's twelve internal-vertex hexagons with
+  their two A₆-orbits of six. Read Dye 1988 *before* spending on a q=9 sweep; the census's framing
+  and the coding reading survive, the geometry's novelty does not.
 - **ω_arc census** (largest arc-clique): 3,4,4,6,6,6,6,8,10,10,10 for primes 3…37. Bounded by the
   pencil bound (q+3)/2, which is linear while the data look sublinear — that gap is unexplained.
 - **Nonexistence for q ≥ 13 has no structural cause.** The crossing story (ω_arc falling below the

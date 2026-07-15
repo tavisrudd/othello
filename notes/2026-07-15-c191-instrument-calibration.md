@@ -45,8 +45,25 @@ Union of the three indexes, Beebe bibliography compilations excluded as extracti
 | 1985 | J. Algebra           | PGL(2,11) and PSL(2,11)                        | **W. L. Edge**  | ✓  | ✓   | ✓  |
 | 1988 | Ann. Discrete Math.  | Midpoints and Midlines in a Finite Hyperbolic  | C. W. L. Garner | ✓  | —   | ✓  |
 | ?    | — (stub record)      | On Galois Geometries — **unverified lead**     | B. Segre        | —  | —   | ✓  |
+| 1991 | J. London Math. Soc. | Hexagons, conics, A₅ and PSL₂(K) — **VERIFIED, ALL THREE MISS** | R. H. Dye | — | — | — |
 
-Bold = self-citation. **Nothing in this table is a coding venue**, and nothing postdates 1988.
+Bold = self-citation. **Nothing in this table is a coding venue.**
+
+**The last row is a ground-truth counterexample to the instrument, added 2026-07-15 after the paper
+was obtained.** Dye 1991 cites Edge 1956 — verified from Dye's own reference list, which reads
+`6. W. L. EDGE, 'Conics and orthogonal projectivities in a finite plane', Canad. J. Math. 8 (1956)
+362-382`, and cites it in §1.4 (*"If K is GF(11) then Edge [6, p. 380] has presented a hexagon whose
+vertices are external points…"*). **No index has it.** Two claims in the original version of this
+report are therefore false and are corrected here rather than deleted:
+
+- ~~"nothing postdates 1988"~~ — Dye 1991 does.
+- ~~"the union is 8"~~ — the union is **at least 9**, and 9 was reached not by a better query but by
+  someone physically obtaining the paper.
+
+This is no longer an argument that the instrument undercounts. **It is a measurement of the
+undercount against a known-correct answer**, and the missed citer is the one the lane most cares
+about: Dye 1991 is the paper the `clebsch` priority footnote is about. Every index reports the
+citation record of a 1956 paper as ending in 1988; a 1991 paper citing it sat outside all three.
 
 **The independent citers are at most four people in thirty-two years**: Ostrom (1959, and among the
 eight authors of the 1962 bundle), Raber (1975), Garner (1988), and Segre if the lead holds. Everything
