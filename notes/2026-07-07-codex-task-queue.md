@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C160.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C161.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -97,6 +97,19 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
 [handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the
 *icosahedral MDS / deep-holes* lane; same lane, renamed 2026-07-14.)
 - **C128 `[clebsch]`** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
+- **C161 `[clebsch]` [QUEUED 2026-07-14 — FOLLOW-UP TO THE RIGIDITY SWEEP]** — settle who owns
+  (iv)⟺(v) of the rigidity TFAE ("PGL(3,11)-equivalent to the Clebsch hexagon ⟺ stabilizer contains
+  A₅") → `notes/2026-07-14-c161-tfae-iv-v-priority.md`. Acted on already: §4 Remark
+  `rem:what-is-new` now states the implication is **not ours** and attributes it to SVM Prop 12,
+  which the paper already cites in §2 — so the paper is safe either way and this check only fixes
+  *whose* it is.
+  **Lit steps:** the rigidity sweep found Karaoglu's 2018 Sussex thesis Table 5.1 credits the q=11
+  "Diagonal" surface with |G|=120 to **Sadeh**, which would predate SVM 1995 — so the SVM attribution
+  may itself be mis-aimed. Determine the earliest source for "the A₅-stabilized 6-arc of PG(2,11) is
+  unique up to PGL(3,11)". Candidates in likely order: Sadeh's thesis (~1984) / Hirschfeld–Sadeh 1984
+  (ILL, same batch as C131/C153), Edge 1956 §§29–32 (already read — he has the order-60 stabilizer and
+  22 = 1320/60, which may already entail uniqueness), Dye 1991, SVM 1995 Prop 12, O'Keefe–Storme 1996.
+  Note Edge is the live possibility: if §§29–32 entail uniqueness, the attribution moves to 1956.
 - **C131 `[clebsch]`** — Sadeh-thesis on-receipt verification (**upgraded 2026-07-14 from
   confirmatory to a real question**: the rigidity/gap sweep found that the concession may be
   *mis-aimed in our favour* — per its zbMATH review, Hirschfeld–Sadeh 1984 is a

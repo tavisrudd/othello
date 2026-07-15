@@ -379,6 +379,18 @@ paper's main claim: among \emph{all} six-arcs of $\PG(2,11)$, the property
 does so in a way that recovers its automorphism group from the coding
 condition rather than assuming it.
 
+\begin{remark}[Two conditions, one word apart]
+\label{rem:not-the-usual-condition}
+The condition studied here is that $\cU(A)$ --- the deep-hole locus --- lies
+on a conic. It is \emph{not} the familiar condition that the arc $A$ itself
+lies on a conic, which is the standing hypothesis throughout the arc
+literature and which the Clebsch hexagon famously fails. The two are
+logically unrelated: they constrain different point sets, and the arcs
+satisfying them are disjoint. Indeed every six-arc lying \emph{on} a conic in
+$\PG(2,11)$ has $|\cU(A)|\in\{18,19,20,22\}$, so by~(iii) none of them comes
+anywhere near the condition of the theorem.
+\end{remark}
+
 \paragraph{Census framing.} The projective-equivalence classes of $k$-arcs
 in $\PG(2,11)$ were classified by
 Sadeh~\cite{SadehThesis1984,HirschfeldSadeh1984}; see also
@@ -387,10 +399,26 @@ census we compute, for each representative $A$, the deep-hole locus
 $\cU(A)$ --- the points off $A$ and off all fifteen of its secants,
 equivalently the points extending $A$ to a projective seven-arc --- and read
 $\cU(A)$ as the covering-radius-three coset data of the associated
-$[6,3,4]_{11}$ code. \emph{The classification of six-arcs, and the raw
-extension-count data $|\cU(A)|$ it entails, belong to Hirschfeld and
-Sadeh}: the size of $\cU(A)$ is a standard projective invariant of any arc
-under an extension-based classification, and we claim no priority on it.
+$[6,3,4]_{11}$ code.
+% TODO(C131) --- DO NOT RE-ASSERT THE OLD CONCESSION WITHOUT THE ILL.
+% This paragraph used to read "the classification of six-arcs, and the raw
+% extension-count data |U(A)| it entails, belong to Hirschfeld and Sadeh".
+% The 2026-07-14 sweep (notes/2026-07-14-gem-lit-rigidity-gap.md) found that
+% may be mis-aimed IN OUR FAVOUR: per its zbMATH review (Zbl 0538.51010,
+% Grundhoefer), Hirschfeld-Sadeh 1984 is a Singer-cycle / complete-7-arc /
+% (n;3)-arc paper and appears NOT to be a six-arc paper at all; and Karaoglu's
+% 2018 Sussex thesis, the modern continuation of the same line, tabulates
+% six-arcs with NO extension-point column. So we may have been conceding a
+% result to a paper that does not contain it.
+% Posture below, deliberate: decline priority WITHOUT asserting anyone else
+% has it -- "we claim no priority on X" does not require "X belongs to Y".
+% C131 settles it when the Sadeh thesis / Hirschfeld-Sadeh ILL arrives: if the
+% extension data IS there, restore an explicit attribution; if it is not, this
+% wording already stands and nothing needs changing.
+\emph{We claim no priority on the six-arc census, nor on the raw
+extension-count data $|\cU(A)|$ that an extension-based classification
+entails}: the size of $\cU(A)$ is a standard projective invariant of any
+arc, and the census itself is Sadeh's.
 What we contribute is the geometric and coding-theoretic meaning of
 $\cU(A)$: that its containment in a conic singles out the Clebsch hexagon
 and forces $A_5$, that this containment is rigid rather than merely
@@ -465,6 +493,21 @@ degenerate conic.}
 $A_5$ is recovered from the coding condition ``deep holes lie on a conic,''
 not assumed as a hypothesis.
 \end{corollary}
+
+\begin{remark}[Which implications are new]
+\label{rem:what-is-new}
+The equivalence (iv)$\Leftrightarrow$(v) is not ours and is not new: that the
+Clebsch hexagon is the unique $\mathrm{PGL}(3,11)$-orbit of six-arcs whose
+stabilizer contains $A_5$ is Storme and
+Van~Maldeghem~\cite[Prop.~12]{SVM1995}, quoted in Section~\ref{sec:hexagon}
+above, and the classification of six-arcs that underlies it is Sadeh's. The
+content of the theorem is the implication
+(i)$\Rightarrow$(iv), and with it the equivalence of the deep-hole
+conditions (i)--(iii) with the classical characterizations (iv)--(v). It is
+that bridge --- from a covering-radius property of the code to a projective
+classification --- that is the claim, and the corollary above is its
+consequence.
+\end{remark}
 
 The rigidity theorem leaves open how close a \emph{different} six-arc can
 come to the phenomenon. The next theorem shows the answer is: not close at

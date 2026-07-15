@@ -257,6 +257,36 @@ because `F₁₁*` is cyclic of order 10 — so `{0} ∪ μ₅` is literally the
 and both models land in the 264-orbit with `|Stab| = 5`, verified. The hexads are the 6-sets of
 Weierstrass points of the genus-2 curve with an order-5 automorphism.
 
+### The bridge to the `clebsch` paper's own invariant: `t + |U| = 82`
+
+Found 2026-07-14 while checking a claim for the manuscript. For a 6-subset `H` **of the conic**, write
+`U(H)` for the deep-hole locus in the `clebsch` paper's sense — the points off `H` and off all fifteen
+of its chords. Then
+
+> **`t(H) + |U(H)| = 82`, identically.**
+
+*Proof.* Let `a, b, c` count the off-conic points lying on exactly 1, 2, 3 chords (`m_P ≤ 3` by step 1).
+Each chord carries `q−1 = 10` off-conic points, so `a + 2b + 3c = 150`. Disjoint chord pairs meet
+off-conic and number `C(15,2) − 6·C(5,2) = 45`, so `b + 3c = 45`. And `c = t − 60` by step 2. Solving:
+`a = 60 + 3c`, `b = 45 − 3c`, so `a + b + c = 105 + c`. The uncovered points are the `6` conic points
+outside `H` (no chord meets the conic off its endpoints) plus the `121 − (105 + c)` off-conic points on
+no chord, giving `|U| = 6 + 16 − c = 22 − (t − 60) = 82 − t`. ∎
+
+Verified for all 924 subsets: pairs `(t, |U|) = (60,22):264, (62,20):330, (63,19):220, (64,18):110`.
+
+**Consequences.**
+
+- **The hexads are the on-conic 6-arcs of *maximal* extension count**, `|U| = 22`. The characterization
+  has a second face in the `clebsch` paper's own language, with no mention of concurrency.
+- `|U|` separates the four PGL(2,11)-orbits exactly as `t` does — same partition, complementary
+  numbering. The `{18:110, 19:220, 20:330, 22:264}` histogram over on-conic 6-subsets **is** the orbit
+  decomposition.
+- **21 never occurs among on-conic arcs** — the mirror of the `t = 61` gap, and the same fact.
+
+This also corrected a claim that was about to ship in the manuscript: the on-conic six-arcs number
+**924**, not 252 (a number the handoff uses for the *perturbations*), and their `|U|` range is
+`{18,19,20,22}`, not `18–22`.
+
 ### Why q=23 fails: the reduction does not transfer, and that is the reason
 
 The identity in step 4 is **not** a general fact about conics — it depends on `|H| = 6 = 2 × 3`. A
