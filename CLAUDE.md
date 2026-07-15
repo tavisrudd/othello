@@ -64,6 +64,9 @@ routing table? (c) which lane next? Wait for the answers.
 - **`alt-orbit-repair`** — Alternate-orbit repair for invariant ten-arcs (C142–C143): start with
   [alternate-orbit repair](notes/handoffs/2026-07-14-alternate-orbit-repair.md). First do C142, the
   certificate-free `s ≥ 7` repair theorem; C143 owns the gated Q25 two-witness certificate.
+- **`build-sys`** — Lean build/restart/cache engineering for the massive shared source tree (C162):
+  start with [Lean build-system hardening](notes/handoffs/2026-07-14-lean-build-system.md). First
+  harden and exercise the trace-sentinel restart guard, then map high-fan-out import blast radius.
 - **`baer`** — Baer-equivariant robust completion (C99, C133, C134): start with
   [Baer-equivariant robust-completion](notes/handoffs/2026-07-14-baer-equivariant-robust-completion.md).
   First task is the C99.6 hostile review and disposition.
@@ -133,6 +136,12 @@ independent — **job count, CPU placement, memory risk** — and conflating the
   sacrifices a worker instead of unrelated processes. It is a **containment guard, not permission
   to oversubscribe memory.**
 
+`1000` is the default sacrificial setting. Lower it to `500` only when the user explicitly gives
+one build priority and has coordinated the other jobs to remain sacrificial; that relative
+protection is a session-level scheduling decision, not a new default. A priority adjustment does
+not change the measured worker cap, permit concurrent heavyweight Lake builds, or relax any RAM
+budget below.
+
 **Choose N by measurement, never from `nproc` and never from another family's N.** Measure the
 heaviest representative leaf's peak RSS with GNU `time -v` (`/usr/bin/time -v`; a bare `time` is a
 bash keyword, not GNU time). Reserve 6–8 GiB for the OS, Lake itself, and **tmpfs** — `/tmp` pages
@@ -172,6 +181,16 @@ copying it.
 With a measured cap set, leaves-first `nix_lake_build_each ...` is unnecessary for uniform leaves
 and much slower — it pays a fresh Lake startup per target; keep it for a strictly serial run, such
 as the heavy-shared-dependency step below.
+
+**Finite-certificate sharding must cross module boundaries.** Splitting a proof into per-row lemmas,
+`fin_cases` branches, or local tactic blocks inside one `.lean` file does not bound elaborator
+memory: Lean can retain all of those proof terms until the module finishes. This was measured on
+the Q11 A5 point-orbit certificate, where three single-source layouts — including row-sharded and
+arithmetic-normalized variants — each reached roughly 17.5--17.75 GiB and exited 137. For a large
+finite certificate, use a definitions-only base, separately compiled bounded leaf modules, and a
+lightweight aggregator. Build the leaves serially to `.olean` before probing the aggregator; do not
+start with the umbrella target and assume tactic-level sharding will provide the same memory bound.
+
 The OOM wrappers in `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash` exist only in the
 user's **interactive** shell, and their `nix` wrapper matches only `nix develop --command
 lake|lean|leanc` — not the `nix develop --command bash -lc '... lake ...'` form above. Agent Bash
@@ -217,6 +236,29 @@ dependencies are **known current**, that same command is a safe elaboration chec
 existing imports and does not rebuild their closure. Confirm the imports are current (`--no-build`)
 before trusting it. **Never** use `--old` to satisfy a validation gate: it ignores transitive deps,
 which is exactly what the gate exists to check.
+
+**Restart progress needs trace-validated sentinels.** An existing olean may belong to an older
+import closure, Lake schedules independent branches in non-monotone filename order, and fresh runs
+may rediscover replay/build tasks with a different progress denominator. Therefore neither an
+olean's existence, a low/high generated-row number, nor `done/total` proves that a module was landed
+by the current build. Before changing `LEAN_NUM_THREADS` or otherwise restarting a large build:
+
+1. stop the one owning Lake process gracefully and confirm its children exited;
+2. choose several modules that the just-stopped run explicitly printed as `Built`;
+3. run `lean/scripts/lean-restart-guard.py checkpoint /home/<checkpoint> <sentinels...>` — it uses
+   `lake build --no-build` and hashes each sentinel's `.olean`, `.olean.hash`, `.ilean.hash`, and
+   `.trace`; and
+4. after the restart, retain the build output and use the script's `audit-log` command. If a
+   trace-validated sentinel appears as `Built`, stop and diagnose before allowing a broad rebuild.
+
+Use `verify` while Lake is stopped to replay the no-build probes and require byte-identical
+sidecars. The script is a restart guard, not a recovery archive; pair it with `lake pack` for an
+uncertain build. A controlled C143 restart verified that outputs produced with
+`LEAN_NUM_THREADS=2` and `=3` are mutually reusable; the worker count itself did not invalidate
+artifacts. The apparent rebuild was a pre-existing one-witness olean whose imported checker had
+changed, exposed by Lake's non-monotone scheduling. Agent PID namespaces may hide host processes,
+so the script's `pgrep` refusal supplements rather than replaces the required external
+PID/ancestry check.
 
 **Cross-lane build hygiene.** Prefer the narrowest leaf targets. Do not run an umbrella aggregate
 when its closure contains a foreign **dirty, stale, or concurrently owned** module — stable checked
