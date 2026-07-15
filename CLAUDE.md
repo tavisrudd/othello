@@ -191,6 +191,13 @@ finite certificate, use a definitions-only base, separately compiled bounded lea
 lightweight aggregator. Build the leaves serially to `.olean` before probing the aggregator; do not
 start with the umbrella target and assume tactic-level sharding will provide the same memory bound.
 
+When a finite certificate is executable but `decide` or `norm_num` gets stuck on an intentionally
+opaque operation, do not unfold the opaque implementation separately in every case. Introduce a
+small reducible evaluator backed by a proved finite table, prove one symbolic bridge to the original
+definition, and reflect the whole finite equality through the evaluator. In the Q11 projective
+action, replacing opaque `ZMod` inversion by a proved 11-entry inverse table reduced a nonidentity
+133-point row from more than 12 minutes to about 8 seconds while keeping the proof kernel-checked.
+
 The OOM wrappers in `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash` exist only in the
 user's **interactive** shell, and their `nix` wrapper matches only `nix develop --command
 lake|lean|leanc` — not the `nix develop --command bash -lc '... lake ...'` form above. Agent Bash

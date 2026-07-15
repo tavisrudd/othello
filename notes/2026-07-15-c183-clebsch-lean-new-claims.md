@@ -4,8 +4,9 @@
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
 **Status**: **IN PROGRESS** — the C174 spine, C176 finite core, q=4/q=5/q=9 leaves, C185 decoding
 synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
-narrow elaboration and axiom audit. Remaining work is the A₅ action certificate, C180's odd-field
-line lemma, and the manuscript synthesis.
+narrow elaboration and axiom audit. C186's finite A₅ point-action bridge also passes its full
+serial build, freshness, generator, and standard-axiom gates. Remaining work is C180's odd-field
+line lemma, C186's conceptual/source argument, and the manuscript synthesis.
 
 ## Live subagent roster
 
@@ -17,7 +18,7 @@ compaction and are the recovery handles for `collaboration.list_agents`/`followu
 | `/root/decoding_lean_static` | C185 synthesis | no Lean or Lake invocation; root validates | complete; `Q11DecodingSynthesis.lean` passes narrow elaboration and standard-axiom audit |
 | `/root/dye_interface_design` | exact imported Dye boundary | design only; root implements and validates | complete; two q=11 axioms only, with downstream dependency split audited |
 | `/root/six_arc_defect_bridge` | actual geometric `u+c=22` bridge | no Lean or Lake invocation; root validates | complete; bridge passes with standard axioms and no Dye dependency |
-| `/root/a5_lean_static` | C186 finite `A5` point-action bridge | no Lean or Lake invocation; root validates | active repair after the row-sharded pass exposed reducibility failures without an OOM |
+| `/root/a5_lean_static` | C186 finite `A5` point-action bridge | no Lean or Lake invocation; root validates | complete; 113-module leaf split, aggregator, freshness probe, generator replay, and standard-axiom audit pass |
 | `/root/small_k_geometric_adapter` | C187 actual projective moment seam | no Lean or Lake invocation; root validates | complete; all six manuscript-facing results pass warning-clean with standard axioms |
 
 Root owns integration, the Dye axiom interface and consequences, validation sequencing, and
@@ -48,6 +49,9 @@ The same strict-kernel verdict now holds for:
   four-arc conclusion, five-arc impossibility, and q=11/q=13 seven-arc spectra;
 - `Q11DecodingSynthesis.lean`: the total distance oracle, uniform twenty deep-hole supports,
   ambiguity strata, and Brianchon/weight-two bridge; and
+- `Q11A5PointOrbits.lean` and its bounded leaves: the 60-element projective point action, orbit
+  partition and uniqueness, order-five fixed union, Brianchon orbit, and triple-point invariance;
+  and
 - `SixArcDefectBridge.lean`: the actual projective-plane identity
   `|U(A)| + |brianchonPoints(A)| = 22` for every q=11 six-arc.
 
@@ -71,11 +75,11 @@ alternative, not a formalization of Dye's conceptual proof.
 
 ## Remaining sequence
 
-1. finish the memory-bounded A₅ action certificate and certify C186 point-orbit facts plus the
-   remaining chirality action layer;
+1. use the certified C186 point-action bridge for the remaining chirality action layer and write
+   the conceptual/source argument;
 2. formalize C180's affine-direction/edge-colouring line lemma; the conditional conic-rigidity
    implication below Dye is already kernel-checked;
-4. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
+3. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
    is stable.
 
 ## Exit gate

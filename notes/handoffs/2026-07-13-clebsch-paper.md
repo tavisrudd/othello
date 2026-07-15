@@ -43,8 +43,9 @@ a decision, not an artifact of which paper finishes first.
 **Status**: **MAJOR REVISION — INTERNAL REPAIRS LANDED; EXTERNAL GATES OPEN.** C128, C146, and
 C163–C173 have repaired the mathematics, terminology, prior-art framing, reproducibility,
 quantitative gaps, unconditional q=11 theorem, and manuscript scope. The draft builds warning-free
-with one rigidity spine. C185's finite synthesis and C187's arithmetic layer now pass Lean; C184's
-manuscript disposition, C187's geometric adapter, and the A₅ action tail remain open. The proved
+with one rigidity spine. C185's finite synthesis, C187's arithmetic and geometric layers, and
+C186's finite A₅ action bridge now pass Lean; C184's manuscript disposition and C186's conceptual
+source argument remain open. The proved
 q=11 defect bridge plus a two-axiom Dye interface now kernel-check the conic-rigidity implication;
 C187's actual projective small-`k` mathematics is also complete in Lean.
 It is not submission-ready until C153
@@ -80,15 +81,15 @@ append-only; promote scoped findings to C items rather than routing work directl
 | 3d | **C180 — PROOF FOUND; SOURCE GATE OPEN** | an odd-characteristic edge-colouring lemma bounds every line by six uncovered points and closes the degenerate line-pair case once Dye's `c<=10` equality theorem is licensed over `F_11` | verify Dye 1991 p.275 field/descent hypotheses, then integrate the conceptual proof → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
 | 3e | **C181 — REPORTED** | the universal `c<=15` matching bound reduces all characteristics to `q=4,5,9,11`; the first two are excluded geometrically and the q=9 internal graph is Sylvester with published `eq_2=5`, independently checked from scratch | closed; manuscript now uses the conceptual proof and retains both exact checkers as verification → [C181 report](../2026-07-15-c181-classification-free-why11.md) |
 | 3f | **C182 — QUEUED; EXTERNAL ARCHIVE GATE** | all cited computations are indexed and manifested locally, but the PDF gives no immutable public artifact location | after C168 clean-HEAD closeout, publish/replay a versioned archive and cite its DOI in a data/code-availability paragraph → [C182 report](../2026-07-15-c182-clebsch-artifact-archive.md) |
-| 3g | **C183 — IN PROGRESS** | decoding synthesis, actual small-`k` projective mathematics, `u+c=22`, and the explicit two-axiom Dye consequences pass narrow elaboration and axiom audit | finish the leaf-split A₅ action certificate and C180's odd-field line lemma → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
+| 3g | **C183 — IN PROGRESS** | decoding synthesis, actual small-`k` projective mathematics, `u+c=22`, the explicit two-axiom Dye consequences, and the leaf-split A₅ point action pass their Lean gates | finish C180's odd-field line lemma and the remaining manuscript synthesis → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
 | 3h | **C184 — CHECKERS COMPLETE; DISPOSITION OPEN** | the tracked checker and Singular replay certify the complete low-degree table, unique cubic containment, and exact C02/C04/C12 companions | decide a concise manuscript disposition; Lean only what survives that decision → [C184 report](../2026-07-15-c184-low-degree-uncovered-loci.md) |
 | 3i | **C185 — CHECKER/FINITE LEAN COMPLETE; MANUSCRIPT OPEN** | the total oracle, ambiguity enumerator, uniform twenty-support theorem, and Brianchon bridge pass strict-kernel audit; monomial-equivariant chirality remains with the action layer | integrate the fixed-code corollaries and finish the action-dependent claims under C186 → [C185 report](../2026-07-15-c185-clebsch-decoding.md) |
-| 3j | **C186 — FINITE BRIDGE REFACTORING; CONCEPTUAL PROOF OPEN** | two monolithic passes OOMed at 17.5 GiB; the row-sharded pass avoided OOM and exposed ordinary reducibility errors now under repair | finish the bounded certificate, then write/source the representation-theoretic proof → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
+| 3j | **C186 — FINITE LEAN BRIDGE COMPLETE; CONCEPTUAL/SOURCE GATE OPEN** | all 60 action leaves, representative and fixed-point leaves, and the lightweight aggregator pass serial build, freshness, generator, and standard-axiom gates | write/source the representation-theoretic proof and integrate its Brianchon/triple-point consequences → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
 | 3k | **C187 — CHECKER/LEAN MATHEMATICS COMPLETE; PRIORITY/MANUSCRIPT OPEN** | the hardened checker plus `SmallKChordMoments.lean` and `SmallKGeometricBridge.lean` cover the finite, arithmetic, and actual projective layers | literature-check `(4,5)` and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
 
-C183's live report contains the compaction-safe subagent roster. The only active subagent is the
-static repair of C186's finite `A5` point-action bridge. Root owns integration, the Dye axiom/source
-audit, all validation, and uses `choom -n 500` for current Clebsch Lean work.
+C183's live report contains the compaction-safe subagent roster. Its delegated finite Lean tasks
+are complete. Root owns integration, the Dye axiom/source audit, all validation, and uses
+`choom -n 500` for current Clebsch Lean work.
 | 4 | **C165 — REPORTED** | 42-per-vertex/252-neighbour theorem, both histograms, no-conic result, and distance-zero global counterexample are tracked and cited | closed → [C165 report](../2026-07-14-c165-clebsch-gap-theorem.md) |
 | 5 | **C166 + C170 — REPORTED** | unconditional q≤14 exact census leaves q=11 alone; old q=9 conjugacy claim removed | closed → [C166 scope audit](../2026-07-14-c166-clebsch-why11.md), [C170 theorem](../2026-07-14-c170-unconditional-q11-uniqueness.md) |
 | 6 | **C128 + C167 — REPORTED** | exact syzygy certified; unsupported group provenance isolated; Klein/Further remarks removed; C174 seam landed | closed → [C128](../2026-07-14-c128-icosahedral-syzygy.md), [C167](../2026-07-14-c167-clebsch-manuscript-scope.md) |
@@ -125,11 +126,12 @@ The sharp global nearest-conic gap and local move-orbit decomposition are in
 - ✅ **Klein syzygy DONE** — `Q11KleinSyzygy.lean` proves the exact integer identity, canonical
   mod-11 reductions, and reduced syzygy; standard axioms, no `native_decide`. It deliberately does
   not certify the removed group/resolvent/diagonal claims.
-- ✅ **C174/C176 and small-field finite spine DONE** — narrow elaboration and axiom audit pass for
+- ✅ **C174/C176, small-field finite spine, and C186 point action DONE** — narrow elaboration and
+  axiom audit pass for
   `ClebschChordDefect.lean`, `Q11BrianchonPetersen.lean`, `ClebschSmallFields.lean`,
-  `Q5SixArcExclusion.lean`, and `Q9Sylvester.lean`; all expose only the standard axioms recorded in
-  C183. `Q11DecodingSynthesis.lean`, `Q11A5PointOrbits.lean`, and `SmallKChordMoments.lean` are
-  drafted but unelaborated and are not counted as certified.
+  `Q5SixArcExclusion.lean`, `Q9Sylvester.lean`, and the leaf-split `Q11A5PointOrbits.lean`; all
+  expose only the standard axioms recorded in C183. `Q11DecodingSynthesis.lean` and
+  `SmallKChordMoments.lean` are also certified.
 - ⏳ **Chirality ℤ/2 — NEXT, needs new infra:** no A₅-on-columns action exists in Lean; must derive the
   60 column permutations (Fin 6) from Stab(arc)⊂PGL(3,11) — the 60 matrices are in
   `papers/clebsch-hexagon-code/check_ten_arc_foil.py` — then act on the 20 triples and `decide` the two

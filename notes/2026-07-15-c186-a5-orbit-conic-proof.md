@@ -2,7 +2,16 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **QUEUED** — orbit data replayed; conceptual derivation remains.
+**Status**: **FINITE LEAN BRIDGE COMPLETE; CONCEPTUAL DERIVATION OPEN.** The strict-kernel
+certificate is physically split into bounded modules: definitions and arithmetic, twelve matrix
+leaves, twelve support leaves plus summary, sixty one-group action leaves plus twelve row
+aggregators, seven representative-orbit cases, and seven fixed-point membership leaves. Ordinary
+`decide` works through a proved eleven-entry evaluator for `ZMod` inversion and symbolic bridges
+back to the original projective action. All 113 source modules, including the lightweight
+`Q11A5PointOrbits` aggregator, pass the serial leaves-first build; `lake build --no-build` reports
+the target up to date, the generator check passes, and the exported axiom audit contains only the
+standard axioms. The remaining C186 work is the sourced representation/order-five argument and
+its Brianchon/triple-point integration.
 
 ## Target argument
 
@@ -20,5 +29,7 @@ did. The existing 133-point enumeration remains an independent verification.
 - prove the representation/order-five fixed-point calculation with exact hypotheses;
 - derive rather than assume the relevant orbit uniqueness;
 - verify the Brianchon ten-set is invariant and contained in the triple-point set; and
-- add a strict-kernel finite action certificate where the conceptual group argument still needs a
-  finite bridge.
+- retain the completed strict-kernel action certificate as an independent finite bridge.
+
+The completed build gate was serial leaves-first at `choom -n 500`, followed by the lightweight
+aggregator, no-build freshness probe, generator replay, and exported axiom audit.
