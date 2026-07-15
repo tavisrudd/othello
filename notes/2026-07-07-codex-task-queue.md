@@ -122,10 +122,10 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   (*a 6-subset of the conic in PG(2,11) is a hexad of S(5,6,12) iff no three of its chords are
   concurrent off it*): literature verdict ABSENT at full-text level, and the E_q healthy-census and
   hexad scripts are promoted, hash-matched, and re-run →
-  `notes/2026-07-14-c147-hexad-polarity-characterization.md`. Open tail: the verifier Steiner-checks
-  only one of the two S(5,6,12) systems, so the headline claim's second half rests on an
-  unreproduced computation; and the result needs a proof, an explanation of the missing t=61, and
-  the q=23 octad analogue before it is claimable.
+  `notes/2026-07-14-c147-hexad-polarity-characterization.md`. The claim is fully machine-checked
+  (both systems Steiner-verified, swapped by every outer map, t=60 stratum = their union exactly,
+  gap at 61). Open tail is mathematics, not verification: a proof, an explanation of the missing
+  t=61, and the q=23 octad analogue before it is claimable.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

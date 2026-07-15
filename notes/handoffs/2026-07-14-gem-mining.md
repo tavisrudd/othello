@@ -135,10 +135,12 @@ numbers (hashes in `2026-07-14-c147-hexad-polarity-characterization.md`). The ce
 three independent points: the repo's own `check_q19_nonexample.py` (|U|=140), BSW's published q=7 and
 q=11 extremal sizes, and Edge's 22 = 1320/60 hexagon count against the stabilizer-60 claim.
 
-**The hexad verifier does not close the headline claim**: it Steiner-verifies one S(5,6,12) system
-and confirms its hexads sit at t=60, but never checks that the other 132 subsets at t=60 form the
-second system. See the C147 report. The pencil bounds, the degenerate-conic impossibility, and the
-torus-clique collinearity are reasoned, not machine-checked.
+**The hexad claim is fully machine-checked** by `notes/2026-07-14-c147-hexad-characterization.py`:
+both S(5,6,12) systems built and Steiner-verified, disjoint, swapped by every one of the 660 outer
+maps, and the t=60 stratum equals their union exactly (264 = 132+132) with the gap at 61 confirmed.
+The two-system form is forced — a polarity-defined invariant cannot separate systems that PGL₂(11)
+exchanges — so it is a coherence check, not a weakness. The pencil bounds, the degenerate-conic
+impossibility, and the torus-clique collinearity remain reasoned, not machine-checked.
 
 **Companion log**: append dated riffs to `done/2026-07-14-gem-mining-archive.md` (create on first
 archive).

@@ -3,8 +3,8 @@
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-14
 **Status**: REPORTED. Scripts promoted and re-run; literature verdict settled as ABSENT at
-full-text level. One verification gap in the headline claim is open and recorded below — it is new
-work, not part of this task.
+full-text level; the headline claim is fully machine-checked. What remains before it is claimable is
+mathematics, not verification: a proof, an explanation of the spectrum gap, and the octad analogue.
 
 ## The claim
 
@@ -72,27 +72,43 @@ Re-run on promotion (primes 3–19; the full sweep to 37 takes minutes):
   Steiner property verified; every hexad has `t = 60`; non-hexads split `{60: 132, 62: 330, 63: 220,
   64: 110}`. Total at `t = 60` is 264; `t = 61` never occurs.
 
-## Open verification gap (new work, not C147)
+## The claim is fully machine-checked
 
-**The verifier does not close the headline claim.** It builds *one* Steiner system and confirms all
-of its hexads sit at `t = 60`. It also shows 132 **non**-hexads at `t = 60` — the second system on
-P¹(F₁₁) — but it never checks that those 132 form a Steiner system. The strategy note's assertion
-that both systems are Steiner, disjoint, and swapped by `PGL₂(11) ∖ PSL₂(11)` rests on an inline
-orbit check that was never part of the script and is lost. So what is machine-checked today is:
+`notes/2026-07-14-c147-hexad-characterization.py` — a standalone verifier of the whole statement,
+written rather than patched into `mathieu-poles.py` so the census artifacts keep their hash
+correspondence. Every assertion below is an `assert`; the script exits nonzero on any failure.
 
-- every hexad of the seeded system has `t = 60`;
-- exactly 264 of the 924 subsets have `t = 60`, and 61 never occurs.
+```
+python3 notes/2026-07-14-c147-hexad-characterization.py
+```
 
-What is **not** machine-checked: that the remaining 132 are the second system. Until that is
-restored, the claim is properly stated as *"`t = 60` iff the subset is a hexad of one of the two
-S(5,6,12) systems"*, with the second half resting on an unreproduced computation. Cheapest fix: add
-the second-orbit construction and Steiner check to the script — deliberately not done here, because
-editing the script would break the hash correspondence to the census artifacts.
+| check | result |
+|-------|--------|
+| PSL(2,11) and the PGL∖PSL coset | 660 maps each |
+| System 1 = PSL-orbit of `{0,1,3,4,5,9}` | 132 blocks, Steiner **verified** |
+| System 2 = image of system 1 under `t ↦ t/2` (det a non-residue) | 132 blocks, Steiner **verified** |
+| System 2 is a single PSL-orbit | **checked**, not assumed from normality |
+| The two systems are distinct and disjoint | `\|sys1 ∪ sys2\| = 264 = 132 + 132` |
+| The outer coset swaps them | **checked** — and all 660 outer maps carry sys1 → sys2 |
+| Null `t ≥ 60` | holds, min = 60 |
+| Spectrum over all 924 subsets | `{60: 264, 62: 330, 63: 220, 64: 110}` |
+| Gap at 61 | holds — 61 never occurs |
+| **`t = 60` stratum = sys1 ∪ sys2, exactly** | **verified** |
+
+**The two-system form is forced, not a weakness.** The condition "no three chords concurrent off H"
+is defined by conic polarity and so is invariant under the full stabilizer of the conic, `PGL₂(11)`.
+Since `PGL₂(11)` swaps the two S(5,6,12) systems (verified above for all 660 outer maps), no
+polarity-defined invariant can distinguish them. A characterization that returned only one system
+would be evidence of a bug. The correct statement is therefore *"iff H is a hexad of one of the two
+S(5,6,12) systems on P¹(F₁₁)"*, and its inability to separate them is a coherence check that passes.
+
+This also re-derives, from a second code path, the chirality motif the vet found in Edge §§29/32
+(two systems exchanged exactly by the non-PSL operations) — the same ℤ/2 that the `clebsch` paper's
+Prop 5.1 carries on the leader side.
 
 ## Remaining work before this is claimable
 
-1. Restore the second-system check (above).
-2. **A proof.** This is a 924-case verification, and the appeal of the statement is that it is
+1. **A proof.** This is a 924-case verification, and the appeal of the statement is that it is
    synthetic. A referee will ask.
 3. **Explain the missing 61.** One accidental concurrence being impossible means concurrences are
    forced to arrive in pairs. That reason is probably the content.
