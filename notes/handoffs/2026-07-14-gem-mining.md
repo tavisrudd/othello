@@ -123,8 +123,15 @@ the two BSW originals remain unread.
   6-subsets, stabilisers C₅/V₄/S₃/D₁₂ contributing 0/2/3/4, and **the hexads are the orbit whose
   stabiliser has odd order**. This explains the gap at 61 (no stabiliser has exactly one such
   involution) and re-derives the classical `{0} ∪ QR` seed as `{fixed point} ∪ {5-orbit}`,
-  66×2×2 = 264. Open: the converse rests on the four-orbit classification, which is a finite check,
-  not yet an argument — look for the PGL₂(q)-orbit classification on 6-subsets in the literature.
+  66×2×2 = 264. **The four-orbit classification is published** — Cameron–Omidi–Tayfeh-Rezaie,
+  "3-Designs from PGL(2,q)", *Electron. J. Combin.* 13 (2006) #R50, Thm 4, whose `g_k(H)` is our
+  invariant and whose hypothesis covers q=11, k=6; the substitution reproduces our table exactly
+  (`notes/2026-07-14-gem-lit-orbit-classification.md`). So the converse closes by citation plus a
+  short involution-content argument, and no 924-case enumeration survives in the proof. Cautions:
+  the S₃ oddity was a `D_n` notation clash and our table matches the classical list; **do not cite the
+  genus-2 literature for the table** (it classifies geometric automorphisms, ours are F₁₁-rational —
+  the 110-orbit is μ₆ geometrically and μ₆ ⊄ F₁₁); and CO-TR §8 needs p > 23, so it cannot support
+  the 132+132 PSL/PGL split.
   **The octad analogue at q=23 is DEAD** and the reduction explains why: the mechanism needs
   `|H| = 2×3`, so that a concurrent *triple* is a *perfect* matching. At `|H| = 8` a triple covers
   only 6 of 8 points, determines no involution, and there are 420 triples to avoid instead of 15

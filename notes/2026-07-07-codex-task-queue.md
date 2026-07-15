@@ -127,8 +127,9 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   (both systems Steiner-verified, swapped by every outer map, t=60 stratum = their union exactly,
   gap at 61). Proof structure found: t(H) = 60 + #{involutions stabilising H with no fixed point in
   it} (verified for all 924), PGL(2,11) has four orbits on 6-subsets, and the hexads are the orbit
-  whose stabiliser has odd order -- which also explains the gap at 61. Open: the converse rests on
-  the four-orbit classification, a finite check rather than an argument. The q=23 octad analogue is
+  whose stabiliser has odd order -- which also explains the gap at 61. The four-orbit classification
+  is published (Cameron-Omidi-Tayfeh-Rezaie, EJC 13 (2006) #R50, Thm 4; substitution reproduces our
+  table), so the converse closes by citation plus a short involution-content argument. The q=23 octad analogue is
   DEAD (min t=295 vs null 280) and the reduction says why -- it needs |H|=2x3 so that a concurrent
   triple is a perfect matching. Singular and note-sized, not a Mathieu tower.
 

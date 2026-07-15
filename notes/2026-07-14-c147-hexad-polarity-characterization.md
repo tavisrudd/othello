@@ -207,18 +207,55 @@ the 66 two-fixed-point involutions has 5 pairs and admits `C(5,3) = 10` invarian
 the 55 fixed-point-free ones has 6 pairs and admits `C(6,3) = 20`, giving `66·10 + 55·20 = 1760`; by
 orbit, `2·330 + 3·220 + 4·110 = 1760`. Agree.
 
-### What is still missing
+### The orbit classification is published — the converse closes by citation
 
-Steps 1–4 are a complete synthetic proof of the identity and need no computer. Step 6's forward
-direction (hexad ⟹ t = 60) needs only that PGL₂(11) is transitive on the 264 hexads with stabilizer
-C₅ — classical, and re-derived above from the `{fixed point} ∪ {5-orbit}` description.
+> P. J. Cameron, G. R. Omidi, B. Tayfeh-Rezaie, "3-Designs from PGL(2,q)", *Electron. J. Combin.*
+> **13** (2006), #R50.
 
-**The converse still rests on the orbit classification** — that there are exactly four orbits and the
-other three all contain an fpf involution. That is a finite check over four orbits rather than 924
-subsets, which is a real improvement, but it is not yet an argument. Two ways to close it: find the
-PGL₂(q)-orbit classification on 6-subsets of the projective line in the literature (it is the kind of
-thing that should be known, and was not searched), or prove directly that any 6-set with even-order
-stabilizer admits an fpf involution.
+Their Theorem 4 gives the PGL(2,q)-orbits on k-subsets **indexed by stabilizer type**, via Möbius
+inversion of `g_k(H)` = the number of k-subsets whose stabilizer is exactly `H`. That is our
+invariant, not merely an orbit count. Our case q = 11, k = 6 sits inside their hypothesis
+(`k ≢ 0, 1 mod p`). The table is not printed there — the paper reduces it to "the simple problem of
+substituting the appropriate values" — and the substitution reproduces our four orbits exactly:
+
+| stabilizer (their notation) | `u` | `g₆` | orbit |
+|-----------------------------|-----|------|-------|
+| C₅                          | 66  | 4    | 264   |
+| D₄ (class 2) = V₄           | 165 | 2    | 330   |
+| D₆ (class 1) = S₃           | 110 | 2    | 220   |
+| D₁₂ (class 2)               | 55  | 2    | 110   |
+
+with C₄ and C₆ excluded (`g₆ = 0` each), which is what pins the order-4 stabilizer as V₄ and the
+order-6 as S₃. Completeness is forced by `264 + 330 + 220 + 110 = 924 = C(12,6)`. Independently
+reproduced by brute force (`2026-07-14-c147-proof-structure.py`).
+
+**What the citation does not give** — the involution-content step, which stays ours. It is now short:
+5 is the only odd order among {5, 4, 6, 12}, so "odd stabilizer ⟺ 264-orbit" is immediate from the
+table, and CO-TR's Lemma 8 supplies the orbit profiles needed for the fixed-point-free refinement.
+
+So the proof is: steps 1–4 synthetic and computer-free; the orbit table by citation; the
+involution-content step a short argument. No 924-case enumeration survives.
+
+### Three cautions for the write-up
+
+1. **The S₃ discrepancy was a notation clash.** CO-TR write `D_n` for the dihedral group of *order*
+   n, so our {C₅, V₄, S₃, D₁₂} is their {C₅, D₄, D₆, D₁₂}. Reducing Shaska's char ≠ 2 full-Aut list
+   modulo the hyperelliptic involution gives {1, C₂, C₅, V₄, **S₃**, D₁₂, S₄, S₅} — S₃ is on the
+   classical list, as `D₁₂/⟨ι⟩`. Our table matches it exactly. Shaska's own paper switches conventions
+   between Lemma 1 and Remark 1; a footnote is warranted.
+2. **Do not cite the genus-2 literature for the table.** It classifies *geometric* automorphism
+   groups; ours are `F₁₁`-rational stabilizers. These coincide here by luck, not by principle — the
+   110-orbit's geometric model is `μ₆`, and `μ₆ ⊄ F₁₁` because `6 ∤ 10`. Cite CO-TR for the table;
+   keep genus-2 as interpretation only. (The rationality caution was real, and it is what kills this
+   route as authority.)
+3. **CO-TR §8 does not apply at p = 11** — its splitting argument requires `p > 23`. It cannot be
+   cited for the 132 + 132 PSL/PGL split of the hexads, which needs its own support.
+
+**The genus-2 reading survives as interpretation, and sharpens.** Shaska's Lemma 1 gives the reduced-C₅
+normal form as `Y² = X⁶ − X`; `y² = x⁵ − 1` is the same curve (`x ↦ 1/x`). Over F₁₁, `μ₅ = QR(11)`
+because `F₁₁*` is cyclic of order 10 — so `{0} ∪ μ₅` is literally the classical `{0} ∪ QR(11)` seed,
+and both models land in the 264-orbit with `|Stab| = 5`, verified. The hexads are the 6-sets of
+Weierstrass points of the genus-2 curve with an order-5 automorphism.
 
 ### Why q=23 fails: the reduction does not transfer, and that is the reason
 
