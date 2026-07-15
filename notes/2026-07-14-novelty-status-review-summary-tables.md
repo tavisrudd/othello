@@ -125,7 +125,17 @@ read. The census, the pencil bound, the Edge passage, the q=23 identity — each
 and each was wrong. That is precisely the failure the gem-mining method exists to prevent (declare
 the null, then compute), skipped at the moment it was needed.
 
-**The lane split is the signal.** Nine of fourteen table-3 rows are `clebsch`, and they cluster: the
-manuscript accumulated framing and priority claims nobody checked against the literature.
-`gem-mining` has five, four of them one session old — the expected price of a new lane's first
-sweep. `relconic` has zero rows, and that is not luck: `arcs` did the scholarship up front.
+**The lane split looks like a signal and mostly is not one.** Nine of fourteen table-3 rows are
+`clebsch` and five are `gem-mining`, which invites a story about a careless lane and a careful one.
+Check the dates before telling it: **the `clebsch` manuscript's first commit and the `gem-mining`
+lane's first commit are the same day as this review** (`4b6aa8e`, `5522332`). Nothing accumulated
+over time; there was no time. The manuscript was drafted, red-teamed, and swept inside one day, and
+the sweep was simply the last review in that chain rather than a belated discovery of old rot.
+
+The real difference is sequence, and it is about tasking, not lanes: **the `clebsch` draft was
+written before the literature sweeps existed and the hexad result after them.** A draft that has not
+yet had its sweep is not a careless draft; it is a draft at the stage before scholarship. What the
+table shows is the cost of writing before searching — which is a schedule choice, cheap to reverse,
+and says nothing about the lane that made it. `relconic`'s zero rows are the one durable point:
+`arcs` cited BSW and drew the exterior-set distinction before any of this, so the searching *can* be
+done first.
