@@ -46,12 +46,15 @@ finding, and it repeated across three independent sweeps.
 - **The hexad characterization is absent**, and Halbeisen–Hungerbühler (J. Geometry 2024) supply the
   reason it *could not* be classical: over ℝ, no-accidental-concurrency is **generic**, so the
   question is not well-posed until the conic is finite.
-- **The rigidity and gap headlines are unclaimed** in everything readable. **But the structural reason
-  first offered for this is false**: `U(A)` is *not* an object the tradition had no reason to compute —
-  it is classical Segre tangent-envelope theory (PGOFF §10.1, Cor. 10.3). The correct and stronger
-  statement is that the classical tools are **large-k tools whose hypotheses exclude us**: the tangent
-  envelope needs `k > q/2+1` (= 6.5 at q=11), Segre's extension bound needs `k > q − √q/4 + 25/16`
-  (≈ 11.73), and we have `k = 6`. An absence became a checkable statement about hypotheses.
+- **The rigidity and gap headlines are unclaimed** in everything readable. `U(A)` is *not* an unnoticed
+  object — it is classical Segre tangent-envelope theory (cite **Ball–Lavrauw arXiv:1908.10772
+  Thms 39–41**, not PGOFF, which has misprints here). But the classical tools are **large-k tools whose
+  hypotheses exclude us**: the odd-q gate is `|A| ≥ 2q/3+2` ≈ **9.34** (ten points at q=11), and Segre's
+  extension bound needs `k > q − √q/4 + 25/16` ≈ 11.73; we have `k = 6`. ⚠ `k > q/2+1` (= 6.5) is the
+  **q-even** gate and was misapplied here at first — the exclusion survives and *widens*.
+  **This is a non-collision certificate, not a significance certificate**: "beneath notice" holds
+  alongside "out of reach", since Sadeh's census has existed since 1984 and computing `|U|` per class
+  was always trivial. Machinery is not motive — the cubic-surface no-motive argument survives.
 
 ## 3. The unread ledger — every claim still conditioned on a source nobody has opened
 

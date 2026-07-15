@@ -188,16 +188,45 @@ in it (Blokhuis–Bruen; Segre/Thm 2.5; Ball–Blokhuis):
 
 **Claim (a) is already exactly that shape** and should be written as that sentence rather than as "the
 histogram has a hole". Same content; one reads as a theorem, the other as a curiosity. Highest-value
-change the sweep found.
+change the sweep found, and the vet confirms it — all three template instances verified verbatim.
 
-**⚠ G5 — this corrects the rigidity sweep, and then hands us something better.** `U(A)` is **not** a
-newly-noticed object: it is classical **Segre tangent-envelope theory** (PGOFF §10.1, Cor. 10.3) — a
-point extends a k-arc iff its pencil is a component of the tangent envelope, and that *is* `U(A)`. The
-rigidity sweep's "the tradition had no reason to compute `U(A)`" is **falsified**; do not repeat it.
-But the replacement is stronger, because it is checkable rather than an absence: **the classical tools
-are large-k tools whose hypotheses provably exclude us.** The tangent envelope needs `k > q/2 + 1`
-(= 6.5 at q=11) and Segre's extension bound needs `k > q − √q/4 + 25/16` (≈ 11.73); our `k = 6` fails
-both. That is why the tradition has the machinery and never pointed it here.
+**Refinement (vet):** anchor on the **minimum-side** precedents — Blokhuis–Bruen, and the Kakeya
+"gap in the spectrum … smallest examples" line — not on Problem (III) itself, which along with Thas's
+open problem (j) is a *maximum-side* question. Minimum-side matches claim (a)'s orientation exactly,
+and it is the cheapest defusal of the (j) hazard (a referee reading us as claiming progress on
+second-largest-complete-arc). Note the hazard arrives anyway via the published `m″(2,11) = 10` table,
+whether or not we adopt the language.
+
+**G5 — `U(A)` is classical machinery, and the defence is narrower than first written.** (Corrected by
+the [Fable vet](../2026-07-14-gap-theorem-vet-fable.md); the version landed here earlier contained a
+parity error and two overdrawn claims.)
+
+`U(A)` is **not** a newly-noticed object: a point extends a k-arc iff its pencil is a component of the
+**tangent envelope** — Segre's theory, and that *is* `U(A)`. **Cite Ball–Lavrauw
+[arXiv:1908.10772](https://arxiv.org/abs/1908.10772) Thms 39–41**, not PGOFF Cor. 10.3: open access,
+both parities, exact gates, Segre attribution — and De Boeck records that PGOFF's printed versions
+contain misprints here.
+
+**⚠ The threshold was wrong, at our parity.** `k > q/2 + 1` (= 6.5 at q=11) is the **q-even**
+theorem's gate. The correct **odd-q** gate is `|A| ≥ 2q/3 + 2` ≈ **9.34**, i.e. **ten points** at
+q=11 (Ball–Lavrauw Thm 40, planar case due to Segre). The exclusion of `k = 6` **survives and widens**
+— it fails by four points, not by half a point — so any "strikingly close" remark is **false at our
+parity and must not enter the tex**. Segre's extension bound `k > q − √q/4 + 25/16` (≈ 11.73) is
+**verified** (Thas notes verbatim; HS survey Table 2.3). One-line vacuity witness: at `k = 6` the
+envelope's class is 14 > 12 lines per pencil, so envelope membership constrains nothing.
+
+**What the defence is and is not.** It is a **non-collision certificate**: no classical theorem
+subsumes the gap statement, because their hypotheses provably exclude `k = 6`. It is **not** a
+significance certificate. "Beneath notice" is true *alongside* "out of reach" — Sadeh's census has
+existed since 1984 and computing `|U|` per class was always trivial, so the hypothesis gate explains
+why no *theorem* covers k=6, not why nobody *stated* the fact. **State both mechanisms in one
+calibrated sentence** (the arc-classification line had the census but no motive; the arc-extension
+line has the motive but its hypotheses exclude k=6) and hang significance where the manuscript
+already puts it: the coding reading and the rigidity theorem the gap protects.
+
+**And do not say the companion sweep is "falsified".** Machinery is not motive: its cubic-surface
+no-motive argument survives intact. The correction is that `U(A)` is not an unnoticed object, not that
+the tradition had a reason to look.
 
 **G3 — the Hirschfeld–Sadeh concession is settled, in our favour, and the ILL gate lifts for it.**
 Hirschfeld's *own* survey cites **Sadeh's thesis [189]** and **PGOFF §14.8** for the q=11 arc data, and
@@ -220,9 +249,10 @@ genre nearby or it reads as informal. Note Thas lists "second largest complete a
 **open problem**: good (the genre is live) and dangerous (a referee may think we claim progress on it
 — we do not).
 
-**Next unread target changed.** The highest-value one is now **PGOFF §10.1 + Cor. 10.3** — the likeliest
-hiding place for a `U(A)` statement, and if it reaches small `k` it undercuts the G5 defence. The ILL
-should name **§10.1 + Cor. 10.3, §14.8, Table 9.4** — three sections, not three chapters.
+**ILL targets (revised by the vet).** Ball–Lavrauw supersedes PGOFF as the *defence* citation, which
+**downgrades §10.1 from "could collapse the defence" to confirmatory**. **§14.8 — the q=11 arc census
+— reverts to the top target**, since that is what C131 actually needs. Name sections, not chapters:
+**§14.8, then §10.1 + Cor. 10.3, Table 9.4**.
 
 **Open obligations (surfaced by the 2026-07-14 adversarial review; previously recorded nowhere):**
 - **C146 — the Edge/BSW prior-art re-base. BLOCKS SUBMISSION.** See above.
