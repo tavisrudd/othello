@@ -19,7 +19,7 @@ adversarial vet (`2026-07-14-gem-program-vet.md`), and the C147 work
 | 3 | **Why q=23 cannot work** (needs \|H\| = 2×3, so a concurrent *triple* is a *perfect* matching) | `gem-mining` | Ours. Explains the octad negative structurally | Nothing — a paragraph, and it closes the family question |
 | 4 | **Deep holes = the conic** (the covering fact) | `relconic` owns; also `clebsch` | Ours. Absent from Edge and Van de Voorde, both read in full | The two BSW originals (ILL) — the negative is conditioned on them |
 | 5 | **"First deep-hole set = F_q-points of a named variety"** | `relconic` owns; `clebsch` demoted it to setup | Audited, survives | Reed–Muller deep holes marked NOT SEARCHED, not cleared |
-| 6 | **Rigidity theorem + gap theorem** | `clebsch` | **Audited by nothing.** No sweep has touched them | A real search. The largest unexamined claim we have |
+| 6 | **Rigidity theorem + gap theorem** | `clebsch` | **Audited 2026-07-14 — no collision found** ([sweep](2026-07-14-gem-lit-rigidity-gap.md)). Nobody characterises the hexagon by its extension points; nobody observes `U(A)` is a conic. **But the two most dangerous sources were unread**: Sadeh's thesis (not online) and Hirschfeld PGOFF Ch. 14 (403, in-copyright). So: "no collision in anything openable", not "verified novel" | The Sadeh/Hirschfeld ILL. Narrow the claim to the deep-hole side — **(iv)⟺(v) is likely classical** |
 | 7 | **Mixed-type ω_arc** (internal/external arc-cliques) | `gem-mining` | New territory — the literature is external-only and structurally cannot see it | Someone to care. Downgraded; lowest in lane |
 | 8 | **k=4 / twisted cubic healthy search** | `cubic` (when opened) | Open. No prior statement of the question found (light search) | Re-derive DMP's R=4 dictionary, then a Rust DFS at q=11, 13 |
 | 9 | **U-atlas with elliptic targets** | `gem-mining` | Open, untried. C132's genus-0 restriction was a fiat | One cell (q ≤ 11, all n) |
@@ -81,6 +81,7 @@ table. The pieces all existed; nobody wrote the sentence. A legitimate note, thi
 | 12 | `clebsch` | The **dual-variety conjecture** (C123) generalizes it | Dead five ways; ZWK subsumes and refutes it | Earlier red team |
 | 13 | `clebsch` | Klein reduction **causes** deep-holes-=-conic | False by our own C126 data. "Because" struck; demoted to discussion | Earlier red team |
 | 14 | `clebsch` | The 6-arc census and the \|U\| histogram are ours | Conceded outright to the arc-classification (Sadeh) school | Earlier audit |
+| 15 | `clebsch` | The whole rigidity TFAE is ours | **(iv)⟺(v)** — "PGL-equivalent to the Clebsch hexagon ⟺ stabilizer contains A₅" — is very likely classical: the q=11 "Diagonal" surface with \|G\|=120 is in Karaoglu's Table 5.1, credited to Sadeh. Claim priority on the **deep-hole side only**: (i)/(ii)/(iii) ⟺ (iv)/(v) | Rigidity/gap sweep |
 
 **Rows that span lanes**, pegged to whoever owns the deliverable:
 
