@@ -9,7 +9,7 @@ manifest, and submission remains gated on C156/C157/C169. C159 is seeded by Cleb
 q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch C187 and only its q5
 folklore/priority check remains.
 
-**Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191
+**Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191/C192
 reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
 `notes/2026-07-15-gem-discovery-track.md`, this handoff and its companion, and the `gem-mining` rows
 of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167), even when they
@@ -31,6 +31,14 @@ circular calibration gate resting on a misreport of an in-repo record, caught on
 review. Fluency is not evidence, and self-review does not catch this class. Nothing gap-mined is
 load-bearing, citable, or promotable to a manuscript before its vet.
 
+**The user launches the vet; a mining session never does.** Do not spawn a vet agent, do not
+commission one, and do not self-vet. Independence means independence from the mining session's
+*framing* — a vet whose prompt the mine wrote inherits the blind spots it exists to catch — and the
+stronger models are a metered, expensive resource the user allocates explicitly. **This lane's
+working role is to find**: mine cells, run the kill order, run the searches, write the report, mark
+it provisional, stop. Leaving output at the gate is the job done right, not a loose end; "awaiting
+vet" is a status to report, never a task to pick up.
+
 ## Adversarial takeover map (2026-07-14)
 
 Full cross-lane issue ledger: [Clebsch + gem takeover audit](../2026-07-14-clebsch-gem-adversarial-takeover.md).
@@ -45,7 +53,8 @@ Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsc
 | **C159** | queued, independent | consume C184's complete q11 six-arc degree/rank table; begin with the missing q<=11 atlas cells, not a q11 six-arc rerun |
 | **C160** | priority residue only | C187 settles the q5 frame/conic calculation; check Edge/frame folklore and coding tables |
 | **C190** | reported | Clebsch-to-gem ownership and citation seams fixed → [report](../2026-07-15-c190-gem-clebsch-routing.md) |
-| **C191** | reported, **provisional — awaiting vet** | gap-mining backfill: the method survives its own history, in-sample only, so its power was falsification not validation; next are the vet, the non-circular instrument calibration, and C177 as the first prospective cell → [report](../2026-07-15-c191-gap-mining-backfill.md) |
+| **C191** | reported, **provisional — verdict contested, vet gate open (user-launched)** | gap-mining backfill → [report](../2026-07-15-c191-gap-mining-backfill.md); its verdict is now contested by its own two follow-ups. **Calibration** → [report](../2026-07-15-c191-instrument-calibration.md): three indexes disagree (7/3/7, union 8) so object-level closure stays a lead not a reading; three of Edge 1956's seven citers are self-citations (four independent in thirty-two years, none after 1988); the instrument's error mode biases toward the emptiness it was used to confirm. **Completeness hunt** → [report](../2026-07-15-c191-completeness-hunt.md): **found a falsifier** — C179's 2006–2016 conic/LDPC coding lineage refutes cell 1's "empty seam", cell 4's object is itself from one of those coding papers, and C179 sat in the same commit as the C178 the backfill did score. The founding cell's seam factor and cause class both need re-scoring; the vet rules. Remaining find-work: C177 as the first prospective cell |
+| **C192** | **closed — not a find** | first cell mined off the C179 coding far side. The 22 hexagons are 1-factors of K₁₂ on the conic's 12 points and each system of 11 is a 1-factorization (verified, both conics; **not** perfect — 0/55, so not GK₁₂). The two systems' 11×11 incidence is the Paley-biplane complement, \|Aut\|=660. **Killed by its own gate**: Edge 1956 §32 states the same structure as a symmetrical (6,6)/(5,5) correspondence and points at Klein 1879; we added λ and a modern name. The K₁₂ phrasing is absent from Edge but absent≠novel. Cost: one cached read → [report](../2026-07-15-c192-hexagon-biplane.md) |
 | **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
 | **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
 | **C177** | queued, independent | test whether local Mathieu systems on the point-regulus conics of `D_Hex(11)` glue to a `2-(1332,6,240)` or oriented `2-(1332,6,120)` design; not a C155 gate |

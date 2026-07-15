@@ -93,3 +93,68 @@ the true one has no name.
 **Status**: graduated → the bound-shape detector in
 [the method](2026-07-15-gems-theory-gaps-method.md) § Internal detectors. The gap itself remains
 unexplained and is the handoff's to own.
+
+### 2026-07-15 — zbMATH's `rf:` search reports every paper in mathematics as uncited
+
+**Provenance**: [C191 instrument calibration](2026-07-15-c191-instrument-calibration.py), zbMATH Open
+API leg.
+**Was I looking for this?**: no — the probe was after Edge 1956's citer list by a non-OpenAlex route.
+**Expectation violated**: that a citation query's empty result means "no citations". The background
+assumption was that the instrument fails *loudly*.
+**Observed**: zbMATH's `rf:` reference search keys on the **internal document id** (`rf:3121304`), not
+the Zbl code (`rf:0072.38102`). The Zbl-code form returns `404 / "Entry not found!" / "successful
+access. No results found."` — which reads exactly like a genuine empty result. Controlled against
+three known-cited seeds: `rf:<Zbl code>` 404s for all, while `an:<Zbl code>` returns 200. **An
+uncontrolled `rf:<Zbl code>` sweep reports a clean absence for every paper it is pointed at.**
+**Strongest question**: which other citation instruments fail silently-empty rather than loudly, and
+has any absence claim in this repo been built on one? — follow-on. **Cross-lane**: this is a tooling
+hazard for any lane running literature gates (`clebsch` C146/C167/C169, `relconic` C154,
+`repaircodes`), not a gem-mining finding. The mine does not write to other lanes; routing is the
+user's.
+**Status**: open lead. The general rule — control a citation instrument against a known-cited seed
+before believing an empty result — is recorded in
+[the method](2026-07-15-gems-theory-gaps-method.md) § Instruments.
+
+### 2026-07-15 — Edge 1956 was cited by four people who were not Edge, and by nobody after 1988
+
+**Provenance**: [C191 instrument calibration](2026-07-15-c191-instrument-calibration.py), all three
+index legs.
+**Was I looking for this?**: no — the probe was after the *venues* of Edge's citers, to test whether
+any was a coding venue. The author field came along for free.
+**Expectation violated**: that "seven indexed citers" described seven independent readers. Nobody had
+looked at who they were.
+**Observed**: three of the seven are **W. L. Edge citing himself** (Camb. Phil. Soc. 1963, Camb. Phil.
+Soc. 1975, J. Algebra 1985). The independent citers are at most four people across thirty-two years —
+Ostrom (1959, and among the eight authors of the 1962 *Monthly* section bundle), Raber (1975), Garner
+(1988), and Segre if an unverified Semantic Scholar stub holds. **The citation record stops at 1988 in
+every index.** zbMATH is starkest: of its three citers, two are self-citations, leaving one.
+**Strongest question**: the paper was near-orphaned in its *own* field, with its author the main
+custodian of its citation record — is that the actual shape of the founding cell's cause, rather than
+"invisible to coding"? — fold into current cell (it is now recorded in C191's cell 1 as s4+s2).
+**Cross-lane**: bears on `clebsch`'s C146 priority footnote, which argues Edge-vs-Dye priority. A
+paper with four independent citers and none after 1988 is a different rhetorical situation than a
+well-known one; the footnote may want the fact. Not routed — `clebsch`'s call.
+**Status**: open lead.
+
+### 2026-07-15 — a coding literature has been working our conic since 2006, and cites Edge nowhere
+
+**Provenance**: [C191 completeness hunt](2026-07-15-c191-completeness-hunt.md), reading
+[C179](2026-07-15-c179-conic-ldpc-literature.md) (a `clebsch` report) against C191's cell 1.
+**Was I looking for this?**: no — the hunt was after *omitted cells* in the backfill's sample, a
+bookkeeping question. It surfaced a live far side instead.
+**Expectation violated**: that the finite-geometry↔coding seam around this conic was empty, which is
+what the backfill and the method both asserted.
+**Observed**: Droms–Mellinger–Meyer (2006), Sin–Wu–Xiang (2011), Madison–Wu (2012), Wu (2013),
+Madison–Wu (2016) fix the same conic in `PG(2,q)`, use the same internal/conic/external point split
+and passant/tangent/secant line split, and exploit the same `PGL(2,q)`/`PSL(2,q)` polarity. They build
+**binary incidence null-space codes on whole point classes**; we build an `F_11` MDS code on a
+six-point arc. They reach the conic from LDPC and cite Edge nowhere, so citer closure on Edge is blind
+to them by construction.
+**Strongest question**: this is an *earned dictionary with a question list attached*, aimed at our
+object, with a nameable keying cause for why it never arrived — the best-shaped gap generator the lane
+has. Edge's 22 hexagons partition the 66 external points into two systems of 11, every external point
+on exactly 2 [in-repo L4, Edge §§29–32] — i.e. a binary parity-check matrix on the same 66 coordinates
+Madison–Wu use, column weight 2, row weight 6. **Nobody has written Edge's hexagons down as a code.**
+— follow-on, and the lane's next find-work.
+**Status**: open lead. The correction it forced in C191 and the method is a *result* and lives there;
+this entry records the byproduct, which is the far side itself.

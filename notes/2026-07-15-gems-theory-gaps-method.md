@@ -2,8 +2,13 @@
 
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-15
-**Status**: backfilled and surviving its own history ([C191](2026-07-15-c191-gap-mining-backfill.md));
-the declared null is untested and awaits C177 as the first prospective cell.
+**Status**: backfilled ([C191](2026-07-15-c191-gap-mining-backfill.md)), and **it did not survive its
+own history**: the [completeness hunt](2026-07-15-c191-completeness-hunt.md) found the backfill's
+sample omitted [C179](2026-07-15-c179-conic-ldpc-literature.md), whose coding lineage on this conic
+falsifies the founding cell's empty-seam reading; the [calibration](2026-07-15-c191-instrument-calibration.md)
+found the instrument behind that reading biased toward producing it. The § Instruments lead and the
+founding cell's cause class are corrected below. The declared null is untested and awaits C177 as the
+first prospective cell.
 
 **Terminology.** A *theory gap* here is an un-asked question — a region of question-space nobody has
 entered. It has nothing to do with the **gap theorem** of C165/C171, which is a statement about conic
@@ -218,30 +223,52 @@ Mathieu-tower axis below is one — is not licensed, and takes the ladder like a
 
 ## Instruments — the static eval
 
-**Lead with object-level citation closure.** One query per seed object returns the seam edges, the
-near-miss candidate list, and open-access status — several of the method's needed quantities at once,
-in a sub-second call.
+**Lead with the far side's object taxonomy — not citation closure on our seed.** The quantity
+promotion needs is *does B's literature work on this object?* Source 4's census says exactly that
+("Census: B's object taxonomy"); ask it directly.
 
-**Category cross-listing is demoted; it is anti-correlated in this lane's regime.** Measured
-2026-07-15 [L2, metadata level]: `cat:math.CO AND cat:cs.IT` returns ≈1850 papers and
-`cat:math.AG AND cat:cs.IT` ≈327 — finite-geometry↔coding is one of the densest seams on the arXiv,
-so at category resolution the region containing the Clebsch hit reads **"dense — skip."** At object
-resolution the same cell is sharp: works citing Edge 1956 number seven indexed citers, not one in a
-coding venue, latest 1988 (Geometriae Dedicata, Camb. Phil. Soc., Archiv der Mathematik, J. Algebra,
-Annals of Discrete Mathematics, Amer. Math. Monthly). A dense field-pair seam is *why* the far side's
-question list exists at all, and says nothing about whether it ever touched `O`.
+**[Corrected 2026-07-15. This section previously led with object-level citer closure and claimed it
+"resolves the founding cell correctly". It does not — the claim is now measured false, and it is what
+produced the backfill's false empty-seam reading. Recorded rather than deleted: this is a lesson that
+grows back.]**
 
-**Calibrate the replacement before the ordering rests on it.** OpenAlex under-indexes mid-century
-citations, so an object-level closure on a classical seed can read empty for a real gap and for an
-indexing artifact alike — the same confirmatory-noise disease this method diagnoses in keyword search,
-relocated into its replacement.
+**Both resolutions failed the founding cell, in opposite directions.** Measured 2026-07-15 [L2,
+metadata level]: `cat:math.CO AND cat:cs.IT` returns ≈1850 papers and `cat:math.AG AND cat:cs.IT`
+≈327 — finite-geometry↔coding is one of the densest seams on the arXiv, so at **category** resolution
+the region containing the Clebsch hit reads **"dense — skip."** At **object** resolution, citer
+closure on Edge 1956 returns seven indexed citers — three of them Edge himself — not one in a coding
+venue, latest 1988, reading **"empty — promote."**
 
-**The calibration must be non-circular, and the obvious seed is not.** The vet's BSW 1992 citer
-enumeration is itself an OpenAlex live query [in-repo, vet §1.5 and its source list], so it cannot be
-ground truth for OpenAlex; and a 1992 seed does not probe mid-century under-indexing in any case. The
-at-risk seed is Edge 1956. Calibrate by a route that does not pass through OpenAlex — Edge 1956's
-citers from MathSciNet or zbMATH, diffed against the OpenAlex closure. Until that diff exists,
-object-level emptiness on a classical seed is a lead, not a reading.
+**Both are wrong, and the empty reading is wrong in the more dangerous direction.** A coding lineage
+has worked this exact conic since 2006 — Droms–Mellinger–Meyer, Sin–Wu–Xiang, Madison–Wu, Wu
+[[C179](2026-07-15-c179-conic-ldpc-literature.md), in-repo L3/L4] — sharing the conic, the
+internal/external split, and the polarity, swerving only at the coding object. It reaches the conic
+from LDPC and **cites Edge nowhere**, so a closure keyed on Edge cannot see it. The seam is populated
+and blind, not empty.
+
+**The general failure: a citer closure keyed on our seed is blind to far-side work that reaches the
+object by its own route.** That is not an edge case — it is the normal case whenever B has an
+independent way in, which is precisely the situation a transport triple describes. Citer emptiness on
+a classical seed measures *who cites the seed*; promotion needs *who works on the object*. The two
+come apart exactly where the near-misses live.
+
+**Citer closure keeps two narrower jobs**: open-access status, and the direction of a fame asymmetry
+*after* the taxonomy question is answered. It is not the seam measurement and it is not the near-miss
+list.
+
+**Calibration — done, and it does not rescue the instrument.**
+[The calibration](2026-07-15-c191-instrument-calibration.md) diffed Edge 1956's citers across
+OpenAlex, zbMATH Open, and Semantic Scholar by routes that do not pass through OpenAlex: **7 / 3 / 7
+against a union of 8, no index a superset**. The under-indexing is real, and its error mode is
+*missing citers* — biasing every reading toward emptier, the direction that confirms a fame-asymmetry
+cause. **An instrument whose failure mode manufactures the confirmation it is asked for cannot
+confirm.** Object-level emptiness on a classical seed is a lead, not a reading. MathSciNet is
+subscription-gated and remains unqueried.
+
+**Instrument trap, recorded.** zbMATH's `rf:` reference search keys on the **internal document id**,
+not the Zbl code; `rf:<Zbl code>` returns a 404 that reads exactly like a genuine "uncited". Control
+any citation instrument against a known-cited seed before believing an empty result — an uncontrolled
+`rf:<Zbl code>` reports every paper in mathematics as uncited.
 
 ## The rules
 
@@ -361,6 +388,8 @@ them change nobody's belief. These run *inside* promotion, before any gate is op
 | Seam emptiness read as proof | it is a prior; the leaf read is still mandatory                |
 | Tier read as cell trust      | validity is not virginity                                      |
 | Fluent self-review           | provisional until a stronger reasoning model vets it           |
+| **Self-commissioned vet**    | the user launches it; the mine never spawns its own reviewer   |
+| Sample picked by the miner   | hunt the cells the backfill missed, not more that confirm      |
 
 ## Trust boundary
 
@@ -374,6 +403,16 @@ the literature claims — the *reasoning over them* too: a named cause, a promot
 verdict, a ledger row, a claimed mechanism. None is load-bearing until a stronger reasoning model
 (Fable, or 5.6 Sol) has passed over it. Route the vet through this lane's own docs, per the
 containment rule in the handoff.
+
+**The vet is a separate stage, and the user launches it.** A mining session does not vet its own
+output, does not commission a vet, and does not spawn a vet agent. Two reasons, both binding:
+independence means independence from the mining session's *framing*, and a vet whose prompt the mine
+wrote inherits the blind spots it exists to catch; and the stronger models are a metered, expensive
+resource the user allocates explicitly, never a tool the mine reaches for when it feels uncertain.
+
+**The mining role is to find.** Mine cells, run the kill order, run the searches, write the report,
+mark it provisional, stop. Leaving output at the gate is the job done correctly rather than a loose
+end, and "awaiting vet" is a status to report, never a task to pick up.
 
 The rule is earned rather than precautionary, and this doc is the evidence. Its first draft was
 written with apparent care and its central claim was wrong; the Fable pass overturned it. The
@@ -416,33 +455,46 @@ works" from "we believed the ordering", and the ordering generalizes from a sing
 Backfilled 2026-07-15 by [C191](2026-07-15-c191-gap-mining-backfill.md), which holds the full scoring
 and the reasoning per cell. Rows below are the summary.
 
-| Cell `(O, D, q)`                        | Cause class | Cause as named          | Value        | Kill stage    | Gate cost      | Verdict          | Evidence     |
-|-----------------------------------------|-------------|-------------------------|--------------|---------------|----------------|------------------|--------------|
-| Clebsch hexagon / arcs↔MDS / deep holes | structural  | fame asymmetry (s4)     | pass         | survived      | six sweeps     | HIT              | L3/L4, gated |
-| conic 6-subsets / design / hexads?      | structural  | well-posedness (s1)+ s4 | partial      | survived      | six sweeps     | HIT, bridge-grade| L3/L4        |
-| mixed arc-cliques / internal / ω_arc    | structural  | definitional keying (s2)| **fail**     | n/a           | none           | novel, worthless | L2/L3        |
-| Wu conics / internal / passant six-set  | n/a         | n/a — object probe      | pass         | step 6        | none           | closed negative  | n/a          |
-| conic 8-subsets q=23 / design / octads? | n/a         | statement, not mechanism| fail         | step 6+rule 4 | none           | dead             | n/a          |
+| Cell `(O, D, q)`                           | Cause class | Cause as named           | Value    | Kill stage        | Gate cost  | Verdict                     | Evidence        |
+|--------------------------------------------|-------------|--------------------------|----------|-------------------|------------|-----------------------------|-----------------|
+| Clebsch hexagon / arcs↔MDS / deep holes    | structural  | s4 + s2 (**corrected**)  | pass     | survived          | six sweeps | HIT                         | L3/L4, gated    |
+| conic 6-subsets / design / hexads?         | structural  | well-posedness (s1)+ s4  | partial  | survived          | six sweeps | HIT, bridge-grade           | L3/L4           |
+| mixed arc-cliques / internal / ω_arc       | structural  | definitional keying (s2) | **fail** | n/a               | none       | novel, worthless            | L2/L3           |
+| Wu conics / internal / passant six-set     | n/a         | n/a — object probe       | pass     | step 6            | none       | closed negative             | n/a             |
+| conic 8-subsets q=23 / design / octads?    | n/a         | statement, not mechanism | fail     | step 6+rule 4     | none       | dead                        | n/a             |
+| Edge 22 hexagons / conic→LDPC / what code? | n/a         | n/a — far-side probe     | —        | step 2 — factored | none       | computed; novelty gate open | machine-checked |
 
-**The backfill is an in-sample fit, not a validation.** These cells shaped the method, so passing was
-close to guaranteed and carries little evidential weight. Its power was falsification — a mis-rank
-here would have killed the method — and the ordering survived it. Survived, not validated. **The
-declared null remains untested**; no retrospective batch can move it. The first genuine datum is C177,
-scored before it is run. Do not add retrospective cells: they inflate confidence without testing
-anything.
+**The backfill is an in-sample fit, not a validation — and it did not pass.** [Corrected 2026-07-15;
+it previously read "the ordering survived it. Survived, not validated."] These cells shaped the
+method, so passing carried little evidential weight either way. Its power was falsification — a
+mis-rank would kill the method — and **the mis-rank was there**: the founding cell's seam is scored
+empty and is populated, which the backfill could not see because it left the cell that shows it
+([C179](2026-07-15-c179-conic-ldpc-literature.md)) out of the sample.
+See the [completeness hunt](2026-07-15-c191-completeness-hunt.md), which also adds two retrodictions
+this ledger did not disclose. **The declared null remains untested**; no retrospective batch can move
+it. The first genuine datum is C177,
+scored before it is run. Do not add retrospective cells *to raise confidence* — they inflate it
+without testing anything. Cells the backfill **missed** are the exception and are wanted: the sample
+was picked by the same session that wrote the method, so a scoreable cell it passed over is the one
+place a mis-rank could still be hiding, and a mis-rank is falsification.
 
 ## First steps
 
-1. **Backfill — DONE**, [C191](2026-07-15-c191-gap-mining-backfill.md). The method survives its own
-   history: the revision promotes the founding hit and ranks the known-worthless cell last, while the
-   first draft assigned the Clebsch cell tier 1 by cause and tier 4 by seam *simultaneously*. Read
-   C191's verdict section before relying on that: it is an in-sample fit and its power was
-   falsification only.
-2. **Calibrate the instrument, non-circularly.** Diff Edge 1956's citers from MathSciNet or zbMATH
-   against the OpenAlex closure — a mid-century seed, by a route that does not pass through the
-   instrument under test. Do **not** use the vet's BSW 1992 list: it is an OpenAlex query itself, and
-   1992 is the wrong regime for the risk. Until the diff exists, no ordering claim rests on
-   object-level emptiness.
+1. **Backfill — DONE, and its verdict does not stand**
+   ([C191](2026-07-15-c191-gap-mining-backfill.md), corrected 2026-07-15). C191 concluded the revision
+   promotes the founding hit where the first draft does not. The first-draft half survives: it does
+   assign the Clebsch cell tier 1 by cause and tier 4 by seam *simultaneously*. The revision half does
+   not: it promotes the founding hit on a seam scored **empty**, and the seam is populated
+   ([completeness hunt](2026-07-15-c191-completeness-hunt.md)). Both drafts mis-measure the founding
+   cell's seam; the revision reaches the right answer by a wrong reading. **Whether the revision still
+   promotes with the seam scored as populated is unresolved** — the method does not quantify how seam
+   thinness trades against value, and that recomputation is the open item.
+2. **Calibrate the instrument — DONE**, [report](2026-07-15-c191-instrument-calibration.md). Edge
+   1956's citers across OpenAlex / zbMATH Open / Semantic Scholar: 7 / 3 / 7, union 8, no superset;
+   three of the seven are self-citations. The instrument under-indexes and its error mode biases
+   toward emptiness — see § Instruments. MathSciNet is subscription-gated and unqueried; the
+   Segre "On Galois Geometries" citation edge is an unverified stub and is the one lead that could
+   still move the union.
 3. **First live cell: C177**, already queued. A transport triple with a computable verdict
    (design-theoretic question, geometric object, glue-or-not answer). Running it through the full kill
    order makes it the ledger's first prospective datum at near-zero marginal cost.
@@ -463,6 +515,10 @@ anything.
 The first pass (backfill + calibration + C177) is task-shaped and takes a C-ID at allocation, pegged
 `gem-mining`. This doc stays infrastructure.
 
+**The vet is not a step on this list, by design.** It is a separate stage the user launches over
+whatever the mine has produced (§ Trust boundary). Mining sessions work this list and leave their
+output provisional; a session that finds itself planning a vet has misread its role.
+
 ## Overturned claims
 
 Recorded because this doc's first version was committed with them, and each is the kind of error that
@@ -477,8 +533,17 @@ grows back. Do not slip back to:
   vocabulary that is ours and days old. Rule 2 is now scoped to classical vocabulary, and the internal
   detectors are admitted on that ground.
 - **"Lead with arXiv category cross-listing."** Measured anti-correlated at cell level: the region
-  containing the founding hit reads "dense — skip". Object-level closure resolves the same cell
-  correctly at the same cost.
+  containing the founding hit reads "dense — skip".
+- **"Object-level citer closure resolves the same cell correctly at the same cost."** [Overturned
+  2026-07-15.] It does not. Citer closure on Edge 1956 reads the founding cell's seam as *empty*, and
+  the seam is populated — a coding lineage has worked this conic since 2006 and cites Edge nowhere
+  [[C179](2026-07-15-c179-conic-ldpc-literature.md)]. A closure keyed on our seed is blind to far-side
+  work that arrives by its own route. Lead with **B's object taxonomy** (source 4's own census); citer
+  closure measures who cites the seed, not who works on the object.
+- **"The founding hit lives in an empty seam, so an empty seam with a nameable cause is where the gem
+  was."** [Overturned 2026-07-15.] The premise is a mis-measurement — see the bullet above. The seam
+  was **populated and blind**, which is the source-2 signature, and the founding cell's cause is s4+s2
+  rather than s4 alone.
 - **"A real gap is unsearchable, so gap mining is not a searching exercise."** True for generic
   un-asked questions, false for transport triples — which are the only candidates this method
   produces, and which arrive with the far side's vocabulary attached. Search is a first-class kill
