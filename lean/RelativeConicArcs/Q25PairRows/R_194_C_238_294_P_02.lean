@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_194_238 : RowResult ⟨194, by decide⟩ ⟨238, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_194_239 : RowResult ⟨194, by decide⟩ ⟨239, by decide⟩ := by
   have _previous := row_194_238
@@ -18,11 +19,13 @@ theorem row_194_239 : RowResult ⟨194, by decide⟩ ⟨239, by decide⟩ := by
 
 theorem row_194_240 : RowResult ⟨194, by decide⟩ ⟨240, by decide⟩ := by
   have _previous := row_194_239
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_194_241 : RowResult ⟨194, by decide⟩ ⟨241, by decide⟩ := by
   have _previous := row_194_240
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_194_242 : RowResult ⟨194, by decide⟩ ⟨242, by decide⟩ := by
   have _previous := row_194_241
@@ -50,7 +53,8 @@ theorem row_194_245 : RowResult ⟨194, by decide⟩ ⟨245, by decide⟩ := by
 
 theorem row_194_246 : RowResult ⟨194, by decide⟩ ⟨246, by decide⟩ := by
   have _previous := row_194_245
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_194_247 : RowResult ⟨194, by decide⟩ ⟨247, by decide⟩ := by
   have _previous := row_194_246
@@ -66,7 +70,8 @@ theorem row_194_248 : RowResult ⟨194, by decide⟩ ⟨248, by decide⟩ := by
 
 theorem row_194_249 : RowResult ⟨194, by decide⟩ ⟨249, by decide⟩ := by
   have _previous := row_194_248
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨216, by decide⟩, by decide⟩
 
 theorem row_194_250 : RowResult ⟨194, by decide⟩ ⟨250, by decide⟩ := by
   have _previous := row_194_249

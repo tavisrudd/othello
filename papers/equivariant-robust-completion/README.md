@@ -3,16 +3,21 @@
 **Working title:** *Frobenius-equivariant pair extension of eight-arcs in `PG(2,25)`.*
 
 **Object:** the focused paper on the quantitative quadratic-Frobenius pair-extension criterion, its
-exact collision correction, and the uniform `PG(2,25)` eight-arc theorem. This is the canonical
+exact collision correction, five-profile lower envelope, and uniform `PG(2,25)` eight-arc theorem. This is the canonical
 paper directory; `baer-equivariant-extension` remains a source/staging view. The generic
 `completion-core-rigidity` package is reusable library material but is not part of this submission.
 
-**Formal status:** the quadratic pair-extension existence theorem, uniform `PG(2,25)` theorem,
-collision equality/excess classification, and semantic global pair count are kernel-checked. The
-end-to-end Lean theorem constructs a conjugate pair whose union with the invariant arc is again an
-arc. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh legal Frobenius pairs
+**Formal status:** the quadratic pair-extension existence theorem, uniform two-pair `PG(2,25)` theorem,
+exact five-profile first-order envelope, 318-alternate-repair theorem, collision equality/excess
+classification, and semantic global pair count are kernel-checked. The
+end-to-end Lean theorem constructs two distinct conjugate pairs whose separate unions with the
+invariant arc are arcs. `QuadraticGlobalCount.lean` defines the semantic global finset of fresh legal Frobenius pairs
 and kernel-checks its equality with the disjoint carrier union and `PairExtensionData.legalCount`.
-The five parity-allowed Q25 profiles are exhausted in Lean.
+The five parity-allowed Q25 profiles are exhausted in Lean. Every invariant eight-arc in
+`PG(2,25)` has at least two distinct legal conjugate pairs, so deleting any selected nonfixed orbit
+from an invariant ten-arc leaves at least one different legal orbit that repairs it.
+For every base order `s≥7`, the certified envelope gives at least 319 legal pairs for every
+invariant eight-arc and hence at least 318 alternate repairs after arbitrary selected-orbit deletion.
 
 **Publication status:** focused LaTeX submission source, bibliography, and PDF complete; bounded
 general-criterion priority search complete. The checked Q25 result has no proof-validity defect in
@@ -33,14 +38,17 @@ specialist-vocabulary/database search; this supports no historical-first claim.
 charge collisions; its subtraction-free linewise and aggregate forms are Lean-proved.
 The profile-independent cross-pair estimate `s+3-f-e` is also kernel-checked in
 `QuadraticInvisible.lean`; the theorem derives the necessary `e≥2` from the cross-pair witness.
-`Q25PairResult.f2_pair_extension` kernel-checks the full exceptional `f=2` existence statement,
-and the certificate-free `Q25ProfileFour.profile_four_pair_extension` kernel-checks `f=4`. The
-`f=2` statement explicitly
-makes both added conjugate points fresh and has passed a second adversarial proof audit. The
+`Q25PairResult.f2_two_pair_extension` kernel-checks two distinct legal pairs in the exceptional
+`f=2` profile, and the certificate-free `Q25ProfileFour.profile_four_pair_extension` kernel-checks
+`f=4`. The `f=2` statement explicitly makes both added conjugate pairs fresh. The
 external census size and observed minimum 32 remain computational evidence. The uniform `s≥5`
 claim does not depend on them: `Q25ProfileZero.profile_zero_pair_extension` kernel-checks `f=0`, and
 `Q25AllProfiles.pair_extension` proves the uniform order-five extension theorem; the generic
 criterion covers every `s≥7`, and there is no intervening prime-power base order.
+`AlternateOrbitRepairProfileEnvelopeResult.profileEnvelope_le_card_globalLegalPairs_of_card_eight`
+connects the five exact arithmetic profiles to the semantic legal-pair finset, and
+`three_hundred_eighteen_le_alternateLegalPairs_of_seven_le` proves the uniform repair bound. The
+profile-minimized envelope is a certified first-order lower bound, not an asserted attained minimum.
 The C135 declarations classify equality by universal visibility and collision-free charge, and
 classify every first-order excess level by invisible mass plus collision redundancy. In the
 quadratic instance, invisible mass is center/empty-carrier incidence. This is an algebraic inverse

@@ -26,15 +26,18 @@ theorem row_68_171 : RowResult ⟨68, by decide⟩ ⟨171, by decide⟩ := by
 
 theorem row_68_172 : RowResult ⟨68, by decide⟩ ⟨172, by decide⟩ := by
   have _previous := row_68_171
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_68_173 : RowResult ⟨68, by decide⟩ ⟨173, by decide⟩ := by
   have _previous := row_68_172
-  exact Or.inr ⟨orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_68_174 : RowResult ⟨68, by decide⟩ ⟨174, by decide⟩ := by
   have _previous := row_68_173
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_68_175 : RowResult ⟨68, by decide⟩ ⟨175, by decide⟩ := by
   have _previous := row_68_174
@@ -74,15 +77,18 @@ theorem row_68_180 : RowResult ⟨68, by decide⟩ ⟨180, by decide⟩ := by
 
 theorem row_68_181 : RowResult ⟨68, by decide⟩ ⟨181, by decide⟩ := by
   have _previous := row_68_180
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_68_182 : RowResult ⟨68, by decide⟩ ⟨182, by decide⟩ := by
   have _previous := row_68_181
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_68_183 : RowResult ⟨68, by decide⟩ ⟨183, by decide⟩ := by
   have _previous := row_68_182
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_68_184 : RowResult ⟨68, by decide⟩ ⟨184, by decide⟩ := by
   have _previous := row_68_183

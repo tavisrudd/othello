@@ -80,7 +80,8 @@ theorem row_144_156 : RowResult ⟨144, by decide⟩ ⟨156, by decide⟩ := by
 
 theorem row_144_157 : RowResult ⟨144, by decide⟩ ⟨157, by decide⟩ := by
   have _previous := row_144_156
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_144_158 : RowResult ⟨144, by decide⟩ ⟨158, by decide⟩ := by
   have _previous := row_144_157
@@ -90,23 +91,28 @@ theorem row_144_158 : RowResult ⟨144, by decide⟩ ⟨158, by decide⟩ := by
 
 theorem row_144_159 : RowResult ⟨144, by decide⟩ ⟨159, by decide⟩ := by
   have _previous := row_144_158
-  exact Or.inr ⟨orbitCodeOfNumber ⟨183, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_144_160 : RowResult ⟨144, by decide⟩ ⟨160, by decide⟩ := by
   have _previous := row_144_159
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_144_161 : RowResult ⟨144, by decide⟩ ⟨161, by decide⟩ := by
   have _previous := row_144_160
-  exact Or.inr ⟨orbitCodeOfNumber ⟨183, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_144_162 : RowResult ⟨144, by decide⟩ ⟨162, by decide⟩ := by
   have _previous := row_144_161
-  exact Or.inr ⟨orbitCodeOfNumber ⟨116, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_144_163 : RowResult ⟨144, by decide⟩ ⟨163, by decide⟩ := by
   have _previous := row_144_162
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_144_164 : RowResult ⟨144, by decide⟩ ⟨164, by decide⟩ := by
   have _previous := row_144_163

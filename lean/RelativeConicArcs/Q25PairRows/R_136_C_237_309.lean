@@ -38,11 +38,13 @@ theorem row_136_241 : RowResult ⟨136, by decide⟩ ⟨241, by decide⟩ := by
 
 theorem row_136_242 : RowResult ⟨136, by decide⟩ ⟨242, by decide⟩ := by
   have _previous := row_136_241
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_136_243 : RowResult ⟨136, by decide⟩ ⟨243, by decide⟩ := by
   have _previous := row_136_242
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_136_244 : RowResult ⟨136, by decide⟩ ⟨244, by decide⟩ := by
   have _previous := row_136_243
@@ -58,19 +60,23 @@ theorem row_136_245 : RowResult ⟨136, by decide⟩ ⟨245, by decide⟩ := by
 
 theorem row_136_246 : RowResult ⟨136, by decide⟩ ⟨246, by decide⟩ := by
   have _previous := row_136_245
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_136_247 : RowResult ⟨136, by decide⟩ ⟨247, by decide⟩ := by
   have _previous := row_136_246
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
 
 theorem row_136_248 : RowResult ⟨136, by decide⟩ ⟨248, by decide⟩ := by
   have _previous := row_136_247
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨37, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_136_249 : RowResult ⟨136, by decide⟩ ⟨249, by decide⟩ := by
   have _previous := row_136_248
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_136_250 : RowResult ⟨136, by decide⟩ ⟨250, by decide⟩ := by
   have _previous := row_136_249

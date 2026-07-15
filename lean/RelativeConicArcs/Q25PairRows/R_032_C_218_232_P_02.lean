@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_32_218 : RowResult ⟨32, by decide⟩ ⟨218, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_32_219 : RowResult ⟨32, by decide⟩ ⟨219, by decide⟩ := by
   have _previous := row_32_218
@@ -24,7 +25,8 @@ theorem row_32_220 : RowResult ⟨32, by decide⟩ ⟨220, by decide⟩ := by
 
 theorem row_32_221 : RowResult ⟨32, by decide⟩ ⟨221, by decide⟩ := by
   have _previous := row_32_220
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_32_222 : RowResult ⟨32, by decide⟩ ⟨222, by decide⟩ := by
   have _previous := row_32_221
@@ -34,11 +36,13 @@ theorem row_32_222 : RowResult ⟨32, by decide⟩ ⟨222, by decide⟩ := by
 
 theorem row_32_223 : RowResult ⟨32, by decide⟩ ⟨223, by decide⟩ := by
   have _previous := row_32_222
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨61, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_32_224 : RowResult ⟨32, by decide⟩ ⟨224, by decide⟩ := by
   have _previous := row_32_223
-  exact Or.inr ⟨orbitCodeOfNumber ⟨116, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_32_225 : RowResult ⟨32, by decide⟩ ⟨225, by decide⟩ := by
   have _previous := row_32_224
@@ -78,7 +82,8 @@ theorem row_32_230 : RowResult ⟨32, by decide⟩ ⟨230, by decide⟩ := by
 
 theorem row_32_231 : RowResult ⟨32, by decide⟩ ⟨231, by decide⟩ := by
   have _previous := row_32_230
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_32_232 : RowResult ⟨32, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_32_231

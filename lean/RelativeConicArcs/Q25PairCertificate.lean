@@ -137,6 +137,14 @@ instance (S : Finset Idx25) (o : OrbitCode) : Decidable (LegalPair S o) := by
   unfold LegalPair
   infer_instance
 
+/-- Two explicit orbit codes are distinct legal extensions of the same normalized configuration. -/
+def TwoLegalPairs (S : Finset Idx25) (q r : OrbitCode) : Prop :=
+  q ≠ r ∧ LegalPair S q ∧ LegalPair S r
+
+instance (S : Finset Idx25) (q r : OrbitCode) : Decidable (TwoLegalPairs S q r) := by
+  unfold TwoLegalPairs
+  infer_instance
+
 theorem LegalPair.rawCap_union {S : Finset Idx25} {o : OrbitCode}
     (hS : RawCap S) (h : LegalPair S o) :
     RawCap (S ∪ orbitPair o) := by
@@ -218,6 +226,17 @@ instance : Decidable NormalizedExtensionStatement := by
   unfold NormalizedExtensionStatement
   infer_instance
 
+/-- Strong normalized target: every increasing normalized arc has two distinct legal pairs. -/
+def NormalizedTwoExtensionStatement : Prop :=
+  ∀ a b c : OrbitCode,
+    orbitNumber a < orbitNumber b → orbitNumber b < orbitNumber c →
+      RawCap (normalizedConfig a b c) →
+        ∃ q r : OrbitCode, TwoLegalPairs (normalizedConfig a b c) q r
+
+instance : Decidable NormalizedTwoExtensionStatement := by
+  unfold NormalizedTwoExtensionStatement
+  infer_instance
+
 /-- One fixed-first-orbit slice of the normalized certificate. -/
 def FirstSlice (a : OrbitCode) : Prop :=
   ∀ b c : OrbitCode,
@@ -227,6 +246,17 @@ def FirstSlice (a : OrbitCode) : Prop :=
 
 instance (a : OrbitCode) : Decidable (FirstSlice a) := by
   unfold FirstSlice
+  infer_instance
+
+/-- Strong fixed-first-orbit slice used by the two-witness certificate. -/
+def FirstSliceTwo (a : OrbitCode) : Prop :=
+  ∀ b c : OrbitCode,
+    orbitNumber a < orbitNumber b → orbitNumber b < orbitNumber c →
+      RawCap (normalizedConfig a b c) →
+        ∃ q r : OrbitCode, TwoLegalPairs (normalizedConfig a b c) q r
+
+instance (a : OrbitCode) : Decidable (FirstSliceTwo a) := by
+  unfold FirstSliceTwo
   infer_instance
 
 def codeFin5 (n : Nat) : Fin 5 := ⟨n % 5, Nat.mod_lt _ (by decide)⟩
@@ -282,13 +312,14 @@ theorem not_rawCap_of_badWitness {a b c : OrbitCode} {i j k : Fin 8}
     orbitCodeOfNumber ⟨5, by decide⟩ = .affineY 0 0 (GF25.ofNat 5) := by decide
 
 /-- One classified normalized row: either a concrete obstruction proves the input is not an arc,
-or a concrete legal orbit extends it. -/
+or two concrete distinct legal orbits extend it. -/
 def RowResult (b c : Fin 310) : Prop :=
   ¬ RawCap (normalizedConfig (orbitCodeOfNumber ⟨5, by decide⟩)
     (orbitCodeOfNumber b) (orbitCodeOfNumber c)) ∨
-  ∃ q : OrbitCode, LegalPair
-    (normalizedConfig (orbitCodeOfNumber ⟨5, by decide⟩)
-      (orbitCodeOfNumber b) (orbitCodeOfNumber c)) q
+  ∃ q r : OrbitCode,
+    TwoLegalPairs
+      (normalizedConfig (orbitCodeOfNumber ⟨5, by decide⟩)
+        (orbitCodeOfNumber b) (orbitCodeOfNumber c)) q r
 
 end Q25PairCertificate
 end RelativeConicArcs

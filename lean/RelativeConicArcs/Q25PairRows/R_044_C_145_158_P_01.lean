@@ -14,19 +14,23 @@ theorem row_44_145 : RowResult ⟨44, by decide⟩ ⟨145, by decide⟩ := by
 
 theorem row_44_146 : RowResult ⟨44, by decide⟩ ⟨146, by decide⟩ := by
   have _previous := row_44_145
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_44_147 : RowResult ⟨44, by decide⟩ ⟨147, by decide⟩ := by
   have _previous := row_44_146
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_44_148 : RowResult ⟨44, by decide⟩ ⟨148, by decide⟩ := by
   have _previous := row_44_147
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_44_149 : RowResult ⟨44, by decide⟩ ⟨149, by decide⟩ := by
   have _previous := row_44_148
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_44_150 : RowResult ⟨44, by decide⟩ ⟨150, by decide⟩ := by
   have _previous := row_44_149
@@ -66,11 +70,13 @@ theorem row_44_155 : RowResult ⟨44, by decide⟩ ⟨155, by decide⟩ := by
 
 theorem row_44_156 : RowResult ⟨44, by decide⟩ ⟨156, by decide⟩ := by
   have _previous := row_44_155
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_44_157 : RowResult ⟨44, by decide⟩ ⟨157, by decide⟩ := by
   have _previous := row_44_156
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨60, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_44_158 : RowResult ⟨44, by decide⟩ ⟨158, by decide⟩ := by
   have _previous := row_44_157

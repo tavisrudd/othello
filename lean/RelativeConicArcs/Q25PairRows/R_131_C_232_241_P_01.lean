@@ -14,23 +14,28 @@ theorem row_131_232 : RowResult ⟨131, by decide⟩ ⟨232, by decide⟩ := by
 
 theorem row_131_233 : RowResult ⟨131, by decide⟩ ⟨233, by decide⟩ := by
   have _previous := row_131_232
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_131_234 : RowResult ⟨131, by decide⟩ ⟨234, by decide⟩ := by
   have _previous := row_131_233
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_131_235 : RowResult ⟨131, by decide⟩ ⟨235, by decide⟩ := by
   have _previous := row_131_234
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨41, by decide⟩,
+    orbitCodeOfNumber ⟨223, by decide⟩, by decide⟩
 
 theorem row_131_236 : RowResult ⟨131, by decide⟩ ⟨236, by decide⟩ := by
   have _previous := row_131_235
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨215, by decide⟩, by decide⟩
 
 theorem row_131_237 : RowResult ⟨131, by decide⟩ ⟨237, by decide⟩ := by
   have _previous := row_131_236
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨223, by decide⟩, by decide⟩
 
 theorem row_131_238 : RowResult ⟨131, by decide⟩ ⟨238, by decide⟩ := by
   have _previous := row_131_237
@@ -46,7 +51,8 @@ theorem row_131_239 : RowResult ⟨131, by decide⟩ ⟨239, by decide⟩ := by
 
 theorem row_131_240 : RowResult ⟨131, by decide⟩ ⟨240, by decide⟩ := by
   have _previous := row_131_239
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_131_241 : RowResult ⟨131, by decide⟩ ⟨241, by decide⟩ := by
   have _previous := row_131_240

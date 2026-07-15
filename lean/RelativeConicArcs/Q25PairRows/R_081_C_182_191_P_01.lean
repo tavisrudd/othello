@@ -14,19 +14,23 @@ theorem row_81_182 : RowResult ⟨81, by decide⟩ ⟨182, by decide⟩ := by
 
 theorem row_81_183 : RowResult ⟨81, by decide⟩ ⟨183, by decide⟩ := by
   have _previous := row_81_182
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_81_184 : RowResult ⟨81, by decide⟩ ⟨184, by decide⟩ := by
   have _previous := row_81_183
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨38, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_81_185 : RowResult ⟨81, by decide⟩ ⟨185, by decide⟩ := by
   have _previous := row_81_184
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_81_186 : RowResult ⟨81, by decide⟩ ⟨186, by decide⟩ := by
   have _previous := row_81_185
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_81_187 : RowResult ⟨81, by decide⟩ ⟨187, by decide⟩ := by
   have _previous := row_81_186
@@ -42,11 +46,13 @@ theorem row_81_188 : RowResult ⟨81, by decide⟩ ⟨188, by decide⟩ := by
 
 theorem row_81_189 : RowResult ⟨81, by decide⟩ ⟨189, by decide⟩ := by
   have _previous := row_81_188
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨37, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_81_190 : RowResult ⟨81, by decide⟩ ⟨190, by decide⟩ := by
   have _previous := row_81_189
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_81_191 : RowResult ⟨81, by decide⟩ ⟨191, by decide⟩ := by
   have _previous := row_81_190

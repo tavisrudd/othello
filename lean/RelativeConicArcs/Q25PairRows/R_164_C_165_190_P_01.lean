@@ -104,23 +104,28 @@ theorem row_164_180 : RowResult ⟨164, by decide⟩ ⟨180, by decide⟩ := by
 
 theorem row_164_181 : RowResult ⟨164, by decide⟩ ⟨181, by decide⟩ := by
   have _previous := row_164_180
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_164_182 : RowResult ⟨164, by decide⟩ ⟨182, by decide⟩ := by
   have _previous := row_164_181
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_164_183 : RowResult ⟨164, by decide⟩ ⟨183, by decide⟩ := by
   have _previous := row_164_182
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_164_184 : RowResult ⟨164, by decide⟩ ⟨184, by decide⟩ := by
   have _previous := row_164_183
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨38, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_164_185 : RowResult ⟨164, by decide⟩ ⟨185, by decide⟩ := by
   have _previous := row_164_184
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_164_186 : RowResult ⟨164, by decide⟩ ⟨186, by decide⟩ := by
   have _previous := row_164_185
@@ -148,6 +153,7 @@ theorem row_164_189 : RowResult ⟨164, by decide⟩ ⟨189, by decide⟩ := by
 
 theorem row_164_190 : RowResult ⟨164, by decide⟩ ⟨190, by decide⟩ := by
   have _previous := row_164_189
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

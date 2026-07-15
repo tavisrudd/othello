@@ -8,19 +8,23 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_69_108 : RowResult ⟨69, by decide⟩ ⟨108, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_69_109 : RowResult ⟨69, by decide⟩ ⟨109, by decide⟩ := by
   have _previous := row_69_108
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_69_110 : RowResult ⟨69, by decide⟩ ⟨110, by decide⟩ := by
   have _previous := row_69_109
-  exact Or.inr ⟨orbitCodeOfNumber ⟨183, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_69_111 : RowResult ⟨69, by decide⟩ ⟨111, by decide⟩ := by
   have _previous := row_69_110
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_69_112 : RowResult ⟨69, by decide⟩ ⟨112, by decide⟩ := by
   have _previous := row_69_111
@@ -30,7 +34,8 @@ theorem row_69_112 : RowResult ⟨69, by decide⟩ ⟨112, by decide⟩ := by
 
 theorem row_69_113 : RowResult ⟨69, by decide⟩ ⟨113, by decide⟩ := by
   have _previous := row_69_112
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨246, by decide⟩, by decide⟩
 
 theorem row_69_114 : RowResult ⟨69, by decide⟩ ⟨114, by decide⟩ := by
   have _previous := row_69_113
@@ -46,7 +51,8 @@ theorem row_69_115 : RowResult ⟨69, by decide⟩ ⟨115, by decide⟩ := by
 
 theorem row_69_116 : RowResult ⟨69, by decide⟩ ⟨116, by decide⟩ := by
   have _previous := row_69_115
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_69_117 : RowResult ⟨69, by decide⟩ ⟨117, by decide⟩ := by
   have _previous := row_69_116

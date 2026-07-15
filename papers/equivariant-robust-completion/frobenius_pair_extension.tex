@@ -47,15 +47,20 @@ orbits.  An exact correction separates secant orbits whose fixed centers
 make them invisible on a carrier from genuine collisions between visible
 charges, and it classifies equality and every first-order excess level.
 
-We then prove that every $\phi$-invariant eight-arc in $\PG(2,25)$ admits a
-fresh conjugate-pair extension.  The zero- and four-fixed-point profiles
+We then prove that every $\phi$-invariant eight-arc in $\PG(2,25)$ admits at
+least two distinct fresh conjugate-pair extensions.  The zero- and four-fixed-point profiles
 follow from incidence and moment arguments.  The exceptional
 two-fixed-point profile is reduced, by projective normalization, to a
 finite certificate checked by the Lean kernel.  The full theorem, the
 semantic global pair count, and the profile split are formalized in Lean
 without unproved declarations, custom axioms, or native-code evaluation.
-Together with the general count, the order-five result covers every
-prime-power base-field order $s\ge5$.
+Consequently, deleting any selected nonfixed conjugate orbit from an invariant
+ten-arc in $\PG(2,25)$ leaves a different orbit that repairs the arc.  Together
+with the general count, the extension result covers every prime-power
+base-field order $s\ge5$.  For every $s\ge7$, an exact five-profile
+lower-envelope calculation gives at least $319$ legal conjugate pairs for
+every invariant eight-arc and hence at least $318$ alternate repairs after
+arbitrary nonfixed-orbit deletion.
 \end{abstract}
 
 \section{Introduction}
@@ -87,9 +92,14 @@ into an orbit-valued extension count.  The main results are:
       extensions of an arbitrary invariant arc;
 \item an exact linewise correction that separates invisible secant centers
       from charge collisions, together with equality and excess criteria;
-\item a uniform theorem that every invariant eight-arc in $\PG(2,25)$
-      extends by a fresh conjugate pair and, together with the general
-      estimate, covers every prime-power base order $s\ge5$; and
+\item a uniform theorem that every invariant eight-arc in $\PG(2,25)$ has
+      at least two distinct fresh conjugate-pair extensions, yielding
+      alternate-orbit repair after arbitrary nonfixed-orbit deletion, and,
+      together with the general estimate, covering every prime-power base
+      order $s\ge5$; and
+\item an exact five-profile first-order lower envelope for invariant
+      eight-arcs over every $s\ge7$, yielding at least $318$ alternate repairs
+      after arbitrary nonfixed-orbit deletion; and
 \item a square-root lower bound for arcs that are saturated with respect to
       conjugate-pair insertion.
 \end{enumerate}
@@ -143,6 +153,14 @@ nonfixed conjugate pairs.
 A \emph{legal conjugate-pair extension} of $\cC$ is an unordered pair
 $Q=\{P,\phi(P)\}$ such that $P\ne\phi(P)$, $Q\cap\cC=\varnothing$, and
 $\cC\cup Q$ is an arc.  Let $\Npair(\cC)$ be the number of such pairs.
+\end{definition}
+
+\begin{definition}[Alternate-orbit repair]\label{def:alternate-repair}
+Let $A$ be an invariant ten-arc, let $O\subseteq A$ be a selected nonfixed
+conjugate orbit, and put $D=A\setminus O$.  An \emph{alternate-orbit repair}
+of this deletion is a legal conjugate-pair extension $Q$ of $D$ with
+$Q\ne O$.  The erased orbit $O$ is itself legal for $D$, so a lower bound
+$\Npair(D)\ge r+1$ supplies at least $r$ alternate repairs.
 \end{definition}
 
 \begin{lemma}[Pair-extension test]\label{lem:pair-test}
@@ -409,13 +427,28 @@ Finally, \eqref{eq:aggregate} gives
 \]
 \end{proof}
 
+\begin{corollary}[Nonexceptional order-five alternate repair]
+\label{cor:q25-nonexceptional-repair}
+Let $A$ be an invariant ten-arc in $\PG(2,25)$, let $O\subseteq A$ be a
+selected nonfixed conjugate orbit, and put $D=A\setminus O$.  If the fixed
+point count of $D$ is $f=0,4,6,8$, then this deletion has at least
+$4,3,35,109$ alternate-orbit repairs, respectively.
+\end{corollary}
+
+\begin{proof}
+The set $D$ is an invariant eight-arc and $O$ is one of its legal
+conjugate-pair extensions.  Proposition~\ref{prop:four-profiles} gives the
+four total legal-pair bounds $5,4,36,110$.  Removing the one possibility
+$O$ gives the asserted alternate counts.
+\end{proof}
+
 The remaining profile $(f,e)=(2,3)$ has $(E,M,N)=(17,12,10)$.  The center
 estimate gives $B\ge18$, but the aggregate identity would still require a
 further collision estimate.  We close this profile by a finite reduction.
 
-\begin{proposition}[Exceptional profile]\label{prop:f2}
+\begin{proposition}[Exceptional profile multiplicity]\label{prop:f2}
 Every invariant eight-arc in $\PG(2,25)$ with exactly two fixed selected
-points has a fresh legal conjugate-pair extension.
+points has at least two distinct fresh legal conjugate-pair extensions.
 \end{proposition}
 
 \begin{proof}[Computer-assisted proof, kernel checked]
@@ -431,23 +464,38 @@ pair-extension predicates.
 
 After these reductions, the remaining finite slice has $46{,}056$ rows.
 Of these, $39{,}012$ carry a checked witness that the proposed old set is
-not an arc, while $7{,}044$ carry a checked fresh legal-pair witness.  The
+not an arc, while $7{,}044$ carry two checked fresh legal-pair witnesses
+and a checked proof that they are distinct.  The
 rows are split into $1{,}639$ leaf modules and $303$ aggregate modules.
 Each leaf is evaluated by Lean's kernel reduction.  The projective
-transport theorem maps the checked survivor back to the original arc and
-states explicitly that both new points are fresh and that the enlarged set
-is an arc.  Section~\ref{sec:formalization} records the trust boundary.
+transport theorem maps both checked survivors back to the original arc,
+preserves their distinctness, and states explicitly that each pair is fresh
+and that each enlarged set is an arc.  Section~\ref{sec:formalization}
+records the trust boundary.
 \end{proof}
 
-\begin{theorem}[Uniform order-five extension]\label{thm:q25}
-Every Frobenius-invariant eight-arc in $\PG(2,25)$ admits an extension by a
-fresh nonfixed point together with its Frobenius conjugate.
+\begin{theorem}[Uniform order-five multiplicity]\label{thm:q25}
+Every Frobenius-invariant eight-arc in $\PG(2,25)$ has at least two distinct
+fresh nonfixed conjugate-pair extensions.
 \end{theorem}
 
 \begin{proof}
 The fixed-point count is even and at most eight.  Proposition
 \ref{prop:four-profiles} treats $f=0,4,6,8$, and Proposition~\ref{prop:f2}
 treats $f=2$.
+\end{proof}
+
+\begin{corollary}[Uniform order-five alternate repair]
+\label{cor:q25-uniform-repair}
+Let $A$ be an invariant ten-arc in $\PG(2,25)$ and let $O\subseteq A$ be
+any selected nonfixed conjugate orbit.  After deleting $O$, at least one
+different legal conjugate orbit repairs the arc.
+\end{corollary}
+
+\begin{proof}
+The remainder $D=A\setminus O$ is an invariant eight-arc, and $O$ is one
+of its legal conjugate-pair extensions.  Theorem~\ref{thm:q25} supplies at
+least two legal pairs for $D$, so at least one is different from $O$.
 \end{proof}
 
 The complete-arc classifications in
@@ -503,6 +551,61 @@ For $k=8$, one has $M\le12<N$ when $s\ge7$.  Full occupation is impossible
 because $8<s^2+1$, so Theorem~\ref{thm:pair-criterion} applies.
 \end{proof}
 
+\begin{theorem}[Five-profile lower envelope]\label{thm:profile-envelope}
+Let $s\ge7$ and let $D$ be a $\phi$-invariant eight-arc with profile
+$8=f+2e$.  Put $N=s(s-1)/2$.  Then $\Npair(D)\ge L_f(s)$, where
+\[
+\begin{array}{c|c|c|c}
+(f,e)&E_f(s)&M_f&L_f(s)=E_f(s)(N-M_f)\\ \hline
+(0,4)&s^2+s-3&12&(s^2+s-3)(N-12)\\
+(2,3)&s^2-s-3&12&(s^2-s-3)(N-12)\\
+(4,2)&s^2-3s+1&10&(s^2-3s+1)(N-10)\\
+(6,1)&s^2-5s+9&6&(s^2-5s+9)(N-6)\\
+(8,0)&s^2-7s+21&0&(s^2-7s+21)N.
+\end{array}
+\]
+For the certified first-order envelope $L(s)=\min_f L_f(s)$,
+\[
+  L(7)=319,\qquad L(8)=726,\qquad L(9)=1350,
+\]
+and $L(s)=L_8(s)$ for every $s\ge10$.  The minimizing profiles are therefore
+$f=4$ at $s=7$, $f=6$ at $s=8,9$, and $f=8$ for $s\ge10$.
+In particular, $\Npair(D)\ge319$ for every $s\ge7$.
+\end{theorem}
+
+\begin{proof}
+Substituting the five solutions of $8=f+2e$ into
+\eqref{eq:E} and \eqref{eq:M} gives the displayed values of
+$E_f$, $M_f$, and hence $L_f=E_f(N-M_f)$ by
+Theorem~\ref{thm:pair-criterion}.  At $s=7,8,9$ the five value vectors are
+respectively
+\[
+(477,351,319,345,441),\quad
+(1104,848,738,726,812),\quad
+(2088,1656,1430,1350,1404).
+\]
+For $s=t+10$, twice each difference $L_f-L_8$, for
+$f=0,2,4,6$, has nonnegative coefficients as a polynomial in $t\ge0$.
+This proves the infinite branch.  Independently, each $L_f(s)$ is
+nondecreasing for $s\ge7$, so the value $319$ at the first boundary is a
+uniform lower bound.  These polynomial identities and inequalities are
+kernel-checked in the supplementary Lean source.
+\end{proof}
+
+\begin{corollary}[Quantitative alternate-orbit repair]
+\label{cor:alternate-repair}
+Let $s\ge7$ be a prime power.  If $A$ is a $\phi$-invariant ten-arc in
+$\PG(2,s^2)$ and $O\subseteq A$ is any selected nonfixed conjugate orbit,
+then deleting $O$ leaves at least $318$ alternate-orbit repairs.
+\end{corollary}
+
+\begin{proof}
+Put $D=A\setminus O$.  Then $D$ is an invariant eight-arc, and $O$ is one
+of its legal conjugate-pair extensions.  Theorem~\ref{thm:profile-envelope}
+gives $\Npair(D)\ge319$.  Excluding $O$ leaves at least $318$ different
+legal pairs.
+\end{proof}
+
 \begin{corollary}[All base orders from five]\label{cor:all-orders}
 Let $s\ge5$ be a prime power.  Every Frobenius-invariant eight-arc in
 $\PG(2,s^2)$ admits an extension by a fresh nonfixed point together with
@@ -539,14 +642,25 @@ mathlib~\cite{Mathlib2020}.  The supplementary source is divided as follows.
       Frobenius pairs whose union with the old arc remains an arc.  It proves
       that this semantic set is the disjoint union of the carrierwise legal
       sets and that its cardinality is the abstract legal count.
+\item The alternate-repair module formalizes deletion of an arbitrary
+      selected nonfixed orbit, proves that the erased orbit is one semantic
+      legal pair of the invariant eight-arc remainder, and supplies the
+      certificate-free eight-repair baseline.  Its order-five wrapper proves
+      Corollary~\ref{cor:q25-nonexceptional-repair}.
+\item The profile-envelope modules prove the five closed forms, their
+      piecewise lower envelope, the semantic envelope comparison in
+      Theorem~\ref{thm:profile-envelope}, and the uniform $318$-repair
+      conclusion in Corollary~\ref{cor:alternate-repair}.
 \item The collision and invisibility modules prove
       Proposition~\ref{prop:linewise}, Corollary~\ref{cor:aggregate}, the
       fixed-center interpretation, and the cross-pair estimate
       \eqref{eq:cross-invisible}.
 \item Separate profile modules prove the lower bounds $5$ and $4$ for
       $f=0$ and $f=4$.  The exceptional certificate proves
-      Proposition~\ref{prop:f2}; the aggregate module proves
-      Theorem~\ref{thm:q25} by the exhaustive parity split.
+      Proposition~\ref{prop:f2}; the order-five alternate-repair module
+      proves Theorem~\ref{thm:q25} by the exhaustive parity split and
+      Corollary~\ref{cor:q25-uniform-repair} by deleting the erased pair
+      from the semantic legal-pair finset.
 \item The orbit-saturation module proves the denominator-free inequality
       $2s(s-1)\le(k-1)^2$ used in Corollary~\ref{cor:saturation}.  The final
       ceiling notation and the geometric case split are paper proofs.
@@ -577,6 +691,17 @@ Source module & Paper-facing declaration or role \\
   \path{exists_quadratic_pair_extension} \\
 \path{RelativeConicArcs/QuadraticGlobalCount.lean} &
   \path{card_globalLegalPairs_eq_legalCount} \\
+\path{RelativeConicArcs/AlternateOrbitRepair.lean} &
+  \path{eight_le_alternateLegalPairs_of_seven_le} \\
+\path{RelativeConicArcs/AlternateOrbitRepairProfileEnvelope.lean} &
+  five closed forms and the piecewise profile envelope \\
+\path{RelativeConicArcs/}\newline
+\path{AlternateOrbitRepairProfile}\allowbreak\path{EnvelopeResult.lean} &
+  \path{profileEnvelope_le_card_globalLegalPairs_of_card_eight},
+  \path{three_hundred_eighteen_le_alternateLegalPairs_of_seven_le} \\
+\path{RelativeConicArcs/Q25AlternateOrbitRepair.lean} &
+  \path{two_le_card_globalLegalPairs_q25},
+  \path{one_le_alternateLegalPairs_q25}, and the four profile bounds \\
 \path{RelativeConicArcs/QuadraticInvisible.lean} &
   aggregate equality/excess and fixed-center criteria \\
 \path{RelativeConicArcs/Q25ProfileZero.lean} &
@@ -584,7 +709,7 @@ Source module & Paper-facing declaration or role \\
 \path{RelativeConicArcs/Q25ProfileFour.lean} &
   \path{four_le_sum_card_legal_profile_four} \\
 \path{RelativeConicArcs/Q25PairResult.lean} &
-  \path{f2_pair_extension} \\
+  \path{f2_two_pair_extension} \\
 \path{RelativeConicArcs/Q25AllProfiles.lean} &
   \path{pair_extension} \\
 \path{FiniteGeom/BaerCompletion/OrbitSaturation.lean} &
@@ -598,13 +723,15 @@ Source module & Paper-facing declaration or role \\
 The accompanying source archive pins Lean to
 \path{leanprover/lean4:v4.32.0-rc1} and mathlib to revision
 \path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  The audited formal-source
-checkpoint is Git revision
-\path{8f308c3d94652c3d3a66335701f1a18b53740675}.  From the \path{lean/}
-directory the two paper-facing aggregate targets are rebuilt by
+checkpoint will be recorded from the final submission commit.  From the
+\path{lean/} directory the paper-facing targets are rebuilt by
 \begin{verbatim}
 LEAN_NUM_THREADS=6 nix develop --command lake build \
   RelativeConicArcs.QuadraticGlobalCount \
-  RelativeConicArcs.Q25AllProfiles
+  RelativeConicArcs.Q25AllProfiles \
+  RelativeConicArcs.AlternateOrbitRepair \
+  RelativeConicArcs.Q25AlternateOrbitRepair \
+  RelativeConicArcs.AlternateOrbitRepairProfileEnvelopeResult
 \end{verbatim}
 The manuscript PDF is reproduced from its source directory with
 \begin{verbatim}
@@ -620,13 +747,16 @@ first-order obstruction bound; its exact correction records which secant
 orbits disappear at fixed centers and which visible obstructions collide.
 This suffices, together with one finite exceptional-profile certificate, to
 prove a uniform conjugate-pair extension theorem for invariant eight-arcs in
-$\PG(2,25)$.
-
-The natural strengthening is now family-specific rather than generic: prove
-that every invariant eight-arc has at least two legal pairs, which would
-give an alternate-orbit repair theorem for invariant ten-arcs after deletion
-of one selected nonfixed orbit.  That multiplicity statement is not used or
-claimed here.
+$\PG(2,25)$, now with two distinct legal pairs in every profile.  The same
+semantic count also proves deletion robustness: for
+every base order $s\ge7$, deleting any selected nonfixed orbit from an
+invariant ten-arc leaves at least $318$ alternate repairs.  More precisely,
+the certified first-order envelope changes its minimizing profile at
+$s=7$, $s=8,9$, and $s\ge10$.  In
+$\PG(2,25)$ the four nonexceptional profiles have the stated stronger
+alternate bounds, while the exceptional two-fixed-point profile still has
+at least one alternative.  Thus uniform order-five alternate repair holds
+after deletion of any selected nonfixed orbit.
 
 \bibliographystyle{plain}
 \bibliography{refs}

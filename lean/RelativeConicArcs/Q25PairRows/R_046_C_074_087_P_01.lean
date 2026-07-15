@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_46_74 : RowResult ⟨46, by decide⟩ ⟨74, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨82, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_46_75 : RowResult ⟨46, by decide⟩ ⟨75, by decide⟩ := by
   have _previous := row_46_74
@@ -54,19 +55,23 @@ theorem row_46_81 : RowResult ⟨46, by decide⟩ ⟨81, by decide⟩ := by
 
 theorem row_46_82 : RowResult ⟨46, by decide⟩ ⟨82, by decide⟩ := by
   have _previous := row_46_81
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_46_83 : RowResult ⟨46, by decide⟩ ⟨83, by decide⟩ := by
   have _previous := row_46_82
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_46_84 : RowResult ⟨46, by decide⟩ ⟨84, by decide⟩ := by
   have _previous := row_46_83
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_46_85 : RowResult ⟨46, by decide⟩ ⟨85, by decide⟩ := by
   have _previous := row_46_84
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_46_86 : RowResult ⟨46, by decide⟩ ⟨86, by decide⟩ := by
   have _previous := row_46_85
@@ -76,6 +81,7 @@ theorem row_46_86 : RowResult ⟨46, by decide⟩ ⟨86, by decide⟩ := by
 
 theorem row_46_87 : RowResult ⟨46, by decide⟩ ⟨87, by decide⟩ := by
   have _previous := row_46_86
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨58, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

@@ -8,11 +8,13 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_174_241 : RowResult ⟨174, by decide⟩ ⟨241, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨37, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_174_242 : RowResult ⟨174, by decide⟩ ⟨242, by decide⟩ := by
   have _previous := row_174_241
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨221, by decide⟩, by decide⟩
 
 theorem row_174_243 : RowResult ⟨174, by decide⟩ ⟨243, by decide⟩ := by
   have _previous := row_174_242
@@ -40,11 +42,13 @@ theorem row_174_246 : RowResult ⟨174, by decide⟩ ⟨246, by decide⟩ := by
 
 theorem row_174_247 : RowResult ⟨174, by decide⟩ ⟨247, by decide⟩ := by
   have _previous := row_174_246
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
 
 theorem row_174_248 : RowResult ⟨174, by decide⟩ ⟨248, by decide⟩ := by
   have _previous := row_174_247
-  exact Or.inr ⟨orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨222, by decide⟩, by decide⟩
 
 theorem row_174_249 : RowResult ⟨174, by decide⟩ ⟨249, by decide⟩ := by
   have _previous := row_174_248

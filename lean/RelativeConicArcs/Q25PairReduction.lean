@@ -44,10 +44,44 @@ theorem mapped_selected_is_standard {a : Fin 5} {b : Fin 2} {z : K25}
   rw [← mapOrbitCode_spec]
   exact map_selected_orbit_to_standard hz
 
-/-- **Kernel-checked normalized exceptional-profile theorem.**  Every eight-point cap made from
-the two standard fixed points and three distinct conjugate orbits has a legal conjugate-pair
-extension. -/
-theorem normalized_extension : NormalizedExtensionStatement := by
+/-- Pull a legal orbit through the inverse of the stabilizer normalization. -/
+theorem exists_legalPair_preimage (y z : K25) (hy : imagPart y ≠ 0)
+    (hz : imagPart z ≠ 0) {C D : Finset Idx25}
+    (hmap : C.map (mapIdx y z hy hz).toEmbedding = D)
+    (hC : RawCap C) (hD : RawCap D) {s : OrbitCode} (hs : LegalPair D s) :
+    ∃ t : OrbitCode, mapOrbitCode y z hy hz t = s ∧ LegalPair C t := by
+  let e := mapIdx y z hy hz
+  have hsurj : Function.Surjective (mapOrbitCode y z hy hz) :=
+    Finite.surjective_of_injective (mapOrbitCode_injective y z hy hz)
+  obtain ⟨t, ht⟩ := hsurj s
+  refine ⟨t, ht, ?_⟩
+  have hpairMap := mapOrbitCode_spec y z hy hz t
+  rw [ht] at hpairMap
+  have hfreshMap : PairFresh D s := hs.pairFresh
+  have hfresh : PairFresh C t := by
+    rw [PairFresh, Finset.disjoint_left]
+    intro x hxC hxt
+    have hxCm : e x ∈ C.map e.toEmbedding :=
+      Finset.mem_map.mpr ⟨x, hxC, rfl⟩
+    rw [hmap] at hxCm
+    have hxtm : e x ∈ (orbitPair t).map e.toEmbedding :=
+      Finset.mem_map.mpr ⟨x, hxt, rfl⟩
+    rw [hpairMap] at hxtm
+    exact (Finset.disjoint_left.mp hfreshMap hxCm) hxtm
+  have hcapDUnion : RawCap (D ∪ orbitPair s) := hs.rawCap_union hD
+  have hmapUnion :
+      (C ∪ orbitPair t).map e.toEmbedding = D ∪ orbitPair s := by
+    rw [Finset.map_union, hmap, hpairMap]
+  have hcapUnion : RawCap (C ∪ orbitPair t) :=
+    (rawCap_mapIdx y z hy hz _).1 (by
+      rw [hmapUnion]
+      exact hcapDUnion)
+  exact legalPair_of_pairFresh_rawCap_union hfresh hcapUnion
+
+/-- **Kernel-checked normalized exceptional-profile multiplicity theorem.**  Every eight-point cap
+made from the two standard fixed points and three distinct conjugate orbits has two distinct legal
+conjugate-pair extensions. -/
+theorem normalized_two_extension : NormalizedTwoExtensionStatement := by
   intro a b c hab hbc hC
   have haGood : IndividuallyGood a := individuallyGood_left hC
   have haAdm : Q25Normalization.Admissible a :=
@@ -132,55 +166,36 @@ theorem normalized_extension : NormalizedExtensionStatement := by
           apply orbitNumber_injective
           omega
         omega
-      have hlegalD : ∃ s : OrbitCode, LegalPair (normalizedConfig standardOrbit q r) s := by
+      have hlegalD : ∃ s t : OrbitCode,
+          TwoLegalPairs (normalizedConfig standardOrbit q r) s t := by
         rcases lt_or_gt_of_ne (fun h => hqr (orbitNumber_injective h)) with hqr' | hrq'
         · simpa only [standardOrbit, omega] using
-            first_slice_005 q r (by simpa only [horbitStd, hfirst] using hstdq) hqr'
+            first_slice_two_005 q r (by simpa only [horbitStd, hfirst] using hstdq) hqr'
               (by simpa only [standardOrbit, omega] using hD)
         · have hDrq : RawCap (normalizedConfig standardOrbit r q) := by
             simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
               Finset.union_comm] using hD
           simpa [standardOrbit, omega, normalizedConfig, Finset.union_assoc,
             Finset.union_left_comm, Finset.union_comm] using
-            first_slice_005 r q (by simpa only [horbitStd, hfirst] using hstdr) hrq'
+            first_slice_two_005 r q (by simpa only [horbitStd, hfirst] using hstdr) hrq'
               (by simpa only [standardOrbit, omega] using hDrq)
-      obtain ⟨s, hs⟩ := hlegalD
-      have hsurj : Function.Surjective
-          (mapOrbitCode (smallNonfixed aa bb) z
-            (imagPart_smallNonfixed_ne_zero aa bb) haAdm) :=
-        Finite.surjective_of_injective
-          (mapOrbitCode_injective (smallNonfixed aa bb) z
-            (imagPart_smallNonfixed_ne_zero aa bb) haAdm)
-      obtain ⟨t, ht⟩ := hsurj s
-      refine ⟨t, ?_⟩
-      have hfreshMap : PairFresh (normalizedConfig standardOrbit q r) s := hs.pairFresh
-      have hpairMap := mapOrbitCode_spec (smallNonfixed aa bb) z
-        (imagPart_smallNonfixed_ne_zero aa bb) haAdm t
-      rw [ht] at hpairMap
-      have hfresh : PairFresh (normalizedConfig (.affineY aa bb z) b c) t := by
-        rw [PairFresh, Finset.disjoint_left]
-        intro x hxC hxt
-        have hxCm : e x ∈
-            (normalizedConfig (.affineY aa bb z) b c).map e.toEmbedding :=
-          Finset.mem_map.mpr ⟨x, hxC, rfl⟩
-        rw [hmap] at hxCm
-        have hxtm : e x ∈ (orbitPair t).map e.toEmbedding :=
-          Finset.mem_map.mpr ⟨x, hxt, rfl⟩
-        rw [hpairMap] at hxtm
-        exact (Finset.disjoint_left.mp hfreshMap hxCm) hxtm
-      have hcapDUnion : RawCap (normalizedConfig standardOrbit q r ∪ orbitPair s) :=
-        hs.rawCap_union hD
-      have hmapUnion :
-          (normalizedConfig (.affineY aa bb z) b c ∪ orbitPair t).map e.toEmbedding =
-            normalizedConfig standardOrbit q r ∪ orbitPair s := by
-        rw [Finset.map_union, hmap, hpairMap]
-      have hcapUnion :
-          RawCap (normalizedConfig (.affineY aa bb z) b c ∪ orbitPair t) :=
-        (rawCap_mapIdx (smallNonfixed aa bb) z (imagPart_smallNonfixed_ne_zero aa bb)
-          haAdm _).1 (by
-          rw [hmapUnion]
-          exact hcapDUnion)
-      exact legalPair_of_pairFresh_rawCap_union hfresh hcapUnion
+      obtain ⟨s, t, hst, hs, ht⟩ := hlegalD
+      obtain ⟨u, huMap, hu⟩ := exists_legalPair_preimage
+        (smallNonfixed aa bb) z (imagPart_smallNonfixed_ne_zero aa bb) haAdm
+        hmap hC hD hs
+      obtain ⟨v, hvMap, hv⟩ := exists_legalPair_preimage
+        (smallNonfixed aa bb) z (imagPart_smallNonfixed_ne_zero aa bb) haAdm
+        hmap hC hD ht
+      refine ⟨u, v, ?_, hu, hv⟩
+      intro huv
+      apply hst
+      rw [← huMap, ← hvMap, huv]
+
+/-- The original one-witness theorem is a projection of the stronger normalized certificate. -/
+theorem normalized_extension : NormalizedExtensionStatement := by
+  intro a b c hab hbc hC
+  obtain ⟨q, r, _hqr, hq, _hr⟩ := normalized_two_extension a b c hab hbc hC
+  exact ⟨q, hq⟩
 
 /-- Order-free form used after orbit decomposition. -/
 theorem normalized_extension_distinct {a b c : OrbitCode}
@@ -221,6 +236,46 @@ theorem normalized_extension_distinct {a b c : OrbitCode}
             Finset.union_comm] using hC
         simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
           Finset.union_comm] using normalized_extension c b a hcb' hba' hC'
+
+/-- Order-free two-witness form used after orbit decomposition. -/
+theorem normalized_two_extension_distinct {a b c : OrbitCode}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hC : RawCap (normalizedConfig a b c)) :
+    ∃ q r : OrbitCode, TwoLegalPairs (normalizedConfig a b c) q r := by
+  have habn : orbitNumber a ≠ orbitNumber b := fun h => hab (orbitNumber_injective h)
+  have hacn : orbitNumber a ≠ orbitNumber c := fun h => hac (orbitNumber_injective h)
+  have hbcn : orbitNumber b ≠ orbitNumber c := fun h => hbc (orbitNumber_injective h)
+  rcases lt_or_gt_of_ne habn with hab' | hba'
+  · rcases lt_or_gt_of_ne hbcn with hbc' | hcb'
+    · exact normalized_two_extension a b c hab' hbc' hC
+    · rcases lt_or_gt_of_ne hacn with hac' | hca'
+      · have hC' : RawCap (normalizedConfig a c b) := by
+          simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+            Finset.union_comm] using hC
+        simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+          Finset.union_comm] using normalized_two_extension a c b hac' hcb' hC'
+      · have hC' : RawCap (normalizedConfig c a b) := by
+          simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+            Finset.union_comm] using hC
+        simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+          Finset.union_comm] using normalized_two_extension c a b hca' hab' hC'
+  · rcases lt_or_gt_of_ne hacn with hac' | hca'
+    · have hC' : RawCap (normalizedConfig b a c) := by
+        simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+          Finset.union_comm] using hC
+      simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+        Finset.union_comm] using normalized_two_extension b a c hba' hac' hC'
+    · rcases lt_or_gt_of_ne hbcn with hbc' | hcb'
+      · have hC' : RawCap (normalizedConfig b c a) := by
+          simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+            Finset.union_comm] using hC
+        simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+          Finset.union_comm] using normalized_two_extension b c a hbc' hca' hC'
+      · have hC' : RawCap (normalizedConfig c b a) := by
+          simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+            Finset.union_comm] using hC
+        simpa [normalizedConfig, Finset.union_assoc, Finset.union_left_comm,
+          Finset.union_comm] using normalized_two_extension c b a hcb' hba' hC'
 
 end Q25PairReduction
 end RelativeConicArcs

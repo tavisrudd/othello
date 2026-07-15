@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_138_231 : RowResult ⟨138, by decide⟩ ⟨231, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_138_232 : RowResult ⟨138, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_138_231
@@ -42,7 +43,8 @@ theorem row_138_236 : RowResult ⟨138, by decide⟩ ⟨236, by decide⟩ := by
 
 theorem row_138_237 : RowResult ⟨138, by decide⟩ ⟨237, by decide⟩ := by
   have _previous := row_138_236
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_138_238 : RowResult ⟨138, by decide⟩ ⟨238, by decide⟩ := by
   have _previous := row_138_237

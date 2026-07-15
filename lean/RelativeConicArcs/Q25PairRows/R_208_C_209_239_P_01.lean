@@ -140,11 +140,13 @@ theorem row_208_230 : RowResult ⟨208, by decide⟩ ⟨230, by decide⟩ := by
 
 theorem row_208_231 : RowResult ⟨208, by decide⟩ ⟨231, by decide⟩ := by
   have _previous := row_208_230
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_208_232 : RowResult ⟨208, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_208_231
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨194, by decide⟩, by decide⟩
 
 theorem row_208_233 : RowResult ⟨208, by decide⟩ ⟨233, by decide⟩ := by
   have _previous := row_208_232
@@ -154,19 +156,23 @@ theorem row_208_233 : RowResult ⟨208, by decide⟩ ⟨233, by decide⟩ := by
 
 theorem row_208_234 : RowResult ⟨208, by decide⟩ ⟨234, by decide⟩ := by
   have _previous := row_208_233
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨197, by decide⟩, by decide⟩
 
 theorem row_208_235 : RowResult ⟨208, by decide⟩ ⟨235, by decide⟩ := by
   have _previous := row_208_234
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_208_236 : RowResult ⟨208, by decide⟩ ⟨236, by decide⟩ := by
   have _previous := row_208_235
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨197, by decide⟩, by decide⟩
 
 theorem row_208_237 : RowResult ⟨208, by decide⟩ ⟨237, by decide⟩ := by
   have _previous := row_208_236
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_208_238 : RowResult ⟨208, by decide⟩ ⟨238, by decide⟩ := by
   have _previous := row_208_237

@@ -26,11 +26,13 @@ theorem row_43_246 : RowResult ⟨43, by decide⟩ ⟨246, by decide⟩ := by
 
 theorem row_43_247 : RowResult ⟨43, by decide⟩ ⟨247, by decide⟩ := by
   have _previous := row_43_246
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨217, by decide⟩, by decide⟩
 
 theorem row_43_248 : RowResult ⟨43, by decide⟩ ⟨248, by decide⟩ := by
   have _previous := row_43_247
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨215, by decide⟩, by decide⟩
 
 theorem row_43_249 : RowResult ⟨43, by decide⟩ ⟨249, by decide⟩ := by
   have _previous := row_43_248

@@ -8,11 +8,13 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_148_191 : RowResult ⟨148, by decide⟩ ⟨191, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨246, by decide⟩, by decide⟩
 
 theorem row_148_192 : RowResult ⟨148, by decide⟩ ⟨192, by decide⟩ := by
   have _previous := row_148_191
-  exact Or.inr ⟨orbitCodeOfNumber ⟨231, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨244, by decide⟩, by decide⟩
 
 theorem row_148_193 : RowResult ⟨148, by decide⟩ ⟨193, by decide⟩ := by
   have _previous := row_148_192
@@ -22,7 +24,8 @@ theorem row_148_193 : RowResult ⟨148, by decide⟩ ⟨193, by decide⟩ := by
 
 theorem row_148_194 : RowResult ⟨148, by decide⟩ ⟨194, by decide⟩ := by
   have _previous := row_148_193
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_148_195 : RowResult ⟨148, by decide⟩ ⟨195, by decide⟩ := by
   have _previous := row_148_194
@@ -38,7 +41,8 @@ theorem row_148_196 : RowResult ⟨148, by decide⟩ ⟨196, by decide⟩ := by
 
 theorem row_148_197 : RowResult ⟨148, by decide⟩ ⟨197, by decide⟩ := by
   have _previous := row_148_196
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨244, by decide⟩, by decide⟩
 
 theorem row_148_198 : RowResult ⟨148, by decide⟩ ⟨198, by decide⟩ := by
   have _previous := row_148_197
@@ -48,7 +52,8 @@ theorem row_148_198 : RowResult ⟨148, by decide⟩ ⟨198, by decide⟩ := by
 
 theorem row_148_199 : RowResult ⟨148, by decide⟩ ⟨199, by decide⟩ := by
   have _previous := row_148_198
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨244, by decide⟩, by decide⟩
 
 theorem row_148_200 : RowResult ⟨148, by decide⟩ ⟨200, by decide⟩ := by
   have _previous := row_148_199
@@ -88,6 +93,7 @@ theorem row_148_205 : RowResult ⟨148, by decide⟩ ⟨205, by decide⟩ := by
 
 theorem row_148_206 : RowResult ⟨148, by decide⟩ ⟨206, by decide⟩ := by
   have _previous := row_148_205
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

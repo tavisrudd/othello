@@ -50,11 +50,13 @@ theorem row_198_205 : RowResult ⟨198, by decide⟩ ⟨205, by decide⟩ := by
 
 theorem row_198_206 : RowResult ⟨198, by decide⟩ ⟨206, by decide⟩ := by
   have _previous := row_198_205
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_198_207 : RowResult ⟨198, by decide⟩ ⟨207, by decide⟩ := by
   have _previous := row_198_206
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨246, by decide⟩, by decide⟩
 
 theorem row_198_208 : RowResult ⟨198, by decide⟩ ⟨208, by decide⟩ := by
   have _previous := row_198_207
@@ -82,19 +84,23 @@ theorem row_198_211 : RowResult ⟨198, by decide⟩ ⟨211, by decide⟩ := by
 
 theorem row_198_212 : RowResult ⟨198, by decide⟩ ⟨212, by decide⟩ := by
   have _previous := row_198_211
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨241, by decide⟩, by decide⟩
 
 theorem row_198_213 : RowResult ⟨198, by decide⟩ ⟨213, by decide⟩ := by
   have _previous := row_198_212
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_198_214 : RowResult ⟨198, by decide⟩ ⟨214, by decide⟩ := by
   have _previous := row_198_213
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨37, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_198_215 : RowResult ⟨198, by decide⟩ ⟨215, by decide⟩ := by
   have _previous := row_198_214
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_198_216 : RowResult ⟨198, by decide⟩ ⟨216, by decide⟩ := by
   have _previous := row_198_215

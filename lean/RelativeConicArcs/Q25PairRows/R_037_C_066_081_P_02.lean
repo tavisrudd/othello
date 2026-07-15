@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_37_66 : RowResult ⟨37, by decide⟩ ⟨66, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨82, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_37_67 : RowResult ⟨37, by decide⟩ ⟨67, by decide⟩ := by
   have _previous := row_37_66
@@ -18,7 +19,8 @@ theorem row_37_67 : RowResult ⟨37, by decide⟩ ⟨67, by decide⟩ := by
 
 theorem row_37_68 : RowResult ⟨37, by decide⟩ ⟨68, by decide⟩ := by
   have _previous := row_37_67
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨84, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_37_69 : RowResult ⟨37, by decide⟩ ⟨69, by decide⟩ := by
   have _previous := row_37_68
@@ -40,15 +42,18 @@ theorem row_37_71 : RowResult ⟨37, by decide⟩ ⟨71, by decide⟩ := by
 
 theorem row_37_72 : RowResult ⟨37, by decide⟩ ⟨72, by decide⟩ := by
   have _previous := row_37_71
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨81, by decide⟩,
+    orbitCodeOfNumber ⟨241, by decide⟩, by decide⟩
 
 theorem row_37_73 : RowResult ⟨37, by decide⟩ ⟨73, by decide⟩ := by
   have _previous := row_37_72
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨84, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_37_74 : RowResult ⟨37, by decide⟩ ⟨74, by decide⟩ := by
   have _previous := row_37_73
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨81, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_37_75 : RowResult ⟨37, by decide⟩ ⟨75, by decide⟩ := by
   have _previous := row_37_74
@@ -88,6 +93,7 @@ theorem row_37_80 : RowResult ⟨37, by decide⟩ ⟨80, by decide⟩ := by
 
 theorem row_37_81 : RowResult ⟨37, by decide⟩ ⟨81, by decide⟩ := by
   have _previous := row_37_80
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

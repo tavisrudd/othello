@@ -158,19 +158,23 @@ theorem row_206_231 : RowResult ⟨206, by decide⟩ ⟨231, by decide⟩ := by
 
 theorem row_206_232 : RowResult ⟨206, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_206_231
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨198, by decide⟩, by decide⟩
 
 theorem row_206_233 : RowResult ⟨206, by decide⟩ ⟨233, by decide⟩ := by
   have _previous := row_206_232
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨197, by decide⟩, by decide⟩
 
 theorem row_206_234 : RowResult ⟨206, by decide⟩ ⟨234, by decide⟩ := by
   have _previous := row_206_233
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨197, by decide⟩, by decide⟩
 
 theorem row_206_235 : RowResult ⟨206, by decide⟩ ⟨235, by decide⟩ := by
   have _previous := row_206_234
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_206_236 : RowResult ⟨206, by decide⟩ ⟨236, by decide⟩ := by
   have _previous := row_206_235
@@ -180,11 +184,13 @@ theorem row_206_236 : RowResult ⟨206, by decide⟩ ⟨236, by decide⟩ := by
 
 theorem row_206_237 : RowResult ⟨206, by decide⟩ ⟨237, by decide⟩ := by
   have _previous := row_206_236
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_206_238 : RowResult ⟨206, by decide⟩ ⟨238, by decide⟩ := by
   have _previous := row_206_237
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_206_239 : RowResult ⟨206, by decide⟩ ⟨239, by decide⟩ := by
   have _previous := row_206_238

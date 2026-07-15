@@ -8,19 +8,23 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_31_91 : RowResult ⟨31, by decide⟩ ⟨91, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨60, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_31_92 : RowResult ⟨31, by decide⟩ ⟨92, by decide⟩ := by
   have _previous := row_31_91
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_31_93 : RowResult ⟨31, by decide⟩ ⟨93, by decide⟩ := by
   have _previous := row_31_92
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨244, by decide⟩, by decide⟩
 
 theorem row_31_94 : RowResult ⟨31, by decide⟩ ⟨94, by decide⟩ := by
   have _previous := row_31_93
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_31_95 : RowResult ⟨31, by decide⟩ ⟨95, by decide⟩ := by
   have _previous := row_31_94
@@ -42,11 +46,13 @@ theorem row_31_97 : RowResult ⟨31, by decide⟩ ⟨97, by decide⟩ := by
 
 theorem row_31_98 : RowResult ⟨31, by decide⟩ ⟨98, by decide⟩ := by
   have _previous := row_31_97
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_31_99 : RowResult ⟨31, by decide⟩ ⟨99, by decide⟩ := by
   have _previous := row_31_98
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨61, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_31_100 : RowResult ⟨31, by decide⟩ ⟨100, by decide⟩ := by
   have _previous := row_31_99

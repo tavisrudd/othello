@@ -44,15 +44,18 @@ theorem row_74_80 : RowResult ⟨74, by decide⟩ ⟨80, by decide⟩ := by
 
 theorem row_74_81 : RowResult ⟨74, by decide⟩ ⟨81, by decide⟩ := by
   have _previous := row_74_80
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_74_82 : RowResult ⟨74, by decide⟩ ⟨82, by decide⟩ := by
   have _previous := row_74_81
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨242, by decide⟩, by decide⟩
 
 theorem row_74_83 : RowResult ⟨74, by decide⟩ ⟨83, by decide⟩ := by
   have _previous := row_74_82
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_74_84 : RowResult ⟨74, by decide⟩ ⟨84, by decide⟩ := by
   have _previous := row_74_83
@@ -62,7 +65,8 @@ theorem row_74_84 : RowResult ⟨74, by decide⟩ ⟨84, by decide⟩ := by
 
 theorem row_74_85 : RowResult ⟨74, by decide⟩ ⟨85, by decide⟩ := by
   have _previous := row_74_84
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨36, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_74_86 : RowResult ⟨74, by decide⟩ ⟨86, by decide⟩ := by
   have _previous := row_74_85
@@ -78,11 +82,13 @@ theorem row_74_87 : RowResult ⟨74, by decide⟩ ⟨87, by decide⟩ := by
 
 theorem row_74_88 : RowResult ⟨74, by decide⟩ ⟨88, by decide⟩ := by
   have _previous := row_74_87
-  exact Or.inr ⟨orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨235, by decide⟩, by decide⟩
 
 theorem row_74_89 : RowResult ⟨74, by decide⟩ ⟨89, by decide⟩ := by
   have _previous := row_74_88
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_74_90 : RowResult ⟨74, by decide⟩ ⟨90, by decide⟩ := by
   have _previous := row_74_89

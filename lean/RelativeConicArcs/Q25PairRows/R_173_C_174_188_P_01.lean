@@ -50,11 +50,13 @@ theorem row_173_180 : RowResult ⟨173, by decide⟩ ⟨180, by decide⟩ := by
 
 theorem row_173_181 : RowResult ⟨173, by decide⟩ ⟨181, by decide⟩ := by
   have _previous := row_173_180
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨40, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_173_182 : RowResult ⟨173, by decide⟩ ⟨182, by decide⟩ := by
   have _previous := row_173_181
-  exact Or.inr ⟨orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_173_183 : RowResult ⟨173, by decide⟩ ⟨183, by decide⟩ := by
   have _previous := row_173_182
@@ -64,19 +66,23 @@ theorem row_173_183 : RowResult ⟨173, by decide⟩ ⟨183, by decide⟩ := by
 
 theorem row_173_184 : RowResult ⟨173, by decide⟩ ⟨184, by decide⟩ := by
   have _previous := row_173_183
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨244, by decide⟩, by decide⟩
 
 theorem row_173_185 : RowResult ⟨173, by decide⟩ ⟨185, by decide⟩ := by
   have _previous := row_173_184
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_173_186 : RowResult ⟨173, by decide⟩ ⟨186, by decide⟩ := by
   have _previous := row_173_185
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_173_187 : RowResult ⟨173, by decide⟩ ⟨187, by decide⟩ := by
   have _previous := row_173_186
-  exact Or.inr ⟨orbitCodeOfNumber ⟨219, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_173_188 : RowResult ⟨173, by decide⟩ ⟨188, by decide⟩ := by
   have _previous := row_173_187

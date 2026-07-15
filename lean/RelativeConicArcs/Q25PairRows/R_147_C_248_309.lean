@@ -14,7 +14,8 @@ theorem row_147_248 : RowResult ⟨147, by decide⟩ ⟨248, by decide⟩ := by
 
 theorem row_147_249 : RowResult ⟨147, by decide⟩ ⟨249, by decide⟩ := by
   have _previous := row_147_248
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨218, by decide⟩, by decide⟩
 
 theorem row_147_250 : RowResult ⟨147, by decide⟩ ⟨250, by decide⟩ := by
   have _previous := row_147_249

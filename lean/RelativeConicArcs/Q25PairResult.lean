@@ -1,7 +1,7 @@
 import RelativeConicArcs.Q25BaseNormalization
 import RelativeConicArcs.Q25OrbitDecomposition
 import RelativeConicArcs.Q25PairReduction
-import RelativeConicArcs.QuadraticLineCounting
+import RelativeConicArcs.QuadraticGlobalCount
 
 /-!
 # Fully kernel-checked order-five exceptional-profile result
@@ -21,7 +21,7 @@ namespace RelativeConicArcs
 namespace Q25PairResult
 
 open Q25Coordinates Q25PairCertificate Q25Normalization Q25PairReduction
-  Q25BaseNormalization Q25OrbitDecomposition FiniteFields
+  Q25BaseNormalization Q25OrbitDecomposition QuadraticGlobalCount FiniteFields
 
 set_option maxHeartbeats 500000000
 set_option maxRecDepth 100000
@@ -106,12 +106,46 @@ theorem invariant_map_liftMapIdx {S : Finset Idx25} (hS : IsConjInvariant S)
   rw [← liftMapIdx_conjIdx]
   exact Finset.mem_map.mpr ⟨conjIdx i, hS i hiS, rfl⟩
 
-/-- **Exceptional `(f,e)=(2,3)` theorem over `PG(2,25)`.**  Every Frobenius-invariant
-eight-cap with exactly two fixed points has a legal nonfixed conjugate-pair extension. -/
-theorem indexed_f2_pair_extension {S : Finset Idx25}
+/-- Pull a legal orbit through a base-field normalization. -/
+theorem exists_legalPair_lift_preimage (g : Vec5 ≃ₗ[F5] Vec5)
+    {S T : Finset Idx25}
+    (hmap : S.map (liftMapIdx g).toEmbedding = T)
+    (hS : RawCap S) (hT : RawCap T) {q : OrbitCode} (hq : LegalPair T q) :
+    ∃ r : OrbitCode, liftMapOrbitCode g r = q ∧ LegalPair S r := by
+  have hsurj : Function.Surjective (liftMapOrbitCode g) :=
+    Finite.surjective_of_injective (liftMapOrbitCode_injective g)
+  obtain ⟨r, hr⟩ := hsurj q
+  refine ⟨r, hr, ?_⟩
+  have hpairMap := liftMapOrbitCode_spec g r
+  rw [hr] at hpairMap
+  have hfreshMap : PairFresh T q := hq.pairFresh
+  have hfresh : PairFresh S r := by
+    rw [PairFresh, Finset.disjoint_left]
+    intro x hxS hxr
+    have hxT : liftMapIdx g x ∈ T := by
+      rw [← hmap]
+      exact Finset.mem_map.mpr ⟨x, hxS, rfl⟩
+    have hxrMap : liftMapIdx g x ∈ (orbitPair r).map (liftMapIdx g).toEmbedding :=
+      Finset.mem_map.mpr ⟨x, hxr, rfl⟩
+    rw [hpairMap] at hxrMap
+    exact (Finset.disjoint_left.mp hfreshMap hxT) hxrMap
+  have hTUnion : RawCap (T ∪ orbitPair q) := hq.rawCap_union hT
+  have hmapUnion :
+      (S ∪ orbitPair r).map (liftMapIdx g).toEmbedding = T ∪ orbitPair q := by
+    rw [Finset.map_union, hmap, hpairMap]
+  have hSUnion : RawCap (S ∪ orbitPair r) :=
+    (rawCap_liftMapIdx g (S ∪ orbitPair r)).1 (by
+      rw [hmapUnion]
+      exact hTUnion)
+  exact legalPair_of_pairFresh_rawCap_union hfresh hSUnion
+
+/-- **Exceptional `(f,e)=(2,3)` multiplicity theorem over `PG(2,25)`.**  Every
+Frobenius-invariant eight-cap with exactly two fixed points has two distinct legal nonfixed
+conjugate-pair extensions. -/
+theorem indexed_f2_two_pair_extension {S : Finset Idx25}
     (hArc : RawCap S) (hInv : IsConjInvariant S)
     (hcard : S.card = 8) (hfixed : (fixedPart S).card = 2) :
-    ∃ q : OrbitCode, LegalPair S q := by
+    ∃ q r : OrbitCode, TwoLegalPairs S q r := by
   obtain ⟨i, j, hij, hfix⟩ := Finset.card_eq_two.mp hfixed
   have hiFix : conjIdx i = i := by
     have : i ∈ fixedPart S := by rw [hfix]; simp
@@ -142,61 +176,99 @@ theorem indexed_f2_pair_extension {S : Finset Idx25}
     rw [hTdecomp, hTfixed]
     simp [normalizedConfig, Finset.union_assoc]
   have hnormArc : RawCap (normalizedConfig a b c) := by rwa [← hTnorm]
-  obtain ⟨q, hq⟩ := normalized_extension_distinct hab hac hbc hnormArc
-  have hsurj : Function.Surjective (liftMapOrbitCode g) :=
-    Finite.surjective_of_injective (liftMapOrbitCode_injective g)
-  obtain ⟨r, hr⟩ := hsurj q
-  refine ⟨r, ?_⟩
-  have hpairMap := liftMapOrbitCode_spec g r
-  rw [hr] at hpairMap
-  have hfreshMap : PairFresh T q := by
-    rw [hTnorm]
-    exact hq.pairFresh
-  have hfresh : PairFresh S r := by
-    rw [PairFresh, Finset.disjoint_left]
-    intro x hxS hxr
-    have hxT : liftMapIdx g x ∈ T := Finset.mem_map.mpr ⟨x, hxS, rfl⟩
-    have hxrMap : liftMapIdx g x ∈ (orbitPair r).map (liftMapIdx g).toEmbedding :=
-      Finset.mem_map.mpr ⟨x, hxr, rfl⟩
-    rw [hpairMap] at hxrMap
-    exact (Finset.disjoint_left.mp hfreshMap hxT) hxrMap
-  have hTUnion : RawCap (T ∪ orbitPair q) := by
-    rw [hTnorm]
-    exact hq.rawCap_union hnormArc
-  have hmapUnion :
-      (S ∪ orbitPair r).map (liftMapIdx g).toEmbedding = T ∪ orbitPair q := by
-    rw [Finset.map_union, hpairMap]
-  have hSUnion : RawCap (S ∪ orbitPair r) :=
-    (rawCap_liftMapIdx g (S ∪ orbitPair r)).1 (by
-      rw [hmapUnion]
-      exact hTUnion)
-  exact legalPair_of_pairFresh_rawCap_union hfresh hSUnion
+  obtain ⟨q, r, hqr, hq, hr⟩ :=
+    normalized_two_extension_distinct hab hac hbc hnormArc
+  have hqT : LegalPair T q := by rwa [hTnorm]
+  have hrT : LegalPair T r := by rwa [hTnorm]
+  obtain ⟨u, huMap, hu⟩ := exists_legalPair_lift_preimage g rfl hArc hTArc hqT
+  obtain ⟨v, hvMap, hv⟩ := exists_legalPair_lift_preimage g rfl hArc hTArc hrT
+  refine ⟨u, v, ?_, hu, hv⟩
+  intro huv
+  apply hqr
+  rw [← huMap, ← hvMap, huv]
+
+/-- The original one-witness exceptional-profile theorem is a projection of multiplicity. -/
+theorem indexed_f2_pair_extension {S : Finset Idx25}
+    (hArc : RawCap S) (hInv : IsConjInvariant S)
+    (hcard : S.card = 8) (hfixed : (fixedPart S).card = 2) :
+    ∃ q : OrbitCode, LegalPair S q := by
+  obtain ⟨q, r, _hqr, hq, _hr⟩ :=
+    indexed_f2_two_pair_extension hArc hInv hcard hfixed
+  exact ⟨q, hq⟩
 
 /-! ## Paper-facing projective theorem -/
 
 noncomputable local instance : Fintype Point25 := Fintype.ofFinite _
 noncomputable local instance : DecidableEq Point25 := Classical.decEq _
 
-/-- **Projective exceptional-profile theorem.**  Every Frobenius-invariant eight-arc in
-`PG(2,25)` with exactly two selected fixed points admits a fresh nonfixed point together with its
-conjugate, and adjoining that pair preserves the arc property. -/
-theorem f2_pair_extension
+/-- The semantic unordered Frobenius pair represented by a coordinate orbit code. -/
+noncomputable def semanticOrbitPair (q : OrbitCode) : Sym2 Point25 :=
+  s(point (orbitIdx q), point (conjIdx (orbitIdx q)))
+
+theorem semanticOrbitPair_toFinset (q : OrbitCode) :
+    (semanticOrbitPair q).toFinset = pointSetIdx (orbitPair q) := by
+  simp [semanticOrbitPair, Sym2.toFinset_mk_eq, pointSetIdx, orbitPair]
+
+theorem semanticOrbitPair_injective : Function.Injective semanticOrbitPair := by
+  intro q r hqr
+  apply orbitPair_injective
+  apply Finset.map_injective pointEquiv.toEmbedding
+  simpa [pointSetIdx, semanticOrbitPair_toFinset] using congrArg Sym2.toFinset hqr
+
+theorem semanticOrbitPair_mem_globalLegalPairs
+    {C : Finset Point25} {S : Finset Idx25}
+    (hpointS : pointSetIdx S = C) (hRaw : RawCap S)
+    {q : OrbitCode} (hq : LegalPair S q) :
+    semanticOrbitPair q ∈ globalLegalPairs F5 K25 gf25_degree C := by
+  rw [mem_globalLegalPairs_iff]
+  refine ⟨?_, ?_⟩
+  · refine ⟨point (orbitIdx q), ?_, ?_, ?_⟩
+    · intro hpfix
+      have hpidx : conjIdx (orbitIdx q) = orbitIdx q := by
+        apply point_injective
+        rw [point_conjIdx]
+        exact hpfix
+      have hrank := congrArg rank hpidx
+      exact (Nat.ne_of_lt (orbitIdx_lt_conj q)) hrank.symm
+    · have hconj :
+          (QuadraticFrobenius.incidence F5 K25 gf25_degree).pointConj
+              (point (orbitIdx q)) =
+            point (conjIdx (orbitIdx q)) := by
+          change ProjectiveConjugation.projectiveEquiv
+              (QuadraticFrobenius.frobeniusRingEquiv F5 K25) (point (orbitIdx q)) = _
+          rw [← point_conjIdx]
+      rw [semanticOrbitPair, hconj]
+    · rw [semanticOrbitPair_toFinset, ← hpointS]
+      apply (Finset.disjoint_map pointEquiv.toEmbedding).mpr
+      exact hq.pairFresh.symm
+  · have hRawUnion := hq.rawCap_union hRaw
+    have hArcUnion : Arc (L := Point25) (pointSetIdx (S ∪ orbitPair q)) := by
+      rw [ProjectiveBridge.arc_iff_projectiveCap]
+      exact (rawCap_iff_projectiveCap (S ∪ orbitPair q)).mp hRawUnion
+    have hset : pointSetIdx (S ∪ orbitPair q) =
+        C ∪ (semanticOrbitPair q).toFinset := by
+      calc
+        pointSetIdx (S ∪ orbitPair q) =
+            pointSetIdx S ∪ pointSetIdx (orbitPair q) := by
+          simp [pointSetIdx, Finset.map_union]
+        _ = C ∪ (semanticOrbitPair q).toFinset := by
+          rw [hpointS, semanticOrbitPair_toFinset]
+    rwa [hset] at hArcUnion
+
+/-- **Projective exceptional-profile multiplicity theorem.**  Every Frobenius-invariant
+eight-arc in `PG(2,25)` with exactly two selected fixed points has two distinct semantic legal
+conjugate-pair extensions. -/
+theorem f2_two_pair_extension
     (C : Finset Point25)
     (hArc : Arc (L := Point25) C)
     (hInv : FiniteGeom.BaerCompletion.IsInvariant
       (QuadraticFrobenius.incidence F5 K25 gf25_degree) C)
     (hcard : C.card = 8)
     (hfixed : (QuadraticLineCounting.fixedArcPoints F5 K25 C).card = 2) :
-    ∃ p : Point25,
-      ProjectiveConjugation.projectiveEquiv
-          (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p ≠ p ∧
-      p ∉ C ∧
-      ProjectiveConjugation.projectiveEquiv
-          (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p ∉ C ∧
-      Arc (L := Point25)
-        (C ∪ {p,
-          ProjectiveConjugation.projectiveEquiv
-            (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p}) := by
+    ∃ q r : Sym2 Point25,
+      q ≠ r ∧
+      q ∈ globalLegalPairs F5 K25 gf25_degree C ∧
+      r ∈ globalLegalPairs F5 K25 gf25_degree C := by
   classical
   let S : Finset Idx25 := C.map pointEquiv.symm.toEmbedding
   have hmemS (i : Idx25) : i ∈ S ↔ point i ∈ C := by
@@ -241,40 +313,45 @@ theorem f2_pair_extension
   have hSfixed : (fixedPart S).card = 2 := by
     have hc := congrArg Finset.card hfixedSet
     simpa [pointSetIdx, hfixed] using hc
-  obtain ⟨q, hq⟩ := indexed_f2_pair_extension hRaw hSInv hScard hSfixed
-  let p := point (orbitIdx q)
-  refine ⟨p, ?_, ?_, ?_, ?_⟩
-  · intro hpfix
-    have hpidx : conjIdx (orbitIdx q) = orbitIdx q := by
-      apply point_injective
-      rw [point_conjIdx]
-      exact hpfix
-    have hr := congrArg rank hpidx
-    exact (Nat.ne_of_lt (orbitIdx_lt_conj q)) hr.symm
-  · intro hpC
-    exact hq.1 ((hmemS (orbitIdx q)).2 hpC)
-  · intro hpC
-    have hconjS : conjIdx (orbitIdx q) ∈ S := by
-      rw [hmemS, point_conjIdx]
-      exact hpC
-    exact hq.2.2.1 (Finset.mem_insert_of_mem hconjS)
-  · have hRawUnion := hq.rawCap_union hRaw
-    have hArcUnion : Arc (L := Point25) (pointSetIdx (S ∪ orbitPair q)) := by
-      rw [ProjectiveBridge.arc_iff_projectiveCap]
-      exact (rawCap_iff_projectiveCap (S ∪ orbitPair q)).mp hRawUnion
-    have hset : pointSetIdx (S ∪ orbitPair q) =
-        C ∪ {p,
+  obtain ⟨q, r, hqr, hq, hr⟩ :=
+    indexed_f2_two_pair_extension hRaw hSInv hScard hSfixed
+  refine ⟨semanticOrbitPair q, semanticOrbitPair r,
+    (fun h => hqr (semanticOrbitPair_injective h)), ?_, ?_⟩
+  · exact semanticOrbitPair_mem_globalLegalPairs hpointS hRaw hq
+  · exact semanticOrbitPair_mem_globalLegalPairs hpointS hRaw hr
+
+/-- **Projective exceptional-profile theorem.**  Every Frobenius-invariant eight-arc in
+`PG(2,25)` with exactly two selected fixed points admits a fresh nonfixed point together with its
+conjugate, and adjoining that pair preserves the arc property. -/
+theorem f2_pair_extension
+    (C : Finset Point25)
+    (hArc : Arc (L := Point25) C)
+    (hInv : FiniteGeom.BaerCompletion.IsInvariant
+      (QuadraticFrobenius.incidence F5 K25 gf25_degree) C)
+    (hcard : C.card = 8)
+    (hfixed : (QuadraticLineCounting.fixedArcPoints F5 K25 C).card = 2) :
+    ∃ p : Point25,
+      ProjectiveConjugation.projectiveEquiv
+          (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p ≠ p ∧
+      p ∉ C ∧
+      ProjectiveConjugation.projectiveEquiv
+          (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p ∉ C ∧
+      Arc (L := Point25)
+        (C ∪ {p,
           ProjectiveConjugation.projectiveEquiv
-            (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p} := by
-      rw [pointSetIdx, Finset.map_union]
-      have hpair : (orbitPair q).map pointEquiv.toEmbedding =
-          {p, ProjectiveConjugation.projectiveEquiv
-            (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p} := by
-        simp [orbitPair, p, point_conjIdx]
-      have hSmap : S.map pointEquiv.toEmbedding = C := by
-        simpa only [pointSetIdx] using hpointS
-      rw [hSmap, hpair]
-    rwa [hset] at hArcUnion
+            (QuadraticFrobenius.frobeniusRingEquiv F5 K25) p}) := by
+  obtain ⟨q, r, _hqr, hq, _hr⟩ := f2_two_pair_extension C hArc hInv hcard hfixed
+  rw [mem_globalLegalPairs_iff] at hq
+  obtain ⟨⟨p, hp, rfl, hdisj⟩, hArcUnion⟩ := hq
+  refine ⟨p, hp, ?_, ?_, ?_⟩
+  · intro hpC
+    exact (Finset.disjoint_left.mp hdisj (by simp [Sym2.toFinset_mk_eq])) hpC
+  · intro hpC
+    change (QuadraticFrobenius.incidence F5 K25 gf25_degree).pointConj p ∈ C at hpC
+    exact (Finset.disjoint_left.mp hdisj (by simp [Sym2.toFinset_mk_eq])) hpC
+  · change Arc (L := Point25)
+      (C ∪ {p, (QuadraticFrobenius.incidence F5 K25 gf25_degree).pointConj p})
+    simpa [Sym2.toFinset_mk_eq] using hArcUnion
 
 end Q25PairResult
 end RelativeConicArcs

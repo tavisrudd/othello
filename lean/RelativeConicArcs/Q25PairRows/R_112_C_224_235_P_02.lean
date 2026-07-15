@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_112_224 : RowResult ⟨112, by decide⟩ ⟨224, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨157, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_112_225 : RowResult ⟨112, by decide⟩ ⟨225, by decide⟩ := by
   have _previous := row_112_224
@@ -48,22 +49,27 @@ theorem row_112_230 : RowResult ⟨112, by decide⟩ ⟨230, by decide⟩ := by
 
 theorem row_112_231 : RowResult ⟨112, by decide⟩ ⟨231, by decide⟩ := by
   have _previous := row_112_230
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨223, by decide⟩, by decide⟩
 
 theorem row_112_232 : RowResult ⟨112, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_112_231
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨221, by decide⟩, by decide⟩
 
 theorem row_112_233 : RowResult ⟨112, by decide⟩ ⟨233, by decide⟩ := by
   have _previous := row_112_232
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩,
+    orbitCodeOfNumber ⟨224, by decide⟩, by decide⟩
 
 theorem row_112_234 : RowResult ⟨112, by decide⟩ ⟨234, by decide⟩ := by
   have _previous := row_112_233
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨223, by decide⟩, by decide⟩
 
 theorem row_112_235 : RowResult ⟨112, by decide⟩ ⟨235, by decide⟩ := by
   have _previous := row_112_234
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨216, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

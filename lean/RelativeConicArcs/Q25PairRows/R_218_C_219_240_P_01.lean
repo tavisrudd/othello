@@ -80,11 +80,13 @@ theorem row_218_230 : RowResult ⟨218, by decide⟩ ⟨230, by decide⟩ := by
 
 theorem row_218_231 : RowResult ⟨218, by decide⟩ ⟨231, by decide⟩ := by
   have _previous := row_218_230
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨198, by decide⟩, by decide⟩
 
 theorem row_218_232 : RowResult ⟨218, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_218_231
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨198, by decide⟩, by decide⟩
 
 theorem row_218_233 : RowResult ⟨218, by decide⟩ ⟨233, by decide⟩ := by
   have _previous := row_218_232
@@ -94,19 +96,23 @@ theorem row_218_233 : RowResult ⟨218, by decide⟩ ⟨233, by decide⟩ := by
 
 theorem row_218_234 : RowResult ⟨218, by decide⟩ ⟨234, by decide⟩ := by
   have _previous := row_218_233
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨194, by decide⟩, by decide⟩
 
 theorem row_218_235 : RowResult ⟨218, by decide⟩ ⟨235, by decide⟩ := by
   have _previous := row_218_234
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_218_236 : RowResult ⟨218, by decide⟩ ⟨236, by decide⟩ := by
   have _previous := row_218_235
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨198, by decide⟩, by decide⟩
 
 theorem row_218_237 : RowResult ⟨218, by decide⟩ ⟨237, by decide⟩ := by
   have _previous := row_218_236
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_218_238 : RowResult ⟨218, by decide⟩ ⟨238, by decide⟩ := by
   have _previous := row_218_237

@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_33_99 : RowResult ⟨33, by decide⟩ ⟨99, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨60, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_33_100 : RowResult ⟨33, by decide⟩ ⟨100, by decide⟩ := by
   have _previous := row_33_99
@@ -48,7 +49,8 @@ theorem row_33_105 : RowResult ⟨33, by decide⟩ ⟨105, by decide⟩ := by
 
 theorem row_33_106 : RowResult ⟨33, by decide⟩ ⟨106, by decide⟩ := by
   have _previous := row_33_105
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_33_107 : RowResult ⟨33, by decide⟩ ⟨107, by decide⟩ := by
   have _previous := row_33_106
@@ -70,18 +72,22 @@ theorem row_33_109 : RowResult ⟨33, by decide⟩ ⟨109, by decide⟩ := by
 
 theorem row_33_110 : RowResult ⟨33, by decide⟩ ⟨110, by decide⟩ := by
   have _previous := row_33_109
-  exact Or.inr ⟨orbitCodeOfNumber ⟨196, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨61, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_33_111 : RowResult ⟨33, by decide⟩ ⟨111, by decide⟩ := by
   have _previous := row_33_110
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_33_112 : RowResult ⟨33, by decide⟩ ⟨112, by decide⟩ := by
   have _previous := row_33_111
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨57, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_33_113 : RowResult ⟨33, by decide⟩ ⟨113, by decide⟩ := by
   have _previous := row_33_112
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨60, by decide⟩,
+    orbitCodeOfNumber ⟨246, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

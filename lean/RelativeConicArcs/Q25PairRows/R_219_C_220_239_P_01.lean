@@ -74,15 +74,18 @@ theorem row_219_230 : RowResult ⟨219, by decide⟩ ⟨230, by decide⟩ := by
 
 theorem row_219_231 : RowResult ⟨219, by decide⟩ ⟨231, by decide⟩ := by
   have _previous := row_219_230
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨38, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_219_232 : RowResult ⟨219, by decide⟩ ⟨232, by decide⟩ := by
   have _previous := row_219_231
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨198, by decide⟩, by decide⟩
 
 theorem row_219_233 : RowResult ⟨219, by decide⟩ ⟨233, by decide⟩ := by
   have _previous := row_219_232
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨38, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_219_234 : RowResult ⟨219, by decide⟩ ⟨234, by decide⟩ := by
   have _previous := row_219_233
@@ -92,15 +95,18 @@ theorem row_219_234 : RowResult ⟨219, by decide⟩ ⟨234, by decide⟩ := by
 
 theorem row_219_235 : RowResult ⟨219, by decide⟩ ⟨235, by decide⟩ := by
   have _previous := row_219_234
-  exact Or.inr ⟨orbitCodeOfNumber ⟨116, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_219_236 : RowResult ⟨219, by decide⟩ ⟨236, by decide⟩ := by
   have _previous := row_219_235
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨198, by decide⟩, by decide⟩
 
 theorem row_219_237 : RowResult ⟨219, by decide⟩ ⟨237, by decide⟩ := by
   have _previous := row_219_236
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨199, by decide⟩, by decide⟩
 
 theorem row_219_238 : RowResult ⟨219, by decide⟩ ⟨238, by decide⟩ := by
   have _previous := row_219_237

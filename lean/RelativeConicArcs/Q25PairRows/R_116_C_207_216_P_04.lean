@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_116_207 : RowResult ⟨116, by decide⟩ ⟨207, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_116_208 : RowResult ⟨116, by decide⟩ ⟨208, by decide⟩ := by
   have _previous := row_116_207
@@ -24,7 +25,8 @@ theorem row_116_209 : RowResult ⟨116, by decide⟩ ⟨209, by decide⟩ := by
 
 theorem row_116_210 : RowResult ⟨116, by decide⟩ ⟨210, by decide⟩ := by
   have _previous := row_116_209
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_116_211 : RowResult ⟨116, by decide⟩ ⟨211, by decide⟩ := by
   have _previous := row_116_210
@@ -34,11 +36,13 @@ theorem row_116_211 : RowResult ⟨116, by decide⟩ ⟨211, by decide⟩ := by
 
 theorem row_116_212 : RowResult ⟨116, by decide⟩ ⟨212, by decide⟩ := by
   have _previous := row_116_211
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨243, by decide⟩, by decide⟩
 
 theorem row_116_213 : RowResult ⟨116, by decide⟩ ⟨213, by decide⟩ := by
   have _previous := row_116_212
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨247, by decide⟩, by decide⟩
 
 theorem row_116_214 : RowResult ⟨116, by decide⟩ ⟨214, by decide⟩ := by
   have _previous := row_116_213
@@ -48,7 +52,8 @@ theorem row_116_214 : RowResult ⟨116, by decide⟩ ⟨214, by decide⟩ := by
 
 theorem row_116_215 : RowResult ⟨116, by decide⟩ ⟨215, by decide⟩ := by
   have _previous := row_116_214
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_116_216 : RowResult ⟨116, by decide⟩ ⟨216, by decide⟩ := by
   have _previous := row_116_215

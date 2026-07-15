@@ -116,15 +116,18 @@ theorem row_112_130 : RowResult ⟨112, by decide⟩ ⟨130, by decide⟩ := by
 
 theorem row_112_131 : RowResult ⟨112, by decide⟩ ⟨131, by decide⟩ := by
   have _previous := row_112_130
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_112_132 : RowResult ⟨112, by decide⟩ ⟨132, by decide⟩ := by
   have _previous := row_112_131
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨33, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_112_133 : RowResult ⟨112, by decide⟩ ⟨133, by decide⟩ := by
   have _previous := row_112_132
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨34, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_112_134 : RowResult ⟨112, by decide⟩ ⟨134, by decide⟩ := by
   have _previous := row_112_133
@@ -134,11 +137,13 @@ theorem row_112_134 : RowResult ⟨112, by decide⟩ ⟨134, by decide⟩ := by
 
 theorem row_112_135 : RowResult ⟨112, by decide⟩ ⟨135, by decide⟩ := by
   have _previous := row_112_134
-  exact Or.inr ⟨orbitCodeOfNumber ⟨39, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨244, by decide⟩, by decide⟩
 
 theorem row_112_136 : RowResult ⟨112, by decide⟩ ⟨136, by decide⟩ := by
   have _previous := row_112_135
-  exact Or.inr ⟨orbitCodeOfNumber ⟨168, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨32, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_112_137 : RowResult ⟨112, by decide⟩ ⟨137, by decide⟩ := by
   have _previous := row_112_136
@@ -148,6 +153,7 @@ theorem row_112_137 : RowResult ⟨112, by decide⟩ ⟨137, by decide⟩ := by
 
 theorem row_112_138 : RowResult ⟨112, by decide⟩ ⟨138, by decide⟩ := by
   have _previous := row_112_137
-  exact Or.inr ⟨orbitCodeOfNumber ⟨85, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨31, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate

@@ -8,7 +8,8 @@ set_option linter.unusedTactic false
 set_option linter.unreachableTactic false
 
 theorem row_40_171 : RowResult ⟨40, by decide⟩ ⟨171, by decide⟩ := by
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_40_172 : RowResult ⟨40, by decide⟩ ⟨172, by decide⟩ := by
   have _previous := row_40_171
@@ -18,11 +19,13 @@ theorem row_40_172 : RowResult ⟨40, by decide⟩ ⟨172, by decide⟩ := by
 
 theorem row_40_173 : RowResult ⟨40, by decide⟩ ⟨173, by decide⟩ := by
   have _previous := row_40_172
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_40_174 : RowResult ⟨40, by decide⟩ ⟨174, by decide⟩ := by
   have _previous := row_40_173
-  exact Or.inr ⟨orbitCodeOfNumber ⟨147, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨62, by decide⟩,
+    orbitCodeOfNumber ⟨248, by decide⟩, by decide⟩
 
 theorem row_40_175 : RowResult ⟨40, by decide⟩ ⟨175, by decide⟩ := by
   have _previous := row_40_174
@@ -62,14 +65,17 @@ theorem row_40_180 : RowResult ⟨40, by decide⟩ ⟨180, by decide⟩ := by
 
 theorem row_40_181 : RowResult ⟨40, by decide⟩ ⟨181, by decide⟩ := by
   have _previous := row_40_180
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_40_182 : RowResult ⟨40, by decide⟩ ⟨182, by decide⟩ := by
   have _previous := row_40_181
-  exact Or.inr ⟨orbitCodeOfNumber ⟨237, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨61, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 theorem row_40_183 : RowResult ⟨40, by decide⟩ ⟨183, by decide⟩ := by
   have _previous := row_40_182
-  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩, by decide⟩
+  exact Or.inr ⟨orbitCodeOfNumber ⟨59, by decide⟩,
+    orbitCodeOfNumber ⟨249, by decide⟩, by decide⟩
 
 end RelativeConicArcs.Q25PairCertificate
