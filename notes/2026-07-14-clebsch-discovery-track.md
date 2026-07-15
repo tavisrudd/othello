@@ -869,3 +869,15 @@ published open problems and questions newly posed by this project.
 - C190 has completed the gem-mining ownership seam: C159 imports C184's q=11 degree/rank atlas,
   and C160 retains only the q=5 priority search. Neither C155 nor the BSW exterior-set conjecture
   changes status.
+
+## 2026-07-15 — the line bound has a plane-axiom/coordinate fault line
+
+- Formalizing C180 isolates a reusable statement stronger than the immediate `PG(2,11)`
+  application: in any finite projective plane, every six-arc satisfies the full `q-5`
+  uncovered-points-per-line bound provided only that the five-covered-point equality case is
+  impossible on disjoint lines. All counting, chord, tangent, and case-split work is purely
+  incidence-theoretic. Desarguesian coordinates and odd characteristic enter solely in excluding
+  that equality case via the triangular prism.
+- **Question — follow-on:** which non-Desarguesian odd-order planes, if any, admit the exceptional
+  five-direction one-factorization configuration? This should not widen the current paper, but the
+  formal boundary makes the question precise and reusable.

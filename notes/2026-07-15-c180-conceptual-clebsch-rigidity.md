@@ -2,8 +2,10 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **PROOF FOUND, SOURCE GATE OPEN** — the geometric argument is complete conditional on
-Dye's characteristic-11 equality theorem; manuscript integration waits for that exact source check.
+**Status**: **INCIDENCE LEAN COMPLETE; AFFINE + SOURCE GATES OPEN** — the generic projective-plane
+incidence spine and complete case split pass Lean. The remaining formal seam is exactly the
+odd-field triangular-prism exclusion of the five-covered-point equality case; manuscript
+integration also waits for the exact Dye 1991 source check.
 
 ## Target
 
@@ -90,6 +92,20 @@ so `c(A)=10`. Dye's equality classification makes `A` a Clebsch hexagon. Its unc
 the nonsingular 12-point invariant conic, which cannot lie in two lines because each line meets it
 in at most two points. A double line is covered by the same lemma. A rank-two nonsplit singular
 conic has only its singular point over the ground field, so it cannot contain `|U(A)|>=12` at all.
+
+## Lean boundary
+
+`lean/RelativeConicArcs/OddSixArcLineBound.lean` now proves, without new axioms or computational
+oracles, the total secant-index count, the chord and one-vertex cases, the five-point disjoint-line
+bound and its equality structure, the covered/uncovered partition, and a master `q-5` theorem
+conditional only on excluding that equality case. It also proves the final scalar contradiction
+once the two affine parallelism equations are supplied.
+
+The remaining bridge has two clean pieces: classify the equality fibers as the standard
+one-factorization pattern of `K6`, then use the existing projective/affine coordinate API to send
+the exceptional line to infinity and derive those equations. The focused Lake target builds fresh
+with `LEAN_NUM_THREADS=1` and `choom -n 500`; its manuscript-facing axiom reports contain only
+`propext`, `Classical.choice`, and `Quot.sound`.
 
 The nonsingular case is even shorter: conic containment already gives `|U(A)|<=12`, so the same
 equality argument applies. Once Dye's exact field/descent statement is pinned, these two arguments
