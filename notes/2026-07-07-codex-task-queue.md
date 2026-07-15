@@ -19,12 +19,12 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C144.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C152.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
-are `alt-orbit-repair`, `baer`, `cap`, `clebsch`, `cubic`, `kayles`, `queens`, `relconic`,
-`repaircodes` (`hexagon` is a spoken synonym for `clebsch` and is never written as a peg). Exactly one lane per
+are `alt-orbit-repair`, `baer`, `cap`, `clebsch`, `cubic`, `gem-mining`, `kayles`, `queens`,
+`relconic`, `repaircodes` (`hexagon` is a spoken synonym for `clebsch` and is never written as a peg). Exactly one lane per
 item; peg in the same edit that allocates the ID; an unpegged row is a bug. The section groupings
 below are presentation only — **the tag is the fact, and wins when they disagree**. Re-pegging is a
 lane switch and needs explicit approval. All rows were pegged 2026-07-14.
@@ -33,16 +33,36 @@ ID is computed, so an invented ID in prose silently burns that number.)
 
 **Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-alternate-orbit-repair.md). The certificate-free `s ≥ 7` theorem is
-first; the uniform Q25 theorem is gated on a representative two-witness certificate leaf and a
-clear Lean build window.
-- **C142 `[alt-orbit-repair]` [QUEUED 2026-07-14]** — kernel-check alternate-orbit repair for
+reported; the uniform Q25 certificate closure is running, and C148 has begun as arithmetic-only
+development outside that build graph. C149–C152 are paper-upgrade tasks ordered by EV and their
+explicit decision gates.
+- **C142 `[alt-orbit-repair]` [REPORTED 2026-07-14]** — kernel-checked alternate-orbit repair for
   invariant ten-arcs over every prime-power base order `s ≥ 7`, with at least eight alternatives,
   and package the existing Q25 nonexceptional-profile repair bounds →
   `notes/2026-07-14-c142-alternate-orbit-repair.md`.
-- **C143 `[alt-orbit-repair]` [QUEUED 2026-07-14 — GATED AFTER C142]** — test a representative
+- **C143 `[alt-orbit-repair]` [ACTIVE 2026-07-14 — KERNEL CLOSURE RUNNING]** — test a representative
   exceptional-profile leaf for two distinct legal pairs; if feasible, regenerate and build the
   full two-witness `f=2` certificate, transport distinctness, and prove uniform Q25 alternate-orbit
   repair → `notes/2026-07-14-c143-q25-alternate-orbit-repair.md`.
+- **C148 `[alt-orbit-repair]` [ACTIVE 2026-07-14 — BUILD-WINDOW GATED]** — kernel-check the exact
+  general-`s` five-profile lower-bound envelope, its crossover profiles, and the uniform
+  318-alternative corollary → `notes/2026-07-14-c148-general-s-profile-envelope.md`.
+- **C149 `[alt-orbit-repair]` [QUEUED 2026-07-14 — AFTER C148 PHASE-DIAGRAM GATE]** — generalize
+  deletion/repair from `10→8` to a parameterized invariant `(k+2)→k` robust equivariant exchange
+  theorem with a nontrivial `(s,k,f,e)` range →
+  `notes/2026-07-14-c149-parameterized-robust-exchange.md`.
+- **C150 `[alt-orbit-repair]` [QUEUED 2026-07-14 — STRUCTURAL SCOUT]** — seek a moment/collision or
+  small integer-LP explanation of the exceptional Q25 legal-pair multiplicity, with `L≥32` as the
+  high target and a strict stop before census-sized formalization →
+  `notes/2026-07-14-c150-q25-multiplicity-structure.md`.
+- **C151 `[alt-orbit-repair]` [QUEUED 2026-07-14 — GATED ON C150 OR FEW MINIMIZER CLASSES]** — prove
+  the exact Q25 minimum legal-pair count `32` and classify extremizers, using a finite certificate
+  only for a small residual classification →
+  `notes/2026-07-14-c151-q25-minimum-classification.md`.
+- **C152 `[alt-orbit-repair]` [QUEUED 2026-07-14 — COMPONENT-CENSUS FIRST]** — formalize the
+  orbit-replacement graph and degree identity, then test fixed-subset fibers for connectivity,
+  diameter, or a finer component invariant →
+  `notes/2026-07-14-c152-orbit-replacement-graph.md`.
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
 [handoff](handoffs/2026-07-14-baer-equivariant-robust-completion.md). C134–C141 are reported. The
@@ -83,6 +103,21 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)
   mine the 27-lines/cubic-surfaces-over-F₁₁ half for R-A/E₆. `[QUEUED 2026-07-14]` → handoff §round-3
   audit + handoff §Open-lit.
+- **C146 `[clebsch]` [QUEUED 2026-07-14 — BLOCKS SUBMISSION]** — re-base the manuscript's prior art
+  onto Edge 1956 and Blokhuis–Seress–Wilbrink 1991/1992, neither of which it cites: obtain the texts,
+  read Edge §§18–32 in full and settle whether he states the covering fact, rewrite the §2 priority
+  footnote (currently argued against Dye 1991, the wrong paper), and frame the healthy census against
+  the open BSW conjecture → `notes/2026-07-14-c146-edge-bsw-prior-art.md`. TODO planted at the §2
+  site in `papers/clebsch-hexagon-code/clebsch_hexagon_code.tex`.
+
+**Gem-mining lane (`gem-mining`, 2026-07-14):** see
+[handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem
+hunt; the Clebsch paper's own findings stay pegged `clebsch`.
+- **C147 `[gem-mining]` [QUEUED 2026-07-14]** — settle the polarity-defect characterization of
+  Mathieu hexads (*a 6-subset of the conic in PG(2,11) is a hexad of S(5,6,12) iff no three of its
+  chords are concurrent off it*) against the literature sweep, and promote the session's E_q
+  healthy-census and hexad scripts to durable verifiers →
+  `notes/2026-07-14-c147-hexad-polarity-characterization.md`.
 
 **Box:** compute up to ~8 GB / multi-core is fine; q ≥ 23 grid-cap campaigns and n=20 queens runs
 still require an explicit user gate.

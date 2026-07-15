@@ -98,6 +98,10 @@ routing table? (c) which lane next? Wait for the answers.
   [`papers/clebsch-hexagon-code/`](papers/clebsch-hexagon-code/) (the `.tex` is authoritative for all
   prose and citations); indexed in [papers-index.md](papers/papers-index.md) under the same
   `clebsch` alias.
+- **`gem-mining`** — the second-gem hunt and the census-sweep machinery behind it (C147): start with
+  [gem mining](notes/handoffs/2026-07-14-gem-mining.md). Owns the generator methodology, the E_q
+  healthy census, and the hexad/octad polarity program. Findings that land in the Clebsch manuscript
+  are pegged `clebsch`, not here.
 - **`cap`** (shared with Codex) — use the same
   [projective cap game](notes/handoffs/2026-07-06-projective-cap-game-handoff.md)
   handoff unless the user names a different lane.
