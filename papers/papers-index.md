@@ -10,6 +10,9 @@ audit. **Clebsch was added 2026-07-13, after that review, bringing it to six (+1
 the `arcs` q=11 material, and the 2026-07-14 seam ruling makes it ship after `arcs`. See
 `papers-planning.md` for the rulings, the ship order, and per-paper guardrails.
 
+Likely expert readers, referee-fit cautions, paper-specific questions, and high-excitement upgrade
+targets are maintained in [`expert-profiles/`](expert-profiles/README.md).
+
 **Numbering.** The `#` on each directory row is that paper's **ship-order number, 1–7**, and is the
 one numbering scheme in use — `papers-planning.md` → *Papers — decomposition and ship order* is the
 authoritative list (it carries the gate distances and the dependency rulings); this registry carries
