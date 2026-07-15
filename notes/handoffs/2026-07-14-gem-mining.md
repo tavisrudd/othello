@@ -9,11 +9,27 @@ manifest, and submission remains gated on C156/C157/C169. C159 is seeded by Cleb
 q11 six-arc low-degree table; C160's finite calculation is superseded by Clebsch C187 and only its q5
 folklore/priority check remains.
 
-**Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190 reports and
-scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`, `notes/2026-07-15-gem-discovery-track.md`, this
-handoff and its companion, and the
-`gem-mining` rows of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167),
-even when they cite a gem result.
+**Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191
+reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
+`notes/2026-07-15-gem-discovery-track.md`, this handoff and its companion, and the `gem-mining` rows
+of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167), even when they
+cite a gem result.
+
+**Gap-mining output is contained to this lane.** Everything the gap mine produces — cells, causes,
+ledger rows, discovery-track entries, method findings — lives in this lane's docs and nowhere else.
+Do not route it into another lane's handoff, and keep it out of the global queue beyond the bare
+one-line `C<id> — description → report path` row the ID registry requires: no findings, no verdicts,
+no status prose there. The mine may *read* any lane's docs freely; it may not write to them. A
+gap-mined result that belongs in a manuscript still routes through that manuscript's lane, exactly as
+any other gem result does.
+
+**Gap-mining output is provisional until vetted by a stronger reasoning model** (Fable, or 5.6 Sol).
+This covers the reasoning, not just the literature claims: causes, promotion scores, cell verdicts,
+ledger rows, claimed mechanisms. The rule is earned — the method's first draft was confidently wrong
+at its centre and needed an adversarial Fable pass to see it, and the revision then introduced a
+circular calibration gate resting on a misreport of an in-repo record, caught only by an independent
+review. Fluency is not evidence, and self-review does not catch this class. Nothing gap-mined is
+load-bearing, citable, or promotable to a manuscript before its vet.
 
 ## Adversarial takeover map (2026-07-14)
 
@@ -29,7 +45,7 @@ Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsc
 | **C159** | queued, independent | consume C184's complete q11 six-arc degree/rank table; begin with the missing q<=11 atlas cells, not a q11 six-arc rerun |
 | **C160** | priority residue only | C187 settles the q5 frame/conic calculation; check Edge/frame folklore and coding tables |
 | **C190** | reported | Clebsch-to-gem ownership and citation seams fixed → [report](../2026-07-15-c190-gem-clebsch-routing.md) |
-| **C191** | reported, method gate | gap-mining backfill: the method survives its own history, in-sample only; next are the non-circular instrument calibration and C177 as the first prospective cell → [report](../2026-07-15-c191-gap-mining-backfill.md) |
+| **C191** | reported, **provisional — awaiting vet** | gap-mining backfill: the method survives its own history, in-sample only, so its power was falsification not validation; next are the vet, the non-circular instrument calibration, and C177 as the first prospective cell → [report](../2026-07-15-c191-gap-mining-backfill.md) |
 | **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
 | **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
 | **C177** | queued, independent | test whether local Mathieu systems on the point-regulus conics of `D_Hex(11)` glue to a `2-(1332,6,240)` or oriented `2-(1332,6,120)` design; not a C155 gate |

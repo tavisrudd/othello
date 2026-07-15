@@ -360,6 +360,7 @@ them change nobody's belief. These run *inside* promotion, before any gate is op
 | Coincidence of small numbers | rule 4 — neighbouring parameter, always                        |
 | Seam emptiness read as proof | it is a prior; the leaf read is still mandatory                |
 | Tier read as cell trust      | validity is not virginity                                      |
+| Fluent self-review           | provisional until a stronger reasoning model vets it           |
 
 ## Trust boundary
 
@@ -367,6 +368,20 @@ The instrument for absence is a language model, which will produce a fluent and 
 if permitted. This is the same hazard the lane fences on the computational side — *no numerical claim
 may depend only on a session scratchpad* — and it binds harder here, because a confabulated absence
 is indistinguishable from a real one at the point of use.
+
+**Everything this mine produces is provisional until vetted by a stronger reasoning model.** Not only
+the literature claims — the *reasoning over them* too: a named cause, a promotion score, a cell
+verdict, a ledger row, a claimed mechanism. None is load-bearing until a stronger reasoning model
+(Fable, or 5.6 Sol) has passed over it. Route the vet through this lane's own docs, per the
+containment rule in the handoff.
+
+The rule is earned rather than precautionary, and this doc is the evidence. Its first draft was
+written with apparent care and its central claim was wrong; the Fable pass overturned it. The
+revision was then written to fix exactly that, and a coverage review found it had introduced a
+*circular* instrument-calibration gate resting on a misreport of an in-repo record — a gate that
+could not fail, inside the doc about not confabulating. Both errors read as fluent and plausible at
+the point of writing. Fluency is not evidence here, and self-review does not catch this class:
+independent, stronger passes do.
 
 **The ladder prices negatives only.** Absence support is what needs grading; a search *positive* is
 not on the ladder at all — it is an immediate cheap kill.

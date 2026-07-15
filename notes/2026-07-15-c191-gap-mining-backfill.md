@@ -2,8 +2,16 @@
 
 **Lane**: `gem-mining` — see CLAUDE.md § Lane routing.
 **Date**: 2026-07-15
-**Status**: **REPORTED** — backfill complete. The method survives its own history. The declared null
-is untested and cannot be tested by this pass.
+**Status**: **REPORTED, PROVISIONAL** — backfill complete; the method survives its own history; the
+declared null is untested and cannot be tested by this pass.
+
+**Provisional means provisional.** Every finding below is this model's reasoning and is **not
+load-bearing until a stronger reasoning model (Fable, or 5.6 Sol) has vetted it**. The rule is earned
+by the session that produced this report: the method's first draft was confidently wrong at its
+centre and needed the Fable pass to see it, and the revision then introduced a circular calibration
+gate resting on a misreport of an in-repo record, caught only by an independent review. Both errors
+read as fluent at the point of writing. Treat the scoring below as a proposal for a vet, not a
+result.
 
 The first pass of [the gap-mining method](2026-07-15-gems-theory-gaps-method.md), per its § First
 steps: score the lane's already-decided cells as if the method had ranked them before the answers
@@ -151,9 +159,13 @@ incorporated. That is itself evidence of the in-sample problem rather than of th
 
 ## Next
 
-1. **Instrument calibration** — the non-circular one. Diff Edge 1956's citers from MathSciNet or
+1. **Vet this report** with a stronger reasoning model before anything downstream leans on it. Its
+   findings are unvetted single-model reasoning, and the two highest-value ones — the tier-1/tier-4
+   incoherence and the factoring retrodiction — are exactly the sort of tidy narrative this session
+   has already shown the model produces fluently and wrongly.
+2. **Instrument calibration** — the non-circular one. Diff Edge 1956's citers from MathSciNet or
    zbMATH against the OpenAlex closure. Until it exists, object-level emptiness is a lead, not a
    reading, and the Clebsch row above rests on an uncalibrated instrument.
-2. **C177, scored before it is run** — the first out-of-sample datum, and the first that can move the
+3. **C177, scored before it is run** — the first out-of-sample datum, and the first that can move the
    declared null.
-3. **Do not add retrospective cells.** They cannot test the null and they will inflate confidence.
+4. **Do not add retrospective cells.** They cannot test the null and they will inflate confidence.
