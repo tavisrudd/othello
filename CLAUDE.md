@@ -131,40 +131,54 @@ independent — **job count, CPU placement, memory risk** — and conflating the
 
 **Choose N by measurement, never from `nproc` and never from another family's N.** Measure the
 heaviest representative leaf's peak RSS with GNU `time -v` (`/usr/bin/time -v`; a bare `time` is a
-bash keyword, not GNU time). Reserve 6–8 GiB for the OS, Lake itself, page cache, and other lanes,
-then require `N × representative_peak_RSS + reserve < physical RAM`. Measured so far:
+bash keyword, not GNU time). Reserve 6–8 GiB for the OS, Lake itself, and **tmpfs** — `/tmp` pages
+are unreclaimable with no swap, so check `free` (shared) and `df /tmp` and add current usage to the
+reserve — then require `N × representative_peak_RSS + reserve < physical RAM`. Measured so far:
 `RelativeConicArcs` Q16 generated leaves ≈1.3 GiB/worker → N=6 verified safe (2026-07-14); the C143
-two-witness leaf peaks ≈6.3 GiB/worker → **N=2** (`2 × 6.34 + 8 ≈ 21 GiB`), and N=3 only on an
-otherwise-quiet box after observing real headroom — `3 × 6.34 + 8 ≈ 27 GiB` fails this rule
-outright, and a 6 GiB reserve leaves ≈1 GiB for everything else (C143 figure reported by the
-alt-orbit-repair lane, not independently re-measured). Use 1–2 while another memory-heavy lane is
-active. A "maximum" that barely fits the most optimistic reserve is not a maximum. A cap that is
-right for one target family is unsafe for another; lighter modules may run a higher cap.
+two-witness leaf peaks ≈6.3 GiB/worker → **N=2** (`2 × 6.34 + 8 ≈ 21 GiB`). N=3 is **not** licensed
+there: `3 × 6.34 + 8 ≈ 27 GiB` fails the rule, and a quieter box changes the reserve, not the rule.
+Use 1 while another memory-heavy build is running at all (see the concurrency hazard below). A cap
+that is right for one target family is unsafe for another; lighter modules may run a higher cap.
+(C143 figures reported by the alt-orbit-repair lane, not independently re-measured.)
 
 **The closure is heterogeneous — size N against what can be co-scheduled, not the average leaf.**
 `N × peak_RSS` assumes every concurrent worker costs the same; that holds for uniform generated
 leaves and breaks when a shared checker sits in the closure. The C143 leaf standalone against
-current dependencies peaks ≈6.3 GiB, but the *first* build after a checker change peaked ≈10.8 GiB:
-it rebuilt `Q25PairCertificate` (≈180 s) before the leaf itself (≈105 s; 4:51.9 total). Two such
-modules co-scheduled would exhaust the budget on their own, so N=2 there is safe only because the
-checker happens to build first and alone — by luck, not by design. Build a known-heavy shared
-dependency **serially first** (N=1) and fan the generated leaves out at the measured N only once it
-completes; aggregate fan-out should begin only after the shared checker is done. This is a targeted
-serial step for one heavy dependency, not the full leaves-first ceremony. (Figures reported by the
-alt-orbit-repair lane, not independently re-measured.)
+current dependencies peaks ≈6.3 GiB; the shared checker `Q25PairCertificate` peaks ≈9.3 GiB on its
+own, and the *first* build after a checker change peaked ≈10.8 GiB overall — it rebuilt the checker
+(≈180 s) before the leaf itself (≈105 s; 4:51.9 total). A **dependent never co-schedules with its
+dependency** — Lake's DAG builds the checker to completion before any row that imports it, so in a
+focused leaf build the checker runs alone by design. The exposure is **non-dependent siblings**:
+in a wide build, modules outside the checker's cone (e.g. Q16 leaves during a Q25 checker rebuild)
+fill the remaining N−1 slots. Budget `checker_peak + (N−1) × heaviest_sibling`, and build a
+known-heavy shared dependency **serially first** (N=1), fanning the generated leaves out at the
+measured N only once it completes. This is a targeted serial step for one heavy dependency, not the
+full leaves-first ceremony. (Figures reported by the alt-orbit-repair lane, not independently
+re-measured.)
 
 ```
-LEAN_NUM_THREADS=3 choom -n 1000 -- taskset -c 20-22 \
+LEAN_NUM_THREADS=2 choom -n 1000 -- taskset -c 20-21 \
   nix develop --command bash \
-  -lc 'export LEAN_NUM_THREADS=3; exec lake build <explicit-targets>'
+  -lc 'export LEAN_NUM_THREADS=2; exec lake build <explicit-targets>'
 ```
+
+N in that example is C143's measured cap, not a default — re-measure for your target family before
+copying it.
 
 With a measured cap set, leaves-first `nix_lake_build_each ...` is unnecessary for uniform leaves
 and much slower — it pays a fresh Lake startup per target; keep it for a strictly serial run, such
 as the heavy-shared-dependency step below.
-Interactive bash already wraps `lake`/`lean`/`leanc` and `nix develop --command lake|lean|leanc`
-via `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash`; if bypassing the shell, prefix with
-`choom -n 1000 --`.
+The OOM wrappers in `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash` exist only in the
+user's **interactive** shell, and their `nix` wrapper matches only `nix develop --command
+lake|lean|leanc` — not the `nix develop --command bash -lc '... lake ...'` form above. Agent Bash
+sessions never pass through any of them. **Always** prefix builds with `choom -n 1000 --` yourself;
+treat the interactive wrappers as a convenience for the user, not as coverage.
+
+**Never run two heavyweight builds at once in `lean/`.** Lake holds only an exclusive
+*configuration* lock (`olean.lock`); it does **not** serialize builds. Two concurrent `lake build`s
+in this workspace race artifact writes on any shared closure and double-book RAM — and the sizing
+rule above is only valid for one build at a time. Coordinate explicitly before starting a
+generated-certificate or aggregate build while another lane may be building.
 
 **Pressure and thrash look alike — distinguish them.** Low `MemAvailable` with **no** kills is the
 guard working: do not intervene, and a build that looks stuck is usually just slow. If **your own**
@@ -173,25 +187,29 @@ terminate that aggregate by its verified parent PID or task handle, lower N, and
 kill an individual worker, and never another lane's process. Do not ride it out — OOM-killed
 modules lose their oleans, so a thrashing build runs *backwards* and can
 leave the tree worse than it started (observed 2026-07-14: leaf oleans regressed under an uncapped
-aggregate before a capped rerun recovered them). Before a large or uncertain rebuild, back up
-`.lake/build/lib/lean` (small — project libs only; deps live under `.lake/packages/`) to a
-disk-backed path under `/home`.
+aggregate before a capped rerun recovered them). Before a large or uncertain rebuild, snapshot the
+build tree with `lake pack <path>.tgz` — it archives the root package's whole `buildDir` and builds
+nothing. Write it to a disk-backed path under `/home`, never `/tmp`. Prefer it to a hand-rolled
+copy of `.lake/build/lib`: the `ir` tree beside it holds the C/object outputs, so a partial copy is
+not known to restore consistently.
 
-**Process inspection — check command and ancestry, not a name.** Under the OOM shim the real binary
-runs as **`lake.orig`**, so `pgrep -x lake` reports a live, healthy build as dead. Use `pgrep -x
-lake.orig` or `pgrep -f 'lake build'`, and confirm ownership by PPID/ancestry before acting on any
-worker. Never `pkill -f` a string that also matches your own command line — it kills the shell that
-issued it. Stopping **your own** build by task ID or verified PID, on evidence, is correct; killing
+**Process inspection — check command and ancestry, not a name.** The installed toolchain's
+`bin/lake` is a wrapper script that `exec`s the real binary **`lake.orig`** (to inject a custom
+`LEAN_CC`), so `comm` is `lake.orig` on **every** invocation — with or without the OOM shim, which
+renames nothing. `pgrep -x lake` therefore reports a live, healthy build as dead, always. Use
+`pgrep -x lake.orig` or `pgrep -f 'lake build'` (argv[0] is preserved by `exec -a`), and confirm
+ownership by PPID/ancestry before acting on any worker. Never `pkill -f` a string that also matches
+your own command line — it kills the shell that issued it. Stopping **your own** build by task ID or verified PID, on evidence, is correct; killing
 on memory pressure alone is not; killing another lane's workers never is.
 
 **Staleness comes from content traces, not mtimes.** An mtime-derived "what's stale" list will miss
 modules Lake intends to rebuild. Probe exact targets with `lake build --no-build <targets>` — it
 exits immediately if a target is not up to date and triggers no fan-out. If it reports a foreign
-dirty or stale dependency, do not build the consumer: stop at direct elaboration or wait for that
-lane. For a new leaf whose dependencies are **known current**, `lake env lean path/to/Leaf.lean` is
-a safe elaboration check — it reads existing imports and does not rebuild their closure. That is
-also its trap: against a stale olean it silently elaborates your leaf on an *older* artifact than
-the dirty source and reports a false green, so confirm the imports are current (`--no-build`)
+dirty or stale dependency, do not build the consumer: wait for that lane, or at most run `lake env
+lean path/to/Leaf.lean` as a smoke test knowing it elaborates against the dependency's *last-built*
+olean rather than the dirty source — never record that as a gate result. For a new leaf whose
+dependencies are **known current**, that same command is a safe elaboration check: it reads
+existing imports and does not rebuild their closure. Confirm the imports are current (`--no-build`)
 before trusting it. **Never** use `--old` to satisfy a validation gate: it ignores transitive deps,
 which is exactly what the gate exists to check.
 
