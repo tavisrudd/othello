@@ -97,8 +97,13 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
 [handoff](handoffs/2026-07-13-clebsch-paper.md) — the lane's single live doc. (Formerly the
 *icosahedral MDS / deep-holes* lane; same lane, renamed 2026-07-14.)
 - **C128 `[clebsch]`** — (open, cheap) kernel-check the icosahedral syzygy H³+T²=f⁵ mod 11.
-- **C131 `[clebsch]`** — Sadeh-thesis on-receipt verification (**confirmatory, non-blocking** — priority on the
-  |U| extension-count spectrum is granted to the arc-classification literature outright). When the
+- **C131 `[clebsch]`** — Sadeh-thesis on-receipt verification (**upgraded 2026-07-14 from
+  confirmatory to a real question**: the rigidity/gap sweep found that the concession may be
+  *mis-aimed in our favour* — per its zbMATH review, Hirschfeld–Sadeh 1984 is a
+  Singer-cycle/7-arc/(n;3)-arc paper and **not a 6-arc paper**, so the manuscript may be conceding
+  priority on the |U| spectrum to a paper that does not contain it. That rests on a ~90-word
+  third-party review, so the ILL decides it. Also confirm whether Sadeh states (iv)⟺(v), which
+  Karaoglu's Table 5.1 credits to Sadeh). When the
   Sussex thesis (~1984) / Hirschfeld–Sadeh Giessen 164 (1984) arrives: (a) confirm no over-concession
   beyond the extension-count spectrum — in particular that it does NOT state the deep-hole/covering
   reading or U-on-a-conic (those stay ours); (b) fix the exact citation form for the spectrum; (c)

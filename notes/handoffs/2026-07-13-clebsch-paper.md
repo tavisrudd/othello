@@ -132,6 +132,49 @@ The rigidity and gap theorems are under their first-ever literature check
   p > 23** and cannot support the 132+132 PSL/PGL split. **arXiv's journal-ref for 1201.0484 is
   wrong** — Van de Voorde is *Discrete Math.* **311**(20) (2011) 2253–2258.
 
+## The rigidity/gap headline — first-ever literature check, 2026-07-14: NO COLLISION FOUND
+
+Full report: [rigidity/gap sweep](../2026-07-14-gem-lit-rigidity-gap.md). **The theorem survives.**
+Nobody characterises the Clebsch hexagon via its extension points; nobody observes that `U(A)` lies
+on, or is, a conic.
+
+**The limit, stated plainly, because it decides what the verdict is worth:** the two most dangerous
+sources were **not read** — Sadeh's thesis (not online) and Hirschfeld PGOFF Ch. 14 (403 on
+archive.org, in-copyright lending). So this is *"no collision in any source that could be opened, and
+the surrounding evidence argues against one existing"*, **not** "verified novel". The ILL is the gate.
+
+Four independent supports, all verified from full text:
+- **Karaoglu's 2018 Sussex thesis** — the direct modern continuation of the Sadeh line, same school
+  and method — tabulates 6-arcs with **no extension-point column** and zero occurrences of any
+  extension/deep-hole concept.
+- **DMP**, our own dictionary source, checks out exactly (`c₀ = |U(A)|`; Thm 6.3(iii) verified
+  verbatim) but contains **no q=11 6-arc data**.
+- **Ball–Lavrauw surveys ×2** — zero hits for Sadeh/Clebsch/hexagon/A₅; the one near-miss ("arcs of
+  size 6") is q=7/q=8 and was cleared in context.
+- **Structural reason nobody would have noticed:** the 6-arc classification exists to *build cubic
+  surfaces*, and the Clebsch map only consumes "**the arc** is not on a conic". No one in that
+  program had a reason to compute `U(A)` at all.
+
+**Three consequences for the manuscript:**
+
+1. **Narrow the priority claim to the deep-hole side.** **(iv) ⟺ (v)** — PGL-equivalent to the
+   Clebsch hexagon ⟺ stabilizer contains A₅ — is very likely classical: the q=11 "Diagonal" surface
+   with `|G| = 120` sits in Karaoglu's Table 5.1, credited to Sadeh. Claim
+   **(i)/(ii)/(iii) ⟺ (iv)/(v)**, not the whole TFAE.
+2. **⚠ The Hirschfeld–Sadeh 1984 concession may be mis-aimed — in our favour.** Per its zbMATH review
+   (Zbl 0538.51010, Grundhöfer), HS84 is about Singer-cycle orbits, complete 7-arcs, and
+   (n;3)/(n;4)-arcs — **it is not a 6-arc paper**. The manuscript may be conceding priority to a paper
+   that does not contain the conceded result. This is a citation fix, not a retraction, and it rests
+   entirely on a ~90-word third-party review — **gate it on the ILL copy** (C131).
+3. **⚠ Conflation hazard, one sentence to pre-empt.** The literature's standing condition is "6-arc
+   **not on a conic**"; ours is "**U(A)** on a conic". One word apart, logically unrelated. A referee
+   from this school will reach for the familiar meaning unless told.
+
+**Gap theorem:** untouched by this sweep beyond one note — arc stability/gap results are an
+established genre (Blokhuis–Bruen, second-largest-complete-arc bounds), so Thm 4.3 should be
+positioned *inside* that genre rather than as a free-standing curiosity. Q2/Q3 of that sweep are thin
+(one search each, marked PARTIAL); the gap theorem deserves its own pass.
+
 **Open obligations (surfaced by the 2026-07-14 adversarial review; previously recorded nowhere):**
 - **C146 — the Edge/BSW prior-art re-base. BLOCKS SUBMISSION.** See above.
 - **C128 — kernel-check the syzygy `H³+T²=f⁵ mod 11`.** The manuscript states the syzygy as fact
