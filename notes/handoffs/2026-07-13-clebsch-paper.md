@@ -86,7 +86,7 @@ append-only; promote scoped findings to C items rather than routing work directl
 | 3j | **C186 — FINITE LEAN BRIDGE COMPLETE; CONCEPTUAL/SOURCE GATE OPEN** | all 60 action leaves, representative and fixed-point leaves, and the lightweight aggregator pass serial build, freshness, generator, and standard-axiom gates | write/source the representation-theoretic proof and integrate its Brianchon/triple-point consequences → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
 | 3k | **C187 — CHECKER/LEAN MATHEMATICS COMPLETE; PRIORITY/MANUSCRIPT OPEN** | the hardened checker plus `SmallKChordMoments.lean` and `SmallKGeometricBridge.lean` cover the finite, arithmetic, and actual projective layers | literature-check `(4,5)` and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
 | 3l | **C194 — REPORTED** | Dye's ten concurrences and the chord-defect identity now give `|U(H)|=q^2-14q+45`; for `q=3 mod 4` the associated conic lies in `U(H)` with exact excess `(q-4)(q-11)` | integrated into §6; new algebra passes narrow Lean elaboration and q=19 enumeration is verification → [C194 report](../2026-07-15-c194-clebsch-family-uncovered-formula.md) |
-| 3m | **C197 — QUEUED; CHEAP BSW FOIL** | BSW's second q=11 complete exterior configuration is absent, so the arc/MDS hypothesis lacks its natural foil | add one concise Pasch/non-MDS comparison and no second spine → [C197 report](../2026-07-15-c197-bsw-pasch-mds-foil.md) |
+| 3m | **C197 — REPORTED** | BSW's second q=11 complete exterior configuration is now used as the natural non-arc/non-MDS foil | one concise Pasch comparison landed in related work; no coordinates, computation, or second spine → [C197 report](../2026-07-15-c197-bsw-pasch-mds-foil.md) |
 
 C183's live report contains the compaction-safe subagent roster. Its delegated finite Lean tasks
 are complete. Root owns integration, the Dye axiom/source audit, all validation, and uses
@@ -107,7 +107,7 @@ reported. C180's internal Lean proof and Dye primary-source audit are complete a
 all-field proof is integrated. C184/C185/C187 retain the exact manuscript/Lean tails recorded in
 the table, and C186 retains both its conceptual proof and source gate. C188 (`relconic`) and C189
 (`cap`, consuming the Nofil implication) are downstream queued consumers, not Clebsch-owned result
-work. C194 is reported with the all-field Clebsch-family formula; C197 is the next bounded editorial foil. C190
+work. C194 and C197 are reported; C190
 records the completed gem-mining routing seam. C153 and C131/C161 remain the live
 external-source gates; C168 is the last local closeout after their claim boundaries settle.
 The C163 boundary and completed validation are in

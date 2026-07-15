@@ -289,10 +289,10 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   `(q-4)(q-11)`, so exact filling is isolated at q=11. The algebraic synthesis passes narrow Lean
   elaboration, and q=19 enumeration is retained as independent verification →
   `notes/2026-07-15-c194-clebsch-family-uncovered-formula.md`.
-- **C197 `[clebsch]` [QUEUED 2026-07-15 — CHEAP BSW FOIL]** — add BSW's second q=11 complete
-  exterior configuration, the Pasch configuration, as the explicit non-arc/non-MDS foil: complete
+- **C197 `[clebsch]` [REPORTED 2026-07-15]** — added BSW's second q=11 complete exterior
+  configuration, the Pasch configuration, as the explicit non-arc/non-MDS foil: complete
   exteriority alone gives only `C subset U`, while the arc/MDS hypothesis selects the Clebsch
-  branch. Keep this a short related-work remark, not a second spine →
+  branch. The addition is one related-work paragraph with no new computation or second spine →
   `notes/2026-07-15-c197-bsw-pasch-mds-foil.md`.
 
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
