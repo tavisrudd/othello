@@ -6,8 +6,8 @@
 synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
 narrow elaboration and axiom audit. C186's finite A₅ point-action bridge also passes its full
 serial build, freshness, generator, and standard-axiom gates. C180's entire incidence reduction
-also passes; only its Desarguesian affine equality-case bridge remains. Remaining work is that
-bridge, C186's conceptual/source argument, and the manuscript synthesis.
+and finite `K6` triangular-prism normal form also pass; only its projective coordinate bridge
+remains. Remaining work is that bridge, C186's conceptual/source argument, and manuscript synthesis.
 
 ## Live subagent roster
 
@@ -58,6 +58,9 @@ The same strict-kernel verdict now holds for:
 - `OddSixArcLineBound.lean`: the complete generic incidence case split for the `q-5` line bound,
   conditional only on excluding the five-covered-point disjoint-line equality case, plus the final
   odd-characteristic scalar contradiction once the two affine equations are supplied.
+- `SixVertexOneFactorization.lean`: a six-witness strict-kernel certificate that every labelled
+  `K6` one-factorization has the triangular-prism normal form required by C180; its tracked `uv`
+  replay independently confirms the `15` matchings and `6` labelled totals.
 
 ## Dye source and formalization boundary
 
@@ -81,9 +84,9 @@ alternative, not a formalization of Dye's conceptual proof.
 
 1. use the certified C186 point-action bridge for the remaining chirality action layer and write
    the conceptual/source argument;
-2. close C180's remaining coordinate bridge from the one-factorization equality case to the two
-   affine parallelism equations; the incidence reduction and conditional conic-rigidity implication
-   below Dye are already kernel-checked;
+2. close C180's remaining projective-to-affine normalization and parallelism bridge; the incidence
+   reduction, finite prism normal form, and conditional conic-rigidity implication below Dye are
+   already kernel-checked;
 3. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
    is stable.
 

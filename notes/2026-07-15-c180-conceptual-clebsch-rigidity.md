@@ -2,10 +2,10 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **INCIDENCE LEAN COMPLETE; AFFINE + SOURCE GATES OPEN** — the generic projective-plane
-incidence spine and complete case split pass Lean. The remaining formal seam is exactly the
-odd-field triangular-prism exclusion of the five-covered-point equality case; manuscript
-integration also waits for the exact Dye 1991 source check.
+**Status**: **INCIDENCE + FINITE PRISM LEAN COMPLETE; COORDINATE + SOURCE GATES OPEN** — the generic
+projective-plane incidence spine, complete case split, and `K6` one-factorization normal form pass
+Lean. The remaining formal seam is the projective-to-affine normalization and parallelism argument;
+manuscript integration also waits for the exact Dye 1991 source check.
 
 ## Target
 
@@ -101,10 +101,15 @@ bound and its equality structure, the covered/uncovered partition, and a master 
 conditional only on excluding that equality case. It also proves the final scalar contradiction
 once the two affine parallelism equations are supplied.
 
-The remaining bridge has two clean pieces: classify the equality fibers as the standard
-one-factorization pattern of `K6`, then use the existing projective/affine coordinate API to send
-the exceptional line to infinity and derive those equations. The focused Lake target builds fresh
-with `LEAN_NUM_THREADS=1` and `choom -n 500`; its manuscript-facing axiom reports contain only
+`lean/RelativeConicArcs/SixVertexOneFactorization.lean` closes the first bridge: every
+one-factorization relabels to the standard total and contains the required triangular prism. A
+tracked `uv` generator independently enumerates 15 perfect matchings and exactly six labelled
+one-factorizations with explicit relabelling witnesses. Lean checks the six-witness table and the
+semantic completeness claim with ordinary kernel reduction.
+
+The sole remaining internal bridge uses the existing projective/affine coordinate API to send the
+exceptional line to infinity and derive the two equations. Both focused Lake targets build fresh
+with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports contain only
 `propext`, `Classical.choice`, and `Quot.sound`.
 
 The nonsingular case is even shorter: conic containment already gives `|U(A)|<=12`, so the same

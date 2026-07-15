@@ -881,3 +881,8 @@ published open problems and questions newly posed by this project.
 - **Question — follow-on:** which non-Desarguesian odd-order planes, if any, admit the exceptional
   five-direction one-factorization configuration? This should not widen the current paper, but the
   formal boundary makes the question precise and reusable.
+- The finite equality object is exceptionally small: `K6` has 15 perfect matchings but only six
+  labelled one-factorization totals, all one relabelling orbit. This makes the triangular-prism
+  extraction a transparent six-witness kernel certificate rather than a large search. **Disposition
+  — answer in this paper:** use the normal form in the conceptual proof; keep the labelled count in
+  the verification note unless it improves exposition.
