@@ -6,8 +6,8 @@
 synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
 narrow elaboration and axiom audit. C186's finite A₅ point-action bridge also passes its full
 serial build, freshness, generator, and standard-axiom gates. C180's entire incidence reduction
-and the projectively invariant triangular-prism obstruction also pass; only equality-fiber
-extraction into that interface remains. Remaining work is that bridge, C186's conceptual/source
+and every incidence/projective prism transport also pass; only the equality-fiber partition into a
+labelled `K6` one-factorization remains. Remaining work is that lemma, C186's conceptual/source
 argument, and manuscript synthesis.
 
 ## Live subagent roster
@@ -67,6 +67,8 @@ The same strict-kernel verdict now holds for:
   `(2 : K) != 0`.
 - `ProjectiveTripleNormalization.lean`: ordered noncollinear-triple projective normalization and
   the diagonal affine rescaling needed to put the first two prism directions in standard form.
+- `OddSixArcPrismExtraction.lean`: exact incidence/projective witness interfaces and the complete
+  transport from an extracted prism to the `card covered != 5` conclusion.
 
 ## Dye source and formalization boundary
 
@@ -90,9 +92,9 @@ alternative, not a formalization of Dye's conceptual proof.
 
 1. use the certified C186 point-action bridge for the remaining chirality action layer and write
    the conceptual/source argument;
-2. close C180's remaining equality-fiber extraction into the projective prism interface; the
-   incidence reduction, finite normal form, coordinate contradiction, and conditional
-   conic-rigidity implication below Dye are already kernel-checked;
+2. close C180's sole remaining fiber-partition lemma (`pairsThrough` fibers form the labelled `K6`
+   one-factorization); all later incidence/projective transport and the conditional rigidity
+   implication below Dye are already kernel-checked;
 3. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
    is stable.
 

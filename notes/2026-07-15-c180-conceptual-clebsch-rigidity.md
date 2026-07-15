@@ -2,10 +2,11 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **INCIDENCE + PROJECTIVE PRISM LEAN COMPLETE; EXTRACTION + SOURCE GATES OPEN** — the
+**Status**: **ALL TRANSPORT LEAN COMPLETE; FIBER PARTITION + SOURCE GATES OPEN** — the
 generic incidence spine, `K6` normal form, projective normalization, and division-free odd-field
-contradiction pass Lean. The remaining formal seam is extracting the explicit prism points and
-directions from the five equality fibers; manuscript integration also waits for Dye 1991.
+contradiction pass Lean. The remaining formal seam is exactly proving that the five index-three
+fibers partition the 15 labelled chords as a one-factorization; manuscript integration also waits
+for Dye 1991.
 
 ## Target
 
@@ -115,6 +116,14 @@ proof is division-free: its two direction determinants differ by `2*x*y`, while 
 equality fibers and feeds them to this theorem. All focused targets
 build fresh with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports
 contain only `propext`, `Classical.choice`, and `Quot.sound`.
+
+`OddSixArcPrismExtraction.lean` now pins this last boundary exactly. It defines the incidence and
+projective prism witnesses, proves all incidence-to-projective transport (including that every arc
+vertex is off the direction line), and derives the desired `card != 5` conclusion from a single
+fiber-extraction hypothesis. No coordinate or projective transport remains hidden in that
+hypothesis: it must only label the six vertices, translate each `pairsThrough` fiber to a canonical
+`K6` matching, prove the five fibers partition all edges, and transport the certified standard
+three-factor prism back to three covered points.
 
 The nonsingular case is even shorter: conic containment already gives `|U(A)|<=12`, so the same
 equality argument applies. Once Dye's exact field/descent statement is pinned, these two arguments
