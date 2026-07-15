@@ -283,12 +283,11 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   `SmallKChordMoments.lean`, close its geometric moment seam, literature-check the classical
   `(4,5)` sibling, and integrate the theorem without displacing the paper's rigidity spine →
   `notes/2026-07-15-c187-general-k-arc-conic-filling.md`.
-- **C194 `[clebsch]` [QUEUED 2026-07-15 — HIGHEST-EV DYE COROLLARY]** — combine Dye's exact ten
-  Brianchon concurrences with the six-arc chord-defect identity to prove
-  `|U(H)|=q^2-14q+45` for every finite-field Clebsch hexagon; when `q=3 mod 4`, use Dye's
-  non-secant-edge criterion to derive `C(F_q) subset U(H)` and show exact conic filling forces
-  `(q-4)(q-11)=0`, hence `q=11` in odd characteristic. Replace the q=19 exact-count computation as
-  proof by the formula while retaining it as independent verification →
+- **C194 `[clebsch]` [REPORTED 2026-07-15]** — Dye's ten Brianchon concurrences plus the six-arc
+  chord-defect identity give `|U(H)|=q^2-14q+45` for every finite-field Clebsch hexagon; for
+  `q=3 mod 4`, Dye's non-secant-edge criterion gives `C(F_q) subset U(H)` with exact excess
+  `(q-4)(q-11)`, so exact filling is isolated at q=11. The algebraic synthesis passes narrow Lean
+  elaboration, and q=19 enumeration is retained as independent verification →
   `notes/2026-07-15-c194-clebsch-family-uncovered-formula.md`.
 - **C197 `[clebsch]` [QUEUED 2026-07-15 — CHEAP BSW FOIL]** — add BSW's second q=11 complete
   exterior configuration, the Pasch configuration, as the explicit non-arc/non-MDS foil: complete

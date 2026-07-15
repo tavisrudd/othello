@@ -154,7 +154,11 @@ power at which the conic-filling extension locus can occur
 (Section~\ref{sec:why11}). The proof combines a universal chord-defect
 identity with the Sylvester graph on the internal points of a conic in
 $\PG(2,9)$; it assumes no symmetry of the arc. The previous nine-field
-census is retained as independent exact verification.
+census is retained as independent exact verification. For the classical
+Clebsch family itself, the same identity and Dye's ten Brianchon points give
+the all-field formula $|\cU(H)|=q^2-14q+45$; when $q\equiv3\pmod4$, the
+associated conic lies inside this locus with exact excess
+$(q-4)(q-11)$.
 
 \paragraph{What is new and what is not.} The six-arc itself, its
 real-projective ancestry, and its finite conic geometry are classical:
@@ -185,7 +189,9 @@ hexagon among all six-arcs and recovers $A_5$ from a purely
 coding-theoretic hypothesis, not by construction; the global and local
 quantitative gap theorem accompanying that rigidity; the invariant chirality bipartition of
 the weight-three support types and its induced per-coset leader split; and
-the unconditional finite-field argument isolating $q=11$.
+the unconditional finite-field argument isolating $q=11$, including the
+Clebsch-family uncovered formula obtained by combining Dye's classical
+geometry with the chord-defect identity.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -607,9 +613,11 @@ projective frame in every six-arc and sweep the two remaining vertices.
 This gives $1548$ representatives meeting every projective class. Exact
 secant enumeration yields
 \[
- |\cU(A)|\in\{12,16,18,19,20,21,22\},
- \qquad\text{with representative multiplicities }
- \{6,30,150,300,630,360,72\}.
+ |\cU(A)|\in\{12,16,18,19,20,21,22\}.
+\]
+The corresponding representative multiplicities are
+\[
+ (6,30,150,300,630,360,72).
 \]
 The six representatives attaining $12$ form the single Clebsch orbit
 ($6=360/60$); every other class has at least $16$ extension points. Thus
@@ -1086,6 +1094,45 @@ nonsingular and singular forms in characteristic two. It is reproduced by
 \texttt{check\_small\_q\_uniqueness.py} and agrees with the conceptual proof
 above.
 
+\begin{proposition}[The Clebsch-family uncovered formula]
+\label{prop:clebsch-family-uncovered}
+Let $H$ be a Clebsch hexagon over $\F_q$. Then
+\[
+ |\cU(H)|=q^2-14q+45.
+\]
+If $q\equiv3\pmod4$ and $\cC$ is Dye's associated conic, then
+$\cC(\F_q)\subseteq\cU(H)$ and
+\[
+ |\cU(H)\setminus\cC(\F_q)|=(q-4)(q-11).
+\]
+In particular, among Clebsch hexagons in this congruence class, the
+associated conic is the complete projective deep-hole syndrome locus if and
+only if $q=11$.
+\end{proposition}
+
+\begin{proof}
+Dye defines a Clebsch hexagon by the occurrence of exactly ten Brianchon
+points, and his Theorem~1 classifies their existence and projective orbit
+\cite[p.~271; Theorem~1, pp.~275--276]{Dye1991}. These points are precisely the off-vertex
+triple-chord concurrences counted by $c(H)$
+. Thus $c(H)=10$, and
+Lemma~\ref{lem:chord-defect} gives
+\[
+ |\cU(H)|=q^2-14q+55-10=q^2-14q+45.
+\]
+Dye also shows that the edges of $H$ are non-secants of the associated conic
+when $q\equiv3\pmod4$\cite[discussion preceding Theorem~6,
+pp.~281--282]{Dye1991}. Hence every rational point of $\cC$ is uncovered.
+Subtracting $|\cC(\F_q)|=q+1$ from the first formula gives
+\[
+ q^2-15q+44=(q-4)(q-11).
+\]
+The factor vanishes only at $q=4$ and $q=11$, and the stated congruence
+leaves only $q=11$. Conversely, Clebsch hexagons exist over $\F_{11}$ by
+Dye's Theorem~1, and the inclusion above is then an equality because both
+sets have twelve points.
+\end{proof}
+
 The theorem is an unconditional field-size classification with a conceptual
 small-field proof. Within the icosahedral construction, three further features meet at $11$:
 $p+1=12$, so the twelve vertices of
@@ -1097,13 +1144,14 @@ At $q=19$ ($19\equiv-1\pmod{10}$, so the rationality filter passes and only
 Lemma~\ref{lem:secant-covering} excludes it) the same recipe --- the poles
 of the six five-fold axes of an icosahedral $A_5<\mathrm{PSL}_2(19)$ --- does
 still produce a genuine six-arc disjoint from the conic, so the object
-exists; what fails is the covering. We built that arc and enumerated its
-projective deep-hole syndrome locus directly
-(\texttt{check\_q19\_nonexample.py}), obtaining
+exists; what fails is the covering. Proposition~\ref{prop:clebsch-family-uncovered}
+now gives directly
 \[
  |\cU(A)| = 140 = 20 + 120
 \]
-against a conic of only $q+1=20$ points. The arithmetic differs from $q=11$
+against a conic of only $q+1=20$ points. The checker
+\texttt{check\_q19\_nonexample.py} independently reconstructs the arc and
+reproduces this value. The arithmetic differs from $q=11$
 in a way worth noting: there $5\mid q-1$, so an order-five element splits and
 fixes two rational points of $\cC$, whereas at $q=19$ we have $5\mid q+1$, so
 the order-five elements lie in a non-split torus and fix no rational conic
@@ -1116,18 +1164,16 @@ The shape of the failure is instructive. The twenty conic directions remain
 in the projective deep-hole syndrome locus --- $\cC\subset\cU(A)$ still ---
 by the same classical edge criterion~\cite[p.~281]{Dye1991}, but they no
 longer exhaust $\cU(A)$:
-$120$ further points of $\PG(2,19)$ escape all fifteen secants, and
+$120=(19-4)(19-11)$ further points of $\PG(2,19)$ escape all fifteen secants, and
 $\cU(A)$ lies on no conic (the quadratic-monomial evaluation matrix of
-$\cU(A)$ has full rank six). The deficit itself is forced by
-Lemma~\ref{lem:secant-covering}: the fifteen secants have total capacity
-$15(q-1)=270$, while $q^2-6=355$ points lie off the arc and off the conic,
-so at least $85$ points must escape, and $120$ in fact do. (That the twelve
---- here twenty --- conic points also remain uncovered is a separate fact,
-not something the lemma predicts.) At $q=11$ the same capacity, $150$, comfortably exceeds the
+$\cU(A)$ has full rank six). The earlier capacity bound from
+Lemma~\ref{lem:secant-covering} predicts only that at least $85$ off-conic
+points escape; the Clebsch-family formula gives the exact excess $120$.
+At $q=11$ the same capacity, $150$, comfortably exceeds the
 $115$ points needing cover, and the excess is spent on overlap. The
-phenomenon therefore degenerates immediately past $q=11$ rather than
-persisting into a family: the conic remains inside the projective syndrome
-locus but no longer exhausts it.
+Clebsch objects therefore persist, and the associated conic remains inside
+the projective syndrome locus when $q\equiv3\pmod4$, but the exact filling
+is isolated at $q=11$ by the factorization above.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}

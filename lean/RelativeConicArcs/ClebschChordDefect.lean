@@ -108,6 +108,36 @@ theorem chordDefect_equation_of_uncovered_card
   push_cast at hidentity
   nlinarith
 
+/-- Dye's ten-Brianchon equality, inserted into the field-independent chord-defect identity,
+gives the uncovered-cardinality formula for a Clebsch hexagon.  The geometric input is exposed as
+the hypothesis `hidentity`; this theorem formalizes only the new algebraic synthesis. -/
+theorem clebsch_uncovered_formula
+    (q c u : ℕ)
+    (hidentity :
+      (u : ℤ) = (q : ℤ) ^ 2 - 14 * (q : ℤ) + 55 - (c : ℤ))
+    (hten : c = 10) :
+    (u : ℤ) = (q : ℤ) ^ 2 - 14 * (q : ℤ) + 45 := by
+  subst c
+  linarith
+
+/-- If the Clebsch uncovered-cardinality formula has conic cardinality `q + 1`, then the only
+integer orders are `4` and `11`.  In the geometric application Dye's existence theorem excludes
+characteristic two, leaving `q = 11`. -/
+theorem orders_of_clebsch_uncovered_conic_card
+    (q u : ℕ)
+    (hformula : (u : ℤ) = (q : ℤ) ^ 2 - 14 * (q : ℤ) + 45)
+    (hu : u = q + 1) :
+    q = 4 ∨ q = 11 := by
+  subst u
+  push_cast at hformula
+  have hfactor : ((q : ℤ) - 4) * ((q : ℤ) - 11) = 0 := by
+    nlinarith
+  rcases mul_eq_zero.mp hfactor with h4 | h11
+  · left
+    omega
+  · right
+    omega
+
 /-- The arithmetic candidate reduction in the chord-defect proof.
 
 The equation is stated in `ℤ`: for `q = 4, 5`, both factors are negative and their product is
@@ -137,6 +167,8 @@ theorem primePower_candidates_of_chordDefect
 
 #print axioms card_sixVertexPerfectMatchings
 #print axioms chordDefect_identity_of_moments
+#print axioms clebsch_uncovered_formula
+#print axioms orders_of_clebsch_uncovered_conic_card
 #print axioms primePower_candidates_of_chordDefect
 
 end ClebschChordDefect
