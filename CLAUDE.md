@@ -141,14 +141,27 @@ alt-orbit-repair lane, not independently re-measured). Use 1–2 while another m
 active. A "maximum" that barely fits the most optimistic reserve is not a maximum. A cap that is
 right for one target family is unsafe for another; lighter modules may run a higher cap.
 
+**The closure is heterogeneous — size N against what can be co-scheduled, not the average leaf.**
+`N × peak_RSS` assumes every concurrent worker costs the same; that holds for uniform generated
+leaves and breaks when a shared checker sits in the closure. The C143 leaf standalone against
+current dependencies peaks ≈6.3 GiB, but the *first* build after a checker change peaked ≈10.8 GiB:
+it rebuilt `Q25PairCertificate` (≈180 s) before the leaf itself (≈105 s; 4:51.9 total). Two such
+modules co-scheduled would exhaust the budget on their own, so N=2 there is safe only because the
+checker happens to build first and alone — by luck, not by design. Build a known-heavy shared
+dependency **serially first** (N=1) and fan the generated leaves out at the measured N only once it
+completes; aggregate fan-out should begin only after the shared checker is done. This is a targeted
+serial step for one heavy dependency, not the full leaves-first ceremony. (Figures reported by the
+alt-orbit-repair lane, not independently re-measured.)
+
 ```
 LEAN_NUM_THREADS=3 choom -n 1000 -- taskset -c 20-22 \
   nix develop --command bash \
   -lc 'export LEAN_NUM_THREADS=3; exec lake build <explicit-targets>'
 ```
 
-With a measured cap set, leaves-first `nix_lake_build_each ...` is unnecessary and much slower — it
-pays a fresh Lake startup per target; keep it only when a strictly serial run is wanted.
+With a measured cap set, leaves-first `nix_lake_build_each ...` is unnecessary for uniform leaves
+and much slower — it pays a fresh Lake startup per target; keep it for a strictly serial run, such
+as the heavy-shared-dependency step below.
 Interactive bash already wraps `lake`/`lean`/`leanc` and `nix develop --command lake|lean|leanc`
 via `~/src/tavis-nix/dot_config/bash/interactive/85-oom.bash`; if bypassing the shell, prefix with
 `choom -n 1000 --`.
