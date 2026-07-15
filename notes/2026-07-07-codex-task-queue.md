@@ -166,7 +166,14 @@ hunt; the Clebsch paper's own findings stay pegged `clebsch`.
   table), so the converse closes by citation plus a short involution-content argument. The q=23 octad analogue is
   DEAD (min t=295 vs null 280) and the reduction says why -- it needs |H|=2x3 so that a concurrent
   triple is a perfect matching. Singular and note-sized, not a Mathieu tower.
-- **C155 `[gem-mining]` [QUEUED 2026-07-14 — AFTER THE RIGIDITY/GAP CHECK]** — write the hexad note:
+- **C155 `[gem-mining]` [QUEUED 2026-07-14 — GATED ON THE RIGIDITY/GAP AND EXTENSION-COUNT CHECKS]** —
+  **New gate 2026-07-14:** the hexad result has a second, equivalent form — `t + |U| = 82` identically
+  on 6-subsets of the conic, so *the hexads are exactly the on-conic 6-arcs with maximal extension
+  count `|U| = 22`*. The sweep cleared the **concurrency** framing; the **extension-count** framing was
+  never searched and is the likelier of the two to be classical (extension counts are the
+  arc-classification school's standard invariant, and six points on a conic is the hexagrammum
+  mysticum). Under check: `notes/2026-07-14-gem-lit-extension-count.md`. If it is taken there, the
+  result is taken. Write the hexad note:
   the `t(H) = 60 + #fpf involutions` identity (synthetic, computer-free), the four-orbit table by
   citation to CO-TR, the short involution-content argument, and the q=23 impossibility →
   `notes/2026-07-14-c155-hexad-note.md`. Consumes C156/C157. Venue: *Discrete Math.* / *J. Comb.

@@ -193,6 +193,16 @@ orbit has an fpf involution, so `t > 60`. Hence
 
 > **H is a hexad of one of the two S(5,6,12) systems ⟺ Stab_{PGL₂(11)}(H) has odd order ⟺ t(H) = 60.**
 
+**Why "odd order" and not "trivial": there is no free orbit to be had.** `|PGL₂(11)| = 1320` and there
+are only `C(12,6) = 924` subsets, so `924 < 1320` forces **every** 6-subset of P¹(F₁₁) to have a
+nontrivial stabilizer — no orbit can be free, before any geometry is considered. The four stabilizers
+are C₅, V₄, S₃, D₁₂, and none is trivial. So the hexads are singled out **not by having symmetry but
+by having symmetry of the right *kind*** — odd order, hence involution-free — in a setting where
+everything has some. This is another of the small-number coincidences the result rests on, alongside
+`|H| = 2 × 3`, and it is why the theorem takes the shape it does: the invariant cannot be "is `H`
+symmetric?" because they all are; it has to be "does `H`'s symmetry contain an involution?", which is
+exactly what `t` measures.
+
 **The gap at 61 is explained.** `t − 60` counts fpf involutions in the stabilizer, and the four
 stabilizers supply 0, 2, 3, 4. Nothing supplies exactly one. The spectrum is not a curiosity — it is
 the orbit decomposition.
@@ -273,6 +283,15 @@ outside `H` (no chord meets the conic off its endpoints) plus the `121 − (105 
 no chord, giving `|U| = 6 + 16 − c = 22 − (t − 60) = 82 − t`. ∎
 
 Verified for all 924 subsets: pairs `(t, |U|) = (60,22):264, (62,20):330, (63,19):220, (64,18):110`.
+
+**⚠ This is an exposure, not just a second face.** The 2026-07-14 hexad sweep cleared the
+*concurrency* framing (Form 1) as ABSENT. **The extension-count framing (Form 2) was never searched,
+and it is the more likely of the two to be classical**: "how many points extend this arc?" is exactly
+the invariant the arc-classification school computes as a matter of course, and six points on a conic
+is the most-studied configuration in classical projective geometry (the hexagrammum mysticum). If
+anyone tabulated extension counts for 6-subsets of a conic at q=11, the maximal ones being Mathieu
+hexads is one observation away. Under check:
+`notes/2026-07-14-gem-lit-extension-count.md`. **C155 is gated on it.**
 
 **Consequences.**
 
