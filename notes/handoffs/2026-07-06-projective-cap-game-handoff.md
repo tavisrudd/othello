@@ -538,6 +538,11 @@ task list.  Current high-value items:
   polyhedral base-case comparison, not progress on `(ON)` or a uniform odd-q law.
   [Proof obligations](../2026-07-15-c189-q5-octahedral-frame.md).
 
+- **C198 [QUEUED] — bounded q=7 complete-exterior residual scout.** Reconstruct BSW's q=7
+  exterior four-arc, compute its twenty-point continuation locus and residual graph, and stop unless
+  a clean symmetry, involution, or certified P-position appears. This is a scout beside C189, not a
+  reformulation of `(ON)`. [Scout](../2026-07-15-c198-q7-exterior-residual-scout.md).
+
 - **C100 [REPORTED] — relative-conic sealing review.** Exact game localization, q=9 terminal P,
   and the actual q=11 icosahedral seeded P position are Lean-proved. The tested descent and
   defect-to-C80 levers were negative; static existence was not promoted into an (ON) or root-value

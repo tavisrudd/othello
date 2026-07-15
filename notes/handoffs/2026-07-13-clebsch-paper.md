@@ -58,7 +58,7 @@ handoff crisp. Until then, do not route work from the historical sections when t
 map.
 
 **Allowed paths for this lane:** `papers/clebsch-hexagon-code/**`, this handoff and its companion,
-`notes/2026-07-14-c1*.md` and `notes/2026-07-15-c176-*.md`/`notes/2026-07-15-c179-*.md`/`notes/2026-07-15-c180-*.md`/`notes/2026-07-15-c181-*.md`/`notes/2026-07-15-c182-*.md`/`notes/2026-07-15-c183-*.md` reports pegged `clebsch`, the explicit `clebsch` rows of the global queue,
+`notes/2026-07-14-c1*.md` and the `notes/2026-07-15-c1*.md` reports pegged `clebsch`, the explicit `clebsch` rows of the global queue,
 and the Q11/Q9 Lean modules needed by C128/C164/C183. The `arcs` companion manuscript, gem-mining scripts,
 and other lanes remain read-only unless the user switches or expands scope.
 
@@ -85,6 +85,8 @@ append-only; promote scoped findings to C items rather than routing work directl
 | 3i | **C185 — CHECKER/FINITE LEAN COMPLETE; MANUSCRIPT OPEN** | the total oracle, ambiguity enumerator, uniform twenty-support theorem, and Brianchon bridge pass strict-kernel audit; monomial-equivariant chirality remains with the action layer | integrate the fixed-code corollaries and finish the action-dependent claims under C186 → [C185 report](../2026-07-15-c185-clebsch-decoding.md) |
 | 3j | **C186 — FINITE LEAN BRIDGE COMPLETE; CONCEPTUAL/SOURCE GATE OPEN** | all 60 action leaves, representative and fixed-point leaves, and the lightweight aggregator pass serial build, freshness, generator, and standard-axiom gates | write/source the representation-theoretic proof and integrate its Brianchon/triple-point consequences → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
 | 3k | **C187 — CHECKER/LEAN MATHEMATICS COMPLETE; PRIORITY/MANUSCRIPT OPEN** | the hardened checker plus `SmallKChordMoments.lean` and `SmallKGeometricBridge.lean` cover the finite, arithmetic, and actual projective layers | literature-check `(4,5)` and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
+| 3l | **C194 — QUEUED; HIGHEST-EV DYE COROLLARY** | Dye's ten concurrences and non-secant criterion have not yet been combined with chord defect into the all-field Clebsch-family formula | prove `|U(H)|=q^2-14q+45`, derive q=11-only exact filling for `q=3 mod 4`, and demote q=19 enumeration to verification → [C194 report](../2026-07-15-c194-clebsch-family-uncovered-formula.md) |
+| 3m | **C197 — QUEUED; CHEAP BSW FOIL** | BSW's second q=11 complete exterior configuration is absent, so the arc/MDS hypothesis lacks its natural foil | add one concise Pasch/non-MDS comparison and no second spine → [C197 report](../2026-07-15-c197-bsw-pasch-mds-foil.md) |
 
 C183's live report contains the compaction-safe subagent roster. Its delegated finite Lean tasks
 are complete. Root owns integration, the Dye axiom/source audit, all validation, and uses
@@ -105,7 +107,8 @@ reported. C180's internal Lean proof and Dye primary-source audit are complete a
 all-field proof is integrated. C184/C185/C187 retain the exact manuscript/Lean tails recorded in
 the table, and C186 retains both its conceptual proof and source gate. C188 (`relconic`) and C189
 (`cap`, consuming the Nofil implication) are downstream queued consumers, not Clebsch-owned result
-work; C190 records the completed gem-mining routing seam. C153 and C131/C161 remain the live
+work. C194 is the highest-EV new conceptual corollary; C197 is a bounded editorial foil. C190
+records the completed gem-mining routing seam. C153 and C131/C161 remain the live
 external-source gates; C168 is the last local closeout after their claim boundaries settle.
 The C163 boundary and completed validation are in
 [coding-semantics repair](../2026-07-14-c163-clebsch-coding-semantics.md).
@@ -386,7 +389,7 @@ genre nearby or it reads as informal. Note Thas lists "second largest complete a
 scoped to the conic-rigidity/covering reading, Sadeh cited for the census. **Priority on the |U| extension-count spectrum is GRANTED to the arc-
 classification literature outright** (it's the standard byproduct of arc classification) — so the
 Sadeh Sussex thesis (~1984) + Hirschfeld–Sadeh Giessen 164 (1984) ILL is **confirmatory, not
-blocking**; nothing gates drafting. Optional: ILL Dye 1991 to close the footnote. P¹ labeling reconciled (Lean chart canonical);
+blocking**; nothing gates drafting. Dye 1991 is now read from the primary text. P¹ labeling reconciled (Lean chart canonical);
 parent-program feed CLOSED NEGATIVE (C130) — do not route C84 through this. **The four-target
 reduce-at-best-prime spike is CLOSED NEGATIVE (C132):** none realizes the arc/deep-hole template.
 The corrected 27-line model is `Q⁻(5,2) ⊂ PG(5,2)` and is non-cap; the spike does not prove global
@@ -432,7 +435,7 @@ conic `XZ=Y²`). Equivalently a **6-arc off every conic** in PG(2,11).
 
 ## ⚠ RED-TEAM DEFLATION (adversarial pass — OVERTURNS the fused framing below)
 
-A hostile-referee pass (read SVM 1995 full text, DMP series, ZWK; Dye 1991 still paywalled) cut the
+A hostile-referee pass (read SVM 1995 full text, DMP series, ZWK, and now Dye 1991) cut the
 lane down. **What actually survives — treat this as the current framing; the "FUSED FRAMING" section
 below is DEMOTED to companion history:**
 
@@ -442,17 +445,11 @@ below is DEMOTED to companion history:**
   points of its A₅-invariant conic.* SVM 1995 Prop. 13 already proved incompleteness-by-computer at
   q=11 but **did not print the extension points** — that one unprinted finite fact + a known
   dictionary is the real contribution. True, apparently unstated, thin.
-- **Dye-1991 gate: CLEARED (C129, strong proxies) — safe to draft with a footnote.** Verdict **NO**:
-  Dye does not state the 0-bisecant points = the conic. Evidence: the **zbMATH review Zbl 0698.20032
-  is written by Dye himself** (detailed contents: Brianchon points, 5 triangles, the self-polar conic
-  C, stabilizers, double-contact conics — *no* 0-bisecant/no-secant statement); Dye's own open 1997
-  Edinburgh paper recaps 1991 page-by-page, strongest conic-incidence being only "C contains no
-  vertex" (p.281); **SVM 1995 Remark 2** extracts the *only* bisecant-stratum↔C fact Dye has
-  (Brianchon∈C iff q=3^(2h)) and proves q=11 incompleteness **by computer without using Dye** — which
-  they'd have cited if it existed. Structural: "C misses every bisecant" is a per-q rationality fact
-  (false over general K, false at q=9), with no home in Dye's synthetic general-K paper. Residual risk
-  LOW (a finite-field aside in the 17-pp body); keep the ILL request open
-  (`londmathsoc.onlinelibrary.wiley.com/doi/pdf/10.1112/jlms/s2-44.2.270`) but draft now.
+- **Dye-1991 gate: CLEARED FROM THE PRIMARY TEXT.** Dye p.281 proves that an edge of the associated
+  conic is a chord iff `-1` is square and otherwise is non-secant. Thus at q=11 Dye supplies
+  `C subset U(A)`, but he does not state the reverse inclusion or exact equality. The exact source
+  boundary and BSW comparison are in
+  [the primary-source audit](../2026-07-15-dye-bsw-primary-source-audit.md).
 - **Klein spine: DECORATION, and the causal "because" is FALSE by our own data.** f mod 11 is the
   PGL₂(11)-invariant Dickson form (forgot the icosahedron); and C126 shows covering-exactness *fails*
   for every sibling — so the Klein reduction produces the *objects* but does NOT cause the *theorem*.
@@ -501,7 +498,7 @@ group-theoretic cause. + chirality-Z/2 proposition + the p=11 uniqueness theorem
 result not a defect). Klein/dual-variety demoted to discussion + one open question.
 
 **Citations locked (C129) — draftable now:**
-- **Dye gate cleared** (above) — footnote the residual, keep ILL open.
+- **Dye gate cleared from the primary text** (above) — cite p.281 directly; no ILL residue remains.
 - **ZWK** arXiv:1901.05445 **Thms I.4–I.7** (I.5 = tangent lines to the NRC; I.6 = quadratic-extension
   family; I.7 = completeness, count q(q+1)²/2) — cite as the true precursor of any dual-variety talk.
 - **DMP k=4** = arXiv:**1909.00207** Thm 3.1 + Tables 1–2, Def 7.1(M2), Thms 7.2/7.3 (codim-4 GDRS
@@ -867,7 +864,7 @@ uniqueness is not claimed. Rest = free footnotes or thin.
    quartic vs `ProjectiveTwistedCubicTransversalSpectrum.lean`. The theory-bearing thread.
 3. **C127 [literature] — DONE** (see "Novelty audit round 2" below): arc = Clebsch hexagon (SVM
    1995 + Dye 1991); Klein reduction partially known (hedge with Elkies §3.3, Dickson invariant);
-   coding bridge novel; "Adler icosahedron/PSL₂(11)" paper does not exist. Remaining: read Dye 1991.
+   coding bridge novel; "Adler icosahedron/PSL₂(11)" paper does not exist. Dye 1991 is now read.
    ~~novelty of the Klein-reduction claim itself (Adler "The~~
    icosahedron and PSL₂(11)," Kondō, X(11), Martin–Singerman, Elkies) + settle O'Keefe–Storme on the
    arc. Calibrates whether the reduction is new or only its coding/deep-hole reading.
@@ -1001,7 +998,7 @@ in-repo now).
   points (= the geometry under our 100-coset / triple-pair split). Char-0 six-axes-off-every-conic
   = the classical Clebsch diagonal cubic (Hitchin 2007). **Do NOT claim a new arc — name it the
   Clebsch hexagon and cite SVM 1995 + Dye 1991.** (O'Keefe–Storme no longer blocking; SVM+Dye
-  answer it. Still paywalled; get for citation only.)
+  answer it. The primary text is now archived and read.)
 - **Klein form-level reduction — PARTIALLY KNOWN, two mandatory hedges.** A₅⊂PSL(2,11) is classical
   (Galois 1832, Klein, Dickson, Kostant, Martin–Singerman). The *form-level* facts (vertex form
   collapsing mod 11 to the all-points Dickson form; diagonals→chords; H³+T²=f⁵ via 1728≡1; the
@@ -1016,9 +1013,8 @@ in-repo now).
   Grothendieck *Esquisse* §4 (+ Caleb Ji arXiv:2304.03345); Dickson gives the √5-prime criterion;
   Klein did the p=5 member. The "vertex count=p+1 fills line ⇒ axis-pole arc, deep holes=conic"
   assembly appears nowhere (and per C126 it degenerates except at p=11 anyway).
-- **Remaining must-read before final wording:** **Dye 1991** (paywalled) — could already state "the
-  0-bisecant points are the conic" geometrically; the covering-radius/deep-hole *reading* stays
-  ours, but read it before locking the wording.
+- **Dye 1991 is read:** p.281 states the non-secant edge criterion, hence `C subset U` at q=11,
+  but not exact equality. See the primary-source audit before changing the wording.
 
 **Safest new headline (C127):** *the complete deep-hole set of the `[6,3,4]₁₁` code on the **Clebsch
 hexagon** is the full point set of the A₅-invariant conic — first identification of an MDS code's

@@ -37,11 +37,12 @@ For the Clebsch six-arc `A` and its associated conic `C` over `F_11`:
 
 - BSW's proved theorem concerns `q = 1 mod 4`: every complete exterior set is linear, consisting
   of the exterior points on a passant.
-- BSW p. 146 reports exceptional computer examples for `q=7,11,19,23,27,31`, no nonlinear
-  examples through `q=131`, and conjectures none for `q>31`. This is not the fixed-six-arc exact
+- BSW p. 146 reports exceptional computer examples for `q=7,11,19,23,27,31`, no other examples
+  for the tested range `q=43,...,131`, and conjectures none for `q>31`. This is not the fixed-six-arc exact
   conic-filling problem and has no direct implication for the odd-q Nofil conjecture.
-- Their q=31 example contains a six-arc and a ten-set whose common 2-secants carry a Petersen
-  structure. It is a classical related occurrence, not the q=11 support-chirality graph.
+- Their q=31 example contains a six-arc and a ten-set: every 2-secant of the six-arc is also a
+  2-secant of the ten-set, and the resulting fifteen pairs of ten-set points are the Petersen
+  edges. It is a classical related occurrence, not the q=11 support-chirality graph.
 
 ## Cross-paper disposition checklist
 

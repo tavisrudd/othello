@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C190.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C198.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -283,6 +283,18 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   `SmallKChordMoments.lean`, close its geometric moment seam, literature-check the classical
   `(4,5)` sibling, and integrate the theorem without displacing the paper's rigidity spine →
   `notes/2026-07-15-c187-general-k-arc-conic-filling.md`.
+- **C194 `[clebsch]` [QUEUED 2026-07-15 — HIGHEST-EV DYE COROLLARY]** — combine Dye's exact ten
+  Brianchon concurrences with the six-arc chord-defect identity to prove
+  `|U(H)|=q^2-14q+45` for every finite-field Clebsch hexagon; when `q=3 mod 4`, use Dye's
+  non-secant-edge criterion to derive `C(F_q) subset U(H)` and show exact conic filling forces
+  `(q-4)(q-11)=0`, hence `q=11` in odd characteristic. Replace the q=19 exact-count computation as
+  proof by the formula while retaining it as independent verification →
+  `notes/2026-07-15-c194-clebsch-family-uncovered-formula.md`.
+- **C197 `[clebsch]` [QUEUED 2026-07-15 — CHEAP BSW FOIL]** — add BSW's second q=11 complete
+  exterior configuration, the Pasch configuration, as the explicit non-arc/non-MDS foil: complete
+  exteriority alone gives only `C subset U`, while the arc/MDS hypothesis selects the Clebsch
+  branch. Keep this a short related-work remark, not a second spine →
+  `notes/2026-07-15-c197-bsw-pasch-mds-foil.md`.
 
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem
@@ -432,6 +444,16 @@ from outside the lane (commit `cfd8537`, Edge 1956 + DMP Thm 7.7 re-pin) and shi
   `rho_C(5)=L2(5)=4`, add it to `RelativeConicArcs.Results` and the small-value/result tables, and
   cite (rather than migrate) the full `4<=k<=7` conic-filling classification →
   `notes/2026-07-15-c188-rhoc5-frame.md`.
+- **C195 `[relconic]` [QUEUED 2026-07-15 — CHEAP DEFINITIONAL UPGRADE]** — add the exact implication
+  diagram separating BSW complete exteriority (`C subset U(A)`) from completeness outside a
+  prescribed conic (`U(A) subset C`), with exact conic filling as their conjunction; synchronize
+  the manuscript, README, proof audit, and result ownership wording →
+  `notes/2026-07-15-c195-exterior-vs-relative-completeness.md`.
+- **C196 `[relconic]` [QUEUED 2026-07-15 — Q7 STRICT-CONTAINMENT FOIL]** — use BSW's classical
+  q=7 exterior four-arc and the four-arc identity `|U(A)|=(q-2)(q-3)` to record the strict example
+  `C(F_7) subsetneq U(A)`, with `8<20`; use it as the smallest concrete warning that complete
+  exteriority is weaker than relative completeness, without claiming the BSW configuration anew →
+  `notes/2026-07-15-c196-q7-exterior-strict-containment.md`.
 
 **Twisted-cubic lane (`cubic`) — the k-tower probe (2026-07-14):** see
 [handoff](handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md).
@@ -624,6 +646,12 @@ fixed-locus / quadric-Witt dichotomy leap).
   proper-subset containment `U(A)⊂C(F_q)` or another localization, and does not advance or
   reformulate `(ON)` →
   `notes/2026-07-15-c189-q5-octahedral-frame.md`.
+- **C198 `[cap]` [QUEUED 2026-07-15 — BOUNDED Q7 EXTERIOR SCOUT]** — reconstruct or obtain BSW's
+  q=7 complete-exterior four-arc, compute its 20-point uncovered locus and residual continuation
+  graph with the existing projective-cap machinery, and test for a recognizable symmetry,
+  involution, or P-position. Strict stop: this is a cheap scout, not manuscript scope unless it
+  yields a clean certified game statement; distinguish it from C189's exact q=5 conic-filling seed →
+  `notes/2026-07-15-c198-q7-exterior-residual-scout.md`.
 
 - **C84 `[cap]` [ACTIVE 2026-07-12 — abundance-first] — conic-involution Schreier catalogue.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:

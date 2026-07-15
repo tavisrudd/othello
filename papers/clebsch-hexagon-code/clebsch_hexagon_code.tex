@@ -135,8 +135,8 @@ Van~Maldeghem identified
 the corresponding six-arc in their finite-plane classification~\cite{SVM1995}.
 
 That such an arc exists, and that its projective deep-hole syndrome locus is
-a conic, is by itself a finite check --- an instance of the DMP dictionary
-applied to one known arc. What we add is that this instance is not an
+a conic, is by itself a short synthesis of classical geometry and the DMP
+dictionary, independently certified by finite computation. What we add is that this instance is not an
 accident of the arc chosen:
 among \emph{all} six-arcs of $\PG(2,11)$ --- fifteen classes under
 $\mathrm{PGL}(3,11)$, which our search meets as $1548$ frame-normalized
@@ -245,12 +245,13 @@ synthetically by Dye under the existence condition $5$ a square in the base
 field~\cite[Theorem~1]{Dye1991}. Dye's Theorems~1 and 3 give projective
 uniqueness and stabilizer $A_5$ directly; Storme and Van~Maldeghem's
 Proposition~12 gives the corresponding finite-plane catalogue statement.
-Dye's unique-polarity theorem identifies the same conic $\cC$, and his orbit
-criterion shows that the six vertices lie on no conic in characteristic
-$11$~\cite[Theorem~2, pp.~276--277; Theorem~6(i), p.~281]{Dye1991}.\footnote{The
+Dye's unique-polarity theorem identifies an associated conic; in our chosen
+coordinates the directly verified conic is $\cC$. His calculation also
+shows that the six vertices lie on no conic in characteristic
+$11$~\cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}.\footnote{The
 primary texts separate two statements that are easy to conflate. Dye proves
 that, over $\F_{11}$, every edge is external to the associated conic
-\cite[Theorem~6(iv), p.~281]{Dye1991}, and
+\cite[discussion preceding Theorem~6, p.~281]{Dye1991}, and
 Blokhuis--Seress--Wilbrink call the resulting six-arc a complete exterior
 set; thus the conic is contained in the uncovered locus. Neither source
 states the converse covering assertion that every off-conic point lies on an
@@ -318,16 +319,26 @@ on no secant of $A$ --- is exactly the twelve points of $\cC$.
 \end{proposition}
 
 \begin{proof}
-Dye's edge criterion at $q=11$, equivalently the complete-exterior-set
-description of Blokhuis--Seress--Wilbrink, shows that all fifteen edges of
-$A$ miss $\cC$~\cite[Theorem~6(iv), p.~281]{Dye1991}
-\cite[pp.~143, 146]{BSW1992}. Hence
+Dye's associated-conic edge criterion and the complete-exterior-set
+description of Blokhuis--Seress--Wilbrink give the classical provenance
+\cite[discussion preceding Theorem~6, p.~281]{Dye1991}
+\cite[pp.~143, 146]{BSW1992}. For the displayed coordinates, direct
+substitution of each of the fifteen line equations into $XZ-Y^2$ gives a
+quadratic with nonsquare discriminant; this finite calculation is also
+replayed by the checker. Hence
 $\cC(\F_{11})\subseteq\cU(A)$. Dye's Clebsch classification gives exactly
-ten Brianchon points, while the chord-defect identity of
-Lemma~\ref{lem:chord-defect} gives
+ten Brianchon points. For completeness, here is the relevant double count.
+The fifteen edges contribute $150$ off-arc incidences. The $45$ pairs of
+disjoint edges meet once, so if $n_i$ counts off-arc points lying on exactly
+$i$ edges, then
 \[
- |\cU(A)|=22-c(A)=22-10=12.
+ n_1+2n_2+3n_3=150,
+ \qquad n_2+3n_3=45,
+ \qquad n_3=10.
 \]
+Thus the edges cover $n_1+n_2+n_3=115$ of the $127$ off-arc points, leaving
+$|\cU(A)|=12$. This is the $q=11$ specialization of the chord-defect
+identity in Lemma~\ref{lem:chord-defect}.
 Since $|\cC(\F_{11})|=12$, the inclusion is equality. By the dictionary
 above this is exactly the projective deep-hole syndrome locus, and its
 nonemptiness gives covering radius three rather than two.
@@ -446,7 +457,7 @@ consequence of the $[6,3,4]$ parameters and is recorded here only to
 connect the code to the design-theoretic framing this venue expects.
 \item \textbf{Five self-polar triangles.} Edge's finite-plane construction
 \cite[\S\S30.2--31]{Edge1956} and Dye's general-field synthetic theory
-\cite[Theorem~2, pp.~276--277]{Dye1991} exhibit five triangles on the six vertices,
+\cite[Theorem~2, pp.~277--278]{Dye1991} exhibit five triangles on the six vertices,
 each self-polar with respect to the unique conic $\cC$ stabilized by the
 hexagon's projective stabilizer --- the same conic as the projective
 deep-hole syndrome locus of Proposition~\ref{prop:deep-holes-conic}. In the
@@ -465,7 +476,8 @@ graph made precise in Proposition~\ref{prop:brianchon-support}.
 \label{sec:rigidity}
 
 The content of Proposition~\ref{prop:deep-holes-conic} is, on its own, a
-single finite computation for one known arc. The following theorem is the
+short synthesis for one known arc, independently certified by finite
+computation. The following theorem is the
 paper's main claim: among \emph{all} six-arcs of $\PG(2,11)$, the property
 ``the projective deep-hole syndrome locus lies on a conic'' picks out the
 Clebsch hexagon uniquely, and does so in a way that recovers its projective
@@ -515,8 +527,9 @@ arc, and the census itself is Sadeh's.
 What we contribute is the geometric and coding-theoretic meaning of
 $\cU(A)$: that its containment in a conic singles out the Clebsch hexagon
 and forces $A_5$, that this containment is rigid rather than merely
-typical, and that for the singled-out class the complete projective
-deep-hole syndrome locus is the full set of $\F_{11}$-points of a conic.
+typical, and the resulting gap, decoding, and support structure. The exact
+conic locus for the singled-out class is the setup supplied by
+Proposition~\ref{prop:deep-holes-conic}, not a separate novelty claim here.
 
 We first isolate the geometric input that removes degenerate conics from the
 computer-assisted part of the argument.
@@ -853,7 +866,8 @@ classical antecedent of the same two-class motif. They are classes of
 hexagons, however, not the support-orbit bipartition proved below.
 Blokhuis--Seress--Wilbrink report another, distinct Petersen appearance at
 $q=31$: a sixteen-point complete exterior set split into a six-arc and a
-ten-set whose shared $2$-secants carry a Petersen graph
+ten-set; every $2$-secant of the six-arc is also a $2$-secant of the ten-set,
+and the resulting fifteen pairs of ten-set points are the Petersen edges
 \cite[p.~146]{BSW1992}. That configuration is neither the present
 $q=11$ support graph nor a chirality assertion.
 

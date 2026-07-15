@@ -3,8 +3,8 @@
 **Lane**: `relconic` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-13
-**Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun and C188 q=5 import remain
-**Tasks:** C106–C110, C188
+**Status:** ACTIVE — strengthened lane and hostile-review repairs pass focused publication gates; C110 shared aggregate rerun, C188 q=5 import, and C195–C196 exterior-set framing remain
+**Tasks:** C106–C110, C188, C195–C196
 
 ## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
 
@@ -54,6 +54,11 @@ The queued C188 follow-up imports only Clebsch C187's `q=5` four-frame witness t
 strict-kernel formalize `rho_C(5)=L_2(5)=4`. The broader `4<=k<=7` conic-filling classification
 stays in the `clebsch` lane and is cited rather than migrated; see the
 [C188 report](../2026-07-15-c188-rhoc5-frame.md).
+
+Two bounded Dye/BSW follow-ups are queued here. C195 adds the implication diagram separating
+complete exteriority (`C subset U`) from completeness outside the prescribed conic (`U subset C`).
+C196 instantiates the distinction on BSW's q=7 exterior four-arc, where the four-arc identity gives
+`|U|=20>8=|C(F_7)|`. Both are framing upgrades; neither changes theorem ownership.
 
 The work is a continuation of the finished
 [C89–C96 formalization](done/2026-07-12-arcs-complete-outside-conic-formalization.md), not a reopening

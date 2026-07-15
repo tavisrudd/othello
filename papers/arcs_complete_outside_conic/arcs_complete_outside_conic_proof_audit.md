@@ -181,7 +181,8 @@ exact \(q=16\) value; the paper proves that this route is too weak and uses
   distribution, coloured chord partition, and extension polynomial. The bounded search did not
   locate that exact conjunction, so it is presented only as a checked synthesis.
 - No claim that the q=11 exterior six-arc or the inclusion of its conic in the ordinary uncovered
-  locus is new. Dye 1991, Theorem 6(iv), and Blokhuis--Seress--Wilbrink 1992, pp. 143 and 146,
+  locus is new. Dye 1991, p. 281 (discussion preceding Theorem 6), and
+  Blokhuis--Seress--Wilbrink 1992, pp. 143 and 146,
   supply that classical input. Exact equality follows after adjoining the elementary chord-defect
   count and Dye's ten Brianchon concurrences; it is described as an apparently unrecorded synthesis.
 - No unconditional priority claim for the uncovered-locus quadratic
