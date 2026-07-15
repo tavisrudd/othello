@@ -2,10 +2,10 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **INCIDENCE + PRISM OBSTRUCTION LEAN COMPLETE; NORMALIZATION + SOURCE GATES OPEN** — the
-generic incidence spine, `K6` normal form, common-infinity direction lemma, and normalized odd-field
-contradiction pass Lean. The remaining formal seam is extracting and projectively normalizing the
-prism from the equality case; manuscript integration also waits for the Dye 1991 source check.
+**Status**: **INCIDENCE + PROJECTIVE PRISM LEAN COMPLETE; EXTRACTION + SOURCE GATES OPEN** — the
+generic incidence spine, `K6` normal form, projective normalization, and division-free odd-field
+contradiction pass Lean. The remaining formal seam is extracting the explicit prism points and
+directions from the five equality fibers; manuscript integration also waits for Dye 1991.
 
 ## Target
 
@@ -108,10 +108,11 @@ one-factorizations with explicit relabelling witnesses. Lean checks the six-witn
 semantic completeness claim with ordinary kernel reduction.
 
 `lean/RelativeConicArcs/OddSixArcAffinePrism.lean` also proves that affine lines through a common
-point at infinity have parallel direction vectors, and rules out the normalized triangular prism
-in odd characteristic. The sole remaining internal bridge extracts the prism directions from the
-five equality fibers and threads them through the now-certified ordered-triple normalizer and
-diagonal affine rescaling in `ProjectiveTripleNormalization.lean`. All focused targets
+point at infinity have parallel direction vectors and, using the certified ordered-triple
+normalizer, rules out any projective realization of the prism off its direction line. The final
+proof is division-free: its two direction determinants differ by `2*x*y`, while injectivity gives
+`x*y != 0`. The sole remaining internal bridge extracts the prism points/directions from the five
+equality fibers and feeds them to this theorem. All focused targets
 build fresh with `LEAN_NUM_THREADS=1` and `choom -n 500`; their manuscript-facing axiom reports
 contain only `propext`, `Classical.choice`, and `Quot.sound`.
 

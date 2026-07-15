@@ -891,3 +891,7 @@ published open problems and questions newly posed by this project.
   and the prism then forces `2=0`. **Question — follow-on:** in characteristic two, classify the
   realizable five-direction equality configurations rather than treating failure of the odd proof
   as merely exceptional.
+- The normalized contradiction needs no division and hence no hidden nonzero-coordinate side
+  conditions beyond distinctness: the two third-direction determinants differ by `2*x*y`, with
+  `x,y != 0` forced by injectivity. This is the cleanest manuscript proof form and makes the exact
+  characteristic-two failure visible.
