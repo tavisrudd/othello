@@ -43,9 +43,10 @@ a decision, not an artifact of which paper finishes first.
 **Status**: **MAJOR REVISION — INTERNAL REPAIRS LANDED; EXTERNAL GATES OPEN.** C128, C146, and
 C163–C173 have repaired the mathematics, terminology, prior-art framing, reproducibility,
 quantitative gaps, unconditional q=11 theorem, and manuscript scope. The draft builds warning-free
-with one rigidity spine. C184/C185/C187 now have hardened computation artifacts, but their
-manuscript dispositions and Lean tails remain open; C186 has only a drafted, unelaborated finite
-bridge and still needs the conceptual source-backed proof. It is not submission-ready until C153
+with one rigidity spine. C185's finite synthesis and C187's arithmetic layer now pass Lean; C184's
+manuscript disposition, C187's geometric adapter, and the A₅ action tail remain open. The proved
+q=11 defect bridge plus a two-axiom Dye interface now kernel-check the conic-rigidity implication.
+It is not submission-ready until C153
 settles BSW priority, C131/C161 settle ownership, these new tails close, and C168 runs
 the clean-source/PDF closeout.
 
@@ -78,16 +79,15 @@ append-only; promote scoped findings to C items rather than routing work directl
 | 3d | **C180 — PROOF FOUND; SOURCE GATE OPEN** | an odd-characteristic edge-colouring lemma bounds every line by six uncovered points and closes the degenerate line-pair case once Dye's `c<=10` equality theorem is licensed over `F_11` | verify Dye 1991 p.275 field/descent hypotheses, then integrate the conceptual proof → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
 | 3e | **C181 — REPORTED** | the universal `c<=15` matching bound reduces all characteristics to `q=4,5,9,11`; the first two are excluded geometrically and the q=9 internal graph is Sylvester with published `eq_2=5`, independently checked from scratch | closed; manuscript now uses the conceptual proof and retains both exact checkers as verification → [C181 report](../2026-07-15-c181-classification-free-why11.md) |
 | 3f | **C182 — QUEUED; EXTERNAL ARCHIVE GATE** | all cited computations are indexed and manifested locally, but the PDF gives no immutable public artifact location | after C168 clean-HEAD closeout, publish/replay a versioned archive and cite its DOI in a data/code-availability paragraph → [C182 report](../2026-07-15-c182-clebsch-artifact-archive.md) |
-| 3g | **C183 — IN PROGRESS** | C174/C176 and the q4/q5/q9 leaves pass narrow elaboration and axiom audit; the action, decoding, small-`k`, and conditional Dye layers remain | root-elaborate the three drafted synthesis modules, then close C180 with an explicit Dye seam rather than formalizing Dye in full → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
+| 3g | **C183 — IN PROGRESS** | decoding synthesis, small-`k` arithmetic, actual `u+c=22`, and the explicit two-axiom Dye consequences pass narrow elaboration and axiom audit | finish the row-sharded A₅ action certificate, the small-`k` geometric adapter, and C180's odd-field line lemma → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
 | 3h | **C184 — CHECKERS COMPLETE; DISPOSITION OPEN** | the tracked checker and Singular replay certify the complete low-degree table, unique cubic containment, and exact C02/C04/C12 companions | decide a concise manuscript disposition; Lean only what survives that decision → [C184 report](../2026-07-15-c184-low-degree-uncovered-loci.md) |
-| 3i | **C185 — CHECKER COMPLETE; LEAN/MANUSCRIPT OPEN** | the complete oracle, ambiguity enumerator, Brianchon locus, and corrected support-determined chirality statement are fail-closed | root-elaborate `Q11DecodingSynthesis.lean` and integrate the fixed-code corollaries → [C185 report](../2026-07-15-c185-clebsch-decoding.md) |
-| 3j | **C186 — FINITE BRIDGE DRAFTED; CONCEPTUAL PROOF OPEN** | `Q11A5PointOrbits.lean` is drafted but unelaborated; it verifies rather than replaces the desired representation-theoretic argument | root-elaborate the bridge, then derive the unique 12-orbit and source the Brianchon-ten-orbit argument forcing `c=10` → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
-| 3k | **C187 — CHECKER COMPLETE; LEAN/PRIORITY/MANUSCRIPT OPEN** | the hardened q5/q11/q13 checker completes the finite leaves of the `4<=k<=7` classification | root-elaborate `SmallKChordMoments.lean`, close its geometric seam, literature-check `(4,5)`, and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
+| 3i | **C185 — CHECKER/FINITE LEAN COMPLETE; MANUSCRIPT OPEN** | the total oracle, ambiguity enumerator, uniform twenty-support theorem, and Brianchon bridge pass strict-kernel audit; monomial-equivariant chirality remains with the action layer | integrate the fixed-code corollaries and finish the action-dependent claims under C186 → [C185 report](../2026-07-15-c185-clebsch-decoding.md) |
+| 3j | **C186 — FINITE BRIDGE REFACTORING; CONCEPTUAL PROOF OPEN** | two monolithic passes OOMed at 17.5 GiB; the row-sharded pass avoided OOM and exposed ordinary reducibility errors now under repair | finish the bounded certificate, then write/source the representation-theoretic proof → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
+| 3k | **C187 — CHECKER/ARITHMETIC LEAN COMPLETE; ADAPTER/PRIORITY/MANUSCRIPT OPEN** | the hardened checker and `SmallKChordMoments.lean` cover the finite and arithmetic layers | close the geometric moment seam, literature-check `(4,5)`, and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
 
-C183's live report contains the compaction-safe subagent roster. C185's worker is active on Lean
-synthesis; C187's checker is complete and its worker has moved to
-C186's finite `A5` point-action bridge; C184 is complete and its worker owns C187's Lean moments.
-Root owns integration, the Dye axiom/source audit, and all validation.
+C183's live report contains the compaction-safe subagent roster. The only active subagent is the
+static repair of C186's finite `A5` point-action bridge. Root owns integration, the Dye axiom/source
+audit, all validation, and uses `choom -n 500` for current Clebsch Lean work.
 | 4 | **C165 — REPORTED** | 42-per-vertex/252-neighbour theorem, both histograms, no-conic result, and distance-zero global counterexample are tracked and cited | closed → [C165 report](../2026-07-14-c165-clebsch-gap-theorem.md) |
 | 5 | **C166 + C170 — REPORTED** | unconditional q≤14 exact census leaves q=11 alone; old q=9 conjugacy claim removed | closed → [C166 scope audit](../2026-07-14-c166-clebsch-why11.md), [C170 theorem](../2026-07-14-c170-unconditional-q11-uniqueness.md) |
 | 6 | **C128 + C167 — REPORTED** | exact syzygy certified; unsupported group provenance isolated; Klein/Further remarks removed; C174 seam landed | closed → [C128](../2026-07-14-c128-icosahedral-syzygy.md), [C167](../2026-07-14-c167-clebsch-manuscript-scope.md) |

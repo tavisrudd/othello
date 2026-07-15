@@ -2,9 +2,10 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **IN PROGRESS** — the C174 spine, C176 finite core, and q=4/q=5/q=9 leaves all pass
-narrow elaboration and axiom audit. Remaining work is the equivariant/action layer, the C185
-decoding synthesis, the C180 line lemma plus explicit Dye interface, and C187's general moments.
+**Status**: **IN PROGRESS** — the C174 spine, C176 finite core, q=4/q=5/q=9 leaves, C185 decoding
+synthesis, C187 arithmetic moments, and the actual q=11 defect-to-Dye seam all pass narrow
+elaboration and axiom audit. Remaining work is the A₅ action certificate, C180's odd-field line
+lemma, the geometric bridge for the general small-`k` moments, and the manuscript synthesis.
 
 ## Live subagent roster
 
@@ -13,14 +14,14 @@ compaction and are the recovery handles for `collaboration.list_agents`/`followu
 
 | Task | Ownership | Build rule | Current state |
 |---|---|---|---|
-| `/root/c183_chord_defect` | `ClebschChordDefect.lean` plus `Q5SixArcExclusion.lean`; C174 and q=5 | no Lean or Lake invocation until root coordinates | complete; both narrow elaborations and axiom audits pass |
-| `/root/c183_brianchon` | C176 core and C185 checker/synthesis | no Lean or Lake invocation until root coordinates | C176/Python complete; active on `Q11DecodingSynthesis.lean` |
-| `/root/c183_q9_sylvester` | q=9/C187, then C186 finite `A5` point-action bridge | no Lean or Lake invocation until root coordinates | q=9/C187 complete; active on `Q11A5PointOrbits.lean` |
-| `/root/c183_curve_loci` | C184 curve audit, then C187 small-`k` Lean moments | no concurrent Lean; root coordinates elaboration | C184 complete; active on `SmallKChordMoments.lean` |
+| `/root/decoding_lean_static` | C185 synthesis | no Lean or Lake invocation; root validates | complete; `Q11DecodingSynthesis.lean` passes narrow elaboration and standard-axiom audit |
+| `/root/dye_interface_design` | exact imported Dye boundary | design only; root implements and validates | complete; two q=11 axioms only, with downstream dependency split audited |
+| `/root/six_arc_defect_bridge` | actual geometric `u+c=22` bridge | no Lean or Lake invocation; root validates | complete; bridge passes with standard axioms and no Dye dependency |
+| `/root/a5_lean_static` | C186 finite `A5` point-action bridge | no Lean or Lake invocation; root validates | active repair after the row-sharded pass exposed reducibility failures without an OOM |
 
-Root owns integration, small-field q=4/q=5 work, the Dye-formalization source audit and axiom
-interface, validation sequencing, and manuscript/handoff synchronization. No two agents may run a
-Lean build concurrently.
+Root owns integration, the Dye axiom interface and consequences, validation sequencing, and
+manuscript/handoff synchronization. No two agents may run a Lean build concurrently. All current
+Clebsch checks use `choom -n 500` as directed on 2026-07-15.
 
 ## Landed strict-kernel surface
 
@@ -39,6 +40,14 @@ Every displayed `#print axioms` result contains only `propext`, `Classical.choic
 `Quot.sound`. There is no `sorryAx`, `native_decide`, external oracle, or new axiom in these
 modules.
 
+The same strict-kernel verdict now holds for:
+
+- `SmallKChordMoments.lean`: the `k=4,5,7` arithmetic specializations and prime-power reduction;
+- `Q11DecodingSynthesis.lean`: the total distance oracle, uniform twenty deep-hole supports,
+  ambiguity strata, and Brianchon/weight-two bridge; and
+- `SixArcDefectBridge.lean`: the actual projective-plane identity
+  `|U(A)| + |brianchonPoints(A)| = 22` for every q=11 six-arc.
+
 ## Dye source and formalization boundary
 
 No exact formalization of Dye's Brianchon bound/equality classification was found in the pinned
@@ -47,20 +56,23 @@ searches. The Rocq archive provides incidence planes, duality, Desargues, and ma
 but no conic/Brianchon/Clebsch layer. Dye's open 1997 self-recap supports the 1991 theorem's use,
 but the primary 1991 equality proof remains inaccessible locally.
 
-The near-term C180 theorem will therefore import two precisely named Dye statements as axioms:
-the ten-point bound under the exact field hypotheses and the equality classification. The new line
-lemma and every implication below those inputs remain kernel-checked, and `#print axioms` will make
-the seam visible. A general formalization of Dye is feasible but is a separate substantial
+`Q11DyeAxioms.lean` now imports exactly two precisely named statements: the ten-point bound for a
+q=11 six-arc and the equality classification up to projective equivalence with the certified
+witness. `Q11DyeConsequences.lean` proves `|U(A)|>=12`, equality of the `12+10` cards under conic
+containment, and `contained in a nonsingular conic -> IsClebschHexagon`. Axiom audit shows the first
+two consequences depend only on the bound, while the classification theorem depends on exactly
+both Dye axioms. The proved `u+c=22` bridge depends on neither. A general formalization of Dye is
+feasible but is a separate substantial
 formal-geometry project; a reflected 1548-class q=11 certificate is the finite self-contained
 alternative, not a formalization of Dye's conceptual proof.
 
 ## Remaining sequence
 
-1. add the shared `Fin 6` action table and certify C176 equivariance, the C186 point-orbit facts,
-   chirality, and the C185 decoder synthesis;
-2. connect the abstract C174 moments directly to the geometric `Moments.lean` definitions and add
-   C187's `k=4,5,7` specializations;
-3. formalize C180's affine-direction/edge-colouring line lemma and its conditional Dye theorem;
+1. finish the memory-bounded A₅ action certificate and certify C186 point-orbit facts plus the
+   remaining chirality action layer;
+2. connect C187's proved arithmetic specializations to the geometric `Moments.lean` definitions;
+3. formalize C180's affine-direction/edge-colouring line lemma; the conditional conic-rigidity
+   implication below Dye is already kernel-checked;
 4. run narrow module builds/axiom audits, then a tracked aggregate only after the foreign Q25 tree
    is stable.
 

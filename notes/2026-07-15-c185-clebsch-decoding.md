@@ -2,7 +2,7 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **CHECKER REPORTED; LEAN SYNTHESIS AND MANUSCRIPT DECISION OPEN.**
+**Status**: **CHECKER AND LEAN SYNTHESIS REPORTED; MANUSCRIPT DECISION OPEN.**
 
 ## Exact result
 
@@ -140,6 +140,11 @@ The blob is recorded as prospective until the root lane stages the new checker e
 
 ## Lean coverage map
 
+`RelativeConicArcs/Q11DecodingSynthesis.lean` now packages items 1--4 below. A narrow direct
+elaboration passed on 2026-07-15; every displayed theorem reports only `propext`,
+`Classical.choice`, and `Quot.sound`. The substantial projective/monomial action layer in item 5
+remains separate and open.
+
 All referenced theorems below live in namespace `RelativeConicArcs.Examples.Q11Coding`, except the
 new Brianchon module, whose namespace is
 `RelativeConicArcs.Examples.Q11BrianchonPetersen`.
@@ -160,15 +165,16 @@ new Brianchon module, whose namespace is
 | Full `MAut(C)` coefficient equivariance and chirality decoders | No Lean monomial action on words/syndromes | Missing |
 | Affine deep-hole stabilizer has four five-element leader orbits; four global size-five decoders attain the lower bound | No Lean stabilizer/orbit infrastructure | Missing |
 
-## Recommended missing synthesis lemmas, in EV order
+## Synthesis status, in EV order
 
-1. Package the already-certified distance facts as one total syndrome oracle, including `s=0` and
-   the distance-one column-ray branch.
-2. Prove that every distance-three syndrome has leader-support set exactly
+1. **Done:** package the already-certified distance facts as one total syndrome oracle, including
+   `s=0` and the distance-one column-ray branch.
+2. **Done:** prove that every distance-three syndrome has leader-support set exactly
    `(Finset.univ : Finset (Fin 6)).powersetCard 3`; derive the uniform count twenty.
-3. Combine that result with `distance_two_leader_distribution` and the weight-one branch to state
+3. **Done:** combine that result with `distance_two_leader_distribution` and the weight-one branch to state
    the complete ambiguity enumerator `1^960 2^150 3^100 20^120`.
-4. Bridge `rawLeaderSupports` at secant index three to the ten concrete `brianchonMatching` values.
+4. **Done:** bridge `rawLeaderSupports` at secant index three to the ten concrete
+   `brianchonMatching` values.
 5. Build the `60` projective lifts and `600` monomial actions in Lean, then certify the two
    chirality orbits, the order-five affine-syndrome stabilizer, its `5+5+5+5` leader orbits, and the
    four transported minimal decoders.

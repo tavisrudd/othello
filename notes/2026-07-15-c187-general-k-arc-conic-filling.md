@@ -2,9 +2,10 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **IN PROGRESS — FINITE SEARCH HARDENED AND REPLAYED.** The `k=4,5,7` arithmetic is
-proved below and the surviving `q=11,13` seven-arc searches now have one tracked fail-closed
-checker. The `(4,5)` literature positioning and Lean formalization remain.
+**Status**: **IN PROGRESS — FINITE SEARCH AND ARITHMETIC LEAN LAYER COMPLETE.** The `k=4,5,7`
+arithmetic and prime-power reduction pass narrow Lean elaboration and standard-axiom audit, and the
+surviving `q=11,13` searches have one tracked fail-closed checker. The geometric moment adapter,
+`(4,5)` literature positioning, and manuscript disposition remain.
 
 ## Exact identity through seven points
 
@@ -87,7 +88,9 @@ the old random `k=7` samples are provenance only and are not evidence used by th
 ## Exit gate
 
 - **done:** replay and harden the attached `k=4,5,7` finite checker;
-- formalize the general first/second chord-moment identity and all three specializations;
+- **done:** formalize the arithmetic first/second chord-moment consequences and all three
+  specializations in `RelativeConicArcs/SmallKChordMoments.lean`; its geometric adapter to arbitrary
+  projective arcs remains open;
 - literature-check the `PG(2,5)` quadrilateral/invariant-conic sibling before claiming novelty;
 - **done:** exhaust the normalized searches at `q=11,13` and audit their raw/deduplicated counts;
   and
