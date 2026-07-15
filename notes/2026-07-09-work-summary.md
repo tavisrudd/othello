@@ -1,7 +1,6 @@
 # Repo Scope Summary — `othello` workspace
 
 A cross-thread synthesis of scope, agenda, results, dead ends, frontier, and tooling.
-(Companion week-by-week activity log: [`2026-07-09-work-summary-timeline.md`](2026-07-09-work-summary-timeline.md).)
 
 ---
 
@@ -16,10 +15,14 @@ games, backed by:
 - a bespoke game-tablebase + query/mining toolchain,
 - a `sorry`-free **Lean 4 / Mathlib** formalization layer.
 
-The center of gravity is the **projective cap ("Nofil") program** and its **odd projective-plane
-kernel**, with the Lean layer certifying results as they land. The cap machinery has also begun
-**spinning off standalone finite-geometry and coding-theory deliverables** — extension, rigidity,
-and completion-distance theory about geometric *legality* rather than game value (see §3, §8).
+The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
+projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
+has spun off enough standalone finite-geometry and coding-theory mathematics — extension, rigidity,
+and completion-distance theory about geometric *legality* rather than game value — that the repo now
+carries a **publication track alongside the research track**: `papers/` stages seven papers in ship
+order plus two OEIS entries, governed by a Lean release gate (see §3, §7, §8).
+[`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
+paper and its proof location.
 
 ---
 
@@ -30,13 +33,13 @@ incidence hypergraph**, where legal positions are *line-capacity independent set
 line families, and per-line capacities `c(L)`, a move adds a point keeping `|S ∩ L| ≤ c(L)` for
 every `L`; the last player able to move wins. `P` = second-player win; `N` = first-player win.
 
-| Instance                      | Capacity / lines                           | Reduces to                               |
-|-------------------------------|--------------------------------------------|------------------------------------------|
-| Non-attacking **Queens**      | capacity-1, four affine directions         | Node-Kayles on the queen graph           |
-| **Cap / Nofil** (aff./proj.)  | capacity-2, all lines of a finite geometry | Nofil on the collinearity-triple 3-graph |
-| **Sum-free** on abelian `G`   | Schur-triple hypergraph (`a+b=c`)          | Nofil on the Schur 3-graph               |
-| **Cap-set** on `F₃ⁿ`          | capacity-2 (`a+b+c=0`); `STS(3ⁿ)`          | affine cap game                          |
-| **Node-Kayles**               | the capacity-1 / saturated-residual limit  | itself (the substrate)                   |
+| Instance                     | Capacity / lines                           | Reduces to                               |
+|------------------------------|--------------------------------------------|------------------------------------------|
+| Non-attacking **Queens**     | capacity-1, four affine directions         | Node-Kayles on the queen graph           |
+| **Cap / Nofil** (aff./proj.) | capacity-2, all lines of a finite geometry | Nofil on the collinearity-triple 3-graph |
+| **Sum-free** on abelian `G`  | Schur-triple hypergraph (`a+b=c`)          | Nofil on the Schur 3-graph               |
+| **Cap-set** on `F₃ⁿ`         | capacity-2 (`a+b+c=0`); `STS(3ⁿ)`          | affine cap game                          |
+| **Node-Kayles**              | the capacity-1 / saturated-residual limit  | itself (the substrate)                   |
 
 **Novelty posture (deliberately conservative):** a *structured finite-incidence subfamily* of the
 published Sieben / Huggan–Huntemann–Stevens (HHS) hypergraph building-avoidance genus — **not a new
@@ -47,15 +50,19 @@ mirror/slack analysis is new.
 
 ---
 
-## 2. The five threads
+## 2. The threads
 
-| Thread                  | What it is                                        | State                                      |
-|-------------------------|---------------------------------------------------|--------------------------------------------|
-| **Projective cap**      | `PG(n,q)` cap/Nofil outcome theorem               | **Active frontier.** Odd-plane kernel open |
-| **Queens**              | Non-attacking queens game + A344227 nimbers       | n=18 outcome solved; G(18) nimber open     |
-| **Sum-free / cap-set**  | Achievement game on abelian groups / `F₃ⁿ`        | Core theorems proved + Lean; one slice open|
-| **Node-Kayles**         | Graph/Cayley substrate for all of the above       | Outcome laws proved; classic opens remain  |
-| **Othello**             | Rust port of the Python engine + endgame solver   | Stable, gate-green, effectively archived   |
+| Thread                 | What it is                                        | State                                        |
+|------------------------|---------------------------------------------------|----------------------------------------------|
+| **Projective cap**     | `PG(n,q)` cap/Nofil outcome theorem               | **Open research frontier.** Odd-plane kernel |
+| **Geometry / coding**  | The spin-off portfolio (§3) — legality, not value | **Where the deliverables are.** Seven papers |
+| **Queens**             | Non-attacking queens game + A344227 nimbers       | n=18 outcome solved; G(18) nimber open       |
+| **Sum-free / cap-set** | Achievement game on abelian groups / `F₃ⁿ`        | Core theorems proved + Lean; one slice open  |
+| **Node-Kayles**        | Graph/Cayley substrate for all of the above       | Outcome laws proved; classic opens remain    |
+| **Othello**            | Rust port of the Python engine + endgame solver   | Stable, gate-green, effectively archived     |
+
+The first two are the split that matters: the cap thread is the *unsolved problem*, the geometry /
+coding thread is the *shippable output*, and the second is now the larger body of work.
 
 ---
 
@@ -88,9 +95,17 @@ mirror/slack analysis is new.
   mirror: hyperbolic quadric **`Q⁺(2m−1,q)`**, symplectic polar space **`W(2n−1,q)`**, and Segre
   products **`PG(a,q)×PG(2m−1,q)`**, all P for odd `q`. *(Lean: `HyperbolicQuadricMirror`,
   `PolarSegreMirror` — reusable `c=2` mirror engine + grid-rook base fully proven; higher
-  instantiations statement-level.)* **Boundary theorem:** odd ambient dimension is necessary but not
-  sufficient — the isometry group must contain an fpf involution (elliptic/parabolic/Hermitian are
-  *mirror* negatives; outcome may still be P by other means).
+  instantiations statement-level.)*
+- **Elliptic quadric `Q⁻` is P too** — the standard elliptic quadric in every even vector dimension
+  carries an fpf mirror (hyperbolic pairs plus one anisotropic binary tail, all scaled by the same
+  nonsplit block map). *(Lean: `EllipticQuadricMirror`, coordinate-exact.)* This **overturned a
+  claimed negative of our own**: the conjectured `Q⁻` mirror *exclusion* was false, and the family it
+  was supposed to rule out is a genuine P family.
+- **Mirror-method boundary (final; all Lean).** For odd fields the method is positive on
+  **both** standard even-dimensional orthogonal types, `Q⁺` and `Q⁻`; the modeled **parabolic and
+  Hermitian** branches are method-negative (no fpf involution of the classified type). Method-negative
+  is not an outcome: those rows leave the game's P/N value undetermined. Odd ambient dimension remains
+  necessary but not sufficient.
 
 ### Queens
 - **Outcome settled through n=18.** Odd `n` → first; `n∈{4,6,8}` → first; `n∈{10,12,14,16}` → second
@@ -127,24 +142,72 @@ cap-game child. They concern *legal* extension / reconstruction / recovery, spli
 machinery as standalone finite-geometry and coding-theory units. The novelty posture is consistently
 conservative — many components are classical-facing, with the claimable content in a specific *robust*
 refinement (the deletion/transversal spectrum, the marked-orbit statistic, the complete-repair
-hypergraph), gated on a specialist prior-art audit. Four connected theory families landed:
+hypergraph), gated on prior-art audits that have repeatedly landed against us and been conceded (§8).
+This is now the larger half of the repo's proven mathematics and the whole of its publication track.
 
-- **Baer-equivariant arc extension.** Over `L = F_{s²}` with Frobenius `τ`, the fixed blocked set of
-  a `τ`-invariant `k`-arc is an exact *mixed cover* of the Baer subplane `PG(2,s)` — invariant secants
-  (fixed-fixed chords + conjugate-pair mate lines) plus isolated conjugate-secant intersections.
-  The corrected `(k,f)` fixed-point bound `B_{k,f}(s)` has asymptotically sharp leading
-  term `(C(f,2)+e)s` (`s ≥ 23` uniform for eight-arcs). **Headline:** the quantitative
-  conjugate-pair extension theorem — exactly `E = s²+s+1 − (f(s+1)−C(f,2)+e)` empty `F_s`-lines and
-  `≥ E·((s²−s)/2 − M)_+` legal conjugate-pair extensions. Hence **every Frobenius-invariant
-  eight-arc pair-extends for every prime power `s ≥ 7`**, and an equivariantly complete invariant arc
-  with `k < s²+1` has size `≥ 1 + ⌈√(2s(s−1))⌉` — the `√2·s` orbit-saturation bound, the
-  strongest extremal corollary (sharpness open). Quadratic extensions are exceptional: for prime
-  Galois degree `≥ 3` no nonfixed orbit yields an invariant secant. The Galois-rank section
-  formula identifies `ρ(S)` with **rank weight** over `L/F` (the mixed cover is its rank-3 quadratic
-  case) and recasts MDS fixed-lengthening counts via a forbidden-normal rank enumerator. Prospective
-  paper: *Equivariant extensions of Galois-invariant arcs over finite fields*.
+- **Arcs complete outside a conic** (the lead deliverable; `arcs`). The exact **prescribed-hole
+  defect identity** and its corollaries (equality pattern, uncovered-locus bound, quantitative
+  stability), the corrected capacity lower bound, and an explicit additive asymptotic
+  `ρ_𝒞(q) ≥ √(2q) + 3/2 − 8/√(2q)` — restated as a concrete inequality rather than O-notation,
+  which is both easier to formalize and a stronger claim. **Exact values:** `ρ_𝒞(8) = ρ_𝒞(9) =
+  ρ_𝒞(11) = 6` and **`ρ_𝒞(16) = 9`** — the last from a checked exhaustive projective classification
+  proving no eight-point arc is complete outside any nonsingular conic (it independently reproduces
+  the known 2633 ordinary eight-arc classes, then refines them into 2630 full-rank and 3 forced-hit
+  quadratic-avoidance rejections). Two structural bridges carry the weight: the **sharp evaluation
+  dichotomy** (for any feature map, hence every Veronese degree, a form vanishing on the uncovered
+  locus `U` and avoiding an arc `A`, `|A| ≤ q`, exists exactly when `span ν(U)` is proper and
+  contains no `ν(a)`), and the **arc / codimension-three MDS syndrome dictionary**, under which
+  relative completeness *is* syndrome confinement and the defect identity *is* a weight-two
+  leader-collision identity. Also owns the **q=11 deep-holes = conic** identification: a projectively
+  non-GRS `[6,3,4]₁₁` code of covering radius three whose distance-three affine syndrome rays are
+  exactly the standard conic. All Lean, `sorry`-free.
 
-- **Completion-core rigidity** (robustness theory for maximal feasible configurations). For a facet
+- **The Clebsch hexagon code** (`clebsch`) — the reading of that q=11 witness, and the sharpest
+  single result in the portfolio. **Rigidity (five-way TFAE):** for a six-arc `A ⊂ PG(2,11)`, `U(A)`
+  lies on *some* conic ⟺ `U(A)` is *all* `𝔽₁₁`-points of a nonsingular conic ⟺ `#U(A) ≤ 15` (in fact
+  12) ⟺ `A` is `PGL(3,11)`-equivalent to the Clebsch hexagon ⟺ `Stab(A) ⊇ A₅`. The icosahedral group
+  is **recovered** from a purely coding-theoretic hypothesis, not assumed. **Gap:** the phenomenon is
+  rigid, not merely stable — every non-Clebsch class has PGL-invariant nearest-conic discrepancy
+  `δ ≥ 12`, the Clebsch class is the unique zero, and each single-point perturbation has
+  `#(U Δ 𝒞) ≥ 18`; distance jumps `0 → ≥18` with nothing between. **Chirality:** the twenty support
+  triples split into two complementary `A₅`-orbits of ten — a natural equivariant `20 → 10` halving.
+  **Why 11, classification-free:** a conic-filling uncovered locus forces `c = (q−6)(q−9)`, which
+  against the universal matching bound `c ≤ 15` rules out every `q ≥ 12` in *all* characteristics,
+  leaving geometric exclusions at `q = 4, 5, 9` (hyperoval completeness; six-cap maximality; the
+  Sylvester graph's clique number five). Extended to **`4 ≤ k ≤ 7`**: the only conic-filling pairs
+  are `(k,q) = (4,5)` — the projective frame — and `(6,11)`. Side results: the dual code is again a
+  Clebsch hexagon code (self-dual phenomenon, not coordinate-for-coordinate); the two icosahedral
+  hexads are **transverse** to `S(5,6,12)`, turning "is this a Golay/Mathieu thing?" into a stated
+  negative; a ten-arc with the same `A₅` has *empty* deep holes, so emptiness is the generic
+  behavior under icosahedral symmetry and the hexagon is the exception, not an artifact; and the
+  same recipe at `q = 19` yields exactly 140 deep holes on no conic — the failure mode the
+  secant-covering bound predicts.
+
+- **Frobenius-equivariant pair extension of eight-arcs** (`baer`). **Headline, Lean-built:** *every*
+  Frobenius-invariant eight-arc in `PG(2,25)` admits a fresh conjugate-pair extension — proved by an
+  exhaustive parity split over `f = 0,2,4,6,8`, with the `f = 0` and `f = 4` profiles
+  **certificate-free** (from center incidence, exact balance, endpoint moments, and parity) and only
+  the exceptional `f = 2` profile needing a finite certificate. Combined with the generic `s ≥ 7`
+  criterion and the absence of an intervening prime-power order, this lifts to **every prime power
+  `s ≥ 5`**. Supporting it: the assembled exact **quadratic-Frobenius criterion** (the principal
+  plausibly unrecorded result), a subtraction-free linewise collision correction
+  `legal(ℓ) + M = N + B_ℓ + Σ(μ_ℓ(q)−1)` separating invisible orbit mass from collision redundancy,
+  and the denominator-free orbit-saturation bound `2s(s−1) ≤ (k−1)²`. The external `GF(25)` census
+  size and its observed minimum are deliberately **kept outside the theorems** as data.
+
+- **Alternate-orbit repair for invariant ten-arcs** — the erasure-repair reading of the same
+  machinery: delete a selected nonfixed conjugate orbit from an invariant ten-arc and the repair must
+  use a *different* legal orbit, not merely restore the erased pair. Kernel-checked for every prime
+  power `s ≥ 7` with at least **eight** alternatives; the uniform `PG(2,25)` theorem carries a
+  two-witness certificate. The exact general-`s` five-profile lower-bound envelope (`f = 4` at
+  `s = 7`, `f = 6` at `s = 8,9`, `f = 8` for `s ≥ 10`) yields a uniform **318 alternate repairs** —
+  a profile-minimized first-order lower bound, not a proved sharp minimum.
+
+- **Completion-core rigidity** — robustness theory for maximal feasible configurations. **Now
+  library-only, not a paper:** the generic completion/transversal synthesis has no family-specific
+  bridge to the Baer/Q25 headline, and its components audited out as classical infrastructure
+  (blocker, weighted, symmetry, reliability, defining-set, algorithmic). It remains reusable, checked
+  machinery. For a facet
   `C` of a finite hereditary independence system, the completion distance `δ(C) = min_{F≠C}|C∖F|` has
   a sharp deletion theorem (any puncture of radius `< δ(C)` forces `C` as unique completion);
   `δ(C)` and minimum defining-set size `d(C)` are the min-edge size and transversal number of the same
@@ -185,6 +248,42 @@ hypergraph), gated on a specialist prior-art audit. Four connected theory famili
   Computed-exact signal: twisted-cubic repair tolerance `τ` is not even monotone in representation count
   or in disjoint availability `ν` (`q = 5,7,11`).
 
+- **Complete repair hypergraphs under concatenation** (`coding`) — the sweep above, matured into a
+  manuscript with a Lean package. The twisted-cubic–axis seed `[2q+1,4,q−1]_q` has an **exact**
+  all-symbol profile in characteristic three: every cubic coordinate has `(ν,τ) = ((q−1)/2, q−2)`
+  (via a shifted-inverse consecutive-power rainbow matching), giving **`τ > ν` at every coordinate**
+  for `q ≥ 9`. Its **projective completion** `[2q+2,4,q]_q` has dual distance three, radius four
+  exhausting the full minimal inner port, and uniform rows `((q−1)/2, q−1)` and `((5q−3)/6, 2q−3)`.
+  The transfer lemma lifts either seed to a fixed-alphabet asymptotically good family preserving the
+  *complete* radius-`r` repair hypergraph — concretely, unbounded `GF(9)` families of exact rate
+  `2/19` and `1/10`, with every fixed eventual relative-distance bound `c < 39/190` and `c < 351/1600`.
+  Both transfer gates are proved **uniformly non-weakenable** by nondegenerate `GF(3)` boundary
+  counterexamples. The sole deep import is Stichtenoth's self-dual TVZ theorem, quarantined and
+  visible in the headline axiom report.
+
+- **The twisted cubic as a shared object.** One object — the twisted cubic in `PG(3,q)` under
+  `PGL(2,q)` — carries coding's weight distribution, completion's external-point transversal
+  spectrum `ρ(x) = τ`, and arcs' `d = 2` conic defect as the on-curve / off-curve / `d=2` instances
+  of a single *circuit/determinant hypergraph of small linear dependencies*. Proved: the equivariance
+  backbone `⟨T_a, inv, scaling⟩ = PGL(2,q)` of order `q³−q` preserves cubic + axis, so `τ` is
+  orbit-constant; the projection→plane-cubic reduction `τ(x) = (q+1) − max-no-3-collinear` of
+  `π_x(C)`, with an orbit→type dictionary (axis = cuspidal, internal = nodal, tangent/regulus =
+  smooth elliptic); and the **axis closed form `τ_axis = q − r₃(h)`** — a cap-set law, which reduces
+  that orbit to the cap-set problem outright. Stating the shared identity once per introduction is
+  what converts a salami-slicing risk into a program identity.
+
+- **Mathieu hexads by polarity defect** (`gem-mining`). *A 6-subset of the conic in `PG(2,11)` is a
+  hexad of `S(5,6,12)` iff no three of its chords are concurrent off it* — fully machine-checked
+  (both systems Steiner-verified, swapped by every outer map, the `t = 60` stratum exactly their
+  union, gap at 61). The proof structure is synthetic and computer-free: `t(H) = 60 + #{involutions
+  stabilizing H with no fixed point in it}`, and `PGL(2,11)` has four orbits on 6-subsets of which
+  the hexads are the one whose stabilizer has odd order — which also explains the gap. A stronger
+  form holds with no conic or characteristic hypothesis: `t(H) + |U(H)| = q²−14q+115` for **every**
+  six-arc in **every** finite projective plane, whose q=11 specialization `t + |U| = 82` says the
+  hexads are exactly the on-conic six-arcs of maximal extension count. The `q = 23` octad analogue is
+  **dead**, and the reduction says why: the mechanism needs `|H| = 2×3` so that a concurrent triple
+  is a perfect matching. Singular and note-sized — not a Mathieu tower.
+
 ---
 
 ## 4. Explored and pruned as dead
@@ -208,7 +307,23 @@ reply-invariant by proof); PGL center-triangle invariants for the third-intruder
 and ALL completion-automorphism capacity families (≤ 838 supply); product-point secant
 selectors; the kill-set-sorted top-k ≤ 4 reply rule (exact at the q=19 root, 11 exact failures
 at q=23); and — proved impossible in the program's whole feature space — every *pointwise*
-value-blind reply selector.
+value-blind reply selector. The conic-involution **Schreier catalogue is a boundary evaluator, not a
+forcing engine** — the escape crux leaves the small-subgroup regime immediately (children generic,
+full PSL/PGL), so exact small-subgroup nimbers cannot drive the induction and the route survives
+only as abundance-first counting. Coarsest-bisimulation quotients grow across every measured point (29 at
+q=11 → 65 at q=13), leaving a bounded raw-state automaton unsupported but **not excluded**.
+
+**Corrected rather than closed:** the conjectured elliptic `Q⁻` mirror *exclusion* was **false** — a
+uniform nonsplit block mirror preserves a standard elliptic form in every even vector dimension, so
+the family it would have ruled out is a genuine P family (§3). It sits here because the failure mode
+is the lesson: a negative believed on a plausible reduction, overturned only by formalizing it.
+
+**Spin-off portfolio.** No second instance of *deep holes = the rational points of a named variety*
+— closed structurally, not by exhaustion; the dual-variety conjecture is a no-go (q=19
+counterexample + `k=4` impossibility, and the published stratification subsumes it); the `q=23`
+octad analogue of the hexad theorem is dead by the mechanism's own reduction (it needs `|H| = 2×3`);
+the internal-conic route yields passant-join clique numbers 4 and 3, so no six-set exists. The
+deep-holes family runs through the **k-tower, not through p**.
 
 **Queens:** SG component decomposition for n=16 (tail 97–100% single-component); modular/twin
 reduction (0% at pc≥13); DFS tail parallelization (transposition-saturated); K=17 dense (negative;
@@ -274,6 +389,19 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
   fourth-lowest off-conic support — every such packet has `≥3` P centers, while non-maximum controls
   at q=17 fail 1332/1344; maximum pencils satisfy computed `Ncenters ≤ q−8` through q=19 (tight at
   q=17), and the q=11 knife-edge P centers realize exactly four perfect-matching reply-graph types.
+- **Abundance, not selection — the newest structural route.** The conic bulk *is* the induced
+  Schreier graph of `H_S = ⟨σ_x : x ∈ S⟩ ≤ PGL(2,q)`, so its Node-Kayles value is set by the subgroup
+  type of `H_S`, and the exact value catalogue is proved and independently verified from field
+  geometry (two centres fully soluble; self-polar `V₄ → K₄`-unions; `D₈ → M₈ ⊔ K₂`; the `S₄` classes;
+  `A₄` cannot occur). That catalogue turned out to be a **boundary evaluator, not a forcing engine**
+  (§4), which redirected the route to abundance: `S₄`-rooted escaping fourth centres are conic-only-P
+  at density `≈0.13` (min over classes, verified two ways), and the target is a counting theorem
+  `#{y : 𝒢 = 0} ≥ c·q²`. The pairing/mirror mechanism is ruled out here — an fpf-involution residual
+  covers only a minority — so the bound **must be Grundy-arithmetic**, with decomposition plus
+  Weil/character-sum equidistribution the live candidate. Two gaps remain even given the density:
+  transferring an off-conic abundance result to an on-conic (ON) child needs a separate exchange
+  lemma, and the open sub-lemma is one-sided — a **single** dim-2 constructible value-0 certificate
+  would do, where every certificate known is a homography fixed locus, i.e. dim 1 = Θ(q).
 - For **q ≥ 23** the live conic cannot be emptied at the two-ply layer (depletion ladder
   `live_on ≥ q − (t²+5t+5)`); one bucket (`1,3,4,9`) verified xor-zero-maintainable through one
   further coupled move (28,646/28,646 obligations). Termination not proved.
@@ -281,10 +409,12 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
   exactly solved in 3.7 s / 25,258 orbit-canon memo states, with independent
   move-order/canonicalization cross-checks. The uniform family remains open, and no second board
   in it has been solved.
-- Prize: eventual uniform proof ~35–45%, de-risked into the D-items (§8). The q=25 unblind the upper
-  half was contingent on is now **resolved all-P**, leaving the proof resting on the amortized-ledger /
-  packet-absorption lever plus the value-blind smallest-orbit anchor; the next empirical dial is the
-  gated q=29 census.
+- Prize: eventual uniform proof ~35–45%. The q=25 unblind the upper half was contingent on is now
+  **resolved all-P**, leaving the proof resting on the amortized-ledger / packet-absorption lever, the
+  abundance route, and the value-blind smallest-orbit anchor; the next empirical dial is the gated
+  q=29 census. The prize is no longer the portfolio's load-bearing bet — the publication track (§8)
+  is independent of it, and the kernel would land there as the flagship's open-frontier section
+  either way.
 
 **Queens:** exact **G(18)** (the nimber; outcome already settled). ~300–500B nodes, ~1.5–2 days per
 ascending-`k` round, **no checkpoint/resume**; policy is `k=1` first (~55% one-shot). Further out:
@@ -341,6 +471,23 @@ arrangement) — each committed with a sha256 for rerun-from-tracked-copy discip
 auto-rustfmts and gates on `make clippy -D warnings`. Committed artifacts: the per-`q` P-certificates
 (q=5..19), reproducibility datasets, and a sum-free/cap paper skeleton.
 
+**Paper checkers** — every manuscript ships standalone verifiers that are independent of Lean *and*
+of the manuscript's own computation. The `clebsch` deck covers rigidity, both gap censuses,
+small-field uniqueness, code automorphisms/chirality, decoding, the dual/Mathieu/ten-arc/q=19 side
+results, the low-degree-locus census, and the `k ≤ 7` finite leaves, plus a tracked Singular replay
+for the companion-curve geometry; `arcs` ships an exhaustive `PG(2,16)` eight-arc classifier.
+**Manifest discipline:** a computation is evidence only if `git ls-files --error-unmatch` proves its
+script is tracked and the manifest records path, blob/SHA-256, exact command, and expected output.
+Untracked or ad-hoc artifacts are not evidence — a rule adopted after audits found cited
+computations that existed nowhere durable.
+
+**Lean build hygiene** is itself engineered. Generated certificate builds fan out heavyweight workers
+that will OOM the box; the cap is chosen by *measuring* the heaviest representative leaf's peak RSS,
+not from core count, and a shared checker in the closure must be built serially first because the
+budget is `checker_peak + (N−1) × heaviest_sibling`, not an average. Staleness is probed by content
+traces (`lake build --no-build`), never mtimes; restarts are gated by a trace-validated sentinel
+guard, since an existing olean may belong to an older import closure.
+
 ---
 
 ## 7. Lean formalization ledger
@@ -358,64 +505,126 @@ rank-3 grid model, the `TrapConverse` escape reduction, per-`q` certificate asse
 **Queens** (queen board ↦ `NodeKayles.Graph` + n=18/n=20 certificate wrappers, sound *given* a
 certificate).
 
-Two further namespaces formalize the §3 spin-off portfolio: **FiniteGeom** (the Singleton bound and
-MDS predicate, Reed–Solomon codes MDS, dual/parity-check characterization, the moment-curve/NRC
-general-position and hyperplane-section distance bounds, the hypergraph matching/transversal layer
-`ν ≤ τ` and `τ ≤ p·ν`, the completion-distance identity `δ_x = τ`, and the strict `τ > ν` witness)
-and **RepairCodes** (the bounded-repair concatenation-transfer lemma over the FiniteGeom code layer).
-The finite-geometry & coding results of §3 are thus **now mostly machine-checked** rather than
-pen-and-paper — the completion-distance / coding-recovery core is kernel-verified, and the
-Baer-equivariant and continuation-rigidity lanes (with their external prior-art audits closed) are
-being formalized against the same layer. This converts the portfolio's central claims from
-audit-surviving arguments into kernel-checked theorems.
+Four further namespaces formalize the §3 spin-off portfolio, and it is now the **larger half of the
+development**:
+
+- **FiniteGeom** — the shared base: Singleton bound and MDS predicate, Reed–Solomon codes MDS,
+  dual/parity-check characterization, moment-curve/NRC general position and hyperplane-section
+  distance, the hypergraph matching/transversal layer (`ν ≤ τ`, `τ ≤ p·ν`), the completion-distance
+  identity `δ_x = τ` with its weighted/multi-insertion/clutter/persistence variants, and the
+  `BaerCompletion/` pair-extension spine.
+- **RelativeConicArcs** — the largest library: the defect identity and corollaries, conic
+  normalization, the asymptotic additive bound, averaging transfer, the char-2 nucleus constraints,
+  certificate soundness, the evaluation obstruction/dichotomy, the arc–MDS syndrome dictionary, the
+  exhaustive `PG(2,16)` eight-arc quadratic-avoidance theorem with `ρ_𝒞(16) = 9`, the q=11
+  coding/deep-hole/extension-complex package, and the whole `Q25` profile ladder up to the uniform
+  pair-extension theorem.
+- **RepairCodes** — the concatenation-transfer lemma, the trace-dual bridge, exact cubic/axis repair
+  invariants, both projective and affine seed lifts, and the two asymptotic families.
+- **DihedralSchreier** — the dihedral reduction and `V₄ → K₄` core.
+
+**Certificate legality is kernel-checked** (`decide` / `checkCap_sound`), never `native_decide`; the
+one historical `native_decide` exception (`KleinFourBridge.explicit_pairProducts`) is closed. Finite
+enumerations (queens, `S₄`/`A₅` nimbers, `ρ_𝒞` values) follow the `getK` pattern — a Lean-proved
+recurrence plus a differential-tested reproducible solver — rather than entering the trust base
+directly.
+
+**The formalization backlog is the critical path**, because the release gate below makes it so.
 
 **Lean-open:** odd planes `q=3,9,17,19,23` (q=9 conditional on `IntruderTerminalReplyStatement`); the
 **uniform** odd-plane `OddEscapeStatement` (only proved per-`q` via certificates — the intrusion
 reductions carry explicit WARNINGs that their no-intrusion hypotheses are *false* for `q ≥ 11`); the
-q=17/q=19 generated-cert path (blocked on a `maxRecDepth` refactor).
+q=17/q=19 generated-cert path (blocked on a `maxRecDepth` refactor). In the portfolio: the `clebsch`
+chirality/gap/rigidity-TFAE layer (partially built — the shared coding core, the icosahedral Schreier
+witness, and the small-field/why-11 leaves are strict-trust clean; the coefficient-bearing action
+layer, the perturbation gap theorem, and the Dye seam are open and **release-blocking**), and
+`ContinuationRigidity` (planned, not built).
+
+**One standing adequacy caveat:** mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome
+semantics (`win`/`grundy`) are self-contained and not yet anchored to a cited `Impartial`/
+`grundyValue`. Adequacy for the game papers rests on the standard-recurrence argument, literature
+values, and differential tests until `CombinatorialGames` bumps. The kernel is kept deliberately tiny
+so it stays inspectable — a better answer than waiting.
 
 ---
 
-## 8. Publishable deliverables & OEIS
+## 8. The publication track
 
-The ~35–45% prize (uniform odd-plane theorem) is de-risked into six independently shippable units:
+The deliverable is no longer "the odd-plane prize, de-risked into stepping stones." A packaging review
+resolved the whole body of work into **seven papers in ship order + two OEIS entries**, staged under
+`papers/` with per-paper status maps. Ship order is set by *formalization-to-full-trust distance*,
+adjusted for two dependencies — not by which manuscript is most finished.
 
-| ID | Deliverable                                                           | Confidence |
-|----|----------------------------------------------------------------------|------------|
-| D1 | Outcome-classes paper (all proven families; odd-plane as conjecture) | ~80%       |
-| D2 | Corrected capacity-≥2 mirror/pairing principle, Lean-checked          | ~85%       |
-| D3 | Conic-localization reduction (first layer = Dawson's chess)          | ~65%       |
-| D4 | Machine-verified per-q ladder + kernel-clean Lean formalization       | ~75%       |
-| D5 | Sum-free achievement game on abelian groups (the `q=2` sibling)      | ~65%       |
-| D6 | Extended non-attacking-queens nimbers past the OEIS horizon           | ~70%       |
+| # | Paper                                                | Lead                                                            | State                                              |
+|---|------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------|
+| 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten |
+| 2 | Dihedral Schreier Node-Kayles                        | exact nimbers for an explicit infinite family                   | draft near-complete; owes `Φ_T`, ½-density, `D₂ₘ`  |
+| 3 | Arcs complete outside a conic                        | the defect identity + additive-3/2 refinement + verified values | manuscript + PDF + checkers + Lean; near-ready     |
+| 4 | The Clebsch hexagon code                             | the rigidity TFAE                                               | working draft; Lean partial, external gates open   |
+| 5 | Complete repair hypergraphs (twisted-cubic–axis LRC) | the certified `[19,4,8]₉` seed + exact row transfer             | manuscript + Lean complete; specialist audit left  |
+| 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | focused source + clean PDF + Lean; closeout done   |
+| 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | theorem-package plan; hardest formalization        |
 
-Plus a **tooling methods note** (the tablebase-meets-CGT story; BuRR-as-lossy-store + the
-PGL-quotiented key are the two fresh wrinkles, the rest competent adoption of strong-solving
-technique). Paper in progress: a Nofil-genus skeleton (the `Z_n` mod-6 law + the affine cap theorem).
+**The two dependencies.** `3 → 4` is **hard**: `arcs` owns the deep-holes = conic identification that
+`clebsch` takes as its starting point. `1 ↔ 3` is a seam, not an ordering constraint — both cite
+backwards, neither waits.
 
-**Geometric & coding spin-off portfolio.** Independent of the odd-plane prize, the cap machinery has
-produced a family of standalone finite-geometry / coding units (see §3). The common gate is a specialist
-prior-art audit — several components are classical-facing, and the claimable content is the specific
-robust refinement:
+**The seam rulings are the interesting governance.** Twice the same pattern appeared — one
+computation, two readings, two papers, no ruling on who owns it, which is exactly the salami-slicing
+a referee flags. Both were resolved by **splitting the reading, not the object**: `arcs` ships first
+and owns the q=11 identification while `clebsch` claims only the reading (rigidity, gap, chirality,
+why-11); `nofil` owns the *game* reading of the shared q=9/q=11 witnesses while `arcs` owns the
+*arc/extension* reading. Neither pair co-claims; each cites the other for the gloss. A Lean directory
+name is not paper ownership.
 
-| ID | Deliverable                                                                     | Gate to a standalone claim                                  |
-|----|---------------------------------------------------------------------------------|-------------------------------------------------------------|
-| S1 | Equivariant extensions of Galois-invariant arcs (conjugate-pair + `√2·s` bound) | a sharpness / stability theorem for the `√2` constant       |
-| S2 | Robust completion / deletion-distance theory (sharp deletion + exact `δ` families)| an exact `t_h(q)` bound or an NRC external-orbit spectrum    |
-| S3 | Continuation-graph rigidity (four-frame semilinear rigidity + full-complex recon)| prior-art check; tighten the loose `O(k³)` thresholds       |
-| S4 | Twisted-cubic–axis / Roth–Lempel LRC families (all-symbol `τ>ν` + transfer lemma)| citation-chain audit of the complete-repair-hypergraph claim |
+**The release gate.** Every lemma and proof is Lean-formalized to the full trust standard before its
+paper is published — `sorry`-free, `#print axioms` clean (no `sorryAx`, no `native_decide`), the
+formal statement *adequate* to the published claim, with a per-result trust-chain note. Each paper
+prints an **adequacy appendix**: the Lean statements of its headline theorems and the definitions they
+bottom out in, verbatim, so statement-adequacy becomes a refereeable object an expert clears in two
+pages without touching the development. Computational enumerations are excluded from the trust base
+and handled by the `getK` pattern instead.
 
-The same objects also carry candidate **cross-domain applications** — a shared-dependency resilience
-analyzer, robust experimental design, a repair-code compiler, canonical-reconstruction and
-minimal-conflict engines, a proof-carrying finite-search platform. All are exploratory pending a
-domain benchmark; the recurring, testable nonclaim is that path-counts / entropy / disjoint-availability
-systematically overstate resilience when the alternatives share hidden dependencies.
+**Writing guardrails.** The general moves here — mirror/pairing, orbit-xor, completions-as-hypergraph,
+Node-Kayles = neighbourhood deletion, saturating-set = covering-code — are each *elementary*, so every
+abstract must lead with the nontrivial object rather than the mechanism (the table's Lead column). Two
+standing rules: **negatives that bound a published method are theorems** (the boundary negatives and
+capacity-2 sharpness belong in the flagship; the wider rejected-conjecture list is logbook, not
+content); and an application without at least one worked nontrivial instantiation is a **remark, never
+an abstract-level contribution**.
+
+**Prior-art posture.** Audits have repeatedly landed against us and been conceded rather than
+argued around: the hexad four-orbit classification is published, so that converse closes by citation;
+the `|U|` spectrum's priority was granted outright to the arc-classification school; the deep-holes =
+named-variety "first" was retired from the seam. The sharpest live exposure is a **single unread pair
+of papers** — two Blokhuis–Seress–Wilbrink originals, one of them titled *Characterization of complete
+exterior sets of conics*, on which every "ours" verdict for the covering fact is conditioned. If either
+states it, both manuscripts get rewritten.
+
+**Extraction & DOI.** The research repo stays private; publication is by *extracting* clean
+self-contained repos — a shared `FiniteGeom` public repo pinned by commit (never copied per-paper
+subsets, which drift and silently invalidate the cross-paper adequacy story), then per-paper repos
+pinning that tag. Zenodo ↔ GitHub-release mints versioned DOIs. **Highest-leverage first move:** stand
+up that public-artifact spine, which clears the shared blocker below in one step.
+
+**Cross-domain applications** — a shared-dependency resilience analyzer, robust experimental design, a
+repair-code compiler, canonical-reconstruction and minimal-conflict engines, a proof-carrying
+finite-search platform — are **parked as connections remarks** in their parent papers. Reception risk
+is maximal in distant fields, so each is staked publicly at zero audit cost rather than developed. The
+recurring, testable nonclaim: path-counts / entropy / disjoint-availability systematically overstate
+resilience when the alternatives share hidden dependencies.
 
 **OEIS:** **A344227** (queens nimbers) sits at rev #54 (`n ≤ 13`); a ready package extends it with
-`a(14)=0, a(15)=1, a(16)=0, a(17)=2`. **Submission is a pending user action, blocked on a public
-code/preprint artifact — the repo has no public git remote.** A sum-free `Z_n` OEIS draft + b-file
-(65 terms) is prepared, verified absent, not submitted. Candidates: torus-queens nimbers, sum-free
-outcome indicator, Paley-game sequence, A316632 extension.
+`a(14)=0, a(15)=1, a(16)=0, a(17)=2`; its lead is the **refutation** — `G(17)=2` kills the published
+eventual-alternation conjecture — and it should be framed exactly that way. A sum-free `Z_n` OEIS
+draft + b-file is prepared and verified absent, not submitted. Further candidates: torus-queens
+nimbers, sum-free outcome indicator, Paley-game sequence, A316632 extension, and the
+Möbius-ladder/dihedral-Cayley nimber sequence that falls out of the `D₂ₘ` family.
+
+**Shared blocker.** Several deliverables want a **public code/preprint URL that does not exist** — the
+repo has no public remote. The A344227 `%H` link and n=18 comment, both sequences' program links, and
+any arXiv posting are all waiting on it. One public mirror or preprint unblocks them together, which
+is why the extraction spine is the first move rather than a packaging chore.
 
 ---
 
@@ -436,3 +645,17 @@ Every result carries an independent check; nothing is trusted on a single comput
   proof-DAG validator (e.g. q=23: all `241,627,613` records, zero game-equation failures).
 - **Spin-off computations:** every computed-exact coding/geometry result ships a replay script
   committed with its sha256; any result promoted to a paper must rerun from the tracked copy.
+- **Manifest discipline:** a computation counts as evidence only when `git ls-files --error-unmatch`
+  proves its script is tracked and a manifest records path, blob/SHA-256, exact command, and expected
+  output. Untracked or ad-hoc artifacts are **not** evidence — adopted after audits found cited
+  computations with no durable source.
+- **Release gate (§8):** full Lean trust standard — `sorry`-free, axiom-clean, statement adequate to
+  the claim, trust-chain note — before any paper publishes. This gate is policy, not aspiration: it
+  was tested by the one finished manuscript that had zero Lean, and the ruling was to hold the gate
+  and formalize rather than ship first.
+
+**The posture that makes the rest work:** results are stated with their trust tier attached —
+PROVED / COMPUTED-EXACT / LITERATURE-IMPORTED / REFUTED — and a claim never outruns its tier. Several
+headline claims here have been demoted, scoped, or conceded outright on audit (§8); one claimed
+*negative* was overturned by formalizing it (§4). Imported literature theorems are quarantined in
+assumption modules and stay visible in the dependent results' axiom reports.
