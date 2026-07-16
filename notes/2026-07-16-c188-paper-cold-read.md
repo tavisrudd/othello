@@ -62,3 +62,22 @@ that the conic equation becomes a nonzero multiple of `XZ-Y^2` is safe.
 
 After applying the must-fixes and low-risk prose improvements, rebuild the PDF, check citation and
 reference warnings, and resume the same cold reader for a targeted verification pass.
+
+## Resolution verification
+
+The same cold reader re-read commit `787a0b60` after the repairs and returned **PASS** on all five
+must-fix findings:
+
+1. `Q5.lean` is present in the complete checker list.
+2. The Python verifier is correctly limited to q=8,9,11,16, with q=5 assigned to its dedicated
+   C187/Lean path.
+3. The evidence table and verification entry-point paragraph agree with those two trust paths.
+4. The Lean comment now states the coordinate pullback only up to nonzero scalar.
+5. The manuscript explicitly excludes arcs of size at most two before applying `L2` to the
+   unrestricted minimum.
+
+The reader also confirmed that the abstract now treats the small witnesses uniformly, the
+companion citation is clearly non-load-bearing context, the bibliography entry resolves, and no
+new mathematical, narrative, citation, or trust-boundary problem was introduced.  The direct
+six-point calculation and any future shortening of the q=11 coding section remain optional, not
+publication blockers.
