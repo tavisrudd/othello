@@ -788,7 +788,7 @@ Accordingly let $\delta_{\rm emb}(O,I)$ be the minimum weight of a dual word
 that is not the zero extension of a word of $I^\perp$ in a single block.
 
 \begin{theorem}[Exact confinement thresholds]\label{thm:weighted-transfer}
-Suppose $|J|\geq2$.  With $+\infty$ used for an empty minimum,
+Suppose $|J|\geq2$ and $I^\perp\ne\{0\}$.  With $+\infty$ used for an empty minimum,
 \[
 \delta_{\rm mb}(O,I)=\min\left\{
  2d(I^\perp),
@@ -1367,12 +1367,14 @@ the sharper weighted sufficient direction, and
 bridge.  The formal \texttt{repairHypergraph} uses the exact dual-word
 support definition in Definition~\ref{def:repair-hypergraph}.
 
-The current Lean layer checks the exact three-stratum partition, the
-closed-term lower-bound direction, the coordinate-surjective threshold
-coincidence, and the weighted transfer implication.  Finite minimum
-attainment, the exact $\delta_{\rm emb}$ formula, the concrete Singer/trace
-instantiation, and the polynomial identity remain manuscript arguments.  They
-introduce no additional external theorem or project axiom.
+The current Lean layer checks functional-fiber nonemptiness, attainment of the
+inner dual distance, the exact three-stratum formula (both directions), the
+exact $\delta_{\rm emb}$ formula in lower-bound-profile form, the
+coordinate-surjective threshold coincidence, confinement below that threshold,
+and the resulting literal repair-hypergraph equality.  The concrete
+Singer/trace instantiation remains to be discharged in Lean.  The polynomial
+enumerator identity is used only as the cited classical concatenated-dual
+decomposition described above, not as a new formalized contribution.
 
 The independent script
 \texttt{notes/2026-07-13-projective-completion-verifier.py} implements its
