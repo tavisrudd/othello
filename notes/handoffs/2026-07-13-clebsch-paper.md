@@ -26,10 +26,10 @@ Paper registry: [`papers-index.md`](../../papers/papers-index.md), alias `clebsc
 
 - Rigidity: among six-arcs of `PG(2,11)`, conic containment of the full
   maximum-distance syndrome locus characterizes the Clebsch class and recovers `A5`.
-- Quantitative refinements: sharp nearest-conic gap, 252 perturbations in eight `A5`
-  orbits, and the intrinsic unordered `10+10` leader-support chirality.
+- Quantitative refinements: sharp nearest-conic gap and 252 perturbations in eight `A5` orbits.
 - Decoding: the syndrome conic is a constant-time distance oracle; the complete ambiguity
-  census reconstructs the Brianchon/Petersen support geometry.
+  census reconstructs the Brianchon/Petersen support geometry and the intrinsic unordered
+  `10+10` leader-support bipartition (support chirality).
 - Conceptual geometry: the `A5` point-orbit decomposition is
   `[6,10,12,15,30,30,30]`; the unique 12-orbit supplies the conic.
 - Low-degree rigidity: only Clebsch lies on a curve of degree at most three; one sharp

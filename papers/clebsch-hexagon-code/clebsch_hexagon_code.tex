@@ -39,17 +39,16 @@
 Among the six-arcs of $\PG(2,11)$, exactly one projective class has the
 maximum-distance syndrome directions of its associated MDS code contained
 in a conic: the Clebsch hexagon. This coding-theoretic condition recovers its
-projective stabilizer $A_5$, and the same class is characterized by
-containment in a plane curve of degree at most three. The arc
-itself lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS. Its
-covering radius is three, and its twelve projective deep-hole directions
-are exactly the $\F_{11}$-points of a conic. A quadratic syndrome test is a
-complete distance oracle; its ambiguity data recover the Brianchon points,
-self-polar triangles, and an invariant support chirality. A line bound,
-chord identities, and the Sylvester graph isolate $q=11$ among
-six-arcs; for arc sizes four through seven, the only other case is a
-four-frame in $\PG(2,5)$. The two exceptional secant arrangements are
-the finite reductions of the reflection arrangements $H_3$ and $A_3$.
+projective stabilizer $A_5$. The resulting non-GRS $[6,3,4]_{11}$ code has
+covering radius three, with the twelve points of that conic as its
+projective deep-hole directions. A quadratic syndrome test gives a complete
+distance oracle, while nearest-word ambiguity recovers the Brianchon
+geometry and an invariant unordered bipartition of leader supports. The same
+class is characterized by low-degree containment of its deep-hole locus.
+A line bound, chord identities, and small-field exclusions isolate $q=11$;
+for arc sizes four through seven, the only other conic-filling case is a
+four-frame in $\PG(2,5)$.
+Their secant arrangements are the finite reductions of $H_3$ and $A_3$.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -95,6 +94,13 @@ Marcugini, and Pambianco~\cite{DMP2021}; their Theorem~6.3 supplies the
 leader count used in Section~\ref{sec:code}. See also
 Hirschfeld~\cite{Hirschfeld1998} for the plane arc/covering-radius setting.
 
+Henceforth \emph{uncovered locus} and $\cU(A)$ are the primary terms;
+\emph{projective deep-hole syndrome locus} is their coding-theoretic synonym.
+We call a line through two points of $A$ a \emph{chord}; \emph{secant}
+emphasizes its incidence with $A$, while \emph{edge} refers to the
+corresponding pair in the complete graph on the arc labels and \emph{join}
+emphasizes construction from its two endpoints.
+
 The three correspondences used throughout are
 \[
 \begin{array}{c@{\quad\longleftrightarrow\quad}l}
@@ -117,9 +123,11 @@ six-arcs of $\PG(2,11)$, conic containment of the projective deep-hole
 syndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer.
 A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
 conceptual implication; the census is needed only for the numerical clause.
-We then prove quantitative gaps, reconstruct the Brianchon geometry from
-decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
-chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
+We then prove quantitative gaps, reconstruct the Brianchon geometry and an
+invariant support bipartition from decoder ambiguity, and isolate $q=11$.
+The word \emph{chirality} below refers only to this unordered bipartition;
+no sign or preferred half is part of the structure. For a Clebsch hexagon
+$K$, the same chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
 $(q-4)(q-11)$ when $q\equiv3\pmod4$. A reflection-arrangement model
 organizes this factorization and the full decoder ambiguity spectrum: the
 fifteen chords are reduced projectivized $H_3$ mirrors. The six joins of a
@@ -142,7 +150,8 @@ arcs lie on normal rational curves; the code here is not GRS.
 stabilizer, and its complete-exterior-set interpretation are classical
 \cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}. Sadeh classified the
 six-arcs of $\PG(2,11)$~\cite{SadehThesis1984}; we claim no priority for
-that census or its extension counts. The companion arcs paper records the
+that census or its extension counts, and our frame-normalized replay is
+independent of the thesis. The companion arcs paper records the
 single conic-locus identification of
 Proposition~\ref{prop:deep-holes-conic}, with a kernel-checked
 % NB: re-pinned 2026-07-16 after the companion's architecture revision:
@@ -152,7 +161,8 @@ certificate~\cite[Prop.~8.2]{ArcsCompleteOutsideConic}; we reprove it for
 self-containment, and no result below depends on the companion paper. The
 new contribution is the symmetry-free coding
 criterion and its consequences: low-degree rigidity, quantitative gaps,
-leader chirality, decoder reconstruction, and the finite-field boundary.
+the invariant support bipartition, decoder reconstruction, and the
+finite-field boundary.
 Edge already obtains the real Clebsch hexagons from the six opposite-vertex
 axes of an icosahedron~\cite[\S\S19--20]{Edge1956}; the icosahedral mirror
 arrangement and its $6_5,10_3,15_2$ singularity ledger are likewise
@@ -275,8 +285,14 @@ order-five eigenvalues are distinct because $5\mid10$. Restricting the same
 representation to the standard subgroups of $A_5$ gives the following
 common-fixed-point ledger; the standard subgroup classification of $A_5$
 shows that these are all possible nontrivial proper point stabilizers. Here
-$D_5$ has order ten, and the last column
-counts points whose stabilizer is exactly the displayed subgroup type.
+$D_5$ has order ten, and the last row counts points whose stabilizer is
+exactly the displayed subgroup type.
+For the noncyclic entries, determine the common projective eigenlines of
+standard generators: a $D_5$ normalizer retains one of the three $C_5$
+eigenlines, an $S_3$ normalizer retains the unique $C_3$ eigenline, a $V_4$
+has three
+simultaneous eigenlines, and its overgroup $A_4$ permutes those three and
+fixes none. This gives the second row.
 \[
 \begin{array}{c|rrrrrr}
 H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
@@ -305,11 +321,12 @@ with $\cC(\F_{11})$~\cite[pp.~281--282; \S3.1, p.~284]{Dye1991}; the other
 three identifications are the transitive sets cited above.
 \end{proof}
 
-\begin{proposition}[The projective deep-hole syndrome locus is the conic]
+\begin{proposition}[The uncovered locus is the conic]
 \label{prop:deep-holes-conic}
-The covering radius of $C$ is three, and its projective deep-hole syndrome
-locus $\mathcal D_{\mathrm{proj}}(C)$ --- the set of directions $x\notin A$
-on no secant of $A$ --- is exactly the twelve points of $\cC$.
+The covering radius of $C$ is three, and
+\[
+ \cU(A)=\mathcal D_{\mathrm{proj}}(C)=\cC(\F_{11}).
+\]
 \end{proposition}
 
 \begin{proof}
@@ -336,13 +353,13 @@ rather than two. Dye's edge criterion and the complete-exterior-set
 description of Blokhuis--Seress--Wilbrink independently supply the classical
 inclusion $\cC(\F_{11})\subseteq\cU(A)$
 \cite[discussion preceding Theorem~6, p.~281]{Dye1991}; see also
-\cite[pp.~143,146]{BSW1992}.
+\cite[pp.~143, 146]{BSW1992}.
 \end{proof}
 
 \begin{corollary}[Directions, cosets, leaders, and received words]
 \label{cor:named-variety}
-The projective deep-hole syndrome locus has $12$ directions, exactly the
-points of $\cC$. Above them lie $12(11-1)=120$ nonzero maximum-distance
+$\cU(A)$ has $12$ directions, exactly the points of $\cC$. Above them lie
+$12(11-1)=120$ nonzero maximum-distance
 syndromes, hence $120$ deep-hole cosets. Each such coset has
 $\binom{6}{3}=20$ minimum-weight leaders, for $2400$ leaders in all, and
 contains $|C|=11^3=1331$ received words. Consequently $C$ has
@@ -420,6 +437,9 @@ $(1,0,0,0,150,420,760)$, forced by the MDS parameters.
 The special geometry also makes distance diagnosis and nearest-word structure
 unusually explicit.  Write a syndrome as $s=(s_0,s_1,s_2)$ and put
 $Q(s)=s_0s_2-s_1^2$.
+For a point $x\notin A$, its \emph{secant index} is the number of chords of
+$A$ through $x$; by the dictionary above, this is the number of
+weight-two leaders for each nonzero syndrome on the ray $x$.
 
 \begin{proposition}[Complete syndrome oracle and ambiguity enumerator]
 \label{prop:decoding-oracle}
@@ -438,9 +458,9 @@ three, and twenty nearest codewords are
 \[
  960,\qquad150,\qquad100,\qquad120.
 \]
-For a distance-two syndrome the number of nearest codewords is the number
-of secants through its direction, called its \emph{secant index}. Every
-distance-three syndrome has exactly one leader on each of the
+For a distance-two syndrome the number of nearest codewords is the secant
+index of its direction. Every distance-three syndrome has exactly one
+leader on each of the
 twenty three-element coordinate supports.
 \end{proposition}
 
@@ -480,7 +500,7 @@ turns its ten pairs of matchings into the Brianchon--support dictionary.
 
 Proposition~\ref{prop:deep-holes-conic} concerns one known arc. The following theorem is the
 paper's main claim: among \emph{all} six-arcs of $\PG(2,11)$, the property
-``the projective deep-hole syndrome locus lies on a conic'' picks out the
+``the uncovered locus lies on a conic'' picks out the
 Clebsch hexagon uniquely, and does so in a way that recovers its projective
 stabilizer from the coding condition rather than assuming it.
 
@@ -494,7 +514,9 @@ literature and which the Clebsch hexagon famously fails. The two are
 logically unrelated: they constrain different point sets, and the arcs
 satisfying them are disjoint. Indeed every six-arc lying \emph{on} a conic in
 $\PG(2,11)$ has $|\cU(A)|\in\{18,19,20,22\}$, so by~(iii) none of them comes
-anywhere near the condition of the theorem.
+anywhere near the condition of the theorem. This four-value assertion is
+the conic-inscribed subcensus of the independent rigidity replay listed in
+Table~\ref{tab:replays}.
 \end{remark}
 
 We first isolate the geometric input that removes degenerate conics from the
@@ -515,14 +537,18 @@ most $q-5$ points of $\cU(A)$.
 \begin{proof}
 A chord contains no point of $\cU(A)$. If a non-chord line $\ell$ contains
 one vertex, the ten chords on the other five vertices meet $\ell$ in at
-least five distinct points: their intersections give a proper edge-colouring
-of $K_5$, whose chromatic index is five. Together with the vertex, at least
-six of the $q+1$ points of $\ell$ are therefore outside $\cU(A)$.
+least five distinct points. Indeed, two of those chords sharing an endpoint
+meet only at that endpoint, which lies off $\ell$; their intersections with
+$\ell$ therefore give a proper edge-colouring of $K_5$, whose chromatic
+index is five. Together with the vertex, at least six of the $q+1$ points
+of $\ell$ are therefore outside $\cU(A)$.
 
 It remains to consider $\ell\cap A=\varnothing$. The fifteen chords meet
 $\ell$ in covered points, and at most three chords pass through any one of
-them, because their endpoint pairs are disjoint. Hence there are at least
-five covered points. Equality would give a proper five-edge-colouring of
+them: chords sharing an endpoint meet only at that arc vertex, not on
+$\ell$, so all chords through one point of $\ell$ have disjoint endpoint
+pairs. Hence there are at least five covered points. Equality would give a
+proper five-edge-colouring of
 $K_6$, necessarily a one-factorization. After relabelling, three factors
 are
 \[
@@ -541,7 +567,7 @@ all cases at most $(q+1)-6=q-5$ points of $\cU(A)$ remain.
 \label{thm:rigidity}
 For a six-arc $A\subset\PG(2,11)$, the following are equivalent:
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
-\item the projective deep-hole syndrome locus $\cU(A)$ lies on some conic (possibly
+\item the uncovered locus $\cU(A)$ lies on some conic (possibly
 degenerate);
 \item $\cU(A)$ is exactly the set of $\F_{11}$-points of a nonsingular
 conic;
@@ -577,9 +603,14 @@ Van~Maldeghem's finite-plane classification gives the converse.
 It remains only to connect the numerical condition (iii). Any ordered four
 points of a six-arc form a projective frame, uniquely normalized to
 $(1,0,0),(0,1,0),(0,0,1),(1,1,1)$. Enumerating the remaining unordered pair
-subject to the arc condition gives $1548$ normalized sets. The least of the
-$360$ ordered-frame normalizations is a complete projective-class key,
-giving fifteen classes; a class with stabilizer $G$ occurs $360/|G|$ times.
+subject to the arc condition gives $1548$ normalized sets. Each embedded arc
+has $\binom{6}{4}\,4!=360$ ordered-frame choices. For each choice, apply the
+unique normalizing projectivity, sort the resulting six normalized points,
+and encode that list lexicographically. Taking the least of the $360$ lists
+removes the frame choice; two arcs have the same least list exactly when a
+projectivity carries one to the other. This canonical key gives fifteen
+classes, and the number of distinct normalized presentations of a class
+with stabilizer $G$ is $360/|G|$.
 The resulting extension counts are
 \[
  |\cU(A)|\in\{12,16,18,19,20,21,22\}.
@@ -647,7 +678,10 @@ and the stabilizer statement is clause~(v) of the theorem.
 \label{rem:degree-threshold}
 The cutoff cannot be raised from three to four: one non-Clebsch class has
 an $18$-point uncovered locus equal to the rational points of a smooth
-absolutely irreducible quartic of genus three.
+absolutely irreducible quartic of genus three. It is normalized class
+\texttt{C02} in the low-degree replay of Table~\ref{tab:replays}, which
+prints its exact quartic equation; the companion Singular calculation
+certifies smoothness and genus three.
 \end{remark}
 
 The rigidity theorem has quantitative consequences at three scales: the
@@ -738,14 +772,14 @@ for a different classification problem. Neither direction records the
 conic rigidity detected here.
 \end{remark}
 
-\section{The chirality bipartition}
+\section{The invariant support bipartition}
 \label{sec:chirality}
 
 Label the six coordinates by $0,\ldots,5$. The $20$ three-element
 coordinate supports form two complementary
 $A_5$-orbits of size ten. Automorphisms preserve the two classes, but
-nothing intrinsic chooses one as positive: this unoriented two-class
-structure is what we call \emph{chirality}. Its ten complementary pairs
+nothing intrinsic chooses one as positive. We use \emph{support chirality}
+only as shorthand for this unoriented bipartition. Its ten complementary pairs
 carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
 
 \begin{figure}[H]
@@ -875,7 +909,7 @@ identifies the ten triple concurrences with the ten Brianchon points and
 their chords with exactly the ten matchings complementary to the total.
 \end{proof}
 
-\begin{proposition}[Invariant support chirality]
+\begin{proposition}[Invariant support bipartition]
 \label{prop:chirality}
 Only the bipartition is intrinsic: neither part has a canonical sign. The
 twenty three-element coordinate supports split into two complementary
@@ -1093,23 +1127,26 @@ $\ell\mapsto\ell T^{-1}$ carries the mirrors onto the secants of $A$.
 Pairwise cross-products of the normals give the stated
 $6_5,10_3,15_2$ ledger, and joining the six fivefold points recovers all
 fifteen normals. These are symbolic identities in
-$\mathbb Z[\tau]/(\tau^2-\tau-1)$, obtained by reducing each coordinate to
-$a+b\tau$. In the same ring, every three-by-three determinant on the six
-points is twice a unit, so the set remains an arc when
-$\operatorname{char}F\ne2$. Finally, $\det T=3$ in $\F_{11}$ and direct
-multiplication gives the two asserted set equalities. The finite
-$\F_5/\F_{11}$ specializations are independently replayed by
-\path{check_reflection_arrangements.py}. The $\F_{11}$ coordinate bridge,
-pointwise secant-index transport, the characteristic-two boundary, and the
-$\F_5$ and $\F_{11}$ intersection spectra are also kernel-checked in
-\path{ReflectionArrangements.lean}.
+$R=\mathbb Z[\tau]/(\tau^2-\tau-1)$, obtained by reducing each coordinate
+to $a+b\tau$. In the same ring, every three-by-three determinant on the six
+points is $2u$ for some $u\in R^\times$. Under any specialization
+$R\to F$, the image of $u$ remains a unit and the image of $2$ is nonzero
+when $\operatorname{char}F\ne2$; hence the six points remain an arc.
+Finally, $\det T=3$ in $\F_{11}$ and direct multiplication gives the two
+asserted set equalities.
 \end{proof}
 
 Characteristic two is bad because the signs coalesce. In every other
-characteristic containing $\tau$, the displayed lattice survives; this
-includes the lattice-faithful but nonsemisimple characteristic-five
-reduction. For the central rank-three hyperplane arrangement, a point
-where $m$ projective mirrors meet has M\"obius value $m-1$. Thus
+characteristic containing $\tau$, the displayed lattice survives. In
+characteristic five, the reflection group $W(H_3)$ has order $120$, which
+is divisible by the characteristic, so the modular group algebra is not
+semisimple. This does not collapse the coordinate arrangement:
+at $\tau=3\in\F_5$, the fifteen distinct mirrors and the full
+$6_5,10_3,15_2$ ledger remain. The finite checks for this statement and the
+$\F_{11}$ projectivity are recorded in
+Section~\ref{sec:verification}. For the central rank-three hyperplane
+arrangement, a point where $m$ projective mirrors meet has M\"obius value
+$m-1$. Thus
 \[
  \chi_{H_3}(t)=t^3-15t^2+59t-45=(t-1)(t-5)(t-9).
 \]
@@ -1235,7 +1272,7 @@ $A_5$ orbits and syndrome conic
 $A_3/H_3$ arrangement synthesis
 & exact root coordinates; intersection lattices
 & \path{ReflectionArrangements.lean} (the two finite reductions) \\
-Decoding and chirality
+Decoding and support bipartition
 & arc--coset dictionary; Edge--Dye triangles
 & \path{Q11DecodingSynthesis.lean} \\
 Rigidity theorem
@@ -1257,7 +1294,10 @@ The range $4\le k\le7$
 \\
 \bottomrule
 \end{tabular}
-\caption{Mathematical and formal dependencies of the principal results.}
+\caption{Mathematical and formal dependencies of the principal results.
+An em dash means that the manuscript makes no Lean-formalization claim for
+that row; its executable evidence, where applicable, is listed separately
+in Table~\ref{tab:replays}.}
 \label{tab:verification}
 \end{table}
 
@@ -1269,18 +1309,20 @@ The range $4\le k\le7$
 \toprule
 Result & Exhaustive or independent executable check \\
 \midrule
-$A_5$ orbits and syndrome conic
+Syndrome conic and rigidity census
 & \path{check_rigidity_degenerate_conic.py} \\
 $A_3/H_3$ arrangement synthesis
 & \path{check_reflection_arrangements.py} \\
-Decoding and chirality
+Decoding and support bipartition
 & \path{check_decoding.py}; \path{check_chirality.py};
 \path{check_code_automorphisms.py} \\
 Rigidity theorem
-& $1548$-representative frame-normalized enumeration \\
+& \path{check_rigidity_degenerate_conic.py};
+$1548$-representative frame-normalized enumeration \\
 Gap and low-degree loci
 & \path{check_global_conic_gap.py}; \path{check_perturbation_gap.py};
-\path{check_low_degree_loci.py}; Singular calculation \\
+\path{check_low_degree_loci.py};
+\path{check_low_degree_loci_c12.sing} \\
 Uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
 Clebsch-family formula
@@ -1293,6 +1335,13 @@ The range $4\le k\le7$
 Table~\ref{tab:verification}.}
 \label{tab:replays}
 \end{table}
+
+For the reflection-arrangement row, the Python replay checks the finite
+$\F_5/\F_{11}$ specializations independently. The Lean file checks the
+$\F_{11}$ coordinate projectivity and pointwise secant-index transport, the
+characteristic-two boundary, both finite intersection spectra, and the
+displayed polynomial factorizations. These finite checks are separate from
+the symbolic $R$-calculation in Proposition~\ref{prop:h3-arrangement}.
 
 The formal development axiomatizes exactly two consequences of Dye's
 Theorem~1: the ten-point Brianchon bound and the classification of equality.
@@ -1427,8 +1476,8 @@ A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
 S.~Ball and M.~Lavrauw,
 \newblock Arcs in finite projective spaces,
 \newblock \emph{EMS Surveys in Mathematical Sciences} \textbf{6} (2019),
-33--45.
-\newblock arXiv:1908.10772.
+133--172.
+\newblock doi:10.4171/EMSS/33; arXiv:1908.10772.
 
 \bibitem{AbiadJabalAmeliReijnders2025}
 A.~Abiad, A.~Jabal Ameli, and L.~Reijnders,

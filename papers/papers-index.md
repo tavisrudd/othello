@@ -61,13 +61,14 @@ defect identity and ρ_𝒞(16) = 9*
 - *Status:* self-contained 19-page LaTeX manuscript + PDF. Its verification map names eleven Python
   replays, one Singular calculation, and eleven Lean roots; the formal development isolates exactly
   two consequences of Dye's theorem as axioms. Conceptual rigidity, low-degree rigidity,
-  quantitative gaps, decoder reconstruction, chirality, the `A₃/H₃` reflection-arrangement
+  quantitative gaps, decoder reconstruction, the invariant support bipartition, the `A₃/H₃`
+  reflection-arrangement
   synthesis, the all-field Clebsch formula, and the `4≤k≤7` classification are integrated. Local
   reproducibility is closed; the remaining gate is an immutable artifact release.
 - **Ships after `arcs` by publication-allocation ruling, not mathematical dependency.** `arcs`
   publishes the shared deep-holes=conic identification first; `clebsch` cites it for provenance but
   reproves it and depends on no unpublished companion result. Its claims are the rigidity and
-  low-degree characterizations, gaps, decoding/chirality structure, and finite-field boundary.
+  low-degree characterizations, gaps, decoding/support-bipartition structure, and finite-field boundary.
   *Added 2026-07-13, after the Fable decomposition ruling, so not among its five+1.*
 
 **5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs: exact transfer under
@@ -156,7 +157,8 @@ repositories: an evidence-based essay and practical how-to
   post-C203 aggregate rebuild remain submission preflight gates.
 - **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
   `clebsch-hexagon-code` — the 19-page paper cites eleven fail-closed Python replays and one Singular
-  calculation. Eleven named Lean roots cover the syndrome conic, `A₅` orbits, decoding/chirality
+  calculation. Eleven named Lean roots cover the syndrome conic, `A₅` orbits, decoding and the
+  support bipartition,
   synthesis, the finite `A₃/H₃` reductions, the chord-defect bridge, the two-axiom Dye consequence
   layer, `q=9`, and the universal `4≤k≤7` moments. The global/local gaps, low-degree census,
   Clebsch-family specialization, and finite seven-arc exclusions remain explicitly checker- or
@@ -188,7 +190,7 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   (`lean/RelativeConicArcs/`).
 - **Partially formalized with an explicit classical boundary — `clebsch-hexagon-code`:**
   `Q11Coding.lean` and `Q11A5PointOrbits.lean` certify the syndrome conic and concrete point-orbit
-  data; `Q11DecodingSynthesis.lean` certifies the decoding/Brianchon/chirality synthesis;
+  data; `Q11DecodingSynthesis.lean` certifies the decoding/Brianchon/support-bipartition synthesis;
   `ReflectionArrangements.lean` certifies the finite `A₃/H₃` coordinate bridges, intersection
   spectra, characteristic boundary, and pointwise transport to the Clebsch secant index;
   `SixArcDefectBridge.lean` proves the projective chord-defect identity; and
@@ -295,7 +297,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-clebsch-gap     | Gap theorem (rigid, not merely stable)   | every non-Clebsch six-arc has `#U≥16` with `U` on no conic; each of the 252 single-point perturbations of the hexagon has symmetric difference `#(U Δ 𝒞) ≥ 18` (exact spectrum `{18,19,20,22,24}`), so at most seven of the twelve conic points survive; distance-to-phenomenon jumps `0 → ≥18` with nothing between | clebsch | paper §4 Thm 4.7; `check_global_conic_gap.py` and `check_perturbation_gap.py` cover the global and 252-neighbour claims. These finite gap censuses are replayed, not Lean-formalized |
 | comp-clebsch-low-degree-loci | Low-degree rigidity and quartic sharpness | a nonzero form of degree at most three contains `U(A)` exactly for the Clebsch class; there the minimum degree is two, the quadratic kernel is the conic equation, and the cubic kernel is that equation times the linear forms. One non-Clebsch class has an 18-point uncovered locus equal to the rational points of a smooth absolutely irreducible genus-three quartic, showing degree four is sharp | clebsch | paper §4 Prop 4.4 and Remark 4.6; `check_low_degree_loci.py` and the Singular replay. The archived quintic/sextic computations are deliberately not claims of the current manuscript |
 | comp-clebsch-u-spectrum | Six-arc extension-count spectrum in `PG(2,11)` | `#U(A) ∈ {12,16,18,19,20,21,22}` with frame-normalized multiplicities `{6,30,150,300,630,360,72}` (Σ=1548); `#U=12` is attained by exactly one `PGL(3,11)` orbit (multiplicity `6=360/60`, consistent with `#Aut=60`) | clebsch | **priority granted outright to Hirschfeld–Sadeh 1984 / Sadeh thesis — recomputed here, claimed by us for neither the numbers nor the classification**; ours is only the deep-hole/covering *reading* of `U`. paper §4; verified by two independent code paths |
-| thm-clebsch-chirality | Support-determined chirality `ℤ/2` on deep-hole leaders | the twenty support triples split into two complementary `A₅`-orbits of ten. Only the unordered bipartition is intrinsic: the outside `S₅` normalizer coset exchanges its parts, while code automorphisms preserve them. Each deep-hole coset has ten leaders in each class, globally `1200+1200`; complementary support pairs are canonically the ten Brianchon points | clebsch | paper §5 Props 5.1 and 5.3; `check_chirality.py`, `check_code_automorphisms.py`, and `check_decoding.py`; kernel-checked finite synthesis in `Q11DecodingSynthesis.lean` |
+| thm-clebsch-chirality | Invariant support bipartition of deep-hole leaders | the twenty support triples split into two complementary `A₅`-orbits of ten. Only the unordered bipartition is intrinsic: the outside `S₅` normalizer coset exchanges its parts, while code automorphisms preserve them. Each deep-hole coset has ten leaders in each class, globally `1200+1200`; complementary support pairs are canonically the ten Brianchon points | clebsch | paper §5 Props 5.1 and 5.3; `check_chirality.py`, `check_code_automorphisms.py`, and `check_decoding.py`; kernel-checked finite synthesis in `Q11DecodingSynthesis.lean` |
 | thm-clebsch-decoding | Complete distance oracle and ambiguity geometry | for syndrome `s`, distance is 0 at zero, 1 on an arc-column ray, 3 exactly when `s≠0` and `s₀s₂-s₁²=0`, and 2 otherwise; nearest-word multiplicities are `1^960 2^150 3^100 20^120`. The ten Brianchon points and five triangles are classical (Edge/Dye); the new layer reconstructs them from decoder ambiguity and identifies their supports with the complementary matchings; every deep hole has all twenty triple supports | clebsch | paper §3 Prop 3.5 and §5 Cor 5.2; `check_decoding.py`; kernel-checked synthesis in `Q11DecodingSynthesis.lean` |
 | thm-clebsch-why11   | Classification-free uniqueness of `q=11` for six-arcs | the chord-defect identity and universal matching bound `c≤15` reduce a conic-filling six-arc to `q∈{4,5,9,11}`; hyperoval completeness excludes q=4, every six-cap is maximal at q=5, and the exact-distance-two Sylvester graph has clique number five at q=9, leaving q=11 | clebsch | paper §6 Thm 6.2; `check_small_q_uniqueness.py` and an independent q=9 construction; kernel-checked support in `ClebschChordDefect.lean` and `Q9Sylvester.lean` |
 | thm-clebsch-family-uncovered | All-field uncovered formula for Clebsch hexagons | every finite-field Clebsch hexagon has `#U=q²−14q+45`; for `q≡3 (mod 4)`, Dye's associated conic lies in `U` with exact off-conic excess `(q−4)(q−11)`, so exact conic filling is isolated at q=11 | clebsch | paper §6 Prop 6.3; hand proof from the chord-defect identity and Dye's ten Brianchon points/non-secant criterion. The `q=19` instance is independently replayed by `check_q19_nonexample.py`; the family specialization itself is not claimed as Lean-formalized |
