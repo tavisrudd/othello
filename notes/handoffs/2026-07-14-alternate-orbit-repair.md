@@ -3,107 +3,128 @@
 **Lane**: `alt-orbit-repair` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-14
-**Status:** OPEN — C142 queued; C143 gated on the representative-leaf feasibility check and a clear
-Lean build window
-**Tasks:** C142–C143
+**Status:** OPEN — C142, C143, C148–C150 reported; C151's universal lower bound and five-row
+attainment certificate are checked, while residual equality-orbit completeness remains active
+**Tasks:** C142–C143, C148–C152
 
-## Active-lane lock
+> **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's current-state map. Never
+> append session history, build timings, validation transcripts, dated progress, dead ends,
+> superseded plans, or amendment trails here. Put every such entry in
+> [the companion archive](done/2026-07-14-alternate-orbit-repair-archive.md), then rewrite this file
+> cleanly to show only the surviving state and next actions.
 
-This is the active sticky lane. Until the user explicitly switches lanes or this handoff is marked
-finished, `go` and `next?` refer only to the next step recorded here. Work begins with C142; C143
-does not trigger a generated-certificate rebuild until its small feasibility gate passes and the
-concurrent Lean build window is clear.
+## Lane scope
+
+This is the sticky `alt-orbit-repair` lane. Until the user explicitly switches lanes or this
+handoff is finished, `go` and `next?` refer to the next C151 step below.
 
 ### Allowed paths
 
-- new alternate-repair modules under `lean/FiniteGeom/BaerCompletion/` and
+- alternate-repair modules under `lean/FiniteGeom/BaerCompletion/` and
   `lean/RelativeConicArcs/`
-- the existing quadratic pair-count and Q25 profile modules needed to state or prove the repair
-  results; generated Q25 certificate sources only under C143
-- `notes/2026-07-14-c142-*`, `notes/2026-07-14-c143-*`, this handoff, and its companion archive
+- the quadratic pair-count and Q25 profile modules needed to state or prove the repair results;
+  generated Q25 certificate sources only under C143/C151
+- `notes/2026-07-14-c142-*` through `notes/2026-07-14-c152-*`, this handoff, and its companion
+  archive
 - this lane's rows in `notes/2026-07-07-codex-task-queue.md` and its routing row in `CLAUDE.md`
 - `papers/equivariant-robust-completion/` and its index/planning rows only after the corresponding
   theorem and trust gates pass
 
 ### Foreign lanes
 
-The closed `baer` lane supplies the pair-counting and Q25 extension theorems but does not own this
-deliverable. Clebsch, cap, cubic, relative-conic, RepairCodes, Queens/Othello, and their working-tree
-changes remain foreign. Do not edit, stage, or route their files into this lane.
+The closed `baer` lane supplies pair-counting and Q25 extension theorems but does not own this
+deliverable. Build-system, Clebsch, cap, cubic, relative-conic, RepairCodes, Queens/Othello, and
+their working-tree changes remain foreign. Do not edit, stage, or commit their files here.
 
 ## Goal
 
-Turn the eight-arc pair-extension count into a family-specific erasure-repair theorem for
-Frobenius-invariant ten-arcs. If a selected nonfixed conjugate orbit is deleted, the repair must use
-a different legal conjugate orbit rather than merely restore the erased pair.
+Prove robust equivariant repair for Frobenius-invariant arcs: after deleting a selected nonfixed
+conjugate orbit, replace it by a different legal conjugate orbit. The general theorem and the Q25
+existence/multiplicity theorem are reported. The active strengthening is the exact exceptional-Q25
+minimum of 32 legal pairs and the classification of equality cases.
 
-For an invariant ten-arc `A`, a selected nonfixed orbit `O`, and `D = A \ O`, the set `D` is an
-invariant eight-arc and `O` is one legal pair extension of `D`. A lower bound of at least two legal
-pairs for `D` therefore supplies an alternate repair.
+## Current theorem map
 
-## Already available
+- **General repair:** for every prime power `s ≥ 7`, deletion from an invariant ten-arc leaves at
+  least eight alternate repairs; the exact profile envelope strengthens the uniform bound to 318.
+- **Parameterized exchange:** if
+  `floor((k-1)^2/4) + r + 1 ≤ s(s-1)/2`, deletion from an invariant `(k+2)`-arc leaves at least `r`
+  alternate repairs, with the reported sharp rectangle `s ≥ 4`, `k ≤ s+1`.
+- **Q25 exceptional profile:** all 1,189 residual class representatives have a kernel-checked
+  lower bound of 32, and five proposed minimizer representatives have checked equality.
+- **Remaining exactness gap:** connect the residual-cover certificate to semantic orbit
+  completeness, including the class-linking and orbit-size facts needed to prove that the five
+  representative rows exhaust all equality cases.
 
-The closed Baer lane provides the exact global legal-pair cardinality bridge and these checked Q25
-lower bounds for invariant eight-arcs:
+Reported theorem and scout details live in their reports:
+[C142](../2026-07-14-c142-alternate-orbit-repair.md),
+[C143](../2026-07-14-c143-q25-alternate-orbit-repair.md),
+[C148](../2026-07-14-c148-general-s-profile-envelope.md),
+[C149](../2026-07-14-c149-parameterized-robust-exchange.md), and
+[C150](../2026-07-14-c150-q25-multiplicity-structure.md).
 
-| Fixed profile `f` | Certified legal pairs | Certified alternatives after restoring one deleted pair |
-|---:|---:|---:|
-| 0 | at least 5 | at least 4 |
-| 2 | existence only | none yet |
-| 4 | at least 4 | at least 3 |
-| 6 | at least 36 | at least 35 |
-| 8 | at least 110 | at least 109 |
+## Current discovery frontier
 
-For every prime power `s ≥ 7`, the general criterion gives more without a new certificate. An
-invariant eight-arc has `M ≤ 12`, an empty carrier, and
-`N = s(s-1)/2 ≥ 21`; hence it has at least nine legal conjugate pairs. Deleting a selected orbit
-from an invariant ten-arc therefore leaves at least eight alternative repairs.
+This table is a state register, not a diary. Historical observations and how they arose belong in
+the companion archive. `LEAN-CHECKED` means kernel-checked; `COMPUTE-CHECKED` means independently
+computed but not yet promoted through the complete semantic theorem.
 
-The independent Q25 census reports minimum legal-pair count 32 in the exceptional `f=2` profile.
-This makes the two-witness strengthening mathematically low-risk, but it remains external evidence
-until C143 installs a kernel-checked certificate. The value 32 is not a theorem target for this
-lane.
+| ID | Surviving finding | Status | Active use |
+|---|---|---|---|
+| D-AOR2 | Orbit replacement gives a token-jumping-style graph on embedded invariant ten-arcs, fibered by the exact fixed-point subset. Dye's shared-triangle graph is a predecessor with different adjacency. | local profile inputs checked; graph theorem open | C152: prove neighbor injectivity and the degree identity before any connectivity claim |
+| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities checked; residual cover open | C151 equality-orbit completeness |
+| D-AOR5 | For an invariant old set, legality of a conjugate candidate pair reduces to freshness, one representative avoiding old secants, and its fixed carrier avoiding old points. | `LEAN-CHECKED; LIT-OPEN` | C151 certificate compression and later exposition assessment |
+| D-AOR6 | The residual order-400 group is two independent 20-element base-field affine normalizers; its executable action preserves legal-orbit cardinality. | `LEAN-CHECKED` | C151 class transport |
+| D-AOR7 | Determinant obstructions factor through 651 canonical dual-line masks; the 310 candidate carriers lie ten apiece on the 31 conjugation-fixed lines. | mask table and Boolean composition `LEAN-CHECKED` | compact C151 residual certificates |
+| D-AOR8 | Freshness blocks 3 candidates and carrier incidence blocks 140 in every residual class; only the old-secant mask varies, yielding the legal-count spectrum 32–47 through overlap. | lower bound and five equalities `LEAN-CHECKED`; spectrum `COMPUTE-CHECKED` | seek a conceptual overlap inequality after the residual cover closes |
+
+Closed discoveries D-AOR1 and D-AOR3 were promoted by C148 and C149 respectively; their final
+statements are in the reports above and their development history is in the companion archive.
 
 ## Open queue
 
-| Task | State | Deliverable |
+| Task | State | Current deliverable |
 |---|---|---|
-| C142 | queued; first | Kernel-checked `s ≥ 7` alternate-repair theorem with at least eight alternatives, plus the Q25 nonexceptional-profile repair bounds |
-| C143 | gated after C142 | Representative-leaf two-witness test; if feasible, regenerate the exceptional `f=2` certificate, transport distinctness, and prove uniform Q25 alternate-orbit repair |
+| C151 | active; lower bound + attainment checked | Prove residual-cover/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
+| C152 | queued behind C151 | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
-## C142 — certificate-free repair theorem
+Reported: C142, C143, C148, C149, and C150; use the linked reports rather than recreating their
+plans here.
 
-1. Load the named-expert proof context before Lean development.
-2. Define the deletion/repair statement semantically in terms of unordered nonfixed Frobenius
-   orbits and the existing global legal-pair finset.
-3. Prove that deleting any selected nonfixed orbit from an invariant ten-arc over `s ≥ 7` leaves at
-   least nine legal pairs and hence at least eight alternatives.
-4. Package the existing Q25 bounds for `f=0,4,6,8` as alternate-repair counts.
-5. Run scoped build, forbidden-token, declaration/axiom, and manuscript-to-Lean statement audits.
+## C151 — next actions
 
-Report: `notes/2026-07-14-c142-alternate-orbit-repair.md`.
+1. Finish the residual-cover bridge from generated row data to semantic normalized configurations.
+2. Prove the valid-row transport without asking `decide` to reduce opaque `Finset` permutation
+   equality: use pointwise containment plus the known eight-point cardinalities, or an explicit
+   eight-point permutation certificate.
+3. Connect each semantic exceptional-profile arc to a certified residual class and transport the
+   checked `≥32` theorem along the projective equivalence.
+4. Connect the five equality representatives and their orbit sizes to the full set of 1,600
+   minimizers; state exactly what is classified up to the ordered-fixed-pair residual group.
+5. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
+   the complete semantic theorem passes.
 
-## C143 — exceptional-profile multiplicity
+The current prototype is split into definition/data, bad-row, valid-transport, and conclusion
+modules under `lean/RelativeConicArcs/Q25ResidualCoverPrototype/`; the generic bridge is
+`lean/RelativeConicArcs/Q25ResidualCoverBridge.lean`. Preserve that module boundary because the
+combined elaboration exceeded the safe memory envelope.
 
-Start with one representative normalized leaf. Replace the existential witness target by two
-distinct legal orbit codes and record source size, kernel time, memory, and downstream transport
-requirements. Only after that gate passes:
+## C152 — queued shape
 
-1. generate two distinct witnesses for every valid normalized `f=2` row while retaining explicit
-   non-arc witnesses for invalid rows;
-2. rebuild the split certificate under the repository's capped-build/OOM protocol;
-3. transport both witnesses and their distinctness through base-point and stabilizer normalization;
-4. combine the five profiles into a uniform two-pair Q25 theorem; and
-5. derive the uniform alternate-orbit repair theorem for invariant ten-arcs in `PG(2,25)`.
+Vertices are embedded Frobenius-invariant ten-arcs with a fixed exact fixed-point subset; an edge
+exchanges one nonfixed conjugate orbit while retaining the common invariant eight-arc. First prove
+adjacency symmetry, fixed-subset preservation, deleted-orbit recovery, neighbor injectivity, and
 
-The result needs only two distinct pairs. Do not enlarge the certificate target to the external
-minimum 32 unless a later publication gate specifically requires it.
+```text
+degree(A) = sum over selected nonfixed orbits q of card(alternateLegalPairs(A,q)).
+```
 
-Report: `notes/2026-07-14-c143-q25-alternate-orbit-repair.md`.
+Only then run embedded and symmetry-quotiented component censuses, actively looking for component
+invariants. High degree alone does not justify connectivity, expansion, or mixing claims.
 
 ## Publication boundary
 
-The certificate-free `s ≥ 7` theorem is already a rigorous paper-level corollary of the checked
-counting machinery. The uniform Q25 repair statement enters the manuscript only after C143 passes.
-No historical-first or literature-novelty language is permitted without a repair-specific priority
-search; allocate that search separately if publication positioning requires it.
+The reported general and Q25 repair theorems may be used with the cautious literature posture in
+the [C143 literature report](../2026-07-14-c143-literature-positioning.md). Do not make a
+historical-first claim. Do not present 32 as the exact semantic minimum, or the five classes as a
+complete extremal classification, until C151's residual-cover and orbit-completeness bridge passes.
