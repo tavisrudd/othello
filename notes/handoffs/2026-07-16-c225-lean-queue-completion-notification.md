@@ -80,15 +80,18 @@ The adapter first creates a restrictive, non-reused run directory and atomically
 bounded argv/digest, submission time, and origin attribution:
 
 ```text
-user=tavis, harness=codex|claude|manual, session_id=<native harness session>,
-work_lane=<explicit lane alias>, task_id=<allocated C###>
+user=<effective account>, harness=codex|claude|manual, session_id=<native harness session>,
+work_lane=<explicit lane alias>, task_id=<caller-attested C###>
 ```
 
 The Codex adapter records `CODEX_THREAD_ID`; the Claude adapter must pass Claude's native session ID
 explicitly rather than relying on prompt or PID inference. `work_lane` is the selected ownership
-lane, not a value inferred from Git. Codex/Claude submissions require an allocated task matching
-`C[0-9]+`. Manual non-task probes use `task_id=null`, are visibly marked `manual`, and may not be
-presented as lane work. Manual submission requires an explicit stable session token.
+lane, not a value inferred from Git. Codex/Claude submissions require a caller-attested task matching
+`C[0-9]+`. This is attribution, not registry authorization: the adapter does not parse the task
+queue or prove that the task is allocated or lane-pegged. Repository agent rules remain responsible
+for allocation and lane correctness. Manual non-task probes use `task_id=null`, are visibly marked
+`manual`, and may not be presented as lane work. Manual submission requires an explicit stable
+session token.
 
 Scope identifiers have symmetric CLI/environment inputs:
 
@@ -108,8 +111,9 @@ does not resolve the environment again.
 
 Agent submissions fail before systemd submission if session, lane, or C-task remains missing or
 invalid. They never infer lane/task from Git state, the current handoff, prompt text, or a previous
-run. The effective OS username is recorded from the process credentials and must be `tavis` on this
-supported host; it is not a caller-controlled scope option.
+run. The OS account is resolved from the effective UID, is not caller-controlled, and must own both
+the configured state root and new run directory. `tavis` is the expected value on this host, not a
+hard-coded queue-tool requirement.
 
 For set-once use, launch the Codex/Claude session with `OTHELLO_LANE` and `OTHELLO_TASK_ID` in its
 parent environment; the harness supplies its native session ID. Exporting variables inside one
@@ -165,8 +169,12 @@ The human-readable unit description is display-only and is never identity or aut
 evidence.
 
 Acceptance metadata is written separately to `accepted.json`; `submission.json` is never rewritten.
-The adapter is the sole writer of `submission.json`, `accepted.json`, and `completion.json`; the
-queue worker is the sole writer of `status.json`.
+All three adapter records are set-once. A publisher writes and fsyncs a same-directory temporary,
+installs it with a no-replace primitive, then fsyncs the directory. If the final path already exists,
+the adapter validates the existing bounded regular file against immutable identity and expected
+content; byte-identical or canonically identical content is idempotent, while any conflict is a hard
+error and suppresses notification. No adapter overwrites `submission.json`, `accepted.json`, or
+`completion.json`. The queue worker is the sole writer of `status.json`.
 
 Do not use `--collect` initially. Failed/abnormally terminated units should remain inspectable until
 the result has been captured; successful units may unload normally after the queue has atomically
@@ -181,11 +189,19 @@ to remaining cgroup processes. The shutdown fixture must validate this ordering 
 accepted; changing the timeout requires an explicit design amendment rather than inheriting a host
 default.
 
-#### 2. Keep one Python status writer and create status before lock acquisition
+#### 2. Adopt the adapter-owned run directory and keep one status writer
 
-The foreground queue worker creates format-2 `status.json` immediately after validating and creating
-its disk-backed run directory, before attempting the build-owner lock. There is no launcher/worker
-ownership transfer: Python is the sole status writer for its entire lifetime.
+The adapter exclusively creates the managed run directory; the foreground worker never recreates it
+or silently substitutes another path. Before writing anything, the worker uses `lstat` and
+descriptor-relative checks to verify that the state root, run directory, and `submission.json` are
+non-symlink objects owned by its effective UID, have the required restrictive modes, and reside at
+the absolute paths passed by the adapter. It parses bounded `submission.json`, recomputes its digest,
+and requires matching run ID, unit, argv, effective account, and the run-ID/submission-digest
+environment nonces. Any mismatch exits before `status.json`, lock acquisition, or Lake invocation.
+
+After successful adoption, the worker creates format-2 `status.json` before attempting the
+build-owner lock. Python is its sole writer for the worker lifetime. Standalone legacy foreground
+mode may retain its separate directory-creation contract but cannot claim C225 managed provenance.
 
 Canonical nonterminal states are `queued` and `running`; canonical terminal states are `success`,
 `failed`, `refused`, and `interrupted`. `phase` is one of `initializing`, `waiting-for-lock`,
@@ -239,10 +255,12 @@ name after durable capture. Cleanup failure is diagnostic and cannot change the 
 A recovery sweep may reset only C225-prefixed failed units with matching immutable submission
 records older than a stated retention threshold; broad `reset-failed` is forbidden.
 
-Delivery semantics are not globally exactly-once. The callback event ID is stable, for example
-`lean-queue:<run-id>:terminal:<revision>`. A live adapter emits at most once; recovery after a
-harness crash is at-least-once and consumers deduplicate by event ID. Callback failure never changes
-queue state.
+Delivery semantics are not globally exactly-once. C225 defines `terminal_revision=1` in immutable
+submission metadata; set-once completion has no correction or overwrite path. Every adapter derives
+the same callback event ID, `lean-queue:<run-id>:terminal:1`, from immutable input rather than local
+observation time. A future correction protocol must allocate a new explicit terminal revision and
+is outside C225. A live adapter emits at most once; recovery after a harness crash is at-least-once
+and consumers deduplicate by event ID. Callback failure never changes queue state.
 
 An arbitrary detached shell process cannot call the private harness `notify(...)` API. systemd
 solves process supervision and wakeable waiting; the live orchestration cell performs the final
@@ -354,33 +372,41 @@ retention, parsing, or availability, and unbounded journal content never reaches
    Every fixture cleans its exact unit in `finally`.
 2. Before submission, a restrictive immutable record binds run ID, UUID unit, absolute paths/argv,
    user/harness/session/lane/C-task origin, and the manager-generation tuple; the blocking adapter
-   records a fully matched InvocationID before successful-unit GC without a resubmit race.
+   records a fully matched InvocationID before successful-unit GC without a resubmit race. The
+   effective account owns the configured state root; `tavis` is a host expectation, not a fixture
+   constant. Task/lane are visibly caller-attested rather than registry-verified.
 3. Table-driven origin tests cover CLI-over-environment precedence, native Codex session fallback,
    explicit task/lane overrides for a session switch, empty/invalid/conflicting values, and refusal
    when required agent scope remains unresolved.
-4. Status exists in `queued/waiting-for-lock` before a held owner lock is released; no Lake command
+4. Managed-run adoption tests cover missing/replaced/symlinked/wrong-owner/wrong-mode directories,
+   submission digest and environment-nonce mismatch, and path substitution. Every mismatch exits
+   before status, lock acquisition, or Lake; the worker never recreates the adapter-owned directory.
+5. Concurrent adapters prove no-clobber publication of submission/acceptance/completion records,
+   idempotent identical reads, hard failure on conflicting content, and the identical event ID
+   `lean-queue:<run-id>:terminal:1` for every valid observer.
+6. Status exists in `queued/waiting-for-lock` before a held owner lock is released; no Lake command
    is invoked during that phase.
-5. Lock timeout records `refused`/2; build and aggregate failures record `failed`/1; SIGTERM records
+7. Lock timeout records `refused`/2; build and aggregate failures record `failed`/1; SIGTERM records
    the signal and the documented interrupted code.
-6. With `KillMode=mixed` and `TimeoutStopSec=120s`, stop with a live child proves TERM reaches Python
+8. With `KillMode=mixed` and `TimeoutStopSec=120s`, stop with a live child proves TERM reaches Python
    first, Python forwards/reaps, releases the lock, and records interruption before exit; escalation
    leaves no cgroup descendant. Forced worker/cgroup death and failure before status creation yield
    bounded external effective states without mutating canonical disk state.
-7. Notification occurs only after service exit/lock release, uses a stable event ID, and is at most
+9. Notification occurs only after service exit/lock release, uses a stable event ID, and is at most
    once per live adapter invocation. Two adapters may emit the same ID and are deduplicable.
-8. A harness fixture owns one blocking wait and consumes one bounded completion envelope; it uses no
+10. A harness fixture owns one blocking wait and consumes one bounded completion envelope; it uses no
    `sleep`, repeated `status`, process-table polling, or live-log capture. Private harness delivery
    beyond that adapter contract is not claimed as a repository test.
-9. Inspection handles already-complete, malformed, oversized, missing, format-1, and manager-
+11. Inspection handles already-complete, malformed, oversized, missing, format-1, and manager-
    unavailable cases without following untrusted paths or blocking on non-regular files.
-10. Successful-unit GC, exact failed-unit capture/reset, cleanup failure, InvocationID mismatch,
+12. Successful-unit GC, exact failed-unit capture/reset, cleanup failure, InvocationID mismatch,
    missing-manager evidence, and the D-Bus subscribe/read boundary all have focused fixtures.
-11. JSON creation/replacement is visibility-atomic and directory-fsynced where process-crash
+13. JSON creation/replacement is visibility-atomic and directory-fsynced where process-crash
    durability is claimed; run directories/files use restrictive permissions.
-12. Per-run status and the capped queue list expose full machine-readable and abbreviated human
+14. Per-run status and the capped queue list expose full machine-readable and abbreviated human
     session/lane/C-task attribution, including concurrent jobs from Codex and Claude fixtures.
-13. Operator guidance distinguishes submitted, queued, lock-owned, child-spawned, and completed.
-14. After the non-Lean fixtures pass, one disposable lightweight target exercises the real
+15. Operator guidance distinguishes submitted, queued, lock-owned, child-spawned, and completed.
+16. After the non-Lean fixtures pass, one disposable lightweight target exercises the real
     systemd-run→queued/running→terminal bridge in a confirmed quiet window.
 
 ## Implementation order
@@ -390,8 +416,9 @@ retention, parsing, or availability, and unbounded journal content never reaches
 2. Implement and table-test CLI/environment/native origin resolution.
 3. Implement restrictive origin/manager/submission identity and the absolute-argv transient-service
    adapter, including the concurrent InvocationID handshake.
-4. Refactor the Python worker to create format-2 status before lock acquisition and publish phases
-   as the sole writer; move terminal publication after lock release.
+4. Implement strict adoption of the adapter-owned run directory, then create format-2 status before
+   lock acquisition and publish phases as the sole status writer; move terminal publication after
+   lock release.
 5. Add bounded completion capture, exact failed-unit cleanup, and the primary `--wait` bridge.
 6. Implement D-Bus reattachment only after its subscribe/ref/snapshot algorithm passes race tests.
 7. Remove polling examples and deprecate Python `--detach` with an actionable foreground/systemd
@@ -429,4 +456,11 @@ A final tightening pass required the InvocationID handshake to occur concurrentl
 wait, expanded manager identity beyond boot ID to a race-checked D-Bus-owner/PID/start-tick tuple,
 and selected `KillMode=mixed` with a pinned 120-second stop timeout so Python gets the first chance to
 forward, reap, unlock, and publish. Origin attribution is also first-class: every agent submission
-and queue view carries user, native harness session ID, work lane, and allocated C-task.
+and queue view carries user, native harness session ID, work lane, and caller-attested C-task.
+
+The implementation-readiness review resolved the remaining ownership ambiguities: the adapter alone
+creates the managed directory and the worker strictly adopts it; adapter records are set-once and
+no-clobber across competing observers; terminal revision 1 fixes the deduplication ID; task/lane are
+caller-attested attribution rather than registry proof; and effective-UID/state-root ownership
+replaces a hard-coded username. With those constraints, the ADR is ready for implementation while
+remaining `Proposed` until its acceptance gates pass.
