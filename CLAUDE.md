@@ -101,10 +101,33 @@ history rewrites, non-fast-forward changes, `git push`, or a real n=16 run.
   lists into context.
 - Use `~/.claude/bin/run-quiet "command args"` for noisy commands such as builds and deployments.
   Read only its bounded summary or a targeted diagnostic tail.
+- Default tool output budgets to 1,000–2,000 tokens. More requires a specifically bounded artifact.
+  If a command reports more than 10,000 original tokens, treat the inspection as incorrectly shaped:
+  do not repeat it; replace it with a source-filtered query against the saved log.
 - Search with `rg`/`rg --files`, but always scope repository-sized searches. Do not run an unbounded
   `git ls-files`, `find`, status dump, or diff when a narrow pathspec answers the question.
+- Never use broad `ps -eo`, repeated `ps`/`free`/`df`, `list_agents`, `wait`, or `write_stdin` as a
+  progress dashboard. Use an unattended runner with disk-backed status and inspect one bounded
+  milestone only after genuine uncertainty or a user request.
+- Do not rerun an unchanged build/elaboration after the same failure. First reduce the saved log to
+  the first error, change the source or invocation, and only then retry.
+- Never render a full ASG session into context. Analyze `asg +show --expand-tool-calls` through a
+  bounded script, or use narrow role/date/session searches with capped hits and context.
+- Batch related harmless local checks instead of triggering one permission review per command.
+  Permission review must receive the minimal action context, never a growing full-session transcript.
 - Run generators and formatters against explicit roots; afterward require changed paths to be a
   subset of the selected lane's allowlist.
+- Stay current with Git after every coherent edit, especially after creating files: run a narrow
+  `git status --short -- <owned-paths>`, account for every new/modified path, and do not leave
+  untracked work to be rediscovered later. Untracked source, certificate, script, and documentation
+  files are urgent because they are absent from every reproducibility claim until committed.
+- As soon as a coherent task-owned change passes its scoped validation, stage explicit whole-file
+  pathspecs and make a forward commit; no separate permission prompt is needed. Do not wait for the
+  end of a long session or accumulate unrelated fixes into one commit. Before compaction, a lane
+  switch, delegation handoff, or a long-running build, commit validated owned work or explicitly
+  record why it remains uncommitted and exactly which paths comprise it.
+- Fast commit cadence does not relax ownership or validation: never stage foreign-lane changes,
+  generated debris, secrets, or a failing/incomplete change merely to make the tree look clean.
 - Preserve dirty worktrees. Never use destructive reset/checkout operations unless explicitly
   requested.
 - Stage non-interactively with explicit whole-file pathspecs or an exact cached patch. Never use

@@ -4,6 +4,127 @@ set -euo pipefail
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 lean_root=$(cd -- "$script_dir/.." && pwd)
 
+agent_session_id=${CODEX_THREAD_ID:-${CLAUDE_SESSION_ID:-${CLAUDE_CODE_SESSION_ID:-${AGENT_SESSION_ID:-}}}}
+if [[ -n ${LEAN_GUARD_SESSION_ENV:-} ]]; then
+  session_env=$LEAN_GUARD_SESSION_ENV
+elif [[ -n $agent_session_id && $agent_session_id =~ ^[A-Za-z0-9._:-]+$ ]]; then
+  session_env=$HOME/.cache/othello-lean-build/guarded-lean-sessions/$agent_session_id.env
+else
+  session_env=
+fi
+
+session_key_valid() {
+  case "$1" in
+    LEAN_GUARD_CPUSET|LEAN_GUARD_THREADS|LEAN_GUARD_OOM_SCORE_ADJ|LEAN_GUARD_RUN_QUIET|LEAN_GUARD_PROFILE|RUN_QUIET_LOGDIR) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+session_value_valid() {
+  local key=$1 value=$2
+  [[ $value != *$'\n'* ]] || return 1
+  case "$key" in
+    LEAN_GUARD_CPUSET) [[ $value =~ ^[0-9,-]+$ ]] ;;
+    LEAN_GUARD_THREADS) [[ $value =~ ^[1-9][0-9]*$ ]] ;;
+    LEAN_GUARD_OOM_SCORE_ADJ) [[ $value =~ ^-?[0-9]+$ ]] ;;
+    LEAN_GUARD_PROFILE) [[ $value =~ ^[A-Za-z0-9._-]+$ ]] ;;
+    LEAN_GUARD_RUN_QUIET|RUN_QUIET_LOGDIR) [[ $value == /* ]] ;;
+    *) return 1 ;;
+  esac
+}
+
+require_session_env() {
+  if [[ -z $session_env ]]; then
+    printf '%s\n' 'guarded-lean: no agent session ID; set LEAN_GUARD_SESSION_ENV to a disk-backed path' >&2
+    exit 2
+  fi
+}
+
+write_session_env() {
+  local destination=$1
+  shift
+  declare -A values=()
+  local line key value assignment temp
+  if [[ -f $destination ]]; then
+    while IFS= read -r line; do
+      [[ -z $line ]] && continue
+      key=${line%%=*}
+      value=${line#*=}
+      if ! session_key_valid "$key" || ! session_value_valid "$key" "$value"; then
+        printf 'guarded-lean: invalid existing session setting: %s\n' "$line" >&2
+        exit 2
+      fi
+      values[$key]=$value
+    done < "$destination"
+  fi
+  for assignment in "$@"; do
+    [[ $assignment == *=* ]] || {
+      printf 'guarded-lean: expected KEY=VALUE, got %s\n' "$assignment" >&2
+      exit 2
+    }
+    key=${assignment%%=*}
+    value=${assignment#*=}
+    if ! session_key_valid "$key" || ! session_value_valid "$key" "$value"; then
+      printf 'guarded-lean: unsupported or invalid session setting: %s\n' "$assignment" >&2
+      exit 2
+    fi
+    values[$key]=$value
+  done
+  mkdir -p -- "$(dirname -- "$destination")"
+  temp=$destination.tmp.$$
+  umask 077
+  : > "$temp"
+  for key in LEAN_GUARD_CPUSET LEAN_GUARD_THREADS LEAN_GUARD_OOM_SCORE_ADJ LEAN_GUARD_RUN_QUIET LEAN_GUARD_PROFILE RUN_QUIET_LOGDIR; do
+    if [[ -v values[$key] ]]; then
+      printf '%s=%s\n' "$key" "${values[$key]}" >> "$temp"
+    fi
+  done
+  mv -- "$temp" "$destination"
+}
+
+if [[ ${1:-} == --session-set ]]; then
+  require_session_env
+  shift
+  (( $# > 0 )) || { printf '%s\n' 'guarded-lean: --session-set needs KEY=VALUE' >&2; exit 2; }
+  write_session_env "$session_env" "$@"
+  printf 'guarded-lean: saved session settings to %s\n' "$session_env"
+  exit 0
+fi
+
+if [[ ${1:-} == --session-show ]]; then
+  require_session_env
+  if [[ -f $session_env ]]; then
+    printf 'session_env=%s\n' "$session_env"
+    sed -n '1,6p' "$session_env"
+  else
+    printf 'session_env=%s (unset)\n' "$session_env"
+  fi
+  exit 0
+fi
+
+if [[ ${1:-} == --session-clear ]]; then
+  require_session_env
+  rm -f -- "$session_env"
+  printf 'guarded-lean: cleared session settings at %s\n' "$session_env"
+  exit 0
+fi
+
+if [[ -n $session_env && -f $session_env ]]; then
+  while IFS= read -r line; do
+    [[ -z $line ]] && continue
+    key=${line%%=*}
+    value=${line#*=}
+    if ! session_key_valid "$key" || ! session_value_valid "$key" "$value"; then
+      printf 'guarded-lean: invalid session setting: %s\n' "$line" >&2
+      exit 2
+    fi
+    if [[ -z ${!key+x} ]]; then
+      printf -v "$key" '%s' "$value"
+      export "${key?}"
+    fi
+  done < "$session_env"
+fi
+
 cpu_set=${LEAN_GUARD_CPUSET:-20-23}
 threads=${LEAN_GUARD_THREADS:-1}
 oom_score_adj=${LEAN_GUARD_OOM_SCORE_ADJ:-1000}
@@ -15,12 +136,20 @@ if [[ ${1:-} == --help ]]; then
   cat <<'EOF'
 usage: guarded-lean [LEAN-ARGS...]
 
+Persist exceptional overrides for this Codex/Claude session:
+  guarded-lean --session-set LEAN_GUARD_CPUSET=20-21 LEAN_GUARD_THREADS=2
+  guarded-lean --session-show
+  guarded-lean --session-clear
+
 Run one Lean elaboration with bounded resources and bounded output. Overrides:
   LEAN_GUARD_CPUSET          CPU list (default 20-23)
   LEAN_GUARD_THREADS         LEAN_NUM_THREADS (default 1)
   LEAN_GUARD_OOM_SCORE_ADJ   choom adjustment (default 1000)
   LEAN_GUARD_RUN_QUIET       output wrapper (default ~/.claude/bin/run-quiet)
   LEAN_GUARD_PROFILE         resource profile (default single)
+
+Session settings live under ~/.cache/othello-lean-build/guarded-lean-sessions/<agent-id>.env.
+An explicit environment variable on one invocation overrides the saved session value.
 EOF
   exit 0
 fi

@@ -25,6 +25,21 @@ lean/scripts/guarded-lean RelativeConicArcs/Module.lean
 It defaults to cores `20-23`, one thread, `choom=1000`, and automatically runs through
 `~/.claude/bin/run-quiet`. See `guarded-lean --help` for exceptional overrides.
 
+If several elaborations need the same exceptional overrides, set them once for the current agent
+session instead of repeating environment assignments on every call:
+
+```sh
+lean/scripts/guarded-lean --session-set \
+  LEAN_GUARD_CPUSET=20-21 LEAN_GUARD_THREADS=2 LEAN_GUARD_PROFILE=q25-two-witness
+lean/scripts/guarded-lean RelativeConicArcs/First.lean
+lean/scripts/guarded-lean RelativeConicArcs/Second.lean
+lean/scripts/guarded-lean --session-clear
+```
+
+The wrapper keys the disk-backed settings by `CODEX_THREAD_ID`/the available Claude session ID, so
+concurrent agent sessions do not share overrides. An explicit environment variable on one invocation
+wins over the saved value. Do not create a shared cross-session environment file.
+
 Unattended builds:
 
 ```sh
@@ -100,6 +115,9 @@ lean/scripts/lean-restart-guard.py verify /home/<checkpoint>
 
 - Do not poll a healthy build. Read the runner's atomic `status` only when needed; it distinguishes
   running, success, failure, interruption, and abandoned/OOM state without trusting PIDs.
+- Do not stream or re-request a large Lean failure. `guarded-lean` already logs through `run-quiet`;
+  inspect only the first error and a small neighborhood. More than 10,000 reported original tokens
+  means the diagnostic shape failed and must be narrowed before another elaboration.
 - Never run broad `ps`, `pgrep`, or `df` commands manually. The wrappers perform silent narrow
   checks. If sandbox PID visibility leaves foreign ownership uncertain, stop and ask the owner/user;
   do not infer permission from an empty process result.
