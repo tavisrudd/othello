@@ -3,8 +3,9 @@
 **Lane:** `clebsch`
 
 **Status:** ACTIVE; compact-proof gate. The coordinate and finite-arrangement leaf is kernel-checked
-without generated certificates. The downstream decoder corollary remains to receive its focused
-build after the shared Lean owner lock clears.
+without generated certificates. The downstream decoder corollary
+`lean/RelativeConicArcs/ReflectionArrangementDecoding.lean` is the sole uncommitted task path; it
+must receive its focused build after the foreign Q25 owner releases the shared Lean lock.
 
 ## Objective
 

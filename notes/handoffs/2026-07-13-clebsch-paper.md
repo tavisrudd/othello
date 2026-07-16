@@ -65,7 +65,8 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   intersection ledgers, complement counts, and decoder-stratum consequences. This is gated on a
   compact theorem-level development: do not generate large certificate trees, and re-scope or stop
   if kernel closure would require them. The compact geometry leaf now passes guarded elaboration;
-  its light decoder corollary awaits the shared Lean build lock. Task boundary and success criteria:
+  its sole uncommitted path, `lean/RelativeConicArcs/ReflectionArrangementDecoding.lean`, awaits a
+  focused build after the foreign Q25 owner releases the shared Lean lock. Task boundary and success criteria:
   [`2026-07-16-c222-lean-a3-h3-closure.md`](../2026-07-16-c222-lean-a3-h3-closure.md).
 
 ## Verification map
