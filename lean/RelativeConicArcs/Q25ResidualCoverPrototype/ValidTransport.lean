@@ -10,8 +10,6 @@ set_option maxHeartbeats 300000000
 set_option maxRecDepth 100000
 
 theorem prototypeValid_transport : prototypeValid.TransportValid ⟨40, by decide⟩ := by
-  unfold ValidRowPayload.TransportValid prototypeValid
-  refine ⟨by decide, by decide, ?_⟩
   let sourceA := orbitCodeOfNumber ⟨5, by decide⟩
   let sourceB := orbitCodeOfNumber ⟨40, by decide⟩
   let sourceC := orbitCodeOfNumber ⟨196, by decide⟩
@@ -32,19 +30,14 @@ theorem prototypeValid_transport : prototypeValid.TransportValid ⟨40, by decid
         Q25Normalization.imagPart, GF25.ofNat, GF25.encode] <;> decide
   have index_roundtrip (i : Fin 8) : forwardIndex (inverseIndex i) = i := by
     fin_cases i <;> rfl
-  apply Finset.Subset.antisymm
-  · intro q hq
-    rcases Finset.mem_image.mp hq with ⟨p, hp, rfl⟩
-    rcases exists_configPoint_of_mem_rowConfig _ _ hp with ⟨i, rfl⟩
-    rw [point_transport]
-    exact configPoint_mem targetA targetB targetC (forwardIndex i)
-  · intro q hq
-    change q ∈ rowConfig ⟨61, by decide⟩ ⟨81, by decide⟩ at hq
-    rcases exists_configPoint_of_mem_rowConfig _ _ hq with ⟨i, rfl⟩
-    apply Finset.mem_image.mpr
-    refine ⟨configPoint sourceA sourceB sourceC (inverseIndex i),
-      configPoint_mem sourceA sourceB sourceC (inverseIndex i), ?_⟩
-    rw [point_transport, index_roundtrip]
+  apply ValidRowPayload.transportValid_of_pointTransport forwardIndex inverseIndex
+    (by decide) (by decide)
+  · intro i
+    change residualApply (GF25.ofNat 13) (GF25.ofNat 21)
+        (configPoint sourceA sourceB sourceC i) =
+      configPoint targetA targetB targetC (forwardIndex i)
+    exact point_transport i
+  · exact index_roundtrip
 
 end Q25ResidualCoverPrototype
 end RelativeConicArcs

@@ -39,6 +39,17 @@ theorem exists_configPoint_of_mem_rowConfig (b c : Fin 310) {p : Idx25}
   · exact ⟨5, h.symm⟩
   · exact ⟨7, h.symm⟩
 
+/-- A pointwise certificate for the executable image of a residual row. -/
+def ValidRowPayload.PointTransport (b : Fin 310) (p : ValidRowPayload)
+    (forwardIndex : Fin 8 → Fin 8) : Prop :=
+  ∀ i : Fin 8,
+    residualApply p.y p.z
+        (configPoint (orbitCodeOfNumber ⟨5, by decide⟩)
+          (orbitCodeOfNumber b) (orbitCodeOfNumber p.c) i) =
+      configPoint (orbitCodeOfNumber ⟨5, by decide⟩)
+        (orbitCodeOfNumber p.canonicalB) (orbitCodeOfNumber p.canonicalC)
+        (forwardIndex i)
+
 /-- The normalized representative named by a valid transport payload. -/
 def ValidRowPayload.canonicalConfig (p : ValidRowPayload) : Finset Idx25 :=
   rowConfig p.canonicalB p.canonicalC
@@ -64,6 +75,30 @@ def ValidRowPayload.TransportValid (b : Fin 310) (p : ValidRowPayload) : Prop :=
 instance (b : Fin 310) (p : ValidRowPayload) : Decidable (p.TransportValid b) := by
   unfold ValidRowPayload.TransportValid
   infer_instance
+
+/-- Pointwise transport plus an explicit right inverse proves the finite-set image equality
+without reducing an opaque `Finset` permutation. -/
+theorem ValidRowPayload.transportValid_of_pointTransport {b : Fin 310}
+    {p : ValidRowPayload} (forwardIndex inverseIndex : Fin 8 → Fin 8)
+    (hy : imagPart p.y ≠ 0) (hz : imagPart p.z ≠ 0)
+    (hpoint : p.PointTransport b forwardIndex)
+    (hright : ∀ i : Fin 8, forwardIndex (inverseIndex i) = i) :
+    p.TransportValid b := by
+  refine ⟨hy, hz, ?_⟩
+  apply Finset.Subset.antisymm
+  · intro q hq
+    rcases Finset.mem_image.mp hq with ⟨x, hx, rfl⟩
+    rcases exists_configPoint_of_mem_rowConfig _ _ hx with ⟨i, rfl⟩
+    rw [hpoint i]
+    exact configPoint_mem _ _ _ (forwardIndex i)
+  · intro q hq
+    change q ∈ rowConfig p.canonicalB p.canonicalC at hq
+    rcases exists_configPoint_of_mem_rowConfig _ _ hq with ⟨i, rfl⟩
+    apply Finset.mem_image.mpr
+    refine ⟨configPoint (orbitCodeOfNumber ⟨5, by decide⟩)
+        (orbitCodeOfNumber b) (orbitCodeOfNumber p.c) (inverseIndex i),
+      configPoint_mem _ _ _ (inverseIndex i), ?_⟩
+    rw [hpoint, hright]
 
 theorem ValidRowPayload.map_eq_canonicalConfig {b : Fin 310} {p : ValidRowPayload}
     (h : p.TransportValid b) :
