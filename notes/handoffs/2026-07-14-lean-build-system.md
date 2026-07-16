@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-15
-**Status**: ACTIVE — C162; C205 base runner reported and extended
+**Status**: ACTIVE — C225 notification loop next; C162/C205 base runner remains open
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -33,15 +33,17 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 
 ## Open work, in order
 
-1. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
+1. **C225 completion notification:** implement the accepted design and gates in
+   [`2026-07-16-c225-lean-queue-completion-notification.md`](2026-07-16-c225-lean-queue-completion-notification.md).
+2. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior.
-2. **Restart guard:** complete hermetic failure tests and a lightweight real
+3. **Restart guard:** complete hermetic failure tests and a lightweight real
    checkpoint→restart→audit→verify cycle.
-3. **Blast radius:** parse project-local imports, compute reverse reachability, and rank hubs by
+4. **Blast radius:** parse project-local imports, compute reverse reachability, and rank hubs by
    rebuild cost as well as dependent count.
-4. **Stable checker boundaries:** freeze narrow schemas/checkers; keep transport and paper-facing
+5. **Stable checker boundaries:** freeze narrow schemas/checkers; keep transport and paper-facing
    theorems downstream of generated leaves.
-5. **Isolation/recovery:** demonstrate pack/restore on disposable state and compare shared-tree
+6. **Isolation/recovery:** demonstrate pack/restore on disposable state and compare shared-tree
    discipline with disk-backed per-lane build directories.
 
 ## Gates and non-goals
