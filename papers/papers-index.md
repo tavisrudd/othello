@@ -52,7 +52,7 @@ defect identity and ρ_𝒞(16) = 9*
   classical inclusion `C subset U`; `arcs` publishes the exact equality, coding translation, and
   certificate as an apparently unrecorded synthesis.
 
-**4 · `clebsch-hexagon-code`** — The Clebsch hexagon code: a rigidity theorem for deep holes
+**4 · `clebsch-hexagon-code`** — *The Clebsch hexagon code: rigidity from a conic deep-hole locus*
 (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic)
 - *Status:* full LaTeX working draft + PDF + fourteen Git-indexed Python checkers and one Singular
   replay; conceptual rigidity, low-degree rigidity, decoding ambiguity, the full `A₅` point-orbit
