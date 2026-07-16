@@ -1172,8 +1172,9 @@ $q=16$ classification &
 C++ generator emits local transition and quadratic-evaluation data for
 covering lists of lengths $4/61/454/2633$ &
 Lean checks transition coverage, leaf rejection, frame normalization, and
-projective transport; generator assertions, canonical labels, and
-deduplication are not trusted \\
+the relative-conic transport used for $\rhoC(16)=9$; the body proves the
+coordinate-change transport of arbitrary quadratics.  Generator assertions,
+canonical labels, and deduplication are not trusted \\
 \addlinespace
 $q=11$ code and extension data &
 Lean checks the stated code, syndrome, and graph claims; independently
@@ -1184,6 +1185,15 @@ independent reproducibility checks \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+For the additive lower bound, the formal theorem contains the same cubic
+expansion and the same coefficient estimates isolated in the body's
+elementary estimate.  Along unbounded families of finite-field orders, Lean
+proves unconditionally that every number below $3/2$ is eventually a lower
+bound for the centred parameter.  Its literal real-valued \texttt{liminf}
+wrapper assumes the centred family is cobounded, because a real-valued
+\texttt{liminf} does not represent divergence to $+\infty$; the operational
+statement covers that case as well.
 
 The witness entry point is
 \texttt{verify\_relative\_conic\_arcs.py}.  The classification entry point
