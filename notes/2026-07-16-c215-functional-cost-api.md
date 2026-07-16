@@ -2,7 +2,7 @@
 
 **Lane:** `repairports`
 
-**Status:** unpointed and pointed definition/search slices implemented.
+**Status:** unpointed, pointed-search, and nonzero fiberwise-reduction slices implemented.
 
 ## Result
 
@@ -30,6 +30,17 @@ The pointed extension uses `WithTop Nat` so an empty constrained witness set has
   lower-bound predicate with comparison against the exact cost;
 - `pointedNonembeddedCostSearch_eq` proves that finite exhaustive witness search computes it.
 
+The first-obstruction reduction now avoids full block-word enumeration in the nonzero outer
+functional sector:
+
+- `pointedFunctionalFiberCost` is the infinity-valued minimum cost of representing a functional
+  nontrivially at the distinguished inner coordinate;
+- its `top`/emptiness equivalence, lower bound, and finite-cost attainment are kernel-checked;
+- `pointedFunctionalTupleRealizationCost_eq` proves the exact additive formula: one constrained
+  target-fiber cost plus the ordinary minimum costs of every off-target fiber;
+- `nonzeroOuterPointedRealizationCost_eq_fiberCost` lifts the formula through the infimum over all
+  nonzero outer functional-dual tuples.
+
 ## Validation
 
 Guarded elaboration of `RepairPorts/FunctionalCost.lean` passes. The printed headline theorems use
@@ -41,7 +52,7 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Derive a fiberwise first-obstruction formula for `pointedNonembeddedCost`: separate the
-zero-functional and nonzero outer-functional cases, express the latter through constrained inner
-fiber costs, and prove equivalence to the exhaustive definition. This is the algorithmic reduction
-needed before optimized decoding or examples.
+Close the zero-functional sector and prove that `pointedNonembeddedCost` is the minimum of that
+term and `nonzeroOuterPointedFiberCost`. The nonzero term is already reduced to constrained inner
+fiber costs; the zero term must retain the target-point condition and exclude the embedded
+one-block word without an off-by-one or empty-index convention.

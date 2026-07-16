@@ -169,6 +169,197 @@ theorem functionalFiberCostSearch_eq
 
 end FiniteSearch
 
+/-- An ambient block represents `beta` and is nonzero at the distinguished inner coordinate. -/
+def IsPointedFunctionalRepresentative
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) (w : κ → 𝔽) : Prop :=
+  blockFunctional I e w = beta ∧ w x ≠ 0
+
+/-- Minimum cost of representing `beta` nontrivially at `x`.  The value is `⊤` when the
+constrained functional fiber is empty. -/
+def pointedFunctionalFiberCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) : WithTop ℕ := by
+  classical
+  exact if ∃ w, IsPointedFunctionalRepresentative I e x beta w then
+      ((sInf {n | ∃ w, IsPointedFunctionalRepresentative I e x beta w ∧
+        hammingNorm w = n} : ℕ) : WithTop ℕ)
+    else ⊤
+
+omit [DecidableEq κ] [DecidableEq V] in
+/-- A constrained fiber has infinite cost exactly when it is empty. -/
+theorem pointedFunctionalFiberCost_eq_top_iff
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) :
+    pointedFunctionalFiberCost I e x beta = ⊤ ↔
+      ¬ ∃ w, IsPointedFunctionalRepresentative I e x beta w := by
+  classical
+  simp [pointedFunctionalFiberCost]
+
+omit [DecidableEq κ] [DecidableEq V] in
+/-- Every constrained representative is bounded below by the pointed fiber cost. -/
+theorem pointedFunctionalFiberCost_le
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) (w : κ → 𝔽)
+    (hw : IsPointedFunctionalRepresentative I e x beta w) :
+    pointedFunctionalFiberCost I e x beta ≤ (hammingNorm w : WithTop ℕ) := by
+  classical
+  have hex : ∃ u, IsPointedFunctionalRepresentative I e x beta u := ⟨w, hw⟩
+  simp only [pointedFunctionalFiberCost, if_pos hex]
+  exact WithTop.coe_le_coe.mpr (Nat.sInf_le ⟨w, hw, rfl⟩)
+
+omit [DecidableEq κ] [DecidableEq V] in
+/-- A nonempty constrained fiber has a representative attaining its pointed cost. -/
+theorem exists_pointedFunctionalFiberCost_realizer
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V)
+    (hex : ∃ w, IsPointedFunctionalRepresentative I e x beta w) :
+    ∃ w, IsPointedFunctionalRepresentative I e x beta w ∧
+      (hammingNorm w : WithTop ℕ) = pointedFunctionalFiberCost I e x beta := by
+  let weights : Set ℕ := {n | ∃ w, IsPointedFunctionalRepresentative I e x beta w ∧
+    hammingNorm w = n}
+  obtain ⟨w₀, hw₀⟩ := hex
+  have hnonempty : weights.Nonempty := ⟨hammingNorm w₀, w₀, hw₀, rfl⟩
+  have hmem := Nat.sInf_mem hnonempty
+  change ∃ w, IsPointedFunctionalRepresentative I e x beta w ∧
+    hammingNorm w = sInf weights at hmem
+  obtain ⟨w, hw, hnorm⟩ := hmem
+  refine ⟨w, hw, ?_⟩
+  have hexw : ∃ u, IsPointedFunctionalRepresentative I e x beta u := ⟨w, hw⟩
+  simp only [pointedFunctionalFiberCost, if_pos hexw]
+  exact_mod_cast hnorm
+
+/-- Fiberwise cost of a functional tuple constrained to be nonzero at `(j,x)`: one pointed
+fiber cost plus the ordinary minimum costs of all other blocks. -/
+def pointedFunctionalTupleCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V) : WithTop ℕ :=
+  pointedFunctionalFiberCost I e x (beta j) +
+    ((∑ l ∈ Finset.univ.erase j, functionalFiberCost I e (beta l) : ℕ) : WithTop ℕ)
+
+omit [DecidableEq κ] [DecidableEq V] in
+/-- Every pointed simultaneous realization is bounded below by the fiberwise tuple formula. -/
+theorem pointedFunctionalTupleCost_le
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V)
+    (w : ι → (κ → 𝔽))
+    (hw : ∀ l, blockFunctional I e (w l) = beta l) (hwx : w j x ≠ 0) :
+    pointedFunctionalTupleCost I e j x beta ≤
+      ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) := by
+  classical
+  have hj := pointedFunctionalFiberCost_le I e x (beta j) (w j) ⟨hw j, hwx⟩
+  have herase : (∑ l ∈ Finset.univ.erase j, functionalFiberCost I e (beta l)) ≤
+      ∑ l ∈ Finset.univ.erase j, hammingNorm (w l) := by
+    apply Finset.sum_le_sum
+    intro l _
+    exact functionalFiberCost_le I e (beta l) (w l) (hw l)
+  have hsum : (∑ l, hammingNorm (w l)) =
+      hammingNorm (w j) + ∑ l ∈ Finset.univ.erase j, hammingNorm (w l) := by
+    rw [add_comm]
+    exact (Finset.sum_erase_add _ _ (Finset.mem_univ j)).symm
+  rw [pointedFunctionalTupleCost, hsum]
+  exact add_le_add hj (WithTop.coe_le_coe.mpr herase)
+
+/-- When the distinguished functional fiber is nonempty, the fiberwise tuple cost is attained. -/
+theorem exists_pointedFunctionalTupleCost_realizer
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V)
+    (hex : ∃ z, IsPointedFunctionalRepresentative I e x (beta j) z) :
+    ∃ w : ι → (κ → 𝔽),
+      (∀ l, blockFunctional I e (w l) = beta l) ∧ w j x ≠ 0 ∧
+      ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) =
+        pointedFunctionalTupleCost I e j x beta := by
+  classical
+  obtain ⟨z, hz, hzcost⟩ := exists_pointedFunctionalFiberCost_realizer I e x (beta j) hex
+  choose u hu hucost using fun l => exists_functionalFiberCost_realizer I e (beta l)
+  let w : ι → (κ → 𝔽) := fun l => if l = j then z else u l
+  have hw : ∀ l, blockFunctional I e (w l) = beta l := by
+    intro l
+    by_cases hlj : l = j
+    · subst l
+      simpa [w] using hz.1
+    · simp [w, hlj, hu l]
+  have hwx : w j x ≠ 0 := by simpa [w] using hz.2
+  refine ⟨w, hw, hwx, ?_⟩
+  have herase : (∑ l ∈ Finset.univ.erase j, hammingNorm (w l)) =
+      ∑ l ∈ Finset.univ.erase j, functionalFiberCost I e (beta l) := by
+    apply Finset.sum_congr rfl
+    intro l hl
+    have hlj : l ≠ j := (Finset.mem_erase.mp hl).1
+    simp [w, hlj, hucost l]
+  have hsum : (∑ l, hammingNorm (w l)) =
+      hammingNorm z + ∑ l ∈ Finset.univ.erase j, functionalFiberCost I e (beta l) := by
+    calc
+      (∑ l, hammingNorm (w l)) =
+          (∑ l ∈ Finset.univ.erase j, hammingNorm (w l)) + hammingNorm (w j) :=
+        (Finset.sum_erase_add _ _ (Finset.mem_univ j)).symm
+      _ = (∑ l ∈ Finset.univ.erase j, functionalFiberCost I e (beta l)) +
+          hammingNorm z := by rw [herase]; simp [w]
+      _ = hammingNorm z +
+          ∑ l ∈ Finset.univ.erase j, functionalFiberCost I e (beta l) := by omega
+  rw [hsum, pointedFunctionalTupleCost, Nat.cast_add, hzcost]
+
+/-- The direct infimum over pointed realizations of a fixed functional tuple. -/
+def pointedFunctionalTupleRealizationCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V) : WithTop ℕ :=
+  sInf {n | ∃ w : ι → (κ → 𝔽),
+    (∀ l, blockFunctional I e (w l) = beta l) ∧ w j x ≠ 0 ∧
+      ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n}
+
+/-- **Fiberwise pointed formula.**  The minimum pointed realization cost of a functional tuple is
+the constrained target-fiber cost plus the ordinary minimum costs of all other fibers. -/
+theorem pointedFunctionalTupleRealizationCost_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V) :
+    pointedFunctionalTupleRealizationCost I e j x beta =
+      pointedFunctionalTupleCost I e j x beta := by
+  apply le_antisymm
+  · by_cases hex : ∃ z, IsPointedFunctionalRepresentative I e x (beta j) z
+    · obtain ⟨w, hw, hwx, hcost⟩ :=
+        exists_pointedFunctionalTupleCost_realizer I e j x beta hex
+      apply sInf_le
+      exact ⟨w, hw, hwx, hcost⟩
+    · have hpoint : pointedFunctionalFiberCost I e x (beta j) = ⊤ :=
+        (pointedFunctionalFiberCost_eq_top_iff I e x (beta j)).2 hex
+      have htuple : pointedFunctionalTupleCost I e j x beta = ⊤ := by
+        simp [pointedFunctionalTupleCost, hpoint]
+      simp [pointedFunctionalTupleRealizationCost, htuple]
+  · apply le_sInf
+    intro n hn
+    obtain ⟨w, hw, hwx, rfl⟩ := hn
+    exact pointedFunctionalTupleCost_le I e j x beta w hw hwx
+
+/-- Minimum pointed realization cost over nonzero outer functional-dual tuples. -/
+def nonzeroOuterPointedRealizationCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  sInf {n | ∃ beta, beta ∈ functionalDual O ∧ beta ≠ 0 ∧
+    pointedFunctionalTupleRealizationCost I e j x beta = n}
+
+/-- The fiberwise version of the nonzero outer pointed cost. -/
+def nonzeroOuterPointedFiberCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  sInf {n | ∃ beta, beta ∈ functionalDual O ∧ beta ≠ 0 ∧
+    pointedFunctionalTupleCost I e j x beta = n}
+
+/-- The entire nonzero outer-functional pointed obstruction is computed fiberwise. -/
+theorem nonzeroOuterPointedRealizationCost_eq_fiberCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    nonzeroOuterPointedRealizationCost I e O j x =
+      nonzeroOuterPointedFiberCost I e O j x := by
+  apply congrArg sInf
+  ext n
+  constructor
+  · rintro ⟨beta, hbeta, hbeta0, hcost⟩
+    exact ⟨beta, hbeta, hbeta0,
+      (pointedFunctionalTupleRealizationCost_eq I e j x beta).symm.trans hcost⟩
+  · rintro ⟨beta, hbeta, hbeta0, hcost⟩
+    exact ⟨beta, hbeta, hbeta0,
+      (pointedFunctionalTupleRealizationCost_eq I e j x beta).trans hcost⟩
+
 /-- A nonembedded concatenated-dual witness through the pointed coordinate `(j,x)`. -/
 def IsPointedNonembeddedWitness
     (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
@@ -269,6 +460,10 @@ end PointedFiniteSearch
 #print axioms RepairPorts.exists_functionalTupleCost_realizer
 #print axioms RepairPorts.hasWeightedFunctionalDualDistanceAtLeast_iff_functionalTupleCost
 #print axioms RepairPorts.functionalFiberCostSearch_eq
+#print axioms RepairPorts.pointedFunctionalFiberCost_eq_top_iff
+#print axioms RepairPorts.exists_pointedFunctionalFiberCost_realizer
+#print axioms RepairPorts.pointedFunctionalTupleRealizationCost_eq
+#print axioms RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost
 #print axioms RepairPorts.pointedNonembeddedCost_eq_top_iff
 #print axioms RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost
 #print axioms RepairPorts.pointedNonembeddedCostSearch_eq

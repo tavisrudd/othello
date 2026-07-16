@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-16
 **Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
-unpointed and infinity-valued pointed costs and verified finite-search bridges are implemented.
+costs, verified searches, and nonzero outer-functional fiberwise reduction are implemented.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 
@@ -28,10 +28,10 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Derive a fiberwise first-obstruction formula for the pointed cost, separating zero-functional and
-nonzero outer-functional cases and replacing exhaustive concatenated-word search by constrained
-inner-fiber costs. The canonical costs, exact lower-bound characterizations, and verified finite
-searches are implemented in
+Close the zero-functional pointed sector and prove that the full pointed nonembedded cost is the
+minimum of the zero-functional term and the now-fiberwise nonzero outer-functional term. The
+canonical costs, exact lower-bound characterizations, verified searches, and nonzero reduction are
+implemented in
 [`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
 
 ## Scope and ownership
