@@ -992,3 +992,14 @@ published open problems and questions newly posed by this project.
   Clebsch joins classical in substance even though the exact phrase “Clebsch hexagon = H3” was not
   found. **Disposition — answer in this paper:** present H3 as a recognition/application, not a new
   geometric discovery.
+
+## 2026-07-16 — C222 incidental surprises
+
+- The feared certificate expansion does not occur. The existing Brianchon module already
+  kernel-checks the `10_3,15_2` chord-intersection ledger; the new `H3` layer needs only a small
+  coordinate/projectivity leaf plus a light downstream decoder corollary. **Disposition:** keep the
+  formalization split at that semantic boundary and generate no certificate tree.
+- The characteristic boundary is unusually cheap to make explicit in the kernel: `F_2` has no
+  solution of `tau^2=tau+1`, while the complete characteristic-five projective spectrum reduces in
+  a 31-point transparent check. **Disposition:** retain both as named theorems rather than leaving
+  the modular caveat solely in prose.

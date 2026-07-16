@@ -2,7 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** DESIRED; compact-proof gate.
+**Status:** ACTIVE; compact-proof gate. The coordinate and finite-arrangement leaf is kernel-checked
+without generated certificates. The downstream decoder corollary remains to receive its focused
+build after the shared Lean owner lock clears.
 
 ## Objective
 
