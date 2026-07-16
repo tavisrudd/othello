@@ -108,3 +108,22 @@ common projective eigenlines rather than “fixed eigenspaces”; the terminolog
 “join”; the characteristic-five paragraph names the reflection group `W(H3)`; and the executable
 table no longer attributes the rigidity checker to the `A5` orbit ledger. The introduction now also
 states explicitly that the frame-normalized replay is independent of Sadeh’s thesis.
+
+## Final small-items follow-up
+
+Fable's final pass found no structural issue and isolated five production-level nits. They were
+handled as follows:
+
+- the misleading `c12` suffix was removed from the Singular source and fail-closed wrapper, both of
+  which cover C02, C04, and C12;
+- Table 2 now says explicitly that it is organized by replay rather than row-for-row with Table 1,
+  and the duplicate rigidity-checker entry was consolidated into its syndrome-and-census row;
+- Remark 4.1 now names clause (iii) of Theorem 4.3 below rather than using a bare forward `(iii)`;
+- the repeated arrangement-versus-conic sentence at the end of Section 6.1 was reduced to the
+  factorization conclusion; and
+- a disabled C182 data-and-code-availability paragraph now sits at the start of Section 7, ready
+  to activate once the immutable DOI exists.
+
+The two remaining uses of “projective deep-hole syndrome locus” are deliberate coding-register
+uses, not competing primary terminology: the manuscript otherwise standardizes on `U(A)` and
+“uncovered locus.” The Clebsch page-336 pinpoint remains assigned to the final primary-scan audit.

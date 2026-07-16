@@ -101,8 +101,10 @@ system exactly over `F_11`. A reducible quartic or quintic has a factor of degre
 zero hits prove irreducibility over `F_11`. C15 similarly has no linear factor and is a nonsingular
 conic.
 
-The C12 factorization replay is Git-tracked as
-[`check_low_degree_loci_c12.sing`](../papers/clebsch-hexagon-code/check_low_degree_loci_c12.sing).
+The C02/C04/C12 geometry replay is Git-tracked as
+[`check_low_degree_loci.sing`](../papers/clebsch-hexagon-code/check_low_degree_loci.sing),
+with the fail-closed wrapper
+[`check_low_degree_loci.sh`](../papers/clebsch-hexagon-code/check_low_degree_loci.sh).
 Singular 4.4.1 returns only a unit and the degree-six polynomial, each with multiplicity one.
 
 These `F_11`-irreducibility results imply absolute irreducibility here. If an `F_11`-irreducible
@@ -134,7 +136,7 @@ From `papers/clebsch-hexagon-code/`:
 
 ```bash
 python check_low_degree_loci.py
-nix shell nixpkgs#singular -c Singular -q check_low_degree_loci_c12.sing
+nix shell nixpkgs#singular -c ./check_low_degree_loci.sh
 ```
 
 The Python checker exits nonzero on every asserted rank, kernel, equation, zero-locus, count, or
@@ -181,5 +183,5 @@ Post-integration replay on 2026-07-15:
 
 - `uv run python check_low_degree_loci.py`: all rank, kernel, exact-locus, rational-singularity,
   and low-degree factor assertions passed;
-- `nix shell nixpkgs#singular -c Singular -q check_low_degree_loci_c12.sing`: all absolute
+- `nix shell nixpkgs#singular -c ./check_low_degree_loci.sh`: all absolute
   irreducibility, smoothness, and singular-scheme assertions passed.

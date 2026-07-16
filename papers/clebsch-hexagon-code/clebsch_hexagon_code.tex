@@ -513,8 +513,8 @@ lies on a conic, which is the standing hypothesis throughout the arc
 literature and which the Clebsch hexagon famously fails. The two are
 logically unrelated: they constrain different point sets, and the arcs
 satisfying them are disjoint. Indeed every six-arc lying \emph{on} a conic in
-$\PG(2,11)$ has $|\cU(A)|\in\{18,19,20,22\}$, so by~(iii) none of them comes
-anywhere near the condition of the theorem. This four-value assertion is
+$\PG(2,11)$ has $|\cU(A)|\in\{18,19,20,22\}$, so clause~(iii) of
+Theorem~\ref{thm:rigidity} below excludes all of them. This four-value assertion is
 the conic-inscribed subcensus of the independent rigidity replay listed in
 Table~\ref{tab:replays}.
 \end{remark}
@@ -1180,11 +1180,9 @@ the two size equations are therefore
 \end{array}
 \]
 The extraneous root $q=4$ lies precisely in the bad characteristic-two
-regime, where the displayed $H_3$ reduction degenerates. Thus the
-arrangements organize the surviving sizes $q=5,11$; the separate geometry
-that makes the complements nonsingular conics is
-Proposition~\ref{prop:deep-holes-conic} for the Clebsch case and the direct
-quadratic verification in the proof below for the frame.
+regime, where the displayed $H_3$ reduction degenerates. Thus, in the
+faithful-reduction range, the arrangement factorizations leave precisely
+$q=5$ and $q=11$.
 
 \begin{theorem}[Conic-filling loci for $4\le k\le7$]
 \label{thm:small-k-conic-filling}
@@ -1257,6 +1255,16 @@ implication; executable replays instead enumerate the finite search space
 with exact arithmetic. Paths are relative to
 \path{lean/RelativeConicArcs/} and the paper directory.
 
+% C182 RELEASE GATE: after the immutable archive is published, replace the
+% bracketed DOI, remove \iffalse/\fi, and rebuild the manuscript.
+\iffalse
+\paragraph{Data and code availability.}
+The manuscript source, rendered PDF, executable replays, and Lean development
+are archived at \emph{[C182 DOI]}. The paths in
+Tables~\ref{tab:verification} and~\ref{tab:replays} are relative to that
+archived release.
+\fi
+
 \begin{table}[H]
 \centering
 \footnotesize
@@ -1310,19 +1318,18 @@ in Table~\ref{tab:replays}.}
 Result & Exhaustive or independent executable check \\
 \midrule
 Syndrome conic and rigidity census
-& \path{check_rigidity_degenerate_conic.py} \\
+& \path{check_rigidity_degenerate_conic.py};
+$1548$-representative frame-normalized enumeration \\
 $A_3/H_3$ arrangement synthesis
 & \path{check_reflection_arrangements.py} \\
 Decoding and support bipartition
 & \path{check_decoding.py}; \path{check_chirality.py};
 \path{check_code_automorphisms.py} \\
-Rigidity theorem
-& \path{check_rigidity_degenerate_conic.py};
-$1548$-representative frame-normalized enumeration \\
 Gap and low-degree loci
 & \path{check_global_conic_gap.py}; \path{check_perturbation_gap.py};
 \path{check_low_degree_loci.py};
-\path{check_low_degree_loci_c12.sing} \\
+\path{check_low_degree_loci.sh}
+(invokes \path{check_low_degree_loci.sing}) \\
 Uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
 Clebsch-family formula
@@ -1332,7 +1339,8 @@ The range $4\le k\le7$
 \bottomrule
 \end{tabular}
 \caption{Executable checks, separate from the formal dependencies in
-Table~\ref{tab:verification}.}
+Table~\ref{tab:verification} and organized by replay rather than row-for-row
+parallelism with that table.}
 \label{tab:replays}
 \end{table}
 

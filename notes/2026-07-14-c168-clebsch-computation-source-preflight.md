@@ -87,6 +87,13 @@ perturbation graph.
 
 ## Current-manuscript inventory expansion
 
+Naming note (2026-07-16): after this dated manifest was recorded,
+`check_low_degree_loci_c12.sh` and `check_low_degree_loci_c12.sing` were renamed
+to `check_low_degree_loci.sh` and `check_low_degree_loci.sing` because both cover
+C02, C04, and C12. The historical paths and hashes below are retained as the
+exact record of the clean-source replay; C182 will record fresh hashes for the
+renamed archive artifacts.
+
 C184--C187 add five executable artifacts and four Lean roots. All nine paths are Git-indexed, and
 the Python checkers were replayed from `papers/clebsch-hexagon-code/` with `uv`; each exited zero
 and reached its fail-closed success marker. The Singular replay was separately run with Singular

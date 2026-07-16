@@ -6,7 +6,7 @@ singular=${SINGULAR:-Singular}
 output=$(mktemp)
 trap 'rm -f "$output"' EXIT
 
-"$singular" -q "$script_dir/check_low_degree_loci_c12.sing" | tee "$output"
+"$singular" -q "$script_dir/check_low_degree_loci.sing" | tee "$output"
 
 if grep -Fq 'ASSERTION FAILED' "$output"; then
   exit 1
