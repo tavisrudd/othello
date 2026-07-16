@@ -28,7 +28,8 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
   secant index is the exact weight-two leader count, and the prescribed-hole defect is an exact
   leader-collision identity; equivalently, relative completeness confines all projective
   distance-three syndrome directions to the prescribed algebraic locus;
-- verified small values: ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6 and ρ_𝒞(16) = 9;
+- verified small values: ρ_𝒞(5) = 4, ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6, and
+  ρ_𝒞(16) = 9;
 - for the `q=11` witness, a non-GRS `[6,3,4]₁₁` MDS code of covering radius three with
   exact conic deep-hole locus, coset distribution, chord decomposition, and icosahedral extension
   polynomial `1+12t+36t²+20t³`;
@@ -40,14 +41,12 @@ and a semantic bridge from a generic rules-only coordinate checker to relative c
 finite checks use kernel `decide`, never `native_decide`; the theorem and axiom manifest is
 [`lean/RelativeConicArcs/TRUST.md`](../../lean/RelativeConicArcs/TRUST.md).
 
-**Queued q=5 follow-up (C188).** Clebsch C187's hardened checker verifies by exhaustive exact
-computation that the ordinary-uncovered locus of the standard four-frame in `PG(2,5)` is exactly
-the six points of the nonsingular conic
-`X²+Y²+Z²+XY+XZ+YZ=0`. Together with this paper's `L₂(5)=4` lower bound, that yields the target
-`ρ_𝒞(5)=L₂(5)=4`. C188 will import the witness into the relative-conic semantics, add the theorem to
-the strict-kernel result registry, and then promote it into the verified small-value table. The
-broader `4≤k≤7` conic-filling classification remains owned by
-[`C187`](../../notes/2026-07-15-c187-general-k-arc-conic-filling.md) and will be cited rather than
+**Exact q=5 value (C188).** Clebsch C187's hardened checker verifies that the ordinary-uncovered
+locus of the standard four-frame in `PG(2,5)` is exactly the six points of the nonsingular conic
+`X²+Y²+Z²+XY+XZ+YZ=0`. C188 transports that frame to the standard conic, kernel-checks the
+relative-completeness certificate, and combines it with `L₂(5)=4` to prove
+`ρ_𝒞(5)=L₂(5)=4`. The broader `4≤k≤7` conic-filling classification remains owned by
+[`C187`](../../notes/2026-07-15-c187-general-k-arc-conic-filling.md) and is cited rather than
 duplicated here.
 
 **Exact q=16 classification.** Every projective eight-arc is normalized to the standard

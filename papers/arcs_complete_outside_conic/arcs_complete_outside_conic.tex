@@ -60,8 +60,8 @@ and, for every prime power $q$,
 \[
  \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-We also prove an upper transfer by projective averaging.  Explicit witnesses
-meet the lower bound for $q=8,9,11$.  Over $\F_{16}$, a
+We also prove an upper transfer by projective averaging.  A projective frame
+meets the lower bound at $q=5$, and explicit witnesses do so for $q=8,9,11$.  Over $\F_{16}$, a
 certificate-checked exhaustive covering list shows that no nonzero quadratic
 contains an eight-arc's ordinary-uncovered locus while avoiding the arc;
 hence $\rhoC(16)=9$.
@@ -175,7 +175,8 @@ interpretation all follow.  Its main consequences and applications are:
 \item an exact prescribed-hole defect identity, with equality and stability;
 \item conic lower bounds, including the additive asymptotic term $3/2$;
 \item a projective-averaging upper-bound transfer; and
-\item a certificate-checked quadratic obstruction giving $\rhoC(16)=9$.
+\item exact values at $q=5,8,9,11$, and a certificate-checked quadratic
+      obstruction giving $\rhoC(16)=9$.
 \end{enumerate}
 
 Sections~\ref{sec:classical}--\ref{sec:examples} form the geometric route:
@@ -761,8 +762,9 @@ inequality.
 \section{Verified finite-field examples}
 \label{sec:examples}
 
-The verified values at $q=8,9,11$ use the lower bound $L_2(q)$ and explicit
-coordinates.  At $q=16$, the same ingredients give $8\le\rhoC(16)\le9$;
+The verified values at $q=5,8,9,11$ use the lower bound $L_2(q)$ and explicit
+coordinates.  At $q=5$ the witness is the projective four-frame.  At $q=16$,
+the same ingredients give $8\le\rhoC(16)\le9$;
 a checked projective classification excludes eight.  The proof has three
 steps: the defect bound supplies the lower bound eight; a hypothetical
 $\cC$-complete eight-arc would have its ordinary-uncovered locus on a
@@ -826,6 +828,8 @@ For the standard conic
 \]
 in the indicated projective planes,
 \[
+ \rhoC(5)=4,
+ \qquad
  \rhoC(8)=6,
  \qquad
  \rhoC(9)=6,
@@ -837,10 +841,21 @@ in the indicated projective planes,
 \begin{proof}
 Equation~\eqref{eq:L2} gives
 \[
+ L_2(5)=4,
+ \qquad
  L_2(8)=L_2(9)=L_2(11)=6.
 \]
-Appendix~\ref{app:witnesses} lists $\cC$-complete arcs of size six in each
-plane.  Their verification is described below.
+For $q=5$, the standard four-frame has ordinary-uncovered locus
+\[
+ V(X^2+Y^2+Z^2+XY+XZ+YZ),
+\]
+a nonsingular six-point conic.  An invertible coordinate change carries this
+conic to $XZ=Y^2$ and the frame to the four coordinates in
+Appendix~\ref{app:witnesses}; the relative certificate is checked in Lean.
+The broader classification of conic-filling loci for $4\le k\le7$ is proved
+in the companion treatment~\cite[the conic-filling classification]{RuddClebsch2026}; only its
+$q=5$ witness is used here.  The appendix also lists $\cC$-complete arcs of
+size six for $q=8,9,11$.  Their verification is described below.
 \end{proof}
 
 The ordinary classification of eight-arcs over $\F_{16}$ records arc
@@ -1245,9 +1260,9 @@ frozen outputs.
 \toprule
 Claim & Evidence & Trust boundary \\
 \midrule
-Four upper-bound witnesses &
-Exact Python verifier checks the field model, conic, arc condition,
-coverage, and both secant moments &
+Five upper-bound witnesses &
+Exact checkers verify the field model, conic, arc condition, coverage, and
+the applicable secant moments &
 Certificate check of the displayed coordinates; no search-completeness
 claim \\
 \addlinespace
@@ -1369,6 +1384,15 @@ displayed coordinates and feed the exact-value theorems in the aggregate
 \nolinkurl{verify_relative_conic_arcs.py} regenerates the same witness checks
 but is not part of the Lean trust base.
 
+For $q=5$, coordinates lie in the prime field.  The projective image of the
+standard four-frame used by the certificate is
+\[
+ (1,0,3),(2,1,2),(3,3,4),(1,4,4).
+\]
+It is obtained from the frame by the matrix with rows
+$(1,2,3)$, $(0,1,3)$, $(3,2,4)$, whose determinant is $2$; substitution
+carries the displayed frame conic to a nonzero multiple of $XZ-Y^2$.
+
 For $q=8$, write
 $\F_8=\F_2[\alpha]/(\alpha^3+\alpha+1)$ and encode
 $a_0+a_1\alpha+a_2\alpha^2$ by the binary integer
@@ -1409,6 +1433,11 @@ encoding.  A witness of size nine is
 \]
 
 \begin{thebibliography}{99}
+
+\bibitem{RuddClebsch2026}
+T.~Rudd,
+\newblock The Clebsch hexagon code: rigidity from a conic deep-hole locus,
+\newblock companion manuscript, 2026.
 
 \bibitem{AlabdullahHirschfeld2019}
 S.~Alabdullah and J.~W.~P.~Hirschfeld,

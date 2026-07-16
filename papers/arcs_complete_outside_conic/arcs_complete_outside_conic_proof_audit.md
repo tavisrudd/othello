@@ -45,10 +45,14 @@
 ## Computer-assisted claims
 
 The supplementary verifier checks explicit upper-bound witnesses for
-\(q=8,9,11,16\). It enumerates the whole projective plane, checks the conic,
-arc condition, relative coverage, and both classical moment equations.
+\(q=8,9,11,16\). The C187 small-\(k\) checker independently verifies the
+four-frame conic-filling identity at \(q=5\), and the C188 Lean leaf transports
+that frame to the standard conic and checks the relative certificate. These
+checks enumerate the relevant projective plane and verify the conic, arc
+condition, and relative coverage; the general verifier also checks both
+classical moment equations.
 
-The lower bounds for \(q=8,9,11\), and the preliminary lower bound eight at
+The lower bounds for \(q=5,8,9,11\), and the preliminary lower bound eight at
 \(q=16\), are analytic. The exact value \(\rho_C(16)=9\) additionally uses an
 exhaustive projective classification of eight-arcs.  The source
 `search_rhoc16.cpp` reports 2633 frame-normalized classes.  Its Lean output
@@ -177,7 +181,7 @@ rejected by Lean and the restored sources rebuilt through the final result regis
 exact \(q=16\) value; the paper proves that this route is too weak and uses
   the independent uncovered-quadratic-rank obstruction instead.
 - No exact values for orders whose witnesses were not independently included
-  and checked in the supplementary verifier.
+  and checked by the supplementary verifier or the dedicated q=5 checker.
 - No unconditional novelty certification for the parameter itself.
 - No claim that the 2633-class ordinary eight-arc enumeration is new.
 - No claim that the general evaluation lemma, or the use of quadrics and

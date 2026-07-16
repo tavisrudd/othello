@@ -22,15 +22,16 @@ spinoff.
 | finite-field evaluation dichotomy | common-zero and distinct-hyperplane counts; `exists_ne_zero_forall_apply_ne_zero`; sharp `q+1` plane cover and equality model; `evaluation_avoidance_iff`; `evaluation_ker_le_ker_iff_mem_span`; `feature_evaluation_avoidance_iff` | proved in `EvaluationDichotomy.lean`; the uniform threshold is `|A|≤q`, the rank-sensitive count is `(q-1)q^(r-2)(q+1-m)`, and the feature theorem specializes to every Veronese degree |
 | projective syndrome geometry | distance-one/two/three trichotomy; exact weight-two support count; `completeOutside_iff_distanceThreeDirections_subset`; one-column and simultaneous extension theorems; maximal extension/graph-independence bridge; leader moment and defect restatements | proved in `SyndromeGeometry.lean`; the general simultaneous object includes pair and triple conflicts, while an arc-confined extension locus reduces exactly to the pair graph |
 | transparent coding bridge | `parityCheckCode`; `[n,n-3,4]` MDS parameter package; affine syndrome distance; actual-leader/support cardinality bijection through weight three; exact `choose(n,3)` weight-three leader count; covering-radius-three predicate; indexed projective arc/triple-independence equivalence | proved in `CodingBridge.lean` without an external coding API; codewords, supports, distance, and leaders are explicit finite functions; `card_syndromeLeadersOfWeight_eq_supports` makes the incidence count literally an affine coefficient-word count |
-| finite examples | `Examples.rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all four values exact |
+| finite examples | `Examples.rhoC_ZMod5`, `rho_points_ZMod5`, `rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all five values exact; the q=5 leaf is the projective four-frame transported to the standard conic, then `NonsingularConic.rho_points_eq_rhoC` transports the value to every nonsingular model |
 | q=16 projective classification | `StepBook.coverage`; `StepBooksValid`; `classifiedAt_level8_of_frame`; frame normalization; checked matrix transitions; `Q16QuadraticAvoidance.level8_quadraticAvoidance`; full-rank/forced-hit leaf rejection; `no_completeOutside_GF16_card_eight` | every legal move is represented by a certified transition into the next list, and the books cover the current parent list exactly, so the lists of lengths 4/61/454/2633 form a kernel-checked exhaustive cover; all 2633 listed representatives satisfy the stronger singular-or-nonsingular quadratic obstruction. Lean's global transport declaration is the relative-conic consequence proving `rhoC_GF16 = 9`; the paper supplies the short arbitrary-quadratic coordinate-change transport from an arbitrary eight-arc to a listed leaf |
 | q=9 terminal game | `Q9Terminal.complete`, `legalExtensions_eq_empty`, `isP` | certified witness is an ordinary complete arc and actual terminal projective P-position |
 | q=11 residual game | residual graph theorems, `continuation_rawArc_iff`, `seed_isP` | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
 | q=11 code and extension spectrum | `witness_mds_columns`, `witness_code_minimum_distance_four`, `projective_distanceThreeDirections_eq_standardConic`, `affine_distanceThree_iff_mem_standardConic`, `witness_code_coveringRadius_three`, `mem_affineSyndromesOfDistance_iff`, `affine_coset_distance_distribution`, `syndromeLeaderSupports_two_eq_raw`, `distance_two_leader_distribution`, `no_nonzero_quadratic_vanishing`, `extension_independence_spectrum`, `maximal_extension_spectrum`, `maximal_independent_extension_complete`, `completed_witness_matchings_oneFactorization` | Lean proves the `[6,3,4]₁₁` code/radius/deep-hole claims, including a direct theorem equating actual distance-three nonzero affine syndrome rays with the incidence-defined standard conic; `no_nonzero_quadratic_vanishing` proves the no-conic premise used with the classical NRC/GRS dictionary. The affine distribution and `(900,150,100)` split range over actual syndromes and actual finite coefficient words, with a proved ray bijection and support equality. Every counted maximal extension is ordinarily complete, and the six distinct antipodal additions give a checked one-factorization. |
 | quadratic global count, invisible-center bound, inverse collision balance, and q=25 pair extension | `QuadraticGlobalCount.card_globalLegalPairs_eq_legalCount`, `QuadraticInvisible.s_add_three_sub_f_sub_e_le_card_empty_through_crossPair_center`, `QuadraticInvisible.aggregate_firstOrder_equality_iff_centers_avoid_carriers_and_collisionFree`, `QuadraticInvisible.aggregate_firstOrder_excess_eq_iff_centerIncidence_add_redundancy_eq`, `Q25PairResult.f2_pair_extension`, `Q25ProfileFour.profile_four_pair_extension`, `Q25ProfileZero.profile_zero_pair_extension`, `Q25AllProfiles.pair_extension` | the semantic global finset of fresh legal Frobenius pairs is exactly the disjoint carrierwise union counted by `legalCount`; equality in the aggregate first-order count is exactly universal center/carrier avoidance plus injective local charging, and excess `k` is exactly center-incidence mass plus collision redundancy; every cross-pair orbit in an `(f,e)` profile is invisible on at least the natural-number value `s+3-f-e` empty carriers; every Frobenius-invariant eight-arc over q=25 has a fresh conjugate-pair extension, with both new points explicitly outside the old arc; `f=2` uses checked normalization and all 46,056 finite rows, while `f=0,4` are certificate-free moment/center-incidence proofs and `f=6,8` use the strict count |
 
-The four exact arithmetic thresholds are also explicit theorems:
-`L2_eight = 6`, `L2_nine = 6`, `L2_eleven = 6`, and `L2_sixteen = 8`.
+The five exact arithmetic thresholds are also explicit theorems:
+`L2_five = 4`, `L2_eight = 6`, `L2_nine = 6`, `L2_eleven = 6`, and
+`L2_sixteen = 8`.
 
 ## Certificate contract
 
@@ -60,7 +61,10 @@ Source verifier:
 SHA-256:
 `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`
 
-The coordinate lists in `Examples.lean` are copied verbatim from that verifier:
+The q=5 four-frame is checked separately in `ExampleChecks/Q5.lean`; its displayed coordinates
+are the image of the C187 frame under an invertible matrix carrying its nonsingular conic to the
+standard conic.  The remaining coordinate lists in `Examples.lean` are copied verbatim from the
+general verifier:
 
 - `q=8`: six points over `F₂[a]/(a³+a+1)`, binary polynomial-basis encoding;
 - `q=9`: six points over `F₃[a]/(a²+1)`, encoding `a₀+3a₁`;
@@ -154,8 +158,8 @@ provenance only; the theorem depends on the emitted data through kernel-checked 
 
 `#print axioms` for the cap-game localization and parametrized-value bridges, the ordinary
 coverage checker, `Certificate.check_sound`,
-`rhoC_le_length_of_check`, the complete-affine specialization and equality criterion, all four
-`L2` theorems, all four final finite-example theorems, the
+`rhoC_le_length_of_check`, the complete-affine specialization and equality criterion, all five
+`L2` theorems, all five final finite-example theorems, the
 q=16 eight-arc nonexistence theorem, the q=9 terminal P theorem, q=11 residual and actual
 seeded P theorems, the q11 MDS/radius/deep-hole/leader/extension/chord theorems, and the public
 syndrome/coding bridges, together with the public finite-field evaluation-dichotomy, quantitative-count,
