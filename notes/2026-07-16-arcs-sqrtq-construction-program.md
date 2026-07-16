@@ -50,8 +50,12 @@ description of variable-height graph or partial-coset repairs for the uncovered 
 complement. That reduction is now explicit: one universal chord-height formula controls coverage,
 and the internal graph-arc condition is `1+g[r,s,u] != 0` in terms of second divided differences.
 Full affine-height layers add no legal examples beyond the constant layers at `s=3,4,5,7,8`.
-Next reduce quadratic heights by coordinate equivalence or derive their trace/norm obstruction,
-rather than starting a raw coefficient census.
+For quadratic heights, every two-repair/one-seed collision is now equivalent to one quadratic over
+the subfield splitting distinctly, giving an explicit discriminant/absolute-trace gate. Twelve
+genuinely nonlinear full layers survive at `s=8`; their `3s=24` arcs leave nineteen points, and two
+points at infinity complete the best one. No nonlinear layer survives the other four tested orders.
+Next normalize the twelve survivors under the conic stabilizer, seed exchange, and Frobenius, then
+express their uncovered locus in trace/norm coordinates before testing another order.
 
 ## C201 input
 

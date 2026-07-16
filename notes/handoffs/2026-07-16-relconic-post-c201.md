@@ -44,8 +44,12 @@ by the `build-sys` lane.
    coverage equations for a graph or partial-coset repair of at most `s` points. Those equations
    now reduce internal arc legality to the second-divided-difference condition
    `1+g[r,s,u] != 0`; full affine-height graphs add nothing beyond the constant layers throughout
-   the five tested orders. Next quotient quadratic heights by coordinate equivalence or derive a
-   trace/norm obstruction before any coefficient census. See
+   the five tested orders. For quadratic heights, each
+   two-repair/one-seed collision is equivalent to one subfield quadratic splitting distinctly.
+   Twelve genuinely nonlinear `3s=24` repair arcs survive at `s=8`, all with nineteen uncovered
+   points; two points at infinity complete the best to an ordinary 26-arc. No nonlinear layer
+   survives at `s=3,4,5,7`. Next normalize the twelve survivors under the conic stabilizer, seed
+   exchange, and Frobenius and identify their trace/norm pattern; do not widen the order census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

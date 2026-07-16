@@ -241,6 +241,56 @@ graphs with `g(r)=0` for some `r`:
 Every legal affine graph has `a=0`, so this class recovers exactly the constant repair layers and
 adds nothing at the tested orders. This is bounded evidence, not a uniform nonexistence proof.
 
+## Fourth coordinate gate: quadratic heights
+
+Take the full coset `T=F` and
+
+```text
+g(r)=a*r^2+b*r+c,                 A=a+1 != 0.
+```
+
+Condition `A!=0` is exactly the internal repair-arc condition from (3). For two repair parameters
+`r,s`, put `p=r+s`, `q=rs`, and for a seed parameter `t` put `T=t-eta`. Formula (2) simplifies to
+
+```text
+H(t) = -T^2 + T*(A*p+b) + c - A*q.
+```
+
+For a seed point of height `c0`, collision is therefore equivalent to
+
+```text
+q-T*p = A^(-1)*(-T^2+b*T+c-c0).                         (5)
+```
+
+Because `T` is outside `F`, the map `(p,q) -> q-T*p` is an `F`-linear bijection from `F^2` to `E`.
+Thus (5) determines one pair `(p,q)` for each seed point, and a collision occurs exactly when
+`X^2-pX+q` has two distinct roots in `F`. In odd characteristic this says that
+`p^2-4q` is a nonzero square. In characteristic two it says `p!=0` and
+`Tr_F/GF(2)(q/p^2)=0`. This is the promised discriminant/trace gate; it replaces all repair-pair
+enumeration by `2s` split-polynomial tests per coefficient triple.
+
+The coefficient probe first applies `A!=0`, then conic avoidance, then the one-repair/two-seed
+conditions from (1), and finally (5). A direct projective line-count assertion independently checks
+every surviving full arc.
+
+| `s` | quadratic graphs | pointwise seed-legal | full arc-legal | nonlinear full arcs | best required uncovered | greedy completion |
+|---:|---:|---:|---:|---:|---:|---:|
+| 3 | 1,458 | 0 | 0 | 0 | -- | -- |
+| 4 | 12,288 | 1 | 1 | 0 | 2 | 14 |
+| 5 | 62,500 | 2 | 2 | 0 | 0 | 15 |
+| 7 | 705,894 | 14 | 0 | 0 | -- | -- |
+| 8 | 1,835,008 | 175 | 47 | 12 | 19 | 26 |
+
+At `s=3,4,5` the quadratic class adds nothing beyond constants. At `s=7`, fourteen graphs clear
+the pointwise seed-secant gate but every one fails the split-polynomial gate. At `s=8`, twelve
+genuinely nonlinear graphs survive; all leave exactly nineteen ordinary (hence required) points
+uncovered. The best `3s=24` arc becomes an ordinary complete 26-arc after adding two points at
+infinity. The twelve nonlinear survivors form three raw coefficient blocks of four in the frozen
+output, giving a small orbit-recognition problem for the next symbolic pass.
+
+This is the first viable nonconstant repair class, but it remains bounded evidence: it supplies no
+infinite construction and does not improve the paper's known numerical upper bounds.
+
 Reproduction:
 
 ```text
@@ -255,6 +305,7 @@ Repair-graph checker and affine-class probe:
 ```text
 python3 papers/arcs_complete_outside_conic/check_c210_repair_graph_equations.py
 python3 papers/arcs_complete_outside_conic/probe_c210_affine_coset_repairs.py
+python3 papers/arcs_complete_outside_conic/probe_c210_quadratic_coset_repairs.py
 ```
 
 Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
@@ -266,11 +317,12 @@ c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_rep
 936763d50ddd5cdddc7aa1289fcb8cd99822efc0a84b066ce1ede6f787669f31  check_c210_repair_graph_equations_output.txt
 7c6634f651ad8436fd70b23a6511fd0f20d32926aeb50cd440204dd3695527bd  probe_c210_affine_coset_repairs.py
 040d38cac56d61efbd99899c39c23991bdc123b3c09fcb2f845ece4228a32fdc  probe_c210_affine_coset_repairs_output.txt
+56f9781d8d6abd0218f2d3fd2bb453fe6d1ee16928b1e5c5bcc7bc4f883c611c  probe_c210_quadratic_coset_repairs.py
+02ec5f85c1658a4d21724fc58872b2d94e3d8140a5b423c6b57f2d725b3ea4ce  probe_c210_quadratic_coset_repairs_output.txt
 ```
 
-The next gate is genuinely nonlinear. A quadratic height has constant second divided difference,
-so `g(r)=a*r^2+b*r+c` satisfies the internal repair-arc condition exactly when `a != -1`; equations
-(1) and (2) then impose the seed-collision and coverage constraints. Before testing all coefficients,
-quotient this class by parameter translation and conic-stabilizing coordinate changes, or derive a
-trace/norm obstruction from (2). A partial domain `T proper subset F` remains available if every
-full quadratic layer is forced to collide.
+The next gate is to normalize the twelve `s=8` nonlinear survivors under parameter translation,
+the affine conic stabilizer, seed-layer exchange, and Frobenius. Extract invariant coefficient
+relations and rewrite their nineteen-point uncovered locus in trace/norm coordinates. Only then
+ask whether the pattern extends to `s=2^m`; a partial domain `T proper subset F` remains available
+if the full quadratic layer cannot cover uniformly.
