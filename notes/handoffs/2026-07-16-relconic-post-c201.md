@@ -36,9 +36,11 @@ by the `build-sys` lane.
 
 1. **C210 — square-root construction program.**  The initial mechanism audit proves an
    infinite-family obstruction for arcs contained in one Baer subplane and selects the genuinely
-   Baer-transversal route. Next derive the coordinate pair-intersection maps and test
-   planar-function, relative-difference-set, and two-layer realizations symbolically before any
-   new census. See
+   Baer-transversal route. The first two-layer parabola family is a uniform conic-disjoint `2s`-arc
+   and an ordinary complete 6-arc at `s=3`, but direct relative coverage fails for `s=4,5,7,8`.
+   Greedy completion remains near `3s` in the larger tested fields. Next characterize its uncovered
+   product-image complement and prove a uniform at-most-`s` compatible repair layer or a structural
+   obstruction; do not widen the finite search. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

@@ -91,3 +91,73 @@ construction-side form of defect.
   forbidding collinear triples.
 
 No infinite C210 construction or global obstruction is claimed yet.
+
+## First coordinate gate: two parallel subfield parabolas
+
+Let `E/F` be quadratic with `|F|=s`, and choose nonzero `alpha,beta in E` with
+`delta=beta-alpha` outside `F`. In affine coordinates put
+
+```text
+A(alpha,beta) = {[1:t:t^2+alpha] : t in F}
+              union {[1:t:t^2+beta] : t in F}.
+```
+
+This is a `2s`-arc disjoint from the standard conic `XZ=Y^2`. Each layer is a parabola. For two
+parameters `t,u` in one layer and `v` in the other, the mixed determinant is, up to sign,
+
+```text
+(u-t) ((v-t)(v-u) + delta).
+```
+
+The product lies in `F`, while `delta` does not, so it cannot vanish; the repeated-parameter case
+reduces to `(u-t)delta`. This proves the arc condition uniformly.
+
+Write an affine point as `[1:y:z]` and `h=z-y^2`. Same-layer chords cover values
+
+```text
+h = c - (y-t)(y-u),        c in {alpha,beta}, t != u in F.
+```
+
+For a mixed chord from parameters `t` and `t+d`, put `lambda=(y-t)/d`. Then
+
+```text
+h = alpha + lambda delta + d^2 lambda(1-lambda),   d in F^*.
+```
+
+The `d=0` mixed chords are the vertical lines `y=t`, so they cover every affine point whose
+`y`-coordinate lies in `F`. These formulas reduce the remaining coverage question to explicit
+quadratic product-image sets over `F`; no projective-plane census is needed.
+
+The structured offset exhaustion gives:
+
+| `s` | ambient `Q=s^2` | seed size | offset pairs | best required uncovered | relative-complete seeds | greedy completion size |
+|---:|---:|---:|---:|---:|---:|---:|
+| 3 | 9 | 6 | 21 | 0 | 9 | 6 |
+| 4 | 16 | 8 | 84 | 14 | 0 | 14 |
+| 5 | 25 | 10 | 230 | 10 | 0 | 14 |
+| 7 | 49 | 14 | 987 | 98 | 0 | 20 |
+| 8 | 64 | 16 | 1736 | 330 | 0 | 24 |
+
+Thus the pure two-layer family is closed as a direct construction beyond the `Q=9` exception. It is
+nevertheless a much higher-coverage q=64 seed than the C201 families. Deterministically adding the
+off-conic uncovered point with maximum new required coverage finishes the displayed seeds at sizes
+`6,14,14,20,24`; for `s=5,7,8` this is at most `3s`, and the resulting arcs are ordinarily complete.
+This is bounded evidence only, not an `O(s)` theorem.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/probe_c210_two_layer_parabolas.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/probe_c210_two_layer_parabolas_output.txt`.
+
+```text
+371aeb802996d3c235bbc625bfd27b7c07d8f4eef0af89ea2897ad7977619224  probe_c210_two_layer_parabolas.py
+efd531f2d6568837a1e00f485ed80c459b3d7c539f988439920dd0ab7d7e2824  probe_c210_two_layer_parabolas_output.txt
+```
+
+The next symbolic gate is now precise: characterize the uncovered product-image complement and
+either give at most `s` mutually compatible repair points for every `s`, or prove that a uniform
+repair layer cannot preserve the arc condition. Do not enlarge the finite search before that step.
