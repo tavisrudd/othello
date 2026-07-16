@@ -140,6 +140,15 @@ theorem h3_dual_projectivity_maps_mirrors (i : Fin 15) :
     SameDirection (h3DualProjectivity (h3Join i)) (rawChordLine (chordEdge i)) := by
   fin_cases i <;> decide
 
+/-- Projectivity transports mirror incidence multiplicity pointwise to the existing Clebsch
+secant-index function.  This is the structural bridge used by the decoder corollary, stronger than
+an equality of aggregate spectra. -/
+theorem h3_multiplicity_eq_rawPointIndex :
+    ∀ p : Fin 133,
+      (Finset.univ.filter fun i : Fin 15 => dot (h3Join i) (projectiveVec p) = 0).card =
+        rawPointIndex (h3Projectivity (projectiveVec p)) := by
+  decide
+
 /-- Multiplicity of a canonical projective point in the reduced `H3` arrangement. -/
 def h3Multiplicity (p : Fin 133) : ℕ :=
   (Finset.univ.filter fun i : Fin 15 => dot (h3Join i) (projectiveVec p) = 0).card
@@ -268,6 +277,7 @@ theorem a3_conic_size_factorization (q : ℤ) :
 #print axioms h3_joins_are_root_directions
 #print axioms h3_projectivity_maps_fivefold_points
 #print axioms h3_dual_projectivity_maps_mirrors
+#print axioms h3_multiplicity_eq_rawPointIndex
 #print axioms h3_intersection_spectrum
 #print axioms h3_fivefold_points_exact
 #print axioms h3_characteristic_two_boundary
