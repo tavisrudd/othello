@@ -77,7 +77,10 @@ The strict weighted example in `RepairCodes.WeightedStrictExample` takes the cla
 regular-action/disjoint-multiplier fact as an explicit theorem argument, not an axiom.  From that
 argument Lean proves the generalized-SPC functional-dual description, exact functional support
 distance five, weighted distance at least six, coordinate surjectivity, and literal completed-seed
-radius-four repair-hypergraph transfer.  Singer's theorem is cited in the manuscript.
+radius-four repair-hypergraph transfer.  Lean also proves that the seed has twenty coordinate
+classes, that unit realization cost is exactly membership in a nonzero scalar coordinate orbit,
+and that dual distance three makes those orbits pairwise distinct.  Singer's theorem is cited in
+the manuscript.
 
 ## Projectively completed seed
 

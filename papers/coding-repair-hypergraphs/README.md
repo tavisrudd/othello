@@ -39,8 +39,9 @@ For the completed seed, a Singer-shifted generalized single-parity-check outer c
 distance five but weighted distance at least six, proving exact radius-four transfer strictly
 beyond the old distance-six gate. The exact case partition, both closed-term directions,
 the coordinate-surjective threshold coincidence, generalized-SPC identification, and the
-averaging/five-fiber deduction are kernel-checked. Singer regularity and the fiber-enumerator
-identity are cited classical inputs.
+twenty-class unit-cost orbit identification, orbit distinctness, and averaging/five-fiber
+deduction are kernel-checked. Singer regularity and the fiber-enumerator identity are cited
+classical inputs.
 
 The support-distance corollary preserves the complete radius-three repair hypergraph blockwise.
 Using a degree-four extension and Stichtenoth's self-dual outer codes gives an unbounded `GF(9)`

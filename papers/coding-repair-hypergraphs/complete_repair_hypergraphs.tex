@@ -1020,9 +1020,12 @@ Averaging translates gives
  =\frac{|S|^2}{820}=\frac{400}{820}<1.
 \]
 Hence some multiplier $a$ has $S\cap aS=\varnothing$.  In the Lean layer,
-Singer regularity is the cited geometric input; the regular-action count,
-$400<820$, and the deduction of a disjoint translate are separated explicitly
-from the subsequent code-theoretic theorem.  For such an $a$,
+the twenty-coordinate count, the exact characterization of unit-cost
+functionals as nonzero scalar multiples of coordinate functionals, and the
+distinctness of their projective classes are kernel-checked.  Singer regularity
+is the cited geometric input; the regular-action count, $400<820$, and the
+deduction of a disjoint translate are separated explicitly from the subsequent
+code-theoretic theorem.  For such an $a$,
 take the generalized single-parity-check outer code
 \[
  O_a=\{(u_1,\ldots,u_5)\in L^5:
@@ -1378,7 +1381,8 @@ exact $\delta_{\rm emb}$ formula in lower-bound-profile form, the
 coordinate-surjective threshold coincidence, confinement below that threshold,
 and the resulting literal repair-hypergraph equality.  For the strict example,
 Lean additionally checks the generalized-SPC functional dual, exact functional
-distance five, weighted distance at least six from a Singer-disjoint unit-cost
+distance five, the seed's twenty distinct projective unit-cost coordinate
+classes, weighted distance at least six from a Singer-disjoint unit-cost
 multiplier, coordinate surjectivity, and exact radius-four transfer for the
 completed seed.  Only Singer's cited regular-action theorem is taken as the
 geometric input.  The polynomial enumerator identity is used only as the cited
