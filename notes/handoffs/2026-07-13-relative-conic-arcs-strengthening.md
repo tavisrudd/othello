@@ -37,8 +37,9 @@ carry:
   current state of every claim is in the
   [novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md) (this lane has no
   false-novelty rows).
-- **Prop 8.7** is what `clebsch` cites as its companion reference (it had gone stale as "Prop 4.6");
-  re-sync if this paper renumbers again.
+- **Proposition 8.7** now contains the q=11 code/coset spectrum, while **Proposition 8.8** contains
+  the extension complex and chord decomposition. The `clebsch` edge-level companion citation must
+  point to Proposition 8.8 after the prose revision; perform that edit only in the `clebsch` lane.
 
 ## Goal
 

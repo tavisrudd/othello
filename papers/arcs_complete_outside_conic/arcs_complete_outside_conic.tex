@@ -60,26 +60,23 @@ and a quantitative stability estimate.  In particular, for every prime power $q$
 \]
 Conversely, if $H$ is any prescribed set and an ordinary complete $b$-arc
 satisfies $b|H|<q^2+q+1$, projective averaging moves it off $H$; the conic
-case gives $\rhoC(q)\le \tmin$ whenever $\tmin\le q$.  We also give tangent
-and parity constraints in even characteristic.  A sharp finite-field
-evaluation dichotomy packages the quadratic obstruction for arbitrary
-feature maps, and the arc--MDS dictionary turns the defect identity into an
-exact syndrome-leader collision identity.  Directly checkable witnesses
-give
+case gives $\rhoC(q)\le \tmin$ whenever $\tmin\le q$.  We also derive
+even-characteristic nucleus constraints and formulate the quadratic
+obstruction as a finite-field evaluation criterion.  Together with the
+lower bounds below, explicit witnesses give
 \[
  \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
  \qquad \rhoC(16)=9.
 \]
-A classification of all $2633$ projective eight-arcs over $\F_{16}$ proves
-the stronger statement that no nonzero quadratic can contain an eight-arc's
-ordinary-uncovered locus while avoiding the arc.  A supplementary verifier
-checks the witnesses, while a companion Lean formalization proves the theorem
-chain and kernel-checks the local classification, quadratic obstruction,
-projective reduction, and exact $q=16$ conclusion.  For the six-point
-$q=11$ witness it certifies the no-conic premise which, by the classical
-normal-rational-curve dictionary, makes the associated $[6,3,4]_{11}$ MDS
-code projectively non-GRS; it also proves covering radius three, the exact
-coset and extension spectra, and the icosahedral simultaneous-extension complex.
+The last equality follows from a certified classification of all $2633$
+projective eight-arcs over $\F_{16}$: no nonzero quadratic contains an
+eight-arc's ordinary-uncovered locus while avoiding the arc.  Supplementary
+checkers and a companion Lean development verify the witnesses, theorem
+chain, and finite classification certificates.  The arc--MDS dictionary
+also turns the defect into a syndrome-leader collision identity; for the
+$q=11$ witness it yields a non-GRS MDS code whose deep-hole locus is the
+conic and whose simultaneous extensions form the icosahedral independence
+complex.
 \end{abstract}
 
 \section{Introduction}
@@ -133,21 +130,12 @@ one-dimensional set that must be covered, rather than an exceptional set
 that may remain uncovered.  Here the selected arc is required to avoid the
 conic.
 
-There is also classical work on \emph{complete exterior sets} of a conic:
-sets of $(q+1)/2$ exterior points whose pairwise joins are exterior lines; see
-Blokhuis--Seress--Wilbrink~\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992},
-who report that, up to isomorphism, one of the two $q=11$ configurations is a
-six-arc.  This is the configuration described thirty-five years earlier by
-Edge~\cite[\S\S29--32]{Edge1956}, who named it a \emph{Clebsch hexagon} after
-its real-plane antecedent.  This is a
-different condition from prescribed-hole completeness: it constrains how
-the selected points meet the conic, whereas Definition~\ref{def:relative}
-requires their secants to cover the complementary off-conic locus.  The
-$q=11$ witness below has all of its secants exterior to the conic, making
-this literature directly relevant even though the paper's completeness
-condition is different.  In uncovered-locus notation, the classical
-exterior-set condition and prescribed-hole completeness point in opposite
-directions.  If
+There is also classical work on \emph{complete exterior sets}: sets of
+$(q+1)/2$ exterior points whose pairwise joins miss the
+conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.  This condition constrains
+the joins of the selected points, whereas Definition~\ref{def:relative}
+requires those joins to cover the complementary off-conic locus.  The two
+conditions therefore point in opposite directions.  If
 \[
  U(A)=\PG(2,q)\setminus
  \left(A\cup\bigcup_{\{a,b\}\in\binom A2}ab\right)
@@ -163,19 +151,8 @@ is the ordinary-uncovered locus, then
      U(A)=\cC(\F_q).
  \end{aligned}
 \]
-The first inclusion can be strict.  Blokhuis--Seress--Wilbrink's $q=7$
-exterior four-arc has all six joins external to the eight-point
-conic~\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.  For
-every four-arc in $\PG(2,q)$, the six secants have exactly three repeated
-off-arc intersection points, so
-\[
- |U(A)|=(q^2+q+1-4)-\bigl(6(q-1)-3\bigr)=(q-2)(q-3).
-\]
-Thus their $q=7$ example has $|U(A)|=20>8=|\cC(\F_7)|$ and is not
-$\cC$-complete.  At $q=11$, complete exteriority gives only
-$\cC(\F_{11})\subseteq U(A)$.  The reverse inclusion used below follows by
-combining Dye's ten-Brianchon-point result with the elementary chord-defect
-count; it is not stated in the BSW paper.
+The strict $q=7$ example and the exceptional equality at $q=11$ return in
+Section~\ref{sec:examples}.
 
 The point index with respect to an arc, and the first two double-counting
 equations for its distribution, are classical; compare
@@ -192,38 +169,25 @@ used to control overlap have an exact remainder.  This produces:
 \item a quantitative stability bound for near equality;
 \item a strengthened lower bound with additive asymptotic term $3/2$;
 \item a projective-averaging upper-bound transfer from ordinary complete
-      arcs;
-\item characteristic-two nucleus constraints;
-\item an exact evaluation-avoidance dichotomy and a coding-theoretic form of
-      the prescribed-hole defect; and
-\item small finite-field results whose upper bounds are independently
-      verifiable from explicit coordinates.
+      arcs.
 \end{enumerate}
 
-Thus the classical scaffolding is the secant-index equations, the
-Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS dictionary, and standard
-saturating-set terminology.  The new claims isolated here are the
-prescribed-hole parameter, the exact remainder after the exceptional-set
-split (including its equality and stability consequences), and the use of
-the ordinary-uncovered locus as an evaluation obstruction.  The defect
-identity is deliberately an exact accounting theorem derived from the two
-classical moments; its content is the identified nonnegative remainder and
-the consequences obtained by retaining it, not a claim that the underlying
-moments are new.
+We then develop three applications of this spine: characteristic-two
+nucleus constraints, an evaluation and coding interpretation, and verified
+small-field results culminating in $\rhoC(16)=9$.
 
-A targeted literature search across complete and saturating arcs,
-almost-complete conic subsets, prescribed-line coverage, arcs and quadrics,
-and the published classification of arcs in $\PG(2,16)$ did not locate
-Definition~\ref{def:relative} or the exact defect identity below in this
-form.  This observation is not a priority certificate: the proofs are
-elementary consequences of classical index equations, and terminology
-involving relative saturation or holes may occur elsewhere.
+The classical inputs are the secant-index equations, the Lunelli--Sce
+$\sqrt{2q}$ scale, the arc--MDS correspondence, and the known $q=11$
+Clebsch geometry.  The contributions here are the prescribed-hole remainder
+and its consequences, the uncovered-locus evaluation obstruction, and the
+certified relative-conic conclusions stated above.
 
 \section{The classical secant equations}
 \label{sec:classical}
 
-Throughout the remainder of the paper, $q\ge3$ and $k\ge3$.  Let $\Pi$ be a projective plane of order $q$, let $A$ be a $k$-arc in
-$\Pi$, and let $r_A(x)$ be the number of secants of $A$ through
+Throughout the remainder of the paper, $q\ge3$ and $k\ge3$.  Let $\Pi$ be
+a projective plane of order $q$, and let $A$ be a $k$-arc in $\Pi$.  Write
+$r_A(x)$ for the number of secants of $A$ through
 $x\in\Pi\setminus A$.  We usually write $r(x)$.  Put
 \[
  N=\binom{k}{2},
@@ -488,9 +452,7 @@ distinct leader supports, and Theorem~\ref{thm:defect} is an exact
 leader-collision remainder identity after prescribed directions are removed.
 In particular, Corollary~\ref{cor:arbitrary-holes} is also a length
 obstruction for projective codimension-three MDS codes whose distance-three
-syndrome directions are confined to the prescribed projective set.  This is
-a reformulation of the geometric theorem, not a claim that the arc--MDS or
-deep-hole dictionaries are new.
+syndrome directions are confined to the prescribed projective set.
 
 \section{Specialization to a conic}
 \label{sec:conic}
@@ -564,12 +526,6 @@ L_2(q)&4&6&6&6&7&8&8&8
 \]
 Thus the second-moment correction alone proves, for example, that a
 $\cC$-complete arc in $\PG(2,16)$ has at least eight points.
-At $q=5$, the matching lower bound $L_2(5)=4$ has a four-frame witness:
-the companion Clebsch analysis checks that its ordinary-uncovered locus is
-the full rational point set of a nonsingular conic.  A queued follow-up will
-import that witness into the present formal semantics and promote the derived
-target $\rhoC(5)=4$ into the verified small-value theorem; the companion owns
-the broader classification for arcs of sizes four through seven.
 
 \begin{theorem}[Explicit additive lower bound]
 \label{thm:asymptotic}
@@ -618,8 +574,11 @@ side is exactly
  +\frac{-a^3+5a^2-8a+6}{2}.
 \]
 For $0\le a\le2$, the last three coefficients are at most
-$5/2$, $1$, and $3$, respectively.  Since $s\ge2$, their total
-contribution is at most $4s^2$.  The displayed difference is nonnegative,
+$5/2$, $1$, and $3$, respectively.  Since $s\ge2$,
+\[
+ \frac52s^2+s+3\le4s^2,
+\]
+so their total contribution is at most $4s^2$.  The displayed difference is nonnegative,
 and hence
 \[
  0\le \frac{2a-3}{4}s^3+4s^2.
@@ -803,6 +762,18 @@ The verified values at $q=8,9,11$ use the lower bound $L_2(q)$ and explicit
 coordinates.  At $q=16$, the same ingredients give $8\le\rhoC(16)\le9$;
 a checked projective classification excludes eight.
 
+Complete exteriority supplies a useful foil.  For every four-arc, the six
+secants have three repeated off-arc intersection points, and hence
+\[
+ |U(A)|=(q^2+q+1-4)-\bigl(6(q-1)-3\bigr)=(q-2)(q-3).
+\]
+Blokhuis--Seress--Wilbrink's $q=7$ exterior four-arc therefore has
+$|U(A)|=20>8=|\cC(\F_7)|$: its conic lies strictly inside the uncovered
+locus~\cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.  The $q=11$ witness
+below is exceptional because the reverse inclusion also holds.
+
+\subsection{Evaluation obstruction}
+
 The algebraic rejection used in that classification is an instance of the
 following elementary linear-algebra observation.  Linear systems of
 quadrics containing arcs are an established tool; see Glynn~\cite{Glynn1994}
@@ -812,6 +783,11 @@ linear system of homogeneous forms, write
 $\operatorname{ev}_x\in V^*$ for evaluation at the representative of $x$.
 The zero or nonzero status of this evaluation is independent of the chosen
 representative.
+
+Indeed, if an arc is complete outside a conic, then its ordinary-uncovered
+locus lies in the zero set of the conic equation while every selected point
+avoids that zero set.  The next lemma isolates exactly the linear-algebraic
+obstruction used to rule this out at $q=16$.
 
 \begin{lemma}[Uncovered evaluation obstruction]
 \label{lem:evaluation-obstruction}
@@ -881,6 +857,8 @@ Lemma~\ref{lem:evaluation-obstruction} is the one-selected-point exclusion
 mechanism, while Proposition~\ref{prop:evaluation-dichotomy} determines
 exactly when a single form can avoid as many as $q$ selected points.
 
+\subsection{Small values and the $q=16$ classification}
+
 \begin{proposition}\label{prop:small-values}
 For the standard conic
 \[
@@ -919,40 +897,31 @@ The assertion includes singular quadratic forms.
 \end{theorem}
 
 \begin{proof}
-Any four points of $A$ form a projective frame.  Normalize that frame and
-apply canonical augmentation.  This gives respectively $4$, $61$, $454$,
-and $2633$ projective classes at sizes five through eight (from $182$, $532$,
-$5155$, and $21495$ legal extensions).  Every retained transition is
-certified by an invertible $3\times3$ matrix together with pointwise
-projective scalar equalities, so the classification does not trust the
-canonical-labeling program.  The final count of $2633$ projective eight-arc
-classes independently reproduces Theorem~3.8.1 of
-Al-Seraji--Al-Ogali~\cite{AlSerajiAlOgali2018}; the count itself is not new.
-More specifically, each \texttt{StepBook.coverage} theorem says that every
-legal one-point extension of its parent is represented by a certified entry,
-and \texttt{StepBooksValid} says that the books cover the current parent list
-in exactly its listed order.  Every entry carries a checked projective
-equivalence to a member of the next list.  The theorem
-\texttt{classifiedAt\_level8\_of\_frame} composes those equalities, and the
-frame-reduction theorem transports an arbitrary eight-arc into a listed
-leaf.  Thus closure and exhaustiveness of the four class lists, not merely
-the arithmetic of each listed member, are kernel-checked; the C++ generator
-is not trusted for completeness.
+The proof has three steps.  First, canonical augmentation reduces every
+eight-arc to one of $2633$ projective classes.  Starting from a normalized
+four-frame, the certified lists contain respectively $4$, $61$, $454$, and
+$2633$ classes at sizes five through eight.  Coverage certificates check
+that every legal extension occurs in the next list, while explicit
+projective equivalences and frame reduction transport an arbitrary
+eight-arc to a listed leaf.  Thus the exhaustiveness claim does not depend
+on trusting the generator's canonical labels.  The final count agrees with
+the published classification of Al-Seraji--Al-Ogali
+\cite[Theorem~3.8.1]{AlSerajiAlOgali2018}.
 
-For $2630$ of the classified leaves, six points of $U(A)$ give an invertible
-$6\times6$ evaluation matrix, giving the first alternative of
+Second, for $2630$ of the classified leaves, six points of $U(A)$ give an
+invertible $6\times6$ evaluation matrix, giving the first alternative of
 Lemma~\ref{lem:evaluation-obstruction}.  In each of
 the remaining three leaves the evaluation rows have rank five, but an
 explicit linear combination places the evaluation functional of a point of
 $A$ in their span, giving the second alternative.
 
-Finally, the obstruction is projectively invariant.  If $gA$ is a normalized
+Third, the obstruction is projectively invariant.  If $gA$ is a normalized
 representative, replace $Q$ by $Q\circ g^{-1}$.  This is nonzero because $g$
 is invertible, its zero set is $gZ(Q)$, and projectivities carry secants to
 secants, so $U(gA)=gU(A)$.  Thus a quadratic as in the statement would
-contradict the checked obstruction for the normalized leaf.  The companion
-Lean development kernel-checks every local alternative; its global conic
-corollary additionally checks frame reduction and projective transport.
+contradict the obstruction for the normalized leaf.
+Appendix~\ref{app:verification} records the independent regeneration and
+formal trust boundary.
 \end{proof}
 
 \begin{corollary}[Exact relative value over $\F_{16}$]
@@ -972,9 +941,9 @@ witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \end{proof}
 
 The published ordinary classification records arc counts, stabilizers,
-secant-index distributions, and conic-contained classes.  We did not find
-the uncovered-locus rank split, Theorem~\ref{thm:q16-quadratic}, or its exact
-relative-conic corollary tabulated there.
+secant-index distributions, and conic-contained classes.  The additional
+datum used here is the uncovered-locus evaluation split: $2630$ full-rank
+leaves and three rank-five leaves forced to meet the arc.
 
 \begin{remark}[Anatomy of the three exceptional leaves]
 Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
@@ -997,6 +966,8 @@ one point from a seven-point subset of a conic.  These descriptions follow
 by direct field arithmetic and are not used to establish classification
 completeness.
 \end{remark}
+
+\subsection{The $q=11$ coding application}
 
 For reference, the verified incidence statistics are
 \[
@@ -1021,7 +992,7 @@ $i=1,2,3$, while the two moment equations give
 \]
 Consequently $(N_1,N_2,N_3)=(90,15,10)$.
 
-\begin{proposition}[The $q=11$ code and extension spectrum]
+\begin{proposition}[The $q=11$ code and coset spectrum]
 \label{prop:q11-code}
 Let $A$ be the six-point witness in Appendix~\ref{app:witnesses}, and let
 $C_A$ be its parity-check code.  Then:
@@ -1032,19 +1003,7 @@ $C_A$ be its parity-check code.  Then:
  \item the affine cosets of distances $0,1,2,3$ number
        $(1,60,1150,120)$, and the distance-two cosets split as
        $(900,150,100)$ according as they have one, two, or three
-       minimum-weight leaders;
- \item the simultaneous one-column MDS extensions form the independence
-       complex of the icosahedral graph, with independence polynomial
-       \[
-        1+12t+36t^2+20t^3;
-       \]
-       exactly six two-column and twenty three-column extensions are
-       maximal, giving six complete eight-arcs and twenty complete nine-arcs
-       containing the fixed seed, and there is no ten-arc extension; and
- \item each witness column colours five pairwise disjoint edges of the
-       icosahedron, missing an antipodal pair, and the six colour classes
-       partition its thirty edges.  Adding the six antipodal edges turns
-       them into six perfect matchings of the augmented graph.
+       minimum-weight leaders.
 \end{enumerate}
 \end{proposition}
 
@@ -1057,143 +1016,69 @@ of the quadratic monomials
 \]
 is nonsingular, so no conic contains all six
 projective columns; by the preceding definition and the classical
-normal-rational-curve dictionary, the code is not projectively GRS.  The
-formal theorem checks the no-conic premise; it does not build coding-theory
-equivalences into the trusted kernel statement.  Direct finite
-arithmetic gives the secant-index spectrum
+normal-rational-curve dictionary, the code is not projectively GRS.  Direct
+finite arithmetic gives the secant-index spectrum
 \[
  0:12,\qquad 1:90,\qquad 2:15,\qquad 3:10,
 \]
 where index zero is precisely the conic.  Multiplying each nonzero
 projective direction by its ten affine scalars gives all nonzero affine
-syndromes bijectively.  In the companion formalization, membership in each
-counted set is equivalent to actual parity-check distance, and for every
-distance-two direction the determinant-zero witness pairs are proved equal
-to the supports of actual weight-two coefficient words.  Uniqueness on an
-independent support and scalar multiplication then give the claimed coset
-and leader counts, not merely rescaled incidence counts.  The index-zero
-directions give the covering radius.
+syndromes bijectively.  Proposition~\ref{prop:syndrome-dictionary} identifies
+the determinant-zero witness pairs with weight-two leader supports;
+uniqueness on an independent support and scalar multiplication then give
+the claimed coset and leader counts.  The index-zero directions give the
+covering radius.
+\end{proof}
 
+\begin{proposition}[The $q=11$ extension complex]
+\label{prop:q11-extensions}
+For the same witness:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+ \item the simultaneous one-column MDS extensions form the independence
+       complex of the icosahedral graph, with independence polynomial
+       \[
+        1+12t+36t^2+20t^3;
+       \]
+       exactly six two-column and twenty three-column extensions are
+       maximal, giving six complete eight-arcs and twenty complete nine-arcs
+       containing the fixed seed, and there is no ten-arc extension;
+ \item each witness column colours five pairwise disjoint edges of the
+       icosahedron, missing an antipodal pair, and the six colour classes
+       partition its thirty edges.  Adding the six antipodal edges turns
+       them into six perfect matchings of the augmented graph.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
 For simultaneous extensions, two conic columns conflict exactly when their
 chord contains a witness column.  No three conic columns are collinear, so
 there is no additional triple obstruction and valid extension sets are
 exactly graph-independent sets.  Exhausting the $2^{12}$ subsets gives the
 displayed polynomial and maximal-set counts.  The same determinant table
-partitions the thirty conflict edges into the six stated matchings.  All
-these finite assertions are independently reproduced by the supplementary
-Python and C++ checkers and kernel-checked in the companion Lean module.
-Lean additionally proves that residual maximality upgrades to ordinary
-completeness: relative completeness confines every further point to the
-conic, and maximality excludes the remaining conic points.  It also checks
-that the six missing antipodal edges are distinct and that adjoining the
-appropriate edge to each colour class gives a six-edge perfect matching;
-the six augmented classes are pairwise edge-disjoint and partition the
-augmented graph.
+partitions the thirty conflict edges into the six stated matchings.
+Relative completeness confines every further extension point to the conic,
+so maximality in the independence complex upgrades to ordinary completeness.
+The six missing antipodal edges are distinct; adjoining the appropriate one
+to each colour class gives six disjoint perfect matchings of the augmented
+graph.  Appendix~\ref{app:verification} records the two independent
+implementations and the formal checks.
 \end{proof}
 
 The six-set is a classical Clebsch hexagon with icosahedral $A_5$ symmetry;
-this identification and the associated orbit geometry belong to prior art,
-not to the proposition's novelty
-posture~\cite{Edge1956,Dye1991,StormeVanMaldeghem1995}.  More precisely,
+see Edge, Dye, and Storme--Van Maldeghem for the classical configuration and
+orbit geometry~\cite{Edge1956,Dye1991,StormeVanMaldeghem1995}.  More precisely,
 Dye's edge criterion at $q=11$ and the complete-exterior-set formulation of
 Blokhuis--Seress--Wilbrink give $\cC(\F_{11})\subseteq U(A)$
 \cite[discussion preceding Theorem~6, p.~281]{Dye1991}
 \cite[pp.~143, 146]{BlokhuisSeressWilbrink1992}.  Dye's ten Brianchon
 concurrences and the chord-defect identity then give $|U(A)|=12$, hence
-equality.  This exact uncovered-locus conclusion is a short synthesis of
-classical inputs rather than a new classical configuration theorem.
-The exact conjunction of the relative-conic deep-hole locus, refined coset
-counts, and extension polynomial was not located in the bounded search, so
-we report it only as a checked synthesis rather than a priority claim.
+equality.  Proposition~\ref{prop:q11-code} combines these classical inputs
+with the syndrome counts, while Proposition~\ref{prop:q11-extensions}
+records the simultaneous-extension calculation.
 
-\begin{remark}[Auxiliary residual-game structure]
-There is also a game-theoretic consequence of this exceptional row, not used
-in any bound above.  After the six witness points are occupied, all twelve
-points of $\cC$ remain legal.  Join two conic points when their chord contains
-a witness point.  The resulting $12$-vertex, $30$-edge, $5$-regular conflict
-graph is the icosahedral graph.  Its antipodal involution is fixed-point-free,
-preserves adjacency, and pairs only nonadjacent vertices, so the usual
-copycat strategy makes the corresponding independent-set building position
-a P-position.  The companion Lean development checks every seeded continuation,
-proves an exact recursive localization from the projective cap game to this
-independent-set game, and hence proves that the displayed six-point projective
-position itself is P.  It also checks that the displayed $q=9$ six-arc covers
-every projective point, including the conic, so that position is terminal P.
-These observations are consequences of the displayed witnesses, not novelty claims.
-\end{remark}
-
-The supplementary Python program
-\texttt{verify\_relative\_conic\_arcs.py} performs exact finite-field
-arithmetic and, for each witness:
-
-\begin{enumerate}[label=(\alph*),leftmargin=2em]
-\item enumerates and normalizes all $q^2+q+1$ projective points;
-\item checks that $XZ=Y^2$ contains exactly $q+1$ points;
-\item verifies disjointness from the conic and that every pair-line contains
-      exactly two selected points;
-\item verifies that every point outside $A\cup\cC$ lies on a selected
-      pair-line; and
-\item independently checks both equations in
-      Proposition~\ref{prop:moments}.
-\end{enumerate}
-
-Its SHA-256 digest is
-\begin{center}
-\texttt{e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a}.
-\end{center}
-The verifier is deliberately simpler than a search program: it certifies the
-listed upper-bound witnesses but makes no claim about search completeness.
-
-Two further implementations independently regenerate
-Proposition~\ref{prop:q11-code}.  Their separately written source files are
-\begin{center}
-\texttt{check\_q11\_structure.py},\qquad
-\texttt{check\_q11\_structure.cpp}.
-\end{center}
-Their SHA-256 digests are
-\begin{center}\scriptsize
-\texttt{0abe909c9aadce0db4c75f296c8de25e929dd1065c906996da8dec017e534d69},\\
-\texttt{1753674172d48f1d056d350e30baa9eb67de0810c84a96da0440947768ae041c}.
-\end{center}
-They agree on the projective, syndrome, chord, and group-action data.  Both
-include transformed-coordinate invariance checks; the adversarial controls
-replace one witness point and mutate a group generator, respectively, and
-reject the exceptional conclusions.  The small-field hyperplane checker
-\texttt{check\_evaluation\_dichotomy.py}, with digest
-\begin{center}
-\texttt{6ed309bd2461ce9998cbd3bcaa5396379e6973b7503ce2dcdfb32c9806386566},
-\end{center}
-exhausts every family of at most $q$ projective hyperplanes for
-$q=2,3,5$ and dimensions one through three, and checks the sharp $q+1$
-plane cover.
-
-The separate exact-classification generator
-\texttt{search\_rhoc16.cpp} has SHA-256 digest
-\begin{center}
-\texttt{589af8430e94b4c9c23ce895e6d32d2b3b5b9b387b1fb23ed6d3875cdee39031}.
-\end{center}
-Its frozen report \texttt{search\_rhoc16\_output.txt} has digest
-\begin{center}
-\texttt{6989079b5cb64b0e57d5c42b872093fff99f861300b8fbb909daef450c15cc63}.
-\end{center}
-The generator emits local Lean certificates; its own assertions and
-canonical labels are not part of the trusted proof boundary.
-
-The companion Lean library \texttt{lean/RelativeConicArcs/} formalizes the
-incidence, defect, conic, asymptotic, averaging, nucleus, evaluation-dichotomy,
-syndrome, and coding arguments.  The downstream \texttt{Q11Coding} module
-kernel-checks the exact code parameters, covering radius, deep-hole locus,
-leader distributions, quadratic obstruction, chord partition, and extension
-complex.  Its
-generic Boolean checker inspects conic disjointness, the arc condition, and
-coverage of the canonical projective representatives
-$[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a proved normalization and soundness
-theorem transports acceptance to relative completeness.  The concrete
-checks use kernel reduction rather than \texttt{native\_decide}.  The trust
-manifest \texttt{lean/RelativeConicArcs/TRUST.md} records the verifier hash,
-the theorem map, and axiom profiles.  In particular, the finite results do
-not depend on the external Kim--Vu input used for the conditional asymptotic
-upper bound.
+Appendix~\ref{app:verification} records the computational and formal
+verification boundary.  The auxiliary game-theoretic consequence of the
+$q=11$ extension graph is separated in Appendix~\ref{app:game}.
 
 \section{Further questions}
 
@@ -1215,11 +1100,12 @@ dimensions at least three.
 
 \begin{problem}
 Determine whether the exact defect remainder yields new lower bounds for
-arc-constrained saturating sets or the corresponding covering codes, and
-whether small-order scans beyond $q=11$ produce further recognizable
-extension complexes.  The evaluation formulation is also the elementary
-linear-algebraic interface used by polynomial-method arguments, but no
-slice-rank or cap-set consequence is asserted here.
+arc-constrained saturating sets or the corresponding covering codes.
+\end{problem}
+
+\begin{problem}
+Determine whether small-order examples beyond $q=11$ produce further
+recognizable simultaneous-extension complexes.
 \end{problem}
 
 \begin{problem}
@@ -1251,6 +1137,95 @@ classification of near-extremal secant arrangements rather than another
 application of the same incidence budget.
 
 \appendix
+\section{Computational and formal verification}
+\label{app:verification}
+
+The supplementary Python program
+\texttt{verify\_relative\_conic\_arcs.py} performs exact finite-field
+arithmetic and, for each witness:
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item enumerates and normalizes all $q^2+q+1$ projective points;
+\item checks that $XZ=Y^2$ contains exactly $q+1$ points;
+\item verifies disjointness from the conic and that every pair-line contains
+      exactly two selected points;
+\item verifies that every point outside $A\cup\cC$ lies on a selected
+      pair-line; and
+\item independently checks both equations in
+      Proposition~\ref{prop:moments}.
+\end{enumerate}
+
+Its SHA-256 digest is
+\begin{center}
+\texttt{e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a}.
+\end{center}
+The verifier is deliberately simpler than a search program: it certifies the
+listed upper-bound witnesses but makes no claim about search completeness.
+
+Two further implementations independently regenerate
+Propositions~\ref{prop:q11-code} and~\ref{prop:q11-extensions}.  Their
+separately written source files are
+\begin{center}
+\texttt{check\_q11\_structure.py},\qquad
+\texttt{check\_q11\_structure.cpp}.
+\end{center}
+Their SHA-256 digests are
+\begin{center}\scriptsize
+\texttt{0abe909c9aadce0db4c75f296c8de25e929dd1065c906996da8dec017e534d69},\\
+\texttt{1753674172d48f1d056d350e30baa9eb67de0810c84a96da0440947768ae041c}.
+\end{center}
+They agree on the projective, syndrome, chord, and group-action data.  Both
+include transformed-coordinate invariance checks; the adversarial controls
+replace one witness point and mutate a group generator, respectively, and
+reject the exceptional conclusions.  The small-field hyperplane checker
+\texttt{check\_evaluation\_dichotomy.py}, with digest
+\begin{center}
+\texttt{6ed309bd2461ce9998cbd3bcaa5396379e6973b7503ce2dcdfb32c9806386566},
+\end{center}
+exhausts every family of at most $q$ projective hyperplanes for
+$q=2,3,5$ and dimensions one through three, and checks the sharp $q+1$
+plane cover.
+
+The exact-classification generator \texttt{search\_rhoc16.cpp} has SHA-256
+digest
+\begin{center}
+\texttt{589af8430e94b4c9c23ce895e6d32d2b3b5b9b387b1fb23ed6d3875cdee39031}.
+\end{center}
+Its frozen report \texttt{search\_rhoc16\_output.txt} has digest
+\begin{center}
+\texttt{6989079b5cb64b0e57d5c42b872093fff99f861300b8fbb909daef450c15cc63}.
+\end{center}
+The generator emits local Lean certificates; its own assertions and
+canonical labels are not part of the trusted proof boundary.
+
+The companion Lean library \texttt{lean/RelativeConicArcs/} formalizes the
+incidence, defect, conic, asymptotic, averaging, nucleus,
+evaluation-dichotomy, syndrome, and coding arguments.  Its finite
+certificates check the code parameters, deep-hole locus, leader
+distributions, quadratic obstruction, chord partition, extension complex,
+and the exhaustiveness and projective transport used at $q=16$.  The generic
+Boolean checker inspects conic disjointness, the arc condition, and coverage
+of the canonical representatives $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a
+proved soundness theorem transports acceptance to relative completeness.
+The concrete checks use kernel reduction rather than
+\texttt{native\_decide}.  The accompanying trust manifest records the
+theorem map and axiom profiles.  In particular, the finite results do not
+depend on the external Kim--Vu hypothesis used for the conditional
+asymptotic upper bound.
+
+\section{Auxiliary residual-game structure}
+\label{app:game}
+
+After the six $q=11$ witness points are occupied, all twelve points of
+$\cC$ remain legal.  Join two conic points when their chord contains a
+witness point.  The resulting $12$-vertex, $30$-edge, $5$-regular conflict
+graph is the icosahedral graph.  Its antipodal involution is fixed-point-free,
+preserves adjacency, and pairs only nonadjacent vertices, so the copycat
+strategy makes the corresponding independent-set building position a
+P-position.  The formal development checks the localization from the
+projective cap game to this graph and hence the actual six-point projective
+position.  It also checks that the displayed $q=9$ six-arc is terminal.
+
 \section{Witness coordinates and field encodings}
 \label{app:witnesses}
 
