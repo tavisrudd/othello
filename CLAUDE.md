@@ -38,8 +38,9 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
 | `queens` | `notes/handoffs/done/2026-07-08-claude-archive-queens-othello.md` (archived) |
-| `relconic` | `notes/2026-07-16-c201-even-field-quadratic-rank.md` |
+| `relconic` | `notes/handoffs/2026-07-16-relconic-post-c201.md` |
 | `repaircodes` | `notes/handoffs/2026-07-13-projective-completion-repaircodes.md` |
+| `repairports` | `notes/handoffs/2026-07-16-repairports.md` |
 
 Each handoff must declare exactly one `**Lane**: \`alias\`` directly under its H1. A cross-lane
 deliverable is pegged to the lane that owns it, or split into separate tasks.
