@@ -3,9 +3,11 @@
 ## Objective
 
 Construct conic-complete arcs of size `O(sqrt(q))`, or prove that no such bound
-can hold for an infinite family of prime powers. This is the principal
-post-submission theorem target for the prescribed-conic lane; it is not a gate
-for the current manuscript.
+can hold for an infinite family of prime powers. This is C210, the
+highest-ceiling long-horizon target for the prescribed-conic lane.  The bounded
+C201 even-field quadratic-rank probe runs first and should supply structural
+data for this program.  Neither task is a release gate for the current
+manuscript.
 
 ## Why this is the right next theorem
 
@@ -16,15 +18,17 @@ small complete arcs and directly answer the strongest significance objection.
 
 ## Initial gates
 
-1. Audit known `O(sqrt(q))` affine and projective complete-arc constructions for
+1. Import C201's rank/forced-hit features and its precise success or failure at
+   the q=64 gate; do not begin with an unrelated blind census.
+2. Audit known `O(sqrt(q))` affine and projective complete-arc constructions for
    whether a projective image can avoid a prescribed conic while retaining
    off-conic coverage.
-2. Determine whether the averaging argument can be strengthened from mere
+3. Determine whether the averaging argument can be strengthened from mere
    avoidance to simultaneous avoidance and coverage at the sharp scale.
-3. Test structured candidates over a sequence of even and odd fields, recording
+4. Test structured candidates over a sequence of even and odd fields, recording
    ordinary-uncovered loci and quadratic evaluation rank rather than only
    `rho_C(q)`.
-4. If construction repeatedly fails, isolate a family-level obstruction strong
+5. If construction repeatedly fails, isolate a family-level obstruction strong
    enough to rule out `O(sqrt(q))` on an infinite sequence.
 
 Additional isolated exact values are evidence, not completion of this program.

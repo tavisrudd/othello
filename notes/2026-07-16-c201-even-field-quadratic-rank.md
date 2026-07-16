@@ -1,0 +1,83 @@
+# C201 — even-field quadratic-rank structural upgrade
+
+**Date:** 2026-07-16
+**Lane:** `relconic`
+**Status:** QUEUED — next bounded theorem probe after release/aggregate tails
+
+## Objective
+
+Determine whether the `GF(16)` uncovered-quadratic obstruction is the first
+case of an infinite even-field theorem.  A successful result must connect the
+defect/incidence restrictions on a near-minimal complete-outside-conic arc to
+one of the two evaluation alternatives:
+
+1. the ordinary-uncovered locus imposes six independent conditions on
+   quadrics; or
+2. every quadric through that locus is forced to meet the arc.
+
+The second alternative includes the rank-five/unique-quadratic anatomy of the
+three exceptional `GF(16)` leaves.
+
+## Existing infrastructure—do not reprove
+
+- `EvaluationDichotomy.lean` gives the sharp finite-field avoidance theorem.
+- `EvaluationObstruction.lean` supplies the injective/span formulations.
+- `Q16QuadraticAvoidance.lean` and `Q16Result.lean` kernel-check the complete
+  `2630 + 3` split and its relative-conic consequence.
+- The defect and stability package bounds the candidate incidence profiles.
+
+The phrase “symbolic rank criterion” therefore means a **geometric criterion
+for forcing rank/forced-hit behavior**, not the already-proved linear-algebra
+dichotomy.
+
+## Work plan
+
+### Gate 1 — symbolic anatomy
+
+- Express the quadratic kernel `K_A` and the restrictions `ev_a |_ K_A` in
+  projectively invariant terms.
+- Identify which defect/index statistics constrain `dim K_A`, and record
+  counterexamples if those statistics alone do not determine it.
+- Reconstruct the three rank-five `GF(16)` leaves and classify the unique
+  quadratic by type, arc intersection, stabilizer orbit, and secant-index
+  profile.
+- Separate equality cells from first-excess cells relative to the corrected
+  defect bound; do not use “stability” for an unclassified histogram.
+
+### Gate 2 — q=64 sizing and falsification
+
+- Compute the corrected lower-bound candidate size(s) before generating arcs.
+- Estimate the frame-normalized search space and reject a full census if it is
+  not credibly bounded.
+- Test only symbolically reduced or orbit-defined candidate families first.
+- Record ordinary-uncovered size, quadratic rank/nullity, forced-hit status,
+  defect, index spectrum, and stabilizer data—not only relative completeness.
+- Use an independent implementation and coordinate/relabel invariance checks.
+
+### Gate 3 — theorem extraction
+
+Promote only one of the following:
+
+- an infinite even-field theorem;
+- a theorem for a natural infinite family of candidate arcs;
+- a structural equality/first-excess theorem explaining all deficient-rank
+  cells; or
+- a precise obstruction showing why the `GF(16)` mechanism cannot extend.
+
+Any promoted mathematics must receive a strict-trust Lean statement.  Finite
+orbit data may remain generated only when a small kernel checker validates the
+complete implication used by the theorem.
+
+## Stop conditions
+
+- Stop a full `q=64` enumeration at the sizing gate if it is not bounded.
+- Do not publish another isolated `rho_C(q)` value as the C201 outcome.
+- Do not claim an even-field pattern from `q=16,64` alone.
+- If rank is independent of all available defect/index invariants, report that
+  separation explicitly and hand the resulting geometric feature to C209.
+
+## Completion gate
+
+Produce a replayable report with exact commands/hashes and either a proved
+family route or a falsified mechanism with a minimal counterexample.  Only a
+concise structural theorem is eligible for the current manuscript.

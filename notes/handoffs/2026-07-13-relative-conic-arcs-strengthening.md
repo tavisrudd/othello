@@ -3,8 +3,8 @@
 **Lane**: `relconic` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-13
-**Status:** ACTIVE — strengthened lane, hostile-review repairs, and C195–C196 exterior-set framing pass focused publication gates; C110 shared aggregate rerun and C188 q=5 import remain
-**Tasks:** C106–C110, C188, C195–C196, C201
+**Status:** ACTIVE — current paper revision committed; release/aggregate tails remain, followed by the bounded C201 structural probe
+**Tasks:** C106–C110, C188, C195–C196, C201, C209–C210
 
 ## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
 
@@ -61,6 +61,14 @@ Two bounded Dye/BSW follow-ups are reported in the
 complete exteriority (`C subset U`) from completeness outside the prescribed conic (`U subset C`).
 C196 instantiates the distinction on BSW's q=7 exterior four-arc, where the four-arc identity gives
 `|U|=20>8=|C(F_7)|`. Both are framing upgrades; neither changes theorem ownership.
+
+The post-revision upgrade decision is recorded in
+[`2026-07-16-arcs-a-plus-upgrade-analysis.md`](../2026-07-16-arcs-a-plus-upgrade-analysis.md).
+C201 is the next bounded theorem probe: it asks whether the q=16 quadratic-rank obstruction has an
+even-field structural continuation.  C209 is a polarity/stability follow-on gated on C201 evidence,
+and C210 is the longer-horizon `O(sqrt(q))` construction-or-obstruction program.  C107 already
+proves the general full-rank/forced-hit evaluation dichotomy, so C201 must contribute a geometric
+criterion that forces those alternatives rather than restating the linear algebra.
 
 The work is a continuation of the finished
 [C89–C96 formalization](done/2026-07-12-arcs-complete-outside-conic-formalization.md), not a reopening
@@ -169,7 +177,9 @@ not make a new abstract `A5` isomorphism or full orbit formalization a completio
 | **C188 [QUEUED 2026-07-15]** | Import C187's `q=5` four-frame witness and derive `rho_C(5)=L_2(5)=4`; cite the broader small-`k` classification without migrating it. | Relative-conic semantic theorem and `Results` entry pass strict-kernel checks; manuscript, result table, proof audit, TRUST manifest, and paper index are synchronized. |
 | **C195 [REPORTED 2026-07-15]** | Add the implication diagram separating complete exteriority from completeness outside the prescribed conic. | Manuscript, PDF, README, proof audit, and paper index state the reverse containments without changing theorem ownership. |
 | **C196 [REPORTED 2026-07-15]** | Instantiate strictness on BSW's q=7 exterior four-arc. | The universal identity `|U(A)|=(q-2)(q-3)` gives `20>8`, so the complete exterior set is not complete outside the conic. |
-| **C201 [QUEUED 2026-07-15]** | Derive the symbolic form of the q=16 quadratic-rank obstruction, test q=64, and classify equality/first-excess orbits in the bounded cells. | Either an infinite even-field theorem route or a precise obstruction failure, with independently replayable orbit/rank evidence. |
+| **C201 [NEXT THEOREM PROBE; after release tails]** | Derive a geometric symbolic criterion forcing the q=16 full-rank/forced-hit alternatives, run a sized and orbit-reduced q=64 gate, and classify equality/first-excess cells. | Either an infinite even-field theorem route or a precise obstruction failure, with independently replayable orbit/rank evidence; do not reprove C107's linear-algebra dichotomy. See `notes/2026-07-16-c201-even-field-quadratic-rank.md`. |
+| **C209 [GATED ON C201]** | Turn a stable C201 feature into a polarity-dual or structural rank/defect stability theorem. | A symbolic inverse theorem connecting defect to quadratic avoidance; an orbit list or second census does not pass. |
+| **C210 [LONG-HORIZON; after C201]** | Construct `C`-complete arcs of size `O(sqrt(q))`, or prove that scale impossible on an infinite family. | A proved infinite construction/obstruction; isolated values and two-field patterns do not pass. |
 
 ## Cheap refutation gates
 

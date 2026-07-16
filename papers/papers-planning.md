@@ -53,13 +53,15 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   landed. Its remaining paper-specific scholarly-artifact gate is a stable, citable archive
   identifier for the source supplement. The shared release policy below additionally requires the
   verbatim Lean adequacy appendix and explicit AI/provenance disclosure.
-- *Next-theorem queue (post-release):* construct `𝒞`-complete arcs of size `O(√q)`, or prove that
-  such a bound fails for an infinite family. This is the paper's main external-scale question and
-  must not delay the current submission. First gates: inventory known `O(√q)` complete affine and
-  projective constructions for compatibility with conic avoidance; test whether projective
-  averaging can preserve the sharp scale; then seek an infinite algebraic construction or a
-  family-level quadratic/evaluation obstruction. Isolated additional values of `ρ_𝒞(q)` do not
-  discharge this queue item.
+- *Next-theorem queue (post-release):* C201 is the immediate bounded probe.  Starting from the
+  kernel-checked `2630+3` quadratic-rank split at q=16 and the already-general C107 evaluation
+  dichotomy, derive a geometric criterion for full rank or forced arc incidence, run a sized and
+  orbit-reduced q=64 gate, and classify equality/first-excess cells.  A concise infinite even-field
+  or structural stability theorem could upgrade the current manuscript; a negative gate remains a
+  discovery result.  C209 (polarity/rank stability) is gated on that evidence.  C210 is the
+  higher-ceiling long-horizon program: construct `𝒞`-complete arcs of size `O(√q)`, or prove that
+  such a bound fails for an infinite family.  Isolated additional values of `ρ_𝒞(q)` discharge
+  none of these tasks.
 
 **4 · The Clebsch hexagon code: rigidity from a conic deep-hole locus** —
 `clebsch-hexagon-code`
