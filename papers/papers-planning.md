@@ -46,11 +46,15 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *What:* standalone; **owns the q=11 deep-holes=conic identification**.
 - *Gate:* owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement.
 
-**4 · Clebsch hexagon code** — `clebsch-hexagon-code`
-- *What:* rigidity TFAE + gap theorem + chirality ℤ/2 + why-11 for the `[6,3,4]₁₁`
-  icosahedral code. Added 2026-07-13, post-review.
-- *Gate:* **must follow 3 — hard dependency, not a preference.** Owes chirality/gap/TFAE
-  Lean (TFAE likely needs `native_decide` — open decision), two checkers, C128.
+**4 · The Clebsch hexagon code: rigidity from a conic deep-hole locus** —
+`clebsch-hexagon-code`
+- *What:* a symmetry-free rigidity TFAE and low-degree characterization for the `[6,3,4]₁₁`
+  code, plus quantitative gaps, decoder/Brianchon reconstruction, intrinsic support chirality,
+  uniqueness of `q=11`, the all-field Clebsch formula, and the `4≤k≤7` boundary. Added
+  2026-07-13, post-review.
+- *Gate:* the 17-page manuscript and local mixed-verification package are closed. It ships after 3
+  by the publication-allocation ruling below, but is mathematically self-contained; the remaining
+  operational gate is an immutable artifact release.
 
 **5 · Coding / LRC** *(conditional)* — `coding-repair-hypergraphs`
 - *What:* promote after the external specialist citation-chain review.
@@ -68,10 +72,11 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *What:* N2 demoted to remarks.
 - *Gate:* no manuscript; hardest formalization; collaborator route if it stalls.
 
-**Dependencies between papers** (the only two; everything else is independent):
+**Publication seams between papers** (the only two; everything else is independent):
 
-- **3 → 4 is hard.** `arcs` owns the deep-holes=conic identification that `clebsch` takes as its
-  starting point. See *Clebsch after Arcs*.
+- **3 → 4 fixes publication order, not proof dependence.** `arcs` publishes the shared
+  deep-holes=conic identification first; `clebsch` reproves it and uses it only as setup. See
+  *Clebsch after Arcs*.
 - **1 ↔ 3 is a seam, not an ordering constraint.** Both cite backwards; neither waits on the other.
   See *Arcs vs Nofil*.
 
@@ -123,10 +128,10 @@ so they are named, not numbered.
 
 `clebsch-hexagon-code` (4) postdates the 2026-07-12 decomposition and is **not** among its five (+1). It
 spun out of the `arcs` q=11 material, and that parentage created a genuine salami-slicing exposure
-that the original ruling did not address: **clebsch's Prop 3.1 *is* arcs' Prop 4.6(i)** — same
-statement, same computation, with the Lean certificate living in `arcs` (`comp-q11-mds-deep-holes`).
-Clebsch's "first identification of a deep-hole set with a named variety" therefore rested on a fact
-`arcs` also publishes. Two papers, one computation, one novelty claim spread across both.
+that the original ruling did not address: **Clebsch Prop. 3.2 and Arcs Prop. 8.7(i) state the same
+deep-holes=conic identification**, although Clebsch now gives an independent conceptual reproof and
+the shared finite Lean certificate lives with `arcs` (`comp-q11-mds-deep-holes`). The identification
+is therefore setup in Clebsch, not its novelty carrier.
 
 **Ruling — the split stands, the seam moves:**
 
@@ -135,20 +140,22 @@ Clebsch's "first identification of a deep-hole set with a named variety" therefo
    Blokhuis--Seress--Wilbrink already give the classical inclusion of the conic in the uncovered
    locus, and equality is an apparently unrecorded short consequence of that inclusion, Dye's ten
    concurrences, and the chord-defect identity.
-2. **`clebsch` claims only the reading** — the rigidity TFAE, the gap theorem, the chirality `ℤ/2`,
-   why-11. None of that appears in `arcs`; all of it is the actual paper. Cor 3.2's "first" is
-   demoted from novelty-carrier to setup, and the abstract/intro now name the companion.
-3. **§3 is self-contained** — the computation is 133 points; it is proved in place and cites `arcs`
-   as "see also". This also removes the paper's dependency on an unpublished working paper for its
-   own foundation, which a referee cannot check.
+2. **`clebsch` claims the reconstruction and rigidity layer** — the symmetry-free TFAE,
+   low-degree characterization, quantitative gaps, decoder/Brianchon reconstruction, intrinsic
+   chirality, the all-field formula and `q=11` isolation, and the `4≤k≤7` boundary. None is the
+   companion's publication claim.
+3. **§3 is self-contained** — the `A₅` orbit ledger and a short chord-incidence count prove the
+   syndrome-conic equality in place. The companion is cited for provenance and its independent
+   certificate, not used as a premise.
 
 **Not folded**, deliberately: the spines differ (`arcs` = defect identity + F₁₆ classification;
 `clebsch` = rigidity + gap + chirality + why-11). Folding would bury a five-way rigidity theorem
 inside a paper about something else and make `arcs` incoherent.
 
-**The order is a decision, not an artifact of which finishes first.** Once `arcs` is out, `clebsch`
-cites a published companion instead of a working paper, and move 3 becomes optional rather than
-load-bearing. Lane map: `../notes/handoffs/2026-07-13-clebsch-paper.md`.
+**The order is a publication-allocation decision, not a mathematical dependency or an artifact of
+which manuscript finishes first.** Once `arcs` is out, `clebsch` cites a published companion rather
+than a working paper; its proof remains unchanged. Lane map:
+`../notes/handoffs/2026-07-13-clebsch-paper.md`.
 
 ### Arcs vs Nofil — the same seam, second instance (ruled 2026-07-14)
 
@@ -212,8 +219,9 @@ each *elementary*. Each abstract opens with the nontrivial lead:
 verified values.
 - *Watch:* fine.
 
-**4 · Clebsch** — this table predates the paper; its lead and its claim boundary are ruled in
-*Clebsch after Arcs* above (lead with the rigidity TFAE; claim only the reading).
+**4 · Clebsch** — this table predates the paper; its lead and claim boundary are ruled in
+*Clebsch after Arcs* above: lead with symmetry-free reconstruction from the conic deep-hole locus
+and its rigidity/decoding consequences; leave the shared syndrome-conic identification to `arcs`.
 
 **5 · Coding** — *lead:* the `[19,4,8]₉` all-symbol repair seed + exact unbounded `GF(9)` row
 transfer.
@@ -302,6 +310,7 @@ preempt AI-slop skepticism; do not overclaim novelty ahead of the prior-art audi
 | Flagship     | arXiv math.CO + INTEGERS (CGT) or Discrete Applied Mathematics      |
 | Dihedral     | arXiv math.CO + INTEGERS or Electronic J. Combinatorics             |
 | Arcs         | arXiv math.CO + Designs, Codes and Cryptography / Finite Fields & Apps |
+| Clebsch      | Designs, Codes and Cryptography / Finite Fields & Apps; JCTA shorter papers or J. Geometry secondarily |
 | Baer/Q25     | FFA / DCC                                                           |
 | Continuation | Electronic J. Combinatorics or DCC                                  |
 | Coding       | DCC, or IEEE Trans. Inf. Theory if the LRC angle survives audit     |
