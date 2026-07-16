@@ -51,6 +51,15 @@ lean/scripts/lean-build-queue.py run Target.One Target.Two \
 lean/scripts/lean-build-queue.py status ~/.cache/othello-lean-build/run-<id>
 ```
 
+For a long gate, add `--detach`. The command returns the generated run directory immediately; the
+detached queue process remains the watcher, and its atomic `status.json` records success, failure,
+interruption, or abandonment without agent polling:
+
+```sh
+lean/scripts/lean-build-queue.py run Target.One Target.Two \
+  --profile single --threads 1 --cores 20-23 --detach
+```
+
 The runner automatically:
 
 - acquires the shared build-owner lock before checking quiet state;

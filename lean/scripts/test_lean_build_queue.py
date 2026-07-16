@@ -48,7 +48,7 @@ state="$FAKE_LAKE_STATE"
 shift
 nobuild=0
 if [ "${1:-}" = --no-build ]; then nobuild=1; shift; fi
-echo "threads=${LEAN_NUM_THREADS:-unset} nobuild=$nobuild targets=$*" >> "$state/lake-calls.log"
+echo "pwd=$PWD threads=${LEAN_NUM_THREADS:-unset} nobuild=$nobuild targets=$*" >> "$state/lake-calls.log"
 rc=0
 mkdir -p "$state/built"
 for target in "$@"; do
@@ -329,6 +329,47 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(plan["workload_peak_mib"], 1024)
         self.assertEqual(manifest["source"]["lean_toolchain"], "leanprover/lean4:v4.99.0")
         self.assertEqual(len((self.state / "run-quiet-calls.log").read_text().splitlines()), 1)
+
+    def test_run_from_foreign_cwd_forces_lean_root_pwd(self) -> None:
+        run_dir = self.tmp / "foreign-cwd"
+        foreign = self.tmp / "foreign"
+        foreign.mkdir()
+        env = self.env()
+        env["PWD"] = str(foreign)
+        result = subprocess.run(
+            self.run_argv(["Fix.Alpha"], run_dir),
+            cwd=foreign,
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        manifest = json.loads((run_dir / "manifest.json").read_text())
+        self.assertEqual(manifest["lean_root"], str(self.lean_root))
+        calls = (self.state / "lake-calls.log").read_text().splitlines()
+        self.assertTrue(all(f"pwd={self.lean_root} " in call for call in calls), calls)
+
+    def test_detach_returns_immediately_and_runner_records_terminal_status(self) -> None:
+        run_dir = self.tmp / "detached"
+        argv = self.run_argv(["Fix.Alpha"], run_dir, extra=["--detach"])
+        result = subprocess.run(
+            argv, env=self.env(), capture_output=True, text=True, timeout=30
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("detached pid:", result.stdout)
+        launch = json.loads((run_dir / "detached.json").read_text())
+        self.assertGreater(launch["launcher_pid"], 0)
+
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline:
+            try:
+                if self.read_status(run_dir).get("state") != "running":
+                    break
+            except (OSError, json.JSONDecodeError):
+                pass
+            time.sleep(0.05)
+        self.assertEqual(self.read_status(run_dir)["state"], "success")
 
     def test_resource_profile_and_tmpfs_are_enforced_before_build(self) -> None:
         fake_tmp = self.tmp / "fake-tmp"

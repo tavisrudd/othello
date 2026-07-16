@@ -504,6 +504,10 @@ def command_run(args: argparse.Namespace) -> int:
     lock = acquire_lock(lock_file, run_id, targets)
 
     env = os.environ.copy()
+    # Popen(cwd=...) changes the process directory but does not rewrite an explicitly inherited
+    # PWD.  Wrappers such as run-quiet may treat PWD as authoritative and otherwise start
+    # `nix develop` from the caller's directory (for example rust/) instead of this Lake package.
+    env["PWD"] = str(lean_root)
     env["LEAN_NUM_THREADS"] = str(args.threads)
 
     manifest = {
@@ -602,6 +606,63 @@ def command_run(args: argparse.Namespace) -> int:
 
 def command_plan(args: argparse.Namespace) -> int:
     print(json.dumps(resource_plan(args), indent=2, sort_keys=True))
+    return EXIT_OK
+
+
+def command_detached_run(args: argparse.Namespace) -> int:
+    """Launch `run` in its own session and return its durable status location."""
+    lean_root = args.lean_root.expanduser().resolve()
+    if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+        fail(f"{lean_root} is not a Lake package")
+
+    home = Path.home().resolve()
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    run_dir = (
+        args.run_dir or STATE_ROOT_DEFAULT / f"run-{stamp}-{uuid.uuid4().hex[:8]}"
+    ).expanduser().resolve()
+    if not run_dir.is_relative_to(home):
+        fail(f"run state must be disk-backed under {home}, not {run_dir}")
+    run_fs_type, run_mount = filesystem_type(run_dir, args.mountinfo)
+    if run_fs_type in {"tmpfs", "ramfs"}:
+        fail(f"run state must be disk-backed; {run_dir} is on {run_fs_type} at {run_mount}")
+    if run_dir.exists():
+        fail(f"refusing to reuse detached run directory {run_dir}")
+    run_dir.mkdir(parents=True)
+
+    child_args = [argument for argument in sys.argv[1:] if argument != "--detach"]
+    if args.run_dir is None:
+        child_args += ["--run-dir", str(run_dir)]
+    launcher_log = run_dir / "launcher.log"
+    child_env = os.environ.copy()
+    child_env["PWD"] = str(lean_root)
+    with launcher_log.open("wb") as log:
+        try:
+            child = subprocess.Popen(
+                [sys.executable, str(Path(__file__).resolve()), *child_args],
+                cwd=lean_root,
+                env=child_env,
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+        except OSError as error:
+            fail(f"cannot start detached queue: {error}")
+
+    atomic_write_json(
+        run_dir / "detached.json",
+        {
+            "format": 1,
+            "launcher_pid": child.pid,
+            "launched_utc": utc_now(),
+            "lean_root": str(lean_root),
+            "run_dir": str(run_dir),
+            "launcher_log": str(launcher_log),
+        },
+    )
+    print(f"detached pid: {child.pid}")
+    print(f"run dir:      {run_dir}")
+    print(f"status:       {Path(__file__).resolve()} status {run_dir}")
     return EXIT_OK
 
 
@@ -803,7 +864,14 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--choom-binary", default="choom")
     run.add_argument("--pgrep-binary", default="pgrep")
     run.add_argument("--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet"))
-    run.set_defaults(function=command_run)
+    run.add_argument(
+        "--detach",
+        action="store_true",
+        help="launch an unattended queue process; status.json records its terminal exit state",
+    )
+    run.set_defaults(
+        function=lambda args: command_detached_run(args) if args.detach else command_run(args)
+    )
 
     plan = subparsers.add_parser("plan", help="validate and print a resource plan; never runs Lake")
     add_resource_arguments(plan)
