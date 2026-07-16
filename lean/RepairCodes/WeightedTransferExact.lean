@@ -170,6 +170,88 @@ theorem isEmbeddedInnerDualBlock_of_all_inner_of_card_le_one
       Finset.mem_filter.mpr ⟨Finset.mem_univ _, hl⟩
     exact hlj (Finset.card_le_one.mp hcard l hljSupport j hj)
 
+/-- A nontrivial inner dual attains `dualDist`.  This exposes the elementary attainment step used
+by the finite minimum notation in the manuscript. -/
+theorem exists_dualWord_hammingNorm_eq_dualDist
+    (I : Submodule 𝔽 (κ → 𝔽)) (hdual : dualCode I ≠ ⊥) :
+    ∃ z ∈ dualCode I, z ≠ 0 ∧ hammingNorm z = dualDist I := by
+  obtain ⟨z₀, hz₀, hz₀ne⟩ := (Submodule.ne_bot_iff (dualCode I)).mp hdual
+  have hne : {n | ∃ z ∈ dualCode I, z ≠ 0 ∧ hammingNorm z = n}.Nonempty :=
+    ⟨hammingNorm z₀, z₀, hz₀, hz₀ne, rfl⟩
+  obtain ⟨z, hz, hzne, heq⟩ := Nat.sInf_mem hne
+  exact ⟨z, hz, hzne, heq⟩
+
+/-- With two available blocks and a nontrivial inner dual, the zero-functional obstruction has
+exact threshold `2 * dualDist I`, stated by equality of all natural lower bounds. -/
+theorem hasZeroFunctionalMultiblockAtLeast_iff_le_two_dualDist
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (hcard : 2 ≤ Fintype.card ι)
+    (hdual : dualCode I ≠ ⊥) (d : ℕ) :
+    HasZeroFunctionalMultiblockAtLeast I e O d ↔ d ≤ 2 * dualDist I := by
+  classical
+  constructor
+  · intro h
+    obtain ⟨j, k, hjk⟩ := Fintype.one_lt_card_iff.mp (by omega : 1 < Fintype.card ι)
+    obtain ⟨z, hzdual, hz0, hznorm⟩ := exists_dualWord_hammingNorm_eq_dualDist I hdual
+    let w : ι → (κ → 𝔽) := fun l => if l = j then z else if l = k then z else 0
+    have hinner : ∀ l, w l ∈ dualCode I := by
+      intro l
+      by_cases hlj : l = j
+      · simpa [w, hlj] using hzdual
+      · by_cases hlk : l = k
+        · simpa [w, hlj, hlk] using hzdual
+        · simp [w, hlj, hlk]
+    have hzero : (fun l => blockFunctional I e (w l)) = 0 := by
+      funext l
+      change blockFunctional I e (w l) = 0
+      rw [blockFunctional_eq_zero_iff I e]
+      exact hinner l
+    have hwdual : (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) := by
+      apply flatten_mem_dualCode_concatenatedCode_of_functionalDual I e O w
+      rw [hzero]
+      intro u hu
+      simp
+    have hblocks : 2 ≤ (blockSupport w).card := by
+      have hjmem : j ∈ blockSupport w := by simp [blockSupport, w, hz0]
+      have hkmem : k ∈ blockSupport w := by simp [blockSupport, w, hjk, hz0]
+      by_contra hlt
+      have hle : (blockSupport w).card ≤ 1 := by omega
+      exact hjk (Finset.card_le_one.mp hle j hjmem k hkmem)
+    have hlower := h w hwdual hblocks hzero
+    have hsum : (∑ l, hammingNorm (w l)) = hammingNorm z + hammingNorm z := by
+      calc
+        (∑ l, hammingNorm (w l)) = ∑ l ∈ ({j, k} : Finset ι), hammingNorm (w l) := by
+          symm
+          apply Finset.sum_subset (by simp)
+          intro l _ hl
+          have hlj : l ≠ j := by
+            intro hlj
+            subst l
+            simp at hl
+          have hlk : l ≠ k := by
+            intro hlk
+            subst l
+            simp at hl
+          simp [w, hlj, hlk]
+        _ = hammingNorm z + hammingNorm z := by simp [w, hjk, Ne.symm hjk]
+    rw [hsum, hznorm] at hlower
+    omega
+  · intro hd w _ hblocks hzero
+    have hinner : ∀ j, w j ∈ dualCode I := by
+      intro j
+      rw [← blockFunctional_eq_zero_iff I e]
+      exact congrFun hzero j
+    have hlower : dualDist I * (blockSupport w).card ≤ ∑ j, hammingNorm (w j) := by
+      apply FiniteGeom.mul_card_filter_le_sum (fun j => hammingNorm (w j))
+        (fun j => w j ≠ 0) (dualDist I)
+      intro j hj
+      exact dualDist_le_hammingNorm (hinner j) hj
+    calc
+      d ≤ 2 * dualDist I := hd
+      _ = dualDist I * 2 := Nat.mul_comm _ _
+      _ ≤ dualDist I * (blockSupport w).card := Nat.mul_le_mul_left _ hblocks
+      _ ≤ ∑ j, hammingNorm (w j) := hlower
+
 /-- **Corrected exact threshold.**  A nonembedded concatenated-dual obstruction has exactly two
 possible forms: a zero-functional word meeting at least two inner blocks, or a realization of a
 nonzero outer functional-dual word.  Stating the result for every lower bound is equivalent to
@@ -229,6 +311,18 @@ theorem hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
         omega
       · exact hbeta0
     · exact hweighted beta hbeta hbeta0 w (fun _ => rfl)
+
+/-- Numeric/profile form of the corrected formula
+`delta_emb = min (2 * dualDist I) d_lambda(O)`. -/
+theorem hasNonembeddedDualDistanceAtLeast_iff_le_two_dualDist_and_weighted
+    [Nonempty ι]
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (hcard : 2 ≤ Fintype.card ι)
+    (hdual : dualCode I ≠ ⊥) (d : ℕ) :
+    HasNonembeddedDualDistanceAtLeast I e O d ↔
+      d ≤ 2 * dualDist I ∧ HasNonzeroFunctionalRealizationAtLeast I e O d := by
+  rw [hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted,
+    hasZeroFunctionalMultiblockAtLeast_iff_le_two_dualDist I e O hcard hdual]
 
 omit [DecidableEq V] in
 /-- Below the corrected exact threshold, every concatenated-dual word is an embedded inner-dual
@@ -704,7 +798,10 @@ end
 end RepairCodes
 
 #print axioms RepairCodes.functionalWeight_ne_one_of_isCoordinateSurjective
+#print axioms RepairCodes.exists_dualWord_hammingNorm_eq_dualDist
+#print axioms RepairCodes.hasZeroFunctionalMultiblockAtLeast_iff_le_two_dualDist
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
+#print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_le_two_dualDist_and_weighted
 #print axioms RepairCodes.concatenatedDualWord_transfer_nonembedded
 #print axioms RepairCodes.repairHypergraph_concatenatedCode_eq_embed_nonembedded
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_multiblock_of_isCoordinateSurjective
