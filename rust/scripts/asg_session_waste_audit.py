@@ -317,6 +317,21 @@ def analyze(args: argparse.Namespace) -> dict[str, Any]:
                     for message in item["messages"]
                     if is_review and message.get("role") == "assistant"
                 ),
+                "review_output_tokens": sum(
+                    message.get("output_tokens") or 0
+                    for message in item["messages"]
+                    if is_review and message.get("role") == "assistant"
+                ),
+                "all_context_tokens": sum(
+                    message.get("context_tokens") or 0
+                    for message in item["messages"]
+                    if message.get("role") == "assistant"
+                ),
+                "all_output_tokens": sum(
+                    message.get("output_tokens") or 0
+                    for message in item["messages"]
+                    if message.get("role") == "assistant"
+                ),
                 "review_decisions": collections.Counter(
                     (
                         (parsed.get("outcome") or "unknown")
@@ -386,6 +401,12 @@ def analyze(args: argparse.Namespace) -> dict[str, Any]:
     session_rows.sort(
         key=lambda row: (row["peak_context_tokens"], row["result_chars"]), reverse=True
     )
+    review_context_tokens = sum(row["review_context_tokens"] for row in session_rows)
+    review_output_tokens = sum(row["review_output_tokens"] for row in session_rows)
+    all_context_tokens = sum(row["all_context_tokens"] for row in session_rows)
+    all_output_tokens = sum(row["all_output_tokens"] for row in session_rows)
+    review_model_tokens = review_context_tokens + review_output_tokens
+    all_model_tokens = all_context_tokens + all_output_tokens
     return {
         "parameters": vars(args),
         "sessions": session_rows,
@@ -397,8 +418,14 @@ def analyze(args: argparse.Namespace) -> dict[str, Any]:
             "tool_results_with_bodies": len(results),
             "tool_result_chars": sum(event.chars for event in results),
             "review_rounds": sum(row["review_rounds"] for row in session_rows),
-            "review_context_tokens": sum(
-                row["review_context_tokens"] for row in session_rows
+            "review_context_tokens": review_context_tokens,
+            "review_output_tokens": review_output_tokens,
+            "all_context_tokens": all_context_tokens,
+            "all_output_tokens": all_output_tokens,
+            "review_model_tokens": review_model_tokens,
+            "all_model_tokens": all_model_tokens,
+            "review_token_share_percent": (
+                100.0 * review_model_tokens / all_model_tokens if all_model_tokens else 0.0
             ),
             "review_input_chars": sum(
                 row["input_chars"]
@@ -483,6 +510,7 @@ def render(report: dict[str, Any], args: argparse.Namespace, out: TextIO) -> Non
     print(
         f"approval-review-rounds={summary['review_rounds']:,} "
         f"approval-context-tokens={summary['review_context_tokens']:,} "
+        f"approval-token-share={summary['review_token_share_percent']:.1f}% "
         f"approval-input-chars={summary['review_input_chars']:,} "
         f"decisions={summary['review_decisions']}",
         file=out,

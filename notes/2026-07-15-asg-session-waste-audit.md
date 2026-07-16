@@ -17,6 +17,10 @@ followed by manual job watching and unbounded diagnostic commands.
 - The auto-review sessions made **1,838 review decisions** and recorded **251,163,757 cumulative
   context tokens**. At least **1,815/1,838 (98.7%)** were plain `allow` decisions; the remaining 23
   responses were not machine-parseable by this audit, not established denials.
+- Across all Codex sessions, ASG recorded **599,297,461 total model tokens** (cumulative context plus
+  generated output). Permission-review sessions used **251,284,221**, or **41.93%** of the total.
+  Thus roughly two tokens in five went to permission checking; almost all review outcomes were plain
+  allows.
 - Those review sessions stored 20,036,194 user-input characters. Because the reviewer conversation
   accumulated the transcript deltas, later approvals repeatedly carried a context near 200k–250k
   tokens even for routine local commands.
