@@ -127,3 +127,17 @@ handled as follows:
 The two remaining uses of “projective deep-hole syndrome locus” are deliberate coding-register
 uses, not competing primary terminology: the manuscript otherwise standardizes on `U(A)` and
 “uncovered locus.” The Clebsch page-336 pinpoint remains assigned to the final primary-scan audit.
+
+## Final release-hygiene notes
+
+Fable found nothing further in the mathematics, structure, or claims. Its three optional release
+notes were resolved without another manuscript edit:
+
+- the new paper-directory README documents that `C01`--`C15` are the lexicographically sorted
+  canonical projective-class keys, identifies the complete printed class listing, and explains why
+  Remark 4.6's `C02` is reproducible;
+- `check_chirality.py` is deliberately retained because “support chirality” remains defined
+  shorthand in the paper and the filename is already a dependency and historical manifest entry;
+  the README maps it explicitly to the invariant unordered support bipartition; and
+- C182's exit gate now requires an archive-layout/path audit, the Clebsch p. 336 primary scan, and a
+  stable-identifier check for the companion paper before the DOI-bearing final build.

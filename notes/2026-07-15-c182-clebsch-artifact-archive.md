@@ -33,6 +33,8 @@ Create an immutable release, preferably a GitHub release archived by Zenodo, con
 - the five cited Lean roots and the minimal tracked import closures needed to replay their claims;
 - a top-level `README` giving environment setup, exact commands, expected PASS sentinels, typical
   runtime, and the distinction between strict-kernel Lean results and executable Python checks;
+  it must also document the `C01`--`C15` canonical-key order, print or point to the complete class
+  listing, and map any renamed artifact paths;
 - license files covering code and manuscript/source redistribution;
 - the commit hash, release tag, and machine-readable SHA-256 manifest.
 
@@ -46,6 +48,11 @@ and cite the archived release, not a mutable branch URL.
   audit;
 - release tag points to that exact clean commit;
 - archive download is independently unpacked and replayed in a fresh directory;
+- the availability paragraph's paths match the frozen archive layout, including
+  `check_low_degree_loci.sh` and `check_low_degree_loci.sing`;
+- the primary scan confirms that Clebsch's configuration is correctly pinpointed at p. 336;
+- the companion-paper citation is updated from “working paper, 2026” if an arXiv identifier or
+  other stable public record exists at freeze time;
 - DOI resolves and the manuscript bibliography/availability paragraph names the same version;
 - the final PDF is rebuilt after inserting the DOI.
 
