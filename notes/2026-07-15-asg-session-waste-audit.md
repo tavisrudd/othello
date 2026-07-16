@@ -38,6 +38,28 @@ Tool-result size totals are a lower bound: ASG's ordinary `+show` view exposes c
 result body, so the analyzer recovers result sizes primarily from sessions with an auto-review
 mirror. The approval-round and recorded context-token totals come directly from ASG message fields.
 
+### Estimated total avoidable share
+
+Permission review is the only waste category with a directly attributable token total. The other
+banned patterns overlap: a broad command can also be a poll, a repeated build can end in a giant
+result, and one oversized result is then carried through many later context windows. Exact additive
+attribution is therefore unavailable from the current trace schema.
+
+Using the fraction of deduplicated calls occupied by waits/polls/broad inspections, discounting the
+waits and builds that were genuinely necessary, and restoring weight for the unusually large results
+and their downstream context amplification gives this audit estimate:
+
+| Category | Share of all Codex model tokens | Status |
+|---|---:|---|
+| Permission review | 41.93% | measured |
+| Other newly banned waste | 15–25% (central estimate 20%) | estimated |
+| Combined avoidable consumption | 54–67% (central estimate about 62%) | partly measured, partly estimated |
+| Productive or not shown avoidable | 33–46% (central estimate about 38%) | residual |
+
+The estimate should be used for engineering prioritization, not billing reconciliation. Its main
+conclusion is robust to the range: after eliminating permission-review accumulation, unattended
+build/status handling and bounded source inspection are the next highest-value interventions.
+
 ## Alt-orbit lane
 
 The paired alt-orbit main/review sessions were the second-largest session family in the window:
