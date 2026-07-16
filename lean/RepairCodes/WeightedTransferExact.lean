@@ -50,6 +50,42 @@ def HasNonembeddedDualDistanceAtLeast
     ¬ IsEmbeddedInnerDualBlock I w →
     d ≤ ∑ j, hammingNorm (w j)
 
+/-- A block family is an embedded inner-dual word specifically in block `j`. -/
+def IsEmbeddedInnerDualBlockAt
+    (I : Submodule 𝔽 (κ → 𝔽)) (j : ι) (w : ι → (κ → 𝔽)) : Prop :=
+  w j ∈ dualCode I ∧ ∀ l, l ≠ j → w l = 0
+
+/-- Pointed lower-bound profile: every dual witness nonzero at `(j,x)` which is not the
+zero-extension of an inner-dual word in block `j` has weight at least `d`. -/
+def HasPointedNonembeddedDualDistanceAtLeast
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) (d : ℕ) : Prop :=
+  ∀ w : ι → (κ → 𝔽),
+    (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) →
+    w j x ≠ 0 →
+    ¬ IsEmbeddedInnerDualBlockAt I j w →
+    d ≤ ∑ l, hammingNorm (w l)
+
+/-- The pointed lower-bound profile is exactly bounded pointed-witness confinement. -/
+theorem hasPointedNonembeddedDualDistanceAtLeast_iff
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) (d : ℕ) :
+    HasPointedNonembeddedDualDistanceAtLeast I e O j x d ↔
+      ∀ w : ι → (κ → 𝔽),
+        (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) →
+        w j x ≠ 0 →
+        (∑ l, hammingNorm (w l)) < d →
+        IsEmbeddedInnerDualBlockAt I j w := by
+  constructor
+  · intro h w hwdual hwx hweight
+    by_contra hnot
+    have := h w hwdual hwx hnot
+    omega
+  · intro h w hwdual hwx hnot
+    by_contra hlower
+    have hembedded := h w hwdual hwx (by omega)
+    exact hnot hembedded
+
 /-- Every realization of every nonzero functional-dual tuple has total inner weight at least `d`.
 This is the lower-bound semantics of the manuscript's weighted distance `d_lambda(O)`. -/
 def HasNonzeroFunctionalRealizationAtLeast
@@ -473,6 +509,80 @@ theorem repairHypergraph_concatenatedCode_eq_embed_nonembedded
     have hinner : S ∈ repairHypergraph I x r := by
       apply mem_repairHypergraph.mpr
       refine ⟨hSsub, hScard, wordBlock w j, htransfer.1 j, hwx, ?_⟩
+      exact (Finset.insert_erase hxSupp).symm
+    exact Finset.mem_image.mpr ⟨S, hinner, hmapS⟩
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hR
+    obtain ⟨hSsub, hScard, z, hzdual, hzx, hzsupp⟩ := mem_repairHypergraph.mp hS
+    have hxS : x ∉ S := by
+      intro hx
+      exact (Finset.mem_erase.mp (hSsub hx)).1 rfl
+    let w := singleBlockWord j z
+    have hwdual : w ∈ dualCode (concatenatedCode I e O) :=
+      singleBlockWord_mem_dualCode_concatenatedCode I e O hzdual
+    have hwx : w (j, x) ≠ 0 := by simpa [w, singleBlockWord] using hzx
+    have hsub : S.map (blockEmbedding j) ⊆ univ.erase (j, x) := by
+      intro p hp
+      obtain ⟨a, ha, rfl⟩ := Finset.mem_map.mp hp
+      exact Finset.mem_erase.mpr ⟨by
+        intro h
+        have hax : a = x := congrArg Prod.snd h
+        exact hxS (hax ▸ ha), Finset.mem_univ _⟩
+    have hcard : (S.map (blockEmbedding j)).card ≤ r := by
+      rw [Finset.card_map]
+      exact hScard
+    have hsupp : wordSupport w = insert (j, x) (S.map (blockEmbedding j)) := by
+      change wordSupport (singleBlockWord j z) = _
+      rw [wordSupport_singleBlockWord, hzsupp, Finset.map_insert]
+      rfl
+    exact mem_repairHypergraph.mpr ⟨hsub, hcard, w, hwdual, hwx, hsupp⟩
+
+/-- A pointed nonembedded-witness bound is sufficient for literal repair-hypergraph equality at
+that target.  Unlike the global threshold, this hypothesis ignores obstructions at other
+coordinates and can therefore be strictly sharper. -/
+theorem repairHypergraph_concatenatedCode_eq_embed_pointed
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (r : ℕ) (j : ι) (x : κ)
+    (hd : HasPointedNonembeddedDualDistanceAtLeast I e O j x (r + 2)) :
+    repairHypergraph (concatenatedCode I e O) (j, x) r =
+      embedHypergraph (blockEmbedding j) (repairHypergraph I x r) := by
+  classical
+  ext R
+  constructor
+  · intro hR
+    obtain ⟨hRsub, hRcard, w, hwdual, hwx, hwsupp⟩ := mem_repairHypergraph.mp hR
+    have hxR : (j, x) ∉ R := by
+      intro hx
+      exact (Finset.mem_erase.mp (hRsub hx)).1 rfl
+    have hwt : hammingNorm w ≤ r + 1 := by
+      rw [← card_wordSupport, hwsupp, Finset.card_insert_of_notMem hxR]
+      omega
+    have hsum : (∑ l, hammingNorm (wordBlock w l)) < r + 2 := by
+      rw [← hammingNorm_eq_sum_hammingNorm_wordBlock]
+      omega
+    have hembedded : IsEmbeddedInnerDualBlockAt I j (wordBlock w) :=
+      (hasPointedNonembeddedDualDistanceAtLeast_iff I e O j x (r + 2)).mp hd
+        (wordBlock w) (by simpa [wordBlock] using hwdual) hwx hsum
+    have hsingle : ∀ l, wordBlock w l ≠ 0 → l = j := by
+      intro l hl
+      by_contra hlj
+      exact hl (hembedded.2 l hlj)
+    have hsuppMap := wordSupport_eq_map_wordSupport_wordBlock_of_single hsingle
+    let S : Finset κ := (wordSupport (wordBlock w j)).erase x
+    have hxSupp : x ∈ wordSupport (wordBlock w j) := mem_wordSupport.mpr hwx
+    have hmapS : S.map (blockEmbedding j) = R := by
+      dsimp [S]
+      rw [Finset.map_erase, ← hsuppMap, hwsupp]
+      exact Finset.erase_insert hxR
+    have hScard : S.card ≤ r := by
+      rw [← Finset.card_map (blockEmbedding j), hmapS]
+      exact hRcard
+    have hSsub : S ⊆ univ.erase x := by
+      intro a ha
+      exact Finset.mem_erase.mpr ⟨(Finset.mem_erase.mp ha).1, Finset.mem_univ _⟩
+    have hinner : S ∈ repairHypergraph I x r := by
+      apply mem_repairHypergraph.mpr
+      refine ⟨hSsub, hScard, wordBlock w j, hembedded.1, hwx, ?_⟩
       exact (Finset.insert_erase hxSupp).symm
     exact Finset.mem_image.mpr ⟨S, hinner, hmapS⟩
   · intro hR
@@ -1048,6 +1158,8 @@ end RepairCodes
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_le_two_dualDist_and_weighted
 #print axioms RepairCodes.concatenatedDualWord_transfer_nonembedded
 #print axioms RepairCodes.repairHypergraph_concatenatedCode_eq_embed_nonembedded
+#print axioms RepairCodes.hasPointedNonembeddedDualDistanceAtLeast_iff
+#print axioms RepairCodes.repairHypergraph_concatenatedCode_eq_embed_pointed
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_multiblock_of_isCoordinateSurjective
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_iff_three_strata
 #print axioms RepairCodes.hasSingletonFunctionalMultiblockAtLeast_iff_term

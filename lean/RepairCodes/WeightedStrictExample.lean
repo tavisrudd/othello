@@ -21,17 +21,56 @@ variable [Fintype κ] [DecidableEq κ]
 variable [Field 𝔽] [DecidableEq 𝔽]
 variable [AddCommGroup V] [Module 𝔽 V] [DecidableEq V]
 
+/-- A regular action supplies a disjoint translate whenever the square of the selected-set size
+is smaller than the acting group.  This proves the orbit-counting step used after invoking
+Singer's classical regular-action theorem. -/
+theorem exists_disjoint_translate_of_regular_action
+    {G X : Type*} [Fintype G] [DecidableEq G] [Fintype X] [DecidableEq X]
+    (S : Finset X) (translate : G → X ≃ X)
+    (hregular : ∀ x y : X, ∃! g : G, translate g x = y)
+    (hsmall : S.card * S.card < Fintype.card G) :
+    ∃ g, Disjoint S (S.map (translate g).toEmbedding) := by
+  classical
+  let move : X → X → G := fun x y => Classical.choose (hregular x y)
+  have hmove_unique (x y : X) (g : G) (hg : translate g x = y) : g = move x y := by
+    exact (Classical.choose_spec (hregular x y)).2 g hg
+  let pairs : Finset (X × X) := S ×ˢ S
+  let bad : Finset G := pairs.image fun p => move p.1 p.2
+  have hbadcard : bad.card ≤ S.card * S.card := by
+    calc
+      bad.card ≤ pairs.card := Finset.card_image_le
+      _ = S.card * S.card := by simp [pairs]
+  have hexists : ∃ g : G, g ∉ bad := by
+    by_contra h
+    push_neg at h
+    have huniv : (univ : Finset G) ⊆ bad := fun g _ => h g
+    have hcard : Fintype.card G ≤ bad.card := by
+      simpa using Finset.card_le_card huniv
+    omega
+  obtain ⟨g, hgbad⟩ := hexists
+  refine ⟨g, ?_⟩
+  rw [Finset.disjoint_left]
+  intro y hyS hytranslate
+  obtain ⟨x, hxS, hxy⟩ := Finset.mem_map.mp hytranslate
+  have hgmove : g = move x y := hmove_unique x y g hxy
+  apply hgbad
+  rw [hgmove]
+  apply Finset.mem_image.mpr
+  exact ⟨(x, y), by simp [pairs, hxS, hyS], rfl⟩
+
 /-- The exact numerical deduction from regular Singer counting: a 20-set in a regular 820-point
 action has a disjoint translate.  Regularity itself is the cited classical Singer input. -/
 theorem exists_disjoint_translate_of_twenty_in_regular_820
     {G X : Type*} [Fintype G] [DecidableEq G] [Fintype X] [DecidableEq X]
     (S : Finset X) (translate : G → X ≃ X)
     (hS : S.card = 20) (hG : Fintype.card G = 820)
-    (hcount : (∑ g, (S ∩ S.map (translate g).toEmbedding).card) = S.card * S.card) :
+    (hregular : ∀ x y : X, ∃! g : G, translate g x = y) :
     ∃ g, Disjoint S (S.map (translate g).toEmbedding) := by
-  apply exists_disjoint_translate_of_sum_inter_lt S translate
-  rw [hcount, hS, hG]
-  norm_num
+  apply exists_disjoint_translate_of_regular_action S translate hregular
+  calc
+    S.card * S.card = 20 * 20 := by rw [hS]
+    _ < 820 := by norm_num
+    _ = Fintype.card G := hG.symm
 
 /-- The generalized parity-check map. -/
 def generalizedSPCFiveCheck (a : V ≃ₗ[𝔽] V) : (Fin 5 → V) →ₗ[𝔽] V where
@@ -303,6 +342,47 @@ theorem hasUnitFunctionalCost_iff_coordinate_orbit
     rw [hfilter]
     simp
 
+/-- Dual distance at least two makes every inner coordinate functional nonzero. -/
+theorem innerCoordinateFunctional_ne_zero
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (hdist : 2 ≤ dualDist I) (k : κ) :
+    innerCoordinateFunctional I e k ≠ 0 := by
+  intro hzero
+  have hzdual : (Pi.single k (1 : 𝔽) : κ → 𝔽) ∈ dualCode I := by
+    rw [← blockFunctional_eq_zero_iff I e, blockFunctional_single, one_smul]
+    exact hzero
+  have hz0 : (Pi.single k (1 : 𝔽) : κ → 𝔽) ≠ 0 := by
+    intro h
+    have := congrFun h k
+    simp at this
+  have hnorm : hammingNorm (Pi.single k (1 : 𝔽) : κ → 𝔽) = 1 := by
+    rw [hammingNorm]
+    have hfilter :
+        (univ.filter fun x => (Pi.single k (1 : 𝔽) : κ → 𝔽) x ≠ 0) =
+          ({k} : Finset κ) := by
+      ext x
+      by_cases hx : x = k
+      · subst x
+        simp
+      · simp [Pi.single_apply, hx]
+    rw [hfilter]
+    simp
+  have := dualDist_le_hammingNorm hzdual hz0
+  omega
+
+/-- Precomposition by a linear equivalence preserves nonzero dual functionals. -/
+def precompNonzeroDual (a : V ≃ₗ[𝔽] V)
+    (f : {f : Module.Dual 𝔽 V // f ≠ 0}) :
+    {f : Module.Dual 𝔽 V // f ≠ 0} :=
+  ⟨f.1.comp a.toLinearMap, by
+    intro hzero
+    apply f.2
+    apply LinearMap.ext
+    intro v
+    obtain ⟨u, rfl⟩ := a.surjective v
+    have h := LinearMap.congr_fun hzero u
+    simpa using h⟩
+
 /-- The raw-functional form of disjointness between the seed's cost-one projective set and its
 multiplier translate.  It is invariant under nonzero scalar rescaling and is exactly what the
 Singer argument supplies. -/
@@ -312,6 +392,65 @@ def HasDisjointUnitCostMultiplier
   ∀ f : Module.Dual 𝔽 V, f ≠ 0 →
     ¬ (HasUnitFunctionalCost I e f ∧
       HasUnitFunctionalCost I e (f.comp a.toLinearMap))
+
+/-- **Singer-to-code bridge.**  Suppose a regular projective action is presented by projective
+classes of nonzero dual functionals, compatible linear multipliers, and the usual scalar-orbit
+equality.  Then the completed seed's twenty coordinate classes have a multiplier translate
+disjoint from themselves, and that multiplier satisfies the raw unit-cost predicate consumed by
+the generalized-SPC theorem.  The regular action is the sole cited Singer input; all deductions
+from it are made here. -/
+theorem exists_disjointUnitCostMultiplier_of_regular_projective_action
+    {G X : Type*} [Fintype G] [DecidableEq G] [Fintype X] [DecidableEq X]
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (hdist : 3 ≤ dualDist I) (hcard : Fintype.card κ = 20)
+    (classOf : {f : Module.Dual 𝔽 V // f ≠ 0} → X)
+    (translate : G → X ≃ X) (multiplier : G → V ≃ₗ[𝔽] V)
+    (hGcard : Fintype.card G = 820)
+    (hregular : ∀ x y : X, ∃! g : G, translate g x = y)
+    (hclass : ∀ f g, classOf f = classOf g ↔
+      ∃ c : 𝔽, c ≠ 0 ∧ f.1 = c • g.1)
+    (hcompat : ∀ g f,
+      translate g (classOf f) = classOf (precompNonzeroDual (multiplier g) f)) :
+    ∃ g : G, HasDisjointUnitCostMultiplier I e (multiplier g) := by
+  classical
+  let coord : κ → {f : Module.Dual 𝔽 V // f ≠ 0} := fun k =>
+    ⟨innerCoordinateFunctional I e k,
+      innerCoordinateFunctional_ne_zero I e (hdist.trans' (by omega)) k⟩
+  let S : Finset X := univ.image fun k => classOf (coord k)
+  have hcoordInjective : Function.Injective (fun k => classOf (coord k)) := by
+    intro k l hkl
+    obtain ⟨c, hc, heq⟩ := (hclass (coord k) (coord l)).mp hkl
+    exact innerCoordinateFunctional_orbit_injective I e hdist hc heq
+  have hScard : S.card = 20 := by
+    rw [show S = univ.image (fun k => classOf (coord k)) by rfl,
+      Finset.card_image_of_injective _ hcoordInjective]
+    simpa using hcard
+  have hunit (f : {f : Module.Dual 𝔽 V // f ≠ 0}) :
+      classOf f ∈ S ↔ HasUnitFunctionalCost I e f.1 := by
+    constructor
+    · intro hfS
+      obtain ⟨k, _, hk⟩ := Finset.mem_image.mp hfS
+      obtain ⟨c, hc, heq⟩ := (hclass f (coord k)).mp hk.symm
+      exact (hasUnitFunctionalCost_iff_coordinate_orbit I e f.1).mpr ⟨k, c, hc, heq⟩
+    · intro hcost
+      obtain ⟨k, c, hc, heq⟩ :=
+        (hasUnitFunctionalCost_iff_coordinate_orbit I e f.1).mp hcost
+      apply Finset.mem_image.mpr
+      refine ⟨k, Finset.mem_univ _, ?_⟩
+      exact ((hclass f (coord k)).mpr ⟨c, hc, heq⟩).symm
+  obtain ⟨g, hg⟩ := exists_disjoint_translate_of_twenty_in_regular_820
+    S translate hScard hGcard hregular
+  refine ⟨g, ?_⟩
+  intro f hf hboth
+  let fs : {f : Module.Dual 𝔽 V // f ≠ 0} := ⟨f, hf⟩
+  have hfS : classOf fs ∈ S := (hunit fs).mpr hboth.1
+  have hcompS : classOf (precompNonzeroDual (multiplier g) fs) ∈ S :=
+    (hunit (precompNonzeroDual (multiplier g) fs)).mpr hboth.2
+  have htranslated : classOf (precompNonzeroDual (multiplier g) fs) ∈
+      S.map (translate g).toEmbedding := by
+    apply Finset.mem_map.mpr
+    exact ⟨classOf fs, hfS, hcompat g fs⟩
+  exact (Finset.disjoint_left.mp hg hcompS htranslated)
 
 /-- A disjoint unit-cost multiplier forces weighted functional distance at least six for its
 generalized-SPC outer code. -/
@@ -377,6 +516,59 @@ theorem generalizedSPCFive_radiusFour_transfer_of_disjoint
   exact repairHypergraph_concatenatedCode_eq_embed_nonembedded
     I e (generalizedSPCFive a) 4 hnonembedded j x
 
+/-- For the completed seed, a disjoint unit-cost multiplier makes both natural obstruction
+thresholds exactly six: they have lower bound six but not seven. -/
+theorem projectiveAxisTwistedCubic_exact_threshold_six_of_disjoint
+    {L : Type*} [AddCommGroup L] [Module 𝔽 L] [DecidableEq L]
+    [Fintype 𝔽] [CharP 𝔽 3]
+    (e : L ≃ₗ[𝔽] projectiveAxisTwistedCubicCode (𝔽 := 𝔽))
+    (a : L ≃ₗ[𝔽] L)
+    (hdisjoint : HasDisjointUnitCostMultiplier
+      (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e a) :
+    HasNonembeddedDualDistanceAtLeast
+        (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e (generalizedSPCFive a) 6 ∧
+      ¬ HasNonembeddedDualDistanceAtLeast
+        (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e (generalizedSPCFive a) 7 ∧
+      HasMultiblockDualDistanceAtLeast
+        (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e (generalizedSPCFive a) 6 ∧
+      ¬ HasMultiblockDualDistanceAtLeast
+        (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e (generalizedSPCFive a) 7 := by
+  let I := projectiveAxisTwistedCubicCode (𝔽 := 𝔽)
+  have hdual : dualCode I ≠ ⊥ := by
+    intro hbot
+    have hzero : dualDist I = 0 := by
+      rw [dualDist, hbot]
+      simp [minDist]
+    have hthree : dualDist I = 3 := projectiveAxisTwistedCubicCode_dualDist
+    omega
+  have hweighted :
+      HasNonzeroFunctionalRealizationAtLeast I e (generalizedSPCFive a) 6 :=
+    generalizedSPCFive_weightedDistance_six_of_disjoint I e a hdisjoint
+  have hzero : HasZeroFunctionalMultiblockAtLeast I e (generalizedSPCFive a) 6 :=
+    hasZeroFunctionalMultiblockAtLeast_of_two_dualDist I e (generalizedSPCFive a) 6 (by
+      dsimp [I]
+      rw [projectiveAxisTwistedCubicCode_dualDist])
+  have hnonembedded :
+      HasNonembeddedDualDistanceAtLeast I e (generalizedSPCFive a) 6 :=
+    (hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
+      I e (generalizedSPCFive a) 6).mpr ⟨hzero, hweighted⟩
+  have hnotseven :
+      ¬ HasNonembeddedDualDistanceAtLeast I e (generalizedSPCFive a) 7 := by
+    intro hseven
+    have hbound := (hasNonembeddedDualDistanceAtLeast_iff_le_two_dualDist_and_weighted
+      I e (generalizedSPCFive a) (by simp) hdual 7).mp hseven
+    have hthree : dualDist I = 3 := projectiveAxisTwistedCubicCode_dualDist
+    omega
+  have hsurj : IsCoordinateSurjective (generalizedSPCFive a) :=
+    generalizedSPCFive_isCoordinateSurjective a
+  have hequiv (d : ℕ) :
+      HasNonembeddedDualDistanceAtLeast I e (generalizedSPCFive a) d ↔
+        HasMultiblockDualDistanceAtLeast I e (generalizedSPCFive a) d :=
+    hasNonembeddedDualDistanceAtLeast_iff_multiblock_of_isCoordinateSurjective
+      I e (generalizedSPCFive a) hsurj d
+  exact ⟨hnonembedded, hnotseven, (hequiv 6).mp hnonembedded,
+    fun hseven => hnotseven ((hequiv 7).mpr hseven)⟩
+
 /-- Over a nine-element field, the completed cubic--axis seed has twenty pairwise distinct
 projective coordinate-functional classes, and these are exactly its unit-cost functional
 classes.  This packages the seed-side input used in the Singer multiplier argument. -/
@@ -430,10 +622,50 @@ theorem projectiveAxisTwistedCubic_strict_weighted_transfer
   exact generalizedSPCFive_radiusFour_transfer_of_disjoint _ e a
     projectiveAxisTwistedCubicCode_dualDist hdisjoint j x
 
+/-- End-to-end paper specialization from a presented regular Singer action.  The action's
+regularity is the cited classical input; the theorem constructs the disjoint multiplier and then
+derives the strict weighted transfer conclusion without assuming `HasDisjointUnitCostMultiplier`. -/
+theorem projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action
+    {L G X : Type*} [AddCommGroup L] [Module 𝔽 L] [DecidableEq L]
+    [Fintype 𝔽] [CharP 𝔽 3]
+    [Fintype G] [DecidableEq G] [Fintype X] [DecidableEq X]
+    (hFcard : Fintype.card 𝔽 = 9)
+    (e : L ≃ₗ[𝔽] projectiveAxisTwistedCubicCode (𝔽 := 𝔽))
+    (classOf : {f : Module.Dual 𝔽 L // f ≠ 0} → X)
+    (translate : G → X ≃ X) (multiplier : G → L ≃ₗ[𝔽] L)
+    (hGcard : Fintype.card G = 820)
+    (hregular : ∀ x y : X, ∃! g : G, translate g x = y)
+    (hclass : ∀ f g, classOf f = classOf g ↔
+      ∃ c : 𝔽, c ≠ 0 ∧ f.1 = c • g.1)
+    (hcompat : ∀ g f,
+      translate g (classOf f) = classOf (precompNonzeroDual (multiplier g) f))
+    (f : Module.Dual 𝔽 L) (hf : f ≠ 0) :
+    ∃ g : G,
+      HasFunctionalDualDistanceAtLeast (generalizedSPCFive (multiplier g)) 5 ∧
+        ¬ HasFunctionalDualDistanceAtLeast (generalizedSPCFive (multiplier g)) 6 ∧
+        HasNonzeroFunctionalRealizationAtLeast
+          (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e
+          (generalizedSPCFive (multiplier g)) 6 ∧
+        IsCoordinateSurjective (generalizedSPCFive (multiplier g)) ∧
+        ∀ j x,
+          repairHypergraph
+              (concatenatedCode (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e
+                (generalizedSPCFive (multiplier g))) (j, x) 4 =
+            embedHypergraph (blockEmbedding j)
+              (repairHypergraph (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) x 4) := by
+  have hindex : Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽) = 20 := by
+    simp [hFcard]
+  obtain ⟨g, hg⟩ := exists_disjointUnitCostMultiplier_of_regular_projective_action
+    (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e
+    (by rw [projectiveAxisTwistedCubicCode_dualDist]) hindex
+    classOf translate multiplier hGcard hregular hclass hcompat
+  exact ⟨g, projectiveAxisTwistedCubic_strict_weighted_transfer e (multiplier g) hg f hf⟩
+
 end
 end RepairCodes
 
 #print axioms RepairCodes.mem_functionalDual_generalizedSPCFive_iff
+#print axioms RepairCodes.exists_disjoint_translate_of_regular_action
 #print axioms RepairCodes.exists_disjoint_translate_of_twenty_in_regular_820
 #print axioms RepairCodes.generalizedSPCFive_functionalDual_full_support
 #print axioms RepairCodes.generalizedSPCFive_functionalDistance_five
@@ -441,7 +673,10 @@ end RepairCodes
 #print axioms RepairCodes.generalizedSPCFive_isCoordinateSurjective
 #print axioms RepairCodes.hasUnitFunctionalCost_iff_coordinate_orbit
 #print axioms RepairCodes.innerCoordinateFunctional_orbit_injective
+#print axioms RepairCodes.exists_disjointUnitCostMultiplier_of_regular_projective_action
 #print axioms RepairCodes.projectiveAxisTwistedCubic_twenty_unitCost_orbits
+#print axioms RepairCodes.projectiveAxisTwistedCubic_exact_threshold_six_of_disjoint
 #print axioms RepairCodes.generalizedSPCFive_weightedDistance_six_of_disjoint
 #print axioms RepairCodes.generalizedSPCFive_radiusFour_transfer_of_disjoint
 #print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer
+#print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action

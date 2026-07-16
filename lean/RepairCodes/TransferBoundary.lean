@@ -1,4 +1,4 @@
-import RepairCodes.SeedLift
+import RepairCodes.WeightedTransferExact
 import Mathlib.Algebra.Field.ZMod
 
 /-!
@@ -314,8 +314,193 @@ theorem outerFunctionalDualDistanceGate_boundary_counterexample :
   intro heq
   exact outerBoundaryRepair_not_embedded (heq ▸ outerBoundaryRepair_mem)
 
+/-! ## The nonsurjective one-block-functional counterexample -/
+
+/-- The full length-one inner code used in the manuscript's corrected-threshold counterexample. -/
+def nonsurjectiveInnerCode : Submodule BoundaryField (Fin 1 → BoundaryField) := ⊤
+
+/-- The evident encoder of one scalar into the full length-one inner code. -/
+def nonsurjectiveInnerEncoder : BoundaryField ≃ₗ[BoundaryField] nonsurjectiveInnerCode where
+  toFun a := ⟨fun _ => a, Submodule.mem_top⟩
+  invFun w := w.1 0
+  left_inv _ := rfl
+  right_inv w := by
+    apply Subtype.ext
+    funext i
+    fin_cases i
+    rfl
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+/-- The two-symbol outer code `{(0,v)}`; its first projection is not onto. -/
+def nonsurjectiveOuterCode : Submodule BoundaryField (Fin 2 → BoundaryField) where
+  carrier := {u | u 0 = 0}
+  zero_mem' := rfl
+  add_mem' := by
+    intro u v hu hv
+    change u 0 = 0 at hu
+    change v 0 = 0 at hv
+    simpa only [Set.mem_setOf_eq, Pi.add_apply, hu, hv, add_zero]
+  smul_mem' := by
+    intro c u hu
+    change u 0 = 0 at hu
+    simpa only [Set.mem_setOf_eq, Pi.smul_apply, hu, smul_zero]
+
+@[simp] theorem mem_nonsurjectiveOuterCode {u : Fin 2 → BoundaryField} :
+    u ∈ nonsurjectiveOuterCode ↔ u 0 = 0 := Iff.rfl
+
+/-- The concatenated dual consists exactly of words whose second block vanishes. -/
+theorem mem_dualCode_nonsurjectiveConcatenation_iff
+    {w : Fin 2 × Fin 1 → BoundaryField} :
+    w ∈ dualCode
+        (concatenatedCode nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+          nonsurjectiveOuterCode) ↔
+      w (1, 0) = 0 := by
+  constructor
+  · intro hw
+    have hu : (![0, 1] : Fin 2 → BoundaryField) ∈ nonsurjectiveOuterCode := by
+      simp [nonsurjectiveOuterCode]
+    have hc : concatenationLinearMap nonsurjectiveInnerCode nonsurjectiveInnerEncoder ![0, 1] ∈
+        concatenatedCode nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+          nonsurjectiveOuterCode :=
+      Submodule.mem_map.mpr ⟨![0, 1], hu, rfl⟩
+    have h := hw _ hc
+    simpa [dotProduct, Fintype.sum_prod_type, Fin.sum_univ_two, Fin.sum_univ_one,
+      nonsurjectiveInnerEncoder] using h
+  · intro hw
+    rw [mem_dualCode]
+    intro c hc
+    obtain ⟨u, hu, rfl⟩ := Submodule.mem_map.mp hc
+    have hu0 : u 0 = 0 := hu
+    simp [dotProduct, Fintype.sum_prod_type, Fin.sum_univ_two, Fin.sum_univ_one,
+      nonsurjectiveInnerEncoder, hu0, hw]
+
+/-- The unit word in the unconstrained first dual block. -/
+def nonsurjectiveDualWitness : Fin 2 → (Fin 1 → BoundaryField) :=
+  fun j _ => if j = 0 then 1 else 0
+
+theorem nonsurjectiveDualWitness_mem :
+    (fun p => nonsurjectiveDualWitness p.1 p.2) ∈ dualCode
+      (concatenatedCode nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+        nonsurjectiveOuterCode) := by
+  rw [mem_dualCode_nonsurjectiveConcatenation_iff]
+  simp [nonsurjectiveDualWitness]
+
+@[simp] theorem nonsurjectiveDualWitness_weight :
+    (∑ j, hammingNorm (nonsurjectiveDualWitness j)) = 1 := by
+  decide
+
+theorem nonsurjectiveDualWitness_not_embedded :
+    ¬ IsEmbeddedInnerDualBlock nonsurjectiveInnerCode nonsurjectiveDualWitness := by
+  rintro ⟨j, hjdual, hjzero⟩
+  fin_cases j
+  · have h := hjdual (fun _ => 1) Submodule.mem_top
+    simpa [nonsurjectiveDualWitness, dotProduct, Fin.sum_univ_one] using h
+  · have hzero := congrFun (hjzero 0 (by decide)) 0
+    simp [nonsurjectiveDualWitness] at hzero
+
+/-- There is no multiblock dual word in the nonsurjective example, so every natural-number lower
+bound on the multiblock threshold holds. -/
+theorem nonsurjective_multiblock_vacuous (d : ℕ) :
+    HasMultiblockDualDistanceAtLeast nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+      nonsurjectiveOuterCode d := by
+  intro w hwdual hblocks
+  have hw1coord : w 1 0 = 0 :=
+    (mem_dualCode_nonsurjectiveConcatenation_iff.mp (by simpa using hwdual))
+  have hw1 : w 1 = 0 := by
+    funext x
+    fin_cases x
+    exact hw1coord
+  have hcard : (blockSupport w).card ≤ 1 := by
+    apply Finset.card_le_one.mpr
+    intro a ha b hb
+    have ha0 : a = 0 := by
+      fin_cases a
+      · rfl
+      · exact False.elim ((Finset.mem_filter.mp ha).2 hw1)
+    have hb0 : b = 0 := by
+      fin_cases b
+      · rfl
+      · exact False.elim ((Finset.mem_filter.mp hb).2 hw1)
+    exact ha0.trans hb0.symm
+  omega
+
+/-- The corrected threshold in the nonsurjective example is exactly one in lower-bound-profile
+form, despite the vacuous infinite multiblock threshold. -/
+theorem nonsurjective_nonembedded_threshold_one :
+    HasNonembeddedDualDistanceAtLeast nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+        nonsurjectiveOuterCode 1 ∧
+      ¬ HasNonembeddedDualDistanceAtLeast nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+        nonsurjectiveOuterCode 2 := by
+  constructor
+  · intro w hwdual hnot
+    have hw0 : (fun p : Fin 2 × Fin 1 => w p.1 p.2) ≠ 0 := by
+      intro hwzero
+      apply hnot
+      refine ⟨0, ?_, ?_⟩
+      · rw [show w 0 = 0 by funext x; exact congrFun hwzero (0, x)]
+        exact Submodule.zero_mem _
+      · intro l hl
+        funext x
+        exact congrFun hwzero (l, x)
+    have hpos : 0 < hammingNorm (fun p : Fin 2 × Fin 1 => w p.1 p.2) :=
+      hammingNorm_pos_iff.mpr hw0
+    rwa [hammingNorm_eq_sum_hammingNorm_wordBlock] at hpos
+  · intro htwo
+    have := htwo nonsurjectiveDualWitness nonsurjectiveDualWitness_mem
+      nonsurjectiveDualWitness_not_embedded
+    rw [nonsurjectiveDualWitness_weight] at this
+    omega
+
+theorem nonsurjectiveDualWitness_support :
+    wordSupport (fun p => nonsurjectiveDualWitness p.1 p.2) =
+      ({(0, 0)} : Finset (Fin 2 × Fin 1)) := by
+  decide
+
+theorem nonsurjective_emptyRepair_mem :
+    (∅ : Finset (Fin 2 × Fin 1)) ∈ repairHypergraph
+      (concatenatedCode nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+        nonsurjectiveOuterCode) (0, 0) 0 := by
+  apply mem_repairHypergraph.mpr
+  refine ⟨by simp, by simp, (fun p => nonsurjectiveDualWitness p.1 p.2),
+    nonsurjectiveDualWitness_mem, ?_, ?_⟩
+  · simp [nonsurjectiveDualWitness]
+  · simpa using nonsurjectiveDualWitness_support
+
+theorem nonsurjective_inner_emptyRepair_not_mem :
+    (∅ : Finset (Fin 1)) ∉ repairHypergraph nonsurjectiveInnerCode 0 0 := by
+  intro h
+  obtain ⟨_, _, z, hzdual, hzx, _⟩ := mem_repairHypergraph.mp h
+  have horth := hzdual (fun _ => 1) Submodule.mem_top
+  have hz0 : z 0 = 0 := by
+    simpa [dotProduct, Fin.sum_univ_one] using horth
+  exact hzx hz0
+
+/-- Literal radius-zero hypergraph failure in the manuscript's nonsurjective example. -/
+theorem nonsurjective_multiblock_confinement_not_transfer :
+    repairHypergraph
+        (concatenatedCode nonsurjectiveInnerCode nonsurjectiveInnerEncoder
+          nonsurjectiveOuterCode) (0, 0) 0 ≠
+      embedHypergraph (blockEmbedding (0 : Fin 2))
+        (repairHypergraph nonsurjectiveInnerCode 0 0) := by
+  intro heq
+  have hempty : (∅ : Finset (Fin 2 × Fin 1)) ∈
+      embedHypergraph (blockEmbedding (0 : Fin 2))
+        (repairHypergraph nonsurjectiveInnerCode 0 0) := by
+    rw [← heq]
+    exact nonsurjective_emptyRepair_mem
+  obtain ⟨S, hS, hmap⟩ := Finset.mem_image.mp hempty
+  have hcard : S.card = 0 := by
+    rw [← Finset.card_map (blockEmbedding (0 : Fin 2)), hmap]
+    rfl
+  have hSempty : S = ∅ := Finset.card_eq_zero.mp hcard
+  exact nonsurjective_inner_emptyRepair_not_mem (hSempty ▸ hS)
+
 #print axioms innerDualDistanceGate_boundary_counterexample
 #print axioms outerFunctionalDualDistanceGate_boundary_counterexample
+#print axioms nonsurjective_multiblock_vacuous
+#print axioms nonsurjective_nonembedded_threshold_one
+#print axioms nonsurjective_multiblock_confinement_not_transfer
 
 end
 end RepairCodes
