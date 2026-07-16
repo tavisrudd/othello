@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — concurrent acceptance handshake landed; strict worker adoption next
+**Status**: IN PROGRESS — strict worker adoption landed; managed Lean queue semantics next
 
 ## Goal
 
@@ -482,6 +482,20 @@ one-second `sleep`, observed exit 0, and cleaned its exact UUID unit; it never i
 legacy queue. Nix Python cannot discover `libsystemd` through `find_library`, so the supported host
 fallback is the stable `/run/current-system/sw/lib/libsystemd.so.0` closure symlink. Step 3 is now
 complete; step 4 remains strict managed-worker adoption and pre-lock format-2 status.
+
+Step 4a adds the separate `lean-build-systemd-worker.py` without editing or importing execution
+semantics from the active legacy runner. Nine default tests plus a real transient-service fixture
+pass. Before any status or lock activity, adoption verifies non-symlink state/run directories and
+`submission.json`, effective-UID ownership, exact 0700/0600 modes, bounded parse/digest, run/unit
+derivation, absolute run and Lean-root paths, actual working directory, complete worker argv and
+argv digest, effective account, and both environment nonces. Missing, replaced, symlinked,
+wrong-mode, wrong-owner, path-substituted, nonce-mismatched, and preexisting-status cases all fail
+without creating or overwriting status. After adoption the sole worker writer atomically publishes
+format-2 `queued/initializing` and `queued/waiting-for-lock`. The live non-Lean fixture held its exact
+fixture lock, observed that queued state while the service remained alive, released the lock, then
+observed terminal success only after unlock; a timeout fixture records `refused`/2. This proves the
+ordering substrate only. Step 4b must integrate the measured resource/quiet/build/aggregate
+semantics into the new worker while leaving legacy users undisturbed.
 
 ## Adversarial design review
 
