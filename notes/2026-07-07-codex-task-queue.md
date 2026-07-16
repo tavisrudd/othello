@@ -73,7 +73,7 @@ unless they retain an explicit open tail.
 
 ### `repaircodes`
 
-- **C202 `[repaircodes]` [QUEUED]** — classify q=9 minimum blockers/maximum repair families → `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
+- **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum blockers classified under monomial `PGL(2,9)`; exact full-port Burnside census records the matching-orbit explosion → `notes/2026-07-15-c202-repair-extremizer-classification.md`.
 - **C203 `[repaircodes]` [QUEUED]** — retain coefficients and test operational repair guarantees → `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
 
 ### Dormant / handoff-owned lanes

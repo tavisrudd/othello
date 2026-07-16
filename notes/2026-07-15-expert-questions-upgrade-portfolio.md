@@ -80,10 +80,12 @@ They are questions to pose, not partial sections to add now.
 
 ### 5. Complete repair hypergraphs
 
-**Bounded structural upgrade (C202).** For the q=9 completed cubic-axis seed, classify minimum
-blockers and maximum pairwise-disjoint repair families up to the monomial automorphism group, not
-only their cardinalities tau and nu. Emit an independently replayable ILP/orbit certificate and
-test whether the optimizer types persist symbolically for q=3^h.
+**Bounded structural upgrade (C202, reported).** The q=9 locality-optimal radius-three port has
+exact cubic/axis maximum-family orbit counts `7/65` and blocker orbit counts `2/8`; all minimum
+blockers at radius four are also classified (`1/2` orbits). The full-port maximum-family census is
+an exact negative boundary: `1,306,963/4,265` orbits. The replayable DP/ILP emitter, Burnside
+certificate, representatives, and symbolic-persistence verdict are in the
+[C202 report](2026-07-15-c202-repair-extremizer-classification.md).
 
 **Operational scout (C203).** Retain coefficient-labelled repair equations and determine what is
 and is not implied about helper access, bandwidth, and availability. The deliverable is either one
