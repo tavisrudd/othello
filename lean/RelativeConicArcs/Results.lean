@@ -3,6 +3,10 @@ import RelativeConicArcs.ExampleChecks.Q8
 import RelativeConicArcs.ExampleChecks.Q9
 import RelativeConicArcs.ExampleChecks.Q11
 import RelativeConicArcs.ExampleChecks.Q16
+import RelativeConicArcs.Q11NonGRS
+import RelativeConicArcs.Q16ExceptionalArithmetic
+import RelativeConicArcs.Q16Profile
+import RelativeConicArcs.Q16QuadraticTransport
 import RelativeConicArcs.Q16Result
 
 /-!
