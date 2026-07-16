@@ -85,3 +85,8 @@ Use a systemd user transient service as the proposed lifecycle owner. Keep
 Retain Task Spooler as a documented alternative, not a new dependency. Do not treat any supervisor
 as a direct model-notification API: the harness must keep one event-driven waiter alive and perform
 its own callback when the supervised job terminates.
+
+Origin scope is resolved before submission from matching CLI options or `OTHELLO_HARNESS`,
+`OTHELLO_SESSION_ID`, `OTHELLO_LANE`, and `OTHELLO_TASK_ID`, with CLI taking precedence. Codex may
+derive its session field from `CODEX_THREAD_ID`. Environment values must be present in the parent
+agent process to serve as session defaults; an `export` in a child tool shell is not persistent.

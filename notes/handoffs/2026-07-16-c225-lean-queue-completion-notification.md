@@ -90,6 +90,33 @@ lane, not a value inferred from Git. Codex/Claude submissions require an allocat
 `C[0-9]+`. Manual non-task probes use `task_id=null`, are visibly marked `manual`, and may not be
 presented as lane work. Manual submission requires an explicit stable session token.
 
+Scope identifiers have symmetric CLI/environment inputs:
+
+| Field | CLI | Environment |
+|---|---|---|
+| harness | `--harness codex|claude|manual` | `OTHELLO_HARNESS` |
+| native session | `--session-id ID` | `OTHELLO_SESSION_ID` |
+| work lane | `--lane ALIAS` | `OTHELLO_LANE` |
+| C task | `--task-id C###` | `OTHELLO_TASK_ID` |
+
+Resolution is per field: an explicit CLI option wins, then a nonempty `OTHELLO_*` value, then a
+documented native-harness value only for fields the harness actually supplies (`CODEX_THREAD_ID`
+may fill session ID and identifies Codex). Conflicting lower-precedence values are retained in a
+bounded diagnostic but never silently override the winner. Values are normalized and validated
+once, then the resolved origin object is written to immutable `submission.json`; downstream code
+does not resolve the environment again.
+
+Agent submissions fail before systemd submission if session, lane, or C-task remains missing or
+invalid. They never infer lane/task from Git state, the current handoff, prompt text, or a previous
+run. The effective OS username is recorded from the process credentials and must be `tavis` on this
+supported host; it is not a caller-controlled scope option.
+
+For set-once use, launch the Codex/Claude session with `OTHELLO_LANE` and `OTHELLO_TASK_ID` in its
+parent environment; the harness supplies its native session ID. Exporting variables inside one
+short-lived agent shell command cannot mutate the parent agent environment and therefore does not
+persist to later tool calls. A future session-scope command/file would be a separate explicit
+source with defined precedence, not an implicit fallback added to this ADR.
+
 The record also captures a user-manager generation tuple: host boot ID, D-Bus unique owner of
 `org.freedesktop.systemd1`, that owner's Unix PID, and `/proc/<pid>/stat` start ticks. The adapter
 reads owner→PID→start ticks→owner and accepts the tuple only if both owner reads match. This
@@ -328,47 +355,51 @@ retention, parsing, or availability, and unbounded journal content never reaches
 2. Before submission, a restrictive immutable record binds run ID, UUID unit, absolute paths/argv,
    user/harness/session/lane/C-task origin, and the manager-generation tuple; the blocking adapter
    records a fully matched InvocationID before successful-unit GC without a resubmit race.
-3. Status exists in `queued/waiting-for-lock` before a held owner lock is released; no Lake command
+3. Table-driven origin tests cover CLI-over-environment precedence, native Codex session fallback,
+   explicit task/lane overrides for a session switch, empty/invalid/conflicting values, and refusal
+   when required agent scope remains unresolved.
+4. Status exists in `queued/waiting-for-lock` before a held owner lock is released; no Lake command
    is invoked during that phase.
-4. Lock timeout records `refused`/2; build and aggregate failures record `failed`/1; SIGTERM records
+5. Lock timeout records `refused`/2; build and aggregate failures record `failed`/1; SIGTERM records
    the signal and the documented interrupted code.
-5. With `KillMode=mixed` and `TimeoutStopSec=120s`, stop with a live child proves TERM reaches Python
+6. With `KillMode=mixed` and `TimeoutStopSec=120s`, stop with a live child proves TERM reaches Python
    first, Python forwards/reaps, releases the lock, and records interruption before exit; escalation
    leaves no cgroup descendant. Forced worker/cgroup death and failure before status creation yield
    bounded external effective states without mutating canonical disk state.
-6. Notification occurs only after service exit/lock release, uses a stable event ID, and is at most
+7. Notification occurs only after service exit/lock release, uses a stable event ID, and is at most
    once per live adapter invocation. Two adapters may emit the same ID and are deduplicable.
-7. A harness fixture owns one blocking wait and consumes one bounded completion envelope; it uses no
+8. A harness fixture owns one blocking wait and consumes one bounded completion envelope; it uses no
    `sleep`, repeated `status`, process-table polling, or live-log capture. Private harness delivery
    beyond that adapter contract is not claimed as a repository test.
-8. Inspection handles already-complete, malformed, oversized, missing, format-1, and manager-
+9. Inspection handles already-complete, malformed, oversized, missing, format-1, and manager-
    unavailable cases without following untrusted paths or blocking on non-regular files.
-9. Successful-unit GC, exact failed-unit capture/reset, cleanup failure, InvocationID mismatch,
+10. Successful-unit GC, exact failed-unit capture/reset, cleanup failure, InvocationID mismatch,
    missing-manager evidence, and the D-Bus subscribe/read boundary all have focused fixtures.
-10. JSON creation/replacement is visibility-atomic and directory-fsynced where process-crash
+11. JSON creation/replacement is visibility-atomic and directory-fsynced where process-crash
    durability is claimed; run directories/files use restrictive permissions.
-11. Per-run status and the capped queue list expose full machine-readable and abbreviated human
+12. Per-run status and the capped queue list expose full machine-readable and abbreviated human
     session/lane/C-task attribution, including concurrent jobs from Codex and Claude fixtures.
-12. Operator guidance distinguishes submitted, queued, lock-owned, child-spawned, and completed.
-13. After the non-Lean fixtures pass, one disposable lightweight target exercises the real
+13. Operator guidance distinguishes submitted, queued, lock-owned, child-spawned, and completed.
+14. After the non-Lean fixtures pass, one disposable lightweight target exercises the real
     systemd-run→queued/running→terminal bridge in a confirmed quiet window.
 
 ## Implementation order
 
 1. Build a tiny non-Lean systemd probe covering exit propagation, signal, failed exec, unit naming,
    result inspection, and cleanup; record the exact supported command/property set.
-2. Implement restrictive origin/manager/submission identity and the absolute-argv transient-service
+2. Implement and table-test CLI/environment/native origin resolution.
+3. Implement restrictive origin/manager/submission identity and the absolute-argv transient-service
    adapter, including the concurrent InvocationID handshake.
-3. Refactor the Python worker to create format-2 status before lock acquisition and publish phases
+4. Refactor the Python worker to create format-2 status before lock acquisition and publish phases
    as the sole writer; move terminal publication after lock release.
-4. Add bounded completion capture, exact failed-unit cleanup, and the primary `--wait` bridge.
-5. Implement D-Bus reattachment only after its subscribe/ref/snapshot algorithm passes race tests.
-6. Remove polling examples and deprecate Python `--detach` with an actionable foreground/systemd
+5. Add bounded completion capture, exact failed-unit cleanup, and the primary `--wait` bridge.
+6. Implement D-Bus reattachment only after its subscribe/ref/snapshot algorithm passes race tests.
+7. Remove polling examples and deprecate Python `--detach` with an actionable foreground/systemd
    message; do not leave two competing detach contracts.
-7. Add the bounded provenance-aware active/recent queue listing.
-8. Add failure, legacy, malformed-state, duplicate-reader, and manager-unavailable tests.
-9. Document the live harness bridge and stable event-ID/deduplication contract.
-10. Run the lightweight real gate only after confirming shared-tree ownership.
+8. Add the bounded provenance-aware active/recent queue listing.
+9. Add failure, legacy, malformed-state, duplicate-reader, and manager-unavailable tests.
+10. Document the live harness bridge and stable event-ID/deduplication contract.
+11. Run the lightweight real gate only after confirming shared-tree ownership.
 
 ## Adversarial design review
 
