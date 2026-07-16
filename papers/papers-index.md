@@ -64,8 +64,8 @@ defect identity and ρ_𝒞(16) = 9*
   the reading (rigidity TFAE, gap, chirality, why-11). *Added 2026-07-13, after the Fable
   decomposition ruling, so not among its five+1.*
 
-**5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs under concatenation: a
-twisted-cubic–axis family
+**5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs: exact transfer under
+concatenation. A twisted-cubic–axis family
 - *Status:* self-contained manuscript + proof/novelty ledgers + strict-trust Lean package;
   internal adversarial audit complete, external specialist priority check remains.
 
