@@ -3,7 +3,7 @@
 **Lane:** `relconic`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE — Gate 1 and first orbit-family probe closed; high-coverage family needed
+**Status:** ACTIVE — two natural q=64 families closed; split-Z3 symbolic reduction or closure next
 
 ## Objective
 
@@ -71,6 +71,17 @@ high-coverage family.
 closed.  Any remaining bounded route must use a union of smaller stabilizer
 orbits while preserving total size thirteen and must prove or cheaply certify
 coverage of the conic nucleus before full profile or rank work.
+
+The first smaller-orbit shape is sized in
+[`2026-07-16-c201-q64-z3-sizing.md`](2026-07-16-c201-q64-z3-sizing.md).
+The nucleus plus four split-`Z3` orbits has more than 43 billion
+pairwise-compatible orbit quadruples before mixed-orbit collinearity checks,
+and more than 57 million even after the full normalizer bound.  Full union
+enumeration is rejected.
+
+**Refined next:** derive a symbolic mixed-orbit collinearity condition for the
+split-`Z3` parameters, or close C201 as a precise bounded-mechanism failure.
+Do not enumerate compatibility cliques.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra
