@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C220.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C222.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -40,6 +40,7 @@ unless they retain an explicit open tail.
 
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C211 `[clebsch]` [REPORTED 2026-07-16]** — exact `A3/H3` finite-reduction bridge, intersection-lattice decoder/complement synthesis, two conic-filling cases, and narrowed novelty audit → `notes/2026-07-16-c211-clebsch-reflection-arrangements.md`.
+- **C222 `[clebsch]` [DESIRED; COMPACT-PROOF GATE]** — Lean-formalize the new `A3/H3` coordinate bridge, intersection ledgers, complement counts, and decoder-stratum consequences, proceeding only through compact theorem-level proofs and not large generated certificate trees → `notes/2026-07-16-c222-lean-a3-h3-closure.md`.
 
 ### `clebsch-next`
 

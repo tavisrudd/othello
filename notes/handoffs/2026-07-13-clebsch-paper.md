@@ -59,6 +59,14 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
 has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 
+## Desired formal closure
+
+- **C222 desired:** Lean-formalize precisely the new C211 `A3/H3` coordinate bridge,
+  intersection ledgers, complement counts, and decoder-stratum consequences. This is gated on a
+  compact theorem-level development: do not generate large certificate trees, and re-scope or stop
+  if kernel closure would require them. Task boundary and success criteria:
+  [`2026-07-16-c222-lean-a3-h3-closure.md`](../2026-07-16-c222-lean-a3-h3-closure.md).
+
 ## Verification map
 
 - Computation inventory, hashes, clean-source replay, Lean gates, and PDF audit: C168 report above
