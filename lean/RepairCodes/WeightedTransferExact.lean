@@ -994,6 +994,47 @@ theorem five_fiber_weight_at_least_six
     (hd : 1 ≤ d) (he : 1 ≤ e) (hpair : 2 ≤ a ∨ 2 ≤ b) :
     6 ≤ a + b + c + d + e := by omega
 
+/-- Abstract five-coordinate endpoint of the strict generalized-SPC example.  Full functional
+support supplies one unit in every fiber, while Singer-disjointness supplies the extra unit in one
+of the first two fibers. -/
+theorem hasNonzeroFunctionalRealizationAtLeast_six_of_five_full_support
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (Fin 5 → V))
+    (hfull : ∀ beta, beta ∈ functionalDual O → beta ≠ 0 → ∀ i, beta i ≠ 0)
+    (hpair : ∀ beta, beta ∈ functionalDual O → beta ≠ 0 →
+      ∀ w : Fin 5 → (κ → 𝔽), (∀ i, blockFunctional I e (w i) = beta i) →
+        2 ≤ hammingNorm (w 0) ∨ 2 ≤ hammingNorm (w 1)) :
+    HasNonzeroFunctionalRealizationAtLeast I e O 6 := by
+  intro beta hbeta hbeta0 w hw
+  have hpositive : ∀ i, 1 ≤ hammingNorm (w i) := by
+    intro i
+    have hwi : w i ≠ 0 := by
+      intro hwi
+      apply hfull beta hbeta hbeta0 i
+      rw [← hw i, hwi]
+      apply LinearMap.ext
+      intro v
+      simp [blockFunctional]
+    exact Nat.one_le_iff_ne_zero.mpr (fun hz => hwi (hammingNorm_eq_zero.mp hz))
+  have hsix := five_fiber_weight_at_least_six
+    (hpositive 0) (hpositive 1) (hpositive 2) (hpositive 3) (hpositive 4)
+    (hpair beta hbeta hbeta0 w hw)
+  simpa [Fin.sum_univ_succ, add_assoc] using hsix
+
+/-- Full support of every nonzero five-coordinate functional-dual word gives functional distance
+at least five. -/
+theorem hasFunctionalDualDistanceAtLeast_five_of_full_support
+    (O : Submodule 𝔽 (Fin 5 → V))
+    (hfull : ∀ beta, beta ∈ functionalDual O → beta ≠ 0 → ∀ i, beta i ≠ 0) :
+    HasFunctionalDualDistanceAtLeast O 5 := by
+  classical
+  intro beta hbeta hbeta0
+  rw [functionalWeight]
+  have hfilter : (univ.filter fun i => beta i ≠ 0) = (univ : Finset (Fin 5)) :=
+    Finset.filter_eq_self.mpr fun i _ => hfull beta hbeta hbeta0 i
+  rw [hfilter]
+  simp
+
 end
 end RepairCodes
 
@@ -1016,3 +1057,5 @@ end RepairCodes
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_of_isCoordinateSurjective
 #print axioms RepairCodes.exists_disjoint_translate_of_sum_inter_lt
 #print axioms RepairCodes.five_fiber_weight_at_least_six
+#print axioms RepairCodes.hasNonzeroFunctionalRealizationAtLeast_six_of_five_full_support
+#print axioms RepairCodes.hasFunctionalDualDistanceAtLeast_five_of_full_support
