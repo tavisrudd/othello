@@ -971,3 +971,24 @@ published open problems and questions newly posed by this project.
 - Broader searches for non-GRS MDS codes with low-degree deep-hole varieties and a universal
   coherent-configuration theory remain cross-paper agenda questions, not additional Clebsch
   manuscript promises.
+
+## 2026-07-16 — C211 incidental surprises
+
+- The apparently suspect characteristic-five specialization is not a bad arrangement reduction:
+  all `15` mirrors and the `6_5,10_3,15_2` lattice survive even though the modular reflection
+  representation is no longer semisimple. The actual H3 bad prime is two, where the signs coalesce.
+  **Question — follow-on:** for noncrystallographic arrangements, which modular reductions retain
+  the lattice after the reflection representation itself degenerates?
+- The spurious algebraic root `q=4` in the H3 conic-size equation is not an unexplained second
+  geometry; it lands exactly at that bad characteristic-two reduction. **Disposition — answer in
+  this paper:** state the reduction boundary next to the factorization so the extra root explains
+  rather than distracts.
+- The novelty search unexpectedly found that Jurrius--Pellikaan already built the general
+  derived-arrangement machinery for coset-leader and list-weight enumerators, including planar MDS
+  secant arrangements. **Question — follow-on:** C212 must now seek a reconstruction or
+  classification theorem beyond their enumerator formalism; a general arrangement--decoder
+  dictionary alone would duplicate prior art.
+- Edge's icosahedral construction and Calvo's mirror configuration make the H3 provenance of the
+  Clebsch joins classical in substance even though the exact phrase “Clebsch hexagon = H3” was not
+  found. **Disposition — answer in this paper:** present H3 as a recognition/application, not a new
+  geometric discovery.

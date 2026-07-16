@@ -39,7 +39,7 @@ unless they retain an explicit open tail.
 ### `clebsch`
 
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
-- **C211 `[clebsch]` [QUEUED PAPER UPGRADE]** — identify the secant arrangements as `A3/H3`, derive the decoder strata and complement formulas from their intersection lattices, and synthesize the two conic-filling cases → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
+- **C211 `[clebsch]` [REPORTED 2026-07-16]** — exact `A3/H3` finite-reduction bridge, intersection-lattice decoder/complement synthesis, two conic-filling cases, and narrowed novelty audit → `notes/2026-07-16-c211-clebsch-reflection-arrangements.md`.
 
 ### `clebsch-next`
 

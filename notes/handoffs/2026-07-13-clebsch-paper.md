@@ -44,12 +44,14 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 1. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
    stable DOI; cite the artifact from the paper.
 
-## Bounded paper upgrade
+## Completed bounded paper upgrade
 
-- **C211:** identify the Clebsch chord arrangement with projectivized `H3` and the q=5 frame joins
-  with `A3`; use their intersection lattices to synthesize the complement formulas, decoding
-  ambiguity strata, and the two small-arc conic-filling cases. The scope and success gates are in
-  [`2026-07-16-clebsch-a-plus-roadmap.md`](../2026-07-16-clebsch-a-plus-roadmap.md).
+- **C211 reported 2026-07-16:** the Clebsch secants are connected to the projectivized `H3`
+  mirrors by an exact `F_11` projectivity; the q=5 frame joins are `A3`; their intersection lattices
+  now synthesize the complement formulas, decoder strata, and two conic-filling cases in the
+  19-page manuscript. The novelty audit conservatively credits Edge/Calvo for the icosahedral
+  geometry and Jurrius--Pellikaan for the general arrangement--decoder mechanism. Exact proof,
+  sources, and validation: [`2026-07-16-c211-clebsch-reflection-arrangements.md`](../2026-07-16-c211-clebsch-reflection-arrangements.md).
 
 This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
 has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.

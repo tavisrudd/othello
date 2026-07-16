@@ -21,6 +21,15 @@ compress parts of the existing exposition rather than create a new independent s
 decoder-tomography, cubic-surface, stability, chirality, and all-field questions belong in the new
 `clebsch-next` lane.
 
+**C211 completed 2026-07-16.** The manuscript now gives an exact `F_11` projectivity from the
+standard `H3` mirrors to the displayed Clebsch secants, derives the complement and decoder strata
+from the intersection lattice, identifies the frame joins with `A3`, and factors the two conic-size
+equations. The rendered draft grows from 17 to 19 pages. The novelty audit materially narrows the
+claim: Edge/Calvo own the icosahedral geometry in substance, and Jurrius--Pellikaan own the general
+derived-arrangement decoder formalism. What survives is the exact finite-field application and the
+paired `A3/H3` conic-filling synthesis. See
+[`2026-07-16-c211-clebsch-reflection-arrangements.md`](2026-07-16-c211-clebsch-reflection-arrangements.md).
+
 ## The `H3` identification
 
 The Clebsch chord arrangement recorded in the paper has fifteen lines and the singularity ledger
@@ -127,6 +136,11 @@ reflection hyperplanes         <-> weight-at-most-two syndromes
 arrangement complement         <-> maximum spanning-weight syndromes
 intersection lattice           <-> decoder ambiguity poset.
 ```
+
+Jurrius and Pellikaan already construct the parity-check derived arrangement and recover extended
+coset-leader and list-weight enumerators from its geometric lattice and multiplicity function,
+including the planar MDS secant case. C212 must therefore improve on that baseline with a genuine
+reconstruction or classification theorem; the displayed dictionary alone is prior art.
 
 An A+ follow-up needs a general reconstruction or classification theorem, not only the `A3` and
 `H3` examples. Natural invariants include the characteristic polynomial, Orlik--Solomon algebra,
