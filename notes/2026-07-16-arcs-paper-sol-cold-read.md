@@ -90,3 +90,34 @@ place to preserve the paper's established theorem numbering and the publication
 allocation of the q=11 material, but their secondary role remains explicit.
 Item 8 is an external release gate and cannot be completed within a prose-only
 revision.
+
+## Post-revision follow-up
+
+Sol cold-read the revised PDF and raised the assessment from **8.8 / A−** to
+**9.1 / A**. The follow-up found that the new hierarchy materially improved the
+paper: the defect identity is now visibly principal, the abstract gives equality
+and stability appropriate weight, the isolated polynomial estimate makes the
+asymptotic proof easier to audit, the prime-power qualification closes the
+liminf ambiguity, and the conclusion successfully presents coding as another
+reading of the same remainder and evaluation rank as a complementary mechanism.
+
+The remaining comments were minor:
+
+1. the nucleus section could be compressed, although it may remain;
+2. the q=11 extension material is long for a declared secondary application;
+3. the elementary estimate could be numbered;
+4. the forced break before Appendix A leaves an almost-empty page; and
+5. the supplement still needs a permanent archived identity.
+
+The forced page break was removed. The nucleus and q=11 sections remain because
+their present scope and numbering serve the established publication allocation;
+further compression is an editorial option rather than a correctness or flow
+repair. The estimate remains unnumbered to preserve theorem numbering. The
+archive identifier remains an external release gate.
+
+Sol's updated comparison judged the two manuscripts essentially tied: Clebsch
+has the more striking theorem, conceptual surprise, and memorable story, while
+prescribed conic has greater generality, reuse potential, expository
+architecture, methodological self-containment, and—narrowly—overall manuscript
+maturity. If forced to rank the revised manuscripts, Sol placed prescribed
+conic first by a small margin.
