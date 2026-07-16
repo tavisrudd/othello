@@ -1,7 +1,7 @@
 # Paper: Arcs complete outside a prescribed conic
 
-**Title:** *Arcs complete outside a prescribed conic — a prescribed-hole defect identity and a
-certified classification over GF(16).* Author: Tavis Rudd.
+**Title:** *Arcs complete outside a prescribed conic — an exact defect identity and the case of
+GF(16).* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled
 PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a completed strict-trust
@@ -91,13 +91,6 @@ The two notions are now separated explicitly in the manuscript:
 complete exteriority gives `C(F_q) subset U(A)`, whereas completeness outside the prescribed
 conic is `U(A) subset C(F_q)`. BSW's `q=7` exterior four-arc is a strict foil, since the universal
 four-arc count gives `|U(A)|=(q-2)(q-3)=20>8=|C(F_7)|`.
-
-In the auxiliary cap-game reading, all twelve conic points are initially live and their antipodal
-involution proves the residual position P. Lean checks every seeded continuation, applies the exact
-parametrized-hole game bridge, and proves the actual six-point projective position P. At `q=9`, a strengthened
-ordinary-coverage check proves that the displayed six-arc has no legal projective extension and is
-therefore terminal P. These are consequences of the certified coordinates, not novelty claims,
-and the game statements are not used in the paper's bounds.
 
 **Novelty posture (self-stated):** the ordinary `PG(2,16)` count of 2633 eight-arc classes is
 known. The general evaluation lemma is elementary linear algebra, and quadrics containing arcs
