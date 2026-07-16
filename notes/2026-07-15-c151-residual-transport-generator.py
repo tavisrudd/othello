@@ -319,6 +319,62 @@ def render_import_aggregate(
     return imports + "\n" + generated_header(csv_hash, transport_fnv, description)
 
 
+def render_dispatch_leaf(
+    payload_leaf: PayloadLeaf,
+    transport_modules: Sequence[str],
+    csv_hash: str,
+    transport_fnv: int,
+) -> str:
+    imports = [
+        "import RelativeConicArcs.Q25ResidualCoverBridge\n",
+        f"import RelativeConicArcs.Q25ResidualCoverData.{payload_leaf.module_name}\n",
+    ]
+    imports.extend(
+        f"import RelativeConicArcs.Q25ResidualTransportData.{name}\n"
+        for name in transport_modules
+    )
+    alternatives = "".join(
+        f"    | exact Q25ResidualTransportData.{theorem_prefix(row)}_payloadValidFor\n"
+        for row in payload_leaf.records
+        if row.valid
+    )
+    count = len(payload_leaf.records)
+    return "".join(imports) + f"""
+{generated_header(
+        csv_hash,
+        transport_fnv,
+        f"semantic dispatcher for {count} rows in {payload_leaf.module_name}",
+    )}
+
+namespace RelativeConicArcs
+namespace Q25ResidualDispatchData
+
+open Q25ResidualCoverData
+
+set_option maxHeartbeats 300000000
+set_option maxRecDepth 100000
+
+theorem dispatch{payload_leaf.module_name} (i : Fin {count}) :
+    ({payload_leaf.array_name}[i]).ValidFor ⟨{payload_leaf.b}, by decide⟩ := by
+  fin_cases i <;>
+    first
+{alternatives}    | decide
+
+end Q25ResidualDispatchData
+end RelativeConicArcs
+"""
+
+
+def render_dispatch_aggregate(
+    module_names: Sequence[str], csv_hash: str, transport_fnv: int, description: str
+) -> str:
+    imports = "".join(
+        f"import RelativeConicArcs.Q25ResidualDispatchData.{name}\n"
+        for name in module_names
+    )
+    return imports + "\n" + generated_header(csv_hash, transport_fnv, description)
+
+
 def tree_sha256(files: Sequence[Path], root: Path) -> str:
     digest = hashlib.sha256()
     for path in sorted(files):
@@ -403,6 +459,94 @@ def write_lean_modules(
     print(f"recommended_first_leaf={prototype_leaf.module_name}.lean")
 
 
+def write_dispatch_modules(
+    output_directory: Path,
+    rows: Sequence[object],
+    transports: tuple[TransportRecord, ...],
+    csv_hash: str,
+) -> None:
+    if output_directory.name != "Q25ResidualDispatchData":
+        raise ValueError("output directory must be named Q25ResidualDispatchData")
+    payloads = payload_leaves(rows)
+    transport_module_lists: dict[tuple[int, int, int], list[str]] = {}
+    for transport_leaf in transport_leaves(rows, transports):
+        payload = transport_leaf.payload_leaf
+        key = (payload.b, payload.first_c, payload.last_c)
+        transport_module_lists.setdefault(key, []).append(transport_leaf.module_name)
+    transports_by_payload = {
+        payload: tuple(
+            transport_module_lists.get(
+                (payload.b, payload.first_c, payload.last_c), []
+            )
+        )
+        for payload in payloads
+    }
+    leaf_names = tuple(f"D_{leaf.module_name}" for leaf in payloads)
+    aggregate_names = tuple(f"B_{b:03d}" for b in range(6, 309))
+    expected = {f"{name}.lean" for name in (*leaf_names, *aggregate_names)} | {"All.lean"}
+    output_directory.mkdir(parents=True, exist_ok=True)
+    unexpected = sorted(path.name for path in output_directory.iterdir() if path.name not in expected)
+    if unexpected:
+        raise RuntimeError(f"refusing output directory with unexpected entries: {unexpected}")
+
+    transport_fnv = transport_fnv1a64(transports)
+    written = []
+    for payload, leaf_name in zip(payloads, leaf_names, strict=True):
+        path = output_directory / f"{leaf_name}.lean"
+        path.write_text(
+            render_dispatch_leaf(
+                payload, transports_by_payload[payload], csv_hash, transport_fnv
+            ),
+            encoding="utf-8",
+        )
+        written.append(path)
+
+    for b, aggregate_name in zip(range(6, 309), aggregate_names, strict=True):
+        modules = tuple(
+            leaf_name
+            for payload, leaf_name in zip(payloads, leaf_names, strict=True)
+            if payload.b == b
+        )
+        path = output_directory / f"{aggregate_name}.lean"
+        path.write_text(
+            render_dispatch_aggregate(
+                modules,
+                csv_hash,
+                transport_fnv,
+                f"import-only aggregate for all residual payload dispatchers with b = {b}",
+            ),
+            encoding="utf-8",
+        )
+        written.append(path)
+
+    all_path = output_directory / "All.lean"
+    all_path.write_text(
+        render_dispatch_aggregate(
+            aggregate_names,
+            csv_hash,
+            transport_fnv,
+            "import-only aggregate for all 46,056 residual payload dispatches",
+        ),
+        encoding="utf-8",
+    )
+    written.append(all_path)
+
+    assert len(written) == len(expected)
+    print(
+        f"generated_files={len(written)} dispatcher_modules={len(payloads)} "
+        f"b_aggregates={len(aggregate_names)} rows={len(rows)}"
+    )
+    print(f"max_rows_per_dispatcher={max(len(leaf.records) for leaf in payloads)}")
+    print(f"generated_source_bytes={sum(path.stat().st_size for path in written)}")
+    print(f"output_directory={output_directory.resolve()}")
+    print(f"csv_sha256={csv_hash}")
+    print(f"cover_generator_sha256={cover.source_sha256()}")
+    print(f"transport_generator_sha256={source_sha256()}")
+    print(f"transport_fnv1a64={transport_fnv:016x}")
+    print(f"generated_tree_sha256={tree_sha256(written, output_directory)}")
+    print("recommended_first_leaf=D_R_031_C_032_081.lean")
+
+
 def render_lean_prototype(record: TransportRecord, csv_hash: str) -> str:
     row = record.row
     return f"""import RelativeConicArcs.Q25ResidualCoverBridge
@@ -470,10 +614,16 @@ def main() -> None:
     parser.add_argument("--csv", required=True, type=Path)
     parser.add_argument("--write-lean-prototype", type=Path)
     parser.add_argument("--write-lean-modules", type=Path)
+    parser.add_argument("--write-dispatch-modules", type=Path)
     parser.add_argument("--prototype-b", type=int, default=40)
     parser.add_argument("--prototype-c", type=int, default=196)
     args = parser.parse_args()
-    if args.write_lean_prototype is not None and args.write_lean_modules is not None:
+    output_modes = (
+        args.write_lean_prototype,
+        args.write_lean_modules,
+        args.write_dispatch_modules,
+    )
+    if sum(mode is not None for mode in output_modes) > 1:
         parser.error("choose only one Lean output mode")
     rows, _ = cover.read_records(args.csv)
     transports = tuple(transport_permutation(row) for row in rows if row.valid)
@@ -499,6 +649,13 @@ def main() -> None:
     if args.write_lean_modules is not None:
         write_lean_modules(
             args.write_lean_modules,
+            rows,
+            transports,
+            cover.sha256(args.csv),
+        )
+    if args.write_dispatch_modules is not None:
+        write_dispatch_modules(
+            args.write_dispatch_modules,
             rows,
             transports,
             cover.sha256(args.csv),
