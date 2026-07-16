@@ -52,6 +52,9 @@ Detailed result/proof history is preserved in the archive and in reports C180–
   19-page manuscript. The novelty audit conservatively credits Edge/Calvo for the icosahedral
   geometry and Jurrius--Pellikaan for the general arrangement--decoder mechanism. Exact proof,
   sources, and validation: [`2026-07-16-c211-clebsch-reflection-arrangements.md`](../2026-07-16-c211-clebsch-reflection-arrangements.md).
+  A fresh referee-style read found no mathematical blocker; its organizational and precision
+  recommendations were integrated in one late capstone subsection:
+  [`2026-07-16-c211-clebsch-cold-read.md`](../2026-07-16-c211-clebsch-cold-read.md).
 
 This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
 has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.

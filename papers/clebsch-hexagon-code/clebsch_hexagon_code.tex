@@ -121,10 +121,11 @@ We then prove quantitative gaps, reconstruct the Brianchon geometry from
 decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
 chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
 $(q-4)(q-11)$ when $q\equiv3\pmod4$. A reflection-arrangement model
-explains both this factorization and the full decoder ambiguity spectrum:
-the fifteen chords are the projectivized $H_3$ mirrors. The six joins of a
-four-frame are similarly the projectivized $A_3$ mirrors, unifying the two
-conic-filling cases.
+organizes this factorization and the full decoder ambiguity spectrum: the
+fifteen chords are reduced projectivized $H_3$ mirrors. The six joins of a
+four-frame are similarly the projectivized $A_3$ mirrors, placing the two
+conic-filling cases in one framework; separate geometry identifies the
+two complements as conics.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -162,9 +163,10 @@ already derive coset-leader and list-weight enumerators from the
 intersection lattice of the parity-check derived arrangement, explicitly
 including redundancy-three MDS secant arrangements
 \cite[Prop.~3.11, Thms.~5.3 and~5.7, Ex.~5.10]{JurriusPellikaan2015}.
-Our paper-specific addition is the exact finite-field bridge to the
-displayed Clebsch code and the resulting $A_3/H_3$ synthesis of its decoder
-strata and the two conic-filling cases.
+Our paper-specific additions are the explicit $\mathrm{PGL}_3(\F_{11})$
+bridge from the reduced $H_3$ fivefold points to the displayed code, its
+specialization to this code's decoder strata, and the joint $A_3/H_3$
+organization of the two conic-filling exceptions.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -214,79 +216,6 @@ vertices lie on no conic in characteristic $11$
 \cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem
 record that the arc is incomplete at $q=11$~\cite[Prop.~13]{SVM1995}, so the
 associated redundancy-three code has covering radius three.
-
-\subsection{The chord arrangement as \texorpdfstring{$H_3$}{H3}}
-
-The incidence ledger above has a stronger explanation. Let $K$ be a field
-of characteristic different from two containing an element $\tau$ with
-$\tau^2=\tau+1$. In dual coordinates, consider the fifteen lines whose
-normal directions are
-\[
- (1,0,0),(0,1,0),(0,0,1),\qquad
- \operatorname{cyc}(1,\epsilon\tau,\delta(\tau-1))
- \quad(\epsilon,\delta\in\{\pm1\}).
-\]
-Over the real embedding with $\tau=(1+\sqrt5)/2$, the thirty signed
-normals are the roots of type $H_3$; thus these are the projectivized
-icosahedral mirrors. Over other fields we call the displayed arrangement
-its reduction.
-
-\begin{proposition}[Reflection-arrangement model]
-\label{prop:h3-arrangement}
-The six fivefold points of this $H_3$ arrangement are
-\[
- \begin{split}
- &(0,1,1-\tau),(0,1,\tau-1),
- (1,1-\tau,0),(1,\tau-1,0),\\
- &(1,0,-\tau),(1,0,\tau).
- \end{split}
-\]
-They form an arc, and their fifteen joins are exactly the fifteen mirrors.
-The remaining singularities are ten triple points and fifteen double
-points. Over $\F_{11}$, take $\tau=8$. The projectivity represented by
-\[
- T=\begin{pmatrix}2&3&8\\10&6&9\\2&2&5\end{pmatrix}
-\]
-carries these six points to the displayed Clebsch hexagon $A$, and hence
-carries the $H_3$ mirrors to the fifteen secants of $A$.
-\end{proposition}
-
-\begin{proof}
-Taking pairwise cross-products of the displayed root normals gives the six
-fivefold points, ten threefold points, and fifteen twofold points; taking
-the joins of the first six recovers all fifteen normals. Each of the twenty
-three-by-three determinants on the six points is $2$ times a unit in
-$\mathbb Z[\tau]$, so none vanishes when
-$\operatorname{char}K\ne2$. For the last assertion, $\det T=3$ in
-$\F_{11}$, and direct multiplication maps the displayed six-set onto $A$.
-Dual multiplication by $T^{-1}$ maps its joins onto the secants of $A$.
-The exact calculation is replayed by
-\path{check_reflection_arrangements.py}.
-\end{proof}
-
-The characteristic boundary is therefore explicit. Characteristic two is
-bad: the signs coalesce. In every other characteristic containing a root
-of $t^2-t-1$, the displayed reduction retains the stated intersection
-lattice. This includes characteristic five, where ``$H_3$'' means the
-modular reduction of the mirror arrangement rather than a semisimple real
-reflection representation.
-
-\paragraph{Complement and syndrome strata.}
-At a codimension-two intersection of $m$ mirrors the M\"obius value is
-$m-1$. Thus the ledger gives linear coefficient
-$6(5-1)+10(3-1)+15(2-1)=59$, and centrality gives
-\[
- \chi_{H_3}(t)=t^3-15t^2+59t-45=(t-1)(t-5)(t-9),
-\]
-so the finite projective complement has $(q-5)(q-9)$ points. Directly, the
-ordinary mirror points number
-$15(q+1)-6\cdot5-10\cdot3-15\cdot2=15(q-5)$; subtracting these and the
-thirty-one singularities gives the same formula without a good-prime
-theorem. At $q=11$ the secant-index strata $0,1,2,3$ have sizes
-$12,90,15,10$, while the six fivefold points are the columns. Multiplying
-projective directions by ten recovers ambiguity counts $960,150,100,120$
-for respectively $1,2,3,20$ nearest codewords, in agreement with the
-general derived-arrangement formalism of~\cite{JurriusPellikaan2015}.
 
 \section{The code and its projective syndrome locus}
 \label{sec:code}
@@ -521,9 +450,10 @@ weight at most two with the secant union, and weight three with its
 complement.  Proposition~\ref{prop:deep-holes-conic} identifies the last
 set with $Q=0$, proving the oracle.  In the notation of its proof, the
 chord-intersection equations give
-$(n_0,n_1,n_2,n_3)=(12,90,15,10)$, equivalently the $H_3$ strata above,
-where $n_i$ counts projective directions
-of secant index $i$ and $n_0$ is the uncovered locus.  Every direction has
+$(n_0,n_1,n_2,n_3)=(12,90,15,10)$, later recognized as the $H_3$
+strata in Section~\ref{sec:reflection-exceptions}, where $n_i$ counts
+projective directions of secant index $i$ and $n_0$ is the uncovered locus.
+Every direction has
 ten nonzero affine syndromes.  Thus the distance-two cosets contribute
 $900$ cases of multiplicity one, $150$ of multiplicity two, and $100$ of
 multiplicity three; the sixty weight-one cosets add sixty more cases of
@@ -1122,37 +1052,96 @@ $\cU(A)$ lies on no conic. The configuration persists; exact conic filling
 is what the factorization isolates at $q=11$.
 \end{remark}
 
-\subsection{The small-arc boundary}
+\subsection{The two reflection-arrangement exceptions}
+\label{sec:reflection-exceptions}
 
-The chord moments also put the six-point theorem into a short classification
-for all smaller neighboring arc sizes. The other surviving arrangement is
-the braid arrangement. For the standard frame
-$E=\{e_1,e_2,e_3,(1,1,1)\}$, its six joins have equations
+The chord moments below classify the neighboring arc sizes. The two
+survivors have a common arrangement-theoretic organization, although the
+arrangement calculation alone gives complement sizes, not conic equations.
+
+Let $F$ be a field of characteristic different from two containing
+$\tau$ with $\tau^2=\tau+1$. In dual coordinates, take the fifteen line
+normals
+\[
+ (1,0,0),(0,1,0),(0,0,1),\qquad
+ \operatorname{cyc}(1,\epsilon\tau,\delta(\tau-1))
+ \quad(\epsilon,\delta\in\{\pm1\}).
+\]
+Over the real embedding with $\tau=(1+\sqrt5)/2$, their signed versions
+are the roots of type $H_3$; over other fields this denotes the displayed
+finite reduction of the icosahedral mirror arrangement.
+
+\begin{proposition}[The Clebsch secants as reduced $H_3$ mirrors]
+\label{prop:h3-arrangement}
+The six fivefold points are
+\[
+ (0,1,1-\tau),(0,1,\tau-1),(1,1-\tau,0),(1,\tau-1,0),
+ (1,0,-\tau),(1,0,\tau).
+\]
+They form an arc, their fifteen joins are the mirrors, and the other
+singularities are ten triple and fifteen double points. Over $\F_{11}$,
+take $\tau=8$. The matrix
+\[
+ T=\begin{pmatrix}2&3&8\\10&6&9\\2&2&5\end{pmatrix}
+\]
+maps these six column vectors onto the displayed Clebsch hexagon $A$.
+Writing line coefficients as rows, the induced map
+$\ell\mapsto\ell T^{-1}$ carries the mirrors onto the secants of $A$.
+\end{proposition}
+
+\begin{proof}
+Pairwise cross-products of the normals give the stated
+$6_5,10_3,15_2$ ledger, and joining the six fivefold points recovers all
+fifteen normals. Every three-by-three determinant on the six points is
+twice a unit in $\mathbb Z[\tau]$, so the set is an arc when
+$\operatorname{char}F\ne2$. Finally, $\det T=3$ in $\F_{11}$ and direct
+multiplication gives the two asserted set equalities. The exact replay is
+\path{check_reflection_arrangements.py}.
+\end{proof}
+
+Characteristic two is bad because the signs coalesce. In every other
+characteristic containing $\tau$, the displayed lattice survives; this
+includes the lattice-faithful but nonsemisimple characteristic-five
+reduction. For the central rank-three hyperplane arrangement, a point
+where $m$ projective mirrors meet has M\"obius value $m-1$. Thus
+\[
+ \chi_{H_3}(t)=t^3-15t^2+59t-45=(t-1)(t-5)(t-9).
+\]
+Dividing the affine complement count by $q-1$ gives $(q-5)(q-9)$
+projective points. At $q=11$, the points lying on respectively zero, one,
+two, and three mirrors number $12,90,15,10$; here ``one'' means an
+ordinary mirror point. With the six fivefold points marked as columns,
+these are exactly the projective strata behind
+Proposition~\ref{prop:decoding-oracle}; the general passage to
+coset-leader multiplicities is due to Jurrius and
+Pellikaan~\cite{JurriusPellikaan2015}.
+
+For the standard four-frame $E=\{e_1,e_2,e_3,(1,1,1)\}$, the six joins
+have equations
 \[
  X,Y,Z,X-Y,X-Z,Y-Z=0.
 \]
-These are precisely the essentialized mirrors $x_i=x_j$ of type $A_3$,
-after setting $x_4=0$. Their four triple points are the frame and their
-three other intersections are double. Hence
+These are the essentialized braid mirrors $x_i=x_j$ of type $A_3$, after
+setting $x_4=0$. Their four triple and three double points give
 \[
  \chi_{A_3}(t)=(t-1)(t-2)(t-3),\qquad
  |\PG(2,q)\setminus\textstyle\bigcup A_3|=(q-2)(q-3).
 \]
-Thus the classification below has the conceptual summary
+In the faithful-reduction range just stated for the explicit $H_3$ model,
+the two size equations are therefore
 \[
-\begin{array}{c@{\quad}c@{\quad}c@{\quad}c}
-\text{arc}&\text{secant arrangement}&|\cU|&|\cU|=q+1\\ \hline
-\text{four-frame}&A_3&(q-2)(q-3)&q=5\\
-\text{Clebsch hexagon}&H_3&(q-5)(q-9)&q=11.
+\begin{array}{c@{\quad}c@{\quad}c}
+\text{arc}&\text{secant arrangement}&|\cU|=q+1\\ \hline
+\text{four-frame}&A_3&(q-1)(q-5)=0\\
+\text{Clebsch hexagon}&H_3&(q-4)(q-11)=0.
 \end{array}
 \]
-Indeed, the two conic-sized equations factor as
-\[
- (q-2)(q-3)-(q+1)=(q-1)(q-5),\qquad
- (q-5)(q-9)-(q+1)=(q-4)(q-11).
-\]
-The root $q=4$ in the second equation is exactly the bad characteristic-two
-reduction of the displayed $H_3$ arrangement, leaving $q=11$.
+The extraneous root $q=4$ lies precisely in the bad characteristic-two
+regime, where the displayed $H_3$ reduction degenerates. Thus the
+arrangements organize the surviving sizes $q=5,11$; the separate geometry
+that makes the complements nonsingular conics is
+Proposition~\ref{prop:deep-holes-conic} for the Clebsch case and the direct
+quadratic verification in the proof below for the frame.
 
 \begin{theorem}[Conic-filling loci for $4\le k\le7$]
 \label{thm:small-k-conic-filling}

@@ -29,6 +29,9 @@ claim: Edge/Calvo own the icosahedral geometry in substance, and Jurrius--Pellik
 derived-arrangement decoder formalism. What survives is the exact finite-field application and the
 paired `A3/H3` conic-filling synthesis. See
 [`2026-07-16-c211-clebsch-reflection-arrangements.md`](2026-07-16-c211-clebsch-reflection-arrangements.md).
+The subsequent cold read found no mathematical blocker and prompted one moderate revision: the
+split early-H3/late-A3 account is now a single capstone subsection immediately before the small-k
+theorem. See [`2026-07-16-c211-clebsch-cold-read.md`](2026-07-16-c211-clebsch-cold-read.md).
 
 ## The `H3` identification
 

@@ -150,3 +150,26 @@ The manuscript now:
 The rendered paper grows from 17 to 19 pages, meeting the roadmap's approximate two-page growth
 gate. The arrangement account synthesizes existing counts rather than adding a second theorem
 spine.
+
+## Cold read and organizational revision
+
+A fresh referee-style read found no blocking mathematical defect but judged the first integration
+too early and partly duplicative: H3 announced the ambiguity census before the code was introduced,
+while A3 appeared roughly twelve pages later. The full report is
+[`2026-07-16-c211-clebsch-cold-read.md`](2026-07-16-c211-clebsch-cold-read.md).
+
+The manuscript was revised accordingly. Both arrangements now form one late capstone subsection,
+“The two reflection-arrangement exceptions,” after the q=11/all-field boundary and immediately
+before the small-k theorem. The revision also:
+
+- replaces “explains conic filling” by the precise distinction between complement size and the
+  separate geometry proving that the complement is a conic;
+- calls q=4 an extraneous polynomial root in the bad characteristic-two regime;
+- keeps the H3 field-of-definition boundary visible;
+- states the row/column convention for the dual projective action;
+- defines ordinary mirror points and distinguishes the central arrangement from its
+  projectivization;
+- sharpens the three paper-specific contributions in the priority paragraph.
+
+The reorganized paper remains 19 pages and removes the duplicated affine ambiguity derivation from
+the arrangement subsection.
