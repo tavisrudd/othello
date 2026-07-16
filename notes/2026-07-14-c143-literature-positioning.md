@@ -35,6 +35,14 @@ Lemma 3.1 (p. 89) transfers incidence for Frobenius-invariant point sets; the pr
 genuine precedence for the paired-extension maneuver, but it supplies no legal-orbit count,
 arbitrary deletion quantifier, different-replacement condition, or multiplicity theorem.
 
+Dye, [*Hexagons, conics, A₅ and PSL₂(K)*](https://doi.org/10.1112/jlms/s2-44.2.270),
+*Journal of the London Mathematical Society* 44 (1991), 270–286, is the nearest special-family
+completion predecessor. Theorem 8 (pp. 283–284) parametrizes the exact completion locus for Clebsch
+hexagons through a fixed vertex. Proposition 1 and Theorem 7 (pp. 282–283) define a five-valent graph
+on Clebsch hexagons by shared associated triangles. Neither result uses quadratic field-Frobenius
+orbit replacement, but both rule out broader claims of first exact symmetric-arc completion
+geometry or first graph on finite-projective configuration objects.
+
 Other nearby strands are:
 
 - Martin, [*On arcs in a finite projective plane*](https://doi.org/10.4153/CJM-1967-030-2),
@@ -87,6 +95,8 @@ robust count for arbitrary Frobenius-stable plane arcs.  The closest conventiona
   (2026): Frobenius-orbit representatives and invariant/pseudo-arc extensions (Proposition 3.1,
   pp. 9–10; Theorem 3.4 and Remark 3.5, p. 13; Theorem 3.11, p. 15), but no legal-extension count
   for arbitrary invariant plane arcs.
+- Dye's Theorem 8 (pp. 283–284) is an exact completion-locus theorem for the Clebsch-hexagon family,
+  but it supplies neither the `E(N-M)` count nor the arbitrary-deletion quantifier.
 
 The ingredients are elementary incidence and orbit counting, so the counting mechanism alone
 should not be advertised as deep novelty.  The apparently distinctive synthesis is the combination
@@ -99,8 +109,17 @@ attainment claim.
 
 ## D-AOR2: orbit-replacement graph
 
-No direct predecessor was located for a graph of embedded finite-projective arcs under one-point or
-one-Frobenius-orbit replacement.  Closest abstractions are:
+No exact predecessor was located for a graph whose edges delete and insert one nonfixed Frobenius
+orbit while preserving the exact fixed subset. Dye's graph is, however, a direct finite-projective
+configuration-graph predecessor, so the broader claim that no arc/configuration graph was located
+is not tenable. Closest predecessors and abstractions are:
+
+- Dye, Proposition 1 and Theorem 7 (pp. 282–283): a five-valent graph on Clebsch hexagons with
+  shared-associated-triangle adjacency, rather than deletion/insertion of a Frobenius orbit.
+- Blokhuis, Seress, and Wilbrink,
+  [*Characterization of complete exterior sets of conics*](https://doi.org/10.1007/BF01204717)
+  (1992): a Paley graph is a proof device on p. 145, and a `q=31` Petersen secant-incidence
+  configuration appears on p. 146. Neither is a reconfiguration graph on arcs.
 
 - Ito et al., [*On the Complexity of Reconfiguration Problems*](https://doi.org/10.1016/j.tcs.2010.12.005),
   *Theoretical Computer Science* 412 (2011), 1054–1065
@@ -133,6 +152,11 @@ At `s=7`, the total legal-pair bounds `(477,351,319,345,441)` for
 `(2380,1400,954,688,440)`.  The simpler `318e` bound is valid but lossy.  Cross-deletion neighbor
 injectivity remains to be formalized before these graph-degree values are promoted to the paper.
 
+The exact Q25 minimum and five residual equality classes pursued in C151 are unaffected. If their
+eventual geometric description uses conic incidence, the pair/cross-ratio model in
+Blokhuis–Seress–Wilbrink (p. 144) is useful vocabulary and possibly a proof heuristic, but its
+classification theorem concerns size-13 complete exterior sets rather than invariant eight-arcs.
+
 ## Publication recommendation
 
 - Lead with quantitative equivariant extension; present arbitrary-deletion replacement as its most
@@ -140,7 +164,8 @@ injectivity remains to be formalized before these graph-degree values are promot
 - For the main theorem, use “to our knowledge” and distinguish Baker–Wantz's paired-extension
   maneuver explicitly.
 - For D-AOR1, say “profile-minimized first-order carrier bound,” never “sharp minimum.”
-- For D-AOR2, say “orbit-replacement graph” and “local degree bound.”  Make no connectivity,
+- For D-AOR2, say “quadratic-Frobenius orbit-replacement graph” and “local degree bound”; distinguish
+  its deletion/insertion adjacency from Dye's shared-triangle graph. Make no connectivity,
   expansion, rapid-mixing, or historical-first claim.
 - Before priority language, run MathSciNet/zbMATH and backward/forward citation searches from
   Baker–Wantz, the Ball–Lavrauw survey, and the MDS Grassmann-graph paper.
