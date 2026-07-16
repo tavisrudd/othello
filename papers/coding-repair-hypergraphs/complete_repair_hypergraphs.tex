@@ -43,8 +43,8 @@
 
 \begin{abstract}
 For a linear code $C$ and a coordinate $x$, let $\cH_x^{(r)}(C)$ be the
-complete hypergraph of helper sets of size at most $r$ arising from supports
-of dual words that contain $x$.  Its matching number $\nu_x$ is disjoint
+complete hypergraph of all linear recovery sets of size at most $r$ at $x$.
+Its matching number $\nu_x$ is disjoint
 availability, while its transversal number $\tau_x$ is the least number of
 helper failures that block every radius-$r$ repair.  These invariants retain
 overlap information that locality and availability alone discard.
@@ -56,42 +56,33 @@ cubic coordinates exact locality three.  We determine the axis invariants
 in terms of the affine cap number, prove
 $\left(\nu_x,\tau_x\right)=\left((q-1)/2,q-2\right)$ at every cubic
 coordinate, and obtain $\tau_x>\nu_x$ for every
-coordinate when $q\geq9$.  At $q=9$ the three coordinate types have exact
-rows
+coordinate when $q\geq9$.  At $q=9$ the three coordinate types have exact rows
 \[
  (\nu,\tau)=(4,7),\qquad(6,12),\qquad(7,13).
 \]
-We also analyze the projective completion obtained by restoring the cubic
-point at infinity.  It is a $[2q+2,4,q]_q$ code.  Its inclusion-minimal
-full repair port stabilizes at radius four and has two uniform rows:
+Restoring the cubic point at infinity gives a more symmetric $[2q+2,4,q]_q$
+variant whose full inclusion-minimal repair port stabilizes at radius four,
+with uniform rows
 \[
  \left(\frac{q-1}{2},q-1\right)\quad\hbox{on the cubic},
  \qquad
  \left(\frac{5q-3}{6},2q-3\right)\quad\hbox{on the axis}.
 \]
 
-We then prove an exact concatenation theorem.  If $I$ is an inner code and
+Our second result is an exact concatenation theorem.  If $I$ is an inner code and
 $r+1<2d(I^\perp)$, an outer functional-dual distance of at least $r+2$
 forces every concatenated dual word of weight at most $r+1$ into one inner
 block.  Consequently the entire hypergraph $\cH_x^{(r)}$, rather than a
 chosen repair subfamily, is copied block by block.  A trace-duality argument
 turns ordinary extension-field dual distance into this functional gate.
-Two nondegenerate examples over $\F_3$ show that neither numerical gate can
-be weakened uniformly while retaining complete-hypergraph equality.
 Combining the $q=9$ seed with a self-dual TVZ outer family gives unbounded
 $\F_9$-linear codes of exact rate $2/19$ whose relative distance is eventually
 greater than every fixed $c<39/190$ (in particular, greater than $1/5$),
-with exact locality three on the nine cubic coordinates per block, exact
-locality two on the ten axis coordinates, and the same exact repair rows in
-every block.
-The completed $q=9$ seed gives a second family with exact rate $1/10$ and
-eventual relative distance greater than every fixed $c<351/1600$, with ten
-cubic and ten axis coordinates per block and exact radius-four rows
-$(4,8)$ and $(7,15)$.  This is equality of bounded radius-four ports; it is
-not a claim about the concatenated code's unbounded full port.
-Every finite and reduction step has been formalized in Lean.  The sole deep
-import is Stichtenoth's self-dual TVZ theorem, cited with its exact consumed
-statement.
+while preserving the exact repair rows blockwise.  The completed seed gives
+a rate-$1/10$ family with eventual relative distance above every
+$c<351/1600$ and exact radius-four rows $(4,8)$ and $(7,15)$.  These are
+bounded-port statements.  All finite arguments and reductions from the sole
+deep input, Stichtenoth's self-dual TVZ theorem, are formalized in Lean.
 \end{abstract}
 
 \section{Introduction}
@@ -112,19 +103,22 @@ therefore the complete bounded repair hypergraph at a coordinate.  We write
 $\nu$ for its matching number and $\tau$ for its transversal number.  Then
 $\nu$ is disjoint availability, while $\tau-1$ is the maximum number of
 arbitrary helper failures that can always be tolerated while retaining at
-least one local repair.  Pamies-Juarez--Hollmann--Oggier
-\cite[Definition~3]{PamiesEtAl2013} explicitly introduced this same minimum
-hitting-set invariant as local repair tolerance, and Wang--Zhang
-\cite{WangZhang2014} subsequently placed repair tolerance in a general
-regenerating-set framework.  Our emphasis is not the definition of $\tau$,
-but the exact coordinatewise computation of both $\nu$ and $\tau$ for a
-complete code-derived repair family and their simultaneous transfer.
+least one local repair.  Our emphasis is the exact coordinatewise computation
+of both invariants for a complete code-derived repair family and their
+simultaneous transfer.  The transversal interpretation itself is established:
+Pamies-Juarez--Hollmann--Oggier~\cite[Definition~3]{PamiesEtAl2013} introduced
+the same minimum hitting-set invariant as local repair tolerance, and
+Wang--Zhang~\cite{WangZhang2014} placed it in a general regenerating-set
+framework.
 
 Our inner families come from a classical object in finite projective
 geometry.  In $\mathrm{PG}(3,q)$, take the affine part of a twisted cubic and,
 when $q$ has characteristic three, adjoin the common axis of the osculating
 planes.  We study both this punctured system and the system obtained by
-restoring the projective cubic point at infinity.  The axis and its
+restoring the projective cubic point at infinity.  The choice is driven by
+its small dependencies: triples on the axis give two-helper repairs, while
+pairs of cubic points complete with an axis point to give three-helper
+repairs.  The axis and its
 stabilizer orbits are classical; a modern account
 appears in Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.  What matters
 here is not an orbit classification but the complete system of small linear
@@ -135,36 +129,46 @@ repairable inner code is established machinery and yields asymptotically
 good LRC families; Liu--Ma--Wu--Xing~\cite{LiuEtAl2022}, in particular,
 derive locality and asymptotic bounds this way.  Locality preservation only
 asserts that some inner repairs survive.  We isolate a stronger dual-distance
-condition under which \emph{every} bounded repair support in the concatenated
-code is an embedded inner repair support.  Thus matching, transversal, edge
-counts, and all other invariants of the complete repair hypergraph transfer
-exactly.
+condition that prevents new low-weight dual words from spanning several
+inner blocks.  Under this condition, \emph{every} bounded repair support in
+the concatenated code is an embedded inner repair support.  Thus matching,
+transversal, edge counts, and all other invariants of the complete repair
+hypergraph transfer exactly.
+
+The argument therefore has two arcs.  Sections~\ref{sec:repair}--\ref{sec:projective-completion}
+construct the repair hypergraph and compute it for the punctured and completed
+geometric seeds.  Sections~\ref{sec:transfer}--\ref{sec:asymptotic} prove exact
+blockwise transfer, connect its functional hypothesis to ordinary dual
+distance, and derive two fixed-alphabet asymptotic families.
 
 \subsection*{Contributions}
 
-The paper proves the following package.
+The main contributions follow the same two-part structure.
 
 \begin{enumerate}[label=(\roman*),leftmargin=2.1em]
 \item We construct a characteristic-three code $C_q$ with parameters
-      $[2q+1,4,q-1]_q$ and classify every circuit of size at most four.
+      $[2q+1,4,q-1]_q$ and classify every minimal linear dependency of size
+      at most four.
 \item We compute exact axis-coordinate matching and transversal numbers in
-      terms of the affine cap number, prove the exact cubic-coordinate row
+      terms of the affine cap number (an exact reduction to a standard finite
+      additive invariant), prove the exact cubic-coordinate row
       $((q-1)/2,q-2)$, and deduce $\tau_x>\nu_x$ for every
-      coordinate when $q\geq9$.
-\item We give the complete $q=9$ table, including the three exact
-      $(\nu,\tau)$ rows and the counts of inclusion-minimal repairs.
+      coordinate when $q\geq9$.  The case $q=9$, used below as the inner
+      seed, has exact rows $(4,7)$, $(6,12)$, and $(7,13)$.
 \item We restore the projective cubic point at infinity, prove parameters
       $[2q+2,4,q]_q$, and determine the complete inclusion-minimal repair
-      port.  Rank four makes radius four exhaustive, with uniform cubic row
-      $((q-1)/2,q-1)$ and axis row $((5q-3)/6,2q-3)$.
+      port.  Every inclusion-minimal repair has at most four helpers, with
+      uniform cubic row $((q-1)/2,q-1)$ and axis row
+      $((5q-3)/6,2q-3)$.
 \item We prove exact preservation of complete radius-$r$ repair hypergraphs
       under the block-confinement hypothesis
       $r+1<2d(I^\perp)$ and an outer functional-dual distance gate.  As a
       derived corollary, every exact inner locality $s\leq r$ is preserved.
       Explicit $\F_3$ examples show that both numerical thresholds are best
       possible for a theorem uniform over all inner and outer codes.
-\item We prove a finite-separable trace bridge from ordinary
-      extension-field dual distance to that functional gate.
+\item We show that ordinary extension-field dual distance implies the
+      functional gate, by representing component functionals through the
+      trace pairing.
 \item Using Stichtenoth's self-dual TVZ family~\cite{Stichtenoth2005}, we
       derive a fixed-alphabet family over $\F_9$ with exact rate $2/19$,
       eventual relative distance greater than every fixed $c<39/190$, exact
@@ -176,28 +180,14 @@ The paper proves the following package.
       radius-four rows $(4,8)$ and $(7,15)$.
 \end{enumerate}
 
-\subsection*{Novelty posture}
+\subsection*{Scope of the contribution}
 
-The twisted cubic, its characteristic-three axis, linear-code locality,
-multiple repair alternatives, and locality-preserving concatenation are
-prior art.  So are repair tolerance as a minimum hitting set
-\cite{PamiesEtAl2013}, general regenerating-set formulations
-\cite{WangZhang2014}, and refined dual-support distributions that capture
-locality~\cite{GruicaEtAl2026}.  The candidate contributions are narrower:
-the exact all-symbol matching/transversal separation for this point system
-and equality of the \emph{complete} bounded repair hypergraph under the
-stated outer-dual gate.  A targeted search found adjacent work on
-twisted-cubic incidence and covering counts~\cite{BartoliEtAl2020}, geometric
-availability~\cite{PamiesEtAl2013,LavrauwVanDeVoorde2019}, and concatenated
-locality~\cite{LiuEtAl2022,JinFu2026}, but did not locate either statement.
-This is a bounded search result, not a priority certificate; the accompanying
-novelty ledger records the exact search boundary and the paper avoids
-unconditional ``first'' language.
-The generic exact-locality corollary, the constants below $39/190$ and
-$351/1600$, and
-the bundled type multiplicities and failure thresholds are derived
-consequences of those two candidate contributions and the cited outer
-family; we do not position them as separate novelty claims.
+The underlying geometry, repair tolerance as a hitting number, and
+locality-preserving concatenation are prior art.  The contributions studied
+here are narrower: exact all-symbol matching and transversal numbers for this
+point system, and equality of its \emph{complete} bounded repair hypergraph
+under an outer-dual gate.  Section~\ref{sec:prior} gives the detailed
+comparison with adjacent work.
 
 \section{Complete bounded repair hypergraphs}
 \label{sec:repair}
@@ -207,7 +197,8 @@ dual $C^\perp$ under the standard dot product.
 
 \begin{definition}\label{def:repair-hypergraph}
 Fix $x\in X$ and $r\geq0$.  The \emph{complete radius-$r$ repair
-hypergraph} at $x$ is
+hypergraph} at $x$ records exactly the helper support of every dual relation
+involving $x$ and at most $r$ other coordinates:
 \[
  \cH_x^{(r)}(C)=
  \left\{R\subseteq X\setminus\{x\}: |R|\leq r,
@@ -233,28 +224,14 @@ Thus Definition~\ref{def:repair-hypergraph} includes every linear repair
 whose coefficient support has at most $r$ helpers; it is not a declared or
 selected subfamily.
 
-This equation gives a direct scalar protocol: contact every $z\in R$ and
-download its one stored $\F$-symbol.  Hence its helper access and download are
-both $|R|$ field symbols.  The helpers merely forward stored symbols, but this
-is only an achieved scalar help-by-transfer protocol, not a regenerating-code
-optimality claim of the kind studied by
-Shah--Rashmi--Kumar--Ramchandran~\cite{ShahEtAl2010}.
-Linear exact repair may instead download subfield functions of a stored
-symbol~\cite{GuruswamiWootters2016}, and optimal repair bandwidth and optimal
-access are separate array-code properties~\cite{YeBarg2016}.  Moreover the
-raw nonzero coefficients are a coordinate gauge:
-diagonal rescaling of the generator columns changes their values while
-preserving every dual support.  Our coefficient-support theorems therefore
-transfer disjoint availability and failure tolerance, but make no
-optimal-access, optimal-bandwidth, or arithmetic-cost claim.
-
 \begin{proposition}\label{prop:basic-hypergraph}
 For every finite code-derived repair hypergraph with nonempty edges,
 \[
  \nu_x^{(r)}(C)\leq\tau_x^{(r)}(C).
 \]
 Passing to the inclusion-minimal repair clutter preserves both $\nu$ and
-$\tau$.  If $r+1\leq d(C^\perp)$, every edge has exactly $r$ helpers.
+$\tau$.  The dual distance also controls edge uniformity: if
+$r+1\leq d(C^\perp)$, every edge has exactly $r$ helpers.
 \end{proposition}
 
 \begin{proof}
@@ -272,8 +249,24 @@ at most $\tau-1$ misses some repair edge, whereas a transversal of size
 $\tau$ blocks them all.  Matching and transversal can nevertheless be far
 apart; equality is not a generic hypergraph law.
 
+\begin{remark}[Operational scope]\label{rem:operational-scope}
+The displayed equation gives one direct scalar protocol: each helper
+forwards its stored $\F$-symbol, so access and download are both $|R|$ field
+symbols.  This is achieved scalar help-by-transfer, not a bandwidth or access
+optimum in a subpacketized model~\cite{ShahEtAl2010,GuruswamiWootters2016,YeBarg2016}.
+Nor are the raw coefficients invariants: diagonal column rescaling changes
+their ratios while preserving every dual support.  The results below transfer
+support invariants such as disjoint availability and failure tolerance, not
+optimal bandwidth, optimal access, or arithmetic cost.
+\end{remark}
+
 \section{The characteristic-three twisted-cubic--axis code}
 \label{sec:seed}
+
+We seek a projective system with two complementary kinds of small
+dependencies: collinear triples for locality two, and mixed
+cubic--axis circuits for locality three.  Characteristic three supplies both
+in one classical configuration.
 
 Let $q=3^h$ and write $\F=\F_q$.  In homogeneous coordinates on
 $\mathrm{PG}(3,q)$ define
@@ -292,7 +285,8 @@ coordinates.
 
 Let $S_q=T_q\sqcup L_q$ and let $G_q$ be the $4\times(2q+1)$ matrix whose
 columns are fixed representatives of these points.  Write $C_q$ for the row
-code of $G_q$.
+code of $G_q$.  Changing a projective representative only rescales one code
+coordinate, so the repair supports are unaffected.
 
 \begin{theorem}[Code parameters]\label{thm:parameters}
 For every finite field of characteristic three,
@@ -302,7 +296,8 @@ For every finite field of characteristic three,
 \end{theorem}
 
 \begin{proof}
-The length is $2q+1$, and four displayed columns span $\F^4$.  The distance
+The length is $2q+1$, and, for example,
+$C(0),C(1),A(0),A_\infty$ span $\F^4$.  The distance
 of a projective-system code is its length minus the largest hyperplane
 section.  If a plane does not contain $L_q$, it meets $L_q$ in at most one
 point and its equation restricts to a nonzero cubic polynomial on $T_q$, so
@@ -320,6 +315,8 @@ For distinct $s,t,u\in\F$, put
 \[
  e_1=s+t+u,\qquad e_2=st+su+tu.
 \]
+These symmetric sums are precisely the coordinates of the axis point that
+completes three cubic points to a dependency.
 
 \begin{theorem}[Small-circuit classification]\label{thm:circuits}
 The inclusion-minimal dependent subsets of $S_q$ having size at most four
@@ -340,11 +337,11 @@ locality three.
 
 \begin{proof}
 Every three distinct points on $L_q$ are minimally dependent.  Vandermonde
-independence handles up to four cubic columns before the point at infinity is
-punctured, and direct $4\times4$ determinants exclude the mixed types with
-two cubic and two axis columns.  Expanding the determinant of three cubic
-columns and $(0:e_1:e_2:0)$ gives zero.  Conversely, the same determinant
-shows that any dependent three-cubic/one-axis set has this axis point.
+independence excludes all-cubic sets of size at most four because the cubic
+point at infinity has been punctured.  Among mixed four-sets, a direct
+$4\times4$ determinant is nonzero for two cubic and two axis columns.  For
+three cubic columns and one axis column, expansion gives dependence exactly
+at $(0:e_1:e_2:0)$, establishing both existence and uniqueness.
 If $e_1=e_2=0$, then $s,t,u$ would be the three roots of
 $X^3-stu$; injectivity of Frobenius would force them equal.  Thus the four
 points form a circuit.  The locality assertions follow from the
@@ -358,11 +355,14 @@ through the respective target type.
 Let $Z_3(q)$ denote the largest size of a subset of the additive group of
 $\F_q$ containing no three distinct elements with sum zero.  Under an
 $\F_3$-basis, this is the usual affine cap number in $\mathrm{AG}(h,3)$.
+It enters because complements of axis-repair transversals are precisely such
+zero-sum-free sets.
 
 \subsection{Axis coordinates}
 
 Fix $y\in L_q$.  The minimal radius-three repair clutter at $y$ splits over
-two disjoint helper grounds:
+two disjoint helper grounds, one containing only axis helpers and the other
+only cubic helpers:
 \begin{itemize}[leftmargin=2em]
 \item every pair among the $q$ other axis points repairs $y$, giving the
       complete graph $K_q$;
@@ -373,15 +373,16 @@ Matching and transversal numbers add across this disjoint union.
 
 For $A_\infty$, the cubic triples are exactly the distinct zero-sum triples
 of $\F_q$, hence the affine lines of $\mathrm{AG}(h,3)$.  For $A(a)$, the
-permutation
+following projective relabeling moves the target to $A_\infty$:
 \[
  t\longmapsto(t+a)^{-1},\qquad 0^{-1}=0,
 \]
-identifies the cubic repair component with the zero-sum triples avoiding
+The convention at the pole $t=-a$ makes this a permutation of $\F_q$.
+Under it, the cubic repair component becomes the zero-sum triples avoiding
 zero.
 
 \begin{theorem}[Exact axis rows]\label{thm:axis-rows}
-At the nucleus-type point $A_\infty$,
+At the point $A_\infty$,
 \[
  \nu_{A_\infty}=\frac{5q-3}{6},
  \qquad
@@ -401,16 +402,20 @@ radius-three repair hypergraph.
 The complete graph $K_q$ contributes matching $(q-1)/2$ and transversal
 $q-1$.  The affine-line hypergraph contributes matching $q/3$ and
 transversal $q-Z_3(q)$: parallel lines give the matching, and complements
-exchange transversals with zero-sum-free sets.  After forbidding zero, the
-corresponding values are $q/3-1$ and $q-1-Z_3(q)$.  Adding the contributions
-gives the formulas.  Proposition~\ref{prop:basic-hypergraph} passes the
-invariants between the complete hypergraph and its minimal clutter.
+exchange transversals with zero-sum-free sets, since a complement contains no
+repair triple exactly when the removed set hits every one.  After forbidding
+zero, one parallel class loses its line through zero and the largest
+zero-sum-free complement is unchanged; the values become $q/3-1$ and
+$q-1-Z_3(q)$.  Adding the contributions gives the formulas.
+Proposition~\ref{prop:basic-hypergraph} passes the invariants between the
+complete hypergraph and its minimal clutter.
 \end{proof}
 
 The strict gap does not require a quantitative cap-set bound.  Any matching
 in the minimal axis clutter consumes two axis helpers for each pair edge and
 three cubic helpers for each cubic edge.  Weighting axis helpers by three and
-cubic helpers by two yields $6\nu_y\leq5q$.  The $K_q$ component alone forces
+cubic helpers by two assigns total weight six to either edge type, and yields
+$6\nu_y\leq5q$.  The $K_q$ component alone forces
 $\tau_y\geq q-1$.  Thus $\nu_y<\tau_y$ for $q\geq9$.
 
 \subsection{Cubic coordinates}
@@ -437,7 +442,9 @@ In particular, $\tau_x>\nu_x$ for $q\geq9$.
 \begin{proof}
 The edge count is the number of unordered pairs of cubic helpers.  A matching
 uses two distinct cubic helpers per edge, giving $\nu_x\leq(q-1)/2$.  For the
-reverse inequality put
+reverse inequality, we relabel the cubic helpers so completion colors are
+injectively determined by sums, then choose a perfect matching with distinct
+sums.  Put
 \[
  u=(s-x)^{-1},\qquad v=(t-x)^{-1}.
 \]
@@ -453,13 +460,13 @@ is
 This is an injective recoding of the sum $u+v$.  Choose a generator $g$ of
 $\F_q^*$ and pair $g^{2i}$ with $g^{2i+1}$ for
 $0\leq i<(q-1)/2$.  These pairs partition $\F_q^*$, while their sums
-$(1+g)g^{2i}$ are distinct.  When $q=3$ there is only one pair, so the same
-conclusion holds even though its sum is zero.  Mapping back by
+$(1+g)g^{2i}$ are distinct.  For $q=3$ there is only one pair, so the
+conclusion is immediate even though its sum is zero.  Mapping back by
 $s=x+u^{-1}$ gives a rainbow perfect matching of the $q-1$ cubic helpers and
 therefore $\nu_x=(q-1)/2$.
 
 For the transversal upper bound, choose one cubic helper $a\ne x$ and take
-all other cubic helpers except $x$ and $a$; this set has size $q-2$ and every
+all cubic helpers other than $x$ and $a$; this set has size $q-2$ and every
 repair uses one of them.  Conversely, suppose a transversal leaves a
 nonempty set $U$ of cubic helpers unchosen.  Fix $a\in U$.  For each
 $b\in U\setminus\{a\}$, the edge on $\{a,b\}$ forces its completion color
@@ -503,20 +510,23 @@ axis $A_\infty$    & $1$ & $2$ & $36+12$   & $7$ & $13$ \\
 
 The $36$ pair repairs are the edges of $K_9$.  The cubic components contain
 eight zero-sum triples avoiding zero at a finite axis point and twelve
-zero-sum triples at $A_\infty$.  The small-circuit inventory consists of
+zero-sum triples at $A_\infty$.  Globally, the small-circuit inventory consists of
 $\binom{10}{3}=120$ axis triples and $\binom93=84$ completed cubic
 four-circuits.
 
-\begin{corollary}\label{cor:q9-ratio}
-Every coordinate of $C_9=[19,4,8]_9$ satisfies
+These rows also give the uniform ratio
 \[
  7\nu_z\leq4\tau_z.
 \]
 The constant $7/4$ is attained at every cubic coordinate.
-\end{corollary}
 
 \section{The projectively completed seed}
 \label{sec:projective-completion}
+
+Restoring the missing cubic point has two effects: it recovers projective
+symmetry within each parameter line, and it makes the complete
+inclusion-minimal repair port accessible through the ambient rank-four
+bound.
 
 Let
 \[
@@ -557,20 +567,22 @@ $q+2$.  This gives distance $(2q+2)-(q+2)=q$; the same spanning columns give
 dimension four.  Pairwise projective independence gives dual distance at
 least three, while any three distinct axis points give equality.
 
-The boundary four-circuit
+The new boundary four-circuit
 \[
  \{C(s),C(t),C_\infty,A(s+t)\}\qquad(s\ne t)
 \]
-supplies the missing cubic-infinity repairs.  Projective shifted inversion
-acts by an invertible ambient map, a coordinate permutation, and nonzero
-column scalings; it is transitive separately on the full cubic and full
-axis.  Thus the exact locality and row calculations may be made at the two
-infinity targets.
+supplies the cubic-infinity repairs.  The shifted-inversion relabeling used
+above extends projectively across its pole.  Its ambient linear realization
+permutes the selected columns up to nonzero scaling and moves any chosen
+cubic, respectively axis, target to the corresponding infinity target.
+Thus locality and the repair hypergraph need be calculated at only those two
+targets.
 
 For exhaustiveness, take an inclusion-minimal target-plus-helper relation.
 Its helper columns are linearly independent: otherwise a helper-only
 relation can be subtracted to cancel one helper without cancelling the
-target coefficient.  Since the generator has four rows, there are at most
+target coefficient, because that helper-only relation has target coefficient
+zero.  Since the generator has four rows, there are at most
 four helpers.  This proves that radius four is the full \emph{minimal} inner
 port; it makes no assertion about a later concatenated code's unbounded
 port.
@@ -578,14 +590,17 @@ port.
 For a cubic target, every minimal edge consumes at least two of the $q$
 other cubic points, so $\nu\le(q-1)/2$; the radius-three rainbow matching
 attains equality.  For an axis target, if an edge uses $c$ cubic and $a$
-axis helpers, its possible shapes give $2c+3a\ge6$.  Summing over a matching
+axis helpers, the short-circuit exclusions imply: if $a=0$ then $c\ge3$; if
+$a=1$ then $c\ge2$; and if $a\ge2$ the inequality is immediate.  Hence
+$2c+3a\ge6$.  Summing over a matching
 and using the $q+1$ cubic and $q$ available axis resources gives
 $6\nu\le5q+2$, hence $\nu\le(5q-3)/6$; the radius-three matching attains
 equality.
 
-Finally, a full-port transversal is equivalent to a linear functional
-nonzero at the target, with the transversal formed by its nonzero values on
-the other columns.  Equivalently,
+Finally, the complement of a full-port transversal contains no helper set
+that spans the target.  It therefore lies in a hyperplane avoiding the
+target; conversely every such hyperplane complement is a transversal.
+Equivalently,
 \[
  \tau_x=(2q+1)-m_x,
 \]
@@ -602,7 +617,10 @@ projective symmetry acts transitively on the full axis.
 \section{Exact repair transfer under concatenation}
 \label{sec:transfer}
 
-We formulate the transfer theorem in a coordinate-free way.  Let $I\leq
+Informally, each outer symbol is a vector encoded as one inner block.  The
+question is whether a small dual relation can couple several such blocks.
+We formulate the answer without choosing coordinates on the outer symbol
+space.  Let $I\leq
 \F^K$ be an inner code and let $V$ be an $\F$-vector space equipped with a
 linear isomorphism $e:V\to I$.  For an outer $\F$-linear code
 $O\leq V^J$, the concatenated code $O\circ_e I\leq\F^{J\times K}$ encodes
@@ -615,8 +633,9 @@ The \emph{functional dual} of $O$ is
        \sum_{j\in J}\beta_j(u_j)=0\text{ for every }u\in O\right\}.
 \]
 Its distance is the minimum number of nonzero component functionals in a
-nonzero tuple.  This is intrinsic to the symbol space $V$ and does not
-choose field coordinates.
+nonzero tuple; its support therefore counts the outer blocks touched by the
+induced dual relation.  This is intrinsic to $V$ and does not choose field
+coordinates.
 
 \begin{theorem}[Complete repair-hypergraph transfer]\label{thm:transfer}
 Let $r\geq0$.  Suppose
@@ -634,6 +653,11 @@ Consequently matching number, transversal number, inclusion-minimal repair
 clutter, edge counts, and the full incidence structure are preserved
 coordinate by coordinate.
 \end{theorem}
+
+The first inequality is the \emph{inner block-confinement gate}: two nonzero
+inner-dual blocks would already be too heavy.  The second is the
+\emph{outer functional gate}: a relation touching at most $r+1$ blocks must
+induce the zero functional on each one.
 
 \begin{proof}
 Take $w\in(O\circ_e I)^\perp$ with $\wt(w)\leq r+1$ and write $w_j$ for
@@ -669,9 +693,11 @@ an $s$-repair and nonexistence at every smaller radius are therefore both
 preserved.
 \end{proof}
 
-The inequality $r+1<2d(I^\perp)$ is important.  It does not require
+The inner gate does not require
 $d(I^\perp)=r+1$.  For the full $q=9$ seed, $d(C_9^\perp)=3$ because of
 the axis triples, yet radius-three transfer is exact since $4<2\cdot3$.
+
+\subsection{Sharpness of the transfer gates}
 
 \begin{proposition}[Uniform boundary of the transfer gates]
 \label{prop:transfer-boundary}
@@ -714,7 +740,7 @@ dual word of weight three.  Targeting its first coordinate gives a
 two-helper repair meeting all three blocks, so it is not an embedded inner
 repair.  Meanwhile $3<2d(I^\perp)=4$.
 
-Both failures are literal inequalities of the complete repair hypergraphs.
+Both examples give strict failure of complete repair-hypergraph equality.
 The two-block dual-distance mechanism is the same elementary symmetric-
 difference obstruction used for distinct recovery sets, for example by
 Kurz--Yaakobi~\cite[Lemma~10(a)]{KurzYaakobi2021}; the point here is the exact
@@ -759,7 +785,8 @@ in the ordinary $L$-dual of $O$, with the same support.
 \end{proof}
 
 Now take $\F=\F_9$, $L=\F_{9^4}=\F_{6561}$, and use a linear equivalence
-between the four-dimensional $\F_9$-space $L$ and the inner code $C_9$.
+between the four-dimensional $\F_9$-space $L$ and the four-dimensional inner
+code $C_9$.
 
 \begin{corollary}[Finite extension-field lift]\label{cor:finite-lift}
 Let $O\leq L^N$ be an $[N,K,D]_L$ code with $O\ne0$ and
@@ -770,17 +797,24 @@ with
 \]
 Its complete radius-three repair hypergraph is an embedded copy of the
 corresponding $C_9$ hypergraph in each block.  Consequently, among its $19N$
-coordinates, $9N$ cubic coordinates have exact locality three and row
-$(\nu,\tau)=(4,7)$, $9N$ finite-axis coordinates have exact locality two and
-row $(6,12)$, and $N$ infinity-axis coordinates have exact locality two and
-row $(7,13)$.  Their guaranteed arbitrary-helper failure thresholds
-$\tau-1$ are respectively $6$, $11$, and $12$.
+coordinates, the exact blockwise profile is:
+\[
+\begin{array}{c|c|c|c}
+\text{type}&\text{multiplicity}&\text{locality}&(\nu,\tau)\\ \hline
+\text{cubic}&9N&3&(4,7)\\
+\text{finite axis}&9N&2&(6,12)\\
+\text{infinity axis}&N&2&(7,13).
+\end{array}
+\]
+The guaranteed arbitrary-helper failure thresholds $\tau-1$ are
+respectively $6$, $11$, and $12$.
 \end{corollary}
 
 \begin{proof}
 Restriction of scalars multiplies dimension by four and does not change
-symbol support.  The usual concatenated-distance argument gives distance at
-least $8D$.  Theorem~\ref{thm:trace} supplies functional-dual distance at
+symbol support.  A nonzero outer word has at least $D$ nonzero symbols, each
+of whose inner encodings has weight at least eight, so the concatenated
+distance is at least $8D$.  Theorem~\ref{thm:trace} supplies functional-dual distance at
 least five, while $4<2d(C_9^\perp)=6$.  Apply
 Theorem~\ref{thm:transfer}, Corollary~\ref{cor:exact-locality-transfer},
 and Table~\ref{tab:q9}.
@@ -806,14 +840,14 @@ The parameter argument is the same, now using the $[20,4,9]_9$ inner seed.
 At radius four the inner gate is $5<2d(\overline C_9^\perp)=6$, and the trace
 bridge requires ordinary outer dual distance $r+2=6$.  Theorem~\ref{thm:transfer}
 therefore gives equality of the complete bounded hypergraphs.  Apply
-Theorem~\ref{thm:completed-port}.  The word ``bounded'' is essential: the
-corollary does not identify the concatenated code's full unbounded port.
+Theorem~\ref{thm:completed-port}.  As in Theorem~\ref{thm:transfer}, the
+conclusion concerns the radius-four port.
 \end{proof}
 
 \section{A fixed-alphabet asymptotic family}
 \label{sec:asymptotic}
 
-We use one deep existence theorem and expose it completely.
+We require one deep existence theorem.
 Stichtenoth~\cite[Theorem~1.6(ii)]{Stichtenoth2005} proves that for every
 square $Q=\ell^2$ there is an unbounded sequence of self-dual
 $[N_j,N_j/2,D_j]_Q$ codes with
@@ -850,7 +884,10 @@ $c$).
 
 \begin{proof}
 Take Stichtenoth's self-dual codes over $L=\F_{6561}$ and concatenate them
-with $C_9$ after restriction to $\F_9$.  Since $39/80>1/3$, eventually
+with $C_9$ after restriction to $\F_9$.  Two numerical consequences are
+needed: dual distance at least five for the transfer gate, and enough primal
+distance for the displayed relative-distance bound.  Since $39/80>1/3$,
+eventually
 \[
  N_j\leq3D_j
  \quad\text{and}\quad N_j\geq15.
@@ -891,7 +928,9 @@ eventually, with the threshold allowed to depend on $c$.
 
 \begin{proof}
 Use the same self-dual outer family and concatenate with $\overline C_9$.
-Eventually $N_j\ge18$ and $N_j\le3D_j$, hence $D_j\ge6$ and
+Here the corresponding goals are dual distance at least six and the
+completed distance ratio.  Eventually $N_j\ge18$ and $N_j\le3D_j$, hence
+$D_j\ge6$ and
 Corollary~\ref{cor:completed-finite-lift} applies.  Length and dimension are
 $20N_j$ and $4(N_j/2)=2N_j$, giving rate $1/10$.  The distance is at least
 $9D_j$.  Since $39/80>4/9$, eventually $4N_j<9D_j$, which yields the clean
@@ -902,18 +941,33 @@ $20c/9<39/80$, so eventually
  \geq\frac{9D_j}{20N_j}>c.
 \]
 The bounded radius-four hypergraph equality transfers the coordinate
-profiles.  It does not promote the inner full-port statement to the
-unbounded port of $\overline\cC_j$.
+profiles.  The conclusion remains the bounded radius-four equality supplied
+by Theorem~\ref{thm:transfer}.
 \end{proof}
 
-\begin{remark}[Meaning of ``unconditional'']
-Theorems~\ref{thm:asymptotic} and~\ref{thm:completed-asymptotic} are
-unconditional as ordinary mathematics once
-Stichtenoth's published theorem is accepted.  In the Lean trust ledger it is
-not a zero-project-axiom theorem: the exact specialization of
-Theorem~1.6(ii) is the single quarantined literature axiom.  Every reduction
-from that statement to Theorem~\ref{thm:asymptotic} is kernel-checked.
-\end{remark}
+The tradeoff between the two constructions is summarized in
+Table~\ref{tab:family-comparison}.  Completion slightly lowers the rate,
+raises the available asymptotic distance threshold, merges the axis
+subtypes, and transfers one additional repair radius.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & punctured seed & completed seed \\
+\midrule
+inner parameters & $[19,4,8]_9$ & $[20,4,9]_9$ \\
+exact asymptotic rate & $2/19$ & $1/10$ \\
+proved eventual $c$ & $c<39/190$ & $c<351/1600$ \\
+transferred radius & $3$ & $4$ \\
+block multiplicities & $9+9+1$ & $10+10$ \\
+repair rows & $(4,7),(6,12),(7,13)$ & $(4,8),(7,15)$ \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of the two fixed-alphabet families.  The distance row
+lists every eventual strict relative-distance constant proved above.}
+\label{tab:family-comparison}
+\end{table}
 
 \section{Relation to prior work}
 \label{sec:prior}
@@ -928,7 +982,7 @@ Lavrauw--Van de Voorde~\cite{LavrauwVanDeVoorde2019}.  In particular,
 same minimum hitting-set formula as our $\tau$, while Wang--Zhang
 \cite{WangZhang2014} organize several tolerance notions through regenerating
 sets.  Thus neither repair tolerance nor the hypergraph interpretation is
-claimed as new here.  The candidate contribution is the exact
+claimed as new here.  The results developed here are the exact
 coordinatewise pair $(\nu,\tau)$, its strict separation on every symbol of
 this family, and the transfer of the entire bounded repair family.
 
@@ -936,10 +990,10 @@ Gruica--Jany--Ravagnani~\cite{GruicaEtAl2026} give a refined weight
 distribution indexed by prescribed subsets of dual-word supports and prove
 duality identities for it.  This is close prior art for treating all bounded
 dual supports rather than a selected repair group.  It does not state the
-matching/transversal computations below or a concatenation theorem that
+matching/transversal computations here or a concatenation theorem that
 identifies the complete bounded support family.
 
-Concatenation is likewise not new.  Liu--Ma--Wu--Xing
+For concatenation, Liu--Ma--Wu--Xing
 \cite[Theorem~3.1]{LiuEtAl2022} concatenate a locally repairable inner code
 with classical outer codes and derive locality and asymptotic parameter
 families.  The recent construction of Jin--Fu~\cite{JinFu2026} also uses
@@ -959,62 +1013,45 @@ incidence counts are adjacent to, but do not by themselves determine,
 matching and transversal numbers of the repair hypergraphs in
 Sections~\ref{sec:invariants} and~\ref{sec:projective-completion}.  The full
 projective cubic and its characteristic-three common axis are therefore not
-claimed as new.  Our none-found posture concerns the exact full-minimal
-repair rows of their union, not the underlying geometry or ordinary code
-parameters.
+claimed as new.  The new calculation concerns the exact full-minimal repair
+rows of their union, not the underlying geometry or ordinary code parameters.
 
 The multiplicative pairing used in the cubic matching proof belongs to a
 classical design-theoretic neighborhood.  Constant-quotient pairings of a
 finite-field half-set are studied as one-quotient starters; see, for example,
 Dinitz~\cite{Dinitz1984}.  We do not claim this pairing pattern as new.  The
-candidate contribution is its use after the shifted-inverse completion
+use made here is to combine it with the shifted-inverse completion
 identity to compute the exact matching number of the code-derived repair
 hypergraph.
 
-The exact novelty boundary is maintained outside the manuscript in a
-claim-by-claim ledger and an adversarial search report.  The intended claim
-is not that twisted-cubic codes, availability, trace duality, or
-concatenation are new.  It is the conjunction of an explicit all-symbol
-$\tau>\nu$ seed with exact complete-hypergraph transfer and concrete
-fixed-alphabet parameters.  Until a specialist citation-chain review is
-complete, this should be read as a candidate contribution supported by a
-documented none-found search, not as a categorical priority statement.
+In summary, the contribution is the conjunction of an explicit all-symbol
+$\tau>\nu$ seed, exact complete-hypergraph transfer, and the resulting
+fixed-alphabet parameters.
 
 \section{Formal verification and provenance}
 \label{sec:verification}
 
 The project was human-directed and agent-generated.  The named author
-selected the research program and publication policy; AI systems generated
+selected the problem, directed the research, set the validation standards,
+and takes responsibility for the final claims; AI systems generated
 substantial portions of the mathematics, code, formal proofs, and prose.
-AI is not listed as an author.  This section makes the verification route
-visible rather than relegating it to acknowledgments.
+AI is not listed as an author.
 
 The complete finite theorem chain is formalized in Lean 4 using mathlib.
 The formal objects are ordinary finite-dimensional linear codes,
 dual-word supports, finite hypergraphs, matching and transversal numbers,
 finite fields, restriction of scalars, and the algebra trace.  The formal
-proofs establish:
+proofs establish four linked groups of results:
 \begin{itemize}[leftmargin=2em]
-\item the code parameters and small-circuit classification;
-\item exact locality and all matching/transversal statements, including the
-      general cubic row $((q-1)/2,q-2)$;
-\item the complete repair-hypergraph equality under concatenation;
-\item generic preservation of every exact locality $s\leq r$ under the
-      radius-$r$ transfer gates;
-\item the finite-separable trace bridge with exact support;
-\item the concrete fields $\F_9\subset\F_{6561}$ and extension degree four;
-\item the disjoint exhaustive lifted coordinate-type partition and its exact
-      multiplicities $9N,9N,N$;
-\item the projectively completed $[2q+2,4,q]_q$ seed, the rank-four cutoff
-      making radius four its full minimal inner port, and the two uniform
-      completed rows;
-\item the completed $[20N,4K,\ge9D]_9$ bounded-port lift, its $10N/10N$
-      partition, exact localities, and rows $(4,8)$ and $(7,15)$;
-\item the analytic extraction of $N\leq3D$, $19N\leq40D$, and every strict
-      distance constant below $39/190$ from the imported limit bound;
-\item both final rates $2/19$ and $1/10$, every strict completed-family
-      constant below $351/1600$, and the clean displayed distance constant
-      $1/5$ for both families.
+\item the finite geometry, code parameters, small-circuit classification,
+      exact localities, and every matching/transversal row;
+\item complete bounded repair-hypergraph transfer, preservation of exact
+      locality through the transferred radius, and both sharpness examples;
+\item the support-preserving trace bridge, the concrete degree-four field
+      extension, and both finite lifted-code profiles;
+\item every asymptotic reduction, including the two exact rates, the strict
+      distance thresholds $39/190$ and $351/1600$, and the common displayed
+      bound $1/5$.
 \end{itemize}
 
 No \texttt{sorry}, \texttt{admit}, \texttt{native\_decide},
@@ -1025,8 +1062,11 @@ algebraic, and analytic-reduction declarations contain only
 The asymptotic headline adds exactly one project axiom,
 \path{Imported.stichtenoth_selfDual_TVZ_6561}, whose docstring cites
 Stichtenoth's theorem number, specialization, and exact parameter statement.
+Thus the asymptotic theorems are ordinary consequences of Stichtenoth's
+published result; within the project trust ledger, that exact specialization
+is the single quarantined literature axiom.
 
-The machine-readable trust manifest is
+The trust manifest is
 \texttt{lean/RepairCodes/TRUST.md}.  The paper package includes a separate
 proof ledger mapping every displayed theorem to Lean declarations and an
 adversarial novelty review separating mathematical novelty from
@@ -1036,10 +1076,10 @@ formalization novelty.
 \section{Statement-adequacy excerpts}
 \label{app:adequacy}
 
-This appendix prints the load-bearing Lean declarations in their source
-form.  Typeclass hypotheses---finite fields, finite index types, decidable
-equality, and finite-dimensionality---are declared immediately above these
-statements in the source files.
+This appendix gives typographically normalized transcriptions of the
+load-bearing Lean declarations.  Typeclass hypotheses---finite fields,
+finite index types, decidable equality, and finite-dimensionality---are
+declared immediately above these statements in the source files.
 
 \subsection*{Exact cubic matching number}
 \begin{verbatim}
@@ -1047,7 +1087,7 @@ theorem cubicRepair_matchingNumber [CharP F 3] (x : F) :
     matchingNumber (axisTwistedCubicRepairHypergraph (.inl x) 3) =
       (Fintype.card F - 1) / 2
 \end{verbatim}
-Its lower bound uses the independently checked declarations
+Its lower bound uses the separately kernel-checked declarations
 \begin{verbatim}
 units_addColor_matchingNumber_lower
 twistedCubicTripleAxisIndex_eq_cubicRepairSumColor
@@ -1066,8 +1106,7 @@ theorem repairHypergraph_concatenatedCode_eq_embed
       embedHypergraph (blockEmbedding j) (repairHypergraph I x r)
 \end{verbatim}
 The ASCII substitutions \texttt{F}, \texttt{kappa}, \texttt{iota}, and
-\texttt{\~=l} above are typographical transliterations of the Unicode
-identifiers in the checked source; the proposition is otherwise verbatim.
+\texttt{\~=l} normalize the Unicode identifiers in the checked source.
 
 The checked corollary
 \texttt{hasExactLocalityAt\_concatenatedCode\_iff\_of\_le} states that the
