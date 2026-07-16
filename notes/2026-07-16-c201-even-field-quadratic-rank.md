@@ -3,7 +3,7 @@
 **Lane:** `relconic`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE — two natural q=64 families closed; split-Z3 symbolic reduction or closure next
+**Status:** ACTIVE — split-Z3 ternary relation indexed; coverage-directed probe next
 
 ## Objective
 
@@ -84,9 +84,18 @@ The symbolic mixed-orbit condition is the nine-factor determinant norm
 nonvanishing of `F` on the four orbit-label triples is exactly the full arc
 condition.
 
-**Refined next:** factor or index the `F!=0` ternary relation into a bounded
-orbit filter, or close C201 as a precise bounded-mechanism failure.  Do not
-enumerate compatibility cliques.
+The ternary relation is now indexed in
+[`2026-07-16-c201-q64-z3-index.md`](2026-07-16-c201-q64-z3-index.md).
+For each compatible orbit pair, the bad third labels are exactly the legal
+orbits meeting its nine mixed secants, so `F=0` is one bitset lookup.  The
+730,380 pair indices forbid only 171--179 of 1,302 labels each.  A deterministic
+100,000-arc-draw probe found ordinary-uncovered sizes 824--1,055, far above the
+necessary bound 65, but this is evidence rather than an exhaustive exclusion.
+
+**Refined next:** use the exact ternary index in a bounded coverage-directed
+optimizer, stopping immediately at a checked `|U(A)|<=65` witness.  If no
+witness appears, do not call the family closed without a certified global
+coverage upper bound; do not enumerate compatibility cliques.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra
