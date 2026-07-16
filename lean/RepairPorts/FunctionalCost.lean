@@ -169,10 +169,109 @@ theorem functionalFiberCostSearch_eq
 
 end FiniteSearch
 
+/-- A nonembedded concatenated-dual witness through the pointed coordinate `(j,x)`. -/
+def IsPointedNonembeddedWitness
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ)
+    (w : ι → (κ → 𝔽)) : Prop :=
+  (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) ∧
+    w j x ≠ 0 ∧ ¬ IsEmbeddedInnerDualBlockAt I j w
+
+/-- The exact pointed obstruction cost.  Empty constrained witness sets have cost `⊤`, not
+natural-number cost zero. -/
+def pointedNonembeddedCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  sInf {n | ∃ w : ι → (κ → 𝔽),
+    IsPointedNonembeddedWitness I e O j x w ∧
+      ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n}
+
+omit [DecidableEq ι] [DecidableEq κ] [DecidableEq V] in
+/-- The pointed cost is infinite exactly when there is no constrained nonembedded witness. -/
+theorem pointedNonembeddedCost_eq_top_iff
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCost I e O j x = ⊤ ↔
+      ¬ ∃ w, IsPointedNonembeddedWitness I e O j x w := by
+  constructor
+  · intro htop ⟨w, hw⟩
+    have hle : pointedNonembeddedCost I e O j x ≤
+        ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) := by
+      apply sInf_le
+      exact ⟨w, hw, rfl⟩
+    rw [htop] at hle
+    simp at hle
+  · intro hempty
+    have hset : {n | ∃ w : ι → (κ → 𝔽),
+        IsPointedNonembeddedWitness I e O j x w ∧
+          ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n} = ∅ := by
+      ext n
+      simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false]
+      rintro ⟨w, hw, -⟩
+      exact hempty ⟨w, hw⟩
+    simp only [pointedNonembeddedCost, hset, WithTop.sInf_empty]
+
+omit [DecidableEq ι] [DecidableEq κ] [DecidableEq V] in
+/-- The existing pointed lower-bound predicate is comparison with the exact infinity-valued
+pointed obstruction cost. -/
+theorem hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) (d : ℕ) :
+    HasPointedNonembeddedDualDistanceAtLeast I e O j x d ↔
+      (d : WithTop ℕ) ≤ pointedNonembeddedCost I e O j x := by
+  constructor
+  · intro h
+    apply le_sInf
+    intro n hn
+    obtain ⟨w, ⟨hwdual, hwx, hnembedded⟩, rfl⟩ := hn
+    exact_mod_cast h w hwdual hwx hnembedded
+  · intro h w hwdual hwx hnembedded
+    have hcost : pointedNonembeddedCost I e O j x ≤
+        ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) := by
+      apply sInf_le
+      exact ⟨w, ⟨hwdual, hwx, hnembedded⟩, rfl⟩
+    exact_mod_cast h.trans hcost
+
+section PointedFiniteSearch
+
+variable [Fintype 𝔽]
+
+/-- The finite set of all constrained nonembedded witnesses through `(j,x)`. -/
+def pointedNonembeddedCandidates
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    Finset (ι → (κ → 𝔽)) := by
+  classical
+  exact Finset.univ.filter (IsPointedNonembeddedWitness I e O j x)
+
+/-- Exhaustive finite-field search for the pointed obstruction cost, with `⊤` returned when the
+constrained witness set is empty. -/
+def pointedNonembeddedCostSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  sInf (((pointedNonembeddedCandidates I e O j x).image fun w =>
+    ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ)) : Set (WithTop ℕ))
+
+omit [DecidableEq V] in
+/-- The exhaustive finite-field search computes the abstract pointed obstruction cost. -/
+theorem pointedNonembeddedCostSearch_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCostSearch I e O j x = pointedNonembeddedCost I e O j x := by
+  apply congrArg sInf
+  ext n
+  simp only [pointedNonembeddedCandidates, Finset.mem_coe, Finset.mem_image, Finset.mem_filter,
+    Finset.mem_univ, true_and, Set.mem_setOf_eq]
+
+end PointedFiniteSearch
+
 #print axioms RepairPorts.exists_functionalFiberCost_realizer
 #print axioms RepairPorts.exists_functionalTupleCost_realizer
 #print axioms RepairPorts.hasWeightedFunctionalDualDistanceAtLeast_iff_functionalTupleCost
 #print axioms RepairPorts.functionalFiberCostSearch_eq
+#print axioms RepairPorts.pointedNonembeddedCost_eq_top_iff
+#print axioms RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost
+#print axioms RepairPorts.pointedNonembeddedCostSearch_eq
 
 end
 

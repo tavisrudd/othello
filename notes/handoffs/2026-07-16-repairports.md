@@ -3,8 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's first
-functional-cost definition and verified finite-search slice is implemented.
+**Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
+unpointed and infinity-valued pointed costs and verified finite-search bridges are implemented.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 
@@ -19,7 +19,7 @@ twisted-cubic--axis paper.
 
 | Task | Status | Deliverable | Promotion gate |
 |---|---|---|---|
-| C215 | active; first API slice implemented | weighted functional-dual theory | exact criterion plus a strict natural example |
+| C215 | active; cost/search API implemented | weighted functional-dual theory | exact criterion plus a strict natural example |
 | C216 | queued after C215 definition layer | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | bounded scout after C215 definitions | circuit-coefficient gauge invariants | nontrivial holonomy/cross-ratio with a consequence |
 | C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
@@ -28,10 +28,10 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Define the pointed functional-fiber cost with an honest infinity value for empty constrained
-fibers, then prove a finite-search bridge to the existing pointed nonembedded-witness predicate.
-The unpointed canonical cost, tuple additivity, weighted-gate characterization, and verified
-finite-field reference search are implemented in
+Derive a fiberwise first-obstruction formula for the pointed cost, separating zero-functional and
+nonzero outer-functional cases and replacing exhaustive concatenated-word search by constrained
+inner-fiber costs. The canonical costs, exact lower-bound characterizations, and verified finite
+searches are implemented in
 [`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
 
 ## Scope and ownership

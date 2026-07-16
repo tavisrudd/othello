@@ -2,7 +2,7 @@
 
 **Lane:** `repairports`
 
-**Status:** initial definition and verified finite-search slice implemented.
+**Status:** unpointed and pointed definition/search slices implemented.
 
 ## Result
 
@@ -21,6 +21,15 @@ search procedure:
 This turns the C214 lower-bound predicate into a reusable invariant and supplies a verified
 reference algorithm without building q=9 coordinates or Singer data into the definition.
 
+The pointed extension uses `WithTop Nat` so an empty constrained witness set has cost `top`:
+
+- `IsPointedNonembeddedWitness` isolates exactly the witnesses relevant at a coordinate;
+- `pointedNonembeddedCost_eq_top_iff` proves that the cost is infinite exactly when no such
+  witness exists;
+- `hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost` identifies the existing pointed
+  lower-bound predicate with comparison against the exact cost;
+- `pointedNonembeddedCostSearch_eq` proves that finite exhaustive witness search computes it.
+
 ## Validation
 
 Guarded elaboration of `RepairPorts/FunctionalCost.lean` passes. The printed headline theorems use
@@ -32,6 +41,7 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Define the pointed functional-fiber cost with an honest infinity value for empty constrained
-fibers, then derive a finite search and bridge it to the existing pointed nonembedded-witness
-predicate. Do not encode emptiness as natural-number zero.
+Derive a fiberwise first-obstruction formula for `pointedNonembeddedCost`: separate the
+zero-functional and nonzero outer-functional cases, express the latter through constrained inner
+fiber costs, and prove equivalence to the exhaustive definition. This is the algorithmic reduction
+needed before optimized decoding or examples.
