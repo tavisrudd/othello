@@ -102,6 +102,37 @@ theorem blockFunctional_surjective
   rw [hpair]
   exact hgv
 
+/-- Every functional fiber contains a minimum-Hamming-weight representative. -/
+theorem exists_minimal_blockFunctional_representative
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (beta : Module.Dual 𝔽 V) :
+    ∃ w : κ → 𝔽, blockFunctional I e w = beta ∧
+      ∀ u : κ → 𝔽, blockFunctional I e u = beta → hammingNorm w ≤ hammingNorm u := by
+  obtain ⟨w₀, hw₀⟩ := blockFunctional_surjective I e beta
+  let weights : Set ℕ := {n | ∃ w : κ → 𝔽, blockFunctional I e w = beta ∧ hammingNorm w = n}
+  have hnonempty : weights.Nonempty := ⟨hammingNorm w₀, w₀, hw₀, rfl⟩
+  obtain ⟨w, hw, hnorm⟩ := Nat.sInf_mem hnonempty
+  refine ⟨w, hw, ?_⟩
+  intro u hu
+  rw [hnorm]
+  exact Nat.sInf_le ⟨u, hu, rfl⟩
+
+/-- Coordinatewise fiber minima can be chosen simultaneously, and their sum is a minimum total
+realization cost.  This is the finite-product attainment step behind `Lambda_I(beta)`. -/
+theorem exists_minimal_functional_realization
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (beta : ι → Module.Dual 𝔽 V) :
+    ∃ w : ι → (κ → 𝔽), (∀ j, blockFunctional I e (w j) = beta j) ∧
+      ∀ u : ι → (κ → 𝔽), (∀ j, blockFunctional I e (u j) = beta j) →
+        (∑ j, hammingNorm (w j)) ≤ ∑ j, hammingNorm (u j) := by
+  classical
+  choose w hw hmin using fun j => exists_minimal_blockFunctional_representative I e (beta j)
+  refine ⟨w, hw, ?_⟩
+  intro u hu
+  apply Finset.sum_le_sum
+  intro j _
+  exact hmin j (u j) (hu j)
+
 /-- The zero-functional stratum of the multiblock threshold. -/
 def HasZeroFunctionalMultiblockAtLeast
     (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
@@ -968,6 +999,8 @@ end RepairCodes
 
 #print axioms RepairCodes.functionalWeight_ne_one_of_isCoordinateSurjective
 #print axioms RepairCodes.blockFunctional_surjective
+#print axioms RepairCodes.exists_minimal_blockFunctional_representative
+#print axioms RepairCodes.exists_minimal_functional_realization
 #print axioms RepairCodes.exists_dualWord_hammingNorm_eq_dualDist
 #print axioms RepairCodes.hasZeroFunctionalMultiblockAtLeast_iff_le_two_dualDist
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
