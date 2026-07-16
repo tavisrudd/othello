@@ -15,6 +15,9 @@ targets are maintained in [`expert-profiles/`](expert-profiles/README.md).
 The shared rigidity/transport research agenda for `arcs`, `clebsch`, `repaircodes`, and `baer` is
 recorded in [`2026-07-15-cross-paper-incidence-pattern-agenda.md`](../notes/2026-07-15-cross-paper-incidence-pattern-agenda.md).
 
+An additional unnumbered methods-paper idea, `lean-proof-engineering-at-scale`, is tracked below.
+It is not part of the seven-paper mathematical ship order and has no manuscript directory yet.
+
 **Numbering.** The `#` on each directory row is that paper's **ship-order number, 1–7**, and is the
 one numbering scheme in use — `papers-planning.md` → *Papers — decomposition and ship order* is the
 authoritative list (it carries the gate distances and the dependency rulings); this registry carries
@@ -85,6 +88,25 @@ Venue target is Designs, Codes and Cryptography / Finite Fields and Their Applic
 explicitly **not** IEEE-TIT. Lane map — the single live doc to read first (status, Lean gallery, open
 lit, remaining work): `../notes/handoffs/2026-07-13-clebsch-paper.md`. Lane alias `clebsch`
 (CLAUDE.md routing), same word as this directory's alias.
+
+## Engineering / methods track — unnumbered spin-off
+
+**— · `lean-proof-engineering-at-scale`** — Lean proof engineering for large generated-certificate
+repositories: an evidence-based essay and practical how-to
+
+- *Status:* idea registered; outline, literature positioning, and manuscript staging directory open.
+- *Owns:* the reusable engineering lessons from the project rather than any mathematical theorem:
+  stable checker/schema boundaries, bounded certificate shards, content-trace staleness, import
+  blast-radius control, restart sentinels, disk-backed artifact recovery, `LEAN_NUM_THREADS` fan-out
+  control, OOM-sacrificial `choom` guards, and cross-lane build-tree isolation.
+- *Evidence base:* the measured C143/C151 build failures and successful redesigns, including direct
+  versus shared-incidence certificates; the C162 restart/cache/blast-radius tooling should turn the
+  case study into reproducible guidance.
+- *Claim posture:* practitioner methods/case-study paper first. Any novelty claim about build systems,
+  proof-certificate architecture, or multi-agent formalization requires a dedicated literature audit
+  and comparison against existing Lean/Lake, CI/cache, and large-formalization practice.
+- *Lane:* `build-sys`; live entry doc:
+  `../notes/handoffs/2026-07-14-lean-build-system.md`.
 
 ## Sequence submissions (OEIS) — see `oeis-submissions/`
 
