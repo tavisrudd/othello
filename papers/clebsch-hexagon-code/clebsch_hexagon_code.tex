@@ -39,20 +39,16 @@
 Among the six-arcs of $\PG(2,11)$, exactly one projective class has the
 maximum-distance syndrome directions of its associated MDS code contained
 in a conic: the Clebsch hexagon. This coding-theoretic condition recovers its
-projective stabilizer $A_5$. More generally, containment of the syndrome
-locus in the zero set of any nonzero form of degree at most three
-characterizes the same class. A line bound, a chord-defect identity, and
-Dye's Brianchon theorem give the main implication; enumeration enters only
-the sharp numerical gap.
-
-The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS; the
-code has covering radius three. Its twelve projective deep-hole directions are the
-$\F_{11}$-points of a conic. A quadratic syndrome test is a complete
-distance oracle; its ambiguity data recover the classical Brianchon points,
-self-polar triangles, and an invariant support chirality. The chord identity
-and the Sylvester graph show that $q=11$ is the only conic-filling field for
-six-arcs. For arc sizes four through seven, the only cases are a four-frame
-in $\PG(2,5)$ and the Clebsch hexagon.
+projective stabilizer $A_5$, and the same class is characterized by
+containment in a plane curve of degree at most three. The arc
+itself lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS. Its
+covering radius is three, and its twelve projective deep-hole directions
+are exactly the $\F_{11}$-points of a conic. A quadratic syndrome test is a
+complete distance oracle; its ambiguity data recover the Brianchon points,
+self-polar triangles, and an invariant support chirality. A line bound,
+chord identities, and the Sylvester graph isolate $q=11$ among
+six-arcs; for arc sizes four through seven, the only other case is a
+four-frame in $\PG(2,5)$.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -98,6 +94,16 @@ Marcugini, and Pambianco~\cite{DMP2021}; their Theorem~6.3 supplies the
 leader count used in Section~\ref{sec:code}. See also
 Hirschfeld~\cite{Hirschfeld1998} for the plane arc/covering-radius setting.
 
+The three correspondences used throughout are
+\[
+\begin{array}{c@{\quad\longleftrightarrow\quad}l}
+\text{parity-check column ray}&\text{arc point},\\
+\text{non-arc point $x$ on $i$ secants}&
+  \text{$i$ weight-two leaders per syndrome above $x$},\\
+\text{uncovered point}&\text{projective deep-hole direction}.
+\end{array}
+\]
+
 The paper studies one small exception to the GRS picture: a non-GRS
 $[6,3,4]_{11}$ MDS code whose projective deep-hole locus is exactly the
 $\F_{11}$-point set of a nonsingular conic. Its parity-check columns form
@@ -138,7 +144,8 @@ Proposition~\ref{prop:deep-holes-conic}, with a kernel-checked
 % 2026-07-14: prop:q11-code is the 7th numbered environment of its §8. That
 % paper is in another lane and ships first, so re-verify these before submission.
 certificate~\cite[Prop.~8.7]{ArcsCompleteOutsideConic}; we reprove it for
-self-containment. The new contribution is the symmetry-free coding
+self-containment, and no result below depends on the companion paper. The
+new contribution is the symmetry-free coding
 criterion and its consequences: low-degree rigidity, quantitative gaps,
 leader chirality, decoder reconstruction, and the finite-field boundary.
 
@@ -210,7 +217,7 @@ normal-rational-curve/GRS dictionary~\cite{StormeThas1991}.
 The arc--coset dictionary from the introduction applies without a GRS
 hypothesis~\cite[Def.~6.1, Thm.~6.3]{DMP2021}. Each uncovered direction
 $x$ lifts to $q-1$ weight-three cosets, and each has
-$\binom63=20$ minimum-weight leaders. Geometrically, the same condition says
+$\binom{6}{3}=20$ minimum-weight leaders. Geometrically, the same condition says
 that adjoining $x$ as a seventh column preserves the MDS property.
 
 The stabilizer already forces the small point sets that will occur.
@@ -259,6 +266,8 @@ H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
 \text{points with stabilizer conjugate to }H&0&6&10&12&15&0
 \end{array}
 \]
+By orbit--stabilizer, the third row already gives the orbits of lengths
+$6$, $10$, $12$, and $15$; only points with exact stabilizer $C_2$ remain.
 To spell out the subtraction in the last row: the normalizer $D_5$ fixes
 one of the three $C_5$ eigenlines and interchanges the other two, giving
 $6$ points with stabilizer $D_5$ and $12$ with stabilizer $C_5$; the unique
@@ -290,7 +299,7 @@ exactly ten Brianchon points. The relevant double count is short.
 The fifteen edges contribute $150$ off-arc incidences. The $45$ pairs of
 disjoint edges meet once, so if $n_i$ counts off-arc points lying on exactly
 $i$ edges, then a point on three edges accounts for
-$\binom32=3$ such pairs and
+$\binom{3}{2}=3$ such pairs and
 \[
  n_1+2n_2+3n_3=150,
  \qquad n_2+3n_3=45,
@@ -770,10 +779,12 @@ carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
     \node[font=\small] at (0,2.05) {$KG(5,2)$};
   \end{scope}
 \end{tikzpicture}
-\caption{The synthematic--Petersen dictionary. The five self-polar
-triangles give the displayed perfect matchings. A Petersen vertex $ij$
-represents the Brianchon point and complementary support pair attached to
-$\{T_i,T_j\}$; two vertices are adjacent when the index pairs are disjoint.}
+\caption{The synthematic--Petersen dictionary. The five line styles encode
+the five self-polar triangles as perfect matchings of the six coordinates.
+For each pair $\{T_i,T_j\}$, their union is an alternating six-cycle: its
+opposite-edge matching gives a Brianchon point, and its alternating vertex
+classes give a complementary support pair. Both are represented by the
+Petersen vertex $ij$; adjacency means that the index pairs are disjoint.}
 \label{fig:synthematic-petersen}
 \end{figure}
 
@@ -845,7 +856,8 @@ their chords with exactly the ten matchings complementary to the total.
 
 \begin{proposition}[Invariant support chirality]
 \label{prop:chirality}
-The twenty three-element coordinate supports split into two complementary
+Only the bipartition is intrinsic: neither part has a canonical sign. The
+twenty three-element coordinate supports split into two complementary
 $A_5$-orbits $\mathcal O_+$ and $\mathcal O_-$ of size ten. For every
 maximum-distance syndrome $s$, each support determines exactly one
 weight-three leader of the coset $H^{-1}(s)$; hence that coset has ten
@@ -855,8 +867,7 @@ leaders split as $1200+1200$.
 Every monomial automorphism of $C$ preserves this unordered bipartition.
 The other coset in the exotic normalizer $N_{S_6}(A_5)\cong S_5$ exchanges
 the two support classes, but its sixty elements are not automorphisms of the
-displayed code. Thus the intrinsic structure is an unordered two-class
-decomposition, not a canonically signed label. By
+displayed code. By
 Proposition~\ref{prop:brianchon-support}, the ten complementary support
 pairs are canonically both the two-subsets of the five self-polar triangles
 and the ten Brianchon points.
@@ -885,7 +896,8 @@ that quotient $A_5$.
 \section{Why \texorpdfstring{$q=11$}{q=11}}
 \label{sec:why11}
 
-The conic-filling syndrome phenomenon of
+Call an arc $A$ \emph{conic-filling} if $\cU(A)=\mathcal Q(\F_q)$ for some
+nonsingular conic $\mathcal Q$. The conic-filling syndrome phenomenon of
 Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to $q=11$, even
 without a symmetry hypothesis on the arc. A universal chord-multiplicity
 identity makes this a four-field question, and the only nontrivial residue
@@ -911,7 +923,7 @@ exactly $i$ chords. Counting chord--point incidences and pairs of chords
 with disjoint endpoints gives
 \[
  n_1+2n_2+3n_3=15(q-1),\qquad
- n_2+3n_3=\binom{15}{2}-6\binom52=45.
+ n_2+3n_3=\binom{15}{2}-6\binom{5}{2}=45.
 \]
 Writing $c(A)=n_3$, the number of covered points off $A$ is
 $n_1+n_2+n_3=15q-60+c(A)$. Subtracting this from the
