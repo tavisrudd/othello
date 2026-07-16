@@ -49,6 +49,8 @@ relative-distance bound `c<351/1600`. Only the bounded radius-four port transfer
 - `proof_ledger.md` — claim-by-claim paper/Lean/import ledger.
 - `adversarial_novelty_review.md` — collision search and final novelty posture.
 - `../../lean/RepairCodes/` — formal theorem chain.
+- `../../lean/RepairCodes/OperationalCoefficients.lean` — coefficient-labelled scalar recovery
+  equations and the monomial gauge boundary.
 - `../../lean/RepairCodes/TRUST.md` — stable trust boundary.
 - `../../notes/2026-07-13-repaircodes-asymptotic-adversarial-review.md` — strict formalization
   review.

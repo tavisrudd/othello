@@ -87,10 +87,12 @@ an exact negative boundary: `1,306,963/4,265` orbits. The replayable DP/ILP emit
 certificate, representatives, and symbolic-persistence verdict are in the
 [C202 report](2026-07-15-c202-repair-extremizer-classification.md).
 
-**Operational scout (C203).** Retain coefficient-labelled repair equations and determine what is
-and is not implied about helper access, bandwidth, and availability. The deliverable is either one
-new exact operational guarantee or a precise negative boundary explaining why support completeness
-does not control those metrics. This should precede any comparison plot against LRC bounds.
+**Operational scout (C203, implemented; aggregate gate pending).** Lean retains the exact scalar recovery equation for every
+repair edge and closed coefficient formulas for all three canonical completed-seed repair shapes.
+The direct protocol reads/downloads one field symbol per helper, but a kernel-checked rescaling
+theorem makes raw coefficient values arbitrary coordinate gauge; no minimum-access or
+minimum-bandwidth claim follows under subpacketization. See the
+[C203 report](2026-07-15-c203-operational-coefficient-boundary.md).
 
 **Follow-on.** A MacWilliams/refined-enumerator transform and optimization of the outer AG family
 could broaden the audience, but neither should be advertised before the bounded coefficient scout.

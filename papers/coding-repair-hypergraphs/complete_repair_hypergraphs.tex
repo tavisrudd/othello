@@ -233,6 +233,16 @@ Thus Definition~\ref{def:repair-hypergraph} includes every linear repair
 whose coefficient support has at most $r$ helpers; it is not a declared or
 selected subfamily.
 
+This equation gives a direct scalar protocol: contact every $z\in R$ and
+download its one stored $\F$-symbol.  Hence its helper access and download are
+both $|R|$ field symbols.  This is an achieved protocol, not a lower bound
+against subpacketized helper messages or protocols using additional parity
+checks.  Moreover the raw nonzero coefficients are a coordinate gauge:
+diagonal rescaling of the generator columns changes their values while
+preserving every dual support.  Our coefficient-support theorems therefore
+transfer disjoint availability and failure tolerance, but make no
+optimal-access, optimal-bandwidth, or arithmetic-cost claim.
+
 \begin{proposition}\label{prop:basic-hypergraph}
 For every finite code-derived repair hypergraph with nonempty edges,
 \[

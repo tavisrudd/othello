@@ -74,7 +74,7 @@ unless they retain an explicit open tail.
 ### `repaircodes`
 
 - **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum blockers classified under monomial `PGL(2,9)`; exact full-port Burnside census records the matching-orbit explosion → `notes/2026-07-15-c202-repair-extremizer-classification.md`.
-- **C203 `[repaircodes]` [QUEUED]** — retain coefficients and test operational repair guarantees → `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
+- **C203 `[repaircodes]` [IN PROGRESS]** — exact coefficient-labelled scalar equations and monomial gauge boundary pass focused Lean; aggregate `RepairCodes` build is deferred behind the foreign Q25 build → `notes/2026-07-15-c203-operational-coefficient-boundary.md`.
 
 ### Dormant / handoff-owned lanes
 

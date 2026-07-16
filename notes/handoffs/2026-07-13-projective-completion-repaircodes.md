@@ -17,9 +17,13 @@ Two bounded expert-review follow-ups do not reopen C111–C114. C202 is complete
 radius-three extremizers and all minimum blockers are classified up to the monomial `PGL(2,9)`
 action, while an exact Burnside census shows that full-port maximum-matchings have 1,306,963 cubic
 and 4,265 axis orbits; see the [C202 report](../2026-07-15-c202-repair-extremizer-classification.md).
-C203 is next and tests whether retaining repair coefficients yields an exact access, bandwidth, or
-availability consequence. See the
-[expert-question portfolio](../2026-07-15-expert-questions-upgrade-portfolio.md).
+C203's implementation is complete. Every repair witness now exposes its exact scalar recovery equation, the
+three canonical completed-seed coefficient formulas are kernel-checked, and a concrete monomial
+rescaling theorem proves the operational boundary: the direct protocol uses one full symbol per
+helper, while raw coefficient values imply no invariant minimum-access or minimum-bandwidth claim.
+See the [C203 report](../2026-07-15-c203-operational-coefficient-boundary.md). Its focused Lean,
+axiom, and PDF gates pass; the final aggregate `RepairCodes` build is deferred behind the foreign
+Q25 build. That aggregate gate is the only remaining bounded follow-up in this lane.
 
 ## Goal and claim ledger
 
