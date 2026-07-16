@@ -56,10 +56,10 @@ cubic coordinates exact locality three.  We determine the axis invariants
 in terms of the affine cap number, prove
 $\left(\nu_x,\tau_x\right)=\left((q-1)/2,q-2\right)$ at every cubic
 coordinate, and obtain $\tau_x>\nu_x$ for every
-coordinate when $q\geq9$.  At $q=9$ the three coordinate types have distinct
-exact rows $(4,7)$, $(6,12)$, and $(7,13)$.
+coordinate when $q\geq9$.  The case $q=9$ gives three exact coordinate
+profiles used as the inner seed below.
 Restoring the cubic point at infinity gives a more symmetric $[2q+2,4,q]_q$
-variant whose full inclusion-minimal repair port stabilizes at radius four,
+variant whose full inclusion-minimal repair clutter stabilizes at radius four,
 with one uniform row on the cubic and one on the axis.
 
 Our second result is an exact concatenation theorem.  If $I$ is an inner code and
@@ -150,7 +150,7 @@ The main contributions follow the same two-part structure.
       seed, has exact rows $(4,7)$, $(6,12)$, and $(7,13)$.
 \item We restore the projective cubic point at infinity, prove parameters
       $[2q+2,4,q]_q$, and determine the complete inclusion-minimal repair
-      port.  Every inclusion-minimal repair has at most four helpers, with
+      clutter.  Every inclusion-minimal repair has at most four helpers, with
       uniform cubic row $((q-1)/2,q-1)$ and axis row
       $((5q-3)/6,2q-3)$.
 \item We prove exact preservation of complete radius-$r$ repair hypergraphs
@@ -166,11 +166,9 @@ The main contributions follow the same two-part structure.
       derive a fixed-alphabet family over $\F_9$ with exact rate $2/19$,
       eventual relative distance greater than every fixed $c<39/190$, exact
       mixed locality, exact type multiplicities, exact repair rows, and
-      helper-failure thresholds.
-\item The projectively completed seed gives a second family with exact rate
-      $1/10$, every eventual distance constant below $351/1600$, equal
-      $10N/10N$ coordinate multiplicities, and exact radius-four rows
-      $(4,8)$ and $(7,15)$.
+      helper-failure thresholds.  The completed seed gives a comparison
+      family with exact rate $1/10$, every eventual distance constant below
+      $351/1600$, and $10N$ cubic and $10N$ axis coordinates.
 \end{enumerate}
 
 \subsection*{Scope of the contribution}
@@ -384,9 +382,9 @@ For $A_\infty$, the cubic triples are exactly the distinct zero-sum triples
 of $\F_q$, hence the affine lines of $\mathrm{AG}(h,3)$.  For $A(a)$, the
 following projective relabeling moves the target to $A_\infty$:
 \[
- t\longmapsto(t+a)^{-1},\qquad 0^{-1}=0,
+ t\longmapsto(t+a)^{-1},\qquad 0^{-1}=0.
 \]
-The convention at the pole $t=-a$ makes this a permutation of $\F_q$.
+This convention at the pole $t=-a$ makes the map a permutation of $\F_q$.
 Under it, the cubic repair component becomes the zero-sum triples avoiding
 zero.  Indeed, a triple $s,t,u$ completes to $A(a)$ exactly when
 $e_2=ae_1$.  None of $s,t,u$ can equal $-a$: substituting one such value
@@ -478,8 +476,9 @@ is
 This is an injective recoding of the sum $u+v$.  Choose a generator $g$ of
 $\F_q^*$ and pair $g^{2i}$ with $g^{2i+1}$ for
 $0\leq i<(q-1)/2$.  These pairs partition $\F_q^*$, while their sums
-$(1+g)g^{2i}$ are distinct.  For $q=3$ there is only one pair, so the
-conclusion is immediate even though its sum is zero.  Mapping back by
+$(1+g)g^{2i}$ are distinct.  If $q>3$, then $g\ne-1$ because $g$ has order
+$q-1>2$, so these sums are also nonzero.  For $q=3$ there is only one pair,
+so the conclusion is immediate even though its sum is zero.  Mapping back by
 $s=x+u^{-1}$ gives a rainbow perfect matching of the $q-1$ cubic helpers and
 therefore $\nu_x=(q-1)/2$.
 
@@ -522,7 +521,9 @@ finite axis $A(a)$ & $9$ & $2$ & $36+8$    & $6$ & $12$ \\
 axis $A_\infty$    & $1$ & $2$ & $36+12$   & $7$ & $13$ \\
 \bottomrule
 \end{tabular}
-\caption{Exact rows of the $[19,4,8]_9$ seed.}
+\caption{Exact coordinate profiles of the $[19,4,8]_9$ seed.  Repair counts
+are inclusion-minimal; $36+8$ and $36+12$ separate the axis-pair and cubic
+components.}
 \label{tab:q9}
 \end{table}
 
@@ -543,7 +544,7 @@ The constant $7/4$ is attained at every cubic coordinate.
 
 Restoring the missing cubic point has two effects: it recovers projective
 symmetry within each parameter line, and it makes the complete
-inclusion-minimal repair port accessible through the ambient rank-four
+inclusion-minimal repair clutter accessible through the ambient rank-four
 bound.
 
 Let
@@ -555,7 +556,7 @@ and let $\overline C_q$ be the row code of the displayed projective system.
 Thus $\overline C_q$ restores the one cubic point punctured from $C_q$; the
 axis is unchanged.
 
-\begin{theorem}[Completed parameters and full minimal repair port]
+\begin{theorem}[Completed parameters and full minimal repair clutter]
 \label{thm:completed-port}
 For every $q=3^h$,
 \[
@@ -564,7 +565,7 @@ For every $q=3^h$,
 \]
 Cubic coordinates have exact locality three and axis coordinates exact
 locality two.  Moreover, every inclusion-minimal repair uses at most four
-helpers, so the full minimal repair port is already visible at radius four.
+helpers, so the full minimal repair clutter is already visible at radius four.
 Its exact rows are
 \[
  (\nu_x^{(4)},\tau_x^{(4)})=
@@ -578,9 +579,11 @@ These values are uniform within each of the two projective parameter lines.
 
 \begin{proof}
 A plane not containing the axis meets it once and meets the full twisted
-cubic in at most three points.  A nonzero plane containing the axis is an
-osculating plane and meets the full cubic in exactly one point.  Hence every
-section has size at most $q+2$, and the old extremal section still attains
+cubic in at most three points.  A plane containing the axis has equation
+$aX_0+dX_3=0$.  If $d=0$, it contains $C_\infty$ and no finite cubic point;
+if $d\ne0$, the equation $a+dt^3=0$ has one finite solution and
+$C_\infty$ is excluded.  Hence every section has size at most $q+2$, and
+the old extremal section still attains
 $q+2$.  This gives distance $(2q+2)-(q+2)=q$; the same spanning columns give
 dimension four.  Pairwise projective independence gives dual distance at
 least three, while any three distinct axis points give equality.
@@ -599,9 +602,10 @@ Away from $s=-a$, it sends $C(s)$ to
 $C((s+a)^{-1})$ up to the nonzero scale $(s+a)^3$; it sends $C(-a)$ to
 $C_\infty$ and $C_\infty$ to $C(0)$.  On the axis it sends $A(y)$ to
 $A((y-a)^{-1})$ up to scale, with $A(a)$ sent to $A_\infty$.
-Consequently this monomial action is transitive separately on the completed
-cubic and on the axis.  Locality and the repair hypergraph therefore need be
-calculated at only the two infinity targets.
+Consequently the ambient map induces a monomial code automorphism that is
+transitive separately on the completed cubic and on the axis.  Locality and
+the repair hypergraph therefore need be calculated at only the two infinity
+targets.
 
 For exhaustiveness, take an inclusion-minimal target-plus-helper relation.
 Its helper columns are linearly independent: otherwise a helper-only
@@ -609,8 +613,8 @@ relation can be subtracted to cancel one helper without cancelling the
 target coefficient, because that helper-only relation has target coefficient
 zero.  Since the generator has four rows, there are at most
 four helpers.  This proves that radius four is the full \emph{minimal} inner
-port; it makes no assertion about a later concatenated code's unbounded
-port.
+repair clutter; it makes no assertion about all minimal repairs of a later
+concatenated code.
 
 For a cubic target, every minimal edge consumes at least two of the $q$
 other cubic points, so $\nu\le(q-1)/2$; the radius-three rainbow matching
@@ -622,9 +626,12 @@ and using the $q+1$ cubic and $q$ available axis resources gives
 $6\nu\le5q+2$, hence $\nu\le(5q-3)/6$; the radius-three matching attains
 equality.
 
-Finally, the complement of a full-port transversal contains no helper set
-that spans the target.  It therefore lies in a hyperplane avoiding the
-target; conversely every such hyperplane complement is a transversal.
+Finally, consider a transversal of the full minimal repair clutter.  Its
+complement contains no helper set that spans the target: any spanning set
+contains an inclusion-minimal spanning subset, and the preceding rank
+argument gives that subset at most four helpers.  The complement therefore
+lies in a hyperplane avoiding the target; conversely every such hyperplane
+complement is a transversal.
 Equivalently,
 \[
  \tau_x=(2q+1)-m_x,
@@ -666,7 +673,8 @@ The \emph{functional dual} of $O$ is
 Its distance is the minimum number of nonzero component functionals in a
 nonzero tuple; its support therefore counts the outer blocks touched by the
 induced dual relation.  This is intrinsic to $V$ and does not choose field
-coordinates.
+coordinates.  We use the standard convention $d(\{0\})=+\infty$, so the
+functional gate is vacuous when the functional dual is zero.
 
 \begin{theorem}[Complete repair-hypergraph transfer]\label{thm:transfer}
 Let $r\geq0$.  Suppose
@@ -872,7 +880,7 @@ At radius four the inner gate is $5<2d(\overline C_9^\perp)=6$, and the trace
 bridge requires ordinary outer dual distance $r+2=6$.  Theorem~\ref{thm:transfer}
 therefore gives equality of the complete bounded hypergraphs.  Apply
 Theorem~\ref{thm:completed-port}.  As in Theorem~\ref{thm:transfer}, the
-conclusion concerns the radius-four port.
+conclusion concerns the radius-four repair hypergraph.
 \end{proof}
 
 \section{A fixed-alphabet asymptotic family}
@@ -935,6 +943,7 @@ $8D_j$, and
  \geq\frac15.
 \]
 The exact localities and repair rows transfer blockwise.
+
 For the sharper distance statement, fix $c<39/190$.  Then
 $19c/8<39/80$, so eventually $D_j/N_j>19c/8$.  Hence
 \[
@@ -965,7 +974,9 @@ $D_j\ge6$ and
 Corollary~\ref{cor:completed-finite-lift} applies.  Length and dimension are
 $20N_j$ and $4(N_j/2)=2N_j$, giving rate $1/10$.  The distance is at least
 $9D_j$.  Since $39/80>4/9$, eventually $4N_j<9D_j$, which yields the clean
-$1/5$ bound.  For fixed $c<351/1600=9(39/80)/20$, one has
+$1/5$ bound.
+
+For fixed $c<351/1600=9(39/80)/20$, one has
 $20c/9<39/80$, so eventually
 \[
  \frac{d(\overline\cC_j)}{20N_j}
@@ -989,14 +1000,15 @@ subtypes, and transfers one additional repair radius.
 \midrule
 inner parameters & $[19,4,8]_9$ & $[20,4,9]_9$ \\
 exact asymptotic rate & $2/19$ & $1/10$ \\
-proved eventual $c$ & $c<39/190$ & $c<351/1600$ \\
+eventual distance range & $c<39/190$ & $c<351/1600$ \\
 transferred radius & $3$ & $4$ \\
 block multiplicities & $9+9+1$ & $10+10$ \\
 repair rows & $(4,7),(6,12),(7,13)$ & $(4,8),(7,15)$ \\
 \bottomrule
 \end{tabular}
-\caption{Comparison of the two fixed-alphabet families.  The distance row
-lists every eventual strict relative-distance constant proved above.}
+\caption{Comparison of the two fixed-alphabet families.  In the distance row,
+every fixed $c$ in the displayed range is eventually a strict lower bound on
+relative distance.}
 \label{tab:family-comparison}
 \end{table}
 
@@ -1068,12 +1080,25 @@ AI is not listed as an author.
 
 The theorem chain is formalized in Lean~4.32.0-rc1 with the matching pinned
 mathlib revision.  The root module \texttt{RepairCodes} kernel-checks the
-finite geometry and repair rows, complete bounded-port transfer and its two
-sharpness examples, the support-preserving trace bridge and finite lifts,
-and every reduction from the asymptotic input to the displayed rates and
-distance bounds.  The proof ledger maps each paper theorem to its formal
-declarations; independent exact-arithmetic enumerators reproduce the
-$q=9$ tables but are not consumed by the Lean proofs.
+finite geometry and repair rows, complete bounded repair-hypergraph transfer
+and its two sharpness examples, the support-preserving trace bridge and
+finite lifts, and every reduction from the asymptotic input to the displayed
+rates and distance bounds.  In particular,
+\texttt{cubicRepair\_matchingNumber} formalizes the colored-graph matching,
+\texttt{repairHypergraph\_concatenatedCode\_eq\_embed} is the exact transfer
+equality, and
+\texttt{hasFunctionalDualDistanceAtLeast\_restrictScalars} is the trace
+bridge.  The formal \texttt{repairHypergraph} uses the exact dual-word
+support definition in Definition~\ref{def:repair-hypergraph}.
+
+The independent script
+\texttt{notes/2026-07-13-projective-completion-verifier.py} implements its
+own finite fields and projective normalization.  Deterministically and in
+exact arithmetic, it exhausts all projective plane forms at
+$q=3,9,27$, checks the repair rows at $q=3,9$, and accepts only when the
+section spectra, parameters, circuit relation, and exact rows agree; two
+column mutations are required to fail the corresponding invariants.  These
+executions reproduce evidence but are not consumed by the Lean proofs.
 
 The formal chain contains no admitted declarations, unsafe definitions,
 native execution, code-generation trust, or externally generated proof
@@ -1088,7 +1113,8 @@ Section~\ref{sec:asymptotic}.
 The artifact entry point, pinned dependencies, reproduction commands,
 expected finite outputs, theorem map, and axiom reports are recorded in the
 paper-package README, proof ledger, and
-\texttt{lean/RepairCodes/TRUST.md}.
+\texttt{lean/RepairCodes/TRUST.md}; the verifier above uses standard Python
+and completes without a specialized resource profile.
 
 \section{Conclusion}
 
@@ -1103,7 +1129,9 @@ good family.
 The two seeds also expose a concrete tradeoff.  Puncturing gives the higher
 rate family and three coordinate types at radius three; projective completion
 raises the transferred radius, merges the axis types, and improves the
-available distance threshold at a small rate cost.  The uniform transfer
+available distance threshold at a small rate cost.
+
+The uniform transfer
 gates are sharp, but they need not be necessary for a fixed inner--outer
 pair.  Characterizing such fixed-pair exceptions is a natural next problem.
 Two further directions are to determine how large the gap
