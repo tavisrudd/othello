@@ -1,7 +1,7 @@
-# Paper: complete repair hypergraphs under concatenation
+# Paper: complete repair hypergraphs
 
-**Working title:** *Complete repair hypergraphs under concatenation: a
-twisted-cubic--axis family.* Author: Tavis Rudd.
+**Working title:** *Complete repair hypergraphs: exact transfer under
+concatenation. A twisted-cubic--axis family.* Author: Tavis Rudd.
 
 **Status:** assembled manuscript. The mathematical chain is Lean-checked under the strict trust
 gate, modulo exactly one quarantined literature theorem: Stichtenoth's self-dual TVZ-family

@@ -33,7 +33,7 @@
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\Span}{\operatorname{span}}
 
-\title{Complete repair hypergraphs under concatenation\\
+\title{Complete repair hypergraphs: exact transfer under concatenation\\
 \large A twisted-cubic--axis family}
 \author{Tavis Rudd}
 \date{July 2026}
@@ -59,8 +59,8 @@ coordinate, and obtain $\tau_x>\nu_x$ for every
 coordinate when $q\geq9$.  The case $q=9$ gives three exact coordinate
 profiles used as the inner seed below.
 Restoring the cubic point at infinity gives a more symmetric $[2q+2,4,q]_q$
-variant whose full inclusion-minimal repair clutter stabilizes at radius four,
-with one uniform row on the cubic and one on the axis.
+comparison variant whose full inclusion-minimal repair clutter stabilizes at
+radius four.
 
 Our second result is an exact concatenation theorem.  If $I$ is an inner code and
 $r+1<2d(I^\perp)$, an outer functional-dual distance of at least $r+2$
@@ -68,14 +68,14 @@ forces every concatenated dual word of weight at most $r+1$ into one inner
 block.  Consequently the entire hypergraph $\cH_x^{(r)}$, rather than a
 chosen repair subfamily, is copied block by block.  A trace-duality argument
 turns ordinary extension-field dual distance into this functional gate.
-Combining the $q=9$ seed with a self-dual TVZ outer family gives unbounded
-$\F_9$-linear codes of exact rate $2/19$ whose relative distance is eventually
-greater than every fixed $c<39/190$ (in particular, greater than $1/5$),
-while preserving the exact repair rows blockwise.  The completed seed gives
-a rate-$1/10$ family with eventual relative distance above every
-$c<351/1600$.  Both conclusions concern the complete repair hypergraph only
-through the stated radius.  All finite arguments and reductions from the
-sole deep input, Stichtenoth's self-dual TVZ theorem, are formalized in Lean.
+Combining the $q=9$ seed with a self-dual
+Tsfasman--Vl\u{a}du\c{t}--Zink (TVZ) outer family gives unbounded
+$\F_9$-linear codes of exact rate $2/19$ whose relative distance is
+eventually greater than every fixed $c<39/190$ (in particular, greater than
+$1/5$), while preserving the exact repair rows blockwise.  The completed
+comparison trades rate $1/10$ for radius-four transfer and a stronger
+distance threshold.  Both conclusions identify the complete repair
+hypergraph only through the stated radius.
 \end{abstract}
 
 \section{Introduction}
@@ -98,11 +98,7 @@ $\nu$ is disjoint availability, while $\tau-1$ is the maximum number of
 arbitrary helper failures that can always be tolerated while retaining at
 least one local repair.  Our emphasis is the exact coordinatewise computation
 of both invariants for a complete code-derived repair family and their
-simultaneous transfer.  The transversal interpretation itself is established:
-Pamies-Juarez--Hollmann--Oggier~\cite[Definition~3]{PamiesEtAl2013} introduced
-the same minimum hitting-set invariant as local repair tolerance, and
-Wang--Zhang~\cite{WangZhang2014} placed it in a general regenerating-set
-framework.
+simultaneous transfer.
 
 Our inner families come from a classical object in finite projective
 geometry.  In $\mathrm{PG}(3,q)$, take the affine part of a twisted cubic and,
@@ -129,10 +125,10 @@ transversal, edge counts, and all other invariants of the complete repair
 hypergraph transfer exactly.
 
 The argument therefore has two arcs.  Sections~\ref{sec:repair}--\ref{sec:projective-completion}
-construct the repair hypergraph and compute it for the punctured and completed
-geometric seeds.  Sections~\ref{sec:transfer}--\ref{sec:asymptotic} prove exact
-blockwise transfer, connect its functional hypothesis to ordinary dual
-distance, and derive two fixed-alphabet asymptotic families.
+construct the repair hypergraph, first for the primary punctured seed and then
+for its projective-completion comparison.  Sections~\ref{sec:transfer}--\ref{sec:asymptotic}
+prove exact blockwise transfer, connect its functional hypothesis to ordinary
+dual distance, and derive the headline and comparison fixed-alphabet families.
 
 \subsection*{Contributions}
 
@@ -148,7 +144,7 @@ The main contributions follow the same two-part structure.
       $((q-1)/2,q-2)$, and deduce $\tau_x>\nu_x$ for every
       coordinate when $q\geq9$.  The case $q=9$, used below as the inner
       seed, has exact rows $(4,7)$, $(6,12)$, and $(7,13)$.
-\item We restore the projective cubic point at infinity, prove parameters
+\item As a comparison, we restore the projective cubic point at infinity, prove parameters
       $[2q+2,4,q]_q$, and determine the complete inclusion-minimal repair
       clutter.  Every inclusion-minimal repair has at most four helpers, with
       uniform cubic row $((q-1)/2,q-1)$ and axis row
@@ -952,7 +948,7 @@ $19c/8<39/80$, so eventually $D_j/N_j>19c/8$.  Hence
 \]
 \end{proof}
 
-\begin{theorem}[Completed uniform asymptotic repair family]
+\begin{theorem}[Completed comparison family]
 \label{thm:completed-asymptotic}
 There is a sequence of $\F_9$-linear codes $\overline\cC_j$ of unbounded
 length and exact rate $1/10$ such that, eventually, the relative minimum
@@ -1116,6 +1112,7 @@ paper-package README, proof ledger, and
 \texttt{lean/RepairCodes/TRUST.md}; the verifier above uses standard Python
 and completes without a specialized resource profile.
 
+\enlargethispage{2\baselineskip}
 \section{Conclusion}
 
 The complete bounded repair hypergraph separates two roles that ordinary
@@ -1131,13 +1128,9 @@ rate family and three coordinate types at radius three; projective completion
 raises the transferred radius, merges the axis types, and improves the
 available distance threshold at a small rate cost.
 
-The uniform transfer
-gates are sharp, but they need not be necessary for a fixed inner--outer
-pair.  Characterizing such fixed-pair exceptions is a natural next problem.
-Two further directions are to determine how large the gap
-$\tau_x-\nu_x$ can be under prescribed code parameters, and to add a
-subpacketized helper-message model in which support transfer can be compared
-with repair bandwidth and access.
+The sharp uniform gates may be unnecessary for fixed pairs.  Open problems
+include bounding the matching--transversal gap and relating support transfer
+to subpacketized bandwidth and access.
 
 \bibliographystyle{plain}
 \bibliography{refs}

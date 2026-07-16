@@ -2,7 +2,8 @@
 
 **Audit date:** 2026-07-13
 
-**Object:** *Complete repair hypergraphs under concatenation: a twisted-cubic--axis family*
+**Object:** *Complete repair hypergraphs: exact transfer under concatenation.
+A twisted-cubic--axis family.*
 **Rule:** a none-found search is evidence for cautious positioning, never a priority
 certificate. Lean establishes correctness of formal statements, not novelty.
 

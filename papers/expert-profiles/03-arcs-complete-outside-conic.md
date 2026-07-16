@@ -1,4 +1,4 @@
-# Expert profile: arcs complete outside a prescribed conic
+# Expert profile: *Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9*
 
 **Paper:** `papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex`<br>
 **Profile verified:** 2026-07-15<br>
@@ -10,8 +10,8 @@ The paper introduces arcs disjoint from a prescribed conic whose secants cover e
 off-conic point. Its reusable spine is the exact prescribed-hole defect identity (with equality and
 stability), its conic lower bound, the projective-averaging upper transfer, the characteristic-two
 nucleus constraints, and the arc--MDS/syndrome interpretation. The finite spine gives exact small
-values and a certified classification over `F_16`, including quadratic avoidance for every
-eight-arc class.
+values and a certificate-checked exhaustive covering list over `F_16`, including quadratic
+avoidance for every eight-arc.
 
 The natural audience is finite geometry first and coding theory second. The strongest fits are
 *Designs, Codes and Cryptography*, *Finite Fields and Their Applications*, or a finite-geometry

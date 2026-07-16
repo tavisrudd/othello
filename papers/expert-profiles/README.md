@@ -14,7 +14,7 @@ willing, independent, or suitable under a particular journal's conflict policy.
 |---|---|---|
 | 1 | Nofil / finite-geometry outcomes | `01-nofil-finite-geometry-outcomes.md` |
 | 2 | Dihedral Schreier Node Kayles | `02-dihedral-schreier-node-kayles.md` |
-| 3 | Arcs complete outside a prescribed conic | `03-arcs-complete-outside-conic.md` |
+| 3 | Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9 | `03-arcs-complete-outside-conic.md` |
 | 4 | Clebsch hexagon code | `04-clebsch-hexagon-code.md` |
 | 5 | Complete repair hypergraphs | `05-coding-repair-hypergraphs.md` |
 | 6 | Frobenius-equivariant pair extension | `06-equivariant-robust-completion.md` |

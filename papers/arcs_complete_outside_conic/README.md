@@ -1,6 +1,6 @@
 # Paper: Arcs complete outside a prescribed conic
 
-**Title:** *Arcs complete outside a prescribed conic — an exact defect identity and
+**Title:** *Arcs complete outside a prescribed conic — An exact defect identity and
 ρ_C(16) = 9.* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled

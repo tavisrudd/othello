@@ -42,8 +42,8 @@ from conic involutions
 
 ## Geometry / coding track — Package 2 (arc extension & reconstruction)
 
-**3 · `arcs_complete_outside_conic`** — Arcs complete outside a prescribed conic (secant-defect
-identity, bounds, MDS syndrome form)
+**3 · `arcs_complete_outside_conic`** — *Arcs complete outside a prescribed conic: An exact
+defect identity and ρ_𝒞(16) = 9*
 - *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean
   formalization; strengthened q11 code/extension spectrum included; near submission-ready.
 - **Owns the q=11 deep-holes=conic identification** (`comp-q11-mds-deep-holes`), which

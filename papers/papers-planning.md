@@ -41,7 +41,8 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   "finite subgroups of PGL₂(q)".
 - *Gate:* owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions.
 
-**3 · Arcs complete outside a conic** — `arcs_complete_outside_conic`
+**3 · Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9** —
+`arcs_complete_outside_conic`
 - *What:* standalone; **owns the q=11 deep-holes=conic identification**.
 - *Gate:* owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement.
 
