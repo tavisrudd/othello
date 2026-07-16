@@ -67,8 +67,8 @@ unless they retain an explicit open tail.
 - **C144 `[relconic]` [QUEUED; QUIESCENT BOX]** — per-lane validation gates and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
 - **C154 `[relconic]` [QUEUED]** — close the last load-bearing citation hole.
 - **C188 `[relconic]` [QUEUED]** — q=5 exact relative-conic value.
-- **C195 `[relconic]` [QUEUED]** — cheap definitional implication upgrade.
-- **C196 `[relconic]` [QUEUED]** — q=7 strict-containment foil from BSW.
+- **C195 `[relconic]` [REPORTED 2026-07-15]** — definitional implication diagram separating complete exteriority from prescribed-hole completeness → `notes/2026-07-15-c195-c196-exterior-relative-framing.md`.
+- **C196 `[relconic]` [REPORTED 2026-07-15]** — q=7 strict-containment foil from BSW via the universal four-arc uncovered count → `notes/2026-07-15-c195-c196-exterior-relative-framing.md`.
 - **C201 `[relconic]` [QUEUED]** — even-field q=16 structural upgrade.
 
 ### `repaircodes`

@@ -34,6 +34,11 @@
 10. The prescribed-hole defect identity therefore has a literal coding interpretation as a
     weight-two-leader collision identity. The resulting MDS-code length obstruction is a
     reformulation of the proved geometric theorem, not a new independent inequality.
+11. The exterior-set comparison uses only the two defining containments: complete exteriority
+    gives `C(F_q) ⊆ U(A)`, while relative completeness is `U(A) ⊆ C(F_q)`. For the cited
+    `q=7` exterior four-arc, the elementary four-arc identity
+    `|U(A)|=(q-2)(q-3)` gives `20>8`, so the first inclusion is strict and the arc is not complete
+    outside the conic. This is a framing distinction, not a new classification claim.
 
 ## Computer-assisted claims
 

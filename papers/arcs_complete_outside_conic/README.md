@@ -87,6 +87,10 @@ Blokhuis--Seress--Wilbrink (1992). In modern uncovered-locus notation BSW and Dy
 reverse inclusion by cardinality. Thus the equality is an apparently unrecorded short synthesis,
 not a newly discovered classical configuration;
 the exact code/extension conjunction is presented as a checked synthesis, not a novelty claim.
+The two notions are now separated explicitly in the manuscript:
+complete exteriority gives `C(F_q) subset U(A)`, whereas completeness outside the prescribed
+conic is `U(A) subset C(F_q)`. BSW's `q=7` exterior four-arc is a strict foil, since the universal
+four-arc count gives `|U(A)|=(q-2)(q-3)=20>8=|C(F_7)|`.
 
 In the auxiliary cap-game reading, all twelve conic points are initially live and their antipodal
 involution proves the residual position P. Lean checks every seeded continuation, applies the exact

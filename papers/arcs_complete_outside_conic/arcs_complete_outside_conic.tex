@@ -146,9 +146,35 @@ requires their secants to cover the complementary off-conic locus.  The
 $q=11$ witness below has all of its secants exterior to the conic, making
 this literature directly relevant even though the paper's completeness
 condition is different.  In uncovered-locus notation, the classical
-exterior-set condition gives only $\cC(\F_{11})\subseteq U(A)$.  The reverse
-inclusion used below follows by combining Dye's ten-Brianchon-point result
-with the elementary chord-defect count; it is not stated in the BSW paper.
+exterior-set condition and prescribed-hole completeness point in opposite
+directions.  If
+\[
+ U(A)=\PG(2,q)\setminus
+ \left(A\cup\bigcup_{\{a,b\}\in\binom A2}ab\right)
+\]
+is the ordinary-uncovered locus, then
+\[
+ \begin{aligned}
+ \text{complete exteriority}&\quad\Longrightarrow\quad
+     \cC(\F_q)\subseteq U(A),\\
+ \text{$\cC$-completeness}&\quad\Longleftrightarrow\quad
+     U(A)\subseteq\cC(\F_q),\\
+ \text{both conditions}&\quad\Longrightarrow\quad
+     U(A)=\cC(\F_q).
+ \end{aligned}
+\]
+The first inclusion can be strict.  Blokhuis--Seress--Wilbrink's $q=7$
+exterior four-arc has all six joins external to the eight-point conic.  For
+every four-arc in $\PG(2,q)$, the six secants have exactly three repeated
+off-arc intersection points, so
+\[
+ |U(A)|=(q^2+q+1-4)-\bigl(6(q-1)-3\bigr)=(q-2)(q-3).
+\]
+Thus their $q=7$ example has $|U(A)|=20>8=|\cC(\F_7)|$ and is not
+$\cC$-complete.  At $q=11$, complete exteriority gives only
+$\cC(\F_{11})\subseteq U(A)$.  The reverse inclusion used below follows by
+combining Dye's ten-Brianchon-point result with the elementary chord-defect
+count; it is not stated in the BSW paper.
 
 The point index with respect to an arc, and the first two double-counting
 equations for its distribution, are classical; compare
