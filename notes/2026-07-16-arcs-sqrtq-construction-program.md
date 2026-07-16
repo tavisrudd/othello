@@ -1,5 +1,8 @@
 # Arcs: square-root construction program
 
+**Lane**: `relconic`
+**Status**: ACTIVE — Baer-transversal coordinate design is the next gate
+
 ## Objective
 
 Construct conic-complete arcs of size `O(sqrt(q))`, or prove that no such bound
@@ -32,6 +35,15 @@ small complete arcs and directly answer the strongest significance objection.
    enough to rule out `O(sqrt(q))` on an infinite sequence.
 
 Additional isolated exact values are evidence, not completion of this program.
+
+## First mechanism audit
+
+The first audit is recorded in
+[`2026-07-16-c210-square-root-mechanism-audit.md`](2026-07-16-c210-square-root-mechanism-audit.md).
+It proves that every arc contained in a Baer subplane leaves more uncovered ambient points than any
+conic can absorb, so the bounded C201 Baer failure is family-level. The selected positive route is
+instead Baer-transversal: derive pair-intersection maps on the external fibers of Baer lines and seek
+a two-layer/difference-family construction making them simultaneously near-bijective.
 
 ## C201 input
 

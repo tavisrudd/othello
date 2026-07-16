@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C144, C188, and C223 REPORTED — per-lane, registry, and paper gates pass
+**Status:** C210 ACTIVE — Baer-transversal square-root design selected
 
 ## Current state
 
@@ -34,9 +34,12 @@ by the `build-sys` lane.
 
 ## Recommended order
 
-1. **C210 — square-root construction program.**  This is the high-ceiling,
-   long-horizon route.  It should begin with construction/literature design,
-   not another blind q=64 census.
+1. **C210 — square-root construction program.**  The initial mechanism audit proves an
+   infinite-family obstruction for arcs contained in one Baer subplane and selects the genuinely
+   Baer-transversal route. Next derive the coordinate pair-intersection maps and test
+   planar-function, relative-difference-set, and two-layer realizations symbolically before any
+   new census. See
+   [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
 
