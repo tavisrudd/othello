@@ -2,10 +2,9 @@
 
 **Lane:** `repaircodes`
 
-**Status:** implementation complete; focused Lean and standard-axiom gates pass.  The first
-aggregate trace gate found only stale pre-existing dependencies after all three changed targets
-built.  A full serialized `RepairCodes` rebuild is detached as run
-`20260716-223943-e2d1518b`.
+**Status:** reported. Focused Lean, standard-axiom, manuscript/ledger/trust, PDF, and aggregate
+`RepairCodes` gates pass. The successful serialized aggregate run is
+`20260716-224724-12fa41e4`; it rebuilt `RepairCodes` and passed the final trace-only gate.
 
 ## Goal
 

@@ -26,12 +26,12 @@ The strict example is a Singer-shifted `[5,4,2]_{6561}` generalized SPC outer co
 completed q=9 seed. The fiber identity is retained as classical structure, not novelty. See
 [`2026-07-16-c214-weighted-functional-transfer.md`](2026-07-16-c214-weighted-functional-transfer.md).
 
-**Formal closure:** C221's exact thresholds and finite-attainment chain are complete; C224 owns the
-post-cold-read closeout.  The pointed refinement, corrective nonsurjective counterexample,
+**Formal closure:** C221's exact thresholds and finite-attainment chain and C224's post-cold-read
+closeout are reported. The pointed refinement, corrective nonsurjective counterexample,
 generalized-SPC specialization, exact threshold-six bundle, and the deduction from a presented
-regular Singer action to the disjoint unit-cost multiplier are kernel-checked.  The remaining stop
-gate is aggregate Lean plus final PDF validation; general weighted-dual algorithms and asymptotic
-realization remain C215 and C216 work in `repairports`.
+regular Singer action to the disjoint unit-cost multiplier are kernel-checked. The aggregate Lean
+and final PDF gates pass; general weighted-dual algorithms and asymptotic realization remain C215
+and C216 work in `repairports`.
 
 Let `I <= F^K` be the inner code, `e : V -> I` its encoding isomorphism, and define
 

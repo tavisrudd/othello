@@ -33,5 +33,5 @@ equality for every transported presentation.
   standard axiom profile.
 - The independent q=9 certificate is deterministic and retains coefficient-table SHA-256
   `c7ec1a09745e2aecb0e8a6b8d35fa145b141017ecabd51d6100064a30ff0a587`.
-- The aggregate `RepairCodes` build remains the sole deferred closure gate behind the foreign Q25
-  build and was neither polled nor disturbed during this review.
+- The lane-wide aggregate `RepairCodes` build and final trace-only gate pass through the C224
+  closeout.

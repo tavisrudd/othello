@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 **Lane:** `repaircodes`
-**Status:** IMPLEMENTED; aggregate `RepairCodes` build pending behind the foreign Q25 build
+**Status:** REPORTED; focused and aggregate Lean, axiom, adversarial-review, and PDF gates pass
 
 The focused [adversarial review](2026-07-15-c203-operational-coefficient-adversarial-review.md)
 records the attacks, two substantive corrections, and the surviving claim boundary.

@@ -3,7 +3,7 @@
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: CORE COMPLETE; C214 PAPER UPGRADE PROMOTED; C221 FORMAL CLOSURE IN PROGRESS. C111–C114 are proved, adversarially reviewed,
+**Status**: LANE COMPLETE; C214 PAPER UPGRADE AND C221/C224 FORMAL CLOSURE REPORTED. C111–C114 are proved, adversarially reviewed,
 and synchronized with the paper and registries. The sole deep formal dependency is the quarantined
 Stichtenoth theorem; external specialist citation-chain review remains a submission preflight gate,
 not a theorem gap. C214 added the exact weighted-functional obstruction, a strict Singer/SPC
@@ -25,11 +25,10 @@ three canonical completed-seed coefficient formulas are kernel-checked, and a co
 rescaling theorem proves the operational boundary: the direct protocol uses one full symbol per
 helper, while raw coefficient values imply no invariant minimum-access or minimum-bandwidth claim.
 See the [C203 report](../2026-07-15-c203-operational-coefficient-boundary.md). Its focused Lean,
-axiom, and PDF gates pass. A focused
+axiom, PDF, and lane-wide aggregate gates pass. A focused
 [adversarial review](../2026-07-15-c203-operational-coefficient-adversarial-review.md) strengthened
 the coefficient-ratio gauge theorem and removed circuit-enumerator reuse from the verifier. The
-final aggregate `RepairCodes` build is deferred behind the foreign Q25 build. That aggregate gate
-remains part of the lane-wide closeout alongside C221.
+final aggregate `RepairCodes` build passed as part of the lane-wide C224 closeout.
 
 C214 is reported in
 [`2026-07-16-c214-weighted-functional-transfer.md`](../2026-07-16-c214-weighted-functional-transfer.md).
@@ -43,14 +42,12 @@ weighted separation, and radius-four conclusion are kernel-checked. Singer regul
 enumerator identity are honestly ledgered as cited classical inputs. The general optimized-outer-family program
 remains in the separate `repairports` lane.
 
-C221's exact threshold work is complete, and C224 owns the post-cold-read closeout.  The pointed
+C221's exact threshold work and C224's post-cold-read closeout are reported. The pointed
 threshold, corrective nonsurjective counterexample, exact threshold-six specialization, and
 Singer-action-to-disjoint-multiplier deduction are now kernel-checked in
 `WeightedTransferExact.lean`, `TransferBoundary.lean`, and `WeightedStrictExample.lean`. Focused
-elaboration and standard-axiom reports pass; the aggregate Lean/PDF gate is the remaining closeout.
-The PDF gate passes.  The first aggregate trace gate built all three changed targets and exposed
-only stale pre-existing dependencies; full serialized aggregate run `20260716-223943-e2d1518b`
-is detached through the safe queue.
+elaboration, standard-axiom, PDF, and lane-wide aggregate gates pass; the successful serialized
+aggregate run is recorded in the [C224 report](../2026-07-16-c224-reviewer-hole-closure.md).
 The polynomial enumerator is an explicit cited classical input. The external coding-theory
 citation-chain review follows closure and remains a submission preflight gate.
 

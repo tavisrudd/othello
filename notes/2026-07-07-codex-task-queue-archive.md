@@ -4612,3 +4612,19 @@ untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 20
   aggregate and its trace-only aggregate gate passed after the shared Q25 builder cleared. This
   closes the only remaining validation tail on the evaluation dichotomy and the adversarial,
   publication, and trust audit package.
+
+## 2026-07-16 repaircodes aggregate closeout
+
+- **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum
+  blockers were classified under monomial `PGL(2,9)`; the exact full-port Burnside census records
+  the matching-orbit explosion →
+  [`2026-07-15-c202-repair-extremizer-classification.md`](2026-07-15-c202-repair-extremizer-classification.md).
+- **C214 `[repaircodes]` [REPORTED 2026-07-16; PAPER-PROMOTED]** — the exact weighted-functional
+  thresholds, strict Singer/SPC beyond-gate example, classical fiber-enumerator boundary, and
+  optimized outer-family disposition were promoted →
+  [`2026-07-16-c214-weighted-functional-transfer.md`](2026-07-16-c214-weighted-functional-transfer.md).
+- **C203, C221, and C224 `[repaircodes]` [REPORTED]** — the serialized lane-wide `RepairCodes`
+  aggregate and its final trace-only gate passed, closing the coefficient-gauge, exact
+  weighted-transfer, and post-cold-read reviewer-hole validation tails. The implementation,
+  standard-axiom, manuscript/ledger/trust, and PDF gates had already passed; the successful run is
+  recorded in [`2026-07-16-c224-reviewer-hole-closure.md`](2026-07-16-c224-reviewer-hole-closure.md).

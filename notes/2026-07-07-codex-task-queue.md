@@ -20,7 +20,7 @@ unless they retain an explicit open tail.
 ### `build-sys`
 
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
-- **C225 `[build-sys]` [QUEUED; NEXT]** — make detached Lean queues observable from launch through terminal exit and bridge completion back to the agent harness without transcript-level polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
+- **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
 
 ### `cap`
 
@@ -80,11 +80,7 @@ unless they retain an explicit open tail.
 
 ### `repaircodes`
 
-- **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum blockers classified under monomial `PGL(2,9)`; exact full-port Burnside census records the matching-orbit explosion → `notes/2026-07-15-c202-repair-extremizer-classification.md`.
-- **C203 `[repaircodes]` [IN PROGRESS]** — exact coefficient-labelled scalar equations and monomial gauge boundary pass focused Lean; aggregate `RepairCodes` build is deferred behind the foreign Q25 build → `notes/2026-07-15-c203-operational-coefficient-boundary.md`.
-- **C214 `[repaircodes]` [REPORTED 2026-07-16; PAPER-PROMOTED]** — exact weighted-functional multiblock and nonembedded-witness thresholds, strict Singer/SPC beyond-gate example, classical fiber-enumerator boundary, and optimized outer-family disposition → `notes/2026-07-16-c214-weighted-functional-transfer.md`.
-- **C221 `[repaircodes]` [IN PROGRESS]** — exact three-stratum iff, closed-term lower bounds, coordinate-surjective threshold coincidence, and Singer/SPC arithmetic core are kernel-checked; concrete attained-minimum, nonembedded-threshold, and trace/SPC instantiations plus the aggregate Lean gate remain → `notes/2026-07-16-c221-weighted-transfer-formal-closure.md`.
-- **C224 `[repaircodes]` [IN PROGRESS]** — close the post-cold-read trust seams: pointed witness threshold and counterexample, exact threshold-six packaging, and the Singer action-to-unit-cost-multiplier bridge; synchronize hypotheses and notation → `notes/2026-07-16-c224-reviewer-hole-closure.md`.
+- No open tasks.
 
 ### `repairports`
 

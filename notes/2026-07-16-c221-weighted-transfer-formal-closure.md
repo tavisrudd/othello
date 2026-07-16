@@ -2,9 +2,9 @@
 
 **Lane:** `repaircodes`
 
-**Status:** promoted into C224 closeout. The exact thresholds, finite attainment, pointed
+**Status:** reported through C224 closeout. The exact thresholds, finite attainment, pointed
 refinement, corrective counterexample, generalized-SPC specialization, and Singer-action bridge
-are kernel-checked; the lane-wide aggregate Lean gate remains.
+are kernel-checked; the lane-wide aggregate Lean gate passes.
 
 ## Kernel-checked scope
 
@@ -28,10 +28,10 @@ manuscript's infinity convention for empty strata instead of using `Nat.sInf ∅
 Focused guarded elaboration passes. Every printed headline uses only Lean's standard axioms; no
 `sorryAx` appears. The manuscript PDF builds cleanly with Tectonic.
 
-## Remaining closure
+## Closeout
 
-Run the aggregate `RepairCodes` build after the foreign Q25 build releases the shared Lean owner
-lock.  C224 owns the final manuscript/ledger synchronization and aggregate gate.
+C224 completed the final manuscript/ledger synchronization and aggregate gate; see
+[`2026-07-16-c224-reviewer-hole-closure.md`](2026-07-16-c224-reviewer-hole-closure.md).
 
 The finite fiber-enumerator equivalence remains optional, and the polynomial identity remains an
 honestly ledgered classical manuscript corollary.
