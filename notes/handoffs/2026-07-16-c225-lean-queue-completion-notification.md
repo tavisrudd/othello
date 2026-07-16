@@ -77,16 +77,39 @@ an arbitrary model turn, and an active systemd service does not imply that Lake 
 
 The adapter first creates a restrictive, non-reused run directory and atomically writes immutable
 `submission.json` with format, run ID, UUID-derived unit name, absolute Lean root/run directory,
-bounded argv/digest, submission time, and manager boot identity. It then runs
+bounded argv/digest, submission time, and origin attribution:
+
+```text
+user=tavis, harness=codex|claude|manual, session_id=<native harness session>,
+work_lane=<explicit lane alias>, task_id=<allocated C###>
+```
+
+The Codex adapter records `CODEX_THREAD_ID`; the Claude adapter must pass Claude's native session ID
+explicitly rather than relying on prompt or PID inference. `work_lane` is the selected ownership
+lane, not a value inferred from Git. Codex/Claude submissions require an allocated task matching
+`C[0-9]+`. Manual non-task probes use `task_id=null`, are visibly marked `manual`, and may not be
+presented as lane work. Manual submission requires an explicit stable session token.
+
+The record also captures a user-manager generation tuple: host boot ID, D-Bus unique owner of
+`org.freedesktop.systemd1`, that owner's Unix PID, and `/proc/<pid>/stat` start ticks. The adapter
+reads owner→PID→start ticks→owner and accepts the tuple only if both owner reads match. This
+distinguishes a user-manager restart within one host boot; the manager API does not expose a manager
+`InvocationID` analogous to a service unit's `InvocationID`.
+
+The adapter then runs
 `lean-build-queue.py run` as a foreground, single-writer worker inside that uniquely named transient
 user service. The primary harness path uses the equivalent of:
 
 ```text
 systemd-run --user --wait --quiet --service-type=exec --expand-environment=no \
   --unit=othello-lean-<run-id> \
+  --description='Othello Lean [<lane>/<C###>] <harness>:<short-session>' \
   --working-directory=<lean-root> \
-  --property=KillMode=control-group \
+  --setenv=OTHELLO_LEAN_RUN_ID=<run-id> \
+  --setenv=OTHELLO_LEAN_SUBMISSION_SHA256=<submission-digest> \
+  --property=KillMode=mixed \
   --property=SendSIGKILL=yes \
+  --property=TimeoutStopSec=120s \
   <absolute-python> <absolute-lean-build-queue.py> run ... --run-dir <absolute-run-dir>
 ```
 
@@ -96,11 +119,23 @@ The manager, not the harness terminal, remains the worker's parent and cgroup ow
 or its `systemd-run` client disappears, the service continues while the same user manager remains
 alive. `Type=exec` does not prove Python initialization or status creation.
 
-The UUID suffix is independent of filesystem paths and is never reused. Submission uses the
-equivalent of `StartTransientUnit(..., mode="fail")`; a loaded-name collision is an error. After
-acceptance the adapter records the systemd `InvocationID` atomically when available. The identity
-tuple is `(run_id, unit, InvocationID)`; if acceptance is ambiguous, recovery queries that reserved
-unit name and never blindly resubmits it.
+The UUID suffix is independent of filesystem paths and is never reused. Before spawning the blocking
+`systemd-run --wait` client, the adapter connects and subscribes to the user manager. While that
+client remains blocked, the adapter observes the exact unit, takes a D-Bus reference, and reads a
+confirmed snapshot. It writes `accepted.json` only when all of these match the immutable submission:
+
+- the user-manager generation tuple is unchanged;
+- unit `Id` is the reserved UUID-derived service name and `Transient=yes`;
+- service `InvocationID` is nonzero;
+- `WorkingDirectory` and the complete absolute `ExecStart` argv match;
+- the run-ID and submission-digest environment nonces match.
+
+This records the unit `InvocationID` during the wait, before successful-unit garbage collection can
+erase it. The authoritative identity is `(manager generation, run_id, unit, InvocationID)`. A loaded
+name collision is an error. If the client or adapter loses the acceptance result, recovery queries
+the reserved name and adopts it only after the same property checks; it never blindly resubmits.
+The human-readable unit description is display-only and is never identity or authorization
+evidence.
 
 Acceptance metadata is written separately to `accepted.json`; `submission.json` is never rewritten.
 The adapter is the sole writer of `submission.json`, `accepted.json`, and `completion.json`; the
@@ -112,9 +147,12 @@ recorded success. Cleanup/reset of failed transient units happens only after out
 
 The first implementation must retain the queue's measured `taskset`, thread, `choom`, and quiet-log
 behavior. Moving those controls to systemd properties is a separate measured decision.
-`KillMode=control-group` and `SendSIGKILL=yes` are part of the C225 contract. The implementation gate
-must either pin and test `TimeoutStopSec` or explicitly accept and document the manager default; it
-may not claim a C225-specific bound otherwise.
+`KillMode=mixed`, `SendSIGKILL=yes`, and `TimeoutStopSec=120s` are part of the proposed C225 contract.
+On stop, only Python receives TERM initially, so it can forward to and reap its child, release the
+lock, and publish interruption status. After Python exits, or after 120 seconds, systemd sends KILL
+to remaining cgroup processes. The shutdown fixture must validate this ordering before the ADR is
+accepted; changing the timeout requires an explicit design amendment rather than inheriting a host
+default.
 
 #### 2. Keep one Python status writer and create status before lock acquisition
 
@@ -189,9 +227,22 @@ Whether implemented as a new `inspect`/`await` subcommand or a small adjacent ad
 is exactly one bounded JSON object on stdout; diagnostics go to stderr. It contains:
 
 ```text
-format, run_id, unit, canonical_state, effective_state, phase,
+format, run_id, unit, origin, canonical_state, effective_state, phase,
 queue_exit_code, service_result, service_exit_code, event_id, reason
 ```
+
+`origin` contains the full `user`, `harness`, `session_id`, `work_lane`, and `task_id` copied from
+the validated immutable submission. Human `status` output prints `lane/C### harness:short-session`
+near the run ID. A bounded queue-list command shows active and recent rows with:
+
+```text
+run_id  effective_state  phase  lane  task  harness  session  unit
+```
+
+Full machine JSON retains the complete session ID; the human table abbreviates it unambiguously and
+offers an exact-run JSON query. Listing scans only the managed state root, caps rows, rejects unsafe
+entries, and never uses a broad process-table query. Successful-run retention for the recent view
+comes from disk completion records, not systemd unit retention.
 
 Normal codes remain 0 success, 1 build/internal failure, 2 refusal, and 130 interruption. Adapter
 codes reserve 124 for caller timeout, 125 for invalid/unreadable state, and 126 for externally
@@ -275,14 +326,16 @@ retention, parsing, or availability, and unbounded journal content never reaches
    behavior and exact exit propagation for 0, nonzero, signal, failed exec, and waiter-client loss.
    Every fixture cleans its exact unit in `finally`.
 2. Before submission, a restrictive immutable record binds run ID, UUID unit, absolute paths/argv,
-   and manager boot identity; accepted submission adds matching InvocationID without a resubmit race.
+   user/harness/session/lane/C-task origin, and the manager-generation tuple; the blocking adapter
+   records a fully matched InvocationID before successful-unit GC without a resubmit race.
 3. Status exists in `queued/waiting-for-lock` before a held owner lock is released; no Lake command
    is invoked during that phase.
 4. Lock timeout records `refused`/2; build and aggregate failures record `failed`/1; SIGTERM records
    the signal and the documented interrupted code.
-5. Stop with a live child proves TERM forwarding, child reaping, lock release, bounded escalation,
-   and no surviving cgroup descendant. Forced worker/cgroup death and failure before status creation
-   yield bounded external effective states without mutating canonical disk state.
+5. With `KillMode=mixed` and `TimeoutStopSec=120s`, stop with a live child proves TERM reaches Python
+   first, Python forwards/reaps, releases the lock, and records interruption before exit; escalation
+   leaves no cgroup descendant. Forced worker/cgroup death and failure before status creation yield
+   bounded external effective states without mutating canonical disk state.
 6. Notification occurs only after service exit/lock release, uses a stable event ID, and is at most
    once per live adapter invocation. Two adapters may emit the same ID and are deduplicable.
 7. A harness fixture owns one blocking wait and consumes one bounded completion envelope; it uses no
@@ -294,24 +347,28 @@ retention, parsing, or availability, and unbounded journal content never reaches
    missing-manager evidence, and the D-Bus subscribe/read boundary all have focused fixtures.
 10. JSON creation/replacement is visibility-atomic and directory-fsynced where process-crash
    durability is claimed; run directories/files use restrictive permissions.
-11. Operator guidance distinguishes submitted, queued, lock-owned, child-spawned, and completed.
-12. After the non-Lean fixtures pass, one disposable lightweight target exercises the real
+11. Per-run status and the capped queue list expose full machine-readable and abbreviated human
+    session/lane/C-task attribution, including concurrent jobs from Codex and Claude fixtures.
+12. Operator guidance distinguishes submitted, queued, lock-owned, child-spawned, and completed.
+13. After the non-Lean fixtures pass, one disposable lightweight target exercises the real
     systemd-run→queued/running→terminal bridge in a confirmed quiet window.
 
 ## Implementation order
 
 1. Build a tiny non-Lean systemd probe covering exit propagation, signal, failed exec, unit naming,
    result inspection, and cleanup; record the exact supported command/property set.
-2. Implement restrictive submission identity and the absolute-argv transient-service adapter.
+2. Implement restrictive origin/manager/submission identity and the absolute-argv transient-service
+   adapter, including the concurrent InvocationID handshake.
 3. Refactor the Python worker to create format-2 status before lock acquisition and publish phases
    as the sole writer; move terminal publication after lock release.
 4. Add bounded completion capture, exact failed-unit cleanup, and the primary `--wait` bridge.
 5. Implement D-Bus reattachment only after its subscribe/ref/snapshot algorithm passes race tests.
 6. Remove polling examples and deprecate Python `--detach` with an actionable foreground/systemd
    message; do not leave two competing detach contracts.
-7. Add failure, legacy, malformed-state, duplicate-reader, and manager-unavailable tests.
-8. Document the live harness bridge and stable event-ID/deduplication contract.
-9. Run the lightweight real gate only after confirming shared-tree ownership.
+7. Add the bounded provenance-aware active/recent queue listing.
+8. Add failure, legacy, malformed-state, duplicate-reader, and manager-unavailable tests.
+9. Document the live harness bridge and stable event-ID/deduplication contract.
+10. Run the lightweight real gate only after confirming shared-tree ownership.
 
 ## Adversarial design review
 
@@ -336,3 +393,9 @@ argv, immutable submission/InvocationID binding, durable completion capture befo
 explicit manager-loss limits, a normative D-Bus algorithm, lock-before-terminal ordering, and
 external `failed-before-status` evidence. Task Spooler was reconsidered and remains a portability
 alternative rather than the preferred tool on this host.
+
+A final tightening pass required the InvocationID handshake to occur concurrently with the blocking
+wait, expanded manager identity beyond boot ID to a race-checked D-Bus-owner/PID/start-tick tuple,
+and selected `KillMode=mixed` with a pinned 120-second stop timeout so Python gets the first chance to
+forward, reap, unlock, and publish. Origin attribution is also first-class: every agent submission
+and queue view carries user, native harness session ID, work lane, and allocated C-task.

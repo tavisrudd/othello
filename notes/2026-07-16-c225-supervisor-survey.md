@@ -4,6 +4,13 @@
 **Lane:** `build-sys`
 **Task:** C225
 
+## Design provenance
+
+- User: `tavis`
+- Harness: `codex`
+- Session ID: `019f6c8b-d2a1-7f60-965a-0b68b1237d7e`
+- Work lane: `build-sys`
+
 ## Question
 
 Can an existing local supervisor supply durable process ownership and event-driven completion so
@@ -21,6 +28,12 @@ Can an existing local supervisor supply durable process ownership and event-driv
   `ActiveState=failed`, `Result=exit-code`, `ExecMainCode=1`, and `ExecMainStatus=9` until an explicit
   `reset-failed`.
 - `systemd-notify` and `busctl` are installed. Task Spooler (`tsp`/`ts`) and `nq` are not installed.
+- The manager API does not expose a user-manager `InvocationID`. Its D-Bus unique owner can be
+  resolved to a Unix PID, so boot ID plus a race-checked owner/PID/process-start tuple can identify
+  the manager incarnation. Individual service units do expose `InvocationID`.
+- `KillMode=mixed` sends TERM only to the main process, then sends the final kill signal to remaining
+  cgroup processes after the main process exits or `TimeoutStopSec` expires. This better matches a
+  Python supervisor that must forward, reap, unlock, and publish before it exits.
 
 These were harmless non-Lean probes using `true`, `sleep 2`, and explicit shell exit codes. Probe
 units were allowed to unload or were reset after inspection.
@@ -39,6 +52,7 @@ Primary references:
 
 - [systemd-run manual](https://www.freedesktop.org/software/systemd/man/latest/systemd-run.html)
 - [systemd service properties](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html)
+- [systemd process-killing behavior](https://www.freedesktop.org/software/systemd/man/latest/systemd.kill.html)
 - [systemd manager D-Bus API](https://www.freedesktop.org/software/systemd/man/latest/org.freedesktop.systemd1.html)
 
 ### Task Spooler
