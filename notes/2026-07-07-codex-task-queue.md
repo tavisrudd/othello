@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C204.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C205.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -39,6 +39,14 @@ it does not own mathematical proofs or any running lane's build process.
   trace-sentinel restart guard, map high-fan-out Lean imports, design stable/versioned generated
   checker boundaries, and validate a disk-backed per-lane artifact-isolation and recovery protocol
   → `notes/2026-07-14-c162-lean-build-system.md`.
+- **C205 `[build-sys]` [QUEUED 2026-07-15 — UNATTENDED BUILD QUEUE]** — generalize the proven
+  `/tmp/c151-run-remaining.sh` pattern into a repository runner for explicit Lean target queues:
+  configurable targets/cores/`LEAN_NUM_THREADS`/`choom`, one log per target, atomic machine-readable
+  run manifest and terminal status, fail-fast diagnostic tails, a shared ownership lock that closes
+  the current quiet-check/launch race, restart-safe `lake build --no-build` skipping, and a final
+  trace-only aggregate gate. It must launch once and be inspectable without token-expensive polling,
+  while respecting the no-concurrent-Lake and foreign-lane ownership rules →
+  `notes/2026-07-15-c205-unattended-lean-build-queue.md`.
 
 **Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-alternate-orbit-repair.md). The certificate-free `s ≥ 7` theorem is
@@ -227,13 +235,10 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   `F_11` MDS code. The report records direct-source versus abstract-only coverage and limits the
   no-collision verdict to the checked claims rather than outrunning unread bodies →
   `notes/2026-07-15-c179-conic-ldpc-literature.md`.
-- **C180 `[clebsch]` [PROOF FOUND 2026-07-15 — DYE SOURCE GATE OPEN]** — replace the
-  nonsingular-conic half of the 1548-representative rigidity census by the exact chord identity
-  `|U(A)|=22-c`, Dye's `c<=10` Brianchon extremality and equality classification, with the field
-  hypotheses checked from Dye 1991. An odd-characteristic edge-colouring/parallel-direction lemma
-  now proves every line contains at most six uncovered points at q=11, closing the degenerate
-  line-pair branch without the census. Retain the census as verification, not as the theorem's
-  explanatory spine →
+- **C180 `[clebsch]` [REPORTED 2026-07-15]** — the conceptual rigidity proof is integrated: the
+  odd-characteristic line bound closes the degenerate-conic branch, while `|U(A)|=22-c` and Dye's
+  sharp `c<=10` equality classification close the nonsingular branch. The 1548-representative
+  census now supplies only the independent size-gap clause and regression check →
   `notes/2026-07-15-c180-conceptual-clebsch-rigidity.md`.
 - **C181 `[clebsch]` [REPORTED 2026-07-15 — CLASSIFICATION-FREE WHY 11]** — from a
   conic-filling uncovered locus derive `c=(q-6)(q-9)`, combine the universal matching bound `c<=15` with
@@ -252,35 +257,34 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   downloaded archive and cite its DOI in a data/code-availability paragraph. Minting the DOI is an
   external action and follows C168's clean-HEAD closeout →
   `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
-- **C183 `[clebsch]` [QUEUED 2026-07-15 — LEAN NEW-CLAIM COVERAGE]** — the existing strict-kernel
-  development certifies the base code/conic/deep-hole/icosahedral facts but not C176, C180, or
-  C181. Formalize the cheap shared combinatorial spine first (C174 chord defect and the finite C176
-  dictionary), then a reflected `F_9` Sylvester/exact-distance-two clique certificate and the small
-  q=4/q=5 leaves. Treat C180's line-pair implication conditional on a precisely stated Dye theorem;
-  a formalization of Dye's equality classification is a separate major-project decision →
+- **C183 `[clebsch]` [REPORTED 2026-07-15]** — the strict-kernel development now covers the chord
+  defect, Brianchon/Petersen core, q=4/5/9 leaves, complete decoding synthesis, small-k moment
+  bridge, concrete `A5` point action, and full odd-characteristic line-bound obstruction. The
+  manuscript cleanly separates these certified finite/geometric claims from the two imported Dye
+  statements; full Dye and coefficient-bearing chirality remain separate optional projects →
   `notes/2026-07-15-c183-clebsch-lean-new-claims.md`.
-- **C184 `[clebsch]` [IN PROGRESS 2026-07-15 — CHECKER/SINGULAR COMPLETE; MANUSCRIPT/LEAN OPEN]** —
-  the fail-closed checker and Singular replay now certify the complete degree-one-through-six
-  rank table, Clebsch's unique containment in a cubic, and the exact C02 quartic, C04 nodal
-  quintic, and displayed C12 smooth sextic loci. Decide the concise manuscript disposition and
-  formalize only the claims retained there →
+- **C184 `[clebsch]` [REPORTED 2026-07-15]** — integrated low-degree algebraic rigidity: Clebsch is
+  the unique six-arc class whose uncovered locus lies on a degree-at-most-three curve, and degree
+  four is sharp via the exact smooth quartic companion. The nodal quintic and bounded sextic result
+  are retained only in the sharpness remark, with the no-degree-six-classification boundary;
+  Python and Singular replays pass →
   `notes/2026-07-15-c184-low-degree-uncovered-loci.md`.
 - **C185 `[clebsch]` [REPORTED 2026-07-15]** — integrated the complete four-way syndrome oracle,
   ambiguity enumerator, decoder reconstruction of the Brianchon matchings, and the exact
   distinction between the size-five equivariant floor and the two support-determined size-ten
   chirality choices; exhaustive checker, narrow Lean synthesis, and PDF gates pass →
   `notes/2026-07-15-c185-clebsch-decoding.md`.
-- **C186 `[clebsch]` [IN PROGRESS 2026-07-15 — FINITE BRIDGE DRAFTED; CONCEPTUAL PROOF OPEN]** —
-  root-elaborate the drafted `Q11A5PointOrbits.lean` finite certificate, but use it only as a bridge:
-  still derive the unique off-arc 12-orbit from the `A5` representation/order-five fixed points and
-  write the source-backed argument from Edge's invariant Brianchon ten-orbit to `c=10` and the
-  conic locus →
+- **C186 `[clebsch]` [REPORTED 2026-07-15]** — printed the full `A5` fixed-point/subgroup ledger,
+  deriving the point-orbit profile `[6,10,12,15,30,30,30]` and the unique conic twelve-orbit; the
+  deep-hole proof now forces its invariant twelve-set conceptually. Dye supplies the abstract
+  representation/orbit identifications, while `Q11A5PointOrbits.lean` independently certifies the
+  displayed concrete sixty-element action →
   `notes/2026-07-15-c186-a5-orbit-conic-proof.md`.
-- **C187 `[clebsch]` [IN PROGRESS 2026-07-15 — CHECKER COMPLETE; LEAN/PRIORITY/MANUSCRIPT OPEN]** —
-  the hardened checker closes both seven-arc leaves at `q=11,13` and certifies the q=5 frame's exact
-  conic, completing the computed `4<=k<=7` classification. Root-elaborate the drafted
-  `SmallKChordMoments.lean`, close its geometric moment seam, literature-check the classical
-  `(4,5)` sibling, and integrate the theorem without displacing the paper's rigidity spine →
+- **C187 `[clebsch]` [REPORTED 2026-07-15]** — integrated the conic-filling classification for
+  `4<=k<=7`: only the q=5 four-frame and q=11 Clebsch hexagon occur. Universal chord moments are
+  Lean-certified; the fail-closed checker closes both seven-arc leaves at `q=11,13` and certifies
+  the q=5 frame's exact conic. The elementary q=5 instance is stated without a separate priority
+  claim and distinguished from Dye's adjacent six-point degeneration →
   `notes/2026-07-15-c187-general-k-arc-conic-filling.md`.
 - **C194 `[clebsch]` [REPORTED 2026-07-15]** — Dye's ten Brianchon concurrences plus the six-arc
   chord-defect identity give `|U(H)|=q^2-14q+45` for every finite-field Clebsch hexagon; for

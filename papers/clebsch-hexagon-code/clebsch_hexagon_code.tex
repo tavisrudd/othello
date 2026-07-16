@@ -35,31 +35,35 @@
 \maketitle
 
 \begin{abstract}
-Among all six-arcs of the projective plane $\PG(2,11)$, exactly one --- up to
-the action of $\mathrm{PGL}(3,11)$ --- has the property that the projective
-maximum-distance syndrome directions of its associated MDS code lie on a
-conic. That arc is the \emph{Clebsch hexagon}, an icosahedral six-arc with
-full projective stabilizer $A_5$, and the conic condition alone recovers
-that stabilizer. The arc lies on no conic, so its $[6,3,4]_{11}$ code is
-not monomially equivalent to a GRS code and has covering radius three. Its
-twelve projective deep-hole syndrome directions are exactly the
-$\F_{11}$-rational points of that conic; they lift to $120$ deep-hole cosets,
-$2400$ minimum-weight leaders, and $159720$ received-word deep holes. The
-$120$ cosets form one monomial orbit, and the $159720$ received words form
-one orbit after adjoining translations by codewords. This
-identification is recorded with its certificate in a companion paper and
-taken here as the starting point.
-We prove this
-rigidity as a five-way equivalence, prove a sharp global nearest-conic gap
-of twelve, decompose the $252$ one-point perturbations into eight $A_5$-orbits, exhibit a canonical
+Among the six-arcs of $\PG(2,11)$, exactly one projective-equivalence class
+has the maximum-distance syndrome directions of its associated MDS code
+contained in a conic. It is the \emph{Clebsch hexagon}, and this
+coding-theoretic condition alone recovers its full projective stabilizer
+$A_5$. The characterization remains true if ``conic'' is weakened to the
+zero set of any nonzero homogeneous form of degree at most three.
+
+The arc itself lies on no conic, so the associated $[6,3,4]_{11}$ MDS code
+is non-GRS; its covering radius is three. Its twelve projective deep-hole
+directions are exactly the $\F_{11}$-rational points of the conic. They lift
+to $120$ deep-hole cosets, $2400$ minimum-weight leaders, and $159720$
+received-word deep holes; the cosets form one monomial orbit, and the
+received words form one orbit under monomial automorphisms and codeword
+translations. A single quadratic in the syndrome gives a complete distance
+oracle, while the radius-two ambiguity pattern reconstructs the classical
+Brianchon points and self-polar triangles.
+
+We prove the rigidity as a five-way equivalence and quantify it by a sharp
+nearest-conic gap of twelve. We also decompose the $252$ one-point
+perturbations into eight $A_5$-orbits and construct an
 automorphism-invariant unordered bipartition of the twenty weight-three
-support types (and hence a $10+10$ split in every deep-hole coset), and show
-that $q=11$ is the only prime power at which the conic-filling syndrome
-locus can occur at all: a chord-multiplicity identity reduces every
-characteristic to $q\in\{4,5,9,11\}$, and the $q=9$ residue is excluded by
-the exact-distance-two clique number of the Sylvester graph. The underlying six-arc census is classical; we
-recompute its extension-count spectrum and supply the coding-theoretic
-reading, but claim no priority on the raw numbers themselves.
+support types, giving a $10+10$ split of the leaders in every deep-hole
+coset. For six-arcs, a chord-multiplicity identity and the clique number of
+the exact-distance-two graph of the Sylvester graph show that $q=11$ is the
+only conic-filling field. More broadly, for arc sizes four through seven,
+the only conic-filling cases are a four-frame in $\PG(2,5)$ and the Clebsch
+hexagon. The six-arc census is classical; our contribution is the rigidity
+theorem, its quantitative and decoding refinements, and their coding-theoretic
+interpretation.
 \end{abstract}
 
 \section{Introduction}
@@ -329,6 +333,75 @@ their Definition~6.1 together with the definition of arc completeness,
 adjoining $x$ as a seventh arc column preserves the MDS property exactly
 when $x$ is missed by every secant.
 
+The stabilizer already forces the small point sets that will occur.
+
+\begin{proposition}[The $A_5$ point orbits]
+\label{prop:a5-point-orbits}
+Let $G=\operatorname{Stab}(A)\cong A_5$. Its orbits on $\PG(2,11)$ have
+lengths
+\[
+ 6,\ 10,\ 12,\ 15,\ 30,\ 30,\ 30.
+\]
+The first four are respectively $A$, the ten Brianchon points,
+$\cC(\F_{11})$, and the fifteen vertices of the five self-polar triangles.
+In particular, $\cC(\F_{11})$ is the unique twelve-point $G$-orbit.
+\end{proposition}
+
+\begin{proof}
+Dye's polarity and stabilizer theorems identify $G$ with the ternary
+icosahedral representation preserving $\cC$, and his Corollary~1 makes it
+transitive on the six vertices, ten Brianchon points, and fifteen triangle
+vertices~\cite[Theorems~2--3 and Corollary~1, pp.~276--279]{Dye1991}.
+For completeness, we derive the orbit sizes rather than import them from
+the finite enumeration.
+
+Since $11\nmid60$, the representation is semisimple, and the ternary
+icosahedral representation is irreducible; hence $G$ fixes no projective
+point. The ordinary
+three-dimensional icosahedral character, reduced in $\F_{11}$, shows that
+an involution, an element of order three, and an element of order five fix
+respectively $13$, $1$, and $3$ projective points. Indeed, an involution
+has a one-dimensional eigenspace and a two-dimensional eigenspace; the
+nontrivial order-three eigenvalues are not in $\F_{11}$; and the three
+order-five eigenvalues are distinct because $5\mid10$. Restricting the same
+representation to the standard subgroups of $A_5$ gives the following
+common-fixed-point ledger; the standard subgroup classification of $A_5$
+shows that these are all possible nontrivial proper point stabilizers. Here
+$D_5$ has order ten, and the last column
+counts points whose stabilizer is exactly the displayed subgroup type.
+\[
+\begin{array}{c|rrrrrr}
+H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
+\#H&5&6&10&6&5&10\\
+|\operatorname{Fix}_{\PG}(H)|&0&1&1&3&3&1\\
+\text{exact-stabilizer points}&0&6&10&12&15&0
+\end{array}
+\]
+To spell out the subtraction in the last row: the normalizer $D_5$ fixes
+one of the three $C_5$ eigenlines and interchanges the other two, giving
+$6$ points with stabilizer $D_5$ and $12$ with stabilizer $C_5$; the unique
+$C_3$-fixed line is already fixed by its $S_3$ normalizer; and $A_4$ cycles
+the three $V_4$ eigenlines, leaving all fifteen with exact stabilizer $V_4$.
+
+It remains to account for exact $C_2$ stabilizers. Each involution lies in
+two $D_5$ subgroups, two $S_3$ subgroups, and one $V_4$. Of its thirteen
+fixed points, these contribute respectively $2$, $2$, and $3$ points from
+the preceding rows. The remaining six points have exact stabilizer $C_2$.
+There are fifteen involutions, so this gives $90$ points, necessarily three
+orbits of length $60/2=30$. The total
+$6+10+12+15+90=133$ exhausts the plane. Dye's Theorem~6(v), specialized at
+$q=11\equiv1\pmod{10}$, identifies the twelve-point $C_5$-stabilizer orbit
+with $\cC(\F_{11})$~\cite[pp.~281--282; \S3.1, p.~284]{Dye1991}; the other
+three identifications are the transitive sets cited above.
+\end{proof}
+
+The explicit sixty-element action, all seven orbits, the unique six- and
+twelve-orbits, and the order-five fixed-point union
+$A\cup\cC(\F_{11})$ are independently kernel-checked by
+\path{lean/RelativeConicArcs/Q11A5PointOrbits.lean}. This finite certificate
+verifies the displayed concrete action, not the abstract subgroup and
+character derivation in the proof.
+
 \begin{proposition}[The projective deep-hole syndrome locus is the conic]
 \label{prop:deep-holes-conic}
 The covering radius of $C$ is three, and its projective deep-hole syndrome
@@ -337,15 +410,8 @@ on no secant of $A$ --- is exactly the twelve points of $\cC$.
 \end{proposition}
 
 \begin{proof}
-Dye's associated-conic edge criterion and the complete-exterior-set
-description of Blokhuis--Seress--Wilbrink give the classical provenance
-\cite[discussion preceding Theorem~6, p.~281]{Dye1991}
-\cite[pp.~143, 146]{BSW1992}. For the displayed coordinates, direct
-substitution of each of the fifteen line equations into $XZ-Y^2$ gives a
-quadratic with nonsquare discriminant; this finite calculation is also
-replayed by the checker. Hence
-$\cC(\F_{11})\subseteq\cU(A)$. Dye's Clebsch classification gives exactly
-ten Brianchon points. For completeness, here is the relevant double count.
+The set $\cU(A)$ is $G$-invariant. Dye's Clebsch classification gives
+exactly ten Brianchon points. For completeness, here is the relevant double count.
 The fifteen edges contribute $150$ off-arc incidences. The $45$ pairs of
 disjoint edges meet once, so if $n_i$ counts off-arc points lying on exactly
 $i$ edges, then
@@ -357,9 +423,16 @@ $i$ edges, then
 Thus the edges cover $n_1+n_2+n_3=115$ of the $127$ off-arc points, leaving
 $|\cU(A)|=12$. This is the $q=11$ specialization of the chord-defect
 identity in Lemma~\ref{lem:chord-defect}.
-Since $|\cC(\F_{11})|=12$, the inclusion is equality. By the dictionary
-above this is exactly the projective deep-hole syndrome locus, and its
-nonemptiness gives covering radius three rather than two.
+By definition $\cU(A)$ is disjoint from the unique six-point orbit $A$.
+The orbit lengths in Proposition~\ref{prop:a5-point-orbits} therefore force
+this invariant twelve-set to be the unique twelve-point orbit
+$\cC(\F_{11})$. By the dictionary above this is exactly the projective
+deep-hole syndrome locus, and its nonemptiness gives covering radius three
+rather than two. Dye's edge criterion and the complete-exterior-set
+description of Blokhuis--Seress--Wilbrink independently supply the classical
+inclusion $\cC(\F_{11})\subseteq\cU(A)$
+\cite[discussion preceding Theorem~6, p.~281]{Dye1991}
+\cite[pp.~143, 146]{BSW1992}.
 \end{proof}
 
 The conclusion and full $133$-point incidence table are reproduced independently by
@@ -695,23 +768,66 @@ displayed histogram, and returns exactly the six normalized Clebsch-class
 representatives whose extension loci lie on conics; every containing conic
 is nonsingular.
 
+The same census supports a strengthening in which a cubic, rather than a
+conic, is allowed.
+
+\begin{proposition}[Low-degree algebraic rigidity]
+\label{prop:low-degree-rigidity}
+For a six-arc $A\subset\PG(2,11)$, the uncovered locus $\cU(A)$ is
+contained in the zero set of a nonzero homogeneous form of degree at most
+three if and only if $A$ is projectively equivalent to the Clebsch
+hexagon. In the Clebsch case the least such degree is two: the quadratic
+vanishing space is spanned by the defining nonsingular conic equation $Q$,
+and the cubic vanishing space is
+\[
+ Q\cdot\F_{11}[X,Y,Z]_1.
+\]
+\end{proposition}
+
+\begin{proof}[Computer-assisted proof]
+For each of the fifteen projective classes in the six-arc census, evaluate
+the ten cubic monomials on $\cU(A)$. The resulting evaluation map has rank
+ten for every non-Clebsch class and rank seven for the Clebsch class. Thus
+no nonzero cubic vanishes on a non-Clebsch uncovered locus. A containing
+form of smaller positive degree could be multiplied by a nonzero monomial
+to produce such a cubic, so smaller positive degrees are excluded as well;
+no nonzero constant vanishes on the nonempty locus. For the
+Clebsch class, the quadratic kernel is one-dimensional and generated by
+$Q$; multiplication by the three-dimensional space of linear forms gives
+the full three-dimensional cubic kernel. These ranks and kernel identities
+are recomputed exactly by \path{check_low_degree_loci.py}.
+\end{proof}
+
 \begin{corollary}[Monomial characterization]
 Up to monomial equivalence, $C$ is the unique linear $[6,3,4]_{11}$ code of
-covering radius three whose projective deep-hole syndrome locus lies on a
-conic. In particular, $A_5$ is recovered from this coding condition, not
-assumed as a hypothesis.
+covering radius three whose projective deep-hole syndrome locus is contained
+in a plane curve of degree at most three. In particular, $A_5$ is recovered
+from this coding condition, not assumed as a hypothesis.
 \end{corollary}
 
 \begin{proof}
 The columns of a parity-check matrix of such a code form a six-arc $A$, and
 covering radius three identifies its projective deep-hole syndrome locus
-with $\cU(A)$. Theorem~\ref{thm:rigidity} makes $A$ projectively equivalent
+with $\cU(A)$. Proposition~\ref{prop:low-degree-rigidity} makes $A$ projectively equivalent
 to the Clebsch hexagon. A projectivity between two unordered parity-check
 column sets lifts, after choosing column representatives, to a row operation
 together with a coordinate permutation and nonzero coordinate scalings;
 these are exactly a monomial code equivalence. The converse is immediate,
 and the stabilizer statement is clause~(v) of the theorem.
 \end{proof}
+
+\begin{remark}[Sharpness of the degree threshold]
+Degree three is best possible. Apart from the Clebsch conic, the exhaustive
+search through degree five finds precisely two projective classes whose
+uncovered locus is the full set of $\F_{11}$-rational zeros of a form: one
+$18$-point locus is a smooth absolutely irreducible quartic of genus three,
+and one $19$-point locus is an absolutely irreducible quintic with one
+ordinary nonsplit node, whose normalization has genus five. The artifact
+also finds sixteen exact sextics in the first nonzero kernel of one
+$22$-point class, including a smooth absolutely irreducible witness. We
+make no degree-six classification: the larger degree-six kernels of the
+other classes were not exhausted.
+\end{remark}
 
 \begin{remark}[Which implications are new]
 \label{rem:what-is-new}
@@ -1266,6 +1382,80 @@ $115$ points needing cover, and the excess is spent on overlap. The
 Clebsch objects therefore persist, and the associated conic remains inside
 the projective syndrome locus when $q\equiv3\pmod4$, but the exact filling
 is isolated at $q=11$ by the factorization above.
+
+\subsection{The small-arc boundary}
+
+The chord moments also put the six-point theorem into a short classification
+for all smaller neighboring arc sizes.
+
+\begin{theorem}[Conic-filling loci for $4\le k\le7$]
+\label{thm:small-k-conic-filling}
+Let $A$ be a $k$-arc in $\PG(2,q)$, where $q$ is a prime power and
+$4\le k\le7$. If $\cU(A)$ is the full set of $\F_q$-rational points of a
+nonsingular conic, then
+\[
+ (k,q)=(4,5)\qquad\text{or}\qquad(k,q)=(6,11).
+\]
+In the first case $A$ is a projective four-frame; in the second it is a
+Clebsch hexagon. Conversely, both cases occur.
+\end{theorem}
+
+\begin{proof}[Proof with exhaustive finite verification]
+Let $n_i$ count off-arc points incident with exactly $i$ chords. For
+$k\le7$, at most three pairwise disjoint chords concur. Counting
+chord--point incidences and pairs of disjoint chords gives the two universal
+moments
+\[
+ \sum_i i n_i=\binom{k}{2}(q-1),\qquad
+ \sum_i\binom{i}{2}n_i=3\binom{k}{4}.
+\]
+For $k=4$, the second moment forces $n_2=3$, and hence
+$|\cU(A)|=(q-2)(q-3)$. Equating this with $q+1$ gives $q=5$. Every
+four-arc is a projective frame, and for the standard frame a direct
+substitution gives
+\[
+ \cU(A)=Z(X^2+Y^2+Z^2+XY+XZ+YZ),
+\]
+a nonsingular six-point conic. For $k=5$, the same moments force
+$n_2=15$ and $|\cU(A)|=q^2-9q+21$; equality with $q+1$ would require
+$q^2-10q+20=0$, which has no integral root. The case $k=6$ is
+Theorem~\ref{thm:why11} together with Theorem~\ref{thm:rigidity}.
+
+For $k=7$, the moments give
+\[
+ |\cU(A)|=q^2-20q+120-n_3.
+\]
+If this equals $q+1$, then
+\[
+ n_3=q^2-21q+119,\quad
+ n_2=105-3n_3,\quad
+ n_1=3(q^2-14q+42).
+\]
+The standard arc-size bound gives $q\ge7$.  The condition $n_2\ge0$ gives
+$q\le15$, so the prime-power candidates are
+$q\in\{7,8,9,11,13\}$; then $n_1\ge0$ eliminates $7,8,9$.
+Thus only $q=11$ and $q=13$ remain, with forced spectra
+$(n_1,n_2,n_3)=(27,78,9)$ and $(87,60,15)$ respectively. An exhaustive
+four-frame-normalized enumeration finds no conic-filling seven-arc in
+either plane. Every seven-arc is reached because it contains a four-frame;
+equivalently, the checker extends every normalized six-arc by every point
+of its uncovered locus and verifies that each resulting seven-arc occurs
+exactly three times, according to which non-frame point is deleted. For
+all candidates with $|\cU(A)|=q+1$, the quadratic evaluation matrix has
+full rank six. The complete finite leaves, including the $q=5$ equality,
+are replayed by \path{check_small_k_conic_filling.py}; the universal moment
+reductions are kernel-checked in \path{SmallKChordMoments.lean} and
+\path{SmallKGeometricBridge.lean} under \path{lean/RelativeConicArcs/}.
+\end{proof}
+
+The $q=5$ four-frame equality is elementary and is stated here without an
+independent priority claim. Dye's adjacent $q=5$ degeneration concerns the
+six points on a conic and their ten internal triple-chord points, not this
+four-frame uncovered-locus statement~\cite[\S1.4]{Dye1991}. The role of the
+theorem here is to give the unified range $4\le k\le7$; its new certified
+component is the exclusion of both surviving seven-arc fields. For $k\ge8$ the
+second moment leaves additional concurrency parameters, so the analogous
+classification remains open.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}

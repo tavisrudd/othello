@@ -2,16 +2,12 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **FINITE LEAN BRIDGE COMPLETE; CONCEPTUAL DERIVATION OPEN.** The strict-kernel
-certificate is physically split into bounded modules: definitions and arithmetic, twelve matrix
-leaves, twelve support leaves plus summary, sixty one-group action leaves plus twelve row
-aggregators, seven representative-orbit cases, and seven fixed-point membership leaves. Ordinary
-`decide` works through a proved eleven-entry evaluator for `ZMod` inversion and symbolic bridges
-back to the original projective action. All 113 source modules, including the lightweight
-`Q11A5PointOrbits` aggregator, pass the serial leaves-first build; `lake build --no-build` reports
-the target up to date, the generator check passes, and the exported axiom audit contains only the
-standard axioms. The remaining C186 work is the sourced representation/order-five argument and
-its Brianchon/triple-point integration.
+**Status**: **REPORTED.** The manuscript now prints the sourced representation-theoretic
+fixed-point and subgroup ledger, derives the orbit profile `[6,10,12,15,30,30,30]`, and uses the
+unique invariant twelve-orbit to identify the uncovered locus with the conic. The independent
+strict-kernel certificate is split into 113 bounded modules and verifies the displayed concrete
+sixty-element action; its aggregator passes `lake build --no-build`, the generator check, and the
+standard-axioms-only audit. It does not replace the manuscript's abstract subgroup derivation.
 
 ## Target argument
 
@@ -33,3 +29,18 @@ did. The existing 133-point enumeration remains an independent verification.
 
 The completed build gate was serial leaves-first at `choom -n 500`, followed by the lightweight
 aggregator, no-build freshness probe, generator replay, and exported axiom audit.
+
+## Manuscript disposition
+
+The paper now prints the missing representation-theoretic derivation. The fixed-point spectra for
+elements of orders two, three, and five are combined with the proper-subgroup ledger for `A5` to
+derive the complete orbit profile `[6,10,12,15,30,30,30]`. Dye identifies the first four orbits as
+the vertices, Brianchon points, associated conic, and self-polar-triangle vertices. Consequently
+the uncovered locus is forced conceptually: it is an invariant twelve-set disjoint from the unique
+six-orbit, hence the unique twelve-orbit, the conic.
+
+The manuscript explicitly separates proof roles. Dye supplies the abstract `A5` representation and
+the classical orbit identifications; the subgroup/fixed-line calculation derives uniqueness; and
+`Q11A5PointOrbits.lean` independently certifies the displayed concrete sixty-element action and all
+seven finite orbits. The Lean certificate is not described as a formalization of the abstract
+subgroup classification.

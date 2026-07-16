@@ -42,10 +42,9 @@ a decision, not an artifact of which paper finishes first.
 **Date**: 2026-07-13
 **Status**: **MAJOR REVISION — INTERNAL REPAIRS LANDED; EXTERNAL GATES OPEN.** C128, C146, and
 C163–C173 have repaired the mathematics, terminology, prior-art framing, reproducibility,
-quantitative gaps, unconditional q=11 theorem, and manuscript scope. The draft builds warning-free
-with one rigidity spine. C185's finite synthesis, C187's arithmetic and geometric layers, and
-C186's finite A₅ action bridge now pass Lean; C184's manuscript disposition and C186's conceptual
-source argument remain open. The proved
+quantitative gaps, unconditional q=11 theorem, and manuscript scope. C180 and C184--C187 are now
+integrated: conceptual rigidity, low-degree algebraic rigidity, complete decoding, the full
+$A_5$ point-orbit derivation, and the $4\le k\le7$ classification. The proved
 q=11 defect bridge plus a two-axiom Dye interface now kernel-check the conic-rigidity implication;
 C187's actual projective small-`k` mathematics is also complete in Lean.
 It is not submission-ready until C131/C161 settle ownership, the remaining new tails close, and C168 runs
@@ -77,14 +76,14 @@ append-only; promote scoped findings to C items rather than routing work directl
 | 3a | **C173 — REPORTED** | the five self-polar triangles pair to the ten complementary supports by alternating-cycle bipartition; Petersen=`KG(5,2)` and all displayed self-polarities are certified | closed → [C173 report](../2026-07-14-c173-dye-triangles-petersen.md) |
 | 3b | **C176 — REPORTED** | the triangle-pair/Brianchon/support dictionary, complete chord-intersection ledger, exact equivariance, and manuscript proposition are tracked | closed → [C176 report](../2026-07-15-c176-brianchon-petersen-dictionary.md) |
 | 3c | **C179 — REPORTED** | the direct fixed-conic binary incidence and orbit-conic code lineage is now cited and distinguished at the object and parameter levels | closed → [C179 report](../2026-07-15-c179-conic-ldpc-literature.md) |
-| 3d | **C180 — LEAN/SOURCE COMPLETE; MANUSCRIPT OPEN** | the five chord directions form a certified proper five-edge-colouring, the prism factors are extracted, odd characteristic rules out the five-covered-point equality case, and Dye 1991 pp.270--276 directly supplies the sharp bound plus ground-field equality classification | integrate the conceptual rigidity proof and retain the census as independent verification → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
+| 3d | **C180 — REPORTED** | the odd-characteristic line bound and Dye equality theorem now carry the conceptual rigidity implication; the census is retained only for the size-gap clause and independent verification | closed → [C180 report](../2026-07-15-c180-conceptual-clebsch-rigidity.md) |
 | 3e | **C181 — REPORTED** | the universal `c<=15` matching bound reduces all characteristics to `q=4,5,9,11`; the first two are excluded geometrically and the q=9 internal graph is Sylvester with published `eq_2=5`, independently checked from scratch | closed; manuscript now uses the conceptual proof and retains both exact checkers as verification → [C181 report](../2026-07-15-c181-classification-free-why11.md) |
 | 3f | **C182 — QUEUED; EXTERNAL ARCHIVE GATE** | all cited computations are indexed and manifested locally, but the PDF gives no immutable public artifact location | after C168 clean-HEAD closeout, publish/replay a versioned archive and cite its DOI in a data/code-availability paragraph → [C182 report](../2026-07-15-c182-clebsch-artifact-archive.md) |
-| 3g | **C183 — IN PROGRESS** | decoding synthesis, actual small-`k` projective mathematics, `u+c=22`, explicit Dye consequences, leaf-split A₅ point action, and C180's full odd-characteristic prism exclusion pass their Lean gates | finish manuscript synthesis and record the final theorem gallery → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
-| 3h | **C184 — CHECKERS COMPLETE; DISPOSITION OPEN** | the tracked checker and Singular replay certify the complete low-degree table, unique cubic containment, and exact C02/C04/C12 companions | decide a concise manuscript disposition; Lean only what survives that decision → [C184 report](../2026-07-15-c184-low-degree-uncovered-loci.md) |
+| 3g | **C183 — REPORTED** | the strict-kernel theorem gallery covers the new combinatorial, small-field, decoding, small-k, point-action, and odd-line-bound seams with explicit Dye axiom boundaries | closed; full Dye and coefficient-bearing chirality are optional follow-ons → [C183 report](../2026-07-15-c183-clebsch-lean-new-claims.md) |
+| 3h | **C184 — REPORTED** | degree-at-most-three rigidity and its strengthened code corollary are integrated; quartic/quintic/sextic companions appear only as a bounded sharpness remark | closed; Python and Singular replays pass → [C184 report](../2026-07-15-c184-low-degree-uncovered-loci.md) |
 | 3i | **C185 — REPORTED** | the total oracle, ambiguity enumerator, uniform twenty-support theorem, decoder/Brianchon reconstruction, and corrected size-five versus chirality hierarchy are integrated; checker, narrow Lean synthesis, and PDF gates pass | closed; the full monomial action remains an optional Lean upgrade → [C185 report](../2026-07-15-c185-clebsch-decoding.md) |
-| 3j | **C186 — FINITE LEAN BRIDGE COMPLETE; CONCEPTUAL/SOURCE GATE OPEN** | all 60 action leaves, representative and fixed-point leaves, and the lightweight aggregator pass serial build, freshness, generator, and standard-axiom gates | write/source the representation-theoretic proof and integrate its Brianchon/triple-point consequences → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
-| 3k | **C187 — CHECKER/LEAN MATHEMATICS COMPLETE; PRIORITY/MANUSCRIPT OPEN** | the hardened checker plus `SmallKChordMoments.lean` and `SmallKGeometricBridge.lean` cover the finite, arithmetic, and actual projective layers | literature-check `(4,5)` and integrate without displacing rigidity → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
+| 3j | **C186 — REPORTED** | the printed subgroup/fixed-point ledger derives all seven point orbits and conceptually forces the conic; the concrete sixty-element action remains independently Lean-certified | closed → [C186 report](../2026-07-15-c186-a5-orbit-conic-proof.md) |
+| 3k | **C187 — REPORTED** | the universal moments, q=5 equality, and complete q=11,13 seven-arc exclusions give the integrated `4<=k<=7` classification | closed; q=5 is priority-neutral and distinguished from Dye's six-point degeneration → [C187 report](../2026-07-15-c187-general-k-arc-conic-filling.md) |
 | 3l | **C194 — REPORTED** | Dye's ten concurrences and the chord-defect identity now give `|U(H)|=q^2-14q+45`; for `q=3 mod 4` the associated conic lies in `U(H)` with exact excess `(q-4)(q-11)` | integrated into §6; new algebra passes narrow Lean elaboration and q=19 enumeration is verification → [C194 report](../2026-07-15-c194-clebsch-family-uncovered-formula.md) |
 | 3m | **C197 — REPORTED** | BSW's second q=11 complete exterior configuration is now used as the natural non-arc/non-MDS foil | one concise Pasch comparison landed in related work; no coordinates, computation, or second spine → [C197 report](../2026-07-15-c197-bsw-pasch-mds-foil.md) |
 
@@ -102,10 +101,8 @@ monomial/affine deep-hole orbit statements. C171 is reported with a sharp PGL-in
 gap `delta>=12` off the Clebsch class and eight local `A₅` move orbits. C173 is reported with the
 five-triangles/Petersen explanation. Dependencies are encoded in the queue rows.
 
-**Current execution order:** C176, C179, and the finite/checker portions of C184, C185, and C187 are
-reported. C180's internal Lean proof and Dye primary-source audit are complete and retain only manuscript integration; C181 is independent of C180 and its conceptual
-all-field proof is integrated. C184/C185/C187 retain the exact manuscript/Lean tails recorded in
-the table, and C186 retains both its conceptual proof and source gate. C188 (`relconic`) and C189
+**Current execution order:** C176, C179--C181, and C184--C187 are reported and integrated. C181 is
+independent of C180 and its conceptual all-field proof is integrated. C188 (`relconic`) and C189
 (`cap`, consuming the Nofil implication) are downstream queued consumers, not Clebsch-owned result
 work. C194 and C197 are reported; C190
 records the completed gem-mining routing seam. C153 and C131/C161 remain the live

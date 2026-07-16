@@ -2,13 +2,14 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **IN PROGRESS** — the C174 spine, C176 finite core, q=4/q=5/q=9 leaves, C185 decoding
+**Status**: **REPORTED** — the C174 spine, C176 finite core, q=4/q=5/q=9 leaves, C185 decoding
 synthesis, C187 arithmetic and geometric moments, and the actual q=11 defect-to-Dye seam all pass
 narrow elaboration and axiom audit. C186's finite A₅ point-action bridge also passes its full
 serial build, freshness, generator, and standard-axiom gates. C180's equality fibers now induce a
 proper five-edge-colouring, the named prism factors are extracted, and the complete odd-field
-projective contradiction passes its focused build and freshness gate. Remaining work is C186's
-conceptual/source argument and manuscript synthesis.
+projective contradiction passes its focused build and freshness gate. The conceptual/source
+arguments and manuscript synthesis are integrated. The coefficient-bearing chirality action layer
+remains a separately identified optional formalization, not an unfinished C183 gate.
 
 ## Live subagent roster
 
@@ -90,14 +91,13 @@ feasible but is a separate substantial
 formal-geometry project; a reflected 1548-class q=11 certificate is the finite self-contained
 alternative, not a formalization of Dye's conceptual proof.
 
-## Remaining sequence
+## Final integration
 
-1. use the certified C186 point-action bridge for the remaining chirality action layer and write
-   the conceptual/source argument;
-2. integrate C180's completed conceptual line-pair proof while keeping the Dye classification
-   boundary explicit;
-3. run any manuscript-level aggregate only after the foreign Q25 tree
-   is stable.
+The C186 point-action bridge is used as an independent finite certificate for the printed abstract
+subgroup/fixed-line derivation. C180's conceptual line-pair proof is integrated with the Dye
+classification boundary explicit. C185 and C187 use their finite synthesis modules exactly at the
+claim boundaries recorded above. No broad aggregate was required while the foreign Q25 tree was
+dirty; the manuscript-facing modules were validated narrowly.
 
 ## Exit gate
 

@@ -2,7 +2,7 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **INTERNAL LEAN PROOF AND DYE SOURCE GATE COMPLETE; MANUSCRIPT OPEN** — the
+**Status**: **REPORTED** — the
 generic incidence spine, proper five-edge-colouring, `K6` prism extraction, projective
 normalization, and division-free odd-field contradiction pass Lean. Dye 1991 pp.270--276 has now
 been read directly and supplies the exact ground-field bound and equality classification needed at
@@ -149,6 +149,14 @@ Access ledger:
 - Dye 1991 OUP record: <https://academic.oup.com/jlms/article/s2-44/2/270/847669>;
 - Dye's zbMATH review: <https://api.zbmath.org/v1/document/_search?search_string=Dye%20hexagons%20conics>;
 - Storme--Van Maldeghem author PDF: <https://cage.ugent.be/~hvm/artikels/41.pdf>.
+
+## Manuscript disposition
+
+The conceptual proof is integrated. The six-arc line bound handles both split and nonsplit
+degenerate conics, while the chord-defect identity and Dye's sharp ten-Brianchon bound force
+equality and his ground-field classification identifies the Clebsch orbit. The 1,548-representative
+census remains only for the independent size-gap clause and finite regression check; it no longer
+carries the conic-containment implication.
 
 Primary OCR inspected locally from the user's authorized copy: `dye-1991.txt`. Because equations
 (4)--(12) are badly OCR-corrupted, manuscript use should quote the theorem statements and

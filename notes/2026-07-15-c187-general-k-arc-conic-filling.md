@@ -2,10 +2,11 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **IN PROGRESS — FINITE SEARCH AND LEAN MATHEMATICS COMPLETE.** The actual projective
-`k=4,5,7` formulas and prime-power reduction pass narrow Lean elaboration and standard-axiom audit,
-and the surviving `q=11,13` searches have one tracked fail-closed checker. Only `(4,5)` literature
-positioning and the manuscript disposition remain.
+**Status**: **REPORTED.** The actual projective `k=4,5,7` formulas and prime-power reduction pass
+narrow Lean elaboration and standard-axiom audit, and the surviving `q=11,13` searches have one
+tracked fail-closed checker. The theorem is integrated as the paper's small-arc coda. The elementary
+`(4,5)` instance is stated without an independent priority claim and distinguished from Dye's
+adjacent six-point conic degeneration.
 
 ## Exact identity through seven points
 
@@ -97,3 +98,21 @@ the old random `k=7` samples are provenance only and are not evidence used by th
 - **done:** exhaust the normalized searches at `q=11,13` and audit their raw/deduplicated counts;
   and
 - make an explicit paper-versus-follow-on decision before any large census run.
+
+## Manuscript disposition
+
+The unified `4<=k<=7` classification is retained as a final subsection after the `q=19`
+nonexample. It is not promoted into the six-arc rigidity equivalence. The proof prints the two
+universal chord moments, handles `k=4,5` algebraically, invokes the existing six-arc theorem, and
+states the exact `q=11,13` finite boundary for `k=7`. The manuscript explicitly leaves `k>=8`
+open because additional concurrency parameters enter.
+
+Dye does not settle the four-frame statement: his `q=5` discussion concerns the six points on a
+conic and the ten internal triple-chord points. Accordingly, the paper makes no separate novelty
+claim for the elementary `(4,5)` equality. The apparently new scope is the unified classification
+and, especially, the certified seven-arc exclusions.
+
+Post-integration replay: `uv run python check_small_k_conic_filling.py` reproduced the complete
+`q=5` equality, both six-arc histograms, all `10232` and `53960` distinct seven-arcs, the exact
+multiplicity-three audit, and zero quadratic-containment hits; it ended
+`SMALL_K_CONIC_FILLING_PASS`.

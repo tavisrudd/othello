@@ -2,7 +2,7 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **CHECKER COMPLETE; MANUSCRIPT DISPOSITION OPEN**
+**Status**: **REPORTED.**
 
 ## Verdict
 
@@ -166,7 +166,20 @@ This merits a compact census theorem in the current paper if space permits:
 3. record the quartic/quintic/sextic companions as the reason “unique irreducible curve locus” is
    the wrong formulation.
 
-The companion curves are mathematically interesting but should not displace the deep-hole theorem.
-A follow-on can study their genera, singularities, automorphism actions, and whether their degrees
-or equations admit a conceptual derivation from the corresponding arc stabilizers. No manuscript
-file was changed under C184.
+The manuscript adopts the compact disposition: a low-degree algebraic-rigidity proposition after
+the main rigidity theorem, the strengthened monomial characterization, and a sharpness remark for
+the quartic/quintic companions. The sextic appears only with the explicit no-classification
+boundary. The companion curves do not displace the deep-hole theorem. A follow-on can study their
+genera, singularities, automorphism actions, and whether their degrees or equations admit a
+conceptual derivation from the corresponding arc stabilizers.
+
+No new Lean formalization is warranted for this paper: the reusable evaluation obstruction is
+already abstracted in `EvaluationObstruction.lean`, while the new content is the finite
+fifteen-class rank certificate and should wait for shared rigidity-census infrastructure.
+
+Post-integration replay on 2026-07-15:
+
+- `uv run python check_low_degree_loci.py`: all rank, kernel, exact-locus, rational-singularity,
+  and low-degree factor assertions passed;
+- `nix shell nixpkgs#singular -c Singular -q check_low_degree_loci_c12.sing`: all absolute
+  irreducibility, smoothness, and singular-scheme assertions passed.
