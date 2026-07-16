@@ -216,6 +216,48 @@ theorem blockFunctional_single
   rw [hleft, hright]
   exact mul_comm _ _
 
+/-- `blockFunctional` is additive in the ambient block word. -/
+theorem blockFunctional_sub
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (w u : κ → 𝔽) :
+    blockFunctional I e (w - u) = blockFunctional I e w - blockFunctional I e u := by
+  apply LinearMap.ext
+  intro v
+  simp [blockFunctional, dotProduct, Finset.sum_sub_distrib, mul_sub]
+
+/-- Dual distance at least three makes the coordinate-functional scalar orbits pairwise distinct. -/
+theorem innerCoordinateFunctional_orbit_injective
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (hdist : 3 ≤ dualDist I) {k l : κ} {c : 𝔽} (hc : c ≠ 0)
+    (heq : innerCoordinateFunctional I e l = c • innerCoordinateFunctional I e k) :
+    l = k := by
+  classical
+  by_contra hlk
+  let z : κ → 𝔽 := Pi.single l 1 - Pi.single k c
+  have hzfunctional : blockFunctional I e z = 0 := by
+    rw [show z = Pi.single l 1 - Pi.single k c by rfl, blockFunctional_sub,
+      blockFunctional_single, blockFunctional_single, one_smul, heq, sub_self]
+  have hzdual : z ∈ dualCode I :=
+    (blockFunctional_eq_zero_iff I e z).mp hzfunctional
+  have hz0 : z ≠ 0 := by
+    intro hz
+    have hzl := congrFun hz l
+    simp [z, Pi.single_apply, hlk, hc] at hzl
+  have hnorm : hammingNorm z = 2 := by
+    rw [hammingNorm]
+    have hfilter : (univ.filter fun x => z x ≠ 0) = ({l, k} : Finset κ) := by
+      ext x
+      by_cases hxl : x = l
+      · subst x
+        simp [z, Pi.single_apply, hlk]
+      · by_cases hxk : x = k
+        · subst x
+          simp [z, Pi.single_apply, hxl, hc]
+        · simp [z, Pi.single_apply, hxl, hxk]
+    rw [hfilter]
+    simp [hlk]
+  have hlower := dualDist_le_hammingNorm hzdual hz0
+  omega
+
 /-- Unit realization cost is exactly membership in a nonzero scalar orbit of the inner coordinate
 functionals.  This is the seed-specific bridge from coordinate columns to Singer projective
 classes. -/
@@ -335,6 +377,31 @@ theorem generalizedSPCFive_radiusFour_transfer_of_disjoint
   exact repairHypergraph_concatenatedCode_eq_embed_nonembedded
     I e (generalizedSPCFive a) 4 hnonembedded j x
 
+/-- Over a nine-element field, the completed cubic--axis seed has twenty pairwise distinct
+projective coordinate-functional classes, and these are exactly its unit-cost functional
+classes.  This packages the seed-side input used in the Singer multiplier argument. -/
+theorem projectiveAxisTwistedCubic_twenty_unitCost_orbits
+    {L : Type*} [AddCommGroup L] [Module 𝔽 L] [DecidableEq L]
+    [Fintype 𝔽] [CharP 𝔽 3]
+    (hcard : Fintype.card 𝔽 = 9)
+    (e : L ≃ₗ[𝔽] projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) :
+    Fintype.card (ProjectiveAxisTwistedCubicIndex 𝔽) = 20 ∧
+      (∀ f : Module.Dual 𝔽 L,
+        HasUnitFunctionalCost (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e f ↔
+          ∃ k : ProjectiveAxisTwistedCubicIndex 𝔽, ∃ c : 𝔽,
+            c ≠ 0 ∧ f = c • innerCoordinateFunctional
+              (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e k) ∧
+      (∀ {k l : ProjectiveAxisTwistedCubicIndex 𝔽} {c : 𝔽}, c ≠ 0 →
+        innerCoordinateFunctional (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e l =
+          c • innerCoordinateFunctional
+            (projectiveAxisTwistedCubicCode (𝔽 := 𝔽)) e k →
+        l = k) := by
+  refine ⟨?_, fun f => hasUnitFunctionalCost_iff_coordinate_orbit _ e f, ?_⟩
+  · simp [hcard]
+  · intro k l c hc heq
+    exact innerCoordinateFunctional_orbit_injective _ e (by
+      rw [projectiveAxisTwistedCubicCode_dualDist]) hc heq
+
 /-- Paper-facing specialization to the completed cubic--axis seed. -/
 theorem projectiveAxisTwistedCubic_strict_weighted_transfer
     {L : Type*} [AddCommGroup L] [Module 𝔽 L] [DecidableEq L]
@@ -373,6 +440,8 @@ end RepairCodes
 #print axioms RepairCodes.generalizedSPCFive_not_functionalDistance_six
 #print axioms RepairCodes.generalizedSPCFive_isCoordinateSurjective
 #print axioms RepairCodes.hasUnitFunctionalCost_iff_coordinate_orbit
+#print axioms RepairCodes.innerCoordinateFunctional_orbit_injective
+#print axioms RepairCodes.projectiveAxisTwistedCubic_twenty_unitCost_orbits
 #print axioms RepairCodes.generalizedSPCFive_weightedDistance_six_of_disjoint
 #print axioms RepairCodes.generalizedSPCFive_radiusFour_transfer_of_disjoint
 #print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer
