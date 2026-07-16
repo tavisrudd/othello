@@ -84,6 +84,15 @@ theorem {prefix}_canonical_card_ge_32 :
   rw [{prefix}_canonicalClassLink]
   exact Q25RowCompositionData.{cls}LegalOrbitSet_card_ge_32
 
+theorem {prefix}_source_card_ge_32
+    (hsource : RawCap (rowConfig ⟨{row.b}, by decide⟩
+      Q25ResidualTransportData.{prefix}Payload.c)) :
+    32 ≤ (legalOrbitSet (rowConfig ⟨{row.b}, by decide⟩
+      Q25ResidualTransportData.{prefix}Payload.c)).card := by
+  exact ValidRowPayload.source_card_ge_of_canonical
+    Q25ResidualTransportData.{prefix}_transportValid hsource
+    {prefix}_canonical_card_ge_32
+
 """
 
 

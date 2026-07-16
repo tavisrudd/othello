@@ -120,6 +120,14 @@ theorem ValidRowPayload.legalCard_eq {b : Fin 310} {p : ValidRowPayload}
     (ValidRowPayload.map_eq_canonicalConfig h) hsource
     (ValidRowPayload.canonical_rawCap h hsource)
 
+/-- Transport a canonical legal-orbit lower bound back to the residual source row. -/
+theorem ValidRowPayload.source_card_ge_of_canonical {n : ℕ} {b : Fin 310}
+    {p : ValidRowPayload} (h : p.TransportValid b)
+    (hsource : RawCap (rowConfig b p.c))
+    (hbound : n ≤ (legalOrbitSet p.canonicalConfig).card) :
+    n ≤ (legalOrbitSet (rowConfig b p.c)).card := by
+  rwa [ValidRowPayload.legalCard_eq h hsource]
+
 /-- The third orbit number carried by either kind of residual row. -/
 def ResidualRowPayload.c : ResidualRowPayload → Fin 310
   | .bad p => p.c
