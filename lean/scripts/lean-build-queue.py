@@ -18,6 +18,7 @@ import fcntl
 import json
 import os
 import re
+import shlex
 import shutil
 import signal
 import subprocess
@@ -31,6 +32,8 @@ from typing import Any, NoReturn
 LEAN_ROOT_DEFAULT = Path(__file__).resolve().parents[1]
 MODULE_RE = re.compile(r"[A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*\Z")
 STATE_ROOT_DEFAULT = Path.home() / ".cache" / "othello-lean-build"
+PROFILE_FILE_DEFAULT = Path(__file__).resolve().with_name("lean-build-profiles.json")
+MOUNTINFO_DEFAULT = Path("/proc/self/mountinfo")
 
 EXIT_OK = 0
 EXIT_BUILD_FAILED = 1
@@ -44,9 +47,14 @@ _child: subprocess.Popen[bytes] | None = None
 _interrupted = False
 
 
+class Refused(Exception):
+    def __init__(self, message: str, code: int = EXIT_REFUSED) -> None:
+        super().__init__(message)
+        self.code = code
+
+
 def fail(message: str, code: int = EXIT_REFUSED) -> NoReturn:
-    print(f"lean-build-queue: {message}", file=sys.stderr)
-    raise SystemExit(code)
+    raise Refused(message, code)
 
 
 def utc_now() -> str:
@@ -70,6 +78,127 @@ def read_json(path: Path) -> dict[str, Any] | None:
     except (OSError, json.JSONDecodeError):
         return None
     return data if isinstance(data, dict) else None
+
+
+def read_meminfo(path: Path) -> dict[str, int]:
+    """Read selected /proc/meminfo values as MiB."""
+    values: dict[str, int] = {}
+    try:
+        lines = path.read_text().splitlines()
+    except OSError as error:
+        fail(f"cannot read memory information from {path}: {error}")
+    for line in lines:
+        fields = line.split()
+        if len(fields) >= 2 and fields[0] in {"MemTotal:", "MemAvailable:"}:
+            values[fields[0][:-1]] = int(fields[1]) // 1024
+    if set(values) != {"MemTotal", "MemAvailable"}:
+        fail(f"{path} does not contain MemTotal and MemAvailable")
+    return values
+
+
+def _unescape_mount(value: str) -> str:
+    return value.replace("\\040", " ").replace("\\011", "\t").replace("\\134", "\\")
+
+
+def filesystem_type(path: Path, mountinfo: Path) -> tuple[str, Path]:
+    """Return the longest matching mount point and its filesystem type."""
+    resolved = path.expanduser().resolve()
+    existing = resolved
+    while not existing.exists() and existing != existing.parent:
+        existing = existing.parent
+    matches: list[tuple[int, str, Path]] = []
+    try:
+        lines = mountinfo.read_text().splitlines()
+    except OSError as error:
+        fail(f"cannot read mount information from {mountinfo}: {error}")
+    for line in lines:
+        try:
+            left, right = line.split(" - ", 1)
+            left_fields = left.split()
+            mount_point = Path(_unescape_mount(left_fields[4])).resolve()
+            fs_type = right.split()[0]
+        except (IndexError, ValueError):
+            continue
+        if existing == mount_point or existing.is_relative_to(mount_point):
+            matches.append((len(str(mount_point)), fs_type, mount_point))
+    if not matches:
+        fail(f"cannot identify the filesystem containing {resolved}")
+    _, fs_type, mount_point = max(matches)
+    return fs_type, mount_point
+
+
+def load_profiles(path: Path) -> dict[str, dict[str, Any]]:
+    data = read_json(path)
+    if data is None or not isinstance(data.get("profiles"), dict):
+        fail(f"no readable resource profiles in {path}")
+    profiles = data["profiles"]
+    if not all(isinstance(name, str) and isinstance(profile, dict) for name, profile in profiles.items()):
+        fail(f"malformed resource profiles in {path}")
+    return profiles
+
+
+def resource_plan(args: argparse.Namespace) -> dict[str, Any]:
+    profiles = load_profiles(args.profile_file.expanduser().resolve())
+    if args.profile not in profiles:
+        fail(f"unknown resource profile {args.profile!r}; choose one of {', '.join(sorted(profiles))}")
+    profile = profiles[args.profile]
+    required = {"verified_max_threads", "reserve_mib"}
+    if not required.issubset(profile):
+        fail(f"resource profile {args.profile!r} is missing {sorted(required - set(profile))}")
+
+    verified_max = int(profile["verified_max_threads"])
+    reserve_mib = int(profile["reserve_mib"])
+    if args.threads > verified_max:
+        fail(
+            f"profile {args.profile!r} permits at most {verified_max} threads; "
+            f"requested {args.threads}"
+        )
+
+    memory = read_meminfo(args.meminfo)
+    tmp_fs_type, tmp_mount = filesystem_type(args.tmp_path, args.mountinfo)
+    measured_tmp_used = shutil.disk_usage(args.tmp_path).used // (1024 * 1024)
+    tmp_used_mib = args.tmp_used_mib if args.tmp_used_mib is not None else measured_tmp_used
+    tmp_ram_mib = tmp_used_mib if tmp_fs_type in {"tmpfs", "ramfs"} else 0
+    worker_peak = profile.get("worker_peak_mib")
+    workload_peak_mib = 0
+    if worker_peak is not None:
+        worker_peak = int(worker_peak)
+        workload_peak_mib = args.threads * worker_peak
+        checker_peak = int(profile.get("shared_checker_peak_mib", 0))
+        sibling_peak = int(profile.get("concurrent_sibling_peak_mib", worker_peak))
+        if checker_peak:
+            workload_peak_mib = max(
+                workload_peak_mib,
+                checker_peak + max(0, args.threads - 1) * sibling_peak,
+            )
+
+    required_total_mib = reserve_mib + tmp_ram_mib + workload_peak_mib
+    if required_total_mib >= memory["MemTotal"]:
+        fail(
+            f"resource profile {args.profile!r} is unsafe: requires {required_total_mib} MiB "
+            f"including reserve/tmpfs, host has {memory['MemTotal']} MiB"
+        )
+    if workload_peak_mib and memory["MemAvailable"] < workload_peak_mib + 1024:
+        fail(
+            f"insufficient memory currently available for {args.profile!r}: "
+            f"need at least {workload_peak_mib + 1024} MiB, have {memory['MemAvailable']} MiB"
+        )
+    return {
+        "profile": args.profile,
+        "description": profile.get("description", ""),
+        "threads": args.threads,
+        "verified_max_threads": verified_max,
+        "reserve_mib": reserve_mib,
+        "worker_peak_mib": worker_peak,
+        "workload_peak_mib": workload_peak_mib,
+        "tmp_used_mib": tmp_used_mib,
+        "tmp_ram_mib": tmp_ram_mib,
+        "tmp_filesystem": tmp_fs_type,
+        "tmp_mount": str(tmp_mount),
+        "required_total_mib": required_total_mib,
+        "mem_total_mib": memory["MemTotal"],
+        "mem_available_mib": memory["MemAvailable"],
+    }
 
 
 def lock_slug(lean_root: Path) -> str:
@@ -171,9 +300,12 @@ def spawn_and_wait(argv: list[str], log_path: Path, env: dict[str, str], cwd: Pa
     with log_path.open("wb") as log:
         log.write(f"$ {' '.join(argv)}\n".encode())
         log.flush()
-        _child = subprocess.Popen(
-            argv, cwd=cwd, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True
-        )
+        try:
+            _child = subprocess.Popen(
+                argv, cwd=cwd, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True
+            )
+        except OSError as error:
+            fail(f"cannot start {argv[0]}: {error}")
         try:
             code = _child.wait()
         finally:
@@ -193,7 +325,7 @@ def nix_argv(nix: str, threads: int, lake_args: str) -> list[str]:
     return [nix, "develop", "--command", "bash", "-lc", shell_script(threads, lake_args)]
 
 
-def build_argv(args: argparse.Namespace, target: str) -> list[str]:
+def build_inner_argv(args: argparse.Namespace, target: str, threads: int) -> list[str]:
     argv: list[str] = []
     if args.cores:
         argv += [args.taskset_binary, "-c", args.cores]
@@ -201,8 +333,13 @@ def build_argv(args: argparse.Namespace, target: str) -> list[str]:
     # of an unrelated process.  Containment, not permission to oversubscribe memory.
     argv += [args.choom_binary, "-n", str(args.choom_adjust), "--"]
     argv += [args.time_binary, "-v"]
-    argv += nix_argv(args.nix_binary, args.threads, quote(target))
+    argv += nix_argv(args.nix_binary, threads, quote(target))
     return argv
+
+
+def build_argv(args: argparse.Namespace, target: str, threads: int) -> list[str]:
+    """Every real Lake build is captured by the shared bounded-output wrapper."""
+    return [args.run_quiet_binary, shlex.join(build_inner_argv(args, target, threads))]
 
 
 def probe_argv(args: argparse.Namespace, targets: list[str]) -> list[str]:
@@ -236,11 +373,27 @@ def telemetry(log_path: Path) -> dict[str, str]:
 
 
 def tail(log_path: Path, lines: int) -> str:
+    if lines == 0:
+        return ""
     try:
         content = log_path.read_text(errors="replace").splitlines()
     except OSError as error:
         return f"(cannot read {log_path}: {error})"
     return "\n".join(content[-lines:])
+
+
+def quiet_evidence(root: Path) -> tuple[Path, Path, Path]:
+    runs = sorted(path for path in root.iterdir() if path.is_dir()) if root.is_dir() else []
+    if len(runs) != 1:
+        fail(f"run-quiet produced {len(runs)} result directories under {root}, expected one")
+    run = runs[0]
+    return run, run / "stdout.log", run / "stderr.log"
+
+
+def diagnostic_tail(stdout_log: Path, stderr_log: Path, lines: int) -> str:
+    chunks = [tail(stderr_log, lines), tail(stdout_log, lines)]
+    combined = "\n".join(chunk for chunk in chunks if chunk)
+    return "\n".join(combined.splitlines()[-lines:]) if lines else ""
 
 
 def toolchain_state(lean_root: Path) -> dict[str, Any]:
@@ -314,7 +467,8 @@ def command_run(args: argparse.Namespace) -> int:
     if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
         fail(f"{lean_root} is not a Lake package")
 
-    targets = list(dict.fromkeys(args.targets))
+    serial_targets = list(dict.fromkeys(args.serial_first))
+    targets = list(dict.fromkeys([*serial_targets, *args.targets]))
     for target in targets:
         if not MODULE_RE.fullmatch(target):
             fail(f"invalid module name: {target!r}")
@@ -323,13 +477,16 @@ def command_run(args: argparse.Namespace) -> int:
         if not MODULE_RE.fullmatch(target):
             fail(f"invalid aggregate module name: {target!r}")
 
+    plan = resource_plan(args)
     home = Path.home().resolve()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
     run_id = f"{stamp}-{uuid.uuid4().hex[:8]}"
     run_dir = (args.run_dir or STATE_ROOT_DEFAULT / f"run-{run_id}").expanduser().resolve()
-    # /tmp is tmpfs on this box: run state and logs there count against RAM.
     if not run_dir.is_relative_to(home):
         fail(f"run state must be disk-backed under {home}, not {run_dir}")
+    run_fs_type, run_mount = filesystem_type(run_dir, args.mountinfo)
+    if run_fs_type in {"tmpfs", "ramfs"}:
+        fail(f"run state must be disk-backed; {run_dir} is on {run_fs_type} at {run_mount}")
     logs = run_dir / "logs"
     logs.mkdir(parents=True, exist_ok=True)
 
@@ -362,8 +519,10 @@ def command_run(args: argparse.Namespace) -> int:
             "cores": args.cores,
             "lean_num_threads": args.threads,
             "choom_adjust": args.choom_adjust,
+            "plan": plan,
         },
-        "logs": {target: str(logs / f"{target.split('.')[-1]}.log") for target in targets},
+        "serial_first": serial_targets,
+        "logs": {target: str(logs / f"{target}.log") for target in targets},
         "source": toolchain_state(lean_root),
     }
     atomic_write_json(run_dir / "manifest.json", manifest)
@@ -375,26 +534,44 @@ def command_run(args: argparse.Namespace) -> int:
         for target in targets:
             wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
             status.start_target(target)
-            leaf = target.split(".")[-1]
-
-            probe_log = logs / f"{leaf}.nobuild.log"
+            probe_log = logs / f"{target}.nobuild.log"
             if spawn_and_wait(probe_argv(args, [target]), probe_log, env, lean_root) == 0:
                 print(f"already current, skipping {target}", flush=True)
                 status.record(target, "skipped-current", log=str(probe_log))
                 continue
 
-            log_path = logs / f"{leaf}.log"
+            log_path = logs / f"{target}.log"
+            quiet_root = logs / f"{target}.quiet" / run_id
+            target_env = env.copy()
+            target_env["RUN_QUIET_LOGDIR"] = str(quiet_root)
             print(f"starting {target}", flush=True)
-            code = spawn_and_wait(build_argv(args, target), log_path, env, lean_root)
+            target_threads = 1 if target in serial_targets else args.threads
+            code = spawn_and_wait(
+                build_argv(args, target, target_threads), log_path, target_env, lean_root
+            )
+            quiet_dir, stdout_log, stderr_log = quiet_evidence(quiet_root)
             if code != 0:
-                print(f"FAILED {target}; tail of {log_path} follows", file=sys.stderr)
-                print(tail(log_path, args.tail_lines), file=sys.stderr)
-                status.record(target, "failed", log=str(log_path), exit_code=code)
+                print(f"FAILED {target}; bounded run-quiet tail follows", file=sys.stderr)
+                print(diagnostic_tail(stdout_log, stderr_log, args.tail_lines), file=sys.stderr)
+                status.record(
+                    target,
+                    "failed",
+                    log=str(log_path),
+                    quiet_dir=str(quiet_dir),
+                    exit_code=code,
+                )
                 status.finish("failed", EXIT_BUILD_FAILED, failed_target=target)
                 return EXIT_BUILD_FAILED
-            measured = telemetry(log_path)
+            measured = telemetry(stderr_log)
             print(f"passed {target} {measured}", flush=True)
-            status.record(target, "built", log=str(log_path), **measured)
+            status.record(
+                target,
+                "built",
+                log=str(log_path),
+                quiet_dir=str(quiet_dir),
+                threads=target_threads,
+                **measured,
+            )
 
         wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
         gate_log = logs / "aggregate-no-build.log"
@@ -415,6 +592,77 @@ def command_run(args: argparse.Namespace) -> int:
         print("interrupted; the queue is safe to re-run", file=sys.stderr)
         status.finish("interrupted", EXIT_INTERRUPTED)
         return EXIT_INTERRUPTED
+    except Refused as error:
+        print(f"lean-build-queue: {error}", file=sys.stderr)
+        status.finish("refused", error.code)
+        return error.code
+    finally:
+        lock.close()
+
+
+def command_plan(args: argparse.Namespace) -> int:
+    print(json.dumps(resource_plan(args), indent=2, sort_keys=True))
+    return EXIT_OK
+
+
+def command_pack(args: argparse.Namespace) -> int:
+    """Create a disk-backed Lake artifact archive without racing another build."""
+    lean_root = args.lean_root.expanduser().resolve()
+    if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+        fail(f"{lean_root} is not a Lake package")
+    destination = args.destination.expanduser().resolve()
+    home = Path.home().resolve()
+    if not destination.is_relative_to(home):
+        fail(f"artifact archive must be disk-backed under {home}, not {destination}")
+    fs_type, mount = filesystem_type(destination, args.mountinfo)
+    if fs_type in {"tmpfs", "ramfs"}:
+        fail(f"artifact archive must be disk-backed; {destination} is on {fs_type} at {mount}")
+    if destination.exists():
+        fail(f"refusing to overwrite existing artifact archive {destination}")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+
+    pgrep = shutil.which(args.pgrep_binary)
+    if pgrep is None:
+        fail(f"{args.pgrep_binary} is unavailable; cannot check for a live foreign build")
+    lock_file = (
+        args.lock_file or STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    ).expanduser().resolve()
+    run_id = f"pack-{datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:8]}"
+    lock = acquire_lock(lock_file, run_id, ["<lake pack>"])
+    try:
+        wait_for_quiet(pgrep, 0, 60)
+        quiet_root = destination.parent / ".lean-pack-logs" / run_id
+        env = os.environ.copy()
+        env["RUN_QUIET_LOGDIR"] = str(quiet_root)
+        inner = [
+            args.nix_binary,
+            "develop",
+            "--command",
+            "lake",
+            "pack",
+            str(destination),
+        ]
+        try:
+            result = subprocess.run(
+                [args.run_quiet_binary, shlex.join(inner)],
+                cwd=lean_root,
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        except OSError as error:
+            fail(f"cannot start {args.run_quiet_binary}: {error}")
+        if result.stdout:
+            print(result.stdout, end="")
+        if result.stderr:
+            print(result.stderr, end="", file=sys.stderr)
+        if result.returncode != 0:
+            return EXIT_BUILD_FAILED
+        if not destination.is_file():
+            fail(f"lake pack reported success but did not create {destination}")
+        print(f"artifact archive: {destination}")
+        return EXIT_OK
     finally:
         lock.close()
 
@@ -483,38 +731,93 @@ def command_status(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("must be a positive integer")
+    return parsed
+
+
+def nonnegative_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 0:
+        raise argparse.ArgumentTypeError("must be a nonnegative integer")
+    return parsed
+
+
+def oom_adjust(value: str) -> int:
+    parsed = int(value)
+    if not -1000 <= parsed <= 1000:
+        raise argparse.ArgumentTypeError("must be between -1000 and 1000")
+    return parsed
+
+
+def add_resource_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--threads",
+        type=positive_int,
+        default=1,
+        help="LEAN_NUM_THREADS; bounded by the selected measured resource profile",
+    )
+    parser.add_argument("--profile", default="single", help="named profile from --profile-file")
+    parser.add_argument("--profile-file", type=Path, default=PROFILE_FILE_DEFAULT)
+    parser.add_argument("--meminfo", type=Path, default=Path("/proc/meminfo"), help=argparse.SUPPRESS)
+    parser.add_argument(
+        "--mountinfo", type=Path, default=MOUNTINFO_DEFAULT, help=argparse.SUPPRESS
+    )
+    parser.add_argument("--tmp-path", type=Path, default=Path("/tmp"), help=argparse.SUPPRESS)
+    parser.add_argument("--tmp-used-mib", type=nonnegative_int, default=None, help=argparse.SUPPRESS)
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     subparsers = result.add_subparsers(dest="command", required=True)
 
     run = subparsers.add_parser("run", help="build an explicit target queue under one owner lock")
     run.add_argument("targets", nargs="+", help="Lean modules to build, in order")
+    run.add_argument(
+        "--serial-first",
+        action="append",
+        default=[],
+        metavar="MODULE",
+        help="build a heavy shared dependency first with one thread; repeat as needed",
+    )
     run.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
     run.add_argument("--run-dir", type=Path, default=None, help="durable run state; must be under $HOME")
     run.add_argument("--lock-file", type=Path, default=None)
     run.add_argument("--aggregate", nargs="+", default=None, help="final trace-only gate (default: the targets)")
     run.add_argument("--cores", default=None, help="taskset CPU list, e.g. 20-23")
-    run.add_argument(
-        "--threads",
-        type=int,
-        default=1,
-        help="LEAN_NUM_THREADS; size it by measured peak RSS, never from nproc",
-    )
-    run.add_argument("--choom-adjust", type=int, default=1000)
+    add_resource_arguments(run)
+    run.add_argument("--choom-adjust", type=oom_adjust, default=1000)
     run.add_argument(
         "--wait-quiet-seconds",
-        type=int,
+        type=nonnegative_int,
         default=0,
         help="how long to queue behind a foreign Lean build (default: refuse immediately)",
     )
-    run.add_argument("--poll-seconds", type=int, default=60)
-    run.add_argument("--tail-lines", type=int, default=80)
+    run.add_argument("--poll-seconds", type=positive_int, default=60)
+    run.add_argument("--tail-lines", type=nonnegative_int, default=80)
     run.add_argument("--nix-binary", default="nix")
     run.add_argument("--time-binary", default="/usr/bin/time", help="GNU time, for per-target telemetry")
     run.add_argument("--taskset-binary", default="taskset")
     run.add_argument("--choom-binary", default="choom")
     run.add_argument("--pgrep-binary", default="pgrep")
+    run.add_argument("--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet"))
     run.set_defaults(function=command_run)
+
+    plan = subparsers.add_parser("plan", help="validate and print a resource plan; never runs Lake")
+    add_resource_arguments(plan)
+    plan.set_defaults(function=command_plan)
+
+    pack = subparsers.add_parser("pack", help="quietly create a disk-backed lake pack archive")
+    pack.add_argument("destination", type=Path)
+    pack.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
+    pack.add_argument("--lock-file", type=Path, default=None)
+    pack.add_argument("--mountinfo", type=Path, default=MOUNTINFO_DEFAULT, help=argparse.SUPPRESS)
+    pack.add_argument("--nix-binary", default="nix")
+    pack.add_argument("--pgrep-binary", default="pgrep")
+    pack.add_argument("--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet"))
+    pack.set_defaults(function=command_pack)
 
     status = subparsers.add_parser("status", help="read a run's status without touching Lake")
     status.add_argument("run_dir", type=Path)
@@ -525,7 +828,12 @@ def parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = parser().parse_args()
-    raise SystemExit(args.function(args))
+    try:
+        code = args.function(args)
+    except Refused as error:
+        print(f"lean-build-queue: {error}", file=sys.stderr)
+        code = error.code
+    raise SystemExit(code)
 
 
 if __name__ == "__main__":

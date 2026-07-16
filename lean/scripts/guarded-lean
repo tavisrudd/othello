@@ -7,9 +7,29 @@ lean_root=$(cd -- "$script_dir/.." && pwd)
 cpu_set=${LEAN_GUARD_CPUSET:-20-23}
 threads=${LEAN_GUARD_THREADS:-1}
 oom_score_adj=${LEAN_GUARD_OOM_SCORE_ADJ:-1000}
+run_quiet=${LEAN_GUARD_RUN_QUIET:-$HOME/.claude/bin/run-quiet}
+profile=${LEAN_GUARD_PROFILE:-single}
+export RUN_QUIET_LOGDIR=${RUN_QUIET_LOGDIR:-$HOME/.cache/othello-lean-build/guarded-lean}
 
-cd "$lean_root"
-exec taskset -c "$cpu_set" \
-  env LEAN_NUM_THREADS="$threads" \
-  choom -n "$oom_score_adj" -- \
-  nix develop --command lake env lean "$@"
+if [[ ${1:-} == --help ]]; then
+  cat <<'EOF'
+usage: guarded-lean [LEAN-ARGS...]
+
+Run one Lean elaboration with bounded resources and bounded output. Overrides:
+  LEAN_GUARD_CPUSET          CPU list (default 20-23)
+  LEAN_GUARD_THREADS         LEAN_NUM_THREADS (default 1)
+  LEAN_GUARD_OOM_SCORE_ADJ   choom adjustment (default 1000)
+  LEAN_GUARD_RUN_QUIET       output wrapper (default ~/.claude/bin/run-quiet)
+  LEAN_GUARD_PROFILE         resource profile (default single)
+EOF
+  exit 0
+fi
+
+# Silent RAM/mount/tmpfs validation. Only a short refusal reaches the caller.
+"$script_dir/lean-build-queue.py" plan --profile "$profile" --threads "$threads" >/dev/null
+
+printf -v quoted_args ' %q' "$@"
+printf -v command 'cd %q && exec taskset -c %q env LEAN_NUM_THREADS=%q choom -n %q -- nix develop --command lake env lean%s' \
+  "$lean_root" "$cpu_set" "$threads" "$oom_score_adj" "$quoted_args"
+
+exec "$run_quiet" "$command" --desc "guarded Lean elaboration" --tags "lean,elaboration"

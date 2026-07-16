@@ -1,0 +1,24 @@
+{
+  "format": 1,
+  "profiles": {
+    "single": {
+      "description": "Unmeasured or mixed work: strictly serial until a representative peak is recorded.",
+      "reserve_mib": 8192,
+      "verified_max_threads": 1
+    },
+    "q16-generated": {
+      "description": "RelativeConicArcs Q16 generated leaves; approximately 1.3 GiB per worker.",
+      "reserve_mib": 8192,
+      "verified_max_threads": 6,
+      "worker_peak_mib": 1330
+    },
+    "q25-two-witness": {
+      "concurrent_sibling_peak_mib": 1330,
+      "description": "C143 Q25 two-witness leaves with the heavy shared checker serialized first.",
+      "reserve_mib": 8192,
+      "shared_checker_peak_mib": 10800,
+      "verified_max_threads": 2,
+      "worker_peak_mib": 6340
+    }
+  }
+}

@@ -32,6 +32,11 @@ STUBS = {
 set -uo pipefail
 [ "${1:-}" = develop ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 [ "${2:-}" = --command ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
+if [ "${3:-}" = lake ] && [ "${4:-}" = pack ]; then
+  mkdir -p "$(dirname "$5")"
+  printf 'fixture lake pack\\n' > "$5"
+  exit 0
+fi
 [ "${3:-}" = bash ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 [ "${4:-}" = -lc ] || { echo "unexpected nix argv: $*" >&2; exit 90; }
 exec bash -lc "export PATH=__BIN__:\\$PATH; ${5:-}"
@@ -104,6 +109,16 @@ if [ -f "$FAKE_LAKE_STATE/busy" ] && grep -qx "${2:-}" "$FAKE_LAKE_STATE/busy"; 
 fi
 exit 1
 """,
+    "run-quiet": """#!/usr/bin/env bash
+set -uo pipefail
+root=${RUN_QUIET_LOGDIR:?}
+mkdir -p "$root/result"
+echo "$1" >> "$FAKE_LAKE_STATE/run-quiet-calls.log"
+bash -c "$1" > "$root/result/stdout.log" 2> "$root/result/stderr.log"
+rc=$?
+printf 'exit=%s dir=%s\\n' "$rc" "$root/result"
+exit "$rc"
+""",
 }
 
 
@@ -126,6 +141,26 @@ class QueueTest(unittest.TestCase):
         self.lean_root.mkdir()
         (self.lean_root / "lakefile.lean").write_text("-- fixture\n")
         (self.lean_root / "lean-toolchain").write_text("leanprover/lean4:v4.99.0\n")
+
+        self.profile_file = self.tmp / "profiles.json"
+        self.profile_file.write_text(
+            json.dumps(
+                {
+                    "profiles": {
+                        "fixture": {
+                            "description": "hermetic test profile",
+                            "reserve_mib": 1024,
+                            "verified_max_threads": 4,
+                            "worker_peak_mib": 512,
+                        }
+                    }
+                }
+            )
+        )
+        self.meminfo = self.tmp / "meminfo"
+        self.meminfo.write_text("MemTotal: 33554432 kB\nMemAvailable: 25165824 kB\n")
+        self.mountinfo = self.tmp / "mountinfo"
+        self.mountinfo.write_text(f"1 0 0:1 / {self.tmp} rw - ext4 fixture rw\n")
 
         self.lock_file = self.tmp / "owner.lock"
 
@@ -161,6 +196,18 @@ class QueueTest(unittest.TestCase):
             "0-1",
             "--threads",
             "2",
+            "--profile",
+            "fixture",
+            "--profile-file",
+            str(self.profile_file),
+            "--meminfo",
+            str(self.meminfo),
+            "--mountinfo",
+            str(self.mountinfo),
+            "--tmp-path",
+            str(self.tmp),
+            "--tmp-used-mib",
+            "64",
             "--nix-binary",
             str(self.bin / "nix"),
             "--time-binary",
@@ -171,6 +218,8 @@ class QueueTest(unittest.TestCase):
             str(self.bin / "choom"),
             "--pgrep-binary",
             str(self.bin / "pgrep"),
+            "--run-quiet-binary",
+            str(self.bin / "run-quiet"),
             *(extra or []),
         ]
 
@@ -195,6 +244,33 @@ class QueueTest(unittest.TestCase):
     def status(self, run_dir: Path):
         return subprocess.run(
             [sys.executable, str(RUNNER), "status", str(run_dir), "--json"],
+            env=self.env(),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
+    def pack(self, destination: Path, extra: list[str] | None = None):
+        return subprocess.run(
+            [
+                sys.executable,
+                str(RUNNER),
+                "pack",
+                str(destination),
+                "--lean-root",
+                str(self.lean_root),
+                "--lock-file",
+                str(self.lock_file),
+                "--mountinfo",
+                str(self.mountinfo),
+                "--nix-binary",
+                str(self.bin / "nix"),
+                "--pgrep-binary",
+                str(self.bin / "pgrep"),
+                "--run-quiet-binary",
+                str(self.bin / "run-quiet"),
+                *(extra or []),
+            ],
             env=self.env(),
             capture_output=True,
             text=True,
@@ -244,8 +320,61 @@ class QueueTest(unittest.TestCase):
         self.assertEqual((self.state / "choom.log").read_text().split(), ["1000"])
 
         manifest = json.loads((run_dir / "manifest.json").read_text())
-        self.assertEqual(manifest["resources"], {"cores": "0-1", "lean_num_threads": 2, "choom_adjust": 1000})
+        self.assertEqual(manifest["resources"]["cores"], "0-1")
+        self.assertEqual(manifest["resources"]["lean_num_threads"], 2)
+        self.assertEqual(manifest["resources"]["choom_adjust"], 1000)
+        plan = manifest["resources"]["plan"]
+        self.assertEqual(plan["profile"], "fixture")
+        self.assertEqual(plan["tmp_ram_mib"], 0)
+        self.assertEqual(plan["workload_peak_mib"], 1024)
         self.assertEqual(manifest["source"]["lean_toolchain"], "leanprover/lean4:v4.99.0")
+        self.assertEqual(len((self.state / "run-quiet-calls.log").read_text().splitlines()), 1)
+
+    def test_resource_profile_and_tmpfs_are_enforced_before_build(self) -> None:
+        fake_tmp = self.tmp / "fake-tmp"
+        fake_tmp.mkdir()
+        tmpfs_mountinfo = self.tmp / "mountinfo-tmpfs"
+        tmpfs_mountinfo.write_text(
+            f"1 0 0:1 / {self.tmp} rw - ext4 fixture rw\n"
+            f"2 1 0:2 / {fake_tmp} rw - tmpfs fixture rw\n"
+        )
+        result = self.run_queue(
+            ["Fix.Alpha"],
+            self.tmp / "unsafe-run",
+            extra=[
+                "--mountinfo",
+                str(tmpfs_mountinfo),
+                "--tmp-path",
+                str(fake_tmp),
+                "--tmp-used-mib",
+                "32000",
+            ],
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("unsafe", result.stderr)
+        self.assertFalse((self.state / "lake-calls.log").exists())
+
+    def test_serial_first_uses_one_thread_then_profile_threads(self) -> None:
+        run_dir = self.tmp / "serial"
+        result = self.run_queue(
+            ["Fix.Leaf"], run_dir, extra=["--serial-first", "Fix.Checker"]
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        calls = (self.state / "lake-calls.log").read_text()
+        self.assertIn("threads=1 nobuild=0 targets=Fix.Checker", calls)
+        self.assertIn("threads=2 nobuild=0 targets=Fix.Leaf", calls)
+        manifest = json.loads((run_dir / "manifest.json").read_text())
+        self.assertEqual(manifest["serial_first"], ["Fix.Checker"])
+
+    def test_pack_is_quiet_disk_backed_and_non_overwriting(self) -> None:
+        destination = self.tmp / "packs" / "fixture.tgz"
+        result = self.pack(destination)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(destination.read_text(), "fixture lake pack\n")
+        self.assertIn("artifact archive:", result.stdout)
+        refused = self.pack(destination)
+        self.assertEqual(refused.returncode, 2)
+        self.assertIn("refusing to overwrite", refused.stderr)
 
     # gate 2: fail-fast with a diagnostic tail -------------------------------
 
@@ -286,10 +415,40 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertIn("foreign Lean build is live", result.stderr)
         self.assertFalse((self.state / "lake-calls.log").exists(), "must not build behind a foreign run")
+        status = self.read_status(run_dir)
+        self.assertEqual(status["state"], "refused")
+        self.assertEqual(status["exit_code"], 2)
 
         # The refusal released the lock, so the tree is usable once the foreign build clears.
         (self.state / "busy").unlink()
         self.assertEqual(self.run_queue(["Fix.Alpha"], self.tmp / "run3c").returncode, 0)
+
+    def test_same_basename_targets_keep_distinct_logs(self) -> None:
+        run_dir = self.tmp / "run3d"
+        result = self.run_queue(["One.All", "Two.All"], run_dir)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+        built = [entry for entry in self.read_status(run_dir)["results"] if entry["outcome"] == "built"]
+        logs = {entry["target"]: Path(entry["quiet_dir"]) / "stdout.log" for entry in built}
+        self.assertEqual(set(logs), {"One.All", "Two.All"})
+        self.assertNotEqual(logs["One.All"], logs["Two.All"])
+        self.assertIn("Built One.All", logs["One.All"].read_text())
+        self.assertIn("Built Two.All", logs["Two.All"].read_text())
+
+    def test_invalid_numeric_controls_are_rejected(self) -> None:
+        cases = (
+            ["--threads", "0"],
+            ["--poll-seconds", "0"],
+            ["--wait-quiet-seconds", "-1"],
+            ["--tail-lines", "-1"],
+            ["--choom-adjust", "1001"],
+        )
+        for index, extra in enumerate(cases):
+            with self.subTest(extra=extra):
+                run_dir = self.tmp / f"invalid-{index}"
+                result = self.run_queue(["Fix.Alpha"], run_dir, extra=extra)
+                self.assertEqual(result.returncode, 2)
+                self.assertFalse(run_dir.exists())
 
     # gate 4: interruption, then restart-safe resumption ----------------------
 

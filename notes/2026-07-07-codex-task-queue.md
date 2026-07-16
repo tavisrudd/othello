@@ -19,7 +19,7 @@ unless they retain an explicit open tail.
 
 ### `build-sys`
 
-- **C162 `[build-sys]` [QUEUED]** — harden restart sentinels, map import blast radius, and validate per-lane artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
+- **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 
 ### `cap`
 
