@@ -1,8 +1,9 @@
 # C201 — even-field quadratic-rank structural upgrade
 
-**Date:** 2026-07-16
 **Lane:** `relconic`
-**Status:** QUEUED — next bounded theorem probe after release/aggregate tails
+
+**Date:** 2026-07-16
+**Status:** ACTIVE — current `relconic` entry handoff and bounded theorem probe
 
 ## Objective
 

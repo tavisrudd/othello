@@ -37,7 +37,7 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
 | `queens` | `notes/handoffs/done/2026-07-08-claude-archive-queens-othello.md` (archived) |
-| `relconic` | `notes/handoffs/2026-07-13-relative-conic-arcs-strengthening.md` |
+| `relconic` | `notes/2026-07-16-c201-even-field-quadratic-rank.md` |
 | `repaircodes` | `notes/handoffs/2026-07-13-projective-completion-repaircodes.md` |
 
 Each handoff must declare exactly one `**Lane**: \`alias\`` directly under its H1. A cross-lane

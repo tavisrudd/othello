@@ -65,7 +65,7 @@ unless they retain an explicit open tail.
 - **C144 `[relconic]` [QUEUED; QUIESCENT BOX]** — per-lane validation gates and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
 - **C154 `[relconic]` [QUEUED]** — close the last load-bearing citation hole.
 - **C188 `[relconic]` [QUEUED]** — q=5 exact relative-conic value.
-- **C201 `[relconic]` [NEXT THEOREM PROBE; after release tails]** — symbolic geometric form of the q=16 quadratic-rank obstruction, bounded q=64 gate, and equality/first-excess classification → `notes/2026-07-16-c201-even-field-quadratic-rank.md`.
+- **C201 `[relconic]` [ACTIVE]** — symbolic geometric form of the q=16 quadratic-rank obstruction, bounded q=64 gate, and equality/first-excess classification → `notes/2026-07-16-c201-even-field-quadratic-rank.md`.
 - **C209 `[relconic]` [GATED ON C201]** — polarity dual and structural rank/defect stability theorem → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C210 `[relconic]` [LONG-HORIZON; after C201]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction → `notes/2026-07-16-arcs-sqrtq-construction-program.md`.
 

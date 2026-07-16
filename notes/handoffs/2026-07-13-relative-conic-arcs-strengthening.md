@@ -3,7 +3,7 @@
 **Lane**: `relconic` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-13
-**Status:** ACTIVE — C107/C110 aggregate tails closed; archival/routing disposition is pending, with the bounded C201 structural probe next after remaining release tasks
+**Status:** CLOSED AS ENTRY MAP — C107/C110 aggregate tails closed; routing now continues at C201, while archival disposition for this file remains pending
 **Tasks:** C106–C110, C188, C195–C196, C201, C209–C210
 
 ## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
