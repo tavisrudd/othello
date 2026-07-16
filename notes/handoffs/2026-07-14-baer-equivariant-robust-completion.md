@@ -3,123 +3,70 @@
 **Lane**: `baer` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-14
-**Status:** FINISHED — C136–C141 referee closeout complete; archive/routing decisions pending
+**Status:** FINISHED — the Baer core (C99 and C133–C141) is reported; publication upgrades continue
+in the `alt-orbit-repair` successor lane
 **Tasks:** C99, C133–C141 (closed)
 
-## Active-lane lock
+> **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's important context and live
+> routing map. Never append session history, build output, dated progress, validation transcripts,
+> superseded plans, review chronology, or amendment trails here. Put them in
+> [the companion archive](done/2026-07-14-baer-equivariant-robust-completion-archive.md) and keep
+> this file written as the current final state.
 
-This is the active sticky lane. Until the user explicitly switches lanes or this handoff is marked
-finished, `go` and `next?` refer only to the next step recorded here. Recent commits and global-queue
-priorities from other papers do not change that routing.
+## Routing state
 
-### Allowed paths
+The Baer core lane is finished. Its same-paper successor is `alt-orbit-repair`, routed through
+[the alternate-orbit handoff](2026-07-14-alternate-orbit-repair.md). Archiving this handoff closes
+only the foundational lane; it does **not** freeze or archive the
+`papers/equivariant-robust-completion/` manuscript. Do not route `go baer` into successor work
+implicitly—the user must select `alt-orbit-repair`.
 
-- `lean/FiniteGeom/BaerCompletion/`
-- the Baer/Frobenius/Q25 modules under `lean/RelativeConicArcs/`, their aggregate, and their trust
-  manifests
-- `notes/2026-07-13-c99-*`
-- `notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md`
-- `notes/2026-07-12-riffing-on-applications/baer-completion-adversarial-review.md`
-- `notes/2026-07-13-baer-completion-adversarial-novelty-review.md`
-- `notes/2026-07-14-c135-baer-inverse-equality.md`
-- `papers/baer-equivariant-extension/`, `papers/equivariant-robust-completion/`, and the associated
-  rows in `papers/papers-index.md`
-- this handoff, its future companion archive, and the C133–C135 registry rows in the global queue
+While this handoff remains live, Baer-owned paths are the modules under
+`lean/FiniteGeom/BaerCompletion/`, the Baer/Frobenius/Q25 modules under
+`lean/RelativeConicArcs/`, the C99/C133–C141 reports, and
+`papers/baer-equivariant-extension/` plus `papers/equivariant-robust-completion/`. Changes from all
+other lanes remain foreign.
 
-### Foreign lanes
-
-The Clebsch-hexagon/Q11 icosahedral paper, relative-conic coding strengthening, twisted-cubic and
-RepairCodes papers, unrelated ProjectiveCap/Nofil tasks, and Queens/Othello work are out of scope.
-Their commits and working-tree changes may be reported as foreign state but must not be reviewed,
-edited, staged, or selected by `next?` without an explicit lane switch.
-
-## Landed result
+## Final result
 
 C99 proves that every Frobenius-invariant eight-arc in `PG(2,25)` admits a fresh conjugate-pair
-extension. The exceptional profiles `f=0,2,4` and the strict-count profiles `f=6,8` are all
-kernel-checked; the public uniform theorem is `Q25AllProfiles.pair_extension`. The 469,600 normalized
-arc census and observed minimum legal-pair count 32 remain external computational evidence and are
-not assumptions of the theorem.
+extension. All five fixed-point profiles are kernel-checked, and the public uniform theorem is
+`Q25AllProfiles.pair_extension`. C136 identifies the semantic finset of fresh legal conjugate pairs
+with the carrierwise union and with `PairExtensionData.legalCount`.
 
-Source of truth:
+The general theory includes the carrierwise lower bound, exact collision correction, C133's
+cross-pair invisibility bound, and C135's algebraic equality/excess classification. The 469,600-arc
+census and its observed minimum 32 are external computational evidence, not assumptions of the
+theorem and not claims of this finished lane.
 
-- [`2026-07-13-c99-baer-collision-strengthening.md`](../2026-07-13-c99-baer-collision-strengthening.md)
-- [`paper-baer-equivariant-robust-completion.md`](../2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md)
-- [`2026-07-13-baer-completion-adversarial-novelty-review.md`](../2026-07-13-baer-completion-adversarial-novelty-review.md)
+The scoped declarations are kernel-checked without `sorry`, `admit`, or custom axioms; their
+expected axiom profile is `[propext, Classical.choice, Quot.sound]`.
 
-## Publication status — submission artifact complete
+## Publication state and successor
 
-The scoped Lean build for the Baer collision profile, quadratic collision/invisibility modules, and
-the full Q25 profile aggregate passes. The headline uniform theorem is kernel-checked, uses no
-`sorry`/`admit` or custom axiom, and has axiom profile exactly
-`[propext, Classical.choice, Quot.sound]`. No proof-validity defect was found in the Q25 result.
+The Baer core produced a complete focused submission artifact presenting the quadratic-Frobenius
+structural criterion, exact collision correction, the all-prime-power consequence, and the uniform
+Q25 theorem. The `alt-orbit-repair` lane subsequently strengthened that same paper with robust
+deletion/replacement, the exact profile envelope, parameterized exchange, and the active Q25
+extremal-classification program. Its handoff is authoritative for the manuscript's current upgrade
+state. Generic completion material and the classical-radius table remain outside the paper's scope.
 
-The adversarial manuscript pass has landed the immediate correctness repairs: Theorem A now carries
-the singleton-independence hypothesis; facet radius has distinct notation; Table D is provisional;
-F.1 distinguishes first-order equality from equality in the truncated bound and includes C135;
-Corollary G contains the full-occupation case; the Q25 namespace citation is corrected; and every
-Lean/prose boundary identified by the review is explicit. C135 is correctly described as an
-algebraic equality/excess classification, not the stronger structural inverse theorem. C136 closes
-the remaining count boundary: the semantic global finset of fresh legal conjugate pairs is
-kernel-checked equal to the disjoint carrierwise union and to `PairExtensionData.legalCount`.
+The bounded literature work found special-family exact completion and configuration-graph
+predecessors, but no exact precursor for the arbitrary quadratic-Frobenius orbit-valued criterion.
+Use only “no exact precursor located in a bounded search” or similarly qualified wording; never
+make a historical-first claim. C135 is an algebraic equality/excess theorem, not a stronger
+geometric structural inverse theorem.
 
-The focused scope is executed. Generic completion material and the classical-radius table are out;
-the paper makes a structural-criterion claim rather than a sharpness claim. C139 found no exact
-precursor for the general criterion in a bounded specialist-vocabulary/database search. The LaTeX
-source, bibliography, stable numbering, cross-references, manuscript/Lean/citation/trust audit, and
-PDF are complete. Tectonic/BibTeX finishes without reference, label, box, or PDF-string warnings.
-The final presentation pass also gives the all-prime-power `s≥5` consequence its own numbered
-corollary, collects all five Q25 profiles in one audit table, and records exact artifact pins and
-build commands. All release gates in C136–C141 are disposed.
+The authoritative context is:
 
-## Open queue
+- [C99 result and trust report](../2026-07-13-c99-baer-collision-strengthening.md)
+- [paper plan and theorem map](../2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md)
+- [adversarial novelty review](../2026-07-13-baer-completion-adversarial-novelty-review.md)
+- [C135 inverse/equality report](../2026-07-14-c135-baer-inverse-equality.md)
+- [companion archive](done/2026-07-14-baer-equivariant-robust-completion-archive.md)
 
-| Task | State | Deliverable |
-|---|---|---|
-| C136 | reported | Global legal-pair cardinality bridge in Lean |
-| C137 | reported | Focused Baer/Q25 manuscript restructure |
-| C138 | reported; table removed | Classical-radius release disposition |
-| C139 | reported | General quadratic-Frobenius specialist priority search |
-| C140 | reported; structural criterion | Sharpness/positioning disposition |
-| C141 | reported | Submission PDF and final referee/trust closeout |
+## Closed task map
 
-The routing table is stale: it still sends `baer` to the closed C99.6 review. Per the finished-lane
-protocol, archive this handoff and update routing only after the user's separate decisions.
-
-## Closed path — C133
-
-C99.6 is valid generically and kernel-checked:
-
-> A cross-pair secant orbit is invisible on at least `s+3-f-e` empty fixed carriers.
-
-`QuadraticInvisible.card_occupied_through_crossPair_center_le` injects occupied center-lines into
-the `f` selected fixed points plus all conjugate selected-point orbits except the two participating
-endpoint orbits, giving `f+(e-2)`. The final theorem
-`s_add_three_sub_f_sub_e_le_card_empty_through_crossPair_center` derives `e≥2` from the cross-pair
-witness and subtracts from the `s+1` fixed lines through the center. Scoped build, forbidden-token,
-and axiom audits pass; the axiom profile is exactly `[propext, Classical.choice, Quot.sound]`.
-
-## Closed path — C134
-
-The bounded zbMATH Open, Crossref, OpenAlex, and source-level search located no exact precursor for
-the uniform `PG(2,25)` theorem. The strongest adjacent sources prove ordinary one-point
-extendability, classify complete arcs, transfer Frobenius-invariant incidence data in the Hughes
-plane, count small arcs, or treat ordinary MDS lengthening; none forces a fresh legal conjugate
-pair. The result may be described only as “no exact precursor located in a bounded search,” never
-as a certified first. Full queries, limitations, and source comparisons are recorded in the
-[C134 priority section](../2026-07-13-baer-completion-adversarial-novelty-review.md#c134-bounded-priority-search--uniform-pg225-theorem).
-
-## Closed path — C135
-
-The exact collision balance now has kernel-checked inverse forms. Equality holds exactly when every
-secant-orbit center avoids every empty fixed carrier and each visible orbit-to-candidate charge is
-injective. More generally, first-order excess `k` is exactly the sum of center/empty-carrier
-incidences and collision redundancy. The census and observed minimum remain external computational
-evidence.
-
-Report: [`2026-07-14-c135-baer-inverse-equality.md`](../2026-07-14-c135-baer-inverse-equality.md).
-
-## Remaining optional gate
-
-Keep the census/minimum computational by default; certify them only if publication needs them. This
-is not an open task in the lane.
+C99 and C133–C141 are reported. Their execution details and dispositions are in the reports and
+companion archive, not here. The former optional census/minimum certification was allocated as C151
+to `alt-orbit-repair`; it is not an open task in this finished foundational lane.
