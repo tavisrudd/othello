@@ -81,7 +81,7 @@ unless they retain an explicit open tail.
 - **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum blockers classified under monomial `PGL(2,9)`; exact full-port Burnside census records the matching-orbit explosion → `notes/2026-07-15-c202-repair-extremizer-classification.md`.
 - **C203 `[repaircodes]` [IN PROGRESS]** — exact coefficient-labelled scalar equations and monomial gauge boundary pass focused Lean; aggregate `RepairCodes` build is deferred behind the foreign Q25 build → `notes/2026-07-15-c203-operational-coefficient-boundary.md`.
 - **C214 `[repaircodes]` [REPORTED 2026-07-16; PAPER-PROMOTED]** — exact weighted-functional confinement criterion, strict Singer/SPC beyond-gate example, classical fiber-enumerator boundary, and optimized outer-family disposition → `notes/2026-07-16-c214-weighted-functional-transfer.md`.
-- **C221 `[repaircodes]` [QUEUED FORMAL CLOSURE]** — kernel-check C214's exact three-case multiblock threshold, coordinate-surjective corollary, and strict Singer/SPC example; optionally formalize the finite fiber equivalence, then rerun focused axiom and PDF gates → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C221 `[repaircodes]` [IN PROGRESS]** — exact three-stratum iff, closed-term lower bounds, coordinate-surjective reduction, and Singer/SPC arithmetic core are kernel-checked; concrete attained-minimum and trace/SPC instantiations plus the aggregate Lean gate remain → `notes/2026-07-16-c221-weighted-transfer-formal-closure.md`.
 
 ### `repairports`
 

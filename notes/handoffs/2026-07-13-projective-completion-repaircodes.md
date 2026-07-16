@@ -3,7 +3,7 @@
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: CORE COMPLETE; C214 PAPER UPGRADE PROMOTED; C221 FORMAL CLOSURE QUEUED. C111–C114 are proved, adversarially reviewed,
+**Status**: CORE COMPLETE; C214 PAPER UPGRADE PROMOTED; C221 FORMAL CLOSURE IN PROGRESS. C111–C114 are proved, adversarially reviewed,
 and synchronized with the paper and registries. The sole deep formal dependency is the quarantined
 Stichtenoth theorem; external specialist citation-chain review remains a submission preflight gate,
 not a theorem gap. C214 added the exact weighted-functional obstruction, a strict Singer/SPC
@@ -40,13 +40,14 @@ implication is kernel-checked; the closed-form converse, Singer averaging proof,
 identity are honestly ledgered as manuscript proofs. The general optimized-outer-family program
 remains in the separate `repairports` lane.
 
-C221 is the next bounded step in this lane. It closes the formal boundary introduced by C214:
-kernel-check the exact zero/singleton/multisupport minimum and its coordinate-surjective two-term
-corollary, then formalize the Singer disjoint-translate lemma and the strict generalized-SPC
-example. A finite fiber equivalence is optional if it stays small; the polynomial enumerator may
-remain a manuscript corollary. Completion requires focused elaboration, standard-axiom output,
-proof-ledger synchronization, and a clean PDF build. The external coding-theory citation-chain
-review follows this closure and remains a submission preflight gate.
+C221 is the active bounded step in this lane. `WeightedTransferExact.lean` now kernel-checks the
+exact zero/singleton/multisupport stratum iff, each closed-term lower bound, the
+coordinate-surjective two-term reduction, and the Singer/SPC averaging and five-fiber arithmetic
+cores. Focused elaboration, standard-axiom output, proof-ledger synchronization, and the PDF gate
+pass. The concrete attained-minimum converse and trace/SPC instantiation remain, and the aggregate
+Lean gate is waiting behind the foreign Q25 build. A finite fiber equivalence remains optional;
+the polynomial enumerator may remain a manuscript corollary. The external coding-theory
+citation-chain review follows closure and remains a submission preflight gate.
 
 ## Goal and claim ledger
 

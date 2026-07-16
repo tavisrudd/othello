@@ -24,10 +24,11 @@ The strict example is a Singer-shifted `[5,4,2]_{6561}` generalized SPC outer co
 completed q=9 seed. The fiber identity is retained as classical structure, not novelty. See
 [`2026-07-16-c214-weighted-functional-transfer.md`](2026-07-16-c214-weighted-functional-transfer.md).
 
-**Formal closure:** C221 is queued in `repaircodes` to kernel-check the exact three-case converse,
-the coordinate-surjective reduction, and the strict Singer/SPC example. Its optional extension is
-the finite fiber equivalence, not a full polynomial library. The stop gate is focused Lean plus
-axiom and PDF validation; general weighted-dual algorithms and asymptotic realization remain C215
+**Formal closure:** C221 is in progress in `repaircodes`. The exact three-stratum iff, all three
+closed-term lower bounds, coordinate-surjective reduction, and Singer/SPC averaging and five-fiber
+arithmetic cores are kernel-checked. Concrete attained-minimum and trace/SPC instantiations remain;
+the optional extension is the finite fiber equivalence, not a full polynomial library. The stop
+gate is focused and aggregate Lean plus axiom and PDF validation; general weighted-dual algorithms and asymptotic realization remain C215
 and C216 work in `repairports`.
 
 Let `I <= F^K` be the inner code, `e : V -> I` its encoding isomorphism, and define
