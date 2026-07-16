@@ -242,6 +242,15 @@ its hundreds of unrelated rows in a pipe, tool wrapper, or agent code. Poll spar
 scripted serial runner that waits and reports only target milestones over repeatedly watching a
 healthy build.
 
+**Be token-conservative with command output.** Before running any command whose output may be large
+or unbounded, narrow it at the source: request explicit paths, exact patterns, needed fields, small
+line ranges, or a deliberate output cap. Do not dump whole files, repository-wide listings, build
+logs, process tables, or broad diffs when a targeted query answers the question. Use
+`~/.claude/bin/run-quiet "command args"` for predictably noisy commands such as Nix builds,
+`home-manager switch`, and similar long-running build or deployment commands; inspect its concise
+terminal summary or a bounded diagnostic tail only if the command fails. Do not reprint output
+already captured earlier in the session.
+
 For a guarded single-file elaboration, use
 `lean/scripts/guarded-lean RelativeConicArcs/Module.lean` instead of repeating the full affinity,
 thread-cap, OOM-priority, Nix-shell, and `lake env lean` prefix. It defaults to cores `20-23`, one
