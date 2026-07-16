@@ -1092,10 +1092,13 @@ $\ell\mapsto\ell T^{-1}$ carries the mirrors onto the secants of $A$.
 \begin{proof}
 Pairwise cross-products of the normals give the stated
 $6_5,10_3,15_2$ ledger, and joining the six fivefold points recovers all
-fifteen normals. Every three-by-three determinant on the six points is
-twice a unit in $\mathbb Z[\tau]$, so the set is an arc when
+fifteen normals. These are symbolic identities in
+$\mathbb Z[\tau]/(\tau^2-\tau-1)$, obtained by reducing each coordinate to
+$a+b\tau$. In the same ring, every three-by-three determinant on the six
+points is twice a unit, so the set remains an arc when
 $\operatorname{char}F\ne2$. Finally, $\det T=3$ in $\F_{11}$ and direct
-multiplication gives the two asserted set equalities. The exact replay is
+multiplication gives the two asserted set equalities. The finite
+$\F_5/\F_{11}$ specializations are independently replayed by
 \path{check_reflection_arrangements.py}. The $\F_{11}$ coordinate bridge,
 pointwise secant-index transport, the characteristic-two boundary, and the
 $\F_5$ and $\F_{11}$ intersection spectra are also kernel-checked in

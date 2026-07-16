@@ -73,7 +73,7 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 
 - Computation inventory, hashes, clean-source replay, Lean gates, and PDF audit: C168 report above
   (**reported 2026-07-15**).
-- The 17-page manuscript now uses layered exposition for the finite-geometry/coding
+- The 19-page manuscript now uses layered exposition for the finite-geometry/coding
   interface and includes a compact frame-normalized census argument, a grayscale-safe
   synthematic--Petersen figure, split trust/verification tables, the exact two-axiom Dye
   boundary, bounded open problems, and the correct hyperfocused-arc priority chain.
