@@ -1121,4 +1121,5 @@ Dye Theorem 1 supplies the ten-Brianchon equality class and its projective uniqu
 supplies the converse classification of a primitive `A5`-fixed six-arc. The manuscript now names
 these imports implication by implication, removes the stale Sadeh/ILL TODO, and makes no covering
 claim conditional on the unread BSW 1991 adjacent-context paper. C153 and C161 left the live queue;
-C168 is next.
+C168 subsequently closed the clean-source executable, guarded Lean, and PDF/citation gates. C182,
+the immutable archive/DOI release, is the remaining reproducibility step.

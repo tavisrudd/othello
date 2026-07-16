@@ -4590,3 +4590,10 @@ untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 20
   Clebsch equality class and its `A5` stabilizer; Storme--Van Maldeghem Proposition 12 supplies the
   converse classification of the primitive `A5`-fixed six-arc →
   [`2026-07-14-c161-tfae-iv-v-priority.md`](2026-07-14-c161-tfae-iv-v-priority.md).
+
+## 2026-07-15 Clebsch reproducibility closeout
+
+- **C168 `[clebsch]` [REPORTED]** — all thirteen executable sources are indexed and hashed; all
+  twelve fail-closed commands and five guarded Lean roots passed from clean source commit
+  `857c09c5`; the Nix-backed 21-page PDF passed warning, citation-key, and internal-reference audits
+  → [`2026-07-14-c168-clebsch-computation-source-preflight.md`](2026-07-14-c168-clebsch-computation-source-preflight.md).

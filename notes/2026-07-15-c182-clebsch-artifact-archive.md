@@ -28,8 +28,9 @@ The archive/DOI request cannot be honestly simulated by prose and remains this t
 Create an immutable release, preferably a GitHub release archived by Zenodo, containing:
 
 - the exact manuscript source and rendered PDF;
-- the eight-item computation manifest from C168, with every script at the recorded Git blob;
-- the cited Lean root and the minimal tracked import closure needed to replay its claims;
+- the C168 thirteen-source executable manifest (twelve replay commands), with every source at the
+  recorded Git blob, plus the five cited Lean roots and their guarded elaboration commands;
+- the five cited Lean roots and the minimal tracked import closures needed to replay their claims;
 - a top-level `README` giving environment setup, exact commands, expected PASS sentinels, typical
   runtime, and the distinction between strict-kernel Lean results and executable Python checks;
 - license files covering code and manuscript/source redistribution;
@@ -41,7 +42,8 @@ and cite the archived release, not a mutable branch URL.
 ## Exit gate
 
 - C153/C161 have fixed final claim and attribution wording;
-- C168 passes its clean-HEAD eight-source replay and PDF audit;
+- C168 has passed its clean-source thirteen-file executable replay, five-root Lean gate, and PDF
+  audit;
 - release tag points to that exact clean commit;
 - archive download is independently unpacked and replayed in a fresh directory;
 - DOI resolves and the manuscript bibliography/availability paragraph names the same version;

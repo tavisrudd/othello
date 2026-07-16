@@ -1,4 +1,4 @@
-LATEXMK ?= latexmk
+LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 
 SOURCES := \

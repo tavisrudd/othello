@@ -2,10 +2,11 @@
 
 **Date**: 2026-07-14
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: named-source inventory and checker hardening passed, including the later decoding,
-low-degree, point-orbit, and small-arc additions. Every executable artifact cited by the current
-manuscript is Git-indexed. C168 remains open for the final clean-source manifest/replay, citation
-audit, and handoff pruning. C153/C161 have settled the last priority attribution.
+**Status**: **REPORTED — CLEAN-SOURCE CLOSEOUT PASSED.** At clean source commit
+`857c09c5906869c8bea814ec78ae73f37539a08f`, every cited executable artifact and Lean root was
+Git-indexed and byte-identical to its recorded blob. All twelve executable commands reached their
+fail-closed success markers, all five Lean roots passed guarded elaboration and their exported axiom
+audits, and the final 21-page PDF passed warning, citation-key, and internal-reference audits.
 
 ## Inventory verdict
 
@@ -109,13 +110,62 @@ The corresponding Lean roots are `lean/RelativeConicArcs/Q11Coding.lean` (blob `
 `Q11A5PointOrbits.lean` (`26453f7b...`),
 `Q11DecodingSynthesis.lean` (`049c1895...`), `SmallKChordMoments.lean` (`a41192d3...`), and
 `SmallKGeometricBridge.lean` (`55aea47b...`). Their reports record the completed narrow builds and
-axiom boundaries; the final C168 pass must replay exact trace/build gates from a clean source state
-rather than infer them from existing oleans.
+axiom boundaries; at that checkpoint the final C168 clean-source trace/build replay was still
+outstanding.
 
 After the C184--C187 integration and abstract repair, the repository-level `papers/Makefile`
-rebuilt the checked-in manuscript with XeLaTeX to a warning-free 21-page, 176,119-byte PDF. C168 still
-requires a fresh clean-HEAD replay and PDF/citation audit with the final C153/C161 priority wording;
-this checkpoint is not a substitute for that exit gate.
+rebuilt the checked-in manuscript with XeLaTeX to a warning-free 21-page, 176,119-byte PDF. That
+checkpoint preceded, and did not substitute for, the final replay below.
+
+## Final clean-source closeout
+
+The final replay used source commit `857c09c5906869c8bea814ec78ae73f37539a08f`. Before execution,
+`git diff --quiet`, `git diff --cached --quiet`, `git ls-files --error-unmatch`, and a working-file
+SHA-256 comparison established that every manifest source below was index-visible and identical to
+the recorded Git object. Commands beginning `uv run` were executed from
+`papers/clebsch-hexagon-code/`; the C181 command was executed from the repository root.
+
+| Source | Git blob | SHA-256 | Exact command | Required output |
+|---|---|---|---|---|
+| `check_rigidity_degenerate_conic.py` | `f5e003ac6b46bf78877423d2c14d4e0fa7cc02b0` | `deaf503932b444d03a084c1954678fa993846696350524a198ccaa1e1d47c054` | `uv run python check_rigidity_degenerate_conic.py` | `all assertions passed`; 1548 representatives, 252 concyclic, six full nonsingular-conic loci |
+| `check_code_automorphisms.py` | `d4cd6e9622ea50fc2121ece4a037c40e8ed60753` | `82b0c9fd1e64f7c9950cd951450c7c85b8f752c08645a33cdcd5520e8163a3fb` | `uv run python check_code_automorphisms.py` | `all assertions passed`; projective/monomial/scalar orders `60/600/10` |
+| `check_chirality.py` | `3bdfc04ba52260b89dd6f3dfe4f734421433130b` | `200cbd604c7e9aa942d1e3b54c372b97c69b8ebcb42220e710d1141131f9cca5` | `uv run python check_chirality.py` | `all assertions passed`; exact Brianchon dictionary, `10+10`, `1200+1200`, affine transitivity |
+| `check_global_conic_gap.py` | `a2cb534f5d6e621eab89fae374dab348169517af` | `bb989b90c2dffe2d8bf71dce8c9b5aa879ddcf2d1abed724934dc24f4cbeea18` | `uv run python check_global_conic_gap.py` | `all assertions passed`; 15 classes, unique zero class, gap 12 |
+| `check_perturbation_gap.py` | `7ec44a0a570676d3b6c4c23e29b91ddcd1dff889` | `0af4aa625539a8d317079276eacbc9364d1d0f653ea7c2362a4e59e22b7b6756` | `uv run python check_perturbation_gap.py` | `all assertions passed`; 252 neighbors in eight `A5`-orbits, none on a conic |
+| `check_small_q_uniqueness.py` | `e6ae20cd4ba49c40470f443b73d3756a35c870be` | `cbe028cec3795edb8e2985c4f5aba6fb268260e6ea5183122cb1d040abb2ec01` | `uv run python check_small_q_uniqueness.py` | `all assertions passed`; prime powers 2 through 13, unique field 11 |
+| `notes/2026-07-15-c181-sylvester-q9.py` | `cdc7f7f452b7beccabdff86514b854d01ffd6306` | `88a5e989aedc8adcefee21804b60264bc2c980102cca64adf6349eafdac1d9c5` | `uv run python notes/2026-07-15-c181-sylvester-q9.py` | `C181_SYLVESTER_Q9_PASS`; intersection array and clique number 5 |
+| `check_q19_nonexample.py` | `be0941ebb8802e44883c7e712bc8cbda36010751` | `8a70fe91a64dab8b94d75188ab90d688a82515a016d48382fab3cecdd02d41e6` | `uv run python check_q19_nonexample.py` | `all assertions passed`; `|U|=140`, conic intersection 20, rank 6 |
+| `check_decoding.py` | `d021423287d721f55755bca3769522c093439701` | `24f42397f4e2b7e32109d44fc2caeb6ec1991476c3bffc6143d61f8364305cb6` | `uv run python check_decoding.py` | `all assertions passed`; total oracle, ambiguity distribution, equivariant decoder hierarchy |
+| `check_low_degree_loci.py` | `b88fabb59d667586b25ebfdb9354a02c68bc4bcc` | `fab65df95dac888758f28fae19cf1d2ce47ee2a170b73fea5a6cba61ccae16fc` | `uv run python check_low_degree_loci.py` | `all assertions passed`; exact minimal loci `C02:4,C04:5,C12:6,C15:2` |
+| `check_low_degree_loci_c12.sh` | `886bd7783e9381e20b6a55312fed6fa50f51929a` | `14d262c09120cfd25f1df564da486a21bb476c997fdfd17c69ef5c1c59c76b93` | `nix shell nixpkgs#singular -c ./check_low_degree_loci_c12.sh` | `all assertions passed`; quartic/quintic/sextic geometry |
+| `check_low_degree_loci_c12.sing` | `ebc85ff42f19ace9d280b151e35c090abf0aa444` | `0c18185146225a6965099e9a2bfb29e8920c8254f48c4a2f17798e870eda6081` | invoked by the preceding fail-closed wrapper | exact Singular assertions consumed by the wrapper |
+| `check_small_k_conic_filling.py` | `4d2d3ac62998ea09b6ecaa9c49d5c5eb94c9fef5` | `2aa2187ce53867ea3e3f823463e71c42f9537594f4603a7091edbf063bf1b67c` | `uv run python check_small_k_conic_filling.py` | `SMALL_K_CONIC_FILLING_PASS`; q=5 equality and q=11,13 exclusions |
+
+The five manuscript-facing Lean roots were then re-elaborated directly with the guarded wrapper,
+not inferred from existing `.olean` files. Each command had zero stderr and exit zero; every
+included `#print axioms` audit reported only `propext`, `Classical.choice`, and `Quot.sound`.
+
+| Root | Git blob | SHA-256 | Exact command | Time |
+|---|---|---|---|---:|
+| `RelativeConicArcs/Q11Coding.lean` | `a6819d43b4948f581e43dd556139c617c0339728` | `792abde700da2fc389a9b36a85d451e2257eeb3d87244a8de2d71e99d3118054` | `scripts/guarded-lean RelativeConicArcs/Q11Coding.lean` | 1m45s |
+| `RelativeConicArcs/Q11A5PointOrbits.lean` | `26453f7b2680e3733ca66a322609a018488dbc8d` | `d1bf97cf47c9c0b23f0fe73f049e3f7e42e50137b6d28e59f3954cbe779dfa0b` | `scripts/guarded-lean RelativeConicArcs/Q11A5PointOrbits.lean` | 9s |
+| `RelativeConicArcs/Q11DecodingSynthesis.lean` | `049c18955eeece0c2c675b767cee10d1d817d8eb` | `d33071bdd173a2be8243167bc5350548615e0c83de6d4afc4833107394bf077d` | `scripts/guarded-lean RelativeConicArcs/Q11DecodingSynthesis.lean` | 14m16s |
+| `RelativeConicArcs/SmallKChordMoments.lean` | `a41192d396bb263536c564e52a4109d1e099b05d` | `92fb60e20790401d1730b165b4fcf043cf78e42a2aae71e45663de1d9c1f0af5` | `scripts/guarded-lean RelativeConicArcs/SmallKChordMoments.lean` | 8s |
+| `RelativeConicArcs/SmallKGeometricBridge.lean` | `55aea47b53d2e7ad22a2b9a6d00b53292e797c95` | `d78cb940373f546825d68b001f8d1f0e780eae99b36f1459fda80aeedad55e53` | `scripts/guarded-lean RelativeConicArcs/SmallKGeometricBridge.lean` | 6s |
+
+Finally, `papers/Makefile` was made Nix-self-contained and
+`make -B clebsch LATEXMK_FLAGS='-g -xelatex -interaction=nonstopmode -halt-on-error'` forced a fresh
+XeLaTeX/BibTeX render. The result is 21 pages. The exact log contains no overfull/underfull boxes,
+LaTeX or package warnings, undefined citations/references, or multiply defined labels. Independent
+source-level audits found every `\cite` key in a `\bibitem` and every `\ref`/`\eqref` target in a
+`\label`.
+
+The final trust-ledger pass found eighteen theorem-like environments and eighteen proof
+environments, including three proofs explicitly labeled computer-assisted/exhaustive; no proof
+sketch, TODO, FIXME, unchecked, or unverified marker remains. Every executable/formal artifact path
+named by the manuscript resolves to one of the tracked sources above. The companion arcs source has
+six preceding theorem-like environments in Section 8 before `prop:q11-code`, so the manuscript's
+cross-reference to Proposition 8.7 is consistent with the source numbering and statement.
 
 ## C168 actions
 
@@ -131,9 +181,8 @@ this checkpoint is not a substitute for that exit gate.
   remainder under C167.
 - **Done:** pruned the dual, Mathieu, ten-arc, higher-redundancy, and Schreier asides, shrinking the
   final executable manifest to the computations that support the rigidity spine.
-- At closeout, record for every cited computation: tracked path, blob/SHA-256, exact command, and
-  expected output, then replay the manifest from a clean index-visible source set.
+- **Done:** recorded and replayed every cited computation and formal root from the clean,
+  index-visible source set above; rebuilt and audited the final PDF.
 
-This preflight does not report C168 complete. It establishes the user's “all cited computation
-scripts must be in Git” requirement for the current executable sources. The final manifest/replay,
-PDF/citation audit, and handoff cleanup remain the explicit exit conditions.
+C168 is complete. C182 remains the external immutable-archive/DOI gate; no DOI or archival claim is
+made by this local closeout.

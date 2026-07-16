@@ -13,7 +13,7 @@
 
 Finish the Clebsch-hexagon paper as a self-contained, honestly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **A− now; solid A after reproducibility and archival closeout**.
+Current assessment: **local reproducibility closed; immutable archival release still required**.
 
 Authoritative manuscript and checkers:
 [`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/).
@@ -40,12 +40,9 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 ## Submission-critical work, in order
 
-1. **Computation-source closeout — C168.** Finish the clean-source replay and manifest audit in
-   [`2026-07-14-c168-clebsch-computation-source-preflight.md`](../2026-07-14-c168-clebsch-computation-source-preflight.md).
-   All scripts cited by the paper must be tracked and must fail reliably on assertion failure.
-2. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
+1. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
    stable DOI; cite the artifact from the paper.
-3. **Final referee pass.** Convert every remaining proof sketch/computational assertion into an
+2. **Final referee pass.** Convert every remaining proof sketch/computational assertion into an
    explicit computer-assisted proof with a named artifact and exact exhaustiveness argument.
 
 ## Optional high-value follow-ons
@@ -58,7 +55,8 @@ These are upgrades, not submission gates unless the manuscript adopts their clai
 
 ## Verification map
 
-- Computation inventory and hashes: C168 report above.
+- Computation inventory, hashes, clean-source replay, Lean gates, and PDF audit: C168 report above
+  (**reported 2026-07-15**).
 - Priority boundary: C153/C161 are closed by
   [`2026-07-15-dye-bsw-primary-source-audit.md`](../2026-07-15-dye-bsw-primary-source-audit.md)
   and [`2026-07-14-c161-tfae-iv-v-priority.md`](../2026-07-14-c161-tfae-iv-v-priority.md).

@@ -38,7 +38,6 @@ unless they retain an explicit open tail.
 
 ### `clebsch`
 
-- **C168 `[clebsch]` [FINAL GATE]** — clean-source computation replay, tracked-script audit, and submission closeout → `notes/2026-07-14-c168-clebsch-computation-source-preflight.md`.
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C206 `[clebsch]` [QUEUED UPGRADE]** — conceptual nearest-conic gap/stability → `notes/2026-07-15-c206-clebsch-gap-stability.md`.
 - **C207 `[clebsch]` [QUEUED UPGRADE]** — intrinsic chirality and outside-`S5` normalizer meaning → `notes/2026-07-15-c207-intrinsic-clebsch-chirality.md`.
