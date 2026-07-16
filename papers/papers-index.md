@@ -68,8 +68,21 @@ defect identity and ρ_𝒞(16) = 9*
 
 **5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs: exact transfer under
 concatenation. A twisted-cubic–axis family
-- *Status:* self-contained manuscript + proof/novelty ledgers + strict-trust Lean package;
-  internal adversarial audit complete, external specialist priority check remains.
+- *Status:* self-contained 16-page manuscript + PDF + independent verifier + proof/novelty
+  ledgers + strict-trust Lean formalization. Internal adversarial and paragraph-level prose reviews
+  are complete. The remaining submission gates are an external specialist citation-chain review,
+  an immutable artifact release, and the final post-C203 aggregate `RepairCodes` rebuild currently
+  deferred behind Q25.
+- *Headline:* the primary `[19,4,8]₉` punctured seed has three exact coordinate profiles and gives
+  a q9 family of rate `2/19` with every fixed eventual distance bound `c<39/190`; a completed
+  `[20,4,9]₉` comparison transfers through radius four and gives rate `1/10` with every fixed
+  bound `c<351/1600`. The exact complete bounded repair hypergraph transfers blockwise under the
+  stated inner- and outer-dual gates.
+- *Trust and scope:* all finite, transfer, trace-duality, coefficient, and asymptotic-reduction
+  arguments are kernel-checked; the asymptotic families additionally use exactly the quarantined
+  Stichtenoth self-dual TVZ theorem. Coefficients certify a direct one-symbol-per-helper scalar
+  protocol, not minimum bandwidth or access under subpacketization. Primary venue fit is Designs,
+  Codes and Cryptography / Finite Fields and Their Applications, not IEEE-TIT in the present form.
 
 **6 · `equivariant-robust-completion`** — Frobenius-equivariant pair extension of eight-arcs in
 `PG(2,25)`
@@ -128,9 +141,10 @@ repositories: an evidence-based essay and practical how-to
 
 - **Complete LaTeX manuscript (+ PDF + verifier + Lean package):**
   `arcs_complete_outside_conic` — near submission-ready.
-- **Complete LaTeX manuscript (+ PDF + proof/novelty ledgers + Lean package):**
-  `coding-repair-hypergraphs` — internally audited; specialist citation-chain review remains a
-  submission preflight gate.
+- **Complete 16-page LaTeX manuscript (+ PDF + independent verifier + proof/novelty ledgers +
+  strict-trust Lean package):** `coding-repair-hypergraphs` — internal adversarial and prose audits
+  complete; specialist citation-chain review, immutable artifact release, and the deferred final
+  post-C203 aggregate rebuild remain submission preflight gates.
 - **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
   `clebsch-hexagon-code` — the 17-page paper cites ten fail-closed Python replays and one Singular
   calculation. Ten named Lean roots cover the syndrome conic, `A₅` orbits, decoding/chirality
@@ -159,7 +173,8 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
   `lean/CapGame/`); the dihedral reduction + V₄→K₄ core (`lean/DihedralSchreier/`); the
   Baer pair-extension proof spine (`lean/FiniteGeom/BaerCompletion/`) and its projective-plane,
   coordinate-conjugation, and quadratic-Frobenius consumers (`lean/RelativeConicArcs/`); the
-  completion δ_x = τ base identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed
+  completion δ_x = τ base identity (`lean/FiniteGeom/Completion.lean`); the coding/LRC seed,
+  exact-transfer, asymptotic, projective-completion, and operational-coefficient theorem chain
   (`lean/RepairCodes/`); and the complete arcs-outside-a-conic theorem/certificate package
   (`lean/RelativeConicArcs/`).
 - **Partially formalized with an explicit classical boundary — `clebsch-hexagon-code`:**
@@ -307,6 +322,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-axis-q9-table   | Exact q9 all-symbol repair table         | `[19,4,8]₉`; rows `(ν,τ)=(4,7),(6,12),(7,13)`; repair counts `28`, `36+8`, `36+12` | coding | lean `RepairCodes/Q9Uniform.lean` `axisTwistedCubic_q9_row_invariants`, `cubicRepair_edge_count_q9`, `axisRepair_component_edge_counts_q9` |
 | thm-axis-q9-circuits | Exact q9 small-circuit inventory       | 120 axis three-circuit supports and 84 completed cubic four-circuit supports | coding | lean `RepairCodes/Q9CircuitInventory.lean` `q9_smallCircuit_support_counts` |
 | thm-axis-uniform-repair | Uniform all-symbol separation       | exact axis formulas, exact cubic row, and `τ>ν` at every coordinate for `q≥9` | coding | lean `RepairCodes/AxisTwistedCubicInvariants.lean` `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `cubicRepair_matchingNumber`, `axisTwistedCubic_allSymbol_tau_gt_nu` |
+| thm-repair-coefficients | Coefficient-labelled scalar repairs | every repair witness yields an exact scalar recovery equation; three completed-seed repair shapes have explicit nonzero coefficients, while a monomial rescaling theorem rules out invariant coefficient-cost claims | coding | lean `RepairCodes/OperationalCoefficients.lean` `repair_edge_has_scalar_recovery_equation`, `projectiveAxisPair_arbitrary_helperCoefficient`, and the three coefficient-relation theorems |
 | thm-axis-q9-lift    | Conditional finite q9 seed-and-lift     | `[19N,4K,≥8D]₉`, all-symbol locality at most 3, exact row transfer, `7ν≤4τ` under explicit outer hypotheses | coding | lean `RepairCodes/Q9SeedLift.lean` `q9UniformLiftCode_parameters`, `q9UniformLiftCode_repairHypergraph`, `q9UniformLiftCode_ratio` |
 | lem-axis-trace-bridge | Extension-field trace duality         | ordinary `GF(9⁴)` dual distance implies the restricted-scalar functional-dual gate with exact support | coding | lean `RepairCodes/TraceDual.lean` `hasFunctionalDualDistanceAtLeast_restrictScalars` |
 | thm-axis-q9-extension-lift | Degree-four outer-code lift     | actual restricted-scalar `[19N,4K,≥8D]₉` lift; disjoint exhaustive type partition with counts `9N,9N,N`; exact locality three/two; exact row transfer and thresholds `6,11,12` | coding | lean `RepairCodes/Q9ExtensionLift.lean` `q9ExtensionLiftCode_parameters`, `q9Lift_coordinate_type_partition`, `q9Lift_coordinate_type_counts`, `q9ExtensionLiftCode_cubic_exact_locality_three`, `q9ExtensionLiftCode_axis_exact_locality_two`, `q9ExtensionLiftCode_row_invariants`, `q9ExtensionLiftCode_failure_thresholds` |

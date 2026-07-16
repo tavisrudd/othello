@@ -56,10 +56,15 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   by the publication-allocation ruling below, but is mathematically self-contained; the remaining
   operational gate is an immutable artifact release.
 
-**5 · Coding / LRC** *(conditional)* — `coding-repair-hypergraphs`
-- *What:* promote after the external specialist citation-chain review.
-- *Gate:* Lean and manuscript complete; externally gated on specialist priority review,
-  not formalization.
+**5 · Complete repair hypergraphs: exact transfer under concatenation** *(conditional)* —
+`coding-repair-hypergraphs`
+- *What:* exact matching/transversal profiles for a twisted-cubic–axis seed, exact blockwise
+  transfer of the complete bounded repair hypergraph, and fixed-alphabet q9 families. The punctured
+  rate-`2/19` family is primary; the rate-`1/10` projective completion is a radius-four comparison.
+- *Gate:* the 16-page manuscript, independent verifier, internal adversarial/prose reviews, and
+  focused strict-trust Lean gates are complete. Submission still requires the external specialist
+  citation-chain review, an immutable artifact release, and the final post-C203 aggregate
+  `RepairCodes` rebuild deferred behind Q25; none is a known theorem gap.
 
 **6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
@@ -313,7 +318,7 @@ preempt AI-slop skepticism; do not overclaim novelty ahead of the prior-art audi
 | Clebsch      | Designs, Codes and Cryptography / Finite Fields & Apps; JCTA shorter papers or J. Geometry secondarily |
 | Baer/Q25     | FFA / DCC                                                           |
 | Continuation | Electronic J. Combinatorics or DCC                                  |
-| Coding       | DCC, or IEEE Trans. Inf. Theory if the LRC angle survives audit     |
+| Coding       | DCC / Finite Fields and Their Applications; JCTA secondarily; not IEEE-TIT in its present form |
 | OEIS entries | OEIS directly, independent of the papers                           |
 
 ## Extraction & DOI plan
@@ -344,8 +349,10 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are
 prior art.
 
-**5 · Coding / LRC** — internal audit narrows novelty to exact all-symbol `(ν,τ)` separation and
-complete-hypergraph transfer; external specialist citation-chain review remains.
+**5 · Coding / LRC** — internal audit narrows candidate novelty to exact all-symbol `(ν,τ)`
+separation and complete bounded repair-hypergraph transfer. External specialist citation-chain
+review remains; ordinary repair tolerance, concatenation, trace duality, and TVZ asymptotics are
+positioned as prior art or derived machinery.
 
 **6 · `baer` ⊕ `completion`** — broad adversarial audit complete. Exact collision accounting is
 checked; every order-five consequence remains unproved until Lean checks the geometry and finite
@@ -389,17 +396,21 @@ Post-review dispositions:
   projection) is the live prize. Follow-up: `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`
   (C115–C120); writeup task C119.
 
-- **Coding / LRC → Paper 6 assembled and internally audited.** `coding-repair-hypergraphs/` contains
-  the manuscript, PDF, proof ledger, and adversarial novelty report. `RepairCodes` proves the trace
+- **Coding / LRC → Paper 5 assembled and internally audited.** `coding-repair-hypergraphs/` contains
+  the 16-page manuscript, PDF, independent verifier, proof ledger, and adversarial novelty report.
+  `RepairCodes` proves the exact complete-hypergraph transfer theorem, trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed
   eventual distance bound `c<39/190`, plus a bundled exact coordinate distribution, mixed
   locality, rows, and thresholds. The projectively completed second seed is also integrated:
   `[2q+2,4,q]_q`, exact full-minimal
   radius-four rows, a `[20N,4K,>=9D]_9` bounded-port lift, and an unbounded q9 family of exact rate
   `1/10` with every fixed eventual bound `c<351/1600`. The sole deep boundary for both families is
-  Stichtenoth Theorem 1.6(ii), quarantined and visible in the headline axiom report. The remaining
-  submission gate is an external specialist citation-chain review, not formalization or manuscript
-  assembly.
+  Stichtenoth Theorem 1.6(ii), quarantined and visible in the headline axiom report. The
+  coefficient-labelled layer now proves exact scalar recovery equations and three canonical
+  completed-seed formulas, while its monomial-rescaling theorem prevents unsupported
+  minimum-bandwidth or minimum-access claims. Internal manuscript and focused formal gates are
+  closed; the remaining submission gates are the external specialist citation-chain review, an
+  immutable artifact release, and the final post-C203 aggregate rebuild deferred behind Q25.
 - **Prescribed-hole covering code → post-arcs companion.** The coding translation of the arcs problem;
   audited first, never delaying arcs.
 - **Generalized D₂ₘ → folded into the dihedral paper** (not a separate paper). Its **Möbius-ladder /
