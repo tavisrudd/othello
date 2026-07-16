@@ -283,6 +283,7 @@ def render_row(csv_hash: str, enumerator_hash: str, b: int, records: Sequence[Re
         ),
         "\nnamespace RelativeConicArcs\n",
         "namespace Q25ResidualCoverData\n\n",
+        "open FiniteFields\n\n",
         f"def residualCoverRow{b:03d}C{first_c:03d}_{last_c:03d} : "
         "Array ResidualRowPayload := #[\n",
     ]

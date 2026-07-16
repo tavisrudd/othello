@@ -10,7 +10,7 @@ Each leaf combines a literal `classNNNNAllowed` cardinality check with its exist
 sound `RowCompositionCertificate`; no upper exactness claim is used.
 
 * payload: class lower bounds 1100 through 1109
-* generator SHA256: `70183fc83d291004ce18b8a4a55110ef34bd8baeb531b0465f01f1702116347a`
+* generator SHA256: `10bfb5f446eec17ef1cb2543f9ff7c3581c25b3e41d4a5b0b2ccd99314e9c388`
 * enumerator SHA256: `73d442df3be986c1082af8e3498ddd0496c09b86dd24963ea6d887a8f9b7680d`
 * canonical CSV SHA256: `62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3`
 * minimum class IDs: `0065,0267,0445,0772,1002`

@@ -9,7 +9,7 @@ not semantic certificates; the row-level residual transport bridge is intentiona
 handwritten downstream.
 
 * payload: 42 normalized rows (217,268) through (217,309)
-* generator SHA256: `70183fc83d291004ce18b8a4a55110ef34bd8baeb531b0465f01f1702116347a`
+* generator SHA256: `10bfb5f446eec17ef1cb2543f9ff7c3581c25b3e41d4a5b0b2ccd99314e9c388`
 * enumerator SHA256: `73d442df3be986c1082af8e3498ddd0496c09b86dd24963ea6d887a8f9b7680d`
 * canonical CSV SHA256: `62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3`
 * semantic FNV-1a-64: `37b674bfe4316ee6`
@@ -18,6 +18,8 @@ handwritten downstream.
 
 namespace RelativeConicArcs
 namespace Q25ResidualCoverData
+
+open FiniteFields
 
 def residualCoverRow217C268_309 : Array ResidualRowPayload := #[
   .bad { c := ⟨268, by decide⟩, i := ⟨0, by decide⟩, j := ⟨6, by decide⟩, k := ⟨7, by decide⟩ },
