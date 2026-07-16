@@ -69,7 +69,7 @@ unless they retain an explicit open tail.
 
 ### `relconic`
 
-- **C144 `[relconic]` [QUEUED; QUIESCENT BOX]** — per-lane validation gates and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
+- **C144 `[relconic]` [REPORTED 2026-07-16]** — per-lane validation gate sets and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
 - **C154 `[relconic]` [REPORTED 2026-07-16]** — Reed--Muller deep-hole residual closed with no variety-equality counterexample; the precise bounded-audit novelty posture survives → `notes/2026-07-16-c154-reed-muller-deep-holes.md`.
 - **C188 `[relconic]` [REPORTED 2026-07-16]** — q=5 exact relative-conic value; registry gate passed.
 - **C201 `[relconic]` [REPORTED 2026-07-16]** — q=16 quadratic anatomy classified; the bounded q=64 Baer, torus, and split-Z3 mechanisms fail at coverage before nontrivial rank anatomy, so no infinite theorem is promoted → `notes/2026-07-16-c201-bounded-mechanism-closure.md`.

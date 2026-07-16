@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C188 and C223 REPORTED — registry and paper gates pass
+**Status:** C144, C188, and C223 REPORTED — per-lane, registry, and paper gates pass
 
 ## Current state
 
@@ -25,11 +25,16 @@ the full rational-point set of a named positive-dimensional variety.  The precis
 novelty posture survives.  The paper needed no claim-boundary change; its conclusion received one
 independent proof-stage copyedit requested by the user.
 
+C144 is reported in
+[`2026-07-14-c144-shared-library-gate-architecture.md`](../2026-07-14-c144-shared-library-gate-architecture.md).
+Import-only validation targets now separate the relconic, Baer, and alternate-orbit closures; the
+alternate-orbit lane uses three compatible modules because its independently compiled terminals
+cannot all share one Lean environment. Build orchestration and notification mechanics remain owned
+by the `build-sys` lane.
+
 ## Recommended order
 
-1. **C144 — shared-library gate architecture.**  Run only in a quiescent build
-   window; it is infrastructure rather than paper mathematics.
-2. **C210 — square-root construction program.**  This is the high-ceiling,
+1. **C210 — square-root construction program.**  This is the high-ceiling,
    long-horizon route.  It should begin with construction/literature design,
    not another blind q=64 census.
 

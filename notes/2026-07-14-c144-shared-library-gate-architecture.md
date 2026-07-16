@@ -3,7 +3,7 @@
 **Date**: 2026-07-14
 **Lane**: `relconic` — see CLAUDE.md § Lane routing. (Cross-cutting infrastructure; pegged to the
 lane that owns the deliverable and the blocked items. Re-peg if another lane should own it.)
-**Status**: QUEUED — needs a quiescent box (no other lane building or regenerating).
+**Status**: REPORTED 2026-07-16
 
 ## The problem
 
@@ -69,7 +69,43 @@ dirties its whole dependent leaf tree, which is simultaneously the OOM risk.
 Cost: a few small files and doc edits. No RAM, no new hardware, no Lake patches, no gate weakening.
 The aggregate stops being a moving target because no lane's closure is gated on other lanes' writes.
 
-## Open / unverified
+## Implemented architecture
+
+- `RelativeConicArcs.Gates.Relconic` owns the relative-conic paper, C107's evaluation dichotomy,
+  and the q=9/q=11 game and coding consumers without importing either Q25 subtree.
+- `RelativeConicArcs.Gates.Baer` owns the public five-profile q=25 extension terminal.
+- The alternate-orbit gate is a three-module compatible target set covering all six paper-facing
+  targets named by that manuscript's reproduction protocol. A single umbrella is impossible at the
+  current source boundary because independently compiled terminals synthesize a duplicate instance
+  name when imported into one environment; the separate targets match the manuscript's valid build.
+- The root workspace guide now makes these per-lane modules the exit gates, widens validation after
+  shared-core edits, reserves the umbrella for a locked quiescent repo-health check, and requires
+  atomic checker-plus-generated-leaf commits.
+- C144 defines validation topology and policy only. The `build-sys` lane owns and supplies the
+  queue, ownership lock, resource profiles, future reverse-import analyzer, pack/restore mechanics,
+  and detached-run lifecycle; C144 neither duplicates nor changes those mechanisms.
+
+## Validation
+
+The `build-sys`-owned queue admitted the measured `q25-two-witness` profile and built the complete
+five-module gate set under the shared ownership lock:
+
+- `RelativeConicArcs.Gates.Relconic`
+- `RelativeConicArcs.Gates.Baer`
+- `RelativeConicArcs.Gates.AlternateOrbitRepairQ25`
+- `RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope`
+- `RelativeConicArcs.Gates.AlternateOrbitRepairParameterized`
+
+Every target passed its exact build, and the queue's final trace-only confirmation passed. The gate
+modules are import-only and introduce no declarations or axioms; their terminal declarations remain
+covered by `lean/RelativeConicArcs/TRUST.md`'s strict audit.
+
+The first attempted single-module alternate-orbit umbrella correctly failed at import composition:
+independently compiled terminals synthesize the same instance name. Splitting the gate into three
+compatible targets preserves all six manuscript targets without changing another lane's theorem
+sources. All three split modules then passed guarded elaboration and the fresh queue gate.
+
+## Deferred build-system questions
 
 - `lake cache` local consumption — needs a two-worktree experiment.
 - Whether restoring only `.lake/build/lib/lean` yields a consistent tree (`lake pack` sidesteps it).
