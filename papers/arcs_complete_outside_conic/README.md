@@ -15,6 +15,8 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
 - an exact **prescribed-hole defect identity** (splits the classical first/second secant-index
   equations over an exceptional set, with an exact — not estimated — remainder);
 - coverage / uncovered-locus bounds, an equality criterion, and a quantitative stability bound;
+- an exact complete-affine-arc specialization: deleting a line is the line-hole case, with
+  `I_L(A)=choose(|A|,2)`, a corrected capacity bound, and the full equality pattern;
 - the explicit lower bound **ρ_𝒞(q) ≥ √(2q) + 3/2 − 8/√(2q)**;
 - arbitrary-hole capacity and projective-averaging transfer theorems, specializing to
   ρ_𝒞(q) ≤ t₂(2,q) when t₂(2,q) ≤ q (and the Kim–Vu corollary);
@@ -24,7 +26,8 @@ cover every point outside A ∪ 𝒞; ρ_𝒞(q) is the minimum size. Contributi
   evaluation-avoidance dichotomy for arbitrary feature maps (hence every Veronese degree);
 - a coding restatement in which plane arcs are codimension-three MDS parity-check systems,
   secant index is the exact weight-two leader count, and the prescribed-hole defect is an exact
-  leader-collision identity;
+  leader-collision identity; equivalently, relative completeness confines all projective
+  distance-three syndrome directions to the prescribed algebraic locus;
 - verified small values: ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6 and ρ_𝒞(16) = 9;
 - for the `q=11` witness, a non-GRS `[6,3,4]₁₁` MDS code of covering radius three with
   exact conic deep-hole locus, coset distribution, chord decomposition, and icosahedral extension

@@ -4,9 +4,37 @@
 
 This audit compares the revised manuscript against the paper-facing Lean
 declarations after the expository rework that foregrounded the defect identity,
-isolated the polynomial estimate in Theorem 4.2, qualified the liminf through
+isolated the polynomial estimate as Lemma 4.2 in the proof architecture of
+Theorem 4.3, qualified the liminf through
 prime powers, and added the conclusion. No mathematical theorem statement was
 intended to change.
+
+## Affine-significance extension
+
+The later significance revision adds Corollary 3.5, identifying deletion of a
+line with complete affine arcs and specializing the defect bound and equality
+criterion. `RelativeConicArcs/Affine.lean` now proves:
+
+- `completeAffine_iff_completeOutside`;
+- `holeIncidence_pointsOnLine`, the identity
+  `I_L(A)=choose(card A,2)` for a line disjoint from the arc;
+- `completeAffine_bound`, the subtraction-safe integral form of the displayed
+  rational inequality; and
+- `completeAffine_bound_eq_iff`, with the same affine and ideal secant-index
+  extremes as the manuscript.
+
+The pre-existing theorem
+`SyndromeGeometry.completeOutside_iff_distanceThreeDirections_subset`
+already exactly supports the coding formulation moved into the introduction.
+The guarded single-module elaboration passed with only `propext`,
+`Classical.choice`, and `Quot.sound`. Run record:
+
+`~/.cache/othello-lean-build/run-20260716-162508-6681eb83`
+
+The top-level trace-only aggregate reached and replayed the new module but
+stopped at the unrelated, already-running Q25 lane because
+`RelativeConicArcs.Q25AllProfiles` was out of date. No Q25 source was rebuilt
+or modified in this pass.
 
 ## Result
 

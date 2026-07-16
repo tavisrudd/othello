@@ -85,11 +85,12 @@ conclusion before them.
 
 ## Disposition in the next revision
 
-Items 1, 2, 3, 6, and 7 were adopted. The coding and nucleus sections remain in
-place to preserve the paper's established theorem numbering and the publication
-allocation of the q=11 material, but their secondary role remains explicit.
-Item 8 is an external release gate and cannot be completed within a prose-only
-revision.
+Items 1, 2, 3, 6, and 7 were adopted in the first revision. A later consensus
+architecture pass moved projective averaging directly after the lower bounds,
+moved the coding dictionary beside the q=11 application, and synchronized all
+live cross-references. The nucleus section remains standalone but is now on the
+uninterrupted geometric route. Item 8 is an external release gate and cannot be
+completed within a prose-only revision.
 
 ## Post-revision follow-up
 
@@ -109,11 +110,12 @@ The remaining comments were minor:
 4. the forced break before Appendix A leaves an almost-empty page; and
 5. the supplement still needs a permanent archived identity.
 
-The forced page break was removed. The nucleus and q=11 sections remain because
-their present scope and numbering serve the established publication allocation;
-further compression is an editorial option rather than a correctness or flow
-repair. The estimate remains unnumbered to preserve theorem numbering. The
-archive identifier remains an external release gate.
+The forced page break was removed. The later architecture pass also numbered
+the polynomial estimate as Lemma 4.2 and relocated the coding material, accepting
+the resulting theorem renumbering and updating the companion references. The
+nucleus and q=11 sections remain because their scope serves the established
+publication allocation; further compression is an editorial option. The archive
+identifier remains an external release gate.
 
 Sol's updated comparison judged the two manuscripts essentially tied: Clebsch
 has the more striking theorem, conceptual surprise, and memorable story, while

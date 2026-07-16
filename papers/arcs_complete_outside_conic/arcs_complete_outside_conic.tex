@@ -15,7 +15,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
-\newtheorem*{estimate}{Elementary estimate}
+\newtheorem{estimate}[theorem]{Lemma}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{problem}[theorem]{Problem}
@@ -60,15 +60,11 @@ and, for every prime power $q$,
 \[
  \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-We also prove an upper transfer by projective averaging and give explicit
-witnesses for $q=8,9,11,16$.  Together with the lower bound, these give
-\[
- \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
- \qquad \rhoC(16)=9.
-\]
-The last equality follows from a certificate-checked exhaustive covering
-list over $\F_{16}$: no nonzero quadratic contains an eight-arc's
-ordinary-uncovered locus while avoiding the arc.
+We also prove an upper transfer by projective averaging.  Explicit witnesses
+meet the lower bound for $q=8,9,11$.  Over $\F_{16}$, a
+certificate-checked exhaustive covering list shows that no nonzero quadratic
+contains an eight-arc's ordinary-uncovered locus while avoiding the arc;
+hence $\rhoC(16)=9$.
 \end{abstract}
 
 \section{Introduction}
@@ -93,12 +89,14 @@ lies on a secant of $A$.  Define
 \[
  \rhoC(q)=\min\{|A|:A\text{ is a $\cC$-complete arc}\}.
 \]
-For an arbitrary arc disjoint from $\cC$, its uncovered locus is
+More generally, if $\cH$ is any set disjoint from an arc $A$, write
 \[
- \cU_{\cC}(A)=
+ \cU_{\cH}(A)=
  \PG(2,q)\setminus
- \left(A\cup\cC\cup\bigcup_{\{a,b\}\in\binom A2}ab\right).
+ \left(A\cup\cH\cup\bigcup_{\{a,b\}\in\binom A2}ab\right).
 \]
+We abbreviate $U(A)=\cU_{\varnothing}(A)$ for the ordinary-uncovered locus
+and retain $\cU_{\cC}(A)$ for the conic-relative locus.
 Thus $A$ is $\cC$-complete exactly when $\cU_{\cC}(A)=\varnothing$.
 \end{definition}
 
@@ -119,17 +117,24 @@ one-dimensional set that must be covered, rather than an exceptional set
 that may remain uncovered.  Here the selected arc is required to avoid the
 conic.
 
+The arbitrary-hole framework also contains an established line-hole
+problem.  If the prescribed set is a line $L_\infty$ and the arc avoids that
+line, completeness outside $L_\infty$ is exactly completeness as an arc in
+the affine plane $\PG(2,q)\setminus L_\infty$.  Closely related hyperfocused
+arcs were motivated by geometric secret sharing~\cite{GiuliettiMontanucci2006},
+and some constructions are complete in precisely this off-line sense
+\cite{GiuliettiMontanucci2006,KorchmarosSzonyi2008}.  Corollary~\ref{cor:affine}
+below gives the resulting affine defect inequality and exact equality
+criterion.  The conic problem is therefore a curved exceptional-locus
+specialization, rather than the sole reason for the prescribed-hole
+formulation.
+
 There is also classical work on \emph{complete exterior sets}: sets of
 $(q+1)/2$ exterior points whose pairwise joins miss the
 conic~\cite[p.~143]{BlokhuisSeressWilbrink1992}.  This condition constrains
 the joins of the selected points, whereas Definition~\ref{def:relative}
 requires those joins to cover the complementary off-conic locus.  The two
-conditions therefore point in opposite directions.  If
-\[
- U(A)=\PG(2,q)\setminus
- \left(A\cup\bigcup_{\{a,b\}\in\binom A2}ab\right)
-\]
-is the ordinary-uncovered locus, then
+conditions therefore point in opposite directions:
 \[
  \begin{aligned}
  \text{complete exteriority}&\quad\Longrightarrow\quad
@@ -141,7 +146,17 @@ is the ordinary-uncovered locus, then
  \end{aligned}
 \]
 Strict containment at $q=7$ and the exceptional equality at $q=11$ return in
-Section~\ref{sec:examples}.
+Section~\ref{sec:clebsch-witness}.
+
+There is also a standard coding formulation.  For a candidate of size
+$k\ge4$, the arc--MDS dictionary identifies its columns with a projective
+$[k,k-3,4]_q$ parity-check system.  Under this dictionary,
+$\cC$-completeness says exactly that every projective syndrome direction
+whose cosets have distance three is confined to the prescribed conic; see
+Proposition~\ref{prop:syndrome-dictionary}.  Thus $\rhoC(q)$ is also a
+minimum-length problem for projective codimension-three MDS systems with a
+prescribed algebraic locus allowed to contain their distance-three syndrome
+directions.
 
 The point index with respect to an arc, and the first two double-counting
 equations for its distribution, are classical; compare
@@ -158,23 +173,26 @@ interpretation all follow.  Its main consequences and applications are:
 
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
 \item an exact prescribed-hole defect identity, with equality and stability;
-\item conic lower bounds, including the additive asymptotic term $3/2$, and
-      a projective-averaging upper-bound transfer; and
+\item conic lower bounds, including the additive asymptotic term $3/2$;
+\item a projective-averaging upper-bound transfer; and
 \item a certificate-checked quadratic obstruction giving $\rhoC(16)=9$.
 \end{enumerate}
 
-Sections~\ref{sec:classical}--\ref{sec:conic} establish the defect identity
-and conic lower bounds.  Sections~\ref{sec:transfer}, \ref{sec:nucleus},
-and~\ref{sec:examples} provide the upper transfer, structural constraints,
-and the exact value at $q=16$.  Section~\ref{sec:coding} and the final
-$q=11$ subsection are secondary coding applications and may be skipped
-without affecting the geometric argument.
+Sections~\ref{sec:classical}--\ref{sec:examples} form the geometric route:
+exact accounting, lower and upper bounds, the characteristic-two refinement,
+and the finite obstruction.  Section~\ref{sec:coding} then gives a secondary
+coding reading and the $q=11$ application; it may be skipped without affecting
+the geometric argument.
 
-The classical inputs are the secant-index equations, the Lunelli--Sce
-$\sqrt{2q}$ scale, the arc--MDS correspondence, and the known $q=11$
-Clebsch geometry.  The contributions here are the prescribed-hole remainder
-and its consequences, the uncovered-locus evaluation obstruction, and the
-certified relative-conic conclusions stated above.
+The secant-index equations, the Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS
+correspondence, and the Clebsch geometry at $q=11$ are classical inputs.  We
+claim neither those ingredients nor the known ordinary eight-arc class count.
+The contributions are the prescribed-hole remainder with its equality and
+stability consequences, its explicit conic specialization, the uncovered-locus
+evaluation obstruction, and the certified relative-conic conclusions.  The
+$q=11$ deep-hole equality is an apparently unrecorded synthesis of classical
+geometry with the relative-completeness and coding dictionaries, not a claim
+of priority for the Clebsch configuration itself.
 
 \section{The classical secant equations}
 \label{sec:classical}
@@ -236,15 +254,18 @@ The next theorem is stated for an arbitrary exceptional point set.  The
 conic enters only in later specializations.
 
 Let $\cH\subseteq\Pi\setminus A$ be any set of points allowed to remain
-uncovered, and define
-\begin{align*}
- V_{\cH}(A)&=\Pi\setminus(A\cup\cH),\\
- \cX_{\cH}(A)&=\{x\in V_{\cH}(A):r(x)>0\},\\
- \cU_{\cH}(A)&=V_{\cH}(A)\setminus\cX_{\cH}(A),\\
- \IH(A)&=\sum_{y\in\cH}r(y).
-\end{align*}
-Thus $\cX_{\cH}(A)$ is the covered required locus, and $\cU_{\cH}(A)$ is
-the uncovered required locus.
+uncovered.  The notation used in the identity is summarized by
+\[
+\begin{array}{c|l}
+V_{\cH}(A)=\Pi\setminus(A\cup\cH)&\text{required locus}\cr
+\cX_{\cH}(A)=\{x\in V_{\cH}(A):r(x)>0\}&\text{covered required points}\cr
+\cU_{\cH}(A)=V_{\cH}(A)\setminus\cX_{\cH}(A)&\text{uncovered required points}\cr
+\IH(A)=\sum_{y\in\cH}r(y)&\text{secant incidence spent on the holes.}
+\end{array}
+\]
+The third line agrees with the uncovered-locus notation introduced in
+Definition~\ref{def:relative}; in particular, $U=\cU_{\varnothing}$ and the
+conic-relative locus is $\cU_{\cC}$.
 
 Splitting Proposition~\ref{prop:moments} over $V_{\cH}(A)$ and $\cH$ gives
 \begin{align}
@@ -264,6 +285,9 @@ $\cH\subseteq\Pi\setminus A$, and put $m=\lfloor k/2\rfloor$.  Define
  N(q-1)-\frac{6}{m}\binom{k}{4}
  -\frac{\IH(A)}{m}-|\cX_{\cH}(A)|.
 \]
+It is the exact coverage capacity left after the universal second-moment and
+hole-incidence losses; the identity below resolves that capacity into local
+nonextremal-index contributions.
 Then
 \begin{equation}
 \boxed{
@@ -292,12 +316,20 @@ By~\eqref{eq:split-second},
  2\sum_{x\in\cX_{\cH}(A)}\binom{r(x)}2
  +2\sum_{y\in\cH}\binom{r(y)}2.
 \]
-Substitution and termwise simplification yield
+Substitution first separates the required-point and hole terms:
+\begin{align*}
+m\Delta_{\cH}(A)
+&=\sum_{x\in\cX_{\cH}(A)}
+  \left(m(r(x)-1)-2\binom{r(x)}2\right)\\
+&\qquad+\sum_{y\in\cH}
+  \left((m-1)r(y)-2\binom{r(y)}2\right).
+\end{align*}
+The pointwise identities
 \begin{align*}
  m(r-1)-2\binom r2&=(r-1)(m-r),\\
  (m-1)r-2\binom r2&=r(m-r),
 \end{align*}
-which proves~\eqref{eq:defect}.  Every term is nonnegative by
+now give~\eqref{eq:defect}.  Every term is nonnegative by
 Lemma~\ref{lem:max-index}.
 \end{proof}
 
@@ -379,6 +411,34 @@ have the maximum possible multiplicity $m$, while almost every hole point
 met by a secant also has multiplicity $m$.  This is the precise stability
 content behind the equality heuristic.
 
+The line-hole case now makes the connection with complete affine arcs
+explicit.
+
+\begin{corollary}[Complete affine arcs]
+\label{cor:affine}
+Let $L_\infty$ be a line in a projective plane of order $q$, and let $A$ be
+a $k$-arc disjoint from $L_\infty$.  Then $A$ is complete as an arc in the
+affine plane $\Pi\setminus L_\infty$ if and only if it is complete outside
+$L_\infty$.  In that case
+\begin{equation}
+ q^2-k\le
+ \binom{k}{2}(q-1)-\frac6m\binom{k}{4}
+ -\frac1m\binom{k}{2}.
+\label{eq:affine-complete}
+\end{equation}
+Equality holds if and only if every affine point outside $A$ has secant index
+in $\{1,m\}$ and every point of $L_\infty$ has secant index in $\{0,m\}$.
+\end{corollary}
+
+\begin{proof}
+Maximality in the affine plane is equivalent to every affine point outside
+$A$ lying on a secant of $A$, which is exactly completeness outside
+$L_\infty$.  Every secant meets $L_\infty$ once, so
+$I_{L_\infty}(A)=\binom{k}{2}$.  Now apply
+Corollaries~\ref{cor:arbitrary-holes} and~\ref{cor:coverage}; the latter also
+gives the equality criterion.
+\end{proof}
+
 \section{Specialization to a conic}
 \label{sec:conic}
 
@@ -409,6 +469,13 @@ If $A$ is $\cC$-complete, then
 \label{eq:conic-complete}
 \end{equation}
 \end{corollary}
+
+\begin{proof}
+Apply Corollary~\ref{cor:coverage} with $\cH=\cC$, using
+$|V_{\cC}(A)|=q^2-k$ and $\IH(A)=\IC(A)$.  If $A$ is
+$\cC$-complete, then $\cU_{\cC}(A)=\varnothing$, and the first inequality
+rearranges to~\eqref{eq:conic-complete}.
+\end{proof}
 
 The first correction in~\eqref{eq:conic-complete} accounts for unavoidable
 concurrence among secants; the last accounts for secant incidence spent on
@@ -452,27 +519,11 @@ L_2(q)&4&6&6&6&7&8&8&8
 Thus the second-moment correction alone proves, for example, that a
 $\cC$-complete arc in $\PG(2,16)$ has at least eight points.
 
-\begin{theorem}[Explicit additive lower bound]
-\label{thm:asymptotic}
-For every prime power $q$,
-\begin{equation}
- \boxed{\displaystyle
- \rhoC(q)\ge\sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.}
-\label{eq:asymptotic-lower}
-\end{equation}
-Consequently,
-as $q$ tends to infinity through prime powers,
-\begin{equation}
- \liminf_{q\to\infty}
- \bigl(\rhoC(q)-\sqrt{2q}\bigr)\ge\frac32.
-\label{eq:liminf}
-\end{equation}
-\end{theorem}
+The routine algebra behind the additive bound is isolated in the next lemma
+on the full interval needed to avoid any parity split.
 
-The routine algebra in the proof is separated in the following estimate.
-It is stated on the full interval needed to avoid any parity split.
-
-\begin{estimate}
+\begin{estimate}[Polynomial estimate]
+\label{lem:polynomial-estimate}
 For $s\ge2$ and $0\le a\le2$, put
 \[
  P_s(a)=
@@ -484,7 +535,7 @@ For $s\ge2$ and $0\le a\le2$, put
 If $P_s(a)\ge0$, then $a\ge3/2-8/s$.
 \end{estimate}
 
-\begin{proof}[Proof of the elementary estimate]
+\begin{proof}
 On $0\le a\le2$, the coefficients of $s^2$, $s$, and $1$ in $P_s(a)$
 are at most $5/2$, $1$, and $3$, respectively.  Since $s\ge2$, their total
 contribution is at most
@@ -495,7 +546,23 @@ Thus $P_s(a)\ge0$ implies
 $0\le(2a-3)s^3/4+4s^2$, and division by $s^2$ gives the claim.
 \end{proof}
 
-\begin{proof}[Proof of Theorem~\ref{thm:asymptotic}]
+\begin{theorem}[Explicit additive lower bound]
+\label{thm:asymptotic}
+For every prime power $q$,
+\begin{equation}
+ \boxed{\displaystyle
+ \rhoC(q)\ge\sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.}
+\label{eq:asymptotic-lower}
+\end{equation}
+Consequently, as $q$ tends to infinity through prime powers,
+\begin{equation}
+ \liminf_{q\to\infty}
+ \bigl(\rhoC(q)-\sqrt{2q}\bigr)\ge\frac32.
+\label{eq:liminf}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
 Let $k$ be the size of a $\cC$-complete arc and put $s=\sqrt{2q}$.
 The elementary first-moment inequality
 $q^2-k\le\binom{k}{2}(q-1)$ implies $k\ge s$ for $q\ge2$:
@@ -518,7 +585,8 @@ gives the necessary inequality
  \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr).
 \]
 After substituting $q=s^2/2$ and $k=s+a$, the right side minus the left
-side is $P_s(a)$.  It is nonnegative, so the elementary estimate gives
+side is $P_s(a)$.  It is nonnegative, so
+Lemma~\ref{lem:polynomial-estimate} gives
 $a\ge3/2-8/s$, which is~\eqref{eq:asymptotic-lower}.  Letting $q$ tend to
 infinity through prime powers gives~\eqref{eq:liminf}.
 \end{proof}
@@ -537,84 +605,6 @@ balanced finite cases, but cannot improve the additive constant $3/2$ in
 Theorem~\ref{thm:asymptotic}.  Any stronger asymptotic result needs an
 additional mechanism, not merely a spectral estimate for $\IC(A)$.
 \end{remark}
-
-\section{Coding interpretation}
-\label{sec:coding}
-
-This section is independent of the geometric proof of $\rhoC(16)=9$ and may
-be skipped on a first reading.  The same remainder has a coding
-interpretation.  Choose nonzero column
-representatives of a $k$-arc $A\subset\PG(2,q)$ and form a $3\times k$
-matrix $H_A$.  For $k\ge4$, the code
-\[
- C_A=\{c\in\F_q^k:H_Ac^{\mathsf T}=0\}
-\]
-is a $[k,k-3,4]_q$ maximum-distance-separable (MDS) code: every three
-columns are independent, the columns span $\F_q^3$, and any four columns
-support a dependence.  Conversely, a projective parity-check system for a
-code with these parameters is a $k$-arc.  This correspondence and its
-coset-weight consequences are classical; see
-Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.
-
-We call such a code \emph{projectively GRS} when, after permuting and scaling
-columns and applying a projective coordinate change, its projective
-parity-check columns lie on a normal rational curve.  In $\PG(2,q)$ this is
-a nonsingular conic, by the standard normal-rational-curve/GRS
-correspondence~\cite{StormeThas1991}.  The next proposition translates an
-uncovered point into a distance-three syndrome direction and a secant index
-into a minimum-leader count; this dictionary will be used for the $q=11$
-witness in Section~\ref{sec:examples}.
-
-\begin{proposition}[Syndrome form of relative completeness]
-\label{prop:syndrome-dictionary}
-Let $s\ne0$ have projective direction $x=[s]\in\PG(2,q)$.  Then:
-\begin{enumerate}[label=(\roman*),leftmargin=2em]
- \item the minimum weight of a word $c$ with $H_Ac^{\mathsf T}=s$ is one,
-       two, or three according as $x\in A$, $x\notin A$ lies on a secant of
-       $A$, or $x$ is ordinarily uncovered;
- \item if the minimum weight is two, the number of weight-two leaders is
-       exactly $r_A(x)$;
- \item if the minimum weight is three, the number of weight-three leaders is
-       exactly $\binom{k}{3}$; and
- \item adjoining $x$ as one more projective parity-check column preserves
-       the MDS property exactly when $x$ is ordinarily uncovered.
-\end{enumerate}
-Consequently, $A$ is complete outside a prescribed set $\cH$ exactly when
-all its projective distance-three syndrome directions lie in $\cH$ (and
-$A\cap\cH=\varnothing$).  These directions are deep-hole directions only
-when covering radius three has separately been established.
-\end{proposition}
-
-\begin{proof}
-A weight-one representation is a scalar multiple of a selected column.  A
-weight-two representation uses a unique unordered column pair whose
-projective span is a secant through $x$; independence of the pair makes its
-two coefficients unique.
-
-If neither case occurs, any three columns form a basis and represent $s$.
-For each three-subset the representation is unique, and none of its
-coefficients can vanish, so there are exactly $\binom{k}{3}$ weight-three
-leaders.  The extension statement is the same three-column independence
-test.  The leader count also follows as the $d=4$ case of the general
-farthest-coset formula in
-Davydov--Marcugini--Pambianco~\cite[Theorem~7.7]{DavydovEtAl2021}; the
-deep-hole/MDS-extension formulation is standard in the Reed--Solomon
-setting~\cite{Kaipa2017}.
-\end{proof}
-
-Thus $r_A(x)$ is the exact number of minimum weight-two leaders of every
-affine syndrome on direction $x$.  All $q-1$ nonzero scalar multiples of a
-projective syndrome direction have the same distance and leader count:
-scalar multiplication bijects their coefficient words without changing
-Hamming support.  This accounts for every projective-to-affine factor of
-$q-1$ below.
-
-The first moment counts leaders, the second counts collisions between
-distinct leader supports, and Theorem~\ref{thm:defect} is an exact
-leader-collision remainder after prescribed directions are removed.  Thus
-Corollary~\ref{cor:arbitrary-holes} is also a length obstruction for
-projective codimension-three MDS codes whose distance-three syndrome
-directions are confined to the prescribed projective set.
 
 \section{An upper-bound transfer from complete arcs}
 \label{sec:transfer}
@@ -773,7 +763,11 @@ inequality.
 
 The verified values at $q=8,9,11$ use the lower bound $L_2(q)$ and explicit
 coordinates.  At $q=16$, the same ingredients give $8\le\rhoC(16)\le9$;
-a checked projective classification excludes eight.
+a checked projective classification excludes eight.  The proof has three
+steps: the defect bound supplies the lower bound eight; a hypothetical
+$\cC$-complete eight-arc would have its ordinary-uncovered locus on a
+quadratic avoiding the arc; and the certificate rules out every such
+quadratic, while the displayed nine-point witness supplies the upper bound.
 
 \subsection{Evaluation obstruction}
 
@@ -855,6 +849,15 @@ classes.  The theorem below adds the datum needed here: the ordinary
 uncovered locus either imposes six independent quadratic conditions or
 forces every containing quadratic to meet the arc.
 
+The argument needs only an exhaustive \emph{covering list}, not a
+classification into pairwise inequivalent representatives.  Lean
+kernel-checks every local transition, every leaf obstruction, frame
+normalization, and the global relative-conic consequence.  The C++ program
+generates certificate data but is not trusted for exhaustiveness or
+rejection; the known class count is used only as an external consistency
+check.  Appendix~\ref{app:verification} gives the exact theorem and
+regeneration boundary.
+
 We first state the completeness contract used by the finite certificate.
 Index the $273$ projective points by their unique normalized representatives
 $[0:0:1]$, $[0:1:z]$, and $[1:y:z]$.  The standard four-frame is
@@ -865,9 +868,9 @@ $[0:0:1]$, $[0:1:z]$, and $[1:y:z]$.  The standard four-frame is
 \begin{lemma}[Augmentation certificate contract]
 \label{lem:q16-contract}
 For $4\le i\le8$, let $\mathcal L_i$ be a finite list of $i$-arcs with
-$\mathcal L_4=\{F\}$.  Suppose that for every $P\in\mathcal L_i$, every
-$x\notin P$ for which $P\cup\{x\}$ is an arc, and every $4\le i<8$, the
-certificate supplies a child $P'\in\mathcal L_{i+1}$ and an invertible
+$\mathcal L_4=\{F\}$.  Suppose that for every $4\le i<8$, every
+$P\in\mathcal L_i$, and every $x\notin P$ such that $P\cup\{x\}$ is an
+arc, the certificate supplies a child $P'\in\mathcal L_{i+1}$ and an invertible
 linear map whose induced projectivity carries $P\cup\{x\}$ onto $P'$.
 Then every eight-arc in $\PG(2,16)$ is projectively equivalent to a member
 of $\mathcal L_8$.
@@ -952,10 +955,90 @@ $2633$-entry covering list is a consistency check, not part of the trusted
 exhaustiveness argument.
 \end{remark}
 
-\subsection{A secondary coding application over
-\texorpdfstring{$\F_{11}$}{F11}}
+\section{Coding interpretation and the
+\texorpdfstring{$q=11$}{q=11} application}
+\label{sec:coding}
 
-This subsection is independent of the proof of $\rhoC(16)=9$.
+This section is independent of the geometric proof of $\rhoC(16)=9$.  It
+gives a second reading of the defect identity and then applies that dictionary
+to the $q=11$ witness.
+
+Choose nonzero column representatives of a $k$-arc
+$A\subset\PG(2,q)$ and form a $3\times k$ matrix $H_A$.  For $k\ge4$, the
+code
+\[
+ C_A=\{c\in\F_q^k:H_Ac^{\mathsf T}=0\}
+\]
+is a $[k,k-3,4]_q$ maximum-distance-separable (MDS) code: every three
+columns are independent, the columns span $\F_q^3$, and any four columns
+support a dependence.  Conversely, a projective parity-check system for a
+code with these parameters is a $k$-arc.  This correspondence and its
+coset-weight consequences are classical; see
+Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021}.
+
+We call such a code \emph{projectively GRS} when, after permuting and scaling
+columns and applying a projective coordinate change, its projective
+parity-check columns lie on a normal rational curve.  In $\PG(2,q)$ this is
+a nonsingular conic, by the standard normal-rational-curve/GRS
+correspondence~\cite{StormeThas1991}.  The next proposition translates an
+uncovered point into a distance-three syndrome direction and a secant index
+into a minimum-leader count.
+
+\begin{proposition}[Syndrome form of relative completeness]
+\label{prop:syndrome-dictionary}
+Let $s\ne0$ have projective direction $x=[s]\in\PG(2,q)$.  Then:
+\begin{enumerate}[label=(\roman*),leftmargin=2em]
+ \item the minimum weight of a word $c$ with $H_Ac^{\mathsf T}=s$ is one,
+       two, or three according as $x\in A$, $x\notin A$ lies on a secant of
+       $A$, or $x$ is ordinarily uncovered;
+ \item if the minimum weight is two, the number of weight-two leaders is
+       exactly $r_A(x)$;
+ \item if the minimum weight is three, the number of weight-three leaders is
+       exactly $\binom{k}{3}$; and
+ \item adjoining $x$ as one more projective parity-check column preserves
+       the MDS property exactly when $x$ is ordinarily uncovered.
+\end{enumerate}
+Consequently, $A$ is complete outside a prescribed set $\cH$ exactly when
+all its projective distance-three syndrome directions lie in $\cH$ (and
+$A\cap\cH=\varnothing$).  These directions are deep-hole directions only
+when covering radius three has separately been established.
+\end{proposition}
+
+\begin{proof}
+A weight-one representation is a scalar multiple of a selected column.  A
+weight-two representation uses a unique unordered column pair whose
+projective span is a secant through $x$; independence of the pair makes its
+two coefficients unique.
+
+If neither case occurs, any three columns form a basis and represent $s$.
+For each three-subset the representation is unique, and none of its
+coefficients can vanish, so there are exactly $\binom{k}{3}$ weight-three
+leaders.  The extension statement is the same three-column independence
+test.  The leader count also follows as the $d=4$ case of the general
+farthest-coset formula in
+Davydov--Marcugini--Pambianco~\cite[Theorem~7.7]{DavydovEtAl2021}; the
+deep-hole/MDS-extension formulation is standard in the Reed--Solomon
+setting~\cite{Kaipa2017}.
+\end{proof}
+
+Thus $r_A(x)$ is the exact number of minimum weight-two leaders of every
+affine syndrome on direction $x$.  All $q-1$ nonzero scalar multiples of a
+projective syndrome direction have the same distance and leader count:
+scalar multiplication bijects their coefficient words without changing
+Hamming support.  This accounts for every projective-to-affine factor of
+$q-1$ below.
+
+The first moment counts leaders, the second counts collisions between
+distinct leader supports, and Theorem~\ref{thm:defect} is an exact
+leader-collision remainder after prescribed directions are removed.  Thus
+Corollary~\ref{cor:arbitrary-holes} is also a length obstruction for
+projective codimension-three MDS codes whose distance-three syndrome
+directions are confined to the prescribed projective set.
+
+\subsection{The Clebsch witness over
+\texorpdfstring{$\F_{11}$}{F11}}
+\label{sec:clebsch-witness}
+
 The six-point witness over $\F_{11}$ is the classical Clebsch hexagon with
 icosahedral $A_5$ symmetry; see Edge, Dye, and Storme--Van Maldeghem for the
 configuration and its orbit geometry
@@ -988,6 +1071,11 @@ q&|A|&\binom{|A|}{2}&q^2-|A|&\IC(A)&\max_{x\notin A}r(x)\\ \hline
 \end{array}
 \]
 
+In every row the last entry equals $m=\lfloor|A|/2\rfloor$, one of the two
+extreme indices singled out by Corollary~\ref{cor:stability}.  The table does
+not assert small defect, but it records that the maximal-multiplicity part of
+the equality pattern is present in each exact witness.
+
 The row at $q=11$ has a stronger geometric interpretation.  Since
 $\IC(A)=0$, none of the 15 secants meets $\cC$: every secant of the witness
 is exterior to the conic.  If $N_i$ denotes the number of required points
@@ -1000,7 +1088,7 @@ $i=1,2,3$, while the two moment equations give
 \]
 Consequently $(N_1,N_2,N_3)=(90,15,10)$.
 
-Under the dictionary of Section~\ref{sec:coding}, the equality
+Under the dictionary above, the equality
 $U(A)=\cC(\F_{11})$ says that the associated code has precisely the conic
 as its projective distance-three syndrome locus.  The next proposition
 records the resulting code and coset data.
@@ -1092,8 +1180,10 @@ The exact defect identity is the organizing result of the paper.  It
 separates the universal overlap forced by the second secant moment from the
 incidence spent on a prescribed exceptional set, and its nonnegative local
 terms retain the equality and stability information lost by a scalar
-counting bound.  The coding interpretation is another reading of the same
-remainder, rather than a separate source of estimates.
+counting bound.  Its line-hole specialization recovers complete affine arcs,
+while the conic case supplies the first curved exceptional locus studied
+here.  The coding interpretation is another reading of the same remainder,
+rather than a separate source of estimates.
 
 Two further mechanisms complement that identity.  Projective averaging
 transfers ordinary complete arcs to prescribed-hole upper bounds, while the
@@ -1270,6 +1360,14 @@ for homogeneous degree-$d$ forms.
 \label{app:witnesses}
 
 All coordinates are homogeneous and use the standard conic $XZ=Y^2$.
+The rules-only Lean checkers in
+\texttt{RelativeConicArcs/ExampleChecks/}---namely
+\texttt{Q8.lean}, \texttt{Q9.lean}, \texttt{Q11.lean}, and
+\texttt{Q16.lean}---verify the
+displayed coordinates and feed the exact-value theorems in the aggregate
+\texttt{Results.lean}.  The independent Python entry point
+\nolinkurl{verify_relative_conic_arcs.py} regenerates the same witness checks
+but is not part of the Lean trust base.
 
 For $q=8$, write
 $\F_8=\F_2[\alpha]/(\alpha^3+\alpha+1)$ and encode
@@ -1380,6 +1478,12 @@ D.~G. Glynn,
 \newblock \emph{Australasian Journal of Combinatorics} \textbf{9} (1994),
 3--19.
 
+\bibitem{GiuliettiMontanucci2006}
+M.~Giulietti and E.~Montanucci,
+\newblock On hyperfocused arcs in $\PG(2,q)$,
+\newblock \emph{Discrete Mathematics} \textbf{306}(24) (2006), 3307--3314.
+\newblock doi:10.1016/j.disc.2006.06.009.
+
 \bibitem{Hirschfeld1998}
 J.~W.~P.~Hirschfeld,
 \newblock \emph{Projective Geometries over Finite Fields}, second edition,
@@ -1390,6 +1494,13 @@ J.~H.~Kim and V.~H.~Vu,
 \newblock Small complete arcs in projective planes,
 \newblock \emph{Combinatorica} \textbf{23} (2003), 311--363.
 \newblock doi:10.1007/s00493-003-0024-1.
+
+\bibitem{KorchmarosSzonyi2008}
+G.~Korchm\'aros and T.~Sz\H{o}nyi,
+\newblock Affinely regular polygons in an affine plane,
+\newblock \emph{Contributions to Discrete Mathematics} \textbf{3}(1)
+(2008), 20--38.
+\newblock doi:10.55016/ojs/cdm.v3i1.62767.
 
 \bibitem{Kaipa2017}
 K.~Kaipa,

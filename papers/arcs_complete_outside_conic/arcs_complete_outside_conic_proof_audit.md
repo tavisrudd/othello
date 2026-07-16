@@ -12,7 +12,9 @@
 3. Coverage, uncovered-locus, equality, and quantitative stability statements are immediate corollaries of the exact identity.
 4. For an arbitrary prescribed hole set of size \(h\), completeness gives the corrected capacity
    inequality with required-locus size \(q^2+q+1-k-h\). The conic specialization uses only
-   \(|C|=q+1\).
+   \(|C|=q+1\). For a line at infinity, every secant contributes exactly one hole incidence,
+   so `I_L(A)=choose(k,2)` and the general theorem gives the displayed complete-affine-arc bound
+   and its equality pattern.
 5. The additive lower bound is obtained from the parity-free necessary inequality
    \[
    q^2-k\le \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),
@@ -146,7 +148,8 @@ the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
 ## Lean formalization
 
 The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the four finite
-certificates. In particular, it proves the arbitrary-hole capacity theorem, the generic
+certificates. In particular, it proves the arbitrary-hole capacity theorem, the complete-affine
+line-hole equivalence, ideal-line incidence identity, corrected affine bound and equality criterion, the generic
 projective-averaging transfer, the explicit additive lower bound, and the universal
 even-characteristic incidence loss. Its generic Boolean checker verifies conic disjointness, the arc
 condition, and coverage on the (q^2+q+1) canonical projective representatives; `check_sound`

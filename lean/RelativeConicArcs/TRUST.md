@@ -13,6 +13,7 @@ spinoff.
 | cap-game localization | persistent containment/move theorems; `legalExtensions_sdiff_holes_eq_uncovered`; `win_parametrizedHoles_iff`, `isP_parametrizedHoles_iff` | proved in Lean; domain legality is separated from the exact parametrized game-value bridge |
 | moments and defect | `pointIndex_le_half_card`, `first_secant_moment`, `second_secant_moment`, defect/coverage/stability theorems in `Defect.lean` | proved in Lean |
 | arbitrary holes and conic bounds | `completeOutside_bound_general`, `NonsingularConic.finite_lower_bound`, `L1_le_L2`, `L2_le_rho` | proved in Lean; the general bound depends only on hole cardinality and incidence |
+| complete affine arcs | `CompleteAffine`, `completeAffine_iff_completeOutside`, `holeIncidence_pointsOnLine`, `completeAffine_bound`, `completeAffine_bound_eq_iff` | proved in `Affine.lean`; deleting a line is definitionally the line-hole case, every secant contributes one ideal incidence, and the corrected bound and equality pattern are the exact specialization of the general defect |
 | asymptotics | `parityFreeNecessary`, `rhoC_explicit_additive_lower_bound`, `eventually_lt_centered`, and the Big-O/liminf wrappers in `Asymptotic.lean` | proved in Lean; the paper's isolated polynomial estimate is the `hExpansion`/`hB2`/`hB1`/`hB0`/`hR` block of `explicit_additive_lower_bound`, with the same error `8 / sqrt(2q)`. `eventually_lt_centered` is unconditional along unbounded orders; the literal real-valued liminf wrapper adds coboundedness because `ℝ` cannot encode `+∞` |
 | averaging | `exists_completeOutside_of_completeArc`, `rhoC_le_t2`, `rhoC_le_of_kimVuBound` | proved in Lean for arbitrary holes under `|A||H| < |PG(2,K)|`; Kim--Vu remains an explicit theorem parameter |
 | characteristic two | hyperoval/nucleus/tangent classification, `complete_holeIncidence_pos`, and nucleus-in/out inequalities in `Nucleus.lean` | proved in Lean under `(2 : K) = 0` |
@@ -153,7 +154,8 @@ provenance only; the theorem depends on the emitted data through kernel-checked 
 
 `#print axioms` for the cap-game localization and parametrized-value bridges, the ordinary
 coverage checker, `Certificate.check_sound`,
-`rhoC_le_length_of_check`, all four `L2` theorems, all four final finite-example theorems, the
+`rhoC_le_length_of_check`, the complete-affine specialization and equality criterion, all four
+`L2` theorems, all four final finite-example theorems, the
 q=16 eight-arc nonexistence theorem, the q=9 terminal P theorem, q=11 residual and actual
 seeded P theorems, the q11 MDS/radius/deep-hole/leader/extension/chord theorems, and the public
 syndrome/coding bridges, together with the public finite-field evaluation-dichotomy, quantitative-count,

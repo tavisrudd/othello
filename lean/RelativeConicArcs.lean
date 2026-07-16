@@ -20,6 +20,7 @@ import RelativeConicArcs.Q25ProfileZero
 import RelativeConicArcs.Q25AllProfiles
 import RelativeConicArcs.Defect
 import RelativeConicArcs.Conic
+import RelativeConicArcs.Affine
 import RelativeConicArcs.Asymptotic
 import RelativeConicArcs.Averaging
 import RelativeConicArcs.Nucleus
