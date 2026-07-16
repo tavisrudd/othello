@@ -79,9 +79,14 @@ pairwise-compatible orbit quadruples before mixed-orbit collinearity checks,
 and more than 57 million even after the full normalizer bound.  Full union
 enumeration is rejected.
 
-**Refined next:** derive a symbolic mixed-orbit collinearity condition for the
-split-`Z3` parameters, or close C201 as a precise bounded-mechanism failure.
-Do not enumerate compatibility cliques.
+The symbolic mixed-orbit condition is the nine-factor determinant norm
+`F(P,Q,R)` recorded in the sizing report.  Pairwise compatibility plus
+nonvanishing of `F` on the four orbit-label triples is exactly the full arc
+condition.
+
+**Refined next:** factor or index the `F!=0` ternary relation into a bounded
+orbit filter, or close C201 as a precise bounded-mechanism failure.  Do not
+enumerate compatibility cliques.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra
