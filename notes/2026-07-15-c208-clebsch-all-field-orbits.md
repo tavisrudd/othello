@@ -1,5 +1,5 @@
 # C208 — all-field Clebsch uncovered-locus orbits
-**Lane**: `clebsch`
+**Lane**: `clebsch-next`
 **Date:** 2026-07-15
 **Status:** QUEUED
 

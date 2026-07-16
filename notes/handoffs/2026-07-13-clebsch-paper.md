@@ -44,13 +44,15 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 1. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
    stable DOI; cite the artifact from the paper.
 
-## Optional high-value follow-ons
+## Bounded paper upgrade
 
-- **C206:** conceptual proof/stability theory for the nearest-conic gap.
-- **C207:** intrinsic coding interpretation of chirality and the outside `S5` normalizer coset.
-- **C208:** all-field `A5` orbit decomposition of uncovered loci, including the `q=19` foil.
+- **C211:** identify the Clebsch chord arrangement with projectivized `H3` and the q=5 frame joins
+  with `A3`; use their intersection lattices to synthesize the complement formulas, decoding
+  ambiguity strata, and the two small-arc conic-filling cases. The scope and success gates are in
+  [`2026-07-16-clebsch-a-plus-roadmap.md`](../2026-07-16-clebsch-a-plus-roadmap.md).
 
-These are upgrades, not submission gates unless the manuscript adopts their claims.
+This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
+has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 
 ## Verification map
 

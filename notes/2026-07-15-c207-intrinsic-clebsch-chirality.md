@@ -1,5 +1,5 @@
 # C207 — intrinsic Clebsch chirality
-**Lane**: `clebsch`
+**Lane**: `clebsch-next`
 **Date:** 2026-07-15
 **Status:** QUEUED
 

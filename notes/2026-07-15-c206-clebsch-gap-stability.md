@@ -1,5 +1,5 @@
 # C206 — conceptual Clebsch gap and stability
-**Lane**: `clebsch`
+**Lane**: `clebsch-next`
 **Date:** 2026-07-15
 **Status:** QUEUED
 

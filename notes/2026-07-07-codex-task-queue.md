@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C210.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C213.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -39,9 +39,15 @@ unless they retain an explicit open tail.
 ### `clebsch`
 
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
-- **C206 `[clebsch]` [QUEUED UPGRADE]** — conceptual nearest-conic gap/stability → `notes/2026-07-15-c206-clebsch-gap-stability.md`.
-- **C207 `[clebsch]` [QUEUED UPGRADE]** — intrinsic chirality and outside-`S5` normalizer meaning → `notes/2026-07-15-c207-intrinsic-clebsch-chirality.md`.
-- **C208 `[clebsch]` [QUEUED UPGRADE]** — all-field `A5` uncovered-locus orbit decomposition → `notes/2026-07-15-c208-clebsch-all-field-orbits.md`.
+- **C211 `[clebsch]` [QUEUED PAPER UPGRADE]** — identify the secant arrangements as `A3/H3`, derive the decoder strata and complement formulas from their intersection lattices, and synthesize the two conic-filling cases → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
+
+### `clebsch-next`
+
+- **C206 `[clebsch-next]` [QUEUED]** — conceptual nearest-conic gap/stability → `notes/2026-07-15-c206-clebsch-gap-stability.md`.
+- **C207 `[clebsch-next]` [QUEUED]** — intrinsic chirality and outside-`S5` normalizer meaning → `notes/2026-07-15-c207-intrinsic-clebsch-chirality.md`.
+- **C208 `[clebsch-next]` [QUEUED]** — all-field `A5` uncovered-locus orbit decomposition → `notes/2026-07-15-c208-clebsch-all-field-orbits.md`.
+- **C212 `[clebsch-next]` [QUEUED; after C211]** — Coxeter-arrangement codes and decoder-tomography reconstruction/classification theorem → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
+- **C213 `[clebsch-next]` [QUEUED FALSIFICATION GATE]** — exact Clebsch-cubic/`E6` incidence test for `12+15`, Brianchon/Eckardt, and five-object structures → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
 
 ### `cubic`
 

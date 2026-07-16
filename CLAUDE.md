@@ -33,6 +33,7 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `build-sys` | `notes/handoffs/2026-07-14-lean-build-system.md` |
 | `cap` | `notes/handoffs/2026-07-06-projective-cap-game-handoff.md` |
 | `clebsch` | `notes/handoffs/2026-07-13-clebsch-paper.md` |
+| `clebsch-next` | `notes/handoffs/2026-07-16-clebsch-next.md` |
 | `cubic` | `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md` |
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
