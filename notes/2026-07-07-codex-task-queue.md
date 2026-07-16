@@ -62,8 +62,6 @@ unless they retain an explicit open tail.
 
 ### `relconic`
 
-- **C107 `[relconic]` [OPEN AGGREGATE TAIL]** — replace obsolete shared aggregate gate through C144.
-- **C110 `[relconic]` [OPEN AGGREGATE TAIL]** — publication closure after C144.
 - **C144 `[relconic]` [QUEUED; QUIESCENT BOX]** — per-lane validation gates and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
 - **C154 `[relconic]` [QUEUED]** — close the last load-bearing citation hole.
 - **C188 `[relconic]` [QUEUED]** — q=5 exact relative-conic value.

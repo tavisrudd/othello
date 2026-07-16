@@ -3,7 +3,7 @@
 **Lane**: `relconic` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-13
-**Status:** ACTIVE — current paper revision committed; release/aggregate tails remain, followed by the bounded C201 structural probe
+**Status:** ACTIVE — C107/C110 aggregate tails closed; archival/routing disposition is pending, with the bounded C201 structural probe next after remaining release tasks
 **Tasks:** C106–C110, C188, C195–C196, C201, C209–C210
 
 ## ⚠ The manuscript was edited from outside this lane (2026-07-14, commit `cfd8537`)
@@ -170,10 +170,10 @@ not make a new abstract `A5` isomorphism or full orbit formalization a completio
 | Task | Work | Completion gate |
 |---|---|---|
 | **C106 [REPORTED 2026-07-13]** | Run the cheap refutation suite and freeze independent small certificates for T1–T3. | Python and independent C++ replays agree; coordinate/relabel invariance and mutations pass; R6 sharpens T1 to `|A|≤q`; “perfect matching” was corrected to five-edge near-perfect matching. |
-| **C107 [REPORTED 2026-07-13; shared aggregate pending]** | Formalize T1 in `EvaluationDichotomy.lean`, including the dimension-sensitive avoidance count, then dual/Veronese closure. | Warning-free focused build, all mathematical targets, and axiom audit pass. The shared aggregate rerun remains deferred while the unrelated generated Q25 leaf sequence builds. |
+| **C107 [REPORTED 2026-07-16]** | Formalize T1 in `EvaluationDichotomy.lean`, including the dimension-sensitive avoidance count, then dual/Veronese closure. | Warning-free focused build, all mathematical targets, axiom audit, and top-level aggregate gate pass. |
 | **C108 [REPORTED 2026-07-13]** | Formalize the thin T2 semantic bridge and coding restatement of the prescribed-hole defect theorem in `SyndromeGeometry.lean` and `CodingBridge.lean`. | Arc, syndrome-distance and exact affine leader counts, confined distance-three locus, leader moments/defect, general conflict-hypergraph extensions, and the arc-confined graph/maximal-completion specialization are kernel-checked without importing this spinoff into existing consumers. |
 | **C109 [REPORTED 2026-07-13]** | Formalize T3 in downstream `Q11Coding.lean`. | Non-GRS `[6,3,4]₁₁` code, exact covering radius/deep-hole locus, syndrome/leader distributions, tangent-antipode matchings, and complete extension spectrum build under strict trust; no abstract `A5` library is required. |
-| **C110 [IN PROGRESS; SHARED AGGREGATE ONLY]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; two hostile-review rounds, the post-audit actual-leader and affine-distance/conic bridges, final source checklist, focused rebuild, axiom audit, and PDF rebuild pass. Only the shared aggregate rerun remains. |
+| **C110 [REPORTED 2026-07-16]** | Complete the rigorous novelty/citation audit, adversarial proof review, consumer review, and publication synchronization. | Claim ledger uses safe wording and primary citations; independent Python/C++ replay and mutations pass; paper/PDF, proof audit, Lean TRUST, `papers-index.md`, and projective-cap consumer note are synchronized; two hostile-review rounds, the post-audit actual-leader and affine-distance/conic bridges, final source checklist, focused rebuild, axiom audit, PDF rebuild, and top-level aggregate gate pass. |
 | **C188 [QUEUED 2026-07-15]** | Import C187's `q=5` four-frame witness and derive `rho_C(5)=L_2(5)=4`; cite the broader small-`k` classification without migrating it. | Relative-conic semantic theorem and `Results` entry pass strict-kernel checks; manuscript, result table, proof audit, TRUST manifest, and paper index are synchronized. |
 | **C195 [REPORTED 2026-07-15]** | Add the implication diagram separating complete exteriority from completeness outside the prescribed conic. | Manuscript, PDF, README, proof audit, and paper index state the reverse containments without changing theorem ownership. |
 | **C196 [REPORTED 2026-07-15]** | Instantiate strictness on BSW's q=7 exterior four-arc. | The universal identity `|U(A)|=(q-2)(q-3)` gives `20>8`, so the complete exterior set is not complete outside the conic. |
@@ -373,5 +373,5 @@ specialist-quality citation chase.
 
 ## Next step
 
-Rerun the top-level `RelativeConicArcs` aggregate once the concurrent Q25 leaf builder has
-completed. Then archive this live handoff and close C107/C110.
+Obtain the required user disposition for archiving this handoff and updating the lane route. If the
+lane remains selected, resume its remaining release tasks before the bounded C201 structural probe.

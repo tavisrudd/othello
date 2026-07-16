@@ -717,3 +717,12 @@ specialist-quality citation chase.
 
 Rerun the top-level `RelativeConicArcs` aggregate once the concurrent Q25 leaf builder has
 completed. Then archive this live handoff and close C107/C110.
+
+## 2026-07-16 aggregate-tail closure
+
+The guarded queue run
+`lean/scripts/lean-build-queue.py run RelativeConicArcs --profile single --threads 1 --cores 20-23`
+passed the target in 21.04 seconds at 3,706,712 KiB maximum RSS, then passed the trace-only aggregate
+gate. The disk-backed run record is
+`/home/tavis/.cache/othello-lean-build/run-20260716-164912-721cc9b2`. This closes the remaining C107
+and C110 aggregate tails; both rows were removed from the live queue.

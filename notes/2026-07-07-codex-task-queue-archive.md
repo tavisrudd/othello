@@ -4605,3 +4605,10 @@ untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 20
   four-arc gives the strict count `20>8`; the two originally separate report paths above were
   consolidated into
   [`2026-07-15-c195-c196-exterior-relative-framing.md`](2026-07-15-c195-c196-exterior-relative-framing.md).
+
+## 2026-07-16 relative-conic aggregate closeout
+
+- **C107 and C110 `[relconic]` [REPORTED]** — the guarded top-level `RelativeConicArcs`
+  aggregate and its trace-only aggregate gate passed after the shared Q25 builder cleared. This
+  closes the only remaining validation tail on the evaluation dichotomy and the adversarial,
+  publication, and trust audit package.
