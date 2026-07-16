@@ -177,6 +177,90 @@ def HasUnitFunctionalCost
     (f : Module.Dual 𝔽 V) : Prop :=
   ∃ w : κ → 𝔽, blockFunctional I e w = f ∧ hammingNorm w = 1
 
+/-- The functional induced by a unit word at inner coordinate `k`. -/
+def innerCoordinateFunctional
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (k : κ) : Module.Dual 𝔽 V :=
+  blockFunctional I e (Pi.single k 1)
+
+/-- A scalar unit word induces the corresponding scalar multiple of the coordinate functional. -/
+theorem blockFunctional_single
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (k : κ) (c : 𝔽) :
+    blockFunctional I e (Pi.single k c) = c • innerCoordinateFunctional I e k := by
+  classical
+  apply LinearMap.ext
+  intro v
+  change (∑ i, (e v : κ → 𝔽) i * (Pi.single k c : κ → 𝔽) i) =
+    c * ∑ i, (e v : κ → 𝔽) i * (Pi.single k (1 : 𝔽) : κ → 𝔽) i
+  have hleft : (∑ i, (e v : κ → 𝔽) i * (Pi.single k c : κ → 𝔽) i) =
+      (e v : κ → 𝔽) k * c := by
+    calc
+      (∑ i, (e v : κ → 𝔽) i * (Pi.single k c : κ → 𝔽) i) =
+          (e v : κ → 𝔽) k * (Pi.single k c : κ → 𝔽) k := by
+        apply Fintype.sum_eq_single k
+        intro i hik
+        simp [Pi.single_apply, hik]
+      _ = (e v : κ → 𝔽) k * c := by simp
+  have hright : (∑ i, (e v : κ → 𝔽) i *
+      (Pi.single k (1 : 𝔽) : κ → 𝔽) i) = (e v : κ → 𝔽) k := by
+    calc
+      (∑ i, (e v : κ → 𝔽) i * (Pi.single k (1 : 𝔽) : κ → 𝔽) i) =
+          (e v : κ → 𝔽) k * 1 := by
+        calc
+          (∑ i, (e v : κ → 𝔽) i * (Pi.single k (1 : 𝔽) : κ → 𝔽) i) =
+              (e v : κ → 𝔽) k * (Pi.single k (1 : 𝔽) : κ → 𝔽) k := by
+            apply Fintype.sum_eq_single k
+            intro i hik
+            simp [Pi.single_apply, hik]
+          _ = (e v : κ → 𝔽) k * 1 := by simp
+      _ = (e v : κ → 𝔽) k := mul_one _
+  rw [hleft, hright]
+  exact mul_comm _ _
+
+/-- Unit realization cost is exactly membership in a nonzero scalar orbit of the inner coordinate
+functionals.  This is the seed-specific bridge from coordinate columns to Singer projective
+classes. -/
+theorem hasUnitFunctionalCost_iff_coordinate_orbit
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (f : Module.Dual 𝔽 V) :
+    HasUnitFunctionalCost I e f ↔
+      ∃ k : κ, ∃ c : 𝔽, c ≠ 0 ∧ f = c • innerCoordinateFunctional I e k := by
+  classical
+  constructor
+  · rintro ⟨w, hwf, hweight⟩
+    let S : Finset κ := univ.filter fun k => w k ≠ 0
+    have hScard : S.card = 1 := by simpa [S, hammingNorm] using hweight
+    obtain ⟨k, hS⟩ := Finset.card_eq_one.mp hScard
+    have hkS : k ∈ S := by rw [hS]; simp
+    have hwk : w k ≠ 0 := (Finset.mem_filter.mp hkS).2
+    have hwEq : w = Pi.single k (w k) := by
+      funext l
+      by_cases hlk : l = k
+      · subst l
+        simp
+      · have hl0 : w l = 0 := by
+          by_contra hl
+          have hlS : l ∈ S := Finset.mem_filter.mpr ⟨Finset.mem_univ _, hl⟩
+          rw [hS] at hlS
+          exact hlk (Finset.mem_singleton.mp hlS)
+        simp [Pi.single_apply, hlk, hl0]
+    refine ⟨k, w k, hwk, ?_⟩
+    calc
+      f = blockFunctional I e w := hwf.symm
+      _ = blockFunctional I e (Pi.single k (w k)) := congrArg (blockFunctional I e) hwEq
+      _ = w k • innerCoordinateFunctional I e k := blockFunctional_single I e k (w k)
+  · rintro ⟨k, c, hc, rfl⟩
+    refine ⟨Pi.single k c, blockFunctional_single I e k c, ?_⟩
+    rw [hammingNorm]
+    have hfilter : (univ.filter fun x => (Pi.single k c : κ → 𝔽) x ≠ 0) =
+        ({k} : Finset κ) := by
+      ext x
+      by_cases hxk : x = k
+      · subst x
+        simp [hc]
+      · simp [Pi.single_apply, hxk]
+    rw [hfilter]
+    simp
+
 /-- The raw-functional form of disjointness between the seed's cost-one projective set and its
 multiplier translate.  It is invariant under nonzero scalar rescaling and is exactly what the
 Singer argument supplies. -/
@@ -288,6 +372,7 @@ end RepairCodes
 #print axioms RepairCodes.generalizedSPCFive_functionalDistance_five
 #print axioms RepairCodes.generalizedSPCFive_not_functionalDistance_six
 #print axioms RepairCodes.generalizedSPCFive_isCoordinateSurjective
+#print axioms RepairCodes.hasUnitFunctionalCost_iff_coordinate_orbit
 #print axioms RepairCodes.generalizedSPCFive_weightedDistance_six_of_disjoint
 #print axioms RepairCodes.generalizedSPCFive_radiusFour_transfer_of_disjoint
 #print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer
