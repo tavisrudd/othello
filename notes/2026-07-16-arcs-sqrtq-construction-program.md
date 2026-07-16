@@ -47,7 +47,11 @@ coverage beyond `s=3`. Its deterministic completions through `s=8` remain at rou
 parabola on a nontrivial additive coset gives a sporadic complete `3s`-arc at `s=5`, but no such
 layer is even arc-legal at `s=7`, closing that uniform repair ansatz. The next gate is a symbolic
 description of variable-height graph or partial-coset repairs for the uncovered product-image
-complement, not a wider finite census.
+complement. That reduction is now explicit: one universal chord-height formula controls coverage,
+and the internal graph-arc condition is `1+g[r,s,u] != 0` in terms of second divided differences.
+Full affine-height layers add no legal examples beyond the constant layers at `s=3,4,5,7,8`.
+Next reduce quadratic heights by coordinate equivalence or derive their trace/norm obstruction,
+rather than starting a raw coefficient census.
 
 ## C201 input
 

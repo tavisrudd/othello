@@ -170,6 +170,77 @@ Thus `s=5` has two sporadic complete `3s`-arcs in this ansatz, and `s=4` has a n
 absence of even an arc-legal layer at `s=7` rules out a uniform theorem using one full translated
 parabola layer. This closes the full-layer repair mechanism, not the broader `O(s)` program.
 
+## Third coordinate gate: repair graphs and divided differences
+
+All affine chord calculations have one form. Represent an affine point by its horizontal
+coordinate and height above the conic:
+
+```text
+P(x,h) = [1:x:x^2+h].
+```
+
+For `x != x'`, the chord through `P(x,h)` and `P(x',h')` meets the vertical fiber at `y` at
+
+```text
+H(y) = h + (y-x)(h'-h)/(x'-x) - (y-x)(y-x').                 (1)
+```
+
+The independent checker exhausts all 52,488 choices of `x != x'`, `h`, `h'`, and `y` over `GF(9)`
+against projective line incidence. Formula (1) gives both collision avoidance and coverage.
+
+Fix a nontrivial additive coset `eta+F` and a repair graph
+
+```text
+R_g = {P(eta+r,g(r)) : r in T},             T subseteq F.
+```
+
+For one repair point `P(y,g)` and two seed points, the forbidden heights are
+
+```text
+g = c - (y-t)(y-u)                                      (same seed layer c),
+g = alpha + lambda*delta + d^2*lambda*(1-lambda)         (mixed layers),
+lambda=(y-t)/d, d=u-t != 0.
+```
+
+For two repair parameters `r != s`, their chord collides with the seed point `P(t,c)` exactly when
+
+```text
+c = g(r) + (t-eta-r)(g(s)-g(r))/(s-r)
+             - (t-eta-r)(t-eta-s).                       (2)
+```
+
+For three distinct repair parameters `r,s,u`, their determinant factors as
+
+```text
+(s-r)(u-r)(u-s) * (1 + g[r,s,u]),                        (3)
+```
+
+where `g[r,s,u]` is the second divided difference. Thus the repair layer is an arc precisely when
+`g[r,s,u] != -1` for every triple. Coverage of a target `P(y,h)` says that `h` equals the value in
+(1) for at least one seed--repair or repair--repair pair. The projective search has therefore been
+reduced to a finite-field interpolation problem.
+
+The first function-class test takes the full coset `T=F` and `g(r)=a*r+b`. Equation (3) is then
+automatic because the second divided difference is zero; equation (2) becomes
+
+```text
+c = a(t-eta)+b-(t-eta-r)(t-eta-s).                        (4)
+```
+
+All `(s-1)s^4` affine graphs were checked at each bounded order. The off-conic column first rejects
+graphs with `g(r)=0` for some `r`:
+
+| `s` | affine graphs | off-conic | arc-legal | legal with `a != 0` | relative-complete |
+|---:|---:|---:|---:|---:|---:|
+| 3 | 162 | 112 | 0 | 0 | 0 |
+| 4 | 768 | 585 | 1 | 0 | 0 |
+| 5 | 2,500 | 2,016 | 2 | 0 | 2 |
+| 7 | 14,406 | 12,384 | 0 | 0 | 0 |
+| 8 | 28,672 | 25,137 | 35 | 0 | 0 |
+
+Every legal affine graph has `a=0`, so this class recovers exactly the constant repair layers and
+adds nothing at the tested orders. This is bounded evidence, not a uniform nonexistence proof.
+
 Reproduction:
 
 ```text
@@ -179,13 +250,27 @@ python3 papers/arcs_complete_outside_conic/probe_c210_two_layer_parabolas.py
 Frozen output:
 `papers/arcs_complete_outside_conic/probe_c210_two_layer_parabolas_output.txt`.
 
+Repair-graph checker and affine-class probe:
+
+```text
+python3 papers/arcs_complete_outside_conic/check_c210_repair_graph_equations.py
+python3 papers/arcs_complete_outside_conic/probe_c210_affine_coset_repairs.py
+```
+
+Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
+
 ```text
 f0bf41b76de2a7f5db495880c5c00288e2c7c27ea6927ff9a0c7433fb5ee861d  probe_c210_two_layer_parabolas.py
 92bd59cd1dcdb2dc0d34cf64d97e55571bed6a4ff38fa9300ee049508d9fbd8f  probe_c210_two_layer_parabolas_output.txt
+c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_repair_graph_equations.py
+936763d50ddd5cdddc7aa1289fcb8cd99822efc0a84b066ce1ede6f787669f31  check_c210_repair_graph_equations_output.txt
+7c6634f651ad8436fd70b23a6511fd0f20d32926aeb50cd440204dd3695527bd  probe_c210_affine_coset_repairs.py
+040d38cac56d61efbd99899c39c23991bdc123b3c09fcb2f845ece4228a32fdc  probe_c210_affine_coset_repairs_output.txt
 ```
 
-The next symbolic gate is now precise: characterize the uncovered product-image complement and
-seek at most `s` mutually compatible repair points as a graph or partial coset layer, allowing the
-height offset to vary with the parameter. The proof obligation is simultaneous: the repair graph
-must avoid every seed secant and its new secants must cover the complement. Do not enlarge the
-finite search before deriving those collision and coverage equations.
+The next gate is genuinely nonlinear. A quadratic height has constant second divided difference,
+so `g(r)=a*r^2+b*r+c` satisfies the internal repair-arc condition exactly when `a != -1`; equations
+(1) and (2) then impose the seed-collision and coverage constraints. Before testing all coefficients,
+quotient this class by parameter translation and conic-stabilizing coordinate changes, or derive a
+trace/norm obstruction from (2). A partial domain `T proper subset F` remains available if every
+full quadratic layer is forced to collide.

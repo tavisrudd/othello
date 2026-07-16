@@ -41,8 +41,11 @@ by the `build-sys` lane.
    Greedy completion remains near `3s` in the larger tested fields. A full parabola repair layer on
    a nontrivial additive coset succeeds sporadically at `s=5`, nearly succeeds at `s=4`, but has no
    arc-legal instance at `s=7`; that uniform mechanism is closed. Next derive the collision and
-   coverage equations for a graph or partial-coset repair of at most `s` points; do not widen the
-   finite search first. See
+   coverage equations for a graph or partial-coset repair of at most `s` points. Those equations
+   now reduce internal arc legality to the second-divided-difference condition
+   `1+g[r,s,u] != 0`; full affine-height graphs add nothing beyond the constant layers throughout
+   the five tested orders. Next quotient quadratic heights by coordinate equivalence or derive a
+   trace/norm obstruction before any coefficient census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
