@@ -7,6 +7,7 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{float}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 
@@ -35,36 +36,36 @@
 \maketitle
 
 \begin{abstract}
-Among the six-arcs of $\PG(2,11)$, exactly one projective-equivalence class
-has the maximum-distance syndrome directions of its associated MDS code
-contained in a conic. It is the \emph{Clebsch hexagon}, and this
-coding-theoretic condition alone recovers its full projective stabilizer
-$A_5$. The characterization remains true if ``conic'' is weakened to the
-zero set of any nonzero homogeneous form of degree at most three.
+Among the six-arcs of $\PG(2,11)$, exactly one projective class has the
+maximum-distance syndrome directions of its associated MDS code contained
+in a conic: the Clebsch hexagon. This coding-theoretic condition recovers its
+projective stabilizer $A_5$, and the characterization remains true with the
+zero set of any nonzero form of degree at most three in place of a conic.
 
-The arc itself lies on no conic, so the associated $[6,3,4]_{11}$ MDS code
-is non-GRS; its covering radius is three. Its twelve projective deep-hole
-directions are exactly the $\F_{11}$-rational points of the conic. They lift
-to $120$ deep-hole cosets, $2400$ minimum-weight leaders, and $159720$
-received-word deep holes; the cosets form one monomial orbit, and the
-received words form one orbit under monomial automorphisms and codeword
-translations. A single quadratic in the syndrome gives a complete distance
-oracle, while the radius-two ambiguity pattern reconstructs the classical
-Brianchon points and self-polar triangles.
+The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS and has
+covering radius three. Its twelve projective deep-hole directions are the
+$\F_{11}$-points of a conic; they lift to $120$ deep-hole cosets, $2400$
+minimum-weight leaders, and $159720$ received-word deep holes. A quadratic
+syndrome test is a complete distance oracle, and its ambiguity data recover
+the classical Brianchon points and self-polar triangles.
 
-We prove the rigidity as a five-way equivalence and quantify it by a sharp
-nearest-conic gap of twelve. We also decompose the $252$ one-point
-perturbations into eight $A_5$-orbits and construct an
-automorphism-invariant unordered bipartition of the twenty weight-three
-support types, giving a $10+10$ split of the leaders in every deep-hole
-coset. For six-arcs, a chord-multiplicity identity and the clique number of
-the exact-distance-two graph of the Sylvester graph show that $q=11$ is the
-only conic-filling field. More broadly, for arc sizes four through seven,
-the only conic-filling cases are a four-frame in $\PG(2,5)$ and the Clebsch
-hexagon. The six-arc census is classical; our contribution is the rigidity
-theorem, its quantitative and decoding refinements, and their coding-theoretic
-interpretation.
+We prove a five-way rigidity equivalence and a sharp nearest-conic gap of
+twelve, decompose the $252$ one-point perturbations into eight $A_5$-orbits,
+and construct an invariant unordered $10+10$ bipartition of the twenty
+weight-three support types. A chord-defect identity and the Sylvester graph
+show that $q=11$ is the only conic-filling field for six-arcs. For arc sizes
+four through seven, the only conic-filling cases are a four-frame in
+$\PG(2,5)$ and the Clebsch hexagon. The six-arc census is classical; the new
+content is its geometric and coding-theoretic rigidity, quantitative gap,
+decoding structure, and finite-field boundary.
 \end{abstract}
+
+\noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
+projective plane; arc; conic.
+
+\smallskip
+\noindent\textbf{2020 Mathematics Subject Classification.} 51E21, 94B05,
+51E22, 05B25.
 
 \section{Introduction}
 \label{sec:intro}
@@ -661,6 +662,16 @@ Proposition~\ref{prop:deep-holes-conic}, not a separate novelty claim here.
 We first isolate the geometric input that removes degenerate conics from the
 computer-assisted part of the argument.
 
+For an external line, the secant intersections form the focus set studied
+in the line-covering literature~\cite{NgWild2001}. Equality at five covered
+points would make the six-arc hyperfocused. The general internal-nucleus
+theorem of Bichara and Korchm\'aros excludes nontrivial hyperfocused arcs in
+odd order~\cite{BicharaKorchmaros1982}; the six-point case also follows from
+Drake and Keating's classification of hyperovals in five-nets
+\cite[Theorem~3.10]{DrakeKeating2004}. We retain the short direct argument
+because it records the chord, one-vertex, and external-line cases together
+in exactly the form needed below.
+
 \begin{lemma}[Six-arc line bound]
 \label{lem:six-arc-line-bound}
 Let $A$ be a six-arc in $\PG(2,q)$, where $q$ is odd. Every line contains at
@@ -753,6 +764,17 @@ displayed histogram, and returns exactly the six normalized Clebsch-class
 representatives whose extension loci lie on conics; every containing conic
 is nonsingular.
 
+The formal development exposes the classical trust seam in this proof
+explicitly. Dye's Theorem~1 is its only specially axiomatized mathematical
+source input, represented by two statements in
+\path{lean/RelativeConicArcs/Q11DyeAxioms.lean}: the ten-point Brianchon
+bound and the classification of equality. The consequences used above are
+derived in \path{Q11DyeConsequences.lean}; the chord-defect identity and the
+line bound are proved independently of those axioms. At $q=11$ the census
+also checks the imported conclusion by a separate finite route: its minimum
+$|\cU(A)|=12=22-10$ gives $\max c(A)=10$, and its six normalized minimizers
+form the single Clebsch class.
+
 The same census supports a strengthening in which a cubic, rather than a
 conic, is allowed.
 
@@ -802,6 +824,7 @@ and the stabilizer statement is clause~(v) of the theorem.
 \end{proof}
 
 \begin{remark}[Sharpness of the degree threshold]
+\label{rem:degree-threshold}
 Degree three is best possible. Apart from the Clebsch conic, the exhaustive
 search through degree five finds precisely two projective classes whose
 uncovered locus is the full set of $\F_{11}$-rational zeros of a form: one
@@ -1445,6 +1468,67 @@ component is the exclusion of both surviving seven-arc fields. For $k\ge8$ the
 second moment leaves additional concurrency parameters, so the analogous
 classification remains open.
 
+\section{Verification architecture and outlook}
+\label{sec:verification}
+
+Table~\ref{tab:verification} separates cited input, kernel-checked finite
+certificates, and fail-closed enumeration. Lean and script paths are
+relative to \path{lean/RelativeConicArcs/} and the paper directory;
+commands, hashes, sentinels, and import closures will accompany the archive.
+
+\begin{table}[H]
+\centering
+\tiny
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\textwidth}
+                    >{\raggedright\arraybackslash}p{0.21\textwidth}
+                    >{\raggedright\arraybackslash}p{0.25\textwidth}
+                    >{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
+\toprule
+Result & Cited or proved input & Lean certificate & Executable replay \\
+\midrule
+$A_5$ orbits and syndrome conic
+& Dye; Proposition~\ref{prop:a5-point-orbits}
+& \path{Q11A5PointOrbits.lean}; \path{Q11Coding.lean}
+& \path{check_rigidity_degenerate_conic.py} \\
+Decoding and chirality
+& arc--coset dictionary; Edge--Dye triangles
+& \path{Q11DecodingSynthesis.lean}
+& \path{check_decoding.py}; \path{check_chirality.py};
+\path{check_code_automorphisms.py} \\
+Rigidity theorem
+& line bound; chord defect; Dye's Theorem~1
+& \path{Q11DyeAxioms.lean}; \path{Q11DyeConsequences.lean};
+\path{SixArcDefectBridge.lean}
+& $1548$-representative rigidity replay \\
+Gap and low-degree loci
+& finite linear algebra over $\F_{11}$
+& ---
+& \path{check_global_conic_gap.py}; \path{check_perturbation_gap.py};
+\path{check_low_degree_loci.py}; Singular replay \\
+Uniqueness of $q=11$
+& chord moments; cited Sylvester bound
+& \path{ClebschChordDefect.lean}; \path{Q9Sylvester.lean}
+& \path{check_small_q_uniqueness.py}; from-scratch $q=9$ certificate \\
+Clebsch-family formula
+& Dye's ten Brianchon points and edge criterion
+& ---
+& \path{check_q19_nonexample.py} \\
+The range $4\le k\le7$
+& two universal chord moments
+& \path{SmallKChordMoments.lean}; \path{SmallKGeometricBridge.lean}
+& \path{check_small_k_conic_filling.py} \\
+\bottomrule
+\end{tabular}
+\caption{Trust and verification map for the principal results.}
+\label{tab:verification}
+\end{table}
+
+Open directions are higher secant-index moments for $k\ge8$, exhaustion of
+the degree-six kernels from Remark~\ref{rem:degree-threshold}, and the
+transition from fixed-$k$ classifications to the large-arc conic-forcing
+regime. The last problem first requires verified thresholds and field
+hypotheses.
+
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
 
@@ -1460,6 +1544,14 @@ A.~Blokhuis, Á.~Seress, and H.~A.~Wilbrink,
 \newblock \emph{Combinatorica} \textbf{12}(2) (1992), 143--147.
 \newblock doi:10.1007/BF01204717.
 
+\bibitem{BicharaKorchmaros1982}
+A.~Bichara and G.~Korchm\'aros,
+\newblock Note on $(q+2)$-sets in a Galois plane of order $q$,
+\newblock in \emph{Combinatorial and Geometric Structures and Their
+Applications}, Annals of Discrete Mathematics \textbf{14}, North-Holland,
+1982, 117--121.
+\newblock doi:10.1016/S0304-0208(08)73588-6.
+
 \bibitem{Clebsch1871}
 A.~Clebsch,
 \newblock Ueber die Anwendung der quadratischen Substitution auf die
@@ -1470,6 +1562,14 @@ Gleichungen 5-ten Grades und die geometrische Theorie des ebenen Fünfseits,
 W.~L.~Edge,
 \newblock Conics and orthogonal projectivities in a finite plane,
 \newblock \emph{Canadian Journal of Mathematics} \textbf{8} (1956), 362--382.
+
+\bibitem{DrakeKeating2004}
+D.~A.~Drake and K.~Keating,
+\newblock Ovals and hyperovals in Desarguesian nets,
+\newblock \emph{Designs, Codes and Cryptography} \textbf{31} (2004),
+195--212.
+\newblock \url{https://doi.org/10.1023/B:DESI.0000015883.89954.80};
+arXiv:math/0202115.
 
 \bibitem{ArcsCompleteOutsideConic}
 T.~Rudd,
@@ -1576,6 +1676,11 @@ A.~L.~Madison and J.~Wu,
 \newblock \emph{Designs, Codes and Cryptography} \textbf{78} (2016),
 473--491.
 \newblock doi:10.1007/s10623-014-0013-y.
+
+\bibitem{NgWild2001}
+S.-L.~Ng and P.~R.~Wild,
+\newblock On $k$-arcs covering a line in finite projective planes,
+\newblock \emph{Ars Combinatoria} \textbf{58} (2001), 289--300.
 
 \bibitem{SadehThesis1984}
 A.~R.~Sadeh,
