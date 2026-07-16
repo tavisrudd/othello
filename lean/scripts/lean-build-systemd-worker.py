@@ -8,13 +8,19 @@ never invokes Lake or the legacy queue.
 from __future__ import annotations
 
 import argparse
+import errno
 import fcntl
 import hashlib
 import importlib.util
 import json
 import os
 import pwd
+import re
+import shlex
+import shutil
+import signal
 import stat
+import subprocess
 import sys
 import time
 import uuid
@@ -29,11 +35,24 @@ if SPEC is None or SPEC.loader is None:
 ADAPTER = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = ADAPTER
 SPEC.loader.exec_module(ADAPTER)
+LEGACY_PATH = Path(__file__).resolve().with_name("lean-build-queue.py")
+LEGACY_SPEC = importlib.util.spec_from_file_location("lean_build_queue_compat", LEGACY_PATH)
+if LEGACY_SPEC is None or LEGACY_SPEC.loader is None:
+    raise RuntimeError(f"cannot load queue compatibility core from {LEGACY_PATH}")
+LEGACY = importlib.util.module_from_spec(LEGACY_SPEC)
+sys.modules[LEGACY_SPEC.name] = LEGACY
+LEGACY_SPEC.loader.exec_module(LEGACY)
 
 EXIT_OK = 0
 EXIT_FAILED = 1
 EXIT_REFUSED = 2
 EXIT_INVALID = 125
+EXIT_INTERRUPTED = 130
+MODULE_RE = re.compile(r"[A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*\Z")
+PROFILE_FILE_DEFAULT = Path(__file__).resolve().with_name("lean-build-profiles.json")
+BUSY_COMMANDS = ("lake.orig", "lean")
+_child: subprocess.Popen[bytes] | None = None
+_interrupted = False
 
 
 class AdoptionError(RuntimeError):
@@ -211,7 +230,9 @@ def replace_status(path: Path, status_data: Mapping[str, object]) -> None:
 
 
 class StatusWriter:
-    def __init__(self, run_dir: Path, submission: Mapping[str, object]) -> None:
+    def __init__(
+        self, run_dir: Path, submission: Mapping[str, object], targets: Sequence[str] = ()
+    ) -> None:
         now = ADAPTER.utc_now()
         self.path = run_dir / "status.json"
         self.data: dict[str, object] = {
@@ -220,7 +241,7 @@ class StatusWriter:
             "state": "queued",
             "phase": "initializing",
             "queue_exit_code": None,
-            "targets": [],
+            "targets": list(targets),
             "results": [],
             "current_target": None,
             "failed_target": None,
@@ -230,6 +251,7 @@ class StatusWriter:
             "updated_utc": now,
             "telemetry": {},
             "diagnostic_paths": {},
+            "source": {},
         }
         ADAPTER.publish_set_once(self.path, self.data, os.geteuid())
 
@@ -237,6 +259,16 @@ class StatusWriter:
         self.data.update(changes)
         self.data["updated_utc"] = ADAPTER.utc_now()
         replace_status(self.path, self.data)
+
+    def start_target(self, target: str) -> None:
+        self.update(current_target=target)
+
+    def record(self, target: str, outcome: str, **extra: object) -> None:
+        results = self.data.get("results")
+        if not isinstance(results, list):
+            raise RuntimeError("managed status results are malformed")
+        results.append({"target": target, "outcome": outcome, **extra})
+        self.update(current_target=None)
 
 
 def acquire_fixture_lock(path: Path, timeout: float) -> object | None:
@@ -291,6 +323,190 @@ def run_fixture(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def spawn_managed(
+    argv: list[str],
+    log_path: Path,
+    env: dict[str, str],
+    cwd: Path,
+    after_spawn=None,
+) -> int:
+    if LEGACY._interrupted:
+        raise LEGACY.Interrupted
+    with log_path.open("wb") as log:
+        log.write(f"$ {shlex.join(argv)}\n".encode())
+        log.flush()
+        try:
+            LEGACY._child = subprocess.Popen(
+                argv,
+                cwd=cwd,
+                env=env,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
+        except OSError as error:
+            raise LEGACY.Refused(f"cannot start {argv[0]}: {error}") from error
+        if after_spawn is not None:
+            after_spawn()
+        try:
+            code = LEGACY._child.wait()
+        finally:
+            LEGACY._child = None
+    if LEGACY._interrupted:
+        raise LEGACY.Interrupted
+    return code
+
+
+def run_managed_queue(args: argparse.Namespace) -> int:
+    run_dir = args.run_dir.expanduser().absolute()
+    try:
+        submission, _ = adopt_managed_run(run_dir, environ=os.environ)
+    except AdoptionError as error:
+        print(f"lean-build-systemd-worker: {error}", file=sys.stderr)
+        return EXIT_INVALID
+
+    serial_targets = list(dict.fromkeys(args.serial_first))
+    targets = list(dict.fromkeys([*serial_targets, *args.targets]))
+    aggregate = list(dict.fromkeys(args.aggregate or targets))
+    writer = StatusWriter(run_dir, submission, targets)
+    lock = None
+    state = "success"
+    exit_code = EXIT_OK
+    failed_target: str | None = None
+    reason: str | None = None
+
+    try:
+        lean_root = Path(str(submission["lean_root"]))
+        if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+            raise LEGACY.Refused(f"{lean_root} is not a Lake package")
+        for target in [*targets, *aggregate]:
+            if not LEGACY.MODULE_RE.fullmatch(target):
+                raise LEGACY.Refused(f"invalid module name: {target!r}")
+        plan = LEGACY.resource_plan(args)
+        run_fs_type, run_mount = LEGACY.filesystem_type(run_dir, args.mountinfo)
+        if run_fs_type in {"tmpfs", "ramfs"}:
+            raise LEGACY.Refused(
+                f"managed run state is on {run_fs_type} at {run_mount}, not disk-backed storage"
+            )
+        pgrep = shutil.which(args.pgrep_binary)
+        if pgrep is None:
+            raise LEGACY.Refused(f"{args.pgrep_binary} is unavailable")
+        logs = run_dir / "logs"
+        logs.mkdir(mode=0o700)
+        writer.update(
+            telemetry={"resource_plan": plan},
+            diagnostic_paths={"logs": str(logs)},
+            source=LEGACY.toolchain_state(lean_root),
+            phase="waiting-for-lock",
+        )
+        signal.signal(signal.SIGINT, LEGACY._handle_signal)
+        signal.signal(signal.SIGTERM, LEGACY._handle_signal)
+        lock = LEGACY.acquire_lock(
+            args.lock_file.expanduser().absolute(),
+            str(submission["run_id"]),
+            targets,
+            wait_seconds=args.wait_quiet_seconds,
+            poll_seconds=args.poll_seconds,
+        )
+        writer.update(state="running", phase="quiet-preflight", started_utc=ADAPTER.utc_now())
+        env = os.environ.copy()
+        env["PWD"] = str(lean_root)
+        env["LEAN_NUM_THREADS"] = str(args.threads)
+
+        for target in targets:
+            LEGACY.wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
+            writer.update(phase="quiet-preflight")
+            writer.start_target(target)
+            probe_log = logs / f"{target}.nobuild.log"
+            if spawn_managed(
+                LEGACY.probe_argv(args, [target]),
+                probe_log,
+                env,
+                lean_root,
+                after_spawn=lambda: writer.update(phase="building"),
+            ) == 0:
+                writer.record(target, "skipped-current", log=str(probe_log))
+                continue
+            log_path = logs / f"{target}.log"
+            quiet_root = logs / f"{target}.quiet" / str(submission["run_id"])
+            target_env = env.copy()
+            target_env["RUN_QUIET_LOGDIR"] = str(quiet_root)
+            threads = 1 if target in serial_targets else args.threads
+            code = spawn_managed(
+                LEGACY.build_argv(args, target, threads),
+                log_path,
+                target_env,
+                lean_root,
+                after_spawn=lambda: writer.update(phase="building"),
+            )
+            quiet_dir, stdout_log, stderr_log = LEGACY.quiet_evidence(quiet_root)
+            if code != 0:
+                writer.record(
+                    target,
+                    "failed",
+                    log=str(log_path),
+                    quiet_dir=str(quiet_dir),
+                    exit_code=code,
+                    diagnostic_tail=LEGACY.diagnostic_tail(
+                        stdout_log, stderr_log, args.tail_lines
+                    ),
+                )
+                state, exit_code, failed_target = "failed", EXIT_FAILED, target
+                break
+            writer.record(
+                target,
+                "built",
+                log=str(log_path),
+                quiet_dir=str(quiet_dir),
+                threads=threads,
+                **LEGACY.telemetry(stderr_log),
+            )
+
+        if exit_code == EXIT_OK:
+            LEGACY.wait_for_quiet(pgrep, args.wait_quiet_seconds, args.poll_seconds)
+            gate_log = logs / "aggregate-no-build.log"
+            writer.start_target("<aggregate --no-build gate>")
+            code = spawn_managed(
+                LEGACY.probe_argv(args, aggregate),
+                gate_log,
+                env,
+                lean_root,
+                after_spawn=lambda: writer.update(phase="aggregate-gate"),
+            )
+            if code != 0:
+                writer.record(
+                    "<aggregate>",
+                    "failed",
+                    log=str(gate_log),
+                    exit_code=code,
+                    diagnostic_tail=LEGACY.tail(gate_log, args.tail_lines),
+                )
+                state, exit_code, failed_target = "failed", EXIT_FAILED, "<aggregate>"
+            else:
+                writer.record("<aggregate>", "gate-passed", log=str(gate_log))
+    except LEGACY.Interrupted:
+        state, exit_code, reason = "interrupted", EXIT_INTERRUPTED, "signal"
+    except LEGACY.Refused as error:
+        state, exit_code, reason = "refused", error.code, str(error)
+    except Exception as error:
+        state, exit_code, reason = "failed", EXIT_FAILED, str(error)[:256]
+    finally:
+        if lock is not None:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+            lock.close()
+
+    writer.update(
+        state=state,
+        phase="finished",
+        queue_exit_code=exit_code,
+        failed_target=failed_target,
+        current_target=None,
+        finished_utc=ADAPTER.utc_now(),
+        reason=reason,
+    )
+    return exit_code
+
+
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     subparsers = result.add_subparsers(dest="command", required=True)
@@ -298,6 +514,24 @@ def parser() -> argparse.ArgumentParser:
     fixture.add_argument("--run-dir", type=Path, required=True)
     fixture.add_argument("--fixture-lock", type=Path, required=True)
     fixture.add_argument("--lock-timeout", type=float, default=5.0)
+    run = subparsers.add_parser("run", help="run the managed Lean target queue")
+    run.add_argument("targets", nargs="+")
+    run.add_argument("--run-dir", type=Path, required=True)
+    run.add_argument("--lock-file", type=Path, required=True)
+    run.add_argument("--serial-first", action="append", default=[])
+    run.add_argument("--aggregate", nargs="+", default=None)
+    run.add_argument("--cores", default=None)
+    LEGACY.add_resource_arguments(run)
+    run.add_argument("--choom-adjust", type=LEGACY.oom_adjust, default=1000)
+    run.add_argument("--wait-quiet-seconds", type=LEGACY.nonnegative_int, default=0)
+    run.add_argument("--poll-seconds", type=LEGACY.positive_int, default=60)
+    run.add_argument("--tail-lines", type=LEGACY.nonnegative_int, default=80)
+    run.add_argument("--nix-binary", default="nix")
+    run.add_argument("--time-binary", default="/usr/bin/time")
+    run.add_argument("--taskset-binary", default="taskset")
+    run.add_argument("--choom-binary", default="choom")
+    run.add_argument("--pgrep-binary", default="pgrep")
+    run.add_argument("--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet"))
     return result
 
 
@@ -305,6 +539,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser().parse_args(argv)
     if args.command == "fixture":
         return run_fixture(args)
+    if args.command == "run":
+        return run_managed_queue(args)
     return EXIT_INVALID
 
 

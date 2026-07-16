@@ -22,6 +22,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent
 ADAPTER_PATH = SCRIPT_DIR / "lean-build-systemd.py"
 WORKER_PATH = SCRIPT_DIR / "lean-build-systemd-worker.py"
+LEGACY_TEST_PATH = SCRIPT_DIR / "test_lean_build_queue.py"
 TEST_ROOT = Path.home() / ".cache" / "othello-lean-build-systemd-worker-tests"
 
 
@@ -36,6 +37,7 @@ def load(name: str, path: Path):
 
 ADAPTER = load("lean_build_systemd_test_adapter", ADAPTER_PATH)
 WORKER = load("lean_build_systemd_test_worker", WORKER_PATH)
+LEGACY_TEST = load("lean_build_queue_fixture_source", LEGACY_TEST_PATH)
 
 
 class ManagedWorkerTests(unittest.TestCase):
@@ -310,6 +312,169 @@ class ManagedWorkerTests(unittest.TestCase):
         self.assertEqual(terminal["state"], "refused")
         self.assertEqual(terminal["queue_exit_code"], 2)
         self.assertEqual(terminal["phase"], "finished")
+
+
+class ManagedQueueExecutionTests(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.tmp.chmod(0o700)
+        self.bin = self.tmp / "bin"
+        self.bin.mkdir()
+        for name, body in LEGACY_TEST.STUBS.items():
+            path = self.bin / name
+            path.write_text(body.replace("__BIN__", str(self.bin)))
+            path.chmod(0o755)
+        self.fake = self.tmp / "fake"
+        (self.fake / "plans").mkdir(parents=True)
+        (self.fake / "built").mkdir()
+        self.lean_root = self.tmp / "lean"
+        self.lean_root.mkdir()
+        (self.lean_root / "lakefile.lean").write_text("-- fixture\n")
+        (self.lean_root / "lean-toolchain").write_text("fixture\n")
+        self.profile = self.tmp / "profiles.json"
+        self.profile.write_text(
+            json.dumps(
+                {
+                    "profiles": {
+                        "fixture": {
+                            "reserve_mib": 1024,
+                            "verified_max_threads": 4,
+                            "worker_peak_mib": 512,
+                        }
+                    }
+                }
+            )
+        )
+        self.meminfo = self.tmp / "meminfo"
+        self.meminfo.write_text("MemTotal: 33554432 kB\nMemAvailable: 25165824 kB\n")
+        self.mountinfo = self.tmp / "mountinfo"
+        self.mountinfo.write_text(f"1 0 0:1 / {self.tmp} rw - ext4 fixture rw\n")
+        self.lock = self.tmp / "owner.lock"
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp)
+
+    def execute(
+        self,
+        targets: list[str],
+        *,
+        extra: list[str] | None = None,
+    ) -> tuple[subprocess.CompletedProcess[str], Path]:
+        identity = uuid.uuid4()
+        run_dir = self.tmp / "managed" / f"run-{identity.hex}"
+        argv = [
+            os.path.abspath(sys.executable),
+            str(WORKER_PATH.absolute()),
+            "run",
+            *targets,
+            "--run-dir",
+            str(run_dir),
+            "--lock-file",
+            str(self.lock),
+            "--profile",
+            "fixture",
+            "--profile-file",
+            str(self.profile),
+            "--threads",
+            "2",
+            "--meminfo",
+            str(self.meminfo),
+            "--mountinfo",
+            str(self.mountinfo),
+            "--tmp-path",
+            str(self.tmp),
+            "--tmp-used-mib",
+            "0",
+            "--nix-binary",
+            str(self.bin / "nix"),
+            "--time-binary",
+            str(self.bin / "time"),
+            "--taskset-binary",
+            str(self.bin / "taskset"),
+            "--choom-binary",
+            str(self.bin / "choom"),
+            "--pgrep-binary",
+            str(self.bin / "pgrep"),
+            "--run-quiet-binary",
+            str(self.bin / "run-quiet"),
+            "--cores",
+            "20-21",
+            *(extra or []),
+        ]
+        origin = ADAPTER.resolve_origin(
+            harness="manual",
+            session_id="managed-queue-test",
+            work_lane=None,
+            task_id=None,
+            environ={},
+        )
+        run_dir, submission, digest = ADAPTER.prepare_submission(
+            state_root=self.tmp / "managed",
+            lean_root=self.lean_root,
+            worker_argv=argv,
+            origin=origin,
+            generation={"boot_id": "fixture"},
+            run_uuid=identity,
+        )
+        environment = os.environ.copy()
+        environment["FAKE_LAKE_STATE"] = str(self.fake)
+        environment["OTHELLO_LEAN_RUN_ID"] = str(submission["run_id"])
+        environment["OTHELLO_LEAN_SUBMISSION_SHA256"] = digest
+        result = subprocess.run(
+            argv,
+            cwd=self.lean_root,
+            env=environment,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+        return result, run_dir
+
+    def test_build_skip_aggregate_and_resource_controls(self) -> None:
+        (self.fake / "built" / "Fix.Beta").touch()
+        result, run_dir = self.execute(
+            ["Fix.Beta"], extra=["--serial-first", "Fix.Alpha"]
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        status = json.loads((run_dir / "status.json").read_text())
+        outcomes = {entry["target"]: entry["outcome"] for entry in status["results"]}
+        self.assertEqual(outcomes["Fix.Alpha"], "built")
+        self.assertEqual(outcomes["Fix.Beta"], "skipped-current")
+        self.assertEqual(outcomes["<aggregate>"], "gate-passed")
+        self.assertEqual(status["state"], "success")
+        calls = (self.fake / "lake-calls.log").read_text()
+        self.assertIn("threads=1 nobuild=0 targets=Fix.Alpha", calls)
+        self.assertIn("threads=1 nobuild=1 targets=Fix.Alpha Fix.Beta", calls)
+
+    def test_build_failure_is_terminal_after_unlock(self) -> None:
+        (self.fake / "plans" / "Fix.Alpha").write_text("fail")
+        result, run_dir = self.execute(["Fix.Alpha"])
+        self.assertEqual(result.returncode, 1)
+        status = json.loads((run_dir / "status.json").read_text())
+        self.assertEqual(status["state"], "failed")
+        self.assertEqual(status["failed_target"], "Fix.Alpha")
+        with self.lock.open("a+") as holder:
+            fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+    def test_aggregate_failure_is_distinct(self) -> None:
+        result, run_dir = self.execute(
+            ["Fix.Alpha"], extra=["--aggregate", "Fix.Umbrella"]
+        )
+        self.assertEqual(result.returncode, 1)
+        status = json.loads((run_dir / "status.json").read_text())
+        self.assertEqual(status["failed_target"], "<aggregate>")
+
+    def test_foreign_busy_process_refuses_without_lake(self) -> None:
+        (self.fake / "busy").write_text("lean\n")
+        result, run_dir = self.execute(["Fix.Alpha"])
+        self.assertEqual(result.returncode, 2)
+        status = json.loads((run_dir / "status.json").read_text())
+        self.assertEqual(status["state"], "refused")
+        self.assertFalse((self.fake / "lake-calls.log").exists())
 
 
 @unittest.skipUnless(

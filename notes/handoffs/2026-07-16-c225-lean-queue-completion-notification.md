@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — strict worker adoption landed; managed Lean queue semantics next
+**Status**: IN PROGRESS — managed queue semantics landed; completion capture next
 
 ## Goal
 
@@ -496,6 +496,20 @@ fixture lock, observed that queued state while the service remained alive, relea
 observed terminal success only after unlock; a timeout fixture records `refused`/2. This proves the
 ordering substrate only. Step 4b must integrate the measured resource/quiet/build/aggregate
 semantics into the new worker while leaving legacy users undisturbed.
+
+Step 4b completes the managed execution semantics without changing the legacy CLI or its running
+processes. During the parallel rollout, the new worker loads the checked-in legacy module as a
+read-only compatibility core for its measured resource calculation, quiet checks, command argv,
+telemetry parsing, and toolchain attribution; managed adoption, status, locking order, child phase
+transitions, outcomes, and terminal publication remain in the new worker. Thirteen default worker
+tests pass: resource/profile enforcement, CPU/thread/choom/run-quiet argv, serial-first execution,
+trace-current skip, build success/failure, aggregate success/failure, foreign-busy refusal, and
+post-terminal lock reacquisition, alongside the adoption suite. `running` is published only after
+the owner lock is held; `building` and `aggregate-gate` only after their child successfully spawns.
+Every outcome is retained locally, the lock is explicitly unlocked and closed, and only then is
+format-2 terminal status published. No real Lean target has run; the eventual lightweight target
+remains behind the confirmed quiet-window acceptance gate. Step 5 is bounded completion capture,
+exact failed-unit cleanup, and the primary wait bridge.
 
 ## Adversarial design review
 
