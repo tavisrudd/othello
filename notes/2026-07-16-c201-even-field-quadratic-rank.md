@@ -3,7 +3,7 @@
 **Lane:** `relconic`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE — Gate 1 closed; full `q=64` census rejected at sizing; orbit-family probe next
+**Status:** ACTIVE — Gate 1 and first orbit-family probe closed; high-coverage family needed
 
 ## Objective
 
@@ -46,6 +46,18 @@ sizing stop condition.
 `q=64`.  Do not generate arbitrary arcs.  Promote C201 only if that family
 supports a field-uniform geometric criterion or gives a minimal falsifying
 counterexample to the `q=16` low-defect mechanism.
+
+The first such probe is closed in
+[`2026-07-16-c201-q64-baer-family.md`](2026-07-16-c201-q64-baer-family.md).
+All 207,144 Frobenius-stable thirteen-arcs obtained by adjoining two
+conjugate pairs to the `GF(8)` subfield conic have full quadratic rank, but
+their ordinary-uncovered loci have size 860–949.  Their rank is therefore
+forced by the elementary `2q+1` quadratic point bound, and none can be
+complete outside a 65-point conic.
+
+**Refined next:** restrict every further family to the necessary prefilter
+`|U(A)|<=65`.  Seek an orbit-defined high-coverage/saturating thirteen-arc
+family; reject it before quadratic analysis if it fails this filter.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra

@@ -116,6 +116,8 @@ The source-by-source comparison is recorded in
 - `search_rhoc16.cpp` / `search_rhoc16_output.txt` — exact eight-arc classification generator + run
 - `analyze_c201_q16.py` — independent frozen-list quadratic-rank, defect, stabilizer, and orbit anatomy
 - `size_c201_q64.py` — corrected-bound arithmetic and rigorous frame-normalized `q=64` census rejection
+- `probe_c201_q64_baer.py` / `check_c201_q64_baer.cpp` — orbit-reduced and raw independent
+  checks of the Frobenius-stable Baer-conic thirteen-arc family
 - `../../lean/RelativeConicArcs/` — standalone Lean formalization and kernel-checked certificates
 
 ## Related but separate
