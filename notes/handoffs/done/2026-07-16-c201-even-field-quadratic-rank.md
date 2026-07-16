@@ -6,7 +6,7 @@
 **Status:** REPORTED — negative bounded gate; no infinite theorem promoted
 
 Incidental observations are logged append-only in
-[`2026-07-16-c201-discovery-track.md`](2026-07-16-c201-discovery-track.md).
+[`2026-07-16-c201-discovery-track.md`](../../2026-07-16-c201-discovery-track.md).
 
 ## Objective
 
@@ -33,7 +33,7 @@ three exceptional `GF(16)` leaves.
 ## Current result
 
 Gate 1 and the `q=64` sizing gate are recorded in
-[`2026-07-16-c201-gate1-q16-anatomy.md`](2026-07-16-c201-gate1-q16-anatomy.md).
+[`2026-07-16-c201-gate1-q16-anatomy.md`](../../2026-07-16-c201-gate1-q16-anatomy.md).
 The independent frozen-list analyzer reconstructs the three deficient leaves,
 their quadratic types, intersections, stabilizers, orbits, secant spectra,
 and defects.  They are exactly the three lowest-defect leaves; no full-rank
@@ -51,7 +51,7 @@ supports a field-uniform geometric criterion or gives a minimal falsifying
 counterexample to the `q=16` low-defect mechanism.
 
 The first such probe is closed in
-[`2026-07-16-c201-q64-baer-family.md`](2026-07-16-c201-q64-baer-family.md).
+[`2026-07-16-c201-q64-baer-family.md`](../../2026-07-16-c201-q64-baer-family.md).
 All 207,144 Frobenius-stable thirteen-arcs obtained by adjoining two
 conjugate pairs to the `GF(8)` subfield conic have full quadratic rank, but
 their ordinary-uncovered loci have size 860–949.  Their rank is therefore
@@ -63,7 +63,7 @@ complete outside a 65-point conic.
 family; reject it before quadratic analysis if it fails this filter.
 
 The conic-aligned transitive family is also closed in
-[`2026-07-16-c201-q64-torus-family.md`](2026-07-16-c201-q64-torus-family.md).
+[`2026-07-16-c201-q64-torus-family.md`](../../2026-07-16-c201-q64-torus-family.md).
 Of the 315 conic-disjoint length-thirteen orbits of an order-13 nonsplit-torus
 subgroup, 310 are arcs and all have the identical spectrum
 `(1041,1560,1326,208,0,0,13)`.  The conic nucleus is uncovered in every case.
@@ -76,7 +76,7 @@ orbits while preserving total size thirteen and must prove or cheaply certify
 coverage of the conic nucleus before full profile or rank work.
 
 The first smaller-orbit shape is sized in
-[`2026-07-16-c201-q64-z3-sizing.md`](2026-07-16-c201-q64-z3-sizing.md).
+[`2026-07-16-c201-q64-z3-sizing.md`](../../2026-07-16-c201-q64-z3-sizing.md).
 The nucleus plus four split-`Z3` orbits has more than 43 billion
 pairwise-compatible orbit quadruples before mixed-orbit collinearity checks,
 and more than 57 million even after the full normalizer bound.  Full union
@@ -88,7 +88,7 @@ nonvanishing of `F` on the four orbit-label triples is exactly the full arc
 condition.
 
 The ternary relation is now indexed in
-[`2026-07-16-c201-q64-z3-index.md`](2026-07-16-c201-q64-z3-index.md).
+[`2026-07-16-c201-q64-z3-index.md`](../../2026-07-16-c201-q64-z3-index.md).
 For each compatible orbit pair, the bad third labels are exactly the legal
 orbits meeting its nine mixed secants, so `F=0` is one bitset lookup.  The
 730,380 pair indices forbid only 171--179 of 1,302 labels each.  A deterministic
@@ -96,7 +96,7 @@ orbits meeting its nine mixed secants, so `F=0` is one bitset lookup.  The
 necessary bound 65, but this is evidence rather than an exhaustive exclusion.
 
 The coverage-directed probe is recorded in
-[`2026-07-16-c201-q64-z3-coverage.md`](2026-07-16-c201-q64-z3-coverage.md).
+[`2026-07-16-c201-q64-z3-coverage.md`](../../2026-07-16-c201-q64-z3-coverage.md).
 Exhaustive one-orbit descent from 500 deterministic starts produced local
 optima with ordinary-uncovered sizes 805--935; nine starts reached 805.  The
 best checked result remains 740 points above the necessary gate, so quadratic
@@ -104,7 +104,7 @@ analysis was skipped.  This is strong bounded evidence, not a global family
 exclusion.
 
 The final synthesis is
-[`2026-07-16-c201-bounded-mechanism-closure.md`](2026-07-16-c201-bounded-mechanism-closure.md).
+[`2026-07-16-c201-bounded-mechanism-closure.md`](../../2026-07-16-c201-bounded-mechanism-closure.md).
 C201 closes as a failure of the tested bounded natural-family mechanisms, not
 as a theorem excluding the split-`Z3` family.  The best checked split-`Z3`
 witness is one- and two-orbit locally optimal at `|U|=805`; a three-orbit
