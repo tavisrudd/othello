@@ -1,0 +1,250 @@
+# Queens nimber calculator (heap-sum engine) + A344227 extension — results record
+
+**Lane**: `queens` — see CLAUDE.md § Lane routing.
+
+**Date**: 2026-07-01
+**Session**: 2026-07-01--15 (`de6cb2bb-e518-4423-bfbf-f05078b26543`)
+**References**:
+- OEIS [A344227](https://oeis.org/A344227) — Sprague-Grundy values of Node-Kayles on the n-queens
+  graph, previously known to n=13: `0,1,1,2,1,3,1,2,3,1,0,1,0,1` (offset 0)
+- [n=18 umbrella](2026-06-23-queens-n18-umbrella.md) — the OEIS-contribution motivation (its
+  2026-06-28 note: the n=18 win/loss verdict alone is not an A344227 term; nimbers are)
+- Dekking–Shallit–Sloane, *Queens in exile*, ELJC 27(1) #P1.52 (2020) — the publication/community
+  model for OEIS-anchored queens-game results (Wythoff-family, different game; venue map)
+- Parked substrate this supersedes: branch `queens-component-nimber` (abf38ee) scoped a Grundy
+  W8 as "the around-the-wall path (NOT built)" — now built, differently
+
+## ★ RESULTS — A344227 extended to n=17
+
+| n  | G (nimber) | status | evidence |
+|----|-----------|--------|----------|
+| 14 | **0**     | NEW    | heap-sum engine k=0 LOSS (1.4s / 11.0M nodes); = the production iso-dense SECOND verdict (G=0 ⟺ P-position, by definition) |
+| 15 | **1**     | NEW    | heap-sum engine k=0 WIN + k=1 LOSS (23.8s / 194M nodes); re-run at `QUEENS_NIMBER_GK=10` (different leaf boundary/code paths) agrees |
+| 16 | **0**     | NEW    | heap-sum engine k=0 LOSS (2m21s / 1.06B nodes); independently = the production n=16 SECOND verdict (multi-config validated) |
+| 17 | **2**     | NEW    | heap-sum engine, `queens-n18` branch, 17 GB TT (`QUEENS_TT_BITS=31`), bk=20/gk=16: k=0 WIN + k=1 WIN + k=2 LOSS (P-position) ⇒ G=2 (~585B nodes / ~59h, 2026-07-04). **VERIFIED 2026-07-07** (run recorded in claude session `08073bd4` — see the 2026-07-04 Handoff Note's validation update). Breaks odd→1; ≠ the ~88% G=1 theory prediction. See Handoff 2026-07-04. |
+
+The OEIS comment's conjectured 1,0 oscillation after n=9 **holds through n=16** but **BREAKS at
+n=17: G(17) = 2** — not the conjectured (nor the theory-predicted) odd→1. It was already known to
+break on the even side by n=18 (our n=18 FIRST-player win ⇒ G(18) ≠ 0). So the sequence is neither
+"even→0 / odd→1" nor bounded by the 0/1 resonance the small terms suggested. **G(17)=2 is
+VERIFIED (2026-07-07, user-confirmed revalidation)**; G(18) remains open (n18-branch scale — see
+Next steps).
+
+## The engine (`queens nimber <n>`, default; `--full` = the old whole-DAG mex)
+
+**Why not mex directly:** mex admits no α-β cutoff, so the full-DAG `Nimber` reference must expand
+every reachable position — hopeless past n≈13.
+
+**The heap-sum trick:** `G(board) = k` ⟺ the game sum *board + Nim-heap(k)* is a P-position
+(Sprague-Grundy: `G(sum) = G(board) ⊕ k = 0`). Win/loss of the sum IS α-β-searchable. The driver
+solves `win(board, k)` for `k = 0, 1, 2, …` until the first LOSS; one TT is shared across rounds
+(`win(avail, h)` is round-independent — the k=1 round of n=15 cost 6.3s on the k=0 round's 17.5s
+table). A `k=0` LOSS is the plain-queens second-player win, so even boards that are P-positions
+cost one ordinary solve.
+
+**State** `(avail, h)`: queen placements (h unchanged) + heap reductions (`h' < h`). Three layers
+(`rust/src/queens/solver/nimber.rs`, `NimberSum`):
+1. **Grundy dense leaf** (`pc ≤ QUEENS_NIMBER_GK`, default 12): `win ⟺ G(avail) ≠ h`, with
+   `G` from the new **`GrundyW8`** layer (`rust/src/queens/dense.rs`) — complete nimber tables
+   `G0..=G8` for all labelled ≤8-vertex graphs (one byte/code, 258 MB, ~seconds parallel build)
+   + nested mex sweeps `g9..g12` over the SAME const projection masks the boolean `get9..get12`
+   use (value-independent code-space geometry). No early-out (mex needs every child).
+2. **Boolean dense leaf** (`h = 0`, `pc ≤ 16`): plain-queens `DenseW8::get_dyn`.
+3. **Deep α-β**: flat lockless `QueensTt` keyed `hash128(D4-canon(avail)) ⊕ HMIX[h]`; heap moves
+   probed first (h→0 is one dense lookup and fires whenever `G(avail) = 0`), queen moves in
+   dynamic order (child popcount ascending — the production-proven ordering); rayon fan-out over
+   D4-distinct root moves + 2 plies (`SUM_PAR_LEVELS`).
+
+## Validation chain (all green)
+
+1. `GrundyW8` tables vs a pure scalar mex recursion (exhaustive k ≤ 6, sampled k = 7, 8) AND
+   `G ≠ 0 ⟺ W-win` against the independently-built boolean tables — `dense.rs` tests
+   `grundy_tables_match_scalar_and_boolean`, `grundy_g9_to_g12_match_reference` (the latter
+   layers g9..g12 over validated G≤8, mirroring the boolean `direct_w*` chain).
+2. Engine vs the independent full-mex `Nimber` (n ≤ 8) and vs OEIS A344227 (n ≤ 11) —
+   `mod.rs` test `nimber_sum_matches_full_mex_and_oeis`.
+3. CLI runs n = 1..13 all match A344227 exactly (n=13: 0.56s).
+4. New terms: n=14/16 agree with the production win/loss verdicts; n=15 reproduced under a
+   different `QUEENS_NIMBER_GK` (different leaf code paths, same G).
+5. Production untouched: full `make test` + the n=12 exact-distinct (1,060,823) and n=14
+   (≈29.2M, 1.02× re-exp) gates pass.
+
+## Codebase Reference
+
+| What | Where |
+|------|-------|
+| `GrundyW8` (tables + g9..g12 sweeps + build) | `rust/src/queens/dense.rs` (after `build_tables`) |
+| `NimberSum` (heap-sum engine, HMIX, driver) | `rust/src/queens/solver/nimber.rs` |
+| CLI (`nimber_mode`, `--full`, `--max-k`) | `rust/src/bin/queens.rs` |
+| Full-mex reference (`Nimber`, unchanged) | `rust/src/queens/solver/nimber.rs` |
+| Grundy tests | `rust/src/queens/dense.rs` tests; `rust/src/queens/mod.rs` `nimber_sum_matches_full_mex_and_oeis` |
+
+## Next steps
+
+- [ ] **OEIS submission**: b-file terms a(14)=0, a(15)=1, a(16)=0, a(17)=2 for A344227 +
+  method comment (user decision on authorship/wording; the Dekking–Shallit–Sloane community is
+  the audience). Package:
+  `../2026-07-03-oeis-a344227-submission.md`.
+- [x] **G(17) = 2** — DONE 2026-07-04 (branch worktree, `QUEENS_TT_BITS=31`, bk=20/gk=16 defaults):
+  k=0 WIN + k=1 WIN + k=2 LOSS ⇒ G=2; ~585B nodes / ~59h. **NOT the predicted 1** (the theory
+  note's ~88% G=1 missed; the paper's odd→1 narrative is overturned). **VERIFIED 2026-07-07**
+  (user-confirmed; run recorded in claude session `08073bd4`, `asg +show 08073bd4` —
+  evidence trail = session record + run table + same-binary G(15)=1 sanity run).
+- [ ] **Theory (2026-07-02, Opus agent):** [conjecture-theory note](../2026-07-02-a344227-conjecture-theory.md)
+  — ★ new PROVEN reduction: for even n the outcome is decided entirely by the long-diagonal
+  moves (second player's ρ-mirror refutes every diagonal-free line; n=18's winning I9=(8,8)
+  is exactly a main-diagonal move); odd n ⟹ G≥1 re-proven via center+mirror. Predictions:
+  G(17)=1 (~88%), G(18)=1 (~55%) / 2 (~30%) / 3 (~12%) ⇒ **fire k=1 first for G(18)** (a LOSS
+  round pins G exactly; ~55% one-search finish). Also: a free correctness gate (non-diagonal
+  even-n openings must have G ≥ 1) + deferred discriminating experiments, §5 of the note.
+  **Two theorem-derived solver levers (untested, measure before believing):** (1) *mirror-reply
+  killer hint* — try ρ(opening) first in the depth-1 sequential loop; root-relative, so the
+  absolute-square killer tables cannot learn it; validate OFFLINE first against existing
+  QUEENS_ROOT_TIMING (root, reply, rank) logs (how often is reply == ρ(root)?). (2) *symmetric
+  diagonal-free instant leaf* — avail == ρ(avail) && avail ∩ long-diagonals == ∅ ⟹
+  LOSS-for-mover, ~10 bit-ops; predicted ~never fires in the asymmetric deep tail (wash).
+- [ ] **Theory implications (2026-07-02, Fable agent):** [implications note](../2026-07-02-theory-implications.md)
+  — border battle collapsed to ONE bounded exchange (Lemma B1: ≤2 queens ever fit the live
+  L-border) + an open scar-set (Δ) battle; B2a/B2b: no exact pairing repair exists ⇒ any
+  even-n theorem is pairing + counting (threshold-shaped, as the data demands). Master Lemma
+  mass-produces solved families (bishops even⟹G=0, knights, torus queens G∈{0,1}, kings
+  O(1)-exceptions). **Engine lever (sound, unbuilt): the symmetric-diagonal-free leaf holds
+  at every h — mover wins ⟺ h≠0** (fires on odd-n center roots in k≥1 rounds). Certificate
+  compression: mirror+exceptions as tiny P-verdict certificates (§5). G(20)≠0 predicted
+  (~70%). Ranked next steps §9.
+- [ ] **G(18) plan** (the oscillation-breaker; G(18) ∈ {1,2,3} likely — every known term ≤ 3):
+  1. **Run on the rebased `queens-n18` branch** (6-word Bits/MAX_N=18; main is 4-word, n ≤ 16).
+     Engine commits cherry-picked there (g13..g16 + bk + n>16 fixes).
+  2. **`--min-k 1`** (landed): k=0 would re-prove the multi-day production n=18 solve; the
+     ascending-k contract + the production verdict make skipping it sound. G(18) = first
+     k ≥ 1 whose round is a LOSS.
+  3. **Cost ≈ a full n=18-scale search per round.** Calibration: nimber-engine n=16 k=0 =
+     634.7M nodes vs production 178.5M ⇒ ~3.6× node inflation (D4-only canon, no killers/ETC,
+     no incremental kernel). Production n=18 = 114B nodes (dense_k=20 config) ⇒ k=1 round
+     ≈ 300-500B nodes ≈ **1.5-2+ days each** at this engine's ~3-5M nodes/s, and the 17 GB TT
+     is ~200× oversubscribed ⇒ the **h=0 TT-skip band is load-bearing** (production's
+     un-skipped n=18 run thrashed and never converged).
+  4. **`QUEENS_NIMBER_SKIP` (landed, default off)**: A/B it at n=17 scale first (e.g. 21,25);
+     fire n=18 k=1 only with the band on + user sign-off (days of box). No checkpoint/resume
+     exists for the sum engine — a multi-day run dies unrecoverably (accepted? or port dumps?).
+  5. **Mirror-reply ordering tweak (pre-G(18), cheap):** in `NimberSum`, at the ply under each
+     root move m, try child ρ(m) (180°-rotation of m) FIRST, ahead of the popcount sort —
+     theorem-motivated for plain-game LOSS rounds (Theorem 3: ρ(m) refutes diagonal-free
+     lines), mirror-*inspired* heuristic at h ≥ 1 (refuting m there needs G(residual)=k, which
+     the theorem does not deliver). Gated + A/B at n=16 k=0 (itself a LOSS round, the exact
+     regime). Matters most if G(18)=1 ⇒ k=1 is a LOSS round (every opening refuted).
+  6. Optional strength ports if k=1 stalls: killers (−43% wall at production n=16), the
+     iso/incremental key. Both multi-session.
+- [ ] Optional engine upgrades (superseded list): ~~W13..17 boolean ceiling~~ → **DONE
+  2026-07-02 as bk=20 (−63% nodes at n=15)**; killers / pext leaf-code build / incremental
+  canon remain unbuilt.
+
+## Handoff Notes
+
+### Session 2026-07-02 — engine upgrade for G(17)/G(18): gk 12→16 (wash), bk h=0 leaf 16→20 (★ −63% nodes)
+
+Goal: G(17), G(18). Two engine levers built + measured (interleaved n=15 A/B, G=*1 every round):
+
+1. **`GrundyW8` g13..g16** (`QUEENS_NIMBER_GK` ceiling 12→16, default 16; commit eb730a0) —
+   mirror the boolean get13..16 with mex, existing W13..W16 masks. **WASH at n=15**
+   (23.3/23.6s vs 23.9/23.1s, ~195M nodes both). *Load-bearing finding:* the heap-sum wall
+   is ~all the **k=0 round's h=0 search** (145M of 195M nodes) — a plain-queens solve on
+   this engine — and the k≥1 rounds ride the shared TT (4–8s). Grundy leaves only serve
+   h>0 ⇒ near-zero wall leverage. Kept as substrate (h>0 leaf coverage matters once the
+   TT is oversubscribed at n≥17). Also: the h=0 boolean leaf is now probed BEFORE the
+   Grundy leaf (early-out beats full mex when only G≠0 is needed).
+2. **★ Boolean h=0 leaf ceiling `bk` 16→20** (`QUEENS_NIMBER_BK`, default 20) — the k=0
+   round is a plain solve, so the production `dense_k` lever applies verbatim; main already
+   has the wide 3-word W17..W20 evaluators + `warm_wide`. New `leaf_code_wide` (3-word
+   build) + `boolean_leaf` dispatch. **n=15: bk16 192.6/193.3M · 22.5/23.3s → bk17
+   138.3/147.8M · 19.5/22.1s → bk20 70.7/72.9M · 17.7/17.9s = −63% nodes / −23% wall.**
+   Unlike production n=16 (W18-20 wall-flat), bk20 wins wall here: each leaf also skips
+   the engine's D4-canon + hash128 + TT probe, and the sum-engine TT is the scarce
+   resource at n≥17.
+
+Also this session: **queens-n18 branch rebased onto main** (24 commits over 75; conflicts:
+verts_of u8-vpcompressb vs u16 6-word migration → scalar u16 kept (vpcompressw port = open
+follow-up), M_MODEL renumbered 18, KILLER_HITS/DEEP_HIST widened to MAXV, IncFrame assert
+328→472; fixup e42e6e5). Gates green: make test 12/12, n=12 exact 1,060,823 (re-exp 1.24×),
+n=14 ≈28.9M HLL / re-exp 1.03×. Merge-to-main NOT done (would need an n=16 record-guard A/B).
+
+### Session 2026-07-01--15 — engine built + validated, n=14..16 collected (COMPLETE for n≤16)
+
+**Completed**: everything above in one session; all three missing n ≤ 16 terms collected.
+**Files created/modified**: `rust/src/queens/dense.rs` (GrundyW8 + tests), `rust/src/queens/solver/nimber.rs`
+(NimberSum), `rust/src/queens/solver/mod.rs` + `rust/src/queens/mod.rs` (exports),
+`rust/src/bin/queens.rs` (CLI flags + round reporting), this handoff.
+**Deviations from plan**: none material; nibble-packing and disk cache for GrundyW8 skipped
+(byte tables build in seconds — nimber runs are one-off).
+**Notes for next agent**: the `round_win` contract is ascending-k (root heap-children are skipped
+as known-WINs from earlier rounds). `HMIX[0]` is the identity so the h=0 subspace keys exactly
+like a plain solve. G ≤ k on k vertices (theory bound) is asserted at table build.
+
+### Session 2026-07-04 — G(17) = 2 computed; verified 2026-07-07; breaks the odd→1 pattern
+
+**Result.** `queens nimber 17` on the `queens-n18` worktree (`/home/tavis/src/othello-n18`, branch
+`queens-n18`, commit 5643433; 17 GB flat TT `QUEENS_TT_BITS=31`; bk=20/gk=16 defaults; no skip
+band) completed after ~59 h wall:
+
+| round | sum           | verdict               | cum. time  | cum. nodes      |
+|-------|---------------|-----------------------|------------|-----------------|
+| k=0   | board+heap(0) | first-player WIN      | 13,120 s   | 62,324,977,155  |
+| k=1   | board+heap(1) | first-player WIN      | 46,866 s   | 279,721,010,917 |
+| k=2   | board+heap(2) | SECOND-player WIN (P) | 152,488 s  | 584,796,995,565 |
+
+First loss at k=2 ⇒ **G(17) = 2**. A sanity run of `queens nimber 15` on the SAME binary just
+before reproduced G(15)=1 — the exact k=1-LOSS path that at n=17 returned a WIN, so a systematic
+"always-WIN" bug is ruled out on this build.
+
+**Significance.** Breaks the odd→1 empirical run (n=9,11,13,15 all = 1; first "2" since G(7)=2).
+Overturns the theory note's ~88%-confidence G(17)=1 prediction and the paper's "even→0 / odd→1
+oscillation" narrative (paper §6.5/§7/abstract/conclusion, and the §7 "0↔1 resonance ⇒ G(17)=1,
+G(19)=1" conjecture is falsified on the n=17 term). Those need a **coordinated paper revision pass
+AFTER validation** — left untouched for now because a piecemeal edit would make the paper
+internally contradictory (multiple sites still assert odd→1).
+
+**Validation update (2026-07-07).** User confirmed the revalidation; `G(17)=2` is locked for the
+paper/OEIS edits. **Evidence pointer (user-supplied 2026-07-08): the G(17) verification run is
+recorded in claude session `08073bd4`** (full trace renderable via `asg +show 08073bd4`; not in
+tmux scrollback or on-disk logs — a 2026-07-08 read-back of the box found neither, so the
+session record is the durable trail). Its log matches the run table above verbatim:
+
+```
+round k=0: board+heap(0) → first-player WIN          13,120s     62.3 B nodes   (G ≠ 0)
+round k=1: board+heap(1) → first-player WIN          46,866s    279.7 B nodes   (G ≠ 1)
+round k=2: board+heap(2) → SECOND-player WIN (P-pos) 152,488s   584.8 B nodes   (G = 2)  ← first loss
+⇒ 17×17 Sprague-Grundy value = *2   (first player wins)
+total: ~585 B nodes / ~59 h
+```
+
+Release-capsule evidence trail: this session record + the config already noted (worktree
+`queens-n18`, commit 5643433, 17 GB TT `QUEENS_TT_BITS=31`, bk=20/gk=16, no skip band) + the
+same-binary G(15)=1 sanity reproduction.
+
+**Bug-hunt (read-only source inspection of `nimber.rs` / `bits.rs` / `store.rs` on the running
+worktree) — ruled out:**
+- **FP precision:** no float in the win/loss verdict path (every `f64` is cold — HLL estimate,
+  memory/load reporting, BuRR density).
+- **Board overflow:** `WORDS = 6` → 384-bit board; n=17 = 289 sq and n=18 = 324 sq both fit; the
+  n=18 int-sizing audit already validated this width.
+- **Move-key overflow:** `SQ_BITS = 9` (512 > 289) with a compile-time `assert!(SUM_MAXV ≤
+  SQ_MASK+1)`; the u16/8-bit sq≥256 key corruption was the known n>16 footgun, fixed in 079aa19.
+- **Grundy overshift** (`1u64 << g`): leaves cap pc ≤ 16 ⇒ G ≤ 16 < 64, and NimberSum compares
+  `G != h` (h ≤ 15), never shifts by the Grundy value.
+- **Stack overflow:** the take2 run did NOT overflow (the earlier scrollback crash was a *different*
+  config, `nim17-branch`); and overflow aborts the process, it cannot mis-report a verdict.
+- **Method / off-by-one:** heap-sum is textbook Sprague-Grundy; `win`/`expand_heap`/`expand_queens`
+  correctly α-β the sum; the root heap-move skip is sound under the ascending-k contract (held —
+  k=0 was a win). A WIN verdict is the robust direction anyway (constructive ∃-a-losing-child,
+  bottoming in exact leaves); only a false LOSS needs the search to MISS a winning move.
+- **Residual (the reason for the rerun):** a flat-TT fingerprint hash-collision silently flipping
+  one cached verdict — lowest-probability (design floor ~46 fp bits ⇒ sub-unity expected false
+  hits even at this round's 280 B / 305 B probes), NOT n=17-specific, but the largest probe
+  exposure we've run. The 2026-07-07 revalidation closes this at status level; the log/config
+  pointer still needs to be recorded above.
+
+**Downstream state:** `queens-n18-paper.md` has had the coordinated post-validation G(17) pass
+(2026-07-07) and now treats `G(17)=2` as verified, not in flight. OEIS package
+(`../2026-07-03-oeis-a344227-submission.md`) already anticipated G ≠ 1 (its line 296: "replace the
+trailing 1") and its §8 paste-guard requires a k=1 LOSS that will not come, so it is
+self-protecting; annotated this session with the actual value a(17) = 2.
