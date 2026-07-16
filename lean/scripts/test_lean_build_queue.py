@@ -449,6 +449,38 @@ class QueueTest(unittest.TestCase):
         self.assertFalse((run_dir / "status.json").exists())
         self.assertFalse((self.state / "lake-calls.log").exists(), "must not build behind another owner")
 
+    def test_detached_run_waits_for_owner_lock_then_builds(self) -> None:
+        run_dir = self.tmp / "run3-wait"
+        with self.lock_file.open("a+") as holder:
+            fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            holder.write(json.dumps({"run_id": "foreign-run", "pid": 4242}))
+            holder.flush()
+            launched = subprocess.run(
+                self.run_argv(
+                    ["Fix.Alpha"],
+                    run_dir,
+                    extra=["--detach", "--wait-quiet-seconds", "10", "--poll-seconds", "1"],
+                ),
+                env=self.env(),
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            self.assertEqual(launched.returncode, 0, launched.stderr)
+            time.sleep(1.5)
+            self.assertFalse((run_dir / "status.json").exists())
+            self.assertIn("waiting for build owner", (run_dir / "launcher.log").read_text())
+
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline:
+            try:
+                if self.read_status(run_dir).get("state") == "success":
+                    break
+            except (OSError, json.JSONDecodeError):
+                pass
+            time.sleep(0.05)
+        self.assertEqual(self.read_status(run_dir)["state"], "success")
+
     def test_refuses_while_a_foreign_lean_build_is_live(self) -> None:
         run_dir = self.tmp / "run3b"
         (self.state / "busy").write_text("lake.orig\n")

@@ -205,23 +205,45 @@ def lock_slug(lean_root: Path) -> str:
     return str(lean_root).strip("/").replace("/", "_") or "root"
 
 
-def acquire_lock(path: Path, run_id: str, targets: list[str]):
-    """Take the build-owner lock, or refuse and name the current owner.
+def acquire_lock(
+    path: Path,
+    run_id: str,
+    targets: list[str],
+    wait_seconds: int = 0,
+    poll_seconds: int = 60,
+):
+    """Take the build-owner lock, waiting when requested, or name the current owner.
 
     The lock is an open file description held for the process lifetime: the kernel releases it on
     exit, including an OOM kill, so a crashed run never wedges the queue.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     stream = path.open("a+")
-    try:
-        fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except OSError as error:
-        if error.errno not in (errno.EACCES, errno.EAGAIN):
-            raise
-        stream.seek(0)
-        owner = stream.read().strip()
-        stream.close()
-        fail(f"another build owner holds {path}: {owner or 'unidentified owner'}")
+    deadline = time.monotonic() + wait_seconds
+    while True:
+        try:
+            fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            break
+        except OSError as error:
+            if error.errno not in (errno.EACCES, errno.EAGAIN):
+                stream.close()
+                raise
+            stream.seek(0)
+            owner = stream.read().strip()
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                stream.close()
+                fail(f"another build owner holds {path}: {owner or 'unidentified owner'}")
+            print(
+                f"waiting for build owner to release {path}: "
+                f"{owner or 'unidentified owner'}",
+                flush=True,
+            )
+            try:
+                _sleep(min(poll_seconds, max(1, int(remaining))))
+            except Interrupted:
+                stream.close()
+                raise
     stream.seek(0)
     stream.truncate()
     json.dump({"run_id": run_id, "pid": os.getpid(), "since": utc_now(), "targets": targets}, stream)
@@ -501,7 +523,13 @@ def command_run(args: argparse.Namespace) -> int:
     signal.signal(signal.SIGTERM, _handle_signal)
 
     # Lock first, quiet check second: the reverse order is the race this runner exists to close.
-    lock = acquire_lock(lock_file, run_id, targets)
+    lock = acquire_lock(
+        lock_file,
+        run_id,
+        targets,
+        wait_seconds=args.wait_quiet_seconds,
+        poll_seconds=args.poll_seconds,
+    )
 
     env = os.environ.copy()
     # Popen(cwd=...) changes the process directory but does not rewrite an explicitly inherited
