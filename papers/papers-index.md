@@ -45,7 +45,7 @@ from conic involutions
 **3 · `arcs_complete_outside_conic`** — *Arcs complete outside a prescribed conic: An exact
 defect identity and ρ_𝒞(16) = 9*
 - *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean
-  formalization; the 18-page paper has completed adversarial, style-guide, and repeated cold-prose
+  formalization; the 19-page paper has completed adversarial, style-guide, and repeated cold-prose
   review. The standard frame and optional-branch hierarchy are explicit. Its remaining
   paper-specific scholarly-artifact gate is a stable, citable archive identifier for the source
   supplement; the repo-wide adequacy-appendix and AI/provenance-disclosure policies also remain to
@@ -143,7 +143,7 @@ repositories: an evidence-based essay and practical how-to
 
 ## Manuscript state at a glance
 
-- **Complete 18-page LaTeX manuscript (+ PDF + independent checkers + strict-trust Lean package):**
+- **Complete 19-page LaTeX manuscript (+ PDF + independent checkers + strict-trust Lean package):**
   `arcs_complete_outside_conic` — adversarial, style-guide, and repeated cold-prose reviews are
   complete, with a final recommendation to publish after minor revision. The frame coordinates and
   optional-branch hierarchy identified in that review have landed. The remaining paper-specific

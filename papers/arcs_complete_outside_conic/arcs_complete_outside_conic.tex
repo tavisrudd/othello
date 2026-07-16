@@ -15,6 +15,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{estimate}{Elementary estimate}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{problem}[theorem]{Problem}
@@ -46,31 +47,28 @@ $A\subseteq\PG(2,q)\setminus\cC$ whose secants cover every point outside
 $A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Starting from the
 classical first two equations for the secant-index distribution of an arc,
 we prove an exact defect identity for an arbitrary prescribed set of points
-that may remain uncovered.  The identity includes equality and stability
-criteria.  Write $\IC(A)$ for the total incidence of the secants of $A$
-with $\cC$.  The conic specialization gives
+that may remain uncovered.  Its nonnegative local remainder gives exact
+equality and quantitative stability criteria.  For a conic, writing
+$\IC(A)$ for the total incidence of the secants of $A$ with $\cC$, it gives
 \[
  q^2-k\le
  \binom{k}{2}(q-1)-\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}
  -\frac{\IC(A)}{\lfloor k/2\rfloor}
 \]
 for every $\cC$-complete $k$-arc, together with an exact equality criterion
-and a quantitative stability estimate.  In particular, for every prime power $q$,
+and, for every prime power $q$,
 \[
  \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-Conversely, projective averaging shows that an ordinary complete $b$-arc
-has an image disjoint from a prescribed set $H$ when $b|H|<q^2+q+1$; in
-particular, $\rhoC(q)\le \tmin$ whenever $\tmin\le q$.  Explicit witnesses
-and the lower bound give
+We also prove an upper transfer by projective averaging and give explicit
+witnesses for $q=8,9,11,16$.  Together with the lower bound, these give
 \[
  \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
  \qquad \rhoC(16)=9.
 \]
-The last equality follows from a computer-assisted, certificate-checked
-covering list of $2633$ eight-arc representatives over $\F_{16}$: no
-nonzero quadratic contains an eight-arc's ordinary-uncovered locus while
-avoiding the arc.
+The last equality follows from a certificate-checked exhaustive covering
+list over $\F_{16}$: no nonzero quadratic contains an eight-arc's
+ordinary-uncovered locus while avoiding the arc.
 \end{abstract}
 
 \section{Introduction}
@@ -153,7 +151,10 @@ classical; for a recent explicit lower bound see
 Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The
 main observation is that, after splitting those equations over
 a prescribed exceptional set and its complement, the inequalities normally
-used to control overlap have an exact remainder.  This produces:
+used to control overlap have an exact remainder.  This defect identity is
+the principal result: it turns the usual lower-bound argument into a local
+accounting theorem from which equality, stability, and the later coding
+interpretation all follow.  Its main consequences and applications are:
 
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
 \item an exact prescribed-hole defect identity, with equality and stability;
@@ -460,6 +461,7 @@ For every prime power $q$,
 \label{eq:asymptotic-lower}
 \end{equation}
 Consequently,
+as $q$ tends to infinity through prime powers,
 \begin{equation}
  \liminf_{q\to\infty}
  \bigl(\rhoC(q)-\sqrt{2q}\bigr)\ge\frac32.
@@ -467,7 +469,33 @@ Consequently,
 \end{equation}
 \end{theorem}
 
-\begin{proof}
+The routine algebra in the proof is separated in the following estimate.
+It is stated on the full interval needed to avoid any parity split.
+
+\begin{estimate}
+For $s\ge2$ and $0\le a\le2$, put
+\[
+ P_s(a)=
+ \frac{2a-3}{4}s^3
+ +\frac{a^2-7a+10}{4}s^2
+ +\frac{-3a^2+10a-8}{2}s
+ +\frac{-a^3+5a^2-8a+6}{2}.
+\]
+If $P_s(a)\ge0$, then $a\ge3/2-8/s$.
+\end{estimate}
+
+\begin{proof}[Proof of the elementary estimate]
+On $0\le a\le2$, the coefficients of $s^2$, $s$, and $1$ in $P_s(a)$
+are at most $5/2$, $1$, and $3$, respectively.  Since $s\ge2$, their total
+contribution is at most
+\[
+ \frac52s^2+s+3\le4s^2.
+\]
+Thus $P_s(a)\ge0$ implies
+$0\le(2a-3)s^3/4+4s^2$, and division by $s^2$ gives the claim.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:asymptotic}]
 Let $k$ be the size of a $\cC$-complete arc and put $s=\sqrt{2q}$.
 The elementary first-moment inequality
 $q^2-k\le\binom{k}{2}(q-1)$ implies $k\ge s$ for $q\ge2$:
@@ -490,28 +518,9 @@ gives the necessary inequality
  \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr).
 \]
 After substituting $q=s^2/2$ and $k=s+a$, the right side minus the left
-side is exactly
-\[
- \frac{2a-3}{4}s^3
- +\frac{a^2-7a+10}{4}s^2
- +\frac{-3a^2+10a-8}{2}s
- +\frac{-a^3+5a^2-8a+6}{2}.
-\]
-Only the leading coefficient matters asymptotically; we bound the remaining
-coefficients uniformly on $0\le a\le2$.
-For $0\le a\le2$, the last three coefficients are at most
-$5/2$, $1$, and $3$, respectively.  Since $s\ge2$,
-\[
- \frac52s^2+s+3\le4s^2,
-\]
-so their total contribution is at most $4s^2$.  The displayed difference is nonnegative,
-and hence
-\[
- 0\le \frac{2a-3}{4}s^3+4s^2.
-\]
-Dividing by $s^2$ gives $a\ge3/2-8/s$, which is
-\eqref{eq:asymptotic-lower}.  Letting $q$ tend to infinity gives
-\eqref{eq:liminf}.
+side is $P_s(a)$.  It is nonnegative, so the elementary estimate gives
+$a\ge3/2-8/s$, which is~\eqref{eq:asymptotic-lower}.  Letting $q$ tend to
+infinity through prime powers gives~\eqref{eq:liminf}.
 \end{proof}
 
 \begin{remark}[The scale of the conic term]
@@ -1077,9 +1086,23 @@ graph.  Appendix~\ref{app:verification} records the two independent
 implementations and the formal checks.
 \end{proof}
 
-\section{Further questions}
+\section{Conclusion and further questions}
 
-The results leave four concrete directions.
+The exact defect identity is the organizing result of the paper.  It
+separates the universal overlap forced by the second secant moment from the
+incidence spent on a prescribed exceptional set, and its nonnegative local
+terms retain the equality and stability information lost by a scalar
+counting bound.  The coding interpretation is another reading of the same
+remainder, rather than a separate source of estimates.
+
+Two further mechanisms complement that identity.  Projective averaging
+transfers ordinary complete arcs to prescribed-hole upper bounds, while the
+evaluation-rank obstruction detects finite configurations invisible to the
+incidence budget.  Over $\F_{16}$ the defect bound reaches eight and the
+quadratic obstruction excludes eight, leaving the checked nine-point
+witness and hence $\rhoC(16)=9$.
+
+These mechanisms leave four concrete directions.
 
 \begin{problem}
 Determine whether the uncovered-quadratic-rank obstruction used at $q=16$
@@ -1109,12 +1132,10 @@ arbitrary feature maps and Veronese degrees; the missing ingredient is an
 appropriate exact secant-moment remainder for caps.
 \end{problem}
 
-The central distinction is between universal overlap, already measured by
-the classical second index equation, and genuinely conic-specific geometry.
-The former gives the lower bound in this paper.  Progress beyond it will
-probably require an explicit construction, an algebraic obstruction, or a
-classification of near-extremal secant arrangements rather than another
-application of the same incidence budget.
+Progress beyond the present lower bound will probably require an explicit
+construction, an algebraic obstruction, or a classification of
+near-extremal secant arrangements rather than another application of the
+same incidence budget.
 
 \clearpage
 \appendix

@@ -47,7 +47,7 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   bound `ρ_𝒞(q)≥√(2q)+3/2−8/√(2q)`, projective averaging, and the exact value
   `ρ_𝒞(16)=9`; the q=11 coding/deep-hole and extension material is a secondary application. It
   **owns the q=11 deep-holes=conic identification**.
-- *Gate:* the 18-page manuscript, PDF, independent checkers, strict-trust Lean package, adversarial
+- *Gate:* the 19-page manuscript, PDF, independent checkers, strict-trust Lean package, adversarial
   review, style-guide pass, and repeated cold-prose reviews are complete. The final cold reader
   recommended publication after minor revision; its frame-coordinate and hierarchy requests have
   landed. Its remaining paper-specific scholarly-artifact gate is a stable, citable archive
