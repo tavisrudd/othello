@@ -4,6 +4,9 @@
 **Lane:** `repaircodes`
 **Status:** IMPLEMENTED; aggregate `RepairCodes` build pending behind the foreign Q25 build
 
+The focused [adversarial review](2026-07-15-c203-operational-coefficient-adversarial-review.md)
+records the attacks, two substantive corrections, and the surviving claim boundary.
+
 ## Verdict
 
 Retaining dual-word coefficients gives the exact local linear combination used by a repair, but it
@@ -22,11 +25,12 @@ protocol, not a lower bound on the best possible protocol after subpacketization
 parity checks. Disjoint availability and failure tolerance remain exactly the matching and
 transversal invariants of the coefficient supports.
 
-Raw coefficient values are not invariant under monomial equivalence. Lean proves a concrete gauge
-boundary: in the axis-pair relation, rescaling the target column by the nonzero factor `(b-a)/d`
-changes its target coefficient to any prescribed `d != 0`, without changing the repair support or
-any support-derived operational invariant. Consequently coefficient histograms, counts of `1`
-coefficients, and multiplication-cost claims are presentation- and basis-dependent.
+Coefficient ratios are not invariant under monomial equivalence. Lean proves a concrete gauge
+boundary: in the axis-pair relation, rescaling one helper column by `d⁻¹` changes that helper's
+coefficient to any prescribed `d != 0` while the target coefficient stays fixed, without changing
+the repair support or any support-derived operational invariant. Consequently even a single
+relation's coefficient histogram, count of `1` coefficients, and multiplication cost are
+presentation- and basis-dependent.
 
 ## Closed coefficient formulas
 
@@ -53,9 +57,10 @@ the projective cubic and axis points.
    ```
 
 Lean proves every displayed coefficient nonzero under the stated hypotheses. Projective shifted
-inversion and monomial repair transport carry these canonical equations to every target, with the
-expected coordinate scales. Thus the formulas cover every radius-two/radius-three minimal repair
-shape up to the already proved target transitivity.
+inversion and the already proved monomial repair transport carry their relation witnesses to every
+target, introducing the corresponding coordinate scales. Thus these are canonical formulas for
+the three radius-two/radius-three minimal repair shapes; the transported raw formulas are not
+claimed to retain the same normalization.
 
 ## Concatenation boundary
 
@@ -72,8 +77,8 @@ dual word. This is the right invariant:
   and its entire repair hypergraph.
 
 Therefore the lift inherits the same direct scalar repair equations blockwise, but complete-support
-transfer alone must not be advertised as optimal-access, optimal-bandwidth, or repair-by-transfer
-minimality.
+transfer alone must not be advertised as optimal access or bandwidth merely because the achieved
+protocol is help-by-transfer.
 
 ## Formal boundary
 
@@ -82,7 +87,7 @@ declarations are:
 
 - `FiniteGeom.repair_edge_has_scalar_recovery_equation`;
 - `projectiveAxisPair_coefficient_relation` and
-  `projectiveAxisPair_arbitrary_targetCoefficient`;
+  `projectiveAxisPair_arbitrary_helperCoefficient`;
 - `projectiveCubicInfinity_coefficient_relation`;
 - `projectiveAxisInfinityCubic_coefficient_relation`; and
 - the three corresponding nonzero-coefficient theorems.
@@ -102,7 +107,7 @@ reconstructs every small-circuit kernel with its own Gaussian elimination and em
 - all 240 size-three/four circuit supports and their everywhere-nonzero kernel vectors;
 - all 840 retargeted recovery equations on the four generator rows;
 - 72 ordered instances of each of the three closed formulas; and
-- 576 arbitrary-target-coefficient gauge rescalings.
+- 576 arbitrary-helper-coefficient gauge rescalings with the target coefficient fixed.
 
 The normalized 240-relation coefficient table has SHA-256
 `c7ec1a09745e2aecb0e8a6b8d35fa145b141017ecabd51d6100064a30ff0a587`.
@@ -121,8 +126,9 @@ The operational boundary agrees with the primary repair-code models:
   achieved helper protocol, but no optimality or array-code claim follows.
 
 Accordingly, the manuscript uses “direct scalar protocol” and states achieved access/download,
-while reserving “optimal bandwidth,” “optimal access,” and broader repair-by-transfer claims for a
-declared subpacketized model with lower bounds.
+while reserving “optimal bandwidth” and “optimal access” for a declared subpacketized model with
+lower bounds. It uses “help-by-transfer” only for the achieved scalar forwarding protocol, without
+an optimality implication.
 
 ## Publication disposition
 

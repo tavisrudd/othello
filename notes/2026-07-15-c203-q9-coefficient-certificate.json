@@ -1,5 +1,5 @@
 {
-  "arbitrary_target_coefficient_gauge_checks": 576,
+  "arbitrary_helper_coefficient_gauge_checks": 576,
   "base_verifier_sha256": "5545c6d7dc8f426a3250b1da822bae6ca6969730b6adede6a14698be8b6ea5f0",
   "coefficient_table": [
     {

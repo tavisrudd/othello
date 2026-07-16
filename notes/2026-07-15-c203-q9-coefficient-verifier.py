@@ -5,7 +5,7 @@ This script is independent of Lean.  It reuses only the small finite-field and p
 from the projective-completion verifier, then implements its own nullspace solver.  It enumerates
 every size-three/four circuit, checks full-support coefficients and every retargeted scalar recovery
 equation on a row-code basis, compares the three closed formulas with the computed kernels, and
-replays the arbitrary-target-coefficient gauge boundary.
+replays the arbitrary-helper-coefficient gauge boundary with the target coefficient fixed.
 """
 
 from __future__ import annotations
@@ -14,6 +14,7 @@ import argparse
 from collections import Counter
 import hashlib
 import importlib.util
+from itertools import combinations
 import json
 from pathlib import Path
 import sys
@@ -21,6 +22,9 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 BASE_VERIFIER = HERE / "2026-07-13-projective-completion-verifier.py"
+
+if not __debug__:
+    raise RuntimeError("this verifier requires assertions; do not run Python with -O")
 
 
 def load_base():
@@ -45,6 +49,48 @@ def linear_combination(field, coefficients, columns):
     for coefficient, column in zip(coefficients, columns):
         result = vector_add(field, result, vector_scale(field, coefficient, column))
     return result
+
+
+def matrix_rank(field, columns):
+    """Independently compute the rank of a family of four-coordinate columns."""
+
+    matrix = [[columns[column][row] for column in range(len(columns))] for row in range(4)]
+    pivot_row = 0
+    for column in range(len(columns)):
+        pivot = next((row for row in range(pivot_row, 4) if matrix[row][column]), None)
+        if pivot is None:
+            continue
+        matrix[pivot_row], matrix[pivot] = matrix[pivot], matrix[pivot_row]
+        inverse = field.inv(matrix[pivot_row][column])
+        matrix[pivot_row] = [field.mul(inverse, value) for value in matrix[pivot_row]]
+        for row in range(pivot_row + 1, 4):
+            if matrix[row][column] == 0:
+                continue
+            multiplier = matrix[row][column]
+            matrix[row] = [
+                field.sub(value, field.mul(multiplier, pivot_value))
+                for value, pivot_value in zip(matrix[row], matrix[pivot_row])
+            ]
+        pivot_row += 1
+    return pivot_row
+
+
+def enumerate_small_circuits(field, points):
+    """Independently enumerate every minimal dependent support of size three or four."""
+
+    circuits = []
+    for size in (3, 4):
+        for support in combinations(range(len(points)), size):
+            columns = [points[index] for index in support]
+            if matrix_rank(field, columns) == size:
+                continue
+            if not all(
+                matrix_rank(field, columns[:deleted] + columns[deleted + 1 :]) == size - 1
+                for deleted in range(size)
+            ):
+                continue
+            circuits.append(support)
+    return tuple(circuits)
 
 
 def kernel_generator(field, columns):
@@ -125,11 +171,7 @@ def main():
     field = base.FIELDS[1]
     assert field.q == 9
     points, labels = base.completed_points(field)
-    circuits = tuple(
-        circuit
-        for circuit in base.minimal_circuits_up_to_five(field, points)
-        if len(circuit) <= 4
-    )
+    circuits = enumerate_small_circuits(field, points)
     assert Counter(map(len, circuits)) == Counter({3: 120, 4: 120})
 
     coefficient_rows = []
@@ -161,15 +203,15 @@ def main():
             assert expected == coefficient_by_support[frozenset(support)]
             formula_checks["axis_pair_ordered"] += 1
             for desired in range(1, q):
-                scale = field.div(field.sub(b, a), desired)
+                scale = field.inv(desired)
                 assert scale != 0
                 scaled_columns = [points[index] for index in support]
-                target_position = support.index(2 * q + 1)
-                scaled_columns[target_position] = vector_scale(
-                    field, scale, scaled_columns[target_position]
+                helper_position = support.index(q + 1 + a)
+                scaled_columns[helper_position] = vector_scale(
+                    field, scale, scaled_columns[helper_position]
                 )
                 scaled_coefficients = [relation[index] for index in support]
-                scaled_coefficients[target_position] = desired
+                scaled_coefficients[helper_position] = desired
                 assert linear_combination(field, scaled_coefficients, scaled_columns) == (0, 0, 0, 0)
                 gauge_checks += 1
 
@@ -220,7 +262,7 @@ def main():
         "full_support_relation_count": len(coefficient_rows),
         "retargeted_recovery_equation_count": sum(len(circuit) for circuit in circuits),
         "formula_checks": dict(sorted(formula_checks.items())),
-        "arbitrary_target_coefficient_gauge_checks": gauge_checks,
+        "arbitrary_helper_coefficient_gauge_checks": gauge_checks,
         "coefficient_table_sha256": hashlib.sha256(encoded_rows).hexdigest(),
         "coefficient_table": coefficient_rows,
     }

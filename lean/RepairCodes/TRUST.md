@@ -116,10 +116,11 @@ locality, and the bounded radius-four rows. Its concrete family theorem adds onl
 `RepairCodes.OperationalCoefficients` retains the dual-word witness behind every repair edge and
 proves its exact scalar recovery equation. It also kernel-checks closed coefficient formulas for
 the axis-pair, cubic-infinity, and zero-sum cubic repairs, with every displayed coefficient
-nonzero. A concrete column-rescaling theorem makes the trust boundary explicit: any prescribed
-nonzero target coefficient can occur in a monomially equivalent presentation of the same
-axis-pair support. These results certify a direct one-symbol-per-helper scalar protocol; they do
-not claim minimum bandwidth or access under subpacketization.
+nonzero. A concrete column-rescaling theorem makes the trust boundary explicit: while the target
+coefficient stays fixed, any prescribed nonzero helper coefficient can occur in a monomially
+equivalent presentation of the same axis-pair support. These results certify a direct
+one-symbol-per-helper scalar protocol; they do not claim minimum bandwidth or access under
+subpacketization.
 
 ## Reproduction
 

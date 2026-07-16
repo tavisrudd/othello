@@ -8,9 +8,9 @@ file records the scalar recovery equation supplied by every witness and gives cl
 formulas for the three canonical radius-two/radius-three repair shapes of the completed
 cubic--axis seed.  All displayed helper coefficients are nonzero under the hypotheses.
 
-For a scalar code, these equations require one full field symbol from every helper.  Their values
-specify the local linear combination, but do not reduce helper access or download bandwidth; raw
-coefficient values also change under harmless column rescaling.
+For a scalar code, the induced direct protocol reads one full field symbol from every helper.
+These equations specify its local linear combination, but do not prove a lower bound on helper
+access or download bandwidth; raw coefficient values also change under harmless column rescaling.
 -/
 
 namespace FiniteGeom
@@ -81,20 +81,21 @@ theorem projectiveAxisPair_coefficients_ne_zero {a b : 𝔽} (hab : a ≠ b) :
     (1 : 𝔽) ≠ 0 ∧ (-1 : 𝔽) ≠ 0 ∧ b - a ≠ 0 := by
   exact ⟨one_ne_zero, neg_ne_zero.mpr one_ne_zero, sub_ne_zero.mpr hab.symm⟩
 
-/-- Raw coefficient values are a coordinate gauge, not an operational invariant.  After rescaling
-the target column by `(b-a)/d`, the same axis-pair support has any prescribed nonzero target
-coefficient `d`.  The scale itself is nonzero, so this is a monomially equivalent presentation. -/
-theorem projectiveAxisPair_arbitrary_targetCoefficient {a b d : 𝔽}
+/-- Coefficient ratios are a coordinate gauge, not an operational invariant.  After rescaling the
+helper column `A(a)` by `d⁻¹`, the same axis-pair support has any prescribed nonzero coefficient
+`d` at that helper while the target coefficient `b-a` stays fixed.  The scale itself is nonzero,
+so this is a monomially equivalent presentation. -/
+theorem projectiveAxisPair_arbitrary_helperCoefficient {a b d : 𝔽}
     (hab : a ≠ b) (hd : d ≠ 0) :
-    (b - a) / d ≠ 0 ∧
-      projectiveAxisTwistedCubicPoints 𝔽 (.inr (.inl a)) -
+    d⁻¹ ≠ 0 ∧ b - a ≠ 0 ∧
+      d • (d⁻¹ • projectiveAxisTwistedCubicPoints 𝔽 (.inr (.inl a))) -
           projectiveAxisTwistedCubicPoints 𝔽 (.inr (.inl b)) +
-        d • (((b - a) / d) •
-          projectiveAxisTwistedCubicPoints 𝔽 (.inr (.inr Unit.unit))) = 0 := by
-  refine ⟨div_ne_zero (sub_ne_zero.mpr hab.symm) hd, ?_⟩
-  rw [smul_smul, div_eq_mul_inv]
-  have hscale : d * ((b - a) * d⁻¹) = b - a := by field_simp
+        (b - a) • projectiveAxisTwistedCubicPoints 𝔽 (.inr (.inr Unit.unit)) = 0 := by
+  refine ⟨inv_ne_zero hd, sub_ne_zero.mpr hab.symm, ?_⟩
+  rw [smul_smul]
+  have hscale : d * d⁻¹ = 1 := by field_simp
   rw [hscale]
+  simp only [one_smul]
   exact projectiveAxisPair_coefficient_relation a b
 
 /-- Coefficient-labelled relation for the canonical cubic-infinity repair:
@@ -149,6 +150,6 @@ theorem projectiveAxisInfinityCubic_coefficients_ne_zero
 end RepairCodes
 
 #print axioms FiniteGeom.repair_edge_has_scalar_recovery_equation
-#print axioms RepairCodes.projectiveAxisPair_arbitrary_targetCoefficient
+#print axioms RepairCodes.projectiveAxisPair_arbitrary_helperCoefficient
 #print axioms RepairCodes.projectiveCubicInfinity_coefficient_relation
 #print axioms RepairCodes.projectiveAxisInfinityCubic_coefficient_relation

@@ -22,8 +22,11 @@ three canonical completed-seed coefficient formulas are kernel-checked, and a co
 rescaling theorem proves the operational boundary: the direct protocol uses one full symbol per
 helper, while raw coefficient values imply no invariant minimum-access or minimum-bandwidth claim.
 See the [C203 report](../2026-07-15-c203-operational-coefficient-boundary.md). Its focused Lean,
-axiom, and PDF gates pass; the final aggregate `RepairCodes` build is deferred behind the foreign
-Q25 build. That aggregate gate is the only remaining bounded follow-up in this lane.
+axiom, and PDF gates pass. A focused
+[adversarial review](../2026-07-15-c203-operational-coefficient-adversarial-review.md) strengthened
+the coefficient-ratio gauge theorem and removed circuit-enumerator reuse from the verifier. The
+final aggregate `RepairCodes` build is deferred behind the foreign Q25 build. That aggregate gate
+is the only remaining bounded follow-up in this lane.
 
 ## Goal and claim ledger
 
