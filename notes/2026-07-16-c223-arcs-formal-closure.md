@@ -45,6 +45,10 @@ Close the remaining mathematical seams between the manuscript's original claims 
 - `Q11NonGRS.lean`: contradiction from the NRC/GRS nonzero-quadratic consequence, with the
   classical dictionary kept as an explicit premise.
 
+Follow-up hardening links the three displayed exceptional forms to the exact generated
+forced-hit records, proves their kernels are precisely the displayed one-dimensional lines, and
+adds the end-to-end theorem `arbitrary_eight_arc_projectiveQuadraticAvoidance`.
+
 ## Validation
 
 - Every focused module passes `guarded-lean`; printed axiom sets contain only

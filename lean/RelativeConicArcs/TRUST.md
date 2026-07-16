@@ -23,7 +23,7 @@ spinoff.
 | projective syndrome geometry | distance-one/two/three trichotomy; exact weight-two support count; `completeOutside_iff_distanceThreeDirections_subset`; one-column and simultaneous extension theorems; maximal extension/graph-independence bridge; leader moment and defect restatements | proved in `SyndromeGeometry.lean`; the general simultaneous object includes pair and triple conflicts, while an arc-confined extension locus reduces exactly to the pair graph |
 | transparent coding bridge | `parityCheckCode`; `[n,n-3,4]` MDS parameter package; affine syndrome distance; actual-leader/support cardinality bijection through weight three; exact `choose(n,3)` weight-three leader count; covering-radius-three predicate; indexed projective arc/triple-independence equivalence | proved in `CodingBridge.lean` without an external coding API; codewords, supports, distance, and leaders are explicit finite functions; `card_syndromeLeadersOfWeight_eq_supports` makes the incidence count literally an affine coefficient-word count |
 | finite examples | `Examples.rhoC_ZMod5`, `rho_points_ZMod5`, `rhoC_GF8`, `rhoC_GF9`, `rhoC_ZMod11`, `rhoC_GF16` | kernel-checked; all five values exact; the q=5 leaf is the projective four-frame transported to the standard conic, then `NonsingularConic.rho_points_eq_rhoC` transports the value to every nonsingular model |
-| q=16 projective classification | `StepBook.coverage`; `StepBooksValid`; `classifiedAt_level8_of_frame`; `arbitrary_eight_arc_classification_chain`; `level8_quadraticAvoidance`; `rejection_profile`; `eval_pullbackQuadratic`; `pullbackQuadratic_ne_zero`; exceptional-leaf arithmetic; `no_completeOutside_GF16_card_eight` | every legal move is represented by a certified transition into the next list, and the books cover the current parent list exactly, so the lists of lengths 4/61/454/2633 form a kernel-checked exhaustive cover. Lean checks the exact 2630+3 split, the stronger quadratic alternative on every leaf, the arbitrary-eight-arc classification chain, and symbolic pullback/nonzeroness for arbitrary quadratics. The manuscript's remaining `U(gA)=gU(A)` step is ordinary projective incidence invariance |
+| q=16 projective classification | `StepBook.coverage`; `StepBooksValid`; `classifiedAt_level8_of_frame`; `arbitrary_eight_arc_classification_chain`; `arbitrary_eight_arc_projectiveQuadraticAvoidance`; `rejection_profile`; `exceptional_leaf_records`; `exceptionalKernelOne/Two/Three`; `no_completeOutside_GF16_card_eight` | every legal move is represented by a certified transition into the next list, and the books cover the current parent list exactly, so the lists of lengths 4/61/454/2633 form a kernel-checked exhaustive cover. Lean checks the exact 2630+3 split, identifies the three exceptional records and their one-dimensional kernels, and proves the full singular-or-nonsingular quadratic-avoidance theorem for every abstract eight-arc, including projective transport of ordinary uncoveredness and zero sets |
 | q=9 terminal game | `Q9Terminal.complete`, `legalExtensions_eq_empty`, `isP` | certified witness is an ordinary complete arc and actual terminal projective P-position |
 | q=11 residual game | residual graph theorems, `continuation_rawArc_iff`, `seed_isP` | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
 | q=11 code and extension spectrum | `witness_mds_columns`, `witness_code_minimum_distance_four`, `projective_distanceThreeDirections_eq_standardConic`, `affine_distanceThree_iff_mem_standardConic`, `witness_code_coveringRadius_three`, `mem_affineSyndromesOfDistance_iff`, `affine_coset_distance_distribution`, `syndromeLeaderSupports_two_eq_raw`, `distance_two_leader_distribution`, `no_nonzero_quadratic_vanishing`, `witness_not_hasGRSQuadratic`, `witness_not_projectivelyGRS_of_implies_quadratic`, `extension_independence_spectrum`, `maximal_extension_spectrum`, `maximal_independent_extension_complete`, `completed_witness_matchings_oneFactorization` | Lean proves the `[6,3,4]₁₁` code/radius/deep-hole claims and closes the implication from the classical NRC/GRS quadratic consequence to non-GRS. The NRC/GRS dictionary itself remains the cited classical input. The affine distribution and `(900,150,100)` split range over actual syndromes and actual finite coefficient words, with a proved ray bijection and support equality. Every counted maximal extension is ordinarily complete, and the six distinct antipodal additions give a checked one-factorization. |
@@ -150,9 +150,11 @@ For every eight-leaf, the generated rejection records ordinary-uncovered points.
 six quadratic evaluation rows have an explicitly checked inverse.  In the remaining three leaves,
 an explicitly checked linear combination forces any conic equation through the uncovered locus to
 vanish at a selected point. `Q16Profile.lean` checks the exact 2630+3 split, while
-`Q16ExceptionalArithmetic.lean` checks the displayed factorizations, hit counts `(2,7,2)`, and
-the middle nonsingular model. `Q16QuadraticTransport.lean` proves an arbitrary-eight-cap
-classification chain plus symbolic coefficient pullback and preservation of nonzeroness. The C++ program and report are reproducible
+`Q16ExceptionalArithmetic.lean` identifies the actual three forced-hit records and proves that
+their evaluation kernels are precisely the three displayed coefficient lines, in addition to the
+factorizations, hit counts `(2,7,2)`, and middle nonsingular model.
+`Q16QuadraticTransport.lean` proves the end-to-end arbitrary-eight-arc quadratic-avoidance theorem,
+including projective invariance of ordinary uncoveredness and quadratic zero sets. The C++ program and report are reproducible
 provenance only; the theorem depends on the emitted data through kernel-checked local predicates.
 
 ## Axiom audit
@@ -177,6 +179,9 @@ There is no `sorryAx`, custom axiom, `admit`, or `native_decide` dependency.
 
 ## Explicit external boundary
 
-The only deep paper input intentionally not reproved is the Kim--Vu complete-arc estimate.  It is
-represented by the named hypothesis `KimVuBound` and appears in theorem signatures; it is not a
-global axiom and is not used by the four finite-example results.
+The only deep asymptotic estimate intentionally not reproved is the Kim--Vu complete-arc bound.
+It is represented by the named hypothesis `KimVuBound`, appears in theorem signatures rather than
+as a global axiom, and is not used by the five finite-example results. The q=11 projectively-GRS
+interpretation separately uses the cited classical normal-rational-curve/GRS dictionary; Lean
+checks the complete algebraic implication after that dictionary. The cited ordinary q=16 class
+count is only an external consistency check and is not a proof input.

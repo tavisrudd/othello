@@ -64,24 +64,26 @@ entries, while `StepBooksValid` proves that the books cover the current parent l
 maps an arbitrary eight-arc to a listed leaf.  Thus closure and exhaustiveness
 of the lists are certified, not delegated to the generator.  At every leaf,
 kernel-checked ordinary-uncovered points either give a full-rank six-row
-quadratic evaluation matrix (2630 leaves), or force the unique rank-five
-quadratic to hit the arc (three leaves).  The semantic proof transports this
+quadratic evaluation matrix (2630 leaves), or force the unique kernel line
+to hit the arc (three leaves). The three latter matrices are separately
+proved to have exactly the displayed one-dimensional kernels. The semantic proof transports this
 rejection to arbitrary eight-arcs and arbitrary nonsingular conics.
 
 The total of 2633 projective eight-arc classes is not a new classification
 claim: it independently reproduces Theorem 3.8.1 of Al-Seraji--Al-Ogali
 (2018). The additional computation partitions those known ordinary classes
 by a different invariant: 2630 full-rank ordinary-uncovered quadratic
-evaluation systems and three rank-five systems forced to meet the arc.
+evaluation systems and three systems with a checked one-dimensional kernel forced to meet the arc.
 
 The classification proves a statement strictly stronger than the conic application: for every
 eight-arc in `PG(2,16)`, no nonzero homogeneous quadratic, singular or nonsingular, contains its
 entire ordinary-uncovered locus while avoiding the arc. Projective invariance is explicit:
 normalizing by `g` replaces a form `Q` by `Q ∘ g⁻¹`, preserves nonzeroness, transports zero sets,
 and carries the ordinary-uncovered locus bijectively. Lean checks the stronger alternative for
-every canonical leaf, the explicit arbitrary-eight-arc classification chain, and symbolic
-coefficient pullback with preservation of nonzeroness. The equality `U(gA)=gU(A)` is the short
-projective-incidence step written in the manuscript; the full conic corollary is also formalized.
+every canonical leaf and, in
+`arbitrary_eight_arc_projectiveQuadraticAvoidance`, the complete arbitrary-eight-arc statement.
+That theorem includes coefficient pullback, preservation of nonzeroness, projective transport of
+zero sets, and the identity `U(gA)=gU(A)`. The full conic corollary is also formalized.
 
 The manuscript now isolates the underlying linear-algebra argument as the
 general uncovered-evaluation obstruction: injective evaluation on the
@@ -90,8 +92,9 @@ uncovered evaluations, excludes a zero locus that contains the former and
 avoids the latter. The quadratic certificate is its degree-two instance.
 The displayed factorizations of the two singular exceptional forms and the
 seven-point incidence of the nonsingular exception are direct `GF(16)`
-arithmetic descriptions. `Q16ExceptionalArithmetic.lean` now checks both factorizations, the
-three exact arc-hit counts `(2,7,2)`, and an invertible standard-conic model for the middle form;
+arithmetic descriptions. `Q16ExceptionalArithmetic.lean` identifies them with the actual three
+forced-hit records and checks their exact one-dimensional kernels, both factorizations, the three
+arc-hit counts `(2,7,2)`, and an invertible standard-conic model for the middle form;
 classification completeness does not depend on them.
 
 For the (q=11) witness, the verified value (I_C=0) implies that all 15
@@ -164,8 +167,7 @@ condition, and coverage on the (q^2+q+1) canonical projective representatives; `
 proves that acceptance implies semantic relative completeness. The accepted coordinate list need
 not be normalized or duplicate-free.
 
-The focused evaluation, syndrome/coding, and q11 modules build successfully; the top-level
-aggregate recheck is deferred only while an unrelated generated Q25 leaf sequence is compiling.
+The focused modules and the top-level `RelativeConicArcs.Results` aggregate build successfully.
 No proof uses `sorry`, `admit`, a custom axiom, or
 `native_decide`. The load-bearing certificate, arithmetic, and final numerical theorems report
 exactly `[propext, Classical.choice, Quot.sound]`; see `lean/RelativeConicArcs/TRUST.md` for the
