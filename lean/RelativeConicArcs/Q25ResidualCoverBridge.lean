@@ -23,6 +23,22 @@ def rowConfig (b c : Fin 310) : Finset Idx25 :=
   normalizedConfig (orbitCodeOfNumber ⟨5, by decide⟩)
     (orbitCodeOfNumber b) (orbitCodeOfNumber c)
 
+/-- Every point in a residual row occurs in its stable eight-entry presentation. -/
+theorem exists_configPoint_of_mem_rowConfig (b c : Fin 310) {p : Idx25}
+    (hp : p ∈ rowConfig b c) :
+    ∃ i : Fin 8, configPoint (orbitCodeOfNumber ⟨5, by decide⟩)
+      (orbitCodeOfNumber b) (orbitCodeOfNumber c) i = p := by
+  simp [rowConfig, normalizedConfig, fixedPair, orbitPair] at hp
+  rcases hp with h | h | h | h | h | h | h | h
+  · exact ⟨6, h.symm⟩
+  · exact ⟨4, h.symm⟩
+  · exact ⟨2, h.symm⟩
+  · exact ⟨0, h.symm⟩
+  · exact ⟨1, h.symm⟩
+  · exact ⟨3, h.symm⟩
+  · exact ⟨5, h.symm⟩
+  · exact ⟨7, h.symm⟩
+
 /-- The normalized representative named by a valid transport payload. -/
 def ValidRowPayload.canonicalConfig (p : ValidRowPayload) : Finset Idx25 :=
   rowConfig p.canonicalB p.canonicalC
