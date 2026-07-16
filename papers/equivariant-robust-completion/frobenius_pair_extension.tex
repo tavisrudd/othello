@@ -60,7 +60,10 @@ with the general count, the extension result covers every prime-power
 base-field order $s\ge5$.  For every $s\ge7$, an exact five-profile
 lower-envelope calculation gives at least $319$ legal conjugate pairs for
 every invariant eight-arc and hence at least $318$ alternate repairs after
-arbitrary nonfixed-orbit deletion.
+arbitrary nonfixed-orbit deletion.  More generally, deleting a selected
+orbit from an invariant $(k+2)$-arc leaves at least $r$ alternate repairs
+whenever
+$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.
 \end{abstract}
 
 \section{Introduction}
@@ -96,10 +99,13 @@ into an orbit-valued extension count.  The main results are:
       at least two distinct fresh conjugate-pair extensions, yielding
       alternate-orbit repair after arbitrary nonfixed-orbit deletion, and,
       together with the general estimate, covering every prime-power base
-      order $s\ge5$; and
+      order $s\ge5$;
 \item an exact five-profile first-order lower envelope for invariant
       eight-arcs over every $s\ge7$, yielding at least $318$ alternate repairs
-      after arbitrary nonfixed-orbit deletion; and
+      after arbitrary nonfixed-orbit deletion;
+\item a parameterized robust exchange theorem for invariant $(k+2)$-arcs,
+      with the exact uniform profile obstruction
+      $\lfloor(k-1)^2/4\rfloor$; and
 \item a square-root lower bound for arcs that are saturated with respect to
       conjugate-pair insertion.
 \end{enumerate}
@@ -120,15 +126,24 @@ lines.  Jungnickel's arcs in Baer-semiplane complements
 \cite{Ueberberg1997} are also adjacent but concern different incidence or
 collineation problems.
 
+Dye gives exact completion geometry for the special family of Clebsch
+hexagons and a five-valent adjacency graph defined by sharing an associated
+triangle~\cite[Proposition~1 and Theorems~7--8, pp.~282--284]{Dye1991}.
+Blokhuis, Seress, and Wilbrink classify extremal complete exterior sets
+relative to a conic~\cite[pp.~143--146]{BlokhuisSeressWilbrink1992}.
+Neither work treats arbitrary plane arcs invariant under the quadratic
+field-Frobenius involution, counts fresh legal conjugate-pair extensions, or
+requires a different replacement after every selected-orbit deletion.
+
 Ordinary arc and MDS lengthening results
 \cite{Alderson2005,AldersonBruenSilverman2007,Alderson2026} impose no
 quadratic Galois-pair constraint.  Likewise, the classification of
 Galois-invariant subsets of $\mathbf P^1$~\cite{LopezMaisnerNartXarles2002}
 does not treat arbitrary plane arcs or their pair extensions.  Bounded
 zbMATH Open, OpenAlex, Crossref, and source-level searches found no exact
-precursor for the quantitative criterion below or for the uniform
-$\PG(2,25)$ theorem.  This is negative search evidence, not a claim of
-historical priority.
+precursor for the quantitative criterion below for arbitrary quadratic-
+field-Frobenius-invariant arcs, or for the uniform $\PG(2,25)$ theorem.
+This is negative search evidence, not a claim of historical priority.
 
 \section{Quadratic Frobenius and mate lines}
 
@@ -156,7 +171,7 @@ $\cC\cup Q$ is an arc.  Let $\Npair(\cC)$ be the number of such pairs.
 \end{definition}
 
 \begin{definition}[Alternate-orbit repair]\label{def:alternate-repair}
-Let $A$ be an invariant ten-arc, let $O\subseteq A$ be a selected nonfixed
+Let $A$ be an invariant arc, let $O\subseteq A$ be a selected nonfixed
 conjugate orbit, and put $D=A\setminus O$.  An \emph{alternate-orbit repair}
 of this deletion is a legal conjugate-pair extension $Q$ of $D$ with
 $Q\ne O$.  The erased orbit $O$ is itself legal for $D$, so a lower bound
@@ -335,8 +350,8 @@ pairs.  The profile of an invariant eight-arc is
 \]
 
 Table~\ref{tab:q25-profiles} records the numerical data and the proved
-lower bound for each profile.  In the exceptional row the bound $L\ge1$
-records the kernel-checked existence theorem; the stronger observed census
+lower bound for each profile.  In the exceptional row the bound $L\ge2$
+records the kernel-checked two-witness theorem; the stronger observed census
 minimum in Remark~\ref{rem:census} is not used.
 
 \begin{table}[ht]
@@ -347,7 +362,7 @@ minimum in Remark~\ref{rem:census} is not used.
 $f$ & $e$ & $E$ & $M$ & proved $L\ge$ & method \\
 \midrule
 $0$ & $4$ & $27$ & $12$ & $5$   & secant-index moments \\
-$2$ & $3$ & $17$ & $12$ & $1$   & kernel-checked certificate \\
+$2$ & $3$ & $17$ & $12$ & $2$   & kernel-checked two-witness certificate \\
 $4$ & $2$ & $11$ & $10$ & $4$   & fixed-center incidence \\
 $6$ & $1$ & $9$  & $6$  & $36$  & uniform criterion \\
 $8$ & $0$ & $11$ & $0$  & $110$ & uniform criterion \\
@@ -606,6 +621,52 @@ gives $\Npair(D)\ge319$.  Excluding $O$ leaves at least $318$ different
 legal pairs.
 \end{proof}
 
+\begin{theorem}[Parameterized robust equivariant exchange]
+\label{thm:parameterized-repair}
+Let $s\ge3$ be a prime power, let $k\ge1$, and let $r\ge0$.  Put
+\[
+  N(s)=\frac{s(s-1)}2,
+  \qquad
+  W(k)=\left\lfloor\frac{(k-1)^2}{4}\right\rfloor.
+\]
+If
+\begin{equation}\label{eq:repair-phase}
+  W(k)+r+1\le N(s),
+\end{equation}
+then deleting any selected nonfixed conjugate orbit from a $\phi$-invariant
+$(k+2)$-arc in $\PG(2,s^2)$ leaves at least $r$ alternate-orbit repairs.
+The obstruction envelope $W(k)$ is exact over all profiles $k=f+2e$.
+In particular, if $s\ge4$ and $1\le k\le s+1$, every such deletion has an
+alternate repair.
+\end{theorem}
+
+\begin{proof}
+For a remainder profile $k=f+2e$, the noninvariant old-secant obstruction is
+\[
+  M=f e+e(e-1)=e(k-e-1).
+\]
+The concave quadratic has the exact profile maximum
+$M\le W(k)$: equality is attained by $f=0$ when $k$ is even and by $f=1$
+when $k$ is odd.  Condition~\eqref{eq:repair-phase} implies $k\le2s+1$.
+For $s\ge3$ this gives $k<s^2+1$; the completed-square occupation identity
+\[
+  2E_{\mathrm{occ}}=(s+1)^2+k-(f-s-1)^2
+\]
+then shows that at least one fixed carrier is empty.  On that carrier,
+Theorem~\ref{thm:pair-criterion} gives
+\[
+  \Npair(D)\ge N(s)-M\ge N(s)-W(k)\ge r+1.
+\]
+The erased orbit is one of these legal pairs, so excluding it leaves at
+least $r$ alternatives.
+
+For the rectangular corollary, $k\le s+1$ gives
+$4W(k)\le(k-1)^2\le s^2$, while $s\ge4$ gives
+$s^2+8\le2(s^2-s)=4N(s)$.  Hence $W(k)+2\le N(s)$, which is
+\eqref{eq:repair-phase} with $r=1$.  The restriction $s\ge4$ is genuine for
+this rectangle: $(s,k)=(3,4)$ misses the inequality by one.
+\end{proof}
+
 \begin{corollary}[All base orders from five]\label{cor:all-orders}
 Let $s\ge5$ be a prime power.  Every Frobenius-invariant eight-arc in
 $\PG(2,s^2)$ admits an extension by a fresh nonfixed point together with
@@ -651,6 +712,10 @@ mathlib~\cite{Mathlib2020}.  The supplementary source is divided as follows.
       piecewise lower envelope, the semantic envelope comparison in
       Theorem~\ref{thm:profile-envelope}, and the uniform $318$-repair
       conclusion in Corollary~\ref{cor:alternate-repair}.
+\item The phase-diagram and parameterized-repair modules prove the exact
+      maximum $W(k)=\lfloor(k-1)^2/4\rfloor$, derive the empty-carrier range
+      from the phase inequality itself, and prove
+      Theorem~\ref{thm:parameterized-repair} for semantic legal-pair finsets.
 \item The collision and invisibility modules prove
       Proposition~\ref{prop:linewise}, Corollary~\ref{cor:aggregate}, the
       fixed-center interpretation, and the cross-pair estimate
@@ -699,6 +764,13 @@ Source module & Paper-facing declaration or role \\
 \path{AlternateOrbitRepairProfile}\allowbreak\path{EnvelopeResult.lean} &
   \path{profileEnvelope_le_card_globalLegalPairs_of_card_eight},
   \path{three_hundred_eighteen_le_alternateLegalPairs_of_seven_le} \\
+\path{RelativeConicArcs/}\newline
+\path{AlternateOrbitRepairPhaseDiagram.lean} &
+  \path{exists_profile_attaining_worstObstruction},
+  \path{phase_profile_product_lowerBound} \\
+\path{RelativeConicArcs/Parameterized}\newline
+\path{AlternateOrbitRepair.lean} &
+  \path{card_alternateLegalPairs_ge_of_phase} \\
 \path{RelativeConicArcs/Q25AlternateOrbitRepair.lean} &
   \path{two_le_card_globalLegalPairs_q25},
   \path{one_le_alternateLegalPairs_q25}, and the four profile bounds \\
@@ -731,7 +803,8 @@ LEAN_NUM_THREADS=6 nix develop --command lake build \
   RelativeConicArcs.Q25AllProfiles \
   RelativeConicArcs.AlternateOrbitRepair \
   RelativeConicArcs.Q25AlternateOrbitRepair \
-  RelativeConicArcs.AlternateOrbitRepairProfileEnvelopeResult
+  RelativeConicArcs.AlternateOrbitRepairProfileEnvelopeResult \
+  RelativeConicArcs.ParameterizedAlternateOrbitRepair
 \end{verbatim}
 The manuscript PDF is reproduced from its source directory with
 \begin{verbatim}
@@ -752,7 +825,9 @@ semantic count also proves deletion robustness: for
 every base order $s\ge7$, deleting any selected nonfixed orbit from an
 invariant ten-arc leaves at least $318$ alternate repairs.  More precisely,
 the certified first-order envelope changes its minimizing profile at
-$s=7$, $s=8,9$, and $s\ge10$.  In
+$s=7$, $s=8,9$, and $s\ge10$.  The parameterized exchange theorem extends
+this deletion mechanism from ten-arcs to invariant $(k+2)$-arcs throughout
+the exact phase $\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  In
 $\PG(2,25)$ the four nonexceptional profiles have the stated stronger
 alternate bounds, while the exceptional two-fixed-point profile still has
 at least one alternative.  Thus uniform order-five alternate repair holds
