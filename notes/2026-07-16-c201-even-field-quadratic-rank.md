@@ -3,7 +3,7 @@
 **Lane:** `relconic`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE — current `relconic` entry handoff and bounded theorem probe
+**Status:** ACTIVE — Gate 1 closed; full `q=64` census rejected at sizing; orbit-family probe next
 
 ## Objective
 
@@ -26,6 +26,26 @@ three exceptional `GF(16)` leaves.
 - `Q16QuadraticAvoidance.lean` and `Q16Result.lean` kernel-check the complete
   `2630 + 3` split and its relative-conic consequence.
 - The defect and stability package bounds the candidate incidence profiles.
+
+## Current result
+
+Gate 1 and the `q=64` sizing gate are recorded in
+[`2026-07-16-c201-gate1-q16-anatomy.md`](2026-07-16-c201-gate1-q16-anatomy.md).
+The independent frozen-list analyzer reconstructs the three deficient leaves,
+their quadratic types, intersections, stabilizers, orbits, secant spectra,
+and defects.  They are exactly the three lowest-defect leaves; no full-rank
+leaf shares either deficient index/defect cell.  The projectively invariant
+kernel/restricted-evaluation formulation is explicit.
+
+At `q=64`, the corrected lower-bound candidate is `k=13`, but a rigorous
+frame-normalized counting lower bound already gives more than `10^18`
+projective twelve-arc classes.  The full census is therefore closed by the
+sizing stop condition.
+
+**Next:** choose and test only a natural symbolic or group-orbit family at
+`q=64`.  Do not generate arbitrary arcs.  Promote C201 only if that family
+supports a field-uniform geometric criterion or gives a minimal falsifying
+counterexample to the `q=16` low-defect mechanism.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra

@@ -114,6 +114,8 @@ The source-by-source comparison is recorded in
 - `check_evaluation_dichotomy.py` — small-field sharp-threshold adversarial checker
 - `check_q11_structure.py` / `.cpp` — independent q11 structure, invariance, and mutation checks
 - `search_rhoc16.cpp` / `search_rhoc16_output.txt` — exact eight-arc classification generator + run
+- `analyze_c201_q16.py` — independent frozen-list quadratic-rank, defect, stabilizer, and orbit anatomy
+- `size_c201_q64.py` — corrected-bound arithmetic and rigorous frame-normalized `q=64` census rejection
 - `../../lean/RelativeConicArcs/` — standalone Lean formalization and kernel-checked certificates
 
 ## Related but separate
