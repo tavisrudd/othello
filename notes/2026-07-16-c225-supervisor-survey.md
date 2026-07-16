@@ -34,9 +34,24 @@ Can an existing local supervisor supply durable process ownership and event-driv
 - `KillMode=mixed` sends TERM only to the main process, then sends the final kill signal to remaining
   cgroup processes after the main process exits or `TimeoutStopSec` expires. This better matches a
   Python supervisor that must forward, reap, unlock, and publish before it exits.
+- The checked-in non-Lean capability fixture now confirms the exact C225 surface with
+  `KillMode=mixed`, `SendSIGKILL=yes`, and `TimeoutStopSec=120s`: exit 0 and exit 7 propagate as 0
+  and 7; SIGKILL returns 255 from `systemd-run` while retained properties report `Result=signal`,
+  `ExecMainCode=2`, and `ExecMainStatus=9`; killing the waiter leaves its service active until
+  independent completion.
+- A `Type=exec` missing executable returns client code 1 with a bounded diagnostic and is immediately
+  unloaded on this host. Recovery cannot infer that failure from a later missing-unit observation;
+  the live adapter must capture it. Successful services likewise garbage-collect normally.
+- NixOS coreutils applets are multicall symlinks. The adapter must pass an absolute executable path
+  without resolving away the symlink spelling, because doing so changes `argv[0]` and applet
+  dispatch (observed with `sleep`).
 
 These were harmless non-Lean probes using `true`, `sleep 2`, and explicit shell exit codes. Probe
 units were allowed to unload or were reset after inspection.
+
+The reproducible fixture is `lean/scripts/lean-build-systemd-probe.py`. It emits one bounded JSON
+object, uses only UUID-scoped `othello-lean-c225-probe-*` units, and stops/resets only each exact
+fixture unit in `finally`.
 
 ## Tool comparison
 

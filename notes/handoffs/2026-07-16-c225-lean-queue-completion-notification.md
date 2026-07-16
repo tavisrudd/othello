@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: QUEUED — ADR revised after adversarial review and supervisor survey
+**Status**: IN PROGRESS — non-Lean systemd capability gate passed; parallel adapter rollout next
 
 ## Goal
 
@@ -19,6 +19,12 @@ Owned implementation paths:
   confirms that a wrapper is preferable to a documented command
 - narrow operator guidance in `lean/AGENTS.md`
 - this handoff, the C225 supervisor survey, and the C225 queue row
+
+Rollout constraint (user direction, 2026-07-16): other agents are using the legacy Python queue.
+Do not edit, stop, or change the launch contract beneath those users. Build and exercise the C225
+path as adjacent, explicitly selected tooling with separate managed run directories. Keep the
+legacy path available during migration; removal or in-place convergence requires a later confirmed
+quiescent window and explicit rollout decision.
 
 Do not change Lake package boundaries, shared-tree ownership rules, resource profiles, target
 semantics, or another lane's running queue. Real Lean validation remains subject to the build-sys
@@ -144,7 +150,10 @@ systemd-run --user --wait --quiet --service-type=exec --expand-environment=no \
   <absolute-python> <absolute-lean-build-queue.py> run ... --run-dir <absolute-run-dir>
 ```
 
-`Type=exec` makes failed `execve` distinguishable from a successfully started worker. `--wait`
+`Type=exec` makes failed `execve` distinguishable from a successfully started worker to the live
+waiting client. On the supported host, that start failure returns client code 1 with a bounded
+diagnostic and the transient unit is immediately unloaded, so it supplies no retained
+`InvocationID` for later recovery. `--wait`
 blocks in systemd's event loop until the service deactivates and propagates the service exit status.
 The manager, not the harness terminal, remains the worker's parent and cgroup owner. If the harness
 or its `systemd-run` client disappears, the service continues while the same user manager remains
@@ -176,9 +185,11 @@ content; byte-identical or canonically identical content is idempotent, while an
 error and suppresses notification. No adapter overwrites `submission.json`, `accepted.json`, or
 `completion.json`. The queue worker is the sole writer of `status.json`.
 
-Do not use `--collect` initially. Failed/abnormally terminated units should remain inspectable until
-the result has been captured; successful units may unload normally after the queue has atomically
-recorded success. Cleanup/reset of failed transient units happens only after outcome capture.
+Do not use `--collect` initially. Services that start and then fail or terminate abnormally should
+remain inspectable until the result has been captured; successful units may unload normally after
+the queue has atomically recorded success. A `Type=exec` start failure is the measured exception:
+the live client must capture it before returning because this manager unloads it immediately.
+Cleanup/reset of retained failed transient units happens only after outcome capture.
 
 The first implementation must retain the queue's measured `taskset`, thread, `choom`, and quiet-log
 behavior. Moving those controls to systemd properties is a separate measured decision.
@@ -232,6 +243,8 @@ identity or manager access is unavailable, the effective state is `unknown`, not
 
 If `execve` succeeds but Python exits before status creation, the canonical state is null and the
 bound service evidence yields `effective_state=failed-before-status`; `queue_exit_code` is null.
+If `execve` itself fails, only a live adapter that captured the `Type=exec` client failure may use
+that effective state. A later recovery observer with no retained unit reports `unknown`.
 Service exit 2 is not called a queue refusal unless a matching canonical `refused` record exists.
 Worker/cgroup OOM is external evidence; child-only OOM is an ordinary child failure observed by
 Python.
@@ -330,7 +343,8 @@ retention, parsing, or availability, and unbounded journal content never reaches
 
 ### Consequences
 
-- We delete or deprecate the unreliable Python detach path instead of hardening it into a supervisor.
+- We introduce an adjacent systemd-managed path without changing the legacy Python detach contract
+  beneath active users. Migration/deprecation is a later quiescent rollout decision.
 - systemd supplies process-group ownership, exit accounting, event-driven waiting, and abnormal-exit
   evidence; Python remains focused on Lean locking, phases, logs, and target outcomes.
 - The harness spends no model turns on periodic status checks.
@@ -421,12 +435,24 @@ retention, parsing, or availability, and unbounded journal content never reaches
    lock release.
 5. Add bounded completion capture, exact failed-unit cleanup, and the primary `--wait` bridge.
 6. Implement D-Bus reattachment only after its subscribe/ref/snapshot algorithm passes race tests.
-7. Remove polling examples and deprecate Python `--detach` with an actionable foreground/systemd
-   message; do not leave two competing detach contracts.
+7. Add systemd-path guidance without changing legacy `--detach` during the parallel rollout. After
+   migration and a confirmed quiescent window, make an explicit keep/deprecate/converge decision;
+   do not silently redirect legacy invocations.
 8. Add the bounded provenance-aware active/recent queue listing.
 9. Add failure, legacy, malformed-state, duplicate-reader, and manager-unavailable tests.
 10. Document the live harness bridge and stable event-ID/deduplication contract.
 11. Run the lightweight real gate only after confirming shared-tree ownership.
+
+Step 1 passed on 2026-07-16 via
+`lean/scripts/lean-build-systemd-probe.py`, without invoking Lean or the legacy queue. The measured
+surface is systemd 258.7 with `--user --wait --quiet --service-type=exec`, absolute executable argv,
+disabled environment expansion, explicit unit/description/working-directory/environment, and
+`KillMode=mixed`, `SendSIGKILL=yes`, `TimeoutStopSec=120s`. Exit 0 and exit 7 propagate unchanged;
+SIGKILL produces client code 255 plus retained `Result=signal`, `ExecMainCode=2`,
+`ExecMainStatus=9`; failed exec produces client code 1 and no retained unit; killing only the
+waiting client leaves the service active through independent completion. Successful services are
+garbage-collected. Exact failed units are reset in fixture cleanup. On NixOS, absolute executable
+paths must preserve multicall symlink spellings rather than resolving them and changing `argv[0]`.
 
 ## Adversarial design review
 
