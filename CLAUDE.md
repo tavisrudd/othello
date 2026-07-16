@@ -233,6 +233,21 @@ your own command line — it kills the shell that issued it. Stopping **your own
 or verified PID, on evidence, is correct; killing on memory pressure alone is not; killing another
 lane's workers never is.
 
+**Do not spend tokens dumping the process table.** After a Lean command ends, do not immediately
+recheck processes; wait at least 20 seconds of actual uncertainty before polling. Filter at the
+source with a narrow query such as
+`ps -C lean -C lake.orig -o pid,ppid,etime,rss,comm,args --no-headers` (or exact-name `pgrep`), and
+only request the fields needed for the ownership decision. Never run `ps -eo ...` and then filter
+its hundreds of unrelated rows in a pipe, tool wrapper, or agent code. Poll sparsely, and prefer a
+scripted serial runner that waits and reports only target milestones over repeatedly watching a
+healthy build.
+
+For a guarded single-file elaboration, use
+`lean/scripts/guarded-lean RelativeConicArcs/Module.lean` instead of repeating the full affinity,
+thread-cap, OOM-priority, Nix-shell, and `lake env lean` prefix. It defaults to cores `20-23`, one
+Lean thread, and `oom_score_adj=1000`; exceptional overrides are
+`LEAN_GUARD_CPUSET`, `LEAN_GUARD_THREADS`, and `LEAN_GUARD_OOM_SCORE_ADJ`.
+
 **Staleness comes from content traces, not mtimes.** An mtime-derived "what's stale" list will miss
 modules Lake intends to rebuild. Probe exact targets with `lake build --no-build <targets>` — it
 exits immediately if a target is not up to date and triggers no fan-out. If it reports a foreign

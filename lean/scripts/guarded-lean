@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+lean_root=$(cd -- "$script_dir/.." && pwd)
+
+cpu_set=${LEAN_GUARD_CPUSET:-20-23}
+threads=${LEAN_GUARD_THREADS:-1}
+oom_score_adj=${LEAN_GUARD_OOM_SCORE_ADJ:-1000}
+
+cd "$lean_root"
+exec taskset -c "$cpu_set" \
+  env LEAN_NUM_THREADS="$threads" \
+  choom -n "$oom_score_adj" -- \
+  nix develop --command lake env lean "$@"
