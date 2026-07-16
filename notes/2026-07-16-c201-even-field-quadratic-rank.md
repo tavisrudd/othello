@@ -3,7 +3,10 @@
 **Lane:** `relconic`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE — split-Z3 ternary relation indexed; coverage-directed probe next
+**Status:** ACTIVE — bounded split-Z3 optimizer misses coverage gate; certificate or closure next
+
+Incidental observations are logged append-only in
+[`2026-07-16-c201-discovery-track.md`](2026-07-16-c201-discovery-track.md).
 
 ## Objective
 
@@ -92,10 +95,18 @@ orbits meeting its nine mixed secants, so `F=0` is one bitset lookup.  The
 100,000-arc-draw probe found ordinary-uncovered sizes 824--1,055, far above the
 necessary bound 65, but this is evidence rather than an exhaustive exclusion.
 
-**Refined next:** use the exact ternary index in a bounded coverage-directed
-optimizer, stopping immediately at a checked `|U(A)|<=65` witness.  If no
-witness appears, do not call the family closed without a certified global
-coverage upper bound; do not enumerate compatibility cliques.
+The coverage-directed probe is recorded in
+[`2026-07-16-c201-q64-z3-coverage.md`](2026-07-16-c201-q64-z3-coverage.md).
+Exhaustive one-orbit descent from 500 deterministic starts produced local
+optima with ordinary-uncovered sizes 805--935; nine starts reached 805.  The
+best checked result remains 740 points above the necessary gate, so quadratic
+analysis was skipped.  This is strong bounded evidence, not a global family
+exclusion.
+
+**Refined next:** either obtain a certified global coverage upper bound for
+the indexed split-`Z3` family, or close C201 explicitly as a failure of the
+tested bounded natural-family mechanisms rather than as a theorem excluding
+the family.  Do not enumerate compatibility cliques.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra
