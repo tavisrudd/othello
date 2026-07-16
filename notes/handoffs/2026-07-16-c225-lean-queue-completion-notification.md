@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — immutable submission identity landed; concurrent launch handshake next
+**Status**: IN PROGRESS — concurrent acceptance handshake landed; strict worker adoption next
 
 ## Goal
 
@@ -470,6 +470,18 @@ same-directory temporary plus no-replace hard-link installation. Eight concurren
 publishers converge on one digest; conflicts, symlinks, wrong modes, wrong owners, and UUID reuse
 fail closed. No service submission or Lean invocation exists yet. Step 3b is the concurrent
 `systemd-run --wait` plus D-Bus InvocationID acceptance handshake.
+
+Step 3b now passes 25 default tests plus an opt-in real user-manager fixture. The adapter opens one
+persistent `libsystemd` user-bus connection and calls `Subscribe` before spawning the blocking
+`systemd-run --wait` client. Once the UUID unit appears it takes `RefUnit` on that same connection,
+rereads a confirmed snapshot, and matches the unchanged manager generation, `Id`, `Transient`,
+nonzero `InvocationID`, working directory, complete D-Bus-decoded `ExecStart` argv, run-ID nonce,
+and submission-digest nonce before set-once publication of deterministic `accepted.json`. The
+connection releases the exact reference after the waiter exits. The harmless live fixture used a
+one-second `sleep`, observed exit 0, and cleaned its exact UUID unit; it never invoked Lean or the
+legacy queue. Nix Python cannot discover `libsystemd` through `find_library`, so the supported host
+fallback is the stable `/run/current-system/sw/lib/libsystemd.so.0` closure symlink. Step 3 is now
+complete; step 4 remains strict managed-worker adoption and pre-lock format-2 status.
 
 ## Adversarial design review
 

@@ -361,5 +361,138 @@ class SubmissionIdentityTests(unittest.TestCase):
             MODULE.publish_set_once(path, {"format": 1, "run_id": "different"}, os.geteuid())
 
 
+class AcceptanceHandshakeTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.submission = {
+            "run_id": "run-aaaaaaaabbbbccccddddeeeeeeeeeeee",
+            "unit": "othello-lean-aaaaaaaabbbbccccddddeeeeeeeeeeee.service",
+            "lean_root": "/fixture/lean",
+            "worker_argv": ["/fixture/python", "/fixture/worker.py", "run"],
+            "origin": {
+                "harness": "codex",
+                "session_id": "session-123456789",
+                "work_lane": "build-sys",
+                "task_id": "C225",
+            },
+            "manager_generation": {
+                "boot_id": "12345678-1234-1234-1234-123456789abc",
+                "dbus_owner": ":1.42",
+                "manager_pid": 4321,
+                "manager_start_ticks": 98765,
+            },
+        }
+        self.digest = "a" * 64
+        self.snapshot = {
+            "Id": self.submission["unit"],
+            "Transient": "yes",
+            "InvocationID": "b" * 32,
+            "WorkingDirectory": self.submission["lean_root"],
+            "ExecStartArgv": self.submission["worker_argv"],
+            "EnvironmentEntries": [
+                f"OTHELLO_LEAN_RUN_ID={self.submission['run_id']}",
+                f"OTHELLO_LEAN_SUBMISSION_SHA256={self.digest}",
+            ],
+        }
+
+    def test_systemd_object_path_uses_bus_escaping(self) -> None:
+        self.assertEqual(
+            MODULE.systemd_object_path("othello-lean_a.service"),
+            "/org/freedesktop/systemd1/unit/othello_2dlean_5fa_2eservice",
+        )
+
+    def test_transient_command_binds_identity_and_shutdown_contract(self) -> None:
+        command = MODULE.transient_command(
+            self.submission, self.digest, systemd_run=Path("/fixture/systemd-run")
+        )
+        self.assertEqual(command[0], "/fixture/systemd-run")
+        self.assertIn("--wait", command)
+        self.assertIn("--service-type=exec", command)
+        self.assertIn(f"--unit={str(self.submission['unit']).removesuffix('.service')}", command)
+        self.assertIn(f"--setenv=OTHELLO_LEAN_RUN_ID={self.submission['run_id']}", command)
+        self.assertIn(f"--setenv=OTHELLO_LEAN_SUBMISSION_SHA256={self.digest}", command)
+        self.assertIn("--property=KillMode=mixed", command)
+        self.assertIn("--property=TimeoutStopSec=120s", command)
+        self.assertEqual(command[-3:], self.submission["worker_argv"])
+
+    def test_matching_snapshot_produces_stable_acceptance(self) -> None:
+        accepted = MODULE.validate_acceptance_snapshot(
+            self.submission,
+            self.digest,
+            self.snapshot,
+            self.submission["manager_generation"],
+        )
+        self.assertEqual(accepted["invocation_id"], "b" * 32)
+        self.assertEqual(accepted["submission_sha256"], self.digest)
+        self.assertNotIn("accepted_utc", accepted)
+
+    def test_each_identity_mismatch_is_rejected(self) -> None:
+        cases = {
+            "generation": (self.snapshot, {**self.submission["manager_generation"], "manager_pid": 9}),
+            "unit": ({**self.snapshot, "Id": "foreign.service"}, self.submission["manager_generation"]),
+            "transient": ({**self.snapshot, "Transient": "no"}, self.submission["manager_generation"]),
+            "invocation": ({**self.snapshot, "InvocationID": ""}, self.submission["manager_generation"]),
+            "working directory": ({**self.snapshot, "WorkingDirectory": "/wrong"}, self.submission["manager_generation"]),
+            "argv": ({**self.snapshot, "ExecStartArgv": ["/wrong"]}, self.submission["manager_generation"]),
+            "nonce": ({**self.snapshot, "EnvironmentEntries": []}, self.submission["manager_generation"]),
+        }
+        for label, (snapshot, generation) in cases.items():
+            with self.subTest(label=label), self.assertRaises(MODULE.StateError):
+                MODULE.validate_acceptance_snapshot(
+                    self.submission, self.digest, snapshot, generation
+                )
+
+
+@unittest.skipUnless(
+    os.environ.get("OTHELLO_SYSTEMD_LIVE_TEST") == "1",
+    "set OTHELLO_SYSTEMD_LIVE_TEST=1 for the harmless real user-manager fixture",
+)
+class LiveAcceptanceHandshakeTest(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.tmp.chmod(0o700)
+        self.state_root = self.tmp / "managed"
+        self.unit: str | None = None
+
+    def tearDown(self) -> None:
+        if self.unit is not None:
+            for action in ("stop", "reset-failed"):
+                subprocess.run(
+                    [str(MODULE.SYSTEMCTL_DEFAULT), "--user", action, self.unit],
+                    stdin=subprocess.DEVNULL,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+        shutil.rmtree(self.tmp)
+
+    def test_live_subscribe_reference_snapshot_and_wait(self) -> None:
+        generation = MODULE.manager_generation()
+        origin = MODULE.resolve_origin(
+            harness="manual",
+            session_id="c225-live-acceptance",
+            work_lane=None,
+            task_id=None,
+            environ={},
+        )
+        run_dir, submission, digest = MODULE.prepare_submission(
+            state_root=self.state_root,
+            lean_root=self.tmp,
+            worker_argv=["/run/current-system/sw/bin/sleep", "1"],
+            origin=origin,
+            generation=generation,
+        )
+        self.unit = str(submission["unit"])
+        accepted, returncode, stderr = MODULE.launch_accept_and_wait(
+            run_dir=run_dir,
+            submission=submission,
+            submission_digest=digest,
+            completion_timeout=10,
+        )
+        self.assertEqual(returncode, 0, stderr)
+        self.assertEqual(accepted["unit"], self.unit)
+        self.assertEqual(json.loads((run_dir / "accepted.json").read_text()), accepted)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
+import ctypes.util
 import hashlib
 import json
 import os
@@ -13,6 +15,7 @@ import shlex
 import stat
 import subprocess
 import sys
+import time
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -36,6 +39,9 @@ LEAN_ROOT_DEFAULT = Path(__file__).resolve().parents[1]
 BUSCTL_DEFAULT = Path("/run/current-system/sw/bin/busctl")
 BOOT_ID_DEFAULT = Path("/proc/sys/kernel/random/boot_id")
 PROC_ROOT_DEFAULT = Path("/proc")
+SYSTEMCTL_DEFAULT = Path("/run/current-system/sw/bin/systemctl")
+SYSTEMD_RUN_DEFAULT = Path("/run/current-system/sw/bin/systemd-run")
+ACCEPT_TIMEOUT = 10.0
 
 
 class OriginError(ValueError):
@@ -412,6 +418,311 @@ def manager_generation(
         "manager_pid": pid,
         "manager_start_ticks": start_ticks,
     }
+
+
+class SystemdBusLease:
+    """One persistent sd-bus connection holding the C225 subscription and unit reference."""
+
+    def __init__(self) -> None:
+        library_name = ctypes.util.find_library("systemd")
+        nixos_library = Path("/run/current-system/sw/lib/libsystemd.so.0")
+        if library_name is None and nixos_library.is_file():
+            library_name = str(nixos_library)
+        if library_name is None:
+            raise StateError("libsystemd is unavailable")
+        self.library = ctypes.CDLL(library_name)
+        self.library.sd_bus_open_user.argtypes = [ctypes.POINTER(ctypes.c_void_p)]
+        self.library.sd_bus_open_user.restype = ctypes.c_int
+        self.library.sd_bus_message_new_method_call.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_void_p),
+            ctypes.c_char_p,
+            ctypes.c_char_p,
+            ctypes.c_char_p,
+            ctypes.c_char_p,
+        ]
+        self.library.sd_bus_message_new_method_call.restype = ctypes.c_int
+        self.library.sd_bus_message_append_basic.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_char,
+            ctypes.c_void_p,
+        ]
+        self.library.sd_bus_message_append_basic.restype = ctypes.c_int
+        self.library.sd_bus_call.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_void_p,
+            ctypes.c_uint64,
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_void_p),
+        ]
+        self.library.sd_bus_call.restype = ctypes.c_int
+        self.library.sd_bus_message_unref.argtypes = [ctypes.c_void_p]
+        self.library.sd_bus_message_unref.restype = ctypes.c_void_p
+        self.library.sd_bus_unref.argtypes = [ctypes.c_void_p]
+        self.library.sd_bus_unref.restype = ctypes.c_void_p
+        self.bus = ctypes.c_void_p()
+        self.referenced_unit: str | None = None
+        result = self.library.sd_bus_open_user(ctypes.byref(self.bus))
+        if result < 0:
+            raise StateError(f"cannot open user-manager D-Bus: {os.strerror(-result)}")
+        try:
+            self._call("Subscribe")
+        except Exception:
+            self.close()
+            raise
+
+    def _call(self, member: str, string_argument: str | None = None) -> None:
+        message = ctypes.c_void_p()
+        reply = ctypes.c_void_p()
+        result = self.library.sd_bus_message_new_method_call(
+            self.bus,
+            ctypes.byref(message),
+            b"org.freedesktop.systemd1",
+            b"/org/freedesktop/systemd1",
+            b"org.freedesktop.systemd1.Manager",
+            member.encode(),
+        )
+        if result < 0:
+            raise StateError(f"cannot create D-Bus {member} call: {os.strerror(-result)}")
+        try:
+            if string_argument is not None:
+                encoded = ctypes.c_char_p(string_argument.encode())
+                result = self.library.sd_bus_message_append_basic(
+                    message, b"s", ctypes.cast(encoded, ctypes.c_void_p)
+                )
+                if result < 0:
+                    raise StateError(f"cannot encode D-Bus {member} call: {os.strerror(-result)}")
+            result = self.library.sd_bus_call(self.bus, message, 0, None, ctypes.byref(reply))
+            if result < 0:
+                raise StateError(f"D-Bus {member} failed: {os.strerror(-result)}")
+        finally:
+            if reply:
+                self.library.sd_bus_message_unref(reply)
+            self.library.sd_bus_message_unref(message)
+
+    def ref_unit(self, unit: str) -> None:
+        if self.referenced_unit is not None:
+            raise StateError("D-Bus lease already references a unit")
+        self._call("RefUnit", unit)
+        self.referenced_unit = unit
+
+    def close(self) -> None:
+        if not getattr(self, "bus", None):
+            return
+        if self.referenced_unit is not None:
+            try:
+                self._call("UnrefUnit", self.referenced_unit)
+            except StateError:
+                pass
+            self.referenced_unit = None
+        self.library.sd_bus_unref(self.bus)
+        self.bus = ctypes.c_void_p()
+
+    def __enter__(self) -> "SystemdBusLease":
+        return self
+
+    def __exit__(self, _type: object, _value: object, _traceback: object) -> None:
+        self.close()
+
+
+def systemd_object_path(unit: str) -> str:
+    encoded = "".join(
+        chr(byte) if chr(byte).isalnum() else f"_{byte:02x}" for byte in unit.encode()
+    )
+    return f"/org/freedesktop/systemd1/unit/{encoded}"
+
+
+def unit_snapshot(
+    unit: str,
+    *,
+    systemctl: Path = SYSTEMCTL_DEFAULT,
+    busctl: Path = BUSCTL_DEFAULT,
+    run_command: Callable[[Sequence[str]], subprocess.CompletedProcess[str]] = default_run_command,
+) -> dict[str, object] | None:
+    properties = (
+        "Id",
+        "LoadState",
+        "Transient",
+        "InvocationID",
+        "WorkingDirectory",
+        "Environment",
+        "ActiveState",
+        "SubState",
+    )
+    command = [str(systemctl), "--user", "show", unit, "--no-pager"]
+    command.extend(f"--property={name}" for name in properties)
+    result = run_command(command)
+    if result.returncode != 0:
+        return None
+    values: dict[str, str] = {}
+    for line in result.stdout.splitlines():
+        key, separator, value = line.partition("=")
+        if separator:
+            values[key] = value
+    if values.get("Id") != unit or values.get("LoadState") != "loaded":
+        return None
+
+    exec_result = run_command(
+        [
+            str(busctl),
+            "--user",
+            "--json=short",
+            "get-property",
+            "org.freedesktop.systemd1",
+            systemd_object_path(unit),
+            "org.freedesktop.systemd1.Service",
+            "ExecStart",
+        ]
+    )
+    if exec_result.returncode != 0:
+        raise StateError("cannot read transient service ExecStart")
+    try:
+        exec_data = json.loads(exec_result.stdout)
+        entries = exec_data["data"]
+        argv = entries[0][1]
+    except (KeyError, IndexError, TypeError, json.JSONDecodeError) as error:
+        raise StateError("malformed transient service ExecStart") from error
+    if not isinstance(argv, list) or not all(isinstance(item, str) for item in argv):
+        raise StateError("malformed transient service argv")
+    try:
+        environment = shlex.split(values.get("Environment", ""))
+    except ValueError as error:
+        raise StateError("malformed transient service environment") from error
+    return {**values, "ExecStartArgv": argv, "EnvironmentEntries": environment}
+
+
+def transient_command(
+    submission: Mapping[str, object],
+    submission_digest: str,
+    *,
+    systemd_run: Path = SYSTEMD_RUN_DEFAULT,
+) -> list[str]:
+    unit = str(submission["unit"])
+    origin = submission["origin"]
+    if not isinstance(origin, Mapping):
+        raise StateError("submission origin is malformed")
+    lane = origin.get("work_lane") or "manual"
+    task = origin.get("task_id") or "probe"
+    harness = origin.get("harness") or "unknown"
+    session = str(origin.get("session_id") or "unknown")[:12]
+    worker_argv = submission["worker_argv"]
+    if not isinstance(worker_argv, list) or not all(isinstance(item, str) for item in worker_argv):
+        raise StateError("submission worker argv is malformed")
+    return [
+        str(systemd_run),
+        "--user",
+        "--wait",
+        "--quiet",
+        "--service-type=exec",
+        "--expand-environment=no",
+        f"--unit={unit.removesuffix('.service')}",
+        f"--description=Othello Lean [{lane}/{task}] {harness}:{session}",
+        f"--working-directory={submission['lean_root']}",
+        f"--setenv=OTHELLO_LEAN_RUN_ID={submission['run_id']}",
+        f"--setenv=OTHELLO_LEAN_SUBMISSION_SHA256={submission_digest}",
+        "--property=KillMode=mixed",
+        "--property=SendSIGKILL=yes",
+        "--property=TimeoutStopSec=120s",
+        *worker_argv,
+    ]
+
+
+def validate_acceptance_snapshot(
+    submission: Mapping[str, object],
+    submission_digest: str,
+    snapshot: Mapping[str, object],
+    current_generation: Mapping[str, object],
+) -> dict[str, object]:
+    if dict(current_generation) != submission.get("manager_generation"):
+        raise StateError("user-manager generation changed before acceptance")
+    unit = submission.get("unit")
+    if snapshot.get("Id") != unit or snapshot.get("Transient") != "yes":
+        raise StateError("transient unit identity mismatch")
+    invocation_id = snapshot.get("InvocationID")
+    if not isinstance(invocation_id, str) or not re.fullmatch(r"[0-9a-f]{32}", invocation_id):
+        raise StateError("transient unit has no valid InvocationID")
+    if snapshot.get("WorkingDirectory") != submission.get("lean_root"):
+        raise StateError("transient unit working directory mismatch")
+    if snapshot.get("ExecStartArgv") != submission.get("worker_argv"):
+        raise StateError("transient unit argv mismatch")
+    environment = snapshot.get("EnvironmentEntries")
+    required_environment = {
+        f"OTHELLO_LEAN_RUN_ID={submission.get('run_id')}",
+        f"OTHELLO_LEAN_SUBMISSION_SHA256={submission_digest}",
+    }
+    if not isinstance(environment, list) or not required_environment.issubset(set(environment)):
+        raise StateError("transient unit environment nonce mismatch")
+    return {
+        "format": 1,
+        "run_id": submission["run_id"],
+        "unit": unit,
+        "invocation_id": invocation_id,
+        "manager_generation": dict(current_generation),
+        "submission_sha256": submission_digest,
+    }
+
+
+def launch_accept_and_wait(
+    *,
+    run_dir: Path,
+    submission: Mapping[str, object],
+    submission_digest: str,
+    effective_uid: int | None = None,
+    systemd_run: Path = SYSTEMD_RUN_DEFAULT,
+    systemctl: Path = SYSTEMCTL_DEFAULT,
+    busctl: Path = BUSCTL_DEFAULT,
+    completion_timeout: float | None = None,
+    lease_factory: Callable[[], SystemdBusLease] = SystemdBusLease,
+) -> tuple[dict[str, object], int, str]:
+    uid = os.geteuid() if effective_uid is None else effective_uid
+    verify_private_directory(run_dir, uid)
+    client: subprocess.Popen[str] | None = None
+    with lease_factory() as lease:
+        client = subprocess.Popen(
+            transient_command(submission, submission_digest, systemd_run=systemd_run),
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        try:
+            deadline = time.monotonic() + ACCEPT_TIMEOUT
+            snapshot: dict[str, object] | None = None
+            while time.monotonic() < deadline:
+                snapshot = unit_snapshot(
+                    str(submission["unit"]), systemctl=systemctl, busctl=busctl
+                )
+                if snapshot is not None:
+                    lease.ref_unit(str(submission["unit"]))
+                    snapshot = unit_snapshot(
+                        str(submission["unit"]), systemctl=systemctl, busctl=busctl
+                    )
+                    if snapshot is not None:
+                        break
+                if client.poll() is not None:
+                    _, stderr = client.communicate(timeout=2)
+                    raise StateError(
+                        f"systemd-run exited before acceptance: rc={client.returncode}, "
+                        f"diagnostic={display_value(stderr.strip())}"
+                    )
+                time.sleep(0.05)
+            if snapshot is None:
+                raise StateError("timed out before transient-unit acceptance")
+            accepted = validate_acceptance_snapshot(
+                submission, submission_digest, snapshot, manager_generation()
+            )
+            publish_set_once(run_dir / "accepted.json", accepted, uid)
+            _, stderr = client.communicate(timeout=completion_timeout)
+            return accepted, int(client.returncode), stderr.strip()[:MAX_VALUE_LENGTH]
+        except Exception:
+            if client.poll() is None:
+                client.terminate()
+                try:
+                    client.communicate(timeout=2)
+                except subprocess.TimeoutExpired:
+                    client.kill()
+                    client.communicate(timeout=2)
+            raise
 
 
 def validate_worker_argv(worker_argv: Sequence[str]) -> list[str]:
