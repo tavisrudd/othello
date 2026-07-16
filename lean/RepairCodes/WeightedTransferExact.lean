@@ -59,6 +59,49 @@ def HasNonzeroFunctionalRealizationAtLeast
     (∀ j, blockFunctional I e (w j) = beta j) →
       d ≤ ∑ j, hammingNorm (w j)
 
+/-- Every outer-symbol functional has an ambient block representative.  This formalizes the
+extension-of-functionals step behind the manuscript's nonempty fiber minima. -/
+theorem blockFunctional_surjective
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) :
+    Function.Surjective (blockFunctional I e) := by
+  classical
+  intro beta
+  let f : I →ₗ[𝔽] 𝔽 := beta.comp e.symm.toLinearMap
+  obtain ⟨g, hg⟩ := LinearMap.exists_extend f
+  let b := Pi.basisFun 𝔽 κ
+  let w : κ → 𝔽 := b.toDualEquiv.symm g
+  have hwg : b.toDual w = g := b.toDualEquiv.apply_symm_apply g
+  have hpair : ∀ x : κ → 𝔽, x ⬝ᵥ w = g x := by
+    intro x
+    rw [← hwg]
+    let L : (κ → 𝔽) →ₗ[𝔽] 𝔽 :=
+      { toFun := fun y => y ⬝ᵥ w
+        map_add' := fun y z => by simp [add_dotProduct]
+        map_smul' := fun c y => by simp [smul_dotProduct] }
+    have hL : L = b.toDual w := by
+      apply b.ext
+      intro i
+      change (b i) ⬝ᵥ w = b.toDual w (b i)
+      rw [b.toDual_apply_left]
+      simp only [b, Pi.basisFun_apply, Pi.basisFun_repr, dotProduct]
+      calc
+        (∑ x, (Pi.single i (1 : 𝔽) : κ → 𝔽) x * w x) =
+            (Pi.single i (1 : 𝔽) : κ → 𝔽) i * w i := by
+          apply Fintype.sum_eq_single i
+          intro x hxi
+          simp [Pi.single_apply, hxi]
+        _ = w i := by simp
+    exact LinearMap.congr_fun hL x
+  refine ⟨w, ?_⟩
+  apply LinearMap.ext
+  intro v
+  change (e v : κ → 𝔽) ⬝ᵥ w = beta v
+  have hgv : g (e v : κ → 𝔽) = beta v := by
+    have h := LinearMap.congr_fun hg (e v)
+    simpa [f] using h
+  rw [hpair]
+  exact hgv
+
 /-- The zero-functional stratum of the multiblock threshold. -/
 def HasZeroFunctionalMultiblockAtLeast
     (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
@@ -924,6 +967,7 @@ end
 end RepairCodes
 
 #print axioms RepairCodes.functionalWeight_ne_one_of_isCoordinateSurjective
+#print axioms RepairCodes.blockFunctional_surjective
 #print axioms RepairCodes.exists_dualWord_hammingNorm_eq_dualDist
 #print axioms RepairCodes.hasZeroFunctionalMultiblockAtLeast_iff_le_two_dualDist
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
