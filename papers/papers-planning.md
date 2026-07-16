@@ -69,7 +69,7 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *What:* exact matching/transversal profiles for a twisted-cubic–axis seed, exact blockwise
   transfer of the complete bounded repair hypergraph, and fixed-alphabet q9 families. The punctured
   rate-`2/19` family is primary; the rate-`1/10` projective completion is a radius-four comparison.
-- *Gate:* the 16-page manuscript, independent verifier, internal adversarial/prose reviews, and
+- *Gate:* the 17-page manuscript, independent verifier, internal adversarial/prose reviews, and
   focused strict-trust Lean gates are complete. Submission still requires the external specialist
   citation-chain review, an immutable artifact release, and the final post-C203 aggregate
   `RepairCodes` rebuild deferred behind Q25; none is a known theorem gap.
@@ -414,7 +414,7 @@ Post-review dispositions:
   (C115–C120); writeup task C119.
 
 - **Coding / LRC → Paper 5 assembled and internally audited.** `coding-repair-hypergraphs/` contains
-  the 16-page manuscript, PDF, independent verifier, proof ledger, and adversarial novelty report.
+  the 17-page manuscript, PDF, independent verifier, proof ledger, and adversarial novelty report.
   `RepairCodes` proves the exact complete-hypergraph transfer theorem, trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed
   eventual distance bound `c<39/190`, plus a bundled exact coordinate distribution, mixed

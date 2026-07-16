@@ -72,7 +72,7 @@ defect identity and ρ_𝒞(16) = 9*
 
 **5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs: exact transfer under
 concatenation. A twisted-cubic–axis family
-- *Status:* self-contained 16-page manuscript + PDF + independent verifier + proof/novelty
+- *Status:* self-contained 17-page manuscript + PDF + independent verifier + proof/novelty
   ledgers + strict-trust Lean formalization. Internal adversarial and paragraph-level prose reviews
   are complete. The remaining submission gates are an external specialist citation-chain review,
   an immutable artifact release, and the final post-C203 aggregate `RepairCodes` rebuild currently
@@ -150,7 +150,7 @@ repositories: an evidence-based essay and practical how-to
   scholarly-artifact gate is a stable, citable archive identifier for the source supplement; the
   shared release policy still requires the verbatim Lean adequacy appendix and explicit
   AI/provenance disclosure.
-- **Complete 16-page LaTeX manuscript (+ PDF + independent verifier + proof/novelty ledgers +
+- **Complete 17-page LaTeX manuscript (+ PDF + independent verifier + proof/novelty ledgers +
   strict-trust Lean package):** `coding-repair-hypergraphs` — internal adversarial and prose audits
   complete; specialist citation-chain review, immutable artifact release, and the deferred final
   post-C203 aggregate rebuild remain submission preflight gates.
