@@ -2,8 +2,9 @@
 
 **Lane:** `repaircodes`
 
-**Status:** in progress. The structural and lower-bound cores are kernel-checked; two concrete
-finite instantiations and the aggregate Lean gate remain.
+**Status:** promoted into C224 closeout. The exact thresholds, finite attainment, pointed
+refinement, corrective counterexample, generalized-SPC specialization, and Singer-action bridge
+are kernel-checked; the lane-wide aggregate Lean gate remains.
 
 ## Kernel-checked scope
 
@@ -29,15 +30,8 @@ Focused guarded elaboration passes. Every printed headline uses only Lean's stan
 
 ## Remaining closure
 
-1. Prove minimum attainment converts the exact strata into literal equalities with the three
-   finite minima, including two available blocks and either a nontrivial inner dual or an
-   infinity-safe formulation of the empty zero fiber. Separately formalize the exact
-   nonembedded-witness threshold `min(2 * dualDist I, d_lambda(O))`.
-2. Instantiate the regular Singer action on the completed q=9 coordinate-functional set and the
-   generalized-SPC trace-dual pattern, rather than leaving those identifications in manuscript
-   prose.
-3. Run the focused target and aggregate `RepairCodes` build after the foreign Q25 build releases
-   the shared Lean owner lock; repeat the standard-axiom scan on the built target.
+Run the aggregate `RepairCodes` build after the foreign Q25 build releases the shared Lean owner
+lock.  C224 owns the final manuscript/ledger synchronization and aggregate gate.
 
 The finite fiber-enumerator equivalence remains optional, and the polynomial identity remains an
 honestly ledgered classical manuscript corollary.

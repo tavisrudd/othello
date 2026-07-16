@@ -950,7 +950,7 @@ preserved.
 \end{proof}
 
 The inner gate does not require
-$d(I^\perp)=r+1$.  For the full $q=9$ seed, $d(C_9^\perp)=3$ because of
+$d(I^\perp)=r+1$.  For the full $q=9$ punctured seed, $d((C_9^\circ)^\perp)=3$ because of
 the axis triples, yet radius-three transfer is exact since $4<2\cdot3$.
 
 \subsection{Sharpness of the transfer gates}
@@ -1024,8 +1024,9 @@ the twenty-coordinate count, the exact characterization of unit-cost
 functionals as nonzero scalar multiples of coordinate functionals, and the
 distinctness of their projective classes are kernel-checked.  Singer regularity
 is the cited geometric input; the regular-action count, $400<820$, and the
-deduction of a disjoint translate are separated explicitly from the subsequent
-code-theoretic theorem.  For such an $a$,
+deduction of a disjoint translate, its transport through functional
+precomposition, and the resulting unit-cost multiplier predicate are
+kernel-checked before the subsequent code-theoretic theorem.  For such an $a$,
 take the generalized single-parity-check outer code
 \[
  O_a=\{(u_1,\ldots,u_5)\in L^5:
@@ -1094,17 +1095,17 @@ in the ordinary $L$-dual of $O$, with the same support.
 
 Now take $\F=\F_9$, $L=\F_{9^4}=\F_{6561}$, and use a linear equivalence
 between the four-dimensional $\F_9$-space $L$ and the four-dimensional inner
-code $C_9$.
+code $C_9^\circ$.
 
 \begin{corollary}[Finite extension-field lift]\label{cor:finite-lift}
 Let $O\leq L^N$ be an $[N,K,D]_L$ code with $O\ne0$ and
-$d(O^\perp)\geq5$.  Its concatenation with $C_9$ is an $\F_9$-linear code
+$d(O^\perp)\geq5$.  Its concatenation with $C_9^\circ$ is an $\F_9$-linear code
 with
 \[
  [19N,\ 4K,\ \geq8D]_9.
 \]
 Its complete radius-three repair hypergraph is an embedded copy of the
-corresponding $C_9$ hypergraph in each block.  Consequently, among its $19N$
+corresponding $C_9^\circ$ hypergraph in each block.  Consequently, among its $19N$
 coordinates, the exact blockwise profile is:
 \[
 \begin{array}{c|c|c|c}
@@ -1123,7 +1124,7 @@ Restriction of scalars multiplies dimension by four and does not change
 symbol support.  A nonzero outer word has at least $D$ nonzero symbols, each
 of whose inner encodings has weight at least eight, so the concatenated
 distance is at least $8D$.  Theorem~\ref{thm:trace} supplies functional-dual distance at
-least five, while $4<2d(C_9^\perp)=6$.  Apply
+least five, while $4<2d((C_9^\circ)^\perp)=6$.  Apply
 Corollary~\ref{thm:transfer}, Corollary~\ref{cor:exact-locality-transfer},
 and Table~\ref{tab:q9}.
 \end{proof}
@@ -1192,7 +1193,7 @@ $c$).
 
 \begin{proof}
 Take Stichtenoth's self-dual codes over $L=\F_{6561}$ and concatenate them
-with $C_9$ after restriction to $\F_9$.  Two numerical consequences are
+with $C_9^\circ$ after restriction to $\F_9$.  Two numerical consequences are
 needed: dual distance at least five for the transfer gate, and enough primal
 distance for the displayed relative-distance bound.  Since $39/80>1/3$,
 eventually
@@ -1379,13 +1380,16 @@ The current Lean layer checks functional-fiber nonemptiness, attainment of the
 inner dual distance, the exact three-stratum formula (both directions), the
 exact $\delta_{\rm emb}$ formula in lower-bound-profile form, the
 coordinate-surjective threshold coincidence, confinement below that threshold,
-and the resulting literal repair-hypergraph equality.  For the strict example,
+the pointed confinement equivalence and coordinatewise transfer theorem, the
+nonsurjective corrective counterexample, and the resulting literal
+repair-hypergraph equality.  For the strict example,
 Lean additionally checks the generalized-SPC functional dual, exact functional
 distance five, the seed's twenty distinct projective unit-cost coordinate
 classes, weighted distance at least six from a Singer-disjoint unit-cost
-multiplier, coordinate surjectivity, and exact radius-four transfer for the
-completed seed.  Only Singer's cited regular-action theorem is taken as the
-geometric input.  The polynomial enumerator identity is used only as the cited
+multiplier, exact obstruction threshold six, coordinate surjectivity, and exact
+radius-four transfer for the completed seed.  From a presented regular Singer
+action, Lean constructs the required disjoint multiplier; only regularity
+itself is the cited geometric input.  The polynomial enumerator identity is used only as the cited
 classical concatenated-dual decomposition described above, not as a new
 formalized contribution.
 

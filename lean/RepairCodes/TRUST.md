@@ -79,7 +79,10 @@ argument Lean proves the generalized-SPC functional-dual description, exact func
 distance five, weighted distance at least six, coordinate surjectivity, and literal completed-seed
 radius-four repair-hypergraph transfer.  Lean also proves that the seed has twenty coordinate
 classes, that unit realization cost is exactly membership in a nonzero scalar coordinate orbit,
-and that dual distance three makes those orbits pairwise distinct.  Singer's theorem is cited in
+and that dual distance three makes those orbits pairwise distinct.  Given the cited regular Singer
+projective action, Lean proves the regular-action disjoint-translate count, transports the action
+through functional precomposition, constructs the required disjoint unit-cost multiplier, and
+derives the exact threshold-six and radius-four conclusions.  Singer regularity itself is cited in
 the manuscript.
 
 ## Projectively completed seed
