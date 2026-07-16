@@ -51,17 +51,21 @@ Its matching number $\nu_x$ is disjoint availability, while its transversal
 number $\tau_x$ is the least number of helper failures that block every
 radius-$r$ repair.
 
-Our principal result is an exact concatenation theorem governed by inner
-coset-leader weights.  It gives the minimum weight of a dual word meeting
-multiple inner blocks, hence a necessary-and-sufficient confinement test.
+Our principal transfer result is governed by exact inner coset-leader
+weights.  It gives both the minimum weight of a dual word meeting multiple
+inner blocks and the minimum weight of a dual witness that is not an embedded
+inner-dual word.
 The usual hypotheses $r+1<2d(I^\perp)$ and outer functional-dual distance at
-least $r+2$ are a simple corollary.  A generalized single-parity-check outer
+least $r+2$ give a simple sufficient corollary for complete-hypergraph
+equality.  A generalized single-parity-check outer
 code for the completed field-nine seed has functional distance five but
-weighted distance six, proving exact radius-four transfer strictly beyond
-that support-distance gate.  Thus the entire hypergraph $\cH_x^{(r)}$, not
+weighted distance at least six and multiblock threshold six, proving exact
+radius-four transfer strictly beyond that support-distance gate.  Thus the
+entire hypergraph $\cH_x^{(r)}$, not
 merely a selected repair family, is copied block by block.
 
-For $q=3^h$, a twisted-cubic--axis code supplies an explicit seed: we compute
+For $q=3^h$, where $h\geq1$ is an integer, a twisted-cubic--axis code supplies
+an explicit seed: we compute
 its coordinatewise matching and transversal numbers and prove
 $\tau_x>\nu_x$ at every coordinate when $q\geq9$.  Combining the field-nine
 seed with a self-dual Tsfasman--Vl\u{a}du\c{t}--Zink outer family gives
@@ -121,7 +125,7 @@ hypergraph transfer exactly.
 
 The theorem hierarchy is deliberate.  The principal general result is the
 weighted complete-hypergraph transfer theorem,
-Theorem~\ref{thm:weighted-transfer}; Theorem~\ref{thm:transfer} is its
+Theorem~\ref{thm:weighted-transfer}; Corollary~\ref{thm:transfer} is its
 support-distance corollary.
 Theorems~\ref{thm:axis-rows} and~\ref{thm:cubic-rows} supply the explicit
 seed on which $\tau>\nu$ holds at every coordinate, and
@@ -148,9 +152,9 @@ Explicit seed
 Exact transfer
 & Exact inner-coset realization weights; a Singer-cycle generalized
   single-parity-check example beyond the support-distance gate
-& A necessary-and-sufficient block-confinement threshold and equality of
-  every complete bounded repair hypergraph, hence preservation of all its
-  invariants \\
+& Exact block- and witness-confinement thresholds and a sufficient criterion
+  for equality of every complete bounded repair hypergraph, hence
+  preservation of all its invariants \\
 Fixed-alphabet synthesis
 & Trace duality and a self-dual TVZ outer family
 & Unbounded $\F_9$ families with positive rate and distance and exact
@@ -210,6 +214,10 @@ The word $y$ supplies the recovery equation
 Thus Definition~\ref{def:repair-hypergraph} includes every linear repair
 whose coefficient support has at most $r$ helpers; it is not a declared or
 selected subfamily.
+The coordinate $x$ has \emph{exact locality} $s$ when $s$ is the least
+nonnegative integer for which $\cH_x^{(s)}(C)$ is nonempty.  In particular,
+exact locality zero means that a weight-one dual word repairs $x$ without a
+helper.
 
 \begin{proposition}\label{prop:basic-hypergraph}
 For every finite code-derived repair hypergraph with nonempty edges,
@@ -284,7 +292,7 @@ dependencies: collinear triples for locality two, and mixed
 cubic--axis circuits for locality three.  Characteristic three supplies both
 in one classical configuration.
 
-Let $q=3^h$ and write $\F=\F_q$.  In homogeneous coordinates on
+Let $h\geq1$ be an integer, let $q=3^h$, and write $\F=\F_q$.  In homogeneous coordinates on
 $\mathrm{PG}(3,q)$ define
 \[
  T_q=\{C(t)=(1:t:t^2:t^3):t\in\F\}
@@ -300,14 +308,14 @@ geometric name only as provenance: all proofs below start from the displayed
 coordinates.
 
 Let $S_q=T_q\sqcup L_q$ and let $G_q$ be the $4\times(2q+1)$ matrix whose
-columns are fixed representatives of these points.  Write $C_q$ for the row
+columns are fixed representatives of these points.  Write $C_q^\circ$ for the row
 code of $G_q$.  Changing a projective representative only rescales one code
 coordinate, so the repair supports are unaffected.
 
 \begin{theorem}[Code parameters]\label{thm:parameters}
 For every finite field of characteristic three,
 \[
- C_q=[2q+1,4,q-1]_q.
+ C_q^\circ=[2q+1,4,q-1]_q.
 \]
 \end{theorem}
 
@@ -445,7 +453,8 @@ exchange transversals with zero-sum-free sets, since a complement contains no
 repair triple exactly when the removed set hits every one.  After forbidding
 zero, one parallel class loses its line through zero.  Translation preserves
 the zero-sum condition in characteristic three, and a translate of a maximum
-zero-sum-free set can be chosen to avoid zero; hence its maximum size remains
+zero-sum-free set can be chosen to avoid zero: such a set is proper, so choose
+$a$ outside its negative and translate by $a$.  Hence its maximum size remains
 $Z_3(q)$.  The values become $q/3-1$ and $q-1-Z_3(q)$.  Adding the
 contributions gives the formulas.
 Proposition~\ref{prop:basic-hypergraph} passes the invariants between the
@@ -520,11 +529,11 @@ $q-2$ vertices.
 Combining the two coordinate types gives the uniform statement.
 
 \begin{corollary}[All-symbol separation]\label{cor:uniform-gap}
-For every $q=3^h\geq9$ and every coordinate $z$ of $C_q$,
+For every integer $h\geq1$ with $q=3^h\geq9$ and every coordinate $z$ of $C_q^\circ$,
 \[
- \nu_z^{(3)}(C_q)<\tau_z^{(3)}(C_q).
+ \nu_z^{(3)}(C_q^\circ)<\tau_z^{(3)}(C_q^\circ).
 \]
-Moreover, $C_q$ has all-symbol locality three, with exact locality two on
+Moreover, $C_q^\circ$ has all-symbol locality three, with exact locality two on
 $L_q$ and exact locality three on $T_q$.
 \end{corollary}
 
@@ -578,12 +587,12 @@ Let
  \qquad \overline S_q=\overline T_q\sqcup L_q,
 \]
 and let $\overline C_q$ be the row code of the displayed projective system.
-Thus $\overline C_q$ restores the one cubic point punctured from $C_q$; the
+Thus $\overline C_q$ restores the one cubic point punctured from $C_q^\circ$; the
 axis is unchanged.
 
 \begin{theorem}[Completed code and symmetry]
 \label{thm:completed-parameters}
-For every $q=3^h$,
+For every integer $h\geq1$ and $q=3^h$,
 \[
  \overline C_q=[2q+2,4,q]_q,
  \qquad d(\overline C_q^\perp)=3.
@@ -691,8 +700,9 @@ projective symmetry acts transitively on the full axis.
 Informally, each outer symbol is a vector encoded as one inner block.  The
 question is whether a small dual relation can couple several such blocks.
 We formulate the answer without choosing coordinates on the outer symbol
-space.  Let $I\leq
-\F^K$ be an inner code and let $V$ be an $\F$-vector space equipped with a
+space.  Let $\F$ be a finite field, let $J,K$ be finite coordinate sets,
+let $I\leq
+\F^K$ be an inner code, and let $V$ be an $\F$-vector space equipped with a
 linear isomorphism $e:V\to I$.  For an outer $\F$-linear code
 $O\leq V^J$, the concatenated code $O\circ_e I\leq\F^{J\times K}$ encodes
 each outer symbol through $e$.  Figure~\ref{fig:block-confinement} previews
@@ -772,7 +782,12 @@ Let $\delta_{\rm mb}(O,I)$ be the minimum Hamming weight of a word in
 $(O\circ_e I)^\perp$ whose nonzero coordinates meet at least two inner
 blocks.  The following statement is the exact obstruction calculation.
 
-\begin{theorem}[Exact multiblock threshold]\label{thm:weighted-transfer}
+For repair transfer one must also exclude a word confined to one block whose
+induced functional is nonzero: such a word need not be an inner-dual word.
+Accordingly let $\delta_{\rm emb}(O,I)$ be the minimum weight of a dual word
+that is not the zero extension of a word of $I^\perp$ in a single block.
+
+\begin{theorem}[Exact confinement thresholds]\label{thm:weighted-transfer}
 Suppose $|J|\geq2$.  With $+\infty$ used for an empty minimum,
 \[
 \delta_{\rm mb}(O,I)=\min\left\{
@@ -786,16 +801,29 @@ Suppose $|J|\geq2$.  With $+\infty$ used for an empty minimum,
  \right\}.
 \]
 Consequently every dual word of weight at most $r+1$ is confined to one
-block if and only if $r+1<\delta_{\rm mb}(O,I)$; this is also equivalent to
-complete radius-$r$ repair-hypergraph equality at every coordinate.
+block if and only if $r+1<\delta_{\rm mb}(O,I)$.
+
+The exact threshold for every bounded dual word to be an embedded
+inner-dual word is
+\[
+ \delta_{\rm emb}(O,I)=\min\{2d(I^\perp),d_\lambda(O)\}.
+\]
+Thus $r+1<\delta_{\rm emb}(O,I)$ implies, for every block $j$ and inner
+coordinate $x$,
+\[
+ \cH_{(j,x)}^{(r)}(O\circ_e I)
+ =\{\{j\}\times R:R\in\cH_x^{(r)}(I)\}.
+\]
 
 If every coordinate projection $O\to V$ is onto, the singleton term is
-empty and
+empty and the two thresholds agree:
 \[
- \delta_{\rm mb}(O,I)=\min\{2d(I^\perp),d_\lambda(O)\}.
+ \delta_{\rm mb}(O,I)=\delta_{\rm emb}(O,I)
+ =\min\{2d(I^\perp),d_\lambda(O)\}.
 \]
 In particular, under this natural nondegeneracy hypothesis, the exact
-transfer criterion is
+witness-confinement criterion, and hence a sufficient complete-hypergraph
+transfer criterion, is
 \[
  r+1<\min\{2d(I^\perp),d_\lambda(O)\}.
 \]
@@ -813,20 +841,40 @@ $|\supp(\beta)|\geq2$, independently minimizing the fibers costs exactly
 $\Lambda_I(\beta)$ and already meets several blocks.  These cases are
 disjoint and exhaustive, proving the formula.
 
-A multiblock dual word of weight at most $r+1$ gives, after targeting any
-nonzero coordinate, a radius-$r$ repair meeting another block.  Conversely
-every nonembedded repair witness is such a word.  This proves both
-equivalences.  Finally, a functional-dual tuple supported only at $j$
-annihilates the image of the projection $O\to V$ at $j$; surjectivity forces
-that functional to vanish.
+A dual word fails to be an embedded inner-dual word in exactly two ways.  If
+$\beta=0$, it must meet at least two blocks, at minimum cost
+$2d(I^\perp)$.  If $\beta\ne0$, independently minimizing its functional
+fibers gives minimum cost $d_\lambda(O)$.  This proves the formula for
+$\delta_{\rm emb}$.  Below that threshold, every dual witness involving
+$(j,x)$ is supported only in block $j$ and its block belongs to $I^\perp$;
+its helper support is therefore an embedded inner repair.  Conversely, every
+inner-dual word extended by zero is dual to every concatenation, proving the
+displayed hypergraph equality.
+
+Finally, a functional-dual tuple supported only at $j$ annihilates the image
+of the projection $O\to V$ at $j$; surjectivity forces that functional to
+vanish.  The singleton term is then empty, so the two exact word-level
+thresholds coincide.
 \end{proof}
 
 There is also an exact coordinatewise version.  For target $(j,x)$, minimize
-over the same fiber decomposition subject to $w_j(x)\ne0$ and to some
-$w_k\ne0$ with $k\ne j$; call the result $\delta_{j,x}$.  Then literal
-equality at that coordinate holds if and only if $r+1<\delta_{j,x}$.  This
-pointed form can be sharper than the global minimum but is not needed for
-our uniform families.
+over dual words subject to $w_j(x)\ne0$ and to the word not being the zero
+extension of an element of $I^\perp$ in block $j$; call the result
+$\delta^{\rm emb}_{j,x}$.  Then $r+1<\delta^{\rm emb}_{j,x}$ is equivalent
+to every bounded witness at $(j,x)$ being an embedded inner-dual witness,
+and it implies literal hypergraph equality there.  The converse implication
+from support-set equality need not hold, because distinct witnesses can have
+the same support.  This pointed threshold can be sharper than the global
+minimum but is not needed for our uniform families.
+
+The distinction between the two thresholds is necessary.  Take $K$ to be a
+singleton, $I=V=\F$, $J=\{1,2\}$, and
+$O=\{(0,v):v\in\F\}$.  Then the concatenated dual consists of the words
+$(a,0)$, so $\delta_{\rm mb}=+\infty$ but $\delta_{\rm emb}=1$.  At the
+first coordinate a weight-one dual word gives an empty radius-zero repair,
+whereas the full inner code has no repair there.  Thus multiblock confinement
+alone cannot imply repair-hypergraph equality when an outer coordinate
+projection is not onto.
 
 The fiber decomposition also gives the finite enumerator identity
 \begin{equation}\label{eq:fiber-enumerator}
@@ -992,9 +1040,10 @@ so every nonzero functional-dual tuple has weighted cost at least six:
 \[
  d_\lambda(O_a)\geq2+1+1+1+1=6.
 \]
-Since $d(I^\perp)=3$, Theorem~\ref{thm:weighted-transfer} gives
-$\delta_{\rm mb}=6$.  Therefore radius-four repair transfer is exact because
-$5<6$, although the support-distance corollary fails its required
+The outer code is coordinate-surjective.  Since $d(I^\perp)=3$,
+Theorem~\ref{thm:weighted-transfer} gives
+$\delta_{\rm mb}=\delta_{\rm emb}=6$.  Therefore radius-four repair transfer
+is exact because $5<6$, although the support-distance corollary fails its required
 functional distance six.  This supplies a nondegenerate strict example
 using the paper's flagship inner geometry and a classical MDS outer code.
 
@@ -1004,7 +1053,7 @@ using the paper's flagship inner geometry and a classical MDS outer code.
 Let $L/\F$ be a finite separable extension and let $O\leq L^J$ be an
 $L$-linear outer code.  Restricting scalars makes each outer symbol an
 $\F$-vector space.  The functional-dual gate in
-Theorem~\ref{thm:transfer} is then supplied by the trace pairing.
+Corollary~\ref{thm:transfer} is then supplied by the trace pairing.
 
 \begin{theorem}[Trace-duality bridge]\label{thm:trace}
 Every $\F$-linear functional $f:L\to\F$ has a unique representation
@@ -1067,7 +1116,7 @@ symbol support.  A nonzero outer word has at least $D$ nonzero symbols, each
 of whose inner encodings has weight at least eight, so the concatenated
 distance is at least $8D$.  Theorem~\ref{thm:trace} supplies functional-dual distance at
 least five, while $4<2d(C_9^\perp)=6$.  Apply
-Theorem~\ref{thm:transfer}, Corollary~\ref{cor:exact-locality-transfer},
+Corollary~\ref{thm:transfer}, Corollary~\ref{cor:exact-locality-transfer},
 and Table~\ref{tab:q9}.
 \end{proof}
 
@@ -1089,9 +1138,9 @@ helper-failure thresholds are $7$ and $14$.
 \begin{proof}
 The parameter argument is the same, now using the $[20,4,9]_9$ inner seed.
 At radius four the inner gate is $5<2d(\overline C_9^\perp)=6$, and the trace
-bridge requires ordinary outer dual distance $r+2=6$.  Theorem~\ref{thm:transfer}
+bridge requires ordinary outer dual distance $r+2=6$.  Corollary~\ref{thm:transfer}
 therefore gives equality of the complete bounded hypergraphs.  Apply
-Theorem~\ref{thm:completed-port}.  As in Theorem~\ref{thm:transfer}, the
+Theorem~\ref{thm:completed-port}.  As in Corollary~\ref{thm:transfer}, the
 conclusion concerns the radius-four repair hypergraph.
 \end{proof}
 
@@ -1196,7 +1245,7 @@ $20c/9<39/80$, so eventually
 \]
 The bounded radius-four hypergraph equality transfers the coordinate
 profiles.  The conclusion remains the bounded radius-four equality supplied
-by Theorem~\ref{thm:transfer}.
+by Corollary~\ref{thm:transfer}.
 \end{proof}
 
 The tradeoff between the two constructions is summarized in
@@ -1265,9 +1314,11 @@ their later paper recalls the statement explicitly
 \cite[Theorem~2.1]{ChenLingXing2005}.  Coset weight distributions are likewise
 standard objects, so the product-sum identity
 \eqref{eq:fiber-enumerator} is structural prior art.  What is added here is
-the exact minimum over zero, singleton, and multiblock functional fibers,
-its equivalence to complete repair-hypergraph confinement, and the strict
-Singer-cycle example beyond the ordinary support-distance gate.
+the use of the exact fiber minima as word-level confinement thresholds and a
+sufficient complete-hypergraph transfer gate, together with the strict
+Singer-cycle example beyond the ordinary support-distance hypothesis.  The
+most family-specific contribution is the exact coordinatewise matching and
+transversal calculation for the twisted-cubic--axis systems.
 
 The geometry of the twisted cubic and its stabilizer has a substantial
 literature.  Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021} describe
@@ -1289,8 +1340,8 @@ shifted-inverse completion identity to compute the exact matching number of
 the code-derived repair hypergraph.
 
 In summary, the contribution is the conjunction of an explicit all-symbol
-$\tau>\nu$ seed, exact complete-hypergraph transfer, and the resulting
-fixed-alphabet parameters.
+$\tau>\nu$ seed, complete-hypergraph transfer under explicit dual gates, and
+the resulting fixed-alphabet parameters.
 
 \section{Formal verification and provenance}
 \label{sec:verification}
@@ -1316,12 +1367,12 @@ the sharper weighted sufficient direction, and
 bridge.  The formal \texttt{repairHypergraph} uses the exact dual-word
 support definition in Definition~\ref{def:repair-hypergraph}.
 
-The closed-form minimum in Theorem~\ref{thm:weighted-transfer}, the
-Singer-cycle averaging example, and the finite enumerator identity are
-proved in the manuscript by finite linear algebra and counting; their
-current Lean layer checks the weighted transfer implication but does not yet
-encode the three-case minimum or polynomial identity.  They introduce no
-additional external theorem or project axiom.
+The current Lean layer checks the exact three-stratum partition, the
+closed-term lower-bound direction, the coordinate-surjective threshold
+coincidence, and the weighted transfer implication.  Finite minimum
+attainment, the exact $\delta_{\rm emb}$ formula, the concrete Singer/trace
+instantiation, and the polynomial identity remain manuscript arguments.  They
+introduce no additional external theorem or project axiom.
 
 The independent script
 \texttt{notes/2026-07-13-projective-completion-verifier.py} implements its
@@ -1342,11 +1393,10 @@ asymptotic theorems additionally consume one project axiom,
 specialization of Stichtenoth's Theorem~1.6(ii) stated in
 Section~\ref{sec:asymptotic}.
 
-The artifact entry point, pinned dependencies, reproduction commands,
-expected finite outputs, theorem map, and axiom reports are recorded in the
-paper-package README, proof ledger, and
-\texttt{lean/RepairCodes/TRUST.md}; the verifier above uses standard Python
-and completes without a specialized resource profile.
+The working artifact contains pinned dependencies, reproduction commands,
+the theorem map, axiom reports, and the independent verifier.  These details
+belong to the versioned supplementary package accompanying a submission;
+they are not needed for the manuscript proofs themselves.
 
 \enlargethispage{2\baselineskip}
 \section{Conclusion}

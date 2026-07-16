@@ -13,9 +13,9 @@ roadmap formula.
 - The exact global obstruction is the minimum weight of a concatenated dual word meeting at least
   two blocks. In full generality it has separate zero-functional, singleton-functional, and
   multisupport-functional terms.
-- If every outer coordinate projection is onto the symbol space, singleton functional-dual words
-  are impossible and the roadmap's two-term formula
-  `min(2*d(I^perp), d_lambda(O))` is exact.
+- The exact nonembedded-witness threshold is always
+  `min(2*d(I^perp), d_lambda(O))`. If every outer coordinate projection is onto the symbol space,
+  singleton functional-dual words are impossible and this threshold equals the multiblock one.
 - The completed `[20,4,9]_9` seed admits a natural strict example: an
   `[5,4,2]_{6561}` generalized single-parity-check outer code has functional support distance five
   but weighted functional distance at least six. Hence radius-four transfer is exact although the
@@ -52,29 +52,38 @@ The cases are exhaustive:
    word is required in a second block;
 3. `|supp beta|>=2`: independently minimizing each fiber already produces a multiblock word.
 
-Every radius-`r` repair is block-confined at every coordinate if and only if
-`r+1 < delta_mb(O,I)`. A multiblock dual word of weight at most `r+1`, targeted at any nonzero
-coordinate, gives a nonembedded radius-`r` repair; the converse is immediate from a repair witness.
+Every dual word of weight at most `r+1` meets at most one block if and only if
+`r+1 < delta_mb(O,I)`. This word-level confinement is not by itself equivalent to repair-hypergraph
+equality: a one-block word can induce a nonzero functional and need not be inner-dual, and distinct
+witnesses can share one support.
+
+Let `delta_emb(O,I)` be the minimum weight of a dual word that is not the zero extension of one
+inner-dual block. Then
+
+```text
+delta_emb(O,I) = min(2*d(I^perp), d_lambda(O)).
+```
+
+The strict inequality `r+1 < delta_emb(O,I)` is equivalent to confinement of every bounded dual
+word to one embedded inner-dual block and implies complete repair-hypergraph equality. No converse
+from equality of support sets is claimed.
 
 If each projection `O -> V` is onto, a functional-dual tuple supported at one coordinate must
 vanish, because its sole functional annihilates all of `V`. Therefore
 
 ```text
-delta_mb(O,I) = min(2*d(I^perp), d_lambda(O)),
+delta_mb(O,I) = delta_emb(O,I) = min(2*d(I^perp), d_lambda(O)),
 d_lambda(O) = min_{0 != beta in O^(perp_fun)} Lambda_I(beta).
 ```
 
 The original roadmap omitted the singleton caveat. It was corrected rather than hidden inside a
 nonstandard definition of `d_lambda`.
 
-For literal equality at one coordinate `(j,x)`, replace `lambda_I(beta_j)` by the pointed cost
-
-```text
-mu_x(beta_j) = min { wt(w) : Phi_I(w)=beta_j and w_x != 0 }
-```
-
-and require a nonzero block outside `j`. This gives an exact target-conditioned threshold and can
-be sharper than the global minimum.
+For a target `(j,x)`, minimize over dual words with `w_j(x) != 0` that are not zero extensions of
+an inner-dual word in block `j`. This gives an exact target-conditioned bad-witness threshold and
+can be sharper than the global minimum. Falling below it implies literal hypergraph equality at
+that coordinate; the reverse implication can fail when an embedded and a nonembedded witness have
+the same support.
 
 ## Strict natural example
 
@@ -135,8 +144,8 @@ recalled explicitly in [IEEE TIT 51 (2005), Theorem 2.1](https://doi.org/10.1109
 The latter primary source was read from the persistent cache at SHA-256
 `e566d78ab3a82d08ea4fc0441b98a85677dda41ee727a91b365c13b907733f0f`.
 Coset weight distributions are classical, and the displayed identity is their blockwise product
-over the outer-dual index set. The candidate contribution is the repair-confinement minimum and
-its exact incidence consequence.
+over the outer-dual index set. The candidate contribution is the use of the exact witness threshold
+as a sufficient complete-incidence transfer gate.
 
 ## Asymptotic outer-family disposition
 

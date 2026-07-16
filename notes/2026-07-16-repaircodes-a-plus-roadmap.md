@@ -18,14 +18,16 @@ structure. That broader program belongs in a separate `repairports` lane.
 
 ## C214: bounded upgrade of the current paper
 
-**Disposition (2026-07-16): promoted.** The exact theorem requires a singleton-functional term in
-full generality; the displayed two-term criterion is exact for coordinate-surjective outer codes.
+**Disposition (2026-07-16, cold-read corrected): promoted.** The exact multiblock theorem requires
+a singleton-functional term in full generality. The exact nonembedded-witness threshold is always
+the displayed two-term minimum; it equals the multiblock threshold for coordinate-surjective outer
+codes and supplies a sufficient hypergraph-transfer gate.
 The strict example is a Singer-shifted `[5,4,2]_{6561}` generalized SPC outer code for the
 completed q=9 seed. The fiber identity is retained as classical structure, not novelty. See
 [`2026-07-16-c214-weighted-functional-transfer.md`](2026-07-16-c214-weighted-functional-transfer.md).
 
 **Formal closure:** C221 is in progress in `repaircodes`. The exact three-stratum iff, all three
-closed-term lower bounds, coordinate-surjective reduction, and Singer/SPC averaging and five-fiber
+closed-term lower bounds, coordinate-surjective coincidence, and Singer/SPC averaging and five-fiber
 arithmetic cores are kernel-checked. Concrete attained-minimum and trace/SPC instantiations remain;
 the optional extension is the finite fiber equivalence, not a full polynomial library. The stop
 gate is focused and aggregate Lean plus axiom and PDF validation; general weighted-dual algorithms and asymptotic realization remain C215
@@ -69,8 +71,9 @@ functional support distance at least `r+2` into the coarser bound `d_lambda(O) >
 
 C214 upgrades the manuscript only if all of the following land.
 
-1. **Exactness.** Prove a necessary-and-sufficient global bounded block-confinement theorem, with
-   target-conditioned refinements if literal coordinatewise repair-hypergraph equality needs them.
+1. **Exactness.** Compute the necessary-and-sufficient global bounded block-confinement threshold,
+   separately compute the nonembedded-witness threshold used for transfer, and use pointed
+   refinements only as sufficient criteria for literal coordinatewise repair-hypergraph equality.
 2. **Strict natural example.** Exhibit a nondegenerate inner/outer pair for which the paper's
    existing outer support-distance gate fails but the weighted criterion still proves exact
    bounded transfer. A synthetic boundary toy is not sufficient for A+ promotion.
