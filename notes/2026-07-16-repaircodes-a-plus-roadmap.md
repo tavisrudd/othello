@@ -18,6 +18,12 @@ structure. That broader program belongs in a separate `repairports` lane.
 
 ## C214: bounded upgrade of the current paper
 
+**Disposition (2026-07-16): promoted.** The exact theorem requires a singleton-functional term in
+full generality; the displayed two-term criterion is exact for coordinate-surjective outer codes.
+The strict example is a Singer-shifted `[5,4,2]_{6561}` generalized SPC outer code for the
+completed q=9 seed. The fiber identity is retained as classical structure, not novelty. See
+[`2026-07-16-c214-weighted-functional-transfer.md`](2026-07-16-c214-weighted-functional-transfer.md).
+
 Let `I <= F^K` be the inner code, `e : V -> I` its encoding isomorphism, and define
 
 ```text

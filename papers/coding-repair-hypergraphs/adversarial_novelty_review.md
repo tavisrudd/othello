@@ -1,6 +1,6 @@
 # Adversarial novelty review
 
-**Audit date:** 2026-07-13
+**Audit date:** 2026-07-16
 
 **Object:** *Complete repair hypergraphs: exact transfer under concatenation.
 A twisted-cubic--axis family.*
@@ -15,7 +15,11 @@ The candidate novelty survives in two narrow places:
    characteristic-three affine-twisted-cubic plus full-axis code, including
    strict `tau > nu` at every coordinate for `q >= 9`; and
 2. equality of the complete bounded dual-support repair hypergraph under
-   concatenation, under the stated inner and outer dual-distance gates.
+   concatenation, now sharpened to the exact inner-coset-weight obstruction.
+
+The concatenated-dual decomposition and product-sum fiber enumerator do not survive as novelty
+claims: Chen--Ling--Xing state the direct-sum dual decomposition explicitly. The surviving C214
+candidate is the exact repair-confinement minimum and its strict Singer-cycle example.
 
 The fixed-alphabet asymptotic family is a formal corollary joining those two
 ingredients to a published self-dual TVZ family. Its ordinary rate/distance/locality
@@ -53,6 +57,9 @@ counterexamples prove exactly that restricted statement.
 | A10 | The projectively completed cubic--axis system or its ordinary code parameters are new | Twisted-cubic orbit/incidence sources explicitly treat the characteristic-three common axis and full projective cubic; projective-system distance from plane sections is standard | `projectiveAxisTwistedCubic_code_parameters`, `projectiveAxisTwistedCubicCode_dualDist` | **CLASSICAL/DERIVED.** Do not claim novelty for the point set, `[2q+2,4,q]_q`, dual distance, or locality by themselves. |
 | A11 | Exact full-minimal completed rows are already known | The targeted twisted-cubic axis/orbit/incidence/coset-code search found no matching/transversal or matroid-port computation for the union | `minimalProjectiveCubicRepair_full_invariants`, `minimalProjectiveAxisRepair_full_invariants` | **CANDIDATE NOVELTY; NONE FOUND.** Permit “we did not locate,” not a priority claim. Generic rank cutoff and local-primal duality are enabling lemmas, not separate novelty loci. |
 | A12 | Rate `1/10` and distance constant `351/1600` are a new AG/LRC bound | Standard concatenation with the same Stichtenoth family gives the arithmetic point | `stichtenoth_projective_q9_uniform_repair_family` | **DERIVED RESULT.** Candidate value lies in the simultaneous exact radius-four profile, not the rate/distance point alone. No endpoint claim. |
+| A13 / C214 | The concatenated-dual fiber decomposition or product-sum enumerator is new | Chen--Ling--Xing, IEEE TIT 47 (2001), Theorem 2.3, give the direct-sum dual decomposition; IEEE TIT 51 (2005), Theorem 2.1, recalls it. Coset weight enumerators are classical. | `blockFunctional_mem_functionalDual` proves the coordinate-free forward map; the manuscript identity is an immediate finite fiber partition | **PRIOR ART.** No novelty claim for the decomposition or enumerator identity. |
+| A14 / C214 | The roadmap formula `min(2d(I^perp),d_lambda)` is exact without qualifications | A singleton-supported functional-dual word is confined and therefore is not itself a multiblock obstruction. | Weighted sufficiency is checked by `repairHypergraph_concatenatedCode_eq_embed_weighted`; the exact three-case converse is presently a manuscript proof | **CORRECTED.** Use the zero/singleton/multisupport formula generally; the two-term formula is exact when every outer coordinate projection is onto. |
+| A15 / C214 | The strict weighted example is only a tailored boundary toy | The inner code is the flagship completed `[20,4,9]_9` seed and the outer code is an `[5,4,2]_{6561}` generalized SPC/MDS code. Singer averaging chooses one monomial coefficient. | Weighted transfer implication is kernel-checked; the orbit average and trace identification are manuscript-level | **SURVIVES, WITH BOUNDARY.** Call it a natural strict finite example, not an asymptotic improvement or a new MDS construction. |
 
 ## Search boundary
 

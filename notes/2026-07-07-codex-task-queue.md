@@ -79,7 +79,7 @@ unless they retain an explicit open tail.
 
 - **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum blockers classified under monomial `PGL(2,9)`; exact full-port Burnside census records the matching-orbit explosion → `notes/2026-07-15-c202-repair-extremizer-classification.md`.
 - **C203 `[repaircodes]` [IN PROGRESS]** — exact coefficient-labelled scalar equations and monomial gauge boundary pass focused Lean; aggregate `RepairCodes` build is deferred behind the foreign Q25 build → `notes/2026-07-15-c203-operational-coefficient-boundary.md`.
-- **C214 `[repaircodes]` [QUEUED PAPER UPGRADE]** — exact weighted-functional confinement criterion, strict beyond-gate example, fiber-enumerator identity, and optimized outer-family disposition → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C214 `[repaircodes]` [REPORTED 2026-07-16; PAPER-PROMOTED]** — exact weighted-functional confinement criterion, strict Singer/SPC beyond-gate example, classical fiber-enumerator boundary, and optimized outer-family disposition → `notes/2026-07-16-c214-weighted-functional-transfer.md`.
 
 ### `repairports`
 

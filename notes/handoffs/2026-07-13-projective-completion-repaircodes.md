@@ -3,10 +3,11 @@
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: CORE COMPLETE; C214 PAPER UPGRADE QUEUED. C111–C114 are proved, adversarially reviewed,
+**Status**: CORE COMPLETE; C214 PAPER UPGRADE PROMOTED. C111–C114 are proved, adversarially reviewed,
 and synchronized with the paper and registries. The sole deep formal dependency is the quarantined
 Stichtenoth theorem; external specialist citation-chain review remains a submission preflight gate,
-not a theorem gap. C214 is a bounded promotion gate, not a reopening of the proved core.
+not a theorem gap. C214 added the exact weighted-functional obstruction, a strict Singer/SPC
+example beyond the old support-distance gate, and an explicit classical-enumerator boundary.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
@@ -30,11 +31,14 @@ the coefficient-ratio gauge theorem and removed circuit-enumerator reuse from th
 final aggregate `RepairCodes` build is deferred behind the foreign Q25 build. That aggregate gate
 is the only remaining bounded follow-up in this lane.
 
-C214 owns one additional bounded manuscript-upgrade decision: derive an exact weighted-functional
-block-confinement criterion, require a natural example strictly beyond the current support-distance
-gates, and assess the fiber-enumerator and optimized-outer-family payoff. If the strict example
-fails, bank the theorem for C215 and do not broaden the current paper. The stand-alone C215–C220
-program belongs to the separate `repairports` lane.
+C214 is reported in
+[`2026-07-16-c214-weighted-functional-transfer.md`](../2026-07-16-c214-weighted-functional-transfer.md).
+The manuscript now leads its transfer section with the exact three-case multiblock threshold and
+its coordinate-surjective two-term corollary. A Singer-shifted `[5,4,2]_{6561}` generalized SPC
+outer code gives the required strict natural example for the completed seed. The weighted transfer
+implication is kernel-checked; the closed-form converse, Singer averaging proof, and enumerator
+identity are honestly ledgered as manuscript proofs. The general optimized-outer-family program
+remains in the separate `repairports` lane.
 
 ## Goal and claim ledger
 
@@ -188,6 +192,9 @@ and novelty promotion.
 | D-PC9 | The completed seed appears to have exactly five nonzero weights: projective section counts `N1=q(q²-1)/3`, `N2=q(q²-1)/2`, `N3=q(q+1)`, `N4=q(q²-1)/6`, `N(q+2)=q+1`; hence exactly `q²-1` minimum-weight words | `CHECKED` independently at q=3,9,27; general moment proof sketched, not Lean | potentially stronger coding-theoretic contribution; `LIT-OPEN` | XH7; prove from plane moments/triple classification, then targeted weight-enumerator search |
 | D-PC10 | Projective shifted inversion is induced by the explicit ambient coordinate change `(x₀,x₁,x₂,x₃) ↦ (a³x₀+x₃, a²x₀-ax₁+x₂, ax₀+x₁, x₀)`; it preserves the completed cubic–axis system and sends finite axis target `A(a)` to `A(∞)` | full monomial action, exact circuit preservation, exact complete-repair-hypergraph relabeling, and the uniform axis row `LEAN` | structural unification, not by itself a novelty claim | XH2 axis gate closed; reuse the same transport for the cubic row |
 | D-PC11 | Any monomial automorphism of a generator's column configuration—an ambient linear equivalence, coordinate permutation, and nonzero column scales—relabels every complete bounded repair hypergraph exactly | generic forward/backward full-support relation transport `LEAN`; instantiated by D-PC10 to close the uniform completed-axis row | reusable formal infrastructure; expected standard, no novelty claim | reuse for cubic-target transitivity and future repair-code symmetries; mention in proof architecture only |
+| D-PC12 | The roadmap's raw `d_lambda` is not necessary when the outer functional dual contains a word supported on one block: such a word is already confined. The exact global obstruction has zero-, singleton-, and multi-support terms; for coordinate-surjective outer codes singleton functional duals cannot occur, and the advertised `min(2d(I^perp),d_lambda)` formula is exact. | mathematical proof complete; weighted transfer implication `LEAN` | correction to the planned theorem boundary, not a novelty claim | paper-promoted with the general three-term form and the qualified two-term corollary |
+| D-PC13 | For the completed q=9 seed, a Singer-cycle translate of its 20 projective coordinate functionals is disjoint from the original set. A five-symbol generalized single-parity-check outer code using that multiplier has functional support distance exactly 5 but weighted distance at least 6, so radius-four transfer holds strictly beyond the old distance-6 gate. | orbit-average proof: `sum_g |S intersect gS|=|S|^2=400<820`; weighted implication `LEAN`; example ledgered `MANUSCRIPT` | strict natural example; generalized SPC/MDS outer code, not a boundary toy | paper-promoted; broader algorithms and applications pass to C215 |
+| D-PC14 | Chen–Ling–Xing give a direct-sum description of a concatenated code's dual (IEEE TIT 47 (2001), Theorem 2.3; recalled in IEEE TIT 51 (2005), Theorem 2.1). The C214 fiber decomposition and product-sum enumerator are therefore classical structural consequences of dual concatenation plus coset weight enumerators; the repair-confinement use is the candidate contribution. | 2005 primary source read at DOI `10.1109/TIT.2005.851760`, SHA-256 `e566d78ab3a82d08ea4fc0441b98a85677dda41ee727a91b365c13b907733f0f`; 2001 source metadata located | prior-art correction; no novelty claim for decomposition or enumerator identity | manuscript, ledger, and Lean history corrected; 2001 full-text chain remains submission preflight |
 
 When a discovery becomes planned work, allocate it separately but keep this row as the concise
 discovery verdict. Negative investigations belong in the companion archive.

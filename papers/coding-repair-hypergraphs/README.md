@@ -3,11 +3,13 @@
 **Working title:** *Complete repair hypergraphs: exact transfer under
 concatenation. A twisted-cubic--axis family.* Author: Tavis Rudd.
 
-**Status:** assembled manuscript. The mathematical chain is Lean-checked under the strict trust
-gate, modulo exactly one quarantined literature theorem: Stichtenoth's self-dual TVZ-family
-theorem, specialized to `GF(6561)`. The internal adversarial novelty review records what is and is
-not defensible as new. An external specialist citation-chain review remains a submission preflight
-gate, not a mathematics or formalization blocker.
+**Status:** assembled manuscript. The original seed, support-distance transfer, and asymptotic
+chain are Lean-checked under the strict trust gate, modulo exactly one quarantined literature
+theorem: Stichtenoth's self-dual TVZ-family theorem, specialized to `GF(6561)`. C214's weighted
+transfer implication is also kernel-checked; its closed-form converse, Singer example, and
+enumerator identity currently have manuscript proofs and explicit proof-ledger boundaries. The
+internal adversarial novelty review records what is and is not defensible as new. An external
+specialist citation-chain review remains a submission preflight gate.
 
 ## Headline
 
@@ -24,7 +26,16 @@ satisfies `tau > nu` for `q >= 9`. At `q=9`, the three coordinate types have exa
 (nu,tau) = (4,7), (6,12), (7,13).
 ```
 
-An exact concatenation theorem preserves the complete radius-three repair hypergraph blockwise.
+An exact concatenation theorem identifies the minimum multiblock dual weight from inner
+coset-leader costs. For coordinate-surjective outer codes the threshold is
+`min(2*d(I^perp), d_lambda(O))`; the previous functional-support gate is a simple corollary.
+For the completed seed, a Singer-shifted generalized single-parity-check outer code has functional
+distance five but weighted distance at least six, proving exact radius-four transfer strictly
+beyond the old distance-six gate. The weighted sufficient direction is kernel-checked; the
+closed-form converse, Singer averaging argument, and fiber-enumerator identity currently have
+manuscript proofs and are marked as such in the proof ledger.
+
+The support-distance corollary preserves the complete radius-three repair hypergraph blockwise.
 Using a degree-four extension and Stichtenoth's self-dual outer codes gives an unbounded `GF(9)`
 family with exact rate `2/19` and eventual relative distance greater than every fixed
 `c < 39/190` (hence greater than `1/5`). Its disjoint exhaustive coordinate partition has exact
@@ -51,6 +62,8 @@ relative-distance bound `c<351/1600`. Only the bounded radius-four port transfer
 - `../../lean/RepairCodes/` — formal theorem chain.
 - `../../lean/RepairCodes/OperationalCoefficients.lean` — coefficient-labelled scalar recovery
   equations and the monomial gauge boundary.
+- `../../lean/RepairCodes/WeightedTransfer.lean` — weighted functional-dual gate and exact
+  repair-hypergraph transfer implication.
 - `../../notes/2026-07-15-c203-q9-coefficient-verifier.py` / `.json` — independent q9 coefficient
   replay and certificate.
 - `../../notes/2026-07-15-c203-operational-coefficient-adversarial-review.md` — adversarial audit

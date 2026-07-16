@@ -4,9 +4,10 @@ import RepairCodes.CodeInstance
 # The outer dual of an ordinary concatenation, without trace coordinates
 
 The bounded-repair transfer proof needs one structural fact: if a block vector `w` annihilates
-the concatenated code, then its vector of block coefficients belongs to the outer dual.  Earlier
-project notes attributed this to a "Chen–Ling–Xing dual decomposition," but the citation audit
-could not locate such a source.  No imported theorem is needed.
+the concatenated code, then its vector of block coefficients belongs to the outer dual.  A
+coordinate-dependent direct-sum description appears in Chen–Ling–Xing (IEEE TIT 47 (2001),
+Theorem 2.3), and is recalled in their 2005 paper, Theorem 2.1.  No imported theorem is needed here:
+the coordinate-free functional statement is proved directly below.
 
 Work coordinate-free over the base field `𝔽`.  For an outer symbol space `V`, a block coefficient
 is canonically an element of `Module.Dual 𝔽 V`.  Accordingly, `functionalDual O` is the annihilator

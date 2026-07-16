@@ -51,12 +51,15 @@ Its matching number $\nu_x$ is disjoint availability, while its transversal
 number $\tau_x$ is the least number of helper failures that block every
 radius-$r$ repair.
 
-Our principal result is an exact concatenation theorem.  If $I$ is an inner
-code, $r+1<2d(I^\perp)$, and the outer functional-dual distance is at least
-$r+2$, then every bounded repair of the concatenated code lies in one inner
-block.  Thus the entire hypergraph $\cH_x^{(r)}$, not merely a selected
-repair family, is copied block by block.  Ordinary extension-field dual
-distance implies the functional gate through the trace pairing.
+Our principal result is an exact concatenation theorem governed by inner
+coset-leader weights.  It gives the minimum weight of a dual word meeting
+multiple inner blocks, hence a necessary-and-sufficient confinement test.
+The usual hypotheses $r+1<2d(I^\perp)$ and outer functional-dual distance at
+least $r+2$ are a simple corollary.  A generalized single-parity-check outer
+code for the completed field-nine seed has functional distance five but
+weighted distance six, proving exact radius-four transfer strictly beyond
+that support-distance gate.  Thus the entire hypergraph $\cH_x^{(r)}$, not
+merely a selected repair family, is copied block by block.
 
 For $q=3^h$, a twisted-cubic--axis code supplies an explicit seed: we compute
 its coordinatewise matching and transversal numbers and prove
@@ -109,13 +112,17 @@ good LRC families; Liu--Ma--Wu--Xing~\cite{LiuEtAl2022}, in particular,
 derive locality and asymptotic bounds this way.  Locality preservation only
 asserts that some inner repairs survive.  We isolate a stronger dual-distance
 condition that prevents new low-weight dual words from spanning several
-inner blocks.  Under this condition, \emph{every} bounded repair support in
+inner blocks.  The exact invariant weights each outer functional by the
+minimum Hamming weight of an inner representative in its dual coset.  Under
+this condition, \emph{every} bounded repair support in
 the concatenated code is an embedded inner repair support.  Thus matching,
 transversal, edge counts, and all other invariants of the complete repair
 hypergraph transfer exactly.
 
 The theorem hierarchy is deliberate.  The principal general result is the
-complete-hypergraph transfer theorem, Theorem~\ref{thm:transfer}.
+weighted complete-hypergraph transfer theorem,
+Theorem~\ref{thm:weighted-transfer}; Theorem~\ref{thm:transfer} is its
+support-distance corollary.
 Theorems~\ref{thm:axis-rows} and~\ref{thm:cubic-rows} supply the explicit
 seed on which $\tau>\nu$ holds at every coordinate, and
 Theorem~\ref{thm:asymptotic} is their fixed-alphabet synthesis.  The
@@ -139,10 +146,11 @@ Explicit seed
 & Exact all-symbol rows with $\tau_x>\nu_x$ for $q\geq9$; three concrete
   field-nine profiles \\
 Exact transfer
-& Inner block confinement plus an outer functional-dual distance gate;
-  sharpness examples over $\F_3$
-& Equality of every complete bounded repair hypergraph, hence preservation
-  of all its invariants and every exact locality below the radius \\
+& Exact inner-coset realization weights; a Singer-cycle generalized
+  single-parity-check example beyond the support-distance gate
+& A necessary-and-sufficient block-confinement threshold and equality of
+  every complete bounded repair hypergraph, hence preservation of all its
+  invariants \\
 Fixed-alphabet synthesis
 & Trace duality and a self-dual TVZ outer family
 & Unbounded $\F_9$ families with positive rate and distance and exact
@@ -742,7 +750,102 @@ induced dual relation.  This is intrinsic to $V$ and does not choose field
 coordinates.  We use the standard convention $d(\{0\})=+\infty$, so the
 functional gate is vacuous when the functional dual is zero.
 
-\begin{theorem}[Complete repair-hypergraph transfer]\label{thm:transfer}
+The support count discards useful inner information.  Define the restriction
+map and its coset-leader weight by
+\[
+ \Phi_I:\F^K\longrightarrow V^*,\qquad
+ \Phi_I(w)(v)=\langle w,e(v)\rangle,
+ \qquad
+ \lambda_I(\beta)=\min_{\Phi_I(w)=\beta}\wt(w).
+\]
+The kernel of $\Phi_I$ is $I^\perp$, and $\Phi_I$ is onto because every
+functional on the subspace $I\leq\F^K$ extends to the ambient space.  Thus
+$\lambda_I$ is the coset-leader weight of a coset of $I^\perp$.  For
+$\beta=(\beta_j)_j\in O^{\perp_{\rm fun}}$ put
+\[
+ \Lambda_I(\beta)=\sum_j\lambda_I(\beta_j),\qquad
+ d_\lambda(O)=\min_{0\ne\beta\in O^{\perp_{\rm fun}}}\Lambda_I(\beta),
+\]
+again with the minimum of the empty set equal to $+\infty$.
+
+Let $\delta_{\rm mb}(O,I)$ be the minimum Hamming weight of a word in
+$(O\circ_e I)^\perp$ whose nonzero coordinates meet at least two inner
+blocks.  The following statement is the exact obstruction calculation.
+
+\begin{theorem}[Exact multiblock threshold]\label{thm:weighted-transfer}
+Suppose $|J|\geq2$.  With $+\infty$ used for an empty minimum,
+\[
+\delta_{\rm mb}(O,I)=\min\left\{
+ 2d(I^\perp),
+ \min_{\substack{0\ne\beta\in O^{\perp_{\rm fun}}\\
+                  |\supp(\beta)|=1}}
+       \bigl(d(I^\perp)+\Lambda_I(\beta)\bigr),
+ \min_{\substack{\beta\in O^{\perp_{\rm fun}}\\
+                  |\supp(\beta)|\geq2}}
+       \Lambda_I(\beta)
+ \right\}.
+\]
+Consequently every dual word of weight at most $r+1$ is confined to one
+block if and only if $r+1<\delta_{\rm mb}(O,I)$; this is also equivalent to
+complete radius-$r$ repair-hypergraph equality at every coordinate.
+
+If every coordinate projection $O\to V$ is onto, the singleton term is
+empty and
+\[
+ \delta_{\rm mb}(O,I)=\min\{2d(I^\perp),d_\lambda(O)\}.
+\]
+In particular, under this natural nondegeneracy hypothesis, the exact
+transfer criterion is
+\[
+ r+1<\min\{2d(I^\perp),d_\lambda(O)\}.
+\]
+\end{theorem}
+
+\begin{proof}
+For $w=(w_j)_j\in(O\circ_e I)^\perp$, set
+$\beta_j=\Phi_I(w_j)$.  Orthogonality says exactly that
+$\beta\in O^{\perp_{\rm fun}}$, and every tuple in the functional dual has
+all such blockwise representatives.  If $\beta=0$, a multiblock word needs
+two nonzero words of $I^\perp$, at minimum cost $2d(I^\perp)$.  If
+$|\supp(\beta)|=1$, its minimum representative occupies one block and a
+nonzero zero-fiber word in a second block costs another $d(I^\perp)$.  If
+$|\supp(\beta)|\geq2$, independently minimizing the fibers costs exactly
+$\Lambda_I(\beta)$ and already meets several blocks.  These cases are
+disjoint and exhaustive, proving the formula.
+
+A multiblock dual word of weight at most $r+1$ gives, after targeting any
+nonzero coordinate, a radius-$r$ repair meeting another block.  Conversely
+every nonembedded repair witness is such a word.  This proves both
+equivalences.  Finally, a functional-dual tuple supported only at $j$
+annihilates the image of the projection $O\to V$ at $j$; surjectivity forces
+that functional to vanish.
+\end{proof}
+
+There is also an exact coordinatewise version.  For target $(j,x)$, minimize
+over the same fiber decomposition subject to $w_j(x)\ne0$ and to some
+$w_k\ne0$ with $k\ne j$; call the result $\delta_{j,x}$.  Then literal
+equality at that coordinate holds if and only if $r+1<\delta_{j,x}$.  This
+pointed form can be sharper than the global minimum but is not needed for
+our uniform families.
+
+The fiber decomposition also gives the finite enumerator identity
+\begin{equation}\label{eq:fiber-enumerator}
+ W_{(O\circ_e I)^\perp}(z)
+ =\sum_{\beta\in O^{\perp_{\rm fun}}}\prod_{j\in J}W_{\beta_j}(z),
+ \qquad
+ W_\gamma(z)=\sum_{\Phi_I(w)=\gamma}z^{\wt(w)}.
+\end{equation}
+Replacing $z^{\wt(w)}$ by independent coordinate variables yields the
+complete support enumerator, so every bounded support and every pointed
+fiber can be recovered, not only the ordinary weight distribution.  This is
+a standard coset-enumerator consequence of the classical direct-sum
+description of concatenated duals; see Chen--Ling--Xing
+\cite[Theorem~2.3]{ChenLingXing2001} and its later restatement
+\cite[Theorem~2.1]{ChenLingXing2005}.  Our use is the exact repair-confinement
+threshold, not a novelty claim for the decomposition or
+Equation~\eqref{eq:fiber-enumerator}.
+
+\begin{corollary}[Support-distance transfer]\label{thm:transfer}
 Let $r\geq0$.  Suppose
 \[
  r+1<2d(I^\perp)
@@ -757,7 +860,7 @@ Then for every block $j\in J$ and inner coordinate $x\in K$,
 Consequently matching number, transversal number, inclusion-minimal repair
 clutter, edge counts, and the full incidence structure are preserved
 coordinate by coordinate.
-\end{theorem}
+\end{corollary}
 
 The first inequality is the \emph{inner block-confinement gate}: two nonzero
 inner-dual blocks would already be too heavy.  The second is the
@@ -785,7 +888,7 @@ other inclusion.
 \end{proof}
 
 \begin{corollary}[Exact mixed-locality transfer]\label{cor:exact-locality-transfer}
-Under the hypotheses of Theorem~\ref{thm:transfer}, let $0\leq s\leq r$.
+Under the hypotheses of Corollary~\ref{thm:transfer}, let $0\leq s\leq r$.
 For every $(j,x)$, the concatenated coordinate has exact locality $s$ if
 and only if the inner coordinate $x$ has exact locality $s$.
 \end{corollary}
@@ -793,7 +896,7 @@ and only if the inner coordinate $x$ has exact locality $s$.
 \begin{proof}
 The inner gate at radius $s$ follows from $s+1\leq r+1<2d(I^\perp)$, and
 the outer gate follows from $d(O^{\perp_{\rm fun}})\geq r+2\geq s+2$.
-Apply Theorem~\ref{thm:transfer} at every radius at most $s$.  Existence of
+Apply Corollary~\ref{thm:transfer} at every radius at most $s$.  Existence of
 an $s$-repair and nonexistence at every smaller radius are therefore both
 preserved.
 \end{proof}
@@ -806,7 +909,7 @@ the axis triples, yet radius-three transfer is exact since $4<2\cdot3$.
 
 \begin{proposition}[Uniform boundary of the transfer gates]
 \label{prop:transfer-boundary}
-Neither numerical hypothesis in Theorem~\ref{thm:transfer} can be weakened
+Neither numerical hypothesis in Corollary~\ref{thm:transfer} can be weakened
 uniformly, even among nonzero codes over $\F_3$.
 \begin{enumerate}[label=(\alph*),leftmargin=2.1em]
 \item At radius $r=3$ there are an inner code and a full outer code with
@@ -851,6 +954,49 @@ difference obstruction used for distinct recovery sets, for example by
 Kurz--Yaakobi~\cite[Lemma~10(a)]{KurzYaakobi2021}; the point here is the exact
 uniform boundary of the complete-hypergraph transfer statement.
 \end{proof}
+
+\subsection{A strict weighted-transfer example}
+
+The weighted criterion is genuinely stronger for the completed field-nine
+seed, not only for a synthetic boundary code.  Let $I=\overline C_9$ be the
+$[20,4,9]_9$ completed cubic--axis code.  Choose the encoder
+$e:L\to I$ with $L=\F_{9^4}$.  The twenty coordinate functionals of $e$
+give a set $S$ of twenty points in $\mathbb P(L^*)\cong\mathrm{PG}(3,9)$.  They are
+distinct because every pair of seed columns is projectively independent.
+
+The Singer group $L^*/\F_9^*$ acts regularly on the 820 points of
+$\mathrm{PG}(3,9)$.  Averaging translates gives
+\[
+ \frac1{820}\sum_{a\in L^*/\F_9^*}|S\cap aS|
+ =\frac{|S|^2}{820}=\frac{400}{820}<1.
+\]
+Hence some multiplier $a$ has $S\cap aS=\varnothing$.  For such an $a$,
+take the generalized single-parity-check outer code
+\[
+ O_a=\{(u_1,\ldots,u_5)\in L^5:
+       u_1+a u_2+u_3+u_4+u_5=0\}.
+\]
+This is an $L$-linear MDS code with parameters $[5,4,2]_{9^4}$, monomially
+equivalent to the ordinary single-parity-check code.  Under the trace
+pairing, every nonzero functional-dual word has the form
+\[
+ (v\mapsto\Tr(cv),\ v\mapsto\Tr(cav),\
+  v\mapsto\Tr(cv),\ v\mapsto\Tr(cv),\ v\mapsto\Tr(cv))
+ \qquad(c\ne0).
+\]
+Thus its functional support distance is exactly five.  A nonzero functional
+has realization cost one precisely when its projective class lies in $S$.
+The disjointness $S\cap aS=\varnothing$ says that the first two displayed
+functionals cannot both have cost one.  The other three cost at least one,
+so every nonzero functional-dual tuple has weighted cost at least six:
+\[
+ d_\lambda(O_a)\geq2+1+1+1+1=6.
+\]
+Since $d(I^\perp)=3$, Theorem~\ref{thm:weighted-transfer} gives
+$\delta_{\rm mb}=6$.  Therefore radius-four repair transfer is exact because
+$5<6$, although the support-distance corollary fails its required
+functional distance six.  This supplies a nondegenerate strict example
+using the paper's flagship inner geometry and a classical MDS outer code.
 
 \section{The trace bridge and the field-nine lift}
 \label{sec:trace}
@@ -1112,6 +1258,17 @@ theorem strengthens the conclusion under an additional outer-dual gate: it
 identifies every bounded dual support and therefore transfers the complete
 repair hypergraph, not only the existence of an inner recovery set.
 
+The algebraic decomposition of the dual of a concatenated code is classical.
+Chen--Ling--Xing~\cite[Theorem~2.3]{ChenLingXing2001} express it as the direct
+sum of an encoded outer dual and one copy of the inner dual in every block;
+their later paper recalls the statement explicitly
+\cite[Theorem~2.1]{ChenLingXing2005}.  Coset weight distributions are likewise
+standard objects, so the product-sum identity
+\eqref{eq:fiber-enumerator} is structural prior art.  What is added here is
+the exact minimum over zero, singleton, and multiblock functional fibers,
+its equivalence to complete repair-hypergraph confinement, and the strict
+Singer-cycle example beyond the ordinary support-distance gate.
+
 The geometry of the twisted cubic and its stabilizer has a substantial
 literature.  Davydov--Marcugini--Pambianco~\cite{DavydovEtAl2021} describe
 the axis in characteristic three and line orbits under the cubic stabilizer;
@@ -1150,12 +1307,21 @@ finite geometry and repair rows, complete bounded repair-hypergraph transfer
 and its two sharpness examples, the support-preserving trace bridge and
 finite lifts, and every reduction from the asymptotic input to the displayed
 rates and distance bounds.  In particular,
-\texttt{cubicRepair\_matchingNumber} formalizes the colored-graph matching,
-\texttt{repairHypergraph\_concatenatedCode\_eq\_embed} is the exact transfer
-equality, and
-\texttt{hasFunctionalDualDistanceAtLeast\_restrictScalars} is the trace
+\path{cubicRepair_matchingNumber} formalizes the colored-graph matching,
+\path{repairHypergraph_concatenatedCode_eq_embed} is the exact transfer
+equality under the support-distance corollary,
+\path{repairHypergraph_concatenatedCode_eq_embed_weighted} kernel-checks
+the sharper weighted sufficient direction, and
+\path{hasFunctionalDualDistanceAtLeast_restrictScalars} is the trace
 bridge.  The formal \texttt{repairHypergraph} uses the exact dual-word
 support definition in Definition~\ref{def:repair-hypergraph}.
+
+The closed-form minimum in Theorem~\ref{thm:weighted-transfer}, the
+Singer-cycle averaging example, and the finite enumerator identity are
+proved in the manuscript by finite linear algebra and counting; their
+current Lean layer checks the weighted transfer implication but does not yet
+encode the three-case minimum or polynomial identity.  They introduce no
+additional external theorem or project axiom.
 
 The independent script
 \texttt{notes/2026-07-13-projective-completion-verifier.py} implements its
