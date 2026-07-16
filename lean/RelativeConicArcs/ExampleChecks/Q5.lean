@@ -9,6 +9,8 @@ set_option maxHeartbeats 20000000
 set_option maxRecDepth 100000
 
 private instance : Fact (Nat.Prime 5) := ⟨by decide⟩
+noncomputable local instance : Fintype (Conic.Point (ZMod 5)) := Fintype.ofFinite _
+noncomputable local instance : DecidableEq (Conic.Point (ZMod 5)) := Classical.decEq _
 
 private def v5 (x y z : Nat) : Vec (ZMod 5) :=
   ![x, y, z]
@@ -50,8 +52,15 @@ theorem rhoC_ZMod5 : rhoC (K := ZMod 5) = 4 := by
       _ ≤ rhoC (K := ZMod 5) := by
         simpa using (NonsingularConic.standard (K := ZMod 5)).finite_lower_bound.2
 
+/-- The exact value transported from the standard model to every nonsingular conic over
+`GF(5)`, including the displayed C187 frame conic. -/
+theorem rho_points_ZMod5 (C : NonsingularConic (K := ZMod 5)) :
+    rho (L := Conic.Point (ZMod 5)) C.points = 4 := by
+  rw [C.rho_points_eq_rhoC, rhoC_ZMod5]
+
 #print axioms q5_frame_check
 #print axioms L2_five
 #print axioms rhoC_ZMod5
+#print axioms rho_points_ZMod5
 
 end RelativeConicArcs.Examples
