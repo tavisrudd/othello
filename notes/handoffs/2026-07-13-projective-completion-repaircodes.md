@@ -3,12 +3,14 @@
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: COMPLETE. C111–C114 are proved, adversarially reviewed, and synchronized with the
-paper and registries. The sole deep formal dependency is the quarantined Stichtenoth theorem;
-external specialist citation-chain review remains a submission preflight gate, not a theorem gap.
+**Status**: CORE COMPLETE; C214 PAPER UPGRADE QUEUED. C111–C114 are proved, adversarially reviewed,
+and synchronized with the paper and registries. The sole deep formal dependency is the quarantined
+Stichtenoth theorem; external specialist citation-chain review remains a submission preflight gate,
+not a theorem gap. C214 is a bounded promotion gate, not a reopening of the proved core.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
+**A+ roadmap:** [weighted-transfer upgrade and `repairports` follow-up](../2026-07-16-repaircodes-a-plus-roadmap.md)
 
 **Follow-up:** the twisted-cubic transversal spectrum spun off to
 [C115–C120](2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in
@@ -27,6 +29,12 @@ axiom, and PDF gates pass. A focused
 the coefficient-ratio gauge theorem and removed circuit-enumerator reuse from the verifier. The
 final aggregate `RepairCodes` build is deferred behind the foreign Q25 build. That aggregate gate
 is the only remaining bounded follow-up in this lane.
+
+C214 owns one additional bounded manuscript-upgrade decision: derive an exact weighted-functional
+block-confinement criterion, require a natural example strictly beyond the current support-distance
+gates, and assess the fiber-enumerator and optimized-outer-family payoff. If the strict example
+fails, bank the theorem for C215 and do not broaden the current paper. The stand-alone C215–C220
+program belongs to the separate `repairports` lane.
 
 ## Goal and claim ledger
 

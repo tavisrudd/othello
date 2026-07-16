@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C213.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C220.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -79,6 +79,16 @@ unless they retain an explicit open tail.
 
 - **C202 `[repaircodes]` [REPORTED 2026-07-15]** — q=9 radius-three extremizers and all minimum blockers classified under monomial `PGL(2,9)`; exact full-port Burnside census records the matching-orbit explosion → `notes/2026-07-15-c202-repair-extremizer-classification.md`.
 - **C203 `[repaircodes]` [IN PROGRESS]** — exact coefficient-labelled scalar equations and monomial gauge boundary pass focused Lean; aggregate `RepairCodes` build is deferred behind the foreign Q25 build → `notes/2026-07-15-c203-operational-coefficient-boundary.md`.
+- **C214 `[repaircodes]` [QUEUED PAPER UPGRADE]** — exact weighted-functional confinement criterion, strict beyond-gate example, fiber-enumerator identity, and optimized outer-family disposition → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+
+### `repairports`
+
+- **C215 `[repairports]` [GATED ON C214]** — weighted functional duals and exact low-weight concatenation theory → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C216 `[repairports]` [QUEUED; after C215 definitions]** — prescribed repair-port realization in asymptotically good fixed-alphabet codes → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C217 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — gauge-invariant holonomy and cross-ratios of overlapping repair circuits → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C218 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — rational-normal-curve plus osculating-nucleus repair families → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C219 `[repairports]` [QUEUED]** — reliability and Boolean analysis of complete repair ports → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C220 `[repairports]` [LONG-HORIZON]** — additive equality and stability for repair blockers and packings → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 
 ### Dormant / handoff-owned lanes
 
