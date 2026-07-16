@@ -137,3 +137,18 @@ The bulk generator output in `e9a0db11` contains `1,036` semantic leaf modules c
 The scoped unattended gate found the bridge and full import aggregate trace-current and passed the
 final aggregate no-build check. The next active step is therefore the payload dispatcher, not
 further transport-leaf generation.
+
+## 2026-07-16 — C151 payload dispatch and canonical class links
+
+Commit `5ea6ea9e` generated 1,071 bounded mixed-row dispatcher leaves covering all 46,056 residual
+payloads. Each bad row reduces only its stored collinear witness, while each valid row reuses one
+of the checked pointwise transports. The representative leaf elaborated successfully, and the
+full dispatcher aggregate was trace-current with its final no-build gate passing under the serial
+profile. A two-worker gate was not started because its measured memory reserve was unavailable.
+
+Commit `85a49ad4` generated 1,036 bounded canonical-class link leaves for all 7,044 valid rows.
+Each link identifies the transported canonical configuration with a literal checked
+`Q25RowCompositionData` class and imports that class's `≥32` theorem. The full class-link aggregate
+was trace-current and passed its final no-build gate. The remaining residual-cover step is a thin
+bounded conclusion layer composing bad-row contradictions and valid-row transport/class bounds,
+followed by the existing projective normalization lift to arbitrary exceptional-profile arcs.

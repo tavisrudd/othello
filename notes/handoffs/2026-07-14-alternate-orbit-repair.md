@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-14
 **Status:** OPEN — C142, C143, C148–C150 reported; C151's universal lower bound, five-row
-attainment, and all 7,044 bounded residual-transport certificates are checked, while the semantic
-payload dispatcher and equality-orbit completeness remain active
+attainment, all 46,056 payload dispatches, and all 7,044 transport/class links are checked, while
+the normalized-row composition theorem and equality-orbit completeness remain active
 **Tasks:** C142–C143, C148–C152
 
 > **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's current-state map. Never
@@ -53,9 +53,10 @@ minimum of 32 legal pairs and the classification of equality cases.
   alternate repairs, with the reported sharp rectangle `s ≥ 4`, `k ≤ s+1`.
 - **Q25 exceptional profile:** all 1,189 residual class representatives have a kernel-checked
   lower bound of 32, and five proposed minimizer representatives have checked equality.
-- **Remaining exactness gap:** connect the residual-cover certificate to semantic orbit
-  completeness, including the class-linking and orbit-size facts needed to prove that the five
-  representative rows exhaust all equality cases.
+- **Remaining exactness gap:** compose the checked payload dispatches and canonical class links
+  into the universal normalized-row `≥32` theorem, lift it to semantic exceptional-profile arcs,
+  and prove the orbit-size facts needed to show that the five representative rows exhaust all
+  equality cases.
 
 Reported theorem and scout details live in their reports:
 [C142](../2026-07-14-c142-alternate-orbit-repair.md),
@@ -86,7 +87,7 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C151 | active; bounded valid-row transports checked | Prove residual-cover/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
+| C151 | active; dispatch and class-link aggregates checked | Compose the normalized-row lower bound, prove semantic residual-cover/orbit completeness, and conclude exact Q25 minimum 32 with five equality classes |
 | C152 | queued behind C151 | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
 Reported: C142, C143, C148, C149, and C150; use the linked reports rather than recreating their
@@ -94,10 +95,11 @@ plans here.
 
 ## C151 — next actions
 
-1. Dispatch each existing payload leaf through its stored bad witness or checked valid transport;
-   do not ask `decide` to reduce an opaque `Finset` equality.
-2. Connect each semantic exceptional-profile arc to a certified residual class and transport the
-   checked `≥32` theorem along the projective equivalence.
+1. Generate bounded conclusion leaves that compose each checked payload dispatch with either its
+   bad-row contradiction or its valid transport and canonical-class `≥32` theorem; aggregate them
+   into the universal normalized-row lower bound.
+2. Lift that normalized-row theorem through the existing stabilizer and base-field normalization
+   maps to every semantic exceptional-profile arc.
 3. Connect the five equality representatives and their orbit sizes to the full set of 1,600
    minimizers; state exactly what is classified up to the ordered-fixed-pair residual group.
 4. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
@@ -109,6 +111,10 @@ permutation certificates per module. The handwritten prototype remains split und
 `lean/RelativeConicArcs/Q25ResidualCoverPrototype/`, and the generic bridge is
 `lean/RelativeConicArcs/Q25ResidualCoverBridge.lean`. Preserve these module boundaries because a
 combined elaboration exceeded the safe memory envelope.
+
+The checked mixed-row dispatcher is split into 1,071 leaves under
+`lean/RelativeConicArcs/Q25ResidualDispatchData/`; the 7,044 literal canonical-class links are
+split along the transport leaves under `lean/RelativeConicArcs/Q25ResidualClassLinkData/`.
 
 ## C152 — queued shape
 
