@@ -60,8 +60,9 @@ and, for every prime power $q$,
 \[
  \rhoC(q)\ge \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-We also prove an upper transfer by projective averaging.  A projective frame
-meets the lower bound at $q=5$, and explicit witnesses do so for $q=8,9,11$.  Over $\F_{16}$, a
+We also prove an upper transfer by projective averaging.  Explicit witnesses
+meet the lower bound for $q=5,8,9,11$; at $q=5$ the witness is a projective
+frame.  Over $\F_{16}$, a
 certificate-checked exhaustive covering list shows that no nonzero quadratic
 contains an eight-arc's ordinary-uncovered locus while avoiding the arc;
 hence $\rhoC(16)=9$.
@@ -494,6 +495,10 @@ Then
  \rhoC(q)\ge L_2(q)\ge L_1(q).
 \label{eq:L2}
 \end{equation}
+Indeed, for $q\ge3$ a set of at most two points has at most one secant, and
+that secant together with the set and the conic contains at most
+$2q+2<q^2+q+1$ points.  Thus a $\cC$-complete arc has at least three points,
+so the moment bound applies to the unrestricted minimum defining $\rhoC(q)$.
 The definition of $L_2(q)$ involves only integer arithmetic after
 multiplication by $\lfloor k/2\rfloor$.
 
@@ -852,11 +857,13 @@ For $q=5$, the standard four-frame has ordinary-uncovered locus
 a nonsingular six-point conic.  An invertible coordinate change carries this
 conic to $XZ=Y^2$ and the frame to the four coordinates in
 Appendix~\ref{app:witnesses}; the relative certificate is checked in Lean.
-The broader classification of conic-filling loci for $4\le k\le7$ is proved
-in the companion treatment~\cite[the conic-filling classification]{RuddClebsch2026}; only its
-$q=5$ witness is used here.  The appendix also lists $\cC$-complete arcs of
-size six for $q=8,9,11$.  Their verification is described below.
+The appendix also lists $\cC$-complete arcs of size six for $q=8,9,11$.
+Their verification is described below.
 \end{proof}
+
+For context, the companion treatment classifies all conic-filling loci for
+$4\le k\le7$~\cite[the conic-filling classification]{RuddClebsch2026}.
+That broader classification is not used in Proposition~\ref{prop:small-values}.
 
 The ordinary classification of eight-arcs over $\F_{16}$ records arc
 counts, stabilizers, secant-index distributions, and conic-contained
@@ -1261,9 +1268,10 @@ frozen outputs.
 Claim & Evidence & Trust boundary \\
 \midrule
 Five upper-bound witnesses &
-Exact checkers verify the field model, conic, arc condition, coverage, and
-the applicable secant moments &
-Certificate check of the displayed coordinates; no search-completeness
+The dedicated q=5 Lean leaf checks the transported frame; the general
+verifier and Lean leaves check q=8,9,11,16 &
+Every displayed coordinate list has a rules-only Lean certificate; the
+independent Python verifier covers q=8,9,11,16 only; no search-completeness
 claim \\
 \addlinespace
 General theorem chain &
@@ -1300,16 +1308,19 @@ wrapper assumes the centred family is cobounded, because a real-valued
 \texttt{liminf} does not represent divergence to $+\infty$; the operational
 statement covers that case as well.
 
-The witness entry point is
-\texttt{verify\_relative\_conic\_arcs.py}.  The classification entry point
-is \texttt{search\_rhoc16.cpp}; its checked-in report and emitted Lean data
-fix the finite search input.  For the upper-bound witnesses, a separate
-rules-only Lean checker verifies
+The q=5 witness entry point is the dedicated rules-only Lean leaf
+\texttt{RelativeConicArcs/ExampleChecks/Q5.lean}; the C187 checker independently
+replays the frame's six-point uncovered-conic identity.  For q=8,9,11,16,
+the independent witness entry point is
+\texttt{verify\_relative\_conic\_arcs.py}, and the corresponding Lean leaves
+check the displayed coordinates.  All five Lean certificates verify
 disjointness, the arc condition, and coverage of the canonical projective
-representatives $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$, and a soundness theorem
-transports acceptance to relative completeness.  The finite examples do
-not depend on the external Kim--Vu hypothesis used only for the conditional
-asymptotic upper bound.
+representatives $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a soundness theorem
+transports acceptance to relative completeness.  The q=16 classification
+entry point is \texttt{search\_rhoc16.cpp}; its checked-in report and emitted
+Lean data fix the finite search input.  The finite examples do not depend on
+the external Kim--Vu hypothesis used only for the conditional asymptotic
+upper bound.
 
 \paragraph{The three exceptional leaves.}
 Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
@@ -1377,12 +1388,13 @@ for homogeneous degree-$d$ forms.
 All coordinates are homogeneous and use the standard conic $XZ=Y^2$.
 The rules-only Lean checkers in
 \texttt{RelativeConicArcs/ExampleChecks/}---namely
-\texttt{Q8.lean}, \texttt{Q9.lean}, \texttt{Q11.lean}, and
+\texttt{Q5.lean}, \texttt{Q8.lean}, \texttt{Q9.lean}, \texttt{Q11.lean}, and
 \texttt{Q16.lean}---verify the
 displayed coordinates and feed the exact-value theorems in the aggregate
 \texttt{Results.lean}.  The independent Python entry point
-\nolinkurl{verify_relative_conic_arcs.py} regenerates the same witness checks
-but is not part of the Lean trust base.
+\nolinkurl{verify_relative_conic_arcs.py} regenerates the q=8,9,11,16 witness
+checks but is not part of the Lean trust base.  The q=5 frame identity has the
+separate C187 checker described above.
 
 For $q=5$, coordinates lie in the prime field.  The projective image of the
 standard four-frame used by the certificate is

@@ -17,8 +17,8 @@ private def v5 (x y z : Nat) : Vec (ZMod 5) :=
 
 /-- The C187 projective four-frame, transported to the standard conic `XZ - Y² = 0` by
 the matrix with rows `(1,2,3)`, `(0,1,3)`, `(3,2,4)`.  That matrix has determinant `2` over
-`ZMod 5` and carries the displayed quadratic
-`X² + Y² + Z² + XY + XZ + YZ` to `3 * (XZ - Y²)`. -/
+`ZMod 5`; pulling back the standard equation gives a nonzero scalar multiple of the displayed
+quadratic `X² + Y² + Z² + XY + XZ + YZ`. -/
 def q5FrameWitness : List (RawPoint (ZMod 5)) := [
   ⟨v5 1 0 3, by decide⟩,
   ⟨v5 2 1 2, by decide⟩,
