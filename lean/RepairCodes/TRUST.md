@@ -66,12 +66,18 @@ The finite seed-and-lift theorem is conditional on properties of the supplied ou
 These are theorem arguments, not global axioms.  `hasFunctionalDualDistanceAtLeast_top` proves
 that the gate is nonvacuous.  The trace-duality bridge is now kernel-proved.
 
-The only nonformalized mathematics is Stichtenoth's deep self-dual TVZ-family theorem
+The only nonformalized mathematics introduced as a global project axiom is Stichtenoth's deep self-dual TVZ-family theorem
 (arXiv:math/0506264, Theorem 1.6(ii)), stated once in `RepairCodes/Imported.lean`.  The concrete
 asymptotic corollary's axiom report contains exactly this import plus the standard logical axioms.
 
 The PGL(2,9) orbit description of the ten-point axis is computational/literature provenance only.
 It is not used by the formal construction, which defines the full projective axis directly.
+
+The strict weighted example in `RepairCodes.WeightedStrictExample` takes the classical Singer
+regular-action/disjoint-multiplier fact as an explicit theorem argument, not an axiom.  From that
+argument Lean proves the generalized-SPC functional-dual description, exact functional support
+distance five, weighted distance at least six, coordinate surjectivity, and literal completed-seed
+radius-four repair-hypergraph transfer.  Singer's theorem is cited in the manuscript.
 
 ## Projectively completed seed
 

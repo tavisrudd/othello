@@ -38,17 +38,15 @@ nonembedded-witness threshold; under coordinate-surjective projections they agre
 the witness threshold is a sufficient complete-hypergraph transfer gate, with no false converse
 from support-set equality. A Singer-shifted `[5,4,2]_{6561}` generalized SPC
 outer code gives the required strict natural example for the completed seed. The weighted transfer
-implication is kernel-checked; the closed-form converse, Singer averaging proof, and enumerator
-identity are honestly ledgered as manuscript proofs. The general optimized-outer-family program
+implication, closed-form converse, finite attainment, generalized-SPC functional dual, strict
+weighted separation, and radius-four conclusion are kernel-checked. Singer regularity and the
+enumerator identity are honestly ledgered as cited classical inputs. The general optimized-outer-family program
 remains in the separate `repairports` lane.
 
-C221 is the active bounded step in this lane. `WeightedTransferExact.lean` now kernel-checks the
-exact zero/singleton/multisupport stratum iff, each closed-term lower bound, the
-coordinate-surjective threshold coincidence, and the Singer/SPC averaging and five-fiber arithmetic
-cores. Focused elaboration, standard-axiom output, proof-ledger synchronization, and the PDF gate
-pass. The concrete attained-minimum converse and trace/SPC instantiation remain, and the aggregate
-Lean gate is waiting behind the foreign Q25 build. A finite fiber equivalence remains optional;
-the polynomial enumerator may remain a manuscript corollary. The external coding-theory
+C221's exact threshold work and the strict generalized-SPC example are now kernel-checked in
+`WeightedTransferExact.lean` and `WeightedStrictExample.lean`. Focused elaboration and
+standard-axiom reports pass; the aggregate Lean/PDF gates and final ledger synchronization are the
+remaining closeout. The polynomial enumerator is an explicit cited classical input. The external coding-theory
 citation-chain review follows closure and remains a submission preflight gate.
 
 ## Goal and claim ledger

@@ -7,10 +7,11 @@ concatenation. A twisted-cubic--axis family.* Author: Tavis Rudd.
 chain are Lean-checked under the strict trust gate, modulo exactly one quarantined literature
 theorem: Stichtenoth's self-dual TVZ-family theorem, specialized to `GF(6561)`. C214's weighted
 transfer implication is also kernel-checked. C221 kernel-checks the exact three-stratum partition,
-the three closed-term lower bounds, the coordinate-surjective threshold coincidence, and the
-Singer/SPC averaging and five-fiber arithmetic cores. Finite minimum attainment, the exact
-nonembedded-witness formula, the concrete trace/SPC instantiation, and the enumerator identity
-retain explicit manuscript boundaries. The internal adversarial novelty review records what is
+finite fiber/minimum attainment, the exact nonembedded-witness formula, and the
+coordinate-surjective threshold coincidence. The generalized-SPC functional dual, exact support
+distance five, weighted distance six, coordinate surjectivity, and radius-four transfer are now
+also checked. Singer's classical regular-action theorem and the classical enumerator identity are
+explicitly cited inputs rather than manuscript proof gaps. The internal adversarial novelty review records what is
 and is not defensible as new. An external
 specialist citation-chain review remains a submission preflight gate.
 
@@ -36,9 +37,10 @@ multiblock threshold. Below the witness threshold, complete repair-hypergraph eq
 the previous functional-support gate is a simple sufficient corollary.
 For the completed seed, a Singer-shifted generalized single-parity-check outer code has functional
 distance five but weighted distance at least six, proving exact radius-four transfer strictly
-beyond the old distance-six gate. The exact case partition, its closed-term lower-bound direction,
-the coordinate-surjective threshold coincidence, and the averaging/five-fiber arithmetic are kernel-checked;
-the concrete trace/SPC identification and fiber-enumerator identity remain manuscript proofs.
+beyond the old distance-six gate. The exact case partition, both closed-term directions,
+the coordinate-surjective threshold coincidence, generalized-SPC identification, and the
+averaging/five-fiber deduction are kernel-checked. Singer regularity and the fiber-enumerator
+identity are cited classical inputs.
 
 The support-distance corollary preserves the complete radius-three repair hypergraph blockwise.
 Using a degree-four extension and Stichtenoth's self-dual outer codes gives an unbounded `GF(9)`
@@ -70,7 +72,9 @@ relative-distance bound `c<351/1600`. Only the bounded radius-four port transfer
 - `../../lean/RepairCodes/WeightedTransfer.lean` — weighted functional-dual gate and exact
   repair-hypergraph transfer implication.
 - `../../lean/RepairCodes/WeightedTransferExact.lean` — exact three-stratum threshold partition,
-  closed-term lower bounds, coordinate-surjective threshold coincidence, and Singer/SPC arithmetic core.
+  exact closed terms, finite attainment, and coordinate-surjective threshold coincidence.
+- `../../lean/RepairCodes/WeightedStrictExample.lean` — generalized-SPC functional dual, strict
+  distance-five/weighted-distance-six separation, and completed-seed radius-four transfer.
 - `../../notes/2026-07-15-c203-q9-coefficient-verifier.py` / `.json` — independent q9 coefficient
   replay and certificate.
 - `../../notes/2026-07-15-c203-operational-coefficient-adversarial-review.md` — adversarial audit

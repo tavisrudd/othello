@@ -1012,19 +1012,24 @@ $e:L\to I$ with $L=\F_{9^4}$.  The twenty coordinate functionals of $e$
 give a set $S$ of twenty points in $\mathbb P(L^*)\cong\mathrm{PG}(3,9)$.  They are
 distinct because every pair of seed columns is projectively independent.
 
-The Singer group $L^*/\F_9^*$ acts regularly on the 820 points of
-$\mathrm{PG}(3,9)$.  Averaging translates gives
+By Singer's classical regular-action theorem~\cite{Singer1938}, the group
+$L^*/\F_9^*$ acts regularly on the 820 points of $\mathrm{PG}(3,9)$.
+Averaging translates gives
 \[
  \frac1{820}\sum_{a\in L^*/\F_9^*}|S\cap aS|
  =\frac{|S|^2}{820}=\frac{400}{820}<1.
 \]
-Hence some multiplier $a$ has $S\cap aS=\varnothing$.  For such an $a$,
+Hence some multiplier $a$ has $S\cap aS=\varnothing$.  In the Lean layer,
+Singer regularity is the cited geometric input; the regular-action count,
+$400<820$, and the deduction of a disjoint translate are separated explicitly
+from the subsequent code-theoretic theorem.  For such an $a$,
 take the generalized single-parity-check outer code
 \[
  O_a=\{(u_1,\ldots,u_5)\in L^5:
        u_1+a u_2+u_3+u_4+u_5=0\}.
 \]
-This is an $L$-linear MDS code with parameters $[5,4,2]_{9^4}$, monomially
+This is the standard $L$-linear generalized single-parity-check MDS code
+with parameters $[5,4,2]_{9^4}$~\cite{MacWilliamsSloane1977}, monomially
 equivalent to the ordinary single-parity-check code.  Under the trace
 pairing, every nonzero functional-dual word has the form
 \[
@@ -1371,10 +1376,14 @@ The current Lean layer checks functional-fiber nonemptiness, attainment of the
 inner dual distance, the exact three-stratum formula (both directions), the
 exact $\delta_{\rm emb}$ formula in lower-bound-profile form, the
 coordinate-surjective threshold coincidence, confinement below that threshold,
-and the resulting literal repair-hypergraph equality.  The concrete
-Singer/trace instantiation remains to be discharged in Lean.  The polynomial
-enumerator identity is used only as the cited classical concatenated-dual
-decomposition described above, not as a new formalized contribution.
+and the resulting literal repair-hypergraph equality.  For the strict example,
+Lean additionally checks the generalized-SPC functional dual, exact functional
+distance five, weighted distance at least six from a Singer-disjoint unit-cost
+multiplier, coordinate surjectivity, and exact radius-four transfer for the
+completed seed.  Only Singer's cited regular-action theorem is taken as the
+geometric input.  The polynomial enumerator identity is used only as the cited
+classical concatenated-dual decomposition described above, not as a new
+formalized contribution.
 
 The independent script
 \texttt{notes/2026-07-13-projective-completion-verifier.py} implements its
