@@ -40,7 +40,7 @@ and cite the archived release, not a mutable branch URL.
 
 ## Exit gate
 
-- C153 and C131/C161 have fixed final claim and attribution wording;
+- C153/C161 have fixed final claim and attribution wording;
 - C168 passes its clean-HEAD eight-source replay and PDF audit;
 - release tag points to that exact clean commit;
 - archive download is independently unpacked and replayed in a fresh directory;

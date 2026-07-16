@@ -1111,3 +1111,14 @@ dual-variety conjecture. (NOT "first non-GRS deep-hole determination.") One-line
 
 Guardrail: respect the papers-planning salami-slicing check before splitting from the arcs
 manuscript.
+
+## 2026-07-15 — C153/C161 priority reconciliation closed
+
+The preserved Dye and BSW scans settle the final live attribution boundary. BSW 1992 defines and
+classifies the `q=11` complete exterior six-arc, which gives conic inclusion but not exact covering.
+Dye Theorem 1 supplies the ten-Brianchon equality class and its projective uniqueness; Dye Theorem
+3 supplies its `A5` stabilizer in characteristic eleven. Storme--Van Maldeghem Proposition 12
+supplies the converse classification of a primitive `A5`-fixed six-arc. The manuscript now names
+these imports implication by implication, removes the stale Sadeh/ILL TODO, and makes no covering
+claim conditional on the unread BSW 1991 adjacent-context paper. C153 and C161 left the live queue;
+C168 is next.

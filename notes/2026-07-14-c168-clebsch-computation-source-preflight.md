@@ -5,7 +5,7 @@
 **Status**: named-source inventory and checker hardening passed, including the later decoding,
 low-degree, point-orbit, and small-arc additions. Every executable artifact cited by the current
 manuscript is Git-indexed. C168 remains open for the final clean-source manifest/replay, citation
-audit, and handoff pruning after C131/C161 settle the last priority attribution.
+audit, and handoff pruning. C153/C161 have settled the last priority attribution.
 
 ## Inventory verdict
 
@@ -114,8 +114,8 @@ rather than infer them from existing oleans.
 
 After the C184--C187 integration and abstract repair, the repository-level `papers/Makefile`
 rebuilt the checked-in manuscript with XeLaTeX to a warning-free 21-page, 176,119-byte PDF. C168 still
-requires a fresh clean-HEAD replay and PDF/citation audit after C153 and C131/C161 settle the final
-priority wording; this checkpoint is not a substitute for that exit gate.
+requires a fresh clean-HEAD replay and PDF/citation audit with the final C153/C161 priority wording;
+this checkpoint is not a substitute for that exit gate.
 
 ## C168 actions
 

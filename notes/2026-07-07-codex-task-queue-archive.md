@@ -4578,3 +4578,15 @@ The remaining history — the verbose priority-ordering snapshots, the original 
 Nth-pass amendment trail, and every REPORTED / NEGATIVE / NO-GO / DONE task body (C1–C74, plus the
 untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 2026-07-11 to
 [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md).
+
+## 2026-07-15 Clebsch priority closeout
+
+- **C153 `[clebsch]` [REPORTED]** — BSW 1992 owns complete exteriority and the `q=11` exterior-set
+  census, hence the inclusion of the conic in the uncovered locus; it does not state exact
+  covering. The manuscript now proves equality from the classical inclusion and Dye's exact
+  concurrence count without making a separate priority claim →
+  [`2026-07-15-dye-bsw-primary-source-audit.md`](2026-07-15-dye-bsw-primary-source-audit.md).
+- **C161 `[clebsch]` [REPORTED]** — Dye Theorems 1 and 3 supply projective uniqueness of the
+  Clebsch equality class and its `A5` stabilizer; Storme--Van Maldeghem Proposition 12 supplies the
+  converse classification of the primitive `A5`-fixed six-arc →
+  [`2026-07-14-c161-tfae-iv-v-priority.md`](2026-07-14-c161-tfae-iv-v-priority.md).

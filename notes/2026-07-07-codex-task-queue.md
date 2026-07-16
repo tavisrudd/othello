@@ -38,8 +38,6 @@ unless they retain an explicit open tail.
 
 ### `clebsch`
 
-- **C153 `[clebsch]` [OPEN RECONCILIATION]** — reconcile BSW source coverage and final priority wording with the preserved scans/OCR.
-- **C161 `[clebsch]` [QUEUED]** — settle ownership of the equality/classification input and fence the Dye import precisely.
 - **C168 `[clebsch]` [FINAL GATE]** — clean-source computation replay, tracked-script audit, and submission closeout → `notes/2026-07-14-c168-clebsch-computation-source-preflight.md`.
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C206 `[clebsch]` [QUEUED UPGRADE]** — conceptual nearest-conic gap/stability → `notes/2026-07-15-c206-clebsch-gap-stability.md`.

@@ -175,7 +175,7 @@ of Blokhuis, Seress, and Wilbrink, the same configuration is a complete
 exterior set of a conic~\cite[pp.~143, 146]{BSW1992}; their broader sets-without-tangents
 work and Van de Voorde's account give the adjacent literature
 \cite{BSW1991,VanDeVoorde2011}. The six-arc census in $\PG(2,11)$ is due to
-Sadeh~\cite{HirschfeldSadeh1984,SadehThesis1984}; see also the tables in
+Sadeh~\cite{SadehThesis1984}; see also the tables in
 Hirschfeld's book~\cite{Hirschfeld1998}. We recompute its extension-count
 spectrum as a byproduct of the rigidity theorem's exhaustive search and
 claim no priority on the raw numbers. The identification of this code's
@@ -640,28 +640,13 @@ anywhere near the condition of the theorem.
 
 \paragraph{Census framing.} The projective-equivalence classes of $k$-arcs
 in $\PG(2,11)$ were classified by
-Sadeh~\cite{SadehThesis1984,HirschfeldSadeh1984}; see also
+Sadeh~\cite{SadehThesis1984}; see also
 Hirschfeld~\cite[Ch.~14]{Hirschfeld1998}. Over the six-arc classes of that
 census we compute, for each representative $A$, the projective uncovered
 locus $\cU(A)$ --- the points off $A$ and off all fifteen of its secants,
 equivalently the points extending $A$ to a projective seven-arc --- and read
 $\cU(A)$ as the projective covering-radius-three syndrome data of the associated
 $[6,3,4]_{11}$ code.
-% TODO(C131) --- DO NOT RE-ASSERT THE OLD CONCESSION WITHOUT THE ILL.
-% This paragraph used to read "the classification of six-arcs, and the raw
-% extension-count data |U(A)| it entails, belong to Hirschfeld and Sadeh".
-% The 2026-07-14 sweep (notes/2026-07-14-gem-lit-rigidity-gap.md) found that
-% may be mis-aimed IN OUR FAVOUR: per its zbMATH review (Zbl 0538.51010,
-% Grundhoefer), Hirschfeld-Sadeh 1984 is a Singer-cycle / complete-7-arc /
-% (n;3)-arc paper and appears NOT to be a six-arc paper at all; and Karaoglu's
-% 2018 Sussex thesis, the modern continuation of the same line, tabulates
-% six-arcs with NO extension-point column. So we may have been conceding a
-% result to a paper that does not contain it.
-% Posture below, deliberate: decline priority WITHOUT asserting anyone else
-% has it -- "we claim no priority on X" does not require "X belongs to Y".
-% C131 settles it when the Sadeh thesis / Hirschfeld-Sadeh ILL arrives: if the
-% extension data IS there, restore an explicit attribution; if it is not, this
-% wording already stands and nothing needs changing.
 \emph{We claim no priority on the six-arc census, nor on the raw
 extension-count data $|\cU(A)|$ that an extension-based classification
 entails}: the size of $\cU(A)$ is a standard projective invariant of any
@@ -832,12 +817,14 @@ other classes were not exhausted.
 
 \begin{remark}[Which implications are new]
 \label{rem:what-is-new}
-The equivalence (iv)$\Leftrightarrow$(v) is not ours and is not new: that the
-Clebsch hexagon is the unique $\mathrm{PGL}(3,11)$-orbit of six-arcs whose
-stabilizer contains $A_5$ is Storme and
-Van~Maldeghem~\cite[Prop.~12]{SVM1995}, quoted in Section~\ref{sec:hexagon}
-above, and the classification of six-arcs that underlies it is Sadeh's. The
-content of the theorem is the implication
+The equivalence (iv)$\Leftrightarrow$(v) is imported rather than new here.
+Dye proves projective uniqueness of Clebsch hexagons and computes their
+stabilizer as $A_5$ in characteristic eleven
+\cite[Theorems~1 and 3, pp.~275--278]{Dye1991}, giving
+(iv)$\Rightarrow$(v). Storme and Van~Maldeghem classify the primitive
+$A_5$-fixed arcs and prove projective uniqueness of their six-point orbit
+\cite[Prop.~12]{SVM1995}, giving (v)$\Rightarrow$(iv). The content of the
+theorem is the implication
 (i)$\Rightarrow$(iv), and with it the equivalence of the projective
 syndrome conditions (i)--(iii) with the classical characterizations
 (iv)--(v). It is
@@ -1569,12 +1556,6 @@ V.~Guruswami and A.~Vardy,
 J.~W.~P.~Hirschfeld,
 \newblock \emph{Projective Geometries over Finite Fields}, second edition,
 \newblock Oxford University Press, 1998.
-
-\bibitem{HirschfeldSadeh1984}
-J.~W.~P.~Hirschfeld and A.~R.~Sadeh,
-\newblock The projective plane over the field of eleven elements,
-\newblock \emph{Mitteilungen aus dem Mathematischen Seminar Giessen}
-\textbf{164} (1984), 245--257.
 
 \bibitem{OKeefeStorme1996}
 C.~M.~O'Keefe and L.~Storme,

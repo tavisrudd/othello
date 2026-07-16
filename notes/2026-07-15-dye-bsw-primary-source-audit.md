@@ -29,9 +29,22 @@ For the Clebsch six-arc `A` and its associated conic `C` over `F_11`:
 - Each source therefore gives the classical inclusion `C(F_11) subset U(A)`. Neither states that
   every off-conic point is covered or writes `U(A)=C(F_11)`.
 - Dye's exact ten concurrences plus the chord-defect identity give `|U(A)|=22-10=12`. Since the
-  conic already contributes twelve uncovered points, equality follows. Describe this as an
-  apparently unrecorded short synthesis, not as a theorem of Dye/BSW and not as a mysterious new
-  finite configuration.
+  conic already contributes twelve uncovered points, equality follows. Describe this as an exact
+  synthesis proved in the manuscript, not as a theorem of Dye/BSW and not as a separate priority
+  claim about the finite configuration.
+
+## C153/C161 disposition
+
+- **C153 is complete.** BSW 1992 is the primary source needed for the complete-exterior-set
+  definition and the `q=11` census. BSW 1991 is cited only for adjacent sets-without-tangents
+  context and is not used to support exact covering. The manuscript therefore makes no claim
+  conditional on obtaining that paper.
+- **C161 is complete.** Dye's Theorem 1 supplies projective uniqueness of the ten-Brianchon
+  equality class, and Theorem 3 computes the stabilizer of that Clebsch class as `A5` in
+  characteristic eleven. These give the classical equality classification used in the rigidity
+  proof and implication `(iv) => (v)`. Storme--Van Maldeghem Proposition 12 classifies the
+  primitive `A5`-fixed six-point orbit and gives `(v) => (iv)`. No Sadeh attribution is needed for
+  this equivalence.
 
 ## Other source facts used in documentation
 
