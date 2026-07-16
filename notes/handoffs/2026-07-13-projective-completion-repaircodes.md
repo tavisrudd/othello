@@ -48,7 +48,9 @@ threshold, corrective nonsurjective counterexample, exact threshold-six speciali
 Singer-action-to-disjoint-multiplier deduction are now kernel-checked in
 `WeightedTransferExact.lean`, `TransferBoundary.lean`, and `WeightedStrictExample.lean`. Focused
 elaboration and standard-axiom reports pass; the aggregate Lean/PDF gate is the remaining closeout.
-The PDF gate passes; aggregate run `20260716-222310-eaa90b4a` is detached through the safe queue.
+The PDF gate passes.  The first aggregate trace gate built all three changed targets and exposed
+only stale pre-existing dependencies; full serialized aggregate run `20260716-223943-e2d1518b`
+is detached through the safe queue.
 The polynomial enumerator is an explicit cited classical input. The external coding-theory
 citation-chain review follows closure and remains a submission preflight gate.
 

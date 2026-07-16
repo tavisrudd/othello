@@ -2,9 +2,10 @@
 
 **Lane:** `repaircodes`
 
-**Status:** implementation complete; focused Lean and standard-axiom gates pass.  Aggregate
-`RepairCodes` validation is detached as run `20260716-222310-eaa90b4a` and will wait behind any
-foreign build owner.
+**Status:** implementation complete; focused Lean and standard-axiom gates pass.  The first
+aggregate trace gate found only stale pre-existing dependencies after all three changed targets
+built.  A full serialized `RepairCodes` rebuild is detached as run
+`20260716-223943-e2d1518b`.
 
 ## Goal
 
