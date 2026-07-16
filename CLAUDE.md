@@ -60,6 +60,16 @@ Named-expert context is not a lane. Before developing or formalizing a nontrivia
 `notes/2026-07-07-named-expert-personas-context.md` and the relevant dossier. Do not load these for
 status, routing, literature comparison, or ordinary read-only review.
 
+## Literature cache: load on demand
+
+Before re-fetching a paper for a literature task, read `/tmp/persistent/tavis/lit-search/README.md`
+and query the shared disk-backed cache with
+`python3 /tmp/persistent/tavis/lit-search/bin/litcache.py get <doi-or-arxiv-key>`; use `list` to
+discover keys and `verify` to recheck the manifest hashes. `/tmp/persistent` is a ZFS mount, not the
+RAM-backed `/tmp` tmpfs. The cache records fetched bytes, not that a paper was read. For user-supplied
+scan sets such as `dye-1991/` and `bsw-1992/`, use the OCR reconstruction only for search and verify
+load-bearing text or formulas against the adjacent authoritative page images and `SHA256SUMS`.
+
 ## Lean: load the detailed rules on demand
 
 Before any Lean edit, generator run, build, staleness probe, or process intervention, read the
