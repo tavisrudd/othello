@@ -53,12 +53,12 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   landed. Its remaining paper-specific scholarly-artifact gate is a stable, citable archive
   identifier for the source supplement. The shared release policy below additionally requires the
   verbatim Lean adequacy appendix and explicit AI/provenance disclosure.
-- *Next-theorem queue (post-release):* C201 is the immediate bounded probe.  Starting from the
-  kernel-checked `2630+3` quadratic-rank split at q=16 and the already-general C107 evaluation
-  dichotomy, derive a geometric criterion for full rank or forced arc incidence, run a sized and
-  orbit-reduced q=64 gate, and classify equality/first-excess cells.  A concise infinite even-field
-  or structural stability theorem could upgrade the current manuscript; a negative gate remains a
-  discovery result.  C209 (polarity/rank stability) is gated on that evidence.  C210 is the
+- *Next-theorem queue (post-release):* C201 is reported as a negative bounded gate.  It classified
+  the kernel-checked `2630+3` quadratic-rank split at q=16, rejected a full q=64 census by sizing,
+  and tested the bounded Baer, torus, and split-`Z3` mechanisms.  All q=64 routes fail at
+  coverage/saturation before nontrivial quadratic-rank anatomy appears, so the result remains a
+  discovery finding and does not upgrade the manuscript.  C209 (polarity/rank stability) remains
+  dormant because C201 supplied no stable cross-cell feature.  C210 is the
   higher-ceiling long-horizon program: construct `𝒞`-complete arcs of size `O(√q)`, or prove that
   such a bound fails for an infinite family.  Isolated additional values of `ρ_𝒞(q)` discharge
   none of these tasks.

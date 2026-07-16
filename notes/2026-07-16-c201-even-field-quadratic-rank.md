@@ -3,7 +3,7 @@
 **Lane:** `relconic`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE — bounded split-Z3 optimizer misses coverage gate; certificate or closure next
+**Status:** REPORTED — negative bounded gate; no infinite theorem promoted
 
 Incidental observations are logged append-only in
 [`2026-07-16-c201-discovery-track.md`](2026-07-16-c201-discovery-track.md).
@@ -103,10 +103,14 @@ best checked result remains 740 points above the necessary gate, so quadratic
 analysis was skipped.  This is strong bounded evidence, not a global family
 exclusion.
 
-**Refined next:** either obtain a certified global coverage upper bound for
-the indexed split-`Z3` family, or close C201 explicitly as a failure of the
-tested bounded natural-family mechanisms rather than as a theorem excluding
-the family.  Do not enumerate compatibility cliques.
+The final synthesis is
+[`2026-07-16-c201-bounded-mechanism-closure.md`](2026-07-16-c201-bounded-mechanism-closure.md).
+C201 closes as a failure of the tested bounded natural-family mechanisms, not
+as a theorem excluding the split-`Z3` family.  The best checked split-`Z3`
+witness is one- and two-orbit locally optimal at `|U|=805`; a three-orbit
+neighborhood is no longer cheap.  The `q=64` obstruction is
+coverage/saturation before quadratic rank becomes informative.  C209 remains
+gated; C210 inherits this conclusion only as negative construction guidance.
 
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra

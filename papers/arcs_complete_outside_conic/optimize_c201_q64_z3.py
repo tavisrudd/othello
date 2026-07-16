@@ -11,7 +11,7 @@ import random
 import probe_c201_q64_baer as field
 import probe_c201_q64_z3_index as index
 
-SAMPLED_INCUMBENT = (213, 486, 870, 1098)
+LOCAL_INCUMBENT = (0, 250, 406, 1298)
 
 
 def random_arc_labels(
@@ -108,6 +108,59 @@ def improve(
         steps += 1
 
 
+def improve_two_orbits(
+    labels: tuple[int, ...],
+    legal: list[tuple[int, ...]],
+    edges: list[tuple[int, int]],
+    adjacency: list[int],
+    bad: dict[tuple[int, int], int],
+    self_masks: list[int],
+    line_masks: dict[tuple[int, ...], int],
+) -> tuple[tuple[int, ...], int]:
+    best_labels = labels
+    best_mask = coverage_mask(labels, legal, self_masks, line_masks)
+    best_covered = best_mask.bit_count()
+    retained_data = []
+    for retained in itertools.combinations(labels, 2):
+        a, b = retained
+        edge = (a, b) if a < b else (b, a)
+        base = self_masks[a] | self_masks[b]
+        base |= index.pair_coverage(legal[a], legal[b], line_masks)
+        retained_data.append((retained, base, bad[edge]))
+
+    for c, d in edges:
+        candidate_bad = bad[(c, d)]
+        candidate_component = self_masks[c] | self_masks[d]
+        candidate_component |= index.pair_coverage(legal[c], legal[d], line_masks)
+        for (a, b), retained_base, retained_bad in retained_data:
+            if c in (a, b) or d in (a, b):
+                continue
+            if not all(
+                (adjacency[x] >> y) & 1
+                for x in (c, d)
+                for y in (a, b)
+            ):
+                continue
+            if (retained_bad >> c) & 1 or (retained_bad >> d) & 1:
+                continue
+            if (candidate_bad >> a) & 1 or (candidate_bad >> b) & 1:
+                continue
+
+            mask = retained_base | candidate_component
+            for x in (c, d):
+                for y in (a, b):
+                    mask |= index.pair_coverage(legal[x], legal[y], line_masks)
+            covered = mask.bit_count()
+            candidate_labels = tuple(sorted((a, b, c, d)))
+            if covered > best_covered or (
+                covered == best_covered and candidate_labels < best_labels
+            ):
+                best_labels = candidate_labels
+                best_mask = mask
+                best_covered = covered
+    return best_labels, len(field.POINTS) - best_covered
+
+
 def arc_from_labels(
     nucleus: int, legal: list[tuple[int, ...]], labels: tuple[int, ...]
 ) -> tuple[int, ...]:
@@ -123,7 +176,7 @@ def direct_coverage(arc: tuple[int, ...], line_masks: dict[tuple[int, ...], int]
     return mask
 
 
-def optimize(restarts: int, seed: int) -> None:
+def optimize(restarts: int, two_opt_passes: int, seed: int) -> None:
     nucleus, legal = index.build_family()
     line_masks, line_label_masks = index.line_indices(legal)
     adjacency, edges, _, self_masks = index.compatibility(nucleus, legal, line_masks)
@@ -136,7 +189,7 @@ def optimize(restarts: int, seed: int) -> None:
     step_histogram: collections.Counter[int] = collections.Counter()
     for restart in range(restarts):
         start = (
-            SAMPLED_INCUMBENT
+            LOCAL_INCUMBENT
             if restart == 0
             else random_arc_labels(rng, edges, adjacency, bad)
         )
@@ -164,6 +217,20 @@ def optimize(restarts: int, seed: int) -> None:
             )
 
     assert global_labels is not None
+    two_opt_results = []
+    for pass_number in range(two_opt_passes):
+        labels, uncovered = improve_two_orbits(
+            global_labels, legal, edges, adjacency, bad, self_masks, line_masks
+        )
+        two_opt_results.append(uncovered)
+        print(
+            f"TWO_OPT pass {pass_number + 1} uncovered {uncovered} labels {labels}"
+        )
+        if uncovered >= global_uncovered:
+            break
+        global_labels = labels
+        global_uncovered = uncovered
+
     arc = arc_from_labels(nucleus, legal, global_labels)
     assert len(arc) == 13 and field.is_arc(arc)
     assert all(
@@ -180,10 +247,11 @@ def optimize(restarts: int, seed: int) -> None:
     transformed_mask = direct_coverage(transformed, line_masks)
     assert transformed_mask.bit_count() == direct_mask.bit_count()
 
-    print(f"seed {seed} restarts {restarts}")
+    print(f"seed {seed} restarts {restarts} requested_two_opt_passes {two_opt_passes}")
     print(f"local_uncovered_histogram {dict(sorted(local_histogram.items()))}")
     print(f"local_step_histogram {dict(sorted(step_histogram.items()))}")
     print(f"best_uncovered {global_uncovered} best_labels {global_labels}")
+    print(f"two_opt_uncovered {two_opt_results}")
     print("direct_arc_and_projective_invariance_checks PASS")
     if global_uncovered <= field.Q + 1:
         profile = field.profile(arc)
@@ -198,10 +266,12 @@ def optimize(restarts: int, seed: int) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--restarts", type=int, default=20)
+    parser.add_argument("--two-opt-passes", type=int, default=0)
     parser.add_argument("--seed", type=int, default=201)
     args = parser.parse_args()
     assert args.restarts > 0
-    optimize(args.restarts, args.seed)
+    assert args.two_opt_passes >= 0
+    optimize(args.restarts, args.two_opt_passes, args.seed)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-16
 **Lane:** `relconic`
-**Status:** QUEUED, gated on C201 evidence
+**Status:** DORMANT, C201 gate not met
 
 ## Target
 
@@ -23,6 +23,15 @@ dichotomy does not meet the gate.
 C201 must identify a stable geometric feature across more than one bounded
 cell, or provide a minimal failure whose dual interpretation is demonstrably
 simpler.  Without that evidence, leave C209 dormant.
+
+## C201 disposition
+
+C201 closed negatively at its bounded mechanism gate.  The tractable `q=64`
+families fail at coverage/saturation before producing informative rank/defect
+cells, so they supply neither a stable geometric feature nor a minimal
+rank-failure with a simpler dual interpretation.  Do not start C209 from the
+repeated split-`Z3` local optimum alone; it is heuristic coverage data, not the
+required inverse-theorem evidence.
 
 ## Trust and disposition
 

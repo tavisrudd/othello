@@ -32,3 +32,13 @@ small complete arcs and directly answer the strongest significance objection.
    enough to rule out `O(sqrt(q))` on an infinite sequence.
 
 Additional isolated exact values are evidence, not completion of this program.
+
+## C201 input
+
+C201 closed its bounded q=64 gate without an infinite theorem.  Its usable
+design lesson is **coverage first, rank second**: the tested Baer,
+transitive-torus, and split-`Z3` size-thirteen mechanisms leave hundreds of
+ordinary points uncovered, so quadratic rank is not yet discriminating.  C210
+may use those exact failures as cheap rejection tests for analogous
+constructions, but they are not a global q=64 exclusion and provide no
+infinite-family lower bound.

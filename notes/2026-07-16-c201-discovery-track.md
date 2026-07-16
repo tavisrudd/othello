@@ -52,3 +52,31 @@ handoff.  Confidence tags are `CHECKED`, `REASONED`, and `OPEN`.
   with the hundreds of ordinary points left uncovered.  **Disposition:** use
   as the precise bounded-mechanism lesson; do not present it as an exhaustive
   theorem about the family.
+
+- **The last cheap stronger neighborhood is closed (`CHECKED`).**  From the
+  best 805 witness, retain each of its six orbit
+  pairs in turn and scan all 730,380 compatible replacement pairs, rejecting
+  candidates by the exact pair and ternary bitsets before coverage evaluation.
+  This complete two-orbit neighborhood is millions of indexed tests rather
+  than billions of quadruples.  No replacement improves 805, so the witness is
+  both one- and two-orbit locally optimal.  **Question:** should a three-orbit
+  neighborhood be attempted?  **Disposition:** no; it returns to hundreds of
+  millions of candidates and no longer qualifies as a cheap bounded gate.  Do
+  not confuse local optimality with global family enumeration.
+
+## 2026-07-16 — closure disposition
+
+- **The quadratic mechanism was not itself falsified (`REASONED from checked
+  gates`).**  The bounded `q=64` routes fail earlier: their secants do not
+  approach the required saturation.  Full rank in the Baer family is trivial
+  from the size of its uncovered locus, while the torus and split-`Z3` routes
+  never reach the `|U|<=65` prefilter.  **Question:** should future rank work
+  begin only after a construction passes a coverage threshold?  **Disposition:**
+  yes; record “coverage first, rank second” as design guidance for C210, not as
+  a theorem.
+
+- **The negative result has an asymmetric consequence for follow-ons
+  (`REASONED`).**  C209 needs stable rank/defect data and therefore remains
+  gated, whereas C210 can still use the failure modes to reject low-coverage
+  symmetric constructions cheaply.  **Disposition:** C209 dormant; C210 may
+  import only the bounded obstruction and explicit claim boundary.
