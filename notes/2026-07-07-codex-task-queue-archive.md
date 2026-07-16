@@ -4597,3 +4597,11 @@ untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 20
   twelve fail-closed commands and five guarded Lean roots passed from clean source commit
   `857c09c5`; the Nix-backed 21-page PDF passed warning, citation-key, and internal-reference audits
   → [`2026-07-14-c168-clebsch-computation-source-preflight.md`](2026-07-14-c168-clebsch-computation-source-preflight.md).
+
+## 2026-07-15 relative-conic framing closeout
+
+- **C195–C196 `[relconic]` [REPORTED]** — the manuscript now displays the reverse uncovered-locus
+  containments for complete exteriority and prescribed-conic completeness, and BSW's q=7 exterior
+  four-arc gives the strict count `20>8`; the two originally separate report paths above were
+  consolidated into
+  [`2026-07-15-c195-c196-exterior-relative-framing.md`](2026-07-15-c195-c196-exterior-relative-framing.md).
