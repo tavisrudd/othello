@@ -51,6 +51,8 @@ relative-distance bound `c<351/1600`. Only the bounded radius-four port transfer
 - `../../lean/RepairCodes/` — formal theorem chain.
 - `../../lean/RepairCodes/OperationalCoefficients.lean` — coefficient-labelled scalar recovery
   equations and the monomial gauge boundary.
+- `../../notes/2026-07-15-c203-q9-coefficient-verifier.py` / `.json` — independent q9 coefficient
+  replay and certificate.
 - `../../lean/RepairCodes/TRUST.md` — stable trust boundary.
 - `../../notes/2026-07-13-repaircodes-asymptotic-adversarial-review.md` — strict formalization
   review.

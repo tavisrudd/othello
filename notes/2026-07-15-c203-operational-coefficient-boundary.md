@@ -92,6 +92,38 @@ finite certificate, or external mathematical input is introduced. The aggregate 
 build remains the final closure gate; it is intentionally deferred while the shared Lean build
 tree is owned by the Q25 lane.
 
+## Independent q=9 replay
+
+The build-independent verifier
+[`2026-07-15-c203-q9-coefficient-verifier.py`](2026-07-15-c203-q9-coefficient-verifier.py)
+reconstructs every small-circuit kernel with its own Gaussian elimination and emits the committed
+[`coefficient certificate`](2026-07-15-c203-q9-coefficient-certificate.json). It checks:
+
+- all 240 size-three/four circuit supports and their everywhere-nonzero kernel vectors;
+- all 840 retargeted recovery equations on the four generator rows;
+- 72 ordered instances of each of the three closed formulas; and
+- 576 arbitrary-target-coefficient gauge rescalings.
+
+The normalized 240-relation coefficient table has SHA-256
+`c7ec1a09745e2aecb0e8a6b8d35fa145b141017ecabd51d6100064a30ff0a587`.
+
+## Primary-source terminology audit
+
+The operational boundary agrees with the primary repair-code models:
+
+- [Guruswami--Wootters](https://arxiv.org/abs/1509.04764) treats exact linear repair over a
+  subfield and measures downloads in bits/subsymbols, demonstrating why one full extension-field
+  equation does not prove minimum bandwidth after subpacketization.
+- [Ye--Barg](https://arxiv.org/abs/1604.00454) distinguishes attaining the repair-bandwidth lower
+  bound from the stronger optimal-access property in MDS array codes.
+- [Shah--Rashmi--Kumar--Ramchandran](https://arxiv.org/abs/1011.2361) uses “repair-by-transfer” for
+  helpers forwarding stored data without arithmetic. The displayed scalar equation is such an
+  achieved helper protocol, but no optimality or array-code claim follows.
+
+Accordingly, the manuscript uses “direct scalar protocol” and states achieved access/download,
+while reserving “optimal bandwidth,” “optimal access,” and broader repair-by-transfer claims for a
+declared subpacketized model with lower bounds.
+
 ## Publication disposition
 
 The manuscript draft now states the achieved direct scalar protocol and explicitly separates it from

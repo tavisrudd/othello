@@ -1,0 +1,3141 @@
+{
+  "arbitrary_target_coefficient_gauge_checks": 576,
+  "base_verifier_sha256": "5545c6d7dc8f426a3250b1da822bae6ca6969730b6adede6a14698be8b6ea5f0",
+  "coefficient_table": [
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1
+      ],
+      "support": [
+        "A(0)",
+        "A(1)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        2
+      ],
+      "support": [
+        "A(0)",
+        "A(2)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(0)",
+        "A(3)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(0)",
+        "A(3)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(0)",
+        "A(3)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(0)",
+        "A(3)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(0)",
+        "A(3)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3
+      ],
+      "support": [
+        "A(0)",
+        "A(3)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(0)",
+        "A(4)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(0)",
+        "A(4)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(0)",
+        "A(4)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(0)",
+        "A(4)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4
+      ],
+      "support": [
+        "A(0)",
+        "A(4)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(0)",
+        "A(5)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(0)",
+        "A(5)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(0)",
+        "A(5)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5
+      ],
+      "support": [
+        "A(0)",
+        "A(5)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(0)",
+        "A(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(0)",
+        "A(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6
+      ],
+      "support": [
+        "A(0)",
+        "A(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(0)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7
+      ],
+      "support": [
+        "A(0)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8
+      ],
+      "support": [
+        "A(0)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1
+      ],
+      "support": [
+        "A(1)",
+        "A(2)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(1)",
+        "A(3)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(1)",
+        "A(3)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(1)",
+        "A(3)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(1)",
+        "A(3)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(1)",
+        "A(3)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5
+      ],
+      "support": [
+        "A(1)",
+        "A(3)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(1)",
+        "A(4)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(1)",
+        "A(4)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(1)",
+        "A(4)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(1)",
+        "A(4)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3
+      ],
+      "support": [
+        "A(1)",
+        "A(4)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(1)",
+        "A(5)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(1)",
+        "A(5)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(1)",
+        "A(5)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4
+      ],
+      "support": [
+        "A(1)",
+        "A(5)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(1)",
+        "A(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(1)",
+        "A(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8
+      ],
+      "support": [
+        "A(1)",
+        "A(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(1)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6
+      ],
+      "support": [
+        "A(1)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7
+      ],
+      "support": [
+        "A(1)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(2)",
+        "A(3)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(2)",
+        "A(3)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(2)",
+        "A(3)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(2)",
+        "A(3)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(2)",
+        "A(3)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4
+      ],
+      "support": [
+        "A(2)",
+        "A(3)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(2)",
+        "A(4)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(2)",
+        "A(4)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(2)",
+        "A(4)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(2)",
+        "A(4)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5
+      ],
+      "support": [
+        "A(2)",
+        "A(4)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(2)",
+        "A(5)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(2)",
+        "A(5)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(2)",
+        "A(5)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3
+      ],
+      "support": [
+        "A(2)",
+        "A(5)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(2)",
+        "A(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(2)",
+        "A(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7
+      ],
+      "support": [
+        "A(2)",
+        "A(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(2)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8
+      ],
+      "support": [
+        "A(2)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6
+      ],
+      "support": [
+        "A(2)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(3)",
+        "A(4)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(3)",
+        "A(4)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(3)",
+        "A(4)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(3)",
+        "A(4)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1
+      ],
+      "support": [
+        "A(3)",
+        "A(4)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(3)",
+        "A(5)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(3)",
+        "A(5)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(3)",
+        "A(5)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        2
+      ],
+      "support": [
+        "A(3)",
+        "A(5)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(3)",
+        "A(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(3)",
+        "A(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3
+      ],
+      "support": [
+        "A(3)",
+        "A(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(3)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4
+      ],
+      "support": [
+        "A(3)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5
+      ],
+      "support": [
+        "A(3)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(4)",
+        "A(5)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(4)",
+        "A(5)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6
+      ],
+      "support": [
+        "A(4)",
+        "A(5)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1
+      ],
+      "support": [
+        "A(4)",
+        "A(5)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(4)",
+        "A(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7
+      ],
+      "support": [
+        "A(4)",
+        "A(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5
+      ],
+      "support": [
+        "A(4)",
+        "A(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3
+      ],
+      "support": [
+        "A(4)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3
+      ],
+      "support": [
+        "A(4)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4
+      ],
+      "support": [
+        "A(4)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4
+      ],
+      "support": [
+        "A(5)",
+        "A(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8
+      ],
+      "support": [
+        "A(5)",
+        "A(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4
+      ],
+      "support": [
+        "A(5)",
+        "A(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5
+      ],
+      "support": [
+        "A(5)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5
+      ],
+      "support": [
+        "A(5)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3
+      ],
+      "support": [
+        "A(5)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "A(6)",
+        "A(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1
+      ],
+      "support": [
+        "A(6)",
+        "A(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        2
+      ],
+      "support": [
+        "A(6)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1
+      ],
+      "support": [
+        "A(7)",
+        "A(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(2)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        4
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(3)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        2
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(4)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        7
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(5)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        7
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(6)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        2
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(7)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        4
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(8)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "support": [
+        "C(0)",
+        "C(1)",
+        "C(inf)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        5
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(3)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        8
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(4)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        1
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(5)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        8
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(6)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        5
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        1
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(8)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "support": [
+        "C(0)",
+        "C(2)",
+        "C(inf)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        6
+      ],
+      "support": [
+        "C(0)",
+        "C(3)",
+        "C(4)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        6
+      ],
+      "support": [
+        "C(0)",
+        "C(3)",
+        "C(5)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "support": [
+        "C(0)",
+        "C(3)",
+        "C(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        5
+      ],
+      "support": [
+        "C(0)",
+        "C(3)",
+        "C(7)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        4
+      ],
+      "support": [
+        "C(0)",
+        "C(3)",
+        "C(8)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6,
+        3
+      ],
+      "support": [
+        "C(0)",
+        "C(3)",
+        "C(inf)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        6
+      ],
+      "support": [
+        "C(0)",
+        "C(4)",
+        "C(5)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        8
+      ],
+      "support": [
+        "C(0)",
+        "C(4)",
+        "C(6)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        2
+      ],
+      "support": [
+        "C(0)",
+        "C(4)",
+        "C(7)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        6
+      ],
+      "support": [
+        "C(0)",
+        "C(4)",
+        "C(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7,
+        4
+      ],
+      "support": [
+        "C(0)",
+        "C(4)",
+        "C(inf)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "support": [
+        "C(0)",
+        "C(5)",
+        "C(6)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        3
+      ],
+      "support": [
+        "C(0)",
+        "C(5)",
+        "C(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        1
+      ],
+      "support": [
+        "C(0)",
+        "C(5)",
+        "C(8)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8,
+        5
+      ],
+      "support": [
+        "C(0)",
+        "C(5)",
+        "C(inf)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        3
+      ],
+      "support": [
+        "C(0)",
+        "C(6)",
+        "C(7)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        3
+      ],
+      "support": [
+        "C(0)",
+        "C(6)",
+        "C(8)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "support": [
+        "C(0)",
+        "C(6)",
+        "C(inf)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        3
+      ],
+      "support": [
+        "C(0)",
+        "C(7)",
+        "C(8)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "support": [
+        "C(0)",
+        "C(7)",
+        "C(inf)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5,
+        8
+      ],
+      "support": [
+        "C(0)",
+        "C(8)",
+        "C(inf)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        7
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(3)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        4
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(4)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        2
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(5)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        4
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(6)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        7
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(7)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        2
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(8)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "support": [
+        "C(1)",
+        "C(2)",
+        "C(inf)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        6
+      ],
+      "support": [
+        "C(1)",
+        "C(3)",
+        "C(4)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        6
+      ],
+      "support": [
+        "C(1)",
+        "C(3)",
+        "C(5)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        1
+      ],
+      "support": [
+        "C(1)",
+        "C(3)",
+        "C(6)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "support": [
+        "C(1)",
+        "C(3)",
+        "C(7)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        3
+      ],
+      "support": [
+        "C(1)",
+        "C(3)",
+        "C(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8,
+        5
+      ],
+      "support": [
+        "C(1)",
+        "C(3)",
+        "C(inf)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        6
+      ],
+      "support": [
+        "C(1)",
+        "C(4)",
+        "C(5)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        4
+      ],
+      "support": [
+        "C(1)",
+        "C(4)",
+        "C(6)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "support": [
+        "C(1)",
+        "C(4)",
+        "C(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        5
+      ],
+      "support": [
+        "C(1)",
+        "C(4)",
+        "C(8)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6,
+        3
+      ],
+      "support": [
+        "C(1)",
+        "C(4)",
+        "C(inf)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        6
+      ],
+      "support": [
+        "C(1)",
+        "C(5)",
+        "C(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        8
+      ],
+      "support": [
+        "C(1)",
+        "C(5)",
+        "C(7)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        2
+      ],
+      "support": [
+        "C(1)",
+        "C(5)",
+        "C(8)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7,
+        4
+      ],
+      "support": [
+        "C(1)",
+        "C(5)",
+        "C(inf)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        3
+      ],
+      "support": [
+        "C(1)",
+        "C(6)",
+        "C(7)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        3
+      ],
+      "support": [
+        "C(1)",
+        "C(6)",
+        "C(8)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5,
+        8
+      ],
+      "support": [
+        "C(1)",
+        "C(6)",
+        "C(inf)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        3
+      ],
+      "support": [
+        "C(1)",
+        "C(7)",
+        "C(8)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "support": [
+        "C(1)",
+        "C(7)",
+        "C(inf)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "support": [
+        "C(1)",
+        "C(8)",
+        "C(inf)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        6
+      ],
+      "support": [
+        "C(2)",
+        "C(3)",
+        "C(4)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        6
+      ],
+      "support": [
+        "C(2)",
+        "C(3)",
+        "C(5)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        2
+      ],
+      "support": [
+        "C(2)",
+        "C(3)",
+        "C(6)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        6
+      ],
+      "support": [
+        "C(2)",
+        "C(3)",
+        "C(7)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        8
+      ],
+      "support": [
+        "C(2)",
+        "C(3)",
+        "C(8)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7,
+        4
+      ],
+      "support": [
+        "C(2)",
+        "C(3)",
+        "C(inf)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        6
+      ],
+      "support": [
+        "C(2)",
+        "C(4)",
+        "C(5)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        3
+      ],
+      "support": [
+        "C(2)",
+        "C(4)",
+        "C(6)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        1
+      ],
+      "support": [
+        "C(2)",
+        "C(4)",
+        "C(7)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "support": [
+        "C(2)",
+        "C(4)",
+        "C(8)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8,
+        5
+      ],
+      "support": [
+        "C(2)",
+        "C(4)",
+        "C(inf)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        5
+      ],
+      "support": [
+        "C(2)",
+        "C(5)",
+        "C(6)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        4
+      ],
+      "support": [
+        "C(2)",
+        "C(5)",
+        "C(7)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "support": [
+        "C(2)",
+        "C(5)",
+        "C(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6,
+        3
+      ],
+      "support": [
+        "C(2)",
+        "C(5)",
+        "C(inf)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        3
+      ],
+      "support": [
+        "C(2)",
+        "C(6)",
+        "C(7)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        3
+      ],
+      "support": [
+        "C(2)",
+        "C(6)",
+        "C(8)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "support": [
+        "C(2)",
+        "C(6)",
+        "C(inf)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        3
+      ],
+      "support": [
+        "C(2)",
+        "C(7)",
+        "C(8)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        5,
+        8
+      ],
+      "support": [
+        "C(2)",
+        "C(7)",
+        "C(inf)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        3,
+        6
+      ],
+      "support": [
+        "C(2)",
+        "C(8)",
+        "C(inf)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "C(3)",
+        "C(4)",
+        "C(5)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        4
+      ],
+      "support": [
+        "C(3)",
+        "C(4)",
+        "C(6)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        2
+      ],
+      "support": [
+        "C(3)",
+        "C(4)",
+        "C(7)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        7
+      ],
+      "support": [
+        "C(3)",
+        "C(4)",
+        "C(8)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "support": [
+        "C(3)",
+        "C(4)",
+        "C(inf)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        5
+      ],
+      "support": [
+        "C(3)",
+        "C(5)",
+        "C(6)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        8
+      ],
+      "support": [
+        "C(3)",
+        "C(5)",
+        "C(7)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        1
+      ],
+      "support": [
+        "C(3)",
+        "C(5)",
+        "C(8)",
+        "A(3)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "support": [
+        "C(3)",
+        "C(5)",
+        "C(inf)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        6
+      ],
+      "support": [
+        "C(3)",
+        "C(6)",
+        "C(7)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        6
+      ],
+      "support": [
+        "C(3)",
+        "C(6)",
+        "C(8)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6,
+        3
+      ],
+      "support": [
+        "C(3)",
+        "C(6)",
+        "C(inf)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        6
+      ],
+      "support": [
+        "C(3)",
+        "C(7)",
+        "C(8)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7,
+        4
+      ],
+      "support": [
+        "C(3)",
+        "C(7)",
+        "C(inf)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8,
+        5
+      ],
+      "support": [
+        "C(3)",
+        "C(8)",
+        "C(inf)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        7
+      ],
+      "support": [
+        "C(4)",
+        "C(5)",
+        "C(6)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        4
+      ],
+      "support": [
+        "C(4)",
+        "C(5)",
+        "C(7)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        8,
+        3,
+        2
+      ],
+      "support": [
+        "C(4)",
+        "C(5)",
+        "C(8)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "support": [
+        "C(4)",
+        "C(5)",
+        "C(inf)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        6
+      ],
+      "support": [
+        "C(4)",
+        "C(6)",
+        "C(7)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        7,
+        4,
+        6
+      ],
+      "support": [
+        "C(4)",
+        "C(6)",
+        "C(8)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8,
+        5
+      ],
+      "support": [
+        "C(4)",
+        "C(6)",
+        "C(inf)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        5,
+        6,
+        6
+      ],
+      "support": [
+        "C(4)",
+        "C(7)",
+        "C(8)",
+        "A(7)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6,
+        3
+      ],
+      "support": [
+        "C(4)",
+        "C(7)",
+        "C(inf)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7,
+        4
+      ],
+      "support": [
+        "C(4)",
+        "C(8)",
+        "C(inf)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        4,
+        7,
+        6
+      ],
+      "support": [
+        "C(5)",
+        "C(6)",
+        "C(7)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        6,
+        5,
+        6
+      ],
+      "support": [
+        "C(5)",
+        "C(6)",
+        "C(8)",
+        "A(6)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        7,
+        4
+      ],
+      "support": [
+        "C(5)",
+        "C(6)",
+        "C(inf)",
+        "A(2)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        3,
+        8,
+        6
+      ],
+      "support": [
+        "C(5)",
+        "C(7)",
+        "C(8)",
+        "A(8)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        8,
+        5
+      ],
+      "support": [
+        "C(5)",
+        "C(7)",
+        "C(inf)",
+        "A(0)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        6,
+        3
+      ],
+      "support": [
+        "C(5)",
+        "C(8)",
+        "C(inf)",
+        "A(1)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "support": [
+        "C(6)",
+        "C(7)",
+        "C(8)",
+        "A(inf)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "support": [
+        "C(6)",
+        "C(7)",
+        "C(inf)",
+        "A(4)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "support": [
+        "C(6)",
+        "C(8)",
+        "C(inf)",
+        "A(5)"
+      ]
+    },
+    {
+      "normalized_coefficients": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "support": [
+        "C(7)",
+        "C(8)",
+        "C(inf)",
+        "A(3)"
+      ]
+    }
+  ],
+  "coefficient_table_sha256": "c7ec1a09745e2aecb0e8a6b8d35fa145b141017ecabd51d6100064a30ff0a587",
+  "field_encoding": "GF(3)[x]/(x^2+1), base-3 coefficient encoding",
+  "formula_checks": {
+    "axis_infinity_zero_sum_ordered": 72,
+    "axis_pair_ordered": 72,
+    "cubic_infinity_ordered": 72
+  },
+  "full_support_relation_count": 240,
+  "q": 9,
+  "retargeted_recovery_equation_count": 840,
+  "small_circuit_count_by_size": {
+    "3": 120,
+    "4": 120
+  },
+  "task": "C203"
+}
