@@ -1284,17 +1284,19 @@ Kernel checking with axioms
 $q=16$ classification &
 C++ generator emits local transition and quadratic-evaluation data for
 covering lists of lengths $4/61/454/2633$ &
-Lean checks transition coverage, leaf rejection, frame normalization, and
-the relative-conic transport used for $\rhoC(16)=9$; the body proves the
-coordinate-change transport of arbitrary quadratics.  Generator assertions,
+Lean checks transition coverage, leaf rejection, the exact $2630+3$ profile,
+frame normalization from an arbitrary eight-arc, and symbolic coordinate
+pullback of arbitrary quadratics with preservation of nonzeroness.  The body
+supplies the short projective-incidence identity $U(gA)=gU(A)$. Generator assertions,
 canonical labels, and deduplication are not trusted \\
 \addlinespace
 $q=11$ code and extension data &
-Lean checks the stated code, syndrome, and graph claims; independently
+Lean checks the stated code, syndrome, graph claims, and the implication from
+the classical NRC/GRS quadratic consequence to non-GRS; independently
 written Python and C++ programs regenerate the finite data and include
 coordinate-invariance and mutation controls &
-The propositions rest on kernel-checked statements; the two programs are
-independent reproducibility checks \\
+The NRC/GRS dictionary remains the cited classical input; the two programs
+are independent reproducibility checks \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1309,15 +1311,16 @@ wrapper assumes the centred family is cobounded, because a real-valued
 statement covers that case as well.
 
 The q=5 witness entry point is the dedicated rules-only Lean leaf
-\texttt{RelativeConicArcs/ExampleChecks/Q5.lean}; the C187 checker independently
-replays the frame's six-point uncovered-conic identity.  For q=8,9,11,16,
+\path{RelativeConicArcs/ExampleChecks/Q5.lean}; the C187 checker independently
+replays the frame's six-point uncovered-conic identity, while Lean also checks
+the displayed invertible coordinate matrix and pullback identity. For q=8,9,11,16,
 the independent witness entry point is
-\texttt{verify\_relative\_conic\_arcs.py}, and the corresponding Lean leaves
+\path{verify_relative_conic_arcs.py}, and the corresponding Lean leaves
 check the displayed coordinates.  All five Lean certificates verify
 disjointness, the arc condition, and coverage of the canonical projective
 representatives $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$; a soundness theorem
 transports acceptance to relative completeness.  The q=16 classification
-entry point is \texttt{search\_rhoc16.cpp}; its checked-in report and emitted
+entry point is \path{search_rhoc16.cpp}; its checked-in report and emitted
 Lean data fix the finite search input.  The finite examples do not depend on
 the external Kim--Vu hypothesis used only for the conditional asymptotic
 upper bound.

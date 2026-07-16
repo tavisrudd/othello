@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C188 IMPLEMENTED — final registry build waits for foreign Q25 Lean owner
+**Status:** C188 and C223 REPORTED — registry and paper gates pass
 
 ## Current state
 
@@ -27,26 +27,16 @@ independent proof-stage copyedit requested by the user.
 
 ## Recommended order
 
-1. **C223 — close the remaining manuscript-original Lean seams.**  The user explicitly resumed
-   the formal-closure sweep while C188's registry build waits for the shared Lean owner.  See
-   [`2026-07-16-c223-arcs-formal-closure.md`](../2026-07-16-c223-arcs-formal-closure.md).
-2. **C188 — finish the result registry.**  The exact theorem, arbitrary-conic
-   transport, axiom audit, manuscript synchronization, and PDF rebuild pass.
-   A foreign Q25 build owns the shared Lean tree; once quiescent, build
-   `RelativeConicArcs.ExampleChecks.Q5` and `RelativeConicArcs.Results`, commit
-   the pending one-line registry import, and mark the task reported.  See
-   [`2026-07-15-c188-rhoc5-frame.md`](../2026-07-15-c188-rhoc5-frame.md).
-3. **C144 — shared-library gate architecture.**  Run only in a quiescent build
+1. **C144 — shared-library gate architecture.**  Run only in a quiescent build
    window; it is infrastructure rather than paper mathematics.
-4. **C210 — square-root construction program.**  This is the high-ceiling,
+2. **C210 — square-root construction program.**  This is the high-ceiling,
    long-horizon route.  It should begin with construction/literature design,
    not another blind q=64 census.
 
 ## Entry action
 
-If the user selects `relconic`, finish C188's registry build unless they explicitly choose a
-different task.  C188 is a Lean task, so read the nested Lean guide before any
-edit, generator run, build, or staleness probe.
+If the user selects `relconic`, C188 and C223 need no residual work. Read the nested Lean guide
+before any new Lean edit, generator run, build, or staleness probe.
 
 ## Durable companions
 

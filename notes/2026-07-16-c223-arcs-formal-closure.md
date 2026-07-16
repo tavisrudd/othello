@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-16
 **Lane:** `relconic`
-**Status:** IN PROGRESS
+**Status:** REPORTED 2026-07-16
 
 ## Goal
 
@@ -33,3 +33,22 @@ Close the remaining mathematical seams between the manuscript's original claims 
 - the result registry, TRUST manifest, proof audit, manuscript verification table, and PDF agree;
 - the focused Lean targets and publication rebuild pass; and
 - task-owned changes are committed without staging foreign queue or build work.
+
+## Implemented declarations
+
+- `Q5.lean`: invertible displayed-frame matrix, conic pullback, and all four frame images.
+- `Q16Profile.lean`: `rejection_profile` proves the exact `2633 = 2630 + 3` split.
+- `Q16ExceptionalArithmetic.lean`: the two split factorizations, hit counts `(2,7,2)`, middle
+  zero count `17`, and an explicit nonsingular-conic coordinate model.
+- `Q16QuadraticTransport.lean`: arbitrary coefficient pullback, evaluation compatibility,
+  preservation of nonzeroness, and the arbitrary-eight-arc classification chain.
+- `Q11NonGRS.lean`: contradiction from the NRC/GRS nonzero-quadratic consequence, with the
+  classical dictionary kept as an explicit premise.
+
+## Validation
+
+- Every focused module passes `guarded-lean`; printed axiom sets contain only
+  `propext`, `Classical.choice`, and `Quot.sound`.
+- Queue run `20260716-195041-728e8203` built `RelativeConicArcs.Results` and passed its aggregate
+  trace gate (1:28 wall, 7,205,476 kB peak).
+- `make arcs` succeeds; there are no undefined references/citations or overfull boxes.

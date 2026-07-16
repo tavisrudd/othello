@@ -79,7 +79,9 @@ eight-arc in `PG(2,16)`, no nonzero homogeneous quadratic, singular or nonsingul
 entire ordinary-uncovered locus while avoiding the arc. Projective invariance is explicit:
 normalizing by `g` replaces a form `Q` by `Q ∘ g⁻¹`, preserves nonzeroness, transports zero sets,
 and carries the ordinary-uncovered locus bijectively. Lean checks the stronger alternative for
-every canonical leaf; the already formalized global reduction checks the full conic corollary.
+every canonical leaf, the explicit arbitrary-eight-arc classification chain, and symbolic
+coefficient pullback with preservation of nonzeroness. The equality `U(gA)=gU(A)` is the short
+projective-incidence step written in the manuscript; the full conic corollary is also formalized.
 
 The manuscript now isolates the underlying linear-algebra argument as the
 general uncovered-evaluation obstruction: injective evaluation on the
@@ -88,8 +90,9 @@ uncovered evaluations, excludes a zero locus that contains the former and
 avoids the latter. The quadratic certificate is its degree-two instance.
 The displayed factorizations of the two singular exceptional forms and the
 seven-point incidence of the nonsingular exception are direct `GF(16)`
-arithmetic descriptions; classification completeness does not depend on
-them.
+arithmetic descriptions. `Q16ExceptionalArithmetic.lean` now checks both factorizations, the
+three exact arc-hit counts `(2,7,2)`, and an invertible standard-conic model for the middle form;
+classification completeness does not depend on them.
 
 For the (q=11) witness, the verified value (I_C=0) implies that all 15
 secants are exterior to the conic. Completeness, the maximum index three, and
@@ -107,8 +110,9 @@ sets is equivalent to actual parity-check distance. For distance two,
 weight-two coefficient words, `card_syndromeLeadersOfWeight_eq_supports` identifies supports with
 words, and scalar multiplication transports the word count along each ray. Invertibility of the
 six-by-six quadratic evaluation matrix proves the formal no-conic premise; the conclusion
-"projectively non-GRS" additionally uses the cited classical normal-rational-curve/GRS
-dictionary.
+"projectively non-GRS" uses the cited classical normal-rational-curve/GRS dictionary.
+`Q11NonGRS.lean` makes this boundary explicit and kernel-checks the implication from the
+dictionary's nonzero-quadratic consequence to the contradiction.
 The named theorem `affine_distanceThree_iff_mem_standardConic` additionally identifies actual
 distance-three affine syndrome rays directly with membership in the incidence-defined standard
 conic, closing the quotient-level code/geometry bridge rather than relying on parallel counts.
@@ -151,7 +155,7 @@ the source and report hashes are recorded in `lean/RelativeConicArcs/TRUST.md`.
 
 ## Lean formalization
 
-The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the four finite
+The standalone `lean/RelativeConicArcs/` package formalizes the theorem chain and the five finite
 certificates. In particular, it proves the arbitrary-hole capacity theorem, the complete-affine
 line-hole equivalence, ideal-line incidence identity, corrected affine bound and equality criterion, the generic
 projective-averaging transfer, the explicit additive lower bound, and the universal
