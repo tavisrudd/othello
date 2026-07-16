@@ -129,3 +129,11 @@ generated one-row memory gate landed in `821087c` and passed at essentially the 
 baseline memory.  The `16`-pattern observation is retained as an engineering compression fact;
 because it depends on the deterministic choice of transporter, it is not promoted as a geometric
 discovery without an invariant explanation.
+
+## 2026-07-16 — C151 bounded residual transports
+
+The bulk generator output in `e9a0db11` contains `1,036` semantic leaf modules covering all
+`7,044` valid residual rows, with at most eight eight-point permutation certificates per module.
+The scoped unattended gate found the bridge and full import aggregate trace-current and passed the
+final aggregate no-build check. The next active step is therefore the payload dispatcher, not
+further transport-leaf generation.

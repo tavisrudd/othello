@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-14
 **Status:** OPEN — C142, C143, C148–C150 reported; C151's universal lower bound, five-row
-attainment, and pointwise residual-transport bridge are checked, while the bulk semantic cover and
-equality-orbit completeness remain active
+attainment, and all 7,044 bounded residual-transport certificates are checked, while the semantic
+payload dispatcher and equality-orbit completeness remain active
 **Tasks:** C142–C143, C148–C152
 
 > **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's current-state map. Never
@@ -86,7 +86,7 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C151 | active; lower bound + attainment checked | Prove residual-cover/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
+| C151 | active; bounded valid-row transports checked | Prove residual-cover/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
 | C152 | queued behind C151 | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
 Reported: C142, C143, C148, C149, and C150; use the linked reports rather than recreating their
@@ -94,20 +94,20 @@ plans here.
 
 ## C151 — next actions
 
-1. Generate and check bounded semantic leaves for every residual-cover row, using at most eight
-   valid eight-point permutation certificates per module.
-2. Dispatch each existing payload leaf through its stored bad witness or checked valid transport;
+1. Dispatch each existing payload leaf through its stored bad witness or checked valid transport;
    do not ask `decide` to reduce an opaque `Finset` equality.
-3. Connect each semantic exceptional-profile arc to a certified residual class and transport the
+2. Connect each semantic exceptional-profile arc to a certified residual class and transport the
    checked `≥32` theorem along the projective equivalence.
-4. Connect the five equality representatives and their orbit sizes to the full set of 1,600
+3. Connect the five equality representatives and their orbit sizes to the full set of 1,600
    minimizers; state exactly what is classified up to the ordered-fixed-pair residual group.
-5. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
+4. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
    the complete semantic theorem passes.
 
-The current prototype is split into definition/data, bad-row, valid-transport, and conclusion
-modules under `lean/RelativeConicArcs/Q25ResidualCoverPrototype/`; the generic bridge is
-`lean/RelativeConicArcs/Q25ResidualCoverBridge.lean`. Preserve that module boundary because the
+The checked valid-row cover is split into 1,036 modules under
+`lean/RelativeConicArcs/Q25ResidualTransportData/`, with at most eight valid eight-point
+permutation certificates per module. The handwritten prototype remains split under
+`lean/RelativeConicArcs/Q25ResidualCoverPrototype/`, and the generic bridge is
+`lean/RelativeConicArcs/Q25ResidualCoverBridge.lean`. Preserve these module boundaries because a
 combined elaboration exceeded the safe memory envelope.
 
 ## C152 — queued shape

@@ -337,11 +337,12 @@ The generated prototype uses the permutation `(0,1,7,6,4,5,2,3)` on source row `
 passes its exact queue gate in `11.31 s` wall at `3,398,676 kB` peak RSS.
 
 The independent transport generator checks all `7,044` valid residual rows against the canonical
-CSV, including a forward permutation and inverse law for each row.  Only `16` point-permutation
-patterns occur; their transport stream has FNV-1a-64 `4e503df3c383731d`.  This count is an
-engineering compression fact about the deterministic chosen transporters, not yet a geometric
-classification claim.  Bulk semantic leaves remain capped at eight valid rows so each module has
-at most `64` concrete point equalities.
+CSV, including a forward permutation and inverse law for each row.  Lean checks the resulting
+certificates in `1,036` modules, capped at eight valid rows and hence at most `64` concrete point
+equalities per module. The import aggregate and its trace-only no-build gate pass. Only `16`
+point-permutation patterns occur; their transport stream has FNV-1a-64 `4e503df3c383731d`.  This
+count is an engineering compression fact about the deterministic chosen transporters, not yet a
+geometric classification claim.
 
 ## Equality classification plan
 
@@ -366,9 +367,8 @@ at most `64` concrete point equalities.
 
 ## Current next step
 
-Generate and check the bounded semantic transport leaves, then add a thin dispatcher for each
-existing payload leaf: bad entries use `not_rawCap_of_badWitness`, while valid entries use the
-checked point-permutation transport. Add explicit class-link theorems from transported canonical
-rows to the literal
+Add a thin dispatcher for each existing payload leaf: bad entries use
+`not_rawCap_of_badWitness`, while valid entries use the checked point-permutation transport. Add
+explicit class-link theorems from transported canonical rows to the literal
 `Q25RowCompositionData` classes.  Only after that cover closes should the five equality orbits and
 their stabilizer sizes be promoted as a complete classification.
