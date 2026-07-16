@@ -528,8 +528,11 @@ Let
 T=C(F_5) union {(2:w:1),(2:-w:1)}.
 ```
 
-The six points `C(F_5)` mean all six points of the subfield conic, including infinity. The eight
-points of `T` lie on the nondegenerate F_25 conic, so they form a cap, and `tau(T)=T` with `f=6`.
+The six points `C(F_5)` mean all six points of the subfield conic, including infinity. This
+six-point seed is the classical characteristic-five Clebsch hexagon (Dye 1991, §1.4, p. 271); the
+project-specific step is adjoining the conjugate pair and analyzing the resulting Frobenius
+fixed-extension obstruction. The eight points of `T` lie on the nondegenerate F_25 conic, so they
+form a cap, and `tau(T)=T` with `f=6`.
 Every fixed Baer point is blocked: a point of the subfield conic is selected, while every other
 point of `PG(2,5)` lies on a secant of that six-point conic. Therefore there is no legal fixed
 point.

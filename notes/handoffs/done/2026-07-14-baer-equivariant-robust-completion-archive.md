@@ -62,3 +62,32 @@ full-occupation completed-square identity. Tectonic and BibTeX produced the fina
 reference, label, box, or PDF-string warnings. Referee disposition: technically sound and acceptable
 as a focused finite-geometry/formal-verification paper; novelty is modest and must remain framed as
 an exact orbit-valued assembly plus the uniform Q25 theorem.
+
+## 2026-07-15 — final live-handoff pruning context
+
+The finished lane's live handoff was reduced to important result context and the pending archive /
+routing decision. The following closed details were moved out of the live map.
+
+C133 proved that a cross-pair secant orbit is invisible on at least `s+3-f-e` empty fixed
+carriers. The proof injects occupied center-lines into the `f` selected fixed points plus the other
+selected conjugate-point orbits, derives `e≥2` from the cross-pair witness, and subtracts from the
+`s+1` fixed lines through the center.
+
+The final adversarial manuscript pass added the singleton-independence hypothesis to Theorem A,
+separated facet-radius notation, marked the removed Table D as provisional before its disposition,
+distinguished first-order equality from equality in the truncated bound, incorporated C135,
+handled the full-occupation case in Corollary G, and corrected the Q25 namespace citation. The
+paper consistently describes C135 as algebraic equality/excess classification rather than a
+stronger geometric inverse theorem.
+
+The subsequent full-text Dye and Blokhuis–Seress–Wilbrink review found genuine special-family exact
+completion and configuration-graph predecessors. It did not locate an exact precursor for the
+arbitrary quadratic-Frobenius orbit-valued criterion in the bounded search. This strengthens the
+comparison section but does not license historical-first wording.
+
+The closed routing queue was C136 semantic count bridge, C137 focused manuscript restructure, C138
+classical-radius table removal, C139 specialist priority search, C140 structural-criterion rather
+than sharpness disposition, and C141 final PDF/referee/trust closeout. None remains an open lane
+task. The census/minimum certification was initially left optional and unallocated, then became
+C151 in the same-paper `alt-orbit-repair` successor lane after the minimizers collapsed to five
+residual classes.

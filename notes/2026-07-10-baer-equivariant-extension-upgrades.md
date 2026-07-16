@@ -225,9 +225,12 @@ For a Frobenius-invariant eight-arc, the bound becomes:
 | 8 | 0 | `28s-125` | `s>=23` |
 
 Thus `s>=23` is the uniform fixed-extension threshold supplied by this
-method. The explicit `s=5,f=6` subfield-conic example from Round 7 blocks all
-31 fixed points, so no uniform theorem covering all smaller odd `s` can be
-obtained merely by deleting slack from this inequality.
+method. The six-point `C(F_5)` seed in the explicit `s=5,f=6` example from
+Round 7 is the classical characteristic-five Clebsch hexagon (Dye 1991,
+§1.4, p. 271). The project-specific construction adjoins a conjugate pair and
+uses the resulting Frobenius geometry to block all 31 fixed points, so no
+uniform theorem covering all smaller odd `s` can be obtained merely by
+deleting slack from this inequality.
 
 ### Proposition 2.3 — leading-term sharpness [PROVED]
 
