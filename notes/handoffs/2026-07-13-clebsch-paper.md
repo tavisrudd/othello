@@ -56,9 +56,14 @@ These are upgrades, not submission gates unless the manuscript adopts their clai
 
 - Computation inventory, hashes, clean-source replay, Lean gates, and PDF audit: C168 report above
   (**reported 2026-07-15**).
-- The 21-page manuscript now includes a compact frame-normalized census argument, a
-  synthematic--Petersen figure, a trust/verification table, the exact two-axiom Dye boundary,
-  bounded open problems, and the correct hyperfocused-arc priority chain for the six-arc line bound.
+- The 17-page manuscript now uses layered exposition for the finite-geometry/coding
+  interface and includes a compact frame-normalized census argument, a grayscale-safe
+  synthematic--Petersen figure, split trust/verification tables, the exact two-axiom Dye
+  boundary, bounded open problems, and the correct hyperfocused-arc priority chain.
+- Two paragraph-level cold reads are recorded in
+  [`2026-07-15-clebsch-cold-prose-read.md`](../2026-07-15-clebsch-cold-prose-read.md)
+  and
+  [`2026-07-15-clebsch-revised-cold-prose-read.md`](../2026-07-15-clebsch-revised-cold-prose-read.md).
 - Priority boundary: C153/C161 are closed by
   [`2026-07-15-dye-bsw-primary-source-audit.md`](../2026-07-15-dye-bsw-primary-source-audit.md)
   and [`2026-07-14-c161-tfae-iv-v-priority.md`](../2026-07-14-c161-tfae-iv-v-priority.md).

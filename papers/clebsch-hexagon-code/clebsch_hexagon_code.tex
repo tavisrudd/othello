@@ -28,8 +28,7 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\A}{A_5}
 
-\title{The Clebsch hexagon code: rigidity of a conic syndrome locus\\
-\large An MDS code over $\F_{11}$ whose projective deep-hole directions form a conic}
+\title{Conic rigidity of the Clebsch hexagon code}
 \author{Tavis Rudd}
 \date{Working draft --- July 2026}
 
@@ -40,25 +39,20 @@
 Among the six-arcs of $\PG(2,11)$, exactly one projective class has the
 maximum-distance syndrome directions of its associated MDS code contained
 in a conic: the Clebsch hexagon. This coding-theoretic condition recovers its
-projective stabilizer $A_5$, and the characterization remains true with the
-zero set of any nonzero form of degree at most three in place of a conic.
+projective stabilizer $A_5$. More generally, containment of the syndrome
+locus in the zero set of any nonzero form of degree at most three
+characterizes the same class. A line bound, a chord-defect identity, and
+Dye's Brianchon theorem give the main implication; enumeration enters only
+the sharp numerical gap.
 
-The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS and has
-covering radius three. Its twelve projective deep-hole directions are the
-$\F_{11}$-points of a conic; they lift to $120$ deep-hole cosets, $2400$
-minimum-weight leaders, and $159720$ received-word deep holes. A quadratic
-syndrome test is a complete distance oracle, and its ambiguity data recover
-the classical Brianchon points and self-polar triangles.
-
-We prove a five-way rigidity equivalence and a sharp nearest-conic gap of
-twelve, decompose the $252$ one-point perturbations into eight $A_5$-orbits,
-and construct an invariant unordered $10+10$ bipartition of the twenty
-weight-three support types. A chord-defect identity and the Sylvester graph
-show that $q=11$ is the only conic-filling field for six-arcs. For arc sizes
-four through seven, the only conic-filling cases are a four-frame in
-$\PG(2,5)$ and the Clebsch hexagon. The six-arc census is classical; the new
-content is its geometric and coding-theoretic rigidity, quantitative gap,
-decoding structure, and finite-field boundary.
+The arc lies on no conic, so its $[6,3,4]_{11}$ MDS code is non-GRS; the
+code has covering radius three. Its twelve projective deep-hole directions are the
+$\F_{11}$-points of a conic. A quadratic syndrome test is a complete
+distance oracle; its ambiguity data recover the classical Brianchon points,
+self-polar triangles, and an invariant support chirality. The chord identity
+and the Sylvester graph show that $q=11$ is the only conic-filling field for
+six-arcs. For arc sizes four through seven, the only cases are a four-frame
+in $\PG(2,5)$ and the Clebsch hexagon.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -116,11 +110,10 @@ six-arcs of $\PG(2,11)$, conic containment of the projective deep-hole
 syndrome locus reconstructs the Clebsch hexagon and its $A_5$ stabilizer.
 A line bound, a chord-defect identity, and Dye's Brianchon theorem give the
 conceptual implication; the census is needed only for the numerical clause.
-We then prove global and local gaps, an invariant chirality split of the
-leaders, decoder reconstruction of the Brianchon geometry, and the
-uniqueness of $q=11$. For the Clebsch family the same chord identity gives
-$|\cU(H)|=q^2-14q+45$, with off-conic excess $(q-4)(q-11)$ when
-$q\equiv3\pmod4$.
+We then prove quantitative gaps, reconstruct the Brianchon geometry from
+decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
+chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
+$(q-4)(q-11)$ when $q\equiv3\pmod4$.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -135,7 +128,7 @@ arcs lie on normal rational curves; the code here is not GRS.
 
 \paragraph{What is new and what is not.} The hexagon, its uniqueness and
 stabilizer, and its complete-exterior-set interpretation are classical
-\cite{Clebsch1871,Edge1956,Dye1991,SVM1995,BSW1992}. Sadeh classified the
+\cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}. Sadeh classified the
 six-arcs of $\PG(2,11)$~\cite{SadehThesis1984}; we claim no priority for
 that census or its extension counts. The companion arcs paper records the
 single conic-locus identification of
@@ -170,10 +163,9 @@ The following invariant construction explains its symmetry.
 \begin{definition}[Clebsch hexagon]
 \label{def:hexagon}
 Let $\A\subset\mathrm{PGL}_2(11)$ be an icosahedral subgroup. The
-\emph{Clebsch hexagon} is the six-point orbit of poles of the six
-$5$-fold-axis chords of $\A$ acting on $\cC$; equivalently, the six points
-of $\PG(2,11)$ each of whose two tangency lines to $\cC$ meet $\cC$ in an
-antipodal pair fixed by a Sylow $5$-subgroup of $\A$.
+six Sylow $5$-subgroups of $\A$ each fix two points of $\cC$. The
+\emph{Clebsch hexagon} is the set of poles of the six chords joining these
+fixed pairs.
 \end{definition}
 
 For a nonsingular conic over an odd field, an \emph{external point} lies on
@@ -183,25 +175,11 @@ Edge's six vertices are external, their fifteen joins are external, and
 those joins concur three at a time at ten internal Brianchon
 points~\cite[\S\S29--32]{Edge1956}. Thus the hexagon is a complete exterior
 set in the terminology of Blokhuis, Seress, and Wilbrink
-\cite[pp.~143,146]{BSW1992}. Exteriority gives only
-$\cC(\F_{11})\subseteq\cU(A)$; Proposition~\ref{prop:deep-holes-conic}
-proves the stronger equality.
-
-The arc hypothesis is essential even inside this classical exterior-set
-category. Blokhuis--Seress--Wilbrink's exhaustive $q=11$ list has two
-complete exterior configurations: the Clebsch six-arc and a Pasch
-configuration~\cite[p.~146]{BSW1992}. The latter has four collinear triples
-on its six points, so it cannot be the column set of a redundancy-three MDS
-code. Thus complete exteriority by itself gives only the inclusion
-$\cC(\F_{11})\subseteq\cU(A)$; imposing the arc/MDS condition selects the
-Clebsch branch on which the exact covering and rigidity questions of this
-paper are posed.
-
-Conic polarity also supports binary incidence and LDPC codes
-\cite{DromsMellingerMeyer2006,SinWuXiang2011,MadisonWu2012,Wu2013,MadisonWu2016}.
-Their coordinates range over entire internal or external point classes;
-they are different objects from the six-coordinate $\F_{11}$-linear MDS
-code studied here.
+\cite[pp.~143,146]{BSW1992}. Their $q=11$ list also contains a Pasch
+configuration, but its four collinear triples prevent it from defining an
+MDS code. Thus exteriority alone gives only
+$\cC(\F_{11})\subseteq\cU(A)$; the arc hypothesis selects the Clebsch
+branch, and Proposition~\ref{prop:deep-holes-conic} proves equality.
 
 This is the arc $K_2$ of Storme and Van~Maldeghem
 \cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
@@ -229,15 +207,11 @@ column system of a length-six, dimension-three GRS code lies on a normal
 rational curve, here a conic, in the classical
 normal-rational-curve/GRS dictionary~\cite{StormeThas1991}.
 
-By the arc--coset dictionary
-\cite[Def.~6.1, Thm.~6.3]{DMP2021}, for every nonzero syndrome $s$
-above a projective direction $x=[s]$, the corresponding coset has minimum
-weight one, two, or three according as $x\in A$, $x$ lies on a secant of
-$A$, or $x$ lies on neither. In the last case each of the $q-1$ cosets above
-$x$ has exactly $\binom{n}{3}$ weight-three leaders, here
-$\binom{6}{3}=20$. Their theorem applies to arbitrary plane arcs and hence
-to this non-GRS code. Adjoining $x$ as a seventh column preserves the MDS
-property exactly when $x$ is missed by every secant.
+The arc--coset dictionary from the introduction applies without a GRS
+hypothesis~\cite[Def.~6.1, Thm.~6.3]{DMP2021}. Each uncovered direction
+$x$ lifts to $q-1$ weight-three cosets, and each has
+$\binom63=20$ minimum-weight leaders. Geometrically, the same condition says
+that adjoining $x$ as a seventh column preserves the MDS property.
 
 The stabilizer already forces the small point sets that will occur.
 
@@ -280,9 +254,9 @@ counts points whose stabilizer is exactly the displayed subgroup type.
 \[
 \begin{array}{c|rrrrrr}
 H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
-\#H&5&6&10&6&5&10\\
-|\operatorname{Fix}_{\PG}(H)|&0&1&1&3&3&1\\
-\text{exact-stabilizer points}&0&6&10&12&15&0
+\text{number of conjugate subgroups}&5&6&10&6&5&10\\
+\text{fixed points for one }H&0&1&1&3&3&1\\
+\text{points with stabilizer conjugate to }H&0&6&10&12&15&0
 \end{array}
 \]
 To spell out the subtraction in the last row: the normalizer $D_5$ fixes
@@ -315,7 +289,8 @@ The set $\cU(A)$ is $G$-invariant. Dye's Clebsch classification gives
 exactly ten Brianchon points. The relevant double count is short.
 The fifteen edges contribute $150$ off-arc incidences. The $45$ pairs of
 disjoint edges meet once, so if $n_i$ counts off-arc points lying on exactly
-$i$ edges, then
+$i$ edges, then a point on three edges accounts for
+$\binom32=3$ such pairs and
 \[
  n_1+2n_2+3n_3=150,
  \qquad n_2+3n_3=45,
@@ -332,8 +307,8 @@ deep-hole syndrome locus, and its nonemptiness gives covering radius three
 rather than two. Dye's edge criterion and the complete-exterior-set
 description of Blokhuis--Seress--Wilbrink independently supply the classical
 inclusion $\cC(\F_{11})\subseteq\cU(A)$
-\cite[discussion preceding Theorem~6, p.~281]{Dye1991}
-\cite[pp.~143, 146]{BSW1992}.
+\cite[discussion preceding Theorem~6, p.~281]{Dye1991}; see also
+\cite[pp.~143,146]{BSW1992}.
 \end{proof}
 
 \begin{corollary}[Directions, cosets, leaders, and received words]
@@ -353,6 +328,26 @@ $\F_{11}^3\setminus\{0\}\to\PG(2,11)$ over each direction consists of ten
 nonzero syndromes, hence ten distinct cosets. Every coset has $|C|$ words.
 \end{proof}
 
+\subsection{Automorphisms and deep-hole orbits}
+\label{sec:automorphisms}
+
+The projective stabilizer of the six column rays is $A_5$ of order $60$,
+acting faithfully and $2$-transitively on the coordinate supports. It is
+the support-permutation quotient of the monomial automorphism group:
+\[
+ 1\longrightarrow\F_{11}^{\times}\longrightarrow
+ \operatorname{MAut}(C)\longrightarrow A_5\longrightarrow1.
+\]
+The kernel consists of the ten global coordinate scalars. The sequence
+splits. Since $\gcd(3,10)=1$, each projective class has a unique
+determinant-one representative; their monomial lifts give an $A_5$
+complement. Hence
+\[
+ \operatorname{MAut}(C)\cong C_{10}\times A_5
+\]
+has order $600$. For the displayed column representatives, the subgroup of
+pure coordinate permutations is trivial.
+
 \begin{proposition}[One orbit on received-word deep holes]
 \label{prop:deep-hole-orbit}
 The monomial automorphism group of $C$ is transitive on the $120$ deep-hole
@@ -368,7 +363,7 @@ stabilizer of each such word is cyclic of order five.
 \begin{proof}
 The projective stabilizer $A_5$ is transitive on the twelve points of
 $\cC$. Indeed, its six Sylow $5$-subgroups form one conjugacy class, each
-fixes the two endpoints of one of the six axis chords, and the involution in
+fixes the two endpoints of one of the six fixed-point chords, and the involution in
 its dihedral normalizer interchanges those endpoints. These twelve endpoints
 exhaust $\cC(\F_{11})$. Every such
 projectivity lifts to a monomial automorphism of the parity-check columns,
@@ -386,6 +381,8 @@ Thus $\Gamma=C\rtimes\operatorname{MAut}(C)$; the two subgroups have trivial
 intersection and the displayed product order follows. Orbit--stabilizer now gives stabilizer order
 $798600/159720=5$, and every group of prime order is cyclic.
 \end{proof}
+
+\subsection{Decoding consequences}
 
 The coset-leader-weight distribution of $C$ is $(1,60,1150,120)$
 (cosets of weight $0,1,2,3$, summing to $11^3=1331$); the last entry counts
@@ -437,37 +434,10 @@ a zero coefficient would put the syndrome on a secant.  Hence all twenty
 supports, and no others, give its weight-three leaders.
 \end{proof}
 
-For this fixed code the proposition is a constant-size post-syndrome test,
-not an asymptotic claim.
-
-\subsection{Symmetry and design structure}
+\subsection{Self-polar structure}
 \label{sec:structural}
 
-\paragraph{Automorphisms.} The projective stabilizer of the six
-column rays is $A_5$ of order $60$, acting faithfully and $2$-transitively
-on the six coordinate supports in its exotic degree-six action. It is the
-support-permutation quotient of the monomial automorphism group, which fits
-into the central exact sequence
-\[
- 1\longrightarrow\F_{11}^{\times}\longrightarrow
- \operatorname{MAut}(C)\longrightarrow A_5\longrightarrow1.
-\]
-The kernel consists of the ten global coordinate scalars. The sequence
-splits. Since $\gcd(3,10)=1$, each projective class has a unique
-determinant-one representative. These representatives multiply, and their
-monomial lifts give an $A_5$ complement. Thus
-\[
- \operatorname{MAut}(C)\cong C_{10}\times A_5
-\]
-has order $600$. For the displayed column representatives, by contrast,
-the subgroup of pure coordinate permutations is trivial.
-
-\paragraph{Design view.} Equivalently, the MDS property says that every
-choice of three coordinate positions contains each ordered triple of field
-symbols exactly once among the codewords. Thus $C$ is the orthogonal array
-$\mathrm{OA}(11^3,6,11,3)$ of strength three.
-
-\paragraph{Five self-polar triangles.} Edge's finite-plane construction
+Edge's finite-plane construction
 \cite[\S\S30.2--31]{Edge1956} and Dye's general-field synthetic theory
 \cite[Theorem~2, pp.~277--278]{Dye1991} exhibit five triangles on the six
 vertices, self-polar for $\cC$. Their vertex-pair matchings partition the
@@ -502,8 +472,8 @@ computer-assisted part of the argument.
 
 The external-line case is a six-point instance of the nonexistence in odd
 order of nontrivial \emph{hyperfocused arcs}, whose secants determine only
-$k-1$ points on an external line,
-\cite{NgWild2001,BicharaKorchmaros1982,DrakeKeating2004}. We give a direct
+$k-1$ points on an external line
+\cite{BicharaKorchmaros1982,DrakeKeating2004,NgWild2001}. We give a direct
 proof because the three possible line positions are then handled together.
 
 \begin{lemma}[Six-arc line bound]
@@ -584,14 +554,16 @@ The resulting extension counts are
 \[
  |\cU(A)|\in\{12,16,18,19,20,21,22\}.
 \]
-The corresponding representative multiplicities are
+Several of the fifteen projective classes share an extension count. Across
+the $1548$ frame-normalized representatives, the corresponding
+multiplicities are
 \[
  (6,30,150,300,630,360,72).
 \]
-Only the six Clebsch representatives attain $12$; every other class has at
-least $16$ extension points. Thus
+The six representatives attaining $12$ form the single Clebsch class;
+every other class has at least $16$ extension points. Thus
 (iii)$\Leftrightarrow$(iv), completing the equivalence. The exhaustive
-calculation is therefore used for the size-gap clause, not for the conic-
+calculation is therefore used for the size-gap clause, not for the conic
 containment implication.
 \end{proof}
 
@@ -645,9 +617,7 @@ and the stabilizer statement is clause~(v) of the theorem.
 \label{rem:degree-threshold}
 The cutoff cannot be raised from three to four: one non-Clebsch class has
 an $18$-point uncovered locus equal to the rational points of a smooth
-absolutely irreducible quartic of genus three. The computation also finds a
-nodal quintic and sixteen exact sextics, but we make no degree-six
-classification.
+absolutely irreducible quartic of genus three.
 \end{remark}
 
 The rigidity theorem has quantitative consequences at three scales: the
@@ -685,7 +655,9 @@ contained in a conic, degenerate or otherwise.
 \end{enumerate}
 \end{theorem}
 
-The exact distributions behind these bounds are
+The first distribution below counts projective classes. The next two count
+embedded one-point replacements of the fixed arc $A$; the final list then
+groups those replacements into $A_5$-orbits:
 \begin{equation}
 \label{eq:gap-histograms}
 \begin{aligned}
@@ -715,29 +687,40 @@ only to one-point replacements of the fixed arc.
 
 \begin{proof}[Computer-assisted proof]
 The first clause restates Theorem~\ref{thm:rigidity}. For the second, the
-exact replay normalizes all $1548$ representatives to fifteen projective
+enumeration normalizes all $1548$ representatives to fifteen projective
 classes, enumerates the $160930$ nonsingular conics, and computes the first
 distribution in~\eqref{eq:gap-histograms}.
 
 For the third, it deletes each vertex in turn, tests every replacement, and
 obtains $42$ choices per vertex and $252$ distinct neighbors. Exact
-quadratic-monomial ranks prove conic noncontainment; the remaining two
+quadratic-monomial evaluation matrices have full rank six, so no nonzero
+quadratic vanishes on a neighbor's uncovered locus. The remaining two
 distributions and the eight $A_5$-orbits follow from the sixty stabilizing
 projectivities.
 \end{proof}
 
+\begin{remark}[Why this rigidity is not in the extension-locus literature]
+The set $\cU(A)$ is the classical extension locus, studied for sufficiently
+large arcs through Segre's tangent-envelope method; see Ball and
+Lavrauw~\cite[Thms.~39--41]{BallLavrauw2019}. Those results require arc-size
+hypotheses far from the six-point regime, while Sadeh's census uses six-arcs
+for a different classification problem. Neither direction records the
+conic rigidity detected here.
+\end{remark}
+
 \section{The chirality bipartition}
 \label{sec:chirality}
 
-The $20$ three-element coordinate supports form two complementary
+Label the six coordinates by $0,\ldots,5$. The $20$ three-element
+coordinate supports form two complementary
 $A_5$-orbits of size ten. Automorphisms preserve the two classes, but
 nothing intrinsic chooses one as positive: this unoriented two-class
 structure is what we call \emph{chirality}. Its ten complementary pairs
 carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=0.9,
+\begin{tikzpicture}[scale=0.95,
   vertex/.style={circle,draw,fill=white,inner sep=1.4pt,font=\scriptsize},
   pvertex/.style={circle,draw,fill=white,minimum size=5.5mm,inner sep=0pt,
                   font=\scriptsize}]
@@ -751,12 +734,17 @@ carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
   \draw[black,thick,loosely dashed] (v0)--(v5) (v1)--(v2) (v3)--(v4);
   \foreach \i in {0,...,5} \node[vertex] at (v\i) {\i};
   \node[font=\small] at (0,2.05) {synthematic total $\mathcal T$};
-  \begin{scope}[yshift=-2.0cm,font=\tiny]
-    \node[blue!70!black] at (-1.15,0) {$T_0=01|23|45$};
-    \node[green!50!black] at (1.15,0) {$T_2=03|15|24$};
-    \node[red!75!black] at (-1.15,-.36) {$T_1=02|14|35$};
-    \node[violet!80!black] at (1.15,-.36) {$T_3=04|13|25$};
-    \node at (0,-.72) {$T_4=05|12|34$};
+  \begin{scope}[yshift=-2.0cm,font=\scriptsize]
+    \draw[blue!70!black,thick] (-1.65,0)--(-1.3,0);
+    \node[anchor=west] at (-1.2,0) {$T_0=01|23|45$};
+    \draw[red!75!black,thick,dashed] (-1.65,-.34)--(-1.3,-.34);
+    \node[anchor=west] at (-1.2,-.34) {$T_1=02|14|35$};
+    \draw[green!50!black,thick,densely dotted] (-1.65,-.68)--(-1.3,-.68);
+    \node[anchor=west] at (-1.2,-.68) {$T_2=03|15|24$};
+    \draw[violet!80!black,thick,dash dot] (-1.65,-1.02)--(-1.3,-1.02);
+    \node[anchor=west] at (-1.2,-1.02) {$T_3=04|13|25$};
+    \draw[black,thick,loosely dashed] (-1.65,-1.36)--(-1.3,-1.36);
+    \node[anchor=west] at (-1.2,-1.36) {$T_4=05|12|34$};
   \end{scope}
 
   \draw[->,thick] (2.25,.65)--(4.05,.65)
@@ -796,10 +784,12 @@ Dye~\cite{Edge1956,Dye1991}, regarded as the five perfect matchings in
 their synthematic total, and let $\mathcal B(A)$ be the set of ten
 Brianchon points of the Clebsch hexagon. For distinct $T,T'\in\mathcal T$,
 the union $T\cup T'$ is an alternating six-cycle. Let $M(T,T')$ be the
-perfect matching joining opposite vertices of this cycle, and let
-$\beta(T,T')=\{S,S^{\mathsf c}\}$ be its unordered bipartition.
+perfect matching joining opposite vertices of this cycle. Let
+$\beta(T,T')=\{S,S^{\mathsf c}\}$ be the unordered pair of alternating
+vertex classes of the cycle.
 For example, $T_0\cup T_1$ is the cycle
-$0,1,4,5,3,2$, and $M(T_0,T_1)=05|13|24$.
+$0,1,4,5,3,2$, so $M(T_0,T_1)=05|13|24$ and
+$\beta(T_0,T_1)=\{\{0,3,4\},\{1,2,5\}\}$.
 
 The three chords indexed by $M(T,T')$ concur at a point $b(T,T')\in
 \mathcal B(A)$. The maps
@@ -824,7 +814,9 @@ The opposite-vertex matching is disjoint from $T$ and $T'$ and contains
 one edge from each of the other three members of the synthematic total.
 Hence $\{T,T'\}$ is recovered as the two members of $\mathcal T$ disjoint
 from $M(T,T')$, so the ten triangle pairs give exactly the ten perfect
-matchings outside the total. Edge's Clebsch construction says that the
+matchings outside the total. Applying the alternating-class rule to the
+five displayed matchings gives ten distinct complementary support pairs,
+hence all ten such pairs. Edge's Clebsch construction says that the
 three chords of each such matching concur, at the ten distinct Brianchon
 points~\cite[\S\S19--20,30]{Edge1956}. The bipartition bijection and
 Petersen assertion are the alternating-cycle construction above.
@@ -871,8 +863,9 @@ and the ten Brianchon points.
 \end{proposition}
 
 \begin{proof}
-The exotic degree-six $A_5$ has two complementary ten-orbits on the $20$
-three-supports. It preserves a unique synthematic total, also preserved by
+The degree-six action of $A_5$ on the twenty three-subsets has two
+ten-element orbits, exchanged by complementation. It preserves a unique
+synthematic total, also preserved by
 its full $S_5$ normalizer. The alternating-cycle construction of
 Figure~\ref{fig:synthematic-petersen} is therefore equivariant, and the
 outside normalizer coset exchanges the two support orbits. Fix a
@@ -883,28 +876,11 @@ vanish: otherwise $[s]$ would lie on a secant of $A$, contrary to maximum
 distance. The resulting error vector therefore has weight three and is the
 unique leader with support $S$. Finally, every monomial automorphism induces
 a support permutation in $A_5$, by the exact sequence in
-Section~\ref{sec:structural}, and so preserves each support orbit. The
-outside normalizer coset swaps the two orbits, but the pure-permutation audit
-there and the monomial support-image audit show that it does not preserve
-$C$, even after coordinate rescaling.
+Section~\ref{sec:automorphisms}, and so preserves each support orbit. The
+outside normalizer coset swaps the two orbits but cannot preserve $C$, even
+after coordinate rescaling, because its support permutations lie outside
+that quotient $A_5$.
 \end{proof}
-
-Equivalently, the two classes form an unbased $\mathbb Z/2$-torsor. This
-formulation records the absence of a preferred sign without adding data to
-the bipartition.
-
-\begin{remark}[A smaller equivariant decoder]
-The stabilizer in
-$\operatorname{MAut}(C)$ of one \emph{affine} deep-hole syndrome has order
-five and four orbits of size five on its twenty leaders.  Transporting any
-one orbit gives a monomial-equivariant set-valued decoder of constant list
-size five on the $120$ deep-hole syndromes, and every nonempty equivariant
-decoder on this syndrome orbit has list size at least five.  Thus chirality
-is not the minimum or coarsest arbitrary equivariant
-selection: its two size-ten lists are the proper nonempty selections
-determined solely by the support, each a union of two of the size-five
-orbits. Exact transport verifies the equivariance statement.
-\end{remark}
 
 \section{Why \texorpdfstring{$q=11$}{q=11}}
 \label{sec:why11}
@@ -914,40 +890,6 @@ Sections~\ref{sec:code}--\ref{sec:rigidity} is specific to $q=11$, even
 without a symmetry hypothesis on the arc. A universal chord-multiplicity
 identity makes this a four-field question, and the only nontrivial residue
 is a classical exact-distance problem in the Sylvester graph.
-
-\begin{lemma}[Secant-covering bound]
-\label{lem:secant-covering}
-Let $A$ be a six-arc of $\PG(2,q)$ disjoint from a nonsingular conic
-$\cC$, and suppose $A$ is complete outside $\cC$: every point of
-$\PG(2,q)$ lying off $A$ and off $\cC$ lies on some secant of $A$. Then
-\[
- 15(q-1)\ \ge\ q^2-6,
-\]
-equivalently $q^2-15q+9\le0$, so $q\le14$.
-\end{lemma}
-
-\begin{proof}
-Since $A$ has six points and $\cC$ has $q+1$ points, and $A$ is disjoint
-from $\cC$,
-\[
- \bigl|\PG(2,q)\setminus(A\cup\cC)\bigr|
- = (q^2+q+1)-6-(q+1) = q^2-6.
-\]
-Each of the $\binom{6}{2}=15$ secants of $A$ is a line of $\PG(2,q)$,
-hence has $q+1$ points, exactly two of which lie in $A$; so each secant
-covers at most $q-1$ points of $\PG(2,q)\setminus A$, and in particular at
-most $q-1$ points of $\PG(2,q)\setminus(A\cup\cC)$. Completeness outside
-$\cC$ says the fifteen secants together cover all $q^2-6$ points of this
-set, so
-\[
- q^2-6\ \le\ 15(q-1).
-\]
-Overlaps can only reduce the union, so summing the fifteen capacities gives
-the required upper bound.
-Rearranging, $q^2-15q+9\le0$, whose real roots are
-$\tfrac{15\pm\sqrt{189}}2\approx0.62,14.38$; since $q$ is a positive
-integer, $q\le14$.
-\end{proof}
 
 \begin{lemma}[Chord-defect identity]
 \label{lem:chord-defect}
@@ -1002,23 +944,23 @@ every off-conic point lies on a secant, so again $\cU(A)$ is empty.
 It remains to exclude $q=9$. The argument has three steps: the six arc
 points must be internal to $\cC$; passant joins of internal points become
 distance-two pairs in the Sylvester graph; and that distance graph has
-clique number five. Relative to $\cC$,
-every chord of $A$ is passant. A point off $\cC$ lies on five passants if it
+clique number five. Since every point of $\cC$ is uncovered, no chord of
+$A$ meets $\cC$; every chord is therefore passant. A point off $\cC$ lies on five passants if it
 is internal and four if it is external; hence the five chords through each
-vertex force all six vertices of $A$ to be internal. Let $H$ be the graph
+vertex force all six vertices of $A$ to be internal. Let $\Sigma$ be the graph
 on the $36$ internal points, with $P\sim Q$ when $Q\in P^\perp$ under the
 conic polarity. Standard conic counts give the intersection array
 \[
  \{5,4,2;1,1,4\},
 \]
-so $H$ is the Sylvester graph
+so $\Sigma$ is the Sylvester graph
 \cite[\S13.1.2]{BrouwerCohenNeumaier1989}; see also the combinatorial
 uniqueness proof in~\cite[Thm.~6]{JurisicVidali2019}. For distinct internal
 points, the unique possible common neighbor is
 $P^\perp\cap Q^\perp=(PQ)^\perp$; consequently $PQ$ is passant exactly when
-$P,Q$ are at distance two in $H$. Thus $A$ would be a six-clique in the
-exact-distance-two graph of $H$. But its clique number, denoted
-$\operatorname{eq}_2(H)$ in
+$P,Q$ are at distance two in $\Sigma$. Thus $A$ would be a six-clique in the
+graph joining pairs at distance exactly two in $\Sigma$. But its clique number, denoted
+$\operatorname{eq}_2(\Sigma)$ in
 \cite[Table~1]{AbiadJabalAmeliReijnders2025}, is five, a contradiction.
 
 Therefore $q=11$. The final assertion follows from
@@ -1028,14 +970,14 @@ in the single Clebsch orbit.
 
 \begin{proposition}[The Clebsch-family uncovered formula]
 \label{prop:clebsch-family-uncovered}
-Let $H$ be a Clebsch hexagon over $\F_q$. Then
+Let $K$ be a Clebsch hexagon over $\F_q$. Then
 \[
- |\cU(H)|=q^2-14q+45.
+ |\cU(K)|=q^2-14q+45.
 \]
 If $q\equiv3\pmod4$ and $\cC$ is Dye's associated conic, then
-$\cC(\F_q)\subseteq\cU(H)$ and
+$\cC(\F_q)\subseteq\cU(K)$ and
 \[
- |\cU(H)\setminus\cC(\F_q)|=(q-4)(q-11).
+ |\cU(K)\setminus\cC(\F_q)|=(q-4)(q-11).
 \]
 In particular, among Clebsch hexagons in this congruence class, the
 associated conic is the complete projective deep-hole syndrome locus if and
@@ -1046,14 +988,13 @@ only if $q=11$.
 Dye defines a Clebsch hexagon by the occurrence of exactly ten Brianchon
 points, and his Theorem~1 classifies their existence and projective orbit
 \cite[p.~271; Theorem~1, pp.~275--276]{Dye1991}. These points are precisely the off-vertex
-triple-chord concurrences counted by $c(H)$
-. Thus $c(H)=10$, and
+triple-chord concurrences counted by $c(K)$. Thus $c(K)=10$, and
 Lemma~\ref{lem:chord-defect} gives
 \[
- |\cU(H)|=q^2-14q+55-10=q^2-14q+45.
+ |\cU(K)|=q^2-14q+55-10=q^2-14q+45.
 \]
-Dye also shows that the edges of $H$ are non-secants of the associated conic
-when $q\equiv3\pmod4$\cite[discussion preceding Theorem~6,
+Dye also shows that the edges of $K$ are non-secants of the associated conic
+when $q\equiv3\pmod4$~\cite[discussion preceding Theorem~6,
 pp.~281--282]{Dye1991}. Hence every rational point of $\cC$ is uncovered.
 Subtracting $|\cC(\F_q)|=q+1$ from the first formula gives
 \[
@@ -1109,9 +1050,10 @@ $|\cU(A)|=(q-2)(q-3)$. Equating this with $q+1$ gives $q=5$. Every
 four-arc is a projective frame, and for the standard frame a direct
 substitution gives
 \[
- \cU(A)=Z(X^2+Y^2+Z^2+XY+XZ+YZ),
+ \cU(A)=V(X^2+Y^2+Z^2+XY+XZ+YZ),
 \]
-a nonsingular six-point conic. For $k=5$, the same moments force
+where $V(f)$ denotes the projective zero set of $f$; this is a nonsingular
+six-point conic. For $k=5$, the same moments force
 $n_2=15$ and $|\cU(A)|=q^2-9q+21$; equality with $q+1$ would require
 $q^2-10q+20=0$, which has no integral root. The case $k=6$ is
 Theorem~\ref{thm:why11} together with Theorem~\ref{thm:rigidity}.
@@ -1132,13 +1074,13 @@ $q\in\{7,8,9,11,13\}$; then $n_1\ge0$ eliminates $7,8,9$.
 Thus only $q=11$ and $q=13$ remain, with forced spectra
 $(n_1,n_2,n_3)=(27,78,9)$ and $(87,60,15)$ respectively. An exhaustive
 four-frame-normalized enumeration now supplies the finite exclusion. It
-finds no conic-filling seven-arc in
-either plane. Every seven-arc is reached because it contains a four-frame;
-equivalently, extending every normalized six-arc by each point of its
-uncovered locus produces every resulting seven-arc exactly three times,
-according to which non-frame point is deleted. For
-all candidates with $|\cU(A)|=q+1$, the quadratic evaluation matrix has
-full rank six.
+finds $10232$ distinct normalized seven-arcs at $q=11$, of which $140$ have
+$|\cU(A)|=q+1$, and $53960$ at $q=13$, of which $1680$ have that size.
+Every seven-arc is reached because it contains a four-frame; extending each
+normalized six-arc by its uncovered points produces every resulting
+seven-arc exactly three times, according to which non-frame point is
+deleted. For all $1820$ candidates of the required size, the quadratic
+evaluation matrix has full rank six, so none lies on a conic.
 \end{proof}
 
 For $k\ge8$ the second moment leaves additional concurrency parameters, so
@@ -1147,56 +1089,80 @@ the analogous classification remains open.
 \section{Verification architecture}
 \label{sec:verification}
 
-Table~\ref{tab:verification} separates cited input, kernel-checked finite
-certificates, and fail-closed enumeration. Lean and script paths are
-relative to \path{lean/RelativeConicArcs/} and the paper directory;
-commands, hashes, sentinels, and import closures will accompany the archive.
+Tables~\ref{tab:verification} and~\ref{tab:replays} separate mathematical
+input, kernel-checked formal proof, and exhaustive finite enumeration. Here
+``kernel-checked'' means that Lean's trusted kernel checks the stated
+implication; executable replays instead enumerate the finite search space
+with exact arithmetic. Paths are relative to
+\path{lean/RelativeConicArcs/} and the paper directory.
 
 \begin{table}[H]
 \centering
-\tiny
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.17\textwidth}
-                    >{\raggedright\arraybackslash}p{0.21\textwidth}
-                    >{\raggedright\arraybackslash}p{0.25\textwidth}
-                    >{\raggedright\arraybackslash}p{0.27\textwidth}@{}}
+\footnotesize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}
+                    >{\raggedright\arraybackslash}p{0.31\textwidth}
+                    >{\raggedright\arraybackslash}p{0.37\textwidth}@{}}
 \toprule
-Result & Cited or proved input & Lean certificate & Executable replay \\
+Result & Mathematical input & Kernel-checked formalization \\
 \midrule
 $A_5$ orbits and syndrome conic
 & Dye; Proposition~\ref{prop:a5-point-orbits}
-& \path{Q11A5PointOrbits.lean}; \path{Q11Coding.lean}
-& \path{check_rigidity_degenerate_conic.py} \\
+& \path{Q11A5PointOrbits.lean}; \path{Q11Coding.lean} \\
 Decoding and chirality
 & arc--coset dictionary; Edge--Dye triangles
-& \path{Q11DecodingSynthesis.lean}
-& \path{check_decoding.py}; \path{check_chirality.py};
-\path{check_code_automorphisms.py} \\
+& \path{Q11DecodingSynthesis.lean} \\
 Rigidity theorem
 & line bound; chord defect; Dye's Theorem~1
 & \path{Q11DyeAxioms.lean}; \path{Q11DyeConsequences.lean};
-\path{SixArcDefectBridge.lean}
-& $1548$-representative rigidity replay \\
+\path{SixArcDefectBridge.lean} \\
 Gap and low-degree loci
 & finite linear algebra over $\F_{11}$
-& ---
-& \path{check_global_conic_gap.py}; \path{check_perturbation_gap.py};
-\path{check_low_degree_loci.py}; Singular replay \\
+& --- \\
 Uniqueness of $q=11$
 & chord moments; cited Sylvester bound
-& \path{ClebschChordDefect.lean}; \path{Q9Sylvester.lean}
-& \path{check_small_q_uniqueness.py}; from-scratch $q=9$ certificate \\
+& \path{ClebschChordDefect.lean}; \path{Q9Sylvester.lean} \\
 Clebsch-family formula
 & Dye's ten Brianchon points and edge criterion
-& ---
-& \path{check_q19_nonexample.py} \\
+& --- \\
 The range $4\le k\le7$
 & two universal chord moments
 & \path{SmallKChordMoments.lean}; \path{SmallKGeometricBridge.lean}
+\\
+\bottomrule
+\end{tabular}
+\caption{Mathematical and formal dependencies of the principal results.}
+\label{tab:verification}
+\end{table}
+
+\begin{table}[H]
+\centering
+\footnotesize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth}
+                    >{\raggedright\arraybackslash}p{0.65\textwidth}@{}}
+\toprule
+Result & Exhaustive or independent executable check \\
+\midrule
+$A_5$ orbits and syndrome conic
+& \path{check_rigidity_degenerate_conic.py} \\
+Decoding and chirality
+& \path{check_decoding.py}; \path{check_chirality.py};
+\path{check_code_automorphisms.py} \\
+Rigidity theorem
+& $1548$-representative frame-normalized enumeration \\
+Gap and low-degree loci
+& \path{check_global_conic_gap.py}; \path{check_perturbation_gap.py};
+\path{check_low_degree_loci.py}; Singular calculation \\
+Uniqueness of $q=11$
+& \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
+Clebsch-family formula
+& \path{check_q19_nonexample.py} \\
+The range $4\le k\le7$
 & \path{check_small_k_conic_filling.py} \\
 \bottomrule
 \end{tabular}
-\caption{Trust and verification map for the principal results.}
-\label{tab:verification}
+\caption{Executable checks, separate from the formal dependencies in
+Table~\ref{tab:verification}.}
+\label{tab:replays}
 \end{table}
 
 The formal development axiomatizes exactly two consequences of Dye's
@@ -1208,9 +1174,10 @@ $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.
 \subsection{Independent small-field census}
 
 Normalizing an ordered four-frame and enumerating the remaining unordered
-pair gives the following exact check. Exponents record multiplicities.
+pair gives the following exact check.
 
-\begin{center}
+\begin{table}[H]
+\centering
 \small
 \begin{tabular}{@{}r r l r@{}}
 \toprule
@@ -1227,9 +1194,14 @@ $q$ & representatives & histogram of $|\cU(A)|$ & conic matches\\
 13 & 4015 & $36^{85},38^{210},39^{480},40^{1080},41^{1800},42^{360}$ & 0\\
 \bottomrule
 \end{tabular}
-\end{center}
+\caption{Small-field census. ``Representatives'' means frame-normalized
+point sets, not projective classes; $m^r$ means that $r$ representatives
+have $|\cU(A)|=m$. The six conic matches at $q=11$ form one projective
+class.}
+\label{tab:small-field-census}
+\end{table}
 
-The replay uses exact arithmetic in every field and tests both nonsingular
+The enumeration uses exact arithmetic in every field and tests both nonsingular
 and singular conic forms in characteristic two. A separate $q=9$
 certificate constructs the polarity graph, verifies the passant/distance-two
 dictionary, and computes clique number five.
@@ -1245,10 +1217,9 @@ needed only for the sharp numerical gap and its refinements.
 
 The same chord moments explain both the isolation of $q=11$ and the
 classification for $4\le k\le7$. For $k\ge8$, further concurrency moments
-are needed. Other concrete problems are to exhaust the degree-six kernels
-from Remark~\ref{rem:degree-threshold} and to connect fixed-$k$ rigidity
-with the large-arc conic-forcing regime. These are tests of how far a
-syndrome locus can reconstruct the projective system that produced it.
+are needed. A second problem is to connect fixed-$k$ rigidity with the
+large-arc conic-forcing regime. Both ask how far a syndrome locus can
+reconstruct the projective system that produced it.
 
 \bibliographystyle{plain}
 \begin{thebibliography}{99}
@@ -1307,6 +1278,13 @@ A.~A.~Davydov, S.~Marcugini, and F.~Pambianco,
 \newblock arXiv:2101.12722v2.
 \newblock (Numbered results are cited by their arXiv~v2 numbering.)
 
+\bibitem{BallLavrauw2019}
+S.~Ball and M.~Lavrauw,
+\newblock Arcs in finite projective spaces,
+\newblock \emph{EMS Surveys in Mathematical Sciences} \textbf{6} (2019),
+33--45.
+\newblock arXiv:1908.10772.
+
 \bibitem{AbiadJabalAmeliReijnders2025}
 A.~Abiad, A.~Jabal Ameli, and L.~Reijnders,
 \newblock The clique number of the exact distance $t$-power graph:
@@ -1334,13 +1312,6 @@ R.~H.~Dye,
 (1991), 270--286.
 \newblock doi:10.1112/jlms/s2-44.2.270.
 
-\bibitem{DromsMellingerMeyer2006}
-S.~V.~Droms, K.~E.~Mellinger, and C.~Meyer,
-\newblock LDPC codes generated by conics in the classical projective plane,
-\newblock \emph{Designs, Codes and Cryptography} \textbf{40} (2006),
-343--356.
-\newblock doi:10.1007/s10623-006-0022-6.
-
 \bibitem{GuruswamiVardy2005}
 V.~Guruswami and A.~Vardy,
 \newblock Maximum-likelihood decoding of Reed--Solomon codes is NP-hard,
@@ -1352,20 +1323,6 @@ J.~W.~P.~Hirschfeld,
 \newblock \emph{Projective Geometries over Finite Fields}, second edition,
 \newblock Oxford University Press, 1998.
 
-\bibitem{MadisonWu2012}
-A.~L.~Madison and J.~Wu,
-\newblock On binary codes from conics in $\PG(2,q)$,
-\newblock \emph{European Journal of Combinatorics} \textbf{33} (2012),
-33--48.
-\newblock doi:10.1016/j.ejc.2011.08.001; arXiv:1104.0324.
-
-\bibitem{MadisonWu2016}
-A.~L.~Madison and J.~Wu,
-\newblock Conics arising from external points and their binary codes,
-\newblock \emph{Designs, Codes and Cryptography} \textbf{78} (2016),
-473--491.
-\newblock doi:10.1007/s10623-014-0013-y.
-
 \bibitem{NgWild2001}
 S.-L.~Ng and P.~R.~Wild,
 \newblock On $k$-arcs covering a line in finite projective planes,
@@ -1376,14 +1333,6 @@ A.~R.~Sadeh,
 \newblock \emph{Classification of $k$-arcs in $\PG(2,11)$ and cubic
 surfaces in $\PG(3,11)$},
 \newblock D.Phil.\ thesis, University of Sussex, 1984.
-
-\bibitem{SinWuXiang2011}
-P.~Sin, J.~Wu, and Q.~Xiang,
-\newblock Dimensions of some binary codes arising from a conic in
-$\PG(2,q)$,
-\newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{118}
-(2011), 853--878.
-\newblock doi:10.1016/j.jcta.2010.11.010; arXiv:0911.2018.
 
 \bibitem{StormeThas1991}
 L.~Storme and J.~A.~Thas,
@@ -1398,13 +1347,6 @@ L.~Storme and H.~Van~Maldeghem,
 \newblock \emph{Journal of Combinatorial Theory, Series A} \textbf{69}
 (1995), 200--216.
 \newblock doi:10.1016/0097-3165(95)90051-9.
-
-\bibitem{Wu2013}
-J.~Wu,
-\newblock Conics arising from internal points and their binary codes,
-\newblock \emph{Linear Algebra and its Applications} \textbf{439} (2013),
-422--434.
-\newblock doi:10.1016/j.laa.2013.04.004.
 
 \bibitem{ZWK2020}
 Y.~Zhang, D.~Wan, and K.~Kaipa,
