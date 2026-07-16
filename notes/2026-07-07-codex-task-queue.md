@@ -19,7 +19,7 @@ PRIMARY, in different sections, with nothing reconciling them. Record priority *
 
 **Task-ID protocol:** one global monotonic `CNN` sequence (see CLAUDE.md). Each task names a report
 file; Codex does the work, writes findings there (verbatim commands/outputs for machine checks), and
-marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C205.**
+marks the entry `[REPORTED <date>]`. Never renumber or reuse an allocated ID. **Max allocated: C208.**
 
 **Lane pegs:** every row carries its lane alias immediately after the ID —
 `- **C<id> `[clebsch]` [QUEUED …]** — …` — from the routing table in CLAUDE.md. The canonical aliases
@@ -39,13 +39,12 @@ it does not own mathematical proofs or any running lane's build process.
   trace-sentinel restart guard, map high-fan-out Lean imports, design stable/versioned generated
   checker boundaries, and validate a disk-backed per-lane artifact-isolation and recovery protocol
   → `notes/2026-07-14-c162-lean-build-system.md`.
-- **C205 `[build-sys]` [QUEUED 2026-07-15 — UNATTENDED BUILD QUEUE]** — generalize the proven
+- **C205 `[build-sys]` [REPORTED 2026-07-15]** — generalized the proven
   `/tmp/c151-run-remaining.sh` pattern into a repository runner for explicit Lean target queues:
   configurable targets/cores/`LEAN_NUM_THREADS`/`choom`, one log per target, atomic machine-readable
-  run manifest and terminal status, fail-fast diagnostic tails, a shared ownership lock that closes
-  the current quiet-check/launch race, restart-safe `lake build --no-build` skipping, and a final
-  trace-only aggregate gate. It must launch once and be inspectable without token-expensive polling,
-  while respecting the no-concurrent-Lake and foreign-lane ownership rules →
+  run manifest and terminal status, fail-fast diagnostic tails, a shared participating-runner
+  ownership lock, restart-safe `lake build --no-build` skipping, and a final trace-only aggregate
+  gate; hostile-review fixes cover refusal state, duplicate leaf names, and unsafe numeric controls →
   `notes/2026-07-15-c205-unattended-lean-build-queue.md`.
 
 **Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
@@ -53,8 +52,11 @@ it does not own mathematical proofs or any running lane's build process.
 reported; the uniform Q25 two-witness certificate and arbitrary-deletion repair theorem passed
 their full kernel build, trace replay, source trust audit, backup, and manuscript/PDF gates. C148's
 exact profile envelope and uniform 318-repair theorem are reported. C149's exact parameter phase
-and semantic `(k+2)→k` repair theorem are reported. C150 is the active decision gate; C150–C152
-remain ordered by EV and their explicit gates.
+and semantic `(k+2)→k` repair theorem are reported. C150's structural scout is reported: aggregate
+moments do not force 32, but the 1,600 minimizers collapse to five residual classes. C151 now has
+kernel-checked lower bounds for all 1,189 residual classes and exact cardinality `32` for all five
+proposed minimizer representatives; residual-orbit completeness remains active, and C152 remains
+gated.
 - **C142 `[alt-orbit-repair]` [REPORTED 2026-07-14]** — kernel-checked alternate-orbit repair for
   invariant ten-arcs over every prime-power base order `s ≥ 7`, with at least eight alternatives,
   and package the existing Q25 nonexceptional-profile repair bounds →
@@ -71,17 +73,18 @@ remain ordered by EV and their explicit gates.
   `floor((k-1)^2/4)+r+1≤s(s-1)/2`, the parameterized semantic `(k+2)→k` robust exchange theorem,
   and the sharp `s≥4`, `k≤s+1` rectangle; trust and manuscript/PDF gates passed →
   `notes/2026-07-14-c149-parameterized-robust-exchange.md`.
-- **C150 `[alt-orbit-repair]` [ACTIVE 2026-07-15 — STRUCTURAL SCOUT]** — seek a moment/collision or
-  small integer-LP explanation of the exceptional Q25 legal-pair multiplicity, with `L≥32` as the
-  high target and a strict stop before census-sized formalization →
+- **C150 `[alt-orbit-repair]` [REPORTED 2026-07-15]** — aggregate moments and separate extrema do
+  not force 32; computed the exact `B/R` frontier and found that the 1,600 minimizers form five
+  residual `PGL(3,5)` classes, clearing C151's few-class gate →
   `notes/2026-07-14-c150-q25-multiplicity-structure.md`.
-- **C151 `[alt-orbit-repair]` [QUEUED 2026-07-14 — GATED ON C150 OR FEW MINIMIZER CLASSES]** — prove
-  the exact Q25 minimum legal-pair count `32` and classify extremizers, using a finite certificate
-  only for a small residual classification →
+- **C151 `[alt-orbit-repair]` [ACTIVE 2026-07-15 — LOWER BOUND + ATTAINMENT CHECKED]** — all 1,189
+  residual classes have kernel-checked lower bounds and all five proposed minimizer representatives
+  have exact cardinality `32`; connect the residual cover and prove orbit completeness to classify
+  extremizers →
   `notes/2026-07-14-c151-q25-minimum-classification.md`.
 - **C152 `[alt-orbit-repair]` [QUEUED 2026-07-14 — COMPONENT-CENSUS FIRST]** — formalize the
-  orbit-replacement graph and degree identity, then test fixed-subset fibers for connectivity,
-  diameter, or a finer component invariant →
+  quadratic-Frobenius deletion/insertion graph and degree identity, explicitly distinct from Dye's
+  shared-triangle graph, then test fixed-subset fibers for connectivity, diameter, or a finer component invariant →
   `notes/2026-07-14-c152-orbit-replacement-graph.md`.
 
 **Baer-equivariant robust-completion lane (2026-07-14):** see
@@ -297,6 +300,21 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   exteriority alone gives only `C subset U`, while the arc/MDS hypothesis selects the Clebsch
   branch. The addition is one related-work paragraph with no new computation or second spine →
   `notes/2026-07-15-c197-bsw-pasch-mds-foil.md`.
+- **C206 `[clebsch]` [QUEUED 2026-07-15 — CONCEPTUAL GAP/STABILITY]** — seek an invariant,
+  character, incidence inequality, or coherent-configuration explanation of the sharp
+  non-Clebsch nearest-conic bound `delta>=12`; determine whether it extends to a genuine stability
+  theorem for extension loci rather than merely repackaging the fifteen-class census →
+  `notes/2026-07-15-c206-clebsch-gap-stability.md`.
+- **C207 `[clebsch]` [QUEUED 2026-07-15 — INTRINSIC CHIRALITY]** — reconstruct the unordered
+  chirality torsor functorially from the code/coset-leader incidence structure, without a chosen
+  Clebsch coordinate model, and identify the algebraic obstruction represented by the outside
+  `S5`-normalizer coset that swaps the halves but does not lift to a monomial code automorphism →
+  `notes/2026-07-15-c207-intrinsic-clebsch-chirality.md`.
+- **C208 `[clebsch]` [QUEUED 2026-07-15 — ALL-FIELD ORBIT LOCUS]** — determine the exact
+  `A5`-orbit decomposition of the Clebsch-family uncovered locus over admissible finite fields,
+  starting with the `q=19` split `20+120`; seek formulas by congruence class and a conceptual
+  explanation of how the associated conic sits inside the larger locus →
+  `notes/2026-07-15-c208-clebsch-all-field-orbits.md`.
 
 **Gem-mining lane (`gem-mining`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-gem-mining.md). Owns the census-sweep machinery and the second-gem

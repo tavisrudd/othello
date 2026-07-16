@@ -952,3 +952,22 @@ published open problems and questions newly posed by this project.
   nonexistence search through `q=131`. This is adjacent to, but does not settle, either the fixed
   six-arc conic-filling problem or the odd-q Nofil conjecture: their set size is `(q+1)/2`, so it is
   six specifically at `q=11`.
+
+## 2026-07-15 — older referee questions after the rigidity upgrades
+
+- The formerly central request for a non-enumerative conic-rigidity proof is closed at theorem
+  level: C180 replaces the conic-containment census implication by the odd-characteristic line
+  bound, chord defect, and Dye's equality classification; C186 independently derives the `A5`
+  point-orbit geometry. A still more intrinsic construction of `A5` directly from the quadratic
+  locus would be elegant, but is no longer a correctness or submission gate.
+- Literal low-degree containment among all fifteen q=11 six-arc classes is closed by C184: Clebsch
+  is uniquely contained in a curve of degree at most three. C185 also recovers the
+  Brianchon/Petersen matching dictionary from decoder ambiguity, so this geometry is observable
+  from the code rather than merely imported from the displayed coordinates.
+- Three distinct high-value questions remain and are queued. C206 asks for a conceptual source of
+  the sharp discrepancy gap and a general stability theorem. C207 asks for an intrinsic chirality
+  torsor and the algebraic meaning of the non-lifting `S5` normalizer coset. C208 asks for the
+  all-field `A5` orbit decomposition of `U(A)`, beginning with the q=19 split `20+120`.
+- Broader searches for non-GRS MDS codes with low-degree deep-hole varieties and a universal
+  coherent-configuration theory remain cross-paper agenda questions, not additional Clebsch
+  manuscript promises.

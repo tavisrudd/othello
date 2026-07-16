@@ -87,6 +87,12 @@ append-only; promote scoped findings to C items rather than routing work directl
 | 3l | **C194 — REPORTED** | Dye's ten concurrences and the chord-defect identity now give `|U(H)|=q^2-14q+45`; for `q=3 mod 4` the associated conic lies in `U(H)` with exact excess `(q-4)(q-11)` | integrated into §6; new algebra passes narrow Lean elaboration and q=19 enumeration is verification → [C194 report](../2026-07-15-c194-clebsch-family-uncovered-formula.md) |
 | 3m | **C197 — REPORTED** | BSW's second q=11 complete exterior configuration is now used as the natural non-arc/non-MDS foil | one concise Pasch comparison landed in related work; no coordinates, computation, or second spine → [C197 report](../2026-07-15-c197-bsw-pasch-mds-foil.md) |
 
+**Queued follow-ons, not submission gates:** C206 seeks a conceptual proof of the sharp
+nearest-conic gap and a genuine stability statement; C207 seeks a code-intrinsic chirality torsor
+and an explanation of the outside normalizer coset; C208 seeks the all-field `A5` orbit
+decomposition of the uncovered locus. Their reports are the live specifications; none expands the
+current manuscript without a concise theorem-level hit.
+
 C183's live report contains the compaction-safe subagent roster. Its delegated finite Lean tasks
 are complete. Root owns integration, the Dye axiom/source audit, all validation, and uses
 `choom -n 500` for current Clebsch Lean work.
