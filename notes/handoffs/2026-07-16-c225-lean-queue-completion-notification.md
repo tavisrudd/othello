@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — non-Lean systemd capability gate passed; parallel adapter rollout next
+**Status**: IN PROGRESS — capability and origin gates passed; managed identity adapter next
 
 ## Goal
 
@@ -15,8 +15,7 @@ model turns on `sleep`/`status` polling.
 Owned implementation paths:
 
 - `lean/scripts/lean-build-queue.py` and its focused tests
-- a narrow systemd submission/inspection adapter under `lean/scripts/`, if the implementation gate
-  confirms that a wrapper is preferable to a documented command
+- the adjacent `lean/scripts/lean-build-systemd.py` adapter, capability probe, and focused tests
 - narrow operator guidance in `lean/AGENTS.md`
 - this handoff, the C225 supervisor survey, and the C225 queue row
 
@@ -453,6 +452,14 @@ SIGKILL produces client code 255 plus retained `Result=signal`, `ExecMainCode=2`
 waiting client leaves the service active through independent completion. Successful services are
 garbage-collected. Exact failed units are reset in fixture cleanup. On NixOS, absolute executable
 paths must preserve multicall symlink spellings rather than resolving them and changing `argv[0]`.
+
+Step 2 passed via the adjacent `lean-build-systemd.py` surface and 12 hermetic table/CLI tests.
+Resolution is CLI over nonempty `OTHELLO_*` environment over native Codex identity; conflicting
+lower-precedence values are retained in a bounded diagnostic. Codex native fallback both identifies
+the harness and supplies `CODEX_THREAD_ID`; Claude never adopts that value. Agent origins require a
+validated session, lane, and caller-attested `C###`. Manual probes require a stable session and
+reject lane/task claims. The effective account comes only from the effective UID. This increment
+does not submit systemd units, invoke Lean, or touch legacy run directories.
 
 ## Adversarial design review
 
