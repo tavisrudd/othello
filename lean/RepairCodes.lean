@@ -26,6 +26,7 @@ import RepairCodes.Q9CircuitInventory
 import RepairCodes.SeedLift
 import RepairCodes.WeightedTransfer
 import RepairCodes.WeightedTransferExact
+import RepairCodes.WeightedStrictExample
 import RepairCodes.TransferBoundary
 import RepairCodes.Q9SeedLift
 import RepairCodes.CodeInstance
