@@ -532,7 +532,9 @@ additional mechanism, not merely a spectral estimate for $\IC(A)$.
 \section{Coding interpretation}
 \label{sec:coding}
 
-The same remainder has a coding interpretation.  Choose nonzero column
+This section is independent of the geometric proof of $\rhoC(16)=9$ and may
+be skipped on a first reading.  The same remainder has a coding
+interpretation.  Choose nonzero column
 representatives of a $k$-arc $A\subset\PG(2,q)$ and form a $3\times k$
 matrix $H_A$.  For $k\ge4$, the code
 \[
@@ -673,7 +675,7 @@ Assume $q$ is even and let $\nu$ be the nucleus of $\cC$.  The nucleus is
 outside $\cC$, all tangents to $\cC$ pass through $\nu$, and every line
 through $\nu$ is one of these $q+1$ tangents.
 
-\begin{proposition}[The nucleus belongs to the arc]
+\begin{proposition}[Case $\nu\in A$]
 \label{prop:nucleus-in}
 Let $A$ be a $k$-arc disjoint from $\cC$ with $\nu\in A$.  Exactly $k-1$
 $A$-secants are tangent to $\cC$.  In particular,
@@ -703,7 +705,7 @@ Inequality~\eqref{eq:nucleus-in} follows from
 Corollary~\ref{cor:conic-bound}.
 \end{proof}
 
-\begin{proposition}[The nucleus lies outside the arc]
+\begin{proposition}[Case $\nu\notin A$]
 \label{prop:nucleus-out}
 Let $A$ be a $\cC$-complete arc with $\nu\notin A$.  Then
 \[
@@ -846,8 +848,10 @@ forces every containing quadratic to meet the arc.
 
 We first state the completeness contract used by the finite certificate.
 Index the $273$ projective points by their unique normalized representatives
-$[0:0:1]$, $[0:1:z]$, and $[1:y:z]$, and let $F$ be the standard
-four-frame.
+$[0:0:1]$, $[0:1:z]$, and $[1:y:z]$.  The standard four-frame is
+\[
+ F=\{[0:0:1],[0:1:0],[1:0:0],[1:1:1]\}.
+\]
 
 \begin{lemma}[Augmentation certificate contract]
 \label{lem:q16-contract}
@@ -883,8 +887,9 @@ The assertion includes singular quadratic forms.
 
 \begin{proof}
 \emph{Certified covering lists.}
-Starting from $F$, the lists contain $4$, $61$, $454$, and $2633$
-representatives at sizes five through eight.  For every listed parent, the
+Starting from $F$, the checked list lengths are
+$|\mathcal L_5|=4$, $|\mathcal L_6|=61$, $|\mathcal L_7|=454$, and
+$|\mathcal L_8|=2633$.  For every listed parent, the
 checker tests all $273$ indexed points.  Each legal move carries a child
 index, an invertible $3\times3$ matrix, and pointwise nonzero scalar
 witnesses proving that the induced projectivity maps the enlarged parent
