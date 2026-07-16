@@ -314,14 +314,25 @@ caution (do not confuse "curve defines the code" with "curve emerges as the deep
 real distinction actively present in the literature, and this paper sits on the standard side of
 it, not our side.
 
-### INFERRED (WebSearch summaries only)
+### VERIFIED — Reed--Muller residual closed by C154
 
-- Reed–Muller code covering radius: "First-order Reed–Muller codes are among the few linear
-  codes with known covering radii" with bounds/exact-values results existing for generalized
-  covering radii — but no summary surfaced an explicit variety-point-set identification for a
-  Reed–Muller deep-hole locus. NOT SEARCHED beyond this summary; a dedicated search of the
-  Reed–Muller-deep-hole subliterature (which the brief flags as real and non-trivial) was not
-  performed in depth. **Flagged as the weakest-covered sub-question in this audit.**
+C154 performed the dedicated pass that this audit originally left open; see the
+[source-by-source report](2026-07-16-c154-reed-muller-deep-holes.md).  The primary literature
+describes first-order binary deep holes as maximum-nonlinearity/bent functions, Ozeki's small
+examples as Hamming association subschemes, generalized first-order maximizers by explicit
+quadratic functions, and higher-order exact-radius results through affine/coset classifications
+of Boolean functions.  None identifies the complete deep-hole locus with the full rational-point
+set of a named positive-dimensional variety.  KLP, Abbe--Shpilka--Wigderson, and Dumer belong to
+the list-size, random-channel, and decoding-algorithm strands rather than explicit deep-hole-set
+classification.  Searches of projective Reed--Muller vocabulary found minimum-distance and
+weight-enumerator work but no projective-RM deep-hole-set description.
+
+The closest semantic near miss is important: bent functions are a named exact class of deep holes
+for `RM(1,m)` when `m` is even, and Ozeki finds named association schemes on selected deep-hole
+unions.  Neither is an algebraic-variety rational-point equality, so the manuscript's precise
+claim boundary survives.
+
+### INFERRED (WebSearch summaries only)
 - AG-code / evaluation-code framing: found general background (Goppa's construction, `C_L(D,
   (k−1)O+P)` deep-hole construction language for RS-as-AG-code) but nothing describing an
   "exceptional set equals a named variety's points" pattern in the reverse (emergent) direction.
@@ -331,15 +342,13 @@ it, not our side.
 
 ### NOT SEARCHED
 
-- A dedicated, deep pass through the Reed–Muller deep-hole literature by name (no specific author
-  names were fetched or verified for this sub-strand — the brief itself flags this exists but I
-  did not chase citations here beyond one generic search).
-- Any non-English-language or pre-2000 geometry literature that might independently carry this
+- Any non-English-language or differently titled pre-web literature that might independently carry this
   vocabulary.
 
-**Verdict for Q5**: partial coverage. The AG/Goppa-code direction-confusion caution is confirmed
-as real and correctly avoided by every paper found. The Reed–Muller deep-hole sub-strand is the
-weakest link in this whole audit — genuinely under-searched, not confidently cleared.
+**Verdict for Q5**: the AG/Goppa-code direction-confusion caution is confirmed as real and
+correctly avoided by every paper found.  C154 closes the named Reed--Muller residual without a
+counterexample.  As throughout this report, that is a bounded negative audit, not an exhaustive
+priority certificate.
 
 ---
 

@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** READY — C154 is the recommended short publication gate
+**Status:** READY — C154 is reported; C188 is next
 
 ## Current state
 
@@ -17,31 +17,31 @@ informative.  C209 therefore remains dormant.  C210 inherits only the bounded
 
 The current manuscript was not edited by C201.
 
+C154 is now reported in
+[`2026-07-16-c154-reed-muller-deep-holes.md`](../2026-07-16-c154-reed-muller-deep-holes.md).
+The dedicated Reed--Muller pass found exact descriptions by bent functions, Hamming association
+subschemes, explicit maximizers, and affine/coset types, but no complete deep-hole locus equal to
+the full rational-point set of a named positive-dimensional variety.  The precise bounded-audit
+novelty posture survives.  The paper needed no claim-boundary change; its conclusion received one
+independent proof-stage copyedit requested by the user.
+
 ## Recommended order
 
-1. **C154 — close the Reed--Muller deep-hole literature residual.**  This is
-   the last unsearched qualifier on the paper's load-bearing “deep-hole set is
-   a variety” positioning.  It is a bounded literature task and should be done
-   before additional theorem work.  Start from
-   [`2026-07-14-gem-lit-deep-holes.md`](../2026-07-14-gem-lit-deep-holes.md)
-   and the C154 directions in
-   [`2026-07-14-c153-c160-queue-rationale.md`](../2026-07-14-c153-c160-queue-rationale.md).
-2. **C188 — prove `rho_C(5)=4`.**  The mathematical witness is already
+1. **C188 — prove `rho_C(5)=4`.**  The mathematical witness is already
    imported from Clebsch C187, but the relative-conic theorem, strict-kernel
    Lean proof, manuscript/result-table synchronization, and rebuild remain.
    See [`2026-07-15-c188-rhoc5-frame.md`](../2026-07-15-c188-rhoc5-frame.md).
-3. **C144 — shared-library gate architecture.**  Run only in a quiescent build
+2. **C144 — shared-library gate architecture.**  Run only in a quiescent build
    window; it is infrastructure rather than paper mathematics.
-4. **C210 — square-root construction program.**  This is the high-ceiling,
+3. **C210 — square-root construction program.**  This is the high-ceiling,
    long-horizon route.  It should begin with construction/literature design,
    not another blind q=64 census.
 
 ## Entry action
 
-If the user selects `relconic`, start C154 unless they explicitly choose a
-different task.  C154 is a literature task: use the shared literature cache
-before fetching sources, keep exact source attribution, and update the paper
-only if the residual search changes the claim boundary.
+If the user selects `relconic`, start C188 unless they explicitly choose a
+different task.  C188 is a Lean task, so read the nested Lean guide before any
+edit, generator run, build, or staleness probe.
 
 ## Durable companions
 

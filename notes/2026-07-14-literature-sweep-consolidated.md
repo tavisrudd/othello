@@ -16,7 +16,7 @@ audit see the [gem-program vet](2026-07-14-gem-program-vet.md).
 | 1 | [hexad](2026-07-14-gem-lit-hexad.md) — is the chord-concurrency characterization of S(5,6,12) known? | Sonnet | **ABSENT** | Good. Primary text read. Two named gaps (below) |
 | 2 | [exterior sets](2026-07-14-gem-lit-exterior-sets.md) — priority for the q=11 hexagon; is the covering fact taken? | Sonnet | **Edge 1956 is the prior art**; the covering fact is **not found** | Good. Edge §§29–32 and Van de Voorde read in full |
 | 3 | [ω_arc](2026-07-14-gem-lit-omega-arc.md) — is the arc-clique invariant studied? | Sonnet | All-external = **the open BSW conjecture**; mixed-type **absent** | ⚠ **Contains known errors** — banner in file. Verdicts survive; citations must be cross-checked |
-| 4 | [deep holes](2026-07-14-gem-lit-deep-holes.md) — is "deep holes = a variety's rational points" claimed? | Sonnet | The **"first" survives** | Good — but this is a clean re-run; the first attempt failed (§4). One sub-question NOT SEARCHED |
+| 4 | [deep holes](2026-07-14-gem-lit-deep-holes.md) — is "deep holes = a variety's rational points" claimed? | Sonnet | The **"first" survives** | Good — clean re-run, with the Reed--Muller residual closed by [C154](2026-07-16-c154-reed-muller-deep-holes.md) |
 | 5 | [orbit classification](2026-07-14-gem-lit-orbit-classification.md) — are the PGL(2,11)-orbits on 6-subsets published? | Opus | **YES — Cameron–Omidi–Tayfeh-Rezaie 2006** | Good. Table re-derived by hand from their theorems and matches |
 | 6 | [rigidity/gap](2026-07-14-gem-lit-rigidity-gap.md) — is the paper's headline taken? | Opus | **No collision found** | Qualified: the two most dangerous sources were unreadable. Q2/Q3 thin. **Its structural argument is falsified by #7** |
 | 7 | [gap theorem](2026-07-14-gem-lit-gap-theorem.md) — the gap theorem's own pass | Opus | **Survives, both halves**; the genre is **Problem (III) of the packing problem** | Good; the survey read end to end. Corrects #6 |
@@ -42,7 +42,10 @@ finding, and it repeated across three independent sweeps.
   Voorde**, both read in full. That is our result, conditioned on the unread BSW originals.
 - **The "first deep-hole set = a named variety's F_q-points"** survives: ZWK's redundancy-4 result is
   a disjoint union of three combinatorial families, not a variety-equality, and in DMP's own examples
-  the uncovered locus tied to a named object is a single point or empty.
+  the uncovered locus tied to a named object is a single point or empty.  C154's dedicated
+  Reed--Muller pass found exact descriptions by bent functions, Hamming association subschemes,
+  and affine/coset types, but no equality with a named positive-dimensional variety's full
+  rational-point set.
 - **The hexad characterization is absent**, and Halbeisen–Hungerbühler (J. Geometry 2024) supply the
   reason it *could not* be classical: over ℝ, no-accidental-concurrency is **generic**, so the
   question is not well-posed until the conic is finite.
@@ -69,7 +72,7 @@ finding, and it repeated across three independent sweeps.
 | ~~**Hirschfeld–Sadeh**, *Giessen* **164** (1984)~~ | ILL | **GATE LIFTED 2026-07-14.** Hirschfeld's own survey cites Sadeh's thesis [189] and PGOFF §14.8 for the q=11 data and **omits HS84 from its bibliography entirely** — a co-author omitting his own paper where it would be needed settles it far better than the zbMATH inference. The concession was mis-aimed and is already withdrawn from the tex | — |
 | **Hirschfeld** Ch. 8 / **Semple–Kneebone** | Neither accessible | The point↔involution and pencil↔involution theorem numbers — **currently inferred, never verified** | C157 |
 | **Lord**, *Geometry of the Mathieu groups and Golay codes* | 403 at full text | The hexad-absence verdict, weakly (its abstract places it in PG(5,3)/PG(11,2), so PG(2,11) content is unlikely — but that is inference from an abstract) | — |
-| **Reed–Muller deep holes** | **NOT SEARCHED** | The "first variety-equality" claim — the one place a counterexample could still sit | C154 |
+| ~~**Reed–Muller deep holes**~~ | **GATE LIFTED 2026-07-16.** C154 checked the explicit deep-hole, covering-radius, bent-function, generalized-RM, projective-RM, and recent exact-radius strands; no variety equality was found | The precise bounded-audit novelty posture survives | [C154](2026-07-16-c154-reed-muller-deep-holes.md) |
 | **Dover**, *Untouchable sets*, arXiv:2505.08551 | PDF extraction failed twice | Nothing load-bearing; shows the area is active | — |
 
 **Closed during the sweeps** (listed so they are not re-chased): Edge 1965a (fetched — PG(2,4), where

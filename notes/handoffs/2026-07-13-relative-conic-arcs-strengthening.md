@@ -31,10 +31,10 @@ carry:
 - **The deep-hole "first" is audited and survives** ([sweep](../2026-07-14-gem-lit-deep-holes.md)):
   no prior instance of a complete deep-hole set identified with the full rational-point set of a
   named variety. ZWK's redundancy-4 result is a disjoint union of three combinatorial families, not
-  a variety-equality. **Residual: Reed–Muller deep holes marked NOT SEARCHED, not cleared** — this
-  paper owns that claim and ships first, so the residual is this lane's. Queued as **C154**; search
-  directions in the [C153–C160 queue rationale](../2026-07-14-c153-c160-queue-rationale.md), and the
-  current state of every claim is in the
+  a variety-equality.  **C154 closed the Reed--Muller residual without a counterexample**:
+  bent functions, Hamming association subschemes, explicit maximizers, and affine/coset types are
+  the closest predecessors, but none is a variety-point-set equality.  See the
+  [C154 report](../2026-07-16-c154-reed-muller-deep-holes.md).  The current state of every claim is in the
   [novelty status tables](../2026-07-14-novelty-status-review-summary-tables.md) (this lane has no
   false-novelty rows).
 - **Proposition 8.2** now contains the q=11 code/coset spectrum, while **Proposition 8.3** contains
