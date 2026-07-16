@@ -32,6 +32,33 @@ def HasMultiblockDualDistanceAtLeast
     (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) →
     2 ≤ (blockSupport w).card → d ≤ ∑ j, hammingNorm (w j)
 
+/-- A concatenated dual word is an embedded inner-dual word when all but one block vanish and the
+remaining block lies in the inner dual.  The zero word is included (choose any block), matching
+the image of the one-block embedding. -/
+def IsEmbeddedInnerDualBlock
+    (I : Submodule 𝔽 (κ → 𝔽)) (w : ι → (κ → 𝔽)) : Prop :=
+  ∃ j, w j ∈ dualCode I ∧ ∀ l, l ≠ j → w l = 0
+
+/-- Every concatenated dual word which is not an embedded inner-dual block has weight at least
+`d`.  This lower-bound predicate gives the corrected exact threshold without assigning the wrong
+value to an empty obstruction set. -/
+def HasNonembeddedDualDistanceAtLeast
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (d : ℕ) : Prop :=
+  ∀ w : ι → (κ → 𝔽),
+    (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) →
+    ¬ IsEmbeddedInnerDualBlock I w →
+    d ≤ ∑ j, hammingNorm (w j)
+
+/-- Every realization of every nonzero functional-dual tuple has total inner weight at least `d`.
+This is the lower-bound semantics of the manuscript's weighted distance `d_lambda(O)`. -/
+def HasNonzeroFunctionalRealizationAtLeast
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (d : ℕ) : Prop :=
+  ∀ beta, beta ∈ functionalDual O → beta ≠ 0 → ∀ w : ι → (κ → 𝔽),
+    (∀ j, blockFunctional I e (w j) = beta j) →
+      d ≤ ∑ j, hammingNorm (w j)
+
 /-- The zero-functional stratum of the multiblock threshold. -/
 def HasZeroFunctionalMultiblockAtLeast
     (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
@@ -102,6 +129,209 @@ theorem flatten_mem_dualCode_concatenatedCode_of_functionalDual
   obtain ⟨u, hu, rfl⟩ := Submodule.mem_map.mp hc
   simpa [dotProduct, Fintype.sum_prod_type, concatenationLinearMap_apply,
     blockFunctional] using hbeta u hu
+
+/-- An embedded block family meets at most one block. -/
+theorem blockSupport_card_le_one_of_isEmbeddedInnerDualBlock
+    (I : Submodule 𝔽 (κ → 𝔽)) {w : ι → (κ → 𝔽)}
+    (h : IsEmbeddedInnerDualBlock I w) : (blockSupport w).card ≤ 1 := by
+  classical
+  obtain ⟨j, _, hj⟩ := h
+  apply Finset.card_le_one.mpr
+  intro a ha b hb
+  have ha' : w a ≠ 0 := (Finset.mem_filter.mp ha).2
+  have hb' : w b ≠ 0 := (Finset.mem_filter.mp hb).2
+  have haj : a = j := by
+    by_contra hne
+    exact ha' (hj a hne)
+  have hbj : b = j := by
+    by_contra hne
+    exact hb' (hj b hne)
+  exact haj.trans hbj.symm
+
+/-- Conversely, an all-inner block family meeting at most one block is an embedded inner-dual
+word. -/
+theorem isEmbeddedInnerDualBlock_of_all_inner_of_card_le_one
+    [Nonempty ι] (I : Submodule 𝔽 (κ → 𝔽)) {w : ι → (κ → 𝔽)}
+    (hinner : ∀ j, w j ∈ dualCode I) (hcard : (blockSupport w).card ≤ 1) :
+    IsEmbeddedInnerDualBlock I w := by
+  classical
+  by_cases hzero : blockSupport w = ∅
+  · let j : ι := Classical.choice inferInstance
+    refine ⟨j, hinner j, ?_⟩
+    intro l _
+    by_contra hl
+    have : l ∈ blockSupport w := Finset.mem_filter.mpr ⟨Finset.mem_univ _, hl⟩
+    simpa [hzero] using this
+  · obtain ⟨j, hj⟩ := Finset.nonempty_iff_ne_empty.mpr hzero
+    refine ⟨j, hinner j, ?_⟩
+    intro l hlj
+    by_contra hl
+    have hljSupport : l ∈ blockSupport w :=
+      Finset.mem_filter.mpr ⟨Finset.mem_univ _, hl⟩
+    exact hlj (Finset.card_le_one.mp hcard l hljSupport j hj)
+
+/-- **Corrected exact threshold.**  A nonembedded concatenated-dual obstruction has exactly two
+possible forms: a zero-functional word meeting at least two inner blocks, or a realization of a
+nonzero outer functional-dual word.  Stating the result for every lower bound is equivalent to
+the extended minimum formula `delta_emb = min (2 d(I^perp)) d_lambda(O)` and remains correct when
+one of the two strata is empty. -/
+theorem hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
+    [Nonempty ι]
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (d : ℕ) :
+    HasNonembeddedDualDistanceAtLeast I e O d ↔
+      HasZeroFunctionalMultiblockAtLeast I e O d ∧
+      HasNonzeroFunctionalRealizationAtLeast I e O d := by
+  classical
+  constructor
+  · intro h
+    constructor
+    · intro w hw hblocks _
+      apply h w hw
+      intro hembedded
+      have := blockSupport_card_le_one_of_isEmbeddedInnerDualBlock I hembedded
+      omega
+    · intro beta hbeta hbeta0 w hwrealize
+      have hwdual := flatten_mem_dualCode_concatenatedCode_of_functionalDual I e O w (by
+        simpa only [hwrealize] using hbeta)
+      apply h w hwdual
+      rintro ⟨j, hjinner, hjzero⟩
+      apply hbeta0
+      funext l
+      by_cases hlj : l = j
+      · subst l
+        change beta j = (0 : Module.Dual 𝔽 V)
+        rw [← hwrealize j, blockFunctional_eq_zero_iff I e]
+        exact hjinner
+      · change beta l = (0 : Module.Dual 𝔽 V)
+        rw [← hwrealize l, hjzero l hlj]
+        apply LinearMap.ext
+        intro v
+        simp [blockFunctional]
+  · rintro ⟨hzero, hweighted⟩ w hwdual hnotembedded
+    let beta : ι → Module.Dual 𝔽 V := fun j => blockFunctional I e (w j)
+    have horth := dualWord_isOrthogonalToConcatenation I e O hwdual
+    have hwblock : wordBlock (fun p => w p.1 p.2) = w := by
+      funext j x
+      rfl
+    rw [hwblock] at horth
+    have hbeta : beta ∈ functionalDual O :=
+      blockFunctional_mem_functionalDual I e O w horth
+    by_cases hbeta0 : beta = 0
+    · apply hzero w hwdual
+      · have hinner : ∀ j, w j ∈ dualCode I := by
+          intro j
+          rw [← blockFunctional_eq_zero_iff I e]
+          exact congrFun hbeta0 j
+        by_contra hblocks
+        apply hnotembedded
+        apply isEmbeddedInnerDualBlock_of_all_inner_of_card_le_one I hinner
+        omega
+      · exact hbeta0
+    · exact hweighted beta hbeta hbeta0 w (fun _ => rfl)
+
+omit [DecidableEq V] in
+/-- Below the corrected exact threshold, every concatenated-dual word is an embedded inner-dual
+word.  This is the precise confinement statement needed by the repair-hypergraph proof. -/
+theorem concatenatedDualWord_transfer_nonembedded
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) {w : ι × κ → 𝔽} (d s : ℕ)
+    (hw : w ∈ dualCode (concatenatedCode I e O))
+    (hd : HasNonembeddedDualDistanceAtLeast I e O d)
+    (hwt : hammingNorm w ≤ s) (hsd : s < d) :
+    (∀ j, wordBlock w j ∈ dualCode I) ∧
+      (univ.filter (fun j => wordBlock w j ≠ 0)).card ≤ 1 := by
+  classical
+  have hembedded : IsEmbeddedInnerDualBlock I (wordBlock w) := by
+    by_contra hnot
+    have hlower := hd (wordBlock w) (by simpa [wordBlock] using hw) hnot
+    rw [← hammingNorm_eq_sum_hammingNorm_wordBlock] at hlower
+    omega
+  constructor
+  · intro l
+    obtain ⟨j, hjinner, hjzero⟩ := hembedded
+    by_cases hlj : l = j
+    · simpa [hlj] using hjinner
+    · rw [hjzero l hlj]
+      exact Submodule.zero_mem _
+  · exact blockSupport_card_le_one_of_isEmbeddedInnerDualBlock I hembedded
+
+omit [DecidableEq V] in
+/-- **Corrected complete-repair transfer.**  If every nonembedded concatenated-dual word has
+weight at least `r + 2`, then the complete radius-`r` repair hypergraph is exactly the embedded
+inner repair hypergraph. -/
+theorem repairHypergraph_concatenatedCode_eq_embed_nonembedded
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (r : ℕ)
+    (hd : HasNonembeddedDualDistanceAtLeast I e O (r + 2))
+    (j : ι) (x : κ) :
+    repairHypergraph (concatenatedCode I e O) (j, x) r =
+      embedHypergraph (blockEmbedding j) (repairHypergraph I x r) := by
+  classical
+  ext R
+  constructor
+  · intro hR
+    obtain ⟨hRsub, hRcard, w, hwdual, hwx, hwsupp⟩ := mem_repairHypergraph.mp hR
+    have hxR : (j, x) ∉ R := by
+      intro hx
+      exact (Finset.mem_erase.mp (hRsub hx)).1 rfl
+    have hwt : hammingNorm w ≤ r + 1 := by
+      rw [← card_wordSupport, hwsupp, Finset.card_insert_of_notMem hxR]
+      omega
+    have htransfer := concatenatedDualWord_transfer_nonembedded I e O (r + 2) (r + 1)
+      hwdual hd hwt (by omega)
+    have hjblock : wordBlock w j ≠ 0 := by
+      intro hz
+      exact hwx (congrFun hz x)
+    have hsingle : ∀ l, wordBlock w l ≠ 0 → l = j := by
+      intro l hl
+      let B := univ.filter (fun a => wordBlock w a ≠ 0)
+      have hjB : j ∈ B := by simp [B, hjblock]
+      have hlB : l ∈ B := by simp [B, hl]
+      exact (Finset.card_le_one.mp htransfer.2 l hlB j hjB)
+    have hsuppMap := wordSupport_eq_map_wordSupport_wordBlock_of_single hsingle
+    let S : Finset κ := (wordSupport (wordBlock w j)).erase x
+    have hxSupp : x ∈ wordSupport (wordBlock w j) := mem_wordSupport.mpr hwx
+    have hmapS : S.map (blockEmbedding j) = R := by
+      dsimp [S]
+      rw [Finset.map_erase, ← hsuppMap, hwsupp]
+      exact Finset.erase_insert hxR
+    have hScard : S.card ≤ r := by
+      rw [← Finset.card_map (blockEmbedding j), hmapS]
+      exact hRcard
+    have hSsub : S ⊆ univ.erase x := by
+      intro a ha
+      exact Finset.mem_erase.mpr ⟨(Finset.mem_erase.mp ha).1, Finset.mem_univ _⟩
+    have hinner : S ∈ repairHypergraph I x r := by
+      apply mem_repairHypergraph.mpr
+      refine ⟨hSsub, hScard, wordBlock w j, htransfer.1 j, hwx, ?_⟩
+      exact (Finset.insert_erase hxSupp).symm
+    exact Finset.mem_image.mpr ⟨S, hinner, hmapS⟩
+  · intro hR
+    obtain ⟨S, hS, rfl⟩ := Finset.mem_image.mp hR
+    obtain ⟨hSsub, hScard, z, hzdual, hzx, hzsupp⟩ := mem_repairHypergraph.mp hS
+    have hxS : x ∉ S := by
+      intro hx
+      exact (Finset.mem_erase.mp (hSsub hx)).1 rfl
+    let w := singleBlockWord j z
+    have hwdual : w ∈ dualCode (concatenatedCode I e O) :=
+      singleBlockWord_mem_dualCode_concatenatedCode I e O hzdual
+    have hwx : w (j, x) ≠ 0 := by simpa [w, singleBlockWord] using hzx
+    have hsub : S.map (blockEmbedding j) ⊆ univ.erase (j, x) := by
+      intro p hp
+      obtain ⟨a, ha, rfl⟩ := Finset.mem_map.mp hp
+      exact Finset.mem_erase.mpr ⟨by
+        intro h
+        have hax : a = x := congrArg Prod.snd h
+        exact hxS (hax ▸ ha), Finset.mem_univ _⟩
+    have hcard : (S.map (blockEmbedding j)).card ≤ r := by
+      rw [Finset.card_map]
+      exact hScard
+    have hsupp : wordSupport w = insert (j, x) (S.map (blockEmbedding j)) := by
+      change wordSupport (singleBlockWord j z) = _
+      rw [wordSupport_singleBlockWord, hzsupp, Finset.map_insert]
+      rfl
+    exact mem_repairHypergraph.mpr ⟨hsub, hcard, w, hwdual, hwx, hsupp⟩
 
 /-- Exact zero/singleton/multisupport partition.  This is an iff, so in contrast with a transfer
 gate it also kernel-checks the converse: any failed global bound fails in one of the three stated
@@ -201,6 +431,79 @@ theorem hasSingletonFunctionalMultiblockAtLeast_of_isCoordinateSurjective
     apply blockFunctional_mem_functionalDual I e O w
     exact horth
   exact (functionalWeight_ne_one_of_isCoordinateSurjective O hO hbeta hweight).elim
+
+/-- For a coordinate-surjective outer code, a concatenated-dual word is nonembedded exactly when
+it meets at least two inner blocks.  This is the missing hypothesis behind identifying the two
+thresholds in the corrected theorem. -/
+theorem not_isEmbeddedInnerDualBlock_iff_two_le_blockSupport_card_of_isCoordinateSurjective
+    [Nonempty ι]
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (hO : IsCoordinateSurjective O)
+    (w : ι → (κ → 𝔽))
+    (hwdual : (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O)) :
+    ¬ IsEmbeddedInnerDualBlock I w ↔ 2 ≤ (blockSupport w).card := by
+  classical
+  constructor
+  · intro hnot
+    by_contra hblocks
+    apply hnot
+    let beta : ι → Module.Dual 𝔽 V := fun j => blockFunctional I e (w j)
+    have horth := dualWord_isOrthogonalToConcatenation I e O hwdual
+    have hwblock : wordBlock (fun p => w p.1 p.2) = w := by
+      funext j x
+      rfl
+    rw [hwblock] at horth
+    have hbeta : beta ∈ functionalDual O :=
+      blockFunctional_mem_functionalDual I e O w horth
+    have hweight_le : functionalWeight beta ≤ (blockSupport w).card := by
+      apply Finset.card_le_card
+      intro j hj
+      have hbj : beta j ≠ 0 := (Finset.mem_filter.mp hj).2
+      apply Finset.mem_filter.mpr
+      refine ⟨Finset.mem_univ _, ?_⟩
+      intro hwj
+      apply hbj
+      change blockFunctional I e (w j) = 0
+      rw [hwj]
+      apply LinearMap.ext
+      intro v
+      simp [blockFunctional]
+    have hbeta0 : beta = 0 := by
+      by_contra hb0
+      have hpos : 1 ≤ functionalWeight beta := by
+        rw [functionalWeight]
+        apply Finset.one_le_card.mpr
+        obtain ⟨j, hj⟩ := Function.ne_iff.mp hb0
+        exact ⟨j, Finset.mem_filter.mpr ⟨Finset.mem_univ _, hj⟩⟩
+      have hone : functionalWeight beta = 1 := by omega
+      exact functionalWeight_ne_one_of_isCoordinateSurjective O hO hbeta hone
+    have hinner : ∀ j, w j ∈ dualCode I := by
+      intro j
+      rw [← blockFunctional_eq_zero_iff I e]
+      exact congrFun hbeta0 j
+    apply isEmbeddedInnerDualBlock_of_all_inner_of_card_le_one I hinner
+    omega
+  · intro htwo hembedded
+    have hone := blockSupport_card_le_one_of_isEmbeddedInnerDualBlock I hembedded
+    omega
+
+/-- Under coordinate surjectivity, the multiblock and nonembedded exact thresholds coincide,
+stated extensionally through all of their natural-number lower bounds. -/
+theorem hasNonembeddedDualDistanceAtLeast_iff_multiblock_of_isCoordinateSurjective
+    [Nonempty ι]
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (hO : IsCoordinateSurjective O) (d : ℕ) :
+    HasNonembeddedDualDistanceAtLeast I e O d ↔
+      HasMultiblockDualDistanceAtLeast I e O d := by
+  constructor
+  · intro h w hwdual hblocks
+    exact h w hwdual
+      ((not_isEmbeddedInnerDualBlock_iff_two_le_blockSupport_card_of_isCoordinateSurjective
+        I e O hO w hwdual).mpr hblocks)
+  · intro h w hwdual hnot
+    exact h w hwdual
+      ((not_isEmbeddedInnerDualBlock_iff_two_le_blockSupport_card_of_isCoordinateSurjective
+        I e O hO w hwdual).mp hnot)
 
 /-- The zero-functional stratum is bounded by two nonzero inner-dual blocks. -/
 theorem hasZeroFunctionalMultiblockAtLeast_of_two_dualDist
@@ -401,6 +704,10 @@ end
 end RepairCodes
 
 #print axioms RepairCodes.functionalWeight_ne_one_of_isCoordinateSurjective
+#print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_zero_and_weighted
+#print axioms RepairCodes.concatenatedDualWord_transfer_nonembedded
+#print axioms RepairCodes.repairHypergraph_concatenatedCode_eq_embed_nonembedded
+#print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_multiblock_of_isCoordinateSurjective
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_iff_three_strata
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_of_three_terms
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_of_isCoordinateSurjective
