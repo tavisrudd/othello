@@ -2,7 +2,7 @@
 
 **Date**: 2026-07-15
 **Lane**: `clebsch` — see CLAUDE.md § Lane routing.
-**Status**: **CHECKER AND LEAN SYNTHESIS REPORTED; MANUSCRIPT DECISION OPEN.**
+**Status**: **REPORTED.**
 
 ## Exact result
 
@@ -134,9 +134,7 @@ elapsed=7.82 max_rss_kib=17400
 Source identity for that run:
 
 - SHA-256: `24f42397f4e2b7e32109d44fc2caeb6ec1991476c3bffc6143d61f8364305cb6`;
-- prospective Git blob: `d021423287d721f55755bca3769522c093439701`.
-
-The blob is recorded as prospective until the root lane stages the new checker explicitly.
+- Git blob: `d021423287d721f55755bca3769522c093439701` (committed in `1b7895e`).
 
 ## Lean coverage map
 
@@ -153,14 +151,14 @@ new Brianchon module, whose namespace is
 |---|---|---|
 | The columns define a `[6,3,4]_{11}` MDS code | `witness_mds_columns`, `witness_code_minimum_distance_four` in `Q11Coding` | Complete |
 | The distance-three projective locus is the standard conic | `projective_distanceThreeDirections_eq_standardConic` in `Q11Coding`; `affine_distanceThree_iff_mem_standardConic` in `Q11SemanticSynthesis` | Complete |
-| Exact distance of every nonzero canonical/affine-ray syndrome | `canonical_syndromeDistance_exact`, `affineRay_syndromeDistance_exact` in `Q11SemanticSynthesis` | Complete, but the four-branch oracle is not packaged as one theorem |
+| Exact distance of every syndrome | `totalSyndromeDistance_exact`, `totalSyndromeDistance_nonzero_branches`, `totalSyndromeDistance_zero_iff` in `Q11DecodingSynthesis` | Complete four-branch oracle |
 | Nonzero coset-distance counts `60,1150,120` | `affine_coset_distance_distribution` in `Q11SemanticDistribution` | Complete |
 | Distance-two leader count equals secant index | `syndromeLeaderSupports_two_eq_raw`, `canonical_weightTwo_leader_count`, `affineRay_weightTwo_leader_count` in `Q11SemanticLeaders` | Complete |
 | Distance-two multiplicity counts `900,150,100` | `distance_two_leader_distribution` in `Q11SemanticLeaders` | Complete |
-| Every deep hole has all twenty triple supports | `conicZero_weightThree_leader_count` in `Q11Coding` proves count twenty at one displayed syndrome | Partial: all syndromes and equality of the support set with all triples need a named synthesis lemma |
+| Every deep hole has all twenty triple supports | `distanceThree_leaderSupports_eq_allTriples`, `distanceThree_leader_count_twenty` in `Q11DecodingSynthesis` | Complete |
 | Ten Brianchon concurrences and complement of the invariant total | `brianchon_concurrences`, `brianchon_matchings_are_complement`, `disjoint_chord_intersection_ledger` in `Q11BrianchonPetersen` | Complete geometrically/combinatorially |
-| Triple-ambiguity leader supports equal the ten Brianchon matchings | Combine `syndromeLeaderSupports_two_eq_raw` with the Brianchon theorems | Missing explicit bridge between the two concrete tables |
-| Full ambiguity distribution `960,150,100,120` | Follows from the existing distance distributions, weight-two distribution, and a uniform deep-hole twenty-leader theorem | Missing one synthesis theorem; one prerequisite is still partial |
+| Triple-ambiguity leader supports equal the ten Brianchon matchings | `brianchonDirectionIndices_eq_indexThree`, `brianchon_weightTwo_leaderSupports` in `Q11DecodingSynthesis` | Complete |
+| Full ambiguity distribution `960,150,100,120` | `ambiguity_strata_sound`, `ambiguity_strata_counts` in `Q11DecodingSynthesis` | Complete |
 | Projective `A5` has two triple orbits `10+10` | No Lean projective-support group action | Missing |
 | Full `MAut(C)` coefficient equivariance and chirality decoders | No Lean monomial action on words/syndromes | Missing |
 | Affine deep-hole stabilizer has four five-element leader orbits; four global size-five decoders attain the lower bound | No Lean stabilizer/orbit infrastructure | Missing |
@@ -183,4 +181,31 @@ Items 1--4 are finite synthesis over existing certified data. Item 5 is the subs
 infrastructure already identified by the chirality lane; it should not be disguised as a final
 `decide` after the group action has been assumed.
 
-No Lean process was run for C185, and the manuscript was not edited.
+## Manuscript disposition
+
+The retained result is split at its natural seam:
+
+- Section 3 states the four-way syndrome oracle, the complete ambiguity enumerator, the
+  secant-index interpretation, and the uniform twenty-support theorem. It explicitly calls the
+  test constant-size only after syndrome formation for this fixed six-coordinate code, making no
+  asymptotic complexity claim.
+- Section 5 states the operational Brianchon corollary: the ten triple-ambiguity directions and
+  their three supports reconstruct the classical ten Brianchon points and the ten matchings
+  complementary to the synthematic total.
+- The chirality discussion records the exact equivariant hierarchy: list size five is the
+  nonempty equivariant floor, while the two size-ten chirality decoders are the proper nonempty
+  selections determined solely by support. This replaces the rejected claim that chirality is the
+  coarsest arbitrary equivariant rule.
+
+The coefficient-bearing action claims remain checker-certified rather than Lean-formalized; the
+manuscript says so directly. The finite oracle, ambiguity counts, Brianchon bridge, and uniform
+twenty-support theorem are covered by `Q11DecodingSynthesis.lean`.
+
+## Validation
+
+- `uv run python check_decoding.py`: all assertions passed, including `1,440,000`
+  coefficient-equivariance cases and `288,000` minimal-decoder equivariance cases.
+- `choom -n 500 -- nix develop --command lake env lean
+  RelativeConicArcs/Q11DecodingSynthesis.lean`: exit zero.
+- XeLaTeX/`latexmk`: nineteen-page PDF produced; warning audit passed after breaking the long Lean
+  module path.

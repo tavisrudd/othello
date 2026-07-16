@@ -188,7 +188,9 @@ geometry: that the conic-containment condition characterizes the Clebsch
 hexagon among all six-arcs and recovers $A_5$ from a purely
 coding-theoretic hypothesis, not by construction; the global and local
 quantitative gap theorem accompanying that rigidity; the invariant chirality bipartition of
-the weight-three support types and its induced per-coset leader split; and
+the weight-three support types and its induced per-coset leader split; and an
+explicit decoder-side synthesis in which a four-way syndrome oracle and its
+ambiguity data reconstruct the classical Brianchon configuration; and
 the unconditional finite-field argument isolating $q=11$, including the
 Clebsch-family uncovered formula obtained by combining Dye's classical
 geometry with the chord-defect identity.
@@ -436,6 +438,57 @@ The coset-leader-weight distribution of $C$ is $(1,60,1150,120)$
 entry counts deep-hole cosets, not received words. Its codeword
 weight enumerator is $(1,0,0,0,150,420,760)$, forced by the MDS parameters;
 we record it as a sanity check, not a novelty.
+
+The special geometry also makes distance diagnosis and nearest-word structure
+unusually explicit.  Write a syndrome as $s=(s_0,s_1,s_2)$ and put
+$Q(s)=s_0s_2-s_1^2$.
+
+\begin{proposition}[Complete syndrome oracle and ambiguity enumerator]
+\label{prop:decoding-oracle}
+For $v\in\F_{11}^6$ with syndrome $s=Hv^{\mathsf T}$,
+\[
+ d(v,C)=
+ \begin{cases}
+ 0,&s=0,\\
+ 1,&[s]\in A,\\
+ 3,&s\ne0\text{ and }Q(s)=0,\\
+ 2,&\text{otherwise}.
+ \end{cases}
+\]
+Among the $1330$ nonzero cosets, the numbers having respectively one, two,
+three, and twenty nearest codewords are
+\[
+ 960,\qquad150,\qquad100,\qquad120.
+\]
+For a distance-two syndrome the number of nearest codewords is its secant
+index.  Every distance-three syndrome has exactly one leader on each of the
+twenty three-element coordinate supports.
+\end{proposition}
+
+\begin{proof}
+The DMP dictionary identifies weight-one directions with the six columns,
+weight at most two with the secant union, and weight three with its
+complement.  Proposition~\ref{prop:deep-holes-conic} identifies the last
+set with $Q=0$, proving the oracle.  In the notation of its proof, the
+chord-intersection equations give
+$(n_0,n_1,n_2,n_3)=(12,90,15,10)$, where $n_i$ counts projective directions
+of secant index $i$ and $n_0$ is the uncovered locus.  Every direction has
+ten nonzero affine syndromes.  Thus the distance-two cosets contribute
+$900$ cases of multiplicity one, $150$ of multiplicity two, and $100$ of
+multiplicity three; the sixty weight-one cosets add sixty more cases of
+multiplicity one.  Leaders are in bijection with nearest codewords by
+translation within the coset.  Finally, the three columns on any support are independent.
+For an uncovered syndrome their unique coefficients are all nonzero, since
+a zero coefficient would put the syndrome on a secant.  Hence all twenty
+supports, and no others, give its weight-three leaders.
+\end{proof}
+
+For this fixed six-coordinate code, the proposition is a constant-size
+post-syndrome test: it is not an asymptotic complexity claim.  The complete
+coefficient-bearing enumeration is independently replayed by
+\path{check_decoding.py}; the finite oracle, uniform twenty-support theorem,
+and ambiguity counts are also packaged in
+\path{Q11DecodingSynthesis.lean} under \path{lean/RelativeConicArcs/}.
 
 \subsection{Certified structural facts}
 \label{sec:structural}
@@ -878,6 +931,22 @@ As an independent verification, \texttt{check\_chirality.py} checks all
 chord intersections, the exact $3^{10}1^{15}$ multiplicity ledger, both
 equivariance statements, and compatibility with the support map.
 
+\begin{corollary}[The decoder reconstructs the Brianchon configuration]
+\label{cor:decoder-brianchon}
+The ten projective directions having three nearest weight-two errors are
+exactly the ten Brianchon points.  At each such direction the three error
+supports are pairwise disjoint and hence form a perfect matching of the six
+coordinates.  The ten matchings thereby recovered are precisely the ten
+perfect matchings outside the five-matching synthematic total.
+\end{corollary}
+
+\begin{proof}
+The three weight-two representations of a secant-index-three direction use
+the three chords through it.  Proposition~\ref{prop:brianchon-support}
+identifies the ten triple concurrences with the ten Brianchon points and
+their chords with exactly the ten matchings complementary to the total.
+\end{proof}
+
 Edge's two systems of eleven Clebsch hexagons over a fixed conic, exchanged
 by the operations outside $\Omega^+(3,11)$~\cite[\S\S29,32]{Edge1956}, are a
 classical antecedent of the same two-class motif. They are classes of
@@ -943,6 +1012,19 @@ $600\cdot2400$ monomial-action cases.
 
 The bipartition is therefore intrinsic to the code's covering-radius data,
 but its two sides have no preferred signs without an additional orientation.
+
+There is a finer equivariance distinction.  The stabilizer in
+$\operatorname{MAut}(C)$ of one \emph{affine} deep-hole syndrome has order
+five and four orbits of size five on its twenty leaders.  Transporting any
+one orbit gives a monomial-equivariant set-valued decoder of constant list
+size five on the $120$ deep-hole syndromes, and every nonempty equivariant
+decoder on this syndrome orbit has list size at least five.  Thus chirality
+is not the minimum or coarsest arbitrary equivariant
+selection: its two size-ten lists are the two proper nonempty selections
+determined solely by the support, each a union of two of the size-five
+orbits.  These affine stabilizer orbits, their transport, and the resulting
+$288000$ equivariance cases are checked by \path{check_decoding.py}; no
+orientation of the two chirality classes is chosen.
 
 \section{Why \texorpdfstring{$q=11$}{q=11}}
 \label{sec:why11}

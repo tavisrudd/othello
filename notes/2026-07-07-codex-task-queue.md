@@ -265,12 +265,11 @@ artifact are settled. The lane is finished pending the user-directed archive/rou
   quintic, and displayed C12 smooth sextic loci. Decide the concise manuscript disposition and
   formalize only the claims retained there →
   `notes/2026-07-15-c184-low-degree-uncovered-loci.md`.
-- **C185 `[clebsch]` [IN PROGRESS 2026-07-15 — CHECKER COMPLETE; LEAN/MANUSCRIPT OPEN]** — the
-  hardened checker certifies the complete distance oracle, ambiguity enumerator, Brianchon
-  triple-ambiguity locus, and exact distinction between size-five equivariant decoders and the
-  two support-determined size-ten chirality choices. Root-elaborate the drafted
-  `Q11DecodingSynthesis.lean`, then integrate the bounded fixed-code statement without asymptotic
-  complexity hype → `notes/2026-07-15-c185-clebsch-decoding.md`.
+- **C185 `[clebsch]` [REPORTED 2026-07-15]** — integrated the complete four-way syndrome oracle,
+  ambiguity enumerator, decoder reconstruction of the Brianchon matchings, and the exact
+  distinction between the size-five equivariant floor and the two support-determined size-ten
+  chirality choices; exhaustive checker, narrow Lean synthesis, and PDF gates pass →
+  `notes/2026-07-15-c185-clebsch-decoding.md`.
 - **C186 `[clebsch]` [IN PROGRESS 2026-07-15 — FINITE BRIDGE DRAFTED; CONCEPTUAL PROOF OPEN]** —
   root-elaborate the drafted `Q11A5PointOrbits.lean` finite certificate, but use it only as a bridge:
   still derive the unique off-arc 12-orbit from the `A5` representation/order-five fixed points and
