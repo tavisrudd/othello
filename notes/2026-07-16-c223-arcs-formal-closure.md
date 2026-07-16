@@ -55,4 +55,6 @@ adds the end-to-end theorem `arbitrary_eight_arc_projectiveQuadraticAvoidance`.
   `propext`, `Classical.choice`, and `Quot.sound`.
 - Queue run `20260716-195041-728e8203` built `RelativeConicArcs.Results` and passed its aggregate
   trace gate (1:28 wall, 7,205,476 kB peak).
+- After the reviewer-facing hardening, queue run `20260716-220724-6a0bb167` rebuilt
+  `RelativeConicArcs.Results` and passed the aggregate trace gate (1:26.88 wall, 9,007,208 kB peak).
 - `make arcs` succeeds; there are no undefined references/citations or overfull boxes.
