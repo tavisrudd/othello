@@ -114,3 +114,18 @@ Literature positioning remains cautious: Dye gives the special Clebsch-family co
 configuration-graph predecessor; BSW supplies nearby finite-geometric graph vocabulary but not the
 same arc-reconfiguration graph. The search supports qualified “to our knowledge” wording, not a
 historical-first claim.
+
+## 2026-07-15 — C151 pointwise residual transport
+
+The valid-row obstruction was removed without reducing the stored `Finset` equality.  The checked
+bridge presents each normalized row by its eight stable points, verifies a source-to-canonical
+point permutation, and uses an explicit right inverse to prove the image equality symbolically.
+The handwritten proof and its generic extraction landed in `d1438ff` and `197ab55`.
+
+An independent downstream generator then reconstructed all `7,044` valid-row permutations from the
+canonical CSV without changing the frozen payload schema or its `1,194` generated leaves.  It found
+only `16` chosen point-permutation patterns and reproduced the handwritten prototype exactly.  The
+generated one-row memory gate landed in `821087c` and passed at essentially the generic bridge's
+baseline memory.  The `16`-pattern observation is retained as an engineering compression fact;
+because it depends on the deterministic choice of transporter, it is not promoted as a geometric
+discovery without an invariant explanation.

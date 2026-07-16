@@ -3,8 +3,9 @@
 **Lane**: `alt-orbit-repair` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-14
-**Status:** OPEN — C142, C143, C148–C150 reported; C151's universal lower bound and five-row
-attainment certificate are checked, while residual equality-orbit completeness remains active
+**Status:** OPEN — C142, C143, C148–C150 reported; C151's universal lower bound, five-row
+attainment, and pointwise residual-transport bridge are checked, while the bulk semantic cover and
+equality-orbit completeness remain active
 **Tasks:** C142–C143, C148–C152
 
 > **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's current-state map. Never
@@ -93,10 +94,10 @@ plans here.
 
 ## C151 — next actions
 
-1. Finish the residual-cover bridge from generated row data to semantic normalized configurations.
-2. Prove the valid-row transport without asking `decide` to reduce opaque `Finset` permutation
-   equality: use pointwise containment plus the known eight-point cardinalities, or an explicit
-   eight-point permutation certificate.
+1. Generate and check bounded semantic leaves for every residual-cover row, using at most eight
+   valid eight-point permutation certificates per module.
+2. Dispatch each existing payload leaf through its stored bad witness or checked valid transport;
+   do not ask `decide` to reduce an opaque `Finset` equality.
 3. Connect each semantic exceptional-profile arc to a certified residual class and transport the
    checked `≥32` theorem along the projective equivalence.
 4. Connect the five equality representatives and their orbit sizes to the full set of 1,600
