@@ -43,8 +43,16 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 
 **3 · Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9** —
 `arcs_complete_outside_conic`
-- *What:* standalone; **owns the q=11 deep-holes=conic identification**.
-- *Gate:* owes a new library — **in progress 2026-07-12 night**; explicit-constant restatement.
+- *What:* the prescribed-hole defect identity and its equality/stability consequences, the explicit
+  bound `ρ_𝒞(q)≥√(2q)+3/2−8/√(2q)`, projective averaging, and the exact value
+  `ρ_𝒞(16)=9`; the q=11 coding/deep-hole and extension material is a secondary application. It
+  **owns the q=11 deep-holes=conic identification**.
+- *Gate:* the 18-page manuscript, PDF, independent checkers, strict-trust Lean package, adversarial
+  review, style-guide pass, and repeated cold-prose reviews are complete. The final cold reader
+  recommended publication after minor revision; its frame-coordinate and hierarchy requests have
+  landed. Its remaining paper-specific scholarly-artifact gate is a stable, citable archive
+  identifier for the source supplement. The shared release policy below additionally requires the
+  verbatim Lean adequacy appendix and explicit AI/provenance disclosure.
 
 **4 · The Clebsch hexagon code: rigidity from a conic deep-hole locus** —
 `clebsch-hexagon-code`
@@ -77,13 +85,14 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *What:* N2 demoted to remarks.
 - *Gate:* no manuscript; hardest formalization; collaborator route if it stalls.
 
-**Publication seams between papers** (the only two; everything else is independent):
+**Publication-ownership seams between papers** (the only two; everything else is independent):
 
 - **3 → 4 fixes publication order, not proof dependence.** `arcs` publishes the shared
   deep-holes=conic identification first; `clebsch` reproves it and uses it only as setup. See
   *Clebsch after Arcs*.
-- **1 ↔ 3 is a seam, not an ordering constraint.** Both cite backwards; neither waits on the other.
-  See *Arcs vs Nofil*.
+- **1 ↔ 3 is an ownership seam, not an ordering or cross-citation constraint.** `nofil` owns the
+  game reading and may cite the public Lean artifact; `arcs` owns the extension reading and no
+  longer contains the game gloss. See *Arcs vs Nofil*.
 
 ### Non-paper deliverables (deliberately outside the paper numbering)
 
@@ -116,13 +125,15 @@ so they are named, not numbered.
   contributions, until the paywalled Metsch / Drake–Sané read clears.
 - **D4 — HOLD.** The conic-localization reduction lands on the open (ON) kernel — a scaffold with no
   result on it. Keep as the flagship's open-frontier section; revisit only when a kernel result exists.
-- **D5 — arcs standalone, through the gate.** Fable's catch: arcs is the one finished manuscript with
-  **zero Lean** — "extract-first" and "formalize-everything" conflicted. Resolution: **hold the gate**
-  (the first paper out sets whether the gate is policy or aspiration). The arcs Lean library is **being
-  formalized 2026-07-12 (tonight)**. When formalizing, **restate the asymptotic lower bound as an
-  explicit inequality with concrete constants for all q ≥ q₀, not O-notation** — easier to formalize and
-  a stronger published claim. Keep the Lunelli–Sce coordination with Baer (arcs owns the additive-3/2
-  relative refinement; Baer owns the orbit criterion).
+- **D5 — arcs standalone, through the gate.** Fable's original catch was a finished manuscript with
+  no Lean, so the release gate was held. That ruling has now been satisfied: the strict-trust
+  `RelativeConicArcs` theorem/certificate package is complete, the requested concrete inequality
+  `ρ_𝒞(q)≥√(2q)+3/2−8/√(2q)` is in the paper and Lean, and the q=16 lower bound is backed by a
+  kernel-checked exhaustive covering certificate. Internal adversarial, style-guide, and repeated
+  cold-prose reviews are also closed. No mathematical gate remains. The operational release work is
+  to archive the source supplement under a stable citable identifier and apply the shared
+  adequacy-appendix and AI/provenance-disclosure policies below. Keep the Lunelli–Sce coordination
+  with Baer (arcs owns the additive-3/2 relative refinement; Baer owns the orbit criterion).
 - **D6 — count.** Six papers (+1 conditional) + two OEIS, as above (five (+1) at the 2026-07-12
   review; Clebsch added 2026-07-13). Dihedral bundles D₂ₘ rather than
   spawning a sequel (anti-salami; the mandatory Φ_T/½-density formalization window is free calendar time
@@ -153,7 +164,8 @@ is therefore setup in Clebsch, not its novelty carrier.
    syndrome-conic equality in place. The companion is cited for provenance and its independent
    certificate, not used as a premise.
 
-**Not folded**, deliberately: the spines differ (`arcs` = defect identity + F₁₆ classification;
+**Not folded**, deliberately: the spines differ (`arcs` = defect identity + exact q=16 quadratic
+obstruction and relative-conic value;
 `clebsch` = rigidity + gap + chirality + why-11). Folding would bury a five-way rigidity theorem
 inside a paper about something else and make `arcs` incoherent.
 
@@ -178,8 +190,9 @@ section is written, which is exactly what `nofil` owes to ship.
 - **`arcs` owns the arc/extension reading** — `thm-extension-conflict-hypergraph`,
   `comp-q11-extension-complex`, `comp-q11-chord-decomposition`. Extension complexes, conflict
   hypergraphs, chord decompositions: no game content in any of them.
-- **Each cites the other for the gloss**, neither co-claims. `arcs` already presents the game half as
-  a §7 *remark*, so the demotion costs it nothing.
+- **No reciprocal paper citation is required for this split.** The final `arcs` manuscript contains
+  no game gloss. `nofil` may cite the public Lean artifact for its finite game checks; `arcs` keeps
+  only the extension interpretation and does not depend on `nofil`.
 
 **The apparent sequence inversion dissolves; the order does not change.** It was an artifact of the
 mis-peg, not a real dependency:
@@ -192,9 +205,8 @@ mis-peg, not a real dependency:
    `comp-q11-icosahedral`'s input, the graph identification `adj_iff_icosahedron`, is a `decide`-grade
    finite check that `nofil` cites from the **public Lean artifact**, which ships as the first
    deliverable — before every paper.
-3. **So dependencies point backwards in ship order in both directions**: `nofil` (1) cites SVM and the
-   public artifact; `arcs` (3) cites `nofil` (1), by then published. No paper cites an unpublished
-   companion — the fragility that forced move 3 in *Clebsch after Arcs*.
+3. **There is no paper-to-paper dependency**: `nofil` (1) cites SVM and the public artifact, while
+   `arcs` (3) makes no game claim and need not cite `nofil`. No paper cites an unpublished companion.
 
 **Residual, not a sequencing problem:** the game theorems are now misfiled — `nofil` owns results
 living in a directory named for `arcs`. Worth a Lean-side rename or move; it changes no proof and
@@ -220,8 +232,8 @@ each *elementary*. Each abstract opens with the nontrivial lead:
 ((q+1−2s)/4)·K₄ law + D₂ₘ/polyhedral).
 - *Watch:* elementary without D₂ₘ; the explicit families are the content.
 
-**3 · Arcs** — *lead:* the exact prescribed-hole defect identity + additive-3/2 refinement +
-verified values.
+**3 · Arcs** — *lead:* the exact prescribed-hole defect identity, explicit additive-3/2 refinement,
+and the exact quadratic obstruction giving `ρ_𝒞(16)=9`.
 - *Watch:* fine.
 
 **4 · Clebsch** — this table predates the paper; its lead and claim boundary are ruled in
@@ -281,14 +293,19 @@ papers rests on the standard-recurrence argument + literature values + different
 `CombinatorialGames` bumps to ≥ `v4.32` (`lean/TRUST.md` Phase 4). Status against the gate:
 - *Closest:* the `nofil` mirror⇒P outcomes (P-theorems Lean; boundary/sharpness negatives + capacity-2
   sharpness still paper-only) and the completion δ(C)=τ / coding base.
-- *Outstanding (blocks release):* arcs (**being formalized tonight**), continuation, completion
-  beyond δ=τ, the `nofil` boundary negatives + capacity-2 sharpness, the dihedral paper-level theorems
+- *Complete at the formalization gate:* arcs, including the defect/equality/stability chain,
+  explicit asymptotic inequality, projective transport, finite witnesses, and q=16 exhaustive
+  covering/leaf-obstruction certificate.
+- *Outstanding (blocks release):* continuation, completion beyond δ=τ, the `nofil` boundary
+  negatives + capacity-2 sharpness, the dihedral paper-level theorems
   (Φ_T, ½-density) plus its one isolated `native_decide` (`KleinFourBridge.explicit_pairProducts`, no
   dependents — clear to `decide`/manual or delete).
-- *Computational (enumerations, not lemmas):* queens/OEIS, S₄/A₅ nimbers, ρ_𝒞 small values follow the
-  `getK` pattern — Lean-proved recurrence + a reproducible differential-tested solver + a trust-chain
-  note. **Not** `native_decide`; a small witness enters the trust base only via kernel-reducible
-  `decide`.
+- *Computational:* queens/OEIS and S₄/A₅ nimbers follow the `getK` pattern — Lean-proved recurrence
+  plus a reproducible differential-tested solver and trust-chain note. The ρ_𝒞 values use a
+  different trust path: kernel-checked coordinate witnesses, and at q=16 locally checked transition
+  and leaf-obstruction certificates that form an exhaustive covering list. Independent generators
+  and class counts are provenance only. **Not** `native_decide`; finite propositions enter the trust
+  base only through kernel reduction.
 
 **Adequacy appendix (policy).** Every paper prints (1–2 pp.) the Lean statements of its headline
 theorems and the handful of definitions they bottom out in, verbatim — turning statement-adequacy (the
