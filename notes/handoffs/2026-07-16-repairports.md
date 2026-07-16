@@ -3,8 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** QUEUED. No theorem development or implementation has started. C215 is gated on the
-C214 paper-upgrade disposition in `repaircodes`.
+**Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete, so C215 is
+unblocked. No repairports theorem development or implementation has started.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 
@@ -19,7 +19,7 @@ twisted-cubic--axis paper.
 
 | Task | Status | Deliverable | Promotion gate |
 |---|---|---|---|
-| C215 | gated on C214 | weighted functional-dual theory | exact criterion plus a strict natural example |
+| C215 | active | weighted functional-dual theory | exact criterion plus a strict natural example |
 | C216 | queued after C215 definition layer | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | bounded scout after C215 definitions | circuit-coefficient gauge invariants | nontrivial holonomy/cross-ratio with a consequence |
 | C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
@@ -28,11 +28,9 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Wait for C214's disposition. If its exact weighted-functional theorem is banked rather than
-promoted into the current manuscript, C215 adopts it and begins with a precise dual-fiber
-decomposition and a targeted prior-art search. If C214 promotes the theorem, C215 starts from the
-remaining general algorithms, target-conditioned refinements, and strict applications not suitable
-for that paper.
+C215 starts from the general algorithms, target-conditioned refinements, and strict applications
+that were deliberately kept out of the C214 paper upgrade. First isolate the stable definition and
+algorithmic problem layer without editing the `RepairCodes` theorem chain.
 
 ## Scope and ownership
 

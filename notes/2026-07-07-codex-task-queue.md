@@ -84,7 +84,7 @@ unless they retain an explicit open tail.
 
 ### `repairports`
 
-- **C215 `[repairports]` [GATED ON C214]** — weighted functional duals and exact low-weight concatenation theory → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C215 `[repairports]` [ACTIVE]** — weighted functional duals and exact low-weight concatenation theory; begin with the stable definition and algorithmic problem layer beyond the promoted C214 results → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C216 `[repairports]` [QUEUED; after C215 definitions]** — prescribed repair-port realization in asymptotically good fixed-alphabet codes → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C217 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — gauge-invariant holonomy and cross-ratios of overlapping repair circuits → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C218 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — rational-normal-curve plus osculating-nucleus repair families → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
