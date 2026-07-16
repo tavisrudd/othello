@@ -1,7 +1,7 @@
 # Paper: Arcs complete outside a prescribed conic
 
-**Title:** *Arcs complete outside a prescribed conic — an exact defect identity and the case of
-GF(16).* Author: Tavis Rudd.
+**Title:** *Arcs complete outside a prescribed conic — an exact defect identity and
+ρ_C(16) = 9.* Author: Tavis Rudd.
 
 **Status:** the most finished unit in `papers/` — a self-contained manuscript with a compiled
 PDF, a proof/claim audit, an independent verifier (SHA-256 stamped), and a completed strict-trust
