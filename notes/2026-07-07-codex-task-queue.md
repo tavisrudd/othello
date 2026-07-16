@@ -75,6 +75,7 @@ unless they retain an explicit open tail.
 - **C201 `[relconic]` [REPORTED 2026-07-16]** — q=16 quadratic anatomy classified; the bounded q=64 Baer, torus, and split-Z3 mechanisms fail at coverage before nontrivial rank anatomy, so no infinite theorem is promoted → `notes/2026-07-16-c201-bounded-mechanism-closure.md`.
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C210 `[relconic]` [LONG-HORIZON; after C201]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction → `notes/2026-07-16-arcs-sqrtq-construction-program.md`.
+- **C223 `[relconic]` [IN PROGRESS]** — close the remaining manuscript-original Lean seams without new searches: q=5 coordinate transport, q=16 `2630+3` profile and exceptional arithmetic, global arbitrary-quadratic transport, and q=11 non-GRS closure → `notes/2026-07-16-c223-arcs-formal-closure.md`.
 
 ### `repaircodes`
 

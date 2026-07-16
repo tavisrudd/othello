@@ -27,15 +27,18 @@ independent proof-stage copyedit requested by the user.
 
 ## Recommended order
 
-1. **C188 — finish the result registry.**  The exact theorem, arbitrary-conic
+1. **C223 — close the remaining manuscript-original Lean seams.**  The user explicitly resumed
+   the formal-closure sweep while C188's registry build waits for the shared Lean owner.  See
+   [`2026-07-16-c223-arcs-formal-closure.md`](../2026-07-16-c223-arcs-formal-closure.md).
+2. **C188 — finish the result registry.**  The exact theorem, arbitrary-conic
    transport, axiom audit, manuscript synchronization, and PDF rebuild pass.
    A foreign Q25 build owns the shared Lean tree; once quiescent, build
    `RelativeConicArcs.ExampleChecks.Q5` and `RelativeConicArcs.Results`, commit
    the pending one-line registry import, and mark the task reported.  See
    [`2026-07-15-c188-rhoc5-frame.md`](../2026-07-15-c188-rhoc5-frame.md).
-2. **C144 — shared-library gate architecture.**  Run only in a quiescent build
+3. **C144 — shared-library gate architecture.**  Run only in a quiescent build
    window; it is infrastructure rather than paper mathematics.
-3. **C210 — square-root construction program.**  This is the high-ceiling,
+4. **C210 — square-root construction program.**  This is the high-ceiling,
    long-horizon route.  It should begin with construction/literature design,
    not another blind q=64 census.
 
