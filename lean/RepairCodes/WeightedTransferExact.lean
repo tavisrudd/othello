@@ -696,6 +696,89 @@ theorem hasSingletonFunctionalMultiblockAtLeast_of_term
     simpa [hlj, Ne.symm hlj, add_comm] using hp
   omega
 
+/-- When there are at least two blocks and the inner dual is nontrivial, the singleton closed-form
+term is exactly its multiblock stratum: attain a minimum inner-dual word in a second block. -/
+theorem hasSingletonFunctionalMultiblockAtLeast_iff_term
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (hcard : 2 ≤ Fintype.card ι)
+    (hdual : dualCode I ≠ ⊥) (d : ℕ) :
+    HasSingletonFunctionalMultiblockAtLeast I e O d ↔
+      HasSingletonFunctionalTermAtLeast I e O d := by
+  classical
+  constructor
+  · intro h beta hbeta hweight w hwreduced
+    let S : Finset ι := univ.filter fun j => beta j ≠ 0
+    have hScard : S.card = 1 := by simpa [S, functionalWeight] using hweight
+    obtain ⟨j, hS⟩ := Finset.card_eq_one.mp hScard
+    have hjS : j ∈ S := by rw [hS]; simp
+    have hjbeta : beta j ≠ 0 := (Finset.mem_filter.mp hjS).2
+    obtain ⟨l, hlj⟩ := Fintype.exists_ne_of_one_lt_card (by omega : 1 < Fintype.card ι) j
+    have hbetal : beta l = 0 := by
+      by_contra hbl
+      have hlS : l ∈ S := Finset.mem_filter.mpr ⟨Finset.mem_univ _, hbl⟩
+      rw [hS] at hlS
+      exact hlj (Finset.mem_singleton.mp hlS)
+    have hwl0 : w l = 0 := hwreduced.2 l hbetal
+    obtain ⟨z, hzdual, hz0, hznorm⟩ := exists_dualWord_hammingNorm_eq_dualDist I hdual
+    let w' : ι → (κ → 𝔽) := Function.update w l z
+    have hw'functional : ∀ a, blockFunctional I e (w' a) = beta a := by
+      intro a
+      by_cases hal : a = l
+      · subst a
+        change blockFunctional I e (w' l) = beta l
+        rw [show w' l = z by simp [w'], hbetal]
+        rw [blockFunctional_eq_zero_iff I e]
+        exact hzdual
+      · simpa [w', hal] using hwreduced.1 a
+    have hw'dual : (fun p => w' p.1 p.2) ∈ dualCode (concatenatedCode I e O) :=
+      flatten_mem_dualCode_concatenatedCode_of_functionalDual I e O w' (by
+        simpa only [hw'functional] using hbeta)
+    have hwj0 : w j ≠ 0 := by
+      intro hwj
+      apply hjbeta
+      rw [← hwreduced.1 j, hwj]
+      apply LinearMap.ext
+      intro v
+      simp [blockFunctional]
+    have hw'j0 : w' j ≠ 0 := by simpa [w', Ne.symm hlj] using hwj0
+    have hw'l0 : w' l ≠ 0 := by simpa [w'] using hz0
+    have hw'blocks : 2 ≤ (blockSupport w').card := by
+      have hjmem : j ∈ blockSupport w' := by simp [blockSupport, hw'j0]
+      have hlmem : l ∈ blockSupport w' := by simp [blockSupport, hw'l0]
+      by_contra hlt
+      have hle : (blockSupport w').card ≤ 1 := by omega
+      exact hlj (Finset.card_le_one.mp hle l hlmem j hjmem)
+    have hw'weight : functionalWeight (fun a => blockFunctional I e (w' a)) = 1 := by
+      simpa only [hw'functional] using hweight
+    have hlower := h w' hw'dual hw'blocks hw'weight
+    have hsumErase :
+        (∑ a ∈ univ.erase l, hammingNorm (w' a)) =
+          (∑ a ∈ univ.erase l, hammingNorm (w a)) := by
+      apply Finset.sum_congr rfl
+      intro a ha
+      have hal : a ≠ l := (Finset.mem_erase.mp ha).1
+      simp [w', hal]
+    have hsum' : (∑ a, hammingNorm (w' a)) =
+        hammingNorm z + (∑ a ∈ univ.erase l, hammingNorm (w a)) := by
+      calc
+        (∑ a, hammingNorm (w' a)) =
+            (∑ a ∈ univ.erase l, hammingNorm (w' a)) + hammingNorm (w' l) :=
+          (Finset.sum_erase_add _ _ (Finset.mem_univ l)).symm
+        _ = (∑ a ∈ univ.erase l, hammingNorm (w a)) + hammingNorm z := by
+          rw [hsumErase]
+          simp [w']
+        _ = hammingNorm z + (∑ a ∈ univ.erase l, hammingNorm (w a)) := by omega
+    have hsum : (∑ a, hammingNorm (w a)) =
+        (∑ a ∈ univ.erase l, hammingNorm (w a)) := by
+      calc
+        (∑ a, hammingNorm (w a)) =
+            (∑ a ∈ univ.erase l, hammingNorm (w a)) + hammingNorm (w l) :=
+          (Finset.sum_erase_add _ _ (Finset.mem_univ l)).symm
+        _ = (∑ a ∈ univ.erase l, hammingNorm (w a)) := by simp [hwl0]
+    rw [hsum', hznorm, ← hsum] at hlower
+    exact hlower
+  · exact hasSingletonFunctionalMultiblockAtLeast_of_term I e O d
+
 /-- A lower bound on reduced multisupport representatives bounds the full multisupport stratum;
 extra zero-functional blocks can only increase weight. -/
 theorem hasMultisupportFunctionalMultiblockAtLeast_of_term
@@ -730,6 +813,49 @@ theorem hasMultisupportFunctionalMultiblockAtLeast_of_term
   apply Finset.sum_le_sum
   intro j _
   by_cases hbj : beta j = 0 <;> simp [w₀, hbj]
+
+/-- The reduced-representative multisupport term is not merely sufficient: it is exactly the
+multisupport stratum, because a realization of two nonzero functionals already meets two blocks. -/
+theorem hasMultisupportFunctionalMultiblockAtLeast_iff_term
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (d : ℕ) :
+    HasMultisupportFunctionalMultiblockAtLeast I e O d ↔
+      HasMultisupportFunctionalTermAtLeast I e O d := by
+  classical
+  constructor
+  · intro h beta hbeta hweight w hwreduced
+    have hwdual := flatten_mem_dualCode_concatenatedCode_of_functionalDual I e O w (by
+      simpa only [hwreduced.1] using hbeta)
+    apply h w hwdual
+    · apply hweight.trans
+      rw [functionalWeight]
+      apply Finset.card_le_card
+      intro j hj
+      have hbj : beta j ≠ 0 := (Finset.mem_filter.mp hj).2
+      apply Finset.mem_filter.mpr
+      refine ⟨Finset.mem_univ _, ?_⟩
+      intro hwj
+      apply hbj
+      rw [← hwreduced.1 j, hwj]
+      apply LinearMap.ext
+      intro v
+      simp [blockFunctional]
+    · simpa only [hwreduced.1] using hweight
+  · exact hasMultisupportFunctionalMultiblockAtLeast_of_term I e O d
+
+/-- Full three-term profile form of the manuscript's exact multiblock threshold formula. -/
+theorem hasMultiblockDualDistanceAtLeast_iff_three_exact_terms
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (hcard : 2 ≤ Fintype.card ι)
+    (hdual : dualCode I ≠ ⊥) (d : ℕ) :
+    HasMultiblockDualDistanceAtLeast I e O d ↔
+      d ≤ 2 * dualDist I ∧
+      HasSingletonFunctionalTermAtLeast I e O d ∧
+      HasMultisupportFunctionalTermAtLeast I e O d := by
+  rw [hasMultiblockDualDistanceAtLeast_iff_three_strata,
+    hasZeroFunctionalMultiblockAtLeast_iff_le_two_dualDist I e O hcard hdual,
+    hasSingletonFunctionalMultiblockAtLeast_iff_term I e O hcard hdual,
+    hasMultisupportFunctionalMultiblockAtLeast_iff_term]
 
 /-- The closed zero/singleton/multisupport terms jointly imply the exact multiblock bound. -/
 theorem hasMultiblockDualDistanceAtLeast_of_three_terms
@@ -806,6 +932,9 @@ end RepairCodes
 #print axioms RepairCodes.repairHypergraph_concatenatedCode_eq_embed_nonembedded
 #print axioms RepairCodes.hasNonembeddedDualDistanceAtLeast_iff_multiblock_of_isCoordinateSurjective
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_iff_three_strata
+#print axioms RepairCodes.hasSingletonFunctionalMultiblockAtLeast_iff_term
+#print axioms RepairCodes.hasMultisupportFunctionalMultiblockAtLeast_iff_term
+#print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_iff_three_exact_terms
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_of_three_terms
 #print axioms RepairCodes.hasMultiblockDualDistanceAtLeast_of_isCoordinateSurjective
 #print axioms RepairCodes.exists_disjoint_translate_of_sum_inter_lt
