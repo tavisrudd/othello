@@ -48,19 +48,20 @@ broader `4≤k≤7` conic-filling classification remains owned by
 duplicated here.
 
 **Exact q=16 classification.** Every projective eight-arc is normalized to the standard
-four-frame and extended through checked class lists of sizes 4, 61, 454, and 2633. The final
-count independently reproduces Al-Seraji--Al-Ogali (2018), so that count is prior art. Every
+four-frame and extended through checked exhaustive covering lists of lengths 4, 61, 454, and
+2633. The final list length matches the projective-class count of Al-Seraji--Al-Ogali (2018), so
+that count is prior art. Every
 transition carries an explicit invertible 3-by-3 matrix and pointwise scalar witnesses. For 2630
-eight-arc classes, six ordinarily uncovered points impose six independent quadratic conditions,
-so no nonzero conic equation can contain the uncovered locus. In the remaining three rank-five
-classes, the forced quadratic equation also vanishes at a selected arc point, contradicting
+listed leaves, six ordinarily uncovered points impose six independent quadratic conditions,
+so no nonzero conic equation can contain the uncovered locus. In the remaining three leaves,
+a checked span relation forces the quadratic equation to vanish at a selected arc point, contradicting
 disjointness. Lean checks all local arithmetic and proves the normalization, classification, and
 conic-transport semantics. In particular, each `StepBook.coverage` theorem proves that every legal
 extension of its parent occurs among certified entries, `StepBooksValid` proves that the books
 cover the current parent list exactly, `classifiedAt_level8_of_frame` composes the four layers,
-and frame reduction transports an arbitrary eight-arc to a listed leaf. Thus closure and
-exhaustiveness of the lists—not only the listed members—are kernel-checked; the C++ enumerator is
-reproducible provenance, not a trusted oracle.
+and frame reduction transports an arbitrary eight-arc to a listed leaf. Thus exhaustiveness as a
+covering list is kernel-checked; pairwise inequivalence and exact quotient-class counts are
+external provenance, and the C++ enumerator is not a trusted oracle.
 From this directory, reproduce the report and emitted Lean data with
 `g++ -O3 -std=c++20 search_rhoc16.cpp -o /var/tmp/search_rhoc16` followed by
 `/var/tmp/search_rhoc16 --emit-lean`; `/tmp` is tmpfs on the development host. The checked-in

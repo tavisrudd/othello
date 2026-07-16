@@ -47,8 +47,8 @@ $A\cup\cC$, and write $\rhoC(q)$ for their minimum size.  Starting from the
 classical first two equations for the secant-index distribution of an arc,
 we prove an exact defect identity for an arbitrary prescribed set of points
 that may remain uncovered.  The identity includes equality and stability
-criteria.
-Its conic specialization gives
+criteria.  Write $\IC(A)$ for the total incidence of the secants of $A$
+with $\cC$.  The conic specialization gives
 \[
  q^2-k\le
  \binom{k}{2}(q-1)-\frac{6}{\lfloor k/2\rfloor}\binom{k}{4}
@@ -67,12 +67,10 @@ and the lower bound give
  \rhoC(8)=\rhoC(9)=\rhoC(11)=6,
  \qquad \rhoC(16)=9.
 \]
-The last equality follows from a certified classification of all $2633$
-projective eight-arc classes over $\F_{16}$: no nonzero quadratic contains
-an eight-arc's ordinary-uncovered locus while avoiding the arc.  The
-arc--MDS dictionary also turns the defect into a syndrome-leader collision
-identity; the exceptional $q=11$ witness yields a non-GRS MDS code with
-conic deep-hole locus.
+The last equality follows from a computer-assisted, certificate-checked
+covering list of $2633$ eight-arc representatives over $\F_{16}$: no
+nonzero quadratic contains an eight-arc's ordinary-uncovered locus while
+avoiding the arc.
 \end{abstract}
 
 \section{Introduction}
@@ -153,24 +151,23 @@ Hirschfeld~\cite[Chapter~9]{Hirschfeld1998} and Ball~\cite{Ball1997}.  The
 use of secant counts to bound the smallest complete $(k,n)$-arcs is also
 classical; for a recent explicit lower bound see
 Alabdullah--Hirschfeld~\cite{AlabdullahHirschfeld2019}.  The
-main observation of this note is that, after splitting those equations over
+main observation is that, after splitting those equations over
 a prescribed exceptional set and its complement, the inequalities normally
 used to control overlap have an exact remainder.  This produces:
 
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
-\item an exact prescribed-hole defect identity and equality criterion;
-\item a quantitative stability bound for near equality;
-\item a strengthened lower bound with additive asymptotic term $3/2$;
-\item a projective-averaging upper-bound transfer from ordinary complete
-      arcs.
+\item an exact prescribed-hole defect identity, with equality and stability;
+\item conic lower bounds, including the additive asymptotic term $3/2$, and
+      a projective-averaging upper-bound transfer; and
+\item a certificate-checked quadratic obstruction giving $\rhoC(16)=9$.
 \end{enumerate}
 
-We next specialize the identity to a conic and interpret it for
-codimension-three MDS codes.  Projective averaging and characteristic-two
-nucleus constraints provide complementary bounds.  An evaluation
-obstruction and a certified classification then give the exact small-field
-results, culminating in $\rhoC(16)=9$; the $q=11$ witness supplies a
-secondary coding application.
+Sections~\ref{sec:classical}--\ref{sec:conic} establish the defect identity
+and conic lower bounds.  Sections~\ref{sec:transfer}, \ref{sec:nucleus},
+and~\ref{sec:examples} provide the upper transfer, structural constraints,
+and the exact value at $q=16$.  Section~\ref{sec:coding} and the final
+$q=11$ subsection are secondary coding applications and may be skipped
+without affecting the geometric argument.
 
 The classical inputs are the secant-index equations, the Lunelli--Sce
 $\sqrt{2q}$ scale, the arc--MDS correspondence, and the known $q=11$
@@ -811,46 +808,8 @@ their span.  In particular, for the full degree-$d$ system it is enough to
 exhibit $\binom{d+2}{2}$ uncovered points whose Veronese evaluation matrix is
 invertible.  This formulation is not specific to conics.
 
-The following sharp form is useful when a zero locus must avoid several
-selected points simultaneously.  The vector-space covering threshold is
-classical; see, for example, Khare~\cite{Khare2009}.
-
-\begin{proposition}[Finite-field evaluation dichotomy]
-\label{prop:evaluation-dichotomy}
-Let $W$ be a finite-dimensional vector space over $\F_q$, let
-$\nu:X\to W$ be any feature map, and let $U,A\subseteq X$ be finite with
-$|A|\le q$.  There is a linear form $f\in W^*$ such that
-\[
- f(\nu(u))=0\quad(u\in U),\qquad
- f\ne0,\qquad f(\nu(a))\ne0\quad(a\in A)
-\]
-if and only if
-\[
- \langle\nu(U)\rangle\ne W
- \quad\hbox{and}\quad
- \nu(a)\notin\langle\nu(U)\rangle\quad(a\in A).
-\]
-The uniform threshold is sharp: $q+1$ distinct hyperplanes through a common
-codimension-two subspace can cover $W$.
-\end{proposition}
-
-\begin{proof}
-Put $S=\langle\nu(U)\rangle$.  Necessity follows by applying $f$ to the
-stated span relations.  Conversely, $S\ne W$ makes the annihilator
-$S^\perp\subseteq W^*$ nonzero.  For each $a\in A$, the condition
-$\nu(a)\notin S$ says that evaluation at $\nu(a)$ cuts out a proper
-hyperplane of $S^\perp$.  At most $q$ proper hyperplanes cannot cover a
-nonzero vector space over $\F_q$: their union has size at most
-$1+q(|S^\perp|/q-1)<|S^\perp|$.  Any form outside their union has the
-required properties.  For sharpness, quotient by a common codimension-two
-subspace and use all $q+1$ lines in $\F_q^2$.
-\end{proof}
-
-Taking $\nu$ to be the degree-$d$ Veronese map gives the same exact
-dichotomy for homogeneous degree-$d$ forms.  Thus
-Lemma~\ref{lem:evaluation-obstruction} is the one-selected-point exclusion
-mechanism, while Proposition~\ref{prop:evaluation-dichotomy} determines
-exactly when a single form can avoid as many as $q$ selected points.
+The more general problem of avoiding several selected points at once has a
+sharp finite-field answer, recorded in Appendix~\ref{app:evaluation}.
 
 \subsection{Small values and the classification over
 \texorpdfstring{$\F_{16}$}{F16}}
@@ -885,6 +844,30 @@ classes.  The theorem below adds the datum needed here: the ordinary
 uncovered locus either imposes six independent quadratic conditions or
 forces every containing quadratic to meet the arc.
 
+We first state the completeness contract used by the finite certificate.
+Index the $273$ projective points by their unique normalized representatives
+$[0:0:1]$, $[0:1:z]$, and $[1:y:z]$, and let $F$ be the standard
+four-frame.
+
+\begin{lemma}[Augmentation certificate contract]
+\label{lem:q16-contract}
+For $4\le i\le8$, let $\mathcal L_i$ be a finite list of $i$-arcs with
+$\mathcal L_4=\{F\}$.  Suppose that for every $P\in\mathcal L_i$, every
+$x\notin P$ for which $P\cup\{x\}$ is an arc, and every $4\le i<8$, the
+certificate supplies a child $P'\in\mathcal L_{i+1}$ and an invertible
+linear map whose induced projectivity carries $P\cup\{x\}$ onto $P'$.
+Then every eight-arc in $\PG(2,16)$ is projectively equivalent to a member
+of $\mathcal L_8$.
+\end{lemma}
+
+\begin{proof}
+Choose four points of the eight-arc.  Every four-arc is a projective frame,
+so a projectivity carries those points to $F$.  Insert the remaining four
+points in any order.  At each step the stated certificate transports the
+legal insertion to the next list.  Induction through the four layers gives
+a member of $\mathcal L_8$ projectively equivalent to the original arc.
+\end{proof}
+
 \begin{theorem}[Quadratic avoidance over $\F_{16}$]
 \label{thm:q16-quadratic}
 Let $A$ be any eight-arc in $\PG(2,16)$, and let $U(A)$ be the points outside
@@ -899,36 +882,34 @@ The assertion includes singular quadratic forms.
 \end{theorem}
 
 \begin{proof}
-The proof separates generation, certified exhaustiveness, the leaf
-obstruction, and projective transport.
-
-\emph{Generation.}
-Canonical augmentation from a normalized four-frame produces lists of
-$4$, $61$, $454$, and $2633$ classes at sizes five through eight.
-
-\emph{Certified exhaustiveness.}
-Coverage certificates check that every legal extension of each listed arc
-occurs in the next list.  Explicit projective equivalences and frame
-reduction then transport an arbitrary eight-arc to a listed leaf.  The
-exhaustiveness claim therefore does not trust the generator's canonical
-labels.  As an external consistency check, the final count agrees with the
-classification of Al-Seraji--Al-Ogali
+\emph{Certified covering lists.}
+Starting from $F$, the lists contain $4$, $61$, $454$, and $2633$
+representatives at sizes five through eight.  For every listed parent, the
+checker tests all $273$ indexed points.  Each legal move carries a child
+index, an invertible $3\times3$ matrix, and pointwise nonzero scalar
+witnesses proving that the induced projectivity maps the enlarged parent
+onto that child.  A separate check matches the certificate books with all
+parents in the current list.  Lemma~\ref{lem:q16-contract} therefore proves
+exhaustiveness without trusting the generator's canonical labels or
+deduplication.  As an external consistency check, the final list length
+agrees with the projective-class count of Al-Seraji--Al-Ogali
 \cite[Theorem~3.8.1]{AlSerajiAlOgali2018}.
 
 \emph{Leaf obstruction.}
-For $2630$ of the classified leaves, six points of $U(A)$ give an
-invertible $6\times6$ evaluation matrix, giving the first alternative of
-Lemma~\ref{lem:evaluation-obstruction}.  In each of
-the remaining three leaves the evaluation rows have rank five, but an
-explicit linear combination places the evaluation functional of a point of
-$A$ in their span, giving the second alternative.
+For $2630$ listed leaves, the certificate gives six ordinarily uncovered
+points and an explicit inverse to their $6\times6$ quadratic evaluation
+matrix.  This is the first alternative of
+Lemma~\ref{lem:evaluation-obstruction}.  For each remaining leaf, a checked
+linear combination expresses evaluation at a selected arc point in the
+span of evaluations at ordinarily uncovered points, giving the second
+alternative.  Thus every listed leaf has the asserted quadratic-avoidance
+property.
 
 \emph{Projective transport.}
-If $gA$ is a normalized
-representative, replace $Q$ by $Q\circ g^{-1}$.  This is nonzero because $g$
-is invertible, its zero set is $gZ(Q)$, and projectivities carry secants to
-secants, so $U(gA)=gU(A)$.  Thus a quadratic as in the statement would
-contradict the obstruction for the normalized leaf.
+If $gA$ is a listed representative, replace $Q$ by $Q\circ g^{-1}$.  This
+form is nonzero, its zero set is $gZ(Q)$, and projectivities carry secants to
+secants, so $U(gA)=gU(A)$.  A quadratic as in the statement would therefore
+contradict the checked obstruction for the listed leaf.
 Appendix~\ref{app:verification} records the independent regeneration and
 formal trust boundary.
 \end{proof}
@@ -949,30 +930,18 @@ set.  This contradicts Theorem~\ref{thm:q16-quadratic}.  The nine-point
 witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \end{proof}
 
-\begin{remark}[Anatomy of the three exceptional leaves]
-Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
-coefficient order $(X^2,Y^2,Z^2,XY,XZ,YZ)$, the one-dimensional kernels of
-the three exceptional evaluation matrices are generated by
-\[
- (1,1,1,1,1,0),\qquad (0,0,0,5,4,1),\qquad (2,1,1,5,5,1).
-\]
-The first and third forms split over $\F_{16}$ as
-\[
- (X+6Y+6Z)(X+7Y+7Z)
- \quad\hbox{and}\quad
- 2(X+4Y+15Z)(X+15Y+4Z),
-\]
-respectively, and each union of lines contains two selected points.  The
-middle form is nonsingular and contains seven of the eight selected points.
-Thus the exceptional leaves are not merely unexplained rank defects: two are
-reducible quadratic configurations, while the third is an arc differing by
-one point from a seven-point subset of a conic.  These descriptions follow
-by direct field arithmetic and are not used to establish classification
-completeness.
+\begin{remark}[Scope of the classification certificate]
+The proof requires an exhaustive covering list, not pairwise inequivalence
+of its entries.  Pairwise deduplication and the exact quotient-class count
+belong to the cited ordinary classification; their agreement with the
+$2633$-entry covering list is a consistency check, not part of the trusted
+exhaustiveness argument.
 \end{remark}
 
-\subsection{The coding application over \texorpdfstring{$\F_{11}$}{F11}}
+\subsection{A secondary coding application over
+\texorpdfstring{$\F_{11}$}{F11}}
 
+This subsection is independent of the proof of $\rhoC(16)=9$.
 The six-point witness over $\F_{11}$ is the classical Clebsch hexagon with
 icosahedral $A_5$ symmetry; see Edge, Dye, and Storme--Van Maldeghem for the
 configuration and its orbit geometry
@@ -1064,6 +1033,7 @@ columns form a basis.  Hence the covering radius is three, and these twelve
 directions are exactly the projective deep-hole locus.
 \end{proof}
 
+\paragraph{Optional extension structure.}
 Relative completeness confines every further projective MDS extension to
 the twelve conic points.  On those points, two extensions conflict exactly
 when their chord contains a witness point; the residual extension problem
@@ -1129,10 +1099,9 @@ asymptotic constant obtained here.
 
 \begin{problem}
 Develop the higher-dimensional analogue for caps complete outside a
-prescribed quadric in $\PG(n,q)$.  Determine in parallel whether the defect
-remainder yields new bounds for arc-constrained saturating sets or covering
-codes; the evaluation lemma already applies to arbitrary feature maps and
-Veronese degrees.
+prescribed quadric in $\PG(n,q)$.  The evaluation lemma already applies to
+arbitrary feature maps and Veronese degrees; the missing ingredient is an
+appropriate exact secant-moment remainder for caps.
 \end{problem}
 
 The central distinction is between universal overlap, already measured by
@@ -1142,13 +1111,14 @@ probably require an explicit construction, an algebraic obstruction, or a
 classification of near-extremal secant arrangements rather than another
 application of the same incidence budget.
 
+\clearpage
 \appendix
 \section{Computational and formal verification}
 \label{app:verification}
 
 The body separates mathematical reductions from finite exclusion.  The
 corresponding evidence and trust boundaries are summarized below.  The
-supplementary manifest at \path{lean/RelativeConicArcs/TRUST.md} records
+source supplement's \texttt{TRUST.md} manifest records
 exact commands, toolchain versions, SHA-256 digests, theorem names, and
 frozen outputs.
 
@@ -1174,10 +1144,11 @@ Kernel checking with axioms
 \texttt{sorry}, custom axiom, or \texttt{native\_decide} \\
 \addlinespace
 $q=16$ classification &
-C++ generator emits local transition, coverage, quadratic-evaluation, and
-transport certificates for the $4/61/454/2633$ class layers &
-Lean checks the certificates and their exhaustiveness; generator assertions
-and canonical labels are not trusted \\
+C++ generator emits local transition and quadratic-evaluation data for
+covering lists of lengths $4/61/454/2633$ &
+Lean checks transition coverage, leaf rejection, frame normalization, and
+projective transport; generator assertions, canonical labels, and
+deduplication are not trusted \\
 \addlinespace
 $q=11$ code and extension data &
 Lean checks the stated code, syndrome, and graph claims; independently
@@ -1192,12 +1163,73 @@ independent reproducibility checks \\
 The witness entry point is
 \texttt{verify\_relative\_conic\_arcs.py}.  The classification entry point
 is \texttt{search\_rhoc16.cpp}; its checked-in report and emitted Lean data
-fix the finite search input.  The rules-only Lean checker verifies
+fix the finite search input.  For the upper-bound witnesses, a separate
+rules-only Lean checker verifies
 disjointness, the arc condition, and coverage of the canonical projective
 representatives $[1:y:z]$, $[0:1:z]$, and $[0:0:1]$, and a soundness theorem
 transports acceptance to relative completeness.  The finite examples do
 not depend on the external Kim--Vu hypothesis used only for the conditional
 asymptotic upper bound.
+
+\paragraph{The three exceptional leaves.}
+Using the binary $\F_{16}$ encoding from Appendix~\ref{app:witnesses} and
+coefficient order $(X^2,Y^2,Z^2,XY,XZ,YZ)$, the one-dimensional kernels of
+the three exceptional evaluation matrices are generated by
+\[
+ (1,1,1,1,1,0),\qquad (0,0,0,5,4,1),\qquad (2,1,1,5,5,1).
+\]
+The first and third forms split over $\F_{16}$ as
+\[
+ (X+6Y+6Z)(X+7Y+7Z)
+ \quad\hbox{and}\quad
+ 2(X+4Y+15Z)(X+15Y+4Z),
+\]
+and each union of lines contains two selected points.  The middle form is
+nonsingular and contains seven selected points.  Thus two rank defects come
+from reducible quadratics, while the third comes from an arc differing by
+one point from a seven-point conic subset.  These descriptions are not used
+for classification completeness.
+
+\section{A general finite-field evaluation dichotomy}
+\label{app:evaluation}
+
+The one-selected-point obstruction used in Section~\ref{sec:examples} has a
+sharp extension to several selected points.  The vector-space covering
+threshold is classical; see, for example, Khare~\cite{Khare2009}.
+
+\begin{proposition}[Finite-field evaluation dichotomy]
+\label{prop:evaluation-dichotomy}
+Let $W$ be a finite-dimensional vector space over $\F_q$, let
+$\nu:X\to W$ be any feature map, and let $U,A\subseteq X$ be finite with
+$|A|\le q$.  There is a linear form $f\in W^*$ such that
+\[
+ f(\nu(u))=0\quad(u\in U),\qquad
+ f\ne0,\qquad f(\nu(a))\ne0\quad(a\in A)
+\]
+if and only if
+\[
+ \langle\nu(U)\rangle\ne W
+ \quad\hbox{and}\quad
+ \nu(a)\notin\langle\nu(U)\rangle\quad(a\in A).
+\]
+The uniform threshold is sharp: $q+1$ distinct hyperplanes through a common
+codimension-two subspace can cover $W$.
+\end{proposition}
+
+\begin{proof}
+Put $S=\langle\nu(U)\rangle$.  Necessity follows by applying $f$ to the
+stated span relations.  Conversely, $S\ne W$ makes the annihilator
+$S^\perp\subseteq W^*$ nonzero.  For each $a\in A$, the condition
+$\nu(a)\notin S$ says that evaluation at $\nu(a)$ cuts out a proper
+hyperplane of $S^\perp$.  At most $q$ proper hyperplanes cannot cover a
+nonzero vector space over $\F_q$: their union has size at most
+$1+q(|S^\perp|/q-1)<|S^\perp|$.  Any form outside their union has the
+required properties.  For sharpness, quotient by a common codimension-two
+subspace and use all $q+1$ lines in $\F_q^2$.
+\end{proof}
+
+For the degree-$d$ Veronese map, the proposition gives the same dichotomy
+for homogeneous degree-$d$ forms.
 
 \section{Witness coordinates and field encodings}
 \label{app:witnesses}
