@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** READY — C154 is reported; C188 is next
+**Status:** C188 IMPLEMENTED — final registry build waits for foreign Q25 Lean owner
 
 ## Current state
 
@@ -27,10 +27,12 @@ independent proof-stage copyedit requested by the user.
 
 ## Recommended order
 
-1. **C188 — prove `rho_C(5)=4`.**  The mathematical witness is already
-   imported from Clebsch C187, but the relative-conic theorem, strict-kernel
-   Lean proof, manuscript/result-table synchronization, and rebuild remain.
-   See [`2026-07-15-c188-rhoc5-frame.md`](../2026-07-15-c188-rhoc5-frame.md).
+1. **C188 — finish the result registry.**  The exact theorem, arbitrary-conic
+   transport, axiom audit, manuscript synchronization, and PDF rebuild pass.
+   A foreign Q25 build owns the shared Lean tree; once quiescent, build
+   `RelativeConicArcs.ExampleChecks.Q5` and `RelativeConicArcs.Results`, commit
+   the pending one-line registry import, and mark the task reported.  See
+   [`2026-07-15-c188-rhoc5-frame.md`](../2026-07-15-c188-rhoc5-frame.md).
 2. **C144 — shared-library gate architecture.**  Run only in a quiescent build
    window; it is infrastructure rather than paper mathematics.
 3. **C210 — square-root construction program.**  This is the high-ceiling,
@@ -39,7 +41,7 @@ independent proof-stage copyedit requested by the user.
 
 ## Entry action
 
-If the user selects `relconic`, start C188 unless they explicitly choose a
+If the user selects `relconic`, finish C188's registry build unless they explicitly choose a
 different task.  C188 is a Lean task, so read the nested Lean guide before any
 edit, generator run, build, or staleness probe.
 
