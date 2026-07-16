@@ -61,9 +61,10 @@ routing table? (c) which lane next? Wait for the answers.
 
 ### Codex WIP
 
-- **`alt-orbit-repair`** — Alternate-orbit repair for invariant ten-arcs (C142–C143): start with
-  [alternate-orbit repair](notes/handoffs/2026-07-14-alternate-orbit-repair.md). First do C142, the
-  certificate-free `s ≥ 7` repair theorem; C143 owns the gated Q25 two-witness certificate.
+- **`alt-orbit-repair`** — Alternate-orbit repair and exact Q25 extremal classification
+  (C142–C152): start with
+  [alternate-orbit repair](notes/handoffs/2026-07-14-alternate-orbit-repair.md). C151's residual
+  equality-orbit cover is active; C152 remains gated behind it.
 - **`build-sys`** — Lean build/restart/cache engineering for the massive shared source tree (C162):
   start with [Lean build-system hardening](notes/handoffs/2026-07-14-lean-build-system.md). First
   harden and exercise the trace-sentinel restart guard, then map high-fan-out import blast radius.
@@ -304,7 +305,9 @@ lane is using the shared build tree.
 
 **Source and staging hygiene.** Run generators against explicit roots, never repository-wide. After
 any generator or formatter, require `git diff --name-only` to be a subset of the selected lane's
-allowlist. Stage explicit pathspecs only — never `git add -A`.
+allowlist. Staging must be non-interactive: never use `git add -p` — it is interactive and fails in
+the agent TUI. Stage explicit whole-file pathspecs, or prepare and apply an exact cached patch
+non-interactively when only part of a file is owned by the current change. Never use `git add -A`.
 
 **`/tmp` is tmpfs on this box.** Do not place Lean worktrees, `.lake` caches, generated
 certificate trees, or other multi-gigabyte build artifacts there: their storage counts against
