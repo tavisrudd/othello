@@ -38,9 +38,11 @@ by the `build-sys` lane.
    infinite-family obstruction for arcs contained in one Baer subplane and selects the genuinely
    Baer-transversal route. The first two-layer parabola family is a uniform conic-disjoint `2s`-arc
    and an ordinary complete 6-arc at `s=3`, but direct relative coverage fails for `s=4,5,7,8`.
-   Greedy completion remains near `3s` in the larger tested fields. Next characterize its uncovered
-   product-image complement and prove a uniform at-most-`s` compatible repair layer or a structural
-   obstruction; do not widen the finite search. See
+   Greedy completion remains near `3s` in the larger tested fields. A full parabola repair layer on
+   a nontrivial additive coset succeeds sporadically at `s=5`, nearly succeeds at `s=4`, but has no
+   arc-legal instance at `s=7`; that uniform mechanism is closed. Next derive the collision and
+   coverage equations for a graph or partial-coset repair of at most `s` points; do not widen the
+   finite search first. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

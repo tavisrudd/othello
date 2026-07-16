@@ -175,6 +175,53 @@ def greedy_relative_completion(field: QuadraticField, seed: tuple[Point, ...],
     return arc
 
 
+def additive_cosets(field: QuadraticField, subfield: tuple[int, ...]) -> list[tuple[int, ...]]:
+    remaining = set(range(field.q))
+    cosets = []
+    while remaining:
+        representative = min(remaining)
+        coset = tuple(sorted(field.add(representative, t) for t in subfield))
+        cosets.append(coset)
+        remaining -= set(coset)
+    assert len(cosets) == field.s and cosets[0] == subfield
+    return cosets
+
+
+def best_coset_repair_layer(field: QuadraticField, seed: tuple[Point, ...],
+                            subfield: tuple[int, ...], all_points: set[Point],
+                            conic: set[Point]) -> dict[str, object]:
+    """Test one full parabola over each nontrivial additive subfield coset."""
+    tested = 0
+    legal = 0
+    complete = 0
+    best: tuple[int, int, int, int] | None = None
+    for coset in additive_cosets(field, subfield)[1:]:
+        representative = coset[0]
+        for gamma in range(1, field.q):
+            tested += 1
+            repair = tuple((1, y, field.add(field.mul(y, y), gamma)) for y in coset)
+            arc = seed + repair
+            lines = {field.cross(x, y) for x, y in itertools.combinations(arc, 2)}
+            if len(lines) != comb(len(arc), 2):
+                continue
+            legal += 1
+            required_uncovered, ordinary_uncovered = profile(field, arc, all_points, conic)
+            if required_uncovered == 0:
+                complete += 1
+            result = (required_uncovered, ordinary_uncovered, representative, gamma)
+            if best is None or result < best:
+                best = result
+    return {
+        "tested": tested,
+        "legal": legal,
+        "relative_complete": complete,
+        "best_required_uncovered": None if best is None else best[0],
+        "best_ordinary_uncovered": None if best is None else best[1],
+        "best_coset_representative": None if best is None else best[2],
+        "best_gamma": None if best is None else best[3],
+    }
+
+
 def run(s: int) -> dict[str, object]:
     field = QuadraticField.for_subfield_order(s)
     subfield = tuple(x for x in range(field.q) if field.in_subfield(x))
@@ -204,6 +251,9 @@ def run(s: int) -> dict[str, object]:
             best = result
     assert best is not None
     best_seed = layer(field, best[2], subfield) + layer(field, best[3], subfield)
+    coset_repair = best_coset_repair_layer(
+        field, best_seed, subfield, all_points, conic
+    )
     completed = greedy_relative_completion(field, best_seed, all_points, conic)
     completed_required, completed_ordinary = profile(field, completed, all_points, conic)
     assert completed_required == 0
@@ -216,6 +266,7 @@ def run(s: int) -> dict[str, object]:
         "best_required_uncovered": best[0],
         "best_ordinary_uncovered": best[1],
         "best_offsets": [best[2], best[3]],
+        "coset_repair": coset_repair,
         "greedy_completed_k": len(completed),
         "greedy_added": [list(point) for point in completed[2 * s:]],
         "greedy_final_ordinary_uncovered": completed_ordinary,

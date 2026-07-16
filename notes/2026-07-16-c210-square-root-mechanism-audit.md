@@ -144,6 +144,32 @@ off-conic uncovered point with maximum new required coverage finishes the displa
 `6,14,14,20,24`; for `s=5,7,8` this is at most `3s`, and the resulting arcs are ordinarily complete.
 This is bounded evidence only, not an `O(s)` theorem.
 
+## Second coordinate gate: full coset repair layers
+
+A third parabola layer over the original parameter set `F` is impossible: for every `t in F`,
+the vertical line `y=t` already contains the two seed points, so a third point gives a collinear
+triple. The smallest equally structured alternative is a full additive-coset layer
+
+```text
+R(eta,gamma) = {[1:y:y^2+gamma] : y in eta+F},
+```
+
+where `eta+F` is a nontrivial additive coset and `gamma != 0`. For the best seed at each tested
+order, the probe checks all `(s-1)(s^2-1)` such layers, rejects any layer that breaks the arc
+condition, and profiles the survivors:
+
+| `s` | layers tested | arc-legal | relative-complete | best required uncovered |
+|---:|---:|---:|---:|---:|
+| 3 | 16 | 0 | 0 | -- |
+| 4 | 45 | 1 | 0 | 2 |
+| 5 | 96 | 2 | 2 | 0 |
+| 7 | 288 | 0 | 0 | -- |
+| 8 | 441 | 35 | 0 | 42 |
+
+Thus `s=5` has two sporadic complete `3s`-arcs in this ansatz, and `s=4` has a near miss, but the
+absence of even an arc-legal layer at `s=7` rules out a uniform theorem using one full translated
+parabola layer. This closes the full-layer repair mechanism, not the broader `O(s)` program.
+
 Reproduction:
 
 ```text
@@ -154,10 +180,12 @@ Frozen output:
 `papers/arcs_complete_outside_conic/probe_c210_two_layer_parabolas_output.txt`.
 
 ```text
-371aeb802996d3c235bbc625bfd27b7c07d8f4eef0af89ea2897ad7977619224  probe_c210_two_layer_parabolas.py
-efd531f2d6568837a1e00f485ed80c459b3d7c539f988439920dd0ab7d7e2824  probe_c210_two_layer_parabolas_output.txt
+f0bf41b76de2a7f5db495880c5c00288e2c7c27ea6927ff9a0c7433fb5ee861d  probe_c210_two_layer_parabolas.py
+92bd59cd1dcdb2dc0d34cf64d97e55571bed6a4ff38fa9300ee049508d9fbd8f  probe_c210_two_layer_parabolas_output.txt
 ```
 
 The next symbolic gate is now precise: characterize the uncovered product-image complement and
-either give at most `s` mutually compatible repair points for every `s`, or prove that a uniform
-repair layer cannot preserve the arc condition. Do not enlarge the finite search before that step.
+seek at most `s` mutually compatible repair points as a graph or partial coset layer, allowing the
+height offset to vary with the parameter. The proof obligation is simultaneous: the repair graph
+must avoid every seed secant and its new secants must cover the complement. Do not enlarge the
+finite search before deriving those collision and coverage equations.

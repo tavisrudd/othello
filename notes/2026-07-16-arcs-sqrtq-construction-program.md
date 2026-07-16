@@ -43,8 +43,10 @@ The first audit is recorded in
 It proves that every arc contained in a Baer subplane leaves more uncovered ambient points than any
 conic can absorb, so the bounded C201 Baer failure is family-level. The first Baer-transversal family,
 two parallel subfield parabolas, is uniformly a conic-disjoint `2s`-arc but fails direct relative
-coverage beyond `s=3`. Its deterministic completions through `s=8` remain at roughly `3s`. The next
-gate is a symbolic description and uniform repair (or obstruction) for its uncovered product-image
+coverage beyond `s=3`. Its deterministic completions through `s=8` remain at roughly `3s`. One full
+parabola on a nontrivial additive coset gives a sporadic complete `3s`-arc at `s=5`, but no such
+layer is even arc-legal at `s=7`, closing that uniform repair ansatz. The next gate is a symbolic
+description of variable-height graph or partial-coset repairs for the uncovered product-image
 complement, not a wider finite census.
 
 ## C201 input
