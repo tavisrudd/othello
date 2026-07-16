@@ -58,12 +58,12 @@ defect identity and ρ_𝒞(16) = 9*
 
 **4 · `clebsch-hexagon-code`** — *The Clebsch hexagon code: rigidity from a conic deep-hole locus*
 (an MDS code over 𝔽₁₁ whose deep holes are exactly a conic)
-- *Status:* self-contained 17-page LaTeX manuscript + PDF. Its verification map names ten Python
-  replays, one Singular calculation, and ten Lean roots; the formal development isolates exactly
+- *Status:* self-contained 19-page LaTeX manuscript + PDF. Its verification map names eleven Python
+  replays, one Singular calculation, and eleven Lean roots; the formal development isolates exactly
   two consequences of Dye's theorem as axioms. Conceptual rigidity, low-degree rigidity,
-  quantitative gaps, decoder reconstruction, chirality, the all-field Clebsch formula, and the
-  `4≤k≤7` classification are integrated. Local reproducibility is closed; the remaining gate is an
-  immutable artifact release.
+  quantitative gaps, decoder reconstruction, chirality, the `A₃/H₃` reflection-arrangement
+  synthesis, the all-field Clebsch formula, and the `4≤k≤7` classification are integrated. Local
+  reproducibility is closed; the remaining gate is an immutable artifact release.
 - **Ships after `arcs` by publication-allocation ruling, not mathematical dependency.** `arcs`
   publishes the shared deep-holes=conic identification first; `clebsch` cites it for provenance but
   reproves it and depends on no unpublished companion result. Its claims are the rigidity and
@@ -155,13 +155,13 @@ repositories: an evidence-based essay and practical how-to
   complete; specialist citation-chain review, immutable artifact release, and the deferred final
   post-C203 aggregate rebuild remain submission preflight gates.
 - **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
-  `clebsch-hexagon-code` — the 17-page paper cites ten fail-closed Python replays and one Singular
-  calculation. Ten named Lean roots cover the syndrome conic, `A₅` orbits, decoding/chirality
-  synthesis, the chord-defect bridge, the two-axiom Dye consequence layer, `q=9`, and the universal
-  `4≤k≤7` moments. The global/local gaps, low-degree census, Clebsch-family specialization, and
-  finite seven-arc exclusions remain explicitly checker- or citation-backed rather than Lean
-  claims. This is the paper's declared trust boundary, not an open local gate. Builds with
-  texliveFull — texliveSmall/Medium lack `enumitem`.
+  `clebsch-hexagon-code` — the 19-page paper cites eleven fail-closed Python replays and one Singular
+  calculation. Eleven named Lean roots cover the syndrome conic, `A₅` orbits, decoding/chirality
+  synthesis, the finite `A₃/H₃` reductions, the chord-defect bridge, the two-axiom Dye consequence
+  layer, `q=9`, and the universal `4≤k≤7` moments. The global/local gaps, low-degree census,
+  Clebsch-family specialization, and finite seven-arc exclusions remain explicitly checker- or
+  citation-backed rather than Lean claims. This is the paper's declared trust boundary, not an open
+  local gate. Builds with texliveFull — texliveSmall/Medium lack `enumitem`.
 - **Markdown manuscript exists:** `dihedral-schreier-node-kayles` (the committed submission).
 - **LaTeX manuscript exists (partial):** `nofil-finite-geometry-outcomes`
   (`paper-sumfree-capgame/main.tex` — sum-free ℤₙ + affine cap written; projective unwritten).
@@ -189,11 +189,13 @@ arXiv posting of the manuscripts. One public mirror or preprint unblocks them to
 - **Partially formalized with an explicit classical boundary — `clebsch-hexagon-code`:**
   `Q11Coding.lean` and `Q11A5PointOrbits.lean` certify the syndrome conic and concrete point-orbit
   data; `Q11DecodingSynthesis.lean` certifies the decoding/Brianchon/chirality synthesis;
+  `ReflectionArrangements.lean` certifies the finite `A₃/H₃` coordinate bridges, intersection
+  spectra, characteristic boundary, and pointwise transport to the Clebsch secant index;
   `SixArcDefectBridge.lean` proves the projective chord-defect identity; and
   `Q11DyeAxioms.lean`/`Q11DyeConsequences.lean` isolate exactly Dye's ten-point bound and equality
   classification as the formal development's axiomatized inputs. `ClebschChordDefect.lean` and
   `Q9Sylvester.lean` support field uniqueness, while `SmallKChordMoments.lean` and
-  `SmallKGeometricBridge.lean` certify the universal small-arc moment consequences. All ten are
+  `SmallKGeometricBridge.lean` certify the universal small-arc moment consequences. All eleven are
   manuscript-named kernel-checked roots. The two gap censuses, low-degree finite linear algebra,
   Clebsch-family use of Dye, and finite `k=7` exclusions are intentionally outside Lean and mapped
   to exact replays or citations in the paper's verification tables. Lane map:
@@ -297,6 +299,7 @@ encodes result *type*; formalization status is in the proof-location column.
 | thm-clebsch-decoding | Complete distance oracle and ambiguity geometry | for syndrome `s`, distance is 0 at zero, 1 on an arc-column ray, 3 exactly when `s≠0` and `s₀s₂-s₁²=0`, and 2 otherwise; nearest-word multiplicities are `1^960 2^150 3^100 20^120`. The ten Brianchon points and five triangles are classical (Edge/Dye); the new layer reconstructs them from decoder ambiguity and identifies their supports with the complementary matchings; every deep hole has all twenty triple supports | clebsch | paper §3 Prop 3.5 and §5 Cor 5.2; `check_decoding.py`; kernel-checked synthesis in `Q11DecodingSynthesis.lean` |
 | thm-clebsch-why11   | Classification-free uniqueness of `q=11` for six-arcs | the chord-defect identity and universal matching bound `c≤15` reduce a conic-filling six-arc to `q∈{4,5,9,11}`; hyperoval completeness excludes q=4, every six-cap is maximal at q=5, and the exact-distance-two Sylvester graph has clique number five at q=9, leaving q=11 | clebsch | paper §6 Thm 6.2; `check_small_q_uniqueness.py` and an independent q=9 construction; kernel-checked support in `ClebschChordDefect.lean` and `Q9Sylvester.lean` |
 | thm-clebsch-family-uncovered | All-field uncovered formula for Clebsch hexagons | every finite-field Clebsch hexagon has `#U=q²−14q+45`; for `q≡3 (mod 4)`, Dye's associated conic lies in `U` with exact off-conic excess `(q−4)(q−11)`, so exact conic filling is isolated at q=11 | clebsch | paper §6 Prop 6.3; hand proof from the chord-defect identity and Dye's ten Brianchon points/non-secant criterion. The `q=19` instance is independently replayed by `check_q19_nonexample.py`; the family specialization itself is not claimed as Lean-formalized |
+| thm-clebsch-reflection-arrangements | Paired `A₃/H₃` organization of the two conic-filling exceptions | the q=5 frame joins are the reduced `A₃` mirrors; an exact projectivity identifies the q=11 Clebsch secants with the reduced `H₃` mirrors; their intersection spectra give complement counts `(q−2)(q−3)` and `(q−5)(q−9)` and transport pointwise to the Clebsch secant-index strata | clebsch | paper §6 Prop `prop:h3-arrangement` and the following synthesis; independent `check_reflection_arrangements.py`; finite reductions, characteristic boundary, projectivity, spectra, factorizations, and pointwise index transport in Lean `RelativeConicArcs/ReflectionArrangements.lean` |
 | thm-conic-filling-kle7 | Conic-filling extension loci for `4≤k≤7` | if a `k`-arc has uncovered locus equal to all rational points of a nonsingular conic, then `(k,q)` is exactly `(4,5)` or `(6,11)`; the former is the projective frame and the latter the Clebsch hexagon. Exact chord moments rule out k=5 and reduce k=7 to q=11,13; exhaustive normalized searches find no seven-arc hit in either field | clebsch | paper §6 Thm 6.5; `check_small_k_conic_filling.py`; universal projective moments in `SmallKChordMoments.lean` and `SmallKGeometricBridge.lean`; finite seven-arc exclusions remain checker-certified. The elementary `(4,5)` instance is priority-neutral; downstream consumers are C188 (`relconic`) and C189 (`cap`/Nofil) |
 | comp-q9-exclusion   | `q=9` icosahedral six-arc is complete    | `#U=0` at `q=9`: the analogous `A₅`-invariant six-arc has covering radius two, so its deep-hole locus is empty and the phenomenon is vacuous | clebsch side computation | `check_q9_exclusion.py` independently re-verifies SVM 1995 Prop. 13 over the Lean-certified GF(9) tables. This checker-only side result is not a claim or dependency of the current manuscript, whose `q=9` exclusion instead uses the Sylvester graph |
 | comp-q19-nonexample | `q=19` icosahedral six-arc has exactly 140 deep holes | the recipe still yields a genuine six-arc disjoint from the conic — at `q=19`, `5∣q+1` so order-five elements are non-split and fix *no* rational conic point, but their `𝔽₃₆₁`-conjugate fixed pairs span Galois-stable rational chords, hence rational poles. The Clebsch-family formula gives `#U=140=20+120` and Dye's edge criterion gives the conic inclusion; the checker independently reconstructs the arc, count, and full quadratic rank | clebsch | paper §6 Remark 6.4 following Prop 6.3; Dye 1991 pp. 281–282; `check_q19_nonexample.py` is independent verification |

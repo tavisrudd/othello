@@ -1096,7 +1096,10 @@ fifteen normals. Every three-by-three determinant on the six points is
 twice a unit in $\mathbb Z[\tau]$, so the set is an arc when
 $\operatorname{char}F\ne2$. Finally, $\det T=3$ in $\F_{11}$ and direct
 multiplication gives the two asserted set equalities. The exact replay is
-\path{check_reflection_arrangements.py}.
+\path{check_reflection_arrangements.py}. The $\F_{11}$ coordinate bridge,
+pointwise secant-index transport, the characteristic-two boundary, and the
+$\F_5$ and $\F_{11}$ intersection spectra are also kernel-checked in
+\path{ReflectionArrangements.lean}.
 \end{proof}
 
 Characteristic two is bad because the signs coalesce. In every other
@@ -1228,7 +1231,7 @@ $A_5$ orbits and syndrome conic
 & \path{Q11A5PointOrbits.lean}; \path{Q11Coding.lean} \\
 $A_3/H_3$ arrangement synthesis
 & exact root coordinates; intersection lattices
-& --- \\
+& \path{ReflectionArrangements.lean} (the two finite reductions) \\
 Decoding and chirality
 & arc--coset dictionary; Edge--Dye triangles
 & \path{Q11DecodingSynthesis.lean} \\
