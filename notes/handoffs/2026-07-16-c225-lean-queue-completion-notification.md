@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — capability and origin gates passed; managed identity adapter next
+**Status**: IN PROGRESS — immutable submission identity landed; concurrent launch handshake next
 
 ## Goal
 
@@ -460,6 +460,16 @@ the harness and supplies `CODEX_THREAD_ID`; Claude never adopts that value. Agen
 validated session, lane, and caller-attested `C###`. Manual probes require a stable session and
 reject lane/task claims. The effective account comes only from the effective UID. This increment
 does not submit systemd units, invoke Lean, or touch legacy run directories.
+
+Step 3a landed the pre-launch identity substrate with 20 passing hermetic tests and a green
+read-only query against the real user manager. It race-checks
+owner→PID→`/proc` start ticks→owner, binds that tuple and a UUID-derived run/unit identity into a
+bounded canonical `submission.json`, requires absolute bounded worker argv, creates state/run
+directories at mode 0700 and records at 0600, fsyncs records and directories, and publishes via a
+same-directory temporary plus no-replace hard-link installation. Eight concurrent identical
+publishers converge on one digest; conflicts, symlinks, wrong modes, wrong owners, and UUID reuse
+fail closed. No service submission or Lean invocation exists yet. Step 3b is the concurrent
+`systemd-run --wait` plus D-Bus InvocationID acceptance handshake.
 
 ## Adversarial design review
 

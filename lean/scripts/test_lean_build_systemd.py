@@ -4,10 +4,18 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
+import json
 import os
+import shutil
+import stat
 import subprocess
 import sys
+import tempfile
+import threading
 import unittest
+import uuid
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 
@@ -17,6 +25,7 @@ assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = MODULE
 SPEC.loader.exec_module(MODULE)
+TEST_ROOT = Path.home() / ".cache" / "othello-lean-build-systemd-tests"
 
 
 class OriginResolutionTests(unittest.TestCase):
@@ -188,6 +197,168 @@ class OriginCliTests(unittest.TestCase):
         self.assertEqual(result.returncode, MODULE.EXIT_INVALID)
         self.assertEqual(result.stdout, "")
         self.assertIn("session ID is required", result.stderr)
+
+
+class ManagerGenerationTests(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.boot_id = self.tmp / "boot_id"
+        self.boot_id.write_text("12345678-1234-1234-1234-123456789abc\n")
+        self.proc_root = self.tmp / "proc"
+        (self.proc_root / "4321").mkdir(parents=True)
+        fields = ["S"] + ["0"] * 18 + ["98765"]
+        (self.proc_root / "4321" / "stat").write_text(f"4321 (systemd user) {' '.join(fields)}\n")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp)
+
+    def runner(self, owners: list[str]):
+        owner_values = iter(owners)
+
+        def run(command: list[str]) -> subprocess.CompletedProcess[str]:
+            if command[6] == "GetNameOwner":
+                output = f's "{next(owner_values)}"\n'
+            else:
+                self.assertEqual(command[6], "GetConnectionUnixProcessID")
+                output = "u 4321\n"
+            return subprocess.CompletedProcess(command, 0, output, "")
+
+        return run
+
+    def test_stable_owner_pid_start_tuple(self) -> None:
+        generation = MODULE.manager_generation(
+            busctl=Path("/fixture/busctl"),
+            boot_id_path=self.boot_id,
+            proc_root=self.proc_root,
+            run_command=self.runner([":1.42", ":1.42"]),
+        )
+        self.assertEqual(
+            generation,
+            {
+                "boot_id": "12345678-1234-1234-1234-123456789abc",
+                "dbus_owner": ":1.42",
+                "manager_pid": 4321,
+                "manager_start_ticks": 98765,
+            },
+        )
+
+    def test_manager_owner_race_is_rejected(self) -> None:
+        with self.assertRaisesRegex(MODULE.StateError, "changed during generation"):
+            MODULE.manager_generation(
+                busctl=Path("/fixture/busctl"),
+                boot_id_path=self.boot_id,
+                proc_root=self.proc_root,
+                run_command=self.runner([":1.42", ":1.43"]),
+            )
+
+    def test_malformed_bus_output_is_rejected(self) -> None:
+        def malformed(command: list[str]) -> subprocess.CompletedProcess[str]:
+            return subprocess.CompletedProcess(command, 0, "not-a-scalar\n", "")
+
+        with self.assertRaisesRegex(MODULE.StateError, "unexpected busctl scalar"):
+            MODULE.manager_generation(
+                busctl=Path("/fixture/busctl"),
+                boot_id_path=self.boot_id,
+                proc_root=self.proc_root,
+                run_command=malformed,
+            )
+
+
+class SubmissionIdentityTests(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.tmp.chmod(0o700)
+        self.lean_root = self.tmp / "lean"
+        self.lean_root.mkdir()
+        self.state_root = self.tmp / "managed"
+        self.origin = {
+            "user": "fixture",
+            "harness": "manual",
+            "session_id": "fixture-session",
+            "work_lane": None,
+            "task_id": None,
+        }
+        self.generation = {
+            "boot_id": "12345678-1234-1234-1234-123456789abc",
+            "dbus_owner": ":1.42",
+            "manager_pid": 4321,
+            "manager_start_ticks": 98765,
+        }
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp)
+
+    def test_prepare_creates_restrictive_bound_submission(self) -> None:
+        run_identity = uuid.UUID("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
+        run_dir, submission, digest = MODULE.prepare_submission(
+            state_root=self.state_root,
+            lean_root=self.lean_root,
+            worker_argv=[sys.executable, "/fixture/worker.py", "run"],
+            origin=self.origin,
+            generation=self.generation,
+            run_uuid=run_identity,
+        )
+        record = run_dir / "submission.json"
+        encoded = record.read_bytes()
+        self.assertEqual(stat.S_IMODE(self.state_root.stat().st_mode), 0o700)
+        self.assertEqual(stat.S_IMODE(run_dir.stat().st_mode), 0o700)
+        self.assertEqual(stat.S_IMODE(record.stat().st_mode), 0o600)
+        self.assertEqual(hashlib.sha256(encoded).hexdigest(), digest)
+        self.assertEqual(json.loads(encoded), submission)
+        self.assertEqual(submission["run_id"], "run-aaaaaaaabbbbccccddddeeeeeeeeeeee")
+        self.assertEqual(submission["unit"], "othello-lean-aaaaaaaabbbbccccddddeeeeeeeeeeee.service")
+        self.assertEqual(submission["run_dir"], str(run_dir))
+        self.assertEqual(submission["terminal_revision"], 1)
+
+    def test_prepare_refuses_run_identity_reuse(self) -> None:
+        identity = uuid.UUID("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee")
+        arguments = {
+            "state_root": self.state_root,
+            "lean_root": self.lean_root,
+            "worker_argv": [sys.executable, "/fixture/worker.py"],
+            "origin": self.origin,
+            "generation": self.generation,
+            "run_uuid": identity,
+        }
+        run_dir, _, _ = MODULE.prepare_submission(**arguments)
+        with self.assertRaisesRegex(MODULE.StateError, "cannot create managed run directory"):
+            MODULE.prepare_submission(**arguments)
+        self.assertTrue((run_dir / "submission.json").is_file())
+
+    def test_state_root_rejects_symlink_and_wrong_mode(self) -> None:
+        real = self.tmp / "real"
+        real.mkdir(mode=0o700)
+        symlink = self.tmp / "link"
+        symlink.symlink_to(real, target_is_directory=True)
+        with self.assertRaisesRegex(MODULE.StateError, "non-symlink directory"):
+            MODULE.ensure_state_root(symlink, os.geteuid())
+        real.chmod(0o755)
+        with self.assertRaisesRegex(MODULE.StateError, "mode must be 0700"):
+            MODULE.ensure_state_root(real, os.geteuid())
+
+    def test_worker_argv_requires_absolute_bounded_executable(self) -> None:
+        with self.assertRaisesRegex(MODULE.StateError, "must be absolute"):
+            MODULE.validate_worker_argv(["python3", "worker.py"])
+        with self.assertRaisesRegex(MODULE.StateError, "argument exceeds"):
+            MODULE.validate_worker_argv([sys.executable, "x" * (MODULE.MAX_ARG_BYTES + 1)])
+
+    def test_set_once_is_idempotent_under_concurrent_publishers(self) -> None:
+        self.state_root.mkdir(mode=0o700)
+        path = self.state_root / "submission.json"
+        barrier = threading.Barrier(8)
+
+        def publish() -> str:
+            barrier.wait()
+            return MODULE.publish_set_once(path, {"format": 1, "run_id": "same"}, os.geteuid())
+
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            digests = list(executor.map(lambda _: publish(), range(8)))
+        self.assertEqual(len(set(digests)), 1)
+        self.assertEqual(json.loads(path.read_text())["run_id"], "same")
+        with self.assertRaisesRegex(MODULE.StateError, "conflicting set-once record"):
+            MODULE.publish_set_once(path, {"format": 1, "run_id": "different"}, os.geteuid())
 
 
 if __name__ == "__main__":
