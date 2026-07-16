@@ -1,3 +1,4 @@
+import RelativeConicArcs.ExampleChecks.Q5
 import RelativeConicArcs.ExampleChecks.Q8
 import RelativeConicArcs.ExampleChecks.Q9
 import RelativeConicArcs.ExampleChecks.Q11
