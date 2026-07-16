@@ -118,6 +118,8 @@ The source-by-source comparison is recorded in
 - `size_c201_q64.py` — corrected-bound arithmetic and rigorous frame-normalized `q=64` census rejection
 - `probe_c201_q64_baer.py` / `check_c201_q64_baer.cpp` — orbit-reduced and raw independent
   checks of the Frobenius-stable Baer-conic thirteen-arc family
+- `probe_c201_q64_torus.py` — exhaustive order-13 nonsplit-torus orbit probe relative to the
+  standard `q=64` conic
 - `../../lean/RelativeConicArcs/` — standalone Lean formalization and kernel-checked certificates
 
 ## Related but separate

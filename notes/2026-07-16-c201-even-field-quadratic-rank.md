@@ -59,6 +59,19 @@ complete outside a 65-point conic.
 `|U(A)|<=65`.  Seek an orbit-defined high-coverage/saturating thirteen-arc
 family; reject it before quadratic analysis if it fails this filter.
 
+The conic-aligned transitive family is also closed in
+[`2026-07-16-c201-q64-torus-family.md`](2026-07-16-c201-q64-torus-family.md).
+Of the 315 conic-disjoint length-thirteen orbits of an order-13 nonsplit-torus
+subgroup, 310 are arcs and all have the identical spectrum
+`(1041,1560,1326,208,0,0,13)`.  The conic nucleus is uncovered in every case.
+Thus a single exact-size conic-stabilizer orbit cannot supply the required
+high-coverage family.
+
+**Refined next:** the Baer/Frobenius and transitive torus families are both
+closed.  Any remaining bounded route must use a union of smaller stabilizer
+orbits while preserving total size thirteen and must prove or cheaply certify
+coverage of the conic nucleus before full profile or rank work.
+
 The phrase “symbolic rank criterion” therefore means a **geometric criterion
 for forcing rank/forced-hit behavior**, not the already-proved linear-algebra
 dichotomy.
