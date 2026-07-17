@@ -177,6 +177,16 @@ small mixed circuits. Search for a second infinite family with tractable exact r
 few-weight behavior, or an additive/design-theoretic reduction. One genuinely new higher-degree
 family is the publication gate; a catalogue of exceptional nuclei alone is not.
 
+**Completed C218 result.** For `q >= d`, the common osculating-hyperplane nucleus of the degree-`d`
+normal rational curve has projective dimension `d-product_i(d_i+1)`, where the `d_i` are the
+base-`p` digits of `d`; it is nonempty exactly when `d+1` has at least two nonzero base-`p` digits.
+The first new useful case is `d=4`, `p=3`: adjoining the unique nucleus `e_2` produces a
+`[q+2,5,q-3]_q` code for every `q=3^h >= 9`. Its circuits of size at most five are the nucleus plus
+the harmonic quadruples of `P^1(F_q)`, which form `S(3,4,q+1)`. Hence every symbol has exact
+locality four; the q=9 nucleus row is `(2,5)`, and dual distance five makes C216 replication
+automatic. See
+[`2026-07-16-c218-quartic-nucleus-repair.md`](2026-07-16-c218-quartic-nucleus-repair.md).
+
 ### C219 — reliability and Boolean analysis of complete repair ports
 
 For a target `x`, regard repairability after a failure set `F` as the monotone Boolean function

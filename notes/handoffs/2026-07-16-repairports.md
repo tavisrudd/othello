@@ -3,8 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C215--C217 are complete. C217's circuit-incidence holonomies form a complete
-coefficient-gauge fingerprint, recover axis cross-ratios, and meet the mathematical promotion gate.
+**Status:** ACTIVE. C215--C218 are complete. C218's characteristic-three quartic plus its unique
+osculating-hyperplane nucleus gives a harmonic Steiner radius-four family and meets its scout gate.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -23,16 +23,16 @@ twisted-cubic--axis paper.
 | C215 | complete | weighted functional-dual theory | exact criterion plus a strict natural example |
 | C216 | complete; optional Lean wrapper deferred to build-system entry | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | complete | circuit-coefficient gauge invariants | complete holonomy fingerprint, cross-ratio, and strict inequivalence example |
-| C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
+| C218 | complete | quartic-nucleus harmonic repair family | `S(3,4,q+1)` circuits, exact parameters, and replication |
 | C219 | queued | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
 | C220 | long-horizon | additive equality and stability | uniform inverse/stability theorem |
 
 ## Immediate next step
 
-Run C218's bounded rational-normal-curve nucleus scout. Classify the degree/characteristic pairs
-with a useful common osculating nucleus and require a genuinely new higher-degree repair family,
-not a catalogue of exceptional nuclei. C217 is closed in
-[`2026-07-16-c217-gauge-invariants.md`](../2026-07-16-c217-gauge-invariants.md).
+Run C219's reliability/Boolean scout. Seek a general reliability formula, recurrence, influence
+identity, or threshold theorem for complete repair ports; use C218's harmonic Steiner port as a
+second structured test alongside the existing C202 blockers. C218 is closed in
+[`2026-07-16-c218-quartic-nucleus-repair.md`](../2026-07-16-c218-quartic-nucleus-repair.md).
 
 ## Scope and ownership
 

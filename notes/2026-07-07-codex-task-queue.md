@@ -87,7 +87,7 @@ unless they retain an explicit open tail.
 - **C215 `[repairports]` [DONE]** — exact canonical and pointed fiber costs, full obstruction formula, reference and cached evaluators, prior-art boundary, and strict Singer/SPC example closed → `notes/2026-07-16-c215-functional-cost-api.md`.
 - **C216 `[repairports]` [DONE]** — exact pointed replication criterion plus scaled random-GV and AG/TVZ fixed-alphabet regions → `notes/2026-07-16-c216-prescribed-port-realization.md`.
 - **C217 `[repairports]` [DONE]** — complete circuit-incidence holonomy fingerprint, axis cross-ratios, strict support-identical monomial inequivalence, and concatenation covariance → `notes/2026-07-16-c217-gauge-invariants.md`.
-- **C218 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — rational-normal-curve plus osculating-nucleus repair families → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C218 `[repairports]` [DONE]** — quartic normal-rational-curve nucleus gives a harmonic `S(3,4,q+1)` radius-four repair family, `[q+2,5,q-3]_q` parameters, and positive-density replication → `notes/2026-07-16-c218-quartic-nucleus-repair.md`.
 - **C219 `[repairports]` [QUEUED]** — reliability and Boolean analysis of complete repair ports → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C220 `[repairports]` [LONG-HORIZON]** — additive equality and stability for repair blockers and packings → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 

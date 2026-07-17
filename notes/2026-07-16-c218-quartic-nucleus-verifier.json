@@ -1,0 +1,36 @@
+{
+  "family": "degree-four normal rational curve plus common hyperplane nucleus in characteristic three",
+  "fields": [
+    {
+      "code_parameters": [
+        11,
+        5,
+        6
+      ],
+      "harmonic_block_count": 30,
+      "harmonic_independence_number": 5,
+      "maximum_hyperplane_section": 5,
+      "mixed_five_circuit_count": 30,
+      "nucleus_matching": 2,
+      "nucleus_transversal": 5,
+      "point_count": 11,
+      "projective_hyperplane_count": 7381,
+      "q": 9,
+      "rank": 5,
+      "repairs_at_curve_point": 12,
+      "repairs_at_nucleus": 30
+    },
+    {
+      "harmonic_block_count": 819,
+      "mixed_five_circuit_count": 819,
+      "point_count": 29,
+      "q": 27,
+      "rank": 5,
+      "repairs_at_curve_point": 117,
+      "repairs_at_nucleus": 819
+    }
+  ],
+  "hyperplane_nucleus_dimension_formula": "degree - product(base-p digit + 1)",
+  "lucas_formula_checks": 252,
+  "task": "C218"
+}
