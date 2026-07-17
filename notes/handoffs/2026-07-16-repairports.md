@@ -3,8 +3,9 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** COMPLETE, awaiting user disposition. C215--C220 are complete. C220 upgrades C202's two
-q=9 cubic blocker forms to a uniform equality and first-stability theorem over every `F_3^h`.
+**Status:** COMPLETE; retained unarchived as the closed foundation for
+[`rp-next`](2026-07-16-rp-next.md). C215--C220 are complete. C220 upgrades C202's two q=9 cubic
+blocker forms to a uniform equality and first-stability theorem over every `F_3^h`.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -29,8 +30,8 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Ask whether to archive this completed handoff, update the root routing table, and which lane to
-select next. C220 is closed in
+No further work is open in this lane. The user selected `rp-next` for the structured depth search;
+its first task is C226. Archive this handoff only on a separate user instruction. C220 is closed in
 [`2026-07-16-c220-cubic-blocker-stability.md`](../2026-07-16-c220-cubic-blocker-stability.md).
 The axis zero-sum-free and line-partition classifications remain outside the completed gate and
 require a separately allocated task if resumed.

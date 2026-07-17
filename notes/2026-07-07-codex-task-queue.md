@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C225.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C228.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -90,6 +90,12 @@ unless they retain an explicit open tail.
 - **C218 `[repairports]` [DONE]** — quartic normal-rational-curve nucleus gives a harmonic `S(3,4,q+1)` radius-four repair family, `[q+2,5,q-3]_q` parameters, and positive-density replication → `notes/2026-07-16-c218-quartic-nucleus-repair.md`.
 - **C219 `[repairports]` [DONE]** — exact complete-port reliability recurrence and influences, C202 failure asymptotics, and C218 Steiner Poisson windows with a common-nucleus bottleneck → `notes/2026-07-16-c219-repair-reliability.md`.
 - **C220 `[repairports]` [DONE]** — uniform restricted-sumset inverse theorem classifies every minimum and one-above-minimum cubic blocker over `F_3^h` → `notes/2026-07-16-c220-cubic-blocker-stability.md`.
+
+### `rp-next`
+
+- **C226 `[rp-next]` [QUEUED; FIRST]** — derive the exact cubic/axis reliability transforms, identify radius-truncated EXIT, and delimit stopping-set and full-MAP claims → `notes/2026-07-16-c226-repair-port-exit-transforms.md`.
+- **C227 `[rp-next]` [QUEUED; after C226]** — identify the pointed rank-jump reliability polynomial with Tutte/matroid-perspective theory, or prove exactly what refinement is required → `notes/2026-07-16-c227-pointed-tutte-repair-polynomial.md`.
+- **C228 `[rp-next]` [QUEUED; after C227; BOUNDED]** — test whether C217 holonomy controls multiplicative or strongly multiplicative ideal LSSS behavior → `notes/2026-07-16-c228-holonomy-lsss-mpc.md`.
 
 ### Dormant / handoff-owned lanes
 
