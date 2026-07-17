@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-16
 **Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
-costs, verified searches, nonzero fiberwise reduction, and exact two-sector pointed split are
+costs, verified searches, and exact fully fiberwise pointed first-obstruction formula are
 implemented.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
@@ -29,10 +29,10 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Derive the zero-functional closed form from the target-pointed inner-dual cost and one off-target
-minimum dual word, with explicit `top` cases for a singleton block index, trivial inner dual, or
-empty target fiber. The full pointed cost is already proved to be the minimum of this isolated zero
-sector and the fiberwise nonzero outer-functional sector; see
+Implement the finite formula algorithm: enumerate outer functional-dual tuples while reusing inner
+fiber and pointed-fiber cost tables, prove equality with full-word exhaustive search, and record the
+exact search-space reduction. The fully fiberwise closed formula and every `top` edge case are
+kernel-checked; see
 [`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
 
 ## Scope and ownership

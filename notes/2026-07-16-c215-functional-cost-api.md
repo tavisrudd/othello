@@ -2,7 +2,7 @@
 
 **Lane:** `repairports`
 
-**Status:** exact pointed first-obstruction split implemented; zero-term closed form remains.
+**Status:** exact fully fiberwise pointed first-obstruction formula implemented.
 
 ## Result
 
@@ -49,6 +49,19 @@ The full pointed obstruction is now classified by functional stratum:
 - `pointedNonembeddedCost_eq_min_zero_nonzero` proves that the exact full pointed cost is the
   minimum of the zero-functional term and `nonzeroOuterPointedFiberCost`.
 
+The zero sector is now closed as well. If another outer block exists and `dualCode I` is
+nontrivial, its exact value is
+
+```text
+pointedFunctionalFiberCost I e x 0 + dualDist I.
+```
+
+Otherwise it is `top`; an empty pointed target fiber also makes the displayed sum `top`.
+`zeroFunctionalPointedNonembeddedCost_eq_closed` proves all cases, and
+`pointedNonembeddedCost_eq_min_closed_nonzero` substitutes the result into the full minimum. Thus
+the complete target-conditioned first obstruction is expressed through independent inner-fiber
+costs, the ordinary inner dual distance, and an infimum over nonzero outer functional-dual tuples.
+
 This is an exact decomposition, not a field-priority claim. The classical concatenated-dual fiber
 structure remains prior art; the target-conditioned repair-obstruction use still requires a
 dedicated literature audit before any novelty language.
@@ -64,7 +77,7 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Derive the zero-sector closed form when another block exists and the inner dual is nontrivial: the
-target-pointed inner-dual cost plus one off-target word of weight `dualDist I`. Prove the singleton
-block, trivial-dual, and empty target-fiber cases as `top`, then replace the remaining direct
-zero-sector search in the full minimum formula.
+Turn the closed formula into a finite reference algorithm that enumerates outer functional-dual
+tuples and reuses a table of inner fiber and pointed-fiber costs. Prove agreement with the existing
+full-word exhaustive search, state the search-space reduction precisely, and then begin the
+targeted prior-art audit before treating the pointed use as a contribution.

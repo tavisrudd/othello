@@ -422,6 +422,161 @@ def zeroFunctionalPointedNonembeddedCost
       (fun l => blockFunctional I e (w l)) = 0 ∧
       ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n}
 
+/-- Closed-form candidate for the zero-functional sector.  A second block and a nontrivial inner
+dual are necessary; the pointed target-fiber cost itself records whether the target constraint is
+attainable. -/
+def zeroFunctionalPointedClosedCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (j : ι) (x : κ) : WithTop ℕ := by
+  classical
+  exact if (∃ l, l ≠ j) ∧ dualCode I ≠ ⊥ then
+      pointedFunctionalFiberCost I e x 0 + (dualDist I : WithTop ℕ)
+    else ⊤
+
+omit [DecidableEq ι] [DecidableEq κ] [DecidableEq V] in
+/-- The zero-functional sector is infinite exactly when it has no pointed nonembedded witness. -/
+theorem zeroFunctionalPointedNonembeddedCost_eq_top_iff
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    zeroFunctionalPointedNonembeddedCost I e O j x = ⊤ ↔
+      ¬ ∃ w, IsPointedNonembeddedWitness I e O j x w ∧
+        (fun l => blockFunctional I e (w l)) = 0 := by
+  constructor
+  · intro htop ⟨w, hw, hzero⟩
+    have hle : zeroFunctionalPointedNonembeddedCost I e O j x ≤
+        ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) := by
+      apply sInf_le
+      exact ⟨w, hw, hzero, rfl⟩
+    rw [htop] at hle
+    simp at hle
+  · intro hempty
+    have hset : {n | ∃ w : ι → (κ → 𝔽),
+        IsPointedNonembeddedWitness I e O j x w ∧
+          (fun l => blockFunctional I e (w l)) = 0 ∧
+          ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n} = ∅ := by
+      ext n
+      simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false]
+      rintro ⟨w, hw, hzero, -⟩
+      exact hempty ⟨w, hw, hzero⟩
+    simp only [zeroFunctionalPointedNonembeddedCost, hset, WithTop.sInf_empty]
+
+/-- **Zero-sector closed form.**  The exact pointed zero-functional obstruction is the pointed
+target inner-dual cost plus one minimum nonzero off-target inner-dual word, with `⊤` in every
+impossible edge case. -/
+theorem zeroFunctionalPointedNonembeddedCost_eq_closed
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    zeroFunctionalPointedNonembeddedCost I e O j x =
+      zeroFunctionalPointedClosedCost I e j x := by
+  classical
+  by_cases hother : ∃ l, l ≠ j
+  · by_cases hdual : dualCode I ≠ ⊥
+    · by_cases hpoint : ∃ z, IsPointedFunctionalRepresentative I e x 0 z
+      · have hclosed : zeroFunctionalPointedClosedCost I e j x =
+            pointedFunctionalFiberCost I e x 0 + (dualDist I : WithTop ℕ) := by
+          simp [zeroFunctionalPointedClosedCost, hother, hdual]
+        rw [hclosed]
+        apply le_antisymm
+        · obtain ⟨l, hlj⟩ := hother
+          obtain ⟨z, hz, hzcost⟩ :=
+            exists_pointedFunctionalFiberCost_realizer I e x 0 hpoint
+          obtain ⟨u, hudual, hu0, hunorm⟩ :=
+            exists_dualWord_hammingNorm_eq_dualDist I hdual
+          let w : ι → (κ → 𝔽) := fun a => if a = j then z else if a = l then u else 0
+          have hzero : (fun a => blockFunctional I e (w a)) = 0 := by
+            funext a
+            change blockFunctional I e (w a) = 0
+            by_cases haj : a = j
+            · subst a
+              simpa [w] using hz.1
+            · by_cases hal : a = l
+              · subst a
+                simp only [w, hlj, ↓reduceIte]
+                rw [blockFunctional_eq_zero_iff I e]
+                exact hudual
+              · simp only [w, haj, hal, if_false]
+                apply LinearMap.ext
+                intro v
+                simp [blockFunctional]
+          have hwdual : (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O) := by
+            apply flatten_mem_dualCode_concatenatedCode_of_functionalDual I e O w
+            rw [hzero]
+            exact Submodule.zero_mem _
+          have hwx : w j x ≠ 0 := by simpa [w] using hz.2
+          have hnembedded : ¬ IsEmbeddedInnerDualBlockAt I j w := by
+            intro hembedded
+            apply hu0
+            simpa [w, hlj] using hembedded.2 l hlj
+          have herase : (∑ a ∈ Finset.univ.erase j, hammingNorm (w a)) =
+              hammingNorm u := by
+            calc
+              (∑ a ∈ Finset.univ.erase j, hammingNorm (w a)) = hammingNorm (w l) := by
+                apply Finset.sum_eq_single l
+                · intro a ha hal
+                  have haj : a ≠ j := (Finset.mem_erase.mp ha).1
+                  simp [w, haj, hal]
+                · intro hl
+                  exact (hl (Finset.mem_erase.mpr ⟨hlj, Finset.mem_univ l⟩)).elim
+              _ = hammingNorm u := by simp [w, hlj]
+          have hsum : (∑ a, hammingNorm (w a)) = hammingNorm z + hammingNorm u := by
+            calc
+              (∑ a, hammingNorm (w a)) =
+                  (∑ a ∈ Finset.univ.erase j, hammingNorm (w a)) + hammingNorm (w j) :=
+                (Finset.sum_erase_add _ _ (Finset.mem_univ j)).symm
+              _ = hammingNorm u + hammingNorm z := by rw [herase]; simp [w]
+              _ = hammingNorm z + hammingNorm u := by omega
+          apply sInf_le
+          refine ⟨w, ⟨hwdual, hwx, hnembedded⟩, hzero, ?_⟩
+          rw [hsum, Nat.cast_add, hunorm, hzcost]
+        · apply le_sInf
+          intro n hn
+          obtain ⟨w, ⟨-, hwx, hnembedded⟩, hzero, rfl⟩ := hn
+          have hjzero : blockFunctional I e (w j) = 0 := by
+            exact congrFun hzero j
+          have hjdual : w j ∈ dualCode I :=
+            (blockFunctional_eq_zero_iff I e (w j)).mp hjzero
+          have htarget := pointedFunctionalFiberCost_le I e x 0 (w j) ⟨hjzero, hwx⟩
+          obtain ⟨l, hlj, hwl0⟩ : ∃ l, l ≠ j ∧ w l ≠ 0 := by
+            by_contra hnone
+            push Not at hnone
+            exact hnembedded ⟨hjdual, hnone⟩
+          have hlzero : blockFunctional I e (w l) = 0 := congrFun hzero l
+          have hldual : w l ∈ dualCode I :=
+            (blockFunctional_eq_zero_iff I e (w l)).mp hlzero
+          have hldist := dualDist_le_hammingNorm hldual hwl0
+          have hpair : hammingNorm (w j) + hammingNorm (w l) ≤
+              ∑ a, hammingNorm (w a) := by
+            have hsub : ({j, l} : Finset ι) ⊆ Finset.univ := by simp
+            have hp := Finset.sum_le_sum_of_subset hsub
+              (f := fun a => hammingNorm (w a))
+            simpa [hlj, Ne.symm hlj, add_comm] using hp
+          exact (add_le_add htarget (WithTop.coe_le_coe.mpr hldist)).trans
+            (WithTop.coe_le_coe.mpr hpair)
+      · have hzeroTop : zeroFunctionalPointedNonembeddedCost I e O j x = ⊤ :=
+          (zeroFunctionalPointedNonembeddedCost_eq_top_iff I e O j x).2 (by
+            rintro ⟨w, ⟨-, hwx, -⟩, hzero⟩
+            apply hpoint
+            exact ⟨w j, congrFun hzero j, hwx⟩)
+        have hpointTop : pointedFunctionalFiberCost I e x 0 = ⊤ :=
+          (pointedFunctionalFiberCost_eq_top_iff I e x 0).2 hpoint
+        simp [zeroFunctionalPointedClosedCost, hother, hdual, hzeroTop, hpointTop]
+    · have hzeroTop : zeroFunctionalPointedNonembeddedCost I e O j x = ⊤ :=
+        (zeroFunctionalPointedNonembeddedCost_eq_top_iff I e O j x).2 (by
+          rintro ⟨w, ⟨-, hwx, -⟩, hzero⟩
+          have hjdual : w j ∈ dualCode I :=
+            (blockFunctional_eq_zero_iff I e (w j)).mp (congrFun hzero j)
+          rw [not_ne_iff.mp hdual] at hjdual
+          have hwj0 : w j = 0 := by simpa using hjdual
+          exact hwx (congrFun hwj0 x))
+      simp [zeroFunctionalPointedClosedCost, hother, hdual, hzeroTop]
+  · have hzeroTop : zeroFunctionalPointedNonembeddedCost I e O j x = ⊤ :=
+      (zeroFunctionalPointedNonembeddedCost_eq_top_iff I e O j x).2 (by
+        rintro ⟨w, ⟨-, -, hnembedded⟩, hzero⟩
+        apply hnembedded
+        refine ⟨(blockFunctional_eq_zero_iff I e (w j)).mp (congrFun hzero j), ?_⟩
+        intro l hlj
+        exact (hother ⟨l, hlj⟩).elim)
+    simp [zeroFunctionalPointedClosedCost, hother, hzeroTop]
+
 /-- **Exact pointed first-obstruction split.**  The full pointed nonembedded cost is the minimum
 of the exceptional zero-functional sector and the fiberwise nonzero outer-functional sector. -/
 theorem pointedNonembeddedCost_eq_min_zero_nonzero
@@ -481,6 +636,16 @@ theorem pointedNonembeddedCost_eq_min_zero_nonzero
           · intro l
             rfl
           · exact hwx
+
+/-- The full pointed obstruction with both sectors in closed fiberwise form. -/
+theorem pointedNonembeddedCost_eq_min_closed_nonzero
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCost I e O j x =
+      min (zeroFunctionalPointedClosedCost I e j x)
+        (nonzeroOuterPointedFiberCost I e O j x) := by
+  rw [pointedNonembeddedCost_eq_min_zero_nonzero,
+    zeroFunctionalPointedNonembeddedCost_eq_closed]
 
 omit [DecidableEq ι] [DecidableEq κ] [DecidableEq V] in
 /-- The pointed cost is infinite exactly when there is no constrained nonembedded witness. -/
@@ -570,6 +735,8 @@ end PointedFiniteSearch
 #print axioms RepairPorts.pointedFunctionalTupleRealizationCost_eq
 #print axioms RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost
 #print axioms RepairPorts.pointedNonembeddedCost_eq_min_zero_nonzero
+#print axioms RepairPorts.zeroFunctionalPointedNonembeddedCost_eq_closed
+#print axioms RepairPorts.pointedNonembeddedCost_eq_min_closed_nonzero
 #print axioms RepairPorts.pointedNonembeddedCost_eq_top_iff
 #print axioms RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost
 #print axioms RepairPorts.pointedNonembeddedCostSearch_eq
