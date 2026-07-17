@@ -852,3 +852,71 @@ Frozen output:
 7ad1d0820688d2c81e089b8f5a5c84d839daebbd97aa13ab89d59eb30ee815e2  analyze_c210_thinned_coverage.py
 8893b06709383647ab990e47bd640e23fc34721bc977e2946650871638648452  analyze_c210_thinned_coverage_output.txt
 ```
+
+## Fourteenth coordinate gate: the coverage cubics have no hidden components
+
+The common-component exception in the preceding Bezout bound is now classified uniformly. Write
+
+```text
+eta=e0+e1*omega,        y=Y0+Y1*omega,        h=H0+H1*omega,
+g(r)=c0+omega*(a1*r^2+b1*r+c1),               omega^2+omega+1=0.
+```
+
+For all three orbit normal forms, `e1*a1*(a1^2+a1+1) != 0`. After expanding (12), the two
+coordinate cubics have leading forms
+
+```text
+r*t*(r+t),              a1*r^2*t.                            (13)
+```
+
+Consequently a common component has degree at most two and leading form `r`, `t`, or `r*t`.
+The linear cases have a direct geometric classification. A vertical factor `r+rho` occurs exactly
+when `(y,h)` is the repair point `R(rho)`: the `t^2` coefficients first force
+`rho=Y0+e0` and `Y1=e1`, and the `t` coefficients then force `h=g(rho)`. A horizontal factor
+`t+theta` occurs exactly when `(y,h)` is the seed point `S(theta)`: comparing the `r^2`
+coefficients gives `Y1*(a1^2+a1+1)=0`, hence `Y1=0` and `theta=Y0`, after which the `r`
+coefficients give `h=c_seed`.
+
+There is no quadratic common component. If
+
+```text
+Q=r*t+u*r+v*t+w
+```
+
+divides both cubics, their leading forms force quotients with leading parts `r+t` and `a1*r`.
+The first quotient gives `u=Y0+a1*Y1`; the second gives
+`a1*u=a1*(Y0+Y1)+Y1`. Thus `Y1*(a1^2+a1+1)=0`, so `Y1=0`. But the `t^2` coefficient of the
+second cubic simultaneously forces `Y1=e1`, a contradiction.
+
+It follows that every non-seed, non-repair affine target has at most nine candidates from each
+seed color. A repair target has the more useful exact hyperedge
+
+```text
+{r} union N_A(r) union N_B(r),                              (14)
+```
+
+where the two neighborhoods are the seed-colored two-repair collision graphs from the twelfth
+gate. Parameters outside the one-repair survivor set either already put `R(r)` on a seed secant or
+on the prescribed conic, so their targets require no repair. On the survivor set, every maximal
+independent set in the induced union collision graph hits every remaining hyperedge (14). At q=64
+that graph is empty, so (14) specializes to the forced singleton `{r}`, explaining part of the
+eighty singleton targets in the thirteenth gate.
+
+The remaining obstruction is now confined to the generic finite hyperedges of size at most
+eighteen after combining both seed colors. The next gate is to decide whether all such hyperedges
+can be hit by an independent subset of the positive-density one-repair survivor set. No generic
+hitting theorem, and therefore no affine-completeness theorem, is claimed yet.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/classify_c210_coverage_components.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/classify_c210_coverage_components_output.txt`.
+
+```text
+a31d24066f5aea18acbc248fc1fe9b9e7698c8f5100f3948ac95e04b1dd9119b  classify_c210_coverage_components.py
+03c88466b485f7b0e81dd7dd3571ead430666684bcef702ef98efecbb8d12e72  classify_c210_coverage_components_output.txt
+```

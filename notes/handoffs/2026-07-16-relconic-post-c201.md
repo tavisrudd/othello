@@ -85,11 +85,17 @@ by the `build-sys` lane.
    sparse domain can cover the residue left by the two full seed layers. The exact q=64 audit shows
    that naive thinning fails maximally: among 288 seed-uncovered affine targets, 80 have singleton
    repair candidates, every repair parameter is forced by at least eight targets, and only the full
-   repair layer covers. The general seed--repair collinearity condition now splits into two cubic
-   coordinate equations in `(r,t)`. Next classify their common-component targets and the resulting
-   singleton/small candidate hyperedges over `GF(8^m)`, then test whether those hitting constraints
-   admit an independent transversal in the degree-six collision graph. Do not widen the order
-   census before this symbolic classification. See
+   repair layer covers. The general seed--repair collinearity condition splits into two cubic
+   coordinate equations in `(r,t)`. Their common components are now completely classified: the
+   only positive-dimensional cases are targets on the repair graph or on a seed layer, and a short
+   coefficient comparison rules out every quadratic component uniformly. Generic targets have at
+   most nine candidates per seed color. A repair target has candidate hyperedge exactly
+   `{r} union N_A(r) union N_B(r)`; after restricting to the one-repair survivor set, every maximal
+   independent set in the induced degree-six collision graph covers all required repair targets
+   automatically. Next classify or control the
+   remaining generic hyperedges of size at most eighteen and prove that their hitting constraints
+   admit an independent subset of the positive-density one-repair survivor set. Do not widen the
+   order census before this symbolic hypergraph-compatibility gate. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
