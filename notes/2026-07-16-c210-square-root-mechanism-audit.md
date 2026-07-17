@@ -291,6 +291,50 @@ output, giving a small orbit-recognition problem for the next symbolic pass.
 This is the first viable nonconstant repair class, but it remains bounded evidence: it supplies no
 infinite construction and does not improve the paper's known numerical upper bounds.
 
+## Fifth coordinate gate: q=64 orbit recognition and affine completeness
+
+The twelve nonlinear survivors were compared as actual point sets, not coefficient strings. The
+checker enumerates all 262,080 elements of `PGL(2,64)` in their symmetric-square action preserving
+the standard conic, composes them with all six field automorphisms, and retains the subgroup
+preserving the fixed two-layer seed. That semilinear seed stabilizer has order eight and is already
+projective: it consists exactly of the subfield translations
+
+```text
+[X:Y:Z] -> [X:Y+d*X:Z+d^2*X],             d in F.
+```
+
+The twelve repairs split into three inequivalent seed-stabilizer orbits of size four. Within an
+orbit, `eta,a,b` are fixed and
+
+```text
+c -> c + a*d^2 + b*d,                      d in F.
+```
+
+gives exactly the four recorded constants. All three representatives satisfy the compact relations
+
+```text
+a*b = 8 = beta^3,             a/b in F^*,
+```
+
+in the frozen model with `(alpha,beta)=(1,2)`. Their subfield ratios `a/b` are `14,22,23`, and the
+corresponding coset invariants `Tr_E/F(eta)` are `14,24,22`. These are discovery coordinates, not
+yet a basis-free existence theorem.
+
+More importantly, every one of the nineteen uncovered points of every survivor lies on the line at
+infinity. There are no uncovered affine points. Hence each nonlinear 24-arc is a **complete affine
+arc** in `AG(2,64)`. Any two of its missing directions can be adjoined legally: after the first is
+adjoined, a secant through it and an affine selected point contains no other point at infinity; the
+second new point is therefore still legal. Their mutual secant is the entire line at infinity, so
+the resulting 26-arc is ordinarily complete. Both added points avoid the standard conic, whose
+point at infinity is `[0:0:1]`.
+
+This changes the construction signal. A characteristic-two family with the same three-layer affine
+coverage would give complete arcs of size `3s+2` in `PG(2,s^2)`, already disjoint from the prescribed
+standard conic, and would solve C210 on an infinite square-order sequence. The current result proves
+this only for `s=8`. A targeted literature search found adjacent work on complete affine,
+hyperfocused, and bicovering arcs, but no direct match for this three-subfield-parabola mechanism;
+no novelty claim is made without a dedicated source comparison.
+
 Reproduction:
 
 ```text
@@ -306,6 +350,7 @@ Repair-graph checker and affine-class probe:
 python3 papers/arcs_complete_outside_conic/check_c210_repair_graph_equations.py
 python3 papers/arcs_complete_outside_conic/probe_c210_affine_coset_repairs.py
 python3 papers/arcs_complete_outside_conic/probe_c210_quadratic_coset_repairs.py
+python3 papers/arcs_complete_outside_conic/analyze_c210_q64_quadratic_orbits.py
 ```
 
 Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
@@ -319,10 +364,12 @@ c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_rep
 040d38cac56d61efbd99899c39c23991bdc123b3c09fcb2f845ece4228a32fdc  probe_c210_affine_coset_repairs_output.txt
 56f9781d8d6abd0218f2d3fd2bb453fe6d1ee16928b1e5c5bcc7bc4f883c611c  probe_c210_quadratic_coset_repairs.py
 02ec5f85c1658a4d21724fc58872b2d94e3d8140a5b423c6b57f2d725b3ea4ce  probe_c210_quadratic_coset_repairs_output.txt
+8414e703504f3f20519c8c1833682e0afea1126474b181c50d5d725121838878  analyze_c210_q64_quadratic_orbits.py
+9d8eca6d73ced53bf961d1802b70aaa4e7d6902427558dc351f338f22ce5d019  analyze_c210_q64_quadratic_orbits_output.txt
 ```
 
-The next gate is to normalize the twelve `s=8` nonlinear survivors under parameter translation,
-the affine conic stabilizer, seed-layer exchange, and Frobenius. Extract invariant coefficient
-relations and rewrite their nineteen-point uncovered locus in trace/norm coordinates. Only then
-ask whether the pattern extends to `s=2^m`; a partial domain `T proper subset F` remains available
-if the full quadratic layer cannot cover uniformly.
+The next gate is a general characteristic-two coverage theorem. Normalize `alpha=1`, express
+`a,b,eta` through a subfield parameter `lambda=a/b` and trace data, and use formula (1) to prove that
+the seed--repair and repair--repair chord-height maps cover every affine fiber. In parallel, rewrite
+the one-repair and split-polynomial arc conditions as trace identities in `lambda`. Do not test a
+larger field until those equations predict which `lambda` should work.

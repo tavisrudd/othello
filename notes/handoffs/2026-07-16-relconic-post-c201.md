@@ -48,8 +48,12 @@ by the `build-sys` lane.
    two-repair/one-seed collision is equivalent to one subfield quadratic splitting distinctly.
    Twelve genuinely nonlinear `3s=24` repair arcs survive at `s=8`, all with nineteen uncovered
    points; two points at infinity complete the best to an ordinary 26-arc. No nonlinear layer
-   survives at `s=3,4,5,7`. Next normalize the twelve survivors under the conic stabilizer, seed
-   exchange, and Frobenius and identify their trace/norm pattern; do not widen the order census. See
+   survives at `s=3,4,5,7`. Exact conic-stabilizer recognition gives three orbits of four, generated
+   internally by subfield translations. All nineteen uncovered points lie at infinity, so these
+   are complete affine 24-arcs and any two missing directions give ordinary complete 26-arcs. A
+   uniform characteristic-two version would yield the target `3s+2` construction. Next derive its
+   affine-coverage and arc conditions as trace identities in `lambda=a/b`; do not widen the order
+   census until those identities predict a parameter. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
