@@ -1,5 +1,7 @@
 import RepairCodes.WeightedTransfer
 import RepairCodes.WeightedTransferExact
+import Mathlib.Data.Finmap
+import Mathlib.Data.List.Fold
 
 /-!
 # Functional-fiber costs for repair ports
@@ -880,6 +882,315 @@ theorem pointedNonembeddedCostFormulaSearch_eq_fullSearch
       pointedNonembeddedCostSearch I e O j x := by
   rw [pointedNonembeddedCostFormulaSearch_eq, pointedNonembeddedCostSearch_eq]
 
+/-! ## Single-pass cached evaluator -/
+
+local instance : DecidableEq (Module.Dual 𝔽 V) := Classical.decEq _
+
+/-- The two cached minima for a functional: ordinary, then constrained to be nonzero at `x`. -/
+abbrev FunctionalCostCacheEntry := WithTop ℕ × WithTop ℕ
+
+/-- Missing functional keys have infinite cost in both sectors. -/
+def functionalCostCacheLookup
+    (cache : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry)
+    (beta : Module.Dual 𝔽 V) : FunctionalCostCacheEntry :=
+  (cache.lookup beta).getD (⊤, ⊤)
+
+/-- Incorporate one ambient block into both minima stored at its represented functional. -/
+def functionalCostCacheInsert
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (cache : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry)
+    (w : κ → 𝔽) : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry :=
+  let beta := blockFunctional I e w
+  let old := functionalCostCacheLookup cache beta
+  let weight : WithTop ℕ := hammingNorm w
+  cache.insert beta
+    (min old.1 weight, if w x = 0 then old.2 else min old.2 weight)
+
+/-- A single traversal of the ambient inner block space, caching ordinary and pointed minima. -/
+def functionalCostCache
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ) :
+    Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry :=
+  (Finset.univ : Finset (κ → 𝔽)).toList.foldl
+    (functionalCostCacheInsert I e x) ∅
+
+/-- The ordinary contribution of one ambient block to one functional's cache entry. -/
+def ordinaryFunctionalCostContribution
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (beta : Module.Dual 𝔽 V) (w : κ → 𝔽) : WithTop ℕ :=
+  if beta = blockFunctional I e w then hammingNorm w else ⊤
+
+/-- The coordinate-pointed contribution of one ambient block to one functional's cache entry. -/
+def pointedFunctionalCostContribution
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) (w : κ → 𝔽) : WithTop ℕ :=
+  if beta = blockFunctional I e w ∧ w x ≠ 0 then hammingNorm w else ⊤
+
+omit [DecidableEq ι] [DecidableEq κ] [DecidableEq V] [Fintype 𝔽] [Fintype V] in
+theorem functionalCostCacheLookup_insert
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (cache : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry)
+    (w : κ → 𝔽) (beta : Module.Dual 𝔽 V) :
+    functionalCostCacheLookup (functionalCostCacheInsert I e x cache w) beta =
+      (min (functionalCostCacheLookup cache beta).1
+          (ordinaryFunctionalCostContribution I e beta w),
+        min (functionalCostCacheLookup cache beta).2
+          (pointedFunctionalCostContribution I e x beta w)) := by
+  classical
+  by_cases hbeta : beta = blockFunctional I e w
+  · subst beta
+    by_cases hx : w x = 0
+    · simp [functionalCostCacheLookup, functionalCostCacheInsert,
+        ordinaryFunctionalCostContribution, pointedFunctionalCostContribution, hx]
+    · simp [functionalCostCacheLookup, functionalCostCacheInsert,
+        ordinaryFunctionalCostContribution, pointedFunctionalCostContribution, hx]
+  · simp [functionalCostCacheLookup, functionalCostCacheInsert,
+      ordinaryFunctionalCostContribution, pointedFunctionalCostContribution, hbeta]
+
+omit [DecidableEq ι] in
+theorem functionalCostCacheLookup_foldl
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (ws : List (κ → 𝔽))
+    (cache : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry)
+    (beta : Module.Dual 𝔽 V) :
+    functionalCostCacheLookup
+        (ws.foldl (functionalCostCacheInsert I e x) cache) beta =
+      ws.foldl (fun (old : FunctionalCostCacheEntry) w =>
+        (min old.1 (ordinaryFunctionalCostContribution I e beta w),
+          min old.2 (pointedFunctionalCostContribution I e x beta w)))
+        (functionalCostCacheLookup cache beta) := by
+  induction ws generalizing cache with
+  | nil => rfl
+  | cons w ws ih =>
+      simp only [List.foldl_cons]
+      rw [ih, functionalCostCacheLookup_insert]
+
+omit [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
+  [Field 𝔽] [DecidableEq 𝔽] [Fintype 𝔽] in
+theorem foldl_cacheEntry_fst
+    (ws : List (κ → 𝔽)) (f g : (κ → 𝔽) → WithTop ℕ)
+    (init : FunctionalCostCacheEntry) :
+    (ws.foldl (fun old w => (min old.1 (f w), min old.2 (g w))) init).1 =
+      (ws.map f).foldl min init.1 := by
+  induction ws generalizing init with
+  | nil => rfl
+  | cons w ws ih =>
+      simp only [List.foldl_cons, List.map_cons]
+      exact ih _
+
+omit [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
+  [Field 𝔽] [DecidableEq 𝔽] [Fintype 𝔽] in
+theorem foldl_cacheEntry_snd
+    (ws : List (κ → 𝔽)) (f g : (κ → 𝔽) → WithTop ℕ)
+    (init : FunctionalCostCacheEntry) :
+    (ws.foldl (fun old w => (min old.1 (f w), min old.2 (g w))) init).2 =
+      (ws.map g).foldl min init.2 := by
+  induction ws generalizing init with
+  | nil => rfl
+  | cons w ws ih =>
+      simp only [List.foldl_cons, List.map_cons]
+      exact ih _
+
+omit [Fintype ι] [DecidableEq ι] in
+theorem toList_map_foldl_min_eq_inf
+    {A B : Type*} [LinearOrder B] [OrderTop B]
+    (s : Finset A) (f : A → B) :
+    (s.toList.map f).foldl min ⊤ = s.inf f := by
+  calc
+    (s.toList.map f).foldl min ⊤ =
+        (s.toList.map f).foldr min ⊤ := List.foldl_eq_foldr
+    _ = ((s.toList.map f : List B) : Multiset B).inf :=
+      (Multiset.inf_coe _).symm
+    _ = (s.1.map f).inf := by rw [← Multiset.map_coe, Finset.coe_toList]
+    _ = s.inf f := (Finset.inf_def).symm
+
+/-- Ordinary cached lookup. -/
+def cachedFunctionalFiberCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) : WithTop ℕ :=
+  (functionalCostCacheLookup (functionalCostCache I e x) beta).1
+
+/-- Coordinate-pointed cached lookup. -/
+def cachedPointedFunctionalFiberCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) : WithTop ℕ :=
+  (functionalCostCacheLookup (functionalCostCache I e x) beta).2
+
+omit [DecidableEq ι] in
+theorem cachedFunctionalFiberCost_eq_inf
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) :
+    cachedFunctionalFiberCost I e x beta =
+      (Finset.univ : Finset (κ → 𝔽)).inf
+        (ordinaryFunctionalCostContribution I e beta) := by
+  rw [cachedFunctionalFiberCost, functionalCostCache, functionalCostCacheLookup_foldl]
+  rw [foldl_cacheEntry_fst]
+  simpa [functionalCostCacheLookup] using
+    toList_map_foldl_min_eq_inf (Finset.univ : Finset (κ → 𝔽))
+      (ordinaryFunctionalCostContribution I e beta)
+
+omit [DecidableEq ι] in
+theorem cachedPointedFunctionalFiberCost_eq_inf
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) :
+    cachedPointedFunctionalFiberCost I e x beta =
+      (Finset.univ : Finset (κ → 𝔽)).inf
+        (pointedFunctionalCostContribution I e x beta) := by
+  rw [cachedPointedFunctionalFiberCost, functionalCostCache,
+    functionalCostCacheLookup_foldl]
+  rw [foldl_cacheEntry_snd]
+  simpa [functionalCostCacheLookup] using
+    toList_map_foldl_min_eq_inf (Finset.univ : Finset (κ → 𝔽))
+      (pointedFunctionalCostContribution I e x beta)
+
+omit [DecidableEq ι] in
+/-- The ordinary component of the single-pass cache is the canonical functional-fiber cost. -/
+theorem cachedFunctionalFiberCost_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) :
+    cachedFunctionalFiberCost I e x beta = functionalFiberCost I e beta := by
+  rw [cachedFunctionalFiberCost_eq_inf]
+  apply le_antisymm
+  · obtain ⟨w, hw, hcost⟩ := exists_functionalFiberCost_realizer I e beta
+    calc
+      (Finset.univ : Finset (κ → 𝔽)).inf
+          (ordinaryFunctionalCostContribution I e beta) ≤
+          ordinaryFunctionalCostContribution I e beta w :=
+        Finset.inf_le (Finset.mem_univ w)
+      _ = (functionalFiberCost I e beta : WithTop ℕ) := by
+        simp [ordinaryFunctionalCostContribution, hw, hcost]
+  · apply Finset.le_inf
+    intro w _
+    simp only [ordinaryFunctionalCostContribution]
+    split
+    · rename_i hw
+      exact_mod_cast functionalFiberCost_le I e beta w hw.symm
+    · exact le_top
+
+omit [DecidableEq ι] in
+/-- The pointed component of the single-pass cache is the canonical pointed fiber cost. -/
+theorem cachedPointedFunctionalFiberCost_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) :
+    cachedPointedFunctionalFiberCost I e x beta =
+      pointedFunctionalFiberCost I e x beta := by
+  rw [cachedPointedFunctionalFiberCost_eq_inf]
+  by_cases hex : ∃ w, IsPointedFunctionalRepresentative I e x beta w
+  · apply le_antisymm
+    · obtain ⟨w, hw, hcost⟩ :=
+        exists_pointedFunctionalFiberCost_realizer I e x beta hex
+      calc
+        (Finset.univ : Finset (κ → 𝔽)).inf
+            (pointedFunctionalCostContribution I e x beta) ≤
+            pointedFunctionalCostContribution I e x beta w :=
+          Finset.inf_le (Finset.mem_univ w)
+        _ = pointedFunctionalFiberCost I e x beta := by
+          simp [pointedFunctionalCostContribution, hw.1, hw.2, hcost]
+    · apply Finset.le_inf
+      intro w _
+      simp only [pointedFunctionalCostContribution]
+      split
+      · rename_i hw
+        exact pointedFunctionalFiberCost_le I e x beta w ⟨hw.1.symm, hw.2⟩
+      · exact le_top
+  · rw [(pointedFunctionalFiberCost_eq_top_iff I e x beta).2 hex]
+    apply top_unique
+    apply Finset.le_inf
+    intro w _
+    simp only [pointedFunctionalCostContribution]
+    split
+    · rename_i hw
+      exact (hex ⟨w, hw.1.symm, hw.2⟩).elim
+    · exact le_rfl
+
+/-- Evaluate one pointed functional tuple using only an already-built cache. -/
+def cachedPointedFunctionalTupleCostFromCache
+    (cache : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry)
+    (j : ι) (beta : ι → Module.Dual 𝔽 V) : WithTop ℕ :=
+  (functionalCostCacheLookup cache (beta j)).2 +
+    ∑ l ∈ Finset.univ.erase j, (functionalCostCacheLookup cache (beta l)).1
+
+/-- Tuple evaluation from the single-pass cache computes the abstract additive tuple cost. -/
+theorem cachedPointedFunctionalTupleCostFromCache_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V) :
+    cachedPointedFunctionalTupleCostFromCache (functionalCostCache I e x) j beta =
+      pointedFunctionalTupleCost I e j x beta := by
+  rw [cachedPointedFunctionalTupleCostFromCache, pointedFunctionalTupleCost]
+  have hpointed : (functionalCostCacheLookup (functionalCostCache I e x) (beta j)).2 =
+      pointedFunctionalFiberCost I e x (beta j) :=
+    cachedPointedFunctionalFiberCost_eq I e x (beta j)
+  rw [hpointed]
+  congr 1
+  calc
+    ∑ l ∈ Finset.univ.erase j,
+        (functionalCostCacheLookup (functionalCostCache I e x) (beta l)).1 =
+        ∑ l ∈ Finset.univ.erase j,
+          (functionalFiberCost I e (beta l) : WithTop ℕ) := by
+      apply Finset.sum_congr rfl
+      intro l _
+      exact cachedFunctionalFiberCost_eq I e x (beta l)
+    _ = ((∑ l ∈ Finset.univ.erase j,
+        functionalFiberCost I e (beta l) : ℕ) : WithTop ℕ) := by norm_cast
+
+/-- Scan the nonzero outer functional-dual tuples using only an already-built cache. -/
+def cachedNonzeroOuterPointedFiberCostFromCache
+    (cache : Finmap fun _ : Module.Dual 𝔽 V => FunctionalCostCacheEntry)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) : WithTop ℕ :=
+  sInf (((nonzeroFunctionalDualCandidates O).image fun beta =>
+    cachedPointedFunctionalTupleCostFromCache cache j beta) : Set (WithTop ℕ))
+
+/-- The cached outer scan computes the same nonzero sector as the reference formula search. -/
+theorem cachedNonzeroOuterPointedFiberCostFromCache_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    cachedNonzeroOuterPointedFiberCostFromCache (functionalCostCache I e x) O j =
+      nonzeroOuterPointedFiberCostSearch I e O j x := by
+  apply congrArg sInf
+  ext n
+  simp only [Finset.mem_coe, Finset.mem_image]
+  constructor
+  · rintro ⟨beta, hbeta, rfl⟩
+    exact ⟨beta, hbeta, (pointedFunctionalTupleCostSearch_eq I e j x beta).trans
+      (cachedPointedFunctionalTupleCostFromCache_eq I e j x beta).symm⟩
+  · rintro ⟨beta, hbeta, rfl⟩
+    exact ⟨beta, hbeta, (cachedPointedFunctionalTupleCostFromCache_eq I e j x beta).trans
+      (pointedFunctionalTupleCostSearch_eq I e j x beta).symm⟩
+
+/-- Complete cached formula evaluator.  The `let` binds the sole inner-ambient traversal; both
+the zero sector and every outer tuple read the resulting table. -/
+def pointedNonembeddedCostCachedSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  let cache := functionalCostCache I e x
+  let zeroCost := if (∃ l, l ≠ j) ∧ dualCode I ≠ ⊥ then
+      (functionalCostCacheLookup cache 0).2 + (dualDist I : WithTop ℕ)
+    else ⊤
+  min zeroCost (cachedNonzeroOuterPointedFiberCostFromCache cache O j)
+
+/-- The single-pass cached evaluator agrees with the extensional formula evaluator. -/
+theorem pointedNonembeddedCostCachedSearch_eq_formulaSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCostCachedSearch I e O j x =
+      pointedNonembeddedCostFormulaSearch I e O j x := by
+  rw [pointedNonembeddedCostCachedSearch, pointedNonembeddedCostFormulaSearch,
+    zeroFunctionalPointedClosedCostSearch]
+  rw [cachedNonzeroOuterPointedFiberCostFromCache_eq]
+  have hpointed : (functionalCostCacheLookup (functionalCostCache I e x) 0).2 =
+      pointedFunctionalFiberCostSearch I e x 0 := by
+    rw [pointedFunctionalFiberCostSearch_eq]
+    exact cachedPointedFunctionalFiberCost_eq I e x 0
+  rw [hpointed]
+
+/-- The single-pass cached evaluator agrees with exhaustive full block-word search. -/
+theorem pointedNonembeddedCostCachedSearch_eq_fullSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCostCachedSearch I e O j x =
+      pointedNonembeddedCostSearch I e O j x := by
+  rw [pointedNonembeddedCostCachedSearch_eq_formulaSearch,
+    pointedNonembeddedCostFormulaSearch_eq_fullSearch]
+
 end FiberwiseFiniteSearch
 
 #print axioms RepairPorts.exists_functionalFiberCost_realizer
@@ -900,6 +1211,7 @@ end FiberwiseFiniteSearch
 #print axioms RepairPorts.pointedFunctionalTupleCostSearch_eq
 #print axioms RepairPorts.nonzeroOuterPointedFiberCostSearch_eq
 #print axioms RepairPorts.pointedNonembeddedCostFormulaSearch_eq_fullSearch
+#print axioms RepairPorts.pointedNonembeddedCostCachedSearch_eq_fullSearch
 
 end
 

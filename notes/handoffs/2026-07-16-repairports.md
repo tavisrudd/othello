@@ -4,10 +4,11 @@
 
 **Date:** 2026-07-16
 **Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
-costs, exact fully fiberwise pointed formula, and verified finite reference evaluator are
-implemented.
+costs, exact fully fiberwise pointed formula, verified finite reference evaluator, and single-pass
+functional-cost cache are implemented.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
+**Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
 
 ## Goal
 
@@ -20,7 +21,7 @@ twisted-cubic--axis paper.
 
 | Task | Status | Deliverable | Promotion gate |
 |---|---|---|---|
-| C215 | active; cost/search API implemented | weighted functional-dual theory | exact criterion plus a strict natural example |
+| C215 | active; cached cost/search API implemented | weighted functional-dual theory | exact criterion plus a strict natural example |
 | C216 | queued after C215 definition layer | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | bounded scout after C215 definitions | circuit-coefficient gauge invariants | nontrivial holonomy/cross-ratio with a consequence |
 | C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
@@ -29,11 +30,9 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Implement a genuinely cached finite evaluator that traverses inner ambient blocks once, stores
-ordinary and coordinate-pointed fiber minima, and scans the outer functional-dual tuples. The
-current extensional reference evaluator already agrees with exhaustive full-word search, but does
-not justify a runtime claim; see
-[`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
+Begin the targeted prior-art audit of concatenated-code dual coset enumerators, separation vectors,
+and weighted dual metrics. Then develop the strict natural example required by C215's promotion
+gate; see [`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
 
 ## Scope and ownership
 

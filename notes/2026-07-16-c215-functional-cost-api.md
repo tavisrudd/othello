@@ -2,7 +2,8 @@
 
 **Lane:** `repairports`
 
-**Status:** exact fully fiberwise formula and verified finite reference evaluator implemented.
+**Status:** exact fully fiberwise formula, verified finite reference evaluator, and single-pass
+functional-cost cache implemented.
 
 ## Result
 
@@ -71,10 +72,25 @@ The finite formula evaluator is now kernel-checked:
 - `pointedNonembeddedCostFormulaSearch_eq_fullSearch` proves equality with exhaustive pointed
   block-word search.
 
-The two exposed finite domains have sizes `|F|^|κ|` for ambient inner blocks and at most
-`|V*|^|ι|` for outer functional tuples, versus `|F|^(|ι| |κ|)` full block families. The
-current Lean evaluator calls the fiber searches extensionally and does not implement a shared
-memoized table, so these domain counts are not yet a runtime or asymptotic-complexity claim.
+The cached evaluator now traverses the `|F|^|κ|` ambient inner blocks once. A `Finmap` keyed by the
+represented functional stores two minima at each key: the ordinary fiber cost and the cost
+constrained to be nonzero at the distinguished coordinate. One shared cache then supplies the
+closed zero sector and every tuple in the outer scan. The outer domain has size at most
+`|V*|^|ι|`, versus `|F|^(|ι| |κ|)` full block families.
+
+The cache implementation is kernel-checked as a finite structural evaluator, but no wall-clock
+benchmark or extracted executable has yet been supplied. Accordingly the report makes no measured
+runtime claim.
+
+Correctness is proved in layers:
+
+- `functionalCostCacheLookup_foldl` specifies the table after any prefix of the ambient traversal;
+- `cachedFunctionalFiberCost_eq` and `cachedPointedFunctionalFiberCost_eq` identify both stored
+  minima with the canonical costs;
+- `cachedPointedFunctionalTupleCostFromCache_eq` verifies cache-only tuple evaluation;
+- `cachedNonzeroOuterPointedFiberCostFromCache_eq` verifies the outer scan;
+- `pointedNonembeddedCostCachedSearch_eq_fullSearch` proves equality with exhaustive full block-word
+  search.
 
 This is an exact decomposition, not a field-priority claim. The classical concatenated-dual fiber
 structure remains prior art; the target-conditioned repair-obstruction use still requires a
@@ -82,17 +98,15 @@ dedicated literature audit before any novelty language.
 
 ## Validation
 
-Guarded elaboration of `RepairPorts/FunctionalCost.lean` passes. The printed headline theorems use
-only `propext`, `Classical.choice`, and `Quot.sound`; the source contains no `sorry`, `admit`, or
-new axiom declaration.
+Guarded elaboration of `RepairPorts/FunctionalCost.lean` passes. The printed cached-evaluator
+headline theorem, like the earlier headline theorems, uses only `propext`, `Classical.choice`, and
+`Quot.sound`; the source contains no `sorry`, `admit`, or new axiom declaration.
 
 The future `RepairPorts.lean` aggregate requires a new Lake library entry. Shared build
 configuration is owned by `build-sys`, so this lane does not edit it unilaterally.
 
 ## Next step
 
-Implement an actual cached table evaluator that traverses the inner ambient space once, records
-ordinary and coordinate-pointed minima by functional class, and then scans the outer
-functional-dual tuples. Prove it equal to the reference formula evaluator before making a measured
-runtime claim. In parallel, begin the targeted prior-art audit before treating the pointed use as
-a contribution.
+Begin the targeted prior-art audit before treating the pointed use as a contribution. Then develop
+the strict natural example required by C215's promotion gate. An extracted executable and benchmark
+remain optional follow-up work if a measured runtime claim becomes useful.
