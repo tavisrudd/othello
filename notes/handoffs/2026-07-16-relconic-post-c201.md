@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — Baer-transversal square-root design selected
+**Status:** C210 ACTIVE — mixed-seed monodromy/compositum gate
 
 ## Current state
 
@@ -66,8 +66,14 @@ by the `build-sys` lane.
    the two bad sets are translates of
    `B_s={x!=0,1:tr(1/(x^2+x))=0}` by `delta=tau,tau^6,tau^5` in the three orbits. Their union has
    size `3s/4+O(sqrt(s))`, leaving at most `s/4+O(sqrt(s))` repair parameters before the other arc
-   gates. Next eliminate the mixed-seed chord equations and test whether a linear-size domain
-   survives; defer affine coverage until then, and do not widen the order census. See
+   gates. The mixed-seed variables now eliminate to one explicit quintic `M(r,d)` for each repair
+   parameter. As a curve in `(r,d)`, it is geometrically irreducible: in the `r` coordinate it is a
+   separable additive quartic, and the rational right side has an odd order-three pole. This rules
+   out component-level forced collisions but does not yet prove that rootless quintic fibers meet
+   the two same-seed trace complements in positive density. Next determine the arithmetic
+   monodromy of the quintic cover and its compositum with those two Artin--Schreier covers; a
+   compatible derangement class is the linear-domain certificate. Defer the two-repair collision
+   graphs and affine coverage until then, and do not widen the order census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

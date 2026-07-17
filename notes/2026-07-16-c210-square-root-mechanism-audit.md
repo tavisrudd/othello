@@ -604,3 +604,59 @@ asymptotic density at most one quarter:
 The next symbolic gate is the first item: eliminate the mixed-seed chord equations for the three
 normal forms and determine whether they impose another positive-density deletion.  Coverage work
 should wait until a linear-size domain survives all arc-legality gates.
+
+## Tenth coordinate gate: mixed-seed collisions form a regular quintic cover
+
+The mixed `A`--`B` chord variables can also be eliminated without an extension-field census. Work
+over a characteristic-two field `F` containing the frozen `GF(8)` coefficients and retain
+
+```text
+omega^2+omega+1=0,               beta=1+tau*omega,
+eta=e0+e1*omega,                 g(r)=g0+omega*(a1*r^2+b1*r+c1).
+```
+
+Put `h(r)=a1*r^2+b1*r+c1+e1^2`. If the seed parameters are `t,t+d`, where
+`d!=0`, the `omega` coordinate of the chord equation determines `t` uniquely. Substitution into
+its `F` coordinate shows that the repair point at `r` lies on a mixed-seed chord exactly when
+`M(r,d)=0` for some `d in F^*`, where
+
+```text
+M(r,d) = e1^2*d^5 + e1*tau*d^4 + (h(r)^2+tau*h(r))*d^3
+         + e1*tau^2*d^2 + (g0+1)*tau^2*d + tau^3*e1.       (7)
+```
+
+The deterministic checker derives (7) for all three orbit normal forms and compares it with the
+original chord formula for every `(r,d)` over `GF(8)`. There are no roots, as required by the known
+full `q=64` arcs.
+
+Equation (7) also exposes the correct asymptotic object. As a polynomial in `r`, after division by
+`d^3`, it is a separable additive quartic plus a constant: its linear coefficient is
+`tau*b1!=0`. Its rational right side has an exact pole of order three at `d=0`, because
+`tau^3*e1!=0`. Over the algebraic closure, every nontrivial index-two quotient of the additive
+quartic is an Artin--Schreier equation. A rational Artin--Schreier coboundary has even pole order,
+so the order-three pole makes every quotient nontrivial. The mixed-collision curve is therefore
+geometrically irreducible. Equivalently, projection to the `r`-line gives a regular, generically
+separable degree-five cover whose rational fibers are exactly the forbidden mixed parameters.
+
+This is a genuine elimination, but not yet a linear-survivor theorem. Geometric irreducibility
+rules out a component-level forced collision; it does not by itself exclude exceptional Frobenius
+cosets in which every rational fiber has a point. More importantly, even a positive-density set
+of rootless quintics need not meet the density-one-quarter complement of
+`B_s union (B_s+delta)` in positive density. The next gate is therefore the arithmetic monodromy
+of (7) together with the two Artin--Schreier trace covers. A derangement class in the required
+Frobenius coset of that compositum would certify a linear-size domain surviving all one-repair
+collision gates. Until then, the two-repair/one-seed graphs and affine coverage remain deferred.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_mixed_seed_collisions.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_mixed_seed_collisions_output.txt`.
+
+```text
+fb2f08f232919ae10490ec7b056df8e73e21d1629696be3a9ce7999e7c945811  analyze_c210_mixed_seed_collisions.py
+a0007cbcfc1363c7782406a47f0ae4655bcc1ffec7ceed33d369132844ac2084  analyze_c210_mixed_seed_collisions_output.txt
+```
