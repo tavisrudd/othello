@@ -71,7 +71,7 @@ unless they retain an explicit open tail.
 ### `relconic`
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
-- **C210 `[relconic]` [ACTIVE; TWO-COSET EXCEPTIONAL LOCUS]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; the coefficient-generic trace-one collision curve is absolutely irreducible, `a=0` is the exact first degree-drop divisor but remains generically absolutely irreducible, and its `a=b=0` intersection closes all twelve normalized q=64 scalar seeds by degree-three collisions; coefficient-varying points on that intersection, lower factorization strata, and `H=J=0` containment remain before any affine-coverage test → `notes/2026-07-16-arcs-sqrtq-construction-program.md`, `notes/2026-07-16-c210-square-root-mechanism-audit.md`.
+- **C210 `[relconic]` [ACTIVE; TWO-COSET EXCEPTIONAL LOCUS]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; on `a=b=0` the reconstruction boundary is absent throughout the odd tower and the inseparable divisor is collision-forcing, but 270 of 5376 normalized q=64 coefficient tuples survive both seed-color parity gates before legality, while none of the twelve arc-legal pairs survives; the normalized arc-legality intersection is next → `notes/2026-07-16-arcs-sqrtq-construction-program.md`, `notes/2026-07-16-c210-square-root-mechanism-audit.md`.
 
 ### `repaircodes`
 

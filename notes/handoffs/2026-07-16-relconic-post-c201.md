@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the first two-coset degree-drop divisor is classified generically
+**Status:** C210 ACTIVE — constant-height arithmetic now reduces to an arc-legality intersection
 
 ## Current state
 
@@ -190,9 +190,16 @@ by the `build-sys` lane.
    collision-free stratum survives. The trace-one cover now has exact `t`-degrees `4`, `2`, and
    `0` on `a!=0`, `a=0,b!=0`, and `a=b=0`. The divisor `a=0` remains generically absolutely
    irreducible and collision-forcing. On `a=b=0`, the curve is univariate; all twelve normalized
-   q=64 trace-one two-layer arcs acquire a collision over relative degree three. Next classify the
-   coefficient-varying `a=b=0` arithmetic, the lower factorization strata in `a=0,b!=0`, and the
-   factorization divisors on `a!=0`, then intersect every survivor with `H=J=0`.
+   q=64 trace-one two-layer arcs acquire a collision over relative degree three. On the full
+   coefficient-varying `a=b=0` locus, `H=delta*p^2*(z^2+z+1)` never vanishes on an odd scalar
+   extension, so the reconstruction boundary disappears. The resultant is `H^2*h0+N(z)`; its
+   exact inseparable divisor `h1=e^2+e*p` is collision-forcing because it reduces to a cubic in
+   `z^2`. The separable complement has genuine pre-legality arithmetic survivors: an exact
+   normalized GF(8) quotient has 270 of 5376 tuples with no odd factor for either seed color, while
+   none of the twelve arc-legal trace-one pairs survives. Next derive the normalized constant-height
+   arc conditions and intersect them with that even-factor condition. Only joint survivors should
+   proceed to the lower factorization strata in `a=0,b!=0` and the factorization divisors on
+   `a!=0`; `H=J=0` needs no further work on `a=b=0`.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 

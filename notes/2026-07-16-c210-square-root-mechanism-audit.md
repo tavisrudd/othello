@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — seed--cross-repair legality is an explicit resultant-curve gate
+**Status**: ACTIVE — the constant-height arithmetic has genuine non-arc survivors
 
 ## Boundary from the literature
 
@@ -2608,6 +2608,76 @@ Frozen output:
 ```text
 a1c3712eb60a9cc1d1701a20c2522b2fb330db06a78ad69e52fafcae4af350ae  analyze_c210_collision_curve_degree_drop.py
 12db8ef114c8fa29815de5f8fe2e2e833b995b4e5c4fc0f65da5ced974638387  analyze_c210_collision_curve_degree_drop_output.txt
+```
+
+## Fortieth coordinate gate: constant-height arithmetic does not close before legality
+
+The coefficient-varying intersection `a=b=0` admits a sharper normalization than the finite
+classification above.  Put
+
+```text
+z=u/p+w,                    h0=c0+g0,     h1=c1+g1.    (79)
+```
+
+On the common trace-one cover, the reconstruction denominator becomes exactly
+
+```text
+H=delta*p^2*(z^2+z+1).                                  (80)
+```
+
+Every scalar field under consideration has odd degree over `GF(2)`, so it contains no `GF(4)`.
+Consequently `z^2+z+1` has no root in any odd scalar extension: the entire `a=b=0` locus is
+disjoint from the exceptional reconstruction boundary `H=J=0` throughout the intended tower.
+
+The resultant is independent of the seed parameter `t` and of `g0,g1` separately.  It is a
+degree-six polynomial in `z`, linear in `h0`, and the coefficient of `h0` is exactly `H^2`.
+Writing `R=H^2*h0+N(z)`, exact differentiation gives
+
+```text
+dN/dz = delta*p^3*(e^2+e*p+h1)*B(z),                    (81)
+
+B(z) = p^2*z^4+delta*p*z^2+p^2*w^2+delta*p*w
+       +delta^2+delta*p+p^2.
+```
+
+Thus `h1=e^2+e*p` is the exact inseparable divisor.  There `R` is a degree-three polynomial in
+`z^2`.  Every cubic over a finite field has an irreducible factor of odd degree, and Frobenius
+squaring does not change that extension degree.  Hence this whole divisor acquires a reconstructible
+seed--cross-repair collision on an odd scalar extension.
+
+The separable complement does not admit the same arithmetic closure.  The polynomial is weighted
+homogeneous under
+
+```text
+(e,delta,p,h0,h1) -> (lambda*e,lambda*delta,lambda*p,
+                       lambda^2*h0,lambda^2*h1),
+```
+
+so set `p=1`; quotient the trace parameter by `w -> w+1` and pair the two seed colors by
+`h1 -> h1+tau`.  Among all `5376` exact normalized `GF(8)` coefficient tuples, `3174` give an
+odd-degree factor for both seed colors, `1932` for exactly one, and `270` for neither.  The last
+`270` are genuine arithmetic survivors of the collision polynomial, although the preceding exact
+arc census proves that none of the twelve arc-legal trace-one pairs lies among them.  Therefore
+factor parity alone cannot close the coefficient-varying constant-height locus; arc legality must
+be imposed before any further arithmetic elimination.  This is a structural reduction, not a
+larger plane census.
+
+Next derive the constant-height two-layer arc conditions in the normalized variables and intersect
+their function-field locus with the two-seed even-factor condition.  Only survivors of that joint
+gate should proceed to the lower factorization strata in `a=0,b!=0`.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_collision_curve_constant_height.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_collision_curve_constant_height_output.txt`.
+
+```text
+9a0bcf485312f2c9668210f0f3d79676660b6578ebc94dffab96221f68fccc9d  analyze_c210_collision_curve_constant_height.py
+3e82aa555c7100fc2f03ce7fdfb32eea3b0bf18951e8affa24ad3338373eecb3  analyze_c210_collision_curve_constant_height_output.txt
 ```
 
 ## Cross-lane imports worth retaining
