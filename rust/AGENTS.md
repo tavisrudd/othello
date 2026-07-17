@@ -1,7 +1,7 @@
-Read *all* of `../AGENTS.md` before doing anything else in this repository.  Reading it is a
-startup barrier: the command that reads it must contain no search, status check, build, or other
-repository operation.  Interpret it first, then issue a separate command that follows its rules.
+Before any other repository operation, read *all* of `../AGENTS.md` in a dedicated command.  Do not
+combine that command with a search, status check, build, or other operation.  Interpret the rules
+before issuing the next command.
 
-If the user says `go`, `go C<id>`, or just `C<id>` (for example, `go C123`), treat it as a task/lane
-routing instruction.  Follow the routing rules in `../AGENTS.md`; never discover the task with a
-repository-wide search or a search for the bare numeric portion of the ID.
+`go`, `go C<id>`, and bare `C<id>` (for example, `go C123`) are task/lane routing instructions.
+Follow `../AGENTS.md`; never resolve them by repository-wide search or by searching for the bare
+number.

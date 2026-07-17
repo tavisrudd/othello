@@ -10,9 +10,8 @@ This file is the always-loaded rules layer. Keep it short and stable.
 
 At the start of a session:
 
-1. Reading this guide is a startup barrier. The command that reads it must contain no search,
-   status check, build, or other repository operation. Read and interpret the complete guide first;
-   only then issue a separate command under its rules.
+1. Before any other repository operation, read and interpret this complete guide in a dedicated
+   command containing no search, status check, build, or other operation.
 2. Select a lane from the user's explicit alias, named handoff, or named task. Do not infer one from
    git, the numeric value of a task ID, or the previous session.
    At the start of a session, a bare `C<id>` and a literal `go C<id>` both explicitly select that
@@ -154,27 +153,26 @@ history rewrites, non-fast-forward changes, `git push`, or a real n=16 run.
 
 ## Command-output and source hygiene
 
-Token waste is a correctness failure, not merely a presentation issue. A tool output cap truncates
-what enters context; it does **not** make an over-broad command safe or scoped. Shape every command
-so the producer itself examines only the needed sources and emits only a small, predictable result.
+Token waste is a correctness failure. Tool output caps only truncate context; they do **not** make
+broad commands safe. Every producer must read only needed sources and emit a small, predictable
+result.
 
-**Hard search preflight — required before every `rg`, `grep`, `find`, or equivalent call:**
+**Before every `rg`, `grep`, `find`, or equivalent call, all of these must be visible in the
+command:**
 
-1. The command must visibly name the smallest known file or directory scope. Bare `.`, `..`, a
-   workspace root, or an unrestricted recursive search is forbidden when a narrower path is known.
-2. The pattern must be selective. Never search a repository for a bare task number, common number,
-   single punctuation mark, or broad alternation such as `C210|210`. Task IDs are resolved only by
-   an anchored exact-row query in the live queue.
-3. The command must visibly bound emitted results at the source with an exact file, a small line
-   range, `-m/--max-count`, a selective filename glob, or a final small `head`. When matches may
-   contain huge lines, also truncate fields or characters before they enter context.
-4. Exclude known bulk/generated domains unless they are the explicit target: large CSV/JSON data,
-   generated certificates, build trees, Git internals/worktrees, archives, and frozen outputs.
-5. If the likely result size is not predictable, first list or count matching filenames with a
-   bounded command; inspect content only in a second, narrower call.
+1. The narrowest known file/directory scope. Bare `.`, `..`, a workspace root, or unrestricted
+   recursion is forbidden when a narrower path is known.
+2. A selective pattern. Never search a repository for a bare/common number, single punctuation
+   mark, or broad alternation such as `C210|210`. Resolve task IDs only by an anchored exact-row
+   query in the live queue.
+3. A source-side result bound: an exact file, small line range, `-m/--max-count`, selective filename
+   glob, or final small `head`. Truncate fields/characters too when matches may be huge lines.
+4. Exclusions for bulk/generated domains unless explicitly targeted: large CSV/JSON data, generated
+   certificates, build trees, Git internals/worktrees, archives, and frozen outputs.
 
-Do not run the search if any preflight item is missing. `max_output_tokens`, terminal truncation,
-and “I will inspect only the beginning” are not substitutes for source-side bounds. Examples:
+If result size is uncertain, first run a bounded filename listing/count, then inspect content in a
+narrower call. Do not search if any requirement is missing. `max_output_tokens`, terminal
+truncation, and intent to inspect only the beginning are not source-side bounds.
 
 ```text
 # Good: exact task lookup in one known file, with one match.
@@ -187,15 +185,13 @@ rg -l -m 1 'collision curve' papers/arcs_complete_outside_conic -g '*.py' | head
 rg -n 'C210|210' ..
 ```
 
-- Filter all non-search commands at the source too: request explicit fields and pathspecs, inspect
-  small line ranges, and never dump whole logs, process tables, broad diffs, or repository-wide file
-  lists into context.
+- Source-filter non-search commands too: request explicit fields/pathspecs and small ranges; never
+  dump whole logs, process tables, broad diffs, or repository-wide file lists into context.
 - Use `~/.claude/bin/run-quiet "command args"` for noisy commands such as builds and deployments.
   Read only its bounded summary or a targeted diagnostic tail.
 - Default tool output budgets to 1,000–2,000 tokens. More requires a specifically bounded artifact.
-  If a command reports more than 10,000 original tokens, treat the inspection as incorrectly shaped:
-  stop, do not inspect or repeat it, and replace it with a source-filtered query against the saved
-  log. Record the event as a command-shaping failure before continuing.
+  Over 10,000 original tokens is a command-shaping failure: stop, do not inspect or repeat it, record
+  the failure, and replace it with a source-filtered query against the saved log.
 - Prefer `rg`/`rg --files` over `grep`/`find`, subject to the same hard preflight. Do not run an
   unbounded `git ls-files`, status dump, or diff when a narrow pathspec answers the question.
 - Never use broad `ps -eo`, repeated `ps`/`free`/`df`, `list_agents`, `wait`, or `write_stdin` as a
