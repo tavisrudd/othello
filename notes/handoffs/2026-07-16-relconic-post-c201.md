@@ -52,8 +52,11 @@ by the `build-sys` lane.
    internally by subfield translations. All nineteen uncovered points lie at infinity, so these
    are complete affine 24-arcs and any two missing directions give ordinary complete 26-arcs. A
    uniform characteristic-two version would yield the target `3s+2` construction. Next derive its
-   affine-coverage and arc conditions as trace identities in `lambda=a/b`; do not widen the order
-   census until those identities predict a parameter. See
+   affine-coverage and arc conditions as trace identities in `lambda=a/b`. Same-layer chord values
+   now have the exact split-polynomial trace description `S_U={Up+q:p!=0, tr(q/p^2)=0}`. The unique
+   minimal q=64 coverage route is `AA,AB,AR,BB,BR`, so repair--repair secants can be omitted from the
+   coverage proof. Next show that the complement of `AB,AR,BR` lies in the two seed translates of
+   `S_y`; do not widen the order census until those identities predict a parameter. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

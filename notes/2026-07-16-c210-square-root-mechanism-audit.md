@@ -335,6 +335,47 @@ this only for `s=8`. A targeted literature search found adjacent work on complet
 hyperfocused, and bicovering arcs, but no direct match for this three-subfield-parabola mechanism;
 no novelty claim is made without a dedicated source comparison.
 
+## Sixth coordinate gate: trace sets and the minimal coverage route
+
+For `U in E\F`, define the same-layer secant-value set
+
+```text
+S_U = {U*p+q : p in F^*, q in F, tr_F/GF(2)(q/p^2)=0}.
+```
+
+Indeed, an unordered pair `r!=s` has `p=r+s!=0`, `q=rs`, and the polynomial
+`X^2+pX+q` has the two roots `r,s` exactly under the displayed absolute-trace condition. Conversely,
+every such split polynomial supplies one unordered pair. Hence `|S_U|=s(s-1)/2`. For a fiber
+coordinate `y outside F`, the two same-seed-layer chord sets are exactly
+
+```text
+y^2 + alpha + S_y,                 y^2 + beta + S_y.
+```
+
+For `y-eta outside F`, the repair--repair values are an affine image of `S_(y-eta)`. The q=64
+checker verifies the trace description for all 56 choices of `U outside F`.
+
+The six chord classes are `AA,AB,AR,BB,BR,RR`, where `A,B` denote the two seed layers and `R` the
+quadratic repair layer. Exhausting only the 63 subsets of these six classes gives a unique minimal
+class cover of the affine plane:
+
+```text
+AA, AB, AR, BB, BR.
+```
+
+Thus repair--repair secants are unnecessary for affine completeness. Their split-polynomial gate
+is needed only to preserve the arc condition. The three cross-layer classes `AB,AR,BR` already
+miss only 56 affine points. Adding either `AA` or `BB` reduces this to 14; both same-seed classes
+fill the final holes. By contrast, adding `RR` to the cross-layer classes leaves 20 points.
+
+This separates the prospective proof into two independent statements:
+
+1. the discriminant/trace conditions from the fourth gate make the three-layer set an arc;
+2. `AB,AR,BR` cover all but a trace-described residue, and the two translates of `S_y` cover that
+   residue.
+
+No general coverage theorem is claimed yet, but repair-pair coverage can now be omitted entirely.
+
 Reproduction:
 
 ```text
@@ -351,6 +392,7 @@ python3 papers/arcs_complete_outside_conic/check_c210_repair_graph_equations.py
 python3 papers/arcs_complete_outside_conic/probe_c210_affine_coset_repairs.py
 python3 papers/arcs_complete_outside_conic/probe_c210_quadratic_coset_repairs.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_q64_quadratic_orbits.py
+python3 papers/arcs_complete_outside_conic/analyze_c210_q64_affine_coverage.py
 ```
 
 Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
@@ -366,10 +408,13 @@ c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_rep
 02ec5f85c1658a4d21724fc58872b2d94e3d8140a5b423c6b57f2d725b3ea4ce  probe_c210_quadratic_coset_repairs_output.txt
 8414e703504f3f20519c8c1833682e0afea1126474b181c50d5d725121838878  analyze_c210_q64_quadratic_orbits.py
 9d8eca6d73ced53bf961d1802b70aaa4e7d6902427558dc351f338f22ce5d019  analyze_c210_q64_quadratic_orbits_output.txt
+8c16bd721123534b8138a52aebd78cf00fcd8529c89cf2a8d4f13b6cda1d3520  analyze_c210_q64_affine_coverage.py
+1e4d1b0f6c2c0efb40e94acd6491c88978ea47c84360d010a335167d4fa4d4a8  analyze_c210_q64_affine_coverage_output.txt
 ```
 
 The next gate is a general characteristic-two coverage theorem. Normalize `alpha=1`, express
-`a,b,eta` through a subfield parameter `lambda=a/b` and trace data, and use formula (1) to prove that
-the seed--repair and repair--repair chord-height maps cover every affine fiber. In parallel, rewrite
-the one-repair and split-polynomial arc conditions as trace identities in `lambda`. Do not test a
-larger field until those equations predict which `lambda` should work.
+`a,b,eta` through a subfield parameter `lambda=a/b` and trace data, and derive membership tests for
+the `AB,AR,BR` chord-value sets. Prove that their simultaneous complement lies in the two
+same-seed translates `y^2+alpha+S_y` and `y^2+beta+S_y`. In parallel, rewrite the one-repair and
+split-polynomial arc conditions as trace identities in `lambda`. Do not test a larger field until
+those equations predict which `lambda` should work.

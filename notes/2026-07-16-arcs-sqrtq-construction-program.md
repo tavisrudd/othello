@@ -59,7 +59,11 @@ subfield translations. Crucially, all nineteen uncovered points lie at infinity:
 24-arcs are complete affine arcs, and any two missing directions produce ordinary complete 26-arcs.
 If this three-layer mechanism extends over `GF(s^2)/GF(s)` in characteristic two, it gives the
 desired `3s+2` bound. Next derive the affine-coverage and arc conditions as trace identities in the
-subfield ratio `lambda=a/b`; do not test another order until those identities predict `lambda`.
+subfield ratio `lambda=a/b`. The same-layer chord sets now have the exact trace form
+`S_U={Up+q: p!=0, tr(q/p^2)=0}`. At q=64 the unique minimal secant-class cover is
+`AA,AB,AR,BB,BR`; repair--repair chords are irrelevant to coverage and remain only an arc-condition
+constraint. Next prove that the complement of `AB,AR,BR` lies in the two seed translates of `S_y`;
+do not test another order until those identities predict `lambda`.
 
 ## C201 input
 
