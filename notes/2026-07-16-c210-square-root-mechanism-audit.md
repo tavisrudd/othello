@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — q=64 exceptional slice classified; actual joint monodromy-drop locus next
+**Status**: ACTIVE — every rational coverage image retains simple branch; extension-field divisors next
 
 ## Boundary from the literature
 
@@ -1734,4 +1734,53 @@ Frozen output:
 ```text
 7a5b31ead2c4bc990443560cc437601cc5f27fe90bf6f127a40d2be61a3a6621  analyze_c210_coverage_branch_discriminants.py
 71df1c9115a48b8476f7b9f6cae282337cb070393b44e5fa9ac22d570ceb84a3  analyze_c210_coverage_branch_discriminants_output.txt
+```
+
+## Twenty-sixth coordinate gate: every rational coverage image retains simple branch
+
+The source equations alone did not show whether their images could lose all simple branch inertia
+on a coefficient stratum.  The full rational translation quotient now has an exact image-level
+test.  For each of the `3136` points
+
+```text
+(eta1,a1,b1,c0) in GF(8)^4,       eta1*a1 != 0,
+```
+
+and for each seed color, the checker finds a target with a degree-seven repair resultant whose
+derivative gcd is exactly `(r+rho)^2`.  The residual quintic is squarefree and avoids `rho`, the
+seed parameter above `rho` is unique, the chord denominator is nonzero, and direct substitution
+both maps the source point to the target and annihilates `J_z`.  The two witness tables have stable
+SHA-256 digests
+
+```text
+A: 5406f7f493ac45354875348ba88b8c7c4aa73d036373c52b8359a274ad024de6
+B: d8dd615e9d1626df209a969397e5af7edbdcb0334803206d5ab54a27c1e2e67f
+```
+
+This includes all `392` rational points on `b1=0`, all `392` on
+`eta1^2+c0+1=0`, and all `56` on the reduced non-simple mixed-cover divisor.
+Thus none of the rational points of the known lower-factor components forces a simultaneous
+coverage-image drop.  There is also a uniform source-separability identity: the coefficient of
+`t^4` in `dJ_z/dy1` is `1` for both seed colors, independent of every coefficient.
+
+The conclusion is deliberately bounded to the rational quotient.  A genuine geometric coverage
+drop divisor could have no `GF(8)` point, just as the reduced mixed-cover divisor has conjugate
+components, and the second arithmetic class from `Tr(a1*c1/b1^2)` has not been tested.  The next
+gate is therefore extension-field elimination of the two branch images, followed only then by
+intersection with (36)--(37) and restoration of the twist bit.  The rational audit has removed
+every `GF(8)` coefficient point from that search without replacing the symbolic gate by a plane
+census.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_coverage_branch_images.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_coverage_branch_images_output.txt`.
+
+```text
+3a21781ac5c91dcf94b68b10796e68740a621c48d145981cf02ce7f19f915e29  analyze_c210_coverage_branch_images.py
+f749b73d111f8356a13ebecfe5cdd3dfab1435c89394545d2862444a757da338  analyze_c210_coverage_branch_images_output.txt
 ```
