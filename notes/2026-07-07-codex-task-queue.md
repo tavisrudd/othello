@@ -79,7 +79,7 @@ unless they retain an explicit open tail.
 
 ### `rp-next`
 
-- **C257 `[rp-next]` [QUEUED; next]** — compute minimum column and auxiliary-dimension realizations of exact separator profiles and require a recurring compression theorem or certified lower-bound family → `notes/2026-07-17-c257-separator-profile-realization-complexity.md`.
+- No open tasks.
 
 ### Dormant / handoff-owned lanes
 
