@@ -49,6 +49,53 @@ P_4(S_9 union {N}) = X union {N}.
 This is a strict three-way statement: without the nucleus the spanning seed is sequentially
 inert; with the nucleus it is one-round complete; full linear recovery ignores the gate.
 
+## What this means for the programme
+
+The durable result is **not** merely a curious q=9 switch. It is the all-field contrast between
+the two flagship geometric families:
+
+```text
+completed cubic--axis family:    bounded sequential closure = full linear span,
+quartic--nucleus family:         bounded sequential closure < full linear span.
+```
+
+The second line now holds for every `q=3^h>=9`, with only five surviving curve coordinates.
+This cubic-versus-harmonic contrast is the safest paper headline supplied by C243. The q=9
+one-round switch is the sharp illustrative example inside that theorem, not the scalable headline.
+
+### Paper disposition
+
+1. **First use: strengthen the main repair-port/Horn-closure paper.** Pair C236's uniform cubic
+   equality theorem with C243's uniform harmonic separation. This gives the general framework a
+   memorable positive/negative flagship comparison without requiring any new probability theorem.
+2. **Possible second use: a short deterministic design/Horn note.** This becomes worthwhile only
+   if C244 or another already-bounded task supplies enough exact consequences to make a compact
+   theorem package: the gate law, inert spanning seeds, the exceptional q=9 saturation switch,
+   and the literature boundary. C243 alone is probably better used inside the main paper.
+3. **Conditional future paper: random gated cascades.** This has the highest speculative ceiling,
+   but it is not yet a paper result. It becomes a paper only after obtaining genuine asymptotic
+   control of SQS spreading or a threshold law. Finite q=9 tables, first moments, and generic
+   sharp-threshold citations do not cross that gate.
+4. **Not currently supported: a propagation-completeness paper.** C243 compares two inequivalent
+   Horn theories. A SAT/knowledge-compilation paper would need a separate representation or
+   equivalence theorem, not merely the inert spanning witness.
+
+### Follow-up order
+
+Keep the live queue order. Run C244 next because its low-cost exact propositions can strengthen
+the main manuscript and determine whether the deterministic note has enough mass. Do not open a
+large threshold programme during C244. After the consequence pack is assembled, a future random-
+cascade item should begin with one bounded scout:
+
+- characterize or bound deterministic spreading/subsystems in the harmonic SQS family;
+- compute enough q=9/q=27 random-closure data to identify a plausible scaling variable, without
+  treating it as asymptotic evidence;
+- search once more for SQS-specific random-seed work; and
+- continue only if a proof route gives more than a first-moment heuristic.
+
+Thus the operational decision is: **bank the deterministic theorem now; consolidate through C244;
+test probability later behind a new task gate.**
+
 ## What scales
 
 The strict inert-versus-span separation is not confined to q=9. In any `S(3,4,v)`, two distinct
