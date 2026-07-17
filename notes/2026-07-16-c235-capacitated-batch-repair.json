@@ -1,0 +1,98 @@
+{
+  "failed_targets_excluded_from_helpers": true,
+  "feasible_repairs_per_target": {
+    "0": 8,
+    "9": 8
+  },
+  "harmonic_block_count": 30,
+  "ordinary_helper_combined_degree": 6,
+  "ordinary_helper_degree_per_target": 3,
+  "ordinary_live_helper_count": 8,
+  "q": 9,
+  "symmetry_reduced_fractional_lp": {
+    "capacity": "min(c_nucleus, 8*c_curve/3)",
+    "nucleus_constraint": "8(a+b) <= c_nucleus",
+    "objective": "maximize 8(a+b)",
+    "ordinary_helper_constraint": "3(a+b) <= c_curve",
+    "region": "lambda_0,lambda_infinity >= 0; lambda_0+lambda_infinity <= min(c_nucleus,8*c_curve/3)",
+    "variables": "a,b = common flow on each of the eight repairs for the two targets"
+  },
+  "targets": [
+    "0",
+    "infinity"
+  ],
+  "task": "C235",
+  "unit_capacity_with_nucleus": {
+    "dual": {
+      "cover_value": "1",
+      "each_curve_helper_weight": "0",
+      "nucleus_weight": "1"
+    },
+    "integral_region": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "primal": {
+      "each_curve_helper_load": "3/8",
+      "flow_per_labeled_repair": "1/16",
+      "nucleus_load": "1",
+      "objective": "1",
+      "target_rates": [
+        "1/2",
+        "1/2"
+      ]
+    }
+  },
+  "unit_capacity_without_nucleus": {
+    "dual": {
+      "cover_value": "8/3",
+      "each_curve_helper_weight": "1/3",
+      "weight_of_each_three_helper_repair": "1"
+    },
+    "integral_region": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ]
+    ],
+    "primal": {
+      "each_curve_helper_load": "1",
+      "flow_per_labeled_repair": "1/6",
+      "objective": "8/3",
+      "target_rates": [
+        "4/3",
+        "4/3"
+      ]
+    }
+  }
+}
