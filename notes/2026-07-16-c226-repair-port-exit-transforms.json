@@ -1,0 +1,82 @@
+{
+  "probability_convention": "the target is unavailable; p_cubic and p_axis are independent helper-erasure probabilities; Q is conditional repair-failure probability",
+  "task": "C226",
+  "transform_checks": [
+    {
+      "axis_bivariate_bernstein_sha256": "68a5b7877bda2c7076cc39ff126231d93ae41536b2444332518e464ddd79e1c5",
+      "axis_direct_equals_zero_sum_free_factorization": true,
+      "axis_radius_three_edge_count": 4,
+      "cubic_bivariate_bernstein_sha256": "b4177936799ce41f44df5aeb6d4d055a2491082fde62cc461b2c68d7d9e738d0",
+      "cubic_direct_equals_restricted_sumset_transform": true,
+      "cubic_radius_three_edge_count": 3,
+      "defect_one_subset_count": 2,
+      "defect_zero_subset_count": 6,
+      "dimension": 1,
+      "endpoint_checks": {
+        "all_helpers_fail": 1,
+        "all_helpers_survive": 0
+      },
+      "helper_types": {
+        "finite_axis": 3,
+        "finite_cubic": 3
+      },
+      "homogeneous_leading_failure": {
+        "axis": {
+          "coefficient": 9,
+          "degree": 3
+        },
+        "cubic": {
+          "coefficient": 6,
+          "degree": 2
+        }
+      },
+      "maximum_zero_sum_free_count": 3,
+      "maximum_zero_sum_free_size": 2,
+      "q": 3,
+      "sample_failure_probability": {
+        "axis": "836/3375",
+        "cubic": "57/125",
+        "p_axis": "2/5",
+        "p_cubic": "1/3"
+      }
+    },
+    {
+      "axis_bivariate_bernstein_sha256": "711fdba1bfb967d8bcbf56f65d817a27469587b05ad75033144f3826f46b5d2e",
+      "axis_direct_equals_zero_sum_free_factorization": true,
+      "axis_radius_three_edge_count": 48,
+      "cubic_bivariate_bernstein_sha256": "6486b6c7a962b6748b27d964695429ba94f8767c33f6dbe6dfad32a3b5af2916",
+      "cubic_direct_equals_restricted_sumset_transform": true,
+      "cubic_radius_three_edge_count": 36,
+      "defect_one_subset_count": 86,
+      "defect_zero_subset_count": 45,
+      "dimension": 2,
+      "endpoint_checks": {
+        "all_helpers_fail": 1,
+        "all_helpers_survive": 0
+      },
+      "helper_types": {
+        "finite_axis": 9,
+        "finite_cubic": 9
+      },
+      "homogeneous_leading_failure": {
+        "axis": {
+          "coefficient": 486,
+          "degree": 13
+        },
+        "cubic": {
+          "coefficient": 45,
+          "degree": 8
+        }
+      },
+      "maximum_zero_sum_free_count": 54,
+      "maximum_zero_sum_free_size": 4,
+      "q": 9,
+      "sample_failure_probability": {
+        "axis": "11900672/38443359375",
+        "cubic": "3394031/474609375",
+        "p_axis": "2/5",
+        "p_cubic": "1/3"
+      }
+    }
+  ]
+}

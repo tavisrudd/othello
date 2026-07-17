@@ -84,7 +84,7 @@ unless they retain an explicit open tail.
 
 ### `rp-next`
 
-- **C226 `[rp-next]` [QUEUED; FIRST]** — derive the exact cubic/axis reliability transforms, identify radius-truncated EXIT, and delimit stopping-set and full-MAP claims → `notes/2026-07-16-c226-repair-port-exit-transforms.md`.
+- **C226 `[rp-next]` [REPORTED 2026-07-16]** — exact cubic/axis failure transforms, radius-truncated EXIT calculus, cheapest-radius distribution, and target-specific stopping-certificate boundary → `notes/2026-07-16-c226-repair-port-exit-transforms.md`.
 - **C227 `[rp-next]` [QUEUED; after C226]** — identify the pointed rank-jump reliability polynomial with Tutte/matroid-perspective theory, or prove exactly what refinement is required → `notes/2026-07-16-c227-pointed-tutte-repair-polynomial.md`.
 - **C228 `[rp-next]` [QUEUED; after C227; BOUNDED]** — test whether C217 holonomy controls multiplicative or strongly multiplicative ideal LSSS behavior → `notes/2026-07-16-c228-holonomy-lsss-mpc.md`.
 
