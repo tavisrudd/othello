@@ -1,0 +1,207 @@
+{
+  "access_structure": "3-of-7 for every dealer in support matroid U(3,8)",
+  "dealer_convention": "one of eight represented forms is the dealer; the other seven are ideal shares",
+  "exhaustive_scope": {
+    "dealer_adversary_checks_including_gauge_replay": 928,
+    "dealer_choices_per_representation": 8,
+    "unqualified_adversaries_per_dealer": 29
+  },
+  "field": "GF(101)",
+  "gauge_replays": [
+    {
+      "coordinate_scales": [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13,
+        17,
+        19
+      ],
+      "global_information_basis_change": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          5,
+          6,
+          0
+        ]
+      ],
+      "square_dimension": 5,
+      "strongly_multiplicative_every_dealer": true,
+      "support_matroid": "U(3,8)"
+    },
+    {
+      "coordinate_scales": [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13,
+        17,
+        19
+      ],
+      "global_information_basis_change": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          5,
+          6,
+          0
+        ]
+      ],
+      "square_dimension": 6,
+      "strongly_multiplicative_every_dealer": false,
+      "support_matroid": "U(3,8)"
+    }
+  ],
+  "multiplicativity_criterion": "the dealer symmetric square lies in the span of the surviving participant squares",
+  "representations": [
+    {
+      "checked_dealer_adversary_pairs": 232,
+      "first_failure": null,
+      "name": "GRS",
+      "ordinary_multiplicative_every_dealer": true,
+      "outcome_histogram": {
+        "adversary_size_0_pass": 8,
+        "adversary_size_1_pass": 56,
+        "adversary_size_2_pass": 168
+      },
+      "points": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          4
+        ],
+        [
+          1,
+          3,
+          9
+        ],
+        [
+          1,
+          4,
+          16
+        ],
+        [
+          1,
+          5,
+          25
+        ],
+        [
+          1,
+          6,
+          36
+        ],
+        [
+          1,
+          7,
+          49
+        ]
+      ],
+      "square_dimension": 5,
+      "square_matroid": "rank-5 rational-normal-curve evaluation matroid U(5,8)",
+      "strongly_multiplicative_every_dealer": true,
+      "support_matroid": "U(3,8)"
+    },
+    {
+      "checked_dealer_adversary_pairs": 232,
+      "first_failure": {
+        "adversary": [
+          1,
+          2
+        ],
+        "adversary_size": 2,
+        "dealer": 0,
+        "dealer_product_reconstructs": false,
+        "rank_with_dealer_square": 6,
+        "remaining_count": 5,
+        "remaining_square_rank": 5
+      },
+      "name": "generic",
+      "ordinary_multiplicative_every_dealer": true,
+      "outcome_histogram": {
+        "adversary_size_0_pass": 8,
+        "adversary_size_1_pass": 56,
+        "adversary_size_2_fail": 168
+      },
+      "points": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          79,
+          63
+        ],
+        [
+          1,
+          21,
+          30
+        ],
+        [
+          1,
+          53,
+          7
+        ],
+        [
+          1,
+          89,
+          22
+        ]
+      ],
+      "square_dimension": 6,
+      "square_matroid": "U(6,8)",
+      "strongly_multiplicative_every_dealer": false,
+      "support_matroid": "U(3,8)"
+    }
+  ],
+  "result": "support-identical ideal LSSSs are separated by strong multiplicativity",
+  "task": "C237",
+  "unqualified_adversaries": "all participant subsets of size at most two"
+}

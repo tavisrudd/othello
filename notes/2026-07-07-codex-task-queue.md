@@ -95,7 +95,7 @@ unless they retain an explicit open tail.
 - **C234 `[rp-next]` [REPORTED 2026-07-16]** — proved an exact associative finite recursive presentation for synchronous depth over an infinite budgeted bottleneck-delay carrier, with represented branching law `min(max(n,m),ell)` and explicit evaluation growth → `notes/2026-07-16-c234-tropical-delay-transfer.md`.
 - **C235 `[rp-next]` [REPORTED 2026-07-16]** — defined the capacitated multi-target repair region and proved an exact harmonic-port availability-versus-throughput separation with a symmetry-reduced primal/dual certificate → `notes/2026-07-16-c235-capacitated-batch-repair.md`.
 - **C236 `[rp-next]` [REPORTED 2026-07-16]** — proved all-field cubic radius-three sequential-equals-span and certified an explicit q=9 harmonic sequential-versus-span witness → `notes/2026-07-16-c236-flagship-closure-comparison.md`.
-- **C237 `[rp-next]` [QUEUED; after C236]** — test support-identical `U(3,8)` GRS and generic representations for a Schur-square/strong-multiplicativity separation, or close the next holonomy-sensitive MPC scale negatively → `notes/2026-07-16-c237-u38-holonomy-mpc.md`.
+- **C237 `[rp-next]` [REPORTED 2026-07-16]** — explicit support-identical `U(3,8)` GRS/generic representations have square matroids `U(5,8)`/`U(6,8)` and separate strong multiplicativity for every dealer → `notes/2026-07-16-c237-u38-holonomy-mpc.md`.
 
 ### Dormant / handoff-owned lanes
 
