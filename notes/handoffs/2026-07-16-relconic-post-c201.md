@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — constant-height arithmetic now reduces to an arc-legality intersection
+**Status:** C210 ACTIVE — the `a=b=0` constant-height locus is closed; the lower factorization strata in `a=0,b!=0` are next
 
 ## Current state
 
@@ -196,10 +196,16 @@ by the `build-sys` lane.
    exact inseparable divisor `h1=e^2+e*p` is collision-forcing because it reduces to a cubic in
    `z^2`. The separable complement has genuine pre-legality arithmetic survivors: an exact
    normalized GF(8) quotient has 270 of 5376 tuples with no odd factor for either seed color, while
-   none of the twelve arc-legal trace-one pairs survives. Next derive the normalized constant-height
-   arc conditions and intersect them with that even-factor condition. Only joint survivors should
-   proceed to the lower factorization strata in `a=0,b!=0` and the factorization divisors on
-   `a!=0`; `H=J=0` needs no further work on `a=b=0`.
+   none of the twelve arc-legal trace-one pairs survives. Imposing arc legality now empties the
+   joint gate. The census scaling that fixes `p=1` is a symmetry of the collision polynomial but not
+   of the plane geometry: every arc-legal trace-one arc has constant pair-sum `p` in `{14,22,24}`,
+   never `p=1`, so the whole normalized `p=1` slice — all 270 survivors included — is arc-illegal.
+   Enumerating the entire constant-height two-layer arc space gives 22 arcs and 12 trace-one arcs,
+   each colliding for at least one seed color; a full brute force confirms none of the 7512 both-seed
+   collision-free configurations is arc-legal. Hence the arc-condition locus and the even-factor
+   survivor set are disjoint and the `a=b=0` constant-height locus is closed. Next classify the lower
+   factorization strata in `a=0,b!=0` and the factorization divisors on `a!=0`, then their
+   intersections with `H=J=0`, before any affine-coverage test.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 

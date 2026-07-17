@@ -2680,6 +2680,54 @@ Frozen output:
 3e82aa555c7100fc2f03ce7fdfb32eea3b0bf18951e8affa24ad3338373eecb3  analyze_c210_collision_curve_constant_height_output.txt
 ```
 
+## Forty-first coordinate gate: arc legality closes the constant-height locus
+
+Imposing the missing arc-legality condition empties the joint gate on `a=b=0`.  The two-seed
+even-factor survivor set and the constant-height two-layer arc-condition locus are disjoint.
+
+The key structural fact is that the census scaling
+`(e,delta,p,h0,h1) -> (l*e,l*delta,l*p,l^2*h0,l^2*h1)`, which the fortieth gate uses to fix `p=1`,
+is a symmetry of the collision polynomial but **not** of the plane geometry.  Every arc-legal
+trace-one arc has constant pair-sum `p` in `{14,22,24}`, never `p=1`.  So the normalized `p=1`
+slice contains no arc at all: all `5376` reconstructed configurations, in particular all `270`
+even-factor survivors, are arc-illegal.  Arc legality must therefore be tested off the scaling
+representative.
+
+Enumerating the entire constant-height two-layer arc space directly (both seed layers of colors
+`alpha,beta`, a left repair coset, and the derived right coset, over the full free height space)
+gives the same `35` arc-legal single layers, `22` two-layer arcs, and `12` trace-one arcs as the
+thirty-ninth gate.  Each normalized tuple reconstructs to a concrete `GF(8)` configuration with
+`k0=p^2*(w^2+w+1)+delta^2`, `k1=delta*p+delta^2`, left height offset `(h0,h1)` relative to the seed
+color, and right height `k+left`.  Every one of the twelve trace-one arcs has an odd-degree
+collision factor for at least one seed color; none is collision-free.  Hence
+
+```text
+{arc-legal constant-height two-layer arc} ∩ {both-seed even-factor survivor} = ∅.    (82)
+```
+
+A direct brute-force over the full unnormalized space `(e,delta,p,w,h0,h1)`, odd-tower seeds fixed,
+confirms (82): of `150528` configurations, `7512` are collision-free for both seed colors and none
+of those is arc-legal.  Factor parity keeps `270` normalized survivors, but arc legality retains
+none, so no coefficient-varying constant-height point survives the joint gate.  The `a=b=0` locus
+is closed for the two-coset constant-height mechanism.
+
+Only the lower factorization strata in `a=0,b!=0` and the factorization divisors on `a!=0` remain.
+Next classify those strata, then their intersections with `H=J=0`, before any affine-coverage test.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_collision_curve_constant_height_arc.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_collision_curve_constant_height_arc_output.txt`.
+
+```text
+588e777c6c4d2193c9e1f45ed70cee66c4fc35b2ecf03d9047b74b611c917ec5  analyze_c210_collision_curve_constant_height_arc.py
+3444b3a6b958bdfd8834c86a3b36c48793ba378c86da4342bfea3de86a8464f7  analyze_c210_collision_curve_constant_height_arc_output.txt
+```
+
 ## Cross-lane imports worth retaining
 
 The current resultant-curve gate remains first.  Recent results in other lanes do not classify
