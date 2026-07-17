@@ -133,3 +133,25 @@ hypothesis: *if independently audited causal annotations predict injected outcom
 selection can reduce common-mode failure missed by generation-axis diversity.* C252 may use this
 fixture only as a unit test before testing decision-focused discovery under hidden, incomplete
 lineage.
+
+## Empirical follow-up gate
+
+Retain an unallocated follow-up that replaces the shared synthetic oracle with two genuinely
+separate evidence channels:
+
+1. Agents generate remediation plans across model, prompt, language, and tool configurations.
+2. At least two annotators independently label each plan's operational, specification, and
+   sociotechnical dependencies without seeing portfolio selections or future injections. Use a
+   fixed rubric, report agreement before adjudication, and freeze the adjudicated ledger.
+3. Freeze every selector's complete maximizing tie set while failure-domain names and injections
+   remain hidden.
+4. Execute the plans on a separate sandbox or incident testbed that revokes credentials and injects
+   control-plane, region, vendor, transport, trust-root, specification, and approval failures.
+5. Score portfolios from observed execution outcomes, not from the annotation ledger. Audit whether
+   the frozen annotations predicted those outcomes before comparing selectors.
+
+Promotion requires a concrete external executor and an annotation protocol with independent
+personnel or independently sourced evidence. A simulator that derives outcomes from the same
+annotations does not pass. The primary endpoint remains coincident portfolio failure with all
+costs, ties, injection budgets, and exclusions fixed in advance; generation-axis and a real neural
+embedding selector remain mandatory baselines.
