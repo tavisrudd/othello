@@ -58,8 +58,16 @@ by the `build-sys` lane.
    coverage proof. Next show that the complement of `AB,AR,BR` lies in the two seed translates of
    `S_y`. The first orbit admits a complete trace parametrization, but its natural `GF(8)` scalar
    extension is obstructed for every `s>=16`: a one-repair collision is forced by a nonzero
-   `z` with `tr(z)=tr(z^(-1))=0`, and the Kloosterman/Weil count guarantees such `z`. Next normalize
-   the other two q=64 orbits or design a partial repair domain; do not widen the order census. See
+   `z` with `tr(z)=tr(z^(-1))=0`, and the Kloosterman/Weil count guarantees such `z`. The other two
+   q=64 orbits now have explicit `GF(8)+GF(8)*omega` normal forms. After sending the roots of each
+   forced pair-sum polynomial to `0,1`, all six orbit/seed collision gates reduce to the same
+   `tr(1/(x^2+x))=0` condition. Hence all three direct full-domain scalar extensions have the same
+   Kloosterman obstruction. The mandatory same-seed deletions for a partial domain are now exact:
+   the two bad sets are translates of
+   `B_s={x!=0,1:tr(1/(x^2+x))=0}` by `delta=tau,tau^6,tau^5` in the three orbits. Their union has
+   size `3s/4+O(sqrt(s))`, leaving at most `s/4+O(sqrt(s))` repair parameters before the other arc
+   gates. Next eliminate the mixed-seed chord equations and test whether a linear-size domain
+   survives; defer affine coverage until then, and do not widen the order census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

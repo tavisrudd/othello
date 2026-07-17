@@ -453,6 +453,7 @@ python3 papers/arcs_complete_outside_conic/analyze_c210_q64_quadratic_orbits.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_q64_affine_coverage.py
 python3 papers/arcs_complete_outside_conic/probe_c210_trace_parameter_family.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_remaining_trace_orbits.py
+python3 papers/arcs_complete_outside_conic/analyze_c210_partial_domain_deletions.py
 ```
 
 Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
@@ -474,6 +475,8 @@ c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_rep
 8485fdc566bb6e7175ceaccb6aa8eeec072adbddbe2570ff5476a0a3eee37127  probe_c210_trace_parameter_family_output.txt
 3562f174a7dd97527805b96ae3fe102f60f856400dbac3cf59729466c73ccf36  analyze_c210_remaining_trace_orbits.py
 3eec58250f1cdd9bea201937750b479b05867ad71c34a3cdca31541c46059f0f  analyze_c210_remaining_trace_orbits_output.txt
+cb80d3ef030482580ec3ea79e7675497dc6775c2f3e7f180923f83294be73eda  analyze_c210_partial_domain_deletions.py
+5eff4f4a29f451375228257c5e2260d0123f3a748ca14c552e4f8786ad767ba9  analyze_c210_partial_domain_deletions_output.txt
 ```
 
 ## Eighth coordinate gate: all three scalar extensions are obstructed
@@ -539,3 +542,65 @@ The next gate is therefore partial-domain rather than another full-field census:
 repair parameters must be deleted to hit every bad reciprocal-trace pair, then determine whether
 the surviving seed--repair secants can still cover the affine plane with `O(s)` total points.  Do
 not test a larger field before that coverage/collision tradeoff survives symbolically.
+
+## Ninth coordinate gate: the partial-domain deletion floor
+
+The same normalization makes the mandatory same-seed deletions exact.  For a characteristic-two
+subfield `F` put
+
+```text
+B_s={x in F\{0,1}: tr(1/(x^2+x))=0}.
+```
+
+For each orbit, normalize the repair parameter using the two roots of the `A`-seed pair-sum
+polynomial.  The corresponding `B`-seed normalization differs by a fixed translation:
+
+```text
+orbit 1: delta=tau,               orbit 2: delta=tau^6,
+orbit 3: delta=tau^5.
+```
+
+All three shifts are nonzero and different from one.  A partial repair domain avoiding both
+same-seed collision classes must therefore delete exactly
+
+```text
+D_delta=|B_s union (B_s+delta)|
+```
+
+parameters before the mixed-seed and two-repair/one-seed gates are even considered.  The earlier
+Kloosterman count gives
+
+```text
+|B_s|=(s-3+K_s)/2=s/2+O(sqrt(s)).
+```
+
+Writing `chi(u)=(-1)^tr(u)` and `f(x)=1/(x^2+x)`, the overlap has the exact character-sum expression
+
+```text
+|B_s intersect (B_s+delta)|
+  = 1/4 * sum_{x notin {0,1,delta,delta+1}}
+      (1+chi(f(x)))*(1+chi(f(x+delta))).
+```
+
+For fixed `delta` in `GF(8)\{0,1}`, the three nonconstant terms are fixed-genus Artin--Schreier
+character sums.  Their poles remain distinct, so the Weil bounds give
+
+```text
+|B_s intersect (B_s+delta)|=s/4+O(sqrt(s)),
+D_delta=3s/4+O(sqrt(s)).
+```
+
+Thus only `s/4+O(sqrt(s))` repair parameters survive this necessary vertex-deletion gate.  This is
+still linear in `s`, so it does not by itself obstruct an `O(s)` construction.  Nor do the deleted
+repair points automatically become coverage holes: each was deleted precisely because it already
+lies on a same-seed secant.  The result is a sharp route separator instead.  Any partial-domain
+construction based on these coefficients must establish all three remaining facts on a domain of
+asymptotic density at most one quarter:
+
+1. no repair point lies on a mixed `A`--`B` secant;
+2. the domain is independent in both two-repair/one-seed collision graphs;
+3. the surviving seed--repair secants retain full affine coverage.
+
+The next symbolic gate is the first item: eliminate the mixed-seed chord equations for the three
+normal forms and determine whether they impose another positive-density deletion.  Coverage work
+should wait until a linear-size domain survives all arc-legality gates.
