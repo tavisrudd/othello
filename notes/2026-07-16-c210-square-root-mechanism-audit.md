@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — external branch collision is an exact two-difference-variable elimination
+**Status**: ACTIVE — seed--cross-repair legality is an explicit resultant-curve gate
 
 ## Boundary from the literature
 
@@ -2361,4 +2361,85 @@ Frozen output:
 ```text
 4ccc096e92ddf510f02cacf8ad571aada27e2996578ce661d1f7ad27257b3139  analyze_c210_two_repair_cosets.py
 ef47957855713923d80c8f7c535b6fd79e45b9ce52814797bb7cd59bbf8db039  analyze_c210_two_repair_cosets_output.txt
+```
+
+## Thirty-sixth coordinate gate: seed--cross-repair legality is one resultant curve
+
+Remain on the only possible infinite full-layer locus (68), and write
+
+```text
+delta=e'+e != 0,        s=r+u,
+k0=c0'+c0,              k1=c1'+c1,
+gamma=g0+g1*omega
+```
+
+for either seed height `gamma`.  Clearing the chord-height denominator and splitting the
+collinearity equation in the basis `(1,omega)` gives two quadratics in the first repair parameter:
+
+```text
+A*r^2+B*r+C=0,          D*r^2+E*r+F=0,                 (70)
+
+A=u+a*delta,
+B=k0+delta*b+delta^2+u^2,
+D=delta*(1+a)+a*u,
+E=k1+delta*b+delta^2+a*u^2,
+
+C=e*k1+delta*(c1+g1)+t*(k0+delta^2)+u*(c0+g0)
+  +e^2*delta+e*delta^2+u*e*b+u*e^2+u*t^2+u^2*t+a*e*u^2,
+
+F=e*(k0+k1)+delta*(c0+c1+g0+g1)+t*k1+u*(c1+g1)
+  +t*delta^2+t^2*delta+u*e*b+u*e^2+u*t*b
+  +u^2*e+a*e*u^2+a*t*u^2.                              (71)
+```
+
+The two leading coefficients never vanish together on the intended locus: `A=D=0` would imply
+`delta*(a^2+a+1)=0`.  Thus the Sylvester determinant has no universal root at `r=infinity`.  Its
+exact form is
+
+```text
+R(u,t)=A^2*F^2+A*B*E*F+A*C*E^2
+       +B^2*D*F+B*C*D*E+C^2*D^2.                       (72)
+```
+
+As a coefficient-parametric polynomial, (72) has `452` terms, degrees six in `u` and four in `t`,
+and total `(u,t)` degree eight, with unique top form `a^2*u^4*t^4`.  More importantly, it retains
+the rational repair parameter rather than merely detecting a geometric common root.  Put
+
+```text
+H=D*B+A*E,              J=D*C+A*F.                      (73)
+```
+
+On `H!=0`, (72) vanishes exactly when the unique common root is `r=J/H`, which already lies in the
+base field.  The identities
+
+```text
+A*J^2+B*H*J+C*H^2=A*R,
+D*J^2+E*H*J+F*H^2=D*R                                (74)
+```
+
+prove this without a root extension.  On `H=0`, equation `R=0` forces `J=0`; there the quadratics
+share their full gcd and one must separately ask whether that quadratic splits over the base field.
+Consequently the remaining seed--cross-repair arc gate is exactly the rational-point problem for
+the coefficient-parametric bidegree-`(6,4)` curve (72), plus the explicit split test on `H=J=0`.
+The checker derives (70)--(71) from the universal height-interpolation identity, verifies
+(72)--(74) as polynomial identities in characteristic two, and compares `24,576` cases with direct
+projective incidence over `GF(64)/GF(8)`.
+
+This is a reduction, not yet an obstruction.  Before affine coverage, classify the geometric
+components and arithmetic Frobenius classes of (72) under both oriented cross-repair trace-one
+conditions (69), including the `H=J=0` locus.  A component or Frobenius coset with no rational
+collision could preserve the two-coset route; otherwise Lang--Weil/Chebotarev closes its arc gate.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_seed_cross_repair_curve.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_seed_cross_repair_curve_output.txt`.
+
+```text
+2518e3b1366a2e1023c85ea0a75b225d1f3d546e7f6da726996544bc9d04c334  analyze_c210_seed_cross_repair_curve.py
+5098b20640fd7b53169aafb270facaf42bcbe0fa92cda7279c6f9c263be17332  analyze_c210_seed_cross_repair_curve_output.txt
 ```

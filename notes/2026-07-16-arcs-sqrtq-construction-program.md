@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — two repair cosets reduce to a shared `(a,b)` trace locus
+**Status**: ACTIVE — the shared-`(a,b)` two-coset locus has an explicit seed-collision curve
 
 ## Objective
 

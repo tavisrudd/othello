@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the two-repair-coset route is reduced to a shared `(a,b)` locus
+**Status:** C210 ACTIVE — the shared-`(a,b)` two-coset locus has an explicit seed-collision curve
 
 ## Current state
 
@@ -172,9 +172,14 @@ by the `build-sys` lane.
    cross-repair triples reduce exactly to `p!=0` and `Tr(q/p^2)=0`, with `deg p<=2`, `deg q<=3`.
    Artin--Schreier classification forces any infinite collision-avoiding pair to share the same
    ordered quadratic/linear coefficient pair `(a,b)`; all 48 pairs among the twelve certified q=64
-   blocks lie off that locus and fail directly. Next impose one-seed/one-point-from-each-repair
-   legality on the shared-`(a,b)` trace locus, then test its affine coverage. Do not reopen the
-   quadratic coefficient census or replace the symbolic gate with a larger plane census. See
+   blocks lie off that locus and fail directly. On the shared-`(a,b)` locus, the missing
+   one-seed/one-point-from-each-repair condition is now two explicit quadratics in one repair
+   parameter. Their 452-term Sylvester resultant has coefficient-parametric bidegree `(6,4)`;
+   off `H=DB+AE=0`, every rational point reconstructs the unique rational repair parameter
+   `r=(DC+AF)/H`, while `H=0` reduces to the explicit shared-quadratic split locus `H=J=0`.
+   Next classify the resultant's geometric components and arithmetic Frobenius classes under both
+   oriented trace-one conditions, then test affine coverage only if a collision-free class survives.
+   Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
