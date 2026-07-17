@@ -1,0 +1,18 @@
+{
+  "affine_plane_line_count": 12,
+  "affine_plane_pair_multiplicity": 1,
+  "cubic": {
+    "contract_A_infinity_AG23": true,
+    "helper_count": 19,
+    "point_count": 20,
+    "small_circuit_connected": true
+  },
+  "harmonic": {
+    "contract_N_V_infinity_AG23": true,
+    "helper_count": 10,
+    "point_count": 11,
+    "small_circuit_connected": true
+  },
+  "q": 9,
+  "task": "C248"
+}
