@@ -644,3 +644,161 @@ paths. Implement multiobjective search over availability, alternate extensions, 
 defect, and deployment cost. Initial domains: short storage codes and combinatorial test designs.
 
 The theorem base exists in pieces; the cross-domain abstraction and practical optimizer do not.
+
+## Cross-paper synthesis after the arcs review
+
+### A15. Proof-carrying repair planning
+
+The arcs step-book architecture should be imported into the repair control plane. Keep the online
+optimizer untrusted and aggressively heuristic, but require every chosen plan to carry a compact
+certificate:
+
+```text
+RepairPlanCertificate {
+  target equations and normalized coefficients,
+  dependency/topological schedule,
+  live-helper witnesses,
+  optional capacity allocation and dual-bound witness,
+  hashes of the code matrix and Port Capsule
+}
+```
+
+A small verifier checks each linear recombination against the pinned codec matrix, verifies that
+every prerequisite is live or produced earlier, and checks that declared helper loads respect the
+allocation. This catches stale matrices, coefficient drift, planner bugs, and invalid sequential
+reuse before a data node moves bytes. It does not certify runtime/network behavior, but it sharply
+shrinks the trusted control-plane code.
+
+This is a stronger product story than a scheduler alone: the same architecture that makes the
+q=16 classification trustworthy makes dynamic repair plans auditable. It is also a credible second
+nongeometry case study for a proof-carrying search paper.
+
+### A16. Unlock-aware capacitated repair scheduling
+
+C229 and C235 can be combined rather than run in two independent stages. A repaired fragment has
+an **option value** because it can unlock additional Horn rules. For each unavailable coordinate
+`e`, maintain:
+
+- its earliest feasible repair time under current resources;
+- the number/weight of rules whose last missing prerequisite is `e`;
+- the marginal growth in terminal closure if `e` becomes available;
+- helper shadow prices for its candidate recovery equations; and
+- the blocker reduction produced by recovering `e`.
+
+A candidate greedy/receding-horizon score is
+
+```text
+unlock_value(e, A)
+  = downstream_demand_unlocked(e)
+  + risk_value * blocker_reduction(e)
+  - sum_(u in A) shadow_price(u)
+  - latency_cost(A).
+```
+
+The exact offline reference is a time-indexed MILP over hyperedge firings. The practical planner can
+use column generation plus the score above, emitting a certificate for the chosen schedule. No
+approximation guarantee is known; establish one only under a restricted acyclic or submodular
+regime. The immediate systems question is whether future-unlock value improves node/rack recovery
+makespan over per-target greedy or static RDAG scheduling.
+
+### A17. Reliability-capacity co-design
+
+Combine C219 pivotality with C235 LP duality. A helper can be important because it is likely to be
+pivotal for *whether* repair exists, expensive because it is scarce in the *service region*, or
+both. Rank interventions by a two-axis frontier rather than a single centrality number:
+
+```text
+stochastic criticality = d Pr[repair succeeds] / d survival_probability(u)
+operational scarcity   = optimal LP dual price of helper u.
+```
+
+Candidate interventions include moving a shard across a rack boundary, adding bandwidth, changing
+the local code, or delaying maintenance. The research contribution would be a joint intervention
+optimizer and evidence that the joint score makes better placement/upgrade decisions than either
+fault-tree importance or load alone. The formula is a derived decision rule, not yet a theorem.
+
+### A18. Behavioral hashing and incremental module replacement
+
+Use C233's finite structural boundary control and C234's hash-consed delay expressions as a
+canonical cache key for repeated modules:
+
+```text
+BehaviorHash(component)
+  = hash(radius, interface signature, terminal control table,
+         active/core weight map, canonical timing-expression DAG).
+```
+
+Two modules with the same verified key may be substituted in a tree context without changing the
+modeled recovery behavior. This could support incremental digital-twin recomputation and regression
+testing after a rack/code-policy change. Exact contextual replacement is proved only in the
+2-sum-tree model; arbitrary production topologies need a guarded abstraction or counterexamples.
+
+### A19. Algebraically guided codec fuzzing
+
+Turn A9 and A10 into a testing loop:
+
+1. enumerate or sample syndrome rays and record decoder cost/failure;
+2. fit exact finite-field low-degree feature kernels to the hard locus;
+3. generate new syndromes on the detected locus and just off it;
+4. minimize counterexamples by coset-leader support and extension-complex adjacency;
+5. emit a reproducible syndrome/codeword certificate.
+
+This can find structured blind spots that uniform random fuzzing undersamples. The first product is
+a codec-validation plugin, not an anomaly-detection platform. Compare against uniform syndrome
+sampling, weight-stratified sampling, and existing decoder test suites on injected and real bugs.
+
+### A20. Coefficient-aware configuration identity
+
+Support hypergraphs alone do not identify a linear representation. C217's cycle holonomies provide
+a gauge-invariant checksum for the coefficient layer, and C237 shows that support-identical
+representations can have different Schur-square/MPC behavior. A signed configuration identity can
+therefore include:
+
+```text
+(support canonical form, fundamental-cycle holonomies, Schur-square rank profile).
+```
+
+Uses: detect unintended codec/MSP coefficient changes, deduplicate only genuinely equivalent
+representations, and prevent a deployment system from treating the same access structure as the
+same cryptographic capability. This is especially useful as a linter/checksum; full classification
+may require foundation/Tutte-group data beyond the chosen cycle basis.
+
+## Prior-art correction for proof-carrying enumeration
+
+Canonical construction paths are established: McKay's isomorph-free generation generates through
+canonical augmentations. Certified solver/checker separation is also established: LRAT augments
+SAT proof logs with hints so simple verified checkers can validate them, including Coq and ACL2
+implementations. Proof-verified finite-geometry enumeration is not empty territory either: the
+projective-plane-of-order-nine work combines SAT search, symbolic symmetry removal, and certificates.
+
+Therefore the arcs-derived novelty claim must be narrower:
+
+- explicit group-action transport witnesses at every augmentation edge;
+- a covering-list certificate that need not certify canonical labels, pairwise inequivalence, or
+  the quotient class count;
+- compositional kernel checking of orbit coverage directly in the native mathematical semantics;
+- and a generic schema demonstrating when this is smaller/simpler than a CNF plus LRAT proof.
+
+Primary baselines:
+
+- [McKay, Isomorph-free exhaustive generation](https://users.cecs.anu.edu.au/~bdm/papers/orderly.pdf)
+- [Cruz-Filipe et al., Efficient Certified RAT Verification](https://arxiv.org/abs/1612.02353)
+- [Dallaire--Bright, Enumerating Projective Planes of Order Nine with Proof Verification](https://cs.uwaterloo.ca/~cbright/reports/sc2-pp9-preprint.pdf)
+- [nauty and Traces](https://pallini.di.uniroma1.it/)
+
+## Updated opportunity ranking
+
+| Rank | Candidate | Product proximity | Research defensibility | Main falsifier |
+|---:|---|---|---|---|
+| 1 | Port Capsule + offline policy compiler | High | Medium-high | Complete-port choices add negligible value over standard LRC/RS policies |
+| 2 | Proof-carrying repair control plane | Medium-high | High if verifier is tiny and overhead low | Certificates add latency/complexity without catching meaningful faults |
+| 3 | Unlock-aware batch scheduler | Medium | Medium-high | Static RDAG/flow scheduling already matches it on realistic traces |
+| 4 | Recovery digital twin and joint hardening | High | Medium | Generic fault-tree/load tools give the same decisions |
+| 5 | Proof-carrying orbit-reduced search library | Medium | High with second domain | Certificates are larger/slower than SAT/LRAT or too domain-specific |
+| 6 | General-access-structure MPC linter | Medium | Medium-high | Real users rely almost entirely on threshold structures already covered |
+| 7 | Algebraically guided codec fuzzing | Medium | Medium | Low-degree loci do not correlate with implementation bugs/decoder cost |
+| 8 | Extension-complex migration planner | Low | Medium-high | No production configuration family has useful compatible-extension structure |
+
+The near-term commercial wedge is the **offline compiler/digital twin**, where integration risk is
+low. The strongest differentiated architecture is **proof-carrying dynamic repair**. The broadest
+research export is **proof-carrying symmetry-reduced search**.
