@@ -1,0 +1,64 @@
+// Absolute-irreducibility certificate for the first C210 Frobenius exception.
+//
+// The normalized polynomial P is derived independently by
+// analyze_c210_collision_curve_frobenius.py.  It is irreducible over GF(8).
+// If it were geometrically reducible, its absolutely irreducible factors
+// would form one Frobenius orbit (because P is base-field irreducible).  The
+// orbit size divides total degree 8.  Its proper possibilities are 2, 4, 8,
+// so irreducibility over GF(8^2), GF(8^4), and GF(8^8) certifies absolute
+// irreducibility.
+
+proc checkIrreducible(poly P, int extensionDegree)
+{
+    list factors = factorize(P);
+    if (size(factors[1]) != 2 || factors[2][2] != 1)
+    {
+        print("reducible over extension degree "+string(extensionDegree));
+        exit(1);
+    }
+}
+
+// P with tau renamed a, where a^3+a+1=0.
+ring r3=(2,a),(u,t),dp;
+minpoly=a^3+a+1;
+poly P=
+    u6+a^5*u5t2+a*u5t+a^4*u5+u4t4+a^4*u4t2+a^6*u4t+a^3*u4
+    +a*u3t2+a^4*u3t+u3+a^2*u2t4+a^2*u2t2+u2t+a*u2
+    +a^2*ut2+a^5*ut+a*u+a^4*t4+a*t2+a^3*t+a^4;
+checkIrreducible(P,1);
+
+// GF(8^2)=GF(2^6), tau=A^3+A^2+A.
+ring r6=(2,A),(u,t),dp;
+minpoly=A^6+A+1;
+number a=A^3+A^2+A;
+if (a^3+a+1 != 0) { print("bad GF(8) embedding in degree 2"); exit(1); }
+poly P=
+    u6+a^5*u5t2+a*u5t+a^4*u5+u4t4+a^4*u4t2+a^6*u4t+a^3*u4
+    +a*u3t2+a^4*u3t+u3+a^2*u2t4+a^2*u2t2+u2t+a*u2
+    +a^2*ut2+a^5*ut+a*u+a^4*t4+a*t2+a^3*t+a^4;
+checkIrreducible(P,2);
+
+// GF(8^4)=GF(2^12), with an irreducible x^12+x^3+1.  The displayed a
+// is a root of x^3+x+1 in that field.
+ring r12=(2,A),(u,t),dp;
+minpoly=A^12+A^3+1;
+number a=A^11+A^10+A^8+A^5;
+if (a^3+a+1 != 0) { print("bad GF(8) embedding in degree 4"); exit(1); }
+poly P=
+    u6+a^5*u5t2+a*u5t+a^4*u5+u4t4+a^4*u4t2+a^6*u4t+a^3*u4
+    +a*u3t2+a^4*u3t+u3+a^2*u2t4+a^2*u2t2+u2t+a*u2
+    +a^2*ut2+a^5*ut+a*u+a^4*t4+a*t2+a^3*t+a^4;
+checkIrreducible(P,4);
+
+// GF(8^8)=GF(2^24), with an irreducible x^24+x^4+x^3+x+1.
+ring r24=(2,A),(u,t),dp;
+minpoly=A^24+A^4+A^3+A+1;
+number a=A^18+A^14+A^9+A^8+A^6+A^3+A^2;
+if (a^3+a+1 != 0) { print("bad GF(8) embedding in degree 8"); exit(1); }
+poly P=
+    u6+a^5*u5t2+a*u5t+a^4*u5+u4t4+a^4*u4t2+a^6*u4t+a^3*u4
+    +a*u3t2+a^4*u3t+u3+a^2*u2t4+a^2*u2t2+u2t+a*u2
+    +a^2*ut2+a^5*ut+a*u+a^4*t4+a*t2+a^3*t+a^4;
+checkIrreducible(P,8);
+
+print("{\"absolute_irreducible\":1,\"checked_extension_degrees\":[1,2,4,8],\"total_degree\":8}");

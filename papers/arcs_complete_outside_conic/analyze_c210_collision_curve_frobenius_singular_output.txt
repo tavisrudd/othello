@@ -1,0 +1,1 @@
+{"absolute_irreducible":1,"checked_extension_degrees":[1,2,4,8],"total_degree":8}

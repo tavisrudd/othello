@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the shared-`(a,b)` two-coset locus has an explicit seed-collision curve
+**Status:** C210 ACTIVE — the first trace-one two-coset Frobenius exception is absolutely irreducible
 
 ## Current state
 
@@ -177,8 +177,14 @@ by the `build-sys` lane.
    parameter. Their 452-term Sylvester resultant has coefficient-parametric bidegree `(6,4)`;
    off `H=DB+AE=0`, every rational point reconstructs the unique rational repair parameter
    `r=(DC+AF)/H`, while `H=0` reduces to the explicit shared-quadratic split locus `H=J=0`.
-   Next classify the resultant's geometric components and arithmetic Frobenius classes under both
-   oriented trace-one conditions, then test affine coverage only if a collision-free class survives.
+   The two oriented trace-one conditions are in fact identical on the shared-`(a,b)` locus. An
+   exact `GF(8)` specialization satisfying that trace bit has no rational point on the beta-seed
+   collision curve, so the Frobenius issue is real; however, its degree-eight curve stays
+   irreducible over extension degrees `2`, `4`, and `8`, hence is absolutely irreducible. Its
+   nonzero degree-two `H` boundary cannot contain the curve, so Lang--Weil forces reconstructible
+   collisions over all sufficiently large scalar extensions. Next stratify the full trace-one
+   coefficient locus by geometric factorization, including `H=J=0`, and test affine coverage only
+   if a genuinely collision-free stratum survives.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 

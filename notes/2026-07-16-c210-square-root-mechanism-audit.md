@@ -2444,6 +2444,63 @@ Frozen output:
 5098b20640fd7b53169aafb270facaf42bcbe0fa92cda7279c6f9c263be17332  analyze_c210_seed_cross_repair_curve_output.txt
 ```
 
+## Thirty-seventh coordinate gate: the first Frobenius exception is geometrically connected
+
+On the shared-`(a,b)` locus, the two oriented conditions in (69) are actually the same condition.
+Indeed `T0(0)`, `T1(0)`, the constant pair sum `P0`, and
+`T0(0)+a*delta*P0` depend only on `(a,b,delta,k0,k1)`, not on which of `e` and
+`e'=e+delta` is designated the left layer. Reversing the two layers therefore leaves the
+Artin--Schreier value unchanged. There is one trace bit, counted twice by the oriented
+formulation, rather than two independent characters.
+
+The trace-one locus nevertheless has genuine small-field Frobenius exceptions. Over `GF(8)`, let
+`tau^3+tau+1=0`, use the beta seed `1+tau*omega`, and take
+
+```text
+(e,delta,a,b,c0,c1,k0,k1)
+  = (tau^2,tau,tau^6,tau^2,tau^5,tau^5,tau^6,tau^3).    (75)
+```
+
+Both orientations of (69) have trace one, but the specialized resultant (72) has no
+`GF(8)`-rational `(u,t)` at all. In particular this is not an `H=J=0` split-test artifact: the
+base curve itself is pointless. This proves that the arithmetic Frobenius-class analysis in the
+previous gate cannot be replaced by a rational coefficient census.
+
+The exception does not persist geometrically. After normalizing its `u^4*t^4` coefficient, the
+specialized polynomial has 22 terms and total degree eight. Exact factorization finds it
+irreducible over `GF(8)` and over the extensions of degrees `2`, `4`, and `8`. Since a
+base-irreducible but geometrically reducible degree-eight polynomial has a transitive Frobenius
+orbit of absolutely irreducible factors whose size divides eight, these extension checks certify
+absolute irreducibility. Moreover `H` specializes to a nonzero polynomial of total degree two, so
+it cannot contain this component. Lang--Weil therefore supplies `H!=0` rational points, and hence
+rational reconstructed collision parameters `r=J/H`, over every sufficiently large scalar
+extension. The specialization (75) is closed as an infinite two-coset mechanism despite its
+pointless `GF(8)` fiber.
+
+This certifies one arithmetic class, not the whole coefficient family. The remaining gate is to
+stratify the trace-one coefficient locus by geometric factorization and show that every stratum
+either has an `H!=0` base-defined component or lies in an explicit lower-dimensional exceptional
+locus; the `H=J=0` split locus remains part of that classification.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_collision_curve_frobenius.py
+nix shell nixpkgs#singular --command Singular -q \
+  papers/arcs_complete_outside_conic/analyze_c210_collision_curve_frobenius.sing
+```
+
+Frozen outputs:
+`papers/arcs_complete_outside_conic/analyze_c210_collision_curve_frobenius_output.txt` and
+`papers/arcs_complete_outside_conic/analyze_c210_collision_curve_frobenius_singular_output.txt`.
+
+```text
+0a829d86e8cdccb4909d9bebde4127c125fc1698cf997d75726068f327996e9d  analyze_c210_collision_curve_frobenius.py
+106e430bf0186abe5042d6eb3fea2eaeba8f51303c5fa1373f6a82db669dc26a  analyze_c210_collision_curve_frobenius.sing
+1681c748bc0b41c6d5ea29a36d71712ce7680c580004dbe9660572ee54dab5b0  analyze_c210_collision_curve_frobenius_output.txt
+3f3ba91f1f8d1ae18f421fb3d2371757b5e38b0f1d395ebb3f3b572c371e6cd4  analyze_c210_collision_curve_frobenius_singular_output.txt
+```
+
 ## Cross-lane imports worth retaining
 
 The current resultant-curve gate remains first.  Recent results in other lanes do not classify
