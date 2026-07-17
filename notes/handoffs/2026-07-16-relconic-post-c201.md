@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — two-repair collision-graph gate
+**Status:** C210 ACTIVE — thinned-domain affine-coverage gate
 
 ## Current state
 
@@ -75,9 +75,15 @@ by the `build-sys` lane.
    two same-seed Artin--Schreier characters are ramification-independent from its sign cover. The
    joint group is `S5 x C2 x C2`, so Chebotarev gives a domain of
    `11s/120+O(sqrt(s))` parameters surviving every one-repair collision gate along
-   `F=GF(8^m)`, odd `m`. Next derive the two seed-colored two-repair/one-seed collision graphs on
-   this domain and prove their union has a linear-size independent set. Defer affine coverage until
-   then, and do not widen the order census. See
+   `F=GF(8^m)`, odd `m`. The two seed-colored two-repair/one-seed collision graphs each have maximum
+   degree three: their equations are linear in the second repair parameter and eliminate to a
+   cubic in the seed parameter with nonzero leading coefficient. Their union therefore has maximum
+   degree six, and a greedy independent set leaves at least
+   `11s/840-O(sqrt(s))` repair points. Together with the quadratic divided-difference condition,
+   this closes every arc-legality gate for the partial-domain mechanism. Next analyze affine
+   coverage after this thinning; in particular, determine whether seed--repair secants from such a
+   sparse domain can cover the residue left by the two full seed layers. Do not widen the order
+   census before deriving that symbolic count. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

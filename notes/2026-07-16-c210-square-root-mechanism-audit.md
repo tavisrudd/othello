@@ -728,3 +728,73 @@ Frozen output:
 63b04512757e78bd21200ce28d2ee062579573ab7b4495992a85db38404f05af  analyze_c210_one_repair_monodromy.py
 0d25ebcc184156dbfbc277ea9a5ad9a404e9dc656e39edb86732bb4134ba0b36  analyze_c210_one_repair_monodromy_output.txt
 ```
+
+## Twelfth coordinate gate: the two-repair graphs have bounded degree
+
+It remains to prevent a chord through two retained repair points from passing through one seed
+point. Fix a repair parameter `r`, let `s` be the other repair parameter, and let `t` be the seed
+parameter. In the `GF(8)+GF(8)*omega` coordinates used above, put
+
+```text
+p=r+s,                            q=r*s,
+x=t+eta0,                         eta=eta0+e1*omega,
+a=a1*omega,                       b=b1*omega,
+c=c0+c1*omega.
+```
+
+For seed omega-coordinate `seed1` (zero for `A`, `tau` for `B`), the collision equation splits as
+
+```text
+x^2+e1^2+x*p+e1*(a1*p+b1)+c0+q+1 = 0,                  (9)
+e1^2+x*(a1*p+b1)+e1*p+e1*(a1*p+b1)
+    +c1+a1*q+seed1 = 0.                                (10)
+```
+
+For fixed `r,x`, both equations are linear in `s`. Their `s` coefficients cannot vanish together.
+Indeed, vanishing of the coefficient in (9) forces `x=r+e1*a1`; substitution into the coefficient
+in (10) gives
+
+```text
+e1*(a1^2+a1+1) != 0.
+```
+
+The inequality is uniform: `e1!=0`, while `X^2+X+1` has no root in `GF(8)` because `GF(8)` has no
+`GF(4)` subfield. Cross-multiplying the two `s`-linear equations therefore gives the exact
+compatibility condition in `x`. It is a cubic with leading coefficient `a1!=0`. Hence for fixed
+`r` there are at most three possible neighbors `s` in either seed-colored collision graph.
+
+The union of the two graphs has maximum degree at most six. Apply the greedy bound
+`alpha(G)>=|V(G)|/(Delta+1)` to the one-repair domain from (8), after discarding the at most two
+roots of `g(r)` that would put a repair point on the conic. This gives an independent repair domain
+`T_arc` with
+
+```text
+|T_arc| >= 11s/840 - O(sqrt(s)).                         (11)
+```
+
+The quadratic height has constant second divided difference `a`, and `a+1!=0` in all three
+normal forms, so every subset of the repair graph is internally an arc. Combining (8)--(11), the
+two `s`-point seed layers with `T_arc` form a conic-disjoint arc of linear size along every
+`s=8^m`, odd `m`. Thus **all arc-legality gates for the partial-domain mechanism are now closed**.
+The remaining C210 question for this mechanism is affine coverage: determine whether seed--repair
+secants from a domain of density at least `11/840+o(1)` can cover all affine points not already
+covered by the two seed layers. Repair--repair secants remain unnecessary for the selected q=64
+coverage route, but the drastic domain thinning makes a new symbolic coverage count essential.
+
+The checker independently compares (9)--(10) with the original extension-field equation for all
+2,688 ordered `(orbit,seed,r,s,t)` tuples over `GF(8)` and records the uniform nondegeneracy
+coefficients.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_two_repair_graphs.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_two_repair_graphs_output.txt`.
+
+```text
+4a79b9cd4ddaf2e6d555bff0c6af000d3af2edd42fdeda85e477d2a5a2c342f7  analyze_c210_two_repair_graphs.py
+973ba28352f18a06e536f1a89577508079485a2938b915e1ce303ebbff2810ae  analyze_c210_two_repair_graphs_output.txt
+```
