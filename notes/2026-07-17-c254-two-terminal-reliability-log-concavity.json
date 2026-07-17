@@ -1,0 +1,163 @@
+{
+  "edge_budget": 14,
+  "profile_counts": [
+    {
+      "edges": 1,
+      "distinct_profiles": 1,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 2,
+      "distinct_profiles": 2,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 3,
+      "distinct_profiles": 4,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 4,
+      "distinct_profiles": 10,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 5,
+      "distinct_profiles": 24,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 6,
+      "distinct_profiles": 64,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 7,
+      "distinct_profiles": 174,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 8,
+      "distinct_profiles": 496,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 9,
+      "distinct_profiles": 1444,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 10,
+      "distinct_profiles": 4306,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 11,
+      "distinct_profiles": 13068,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 12,
+      "distinct_profiles": 40302,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 13,
+      "distinct_profiles": 125806,
+      "profiles_with_internal_equality": 0
+    },
+    {
+      "edges": 14,
+      "distinct_profiles": 396758,
+      "profiles_with_internal_equality": 0
+    }
+  ],
+  "closure_failure_count": 1,
+  "first_closure_failure": {
+    "edges": 14,
+    "operation": "P",
+    "left": [
+      0,
+      0,
+      1
+    ],
+    "right": [
+      0,
+      0,
+      0,
+      0,
+      81,
+      324,
+      594,
+      648,
+      459,
+      216,
+      66,
+      12,
+      1
+    ],
+    "result": [
+      0,
+      0,
+      1,
+      12,
+      147,
+      706,
+      1737,
+      2628,
+      2679,
+      1926,
+      993,
+      364,
+      91,
+      14,
+      1
+    ],
+    "failures": [
+      {
+        "index": 3,
+        "left": 144,
+        "right": 147
+      }
+    ],
+    "expression": "P(S(e,e),S(P(e,P(e,e)),S(P(e,P(e,e)),S(P(e,P(e,e)),P(e,P(e,e))))))"
+  },
+  "exact_counterexample": {
+    "description": "parallel composition of a 2-edge path and four 3-parallel-edge bundles in series",
+    "expression": "P(S(e,e),S(P(e,P(e,e)),S(P(e,P(e,e)),S(P(e,P(e,e)),P(e,P(e,e))))))",
+    "profile": [
+      0,
+      0,
+      1,
+      12,
+      147,
+      706,
+      1737,
+      2628,
+      2679,
+      1926,
+      993,
+      364,
+      91,
+      14,
+      1
+    ],
+    "failures": [
+      {
+        "index": 3,
+        "left": 144,
+        "right": 147
+      }
+    ],
+    "direct_subset_check": true,
+    "infinite_family": {
+      "parameter": "q >= 3 parallel edges per bundle",
+      "low_coefficients": [
+        "a_2 = 1",
+        "a_3 = 4q",
+        "a_4 = binom(4q,2) + q^4"
+      ],
+      "defect": "a_2*a_4 - a_3^2 = q*(q^3 - 8q - 2) > 0"
+    }
+  }
+}

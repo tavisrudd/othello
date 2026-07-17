@@ -79,8 +79,7 @@ unless they retain an explicit open tail.
 
 ### `rp-next`
 
-- **C254 `[rp-next]` [QUEUED; after C253]** — test ordinary log-concavity of size-graded two-terminal reliability first on series--parallel networks, requiring a composition lemma or exact counterexample rather than another census → `notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md`.
-- **C255 `[rp-next]` [QUEUED; after C254]** — define gauge-invariant cheap-coefficient cost for a selected repair library and seek a support-identical foundation/cross-ratio pair with provably different optimum implementation cost → `notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md`.
+- **C255 `[rp-next]` [QUEUED; next]** — define gauge-invariant cheap-coefficient cost for a selected repair library and seek a support-identical foundation/cross-ratio pair with provably different optimum implementation cost → `notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md`.
 - **C256 `[rp-next]` [QUEUED; after C255]** — build a small radius-truncated port rigidity atlas across fields and extract a reconstruction criterion or strict field-sensitive repeated-row MSP gap → `notes/2026-07-17-c256-radius-truncated-port-rigidity.md`.
 - **C257 `[rp-next]` [QUEUED; after C256]** — compute minimum column and auxiliary-dimension realizations of exact separator profiles and require a recurring compression theorem or certified lower-bound family → `notes/2026-07-17-c257-separator-profile-realization-complexity.md`.
 
