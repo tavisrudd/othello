@@ -2196,3 +2196,82 @@ Frozen output:
 e5f86aedec03d3c4b404671ecf7de5dd93cc07dc2377d6565ecfb9372940b3d9  analyze_c210_external_ramification_collision.py
 98f27a86902d6fc1bacca0fa5f6f06ad2b030dc6823a128da7f00efa9b7c88fd  analyze_c210_external_ramification_collision_output.txt
 ```
+
+## Thirty-fourth coordinate gate: the lower collision strata still miss full-graph targets
+
+The lower divisors change only the one-repair collision cover used to thin the repair domain.  For
+coverage, one may forget legality entirely and allow every repair parameter.  A target with no
+rational point in either seed--repair incidence fiber then has no seed--repair chord even from the
+full graph, so deleting parameters to obtain an arc cannot help.
+
+On every repair-stratum coefficient point of the odd tower, the preceding gate gives the two
+coverage marginals `S7 x S7`.  The coefficient-independent seed-only covers retain
+`S5 x C2 x C2`, and the repair--repair cover retains one nontrivial Artin--Schreier character.  The
+latter remains distinct uniformly: if
+
+```text
+R=h+c+Y^2+Y*b*omega = R0+R1*omega,       Y=y-eta,
+```
+
+then division by `1+a*omega` shows that its pair-sum pole is
+
+```text
+p_RR=0  iff  a*R0+R1=0.                                  (60)
+```
+
+The coefficient of `h0` in (60) is `a!=0`, whereas the two same-seed poles have equations
+`h1+c1+y1^2=0`; the mixed-seed discriminant is the coefficient-independent degree-five branch
+cover.  Thus the lower coverage marginal is `S5 x C2 x C2 x C2_RR` throughout the three
+coefficient divisors.  Exact isolated-branch checks cover all `784` rational quotient points in
+their union, for both seed colours, and also both conjugate components of `D_H=0`, their `b=0`
+intersections, their intersections with `e^2+k=0`, and both conjugate triple intersections.  At
+every witness the opposite `S7` cover and all four lower covers are unramified.
+
+No direct-product assumption is needed.  Any subdirect product of `S7 x S7` with
+`S5 x C2^3` can couple the two sides only through sign characters, and the common elementary
+abelian quotient has rank at most two.  The derangements split by parity as
+
+```text
+S7: 930 even + 924 odd,          S5: 24 even + 20 odd.   (61)
+```
+
+Enumerating every rank-at-most-two sign relation with surjective projections, while fixing the
+three Artin--Schreier characters to their no-chord values, gives the uniform lower bound
+
+```text
+density(no chord of any of AA,AB,AR,BB,BR,RR)
+  >= 1331/216000
+   = 0.006162037... .                                    (62)
+```
+
+With no sign coupling, the exact density is
+
+```text
+(1854/5040)^2 * (44/120) * (1/2)^3
+  = 116699/18816000
+  = 0.006202115... .                                     (63)
+```
+
+Function-field Chebotarev therefore supplies uncovered affine targets over all sufficiently large
+admissible odd extensions on each of `b=0`, `e^2+k=0`, and `D_H=0`, including every classified
+intersection.  The cover degrees are bounded, so the square-root error is uniform over these
+coefficient strata.  These targets are uncovered even by the full quadratic repair graph.
+Consequently no partial domain can be affine-complete, regardless of whether the lowered collision
+group makes arc thinning easier.  Together with the generic gate, this closes the entire
+quadratic-height repair-graph mechanism.  It does **not** close C210: the next construction gate
+must leave the single quadratic graph ansatz rather than search another coefficient stratum or
+larger plane census.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_lower_collision_strata.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_lower_collision_strata_output.txt`.
+
+```text
+4d6e5baeaa76da4f46e74ced2f87ac7eeab3fe749dc9742584f6afc4fac0690d  analyze_c210_lower_collision_strata.py
+509006345e65f07a79fe8a78a36acb37613b5fbbe1a0493ecfb0d1ef9db0d7da  analyze_c210_lower_collision_strata_output.txt
+```

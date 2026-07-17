@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — external branch collision is an exact two-difference-variable elimination
+**Status**: ACTIVE — the single quadratic repair-graph mechanism is closed
 
 ## Objective
 
@@ -122,6 +122,15 @@ external chart, disjoint from the known source.  The saturated collision polynom
 coefficient is also explicit and has no coefficient-only factor.  Next pseudo-reduce the
 degree-eighteen ramification equation modulo the degree-five collision polynomial on `L1!=0`, and
 handle `L0=L1=0` separately.
+
+That elimination and the remaining lower strata are now closed.  The coverage top group is
+uniformly `S7 x S7` at every odd-tower repair coefficient.  On `b=0`, `e^2+k=0`, `D_H=0`, and
+their classified intersections, forgetting repair legality and allowing the full quadratic graph
+still leaves a target class of density at least `1331/216000` with none of the six chord types;
+the bound already minimizes over every possible sign coupling.  Hence no quadratic partial graph
+can be affine-complete on all sufficiently large admissible extensions.  The quadratic-height
+mechanism is finished.  C210 remains active and must next formulate a genuinely different
+Baer-transversal mechanism, not another quadratic coefficient search.
 
 ## C201 input
 

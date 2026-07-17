@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — odd-tower coverage top monodromy is uniformly `S7 x S7`
+**Status:** C210 ACTIVE — the single quadratic repair-graph mechanism is closed
 
 ## Current state
 
@@ -162,10 +162,15 @@ by the `build-sys` lane.
    `lambda^8*d^30` is exactly `tau*e^2*a^4`. Thus each seed cover has an isolated simple branch
    away from the other at every repair coefficient. On `GF(8^m)`, odd `m`, the cover degree is
    always seven because `a^2+a+1!=0`; irreducibility plus these isolated transpositions gives the
-   uniform top group `S7 x S7`. There is no residual coverage top-group drop. Next test only the
-   known lower mixed-collision strata `b=0`, `e^2+k=0`, and `D_H=0`, including their classified
-   intersections, for an arc-legal affine-complete family over infinitely many odd extensions. Do
-   not replace this symbolic gate with a larger plane census. See
+   uniform top group `S7 x S7`. There is no residual coverage top-group drop. The remaining lower
+   mixed-collision strata `b=0`, `e^2+k=0`, and `D_H=0`, including every classified intersection,
+   are now closed by projecting away legality: even under the worst possible rank-two sign
+   coupling, a density at least `1331/216000` of affine targets has no chord from any seed--seed,
+   seed--repair, or repair--repair class, even when the full quadratic repair graph is allowed.
+   Deleting to an arc-legal domain cannot add coverage. This closes the single quadratic graph
+   ansatz, not C210. Next leave that ansatz and formulate the next genuinely Baer-transversal
+   mechanism; do not search another quadratic coefficient stratum or replace the symbolic gate
+   with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
