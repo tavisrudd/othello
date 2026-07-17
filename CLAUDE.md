@@ -12,6 +12,9 @@ At the start of a session:
 
 1. Select a lane from the user's explicit alias or named handoff. Do not infer one from git, task
    numbers, or the previous session.
+   A literal `go C<id>` is an explicit named-task selection rather than an inference: resolve the
+   allocated task's lane peg from the live queue or named handoff, then enter through that lane's
+   handoff in the normal way.
 2. Read only that lane's entry handoff. It is the current-state map.
 3. Read `notes/2026-07-07-codex-task-queue.md` only for global task-ID allocation, explicit lane
    completion, or a user-requested cross-lane status. A selected lane's handoff owns its next step.
@@ -130,8 +133,11 @@ a handoff may persist it with `Mode: intent-based` under its date. `yc` means �
 means “vibe check”: translate the technical evidence into an honest progress assessment, including
 momentum, risks, and likely route viability rather than merely reciting implementation status.
 When stopping after a substantial full or partial C-item chunk, include a one-line vibe check in
-the user-facing work report even when `vb` was not requested. Do not add routine vibe checks to
-intermediate commentary, minor status updates, or administrative/edit-only reports.
+the user-facing work report even when `vb` was not requested. End the same report with a standalone,
+copy-pasteable `go C<id>` line naming the next allocated C item. If the next item is still behind a
+pre-allocation gate, say so and use `go <lane>` instead; never fabricate an unallocated concrete ID.
+Do not add routine vibe checks or resume commands to intermediate commentary, minor status updates,
+or administrative/edit-only reports.
 
 In intent-based mode, state and take a decision only when it is reversible, already permitted,
 strongly lopsided (at least 80/20 from visible evidence), and does not change downstream shape.
