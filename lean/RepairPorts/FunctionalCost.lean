@@ -726,6 +726,162 @@ theorem pointedNonembeddedCostSearch_eq
 
 end PointedFiniteSearch
 
+section FiberwiseFiniteSearch
+
+variable [Fintype 𝔽] [Fintype V]
+
+/-- Finite ambient blocks in the functional fiber of `beta` that are nonzero at `x`. -/
+def pointedFunctionalFiberCandidates
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) : Finset (κ → 𝔽) := by
+  classical
+  exact Finset.univ.filter (IsPointedFunctionalRepresentative I e x beta)
+
+/-- Finite search for a constrained functional-fiber cost, with `⊤` for an empty fiber. -/
+def pointedFunctionalFiberCostSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) : WithTop ℕ :=
+  sInf (((pointedFunctionalFiberCandidates I e x beta).image fun w =>
+    (hammingNorm w : WithTop ℕ)) : Set (WithTop ℕ))
+
+omit [DecidableEq V] [Fintype V] in
+/-- Finite constrained-fiber search computes the abstract pointed fiber cost. -/
+theorem pointedFunctionalFiberCostSearch_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (x : κ)
+    (beta : Module.Dual 𝔽 V) :
+    pointedFunctionalFiberCostSearch I e x beta =
+      pointedFunctionalFiberCost I e x beta := by
+  classical
+  by_cases hex : ∃ w, IsPointedFunctionalRepresentative I e x beta w
+  · obtain ⟨w, hw, hcost⟩ :=
+      exists_pointedFunctionalFiberCost_realizer I e x beta hex
+    apply le_antisymm
+    · apply sInf_le
+      apply Finset.mem_image.mpr
+      exact ⟨w, Finset.mem_filter.mpr ⟨Finset.mem_univ _, hw⟩, hcost⟩
+    · apply le_sInf
+      intro n hn
+      obtain ⟨u, hu, rfl⟩ := Finset.mem_image.mp hn
+      exact pointedFunctionalFiberCost_le I e x beta u (Finset.mem_filter.mp hu).2
+  · have hcandidates : pointedFunctionalFiberCandidates I e x beta = ∅ := by
+      apply Finset.not_nonempty_iff_eq_empty.mp
+      rintro ⟨w, hw⟩
+      exact hex ⟨w, (Finset.mem_filter.mp hw).2⟩
+    have hcost : pointedFunctionalFiberCost I e x beta = ⊤ :=
+      (pointedFunctionalFiberCost_eq_top_iff I e x beta).2 hex
+    simp [pointedFunctionalFiberCostSearch, hcandidates, hcost]
+
+/-- Fiberwise finite evaluation of one pointed functional tuple. -/
+def pointedFunctionalTupleCostSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V) : WithTop ℕ :=
+  pointedFunctionalFiberCostSearch I e x (beta j) +
+    ((∑ l ∈ Finset.univ.erase j, functionalFiberCostSearch I e (beta l) : ℕ) : WithTop ℕ)
+
+/-- The finite tuple evaluator computes the abstract additive tuple cost. -/
+theorem pointedFunctionalTupleCostSearch_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (x : κ) (beta : ι → Module.Dual 𝔽 V) :
+    pointedFunctionalTupleCostSearch I e j x beta =
+      pointedFunctionalTupleCost I e j x beta := by
+  rw [pointedFunctionalTupleCostSearch, pointedFunctionalTupleCost,
+    pointedFunctionalFiberCostSearch_eq]
+  congr 1
+  norm_cast
+  apply Finset.sum_congr rfl
+  intro l _
+  exact functionalFiberCostSearch_eq I e (beta l)
+
+/-- The finite set of nonzero outer functional-dual tuples. -/
+def nonzeroFunctionalDualCandidates
+    (O : Submodule 𝔽 (ι → V)) : Finset (ι → Module.Dual 𝔽 V) := by
+  classical
+  letI : Fintype (Module.Dual 𝔽 V) :=
+    Fintype.ofInjective (fun beta : Module.Dual 𝔽 V => (beta : V → 𝔽)) (by
+      intro beta gamma h
+      ext v
+      exact congrFun h v)
+  exact Finset.univ.filter fun beta => beta ∈ functionalDual O ∧ beta ≠ 0
+
+/-- Finite formula evaluation of the nonzero outer-functional pointed sector. -/
+def nonzeroOuterPointedFiberCostSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  sInf (((nonzeroFunctionalDualCandidates O).image fun beta =>
+    pointedFunctionalTupleCostSearch I e j x beta) : Set (WithTop ℕ))
+
+/-- Finite outer-tuple enumeration computes the nonzero fiberwise sector. -/
+theorem nonzeroOuterPointedFiberCostSearch_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    nonzeroOuterPointedFiberCostSearch I e O j x =
+      nonzeroOuterPointedFiberCost I e O j x := by
+  classical
+  apply congrArg sInf
+  ext n
+  constructor
+  · intro hn
+    obtain ⟨beta, hbeta, hcost⟩ := Finset.mem_image.mp hn
+    have hb : beta ∈ functionalDual O ∧ beta ≠ 0 := by
+      simpa only [nonzeroFunctionalDualCandidates, Finset.mem_filter, Finset.mem_univ, true_and]
+        using hbeta
+    exact ⟨beta, hb.1, hb.2, (pointedFunctionalTupleCostSearch_eq I e j x beta).symm.trans hcost⟩
+  · rintro ⟨beta, hbeta, hbeta0, hcost⟩
+    apply Finset.mem_image.mpr
+    have hcand : beta ∈ nonzeroFunctionalDualCandidates O := by
+      simp only [nonzeroFunctionalDualCandidates, Finset.mem_filter, Finset.mem_univ, true_and]
+      exact ⟨hbeta, hbeta0⟩
+    exact ⟨beta, hcand,
+      (pointedFunctionalTupleCostSearch_eq I e j x beta).trans hcost⟩
+
+/-- Finite formula evaluation of the closed zero-functional sector. -/
+def zeroFunctionalPointedClosedCostSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (j : ι) (x : κ) : WithTop ℕ := by
+  classical
+  exact if (∃ l, l ≠ j) ∧ dualCode I ≠ ⊥ then
+      pointedFunctionalFiberCostSearch I e x 0 + (dualDist I : WithTop ℕ)
+    else ⊤
+
+omit [DecidableEq V] [Fintype V] in
+/-- The finite zero-sector evaluator computes the abstract closed form. -/
+theorem zeroFunctionalPointedClosedCostSearch_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I) (j : ι) (x : κ) :
+    zeroFunctionalPointedClosedCostSearch I e j x =
+      zeroFunctionalPointedClosedCost I e j x := by
+  classical
+  simp only [zeroFunctionalPointedClosedCostSearch, zeroFunctionalPointedClosedCost]
+  split_ifs
+  · rw [pointedFunctionalFiberCostSearch_eq]
+  · rfl
+
+/-- Finite evaluation of the complete closed pointed-obstruction formula. -/
+def pointedNonembeddedCostFormulaSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  min (zeroFunctionalPointedClosedCostSearch I e j x)
+    (nonzeroOuterPointedFiberCostSearch I e O j x)
+
+/-- The finite formula evaluator computes the exact abstract pointed obstruction. -/
+theorem pointedNonembeddedCostFormulaSearch_eq
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCostFormulaSearch I e O j x =
+      pointedNonembeddedCost I e O j x := by
+  rw [pointedNonembeddedCostFormulaSearch,
+    zeroFunctionalPointedClosedCostSearch_eq,
+    nonzeroOuterPointedFiberCostSearch_eq,
+    ← pointedNonembeddedCost_eq_min_closed_nonzero]
+
+/-- The decomposed finite formula evaluator agrees with exhaustive block-word search. -/
+theorem pointedNonembeddedCostFormulaSearch_eq_fullSearch
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCostFormulaSearch I e O j x =
+      pointedNonembeddedCostSearch I e O j x := by
+  rw [pointedNonembeddedCostFormulaSearch_eq, pointedNonembeddedCostSearch_eq]
+
+end FiberwiseFiniteSearch
+
 #print axioms RepairPorts.exists_functionalFiberCost_realizer
 #print axioms RepairPorts.exists_functionalTupleCost_realizer
 #print axioms RepairPorts.hasWeightedFunctionalDualDistanceAtLeast_iff_functionalTupleCost
@@ -740,6 +896,10 @@ end PointedFiniteSearch
 #print axioms RepairPorts.pointedNonembeddedCost_eq_top_iff
 #print axioms RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost
 #print axioms RepairPorts.pointedNonembeddedCostSearch_eq
+#print axioms RepairPorts.pointedFunctionalFiberCostSearch_eq
+#print axioms RepairPorts.pointedFunctionalTupleCostSearch_eq
+#print axioms RepairPorts.nonzeroOuterPointedFiberCostSearch_eq
+#print axioms RepairPorts.pointedNonembeddedCostFormulaSearch_eq_fullSearch
 
 end
 

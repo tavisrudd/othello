@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-16
 **Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
-costs, verified searches, and exact fully fiberwise pointed first-obstruction formula are
+costs, exact fully fiberwise pointed formula, and verified finite reference evaluator are
 implemented.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
@@ -29,10 +29,10 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Implement the finite formula algorithm: enumerate outer functional-dual tuples while reusing inner
-fiber and pointed-fiber cost tables, prove equality with full-word exhaustive search, and record the
-exact search-space reduction. The fully fiberwise closed formula and every `top` edge case are
-kernel-checked; see
+Implement a genuinely cached finite evaluator that traverses inner ambient blocks once, stores
+ordinary and coordinate-pointed fiber minima, and scans the outer functional-dual tuples. The
+current extensional reference evaluator already agrees with exhaustive full-word search, but does
+not justify a runtime claim; see
 [`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
 
 ## Scope and ownership

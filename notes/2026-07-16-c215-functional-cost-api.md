@@ -2,7 +2,7 @@
 
 **Lane:** `repairports`
 
-**Status:** exact fully fiberwise pointed first-obstruction formula implemented.
+**Status:** exact fully fiberwise formula and verified finite reference evaluator implemented.
 
 ## Result
 
@@ -62,6 +62,20 @@ Otherwise it is `top`; an empty pointed target fiber also makes the displayed su
 the complete target-conditioned first obstruction is expressed through independent inner-fiber
 costs, the ordinary inner dual distance, and an infimum over nonzero outer functional-dual tuples.
 
+The finite formula evaluator is now kernel-checked:
+
+- `pointedFunctionalFiberCostSearch_eq` handles constrained inner fibers, including empty fibers;
+- `pointedFunctionalTupleCostSearch_eq` evaluates the additive tuple formula;
+- `nonzeroOuterPointedFiberCostSearch_eq` enumerates the finite nonzero outer functional-dual
+  tuples;
+- `pointedNonembeddedCostFormulaSearch_eq_fullSearch` proves equality with exhaustive pointed
+  block-word search.
+
+The two exposed finite domains have sizes `|F|^|κ|` for ambient inner blocks and at most
+`|V*|^|ι|` for outer functional tuples, versus `|F|^(|ι| |κ|)` full block families. The
+current Lean evaluator calls the fiber searches extensionally and does not implement a shared
+memoized table, so these domain counts are not yet a runtime or asymptotic-complexity claim.
+
 This is an exact decomposition, not a field-priority claim. The classical concatenated-dual fiber
 structure remains prior art; the target-conditioned repair-obstruction use still requires a
 dedicated literature audit before any novelty language.
@@ -77,7 +91,8 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Turn the closed formula into a finite reference algorithm that enumerates outer functional-dual
-tuples and reuses a table of inner fiber and pointed-fiber costs. Prove agreement with the existing
-full-word exhaustive search, state the search-space reduction precisely, and then begin the
-targeted prior-art audit before treating the pointed use as a contribution.
+Implement an actual cached table evaluator that traverses the inner ambient space once, records
+ordinary and coordinate-pointed minima by functional class, and then scans the outer
+functional-dual tuples. Prove it equal to the reference formula evaluator before making a measured
+runtime claim. In parallel, begin the targeted prior-art audit before treating the pointed use as
+a contribution.
