@@ -1,0 +1,95 @@
+{
+  "task": "C231",
+  "radii": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "theorems_checked": {
+    "standard_2_sum_circuit_composition": true,
+    "scalar_budget_message_parallel_step": true,
+    "coupled_terminal_closure": true,
+    "budgeted_min_max_arrival_convolution": true
+  },
+  "exhaustive_scout": {
+    "component_representations": 19,
+    "represented_2_sum_pairs": 361,
+    "seed_radius_states": 98000,
+    "arrival_equations": 285600,
+    "one_step_cross_additions": {
+      "1": 0,
+      "2": 0,
+      "3": 2916,
+      "4": 3996,
+      "5": 4092
+    }
+  },
+  "strict_three_round_interface_relay": {
+    "field": "GF(2)",
+    "radius": 3,
+    "component_columns": {
+      "p": 1,
+      "a": 2,
+      "b": 3,
+      "c": 4,
+      "d": 6
+    },
+    "left_names": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "right_names": [
+      "u",
+      "v",
+      "w",
+      "z"
+    ],
+    "seed": [
+      "b",
+      "c",
+      "d",
+      "v",
+      "w"
+    ],
+    "parallel_addition_layers": [
+      [
+        "a"
+      ],
+      [
+        "u"
+      ],
+      [
+        "z"
+      ]
+    ],
+    "arrival_times": {
+      "a": 1,
+      "b": 0,
+      "c": 0,
+      "d": 0,
+      "u": 2,
+      "v": 0,
+      "w": 0,
+      "z": 3
+    },
+    "cross_interface_round": 2,
+    "terminal_closure": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "u",
+      "v",
+      "w",
+      "z"
+    ]
+  },
+  "literature_cache": {
+    "arXiv:1610.09767": "6aacd2b590e73c571961d6dd921fae9ad7c2378088cabae1171bbd50668b5a50",
+    "arXiv:2301.06642": "a7150e01acd2f4bf86454bdc11bad436f29832d38ea749e95b072b02e7cae0d5"
+  }
+}
