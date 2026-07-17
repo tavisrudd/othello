@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — provenance-aware queue listing landed; failure/legacy fixtures next
+**Status**: IN PROGRESS — hermetic matrix and guidance complete; real lightweight gate next
 
 ## Goal
 
@@ -562,6 +562,16 @@ pass, including active/completed attribution, exact filtering, row caps, manager
 rejection, session abbreviation, and both CLI output modes. No real Lean target ran. Step 9 is the
 remaining failure, legacy, malformed-state, duplicate-reader, and manager-unavailable fixture
 coverage from the acceptance matrix.
+
+Steps 9 and 10 close the remaining hermetic inspection matrix and operator contract. The adapter
+suite now has 46 passing default tests: malformed and oversized managed records are rejected,
+completed failures resolve without live-manager access, manager loss stays `unknown`, and existing
+completion redelivery preserves the stable event ID for duplicate-reader deduplication. The
+unchanged 17-test legacy queue suite also passes, including lock-backed live/abandoned format-1
+status behavior. `lean/AGENTS.md` documents the blocking bridge, recovery delivery, phase evidence,
+stable event IDs, the human active/recent table, and the full exact-run JSON query. Both suites are
+fully stubbed/hermetic and no real Lean target ran. Step 11 is the one disposable lightweight
+systemd-run-to-terminal gate in a confirmed shared-tree quiet window.
 
 ## Adversarial design review
 

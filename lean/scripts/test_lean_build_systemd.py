@@ -827,7 +827,7 @@ class ManagedListTests(unittest.TestCase):
                 "format": 2,
                 "run_id": submission["run_id"],
                 "state": state,
-                "phase": "finished" if state == "success" else "building",
+                "phase": "finished" if state in {"success", "failed"} else "building",
                 "queue_exit_code": 0 if state == "success" else None,
             }
             MODULE.publish_set_once(run_dir / "status.json", status, os.geteuid())
@@ -923,6 +923,54 @@ class ManagedListTests(unittest.TestCase):
         self.assertEqual(diagnostics, [])
         with self.assertRaisesRegex(MODULE.StateError, "invalid managed run ID"):
             MODULE.list_managed_runs(state_root=self.state_root, run_id="../foreign")
+
+    def test_list_skips_malformed_and_oversized_records(self) -> None:
+        malformed_dir, _, _ = self.make_run(
+            "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "malformed-session", state="running"
+        )
+        malformed_status = malformed_dir / "status.json"
+        malformed_status.write_text("{not-json}\n")
+        malformed_status.chmod(0o600)
+        oversized_dir, _, _ = self.make_run(
+            "11111111-2222-3333-4444-555555555555", "oversized-session"
+        )
+        oversized = oversized_dir / "completion.json"
+        oversized.write_bytes(b"x" * (MODULE.MAX_RECORD_BYTES + 1))
+        oversized.chmod(0o600)
+        payload, diagnostics = MODULE.list_managed_runs(state_root=self.state_root)
+        self.assertEqual(payload["rows"], [])
+        self.assertEqual(payload["skipped"], 2)
+        self.assertTrue(any("status record is malformed" in item for item in diagnostics))
+        self.assertTrue(any("exceeds" in item for item in diagnostics))
+
+    def test_completed_failure_needs_no_live_manager_evidence(self) -> None:
+        run_dir, submission, accepted = self.make_run(
+            "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "failed-session", state="failed"
+        )
+        assert accepted is not None
+        status = json.loads((run_dir / "status.json").read_text())
+        status["queue_exit_code"] = 1
+        (run_dir / "status.json").write_text(json.dumps(status) + "\n")
+        (run_dir / "status.json").chmod(0o600)
+        completion = MODULE.completion_envelope(
+            submission=submission,
+            accepted=accepted,
+            status=status,
+            service={
+                "Result": "exit-code",
+                "ExecMainStatus": "1",
+                "InvocationID": accepted["invocation_id"],
+            },
+            client_returncode=1,
+        )
+        MODULE.publish_set_once(run_dir / "completion.json", completion, os.geteuid())
+        payload, diagnostics = MODULE.list_managed_runs(
+            state_root=self.state_root,
+            generation_reader=lambda: self.fail("completed rows must not query the manager"),
+            snapshot_reader=lambda _unit: self.fail("completed rows must not query a unit"),
+        )
+        self.assertEqual(diagnostics, [])
+        self.assertEqual(payload["rows"][0]["effective_state"], "failed")
 
     def test_human_table_abbreviates_sessions_unambiguously(self) -> None:
         payload = {
