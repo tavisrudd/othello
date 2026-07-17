@@ -85,29 +85,10 @@ active area in probabilistic combinatorics. Two facts already in hand make this 
 
 This is the natural probability companion paper and the missing probabilistic leg of Paper B.
 
-### 5. The code-equivalence cryptography export is entirely absent
+### 5--6. Restricted export branches
 
-C217's gauge theorem restates as: monomial equivalence of represented codes is support-matroid
-isomorphism plus equality of fundamental circuit holonomies, with a linear-time comparison once
-supports are aligned. C237 adds Schur-power matroid profiles as gauge-invariant fingerprints. The
-corpus positions these only against McEliece square distinguishers as prior art, and never
-mentions that the Linear Equivalence Problem now underlies NIST-onramp signature schemes (LESS;
-matrix-code analog MEDS), where canonical forms and invariants are the entire attack surface.
-Real caveat: the reduction needs accessible small circuits, so random instances resist it. But a
-clean statement of the reduction (equivalence as matroid-iso plus holonomy), together with
-holonomy/Schur profiles as distinguishers and preflight linters for structured instances, is a
-publishable bridge into an active cryptanalytic community, and the certificate infrastructure to
-demonstrate it already exists.
-
-### 6. The quantum translation is unexplored
-
-Stabilizer/CSS erasure decoding has precisely this structure: erased qubits, peeling decoders,
-stopping sets — and, with erasure-dominant hardware (neutral atoms, erasure-converted qubits),
-growing practical weight. Complete pointed ports, stopping cores, the C233 boundary-control
-algebra (mapping to modular/code-surgery composition), and the capacitated service regions all
-appear to transplant; "quantum" appears in the corpus once, in a nonclaims list. Higher risk than
-items 1--5 — the symplectic CSS structure may break the clean matroid picture — but the payoff
-class is large and the audience is the hottest in coding theory.
+These two branches and their follow-up items were moved verbatim to
+`2026-07-17-fable5-rp-next-fable-do-NOT-read.md`. Do not follow that pointer in a Fable session.
 
 ### 7. A cheap decisive check nobody ran: is the flagship construction a good LRC?
 

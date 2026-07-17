@@ -1,0 +1,476 @@
+{
+  "task": "C240",
+  "pointed_profile_shape": {
+    "committed_profiles": {
+      "uniform": {
+        "profile": [
+          0,
+          0,
+          0,
+          20,
+          15,
+          6,
+          1
+        ],
+        "log_concave": true,
+        "lc_failure_indices": [],
+        "ultra_log_concave": true,
+        "ulc_failures": []
+      },
+      "cubic_infinity_full_rank_jump": {
+        "profile": [
+          0,
+          0,
+          0,
+          36,
+          2502,
+          9486,
+          24654,
+          48378,
+          74457,
+          91963,
+          92287,
+          75573,
+          50388,
+          27132,
+          11628,
+          3876,
+          969,
+          171,
+          19,
+          1
+        ],
+        "log_concave": true,
+        "lc_failure_indices": [],
+        "ultra_log_concave": true,
+        "ulc_failures": []
+      },
+      "harmonic_curve_full_rank_jump": {
+        "profile": [
+          0,
+          0,
+          0,
+          0,
+          12,
+          234,
+          210,
+          120,
+          45,
+          10,
+          1
+        ],
+        "log_concave": true,
+        "lc_failure_indices": [],
+        "ultra_log_concave": true,
+        "ulc_failures": []
+      },
+      "harmonic_nucleus_full_rank_jump": {
+        "profile": [
+          0,
+          0,
+          0,
+          0,
+          30,
+          252,
+          210,
+          120,
+          45,
+          10,
+          1
+        ],
+        "log_concave": true,
+        "lc_failure_indices": [],
+        "ultra_log_concave": true,
+        "ulc_failures": []
+      }
+    },
+    "ulc_counterexample": {
+      "field": "GF(2)",
+      "binary_columns": [
+        13,
+        30,
+        10,
+        27,
+        23,
+        31,
+        7
+      ],
+      "target_index": 2,
+      "target_column": 10,
+      "profile": [
+        0,
+        0,
+        1,
+        4,
+        6,
+        5,
+        1
+      ],
+      "log_concave": true,
+      "lc_failure_indices": [],
+      "ultra_log_concave": false,
+      "ulc_failures": [
+        {
+          "index": 4,
+          "left": 4320,
+          "right": 4500
+        }
+      ]
+    },
+    "random_sample": {
+      "seed": 240,
+      "matrix_draws": 2000,
+      "pointed_noncoloop_cases": 10760,
+      "lc_counterexample": null
+    }
+  },
+  "fixed_alphabet_lrc": {
+    "inner_code": "[11,5,6]_9 quartic-nucleus code",
+    "locality": 4,
+    "outer_alphabet": 59049,
+    "inner_rate_cap": 0.45454545454545453,
+    "plain_locality_zero_distance_cap": 0.8,
+    "zero_distance_rate_gap": 0.3454545454545455,
+    "rows": [
+      {
+        "outer_rate": 0.1,
+        "concatenated_rate": 0.045454545454545456,
+        "concatenated_relative_distance_lower_bound": 0.4711461681052273,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.22876020793680596,
+        "rate_gap": 0.1833056624822605
+      },
+      {
+        "outer_rate": 0.2,
+        "concatenated_rate": 0.09090909090909091,
+        "concatenated_relative_distance_lower_bound": 0.40837310500484,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.2872610087395565,
+        "rate_gap": 0.1963519178304656
+      },
+      {
+        "outer_rate": 0.3,
+        "concatenated_rate": 0.13636363636363635,
+        "concatenated_relative_distance_lower_bound": 0.3493927309980417,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.34616822110841194,
+        "rate_gap": 0.2098045847447756
+      },
+      {
+        "outer_rate": 0.4,
+        "concatenated_rate": 0.18181818181818182,
+        "concatenated_relative_distance_lower_bound": 0.29299606958778435,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.4060185760098669,
+        "rate_gap": 0.22420039419168508
+      },
+      {
+        "outer_rate": 0.5,
+        "concatenated_rate": 0.22727272727272727,
+        "concatenated_relative_distance_lower_bound": 0.23870072217538832,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.4670076461548648,
+        "rate_gap": 0.23973491888213752
+      },
+      {
+        "outer_rate": 0.6,
+        "concatenated_rate": 0.2727272727272727,
+        "concatenated_relative_distance_lower_bound": 0.18630404938284056,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.5292777480106203,
+        "rate_gap": 0.2565504752833476
+      },
+      {
+        "outer_rate": 0.7,
+        "concatenated_rate": 0.3181818181818182,
+        "concatenated_relative_distance_lower_bound": 0.13577589178575356,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.5930111864121053,
+        "rate_gap": 0.2748293682302871
+      },
+      {
+        "outer_rate": 0.8,
+        "concatenated_rate": 0.36363636363636365,
+        "concatenated_relative_distance_lower_bound": 0.08726313965906841,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.6585207610829116,
+        "rate_gap": 0.29488439744654793
+      },
+      {
+        "outer_rate": 0.9,
+        "concatenated_rate": 0.40909090909090906,
+        "concatenated_relative_distance_lower_bound": 0.04124337586826612,
+        "qary_lrc_gv_rate_lower_bound_at_same_delta": 0.7264857207267269,
+        "rate_gap": 0.31739481163581784
+      }
+    ]
+  },
+  "peeling_classification": {
+    "field": "GF(2)",
+    "conclusion": "P_r fails deletion-, duality-, and 2-sum closure at r=2 and r=3",
+    "witnesses": {
+      "2": {
+        "deletion": {
+          "parent_columns": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "deleted_index": 0,
+          "minor_columns": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "minor_failure": {
+            "seed_mask": 7,
+            "horn_mask": 7,
+            "full_closure_mask": 15
+          }
+        },
+        "duality": {
+          "primal_columns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "primal_rank": 3,
+          "dual_failure": {
+            "seed_mask": 11,
+            "horn_mask": 11,
+            "full_closure_mask": 75
+          }
+        },
+        "two_sum": {
+          "left_columns_with_glue_first": [
+            1,
+            2,
+            3
+          ],
+          "right_columns_with_glue_first": [
+            1,
+            2,
+            3
+          ],
+          "sum_columns": [
+            2,
+            3,
+            8,
+            9
+          ],
+          "sum_failure": {
+            "seed_mask": 7,
+            "horn_mask": 7,
+            "full_closure_mask": 15
+          }
+        }
+      },
+      "3": {
+        "deletion": {
+          "parent_columns": [
+            1,
+            2,
+            3,
+            4,
+            8,
+            13
+          ],
+          "deleted_index": 0,
+          "minor_columns": [
+            2,
+            3,
+            4,
+            8,
+            13
+          ],
+          "minor_failure": {
+            "seed_mask": 15,
+            "horn_mask": 15,
+            "full_closure_mask": 31
+          }
+        },
+        "duality": {
+          "primal_columns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "primal_rank": 4,
+          "dual_failure": {
+            "seed_mask": 45,
+            "horn_mask": 45,
+            "full_closure_mask": 429
+          }
+        },
+        "two_sum": {
+          "left_columns_with_glue_first": [
+            1,
+            2,
+            3
+          ],
+          "right_columns_with_glue_first": [
+            1,
+            2,
+            4,
+            7
+          ],
+          "sum_columns": [
+            2,
+            3,
+            8,
+            16,
+            25
+          ],
+          "sum_failure": {
+            "seed_mask": 15,
+            "horn_mask": 15,
+            "full_closure_mask": 31
+          }
+        }
+      }
+    }
+  },
+  "cascade_replay": {
+    "cubic": [
+      {
+        "q": 3,
+        "point_count": 8,
+        "flat_count": 53,
+        "hyperplane_count": 20,
+        "mobius_fixed_size_spanning_counts": [
+          0,
+          0,
+          0,
+          0,
+          49,
+          52,
+          28,
+          8,
+          1
+        ],
+        "direct_hyperplane_union_spanning_counts": [
+          0,
+          0,
+          0,
+          0,
+          49,
+          52,
+          28,
+          8,
+          1
+        ]
+      },
+      {
+        "q": 9,
+        "point_count": 20,
+        "flat_count": 388,
+        "hyperplane_count": 220,
+        "mobius_fixed_size_spanning_counts": [
+          0,
+          0,
+          0,
+          0,
+          3315,
+          13152,
+          36030,
+          75300,
+          124725,
+          167500,
+          184655,
+          167950,
+          125970,
+          77520,
+          38760,
+          15504,
+          4845,
+          1140,
+          190,
+          20,
+          1
+        ],
+        "direct_hyperplane_union_spanning_counts": [
+          0,
+          0,
+          0,
+          0,
+          3315,
+          13152,
+          36030,
+          75300,
+          124725,
+          167500,
+          184655,
+          167950,
+          125970,
+          77520,
+          38760,
+          15504,
+          4845,
+          1140,
+          190,
+          20,
+          1
+        ]
+      }
+    ],
+    "bernoulli_formula": "sum_{F flat} mu(F,E) (1-p)^(|E|-|F|)",
+    "harmonic_zero_sum_affine_checks": {
+      "9": {
+        "scope": "all subsets",
+        "seed_count": 512
+      },
+      "27": {
+        "scope": "all subsets of size at most three",
+        "seed_count": 3304
+      }
+    },
+    "harmonic_full_rule_escape": {
+      "q": 27,
+      "proper_affine_plane": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "triple": [
+        0,
+        1,
+        3
+      ],
+      "harmonic_completion": 23,
+      "conclusion": "the full harmonic-block cascade is not confined to affine closure"
+    }
+  },
+  "width_two_boundary": {
+    "field": "GF(2)",
+    "left_columns": [
+      4,
+      5,
+      6
+    ],
+    "right_columns": [
+      8,
+      9,
+      10
+    ],
+    "interface_vectors": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "active_set_target_checks": 384,
+    "radius_threshold_checks": 1920,
+    "conclusion": "pointwise boundary-vector support costs exactly convolve for one-step closure"
+  }
+}

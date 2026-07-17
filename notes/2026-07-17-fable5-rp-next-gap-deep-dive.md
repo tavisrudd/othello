@@ -207,105 +207,10 @@ it against direct simulation at q=3 and q=9.
 4. Opens a new problem family for probabilists (bootstrap on group-action Steiner systems) where
    this program owns the solvable cases.
 
-## 5. Code-equivalence cryptography export
+## 5--6. Restricted export branches
 
-### Sharpened statement
-
-Two deliverables, cleanly separated:
-
-1. **Reduction theorem:** monomial (linear) equivalence of represented codes, given circuit
-   data, is support-matroid isomorphism plus equality of fundamental circuit holonomies (C217's
-   gauge theorem, restated as a torsor decomposition of the Linear Equivalence Problem:
-   combinatorial layer = matroid iso, algebraic layer = holonomy comparison, the latter
-   linear-time once supports align).
-2. **Invariant toolkit:** holonomy fingerprints and Schur-power matroid profiles (C237) as
-   gauge-invariant distinguishers for *structured* instances.
-
-### One level down
-
-- Honest feasibility line: computing holonomies needs accessible small circuits. LEP-based
-  signatures (LESS) use random codes, where finding low-weight codewords is itself hard, so no
-  direct attack on the standard instances follows. The value concentrates in three places:
-  structured/compressed variants proposed for smaller keys; the conceptual decomposition of LEP
-  hardness (which layer is hard for random codes?); and non-adversarial tooling.
-- Generalization the corpus misses: the C217 argument is generic multiplicative cohomology of a
-  bipartite incidence graph under two scaling groups. **Matrix-code equivalence (MEDS setting)
-  has row and column scaling groups and admits the same spanning-tree gauge normalization**,
-  giving canonical forms and invariants there too — a second cryptosystem family for one theorem.
-- Mandatory audit before any writing: the recent canonical-form line inside the LESS literature
-  (information-set-based canonical forms used to shrink signatures). The holonomy view may be
-  equivalent, cleaner, or subsumed; the audit decides the claim's shape.
-
-### First probe
-
-The audit above, plus one script: holonomy + Schur-profile fingerprints computed for pairs of
-equivalent/inequivalent structured codes (GRS, LRC, the committed q=9 pair), demonstrating the
-linter behavior end-to-end on existing certificates.
-
-### Second-order wins if landed
-
-1. **Canonical hashing of codes up to equivalence** (when circuits are accessible): deduplication
-   for code tables and best-known-code databases — a service the coding community would actually
-   use, and a crypto-grade application for C238's RepresentationID capsule.
-2. A foundations contribution to LEP-based signatures: locating the hardness layer, valuable to
-   that community whether or not any attack materializes.
-3. Systematizing Schur-power stability could yield new distinguishers for structured McEliece
-   variants — cryptanalysis papers adjacent to the C237 machinery.
-
-### Risk / kill
-
-If the audit shows the canonical-form literature already covers the reduction in equivalent
-generality, downgrade to the toolkit/linter deliverable and cite; the MEDS generalization may
-still be new.
-
-## 6. Quantum/CSS translation
-
-### Sharpened statement
-
-Port the sequential-closure machinery to stabilizer erasure decoding. The crisp candidate
-contribution: **complete-port peeling for qLDPC erasure decoding** — peel using *all* bounded
-stabilizer-group elements through a qubit, not a fixed generator set.
-
-### One level down
-
-- Standard quantum erasure peeling (Delfosse--Zemor style, union-find) fires a check with exactly
-  one erased qubit; its failure states depend on the chosen generator set. Berczi--Boros--Makino's
-  observation that one-step Horn behavior is CNF-dependent is exactly this phenomenon. The
-  complete bounded port (all group elements of weight at most `r+1` through the target) gives a
-  canonical, generator-independent closure that strictly dominates fixed-check peeling at equal
-  locality; the stopping-core theory then *quantifies* the gap between decoders — a measurable,
-  publishable delta on hypergraph-product codes.
-- The composition layer has a natural target: hypergraph-product and lifted-product codes have
-  tensor/module structure; whether a C233-style boundary algebra composes across product or
-  surgery interfaces is the analog of the 2-sum question, and lattice surgery is literally a
-  boundary-interface operation.
-- C235's capacitated regions map to measurement-capacity scheduling in erasure-dominant hardware
-  (neutral atoms, erasure-converted qubits), where repair rounds and helper capacities are
-  physical constraints.
-
-### First probe
-
-Focused audit (Delfosse--Zemor, union-find, qLDPC erasure literature) to fix the exact SOTA
-boundary, then one experiment: on small hypergraph-product codes, compare recoverable-erasure
-fractions of fixed-generator peeling versus complete-port sequential closure at equal radius.
-The gap number decides everything.
-
-### Second-order wins if landed
-
-1. Entry into the highest-visibility audience in coding theory with a decoder-level, measurable
-   claim rather than a framework claim.
-2. Stabilizer signs form a gauge 1-cochain; the C217 holonomy machinery may say something about
-   equivalence of stabilizer groups under local phase gauges — speculative, but it would be a
-   second, deeper quantum export.
-3. Even a clean negative (symplectic structure breaks the matroid picture, or the gap is
-   negligible on good qLDPC families) sharpens the classical theory's boundary and is worth a
-   note.
-
-### Risk / kill
-
-Union-find decoders already compute closures efficiently for topological codes; the win must
-come from *non-topological* qLDPC families and from the generator-independence point. Kill if
-the measured gap on product codes is negligible.
+The full proposals, probes, risks, interactions, and ranking notes were moved verbatim to
+`2026-07-17-fable5-rp-next-fable-do-NOT-read.md`. Do not follow that pointer in a Fable session.
 
 ## 7. LRC-bound benchmark and the port-capacity converse
 
@@ -370,8 +275,6 @@ structure (C219's series-bottleneck mechanism suggests where rate must be lost).
 | 1 + 2       | Classification plus FPT evaluation: a complete structure/computation dichotomy   |
 | 2 + 4       | Boundary algebra evaluates cascade laws on decomposable topologies               |
 | 3 + 7       | Newton-inequality reliability bounds feed the port-capacity converse and twin    |
-| 1 + 6       | Peeling-optimality classification restated for stabilizer codes                  |
-| 5 + C238    | RepresentationID capsule becomes a crypto-grade canonical-hash tool              |
 
 ## Revised ranking after deepening
 
@@ -380,7 +283,8 @@ it is now low-risk exact-theorem work, not open-problem work). Item 7 rose in ce
 port-capacity converse is the largest genuinely new theory question found in this review),
 while its benchmark half stays a cheap check. Items 1 and 2 remain the strongest
 classification/algorithm bets; 3 is the highest-prestige lottery ticket with an hours-cheap
-data probe; 5 and 6 are export bets gated on their audits.
+data probe. The two restricted export bets remain gated on their audits; their details live only
+in `2026-07-17-fable5-rp-next-fable-do-NOT-read.md`.
 
 ## Explicit nonclaims
 
