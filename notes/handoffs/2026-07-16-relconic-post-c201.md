@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — universal external branch-image collision is excluded on the repair stratum
+**Status:** C210 ACTIVE — odd-tower coverage top monodromy is uniformly `S7 x S7`
 
 ## Current state
 
@@ -155,11 +155,17 @@ by the `build-sys` lane.
    `s*e=d^2+e^2+k`, and clearing `e^6`, the coefficient of `lambda^3*d^18` is exactly `e*a^4`.
    Hence the multiple-root condition is nonzero on the reduced section at every repair-stratum
    coefficient point, for both seed colors, including the old `L1=0` boundary. There is no new
-   geometric branch-image divisor. Next combine this coefficient-uniform transposition witness
-   with the existing specialization monodromy gates and classify only residual higher-codimension
-   drops before judging whether any special stratum can support an arc-legal affine-complete family
-   over infinitely many odd extensions. Do not replace this symbolic gate with a larger plane
-   census. See
+   geometric self-collision divisor. Cross-seed isolation is also uniform: inserting the shift
+   `tau*omega` gives a 216-term degree-seven collision resultant, whose repeated-root condition is
+   a 100056-term cubic--cubic resultant in `z=u^2`. After removing
+   `e*Norm(D)*(lambda+1)^6`, imposing `s*e=d^2+e^2+k`, and clearing `e^10`, the coefficient of
+   `lambda^8*d^30` is exactly `tau*e^2*a^4`. Thus each seed cover has an isolated simple branch
+   away from the other at every repair coefficient. On `GF(8^m)`, odd `m`, the cover degree is
+   always seven because `a^2+a+1!=0`; irreducibility plus these isolated transpositions gives the
+   uniform top group `S7 x S7`. There is no residual coverage top-group drop. Next test only the
+   known lower mixed-collision strata `b=0`, `e^2+k=0`, and `D_H=0`, including their classified
+   intersections, for an arc-legal affine-complete family over infinitely many odd extensions. Do
+   not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

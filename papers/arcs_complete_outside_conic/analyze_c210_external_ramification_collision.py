@@ -24,6 +24,11 @@ section equation is imposed, one coefficient of this condition is exactly
 ``e*a^4``.  Thus it cannot vanish identically at any repair-stratum
 coefficient specialization.  This chart-free test also includes ``L1=0``.
 
+The same calculation with the opposite seed-height shift gives a degree-seven
+cross-seed collision resultant.  Its multiple-root core restricts to a section
+polynomial with coefficient ``tau*e^2*a^4``.  Consequently a simple branch of
+either seed cover can be chosen away from the branch divisor of the other.
+
 The checker constructs every polynomial in the sparse GF(8)-coefficient ring,
 verifies the quadratic resultant independently by a Sylvester determinant,
 and records stable digests.
@@ -36,6 +41,10 @@ import itertools
 import json
 
 from analyze_c210_coverage_branch_discriminants import NAMES, Ring
+from analyze_c210_persistent_singletons import (
+    coverage_equations,
+    sylvester_resultant,
+)
 
 
 def main() -> None:
@@ -81,6 +90,17 @@ def main() -> None:
         pair_mul(D_prime, pair_add(pair_mul(Y_prime, Y_prime), height)),
         pair_mul(Y_prime, W_prime),
     )
+    seed_shift = (ring.zero, ring.constant(ring.context.tau))
+    cross_W_prime = pair_add(W_prime, seed_shift)
+    cross_collision = pair_add(
+        pair_mul(
+            D_prime,
+            pair_add(
+                pair_add(pair_mul(Y_prime, Y_prime), height), seed_shift
+            ),
+        ),
+        pair_mul(Y_prime, cross_W_prime),
+    )
     R_prime = pair_add(W_prime, pair_scale(b, E_prime))
     T_prime = pair_mul(pair_add(D_prime, Y_prime), W_prime)
     ramification = determinant(pair_mul(Y_prime, R_prime), T_prime)
@@ -104,8 +124,11 @@ def main() -> None:
 
     C0 = coefficients(collision[0])
     C1 = coefficients(collision[1])
+    cross_C0 = coefficients(cross_collision[0])
+    cross_C1 = coefficients(cross_collision[1])
     JR = coefficients(ramification)
     assert len(C0) == len(C1) == 3
+    assert len(cross_C0) == len(cross_C1) == 3
     assert len(JR) == 6
 
     zero = ring.zero
@@ -130,6 +153,20 @@ def main() -> None:
         reduced[u_index] -= minimum_u
         saturated_resultant[tuple(reduced)] = scalar
     assert len(saturated_resultant) == 111
+
+    cross_matrix = (
+        (cross_C0[0], cross_C0[1], cross_C0[2], zero),
+        (zero, cross_C0[0], cross_C0[1], cross_C0[2]),
+        (cross_C1[0], cross_C1[1], cross_C1[2], zero),
+        (zero, cross_C1[0], cross_C1[1], cross_C1[2]),
+    )
+    cross_resultant = ring.zero
+    for permutation in itertools.permutations(range(4)):
+        term = ring.one
+        for row, column in enumerate(permutation):
+            term = mul(term, cross_matrix[row][column])
+        cross_resultant = add(cross_resultant, term)
+    assert len(cross_resultant) == 216
 
     # The linear subresultant is L1*v+L0.  Verify the standard quadratic
     # identity A2*Res=A2*L0^2+A1*L0*L1+A0*L1^2 exactly.
@@ -322,10 +359,266 @@ def main() -> None:
     assert quadratic_sylvester == multiple_root_resultant
     assert len(multiple_root_resultant) == 3352
 
+    cross_u_coefficients = [
+        coefficient_in(cross_resultant, u_index, exponent)
+        for exponent in range(8)
+    ]
+
+    def evaluate(poly, values):
+        out = 0
+        for monomial, scalar in poly.items():
+            term = scalar
+            for name, exponent in zip(NAMES, monomial):
+                term = ring.field.mul(
+                    term, ring.field.power(values[name], exponent)
+                )
+            out = ring.field.add(out, term)
+        return out
+
+    def field_sum(*values):
+        out = 0
+        for value in values:
+            out = ring.field.add(out, value)
+        return out
+
+    def normalized_numeric(poly):
+        poly = list(poly)
+        while poly and not poly[-1]:
+            poly.pop()
+        inverse = ring.field.inv(poly[-1])
+        return tuple(ring.field.mul(value, inverse) for value in poly)
+
+    # Compare one specialization with the independent incidence-resultant
+    # implementation.  Use an A-section point and the opposite B seed.
+    context = ring.context
+    section_s = context.tau
+    section_d = 1
+    section_r = 1
+    section_lambda = context.tau
+    section_e = context.eta1
+    section_a = context.a1
+    section_b = context.b1
+    assert field_sum(
+        ring.field.mul(section_d, section_d),
+        ring.field.mul(section_e, section_e),
+        ring.field.mul(section_s, section_e),
+        1,
+    ) == 0
+    assert field_sum(
+        ring.field.mul(section_e, section_e),
+        ring.field.mul(section_a, ring.field.mul(section_r, section_r)),
+        ring.field.mul(section_b, section_r),
+        ring.field.mul(section_s, field_sum(section_d, section_e)),
+    ) == 0
+    omega = ring.field.div(
+        ring.field.add(context.beta, context.alpha), context.tau
+    )
+    section_D = field_sum(
+        section_d, ring.field.mul(section_e, omega)
+    )
+    section_Y = ring.field.mul(section_lambda, section_D)
+    section_t = field_sum(section_d, 1, section_r)
+    section_y = field_sum(section_Y, section_t)
+    section_W = ring.field.mul(
+        section_s, ring.field.mul(omega, section_D)
+    )
+    section_h = field_sum(
+        context.alpha,
+        ring.field.mul(section_Y, section_Y),
+        ring.field.mul(section_lambda, section_W),
+    )
+    cross_target = (
+        *context.coordinates(section_y),
+        *context.coordinates(section_h),
+    )
+    direct_cross_equations = coverage_equations(
+        ring.field,
+        context.coordinates,
+        context.eta0,
+        section_e,
+        section_a,
+        section_b,
+        context.c0,
+        0,
+        context.beta,
+        *cross_target,
+    )
+    direct_cross_resultant = sylvester_resultant(
+        ring.field, *direct_cross_equations
+    )
+    shifted_direct_cross_resultant = [0] * len(direct_cross_resultant)
+    for exponent, scalar in enumerate(direct_cross_resultant):
+        for shifted_exponent in range(exponent + 1):
+            if exponent & shifted_exponent != shifted_exponent:
+                continue
+            shifted_direct_cross_resultant[shifted_exponent] = ring.field.add(
+                shifted_direct_cross_resultant[shifted_exponent],
+                ring.field.mul(
+                    scalar,
+                    ring.field.power(
+                        section_r, exponent - shifted_exponent
+                    ),
+                ),
+            )
+    symbolic_values = {
+        "e": section_e,
+        "a": section_a,
+        "b": section_b,
+        "k": section_s,
+        "y0": section_lambda,
+        "y1": section_d,
+        "h0": 0,
+        "h1": 0,
+    }
+    specialized_cross_resultant = tuple(
+        evaluate(coefficient, symbolic_values)
+        for coefficient in cross_u_coefficients
+    )
+    assert normalized_numeric(specialized_cross_resultant) == normalized_numeric(
+        shifted_direct_cross_resultant
+    )
+    cross_derivative_cubic = tuple(
+        cross_u_coefficients[exponent] for exponent in (1, 3, 5, 7)
+    )
+    cross_even_cubic = tuple(
+        cross_u_coefficients[exponent] for exponent in (0, 2, 4, 6)
+    )
+    cross_cubic_matrix = []
+    for coefficients_z in (cross_derivative_cubic, cross_even_cubic):
+        for shift in range(3):
+            cross_cubic_matrix.append(
+                (ring.zero,) * shift
+                + coefficients_z
+                + (ring.zero,) * (2 - shift)
+            )
+    cross_multiple_root_resultant = ring.zero
+    for permutation in itertools.permutations(range(6)):
+        term = ring.one
+        for row, column in enumerate(permutation):
+            term = mul(term, cross_cubic_matrix[row][column])
+        cross_multiple_root_resultant = add(
+            cross_multiple_root_resultant, term
+        )
+    assert len(cross_multiple_root_resultant) == 100056
+
+    def exact_factor_valuation(poly, divider):
+        valuation = 0
+        while True:
+            quotient = divider(poly)
+            if quotient is None:
+                return valuation
+            poly = quotient
+            valuation += 1
+
     e_index = NAMES.index("e")
+    a_index = NAMES.index("a")
+    b_index = NAMES.index("b")
     s_index = NAMES.index("k")
     lam_index = NAMES.index("y0")
     d_index = NAMES.index("y1")
+    cross_factor_valuations = {
+        name: min(monomial[index] for monomial in cross_multiple_root_resultant)
+        for name, index in (
+            ("e", e_index),
+            ("a", a_index),
+            ("b", b_index),
+            ("s", s_index),
+            ("lambda", lam_index),
+        )
+    }
+    for name, factor, index in (
+        ("a^2+a+1", add(square(a), a, ring.one), a_index),
+        ("lambda+1", add(lam, ring.one), lam_index),
+        ("Norm(D)", norm_D, d_index),
+        ("s+b", add(s, b), s_index),
+    ):
+        cross_factor_valuations[name] = exact_factor_valuation(
+            cross_multiple_root_resultant,
+            lambda poly, factor=factor, index=index: divide_by_monic_in(
+                poly, factor, index
+            ),
+        )
+    assert cross_factor_valuations == {
+        "e": 1,
+        "a": 0,
+        "b": 0,
+        "s": 0,
+        "lambda": 0,
+        "a^2+a+1": 0,
+        "lambda+1": 6,
+        "Norm(D)": 1,
+        "s+b": 0,
+    }
+    cross_multiple_root_core = divide_by_monomial(
+        cross_multiple_root_resultant, {e_index: 1}
+    )
+    assert cross_multiple_root_core is not None
+    cross_multiple_root_core = divide_by_monic_in(
+        cross_multiple_root_core, norm_D, d_index
+    )
+    assert cross_multiple_root_core is not None
+    for _ in range(6):
+        cross_multiple_root_core = divide_by_monic_in(
+            cross_multiple_root_core, add(lam, ring.one), lam_index
+        )
+        assert cross_multiple_root_core is not None
+    assert divide_by_monic_in(
+        cross_multiple_root_core, add(lam, ring.one), lam_index
+    ) is None
+    assert len(cross_multiple_root_core) == 46266
+
+    cross_section_relation_degree = variable_degree(
+        cross_multiple_root_core, s_index
+    )
+    assert cross_section_relation_degree == 10
+    cross_section_numerator = add(square(d), square(e), u)
+    cross_section_powers = [
+        power(cross_section_numerator, exponent)
+        for exponent in range(cross_section_relation_degree + 1)
+    ]
+    cross_section_restricted_core = {}
+    for monomial, scalar in cross_multiple_root_core.items():
+        s_exponent = monomial[s_index]
+        transformed = list(monomial)
+        transformed[s_index] = 0
+        transformed[e_index] += (
+            cross_section_relation_degree - s_exponent
+        )
+        contribution = mul(
+            {tuple(transformed): scalar},
+            cross_section_powers[s_exponent],
+        )
+        for key, value in contribution.items():
+            new = ring.field.add(
+                cross_section_restricted_core.get(key, 0), value
+            )
+            if new:
+                cross_section_restricted_core[key] = new
+            else:
+                cross_section_restricted_core.pop(key, None)
+    cross_critical_section_coefficient = {}
+    for monomial, scalar in cross_section_restricted_core.items():
+        if monomial[lam_index] != 8 or monomial[d_index] != 30:
+            continue
+        reduced = list(monomial)
+        reduced[lam_index] = 0
+        reduced[d_index] = 0
+        cross_critical_section_coefficient[tuple(reduced)] = scalar
+    expected_cross_critical_coefficient = mul(
+        ring.constant(ring.context.tau),
+        mul(square(e), power(a, 4)),
+    )
+    assert (
+        cross_critical_section_coefficient
+        == expected_cross_critical_coefficient
+    )
+    cross_section_coefficient_count = len({
+        (monomial[lam_index], monomial[d_index])
+        for monomial in cross_section_restricted_core
+    })
+    assert len(cross_section_restricted_core) == 96574
+    assert cross_section_coefficient_count == 371
+
     multiple_root_core = divide_by_monomial(
         multiple_root_resultant, {e_index: 1, lam_index: 4}
     )
@@ -419,6 +712,59 @@ def main() -> None:
             "saturated_degree_vector": degree_vector(saturated_resultant),
             "saturated_sha256": digest(saturated_resultant),
         },
+        "cross_seed_collision_resultant": {
+            "seed_height_shift": "tau*omega",
+            "term_count": len(cross_resultant),
+            "degree_vector": degree_vector(cross_resultant),
+            "sha256": digest(cross_resultant),
+            "direct_incidence_specialization": {
+                "target_coordinates": list(cross_target),
+                "resultant_degree":
+                    len(normalized_numeric(direct_cross_resultant)) - 1,
+                "symbolic_resultant_matches_after_r_to_u_shift": True,
+            },
+            "multiple_root_resultant": {
+                "quadratic_variable": "z=u^2",
+                "derivative_cubic_term_counts": [
+                    len(value) for value in cross_derivative_cubic
+                ],
+                "even_cubic_term_counts": [
+                    len(value) for value in cross_even_cubic
+                ],
+                "term_count": len(cross_multiple_root_resultant),
+                "degree_vector": degree_vector(
+                    cross_multiple_root_resultant
+                ),
+                "sha256": digest(cross_multiple_root_resultant),
+                "candidate_factor_valuations": cross_factor_valuations,
+                "selected_open_factor": "e*Norm(D)*(lambda+1)^6",
+                "core_term_count": len(cross_multiple_root_core),
+                "core_degree_vector": degree_vector(
+                    cross_multiple_root_core
+                ),
+                "core_sha256": digest(cross_multiple_root_core),
+                "section_relation": "s*e=d^2+e^2+k",
+                "section_relation_denominator_power":
+                    cross_section_relation_degree,
+                "section_restricted_term_count": len(
+                    cross_section_restricted_core
+                ),
+                "section_restricted_degree_vector": degree_vector(
+                    cross_section_restricted_core
+                ),
+                "section_restricted_sha256": digest(
+                    cross_section_restricted_core
+                ),
+                "restricted_section_coefficient_count":
+                    cross_section_coefficient_count,
+                "decisive_section_coefficient": {
+                    "section_monomial": "lambda^8*d^30",
+                    "coefficient": "tau*e^2*a^4",
+                },
+                "consequence":
+                    "each seed cover has a simple branch away from the other seed cover at every repair-stratum coefficient point",
+            },
+        },
         "generic_linear_subresultant": {
             "L0_term_count": len(L0),
             "L1_term_count": len(L1),
@@ -485,9 +831,9 @@ def main() -> None:
                 "no repair-stratum coefficient specialization makes every reduced section image collide with a second ramification source",
         },
         "remaining_gate":
-            "combine the coefficient-uniform simple branch with the specialization monodromy gates and classify any residual higher-codimension drops",
+            "test the known lower mixed-collision drop strata and their intersections for arc-legal affine-complete infinite families",
         "status":
-            "universal external branch-image collision excluded on the repair stratum",
+            "self and cross-seed branch collisions excluded uniformly; odd-tower top monodromy is S7 x S7",
     }, sort_keys=True))
 
 

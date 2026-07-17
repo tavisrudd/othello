@@ -2110,6 +2110,89 @@ Frozen output:
 `papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision_output.txt`.
 
 ```text
-56a1564eeed41c0d9cbec626ccfb06b1c4ed7fcd5df0e8e8c3cbac7172c3ab4b  analyze_c210_external_ramification_collision.py
-169dd92e1ee11d8b51268c1e142fca2b2a6efbdf4712e90bd0b6ae80482b448b  analyze_c210_external_ramification_collision_output.txt
+e5f86aedec03d3c4b404671ecf7de5dd93cc07dc2377d6565ecfb9372940b3d9  analyze_c210_external_ramification_collision.py
+98f27a86902d6fc1bacca0fa5f6f06ad2b030dc6823a128da7f00efa9b7c88fd  analyze_c210_external_ramification_collision_output.txt
+```
+
+## Thirty-third coordinate gate: the two coverage top groups are uniformly independent
+
+The preceding gate isolates a simple branch inside either fixed seed cover.  To make the joint
+monodromy coefficient-uniform, it remains to show that this branch need not ramify the opposite
+seed cover.  The same elimination handles that question after inserting the exact seed-height
+shift
+
+```text
+delta_z=beta+alpha=tau*omega.
+```
+
+For a section point of seed `A`, the opposite-seed source has
+
+```text
+W'_B=W'_A+delta_z,
+C_B=D'*(Y'^2+height+delta_z)+Y'*W'_B.                   (55)
+```
+
+The two coordinates of `C_B=0` remain quadratic in `v`.  Their Sylvester resultant `Q(u)` has
+`216` terms and exact degree seven in `u`.  A direct specialization at target
+`(tau^3,tau^2,0,1)` agrees, after `r'=r+u` and monic normalization, with the independent
+seed--repair incidence resultant for seed `B`.
+
+As in (51), characteristic two splits the repeated-root calculation:
+
+```text
+Q'(u)=q7*u^6+q5*u^4+q3*u^2+q1,
+Q(u)+u*Q'(u)=q6*u^6+q4*u^4+q2*u^2+q0.                 (56)
+```
+
+These are cubics in `z=u^2`.  Their exact `6 x 6` Sylvester resultant has `100056` terms.  Its
+selected-section factorization is
+
+```text
+Res_z(Q',Q+uQ')=e*Norm(D)*(lambda+1)^6*Xi.              (57)
+```
+
+The valuations of `a`, `a^2+a+1`, `b`, `s`, `lambda`, and `s+b` are all zero; (57) contains no
+hidden coefficient divisor among them.  The core `Xi` has `46266` terms.  Substitute the section
+relation `s*e=d^2+e^2+k` and clear `e^10`; the restricted polynomial has `96574` terms and `371`
+distinct `(lambda,d)` coefficient positions.  Its coefficient at `lambda^8*d^30` is exactly
+
+```text
+tau*e^2*a^4.                                             (58)
+```
+
+Hence `Xi` is nonzero on the section for every repair-stratum coefficient point.  The nonzero
+opens of (58), the same-seed core (54), and the endpoint conditions meet.  One may therefore choose
+an `A` reduced branch point that is simple in the `A` cover and unramified in the `B` cover.  The
+calculation is symmetric under exchanging the seed colours, so the converse isolated
+transposition also exists.
+
+This completes the top-group specialization argument on the intended tower.  For
+`F=GF(8^m)`, `m` odd, `a^2+a+1` has no root, so each fixed-coefficient cover has degree seven on
+`y1!=0`.  Its rational incidence source is irreducible, hence its monodromy is transitive; prime
+degree plus the coefficient-uniform transposition gives `S7`.  The cross-seed isolation above
+separates the two normal factors.  Thus at every repair-stratum coefficient point on every odd
+tower the two coverage top groups are
+
+```text
+S7 x S7.                                                 (59)
+```
+
+There is no residual higher-codimension drop in the coverage top group.  The geometric degree-drop
+divisor `a^2+a+1=0` has no point on the odd tower.  What remains is entirely in the already-known
+lower mixed-collision group: the divisors `b=0`, `e^2+k=0`, and `D_H=0`, together with their
+classified pair and triple intersections.  Those strata must now be tested for an arc-legal
+affine-complete infinite family; no further coverage-branch elimination is needed first.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision_output.txt`.
+
+```text
+e5f86aedec03d3c4b404671ecf7de5dd93cc07dc2377d6565ecfb9372940b3d9  analyze_c210_external_ramification_collision.py
+98f27a86902d6fc1bacca0fa5f6f06ad2b030dc6823a128da7f00efa9b7c88fd  analyze_c210_external_ramification_collision_output.txt
 ```
