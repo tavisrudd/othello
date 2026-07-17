@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — reduced ramification exists universally; only image-level branch collision remains
+**Status**: ACTIVE — external branch collision is an exact two-difference-variable elimination
 
 ## Objective
 
@@ -107,6 +107,14 @@ the finite bad values, while the two defining equations are successively quadrat
 and `r`.  Hence every repair-stratum coefficient point has a non-endpoint reduced ramification
 source over the algebraic closure.  The only remaining image-divisor mechanism is global collision
 of distinct ramification sources above the same target.
+
+That collision is now separated into internal and external pieces.  The universal section is
+injective onto its image: its four target coordinates recover `lambda,s,d,r` triangularly.  For a
+second source, the differences `u=r'+r`, `v=d'+d` reduce target equality to two quadratics in `v`
+and ramification to one quintic in `v`, independently of `k`, seed color, and the original `r`.
+After removing the known `u^2` source factor, the collision resultant has `111` terms and degree
+five in `u`.  The next gate is its exact resultant with the saturated external-ramification
+equation, plus the linear-subresultant boundary charts.
 
 ## C201 input
 

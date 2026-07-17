@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — reduced ramification exists universally; only image-level branch collision remains
+**Status:** C210 ACTIVE — external branch collision is an exact two-difference-variable elimination
 
 ## Current state
 
@@ -145,8 +145,12 @@ by the `build-sys` lane.
    this symbolic gate with a larger plane census. The source side is now completely uniform:
    `W=s*omega*D` and `Y=lambda*D` give a non-endpoint reduced ramification source at every
    repair-stratum coefficient specialization, with transverse derivative
-   `s*(s+b1)*Norm(D)^2`. The remaining elimination is solely whether distinct ramification sources
-   can collide over every target on a special coefficient stratum. See
+   `s*(s+b1)*Norm(D)^2`. This section is injective onto its image. For a second source, the
+   differences `u=r'+r`, `v=d'+d` give two quadratic target-collision equations and one quintic
+   ramification equation in `v`, independent of `k`, seed color, and the original `r`. After the
+   known `u^2` source factor is removed, the collision resultant has 111 terms and degree five in
+   `u`. Next eliminate `u` against the saturated external-ramification equation and cover the
+   `L1=0` subresultant boundaries. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

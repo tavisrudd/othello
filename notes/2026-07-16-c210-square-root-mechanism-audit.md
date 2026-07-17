@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — reduced ramification exists universally; only image-level branch collision remains
+**Status**: ACTIVE — external branch collision is an exact two-difference-variable elimination
 
 ## Boundary from the literature
 
@@ -1897,4 +1897,97 @@ Frozen output:
 ```text
 14aac2cc62f18271455629981bf9d5e6a97ccf57309fc5e9bdbf4f6f545ebfa3  analyze_c210_universal_ramification_family.py
 ce8bbbd3c785e427bfbd25a23da4cc314c770124870223fbb00d88c327fa9faa  analyze_c210_universal_ramification_family_output.txt
+```
+
+## Twenty-ninth coordinate gate: the universal branch section has no self-collision
+
+On the reduced family (41), the branch target simplifies to
+
+```text
+y=t+lambda*D,
+h=z+lambda^2*D^2+lambda*s*omega*D.                      (44)
+```
+
+After substituting the first equation in (43), its coordinates are triangular:
+
+```text
+y1 = lambda*e,
+h0 = z0+lambda^2*(k+1+z0)+s*e*(lambda^2+lambda),
+h1 = z1+lambda^2*e^2+lambda*s*(d+e),
+y0 = 1+r+(lambda+1)*d.                                  (45)
+```
+
+On the already-selected open set `e*lambda*(lambda+1)*s!=0`, these recover in order
+`lambda,s,d,r`, and then `t=d+1+r`.  The checker verifies every cross-multiplied inverse identity
+in the exact polynomial ring.  Hence the universal reduced ramification family is injective onto
+its image: two distinct points of this section cannot create a multiple branch image.  Any
+remaining collision must pair the section with a ramification source outside it.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_ramification_image_section.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_ramification_image_section_output.txt`.
+
+```text
+e7b68c444e7b854d2d85ae0f1ac260f6a5b42569b9658a50cfe4e2f73ba1a84b  analyze_c210_ramification_image_section.py
+d34b66da5cde54b2e65f16c2e6576475820d01331c3ed3f6b97b62350a833269  analyze_c210_ramification_image_section_output.txt
+```
+
+## Thirtieth coordinate gate: external collision is a low-variable system
+
+Compare a section point with a second source over the same target and put
+
+```text
+u=r'+r,        v=d'+d.
+```
+
+Then the second-source data are
+
+```text
+D'=D+(v,0),
+Y'=lambda*D+(u+v,0),
+W'=W+(v^2,a1*u^2+b1*u).                                 (46)
+```
+
+The two target-height collision equations have only `10` and `17` terms and are both quadratic
+in `v`; the second-source ramification equation has `82` terms and degree five in `v`.  Remarkably,
+all three are independent of `k`, the seed color, and the original repair root `r`.
+
+The known source is `u=v=0`.  The exact Sylvester resultant of the two collision quadratics has
+factor precisely `u^2`; after saturation the external collision polynomial has `111` terms and
+degree five in `u`, with digest
+
+```text
+2ec5288fc9dc900c51fccb71bf63cf72ccbf9f6f25908db6a19f3bfdf6742fed.
+```
+
+On the generic linear-subresultant chart, the common root is `v=L0/L1`, where `L0,L1` have `27`
+and `18` terms.  Substitution into the ramification equation, with denominators cleared, produces
+an `8866`-term polynomial with the same known-source `u^2` valuation and digest
+
+```text
+de26a6738b00c18a1a815c7b3b525d56f1120ee9659fd7a2fcf22bd8516f35b8.
+```
+
+The final image-collision gate is therefore explicit: divide the latter equation by `u^2`,
+eliminate `u` against the `111`-term degree-five collision resultant, and handle the `L1=0`
+boundary charts separately.  No coefficient-space branch discriminant or ambient-plane census is
+needed.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision_output.txt`.
+
+```text
+5ce3b80031e7353f348c4c56578b9999492ccfb8462420f046afe1bb9e7ad020  analyze_c210_external_ramification_collision.py
+1886b3a7bf99a64e899bfbf2632d35f09d7d9f1a6b367f245e1aef26e0d5b3cb  analyze_c210_external_ramification_collision_output.txt
 ```
