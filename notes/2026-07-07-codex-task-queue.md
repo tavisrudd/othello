@@ -79,7 +79,7 @@ unless they retain an explicit open tail.
 
 ### `rp-next`
 
-- **C253 `[rp-next]` [QUEUED; after C252]** — define and falsify compensation-aware continuation resilience under irreversible prefixes, switching, and saga recovery against contingent/fault-tolerant planning and durable-workflow baselines → `notes/2026-07-17-c253-continuation-resilience.md`.
+- **C253 `[rp-next]` [IN PROGRESS]** — define and falsify compensation-aware continuation resilience under irreversible prefixes, switching, and saga recovery against contingent/fault-tolerant planning and durable-workflow baselines → `notes/2026-07-17-c253-continuation-resilience.md`.
 - **C254 `[rp-next]` [QUEUED; after C253]** — test ordinary log-concavity of size-graded two-terminal reliability first on series--parallel networks, requiring a composition lemma or exact counterexample rather than another census → `notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md`.
 - **C255 `[rp-next]` [QUEUED; after C254]** — define gauge-invariant cheap-coefficient cost for a selected repair library and seek a support-identical foundation/cross-ratio pair with provably different optimum implementation cost → `notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md`.
 - **C256 `[rp-next]` [QUEUED; after C255]** — build a small radius-truncated port rigidity atlas across fields and extract a reconstruction criterion or strict field-sensitive repeated-row MSP gap → `notes/2026-07-17-c256-radius-truncated-port-rigidity.md`.
