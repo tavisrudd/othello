@@ -12,10 +12,11 @@ At the start of a session:
 
 1. Select a lane from the user's explicit alias, named handoff, or named task. Do not infer one from
    git, the numeric value of a task ID, or the previous session.
-   A literal `go C<id>` explicitly selects that task **and its lane**. Look up the exact `C<id>` row
-   in `notes/2026-07-07-codex-task-queue.md`, take the row's bracketed lane peg as authoritative,
-   and then read only that lane's entry handoff from the routing table below. Do not search broadly
-   for the task ID or ask the user which lane it belongs to.
+   At the start of a session, a bare `C<id>` and a literal `go C<id>` both explicitly select that
+   task **and its lane**. Look up the exact `C<id>` row in
+   `notes/2026-07-07-codex-task-queue.md`, take the row's bracketed lane peg as authoritative, and
+   then read only that lane's entry handoff from the routing table below. Do not search broadly for
+   the task ID or ask the user which lane it belongs to.
 2. Read only that lane's entry handoff. It is the current-state map.
 3. Otherwise, read `notes/2026-07-07-codex-task-queue.md` only for global task-ID allocation,
    explicit lane completion, or a user-requested cross-lane status. A selected lane's handoff owns
