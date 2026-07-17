@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-17
 
-**Status:** integrated draft; evidence and claim boundaries audited
+**Status:** complete; evidence and claim boundaries audited
 
 **Working record:**
 [C239 domain-translation scratchpad](2026-07-17-c239-domain-translation-scratchpad.md)

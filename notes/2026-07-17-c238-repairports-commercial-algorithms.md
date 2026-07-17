@@ -8,6 +8,11 @@
 
 **Working record:** [C238 scratchpad](2026-07-17-c238-repairports-commercial-algorithms-scratchpad.md)
 
+**Cross-domain review:**
+[C239 domain translation, generalization, and missed-gap audit](2026-07-17-c239-domain-translation-audit.md)
+retains the paper grade and first storage wedge, but reframes the broader program as resilience
+knowledge compilation over pointed elementary capability modes.
+
 ## Executive answer
 
 There is a commercially credible systems object in this material, but it is **not primarily a new
