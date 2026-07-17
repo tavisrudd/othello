@@ -129,8 +129,9 @@ Default mode is collaborative. `mi` enables intent-based mode for the rest of th
 a handoff may persist it with `Mode: intent-based` under its date. `yc` means “your call.” `vb`
 means “vibe check”: translate the technical evidence into an honest progress assessment, including
 momentum, risks, and likely route viability rather than merely reciting implementation status.
-Every progress or completion report to the user must include a one-line vibe check, even when `vb`
-was not requested; keep it distinct from the factual status summary.
+When stopping after a substantial full or partial C-item chunk, include a one-line vibe check in
+the user-facing work report even when `vb` was not requested. Do not add routine vibe checks to
+intermediate commentary, minor status updates, or administrative/edit-only reports.
 
 In intent-based mode, state and take a decision only when it is reversible, already permitted,
 strongly lopsided (at least 80/20 from visible evidence), and does not change downstream shape.
