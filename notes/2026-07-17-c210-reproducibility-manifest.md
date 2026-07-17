@@ -36,6 +36,12 @@ resultant from the committed modules and reproduced the `a=0` factorizations in 
 remaining leaves are the earlier single-quadratic-graph line, pinned here as their committed
 artifacts.
 
+`a_zero_artin_schreier_divisor` (the `a=0,b!=0` closure — see
+[`2026-07-17-c210-a-zero-artin-schreier-divisor.md`](2026-07-17-c210-a-zero-artin-schreier-divisor.md))
+was added later the same session; its fresh run is byte-identical to the committed output
+(`diff` exit 0), and its Singular certificate re-derives the residue reduction independently of
+the Python set arithmetic.
+
 ## Load-bearing leaves (sha256, bytes)
 
 | file | sha256 | bytes |
@@ -54,9 +60,11 @@ artifacts.
 | `analyze_c210_collision_curve_constant_height_arc_output.txt` | `3444b3a6b958bdfd8834c86a3b36c48793ba378c86da4342bfea3de86a8464f7` | 1071 |
 | `analyze_c210_a_zero_factorization_strata.py` | `de9013e648927b3c7a5a6df3a948365f7c17e3ad7b35da18dc6a2934f6514ba3` | 10832 |
 | `analyze_c210_a_zero_factorization_strata_output.txt` | `893588118bddb76a306ceb5770d2e9d76a707c60402b40aeb935bb8469e6eed8` | 1442 |
+| `analyze_c210_a_zero_artin_schreier_divisor.py` | `9ec4f200ce84bbe2254db309e1f842d335bd7e477c21d0ecaff1e7744f4ebe89` | 28625 |
+| `analyze_c210_a_zero_artin_schreier_divisor_output.txt` | `a5e4ee96eb2bf87d36adad45a9a6a4bd2ad8f6685c236665db948d34c71b2f1f` | 2955 |
 
 Full pipeline hashes: `analyze_c210_SHA256SUMS`
-(sha256 `438085fcdb7726f18bc710c73bca1597bf83e6a0c63b3cf994e74651d1678495`).
+(sha256 `d6ca72d1f13ee677abdfe641aa277ada1798cec83683e863db1faa42179443df`).
 
 ## Trusted boundary
 

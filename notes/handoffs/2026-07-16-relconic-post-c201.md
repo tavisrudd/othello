@@ -3,9 +3,9 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the `a=b=0` constant-height locus is closed; the `a=0,b!=0` stratum is
-reduced to one Artin--Schreier divisor plus a codimension-`>=1` common-factor sublocus; the `a!=0`
-divisors are next
+**Status:** C210 ACTIVE — the `a=b=0` and `a=0,b!=0` strata are both closed (the Artin--Schreier
+divisor `D3` is explicit, complete, and collision-forcing on every branch); the `a!=0`
+(t-degree-four) factorization divisors are next
 
 ## Current state
 
@@ -213,11 +213,18 @@ by the `build-sys` lane.
    `gcd(A2,A1)=b` and `gcd(A2,A0)=gcd(A1,A0)=1`. The common-`u`-factor and `A1==0` reducibility
    mechanisms are therefore absent on `delta!=0,b!=0` (`A1==0` would force `delta*b=0`), so the whole
    stratum collapses to the single Artin--Schreier divisor `D3`: `phi=A0*A2/A1^2` in the
-   Artin--Schreier image of `GF(2)-bar(params)(u)`. Next derive `D3`'s equations by the reduced
-   AS-residue over the roots of `G1,G2` (poles are order two; `Q,G1` split over `GF(4)`, `G2` is
-   absolutely irreducible), fold in the codimension-`>=1` sublocus where a root of `Q` meets `G1*G2`
-   and `A0` (the generic `gcd=1` does not specialize), intersect with `H=J=0`, and test whether any
-   surviving component is collision-free rather than collision-forcing. Then do the same for the
+   Artin--Schreier image of `GF(2)-bar(params)(u)`. That divisor is now explicit and the stratum
+   is closed: `W=(A0')^2*Q^4+A0*Q^2*(D')^2` vanishes identically mod `G1`, and mod `G2` gives
+   three `h1`-free conditions whose complete solution off `delta*b*p=0` is `{e=0, h0=0}`,
+   `{e=delta, h0=p^2*theta+e^2+e*b}`, and `{delta=p, theta=1, h0=e*(e+b+p)}` (two-chart resultant
+   elimination; the `theta=0` and `h0`-free candidates force `delta=0`; the merged-pole locus
+   `Res(G1,G2)=p^2*K1*K2` can only shrink `D3`). Every branch splits into explicitly rational
+   components — no conjugate-component escape — and the `delta=p` witness reproduces its two
+   collision lines `L1,L2` exactly in projective incidence over GF(64). `H` pulls back to
+   `delta*G1`, rootless over every odd-tower field, so the `H=J=0` split locus is arithmetically
+   empty and `r=J/H` always reconstructs; off `D3` Lang--Weil then forces collisions. Hence no
+   collision-free coefficient stratum exists on `a=0,b!=0`; the `p=0`, `delta=0`, `b=0`
+   boundaries are owned by the coincident-pair, single-coset, and `a=b=0` gates. Next derive the
    factorization divisors on `a!=0` (t-degree four), before any affine-coverage test.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
@@ -238,6 +245,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   machine-checkable list `papers/arcs_complete_outside_conic/analyze_c210_SHA256SUMS`
 - C210 a=0 stratum independent verification + promotion note:
   [`2026-07-17-c210-a-zero-verification.md`](../2026-07-17-c210-a-zero-verification.md)
+- C210 a=0 closure report (explicit AS divisor, branch decomposition, witnesses):
+  [`2026-07-17-c210-a-zero-artin-schreier-divisor.md`](../2026-07-17-c210-a-zero-artin-schreier-divisor.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
   [`2026-07-16-c201-discovery-track.md`](../2026-07-16-c201-discovery-track.md)
 - live global queue:
