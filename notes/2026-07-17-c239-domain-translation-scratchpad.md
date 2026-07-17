@@ -319,3 +319,211 @@ For every transplant, record:
 - For each “gap,” seek the strongest adjacent method and write the falsifier first.
 - Preserve C238's claim boundary: proved locally, derived/implementable, or speculative.
 - Do not alter the current paper manuscript during this audit.
+
+## 2026-07-17 checkpoint — comparison with the applications riff
+
+The 7,000-line
+[`riffing-on-applications`](2026-07-12-riffing-on-applications.md) archive already covers most
+vertical destinations: shared-dependency resilience, proof-carrying search, supply chains,
+configuration/product lines, security architecture, OR solution portfolios, SDN, protocol
+symmetry, gossip provenance, causal inference, statistics, and ML. C239 should **not** add another
+hundred destination ideas. Its additional value is to:
+
+1. identify a smaller number of established abstractions that subsume many riffs;
+2. locate missing cross-domain theorem families rather than application nouns;
+3. predict sibling phenomena from structural causes;
+4. import algorithms from the destination fields back into repair-port compilation; and
+5. expose where an attractive riff is already standard under different terminology.
+
+The riff's strongest OR idea—transversally robust solution portfolios—is retained, but the new
+audit sharpens it: compare against diverse planning, interdiction, column generation, and solution
+reconfiguration, then target **minimum common failure-domain coverage**, not decision-vector
+distance. The riff's configuration-completion ideas are part of the established solution-graph
+reconfiguration world; the possible addition is option value/certification over a complete
+extension complex, not the existence of reconfiguration paths.
+
+## 2026-07-17 checkpoint — primary-literature collisions and promotions
+
+### Knowledge compilation is the correct umbrella discipline
+
+[Darwiche and Marquis's knowledge-compilation map](https://doi.org/10.1613/jair.989) says a
+compiled representation should be judged by succinctness and by which queries and transformations
+it supports in polynomial time. This supplies a much sharper program than “build a capsule”:
+
+> Build a **resilience knowledge-compilation map** whose rows are witness antichains, blocker
+> antichains, ZDD/BDD variants, Horn fixed-point systems, separator tables, weighted expression
+> DAGs, and lazy symmetry oracles; whose columns are availability, minimal explanation, blocker,
+> update, ETA, capacity, and plan-extraction queries.
+
+This demotes the generic claim that compile-once/query-many is new. The potential new contribution
+is a representation family combining algebraic validity, causal unlock, quantitative valuations,
+module composition, and independently checked transformations. The theory paper needs succinctness
+separations and tractable-query results, not a schema alone.
+
+[Efficient Explanations for Knowledge Compilation Languages](https://arxiv.org/abs/2107.01654)
+already obtains familiar explanation classes efficiently for d-DNNF and related languages.
+Therefore minimal enabler/blocker explanations are not a new generic capability. The gap, if any,
+is executable restoration with coefficients, state transitions, shared capacities, and proof
+objects.
+
+### Provenance is a close ancestor, not an empty field
+
+[Green--Karvounarakis--Tannen](https://www.cs.ucdavis.edu/~green/papers/pods07.pdf) unify multiple
+database semantics through provenance semirings, extend to Datalog fixed points, and represent
+possibly infinite provenance by finite algebraic systems of formal power series. This is strikingly
+close to C233--C234's finite control/syntax over an infinite quantitative carrier.
+
+Consequences:
+
+- “restorative provenance” must not claim to invent semiring valuation or finite recursive
+  presentation;
+- C234 should be compared explicitly with Datalog provenance and weighted automata;
+- the strongest new question is whether one **operational provenance** representation supports
+  action extraction, capacity-constrained multi-target selection, and small verification
+  certificates;
+- provenance semiring machinery may supply a cleaner algebraic formulation and implementations for
+  the Capsule back ends.
+
+Reverse data management, why-not provenance, causality, and database repair already study minimal
+input interventions that change outputs. The [cell-based causality/repair work](https://www.usenix.org/conference/tapp15/workshop-program/presentation/debosschere)
+even calls for provenance tailored to procedural chase repairs. Thus “tell me how to restore the
+answer” is established. A defensible delta must jointly handle precompiled alternative action
+sequences, resource/time valuations, algebraic compatibility, and independently verified execution.
+
+### Complete ports are finite-field elementary modes
+
+The most important missed domain is metabolic pathway analysis.
+
+- [Network expansion](https://pubmed.ncbi.nlm.nih.gov/16155745/) starts from seed metabolites,
+  repeatedly fires reactions whose substrates are available, and computes the resulting scope.
+  This is essentially the same monotone closure pattern as C229--C230.
+- [Exhaustive biosynthetic-pathway enumeration](https://www.nature.com/articles/s41598-018-28007-7)
+  explicitly tracks stuck reactions and triggers them when precursors appear later—nearly the same
+  reverse-incidence operational algorithm proposed for sequential repair.
+- Elementary flux modes are support-minimal feasible steady-state flux vectors; metabolic minimal
+  cut sets block every target-carrying mode. Their hypergraph duality and dedicated enumeration
+  algorithms are mature
+  ([MCS2 overview](https://pmc.ncbi.nlm.nih.gov/articles/PMC6612898/),
+  [dual-network result](https://doi.org/10.1093/bioinformatics/btr674)).
+- [Elementary-vector theory](https://arxiv.org/abs/1512.00267) places these modes in linear
+  subspaces, subspace cones, polyhedral cones, and polyhedra using conformal decomposition.
+- The metabolic literature explicitly identifies elementary modes with positive circuits of an
+  oriented vector matroid
+  ([Schuster--Hilgetag framework](https://pmc.ncbi.nlm.nih.gov/articles/PMC544875/)).
+
+So a pointed repair port is best understood as a finite-field sibling of a pointed family of
+elementary flux modes. The common generalization is a **Pointed Elementary Capability Mode**:
+
+```text
+linear relation / cone / semimodule + distinguished output capability
+    -> inclusion-minimal feasible elementary vectors using that output
+    -> coefficient/sign-labelled support family
+    -> dual minimal interventions blocking all output-producing modes.
+```
+
+This is more mathematically grounded than the unconstrained `CapabilityCapsule` name. It predicts
+a genuine three-way program across finite-field code repair, real-cone metabolic production, and
+network-coded/linear dataflow systems.
+
+Claim boundary: metabolic scope expansion is topological and often treats available metabolites as
+reusable; flux modes enforce steady-state stoichiometry and sign constraints; code repair treats
+symbols as nonconsumable information. No single encoding may preserve all three. The paper-worthy
+work is to state the exact common category and the assumptions under which ports, blockers,
+composition, and valuations transfer.
+
+### Algorithms to import back from metabolism
+
+The metabolic connection is bidirectional, not an application claim:
+
+- use EFM enumeration, double-description, reverse search, MILP column generation, and dual-network
+  minimal-cut algorithms as baselines or engines for complete-port compilation;
+- use “generate only relevant modes” optimization when complete enumeration is impossible;
+- compare pointed syndrome/circuit enumeration against elementary-vector algorithms on matched
+  sparse matrices;
+- test whether symmetry and fixed-target structure make finite-field ports easier than generic EFM
+  enumeration.
+
+Potential export in the other direction: C231--C234's exact separator composition, terminal
+boundary-control algebra, and delay-expression DAGs may give modular algorithms for network
+expansion or pathway ETA on tree-like reaction networks. This is a real gap hypothesis, not yet a
+literature conclusion.
+
+### Petri nets and dynamic fault trees explain two more objects
+
+Minimal stopping cores resemble Petri-net siphons/deadlock structures; BDD computation of all
+minimal siphons is established
+([Chen--Liu](https://doi.org/10.1145/2406336.2406339)). Dynamic fault trees already include
+sequence-enforcing, priority-AND, spare, and functional-dependency gates and minimal cut sequences
+([example primary treatment](https://doi.org/10.1177/1748006X14552004)).
+
+Therefore:
+
+- do not claim generic stopping-core/deadlock or sequential reliability novelty;
+- test an exact restricted correspondence between monotone repair closure and safe/read Petri nets;
+- the plausible delta is automatically extracting these structures from algebraic recovery
+  semantics and pairing them with executable witnesses, rather than inventing new fault-tree gates.
+
+### E-graphs are the compiler-side sibling
+
+An e-graph stores many equivalent expressions and extracts a least-cost representative. This is
+close to storing all reconstruction expressions and choosing one under a cost model.
+[Fast and Optimal Extraction for Sparse Equality Graphs](https://doi.org/10.1145/3689801) shows
+general extraction is NP-hard/inapproximable within a constant ratio but tractable on a sparse
+class. Equality-saturation systems already produce explanations, and an executable formally
+verified merge/extraction checker now exists in the
+[Archive of Formal Proofs](https://devel.isa-afp.org/entries/Equality_Saturation_Checker.html).
+
+So “proof-carrying alternative-expression extraction” is not new. The predicted missing sibling is
+**failure- and capacity-aware multi-extraction**:
+
+- leaves/operators can become unavailable;
+- an extracted term can materialize intermediates that unlock later extractions;
+- several target terms contend for shared leaves/operators;
+- coefficients or side conditions must be checked;
+- the objective is a certified schedule, not one minimum-cost term.
+
+This should be tested as an e-graph paper/benchmark. Conversely, e-graph compactness and extraction
+algorithms may improve capsule representation for codes with recursively equivalent repair
+expressions.
+
+### Weighted automata constrain the transfer-algebra claim
+
+Weighted automata over tropical semirings already attach min/plus quantitative semantics to finite
+control and can require infinite weight carriers; determinization/equivalence have delicate
+boundaries ([Mohri's algorithms survey](https://research.google.com/pubs/archive/35076.pdf)).
+C232--C234 should be positioned as a **domain-specific weighted tree transducer/context algebra**
+for Horn recovery, with an exact radius/interface finiteness theorem and an explicit failure of a
+finite quantitative alphabet. The contribution cannot be “finite state plus tropical weights.”
+
+The sharper PL theorem candidate is a Myhill--Nerode-style characterization of contextual recovery
+equivalence and a minimal boundary transducer, including when determinization or finite-weight
+quotienting is impossible.
+
+### Diverse planning and reconfiguration narrow two claims
+
+[Plan-diversity research](https://doi.org/10.1609/aaai.v29i1.9669) already studies pathologies in
+syntactic plan-distance metrics. This supports rather than defeats the riff's transversally robust
+portfolio: predict that two plan sets with equal pairwise diversity can have different minimum
+common failure-domain hitting numbers. The publishable object is that separation plus a generation
+algorithm and domain benchmark.
+
+Solution-graph reconfiguration is a mature area, and current work studies path preservation and
+kernelization even for independent sets
+([STACS 2026 example](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.STACS.2026.19)).
+Thus extension complexes do not invent configuration-space topology. The possible new objective is
+certified **continuation diversity**: choose a state/path maximizing the minimum future disruption
+that destroys all safe continuations, rather than merely finding one reconfiguration path.
+
+## Revised top abstractions after the first audit
+
+1. **Resilience knowledge compilation** — broadest CS umbrella and proper evaluation discipline.
+2. **Pointed elementary capability modes** — deepest mathematical generalization, joining repair
+   circuits, elementary flux modes, and linear/coded dataflow.
+3. **Operational/proof-carrying provenance** — useful systems interface, but heavily prior-art
+   constrained.
+4. **Failure-aware multi-extraction** — best compiler transplant via e-graphs.
+5. **Fully abstract weighted recovery interfaces** — best PL/theory transplant from C231--C234.
+6. **Transversally robust plan portfolios** — strongest OR transplant from the riff archive.
+7. **Continuation-robust reconfiguration** — sharper version of option-preserving migration.
+
+The generic Capability Capsule remains a product IR, not the research novelty claim.
