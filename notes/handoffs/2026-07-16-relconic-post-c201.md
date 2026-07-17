@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — external branch collision is an exact two-difference-variable elimination
+**Status:** C210 ACTIVE — universal external branch-image collision is excluded on the repair stratum
 
 ## Current state
 
@@ -139,10 +139,7 @@ by the `build-sys` lane.
    critical/triple intersections now also retain exact simple coverage-branch witnesses over
    `GF(64)`. The omitted trace-one translation class retains such witnesses for both seed colors at
    all `2744` applicable rational quotient coefficients. Thus the known lower factors and the
-   arithmetic twist are not coverage-drop components. Next eliminate the two branch images and
-   classify any genuinely new geometric image divisors, then test whether any resulting stratum can
-   support an arc-legal affine-complete family over infinitely many odd extensions. Do not replace
-   this symbolic gate with a larger plane census. The source side is now completely uniform:
+   arithmetic twist are not coverage-drop components. The source side is now completely uniform:
    `W=s*omega*D` and `Y=lambda*D` give a non-endpoint reduced ramification source at every
    repair-stratum coefficient specialization, with transverse derivative
    `s*(s+b1)*Norm(D)^2`. This section is injective onto its image. For a second source, the
@@ -150,9 +147,19 @@ by the `build-sys` lane.
    ramification equation in `v`, independent of `k`, seed color, and the original `r`. After the
    known `u^2` source factor is removed, the collision resultant has 111 terms and degree five in
    `u`. The linear subresultant satisfies `L0=u*M0` and
-   `L1|_(u=0)=s*(lambda+1)^2*Norm(D)`, so its `L1=0` boundary is disjoint from the known source.
-   Next pseudo-reduce the saturated degree-eighteen ramification equation modulo the degree-five
-   collision polynomial on `L1!=0`, then handle `L0=L1=0` directly. See
+   `L1|_(u=0)=s*(lambda+1)^2*Norm(D)`. The final elimination is now chart-free. At `u=0`, the two
+   residual collision equations imply `s*Norm(D)=0`, so there is no external source. For `u!=0`, a
+   second ramification source forces a multiple root of the saturated collision quintic. In
+   characteristic two its discriminant reduces to a 3352-term resultant of two quadratics in
+   `z=u^2`; after removing `e*lambda^4*(lambda+1)`, imposing
+   `s*e=d^2+e^2+k`, and clearing `e^6`, the coefficient of `lambda^3*d^18` is exactly `e*a^4`.
+   Hence the multiple-root condition is nonzero on the reduced section at every repair-stratum
+   coefficient point, for both seed colors, including the old `L1=0` boundary. There is no new
+   geometric branch-image divisor. Next combine this coefficient-uniform transposition witness
+   with the existing specialization monodromy gates and classify only residual higher-codimension
+   drops before judging whether any special stratum can support an arc-legal affine-complete family
+   over infinitely many odd extensions. Do not replace this symbolic gate with a larger plane
+   census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

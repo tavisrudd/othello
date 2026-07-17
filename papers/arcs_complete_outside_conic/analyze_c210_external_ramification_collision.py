@@ -13,13 +13,20 @@ repair constant ``k``, the seed colour, and the original repair root ``r``.
 
 The common known source is ``u=v=0``.  The Sylvester resultant of ``C0,C1``
 has exactly the factor ``u^2``; after saturation the external collision
-polynomial has 111 terms and degree five in ``u``.  On the generic linear
-subresultant chart, substituting the unique common ``v`` into ``J'`` gives the
-remaining exact external-ramification equation.
+polynomial ``R(u)`` has 111 terms and degree five.  A second ramified source
+would make its external root multiple.  In characteristic two,
 
-This checker constructs every polynomial in the sparse GF(8)-coefficient ring
-and records stable digests.  The next gate is the final elimination in ``u``
-and the section parameters.
+    R(u)=u*R'(u)+(r4*u^4+r2*u^2+r0),
+
+so the multiple-root condition is the resultant of two quadratics in
+``z=u^2``.  After the selected-open factors are removed and the universal
+section equation is imposed, one coefficient of this condition is exactly
+``e*a^4``.  Thus it cannot vanish identically at any repair-stratum
+coefficient specialization.  This chart-free test also includes ``L1=0``.
+
+The checker constructs every polynomial in the sparse GF(8)-coefficient ring,
+verifies the quadratic resultant independently by a Sylvester determinant,
+and records stable digests.
 """
 
 from __future__ import annotations
@@ -156,6 +163,59 @@ def main() -> None:
             exponent >>= 1
         return out
 
+    def coefficient_in(poly, index, exponent):
+        out = {}
+        for monomial, scalar in poly.items():
+            if monomial[index] != exponent:
+                continue
+            reduced = list(monomial)
+            reduced[index] = 0
+            out[tuple(reduced)] = scalar
+        return out
+
+    def variable_degree(poly, index):
+        return max((monomial[index] for monomial in poly), default=-1)
+
+    def shift_variable(poly, index, shift):
+        out = {}
+        for monomial, scalar in poly.items():
+            shifted = list(monomial)
+            shifted[index] += shift
+            out[tuple(shifted)] = scalar
+        return out
+
+    def divide_by_monomial(poly, exponents):
+        if any(
+            monomial[index] < exponent
+            for monomial in poly
+            for index, exponent in exponents.items()
+        ):
+            return None
+        out = {}
+        for monomial, scalar in poly.items():
+            reduced = list(monomial)
+            for index, exponent in exponents.items():
+                reduced[index] -= exponent
+            out[tuple(reduced)] = scalar
+        return out
+
+    def divide_by_monic_in(poly, factor, index):
+        """Divide exactly by a polynomial monic in one variable."""
+        factor_degree = variable_degree(factor, index)
+        if coefficient_in(factor, index, factor_degree) != ring.one:
+            raise ValueError("factor is not monic in the selected variable")
+        quotient = ring.zero
+        remainder = poly
+        while variable_degree(remainder, index) >= factor_degree:
+            remainder_degree = variable_degree(remainder, index)
+            leading = coefficient_in(remainder, index, remainder_degree)
+            term = shift_variable(
+                leading, index, remainder_degree - factor_degree
+            )
+            quotient = add(quotient, term)
+            remainder = add(remainder, mul(term, factor))
+        return quotient if not remainder else None
+
     # On L1!=0 the common collision root is v=L0/L1.  Clear L1^5 from J'.
     external_ramification = ring.zero
     degree = len(JR) - 1
@@ -193,6 +253,133 @@ def main() -> None:
     ramification_at_known_source = coefficient_after_u_saturation(
         external_ramification, 2
     )
+
+    # The u=0 chart has no external affine collision on the selected section.
+    # After removing the common (lambda+1)*v, its two equations imply
+    # s*Norm(D)=0, contrary to the open conditions.
+    collision_u_zero = [
+        coefficient_in(value, u_index, 0) for value in collision
+    ]
+    collision_u_zero_brackets = (
+        add(mul(d, v), mul(e, s)),
+        add(mul(e, v), mul(s, add(d, e))),
+    )
+    common_u_zero_factor = mul(add(lam, ring.one), v)
+    assert collision_u_zero == [
+        mul(common_u_zero_factor, bracket)
+        for bracket in collision_u_zero_brackets
+    ]
+    assert add(
+        mul(e, collision_u_zero_brackets[0]),
+        mul(d, collision_u_zero_brackets[1]),
+    ) == mul(s, norm_D)
+
+    # If R=sum r_i*u^i is the saturated collision quintic, then
+    # R'=r5*u^4+r3*u^2+r1 and R+u*R'=r4*u^4+r2*u^2+r0.  In z=u^2 these are
+    # quadratics.  Their resultant is the chart-free multiple-root condition.
+    collision_u_coefficients = [
+        coefficient_in(saturated_resultant, u_index, exponent)
+        for exponent in range(6)
+    ]
+    derivative_quadratic = (
+        collision_u_coefficients[1],
+        collision_u_coefficients[3],
+        collision_u_coefficients[5],
+    )
+    even_quadratic = (
+        collision_u_coefficients[0],
+        collision_u_coefficients[2],
+        collision_u_coefficients[4],
+    )
+    multiple_root_resultant = add(
+        square(add(
+            mul(derivative_quadratic[2], even_quadratic[0]),
+            mul(even_quadratic[2], derivative_quadratic[0]),
+        )),
+        mul(
+            add(
+                mul(derivative_quadratic[2], even_quadratic[1]),
+                mul(even_quadratic[2], derivative_quadratic[1]),
+            ),
+            add(
+                mul(derivative_quadratic[1], even_quadratic[0]),
+                mul(even_quadratic[1], derivative_quadratic[0]),
+            ),
+        ),
+    )
+    quadratic_matrix = (
+        (*derivative_quadratic, ring.zero),
+        (ring.zero, *derivative_quadratic),
+        (*even_quadratic, ring.zero),
+        (ring.zero, *even_quadratic),
+    )
+    quadratic_sylvester = ring.zero
+    for permutation in itertools.permutations(range(4)):
+        term = ring.one
+        for row, column in enumerate(permutation):
+            term = mul(term, quadratic_matrix[row][column])
+        quadratic_sylvester = add(quadratic_sylvester, term)
+    assert quadratic_sylvester == multiple_root_resultant
+    assert len(multiple_root_resultant) == 3352
+
+    e_index = NAMES.index("e")
+    s_index = NAMES.index("k")
+    lam_index = NAMES.index("y0")
+    d_index = NAMES.index("y1")
+    multiple_root_core = divide_by_monomial(
+        multiple_root_resultant, {e_index: 1, lam_index: 4}
+    )
+    assert multiple_root_core is not None
+    multiple_root_core = divide_by_monic_in(
+        multiple_root_core, add(lam, ring.one), lam_index
+    )
+    assert multiple_root_core is not None
+    assert len(multiple_root_core) == 2746
+    assert multiple_root_resultant == mul(
+        mul(e, power(lam, 4)),
+        mul(add(lam, ring.one), multiple_root_core),
+    )
+    assert divide_by_monomial(multiple_root_core, {e_index: 1}) is None
+    assert divide_by_monomial(multiple_root_core, {lam_index: 1}) is None
+    assert divide_by_monic_in(
+        multiple_root_core, add(lam, ring.one), lam_index
+    ) is None
+
+    # On the universal section, z0=1 for both seed colours, hence
+    # s*e=d^2+e^2+k.  Reuse the now-free u slot for the coefficient k and
+    # clear the largest possible denominator e^6.
+    section_relation_degree = variable_degree(multiple_root_core, s_index)
+    assert section_relation_degree == 6
+    coefficient_k = u
+    section_numerator = add(square(d), square(e), coefficient_k)
+    section_powers = [
+        power(section_numerator, exponent)
+        for exponent in range(section_relation_degree + 1)
+    ]
+    section_restricted_core = ring.zero
+    for monomial, scalar in multiple_root_core.items():
+        s_exponent = monomial[s_index]
+        transformed = list(monomial)
+        transformed[s_index] = 0
+        transformed[e_index] += section_relation_degree - s_exponent
+        section_restricted_core = add(
+            section_restricted_core,
+            mul({tuple(transformed): scalar}, section_powers[s_exponent]),
+        )
+    critical_section_coefficient = {}
+    for monomial, scalar in section_restricted_core.items():
+        if monomial[lam_index] != 3 or monomial[d_index] != 18:
+            continue
+        reduced = list(monomial)
+        reduced[lam_index] = 0
+        reduced[d_index] = 0
+        critical_section_coefficient[tuple(reduced)] = scalar
+    assert critical_section_coefficient == mul(e, power(a, 4))
+    assert len(section_restricted_core) == 5580
+    restricted_section_coefficient_count = len({
+        (monomial[lam_index], monomial[d_index])
+        for monomial in section_restricted_core
+    })
 
     def degree_vector(poly):
         return {
@@ -255,10 +442,52 @@ def main() -> None:
             "degree_vector": degree_vector(external_ramification),
             "sha256": digest(external_ramification),
         },
+        "external_u_zero_boundary": {
+            "collision_equations_after_common_factor": [
+                "d*v+e*s", "e*v+s*(d+e)"
+            ],
+            "elimination_identity":
+                "e*(d*v+e*s)+d*(e*v+s*(d+e))=s*Norm(D)",
+            "consequence":
+                "u=0 has no external v!=0 collision on s*Norm(D)!=0",
+        },
+        "collision_quintic_multiple_root_core": {
+            "identity":
+                "R(u)=u*R'(u)+(r4*u^4+r2*u^2+r0)",
+            "quadratic_variable": "z=u^2",
+            "quadratic_coefficient_term_counts": {
+                "derivative": [len(value) for value in derivative_quadratic],
+                "even_part": [len(value) for value in even_quadratic],
+            },
+            "resultant_term_count": len(multiple_root_resultant),
+            "resultant_degree_vector": degree_vector(multiple_root_resultant),
+            "resultant_sha256": digest(multiple_root_resultant),
+            "selected_open_factor": "e*lambda^4*(lambda+1)",
+            "core_term_count": len(multiple_root_core),
+            "core_degree_vector": degree_vector(multiple_root_core),
+            "core_sha256": digest(multiple_root_core),
+            "section_relation": "s*e=d^2+e^2+k",
+            "section_relation_denominator_power": section_relation_degree,
+            "section_restricted_term_count": len(section_restricted_core),
+            "section_restricted_degree_vector": degree_vector(
+                section_restricted_core
+            ),
+            "section_restricted_sha256": digest(section_restricted_core),
+            "restricted_section_coefficient_count":
+                restricted_section_coefficient_count,
+            "decisive_section_coefficient": {
+                "section_monomial": "lambda^3*d^18",
+                "coefficient": "e*a^4",
+            },
+            "boundary_coverage":
+                "direct Sylvester/discriminant calculation includes L1=0",
+            "consequence":
+                "no repair-stratum coefficient specialization makes every reduced section image collide with a second ramification source",
+        },
         "remaining_gate":
-            "saturate the external ramification equation by u^2 and eliminate u against the 111-term collision resultant, including L1=0 boundary charts",
+            "combine the coefficient-uniform simple branch with the specialization monodromy gates and classify any residual higher-codimension drops",
         "status":
-            "external branch collision reduced to an exact low-variable elimination system",
+            "universal external branch-image collision excluded on the repair stratum",
     }, sort_keys=True))
 
 

@@ -2024,3 +2024,92 @@ The next computation can therefore treat `L1!=0` and `L1=0` as genuinely disjoin
 On the generic chart, reduce the degree-eighteen saturated ramification polynomial modulo the
 degree-five collision polynomial before taking the final resultant; on the boundary, impose
 `L0=L1=0` and eliminate `v` directly.
+
+## Thirty-second coordinate gate: the collision quintic is generically squarefree on every section
+
+The final elimination has a chart-free characteristic-two shortcut.  First, the apparent `u=0`
+external boundary is empty.  After setting `u=0`, both collision equations have the common factor
+`(lambda+1)v`; for `v!=0` their residual equations are
+
+```text
+d*v+e*s=0,
+e*v+s*(d+e)=0.                                          (49)
+```
+
+Their exact linear combination is
+
+```text
+e*(d*v+e*s)+d*(e*v+s*(d+e))=s*Norm(D),                 (50)
+```
+
+which is nonzero on the selected section.  Thus every external affine collision has `u!=0`; the
+universal `u^2` saturation removes only the known source.
+
+Let the saturated 111-term collision resultant be
+
+```text
+R(u)=r5*u^5+r4*u^4+r3*u^3+r2*u^2+r1*u+r0.
+```
+
+At an external second source, ramification makes the local intersection of the two collision
+equations nonreduced, hence makes the corresponding root of `R` multiple.  This implication is
+valid on every finite-`v` chart: if `C=D'F` denotes the denominator-cleared collision map, then on
+`C=0` its Jacobian is `J'/Norm(D')`, where `J'` is the second-source ramification numerator.  The
+endpoint divisor `Norm(D')=0` is already excluded from the source.  No division by the linear
+subresultant `L1` is involved.
+
+In characteristic two,
+
+```text
+R'(u)=r5*u^4+r3*u^2+r1,
+R(u)+u*R'(u)=r4*u^4+r2*u^2+r0.                         (51)
+```
+
+Writing `z=u^2`, a repeated root is therefore detected by the resultant of two quadratics in `z`.
+The checker evaluates this both by the closed quadratic formula and by an independent `4 x 4`
+Sylvester determinant.  The result has `3352` terms and exact factorization
+
+```text
+Res_z(R',R+uR') = e*lambda^4*(lambda+1)*Delta,          (52)
+```
+
+where `Delta` has `2746` terms.  The displayed factors are all endpoint/open-set factors; in
+particular this calculation includes the formerly separate `L1=0` boundary.
+
+It remains to ask whether `Delta` can vanish along the entire reduced section at a special repair
+coefficient.  Both seed colours have `z0=1`, so the first section equation is
+
+```text
+s*e=d^2+e^2+k.                                         (53)
+```
+
+Substitute (53) into `Delta` and clear the maximal denominator `e^6`.  The resulting polynomial has
+`5580` terms and `142` distinct `(lambda,d)` coefficient positions.  Decisively, its coefficient at
+`lambda^3*d^18` is exactly
+
+```text
+e*a^4.                                                  (54)
+```
+
+This is nonzero at every repair-stratum coefficient specialization, where `e*a!=0`.  Hence the
+multiple-root condition is never identically zero on the two-dimensional section.  Its nonzero
+locus meets the dense open conditions on `s`, `s+b`, `Norm(D)`, `lambda`, and `lambda+1`; the second
+section equation is solvable over the algebraic closure because its leading coefficient is `a`.
+Therefore every repair-stratum coefficient point, for both seed colours, has a reduced section
+branch image that does not collide with a second ramification source.  There is no new geometric
+branch-image divisor from external collision.  Residual monodromy drops, if any, must be
+higher-codimensional and cannot arise by universal collision of this section.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision_output.txt`.
+
+```text
+56a1564eeed41c0d9cbec626ccfb06b1c4ed7fcd5df0e8e8c3cbac7172c3ab4b  analyze_c210_external_ramification_collision.py
+169dd92e1ee11d8b51268c1e142fca2b2a6efbdf4712e90bd0b6ae80482b448b  analyze_c210_external_ramification_collision_output.txt
+```
