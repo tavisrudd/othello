@@ -56,7 +56,10 @@ by the `build-sys` lane.
    now have the exact split-polynomial trace description `S_U={Up+q:p!=0, tr(q/p^2)=0}`. The unique
    minimal q=64 coverage route is `AA,AB,AR,BB,BR`, so repair--repair secants can be omitted from the
    coverage proof. Next show that the complement of `AB,AR,BR` lies in the two seed translates of
-   `S_y`; do not widen the order census until those identities predict a parameter. See
+   `S_y`. The first orbit admits a complete trace parametrization, but its natural `GF(8)` scalar
+   extension is obstructed for every `s>=16`: a one-repair collision is forced by a nonzero
+   `z` with `tr(z)=tr(z^(-1))=0`, and the Kloosterman/Weil count guarantees such `z`. Next normalize
+   the other two q=64 orbits or design a partial repair domain; do not widen the order census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

@@ -63,7 +63,11 @@ subfield ratio `lambda=a/b`. The same-layer chord sets now have the exact trace 
 `S_U={Up+q: p!=0, tr(q/p^2)=0}`. At q=64 the unique minimal secant-class cover is
 `AA,AB,AR,BB,BR`; repair--repair chords are irrelevant to coverage and remain only an arc-condition
 constraint. Next prove that the complement of `AB,AR,BR` lies in the two seed translates of `S_y`;
-do not test another order until those identities predict `lambda`.
+do not test another order until those identities predict `lambda`. The first orbit now has such a
+trace parametrization, but its natural `GF(8)` scalar extension is killed for every `s>=16`: a
+one-repair collision is equivalent to a nonzero `z` with `tr(z)=tr(z^(-1))=0`, whose count is
+positive by the Weil bound for binary Kloosterman sums. The remaining routes are the other two
+q=64 orbits or a partial repair domain.
 
 ## C201 input
 

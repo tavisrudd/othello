@@ -376,6 +376,64 @@ This separates the prospective proof into two independent statements:
 
 No general coverage theorem is claimed yet, but repair-pair coverage can now be omitted entirely.
 
+## Seventh coordinate gate: the first orbit is sporadic
+
+The first q=64 orbit has a basis-free one-parameter description. Put
+
+```text
+tau = Tr_E/F(beta),                 n = N_E/F(beta).
+```
+
+For all 56 choices `beta outside F` at `s=8`, the trace-parametrized coefficients
+
+```text
+eta=beta, lambda=a/b=tau, b^2=beta^3/tau, a=tau*b, c=b^(-2)
+```
+
+give an arc if and only if
+
+```text
+tr_F/GF(2)(tau)=0,                 n=tau^5.
+```
+
+There are six such `beta`, one absolute-Frobenius orbit; every resulting 24-arc is affine-complete
+and extends by two directions to a complete 26-arc. At `s=4` there is no predicted `beta` and no
+arc. The quadratic `X^2+tau*X+tau^5` is irreducible over `F` precisely when
+`tr_F/GF(2)(tau^3)=1`.
+
+At `s=8`, the three possible `tau` are the roots of `tau^3+tau+1=0`. Writing
+`beta=1+tau*omega`, where `omega^2+omega+1=0`, simplifies the repair height to
+
+```text
+g(r)=omega*(tau^6*r^2 + tau^5*r + tau^4).
+```
+
+This suggests extending the same `GF(8)` coefficients to larger `F` containing `GF(8)`. That
+natural extension is obstructed. A collision between one repair point and two points of the
+`beta` seed layer exists as soon as there is `z in F^*` with
+
+```text
+tr(z)=0,                           tr(z^(-1))=0.          (6)
+```
+
+For this family the relevant pair sum is `p=tau^3*z`, with `z=x^2+x`; the split-polynomial
+criterion becomes exactly the second condition in (6). If `N_00` counts such `z` and
+
+```text
+K_s = sum_{z in F^*} (-1)^(tr(z+z^(-1))),
+```
+
+then the character expansion gives
+
+```text
+N_00 = (s-3+K_s)/4.
+```
+
+The classical Weil bound `|K_s|<=2*sqrt(s)` forces `N_00>0` for every `s>=16`. Thus the direct
+`GF(8)` scalar extension of the first orbit cannot produce an infinite family. The bounded checker
+records `N_00=1, K_4=3` and the exceptional `N_00=0, K_8=-5`. This obstruction does not yet apply
+to the other two q=64 orbits or to partial repair domains.
+
 Reproduction:
 
 ```text
@@ -393,6 +451,7 @@ python3 papers/arcs_complete_outside_conic/probe_c210_affine_coset_repairs.py
 python3 papers/arcs_complete_outside_conic/probe_c210_quadratic_coset_repairs.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_q64_quadratic_orbits.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_q64_affine_coverage.py
+python3 papers/arcs_complete_outside_conic/probe_c210_trace_parameter_family.py
 ```
 
 Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
@@ -410,11 +469,12 @@ c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_rep
 9d8eca6d73ced53bf961d1802b70aaa4e7d6902427558dc351f338f22ce5d019  analyze_c210_q64_quadratic_orbits_output.txt
 8c16bd721123534b8138a52aebd78cf00fcd8529c89cf2a8d4f13b6cda1d3520  analyze_c210_q64_affine_coverage.py
 1e4d1b0f6c2c0efb40e94acd6491c88978ea47c84360d010a335167d4fa4d4a8  analyze_c210_q64_affine_coverage_output.txt
+73727d2ce39719fbe00f80cc5d569827ba023c197a8bfb2f89660d563bb2895c  probe_c210_trace_parameter_family.py
+8485fdc566bb6e7175ceaccb6aa8eeec072adbddbe2570ff5476a0a3eee37127  probe_c210_trace_parameter_family_output.txt
 ```
 
-The next gate is a general characteristic-two coverage theorem. Normalize `alpha=1`, express
-`a,b,eta` through a subfield parameter `lambda=a/b` and trace data, and derive membership tests for
-the `AB,AR,BR` chord-value sets. Prove that their simultaneous complement lies in the two
-same-seed translates `y^2+alpha+S_y` and `y^2+beta+S_y`. In parallel, rewrite the one-repair and
-split-polynomial arc conditions as trace identities in `lambda`. Do not test a larger field until
-those equations predict which `lambda` should work.
+The first orbit's most natural infinite extension is now closed. Next normalize the other two q=64
+orbit representatives in relative trace/norm coordinates and derive their one-repair collision
+sets. The acceptance gate is structural: their analogues of (6) must avoid a Kloosterman-forced
+intersection, or use a partial repair domain that deletes every bad reciprocal-trace pair while
+retaining affine coverage. Do not test a larger field before one of those routes survives on paper.

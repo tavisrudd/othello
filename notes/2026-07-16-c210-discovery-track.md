@@ -112,3 +112,15 @@ Confidence tags are `CHECKED`, `REASONED`, and `OPEN`.
   formula gives no arc at `s=4`. **Question:** is the relevant infinite condition a family of
   trace-one elements satisfying an additive or linearized polynomial, rather than all quadratic
   extensions? **Disposition:** derive the general trace identities before testing `s=16`.
+
+- **The six successful parameters have a basis-free trace/norm characterization (`CHECKED`,
+  bounded).** They are exactly the `beta` with `tr(Tr(beta))=0` and
+  `N(beta)=Tr(beta)^5`; irreducibility is `tr(Tr(beta)^3)=1`. **Disposition:** retain this as the
+  exact explanation of the first q=64 orbit.
+
+- **The obvious infinite scalar extension is killed by reciprocal trace (`REASONED`, using the
+  classical Weil bound).** For the `GF(8)` coefficient pattern, one-repair/two-seed legality would
+  require that no nonzero `z` satisfy `tr(z)=tr(z^(-1))=0`. The exact count is
+  `(s-3+K_s)/4`, so `|K_s|<=2*sqrt(s)` makes it positive for every `s>=16`; `GF(8)` is the exceptional
+  zero-count case. **Question:** do the other two q=64 orbits change the reciprocal map enough to
+  evade the same Kloosterman obstruction? **Disposition:** this is the next symbolic gate.
