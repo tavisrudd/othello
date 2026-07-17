@@ -62,6 +62,30 @@ The expectation and question fields are aids, not admission tests: a worthwhile 
 speculative musing can be logged without manufacturing a violated expectation. The admission test
 is that it was incidental.
 
+### Structural sibling predictions
+
+One especially useful incidental lead has the form:
+
+> We found phenomenon **P** here; we predict a related phenomenon in **X, Y, and Z** because those
+> settings share mechanism **S**.
+
+Log this when the cross-domain prediction was not part of the current deliverable. It should be a
+**phenomenon forecast**, not a list of places where an algorithm might be applied. Useful forecasts
+predict a missing distinction, exceptional regime, obstruction, strict separation, or pair of
+objects that a coarser abstraction incorrectly identifies.
+
+When available, add these fields to the normal entry:
+
+```markdown
+**Structural mechanism:** the invariant or ingredients shared across the settings.
+**Predicted siblings:** X — predicted P_X; Y — predicted P_Y; Z — predicted P_Z.
+**Discriminator / falsifier:** an observation separating the prediction from analogy, and what
+would show that an existing baseline already captures it.
+```
+
+The prediction remains an open lead until checked. It does not allocate cross-lane work, and the
+discovery track should not be filled with generic “could apply to” lists.
+
 ## Legacy normalization (2026-07-16)
 
 The C115, Clebsch, and gem discovery logs follow this boundary. Two relconic companions had used

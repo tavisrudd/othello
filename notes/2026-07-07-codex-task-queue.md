@@ -97,6 +97,7 @@ unless they retain an explicit open tail.
 - **C236 `[rp-next]` [REPORTED 2026-07-16]** — proved all-field cubic radius-three sequential-equals-span and certified an explicit q=9 harmonic sequential-versus-span witness → `notes/2026-07-16-c236-flagship-closure-comparison.md`.
 - **C237 `[rp-next]` [REPORTED 2026-07-16]** — explicit support-identical `U(3,8)` GRS/generic representations have square matroids `U(5,8)`/`U(6,8)` and separate strong multiplicativity for every dealer → `notes/2026-07-16-c237-u38-holonomy-mpc.md`.
 - **C238 `[rp-next]` [REPORTED 2026-07-17]** — synthesized repaircodes/repairports/rp-next and the paper portfolio into commercially useful algorithms, data structures, explicit substantial-SOTA-improvement bets, protocol applications, and broader-CS paper packages → `notes/2026-07-17-c238-repairports-commercial-algorithms.md`.
+- **C239 `[rp-next]` [ACTIVE]** — reinterpret the C238 synthesis and its theorem base through adjacent domains, identify the underlying abstractions, test transplants against real gaps, and rank missed papers/products → `notes/2026-07-17-c239-domain-translation-audit.md`.
 
 ### Dormant / handoff-owned lanes
 
