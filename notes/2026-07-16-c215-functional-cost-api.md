@@ -2,7 +2,7 @@
 
 **Lane:** `repairports`
 
-**Status:** unpointed, pointed-search, and nonzero fiberwise-reduction slices implemented.
+**Status:** exact pointed first-obstruction split implemented; zero-term closed form remains.
 
 ## Result
 
@@ -41,6 +41,18 @@ functional sector:
 - `nonzeroOuterPointedRealizationCost_eq_fiberCost` lifts the formula through the infimum over all
   nonzero outer functional-dual tuples.
 
+The full pointed obstruction is now classified by functional stratum:
+
+- `zeroFunctionalPointedNonembeddedCost` retains exactly the zero-functional witnesses that are
+  nonzero at the target and are not the embedded one-block inner-dual word;
+- a nonzero functional tuple is proved incapable of being embedded at the distinguished block;
+- `pointedNonembeddedCost_eq_min_zero_nonzero` proves that the exact full pointed cost is the
+  minimum of the zero-functional term and `nonzeroOuterPointedFiberCost`.
+
+This is an exact decomposition, not a field-priority claim. The classical concatenated-dual fiber
+structure remains prior art; the target-conditioned repair-obstruction use still requires a
+dedicated literature audit before any novelty language.
+
 ## Validation
 
 Guarded elaboration of `RepairPorts/FunctionalCost.lean` passes. The printed headline theorems use
@@ -52,7 +64,7 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Close the zero-functional sector and prove that `pointedNonembeddedCost` is the minimum of that
-term and `nonzeroOuterPointedFiberCost`. The nonzero term is already reduced to constrained inner
-fiber costs; the zero term must retain the target-point condition and exclude the embedded
-one-block word without an off-by-one or empty-index convention.
+Derive the zero-sector closed form when another block exists and the inner dual is nontrivial: the
+target-pointed inner-dual cost plus one off-target word of weight `dualDist I`. Prove the singleton
+block, trivial-dual, and empty target-fiber cases as `top`, then replace the remaining direct
+zero-sector search in the full minimum formula.

@@ -360,6 +360,41 @@ theorem nonzeroOuterPointedRealizationCost_eq_fiberCost
     exact ⟨beta, hbeta, hbeta0,
       (pointedFunctionalTupleRealizationCost_eq I e j x beta).trans hcost⟩
 
+omit [DecidableEq ι] [DecidableEq κ] [DecidableEq 𝔽] [DecidableEq V] in
+/-- A flattened concatenated-dual word induces an outer functional-dual tuple. -/
+theorem blockFunctionalTuple_mem_functionalDual_of_flatten_mem
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (w : ι → (κ → 𝔽))
+    (hwdual : (fun p => w p.1 p.2) ∈ dualCode (concatenatedCode I e O)) :
+    (fun l => blockFunctional I e (w l)) ∈ functionalDual O := by
+  have horth := dualWord_isOrthogonalToConcatenation I e O hwdual
+  have hwblock : wordBlock (fun p => w p.1 p.2) = w := by
+    funext l y
+    rfl
+  rw [hwblock] at horth
+  exact blockFunctional_mem_functionalDual I e O w horth
+
+omit [Fintype ι] [DecidableEq κ] [DecidableEq 𝔽] [DecidableEq V] in
+/-- A realization of a nonzero functional tuple cannot be an embedded inner-dual word at the
+distinguished block. -/
+theorem not_isEmbeddedInnerDualBlockAt_of_functionalTuple_ne_zero
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (j : ι) (beta : ι → Module.Dual 𝔽 V) (hbeta0 : beta ≠ 0)
+    (w : ι → (κ → 𝔽)) (hw : ∀ l, blockFunctional I e (w l) = beta l) :
+    ¬ IsEmbeddedInnerDualBlockAt I j w := by
+  rintro ⟨hjdual, hother⟩
+  apply hbeta0
+  funext l
+  change beta l = 0
+  by_cases hlj : l = j
+  · subst l
+    rw [← hw j, blockFunctional_eq_zero_iff I e]
+    exact hjdual
+  · rw [← hw l, hother l hlj]
+    apply LinearMap.ext
+    intro v
+    simp [blockFunctional]
+
 /-- A nonembedded concatenated-dual witness through the pointed coordinate `(j,x)`. -/
 def IsPointedNonembeddedWitness
     (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
@@ -376,6 +411,76 @@ def pointedNonembeddedCost
   sInf {n | ∃ w : ι → (κ → 𝔽),
     IsPointedNonembeddedWitness I e O j x w ∧
       ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n}
+
+/-- The zero-functional pointed obstruction sector.  The nonembedded condition explicitly removes
+the one-block inner-dual word at the target. -/
+def zeroFunctionalPointedNonembeddedCost
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) : WithTop ℕ :=
+  sInf {n | ∃ w : ι → (κ → 𝔽),
+    IsPointedNonembeddedWitness I e O j x w ∧
+      (fun l => blockFunctional I e (w l)) = 0 ∧
+      ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) = n}
+
+/-- **Exact pointed first-obstruction split.**  The full pointed nonembedded cost is the minimum
+of the exceptional zero-functional sector and the fiberwise nonzero outer-functional sector. -/
+theorem pointedNonembeddedCost_eq_min_zero_nonzero
+    (I : Submodule 𝔽 (κ → 𝔽)) (e : V ≃ₗ[𝔽] I)
+    (O : Submodule 𝔽 (ι → V)) (j : ι) (x : κ) :
+    pointedNonembeddedCost I e O j x =
+      min (zeroFunctionalPointedNonembeddedCost I e O j x)
+        (nonzeroOuterPointedFiberCost I e O j x) := by
+  apply le_antisymm
+  · apply le_min
+    · apply le_sInf
+      intro n hn
+      obtain ⟨w, hw, -, rfl⟩ := hn
+      apply sInf_le
+      exact ⟨w, hw, rfl⟩
+    · apply le_sInf
+      intro n hn
+      obtain ⟨beta, hbeta, hbeta0, rfl⟩ := hn
+      by_cases hex : ∃ z, IsPointedFunctionalRepresentative I e x (beta j) z
+      · obtain ⟨w, hw, hwx, hcost⟩ :=
+          exists_pointedFunctionalTupleCost_realizer I e j x beta hex
+        have hwfun : (fun l => blockFunctional I e (w l)) = beta := funext hw
+        have hwdual := flatten_mem_dualCode_concatenatedCode_of_functionalDual I e O w (by
+          rw [hwfun]
+          exact hbeta)
+        have hnembedded :=
+          not_isEmbeddedInnerDualBlockAt_of_functionalTuple_ne_zero I e j beta hbeta0 w hw
+        rw [← hcost]
+        apply sInf_le
+        exact ⟨w, ⟨hwdual, hwx, hnembedded⟩, rfl⟩
+      · have hpoint : pointedFunctionalFiberCost I e x (beta j) = ⊤ :=
+          (pointedFunctionalFiberCost_eq_top_iff I e x (beta j)).2 hex
+        simp [pointedFunctionalTupleCost, hpoint]
+  · apply le_sInf
+    intro n hn
+    obtain ⟨w, ⟨hwdual, hwx, hnembedded⟩, rfl⟩ := hn
+    let beta : ι → Module.Dual 𝔽 V := fun l => blockFunctional I e (w l)
+    have hbeta : beta ∈ functionalDual O :=
+      blockFunctionalTuple_mem_functionalDual_of_flatten_mem I e O w hwdual
+    by_cases hbeta0 : beta = 0
+    · calc
+        min (zeroFunctionalPointedNonembeddedCost I e O j x)
+            (nonzeroOuterPointedFiberCost I e O j x) ≤
+            zeroFunctionalPointedNonembeddedCost I e O j x := min_le_left _ _
+        _ ≤ ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) := by
+          apply sInf_le
+          exact ⟨w, ⟨hwdual, hwx, hnembedded⟩, hbeta0, rfl⟩
+    · calc
+        min (zeroFunctionalPointedNonembeddedCost I e O j x)
+            (nonzeroOuterPointedFiberCost I e O j x) ≤
+            nonzeroOuterPointedFiberCost I e O j x := min_le_right _ _
+        _ ≤ pointedFunctionalTupleCost I e j x beta := by
+          apply sInf_le
+          exact ⟨beta, hbeta, hbeta0, rfl⟩
+        _ ≤ ((∑ l, hammingNorm (w l) : ℕ) : WithTop ℕ) := by
+          apply pointedFunctionalTupleCost_le I e j x beta w
+          · intro l
+            rfl
+          · exact hwx
 
 omit [DecidableEq ι] [DecidableEq κ] [DecidableEq V] in
 /-- The pointed cost is infinite exactly when there is no constrained nonembedded witness. -/
@@ -464,6 +569,7 @@ end PointedFiniteSearch
 #print axioms RepairPorts.exists_pointedFunctionalFiberCost_realizer
 #print axioms RepairPorts.pointedFunctionalTupleRealizationCost_eq
 #print axioms RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost
+#print axioms RepairPorts.pointedNonembeddedCost_eq_min_zero_nonzero
 #print axioms RepairPorts.pointedNonembeddedCost_eq_top_iff
 #print axioms RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost
 #print axioms RepairPorts.pointedNonembeddedCostSearch_eq

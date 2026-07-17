@@ -84,7 +84,7 @@ unless they retain an explicit open tail.
 
 ### `repairports`
 
-- **C215 `[repairports]` [ACTIVE]** — canonical costs, verified searches, and the exact nonzero outer-functional fiberwise pointed formula are implemented; next close the zero-functional sector and combine them → `notes/2026-07-16-c215-functional-cost-api.md`.
+- **C215 `[repairports]` [ACTIVE]** — canonical costs, verified searches, nonzero fiberwise formula, and the exact zero/nonzero pointed minimum split are implemented; next derive the zero-sector closed form and edge cases → `notes/2026-07-16-c215-functional-cost-api.md`.
 - **C216 `[repairports]` [QUEUED; after C215 definitions]** — prescribed repair-port realization in asymptotically good fixed-alphabet codes → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C217 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — gauge-invariant holonomy and cross-ratios of overlapping repair circuits → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C218 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — rational-normal-curve plus osculating-nucleus repair families → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
