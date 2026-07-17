@@ -1,0 +1,34 @@
+{
+  "task": "C232 fixed-radius fixed-width transfer obstruction",
+  "field": "GF(2)",
+  "radius": 2,
+  "centre_interface_width": 2,
+  "verified_n": [
+    1,
+    32
+  ],
+  "families_checked": 32,
+  "checks": [
+    "simple nonzero binary columns",
+    "complete circuit inventory through cardinality three",
+    "both virtual elements noncoloops",
+    "local multi-interface response trace",
+    "direct closure after gluing parallel-pair leaves"
+  ],
+  "first_record": {
+    "n": 1,
+    "rank": 2,
+    "centre_columns": 3,
+    "three_element_circuits": 1,
+    "q_response_first_finite_round": 0,
+    "terminal_arrival_round": 1
+  },
+  "last_record": {
+    "n": 32,
+    "rank": 33,
+    "centre_columns": 65,
+    "three_element_circuits": 32,
+    "q_response_first_finite_round": 31,
+    "terminal_arrival_round": 32
+  }
+}
