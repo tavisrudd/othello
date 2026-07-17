@@ -78,7 +78,7 @@ def exact_double_root_witness(
     # source points with the same resultant root.
     t_gcd = t_gcd_modulus(field, (root, 1), equations[:3], equations[3:])
     assert len(t_gcd) == 2
-    t_value = t_gcd[0][0]
+    t_value = 0 if not t_gcd[0] else t_gcd[0][0]
     assert t_gcd[1] == (1,)
 
     return {

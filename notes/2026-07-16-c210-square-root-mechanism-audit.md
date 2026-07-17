@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — generic coverage/collision wreath groups derived; joint coverage next
+**Status**: ACTIVE — joint seed route leaves positive density uncovered; repair--repair next
 
 ## Boundary from the literature
 
@@ -1197,6 +1197,115 @@ Frozen output:
 `papers/arcs_complete_outside_conic/analyze_c210_generic_coverage_monodromy_output.txt`.
 
 ```text
-f193a7a642c52e28e715c7251dd2b9ebdeb3c8dea19aa7da5147f973616b26c0  analyze_c210_generic_coverage_monodromy.py
+298932fe05e09b2a379d1eef8b61bbce51e02340a236bdeaefad3ce3fabbdf09  analyze_c210_generic_coverage_monodromy.py
 127e6fc29257631e04f5b3229e621538a10bf56b4a4b8b55dca83e12bdcda238  analyze_c210_generic_coverage_monodromy_output.txt
+```
+
+## Nineteenth coordinate gate: the joint seed route leaves positive density uncovered
+
+The three seed--seed chord classes also have small exact covers.  On the generic stratum `y1!=0`,
+write a mixed `A`--`B` chord with seed difference `d=t+u`.  The omega-coordinate equation recovers
+the translated second endpoint linearly.  Substituting it into the base-coordinate equation gives
+
+```text
+P_AB(d) = B^2*d^5 + B*d^4 + (A^2+A)*d^3
+          + y1*d^2 + (h0+1)*d + y1*tau,                 (18)
+
+A=(y1^2+h1+tau)/tau,                 B=y1/tau.
+```
+
+The incidence source is rational and (18) is generically degree five, so the geometric action is
+transitive.  Three squarefree `GF(8)` fibers have factor degrees
+
+```text
+[5],                  [2,3],                  [1,4].
+```
+
+The `[2,3]` Frobenius has a transposition as its third power; prime-degree transitivity therefore
+forces arithmetic `S5`.  The `[5]` Frobenius is even and the `[1,4]` Frobenius is odd.  Since both
+occur at rational unramified targets, the geometric group cannot be the constant-index-two `A5`
+subgroup.  Hence the mixed seed cover has both arithmetic and geometric group `S5`.
+
+For a same-layer chord of seed height `c=(c0,c1)`, put `p=t+u` and `q=tu`.  The target equations
+recover
+
+```text
+p_c = (h1+c1+y1^2)/y1,
+q_c = h0+c0+y0^2+y1^2+y0*p_c.                            (19)
+```
+
+The chord exists exactly when `p_c!=0` and
+
+```text
+tr(q_c/p_c^2)=0.                                         (20)
+```
+
+Thus `AA` and `BB` are two Artin--Schreier characters.  Their pole divisors are distinct because
+the two pair sums differ by `tau/y1`.  The checker exhausts all 3,584 generic q=64 targets,
+25,088 mixed differences, and 200,704 same-layer unordered-pair comparisons against direct chord
+incidence.  It also realizes all eight Frobenius triples
+
+```text
+(sign(P_AB), trace_AA, trace_BB) in C2^3.
+```
+
+The mixed `S5` cover can intersect an abelian compositum only through its sign quotient, so these
+eight witnesses prove that the seed-only joint group is
+
+```text
+S5 x C2 x C2.                                             (21)
+```
+
+The two seed colors in the repair covers are independent as well.  At
+`(y0,y1,h0,h1)=(0,1,0,tau^4)`, the `A`-repair resultant has one exact doubled root while the
+`B`-repair resultant is squarefree.  At `(0,1,1,tau^4)` the roles reverse.  These supported
+transpositions separate the two `S7` top groups.  The fixed-repair incidence hypersurfaces for
+`A` and `B` are also distinct, so the collision inertia from the eighteenth gate remains supported
+on one of the fourteen candidate sheets.  Finally, the seed-only branch divisors are independent
+of the repair-coefficient branch divisors.  The full coefficient-generic group on `y1!=0` is
+therefore
+
+```text
+((H wr S7) x (H wr S7)) x (S5 x C2 x C2),
+H=S5 x C2 x C2.                                           (22)
+```
+
+This yields a genuine route obstruction.  Each same-layer class is absent with density `1/2`, the
+mixed seed quintic is rootless with density `44/120=11/30`, and one seed color has no rational
+one-repair-legal candidate with density
+
+```text
+a = 1647740935800659269 / 1805923123200000000
+  = 0.9124092352729555...
+```
+
+Consequently the coefficient-generic density missed by all three seed--seed classes and both
+legal seed--repair classes is
+
+```text
+(1/2)^2 * (11/30) * a^2
+  = 29865552106645555637458091245391757971
+    / 391362999229013085388800000000000000000
+  = 0.07631163948937644... .                              (23)
+```
+
+Any partial repair domain is a subset of the one-repair-legal parameters, so thinning cannot fill
+these targets with a seed--repair chord.  This does not yet close the quadratic repair mechanism:
+repair--repair secants may cover part or all of the class in (23), even though they were redundant
+for the full q=64 layer.  The next gate is the repair--repair incidence character together with
+the requirement that both endpoints lie in an arc-legal independent domain.  No plane census is
+needed.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_joint_coverage_monodromy.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_joint_coverage_monodromy_output.txt`.
+
+```text
+ba4c93d216f46f369d8143f8d39bfbc2018c4906e7964de635c2333f32621fe5  analyze_c210_joint_coverage_monodromy.py
+71e9bf377337fe1fb176f24b887e01a9ebaa5d3fb4ddc4950909183512243fd2  analyze_c210_joint_coverage_monodromy_output.txt
 ```

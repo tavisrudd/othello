@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — generic coverage/collision wreath groups derived; joint coverage next
+**Status:** C210 ACTIVE — joint seed route leaves positive density uncovered; repair--repair next
 
 ## Current state
 
@@ -107,9 +107,12 @@ by the `build-sys` lane.
    source and isolated double-root witnesses now force full arithmetic/geometric groups `S7` and
    `S6`; composing with the one-repair collision group `H=S5 x C2 x C2` gives `H wr S7` and
    `H wr S6`. One seed color therefore gives a rational legal candidate on only about `8.76%` of
-   coefficient-generic targets. Next compute the joint monodromy of both seed colors and all three
-   seed--seed secant schemes, then decide whether the simultaneous no-legal-repair class meets the
-   seed-uncovered locus. Do not replace this symbolic gate with a larger plane census. See
+   coefficient-generic targets. The mixed seed class now has `S5` monodromy, the same-layer trace
+   covers are independent, and isolated seed-color branch witnesses give the full joint group
+   `((H wr S7) x (H wr S7)) x (S5 x C2 x C2)`. It leaves density `0.0763116...` missed by every
+   seed--seed chord and every one-repair-legal seed--repair chord. Next derive the repair--repair
+   incidence character and require both endpoints to lie in an arc-legal independent domain. Do
+   not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

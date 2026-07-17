@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — generic coverage/collision wreath groups derived; joint coverage next
+**Status**: ACTIVE — joint seed route leaves positive density uncovered; repair--repair next
 
 ## Objective
 
@@ -76,9 +76,12 @@ separable. Thus the frozen empty edges are arithmetic rather than a universal de
 generic degree-seven cover now has arithmetic and geometric group `S7`, while the `y1=0`
 degree-six boundary has `S6`. Composing either with the one-repair collision group
 `H=S5 x C2 x C2` gives the full wreath product, so one seed color supplies a rational legal
-candidate for only about `8.76%` of coefficient-generic targets. Next compute the joint monodromy
-of both seed colors and the seed--seed secant schemes, and decide whether the simultaneous
-no-legal-repair class meets the seed-uncovered locus; a larger fixed-field census is not the gate.
+candidate for only about `8.76%` of coefficient-generic targets. The joint monodromy of both seed
+colors and the seed--seed secant schemes is
+`((H wr S7) x (H wr S7)) x (S5 x C2 x C2)`, and it leaves a coefficient-generic density
+`0.0763116...` missed by every seed--seed chord and every one-repair-legal seed--repair chord.
+Next derive the repair--repair incidence character and impose that both endpoints lie in an
+arc-legal independent domain; a larger fixed-field census is not the gate.
 
 ## C201 input
 
