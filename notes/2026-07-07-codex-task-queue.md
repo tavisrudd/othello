@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C264.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C273.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -21,6 +21,7 @@ unless they retain an explicit open tail.
 
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 - **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
+- **C270 `[build-sys]` [QUEUED]** — public mirror / first extraction ("do this first", `papers/papers-planning.md`): tagged public `FiniteGeom` base repo pinned by commit + the Lean-complete mirror outcomes, unblocking the nofil public-artifact citation (per the *Arcs vs Nofil* ruling), OEIS `%H` links, and arXiv posting; peg is a judgment call pending user confirmation → `notes/2026-07-17-c270-finitegeom-public-extraction.md`.
 
 ### `cap`
 
@@ -51,6 +52,12 @@ unless they retain an explicit open tail.
 - **C212 `[clebsch-next]` [QUEUED; after C211]** — Coxeter-arrangement codes and decoder-tomography reconstruction/classification theorem → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
 - **C213 `[clebsch-next]` [QUEUED FALSIFICATION GATE]** — exact Clebsch-cubic/`E6` incidence test for `12+15`, Brianchon/Eckardt, and five-object structures → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
 
+### `continuation`
+
+- **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
+- **C272 `[continuation]` [QUEUED]** — N1 manuscript draft per ruling D3: N1 headline (four-point-frame semilinear-rigidity Thm 7.4), N2 as a remarks subsection out of the abstract and contributions, extremal m(k),r(k) stated as open → `notes/2026-07-17-c272-continuation-n1-manuscript.md`.
+- **C273 `[continuation]` [QUEUED]** — build the `ContinuationRigidity` Lean library per the Phase 3 plan (implement, do not re-decide it); collaborator route is the recorded fallback if formalization stalls per the #7 gate → `notes/2026-07-17-c273-continuation-lean-library.md`.
+
 ### `cubic`
 
 - **C116 `[cubic]` [STARTED/DEFERRED]** — exact TO/RC/IC transversal spectra; resume with HiGHS → `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`.
@@ -76,6 +83,14 @@ unless they retain an explicit open tail.
 - **C177 `[gem-mining]` [QUEUED FOLLOW-ON]** — generalized-hexagon connection.
 - **C193 `[gem-mining]` [OPEN ILL GATE]** — obtain/read the remaining BSW source.
 
+### `nofil`
+
+- **C265 `[nofil]` [QUEUED]** — write the projective mirror-outcomes section into `notes/paper-sumfree-capgame/main.tex` per ruling D1 (FOLD): integrate the Lean-proved mirror⇒P projective theorems (PG(n,2), elliptic Q⁻, even-q planes, hyperbolic quadrics), retire the manuscript's "projective case open" framing, and clear the DRAFT flags and placeholder title/author block → `notes/2026-07-17-c265-nofil-projective-section.md`.
+- **C266 `[nofil]` [QUEUED]** — implement the recorded sharpness-negative release gate (do not re-decide it): Scharlau/Witt-transfer lemma to make the elliptic Q⁻ method-negative airtight, plus boundary negatives and capacity-2 sharpness to the recorded internal gate (parabolic + Hermitian negatives already rigorous) → `notes/2026-07-17-c266-nofil-sharpness-witt-transfer.md`.
+- **C267 `[nofil]` [QUEUED]** — close the novelty audit's open diligence item: obtain and verify the Clark–Mancini–Van Hook full text, then harden or retain the qualified "to our knowledge / first" language per the audit's instruction → `notes/2026-07-17-c267-nofil-novelty-clark-mancini-vanhook.md`.
+- **C268 `[nofil]` [QUEUED]** — create the `lean/TRUST.md`-standard trust ledger for `lean/ProjectiveCap/` + `lean/CapGame/` (axiom audit, no-`sorry`/no-`native_decide` statement, adequacy notes) → `notes/2026-07-17-c268-nofil-projectivecap-trust-ledger.md`.
+- **C269 `[nofil]` [QUEUED]** — full-manuscript pass to the arcs/clebsch release bar: complete LaTeX+PDF, adversarial review, repeated cold-prose review → `notes/2026-07-17-c269-nofil-latex-adversarial-review.md`.
+
 ### `relconic`
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
@@ -87,7 +102,7 @@ unless they retain an explicit open tail.
 
 ### `rp-next`
 
-- **C259 `[rp-next]` [QUEUED; next]** — turn the harvest map into execution-ready manuscript/product handoff packets with destinations, owners, prerequisites, validation gates, and stop conditions, then close the lane → `notes/2026-07-17-c259-rp-next-execution-packets.md`.
+- No open tasks.
 
 ### Dormant / handoff-owned lanes
 
