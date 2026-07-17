@@ -2443,3 +2443,74 @@ Frozen output:
 2518e3b1366a2e1023c85ea0a75b225d1f3d546e7f6da726996544bc9d04c334  analyze_c210_seed_cross_repair_curve.py
 5098b20640fd7b53169aafb270facaf42bcbe0fa92cda7279c6f9c263be17332  analyze_c210_seed_cross_repair_curve_output.txt
 ```
+
+## Cross-lane imports worth retaining
+
+The current resultant-curve gate remains first.  Recent results in other lanes do not classify
+(72), but two of them suggest the strongest route from ansatz-by-ansatz failures to a broader C210
+obstruction.
+
+### Exact defect accounting from the Baer lane
+
+[C135](2026-07-14-c135-baer-inverse-equality.md) proves an exact balance in which first-order
+capacity excess is precisely invisible orbit mass plus collision redundancy.  C210 has the same
+structural pieces: secants are the available capacity, points hit by no secant are invisible mass,
+and repeated secants through one external point waste capacity.  The appropriate transplant is an
+exact carrierwise identity on the external fibers of extended Baer lines, separating
+
+```text
+required external points missed
+  = nominal pair capacity lost to the conic
+    + invisible-fiber mass
+    + repeated-hit redundancy.                                (75)
+```
+
+This should refine, not merely restate, the global secant-count lower bound.  A useful theorem must
+couple the two correction terms using the Baer-fiber or trace geometry; an unstructured first- or
+second-moment inequality is not enough.
+[C150](2026-07-14-c150-q25-multiplicity-structure.md) is the explicit warning: in the
+alternate-orbit problem, separate moment bounds on invisibility and collision redundancy missed
+the sharp result because the needed information was their geometric coupling.
+
+The bounded probe after the two-coset disposition is therefore: define the pair-intersection
+charge map on each Baer-line fiber, derive the exact analogue of C135's balance, and test whether
+the arc condition forces a positive linear coupling between invisible mass and collision
+redundancy.  Promote this only if it yields a bound stronger than the existing global defect
+inequality for `k=c*s`; do not open a moment census for its own sake.
+
+### Secant-index hierarchy from C174
+
+[C174](2026-07-14-c174-general-six-subset-identity.md) proves for every six-arc in every finite
+projective plane that uncovered points trade exactly against triple concurrence of chords.  Its
+reusable content is the inclusion--exclusion interface: coverage is determined by the external
+secant-multiplicity distribution.  For C210, where `k=Theta(s)` rather than six, higher concurrence
+moments enter and the six-arc closed formula does not transfer directly.  It can nevertheless
+supply the local algebra behind (75): organize each fiber's covered-point indicator through
+factorial moments of its secant multiplicities, then seek an arc- or trace-specific bound on the
+resulting collision terms.
+
+The Baer identity and C174 hierarchy should be developed together if the current two-coset route
+closes.  Separately, each is too coarse: C135 supplies the right defect decomposition but not the
+C210 geometry, while C174 supplies exact multiplicity accounting but no asymptotic control of the
+higher moments.
+
+### Lower-priority transplants and stop conditions
+
+- The Baer/alternate-orbit robust-exchange theorems suggest a different construction architecture:
+  begin with a high-coverage set and exchange Frobenius pairs to remove collisions.  Do not promote
+  it until one bounded test shows an exchange invariant or monotone potential that preserves
+  off-conic coverage; abundant legal replacements alone are insufficient.
+- RepairCodes transfer preserves complete bounded repair patterns inside concatenated codes, but
+  it does not preserve rank three, a projective plane, or one prescribed conic.  It is not a direct
+  finite-seed-to-C210-family theorem without a new geometry-preserving transfer statement.
+- The rp-next separator-response algebra becomes relevant only if a future construction splits
+  into bounded-interface Baer fibers or cosets.  The present quadratic layers are globally coupled
+  by field equations.  Sequential Horn closure must not replace C210's one-secant coverage rule.
+- Clebsch-style orbit and coherent-configuration methods may explain exceptional small fields or
+  reduce a finite coefficient classification.  They do not by themselves control the infinite
+  asymptotic scale.
+
+Thus the post-two-coset conceptual fallback is not another repair polynomial or larger census.  It
+is the combined Baer/C174 question: can the arc condition force enough repeated-hit redundancy or
+invisible-fiber mass that `Theta(s)` selected points cannot cover every required fiber at the
+counting threshold?
