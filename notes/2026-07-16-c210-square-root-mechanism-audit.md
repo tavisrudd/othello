@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — generic quadratic repairs obstructed; exceptional locus next
+**Status**: ACTIVE — q=64 exceptional slice classified; actual joint monodromy-drop locus next
 
 ## Boundary from the literature
 
@@ -1371,13 +1371,11 @@ coefficient-generic density
 ```
 
 This closes generic quadratic repair coefficients: even the full repair layer is not affine
-complete, and deleting repair points cannot add coverage.  It does not yet close every quadratic
-family.  The q=64 complete layers themselves lie on an exceptional monodromy-drop locus, and a
-field-varying coefficient family could in principle remain inside such a locus.  The next gate is
-to classify the coefficient conditions under which (27) drops enough to eliminate the Frobenius
-class in (28), then compare every surviving component with the already-closed three frozen scalar
-extensions.  If no new positive-dimensional component survives, the quadratic repair mechanism is
-fully closed and C210 should move to nonquadratic graphs or another Baer-transversal design.
+complete, and deleting repair points cannot add coverage. It does not yet close every quadratic
+family: a field-varying coefficient family could in principle remain inside a proper joint-
+monodromy locus. The next gate must distinguish genuine monodromy drop from small-field arithmetic
+coverage before classifying those coefficient conditions; the twenty-first gate performs that
+distinction for the q=64 layers.
 
 Reproduction:
 
@@ -1391,4 +1389,67 @@ Frozen output:
 ```text
 f4efb70bde75e8a417051f8d634ffb4a1f72688c869e353d837b70ea2596e479  analyze_c210_repair_repair_coverage.py
 9bdbb50a57774b2f930ac5fbcaa47bd56473c82e171c997aa86a7017a2f18fa4  analyze_c210_repair_repair_coverage_output.txt
+```
+
+## Twenty-first coordinate gate: q=64 completeness is not a degree-seven monodromy drop
+
+The phrase “the q=64 complete layers lie on an exceptional monodromy-drop locus” was too strong.
+Completeness over one finite field is an arithmetic fiber statement and does not imply geometric
+monodromy drop. The exact coefficient slice now separates those notions.
+
+Translate the repair parameter so that `eta0=0`. This is an exact quotient, not a sampling
+normalization: the remaining quadratic graph is
+
+```text
+eta=omega*eta1,
+g(r)=c0+omega*(a1*r^2+b1*r+c1),
+eta1!=0.
+```
+
+Exhausting all `7*8^4=28,672` normalized tuples gives 551 graphs whose full secant set covers every
+affine point outside the conic and 550 that cover the whole affine plane. These coverage-only
+counts include degenerate and collision-illegal graphs. Imposing conic avoidance and exact
+no-three-collinear legality on the full 24-point layer leaves exactly twelve graphs; all twelve are
+affine-complete and are precisely the previously known survivors.
+
+The twelve legal points split into three four-point blocks. In each block
+`(eta1,a1,b1,c0)` is fixed and
+
+```text
+c1 -> c1 + a1*d^2 + b1*d,       d in GF(8).             (29)
+```
+
+has four distinct values. Thus every legal q=64 exceptional block is exactly the subfield-
+translation orbit of one frozen representative; there is no fourth rational component hidden by
+the earlier raw parameterization. Since the translation is in the seed stabilizer and is defined
+over every scalar extension, the already-closed three frozen scalar-extension families also close
+these translated blocks.
+
+More importantly, each frozen representative has an exact interior double-branch witness for the
+degree-seven `A`--repair cover. The derivative gcd is `(r+rho)^2`, the residual factor is squarefree
+and avoids `rho`, and the incidence point above `rho` is unique. The fixed-coefficient incidence
+source is rational and geometrically connected, so transitivity in prime degree together with this
+transposition gives geometric and arithmetic `S7` for every orbit. The three q=64 layers therefore
+do **not** lie on the degree-seven monodromy-drop locus. Their q=64 coverage is a small-field
+arithmetic exception compatible with full `S7`, exactly as the frozen extension obstructions
+suggested.
+
+This corrects the next gate. One must first specialize the **full joint** group (27) at the three
+representatives and determine whether any lower factor or coupling drops; one cannot infer such a
+drop from q=64 completeness. After that, classify the genuine coefficient-space drop divisors and
+their intersections. The known q=64 points supply full-`S7` control points, not presumed points on
+those divisors. A larger plane census still does not answer this symbolic question.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_exceptional_quadratic_locus.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_exceptional_quadratic_locus_output.txt`.
+
+```text
+7f2be80466f6d4d224f3d843d5993f59913ebf05be3c8cac0812cbe6672a40ff  analyze_c210_exceptional_quadratic_locus.py
+51f17198f87cf1ede32f552acadfded1ff1281959858d881c0792cadd8127061  analyze_c210_exceptional_quadratic_locus_output.txt
 ```

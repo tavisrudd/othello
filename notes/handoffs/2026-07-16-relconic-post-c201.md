@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — generic quadratic repairs obstructed; exceptional locus next
+**Status:** C210 ACTIVE — q=64 exceptional slice classified; actual joint monodromy-drop locus next
 
 ## Current state
 
@@ -113,9 +113,14 @@ by the `build-sys` lane.
    seed--seed chord and every one-repair-legal seed--repair chord. Repair--repair coverage is one
    independent Artin--Schreier character, halving the full uncovered density to `0.0381558...`.
    Thus even the coefficient-generic full repair layer is not affine-complete, and thinning cannot
-   help. Next classify the exceptional monodromy-drop locus containing the q=64 complete layers,
-   and compare each positive-dimensional component with the already-closed frozen scalar
-   extensions. Do not replace this symbolic gate with a larger plane census. See
+   help. The normalized q=64 coefficient slice now has exactly twelve legal affine-complete graphs,
+   namely the three known four-point translation blocks; those translation families are already
+   covered by the frozen scalar-extension closure. However, all three representatives retain full
+   geometric and arithmetic `S7` for the degree-seven seed--repair cover. Their q=64 completeness
+   is therefore a small-field arithmetic exception, not a degree-seven monodromy drop. Next
+   specialize the full joint group (including the second seed color, collision wreath factors,
+   seed-only covers, and repair character) at all three representatives, then classify the genuine
+   coefficient-space drop divisors. Do not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — generic quadratic repairs obstructed; exceptional locus next
+**Status**: ACTIVE — q=64 exceptional slice classified; actual joint monodromy-drop locus next
 
 ## Objective
 
@@ -82,9 +82,15 @@ colors and the seed--seed secant schemes is
 `0.0763116...` missed by every seed--seed chord and every one-repair-legal seed--repair chord.
 Repair--repair coverage is one independent Artin--Schreier character, so even the full repair layer
 misses density `0.0381558...`; thinning cannot repair it. Generic quadratic coefficients are
-therefore obstructed. Next classify the exceptional monodromy-drop locus containing the q=64
-complete layers and compare its positive-dimensional components with the already-closed frozen
-scalar extensions; a larger fixed-field census is not the gate.
+therefore obstructed. The exact normalized q=64 coefficient slice has now been classified: all
+twelve legal affine-complete graphs are the three known four-point subfield-translation blocks, so
+their translation families add nothing beyond the already-closed frozen scalar extensions. A
+critical premise also changed: each frozen representative retains geometric and arithmetic `S7`
+for the degree-seven seed--repair cover, certified by an exact simple branch. Hence q=64
+completeness is a small-field arithmetic exception, not evidence that these points lie on the
+degree-seven monodromy-drop locus. Next specialize the full joint group at all three representatives
+to test the remaining factors and couplings, then classify the genuine coefficient-space drop
+divisors; a larger fixed-field census is not the gate.
 
 ## C201 input
 
