@@ -1988,6 +1988,39 @@ Frozen output:
 `papers/arcs_complete_outside_conic/analyze_c210_external_ramification_collision_output.txt`.
 
 ```text
-5ce3b80031e7353f348c4c56578b9999492ccfb8462420f046afe1bb9e7ad020  analyze_c210_external_ramification_collision.py
-1886b3a7bf99a64e899bfbf2632d35f09d7d9f1a6b367f245e1aef26e0d5b3cb  analyze_c210_external_ramification_collision_output.txt
+62b439970626ca2e328896eaee3546c2731239eac084d944062ab69af0ed34d3  analyze_c210_external_ramification_collision.py
+6b1c6607b8c5f96c5c5b3e2a8b432b73c3a00f88e42de8961c2bb66f6eeb54cd  analyze_c210_external_ramification_collision_output.txt
 ```
+
+## Thirty-first coordinate gate: the subresultant boundary is disjoint from the known source
+
+The linear subresultant has additional exact structure.  Its constant term `L0` is divisible by
+`u`, while
+
+```text
+L1|_(u=0) = s*(lambda+1)^2*Norm(D).                      (47)
+```
+
+Every factor on the right is nonzero on the selected section.  Hence the denominator boundary
+`L1=0` cannot approach the known source `u=v=0`; it is a purely external chart and needs no further
+known-root saturation.
+
+The constant coefficient of the already-saturated 111-term collision resultant is also exact:
+
+```text
+lambda*(lambda+1)^2*Norm(D)
+  *(s^2*Norm(D)+s*e*b1*(s+b1)+lambda*b1^2*Norm(D)).      (48)
+```
+
+Thus the `u=0` behavior contains only the displayed open-set factors and one additional expression
+linear in `lambda` when `b1!=0`; it hides no coefficient-only component.  The corresponding
+coefficient of the saturated external-ramification equation has 220 terms and stable digest
+
+```text
+52da40d7b031044b8b5252584560c042fdbe384ba2dbad10a6982d8a3336191b.
+```
+
+The next computation can therefore treat `L1!=0` and `L1=0` as genuinely disjoint external charts.
+On the generic chart, reduce the degree-eighteen saturated ramification polynomial modulo the
+degree-five collision polynomial before taking the final resultant; on the boundary, impose
+`L0=L1=0` and eliminate `v` directly.

@@ -149,8 +149,10 @@ by the `build-sys` lane.
    differences `u=r'+r`, `v=d'+d` give two quadratic target-collision equations and one quintic
    ramification equation in `v`, independent of `k`, seed color, and the original `r`. After the
    known `u^2` source factor is removed, the collision resultant has 111 terms and degree five in
-   `u`. Next eliminate `u` against the saturated external-ramification equation and cover the
-   `L1=0` subresultant boundaries. See
+   `u`. The linear subresultant satisfies `L0=u*M0` and
+   `L1|_(u=0)=s*(lambda+1)^2*Norm(D)`, so its `L1=0` boundary is disjoint from the known source.
+   Next pseudo-reduce the saturated degree-eighteen ramification equation modulo the degree-five
+   collision polynomial on `L1!=0`, then handle `L0=L1=0` directly. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

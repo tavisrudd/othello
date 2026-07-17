@@ -116,6 +116,13 @@ After removing the known `u^2` source factor, the collision resultant has `111` 
 five in `u`.  The next gate is its exact resultant with the saturated external-ramification
 equation, plus the linear-subresultant boundary charts.
 
+The first boundary artifact is now removed exactly: `L0` has factor `u`, but
+`L1|_(u=0)=s*(lambda+1)^2*Norm(D)` is nonzero on the chosen section.  Therefore `L1=0` is a purely
+external chart, disjoint from the known source.  The saturated collision polynomial's constant
+coefficient is also explicit and has no coefficient-only factor.  Next pseudo-reduce the
+degree-eighteen ramification equation modulo the degree-five collision polynomial on `L1!=0`, and
+handle `L0=L1=0` separately.
+
 ## C201 input
 
 C201 closed its bounded q=64 gate without an infinite theorem.  Its usable

@@ -128,6 +128,17 @@ def main() -> None:
     # identity A2*Res=A2*L0^2+A1*L0*L1+A0*L1^2 exactly.
     L1 = add(mul(C0[2], C1[1]), mul(C1[2], C0[1]))
     L0 = add(mul(C0[2], C1[0]), mul(C1[2], C0[0]))
+    assert min(monomial[u_index] for monomial in L0) == 1
+    norm_D = add(square(d), mul(d, e), square(e))
+    L1_at_known_source = {
+        monomial: scalar
+        for monomial, scalar in L1.items()
+        if monomial[u_index] == 0
+    }
+    expected_L1_at_known_source = mul(
+        mul(s, square(add(lam, ring.one))), norm_D
+    )
+    assert L1_at_known_source == expected_L1_at_known_source
     quadratic_identity = add(
         mul(C0[2], resultant),
         mul(C0[2], square(L0)),
@@ -158,6 +169,30 @@ def main() -> None:
         )
     assert len(external_ramification) == 8866
     assert min(monomial[u_index] for monomial in external_ramification) == 2
+
+    def coefficient_after_u_saturation(poly, valuation):
+        out = {}
+        for monomial, scalar in poly.items():
+            if monomial[u_index] != valuation:
+                continue
+            reduced = list(monomial)
+            reduced[u_index] = 0
+            out[tuple(reduced)] = scalar
+        return out
+
+    collision_at_known_source = coefficient_after_u_saturation(resultant, 2)
+    expected_collision_at_known_source = mul(
+        mul(mul(lam, square(add(lam, ring.one))), norm_D),
+        add(
+            mul(square(s), norm_D),
+            mul(mul(mul(s, e), b), add(s, b)),
+            mul(mul(lam, square(b)), norm_D),
+        ),
+    )
+    assert collision_at_known_source == expected_collision_at_known_source
+    ramification_at_known_source = coefficient_after_u_saturation(
+        external_ramification, 2
+    )
 
     def degree_vector(poly):
         return {
@@ -201,6 +236,18 @@ def main() -> None:
             "L0_term_count": len(L0),
             "L1_term_count": len(L1),
             "common_root": "v=L0/L1",
+            "L0_known_source_factor": "u",
+            "L1_at_u_zero": "s*(lambda+1)^2*Norm(D)",
+        },
+        "known_source_boundary": {
+            "saturated_collision_at_u_zero":
+                "lambda*(lambda+1)^2*Norm(D)*(s^2*Norm(D)+s*e*b*(s+b)+lambda*b^2*Norm(D))",
+            "saturated_external_ramification_term_count_at_u_zero":
+                len(ramification_at_known_source),
+            "saturated_external_ramification_sha256_at_u_zero":
+                digest(ramification_at_known_source),
+            "consequence":
+                "L1=0 cannot meet the known source on the selected open set; its boundary chart is purely external",
         },
         "external_ramification_after_substitution": {
             "term_count_before_u_saturation": len(external_ramification),
