@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — thinned-domain affine-coverage gate
+**Status:** C210 ACTIVE — coverage candidate-hypergraph gate
 
 ## Current state
 
@@ -82,8 +82,14 @@ by the `build-sys` lane.
    `11s/840-O(sqrt(s))` repair points. Together with the quadratic divided-difference condition,
    this closes every arc-legality gate for the partial-domain mechanism. Next analyze affine
    coverage after this thinning; in particular, determine whether seed--repair secants from such a
-   sparse domain can cover the residue left by the two full seed layers. Do not widen the order
-   census before deriving that symbolic count. See
+   sparse domain can cover the residue left by the two full seed layers. The exact q=64 audit shows
+   that naive thinning fails maximally: among 288 seed-uncovered affine targets, 80 have singleton
+   repair candidates, every repair parameter is forced by at least eight targets, and only the full
+   repair layer covers. The general seed--repair collinearity condition now splits into two cubic
+   coordinate equations in `(r,t)`. Next classify their common-component targets and the resulting
+   singleton/small candidate hyperedges over `GF(8^m)`, then test whether those hitting constraints
+   admit an independent transversal in the degree-six collision graph. Do not widen the order
+   census before this symbolic classification. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

@@ -798,3 +798,57 @@ Frozen output:
 4a79b9cd4ddaf2e6d555bff0c6af000d3af2edd42fdeda85e477d2a5a2c342f7  analyze_c210_two_repair_graphs.py
 973ba28352f18a06e536f1a89577508079485a2938b915e1ce303ebbff2810ae  analyze_c210_two_repair_graphs_output.txt
 ```
+
+## Thirteenth coordinate gate: coverage does not inherit under naive thinning
+
+Arc legality survives a positive-density thinning, but the known affine-coverage certificate does
+not. For a target `P(y,h)`, a repair point `P(x,g)`, and a seed point `P(t,c_seed)`, the exact
+height-coordinate collinearity equation is
+
+```text
+(t+x)*((y+x)^2+h+g) + (y+x)*((t+x)^2+c_seed+g) = 0.       (12)
+```
+
+Here `x=eta+r`, `g=g(r)`, and `r,t in F`. Splitting (12) in the
+`F+F*omega` basis gives two equations of total degree at most three in `(r,t)`. Thus affine
+coverage by a partial repair domain is a bounded-rank candidate-hypergraph problem, not a direct
+consequence of the positive density in (11). Generic targets have at most nine `(r,t)` solutions by
+Bézout; targets for which the two coordinate equations share a component require separate
+classification.
+
+The exact q=64 audit makes the obstruction concrete without widening the order census. With the
+two seed layers frozen, they cover 3,808 of the 4,096 affine points. For each of the remaining 288
+targets, record the set of repair parameters whose `AR` or `BR` secants contain it. The candidate
+set-size distribution is
+
+```text
+size       1    2    3    4    5
+targets   80   80   72   48    8.
+```
+
+Every one of the eight repair parameters is the unique candidate for at least eight targets.
+Exhausting all 256 repair subsets confirms that only the full repair layer covers the affine plane;
+the best proper subset still misses eight affine points. This explains why the q=64 complete arc
+cannot simply be thinned according to (11). It does **not** obstruct asymptotic partial domains:
+outside q=64 the collision graph supplies alternative parameters for omitted repair points, and
+the candidate hyperedges themselves change with the extension field.
+
+The next gate is now precise. Classify the common-component cases of the two coordinate equations
+from (12), then determine the forced singleton and small candidate hyperedges over
+`F=GF(8^m)`. The partial-domain route survives only if their hitting constraints admit an
+independent transversal in the degree-six collision graph. No affine-completeness claim is made
+before that hypergraph compatibility is proved.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_thinned_coverage.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_thinned_coverage_output.txt`.
+
+```text
+7ad1d0820688d2c81e089b8f5a5c84d839daebbd97aa13ab89d59eb30ee815e2  analyze_c210_thinned_coverage.py
+8893b06709383647ab990e47bd640e23fc34721bc977e2946650871638648452  analyze_c210_thinned_coverage_output.txt
+```
