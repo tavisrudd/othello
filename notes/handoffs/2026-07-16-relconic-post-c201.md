@@ -66,6 +66,8 @@ before any new Lean edit, generator run, build, or staleness probe.
 
 ## Durable companions
 
+- C210 incidental-discovery track:
+  [`2026-07-16-c210-discovery-track.md`](../2026-07-16-c210-discovery-track.md)
 - C201 discovery track:
   [`2026-07-16-c201-discovery-track.md`](../2026-07-16-c201-discovery-track.md)
 - live global queue:
