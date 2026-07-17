@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — every rational coverage image retains simple branch; extension-field divisors next
+**Status**: ACTIVE — known geometric lower-factor strata and the arithmetic twist retain simple coverage branch; unknown image divisors next
 
 ## Boundary from the literature
 
@@ -1783,4 +1783,55 @@ Frozen output:
 ```text
 3a21781ac5c91dcf94b68b10796e68740a621c48d145981cf02ce7f19f915e29  analyze_c210_coverage_branch_images.py
 f749b73d111f8356a13ebecfe5cdd3dfab1435c89394545d2862444a757da338  analyze_c210_coverage_branch_images_output.txt
+```
+
+## Twenty-seventh coordinate gate: known extension strata and the arithmetic twist survive
+
+The first extension-field check is deliberately coefficient-geometric rather than a larger plane
+census.  The reduced mixed-cover divisor (37) has two conjugate components
+
+```text
+k+omega*C=0,        k+omega^2*C=0,        C=e^2+sqrt(tau)*e,
+```
+
+and the rational audit in the preceding gate sees neither component generically.  Exact
+`GF(64)` closed-point witnesses now show that both seed--repair coverage covers retain a branch
+target with exactly one doubled repair root at a generic point of each component, at its
+intersection with `b1=0`, at both conjugate intersections with `e^2+k=0`, and at the resulting two
+conjugate triple intersections.  Thus no known geometric mixed-cover component, nor any of these
+lower-factor intersection strata, is contained in a simultaneous coverage-image drop locus.
+
+The omitted finite-field translation class is also closed at this branch gate.  For every
+`7*7*7*8=2744` rational quotient point with `e*a1*b1!=0`, choose a representative satisfying
+
+```text
+Tr(a1*c1/b1^2)=1.
+```
+
+For both seed colors, the exact degree-seven resultant again has derivative gcd precisely
+`(r+rho)^2`, squarefree residual quintic, and a unique seed parameter over `rho`.  The stable
+witness-table digests are
+
+```text
+A: 4102a9d58baacf0bd338042a5f4c25df2eba0fee7a95fa50d5ec49e8bc0efb09
+B: f603013a5e1941a58d69ee6f3687fb574d3db3ae1e494baddebb757195e9dc06
+```
+
+This does not classify unknown coverage image divisors: a new component disjoint from the known
+lower-factor locus could still occur over an extension.  The next gate remains elimination of the
+two branch images themselves.  What has changed is that intersections with (36)--(37) and the
+arithmetic twist no longer need to be carried as unresolved first-order candidates.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_extension_branch_strata.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_extension_branch_strata_output.txt`.
+
+```text
+1f0b1d2e196fd42b1f2a71b26423ee78f438790772588dad5fcd7b73bc489d98  analyze_c210_extension_branch_strata.py
+f0e913e6d2eec79c18e9988269b0dccc2d394cd45a0dd561ff2b7cee68308d11  analyze_c210_extension_branch_strata_output.txt
 ```

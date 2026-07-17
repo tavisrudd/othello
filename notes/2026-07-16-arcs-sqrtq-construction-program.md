@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — q=64 exceptional slice classified; actual joint monodromy-drop locus next
+**Status**: ACTIVE — known extension strata and arithmetic twist retain simple coverage branch; unknown image divisors next
 
 ## Objective
 
@@ -91,6 +91,14 @@ completeness is a small-field arithmetic exception, not evidence that these poin
 degree-seven monodromy-drop locus. Next specialize the full joint group at all three representatives
 to test the remaining factors and couplings, then classify the genuine coefficient-space drop
 divisors; a larger fixed-field census is not the gate.
+
+Those specialization and lower-factor gates are now closed.  Both conjugate geometric components
+of the mixed-cover Hasse divisor, their `b1=0` intersections, and their conjugate critical/triple
+intersections retain exact simple coverage-branch witnesses for both seed colors over `GF(64)`.
+The trace-one translation twist likewise retains such witnesses at all `2744` applicable rational
+quotient coefficients.  The remaining gate is therefore the symbolic elimination/classification
+of genuinely new coverage image divisors; known lower factors and the twist are no longer candidate
+components.
 
 ## C201 input
 

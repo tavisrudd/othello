@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — rational coverage images retain simple branch; extension-field divisors next
+**Status:** C210 ACTIVE — known extension strata and twist retain simple coverage branch; unknown image divisors next
 
 ## Current state
 
@@ -134,12 +134,15 @@ by the `build-sys` lane.
    inseparable on the `GF(8)` repair stratum, and they cannot coalesce on any coefficient stratum:
    their difference has the coefficient-independent term `tau^4*y1`. Every one of the `3136`
    rational quotient coefficients now has an exact simple branch-image witness for both seed
-   colors, including every rational point of the known mixed-cover divisors. Hence any remaining
-   genuine coverage drop must be visible only after extension-field elimination (or through the
-   untested arithmetic twist). Next classify those geometric image divisors, combine them with the
-   lower-factor components, restore the one arithmetic twist bit, and test whether any
-   resulting stratum can support an arc-legal affine-complete family over infinitely many odd
-   extensions. Do not replace this symbolic gate with a larger plane census. See
+   colors, including every rational point of the known mixed-cover divisors. The two conjugate
+   geometric components of the mixed Hasse divisor, their `b1=0` intersections, and both conjugate
+   critical/triple intersections now also retain exact simple coverage-branch witnesses over
+   `GF(64)`. The omitted trace-one translation class retains such witnesses for both seed colors at
+   all `2744` applicable rational quotient coefficients. Thus the known lower factors and the
+   arithmetic twist are not coverage-drop components. Next eliminate the two branch images and
+   classify any genuinely new geometric image divisors, then test whether any resulting stratum can
+   support an arc-legal affine-complete family over infinitely many odd extensions. Do not replace
+   this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
