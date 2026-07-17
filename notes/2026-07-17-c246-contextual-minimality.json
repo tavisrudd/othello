@@ -1,0 +1,128 @@
+{
+  "conclusion": "realizable profiles are exactly positive projectively invariant truncated subadditive profiles; the fully abstract structural map is incoming convolved with local response",
+  "raw_response_nonminimality": [
+    {
+      "effective_response_agreements": 2,
+      "field": "GF(2)",
+      "left_extra_activation_at_masked_input": true,
+      "radius": 1,
+      "raw_response_differences": 1,
+      "realizable_inputs_checked": 2,
+      "separator_dimension": 1
+    },
+    {
+      "effective_response_agreements": 3,
+      "field": "GF(2)",
+      "left_extra_activation_at_masked_input": true,
+      "radius": 2,
+      "raw_response_differences": 1,
+      "realizable_inputs_checked": 3,
+      "separator_dimension": 1
+    },
+    {
+      "effective_response_agreements": 4,
+      "field": "GF(2)",
+      "left_extra_activation_at_masked_input": true,
+      "radius": 3,
+      "raw_response_differences": 1,
+      "realizable_inputs_checked": 4,
+      "separator_dimension": 1
+    },
+    {
+      "effective_response_agreements": 2,
+      "field": "GF(3)",
+      "left_extra_activation_at_masked_input": true,
+      "radius": 1,
+      "raw_response_differences": 1,
+      "realizable_inputs_checked": 2,
+      "separator_dimension": 1
+    },
+    {
+      "effective_response_agreements": 3,
+      "field": "GF(3)",
+      "left_extra_activation_at_masked_input": true,
+      "radius": 2,
+      "raw_response_differences": 1,
+      "realizable_inputs_checked": 3,
+      "separator_dimension": 1
+    },
+    {
+      "effective_response_agreements": 4,
+      "field": "GF(3)",
+      "left_extra_activation_at_masked_input": true,
+      "radius": 3,
+      "raw_response_differences": 1,
+      "realizable_inputs_checked": 4,
+      "separator_dimension": 1
+    }
+  ],
+  "realizability": [
+    {
+      "admissible_and_realized_profiles": 8,
+      "field": "GF(2)",
+      "fresh_padding_observer_checks": 12,
+      "maximum_columns_in_canonical_realizer": 3,
+      "ordered_unequal_profile_pairs_with_a_strict_coordinate": 37,
+      "projective_boundary_points": 3,
+      "radius": 1,
+      "scalar_invariant_positive_candidates": 8,
+      "separator_dimension": 2
+    },
+    {
+      "admissible_and_realized_profiles": 24,
+      "field": "GF(2)",
+      "fresh_padding_observer_checks": 48,
+      "maximum_columns_in_canonical_realizer": 6,
+      "ordered_unequal_profile_pairs_with_a_strict_coordinate": 393,
+      "projective_boundary_points": 3,
+      "radius": 2,
+      "scalar_invariant_positive_candidates": 27,
+      "separator_dimension": 2
+    },
+    {
+      "admissible_and_realized_profiles": 52,
+      "field": "GF(2)",
+      "fresh_padding_observer_checks": 117,
+      "maximum_columns_in_canonical_realizer": 9,
+      "ordered_unequal_profile_pairs_with_a_strict_coordinate": 1962,
+      "projective_boundary_points": 3,
+      "radius": 3,
+      "scalar_invariant_positive_candidates": 64,
+      "separator_dimension": 2
+    },
+    {
+      "admissible_and_realized_profiles": 16,
+      "field": "GF(3)",
+      "fresh_padding_observer_checks": 64,
+      "maximum_columns_in_canonical_realizer": 4,
+      "ordered_unequal_profile_pairs_with_a_strict_coordinate": 175,
+      "projective_boundary_points": 4,
+      "radius": 1,
+      "scalar_invariant_positive_candidates": 16,
+      "separator_dimension": 2
+    },
+    {
+      "admissible_and_realized_profiles": 59,
+      "field": "GF(3)",
+      "fresh_padding_observer_checks": 312,
+      "maximum_columns_in_canonical_realizer": 8,
+      "ordered_unequal_profile_pairs_with_a_strict_coordinate": 2643,
+      "projective_boundary_points": 4,
+      "radius": 2,
+      "scalar_invariant_positive_candidates": 81,
+      "separator_dimension": 2
+    },
+    {
+      "admissible_and_realized_profiles": 152,
+      "field": "GF(3)",
+      "fresh_padding_observer_checks": 904,
+      "maximum_columns_in_canonical_realizer": 12,
+      "ordered_unequal_profile_pairs_with_a_strict_coordinate": 18328,
+      "projective_boundary_points": 4,
+      "radius": 3,
+      "scalar_invariant_positive_candidates": 256,
+      "separator_dimension": 2
+    }
+  ],
+  "task": "C246"
+}
