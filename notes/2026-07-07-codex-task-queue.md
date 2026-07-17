@@ -70,13 +70,8 @@ unless they retain an explicit open tail.
 
 ### `relconic`
 
-- **C144 `[relconic]` [REPORTED 2026-07-16]** — per-lane validation gate sets and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
-- **C154 `[relconic]` [REPORTED 2026-07-16]** — Reed--Muller deep-hole residual closed with no variety-equality counterexample; the precise bounded-audit novelty posture survives → `notes/2026-07-16-c154-reed-muller-deep-holes.md`.
-- **C188 `[relconic]` [REPORTED 2026-07-16]** — q=5 exact relative-conic value; registry gate passed.
-- **C201 `[relconic]` [REPORTED 2026-07-16]** — q=16 quadratic anatomy classified; the bounded q=64 Baer, torus, and split-Z3 mechanisms fail at coverage before nontrivial rank anatomy, so no infinite theorem is promoted → `notes/2026-07-16-c201-bounded-mechanism-closure.md`.
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C210 `[relconic]` [ACTIVE; TWO-COSET EXCEPTIONAL LOCUS]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; the coefficient-generic trace-one collision curve is absolutely irreducible, `a=0` is the exact first degree-drop divisor but remains generically absolutely irreducible, and its `a=b=0` intersection closes all twelve normalized q=64 scalar seeds by degree-three collisions; coefficient-varying points on that intersection, lower factorization strata, and `H=J=0` containment remain before any affine-coverage test → `notes/2026-07-16-arcs-sqrtq-construction-program.md`, `notes/2026-07-16-c210-square-root-mechanism-audit.md`.
-- **C223 `[relconic]` [REPORTED 2026-07-16]** — closed the manuscript-original Lean seams without new searches: q=5 coordinate transport, q=16 `2630+3` profile and exceptional arithmetic, arbitrary-eight-arc classification plus quadratic pullback, and q=11 non-GRS implication → `notes/2026-07-16-c223-arcs-formal-closure.md`.
 
 ### `repaircodes`
 

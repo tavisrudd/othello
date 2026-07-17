@@ -4670,3 +4670,14 @@ untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 20
 - **C250 `[rp-next]` [REPORTED 2026-07-17]** — built and independently checked typed lineage, cheap-attack, and resolution lower-bound certificates, but proof-carrying plans, fault-tree cut sets, PB planning certificates, and LDFI already own every theorem-bearing component; retain the evidence boundary as product engineering, not a new formal object → `notes/2026-07-17-c250-proof-carrying-remediation-portfolios.md`.
 - **C251 `[rp-next]` [REPORTED 2026-07-17]** — built a deterministic blinded common-mode fixture in which exact causal selection strictly beats every best surface/generation-axis tie at equal marginal risk, while retaining the result only as a synthetic benchmark hypothesis because annotations and execution share one authored causal model → `notes/2026-07-17-c251-agent-remediation-common-mode-benchmark.md`.
 - **C252 `[rp-next]` [REPORTED 2026-07-17]** — decision-focused active fault discovery learns only dependency uncertainty capable of changing the selected remediation portfolio; the exact 16-model fixture strictly beats LDFI-style hazard enumeration, full-graph causal discovery, coverage, and random order, but targeted active learning already owns the acquisition objective, so retain the application translation only → `notes/2026-07-17-c252-decision-focused-fault-discovery.md`.
+
+## Archived 2026-07-17 from the live queue
+
+Moved verbatim from the live queue after completion reporting; relative links retain their original
+depth because this archive is in the same `notes/` directory.
+
+- **C144 `[relconic]` [REPORTED 2026-07-16]** — per-lane validation gate sets and atomic regeneration protocol → `notes/2026-07-14-c144-shared-library-gate-architecture.md`.
+- **C154 `[relconic]` [REPORTED 2026-07-16]** — Reed--Muller deep-hole residual closed with no variety-equality counterexample; the precise bounded-audit novelty posture survives → `notes/2026-07-16-c154-reed-muller-deep-holes.md`.
+- **C188 `[relconic]` [REPORTED 2026-07-16]** — q=5 exact relative-conic value; registry gate passed.
+- **C201 `[relconic]` [REPORTED 2026-07-16]** — q=16 quadratic anatomy classified; the bounded q=64 Baer, torus, and split-Z3 mechanisms fail at coverage before nontrivial rank anatomy, so no infinite theorem is promoted → `notes/2026-07-16-c201-bounded-mechanism-closure.md`.
+- **C223 `[relconic]` [REPORTED 2026-07-16]** — closed the manuscript-original Lean seams without new searches: q=5 coordinate transport, q=16 `2630+3` profile and exceptional arithmetic, arbitrary-eight-arc classification plus quadratic pullback, and q=11 non-GRS implication → `notes/2026-07-16-c223-arcs-formal-closure.md`.
