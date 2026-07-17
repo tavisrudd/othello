@@ -1,0 +1,68 @@
+{
+  "all_field_counting_formula": "block-free five-sets / all five-sets = (q-7)/(q-2) for q=3^h >= 9",
+  "claim": "q=9 exact nucleus switch; all characteristic-three q>=9 inert spanning separation; fixed five-seed one-round switch does not scale to q=27",
+  "fixed_seed_one_round_obstruction": "five seeds expose at most C(5,3)=10 curve targets in one round, while q-4 targets are missing",
+  "general_gating_identity": "if N is present or the curve seed contains a block, closure is N plus design closure; otherwise a nucleus-free block-free seed is inert",
+  "q9_exact_switch": {
+    "completion_multiplicity_per_missing_curve_point": {
+      "2": 2,
+      "4": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2
+    },
+    "contained_blocks": 0,
+    "missing_curve_points": 5,
+    "q": 9,
+    "seed": [
+      "infinity",
+      0,
+      1,
+      "x",
+      "2+x"
+    ],
+    "seed_rank": 5,
+    "with_nucleus_closure_size": 11,
+    "with_nucleus_parallel_rounds": [
+      [
+        2,
+        4,
+        6,
+        7,
+        8
+      ]
+    ],
+    "without_nucleus_closure_size": 5
+  },
+  "scaling_replays": [
+    {
+      "block_containing_five_sets": 180,
+      "block_free_five_sets": 72,
+      "block_free_fraction": "2/7",
+      "curve_point_count": 10,
+      "every_five_curve_points_span_rank_five": true,
+      "five_set_count": 252,
+      "harmonic_block_count": 30,
+      "missing_points_from_five_seed": 5,
+      "one_round_completion_from_five_seed_possible_by_count": true,
+      "one_round_distinct_target_upper_bound": 10,
+      "q": 9,
+      "strict_inert_spanning_witness_exists": true
+    },
+    {
+      "block_containing_five_sets": 19656,
+      "block_free_five_sets": 78624,
+      "block_free_fraction": "4/5",
+      "curve_point_count": 28,
+      "every_five_curve_points_span_rank_five": true,
+      "five_set_count": 98280,
+      "harmonic_block_count": 819,
+      "missing_points_from_five_seed": 23,
+      "one_round_completion_from_five_seed_possible_by_count": false,
+      "one_round_distinct_target_upper_bound": 10,
+      "q": 27,
+      "strict_inert_spanning_witness_exists": true
+    }
+  ],
+  "task": "C243"
+}
