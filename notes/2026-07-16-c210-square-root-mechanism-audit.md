@@ -1669,3 +1669,69 @@ Frozen output:
 974c8951bbee5f0d857935eafefe201a204c4a93a5340f368230a05ed24fb024  analyze_c210_coefficient_branch_divisors.py
 255f7fb968bd0ad6dff87a82dc0627f834d0c9bbcbfc052514bf3e0e811d23e5  analyze_c210_coefficient_branch_divisors_output.txt
 ```
+
+## Twenty-fifth coordinate gate: the coverage ramification sources are exact and distinct
+
+Expanding the degree-seven coverage discriminants directly is the wrong algebraic interface in
+characteristic two: the ordinary discriminant is a square, while a naive sparse Sylvester
+expansion obscures the much smaller ramification equation.  Work instead on the rational
+incidence source.  For repair parameter `r`, seed parameter `t`, target abscissa `y`, and one fixed
+seed height `z`, put
+
+```text
+x=eta+r,       D=x+t,       Y=y+t,       q=g(r)+z.
+```
+
+The height of the chord at `y` is
+
+```text
+h=z+Y^2+Y*(D+q/D).
+```
+
+Since `g'(r)=omega*b1` in characteristic two, clearing the common `D^2` denominator gives
+
+```text
+dh/dr = Y*(D^2+omega*b1*D+q),
+dh/dt = D^3+q*D+Y*(D^2+q).                              (38)
+```
+
+The branch source is therefore the coordinate determinant over `F`
+
+```text
+J_z=det_F(dh/dr,dh/dt)=0.                               (39)
+```
+
+On the translation quotient `eta0=1`, `c1=0`, `k=c0+1`, exact sparse expansion gives 222 terms
+for seed `A` and 238 for seed `B`.  Both have total degree eight and degree vector at most
+
+```text
+(eta1,a1,b1,k,y0,y1,r,t) = (5,2,2,2,2,2,5,5).
+```
+
+Neither ramification equation has all four source derivatives identically zero at any of the
+`3136` `GF(8)` repair-stratum coefficient points `eta1*a1!=0`.  More importantly, the two seed
+equations cannot merge on a coefficient stratum.  Their difference has only 35 terms, is
+independent of `a1`, and the coefficient of the bare target coordinate `y1` is the nonzero
+constant `tau^4`.  Hence `J_A-J_B` is never the zero polynomial, over any coefficient field or
+arithmetic twist.  A wholesale identification of the two degree-seven ramification covers is
+therefore not a coverage drop divisor.
+
+The checker reconstructs the degree-seven elimination resultants on the quotient and performs
+`540` direct incidence-plus-Jacobian evaluations for each seed color.  The remaining gate is to
+compute the images of (39), classify where either image discriminant loses generic simple branch,
+and then intersect only those genuine divisors with the mixed-cover components (36)--(37) and the
+arithmetic twist bit (34).
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_coverage_branch_discriminants.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_coverage_branch_discriminants_output.txt`.
+
+```text
+7a5b31ead2c4bc990443560cc437601cc5f27fe90bf6f127a40d2be61a3a6621  analyze_c210_coverage_branch_discriminants.py
+71df1c9115a48b8476f7b9f6cae282337cb070393b44e5fa9ac22d570ceb84a3  analyze_c210_coverage_branch_discriminants_output.txt
+```

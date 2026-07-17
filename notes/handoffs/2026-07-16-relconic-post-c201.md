@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — mixed `S5` drop divisors exact; degree-seven coverage divisors next
+**Status:** C210 ACTIVE — coverage ramification sources exact and distinct; their image divisors next
 
 ## Current state
 
@@ -129,9 +129,12 @@ by the `build-sys` lane.
    `eta1^2+c0+1=0`, and
    `k^2+C*k+C^2=0` for `k=c0+1`, `C=eta1^2+sqrt(tau)*eta1`; the last splits into two conjugate
    geometric components. Their intersections are classified, neither arithmetic twist changes
-   them, and all three q=64 blocks avoid them. Next compute the coefficient-space branch
-   discriminants for the two degree-seven seed--repair coverage covers, combine their divisors with
-   these lower-factor components, restore the one arithmetic twist bit, and test whether any
+   them, and all three q=64 blocks avoid them. The two degree-seven coverage covers now have exact
+   degree-eight ramification-source equations on the four-variable quotient. Neither is everywhere
+   inseparable on the `GF(8)` repair stratum, and they cannot coalesce on any coefficient stratum:
+   their difference has the coefficient-independent term `tau^4*y1`. Next compute the images of
+   those two source equations, classify their genuine simple-branch drop divisors, combine them
+   with the lower-factor components, restore the one arithmetic twist bit, and test whether any
    resulting stratum can support an arc-legal affine-complete family over infinitely many odd
    extensions. Do not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
