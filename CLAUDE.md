@@ -124,7 +124,9 @@ checks, finite-certificate sharding rules, and exact command forms.
 ## Intent-based mode and short commands
 
 Default mode is collaborative. `mi` enables intent-based mode for the rest of the current session;
-a handoff may persist it with `Mode: intent-based` under its date. `yc` means “your call.”
+a handoff may persist it with `Mode: intent-based` under its date. `yc` means “your call.” `vb`
+means “vibe check”: translate the technical evidence into an honest progress assessment, including
+momentum, risks, and likely route viability rather than merely reciting implementation status.
 
 In intent-based mode, state and take a decision only when it is reversible, already permitted,
 strongly lopsided (at least 80/20 from visible evidence), and does not change downstream shape.
