@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — generic coverage degree derived; arithmetic monodromy next
+**Status**: ACTIVE — generic coverage/collision wreath groups derived; joint coverage next
 
 ## Objective
 
@@ -73,8 +73,12 @@ hypergraph has sixty-eight empty target edges after one-repair legality filterin
 coefficient-space audit now proves that the generic seed--repair resultant has exact degree seven
 off `y1=0`, while at least one seed color has exact degree six on `y1=0`; both strata are generically
 separable. Thus the frozen empty edges are arithmetic rather than a universal degree collapse. The
-next route is generic arithmetic/geometric monodromy and collision-cover compatibility; a larger
-fixed-field census is not the gate.
+generic degree-seven cover now has arithmetic and geometric group `S7`, while the `y1=0`
+degree-six boundary has `S6`. Composing either with the one-repair collision group
+`H=S5 x C2 x C2` gives the full wreath product, so one seed color supplies a rational legal
+candidate for only about `8.76%` of coefficient-generic targets. Next compute the joint monodromy
+of both seed colors and the seed--seed secant schemes, and decide whether the simultaneous
+no-legal-repair class meets the seed-uncovered locus; a larger fixed-field census is not the gate.
 
 ## C201 input
 

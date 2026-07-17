@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — coefficient-space degree gate closed; arithmetic monodromy next
+**Status**: ACTIVE — generic coverage/collision wreath groups derived; joint coverage next
 
 ## Boundary from the literature
 
@@ -1100,4 +1100,103 @@ Frozen output:
 ```text
 bb750f220644fe7d8f1697bb8a4ea5318256a8f37247f4b3ae74cf1c7e4f12e2  analyze_c210_symbolic_coverage_resultant.py
 33e8188354b7997ea7833e2266cf5ffe176a13eff0047b2dcf7f98b3b0ed8afd  analyze_c210_symbolic_coverage_resultant_output.txt
+```
+
+## Eighteenth coordinate gate: generic coverage has full symmetric monodromy
+
+Fix one seed color and the quadratic repair coefficients, and retain the target coordinates as
+variables.  The seed--repair incidence source is rational: its coordinates are the repair
+parameter `r`, the seed parameter `t`, and the target horizontal coordinates `(y0,y1)`; the chord
+formula determines `(h0,h1)`.  Eliminating `t^2` between the two coordinate equations recovers `t`
+linearly over the generic resultant root.  Thus the degree-seven resultant from the seventeenth
+gate is the actual connected incidence cover, not a quotient with hidden seed-coordinate degree.
+In particular its geometric monodromy is transitive.
+
+One frozen `GF(8)` specialization certifies simple degree-two inertia.  With orbit-one
+coefficients, seed color `A`, and
+
+```text
+(y0,y1,h0,h1)=(0,1,0,tau^4),        r=tau^5,        t=tau,
+```
+
+the degree-seven resultant has
+
+```text
+gcd(P,P_r)=(r+tau^5)^2.
+```
+
+After removing that square, the residual factor is squarefree and nonzero at `tau^5`; the two
+original incidence quadratics have the unique common seed parameter `t=tau`.  Hence this is one
+ramified incidence point of exact fiber multiplicity two, so geometric inertia acts as a
+transposition.  A transitive group of prime degree seven is primitive, and a primitive subgroup
+containing a transposition is the full symmetric group.  Therefore both geometric and arithmetic
+monodromy are `S7`.  Equivalently, the generic coefficient-space degree-seven cover has full
+monodromy because its group contains this specialized `S7`.
+
+The boundary `y1=0` is similar but needs one extra group-theoretic witness.  The incidence source
+on that divisor remains rational and the relevant seed color has degree six.  At
+
+```text
+(y0,y1,h0,h1)=(0,0,1,1),            r=tau^3,        t=tau^3,
+```
+
+the resultant has one exact doubled root and one incidence point over it, again giving a geometric
+transposition.  At the unramified target `(0,0,0,1)`, its factor degrees are `[1,5]`, and `t` is
+linear over both repair residue fields.  Frobenius therefore supplies a genuine 5-cycle.  A
+5-cycle cannot preserve either nontrivial block system of a transitive degree-six action (blocks
+of size two or three), so the arithmetic group is primitive; the transposition forces `S6`.  The
+geometric group is normal in `S6` and contains that transposition, whose normal closure is `S6`.
+Thus both boundary groups are `S6`.
+
+These covers are also generically independent from the one-repair collision cover
+
+```text
+H = S5 x C2 x C2.
+```
+
+Pulling the collision cover back to the rational incidence source preserves its geometric group
+`H`.  For a collision branch value `r=rho`, the fixed-`rho` seed--repair incidence hypersurface is
+generically distinct from the corresponding hypersurfaces for every other repair value: equality
+would identically put two repair points and one seed point on a chord, contrary to the explicit
+bounded-degree collision equations.  Generic collision inertia is therefore supported on one
+candidate sheet.  The top `S7` or `S6` action conjugates that inertia through all sheets, giving
+
+```text
+degree-seven stratum:       H wr S7,
+degree-six boundary:        H wr S6
+```
+
+for both geometric and arithmetic composita.  The concrete coverage transpositions do not hide a
+quadratic sign coupling: their repair roots `tau^5` and `tau^3` avoid the four same-seed poles
+`{0,1,tau^2,tau^6}`, while every mixed-collision branch value lies outside `GF(8)`.
+
+The wreath group makes the coefficient-generic density transparent.  A candidate sheet is
+one-repair-legal on `44/480=11/120` of `H`.  If `sigma in S_n` is the top Frobenius, only its fixed
+sheets are rational, so one seed color has at least one rational legal candidate with density
+
+```text
+1 - (1/n!) * sum_sigma (1-11/120)^fix(sigma)
+ = 0.087590764727...     for n=7,
+ = 0.087590764716...     for n=6.
+```
+
+This is a compatibility theorem, not an affine-completeness theorem.  It says the generic
+coverage candidates do not correlate favorably with the one-repair survivor condition; roughly
+`8.76%` of generic targets are hit by a legal candidate from one seed color.  The next gate is the
+joint monodromy of the two seed colors together with the three seed--seed secant schemes.  It must
+decide whether the simultaneous no-legal-repair class meets the seed-uncovered locus.  A larger
+plane census would not answer that coefficient-space question.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_generic_coverage_monodromy.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_generic_coverage_monodromy_output.txt`.
+
+```text
+f193a7a642c52e28e715c7251dd2b9ebdeb3c8dea19aa7da5147f973616b26c0  analyze_c210_generic_coverage_monodromy.py
+127e6fc29257631e04f5b3229e621538a10bf56b4a4b8b55dca83e12bdcda238  analyze_c210_generic_coverage_monodromy_output.txt
 ```

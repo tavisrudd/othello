@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — generic coverage degree derived; arithmetic monodromy next
+**Status:** C210 ACTIVE — generic coverage/collision wreath groups derived; joint coverage next
 
 ## Current state
 
@@ -103,9 +103,13 @@ by the `build-sys` lane.
    scalar extension of the three q=64 quadratic orbits is closed. The coefficient-parametric
    resultant now has leading term `a1*y1*(a1^2+a1+1)`, hence exact degree seven off `y1=0`; on
    `y1=0`, the two seed-color degree-six coefficients differ by `a1*tau`, so one remains nonzero.
-   Squarefree specializations make both strata generically separable. Next compute the generic
-   arithmetic/geometric monodromy and its compatibility with the one-repair collision covers. Do
-   not replace this symbolic gate with a larger plane census. See
+   Squarefree specializations make both strata generically separable. The rational incidence
+   source and isolated double-root witnesses now force full arithmetic/geometric groups `S7` and
+   `S6`; composing with the one-repair collision group `H=S5 x C2 x C2` gives `H wr S7` and
+   `H wr S6`. One seed color therefore gives a rational legal candidate on only about `8.76%` of
+   coefficient-generic targets. Next compute the joint monodromy of both seed colors and all three
+   seed--seed secant schemes, then decide whether the simultaneous no-legal-repair class meets the
+   seed-uncovered locus. Do not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
