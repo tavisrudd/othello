@@ -92,10 +92,14 @@ by the `build-sys` lane.
    most nine candidates per seed color. A repair target has candidate hyperedge exactly
    `{r} union N_A(r) union N_B(r)`; after restricting to the one-repair survivor set, every maximal
    independent set in the induced degree-six collision graph covers all required repair targets
-   automatically. Next classify or control the
-   remaining generic hyperedges of size at most eighteen and prove that their hitting constraints
-   admit an independent subset of the positive-density one-repair survivor set. Do not widen the
-   order census before this symbolic hypergraph-compatibility gate. See
+   automatically. The q=64 non-repair singleton targets now give a much stronger extension
+   obstruction. Their two seed-color elimination schemes have extra odd closed-point degrees only
+   `3`, `5`, and `7`; for every repair parameter there is a forcing target of each pure type.
+   Hence affine coverage forces the full repair layer whenever `105` does not divide the odd
+   extension degree `m`, while that full layer is collision-obstructed for `m>1`. The only surviving
+   scalar-extension frontier is the infinite sub-tower `105 | m`. Next compute the candidate
+   hyperedges over the degree-`3`, `5`, and `7` residue fields and test their compatibility with
+   the collision graph symbolically. Do not run a `GF(8^105)` plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

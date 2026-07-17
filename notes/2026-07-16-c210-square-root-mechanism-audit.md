@@ -920,3 +920,53 @@ Frozen output:
 a31d24066f5aea18acbc248fc1fe9b9e7698c8f5100f3948ac95e04b1dd9119b  classify_c210_coverage_components.py
 03c88466b485f7b0e81dd7dd3571ead430666684bcef702ef98efecbb8d12e72  classify_c210_coverage_components_output.txt
 ```
+
+## Fifteenth coordinate gate: singleton persistence forces `105 | m`
+
+The q=64 singleton targets are not merely bounded-field noise. For each non-repair singleton, the
+two seed-color incidence schemes are zero-dimensional by the fourteenth gate. Factoring their
+degree-seven elimination resultants over `GF(8)` and then computing the seed-parameter residue
+degree gives the exact extension degrees at which new candidates appear.
+
+Among the seventy-two non-repair q=64 singleton targets, the sets of extra odd closed-point degrees
+have distribution
+
+```text
+extra odd degrees     {3}   {5}   {7}   {3,5}   {3,7}
+targets                28    16    16       8       4
+```
+
+Even residue degrees never enter `GF(8^m)` for odd `m`. More strongly, for every one of the eight
+repair parameters `r in GF(8)`, there is a singleton target of each pure type `{3}`, `{5}`, and
+`{7}`. Therefore:
+
+```text
+if 3 does not divide m, a type-{3} target forces every r;
+if 5 does not divide m, a type-{5} target forces every r;
+if 7 does not divide m, a type-{7} target forces every r.                 (15)
+```
+
+Thus affine coverage forces the entire `GF(8)` repair layer in every odd extension except possibly
+when `105 | m`. For `m>1`, that full layer is not arc-legal: the seventh and eighth gates produce a
+one-repair/two-seed collision for every `s=8^m>=16`. Consequently the partial-domain scalar
+extension mechanism is impossible for every odd `m` not divisible by `105`.
+
+This is a strong infinite-family obstruction, not yet a closure of the mechanism. The sub-tower
+`m=105*k`, `k` odd, is still infinite, and in it all three extra odd residue degrees occur. The next
+gate is purely finite-algebraic: over the degree-`3`, `5`, and `7` residue fields, determine the
+candidate hyperedges supplied by these persistent-target schemes and test their compatibility with
+the collision graph. No `GF(8^105)` plane census is needed or permitted.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_persistent_singletons.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_persistent_singletons_output.txt`.
+
+```text
+dcbf939c5eb43ded6efc660cf50137d84fcb54e12db5f15ff315904f2c6a749a  analyze_c210_persistent_singletons.py
+0131458b895aada1c115ddf1cb573e9056c2a693bfd626ba94d912a5ab81b8f9  analyze_c210_persistent_singletons_output.txt
+```
