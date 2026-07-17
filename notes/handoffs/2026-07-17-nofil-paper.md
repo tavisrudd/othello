@@ -44,8 +44,8 @@ sharpness-negative release gate, a cleared novelty audit, and adversarial + cold
   (C267).
 - No trust ledger for the finite-game Lean libraries (C268).
 - Manuscript has had no arcs/clebsch-bar review cycle and no PDF (C269).
-- Public-artifact citation the paper depends on is not yet minted; the first extraction is untracked
-  (C270, `[build-sys]`).
+- Public-artifact citation the paper depends on is not yet minted; the first extraction is C270,
+  owned here.
 
 ## Next steps
 
@@ -77,6 +77,7 @@ the manuscript; the `cap` lane owns the open math:
 The odd-plane kernel is the flagship's open-frontier section only (ruling D4); it does not gate the
 projective outcomes write-up.
 
-The public-mirror / first-extraction deliverable is `[build-sys]`-pegged (C270), not owned here, but
-gates this paper's public-artifact citation per the *Arcs vs Nofil* ruling. Its peg is a judgment
-call flagged for the user.
+The public-mirror / first-extraction deliverable (C270) is owned by this lane: the first extraction
+is the `FiniteGeom` base plus the Lean-complete mirror outcomes, and it gates this paper's
+public-artifact citation per the *Arcs vs Nofil* ruling. Re-pegged from `[build-sys]` on user
+approval, 2026-07-17.

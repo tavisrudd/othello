@@ -21,8 +21,6 @@ unless they retain an explicit open tail.
 
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 - **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
-- **C270 `[build-sys]` [QUEUED]** — public mirror / first extraction ("do this first", `papers/papers-planning.md`): tagged public `FiniteGeom` base repo pinned by commit + the Lean-complete mirror outcomes, unblocking the nofil public-artifact citation (per the *Arcs vs Nofil* ruling), OEIS `%H` links, and arXiv posting; peg is a judgment call pending user confirmation → `notes/2026-07-17-c270-finitegeom-public-extraction.md`.
-
 ### `cap`
 
 - **C13 `[cap]` [OPEN]** — q=9 intrusion structure / Lean target → `notes/2026-07-07-codex-q9-intrusion-probe.md`.
@@ -90,6 +88,7 @@ unless they retain an explicit open tail.
 - **C267 `[nofil]` [QUEUED]** — close the novelty audit's open diligence item: obtain and verify the Clark–Mancini–Van Hook full text, then harden or retain the qualified "to our knowledge / first" language per the audit's instruction → `notes/2026-07-17-c267-nofil-novelty-clark-mancini-vanhook.md`.
 - **C268 `[nofil]` [QUEUED]** — create the `lean/TRUST.md`-standard trust ledger for `lean/ProjectiveCap/` + `lean/CapGame/` (axiom audit, no-`sorry`/no-`native_decide` statement, adequacy notes) → `notes/2026-07-17-c268-nofil-projectivecap-trust-ledger.md`.
 - **C269 `[nofil]` [QUEUED]** — full-manuscript pass to the arcs/clebsch release bar: complete LaTeX+PDF, adversarial review, repeated cold-prose review → `notes/2026-07-17-c269-nofil-latex-adversarial-review.md`.
+- **C270 `[nofil]` [QUEUED]** — public mirror / first extraction ("do this first", `papers/papers-planning.md`): tagged public `FiniteGeom` base repo pinned by commit + the Lean-complete mirror outcomes, unblocking this paper's public-artifact citation (per the *Arcs vs Nofil* ruling), OEIS `%H` links, and arXiv posting → `notes/2026-07-17-c270-finitegeom-public-extraction.md`.
 
 ### `relconic`
 
