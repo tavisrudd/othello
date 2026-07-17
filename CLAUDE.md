@@ -254,6 +254,19 @@ All durable state lives in git-visible docs:
 - Companion `-archive.md` files are append-only history. Dated findings get their own `notes/` file.
 - Write current conclusions cleanly; put correction trails and superseded reasoning in the archive.
 
+**Hard completion invariant:** the live task queue is an allocation/open-work index, not a
+completion ledger. It must contain **no `[REPORTED ...]` rows and no other completed-task rows**.
+When a task completes, perform all of the following in the same coherent commit:
+
+1. append its completed row to `notes/2026-07-07-codex-task-queue-archive.md`;
+2. verify that its `C<id>` occurs there exactly once;
+3. delete its row from `notes/2026-07-07-codex-task-queue.md`; and
+4. update the owning lane's handoff.
+
+Archive first: if the completed row is not yet present in the companion archive, that is a blocker
+to deleting it, not a reason to leave `[REPORTED]` history in the live queue. Never transition a
+live queue row to `[REPORTED]`, even temporarily.
+
 Every task uses the global monotonic `CNN` sequence and is allocated in the live queue. Compute a new
 ID as `max(CNN in queue + handoffs + notes/) + 1`; never reuse or renumber a reported ID. Examples
 must use `C<id>`, never a concrete unallocated number.
