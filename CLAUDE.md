@@ -199,12 +199,14 @@ rg -n 'C210|210' ..
 - Never use broad `ps -eo`, repeated `ps`/`free`/`df`, `list_agents`, `wait`, or `write_stdin` as a
   progress dashboard. Use an unattended runner with disk-backed status and inspect one bounded
   milestone only after genuine uncertainty or a user request.
-- Enforce a hard polling budget for running tool cells. Call `functions.wait` only after the cell
+- **Codex only; Claude must ignore this item:** Enforce a hard polling budget for running tool
+  cells. Call `functions.wait` only after the cell
   has explicitly yielded a running ID, set `yield_time_ms` to 60000, and call it at most twice for
   that cell. If two waits do not complete it, do not poll it again: continue independent work or
   leave the job with a durable unattended status path. Start work expected to exceed that budget
   through an unattended runner in the first place; never shorten the timeout to manufacture updates.
-- Enforce a hard delegation-wait budget. Spawn agents only when useful independent local work can
+- **Codex only; Claude must ignore this item:** Enforce a hard delegation-wait budget. Spawn agents
+  only when useful independent local work can
   run concurrently, exhaust that work before waiting, then call `wait_agent` at most once per
   delegation batch with `timeout_ms: 60000`. If agents remain active, rely on their completion
   notifications or continue other work; do not call `wait_agent` again and do not use `list_agents`
