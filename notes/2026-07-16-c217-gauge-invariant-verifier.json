@@ -1,0 +1,66 @@
+{
+  "arbitrary_full_gauge_replay": "passed",
+  "c203_verifier_sha256": "d1fdb40212db483a27ac612992c34e9adb3c327c4186f52083045dc15833a035",
+  "coordinate_count": 20,
+  "cycle_rank": 581,
+  "distinguishing_anharmonic_orbits": [
+    [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    [
+      2
+    ]
+  ],
+  "distinguishing_examples": [
+    {
+      "holonomy": 3,
+      "parameters": [
+        0,
+        1,
+        2,
+        8
+      ]
+    },
+    {
+      "holonomy": 2,
+      "parameters": [
+        0,
+        1,
+        3,
+        4
+      ]
+    }
+  ],
+  "field_encoding": "GF(3)[x]/(x^2+1), base-3 coefficient encoding",
+  "finite_axis_cross_ratio_histogram": {
+    "2": 432,
+    "3": 432,
+    "4": 432,
+    "5": 432,
+    "6": 432,
+    "7": 432,
+    "8": 432
+  },
+  "finite_axis_ordered_cross_ratio_checks": 3024,
+  "fundamental_holonomy_count": 581,
+  "fundamental_holonomy_histogram": {
+    "1": 63,
+    "2": 66,
+    "3": 82,
+    "4": 72,
+    "5": 72,
+    "6": 82,
+    "7": 72,
+    "8": 72
+  },
+  "incidence_count": 840,
+  "incidence_graph_connected": true,
+  "q": 9,
+  "small_circuit_count": 240,
+  "task": "C217"
+}

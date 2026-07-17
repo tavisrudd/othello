@@ -159,6 +159,16 @@ whether it recovers projective cross-ratios on `P^1(F_9)`, distinguishes support
 monomially inequivalent realizations, or transfers covariantly under concatenation. Continue only
 if a nontrivial invariant has a classification or operational consequence.
 
+**Completed C217 result.** The circuit--coordinate incidence graph carries a multiplicative
+holonomy on every cycle. Fundamental-cycle holonomies for a spanning forest completely classify
+nonzero coefficient labelings up to circuit and coordinate gauges. On two overlapping axis
+triples, the four-cycle holonomy is the projective cross-ratio. Two four-point axis restrictions
+over `GF(9)` have the same `U(2,4)` repair supports but cross-ratios in distinct anharmonic orbits,
+so their row codes are not monomially equivalent. Embedded inner relations copy these invariants
+through C216 concatenation. The full q=9 small-circuit incidence graph has cycle rank 581, and an
+deterministic replay verifies all fundamental holonomies and 3024 ordered finite-axis cross-ratios.
+See [`2026-07-16-c217-gauge-invariants.md`](2026-07-16-c217-gauge-invariants.md).
+
 ### C218 — rational normal curves with osculating nuclei
 
 Classify pairs `(degree, characteristic)` for which a rational normal curve has a useful common

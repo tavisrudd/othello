@@ -3,8 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C215 is complete. C216's pointed replication theorem and scaled random/AG
-achievable regions are derived at manuscript level; its mathematical promotion gate is met.
+**Status:** ACTIVE. C215--C217 are complete. C217's circuit-incidence holonomies form a complete
+coefficient-gauge fingerprint, recover axis cross-ratios, and meet the mathematical promotion gate.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -22,18 +22,17 @@ twisted-cubic--axis paper.
 |---|---|---|---|
 | C215 | complete | weighted functional-dual theory | exact criterion plus a strict natural example |
 | C216 | complete; optional Lean wrapper deferred to build-system entry | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
-| C217 | bounded scout after C215 definitions | circuit-coefficient gauge invariants | nontrivial holonomy/cross-ratio with a consequence |
+| C217 | complete | circuit-coefficient gauge invariants | complete holonomy fingerprint, cross-ratio, and strict inequivalence example |
 | C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
 | C219 | queued | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
 | C220 | long-horizon | additive equality and stability | uniform inverse/stability theorem |
 
 ## Immediate next step
 
-Run C217's bounded gauge-invariant scout. Identify the first coefficient invariant that survives
-independent rescaling of code coordinates and repair equations, and require a concrete consequence
-beyond a restatement of circuit elimination. See
-[`2026-07-16-c216-prescribed-port-realization.md`](../2026-07-16-c216-prescribed-port-realization.md)
-for the closed C216 theorem and regions.
+Run C218's bounded rational-normal-curve nucleus scout. Classify the degree/characteristic pairs
+with a useful common osculating nucleus and require a genuinely new higher-degree repair family,
+not a catalogue of exceptional nuclei. C217 is closed in
+[`2026-07-16-c217-gauge-invariants.md`](../2026-07-16-c217-gauge-invariants.md).
 
 ## Scope and ownership
 
