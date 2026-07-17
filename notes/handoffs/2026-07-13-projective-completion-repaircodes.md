@@ -3,15 +3,50 @@
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: LANE COMPLETE; C214 PAPER UPGRADE AND C221/C224 FORMAL CLOSURE REPORTED. C111–C114 are proved, adversarially reviewed,
-and synchronized with the paper and registries. The sole deep formal dependency is the quarantined
-Stichtenoth theorem; external specialist citation-chain review remains a submission preflight gate,
-not a theorem gap. C214 added the exact weighted-functional obstruction, a strict Singer/SPC
-example beyond the old support-distance gate, and an explicit classical-enumerator boundary.
+**Status**: ACTIVE; PRE-ALLOCATION GATE — C274 froze packet M1's theorem crosswalk and rewrite bill,
+and C275 froze its deny-by-default clean-room publication manifest. The user selected
+separate clean-history repositories for each exported paper plus a new shared Lean monorepo backing
+all exported papers under `papers/`, because this monorepo contains substantial nonpublication
+material. No new M1 C-task is allocated until the user supplies or approves the paper repository
+identity/remote and license and decides whether C220 remains. No repository initialization, history
+transplant, or file export is allowed before those gates pass. The older C111–C114, C214, C221, and C224 formal program remains
+complete; its sole deep formal dependency is the quarantined Stichtenoth theorem.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
 **Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
 **A+ roadmap:** [weighted-transfer upgrade and `repairports` follow-up](../2026-07-16-repaircodes-a-plus-roadmap.md)
+
+## Active M1 packet — publication gate after C275
+
+**Objective:** turn the portfolio harvested by
+[C258](../2026-07-17-c258-rp-next-reward-harvest-map.md) and packaged by
+[C259](../2026-07-17-c259-rp-next-execution-packets.md) into a separately published short
+theorem-led complete-port manuscript without exposing the monorepo or its history. C274 completed
+the theorem/evidence crosswalk. C275 defines the exact clean-room export surface and is complete.
+
+**Frozen manifest:**
+[`2026-07-17-c275-m1-publication-boundary-manifest.md`](../2026-07-17-c275-m1-publication-boundary-manifest.md)
+and its
+[`allowlist.tsv`](../2026-07-17-c275-m1-publication-allowlist.tsv). Do not initialize a repository,
+copy files, edit paper prose, or touch shared Lean/build configuration before allocating the next
+task after the user gate.
+
+**Retained spine:** complete bounded repair ports; exact weighted-functional transfer; prescribed
+asymptotic realization; reliability and bounded EXIT; pointed Tutte/perspective structure; and the
+cubic versus quartic-nucleus/harmonic flagship contrast. Composition semantics, general service
+regions, coefficient optimization, log-concavity history, product architecture, and generic
+tract/foundation material remain excluded.
+
+**Publication boundary:** new repositories are fresh-history allowlisted exports, never forks or
+history-filtered publications of this monorepo. Every paper receives a separate manifest. The
+shared Lean monorepo receives one global manifest derived from the union of all paper-facing target
+closures, plus a separately verified guarded `lake pack`/restore artifact path. No broad directory
+copy and no raw `.lake/build` or selected-`.olean` copy is an acceptable starting point.
+
+**Next step:** obtain the M1 repository name/local destination/public remote and license, then decide
+whether C220's optional stability theorem remains. Allocate the next global C-ID only after those
+answers. Separately route the all-papers shared Lean monorepo export to an owner that coordinates
+the build-system artifact path and existing public-`FiniteGeom` extraction work.
 
 **Follow-up:** the twisted-cubic transversal spectrum spun off to
 [C115–C120](2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in

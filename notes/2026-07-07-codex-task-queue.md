@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C273.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C275.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -96,7 +96,7 @@ unless they retain an explicit open tail.
 
 ### `repaircodes`
 
-- No open tasks.
+- No open tasks; M1 is pre-allocation-gated on repository identity/remote, license, and the optional C220 inclusion decision recorded in the handoff.
 
 ### `rp-next`
 
