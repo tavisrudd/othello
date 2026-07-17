@@ -1,0 +1,74 @@
+{
+  "task": "C230",
+  "radius": 2,
+  "theorems_checked": {
+    "arrival_times_satisfy_causal_min_max_equations": true,
+    "stopping_core_is_infinite_arrival_set": true,
+    "element_conditioning_residual_law": true,
+    "direct_sum_cumulative_profile_factorization": true
+  },
+  "exhaustive_scout": {
+    "simple_binary_rank_at_most_3_restrictions": 127,
+    "element_seed_cases": 5103,
+    "direct_sum_profile_identities": 81
+  },
+  "naive_minor_counterexamples": {
+    "deletion": {
+      "field": "GF(2)",
+      "columns": {
+        "a": 1,
+        "b": 2,
+        "c": 4,
+        "x": 3,
+        "y": 7
+      },
+      "radius": 2,
+      "seed": [
+        "a",
+        "b",
+        "c"
+      ],
+      "distinguished": "x",
+      "original_closure": [
+        "a",
+        "b",
+        "c",
+        "x",
+        "y"
+      ],
+      "deletion_closure": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    "contraction": {
+      "field": "GF(2)",
+      "columns": {
+        "a": 1,
+        "b": 2,
+        "c": 4,
+        "w": 7
+      },
+      "radius": 2,
+      "seed": [
+        "b",
+        "c"
+      ],
+      "initially_live": "a",
+      "original_closure_without_live": [
+        "b",
+        "c"
+      ],
+      "same_radius_contraction_closure": [
+        "b",
+        "c",
+        "w"
+      ]
+    }
+  },
+  "literature_cache": {
+    "arXiv:1610.09767": "6aacd2b590e73c571961d6dd921fae9ad7c2378088cabae1171bbd50668b5a50",
+    "arXiv:2301.06642": "a7150e01acd2f4bf86454bdc11bad436f29832d38ea749e95b072b02e7cae0d5"
+  }
+}
