@@ -471,3 +471,176 @@ The fastest falsification test is small: compile standard RS/LRC matrices, repla
 heterogeneous helper capacities and correlated failures, and measure whether complete-port choice +
 sequential reuse improves the feasible repair fraction or LP makespan over fixed/minimum-input
 reconstruction enough to justify systems integration.
+
+## Additional exportable machinery from the other paper packages
+
+The user explicitly widened the read-only idea pool beyond repair work, beginning with
+`arcs_complete_outside_conic`. These are additional candidates; they do not change the ownership of
+the source paper lanes.
+
+### A8. Proof-carrying orbit-reduced enumeration
+
+The q=16 arcs classification uses a commercially interesting verification architecture:
+
+1. a fast untrusted C++ generator normalizes a four-frame, performs symmetry/canonical reduction,
+   and emits covering lists at successive augmentation depths;
+2. every parent/child transition carries an explicit invertible projective transformation and
+   pointwise scalar witnesses;
+3. local certificates prove that every legal child is represented in the next covering list;
+4. a small trusted Lean checker composes the layers and transports an arbitrary input to a listed
+   leaf;
+5. downstream properties are checked at the leaves without trusting canonical labels,
+   deduplication, or the generator's class count.
+
+This pattern is broader than arcs: **proof-carrying canonical augmentation** for finite search.
+Potential uses include code/design catalogs, finite protocol-state exploration, hardware test-vector
+classification, and symmetry-heavy configuration synthesis. It sits between conventional
+canonical-generation tools and SAT/SMT proof logging: the certificate explains orbit coverage by
+explicit transports rather than trusting the canonicalizer.
+
+Broader-CS paper candidate: formal methods / constraint programming paper comparing certificate
+size, verifier time, trusted code base, and search overhead against an uncertified canonical search
+and a SAT/DRAT encoding. The q=16 `4 -> 61 -> 454 -> 2633` step books are a strong case study.
+
+### A9. Low-degree uncovered-locus / syndrome anomaly detector
+
+The arcs paper's evaluation obstruction is algorithmic. Given:
+
+- a finite point/syndrome set `U` left uncovered by pair combinations; and
+- a feature map `phi` (quadratic/Veronese or arbitrary finite-dimensional features),
+
+form the evaluation matrix `phi(U)`. Its kernel is exactly the family of low-complexity algebraic
+models containing the anomaly locus. Rank growth gives either a model equation or a certificate
+that no nonzero model in the chosen feature class contains all anomalies while avoiding the base
+configuration.
+
+Potential uses:
+
+- flag parity-check matrices whose hard/deep-hole syndromes collapse onto a low-degree variety;
+- generate adversarial decoder test suites concentrated on structured hard syndromes;
+- screen code-based cryptographic candidates for unexpectedly algebraic failure loci;
+- detect whether missed cases in a finite test/configuration campaign share a low-degree feature
+  explanation.
+
+This is presently a research/audit tool, not a new generic anomaly-detection algorithm. The value is
+the exact finite-field certificate and direct tie to coset-leader/deep-hole structure.
+
+### A10. Syndrome-ray and extension-complex atlas
+
+The q=11 arcs package normalizes every nonzero syndrome to a projective ray, records exact
+coset-leader distance and multiplicity, and builds the independence complex of simultaneous legal
+column extensions. Generalize this into a short-code atlas:
+
+```text
+SyndromeAtlas {
+  projective ray representative,
+  minimum coset-leader weight,
+  number/supports of minimum leaders,
+  algebraic-locus tags,
+  valid code-extension neighbors/facets
+}
+```
+
+Uses: exhaustive decoder validation, worst-case syndrome test generation, safe code extension, and
+identifying extension choices that preserve MDS/local-repair constraints. Commercial relevance is
+narrow but concrete for codec verification and code-design tooling.
+
+### A11. Collision-aware pair-coverage optimizer
+
+The prescribed-hole defect identity exactly decomposes pair-generated coverage into useful coverage,
+duplicate collisions, and exceptional-locus capacity. This suggests a branch-and-bound/search
+heuristic for saturating sets and short covering codes:
+
+- reward newly covered syndrome/projective directions;
+- charge exact collision redundancy rather than a loose union bound;
+- retain a residual lower bound from the defect identity;
+- prune when remaining pair capacity cannot cover the prescribed complement.
+
+Possible adjacent applications are pairwise test-suite generation and two-resource coverage designs,
+but those mappings require separate semantics and benchmarks. The immediate credible application is
+faster finite-geometry/code search.
+
+### A12. Robust completion and alternate-extension planner
+
+The completion-core and Frobenius-pair packages provide a general design-resilience layer:
+
+- completion distance equals a circuit/extension transversal number;
+- deletion robustness asks how many existing elements must be lost before no legal completion
+  remains;
+- the equivariant arc result counts legal Galois-orbit additions with an exact invisible/collision
+  correction;
+- alternate-repair theorems certify that deleting a selected orbit leaves many replacement orbits.
+
+Data structure: an **Extension Complex** whose vertices are legal augmentations and whose faces are
+simultaneously compatible augmentations, augmented with blocker/transversal data and symmetry-orbit
+labels. This is the same antichain/robustness technology as repair ports applied to design evolution.
+
+Potential product use: resilient code/configuration migration—precompute alternate parity columns or
+symmetry-compatible upgrades before retiring a device/field orbit. Practical value depends on a
+finite code family used in real systems; the current Q25 result is a mathematical demonstration,
+not a deployed-code proposal.
+
+### A13. Continuation-graph fingerprinting and reconstruction
+
+The continuation-rigidity package shows that, in its proven regime, the abstract graph/complex of
+legal extensions recovers the ambient semilinear geometry and original cap. This suggests:
+
+- canonical fingerprints for finite codes/designs derived from compatibility rather than raw
+  coordinates;
+- equivalence/deduplication without exposing a chosen coordinate gauge;
+- tamper detection: a modified compatibility graph that no longer reconstructs the expected
+  geometry is a structural integrity failure;
+- black-box reverse engineering from a legal-extension oracle.
+
+This is promising for a graph reconstruction/canonicalization paper. Commercial use is speculative
+until reconstruction algorithms and noise stability are developed; the present theorems are exact,
+not robust-to-noise learning results.
+
+### A14. Symmetry-certificate preprocessing for combinatorial games
+
+The Nofil and dihedral Node-Kayles packages contribute two reusable solver ideas:
+
+- search for fixed-point-free involutions that certify a pairing/mirror strategy before exploring
+  the game tree;
+- quotient residual conflict graphs by Schreier/Cayley symmetry, then compute and independently
+  certify nimbers on the small templates.
+
+These can improve impartial-game/puzzle solvers and provide hard, symmetry-rich benchmarks for
+game-graph verification. The mapping to production scheduling or independent-set optimization is
+too indirect for a near-term commercial claim.
+
+## Additional broader-CS paper candidates from the widened portfolio
+
+### S6. Proof-Carrying Symmetry-Reduced Search
+
+Combine the arcs step-book architecture with the repository's certificate-first finite checkers.
+Headline: an untrusted high-performance canonical augmentation engine emits explicit group-action
+coverage witnesses checked by a small proof assistant kernel; correctness does not trust
+canonical labels or class counts.
+
+This may have broader CS reach than any single geometry theorem. Required work: generic certificate
+schema/library, second nongeometry benchmark, comparison with SAT proof logs and nauty-style
+canonical generation, and measurement of search/certificate/checking overhead.
+
+### S7. Algebraic Hard-Syndrome Auditing for Linear Codes
+
+Combine the arcs evaluation-rank detector, syndrome atlas, repair-port blocker structure, and C237
+Schur-square fingerprints. Build a tool that reports:
+
+- low-degree varieties containing deep/hard syndromes;
+- coset-leader multiplicity anomalies;
+- repair bottleneck loci;
+- low Schur-square dimension or representation-dependent MPC behavior.
+
+Potential audiences: coding systems, codec validation, and code-based cryptography. The paper must
+clearly separate known square-code distinguishers and classical syndrome decoding from the new
+joint audit workflow.
+
+### S8. Resilient Configuration Synthesis by Extension Complexes
+
+Unify complete repair ports, completion transversals, and legal extension complexes into one
+algorithmic object for configurations that must survive deletions and retain multiple upgrade
+paths. Implement multiobjective search over availability, alternate extensions, pair-coverage
+defect, and deployment cost. Initial domains: short storage codes and combinatorial test designs.
+
+The theorem base exists in pieces; the cross-domain abstraction and practical optimizer do not.
