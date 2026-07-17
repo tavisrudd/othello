@@ -21,6 +21,15 @@ At the start of a session:
 Live docs must not contain timelines, transcripts, validation output, or superseded plans. Put those
 in companion archives or dated reports.
 
+Every proof/math lane maintains one append-only discovery-track companion for incidental
+observations and musings encountered while doing planned work. The discriminator is “was I looking
+for this?”: if yes, it is a deliverable and belongs in the task report/ledger/handoff, not the
+discovery track. Logging a lead does not allocate work, expand scope, or make it a handoff frontier;
+promotion uses the normal C-ID and lane-routing process. Do not preload the log on ordinary entry;
+open it when an incidental observation needs recording and review it during handoff. Follow
+[`notes/discovery-track-conventions.md`](notes/discovery-track-conventions.md) when creating,
+appending, promoting, or handing off a discovery log.
+
 ## Lane routing
 
 Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken synonym for
