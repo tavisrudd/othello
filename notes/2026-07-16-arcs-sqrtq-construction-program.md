@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — Baer-transversal coordinate design is the next gate
+**Status**: ACTIVE — fixed-coefficient quadratic mechanism closed; coefficient-space gate next
 
 ## Objective
 
@@ -66,8 +66,12 @@ constraint. Next prove that the complement of `AB,AR,BR` lies in the two seed tr
 do not test another order until those identities predict `lambda`. The first orbit now has such a
 trace parametrization, but its natural `GF(8)` scalar extension is killed for every `s>=16`: a
 one-repair collision is equivalent to a nonzero `z` with `tr(z)=tr(z^(-1))=0`, whose count is
-positive by the Weil bound for binary Kloosterman sums. The remaining routes are the other two
-q=64 orbits or a partial repair domain.
+positive by the Weil bound for binary Kloosterman sums. The later trace, monodromy, and coverage
+gates close all three frozen-orbit scalar extensions: off the `105 | m` subtower singleton targets
+force the full collision-obstructed layer, while on that subtower an exact residue-field
+hypergraph has sixty-eight empty target edges after one-repair legality filtering. The next route
+is a symbolic coefficient-space audit of quadratic repair graphs; a larger fixed-field census is
+not the gate.
 
 ## C201 input
 

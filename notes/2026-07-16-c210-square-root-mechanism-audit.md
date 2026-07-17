@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — first construction audit complete; Baer-transversal design selected
+**Status**: ACTIVE — frozen `GF(8)` quadratic scalar-extension mechanism closed
 
 ## Boundary from the literature
 
@@ -969,4 +969,72 @@ Frozen output:
 ```text
 dcbf939c5eb43ded6efc660cf50137d84fcb54e12db5f15ff315904f2c6a749a  analyze_c210_persistent_singletons.py
 0131458b895aada1c115ddf1cb573e9056c2a693bfd626ba94d912a5ab81b8f9  analyze_c210_persistent_singletons_output.txt
+```
+
+## Sixteenth coordinate gate: the degree-105 residue hypergraph is empty
+
+The remaining `105 | m` subtower does not rescue the frozen first-orbit coefficients. Each of the
+seventy-two persistent q=64 targets has a degree-seven seed--repair elimination resultant over
+`GF(8)`. In an odd extension, only closed points of odd degree can become rational. Hence all
+possible candidates have degrees `1`, `3`, `5`, or `7`; every such degree already divides `105`.
+No new candidate for one of these targets can first appear farther up the odd subtower.
+
+The exact residue-field checker realizes every irreducible factor in `GF(8^d)`, includes all of its
+Frobenius-conjugate repair parameters, and then applies every collision gate involving one repair
+point. For a degree-`d` candidate, the two same-seed tests retain their absolute-trace form because
+`105/d` is odd. For the mixed-seed gate, the checker specializes the quintic `M(r,D)` from (7) and
+tests whether it has a root in `GF(8^105)`. Since its degree is five, only relative factor degrees
+`1`, `3`, and `5` can enter this odd extension. The q=64 full-arc legality of all eight base repair
+parameters is rechecked first as a sanity gate.
+
+Across all target hyperedges, the accepted resultant factors and candidate vertices have profile
+
+```text
+degree                         1    3    5    7
+factor occurrences           72   52   24   20
+distinct candidate vertices   8  132  120  140
+one-repair-legal vertices      0    0   20    0
+```
+
+After the one-repair deletions, sixty-eight of the seventy-two coverage hyperedges are empty. One
+compact witness uses `tau^3+tau+1=0` and target coordinates
+
+```text
+(y0,y1,h0,h1)=(1,tau^5,tau^2,1).
+```
+
+Its complete odd-degree candidate set consists of the base root of `X+tau^2` and the seven roots
+of
+
+```text
+X^7 + tau^2 X^6 + tau^2 X^5 + tau^6 X^4
+    + tau^3 X^2 + tau^4 X + tau^5.
+```
+
+The base candidate lies on a mixed seed chord in `GF(8^105)`. Every degree-seven candidate lies
+on both a `B`--`B` seed chord and a mixed seed chord. Thus this target has no arc-legal repair
+candidate. The obstruction persists in every `GF(8^(105k))`, `k` odd: the target cannot acquire
+new odd-degree candidates, while each exhibited collision remains present after extension.
+Consequently the partial-domain scalar extensions of the frozen q=64 quadratic repair orbits are
+closed for every odd `m`, including the last `105 | m` frontier. No two-repair collision-graph
+test is needed.
+
+This closes the observed fixed-coefficient mechanism, not C210. Coefficients varying with the
+field order, nonquadratic repair graphs, and other Baer-transversal designs remain possible. The
+next symbolic gate is to put the quadratic coefficients themselves into the coverage resultants
+and determine whether an empty-target certificate persists generically or only on the three q=64
+specializations; do not replace that coefficient-space test by a larger plane census.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_residue_hypergraph.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_residue_hypergraph_output.txt`.
+
+```text
+068a993ac259823c3ec7b8f02e7eb78d284d03c9b3838e796017d5f1ac063529  analyze_c210_residue_hypergraph.py
+8855d92e54db774bde69166c6da9e05a1831d28e02e6c0897d57121804c3bc5a  analyze_c210_residue_hypergraph_output.txt
 ```

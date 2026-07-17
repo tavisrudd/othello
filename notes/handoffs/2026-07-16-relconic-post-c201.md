@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — coverage candidate-hypergraph gate
+**Status:** C210 ACTIVE — frozen quadratic mechanism closed; coefficient-space gate next
 
 ## Current state
 
@@ -96,10 +96,14 @@ by the `build-sys` lane.
    obstruction. Their two seed-color elimination schemes have extra odd closed-point degrees only
    `3`, `5`, and `7`; for every repair parameter there is a forcing target of each pure type.
    Hence affine coverage forces the full repair layer whenever `105` does not divide the odd
-   extension degree `m`, while that full layer is collision-obstructed for `m>1`. The only surviving
-   scalar-extension frontier is the infinite sub-tower `105 | m`. Next compute the candidate
-   hyperedges over the degree-`3`, `5`, and `7` residue fields and test their compatibility with
-   the collision graph symbolically. Do not run a `GF(8^105)` plane census. See
+   extension degree `m`, while that full layer is collision-obstructed for `m>1`. The degree-`3`,
+   `5`, and `7` residue-hypergraph gate now closes the last `105 | m` subtower as well: among 400
+   exact candidate vertices only twenty degree-five vertices survive the one-repair gates, and
+   sixty-eight of seventy-two required target hyperedges are empty. Thus every fixed-coefficient
+   scalar extension of the three q=64 quadratic orbits is closed. Next put the quadratic
+   coefficients themselves into the coverage resultants and decide whether the empty-target
+   certificate is generic or special to those three orbits. Do not replace this symbolic
+   coefficient-space gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
