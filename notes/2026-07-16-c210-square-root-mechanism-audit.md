@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — joint seed route leaves positive density uncovered; repair--repair next
+**Status**: ACTIVE — generic quadratic repairs obstructed; exceptional locus next
 
 ## Boundary from the literature
 
@@ -1308,4 +1308,87 @@ Frozen output:
 ```text
 ba4c93d216f46f369d8143f8d39bfbc2018c4906e7964de635c2333f32621fe5  analyze_c210_joint_coverage_monodromy.py
 71e9bf377337fe1fb176f24b887e01a9ebaa5d3fb4ddc4950909183512243fd2  analyze_c210_joint_coverage_monodromy_output.txt
+```
+
+## Twentieth coordinate gate: repair--repair chords do not rescue generic coefficients
+
+For two repair parameters `r,s`, put `p=r+s`, `q=rs`, and `Y=y-eta`.  The quadratic repair height
+`g(r)=a*r^2+b*r+c` makes the chord interpolation collapse to
+
+```text
+h = c + Y^2 + Y*((1+a)*p+b) + (1+a)*q.                   (24)
+```
+
+The internal repair-arc condition already gives `1+a!=0`.  Hence, after dividing by `1+a`, a
+generic target determines the pair sum and product from
+
+```text
+q+Y*p = (1+a)^(-1)*(h+c+Y^2+Y*b).                       (25)
+```
+
+Writing both sides in the `1,omega` basis recovers `p` from the omega coordinate whenever
+`y1!=eta1`, then recovers `q` from the base coordinate.  A repair--repair chord exists exactly when
+
+```text
+p!=0,                         tr(q/p^2)=0.               (26)
+```
+
+Thus the entire `RR` class is one more Artin--Schreier character, not a high-degree candidate
+cover.  The checker compares (24)--(26) with all 100,352 direct unordered repair-pair incidences
+over the generic q=64 target stratum.  It obtains 2,688 targets with nonzero recovered pair sum,
+512 on the divisor `y1=eta1`, and 384 with pair sum zero; every direct chord agrees exactly.
+
+This new character is independent.  Together with the mixed-seed sign and the two same-layer
+characters, all sixteen Frobenius quadruples
+
+```text
+(sign(P_AB), trace_AA, trace_BB, trace_RR) in C2^4
+```
+
+occur at unramified `GF(8)` targets.  Its pole divisor is also distinct from the seed--repair
+coverage and collision divisors.  A compact witness is
+
+```text
+(y0,y1,h0,h1)=(0,1,0,tau^6),       p_RR=0,       q_RR=tau^4.
+```
+
+Here `q_RR!=0`, so Artin--Schreier reduction gives genuine ramification, while both degree-seven
+seed--repair resultants, the mixed seed quintic, and the same-layer covers are unramified.  The
+repair pole varies with the quadratic coefficients and is not any fixed-repair collision image.
+Consequently the full coefficient-generic group becomes
+
+```text
+((H wr S7) x (H wr S7)) x (S5 x C2 x C2 x C2_RR).       (27)
+```
+
+The `RR` class is absent on half of (23).  Therefore every chord class simultaneously misses the
+coefficient-generic density
+
+```text
+29865552106645555637458091245391757971
+  / 782725998458026170777600000000000000000
+ = 0.03815581974468822... .                              (28)
+```
+
+This closes generic quadratic repair coefficients: even the full repair layer is not affine
+complete, and deleting repair points cannot add coverage.  It does not yet close every quadratic
+family.  The q=64 complete layers themselves lie on an exceptional monodromy-drop locus, and a
+field-varying coefficient family could in principle remain inside such a locus.  The next gate is
+to classify the coefficient conditions under which (27) drops enough to eliminate the Frobenius
+class in (28), then compare every surviving component with the already-closed three frozen scalar
+extensions.  If no new positive-dimensional component survives, the quadratic repair mechanism is
+fully closed and C210 should move to nonquadratic graphs or another Baer-transversal design.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_repair_repair_coverage.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_repair_repair_coverage_output.txt`.
+
+```text
+f4efb70bde75e8a417051f8d634ffb4a1f72688c869e353d837b70ea2596e479  analyze_c210_repair_repair_coverage.py
+9bdbb50a57774b2f930ac5fbcaa47bd56473c82e171c997aa86a7017a2f18fa4  analyze_c210_repair_repair_coverage_output.txt
 ```

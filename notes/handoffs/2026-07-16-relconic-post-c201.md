@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — joint seed route leaves positive density uncovered; repair--repair next
+**Status:** C210 ACTIVE — generic quadratic repairs obstructed; exceptional locus next
 
 ## Current state
 
@@ -110,9 +110,12 @@ by the `build-sys` lane.
    coefficient-generic targets. The mixed seed class now has `S5` monodromy, the same-layer trace
    covers are independent, and isolated seed-color branch witnesses give the full joint group
    `((H wr S7) x (H wr S7)) x (S5 x C2 x C2)`. It leaves density `0.0763116...` missed by every
-   seed--seed chord and every one-repair-legal seed--repair chord. Next derive the repair--repair
-   incidence character and require both endpoints to lie in an arc-legal independent domain. Do
-   not replace this symbolic gate with a larger plane census. See
+   seed--seed chord and every one-repair-legal seed--repair chord. Repair--repair coverage is one
+   independent Artin--Schreier character, halving the full uncovered density to `0.0381558...`.
+   Thus even the coefficient-generic full repair layer is not affine-complete, and thinning cannot
+   help. Next classify the exceptional monodromy-drop locus containing the q=64 complete layers,
+   and compare each positive-dimensional component with the already-closed frozen scalar
+   extensions. Do not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

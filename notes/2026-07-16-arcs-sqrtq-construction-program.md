@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — joint seed route leaves positive density uncovered; repair--repair next
+**Status**: ACTIVE — generic quadratic repairs obstructed; exceptional locus next
 
 ## Objective
 
@@ -80,8 +80,11 @@ candidate for only about `8.76%` of coefficient-generic targets. The joint monod
 colors and the seed--seed secant schemes is
 `((H wr S7) x (H wr S7)) x (S5 x C2 x C2)`, and it leaves a coefficient-generic density
 `0.0763116...` missed by every seed--seed chord and every one-repair-legal seed--repair chord.
-Next derive the repair--repair incidence character and impose that both endpoints lie in an
-arc-legal independent domain; a larger fixed-field census is not the gate.
+Repair--repair coverage is one independent Artin--Schreier character, so even the full repair layer
+misses density `0.0381558...`; thinning cannot repair it. Generic quadratic coefficients are
+therefore obstructed. Next classify the exceptional monodromy-drop locus containing the q=64
+complete layers and compare its positive-dimensional components with the already-closed frozen
+scalar extensions; a larger fixed-field census is not the gate.
 
 ## C201 input
 
