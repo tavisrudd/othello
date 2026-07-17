@@ -1,0 +1,16 @@
+{
+  "status": "pass",
+  "algebra": {
+    "profiles": 35,
+    "pairs": 1225,
+    "triples": 42875
+  },
+  "branching_binary_2sum_tree": {
+    "cases": 27,
+    "relay_circuits_independently_checked": 56,
+    "max_circuits": 927,
+    "max_ground": 59
+  },
+  "branching_formula": "tau(y) = min(max(n,m),ell)",
+  "radius": 5
+}
