@@ -219,6 +219,15 @@ structure of line partitions beyond q=9. This is the least mechanically tractabl
 uniform inverse theorem would connect repair robustness to cap-set and additive-combinatorial
 stability in a genuinely new way.
 
+**Completed C220 result.** For `S subset F_3^h`, put
+`delta(S)=|S restricted-plus S|-(|S|-1)`. Defect zero occurs exactly for sets of size one or two.
+Defect one occurs exactly for the empty set, every three-set, and affine-subspace cosets of size at
+least four. A cubic radius-three blocker has the exact size decomposition
+`q-1+delta(S)+e`, where `e` counts redundant selected axis colors. This classifies every minimum
+and one-above-minimum blocker uniformly: there are `q(q+1)/2` minimum blockers, proving C202's two
+q=9 forms exhaustive for every `q=3^h`. See
+[`2026-07-16-c220-cubic-blocker-stability.md`](2026-07-16-c220-cubic-blocker-stability.md).
+
 ## Priority and stop rules
 
 The lane order is C215, C216, C217, C218, C219, C220, except that C215 begins only after C214's

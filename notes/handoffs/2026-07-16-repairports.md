@@ -3,8 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C215--C219 are complete. C219 gives an exact Boolean reliability calculus,
-C202 high-survival failure laws, and C218 Steiner Poisson windows with a common-nucleus bottleneck.
+**Status:** COMPLETE, awaiting user disposition. C215--C220 are complete. C220 upgrades C202's two
+q=9 cubic blocker forms to a uniform equality and first-stability theorem over every `F_3^h`.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -25,14 +25,15 @@ twisted-cubic--axis paper.
 | C217 | complete | circuit-coefficient gauge invariants | complete holonomy fingerprint, cross-ratio, and strict inequivalence example |
 | C218 | complete | quartic-nucleus harmonic repair family | `S(3,4,q+1)` circuits, exact parameters, and replication |
 | C219 | complete | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
-| C220 | long-horizon | additive equality and stability | uniform inverse/stability theorem |
+| C220 | complete | additive equality and stability | uniform inverse/stability theorem |
 
 ## Immediate next step
 
-Do not launch C220 from a broad search. First state a sharp additive equality or stability
-conjecture for one of the two symbolic C202 reductions: restricted-sumset cubic blockers or
-zero-sum-free/line-partition axis extremizers. C219 is closed in
-[`2026-07-16-c219-repair-reliability.md`](../2026-07-16-c219-repair-reliability.md).
+Ask whether to archive this completed handoff, update the root routing table, and which lane to
+select next. C220 is closed in
+[`2026-07-16-c220-cubic-blocker-stability.md`](../2026-07-16-c220-cubic-blocker-stability.md).
+The axis zero-sum-free and line-partition classifications remain outside the completed gate and
+require a separately allocated task if resumed.
 
 ## Scope and ownership
 

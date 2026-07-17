@@ -1,0 +1,77 @@
+{
+  "defect": "|S restricted-plus S|-(|S|-1)",
+  "exhaustive": [
+    {
+      "affine_cosets_of_dimension_at_least_two": 0,
+      "defect_histogram_by_subset_size": {
+        "0": {
+          "1": 1
+        },
+        "1": {
+          "0": 3
+        },
+        "2": {
+          "0": 3
+        },
+        "3": {
+          "1": 1
+        }
+      },
+      "dimension": 1,
+      "minimum_blocker_count": 6,
+      "q": 3,
+      "unit_above_minimum_blocker_count": 17
+    },
+    {
+      "affine_cosets_of_dimension_at_least_two": 1,
+      "defect_histogram_by_subset_size": {
+        "0": {
+          "1": 1
+        },
+        "1": {
+          "0": 9
+        },
+        "2": {
+          "0": 36
+        },
+        "3": {
+          "1": 84
+        },
+        "4": {
+          "2": 54,
+          "3": 72
+        },
+        "5": {
+          "3": 72,
+          "5": 54
+        },
+        "6": {
+          "4": 84
+        },
+        "7": {
+          "3": 36
+        },
+        "8": {
+          "2": 9
+        },
+        "9": {
+          "1": 1
+        }
+      },
+      "dimension": 2,
+      "minimum_blocker_count": 45,
+      "q": 9,
+      "unit_above_minimum_blocker_count": 455
+    }
+  ],
+  "q27_controls": {
+    "affine_planes_checked": 39,
+    "dimension": 3,
+    "exhaustive_subsets_of_size_at_most_five": 101584,
+    "q": 27,
+    "whole_space_checked": true
+  },
+  "task": "C220",
+  "unit_defect_iff": "S is empty, |S| is 3, or |S|>=4 and S is an affine subspace coset",
+  "zero_defect_iff": "|S| is 1 or 2"
+}
