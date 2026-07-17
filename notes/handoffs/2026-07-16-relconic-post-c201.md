@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — q=64 full joint group retained; four-variable drop divisors next
+**Status:** C210 ACTIVE — mixed `S5` drop divisors exact; degree-seven coverage divisors next
 
 ## Current state
 
@@ -124,11 +124,16 @@ by the `build-sys` lane.
    geometric `C2_RR` coupling. Thus all twelve translated q=64 layers retain the full group (27),
    not merely its degree-seven quotient. The translation quotient is now exact: geometrically
    `c1` is eliminable because `c1 -> c1+a1*d^2+b1*d`, while over a finite field it contributes only
-   the twist bit `Tr(a1*c1/b1^2)` when `b1!=0`. Next compute the coefficient-space branch
-   discriminants in the four geometric variables `(eta1,a1,b1,c0)`, classify their genuine drop
-   divisors and intersections, then restore the one arithmetic twist bit and test whether any such
-   divisor can support an arc-legal affine-complete family over infinitely many odd extensions. Do
-   not replace this symbolic gate with a larger plane census. See
+   the twist bit `Tr(a1*c1/b1^2)` when `b1!=0`. The mixed-collision `S5` branch calculation is now
+   exact on the four-variable quotient. Its reduced drop divisors are `b1=0`,
+   `eta1^2+c0+1=0`, and
+   `k^2+C*k+C^2=0` for `k=c0+1`, `C=eta1^2+sqrt(tau)*eta1`; the last splits into two conjugate
+   geometric components. Their intersections are classified, neither arithmetic twist changes
+   them, and all three q=64 blocks avoid them. Next compute the coefficient-space branch
+   discriminants for the two degree-seven seed--repair coverage covers, combine their divisors with
+   these lower-factor components, restore the one arithmetic twist bit, and test whether any
+   resulting stratum can support an arc-legal affine-complete family over infinitely many odd
+   extensions. Do not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

@@ -1598,3 +1598,74 @@ Frozen output:
 100f1df367a4a02ee94e25334878feecdd1cf41e26d39ad0b8809f06a7453b6e  analyze_c210_translation_quotient.py
 42e4affb290c1deeffb22c8618b1d030441d37bf9b468e345cdd0447e3c8378e  analyze_c210_translation_quotient_output.txt
 ```
+
+## Twenty-fourth coordinate gate: the mixed-cover drop divisors are exact
+
+The first coefficient-space branch calculation can be done without expanding a large resultant.
+Put
+
+```text
+e=eta1,                 k=c0+1,
+h(r)=a1*r^2+b1*r+e^2,  L(r)=h(r)^2+tau*h(r).
+```
+
+For the mixed-seed collision quintic, simultaneous vanishing with its `d`-derivative forces
+`d^2=tau*omega` or `tau*omega^2`.  Eliminating this conjugate pair gives the degree-eight branch
+polynomial
+
+```text
+B(r)=L(r)^2+tau*(e^2+k)*L(r)+tau^2*(e^4+e^2*k+k^2).       (35)
+```
+
+On the repair stratum `e*a1!=0`, its derivative is the constant
+
+```text
+B'(r)=tau^2*b1*(e^2+k).                                  (36)
+```
+
+Thus the eight branch values cease to be distinct on exactly two reduced divisors: `b1=0`, where
+the additive-quartic fibers become inseparable, and `e^2+k=0`, where the two four-point critical
+fibers coincide.  Loss of simple transposition inertia adds one more reduced divisor.  If
+`s=sqrt(tau)` and `C=e^2+s*e`, its equation is
+
+```text
+D_H=k^2+C*k+C^2=0.                                       (37)
+```
+
+The raw norm obtained by squaring the second Hasse derivative is `D_H^2`; using that nonreduced
+equation would incorrectly double the divisor.  Over `GF(64)`, (37) factors as
+
+```text
+(k+omega*C)*(k+omega^2*C).
+```
+
+The two geometric components meet on the repair stratum at `(e,k)=(s,0)`.  The critical-value
+divisor meets them at `(e,k)=(s*omega,e^2)` and `(s*omega^2,e^2)`, respectively.  Intersecting with
+`b1=0` gives the corresponding pair and triple intersections; there are no other ones.
+
+An exhaustive check over the `7*7*8*8=3136` `GF(8)` quotient points with `e*a1!=0` finds 392 points
+on each of `b1=0` and `e^2+k=0`, and 56 on (37).  The last 56 all lie over the single rational
+intersection `(e,k)=(s,0)`.  The three pairwise rational intersection counts are `49,7,0`, and the
+triple intersection has no `GF(8)` point.  All three exceptional q=64 blocks avoid every divisor,
+as required by their already-certified full joint group.
+
+Equations (35)--(37) depend only on `(eta1,a1,b1,c0)`.  Restoring `c1` therefore introduces no
+geometric or arithmetic twist in this lower `S5` factor: both values of
+`Tr(a1*c1/b1^2)` have the same mixed branch discriminants.  This completes the lower mixed-cover
+piece of the coefficient-drop gate.  The two degree-seven seed--repair coverage covers still
+require their coefficient-space branch calculation before any drop divisor can be tested for an
+infinite arc-legal affine-complete family.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_coefficient_branch_divisors.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_coefficient_branch_divisors_output.txt`.
+
+```text
+974c8951bbee5f0d857935eafefe201a204c4a93a5340f368230a05ed24fb024  analyze_c210_coefficient_branch_divisors.py
+255f7fb968bd0ad6dff87a82dc0627f834d0c9bbcbfc052514bf3e0e811d23e5  analyze_c210_coefficient_branch_divisors_output.txt
+```
