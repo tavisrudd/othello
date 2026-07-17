@@ -1,0 +1,139 @@
+{
+  "task": "C229",
+  "field": "GF(5)",
+  "radius": 2,
+  "columns": {
+    "a": [
+      1,
+      0,
+      0
+    ],
+    "b": [
+      0,
+      1,
+      0
+    ],
+    "c": [
+      0,
+      0,
+      1
+    ],
+    "x": [
+      1,
+      1,
+      0
+    ],
+    "y": [
+      1,
+      1,
+      1
+    ],
+    "w": [
+      1,
+      2,
+      3
+    ]
+  },
+  "rank": 3,
+  "circuits": [
+    [
+      "a",
+      "b",
+      "x"
+    ],
+    [
+      "c",
+      "x",
+      "y"
+    ],
+    [
+      "a",
+      "b",
+      "c",
+      "y"
+    ],
+    [
+      "a",
+      "b",
+      "c",
+      "w"
+    ],
+    [
+      "a",
+      "b",
+      "y",
+      "w"
+    ],
+    [
+      "a",
+      "c",
+      "x",
+      "w"
+    ],
+    [
+      "a",
+      "c",
+      "y",
+      "w"
+    ],
+    [
+      "a",
+      "x",
+      "y",
+      "w"
+    ],
+    [
+      "b",
+      "c",
+      "x",
+      "w"
+    ],
+    [
+      "b",
+      "c",
+      "y",
+      "w"
+    ],
+    [
+      "b",
+      "x",
+      "y",
+      "w"
+    ]
+  ],
+  "seed": [
+    "a",
+    "b",
+    "c"
+  ],
+  "one_shot_radius_2": [
+    "a",
+    "b",
+    "c",
+    "x"
+  ],
+  "sequential_radius_2": [
+    "a",
+    "b",
+    "c",
+    "x",
+    "y"
+  ],
+  "full_span": [
+    "a",
+    "b",
+    "c",
+    "x",
+    "y",
+    "w"
+  ],
+  "strict_hierarchy": true,
+  "exhaustive_checks": {
+    "seed_sets": 64,
+    "joint_target_helper_pairs": 665,
+    "full_circuit_horn_equals_matroid_closure": true,
+    "unbounded_repair_closes_in_one_round": true,
+    "small_circuit_horn_equals_sequential_closure": true,
+    "joint_minimal_helpers_equal_minimal_unions": true
+  }
+}
