@@ -7,6 +7,7 @@ surprises, failed intuitions, and questions encountered while executing the queu
 It is not a task queue, proof ledger, or authority for manuscript claims. Promote an item to the
 global queue/report only after scoping and verification; leave the original observation here with a
 pointer rather than rewriting its history.
+It follows the repository-wide [discovery-track conventions](discovery-track-conventions.md).
 
 For every new observation, also record the strongest natural question it raises and classify it as
 **answer in this paper**, **follow-on**, or **do not pursue yet**. This preserves reader-driven

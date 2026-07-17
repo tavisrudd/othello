@@ -255,6 +255,11 @@ reconstruction and genuinely additional syndrome/extension invariants.
 
 ## Discovery Track register
 
+**Legacy embedded register — frozen.** These entries predate the standalone-companion convention in
+[`discovery-track-conventions.md`](../discovery-track-conventions.md). Preserve them as incidental
+history, but put new observations in a separate lane discovery log; planned theorem work and status
+remain in the work-package/report/handoff path.
+
 Append and reclassify only incidental mathematical consequences here as they are noticed while
 executing C107–C110, following the earlier arcs-formalization handoff pattern. Planned theorem
 deliverables and their completion state belong in the work-package table, not here. Each discovery

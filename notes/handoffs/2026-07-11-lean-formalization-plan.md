@@ -273,7 +273,7 @@ rainbow perfect matching. **C105** proves that neither transfer gate can be weak
 using nondegenerate `GF(3)` examples and literal complete-hypergraph inequality. See the
 [RepairCodes strengthening handoff](done/2026-07-13-repaircodes-strengthening-plan.md).
 
-### Discovery track for final review
+### Final-review strengthening summary
 
 Final classification after the strict trust and internal adversarial novelty audits. Candidate
 novelty remains subject to the external specialist gate unless explicitly stated otherwise.

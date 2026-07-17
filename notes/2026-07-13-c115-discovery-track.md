@@ -4,6 +4,9 @@
 **Context**: kept while executing C115 (twisted-cubic external-point τ-spectrum). Incidental,
 potentially-useful, or surprising things noticed in passing — NOT the planned deliverable (that is
 [the C115 report](2026-07-13-c115-twisted-cubic-tau-reduction.md)).
+This is a legacy task-scoped instance of the normalized
+[discovery-track conventions](discovery-track-conventions.md): its entries are incidental, not C115
+obligations.
 Confidence tags: `CHECKED` = computationally replayed; `LEAN` = kernel-proved; `REASONED` = argued
 but not yet replayed/formalized.
 

@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — D-Bus reattachment landed; adjacent CLI/operator rollout next
+**Status**: IN PROGRESS — adjacent managed CLI documented; provenance-aware queue listing next
 
 ## Goal
 
@@ -538,6 +538,17 @@ manager restart, InvocationID mismatch, malformed status identity, and recovery 
 opt-in live fixtures pass against the real user manager, including a referenced transient unit that
 wakes through sd-bus without sleep or status polling. No real Lean target or legacy queue ran. Step
 7 is adjacent CLI/operator rollout guidance without redirecting legacy `--detach`.
+
+Step 7 exposes the primary bridge as the adjacent `lean-build-systemd.py run` command. It resolves
+the explicit harness/session/lane/C-task origin, reserves one UUID identity, creates the immutable
+submission, assembles the complete strict-worker argv with the measured resource and quiet-check
+options, and uses the same legacy build-owner lock while retaining a separate managed state root.
+The command blocks for and prints one bounded completion envelope; `await RUN_DIR` remains the
+recovery path. Thirty-nine default adapter tests pass, including CLI assembly, shared-lock
+selection, origin binding, module validation before state creation, and the Step 6 recovery suite.
+Operator guidance now documents explicit selection, phase meanings, stable event-ID deduplication,
+and timeout/unknown/abandonment codes while leaving `lean-build-queue.py --detach` unchanged. No
+real Lean target ran. Step 8 is the bounded provenance-aware active/recent queue listing.
 
 ## Adversarial design review
 

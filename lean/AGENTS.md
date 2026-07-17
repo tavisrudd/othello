@@ -60,6 +60,37 @@ lean/scripts/lean-build-queue.py run Target.One Target.Two \
   --profile single --threads 1 --cores 20-23 --detach
 ```
 
+C225 also provides an adjacent, explicitly selected systemd-managed path. It does not replace or
+redirect the legacy command above during the parallel rollout. Supply the current harness session,
+lane, and caller-attested C-task either with the documented `OTHELLO_*` parent-session environment
+or explicit options. The command blocks in one event-driven wait and prints exactly one bounded
+completion envelope:
+
+```sh
+lean/scripts/lean-build-systemd.py run Target.One Target.Two \
+  --profile single --threads 1 --cores 20-23 \
+  --harness codex --session-id "$CODEX_THREAD_ID" --lane build-sys --task-id C225
+```
+
+If the primary waiting client is lost, reattach to its immutable run directory without stopping or
+resubmitting the service:
+
+```sh
+lean/scripts/lean-build-systemd.py await \
+  ~/.cache/othello-lean-build-systemd/run-<uuid> --timeout 3600
+```
+
+Exit 124 is a non-mutating caller timeout, 125 means state or supervisor evidence is insufficient,
+and 126 is externally observed abandonment. Consumers deduplicate recovery delivery by the stable
+`event_id`. The managed path uses the same build-owner lock and measured worker controls as the
+legacy path, but keeps separate managed run directories. Do not run a real Lean target through it
+until the build-sys quiet-window gate is confirmed.
+
+Interpret managed status narrowly: `queued/waiting-for-lock` means the worker exists but does not
+own the tree; `running/quiet-preflight` means it owns the lock; `running/building` or
+`running/aggregate-gate` means the named child was spawned; only a terminal completion envelope
+after service exit establishes released resources and the recorded outcome.
+
 The runner automatically:
 
 - acquires the shared build-owner lock before checking quiet state;

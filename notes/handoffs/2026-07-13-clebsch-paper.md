@@ -103,4 +103,5 @@ changes as foreign unless the user explicitly switches or expands scope.
 - Full accumulated handoff history:
   [`done/2026-07-13-clebsch-paper-archive.md`](done/2026-07-13-clebsch-paper-archive.md).
 - Adversarial review, novelty/literature, formalization, decoding, curve, orbit, and small-`k`
-  reports are indexed from the archive and discovery track; do not duplicate their prose here.
+  reports are indexed from the archive; the discovery track is only the companion record of
+  incidental observations and promotion pointers. Do not duplicate their prose here.

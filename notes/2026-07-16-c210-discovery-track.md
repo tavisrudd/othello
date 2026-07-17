@@ -1,10 +1,12 @@
-# C210 incidental-discovery track
+# C210 mechanism notebook (legacy discovery-track filename)
 
 **Date opened:** 2026-07-16
 **Lane:** `relconic`
-**Context:** incidental observations, surprises, failed intuitions, and follow-on questions noticed
-while pursuing the C210 square-root construction program. This append-only log is not the task queue,
-proof ledger, or main mechanism audit. The theorem-facing record remains
+**Classification:** task-work notebook, not a discovery track under the normalized
+[discovery-track conventions](discovery-track-conventions.md). Most entries record construction
+signals, rejected mechanisms, and active proof routes that the C210 program was explicitly pursuing.
+The file is retained at its existing path for stable links; do not append new planned work here. The
+theorem-facing record remains
 [`2026-07-16-c210-square-root-mechanism-audit.md`](2026-07-16-c210-square-root-mechanism-audit.md).
 Confidence tags are `CHECKED`, `REASONED`, and `OPEN`.
 

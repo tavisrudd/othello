@@ -69,9 +69,11 @@ before any new Lean edit, generator run, build, or staleness probe.
 
 ## Durable companions
 
-- C210 incidental-discovery track:
+- lane discovery track (incidental observations only):
+  [`2026-07-16-relconic-discovery-track.md`](../2026-07-16-relconic-discovery-track.md)
+- C210 mechanism notebook (legacy filename; task history, not a discovery track):
   [`2026-07-16-c210-discovery-track.md`](../2026-07-16-c210-discovery-track.md)
-- C201 discovery track:
+- C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
   [`2026-07-16-c201-discovery-track.md`](../2026-07-16-c201-discovery-track.md)
 - live global queue:
   [`2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md)

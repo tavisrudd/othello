@@ -8,7 +8,9 @@ leave the original with a pointer to where it went.
 Sibling of the [Clebsch discovery track](2026-07-14-clebsch-discovery-track.md), same conventions,
 different lane — entries do not cross between them. Companion to
 [the gap-mining method](2026-07-15-gems-theory-gaps-method.md), which owns the cells and their
-ledger.
+ledger. The repository-wide [discovery-track conventions](discovery-track-conventions.md) preserve
+this log's “was I looking for this?” boundary while allowing incidental musings that do not arise
+from a violated expectation.
 
 ## What belongs here — and what does not
 

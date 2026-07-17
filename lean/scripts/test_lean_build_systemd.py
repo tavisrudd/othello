@@ -772,6 +772,117 @@ class ReattachmentTests(unittest.TestCase):
             )
 
 
+class ManagedCliTests(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.tmp.chmod(0o700)
+        self.lean_root = self.tmp / "lean"
+        self.lean_root.mkdir()
+        (self.lean_root / "lakefile.toml").write_text("name = 'fixture'\n")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp)
+
+    def arguments(self, *extra: str):
+        return MODULE.parser().parse_args(
+            [
+                "run",
+                "Target.One",
+                "Target.Two",
+                "--harness",
+                "codex",
+                "--session-id",
+                "managed-cli-session",
+                "--lane",
+                "build-sys",
+                "--task-id",
+                "C225",
+                "--state-root",
+                str(self.tmp / "state"),
+                "--lean-root",
+                str(self.lean_root),
+                *extra,
+            ]
+        )
+
+    def test_run_reserves_identity_and_forwards_measured_worker_contract(self) -> None:
+        args = self.arguments(
+            "--serial-first",
+            "Heavy.Shared",
+            "--aggregate",
+            "Gate.Final",
+            "--cores",
+            "20-21",
+            "--threads",
+            "2",
+            "--profile",
+            "q25-two-witness",
+            "--wait-quiet-seconds",
+            "30",
+        )
+        captured: dict[str, object] = {}
+
+        def launch(**kwargs):
+            captured.update(kwargs)
+            submission = kwargs["submission"]
+            completion = {
+                "format": 1,
+                "run_id": submission["run_id"],
+                "unit": submission["unit"],
+                "invocation_id": "b" * 32,
+                "origin": submission["origin"],
+                "adapter_exit_code": 0,
+                "event_id": f"lean-queue:{submission['run_id']}:terminal:1",
+            }
+            return {"format": 1}, completion, "fixture diagnostic"
+
+        completion, diagnostic = MODULE.run_managed_cli(
+            args,
+            environ={},
+            generation_reader=lambda: {
+                "boot_id": "12345678-1234-1234-1234-123456789abc",
+                "dbus_owner": ":1.42",
+                "manager_pid": 4321,
+                "manager_start_ticks": 98765,
+            },
+            launcher=launch,
+        )
+        run_dir = captured["run_dir"]
+        submission = captured["submission"]
+        self.assertEqual(completion["adapter_exit_code"], 0)
+        self.assertEqual(diagnostic, "fixture diagnostic")
+        self.assertEqual(submission["run_dir"], str(run_dir))
+        self.assertEqual(json.loads((run_dir / "submission.json").read_text()), submission)
+        argv = submission["worker_argv"]
+        self.assertEqual(argv[:3], [os.path.abspath(sys.executable), str(MODULE.WORKER_DEFAULT), "run"])
+        self.assertEqual(argv[3:5], ["Target.One", "Target.Two"])
+        self.assertIn("--serial-first", argv)
+        self.assertIn("Heavy.Shared", argv)
+        self.assertIn("--aggregate", argv)
+        self.assertIn("Gate.Final", argv)
+        self.assertIn("--threads", argv)
+        self.assertIn("q25-two-witness", argv)
+        expected_lock = (
+            MODULE.LEGACY_STATE_ROOT_DEFAULT
+            / "locks"
+            / f"{MODULE.lock_slug(self.lean_root)}.lock"
+        )
+        self.assertEqual(argv[argv.index("--lock-file") + 1], str(expected_lock))
+
+    def test_run_rejects_invalid_module_before_creating_managed_state(self) -> None:
+        args = self.arguments()
+        args.targets = ["bad/module"]
+        with self.assertRaisesRegex(MODULE.StateError, "invalid Lean module"):
+            MODULE.run_managed_cli(
+                args,
+                environ={},
+                generation_reader=lambda: {},
+                launcher=lambda **_kwargs: self.fail("launcher must not run"),
+            )
+        self.assertFalse((self.tmp / "state").exists())
+
+
 @unittest.skipUnless(
     os.environ.get("OTHELLO_SYSTEMD_LIVE_TEST") == "1",
     "set OTHELLO_SYSTEMD_LIVE_TEST=1 for the harmless real user-manager fixture",

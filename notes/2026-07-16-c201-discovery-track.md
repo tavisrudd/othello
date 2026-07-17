@@ -1,11 +1,13 @@
-# C201 discovery track
+# C201 mechanism-audit notebook (legacy discovery-track filename)
 
 **Date opened:** 2026-07-16
 **Lane:** `relconic`
-**Context:** incidental observations, surprises, failed intuitions, and follow-on
-questions noticed while executing C201.  This append-only log is not the task
-queue or proof ledger.  Planned deliverables remain in the C201 reports and
-handoff.  Confidence tags are `CHECKED`, `REASONED`, and `OPEN`.
+**Classification:** task-work notebook, not a discovery track under the normalized
+[discovery-track conventions](discovery-track-conventions.md). This file substantially records the
+bounded mechanism gates C201 was designed to test, including negative results and closure
+dispositions. It is retained at its existing path for stable links. The authoritative deliverables
+remain the C201 reports and handoff; do not append new planned work here. Confidence tags are
+`CHECKED`, `REASONED`, and `OPEN`.
 
 ## 2026-07-16 — split-`Z3` indexing and coverage probe
 

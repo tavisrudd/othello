@@ -35,6 +35,7 @@ HARNESS_VALUES = ("codex", "claude", "manual")
 SESSION_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:@+-]{0,127}\Z")
 LANE_RE = re.compile(r"[a-z0-9][a-z0-9-]{0,63}\Z")
 TASK_RE = re.compile(r"C[0-9]+\Z")
+MODULE_RE = re.compile(r"[A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*\Z")
 BUS_OWNER_RE = re.compile(r":[0-9]+\.[0-9]+\Z")
 BOOT_ID_RE = re.compile(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\Z")
 STATE_ROOT_DEFAULT = Path.home() / ".cache" / "othello-lean-build-systemd"
@@ -44,6 +45,9 @@ BOOT_ID_DEFAULT = Path("/proc/sys/kernel/random/boot_id")
 PROC_ROOT_DEFAULT = Path("/proc")
 SYSTEMCTL_DEFAULT = Path("/run/current-system/sw/bin/systemctl")
 SYSTEMD_RUN_DEFAULT = Path("/run/current-system/sw/bin/systemd-run")
+WORKER_DEFAULT = Path(__file__).resolve().with_name("lean-build-systemd-worker.py")
+PROFILE_FILE_DEFAULT = Path(__file__).resolve().with_name("lean-build-profiles.json")
+LEGACY_STATE_ROOT_DEFAULT = Path.home() / ".cache" / "othello-lean-build"
 ACCEPT_TIMEOUT = 10.0
 
 
@@ -930,6 +934,141 @@ def service_client_returncode(service: Mapping[str, object]) -> int:
     return 255
 
 
+def positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("must be a positive integer")
+    return parsed
+
+
+def nonnegative_int(value: str) -> int:
+    parsed = int(value)
+    if parsed < 0:
+        raise argparse.ArgumentTypeError("must be a nonnegative integer")
+    return parsed
+
+
+def oom_adjust(value: str) -> int:
+    parsed = int(value)
+    if not -1000 <= parsed <= 1000:
+        raise argparse.ArgumentTypeError("must be between -1000 and 1000")
+    return parsed
+
+
+def lock_slug(lean_root: Path) -> str:
+    return str(lean_root).strip("/").replace("/", "_") or "root"
+
+
+def managed_worker_argv(
+    args: argparse.Namespace, run_dir: Path, lock_file: Path
+) -> list[str]:
+    argv = [
+        os.path.abspath(sys.executable),
+        str(WORKER_DEFAULT.absolute()),
+        "run",
+        *args.targets,
+        "--run-dir",
+        str(run_dir),
+        "--lock-file",
+        str(lock_file),
+    ]
+    for target in args.serial_first:
+        argv.extend(("--serial-first", target))
+    if args.aggregate is not None:
+        argv.append("--aggregate")
+        argv.extend(args.aggregate)
+    if args.cores is not None:
+        argv.extend(("--cores", args.cores))
+    argv.extend(
+        (
+            "--threads",
+            str(args.threads),
+            "--profile",
+            args.profile,
+            "--profile-file",
+            str(args.profile_file.expanduser().absolute()),
+            "--meminfo",
+            str(args.meminfo.expanduser().absolute()),
+            "--mountinfo",
+            str(args.mountinfo.expanduser().absolute()),
+            "--tmp-path",
+            str(args.tmp_path.expanduser().absolute()),
+            "--choom-adjust",
+            str(args.choom_adjust),
+            "--wait-quiet-seconds",
+            str(args.wait_quiet_seconds),
+            "--poll-seconds",
+            str(args.poll_seconds),
+            "--tail-lines",
+            str(args.tail_lines),
+            "--nix-binary",
+            args.nix_binary,
+            "--time-binary",
+            args.time_binary,
+            "--taskset-binary",
+            args.taskset_binary,
+            "--choom-binary",
+            args.choom_binary,
+            "--pgrep-binary",
+            args.pgrep_binary,
+            "--run-quiet-binary",
+            args.run_quiet_binary,
+        )
+    )
+    if args.tmp_used_mib is not None:
+        argv.extend(("--tmp-used-mib", str(args.tmp_used_mib)))
+    return argv
+
+
+def run_managed_cli(
+    args: argparse.Namespace,
+    *,
+    environ: Mapping[str, str],
+    generation_reader: Callable[[], Mapping[str, object]] = manager_generation,
+    launcher: Callable[..., tuple[dict[str, object], dict[str, object], str]] | None = None,
+) -> tuple[dict[str, object], str]:
+    lean_root = args.lean_root.expanduser().absolute()
+    if not (lean_root / "lakefile.lean").is_file() and not (lean_root / "lakefile.toml").is_file():
+        raise StateError(f"Lean root is not a Lake package: {lean_root}")
+    targets = [*args.targets, *args.serial_first, *(args.aggregate or [])]
+    invalid = next((target for target in targets if MODULE_RE.fullmatch(target) is None), None)
+    if invalid is not None:
+        raise StateError(f"invalid Lean module name: {display_value(invalid)}")
+    origin = resolve_origin(
+        harness=args.harness,
+        session_id=args.session_id,
+        work_lane=args.work_lane,
+        task_id=args.task_id,
+        environ=environ,
+    )
+    identity = uuid.uuid4()
+    state_root = args.state_root.expanduser().absolute()
+    run_dir = state_root / f"run-{identity.hex}"
+    lock_file = (
+        args.lock_file.expanduser().absolute()
+        if args.lock_file is not None
+        else LEGACY_STATE_ROOT_DEFAULT / "locks" / f"{lock_slug(lean_root)}.lock"
+    )
+    worker_argv = managed_worker_argv(args, run_dir, lock_file)
+    actual_run_dir, submission, digest = prepare_submission(
+        state_root=state_root,
+        lean_root=lean_root,
+        worker_argv=worker_argv,
+        origin=origin,
+        generation=dict(generation_reader()),
+        run_uuid=identity,
+    )
+    if actual_run_dir != run_dir:
+        raise StateError("prepared run directory differs from reserved identity")
+    launch = launch_accept_and_wait if launcher is None else launcher
+    _, completion, diagnostic = launch(
+        run_dir=run_dir,
+        submission=submission,
+        submission_digest=digest,
+    )
+    return completion, diagnostic
+
+
 def reattach_and_wait(
     *,
     run_dir: Path,
@@ -1261,6 +1400,39 @@ def parser() -> argparse.ArgumentParser:
     )
     await_parser.add_argument("run_dir", type=Path)
     await_parser.add_argument("--timeout", type=float)
+    run = subparsers.add_parser(
+        "run", help="submit and block on one adjacent systemd-managed Lean queue"
+    )
+    run.add_argument("targets", nargs="+", help="Lean modules to build, in order")
+    run.add_argument("--harness", choices=HARNESS_VALUES)
+    run.add_argument("--session-id")
+    run.add_argument("--lane", dest="work_lane")
+    run.add_argument("--task-id")
+    run.add_argument("--state-root", type=Path, default=STATE_ROOT_DEFAULT)
+    run.add_argument("--lean-root", type=Path, default=LEAN_ROOT_DEFAULT)
+    run.add_argument("--lock-file", type=Path)
+    run.add_argument("--serial-first", action="append", default=[], metavar="MODULE")
+    run.add_argument("--aggregate", nargs="+", default=None)
+    run.add_argument("--cores", default=None)
+    run.add_argument("--threads", type=positive_int, default=1)
+    run.add_argument("--profile", default="single")
+    run.add_argument("--profile-file", type=Path, default=PROFILE_FILE_DEFAULT)
+    run.add_argument("--meminfo", type=Path, default=Path("/proc/meminfo"), help=argparse.SUPPRESS)
+    run.add_argument(
+        "--mountinfo", type=Path, default=Path("/proc/self/mountinfo"), help=argparse.SUPPRESS
+    )
+    run.add_argument("--tmp-path", type=Path, default=Path("/tmp"), help=argparse.SUPPRESS)
+    run.add_argument("--tmp-used-mib", type=nonnegative_int, default=None, help=argparse.SUPPRESS)
+    run.add_argument("--choom-adjust", type=oom_adjust, default=1000)
+    run.add_argument("--wait-quiet-seconds", type=nonnegative_int, default=0)
+    run.add_argument("--poll-seconds", type=positive_int, default=60)
+    run.add_argument("--tail-lines", type=nonnegative_int, default=80)
+    run.add_argument("--nix-binary", default="nix")
+    run.add_argument("--time-binary", default="/usr/bin/time")
+    run.add_argument("--taskset-binary", default="taskset")
+    run.add_argument("--choom-binary", default="choom")
+    run.add_argument("--pgrep-binary", default="pgrep")
+    run.add_argument("--run-quiet-binary", default=str(Path.home() / ".claude/bin/run-quiet"))
     return result
 
 
@@ -1280,8 +1452,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
         elif args.command == "manager-generation":
             payload = {"format": 1, "manager_generation": manager_generation()}
-        else:
+        elif args.command == "await":
             payload, diagnostic = reattach_and_wait(run_dir=args.run_dir, timeout=args.timeout)
+            if diagnostic:
+                print(f"lean-build-systemd: {diagnostic}", file=sys.stderr)
+        else:
+            payload, diagnostic = run_managed_cli(args, environ=os.environ)
             if diagnostic:
                 print(f"lean-build-systemd: {diagnostic}", file=sys.stderr)
     except (OriginError, StateError) as error:
@@ -1289,7 +1465,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         return EXIT_INVALID
     json.dump(payload, sys.stdout, sort_keys=True, separators=(",", ":"))
     sys.stdout.write("\n")
-    return int(payload.get("adapter_exit_code", 0)) if args.command == "await" else 0
+    return (
+        int(payload.get("adapter_exit_code", 0))
+        if args.command in {"await", "run"}
+        else 0
+    )
 
 
 if __name__ == "__main__":

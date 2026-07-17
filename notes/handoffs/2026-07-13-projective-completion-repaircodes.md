@@ -192,6 +192,11 @@ the corresponding claim before xhigh review.
 
 ## Discovery Track register
 
+**Legacy embedded register — frozen.** These rows predate the standalone-companion convention in
+[`discovery-track-conventions.md`](../discovery-track-conventions.md). Preserve them as incidental
+history, but put new observations in a separate lane discovery log; planned work remains in the
+task/report/handoff path.
+
 This register contains only unplanned mathematical findings encountered while executing C111–C114.
 It does not duplicate planned deliverables, implementation progress, validation results, or task
 closure. `CHECKED` means independently replayed finite evidence; `LEAN` means kernel-proved;
