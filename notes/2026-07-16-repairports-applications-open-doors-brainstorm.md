@@ -655,6 +655,281 @@ In order of expected value:
 4. define the two-target joint port and enumerate the q=9 recovery closure as a stress test;
 5. audit whether the C218 support matroid is representable outside characteristic three.
 
+### Highest-EV portfolio in detail
+
+Here “expected value” means conceptual or publication payoff multiplied by the probability of a
+clean bounded result, discounted for scope risk. It is not a claim about theorem difficulty or a
+time estimate. Immediate manuscript value and longer-term research-option value are separated:
+
+| Pick | Immediate manuscript value | Research-option value | Scope risk | Verdict |
+|---|---|---|---|---|
+| exact reliability transforms + truncated EXIT | very high | high | low | do first |
+| pointed Tutte/perspective identification | high if exact | very high | low-to-medium | best mathematical probe |
+| holonomy-sensitive LSSS/MPC test | high if positive | very high | low if bounded | best asymmetric bet |
+| q=9 joint-port/Horn prototype | modest for current paper | very high | medium | best next-program seed |
+| component EXIT + GLDPC density evolution | medium | high | medium | best external application test |
+| C218 characteristic audit | medium if obstructed | medium-high | low-to-medium | opportunistic sixth |
+
+#### Pick A — exact transforms and truncated EXIT framing
+
+**Rank:** highest immediate EV; theorem-ready.
+
+**Why it ranks first.** Equations (1)--(3) already follow from the completed structural
+classifications by one conditioning argument. The truncated EXIT identification is likewise exact.
+Together they connect C219 and C220 to standard coding-channel language without requiring a new
+construction, a new search, or a large literature-dependent proof. They also turn the reliability
+section from a collection of finite calculations into a pair of general transforms.
+
+**Concrete deliverable.** A compact manuscript package should contain:
+
+1. the multitype cubic transform (1);
+2. its homogeneous defect form (2);
+3. the axis factorization (3);
+4. the definition of `h_x^(<=r)` and the identity `R_x^(<=r)=1-h_x^(<=r)`;
+5. the deletion--contraction and pivotal-derivative formulas in EXIT notation;
+6. the q=9 leading layers as examples, with no new census;
+7. one paragraph distinguishing bounded local EXIT, full symbol-MAP EXIT, and C216's
+   fixed-alphabet asymptotic regime.
+
+**Immediate deductions.** The same proposition yields:
+
+- the exact distribution of the cheapest available repair radius through successive differences
+  `R^(<=r)-R^(<=r-1)`;
+- a stopping-set interpretation of C202 and C220;
+- a direct route from future restricted-sumset or cap-set enumeration to reliability;
+- exact component functions for a later GLDPC test.
+
+**Promotion gate.** Promote into the combined paper if the formulas remain compact after aligning
+the paper's failure/survival conventions and a focused prior-art check finds no identical complete-
+port statement. Even if the transform is classical in another language, retain it as a corollary
+if it materially shortens or strengthens the operational section.
+
+**Kill or containment criteria.** Do not let this expand into:
+
+- a general BEC-capacity claim;
+- an unproved EXIT area theorem;
+- a complete defect enumerator beyond C220;
+- new q=9 orbit tables;
+- a claim that bounded repair equals full MAP decoding.
+
+**Main risk.** The notation can silently conflate erased and surviving coordinates or local and
+unbounded recovery. State all four conventions once and test the formulas at `p=0` and `p=1`.
+
+#### Pick B — pointed Tutte or matroid-perspective identification
+
+**Rank:** highest mathematical EV among bounded probes.
+
+**Why it ranks this high.** C219's recurrence is already Tutte-like, while the full repair event is
+the rank-jump condition at one distinguished element. An exact identification could replace an
+ad hoc reliability calculus with a standard invariant and import duality, composition, algorithms,
+and code-enumerator relations at once. The initial probe is small: it is a subset-expansion
+comparison, not a new geometric classification.
+
+**Concrete first probe.** For a nonloop distinguished element `x` of a matroid `M`, define a
+multivariate pointed rank-jump polynomial separating subsets `A subset E-{x}` according to
+
+```text
+epsilon_x(A)=r_M(A union {x})-r_M(A) in {0,1}.
+```
+
+Then:
+
+1. write its subset expansion with cardinality, rank, and nullity variables;
+2. derive deletion--contraction at an ordinary helper;
+3. compare it exactly with the Las Vergnas/Tutte polynomial of the natural perspective involving
+   `M\x` and `M/x`;
+4. identify the specialization giving homogeneous and multivariate repair reliability;
+5. test the formula on a uniform matroid, the cubic q=9 target, and the harmonic q=9 target;
+6. determine whether duality exchanges the port with a useful blocker or cocircuit polynomial.
+
+**Outcome ladder.** There are three useful outcomes:
+
+- **strong GO:** reliability is a direct specialization of a standard perspective polynomial and
+  at least one nontrivial theorem imports immediately;
+- **partial GO:** the exact object is a modest pointed refinement, but it has a clean universal
+  recurrence and composition law not visible in the current presentation;
+- **STOP:** the standard polynomial forgets the distinguished closure event and the proposed
+  refinement merely restates the full Boolean truth table without compression or a new theorem.
+
+**Promotion gate.** A name match alone is insufficient. Promotion requires one useful consequence:
+a duality formula, a 2-sum/parallel-connection composition law, a bounded-branchwidth algorithm, or
+a coefficient/weight-enumerator identity.
+
+**Main risks.** Ordinary Tutte data may not determine a pointed port, and the radius cutoff is not
+encoded by the full rank-jump statistic. The first paper statement should therefore concern the
+unbounded port; bounded EXIT is a filtered refinement and may require additional variables.
+
+**Opened option if successful.** The result would justify a separate pointed-Tutte program on
+composition, fixed-parameter evaluation, complexity, and possible log-concavity. No Lorentzian or
+Hodge claim should be made until the exact polynomial class is established.
+
+#### Pick C — holonomy-sensitive multiplicative secret sharing
+
+**Rank:** largest asymmetric upside from a small experiment.
+
+**Why it ranks this high.** C217 currently proves an algebraically genuine distinction whose
+operational meaning is not yet decisive. Multiplicativity of an LSSS depends on coefficient-level
+data and is central to MPC, while the access structure depends only on supports. The existing pair
+of q=9 representations already supplies a controlled test: same support port, different holonomy,
+no search for examples required.
+
+**Concrete bounded experiment.** For both certified q=9 representations:
+
+1. fix the exact matroid-port/linear-secret-sharing orientation and dealer convention;
+2. construct the corresponding ideal LSSS matrices;
+3. implement or symbolically derive the standard multiplicativity criterion;
+4. test strong multiplicativity under the relevant adversary deletions if ordinary
+   multiplicativity differs or is automatically satisfied;
+5. verify that the criterion is invariant under the circuit and coordinate gauges quotiented by
+   C217;
+6. express any difference as a holonomy equation rather than as a raw matrix computation.
+
+**Outcome ladder.**
+
+- **major GO:** the two representations have different multiplicative or strongly multiplicative
+  behavior; this gives holonomy a direct cryptographic meaning;
+- **structural GO:** both examples agree, but the criterion factors through a new explicit
+  holonomy expression that can classify a larger family without search;
+- **negative boundary:** the criterion provably depends only on the support port in this rank or
+  family;
+- **STOP:** the pair agrees and the symbolic criterion exposes no holonomy dependence. Record the
+  negative and do not begin an open-ended representation census.
+
+**Promotion gate.** A finite difference must be accompanied by a gauge-invariant proof or a
+general criterion explaining it. A raw q=9 yes/no table is not paper-level.
+
+**Main risks.** Multiplicativity may depend on the whole represented matroid rather than the
+bounded port alone; primal/dual conventions can reverse the access structure; and both q=9
+realizations may lie on the same side of the MPC criterion despite being inequivalent.
+
+**Opened option if successful.** This would connect complete repair ports to characteristic-
+dependent MPC, representation moduli of ideal access structures, and field-sensitive network or
+index coding. It could justify a cryptography-facing follow-up rather than merely another coding
+section.
+
+#### Pick D — q=9 joint-port and Horn-closure prototype
+
+**Rank:** best seed for a new standalone program; not needed for the current paper.
+
+**Why it ranks this high.** The common-nucleus bottleneck proves that single-target availability
+can badly misrepresent system-level service. Joint ports address a real semantic gap, and q=9
+already has complete circuit inventories, symmetry actions, and independent verifiers. A bounded
+prototype can determine whether Horn closure yields a compressible theory before any general
+architecture is chosen.
+
+**Minimal definition.** For a fixed repair-radius inventory on ground set `V`, an initially live
+set `L` grows by the closure rule
+
+```text
+x enters L if some repair edge H for x satisfies H subset L.
+```
+
+The terminal closure, repair depth, and feasible parallel layers are the first joint-port
+invariants. Capacities should be deferred until the uncapacitated closure is understood.
+
+**Concrete q=9 prototype.** For the cubic--axis and harmonic systems:
+
+1. compute closure for every initial live set, reduced by failure-set size and symmetry;
+2. enumerate minimal permanent failure sets;
+3. compare one-round parallel, unrestricted parallel, and sequential recoverability;
+4. record minimum and maximum repair depth;
+5. isolate the effect of the C218 nucleus being live, dead, replicated abstractly, or given
+   capacity one;
+6. test whether feasible recovered-set families satisfy accessibility, union closure, or an
+   antimatroid/greedoid axiom;
+7. seek a symbolic reduction before promoting any orbit census.
+
+**Promotion gate.** Require at least one of:
+
+- a general Horn-closure recurrence;
+- a structural characterization of permanent failures;
+- an antimatroid/greedoid theorem for a natural port class;
+- a strict separation between sequential and parallel recovery with a uniform family;
+- a random-cascade threshold theorem.
+
+**Kill criteria.** Stop if the q=9 closure produces only a large unstructured orbit table, if no
+definition cleanly separates target failures from helper service capacity, or if the result merely
+restates ordinary global erasure correction.
+
+**Opened option if successful.** Joint ports could unify cooperative repair, stopping sets,
+bootstrap percolation, Horn implication systems, batch scheduling, and repair-control policies.
+
+#### Pick E — exact component EXIT and a first GLDPC comparison
+
+**Rank:** best established external application; medium scope.
+
+**Why it is valuable.** GLDPC density evolution already consumes exact component EXIT functions.
+The repair ports provide structured components with known geometry, blocker spectra, and
+multitype reliability. This is a direct way to test whether the theory improves an established
+coding design problem rather than only supplying new language.
+
+**Concrete bounded experiment.**
+
+1. derive exact univariate and type-dependent EXIT polynomials for the q=9 cubic and harmonic
+   components;
+2. specify precisely whether they act as variable-node or check-node components;
+3. choose one rate-matched SPC/Hamming/simplex baseline per component;
+4. run density evolution on a small, documented ensemble family;
+5. compare iterative threshold, stability condition, and predicted error-floor contribution;
+6. separate benefits due to component distance from benefits due to complete-port geometry;
+7. stop before ensemble-wide optimization unless a strict effect appears.
+
+**Promotion gate.** Require a reproducible threshold or error-floor tradeoff that is not explained
+solely by using a larger or stronger component code. A negative result is still useful if it shows
+that complete-port richness does not improve density evolution beyond ordinary component
+parameters.
+
+**Main risks.** C216's concatenated families are not automatically sparse GLDPC ensembles; the
+alphabet and rate matching may make the comparison artificial; and the common nucleus may hurt
+iterative performance despite giving elegant finite geometry.
+
+**Opened option if successful.** A positive comparison leads naturally to spatial coupling,
+mixtures of port types, threshold saturation, and port-aware component optimization.
+
+#### Pick F — characteristic audit of the C218 support matroid
+
+**Rank:** opportunistic sixth; bounded but binary in payoff.
+
+**Why it remains attractive.** C218 arises from a characteristic-three nucleus, while C217 shows
+that support and representation data must be distinguished. If the resulting support matroid
+itself excludes other characteristics, the port becomes a small local field certificate. If it is
+widely representable, the negative sharply limits the characteristic-fingerprint narrative.
+
+**Concrete bounded audit.**
+
+1. extract an exact abstract support matroid for the smallest q=9 harmonic system or a carefully
+   chosen minor carrying the nucleus circuits;
+2. formulate realization equations modulo projective and coordinate gauge;
+3. test small characteristics first, using symbolic elimination or certified finite search;
+4. isolate a minor obstruction or holonomy identity if nonrepresentability appears;
+5. distinguish “this displayed NRC realization needs characteristic three” from “the abstract
+   support matroid is representable only in characteristic three.”
+
+**Promotion gate.** Require a symbolic obstruction, excluded-minor witness, or exact
+characteristic theorem. A solver failure or absence of a small-field representation is not enough.
+
+**Kill criteria.** If explicit representations appear in several characteristics and no useful
+minimal-field invariant survives, record that the characteristic dependence belongs to the
+geometric realization rather than the support port and stop.
+
+#### Recommended execution order
+
+The portfolio is deliberately sequential:
+
+1. **Do Pick A first.** It is almost entirely deductive and strengthens the combined manuscript
+   regardless of later outcomes.
+2. **Run Pick B as the first literature/symbolic probe.** A clean standard-polynomial
+   identification could reorganize the reliability section before drafting hardens.
+3. **Run Pick C as one bounded q=9 experiment.** Its upside is large, but its stop rule must be
+   enforced.
+4. **Choose between Picks D and E according to the desired next audience.** D builds a new
+   repair-theory program; E tests relevance to iterative coding practice.
+5. **Run Pick F only in a quiescent bounded window** or when field dependence becomes important to
+   the manuscript's claims.
+
+The portfolio should not run as six simultaneous open fronts. Picks A--C are the highest-EV
+pre-draft sequence; D--F are option value after the combined paper's theorem package is fixed.
+
 ### Stand-alone follow-up programs
 
 The following are large enough to require separate allocation and handoff state:
