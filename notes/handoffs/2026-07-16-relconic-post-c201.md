@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — known extension strata and twist retain simple coverage branch; unknown image divisors next
+**Status:** C210 ACTIVE — reduced ramification exists universally; only image-level branch collision remains
 
 ## Current state
 
@@ -142,7 +142,11 @@ by the `build-sys` lane.
    arithmetic twist are not coverage-drop components. Next eliminate the two branch images and
    classify any genuinely new geometric image divisors, then test whether any resulting stratum can
    support an arc-legal affine-complete family over infinitely many odd extensions. Do not replace
-   this symbolic gate with a larger plane census. See
+   this symbolic gate with a larger plane census. The source side is now completely uniform:
+   `W=s*omega*D` and `Y=lambda*D` give a non-endpoint reduced ramification source at every
+   repair-stratum coefficient specialization, with transverse derivative
+   `s*(s+b1)*Norm(D)^2`. The remaining elimination is solely whether distinct ramification sources
+   can collide over every target on a special coefficient stratum. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

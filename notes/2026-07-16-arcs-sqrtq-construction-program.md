@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — known extension strata and arithmetic twist retain simple coverage branch; unknown image divisors next
+**Status**: ACTIVE — reduced ramification exists universally; only image-level branch collision remains
 
 ## Objective
 
@@ -99,6 +99,14 @@ The trace-one translation twist likewise retains such witnesses at all `2744` ap
 quotient coefficients.  The remaining gate is therefore the symbolic elimination/classification
 of genuinely new coverage image divisors; known lower factors and the twist are no longer candidate
 components.
+
+The source side of that last gate is now uniform.  With `D=x+t`, `W=D^2+q`, `E=omega*D`, the
+conditions `W=sE` and `Y=lambda*D` produce a ramification point for every coefficient
+specialization, and the exact transverse derivative is `s(s+b1)Norm(D)^2`.  The free `s` avoids
+the finite bad values, while the two defining equations are successively quadratic in `d=1+r+t`
+and `r`.  Hence every repair-stratum coefficient point has a non-endpoint reduced ramification
+source over the algebraic closure.  The only remaining image-divisor mechanism is global collision
+of distinct ramification sources above the same target.
 
 ## C201 input
 

@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — known geometric lower-factor strata and the arithmetic twist retain simple coverage branch; unknown image divisors next
+**Status**: ACTIVE — reduced ramification exists universally; only image-level branch collision remains
 
 ## Boundary from the literature
 
@@ -1834,4 +1834,67 @@ Frozen output:
 ```text
 1f0b1d2e196fd42b1f2a71b26423ee78f438790772588dad5fcd7b73bc489d98  analyze_c210_extension_branch_strata.py
 f0e913e6d2eec79c18e9988269b0dccc2d394cd45a0dd561ff2b7cee68308d11  analyze_c210_extension_branch_strata_output.txt
+```
+
+## Twenty-eighth coordinate gate: reduced coverage ramification exists universally
+
+The remaining coverage calculation has a uniform source parametrization.  For either seed color
+put
+
+```text
+D=x+t,        W=D^2+q,        E=omega*D,        Y=y+t.
+```
+
+The two differential columns in (38) become `Y*(W+b1*E)` and `(D+Y)*W`, and their
+coordinate determinant has the exact decomposition
+
+```text
+J=Norm(W)*det(Y,D)+b1*det(Y*E,(D+Y)*W).                 (40)
+```
+
+Now impose
+
+```text
+W=s*E,        Y=lambda*D+mu*E.                          (41)
+```
+
+At `mu=0`, (40) vanishes identically, while its transverse derivative is
+
+```text
+dJ/dmu = s*(s+b1)*Norm(D)^2.                            (42)
+```
+
+This family exists for every repair-stratum coefficient specialization, not merely generically.
+Writing `D=(d,e)` with `d=1+r+t`, the two coordinates of `W=sE` are
+
+```text
+d^2+e^2+k+1+z0 = s*e,
+e^2+a1*r^2+b1*r+z1 = s*(d+e).                           (43)
+```
+
+Over the algebraic closure, first solve the monic quadratic for `d`, then the quadratic in `r`,
+whose leading coefficient `a1` is nonzero; finally set `t=d+1+r`.  Because `e!=0`, only two values
+of `d/e` make `Norm(D)=0`.  The free scalar `s` can therefore avoid those values as well as
+`0,b1`, and `lambda` can avoid `0,1`.  Equations (41)--(42) then give a non-endpoint reduced
+ramification source for both seed colors at every coefficient point with `e*a1!=0`.
+
+Consequently no extension-field coefficient divisor can make the coverage ramification source
+disappear or become everywhere nonreduced.  The remaining image-divisor gate is now only the
+global collision question: can every point of this reduced family share its target with another
+ramification point on a special coefficient stratum?  The next elimination should compare two
+distinct ramification sources over their common target; it need not recompute source
+separability or intersect the already-closed lower-factor and twist loci.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_universal_ramification_family.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_universal_ramification_family_output.txt`.
+
+```text
+14aac2cc62f18271455629981bf9d5e6a97ccf57309fc5e9bdbf4f6f545ebfa3  analyze_c210_universal_ramification_family.py
+ce8bbbd3c785e427bfbd25a23da4cc314c770124870223fbb00d88c327fa9faa  analyze_c210_universal_ramification_family_output.txt
 ```
