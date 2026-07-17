@@ -1,0 +1,26 @@
+{
+  "binary_exhaustive": {
+    "field": "GF(2)",
+    "full_three-component_context_checks": 512,
+    "input_profile_count": 64,
+    "input_scope": "all normalized truncated pointwise profiles",
+    "maximum_feedback_iterations": 2,
+    "radius": 2,
+    "separator_dimension": 2,
+    "separator_vector_count": 4,
+    "two-child_response_checks": 4096
+  },
+  "conclusion": "truncated separator-vector terminal response maps compose exactly beyond one-element gluing",
+  "task": "C241",
+  "ternary_replay": {
+    "field": "GF(3)",
+    "full_three-component_context_checks": 512,
+    "input_profile_count": 8,
+    "input_scope": "all profiles realized by the third component, plus three abstract profiles",
+    "maximum_feedback_iterations": 2,
+    "radius": 2,
+    "separator_dimension": 2,
+    "separator_vector_count": 9,
+    "two-child_response_checks": 512
+  }
+}
