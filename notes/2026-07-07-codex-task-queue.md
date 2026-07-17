@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C232.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C237.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -91,6 +91,11 @@ unless they retain an explicit open tail.
 - **C230 `[rp-next]` [REPORTED 2026-07-16]** — derived the causal min--max arrival-time valuation, exact direct-sum depth/core profile factorization, and lift-filtered element-conditioning law, with binary deletion/contraction counterexamples to the naive same-radius minor recurrence → `notes/2026-07-16-c230-horn-depth-composition.md`.
 - **C231 `[rp-next]` [REPORTED 2026-07-16]** — proved exact 2-sum composition through scalar per-round locality-budget messages and a budget-indexed min--max arrival convolution, with a strict three-round binary interface relay and 98,000-state verifier → `notes/2026-07-16-c231-two-sum-repair-convolution.md`.
 - **C232 `[rp-next]` [REPORTED 2026-07-16]** — lifted C231 to an exact multi-interface directed-message calculus and contextual tree congruence, then disproved a radius/width-only finite behavioral alphabet with an unbounded binary triangle relay at radius two and width two → `notes/2026-07-16-c232-multi-interface-transfer-obstruction.md`.
+- **C233 `[rp-next]` [QUEUED]** — determine whether forgetting arrival times yields a finite radius/width-bounded terminal-response algebra on 2-sum trees, separating finite structural control from unbounded exact count weights → `notes/2026-07-16-c233-terminal-closure-transfer.md`.
+- **C234 `[rp-next]` [QUEUED; after C233]** — salvage exact synchronous depth with an infinite-carrier min--max/tropical delay algebra, proving a compositional finite presentation or isolating the first branching obstruction beyond scalar delay → `notes/2026-07-16-c234-tropical-delay-transfer.md`.
+- **C235 `[rp-next]` [QUEUED; after C234]** — define the capacitated multi-target repair region and prove an exact harmonic-port availability-versus-throughput separation with a symmetry-reduced primal/dual certificate → `notes/2026-07-16-c235-capacitated-batch-repair.md`.
+- **C236 `[rp-next]` [QUEUED; after C235]** — settle the flagship bounded-closure comparison by proving or refuting sequential-equals-span for the cubic family and certifying the harmonic sequential-versus-span witness → `notes/2026-07-16-c236-flagship-closure-comparison.md`.
+- **C237 `[rp-next]` [QUEUED; after C236]** — test support-identical `U(3,8)` GRS and generic representations for a Schur-square/strong-multiplicativity separation, or close the next holonomy-sensitive MPC scale negatively → `notes/2026-07-16-c237-u38-holonomy-mpc.md`.
 
 ### Dormant / handoff-owned lanes
 
