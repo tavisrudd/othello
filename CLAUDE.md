@@ -134,9 +134,12 @@ checks, finite-certificate sharding rules, and exact command forms.
 ## Intent-based mode and short commands
 
 Default mode is collaborative. `mi` enables intent-based mode for the rest of the current session;
-a handoff may persist it with `Mode: intent-based` under its date. `yc` means “your call.” `vb`
-means “vibe check”: translate the technical evidence into an honest progress assessment, including
-momentum, risks, and likely route viability rather than merely reciting implementation status.
+a handoff may persist it with `Mode: intent-based` under its date. 
+
+`yc` means “your call.” `vb` means “vibe check”: translate the technical evidence into an honest 
+progress assessment (good/bad, disappointing/great, etc.), including momentum, risks, and likely 
+route viability rather than merely reciting implementation status. 
+
 When stopping after a substantial full or partial C-item chunk, include a one-line vibe check in
 the user-facing work report even when `vb` was not requested. End the same report with a standalone,
 copy-pasteable `go C<id>` line naming the next allocated C item. If the next item is still behind a
