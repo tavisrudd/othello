@@ -10,18 +10,21 @@ This file is the always-loaded rules layer. Keep it short and stable.
 
 At the start of a session:
 
-1. Select a lane from the user's explicit alias, named handoff, or named task. Do not infer one from
+1. Reading this guide is a startup barrier. The command that reads it must contain no search,
+   status check, build, or other repository operation. Read and interpret the complete guide first;
+   only then issue a separate command under its rules.
+2. Select a lane from the user's explicit alias, named handoff, or named task. Do not infer one from
    git, the numeric value of a task ID, or the previous session.
    At the start of a session, a bare `C<id>` and a literal `go C<id>` both explicitly select that
    task **and its lane**. Look up the exact `C<id>` row in
    `notes/2026-07-07-codex-task-queue.md`, take the row's bracketed lane peg as authoritative, and
    then read only that lane's entry handoff from the routing table below. Do not search broadly for
    the task ID or ask the user which lane it belongs to.
-2. Read only that lane's entry handoff. It is the current-state map.
-3. Otherwise, read `notes/2026-07-07-codex-task-queue.md` only for global task-ID allocation,
+3. Read only that lane's entry handoff. It is the current-state map.
+4. Otherwise, read `notes/2026-07-07-codex-task-queue.md` only for global task-ID allocation,
    explicit lane completion, or a user-requested cross-lane status. A selected lane's handoff owns
    its next step.
-4. Do not preload archives, discovery logs, expert dossiers, paper sources, build manuals, or
+5. Do not preload archives, discovery logs, expert dossiers, paper sources, build manuals, or
    performance playbooks. Load them when the task or handoff points to them.
 
 Live docs must not contain timelines, transcripts, validation output, or superseded plans. Put those
@@ -151,16 +154,50 @@ history rewrites, non-fast-forward changes, `git push`, or a real n=16 run.
 
 ## Command-output and source hygiene
 
-- Be token-conservative: filter at the source, use explicit paths/patterns/fields, cap output, and
-  inspect small ranges. Never dump whole logs, process tables, broad diffs, or repository-wide file
+Token waste is a correctness failure, not merely a presentation issue. A tool output cap truncates
+what enters context; it does **not** make an over-broad command safe or scoped. Shape every command
+so the producer itself examines only the needed sources and emits only a small, predictable result.
+
+**Hard search preflight — required before every `rg`, `grep`, `find`, or equivalent call:**
+
+1. The command must visibly name the smallest known file or directory scope. Bare `.`, `..`, a
+   workspace root, or an unrestricted recursive search is forbidden when a narrower path is known.
+2. The pattern must be selective. Never search a repository for a bare task number, common number,
+   single punctuation mark, or broad alternation such as `C210|210`. Task IDs are resolved only by
+   an anchored exact-row query in the live queue.
+3. The command must visibly bound emitted results at the source with an exact file, a small line
+   range, `-m/--max-count`, a selective filename glob, or a final small `head`. When matches may
+   contain huge lines, also truncate fields or characters before they enter context.
+4. Exclude known bulk/generated domains unless they are the explicit target: large CSV/JSON data,
+   generated certificates, build trees, Git internals/worktrees, archives, and frozen outputs.
+5. If the likely result size is not predictable, first list or count matching filenames with a
+   bounded command; inspect content only in a second, narrower call.
+
+Do not run the search if any preflight item is missing. `max_output_tokens`, terminal truncation,
+and “I will inspect only the beginning” are not substitutes for source-side bounds. Examples:
+
+```text
+# Good: exact task lookup in one known file, with one match.
+rg -n -m 1 '^- \*\*C210 ' notes/2026-07-07-codex-task-queue.md
+
+# Good: bounded discovery under the one relevant source subtree.
+rg -l -m 1 'collision curve' papers/arcs_complete_outside_conic -g '*.py' | head -n 20
+
+# Forbidden: broad root plus common numeric alternative; an output budget does not rescue it.
+rg -n 'C210|210' ..
+```
+
+- Filter all non-search commands at the source too: request explicit fields and pathspecs, inspect
+  small line ranges, and never dump whole logs, process tables, broad diffs, or repository-wide file
   lists into context.
 - Use `~/.claude/bin/run-quiet "command args"` for noisy commands such as builds and deployments.
   Read only its bounded summary or a targeted diagnostic tail.
 - Default tool output budgets to 1,000–2,000 tokens. More requires a specifically bounded artifact.
   If a command reports more than 10,000 original tokens, treat the inspection as incorrectly shaped:
-  do not repeat it; replace it with a source-filtered query against the saved log.
-- Search with `rg`/`rg --files`, but always scope repository-sized searches. Do not run an unbounded
-  `git ls-files`, `find`, status dump, or diff when a narrow pathspec answers the question.
+  stop, do not inspect or repeat it, and replace it with a source-filtered query against the saved
+  log. Record the event as a command-shaping failure before continuing.
+- Prefer `rg`/`rg --files` over `grep`/`find`, subject to the same hard preflight. Do not run an
+  unbounded `git ls-files`, status dump, or diff when a narrow pathspec answers the question.
 - Never use broad `ps -eo`, repeated `ps`/`free`/`df`, `list_agents`, `wait`, or `write_stdin` as a
   progress dashboard. Use an unattended runner with disk-backed status and inspect one bounded
   milestone only after genuine uncertainty or a user request.
