@@ -2501,6 +2501,45 @@ Frozen outputs:
 3f3ba91f1f8d1ae18f421fb3d2371757b5e38b0f1d395ebb3f3b572c371e6cd4  analyze_c210_collision_curve_frobenius_singular_output.txt
 ```
 
+## Thirty-eighth coordinate gate: the coefficient-generic curve is geometrically irreducible
+
+The full 452-term polynomial (72), regarded in
+
+```text
+GF(2)[e,delta,a,b,k0,k1,c0,c1,g0,g1,u,t],
+```
+
+has exactly one irreducible factor. This is an exact multivariate factorization, not a finite-field
+point sample. Gauss's lemma therefore gives irreducibility over the rational coefficient function
+field. More strongly, the degree-preserving absolutely irreducible fiber (75) lies in this same
+family. Geometric integrality is open in the coefficient base, so the generic collision curve is
+absolutely irreducible. Pullback to the dominant Artin--Schreier cover encoding the common
+trace-one condition preserves that absolute irreducibility.
+
+Consequently every coefficient-generic trace-one pair is collision-forcing over sufficiently
+large scalar extensions: Lang--Weil gives points on the unique component, and the lower-degree
+nonzero polynomial `H` removes only finitely many of them. Any infinite escape from the two-coset
+arc obstruction must therefore lie in the proper closed coefficient locus where the resultant
+specializes reducibly, drops degree, or is contained in the `H=J=0` boundary. This turns the open
+classification from an unrestricted family problem into an exceptional-locus problem.
+
+The checker regenerates (72) from (70)--(71), sends the exact sparse polynomial to Singular, and
+requires one factor of multiplicity one.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_collision_curve_generic_factorization.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_collision_curve_generic_factorization_output.txt`.
+
+```text
+19fe74ffe3367fefe103a8d2219108fa6ae978298acdf0fc1677a9467879cb53  analyze_c210_collision_curve_generic_factorization.py
+9a194fecd96300b28749ddae97e98dee15f855acc3e268697a8246f5b0467c29  analyze_c210_collision_curve_generic_factorization_output.txt
+```
+
 ## Cross-lane imports worth retaining
 
 The current resultant-curve gate remains first.  Recent results in other lanes do not classify

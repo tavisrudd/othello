@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the first trace-one two-coset Frobenius exception is absolutely irreducible
+**Status:** C210 ACTIVE — the coefficient-generic trace-one two-coset collision curve is absolutely irreducible
 
 ## Current state
 
@@ -182,9 +182,12 @@ by the `build-sys` lane.
    collision curve, so the Frobenius issue is real; however, its degree-eight curve stays
    irreducible over extension degrees `2`, `4`, and `8`, hence is absolutely irreducible. Its
    nonzero degree-two `H` boundary cannot contain the curve, so Lang--Weil forces reconstructible
-   collisions over all sufficiently large scalar extensions. Next stratify the full trace-one
-   coefficient locus by geometric factorization, including `H=J=0`, and test affine coverage only
-   if a genuinely collision-free stratum survives.
+   collisions over all sufficiently large scalar extensions. Exact factorization of the universal
+   452-term resultant gives one factor, and the absolutely irreducible fiber makes geometric
+   integrality generic even after pullback to the trace-one cover. Thus only the proper closed
+   coefficient locus of factorization, degree drop, or `H=J=0` containment remains. Next compute
+   those exceptional divisors and their intersections, and test affine coverage only if a genuinely
+   collision-free stratum survives.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
