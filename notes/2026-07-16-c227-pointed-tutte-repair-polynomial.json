@@ -1,0 +1,267 @@
+{
+  "q9_examples": {
+    "cubic_infinity_full_rank_jump": {
+      "avoiding_hyperplane_section_count": 256,
+      "dual_success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        9,
+        91,
+        415,
+        1125,
+        2010,
+        2478,
+        2142,
+        1374,
+        933,
+        171,
+        19,
+        1
+      ],
+      "failure_by_survivor_count": [
+        1,
+        19,
+        171,
+        933,
+        1374,
+        2142,
+        2478,
+        2010,
+        1125,
+        415,
+        91,
+        9,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "helper_count": 19,
+      "largest_avoiding_hyperplane_section": 11,
+      "success_by_survivor_count": [
+        0,
+        0,
+        0,
+        36,
+        2502,
+        9486,
+        24654,
+        48378,
+        74457,
+        91963,
+        92287,
+        75573,
+        50388,
+        27132,
+        11628,
+        3876,
+        969,
+        171,
+        19,
+        1
+      ]
+    },
+    "harmonic_curve_full_rank_jump": {
+      "avoiding_hyperplane_section_count": 302,
+      "dual_success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        18,
+        198,
+        120,
+        45,
+        10,
+        1
+      ],
+      "failure_by_survivor_count": [
+        1,
+        10,
+        45,
+        120,
+        198,
+        18,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "helper_count": 10,
+      "largest_avoiding_hyperplane_section": 5,
+      "new_successes_beyond_radius_four_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        162,
+        84,
+        36,
+        9,
+        1,
+        0
+      ],
+      "success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        12,
+        234,
+        210,
+        120,
+        45,
+        10,
+        1
+      ]
+    },
+    "harmonic_nucleus_full_rank_jump": {
+      "avoiding_hyperplane_section_count": 356,
+      "dual_success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        180,
+        120,
+        45,
+        10,
+        1
+      ],
+      "failure_by_survivor_count": [
+        1,
+        10,
+        45,
+        120,
+        180,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "helper_count": 10,
+      "largest_avoiding_hyperplane_section": 4,
+      "new_successes_beyond_radius_four_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        72,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        30,
+        252,
+        210,
+        120,
+        45,
+        10,
+        1
+      ]
+    }
+  },
+  "rank_polynomial_identity": "S_x(u)=d/dy (U_{M\\x}(u,y)-U_{M/x}(u,y)) at y=1",
+  "repair_specialization": "success enumerator is coefficient of z^0",
+  "subset_polynomial": "P_x(u,z)=sum_{A subset E-{x}} u^|A| z^epsilon_x(A)",
+  "task": "C227",
+  "uniform_example": {
+    "failure_by_survivor_count": [
+      1,
+      6,
+      15,
+      0,
+      0,
+      0,
+      0
+    ],
+    "helper_count": 6,
+    "matroid": "U_{3,7}",
+    "pointed_tutte_terms_grouped_by_subset_size": [
+      {
+        "coefficient": 1,
+        "subset_size": 0,
+        "x_minus_1_exponent": 2,
+        "y_minus_1_exponent": 0,
+        "z_exponent_epsilon": 1
+      },
+      {
+        "coefficient": 6,
+        "subset_size": 1,
+        "x_minus_1_exponent": 1,
+        "y_minus_1_exponent": 0,
+        "z_exponent_epsilon": 1
+      },
+      {
+        "coefficient": 15,
+        "subset_size": 2,
+        "x_minus_1_exponent": 0,
+        "y_minus_1_exponent": 0,
+        "z_exponent_epsilon": 1
+      },
+      {
+        "coefficient": 20,
+        "subset_size": 3,
+        "x_minus_1_exponent": 0,
+        "y_minus_1_exponent": 0,
+        "z_exponent_epsilon": 0
+      },
+      {
+        "coefficient": 15,
+        "subset_size": 4,
+        "x_minus_1_exponent": 0,
+        "y_minus_1_exponent": 1,
+        "z_exponent_epsilon": 0
+      },
+      {
+        "coefficient": 6,
+        "subset_size": 5,
+        "x_minus_1_exponent": 0,
+        "y_minus_1_exponent": 2,
+        "z_exponent_epsilon": 0
+      },
+      {
+        "coefficient": 1,
+        "subset_size": 6,
+        "x_minus_1_exponent": 0,
+        "y_minus_1_exponent": 3,
+        "z_exponent_epsilon": 0
+      }
+    ],
+    "rank": 3,
+    "success_by_survivor_count": [
+      0,
+      0,
+      0,
+      20,
+      15,
+      6,
+      1
+    ]
+  }
+}
