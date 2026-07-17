@@ -5,7 +5,9 @@
 **Date:** 2026-07-16
 **Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
 costs, exact fully fiberwise pointed formula, verified finite reference evaluator, and single-pass
-functional-cost cache are implemented.
+functional-cost cache are implemented. The targeted prior-art audit identifies the ordinary cost
+as a classical induced quotient/syndrome weight and narrows the contribution candidate to the
+pointed nonembedded repair obstruction.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -30,9 +32,10 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Begin the targeted prior-art audit of concatenated-code dual coset enumerators, separation vectors,
-and weighted dual metrics. Then develop the strict natural example required by C215's promotion
-gate; see [`2026-07-16-c215-functional-cost-api.md`](../2026-07-16-c215-functional-cost-api.md).
+Develop the strict natural example required by C215's promotion gate: a nondegenerate inner/outer
+pair where the ordinary functional-support gate fails but the induced quotient-weight criterion
+proves repair-port preservation. Use the claim boundary in
+[`2026-07-16-c215-prior-art-audit.md`](../2026-07-16-c215-prior-art-audit.md).
 
 ## Scope and ownership
 

@@ -92,9 +92,12 @@ Correctness is proved in layers:
 - `pointedNonembeddedCostCachedSearch_eq_fullSearch` proves equality with exhaustive full block-word
   search.
 
-This is an exact decomposition, not a field-priority claim. The classical concatenated-dual fiber
-structure remains prior art; the target-conditioned repair-obstruction use still requires a
-dedicated literature audit before any novelty language.
+This is an exact decomposition, not a field-priority claim. The targeted audit identifies
+`functionalFiberCost` exactly as the classical induced quotient Hamming weight, equivalently a
+coset-leader or syndrome weight. The unpointed additive outer distance is therefore prior art at
+the definition level. The narrower contribution candidate is the coordinate-pointed,
+nonembedded-obstruction classification and its repair-port application; see
+[`2026-07-16-c215-prior-art-audit.md`](2026-07-16-c215-prior-art-audit.md).
 
 ## Validation
 
@@ -107,6 +110,6 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Begin the targeted prior-art audit before treating the pointed use as a contribution. Then develop
-the strict natural example required by C215's promotion gate. An extracted executable and benchmark
-remain optional follow-up work if a measured runtime claim becomes useful.
+Develop the strict natural example required by C215's promotion gate, using the claim boundary in
+the prior-art audit. An extracted executable and benchmark remain optional follow-up work if a
+measured runtime claim becomes useful.
