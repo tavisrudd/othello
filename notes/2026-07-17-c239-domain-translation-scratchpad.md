@@ -527,3 +527,123 @@ that destroys all safe continuations, rather than merely finding one reconfigura
 7. **Continuation-robust reconfiguration** — sharper version of option-preserving migration.
 
 The generic Capability Capsule remains a product IR, not the research novelty claim.
+
+## 2026-07-17 checkpoint — PL, contracts, and local-to-global semantics
+
+### Boundary transfer is a quantitative interface theory instance
+
+Interface automata, assume--guarantee contracts, quotient operations, and full abstraction are
+established. For example, the
+[algebraic theory of interface automata](https://doi.org/10.1016/j.tcs.2014.07.018) supplies
+parallel composition, conjunction, disjunction, hiding, quotient, substitutive refinement, and a
+full-abstraction result. Quantitative compositional pricing and resource interfaces already attach
+cost/resource semantics to component contracts
+([QEST 2006](https://ptolemy.berkeley.edu/projects/chess/pubs/233.html)). Dependability work also
+uses behavioral interfaces and bisimulation to compose dynamic fault models.
+
+Hence C231--C234 do not invent contracts or quantitative interfaces. Their possible distinctive
+content is much narrower and more exact:
+
+- interfaces are **compiled automatically from all bounded elementary recovery modes**;
+- the structural control alphabet is finite at fixed radius/interface width;
+- the exact count/time carrier is provably infinite even when structural control is finite;
+- an expression grammar still gives finite recursive presentation;
+- specific 2-sum and tree composition laws are exact rather than conservative.
+
+Best theory reframe:
+
+> a fully abstract interface theory for bounded monotone restoration, with a finite qualitative
+> quotient, an unavoidable infinite quantitative carrier, and exact semiring-valued composition.
+
+The new theorem needed is a canonical/minimal contextual quotient or a general characterization of
+which valuations factor through the finite control layer. Merely importing “Myhill--Nerode” language
+would not suffice.
+
+### Semiring hypergraph evaluation is prior art
+
+[Goodman's semiring parsing](https://aclanthology.org/J99-4004/) and subsequent hypergraph dynamic
+programming show that one packed derivation forest can support many valuations. This is another
+direct ancestor of the compile-once/value-many thesis. A Capability Capsule should therefore be
+presented as a **domain-specific packed derivation forest with additional blocker duality,
+coefficient labels, state updates, and certificates**, not as a new universal semiring engine.
+
+This also suggests an implementation strategy: reuse generalized inside/outside or hypergraph
+semiring kernels for availability, cheapest repair, count, probability, and earliest-arrival
+valuations, while keeping capacity coupling and blocker enumeration as separate back ends where
+simple semiring factorization fails.
+
+### Holonomy is a sheaf/gain-graph phenomenon
+
+Gain graphs and cellular sheaves already formalize locally labelled relationships whose cycle data
+controls global consistency. Spectral sheaf theory explicitly uses local restriction maps and
+global sections for distributed consistency and consensus
+([Hansen--Ghrist](https://doi.org/10.1007/s41468-019-00038-7)); network-coding sheaves have been
+used for global extendability, robustness, and information flow
+([Ghrist--Hiraoka](https://doi.org/10.34385/proc.45.A4L-C3)).
+
+Thus coefficient holonomy is not a generally new local-to-global obstruction. The local result's
+value is as an unusually small **representation-sensitive capability separation**: the same
+support matroid/access structure can yield different Schur-square rank and strong multiplicativity.
+
+The cross-domain prediction should be stated with sheaf precision:
+
+> Whenever a system is specified by a support hypergraph plus local linear restriction maps,
+> support-level policy equivalence can fail to preserve a nonlinear/compositional capability; a
+> cycle/cocycle or sheaf invariant may be the cheapest missing fingerprint.
+
+Predicted siblings:
+
+- network-coded flows with identical path supports but different global transfer capability;
+- distributed frame/sensor synchronization with identical communication graphs but different
+  cycle inconsistency;
+- linear/tensor computation graphs with identical dependency DAGs but different composability;
+- cryptographic access structures with identical authorized sets but different multiplication
+  behavior (already witnessed locally).
+
+The novelty test is not whether holonomy exists; it is whether a cheap cycle fingerprint predicts a
+capability that currently requires a full global rank/transfer computation.
+
+## Layered abstraction emerging from the audit
+
+A single hypergraph is too coarse. The common system has at least six layers:
+
+```text
+L0  support layer:       which resources occur in each minimal witness?
+L1  linear/label layer:  which coefficients, signs, maps, or gains make it valid?
+L2  causal layer:        which completed capabilities enable later witnesses?
+L3  resource layer:      how do simultaneous witnesses contend for capacities?
+L4  context layer:       what boundary behavior is observable under composition?
+L5  evidence layer:      how is every compilation and execution claim checked?
+```
+
+Different adjacent fields usually cover only a subset:
+
+| Field | Strong layers | Typical omission relevant here |
+|---|---|---|
+| knowledge compilation/provenance | L0, some L2, valuation fragments | L1 algebraic identity, L3 joint scheduling, L5 transformation evidence |
+| metabolic modes | L0--L1 and capacity cones | L4 exact modular restoration contracts, L5 proof-carrying compilation |
+| e-graphs | L0/L2 expression alternatives, cost extraction | failures, multi-target L3, blocker duals, domain coefficients |
+| Petri nets/workflows | L2 and richer token dynamics | automatically derived elementary linear witnesses and compact L1 identity |
+| interface/contracts | L4 and sometimes resource costs | complete witness extraction from source algebra, blocker duality |
+| sheaves/gain graphs | L1 local-to-global consistency | operational L2--L3 restoration planning |
+| repair-port portfolio | exact L0--L4 instances | generality, implementation, and comparative evaluation |
+
+This layered view is likely the clearest answer to “what have we missed?” The opportunity is not a
+new name for any one layer; it is semantics-preserving compilation across all six.
+
+## Revised structural predictions after the second audit
+
+1. **Coarse-equivalence failures will recur.** Systems equal at L0 but different at L1 will have
+   different nonlinear/compositional capabilities in MPC, network coding, metabolism, and tensor
+   programs.
+2. **Static/dynamic feasibility gaps will recur.** Systems with identical one-step witnesses can
+   differ after L2 closure in build recovery, metabolic scope, incident remediation, and staged
+   reconfiguration.
+3. **Availability/throughput inversions will recur.** L0 abundance can conceal L3 bottlenecks in
+   quorum systems, production recipes, diverse plans, and coded computation.
+4. **Finite-control/infinite-value separations will recur.** Fixed boundary behavior at L4 can
+   coexist with unbounded latency/count/cost carriers in workflows, protocols, parsing, and
+   modular supply processes.
+5. **Proof cost will reorder optimizers.** Two equal-cost plans at L3/L4 can have radically
+   different L5 certificate size/check time; formal CI, agentic remediation, and regulated
+   operations should expose a proof-cost Pareto frontier.
