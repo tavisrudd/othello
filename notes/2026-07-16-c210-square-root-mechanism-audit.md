@@ -452,6 +452,7 @@ python3 papers/arcs_complete_outside_conic/probe_c210_quadratic_coset_repairs.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_q64_quadratic_orbits.py
 python3 papers/arcs_complete_outside_conic/analyze_c210_q64_affine_coverage.py
 python3 papers/arcs_complete_outside_conic/probe_c210_trace_parameter_family.py
+python3 papers/arcs_complete_outside_conic/analyze_c210_remaining_trace_orbits.py
 ```
 
 Their frozen outputs are the correspondingly named `_output.txt` files in the same directory.
@@ -471,10 +472,70 @@ c7523e1dee7073cf4456c81868194ff10ddba5db3e9f796d9302429129b3a8d5  check_c210_rep
 1e4d1b0f6c2c0efb40e94acd6491c88978ea47c84360d010a335167d4fa4d4a8  analyze_c210_q64_affine_coverage_output.txt
 73727d2ce39719fbe00f80cc5d569827ba023c197a8bfb2f89660d563bb2895c  probe_c210_trace_parameter_family.py
 8485fdc566bb6e7175ceaccb6aa8eeec072adbddbe2570ff5476a0a3eee37127  probe_c210_trace_parameter_family_output.txt
+3562f174a7dd97527805b96ae3fe102f60f856400dbac3cf59729466c73ccf36  analyze_c210_remaining_trace_orbits.py
+3eec58250f1cdd9bea201937750b479b05867ad71c34a3cdca31541c46059f0f  analyze_c210_remaining_trace_orbits_output.txt
 ```
 
-The first orbit's most natural infinite extension is now closed. Next normalize the other two q=64
-orbit representatives in relative trace/norm coordinates and derive their one-repair collision
-sets. The acceptance gate is structural: their analogues of (6) must avoid a Kloosterman-forced
-intersection, or use a partial repair domain that deletes every bad reciprocal-trace pair while
-retaining affine coverage. Do not test a larger field before one of those routes survives on paper.
+## Eighth coordinate gate: all three scalar extensions are obstructed
+
+The other two q=64 orbits admit equally compact coordinates, but they do not escape (6).  Retain
+the first orbit's notation
+
+```text
+tau^3+tau+1=0,                    omega^2+omega+1=0,
+beta=1+tau*omega.
+```
+
+Choosing one representative from each translation orbit gives
+
+```text
+orbit 1: eta=1+tau*omega,
+         g(r)=omega*(tau^6*r^2+tau^5*r+tau^4),
+
+orbit 2: eta=tau^3+tau^5*omega,
+         g(r)=tau^2+omega*(tau^5*r^2+tau^6*r+1),
+
+orbit 3: eta=tau+tau^6*omega,
+         g(r)=tau^5+omega*(tau^3*r^2+tau*r+tau^4).
+```
+
+These identities normalize all twelve q=64 survivors, four per representative under subfield
+translation.  For any orbit and either seed height, the one-repair/two-seed equation determines a
+quadratic pair sum `p(r)` with two distinct roots `r0,r1` in `GF(8)`.  Put
+
+```text
+r=r0+(r0+r1)*x,                  z=x^2+x.
+```
+
+Then `p=kappa*z`.  Write the corresponding forced pair product as `q`; after the same substitution,
+
+```text
+q/p^2 = N(x)/(x^2*(x+1)^2),      deg(N)<=3.
+```
+
+Its partial fractions have double-pole coefficients `N(0),N(1)` and simple-pole coefficients
+`N'(0),N'(1)`.  Inside an absolute trace, `A/x^2` may be replaced by `sqrt(A)/x`.  The exact
+coefficient calculation gives reduced simple-pole coefficients `(1,1)` in all six orbit/seed
+cases.  Consequently every split-polynomial gate is
+
+```text
+tr(q/p^2)=tr(1/x+1/(x+1))=tr(1/z).
+```
+
+Because `z=x^2+x` runs through the nonzero absolute-trace-zero elements, a collision exists exactly
+when
+
+```text
+tr(z)=0,                          tr(z^(-1))=0.
+```
+
+Thus the three q=64 orbits are exceptional manifestations of one mechanism, not three candidate
+infinite mechanisms.  Every admissible direct scalar extension of their `GF(8)` coefficients is
+obstructed once the reciprocal-trace count is positive; the Kloosterman calculation above gives
+positivity for every `s>=16`.  This closes all full-domain scalar extensions of the three observed
+orbits.  It does not obstruct coefficient families that vary with `s`, or partial repair domains.
+
+The next gate is therefore partial-domain rather than another full-field census: quantify how many
+repair parameters must be deleted to hit every bad reciprocal-trace pair, then determine whether
+the surviving seed--repair secants can still cover the affine plane with `O(s)` total points.  Do
+not test a larger field before that coverage/collision tradeoff survives symbolically.
