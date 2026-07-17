@@ -96,7 +96,7 @@ unless they retain an explicit open tail.
 - **C235 `[rp-next]` [REPORTED 2026-07-16]** — defined the capacitated multi-target repair region and proved an exact harmonic-port availability-versus-throughput separation with a symmetry-reduced primal/dual certificate → `notes/2026-07-16-c235-capacitated-batch-repair.md`.
 - **C236 `[rp-next]` [REPORTED 2026-07-16]** — proved all-field cubic radius-three sequential-equals-span and certified an explicit q=9 harmonic sequential-versus-span witness → `notes/2026-07-16-c236-flagship-closure-comparison.md`.
 - **C237 `[rp-next]` [REPORTED 2026-07-16]** — explicit support-identical `U(3,8)` GRS/generic representations have square matroids `U(5,8)`/`U(6,8)` and separate strong multiplicativity for every dealer → `notes/2026-07-16-c237-u38-holonomy-mpc.md`.
-- **C238 `[rp-next]` [ACTIVE]** — synthesize repaircodes/repairports/rp-next into commercially useful algorithms, data structures, substantial improvements to existing systems, and broader-CS paper packages → `notes/2026-07-17-c238-repairports-commercial-algorithms.md`.
+- **C238 `[rp-next]` [REPORTED 2026-07-17]** — synthesized repaircodes/repairports/rp-next and the paper portfolio into commercially useful algorithms, data structures, explicit substantial-SOTA-improvement bets, protocol applications, and broader-CS paper packages → `notes/2026-07-17-c238-repairports-commercial-algorithms.md`.
 
 ### Dormant / handoff-owned lanes
 

@@ -1,8 +1,11 @@
 # C238 — Commercial algorithms and broader paper portfolio from repair ports, `repaircodes`, and arcs
 
-**Lane:** `rp-next`  
-**Date:** 2026-07-17  
-**Scope:** synthesis and research/product recommendations; no production-speed or market-size claim  
+**Lane:** `rp-next`
+
+**Date:** 2026-07-17
+
+**Scope:** synthesis and research/product recommendations; no production-speed or market-size claim
+
 **Working record:** [C238 scratchpad](2026-07-17-c238-repairports-commercial-algorithms-scratchpad.md)
 
 ## Executive answer
