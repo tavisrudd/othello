@@ -3,9 +3,11 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C215 is complete: its canonical and pointed costs, exact fiberwise formula,
-reference and cached evaluators, prior-art boundary, and inherited strict Singer/SPC example are
-closed. C216 is active.
+**Status:** ACTIVE. C214 was paper-promoted and the repaircodes lane is complete. C215's canonical
+costs, exact fully fiberwise pointed formula, verified finite reference evaluator, and single-pass
+functional-cost cache are implemented. The targeted prior-art audit identifies the ordinary cost
+as a classical induced quotient/syndrome weight and narrows the contribution candidate to the
+pointed nonembedded repair obstruction.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -21,8 +23,8 @@ twisted-cubic--axis paper.
 
 | Task | Status | Deliverable | Promotion gate |
 |---|---|---|---|
-| C215 | complete | weighted functional-dual theory | exact criterion plus a strict natural example |
-| C216 | active | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
+| C215 | active; cached cost/search API implemented | weighted functional-dual theory | exact criterion plus a strict natural example |
+| C216 | queued after C215 definition layer | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | bounded scout after C215 definitions | circuit-coefficient gauge invariants | nontrivial holonomy/cross-ratio with a consequence |
 | C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
 | C219 | queued | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
@@ -30,9 +32,10 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Develop C216's prescribed-port realization theorem. First separate the purely concatenation-based
-existence statement from the positive-density replication claim, then derive the strongest
-fixed-alphabet rate/distance region justified by standard outer AG or random linear families.
+Develop the strict natural example required by C215's promotion gate: a nondegenerate inner/outer
+pair where the ordinary functional-support gate fails but the induced quotient-weight criterion
+proves repair-port preservation. Use the claim boundary in
+[`2026-07-16-c215-prior-art-audit.md`](../2026-07-16-c215-prior-art-audit.md).
 
 ## Scope and ownership
 

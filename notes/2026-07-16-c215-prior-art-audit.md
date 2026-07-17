@@ -1,8 +1,7 @@
 # C215 prior-art audit: quotient weights, coset leaders, and pointed fibers
 
 **Lane:** `repairports`
-**Status:** bounded targeted audit complete; novelty boundary narrowed; existing strict example
-confirmed sufficient for C215 closure.
+**Status:** bounded targeted audit complete; novelty boundary narrowed.
 
 ## Verdict
 
@@ -131,17 +130,8 @@ enumerators. It was not a systematic review of every generalized-concatenation o
 protection reference. The positive identification of `lambda_I` as an induced quotient weight is
 definition-level and decisive. The absence of a pointed analogue is only provisional.
 
-## Strict-example disposition
-
-C215 does not need a duplicate construction. C214's completed `[20,4,9]_9` inner seed and
-Singer-shifted `[5,4,2]_{6561}` generalized-SPC outer code are exactly the required nondegenerate
-pair: functional support distance is five while induced quotient-weight distance is at least six,
-so radius-four repair transfer holds beyond the old support-distance gate. C221 and C224 subsequently
-kernel-checked the five-fiber lower bound, exact threshold-six package, and deduction from a
-presented regular Singer action. This satisfies C215's strict-natural-example gate with the
-classical quotient-weight attribution established above.
-
 ## Next step
 
-C215 is complete. C216 owns prescribed repair-port realization in asymptotically good
-fixed-alphabet families.
+Construct a strict natural inner/outer pair for which the ordinary outer functional-support gate
+fails but the induced quotient-weight criterion proves the required repair-port preservation. The
+example must derive its gain from nonconstant syndrome weights, not from a synthetic boundary case.
