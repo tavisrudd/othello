@@ -39,7 +39,8 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 **2 · Dihedral Schreier catalogue** — `dihedral-schreier-node-kayles`
 - *What:* **extended with the generalized-D₂ₘ family** before shipping; retitle toward
   "finite subgroups of PGL₂(q)".
-- *Gate:* owes Φ_T, ½-density, the one `native_decide` clear, + the D₂ₘ additions.
+- *Gate:* owes Φ_T, ½-density, + the D₂ₘ additions. (The lone `native_decide` is cleared:
+  `KleinFourBridge.lean` uses kernel `decide` since 2026-07-12.)
 
 **3 · Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9** —
 `arcs_complete_outside_conic`
@@ -307,8 +308,8 @@ papers rests on the standard-recurrence argument + literature values + different
   covering/leaf-obstruction certificate.
 - *Outstanding (blocks release):* continuation, completion beyond δ=τ, the `nofil` boundary
   negatives + capacity-2 sharpness, the dihedral paper-level theorems
-  (Φ_T, ½-density) plus its one isolated `native_decide` (`KleinFourBridge.explicit_pairProducts`, no
-  dependents — clear to `decide`/manual or delete).
+  (Φ_T, ½-density). The formerly isolated `native_decide` (`KleinFourBridge.explicit_pairProducts`)
+  is cleared: `KleinFourBridge.lean` now uses kernel `decide` (2026-07-12).
 - *Computational:* queens/OEIS and S₄/A₅ nimbers follow the `getK` pattern — Lean-proved recurrence
   plus a reproducible differential-tested solver and trust-chain note. The ρ_𝒞 values use a
   different trust path: kernel-checked coordinate witnesses, and at q=16 locally checked transition

@@ -1,0 +1,57 @@
+# Dihedral Schreier Node-Kayles paper
+
+**Lane**: `dihedral`
+
+**Date**: 2026-07-17
+
+## Goal
+
+Bring `papers/dihedral-schreier-node-kayles` (Node Kayles on fixed-point-deleted Schreier graphs
+from conic involutions) to the arcs/clebsch release bar: LaTeX+PDF, full-trust Lean, adequacy
+appendix, provenance section, adversarial and cold-prose review, and a cleared novelty audit.
+
+## Current status
+
+- Manuscript: `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`, near-complete and
+  committed markdown. Covers V₄ (Klein-four boundary) + dihedral D_{4n} + S₄/A₅ regular-template
+  rows; §14 defers the nonregular polyhedral coset templates and the PSL₂/PGL₂ escape residual.
+- Lean: `lean/DihedralSchreier/` certifies the reduction plumbing and the V₄→K₄ core only, without
+  `sorry` or `native_decide` (kernel `decide`). Template nimbers, Theorem 7.2 isomorphisms,
+  Brown et al. ladder values, orbit counts, and the density theorem are not yet formalized. See
+  `lean/DihedralSchreier/README.md`.
+- Solver: `rust/scripts/nodekayles_cayley.rs`. S₄ nimbers cross-checked by three independent
+  solvers; A₅ template rows are single-solver.
+- Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (bundle D₂ₘ, do not
+  spawn a sequel; escape hatch = ship the committed catalogue with §14 as the stated program),
+  and the release policy (formalization gate, adequacy appendix, provenance section).
+
+## Open frontiers
+
+- A₅ template nimbers have no recorded independent cross-check (C260).
+- No dedicated novelty/priority audit for this paper (C261).
+- Φ_T (Burnside) and ½-density formalizations are owed (C262).
+- D₂ₘ additions are owed before shipping per D6 (C263).
+- Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
+
+## Next steps
+
+- **C260** — independent cross-check of the S₄/A₅ template nimbers; correct the paper README
+  cross-check claim (already scoped to S₄).
+- **C261** — novelty/priority audit: Brown et al. pendant-ladder coverage for Theorem 7.2,
+  Tranchida delineation, general Schreier/Node-Kayles literature.
+- **C262** — implement the recorded formalization gate (Φ_T, ½-density), or a declared trust
+  boundary per the planning ruling; do not re-decide the gate.
+- **C263** — generalized-D₂ₘ additions per D6, with the §14 escape hatch.
+- **C264** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle.
+
+## Cross-lane relationships (foreign; do not re-peg without approval)
+
+The paper's driver and expert-upgrade items sit in the `cap` lane, not here:
+
+- **C84 `[cap]`** — abundance-first conic-involution Schreier program (the paper's driver /
+  next-programme), `notes/2026-07-12-conic-involution-residual-graphs.md`.
+- **C199 `[cap]`** — extract direct strategies from the Schreier catalogue.
+- **C200 `[cap]`** — recognize Schreier graph families structurally.
+
+Both C199 and C200 live in `notes/2026-07-15-expert-questions-upgrade-portfolio.md`. They overlap
+this paper's structural-recognition surface but remain `cap`-owned; coordinate rather than duplicate.

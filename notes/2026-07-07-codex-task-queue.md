@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C257.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C264.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -56,6 +56,14 @@ unless they retain an explicit open tail.
 - **C116 `[cubic]` [STARTED/DEFERRED]** — exact TO/RC/IC transversal spectra; resume with HiGHS → `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`.
 - **C158 `[cubic]` [QUEUED]** — k=4 healthy search → lane handoff.
 - **C204 `[cubic]` [QUEUED]** — N1 graph recognition/coherent-configuration gate → `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
+
+### `dihedral`
+
+- **C260 `[dihedral]` [QUEUED]** — independent cross-check of the S₄/A₅ regular-template nimbers (the A₅ appendix rows, including 𝒢=1 for (2,3,5),(2,5,5), are single-solver) and correct the `papers/.../README.md` "three independent solvers" claim to scope it to S₄ → `notes/2026-07-17-c260-a5-template-nimber-crosscheck.md`.
+- **C261 `[dihedral]` [QUEUED]** — dedicated novelty/priority audit: whether Brown et al. ladder Grundy values cover Theorem 7.2's opposite-end-pendant ladder family, delineation from Tranchida (off-conic↔involution correspondence), and general Schreier/Node-Kayles literature → `notes/2026-07-17-c261-dihedral-novelty-audit.md`.
+- **C262 `[dihedral]` [QUEUED]** — implement the recorded formalization gate: Φ_T (Burnside) and ½-density Lean formalization to `lean/TRUST.md`, or a clebsch-style declared trust boundary per the planning ruling (do not re-decide the gate) → `notes/2026-07-17-c262-dihedral-burnside-density-formalization.md`.
+- **C263 `[dihedral]` [QUEUED]** — generalized-D₂ₘ additions per ruling D6 (bundle, do not spawn a sequel); escape hatch: if D₂ₘ stalls beyond the formalization window, ship the committed catalogue with §14 as the stated program → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
+- **C264 `[dihedral]` [QUEUED]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose) for the markdown manuscript → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 
 ### `gem-mining`
 
