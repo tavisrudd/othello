@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — fixed-coefficient quadratic mechanism closed; coefficient-space gate next
+**Status**: ACTIVE — generic coverage degree derived; arithmetic monodromy next
 
 ## Objective
 
@@ -69,9 +69,12 @@ one-repair collision is equivalent to a nonzero `z` with `tr(z)=tr(z^(-1))=0`, w
 positive by the Weil bound for binary Kloosterman sums. The later trace, monodromy, and coverage
 gates close all three frozen-orbit scalar extensions: off the `105 | m` subtower singleton targets
 force the full collision-obstructed layer, while on that subtower an exact residue-field
-hypergraph has sixty-eight empty target edges after one-repair legality filtering. The next route
-is a symbolic coefficient-space audit of quadratic repair graphs; a larger fixed-field census is
-not the gate.
+hypergraph has sixty-eight empty target edges after one-repair legality filtering. The symbolic
+coefficient-space audit now proves that the generic seed--repair resultant has exact degree seven
+off `y1=0`, while at least one seed color has exact degree six on `y1=0`; both strata are generically
+separable. Thus the frozen empty edges are arithmetic rather than a universal degree collapse. The
+next route is generic arithmetic/geometric monodromy and collision-cover compatibility; a larger
+fixed-field census is not the gate.
 
 ## C201 input
 

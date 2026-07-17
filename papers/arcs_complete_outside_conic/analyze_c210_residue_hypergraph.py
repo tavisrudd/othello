@@ -18,6 +18,7 @@ from __future__ import annotations
 import itertools
 import json
 import random
+import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -265,6 +266,7 @@ def split_linear_roots(field: Any, poly: Poly, seed: int) -> tuple[Element, ...]
 
 @dataclass(frozen=True)
 class Context:
+    orbit: int
     ambient: QuadraticField
     base_values: tuple[int, ...]
     base_field: BaseField
@@ -278,17 +280,24 @@ class Context:
     c0: int
     c1: int
     g0: int
+    eta: int
+    a_big: int
+    b_big: int
+    c_big: int
     coordinates: Any
 
 
-def build_context() -> Context:
+def build_context(orbit: int = 1) -> Context:
+    assert orbit in (1, 2, 3)
     ambient = QuadraticField.for_subfield_order(8)
     base_values = tuple(x for x in range(ambient.q) if ambient.in_subfield(x))
     source = json.loads(Path(__file__).with_name(
         "probe_c210_quadratic_coset_repairs_output.txt"
     ).read_text().splitlines()[-1])
     alpha, beta = source["seed_offsets"]
-    eta, a_big, b_big, c_big = source["nonlinear_legal_parameters"][0][:4]
+    eta, a_big, b_big, c_big = source["nonlinear_legal_parameters"][
+        4 * (orbit - 1)
+    ][:4]
     tau = ambient.add(beta, ambient.power(beta, 8))
     omega = ambient.div(ambient.add(beta, 1), tau)
 
@@ -305,6 +314,7 @@ def build_context() -> Context:
     c0, c1 = coordinates(c_big)
     assert a0 == b0 == 0
     return Context(
+        orbit=orbit,
         ambient=ambient,
         base_values=base_values,
         base_field=BaseField(ambient, base_values),
@@ -318,6 +328,10 @@ def build_context() -> Context:
         c0=c0,
         c1=c1,
         g0=c0,
+        eta=eta,
+        a_big=a_big,
+        b_big=b_big,
+        c_big=c_big,
         coordinates=coordinates,
     )
 
@@ -331,10 +345,10 @@ def affine_line(field: QuadraticField, left: Point, right: Point) -> set[Point]:
 
 def singleton_factor_rows(context: Context) -> list[dict[str, Any]]:
     field = context.ambient
-    source = json.loads(Path(__file__).with_name(
-        "probe_c210_quadratic_coset_repairs_output.txt"
-    ).read_text().splitlines()[-1])
-    eta, a_big, b_big, c_big = source["nonlinear_legal_parameters"][0][:4]
+    eta = context.eta
+    a_big = context.a_big
+    b_big = context.b_big
+    c_big = context.c_big
     seeds = tuple(
         layer(field, context.alpha, context.base_values)
         + layer(field, context.beta, context.base_values)
@@ -644,8 +658,8 @@ def solve_independent_transversal(
     return (set(result) if result is not None else None), calls
 
 
-def main() -> None:
-    context = build_context()
+def analyze_orbit(orbit: int) -> dict[str, Any]:
+    context = build_context(orbit)
     assert all(
         not one_repair_failures(
             context, context.base_field, r, total_residue_degree=1
@@ -704,9 +718,10 @@ def main() -> None:
     selected_degree_profile = Counter(
         node[0] for node in solution
     ) if solution is not None else Counter()
-    assert degree_profile == {1: 8, 3: 132, 5: 120, 7: 140}
-    assert legal_degree_profile == {5: 20}
-    assert len(empty_indices) == 68
+    if orbit == 1:
+        assert degree_profile == {1: 8, 3: 132, 5: 120, 7: 140}
+        assert legal_degree_profile == {5: 20}
+        assert len(empty_indices) == 68
 
     def base_exponent(value: int) -> int | None:
         if value == 0:
@@ -738,7 +753,8 @@ def main() -> None:
             },
         }
 
-    print(json.dumps({
+    return {
+        "orbit": orbit,
         "base_field": "GF(8)",
         "residue_degrees": [3, 5, 7],
         "extension_frontier": "GF(8^m), 105|m, m odd",
@@ -776,6 +792,46 @@ def main() -> None:
                 "collision obstruction closes the 105|m scalar-extension frontier"
             )
         ),
+    }
+
+
+def main() -> None:
+    if len(sys.argv) > 1:
+        print(json.dumps(analyze_orbit(int(sys.argv[1])), sort_keys=True))
+        return
+
+    results = [analyze_orbit(orbit) for orbit in (1, 2, 3)]
+    common_keys = (
+        "singleton_targets",
+        "accepted_modulus_occurrences_by_degree",
+        "candidate_vertices_by_degree",
+        "one_repair_legal_vertices_by_degree",
+        "one_repair_failure_counts",
+        "empty_hyperedges_after_vertex_deletion",
+    )
+    assert all(
+        all(result[key] == results[0][key] for key in common_keys)
+        for result in results[1:]
+    )
+    print(json.dumps({
+        "base_field": "GF(8)",
+        "extension_frontier": "GF(8^m), 105|m, m odd",
+        "common_profile": {key: results[0][key] for key in common_keys},
+        "orbit_empty_hyperedge_certificates": [
+            {
+                "orbit": result["orbit"],
+                "certificate": result["first_empty_hyperedge_certificate"],
+            }
+            for result in results
+        ],
+        "all_three_orbits_closed": all(
+            result["empty_hyperedges_after_vertex_deletion"] > 0
+            for result in results
+        ),
+        "no_large_plane_census": True,
+        "status":
+            "one-repair vertex obstructions close all three frozen q=64 "
+            "scalar-extension orbits",
     }, sort_keys=True))
 
 

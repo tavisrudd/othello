@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — frozen quadratic mechanism closed; coefficient-space gate next
+**Status:** C210 ACTIVE — generic coverage degree derived; arithmetic monodromy next
 
 ## Current state
 
@@ -100,10 +100,12 @@ by the `build-sys` lane.
    `5`, and `7` residue-hypergraph gate now closes the last `105 | m` subtower as well: among 400
    exact candidate vertices only twenty degree-five vertices survive the one-repair gates, and
    sixty-eight of seventy-two required target hyperedges are empty. Thus every fixed-coefficient
-   scalar extension of the three q=64 quadratic orbits is closed. Next put the quadratic
-   coefficients themselves into the coverage resultants and decide whether the empty-target
-   certificate is generic or special to those three orbits. Do not replace this symbolic
-   coefficient-space gate with a larger plane census. See
+   scalar extension of the three q=64 quadratic orbits is closed. The coefficient-parametric
+   resultant now has leading term `a1*y1*(a1^2+a1+1)`, hence exact degree seven off `y1=0`; on
+   `y1=0`, the two seed-color degree-six coefficients differ by `a1*tau`, so one remains nonzero.
+   Squarefree specializations make both strata generically separable. Next compute the generic
+   arithmetic/geometric monodromy and its compatibility with the one-repair collision covers. Do
+   not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

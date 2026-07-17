@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 **Date**: 2026-07-16
-**Status**: ACTIVE — frozen `GF(8)` quadratic scalar-extension mechanism closed
+**Status**: ACTIVE — coefficient-space degree gate closed; arithmetic monodromy next
 
 ## Boundary from the literature
 
@@ -973,13 +973,15 @@ dcbf939c5eb43ded6efc660cf50137d84fcb54e12db5f15ff315904f2c6a749a  analyze_c210_p
 
 ## Sixteenth coordinate gate: the degree-105 residue hypergraph is empty
 
-The remaining `105 | m` subtower does not rescue the frozen first-orbit coefficients. Each of the
+The remaining `105 | m` subtower does not rescue any of the three frozen q=64 orbit coefficients.
+For each orbit, each of the
 seventy-two persistent q=64 targets has a degree-seven seed--repair elimination resultant over
 `GF(8)`. In an odd extension, only closed points of odd degree can become rational. Hence all
 possible candidates have degrees `1`, `3`, `5`, or `7`; every such degree already divides `105`.
 No new candidate for one of these targets can first appear farther up the odd subtower.
 
-The exact residue-field checker realizes every irreducible factor in `GF(8^d)`, includes all of its
+The exact residue-field checker runs independently on all three orbit representatives, realizes
+every irreducible factor in `GF(8^d)`, includes all of its
 Frobenius-conjugate repair parameters, and then applies every collision gate involving one repair
 point. For a degree-`d` candidate, the two same-seed tests retain their absolute-trace form because
 `105/d` is odd. For the mixed-seed gate, the checker specializes the quintic `M(r,D)` from (7) and
@@ -987,7 +989,7 @@ tests whether it has a root in `GF(8^105)`. Since its degree is five, only relat
 `1`, `3`, and `5` can enter this odd extension. The q=64 full-arc legality of all eight base repair
 parameters is rechecked first as a sanity gate.
 
-Across all target hyperedges, the accepted resultant factors and candidate vertices have profile
+For each orbit, the accepted resultant factors and candidate vertices have the identical profile
 
 ```text
 degree                         1    3    5    7
@@ -1017,7 +1019,9 @@ candidate. The obstruction persists in every `GF(8^(105k))`, `k` odd: the target
 new odd-degree candidates, while each exhibited collision remains present after extension.
 Consequently the partial-domain scalar extensions of the frozen q=64 quadratic repair orbits are
 closed for every odd `m`, including the last `105 | m` frontier. No two-repair collision-graph
-test is needed.
+test is needed. The other two orbit representatives have independent empty-target certificates of
+degrees three and five, respectively, and reproduce the same `400`-candidate, `20`-survivor,
+`68`-empty-edge profile.
 
 This closes the observed fixed-coefficient mechanism, not C210. Coefficients varying with the
 field order, nonquadratic repair graphs, and other Baer-transversal designs remain possible. The
@@ -1035,6 +1039,65 @@ Frozen output:
 `papers/arcs_complete_outside_conic/analyze_c210_residue_hypergraph_output.txt`.
 
 ```text
-068a993ac259823c3ec7b8f02e7eb78d284d03c9b3838e796017d5f1ac063529  analyze_c210_residue_hypergraph.py
-8855d92e54db774bde69166c6da9e05a1831d28e02e6c0897d57121804c3bc5a  analyze_c210_residue_hypergraph_output.txt
+7ccddae1628c1bdbd7683a3067d5d1b5fcc813217581c00c561b279fc4366de6  analyze_c210_residue_hypergraph.py
+75381617ba722d618a74e2cef9e2c29e255e180317c0b4e15cac5bb6c3966365  analyze_c210_residue_hypergraph_output.txt
+```
+
+## Seventeenth coordinate gate: the generic coverage resultant does not collapse
+
+The coefficient-space calculation retains
+
+```text
+eta=e0+e1*omega,                 g(r)=c0+omega*(a1*r^2+b1*r+c1),
+target=(y0+y1*omega,h0+h1*omega),
+seed height=z0+z1*omega,
+```
+
+and computes the seed--repair Sylvester resultant in `r` over the twelve-variable polynomial ring
+in characteristic two. Its coefficient support from degree zero through seven has sizes
+
+```text
+472, 268, 276, 92, 94, 31, 16, 3.
+```
+
+The leading coefficient factors exactly as
+
+```text
+[r^7] Res = a1*y1*(a1^2+a1+1).                           (16)
+```
+
+The repair-arc condition already requires `a1!=0`. Along `F=GF(8^m)`, `m` odd, the field has no
+`GF(4)` subfield, so `a1^2+a1+1` cannot vanish. Thus every target with `y1!=0` gives an exact
+degree-seven coverage cover, uniformly in the remaining repair coefficients.
+
+On the divisor `y1=0`, the degree-six coefficient is
+
+```text
+[r^6] Res = a1*(a1*(h0+z0)+h1+z1).                       (17)
+```
+
+The two seed colors have `(z0,z1)=(1,0)` and `(1,tau)`, so their degree-six coefficients differ by
+`a1*tau!=0`. At least one seed color therefore retains exact degree six for every target on this
+divisor. Exact GF(8) specializations give squarefree resultants of degree seven for both seed
+colors and a squarefree degree-six resultant on `y1=0`. Hence both coefficient-space strata are
+generically separable.
+
+This rules out a universal resultant degree drop or hidden component as the explanation for the
+three frozen empty-target certificates. Their obstruction is arithmetic: factorization and
+collision rationality remove every candidate after specialization. The next coefficient-space
+gate is therefore the arithmetic/geometric monodromy of the generic degree-seven cover (and the
+degree-six boundary cover), together with its compositum with the one-repair collision covers.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_symbolic_coverage_resultant.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_symbolic_coverage_resultant_output.txt`.
+
+```text
+bb750f220644fe7d8f1697bb8a4ea5318256a8f37247f4b3ae74cf1c7e4f12e2  analyze_c210_symbolic_coverage_resultant.py
+33e8188354b7997ea7833e2266cf5ffe176a13eff0047b2dcf7f98b3b0ed8afd  analyze_c210_symbolic_coverage_resultant_output.txt
 ```
