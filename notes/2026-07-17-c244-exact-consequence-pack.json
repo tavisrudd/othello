@@ -1,0 +1,150 @@
+{
+  "design_layers_and_poisson": {
+    "derived_sts_stein_chen_bound": "d_TV <= 2[t*s^6 + 2*P1*s^6 + 2*P1*s^5], where t=m(m-1)/6 and P1=m(m-1)(m-3)/8",
+    "derived_sts_window_rate": "O(m^(-1/3)) at s=c*m^(-2/3) for fixed c",
+    "exact_layers": [
+      {
+        "a4": 30,
+        "a5": 180,
+        "n": 10,
+        "q": 9,
+        "unordered_block_pairs_meeting_in_one": 120,
+        "unordered_block_pairs_meeting_in_two": 270
+      },
+      {
+        "a4": 819,
+        "a5": 19656,
+        "n": 28,
+        "q": 27,
+        "unordered_block_pairs_meeting_in_one": 131040,
+        "unordered_block_pairs_meeting_in_two": 29484
+      }
+    ],
+    "janson_lower_tail_claim_promoted": false,
+    "sqs_stein_chen_bound": "d_TV <= 2[b*s^8 + 2(P1+P2)*s^8 + 2*P1*s^7 + 2*P2*s^6], where b=n(n-1)(n-2)/24 and P1,P2 are the recorded overlap counts",
+    "sqs_window_rate": "O(n^(-1/4)) at s=c*n^(-3/4) for fixed c"
+  },
+  "exit_deficits": {
+    "brainstorm_redundancy_ledger_refuted": true,
+    "curve_radius_four_deficit": "23/154",
+    "harmonic_q9_code": "[11,5,6]_9",
+    "ledger_identity": "truncated EXIT area = code dimension + total locality deficit",
+    "nucleus_radius_four_deficit": "2/77",
+    "radius_four_exit_area_sum": "502/77",
+    "symbol_map_exit_area_sum": "5",
+    "total_locality_deficit": "117/77"
+  },
+  "master_enumerator_and_joint_law": [
+    {
+      "joint_failure_matrix_sha256": "5815183a2089e193461c490684435f7eea05a8bd29a2e8248c7727546bbfe2ed",
+      "joint_formula_equals_direct_enumeration": true,
+      "line_free_iff_restricted_sumset_avoids_negative_seed": true,
+      "master_term_count": 4,
+      "master_terms_sha256": "a088ac5da272707df0adb711ff5b8adecd772c0f21aa861a80eb149ce966e997",
+      "q": 3,
+      "sample_erasure_probabilities": {
+        "axis": "2/5",
+        "cubic": "1/3"
+      },
+      "sample_fkg_product": "15884/140625",
+      "sample_joint_failure": "692/3375"
+    },
+    {
+      "joint_failure_matrix_sha256": "ac4002979bb03e04940cb4b5df04332af8bd86fb2fd63a09794eb8fd493449fa",
+      "joint_formula_equals_direct_enumeration": true,
+      "line_free_iff_restricted_sumset_avoids_negative_seed": true,
+      "master_term_count": 13,
+      "master_terms_sha256": "c043ddfc7554ccbeecf5f74b3ea4e92ff0d8f13d19e17570c1f4c10483d81616",
+      "q": 9,
+      "sample_erasure_probabilities": {
+        "axis": "2/5",
+        "cubic": "1/3"
+      },
+      "sample_fkg_product": "40391249688832/18245578765869140625",
+      "sample_joint_failure": "7145216/38443359375"
+    }
+  ],
+  "pointed_distance": [
+    {
+      "hyperplane_section_histogram": {
+        "1": 240,
+        "2": 360,
+        "3": 90,
+        "4": 120,
+        "11": 10
+      },
+      "nonzero_weight_set": [
+        9,
+        16,
+        17,
+        18,
+        19
+      ],
+      "q": 9,
+      "targets": [
+        {
+          "minimum_blocker_size": 8,
+          "minimum_blocker_support_count": 9,
+          "pointed_primal_distance": 9,
+          "target_class": "curve"
+        },
+        {
+          "minimum_blocker_size": 15,
+          "minimum_blocker_support_count": 108,
+          "pointed_primal_distance": 16,
+          "target_class": "axis"
+        }
+      ]
+    },
+    {
+      "hyperplane_section_histogram": {
+        "1": 6552,
+        "2": 9828,
+        "3": 756,
+        "4": 3276,
+        "29": 28
+      },
+      "nonzero_weight_set": [
+        27,
+        52,
+        53,
+        54,
+        55
+      ],
+      "q": 27,
+      "targets": [
+        {
+          "minimum_blocker_size": 26,
+          "minimum_blocker_support_count": 27,
+          "pointed_primal_distance": 27,
+          "target_class": "curve"
+        },
+        {
+          "minimum_blocker_size": 51,
+          "minimum_blocker_support_count": 3159,
+          "pointed_primal_distance": 52,
+          "target_class": "axis"
+        }
+      ]
+    }
+  ],
+  "split_enumerator": {
+    "example": "completed cubic q=3, coordinate partition 1+7",
+    "identity": "W_C(A,B)=A*W_(C,x=0 punctured)(A,B)+B*W_(target nonzero, other)(A,B)",
+    "split_enumerator": {
+      "target_0_other_weight_0": 1,
+      "target_0_other_weight_3": 2,
+      "target_0_other_weight_4": 6,
+      "target_0_other_weight_5": 12,
+      "target_0_other_weight_6": 6,
+      "target_1_other_weight_2": 6,
+      "target_1_other_weight_3": 2,
+      "target_1_other_weight_4": 12,
+      "target_1_other_weight_5": 18,
+      "target_1_other_weight_6": 16
+    },
+    "target_zero_subcode_is_contraction_code": true,
+    "target_zero_subcode_size": 27
+  },
+  "task": "C244"
+}
