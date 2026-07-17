@@ -45,7 +45,7 @@ valuations.
 
 The strongest generalization candidate is:
 
-> Compile a declarative redundant system into a signed, proof-carrying capability capsule that
+> Compile a declarative redundant system into a labelled, proof-carrying capability capsule that
 > supports fast repeated “can it work?”, “why not?”, “what should I do next?”, “how long?”, and
 > “which intervention preserves the most future options?” queries.
 
@@ -65,10 +65,10 @@ This is broader than the C238 repair-control-plane framing and may be the missin
 | functional-cost transfer | abstract interpretation / assume-guarantee contract / quotient seminorm | sharp criterion for when local summaries remain exact under composition | contract systems whose coarse support summaries silently lose feasibility or cost |
 | repair service region | fractional packing / production polytope / capacity region | ports are derived automatically and sequential unlock can change the feasible region | online scheduling over dynamically revealed recipes rather than a fixed job graph |
 | pointed repair polynomial / EXIT | semiring provenance / reliability polynomial / partition function | one compiled family supports reliability and conditional failure transforms | cross-query knowledge compilation instead of one BDD/model per metric |
-| coefficient holonomy | gain graph / gauge cocycle / sheaf obstruction / semantic type refinement | same support structure can have different multiplicative/security capability | audits that collapse representation-level semantics to a combinatorial policy graph |
+| coefficient holonomy | gain graph / gauge cocycle / sheaf obstruction / semantic type refinement | the same support structure can have different labelled composition behavior | audits that collapse representation-level semantics to a combinatorial dependency graph |
 | Syndrome Atlas | stratified memoization / quotient decision diagram / behavioral type table | exact algebraic strata concentrate hard cases and expose ambiguity | test generation that samples by behavioral strata rather than input frequency |
 | Extension Complex | reconfiguration graph / solution complex / option-preserving planning | alternates and exchange paths make future optionality explicit | configuration repair that finds one valid state but destroys resilience to the next change |
-| Orbit StepBook | proof-carrying quotient transition system / certified partial-order reduction | generator may be untrusted; verifier checks explicit transports and coverage | symmetry reducers that assume or trust canonicalization without replayable quotient evidence |
+| Orbit StepBook | proof-carrying quotient transition system / certified partial-order reduction | an independent verifier checks explicit transports and coverage | symmetry reducers without replayable quotient evidence |
 | factorized obstruction masks | factorized database / BDD/ZDD / tensor-network constraint store | geometry supplies a natural two-level factorization and exact carrier map | explanation/search engines that materialize a huge flat incidence relation |
 | resource-aware proof build | precedence/resource scheduling with proof provenance | exact proof identity, generator lineage, and resource envelope travel together | formal CI that treats proof artifacts as ordinary build outputs |
 
@@ -90,7 +90,7 @@ CapabilityCapsule {
   reliability/provenance valuations,
   interface summaries and composition contracts,
   symmetry transports,
-  verifier and signature metadata
+  verifier and evidence metadata
 }
 ```
 
@@ -100,7 +100,7 @@ preserving certificates.
 
 ### B. Certified Alternative-Recovery IR
 
-Compiler viewpoint: the source is a matrix, ruleset, workflow, quorum policy, build graph, or
+Compiler viewpoint: the source is a matrix, ruleset, workflow, quorum specification, build graph, or
 configuration theory. The IR is a minimal-witness hypergraph enriched with coefficients,
 prerequisites, capacities, and proof objects. Back ends answer different queries or emit executable
 plans. This resembles compiler IR design more than a storage appliance.
@@ -149,8 +149,8 @@ representations remain succinct under bounded port radius/tree-like composition/
 ### AI planning, workflow orchestration, and agent systems
 
 - Horn closure is delete-free planning with alternative recipes.
-- proof-carrying plans are directly applicable to agents that propose actions but should not be
-  trusted to assert prerequisites or effects.
+- proof-carrying plans are directly applicable to agents that propose actions but are not a
+  reliable source for prerequisites or effects.
 - stopping cores are compact “bounded plan impossible” explanations.
 - Gap hypothesis: planners produce a plan or unsat core, but do not precompile all minimal
   restoration alternatives plus exact reusable boundary contracts.
@@ -168,7 +168,7 @@ representations remain succinct under bounded port radius/tree-like composition/
 - Risk: this may reduce to standard hypergraph scheduling or process-network synthesis unless the
   compositional/certificate result adds something formal.
 
-### Reliability, diagnosis, and cyber-physical recovery
+### Reliability, diagnosis, and industrial recovery
 
 - ports/blockers unify success paths, minimal cut sets, and repair actions.
 - dynamic closure goes beyond static fault trees because a successful recovery changes what can be
@@ -178,13 +178,10 @@ representations remain succinct under bounded port radius/tree-like composition/
 - Commercial transplant: industrial control restoration, telecom recovery, and power-system
   black-start planning, but only with domain-valid physical constraints.
 
-### Security, IAM, secret sharing, and trust management
+### Restricted-domain branch
 
-- support ports are authorization/quorum witnesses; blockers are denial coalitions.
-- holonomy warns that an access structure is not a complete semantic security specification.
-- Gap hypothesis: policy analysis misses representation-sensitive cryptographic capability,
-  especially multiplicative MPC after adversary deletion.
-- Commercial transplant: linting threshold/MPC deployments and migration across share schemes.
+This branch is isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain filename; do not follow
+automatically).
 
 ### Distributed systems, quorum systems, and network protocols
 
@@ -197,7 +194,7 @@ representations remain succinct under bounded port radius/tree-like composition/
 
 ### Networking and SDN/NFV
 
-- repair plans resemble a control plane compiling a declarative protection policy into verified
+- repair plans resemble a control plane compiling a declarative failover specification into verified
   failover actions.
 - ports can represent all bounded path/function-chain realizations; coefficients matter for coded
   flows and network coding.
@@ -206,14 +203,10 @@ representations remain succinct under bounded port radius/tree-like composition/
 - Risk: for ordinary routing, mature path/cut machinery dominates; restrict the claim to coded or
   multi-stage capability restoration.
 
-### Software supply chains, builds, and package ecosystems
+### Restricted build-provenance branch
 
-- alternative builders/artifacts/dependencies form recovery ports; signatures and provenance are
-  native requirements.
-- stopping cores explain why no trusted rebuild path remains.
-- separator summaries fit modular builds; resource-aware proof CI is one instance.
-- Commercial transplant: reconstruct a trusted artifact from caches, builders, source mirrors, and
-  attestations after compromise.
+This branch is isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain filename; do not follow
+automatically).
 
 ### Cloud data/AI serving and coded computation
 
@@ -243,14 +236,14 @@ representations remain succinct under bounded port radius/tree-like composition/
    bounded restoration contexts, with quantitative values carried separately.
 4. **Option-preserving configuration repair:** optimize the extension complex, not merely distance
    to one valid configuration.
-5. **Representation-sensitive policy analysis:** enrich access/quorum/dependency structures with
+5. **Representation-sensitive dependency analysis:** enrich labelled dependency structures with
    coefficient or cocycle data when support-level identity loses capability.
 6. **Certified dynamic cut/path duality:** pair executable causal recovery plans with residual
    stopping-core certificates in one IR.
 7. **Algebraic behavioral coverage:** compile exact hard-case strata for fuzzing and regression
    selection.
-8. **Proof-producing symmetry compilation:** quotient huge state spaces without trusting the
-   canonicalizer or orbit count.
+8. **Proof-producing symmetry compilation:** quotient huge state spaces while checking the
+   canonicalizer's transports and coverage independently.
 
 ## Structural prediction ledger: found here, predicted in X/Y/Z
 
@@ -258,19 +251,22 @@ This is a separate discovery mode from application listing. Each row starts from
 locally, predicts related phenomena in other domains because the same structural ingredients are
 present, and names the observation that would make the prediction nontrivial.
 
+Restricted sibling variants are isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain filename;
+do not follow automatically).
+
 | Found here | Predicted analogs | Why the mechanism should transfer | Discriminating prediction |
 |---|---|---|---|
-| support-identical representations have different functional costs or MPC capability | authorization policies backed by different cryptographic schemes; coded-computation plans with identical worker sets; network-coded routes with identical topology | the Boolean support hypergraph forgets scalar maps, composition phases, or implementation labels | construct two deployments with the same minimal authorized/available sets but different composability, cost, or adversary robustness |
+| support-identical representations have different functional costs or labelled capability | coded-computation plans with identical worker sets; network-coded routes with identical topology; linear dataflows with identical dependency shadows | the Boolean support hypergraph forgets scalar maps, composition phases, or implementation labels | construct two deployments with the same minimal available sets but different composability or cost |
 | parallel, sequential, and full-span recovery separate strictly | incident runbooks; multi-stage manufacturing; package/build recovery | completing one action creates an intermediate that unlocks rules unavailable initially, while global feasibility may still require an unbounded/forbidden action | find the smallest workflow where independent fallback checks fail, bounded causal remediation succeeds, and unconstrained feasibility is strictly stronger |
 | bounded local behavior needs a finite control state but unbounded quantitative carrier | streaming cost monitors; modular workflow ETA; hierarchical quorum latency; supply-chain lead time | contextual choices are finite while accumulated counts/delays remain unbounded | prove no finite value alphabet is exact, then give a finite syntax/control algebra over an infinite semiring carrier |
 | support distance is insufficient; functional quotient cost is sharp | API substitutability; data-layout migration; approximate service replacement | two components can expose the same reachable interfaces while differing in the cost of realizing the required function | exhibit a composition accepted by reachability/type matching but rejected exactly by a functional-cost contract |
 | availability and throughput separate on the same recovery hypergraph | quorum systems; replicated database reads; coded computation; supplier networks | existence of one live witness is a Boolean property, whereas simultaneous demand is a fractional packing problem with shared bottlenecks | find a highly available design whose maximum sustainable concurrent service is provably poor, with a dual bottleneck certificate |
-| local alternate completions do not imply a universal bridge preserving all profiles | rolling protocol reconfiguration; schema migration; dependency upgrades; key rotation | each state may have some escape, yet no single transition is compatible with every future context | find configurations where pairwise safe migrations exist but every universal migration destroys at least one continuation class |
-| a small exceptional field/parameter changes the closure spectrum | finite-word-size protocols; SIMD/quantized kernels; small-threshold secret sharing | identities that are generic over large domains collapse when coefficients or residues coincide | predict exceptional small moduli/word widths where test coverage, rank, or adversary properties change discontinuously |
-| factorized obstruction incidence collapses a huge flat search | policy analysis; configuration diagnosis; attack graphs; constraint explanations | obstructions are generated through a small family of carriers/interfaces rather than independently | recover the same answers from a two-level carrier-to-obstruction map using asymptotically or empirically less memory |
-| explicit transports let a tiny checker validate untrusted orbit reduction | concurrent protocol model checking; replicated workflow exploration; compiler state-space search | symmetry reduction is sound when every quotient edge/state can be lifted by a replayable group action | demonstrate a bug or trust reduction unavailable when the canonicalizer only emits orbit representatives/counts |
-| algebraic hard cases lie on exact syndrome strata | cryptographic implementation testing; coded computation; numerical kernels over finite/quantized domains | failures depend on rank/discriminant/ambiguity loci of low codimension, which uniform fuzzing rarely samples | algebraically stratified tests find distinct bugs or semantic branches at materially lower test budgets |
-| exact recovery semantics can be compiled once and valued many ways | database lineage; resilience digital twins; policy analysis | reliability, blockers, ETA, capacity, and explanations are valuations of the same witness structure | one shared IR beats separate per-query models in build cost, consistency, or certificate reuse without losing exactness |
+| local alternate completions do not imply a universal bridge preserving all profiles | rolling protocol reconfiguration; schema migration; dependency upgrades | each state may have some escape, yet no single transition is compatible with every future context | find configurations where pairwise safe migrations exist but every universal migration destroys at least one continuation class |
+| a small exceptional field/parameter changes the closure spectrum | finite-word-size protocols; SIMD/quantized kernels; finite arithmetic | identities that are generic over large domains collapse when coefficients or residues coincide | predict exceptional small moduli/word widths where test coverage or rank properties change discontinuously |
+| factorized obstruction incidence collapses a huge flat search | dependency analysis; configuration diagnosis; process explanations | obstructions are generated through a small family of carriers/interfaces rather than independently | recover the same answers from a two-level carrier-to-obstruction map using asymptotically or empirically less memory |
+| explicit transports let a tiny checker validate orbit reduction | concurrent protocol model checking; replicated workflow exploration; compiler state-space search | symmetry reduction is sound when every quotient edge/state can be lifted by a replayable group action | demonstrate a bug or assumption reduction unavailable when the canonicalizer only emits orbit representatives/counts |
+| algebraic hard cases lie on exact syndrome strata | coded computation; numerical kernels over finite/quantized domains | failures depend on rank/discriminant/ambiguity loci of low codimension, which uniform fuzzing rarely samples | algebraically stratified tests find distinct bugs or semantic branches at materially lower test budgets |
+| exact recovery semantics can be compiled once and valued many ways | database lineage; resilience digital twins; configuration analysis | reliability, blockers, ETA, capacity, and explanations are valuations of the same witness structure | one shared IR beats separate per-query models in build cost, consistency, or certificate reuse without losing exactness |
 
 ### Prediction templates to use in the final report
 
@@ -309,7 +305,7 @@ For every transplant, record:
 | configuration | pending | pending | extension/exchange complex | pending | pending | pending | pending |
 | PL/compilers | pending | pending | transfer + contextual summaries | pending | pending | pending | pending |
 | protocol verification | pending | pending | StepBook + transports | pending | pending | pending | pending |
-| supply/build security | pending | pending | signed capsules + provenance | pending | pending | pending | pending |
+| restricted-domain branch | [companion](2026-07-17-c239-fable-do-NOT-read.md) | isolated | isolated | pending | pending | pending | pending |
 | coded computation | pending | pending | complete coefficient-aware ports | pending | pending | pending | pending |
 
 ## Source discipline
@@ -325,9 +321,13 @@ For every transplant, record:
 The 7,000-line
 [`riffing-on-applications`](2026-07-12-riffing-on-applications.md) archive already covers most
 vertical destinations: shared-dependency resilience, proof-carrying search, supply chains,
-configuration/product lines, security architecture, OR solution portfolios, SDN, protocol
-symmetry, gossip provenance, causal inference, statistics, and ML. C239 should **not** add another
-hundred destination ideas. Its additional value is to:
+configuration/product lines, OR solution portfolios, SDN, protocol
+symmetry, gossip provenance, causal inference, statistics, and ML.
+
+The restricted destination branch is isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain
+filename; do not follow automatically).
+
+C239 should **not** add another hundred destination ideas. Its additional value is to:
 
 1. identify a smaller number of established abstractions that subsume many riffs;
 2. locate missing cross-domain theorem families rather than application nouns;
@@ -572,36 +572,10 @@ semiring kernels for availability, cheapest repair, count, probability, and earl
 valuations, while keeping capacity coupling and blocker enumeration as separate back ends where
 simple semiring factorization fails.
 
-### Holonomy is a sheaf/gain-graph phenomenon
+### Restricted representation-sensitive branch
 
-Gain graphs and cellular sheaves already formalize locally labelled relationships whose cycle data
-controls global consistency. Spectral sheaf theory explicitly uses local restriction maps and
-global sections for distributed consistency and consensus
-([Hansen--Ghrist](https://doi.org/10.1007/s41468-019-00038-7)); network-coding sheaves have been
-used for global extendability, robustness, and information flow
-([Ghrist--Hiraoka](https://doi.org/10.34385/proc.45.A4L-C3)).
-
-Thus coefficient holonomy is not a generally new local-to-global obstruction. The local result's
-value is as an unusually small **representation-sensitive capability separation**: the same
-support matroid/access structure can yield different Schur-square rank and strong multiplicativity.
-
-The cross-domain prediction should be stated with sheaf precision:
-
-> Whenever a system is specified by a support hypergraph plus local linear restriction maps,
-> support-level policy equivalence can fail to preserve a nonlinear/compositional capability; a
-> cycle/cocycle or sheaf invariant may be the cheapest missing fingerprint.
-
-Predicted siblings:
-
-- network-coded flows with identical path supports but different global transfer capability;
-- distributed frame/sensor synchronization with identical communication graphs but different
-  cycle inconsistency;
-- linear/tensor computation graphs with identical dependency DAGs but different composability;
-- cryptographic access structures with identical authorized sets but different multiplication
-  behavior (already witnessed locally).
-
-The novelty test is not whether holonomy exists; it is whether a cheap cycle fingerprint predicts a
-capability that currently requires a full global rank/transfer computation.
+This branch is isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain filename; do not follow
+automatically).
 
 ## Layered abstraction emerging from the audit
 
@@ -634,8 +608,9 @@ new name for any one layer; it is semantics-preserving compilation across all si
 ## Revised structural predictions after the second audit
 
 1. **Coarse-equivalence failures will recur.** Systems equal at L0 but different at L1 will have
-   different nonlinear/compositional capabilities in MPC, network coding, metabolism, and tensor
-   programs.
+   different nonlinear/compositional capabilities in network coding, metabolism, and tensor
+   programs. The restricted sibling is isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain
+   filename; do not follow automatically).
 2. **Static/dynamic feasibility gaps will recur.** Systems with identical one-step witnesses can
    differ after L2 closure in build recovery, metabolic scope, incident remediation, and staged
    reconfiguration.

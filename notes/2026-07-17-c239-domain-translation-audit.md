@@ -9,8 +9,8 @@
 **Working record:**
 [C239 domain-translation scratchpad](2026-07-17-c239-domain-translation-scratchpad.md)
 
-**Parent report:**
-[C238 commercial algorithms report](2026-07-17-c238-repairports-commercial-algorithms.md)
+**Parent report:** `2026-07-17-c238-repairports-commercial-algorithms.md` (plain filename; source
+contains restricted-domain material, so do not follow automatically)
 
 ## Executive thesis
 
@@ -26,9 +26,12 @@ faithfully than the separate abstractions used in adjacent fields.
 
 This report will test that thesis through programming languages, databases and provenance,
 knowledge compilation, AI planning, operations research, reliability, configuration repair,
-security, distributed protocols, networking, software supply chains, coded computation, and
+distributed protocols, networking, coded computation, and
 verification. A vocabulary transplant will not count as a contribution: each retained direction
 must expose a real gap and identify a theorem, algorithm, certificate, or benchmark that closes it.
+
+Restricted-domain branches are isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain filename;
+do not follow automatically).
 
 The audit changes the C238 framing in one important way. The broad research object should not be
 named only by the storage operation it performs. It is a **resilience knowledge compiler** whose
@@ -93,7 +96,7 @@ The final report will distinguish:
 
 ## 1. What the first report missed
 
-The [C238 report](2026-07-17-c238-repairports-commercial-algorithms.md) correctly identified a
+The C238 report `2026-07-17-c238-repairports-commercial-algorithms.md` correctly identified a
 compiled repair control plane, proof-carrying symmetry reduction, protocol capsules, and several
 commercial wedges. Its main omission was not another application. It did not identify the nearest
 general disciplines strongly enough.
@@ -111,8 +114,8 @@ general disciplines strongly enough.
 | solution reconfiguration and viability | paths/connectivity through a solution space | narrows extension-complex novelty to continuation robustness and certified option value |
 | diverse planning and OR | alternative solution pools, interdiction, and resource robustness | sharpens the objective to common failure-domain transversals |
 
-This audit used the earlier
-[`riffing-on-applications`](2026-07-12-riffing-on-applications.md) archive as a destination map. That
+This audit used the earlier `2026-07-12-riffing-on-applications.md` archive as a destination map.
+That source contains restricted-domain material and is therefore cited as a plain filename. The
 archive already contains hundreds of plausible verticals. The useful new move is compression:
 many of those riffs are manifestations of the same six-layer semantics below.
 
@@ -141,9 +144,9 @@ H_c = { support(m) : m is an elementary capability mode for c }
 B_c = minimal { B subset E : B intersects every member of H_c }.
 ```
 
-The support shadow alone is insufficient whenever coefficients, signs, gains, trust labels, or
-side conditions affect composition. C217/C237 already give an exact warning: identical support
-matroids can have different Schur-square ranks and strong-multiplicativity behavior.
+The support shadow alone is insufficient whenever coefficients, signs, gains, or side conditions
+affect composition. The restricted-domain instance and its source references are isolated in
+`2026-07-17-c239-fable-do-NOT-read.md` (plain filename; do not follow automatically).
 
 The metabolism bridge is exact enough to matter but not so exact that domains can be conflated.
 [Elementary flux modes](https://pmc.ncbi.nlm.nih.gov/articles/PMC544875/) are positive circuits of
@@ -159,11 +162,11 @@ One hypergraph is too coarse. The compiled object has six layers:
 | Layer | Question | Local material |
 |---|---|---|
 | L0 support | Which resources occur in each minimal witness/blocker? | complete ports, blockers, syndrome tables |
-| L1 label | Which coefficients, signs, maps, gains, or trust labels make a support valid? | functional cost, coefficient holonomy, Schur-square profiles |
+| L1 label | Which coefficients, signs, maps, gains, or domain labels make a support valid? | functional cost, coefficient and gauge fingerprints |
 | L2 causal | Which established capabilities unlock later modes? | Horn closure, stopping core, repair depth |
 | L3 resource | How do simultaneous modes contend for capacity, time, or risk? | service region, shadow prices, min--max ETA |
 | L4 context | What behavior can an environment observe through a module boundary? | 2-sum messages, terminal boundary controls, delay transfer |
-| L5 evidence | How is compilation, quotienting, and execution independently checked? | code hashes, equations, transports, StepBooks, Lean certificates |
+| L5 evidence | How is compilation, quotienting, and execution independently checked? | source identifiers, equations, transports, StepBooks, Lean certificates |
 
 The neighboring fields are complementary precisely because none routinely owns all six:
 
@@ -183,7 +186,7 @@ The neighboring fields are complementary precisely because none routinely owns a
 
 ```text
 CapabilityCapsule {
-  source_and_capability_hashes,
+  source_and_capability_identifiers,
   elementary_modes + label/coefficient certificates,
   support_and_blocker_antichains,
   reverse_incidence and causal_unlock_rules,
@@ -192,7 +195,7 @@ CapabilityCapsule {
   contextual boundary summaries,
   symmetry transports,
   compiler-pass and execution certificates,
-  schema/version/signature metadata
+  schema/version/evidence metadata
 }
 ```
 
@@ -232,10 +235,13 @@ The nontrivial extension is:
 ```text
 explanation provenance
     + executable state-changing interventions
-    + algebraic/cryptographic validity labels
+    + algebraic and domain-validity labels
     + shared-resource multi-target scheduling
     + independently checkable execution evidence.
 ```
+
+Restricted variants of the label layer are preserved in `2026-07-17-c239-fable-do-NOT-read.md`
+(plain filename; do not follow automatically).
 
 Call this **operational provenance**. Its first credible domain is a bounded monotone recovery
 workflow—build artifacts, replicated data products, or incident runbooks—where actions create
@@ -318,14 +324,17 @@ consistency. Spectral sheaf theory applies this to distributed agreement
 information flow and extendability
 ([Ghrist--Hiraoka](https://doi.org/10.34385/proc.45.A4L-C3)).
 
-The local result is a small exact test: the same support matroid/access structure can carry
-representations with different nonlinear composition capability. The research question is whether
-a gauge/cycle/cocycle fingerprint can predict that capability materially more cheaply than full
-global rank or transfer analysis. Holonomy itself is not the novelty.
+The general research question is whether a gauge/cycle/cocycle fingerprint can predict nonlinear
+composition capability materially more cheaply than full global rank or transfer analysis.
+Holonomy itself is not the novelty. The restricted local test case is preserved in
+`2026-07-17-c239-fable-do-NOT-read.md` (plain filename; do not follow automatically).
 
 ## 4. Structural predictions: found here, expected in X/Y/Z
 
 These are phenomenon forecasts, not application suggestions.
+
+Restricted variants of this prediction table are isolated in `2026-07-17-c239-fable-do-NOT-read.md`
+(plain filename; do not follow automatically).
 
 | Found locally | Predicted in X/Y/Z | Structural reason | Observable/falsifier |
 |---|---|---|---|
@@ -333,13 +342,13 @@ These are phenomenon forecasts, not application suggestions.
 | parallel < sequential < unconstrained feasibility | build recovery; incident runbooks; metabolic scope | L2 actions create intermediates that unlock new modes | smallest three-way separation; falsified if the domain is one-shot or closure-complete |
 | availability and throughput diverge | quorums; supplier recipes; coded computation | existential L0 witness versus L3 packing | highly available design with poor certified capacity and dual bottleneck |
 | finite structural control but infinite exact value carrier | hierarchical workflows; protocol ETA; modular production | finite L4 contexts accumulate unbounded counts/delays | no finite value quotient but finite expression grammar; weighted automata may subsume it |
-| local alternatives exist but no universal bridge preserves all profiles | rolling configuration; schema migration; key rotation | solution graph is locally nonempty but lacks a context-universal transition | every state has an escape, yet each migration kills a continuation class |
+| local alternatives exist but no universal bridge preserves all profiles | rolling configuration; schema migration; dependency upgrades | solution graph is locally nonempty but lacks a context-universal transition | every state has an escape, yet each migration kills a continuation class |
 | support distance loses sharp composition cost | API replacement; data-layout migration; service substitution | reachability/type equality ignores functional realization cost | same exposed support, different exact composability |
-| exceptional small fields change closure | modular protocols; quantized kernels; threshold cryptography | coefficient identities collapse at special characteristics/moduli | discontinuous rank/closure/security at small parameters |
-| obstruction incidence factors through few carriers | IAM; metabolic modules; failure domains | blockers share a small latent incidence source | two-level store preserves answers with major memory/time reduction |
-| explicit transports remove canonicalizer trust | protocol checking; hardware exploration; chemical enumeration | quotient correctness can be replayed by group actions | injected symmetry bug caught by the checker |
-| hard cases occupy algebraic strata | codecs/network coding; crypto arithmetic; quantized kernels | ambiguity/rank failures lie on low-codimension loci | stratified tests find distinct bugs with fewer cases |
-| continuation behavior reconstructs hidden structure | policy APIs; configuration services; code fingerprints | legal-extension oracle leaks a rigid compatibility object | bounded queries identify the hidden class; privacy defenses break rigidity |
+| exceptional small fields change closure | modular protocols; quantized kernels; finite arithmetic | coefficient identities collapse at special characteristics/moduli | discontinuous rank or closure at small parameters |
+| obstruction incidence factors through few carriers | configuration diagnosis; metabolic modules; failure domains | blockers share a small latent incidence source | two-level store preserves answers with major memory/time reduction |
+| explicit transports reduce canonicalizer assumptions | protocol checking; hardware exploration; chemical enumeration | quotient correctness can be replayed by group actions | injected symmetry bug caught by the checker |
+| hard cases occupy algebraic strata | codecs/network coding; finite arithmetic; quantized kernels | ambiguity/rank failures lie on low-codimension loci | stratified tests find distinct bugs with fewer cases |
+| continuation behavior reconstructs hidden structure | structured APIs; configuration services; code fingerprints | legal-extension oracle exposes a rigid compatibility object | bounded queries identify the hidden class; a countermeasure breaks rigidity |
 | proof cost changes the preferred plan | agentic remediation; regulated workflows; formal builds | L5 cost is not correlated with L3 execution cost | equal-execution plans reverse order when checker cost is priced |
 
 Three immediate prediction experiments are especially clean:
@@ -357,7 +366,7 @@ Three immediate prediction experiments are especially clean:
 ### 5.1 Elementary Capability Capsule
 
 This refines the C238 capsule by making the algebraic category and semantic layers explicit. Every
-support witness carries a label type—field coefficients, signed flux, trust predicate, rewrite
+support witness carries a label type—field coefficients, oriented flux, domain predicate, rewrite
 proof, or plain Boolean derivation—so consumers cannot mistake support equality for semantic
 substitutability.
 
@@ -411,7 +420,7 @@ Replace syntactic diversity with failure-domain coverage:
 repeat:
     generate the best acceptable plan avoiding selected failure domains
     update a minimum transversal of the plan family
-    choose a new adversarial failure set or certify target robustness
+    choose a new worst-case failure set or certify target robustness
 ```
 
 This is a double-oracle/column-generation architecture. Its novelty depends on outperforming
@@ -425,7 +434,7 @@ independent futures. Compare against viability kernels and solution-graph connec
 
 ### 5.8 Certificate-cost-aware planner
 
-Add proof bytes, checker time, trusted-code surface, and certificate freshness as resource columns.
+Add proof bytes, checker time, checker-code surface, and certificate freshness as resource columns.
 Optimize execution and assurance cost jointly. This makes proof-carrying architecture operational
 rather than decorative.
 
@@ -440,7 +449,7 @@ rather than decorative.
 | 5 | modular pathway analysis | expansion, EFM/MCS, FBA/MILP | exact separator transfer and reusable boundary summaries | major repeated-analysis speed/memory gain | decomposition is unnatural or existing tools dominate |
 | 6 | operational provenance | why/why-not, reverse data management, planners | checked state-changing sequences with resources and cores | safer/faster build/cloud recovery | planner plus lineage supplies the same result |
 | 7 | representation-sensitive linter | sheaf/gain invariants and rank tests | cheap fingerprint for support-identical differences | detect capability drift without global recomputation | fingerprint is no cheaper or less predictive |
-| 8 | continuation-robust reconfiguration | solution graphs, robust control, viability | transversal diversity of future continuations | fewer rolling-change dead ends | existing connectivity/robust MPC captures it |
+| 8 | continuation-robust reconfiguration | solution graphs, robust control, viability | transversal diversity of future continuations | fewer rolling-change dead ends | existing connectivity and robust-control methods capture it |
 
 The first three are most concrete. Knowledge compilation is broadest but needs complexity theorems.
 Metabolism is the most surprising connection and has the highest domain-validation burden.
@@ -455,22 +464,20 @@ holonomy/sheaf consistency, one safe reconfiguration path, or ordinary plan dive
 
 The first build should still be the **Repair Port Capsule and storage recovery simulator**. It has a
 real source compiler—the parity-check/generator matrix—and exact local semantics. General cloud
-runbooks often lack a trustworthy declarative source, so a broad “resilience compiler” would spend
+runbooks often lack a reliable declarative source, so a broad “resilience compiler” would spend
 its first years solving model extraction rather than validating the core engine.
 
 ### 7.2 Best adjacent wedges
 
-1. **Build/artifact restoration capsule.** Compile source mirrors, trusted builders, cached
-   artifacts, signatures, dependency recipes, and attestations into verified reconstruction plans.
+1. Restricted adjacent wedges are isolated in `2026-07-17-c239-fable-do-NOT-read.md` (plain
+   filename; do not follow automatically).
 2. **Failure-aware compiler/query fallback.** Apply the multi-extractor to e-graph, tensor, query,
    or build-plan corpora with unavailable operators/devices/data sources.
 3. **Resilient plan-portfolio service.** Wrap an optimizer and generate alternatives avoiding
    common causal failure domains rather than merely differing syntactically.
-4. **Agentic remediation verifier.** Let an untrusted agent propose a plan; verify prerequisites,
-   effects, identity, and stopping-core claims against a capsule.
-5. **MPC/network-code representation linter.** Audit support-identical coefficient drift in a
-   narrow, high-consequence market.
-6. **Metabolic-mode compiler.** Scientifically interesting but not a first commercial product
+4. **Agentic remediation verifier.** Let a proposal-producing agent emit a plan; verify prerequisites,
+   effects, claimed outcomes, and stopping-core claims against a capsule.
+5. **Metabolic-mode compiler.** Scientifically interesting but not a first commercial product
    without a systems-biology partner and a benchmark win over EFM/FBA tools.
 
 ### 7.3 Platform later, not first
@@ -478,9 +485,9 @@ its first years solving model extraction rather than validating the core engine.
 After two verticals share infrastructure, expose a typed Capability Compiler SDK:
 
 ```text
-front end: field matrix | cone/polyhedron | Horn workflow | e-graph | protocol policy
+front end: field matrix | cone/polyhedron | Horn workflow | e-graph | protocol configuration
 middle IR: modes + blockers + labels + causal rules + resources + boundary controls
-back ends: availability | plan | ETA | capacity | explanation | hardening | certificate
+back ends: availability | plan | ETA | capacity | explanation | robustness | certificate
 ```
 
 The six-layer types should prevent unsupported cross-domain assumptions. Premature unification
@@ -546,13 +553,10 @@ impossibility cores.
 Required: one build/database/cloud workflow language, checker, and evaluation. Assessment: **B
 systems architecture today; A− only with a compelling deployment**.
 
-### Paper T — Representation-sensitive capability shadows
+### Paper T — restricted-domain branch
 
-Study support hypergraphs as lossy shadows of labelled linear systems and test whether compact
-cocycle/sheaf fingerprints predict capabilities invisible to support.
-
-Theorem base: C217/C237. Required: a general invariant and a second domain such as network coding.
-Assessment: **B/B+ specialist**, potentially deeper if it avoids global recomputation.
+Paper T and its source-specific assessment are isolated in
+`2026-07-17-c239-fable-do-NOT-read.md` (plain filename; do not follow automatically).
 
 ### Priority order
 
@@ -624,7 +628,7 @@ forecasts in neighboring fields.
 
 The most important predicted discoveries are:
 
-- support-identical but capability-different systems outside MPC;
+- support-identical but capability-different systems in a second non-coding domain;
 - static/sequential/global three-way separations in expression and workflow systems;
 - highly available but low-throughput plan/quorum/production families;
 - finite contextual control with irreducibly infinite quantitative behavior; and
