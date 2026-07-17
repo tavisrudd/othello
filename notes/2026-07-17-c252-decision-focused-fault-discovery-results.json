@@ -1,0 +1,1272 @@
+{
+  "gate": "synthetic_sample_advantage_with_novelty_kill",
+  "limitations": [
+    "finite authored version space and deterministic noiseless execution oracle",
+    "singleton equal-cost injections only",
+    "LDFI row is a lineage-hazard objective translation, not a reimplementation of Molly",
+    "decision-focused acquisition is an instance of established targeted active learning/value of information"
+  ],
+  "model_count": 16,
+  "models": [
+    {
+      "decision": 0,
+      "id": "decision_0__holder_causal_1",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g",
+          "fd_h"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "causal_1",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_causal_2",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b",
+          "fd_h"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "causal_2",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_causal_3",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d",
+          "fd_h"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "causal_3",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_causal_4",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f",
+          "fd_h"
+        ]
+      },
+      "nuisance_holder": "causal_4",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_axis_1",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b",
+          "fd_h"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_1",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_axis_2",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c",
+          "fd_h"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_2",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_axis_3",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d",
+          "fd_h"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_3",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 0,
+      "id": "decision_0__holder_axis_4",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_b"
+        ],
+        "axis_2": [
+          "fd_b",
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_b",
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_b",
+          "fd_e",
+          "fd_h"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_4",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "causal_2",
+          "causal_3",
+          "causal_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_causal_1",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g",
+          "fd_h"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "causal_1",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_causal_2",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b",
+          "fd_h"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "causal_2",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_causal_3",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d",
+          "fd_h"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "causal_3",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_causal_4",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f",
+          "fd_h"
+        ]
+      },
+      "nuisance_holder": "causal_4",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_axis_1",
+      "lineage": {
+        "axis_1": [
+          "fd_a",
+          "fd_h"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_1",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_axis_2",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c",
+          "fd_h"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_2",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_axis_3",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d",
+          "fd_h"
+        ],
+        "axis_4": [
+          "fd_e"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_3",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    },
+    {
+      "decision": 1,
+      "id": "decision_1__holder_axis_4",
+      "lineage": {
+        "axis_1": [
+          "fd_a"
+        ],
+        "axis_2": [
+          "fd_c"
+        ],
+        "axis_3": [
+          "fd_d"
+        ],
+        "axis_4": [
+          "fd_e",
+          "fd_h"
+        ],
+        "causal_1": [
+          "fd_a",
+          "fd_b",
+          "fd_g"
+        ],
+        "causal_2": [
+          "fd_b"
+        ],
+        "causal_3": [
+          "fd_b",
+          "fd_c",
+          "fd_d"
+        ],
+        "causal_4": [
+          "fd_b",
+          "fd_e",
+          "fd_f"
+        ]
+      },
+      "nuisance_holder": "axis_4",
+      "optimal_portfolios": [
+        [
+          "causal_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_2",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_1",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_2",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ],
+        [
+          "causal_4",
+          "axis_1",
+          "axis_2",
+          "axis_3"
+        ],
+        [
+          "axis_1",
+          "axis_2",
+          "axis_3",
+          "axis_4"
+        ]
+      ],
+      "optimum": 4
+    }
+  ],
+  "observation": "singleton fault -> complete failed-plan vector",
+  "policy_summaries": {
+    "coverage": {
+      "histogram": {
+        "2": 16
+      },
+      "max_interventions": 2,
+      "mean_interventions": 2.0,
+      "min_interventions": 2
+    },
+    "decision_focused": {
+      "histogram": {
+        "1": 16
+      },
+      "max_interventions": 1,
+      "mean_interventions": 1.0,
+      "min_interventions": 1
+    },
+    "full_graph_information_gain": {
+      "histogram": {
+        "2": 16
+      },
+      "max_interventions": 2,
+      "mean_interventions": 2.0,
+      "min_interventions": 2
+    },
+    "ldfi_hazard_enumeration": {
+      "histogram": {
+        "8": 16
+      },
+      "max_interventions": 8,
+      "mean_interventions": 8.0,
+      "min_interventions": 8
+    },
+    "random_uniform_order": {
+      "histogram": {
+        "1": 5040,
+        "2": 5040,
+        "3": 5040,
+        "4": 5040,
+        "5": 5040,
+        "6": 5040,
+        "7": 5040,
+        "8": 5040
+      },
+      "max_interventions": 8,
+      "mean_interventions": 4.5,
+      "min_interventions": 1,
+      "permutations": 40320
+    }
+  },
+  "representative_traces": {
+    "coverage": {
+      "certified_portfolio": [
+        "causal_1",
+        "causal_2",
+        "causal_3",
+        "causal_4"
+      ],
+      "interventions": 2,
+      "trace": [
+        {
+          "failed_plans": [
+            "causal_1",
+            "axis_1"
+          ],
+          "fault": "fd_a",
+          "models_remaining": 16
+        },
+        {
+          "failed_plans": [
+            "causal_2",
+            "axis_1",
+            "axis_2",
+            "axis_3",
+            "axis_4"
+          ],
+          "fault": "fd_b",
+          "models_remaining": 8
+        }
+      ]
+    },
+    "decision_focused": {
+      "certified_portfolio": [
+        "causal_1",
+        "causal_2",
+        "causal_3",
+        "causal_4"
+      ],
+      "interventions": 1,
+      "trace": [
+        {
+          "failed_plans": [
+            "causal_2",
+            "axis_1",
+            "axis_2",
+            "axis_3",
+            "axis_4"
+          ],
+          "fault": "fd_b",
+          "models_remaining": 8
+        }
+      ]
+    },
+    "full_graph_information_gain": {
+      "certified_portfolio": [
+        "causal_1",
+        "causal_2",
+        "causal_3",
+        "causal_4"
+      ],
+      "interventions": 2,
+      "trace": [
+        {
+          "failed_plans": [
+            "causal_1"
+          ],
+          "fault": "fd_h",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_2",
+            "axis_1",
+            "axis_2",
+            "axis_3",
+            "axis_4"
+          ],
+          "fault": "fd_b",
+          "models_remaining": 1
+        }
+      ]
+    },
+    "ldfi_hazard_enumeration": {
+      "certified_portfolio": [
+        "causal_1",
+        "causal_2",
+        "causal_3",
+        "causal_4"
+      ],
+      "interventions": 8,
+      "trace": [
+        {
+          "failed_plans": [
+            "causal_1"
+          ],
+          "fault": "fd_h",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_1",
+            "axis_1"
+          ],
+          "fault": "fd_a",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_3",
+            "axis_2"
+          ],
+          "fault": "fd_c",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_3",
+            "axis_3"
+          ],
+          "fault": "fd_d",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_4",
+            "axis_4"
+          ],
+          "fault": "fd_e",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_4"
+          ],
+          "fault": "fd_f",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_1"
+          ],
+          "fault": "fd_g",
+          "models_remaining": 2
+        },
+        {
+          "failed_plans": [
+            "causal_2",
+            "axis_1",
+            "axis_2",
+            "axis_3",
+            "axis_4"
+          ],
+          "fault": "fd_b",
+          "models_remaining": 1
+        }
+      ]
+    }
+  },
+  "schema_version": 1,
+  "source_fixture": "2026-07-17-c251-agent-remediation-common-mode-corpus.json",
+  "stop_rule": "surviving models have a common exactly optimal size-four portfolio"
+}
