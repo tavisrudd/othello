@@ -2540,6 +2540,76 @@ Frozen output:
 9a194fecd96300b28749ddae97e98dee15f855acc3e268697a8246f5b0467c29  analyze_c210_collision_curve_generic_factorization_output.txt
 ```
 
+## Thirty-ninth coordinate gate: the first degree-drop divisor and its constant-height intersection
+
+The common trace-one condition has a rational Artin--Schreier parametrization.  Keep the constant
+pair sum `p!=0`, choose `w`, and put
+
+```text
+T0 = p^2*(w^2+w+1) + a*delta*p,
+L  = delta*b + delta^2,
+k0 = T0 + L,
+k1 = delta*(a^2+a+1)*p + a*T0 + L.                    (76)
+```
+
+Then `q/p^2=w^2+w+1`, so its absolute trace is one on every odd scalar extension of `GF(8)`.
+Substitution of (76) into the universal resultant preserves irreducibility over the coefficient
+function field.  More importantly, the `t` coefficients expose the exact first degree drops.  With
+
+```text
+Q(u)=u^2+delta*u+delta^2,
+```
+
+the leading coefficient is
+
+```text
+[t^4]R = a^2*Q(u)^2.                                  (77)
+```
+
+On `a=0`, the new leading coefficient is
+
+```text
+[t^2]R = b^2*Q(u)^2.                                  (78)
+```
+
+Since `delta!=0`, `Q` is a nonzero polynomial.  Thus the `t`-degree stratification on the intended
+trace cover is exactly `4` for `a!=0`, `2` for `a=0,b!=0`, and `0` for `a=b=0`.  Exact
+multivariate factorization finds one multiplicity-one factor after the trace pullback and again on
+the whole divisor `a=0`.  A degree-preserving `a=0,b!=0` fiber of total degree six stays
+irreducible over relative extension degrees `1,2,3,6`; the transitive-factor-orbit criterion
+therefore certifies that fiber as absolutely irreducible.  Geometric integrality is open, so the
+generic point of the degree-drop divisor is still collision-forcing.  The divisor `a=0` is not an
+escape component.
+
+The intersection `a=b=0` is genuinely different: `R` becomes a degree-six polynomial in `u` and
+is independent of the seed parameter `t`.  An exact normalized `GF(8)` classification finds `35`
+constant-height single repair layers that are individually arc-legal with the two seeds, `22`
+two-layer arcs, and exactly `12` satisfying the common trace-one condition.  In six of those twelve
+the alpha-seed univariate factors with degrees `(3,3)` and the beta-seed polynomial is irreducible
+of degree six; in the other six the seed colors reverse.  Hence every finite exception acquires a
+seed--cross-repair collision already over the relative degree-three extension.  None supplies an
+odd scalar-tower construction.
+
+This closes the generic point of the first degree-drop divisor and every normalized `GF(8)` scalar
+seed on its constant-height intersection.  It does not yet classify coefficient-varying points on
+`a=b=0`, the lower factorization loci inside `a=0,b!=0`, or factorization divisors on `a!=0`.
+Those exceptional strata, followed by their intersections with `H=J=0`, remain ahead of affine
+coverage.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_collision_curve_degree_drop.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_collision_curve_degree_drop_output.txt`.
+
+```text
+a1c3712eb60a9cc1d1701a20c2522b2fb330db06a78ad69e52fafcae4af350ae  analyze_c210_collision_curve_degree_drop.py
+12db8ef114c8fa29815de5f8fe2e2e833b995b4e5c4fc0f65da5ced974638387  analyze_c210_collision_curve_degree_drop_output.txt
+```
+
 ## Cross-lane imports worth retaining
 
 The current resultant-curve gate remains first.  Recent results in other lanes do not classify

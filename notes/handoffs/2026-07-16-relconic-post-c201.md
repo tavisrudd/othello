@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the coefficient-generic trace-one two-coset collision curve is absolutely irreducible
+**Status:** C210 ACTIVE — the first two-coset degree-drop divisor is classified generically
 
 ## Current state
 
@@ -187,7 +187,12 @@ by the `build-sys` lane.
    integrality generic even after pullback to the trace-one cover. Thus only the proper closed
    coefficient locus of factorization, degree drop, or `H=J=0` containment remains. Next compute
    those exceptional divisors and their intersections, and test affine coverage only if a genuinely
-   collision-free stratum survives.
+   collision-free stratum survives. The trace-one cover now has exact `t`-degrees `4`, `2`, and
+   `0` on `a!=0`, `a=0,b!=0`, and `a=b=0`. The divisor `a=0` remains generically absolutely
+   irreducible and collision-forcing. On `a=b=0`, the curve is univariate; all twelve normalized
+   q=64 trace-one two-layer arcs acquire a collision over relative degree three. Next classify the
+   coefficient-varying `a=b=0` arithmetic, the lower factorization strata in `a=0,b!=0`, and the
+   factorization divisors on `a!=0`, then intersect every survivor with `H=J=0`.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
