@@ -1039,3 +1039,209 @@ equivariant offline compiler
   -> small proof-carrying plan / coverage verifiers
   -> content-traced, resource-aware certificate build pipeline
 ```
+
+## Network, consensus, quorum, and gossip audit
+
+### Exact bridge: recovery ports and general quorum systems
+
+For a set family `Q` of acceptable quorums/recovery supports:
+
+```text
+availability = exists Q in Q, all members of Q are live
+blocker      = a set meeting every Q
+capacity     = fractional packing of Q under member capacities
+ETA          = min_(Q in Q) max_(u in Q) arrival(u)
+```
+
+These are exactly the Boolean, blocker, LP, and min--max objects already developed for complete
+repair ports. This correspondence is mathematically exact, but it is not itself novel. Naor--Wool
+already treat quorum load/capacity/availability; Flexible Paxos weakens intersection to the
+cross-phase conditions actually needed; AWARE and WPaxos already optimize/adapt WAN quorums.
+
+The credible contribution is a unified **Protocol/Quorum Capsule** with independently checked safety
+and operational semantics:
+
+```text
+ProtocolCapsule {
+  protocol/epoch/config hash,
+  minimal phase-specific quorum families or lazy oracles,
+  cross-phase/round intersection certificates,
+  minimal blockers and declared fault domains,
+  heterogeneous availability BDD,
+  latency min-max/profile DAG,
+  load/capacity LP columns and prices,
+  reconfiguration extension complex,
+  symmetry generators/transports,
+  optional erasure-code Repair Port Capsule,
+  signed proof manifest
+}
+```
+
+Safety, liveness/availability, and performance must remain separate layers. Repair-port mathematics
+does not prove Paxos/Raft/HotStuff agreement and does not model Byzantine equivocation by itself.
+
+### N1. Certified adaptive quorum planner
+
+Offline:
+
+1. compile or lazily generate every allowed phase-specific quorum;
+2. certify the exact required intersection conditions across phases/rounds/epochs;
+3. compute blockers and availability under failure domains;
+4. build min--max quorum ETA expressions and capacity columns; and
+5. precompute safe membership-change faces/paths.
+
+Online, choose a quorum minimizing predicted completion time plus capacity shadow prices and risk,
+then emit an epoch-pinned safety/configuration certificate. A quorum certificate already proves
+that votes were obtained; this new certificate proves that the *chosen quorum policy and
+reconfiguration* belong to the verified configuration.
+
+Potential substantial delta over adaptive weighted/flexible quorum systems: optimize over the full
+safe quorum family while jointly accounting for correlated availability, load, and future
+reconfiguration, with a small independent checker. The likely first win is assurance and safer
+adaptation, not an assumed latency win.
+
+Benchmark against majority Paxos/Raft, Flexible Paxos/WPaxos, and AWARE. Falsifier: their restricted
+weight/quorum search achieves the same latency/availability frontier and no material configuration
+fault is caught.
+
+### N2. Quorum-certificate ETA and bottleneck compiler
+
+A phase completes when all messages in any acceptable quorum arrive, so its exact arrival time is
+`min_Q max_(u in Q) T_u`. C234's expression DAG and budgeted bottleneck convolution can represent
+this directly; sequential phases/Horn triggers then compose certificate formation and downstream
+unlocks.
+
+Potential substantial delta: exact, incrementally reevaluated ETA and counterfactual bottleneck
+explanations for nonthreshold/hierarchical/flexible quorums, rather than a single fixed quorum-size
+order statistic. This is particularly useful for incident response and leader/weight selection.
+
+Prior-art risk is high: quorum latency optimization and dynamic weighted consensus exist. Promote
+only if the general-family compiler is much faster than explicit enumeration and improves tail
+prediction or configuration decisions on real traces.
+
+### N3. Safe reconfiguration as an extension/exchange complex
+
+Raft uses overlapping majorities during membership change; Vertical Paxos and Matchmaker Paxos
+provide other reconfiguration mechanisms. Model possible membership/weight changes as vertices and
+simultaneously safe changes as faces, with alternate paths and deletion blockers attached.
+
+Potential substantial delta: synthesize a reconfiguration plan that preserves multiple alternate
+future plans, not merely one safe next transition, and emit universal intersection certificates for
+the path. The `alt-orbit-repair` phase theorem is a strong mathematical demonstration of option-rich
+exchange, but it does not yet apply to consensus memberships. A general quorum-extension theorem and
+production policy corpus are mandatory.
+
+### N4. Code-aware gossip and data dissemination
+
+Ordinary GossipSub maintains a sparse mesh, peer scores, thresholds, and outbound quotas. Random
+linear network coding/algebraic gossip and instantly decodable network coding already combine
+coding with dissemination/scheduling. Narwhal explicitly separates reliable transaction
+dissemination from ordering; asynchronous verifiable information dispersal already uses erasure
+coding under Byzantine faults.
+
+The repair-derived layer is narrower:
+
+```text
+CodedGossipCapsule {
+  object/code/commitment hash,
+  each peer's authenticated shard/span state,
+  minimal target recovery equations,
+  innovative functional/circuit candidates,
+  reverse unlock incidence,
+  peer/link capacities and trust domains,
+  stopping cores and proof-carrying transmission DAGs
+}
+```
+
+An unlock-aware scheduler chooses the authenticated coded packet/shard that creates the most useful
+new decoding facts per scarce link. Repaired shards can be retransmitted; global encoding vectors or
+repair equations certify innovation and correctness. GossipSub remains the mesh/attack-resistance
+layer.
+
+Potential substantial delta: fewer redundant shard transmissions, higher recoverable fraction under
+correlated peer loss, and actionable stopping-core diagnostics in heterogeneous erasure-coded
+dissemination. Compare with uncoded GossipSub, RLNC/algebraic gossip, IDNC scheduling, and the target
+protocol's ordinary erasure-coded broadcast. Falsifier: RLNC's cheap randomness matches delivery and
+recovery while the complete-port state/certificates add overhead.
+
+Byzantine boundary: Merkle/commitment/authentication or verifiable coding is required. Linear repair
+validity alone prevents neither poisoning nor equivocation.
+
+### N5. Proof-producing symmetry reduction for protocol model checking
+
+Distributed protocols are dominated by interchangeable processes. Existing FDR/PRISM and protocol
+synthesis work exploit process symmetry and can achieve enormous reductions; PRISM's documented
+symmetry mode explicitly assumes rather than checks that the model is symmetric.
+
+Apply the arcs StepBook architecture to an explicit-state protocol model:
+
+1. the untrusted checker canonicalizes states under process permutations;
+2. each omitted transition/state carries an explicit permutation transport to a retained one;
+3. local certificates prove transition preservation and property invariance;
+4. covering step books prove every reachable successor is represented; and
+5. a small kernel checks global safety coverage without trusting the canonicalizer.
+
+This is the strongest protocol-facing SOTA thesis. The possible step-function improvement is in
+**assurance per unit state-space reduction**: retain mature symmetry speedups while removing the
+canonicalizer/symmetry assumption from the trusted computing base. It also supplies the mandatory
+nongeometry benchmark for the broader proof-carrying search paper.
+
+Benchmark on finite Paxos/Raft, randomized consensus, cache-coherence, or GossipSub models against
+plain explicit exploration, FDR/PRISM symmetry reduction, and SAT/SMT certificate routes. Measure
+state reduction, generator time, certificate size, checker time, trusted code, and injected
+symmetry/transition bugs. Initial claim is safety/exhaustiveness; liveness and fairness need separate
+certificates.
+
+### N6. Network-coded overlay coefficient linter
+
+In a linear network-coded overlay, support/routing topology does not fully determine coefficient
+behavior. Carry global encoding vectors and compute a coefficient-aware identity/holonomy
+fingerprint for repeated/cyclic coding configurations. Candidate uses: detect dependent packets,
+stale local coding coefficients, or support-identical coefficient drift before rollout.
+
+Network coding already carries encoding vectors and rank checks, so this is not a SOTA claim yet.
+It becomes interesting only if cycle-holonomy fingerprints detect configuration equivalence or bugs
+more cheaply/stably than full transfer-matrix comparison.
+
+## Substantial-SOTA lens across the whole portfolio
+
+Promote only areas with a plausible order-of-magnitude, capability, or assurance delta:
+
+| Area | Current SOTA strength | Missing capability supplied here | Potential substantial delta | Decisive falsifier |
+|---|---|---|---|---|
+| Erasure-coded repair control | Strong pipelining, RDAG/flow scheduling, optimized layouts | Complete equation family + sequential reuse + capacity + certificates | Recover cases fixed plans miss; lower node/rack makespan; smaller trusted controller | No significant feasible-set/makespan gain on realistic codes/failures |
+| Protocol model checking | Mature symmetry reduction, often with large trusted canonicalization/assumptions | Explicit transport/coverage certificates checked in native semantics | Same exponential state reduction with much smaller TCB and caught symmetry bugs | Certificates dominate runtime/space or certify no more than SAT/SMT alternatives |
+| Formal proof CI | Mature build/cache tools, weak resource/provenance handling for huge generated Lean leaves | Content-traced, RSS-aware DAG scheduling + certificate factorization | Avoid OOM/rebuild cycles and make multi-hour proof farms restartable/auditable | Generic Lake/Nix/Bazel tuning matches results without special tooling |
+| Consensus quorum operations | Flexible/adaptive/weighted quorums and classical load/availability theory | One verified phase-aware safety/availability/latency/capacity/reconfig capsule | Safer adaptation and better joint Pareto frontier for heterogeneous deployments | AWARE/WPaxos/fixed policies match frontier and catch same config faults |
+| Coded gossip/data availability | RLNC, algebraic gossip, IDNC, erasure-coded VID | Complete structured recovery semantics + unlock/stopping-core diagnostics + plan verification | Less redundant traffic and better correlated-loss recovery for structured codes | RLNC/ordinary coding matches delivery at far lower controller cost |
+| Symmetric code compilation | Code automorphisms known; repair metadata often explicit/ad hoc | Certified equivariant compilation of full repair semantics | Orbit-factor reduction in compile time, capsule size, and validation | Real code families have too little useful symmetry or lazy standard oracles suffice |
+| Codec validation | Random/weight-stratified tests and code-specific exhaustive tests | Algebraic hard-locus discovery + behavior/ambiguity reconstruction | Find structured bugs with orders fewer tests; identify drift from behavior | Low-degree loci do not correlate with faults/cost |
+| Configuration migration | Reconfiguration protocols and ordinary hitting-set robustness | Extension complex with alternate-future option value and proof-carrying paths | Avoid safe-now/dead-end-later changes | No production family exhibits useful nontrivial extension structure |
+
+Areas not presently credible as substantial SOTA improvements:
+
+- generic path routing/network reliability (our objects reduce to established cuts/flows/BDD);
+- generic Datalog/Horn evaluation;
+- generic fault-tree reliability;
+- ordinary threshold consensus or threshold MPC;
+- unconstrained workflow engines; and
+- ordinary canonical augmentation without the proof-carrying trust improvement.
+
+## Protocol-related primary baselines checked
+
+- [Naor--Wool, load/capacity/availability of quorum systems](https://www.wisdom.weizmann.ac.il/~naor/PAPERS/quor_abs.html)
+- [Flexible Paxos](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.OPODIS.2016.25)
+- [AWARE adaptive WAN Byzantine consensus](https://arxiv.org/abs/2011.01671)
+- [WPaxos](https://arxiv.org/abs/1703.08905)
+- [Raft and overlapping-majority membership changes](https://www.usenix.org/node/184041.)
+- [Vertical Paxos](https://lamport.azurewebsites.net/pubs/vertical-paxos.pdf)
+- [HotStuff quorum certificates](https://pdos.csail.mit.edu/6.824/papers/hotstuff.pdf)
+- [libp2p GossipSub v1.1 specification](https://github.com/libp2p/specs/blob/master/pubsub/gossipsub/gossipsub-v1.1.md)
+- [random linear network coding](https://authors.library.caltech.edu/records/e9xap-44498)
+- [algebraic gossip](https://www.mit.edu/people/medard/papers/ITRevised.pdf)
+- [joint scheduling and instantly decodable network coding](https://openresearch-repository.anu.edu.au/server/api/core/bitstreams/f654031c-5240-4c1a-a891-d1eeda383df3/content)
+- [Narwhal and Tusk](https://arxiv.org/abs/2105.11827)
+- [asynchronous verifiable information dispersal](https://people.csail.mit.edu/tessaro/papers/dds.pdf)
+- [symmetry reduction in CSP model checking](https://link.springer.com/article/10.1007/s10009-019-00516-4)
+- [PRISM symmetry reduction](https://www.prismmodelchecker.org/symm/)
+- [automatic completion of distributed protocols with symmetry](https://arxiv.org/abs/1505.04409)
