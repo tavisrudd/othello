@@ -660,3 +660,71 @@ Frozen output:
 fb2f08f232919ae10490ec7b056df8e73e21d1629696be3a9ce7999e7c945811  analyze_c210_mixed_seed_collisions.py
 a0007cbcfc1363c7782406a47f0ae4655bcc1ffec7ceed33d369132844ac2084  analyze_c210_mixed_seed_collisions_output.txt
 ```
+
+## Eleventh coordinate gate: a linear domain survives all one-repair collisions
+
+The degree-five cover in (7) has full monodromy, and its interaction with the two same-seed trace
+conditions is independent. Differentiate (7) with respect to `d`. Simultaneous vanishing of `M`
+and `M_d` forces
+
+```text
+d^4+tau*d^2+tau^2=0,
+```
+
+so, over the algebraic closure, `d^2` is one of `tau*omega,tau*omega^2`. For either value the
+critical equation in `r` is one fiber of the separable additive quartic `h(r)^2+tau*h(r)`, hence
+has four distinct roots. The two fibers are disjoint because their right sides differ by
+
+```text
+tau*(e1^2+g0+1),
+```
+
+which is nonzero in all three orbit normal forms. Thus there are eight distinct branch values.
+At each critical point the second Hasse derivative in `d` is nonzero, so the local ramification
+index is exactly two and the inertia permutation on the five sheets is a transposition. The cover
+is already geometrically irreducible by the tenth gate. A transitive degree-five subgroup of `S5`
+containing a transposition is `S5`; therefore both geometric and arithmetic monodromy are `S5`.
+
+The two same-seed conditions are independent Artin--Schreier characters. Each has two simple poles,
+and the two pole pairs are disjoint because `delta` is neither zero nor one. All four poles lie in
+`GF(8)`. By contrast, every mixed branch value lies outside `GF(8)`: its additive-quartic value has
+nonzero `omega` coordinate. The unique possible quadratic intersection with an `S5` Galois closure
+is its sign subcover, which ramifies at the transposition branch values. None of the three
+nontrivial combinations of the same-seed characters has that ramification support. Consequently
+the joint geometric and arithmetic group is
+
+```text
+S5 x C2 x C2.
+```
+
+A repair parameter clears the mixed-seed gate precisely when its `S5` Frobenius is a derangement;
+`S5` has 44 derangements. It clears each same-seed gate precisely when the corresponding
+Artin--Schreier Frobenius is nontrivial. Function-field Chebotarev therefore gives, for
+`F=GF(8^m)` with odd `m`,
+
+```text
+|T_one-repair| = (44/(120*4))*s + O(sqrt(s))
+               = 11s/120 + O(sqrt(s)).                    (8)
+```
+
+The restriction to odd `m` keeps `omega^2+omega+1` irreducible over `F`, so
+`E=F(omega)` is the required quadratic ambient extension. Equation (8) is the first infinite-family
+positive-density result for the partial repair route: a linear-size domain survives every
+collision involving exactly one repair point. It does not yet make that whole domain an arc,
+because two-repair/one-seed chords can join two surviving vertices. The next gate is to derive the
+two seed-colored collision graphs on `T_one-repair` and prove that their union has a linear-size
+independent set. Affine coverage remains deferred.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_one_repair_monodromy.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_one_repair_monodromy_output.txt`.
+
+```text
+63b04512757e78bd21200ce28d2ee062579573ab7b4495992a85db38404f05af  analyze_c210_one_repair_monodromy.py
+0d25ebcc184156dbfbc277ea9a5ad9a404e9dc656e39edb86732bb4134ba0b36  analyze_c210_one_repair_monodromy_output.txt
+```

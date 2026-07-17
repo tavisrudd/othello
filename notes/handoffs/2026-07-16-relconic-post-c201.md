@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — mixed-seed monodromy/compositum gate
+**Status:** C210 ACTIVE — two-repair collision-graph gate
 
 ## Current state
 
@@ -70,10 +70,14 @@ by the `build-sys` lane.
    parameter. As a curve in `(r,d)`, it is geometrically irreducible: in the `r` coordinate it is a
    separable additive quartic, and the rational right side has an odd order-three pole. This rules
    out component-level forced collisions but does not yet prove that rootless quintic fibers meet
-   the two same-seed trace complements in positive density. Next determine the arithmetic
-   monodromy of the quintic cover and its compositum with those two Artin--Schreier covers; a
-   compatible derangement class is the linear-domain certificate. Defer the two-repair collision
-   graphs and affine coverage until then, and do not widen the order census. See
+   the two same-seed trace complements in positive density. The monodromy calculation now closes
+   that gap: eight simple branch values give transposition inertia and force full `S5`, while the
+   two same-seed Artin--Schreier characters are ramification-independent from its sign cover. The
+   joint group is `S5 x C2 x C2`, so Chebotarev gives a domain of
+   `11s/120+O(sqrt(s))` parameters surviving every one-repair collision gate along
+   `F=GF(8^m)`, odd `m`. Next derive the two seed-colored two-repair/one-seed collision graphs on
+   this domain and prove their union has a linear-size independent set. Defer affine coverage until
+   then, and do not widen the order census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

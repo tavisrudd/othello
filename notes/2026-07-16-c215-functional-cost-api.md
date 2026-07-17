@@ -2,8 +2,8 @@
 
 **Lane:** `repairports`
 
-**Status:** exact fully fiberwise formula, verified finite reference evaluator, and single-pass
-functional-cost cache implemented.
+**Status:** COMPLETE. Exact fully fiberwise formula, verified finite reference evaluator,
+single-pass functional-cost cache, prior-art boundary, and strict natural example are closed.
 
 ## Result
 
@@ -110,6 +110,5 @@ configuration is owned by `build-sys`, so this lane does not edit it unilaterall
 
 ## Next step
 
-Develop the strict natural example required by C215's promotion gate, using the claim boundary in
-the prior-art audit. An extracted executable and benchmark remain optional follow-up work if a
-measured runtime claim becomes useful.
+C216 owns prescribed-port asymptotic realization. An extracted executable and benchmark remain an
+optional algorithmic lead in the repairports discovery track, not unfinished C215 work.

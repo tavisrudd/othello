@@ -75,7 +75,7 @@ unless they retain an explicit open tail.
 - **C188 `[relconic]` [REPORTED 2026-07-16]** — q=5 exact relative-conic value; registry gate passed.
 - **C201 `[relconic]` [REPORTED 2026-07-16]** — q=16 quadratic anatomy classified; the bounded q=64 Baer, torus, and split-Z3 mechanisms fail at coverage before nontrivial rank anatomy, so no infinite theorem is promoted → `notes/2026-07-16-c201-bounded-mechanism-closure.md`.
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
-- **C210 `[relconic]` [ACTIVE; MIXED-SEED MONODROMY]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction → `notes/2026-07-16-arcs-sqrtq-construction-program.md`, `notes/2026-07-16-c210-square-root-mechanism-audit.md`.
+- **C210 `[relconic]` [ACTIVE; TWO-REPAIR COLLISION GRAPH]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction → `notes/2026-07-16-arcs-sqrtq-construction-program.md`, `notes/2026-07-16-c210-square-root-mechanism-audit.md`.
 - **C223 `[relconic]` [REPORTED 2026-07-16]** — closed the manuscript-original Lean seams without new searches: q=5 coordinate transport, q=16 `2630+3` profile and exceptional arithmetic, arbitrary-eight-arc classification plus quadratic pullback, and q=11 non-GRS implication → `notes/2026-07-16-c223-arcs-formal-closure.md`.
 
 ### `repaircodes`
@@ -85,8 +85,8 @@ unless they retain an explicit open tail.
 ### `repairports`
 
 - **C215 `[repairports]` [DONE]** — exact canonical and pointed fiber costs, full obstruction formula, reference and cached evaluators, prior-art boundary, and strict Singer/SPC example closed → `notes/2026-07-16-c215-functional-cost-api.md`.
-- **C216 `[repairports]` [ACTIVE]** — prescribed repair-port realization in asymptotically good fixed-alphabet codes → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
-- **C217 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — gauge-invariant holonomy and cross-ratios of overlapping repair circuits → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
+- **C216 `[repairports]` [DONE]** — exact pointed replication criterion plus scaled random-GV and AG/TVZ fixed-alphabet regions → `notes/2026-07-16-c216-prescribed-port-realization.md`.
+- **C217 `[repairports]` [ACTIVE SCOUT]** — gauge-invariant holonomy and cross-ratios of overlapping repair circuits → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C218 `[repairports]` [QUEUED SCOUT; after C215 definitions]** — rational-normal-curve plus osculating-nucleus repair families → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C219 `[repairports]` [QUEUED]** — reliability and Boolean analysis of complete repair ports → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
 - **C220 `[repairports]` [LONG-HORIZON]** — additive equality and stability for repair blockers and packings → `notes/2026-07-16-repaircodes-a-plus-roadmap.md`.
