@@ -1,0 +1,146 @@
+{
+  "cheap_subgroup": [
+    1,
+    2
+  ],
+  "examples": [
+    {
+      "axis_parameters": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "best_edge_labels_mod_cheap": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_vertex_potential_mod_cheap": [
+        0,
+        0,
+        0,
+        3,
+        0,
+        3,
+        1,
+        2
+      ],
+      "circuit_supports": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "cross_ratio_holonomy": 2,
+      "directed_multiplier_best_coordinate_potential_mod_cheap": [
+        0,
+        3,
+        1,
+        2
+      ],
+      "directed_multiplier_optimum": 0,
+      "directed_multiplier_optimum_assignment_count": 1,
+      "directed_multiplier_switchings_checked": 64,
+      "holonomy_is_cheap": true,
+      "optimum": 0,
+      "optimum_assignment_count": 1,
+      "switchings_checked": 16384
+    },
+    {
+      "axis_parameters": [
+        0,
+        1,
+        2,
+        8
+      ],
+      "best_edge_labels_mod_cheap": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        3,
+        0,
+        3,
+        0,
+        0,
+        1,
+        0
+      ],
+      "best_vertex_potential_mod_cheap": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "circuit_supports": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "cross_ratio_holonomy": 3,
+      "directed_multiplier_best_coordinate_potential_mod_cheap": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "directed_multiplier_optimum": 14,
+      "directed_multiplier_optimum_assignment_count": 12,
+      "directed_multiplier_switchings_checked": 64,
+      "holonomy_is_cheap": false,
+      "optimum": 4,
+      "optimum_assignment_count": 38,
+      "switchings_checked": 16384
+    }
+  ],
+  "field": "GF(9)=GF(3)[z]/(z^2+1)",
+  "quotient": "GF(9)^*/GF(3)^* = C4"
+}
