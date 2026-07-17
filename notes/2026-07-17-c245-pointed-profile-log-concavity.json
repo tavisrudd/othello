@@ -1,0 +1,84 @@
+{
+  "simple_binary_rank_at_most_four": {
+    "field": "GF(2)",
+    "ambient_rank": 4,
+    "projective_points": 15,
+    "fixed_target": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "all_helper_restrictions": 16384,
+    "pointed_noncoloop_cases": 15521,
+    "ground_size_distribution": [
+      0,
+      0,
+      0,
+      7,
+      112,
+      721,
+      1834,
+      2947,
+      3424,
+      3003,
+      2002,
+      1001,
+      364,
+      91,
+      14,
+      1
+    ],
+    "lc_counterexample": null
+  },
+  "simple_ternary_rank_at_most_three": {
+    "field": "GF(3)",
+    "ambient_rank": 3,
+    "projective_points": 13,
+    "fixed_target": [
+      0,
+      0,
+      1
+    ],
+    "all_helper_restrictions": 4096,
+    "pointed_noncoloop_cases": 3984,
+    "ground_size_distribution": [
+      0,
+      0,
+      0,
+      12,
+      184,
+      486,
+      792,
+      924,
+      792,
+      495,
+      220,
+      66,
+      12,
+      1
+    ],
+    "lc_counterexample": null
+  },
+  "binary_with_loops_and_parallels_rank_at_most_three": {
+    "field": "GF(2)",
+    "coordinate_rank": 1,
+    "helper_types_including_zero": 8,
+    "max_helpers": 8,
+    "multiset_configurations": 12870,
+    "pointed_noncoloop_cases": 11133,
+    "ground_size_distribution": [
+      0,
+      0,
+      1,
+      11,
+      61,
+      217,
+      601,
+      1419,
+      2997,
+      5826
+    ],
+    "lc_counterexample": null
+  }
+}
