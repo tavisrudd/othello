@@ -3,7 +3,9 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the `a=b=0` constant-height locus is closed; the lower factorization strata in `a=0,b!=0` are next
+**Status:** C210 ACTIVE — the `a=b=0` constant-height locus is closed; the `a=0,b!=0` stratum is
+reduced to one Artin--Schreier divisor plus a codimension-`>=1` common-factor sublocus; the `a!=0`
+divisors are next
 
 ## Current state
 
@@ -203,9 +205,20 @@ by the `build-sys` lane.
    Enumerating the entire constant-height two-layer arc space gives 22 arcs and 12 trace-one arcs,
    each colliding for at least one seed color; a full brute force confirms none of the 7512 both-seed
    collision-free configurations is arc-legal. Hence the arc-condition locus and the even-factor
-   survivor set are disjoint and the `a=b=0` constant-height locus is closed. Next classify the lower
-   factorization strata in `a=0,b!=0` and the factorization divisors on `a!=0`, then their
-   intersections with `H=J=0`, before any affine-coverage test.
+   survivor set are disjoint and the `a=b=0` constant-height locus is closed. The `a=0,b!=0` stratum
+   is now reduced: on `a=0` the trace-one cover is the conic `A2*t^2+A1*t+A0` with `A2=b^2*Q^2`
+   (a perfect square, `Q=u^2+u*delta+delta^2`), `A1=delta*b*G1*G2`
+   (`G1=u^2+u*p+p^2*theta`, `G2=u^3+u^2*delta+u*p^2*theta+delta*p^2*theta+delta^2*p`,
+   `theta=w^2+w+1`, both irreducible and monic in `u`), and `A0` irreducible of `u`-degree six, with
+   `gcd(A2,A1)=b` and `gcd(A2,A0)=gcd(A1,A0)=1`. The common-`u`-factor and `A1==0` reducibility
+   mechanisms are therefore absent on `delta!=0,b!=0` (`A1==0` would force `delta*b=0`), so the whole
+   stratum collapses to the single Artin--Schreier divisor `D3`: `phi=A0*A2/A1^2` in the
+   Artin--Schreier image of `GF(2)-bar(params)(u)`. Next derive `D3`'s equations by the reduced
+   AS-residue over the roots of `G1,G2` (poles are order two; `Q,G1` split over `GF(4)`, `G2` is
+   absolutely irreducible), fold in the codimension-`>=1` sublocus where a root of `Q` meets `G1*G2`
+   and `A0` (the generic `gcd=1` does not specialize), intersect with `H=J=0`, and test whether any
+   surviving component is collision-free rather than collision-forcing. Then do the same for the
+   factorization divisors on `a!=0` (t-degree four), before any affine-coverage test.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
@@ -220,6 +233,11 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-16-relconic-discovery-track.md`](../2026-07-16-relconic-discovery-track.md)
 - C210 mechanism notebook (legacy filename; task history, not a discovery track):
   [`2026-07-16-c210-discovery-track.md`](../2026-07-16-c210-discovery-track.md)
+- C210 pipeline reproducibility manifest (sha256/byte counts, check command):
+  [`2026-07-17-c210-reproducibility-manifest.md`](../2026-07-17-c210-reproducibility-manifest.md);
+  machine-checkable list `papers/arcs_complete_outside_conic/analyze_c210_SHA256SUMS`
+- C210 a=0 stratum independent verification + promotion note:
+  [`2026-07-17-c210-a-zero-verification.md`](../2026-07-17-c210-a-zero-verification.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
   [`2026-07-16-c201-discovery-track.md`](../2026-07-16-c201-discovery-track.md)
 - live global queue:
