@@ -4628,3 +4628,15 @@ untagged bodies C14/C15/C22 subsumed by later work) — was moved verbatim on 20
   weighted-transfer, and post-cold-read reviewer-hole validation tails. The implementation,
   standard-axiom, manuscript/ledger/trust, and PDF gates had already passed; the successful run is
   recorded in [`2026-07-16-c224-reviewer-hole-closure.md`](2026-07-16-c224-reviewer-hole-closure.md).
+
+## 2026-07-16 repairports lane closeout
+
+- **C215 `[repairports]` [REPORTED 2026-07-16]** — exact canonical and pointed fiber costs, full obstruction formula, reference and cached evaluators, prior-art boundary, and strict Singer/SPC example → [`2026-07-16-c215-functional-cost-api.md`](2026-07-16-c215-functional-cost-api.md).
+- **C216 `[repairports]` [REPORTED 2026-07-16]** — exact pointed replication criterion plus scaled random-GV and AG/TVZ fixed-alphabet regions → [`2026-07-16-c216-prescribed-port-realization.md`](2026-07-16-c216-prescribed-port-realization.md).
+- **C217 `[repairports]` [REPORTED 2026-07-16]** — complete circuit-incidence holonomy fingerprint, axis cross-ratios, strict support-identical monomial inequivalence, and concatenation covariance → [`2026-07-16-c217-gauge-invariants.md`](2026-07-16-c217-gauge-invariants.md).
+- **C218 `[repairports]` [REPORTED 2026-07-16]** — quartic normal-rational-curve nucleus gives a harmonic `S(3,4,q+1)` radius-four repair family, `[q+2,5,q-3]_q` parameters, and positive-density replication → [`2026-07-16-c218-quartic-nucleus-repair.md`](2026-07-16-c218-quartic-nucleus-repair.md).
+- **C219 `[repairports]` [REPORTED 2026-07-16]** — exact complete-port reliability recurrence and influences, C202 failure asymptotics, and C218 Steiner Poisson windows with a common-nucleus bottleneck → [`2026-07-16-c219-repair-reliability.md`](2026-07-16-c219-repair-reliability.md).
+- **C220 `[repairports]` [REPORTED 2026-07-16]** — uniform restricted-sumset inverse theorem classifies every minimum and one-above-minimum cubic blocker over `F_3^h` → [`2026-07-16-c220-cubic-blocker-stability.md`](2026-07-16-c220-cubic-blocker-stability.md).
+- **Lane disposition:** archived at
+  [`handoffs/done/2026-07-16-repairports.md`](handoffs/done/2026-07-16-repairports.md); structured
+  follow-up continues in `rp-next`.

@@ -3,12 +3,14 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** COMPLETE; retained unarchived as the closed foundation for
-[`rp-next`](2026-07-16-rp-next.md). C215--C220 are complete. C220 upgrades C202's two q=9 cubic
-blocker forms to a uniform equality and first-stability theorem over every `F_3^h`.
-**Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
-**Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
-**Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
+**Status:** ARCHIVED 2026-07-16. C215--C220 are complete. C220 upgrades C202's two q=9 cubic blocker
+forms to a uniform equality and first-stability theorem over every `F_3^h`.
+**Successor:** [`rp-next`](../2026-07-16-rp-next.md)
+**Roadmap:**
+[`2026-07-16-repaircodes-a-plus-roadmap.md`](../../2026-07-16-repaircodes-a-plus-roadmap.md)
+**Parent paper:** [`coding-repair-hypergraphs`](../../../papers/coding-repair-hypergraphs/README.md)
+**Discovery log:**
+[`2026-07-16-repairports-discovery-track.md`](../../2026-07-16-repairports-discovery-track.md)
 
 ## Goal
 
@@ -28,29 +30,22 @@ twisted-cubic--axis paper.
 | C219 | complete | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
 | C220 | complete | additive equality and stability | uniform inverse/stability theorem |
 
-## Immediate next step
+## Disposition
 
 No further work is open in this lane. The user selected `rp-next` for the structured depth search;
-its first task is C226. Archive this handoff only on a separate user instruction. C220 is closed in
-[`2026-07-16-c220-cubic-blocker-stability.md`](../2026-07-16-c220-cubic-blocker-stability.md).
+its first task is C226. C220 is closed in
+[`2026-07-16-c220-cubic-blocker-stability.md`](../../2026-07-16-c220-cubic-blocker-stability.md).
 The axis zero-sum-free and line-partition classifications remain outside the completed gate and
 require a separately allocated task if resumed.
 
-## Scope and ownership
+## Historical scope and ownership
 
-This lane may edit:
+While live, this lane owned its handoff, roadmap, C215--C220 reports and explicitly named artifacts,
+future `papers/repair-ports-*` packages, and future `lean/RepairPorts/` modules. It did not own the
+current `coding-repair-hypergraphs` paper or the `lean/RepairCodes/` theorem chain; those remained
+with `repaircodes` unless the user explicitly moved a deliverable.
 
-- `notes/handoffs/2026-07-16-repairports.md` and a future companion archive;
-- `notes/2026-07-16-repaircodes-a-plus-roadmap.md` and future C215–C220 reports;
-- future `papers/repair-ports-*` packages;
-- future `lean/RepairPorts/` modules and an aggregate `lean/RepairPorts.lean`;
-- future explicitly named C215–C220 scripts and certificates under `notes/`.
-
-It must not edit the current `coding-repair-hypergraphs` paper or `lean/RepairCodes/` theorem chain;
-those remain owned by `repaircodes` unless the user explicitly moves a deliverable. Before any Lean
-work, read `lean/AGENTS.md` completely.
-
-## Boundaries
+## Boundaries retained for the record
 
 - Do not treat a restatement of the concatenated-dual preimage as a contribution without a strict
   application or useful invariant.

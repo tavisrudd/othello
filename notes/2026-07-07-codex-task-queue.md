@@ -82,15 +82,6 @@ unless they retain an explicit open tail.
 
 - No open tasks.
 
-### `repairports`
-
-- **C215 `[repairports]` [DONE]** — exact canonical and pointed fiber costs, full obstruction formula, reference and cached evaluators, prior-art boundary, and strict Singer/SPC example closed → `notes/2026-07-16-c215-functional-cost-api.md`.
-- **C216 `[repairports]` [DONE]** — exact pointed replication criterion plus scaled random-GV and AG/TVZ fixed-alphabet regions → `notes/2026-07-16-c216-prescribed-port-realization.md`.
-- **C217 `[repairports]` [DONE]** — complete circuit-incidence holonomy fingerprint, axis cross-ratios, strict support-identical monomial inequivalence, and concatenation covariance → `notes/2026-07-16-c217-gauge-invariants.md`.
-- **C218 `[repairports]` [DONE]** — quartic normal-rational-curve nucleus gives a harmonic `S(3,4,q+1)` radius-four repair family, `[q+2,5,q-3]_q` parameters, and positive-density replication → `notes/2026-07-16-c218-quartic-nucleus-repair.md`.
-- **C219 `[repairports]` [DONE]** — exact complete-port reliability recurrence and influences, C202 failure asymptotics, and C218 Steiner Poisson windows with a common-nucleus bottleneck → `notes/2026-07-16-c219-repair-reliability.md`.
-- **C220 `[repairports]` [DONE]** — uniform restricted-sumset inverse theorem classifies every minimum and one-above-minimum cubic blocker over `F_3^h` → `notes/2026-07-16-c220-cubic-blocker-stability.md`.
-
 ### `rp-next`
 
 - **C226 `[rp-next]` [QUEUED; FIRST]** — derive the exact cubic/axis reliability transforms, identify radius-truncated EXIT, and delimit stopping-set and full-MAP claims → `notes/2026-07-16-c226-repair-port-exit-transforms.md`.
