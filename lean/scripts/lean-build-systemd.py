@@ -8,6 +8,7 @@ import ctypes
 import ctypes.util
 import hashlib
 import json
+import math
 import os
 import pwd
 import re
@@ -23,7 +24,9 @@ from pathlib import Path
 from typing import Callable, Mapping, NoReturn, Sequence
 
 
+EXIT_TIMEOUT = 124
 EXIT_INVALID = 125
+EXIT_ABANDONED = 126
 MAX_VALUE_LENGTH = 128
 MAX_RECORD_BYTES = 64 * 1024
 MAX_ARG_BYTES = 4096
@@ -456,20 +459,68 @@ class SystemdBusLease:
             ctypes.POINTER(ctypes.c_void_p),
         ]
         self.library.sd_bus_call.restype = ctypes.c_int
+        self.library.sd_bus_process.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+        self.library.sd_bus_process.restype = ctypes.c_int
+        self.library.sd_bus_wait.argtypes = [ctypes.c_void_p, ctypes.c_uint64]
+        self.library.sd_bus_wait.restype = ctypes.c_int
+        self.library.sd_bus_add_match.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(ctypes.c_void_p),
+            ctypes.c_char_p,
+            ctypes.c_void_p,
+            ctypes.c_void_p,
+        ]
+        self.library.sd_bus_add_match.restype = ctypes.c_int
+        self.library.sd_bus_slot_unref.argtypes = [ctypes.c_void_p]
+        self.library.sd_bus_slot_unref.restype = ctypes.c_void_p
         self.library.sd_bus_message_unref.argtypes = [ctypes.c_void_p]
         self.library.sd_bus_message_unref.restype = ctypes.c_void_p
         self.library.sd_bus_unref.argtypes = [ctypes.c_void_p]
         self.library.sd_bus_unref.restype = ctypes.c_void_p
         self.bus = ctypes.c_void_p()
         self.referenced_unit: str | None = None
+        self.match_slots: list[ctypes.c_void_p] = []
+        self.event_count = 0
+        callback_type = ctypes.CFUNCTYPE(
+            ctypes.c_int, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p
+        )
+
+        def record_event(_message: object, _userdata: object, _error: object) -> int:
+            self.event_count += 1
+            return 0
+
+        self.match_callback = callback_type(record_event)
         result = self.library.sd_bus_open_user(ctypes.byref(self.bus))
         if result < 0:
             raise StateError(f"cannot open user-manager D-Bus: {os.strerror(-result)}")
         try:
             self._call("Subscribe")
+            self._add_match(
+                "type='signal',sender='org.freedesktop.systemd1',"
+                "interface='org.freedesktop.DBus.Properties',member='PropertiesChanged',"
+                "path_namespace='/org/freedesktop/systemd1/unit'"
+            )
+            self._add_match(
+                "type='signal',sender='org.freedesktop.systemd1',"
+                "interface='org.freedesktop.systemd1.Manager',member='UnitRemoved',"
+                "path='/org/freedesktop/systemd1'"
+            )
         except Exception:
             self.close()
             raise
+
+    def _add_match(self, expression: str) -> None:
+        slot = ctypes.c_void_p()
+        result = self.library.sd_bus_add_match(
+            self.bus,
+            ctypes.byref(slot),
+            expression.encode(),
+            ctypes.cast(self.match_callback, ctypes.c_void_p),
+            None,
+        )
+        if result < 0:
+            raise StateError(f"cannot install D-Bus signal match: {os.strerror(-result)}")
+        self.match_slots.append(slot)
 
     def _call(self, member: str, string_argument: str | None = None) -> None:
         message = ctypes.c_void_p()
@@ -506,6 +557,33 @@ class SystemdBusLease:
         self._call("RefUnit", unit)
         self.referenced_unit = unit
 
+    def wait_for_change(self, timeout: float) -> bool:
+        """Drain queued signals, then block in sd-bus until one arrives or time expires."""
+        previous_events = self.event_count
+        while True:
+            result = self.library.sd_bus_process(self.bus, None)
+            if result < 0:
+                raise StateError(f"cannot process user-manager D-Bus: {os.strerror(-result)}")
+            if result == 0:
+                break
+        if self.event_count != previous_events:
+            return True
+        if timeout <= 0:
+            return False
+        microseconds = min(int(timeout * 1_000_000), (1 << 64) - 2)
+        result = self.library.sd_bus_wait(self.bus, microseconds)
+        if result < 0:
+            raise StateError(f"cannot wait on user-manager D-Bus: {os.strerror(-result)}")
+        if result == 0:
+            return False
+        while True:
+            result = self.library.sd_bus_process(self.bus, None)
+            if result < 0:
+                raise StateError(f"cannot process user-manager D-Bus: {os.strerror(-result)}")
+            if result == 0:
+                break
+        return True
+
     def close(self) -> None:
         if not getattr(self, "bus", None):
             return
@@ -515,6 +593,13 @@ class SystemdBusLease:
             except StateError:
                 pass
             self.referenced_unit = None
+        for slot in self.match_slots:
+            self.library.sd_bus_slot_unref(slot)
+        self.match_slots.clear()
+        try:
+            self._call("Unsubscribe")
+        except StateError:
+            pass
         self.library.sd_bus_unref(self.bus)
         self.bus = ctypes.c_void_p()
 
@@ -683,6 +768,57 @@ def read_status_record(run_dir: Path, effective_uid: int) -> dict[str, object] |
     return data
 
 
+def read_json_record(path: Path, effective_uid: int) -> dict[str, object]:
+    encoded = read_existing_record(path, effective_uid)
+    try:
+        data = json.loads(encoded)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise StateError(f"{path.name} is malformed") from error
+    if not isinstance(data, dict):
+        raise StateError(f"{path.name} must contain one object")
+    return data
+
+
+def read_reattachment_identity(
+    run_dir: Path, effective_uid: int
+) -> tuple[dict[str, object], dict[str, object], str]:
+    verify_private_directory(run_dir, effective_uid)
+    submission_path = run_dir / "submission.json"
+    encoded = read_existing_record(submission_path, effective_uid)
+    try:
+        submission = json.loads(encoded)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise StateError("submission.json is malformed") from error
+    if not isinstance(submission, dict) or submission.get("format") != 1:
+        raise StateError("submission identity or format mismatch")
+    if submission.get("run_dir") != str(run_dir):
+        raise StateError("submission run-directory mismatch")
+    digest = hashlib.sha256(encoded).hexdigest()
+    accepted = read_json_record(run_dir / "accepted.json", effective_uid)
+    expected = {
+        "format": 1,
+        "run_id": submission.get("run_id"),
+        "unit": submission.get("unit"),
+        "manager_generation": submission.get("manager_generation"),
+        "submission_sha256": digest,
+    }
+    if any(accepted.get(key) != value for key, value in expected.items()):
+        raise StateError("accepted identity does not match immutable submission")
+    invocation_id = accepted.get("invocation_id")
+    if not isinstance(invocation_id, str) or re.fullmatch(r"[0-9a-f]{32}", invocation_id) is None:
+        raise StateError("accepted record has no valid InvocationID")
+    return submission, accepted, digest
+
+
+def validate_reattachment_status(
+    status: Mapping[str, object] | None, submission: Mapping[str, object]
+) -> None:
+    if status is not None and (
+        status.get("format") != 2 or status.get("run_id") != submission.get("run_id")
+    ):
+        raise StateError("canonical status identity or format mismatch")
+
+
 def integer_property(snapshot: Mapping[str, object] | None, name: str) -> int | None:
     if snapshot is None:
         return None
@@ -726,7 +862,7 @@ def completion_envelope(
             effective_state, adapter_exit_code = "failed-before-status", 1
             reason = "worker exited before canonical status creation"
     elif client_returncode != 0:
-        effective_state, adapter_exit_code = "abandoned", 126
+        effective_state, adapter_exit_code = "abandoned", EXIT_ABANDONED
         reason = "service exited abnormally with nonterminal canonical status"
     else:
         effective_state, adapter_exit_code = "unknown", EXIT_INVALID
@@ -752,6 +888,199 @@ def completion_envelope(
         "event_id": f"lean-queue:{submission['run_id']}:terminal:1",
         "reason": str(reason)[:MAX_VALUE_LENGTH] if reason is not None else None,
     }
+
+
+def observation_envelope(
+    submission: Mapping[str, object],
+    accepted: Mapping[str, object],
+    status: Mapping[str, object] | None,
+    *,
+    effective_state: str,
+    adapter_exit_code: int,
+    reason: str,
+) -> dict[str, object]:
+    origin = submission.get("origin")
+    if not isinstance(origin, Mapping):
+        raise StateError("submission origin is malformed")
+    return {
+        "format": 1,
+        "run_id": submission["run_id"],
+        "unit": submission["unit"],
+        "invocation_id": accepted["invocation_id"],
+        "origin": dict(origin),
+        "canonical_state": status.get("state") if status is not None else None,
+        "effective_state": effective_state,
+        "phase": status.get("phase") if status is not None else None,
+        "queue_exit_code": status.get("queue_exit_code") if status is not None else None,
+        "service_result": None,
+        "service_exit_code": None,
+        "adapter_exit_code": adapter_exit_code,
+        "event_id": f"lean-queue:{submission['run_id']}:terminal:1",
+        "reason": reason[:MAX_VALUE_LENGTH],
+    }
+
+
+def service_client_returncode(service: Mapping[str, object]) -> int:
+    result = service.get("Result")
+    status = integer_property(service, "ExecMainStatus")
+    if result == "success":
+        return 0
+    if result == "exit-code" and status is not None:
+        return status
+    return 255
+
+
+def reattach_and_wait(
+    *,
+    run_dir: Path,
+    timeout: float | None = None,
+    effective_uid: int | None = None,
+    systemctl: Path = SYSTEMCTL_DEFAULT,
+    busctl: Path = BUSCTL_DEFAULT,
+    lease_factory: Callable[[], SystemdBusLease] = SystemdBusLease,
+    snapshot_reader: Callable[..., dict[str, object] | None] = unit_snapshot,
+    generation_reader: Callable[[], Mapping[str, object]] = manager_generation,
+    notify_callback: Callable[[dict[str, object]], None] | None = None,
+    run_command: Callable[[Sequence[str]], subprocess.CompletedProcess[str]] = default_run_command,
+) -> tuple[dict[str, object], str]:
+    """Reattach to one accepted invocation and wait on D-Bus without repository polling."""
+    if timeout is not None and (not math.isfinite(timeout) or timeout < 0):
+        raise StateError("timeout must be a finite nonnegative number")
+    uid = os.geteuid() if effective_uid is None else effective_uid
+    absolute_run_dir = run_dir.expanduser().absolute()
+    submission, accepted, _ = read_reattachment_identity(absolute_run_dir, uid)
+    completion_path = absolute_run_dir / "completion.json"
+    if completion_path.exists():
+        completion = read_json_record(completion_path, uid)
+        if (
+            completion.get("run_id") != submission.get("run_id")
+            or completion.get("unit") != submission.get("unit")
+            or completion.get("invocation_id") != accepted.get("invocation_id")
+            or completion.get("event_id")
+            != f"lean-queue:{submission['run_id']}:terminal:1"
+            or completion.get("format") != 1
+            or completion.get("origin") != submission.get("origin")
+            or not isinstance(completion.get("adapter_exit_code"), int)
+        ):
+            raise StateError("completion identity mismatch")
+        diagnostic = ""
+        if notify_callback is not None:
+            try:
+                notify_callback(completion)
+            except Exception as error:
+                diagnostic = f"callback failed: {str(error)[:MAX_VALUE_LENGTH]}"
+        return completion, diagnostic
+
+    diagnostics: list[str] = []
+    deadline = None if timeout is None else time.monotonic() + timeout
+    with lease_factory() as lease:
+        try:
+            current_generation = dict(generation_reader())
+        except StateError as error:
+            status = read_status_record(absolute_run_dir, uid)
+            validate_reattachment_status(status, submission)
+            return observation_envelope(
+                submission,
+                accepted,
+                status,
+                effective_state="unknown",
+                adapter_exit_code=EXIT_INVALID,
+                reason=f"user-manager evidence unavailable: {error}",
+            ), ""
+        if current_generation != submission.get("manager_generation"):
+            status = read_status_record(absolute_run_dir, uid)
+            validate_reattachment_status(status, submission)
+            return observation_envelope(
+                submission,
+                accepted,
+                status,
+                effective_state="unknown",
+                adapter_exit_code=EXIT_INVALID,
+                reason="user-manager generation no longer matches submission",
+            ), ""
+
+        unit = str(submission["unit"])
+        service = snapshot_reader(unit, systemctl=systemctl, busctl=busctl)
+        if service is not None:
+            lease.ref_unit(unit)
+            service = snapshot_reader(unit, systemctl=systemctl, busctl=busctl)
+
+        while True:
+            status = read_status_record(absolute_run_dir, uid)
+            validate_reattachment_status(status, submission)
+            if service is not None and service.get("InvocationID") != accepted.get("invocation_id"):
+                raise StateError("reattached service InvocationID mismatch")
+            canonical_terminal = status is not None and status.get("state") in {
+                "success",
+                "failed",
+                "refused",
+                "interrupted",
+            }
+            service_terminal = service is not None and service.get("ActiveState") in {
+                "inactive",
+                "failed",
+            }
+            if (canonical_terminal and service is None) or service_terminal:
+                client_returncode = (
+                    int(status["queue_exit_code"])
+                    if service is None and canonical_terminal
+                    else service_client_returncode(service)
+                )
+                completion = completion_envelope(
+                    submission=submission,
+                    accepted=accepted,
+                    status=status,
+                    service=service,
+                    client_returncode=client_returncode,
+                )
+                publish_set_once(completion_path, completion, uid)
+                if notify_callback is not None:
+                    try:
+                        notify_callback(completion)
+                    except Exception as error:
+                        diagnostics.append(f"callback failed: {str(error)[:MAX_VALUE_LENGTH]}")
+                if service is not None and (
+                    service.get("ActiveState") == "failed" or service.get("Result") != "success"
+                ):
+                    cleanup = run_command(
+                        [str(systemctl), "--user", "reset-failed", unit]
+                    )
+                    if cleanup.returncode != 0:
+                        diagnostics.append(
+                            f"cleanup failed: {cleanup.stderr.strip()[:MAX_VALUE_LENGTH]}"
+                        )
+                return completion, "; ".join(diagnostics)[:MAX_VALUE_LENGTH]
+            if service is None:
+                return observation_envelope(
+                    submission,
+                    accepted,
+                    status,
+                    effective_state="unknown",
+                    adapter_exit_code=EXIT_INVALID,
+                    reason="unit is absent and canonical status is nonterminal or missing",
+                ), ""
+
+            remaining = None if deadline is None else deadline - time.monotonic()
+            if remaining is not None and remaining <= 0:
+                service = snapshot_reader(unit, systemctl=systemctl, busctl=busctl)
+                status = read_status_record(absolute_run_dir, uid)
+                validate_reattachment_status(status, submission)
+                if service is not None and service.get("InvocationID") != accepted.get("invocation_id"):
+                    raise StateError("reattached service InvocationID mismatch")
+                if service is not None and service.get("ActiveState") in {"inactive", "failed"}:
+                    continue
+                return observation_envelope(
+                    submission,
+                    accepted,
+                    status,
+                    effective_state="unknown",
+                    adapter_exit_code=EXIT_TIMEOUT,
+                    reason="caller timeout expired; service was not stopped or reset",
+                ), ""
+            lease.wait_for_change(remaining if remaining is not None else 24 * 60 * 60)
+            service = snapshot_reader(unit, systemctl=systemctl, busctl=busctl)
+
+
 def launch_accept_and_wait(
     *,
     run_dir: Path,
@@ -927,6 +1256,11 @@ def parser() -> argparse.ArgumentParser:
     subparsers.add_parser(
         "manager-generation", help="print the race-checked user-manager generation JSON"
     )
+    await_parser = subparsers.add_parser(
+        "await", help="reattach to one accepted managed run and emit one bounded JSON envelope"
+    )
+    await_parser.add_argument("run_dir", type=Path)
+    await_parser.add_argument("--timeout", type=float)
     return result
 
 
@@ -944,14 +1278,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                     environ=os.environ,
                 ),
             }
-        else:
+        elif args.command == "manager-generation":
             payload = {"format": 1, "manager_generation": manager_generation()}
+        else:
+            payload, diagnostic = reattach_and_wait(run_dir=args.run_dir, timeout=args.timeout)
+            if diagnostic:
+                print(f"lean-build-systemd: {diagnostic}", file=sys.stderr)
     except (OriginError, StateError) as error:
         print(f"lean-build-systemd: {error}", file=sys.stderr)
         return EXIT_INVALID
     json.dump(payload, sys.stdout, sort_keys=True, separators=(",", ":"))
     sys.stdout.write("\n")
-    return 0
+    return int(payload.get("adapter_exit_code", 0)) if args.command == "await" else 0
 
 
 if __name__ == "__main__":

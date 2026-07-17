@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — durable completion bridge landed; D-Bus reattachment next
+**Status**: IN PROGRESS — D-Bus reattachment landed; adjacent CLI/operator rollout next
 
 ## Goal
 
@@ -523,8 +523,21 @@ service receive exact-name `reset-failed`; there is no broad cleanup. Twenty-eig
 and fourteen worker tests pass. Real transient fixtures prove both success and refusal: each emits
 one callback and retains byte-identical completion, while refusal captures canonical `refused`/2
 and `Result=exit-code` before its exact failed unit is reset and garbage-collected. A raw successful
-sleep with no queue record honestly completes as `unknown`/125. No real Lean target ran. Step 6 is
-the subscribed reattachment algorithm for a lost primary waiter.
+sleep with no queue record honestly completes as `unknown`/125. No real Lean target ran.
+
+Step 6 adds the adjacent `await RUN_DIR [--timeout]` reattachment path and completes the subscribed
+algorithm for a lost primary waiter. One persistent user-bus lease installs bounded
+`PropertiesChanged` and `UnitRemoved` matches before inspection, references the exact loaded unit,
+rereads the confirmed InvocationID snapshot, and rereads service plus canonical disk state after
+every D-Bus wake. It durably publishes and delivers only a reconciled terminal envelope; timeout,
+manager-generation loss, and a missing unit with nonterminal state remain non-mutating `unknown`
+observations. An existing completion is identity-validated and redelivered with the same event ID
+for recovery deduplication. Thirty-seven default adapter tests cover terminal capture,
+successful-unit GC, UnitRemoved with nonterminal state, zero-timeout behavior, failed-before-status,
+manager restart, InvocationID mismatch, malformed status identity, and recovery redelivery. Two
+opt-in live fixtures pass against the real user manager, including a referenced transient unit that
+wakes through sd-bus without sleep or status polling. No real Lean target or legacy queue ran. Step
+7 is adjacent CLI/operator rollout guidance without redirecting legacy `--detach`.
 
 ## Adversarial design review
 

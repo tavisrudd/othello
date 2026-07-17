@@ -514,6 +514,264 @@ class AcceptanceHandshakeTests(unittest.TestCase):
             )
 
 
+class ReattachmentTests(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.tmp.chmod(0o700)
+        self.generation = {
+            "boot_id": "12345678-1234-1234-1234-123456789abc",
+            "dbus_owner": ":1.42",
+            "manager_pid": 4321,
+            "manager_start_ticks": 98765,
+        }
+        self.run_dir, self.submission, self.digest = MODULE.prepare_submission(
+            state_root=self.tmp / "managed",
+            lean_root=self.tmp,
+            worker_argv=[sys.executable, "/fixture/worker.py"],
+            origin={
+                "user": "fixture",
+                "harness": "codex",
+                "session_id": "fixture-session",
+                "work_lane": "build-sys",
+                "task_id": "C225",
+            },
+            generation=self.generation,
+        )
+        self.accepted = {
+            "format": 1,
+            "run_id": self.submission["run_id"],
+            "unit": self.submission["unit"],
+            "invocation_id": "b" * 32,
+            "manager_generation": self.generation,
+            "submission_sha256": self.digest,
+        }
+        MODULE.publish_set_once(
+            self.run_dir / "accepted.json", self.accepted, os.geteuid()
+        )
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp)
+
+    def write_status(self, state: str, phase: str, exit_code: int | None) -> None:
+        path = self.run_dir / "status.json"
+        temporary = path.with_suffix(".tmp")
+        temporary.write_text(
+            json.dumps(
+                {
+                    "format": 2,
+                    "run_id": self.submission["run_id"],
+                    "state": state,
+                    "phase": phase,
+                    "queue_exit_code": exit_code,
+                    "reason": None,
+                }
+            )
+            + "\n"
+        )
+        temporary.chmod(0o600)
+        temporary.replace(path)
+
+    def active(self) -> dict[str, object]:
+        return {
+            "Id": self.submission["unit"],
+            "InvocationID": self.accepted["invocation_id"],
+            "ActiveState": "active",
+            "SubState": "running",
+            "Result": "success",
+            "ExecMainStatus": "0",
+        }
+
+    def inactive(self, result: str = "success", code: int = 0) -> dict[str, object]:
+        return {
+            **self.active(),
+            "ActiveState": "inactive" if result == "success" else "failed",
+            "SubState": "dead" if result == "success" else "failed",
+            "Result": result,
+            "ExecMainStatus": str(code),
+        }
+
+    def fixture_lease(self, on_wait=None):
+        class Lease:
+            def __init__(inner_self) -> None:
+                inner_self.referenced: list[str] = []
+                inner_self.waits = 0
+
+            def __enter__(inner_self):
+                return inner_self
+
+            def __exit__(inner_self, *_args) -> None:
+                pass
+
+            def ref_unit(inner_self, unit: str) -> None:
+                inner_self.referenced.append(unit)
+
+            def wait_for_change(inner_self, _timeout: float) -> bool:
+                inner_self.waits += 1
+                if on_wait is not None:
+                    on_wait()
+                return True
+
+        lease = Lease()
+        return lease, lambda: lease
+
+    def snapshot_sequence(self, snapshots: list[dict[str, object] | None]):
+        values = iter(snapshots)
+        last = snapshots[-1]
+
+        def read(_unit: str, **_kwargs):
+            nonlocal last
+            try:
+                last = next(values)
+            except StopIteration:
+                pass
+            return last
+
+        return read
+
+    def successful_command(self, command):
+        return subprocess.CompletedProcess(command, 0, "", "")
+
+    def test_subscribe_ref_snapshot_wake_reread_and_terminal_capture(self) -> None:
+        self.write_status("running", "building", None)
+        lease, factory = self.fixture_lease(
+            lambda: self.write_status("success", "finished", 0)
+        )
+        notifications: list[dict[str, object]] = []
+        completion, diagnostic = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            timeout=2,
+            lease_factory=factory,
+            snapshot_reader=self.snapshot_sequence(
+                [self.active(), self.active(), self.inactive()]
+            ),
+            generation_reader=lambda: self.generation,
+            notify_callback=notifications.append,
+            run_command=self.successful_command,
+        )
+        self.assertEqual(completion["effective_state"], "success", diagnostic)
+        self.assertEqual(lease.referenced, [self.submission["unit"]])
+        self.assertEqual(lease.waits, 1)
+        self.assertEqual(notifications, [completion])
+        self.assertEqual(json.loads((self.run_dir / "completion.json").read_text()), completion)
+
+    def test_garbage_collected_unit_resolves_from_terminal_disk_status(self) -> None:
+        self.write_status("success", "finished", 0)
+        lease, factory = self.fixture_lease()
+        completion, _ = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            lease_factory=factory,
+            snapshot_reader=self.snapshot_sequence([None]),
+            generation_reader=lambda: self.generation,
+        )
+        self.assertEqual(completion["effective_state"], "success")
+        self.assertEqual(lease.referenced, [])
+        self.assertEqual(lease.waits, 0)
+
+    def test_unit_removed_wake_with_nonterminal_status_is_unknown(self) -> None:
+        self.write_status("running", "building", None)
+        lease, factory = self.fixture_lease()
+        observation, _ = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            timeout=2,
+            lease_factory=factory,
+            snapshot_reader=self.snapshot_sequence([self.active(), self.active(), None]),
+            generation_reader=lambda: self.generation,
+        )
+        self.assertEqual(observation["effective_state"], "unknown")
+        self.assertEqual(lease.waits, 1)
+        self.assertFalse((self.run_dir / "completion.json").exists())
+
+    def test_timeout_is_non_mutating_and_does_not_wait_when_already_expired(self) -> None:
+        self.write_status("queued", "waiting-for-lock", None)
+        lease, factory = self.fixture_lease()
+        observation, _ = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            timeout=0,
+            lease_factory=factory,
+            snapshot_reader=self.snapshot_sequence(
+                [self.active(), self.active(), self.active()]
+            ),
+            generation_reader=lambda: self.generation,
+        )
+        self.assertEqual(observation["adapter_exit_code"], MODULE.EXIT_TIMEOUT)
+        self.assertEqual(lease.waits, 0)
+        self.assertFalse((self.run_dir / "completion.json").exists())
+        for invalid in (-1, float("nan"), float("inf")):
+            with self.subTest(timeout=invalid), self.assertRaisesRegex(
+                MODULE.StateError, "finite nonnegative"
+            ):
+                MODULE.reattach_and_wait(run_dir=self.run_dir, timeout=invalid)
+
+    def test_failed_before_status_uses_bound_service_evidence(self) -> None:
+        lease, factory = self.fixture_lease()
+        completion, _ = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            lease_factory=factory,
+            snapshot_reader=self.snapshot_sequence(
+                [self.inactive("exit-code", 1), self.inactive("exit-code", 1)]
+            ),
+            generation_reader=lambda: self.generation,
+            run_command=self.successful_command,
+        )
+        self.assertEqual(completion["effective_state"], "failed-before-status")
+        self.assertIsNone(completion["canonical_state"])
+
+    def test_manager_restart_and_invocation_mismatch_fail_closed(self) -> None:
+        lease, factory = self.fixture_lease()
+        observation, _ = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            lease_factory=factory,
+            snapshot_reader=self.snapshot_sequence([self.active()]),
+            generation_reader=lambda: {**self.generation, "manager_pid": 9},
+        )
+        self.assertEqual(observation["effective_state"], "unknown")
+        mismatched = {**self.active(), "InvocationID": "c" * 32}
+        with self.assertRaisesRegex(MODULE.StateError, "InvocationID mismatch"):
+            MODULE.reattach_and_wait(
+                run_dir=self.run_dir,
+                lease_factory=factory,
+                snapshot_reader=self.snapshot_sequence([mismatched, mismatched]),
+                generation_reader=lambda: self.generation,
+            )
+
+    def test_existing_completion_is_validated_and_redelivered_by_event_id(self) -> None:
+        self.write_status("success", "finished", 0)
+        completion = MODULE.completion_envelope(
+            submission=self.submission,
+            accepted=self.accepted,
+            status=json.loads((self.run_dir / "status.json").read_text()),
+            service=None,
+            client_returncode=0,
+        )
+        MODULE.publish_set_once(
+            self.run_dir / "completion.json", completion, os.geteuid()
+        )
+        notifications: list[dict[str, object]] = []
+        returned, diagnostic = MODULE.reattach_and_wait(
+            run_dir=self.run_dir,
+            notify_callback=notifications.append,
+        )
+        self.assertEqual(returned, completion, diagnostic)
+        self.assertEqual(notifications, [completion])
+
+    def test_malformed_status_identity_is_not_reported_as_unknown(self) -> None:
+        self.write_status("running", "building", None)
+        status_path = self.run_dir / "status.json"
+        status = json.loads(status_path.read_text())
+        status["run_id"] = "run-foreign"
+        status_path.write_text(json.dumps(status) + "\n")
+        status_path.chmod(0o600)
+        lease, factory = self.fixture_lease()
+        with self.assertRaisesRegex(MODULE.StateError, "status identity"):
+            MODULE.reattach_and_wait(
+                run_dir=self.run_dir,
+                lease_factory=factory,
+                snapshot_reader=self.snapshot_sequence([None]),
+                generation_reader=lambda: self.generation,
+            )
+
+
 @unittest.skipUnless(
     os.environ.get("OTHELLO_SYSTEMD_LIVE_TEST") == "1",
     "set OTHELLO_SYSTEMD_LIVE_TEST=1 for the harmless real user-manager fixture",
@@ -565,6 +823,41 @@ class LiveAcceptanceHandshakeTest(unittest.TestCase):
         self.assertEqual(accepted["unit"], self.unit)
         self.assertEqual(json.loads((run_dir / "accepted.json").read_text()), accepted)
         self.assertEqual(json.loads((run_dir / "completion.json").read_text()), completion)
+
+    def test_live_bus_wait_wakes_for_exact_referenced_unit(self) -> None:
+        self.unit = f"othello-lean-{uuid.uuid4().hex}.service"
+        with MODULE.SystemdBusLease() as lease:
+            launched = subprocess.run(
+                [
+                    str(MODULE.SYSTEMD_RUN_DEFAULT),
+                    "--user",
+                    "--quiet",
+                    "--service-type=exec",
+                    f"--unit={self.unit.removesuffix('.service')}",
+                    "/run/current-system/sw/bin/sleep",
+                    "1",
+                ],
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(launched.returncode, 0, launched.stderr)
+            lease.ref_unit(self.unit)
+            snapshot = MODULE.unit_snapshot(self.unit)
+            self.assertIsNotNone(snapshot)
+            deadline = MODULE.time.monotonic() + 5
+            while snapshot is not None and snapshot.get("ActiveState") not in {
+                "inactive",
+                "failed",
+            }:
+                remaining = deadline - MODULE.time.monotonic()
+                self.assertGreater(remaining, 0, snapshot)
+                self.assertTrue(lease.wait_for_change(remaining))
+                snapshot = MODULE.unit_snapshot(self.unit)
+            self.assertIsNotNone(snapshot)
+            self.assertEqual(snapshot.get("ActiveState"), "inactive")
 
 
 if __name__ == "__main__":
