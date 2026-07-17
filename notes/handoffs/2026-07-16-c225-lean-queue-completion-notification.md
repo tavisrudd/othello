@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — managed queue semantics landed; completion capture next
+**Status**: IN PROGRESS — durable completion bridge landed; D-Bus reattachment next
 
 ## Goal
 
@@ -510,6 +510,21 @@ Every outcome is retained locally, the lock is explicitly unlocked and closed, a
 format-2 terminal status published. No real Lean target has run; the eventual lightweight target
 remains behind the confirmed quiet-window acceptance gate. Step 5 is bounded completion capture,
 exact failed-unit cleanup, and the primary wait bridge.
+
+Step 5 now durably reconciles queue and service exit inside the primary blocking bridge. After
+`systemd-run --wait` returns, while the exact unit reference is still held, the adapter rereads the
+bound invocation and strict bounded format-2 status, rejects run/format/InvocationID or terminal
+exit conflicts, and derives canonical/effective state for terminal success/failure/refusal/
+interruption, failed-before-status, nonterminal abnormal abandonment, or unknown. It installs one
+deterministic `completion.json` before invoking the injected harness callback; the event ID is
+always `lean-queue:<run-id>:terminal:1`. Callback or cleanup failure is bounded diagnostic output
+and cannot rewrite the captured outcome. Only after durable capture and callback does a failed
+service receive exact-name `reset-failed`; there is no broad cleanup. Twenty-eight adapter tests
+and fourteen worker tests pass. Real transient fixtures prove both success and refusal: each emits
+one callback and retains byte-identical completion, while refusal captures canonical `refused`/2
+and `Result=exit-code` before its exact failed unit is reset and garbage-collected. A raw successful
+sleep with no queue record honestly completes as `unknown`/125. No real Lean target ran. Step 6 is
+the subscribed reattachment algorithm for a lost primary waiter.
 
 ## Adversarial design review
 

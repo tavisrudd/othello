@@ -441,6 +441,78 @@ class AcceptanceHandshakeTests(unittest.TestCase):
                     self.submission, self.digest, snapshot, generation
                 )
 
+    def test_completion_reconciles_terminal_status_and_stable_event(self) -> None:
+        status = {
+            "format": 2,
+            "run_id": self.submission["run_id"],
+            "state": "success",
+            "phase": "finished",
+            "queue_exit_code": 0,
+            "reason": None,
+        }
+        accepted = {"invocation_id": "b" * 32}
+        service = {
+            "Result": "success",
+            "ExecMainStatus": "0",
+            "InvocationID": "b" * 32,
+        }
+        completion = MODULE.completion_envelope(
+            submission=self.submission,
+            accepted=accepted,
+            status=status,
+            service=service,
+            client_returncode=0,
+        )
+        self.assertEqual(completion["effective_state"], "success")
+        self.assertEqual(completion["adapter_exit_code"], 0)
+        self.assertEqual(
+            completion["event_id"],
+            f"lean-queue:{self.submission['run_id']}:terminal:1",
+        )
+
+    def test_completion_derives_failed_before_status_and_abandoned(self) -> None:
+        accepted = {"invocation_id": "b" * 32}
+        failed_before = MODULE.completion_envelope(
+            submission=self.submission,
+            accepted=accepted,
+            status=None,
+            service={"Result": "exit-code", "ExecMainStatus": "1", "InvocationID": "b" * 32},
+            client_returncode=1,
+        )
+        self.assertEqual(failed_before["effective_state"], "failed-before-status")
+        self.assertIsNone(failed_before["queue_exit_code"])
+        nonterminal = MODULE.completion_envelope(
+            submission=self.submission,
+            accepted=accepted,
+            status={
+                "format": 2,
+                "run_id": self.submission["run_id"],
+                "state": "running",
+                "phase": "building",
+                "queue_exit_code": None,
+            },
+            service={"Result": "signal", "ExecMainStatus": "9", "InvocationID": "b" * 32},
+            client_returncode=255,
+        )
+        self.assertEqual(nonterminal["effective_state"], "abandoned")
+        self.assertEqual(nonterminal["adapter_exit_code"], 126)
+
+    def test_completion_rejects_conflicting_terminal_exit(self) -> None:
+        with self.assertRaisesRegex(MODULE.StateError, "conflict"):
+            MODULE.completion_envelope(
+                submission=self.submission,
+                accepted={"invocation_id": "b" * 32},
+                status={
+                    "format": 2,
+                    "run_id": self.submission["run_id"],
+                    "state": "success",
+                    "phase": "finished",
+                    "queue_exit_code": 0,
+                },
+                service={"Result": "exit-code", "ExecMainStatus": "1", "InvocationID": "b" * 32},
+                client_returncode=1,
+            )
+
 
 @unittest.skipUnless(
     os.environ.get("OTHELLO_SYSTEMD_LIVE_TEST") == "1",
@@ -483,15 +555,16 @@ class LiveAcceptanceHandshakeTest(unittest.TestCase):
             generation=generation,
         )
         self.unit = str(submission["unit"])
-        accepted, returncode, stderr = MODULE.launch_accept_and_wait(
+        accepted, completion, stderr = MODULE.launch_accept_and_wait(
             run_dir=run_dir,
             submission=submission,
             submission_digest=digest,
             completion_timeout=10,
         )
-        self.assertEqual(returncode, 0, stderr)
+        self.assertEqual(completion["adapter_exit_code"], MODULE.EXIT_INVALID, stderr)
         self.assertEqual(accepted["unit"], self.unit)
         self.assertEqual(json.loads((run_dir / "accepted.json").read_text()), accepted)
+        self.assertEqual(json.loads((run_dir / "completion.json").read_text()), completion)
 
 
 if __name__ == "__main__":

@@ -498,7 +498,7 @@ class LiveManagedWorkerTest(unittest.TestCase):
             "--fixture-lock",
             str(self.lock_path),
             "--lock-timeout",
-            "5",
+            "1",
         ]
         origin = ADAPTER.resolve_origin(
             harness="manual",
@@ -529,6 +529,7 @@ class LiveManagedWorkerTest(unittest.TestCase):
         shutil.rmtree(self.tmp)
 
     def test_real_bridge_is_queued_before_lock_release(self) -> None:
+        notifications: list[dict[str, object]] = []
         with self.lock_path.open("a+") as holder, ThreadPoolExecutor(max_workers=1) as executor:
             fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
             future = executor.submit(
@@ -537,6 +538,7 @@ class LiveManagedWorkerTest(unittest.TestCase):
                 submission=self.submission,
                 submission_digest=self.digest,
                 completion_timeout=10,
+                notify_callback=notifications.append,
             )
             deadline = time.monotonic() + 5
             status = None
@@ -554,12 +556,33 @@ class LiveManagedWorkerTest(unittest.TestCase):
             self.assertEqual(status["state"], "queued")
             self.assertFalse(future.done())
             fcntl.flock(holder.fileno(), fcntl.LOCK_UN)
-            accepted, returncode, stderr = future.result(timeout=10)
-        self.assertEqual(returncode, 0, stderr)
+            accepted, completion, stderr = future.result(timeout=10)
+        self.assertEqual(completion["adapter_exit_code"], 0, stderr)
+        self.assertEqual(notifications, [completion])
         self.assertEqual(accepted["unit"], self.unit)
         terminal = json.loads((self.run_dir / "status.json").read_text())
         self.assertEqual(terminal["state"], "success")
         self.assertEqual(terminal["queue_exit_code"], 0)
+        self.assertIsNotNone(terminal["finished_utc"])
+
+    def test_refusal_is_captured_before_exact_failed_unit_cleanup(self) -> None:
+        notifications: list[dict[str, object]] = []
+        with self.lock_path.open("a+") as holder:
+            fcntl.flock(holder.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            _, completion, diagnostics = ADAPTER.launch_accept_and_wait(
+                run_dir=self.run_dir,
+                submission=self.submission,
+                submission_digest=self.digest,
+                completion_timeout=10,
+                notify_callback=notifications.append,
+            )
+        self.assertEqual(completion["canonical_state"], "refused", diagnostics)
+        self.assertEqual(completion["queue_exit_code"], 2)
+        self.assertEqual(completion["service_result"], "exit-code")
+        self.assertEqual(notifications, [completion])
+        self.assertEqual(json.loads((self.run_dir / "completion.json").read_text()), completion)
+        self.assertIsNone(ADAPTER.unit_snapshot(self.unit))
+        terminal = json.loads((self.run_dir / "status.json").read_text())
         self.assertIsNotNone(terminal["finished_utc"])
 
 

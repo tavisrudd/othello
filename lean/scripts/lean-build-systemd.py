@@ -548,6 +548,9 @@ def unit_snapshot(
         "Environment",
         "ActiveState",
         "SubState",
+        "Result",
+        "ExecMainCode",
+        "ExecMainStatus",
     )
     command = [str(systemctl), "--user", "show", unit, "--no-pager"]
     command.extend(f"--property={name}" for name in properties)
@@ -662,6 +665,93 @@ def validate_acceptance_snapshot(
     }
 
 
+def read_status_record(run_dir: Path, effective_uid: int) -> dict[str, object] | None:
+    path = run_dir / "status.json"
+    try:
+        path.lstat()
+    except FileNotFoundError:
+        return None
+    except OSError as error:
+        raise StateError(f"cannot inspect status record: {error}") from error
+    encoded = read_existing_record(path, effective_uid)
+    try:
+        data = json.loads(encoded)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise StateError("status record is malformed") from error
+    if not isinstance(data, dict):
+        raise StateError("status record must contain one object")
+    return data
+
+
+def integer_property(snapshot: Mapping[str, object] | None, name: str) -> int | None:
+    if snapshot is None:
+        return None
+    value = snapshot.get(name)
+    try:
+        return int(value) if value not in (None, "") else None
+    except (TypeError, ValueError):
+        return None
+
+
+def completion_envelope(
+    *,
+    submission: Mapping[str, object],
+    accepted: Mapping[str, object],
+    status: Mapping[str, object] | None,
+    service: Mapping[str, object] | None,
+    client_returncode: int,
+) -> dict[str, object]:
+    terminal_states = {"success", "failed", "refused", "interrupted"}
+    if status is not None:
+        if status.get("format") != 2 or status.get("run_id") != submission.get("run_id"):
+            raise StateError("canonical status identity or format mismatch")
+    if service is not None and service.get("InvocationID") != accepted.get("invocation_id"):
+        raise StateError("completion service InvocationID mismatch")
+    canonical_state = status.get("state") if status is not None else None
+    phase = status.get("phase") if status is not None else None
+    queue_exit_code = status.get("queue_exit_code") if status is not None else None
+    if canonical_state in terminal_states:
+        if not isinstance(queue_exit_code, int):
+            raise StateError("terminal canonical status has no integer queue exit code")
+        if client_returncode != queue_exit_code:
+            raise StateError("queue status and systemd-run exit code conflict")
+        effective_state = canonical_state
+        adapter_exit_code = queue_exit_code
+        reason = status.get("reason")
+    elif status is None:
+        if client_returncode == 0:
+            effective_state, adapter_exit_code = "unknown", EXIT_INVALID
+            reason = "service exited successfully without canonical status"
+        else:
+            effective_state, adapter_exit_code = "failed-before-status", 1
+            reason = "worker exited before canonical status creation"
+    elif client_returncode != 0:
+        effective_state, adapter_exit_code = "abandoned", 126
+        reason = "service exited abnormally with nonterminal canonical status"
+    else:
+        effective_state, adapter_exit_code = "unknown", EXIT_INVALID
+        reason = "service exited with nonterminal canonical status"
+
+    origin = submission.get("origin")
+    if not isinstance(origin, Mapping):
+        raise StateError("submission origin is malformed")
+    service_result = service.get("Result") if service is not None else None
+    return {
+        "format": 1,
+        "run_id": submission["run_id"],
+        "unit": submission["unit"],
+        "invocation_id": accepted["invocation_id"],
+        "origin": dict(origin),
+        "canonical_state": canonical_state,
+        "effective_state": effective_state,
+        "phase": phase,
+        "queue_exit_code": queue_exit_code,
+        "service_result": service_result,
+        "service_exit_code": integer_property(service, "ExecMainStatus"),
+        "adapter_exit_code": adapter_exit_code,
+        "event_id": f"lean-queue:{submission['run_id']}:terminal:1",
+        "reason": str(reason)[:MAX_VALUE_LENGTH] if reason is not None else None,
+    }
 def launch_accept_and_wait(
     *,
     run_dir: Path,
@@ -673,7 +763,8 @@ def launch_accept_and_wait(
     busctl: Path = BUSCTL_DEFAULT,
     completion_timeout: float | None = None,
     lease_factory: Callable[[], SystemdBusLease] = SystemdBusLease,
-) -> tuple[dict[str, object], int, str]:
+    notify_callback: Callable[[dict[str, object]], None] | None = None,
+) -> tuple[dict[str, object], dict[str, object], str]:
     uid = os.geteuid() if effective_uid is None else effective_uid
     verify_private_directory(run_dir, uid)
     client: subprocess.Popen[str] | None = None
@@ -713,7 +804,35 @@ def launch_accept_and_wait(
             )
             publish_set_once(run_dir / "accepted.json", accepted, uid)
             _, stderr = client.communicate(timeout=completion_timeout)
-            return accepted, int(client.returncode), stderr.strip()[:MAX_VALUE_LENGTH]
+            service = unit_snapshot(
+                str(submission["unit"]), systemctl=systemctl, busctl=busctl
+            )
+            status = read_status_record(run_dir, uid)
+            completion = completion_envelope(
+                submission=submission,
+                accepted=accepted,
+                status=status,
+                service=service,
+                client_returncode=int(client.returncode),
+            )
+            publish_set_once(run_dir / "completion.json", completion, uid)
+            diagnostics = [stderr.strip()[:MAX_VALUE_LENGTH]] if stderr.strip() else []
+            if notify_callback is not None:
+                try:
+                    notify_callback(completion)
+                except Exception as error:
+                    diagnostics.append(f"callback failed: {str(error)[:MAX_VALUE_LENGTH]}")
+            if service is not None and (
+                service.get("ActiveState") == "failed" or service.get("Result") != "success"
+            ):
+                cleanup = default_run_command(
+                    [str(systemctl), "--user", "reset-failed", str(submission["unit"])]
+                )
+                if cleanup.returncode != 0:
+                    diagnostics.append(
+                        f"cleanup failed: {cleanup.stderr.strip()[:MAX_VALUE_LENGTH]}"
+                    )
+            return accepted, completion, "; ".join(diagnostics)[:MAX_VALUE_LENGTH]
         except Exception:
             if client.poll() is None:
                 client.terminate()
