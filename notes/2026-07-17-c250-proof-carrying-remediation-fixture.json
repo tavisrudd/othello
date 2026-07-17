@@ -1,0 +1,61 @@
+{
+  "domains": ["trust_root", "control_plane", "network"],
+  "resources": {
+    "database_vault": {
+      "type": "credential_source",
+      "domains": ["trust_root", "control_plane"]
+    },
+    "orchestrator_vault": {
+      "type": "credential_source",
+      "domains": ["control_plane", "network"]
+    },
+    "dns_vault": {
+      "type": "credential_source",
+      "domains": ["trust_root", "network"]
+    }
+  },
+  "schemas": {
+    "mint_credential": {
+      "inputs": ["credential_source"],
+      "output": "credential"
+    },
+    "restore_database": {
+      "inputs": ["credential"],
+      "output": "remediation_success"
+    },
+    "restart_control_plane": {
+      "inputs": ["credential"],
+      "output": "remediation_success"
+    },
+    "reroute_dns": {
+      "inputs": ["credential"],
+      "output": "remediation_success"
+    }
+  },
+  "plans": [
+    {
+      "id": "database_restore",
+      "steps": [
+        {"id": "credential", "schema": "mint_credential", "inputs": ["resource:database_vault"]},
+        {"id": "done", "schema": "restore_database", "inputs": ["step:credential"]}
+      ],
+      "goal": "step:done"
+    },
+    {
+      "id": "control_restart",
+      "steps": [
+        {"id": "credential", "schema": "mint_credential", "inputs": ["resource:orchestrator_vault"]},
+        {"id": "done", "schema": "restart_control_plane", "inputs": ["step:credential"]}
+      ],
+      "goal": "step:done"
+    },
+    {
+      "id": "dns_failover",
+      "steps": [
+        {"id": "credential", "schema": "mint_credential", "inputs": ["resource:dns_vault"]},
+        {"id": "done", "schema": "reroute_dns", "inputs": ["step:credential"]}
+      ],
+      "goal": "step:done"
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "claimed_dependencies": {
+    "control_restart": [
+      "control_plane",
+      "network"
+    ],
+    "database_restore": [
+      "control_plane",
+      "trust_root"
+    ],
+    "dns_failover": [
+      "network",
+      "trust_root"
+    ]
+  },
+  "lower_bound": {
+    "claim": "rho >= 2",
+    "clauses": [
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        -1,
+        -2
+      ],
+      [
+        -1,
+        -3
+      ],
+      [
+        -2,
+        -3
+      ]
+    ],
+    "resolution_steps": [
+      {
+        "clause": [
+          -1,
+          3
+        ],
+        "parents": [
+          4,
+          2
+        ],
+        "pivot": -2
+      },
+      {
+        "clause": [
+          -2,
+          3
+        ],
+        "parents": [
+          4,
+          3
+        ],
+        "pivot": -1
+      },
+      {
+        "clause": [
+          -3,
+          2
+        ],
+        "parents": [
+          5,
+          1
+        ],
+        "pivot": -1
+      },
+      {
+        "clause": [
+          -1,
+          2
+        ],
+        "parents": [
+          5,
+          2
+        ],
+        "pivot": -3
+      },
+      {
+        "clause": [
+          -3,
+          1
+        ],
+        "parents": [
+          6,
+          1
+        ],
+        "pivot": -2
+      },
+      {
+        "clause": [
+          -2,
+          1
+        ],
+        "parents": [
+          6,
+          3
+        ],
+        "pivot": -3
+      },
+      {
+        "clause": [
+          3
+        ],
+        "parents": [
+          7,
+          3
+        ],
+        "pivot": -1
+      },
+      {
+        "clause": [
+          -1
+        ],
+        "parents": [
+          7,
+          5
+        ],
+        "pivot": 3
+      },
+      {
+        "clause": [
+          -2
+        ],
+        "parents": [
+          8,
+          6
+        ],
+        "pivot": 3
+      },
+      {
+        "clause": [
+          2
+        ],
+        "parents": [
+          9,
+          2
+        ],
+        "pivot": -3
+      },
+      {
+        "clause": [
+          -3
+        ],
+        "parents": [
+          9,
+          6
+        ],
+        "pivot": 2
+      },
+      {
+        "clause": [
+          1
+        ],
+        "parents": [
+          11,
+          3
+        ],
+        "pivot": -3
+      },
+      {
+        "clause": [],
+        "parents": [
+          16,
+          15
+        ],
+        "pivot": 2
+      }
+    ],
+    "threshold": 2,
+    "variables": {
+      "control_plane": 2,
+      "network": 3,
+      "trust_root": 1
+    }
+  },
+  "upper_bound": {
+    "attack": [
+      "trust_root",
+      "control_plane"
+    ],
+    "claim": "rho < 3",
+    "threshold": 3
+  }
+}
