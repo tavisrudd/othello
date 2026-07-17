@@ -59,3 +59,10 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 - C162 current report: [`../2026-07-14-c162-lean-build-system.md`](../2026-07-14-c162-lean-build-system.md).
 - C205 base runner: [`../2026-07-15-c205-unattended-lean-build-queue.md`](../2026-07-15-c205-unattended-lean-build-queue.md).
 - Full prior handoff state: archive linked above.
+
+## Registered spin-off (no C task)
+
+The `lean-proof-engineering-at-scale` methods-paper idea and its five upgrade gates are registered in
+`papers/papers-index.md` and `done/2026-07-14-lean-build-system-archive.md`. C allocation is gated on
+a manuscript outline and a measurable contribution beyond repository-specific operating instructions
+per gate 5; none is allocated here until that gate is met.

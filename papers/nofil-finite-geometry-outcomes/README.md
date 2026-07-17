@@ -8,11 +8,11 @@ flagged `DRAFT — SUBJECT TO LEAD-AUTHOR REVISION`) currently covers the sum-fr
 and the cap game on AG(n,q); it still treats the **projective** case as open. But the
 projective mirror-outcome theorems are already proven in Lean and only need writing up.
 
-**Open packaging decision — fold vs split:** does the projective mirror-outcomes material
-become a section of this flagship (finishing what `main.tex` started, per the master plan),
-or split into its own companion paper (the Fable-review "Paper 2" framing)? Recorded in
-`../papers-planning.md`; this is the main question for the Fable review. The evidence-tagged D1
-manuscript skeleton (listed below) is the ready draft asset for either path.
+**Packaging decision — resolved FOLD (ruling D1, `../papers-planning.md`):** the projective
+mirror-outcomes material becomes a section of this flagship, finishing what `main.tex` started;
+there is no standalone projective "Paper 2" and no standalone sum-free paper. If the flagship
+balloons, cut the capacity-c material, never sum-free. The evidence-tagged D1 manuscript skeleton
+(listed below) is the ready draft asset for the projective section.
 
 **Technique:** fixed-point-free collineation ⇒ P (the mirror⇒P spine). Split by technique
 from the `dihedral-schreier-node-kayles` catalogue.
