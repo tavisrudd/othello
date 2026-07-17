@@ -3,9 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C215 is complete: its canonical and pointed costs, exact fiberwise formula,
-reference and cached evaluators, prior-art boundary, and inherited strict Singer/SPC example are
-closed. C216 is active.
+**Status:** ACTIVE. C215 is complete. C216's pointed replication theorem and scaled random/AG
+achievable regions are derived at manuscript level; its mathematical promotion gate is met.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -22,7 +21,7 @@ twisted-cubic--axis paper.
 | Task | Status | Deliverable | Promotion gate |
 |---|---|---|---|
 | C215 | complete | weighted functional-dual theory | exact criterion plus a strict natural example |
-| C216 | active | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
+| C216 | complete; optional Lean wrapper deferred to build-system entry | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | bounded scout after C215 definitions | circuit-coefficient gauge invariants | nontrivial holonomy/cross-ratio with a consequence |
 | C218 | bounded scout after C215 definitions | rational-normal-curve nucleus hierarchy | a second tractable infinite repair family |
 | C219 | queued | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
@@ -30,9 +29,11 @@ twisted-cubic--axis paper.
 
 ## Immediate next step
 
-Develop C216's prescribed-port realization theorem. First separate the purely concatenation-based
-existence statement from the positive-density replication claim, then derive the strongest
-fixed-alphabet rate/distance region justified by standard outer AG or random linear families.
+Run C217's bounded gauge-invariant scout. Identify the first coefficient invariant that survives
+independent rescaling of code coordinates and repair equations, and require a concrete consequence
+beyond a restatement of circuit elimination. See
+[`2026-07-16-c216-prescribed-port-realization.md`](../2026-07-16-c216-prescribed-port-realization.md)
+for the closed C216 theorem and regions.
 
 ## Scope and ownership
 
