@@ -2,7 +2,7 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — adjacent managed CLI documented; provenance-aware queue listing next
+**Status**: IN PROGRESS — provenance-aware queue listing landed; failure/legacy fixtures next
 
 ## Goal
 
@@ -549,6 +549,19 @@ selection, origin binding, module validation before state creation, and the Step
 Operator guidance now documents explicit selection, phase meanings, stable event-ID deduplication,
 and timeout/unknown/abandonment codes while leaving `lean-build-queue.py --detach` unchanged. No
 real Lean target ran. Step 8 is the bounded provenance-aware active/recent queue listing.
+
+Step 8 adds `lean-build-systemd.py list`, a read-only active/recent view capped at 100 rows (20 by
+default). The default table shows run ID, effective state, phase, lane, task, harness, an
+unambiguous abbreviated session, and exact unit; `--json` retains the complete session and
+effective account, while `--run-id ... --json` is the exact-run query. Completed rows come from
+validated immutable completion records; nonterminal accepted rows consult only their exact bound
+InvocationID and manager generation. Missing manager evidence yields `unknown`, not a forged death.
+Unsafe/malformed directories and records are skipped with bounded diagnostics, and the command
+never mutates queue/supervisor state or searches the process table. Forty-four default adapter tests
+pass, including active/completed attribution, exact filtering, row caps, manager loss, unsafe-entry
+rejection, session abbreviation, and both CLI output modes. No real Lean target ran. Step 9 is the
+remaining failure, legacy, malformed-state, duplicate-reader, and manager-unavailable fixture
+coverage from the acceptance matrix.
 
 ## Adversarial design review
 

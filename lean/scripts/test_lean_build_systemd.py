@@ -772,6 +772,223 @@ class ReattachmentTests(unittest.TestCase):
             )
 
 
+class ManagedListTests(unittest.TestCase):
+    def setUp(self) -> None:
+        TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)
+        self.tmp = Path(tempfile.mkdtemp(dir=TEST_ROOT))
+        self.tmp.chmod(0o700)
+        self.state_root = self.tmp / "managed"
+        self.lean_root = self.tmp / "lean"
+        self.lean_root.mkdir()
+        self.generation = {
+            "boot_id": "12345678-1234-1234-1234-123456789abc",
+            "dbus_owner": ":1.42",
+            "manager_pid": 4321,
+            "manager_start_ticks": 98765,
+        }
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.tmp)
+
+    def make_run(
+        self,
+        identity: str,
+        session: str,
+        *,
+        harness: str = "codex",
+        state: str | None = None,
+    ) -> tuple[Path, dict[str, object], dict[str, object] | None]:
+        run_dir, submission, digest = MODULE.prepare_submission(
+            state_root=self.state_root,
+            lean_root=self.lean_root,
+            worker_argv=[sys.executable, "/fixture/worker.py"],
+            origin={
+                "user": "fixture",
+                "harness": harness,
+                "session_id": session,
+                "work_lane": "build-sys",
+                "task_id": "C225",
+            },
+            generation=self.generation,
+            run_uuid=uuid.UUID(identity),
+        )
+        accepted = None
+        if state is not None:
+            accepted = {
+                "format": 1,
+                "run_id": submission["run_id"],
+                "unit": submission["unit"],
+                "invocation_id": identity.replace("-", ""),
+                "manager_generation": self.generation,
+                "submission_sha256": digest,
+            }
+            MODULE.publish_set_once(run_dir / "accepted.json", accepted, os.geteuid())
+            status = {
+                "format": 2,
+                "run_id": submission["run_id"],
+                "state": state,
+                "phase": "finished" if state == "success" else "building",
+                "queue_exit_code": 0 if state == "success" else None,
+            }
+            MODULE.publish_set_once(run_dir / "status.json", status, os.geteuid())
+        return run_dir, submission, accepted
+
+    def test_list_combines_active_and_completed_rows_with_full_origin(self) -> None:
+        active_dir, active_submission, active_accepted = self.make_run(
+            "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "shared-session-active-123456789",
+            state="running",
+        )
+        complete_dir, complete_submission, complete_accepted = self.make_run(
+            "11111111-2222-3333-4444-555555555555",
+            "shared-session-complete-987654321",
+            harness="claude",
+            state="success",
+        )
+        assert complete_accepted is not None
+        completion = MODULE.completion_envelope(
+            submission=complete_submission,
+            accepted=complete_accepted,
+            status=json.loads((complete_dir / "status.json").read_text()),
+            service={
+                "Result": "success",
+                "ExecMainStatus": "0",
+                "InvocationID": complete_accepted["invocation_id"],
+            },
+            client_returncode=0,
+        )
+        MODULE.publish_set_once(complete_dir / "completion.json", completion, os.geteuid())
+        snapshots: list[str] = []
+
+        def snapshot(unit: str) -> dict[str, object]:
+            snapshots.append(unit)
+            assert active_accepted is not None
+            return {
+                "InvocationID": active_accepted["invocation_id"],
+                "ActiveState": "active",
+            }
+
+        payload, diagnostics = MODULE.list_managed_runs(
+            state_root=self.state_root,
+            generation_reader=lambda: self.generation,
+            snapshot_reader=snapshot,
+        )
+        self.assertEqual(diagnostics, [])
+        self.assertEqual(len(payload["rows"]), 2)
+        by_id = {row["run_id"]: row for row in payload["rows"]}
+        self.assertEqual(by_id[active_submission["run_id"]]["effective_state"], "running")
+        self.assertEqual(by_id[complete_submission["run_id"]]["effective_state"], "success")
+        self.assertEqual(
+            by_id[active_submission["run_id"]]["session"],
+            "shared-session-active-123456789",
+        )
+        self.assertEqual(by_id[complete_submission["run_id"]]["harness"], "claude")
+        self.assertEqual(snapshots, [active_submission["unit"]])
+        self.assertEqual(active_dir.parent, self.state_root)
+        active_only, _ = MODULE.list_managed_runs(
+            state_root=self.state_root,
+            limit=1,
+            generation_reader=lambda: self.generation,
+            snapshot_reader=snapshot,
+        )
+        self.assertEqual(active_only["rows"][0]["run_id"], active_submission["run_id"])
+
+    def test_list_skips_unsafe_entry_and_reports_manager_loss_as_unknown(self) -> None:
+        _, submission, _ = self.make_run(
+            "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "fixture-session", state="running"
+        )
+        unsafe = self.state_root / "run-11111111222233334444555555555555"
+        unsafe.symlink_to(self.lean_root, target_is_directory=True)
+        payload, diagnostics = MODULE.list_managed_runs(
+            state_root=self.state_root,
+            generation_reader=lambda: (_ for _ in ()).throw(MODULE.StateError("unavailable")),
+        )
+        self.assertEqual(payload["rows"][0]["run_id"], submission["run_id"])
+        self.assertEqual(payload["rows"][0]["effective_state"], "unknown")
+        self.assertEqual(payload["skipped"], 1)
+        self.assertTrue(any("non-symlink" in item for item in diagnostics))
+        self.assertTrue(any("user manager" in item for item in diagnostics))
+
+    def test_list_limit_filter_and_missing_root_are_bounded(self) -> None:
+        self.make_run("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", "session-a")
+        _, second, _ = self.make_run("11111111-2222-3333-4444-555555555555", "session-b")
+        payload, _ = MODULE.list_managed_runs(state_root=self.state_root, limit=1)
+        self.assertEqual(len(payload["rows"]), 1)
+        exact, _ = MODULE.list_managed_runs(
+            state_root=self.state_root, run_id=second["run_id"]
+        )
+        self.assertEqual([row["run_id"] for row in exact["rows"]], [second["run_id"]])
+        empty, diagnostics = MODULE.list_managed_runs(state_root=self.tmp / "missing")
+        self.assertEqual(empty["rows"], [])
+        self.assertEqual(diagnostics, [])
+        with self.assertRaisesRegex(MODULE.StateError, "invalid managed run ID"):
+            MODULE.list_managed_runs(state_root=self.state_root, run_id="../foreign")
+
+    def test_human_table_abbreviates_sessions_unambiguously(self) -> None:
+        payload = {
+            "rows": [
+                {
+                    "run_id": "run-a",
+                    "effective_state": "running",
+                    "phase": "building",
+                    "lane": "build-sys",
+                    "task": "C225",
+                    "harness": "codex",
+                    "session": "common-prefix-alpha-long",
+                    "unit": "unit-a",
+                },
+                {
+                    "run_id": "run-b",
+                    "effective_state": "queued",
+                    "phase": "waiting-for-lock",
+                    "lane": "build-sys",
+                    "task": "C225",
+                    "harness": "claude",
+                    "session": "common-prefix-beta-long",
+                    "unit": "unit-b",
+                },
+            ]
+        }
+        table = MODULE.human_list_table(payload)
+        self.assertIn("run_id", table)
+        self.assertIn("common-prefix-a…", table)
+        self.assertIn("common-prefix-b…", table)
+        self.assertNotIn("common-prefix-alpha-long", table)
+
+    def test_list_cli_has_bounded_limit_and_json_mode(self) -> None:
+        args = MODULE.parser().parse_args(
+            ["list", "--state-root", str(self.state_root), "--limit", "5", "--json"]
+        )
+        self.assertEqual(args.limit, 5)
+        self.assertTrue(args.machine_json)
+        with self.assertRaises(SystemExit):
+            MODULE.parser().parse_args(["list", "--limit", str(MODULE.MAX_LIST_ROWS + 1)])
+
+        machine = subprocess.run(
+            [
+                sys.executable,
+                str(ADAPTER),
+                "list",
+                "--state-root",
+                str(self.state_root),
+                "--json",
+            ],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(machine.returncode, 0, machine.stderr)
+        self.assertEqual(json.loads(machine.stdout)["rows"], [])
+        human = subprocess.run(
+            [sys.executable, str(ADAPTER), "list", "--state-root", str(self.state_root)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(human.returncode, 0, human.stderr)
+        self.assertEqual(human.stdout, "No managed Lean queue runs.\n")
+
+
 class ManagedCliTests(unittest.TestCase):
     def setUp(self) -> None:
         TEST_ROOT.mkdir(mode=0o700, parents=True, exist_ok=True)

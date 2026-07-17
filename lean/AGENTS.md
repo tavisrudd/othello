@@ -80,6 +80,20 @@ lean/scripts/lean-build-systemd.py await \
   ~/.cache/othello-lean-build-systemd/run-<uuid> --timeout 3600
 ```
 
+Use the bounded managed queue view to distinguish concurrent harness/lane/task ownership. The
+default table abbreviates session IDs only far enough to remain unambiguous within the displayed
+rows; machine output retains the full session and effective-account attribution. An exact run query
+is read-only and does not await, stop, reset, or resubmit its unit:
+
+```sh
+lean/scripts/lean-build-systemd.py list --limit 20
+lean/scripts/lean-build-systemd.py list --run-id run-<uuid-without-dashes> --json
+```
+
+The listing reads only restrictive managed run records and exact bound systemd units. It skips
+unsafe or malformed run entries with bounded stderr diagnostics and never searches the process
+table.
+
 Exit 124 is a non-mutating caller timeout, 125 means state or supervisor evidence is insufficient,
 and 126 is externally observed abandonment. Consumers deduplicate recovery delivery by the stable
 `event_id`. The managed path uses the same build-owner lock and measured worker controls as the

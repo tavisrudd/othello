@@ -31,10 +31,12 @@ MAX_VALUE_LENGTH = 128
 MAX_RECORD_BYTES = 64 * 1024
 MAX_ARG_BYTES = 4096
 MAX_ARGV_BYTES = 48 * 1024
+MAX_LIST_ROWS = 100
 HARNESS_VALUES = ("codex", "claude", "manual")
 SESSION_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:@+-]{0,127}\Z")
 LANE_RE = re.compile(r"[a-z0-9][a-z0-9-]{0,63}\Z")
 TASK_RE = re.compile(r"C[0-9]+\Z")
+RUN_ID_RE = re.compile(r"run-[0-9a-f]{32}\Z")
 MODULE_RE = re.compile(r"[A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*\Z")
 BUS_OWNER_RE = re.compile(r":[0-9]+\.[0-9]+\Z")
 BOOT_ID_RE = re.compile(r"[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\Z")
@@ -948,6 +950,13 @@ def nonnegative_int(value: str) -> int:
     return parsed
 
 
+def list_limit(value: str) -> int:
+    parsed = positive_int(value)
+    if parsed > MAX_LIST_ROWS:
+        raise argparse.ArgumentTypeError(f"must not exceed {MAX_LIST_ROWS}")
+    return parsed
+
+
 def oom_adjust(value: str) -> int:
     parsed = int(value)
     if not -1000 <= parsed <= 1000:
@@ -1067,6 +1076,315 @@ def run_managed_cli(
         submission_digest=digest,
     )
     return completion, diagnostic
+
+
+def read_optional_json_record(
+    run_dir: Path, name: str, effective_uid: int
+) -> dict[str, object] | None:
+    path = run_dir / name
+    try:
+        path.lstat()
+    except FileNotFoundError:
+        return None
+    except OSError as error:
+        raise StateError(f"cannot inspect {name}: {error}") from error
+    return read_json_record(path, effective_uid)
+
+
+def validate_list_submission(
+    run_dir: Path, submission: Mapping[str, object]
+) -> dict[str, object]:
+    run_id = run_dir.name
+    unit = f"othello-lean-{run_id.removeprefix('run-')}.service"
+    if (
+        submission.get("format") != 1
+        or submission.get("run_id") != run_id
+        or submission.get("run_dir") != str(run_dir)
+        or submission.get("unit") != unit
+    ):
+        raise StateError("submission identity or format mismatch")
+    origin = submission.get("origin")
+    if not isinstance(origin, Mapping):
+        raise StateError("submission origin is malformed")
+    required = {
+        "user": origin.get("user"),
+        "harness": origin.get("harness"),
+        "session_id": origin.get("session_id"),
+    }
+    if not all(
+        isinstance(value, str) and value and len(value) <= MAX_VALUE_LENGTH
+        for value in required.values()
+    ):
+        raise StateError("submission origin attribution is malformed")
+    if origin.get("harness") not in HARNESS_VALUES or SESSION_RE.fullmatch(
+        str(origin.get("session_id"))
+    ) is None:
+        raise StateError("submission origin attribution is malformed")
+    lane = origin.get("work_lane")
+    task = origin.get("task_id")
+    if lane is not None and (not isinstance(lane, str) or LANE_RE.fullmatch(lane) is None):
+        raise StateError("submission work-lane attribution is malformed")
+    if task is not None and (not isinstance(task, str) or TASK_RE.fullmatch(task) is None):
+        raise StateError("submission task attribution is malformed")
+    submitted = submission.get("submitted_utc")
+    if not isinstance(submitted, str) or len(submitted) > MAX_VALUE_LENGTH:
+        raise StateError("submission timestamp is malformed")
+    try:
+        parsed_submitted = datetime.fromisoformat(submitted)
+    except ValueError as error:
+        raise StateError("submission timestamp is malformed") from error
+    if parsed_submitted.tzinfo is None:
+        raise StateError("submission timestamp has no timezone")
+    return dict(origin)
+
+
+def validate_list_completion(
+    completion: Mapping[str, object],
+    submission: Mapping[str, object],
+    accepted: Mapping[str, object] | None,
+) -> None:
+    expected_event = f"lean-queue:{submission['run_id']}:terminal:1"
+    if (
+        completion.get("format") != 1
+        or completion.get("run_id") != submission.get("run_id")
+        or completion.get("unit") != submission.get("unit")
+        or completion.get("origin") != submission.get("origin")
+        or completion.get("event_id") != expected_event
+    ):
+        raise StateError("completion identity or attribution mismatch")
+    if accepted is None or completion.get("invocation_id") != accepted.get("invocation_id"):
+        raise StateError("completion has no matching accepted invocation")
+    if completion.get("effective_state") not in {
+        "success",
+        "failed",
+        "refused",
+        "interrupted",
+        "failed-before-status",
+        "abandoned",
+        "unknown",
+    }:
+        raise StateError("completion effective state is malformed")
+
+
+def list_effective_state(
+    *,
+    submission: Mapping[str, object],
+    accepted: Mapping[str, object] | None,
+    status: Mapping[str, object] | None,
+    completion: Mapping[str, object] | None,
+    service: Mapping[str, object] | None,
+    manager_matches: bool,
+) -> tuple[str, str | None]:
+    phase = status.get("phase") if status is not None else None
+    if phase is not None and phase not in {
+        "initializing",
+        "waiting-for-lock",
+        "quiet-preflight",
+        "building",
+        "aggregate-gate",
+        "finished",
+    }:
+        raise StateError("canonical status phase is malformed")
+    if completion is not None:
+        return str(completion["effective_state"]), phase
+    if accepted is None:
+        return "submitted", phase or "initializing"
+    canonical = status.get("state") if status is not None else None
+    if canonical is not None and canonical not in {
+        "queued",
+        "running",
+        "success",
+        "failed",
+        "refused",
+        "interrupted",
+    }:
+        raise StateError("canonical status state is malformed")
+    if canonical in {"success", "failed", "refused", "interrupted"}:
+        return str(canonical), phase
+    if not manager_matches or service is None:
+        return "unknown", phase
+    if service.get("InvocationID") != accepted.get("invocation_id"):
+        return "unknown", phase
+    active_state = service.get("ActiveState")
+    if active_state in {"active", "activating", "reloading", "deactivating"}:
+        if canonical in {"queued", "running"}:
+            return str(canonical), phase
+        return "accepted", phase or "initializing"
+    if active_state in {"inactive", "failed"}:
+        return ("failed-before-status" if status is None else "abandoned"), phase
+    return "unknown", phase
+
+
+def list_managed_runs(
+    *,
+    state_root: Path,
+    limit: int = 20,
+    run_id: str | None = None,
+    effective_uid: int | None = None,
+    snapshot_reader: Callable[..., dict[str, object] | None] = unit_snapshot,
+    generation_reader: Callable[[], Mapping[str, object]] = manager_generation,
+) -> tuple[dict[str, object], list[str]]:
+    """Read a bounded active/recent view without mutating queue or supervisor state."""
+    if not 1 <= limit <= MAX_LIST_ROWS:
+        raise StateError(f"list limit must be between 1 and {MAX_LIST_ROWS}")
+    if run_id is not None and RUN_ID_RE.fullmatch(run_id) is None:
+        raise StateError(f"invalid managed run ID: {display_value(run_id)}")
+    uid = os.geteuid() if effective_uid is None else effective_uid
+    root = state_root.expanduser().absolute()
+    try:
+        root.lstat()
+    except FileNotFoundError:
+        return {"format": 1, "state_root": str(root), "rows": [], "skipped": 0}, []
+    except OSError as error:
+        raise StateError(f"cannot inspect managed state root: {error}") from error
+    verify_private_directory(root, uid)
+
+    diagnostics: list[str] = []
+    candidates: list[tuple[str, Path, dict[str, object], dict[str, object]]] = []
+    try:
+        entries = list(root.iterdir())
+    except OSError as error:
+        raise StateError(f"cannot scan managed state root: {error}") from error
+    for entry in entries:
+        if RUN_ID_RE.fullmatch(entry.name) is None or (run_id is not None and entry.name != run_id):
+            continue
+        try:
+            verify_private_directory(entry, uid)
+            submission = read_json_record(entry / "submission.json", uid)
+            origin = validate_list_submission(entry, submission)
+            candidates.append((str(submission["submitted_utc"]), entry, submission, origin))
+        except StateError as error:
+            diagnostics.append(f"{entry.name}: {error}")
+
+    candidates.sort(key=lambda item: (item[0], item[1].name), reverse=True)
+    records: list[
+        tuple[
+            Path,
+            dict[str, object],
+            dict[str, object],
+            dict[str, object] | None,
+            dict[str, object] | None,
+            dict[str, object] | None,
+        ]
+    ] = []
+    skipped = len(diagnostics)
+    for _, entry, submission, origin in candidates:
+        try:
+            status = read_status_record(entry, uid)
+            validate_reattachment_status(status, submission)
+            accepted = read_optional_json_record(entry, "accepted.json", uid)
+            if accepted is not None:
+                expected = {
+                    "format": 1,
+                    "run_id": submission.get("run_id"),
+                    "unit": submission.get("unit"),
+                    "manager_generation": submission.get("manager_generation"),
+                    "submission_sha256": hashlib.sha256(canonical_json(submission)).hexdigest(),
+                }
+                if any(accepted.get(key) != value for key, value in expected.items()):
+                    raise StateError("accepted identity does not match immutable submission")
+                invocation = accepted.get("invocation_id")
+                if not isinstance(invocation, str) or re.fullmatch(r"[0-9a-f]{32}", invocation) is None:
+                    raise StateError("accepted record has no valid InvocationID")
+            completion = read_optional_json_record(entry, "completion.json", uid)
+            if completion is not None:
+                validate_list_completion(completion, submission, accepted)
+            records.append((entry, submission, origin, accepted, status, completion))
+        except StateError as error:
+            diagnostics.append(f"{entry.name}: {error}")
+            skipped += 1
+
+    active = [record for record in records if record[-1] is None]
+    recent = [record for record in records if record[-1] is not None]
+    records = (active + recent)[:limit]
+    needs_manager = any(
+        accepted is not None
+        for _, _, _, accepted, _, completion in records
+        if completion is None
+    )
+
+    current_generation: Mapping[str, object] | None = None
+    if needs_manager:
+        try:
+            current_generation = generation_reader()
+        except StateError as error:
+            diagnostics.append(f"user manager: {error}")
+
+    rows: list[dict[str, object]] = []
+    for entry, submission, origin, accepted, status, completion in records:
+        service = None
+        manager_matches = current_generation == submission.get("manager_generation")
+        if completion is None and accepted is not None and manager_matches:
+            try:
+                service = snapshot_reader(str(submission["unit"]))
+            except StateError as error:
+                diagnostics.append(f"{entry.name}: cannot inspect exact unit: {error}")
+        effective_state, phase = list_effective_state(
+            submission=submission,
+            accepted=accepted,
+            status=status,
+            completion=completion,
+            service=service,
+            manager_matches=manager_matches,
+        )
+        rows.append(
+            {
+                "run_id": submission["run_id"],
+                "effective_state": effective_state,
+                "phase": phase,
+                "lane": origin.get("work_lane"),
+                "task": origin.get("task_id"),
+                "harness": origin["harness"],
+                "session": origin["session_id"],
+                "user": origin["user"],
+                "unit": submission["unit"],
+                "submitted_utc": submission["submitted_utc"],
+            }
+        )
+    return {
+        "format": 1,
+        "state_root": str(root),
+        "rows": rows,
+        "skipped": skipped,
+    }, diagnostics[:10]
+
+
+def abbreviated_sessions(rows: Sequence[Mapping[str, object]]) -> dict[str, str]:
+    values = sorted({str(row["session"]) for row in rows})
+    result: dict[str, str] = {}
+    for value in values:
+        width = min(8, len(value))
+        while width < len(value) and any(
+            other != value and other.startswith(value[:width]) for other in values
+        ):
+            width += 1
+        result[value] = value if width == len(value) else value[:width] + "…"
+    return result
+
+
+def human_list_table(payload: Mapping[str, object]) -> str:
+    rows = payload.get("rows")
+    if not isinstance(rows, list) or not rows:
+        return "No managed Lean queue runs."
+    sessions = abbreviated_sessions(rows)
+    columns = ("run_id", "effective_state", "phase", "lane", "task", "harness", "session", "unit")
+    display_rows: list[list[str]] = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            raise StateError("list row is malformed")
+        values = {key: "-" if row.get(key) is None else str(row.get(key)) for key in columns}
+        values["session"] = sessions[values["session"]]
+        display_rows.append([values[key] for key in columns])
+    widths = [
+        max(len(columns[index]), *(len(row[index]) for row in display_rows))
+        for index in range(len(columns))
+    ]
+    lines = ["  ".join(name.ljust(widths[index]) for index, name in enumerate(columns))]
+    lines.extend(
+        "  ".join(value.ljust(widths[index]) for index, value in enumerate(row))
+        for row in display_rows
+    )
+    return "\n".join(line.rstrip() for line in lines)
 
 
 def reattach_and_wait(
@@ -1400,6 +1718,13 @@ def parser() -> argparse.ArgumentParser:
     )
     await_parser.add_argument("run_dir", type=Path)
     await_parser.add_argument("--timeout", type=float)
+    list_parser = subparsers.add_parser(
+        "list", help="show a bounded provenance-aware active/recent managed queue view"
+    )
+    list_parser.add_argument("--state-root", type=Path, default=STATE_ROOT_DEFAULT)
+    list_parser.add_argument("--limit", type=list_limit, default=20)
+    list_parser.add_argument("--run-id")
+    list_parser.add_argument("--json", action="store_true", dest="machine_json")
     run = subparsers.add_parser(
         "run", help="submit and block on one adjacent systemd-managed Lean queue"
     )
@@ -1456,6 +1781,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             payload, diagnostic = reattach_and_wait(run_dir=args.run_dir, timeout=args.timeout)
             if diagnostic:
                 print(f"lean-build-systemd: {diagnostic}", file=sys.stderr)
+        elif args.command == "list":
+            payload, diagnostics = list_managed_runs(
+                state_root=args.state_root, limit=args.limit, run_id=args.run_id
+            )
+            for diagnostic in diagnostics:
+                print(f"lean-build-systemd: {diagnostic}", file=sys.stderr)
         else:
             payload, diagnostic = run_managed_cli(args, environ=os.environ)
             if diagnostic:
@@ -1463,8 +1794,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     except (OriginError, StateError) as error:
         print(f"lean-build-systemd: {error}", file=sys.stderr)
         return EXIT_INVALID
-    json.dump(payload, sys.stdout, sort_keys=True, separators=(",", ":"))
-    sys.stdout.write("\n")
+    if args.command == "list" and not args.machine_json:
+        print(human_list_table(payload))
+    else:
+        json.dump(payload, sys.stdout, sort_keys=True, separators=(",", ":"))
+        sys.stdout.write("\n")
     return (
         int(payload.get("adapter_exit_code", 0))
         if args.command in {"await", "run"}
