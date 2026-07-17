@@ -802,3 +802,240 @@ Primary baselines:
 The near-term commercial wedge is the **offline compiler/digital twin**, where integration risk is
 low. The strongest differentiated architecture is **proof-carrying dynamic repair**. The broadest
 research export is **proof-carrying symmetry-reduced search**.
+
+## Full paper-index, discovery-log, and `alt-orbit-repair` audit
+
+Sources scanned after the initial report draft:
+
+- every current mathematical paper abstract/README and every result row in
+  [`papers-index.md`](../papers/papers-index.md);
+- the embedded `repaircodes` and arcs Discovery Track registers;
+- the standalone `repairports` and `rp-next` discovery logs;
+- the C115 twisted-cubic cross-lane discovery log and its Fable/Opus triage;
+- the `alt-orbit-repair` live/archive logs and C142, C143, C148, C149, C150 findings; and
+- the relconic C201/C210 mechanism notebooks, including their negative results.
+
+The following are the material additions. Classical/standard mechanisms are retained only as
+implementation guidance, not promoted as novelty.
+
+### A21. Equivariant Repair Port Capsule
+
+D-PC10/D-PC11 prove the exact transport principle needed to compress the primary data structure:
+a monomial automorphism of a generator's column configuration relabels the complete bounded repair
+hypergraph, including full-support relations. More generally, blockers, repair Boolean functions,
+Horn closure, and coefficient-labelled equations are all functorial under the same verified
+transport.
+
+Store:
+
+```text
+EquivariantPortCapsule {
+  group generators and action certificates,
+  coordinate-orbit representatives and stabilizers,
+  repair-edge orbit representatives,
+  transporter map / Schreier data,
+  representative coefficients, blockers, BDD nodes, and Horn rules,
+  lazy expansion and query cache
+}
+```
+
+Compile one target/edge representative per orbit and transport answers on demand. This can reduce
+preprocessing and metadata by orbit-size factors for RS-like, cyclic, geometric, and other highly
+symmetric codes. A tiny checker verifies each generator action on the pinned matrix and the
+transported equation. For asymmetric codes it degenerates safely to the ordinary capsule.
+
+This is a major addition to the product thesis. Symmetry reduction itself is standard; the specific
+gain is that the entire *complete repair semantics*, rather than only code coordinates, is compiled
+equivariantly and certified.
+
+### A22. Multiobjective pointed syndrome compiler
+
+The `repairports` discovery log observes that C215's cache is an ordinary syndrome/coset-leader
+table plus a target-forced nonzero minimum for every coordinate. Compute all pointed columns in one
+ambient traversal:
+
+```text
+PointedCost[beta] = {
+  ordinary_min,
+  forced_nonzero_min[x] for each inner coordinate x
+}
+```
+
+Every visited representative updates the ordinary minimum and all coordinates on which it is
+nonzero. Combine this with coordinate orbits, a code trellis, or state-space dynamic programming
+instead of rebuilding a table per target. The open algorithmic question is which inner-code classes
+admit runtime polynomial in the number of syndromes and coordinate orbits rather than the full
+ambient `|F|^k` traversal.
+
+Immediate improvement: one scan and one vector-valued table instead of `n` independent target
+scans. Research improvement: symmetry/trellis-compressed output-sensitive compilation.
+
+### A23. Orbit-exchange capsule and resilient configuration planner
+
+The alternate-orbit lane supplies a second, higher-level meaning of repair: repair the
+*configuration*, not merely the erased data. After deleting a selected nonfixed conjugate orbit,
+the system can add a different legal orbit while retaining the arc/code constraint.
+
+```text
+OrbitExchangeCapsule {
+  configuration and symmetry action,
+  selected orbit units,
+  deletion remainder -> restoration and alternate additions,
+  carrier-indexed candidate sets,
+  obstruction/collision profile,
+  exchange-graph adjacency oracle,
+  robustness envelope and proof certificates
+}
+```
+
+The checked phase condition
+
+```text
+floor((k-1)^2/4) + r + 1 <= s(s-1)/2
+```
+
+guarantees at least `r` alternate orbit repairs in the proven family. For invariant ten-arcs and
+`s>=7`, at least 318 alternatives survive every selected-orbit deletion. The Q25 result guarantees
+an alternate pair in every profile. These are strong mathematical demonstrations of option-rich
+configuration repair.
+
+Commercial mapping: code/profile migration or symmetry-constrained resource replacement where
+resources are retired/added in coupled orbit units. This remains speculative until a deployed code
+or configuration family has the same exchange semantics. Do not imply the exchange graph is
+connected or rapidly mixing; C152 has not proved that.
+
+### A24. Factorized obstruction-mask search and certificates
+
+C151's certificate engineering is an algorithm/data-structure result hiding inside a formal proof.
+Direct legality witnesses were too expensive. The successful factorization uses:
+
+- 651 canonical dual-line obstruction masks;
+- 310 candidate carriers on 31 fixed lines, ten per line;
+- constant freshness and carrier-incidence blocks;
+- a varying old-secant mask;
+- residual symmetry transports; and
+- small row dispatch certificates referring to the factored masks.
+
+General schema:
+
+```text
+FactorizedConstraintStore {
+  canonical predicate masks,
+  pair/tuple -> mask IDs,
+  constant obstruction layers,
+  variable obstruction bitsets,
+  symmetry transport IDs,
+  small conclusion certificates
+}
+```
+
+This can substantially improve symmetry-heavy finite CSP/enumeration systems when expensive
+algebraic predicates repeat through a small quotient. It is related to standard bitset CSP and
+decision-diagram techniques; the paper contribution would be the proof-carrying factorization and
+measured certificate/compiler effect, not bitsets themselves.
+
+The relconic C201 notebook independently reinforces the pattern: a nine-factor determinant test
+became a pair-indexed 1,302-bit forbidden-third lookup. It also supplies a useful negative rule for
+search pipelines: run cheap coverage/capacity gates before expensive low-degree rank tests.
+
+### A25. Resource-aware generated-proof build scheduler
+
+The C143/C151 logs expose a commercially useful formal-CI problem:
+
+- generated Lean leaves consumed roughly 6--11 GB each;
+- changing worker counts did not invalidate correct artifacts, but scheduler order and stale
+  content made progress misleading;
+- filenames, timestamps, and progress denominators were inadequate freshness evidence;
+- bounded certificate shards, content traces, `--no-build` validation, memory guards, and
+  disk-backed snapshots made the build recoverable; and
+- factoring repeated incidence masks reduced proof duplication.
+
+Candidate tool:
+
+```text
+ProofBuildManifest {
+  content-addressed source/trace keys,
+  dependency DAG,
+  measured/predicted peak RSS and time per target family,
+  maximum-safe concurrency constraints,
+  restart/snapshot provenance,
+  aggregate trust and staleness checks
+}
+```
+
+Schedule proof targets as a resource-constrained DAG rather than a fixed worker pool, preferentially
+building shared high-memory checkers before parallel bounded leaves. The repository already has an
+unnumbered `lean-proof-engineering-at-scale` paper idea. To claim novelty, compare with Lake,
+Bazel/Nix-style content-addressed builds, remote caches, and large-formalization CI practice. As a
+case study/tool, this may be more commercially immediate for formal-verification teams than several
+mathematical products.
+
+### A26. Decoder-ambiguity and continuation fingerprints
+
+The Clebsch theorem registry adds a more ambitious inverse problem. For the short q11 code, a single
+quadratic syndrome test is a complete distance oracle, and nearest-word ambiguity reconstructs the
+Brianchon geometry and an intrinsic support bipartition. The continuation package independently
+reconstructs a finite geometry/configuration from its legal-extension complex.
+
+Generalize to an **Ambiguity/Continuation Fingerprint**:
+
+```text
+BehaviorFingerprint {
+  hard-syndrome locus,
+  nearest-leader multiplicity and support complex,
+  legal-extension conflict complex,
+  inferred automorphism group / coefficient identity
+}
+```
+
+Possible uses: identify an unknown short codec from black-box decoder behavior, detect coefficient
+or implementation drift, reconstruct hidden structure, and generate targeted tests. Potential paper:
+*Behavioral reconstruction of linear codes from decoding and extension oracles*. The present
+evidence is one exceptionally rigid code plus an exact continuation theorem; a general/noisy
+reconstruction theory is open.
+
+### A27. Symmetry-first game/puzzle preprocessing
+
+The Nofil/dihedral theorems suggest a solver prepass:
+
+1. search for a fixed-point-free legal-structure involution and emit a mirror-strategy certificate;
+2. otherwise quotient residual positions into Schreier orbit templates;
+3. xor only the template nimbers with odd orbit multiplicity; and
+4. cache templates through a Burnside/group-action signature.
+
+This can dramatically avoid game-tree search on structured boards. It is a sound algorithmic export
+and good benchmark domain for proof-carrying symmetry tooling, but its commercial reach is mainly
+puzzle/game solvers and verification testbeds.
+
+## Promotions and demotions after the full scan
+
+Promote:
+
+1. **Equivariant capsule compilation** into the core storage architecture.
+2. **Multiobjective pointed syndrome compilation** into the algorithms research agenda.
+3. **Orbit-exchange configuration repair** into the extension-complex paper/product, with a much
+   sharper theorem base than the first draft recognized.
+4. **Factorized obstruction masks** and **resource-aware proof CI** into the proof-carrying search
+   and methods-paper programs.
+5. **Behavioral code reconstruction** as a creative, longer-horizon paper.
+
+Keep but do not promote as novelty:
+
+- pair-indexed forbidden-third bitsets and coverage-before-rank staging (standard search/CSP
+  engineering, though directly useful here);
+- mirror/involution preprocessing (standard pairing-strategy idea with strong exact instances);
+- BDD reliability, Horn forward chaining, LP scheduling, clutter dualization, and canonical
+  augmentation individually;
+- the five-weight cubic-axis family as a commercial algorithm (good certified code family, modest
+  algorithmic leverage); and
+- Q64 layered-parabola construction signals (interesting finite geometry, no current product path).
+
+The updated strongest architecture is:
+
+```text
+equivariant offline compiler
+  -> signed Port / Exchange / Syndrome capsules
+  -> untrusted dynamic planners and finite search engines
+  -> small proof-carrying plan / coverage verifiers
+  -> content-traced, resource-aware certificate build pipeline
+```
