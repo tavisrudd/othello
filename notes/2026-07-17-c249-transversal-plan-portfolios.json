@@ -1,0 +1,1386 @@
+{
+  "cases": [
+    {
+      "baselines": {
+        "action": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            1,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "H3"
+          ],
+          "representative_minimum_transversal": [
+            "primary-admin-plane"
+          ],
+          "representative_tau": 1,
+          "score": [
+            0.857142857143,
+            5.142857142857
+          ]
+        },
+        "embedding": {
+          "cooptimal_count": 4,
+          "cooptimal_tau_range": [
+            2,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "R3"
+          ],
+          "representative_minimum_transversal": [
+            "db-island-3-control",
+            "primary-admin-plane"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.83699909854,
+            5.249696705383
+          ]
+        },
+        "exact-transversal": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "database-recovery-edge-0",
+            "db-island-0-control",
+            "db-island-1-control",
+            "db-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            4.0
+          ]
+        },
+        "risk-frequency": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "database-recovery-edge-0",
+            "db-island-0-control",
+            "db-island-1-control",
+            "db-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            -1.0,
+            -12.0
+          ]
+        },
+        "risk-pairwise": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "database-recovery-edge-0",
+            "db-island-0-control",
+            "db-island-1-control",
+            "db-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            1.0,
+            6.0
+          ]
+        },
+        "risk-union": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "database-recovery-edge-0",
+            "db-island-0-control",
+            "db-island-1-control",
+            "db-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            12.0
+          ]
+        }
+      },
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "actions": [
+            "database-recovery-snapshot-0",
+            "database-recovery-replay-0",
+            "database-recovery-reconcile-0",
+            "validate"
+          ],
+          "description": "database-recovery-snapshot-0 database-recovery-replay-0 database-recovery-reconcile-0 validate",
+          "failure_domains": [
+            "database-recovery-edge-0",
+            "database-recovery-operator-0",
+            "primary-admin-plane"
+          ],
+          "name": "H0"
+        },
+        {
+          "actions": [
+            "database-recovery-export-1",
+            "database-recovery-rebuild-1",
+            "database-recovery-checksum-1",
+            "validate"
+          ],
+          "description": "database-recovery-export-1 database-recovery-rebuild-1 database-recovery-checksum-1 validate",
+          "failure_domains": [
+            "database-recovery-edge-1",
+            "database-recovery-operator-1",
+            "primary-admin-plane"
+          ],
+          "name": "H1"
+        },
+        {
+          "actions": [
+            "database-recovery-mirror-2",
+            "database-recovery-promote-2",
+            "database-recovery-rewire-2",
+            "validate"
+          ],
+          "description": "database-recovery-mirror-2 database-recovery-promote-2 database-recovery-rewire-2 validate",
+          "failure_domains": [
+            "database-recovery-edge-2",
+            "database-recovery-operator-2",
+            "primary-admin-plane"
+          ],
+          "name": "H2"
+        },
+        {
+          "actions": [
+            "database-recovery-journal-3",
+            "database-recovery-restore-3",
+            "database-recovery-audit-3",
+            "validate"
+          ],
+          "description": "database-recovery-journal-3 database-recovery-restore-3 database-recovery-audit-3 validate",
+          "failure_domains": [
+            "database-recovery-edge-3",
+            "database-recovery-operator-3",
+            "primary-admin-plane"
+          ],
+          "name": "H3"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-0",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-0 validate isolated recovery channel",
+          "failure_domains": [
+            "db-island-0-control",
+            "db-island-0-identity",
+            "db-island-0-transport"
+          ],
+          "name": "R0"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-1",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-1 validate isolated recovery channel",
+          "failure_domains": [
+            "db-island-1-control",
+            "db-island-1-identity",
+            "db-island-1-transport"
+          ],
+          "name": "R1"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-2",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-2 validate isolated recovery channel",
+          "failure_domains": [
+            "db-island-2-control",
+            "db-island-2-identity",
+            "db-island-2-transport"
+          ],
+          "name": "R2"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-3",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-3 validate isolated recovery channel",
+          "failure_domains": [
+            "db-island-3-control",
+            "db-island-3-identity",
+            "db-island-3-transport"
+          ],
+          "name": "R3"
+        }
+      ],
+      "case": "database-recovery",
+      "portfolio_count": 70,
+      "portfolio_size": 4,
+      "uniform_action_cost": [
+        4
+      ],
+      "uniform_domain_count": [
+        3
+      ]
+    },
+    {
+      "baselines": {
+        "action": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            1,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "H3"
+          ],
+          "representative_minimum_transversal": [
+            "global-root-credential"
+          ],
+          "representative_tau": 1,
+          "score": [
+            0.857142857143,
+            5.142857142857
+          ]
+        },
+        "embedding": {
+          "cooptimal_count": 4,
+          "cooptimal_tau_range": [
+            2,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "R3"
+          ],
+          "representative_minimum_transversal": [
+            "global-root-credential",
+            "identity-island-3-control"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.793484426111,
+            5.258047480445
+          ]
+        },
+        "exact-transversal": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "credential-revocation-edge-0",
+            "identity-island-0-control",
+            "identity-island-1-control",
+            "identity-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            4.0
+          ]
+        },
+        "risk-frequency": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "credential-revocation-edge-0",
+            "identity-island-0-control",
+            "identity-island-1-control",
+            "identity-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            -1.0,
+            -12.0
+          ]
+        },
+        "risk-pairwise": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "credential-revocation-edge-0",
+            "identity-island-0-control",
+            "identity-island-1-control",
+            "identity-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            1.0,
+            6.0
+          ]
+        },
+        "risk-union": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "credential-revocation-edge-0",
+            "identity-island-0-control",
+            "identity-island-1-control",
+            "identity-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            12.0
+          ]
+        }
+      },
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "actions": [
+            "credential-revocation-snapshot-0",
+            "credential-revocation-replay-0",
+            "credential-revocation-reconcile-0",
+            "validate"
+          ],
+          "description": "credential-revocation-snapshot-0 credential-revocation-replay-0 credential-revocation-reconcile-0 validate",
+          "failure_domains": [
+            "credential-revocation-edge-0",
+            "credential-revocation-operator-0",
+            "global-root-credential"
+          ],
+          "name": "H0"
+        },
+        {
+          "actions": [
+            "credential-revocation-export-1",
+            "credential-revocation-rebuild-1",
+            "credential-revocation-checksum-1",
+            "validate"
+          ],
+          "description": "credential-revocation-export-1 credential-revocation-rebuild-1 credential-revocation-checksum-1 validate",
+          "failure_domains": [
+            "credential-revocation-edge-1",
+            "credential-revocation-operator-1",
+            "global-root-credential"
+          ],
+          "name": "H1"
+        },
+        {
+          "actions": [
+            "credential-revocation-mirror-2",
+            "credential-revocation-promote-2",
+            "credential-revocation-rewire-2",
+            "validate"
+          ],
+          "description": "credential-revocation-mirror-2 credential-revocation-promote-2 credential-revocation-rewire-2 validate",
+          "failure_domains": [
+            "credential-revocation-edge-2",
+            "credential-revocation-operator-2",
+            "global-root-credential"
+          ],
+          "name": "H2"
+        },
+        {
+          "actions": [
+            "credential-revocation-journal-3",
+            "credential-revocation-restore-3",
+            "credential-revocation-audit-3",
+            "validate"
+          ],
+          "description": "credential-revocation-journal-3 credential-revocation-restore-3 credential-revocation-audit-3 validate",
+          "failure_domains": [
+            "credential-revocation-edge-3",
+            "credential-revocation-operator-3",
+            "global-root-credential"
+          ],
+          "name": "H3"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-0",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-0 validate isolated recovery channel",
+          "failure_domains": [
+            "identity-island-0-control",
+            "identity-island-0-identity",
+            "identity-island-0-transport"
+          ],
+          "name": "R0"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-1",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-1 validate isolated recovery channel",
+          "failure_domains": [
+            "identity-island-1-control",
+            "identity-island-1-identity",
+            "identity-island-1-transport"
+          ],
+          "name": "R1"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-2",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-2 validate isolated recovery channel",
+          "failure_domains": [
+            "identity-island-2-control",
+            "identity-island-2-identity",
+            "identity-island-2-transport"
+          ],
+          "name": "R2"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-3",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-3 validate isolated recovery channel",
+          "failure_domains": [
+            "identity-island-3-control",
+            "identity-island-3-identity",
+            "identity-island-3-transport"
+          ],
+          "name": "R3"
+        }
+      ],
+      "case": "credential-revocation",
+      "portfolio_count": 70,
+      "portfolio_size": 4,
+      "uniform_action_cost": [
+        4
+      ],
+      "uniform_domain_count": [
+        3
+      ]
+    },
+    {
+      "baselines": {
+        "action": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            1,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "H3"
+          ],
+          "representative_minimum_transversal": [
+            "global-orchestrator"
+          ],
+          "representative_tau": 1,
+          "score": [
+            0.857142857143,
+            5.142857142857
+          ]
+        },
+        "embedding": {
+          "cooptimal_count": 4,
+          "cooptimal_tau_range": [
+            2,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "R3"
+          ],
+          "representative_minimum_transversal": [
+            "global-orchestrator",
+            "service-island-3-control"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.793484426111,
+            5.258047480445
+          ]
+        },
+        "exact-transversal": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "global-orchestrator",
+            "service-island-0-control",
+            "service-island-1-control",
+            "service-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            4.0
+          ]
+        },
+        "risk-frequency": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "global-orchestrator",
+            "service-island-0-control",
+            "service-island-1-control",
+            "service-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            -1.0,
+            -12.0
+          ]
+        },
+        "risk-pairwise": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "global-orchestrator",
+            "service-island-0-control",
+            "service-island-1-control",
+            "service-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            1.0,
+            6.0
+          ]
+        },
+        "risk-union": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "global-orchestrator",
+            "service-island-0-control",
+            "service-island-1-control",
+            "service-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            12.0
+          ]
+        }
+      },
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "actions": [
+            "service-failover-snapshot-0",
+            "service-failover-replay-0",
+            "service-failover-reconcile-0",
+            "validate"
+          ],
+          "description": "service-failover-snapshot-0 service-failover-replay-0 service-failover-reconcile-0 validate",
+          "failure_domains": [
+            "global-orchestrator",
+            "service-failover-edge-0",
+            "service-failover-operator-0"
+          ],
+          "name": "H0"
+        },
+        {
+          "actions": [
+            "service-failover-export-1",
+            "service-failover-rebuild-1",
+            "service-failover-checksum-1",
+            "validate"
+          ],
+          "description": "service-failover-export-1 service-failover-rebuild-1 service-failover-checksum-1 validate",
+          "failure_domains": [
+            "global-orchestrator",
+            "service-failover-edge-1",
+            "service-failover-operator-1"
+          ],
+          "name": "H1"
+        },
+        {
+          "actions": [
+            "service-failover-mirror-2",
+            "service-failover-promote-2",
+            "service-failover-rewire-2",
+            "validate"
+          ],
+          "description": "service-failover-mirror-2 service-failover-promote-2 service-failover-rewire-2 validate",
+          "failure_domains": [
+            "global-orchestrator",
+            "service-failover-edge-2",
+            "service-failover-operator-2"
+          ],
+          "name": "H2"
+        },
+        {
+          "actions": [
+            "service-failover-journal-3",
+            "service-failover-restore-3",
+            "service-failover-audit-3",
+            "validate"
+          ],
+          "description": "service-failover-journal-3 service-failover-restore-3 service-failover-audit-3 validate",
+          "failure_domains": [
+            "global-orchestrator",
+            "service-failover-edge-3",
+            "service-failover-operator-3"
+          ],
+          "name": "H3"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-0",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-0 validate isolated recovery channel",
+          "failure_domains": [
+            "service-island-0-control",
+            "service-island-0-identity",
+            "service-island-0-transport"
+          ],
+          "name": "R0"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-1",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-1 validate isolated recovery channel",
+          "failure_domains": [
+            "service-island-1-control",
+            "service-island-1-identity",
+            "service-island-1-transport"
+          ],
+          "name": "R1"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-2",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-2 validate isolated recovery channel",
+          "failure_domains": [
+            "service-island-2-control",
+            "service-island-2-identity",
+            "service-island-2-transport"
+          ],
+          "name": "R2"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-3",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-3 validate isolated recovery channel",
+          "failure_domains": [
+            "service-island-3-control",
+            "service-island-3-identity",
+            "service-island-3-transport"
+          ],
+          "name": "R3"
+        }
+      ],
+      "case": "service-failover",
+      "portfolio_count": 70,
+      "portfolio_size": 4,
+      "uniform_action_cost": [
+        4
+      ],
+      "uniform_domain_count": [
+        3
+      ]
+    },
+    {
+      "baselines": {
+        "action": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            1,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "H3"
+          ],
+          "representative_minimum_transversal": [
+            "central-package-trust"
+          ],
+          "representative_tau": 1,
+          "score": [
+            0.857142857143,
+            5.142857142857
+          ]
+        },
+        "embedding": {
+          "cooptimal_count": 4,
+          "cooptimal_tau_range": [
+            2,
+            2
+          ],
+          "representative": [
+            "H0",
+            "H1",
+            "H2",
+            "R3"
+          ],
+          "representative_minimum_transversal": [
+            "central-package-trust",
+            "patch-island-3-control"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.793484426111,
+            5.258047480445
+          ]
+        },
+        "exact-transversal": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "central-package-trust",
+            "patch-island-0-control",
+            "patch-island-1-control",
+            "patch-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            4.0
+          ]
+        },
+        "risk-frequency": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "central-package-trust",
+            "patch-island-0-control",
+            "patch-island-1-control",
+            "patch-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            -1.0,
+            -12.0
+          ]
+        },
+        "risk-pairwise": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "central-package-trust",
+            "patch-island-0-control",
+            "patch-island-1-control",
+            "patch-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            1.0,
+            6.0
+          ]
+        },
+        "risk-union": {
+          "cooptimal_count": 17,
+          "cooptimal_tau_range": [
+            4,
+            4
+          ],
+          "representative": [
+            "H0",
+            "R0",
+            "R1",
+            "R2"
+          ],
+          "representative_minimum_transversal": [
+            "central-package-trust",
+            "patch-island-0-control",
+            "patch-island-1-control",
+            "patch-island-2-control"
+          ],
+          "representative_tau": 4,
+          "score": [
+            12.0
+          ]
+        }
+      },
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "actions": [
+            "patch-remediation-snapshot-0",
+            "patch-remediation-replay-0",
+            "patch-remediation-reconcile-0",
+            "validate"
+          ],
+          "description": "patch-remediation-snapshot-0 patch-remediation-replay-0 patch-remediation-reconcile-0 validate",
+          "failure_domains": [
+            "central-package-trust",
+            "patch-remediation-edge-0",
+            "patch-remediation-operator-0"
+          ],
+          "name": "H0"
+        },
+        {
+          "actions": [
+            "patch-remediation-export-1",
+            "patch-remediation-rebuild-1",
+            "patch-remediation-checksum-1",
+            "validate"
+          ],
+          "description": "patch-remediation-export-1 patch-remediation-rebuild-1 patch-remediation-checksum-1 validate",
+          "failure_domains": [
+            "central-package-trust",
+            "patch-remediation-edge-1",
+            "patch-remediation-operator-1"
+          ],
+          "name": "H1"
+        },
+        {
+          "actions": [
+            "patch-remediation-mirror-2",
+            "patch-remediation-promote-2",
+            "patch-remediation-rewire-2",
+            "validate"
+          ],
+          "description": "patch-remediation-mirror-2 patch-remediation-promote-2 patch-remediation-rewire-2 validate",
+          "failure_domains": [
+            "central-package-trust",
+            "patch-remediation-edge-2",
+            "patch-remediation-operator-2"
+          ],
+          "name": "H2"
+        },
+        {
+          "actions": [
+            "patch-remediation-journal-3",
+            "patch-remediation-restore-3",
+            "patch-remediation-audit-3",
+            "validate"
+          ],
+          "description": "patch-remediation-journal-3 patch-remediation-restore-3 patch-remediation-audit-3 validate",
+          "failure_domains": [
+            "central-package-trust",
+            "patch-remediation-edge-3",
+            "patch-remediation-operator-3"
+          ],
+          "name": "H3"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-0",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-0 validate isolated recovery channel",
+          "failure_domains": [
+            "patch-island-0-control",
+            "patch-island-0-identity",
+            "patch-island-0-transport"
+          ],
+          "name": "R0"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-1",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-1 validate isolated recovery channel",
+          "failure_domains": [
+            "patch-island-1-control",
+            "patch-island-1-identity",
+            "patch-island-1-transport"
+          ],
+          "name": "R1"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-2",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-2 validate isolated recovery channel",
+          "failure_domains": [
+            "patch-island-2-control",
+            "patch-island-2-identity",
+            "patch-island-2-transport"
+          ],
+          "name": "R2"
+        },
+        {
+          "actions": [
+            "assess",
+            "prestage",
+            "switch-channel-3",
+            "validate"
+          ],
+          "description": "assess prestage switch-channel-3 validate isolated recovery channel",
+          "failure_domains": [
+            "patch-island-3-control",
+            "patch-island-3-identity",
+            "patch-island-3-transport"
+          ],
+          "name": "R3"
+        }
+      ],
+      "case": "patch-remediation",
+      "portfolio_count": 70,
+      "portfolio_size": 4,
+      "uniform_action_cost": [
+        4
+      ],
+      "uniform_domain_count": [
+        3
+      ]
+    },
+    {
+      "baselines": {
+        "action": {
+          "cooptimal_count": 126,
+          "cooptimal_tau_range": [
+            1,
+            3
+          ],
+          "representative": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ],
+          "representative_minimum_transversal": [
+            "backbone-a",
+            "backbone-b"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.857142857143,
+            5.142857142857
+          ]
+        },
+        "embedding": {
+          "cooptimal_count": 126,
+          "cooptimal_tau_range": [
+            1,
+            3
+          ],
+          "representative": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ],
+          "representative_minimum_transversal": [
+            "backbone-a",
+            "backbone-b"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.576600082737,
+            3.459600496425
+          ]
+        },
+        "exact-transversal": {
+          "cooptimal_count": 3,
+          "cooptimal_tau_range": [
+            3,
+            3
+          ],
+          "representative": [
+            "P0",
+            "P1",
+            "P3",
+            "P6"
+          ],
+          "representative_minimum_transversal": [
+            "audit-plane",
+            "backbone-a",
+            "backbone-b"
+          ],
+          "representative_tau": 3,
+          "score": [
+            3.0
+          ]
+        },
+        "risk-frequency": {
+          "cooptimal_count": 20,
+          "cooptimal_tau_range": [
+            2,
+            3
+          ],
+          "representative": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ],
+          "representative_minimum_transversal": [
+            "backbone-a",
+            "backbone-b"
+          ],
+          "representative_tau": 2,
+          "score": [
+            -2.0,
+            -20.0
+          ]
+        },
+        "risk-pairwise": {
+          "cooptimal_count": 5,
+          "cooptimal_tau_range": [
+            2,
+            2
+          ],
+          "representative": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ],
+          "representative_minimum_transversal": [
+            "backbone-a",
+            "backbone-b"
+          ],
+          "representative_tau": 2,
+          "score": [
+            0.8,
+            5.2
+          ]
+        },
+        "risk-union": {
+          "cooptimal_count": 48,
+          "cooptimal_tau_range": [
+            1,
+            3
+          ],
+          "representative": [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ],
+          "representative_minimum_transversal": [
+            "backbone-a",
+            "backbone-b"
+          ],
+          "representative_tau": 2,
+          "score": [
+            8.0
+          ]
+        }
+      },
+      "candidate_count": 9,
+      "candidates": [
+        {
+          "actions": [
+            "inspect-0",
+            "stage-0",
+            "remediate-0",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 0 validate",
+          "failure_domains": [
+            "backbone-a",
+            "east-control",
+            "vendor-a"
+          ],
+          "name": "P0"
+        },
+        {
+          "actions": [
+            "inspect-1",
+            "stage-1",
+            "remediate-1",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 1 validate",
+          "failure_domains": [
+            "audit-plane",
+            "backbone-a",
+            "vendor-b"
+          ],
+          "name": "P1"
+        },
+        {
+          "actions": [
+            "inspect-2",
+            "stage-2",
+            "remediate-2",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 2 validate",
+          "failure_domains": [
+            "backbone-b",
+            "east-control",
+            "vendor-b"
+          ],
+          "name": "P2"
+        },
+        {
+          "actions": [
+            "inspect-3",
+            "stage-3",
+            "remediate-3",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 3 validate",
+          "failure_domains": [
+            "backbone-b",
+            "global-identity",
+            "west-control"
+          ],
+          "name": "P3"
+        },
+        {
+          "actions": [
+            "inspect-4",
+            "stage-4",
+            "remediate-4",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 4 validate",
+          "failure_domains": [
+            "east-control",
+            "global-identity",
+            "west-control"
+          ],
+          "name": "P4"
+        },
+        {
+          "actions": [
+            "inspect-5",
+            "stage-5",
+            "remediate-5",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 5 validate",
+          "failure_domains": [
+            "backbone-a",
+            "backbone-b",
+            "vendor-a"
+          ],
+          "name": "P5"
+        },
+        {
+          "actions": [
+            "inspect-6",
+            "stage-6",
+            "remediate-6",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 6 validate",
+          "failure_domains": [
+            "audit-plane",
+            "east-control",
+            "vendor-b"
+          ],
+          "name": "P6"
+        },
+        {
+          "actions": [
+            "inspect-7",
+            "stage-7",
+            "remediate-7",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 7 validate",
+          "failure_domains": [
+            "backbone-b",
+            "east-control",
+            "vendor-a"
+          ],
+          "name": "P7"
+        },
+        {
+          "actions": [
+            "inspect-8",
+            "stage-8",
+            "remediate-8",
+            "validate"
+          ],
+          "description": "inspect stage remediate route 8 validate",
+          "failure_domains": [
+            "audit-plane",
+            "east-control",
+            "vendor-a"
+          ],
+          "name": "P8"
+        }
+      ],
+      "case": "cross-control",
+      "portfolio_count": 126,
+      "portfolio_size": 4,
+      "uniform_action_cost": [
+        4
+      ],
+      "uniform_domain_count": [
+        3
+      ]
+    }
+  ],
+  "objective": "maximize the minimum unit-cost failure-domain transversal",
+  "schema": "c249-transversal-plan-portfolios-v1",
+  "summary": {
+    "higher_order_pairwise_separation": true,
+    "surface_cases": 4,
+    "surface_strict_action_separations": 4,
+    "surface_strict_embedding_separations": 4
+  }
+}
