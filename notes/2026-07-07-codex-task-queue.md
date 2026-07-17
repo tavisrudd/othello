@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C249.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C253.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -108,6 +108,10 @@ unless they retain an explicit open tail.
 - **C247 `[rp-next]` [REPORTED 2026-07-17]** — proved the exact support/coefficient/valuation dictionary and automatic repair-shadow preservation, identified C217 holonomies as restrictions of foundation points with an exact `U(2,4)` match, and closed the route as positioning-only because neither flagship gains a new repair capability → `notes/2026-07-17-c247-tract-foundation-audit.md`.
 - **C248 `[rp-next]` [REPORTED 2026-07-17]** — corrected the port-to-MSP size dictionary, proved a connected-port one-row barrier giving native `n` versus excluded-field `n+1` rows for both flagships, and killed the proposed strong lifting route because the AG/anharmonic gadgets supply neither a growing rank-cover nor a Nullstellensatz-degree gap → `notes/2026-07-17-c248-field-sensitive-msp-scout.md`.
 - **C249 `[rp-next]` [REPORTED 2026-07-17]** — exact transversals strictly beat action/TF--IDF diversity on four equal-cost remediation witnesses and pairwise risk diversity on a higher-order witness, but established shared-risk/d-failure-resilient routing already owns the frontier, so retain an application/checker rather than a new planning problem → `notes/2026-07-17-c249-transversal-plan-portfolios.md`.
+- **C250 `[rp-next]` [QUEUED; after C249]** — test whether typed plan-dependency semantics plus proof-logged portfolio lower bounds yield a genuine proof-carrying remediation object beyond ordinary plan validation, fault trees, and lineage-driven fault injection → `notes/2026-07-17-c250-proof-carrying-remediation-portfolios.md`.
+- **C251 `[rp-next]` [QUEUED; after C250]** — build a blinded fault-injection benchmark for common-mode failures across agent/model/prompt/tool/specification diversity and test whether certified causal portfolio selection beats N-version and embedding baselines → `notes/2026-07-17-c251-agent-remediation-common-mode-benchmark.md`.
+- **C252 `[rp-next]` [QUEUED; after C251]** — test decision-focused active fault discovery that learns only dependency uncertainty capable of changing the selected remediation portfolio against LDFI, causal-discovery, coverage, and random baselines → `notes/2026-07-17-c252-decision-focused-fault-discovery.md`.
+- **C253 `[rp-next]` [QUEUED; after C252]** — define and falsify compensation-aware continuation resilience under irreversible prefixes, switching, and saga recovery against contingent/fault-tolerant planning and durable-workflow baselines → `notes/2026-07-17-c253-continuation-resilience.md`.
 
 ### Dormant / handoff-owned lanes
 

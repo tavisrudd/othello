@@ -6,7 +6,8 @@ transversals beat action and TF--IDF diversity on four equal-cost remediation wi
 pairwise shared-risk metric on a higher-order witness. However, the objective is the direct
 finite-plan form of established shared-risk/d-failure-resilient routing and hitting-set
 interdiction. Retain it as an agentic-remediation objective and checker, not as a new planning
-problem or a stand-alone theory paper.
+problem or a stand-alone theory paper. Follow-on analysis allocates C250--C253 around certificates,
+empirical common modes, active fault discovery, and continuation resilience.
 
 ## Decision
 
@@ -153,3 +154,196 @@ planning-problem gate. Preserve three artifacts:
 Do not allocate a transversal-robust planning paper from these results. A future product experiment
 would need real generated remediation plans, blinded domain annotation, neural-embedding baselines,
 and execution/fault injection. That is an empirical validation task, not missing theory in C249.
+
+## Follow-on analysis: what remains after the novelty kill
+
+The static score is not the end of the useful route. It changes where the novelty must live. A
+credible follow-on cannot be “minimal cut sets for plans”: reliability engineering already treats
+minimal cut sets as the prime failure objects, and shared-risk routing already interprets the
+minimum disabling set as adversarial resilience. The surviving seam is the **agent-facing evidence
+boundary** between natural-language remediation, executable plan semantics, observed system
+lineage, and an independently checked portfolio guarantee.
+
+### Ranked adjacent approaches
+
+#### 1. Proof-carrying common-cause remediation
+
+The strongest adjacent object is a certificate bundle containing:
+
+1. an ordinary plan-validity witness;
+2. action-derived dependency provenance, with every dependency justified by a typed action rule or
+   observed execution edge rather than asserted in prose;
+3. an upper-bound witness when the attacker finds a cheap transversal; and
+4. a proof log that no transversal below the claimed budget exists.
+
+Planning already has formally verified validators and certifying algorithms. Abdulaziz--Koller give
+a formally verified temporal-plan validator
+([DOI 10.1609/aaai.v36i9.21197](https://doi.org/10.1609/aaai.v36i9.21197)); Mugdan--Christen--Eriksson
+give optimality certificates
+([DOI 10.1609/icaps.v33i1.27206](https://doi.org/10.1609/icaps.v33i1.27206)); and the 2025--2026
+agentic PDDL pipeline already places ordinary validators behind LLM-produced planning abstractions
+([arXiv:2512.09629](https://arxiv.org/abs/2512.09629)). The open-looking combination is not plan
+validation alone, but **dependency completeness plus a portfolio-wide common-cause lower bound**.
+
+The bounded technical route is concrete. Compile “there exists a failure set of cost `< B` that
+hits every plan” to pseudo-Boolean SAT. A satisfying assignment is a cheap attack; an
+unsatisfiability proof is a resilience certificate checked by a small proof logger/checker such as
+the general VeriPB architecture ([project](https://veripb.org/)). The hard and potentially novel
+part is proving that the plan-to-dependency compilation is complete for the declared action model.
+
+#### 2. A real common-mode remediation benchmark
+
+The synthetic C249 corpus is only a unit test. A useful empirical object would generate remediation
+plans across models, agent architectures, prompt/specification variants, tool sets, and planning
+languages, then execute them under hidden credential, control-plane, region, vendor, network, and
+trust-root failures. Domain annotations must be blinded to the portfolio selector and audited
+against traces or fault injections.
+
+This is now sharply adjacent to Ron--Baudry--Monperrus, *N-Version Programming with Coding Agents*
+([arXiv:2606.20158](https://arxiv.org/abs/2606.20158)). Their 48 implementations and one-million-test
+campaign find substantial agent common-mode failure, often at ambiguous or difficult parts of the
+shared specification, while also finding real benefit from three-version voting. That closes a
+generic “multiple AI agents improve reliability” claim. It does **not** yet answer whether
+pre-execution causal portfolio selection beats model/language/prompt diversity for remediation
+plans, or whether a small dependency certificate predicts injected coincident failures.
+
+#### 3. Continuation rather than initial-state resilience
+
+C249 assumes every alternative remains available. Real remediation consumes credentials, mutates
+state, changes routing, and may cross irreversible boundaries. Define a prefix-indexed score
+
+```text
+rho_cont(P) = min over reachable execution prefixes s of
+              minimum failure cost disabling every valid continuation from s.
+```
+
+Switching cost, compensation, and shared destructive prefixes then become first-class. A portfolio
+can have large initial `rho_w` but collapse after one common step. Generic contingent planning,
+fault-tolerant planning, plan repair, and workflow compensation are mature, so novelty would require
+an exact state-indexed blocker law or compact certificate, not the observation that plans should
+adapt. Stonebraker--Zhou--Kraft--Li's 2026 AC/DC workflow program already combines durable execution,
+physical backout, and saga compensation
+([CIDR 2026](https://www.vldb.org/cidrdb/2026/consistency-and-correctness-in-data-oriented-workflow-systems.html));
+it is a mandatory boundary for this route.
+
+#### 4. Counterexample-guided common-cause discovery
+
+When the dependency model is incomplete, alternate:
+
+1. propose a portfolio and its current dependency proof;
+2. search for the cheapest modeled disabling scenario;
+3. inject or simulate that failure;
+4. refine the dependency model or portfolio from the counterexample.
+
+The loop itself is not new. Dawson--Fan alternate robust planning with adversarial falsification
+([arXiv:2203.02038](https://arxiv.org/abs/2203.02038)), and adversarial planning already studies
+static and adaptive removal of planning actions
+([arXiv:2205.00566](https://arxiv.org/abs/2205.00566)). The remaining opportunity is a
+proof-producing, plan-portfolio-specific loop in which each injected failure either invalidates a
+dependency claim or shrinks the set of portfolio-relevant uncertain models.
+
+## Second brainstorm from new perspectives
+
+The following pass deliberately starts outside diverse planning.
+
+### Reliability engineering: success trees, not self-reported labels
+
+Fault-tree analysis identifies minimal cut sets, while the dual success-tree view identifies
+minimal sets of functioning components. C249's family `{D(p) : p in P}` is already a particularly
+simple success structure. Automatic cut-set generation by model checking is established
+([Kromodimoeljo--Lindsay, arXiv:1506.03555](https://arxiv.org/abs/1506.03555)).
+
+**New seam:** compile each action's preconditions, effects, compensations, and environmental
+assumptions into a plan success tree, then preserve enough provenance to explain the portfolio's
+minimal cut sets. The result should be marketed as an agent-to-safety-analysis compiler, not as new
+cut-set mathematics.
+
+### Distributed systems and chaos engineering: test the missing lineage
+
+Alvaro et al.'s Lineage-Driven Fault Injection converts successful outcome lineage to SAT, injects
+candidate failure combinations, and either finds a counterexample or exhausts the bounded
+falsifiers ([MOLLY/LDFI paper](https://people.ucsc.edu/~palvaro/molly.pdf)). This is extremely close
+to C249's proposed attacker/checker and rules out a broad novelty claim for SAT-guided fault
+injection.
+
+**New seam:** plans are *prospective alternatives* produced by untrusted agents, whereas LDFI
+analyzes derivations in an executing distributed program. Join declared plan provenance with
+observed lineage, and target tests only at discrepancies that could change which portfolio
+maximizes `rho_w`. This “decision-focused LDFI” is narrower than full fault-space exhaustion and is
+directly falsifiable against LDFI and random chaos baselines.
+
+### Causal experimental design: learn only decision-relevant dependencies
+
+Wang et al. actively inject faults to learn unknown microservice communication/error-propagation
+graphs and use them for fault localization
+([DOI 10.1609/aaai.v37i13.26868](https://doi.org/10.1609/aaai.v37i13.26868)). Full causal-graph
+recovery may be unnecessary for portfolio selection.
+
+**New seam:** maintain a version space of dependency hypergraphs and choose the next intervention
+to distinguish only models whose optimal remediation portfolios differ. The target is fewer
+injections to certify the same portfolio decision, not a more accurate global causal graph. Compare
+against random injection, coverage, LDFI hazard search, and generic active causal discovery.
+
+### Transactional workflows: the fallback itself can need repair
+
+Saga compensation and durable execution show that an action's failure semantics include both its
+forward effect and whether its compensation remains executable. A fallback portfolio that shares
+an orchestrator, compensation service, idempotency key store, or audit log may have a hidden common
+cause after partial execution even when its initial plans are domain-disjoint.
+
+**New seam:** model forward and compensating actions symmetrically and compute continuation
+resilience over the combined workflow state. The smallest worthwhile witness must strictly separate
+initial `rho_w`, ordinary strong/strong-cyclic success, and compensation-aware continuation
+resilience.
+
+### Security games: useful attacker models, low novelty
+
+Attack-graph countermeasure selection already optimizes defensive controls under budget and models
+attacker/defender action costs; see Stan et al.
+([arXiv:1906.10943](https://arxiv.org/abs/1906.10943)) and Soikkeli--Muñoz-González--Lupu
+([arXiv:1904.03082](https://arxiv.org/abs/1904.03082)). A Stackelberg or moving-target restatement of
+C249 is therefore unlikely to be novel.
+
+**Possible import:** use adaptive attackers, recovery cost, and collateral action cost as baselines
+for continuation resilience. Do not allocate a generic security-game formulation.
+
+### Specification diversity: diversify assumptions before implementations
+
+The coding-agent N-version result locates many common failures in shared specification ambiguity.
+Operational plans likewise share implicit assumptions about authority, observability, naming,
+freshness, and rollback. Merely switching models or prompts does not diversify those assumptions.
+
+**New seam:** require each plan to emit a compact assumption ledger and select a portfolio that
+covers competing interpretations of unresolved requirements. This is likely a benchmark feature,
+not a stand-alone theory: conformant/robust planning under model uncertainty is mature, and the
+novel evidence would have to be empirical reduction of common-mode remediation failures.
+
+### Human and organizational domains: sociotechnical common causes
+
+Credentials and cloud regions are not the only domains. Approval chains, on-call ownership,
+vendor escalation, maintenance windows, shared runbooks, and the same human reviewer can disable
+otherwise disjoint technical plans.
+
+**New seam:** extend the benchmark annotation schema to sociotechnical dependencies and test
+whether purely technical portfolio selection overstates resilience. Human-reliability and common-
+cause analysis are established, so this is an operational extension rather than a mathematical
+novelty claim.
+
+## Promoted follow-on queue
+
+The follow-ons are allocated in expected-value order:
+
+1. **C250 — proof-carrying remediation portfolios.** Build the typed dependency semantics and an
+   independently checked lower-bound certificate. This decides whether there is a defensible formal
+   object beyond fault-tree/LDFI repackaging.
+2. **C251 — agent remediation common-mode benchmark.** Use C250's schema to test model, prompt,
+   language, tool, specification, and assumption-ledger diversity under blinded fault injection.
+3. **C252 — decision-focused active fault discovery.** Learn only the uncertain dependency edges
+   that can change the selected robust portfolio; compare against LDFI, generic causal discovery,
+   coverage, and random injection.
+4. **C253 — compensation-aware continuation resilience.** Test whether a state-indexed blocker
+   invariant adds anything beyond contingent planning, fault-tolerant planning, and durable saga
+   semantics.
+
+Security games, probabilistic SRLGs, generic N-version agents, generic fault trees, and generic
+counterexample-guided planning remain citation-only imports. They are not separate tasks.
