@@ -115,6 +115,11 @@ boundary supporting a precise conjecture.
 A future promotion should require either a counterexample beyond these ranges or that exact
 preservation lemma. Merely enlarging another random sample is below the promotion gate.
 
+The adjacent-opening audit identifies the graphic specialization as the coefficient sequence of
+two-terminal reliability and puts a series--parallel closure/counterexample probe on the
+queue as C254; see
+[`2026-07-17-c245-c249-adjacent-novel-openings.md`](2026-07-17-c245-c249-adjacent-novel-openings.md).
+
 ## Reproducibility
 
 [`2026-07-17-c245-pointed-profile-log-concavity.py`](2026-07-17-c245-pointed-profile-log-concavity.py)
@@ -126,4 +131,3 @@ Run from `rust/`:
 ```bash
 python3 ../notes/2026-07-17-c245-pointed-profile-log-concavity.py
 ```
-

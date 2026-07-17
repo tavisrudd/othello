@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C253.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C257.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -112,6 +112,10 @@ unless they retain an explicit open tail.
 - **C251 `[rp-next]` [QUEUED; after C250]** — build a blinded fault-injection benchmark for common-mode failures across agent/model/prompt/tool/specification diversity and test whether certified causal portfolio selection beats N-version and embedding baselines → `notes/2026-07-17-c251-agent-remediation-common-mode-benchmark.md`.
 - **C252 `[rp-next]` [QUEUED; after C251]** — test decision-focused active fault discovery that learns only dependency uncertainty capable of changing the selected remediation portfolio against LDFI, causal-discovery, coverage, and random baselines → `notes/2026-07-17-c252-decision-focused-fault-discovery.md`.
 - **C253 `[rp-next]` [QUEUED; after C252]** — define and falsify compensation-aware continuation resilience under irreversible prefixes, switching, and saga recovery against contingent/fault-tolerant planning and durable-workflow baselines → `notes/2026-07-17-c253-continuation-resilience.md`.
+- **C254 `[rp-next]` [QUEUED; after C253]** — test ordinary log-concavity of size-graded two-terminal reliability first on series--parallel networks, requiring a composition lemma or exact counterexample rather than another census → `notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md`.
+- **C255 `[rp-next]` [QUEUED; after C254]** — define gauge-invariant cheap-coefficient cost for a selected repair library and seek a support-identical foundation/cross-ratio pair with provably different optimum implementation cost → `notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md`.
+- **C256 `[rp-next]` [QUEUED; after C255]** — build a small radius-truncated port rigidity atlas across fields and extract a reconstruction criterion or strict field-sensitive repeated-row MSP gap → `notes/2026-07-17-c256-radius-truncated-port-rigidity.md`.
+- **C257 `[rp-next]` [QUEUED; after C256]** — compute minimum column and auxiliary-dimension realizations of exact separator profiles and require a recurring compression theorem or certified lower-bound family → `notes/2026-07-17-c257-separator-profile-realization-complexity.md`.
 
 ### Dormant / handoff-owned lanes
 

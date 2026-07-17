@@ -205,3 +205,6 @@ represented distinguishing context. The correct claim is:
 - `(Phi,omega)` on realizable profiles: the corresponding fully abstract state when exact terminal
   active/core totals are also observed.
 
+The adjacent-opening audit keeps the theorem fixed and instead asks for the minimum column count
+and auxiliary dimension realizing one exact profile; see
+[`2026-07-17-c245-c249-adjacent-novel-openings.md`](2026-07-17-c245-c249-adjacent-novel-openings.md).

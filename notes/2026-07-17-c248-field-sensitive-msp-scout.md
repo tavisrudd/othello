@@ -167,3 +167,7 @@ field-sensitive succinctness paper, a superlinear lower bound, or an A/A+ comple
 Close the lifting route unless a future task supplies a growing lower-bound object before invoking
 the flagship geometry. Do not infer MSP-size hardness from characteristic obstruction,
 non-equivalent coefficient realizations, or C216 replication alone.
+
+The adjacent-opening audit does not revive that lift. It isolates radius-truncated port rigidity
+and locality-constrained MSP cost as separate bounded problems; see
+[`2026-07-17-c245-c249-adjacent-novel-openings.md`](2026-07-17-c245-c249-adjacent-novel-openings.md).

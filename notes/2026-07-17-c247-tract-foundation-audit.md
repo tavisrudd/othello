@@ -140,3 +140,8 @@ positioning paragraph, with the automatic repair-shadow proposition included onl
 exposition. Do not promote foundation computation, a tract-valued port API, or a valuation layer
 without a future operational observable that distinguishes foundation points or genuinely uses
 nontrivial coefficient valuations.
+
+The adjacent-opening audit proposes one such falsifiable observable—minimum hardware coefficient
+cost over the legitimate gauge orbit of a selected repair library—without reopening the generic
+tract/foundation claim; see
+[`2026-07-17-c245-c249-adjacent-novel-openings.md`](2026-07-17-c245-c249-adjacent-novel-openings.md).
