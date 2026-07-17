@@ -86,7 +86,7 @@ unless they retain an explicit open tail.
 
 - **C226 `[rp-next]` [REPORTED 2026-07-16]** — exact cubic/axis failure transforms, radius-truncated EXIT calculus, cheapest-radius distribution, and target-specific stopping-certificate boundary → `notes/2026-07-16-c226-repair-port-exit-transforms.md`.
 - **C227 `[rp-next]` [REPORTED 2026-07-16]** — identified full repair with the one-element pointed/Las Vergnas perspective polynomial, imported repair--failure duality and a deletion/contraction rank-enumerator identity, and proved the bounded-radius refinement boundary → `notes/2026-07-16-c227-pointed-tutte-repair-polynomial.md`.
-- **C228 `[rp-next]` [QUEUED; after C227; BOUNDED]** — test whether C217 holonomy controls multiplicative or strongly multiplicative ideal LSSS behavior → `notes/2026-07-16-c228-holonomy-lsss-mpc.md`.
+- **C228 `[rp-next]` [REPORTED 2026-07-16; NEGATIVE BOUNDARY]** — proved that both C217 `U(2,4)` holonomy classes are ordinary multiplicative and not strongly multiplicative for every dealer; the quadratic Veronese criterion is support-only (`U(3,4)`) on this family → `notes/2026-07-16-c228-holonomy-lsss-mpc.md`.
 
 ### Dormant / handoff-owned lanes
 

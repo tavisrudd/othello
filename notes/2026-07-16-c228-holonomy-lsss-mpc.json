@@ -1,0 +1,536 @@
+{
+  "access_structure": "2-of-3 for every dealer choice in U(2,4)",
+  "c217_verifier_sha256": "dee4dcd0e403122562c0f44cb444508b814738ae82845112282c87bc5814c330",
+  "dealer_convention": "pi_dealer is the secret linear form; each other projective point pi_i is one ideal participant share",
+  "field_encoding": "GF(3)[x]/(x^2+1), base-3 coefficient encoding",
+  "ordinary_criterion": "pi_dealer tensor pi_dealer lies in the span of participant tensor squares",
+  "primal_dual_convention_check": "U(2,4) is identically self-dual, so the dual convention has the same 2-of-3 port",
+  "q2": true,
+  "q3": false,
+  "representations": [
+    {
+      "anharmonic_orbit": [
+        2
+      ],
+      "dealer_tests": [
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 0,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "1": 6,
+            "3": 3,
+            "4": 1
+          },
+          "minimal_qualified_coalitions": [
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              1
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            1,
+            3,
+            4
+          ],
+          "singleton_adversary_deletions": {
+            "1": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                3,
+                4
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 5
+            },
+            "3": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                4
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 4
+            },
+            "4": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                3
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 3
+            }
+          },
+          "strongly_multiplicative": false
+        },
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 1,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "0": 3,
+            "3": 1,
+            "4": 6
+          },
+          "minimal_qualified_coalitions": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            0,
+            3,
+            4
+          ],
+          "singleton_adversary_deletions": {
+            "0": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                3,
+                4
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 8
+            },
+            "3": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                4
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 6
+            },
+            "4": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                3
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 7
+            }
+          },
+          "strongly_multiplicative": false
+        },
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 3,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "0": 6,
+            "1": 1,
+            "4": 3
+          },
+          "minimal_qualified_coalitions": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            0,
+            1,
+            4
+          ],
+          "singleton_adversary_deletions": {
+            "0": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                4
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 7
+            },
+            "1": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                4
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 6
+            },
+            "4": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                1
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 8
+            }
+          },
+          "strongly_multiplicative": false
+        },
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 4,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "0": 1,
+            "1": 3,
+            "3": 6
+          },
+          "minimal_qualified_coalitions": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              0
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            0,
+            1,
+            3
+          ],
+          "singleton_adversary_deletions": {
+            "0": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                3
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 3
+            },
+            "1": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                3
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 4
+            },
+            "3": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                1
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 5
+            }
+          },
+          "strongly_multiplicative": false
+        }
+      ],
+      "holonomy": 2,
+      "parameters": [
+        0,
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "anharmonic_orbit": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "dealer_tests": [
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 0,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "1": 3,
+            "2": 5,
+            "8": 5
+          },
+          "minimal_qualified_coalitions": [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              8,
+              1
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            1,
+            2,
+            8
+          ],
+          "singleton_adversary_deletions": {
+            "1": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                2,
+                8
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 4
+            },
+            "2": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                8
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 8
+            },
+            "8": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                2
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 2
+            }
+          },
+          "strongly_multiplicative": false
+        },
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 1,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "0": 6,
+            "2": 8,
+            "8": 8
+          },
+          "minimal_qualified_coalitions": [
+            [
+              0,
+              2
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              8,
+              0
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            0,
+            2,
+            8
+          ],
+          "singleton_adversary_deletions": {
+            "0": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                2,
+                8
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 7
+            },
+            "2": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                8
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 5
+            },
+            "8": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                2
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 2
+            }
+          },
+          "strongly_multiplicative": false
+        },
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 2,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "0": 4,
+            "1": 7,
+            "8": 2
+          },
+          "minimal_qualified_coalitions": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              8,
+              0
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            0,
+            1,
+            8
+          ],
+          "singleton_adversary_deletions": {
+            "0": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                8
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 3
+            },
+            "1": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                8
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 6
+            },
+            "8": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                1
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 2
+            }
+          },
+          "strongly_multiplicative": false
+        },
+        {
+          "coordinate_gauge_replay": "passed",
+          "dealer": 8,
+          "global_information_basis_replay": "passed",
+          "lagrange_recombination_weights": {
+            "0": 4,
+            "1": 7,
+            "2": 2
+          },
+          "minimal_qualified_coalitions": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              0
+            ]
+          ],
+          "multiplicative_square_port": "3-of-3",
+          "ordinary_multiplicative": true,
+          "participants": [
+            0,
+            1,
+            2
+          ],
+          "singleton_adversary_deletions": {
+            "0": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                1,
+                2
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 8
+            },
+            "1": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                2
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 5
+            },
+            "2": {
+              "rank_after_adding_dealer_square": 3,
+              "remaining_participants": [
+                0,
+                1
+              ],
+              "remaining_square_rank": 2,
+              "vanishing_product_witness_at_dealer": 1
+            }
+          },
+          "strongly_multiplicative": false
+        }
+      ],
+      "holonomy": 3,
+      "parameters": [
+        0,
+        1,
+        2,
+        8
+      ]
+    }
+  ],
+  "strong_criterion": "the ordinary criterion remains true after deleting every unqualified adversary set",
+  "structural_result": "quadratic Veronese sends each four-point realization to U(3,4); the induced multiplicative port is 3-of-3, independent of holonomy",
+  "task": "C228"
+}
