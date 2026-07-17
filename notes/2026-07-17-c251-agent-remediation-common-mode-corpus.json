@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "portfolio_size": 4,
+  "fault_campaign": {
+    "max_faults": 2,
+    "include_singletons": true
+  },
+  "scenarios": [
+    {
+      "id": "shared_operational_control_plane",
+      "stratum": "shared_operational_resource",
+      "domains": [
+        {"blind": "fd_a", "hidden": "credential", "class": "operational"},
+        {"blind": "fd_b", "hidden": "control_plane", "class": "operational"},
+        {"blind": "fd_c", "hidden": "region", "class": "operational"},
+        {"blind": "fd_d", "hidden": "vendor", "class": "operational"},
+        {"blind": "fd_e", "hidden": "transport", "class": "operational"},
+        {"blind": "fd_f", "hidden": "trust_root", "class": "operational"},
+        {"blind": "fd_g", "hidden": "target_ambiguity", "class": "specification"},
+        {"blind": "fd_h", "hidden": "approval_chain", "class": "sociotechnical"}
+      ],
+      "plans": [
+        {"id": "causal_1", "cost": 1, "lineage": ["fd_a", "fd_g"], "audit_lineage": ["fd_a", "fd_g"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "causal_2", "cost": 1, "lineage": ["fd_b", "fd_h"], "audit_lineage": ["fd_b", "fd_h"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "causal_3", "cost": 1, "lineage": ["fd_c", "fd_d"], "audit_lineage": ["fd_c", "fd_d"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "causal_4", "cost": 1, "lineage": ["fd_e", "fd_f"], "audit_lineage": ["fd_e", "fd_f"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "axis_1", "cost": 1, "lineage": ["fd_b", "fd_a"], "audit_lineage": ["fd_b", "fd_a"], "actions": ["vault_login", "sql_restore", "health_probe", "commit_db"], "text": "database snapshot credential restore checksum", "axes": {"model": "m1", "prompt": "p1", "language": "python", "tool": "db_cli"}},
+        {"id": "axis_2", "cost": 1, "lineage": ["fd_b", "fd_c"], "audit_lineage": ["fd_b", "fd_c"], "actions": ["cluster_auth", "pod_recreate", "rollout_wait", "commit_k8s"], "text": "kubernetes cluster pod rollout scheduler", "axes": {"model": "m2", "prompt": "p2", "language": "go", "tool": "kube_api"}},
+        {"id": "axis_3", "cost": 1, "lineage": ["fd_b", "fd_d"], "audit_lineage": ["fd_b", "fd_d"], "actions": ["vendor_login", "ticket_open", "escalate_case", "commit_vendor"], "text": "vendor escalation support ticket entitlement", "axes": {"model": "m3", "prompt": "p3", "language": "rust", "tool": "vendor_api"}},
+        {"id": "axis_4", "cost": 1, "lineage": ["fd_b", "fd_e"], "audit_lineage": ["fd_b", "fd_e"], "actions": ["route_login", "bgp_shift", "path_probe", "commit_route"], "text": "network route transport bgp failover", "axes": {"model": "m4", "prompt": "p4", "language": "typescript", "tool": "network_api"}}
+      ]
+    },
+    {
+      "id": "shared_specification_target",
+      "stratum": "shared_specification_ambiguity",
+      "domains": [
+        {"blind": "fd_j", "hidden": "credential", "class": "operational"},
+        {"blind": "fd_k", "hidden": "control_plane", "class": "operational"},
+        {"blind": "fd_l", "hidden": "region", "class": "operational"},
+        {"blind": "fd_m", "hidden": "vendor", "class": "operational"},
+        {"blind": "fd_n", "hidden": "transport", "class": "operational"},
+        {"blind": "fd_o", "hidden": "trust_root", "class": "operational"},
+        {"blind": "fd_p", "hidden": "target_ambiguity", "class": "specification"},
+        {"blind": "fd_q", "hidden": "approval_chain", "class": "sociotechnical"}
+      ],
+      "plans": [
+        {"id": "causal_1", "cost": 1, "lineage": ["fd_j", "fd_p"], "audit_lineage": ["fd_j", "fd_p"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "causal_2", "cost": 1, "lineage": ["fd_k", "fd_q"], "audit_lineage": ["fd_k", "fd_q"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "causal_3", "cost": 1, "lineage": ["fd_l", "fd_m"], "audit_lineage": ["fd_l", "fd_m"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "causal_4", "cost": 1, "lineage": ["fd_n", "fd_o"], "audit_lineage": ["fd_n", "fd_o"], "actions": ["inspect", "execute"], "text": "inspect service and execute recovery", "axes": {"model": "m0", "prompt": "p0", "language": "python", "tool": "shell"}},
+        {"id": "axis_1", "cost": 1, "lineage": ["fd_p", "fd_j"], "audit_lineage": ["fd_p", "fd_j"], "actions": ["vault_login", "sql_restore", "health_probe", "commit_db"], "text": "database snapshot credential restore checksum", "axes": {"model": "m1", "prompt": "p1", "language": "python", "tool": "db_cli"}},
+        {"id": "axis_2", "cost": 1, "lineage": ["fd_p", "fd_k"], "audit_lineage": ["fd_p", "fd_k"], "actions": ["cluster_auth", "pod_recreate", "rollout_wait", "commit_k8s"], "text": "kubernetes cluster pod rollout scheduler", "axes": {"model": "m2", "prompt": "p2", "language": "go", "tool": "kube_api"}},
+        {"id": "axis_3", "cost": 1, "lineage": ["fd_p", "fd_l"], "audit_lineage": ["fd_p", "fd_l"], "actions": ["vendor_login", "ticket_open", "escalate_case", "commit_vendor"], "text": "vendor escalation support ticket entitlement", "axes": {"model": "m3", "prompt": "p3", "language": "rust", "tool": "vendor_api"}},
+        {"id": "axis_4", "cost": 1, "lineage": ["fd_p", "fd_m"], "audit_lineage": ["fd_p", "fd_m"], "actions": ["route_login", "bgp_shift", "path_probe", "commit_route"], "text": "network route transport bgp failover", "axes": {"model": "m4", "prompt": "p4", "language": "typescript", "tool": "network_api"}}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,681 @@
+{
+  "gate": "synthetic_success",
+  "limitations": [
+    "fixture annotations and execution oracle share a synthetic causal model",
+    "no live agent generation or production infrastructure execution",
+    "N-version majority is meaningful only for non-state-changing verdicts"
+  ],
+  "portfolio_size": 4,
+  "scenario_count": 2,
+  "scenarios": [
+    {
+      "annotation_audit": {
+        "cell_agreement": 1.0,
+        "cohen_kappa": 1.0,
+        "plan_exact_matches": 8,
+        "plans": 8
+      },
+      "hidden_manifest_sha256": "4d72fe1f1db8597aa7e3e7c150c81b3d5e6aab03301b4dc30e5f7ef251b82ac2",
+      "id": "shared_operational_control_plane",
+      "injections": 36,
+      "selectors": {
+        "action_diversity": {
+          "portfolios": [
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.2222222222222222,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.2222222222222222
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            16,
+            6.0
+          ],
+          "ties": 1
+        },
+        "certified_causal": {
+          "portfolios": [
+            [
+              "causal_1",
+              "causal_2",
+              "causal_3",
+              "causal_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.0,
+              "worst": 0.0
+            },
+            "majority": {
+              "best": 0.0,
+              "worst": 0.0
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            4
+          ],
+          "ties": 1
+        },
+        "embedding_diversity": {
+          "portfolios": [
+            [
+              "causal_1",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_1",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_1",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_2",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_3",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_4",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.05555555555555555,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            20,
+            6.0
+          ],
+          "ties": 17
+        },
+        "generation_axes": {
+          "portfolios": [
+            [
+              "causal_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.05555555555555555,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            4,
+            16
+          ],
+          "ties": 5
+        },
+        "n_version": {
+          "portfolios": [
+            [
+              "causal_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.05555555555555555,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            4,
+            16
+          ],
+          "ties": 5
+        },
+        "random": {
+          "mean_rates": {
+            "coincident": 0.041666666666666664,
+            "majority": 0.21428571428571427,
+            "mean_plan_failure": 0.4166666666666667
+          },
+          "population": 70,
+          "rates": {
+            "coincident": {
+              "best": 0.0,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.0,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          }
+        }
+      },
+      "stratum": "shared_operational_resource",
+      "strict_without_tiebreak": {
+        "action_diversity": true,
+        "embedding_diversity": true,
+        "generation_axes": true,
+        "n_version": true,
+        "random_mean": true
+      }
+    },
+    {
+      "annotation_audit": {
+        "cell_agreement": 1.0,
+        "cohen_kappa": 1.0,
+        "plan_exact_matches": 8,
+        "plans": 8
+      },
+      "hidden_manifest_sha256": "0c4be4c68257d347f4d287f91f2376786ad516e754faae8e0c4574909436cbb3",
+      "id": "shared_specification_target",
+      "injections": 36,
+      "selectors": {
+        "action_diversity": {
+          "portfolios": [
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.2222222222222222,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.2222222222222222
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            16,
+            6.0
+          ],
+          "ties": 1
+        },
+        "certified_causal": {
+          "portfolios": [
+            [
+              "causal_1",
+              "causal_2",
+              "causal_3",
+              "causal_4"
+            ],
+            [
+              "causal_2",
+              "causal_3",
+              "causal_4",
+              "axis_1"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.0,
+              "worst": 0.0
+            },
+            "majority": {
+              "best": 0.0,
+              "worst": 0.0
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            4
+          ],
+          "ties": 2
+        },
+        "embedding_diversity": {
+          "portfolios": [
+            [
+              "causal_1",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_1",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_1",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_2",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_3",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_1",
+              "axis_2",
+              "axis_3"
+            ],
+            [
+              "causal_4",
+              "axis_1",
+              "axis_2",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_1",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.05555555555555555,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            20,
+            6.0
+          ],
+          "ties": 17
+        },
+        "generation_axes": {
+          "portfolios": [
+            [
+              "causal_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.05555555555555555,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            4,
+            16
+          ],
+          "ties": 5
+        },
+        "n_version": {
+          "portfolios": [
+            [
+              "causal_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_2",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_3",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "causal_4",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ],
+            [
+              "axis_1",
+              "axis_2",
+              "axis_3",
+              "axis_4"
+            ]
+          ],
+          "rates": {
+            "coincident": {
+              "best": 0.05555555555555555,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.2222222222222222,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          },
+          "score": [
+            4,
+            16
+          ],
+          "ties": 5
+        },
+        "random": {
+          "mean_rates": {
+            "coincident": 0.041666666666666664,
+            "majority": 0.21626984126984128,
+            "mean_plan_failure": 0.4166666666666667
+          },
+          "population": 70,
+          "rates": {
+            "coincident": {
+              "best": 0.0,
+              "worst": 0.2222222222222222
+            },
+            "majority": {
+              "best": 0.0,
+              "worst": 0.3055555555555556
+            },
+            "mean_plan_failure": {
+              "best": 0.4166666666666667,
+              "worst": 0.4166666666666667
+            }
+          }
+        }
+      },
+      "stratum": "shared_specification_ambiguity",
+      "strict_without_tiebreak": {
+        "action_diversity": true,
+        "embedding_diversity": true,
+        "generation_axes": true,
+        "n_version": true,
+        "random_mean": true
+      }
+    }
+  ],
+  "schema_version": 1
+}
