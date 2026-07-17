@@ -1,0 +1,82 @@
+{
+  "task": "C233 terminal-closure transfer algebra",
+  "theorems_checked": {
+    "finite_terminal_boundary_control": true,
+    "least_fixed_point_composition": true,
+    "additive_active_core_weights": true,
+    "triangle_delay_collapse": true
+  },
+  "bounded_binary_multiport_catalog": {
+    "field": "GF(2)",
+    "ambient_rank": 3,
+    "interface_width": 2,
+    "component_representations": 22,
+    "private_column_range": [
+      1,
+      4
+    ],
+    "component_seed_radius_states": 558,
+    "states_by_radius": {
+      "1": 186,
+      "2": 186,
+      "3": 186
+    },
+    "distinct_structural_controls": {
+      "1": 3,
+      "2": 27,
+      "3": 27
+    },
+    "distinct_weighted_behaviors": {
+      "1": 50,
+      "2": 46,
+      "3": 45
+    },
+    "controls_with_multiple_count_weights": {
+      "1": 3,
+      "2": 9,
+      "3": 9
+    },
+    "checks": [
+      "complete terminal response table",
+      "boundary monotonicity",
+      "terminal stopping-core condition"
+    ]
+  },
+  "weighted_2_sum_composition_catalog": {
+    "field": "GF(2)",
+    "one_port_component_representations": 19,
+    "component_seed_states": 140,
+    "represented_2_sum_seed_radius_states": 58800,
+    "maximum_boundary_fixed_point_iterations": 2,
+    "checks": [
+      "least boundary fixed point versus direct represented 2-sum closure",
+      "sum of component active/core weights versus direct terminal counts"
+    ]
+  },
+  "triangle_relay_terminal_replay": {
+    "field": "GF(2)",
+    "radius": 2,
+    "interface_width": 2,
+    "verified_n": [
+      2,
+      32
+    ],
+    "families_checked": 31,
+    "distinct_terminal_structural_controls": 1,
+    "distinct_integer_weight_tables": 31,
+    "first_record": {
+      "n": 2,
+      "private_columns": 3,
+      "active_with_no_boundary_supply": 2,
+      "core_with_no_boundary_supply": 1,
+      "active_with_unit_p_supply": 3
+    },
+    "last_record": {
+      "n": 32,
+      "private_columns": 63,
+      "active_with_no_boundary_supply": 32,
+      "core_with_no_boundary_supply": 31,
+      "active_with_unit_p_supply": 63
+    }
+  }
+}
