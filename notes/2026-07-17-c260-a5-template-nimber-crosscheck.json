@@ -1,0 +1,14 @@
+{
+  "solver": "c260-rust-leftmult-only",
+  "results": [
+    {"group": "A5", "sig": [2, 3, 5], "vertices": 60, "edges": 90, "grundy": 1},
+    {"group": "A5", "sig": [2, 5, 5], "vertices": 60, "edges": 90, "grundy": 1},
+    {"group": "A5", "sig": [3, 3, 5], "vertices": 60, "edges": 90, "grundy": 0},
+    {"group": "A5", "sig": [3, 5, 5], "vertices": 60, "edges": 90, "grundy": 0},
+    {"group": "A5", "sig": [5, 5, 5], "vertices": 60, "edges": 90, "grundy": 0},
+    {"group": "S4", "sig": [2, 3, 3], "vertices": 24, "edges": 36, "grundy": 0},
+    {"group": "S4", "sig": [2, 3, 4], "vertices": 24, "edges": 36, "grundy": 0},
+    {"group": "S4", "sig": [3, 3, 3], "vertices": 24, "edges": 36, "grundy": 0},
+    {"group": "S4", "sig": [3, 4, 4], "vertices": 24, "edges": 36, "grundy": 0}
+  ]
+}

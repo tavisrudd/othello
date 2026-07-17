@@ -63,4 +63,9 @@ rustc -O -C target-cpu=native rust/scripts/nodekayles_cayley.rs -o /tmp/nkcay
 ```
 
 Cross-validated: S₄ agrees across three independent solvers (Python mask-DP, Python
-pynauty-canonical, Rust); the V₄ row agrees with the closed form `#K₄ mod 2` and `Cor 3.2`.
+pynauty-canonical, Rust); the V₄ row agrees with the closed form `#K₄ mod 2` and `Cor 3.2`. All
+five A₅ rows are independently cross-checked (C260): a separate Rust solver (left-mult-only
+canonicalization) reproduces every value, and a genuinely different graph-isomorphism (BLISS)
+solver reproduces V₄ + all four S₄ classes; BLISS also confirms `|Aut(Cay(A₅,T))|` equals the
+hand-built canonicalization group in each class. See
+`2026-07-17-c260-a5-template-nimber-crosscheck.md`.

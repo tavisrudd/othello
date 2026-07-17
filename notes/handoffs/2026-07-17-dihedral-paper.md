@@ -20,25 +20,25 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   Brown et al. ladder values, orbit counts, and the density theorem are not yet formalized. See
   `lean/DihedralSchreier/README.md`.
 - Solver: `rust/scripts/nodekayles_cayley.rs`. S₄ nimbers cross-checked by three independent
-  solvers; A₅ template rows are single-solver.
+  solvers; all five A₅ rows independently reproduced by the C260 cross-check solver.
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (bundle D₂ₘ, do not
   spawn a sequel; escape hatch = ship the committed catalogue with §14 as the stated program),
   and the release policy (formalization gate, adequacy appendix, provenance section).
+- Closed: C260 A₅ nimber cross-check (2026-07-17) — all five values reproduced by an independent
+  solver; evidence bundle with SHA-256 manifest; claim edits landed →
+  `notes/2026-07-17-c260-a5-template-nimber-crosscheck.md`.
 - Closed: C261 novelty audit (2026-07-17) — attributions verified exact in full text, no colliding
   prior art, package verdict apparently unrecorded; wording recommendations R1–R5 pending in C264 →
   `notes/2026-07-17-c261-dihedral-novelty-audit.md`.
 
 ## Open frontiers
 
-- A₅ template nimbers have no recorded independent cross-check (C260).
 - Φ_T (Burnside) and ½-density formalizations are owed (C262).
 - D₂ₘ additions are owed before shipping per D6 (C263).
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
 
 ## Next steps
 
-- **C260** — independent cross-check of the S₄/A₅ template nimbers; correct the paper README
-  cross-check claim (already scoped to S₄).
 - **C264** must also apply the C261 audit's wording recommendations R1–R5 (HHS reduction citation,
   Schaefer root citation, Möbius-ladder ownership clause, optional novelty sentence, Ernst–Sieben
   distinction).

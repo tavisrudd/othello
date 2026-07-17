@@ -64,7 +64,6 @@ unless they retain an explicit open tail.
 
 ### `dihedral`
 
-- **C260 `[dihedral]` [QUEUED]** — independent cross-check of the S₄/A₅ regular-template nimbers (the A₅ appendix rows, including 𝒢=1 for (2,3,5),(2,5,5), are single-solver) and correct the `papers/.../README.md` "three independent solvers" claim to scope it to S₄ → `notes/2026-07-17-c260-a5-template-nimber-crosscheck.md`.
 - **C262 `[dihedral]` [QUEUED]** — implement the recorded formalization gate: Φ_T (Burnside) and ½-density Lean formalization to `lean/TRUST.md`, or a clebsch-style declared trust boundary per the planning ruling (do not re-decide the gate) → `notes/2026-07-17-c262-dihedral-burnside-density-formalization.md`.
 - **C263 `[dihedral]` [QUEUED]** — generalized-D₂ₘ additions per ruling D6 (bundle, do not spawn a sequel); escape hatch: if D₂ₘ stalls beyond the formalization window, ship the committed catalogue with §14 as the stated program → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
 - **C264 `[dihedral]` [QUEUED]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose) for the markdown manuscript → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.

@@ -1066,7 +1066,10 @@ automorphisms in every class. The symmetric \((5,5,5)\) triple also admits the
 color-permuting \(S_3\), giving a 360-element canonicalization group. The source and full
 reproduction details are in `scripts/nodekayles_cayley.rs` and the companion computation
 note `notes/2026-07-12-polyhedral-nk-templates.md`. The four \(S_4\) values were additionally
-cross-checked by two independent solvers.
+cross-checked by two independent solvers. The five \(A_5\) values were subsequently
+independently cross-checked as well: a separate solver using a different canonicalization
+reproduces all five, and an independent graph-isomorphism canonicalization confirms that the
+automorphism group used equals the full automorphism group of each Cayley graph.
 
 In \(A_5\), the two value-one classes are exactly those containing a commuting generator
 pair, equivalently a pair product of order two. This is an observation about the displayed

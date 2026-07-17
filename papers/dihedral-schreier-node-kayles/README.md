@@ -25,8 +25,9 @@ split by technique, not by geometry.
 - **Lean:** `lean/DihedralSchreier/` — certifies the reduction plumbing and the V₄→K₄ core
   (`KleinFour.lean`, `KleinFourBridge.lean`) only; template nimbers are not Lean-certified.
 - **Solver:** `rust/scripts/nodekayles_cayley.rs` — S₄ nimbers cross-checked by three
-  independent solvers; the A₅ template rows are single-solver, with an independent cross-check
-  pending (queued as C260).
+  independent solvers; the A₅ template rows are now independently cross-checked (C260), with all
+  five values reproduced by a separate solver — see
+  `notes/2026-07-17-c260-a5-template-nimber-crosscheck.md`.
 - Driver / next-programme: C84 in `notes/handoffs/2026-07-06-projective-cap-game-handoff.md`.
 
 See `../papers-index.md` for the registry and `../papers-planning.md` for cross-paper strategy.
