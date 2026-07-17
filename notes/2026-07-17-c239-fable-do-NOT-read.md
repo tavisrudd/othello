@@ -138,3 +138,30 @@ avoids an otherwise expensive global computation.
 One ordinary C239 phrase said “robust MPC” in the reconfiguration baseline. There `MPC` meant
 **model-predictive control**, not multiparty computation. The ordinary document now spells this as
 “robust control” to avoid a false safeguard trigger.
+
+## 8. Restricted rp-next export proposed after C239
+
+The later rp-next gap deep dive proposed separating code equivalence into two potential
+deliverables:
+
+1. a reduction of monomial equivalence, when circuit data is accessible, into support-matroid
+   isomorphism followed by comparison of fundamental-circuit holonomies; and
+2. a toolkit of holonomy and Schur-power fingerprints for structured code families.
+
+The proposal explicitly does **not** claim an attack on standard random-code instances: extracting
+the needed low-weight circuit data may already contain the hard problem. Plausible uses are
+canonicalization or deduplication of structured codes, diagnostics for compressed structured
+variants, and identifying whether combinatorial alignment or coefficient comparison is the actual
+hard layer.
+
+A speculative extension applies the same spanning-tree gauge normalization to matrix-code
+equivalence with row and column scaling actions. Before promotion, this requires:
+
+- a focused audit of canonical forms in the LESS and related code-equivalence literature;
+- comparison with existing information-set-based normalization;
+- an end-to-end experiment on equivalent and inequivalent structured families; and
+- a precise statement of which circuit oracle is assumed and how expensive it is.
+
+If prior work already gives the same reduction at equal generality, retain only the invariant and
+diagnostic toolkit. No C-task is allocated for this restricted branch by the ordinary rp-next
+handoff.

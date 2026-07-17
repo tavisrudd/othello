@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C238.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C240.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -98,6 +98,7 @@ unless they retain an explicit open tail.
 - **C237 `[rp-next]` [REPORTED 2026-07-16]** — explicit support-identical `U(3,8)` GRS/generic representations have square matroids `U(5,8)`/`U(6,8)` and separate strong multiplicativity for every dealer → `notes/2026-07-16-c237-u38-holonomy-mpc.md`.
 - **C238 `[rp-next]` [REPORTED 2026-07-17]** — synthesized repaircodes/repairports/rp-next and the paper portfolio into commercially useful algorithms, data structures, explicit substantial-SOTA-improvement bets, protocol applications, and broader-CS paper packages → `notes/2026-07-17-c238-repairports-commercial-algorithms.md`.
 - **C239 `[rp-next]` [REPORTED 2026-07-17]** — reinterpreted C238 through knowledge compilation, provenance, metabolic modes, e-graphs, contracts, weighted automata, sheaves, planning, and reconfiguration; derived a six-layer capability semantics, structural predictions, and ranked missed papers/products → `notes/2026-07-17-c239-domain-translation-audit.md`.
+- **C240 `[rp-next]` [ACTIVE]** — run the five-way peeling-classification, pointed-profile-shape, cascade-replay, width-two-boundary, and fixed-alphabet-LRC probe battery; issue evidence-based promotion decisions before opening another theorem program → `notes/2026-07-17-c240-rp-next-gap-probe-battery.md`.
 
 ### Dormant / handoff-owned lanes
 
