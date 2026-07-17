@@ -1541,3 +1541,60 @@ Frozen output:
 f14a9c5f2f3c21adce3e0363dcb35c5ca4f82ee408d35ddb0ec0ec9d3506eec3  analyze_c210_frozen_joint_monodromy.py
 4c37c0aea0c335f7e6ce66df9f43f444240e2e6492d3e04c4d5ee14344cc970c  analyze_c210_frozen_joint_monodromy_output.txt
 ```
+
+## Twenty-third coordinate gate: the translation quotient removes `c1` geometrically
+
+Before computing large branch discriminants, one coefficient can be removed exactly.  A subfield
+translation `x -> x+d` fixes both seed layers.  Reparametrizing the translated repair graph by
+`r' = r+d` fixes `eta1,a1,b1,c0` and sends
+
+```text
+c1 -> c1 + a1*d^2 + b1*d.                               (32)
+```
+
+This is a conjugacy of the full point configuration, not merely an equality of coefficient counts:
+the checker compares the translated and reparametrized repair point sets for every `d in GF(8)`
+and every frozen representative.  It therefore preserves arc legality, every chord class, and the
+entire joint incidence cover.
+
+The repair-arc stratum has `a1!=0`.  Over the algebraic closure, the equation
+
+```text
+a1*d^2+b1*d = c1
+```
+
+always has a root, so every geometric orbit meets `c1=0`.  Thus genuine geometric monodromy-drop
+divisors are pulled back from the four-coordinate quotient
+
+```text
+(eta1,a1,b1,c0).                                         (33)
+```
+
+The finite-field residue is also exact.  If `b1=0`, Frobenius is bijective and (32) has one orbit.
+If `b1!=0`, its kernel is `{0,b1/a1}`, its image has index two, and the two arithmetic twist classes
+are distinguished by
+
+```text
+chi = Tr(a1*c1/b1^2).                                    (34)
+```
+
+Indeed, after `z=a1*d/b1`, an increment in (34) is `Tr(z^2+z)=0`; conversely the trace-zero
+criterion solves the Artin--Schreier equation.  Each q=64 exceptional block is exactly the
+four-element `chi=1` class for its fixed `(eta1,a1,b1,c0)`; the opposite four coefficients form the
+other twist.  Consequently the drop-divisor calculation needs only the four geometric variables
+in (33), followed by at most one arithmetic trace-bit check.  It must not treat the eight `c1`
+values as eight unrelated coefficient cases.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_translation_quotient.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_translation_quotient_output.txt`.
+
+```text
+100f1df367a4a02ee94e25334878feecdd1cf41e26d39ad0b8809f06a7453b6e  analyze_c210_translation_quotient.py
+42e4affb290c1deeffb22c8618b1d030441d37bf9b468e345cdd0447e3c8378e  analyze_c210_translation_quotient_output.txt
+```

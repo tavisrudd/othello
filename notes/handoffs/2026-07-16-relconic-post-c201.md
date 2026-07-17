@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — q=64 full joint group retained; coefficient-space drop divisors next
+**Status:** C210 ACTIVE — q=64 full joint group retained; four-variable drop divisors next
 
 ## Current state
 
@@ -122,10 +122,13 @@ by the `build-sys` lane.
    transpositions give both `S7` top covers, the one-repair collision group supplies both `H wr S7`
    factors, all sixteen lower Frobenius characters occur, and an isolated repair branch prevents a
    geometric `C2_RR` coupling. Thus all twelve translated q=64 layers retain the full group (27),
-   not merely its degree-seven quotient. Next compute the coefficient-space branch discriminants,
-   classify their genuine drop divisors and intersections up to translation, and test whether any
-   such divisor can support an arc-legal affine-complete family over infinitely many odd
-   extensions. Do not replace this symbolic gate with a larger plane census. See
+   not merely its degree-seven quotient. The translation quotient is now exact: geometrically
+   `c1` is eliminable because `c1 -> c1+a1*d^2+b1*d`, while over a finite field it contributes only
+   the twist bit `Tr(a1*c1/b1^2)` when `b1!=0`. Next compute the coefficient-space branch
+   discriminants in the four geometric variables `(eta1,a1,b1,c0)`, classify their genuine drop
+   divisors and intersections, then restore the one arithmetic twist bit and test whether any such
+   divisor can support an arc-legal affine-complete family over infinitely many odd extensions. Do
+   not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
