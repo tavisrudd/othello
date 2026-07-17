@@ -19,6 +19,7 @@ making better proof-design choices in Lean.
 | Computational complete-arc searcher | A. A. Davydov, G. Faina, Daniele Bartoli, Stefano Marcugini, Fernanda Pambianco | ProjectiveCap q=23+ work: canonical classes, certificate-first search, early stopping, randomized/greedy search only as evidence generation. |
 | Formal cap-set methodologist | Sander R. Dahmen, Johannes Holzl, Robert Y. Lewis; Ellenberg and Gijswijt | Affine cap-set definitions and bounds: follow formalization-friendly algebra, but do not confuse cap-size bounds with game outcome proofs. |
 | Graph-game certificate engineer | Thomas J. Schaefer, Aaron N. Siegel, Berlekamp-Conway-Guy | Queens/NodeKayles: prove finite-board strategies by game-graph certificates, local reductions, and Grundy/PN bridges; expect general hardness. |
+| Repair-reliability and Boolean-threshold analyst | Svante Janson, Ryan O'Donnell; Ehud Friedgut, Gil Kalai | RepairPorts: exact reliability recurrences and pivotal influences, dependency-controlled Poisson windows, and careful sharp-threshold terminology. |
 
 ## Loading order by task
 
@@ -36,6 +37,8 @@ making better proof-design choices in Lean.
    load the formal cap-set methodology dossier before inventing definitions.
 6. Queens n=20 certificate work:
    load graph-game certificate engineering and Lean CGT.
+7. Repair-port reliability and threshold work:
+   load `expert-personas/janson-odonnell-reliability-thresholds.md`.
 
 ## Current project cautions
 
@@ -69,3 +72,9 @@ making better proof-design choices in Lean.
   https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITP.2019.15
 - Schaefer, two-person perfect-information games:
   https://doi.org/10.1016/0022-0000(78)90045-4
+- Janson, Poisson approximation for dependent indicator sums:
+  https://doi.org/10.1002/rsa.3240010209
+- O'Donnell, Boolean functions, influences, and thresholds:
+  https://www.cs.cmu.edu/~odonnell/papers/Analysis-of-Boolean-Functions-by-Ryan-ODonnell.pdf
+- Friedgut and Kalai, symmetric monotone thresholds:
+  https://doi.org/10.1090/S0002-9939-96-03732-X

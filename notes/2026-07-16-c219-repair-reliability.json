@@ -1,0 +1,303 @@
+{
+  "c202_q9": {
+    "axis_infinity": {
+      "label": "A(inf)",
+      "radii": {
+        "3": {
+          "edge_count": 48,
+          "failure_by_survivor_count": [
+            1,
+            19,
+            135,
+            513,
+            1098,
+            1188,
+            486,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "helper_count": 19,
+          "minimum_blocker_count": 486,
+          "minimum_blocker_size": 13,
+          "success_by_survivor_count": [
+            0,
+            0,
+            36,
+            456,
+            2778,
+            10440,
+            26646,
+            50388,
+            75582,
+            92378,
+            92378,
+            75582,
+            50388,
+            27132,
+            11628,
+            3876,
+            969,
+            171,
+            19,
+            1
+          ]
+        },
+        "4": {
+          "edge_count": 1038,
+          "failure_by_survivor_count": [
+            1,
+            19,
+            135,
+            513,
+            108,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "helper_count": 19,
+          "minimum_blocker_count": 108,
+          "minimum_blocker_size": 15,
+          "success_by_survivor_count": [
+            0,
+            0,
+            36,
+            456,
+            3768,
+            11628,
+            27132,
+            50388,
+            75582,
+            92378,
+            92378,
+            75582,
+            50388,
+            27132,
+            11628,
+            3876,
+            969,
+            171,
+            19,
+            1
+          ]
+        }
+      }
+    },
+    "cubic_infinity": {
+      "label": "C(inf)",
+      "radii": {
+        "3": {
+          "edge_count": 36,
+          "failure_by_survivor_count": [
+            1,
+            19,
+            171,
+            933,
+            3300,
+            7614,
+            11280,
+            10650,
+            6372,
+            2363,
+            500,
+            45,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "helper_count": 19,
+          "minimum_blocker_count": 45,
+          "minimum_blocker_size": 8,
+          "success_by_survivor_count": [
+            0,
+            0,
+            0,
+            36,
+            576,
+            4014,
+            15852,
+            39738,
+            69210,
+            90015,
+            91878,
+            75537,
+            50388,
+            27132,
+            11628,
+            3876,
+            969,
+            171,
+            19,
+            1
+          ]
+        },
+        "4": {
+          "edge_count": 1962,
+          "failure_by_survivor_count": [
+            1,
+            19,
+            171,
+            933,
+            1374,
+            2142,
+            2478,
+            2010,
+            1125,
+            415,
+            91,
+            9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "helper_count": 19,
+          "minimum_blocker_count": 9,
+          "minimum_blocker_size": 8,
+          "success_by_survivor_count": [
+            0,
+            0,
+            0,
+            36,
+            2502,
+            9486,
+            24654,
+            48378,
+            74457,
+            91963,
+            92287,
+            75573,
+            50388,
+            27132,
+            11628,
+            3876,
+            969,
+            171,
+            19,
+            1
+          ]
+        }
+      }
+    }
+  },
+  "c218_q9": {
+    "curve_target": {
+      "common_nucleus_helper": 10,
+      "derived_intersection_pairs": {
+        "0": 12,
+        "1": 54
+      },
+      "derived_steiner_triple_count": 12,
+      "edge_count": 12,
+      "failure_by_survivor_count": [
+        1,
+        10,
+        45,
+        120,
+        198,
+        180,
+        84,
+        36,
+        9,
+        1,
+        0
+      ],
+      "helper_count": 10,
+      "minimum_blocker_count": 1,
+      "minimum_blocker_size": 1,
+      "predicted_derived_intersection_pairs": {
+        "0": 12,
+        "1": 54
+      },
+      "success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        12,
+        72,
+        126,
+        84,
+        36,
+        9,
+        1
+      ]
+    },
+    "n": 10,
+    "nucleus_target": {
+      "block_intersection_pairs": {
+        "0": 45,
+        "1": 120,
+        "2": 270
+      },
+      "edge_count": 30,
+      "failure_by_survivor_count": [
+        1,
+        10,
+        45,
+        120,
+        180,
+        72,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "helper_count": 10,
+      "minimum_blocker_count": 72,
+      "minimum_blocker_size": 5,
+      "predicted_block_intersection_pairs": {
+        "0": 45,
+        "1": 120,
+        "2": 270
+      },
+      "success_by_survivor_count": [
+        0,
+        0,
+        0,
+        0,
+        30,
+        180,
+        210,
+        120,
+        45,
+        10,
+        1
+      ]
+    }
+  },
+  "reliability_basis": "success probability is sum_k a_k*s^k*(1-s)^(N-k), where a_k is success_by_survivor_count[k]",
+  "task": "C219"
+}

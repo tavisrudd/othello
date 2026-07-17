@@ -200,6 +200,15 @@ influences, and asymptotic thresholds. Exact port transfer preserves this entire
 function. Use C202's blocker representatives and group action as the first finite test, but require
 a symmetry formula, recurrence, or asymptotic theorem before promoting a stand-alone paper.
 
+**Completed C219 result.** Complete ports admit an exact deletion--contraction reliability
+recurrence, pivotal partial derivatives, the homogeneous Russo--Margulis identity, and blocker-dual
+high-survival asymptotics; exact port transfer preserves this entire calculus. For every
+`S(3,4,n)`, random point survival has a Poisson repair window at `n^(-3/4)` with limit
+`1-exp(-c^4/24)`. The derived `S(2,3,n-1)` at a C218 curve target has window `n^(-2/3)`, but every
+repair shares the nucleus, producing a series bottleneck and qualitatively different homogeneous
+reliability. Exact q=9 Bernstein profiles recover C202's blocker layers and quantify the full-port
+gain. See [`2026-07-16-c219-repair-reliability.md`](2026-07-16-c219-repair-reliability.md).
+
 ### C220 — additive equality and stability for repair extremizers
 
 The completed axis port reduces minimum blockers to complements of maximum zero-sum-free sets and

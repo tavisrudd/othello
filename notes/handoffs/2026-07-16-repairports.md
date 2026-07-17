@@ -3,8 +3,8 @@
 **Lane**: `repairports`
 
 **Date:** 2026-07-16
-**Status:** ACTIVE. C215--C218 are complete. C218's characteristic-three quartic plus its unique
-osculating-hyperplane nucleus gives a harmonic Steiner radius-four family and meets its scout gate.
+**Status:** ACTIVE. C215--C219 are complete. C219 gives an exact Boolean reliability calculus,
+C202 high-survival failure laws, and C218 Steiner Poisson windows with a common-nucleus bottleneck.
 **Roadmap:** [`2026-07-16-repaircodes-a-plus-roadmap.md`](../2026-07-16-repaircodes-a-plus-roadmap.md)
 **Parent paper:** [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
 **Discovery log:** [`2026-07-16-repairports-discovery-track.md`](../2026-07-16-repairports-discovery-track.md)
@@ -24,15 +24,15 @@ twisted-cubic--axis paper.
 | C216 | complete; optional Lean wrapper deferred to build-system entry | prescribed-port asymptotic realization | general theorem plus nontrivial achievable region |
 | C217 | complete | circuit-coefficient gauge invariants | complete holonomy fingerprint, cross-ratio, and strict inequivalence example |
 | C218 | complete | quartic-nucleus harmonic repair family | `S(3,4,q+1)` circuits, exact parameters, and replication |
-| C219 | queued | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
+| C219 | complete | repair reliability/Boolean theory | general formula, recurrence, or threshold theorem |
 | C220 | long-horizon | additive equality and stability | uniform inverse/stability theorem |
 
 ## Immediate next step
 
-Run C219's reliability/Boolean scout. Seek a general reliability formula, recurrence, influence
-identity, or threshold theorem for complete repair ports; use C218's harmonic Steiner port as a
-second structured test alongside the existing C202 blockers. C218 is closed in
-[`2026-07-16-c218-quartic-nucleus-repair.md`](../2026-07-16-c218-quartic-nucleus-repair.md).
+Do not launch C220 from a broad search. First state a sharp additive equality or stability
+conjecture for one of the two symbolic C202 reductions: restricted-sumset cubic blockers or
+zero-sum-free/line-partition axis extremizers. C219 is closed in
+[`2026-07-16-c219-repair-reliability.md`](../2026-07-16-c219-repair-reliability.md).
 
 ## Scope and ownership
 
