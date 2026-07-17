@@ -165,8 +165,9 @@ command:**
 2. A selective pattern. Never search a repository for a bare/common number, single punctuation
    mark, or broad alternation such as `C210|210`. Resolve task IDs only by an anchored exact-row
    query in the live queue.
-3. A source-side result bound: an exact file, small line range, `-m/--max-count`, selective filename
-   glob, or final small `head`. Truncate fields/characters too when matches may be huge lines.
+3. A global output bound: target 10 lines and never exceed 20 unless a known need is stated first
+   and the command has an explicit larger bound. In multi-file searches, `-m/--max-count` limits
+   each file, not the total; add a final `head`. Truncate fields/characters when lines may be huge.
 4. Exclusions for bulk/generated domains unless explicitly targeted: large CSV/JSON data, generated
    certificates, build trees, Git internals/worktrees, archives, and frozen outputs.
 
@@ -185,8 +186,9 @@ rg -l -m 1 'collision curve' papers/arcs_complete_outside_conic -g '*.py' | head
 rg -n 'C210|210' ..
 ```
 
-- Source-filter non-search commands too: request explicit fields/pathspecs and small ranges; never
-  dump whole logs, process tables, broad diffs, or repository-wide file lists into context.
+- Apply the same 10-line target and 20-line ceiling to non-search commands. Source-filter with
+  explicit fields/pathspecs and small ranges; never dump whole logs, process tables, broad diffs,
+  or repository-wide file lists into context.
 - Use `~/.claude/bin/run-quiet "command args"` for noisy commands such as builds and deployments.
   Read only its bounded summary or a targeted diagnostic tail.
 - Default tool output budgets to 1,000–2,000 tokens. More requires a specifically bounded artifact.
