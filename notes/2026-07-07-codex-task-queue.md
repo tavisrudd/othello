@@ -87,8 +87,7 @@ unless they retain an explicit open tail.
 
 ### `rp-next`
 
-- **C258 `[rp-next]` [QUEUED; next]** — harvest C215--C257 into a ranked asset map covering theorem packages, manuscript claims, algorithms, certificates, and product opportunities, with explicit evidence and dependency boundaries → `notes/2026-07-17-c258-rp-next-reward-harvest-map.md`.
-- **C259 `[rp-next]` [QUEUED; after C258]** — turn the harvest map into execution-ready manuscript/product handoff packets with destinations, owners, prerequisites, validation gates, and stop conditions, then close the lane → `notes/2026-07-17-c259-rp-next-execution-packets.md`.
+- **C259 `[rp-next]` [QUEUED; next]** — turn the harvest map into execution-ready manuscript/product handoff packets with destinations, owners, prerequisites, validation gates, and stop conditions, then close the lane → `notes/2026-07-17-c259-rp-next-execution-packets.md`.
 
 ### Dormant / handoff-owned lanes
 
