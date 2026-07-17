@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — q=64 exceptional slice classified; actual joint monodromy-drop locus next
+**Status:** C210 ACTIVE — q=64 full joint group retained; coefficient-space drop divisors next
 
 ## Current state
 
@@ -117,10 +117,15 @@ by the `build-sys` lane.
    namely the three known four-point translation blocks; those translation families are already
    covered by the frozen scalar-extension closure. However, all three representatives retain full
    geometric and arithmetic `S7` for the degree-seven seed--repair cover. Their q=64 completeness
-   is therefore a small-field arithmetic exception, not a degree-seven monodromy drop. Next
-   specialize the full joint group (including the second seed color, collision wreath factors,
-   seed-only covers, and repair character) at all three representatives, then classify the genuine
-   coefficient-space drop divisors. Do not replace this symbolic gate with a larger plane census. See
+   is therefore a small-field arithmetic exception, not a degree-seven monodromy drop. The full
+   specialization gate now retains every factor at all three representatives: isolated
+   transpositions give both `S7` top covers, the one-repair collision group supplies both `H wr S7`
+   factors, all sixteen lower Frobenius characters occur, and an isolated repair branch prevents a
+   geometric `C2_RR` coupling. Thus all twelve translated q=64 layers retain the full group (27),
+   not merely its degree-seven quotient. Next compute the coefficient-space branch discriminants,
+   classify their genuine drop divisors and intersections up to translation, and test whether any
+   such divisor can support an arc-legal affine-complete family over infinitely many odd
+   extensions. Do not replace this symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action

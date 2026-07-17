@@ -1453,3 +1453,91 @@ Frozen output:
 7f2be80466f6d4d224f3d843d5993f59913ebf05be3c8cac0812cbe6672a40ff  analyze_c210_exceptional_quadratic_locus.py
 51f17198f87cf1ede32f552acadfded1ff1281959858d881c0792cadd8127061  analyze_c210_exceptional_quadratic_locus_output.txt
 ```
+
+## Twenty-second coordinate gate: the q=64 exceptions retain the full joint group
+
+Specializing only the degree-seven top cover was not enough: a lower collision factor, a second
+seed color, or a quadratic-character coupling could still have dropped at one of the three frozen
+coefficient points.  The full specialization checker now excludes each possibility separately.
+
+For every orbit representative and both seed colors, it gives a rational target at which the
+degree-seven seed--repair resultant has one exact doubled repair root.  The residual factor is
+squarefree and avoids that root, and the seed parameter above the doubled root is unique.  At the
+same target
+
+```text
+the other seed--repair resultant is squarefree,
+the mixed-seed quintic is squarefree,
+both same-seed Artin--Schreier denominators are nonzero,
+the repair--repair Artin--Schreier denominator is nonzero,
+and the repair root avoids all four same-seed collision poles.
+```
+
+The mixed-collision branch values lie outside `GF(8)`, so the last condition also isolates the
+transposition from the full one-repair group `H=S5 x C2 x C2`.  The exact witnesses, in the format
+`(target tau exponents; doubled-root exponent)`, are
+
+```text
+orbit 1: A ((-,0,-,4);5),       B ((-,0,0,4);5),
+orbit 2: A ((-,0,1,4);6),       B ((-,0,-,4);5),
+orbit 3: A ((-,0,5,6);3),       B ((-,3,3,1);5).
+```
+
+Here `-` denotes zero.  Each fixed-coefficient incidence source is rational and connected, so
+prime-degree transitivity plus its isolated transposition gives geometric and arithmetic `S7`.
+The fixed-repair incidence hypersurfaces for distinct repair values and for the two seed colors
+remain distinct: equality would force a forbidden three-point chord in one of these arc-legal
+24-point layers.  Pulling back the already-certified one-repair collision cover and conjugating its
+supported inertia by each `S7` therefore gives two independent factors
+
+```text
+(H wr S7) x (H wr S7).                                  (30)
+```
+
+The lower factors do not couple after specialization.  For each of the three representatives, an
+exhaustion of the unramified `GF(8)` target fibers realizes all sixteen tuples
+
+```text
+(sign(P_AB), trace_AA, trace_BB, trace_RR) in C2^4.
+```
+
+In addition, each orbit has a repair--repair pole with nonzero product where both seed--repair
+resultants, the mixed quintic, and the same-seed covers are unramified.  The targets and nonzero
+products are
+
+```text
+orbit 1: target (-,0,-,6), q_RR=tau^4,
+orbit 2: target (-,0,6,1), q_RR=tau^6,
+orbit 3: target (-,0,1,-), q_RR=tau^2.
+```
+
+The seed-only `S5 x C2 x C2` branch supports are coefficient-independent, and these isolated
+repair branches prove that `C2_RR` remains geometrically independent.  The sixteen Frobenius
+tuples rule out a residual arithmetic sign coupling.  Consequently every frozen representative
+has the full geometric and arithmetic group
+
+```text
+((H wr S7) x (H wr S7)) x (S5 x C2 x C2 x C2_RR),
+H=S5 x C2 x C2.                                           (31)
+```
+
+The four legal q=64 layers in each block are conjugate by the seed-stabilizer translations (29),
+so (31) holds on all twelve exceptional layers.  Their affine completeness is wholly a
+small-field arithmetic exception: none lies on any joint-monodromy-drop locus.  The next gate is
+now the genuine one—compute the coefficient-space branch discriminants, classify their drop
+divisors and intersections up to the translation quotient, and determine whether any divisor can
+support an arc-legal affine-complete family over infinitely many odd extensions.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_frozen_joint_monodromy.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_frozen_joint_monodromy_output.txt`.
+
+```text
+f14a9c5f2f3c21adce3e0363dcb35c5ca4f82ee408d35ddb0ec0ec9d3506eec3  analyze_c210_frozen_joint_monodromy.py
+4c37c0aea0c335f7e6ce66df9f43f444240e2e6492d3e04c4d5ee14344cc970c  analyze_c210_frozen_joint_monodromy_output.txt
+```
