@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C241.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C249.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -100,6 +100,14 @@ unless they retain an explicit open tail.
 - **C239 `[rp-next]` [REPORTED 2026-07-17]** — reinterpreted C238 through knowledge compilation, provenance, metabolic modes, e-graphs, contracts, weighted automata, sheaves, planning, and reconfiguration; derived a six-layer capability semantics, structural predictions, and ranked missed papers/products → `notes/2026-07-17-c239-domain-translation-audit.md`.
 - **C240 `[rp-next]` [REPORTED 2026-07-17]** — killed the ULC and excluded-minor routes, proved the cubic Möbius cascade law and harmonic affine-core boundary, quantified the C216+C218 plain-LRC gap, and established exact width-two separator-vector cost convolution → `notes/2026-07-17-c240-rp-next-gap-probe-battery.md`.
 - **C241 `[rp-next]` [REPORTED 2026-07-17]** — proved contextual sufficiency and exact finite least-feedback composition of truncated separator-vector response maps, then derived explicit bounded-branchwidth terminal Horn-closure and stopping-core algorithms → `notes/2026-07-17-c241-bounded-branchwidth-horn-closure.md`.
+- **C242 `[rp-next]` [REPORTED 2026-07-17]** — deduplicated the session/Fable direction inventory against C226--C241, closed superseded routes, and reopened the lane with an expected-value-ranked agenda and explicit gates → `notes/2026-07-17-c242-rp-next-session-ideas-ev-review.md`.
+- **C243 `[rp-next]` [QUEUED; after C242]** — vet and assemble the exact q=9 nucleus-gated separation, propagation-completeness/spreading-set boundary, and honest scaling/threshold decision → `notes/2026-07-17-c243-nucleus-gated-separation-vet.md`.
+- **C244 `[rp-next]` [QUEUED; after C243]** — replay the low-cost exact consequence pack: pointed distance, joint enumerator law, EXIT deficits, early design layers, and split-enumerator prior-art boundary → `notes/2026-07-17-c244-exact-consequence-pack.md`.
+- **C245 `[rp-next]` [QUEUED; after C244]** — falsify or locate ordinary log-concavity of pointed repair profiles by a bounded exhaustive represented-matroid sweep and exact matroid-morphism specialization audit → `notes/2026-07-17-c245-pointed-profile-log-concavity.md`.
+- **C246 `[rp-next]` [QUEUED; after C245]** — characterize realizable separator profiles and test contextual completeness/minimality of C241 terminal response semantics with distinguishing contexts → `notes/2026-07-17-c246-contextual-minimality.md`.
+- **C247 `[rp-next]` [QUEUED; after C246]** — audit the tract/foundation dictionary on the flagship ports and retain it only if it yields a repair-specific preservation or distinction theorem → `notes/2026-07-17-c247-tract-foundation-audit.md`.
+- **C248 `[rp-next]` [QUEUED; after C247]** — scope field-sensitive monotone-span-program succinctness, separating representability obstructions from genuine minimum-size lower bounds → `notes/2026-07-17-c248-field-sensitive-msp-scout.md`.
+- **C249 `[rp-next]` [QUEUED; after C248]** — test transversal-robust agentic plan portfolios against syntactic/embedding diversity and fair interdiction baselines on a bounded corpus → `notes/2026-07-17-c249-transversal-plan-portfolios.md`.
 
 ### Dormant / handoff-owned lanes
 
