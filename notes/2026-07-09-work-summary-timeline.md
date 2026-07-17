@@ -1,8 +1,24 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-15** — five working weeks, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-16** — five working weeks, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
+
+## Content split between the two documents — binding rule
+
+The two files differ in **what may be mentioned**, not only in tense:
+
+- **The scope report is externally facing.** It must give **no indication of how the work was
+  produced** — no models, agents, sessions, task IDs, lanes, handoffs, queues, delegation, review
+  passes, or any other internal process. It states mathematics, evidence, and trust tier only. A
+  reader must be able to take it for a research group's own state-of-play memo.
+- **This timeline is internally facing.** It *may and should* record exactly that: which model or
+  agent did what, how work was routed and delegated, where a review or red-team pass changed a
+  result, which C items were allocated, and which process changes were adopted. Method history is
+  the point of this file.
+
+When a fact belongs to both, it is written twice, differently — the finding in the scope report, the
+provenance here. Never resolve the overlap by adding process detail to the scope report.
 
 The arc in one line: **Othello engine → Queens solver + open problem → CGT theory pivot →
 projective-cap program → a publication portfolio**, with Lean formalization ramping alongside from
@@ -130,7 +146,7 @@ game-boundary caveat).
   finite-search platform); then a three-agent key-card fanout kept separate so the independent views
   stay comparable.
 
-## Week 6 — Jul 12–15 · The portfolio: papers, lanes, and the Lean release gate
+## Week 6 — Jul 12–16 · The portfolio: papers, lanes, and the Lean release gate
 
 The centre of gravity moves from *prove the odd-plane kernel* to *ship what is already proved*. The
 spin-off theory of week 5 becomes an actual publication track (`papers/`), the single cap program
@@ -215,6 +231,83 @@ policy. The odd-plane kernel keeps running underneath as one lane among several.
   portfolio's sharpest remaining exposure is now a **single unread pair of papers**: C153 must obtain
   the two Blokhuis–Seress–Wilbrink originals, since every "ours" verdict on the covering fact is
   conditioned on them and one is titled *Characterization of complete exterior sets of conics*.
+  Two governance documents also landed: an **expert-questions routing portfolio** (allocating
+  C199–C204 from the named-reader profiles and the Dye/BSW audit, and explicitly declining to
+  allocate for Clebsch/Baer — "do not duplicate"), and the **cross-paper incidence-pattern agenda**,
+  the repo's first stated unifying programme across `arcs`/`clebsch`/`repaircodes`/`baer` — which
+  still carries no C-ID or lane peg, so by the repo's own rules it is a direction, not work.
+
+- **Jul 15 — the session-waste audit that became policy.**
+  An ASG audit across 62 Codex sessions measured the dominant avoidable cost and found it is **not
+  mathematical reasoning**: it is the **permission-review loop**. 1,838 review decisions, ≥1,815
+  (98.7%) plain `allow`; permission-review sessions consumed **251M of 599M total model tokens
+  (41.9%)** — roughly two tokens in five spent approving routine local commands, because the reviewer
+  conversation accumulated transcript deltas and later approvals carried 200k–250k context each.
+  Combined avoidable estimate **54–67%, central ~62%**. The `alt-orbit-repair` lane was the measured
+  worst offender (480 approval rounds, 26.1%; two of the top-3 repo-wide output producers were its
+  direct Lean elaborations streaming ~28k and ~16k lines of repeated unsolved goals instead of
+  logging quietly). This audit is the direct source of the current `CLAUDE.md` command-output hygiene
+  rules — the 1k–2k token budgets, the 10k "incorrectly shaped inspection" rule, the ban on `ps` /
+  `list_agents` / `wait` as progress dashboards, and the `run-quiet` mandate. A measurement that
+  became policy within a day.
+
+- **Jul 16 — the Dye/BSW exposure closes; three lanes go deep; one process convention lands.**
+  The single largest overhang cleared: **both load-bearing sources were obtained as user-supplied
+  page scans and read at full text.** Dye 1991 supplies the ten-Brianchon bound, projective
+  transitivity (a *ground-field* statement, removing the suspected descent issue), and the `A₅`
+  stabilizer; BSW 1992 supplies the complete-exterior-set definition and Brouwer's census. Only BSW
+  1991 (Giessen) stays unread, cited for adjacent context with **no manuscript claim conditional on
+  it** — C153 and C161 both closed. Three movements followed: priority for the q=11 six-arc flips to
+  **Korchmáros 1981**, a *third* prior name after Edge 1956 and BSW, arriving from chains of circles
+  on an elliptic quadric in `PG(3,q)` and absent from the lane's record; the exact covering
+  `U(A) = C(F₁₁)` **survives as ours** (both sources give only the inclusion, so it must be framed as
+  a manuscript synthesis, not a Dye/BSW theorem); and BSW's census turns out to contain a **second
+  q=11 configuration, a Pasch**, now used as a manuscript foil. On the gem-mining side the same audit
+  cut the other way: **C192's Paley-biplane novelty was killed by Edge 1956 §32** ("we added λ and a
+  modern name"), and Dye 1991 was relayed as *the same geometry, not a near-miss*.
+
+  **`clebsch` (C211):** the fifteen Clebsch secants **are** the projectivized `H₃` icosahedral
+  mirrors, via an explicit `F₁₁` projectivity (`τ = 8`, det-3 matrix) — an equality of arrangements,
+  not of incidence ledgers. Paired with `A₃`, the two characteristic polynomials give complements
+  `(q−5)(q−9)` and `(q−2)(q−3)`, whose conic-size equations factor to `(q−4)(q−11)` and `(q−1)(q−5)`,
+  isolating q=11 and q=5. Three parallel targeted novelty searches then **materially narrowed the
+  claim**: Edge/Calvo own the icosahedral geometry in substance, and **Jurrius–Pellikaan 2015 is an
+  exact collision** with the general arrangement-decoder mechanism (Example 5.10 treats
+  redundancy-three MDS secant arrangements). Only the paired `A₃`/`H₃` conic-filling synthesis
+  survives. A fresh referee-style cold read found no blocking defect but judged the integration too
+  early and duplicative; both arrangements were rebuilt into one late capstone subsection. Paper
+  17 → 19 pages.
+
+  **`relconic`:** **C201 closed negative** — the q=16 quadratic anatomy classified (2,633 leaves in
+  62 cells, no equality cell), but a q=64 census was rejected by a rigorous `>10¹⁸` twelve-arc class
+  bound, and the three preregistered mechanisms (Baer, torus, split-`Z₃`) all fail at **coverage**
+  before any rank anatomy appears. The manuscript decision rule was held and C201 stayed out of the
+  paper; C209 went dormant for lack of a stable cross-cell feature. **C210** succeeded it with a much
+  higher ceiling and ran 21 gates in a day. A **correction worth recording**: the earlier "q=64
+  layers lie on a monodromy-drop locus" was too strong — each frozen representative retains full
+  `S₇`, so q=64 completeness is a small-field arithmetic exception, and the known points are
+  **control points, not points on a drop divisor**.
+
+  **`rp-next`:** the `repairports` lane archived and its successor opened as an explicit **depth
+  lane, not a paper-freeze lane** — each round must produce a general identity, a strict operational
+  separation, an explanatory compression, or a decisive negative; a name match or an unstructured q=9
+  table explicitly does not pass. C226–C233 ran in one day under that discipline, and the discipline
+  visibly worked: C228 and C232 are both decisive negatives, and C233 was allocated specifically to
+  salvage what C232 killed. Fable rounds R4/R5 supplied the C236 and C237 test designs.
+
+  **Process:** `notes/discovery-track-conventions.md` landed and was **applied retroactively the same
+  day** — every proof/math lane now keeps one append-only companion for *incidental* observations,
+  admitted by a single test ("was I looking for this?"), with logging allocating no C-ID and
+  authorizing no investigation. The convention immediately reclassified the C201 and C210
+  "discovery-track" files as mechanism notebooks (they had used the label for *planned* audits) and
+  froze the legacy in-handoff registers. **C225** replaced the Python `--detach` path with
+  systemd-managed transient services after `--detach` was found to return before its worker acquired
+  the build lock, leaving no durable record for a worker that died during init; the ADR keeps three
+  authorities separate (systemd owns lifecycle, the queue owns Lean semantics, the harness owns its
+  callback) and rejected exactly-once notification as impossible, settling for at-least-once with a
+  stable dedup ID. **Standing caveat across C162/C205/C225: no real Lean target has ever run through
+  any of this tooling** — a policy consequence of the no-concurrent-Lake rule with a foreign build
+  live all session, not an oversight.
 
 ---
 

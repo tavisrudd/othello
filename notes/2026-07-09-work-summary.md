@@ -149,18 +149,29 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   defect identity** and its corollaries (equality pattern, uncovered-locus bound, quantitative
   stability), the corrected capacity lower bound, and an explicit additive asymptotic
   `ρ_𝒞(q) ≥ √(2q) + 3/2 − 8/√(2q)` — restated as a concrete inequality rather than O-notation,
-  which is both easier to formalize and a stronger claim. **Exact values:** `ρ_𝒞(8) = ρ_𝒞(9) =
-  ρ_𝒞(11) = 6` and **`ρ_𝒞(16) = 9`** — the last from a checked exhaustive projective classification
-  proving no eight-point arc is complete outside any nonsingular conic (it independently reproduces
-  the known 2633 ordinary eight-arc classes, then refines them into 2630 full-rank and 3 forced-hit
-  quadratic-avoidance rejections). Two structural bridges carry the weight: the **sharp evaluation
-  dichotomy** (for any feature map, hence every Veronese degree, a form vanishing on the uncovered
-  locus `U` and avoiding an arc `A`, `|A| ≤ q`, exists exactly when `span ν(U)` is proper and
-  contains no `ν(a)`), and the **arc / codimension-three MDS syndrome dictionary**, under which
-  relative completeness *is* syndrome confinement and the defect identity *is* a weight-two
-  leader-collision identity. Also owns the **q=11 deep-holes = conic** identification: a projectively
-  non-GRS `[6,3,4]₁₁` code of covering radius three whose distance-three affine syndrome rays are
-  exactly the standard conic. All Lean, `sorry`-free.
+  which is both easier to formalize and a stronger claim. **Exact values:** `ρ_𝒞(5) = 4`,
+  `ρ_𝒞(8) = ρ_𝒞(9) = ρ_𝒞(11) = 6` and **`ρ_𝒞(16) = 9`** — the last from a checked exhaustive
+  projective classification proving no eight-point arc is complete outside any nonsingular conic (it
+  independently reproduces the known 2633 ordinary eight-arc classes, then refines them into 2630
+  full-rank and 3 forced-hit quadratic-avoidance rejections). Two structural bridges carry the
+  weight: the **sharp evaluation dichotomy** (for any feature map, hence every Veronese degree, a
+  form vanishing on the uncovered locus `U` and avoiding an arc `A`, `|A| ≤ q`, exists exactly when
+  `span ν(U)` is proper and contains no `ν(a)`), and the **arc / codimension-three MDS syndrome
+  dictionary**, under which relative completeness *is* syndrome confinement and the defect identity
+  *is* a weight-two leader-collision identity. Also owns the **q=11 deep-holes = conic**
+  identification: a projectively non-GRS `[6,3,4]₁₁` code of covering radius three whose
+  distance-three affine syndrome rays are exactly the standard conic. All Lean, `sorry`-free.
+
+  **The prescribed hole answers to something already asked.** Taking the hole to be a *line at
+  infinity* specializes the whole framework to **complete affine arcs**: `CompleteOutside A L∞` is
+  exactly maximality of `A` as an arc in the affine plane obtained by deleting that line, every
+  secant meets a disjoint line once so `I_{L∞}(A) = C(k,2)`, and substitution into the general
+  prescribed-hole inequality gives a complete affine bound with the general zero-defect theorem
+  supplying the equality pattern at affine and ideal points alike. That instance sits inside an
+  existing research line — hyperfocused arcs and their secret-sharing origin (Giulietti–Montanucci;
+  Korchmáros–Szőnyi, who state explicitly that some such constructions are complete in exactly this
+  sense). The boundary is kept narrow and stated as such: this shows the *line-hole instance* was
+  previously asked for, **not** that the conic parameter itself was.
 
 - **The Clebsch hexagon code** (`clebsch`) — the reading of that q=11 witness, and the sharpest
   single result in the portfolio. **Rigidity (five-way TFAE):** for a six-arc `A ⊂ PG(2,11)`, `U(A)`
@@ -169,19 +180,75 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   is **recovered** from a purely coding-theoretic hypothesis, not assumed. **Gap:** the phenomenon is
   rigid, not merely stable — every non-Clebsch class has PGL-invariant nearest-conic discrepancy
   `δ ≥ 12`, the Clebsch class is the unique zero, and each single-point perturbation has
-  `#(U Δ 𝒞) ≥ 18`; distance jumps `0 → ≥18` with nothing between. **Chirality:** the twenty support
-  triples split into two complementary `A₅`-orbits of ten — a natural equivariant `20 → 10` halving.
-  **Why 11, classification-free:** a conic-filling uncovered locus forces `c = (q−6)(q−9)`, which
-  against the universal matching bound `c ≤ 15` rules out every `q ≥ 12` in *all* characteristics,
-  leaving geometric exclusions at `q = 4, 5, 9` (hyperoval completeness; six-cap maximality; the
-  Sylvester graph's clique number five). Extended to **`4 ≤ k ≤ 7`**: the only conic-filling pairs
-  are `(k,q) = (4,5)` — the projective frame — and `(6,11)`. Side results: the dual code is again a
-  Clebsch hexagon code (self-dual phenomenon, not coordinate-for-coordinate); the two icosahedral
-  hexads are **transverse** to `S(5,6,12)`, turning "is this a Golay/Mathieu thing?" into a stated
-  negative; a ten-arc with the same `A₅` has *empty* deep holes, so emptiness is the generic
-  behavior under icosahedral symmetry and the hexagon is the exception, not an artifact; and the
-  same recipe at `q = 19` yields exactly 140 deep holes on no conic — the failure mode the
-  secant-covering bound predicts.
+  `#(U Δ 𝒞) ≥ 18`; distance jumps `0 → ≥18` with nothing between. **Why 11, classification-free:** a
+  conic-filling uncovered locus forces `c = (q−6)(q−9)`, which against the universal matching bound
+  `c ≤ 15` rules out every `q ≥ 12` in *all* characteristics, leaving geometric exclusions at
+  `q = 4, 5, 9` (hyperoval completeness; six-cap maximality; the Sylvester graph's clique number
+  five, which lands by identifying a hypothetical six-arc with a six-clique in the exact-distance-two
+  graph of the 36 internal points — a distance-regular graph of intersection array `{5,4,2;1,1,4}`
+  whose `eq₂` is known to be 5). Extended to **`4 ≤ k ≤ 7`**: the only conic-filling pairs are
+  `(k,q) = (4,5)` — the projective frame — and `(6,11)`; at `k=7` the arithmetic leaves only q=11 and
+  q=13 with forced spectra, both excluded by exhaustive search.
+
+  **The spine is now conceptual rather than enumerative**, which is what moves the paper's central
+  claim from an exact classification to an equality theorem. Two replacements did it. The **`q−5`
+  line lemma** — every line carries at most `q−5` points of `U(A)` for a six-arc in odd
+  characteristic — is proved by a short synthetic argument: the fifteen chords properly 5-edge-colour
+  `K₆`, hence one-factorize it; three factor classes normalize to a triangular prism; and the two
+  parallelism conditions force `a(b−1) = −1` and `a(b−1) = +1` simultaneously. That alone bounds
+  `|U(A)| ≤ 12`, so with Dye's `c ≤ 10` it forces `c = 10` and closes the line-pair branch without a
+  census. Separately, the **`A₅` orbit profile `[6, 10, 12, 15, 30, 30, 30]` is *derived*** from
+  fixed-point spectra and the subgroup ledger, not assumed; a second off-arc orbit would already
+  breach `c ≤ 15`, forcing `c = 10` and identifying `U` with the unique 12-orbit — the conic. The
+  1,548-class census survives only as the independent size-gap clause and a regression check.
+
+  **The family formula, replacing an instance.** For *any* Clebsch hexagon over `𝔽_q`,
+  `|U(H)| = q² − 14q + 45`; for `q ≡ 3 (mod 4)` every edge is a non-secant of Dye's associated conic,
+  so the off-conic excess is exactly `(q−4)(q−11)`. Within that congruence class the conic is the
+  whole uncovered locus **exactly at q=11**. The q=19 count of 140 deep holes on no conic is now a
+  corollary of the formula, and its checker demoted to independent verification.
+
+  **The two reflection-arrangement exceptions.** The fifteen Clebsch secants **are** the
+  projectivized `H₃` icosahedral mirrors — an equality of arrangements, not of incidence ledgers,
+  exhibited by an explicit `F₁₁` projectivity at `τ = 8`. The six fivefold points of the mirror
+  arrangement remain an arc in every characteristic but two (every `3×3` determinant on them is twice
+  a unit of `ℤ[τ]`), and the singularity ledger `6₅ 10₃ 15₂` gives
+  `χ_{H₃}(t) = (t−1)(t−5)(t−9)`, hence projective complement `(q−5)(q−9)`. Paired with the braid
+  arrangement `A₃` — the six joins of a standard four-frame, `χ_{A₃}(t) = (t−1)(t−2)(t−3)`, complement
+  `(q−2)(q−3)` — the two conic-size equations factor as `(q−4)(q−11)` and `(q−1)(q−5)`, isolating
+  q=11 and q=5. The apparent `q=4` root is extraneous: the `H₃` model is bad in characteristic two.
+  Marking the six fivefold points as parity-check columns turns the multiplicity strata into the
+  established nearest-codeword ambiguity counts. **The claim here is deliberately small**: Edge
+  already derives real Clebsch hexagons from the six icosahedral axes and Dye gives the golden-ratio
+  coordinates, so the icosahedral identification is classical in substance; Calvo 2024 owns the
+  modern reflection-arrangement ledger; and Jurrius–Pellikaan 2015 is an exact collision with the
+  general arrangement-decoder mechanism, down to an example on redundancy-three MDS secant
+  arrangements. What survives is the paired `A₃`/`H₃` conic-filling synthesis — an application, not a
+  new arrangement theorem.
+
+  **Low-degree rigidity, with a refutation inside it.** *Clebsch is the unique class among the
+  fifteen whose uncovered set lies on any cubic* — every non-Clebsch cubic evaluation matrix has full
+  column rank ten, while Clebsch has minimum degree two with a one-dimensional quadratic kernel. This
+  containment theorem **replaced a false predecessor**: "Clebsch is the unique class whose uncovered
+  set is the full rational point set of an irreducible curve" is wrong — three other classes have
+  exact absolutely irreducible loci at their minimum vanishing degree (a smooth quartic of genus 3, a
+  quintic with one nonsplit node, a smooth sextic of genus 10). The negative boundary is stated as a
+  boundary: degree six was exhausted only for the one class whose kernel is small enough.
+
+  **Decoding and chirality, at their correct levels.** The complete syndrome-distance oracle is a
+  four-case rule, and the nearest-codeword multiplicity distribution is exact. The twenty support
+  triples split into two complementary `A₅`-orbits of ten — but **chirality is not the coarsest
+  equivariant rule**, which corrects the natural reading of that halving: the stabilizer of an affine
+  syndrome vector in the order-600 monomial group has order five with four orbits of size five, so
+  **list size five is the equivariant floor** and is attained by four distinct decoders. The two
+  size-ten chirality decoders are the proper selections determined *solely by support*, and they form
+  an unordered pair — no preferred orientation is asserted.
+
+  Side results: the dual code is again a Clebsch hexagon code (self-dual phenomenon, not
+  coordinate-for-coordinate); the two icosahedral hexads are **transverse** to `S(5,6,12)`, turning
+  "is this a Golay/Mathieu thing?" into a stated negative; and a ten-arc with the same `A₅` has
+  *empty* deep holes, so emptiness is the generic behavior under icosahedral symmetry and the hexagon
+  is the exception, not an artifact.
 
 - **Frobenius-equivariant pair extension of eight-arcs** (`baer`). **Headline, Lean-built:** *every*
   Frobenius-invariant eight-arc in `PG(2,25)` admits a fresh conjugate-pair extension — proved by an
@@ -201,7 +268,14 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   power `s ≥ 7` with at least **eight** alternatives; the uniform `PG(2,25)` theorem carries a
   two-witness certificate. The exact general-`s` five-profile lower-bound envelope (`f = 4` at
   `s = 7`, `f = 6` at `s = 8,9`, `f = 8` for `s ≥ 10`) yields a uniform **318 alternate repairs** —
-  a profile-minimized first-order lower bound, not a proved sharp minimum.
+  a profile-minimized first-order lower bound, not a proved sharp minimum. At `PG(2,25)` all 1,189
+  residual class representatives carry a kernel-checked lower bound of **32**, with five proposed
+  minimizer classes at checked equality, and the mechanism is understood: freshness blocks three
+  candidates and carrier incidence blocks 140 in *every* residual class, so only the old-secant mask
+  varies and the legal-count spectrum 32–47 comes entirely from overlap. **The boundary is explicit
+  and load-bearing: 32 is not yet the exact semantic minimum**, and the five classes are not yet a
+  complete extremal classification — that needs the residual-cover and orbit-completeness bridge,
+  which is the open frontier.
 
 - **Completion-core rigidity** — robustness theory for maximal feasible configurations. **Now
   library-only, not a paper:** the generic completion/transversal synthesis has no family-specific
@@ -260,6 +334,83 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   Both transfer gates are proved **uniformly non-weakenable** by nondegenerate `GF(3)` boundary
   counterexamples. The sole deep import is Stichtenoth's self-dual TVZ theorem, quarantined and
   visible in the headline axiom report.
+
+  **Two corrections carried into the manuscript, one of them substantive.** A standalone referee read
+  found the earlier text **incorrectly equating multiblock confinement with complete
+  repair-hypergraph equality** — a one-block dual word may induce a nonzero outer functional, and
+  equality of support sets does not identify witnesses. The manuscript now separates multiblock
+  distance from the exact **nonembedded-witness threshold** `δ_emb = min(2d(I⊥), d_λ(O))`; falling
+  below `δ_emb` implies hypergraph equality, **with no converse claimed**. Coordinate-surjective
+  applications survive because their singleton functional stratum is empty. That exact threshold also
+  *replaces* the original transfer gate rather than refining it: a Singer-shifted `[5,4,2]_{6561}`
+  single-parity-check outer code reaches `d_λ ≥ 6` on support only 5, so transfer holds **where the
+  old support-distance gate fails**, and the rate-`1/10` family is revealed as merely the
+  `R_outer = 1/2` point of an AG Pareto continuum that does not dominate it.
+
+  **A second infinite family.** The `d = 4`, `p = 3` nucleus `e₂` gives `[q+2, 5, q−3]_q` for every
+  `q = 3^h ≥ 9`, dual distance five, exact locality four, whose small circuits are the nucleus
+  together with the **harmonic quadruples forming an `S(3,4,q+1)`** — the Steiner system is what
+  makes the family tractable, and at q=9 it is a `[11,5,6]₉` with nucleus row `(2,5)`.
+
+- **Repair ports as a theory in their own right** (`repairports` → `rp-next`) — the completed repair
+  machinery turned into a deliberate search engine, run under a discipline that each round must yield
+  a general identity, a strict operational separation, an explanatory compression, or a **decisive
+  negative that kills a tempting route**. It produced all four, and the negatives are the load-bearing
+  part.
+
+  **What a repair port *is*.** Every bounded repair port is an exact **radius-truncated erasure-channel
+  EXIT object**, with two exact partition-function transforms: the cubic failure law is the partition
+  function of **restricted-sumset defect**, and the axis law factors as an explicit prefactor times
+  the **independence polynomial of the zero-sum-triple hypergraph**. The operational payoff is the
+  cheapest-radius law `Pr(L_x = r) = h^(≤r−1) − h^(≤r)`, whose successive differences **price the
+  marginal locality budget**. Four conventions were nailed down in the process, each a live trap:
+  `h^(≤r)` is *extrinsic* (homogeneous residual erasure is `p·h`, not `h`); a radius cutoff is a
+  generally suboptimal bounded-query decoder, not symbol-MAP; and repair blockers are exact
+  **target-specific one-shot certificates**, not Tanner stopping sets of an iterative decoder.
+
+  **The invariant already had a name.** The full rank-jump port **is** the one-element set-pointed
+  Tutte polynomial — the Las Vergnas perspective `M∖x → M/x` — so no new invariant was needed. That
+  import pays immediately: pointed duality gives `R_(M,x)(s) + R_(M*,x)(1−s) = 1`, turning blockers
+  into dual repairs, and two ordinary rank polynomials suffice to compress the port. It also draws its
+  own boundary — the standard polynomial is *unfiltered*, so bounded-radius theory must retain circuit
+  size (the full nucleus port adds exactly `72u⁵` over radius four).
+
+  **Cooperative and sequential repair.** Full cooperative ports are just clutter conjunctions of
+  restricted singleton ports — again no new invariant. The real layer beneath is bounded **sequential**
+  repair, which is exactly **small-circuit Horn closure**; unbounded closure completes in *one* round,
+  so iteration exists only because of the radius cutoff. Composition then works through matroid
+  2-sum, which passes **exactly one scalar message** — a cheapest-certificate budget `β ∈ {0..r, ∞}` —
+  with costs adding across the interface and readiness times combining by max.
+
+  **Where it stops, and why.** Three decisive negatives bound the theory. *Naive same-radius
+  deletion–contraction is dead* — deletion removes a repairable relay while contraction admits an
+  over-budget lifted circuit, with two explicit binary witnesses. *There is no finite transfer
+  alphabet bounded by radius and interface width* — binary triangle relays at radius two and width
+  two have pairwise distinct first-finite-response times, and the proof discards the counts entirely,
+  so it is strictly stronger than "the counts are unbounded." That obstruction turned out to be
+  **purely a timing artifact**: forgetting arrival times restores a finite structural control algebra,
+  with the exact counts surviving as additive infinite-carrier weights — all the triangle relays
+  collapse to a single control. And on the cryptographic side, both `GF(9)` holonomy classes are
+  ordinary multiplicative but **not strongly multiplicative for every dealer**, because the criterion
+  factors through the quadratic Veronese matroid and is uniformly `U(3,4)` — blind to cross-ratio, so
+  **no realization can fix it**.
+
+  **Gauge, reliability, and stability.** Fundamental-cycle holonomies classify coefficient labelings
+  up to gauge with a linear-time equivalence test, and axis four-cycles *are* projective cross-ratios;
+  holonomy **strictly refines** the support port, shown by a `GF(9)` pair with identical `U(2,4)`
+  support whose holonomies lie in disjoint anharmonic orbits. For any `S(3,4,n)`, survival
+  `s_n = c·n^(−3/4)` puts repairability in a **Poisson window** `1 − exp(−c⁴/24)` — explicitly *not* a
+  sharp threshold — while every curve-target repair contains the nucleus, giving a **series
+  bottleneck** with no vanishing-probability threshold at all. A uniform inverse theorem on
+  restricted-sumset defect then yields exactly `q(q+1)/2` minimum blockers for **every** `q = 3^h`,
+  upgrading a q=9 census to a uniform statement.
+
+  **One novelty claim was walked back.** The functional-cost parameter `λ_I` **is** the classical
+  induced quotient / coset-leader / syndrome weight — a definition-level collision, decisive. Only the
+  *pointed* constrained-coset cost survives as a candidate; the real upgrade in that neighborhood is
+  prescribed-port replication at positive density. Separately, a kernel-checked rescaling theorem
+  shows raw coefficient values are **arbitrary coordinate gauge**, so no minimum-access or
+  minimum-bandwidth claim follows from them under subpacketization.
 
 - **The twisted cubic as a shared object.** One object — the twisted cubic in `PG(3,q)` under
   `PGL(2,q)` — carries coding's weight distribution, completion's external-point transversal
@@ -323,7 +474,43 @@ is the lesson: a negative believed on a plausible reduction, overturned only by 
 counterexample + `k=4` impossibility, and the published stratification subsumes it); the `q=23`
 octad analogue of the hexad theorem is dead by the mechanism's own reduction (it needs `|H| = 2×3`);
 the internal-conic route yields passant-join clique numbers 4 and 3, so no six-set exists. The
-deep-holes family runs through the **k-tower, not through p**.
+deep-holes family runs through the **k-tower, not through p**. A bounded literature audit closes the
+**Reed–Muller residual**: no source identifies an RM / generalized-RM / projective-RM deep-hole locus
+with a named variety's rational points — the closest genuine predecessor is `RM(1,m)` deep holes =
+bent functions for even `m`, an exact description by a named combinatorial class, not a variety
+equality. The audit is a bounded negative, not a priority certificate; a bare "first connection
+between deep holes and geometry" would still be **false**.
+
+**The even-field rank program (`ρ_𝒞` beyond q=16) — closed negative, and the failure mode is the
+finding.** The q=16 anatomy is fully classified (2,633 leaves in 62 cells; no equality cell; minimum
+scaled defect 224 at rank five; full rank starting only at 256; no cell mixing ranks five and six —
+a finite separation, *not* a field-uniform criterion). At q=64 a full census is rejected by a
+rigorous `>10¹⁸` twelve-arc class lower bound, and all three preregistered symmetry mechanisms fail:
+Baer (`|U| = 860..949`), the order-13 nonsplit torus (`|U| = 1041`, and the conic **nucleus** is
+uncovered in every one of the 310 arcs, so it fails before any rank argument), and split-`Z₃`
+(best-checked `|U| = 805`, one- and two-orbit locally optimal). All miss the required `|U| ≤ 65` by
+hundreds. **Their primary failure is not an avoiding quadratic or a new rank type — it is that their
+secants leave hundreds of points uncovered.** Only the preregistered bounded mechanisms are closed;
+no infinite even-field theorem is claimed either way, and the split-`Z₃` record is heuristic, not a
+family exclusion. The dependent polarity/rank-stability inverse theorem is consequently **dormant on
+an unmet gate** — no stable cross-cell feature exists to invert.
+
+**Repair ports.** Naive same-radius deletion–contraction (two explicit binary witnesses; 5,103
+exhaustive cases); any finite radius/width-bounded transfer alphabet (unbounded binary triangle
+relays at radius two, width two — and the disproof discards the counts, so it is not a
+count-unboundedness argument); strong multiplicativity for the `GF(9)` holonomy classes (the
+criterion factors through the quadratic Veronese matroid and is uniformly `U(3,4)`, so **no**
+realization can fix it — closed for every dealer). Downgraded rather than killed: the
+functional-cost parameter `λ_I` is definitionally the classical coset-leader / syndrome weight;
+coefficient values are arbitrary gauge under a kernel-checked rescaling theorem, so no
+minimum-access or minimum-bandwidth claim follows from them.
+
+**Clebsch, self-inflicted.** "The Clebsch class is the unique one whose uncovered set is an
+irreducible curve's rational point set" — **false**, three counterexample classes (quartic, quintic,
+sextic); replaced by the sharper and cheaper *unique class whose uncovered set lies on any cubic*.
+"Chirality is the coarsest equivariant selection rule" — **false**; list size five is the equivariant
+floor and is attained. The Paley-biplane structure on the two hexagon systems is **Edge 1956 §32**,
+pointing at Klein 1879 — the computation stands, but only λ and a modern name were added.
 
 **Queens:** SG component decomposition for n=16 (tail 97–100% single-component); modular/twin
 reduction (0% at pc≥13); DFS tail parallelization (transposition-saturated); K=17 dense (negative;
@@ -416,6 +603,35 @@ frame reduction  (PG(2,q)=P ⟺ a single 4-cap frame is P; Lean)
   is independent of it, and the kernel would land there as the flagship's open-frontier section
   either way.
 
+**Arcs — the `O(√q)` construction problem.** The portfolio's other genuinely open program, and the
+one with the highest ceiling: construct `𝒞`-complete arcs of size `O(√q)`, or prove an
+infinite-family obstruction. It is not a release gate for any manuscript; it is the next theorem.
+The shape of the difficulty is now sharp, and it is **not the one expected**:
+
+- **Arc legality is solved at linear size.** Two parallel subfield parabolas form a uniform
+  conic-disjoint `2s`-arc, and adding a repair layer yields a conic-disjoint arc of size
+  `11s/840 − O(√s)` along every `s = 8^m` with `m` odd — proved via `S₅ × C₂ × C₂` monodromy,
+  Chebotarev, and a greedy bound on a collision graph of maximum degree six. This is the program's
+  first infinite-family positive-density result.
+- **Coverage is what fails, and this inverts the original working assumption.** The lesson stated
+  plainly: **saturation is the prerequisite bottleneck and quadratic evaluation rank is downstream.**
+- **What is closed.** Arcs inside a single Baer subplane are never conic-complete for `s ≥ 3` (an
+  infinite-family mechanism obstruction: they leave `(s²−s)²/2` points uncovered against an ambient
+  conic of at most `s²+1` points). A Kloosterman/Weil bound kills every full-domain `GF(8)`-coefficient
+  scalar extension for all `s ≥ 16` — `GF(8)` is the unique escape. Partial domains then die too:
+  singleton forcing sends `105 | m`, and on that subtower the residue hypergraph is empty (68 of 72
+  hyperedges). And **generic quadratic repair coefficients are closed** — the joint monodromy group
+  is a full wreath product, leaving a density `≈ 0.0382` missed by *every* chord class, so even the
+  complete repair layer is not affine-complete and thinning cannot help.
+- **The live signal.** Twelve genuinely nonlinear repair layers at `s = 8` give `3s = 24` arcs whose
+  nineteen uncovered points all lie on the line at infinity — hence **complete affine arcs**,
+  extending to complete 26-arcs disjoint from the conic. A uniform characteristic-two version with
+  the same three-layer coverage would give `3s+2` and **solve the problem on an infinite square-order
+  sequence**. Proved only at `s = 8`.
+- **Still open:** coefficient families that vary with the field order, nonquadratic repair graphs,
+  and other Baer-transversal designs. What is closed is the observed fixed-coefficient mechanism, not
+  the problem.
+
 **Queens:** exact **G(18)** (the nimber; outcome already settled). ~300–500B nodes, ~1.5–2 days per
 ascending-`k` round, **no checkpoint/resume**; policy is `k=1` first (~55% one-shot). Further out:
 n=20 outcome (conjectured first, witness (9,9)); nimbers past n=17.
@@ -481,12 +697,33 @@ script is tracked and the manifest records path, blob/SHA-256, exact command, an
 Untracked or ad-hoc artifacts are not evidence — a rule adopted after audits found cited
 computations that existed nowhere durable.
 
-**Lean build hygiene** is itself engineered. Generated certificate builds fan out heavyweight workers
-that will OOM the box; the cap is chosen by *measuring* the heaviest representative leaf's peak RSS,
-not from core count, and a shared checker in the closure must be built serially first because the
-budget is `checker_peak + (N−1) × heaviest_sibling`, not an average. Staleness is probed by content
-traces (`lake build --no-build`), never mtimes; restarts are gated by a trace-validated sentinel
-guard, since an existing olean may belong to an older import closure.
+**Lean build hygiene** is itself engineered, and has grown into a tool layer rather than a set of
+rules. Generated certificate builds fan out heavyweight workers that will OOM the box; the cap is
+chosen by *measuring* the heaviest representative leaf's peak RSS, not from core count, and a shared
+checker in the closure must be built serially first because the budget is
+`checker_peak + (N−1) × heaviest_sibling`, not an average. Staleness is probed by content traces
+(`lake build --no-build`), never mtimes; restarts are gated by a trace-validated sentinel guard,
+since an existing olean may belong to an older import closure. The forcing case is real: one
+alternate-orbit certificate is sharded into 1,036 transport modules, 1,071 dispatch leaves, and 7,044
+canonical class links **because a combined elaboration exceeded the safe memory envelope**.
+
+What exists now: a guarded single-file elaborator; an **unattended build queue** over explicit
+targets with a `flock`-based ownership lock acquired *before* the quiet check (the seed script
+checked for a quiet tree and then launched, holding nothing in between, so two runners could both see
+quiet and both start — the double-booked-RAM case the sizing rule cannot survive); liveness decided
+from the lock rather than a PID, so a run killed by the OOM reaper reports `abandoned` rather than a
+stale `running`, and the check survives a sandbox whose PID namespace hides host processes; atomic
+temp-`fsync`-rename state writes so a reader never sees a torn status; versioned **measured**
+resource profiles; and a guarded `lake pack`. Resumption needs no bookkeeping — `--no-build` skips
+whatever is trace-current. A newer path replaces process detachment with **systemd-managed transient
+services**, on the principle that three authorities stay separate and none impersonates another:
+systemd knows whether the process was created, is alive, and how it exited; the queue knows
+lock/quiet/build/aggregate phase; abnormal death is *external evidence*, never a forged canonical
+state. Notification is at-least-once with a stable dedup ID derived from immutable input — global
+exactly-once was assessed as impossible without a durable outbox and consumer acknowledgement, and
+was rejected rather than approximated. **The standing caveat is load-bearing: no real Lean target has
+yet run through this tooling.** Every path is pinned by hermetic tests with stubbed `nix`/`lake`/
+`choom`/`pgrep`, but real integration is unproven, and a quiet `pgrep` is not proof of an idle tree.
 
 ---
 
@@ -534,11 +771,27 @@ directly.
 **Lean-open:** odd planes `q=3,9,17,19,23` (q=9 conditional on `IntruderTerminalReplyStatement`); the
 **uniform** odd-plane `OddEscapeStatement` (only proved per-`q` via certificates — the intrusion
 reductions carry explicit WARNINGs that their no-intrusion hypotheses are *false* for `q ≥ 11`); the
-q=17/q=19 generated-cert path (blocked on a `maxRecDepth` refactor). In the portfolio: the `clebsch`
-chirality/gap/rigidity-TFAE layer (partially built — the shared coding core, the icosahedral Schreier
-witness, and the small-field/why-11 leaves are strict-trust clean; the coefficient-bearing action
-layer, the perturbation gap theorem, and the Dye seam are open and **release-blocking**), and
-`ContinuationRigidity` (planned, not built).
+q=17/q=19 generated-cert path (blocked on a `maxRecDepth` refactor); and `ContinuationRigidity`
+(planned, not built).
+
+**The `clebsch` Lean layer resolved into a clean split: the geometry is closed, the group actions are
+not, and neither blocks release.** Closed and kernel-checked with standard axioms only: the chord
+defect algebra and family formula, the Brianchon/Petersen ledger, the small-field and why-11 leaves
+(including the q=9 Sylvester clique bound via a proper six-colouring rather than a graph-library
+answer), the `q−5` line lemma with its one-factorization and prism arguments, the projective
+`A₅` point orbits, the decoding synthesis, and the `|U(A)| + |Brianchon(A)| = 22` bridge. Still
+missing: the projective `A₅` *support* action, the full monomial coefficient equivariance and its
+chirality decoders, and the affine stabilizer/orbit infrastructure — with an explicit
+guard that this work must not be disguised as a final `decide` after the group action has been
+assumed. **Two axioms, deliberately**: Dye's ten-Brianchon bound and its equality classification, in
+a single named module with an audited dependency split (the `u + c = 22` bridge depends on neither).
+No exact formalization of Dye exists in the pinned mathlib tree or in any public Lean/Rocq/Isabelle
+archive — the Rocq geometry archive has incidence planes, duality, Desargues, matroids, but no
+conic/Brianchon/Clebsch layer — so the choice was between importing two precisely named statements
+and starting a separate substantial formal-geometry project. The `A₃`/`H₃` synthesis is being closed
+under a hard **compactness gate**: reusable definitions and short counting only, and if a subclaim
+needs a large generated case-split tree, stop, record the obstruction and its estimated size, and
+leave the manuscript's computer-assisted label intact.
 
 **One standing adequacy caveat:** mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome
 semantics (`win`/`grundy`) are self-contained and not yet anchored to a cited `Impartial`/
@@ -555,19 +808,43 @@ resolved the whole body of work into **seven papers in ship order + two OEIS ent
 `papers/` with per-paper status maps. Ship order is set by *formalization-to-full-trust distance*,
 adjusted for two dependencies — not by which manuscript is most finished.
 
-| # | Paper                                                | Lead                                                            | State                                              |
-|---|------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------|
-| 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten |
-| 2 | Dihedral Schreier Node-Kayles                        | exact nimbers for an explicit infinite family                   | draft near-complete; owes `Φ_T`, ½-density, `D₂ₘ`  |
-| 3 | Arcs complete outside a conic                        | the defect identity + additive-3/2 refinement + verified values | manuscript + PDF + checkers + Lean; near-ready     |
-| 4 | The Clebsch hexagon code                             | the rigidity TFAE                                               | working draft; Lean partial, external gates open   |
-| 5 | Complete repair hypergraphs (twisted-cubic–axis LRC) | the certified `[19,4,8]₉` seed + exact row transfer             | manuscript + Lean complete; specialist audit left  |
-| 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | focused source + clean PDF + Lean; closeout done   |
-| 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | theorem-package plan; hardest formalization        |
+| # | Paper                                                | Lead                                                            | State                                                |
+|---|------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------|
+| 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten   |
+| 2 | Dihedral Schreier Node-Kayles                        | exact nimbers for an explicit infinite family                   | draft near-complete; owes `Φ_T`, ½-density, `D₂ₘ`    |
+| 3 | Arcs complete outside a conic                        | the defect identity + additive-3/2 refinement + verified values | **no mathematical gate left**; archive identity only |
+| 4 | The Clebsch hexagon code                             | the rigidity TFAE                                               | manuscript + PDF + Lean; artifact release only       |
+| 5 | Complete repair hypergraphs (twisted-cubic–axis LRC) | the certified `[19,4,8]₉` seed + exact row transfer             | manuscript + Lean complete; specialist audit left    |
+| 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | focused source + clean PDF + Lean; closeout done     |
+| 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | theorem-package plan; hardest formalization          |
 
-**The two dependencies.** `3 → 4` is **hard**: `arcs` owns the deep-holes = conic identification that
-`clebsch` takes as its starting point. `1 ↔ 3` is a seam, not an ordering constraint — both cite
-backwards, neither waits.
+Papers 3 and 4 now carry their final titles — *Arcs complete outside a prescribed conic: an exact
+defect identity and `ρ_𝒞(16) = 9`* and *The Clebsch hexagon code: rigidity from a conic deep-hole
+locus* — each leading with the theorem rather than the topic. Paper 5's venue is stated as DCC / FFA,
+explicitly **not** IEEE-TIT. A `lean-proof-engineering-at-scale`
+methods paper is registered as an idea and deliberately kept **outside** the mathematical ship order;
+its evidence base is the measured build failures and the tooling above, and any novelty claim there
+needs its own literature audit.
+
+**Papers 3, 4, 5, and 6 are all past their mathematical gates. Nothing has shipped.** What remains for
+each is artifact-release plumbing — a citable archive identifier, an immutable release, an external
+citation-chain review — which means the shared blocker below is now the binding constraint on the whole
+front half of the portfolio, not a packaging chore.
+
+**The one dependency, downgraded.** `3 → 4` was recorded as a *hard* dependency; it is now a
+**publication-allocation ruling, not a mathematical one** — `clebsch` reproves the identification, cites
+`arcs` for provenance, and depends on no unpublished companion. `1 ↔ 3` is a seam, not an ordering
+constraint — both cite backwards, neither waits.
+
+**Where the next theorem is not.** `arcs` is assessed a mature **strong-A** specialist paper, and the
+route to A+ was specific: a second theorem *mathematically inseparable* from the defect identity, which
+would have completed the chain `defect bound → bounded candidate cells → uncovered-locus geometry →
+quadratic-rank obstruction → even-field conclusion` and answered the most serious significance
+criticism. The even-field program was that route, and it **closed negative** (§4). The chain does not
+exist, the identified A+ route is spent, and the decision rule was held rather than bent — the negative
+stayed in the discovery record instead of being written up as manuscript weight. Isolated further
+values of `ρ_𝒞(q)` are explicitly not a substitute, and neither is migrating the Clebsch classification
+across the seam.
 
 **The seam rulings are the interesting governance.** Twice the same pattern appeared — one
 computation, two readings, two papers, no ruling on who owns it, which is exactly the salami-slicing
@@ -596,10 +873,45 @@ an abstract-level contribution**.
 **Prior-art posture.** Audits have repeatedly landed against us and been conceded rather than
 argued around: the hexad four-orbit classification is published, so that converse closes by citation;
 the `|U|` spectrum's priority was granted outright to the arc-classification school; the deep-holes =
-named-variety "first" was retired from the seam. The sharpest live exposure is a **single unread pair
-of papers** — two Blokhuis–Seress–Wilbrink originals, one of them titled *Characterization of complete
-exterior sets of conics*, on which every "ours" verdict for the covering fact is conditioned. If either
-states it, both manuscripts get rewritten.
+named-variety "first" was retired from the seam; the arrangement-decoder mechanism is
+Jurrius–Pellikaan's; the icosahedral geometry is Edge's and Calvo's in substance; the Paley-biplane
+structure is Edge's; and the functional-cost parameter is definitionally the classical coset-leader
+weight.
+
+**The largest standing exposure is now closed, and it cost three concessions.** Both load-bearing
+primary sources were obtained as page scans and read at full text. Dye 1991 supplies the
+ten-Brianchon bound, the `A₅` stabilizer, and — importantly — projective **transitivity as a
+ground-field statement**, which removes a suspected descent issue rather than creating one. BSW 1992
+supplies the complete-exterior-set definition and Brouwer's census. Only the adjacent Giessen 1991
+note stays unread, and **no claim is conditional on it**. The three concessions: priority for the
+q=11 six-arc goes to **Korchmáros 1981** — a *third* prior name after Edge and BSW, reached from
+chains of circles on an elliptic quadric in `PG(3,q)`, and absent from our record until the audit;
+the `q < 131` verification is **Brouwer's, inside BSW 1992**, three years before the source we had
+been crediting; and the same audit killed a gem-mining novelty claim outright. What **survives as
+ours** is the exact covering `U(A) = C(𝔽₁₁)`: each source gives only the classical inclusion, and
+neither states that every off-conic point is covered — so it ships as a manuscript synthesis, with no
+separate priority claim about the finite configuration. The census also handed the manuscript a gift:
+it contains a **second q=11 configuration, a Pasch** (six points on four three-point lines, hence not
+an arc), which becomes a clean foil — complete exteriority plus the arc/MDS hypothesis gives the
+Clebsch branch, complete exteriority alone also gives the Pasch branch. In the same field, at the
+same cardinality, the classical condition does not imply the hypothesis. BSW's own conjecture that
+nothing exists beyond q=31 is stated, in their words, as: *"How to prove this we have no idea."*
+
+**The shared question underneath four of the papers.** `arcs`, `clebsch`, `repaircodes`, and `baer` are
+now framed as complementary test cases of one question: *when an algebraic code invariant records a
+complete incidence pattern rather than only its cardinality, what hypotheses force that pattern to be
+rigid locally and transportable globally?* Prescribed-hole coverage, the Clebsch deep-hole locus,
+complete repair hypergraphs, and Frobenius-pair extension are four instances. The recurring structural
+shape is a defect identity of the form *ambient capacity − legal locus = visible collisions + invisible
+obstructions*; the recurring method question is which computer-assisted classifications admit
+invariant-theoretic replacements, with the `A₅` orbit proof as the model — retain the finite
+certificate, move the explanatory burden onto character and subgroup data. The highest-value next
+theorem it names is an **orbit-valued transfer statement**: hypotheses under which a bounded inner
+code's complete legal-extension or repair hypergraph, *together with its automorphism-orbit labels*,
+embeds faithfully into every block of a concatenated family — which would connect the local rigidity of
+`arcs`/`clebsch` to the global persistence mechanism of `repaircodes`. Two brakes are stated with it:
+the point is **not** to merge the manuscripts, and the agenda does not by itself license a refactor.
+It is a stated direction, not active work — nothing in it is allocated.
 
 **Extraction & DOI.** The research repo stays private; publication is by *extracting* clean
 self-contained repos — a shared `FiniteGeom` public repo pinned by commit (never copied per-paper
