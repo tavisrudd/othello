@@ -1,0 +1,815 @@
+{
+  "task": "C231 pre-allocation tree-congruence scout",
+  "component_representations": 41,
+  "component_representations_by_private_size": {
+    "2": 3,
+    "3": 16,
+    "4": 15,
+    "5": 6,
+    "6": 1
+  },
+  "pointed_component_seed_states": 636,
+  "seed_states_by_private_size": {
+    "2": 12,
+    "3": 128,
+    "4": 240,
+    "5": 192,
+    "6": 64
+  },
+  "signature": {
+    "output": [
+      "private_ground_size",
+      "active_count",
+      "truncated_beta"
+    ],
+    "refinement": "next output under every incoming truncated beta",
+    "infinity_encoding": "radius + 1"
+  },
+  "radii": [
+    {
+      "radius": 1,
+      "input_alphabet": [
+        0,
+        1,
+        2
+      ],
+      "states": 636,
+      "output_only_classes": 25,
+      "output_only_congruence_violations": 302,
+      "first_output_only_counterexample": {
+        "incoming": 0,
+        "left": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            2
+          ]
+        },
+        "right": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            2
+          ]
+        },
+        "left_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            3,
+            2,
+            2
+          ]
+        },
+        "right_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            2
+          ]
+        }
+      },
+      "output_only_partner_replay_comparisons_until_decision": 388596,
+      "output_only_partner_replay_counterexample": null,
+      "proposed_one_step_classes": 40,
+      "proposed_transition_congruence_violations": 0,
+      "minimal_behavioral_classes": 40,
+      "extra_refinement_rounds_after_proposed": 0,
+      "partner_replay_comparisons": 379056,
+      "partner_replay_counterexample": null,
+      "proposed_signature_is_congruence": true,
+      "proposed_signature_matches_minimal_partition": true
+    },
+    {
+      "radius": 2,
+      "input_alphabet": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "states": 636,
+      "output_only_classes": 33,
+      "output_only_congruence_violations": 226,
+      "first_output_only_counterexample": {
+        "incoming": 0,
+        "left": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            3
+          ]
+        },
+        "right": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            3
+          ]
+        },
+        "left_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            3,
+            2,
+            2
+          ]
+        },
+        "right_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            3
+          ]
+        }
+      },
+      "output_only_partner_replay_comparisons_until_decision": 142465,
+      "output_only_partner_replay_counterexample": {
+        "representative": 146,
+        "equivalent": 162,
+        "partner": 0,
+        "representative_state": {
+          "component": 19,
+          "columns": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "active": [
+            1,
+            3
+          ],
+          "output": [
+            4,
+            2,
+            3
+          ]
+        },
+        "equivalent_state": {
+          "component": 20,
+          "columns": [
+            1,
+            2,
+            3,
+            4,
+            6
+          ],
+          "active": [
+            1,
+            3
+          ],
+          "output": [
+            4,
+            2,
+            3
+          ]
+        },
+        "partner_state": {
+          "component": 0,
+          "columns": [
+            1,
+            2,
+            3
+          ],
+          "active": [],
+          "output": [
+            2,
+            0,
+            3
+          ]
+        },
+        "representative_trace": [
+          [
+            2,
+            3,
+            0,
+            3
+          ]
+        ],
+        "equivalent_trace": [
+          [
+            2,
+            3,
+            0,
+            3
+          ],
+          [
+            3,
+            3,
+            0,
+            3
+          ]
+        ]
+      },
+      "proposed_one_step_classes": 47,
+      "proposed_transition_congruence_violations": 0,
+      "minimal_behavioral_classes": 47,
+      "extra_refinement_rounds_after_proposed": 0,
+      "partner_replay_comparisons": 374604,
+      "partner_replay_counterexample": null,
+      "proposed_signature_is_congruence": true,
+      "proposed_signature_matches_minimal_partition": true
+    },
+    {
+      "radius": 3,
+      "input_alphabet": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "states": 636,
+      "output_only_classes": 36,
+      "output_only_congruence_violations": 162,
+      "first_output_only_counterexample": {
+        "incoming": 0,
+        "left": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            4
+          ]
+        },
+        "right": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            4
+          ]
+        },
+        "left_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            3,
+            2,
+            2
+          ]
+        },
+        "right_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            4
+          ]
+        }
+      },
+      "output_only_partner_replay_comparisons_until_decision": 15904,
+      "output_only_partner_replay_counterexample": {
+        "representative": 13,
+        "equivalent": 15,
+        "partner": 3,
+        "representative_state": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            4
+          ]
+        },
+        "equivalent_state": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            4
+          ]
+        },
+        "partner_state": {
+          "component": 0,
+          "columns": [
+            1,
+            2,
+            3
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            2,
+            2,
+            2
+          ]
+        },
+        "representative_trace": [
+          [
+            1,
+            4,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2,
+            2
+          ]
+        ],
+        "equivalent_trace": [
+          [
+            1,
+            4,
+            2,
+            2
+          ]
+        ]
+      },
+      "proposed_one_step_classes": 45,
+      "proposed_transition_congruence_violations": 0,
+      "minimal_behavioral_classes": 45,
+      "extra_refinement_rounds_after_proposed": 0,
+      "partner_replay_comparisons": 375876,
+      "partner_replay_counterexample": null,
+      "proposed_signature_is_congruence": true,
+      "proposed_signature_matches_minimal_partition": true
+    },
+    {
+      "radius": 4,
+      "input_alphabet": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "states": 636,
+      "output_only_classes": 36,
+      "output_only_congruence_violations": 162,
+      "first_output_only_counterexample": {
+        "incoming": 0,
+        "left": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            5
+          ]
+        },
+        "right": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            5
+          ]
+        },
+        "left_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            3,
+            2,
+            2
+          ]
+        },
+        "right_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            5
+          ]
+        }
+      },
+      "output_only_partner_replay_comparisons_until_decision": 15904,
+      "output_only_partner_replay_counterexample": {
+        "representative": 13,
+        "equivalent": 15,
+        "partner": 3,
+        "representative_state": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            5
+          ]
+        },
+        "equivalent_state": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            5
+          ]
+        },
+        "partner_state": {
+          "component": 0,
+          "columns": [
+            1,
+            2,
+            3
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            2,
+            2,
+            2
+          ]
+        },
+        "representative_trace": [
+          [
+            1,
+            5,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2,
+            2
+          ]
+        ],
+        "equivalent_trace": [
+          [
+            1,
+            5,
+            2,
+            2
+          ]
+        ]
+      },
+      "proposed_one_step_classes": 45,
+      "proposed_transition_congruence_violations": 0,
+      "minimal_behavioral_classes": 45,
+      "extra_refinement_rounds_after_proposed": 0,
+      "partner_replay_comparisons": 375876,
+      "partner_replay_counterexample": null,
+      "proposed_signature_is_congruence": true,
+      "proposed_signature_matches_minimal_partition": true
+    },
+    {
+      "radius": 5,
+      "input_alphabet": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "states": 636,
+      "output_only_classes": 36,
+      "output_only_congruence_violations": 162,
+      "first_output_only_counterexample": {
+        "incoming": 0,
+        "left": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            6
+          ]
+        },
+        "right": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            6
+          ]
+        },
+        "left_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            3,
+            2,
+            2
+          ]
+        },
+        "right_next": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            6
+          ]
+        }
+      },
+      "output_only_partner_replay_comparisons_until_decision": 15904,
+      "output_only_partner_replay_counterexample": {
+        "representative": 13,
+        "equivalent": 15,
+        "partner": 3,
+        "representative_state": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            1
+          ],
+          "output": [
+            3,
+            1,
+            6
+          ]
+        },
+        "equivalent_state": {
+          "component": 3,
+          "columns": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "active": [
+            3
+          ],
+          "output": [
+            3,
+            1,
+            6
+          ]
+        },
+        "partner_state": {
+          "component": 0,
+          "columns": [
+            1,
+            2,
+            3
+          ],
+          "active": [
+            1,
+            2
+          ],
+          "output": [
+            2,
+            2,
+            2
+          ]
+        },
+        "representative_trace": [
+          [
+            1,
+            6,
+            2,
+            2
+          ],
+          [
+            2,
+            2,
+            2,
+            2
+          ]
+        ],
+        "equivalent_trace": [
+          [
+            1,
+            6,
+            2,
+            2
+          ]
+        ]
+      },
+      "proposed_one_step_classes": 45,
+      "proposed_transition_congruence_violations": 0,
+      "minimal_behavioral_classes": 45,
+      "extra_refinement_rounds_after_proposed": 0,
+      "partner_replay_comparisons": 375876,
+      "partner_replay_counterexample": null,
+      "proposed_signature_is_congruence": true,
+      "proposed_signature_matches_minimal_partition": true
+    }
+  ],
+  "total_proposed_partner_replay_comparisons": 1881288
+}

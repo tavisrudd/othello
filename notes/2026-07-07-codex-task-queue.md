@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C231.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C232.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -90,6 +90,7 @@ unless they retain an explicit open tail.
 - **C229 `[rp-next]` [REPORTED 2026-07-16]** — proved that full cooperative ports are clutter conjunctions of restricted singleton ports, identified sequential locality with small-circuit Horn closure and its stopping core, and gave a smallest six-column strict parallel/sequential/full-span separation → `notes/2026-07-16-c229-cooperative-horn-closure.md`.
 - **C230 `[rp-next]` [REPORTED 2026-07-16]** — derived the causal min--max arrival-time valuation, exact direct-sum depth/core profile factorization, and lift-filtered element-conditioning law, with binary deletion/contraction counterexamples to the naive same-radius minor recurrence → `notes/2026-07-16-c230-horn-depth-composition.md`.
 - **C231 `[rp-next]` [REPORTED 2026-07-16]** — proved exact 2-sum composition through scalar per-round locality-budget messages and a budget-indexed min--max arrival convolution, with a strict three-round binary interface relay and 98,000-state verifier → `notes/2026-07-16-c231-two-sum-repair-convolution.md`.
+- **C232 `[rp-next]` [QUEUED]** — lift C231's bounded scalar-message congruence to multi-interface decomposition trees, proving a radius/width-bounded transfer algebra or locating the first obstruction to finite refinement → `notes/2026-07-16-c231-tree-congruence-scout.md`.
 
 ### Dormant / handoff-owned lanes
 
