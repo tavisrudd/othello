@@ -2275,3 +2275,90 @@ Frozen output:
 4d6e5baeaa76da4f46e74ced2f87ac7eeab3fe749dc9742584f6afc4fac0690d  analyze_c210_lower_collision_strata.py
 509006345e65f07a79fe8a78a36acb37613b5fbbe1a0493ecfb0d1ef9db0d7da  analyze_c210_lower_collision_strata_output.txt
 ```
+
+## Thirty-fifth coordinate gate: two repair cosets reduce to a shared-coefficient locus
+
+The smallest mechanism outside one repair graph adds a second nontrivial additive coset.  Write
+
+```text
+R : eta=e*omega,   g(r)=c0+omega*(a*r^2+b*r+c1),
+R': eta'=e'*omega, h(s)=c0'+omega*(a'*s^2+b'*s+c1'),
+delta=e'+e != 0.                                           (64)
+```
+
+Fix a point `R'(s)` and ask whether it lies on a chord through two points `R(r),R(u)`.  Put
+`p=r+u`, `q=ru`, `Y=s+delta*omega`, and
+
+```text
+T=h(s)+C+Y^2+B*Y=T0+T1*omega,
+N=a^2+a+1.
+```
+
+The two coordinate equations are linear in `(p,q)` and give
+
+```text
+p=(T1+a*T0)/(delta*N),
+q=T0+p*(s+a*delta).                                      (65)
+```
+
+On the odd tower `N!=0`.  The two left parameters exist distinctly exactly when
+
+```text
+p!=0,                  Tr(q/p^2)=0.                      (66)
+```
+
+Thus cross-repair legality is one Artin--Schreier trace problem, not a three-parameter incidence
+search.  Write `p=P2*s^2+P1*s+P0`.  Exact expansion gives
+
+```text
+P2=(a'+a)/(delta*N),       P1=(b'+b)/(delta*N),
+deg(q)<=3,                 leading(q)=P2*s^3.             (67)
+```
+
+Unless `q/p^2` is Artin--Schreier-equivalent to a trace-one constant, the curve
+`w^2+w=q/p^2` gives trace-zero values, and hence forbidden triples, over every sufficiently large
+field.  The exceptional cases classify directly:
+
+- If `a'!=a`, then `P2!=0` and `q/p^2` tends to zero at infinity.  Any equivalent constant has
+  trace zero, so it forces rather than avoids collisions.
+- If `a'=a` but `b'!=b`, equivalence to a constant requires
+  `T0(0)=a^2*delta^2`.  The constant is
+  `P1^(-2)+P1^(-1)=z^2+z`, again of trace zero.
+- Therefore an infinite collision-avoiding pair must satisfy
+
+```text
+a'=a,                    b'=b.                           (68)
+```
+
+On (68), `p=P0` is constant in both orientations.  The `2+1` cross-repair triples disappear only
+when `P0=0`, or when
+
+```text
+Tr((T0(0)+a*delta*P0)/P0^2)=1.                          (69)
+```
+
+The bounded screen now has a conceptual explanation.  Among the twelve certified q=64 repair
+blocks there are `48` unordered pairs on distinct cosets and `96` orientations; every orientation
+has `a'!=a`.  The checker compares (65)--(66) with `21,504` direct projective triples.  Twenty-four
+pairs have two forbidden third parameters in each orientation, and twenty-four have four in each
+orientation.  Hence none of the twelve blocks can be doubled to a 32-point repair construction.
+This is a targeted test of the certified blocks, not a reopened coefficient census.
+
+The two-coset route is not yet closed.  Its only remaining full-layer locus has a shared ordered
+coefficient pair `(a,b)` and the trace condition (69).  The next gate is to impose the still-missing
+one-seed/one-point-from-each-repair collision equations on that locus, then test affine coverage.
+The q=64 blocks supply no point on it.
+
+Reproduction:
+
+```text
+python3 papers/arcs_complete_outside_conic/analyze_c210_two_repair_cosets.py
+```
+
+Frozen output:
+`papers/arcs_complete_outside_conic/analyze_c210_two_repair_cosets_output.txt`.
+
+```text
+4ccc096e92ddf510f02cacf8ad571aada27e2996578ce661d1f7ad27257b3139  analyze_c210_two_repair_cosets.py
+ef47957855713923d80c8f7c535b6fd79e45b9ce52814797bb7cd59bbf8db039  analyze_c210_two_repair_cosets_output.txt
+```

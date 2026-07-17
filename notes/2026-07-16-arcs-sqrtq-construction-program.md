@@ -1,7 +1,7 @@
 # Arcs: square-root construction program
 
 **Lane**: `relconic`
-**Status**: ACTIVE — the single quadratic repair-graph mechanism is closed
+**Status**: ACTIVE — two repair cosets reduce to a shared `(a,b)` trace locus
 
 ## Objective
 
@@ -131,6 +131,14 @@ the bound already minimizes over every possible sign coupling.  Hence no quadrat
 can be affine-complete on all sufficiently large admissible extensions.  The quadratic-height
 mechanism is finished.  C210 remains active and must next formulate a genuinely different
 Baer-transversal mechanism, not another quadratic coefficient search.
+
+The first such mechanism uses two distinct repair cosets.  Its cross-repair `2+1` triples reduce
+to one split quadratic with pair sum/product `(p(s),q(s))`, hence to
+`p(s)!=0` and `Tr(q(s)/p(s)^2)=0`.  The associated Artin--Schreier function has degrees at most
+`(2,3)`.  It forces collisions over large fields unless both repair graphs share the same ordered
+quadratic/linear coefficient pair `(a,b)` and satisfy one explicit constant-trace condition.  All
+48 pairs among the twelve certified q=64 blocks lie off this exceptional locus and fail.  The next
+gate is the seed--cross-repair legality equation on the shared-`(a,b)` locus, followed by coverage.
 
 ## C201 input
 

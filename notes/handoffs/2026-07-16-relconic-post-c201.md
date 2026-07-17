@@ -3,7 +3,7 @@
 **Lane**: `relconic`
 
 **Date:** 2026-07-16
-**Status:** C210 ACTIVE — the single quadratic repair-graph mechanism is closed
+**Status:** C210 ACTIVE — the two-repair-coset route is reduced to a shared `(a,b)` locus
 
 ## Current state
 
@@ -168,9 +168,13 @@ by the `build-sys` lane.
    coupling, a density at least `1331/216000` of affine targets has no chord from any seed--seed,
    seed--repair, or repair--repair class, even when the full quadratic repair graph is allowed.
    Deleting to an arc-legal domain cannot add coverage. This closes the single quadratic graph
-   ansatz, not C210. Next leave that ansatz and formulate the next genuinely Baer-transversal
-   mechanism; do not search another quadratic coefficient stratum or replace the symbolic gate
-   with a larger plane census. See
+   ansatz, not C210. The first new Baer-transversal gate adds a second repair coset. Its `2+1`
+   cross-repair triples reduce exactly to `p!=0` and `Tr(q/p^2)=0`, with `deg p<=2`, `deg q<=3`.
+   Artin--Schreier classification forces any infinite collision-avoiding pair to share the same
+   ordered quadratic/linear coefficient pair `(a,b)`; all 48 pairs among the twelve certified q=64
+   blocks lie off that locus and fail directly. Next impose one-seed/one-point-from-each-repair
+   legality on the shared-`(a,b)` trace locus, then test its affine coverage. Do not reopen the
+   quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
 ## Entry action
