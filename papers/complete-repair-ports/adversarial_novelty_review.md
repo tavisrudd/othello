@@ -135,14 +135,31 @@ Primary sources read closely:
 | A cross-block dual word is asserted without disproving literal hypergraph equality | Survived: each Lean theorem supplies a named repair edge, proves its complete-hypergraph membership, and proves it is absent from the embedded inner hypergraph. |
 | “Unconditional” hides a project axiom | Survived after explicit qualification: the ordinary mathematical theorem cites Stichtenoth; the Lean headline has exactly one quarantined literature axiom. |
 
+## C285/C286 preflight and cold-read closure
+
+The dedicated C285 citation-chain preflight preserved the six-part theorem spine but found three
+source-level defects: projectivizing normalized recovery coefficients, omitting the exact
+zero-functional branch from the pointed transfer minimum, and retaining a vacuous dual-distance
+sentence in the basic-invariants proposition. C286 corrected all three. It also restored the
+dual-distance half of the AG realization region, exposed the random simultaneous-GV and all-field
+Poisson calculations, normalized the q-ary EXIT area convention, and pinned the Chen--Ling--Xing
+and Las Vergnas source locations.
+
+Three independent context-light readers then covered the manuscript sequentially, paragraph by
+paragraph, with separate durable logs. Their additional accepted edits disambiguated the
+contraction matroid, made the `Z^0` pointed-Tutte specialization literal, removed the target from
+the cocircuit blocker, clarified the cubic proof sketch, quantified the Steiner asymptotic, and
+repaired the conclusion's bounded/full-radius wording. No reader requested a structural rewrite.
+Stable public checker/archive provenance remains a release gate rather than a private-draft defect.
+
 ## Residual gate
 
 This is a defensible internal adversarial review, not an exhaustive priority search.
-Before submission, a coding-theory specialist should follow citation chains from
+The C285 specialist pass followed the bounded citation chains from
 Pamies-Juarez--Hollmann--Oggier, Wang--Zhang, Liu--Ma--Wu--Xing,
-Gruica--Jany--Ravagnani, and Jin--Fu in MathSciNet/zbMATH/IEEE Xplore, with special
-attention to duals of concatenated codes, robust/overall repair tolerance, and whether the
-exact complete-hypergraph boundary proposition has appeared under different terminology.
+Gruica--Jany--Ravagnani, Jin--Fu, Chen--Ling--Xing, and the pointed-matroid sources, with special
+attention to duals of concatenated codes, repair tolerance, and complete-support transfer. It found
+no colliding statement, but the review remains bounded rather than exhaustive.
 
 That residual gate affects priority confidence, not the mathematical validity or the
 Lean trust boundary. Until it is complete, the manuscript's strongest allowed novelty

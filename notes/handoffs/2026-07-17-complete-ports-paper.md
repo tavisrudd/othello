@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-17
-**Status**: ACTIVE; C286 CORRECTION AND COLD-READ PASS IN PROGRESS
+**Status**: ACTIVE; C286 CORRECTION AND COLD-READ PASS COMPLETE; USER/RELEASE GATES OPEN
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
@@ -33,6 +33,7 @@ Completed preparation:
 - [C279 private identity migration](../2026-07-17-c279-complete-ports-identity-migration.md); and
 - [C280 six-part manuscript assembly](../2026-07-17-c280-complete-ports-six-part-assembly.md).
 - [C285 submission-preflight citation and claim audit](../2026-07-17-c285-complete-ports-citation-preflight.md).
+- [C286 private-source correction and independent cold-read pass](../2026-07-17-c286-complete-ports-correction-and-cold-read.md).
 
 ## Publication boundary
 
@@ -50,11 +51,11 @@ generic tract/foundation exposition. C220 remains an explicit inclusion decision
 
 ## Next step
 
-Execute C286: apply the C285 correction list to the private manuscript package and run independent
-paragraph-by-paragraph cold reads with durable observation/editorial logs. Reconcile accepted
-findings, rebuild and inspect the private PDF, and synchronize the bibliography, proof/novelty
-ledgers, README, and handoff. Keep C220 omitted pending its separate user decision and do not begin
-public export.
+The corrected private draft has passed three independent paragraph-by-paragraph cold reads and
+same-reader resolution checks. The next step is a user decision on C220 (the bounded recommendation
+remains omission), followed by allocation of the release-preparation pass only after the repository
+destination/remote, license, public checker/archive identity, and shared-Lean export gates are
+resolved. Do not initialize, copy, publish, or push before those decisions.
 
 Public export remains gated on the complete-ports repository name/local destination/public remote,
 license, and C220 decision. The private rename does not authorize repository initialization, copy,

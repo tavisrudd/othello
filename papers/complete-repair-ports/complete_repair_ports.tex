@@ -42,7 +42,7 @@ scalar recovery coefficients, and its reliability under helper failures.
 
 We prove an exact weighted-functional transfer theorem for concatenation and
 identify the persistent pointed obstruction to replicating a prescribed port.
-Every fixed represented port above this obstruction occurs with positive
+Every fixed represented port satisfying this obstruction bound occurs with positive
 density in an asymptotically good fixed-alphabet family.  The same object has
 an exact deletion--contraction reliability calculus and a radius-truncated BEC
 EXIT hierarchy whose successive differences give the cheapest available
@@ -88,12 +88,16 @@ radius filtration adds.  Section~\ref{sec:flagships} compares cubic--axis and
 quartic--nucleus flagships.
 
 The asymptotic coding ingredients, reliability identities, Chen--Stein
-approximation, and pointed-Tutte polynomial are classical.  Our contribution
-is their exact organization around the complete bounded pointed object,
+approximation, and pointed-Tutte polynomial are classical.  We develop their
+exact organization around the complete bounded pointed object,
 together with the transfer boundary, prescribed-port consequence, and the
 two exact geometric port inventories.  We make no minimum-bandwidth claim,
 no full-MAP claim for a radius cutoff, and no threshold claim for harmonic
 closure.
+In the literature reviewed, we did not locate the exact complete-port
+confinement criterion or the two coordinatewise port inventories
+\cite{PamiesEtAl2013,LiuEtAl2022,GruicaEtAl2026,DavydovEtAl2021}; this is a
+bounded comparison, not a priority claim.
 
 \section{Complete bounded repair ports}
 \label{sec:ports}
@@ -122,28 +126,24 @@ Assume the empty helper set is not a repair.  Then
 \[
  \nu_x^{(\leq r)}\leq\tau_x^{(\leq r)}.
 \]
-Both numbers are unchanged after deleting nonminimal repair sets.  Moreover,
-if $r+1<d(C^\perp)$, every repair set in
-$\cH_x^{(\leq r)}(C)$ has cardinality exactly one less than the weight of its
-dual witness.
+Both numbers are unchanged after deleting nonminimal repair sets, so either
+the complete hypergraph or its minimal clutter may be used for these optima.
 \end{proposition}
 
 \begin{proof}
 A matching of $m$ nonempty edges forces every transversal to select at least
 one point from each edge.  Minimalization preserves the upward closure of the
-success event, hence preserves matching and transversal optima.  The last
-claim follows because two distinct witnesses with the same target and helper
-support would differ by a dual word supported on at most $r+1$ coordinates.
+success event, hence preserves matching and transversal optima.
 \end{proof}
 
 \begin{definition}[Coefficient layer]
-For $R\in\cH_x^{(\leq r)}(C)$, its coefficient fiber is the set of projective
-tuples
+For $R\in\cH_x^{(\leq r)}(C)$, its coefficient fiber is the set of normalized
+coefficient vectors
 \[
- \left[\left(-\frac{w_y}{w_x}\right)_{y\in R}\right]
+ \left(-\frac{w_y}{w_x}\right)_{y\in R}
  \quad(w\in C^\perp,\ \supp(w)=R\cup\{x\}).
 \]
-Each representative gives the exact recovery equation
+Each vector gives the exact recovery equation
 $c_x=\sum_{y\in R}(-w_y/w_x)c_y$.  The direct protocol reads one complete
 $\F_q$ symbol from every helper; no subpacketized access or bandwidth optimum
 is asserted.
@@ -160,7 +160,7 @@ For independent survival probabilities $(s_y)$, the reliability is
 $R_x^{(\leq r)}(s)=\mathbb E[f_x^{(\leq r)}]$.
 \end{definition}
 
-Exact equality of complete ports preserves all three support-derived layers:
+Exact equality of complete ports preserves all support-derived invariants:
 matching, transversals, blocker clutters, multivariate reliability, and every
 correlated-law reliability after transporting the helper labels.  Coefficient
 fibers require the finer functional data used next.
@@ -193,15 +193,30 @@ The weighted cost of such a tuple is $\sum_j\lambda(\beta_j)$.  This is the
 ordinary quotient/coset-leader weight attached to the inner encoder; the
 pointed use below is the repair-specific part.
 
+The all-zero functional sector has the fixed pointed cost
+\[
+ z_x(I)=
+ \begin{cases}
+ \mu_x(0)+d(I^\perp),&I^\perp\neq0,\\
+ \infty,&I^\perp=0.
+ \end{cases}
+\]
+
 \begin{theorem}[Exact pointed confinement and transfer]
 \label{thm:transfer}
-Fix an outer block $j$ and an inner coordinate $x$.  The minimum weight of a
+Assume $|J|\geq2$, and fix an outer block $j$ and an inner coordinate $x$.
+The minimum weight of a
 concatenated dual witness through $(j,x)$ that is not an embedded inner-dual
-witness is the minimum, over functional-dual tuples, of
+witness is
 \[
- \mu_x(\beta_j)+\sum_{\ell\neq j}\lambda(\beta_\ell),
+ \min\left\{
+ z_x(I),
+ \min_{\substack{(\beta_\ell)\text{ in the functional dual of }O\\
+                  (\beta_\ell)\neq0}}
+ \left(\mu_x(\beta_j)+\sum_{\ell\neq j}\lambda(\beta_\ell)\right)
+ \right\},
 \]
-with the embedded zero tuple removed.  Consequently, if this pointed cost is
+where a minimum over an empty set is $\infty$.  Consequently, if this pointed cost is
 greater than $r+1$, then
 \[
  \cH_{(j,x)}^{(\leq r)}(O\circ I)
@@ -220,36 +235,36 @@ for every nonzero functional-dual tuple.
 A block tuple $w=(w_j)$ lies in $(O\circ I)^\perp$ exactly when
 $(\Phi_I(w_j))$ lies in the functional dual of $O$.  Minimizing independently
 inside each non-target fiber gives $\lambda$; the target constraint gives
-$\mu_x$.  The all-zero functional sector consists of inner-dual words.  A
-nonembedded zero-sector witness needs a pointed inner-dual word in the target
-block and a nonzero inner-dual word elsewhere, giving the displayed
-$2d(I^\perp)$ sufficient bound.  Below the minimum nonembedded weight every
+$\mu_x$.  For a nonzero functional tuple this gives the inner minimum in the
+display.  In the all-zero sector, a nonembedded witness needs a pointed
+inner-dual word in the target block and a nonzero inner-dual word in another
+block.  Since $|J|\geq2$, independent minimization gives the exact cost
+$z_x(I)$.  This cost is at least $2d(I^\perp)$ whenever it is finite, giving
+the displayed sufficient bound.  Below the minimum nonembedded weight every
 bounded pointed witness is confined to the target block, where it is exactly
 an embedded inner repair witness.
 \end{proof}
 
 The functional-dual decomposition is classical concatenation machinery
-\cite{ChenLingXing2001,ChenLingXing2005}.  The weighted statement matters
-because ordinary functional support distance can be strictly weaker.  For the
+\cite[Theorem~2.3]{ChenLingXing2001}\cite[Theorem~2.1]{ChenLingXing2005}.
+The weighted statement matters because ordinary functional support distance
+can be strictly weaker.  For the
 completed field-nine cubic--axis inner code, a Singer-shifted generalized
 single-parity-check $[5,4,2]_{6561}$ outer code has functional distance five
 but weighted distance at least six.  Its exact nonembedded threshold is six,
 so radius-four transfer holds although the support-distance gate requiring
-functional distance six fails.  Singer regularity is the only classical group
-input in this example \cite{Singer1938}.
+functional distance six fails.  Here Singer-shifted means that the five
+parity-check multipliers are chosen through a regular Singer action so that
+the inner code's twenty unit-cost projective functional classes have disjoint
+translates in the five blocks.  This finite calculation belongs to the checked
+transfer chain described in Section~\ref{sec:verification}; Singer regularity
+is its only classical group input \cite{Singer1938}.
 
 \section{Prescribed positive-density realization}
 \label{sec:realization}
 
 The pointed zero-functional sector persists even when outer dual distance
-grows.  Define
-\[
- z_x(I)=
- \begin{cases}
- \mu_x(0)+d(I^\perp),&I^\perp\neq0,\\
- \infty,&I^\perp=0.
- \end{cases}
-\]
+grows.
 
 \begin{theorem}[Prescribed represented ports]
 \label{thm:prescribed}
@@ -287,14 +302,23 @@ For an inner $[m,k,d]_q$ code the concatenated parameters satisfy
  \qquad
  \delta_{\rm concat}\geq\frac{d}{m}\delta.
 \]
+Indeed, for a random $L$-linear outer code the expected numbers of nonzero
+words and dual words below the two cutoffs have exponential rates
+$R+H_Q(\delta)-1$ and $H_Q(\delta^\perp)-R$, respectively, so both vanish
+simultaneously \cite{MacWilliamsSloane1977}.
 When $Q$ is square, algebraic-geometry outer codes similarly give, for
 $\gamma=1/A(Q)$ and $\gamma<R<1-\gamma$,
 \[
+ \delta(O_N)\geq1-R-\gamma,
+ \qquad
+ \delta(O_N^\perp)\geq R-\gamma,
+ \qquad
  \delta_{\rm concat}\geq\frac{d}{m}(1-R-\gamma).
 \]
 These are the classical GV and TVZ ingredients.  For the completed
 $[20,4,9]_9$ seed, $Q=6561$ and $\gamma\leq1/80$, recovering the concrete
-rate-$1/10$ family as one instance \cite{Stichtenoth2005}.
+rate-$1/10$ family as one instance
+\cite{Stichtenoth2009,Stichtenoth2005}.
 
 \section{Reliability and bounded EXIT}
 \label{sec:reliability}
@@ -333,6 +357,9 @@ homogeneous identity.  Failure occurs exactly when the failed helper set
 contains a minimal blocker; inclusion--exclusion begins with the minimum
 blockers and all intersections contribute only at higher order.
 \end{proof}
+
+These are the standard deletion--contraction and pivotality identities for a
+monotone reliability system \cite{Colbourn1987}.
 
 For EXIT conventions, condition the target $x$ unavailable and erase helper
 $v$ with probability $p_v$.  Put
@@ -378,8 +405,10 @@ radius $r$, beta integration gives
  L_r(x)=\sum_{k=0}^{N-1}
  \frac{\Delta a_k}{N\binom{N-1}{k}}.
 \]
-Under this failure convention the symbol-MAP areas sum to the code dimension
-$K$, so
+With entropy normalized in $\log_q$ units, the unrecoverable-symbol indicator
+is the normalized conditional entropy on the $q$-ary erasure channel.  Under
+this convention the symbol-MAP areas sum to the code dimension $K$
+\cite{AshikhminKramerTenBrink2004}, so
 \[
  \sum_x\int_0^1h_x^{(\leq r)}(p)\,dp
  =K+\sum_xL_r(x).
@@ -397,10 +426,10 @@ The set $A$ repairs $x$ exactly when $\epsilon_x(A)=0$.
 
 \begin{theorem}[Pointed perspective polynomial]
 \label{thm:tutte}
-Let $D=M\backslash x$ and $C=M/x$.  The Las Vergnas polynomial of the
-elementary perspective $D\to C$ is
+Let $D=M\backslash x$ and $Q=M/x$.  The Las Vergnas polynomial of the
+elementary perspective $D\to Q$ is
 \[
- T_{D\to C}(X,Y,Z)=
+ T_{D\to Q}(X,Y,Z)=
  \sum_{A\subseteq V}
  (X-1)^{r(M)-r_M(A\cup\{x\})}
  (Y-1)^{|A|-r_M(A)}Z^{\epsilon_x(A)}.
@@ -416,32 +445,39 @@ then, for $n=|V|$,
 Writing $U_K(u,y)=\sum_Au^{|A|}y^{r_K(A)}$, one also has
 \[
  S_x(u)=\left.\frac{\partial}{\partial y}
- \bigl(U_D(u,y)-U_C(u,y)\bigr)\right|_{y=1}.
+ \bigl(U_D(u,y)-U_Q(u,y)\bigr)\right|_{y=1}.
 \]
 \end{theorem}
 
 \begin{proof}
 Contraction gives
-$r_D(A)=r_M(A)$ and $r_C(A)=r_M(A\cup\{x\})-1$, so
-$r_D(A)-r_C(A)=1-\epsilon_x(A)$.  Substitution in the rank-one
-perspective expansion gives the displayed polynomial.  Extracting the
-$Z^0$ terms counts successful survivor sets by size and yields reliability.
+$r_D(A)=r_M(A)$ and $r_Q(A)=r_M(A\cup\{x\})-1$, so
+$r_D(A)-r_Q(A)=1-\epsilon_x(A)$.  Substitution in the rank-one
+perspective expansion gives the displayed polynomial.  The $Z^0$ terms are
+exactly the successful sets; more explicitly,
+\[
+ S_x(u)=u^{r(M)}[Z^0]T_{D\to Q}(1+u^{-1},1+u,Z),
+\]
+which yields the reliability formula.
 Finally,
 \[
- \left.\partial_y(y^{r_D(A)}-y^{r_C(A)})\right|_{y=1}
- =r_D(A)-r_C(A),
+ \left.\partial_y(y^{r_D(A)}-y^{r_Q(A)})\right|_{y=1}
+ =r_D(A)-r_Q(A),
 \]
 which is the zero--one success indicator.
 \end{proof}
 
-This identification is standard set-pointed Tutte theory
-\cite{LasVergnas1999}; it is not a new polynomial.  Pointed duality gives
+This identification is the singleton specialization of standard set-pointed
+Tutte theory \cite[equation~(3.1)]{LasVergnas1999}; it is not a new polynomial.
+Pointed duality gives
 \[
  R_{(M,x)}(s)+R_{(M^*,x)}(1-s)=1,
 \]
 and the minimal failure blockers of $(M,x)$ are exactly the minimal repair
-sets of $(M^*,x)$.  For a represented matroid they are cocircuits through
-$x$, hence inclusion-minimal row-code supports through $x$.  In particular,
+sets of $(M^*,x)$.  For a represented matroid they are the sets
+$Q'\setminus\{x\}$, where $Q'$ ranges over cocircuits containing $x$;
+equivalently, $Q'$ is an inclusion-minimal row-code support through $x$.
+In particular,
 \[
  \tau_{\rm full}(x)=d_x(C)-1,
  \qquad
@@ -502,10 +538,13 @@ most three times.  This gives the code parameters.  Vandermonde determinants
 classify the displayed small circuits.  At an axis target the repair clutter
 is a disjoint union of $K_q$ and a zero-sum-triple hypergraph, so matching and
 transversal numbers add; complements of transversals are precisely
-zero-sum-free sets.  At a cubic target, inversion relabels helpers by
-$\F_q^*$; a multiplicative-generator pairing gives $(q-1)/2$ repairs with
-distinct axis completions, while omitting two suitable helper classes blocks
-all repairs.  The stated strict inequalities follow from the elementary bound
+zero-sum-free sets.  At a cubic target, inversion relabels the other cubic
+helpers by $\F_q^*$.  A multiplicative-generator pairing gives $(q-1)/2$
+repairs with distinct axis completions; no larger matching is possible because
+each repair uses two of the $q-1$ cubic helpers.  The shifted-inverse
+complement lemma bounds a repair-free helper set by $q+2$, attained by all
+axis helpers together with one cubic helper.  Taking complements gives
+$\tau=q-2$.  The stated strict inequalities follow from the elementary bound
 $Z_3(q)\leq q-2$ and the displayed formulas.
 \end{proof}
 
@@ -545,7 +584,9 @@ Its minimal circuits of size at most five are exactly
  \{N\}\cup B,
 \]
 where $B$ is a harmonic quadruple of $\mathbb P^1(\F_q)$.  These quadruples
-form a Steiner system $S(3,4,q+1)$.  Hence the radius-four repairs are all
+form a Steiner system $S(3,4,q+1)$, the characteristic-three four-set orbit
+in the standard $\operatorname{PGL}(2,q)$ design construction
+\cite[Section~2]{Tricot2024}.  Hence the radius-four repairs are all
 $B$ at the nucleus and all $\{N\}\cup(B\setminus\{x\})$ at a curve target
 $x\in B$.  Every curve target has $(\nu,\tau)=(1,1)$.  At $q=9$ the nucleus
 has $(\nu,\tau)=(2,5)$, with 30 repairs, while each curve target has 12.
@@ -569,8 +610,8 @@ $(q+2)-5=q-3$.  The repair and row statements follow from the circuit
 inventory; the field-nine nucleus row is an exact finite enumeration.
 \end{proof}
 
-The coarse transfer gate is automatic at radius four because
-$5<2d(Q_q^\perp)=10$.  Theorem~\ref{thm:prescribed} therefore places the
+The inner-dual half of the coarse transfer gate is automatic at radius four
+because $5<2d(Q_q^\perp)=10$.  Theorem~\ref{thm:prescribed} therefore places the
 entire harmonic port with positive density in asymptotically good
 fixed-$\F_q$ families.
 
@@ -612,9 +653,9 @@ circuits:
 Their difference from the truncated profiles is the concrete
 radius-filtration boundary promised in Section~\ref{sec:tutte}.
 
-There is also an asymptotic reliability contrast.  In any
-$S(3,4,n)$, retain each point independently with probability
-$s=cn^{-3/4}$.  If $X$ counts retained blocks, dependency-graph
+There is also an asymptotic reliability contrast.  Along any sequence of
+Steiner systems $S(3,4,n)$ with $n\to\infty$, retain each point independently
+with probability $s=cn^{-3/4}$.  If $X$ counts retained blocks, dependency-graph
 Chen--Stein approximation gives
 \[
  X\ \Longrightarrow\ \operatorname{Poisson}(c^4/24),
@@ -623,6 +664,10 @@ Chen--Stein approximation gives
 \]
 with total-variation error $O(n^{-1/4})$
 \cite{ArratiaGoldsteinGordon1989}.  This is the repair window at the nucleus.
+Indeed, there are $b=n(n-1)(n-2)/24$ blocks; each block meets
+$3(n-4)$ others in two points and $2(n-4)(n-8)/3$ others in one point.
+The dependency bound has joint terms $O(n^4s^6)$ and $O(n^5s^7)$, giving
+$O(n^{-1/4})$ at the displayed scale.
 At a curve target the blocks through it induce an $S(2,3,n-1)$, but every
 repair also uses $N$.  If $N$ survives with probability $\rho$ and curve
 helpers survive with probability $c(n-1)^{-2/3}$, repairability tends to
@@ -631,18 +676,21 @@ helpers survive with probability $c(n-1)^{-2/3}$, repairability tends to
 \]
 with conditional Poisson error $O(n^{-1/3})$.  Thus the nucleus target has a
 sparse parallel window, while every curve target has a series bottleneck.
+For $m=n-1$, the derived design has $m(m-1)/6$ triples and
+$m(m-1)(m-3)/8$ unordered pairs meeting in one point, which gives the stated
+conditional error rate from the same bound.
 
 Finally, the harmonic small-circuit closure has a deterministic nucleus gate.
 Let $D(S)$ close curve set $S$ under ``three points of a harmonic block add
 the fourth.''  Then
 \[
- L_4(S)=S\quad\text{if $S$ contains no block},
+ \operatorname{cl}_4(S)=S\quad\text{if $S$ contains no block},
 \qquad
- L_4(S)=\{N\}\cup D(S)\quad\text{otherwise},
+ \operatorname{cl}_4(S)=\{N\}\cup D(S)\quad\text{otherwise},
 \]
-and $L_4(S\cup\{N\})=\{N\}\cup D(S)$.  At $q=9$ there is a block-free
+and $\operatorname{cl}_4(S\cup\{N\})=\{N\}\cup D(S)$.  At $q=9$ there is a block-free
 rank-five set of five curve points that linearly spans all eleven points but
-is inert under $L_4$; adjoining $N$ completes all five missing curve points
+is inert under $\operatorname{cl}_4$; adjoining $N$ completes all five missing curve points
 in one parallel round.  This is a finite deterministic separation, not an
 asymptotic propagation or threshold theorem.
 
@@ -650,10 +698,11 @@ asymptotic propagation or threshold theorem.
 \label{sec:verification}
 
 The finite transfer core and the cubic--axis theorem chain are checked in
-Lean.  The paper-facing roots are `RepairCodes` and
-`RepairPorts.FunctionalCost`; the exact public module closure and artifact
+Lean.  The paper-facing roots are \texttt{RepairCodes} and
+\texttt{RepairPorts.FunctionalCost}; the exact public module closure and artifact
 provenance are release-gate data, not claims made by this private draft.
-The asymptotic trace, random-code, and AG arguments remain manuscript proofs.
+The asymptotic trace, random-code, and AG arguments remain manuscript-level
+arguments.
 
 The harmonic and probability statements have deterministic independent
 replays.  The load-bearing private evidence bundle consists of the scripts
@@ -664,8 +713,9 @@ records its command, conventions, checked counts, hashes, and finite boundary.
 The field-nine checks do not imply unproved all-field classifications; the
 all-field statements above have symbolic proofs.
 
-The only quarantined asymptotic import is Stichtenoth's self-dual TVZ-family
-theorem over $\F_{6561}$ \cite{Stichtenoth2005}.  Classical inputs are labeled
+The only nonformalized axiom in the cited Lean theorem chain is Stichtenoth's
+self-dual TVZ-family theorem over $\F_{6561}$ \cite{Stichtenoth2005}.
+Classical inputs are labeled
 as such: concatenated-dual decomposition, Singer regularity, normal-rational-
 curve nuclei, reliability/EXIT calculus, Chen--Stein approximation, and the
 Las Vergnas perspective polynomial.
@@ -683,11 +733,12 @@ The cubic--axis family shows rich overlapping ports and strict weighted
 transfer beyond a support-only gate.  The quartic--nucleus family replaces
 that overlap pattern by a harmonic Steiner design: the nucleus has a sparse
 parallel repair window while curve targets share a compulsory series helper.
-Pointed-Tutte theory explains the full-radius structure, and the explicit
-field-nine profiles show exactly what bounded radius remembers beyond it.
+Pointed-Tutte theory explains the full-radius structure, while the explicit
+field-nine profiles isolate what the bounded-radius truncation retains and
+what the full-radius invariant adds.
 
-The optional cubic blocker-stability strengthening is deliberately not used
-here pending its separate inclusion decision.  Sequential composition,
+A sharper cubic blocker-stability statement is not needed for the present
+results.  Sequential composition,
 general service regions, coefficient optimization, log-concavity, and random
 harmonic-cascade thresholds lie outside this paper.
 

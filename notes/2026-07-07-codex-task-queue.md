@@ -52,8 +52,6 @@ unless they retain an explicit open tail.
 
 ### `complete-ports`
 
-- **C286 `[complete-ports]` [IN PROGRESS]** — apply the C285 private-source correction list, run independent paragraph-by-paragraph cold reads with durable observation/editorial logs, reconcile accepted findings across the manuscript package, and rebuild/inspect the private PDF without deciding C220 or beginning public export → `notes/2026-07-17-c286-complete-ports-correction-and-cold-read.md`.
-
 ### `continuation`
 
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.

@@ -2,7 +2,8 @@
 
 **Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*<br>
 **Author:** Tavis Rudd<br>
-**Status:** private six-part manuscript assembled; publication export remains gated.
+**Status:** private six-part manuscript corrected after citation preflight and independent cold
+reads; publication export remains gated.
 
 ## Paper spine
 
@@ -23,6 +24,11 @@ The field-nine harmonic profiles give exact reliability and EXIT deficits. The a
 Steiner system has a sparse Poisson repair window at the nucleus and a compulsory-helper series
 bottleneck at curve targets. The cubic family supplies exact matching/transversal rows and the
 natural strict weighted-transfer example.
+
+The C286 correction pass repaired the exact transfer statement's zero-functional branch,
+normalized the coefficient fibers correctly, completed the random/AG and Poisson proof chain,
+and reconciled three context-light paragraph-by-paragraph cold reads. The private PDF remains an
+11-page draft.
 
 ## Evidence boundary
 
