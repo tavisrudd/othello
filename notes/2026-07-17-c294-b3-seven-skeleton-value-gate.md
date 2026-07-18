@@ -2,7 +2,7 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** gated on B2  
+**Status:** active; first exact sparse-core quotient attempt stopped at the fixed gate
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -49,3 +49,16 @@ all seven hard types are classified or the theorem is explicitly narrowed around
 exceptions. Do not raise a generic state cap before reporting whether the boundary quotient itself
 merges states and closes the first value.
 
+## First attempt result
+
+`notes/2026-07-17-c294-b3-seven-skeleton-value.md` proves the exact sparse absolute-two-core/B1-
+interface quotient and records its independently checked first merger. The quotient has 2,998,831
+high-core different-mask cache-hit events by the fixed ten-million connected-state gate, but it
+stops at an unseen 30-vertex quotient node without returning the type-0 follower nimber. Thus the
+boundary quotient genuinely merges states but does not close the first value; B3 remains active
+and the other six types remain unrun.
+
+Do not repeat this run or raise its cap. The next bounded design question is whether exact
+isomorphism canonicalization of the high two-core together with B1 attachment labels produces
+material additional mergers on the already tracked 100,000-state prefix. Require a measured
+compression gate before implementing another value solver.
