@@ -105,17 +105,9 @@ own the tree; `running/quiet-preflight` means it owns the lock; `running/buildin
 `running/aggregate-gate` means the named child was spawned; only a terminal completion envelope
 after service exit establishes released resources and the recorded outcome.
 
-On a failed build the envelope carries `failed_target` and a derived `reason`, so the failing target
-needs no separate status or log read; the per-target diagnostic tail remains in the run directory
-under `logs/` when the actual Lean error is needed.
-
-The transient unit starts from the user manager's environment, not from an agent shell. The adapter
-therefore sets `__NIXOS_SET_ENVIRONMENT_DONE=1` on the unit: the shared build argv runs
-`nix develop --command bash -lc`, and that login shell otherwise rebuilds `PATH` from `/etc/profile`
-and discards the devshell, so `lake` disappears and the first `--no-build` probe exits 127. The
-acceptance handshake rejects a unit that lacks this baseline rather than letting it build in a
-broken environment. Do not assume any other agent-shell environment reaches a managed run; pass what
-a run needs explicitly.
+A failed build names its target in the envelope's `failed_target` and `reason`; the Lean error itself
+is in the run directory's `logs/`. A managed run does not inherit the agent shell's environment, so
+pass anything it needs explicitly.
 
 The runner automatically:
 
