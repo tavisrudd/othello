@@ -391,6 +391,7 @@ class AcceptanceHandshakeTests(unittest.TestCase):
             "EnvironmentEntries": [
                 f"OTHELLO_LEAN_RUN_ID={self.submission['run_id']}",
                 f"OTHELLO_LEAN_SUBMISSION_SHA256={self.digest}",
+                *(f"{name}={value}" for name, value in MODULE.MANAGED_UNIT_ENVIRONMENT.items()),
             ],
         }
 
@@ -413,6 +414,29 @@ class AcceptanceHandshakeTests(unittest.TestCase):
         self.assertIn("--property=KillMode=mixed", command)
         self.assertIn("--property=TimeoutStopSec=120s", command)
         self.assertEqual(command[-3:], self.submission["worker_argv"])
+
+    def test_transient_command_sets_devshell_login_shell_baseline(self) -> None:
+        # Without this the login shell in the shared `nix develop --command bash -lc` argv
+        # rebuilds PATH from /etc/profile and the devshell `lake` disappears.
+        command = MODULE.transient_command(
+            self.submission, self.digest, systemd_run=Path("/fixture/systemd-run")
+        )
+        self.assertIn("--setenv=__NIXOS_SET_ENVIRONMENT_DONE=1", command)
+
+    def test_acceptance_rejects_unit_missing_environment_baseline(self) -> None:
+        snapshot = dict(self.snapshot)
+        snapshot["EnvironmentEntries"] = [
+            entry
+            for entry in self.snapshot["EnvironmentEntries"]
+            if not entry.startswith("__NIXOS_SET_ENVIRONMENT_DONE=")
+        ]
+        with self.assertRaises(MODULE.StateError):
+            MODULE.validate_acceptance_snapshot(
+                self.submission,
+                self.digest,
+                snapshot,
+                self.submission["manager_generation"],
+            )
 
     def test_matching_snapshot_produces_stable_acceptance(self) -> None:
         accepted = MODULE.validate_acceptance_snapshot(
@@ -469,6 +493,43 @@ class AcceptanceHandshakeTests(unittest.TestCase):
             completion["event_id"],
             f"lean-queue:{self.submission['run_id']}:terminal:1",
         )
+
+    def test_failed_completion_surfaces_failing_target_without_a_log_read(self) -> None:
+        completion = MODULE.completion_envelope(
+            submission=self.submission,
+            accepted={"invocation_id": "b" * 32},
+            status={
+                "format": 2,
+                "run_id": self.submission["run_id"],
+                "state": "failed",
+                "phase": "finished",
+                "queue_exit_code": 1,
+                "failed_target": "RelativeConicArcs.Example",
+                "reason": None,
+            },
+            service={"Result": "exit-code", "ExecMainStatus": "1", "InvocationID": "b" * 32},
+            client_returncode=1,
+        )
+        self.assertEqual(completion["failed_target"], "RelativeConicArcs.Example")
+        self.assertEqual(completion["reason"], "build failed at target RelativeConicArcs.Example")
+
+    def test_worker_supplied_reason_wins_over_derived_target_text(self) -> None:
+        completion = MODULE.completion_envelope(
+            submission=self.submission,
+            accepted={"invocation_id": "b" * 32},
+            status={
+                "format": 2,
+                "run_id": self.submission["run_id"],
+                "state": "failed",
+                "phase": "finished",
+                "queue_exit_code": 1,
+                "failed_target": "RelativeConicArcs.Example",
+                "reason": "resource profile rejected",
+            },
+            service={"Result": "exit-code", "ExecMainStatus": "1", "InvocationID": "b" * 32},
+            client_returncode=1,
+        )
+        self.assertEqual(completion["reason"], "resource profile rejected")
 
     def test_completion_derives_failed_before_status_and_abandoned(self) -> None:
         accepted = {"invocation_id": "b" * 32}

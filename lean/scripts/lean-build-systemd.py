@@ -52,6 +52,14 @@ PROFILE_FILE_DEFAULT = Path(__file__).resolve().with_name("lean-build-profiles.j
 LEGACY_STATE_ROOT_DEFAULT = Path.home() / ".cache" / "othello-lean-build"
 ACCEPT_TIMEOUT = 10.0
 
+# The shared build argv runs `nix develop --command bash -lc ...`.  A login shell re-runs
+# /etc/profile, and on NixOS that rebuilds PATH from scratch unless this sentinel is already
+# set, discarding the devshell PATH that `nix develop` just installed.  An agent shell always
+# has it exported, so the legacy queue inherits it and never observes the failure; a transient
+# unit starts from the user manager's environment and does not.  Without this the first
+# `lake build --no-build` probe dies with `lake: not found` and exit 127.
+MANAGED_UNIT_ENVIRONMENT: dict[str, str] = {"__NIXOS_SET_ENVIRONMENT_DONE": "1"}
+
 
 class OriginError(ValueError):
     pass
@@ -714,6 +722,7 @@ def transient_command(
         f"--working-directory={submission['lean_root']}",
         f"--setenv=OTHELLO_LEAN_RUN_ID={submission['run_id']}",
         f"--setenv=OTHELLO_LEAN_SUBMISSION_SHA256={submission_digest}",
+        *(f"--setenv={name}={value}" for name, value in sorted(MANAGED_UNIT_ENVIRONMENT.items())),
         "--property=KillMode=mixed",
         "--property=SendSIGKILL=yes",
         "--property=TimeoutStopSec=120s",
@@ -743,6 +752,7 @@ def validate_acceptance_snapshot(
     required_environment = {
         f"OTHELLO_LEAN_RUN_ID={submission.get('run_id')}",
         f"OTHELLO_LEAN_SUBMISSION_SHA256={submission_digest}",
+        *(f"{name}={value}" for name, value in MANAGED_UNIT_ENVIRONMENT.items()),
     }
     if not isinstance(environment, list) or not required_environment.issubset(set(environment)):
         raise StateError("transient unit environment nonce mismatch")
@@ -860,6 +870,13 @@ def completion_envelope(
         effective_state = canonical_state
         adapter_exit_code = queue_exit_code
         reason = status.get("reason")
+        if reason is None and canonical_state == "failed":
+            # The worker records the failing target but leaves `reason` for refusals and
+            # interruptions.  Derive one so a failed build is actionable from the envelope
+            # alone instead of requiring a separate status/log read.
+            failed = status.get("failed_target")
+            if isinstance(failed, str) and failed:
+                reason = f"build failed at target {failed}"
     elif status is None:
         if client_returncode == 0:
             effective_state, adapter_exit_code = "unknown", EXIT_INVALID
@@ -887,6 +904,7 @@ def completion_envelope(
         "canonical_state": canonical_state,
         "effective_state": effective_state,
         "phase": phase,
+        "failed_target": status.get("failed_target") if status is not None else None,
         "queue_exit_code": queue_exit_code,
         "service_result": service_result,
         "service_exit_code": integer_property(service, "ExecMainStatus"),
