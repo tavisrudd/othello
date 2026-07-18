@@ -24,7 +24,8 @@ authoritative list (it carries the gate distances and the dependency rulings); t
 the same numbers and does not restate them. Directory rows appear in ascending `#` across both tracks
 below. `—` marks a staging view that is not itself a paper. The public mirror and the two OEIS
 entries are **not** papers and are deliberately outside this numbering; see the planning doc's
-*Non-paper deliverables*.
+*Non-paper deliverables*. These numbers are registry positions, not working names; future candidates
+use a descriptive alias and working title until admitted here.
 
 ## Games track — impartial cap / Nofil / Node-Kayles
 
@@ -74,8 +75,9 @@ defect identity and ρ_𝒞(16) = 9*
 **5 · `complete-repair-ports`** — Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure
 - *Status:* six-part private manuscript assembled and rebuilt, with synchronized proof and novelty
-  ledgers. Structural-section assembly is complete; citation-chain review, the C220 inclusion
-  decision, immutable artifact release, and public-export gates remain before submission.
+  ledgers. Structural-section assembly is complete and C220 is **omitted by decision**. External
+  specialist citation-chain review, immutable checker/archive identity, shared-Lean public closure,
+  adequacy/provenance integration, and public-export gates remain before submission.
 - *Headline:* complete bounded repair ports unify support, coefficient, and probability layers;
   exact weighted-functional transfer and prescribed realization connect the local object to
   asymptotically good families; reliability/EXIT and pointed-Tutte structure culminate in a cubic
@@ -151,8 +153,9 @@ repositories: an evidence-based essay and practical how-to
   AI/provenance disclosure.
 - **Six-part private LaTeX manuscript (+ PDF + deterministic replays + proof/novelty ledgers +
   strict-trust Lean core):** `complete-repair-ports` — identity and structural assembly are
-  complete; specialist citation-chain review, C220 disposition, immutable artifact release, and
-  the deferred final post-C203 aggregate rebuild remain submission preflight gates.
+  complete; C220 is omitted. Specialist citation-chain review, immutable checker/archive identity,
+  shared-Lean public closure, adequacy/provenance integration, and the deferred aggregate rebuild
+  remain submission preflight gates.
 - **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
   `clebsch-hexagon-code` — the 19-page paper cites eleven fail-closed Python replays and one Singular
   calculation. Eleven named Lean roots cover the syndrome conic, `A₅` orbits, decoding and the
@@ -174,7 +177,9 @@ repositories: an evidence-based essay and practical how-to
 
 Several deliverables want a **public code/preprint URL** that does not exist yet (the repo has no
 public remote): the A344227 `%H` link and n=18 comment, the sequences' program links, and any
-arXiv posting of the manuscripts. One public mirror or preprint unblocks them together.
+arXiv posting of the manuscripts. One shared, incrementally tagged public Lean repository plus
+paper-specific fresh-history repositories supplies that prerequisite. It does not clear each
+paper's remaining adequacy/provenance, scholarly review, immutable-release, or build gates.
 
 ## Lean state at a glance
 

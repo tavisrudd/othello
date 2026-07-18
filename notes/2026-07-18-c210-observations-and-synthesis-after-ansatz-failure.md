@@ -461,7 +461,7 @@ the literature check is complete, and a carefully bounded pointer to the structu
 barrier. Do not insert the entire C210 elimination: its specialized algebra would overwhelm the
 present paper's general theorem.
 
-### Paper II: layered Baer-transversal arcs and collision obstruction
+### Working alias `layered-arcs`: layered Baer-transversal arcs and collision obstruction
 
 A coherent C210 sequel should have the following theorem-led structure:
 
@@ -483,12 +483,17 @@ The principal editorial task is to replace the phrase “C210 ansatz with parame
 `a,b,delta,p,w`” by a natural family definition in terms of two seed layers, two additive repair
 cosets, their height functions, and the trace-one compatibility condition.
 
-Drafting this paper is gated on the C297 normal-form audit, even though the cheaper C298 projection
-triage comes first as research.
+The C297 normal-form and C298 robust-collision gates are now complete. Drafting may begin once the
+relconic integrator freezes the exact `layered-arcs` claim set. The manuscript must state C210 as
+the proper common-curvature/common-linear-direction slice identified by C297; C304 owns the omitted
+moduli and must not be silently absorbed as though C210 had covered them.
 
-### Paper III: conic-involution Schreier games
+### Gated working alias `conic-scar-games`: conic-involution Schreier games
 
-C84 and C294 belong together in a different manuscript:
+C84 and C294 do not yet justify a joint manuscript. They share a conic-involution language, but no
+proved value-preserving transfer connects C84's fourth-centre density family to C294's mixed
+subfield Cayley scar. Keep the lanes and claims separate. If such a transfer theorem lands, a
+future `conic-scar-games` manuscript could use the following spine:
 
 1. off-conic centres as projection involutions of the conic;
 2. fixed/dead-point-deleted conic Schreier residuals;
@@ -498,7 +503,8 @@ C84 and C294 belong together in a different manuscript:
 6. exact statement of the unresolved abundance and `(ON)` transfer boundary.
 
 C84's failed certificate candidates are research boundaries, not an impossibility theorem unless a
-certificate language is formalized first.
+certificate language is formalized first. The existing `dihedral-schreier-node-kayles` manuscript
+continues to own the proper-small-subgroup catalogue and is not this gated synthesis.
 
 ## Literature and novelty boundary
 
@@ -1093,8 +1099,8 @@ relevant class becomes trivial or its pole divisor merges:
 
 A conceptual proof could derive the uniqueness of the generic quadratic slope and the branch
 completeness from valuations and residues, using ideal certificates only as verification. This is
-worth doing inside Paper II drafting where it materially shortens or clarifies the proof. It is not
-a standalone research gate for the exceptional-incidence program.
+worth doing inside `layered-arcs` drafting where it materially shortens or clarifies the proof. It
+is not a standalone research gate for the exceptional-incidence program.
 
 ### Missing layer 5: the correct characteristic-two geometry
 
@@ -1232,27 +1238,30 @@ are allocated as C297--C305, each explicitly recorded as a C210 follow-on.
 
 | Task | C210 follow-on | Status/dependency | Deliverable |
 |---|---|---|---|
-| C298 | robust collision matching | first | Run the bounded projection-degree/component triage, then prove a linear matching/transversal bound or isolate projection collapse |
+| C298 | robust collision matching | complete | Linear matching/transversal obstruction proved away from two exact terminal stars; committed report is the producer for C303 |
 | C305 | generic `q=512` closure | feasibility-gated | Prove the lossless quotient, benchmark a deterministic shard, and close the finite gap only within a justified resource bound |
-| C297 | normal form and moduli | after C298 triage; Paper II gate | Decide universality of the quadratic two-coset ansatz under true projective equivalence |
-| C299 | invariant/residue exposition | gated on Paper II drafting | Supply only the invariant and Artin--Schreier residue arguments that materially clarify the manuscript |
+| C297 | normal form and moduli | complete (`3955bf94`) | Proper codimension-three scope and exact projective/semilinear quotients; producer for C301/C304 and `layered-arcs` |
+| C299 | invariant/residue exposition | gated on agreed `layered-arcs` claim set | Supply only the invariant and Artin--Schreier residue arguments that materially clarify the manuscript |
 | C300 | `q=64` arithmetic classification | literature-first | Audit pencils/unions of conics and hyperfocused arcs, then settle projective/code equivalence, stabilizers, and coverage residues; keep the elliptic step to a bounded lookup |
-| C301 | exceptional-incidence dichotomy | gated on C297/C298 | Put the collision correspondence into the existing exceptional-covers framework and prove the first applicable bounded-degree layer theorem |
+| C301 | exceptional-incidence dichotomy | ready; C297/C298 complete | Put the collision correspondence into the existing exceptional-covers framework and prove the first applicable bounded-degree layer theorem |
 | C302 | carrierwise secant-defect stability | queued | Unify global defect, C174, Baer fibers, and collision energy into an equality/stability theorem |
 | C303 | partial-domain hypergraph | gated on C298/C302 | Decide whether large collision-free domains can retain relative coverage |
-| C304 | alternative towers and function architectures | gated on C297 | Audit even extensions and run a theorem-led odd-characteristic/linearized-function pilot |
+| C304 | alternative towers and function architectures | ready; C297 complete | Begin with C297's omitted constant-p moduli, then audit even extensions or run one theorem-led alternative-function pilot |
 
-Start with C298's bounded projection triage. C305 may proceed independently only through its
-lossless-chart and benchmark gates; its full sweep is not presumed feasible. C297 follows the C298
-triage and remains mandatory before Paper II drafting because it fixes the breadth and invariant
-description of the theorem. C299 is drafting support, not a gate for C301. C301 begins by importing
-the exceptional-covers classification and consumes the C297 normal-form and C298 projection
-lessons. C303 consumes the robust collision and stability outputs. C304 must not reopen undirected
+The parallel-ready set is C300's literature phase, C301, C302, C304, and C305's lossless-chart and
+benchmark gates; a full C305 sweep is not presumed feasible. C299 is drafting support after the
+integrator fixes the `layered-arcs` scope, not a gate for C301. C301 consumes the committed C297
+normal form and C298 projection theorem. C303 consumes C298 plus C302 and treats the two terminal
+stars separately. C304 begins with C297's omitted constant-p moduli and must not reopen undirected
 polynomial coefficient mining.
 
-## Recommended immediate deliverable
+## Recommended immediate deliverables
 
-The next relconic task is C298 and its first milestone is scoped as follows:
+Parallel workers may take C300's literature phase, C301, C302, C304, or C305's feasibility phase
+on distinct task-owned paths. The lane integrator alone updates the shared handoff; C303 remains
+gated on C302, and C299 waits for an agreed `layered-arcs` drafting scope.
+
+The completed C298 milestone was scoped as follows:
 
 > Compute the degrees of the `t`, `r`, and `r+u` maps on every genuine collision component;
 > classify constant-coordinate components and orientation/repeated-point duplicates; then decide
@@ -1260,8 +1269,8 @@ The next relconic task is C298 and its first milestone is scoped as follows:
 
 This bounded triage decides whether partial domains remain viable inside the certified family. A
 robust bounded-degree projection opens the `Omega(q)` matching proof; concentrated fibers identify
-the exact escape locus. It must not infer a matching bound from point count alone. C297 remains the
-next manuscript-scope gate after this triage.
+the exact escape locus. It must not infer a matching bound from point count alone. C297 has now
+closed the manuscript-scope gate.
 
 ## Final vibe assessment
 
@@ -1270,7 +1279,7 @@ obstruction, finite construction, and structural calculus have not yet been dist
 best forms.
 
 The negative theorem is strong because it closes every visible algebraic loophole in the selected
-sharp-scale architecture; C297 still has to determine how canonical that architecture is. The
+sharp-scale architecture; C297 has now proved exactly how noncanonical that architecture is. The
 `q=64` object is strong because it exposes an unoptimized finite phenomenon. Classical conic
 matchings provide a useful shared carrier for geometry, game value, repair, continuation, and
 coding interpretations, but the new content must be an exact identity or reconstruction theorem,

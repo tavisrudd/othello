@@ -133,3 +133,10 @@ The reported general and Q25 repair theorems may be used with the cautious liter
 the [C143 literature report](../2026-07-14-c143-literature-positioning.md). Do not make a
 historical-first claim. Do not present 32 as the exact semantic minimum, or the five classes as a
 complete extremal classification, until C151's residual-cover and orbit-completeness bridge passes.
+
+While C151 remains live, the `alt-orbit-repair` integrator is the sole writer of
+`papers/equivariant-robust-completion/` and its release boundary. C270/C287 may inventory metadata
+and prospective shared-Lean targets read-only, but the release coordinator must not freeze or edit
+the manuscript around an unfinished theorem boundary. C152 becomes a release gate only if its
+exchange-graph claims are adopted. Public-release preparation resumes after the lane integrator
+records the final adopted theorem set.

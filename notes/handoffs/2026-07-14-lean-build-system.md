@@ -66,3 +66,13 @@ The `lean-proof-engineering-at-scale` methods-paper idea and its five upgrade ga
 `papers/papers-index.md` and `done/2026-07-14-lean-build-system-archive.md`. C allocation is gated on
 a manuscript outline and a measurable contribution beyond repository-specific operating instructions
 per gate 5; none is allocated here until that gate is met.
+
+## Public shared-Lean extraction
+
+C287 owns the fresh-history shared Lean repository's reviewed manifests, incremental source
+extraction, exact target builds, axiom audits, clean-checkout validation, and artifact
+pack/restore portability. The first tag is the exact `FiniteGeom` + mirror closure; later tags add
+reviewed paper-facing closures without copying Lean into paper repositories. C270 (`nofil`) owns
+public identity, metadata, DOI/OEIS and eventual user-authorized remote actions. C287 must not
+create remotes, publish, or push; C270 must not copy sources or run builds. All real validation is
+serialized through the build-owner lock and unattended queue.

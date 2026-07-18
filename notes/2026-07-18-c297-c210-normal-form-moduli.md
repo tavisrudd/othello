@@ -33,10 +33,11 @@ There are two separate conclusions.
    first condition is projectively visible through the unordered pair `{A_1,A_2}`.
 
 Thus the completed C210 obstruction remains exactly correct in its committed scope, but it is not
-a classification theorem for all full quadratic trace-compatible two-coset architectures.  Paper
-II must define the C210 family as the common-curvature, common-linear-direction slice (2), rather
-than as *the* general quadratic two-coset normal form.  The omitted moduli are genuine input for
-C304, while the quotient below clears the C297 gate for C301.
+a classification theorem for all full quadratic trace-compatible two-coset architectures.  The
+`layered-arcs` manuscript must define the C210 family as the common-curvature,
+common-linear-direction slice (2), rather than as *the* general quadratic two-coset normal form.
+The omitted moduli are genuine input for C304, while the quotient below clears the C297 gate for
+C301.
 
 This report proves a normal-form and moduli statement.  It neither constructs an arc after the
 seed--repair gates nor weakens any collision theorem already proved inside C210.
@@ -362,5 +363,5 @@ The lossless one-seed scaling distinction is independently recorded in
 ## Vibe check
 
 This is a useful negative scope result, not a setback.  C210 remains a strong obstruction on a
-natural low-dimensional slice, while C297 prevents Paper II from overstating that slice as a
+natural low-dimensional slice, while C297 prevents `layered-arcs` from overstating that slice as a
 classification theorem and exposes a small, theorem-led set of omitted moduli for the next attack.

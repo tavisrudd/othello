@@ -38,6 +38,15 @@ The first arrow is open. C84 abundance alone does not establish `(ON)`.
 
 Do not claim progress on these from a C84 density result without the corresponding theorem.
 
+## Parallel coordination boundary
+
+C294's mixed subfield Cayley scar and C84's fourth-centre density family share a failed internal
+pairing language, not a proved reduction. Neither lane waits on the other. A future arithmetic
+character sieve is a one-shot `cap` diagnostic only after a new task preregisters the rooted
+convention, invariant library, Boolean grammar/depth/size, zero handling, stratum budget, and
+discovery/holdout fields before labels are read. It does not reopen C84, certify P, prove density,
+or supply the separate exchange/small-bad-set arrow to `(ON)`.
+
 Detailed odd-plane context is in the parent
 [cap handoff](../2026-07-06-projective-cap-game-handoff.md) and the
 [program integration report](../../2026-07-12-conic-involution-residual-graphs.md).

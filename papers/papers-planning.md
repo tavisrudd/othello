@@ -25,25 +25,28 @@ A directory ≠ a paper. See the resolved decomposition next.
 Fable review resolved six (+1); **Clebsch was added 2026-07-13**, after that review, as a spin-out of
 the Arcs q=11 material.
 
-**One numbering scheme, repo-wide: papers are numbered 1–7 in ship order, ascending.** The list below
-is the authoritative one — `papers-index.md` carries the same numbers on its directory rows and
-points here; no other doc keeps a second ordered copy. Ship order is set by
-formalization-to-full-trust distance, adjusted for the dependencies below.
+**One numbering scheme, repo-wide: the admitted papers are numbered 1–7 in ship-priority order,
+ascending.** The list below is the authoritative one — `papers-index.md` carries the same numbers on
+its directory rows and points here; no other doc keeps a second ordered copy. The numbers are
+registry positions, not working names or a hidden dependency graph. New candidates use a working
+alias and title until admitted. Priority reflects paper-specific verification and release readiness,
+adjusted only by the explicit ownership edges below.
 
 **1 · Games flagship** — `nofil-finite-geometry-outcomes`
 - *What:* folds sum-free ℤₙ + affine AG(n,q) + projective mirror outcomes + the
   boundary/sharpness negatives into one classification.
-- *Gate:* core P-theorems done; owes the sum-free law, boundary negatives, capacity-2
-  sharpness, the Scharlau/Witt lemma.
+- *Gate:* core P-theorems done; C265--C268 close the sum-free law, boundary/sharpness negatives,
+  Scharlau/Witt support, novelty, and Lean trust ledger; C269 then performs the mixed-verification,
+  adequacy/provenance, adversarial, and cold-prose release pass.
 
 **2 · Dihedral Schreier catalogue** — `dihedral-schreier-node-kayles`
 - *What:* **extended with the generalized-D₂ₘ family** before shipping; retitle toward
   "finite subgroups of PGL₂(q)".
-- *Gate:* Φ_T and the finite ½-density core are Lean-formalized (C262) and the D₂ₘ additions
-  landed with end-to-end machine verification (C263, retitled "Dihedral Subgroups of PGL₂(q)";
-  deferrals now live in §15). Remaining: the C278 single-axiom conditional density closure and the
-  C264 LaTeX + adversarial/cold-prose cycle. (The lone `native_decide` is cleared: kernel `decide`
-  since 2026-07-12.)
+- *Gate:* Φ_T and the finite ½-density core are Lean-formalized (C262), the D₂ₘ additions landed
+  with end-to-end machine verification (C263), and C278 records the exact one-axiom conditional
+  density boundary. Remaining: the single-writer C264 rebuild/review chain, including C281's §9
+  correction, the mixed-verification map, adequacy/provenance, reproducibility, adversarial review,
+  and cold prose. (The lone `native_decide` is cleared: kernel `decide` since 2026-07-12.)
 
 **3 · Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9** —
 `arcs_complete_outside_conic`
@@ -73,25 +76,31 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   code, plus quantitative gaps, decoder/Brianchon reconstruction, intrinsic support chirality,
   uniqueness of `q=11`, the all-field Clebsch formula, and the `4≤k≤7` boundary. Added
   2026-07-13, post-review.
-- *Gate:* the 17-page manuscript and local mixed-verification package are closed. It ships after 3
-  by the publication-allocation ruling below, but is mathematically self-contained; the remaining
-  operational gate is an immutable artifact release.
+- *Gate:* the manuscript and local mixed-verification package are closed. It ships after `arcs` by
+  the publication-allocation ruling below, but is mathematically self-contained. Remaining:
+  repository-policy adequacy/provenance integration, an exact shared-Lean commit/target pin, and
+  immutable artifact release (C182). C222 is an optional formal upgrade unless its claims are
+  labelled Lean-formalized.
 
 **5 · Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure** *(conditional)* —
 `complete-repair-ports`
 - *What:* the complete bounded port and its support/coefficient/probability layers, exact
   weighted-functional transfer, prescribed realization, reliability/EXIT, pointed-Tutte
   structure, and cubic versus quartic-nucleus/harmonic flagships.
-- *Gate:* the private identity migration and six-part manuscript assembly are complete. The C220
-  inclusion decision, external specialist citation-chain review, an immutable artifact release,
-  and the final post-C203 aggregate `RepairCodes` rebuild remain.
+- *Gate:* the private identity migration and six-part manuscript assembly are complete; C220 is
+  omitted by decision. External specialist citation-chain review, the mixed-verification and
+  adequacy/provenance pass, immutable checker/archive identity, exact shared-Lean pinning, and the
+  final aggregate `RepairCodes` rebuild remain.
 
 **6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
   theorem, yielding pair extension for every prime-power base order `s≥5`; generic completion-core
   material is outside the submission.
-- *Gate:* theorem spine and all order-five profiles Lean-built; bounded general-criterion priority
-  search complete; LaTeX source, bibliography, clean PDF, and internal referee closeout complete.
+- *Gate:* the reported theorem spine and all order-five profiles are Lean-built; bounded
+  general-criterion priority search, LaTeX source, bibliography, clean PDF, and internal referee
+  closeout are complete. The same manuscript remains owned by `alt-orbit-repair` while C151 settles
+  the exact Q25 minimum/equality boundary; C152's exchange graph is a release gate only if adopted.
+  Release preparation stays frozen until that owner records the adopted theorem set.
 
 **7 · Continuation-graph rigidity, N1 only** — `continuation-graph-rigidity`
 - *What:* N2 demoted to remarks.
@@ -113,16 +122,18 @@ formalization gate in the paper sense, and no novelty seam. Numbering them in th
 papers is what previously made a bare "#4" mean *Arcs* in one doc and *Equivariant/Baer* in another,
 so they are named, not numbered.
 
-- **Public mirror + first extraction** — no Lean gate; **do this first**. It unblocks everything
-  below and above: both OEIS links, any arXiv posting, the A344227 n=18 comment, and the
-  public-artifact citation the *Arcs vs Nofil* ruling depends on.
+- **Public mirror + first extraction** — prepare first under the C270/C287 split. C287 must clear
+  the exact source-manifest, build, axiom, clean-checkout, and portability gates before C270 performs
+  any explicitly authorized public release action. The resulting stable artifact unblocks both
+  OEIS links, arXiv postings, the A344227 n=18 comment, and the citation required by the
+  *Arcs vs Nofil* ruling; it does not replace paper-specific gates.
 - **OEIS A344227** (priority stamp now) — computational (`getK` pattern), no Lean gate.
 - **OEIS sum-free ℤₙ** — the vehicle for the sum-free law per D1; never a standalone paper.
 
 ### The decision rulings
 
 - **D1 — FOLD (not split).** Projective mirror outcomes become the flagship's projective section; no
-  standalone projective "Paper 2." The nontrivial object is the *classification with its exact method
+  standalone `projective-mirror` manuscript. The nontrivial object is the *classification with its exact method
   boundary* (mirror ⇒ P across ℤₙ / AG(n,q) / PG(n,2) / elliptic / even-q planes / hyperbolic quadrics,
   **and** where it dies — parabolic/Hermitian, capacity ≥ 3); that object only exists in one paper, and
   a standalone projective paper is "the same elementary mirror trick on more boards." **No standalone
@@ -225,11 +236,11 @@ mis-peg, not a real dependency:
 living in a directory named for `arcs`. Worth a Lean-side rename or move; it changes no proof and
 gates nothing.
 
-**Highest-leverage first move:** stand up the public-artifact spine — extract the first public repo
-(tagged `FiniteGeom` base + the Lean-complete mirror outcomes), mint the Zenodo DOI, submit the
-A344227 priority-stamp subset. Cheap; unblocks four deliverables at once (both OEIS links, arXiv
-postings, the n=18 comment); starts the priority clock on the refutation; and forces the extraction
-machinery to exist before any paper depends on it.
+**Highest-leverage first move:** prepare the public-artifact spine under the C270/C287 split. C270
+fixes identity, metadata, and proposed DOI/OEIS links while C287 validates the first exact
+`FiniteGeom` + mirror closure, clean checkout, axiom boundary, and portable artifact. Minting a
+DOI, submitting OEIS material, creating a remote, or pushing remains a separate explicit public
+action after those gates pass; planning the spine does not authorize it.
 
 ## Writing guardrails (from the Fable review)
 
@@ -282,43 +293,46 @@ The research is human-directed (program lead), but the mathematics, code, and pr
 agent-generated; the lead directs the program and cannot defend the proofs at referee depth. This is a
 first-class design constraint, not a footnote.
 
-**Lean is the trust anchor.** For a machine-checked result, proof *validity* is referee-verifiable
+**Lean is the trust anchor for Lean-labelled claims.** For a machine-checked result, proof
+*validity* is referee-verifiable
 without the author understanding the mathematics. The lead can confirm the mechanical half — build
 succeeds, `sorry`-free, `#print axioms` clean — unaided. The residual is **statement adequacy**: does
 the Lean theorem actually say what the paper claims (not a vacuous or mis-stated version)? That still
 needs mathematical judgment, handled below.
 
-**Formalization gate (release policy).** **Every lemma and proof is Lean-formalized to the project's
-full trust standard (`lean/TRUST.md`) before that paper is published** — not merely `sorry`-free, but:
+**Verification gate (release policy).** Every published claim declares one exact trust route in the
+paper's verification map: full-trust Lean, conceptual proof with named classical imports, exact
+replay/certificate, or a stated combination. A paper may ship with a mixed boundary; it may not
+blur the boundary or call a checker-/citation-backed statement Lean-formalized.
+
+Every claim presented as Lean-formalized meets the full `lean/TRUST.md` standard:
+
 - `#print axioms` clean — only `propext, Classical.choice, Quot.sound`; **no `sorryAx`, no
   `native_decide`**;
 - the formal *statement adequate* to the published claim — definitions anchored to standard / mathlib
   objects where possible, adequacy argued, not self-asserted;
 - a **trust-chain note** per result (what Lean certifies, what is deferred to differential tests, what
-  stays trusted);
-- nontrivial proofs developed with the named-expert rigor (CLAUDE.md §Lean).
+  stays trusted); and
+- nontrivial proofs developed with the named-expert rigor (`AGENTS.md` §Lean).
 
-The formalization backlog is the **critical path**; the per-paper Lean libraries in
-`../notes/handoffs/2026-07-11-lean-formalization-plan.md` are release-blocking. One standing adequacy
-caveat: mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome semantics (`win`/`grundy`) are
-self-contained and **not yet anchored to a cited `Impartial`/`grundyValue`** — adequacy for the game
-papers rests on the standard-recurrence argument + literature values + differential tests until
-`CombinatorialGames` bumps to ≥ `v4.32` (`lean/TRUST.md` Phase 4). Status against the gate:
-- *Closest:* the `nofil` mirror⇒P outcomes (P-theorems Lean; boundary/sharpness negatives + capacity-2
-  sharpness still paper-only) and the completion δ(C)=τ / coding base.
-- *Complete at the formalization gate:* arcs, including the defect/equality/stability chain,
-  explicit asymptotic inequality, projective transport, finite witnesses, and q=16 exhaustive
-  covering/leaf-obstruction certificate.
-- *Outstanding (blocks release):* continuation, completion beyond δ=τ, the `nofil` boundary
-  negatives + capacity-2 sharpness, the dihedral paper-level theorems
-  (Φ_T, ½-density). The formerly isolated `native_decide` (`KleinFourBridge.explicit_pairProducts`)
-  is cleared: `KleinFourBridge.lean` now uses kernel `decide` (2026-07-12).
-- *Computational:* queens/OEIS and S₄/A₅ nimbers follow the `getK` pattern — Lean-proved recurrence
-  plus a reproducible differential-tested solver and trust-chain note. The ρ_𝒞 values use a
-  different trust path: kernel-checked coordinate witnesses, and at q=16 locally checked transition
-  and leaf-obstruction certificates that form an exhaustive covering list. Independent generators
-  and class counts are provenance only. **Not** `native_decide`; finite propositions enter the trust
-  base only through kernel reduction.
+Formalization is therefore paper-specific critical work, not a global requirement that every proof
+in every paper enter Lean. The per-paper verification map is release-blocking. One standing adequacy
+caveat remains: mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome semantics
+(`win`/`grundy`) are self-contained and **not yet anchored to a cited
+`Impartial`/`grundyValue`**. Game-paper adequacy rests on the standard-recurrence argument,
+literature values, differential tests, and the printed adequacy appendix until
+`CombinatorialGames` catches up.
+
+Current boundaries:
+
+- `arcs` has a full-trust Lean headline chain plus kernel-checked finite certificates.
+- `clebsch` has a closed mixed map: conceptual/classical proof, two explicitly isolated Dye
+  assumptions, deterministic replays, and named Lean roots.
+- `complete-ports` has a kernel-checked core and explicitly mapped manuscript/citation/replay layers.
+- `nofil`, `dihedral`, and `continuation` retain their own stated formalization and adequacy gates;
+  no other paper inherits those gates merely through ship order.
+- Queens/OEIS and finite nimbers use the `getK` pattern: a proved recurrence plus reproducible,
+  differential-tested computation, never `native_decide` rhetoric.
 
 **Adequacy appendix (policy).** Every paper prints (1–2 pp.) the Lean statements of its headline
 theorems and the handful of definitions they bottom out in, verbatim — turning statement-adequacy (the
@@ -353,21 +367,28 @@ preempt AI-slop skepticism; do not overclaim novelty ahead of the prior-art audi
 
 ## Extraction & DOI plan
 
-This research repo stays private (many leads still open); publish by **extracting** clean,
-self-contained repos per paper.
+This research repo stays private (many leads still open); publish through clean, reviewed
+fresh-history repositories.
 
-- **Shared `FiniteGeom` = its own tagged public repo, pinned by commit** — not copied per-paper
-  subsets. Copied subsets drift, and drift in shared definitions silently invalidates the cross-paper
-  adequacy story (one trust-chain note pointing at diverging definitions is worse than none).
-- **Per-paper public repo** = manuscript + its Lean library (pinning the `FiniteGeom` tag) + the
-  minimal solver/verifier + certificates / b-files / data + a reproducibility README + the adequacy
-  appendix source.
+- **One shared public Lean repository, incrementally tagged.** Its first reviewed tag contains the
+  exact `FiniteGeom` + mirror closure needed by the first releases. Later tagged commits add exact
+  paper-facing closures. The source is never copied into paper repositories, and the export unit is
+  never the private `lean/` tree.
+- **Per-paper public repo** = manuscript + minimal solver/verifier + certificates / b-files / data +
+  reproducibility README + adequacy/provenance sources. It pins one exact shared-Lean commit and
+  public target list; it contains no duplicate Lean library.
+- **Role split:** C270 (`nofil`) owns public repository identity, metadata, release/DOI/OEIS and
+  paper coordination. C287 (`build-sys`) owns the reviewed source manifest, extraction, exact target
+  gates, builds, axiom audits, clean-checkout validation, and artifact portability. C270 does not
+  copy or build; C287 does not create remotes, publish, or push.
 - **DOI:** Zenodo ↔ GitHub-release integration mints a versioned DOI (+ concept DOI); arXiv for the
   manuscripts; cross-link. Versioned DOIs are what let "disclose the adequacy caveat now, anchor to
   mathlib later" be a respectable posture. This also clears the **public-artifact blocker** (OEIS `%H`,
   arXiv code links).
-- **Order:** driven by formalization readiness (see *Papers — decomposition and ship order*), not "most finished
-  manuscript" — the first extraction is the `FiniteGeom` base + the Lean-complete mirror outcomes.
+- **Order:** the numbered list is planning priority, not a hidden mathematical dependency graph.
+  `arcs -> clebsch` is the hard publication-allocation edge; `nofil <-> arcs` is an ownership seam,
+  not a submission-order dependency. The first shared-Lean tag is the exact `FiniteGeom` + mirror
+  closure, validated by C287 before C270 performs any public release action with explicit authority.
 
 ## Novelty gates & loose ends
 

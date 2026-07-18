@@ -59,8 +59,9 @@ sharpness-negative release gate, a cleared novelty audit, and adversarial + cold
   harden or retain the qualified language per the audit's instruction.
 - **C268** — create the `lean/TRUST.md`-standard ledger for `lean/ProjectiveCap/` + `lean/CapGame/`
   (axiom audit, no-`sorry`/no-`native_decide` statement, adequacy notes).
-- **C269** — full-manuscript pass to the arcs/clebsch bar: complete LaTeX+PDF, adversarial review,
-  repeated cold-prose review.
+- **C269** — after C265--C268, run the full-manuscript pass to the arcs/clebsch bar: complete
+  LaTeX+PDF, explicit mixed-trust verification map, verbatim adequacy appendix for headline Lean
+  statements, AI/provenance section, adversarial review, and repeated cold-prose review.
 
 ## Cross-lane relationships (foreign; do not re-peg without approval)
 
@@ -77,7 +78,9 @@ the manuscript; the `cap` lane owns the open math:
 The odd-plane kernel is the flagship's open-frontier section only (ruling D4); it does not gate the
 projective outcomes write-up.
 
-The public-mirror / first-extraction deliverable (C270) is owned by this lane: the first extraction
-is the `FiniteGeom` base plus the Lean-complete mirror outcomes, and it gates this paper's
-public-artifact citation per the *Arcs vs Nofil* ruling. Re-pegged from `[build-sys]` on user
-approval, 2026-07-17.
+The public-identity / first-release coordination deliverable (C270) is owned by this lane. It owns
+repository identity, metadata, DOI/OEIS links, paper coordination, and eventual user-authorized
+remote actions. C287 in `build-sys` owns the reviewed manifest, exact `FiniteGeom` + mirror source
+closure, extraction, build/axiom gates, clean-checkout validation, and portability. C270 does not
+copy or build; C287 does not create remotes, publish, or push. The `nofil`/`arcs` relationship is an
+ownership seam, not a submission-order dependency.

@@ -58,9 +58,13 @@ The corrected private draft has passed three independent paragraph-by-paragraph 
 same-reader resolution checks, and the user has chosen to omit C220. The paper repository,
 disk-backed destination, and MIT license are approved. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md) and remains separately build-system-owned.
-Allocate the release-preparation pass only after the public checker/archive identity and
-shared-Lean export gates are resolved. Do not initialize, copy, publish, or push before those gates.
+Allocate the release-preparation pass only after the external specialist citation-chain review,
+public checker/archive identity, and shared-Lean export gates are resolved. That pass must add the
+explicit mixed-trust verification map, verbatim adequacy appendix for headline Lean statements,
+and AI/provenance section before fresh-history export. Do not initialize, copy, publish, or push
+before those gates.
 
 Public export remains gated on the public checker/archive identity and C287 shared-Lean export. The
+paper repo pins an exact validated shared-Lean commit and contains no copied Lean sources. The
 approved repository metadata and private rename do not authorize repository initialization, copy,
 publication, or push.

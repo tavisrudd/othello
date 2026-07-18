@@ -50,6 +50,19 @@ until the paywalled Metsch / Drake–Sané read clears.
 - **C273** — `ContinuationRigidity` Lean library per the Phase 3 plan; do not re-decide the plan.
   The recorded collaborator route is the fallback if formalization stalls (per the #7 gate).
 
+## Crowns consumer contract
+
+- `continuation` owns C271--C273, the N1 statement, graph convention, stable `q>=13` range,
+  exceptional boundary, manuscript, and Lean implementation.
+- General C295 reconstruction consumes the committed C272 N1 package read-only and must not widen
+  C272 or C273. C273 formalization is not a prerequisite to specify C295's intrinsic recovery
+  predicates.
+- The bounded q=11 Clebsch matching-decomposition pilot lies below N1's field range and may proceed
+  independently in `crowns` once its queue gate is recorded. It is not evidence for the general
+  `q>=13` theorem by itself.
+- Any C295 result proposed for this manuscript returns to the continuation owner for integration;
+  crowns agents do not edit the paper or this handoff.
+
 ## Collaborator route
 
 The #7 gate records a collaborator route as the fallback if the (hardest-in-the-portfolio)

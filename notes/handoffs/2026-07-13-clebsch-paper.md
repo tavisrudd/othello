@@ -13,8 +13,9 @@
 
 Finish the Clebsch-hexagon paper as a self-contained, honestly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **manuscript and local reproducibility closed; immutable archival release still
-required**.
+Current assessment: **manuscript and local reproducibility closed; mixed-verification policy
+integration, exact shared-Lean pinning, the `arcs` publication-allocation edge, and immutable
+archival release remain**.
 
 Authoritative manuscript and checkers:
 [`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/).
@@ -41,7 +42,14 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 ## Submission-critical work, in order
 
-1. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
+1. Apply the repository mixed-verification policy: keep the existing conceptual/replay/Lean
+   boundary explicit, print the adequacy appendix for the headline Lean statements, and add the
+   final AI/provenance disclosure.
+2. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
+   sources into the paper repository.
+3. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
+   this paper's release pass.
+4. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
    stable DOI; cite the artifact from the paper.
 
 ## Completed bounded paper upgrade
@@ -59,15 +67,18 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
 has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 
-## Desired formal closure
+## Optional formal upgrade
 
-- **C222 active:** Lean-formalize precisely the new C211 `A3/H3` coordinate bridge,
+- **C222 active but not release-blocking under the mixed-verification policy:** Lean-formalize
+  precisely the new C211 `A3/H3` coordinate bridge,
   intersection ledgers, complement counts, and decoder-stratum consequences. This is gated on a
   compact theorem-level development: do not generate large certificate trees, and re-scope or stop
   if kernel closure would require them. The compact geometry leaf now passes guarded elaboration;
   its sole uncommitted path, `lean/RelativeConicArcs/ReflectionArrangementDecoding.lean`, awaits a
   focused build after the foreign Q25 owner releases the shared Lean lock. Task boundary and success criteria:
   [`2026-07-16-c222-lean-a3-h3-closure.md`](../2026-07-16-c222-lean-a3-h3-closure.md).
+  If the paper labels these bridge claims Lean-formalized, C222 becomes a gate for that label;
+  otherwise the verification map must retain their conceptual/replay route.
 
 ## Verification map
 
@@ -97,6 +108,13 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 This lane owns the Clebsch manuscript, its checker scripts, Clebsch reports, and its exact queue
 rows. It does not own Baer/alternate-orbit extensions or the gem-mining lane. Treat their working
 changes as foreign unless the user explicitly switches or expands scope.
+
+The `crowns` C295/C296 work may consume the committed q=11 rigidity, code, graph, and foil artifacts
+read-only. The immediate implication “uncoloured continuation graph has twelve vertices, therefore
+Clebsch” is a recognition corollary and does not widen this manuscript. A genuine C295 result must
+recover the matching/port decomposition intrinsically; any proposed paper import returns to the
+`clebsch` owner. The `clebsch-next` C212 arrangement/decoder reconstruction remains distinct from
+C295 continuation-to-matching recovery and coordinates only if C295 reaches the `H3`/decoder layer.
 
 ## Closed-history pointers
 

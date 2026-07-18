@@ -7,8 +7,9 @@
 ## Goal
 
 Bring `papers/dihedral-schreier-node-kayles` (Node Kayles on fixed-point-deleted Schreier graphs
-from conic involutions) to the arcs/clebsch release bar: LaTeX+PDF, full-trust Lean, adequacy
-appendix, provenance section, adversarial and cold-prose review, and a cleared novelty audit.
+from conic involutions) to the arcs/clebsch release bar: LaTeX+PDF, an explicit mixed-verification
+map, `lean/TRUST.md` closure for every Lean-labelled claim, adequacy appendix, provenance section,
+adversarial and cold-prose review, and a cleared novelty audit.
 
 ## Current status
 
@@ -33,8 +34,8 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   `notes/2026-07-17-c284-dihedral-polyhedral-coset-templates.md`.
 - Discovery track: `notes/2026-07-18-dihedral-discovery-track.md` (started 2026-07-18).
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
-  satisfied by C263, escape hatch not needed), and the release policy (formalization gate,
-  adequacy appendix, provenance section).
+  satisfied by C263, escape hatch not needed), and the mixed-verification release policy
+  (claim-route map, adequacy appendix, provenance section).
 - C264 architecture DECIDED (Fable, 2026-07-17): spine proposal adopted with four changes (density
   theorem stays a named §7 headline with the single-axiom sentence; §5 compression is
   arithmetic-only, structural proofs intact; §8 boundaries absorb C283's wild result; §6 leads with
@@ -131,8 +132,8 @@ from the old manuscript's section order.
 |---|---|---|
 | **C306 structural rebuild** | Source manuscript; Fable ruling; C263 pair-family report; runbook migration/non-loss table. No later report prose is to be integrated speculatively in this phase. | `notes/YYYY-MM-DD-c306-dihedral-structural-rebuild.md` |
 | **C307 correctness integration** | C281 correction/census; C284 templates; C289 `rho` split and mirror lemmas; C290 proved arithmetic; C278 density; C283 wild pair; C288 validation census; C260 replay boundary. | `notes/YYYY-MM-DD-c307-dihedral-correctness-integration.md` plus a claim/source ledger referenced by the paper. |
-| **C308 apparatus/trust** | C261 novelty audit R1–R5; C262 formalization report; C278 axiom boundary; C260/C284 computation boundaries; `lean/DihedralSchreier/README.md`; all citations already present in the manuscript. | `notes/YYYY-MM-DD-c308-dihedral-scholarly-trust.md` |
-| **C309 artifact gate** | C306–C308 closing reports; paper README and build instructions; evidence/regeneration commands in C260/C281/C284/C288/C289/C290; `lean/DihedralSchreier/README.md`. Read `lean/AGENTS.md` before any Lean operation. | `notes/YYYY-MM-DD-c309-dihedral-artifact-reproducibility.md` |
+| **C308 apparatus/trust** | C261 novelty audit R1–R5; C262 formalization report; C278 axiom boundary; C260/C284 computation boundaries; `lean/DihedralSchreier/README.md`; all citations already present in the manuscript. | `notes/YYYY-MM-DD-c308-dihedral-scholarly-trust.md`, including the exact mixed-verification map, adequacy appendix, and AI/provenance boundary. |
+| **C309 artifact gate** | C306–C308 closing reports; paper README and build instructions; evidence/regeneration commands in C260/C281/C284/C288/C289/C290; `lean/DihedralSchreier/README.md`. Read `lean/AGENTS.md` before any Lean operation. | `notes/YYYY-MM-DD-c309-dihedral-artifact-reproducibility.md`, including the exact shared-Lean commit/target pin and no copied Lean source. |
 | **C310 adversarial review** | Built C309 source/PDF; C307 claim ledger; C308 trust/provenance boundary; the runbook's correctness-hazard list. Review the paper as submitted, not the discovery reports as a substitute. | `notes/YYYY-MM-DD-c310-dihedral-adversarial-review.md` with finding, severity, disposition, and fixing commit for every item. |
 | **C311 cold prose/release** | Corrected C310 source/PDF and closed issue ledger; title/abstract ruling; paper registry and staging README. | `notes/YYYY-MM-DD-c311-dihedral-cold-prose-release.md` recording two separated full reads and final artifact identity. |
 

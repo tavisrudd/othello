@@ -11,10 +11,18 @@ repositories. It is not a publication, fork, subtree, or history-filtered copy o
 monorepo, and it is not a per-paper Lean bundle. Each paper records only a shared-repository commit
 pin, exact public target list, public proof ledger, and artifact provenance.
 
-The export unit is the reviewed union of paper-facing import closures. It is never the private
-`lean/` directory. For `complete-ports`, the initial logical requests are `RepairCodes` and
-`RepairPorts.FunctionalCost`; C287 must replace those names with exact public module closures and
-aggregate gates before any source is copied.
+The shared repository evolves through reviewed, incrementally tagged commits. The first tag is the
+exact `FiniteGeom` + mirror closure required by the first release set; later tags add the exact
+closures of further papers. C287 owns manifests, extraction, builds, axiom audits, clean-checkout
+validation, and artifact portability. C270 owns public repository identity, metadata,
+release/DOI/OEIS coordination, and any eventual user-authorized remote action. C287 does not create
+remotes, publish, or push; C270 does not copy sources or run builds.
+
+Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
+tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed
+manifest and green aggregate closure. For `complete-ports`, the logical requests are `RepairCodes`
+and `RepairPorts.FunctionalCost`; C287 must replace those names with exact public module closures
+and aggregate gates before those sources are copied.
 
 ## Preconditions
 
@@ -25,15 +33,18 @@ aggregate gates before any source is copied.
    identity or license.
 3. Confirm that `~/src/papers/lean` is new and empty. Do not initialize Git, copy files, or attach a
    remote during planning.
-4. Coordinate with the existing public-`FiniteGeom` extraction work and the build-system owner.
-   Do not duplicate or bypass an already reviewed public module boundary.
+4. Coordinate with C270 and the build-system owner. C270 supplies the approved public identity and
+   release metadata; it does not define or copy the source closure. Do not duplicate or bypass an
+   already reviewed public module boundary.
 
 ## Execution phases
 
-### 1. Freeze the source contract
+### 1. Freeze the first-tag source contract
 
-- Collect each paper's declared logical Lean targets and compute their exact reverse-complete
-  source closures with the build-system-owned import tooling.
+- Collect the first release set's declared logical Lean targets and compute their exact
+  reverse-complete source closures with the build-system-owned import tooling. Record deferred
+  paper closures explicitly; do not include them merely because the repository will eventually
+  need them.
 - Review the union plus explicit infrastructure additions: `lean-toolchain`, Lake configuration,
   guarded public build wrappers, license, README, target manifest, and proof/provenance schema.
 - Classify every candidate as exact source copy, public rewrite, generated metadata, or exclusion.
@@ -81,10 +92,17 @@ aggregate gates before any source is copied.
 - Release a paper only after its pinned commit and target gates pass independently in the public
   layout.
 
+### 6. Add later paper closures
+
+- Start from the last validated public tag and a new reviewed closure manifest.
+- Add only the newly admitted exact sources and required public rewrites; re-run the full aggregate
+  clean-checkout and axiom gates for the enlarged repository.
+- Mint a new tag only after portability passes. Existing paper repositories keep their old exact
+  pins unless they deliberately adopt the new tag and repeat their public gates.
+
 ## Completion evidence
 
 C287 closes only with a reviewed source manifest, fresh-history source commit, exact public gate
 map, clean-checkout validation, axiom audit, artifact pack manifest, independent restore/no-build
 check, and a documented failure boundary. Planning this sequence does not authorize repository
 creation, copying, building, packing, publication, or push.
-
