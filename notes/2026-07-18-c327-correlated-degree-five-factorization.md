@@ -7,7 +7,8 @@
 **Status:** active; theorem-led analysis of C316's two seed--seed--repair eliminants, with no large
 field or coefficient census.  The first common pentic normal form and shared branch identity are
 proved below, together with generic geometric monodromy `S5` for each pentic separately.  Their
-shared resolvent and trace-cover correlation remain open.
+generic splitting fields are disjoint and retain joint monodromy `S5 times S5` after the legality
+Artin--Schreier base changes.  Constant fields and effective finite-field point supply remain open.
 
 ## Objective
 
@@ -246,6 +247,88 @@ splitting field and reduce monodromy to `A5`.  Moreover the two pentics share
 `(delta_0,delta_1,M,B)` and their target coordinates are related by (4)--(7).  C327 must therefore
 compute or characterize the two sign/Berlekamp resolvent classes and their pullbacks to the trace
 covers before claiming either generic disjointness or simultaneous derangement density.
+
+## Generic disjointness and persistence through the legality covers
+
+### Common target coordinate
+
+Hold `(delta_0,delta_1,A_1,A_2,e_1,e_2)` fixed and vary the two seed `Y`-coordinates by a common
+translation.  Their sum, hence `Delta_S`, stays fixed.  Put
+
+    z=Z_{1,0}=P0^2*Y_alpha+1.
+
+Then
+
+    Z_{2,0}=z+c_0,
+    c_0=d^2+P0^2*theta.                                 (13)
+
+Thus both pentics define degree-five covers of the same `z`-line.  If `b,c` are the two critical
+parameters above, the first sign cover ramifies over
+
+    D_1: z in {R_1(b),R_1(c)},                          (14)
+
+while the second ramifies over
+
+    D_2: z in {R_2(b)+c_0,R_2(c)+c_0}.                  (15)
+
+The sets in (14)--(15) are understood as the corresponding conjugation-invariant degree-two
+branch divisors, so no choice of square roots is part of the statement.
+
+### Theorem: the two generic splitting fields are disjoint
+
+The branch divisors `D_1,D_2` are distinct.  Indeed, `R_1,R_2` are independent of `theta` after
+the displayed fixed parameters are chosen, whereas (15) moves with nonzero coefficient `P0^2` in
+the free algebraic parameter `theta`; (14) does not.  Hence no irreducible component of the
+generic transposition divisor in (14) equals one in (15).
+
+Let `L_i` be the splitting field of the `i`th generic pentic over the common survivor function
+field.  Each has geometric Galois group `S5`.  Its unique proper nontrivial Galois quotient is the
+quadratic sign field, and that field ramifies along `D_i` because the local inertia there is a
+transposition.  The distinct branch divisors therefore make the two sign fields distinct.
+
+The intersection `L_1 intersect L_2` is Galois over the base and corresponds to a common quotient
+of the two `S5` groups.  A nontrivial proper common quotient would identify the sign fields; equality
+of the full splitting fields would also identify them.  Both are excluded.  Consequently
+
+    L_1 intersect L_2=K_base,
+    Gal(L_1*L_2/K_base)=S5 times S5.                    (16)
+
+### The legality Artin--Schreier covers do not reduce (16)
+
+On the generic C315 chart `X_gamma notin {0,d,1}`, the four trace-one requirements can be
+geometrized by adjoining Artin--Schreier variables for
+
+    Y_gamma/X_gamma^2+1,
+    rho^2*(Y_gamma+theta)/(X_gamma+d)^2+1,
+
+for `gamma in {alpha,beta}`.  After deleting the displayed denominator divisors, these are finite
+etale 2-power covers.  In particular they are etale at the generic points of `D_1,D_2`.
+
+Any intersection of their composite with `L_1*L_2` is a normal 2-power quotient of
+`S5 times S5`.  It is therefore contained in the compositum of the two sign quadratic fields.
+Every nontrivial field in that biquadratic compositum ramifies along `D_1`, `D_2`, or both, while
+the legality composite is etale there.  The intersection is trivial.  Thus, on every geometric
+component of the generic legality cover,
+
+    Gal((L_1*L_2)*K_legal/K_legal)=S5 times S5.          (17)
+
+This closes the generic shared-resolvent question at the group level: the two splitting fields
+have no common nontrivial resolvent field, and the legality covers do not create one.
+
+### Arithmetic boundary
+
+The derangement conjugacy classes in `S5` are `(5)` and `(3,2)`, with respectively `24` and `20`
+elements.  If an effective finite-field Chebotarev theorem applies to a geometrically connected
+legality component with constant field `GF(2)`, the joint group (17) predicts main-term proportion
+
+    ((24+20)/120)^2=(11/30)^2=121/900                 (18)
+
+for simultaneous no-linear-factor pentics on that component.
+
+Equation (18) is presently a conditional main term, not a proved finite-field density.  The next
+gate is to classify the geometric components and constant fields of the fourfold legality cover,
+then supply an effective error term uniform enough for the odd tower.  No independence heuristic
+or uneffective invocation of Chebotarev is substituted for that work.
 
 ## Evidence boundary
 
