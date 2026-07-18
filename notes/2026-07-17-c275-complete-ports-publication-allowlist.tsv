@@ -5,7 +5,7 @@ copy	papers/complete-repair-ports/refs.bib	refs.bib	citation-audit-required
 rewrite	papers/complete-repair-ports/README.md	README.md	public-status-and-build-only; never copy private paths/status
 rewrite	papers/complete-repair-ports/proof_ledger.md	formal/PROOF_LEDGER.md	public claim/evidence ledger only
 exclude	papers/complete-repair-ports/adversarial_novelty_review.md	-	internal review record
-generate	-	LICENSE	user-selected license required before publication
+generate	-	LICENSE	generate the approved MIT license text
 generate	-	CITATION.cff	paper metadata and authorship review required
 generate	-	formal/LEAN_REVISION	pin exact commit of all-papers shared Lean monorepo
 generate	-	formal/TARGETS.txt	complete-ports paper-facing shared-Lean targets and gates
@@ -17,8 +17,6 @@ copy	notes/2026-07-16-c218-quartic-nucleus-verifier.py	evidence/2026-07-16-c218-
 copy	notes/2026-07-16-c218-quartic-nucleus-verifier.json	evidence/2026-07-16-c218-quartic-nucleus-verifier.json	committed deterministic certificate
 copy	notes/2026-07-16-c219-repair-reliability.py	evidence/2026-07-16-c219-repair-reliability.py	reliability and dependency of C227
 copy	notes/2026-07-16-c219-repair-reliability.json	evidence/2026-07-16-c219-repair-reliability.json	committed deterministic certificate
-conditional	notes/2026-07-16-c220-restricted-sumset-stability.py	evidence/2026-07-16-c220-restricted-sumset-stability.py	only if C220 enters frozen manuscript
-conditional	notes/2026-07-16-c220-restricted-sumset-stability.json	evidence/2026-07-16-c220-restricted-sumset-stability.json	only if C220 enters frozen manuscript
 copy	notes/2026-07-16-c226-repair-port-exit-transforms.py	evidence/2026-07-16-c226-repair-port-exit-transforms.py	bounded-EXIT transforms and C244 dependency
 copy	notes/2026-07-16-c226-repair-port-exit-transforms.json	evidence/2026-07-16-c226-repair-port-exit-transforms.json	committed deterministic certificate
 copy	notes/2026-07-16-c227-pointed-tutte-repair-polynomial.py	evidence/2026-07-16-c227-pointed-tutte-repair-polynomial.py	pointed-Tutte check and C244 dependency

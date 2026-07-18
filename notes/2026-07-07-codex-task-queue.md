@@ -21,6 +21,7 @@ unless they retain an explicit open tail.
 
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 - **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
+- **C287 `[build-sys]` [QUEUED]** — extract the reviewed union of all paper-facing Lean closures into one fresh-history shared repository at `~/src/papers/lean`, validate public gates, and prove guarded artifact restore semantics → `notes/2026-07-17-c287-shared-lean-extraction-plan.md`.
 ### `cap`
 
 - **C13 `[cap]` [OPEN]** — q=9 intrusion structure / Lean target → `notes/2026-07-07-codex-q9-intrusion-probe.md`.

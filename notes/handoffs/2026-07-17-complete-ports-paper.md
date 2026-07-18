@@ -8,6 +8,8 @@
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
 Reliability, and Geometric Structure*
+**Approved paper repository**: `tavisrudd/complete-ports` at `~/src/papers/complete-ports`
+**Approved paper license**: MIT
 
 ## Goal
 
@@ -53,11 +55,12 @@ blocker-stability strengthening.
 ## Next step
 
 The corrected private draft has passed three independent paragraph-by-paragraph cold reads and
-same-reader resolution checks, and the user has chosen to omit C220. Allocate the
-release-preparation pass only after the repository destination/remote, license, public
-checker/archive identity, and shared-Lean export gates are resolved. Do not initialize, copy,
-publish, or push before those decisions.
+same-reader resolution checks, and the user has chosen to omit C220. The paper repository,
+disk-backed destination, and MIT license are approved. Shared-Lean extraction is planned under
+[C287](../2026-07-17-c287-shared-lean-extraction-plan.md) and remains separately build-system-owned.
+Allocate the release-preparation pass only after the public checker/archive identity and
+shared-Lean export gates are resolved. Do not initialize, copy, publish, or push before those gates.
 
-Public export remains gated on the complete-ports repository name/local destination/public remote,
-license, public checker/archive identity, and shared-Lean export. The private rename does not
-authorize repository initialization, copy, publication, or push.
+Public export remains gated on the public checker/archive identity and C287 shared-Lean export. The
+approved repository metadata and private rename do not authorize repository initialization, copy,
+publication, or push.

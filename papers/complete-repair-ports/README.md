@@ -67,6 +67,8 @@ nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
 
 This directory belongs to the private monorepo. Publication must use the reviewed C275
 deny-by-default allowlist into a new empty destination with fresh Git history. Do not publish,
-fork, history-filter, or broadly copy the private monorepo. Repository identity/remote, license,
-public rewrites and checker/archive identity, and the separately owned shared-Lean export remain
-explicit gates. No push is authorized by manuscript assembly.
+fork, history-filter, or broadly copy the private monorepo. The approved paper destination is
+`tavisrudd/complete-ports` staged at `~/src/papers/complete-ports` with the MIT license. Public
+rewrites and checker/archive identity, and the separately owned shared-Lean export at
+`~/src/papers/lean`, remain explicit gates. No initialization, copy, publication, or push is
+authorized by manuscript assembly or these metadata decisions.
