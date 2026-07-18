@@ -1,8 +1,8 @@
-# C294: a full-`PGL₂` conic-continuation P-family
+# C294: a one-dimensional full-`PGL₂` conic-continuation P-family
 
 **Date:** 2026-07-17
 **Lane:** `crowns`
-**Status:** bronze theorem proved; prime-field full-group boundary crossed.
+**Status:** bronze strengthened to a `Theta(p)` family; silver classification remains open.
 
 ## Result
 
@@ -19,23 +19,30 @@ P_\infty=(1,0,0),\qquad P_0=(0,1,0),\qquad
 P_t=(t,t^{-1},1),
 \]
 
-and take the four off-conic centres
+For every (b in F_p) such that
 
 \[
-S=\{(0,1,1),\;(-1,0,1),\;(1,3,1),\;(-3,-1,1)\}.
+b\notin\{0,1,-1,2\},\qquad (b-1)^2+4\text{ is a nonsquare},
 \]
 
-Then (\{P_\infty,P_0\}\cup S) is a six-arc, the projection involutions
-(T=\{\sigma_x:x\in S\}) generate (PGL_2(p)), and the fixed-point-deleted
-Schreier residual (R_S) is a P-position for Node Kayles. Equivalently,
+take the four off-conic centres
 
 \[
-\mathcal G(R_S)=0.
+S_b=\{(0,1,1),\;(-1,0,1),\;(1,b,1),\;(-b,-1,1)\}.
 \]
 
-Dirichlet's theorem supplies infinitely many primes in both displayed residue classes. Thus this
-is a uniform P theorem for an infinite, genuine full-group family after the fourth off-conic
-centre. It meets the Crown I bronze criterion.
+Then (\{P_\infty,P_0\}\cup S_b) is a six-arc, the projection involutions
+(T_b=\{\sigma_x:x\in S_b\}) generate (PGL_2(p)), and the fixed-point-deleted
+Schreier residual (R_{S_b}) is a P-position for Node Kayles. Equivalently,
+
+\[
+\mathcal G(R_{S_b})=0.
+\]
+
+There are exactly ((p-5)/2) admissible parameters (b). Dirichlet's theorem supplies infinitely
+many primes in both displayed residue classes. Thus this is a one-dimensional uniform P-family
+across infinitely many genuine full-group residuals after the fourth off-conic centre. The old
+bronze configuration is the member (b=3).
 
 This theorem concerns the **conic-only residual** after the four centres have been selected. It
 does not prove that an earlier game state can force entry into this family, nor does it transfer an
@@ -52,10 +59,16 @@ For an affine off-conic centre (x=(r,c,1)), projection through (x) induces
 A_{r,c}=\begin{pmatrix}1&-r\\c&-1\end{pmatrix}.
 \]
 
-The four products (rc) are (0,0,3,3), so the centres are off the conic for (p>2). Their row
-and column coordinates are pairwise distinct. The determinants of the four triples of affine
-centres are (-1,-1,4,4); together with the distinct-row/distinct-column conditions this checks all
-twenty triples among (P_\infty,P_0) and the four centres. Hence they form a six-arc for (p>5).
+The four products (rc) are (0,0,b,b), so the centres are off the conic when (b ne 1). Their row
+and column coordinates are pairwise distinct when (b notin \{0,1,-1\}). The determinants of the
+four triples of affine centres are
+
+\[
+2-b,\quad 2-b,\quad (b-2)(b+1),\quad (b-2)(b+1).
+\]
+
+Together with the distinct-row/distinct-column conditions, the displayed exclusions check all
+twenty triples among (P_\infty,P_0) and the four centres.
 
 ### The generated group is full `PGL₂(p)`
 
@@ -63,11 +76,12 @@ Write the generators in the displayed order as (A_0,A_1,A_2,A_3). Direct multipl
 
 \[
 A_2A_0A_2A_0A_1A_0=
-\begin{pmatrix}3&-1\\1&1\end{pmatrix}.
+\begin{pmatrix}2b-3&2-b\\b-2&1\end{pmatrix}.
 \]
 
-This matrix has trace (4), determinant (4), and is nonscalar, so in characteristic (p) it is
-a nontrivial unipotent and has projective order (p). The fixed-point sets of (A_0) and (A_1)
+This matrix has trace (2b-2), determinant ((b-1)^2), zero discriminant, and is nonscalar exactly
+when (b ne 2). Thus it is a nontrivial unipotent of projective order (p). The fixed-point sets of
+(A_0) and (A_1)
 are respectively ({0,2}) and ({\infty,-1/2}); they are disjoint for (p>5). Thus the
 generated group has no global fixed point and is not contained in a Borel subgroup.
 
@@ -86,8 +100,8 @@ Let
 \tau(t)=-1/t.
 \]
 
-Because (-1) is nonsquare, (	au) is fixed-point-free on (\mathbf P^1(p)). Conjugation by
-(	au) sends the centre coordinates
+Because (-1) is nonsquare, (\tau) is fixed-point-free on (\mathbf P^1(p)). Conjugation by
+(\tau) sends the centre coordinates
 
 \[
 (r,c)\longmapsto(-c,-r),
@@ -98,26 +112,38 @@ the union of generator matchings and the deleted conic set (D(S)), which is defi
 of pairs in (S).
 
 It remains to check that no mirror pair is an edge. Equality
-(	au(t)=\sigma_{r,c}(t)) is equivalent to a fixed point of
-(	au^{-1}\sigma_{r,c}). Its discriminant is
+(\tau(t)=\sigma_{r,c}(t)) is equivalent to a fixed point of
+(\tau^{-1}\sigma_{r,c}). Its discriminant is
 
 \[
 (r-c)^2+4,
 \]
 
-which is (5,5,8,8) for the four centres. For (p\equiv3,27\pmod {40}), quadratic reciprocity
-gives
+which is (5,5,(b-1)^2+4,(b-1)^2+4). For (p\equiv3,27\pmod {40}), quadratic
+reciprocity gives
 
 \[
-\left(\frac{-1}{p}\right)=
-\left(\frac{5}{p}\right)=
-\left(\frac{8}{p}\right)=-1.
+\left(\frac{-1}{p}\right)=\left(\frac{5}{p}\right)=-1.
 \]
 
-Thus (	au) restricts to a fixed-point-free automorphism of the live residual and no vertex is
-adjacent to its mate. After any move at (v), the response at (	au v) is legal; deleting the
-two closed neighborhoods restores a (	au)-invariant position. Induction gives a second-player
-win, hence (mathcal G(R_S)=0).
+The hypothesis on (b) handles the other pair. Thus (\tau) restricts to a fixed-point-free
+automorphism of the live residual and no vertex is adjacent to its mate. After any move at (v),
+the response at (\tau v) is legal; deleting the two closed neighborhoods restores a
+(\tau)-invariant position. Induction gives a second-player win, hence
+(\mathcal G(R_{S_b})=0).
+
+### Exact parameter count
+
+Put (x=b-1). Since (-1) is nonsquare, (x^2+4) has no zero in (F_p), and the standard quadratic
+character identity gives
+
+\[
+\sum_{x\in F_p}\chi(x^2+4)=-1.
+\]
+
+Therefore ((p+1)/2) values of (b) make ((b-1)^2+4) nonsquare. The excluded values (b=0,-1,2)
+are among them because their tests are (5,8,5), while (b=1) has the square test (4). Exactly
+((p-5)/2) legal parameters remain.
 
 ## Exact Dickson/subfield boundary audit
 
@@ -141,27 +167,45 @@ unipotent/Borel argument forces containment of (PSL_2(p)), and the nonsquare det
 it to (PGL_2(p)). This is the first clean family because it crosses the full-group boundary
 without borrowing the unresolved abundance or recognition mechanisms owned by C84/C199/C200.
 
-## Relation to C84, C199, and C200
+## Program relations and silver boundary
 
-- C84 seeks a positive-density or existence mechanism broad enough to survive bad-set avoidance.
-  This family is a one-parameter-free explicit orbit and supplies only (O(1)) children per field;
-  it does not address density or the `(ON)` transfer lemma.
+- C84 sought a full-dimensional density mechanism broad enough to survive bad-set avoidance. This
+  family supplies `Theta(p)` configurations but remains a one-dimensional mirror locus, not the
+  required two-dimensional raw fourth-centre density for a fixed rooted triple. It does not prove
+  the `(ON)` transfer lemma.
 - C199 seeks direct strategies for the bounded proper-subgroup catalogue. The mirror here is a
   direct strategy, but for a new full-group residual rather than a recertification of a catalogue
   row.
 - C200 seeks structural recognition of bounded catalogue graphs. The present proof needs no graph
   isomorphism classification: it uses a value-preserving automorphism on a growing full-group
   Schreier family.
+- The odd-projective-plane program uses the same burned-pair plus conic-residual object. C294
+  supplies an explicit full-group off-conic P stratum, but it neither forces entry from an arbitrary
+  size-three state nor identifies an on-conic P child, and it does not seal away later off-conic
+  moves.
+- Each centre's projection matching is its radius-two pointed repair port on the conic: an edge
+  `{u,v}` means `{x,u,v}` is a projective 3-circuit. Thus `R_{S_b}` is the shared-helper conflict
+  graph obtained by superposing four pointed repair ports and deleting helpers killed by target
+  secants. This is a genuine future interface to the complete-ports theory, but it is multi-target
+  and game-valued, outside that paper's frozen single-target reliability/Tutte scope.
+
+Crown I silver asks for every tame legal configuration of one fixed size, including the full and
+subfield linear-group cases. The family above is a new positive-dimensional full-group stratum,
+not that classification. The minimal silver battlefield is three centres; exact q=11 data already
+show that root and two-ply pairing certificates miss most P residuals, so silver needs a genuinely
+non-pairing global recursion plus an explicit subfield descent theorem.
 
 ## Evidence and replay
 
-The uniform theorem is the coordinate proof above, using Dickson's classical subgroup
-classification and Dirichlet's theorem. The finite checker independently:
+The uniform theorem is the coordinate proof above, using the quadratic character identity,
+Dickson's classical subgroup classification, and Dirichlet's theorem. The finite checker
+independently:
 
-- verifies all twenty cap determinants;
-- checks the generator conjugation, deleted-set invariance, fixed-free pairing, and nonadjacency;
-- verifies the unipotent word; and
-- enumerates the complete generated projective matrix group for every eligible prime at most 110,
+- verifies all twenty cap determinants for all 140 admissible parameters over the eligible primes
+  at most 110;
+- checks the generator conjugation, deleted-set invariance, fixed-free pairing, nonadjacency, and
+  unipotent word for every parameter; and
+- enumerates the complete generated projective matrix group for the (b=3) member in each field,
   obtaining (p(p^2-1)=|PGL_2(p)|) for (p=43,67,83,107).
 
 From `/home/tavis/src/othello` run:
@@ -173,9 +217,15 @@ sha256sum -c notes/2026-07-17-c294-full-conic-continuation-crown.sha256
 
 The checker uses only Python's standard library, deterministic exhaustive enumeration, and no
 random seed. The JSON is a compact certificate of the checked finite cases. It does not certify
-Dickson's classification, quadratic reciprocity, Dirichlet's theorem, or the general mirror
-induction; those are the trusted mathematical boundary. It also does not claim that the four
-sample enumerations prove the infinite theorem.
+the character-sum identity, Dickson's classification, quadratic reciprocity, Dirichlet's theorem,
+or the general mirror induction; those are the trusted mathematical boundary. The four full-group
+enumerations cross-check one parameter per field; the uniform group conclusion for every (b) is
+the mathematical argument above.
+
+| Load-bearing artifact | Bytes | SHA-256 |
+|---|---:|---|
+| `notes/2026-07-17-c294-full-conic-continuation-crown.py` | 8,277 | `5507932c7a2a8868f147716d5346793fe8c3904310f2c45f7e19f42ccaf96e77` |
+| `notes/2026-07-17-c294-full-conic-continuation-crown.json` | 4,986 | `66fdda60396f5dd6d8fe928e207291a4cda1806c471a4924d38fb98397920166` |
 
 Reference for the subgroup classification: L. E. Dickson, *Linear Groups with an Exposition of
 the Galois Field Theory*, Teubner, 1901.

@@ -10,14 +10,17 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import deque
+from collections import Counter, deque
 from itertools import combinations
 from pathlib import Path
 
 
 STEM = "2026-07-17-c294-full-conic-continuation-crown"
-CENTRES = ((0, 1), (-1, 0), (1, 3), (-3, -1))
 TAU = (0, -1, 1, 0)  # t |-> -1/t
+
+
+def centres_for(b: int) -> tuple[tuple[int, int], ...]:
+    return ((0, 1), (-1, 0), (1, b), (-b, -1))
 
 
 def is_prime(n: int) -> bool:
@@ -94,16 +97,17 @@ def sigma_matrix(r: int, c: int, p: int) -> tuple[int, ...]:
     return (1, -r % p, c % p, -1 % p)
 
 
-def check_case(p: int) -> dict[str, object]:
-    assert p > 5 and p % 40 in (3, 27)
-    assert [legendre(x, p) for x in (-1, 5, 8)] == [-1, -1, -1]
+def check_parameter(p: int, b: int, enumerate_group: bool) -> dict[str, object]:
+    assert b not in (0, 1, 2, p - 1)
+    assert legendre((b - 1) ** 2 + 4, p) == -1
 
-    centres = tuple((r % p, c % p, 1) for r, c in CENTRES)
+    centre_pairs = centres_for(b)
+    centres = tuple((r % p, c % p, 1) for r, c in centre_pairs)
     opening = ((1, 0, 0), (0, 1, 0))
     cap_dets = [det3(triple, p) for triple in combinations(opening + centres, 3)]
     assert all(cap_dets)
 
-    gens = [sigma_matrix(r, c, p) for r, c in CENTRES]
+    gens = [sigma_matrix(r, c, p) for r, c in centre_pairs]
     conjugate_indices = []
     tau_perm = tuple(act(TAU, t, p) for t in range(p + 1))
     assert all(tau_perm[tau_perm[t]] == t for t in range(p + 1))
@@ -129,25 +133,60 @@ def check_case(p: int) -> dict[str, object]:
     unipotent = (1, 0, 0, 1)
     for i in word:
         unipotent = mat_mul(unipotent, gens[i], p)
-    assert unipotent == tuple(x % p for x in (3, -1, 1, 1))
-    a, b, c, d = unipotent
-    assert (a + d) ** 2 % p == 4 * (a * d - b * c) % p
+    expected_unipotent = (2 * b - 3, 2 - b, b - 2, 1)
+    assert unipotent == tuple(x % p for x in expected_unipotent)
+    ma, mb, mc, md = unipotent
+    assert (ma + md) ** 2 % p == 4 * (ma * md - mb * mc) % p
     assert mat_normalize(unipotent, p) != (1, 0, 0, 1)
 
-    order = projective_group_order(gens, p)
     expected = p * (p * p - 1)
-    assert order == expected
     return {
-        "p": p,
+        "b": b,
         "cap_triples_checked": len(cap_dets),
         "conjugation_on_generators": conjugate_indices,
         "dead_conic_vertices": len(dead),
-        "generated_group_order": order,
+        "generated_group_order": projective_group_order(gens, p) if enumerate_group else None,
         "live_conic_vertices": len(live),
         "mirror_pairs": len(live) // 2,
-        "nonsquare_tests": {"-1": -1, "5": -1, "8": -1},
         "pgl2_order": expected,
         "unipotent_word": word,
+    }
+
+
+def check_case(p: int) -> dict[str, object]:
+    assert p > 5 and p % 40 in (3, 27)
+    assert [legendre(x, p) for x in (-1, 5, 8)] == [-1, -1, -1]
+    parameters = tuple(
+        b for b in range(p)
+        if b not in (0, 1, 2, p - 1) and legendre((b - 1) ** 2 + 4, p) == -1
+    )
+    assert len(parameters) == (p - 5) // 2
+    rows = [check_parameter(p, b, enumerate_group=b == 3) for b in parameters]
+    sample = next(row for row in rows if row["b"] == 3)
+    assert sample["generated_group_order"] == sample["pgl2_order"]
+    return {
+        "admissible_parameter_count": len(parameters),
+        "admissible_parameters": list(parameters),
+        "cap_triples_checked": sum(int(row["cap_triples_checked"]) for row in rows),
+        "dead_vertex_histogram": {
+            str(key): value for key, value in sorted(Counter(
+                int(row["dead_conic_vertices"]) for row in rows
+            ).items())
+        },
+        "enumerated_parameter": 3,
+        "generated_group_order": sample["generated_group_order"],
+        "live_vertex_histogram": {
+            str(key): value for key, value in sorted(Counter(
+                int(row["live_conic_vertices"]) for row in rows
+            ).items())
+        },
+        "mirror_checks": len(parameters),
+        "nonsquare_tests": {"-1": -1, "5": -1},
+        "p": p,
+        "parameter_count_formula": "(p-5)/2",
+        "pgl2_order": sample["pgl2_order"],
+        "unipotent_checks": len(parameters),
+        "unipotent_word": sample["unipotent_word"],
     }
 
 
@@ -156,26 +195,35 @@ def generate() -> dict[str, object]:
     return {
         "cases": [check_case(p) for p in primes],
         "family": {
-            "centres": [list(x) for x in CENTRES],
+            "centres": "(0,1), (-1,0), (1,b), (-b,-1)",
+            "parameter_condition": "b not in {0,1,-1,2} and (b-1)^2+4 nonsquare",
+            "parameter_count": "(p-5)/2",
             "prime_condition": "p > 5 and p mod 40 in {3,27}",
             "residual_outcome": "P by fixed-point-free nonadjacent tau pairing",
             "tau": "t -> -1/t",
         },
-        "schema": "c294-full-pgl-mirror-family-v1",
+        "schema": "c294-full-pgl-mirror-family-v2",
     }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
+    if args.check and args.write:
+        parser.error("choose at most one of --check and --write")
     result = generate()
     rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.check:
         tracked = json.loads(Path(__file__).with_suffix(".json").read_text())
         if tracked != result:
             raise SystemExit("tracked JSON content differs from deterministic regeneration")
-        print(f"OK: {len(result['cases'])} prime cases; tracked JSON content matches")
+        parameters = sum(int(case["admissible_parameter_count"]) for case in result["cases"])
+        print(f"OK: {len(result['cases'])} prime cases, {parameters} parameters; tracked JSON matches")
+    elif args.write:
+        Path(__file__).with_suffix(".json").write_text(rendered)
+        print(f"WROTE {Path(__file__).with_suffix('.json')}")
     else:
         print(rendered, end="")
     return 0

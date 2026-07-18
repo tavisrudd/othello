@@ -1,0 +1,273 @@
+{
+  "cases": [
+    {
+      "atlas_certified": 625,
+      "atlas_false_positives": 0,
+      "combined_atlas_certified": 625,
+      "combined_atlas_false_positives": 0,
+      "degree_two_atlas_certified": 625,
+      "degree_two_atlas_false_positives": 0,
+      "degree_two_exception_orbits": [],
+      "grundy_counts": {
+        "0": 625,
+        "1": 515,
+        "2": 780,
+        "3": 60
+      },
+      "legal_triples": 1980,
+      "p_atlas_only": 260,
+      "p_root_pairing": 365,
+      "p_uncovered": 0,
+      "p_uncovered_after_degree_two": 0,
+      "pairing_or_degree_two_exception_orbits": [],
+      "q": 5,
+      "root_pairing_certified": 365,
+      "root_pairing_false_positives": 0
+    },
+    {
+      "atlas_certified": 6258,
+      "atlas_false_positives": 0,
+      "combined_atlas_certified": 6258,
+      "combined_atlas_false_positives": 0,
+      "degree_two_atlas_certified": 6258,
+      "degree_two_atlas_false_positives": 0,
+      "degree_two_exception_orbits": [],
+      "grundy_counts": {
+        "0": 6258,
+        "1": 3878,
+        "2": 1400,
+        "3": 4536,
+        "4": 336
+      },
+      "legal_triples": 16408,
+      "p_atlas_only": 4592,
+      "p_root_pairing": 1666,
+      "p_uncovered": 0,
+      "p_uncovered_after_degree_two": 0,
+      "pairing_or_degree_two_exception_orbits": [],
+      "q": 7,
+      "root_pairing_certified": 1666,
+      "root_pairing_false_positives": 0
+    },
+    {
+      "atlas_certified": 31625,
+      "atlas_false_positives": 0,
+      "combined_atlas_certified": 107855,
+      "combined_atlas_false_positives": 0,
+      "degree_two_atlas_certified": 106535,
+      "degree_two_atlas_false_positives": 0,
+      "degree_two_exception_orbits": [
+        {
+          "components": [
+            11
+          ],
+          "degree_sequence": [
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "edges": 14,
+          "generated_group_order": 1320,
+          "grundy": 0,
+          "orbit_size": 1320,
+          "pair_product_orders": [
+            2,
+            3,
+            11
+          ],
+          "representative": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              10
+            ]
+          ],
+          "root_pairing": false,
+          "triangles": 2,
+          "vertices": 11
+        },
+        {
+          "components": [
+            12
+          ],
+          "degree_sequence": [
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "edges": 16,
+          "generated_group_order": 1320,
+          "grundy": 0,
+          "orbit_size": 660,
+          "pair_product_orders": [
+            2,
+            12,
+            12
+          ],
+          "representative": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              0,
+              2
+            ],
+            [
+              1,
+              2,
+              8
+            ]
+          ],
+          "root_pairing": true,
+          "triangles": 0,
+          "vertices": 12
+        },
+        {
+          "components": [
+            12
+          ],
+          "degree_sequence": [
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "edges": 16,
+          "generated_group_order": 1320,
+          "grundy": 0,
+          "orbit_size": 660,
+          "pair_product_orders": [
+            6,
+            12,
+            12
+          ],
+          "representative": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              6
+            ],
+            [
+              1,
+              6,
+              10
+            ]
+          ],
+          "root_pairing": true,
+          "triangles": 0,
+          "vertices": 12
+        }
+      ],
+      "grundy_counts": {
+        "0": 109175,
+        "1": 70125,
+        "2": 37180,
+        "3": 30360,
+        "4": 9900,
+        "5": 9240
+      },
+      "legal_triples": 265980,
+      "p_atlas_only": 15840,
+      "p_root_pairing": 15785,
+      "p_uncovered": 77550,
+      "p_uncovered_after_degree_two": 1320,
+      "pairing_or_degree_two_exception_orbits": [
+        {
+          "components": [
+            11
+          ],
+          "degree_sequence": [
+            1,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "edges": 14,
+          "generated_group_order": 1320,
+          "grundy": 0,
+          "orbit_size": 1320,
+          "pair_product_orders": [
+            2,
+            3,
+            11
+          ],
+          "representative": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              10
+            ]
+          ],
+          "root_pairing": false,
+          "triangles": 2,
+          "vertices": 11
+        }
+      ],
+      "q": 11,
+      "root_pairing_certified": 15785,
+      "root_pairing_false_positives": 0
+    }
+  ],
+  "degree_two_kernel_crosscheck_max_vertices": 12,
+  "schema": "c294-silver-three-centre-gate-v3"
+}
