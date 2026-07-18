@@ -4,10 +4,9 @@
 
 **Date:** 2026-07-18
 **Status:** OPEN — C142, C143, C148–C150 reported; C151's universal normalized-row lower bound and
-five-row attainment are checked. The residual-orbit layer is mid-rewrite: the kernel-reducible
-evaluator has landed and stabilizer order 2 is kernel-checked for the first minimizer row, while the
-orbit–stabilizer scaffolding, the semantic normalization lift, and equality-orbit completeness
-remain active
+five-row attainment are checked. The residual-orbit layer is now certified: the parameter group,
+its action, the five orbit sizes, their disjointness, and the union `1600` are kernel-checked. The
+semantic normalization lift and equality-orbit exhaustion remain active
 **Tasks:** C142–C143, C148–C152, C318–C319
 
 Companion discovery log:
@@ -58,9 +57,11 @@ minimum of 32 legal pairs and the classification of equality cases.
   alternate repairs, with the reported sharp rectangle `s ≥ 4`, `k ≤ s+1`.
 - **Q25 exceptional profile:** all 1,189 residual class representatives have a kernel-checked
   lower bound of 32, and five proposed minimizer representatives have checked equality.
+- **Residual orbits:** the parameter group, its `MulAction`, the five orbit sizes
+  `200,400,400,200,400`, their pairwise disjointness, and the union `1600` are kernel-checked
+  through orbit–stabilizer against decided stabilizer orders; no orbit is materialized.
 - **Remaining exactness gap:** lift the universal normalized-row `≥32` theorem to semantic
-  exceptional-profile arcs and prove the orbit-size facts needed to show that the five
-  representative rows exhaust all equality cases.
+  exceptional-profile arcs, and prove that the five certified orbits exhaust the rows attaining 32.
 
 Reported theorem and scout details live in their reports:
 [C142](../2026-07-14-c142-alternate-orbit-repair.md),
@@ -78,7 +79,7 @@ computed but not yet promoted through the complete semantic theorem.
 | ID | Surviving finding | Status | Active use |
 |---|---|---|---|
 | D-AOR2 | Orbit replacement gives a token-jumping-style graph on embedded invariant ten-arcs, fibered by the exact fixed-point subset. Dye's shared-triangle graph is a predecessor with different adjacency. | local profile inputs checked; graph theorem open | C152: prove neighbor injectivity and the degree identity before any connectivity claim |
-| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities checked; residual cover open | C151 equality-orbit completeness |
+| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities, orbit sizes, disjointness, and union 1,600 `LEAN-CHECKED`; exhaustion open | C151 equality-orbit completeness |
 | D-AOR5 | For an invariant old set, legality of a conjugate candidate pair reduces to freshness, one representative avoiding old secants, and its fixed carrier avoiding old points. | `LEAN-CHECKED; LIT-OPEN` | C151 certificate compression and later exposition assessment |
 | D-AOR6 | The residual order-400 group is two independent 20-element base-field affine normalizers; its executable action preserves legal-orbit cardinality. | `LEAN-CHECKED` | C151 class transport |
 | D-AOR7 | Determinant obstructions factor through 651 canonical dual-line masks; the 310 candidate carriers lie ten apiece on the 31 conjugation-fixed lines. | mask table and Boolean composition `LEAN-CHECKED` | compact C151 residual certificates |
@@ -91,7 +92,7 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C151 | active; normalized-row lower bound checked; residual-orbit layer mid-rewrite on the orbit–stabilizer route | Prove semantic normalization/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
+| C151 | active; normalized-row lower bound and residual-orbit layer checked | Prove exhaustion and the semantic normalization lift, then conclude exact Q25 minimum 32 with five equality classes |
 | C318 | queued after C151 | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
 | C319 | gated on measured C151 cost | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued behind C151 | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
@@ -102,28 +103,34 @@ plans here.
 ## C151 — next actions
 
 Read [the C151 report](../2026-07-14-c151-q25-minimum-classification.md) § "Residual-orbit
-certification" before touching the residual layer; it records a blocker that is not visible from the
-sources and two approaches that are ruled out.
+certification" before touching the residual layer; it records why the fast evaluator exists and two
+approaches that are ruled out.
 
-1. Prove the composition law on `AdmissibleCoordinate` (recovered-parameter formula, then
-   `apply (g * h) = apply g ∘ apply h`). Riskiest step; gates everything below it.
-2. Group instance on the 20-element factor, factored `MulAction` compatibility, then bridge
-   Mathlib's orbit–stabilizer to the `Finset` cardinalities and conclude the five orbit sizes.
-3. Non-conjugacy, equal-or-disjoint, union `1600`; keep exhaustion a separate theorem against the
-   residual-cover machinery.
-4. Lift the normalized-row theorem through the existing stabilizer and base-field normalization
+1. Prove exhaustion: every normalized row attaining 32 lies in `minimumOrbitUnion`. This is work on
+   the residual-cover side; `isMinimumResidualClass_iff_mem_minimumOrbitUnion` already turns the
+   goal into a membership statement.
+2. Lift the normalized-row theorem through the existing stabilizer and base-field normalization
    maps to every semantic exceptional-profile arc.
-5. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
+3. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
    the complete semantic theorem passes.
 
 State a cold session needs before starting:
 
-- `Q25ResidualFast.lean` is committed and green; phrase every new `decide` through
-  `residualApplyFast`, never through `parameterEmbedding`.
-- `Q25ResidualMinimumOrbits.lean` is untracked and **does not compile**. Replace it wholesale; do
-  not repair its `decide`s. `Q25ResidualEquality.lean` imports it and is likewise unbuildable.
-- Orbit sizes have never been certified — `orbitSize` is schema payload consumed by no proof. The
-  only kernel-checked orbit fact is stabilizer order 2 for row `(5,58,169)`.
+- The residual-orbit layer is committed and green: `Q25ResidualComposition.lean` (composition law),
+  `Q25ResidualGroup.lean` (group, `MulAction`, orbit–stabilizer bridge),
+  `Q25ResidualMinimumOrbits.lean` (five stabilizer orders, orbit sizes, disjointness, union 1600),
+  and `Q25ResidualEquality.lean` (semantic class predicate). Orbit sizes are theorems now, not
+  schema payload.
+- Phrase every new `decide` through `residualApplyFast`, never through `parameterEmbedding` or
+  `residualApply`; `smul_eq_map` bridges to the embedding form used by the cover certificates.
+- Decide stabilizers and non-reachability, never orbits: `Finset.image` deduplicates quadratically.
+  High-level automation can reintroduce this silently — `tauto` on a goal mentioning `Finset`
+  membership tried to decide it and hit the recursion limit.
+- `lean/RelativeConicArcs/Q25MinimumClassification.lean` and
+  `lean/RelativeConicArcs/Q25ResidualConclusionDispatchData/` remain untracked with unverified build
+  state, as do the two 2026-07-17 generators under `notes/`.
+  `Q25ResidualCoverPrototype/RowConclusion.lean` is modified but uncommitted; its row-conclusion
+  change covers one class (`b=31`, 50 rows).
 - C318 (manifest rows for the residual layer) and C319 (gated canonicalizer-or-demote decision) are
   queued behind this work.
 

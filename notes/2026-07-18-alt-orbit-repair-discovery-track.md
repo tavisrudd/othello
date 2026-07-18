@@ -64,3 +64,25 @@ avoidable trusted data. For any `ZMod p` with small `p`, inversion is `a ^ (p - 
 table at all — possibly worth a shared lemma if another small-field evaluator appears.
 
 **Evidence level.** Kernel-checked (`f5_inv_eq_pow`, built green).
+
+---
+
+## 2026-07-18 — a finishing tactic reintroduced the blocked computation
+
+**Context.** Closing the semantic bridge `IsMinimumResidualClass C ↔ C ∈ minimumOrbitUnion`. After
+rewriting, the goal was pure re-association of a five-way disjunction of `Finset` memberships, so
+`tauto` looked like the obvious closer.
+
+**Noticed.** `tauto` hit the recursion limit. The disjuncts are decidable propositions, so the
+tactic's decision procedures attempt to evaluate them — which is exactly the orbit materialization
+the whole module is built to avoid. `simp only [Finset.mem_union, or_assoc]` closes the same goal
+symbolically and instantly.
+
+**Why it may matter.** The route's cost discipline lives in how statements are phrased, but a
+finishing tactic can silently discard that phrasing and evaluate a decidable proposition that the
+design never intended to evaluate. In a development where decidability is abundant and evaluation
+is catastrophic, `decide`-capable automation is a hazard at the *end* of a proof, not only inside
+it. The same caution applies to `omega`-adjacent closers and to `simp` with `decide := true`.
+
+**Evidence level.** Observed elaboration failure and the working symbolic replacement; both built
+green.

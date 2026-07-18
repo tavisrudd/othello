@@ -410,14 +410,16 @@ every semantic exceptional-profile arc normalizes into that slice or classify th
 
 ## Residual-orbit certification: blocker, evaluator, and route (2026-07-18)
 
-### The orbit sizes were never certified
+### Orbit sizes: generator output until 2026-07-18, now certified
 
 `orbitSize` is a payload field in `Q25ResidualCoverData/Schema.lean` and appears in no proof; the
 bridge docstring already says the stored `legalCount`, `classIndex`, and `orbitSize` fields are not
-proof inputs. The sizes `200,400,400,200,400` have therefore been generator output throughout, not
-theorems. The first kernel-checked fact about the residual orbit structure is the stabilizer
-measurement below, dated today. Earlier text describing orbit-size certification as merely
-remaining understated this.
+proof inputs. The sizes `200,400,400,200,400` were therefore generator output throughout, not
+theorems.
+
+They are now kernel-checked, together with pairwise disjointness and the union `1600`, by the
+orbit–stabilizer route below. The certified statements and their replay commands are in
+§ "Certified residual-orbit layer".
 
 ### The blocker was one opaque atom, not size
 
@@ -464,21 +466,24 @@ arithmetic would avoid sorting, but is not needed by the route below.
 ### Route: orbit–stabilizer, which never materializes an orbit
 
 Orbit sizes come from `400 / |stab|`, so `200` is arithmetic on a verified stabilizer order. Ordered
-by risk, with the riskiest mathematics first:
+by risk, with the riskiest mathematics first; steps 1–5 landed on 2026-07-18:
 
-1. Define multiplication on `AdmissibleCoordinate` by the recovered-parameter formula and prove
+1. **Done.** Multiplication on `AdmissibleCoordinate` by the recovered-parameter formula, with
    `apply (g * h) = apply g ∘ apply h`. The scale/shift pair is a bijection onto `AGL(1,5)`, so the
    parameter exists; the identity parameter is `x = ω`. This is the soundness lemma of the design.
-2. Group instance on the 20-element factor, axioms by `decide` (`8,000` cases); `ResidualParameter`
+2. **Done.** Group instance, axioms by `decide`. The axioms were decided on the 25-element
+   coordinate type rather than the 20-element subtype: associativity is `15,625` cases that way
+   against `8,000`, and the raw type avoids subtype overhead in the kernel. `ResidualParameter`
    inherits the product group. Never put the group on the 400-element product: `mul_assoc` there is
    `6.4 · 10⁷` cases.
-3. `MulAction` compatibility factored: `decide` only the two parameter-level facts over `400` pairs
-   (`scale` multiplicativity, `shift` composition); derive the `.affine` and `.infinity` cases
-   symbolically and `.vertical` by `rfl`. Deciding compatibility directly is about `10⁸` cases.
-4. Bridge Mathlib's `Set`-orbit and `Subgroup`-stabilizer to the `Finset.image`/`Finset.filter`
-   forms, then the five sizes.
-5. Non-conjugacy of the five representatives, equal-or-disjoint, and the union cardinality `1600`.
-6. Exhaustion as a separate theorem against the residual-cover machinery.
+3. **Done.** `MulAction` compatibility factored: only the two parameter-level facts are decided
+   (`scale` multiplicativity, `shift` composition), and the `.affine`/`.infinity` cases are derived
+   symbolically with `.vertical` by `rfl`. Deciding compatibility directly is about `10⁸` cases.
+4. **Done.** Mathlib's `Set`-orbit and `Subgroup`-stabilizer bridged to the
+   `Finset.image`/`Finset.filter` forms, then the five sizes.
+5. **Done.** Non-conjugacy of the five representatives, equal-or-disjoint, and the union
+   cardinality `1600`.
+6. **Open.** Exhaustion as a separate theorem against the residual-cover machinery.
 
 Two traps recorded by the design review. Every decided statement must be phrased through
 `Finset.image` of the *fast* function with a `simp` bridge to the embedding form, never
@@ -491,23 +496,66 @@ anywhere in the repo; decide `(A ∩ B) = ∅` explicitly and bridge.
 The full cost analysis and correctness flags are in
 [the design review](2026-07-18-c151-orbit-completeness-fable-review.md).
 
-### Uncommitted and broken state
+### Certified residual-orbit layer (2026-07-18)
 
-These paths are untracked and support no reproducibility claim yet:
+Four committed modules under `lean/RelativeConicArcs/`. The recovered parameter is
+`mulCoord g h = algebraMap (imagPart h) * g + algebraMap (realPart h)`, which is `(φ h)⁻¹ g`; the
+inverse parameter is the map's own image of `ω`.
 
-- `lean/RelativeConicArcs/Q25ResidualMinimumOrbits.lean` — **does not compile**. Its eleven `decide`s
-  are the wrong shape; replace it wholesale with the orbit–stabilizer version rather than repairing
-  them.
-- `lean/RelativeConicArcs/Q25ResidualEquality.lean` — imports the above, so also unbuildable.
-- `lean/RelativeConicArcs/Q25MinimumClassification.lean` and
-  `lean/RelativeConicArcs/Q25ResidualConclusionDispatchData/` — build state unverified this session.
-- `notes/2026-07-17-c151-residual-conclusion-dispatch-generator.py` and
-  `notes/2026-07-17-c151-residual-equality-generator.py`.
-- `lean/RelativeConicArcs/Q25ResidualCoverPrototype/RowConclusion.lean` is modified but uncommitted;
-  its row-conclusion change covers one class (`b=31`, 50 rows).
+| Module | Terminal | Statement |
+|---|---|---|
+| `Q25ResidualComposition.lean` | `residualApplyFast_mul` | `apply (g * h) = apply g ∘ apply h` |
+| `Q25ResidualGroup.lean` | `card_residualOrbit_mul_card_residualStabilizer` | `orbit.card * stabilizer.card = 400` |
+| `Q25ResidualMinimumOrbits.lean` | `card_residualOrbit_*` | orbit sizes `200,400,400,200,400` |
+| `Q25ResidualMinimumOrbits.lean` | `card_minimumOrbitUnion` | the five orbits union to `1600` |
+| `Q25ResidualEquality.lean` | `isMinimumResidualClass_iff_mem_minimumOrbitUnion` | `IsMinimumResidualClass C ↔ C ∈ minimumOrbitUnion` |
+
+Only two shapes are ever decided: the parameter-level `scale`/`shift` identities over `K25` pairs,
+and, per row, one `400`-parameter stabilizer filter plus one `400`-parameter non-reachability
+statement. Stabilizer orders are `2,1,1,2,1`; disjointness uses ten non-reachability decides. No
+orbit is materialized anywhere in the proof, and `residualApply` never appears inside a `decide`.
+
+Replay, from `/home/tavis/src/othello/lean`:
+
+```sh
+scripts/lean-build-queue.py run \
+  RelativeConicArcs.Q25ResidualComposition RelativeConicArcs.Q25ResidualGroup \
+  RelativeConicArcs.Q25ResidualMinimumOrbits RelativeConicArcs.Q25ResidualEquality \
+  --profile single --threads 1 --cores 20-23
+```
+
+Exact-target queue results, one Lean worker on cores `20-23` with `choom -n 1000`, all exit status
+`0` and each followed by a successful trace-only aggregate gate:
+`Q25ResidualComposition` `0:34.61` wall at `5,128,248 kB` peak RSS
+(`/home/tavis/.cache/othello-lean-build/run-20260718-224412-ca2cdfa8`);
+`Q25ResidualMinimumOrbits` `2:06.52` at `8,865,192 kB`
+(`run-20260718-225434-11fc8755`), and `1:45` on rebuild after the group module gained its bridge
+lemmas; `Q25ResidualGroup` `0:08.95` at `3,479,772 kB` (`run-20260718-225036-24c896f3`);
+`Q25ResidualEquality` `0:08.16` at `3,394,252 kB` (`run-20260718-230121-8a185f8a`). A confirming
+re-run reports all four already trace-current (`run-20260718-230347-5b035a23`).
+
+Source SHA-256 and byte counts:
+
+| File | SHA-256 | Bytes |
+|---|---|---|
+| `Q25ResidualComposition.lean` | `86482e38daed26fc35e77821ed3681e8c3847a7b7b0114dd6c90a277536e6c63` | `4,292` |
+| `Q25ResidualGroup.lean` | `5991948725b455837dd228703729879a42f4a387c19620612b18dfbc9d3a713d` | `7,744` |
+| `Q25ResidualMinimumOrbits.lean` | `8ca5af076c2660767d6153ef04b3cde96dc5808d45908d07e9ccdbb66be1f49b` | `9,568` |
+| `Q25ResidualEquality.lean` | `8723073b569ef941a7594944a295e3b5ba8a7429d24c2368fa7cac093c8f6747` | `2,593` |
+
+A forbidden-token scan over the four files is clean. The axiom profile of
+`residualApplyFast_mul`, `card_residualOrbit_mul_card_residualStabilizer`,
+`card_residualStabilizer_0065`, `card_residualOrbit_0065`, `card_minimumOrbitUnion`, and
+`isMinimumResidualClass_iff_mem_minimumOrbitUnion` is `[propext, Classical.choice, Quot.sound]`
+with no `sorryAx`.
+
+What this does not certify: that the five orbits *exhaust* the rows attaining `32`, and that every
+semantic exceptional-profile arc normalizes into the orbit-`5` slice. Until both land, `32` is not
+the exact semantic minimum and the five classes are not a complete extremal classification.
 
 ## Current next step
 
-Prove the composition law on `AdmissibleCoordinate` (step 1 above). It is the riskiest step and
-gates everything after it; if the recovered-parameter formula turns ugly, stop and reconsider the
-route before building scaffolding on it.
+Exhaustion (step 6): prove that every normalized row attaining `32` lies in `minimumOrbitUnion`,
+against the residual-cover machinery. The certified layer above supplies the target shape —
+`isMinimumResidualClass_iff_mem_minimumOrbitUnion` turns the goal into a membership statement — so
+the remaining work is on the cover side, not the action side.
