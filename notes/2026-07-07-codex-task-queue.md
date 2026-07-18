@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C280.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C284.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -69,7 +69,11 @@ unless they retain an explicit open tail.
 ### `dihedral`
 
 - **C278 `[dihedral]` [QUEUED]** — conditional density-½ formalization per the 2026-07-17 `yc` ruling: quarantine equidistribution of primes in arithmetic progressions as one named axiom (RepairCodes-Stichtenoth / Q11DyeAxioms pattern) and kernel-check the derivation from it plus the proved 2-of-4 classification to Thm 12.1's relative density ½ → `notes/2026-07-17-c278-dihedral-conditional-density.md`.
-- **C264 `[dihedral]` [QUEUED]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose) for the markdown manuscript → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
+- **C264 `[dihedral]` [QUEUED; after C278/C281 content lands]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose); apply the C261 wording recommendations R1–R5, the C278 single-axiom density boundary sentence, the C260 maximal-automorphism-group remark in Appendix A, and an eventual-periodicity-in-m (Dawson period 34) corollary for the even-m pair family → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
+- **C281 `[dihedral]` [QUEUED]** — exhaustive per-q census appendix: extend the C263 pair enumerator to legal triples, tabulate every tame legal dihedral configuration and value histogram for `q ≤ 23` as a half-page appendix, with the standard script/JSON/manifest evidence bundle → `notes/2026-07-17-c281-dihedral-census-appendix.md`.
+- **C282 `[dihedral]` [QUEUED]** — byproduct OEIS entries for the fixed-point-deleted Schreier/dihedral-Cayley nimber sequences: draft priority-stamp submissions now (A344227 pattern); program `%H` links follow the C270 public artifact → `notes/2026-07-17-c282-dihedral-oeis-byproducts.md`.
+- **C283 `[dihedral]` [QUEUED SPIKE; time-boxed]** — wild-case scoping spike: compute `p | 2m` residual examples, produce the §15 remark with one displayed wild example (what exactly breaks: fixed-point structure, orbit shapes), and report a feasibility frontier for any wild classification; scope-only beyond the remark, no classification claim → `notes/2026-07-17-c283-dihedral-wild-case-spike.md`.
+- **C284 `[dihedral]` [QUEUED; USER SEQUENCING GATE]** — polyhedral nonregular coset templates: extend the classification to the `A₄/S₄/A₅` coset actions, completing all finite subgroups of PGL₂(q) except the escape residual and earning the full D6 title; whether this lands pre-submission (delaying C264) or post-release is a user decision to take before C264 starts → `notes/2026-07-17-c284-dihedral-polyhedral-coset-templates.md`.
 
 ### `gem-mining`
 

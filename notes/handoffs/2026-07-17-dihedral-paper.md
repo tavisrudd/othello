@@ -50,9 +50,21 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Next steps
 
-- **C264** must also apply the C261 audit's wording recommendations R1–R5 (HHS reduction citation,
-  Schaefer root citation, Möbius-ladder ownership clause, optional novelty sentence, Ernst–Sieben
-  distinction).
+- **C278** (in flight 2026-07-17) — conditional density-½ via one quarantined equidistribution
+  axiom; review its axiom statement's faithfulness before accepting.
+- **C284 USER SEQUENCING GATE, decide FIRST**: polyhedral nonregular coset templates would complete
+  all finite subgroups of PGL₂(q) except the escape residual (the biggest significance lever).
+  Decide pre-submission (delays C264) vs post-release before starting C264.
+- **C281** — exhaustive per-q census appendix (extend C263 enumerator to triples; evidence bundle).
+- **C283** — wild-case scoping spike, time-boxed: `p | 2m` examples + §15 remark + feasibility
+  frontier; no classification claim.
+- **C282** — byproduct OEIS priority-stamp drafts (program links follow C270).
+- **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Must apply: the
+  C261 wording recommendations R1–R5 (HHS reduction citation, Schaefer root citation,
+  Möbius-ladder ownership clause, optional novelty sentence, Ernst–Sieben distinction); the C278
+  single-axiom boundary sentence; the C260 maximal-automorphism-group remark (Appendix A); an
+  eventual-periodicity-in-m corollary (Dawson period 34) if C264's read confirms §14 lacks it; and
+  title/abstract calibration so nothing reads as covering the wild case.
 - **C264** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle.
 
 ## Cross-lane relationships (foreign; do not re-peg without approval)
