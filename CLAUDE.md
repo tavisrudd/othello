@@ -337,7 +337,11 @@ When a task completes, perform all of the following in the same coherent commit:
 1. append its completed row to `notes/2026-07-07-codex-task-queue-archive.md`;
 2. verify that its `C<id>` occurs there exactly once;
 3. delete its row from `notes/2026-07-07-codex-task-queue.md`; and
-4. update the owning lane's handoff.
+4. update the owning lane's handoff; and
+5. before sending the user-facing completion report, review the work just closed against the
+   discovery-track discriminator and append any genuinely incidental observations or musings to
+   the lane's companion log. Do not manufacture an entry when there was none; retain the handoff's
+   one-line companion link either way.
 
 Archive first: if the completed row is not yet present in the companion archive, that is a blocker
 to deleting it, not a reason to leave `[REPORTED]` history in the live queue. Never transition a
