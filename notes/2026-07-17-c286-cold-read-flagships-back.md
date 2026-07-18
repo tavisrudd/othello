@@ -116,3 +116,32 @@ private C-label inventory and withheld closure with one versioned public manifes
 repair the full-radius/bounded-radius sentence and remove the pending-inclusion remark.  Finally,
 expand the one cubic transversal sentence just enough that the theorem’s exact `q-2` value is
 visible from the proof sketch.
+
+## Resolution verification
+
+Targeted reread of the current geometric-flagship back half through the conclusion; no manuscript
+source was edited.
+
+- **PASS — cubic proof clarification (current lines 541--548).** The matching upper bound is now
+  explicit, the shifted-inverse complement lemma supplies the maximum repair-free set, and taking
+  complements visibly yields `tau=q-2`.
+- **PASS — asymptotic Steiner quantifier (656--670).** The statement now ranges along sequences of
+  `S(3,4,n)` with `n` tending to infinity.  The added block/dependency counts also make the quoted
+  error order locally checkable.
+- **PASS — TeX module typography (700--703).** Both Lean roots use `\texttt{...}` rather than
+  Markdown backticks.
+- **PASS — trust wording (700--721).** The prose now distinguishes checked Lean results,
+  manuscript-level arguments, deterministic private replays, and the sole nonformalized axiom
+  without the former “quarantined import” register.
+- **PASS — closure notation (683--695).** `\operatorname{cl}_4` now denotes the bounded closure,
+  removing the collision with the EXIT-deficit notation `L_4`.
+- **PASS — full/bounded-radius conclusion (732--738).** The revised sentence clearly says what the
+  truncation retains and what the full-radius invariant adds.
+- **PASS — internal C220 decision prose (740--743).** The pending inclusion-decision language is
+  gone; the replacement states only that the sharper result is unnecessary here.
+- **UNRESOLVED RELEASE GATE — stable public provenance (700--714).** As explicitly intended for
+  this private draft, exact public module closure, stable artifact paths/version, and public replay
+  provenance are still absent.  The internal C-label inventory is not externally resolvable.  This
+  remains a release task, not a manuscript edit authorized in this pass.
+
+**New defects:** None found in the targeted reread.
