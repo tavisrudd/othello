@@ -2,7 +2,7 @@
 
 **Lane**: `cap` — see CLAUDE.md § Lane routing.
 
-Date created: 2026-07-06.  Refactored current-state handoff: 2026-07-08.
+Date created: 2026-07-06.  Current-state synthesis refreshed: 2026-07-17.
 
 The previous long handoff, including the full chronological session log and superseded planning
 notes, was moved intact to
@@ -527,6 +527,55 @@ Important modes:
 
 Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
+## C84 in the odd-q proof program
+
+**Role.** C84 studies the conic-only residual after an off-conic fourth centre. It strengthens the
+odd-q conjecture by showing that generic, mirror-free escape children remain P-rich, but it does
+not prove `(ON)`: abundance is mostly off-conic, whereas `(ON)` requires an on-conic P child for
+every residual size-3 state. Any abundance proof still needs a separate exchange/transfer lemma,
+or an induction whose bad set is smaller than the certified P family.
+
+**What is established.** The conic residual is the Node--Kayles Schreier graph of
+`H_S = ⟨σ_x⟩ ≤ PGL(2,q)`. The small-subgroup catalogue is an exact boundary evaluator, including
+the `V₄`, `D₈`, and `S₄` templates, but the escape crux immediately enters generic PSL/PGL
+subgroups. In the mirror-free q=29 class-D fibre, exactly `139/753` children are P; thus the
+generic region is P-rich rather than depleted.
+
+**Mechanisms now closed.** None of the following supplies a q-uniform one-ply certificate:
+
+- fixed-point-free pairing/mirror automorphisms;
+- an immediate one-reply component core of size at most 13;
+- a context-free coloured word in the four conic involutions; or
+- the rooted-S4/fourth-centre packets `H, HsH, HsHsH, ...`.
+
+These are mechanism negatives, not evidence against the odd-q outcome. They say that P-ness is
+adaptive and context-dependent, matching the earlier C64/C69/C75 static-signature failures.
+
+**Why the ledger route survives.** The C63/C77 integer ledger
+`Ψ = reservoir_slack + 6·defect − 4·intruders − 2·[conic_xor=0]` is value-blind, but its conic
+part is proved root-peak bounded at every depth. C80 independently proves the exact drain law that a
+conic move removes `1 + degree` live conic vertices. These facts do not identify a winning reply;
+they remain candidates for an amortized strategy over a complete opponent/reply round.
+
+**Current test and stop rule.** On the 91 q=29 P roots having a forced transition, construct the
+exact two-ply forced-transition closure and measure:
+
+1. `ΔΨ` and whether accumulated ledger debt is paid or merely shifted;
+2. live-conic drain and defect/intruder retirement;
+3. descent into the certified small-zone/base families; and
+4. whether the same contract persists across q=13,17,19,23.
+
+A field-stable lexicographic or amortized descent contract is the sought multi-step certificate.
+If the exact winning transitions do not separate from losing alternatives or do not descend,
+retire adaptive finite-template mining and return C84 to the full-dimensional
+spectral/probabilistic abundance lane. Even a successful ledger contract still needs the separate
+transfer to `(ON)`.
+
+Primary records: [program integration](../2026-07-12-conic-involution-residual-graphs.md),
+[adaptive core](../2026-07-17-c84-adaptive-core.md),
+[word obstruction](../2026-07-17-c84-forced-reply-algebra.md), and
+[double-coset obstruction](../2026-07-17-c84-double-coset-packets.md).
+
 ## Near-Term Queue
 
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
@@ -554,59 +603,11 @@ task list.  Current high-value items:
   defect-to-C80 levers were negative; static existence was not promoted into an (ON) or root-value
   claim. [Final map](../2026-07-12-c100-relative-conic-game-bridge.md).
 
-- **C84 — conic-involution Schreier catalogue → abundance-first (PRIMARY, 2026-07-12).** The conic
-  bulk is the induced Schreier graph of `H_S = ⟨σ_x⟩ ≤ PGL(2,q)`; its Node-Kayles value is set by
-  the subgroup type. Proven + independently verified (field geometry, q=11–19): two-centre full
-  decomposition; self-polar `V₄`→`K₄`s; `D₈`→`M₈⊔K₂`; `S₄` classes; orbit-template theorem; `A₄`
-  excluded. **Gating measurement done:** the escape crux (size-3 → size-4) leaves the small-subgroup
-  regime immediately (V₄/D₈ have no subgroup-preserving 4th move; S₄ admits ≤3 but no legal 5th), so
-  the children are generic (full PSL/PGL) — the catalogue is a **boundary evaluator, not a forcing
-  engine**. **Reprioritized to abundance-first** (Codex+Claude, 2026-07-12): S₄-rooted escaping 4th
-  centres are conic-only-P at density `≈0.13` (min over classes, q=11–23, verified two ways; q=7 the
-  lone dip, no dip at depleted {11,17}); the target is a provable `#{y : 𝒢=0} ≥ c·q²`. **Pairing/mirror
-  mechanism ruled out** (fpf-involution residual automorphism covers only a minority) — the bound
-  must be Grundy-arithmetic. **Existence-strength pairing is now also closed:** an exact geometric
-  plus abstract automorphism census at prime `q=7,11,13,17,19,23,29,31` found zero pairing
-  children among all 753 class-D escapes at `q=29`; this needs an adaptive/non-pairing certificate
-  or an explicit exception (`notes/2026-07-17-c84-pairing-obstruction.md`). **Adaptive q=29
-  follow-up:** exact solution of that entire mirror-free fiber gives `139/753` P (`0.1846`); 91/139
-  P roots have a move with a unique winning reply, while every P root has one-reply component width
-  at least 14 (range 14–20), closing immediate component cores of bound ≤13. Mine the forced-reply
-  algebra rather than another static signature (`notes/2026-07-17-c84-adaptive-core.md`). The first
-  such extraction is now complete: 470 forcing pairs across q=13--29 use 88 canonical shortest
-  coloured words, and every word also labels a nonwinning response; the next test must condition
-  on rooted-S4/fourth-centre context or use a response packet
-  (`notes/2026-07-17-c84-forced-reply-algebra.md`). That contextual test is now also closed:
-  rooted-S4/fourth-centre double-coset packets fully cover no q=23 or q=29 P root, and only one of
-  195 q=29 forced replies is a singleton packet. Stop one-ply signatures; test two-ply forced
-  descent once, then return to the spectral/probabilistic abundance lane if it fails
-  (`notes/2026-07-17-c84-double-coset-packets.md`). Ranking:
-  (1) prove positive-density P (S₄ then all triple types), beginning with a multi-step adaptive
-  class-D certificate;
-  (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
-  complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) drain minimax
-  fallback. Corrections folded: order 24 ≠ S₄ (D₂₄ occurs at `12|q²−1`, separate by element-order
-  profile). **Frontier sharpened (Fable consult, 2026-07-12):** density `#{y:𝒢=0}≥c·q²` ≡ `{𝒢=0}`
-  is a dimension-2 CvdDM-definable set (equal strength — can't assume one to prove the other); the
-  real open lemma is **one-sided — one dim-2 constructible value-0 certificate family** — since
-  every known certificate (catalogue/pairing) is a homography fixed locus = dim 1 = Θ(q); the exact
-  Fricke coordinate determines the value only *vacuously* (near-injective on generic classes, so `𝒢`
-  is just a conjugacy invariant). Near-term lever = **existence not density** (one P child avoiding
-  the induction's bad set, Θ(q)-achievable iff that set is O(1) curves — read off Lean
-  `OddEscapeGameStatement`). **Dihedral package:** the revised submission includes the self-polar
-  `V₄≅D₄` boundary, the full tame `D₄ₙ` template/formula classification, and an adversarially
-  checked uniform quotient-by-central-involution proof; exact `S₄/A₅` computation completes the
-  free-orbit `t₁` row across all realizable tame small-subgroup types. Its checked Lean reduction
-  layer is the standalone `DihedralSchreier` library. **Novelty:** the named conic↔Schreier correspondence + the subgroup-type
-  value catalogue are the defensible new theorem; the orbit-template periodicity is known+known
-  bookkeeping (Dickson counts ∘ trivial piece-Grundy) — see
-  [novelty audit C84 addendum](../2026-07-08-codex-projective-nofil-novelty-audit.md). Notes:
-  [dihedral submission](../2026-07-12-dihedral-schreier-node-kayles-submission.md),
-  [polyhedral regular-template nimbers](../2026-07-12-polyhedral-nk-templates.md),
-  [Schreier graphs](../2026-07-12-conic-involution-schreier-graphs.md),
-  [program integration](../2026-07-12-conic-involution-residual-graphs.md); scripts
-  `s4_escape_probe.py`, `s4_abundance_check.py`, `pairing_witness.py`, `exact_fricke.py`,
-  `refined_signature.py`.
+- **C84 [ACTIVE] — abundance-first conic-involution Schreier program.** The exact boundary
+  catalogue and q=29 abundance evidence stand; pairing, bounded one-reply cores, fixed words, and
+  rooted-S4 double-coset packets are closed as uniform mechanisms. Run the two-ply ledger/descent
+  test specified in **C84 in the odd-q proof program** above. If it fails, return to the
+  spectral/probabilistic abundance lane. [Program map](../2026-07-12-conic-involution-residual-graphs.md).
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —
