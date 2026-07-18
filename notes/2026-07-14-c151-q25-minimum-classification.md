@@ -553,9 +553,71 @@ What this does not certify: that the five orbits *exhaust* the rows attaining `3
 semantic exceptional-profile arc normalizes into the orbit-`5` slice. Until both land, `32` is not
 the exact semantic minimum and the five classes are not a complete extremal classification.
 
+## Exhaustion route: the strict bound is already tracked data (2026-07-18)
+
+Each canonical class carries a `RowCompositionCertificate` over an `OrbitMask` of orbit codes its
+fresh/secant/carrier certificates prove legal. The structure field is
+`card_le : 32 ≤ (maskOrbitSet allowed).card`, so the threshold is a constant of the structure and
+the mask's own cardinality reaches no Lean statement.
+
+Reading those cardinalities out of the tracked `Q25RowCompositionData` leaves gives the spectrum
+`32`–`47` over all `1,189` classes, and exactly five classes attain `32`: `65`, `267`, `445`,
+`772`, `1002`. These are the five certified minimizer rows. Every other class already carries a mask
+of at least `33` elements.
+
+Because the mask is a *subset* of the legal orbit set, a mask of `n` elements certifies
+`n ≤ legalOrbitSet.card`. The strict bound that rules out every non-minimizer class is therefore
+already present as tracked, kernel-checkable data: exhaustion needs no new mask generation, only a
+`decide` at threshold `33` against masks that are already committed.
+
+Two structural facts make the rest reusable rather than regenerated:
+
+- `ValidRowPayload.TransportValid b p` is
+  `(rowConfig b p.c).image (residualApply p.y p.z) = p.canonicalConfig`. The transport is an element
+  of the certified residual action, not merely an eight-point permutation; the permutation
+  certificate is only the cheap way to prove that image equality. A valid row's transport therefore
+  yields orbit membership, and `ValidRowPayload.legalCard_eq` gives *equality* of legal
+  cardinalities between a row and its canonical class.
+- `ValidRowPayload.source_card_ge_of_canonical` is already generic in the bound `n`, so the existing
+  dispatch payload tree is reusable at threshold `33`; only a new conclusion layer is required.
+
+The resulting argument: dispatch each normalized row; a bad payload contradicts the assumed
+`RawCap`; a valid payload transports legal cardinality to its canonical class, and a class whose
+mask has at least `33` elements cannot attain `32`. So a row attaining `32` links to one of the five
+classes and lies in their residual orbits, closing against
+`isMinimumResidualClass_iff_mem_minimumOrbitUnion`.
+
+### Mask-spectrum evidence bundle
+
+Replay, from `/home/tavis/src/othello`:
+
+```sh
+python3 notes/2026-07-18-c151-minimum-mask-spectrum.py \
+  --check notes/2026-07-18-c151-minimum-mask-spectrum.json
+```
+
+| File | SHA-256 | Bytes |
+|---|---|---|
+| `2026-07-18-c151-minimum-mask-spectrum.py` | `151b34ce6d0e1c0d3d18b9f12623e504ca0095c0bca506c7f657db6ddb410a94` | `7,549` |
+| `2026-07-18-c151-minimum-mask-spectrum.json` | `236c9abe08fda2c03d076868d23a4577b65ff9ebe2afdf85c560836a77c5fd17` | `10,393` |
+
+The script parses only tracked Lean sources and fails loudly on schema drift: a wrong mask-word
+count, a duplicated class, a class set other than `0..1188`, or any class below the certified `32`.
+The independent cross-check reads the `legal` column of the residual-cover CSV
+(`62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3`), which is derived from the
+generator rather than from the Lean tree; it agrees with the mask cardinality on all `1,189`
+classes. That CSV is an untracked cache, so `--check` compares only the tracked-source-derived
+fields and records the cross-check status separately.
+
+What this does not certify: the mask cardinality is a lower bound on the legal count, not the exact
+count, except at the five rows where equality is separately checked. The CSV agreement cross-checks
+the generator against the Lean tree; it is not a proof that a mask equals its legal orbit set. None
+of this is yet a Lean theorem — it identifies which decides to run and shows the data for them is
+already committed.
+
 ## Current next step
 
-Exhaustion (step 6): prove that every normalized row attaining `32` lies in `minimumOrbitUnion`,
-against the residual-cover machinery. The certified layer above supplies the target shape —
-`isMinimumResidualClass_iff_mem_minimumOrbitUnion` turns the goal into a membership statement — so
-the remaining work is on the cover side, not the action side.
+Exhaustion (step 6), by the route above: a class-level strict-bound layer proving
+`33 ≤ (maskOrbitSet allowed).card` for the `1,184` non-minimizer classes, then a conclusion layer
+reusing the existing dispatch payloads at that threshold. The semantic normalization lift is written
+in `Q25MinimumClassification.lean` and is under its first build.
