@@ -27,6 +27,10 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
   satisfied by C263, escape hatch not needed), and the release policy (formalization gate,
   adequacy appendix, provenance section).
+- Closed: C278 conditional density (2026-07-17) — density-½ kernel-certified behind exactly one
+  Davenport-cited equidistribution axiom (`DensityAxioms.lean` + `DensityConditional.lean`; audits
+  `[propext, Classical.choice, Quot.sound, primes_equidistribute]`) →
+  `notes/2026-07-17-c278-dihedral-conditional-density.md`.
 - Closed: C263 D₂ₘ additions (2026-07-17) — full pair family `D₂ₘ` classified (odd dihedral always
   P; even case `(1−δ)·𝒢(Pₘ)` Dawson), verified over all 241,344 tame legal pairs, retitle applied,
   Discussion now §15 → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
@@ -42,16 +46,13 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Open frontiers
 
-- Density-½ gate RULED (`yc`, 2026-07-17): formalize conditionally — quarantine equidistribution
-  of primes in AP as one named axiom (RepairCodes-Stichtenoth pattern) and kernel-check the
-  derivation to the ½ conclusion. Allocated as C278. Unconditional formalization (PNT in AP)
-  stays out of scope; C264 states the single-axiom boundary in the paper.
+- Density-½ gate CLOSED (C278, 2026-07-17): one quarantined axiom `primes_equidistribute`,
+  ½ kernel-derived for all triple types and both torus signs. C264 still owes the paper's
+  single-axiom boundary sentence; replace the axiom when mathlib ships PNT-in-AP.
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
 
 ## Next steps
 
-- **C278** (in flight 2026-07-17) — conditional density-½ via one quarantined equidistribution
-  axiom; review its axiom statement's faithfulness before accepting.
 - **C284 USER SEQUENCING GATE, decide FIRST**: polyhedral nonregular coset templates would complete
   all finite subgroups of PGL₂(q) except the escape residual (the biggest significance lever).
   Decide pre-submission (delays C264) vs post-release before starting C264.

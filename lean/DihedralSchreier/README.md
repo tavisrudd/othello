@@ -34,6 +34,32 @@ Formalized without `sorry` or `native_decide`:
   `candidate_primes_infinite` / `P_and_N_primes_infinite` deliver Dirichlet's theorem
   (mathlib) for each class, so P and N positions each occur over infinitely many primes.
 
+## Conditional layer: the density value `1/2` (one quarantined axiom)
+
+The numerical `1/2` of Theorem 12.1 is not derivable from current mathlib (mathlib has only the
+qualitative Dirichlet theorem, not quantitative equidistribution). It is certified here
+**conditionally**, behind exactly one quarantined classical axiom — the same disclosure style as
+`RepairCodes/TRUST.md`'s Stichtenoth import:
+
+- `DensityAxioms.lean`: the sole axiom `primes_equidistribute` — the prime number theorem for
+  arithmetic progressions (Davenport, *Multiplicative Number Theory*, Chs. 20–22):
+  `π(x;m,a)/π(x) → 1/φ(m)` for each reduced residue class `a mod m`. This file contains no other
+  mathematical assertion. The axiom is exactly the textbook fact: fixed modulus, fixed reduced
+  class, no effective error term, no uniformity in `m`. When mathlib gains PNT-in-AP the axiom is
+  to be replaced by that theorem.
+- `DensityConditional.lean`: defines `RelativeDensity` (limit of prime-counting ratios) and
+  derives, for each of the three triple types and either torus sign `s = ±1`, that the P-classes
+  have density `1/2` relative to the torus family
+  (`relative_density_{dodd_nodd, dodd_neven, deven}`). The derivation consumes the committed
+  classification: `candidate_coprime` (each class reduced), `candidate_distinct` (four distinct
+  classes), and `card_P_*` (two of four are P). The shared `φ(8n)` cancels in the ratio
+  `2/4 = 1/2`, so the value never requires computing `φ(8n)`.
+
+The conditional headline theorems depend on exactly
+`[propext, Classical.choice, Quot.sound, DensityAxioms.primes_equidistribute]`; the unconditional
+`Density.lean` results are untouched and remain axiom-clean (dependence only on
+`[propext, Classical.choice, Quot.sound]`).
+
 This certifies the reduction plumbing and the Burnside-homomorphism reformulation, but not
 the paper's remaining Grundy-value or orbit-count conclusions, nor the *quantitative*
 prime-density value. In particular, not yet claimed as formalized:
@@ -43,9 +69,11 @@ prime-density value. In particular, not yet claimed as formalized:
 - Brown et al.'s ladder, pendant-ladder, and prism Grundy evaluations;
 - the `V₄` split-count formula and every template nimber;
 - the finite-field orbit counts;
-- the numerical density value `1/2` of Theorem 12.1: mathlib provides Dirichlet's theorem
-  (infinitude in each reduced residue class) but not the equidistribution / `1/φ`-density
-  statement, so only the reachable infinitude form of Theorem 12.1 is certified here.
+- the numerical density value `1/2` of Theorem 12.1 *unconditionally*: mathlib provides
+  Dirichlet's theorem (infinitude in each reduced residue class) but not the equidistribution /
+  `1/φ`-density statement. The `1/2` value is certified **conditionally** in the conditional
+  layer below, behind the single quarantined PNT-in-AP axiom; an unconditional proof awaits
+  mathlib's PNT-in-AP.
 
 Validation:
 

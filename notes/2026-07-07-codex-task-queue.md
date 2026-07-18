@@ -68,7 +68,6 @@ unless they retain an explicit open tail.
 
 ### `dihedral`
 
-- **C278 `[dihedral]` [QUEUED]** — conditional density-½ formalization per the 2026-07-17 `yc` ruling: quarantine equidistribution of primes in arithmetic progressions as one named axiom (RepairCodes-Stichtenoth / Q11DyeAxioms pattern) and kernel-check the derivation from it plus the proved 2-of-4 classification to Thm 12.1's relative density ½ → `notes/2026-07-17-c278-dihedral-conditional-density.md`.
 - **C264 `[dihedral]` [QUEUED; after C278/C281 content lands]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose); apply the C261 wording recommendations R1–R5, the C278 single-axiom density boundary sentence, the C260 maximal-automorphism-group remark in Appendix A, and an eventual-periodicity-in-m (Dawson period 34) corollary for the even-m pair family → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 - **C281 `[dihedral]` [QUEUED]** — exhaustive per-q census appendix: extend the C263 pair enumerator to legal triples, tabulate every tame legal dihedral configuration and value histogram for `q ≤ 23` as a half-page appendix, with the standard script/JSON/manifest evidence bundle → `notes/2026-07-17-c281-dihedral-census-appendix.md`.
 - **C282 `[dihedral]` [QUEUED]** — byproduct OEIS entries for the fixed-point-deleted Schreier/dihedral-Cayley nimber sequences: draft priority-stamp submissions now (A344227 pattern); program `%H` links follow the C270 public artifact → `notes/2026-07-17-c282-dihedral-oeis-byproducts.md`.
