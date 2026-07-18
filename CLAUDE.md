@@ -216,6 +216,10 @@ Token waste is a correctness failure. Tool output caps only truncate context; th
 broad commands safe. Every producer must read only needed sources and emit a small, predictable
 result.
 
+**Current-task handoff exception:** The line-count and display-token caps below do not apply to the
+selected lane's live handoff or files it directs the agent to read. Read them in full, chunking only
+to avoid tool truncation. This exception does not authorize other preloads or broad output.
+
 **Before every `rg`, `grep`, `find`, or equivalent call, all of these must be visible in the
 command:**
 
