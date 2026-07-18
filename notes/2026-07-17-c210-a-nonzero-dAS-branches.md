@@ -48,14 +48,21 @@ checker's `A_i,B_i`) as
 load-bearing certification is the direct branch verification above.
 
 **Open (next sub-task): completeness.**  Branches 1-3 are not yet shown to be
-*all* of `D_AS` off the excluded locus `delta*p*N*K1*K2=0`.  The cross-determinant
-(`h0`-eliminated) variety `V(R01,R12,R02)` strictly contains the three branches,
-so the extra locus must be shown either spurious (no consistent `h0` lift, i.e.
-`A_i=0` without `B_i=0`) or contained in the excluded loci before completeness
-can be claimed.  The a=0 report needed careful resultant/gcd elimination for the
-analogous step and explicitly recorded that `minAssGTZ` returned a **wrong**
-decomposition there, so this must be done by exact division/resultant/radical
-arguments, not by trusting a primary-decomposition call.
+*all* of `D_AS` off `delta*p*N=0`.  A concrete negative finding narrows the route:
+the naive cross-determinant projection does **not** work.  The square-free big
+factors `P01,P12,P02` of `E_ij = A_i*B_j + A_j*B_i` have a common zero set
+`V(P01,P12,P02)` whose image under eliminating `a`, saturated by `delta*p`, is
+**2-dimensional in `(delta,p,w)`** -- its radical lies strictly inside
+`(delta+p, w^2+w)` (branch 3 is only the 1-dimensional `{delta=p, theta=1}`).  So
+`V(P01,P12,P02)` is polluted by the degenerate `A_i=0` locus (cross-determinants
+vanish but no consistent `h0` lifts), exactly the a=0 "`h0`-free / all-alpha
+candidate" subtlety.  Completeness must instead work with the full `D_AS` ideal
+`(c0,c1,c2)` (`u`-free, `h1`-free, in `GF(2)[e,delta,a,b,p,w,h0]`) saturated by
+`e*(e+delta)` (drops branches 1,2) and `delta*p*N`, checked equal to the branch-3
+ideal `(delta+p, w^2+w, h0-h0_3)`; or the `A_i=0` sublocus must be shown to force
+`theta=0` (excluded), mirroring a=0.  The a=0 report also recorded that
+`minAssGTZ` returned a **wrong** decomposition on the analogous step, so this must
+use exact division/resultant/radical arguments.
 
 Also open (later parts): collision-forcing vs arc-legal per branch via the
 second-layer `tau`-quadratic trace test `Tr(A/(bQ)^2)=0` (the crux, since the

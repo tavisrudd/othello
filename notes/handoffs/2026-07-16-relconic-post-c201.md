@@ -23,10 +23,18 @@ Step-2(b) part 2 gives the three explicit branches (a-deformed a=0 branches), ea
 `e=0` (`h0=0`), `e=delta` (`h0=p^2*theta+e^2+e*b+e*a*p`), `delta=p,theta=1`
 (`h0=e^2*a^2+e*a^2*p+e*a*p+e^2+e*b+e*p`), `h1` free, each recovering the a=0 value at `a=0`
 ([`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)).
-Step 2 remaining, in order: (b-part-2 completeness) show these three are ALL of `D_AS` off
-`delta*p*N*K1*K2=0` -- the cross-determinant variety strictly contains them, so the extra locus must be
-shown spurious (no consistent `h0` lift) or excluded, by exact division/resultant/radical work (NOT
-minAssGTZ -- wrong on the a=0 analogue);
+Step 2 remaining, in order: (b-part-2 completeness) show these three are ALL of `D_AS` off `delta*p*N=0`.
+**Concrete finding (2026-07-17): do NOT use the naive cross-determinant projection.** The big
+cross-determinant factors `P01,P12,P02` (from `E_ij=A_i*B_j+A_j*B_i`) have a common zero set
+`V(P01,P12,P02)` that, after eliminating `a` and saturating by `delta*p`, is **2-dimensional in
+`(delta,p,w)`** (radical strictly inside `(delta+p,w^2+w)`), i.e. polluted by the degenerate `A_i=0`
+locus (cross-dets vanish but no consistent `h0` lifts) -- the a=0 "`h0`-free / all-alpha candidate"
+subtlety. Completeness must instead work with the full `D_AS` ideal `(c0,c1,c2)` (u-free, h1-free, in
+`GF(2)[e,delta,a,b,p,w,h0]`) saturated by `e*(e+delta)` (drops branches 1,2) and `delta*p*N`, checked
+equal to the branch-3 ideal `(delta+p, w^2+w, h0-h0_3)`; or explicitly show the `A_i=0` sublocus forces
+`theta=0` (excluded: `delta=0` / no rational `w` over the odd tower), mirroring a=0. That 3-generator
+saturation in 7 vars is heavy -- budget it, use `quit;`-terminated Singular piped via stdin, do not
+leave it orphaned;
 (c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
 trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
 arc-legal rootless branch is where a construction could hide); (d) the `a!=0` reconstruction-split
