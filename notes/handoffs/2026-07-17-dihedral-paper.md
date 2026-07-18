@@ -55,9 +55,9 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Next steps
 
-- **C284 USER SEQUENCING GATE, decide FIRST**: polyhedral nonregular coset templates would complete
-  all finite subgroups of PGL₂(q) except the escape residual (the biggest significance lever).
-  Decide pre-submission (delays C264) vs post-release before starting C264.
+- **C284 — GATE DECIDED (user, 2026-07-17): pre-submission.** Polyhedral nonregular coset
+  templates land before C264; the paper waits for them and earns the full finite-subgroups title.
+  C264 is delayed behind C284 accordingly.
 - **C281** — exhaustive per-q census appendix (extend C263 enumerator to triples; evidence bundle).
 - **C283** — wild-case scoping spike, time-boxed: `p | 2m` examples + §15 remark + feasibility
   frontier; no classification claim.
