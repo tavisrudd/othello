@@ -2,7 +2,7 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; exact high-core isomorphism fails its live fixed-prefix movement gate
+**Status:** active; separator census passes its reuse gate, so exact two-port semantics are next
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -77,3 +77,16 @@ reduces decompositions by only 0.249%, still spends 100,000 connected states, an
 ten million states. The next bounded diagnostic is a census of repeated pieces behind one- and
 two-vertex separators in the canonical high cores; require substantial reuse before designing a
 two-port boundary algebra.
+
+## Separator-census result
+
+`notes/2026-07-17-c294-b3-separator-census.md` passes that bounded diagnostic. Among genuine
+two-port pieces with at least eight internal vertices, 61,220 exact classes recur across distinct
+canonical high cores and cover 976,693 of 1,313,230 occurrences (`74.37%`); reused pieces reach 29
+vertices. An independently organized replay verifies the first nontrivial cross-core one- and
+two-port witnesses. The unchanged traversal reproduces every predecessor invariant and still
+returns no value.
+
+The next bounded design task is to define the exact two-port live/dead transition object and a
+local replacement theorem, then falsify it on the recorded q=3/q=5 prefix before integrating it
+into a value solver. Do not repeat or enlarge the ten-million-state run.

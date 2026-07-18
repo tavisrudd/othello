@@ -1,0 +1,1 @@
+{"field_order":5,"one_port_min_8":{"adjacency_and_labels_preserved":true,"component_vertices":8,"mapping_size":9,"port_count":1,"single_label_mutation_rejected":true},"traversal_invariants_match":true,"two_port_min_8":{"adjacency_and_labels_preserved":true,"component_vertices":8,"mapping_size":10,"port_count":2,"single_label_mutation_rejected":true},"type_index":0}
