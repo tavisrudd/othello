@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "abstract_pairing_children_ABCD": [10, 6, 2, 3],
+      "escaping_children_ABCD": [31, 29, 30, 27],
+      "pgl2_pairing_children_ABCD": [10, 6, 2, 3],
+      "q": 7
+    },
+    {
+      "abstract_pairing_children_ABCD": [9, 0, 1, 1],
+      "escaping_children_ABCD": [85, 87, 86, 87],
+      "pgl2_pairing_children_ABCD": [9, 0, 1, 0],
+      "q": 11
+    },
+    {
+      "abstract_pairing_children_ABCD": [6, 8, 20, 3],
+      "escaping_children_ABCD": [133, 135, 134, 131],
+      "pgl2_pairing_children_ABCD": [6, 8, 16, 3],
+      "q": 13
+    },
+    {
+      "abstract_pairing_children_ABCD": [9, 2, 6, 4],
+      "escaping_children_ABCD": [235, 241, 238, 239],
+      "pgl2_pairing_children_ABCD": [9, 2, 6, 3],
+      "q": 17
+    },
+    {
+      "abstract_pairing_children_ABCD": [28, 2, 5, 2],
+      "escaping_children_ABCD": [307, 305, 306, 305],
+      "pgl2_pairing_children_ABCD": [28, 2, 5, 2],
+      "q": 19
+    },
+    {
+      "abstract_pairing_children_ABCD": [25, 9, 12, 4],
+      "escaping_children_ABCD": [457, 459, 458, 457],
+      "pgl2_pairing_children_ABCD": [25, 9, 12, 4],
+      "q": 23
+    },
+    {
+      "abstract_pairing_children_ABCD": [3, 15, 12, 0],
+      "escaping_children_ABCD": [751, 757, 754, 753],
+      "pgl2_pairing_children_ABCD": [3, 15, 12, 0],
+      "q": 29
+    },
+    {
+      "abstract_pairing_children_ABCD": [48, 18, 14, 4],
+      "escaping_children_ABCD": [871, 869, 870, 867],
+      "pgl2_pairing_children_ABCD": [48, 18, 14, 4],
+      "q": 31
+    }
+  ],
+  "class_order": "ABCD",
+  "schema": "c84-pairing-obstruction-v1"
+}

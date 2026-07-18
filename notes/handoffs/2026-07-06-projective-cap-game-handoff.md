@@ -565,7 +565,11 @@ task list.  Current high-value items:
   centres are conic-only-P at density `≈0.13` (min over classes, q=11–23, verified two ways; q=7 the
   lone dip, no dip at depleted {11,17}); the target is a provable `#{y : 𝒢=0} ≥ c·q²`. **Pairing/mirror
   mechanism ruled out** (fpf-involution residual automorphism covers only a minority) — the bound
-  must be Grundy-arithmetic. Ranking: (1) prove positive-density P (S₄ then all triple types);
+  must be Grundy-arithmetic. **Existence-strength pairing is now also closed:** an exact geometric
+  plus abstract automorphism census at prime `q=7,11,13,17,19,23,29,31` found zero pairing
+  children among all 753 class-D escapes at `q=29`; this needs an adaptive/non-pairing certificate
+  or an explicit exception (`notes/2026-07-17-c84-pairing-obstruction.md`). Ranking: (1) prove
+  positive-density P (S₄ then all triple types), beginning with a bounded adaptive class-D core;
   (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
   complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) drain minimax
   fallback. Corrections folded: order 24 ≠ S₄ (D₂₄ occurs at `12|q²−1`, separate by element-order

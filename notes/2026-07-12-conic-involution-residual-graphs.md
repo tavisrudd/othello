@@ -78,6 +78,15 @@ non-pairing reason, so `pairing/τ` is not the density mechanism (same adaptive-
 as A5/C75). A provable positive-density bound cannot be a symmetry construction; the precise
 target is sharpened in **§The frontier** below.
 
+**Pairing also fails as a uniform existence mechanism (C84 follow-up, 2026-07-17).** An exact
+dependency-free automorphism census over all S₄-rooted escapes at prime
+`q=7,11,13,17,19,23,29,31` found that class D at `q=29` has zero pairing-certified children among
+all 753 legal escapes—not merely zero `PGL₂`-induced mirrors, but zero fixed-point-free
+nonadjacent involutory graph automorphisms of any kind. Thus pairing cannot supply one P child in
+every S₄ class. The surviving existence route must use an adaptive certificate, a non-pairing
+bounded core/quotient, or explicit exceptions. This is a bounded obstruction, not a claim that the
+q=29 children are N. Evidence: `notes/2026-07-17-c84-pairing-obstruction.md`.
+
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
 conic-only value 0; that does **not** by itself produce an **on-conic** P child. Closing the
 escape via (ON) needs a separate **exchange / transfer lemma** carrying an off-conic
