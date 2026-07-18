@@ -3,11 +3,14 @@
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: ACTIVE; PRE-ALLOCATION GATE — C274 froze packet M1's theorem crosswalk and rewrite bill,
-and C275 froze its deny-by-default clean-room publication manifest. The user selected
+**Status**: ACTIVE; PAPER RENAME READY / EXPORT GATED — C274 froze the complete-ports paper's
+theorem crosswalk and rewrite bill, C275 froze its deny-by-default clean-room publication manifest,
+and [C276](../2026-07-17-c276-complete-ports-rename-census.md) inventoried the atomic paper-only
+rename. The `repaircodes` lane alias, this handoff path/field, task pegs, owner references, and Lean
+namespaces remain unchanged. The user selected
 separate clean-history repositories for each exported paper plus a new shared Lean monorepo backing
 all exported papers under `papers/`, because this monorepo contains substantial nonpublication
-material. No new M1 C-task is allocated until the user supplies or approves the paper repository
+material. Public export remains gated until the user supplies or approves the paper repository
 identity/remote and license and decides whether C220 remains. No repository initialization, history
 transplant, or file export is allowed before those gates pass. The older C111–C114, C214, C221, and C224 formal program remains
 complete; its sole deep formal dependency is the quarantined Stichtenoth theorem.
@@ -16,12 +19,12 @@ complete; its sole deep formal dependency is the quarantined Stichtenoth theorem
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
 **A+ roadmap:** [weighted-transfer upgrade and `repairports` follow-up](../2026-07-16-repaircodes-a-plus-roadmap.md)
 
-## Active M1 packet — publication gate after C275
+## Active complete-ports paper packet — rename after C276
 
 **Objective:** turn the portfolio harvested by
 [C258](../2026-07-17-c258-rp-next-reward-harvest-map.md) and packaged by
 [C259](../2026-07-17-c259-rp-next-execution-packets.md) into a separately published short
-theorem-led complete-port manuscript without exposing the monorepo or its history. C274 completed
+theorem-led complete-ports manuscript without exposing the monorepo or its history. C274 completed
 the theorem/evidence crosswalk. C275 defines the exact clean-room export surface and is complete.
 
 **Frozen manifest:**
@@ -43,10 +46,11 @@ shared Lean monorepo receives one global manifest derived from the union of all 
 closures, plus a separately verified guarded `lake pack`/restore artifact path. No broad directory
 copy and no raw `.lake/build` or selected-`.olean` copy is an acceptable starting point.
 
-**Next step:** obtain the M1 repository name/local destination/public remote and license, then decide
-whether C220's optional stability theorem remains. Allocate the next global C-ID only after those
-answers. Separately route the all-papers shared Lean monorepo export to an owner that coordinates
-the build-system artifact path and existing public-`FiniteGeom` extraction work.
+**Next step:** allocate one `[repaircodes]` task to execute C276's paper-only rename map while
+preserving every lane identity. After the private rename, obtain the complete-ports repository
+name/local destination/public remote and license, then decide whether C220's optional stability
+theorem remains. Separately route the all-papers shared Lean monorepo export to an owner that
+coordinates the build-system artifact path and existing public-`FiniteGeom` extraction work.
 
 **Follow-up:** the twisted-cubic transversal spectrum spun off to
 [C115–C120](2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in
