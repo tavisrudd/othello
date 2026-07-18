@@ -150,7 +150,7 @@ must be computed only for separator pieces actually requested by the live decomp
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| `2026-07-17-c294-b3-two-port-transition.cpp` | 16,124 | `0ce0cd7defa10acac8b082ff9f7cca8f7053ce9cf99f6f20190b5876ffb245f2` |
+| `2026-07-17-c294-b3-two-port-transition.cpp` | 16,172 | `dd99c563e47d3e2610544e724ac4d8d44439e18187edcfe9ff29ea6bc2a6476c` |
 | `2026-07-17-c294-b3-two-port-transition-replay.py` | 8,918 | `3f3d78a972fb4779fce5026753987c2fa914ae4004d806bf0cda424882b64686` |
 | `2026-07-17-c294-b3-two-port-transition-q3.json` | 656 | `b189a4b276c7740a6645264677d64eaa90a57c1f7cf0094a5792ddba553e373c` |
 | `2026-07-17-c294-b3-two-port-transition-q5-100k.json` | 971 | `184a8eea7e819025bbdf4a9cab299fa6537f1b47ca075f031b3a6806f5b41e77` |

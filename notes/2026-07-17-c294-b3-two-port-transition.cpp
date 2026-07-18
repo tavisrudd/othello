@@ -261,6 +261,7 @@ class TwoPortTransition {
     std::unordered_map<std::vector<int>, int, VectorHash> node_ids_;
 };
 
+#ifndef C294_TWO_PORT_TRANSITION_NO_MAIN
 int main(int argc, char **argv) {
     if (argc < 3 || argc > 4) {
         std::cerr << "usage: c294-b3-two-port-transition GAME_STATE_LIMIT "
@@ -414,3 +415,4 @@ int main(int argc, char **argv) {
             << "  \"value_conflicts\": " << conflicts << "\n"
             << "}\n";
 }
+#endif

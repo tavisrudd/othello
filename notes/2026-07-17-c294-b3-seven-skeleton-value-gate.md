@@ -2,8 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; exact two-port semantics passes its first compression gate, so bounded live
-integration is next
+**Status:** active; first live two-port selector reproduces the prior whole-core quotient and adds
+no transition-specific compression
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -103,3 +103,16 @@ or a follower value. The next bounded step is live integration on the unchanged 
 prefix. Require a measured reduction in decompositions or materially reusable interface hits before
 any ten-million-state run; compute transition nodes only for pieces requested by the live
 decomposition.
+
+## Live-integration result
+
+`notes/2026-07-17-c294-b3-two-port-live.md` integrates one on-demand piece into an exact
+port-labelled context key on the unchanged prefix. It records 10,726 reusable hits among 10,888
+requests, but every hit reuses the same exact piece class. The traversal has exactly the prior
+whole-core live metrics: 1,941,400 decompositions, 84,903 quotient classes, and no follower value.
+The independent replay confirms that the first full cache hit is already graph isomorphism.
+
+Thus the first live selector fails the transition-specific material-gain gate. Do not run it at ten
+million states. The next bounded design must expose different exact piece classes to the transition
+quotient without merely recoding whole-core isomorphism, and must show a new decomposition or
+contextual-hit gain on the fixed prefix before another value run.
