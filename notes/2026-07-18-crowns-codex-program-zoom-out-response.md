@@ -6,55 +6,66 @@
 
 **Status:** companion reflection on
 `2026-07-18-crowns-fable-program-zoom-out-response.md`, read against the complete work
-summary/timeline, papers index, staged paper abstracts, crowns handoff, and full C294 record. No new
-theorem or computation; judgments and routing recommendations only. Any new allocation still
-requires the normal queue process and user approval.
+summary/timeline, papers index, staged paper abstracts, crowns handoff, full C294 record, complete
+C210 synthesis, and the landed C298 robust-collision theorem. No new theorem or computation;
+judgments and routing recommendations only. Any new allocation still requires the normal queue
+process and user approval.
 
 ## 1. Executive judgment
 
-Fable found the right bottleneck and named it at the wrong scale.
+Fable identified an important bottleneck and promoted it too quickly into a single cause.
 
-The geometric **game-value** program is indeed dominated by one technology: find a
+The geometric **P-position** program is indeed dominated by one technology: find a
 fixed-point-free, nonadjacent involution and answer by its mate. More precisely, that is the only
-technology that currently produces broad, conceptual infinite families of P-positions across the
-finite-geometric boards. C294 matters because its obstruction chain proves, with unusual clarity,
-that a second technology cannot merely be a more permissive version of the first. Colour-preserving
-repair fails; immediate restoration by an arbitrary abstract involution fails; an asymmetric state
-must persist. That is a real conceptual boundary.
+technology that currently produces broad, conceptual infinite families of Grundy-zero positions
+across the finite-geometric boards. C294 matters because its obstruction chain proves, with unusual
+clarity, that a replacement cannot merely be a more permissive version of the same technology.
+Colour-preserving repair fails; immediate restoration by an arbitrary abstract involution fails;
+an asymmetric state must persist. That is a real conceptual boundary.
 
 But the **whole program** is not one-technology. Its larger proved and manuscript-ready half already
 uses exact defect identities, evaluation-rank dichotomies, orbit and subgroup reconstruction,
 Frobenius charging, complete repair hypergraphs, weighted transfer, pointed Tutte/EXIT structure,
-and certificate-backed finite classification. Even within games, the dihedral exact nimbers,
-finite Grundy computations, terminal positions, and Queens values are not all mirror theorems. The
-accurate claim is therefore:
+and certificate-backed finite classification. C210 and C298 add another genuine technology:
+algebraic classification of collision components followed by exact hypergraph matching and
+transversal bounds. Even within games, the dihedral exact nimbers, finite Grundy computations,
+terminal positions, and Queens values are not all mirror theorems. The accurate claim is therefore:
 
 > The program has many geometric and coding technologies, but only one scalable geometric
-> P-value technology. C294 is the best current experiment for constructing a second one.
+> Grundy-zero certificate. C294 is the best current experiment for constructing another one; a
+> full Grundy-value technology is a stronger and separate demand.
 
 That qualification changes the routing rhetoric. C294 is the critical research path for Crown I
-and a plausible model for the odd-plane kernel. It is not the sole blocker of the portfolio, Crown
-II, the relative-conic coverage problem, or publication. Those have independent gates.
+and a plausible model for the odd-plane kernel. No theorem currently reduces C84's fourth-centre
+density and exchange problem, the parabolic/Hermitian mirror boundary, and the mixed C294 scar to
+one common state algebra. They share a failed certificate, not yet a proved cause. C294 is therefore
+not the sole blocker of the portfolio, Crown II, the relative-conic coverage problem, or
+publication. Those have independent gates.
 
-## 2. There is one value bottleneck, not one program blocker
+## 2. There is no established single program blocker
 
-Four constraints should remain separate.
+Five constraints should remain separate.
 
-1. **Value technology.** The mixed `PGL2` scar and the odd-plane kernel need a value-preserving
-   mechanism beyond immediate automorphism pairing. This is the blocker Fable identified.
-2. **Intrinsic reconstruction.** Crown II still has to recover the relevant incidence, matching,
+1. **Grundy-zero certification.** The mixed `PGL2` scar and the odd-plane kernel need a
+   value-preserving mechanism beyond immediate automorphism pairing. This is the bottleneck Fable
+   identified, but no theorem says that the same mechanism solves both.
+2. **Exact nimber compression.** Crown I gold and subfield descent may need nonzero Grundy values,
+   not merely a new way to certify P. A P/N quotient and a nimber-compatible quotient are different
+   deliverables.
+3. **Intrinsic reconstruction.** Crown II still has to recover the relevant incidence, matching,
    or code structure from an abstract continuation object. A value theorem does not supply that
    reconstruction.
-3. **Coverage and abundance.** The relative-conic `O(sqrt(q))` program and C84's full-dimensional
+4. **Coverage and abundance.** The relative-conic `O(sqrt(q))` program and C84's full-dimensional
    abundance/exchange problem are not consequences of solving one regular Cayley scar. They may
    consume the same ideas later, but they have separate geometric and arithmetic obligations.
-4. **Shipping.** Four manuscripts are past their local mathematical gates, yet nothing has shipped.
-   The public artifact/release spine is a real blocker of a different kind and is currently more
-   certain to yield visible program value than any open theorem attack.
+5. **Shipping.** Four manuscripts are past their local mathematical gates, yet nothing has shipped.
+   A public artifact spine is a shared prerequisite, not a sufficient release condition: adequacy
+   and provenance policy, citation-chain review, C220 disposition, aggregate rebuilds, and immutable
+   releases remain paper-specific gates.
 
-The distinction matters because “critical path” can mean either *the deepest common mathematical
-risk* or *the next action that advances the portfolio*. C294 is the first. The artifact spine is
-the second. Neither should erase the other.
+The distinction matters because “critical path” can mean either *the deepest mathematical risk* or
+*the next action that advances the portfolio*. C294 is one instance of the first. The artifact
+spine is part of the second. Neither is a universal dependency of everything else.
 
 ## 3. What the full C294 record actually licenses
 
@@ -68,6 +79,12 @@ steps:
 
 This proves that the missing state is asymmetric. It does not yet prove that a bounded asymmetric
 state exists.
+
+It also does not prove that C84 has the same missing state. C294's hard object is a regular
+three-generator Cayley scar arising in subfield descent. C84 varies a fourth centre over a
+two-dimensional rooted family and still needs a separate off-conic-to-on-conic exchange or
+small-bad-set theorem. A C294 boundary algebra could become a reusable model, but there is no
+current reduction from the class-D density problem to the mixed subfield scar.
 
 That negative boundary is especially important because seven of the twelve mixed `PGL2(5)` types
 still have unevaluated root values. The current contextual-algebra picture is therefore a candidate
@@ -85,6 +102,10 @@ If frontier complexity stays bounded and the hard types share a small transition
 becomes the strongest route in the program. If frontier size grows or the nimbers split without a
 small rule, the result is still valuable: it scopes silver and prevents “contextual algebra” from
 becoming a name for an object that does not compress.
+
+The hard-type nimbers decide more than whether another P-certificate exists. If a scar has nonzero
+nimber, odd-subfield descent must carry that exact value by xor. A technology proving only
+Grundy-zero cases would not close the resulting classification.
 
 Two nearby C294 repairs should also precede grand synthesis. The checked mod-40 extension doubles
 the eligible prime residues essentially for free and belongs in the atomic bronze bundle. The
@@ -114,12 +135,16 @@ A disciplined version would:
   cross-ratios, their products, and quadratic characters;
 - test exact Boolean formulas and low-complexity strata, recording zeros separately;
 - require the same symbolic rule over both `q=13` and `q=29`, rather than accepting a field-specific
-  fit; and
+  fit, after first verifying that the complete P/N-labelled populations use exactly the same rooted
+  convention; and
 - compare against the existing subgroup/orbit strata so that a “character law” is not merely a
   disguised class label.
 
 This remains an unusually high information-per-cost task. Its likely near-term payoff is a clean
-arithmetic stratification or a strong null, not necessarily the full density theorem in one jump.
+arithmetic stratification or a bounded negative for the preregistered predicate class, not
+necessarily the full density theorem in one jump. A flat result cannot prove that the P-set is
+“arithmetically unstructured” without first defining and exhausting a mathematical hypothesis
+class; it can only reject the tested invariant library.
 
 ## 5. Even characteristic is a promising control experiment, not the missing half of the whole game
 
@@ -164,40 +189,49 @@ assembly.” If it does not, the ledger still tells the dihedral outlook exactly
 conjectured. The Guy--Smith analogy is useful motivation, but it should follow the precise theorem
 schema rather than substitute for it.
 
-## 7. The Clebsch Crown III pilot is even cheaper than Fable says
+## 7. The Clebsch observation is a recognition corollary, not yet Crown III
 
-This is the strongest immediate mathematical suggestion in the response, but the proposed finite
-uniqueness check appears unnecessary under the current definitions.
-
+Fable's proposed finite uniqueness check appears unnecessary under the current graph convention.
 The seeded continuation graph has the legal-extension locus `U(A)` as its vertex set. If it is
 isomorphic to the icosahedron, it has twelve vertices. The existing Clebsch rigidity theorem says
 that, among six-arcs in `PG(2,11)`, `#U(A) <= 15`—in fact `#U(A)=12` in the exceptional case—is
 equivalent to projective equivalence with the Clebsch hexagon. The Lean-checked q=11 localization
-then identifies the Clebsch continuation graph with the icosahedron and proves the seed P by the
+identifies the Clebsch continuation graph with the icosahedron and proves the seed P by the
 antipodal mirror.
 
-So, modulo checking that the same continuation-graph convention is used in all three statements,
-the desired pilot is already a corollary chain:
+Thus, after checking that all sources use the same continuation convention, there is an immediate
+recognition corollary:
 
 ```text
 abstract continuation graph is the icosahedron
     -> it has 12 vertices
     -> the legal-extension locus has size 12
     -> the seed is the Clebsch projective class
-    -> the associated code and its conic deep-hole geometry are recovered up to equivalence
-    -> the continuation game is P.
+    -> the associated code and conic deep-hole geometry are determined up to equivalence.
 ```
 
-This does realize “the game remembers the geometry, and the geometry solves the game” at bounded
-scale. It should be stated, with the publication seam handled carefully, without pretending it is
-the general C295 reconstruction theorem. It recognizes one projective class by a coarse intrinsic
-invariant—vertex count plus the icosahedral graph—not arbitrary incidence from arbitrary
-continuation data. That makes it an honest Crown III bronze and an excellent motivating example,
-not evidence that the general reconstruction problem has disappeared.
+The P conclusion is also immediate from the same graph, but that is precisely why this is not yet a
+Crown III theorem. The icosahedron's intrinsic antipodal automorphism solves its Node--Kayles game
+directly; the value has not been derived from reconstructed geometry or code data. Nor does vertex
+count recover the uncoloured graph's decomposition into projection matchings. A coloured family of
+matchings reconstructs its centres almost tautologically; Crown II requires the colours and centres
+to be identifiable from the uncoloured continuation object.
 
-## 8. The gem inventory is crowns-weighted, not program-wide
+A genuine bounded Crown III pilot would need three further arrows:
 
-Fable's ranking is perceptive within the crowns narrative, but it omits two of the most mature
+1. intrinsically recover the matching/port decomposition from the uncoloured graph or complex;
+2. reconstruct the centres, incidence geometry, and code from that decomposition; and
+3. derive the value certificate from an invariant of the reconstructed algebraic data, rather than
+   invoking the graph's antipodal symmetry independently.
+
+Until then the result is an excellent recognition vignette and a falsification target for C295,
+not “the game remembers the geometry, and the geometry solves the game.” It also crosses three
+publication allocations—`arcs` owns the graph identification, `nofil` the P-reading, and `clebsch`
+the rigidity—so any statement must avoid repackaging their juxtaposition as a new crown.
+
+## 8. The gem inventory is crowns-weighted and misses the landed C210/C298 theorem
+
+Fable's ranking is perceptive within the crowns narrative, but it omits three of the most mature
 program-scale results.
 
 The complete-repair-ports manuscript is not infrastructure debris. Its abstract already supports
@@ -212,19 +246,45 @@ order `s >= 5`, with the exceptional Q25 profile kernel-checked and a strong alt
 corollary. It is more mature than several speculative entries ranked above it. Its narrower
 audience does not make it less of a gem.
 
+Most importantly, C210 is not merely a failed construction search or a source of common language.
+It proves a complete asymptotic collision obstruction throughout a natural trace-one
+two-repair-coset architecture, with explicit exceptional strata and thresholds. C298 has now
+upgraded that theorem robustly. On every noncollapsed collision component, all three coordinate
+maps have geometric fiber size at most nine; exact hypergraph estimates then force
+`Omega(q)` matching and transversal numbers. The only failures are two completely classified
+terminal star strata where all `q-1` edges share one repair vertex and the transversal number is
+one. This is a theorem-scale generic/exceptional dichotomy, not a proposed next experiment.
+
+C298 also identifies the next frontier exactly. Outside the stars, one must decide whether the
+linear deletion cost necessarily destroys relative coverage. On the stars, one must decide whether
+the collision set can be killed by one deletion per seed colour while preserving coverage. This is
+the two-hypergraph problem C302/C303 are designed to expose. C297 separately asks whether the C210
+normal form is broad enough to make the obstruction a classification theorem.
+
+The publication grade is conditional but already high. C210+C298, with C297 proving a natural
+normal form and the argument distilled and formalized, would be a strong **A- specialist paper**.
+A sharp C302/C303 collision-versus-coverage theorem—or a surviving partial-domain construction—would
+raise the package to **A**. A genuinely broad C301 exceptional-incidence theorem or a new infinite
+sharp-scale family from C304 could reach **A+**. C305's finite `q=512` closure improves completeness
+but does not change the grade by itself. Formalization raises trust and distinctiveness; breadth and
+the collision/coverage theorem determine the mathematical grade.
+
 I would keep three inventories instead of forcing unlike objects into one ranking:
 
 - **Established scientific jewels:** Clebsch rigidity/decoding, the prescribed-conic defect
-  theory, complete repair ports, the mirror classification with its sharp boundary, uniform
-  Frobenius pair extension, and the dihedral value corpus.
-- **High-upside research bets:** C294 contextual value transfer, the relative-conic
-  `O(sqrt(q))` coverage problem, intrinsic continuation reconstruction, and the even-characteristic
-  continuation pilot.
-- **High-leverage actions:** build the public extraction/release spine, state the Clebsch Crown III
-  corollary, run the C84 arithmetic sieve, and complete a games-track prior-art sweep.
+  theory, complete repair ports, the C210 obstruction plus C298 robust-collision dichotomy, the
+  mirror classification with its sharp boundary, uniform Frobenius pair extension, and the
+  dihedral value corpus.
+- **High-upside research bets:** C297 normal-form breadth and C302/C303 collision-versus-coverage,
+  C294 contextual value transfer, the broader relative-conic `O(sqrt(q))` problem, intrinsic
+  continuation reconstruction, and the even-characteristic continuation pilot.
+- **High-leverage actions:** resolve the release-policy boundary and build the public extraction
+  spine, state the Clebsch recognition corollary at its correct level, run the C84 arithmetic sieve,
+  and complete a games-track prior-art sweep.
 
 C294 bronze, the `PG(2,64)` 24/26-arc, the cap-set identity, and the congruence-law assembly can move
-between those lists as their explanatory theorems mature. This separation prevents scientific
+between those lists as their explanatory theorems mature. C298 has already moved: it is proved,
+with the two terminal star collapses as an exact boundary. This separation prevents scientific
 depth, research upside, and operational urgency from being mistaken for one scale.
 
 ## 9. Notes on the smaller levers
@@ -240,36 +300,51 @@ depth, research upside, and operational urgency from being mistaken for one scal
 - **Cap-set bridge:** `tau_axis = q-r_3(h)` deserves an explicit cross-reference wherever the repair
   parameter is introduced. It is a clean identity with a famous external object, but it should not
   be inflated into a separate paper without a new consequence.
-- **The `PG(2,64)` rhyme:** worth recording as a classification target, but “named uncovered locus”
-  is not yet a mechanism. The earlier no-second-instance result and the failed q=64 coverage
-  mechanisms counsel restraint until a rigidity invariant appears.
+- **The `PG(2,64)` rhyme:** Fable's formulation is technically too strong. The 24-arc has nineteen
+  uncovered points that **lie on** the line at infinity; its uncovered locus is not the full rational
+  line. After two directions are adjoined, the 26-arc is ordinarily complete, so its
+  `[26,3,24]_64` code does not carry an analogous named deep-hole locus. The honest comparison is
+  line-confinement for the 24-arc versus exact conic equality for Clebsch. Projective/code
+  classification remains worthwhile, but it is not yet the same rigidity phenomenon.
 - **Public URL:** agree on leverage, disagree on the word “mirror” if it suggests exposing the
   private research repo wholesale. The scope summary's extraction plan—a public shared `FiniteGeom`
   artifact pinned by per-paper repositories, immutable releases, adequacy appendices, and explicit
-  provenance disclosure—is the correct unblock. It may be more than an afternoon, but it is finite,
-  controllable work.
-- **Cross-paper incidence-pattern agenda:** either allocate one precise orbit-valued transfer
-  theorem or soften “programme” to “recurring question.” The present note correctly says that a
-  direction is not work.
+  provenance disclosure—is the correct shared prerequisite. It is not the sole unblock. The scope
+  summary still states a global all-lemmas-in-Lean release gate, while the current papers index
+  permits an explicit mixed proof/citation/replay/kernel trust boundary. That policy conflict must
+  be resolved, and the remaining paper-specific reviews and rebuilds must close, before “ready to
+  release” has one meaning.
+- **Cross-paper incidence-pattern agenda:** the blanket “still unallocated” statement is stale.
+  C302 already owns carrierwise secant-defect stability, and C303 consumes it for the partial-domain
+  two-hypergraph problem. The stronger orbit-valued transfer theorem and the game-specific intrinsic
+  dead-set identity remain unallocated or consumer-gated; those should be named precisely rather
+  than treating the whole agenda as untouched.
 
 ## 10. Recommended ordering
 
 Without allocating anything here, the evidence supports this order:
 
-1. Build the public artifact spine and release the papers already past their mathematical gates.
-2. Repair the C294 bronze bundle, then run the cheap frontier measurement and exact `PGL2(5)`
+1. Resolve the release-policy boundary, build the public artifact spine, and close each paper's
+   remaining specific gate; the shared URL does not itself authorize release.
+2. Consume the landed C298 theorem: establish C297's normal-form breadth and pursue C302/C303's
+   collision-versus-coverage dichotomy, with the terminal stars treated as possible construction
+   escapes rather than noise.
+3. Repair the C294 bronze bundle, then run the cheap frontier measurement and exact `PGL2(5)`
    value gate before investing in contextual-algebra machinery.
-3. State the bounded Clebsch continuation-graph -> arc/code/value corollary from existing theorems.
-4. Run the exact C84 arithmetic-invariant sieve with preregistered formulas and a cross-field gate.
-5. Scope the even-characteristic continuation pilot at `q=8,16`; add `q=32` only after sizing.
-6. Assemble the proper-subgroup congruence ledger before naming a general periodicity theorem.
+4. State the bounded Clebsch recognition corollary from existing theorems, while using intrinsic
+   matching-colour recovery—not vertex count—as the actual C295/Crown III discriminator.
+5. Run the exact C84 arithmetic-invariant sieve with preregistered formulas, a cross-field gate, and
+   a formally bounded meaning for a negative result.
+6. Scope the even-characteristic continuation pilot at `q=8,16`; add `q=32` only after sizing.
+7. Assemble the proper-subgroup congruence ledger before naming a general periodicity theorem.
 
 The overall vibe is very good. This is no longer a fragile project waiting on one heroic theorem:
 it is a real portfolio with several mature papers, multiple independent mathematical technologies,
-and one unusually well-localized hard problem in game value. The danger is not lack of substance.
-It is allowing the glamour of the one deep blocker to obscure the finished work, or allowing a
-promising metaphor—contextual algebra, domain walls, congruence laws—to outrun the finite gates that
-would make it mathematics.
+a landed robust C210/C298 obstruction, and several sharply separated hard problems. The danger is
+not lack of substance. It is manufacturing a single grand blocker from several failed mirror
+certificates, overlooking proved work outside the crowns narrative, or allowing a promising
+metaphor—contextual algebra, domain walls, congruence laws—to outrun the finite gates that would make
+it mathematics.
 
 ---
 
