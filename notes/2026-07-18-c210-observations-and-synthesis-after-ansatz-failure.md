@@ -934,17 +934,283 @@ enumerating cubic or quartic graphs would repeat the closed mechanism search.
 set for collinear triples, and restore lost coverage by exchange. This is credible only after the
 collision projection and coverage robustness are measured.
 
+## Second zoom-out: the abstraction C210 may be missing
+
+The first synthesis still treats C210 mainly as a completed ansatz obstruction with reusable
+coordinates. A stronger mathematical reading changes the question from
+
+> Which repair formula should be tried next?
+
+to
+
+> Why does every bounded-complexity full-layer construction produce a positive-dimensional
+> forbidden-incidence variety, and which exceptional arithmetic geometries can prevent that
+> variety from having rational points?
+
+That shift exposes several missing theorem layers.
+
+### Missing layer 1: a normal-form or universality theorem
+
+The publication strength of the obstruction depends on how much of the natural construction space
+the C210 parameters represent. The current proof classifies every specialization *inside* the
+selected trace-one two-repair-coset family. It does not yet answer:
+
+- whether every pair of full quadratic repair cosets compatible with the two seed layers is
+  projectively equivalent to a C210 specialization;
+- whether shared coefficients and trace-one relations are forced by arc legality or are a chosen
+  slice;
+- what the actual moduli dimension is after quotienting by the conic stabilizer, field
+  automorphisms, seed interchange, repair interchange, and genuine projective equivalence;
+- whether the three `q=64` fixed-seed orbits remain distinct under the full projective group;
+- whether the weighted scaling used by the collision polynomial is equation gauge rather than a
+  geometric symmetry.
+
+The decisive strengthening would be:
+
+> Every full quadratic two-repair-coset extension of the two-parabola seed satisfying the internal
+> legality and common trace constraints is projectively equivalent to the C210 normal form.
+
+If this is true, C210 becomes a classification theorem. If it is false, the omitted moduli identify
+the exact surviving quadratic architecture and prevent the paper from overstating its scope.
+
+### Missing layer 2: the current curve may already imply linear robustness
+
+The final theorem uses one rational point of each collision component. Generically the same proof
+gives
+
+    #X(F_q) = q + O(sqrt(q)).
+
+The actual collision triple has seed coordinate `t`, left-repair coordinate `r`, and right-repair
+coordinate `r+u`; the collision curve is presented in `(u,t)`, with `r=J/H`. If each of the three
+coordinate maps is nonconstant of uniformly bounded degree, then every selected vertex belongs to
+only `O(1)` collision triples. Greedy matching in the resulting tripartite 3-uniform hypergraph
+would give
+
+    Omega(q)
+
+pairwise vertex-disjoint genuine collisions. Every collision-free restriction would then have to
+delete `Omega(q)` selected vertices.
+
+This is not yet proved. The precise missing checks are:
+
+1. bound the degrees of the `t`, `r`, and `r+u` maps on every genuine component;
+2. classify components on which one of those maps is constant;
+3. remove repeated-point and orientation duplicates;
+4. repeat the projection audit on all three factorization branches and degenerate strata;
+5. combine the resulting transversal bound with a coverage-loss estimate.
+
+The current genus and point bounds (`q-4*sqrt(q)-6`, `q-2`, and the generic
+`q+1-30*sqrt(q)-10`) provide most of the point-supply input. Thus the robust obstruction may be a
+near-term theorem rather than a distant program.
+
+### Missing layer 3: exceptional incidence correspondences
+
+Three one-dimensional layers have three parameters. Collinearity in the quadratic extension gives
+two scalar conditions over the subfield, so the expected forbidden locus is a curve. A bounded-
+degree geometrically integral curve defined over the base field has about `q` rational points.
+Therefore a full-layer arc persisting over infinitely many fields must exhibit exceptional
+behavior: its geometric components must be absent, vertical/degenerate, or permuted by Frobenius
+without a base-defined component.
+
+This is analogous to exceptional permutation polynomials. A polynomial can permute infinitely
+many extensions only when the off-diagonal fiber product has no Frobenius-fixed component. Here a
+prospective infinite arc is an **exceptional incidence correspondence** whose forbidden
+collinearity variety remains rational-point-free despite its expected positive dimension.
+
+The moduli-level program is:
+
+1. define a parameter space `M` of bounded-complexity layered sections;
+2. construct the universal collision family `X -> M`;
+3. identify the open locus of geometrically integral fibers;
+4. describe the reducibility, constant-field, degree-drop, and projection-collapse discriminant;
+5. descend through successive proper exceptional loci by Noetherian induction;
+6. classify the surviving monodromy and Frobenius types.
+
+C210 is a complete computation of one nontrivial low-degree stratum. The possible headline theorem
+is:
+
+> A bounded-degree algebraic union of full subfield layers either belongs to an exceptional
+> monodromy class or contains linearly many pairwise vertex-disjoint collinear triples for all
+> sufficiently large fields.
+
+### Missing layer 4: an Artin--Schreier cohomology explanation
+
+The factorization problem naturally lives in
+
+    K / {g^2+g : g in K} = H^1(K,Z/2).
+
+The trace-one condition is a nontrivial Artin--Schreier torsor. The second-layer classes `chi0` and
+`chi1` are cohomology classes; their pole residues control splitting, ramification, and genus. The
+three exact factorization branches should therefore be explained as the boundary strata where the
+relevant class becomes trivial or its pole divisor merges:
+
+- `e=0`;
+- `e=delta`;
+- `delta=p`, `w in {0,1}`.
+
+A conceptual proof should derive the uniqueness of the generic quadratic slope and the branch
+completeness from valuations and residues, using ideal certificates only as verification. Such a
+proof would explain why the branches exist, shorten the manuscript, and make the argument portable
+to other Artin--Schreier layer families.
+
+### Missing layer 5: the correct characteristic-two geometry
+
+Invariantly, a nonsingular conic is the Veronese curve in the projective space of binary quadratic
+forms. In odd characteristic, off-conic points, nonsingular forms, and projective involutions fit a
+clean symmetric-square representation. In characteristic two, the nucleus makes polarity
+degenerate and separates quadratic forms from symmetric bilinear forms.
+
+The coordinate
+
+    P(x,h) = [1:x:x^2+h]
+
+should be understood as a section of an affine/normal bundle over the conic, with `h` carrying
+weight two. The second divided difference is then an invariant curvature or second-jet condition
+on sections. This perspective may:
+
+- supply the invariant definition missing from the C210 paper;
+- distinguish genuine projective symmetries from polynomial gauge scalings;
+- identify the three residue branches as boundary divisors of a compactified section moduli space;
+- clarify exactly how the nucleus and odd-degree trace obstruction enter reconstruction.
+
+### Missing layer 6: the secant map is an almost-perfect design
+
+At size `k~c*q` in ambient order `Q=q^2`, the pair supply is `c^2*q^2/2`. A Baer external fiber
+has order `q^2`; the first numerical possibility of surjectivity is `c=sqrt(2)`. Near this scale,
+the pair-intersection maps must be simultaneously nearly surjective and nearly injective on every
+carrier fiber.
+
+This is closer to a perfect difference set, Sidon design, or approximate Steiner system than to an
+ordinary complete-arc search. The expected general identity is
+
+    coverage deficit
+      = pair-capacity deficit
+        + repeated-hit energy
+        + exceptional-set expenditure.
+
+The prescribed-hole defect identity, C174's chord-concurrency identity, the Baer inverse balances,
+and C210's collision redundancies may be different carrierwise specializations of that formula.
+The deeper structural possibility is:
+
+> Low-degree algebraic layers have forced incidence energy, while near-optimal relative coverage
+> requires Sidon-like low energy.
+
+Proving that incompatibility would obstruct a much wider class than the selected C210 family.
+
+### Missing layer 7: collision and coverage demand opposite arithmetic
+
+A successful construction asks the same layer maps to produce opposite point-supply behavior:
+
+    forbidden collision covers: no rational points;
+    desired coverage covers:    rational points for every target.
+
+Both sets of covers arise from the same coefficient family, so their monodromy and trace classes
+are coupled. The deepest possible no-go theorem would show that coverage-rich bounded-complexity
+families necessarily make at least one collision cover geometrically integral. C210 may be an
+explicit instance of this collision/coverage monodromy incompatibility.
+
+### Missing layer 8: the `q=64` object may be an arithmetic special fiber
+
+The reciprocal-trace obstruction is counted by a Kloosterman sum. Kloosterman sums are Frobenius
+traces of explicit elliptic curves, so the exceptional zero count at subfield order `8` may have an
+elliptic-curve or isogeny explanation rather than being an isolated coefficient coincidence.
+
+The finite classification should determine:
+
+- full `PGL3(64)` equivalence of the twelve raw solutions and three fixed-seed orbits;
+- stabilizers and field automorphisms of the resulting `24`- and `26`-arcs;
+- automorphism group and equivalence class of the associated `[26,3,24]_64` MDS code;
+- the elliptic curve whose Frobenius trace is the relevant Kloosterman value;
+- whether the three repair orbits are twists, isogeny classes, or rational points of one moduli
+  curve;
+- whether the unexplained `56 -> 14 -> 0` coverage residues are group or curve fibers.
+
+This could turn the finite example into a conceptual arithmetic theorem even though its direct
+scalar extension fails.
+
+### Missing layer 9: the open tower and function-theory boundaries
+
+The final theorem closes `q=8^m` with `m` odd. It does not close even relative extension degrees,
+where `GF(4)` appears, the trace of `1` changes, and the reconstruction denominator may vanish. The
+first fixed `GF(8)` coefficient family is Kloosterman-obstructed in larger fields, but coefficient
+families chosen anew on the even tower remain outside the theorem.
+
+Odd-characteristic square orders are also underdeveloped. Planar functions and relative difference
+sets provide genuine derivative-bijection mechanisms for pair-intersection maps. The bounded
+`s=5` complete `15`-arc may be a small congruence/semifield signal rather than noise. Any revisit
+must derive both cross-layer arc legality and coverage; planar-function terminology alone proves
+neither.
+
+The correct boundary audit includes:
+
+- even-degree extensions of the characteristic-two family;
+- other characteristic-two trace/linearized-function families;
+- odd-characteristic planar or relative-difference-set layers;
+- characteristic-two o-polynomial or hyperoval-derived internal repair layers;
+- bounded-degree versus degree-growing or inseparable/linearized maps.
+
+### Missing layer 10: partial domains are a two-hypergraph problem
+
+The collision triples form a structured tripartite 3-uniform hypergraph. Coverage requirements
+form a second hypergraph on the same layer vertices. The partial-domain problem is not simply
+“delete bad parameters”; it is:
+
+> Find a large independent set in the collision hypergraph that remains a covering set in the
+> coverage hypergraph.
+
+The exact algebraic degrees may supply bounded codegrees and pseudorandomness estimates. Depending
+on the projection audit, appropriate tools include greedy matching, containers, random nibble,
+absorption, deterministic switching along collision correspondences, and character-sum control of
+coverage loss.
+
+### Missing layer 11: the common matching object must be intrinsically identifiable
+
+A *colored* family of conic projection matchings reconstructs its centres almost tautologically.
+Crown II/III needs recovery from an uncolored continuation or residual object. The actual questions
+are:
+
+- is the decomposition into generator matchings unique;
+- can the color classes be recognized intrinsically;
+- can inequivalent centre configurations have the same uncolored residual graph;
+- does generic full-`PGL2` generation destroy identifiability;
+- which fixed-point, collision, port, or continuation predicates recover the decomposition?
+
+The C294 family, the Clebsch configuration, and the C210 `q=64` arc are the correct bounded pilots.
+Until this identifiability theorem exists, the common conic-matching dictionary is infrastructure,
+not yet a reconstruction crown.
+
+## Allocated post-C210 program
+
+Repository tasks use global monotonic integer IDs, so the requested conceptual `C210.n` packages
+are allocated as C297--C304, each explicitly recorded as a C210 follow-on.
+
+| Task | C210 follow-on | Status/dependency | Deliverable |
+|---|---|---|---|
+| C297 | normal form and moduli | first | Decide universality of the quadratic two-coset ansatz under true projective equivalence |
+| C298 | robust collision matching | queued | Prove or refute a linear matching/transversal bound from the existing collision curves |
+| C299 | invariant/cohomological formulation | queued | Recast height sections, reconstruction, and three branches through conic-bundle and Artin--Schreier residue geometry |
+| C300 | `q=64` arithmetic classification | queued | Full projective/code equivalence, stabilizers, Kloosterman/elliptic interpretation, and coverage residues |
+| C301 | exceptional-incidence dichotomy | gated on C297--C299 | State and prove the first general bounded-degree layer theorem |
+| C302 | carrierwise secant-defect stability | queued | Unify global defect, C174, Baer fibers, and collision energy into an equality/stability theorem |
+| C303 | partial-domain hypergraph | gated on C298/C302 | Decide whether large collision-free domains can retain relative coverage |
+| C304 | alternative towers and function architectures | gated on C297 | Audit even extensions and run a theorem-led odd-characteristic/linearized-function pilot |
+
+The intended order is `C297`, then `C298`; C299, C300, and C302 can proceed when their proof or
+literature prerequisites are available. C301 is the abstraction theorem only after the concrete
+normal-form and projection lessons are known. C303 consumes the robust collision and stability
+outputs. C304 must not reopen undirected polynomial coefficient mining.
+
 ## Recommended immediate deliverable
 
-The next relconic task should be scoped as follows:
+The next relconic task is C297 and is scoped as follows:
 
-> Determine the collision hitting number and coverage cost for partial domains of the C210 repair
-> cosets; either prove a robust near-full-coset obstruction or exhibit a collision-free
-> partial-domain construction. In parallel, state the full-layer ansatz invariantly for publication.
+> Determine whether the selected trace-one full quadratic two-repair-coset family is a projective
+> normal form for the natural architecture; compute the genuine quotient moduli and identify every
+> omitted degree of freedom before generalizing the obstruction.
 
-This task has a sharp two-sided success criterion and cannot collapse into another parameter
-census. A new global C-ID must be allocated through the normal queue process; this note does not
-fabricate one.
+This task has a sharp two-sided success criterion. A positive universality result upgrades the
+paper theorem; a negative result identifies the exact surviving family and scopes C298--C304
+honestly. It must not become another finite coefficient census.
 
 ## Final vibe assessment
 
@@ -987,3 +1253,9 @@ Cross-lane records used in the synthesis:
 - [`handoffs/2026-07-17-complete-ports-paper.md`](handoffs/2026-07-17-complete-ports-paper.md);
 - [`handoffs/2026-07-17-continuation-paper.md`](handoffs/2026-07-17-continuation-paper.md);
 - [`handoffs/2026-07-17-nofil-paper.md`](handoffs/2026-07-17-nofil-paper.md).
+
+Expert-lens protocol used for the second zoom-out:
+
+- [`2026-07-07-named-expert-personas-context.md`](2026-07-07-named-expert-personas-context.md);
+- [`expert-personas/hirschfeld-thas-storme-ball-lavrauw-projective-arcs.md`](expert-personas/hirschfeld-thas-storme-ball-lavrauw-projective-arcs.md);
+- [`expert-personas/davydov-marcugini-pambianco-computational-arcs.md`](expert-personas/davydov-marcugini-pambianco-computational-arcs.md).
