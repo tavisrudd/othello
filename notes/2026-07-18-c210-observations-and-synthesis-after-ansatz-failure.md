@@ -22,6 +22,11 @@ trace-one two-repair-coset architecture is collision-forcing throughout the suff
 odd `8`-tower, including every algebraic factorization and degeneration stratum in its certified
 scope.
 
+The scope has one important asymmetry. The obstruction is uniform for every nonconstant-height
+specialization once `q>=32768`, and every exceptional stratum closes once `q>=512`; on the
+constant-height stratum it closes the exact `GF(8)`-defined scalar-extension families, not fresh
+constant-height coefficients chosen independently in each larger field.
+
 The correct conclusion is therefore not “the construction search failed, move on.” The durable
 output has four layers:
 
@@ -34,9 +39,10 @@ output has four layers:
 The main weakness is concentration and exposition, not mathematical substance. The final theorem
 is currently stated using internal “C210 ansatz” language and must be restated invariantly before
 it is manuscript-ready. The strongest new open attack is to determine whether the collision
-obstruction is robust under deletion to partial repair domains. The strongest broader theory lead
-is a carrierwise Baer-fiber secant-defect identity coupling invisible mass to repeated-hit
-redundancy.
+obstruction is robust under deletion to partial repair domains. The highest-upside broader theory
+lead is a carrierwise Baer-fiber secant-defect identity coupling invisible mass to repeated-hit
+redundancy, but its motivation must come from a new equality/stability statement rather than the
+tautological recurrence of the `sqrt(2)` counting constant.
 
 **EDITORIAL:** do not archive `relconic` merely because the full-coset ansatz is closed. Task
 allocation and the lane-finish administration remain separate decisions, but the mathematical
@@ -59,10 +65,12 @@ these algebraic solutions are three real, distinct selected points, not duplicat
 resultant roots.
 
 This is much stronger than “we searched many parameters and did not find a construction.” It says
-that every parameter choice in the certified full two-coset template is eventually bad. It is also
-much weaker than a global impossibility theorem: a different template, a partial repair domain, an
-orbit or exchange construction, or another geometric architecture may still produce
-`C`-complete arcs of order `sqrt(Q)`.
+that every nonconstant-height specialization is eventually bad, every exceptional stratum is bad
+from `q=512` onward, and every `GF(8)`-defined constant-height scalar family is eventually bad.
+Fresh per-field constant-height choices remain outside the theorem. It is also much weaker than a
+global impossibility theorem: a different template, a partial repair domain, an orbit or exchange
+construction, or another geometric architecture may still produce `C`-complete arcs of order
+`sqrt(Q)`.
 
 ## The motivating problem and notation
 
@@ -274,10 +282,11 @@ as a task-work mechanism notebook rather than an incidental discovery log.
 
 ### Baer-contained arcs are impossible
 
-**PROVED.** Let the ambient plane have order `s^2`, let `B` be a Baer subplane of order `s`, and
-let an arc `A` lie in `B`. The external points of `PG(2,s^2)\B` partition into the external fibers
-of extended `B`-lines. Only fibers belonging to secants of `A` are covered. Since an arc in `B` has
-at most `s+2` points, at least `(s^2-s)/2` `B`-lines are nonsecants, leaving at least
+**PROVED; NOVELTY OPEN.** Let the ambient plane have order `s^2`, let `B` be a Baer subplane of
+order `s`, and let an arc `A` lie in `B`. The external points of `PG(2,s^2)\B` partition into the
+external fibers of extended `B`-lines. Only fibers belonging to secants of `A` are covered. Since
+an arc in `B` has at most `s+2` points, at least `(s^2-s)/2` `B`-lines are nonsecants, leaving at
+least
 
     (s^2-s)^2/2
 
@@ -285,18 +294,20 @@ external points uncovered. For `s>=3` this exceeds the `s^2+1` points of an ambi
 Therefore no arc contained in one Baer subplane can be complete outside any ambient conic.
 
 This is a family-level construction obstruction independent of the later two-repair-coset theorem.
+The argument is elementary enough that it should be treated as presumably known until the
+classical Baer-subplane and complete-arc literature is checked.
 
-### The sharp constant reappears fiberwise
+### The fiberwise sharp constant is bookkeeping, not evidence
 
 **SYNTHESIS.** A Baer external fiber has about `s^2` points. An arc of size `k~c*s` has about
-`c^2*s^2/2` secants. Surjectivity of a pair-intersection map becomes numerically possible exactly
-at
+`c^2*s^2/2` secants. Restricting the global pair-capacity count to a carrier of the same order
+necessarily reproduces the numerical threshold
 
-    c >= sqrt(2),
+    c >= sqrt(2).
 
-the leading constant in the prescribed-conic defect lower bound. This strongly suggests that the
-global defect identity has a carrierwise Baer-fiber refinement rather than the matching constant
-being a coincidence.
+The repeated constant is therefore neither a coincidence nor evidence for a new theorem. The
+carrierwise program is justified only if it produces a genuinely stronger equality or stability
+statement with new nonnegative redundancy terms.
 
 ### Two parallel subfield parabolas
 
@@ -315,8 +326,9 @@ and cannot vanish because the product term lies in `F` while `delta` does not.
 
 The direct two-layer coverage idea works only at the small tested exception `s=3`; at `s=8` it
 still leaves only `330` required points, making it a much stronger seed than earlier mechanisms.
-Its relationship to translation and hyperfocused arcs requires a dedicated literature comparison
-before a novelty claim.
+Because these are affine parts of two conics in one pencil, the first priority check is the
+classical literature on arcs contained in unions or pencils of conics. Translation and
+hyperfocused arcs are the second comparison. No novelty claim should precede either audit.
 
 ### Universal height-interpolation interface
 
@@ -419,11 +431,12 @@ Grades are qualitative portfolio judgments, not claims about venue acceptance.
 |---:|---|:---:|:---:|---|
 | 1 | Exact prescribed-hole defect identity and sharp `sqrt(2q)` lower scale | A- | A | The strongest organizing theory in the relative-conic program |
 | 2 | C294 explicit `Theta(q)` full-`PGL2` P-family | A | A- | Unexpectedly clean crossing of the full-group boundary |
-| 3 | C210 complete odd-tower two-repair-coset obstruction | B+ | B+ now; A- after invariant packaging | Deep and decisive, but currently stated in internal ansatz language |
+| 3 | C210 complete odd-tower two-repair-coset obstruction | B+ | B+ now; A- only if C297 establishes natural breadth and the proof is repackaged invariantly | Deep and decisive inside its certified family |
 | 4 | C84 exact conic-Schreier catalogue and generic escape boundary | B+ | B+ | Strong structural core when packaged with C294 |
 | 5 | `PG(2,64)` affine-complete `24`-arcs and complete conic-disjoint `26`-arcs | A- | B alone; A- inside the C210 sequel | The strongest accidental finite construction signal |
 
-The Baer-contained obstruction is a clean publishable proposition rather than a standalone paper.
+The Baer-contained obstruction is a clean compact proposition rather than a standalone paper, but
+should be presented as presumably known until its priority check is complete.
 The carrierwise Baer-fiber defect program is unproved, but a successful theorem could itself have
 `A`-level strength.
 
@@ -443,9 +456,10 @@ The manuscript
 - a projective-averaging upper transfer;
 - exact small-field values and an evaluation-rank obstruction.
 
-**EDITORIAL:** add at most the short Baer-contained obstruction and a carefully bounded pointer to
-the structured construction barrier. Do not insert the entire C210 elimination: its specialized
-algebra would overwhelm the present paper's general theorem.
+**EDITORIAL:** add at most the short Baer-contained obstruction, with a presumed-known hedge until
+the literature check is complete, and a carefully bounded pointer to the structured construction
+barrier. Do not insert the entire C210 elimination: its specialized algebra would overwhelm the
+present paper's general theorem.
 
 ### Paper II: layered Baer-transversal arcs and collision obstruction
 
@@ -468,6 +482,9 @@ A suitable working title is:
 The principal editorial task is to replace the phrase “C210 ansatz with parameters
 `a,b,delta,p,w`” by a natural family definition in terms of two seed layers, two additive repair
 cosets, their height functions, and the trace-one compatibility condition.
+
+Drafting this paper is gated on the C297 normal-form audit, even though the cheaper C298 projection
+triage comes first as research.
 
 ### Paper III: conic-involution Schreier games
 
@@ -493,9 +510,11 @@ The exact relative-conic problem is not supplied by the nearest established cons
 - Prescribed-symmetry constructions give important finite examples but not this infinite
   conic-relative theorem: Lisoněk--Marcugini--Pambianco,
   [*Constructions of small complete arcs with prescribed symmetry*](https://cdm.ucalgary.ca/article/download/61979/46677/176938).
-- Translation and hyperfocused arcs already include additive-subgroup graph constructions and
-  examples complete off a focus line. The two-parabola and `q=64` C210 constructions therefore
-  require comparison with Faina--Parrettini--Pasticci,
+- The two-parabola seed is the union of affine parts of two conics in one pencil. Classical work on
+  arcs in unions and pencils of conics is therefore the first novelty boundary and could subsume
+  the seed directly. Translation and hyperfocused arcs also include additive-subgroup graph
+  constructions and examples complete off a focus line, so the second comparison is with
+  Faina--Parrettini--Pasticci,
   [*Hyperfocused arcs in PG(2,32)*](https://arxiv.org/abs/0803.3933), and its cited translation-arc
   lineage before any novelty claim.
 - Modern curve-based completeness arguments also use normalization and finite-field point bounds;
@@ -566,8 +585,9 @@ C294 study the game on the corresponding residual matching union. Complete ports
 pointed matching as a repair interface. Continuation asks how much of the centre configuration and
 ambient geometry can be recovered from the abstract continuation structure.
 
-This dictionary is the strongest candidate for a program-wide common language. It still needs a
-short invariant theorem package, especially in characteristic two.
+This classical dictionary is useful program-wide notation, not by itself a theorem package.
+Characteristic-two conventions and reconstruction lemmas should be written only for a concrete
+consumer. The research opportunity begins with the exact multiplicity identity below.
 
 ### Exact dead-set and redundancy interface to seek
 
@@ -882,7 +902,23 @@ Stop conditions:
   behavior;
 - do not infer a linear hitting number from a linear rational-point count.
 
-### 2. Carrierwise Baer-fiber defect identity
+### 2. Close or delimit the generic `q=512` gap
+
+**OPEN; C305, feasibility-gated exact closure.** Only `q=8` and `q=512` lie below the uniform
+generic Hasse--Weil threshold, and the exceptional `q=512` strata are already closed. A bounded
+generic sweep could sharpen the theorem to every odd-tower `q>=512`, while a survivor would be a
+more interesting sporadic construction candidate.
+
+The naive normalized and unnormalized scopes have about `512^4 = 68,719,476,736` and
+`512^5 = 35,184,372,088,832` parameter points respectively. Their feasibility must not be assumed.
+First prove that the scaling chart is lossless on the target specializations, identify every valid
+symmetry or Frobenius quotient, implement the committed `H,J` reconstruction and direct
+genuineness check, and benchmark a representative deterministic shard. Run the full sweep only if
+that evidence gives a credible resource bound; otherwise seek an algebraic reduction and record
+the finite gap honestly. Include the recorded `q=8` branch exceptions only if the same bounded
+checker closes them cheaply.
+
+### 3. Carrierwise Baer-fiber defect identity
 
 **OPEN; highest theory upside.** Refine the global prescribed-hole remainder onto individual
 extended Baer-line fibers. Separate:
@@ -895,40 +931,39 @@ extended Baer-line fibers. Separate:
 The result is valuable only if it gives an equality/stability theorem or a bound stronger than the
 existing scalar defect inequality. The main target is a bounded-Baer-coset obstruction.
 
-### 3. Invariant conic matching/port dictionary
+### 4. Exact dead-set/redundancy identity
 
-**OPEN; short common-interface package.** Prove:
+**OPEN; scoped common-interface result.** The off-conic-centre, projection-involution, chord-
+matching, and pointed-port correspondences are classical geometry, not a new theorem package.
+Record consumer-specific characteristic-two conventions only when needed. The research target is
+the nonclassical item: an exact identity relating distinct dead conic vertices, secant-incidence
+multiplicity, repeated hits, and off-conic coverage defect for a family of centres.
 
-1. off-conic centre to conic matching/port, with characteristic-two exceptions stated;
-2. reconstruction of a centre from its matching;
-3. collinearity of centres in matrix or matching language;
-4. exact dead-set/redundancy identity for a family of centres;
-5. relationship to the pointed repair-port and Schreier residual conventions.
+Test that identity on the C294 crown, the Clebsch six-set, and the C210 `q=64` arc. A general
+dictionary should not be allocated unless one of those consumers exposes a genuinely missing
+lemma.
 
-Test the predicates on the C294 crown, the Clebsch six-set, and the C210 `q=64` arc. If the same
-intrinsic predicates recover all three, this is a credible nucleus for Crown III.
-
-### 4. C294 mixed-class Cayley scar
+### 5. C294 mixed-class Cayley scar
 
 **OPEN; crown-owned.** Use projective trace/determinant coordinates to make the remaining dihedral
 centralizer coset exact, then prove a value-preserving local surgery or recursive scar theorem.
 C210 contributes exceptional-locus organization, not the game response.
 
-### 5. Family-level odd-`q` continuation transfer
+### 6. Family-level odd-`q` continuation transfer
 
 **OPEN; cap-owned.** Seek a value-preserving correspondence between different fourth-centre
 residuals or between off-conic and on-conic children. This bypasses the exact C84 obstruction to
 internal two-ply pairing. Algebraic point counting begins only after the deterministic game lemma
 is stated.
 
-### 6. Nonquadratic or partial repair graphs
+### 7. Nonquadratic or partial repair graphs
 
 **OPEN.** Use the exact divided-difference condition to select height functions from
 translation-arc, oval/hyperoval, or related finite-field function theory whose internal legality is
 proved structurally. Derive seed--repair trace equations before testing coefficients. Blindly
 enumerating cubic or quartic graphs would repeat the closed mechanism search.
 
-### 7. Probabilistic deletion and exchange
+### 8. Probabilistic deletion and exchange
 
 **OPEN; lower priority until attack 1.** Start from a high-coverage layered set, delete a hitting
 set for collinear triples, and restore lost coverage by exchange. This is credible only after the
@@ -1001,7 +1036,10 @@ This is not yet proved. The precise missing checks are:
 
 The current genus and point bounds (`q-4*sqrt(q)-6`, `q-2`, and the generic
 `q+1-30*sqrt(q)-10`) provide most of the point-supply input. Thus the robust obstruction may be a
-near-term theorem rather than a distant program.
+near-term theorem rather than a distant program. The first projection-degree/resultant audit uses
+polynomials already present in the proof bundle and is the cheapest decisive go/no-go milestone in
+the continuation program. It should run before the broader normal-form audit, without presuming
+that degree bounds alone settle componentwise nonconstancy.
 
 ### Missing layer 3: exceptional incidence correspondences
 
@@ -1017,7 +1055,12 @@ many extensions only when the off-diagonal fiber product has no Frobenius-fixed 
 prospective infinite arc is an **exceptional incidence correspondence** whose forbidden
 collinearity variety remains rational-point-free despite its expected positive dimension.
 
-The moduli-level program is:
+Exceptional covers and correspondences already have a developed monodromy theory and
+classification literature. The first step is therefore to place this collision correspondence
+precisely in that framework and determine which classified exceptional types can occur at the
+relevant bidegrees, not to rebuild the general theory from scratch.
+
+The application program is:
 
 1. define a parameter space `M` of bounded-complexity layered sections;
 2. construct the universal collision family `X -> M`;
@@ -1048,10 +1091,10 @@ relevant class becomes trivial or its pole divisor merges:
 - `e=delta`;
 - `delta=p`, `w in {0,1}`.
 
-A conceptual proof should derive the uniqueness of the generic quadratic slope and the branch
-completeness from valuations and residues, using ideal certificates only as verification. Such a
-proof would explain why the branches exist, shorten the manuscript, and make the argument portable
-to other Artin--Schreier layer families.
+A conceptual proof could derive the uniqueness of the generic quadratic slope and the branch
+completeness from valuations and residues, using ideal certificates only as verification. This is
+worth doing inside Paper II drafting where it materially shortens or clarifies the proof. It is not
+a standalone research gate for the exceptional-incidence program.
 
 ### Missing layer 5: the correct characteristic-two geometry
 
@@ -1066,7 +1109,9 @@ The coordinate
 
 should be understood as a section of an affine/normal bundle over the conic, with `h` carrying
 weight two. The second divided difference is then an invariant curvature or second-jet condition
-on sections. This perspective may:
+on sections. The concrete invariant-definition and gauge-versus-symmetry questions belong to
+C297. Bundle and compactified-moduli language should be introduced only if it helps answer them.
+This perspective may:
 
 - supply the invariant definition missing from the C210 paper;
 - distinguish genuine projective symmetries from polynomial gauge scalings;
@@ -1090,12 +1135,12 @@ ordinary complete-arc search. The expected general identity is
 
 The prescribed-hole defect identity, C174's chord-concurrency identity, the Baer inverse balances,
 and C210's collision redundancies may be different carrierwise specializations of that formula.
-The deeper structural possibility is:
-
-> Low-degree algebraic layers have forced incidence energy, while near-optimal relative coverage
-> requires Sidon-like low energy.
-
-Proving that incompatibility would obstruct a much wider class than the selected C210 family.
+Algebraicity alone cannot force high incidence energy: Singer difference sets and planar-function
+relative difference sets are algebraic and attain perfect or Sidon-optimal behavior. Any
+obstruction must isolate the restrictive feature actually present here, such as full
+subfield-rational one-dimensional layers in a fixed bounded-degree section family. Proving an
+energy incompatibility for that narrower class would obstruct a much wider family than the
+selected C210 slice without contradicting the known perfect constructions.
 
 ### Missing layer 7: collision and coverage demand opposite arithmetic
 
@@ -1120,13 +1165,14 @@ The finite classification should determine:
 - full `PGL3(64)` equivalence of the twelve raw solutions and three fixed-seed orbits;
 - stabilizers and field automorphisms of the resulting `24`- and `26`-arcs;
 - automorphism group and equivalence class of the associated `[26,3,24]_64` MDS code;
-- the elliptic curve whose Frobenius trace is the relevant Kloosterman value;
-- whether the three repair orbits are twists, isogeny classes, or rational points of one moduli
-  curve;
+- the classical elliptic-curve realization whose Frobenius trace is the relevant Kloosterman
+  value;
 - whether the unexplained `56 -> 14 -> 0` coverage residues are group or curve fibers.
 
-This could turn the finite example into a conceptual arithmetic theorem even though its direct
-scalar extension fails.
+The Kloosterman--elliptic identification is a bounded literature lookup. Questions about twists,
+isogenies, or a moduli curve should be opened only if that lookup or the projective classification
+reveals a concrete coincidence. The substantive work is projective/code equivalence, stabilizers,
+and the `56 -> 14 -> 0` coverage residues.
 
 ### Missing layer 9: the open tower and function-theory boundaries
 
@@ -1182,35 +1228,40 @@ not yet a reconstruction crown.
 ## Allocated post-C210 program
 
 Repository tasks use global monotonic integer IDs, so the requested conceptual `C210.n` packages
-are allocated as C297--C304, each explicitly recorded as a C210 follow-on.
+are allocated as C297--C305, each explicitly recorded as a C210 follow-on.
 
 | Task | C210 follow-on | Status/dependency | Deliverable |
 |---|---|---|---|
-| C297 | normal form and moduli | first | Decide universality of the quadratic two-coset ansatz under true projective equivalence |
-| C298 | robust collision matching | queued | Prove or refute a linear matching/transversal bound from the existing collision curves |
-| C299 | invariant/cohomological formulation | queued | Recast height sections, reconstruction, and three branches through conic-bundle and Artin--Schreier residue geometry |
-| C300 | `q=64` arithmetic classification | queued | Full projective/code equivalence, stabilizers, Kloosterman/elliptic interpretation, and coverage residues |
-| C301 | exceptional-incidence dichotomy | gated on C297--C299 | State and prove the first general bounded-degree layer theorem |
+| C298 | robust collision matching | first | Run the bounded projection-degree/component triage, then prove a linear matching/transversal bound or isolate projection collapse |
+| C305 | generic `q=512` closure | feasibility-gated | Prove the lossless quotient, benchmark a deterministic shard, and close the finite gap only within a justified resource bound |
+| C297 | normal form and moduli | after C298 triage; Paper II gate | Decide universality of the quadratic two-coset ansatz under true projective equivalence |
+| C299 | invariant/residue exposition | gated on Paper II drafting | Supply only the invariant and Artin--Schreier residue arguments that materially clarify the manuscript |
+| C300 | `q=64` arithmetic classification | literature-first | Audit pencils/unions of conics and hyperfocused arcs, then settle projective/code equivalence, stabilizers, and coverage residues; keep the elliptic step to a bounded lookup |
+| C301 | exceptional-incidence dichotomy | gated on C297/C298 | Put the collision correspondence into the existing exceptional-covers framework and prove the first applicable bounded-degree layer theorem |
 | C302 | carrierwise secant-defect stability | queued | Unify global defect, C174, Baer fibers, and collision energy into an equality/stability theorem |
 | C303 | partial-domain hypergraph | gated on C298/C302 | Decide whether large collision-free domains can retain relative coverage |
 | C304 | alternative towers and function architectures | gated on C297 | Audit even extensions and run a theorem-led odd-characteristic/linearized-function pilot |
 
-The intended order is `C297`, then `C298`; C299, C300, and C302 can proceed when their proof or
-literature prerequisites are available. C301 is the abstraction theorem only after the concrete
-normal-form and projection lessons are known. C303 consumes the robust collision and stability
-outputs. C304 must not reopen undirected polynomial coefficient mining.
+Start with C298's bounded projection triage. C305 may proceed independently only through its
+lossless-chart and benchmark gates; its full sweep is not presumed feasible. C297 follows the C298
+triage and remains mandatory before Paper II drafting because it fixes the breadth and invariant
+description of the theorem. C299 is drafting support, not a gate for C301. C301 begins by importing
+the exceptional-covers classification and consumes the C297 normal-form and C298 projection
+lessons. C303 consumes the robust collision and stability outputs. C304 must not reopen undirected
+polynomial coefficient mining.
 
 ## Recommended immediate deliverable
 
-The next relconic task is C297 and is scoped as follows:
+The next relconic task is C298 and its first milestone is scoped as follows:
 
-> Determine whether the selected trace-one full quadratic two-repair-coset family is a projective
-> normal form for the natural architecture; compute the genuine quotient moduli and identify every
-> omitted degree of freedom before generalizing the obstruction.
+> Compute the degrees of the `t`, `r`, and `r+u` maps on every genuine collision component;
+> classify constant-coordinate components and orientation/repeated-point duplicates; then decide
+> whether the existing curves can support a uniform linear matching/transversal theorem.
 
-This task has a sharp two-sided success criterion. A positive universality result upgrades the
-paper theorem; a negative result identifies the exact surviving family and scopes C298--C304
-honestly. It must not become another finite coefficient census.
+This bounded triage decides whether partial domains remain viable inside the certified family. A
+robust bounded-degree projection opens the `Omega(q)` matching proof; concentrated fibers identify
+the exact escape locus. It must not infer a matching bound from point count alone. C297 remains the
+next manuscript-scope gate after this triage.
 
 ## Final vibe assessment
 
@@ -1218,19 +1269,22 @@ C210 is not a disappointing dead end. It is an overgrown but substantial proof b
 obstruction, finite construction, and structural calculus have not yet been distilled into their
 best forms.
 
-The negative theorem is strong because it closes every visible algebraic loophole in a natural
-sharp-scale architecture. The `q=64` object is strong because it exposes an unoptimized finite
-phenomenon. The larger opportunity is strong because conic matchings appear to be the shared
-carrier for geometry, game value, repair, continuation, and coding interpretations.
+The negative theorem is strong because it closes every visible algebraic loophole in the selected
+sharp-scale architecture; C297 still has to determine how canonical that architecture is. The
+`q=64` object is strong because it exposes an unoptimized finite phenomenon. Classical conic
+matchings provide a useful shared carrier for geometry, game value, repair, continuation, and
+coding interpretations, but the new content must be an exact identity or reconstruction theorem,
+not the dictionary itself.
 
 The correct response is:
 
 1. keep the relconic program live;
-2. package the full-coset theorem invariantly;
-3. run one robust partial-domain attack;
-4. develop the carrierwise secant/matching interface if that attack exposes the expected
+2. run C298's bounded projection triage and then the justified robust partial-domain attack;
+3. put the `q=512` closure through a lossless-quotient and benchmark gate before any full sweep;
+4. run C297 before packaging the full-coset theorem invariantly;
+5. develop the carrierwise secant/matching identity if the collision work exposes the expected
    redundancy structure;
-5. do not resume undirected coefficient mining.
+6. do not resume undirected coefficient mining.
 
 ## Source map
 
