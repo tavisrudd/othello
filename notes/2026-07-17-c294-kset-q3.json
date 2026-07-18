@@ -1,0 +1,11 @@
+{
+  "cache_hits": 9809,
+  "connected_states": 758,
+  "decompositions": 3413,
+  "field_order": 3,
+  "follower_nimber": 1,
+  "limit_vertices": -1,
+  "state_limit": 1000000,
+  "stopped_at_limit": false,
+  "type_index": 0
+}

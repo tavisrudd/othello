@@ -1,0 +1,18 @@
+{
+  "counts": {
+    "cache_hits": 9809,
+    "connected_states": 758,
+    "decompositions": 3413
+  },
+  "field_order": 3,
+  "follower_nimber": 1,
+  "pair_product_orders": [
+    2,
+    3,
+    4
+  ],
+  "state_limit": 1000000,
+  "stopped_at_limit": false,
+  "type_index": 0,
+  "vertices": 20
+}
