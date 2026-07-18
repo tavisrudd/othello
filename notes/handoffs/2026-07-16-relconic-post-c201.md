@@ -9,8 +9,13 @@ divisor `D3` is explicit, complete, and collision-forcing on every branch). On `
 `F = psi^2 + sigma*psi + R1`, `psi = tau^2+bQ*tau`, `sigma = a*delta*N*G1*G2a`, `R1 = a^2*Q^2*B0`,
 so the whole a!=0 factorization locus is one AS divisor `D_AS = {R1/sigma^2 in AS-image}`
 (step 1; uniqueness complete on `a*delta*N*b!=0` via the alternate-slope odd-degree exclusion).
-Step 2, in order: (a) preflight resultants `Res(G2a,G2a')`, `Res(Q,G2a)`, infinity-place balance
-(`Res(G1,G2a)=Res(G1,G2)` inherited free); (b) `D_AS` branches by AS-residues at the roots of `G1`
+Step-2(a) preflight is now **done and clean** (no new degeneracy locus): `Res_u(G2a,G2a')=delta^4*p^2*N^2`
+(a=0's `delta^4*p^2` times the arithmetically-empty `N^2`, so `G2a` stays separable off `delta*p=0`);
+`Res_u(Q,G2a)=delta^2*N*K1*K2`; `Res_u(G1,G2a)=Res_u(G1,G2)=p^2*K1*K2` inherited free
+(`G2a==G2 mod G1`); and the infinity place is AS-**trivial** (value `(e/delta)^2+(e/delta)`), so
+`D_AS` is fixed entirely by the finite `G1,G2a` residues
+([`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)).
+Step 2 remaining, in order: (b) `D_AS` branches by AS-residues at the roots of `G1`
 and `G2a` (expect up to five conditions, not the a=0 three -- `W==0 mod G1` was an a=0 accident);
 (c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
 trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
@@ -241,8 +246,13 @@ by the `build-sys` lane.
    `F=psi^2+sigma*psi+R1` (`psi=tau^2+bQ*tau`, `sigma=a*delta*N*G1*G2a`, `R1=a^2*Q^2*B0`), so the
    whole a!=0 factorization locus is one AS divisor `D_AS={R1/sigma^2 in AS-image}`
    ([`2026-07-17-c210-a-nonzero-artin-schreier-form.md`](../2026-07-17-c210-a-nonzero-artin-schreier-form.md)).
-   Next compute `D_AS`'s branches by AS-residues at the roots of `G1` and `G2a`, then decide
-   collision-forcing vs arc-legal, before any affine-coverage test.
+   The step-2(a) preflight is done and clean: `Res_u(G2a,G2a')=delta^4*p^2*N^2`,
+   `Res_u(Q,G2a)=delta^2*N*K1*K2`, `Res_u(G1,G2a)=Res_u(G1,G2)=p^2*K1*K2` inherited free, and the
+   infinity place is AS-trivial (value `(e/delta)^2+(e/delta)`), so the residue setup mirrors a=0 up
+   to the arithmetically-empty `N` factors
+   ([`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)).
+   Next (step-2(b)) compute `D_AS`'s branches by AS-residues at the roots of `G1` and `G2a`, then decide
+   collision-forcing vs arc-legal via the second-layer `Tr(A/(bQ)^2)=0` test, before any affine-coverage test.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
@@ -266,6 +276,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-17-c210-a-zero-artin-schreier-divisor.md`](../2026-07-17-c210-a-zero-artin-schreier-divisor.md)
 - C210 a!=0 step 1 (reduction to a single AS form `F=psi^2+sigma*psi+R1`):
   [`2026-07-17-c210-a-nonzero-artin-schreier-form.md`](../2026-07-17-c210-a-nonzero-artin-schreier-form.md)
+- C210 a!=0 step-2(a) preflight (resultants + infinity-place AS-triviality; residue setup clean):
+  [`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)
 - C210 a!=0 step-1/step-2 Fable review (traps, progress bar, landing odds):
   [`2026-07-17-c210-fable-review.md`](../2026-07-17-c210-fable-review.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
