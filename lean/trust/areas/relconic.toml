@@ -1,0 +1,300 @@
+# Trust spine — arcs complete outside a conic, and the Q25 equivariant-repair work sharing its tree.
+#
+# Declared by a reviewer.  Read `lean/RelativeConicArcs/TRUST.md` for the prose manifest; this file
+# is the machine-checkable subset of it.
+#
+# The member globs below were derived from the tracked tree at declaration time and then reviewed.
+# They detect drift away from that snapshot; they say nothing about whether the snapshot is
+# mathematically right.  Every tree here is `legacy-unverified`: none carries a provenance header,
+# so its tracked bytes have an identity but no demonstrated regeneration.  Turning any of them
+# `strict` is C324's job, not this file's.
+
+schema_version = 1
+area = "relconic"
+manifest = "RelativeConicArcs/TRUST.md"
+
+owns = ["RelativeConicArcs", "RelativeConicArcs.**"]
+
+# The two Dye axioms.  They are declared here so they appear in the portfolio axiom map, and they
+# sit outside every gate closure, which the checker reports separately.  Declaring an axiom is not
+# endorsing it.
+permitted_axioms = [
+  "RelativeConicArcs.ClebschDye.dye1991_brianchon_bound",
+  "RelativeConicArcs.ClebschDye.dye1991_equality_classification",
+]
+
+# ---------------------------------------------------------------------------------------------
+# Gates.  Five independently compiled import-only targets; they are never built into one
+# environment, which is why completeness is defined over their union rather than a single closure.
+
+[[gate]]
+module = "RelativeConicArcs.Gates.Relconic"
+terminals = ["RelativeConicArcs.Certificate.check_sound"]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.Baer"
+terminals = ["RelativeConicArcs.Q25AllProfiles.pair_extension"]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AlternateOrbitRepairQ25"
+terminals = ["RelativeConicArcs.Q25AllProfiles.pair_extension"]
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AlternateOrbitRepairParameterized"
+terminals = []
+coverage_rule = "closure"
+
+[[gate]]
+module = "RelativeConicArcs.Gates.AlternateOrbitRepairProfileEnvelope"
+terminals = []
+coverage_rule = "closure"
+
+# ---------------------------------------------------------------------------------------------
+# Terminals.
+#
+# Only declarations whose fully-qualified name has been confirmed against the source namespace
+# stack are listed.  The remaining terminals named in prose in `RelativeConicArcs/TRUST.md` are
+# deliberately absent until extraction resolves their exact names: a guessed name would produce a
+# green check for a declaration that does not exist.
+#
+# `pair_extension` sits in two gates on purpose.  It is the multi-gate case the schema has to
+# support, since the Baer and Q25 gates cannot be compiled into one environment.
+
+[[terminal]]
+declaration = "RelativeConicArcs.Certificate.check_sound"
+gates = ["RelativeConicArcs.Gates.Relconic"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RelativeConicArcs.Q25AllProfiles.pair_extension"
+gates = [
+  "RelativeConicArcs.Gates.Baer",
+  "RelativeConicArcs.Gates.AlternateOrbitRepairQ25",
+]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+# ---------------------------------------------------------------------------------------------
+# Owned modules that no declared extraction unit reaches.
+#
+# Each entry is a statement that the gap is known and why.  Nothing here is audited: these modules
+# are not in any gate closure, so no gate build kernel-checks them and no terminal depends on them.
+# They appear in the unaudited-modules table for exactly that reason.  Removing an entry once its
+# work lands is how the tree stops being invisible.
+
+[[unreached]]
+modules = [
+  "RelativeConicArcs.Q25ResidualClassLinkData.**",
+  "RelativeConicArcs.Q25ResidualConclusionData.**",
+  "RelativeConicArcs.Q25ResidualCoverData.**",
+  "RelativeConicArcs.Q25ResidualCoverPrototype.**",
+  "RelativeConicArcs.Q25ResidualDispatchData.**",
+  "RelativeConicArcs.Q25ResidualTransportData.**",
+  "RelativeConicArcs.Q25RowCompositionData.**",
+  "RelativeConicArcs.Q25ClassBoundData.**",
+  "RelativeConicArcs.Q25LineMaskData.**",
+  "RelativeConicArcs.Q25CarrierLineData.**",
+  "RelativeConicArcs.Q25ExactMinimumRows.**",
+  "RelativeConicArcs.Q25Residual**",
+  "RelativeConicArcs.Q25Minimum**",
+  "RelativeConicArcs.Q25Row**",
+  "RelativeConicArcs.Q25Line**",
+  "RelativeConicArcs.Q25Exactness**",
+]
+severity = "info"
+reason = """\
+In-flight Q25 residual-orbit work owned by the relconic lane; no gate imports it yet, so it is \
+outside every audited closure.  This exclusion is a status report, not an exemption: it must be \
+removed and the trees brought under a gate when that work lands."""
+
+[[unreached]]
+modules = [
+  "RelativeConicArcs.Q11A5**",
+  "RelativeConicArcs.Q11Dye**",
+  "RelativeConicArcs.Q11Klein**",
+  "RelativeConicArcs.Q11Brianchon**",
+  "RelativeConicArcs.Clebsch**",
+  "RelativeConicArcs.ReflectionArrangement**",
+  "RelativeConicArcs.SixVertex**",
+  "RelativeConicArcs.Q5Six**",
+]
+severity = "info"
+reason = """\
+Clebsch/A5 orbit exploration reached through the two declared Dye axioms.  It is not paper-facing \
+through this area's gates and `lean/RelativeConicArcs/TRUST.md` makes no audit claim about it."""
+
+[[unreached]]
+modules = ["RelativeConicArcs"]
+severity = "info"
+reason = "library root aggregator; gates import the specific terminals they need, never the root"
+
+# ---------------------------------------------------------------------------------------------
+# Named external inputs.  Reviewer declarations; the checker verifies only that the stated entry
+# declarations exist in some extraction unit and that an `axiom` entry mode agrees with Lean.
+
+[[external_input]]
+name = "Kim-Vu complete-arc bound"
+entry_mode = "hypothesis"
+entry_declarations = []
+anchor = "RelativeConicArcs/TRUST.md#explicit-external-boundary"
+
+[[external_input]]
+name = "NRC/GRS dictionary"
+entry_mode = "consistency-check"
+entry_declarations = []
+anchor = "RelativeConicArcs/TRUST.md#explicit-external-boundary"
+
+[[external_input]]
+name = "Al-Seraji--Al-Ogali class count"
+entry_mode = "consistency-check"
+entry_declarations = []
+anchor = "RelativeConicArcs/TRUST.md#exact-q16-classification-provenance"
+
+# ---------------------------------------------------------------------------------------------
+# Generated data trees.
+
+[[data_tree]]
+path = "RelativeConicArcs/Q16CertificateData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "L[0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q16CertificateRows"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "R[0-9]_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q16LeafData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "L_[0-9][0-9][0-9].lean", role = "leaf" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25CarrierLineData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "All.lean", role = "aggregate" },
+  { glob = "Dispatch.lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ClassBoundData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "C_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "All.lean", role = "aggregate" },
+  { glob = "Bridge.lean", role = "handwritten" },
+  { glob = "Index.lean", role = "index" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ExactMinimumRows"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "C_[0-9][0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "All.lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25LineMaskData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "L_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "All.lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25PairData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "L_[0-9][0-9][0-9].lean", role = "leaf" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25PairRows"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9]_P_[0-9][0-9].lean", role = "leaf" },
+  { glob = "R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "aggregate" },
+  { glob = "R_[0-9][0-9][0-9].lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ResidualClassLinkData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "L_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9]_V_[0-9][0-9].lean", role = "leaf" },
+  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
+  { glob = "All.lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ResidualConclusionData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "C_R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
+  { glob = "All.lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ResidualCoverData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "K_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].lean", role = "aggregate" },
+  { glob = "All.lean", role = "aggregate" },
+  { glob = "Rows.lean", role = "aggregate" },
+  { glob = "Classes.lean", role = "handwritten" },
+  { glob = "Schema.lean", role = "schema" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ResidualDispatchData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "D_R_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
+  { glob = "All.lean", role = "aggregate" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25ResidualTransportData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "T_[0-9][0-9][0-9]_C_[0-9][0-9][0-9]_[0-9][0-9][0-9]_V_[0-9][0-9].lean", role = "leaf" },
+  { glob = "B_[0-9][0-9][0-9].lean", role = "aggregate" },
+  { glob = "All.lean", role = "aggregate" },
+  { glob = "Prototype.lean", role = "handwritten" },
+]
+
+[[data_tree]]
+path = "RelativeConicArcs/Q25RowCompositionData"
+provenance = "legacy-unverified"
+reason = "frozen before the provenance-header convention existed; C324 owns regeneration"
+members = [
+  { glob = "C_[0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9].lean", role = "leaf" },
+  { glob = "All.lean", role = "aggregate" },
+]

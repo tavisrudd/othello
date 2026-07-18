@@ -1,0 +1,21 @@
+{
+  "canonical_bytes": 10900689,
+  "canonical_sha256": "b293e285a6fbd16cef2c6aef364e83b46f8b500da9afadd6582638d727b57f8b",
+  "edge_kinds": {
+    "exports": 3,
+    "has_data_tree": 15,
+    "has_gate": 5,
+    "has_member": 10353,
+    "imports": 30270
+  },
+  "lean_facts": "absent",
+  "node_kinds": {
+    "area": 1,
+    "data_tree": 15,
+    "external_input": 3,
+    "gate": 5,
+    "module": 10877
+  },
+  "replay": "lean/scripts/lean-trust-spine.py graph --out <path>",
+  "schema_version": 1
+}

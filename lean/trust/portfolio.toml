@@ -1,0 +1,115 @@
+# Portfolio registry for the trust spine.
+#
+# Everything in this file and in the per-area spines beside it is a DECLARATION written by a
+# reviewer.  Nothing here is evidence.  The checker's whole job is to compare these declarations
+# against facts it extracts from Lean and from tracked bytes, and to fail when they diverge.
+#
+# The classification boundary is deliberately narrow: a project-local module is whatever git tracks
+# as `*.lean` under a library root that `lakefile.toml` declares.  That definition is read from the
+# lakefile rather than restated here, so a new top-level area cannot appear without either being
+# classified or being reported as unclassified.
+
+schema_version = 1
+
+[portfolio]
+# Cross-checked against lakefile.toml's `lean_lib` entries.  A library on one side and not the
+# other is a `lakefile-drift` finding, which is what catches a new area being added to the build
+# without ever being given a trust classification.
+libraries = [
+  "CapGame",
+  "DihedralSchreier",
+  "FiniteGeom",
+  "NodeKayles",
+  "ProjectiveCap",
+  "Queens",
+  "RelativeConicArcs",
+  "RepairCodes",
+  "Sumfree",
+]
+
+# Directories under `lean/` that hold no Lean library source.  Used only to bound the untracked-file
+# scan; it is not an ignore list for classification.
+non_source_dirs = [".lake", "scripts", "trust"]
+
+# ---------------------------------------------------------------------------------------------
+# Areas with a declared spine.
+
+[[area]]
+name = "relconic"
+spine = "areas/relconic.toml"
+
+# ---------------------------------------------------------------------------------------------
+# Libraries that are built but have no trust spine yet.
+#
+# These are classified, not excused.  Their modules stay in the portfolio inventory and any
+# project-local axiom they declare is still reported, so rolling the schema out area by area cannot
+# create a temporary blind spot.  Each entry is a commitment to write a spine, not a waiver.
+
+[[unaudited_library]]
+library = "CapGame"
+reason = "projective cap game; no paper-facing gate declared yet"
+
+[[unaudited_library]]
+library = "DihedralSchreier"
+reason = """\
+Fixed-point-deleted Schreier templates.  `DihedralSchreier/DensityAxioms.lean` declares a \
+project-local axiom that lean/TRUST.md's named-classical-inputs table does not list; resolving \
+that is the first task of this area's spine."""
+
+[[unaudited_library]]
+library = "FiniteGeom"
+reason = "Baer completion has a manifest but its terminals are not yet declared against a gate"
+
+[[unaudited_library]]
+library = "NodeKayles"
+reason = "queens/getK evaluator; manifest exists, terminals not declared"
+
+[[unaudited_library]]
+library = "ProjectiveCap"
+reason = "shared projective infrastructure; consumed by relconic, no terminals of its own declared"
+
+[[unaudited_library]]
+library = "Queens"
+reason = "dormant performance work; no paper-facing claim"
+
+[[unaudited_library]]
+library = "RepairCodes"
+reason = """\
+Manifest exists and declares the Stichtenoth self-dual TVZ family as a global project axiom; \
+terminals are not yet declared against a gate."""
+
+[[unaudited_library]]
+library = "Sumfree"
+reason = "no paper-facing claim declared"
+
+# ---------------------------------------------------------------------------------------------
+# Generated documents.
+#
+# Only this build-sys-owned file carries generated regions for now.  Inserting regions into the
+# per-area manifests under another lane's directory is a Phase D step and needs that lane's owner;
+# see the C326 plan.
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "relconic"
+section = "gates"
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "relconic"
+section = "terminal-axioms"
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "relconic"
+section = "data-trees"
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "relconic"
+section = "portfolio-axioms"
+
+[[generated_doc]]
+path = "trust/PORTFOLIO.md"
+area = "relconic"
+section = "unaudited-modules"
