@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C285.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C325.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -16,11 +16,14 @@ unless they retain an explicit open tail.
 
 - **C151 `[alt-orbit-repair]` [ACTIVE]** — finish residual-cover/orbit completeness for the five Q25 minimizer classes → `notes/2026-07-14-c151-q25-minimum-classification.md`.
 - **C152 `[alt-orbit-repair]` [QUEUED; after C151]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
+- **C318 `[alt-orbit-repair]` [QUEUED; after C151]** — add the Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, and the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C319 `[alt-orbit-repair]` [GATED; after C151 lands and its kernel cost is measured]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation; do not schedule the full canonicalizer before the five-orbit cost is known → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 
 ### `build-sys`
 
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 - **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
+- **C324 `[build-sys]` [QUEUED; before C287 extraction]** — one clean regeneration pass per paper on the pinned toolchain, confirming each frozen artifact still reproduces byte-identically; recorded hashes prove identity, not that the generator still reproduces the artifact. Record the outcome per manifest → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C287 `[build-sys]` [QUEUED]** — extract the reviewed union of all paper-facing Lean closures into one fresh-history shared repository at `~/src/papers/lean`, validate public gates, and prove guarded artifact restore semantics → `notes/2026-07-17-c287-shared-lean-extraction-plan.md`.
 ### `cap`
 
@@ -40,6 +43,8 @@ unless they retain an explicit open tail.
 
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C211 `[clebsch]` [REPORTED 2026-07-16]** — exact `A3/H3` finite-reduction bridge, intersection-lattice decoder/complement synthesis, two conic-filling cases, and narrowed novelty audit → `notes/2026-07-16-c211-clebsch-reflection-arrangements.md`.
+- **C320 `[clebsch]` [QUEUED]** — create the `lean/CERTIFICATES.md`-standard trust manifest for the Clebsch package: every claim with its exact verifier, one verify-all entry point, the Lean/Python/Singular/cited-mathematics boundary, and the two Dye assumptions as named classical imports with what remains unconditional without them (Dye is currently documented nowhere under `lean/`) → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C321 `[clebsch]` [QUEUED; after C320]** — replace the load-bearing Singular evidence: extract cofactor/factorization certificates for positive claims and check them by exact arithmetic; for completeness-type claims re-derive the input system independently from the geometry plus invariant spot checks, since a second CAS run on the same input shares the specification and is near-zero marginal evidence → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C222 `[clebsch]` [ACTIVE; COMPACT-PROOF GATE]** — Lean-formalize the new `A3/H3` coordinate bridge, intersection ledgers, complement counts, and decoder-stratum consequences, proceeding only through compact theorem-level proofs and not large generated certificate trees → `notes/2026-07-16-c222-lean-a3-h3-closure.md`.
 
 ### `clebsch-next`
@@ -52,6 +57,8 @@ unless they retain an explicit open tail.
 
 ### `complete-ports`
 
+- **C325 `[complete-ports]` [QUEUED]** — one consolidated executable verifier reproducing every finite table from a versioned manifest, plus a per-theorem proof ledger naming its evidence mode (Lean / exact replay / conventional proof / external classical theorem / a stated combination); the risk here is the number of verification modes, not generated volume → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+
 ### `continuation`
 
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
@@ -60,6 +67,7 @@ unless they retain an explicit open tail.
 
 ### `crowns`
 
+- **C323 `[crowns]` [QUEUED; URGENT]** — commit or explicitly close the untracked C294 evidence bundle (`notes/2026-07-17-c294-b3-seven-skeleton-value.{md,cpp}`, `-replay.{py,json}`, `-q3.json`, `-q5-100k.json`); while untracked it supports no reproducibility claim. Then prefer strategy certificates over a second solver for the small bases, since a strategy certificate changes what is proved while solver agreement only changes confidence → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C294 `[crowns]` [QUEUED; coordinate C84/C199/C200]** — full conic-continuation crown: audit the exact full/subfield Dickson boundary, select the first genuine full-group residual family, and prove a value-preserving compression or direct P/N mechanism that crosses the current `PSL₂/PGL₂` escape boundary → `notes/2026-07-17-c294-full-conic-continuation-crown.md`.
 - **C295 `[crowns]` [QUEUED; after C272 N1 package]** — continuation-reconstruction crown: promote frame-graph semilinear rigidity toward intrinsic recovery of the ambient incidence geometry, selected configuration, and associated code, with an exact exceptional-field boundary → `notes/2026-07-17-c295-continuation-reconstruction-crown.md`.
 - **C296 `[crowns]` [GATED on substantive C294/C295 theorems]** — reconstruction-to-value synthesis: prove on a natural infinite class, or first on a sharply bounded Clebsch/frame pilot, that the continuation object reconstructs its algebraic geometry and that the reconstructed data determine the exact P/N or Grundy value → `notes/2026-07-17-c296-reconstruction-to-value-crown.md`.
@@ -78,6 +86,7 @@ unless they retain an explicit open tail.
 - **C309 `[dihedral]` [QUEUED; after C308, C264 phase 4/6]** — artifact/reproducibility gate: stabilize tables, references, appendices, regeneration commands, PDF build, evidence manifests, and scoped existing formal checks → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 - **C310 `[dihedral]` [QUEUED; after C309, C264 phase 5/6]** — adversarial mathematical referee pass with a dated issue ledger and repairs for every blocking correctness, scope, dependency, or reproducibility finding → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 - **C311 `[dihedral]` [QUEUED; after C310, C264 phase 6/6]** — two separated cold-prose reads, final title/abstract and journal-neutral preflight, final source/PDF agreement, and C264 closure → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
+- **C322 `[dihedral]` [QUEUED; feeds C308 trust apparatus]** — audit at source level what the three nimber solvers actually share (move generator/rules encoding, algorithm, state canonicalization); agreement is evidence only if they share none of the three. Add mutation tests on the q11 template, and write a genuinely independent solver if the audit finds a shared move generator → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C291 `[dihedral]` [QUEUED; POST-C264]** — structural strategies and compact certificates for the nonregular polyhedral templates: recognize residual graph families where possible and replace the nonzero `1/2` table entries by human strategies or small independently checkable Node-Kayles certificates → `notes/2026-07-17-c291-polyhedral-template-strategies.md`.
 - **C292 `[dihedral]` [QUEUED; POST-RELEASE]** — wild polyhedral characteristic spike: classify or sharply delimit `S₄/A₅` behavior in characteristics dividing the group order (`p=3,5`), including unipotent stabilizers, changed orbit types, and exactly which tame formulas fail → `notes/2026-07-17-c292-wild-polyhedral-spike.md`.
 - **C293 `[dihedral]` [QUEUED; POST-RELEASE, after C291]** — formalize the polyhedral finite boundary: add a small Lean-checkable orbit-template/table certificate layer for the `S₄/A₅` rows and audit the resulting paper-facing theorem boundary without importing the full escape residual → `notes/2026-07-17-c293-polyhedral-template-formalization.md`.

@@ -1,5 +1,9 @@
 # NodeKayles — Lean verification of the queens `getK` leaf evaluator
 
+> **Scope: NodeKayles/queens only.** This directory also holds the finite-geometry, repair-code,
+> and dihedral developments, which this file does not describe. Reviewers start at
+> [`CERTIFICATES.md`](CERTIFICATES.md).
+
 The 2-lite formal-verification effort scoped in
 [`../notes/proposal-2026-06-26-getk-lean-verification.md`](../notes/proposal-2026-06-26-getk-lean-verification.md).
 Goal: a machine-checked proof that the **scalar Node-Kayles recurrence** the dense

@@ -1,5 +1,9 @@
 # Trust chain — what the Lean proofs certify about `getK`
 
+> **Scope: the NodeKayles/queens `getK` evaluator only.** This is not the trust document for the
+> tree as a whole. For the portfolio trust model, the per-paper manifests, and the named classical
+> inputs, see [`CERTIFICATES.md`](CERTIFICATES.md).
+
 This is the legibility layer for the 2-lite verification (`proposal-2026-06-26-getk-lean-verification.md`).
 It states precisely which Rust behaviour the Lean theorems (`NodeKayles/Basic.lean`) underwrite,
 what is deliberately left to the existing differential tests, and what stays in the trusted base.
