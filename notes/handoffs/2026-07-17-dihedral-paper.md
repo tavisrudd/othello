@@ -36,10 +36,10 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Open frontiers
 
-- USER GATE (from C262): Φ_T and the finite core of ½-density are formalized; the numerical
-  density value 1/2 is blocked on prime equidistribution in AP, absent from mathlib. Rule whether
-  the delivered form satisfies the release gate or the paper adds a declared boundary sentence
-  (wording would fold into C264).
+- Density-½ gate RULED (`yc`, 2026-07-17): formalize conditionally — quarantine equidistribution
+  of primes in AP as one named axiom (RepairCodes-Stichtenoth pattern) and kernel-check the
+  derivation to the ½ conclusion. Allocated as C278. Unconditional formalization (PNT in AP)
+  stays out of scope; C264 states the single-axiom boundary in the paper.
 - D₂ₘ additions are owed before shipping per D6 (C263).
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
 
