@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-17
-**Status**: ACTIVE; C286 CORRECTION AND COLD-READ PASS COMPLETE; USER/RELEASE GATES OPEN
+**Status**: ACTIVE; C220 OMITTED; RELEASE GATES OPEN
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
@@ -47,16 +47,17 @@ independent restore/trace validation; never copy raw build trees or selected `.o
 Retain complete ports, pointed transfer, prescribed realization, reliability/EXIT, pointed Tutte,
 and the two geometric flagships. Exclude sequential-composition semantics, general service regions,
 the full coefficient-optimization programme, log-concavity history, product architecture, and
-generic tract/foundation exposition. C220 remains an explicit inclusion decision.
+generic tract/foundation exposition. The user chose to omit C220's optional cubic
+blocker-stability strengthening.
 
 ## Next step
 
 The corrected private draft has passed three independent paragraph-by-paragraph cold reads and
-same-reader resolution checks. The next step is a user decision on C220 (the bounded recommendation
-remains omission), followed by allocation of the release-preparation pass only after the repository
-destination/remote, license, public checker/archive identity, and shared-Lean export gates are
-resolved. Do not initialize, copy, publish, or push before those decisions.
+same-reader resolution checks, and the user has chosen to omit C220. Allocate the
+release-preparation pass only after the repository destination/remote, license, public
+checker/archive identity, and shared-Lean export gates are resolved. Do not initialize, copy,
+publish, or push before those decisions.
 
 Public export remains gated on the complete-ports repository name/local destination/public remote,
-license, and C220 decision. The private rename does not authorize repository initialization, copy,
-publication, or push.
+license, public checker/archive identity, and shared-Lean export. The private rename does not
+authorize repository initialization, copy, publication, or push.

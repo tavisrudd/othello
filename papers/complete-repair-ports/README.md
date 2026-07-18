@@ -43,8 +43,8 @@ random GV and AG/TVZ codes, normal-rational-curve nuclei, harmonic Steiner syste
 deletion--contraction reliability, BEC EXIT, Chen--Stein approximation, and the Las Vergnas
 perspective polynomial. A none-found search is not a priority certificate.
 
-C220's optional cubic blocker-stability strengthening is not included pending its separate
-decision. Sequential composition, service regions, coefficient optimization, log-concavity,
+C220's optional cubic blocker-stability strengthening is omitted by scope decision. Sequential
+composition, service regions, coefficient optimization, log-concavity,
 product architecture, and random harmonic-cascade thresholds are outside scope.
 
 ## Files
@@ -68,5 +68,5 @@ nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
 This directory belongs to the private monorepo. Publication must use the reviewed C275
 deny-by-default allowlist into a new empty destination with fresh Git history. Do not publish,
 fork, history-filter, or broadly copy the private monorepo. Repository identity/remote, license,
-C220 disposition, public rewrites, and the separately owned shared-Lean export remain explicit
-gates. No push is authorized by manuscript assembly.
+public rewrites and checker/archive identity, and the separately owned shared-Lean export remain
+explicit gates. No push is authorized by manuscript assembly.
