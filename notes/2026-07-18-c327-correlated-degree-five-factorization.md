@@ -8,7 +8,8 @@
 field or coefficient census.  The first common pentic normal form and shared branch identity are
 proved below, together with generic geometric monodromy `S5` for each pentic separately.  Their
 generic splitting fields are disjoint and retain joint monodromy `S5 times S5` after the legality
-Artin--Schreier base changes.  Constant fields and effective finite-field point supply remain open.
+Artin--Schreier base changes.  The generic legality cover is geometrically connected of degree
+sixteen with constant field `GF(2)`.  An explicit effective finite-field point bound remains open.
 
 ## Objective
 
@@ -329,6 +330,66 @@ Equation (18) is presently a conditional main term, not a proved finite-field de
 gate is to classify the geometric components and constant fields of the fourfold legality cover,
 then supply an effective error term uniform enough for the odd tower.  No independence heuristic
 or uneffective invocation of Chebotarev is substituted for that work.
+
+## Geometry and constant field of the legality cover
+
+### Theorem
+
+On the generic seed chart
+
+    x,x' notin {0,d,1},             x!=x',
+
+put `theta=w^2+w+1` and adjoin, for `gamma=(X,Y)` equal to either `(x,y)` or
+`(x',y')`, variables satisfying
+
+    U_gamma^2+U_gamma=Y/X^2+1,                          (19)
+    V_gamma^2+V_gamma=rho^2*(Y+theta)/(X+d)^2+1.        (20)
+
+Over every odd-degree finite field, (19)--(20) have rational solutions exactly when C315's two
+trace-one conditions hold.  Over the generic rational base, their four Artin--Schreier classes are
+linearly independent modulo `g^2+g`.  Consequently their composite is a geometrically connected
+etale cover of degree sixteen with Galois group `(C2)^4` and constant field `GF(2)`.
+
+### Proof of independence
+
+Use the four boundary valuations
+
+    x=0,       x=d,       x'=0,       x'=d.
+
+At `x=0`, only the right side of (19) for `alpha` has a pole.  Its order is two and its leading
+residue is `y`, which is not a square in the divisor's rational residue field.  If a rational
+function `g^2+g` has a pole of order two, its leading residue is the square of the leading
+coefficient of a simple pole of `g`.  Hence the `alpha` class (19) cannot occur with nonzero
+coefficient in an Artin--Schreier relation.
+
+At `x=d`, only the `alpha` class (20) has a pole, with leading residue
+`rho^2*(y+theta)`.  The square factor `rho^2` does not make the transcendental element
+`y+theta` a square in the residue field.  The same argument at `x'=0,d` separately detects the two
+`beta` classes.  Thus no nonempty `GF(2)`-linear combination of the four right sides lies in the
+image of `g->g^2+g`.
+
+Artin--Schreier theory now gives a degree-sixteen elementary abelian extension.  The valuation
+argument remains valid after algebraic closure of the constant field, so the cover is
+geometrically connected.  Since its equations and rational base are defined over `GF(2)`, its
+actual constant field is `GF(2)`.
+
+For an odd-degree finite field, `Tr(1)=1`; hence (19) is solvable precisely when
+`Tr(Y/X^2)=1`, and similarly for (20).  Every generic legal ordered seed pair has exactly sixteen
+rational lifts, and every rational lift projects to such a pair.
+
+### Updated arithmetic boundary
+
+The constant-field and generic-connectedness hypotheses behind (18) are now closed, as is the
+joint geometric monodromy `S5 times S5` after this base change.  Turning (18) into a theorem still
+requires a source-pinned effective Chebotarev or explicit twist-and-point-count bound with:
+
+- the branch and deletion divisors removed explicitly;
+- a degree/Betti or other effective error constant;
+- a threshold on the odd tower; and
+- separate treatment of `X in {0,d}` and the other C315 exceptional rows.
+
+Until that bound is supplied, C327 does not claim that a simultaneous no-root rational point
+exists over any particular field.
 
 ## Evidence boundary
 
