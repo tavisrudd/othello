@@ -2,7 +2,8 @@
 
 **Lane**: `relconic`
 
-**Status:** gated by C313, C314, and C315; do not assume C305's two-height model generalizes.
+**Status:** ready; C313's linear base is empty and C315 exports the exact constant-height `E4`
+survivor. Do not assume C305's two-height model generalizes.
 
 ## Objective
 

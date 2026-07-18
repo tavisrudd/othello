@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-18
 
-**Status:** active program map; C312--C314 complete, C315 ready, C316--C317 gated, C299 deliberately deferred.
+**Status:** active program map; C312--C315 complete, C316 ready, C317 gated, C299 deliberately deferred.
 
 ## Purpose
 
@@ -68,18 +68,17 @@ Only C297's proved actions may be used as geometric quotients.
 | C312 | complete | universal seed--repair determinant and trace reduction; exact eight-packet coefficient system, but no global moduli solve | C313, C315 |
 | C313 | complete | linear-p trace stratum empty over every odd scalar degree, before the seed gate | C316, C317 |
 | C314 | complete | six-stratum invariant atlas, reconstruction, relabeling actions, degeneracy divisors, and marked stabilizers | C315, C316, later C299 |
-| C315 | ready; C312+C314 satisfied | solve simultaneous seed legality on the constant-p moduli atlas | C316, C317 |
-| C316 | gated by C315; C313+C314 satisfied | construct and audit collision/height maps on the constant-p survivor family; the linear-p base is empty | C317 |
+| C315 | complete | the odd-degree tail survivor is exactly the nine-dimensional constant-height `E4` arithmetic open; all other atlas charts are empty | C316, C317 |
+| C316 | ready; C313--C315 satisfied | construct and audit collision/height maps on C315's `E4` survivor family; the linear-p base is empty | C317 |
 | C317 | gated by C316 | fiber geometry and terminal asymptotic construction-versus-obstruction dichotomy | later C299 scope decision |
 
-The C314 atlas is committed and C315 is ready. Shared handoff and queue edits remain serialized.
-C315 solves the committed coefficient system exported by C312;
+The C315 `E4` survivor interface is committed and C316 is ready. Shared handoff and queue edits
+remain serialized. C315 solves the committed coefficient system exported by C312;
 this separation prevents a universal determinant lemma from turning into an unbounded moduli
-classification. C316 must prove whether C305's two-height affine-bundle picture survives on either
-C297 survivor family; it may not assume the same target dimension or coefficient matrix. It
-consumes C313's committed empty-linear-base verdict as well as C315's constant-p verdict. If the
-constant-p survivor scheme is empty, C316 closes as a vacuous gate and exports the exact
-obstruction interface to C317.
+classification. C316 must prove whether C305's two-height affine-bundle picture survives on
+C315's constant-height `E4` family; it may not assume the same target dimension or coefficient
+matrix. It consumes C313's committed empty-linear-base verdict as well as C315's constant-p
+survivor interface.
 
 ## Red-team scope controls
 
