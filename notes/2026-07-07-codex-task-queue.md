@@ -101,7 +101,7 @@ unless they retain an explicit open tail.
 ### `relconic`
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
-- **C210 `[relconic]` [ACTIVE]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; current frontier: the `b=0,a!=0` boundary, second-layer Artin--Schreier classification, and reconstruction/genuineness → [`C210 umbrella handoff`](handoffs/2026-07-17-c210.md).
+- **C210 `[relconic]` [ACTIVE]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; current frontier: both `b!=0` second-layer Artin--Schreier classes and projective genuineness, with only a bounded `q=8` exception left on `b=0` → [`C210 umbrella handoff`](handoffs/2026-07-17-c210.md).
 
 ### `rp-next`
 

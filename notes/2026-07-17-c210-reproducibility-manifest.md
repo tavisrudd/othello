@@ -42,11 +42,12 @@ was added later the same session; its fresh run is byte-identical to the committ
 (`diff` exit 0), and its Singular certificate re-derives the residue reduction independently of
 the Python set arithmetic.
 
-The six `a_nonzero_*` bundles now carry the active t-degree-four line through
-the exact GF(8)/GF(512) residue census and the exact original-cover splits. The
-census and split fresh runs are byte-identical to their committed outputs; the
-census directly evaluates every gcd-enumerated GF(512) root, while the split
-checker compares its displayed factors directly with the universal resultant.
+The seven `a_nonzero_*` bundles now carry the active t-degree-four line through
+the exact GF(8)/GF(512) residue census, exact original-cover splits, and the
+`b=0,a!=0` closure. Their fresh runs are byte-identical to the committed
+outputs. The census directly evaluates every gcd-enumerated GF(512) root; the
+split and boundary checkers compare their displayed factors and reconstruction
+identities directly with the universal resultant.
 
 ## Load-bearing leaves (sha256, bytes)
 
@@ -80,9 +81,11 @@ checker compares its displayed factors directly with the universal resultant.
 | `analyze_c210_a_nonzero_dAS_census_output.txt` | `f5525fcbf2cd38b0a64a5443ba0ed875e90294889b53731e0b354d58c635c69b` | 1983 |
 | `analyze_c210_a_nonzero_exact_splits.py` | `45159c3c20732989da9798fdf4caee58a402e2b9403b1f4fdb166c8cf8b6fea3` | 7977 |
 | `analyze_c210_a_nonzero_exact_splits_output.txt` | `7616801d5b3979d925280f5f2aa2bd4520ff7fee1336eee8d0a6dcb2caa0d02f` | 1461 |
+| `analyze_c210_a_nonzero_b_zero.py` | `191a5257624cbea15953e76597eda367e0f3687f5522b94d712a9d49495d9894` | 8978 |
+| `analyze_c210_a_nonzero_b_zero_output.txt` | `ae8e898e35d5eb841568b6e520f1fe76fcdaa73fd7754bccac3589cbc8267ddd` | 1252 |
 
 Full pipeline hashes: `analyze_c210_SHA256SUMS`
-(sha256 `9c24cda1a6d207151df65b0bf6b9bfef0cf87b25c47c262ab99766196721f882`).
+(sha256 `ae5c8b81c2bc20478113f6c42ab266a34a464065ca89f9554723429794e849ff`).
 
 ## Trusted boundary
 
