@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-18
 
-**Status:** active program map; C312--C313 complete, C314 ready, C315--C317 gated, C299 deliberately deferred.
+**Status:** active program map; C312--C314 complete, C315 ready, C316--C317 gated, C299 deliberately deferred.
 
 ## Purpose
 
@@ -67,13 +67,13 @@ Only C297's proved actions may be used as geometric quotients.
 |---|---|---|---|
 | C312 | complete | universal seed--repair determinant and trace reduction; exact eight-packet coefficient system, but no global moduli solve | C313, C315 |
 | C313 | complete | linear-p trace stratum empty over every odd scalar degree, before the seed gate | C316, C317 |
-| C314 | ready | invariant atlas, transition/relabeling actions, and degeneracy divisors; full stabilizers and unmarked recognition are secondary | C315, C316, later C299 |
-| C315 | gated by C314; C312 satisfied | solve simultaneous seed legality on the constant-p moduli atlas | C316, C317 |
-| C316 | gated by C314+C315; C313 satisfied | construct and audit collision/height maps on the constant-p survivor family; the linear-p base is empty | C317 |
+| C314 | complete | six-stratum invariant atlas, reconstruction, relabeling actions, degeneracy divisors, and marked stabilizers | C315, C316, later C299 |
+| C315 | ready; C312+C314 satisfied | solve simultaneous seed legality on the constant-p moduli atlas | C316, C317 |
+| C316 | gated by C315; C313+C314 satisfied | construct and audit collision/height maps on the constant-p survivor family; the linear-p base is empty | C317 |
 | C317 | gated by C316 | fiber geometry and terminal asymptotic construction-versus-obstruction dichotomy | later C299 scope decision |
 
-C314 remains independently ready. Shared handoff and queue edits remain serialized. C315 solves
-the committed coefficient system exported by C312;
+The C314 atlas is committed and C315 is ready. Shared handoff and queue edits remain serialized.
+C315 solves the committed coefficient system exported by C312;
 this separation prevents a universal determinant lemma from turning into an unbounded moduli
 classification. C316 must prove whether C305's two-height affine-bundle picture survives on either
 C297 survivor family; it may not assume the same target dimension or coefficient matrix. It
