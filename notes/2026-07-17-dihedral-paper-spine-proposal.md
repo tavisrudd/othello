@@ -237,3 +237,48 @@ Fable should return one of:
 
 The response should also choose a title direction and rule on whether C289/C290 are pre-submission
 gates.
+
+---
+
+## Fable decision (2026-07-17)
+
+**Adopt with changes.** The universal-reduction/three-applications spine is stronger than the
+current discovery-order manuscript plus a polyhedral appendix, and the two-point family belongs
+first: it teaches the whole method on cycles, paths, and Dawson's chess before the reader meets the
+ladder taxonomy. Discovery order is not a reader-facing constraint. Required changes:
+
+1. **The density theorem must not be flattened.** The migration map sends §12 into the §7
+   arithmetic synthesis as one bullet among six. Theorem 12.1 (density ½, kernel-certified behind
+   the single `primes_equidistribute` axiom) is one of the paper's two Lean-anchored headline
+   results; §7 must state it as a named theorem with the C278 single-axiom boundary sentence
+   attached, not as a row in a synthesis list.
+2. **§5 compression is arithmetic-only.** The double-cover-of-a-tree lemma and the structural
+   ladder-recognition proofs are preserved intact; only the repeated split/nonsplit derivations
+   move to §7. If a §§4–13 proof would be cut rather than moved, it stays.
+3. **§8's boundary taxonomy must absorb C283.** The wild case is no longer merely "outside the
+   result": `p | 2m` forces `D_{2p}` with a unipotent rotor, residual `P_p`, value `A002187(p)`,
+   and it breaks the tame odd-order P law. State it as the paper's sharpest boundary marker.
+   Whether to promote the short wild-pair lemma from remark to theorem (C283 judged it a short
+   lemma) is a user scope call; the default is the remark as landed.
+4. **§6 leads with completeness, presents the split as the load-bearing refinement.** The `A₅
+   (3,5,5; ρ=3/5)` split leads the section even if C289 yields only an elementary finite-group
+   proof — an exact invariant refinement invisible to the classical signature is the finding — but
+   the prose claims no geometric meaning C289 does not prove.
+
+Answers to the numbered questions: (1) yes, adopt the spine; (2) yes, two-point first; (3)
+corollary + remark only, but the corollary keeps its Lean anchor citation; (4) the ten-row
+`(σ, ρ, class size, t₁…t₅)` table belongs in the body, edge lists and replay counts in the
+evidence appendix; (5) yes, with the calibration in change 4; (6) keep `D₁₂` and add one
+contrasting `A₅` example rather than replacing; (7) title direction 1, "Node Kayles on Conic
+Schreier Graphs: Dihedral and Polyhedral Templates" — it leads with the searchable terms for the
+stated audience and advertises exactly the proved content (final wording is a user call at C264);
+(8) C290 is a hard pre-submission gate (§7 does not exist without it) and C289 is a gate at
+elementary-proof scope only — a proved `Aut`-orbit/Nielsen-class account of `ρ`, with any
+geometric interpretation optional; C291 is post-C264; (9) the two visibility risks are the density
+theorem (change 1) and the ladder structural proofs (change 2), both addressed; (10) the proposed
+central claim as worded, with "classified dihedral or polyhedral families" kept and the three
+exclusions (off-conic, wild, growing full/subfield groups) named in the same breath.
+
+Execution consequence: C284's manuscript integration transfers to C264 §6 under this spine — no
+appended section to the current manuscript. The C284 queue row closes on its committed, replayed
+evidence bundle with integration explicitly owed by C264.

@@ -26,16 +26,20 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   orbit counts, and the new §14 pair-family theorems. See `lean/DihedralSchreier/README.md`.
 - Solver: `rust/scripts/nodekayles_cayley.rs`. S₄ nimbers cross-checked by three independent
   solvers; all five A₅ rows independently reproduced by the C260 cross-check solver.
-- C284 evidence bundle is ready but uncommitted/integration-pending: `A₄` cannot be
-  involution-generated; all nonregular `S₄/A₅` coset templates are tabulated; and the old
-  `A₅ (3,5,5)` signature splits into `ρ=3/5` classes with different nonregular values →
+- Closed: C284 polyhedral coset templates (2026-07-17) — `A₄` impossible; all `S₄/A₅` nonregular
+  templates tabulated; `(σ,ρ)` proved a complete `Aut(G)`-orbit invariant (the `A₅ (3,5,5)` split);
+  bundle reviewed, independently re-replayed (2,160 triples, 38 templates, 0 mismatches), and
+  committed; manuscript integration owed by C264 §6 under the adopted spine →
   `notes/2026-07-17-c284-dihedral-polyhedral-coset-templates.md`.
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
   satisfied by C263, escape hatch not needed), and the release policy (formalization gate,
   adequacy appendix, provenance section).
-- C264 architecture proposal awaits Fable review: rebuild around the universal reduction followed
-  by two-point dihedral, three-point dihedral, and polyhedral applications, with a unified arithmetic
-  synthesis → `notes/2026-07-17-dihedral-paper-spine-proposal.md`.
+- C264 architecture DECIDED (Fable, 2026-07-17): spine proposal adopted with four changes (density
+  theorem stays a named §7 headline with the single-axiom sentence; §5 compression is
+  arithmetic-only, structural proofs intact; §8 boundaries absorb C283's wild result; §6 leads with
+  completeness, `ρ`-split calibrated). Title direction 1 recommended (final wording user call).
+  C290 hard gate; C289 gate at elementary-proof scope; C291 post-C264. Decision appended to
+  `notes/2026-07-17-dihedral-paper-spine-proposal.md`.
 - Closed: C278 conditional density (2026-07-17) — density-½ kernel-certified behind exactly one
   Davenport-cited equidistribution axiom (`DensityAxioms.lean` + `DensityConditional.lean`; audits
   `[propext, Classical.choice, Quot.sound, primes_equidistribute]`) →
@@ -66,7 +70,6 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - Density-½ gate CLOSED (C278, 2026-07-17): one quarantined axiom `primes_equidistribute`,
   ½ kernel-derived for all triple types and both torus signs. C264 still owes the paper's
   single-axiom boundary sentence; replace the axiom when mathlib ships PNT-in-AP.
-- C284 must be reviewed, committed atomically, and integrated before its queue row can close.
 - Pre-submission content upgrades are C281 (dihedral census), C288 (polyhedral census), C289
   (structural explanation of the `A₅` split), and C290 (closed congruence/P/N laws).
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264), which remains last.
@@ -76,17 +79,18 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Next steps
 
-1. **C284** — review and atomically commit the existing report/script/JSON/manifest bundle, then
-   integrate its theorem/table text and close the live queue row through the archive invariant.
-2. **C281 + C288** — build the dihedral and polyhedral census appendices; these may proceed as
-   separate evidence bundles once C284 is committed.
-3. **C289** — replace the computationally discovered `A₅ (3,5,5;ρ=3/5)` split by a conceptual
+1. **C281 + C288** — build the dihedral and polyhedral census appendices as independent evidence
+   bundles (per the adopted spine, they validate but do not set the architecture). A partial,
+   self-reported-buggy `notes/2026-07-17-c281-dihedral-census-appendix.rs` from an interrupted
+   session is on disk untracked; rewrite rather than trust it (its `r^{M/2}` closure shortcut was
+   wrong for gated triples).
+2. **C289** — replace the computationally discovered `A₅ (3,5,5;ρ=3/5)` split by a conceptual
    group-theoretic lemma and calibrated interpretation.
-4. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
-5. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply C261 R1–R5,
+3. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
+4. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply C261 R1–R5,
    the C278 single-axiom boundary sentence, C260/C284 computation boundaries, the Dawson period-34
    corollary, and title/abstract calibration excluding the wild and full-group escape cases.
-6. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
+5. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
    C293 Lean formalization. Continue the full `PSL₂/PGL₂` escape program only through C84 `[cap]`.
 
 ## Cautions (standing, for any session in this lane)
