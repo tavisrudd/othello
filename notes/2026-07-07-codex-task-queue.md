@@ -116,7 +116,6 @@ unless they retain an explicit open tail.
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C299 `[relconic]` [GATED; PAPER-II DRAFT]** — C210 invariant/residue exposition: during Paper II drafting, supply only the characteristic-two section/gauge formulation and Artin--Schreier residue arguments that materially shorten or clarify the proof; this task is not a C301 gate → `notes/2026-07-18-c299-c210-artin-schreier-conic-bundle.md`.
-- **C330 `[relconic]` [QUEUED]** — prove the relative-coverage theorem for C329's explicit `Delta_R=0` collision-free four-layer family: characterize the secants through every point of the prescribed conic on the six-trace/pentic-derangement survivor, establish a uniform odd-tower coverage count or isolate an exact uncovered-point obstruction, and exit with a `C`-complete `O(sqrt(q))` construction only if both collision-freeness and coverage hold simultaneously → `notes/2026-07-18-c330-relative-coverage-of-fresh-four-layer-arcs.md`.
 
 ### `rp-next`
 
