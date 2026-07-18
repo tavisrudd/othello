@@ -8,8 +8,16 @@ divisor `D3` is explicit, complete, and collision-forcing on every branch). On `
 (t-degree-four) the cover is now reduced to a **single** Artin--Schreier form
 `F = psi^2 + sigma*psi + R1`, `psi = tau^2+bQ*tau`, `sigma = a*delta*N*G1*G2a`, `R1 = a^2*Q^2*B0`,
 so the whole a!=0 factorization locus is one AS divisor `D_AS = {R1/sigma^2 in AS-image}`
-(step 1). Next: compute `D_AS`'s branches by AS-residues at the roots of `G1` and `G2a`, then
-decide collision-forcing vs arc-legal (step 2).
+(step 1; uniqueness complete on `a*delta*N*b!=0` via the alternate-slope odd-degree exclusion).
+Step 2, in order: (a) preflight resultants `Res(G2a,G2a')`, `Res(Q,G2a)`, infinity-place balance
+(`Res(G1,G2a)=Res(G1,G2)` inherited free); (b) `D_AS` branches by AS-residues at the roots of `G1`
+and `G2a` (expect up to five conditions, not the a=0 three -- `W==0 mod G1` was an a=0 accident);
+(c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
+trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
+arc-legal rootless branch is where a construction could hide); (d) the `a!=0` reconstruction-split
+locus `H=J=0` (the a=0 `H->delta*G1` pullback is stratum-specific); (e) close the unowned
+`b=0,a!=0` degenerate stratum (`psi=tau^2` inseparable). Committed Fable review of this plan:
+[`2026-07-17-c210-fable-review.md`](../2026-07-17-c210-fable-review.md).
 
 ## Current state
 
@@ -258,6 +266,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-17-c210-a-zero-artin-schreier-divisor.md`](../2026-07-17-c210-a-zero-artin-schreier-divisor.md)
 - C210 a!=0 step 1 (reduction to a single AS form `F=psi^2+sigma*psi+R1`):
   [`2026-07-17-c210-a-nonzero-artin-schreier-form.md`](../2026-07-17-c210-a-nonzero-artin-schreier-form.md)
+- C210 a!=0 step-1/step-2 Fable review (traps, progress bar, landing odds):
+  [`2026-07-17-c210-fable-review.md`](../2026-07-17-c210-fable-review.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
   [`2026-07-16-c201-discovery-track.md`](../2026-07-16-c201-discovery-track.md)
 - live global queue:

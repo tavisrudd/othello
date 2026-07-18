@@ -47,21 +47,29 @@ with `a*Q != 0`, so `R` and `F` are reducible together over
 
    (Verified by direct `tau`-expansion, not only by coefficient matching.)
 
-4. **One factorization divisor.** As a quadratic in `psi`, `F` factors over `K`
-   iff the Artin--Schreier class `R1/sigma^2` is trivial in `K/{g^2+g}`. Every
-   finer split reduces to this one divisor: a linear factor `tau+phi` forces the
+4. **One factorization divisor** (on `a*delta*N*b != 0`). As a quadratic in
+   `psi`, `F` factors over `K` via slope `bQ` iff the Artin--Schreier class
+   `R1/sigma^2` is trivial in `K/{g^2+g}`. The two other factorization modes both
+   collapse into this one divisor: (i) a linear factor `tau+phi` forces the
    same-slope partner `tau+phi+bQ`, so `beta = phi^2+bQ*phi` lies in `K` and the
-   (2,2) split is already over `K`. Hence the a!=0 factorization locus is the
-   single Artin--Schreier divisor
+   split is the `bQ` one; (ii) the alternate slope `s'` (root of
+   `X^2+bQ*X+sigma`) is excluded from `K` because `sigma/(bQ)^2` has polynomial
+   part of degree `deg(sigma)-deg(bQ)^2 = 5-4 = 1` (odd), while every `g^2+g` has
+   a constant or even-degree polynomial part -- so `s' in K` would need
+   `a*delta*N*b = 0`. Hence the a!=0 factorization locus is the single
+   Artin--Schreier divisor
 
        D_AS = { R1/sigma^2 in the Artin--Schreier image of K },
        sigma = a*delta*N*G1*G2a,   R1 = a^2*Q^2*B0.
 
-**Conclusion.** Off `D_AS` the cover is absolutely irreducible and Lang--Weil
-forces reconstructible collisions, exactly as on the closed a=0 conic -- there
-in `t`, here in `psi = tau^2+bQ*tau`. The height parameters `e, h0, h1` enter
-only through `R1 = a^2*Q^2*B0`, i.e. only in the numerator of the AS class; `B2`
-and `B1` are the pure geometric skeleton.
+**Conclusion.** Off `D_AS` the cover is absolutely irreducible, so Lang--Weil
+forces collisions **once the a!=0 reconstruction-split locus `H=J=0` is shown
+empty** (a step-2 deliverable; proven only on a=0 so far). This mirrors the
+closed a=0 conic -- there in `t`, here in `psi = tau^2+bQ*tau`. The height
+parameters `e, h0, h1` enter only through `R1 = a^2*Q^2*B0`, i.e. only in the
+numerator of the AS class; `B2` and `B1` are the pure geometric skeleton.
+The `b=0, a!=0` locus is a **separate degenerate stratum** (`psi=tau^2`
+inseparable, `Q1=0`) that the a=b=0 gate does not own; it is deferred to step 2.
 
 ## Artifact and replay
 
@@ -89,13 +97,24 @@ and `B1` are the pure geometric skeleton.
 
 - the explicit branch equations of `D_AS` from the AS-residues of `R1/sigma^2`
   at the roots of `G1` and `G2a` (mirrors the a=0 `W`-residue derivation; this
-  is where `e,h0,h1` become load-bearing);
+  is where `e,h0,h1` become load-bearing). Preflight before the residue
+  derivation: `Res(G2a,G2a')` (a-deformed simple-root locus), `Res(Q,G2a)`
+  (shared-`Q`-root pole cancellation), and the infinity-place balance;
+  `Res(G1,G2a)=Res(G1,G2)=p^2*K1*K2` is inherited from a=0 for free since
+  `G2a=G2` at the roots of `G1`;
 - whether any `D_AS` branch is collision-free (arc-legal) rather than
-  collision-forcing;
-- the reconstruction-split locus `H=J=0` on `a!=0`;
+  collision-forcing. Unlike a=0 (whose components were `t`-linear), the `D_AS`
+  components are `tau`-quadratics `tau^2+bQ*tau+A(u)`, so this needs a
+  **second-layer** trace analysis `Tr(A/(bQ)^2)=0`: a branch is collision-free
+  only if its `tau`-quadratic stays rootless over the whole odd tower -- the one
+  place a genuine construction could still hide;
+- the reconstruction-split locus `H=J=0` on `a!=0` (the a=0 pullback
+  `H -> delta*G1` is stratum-specific; `H=D*B+A*E` must be recomputed on `a!=0`);
+- the `b=0, a!=0` degenerate stratum (`psi=tau^2` inseparable, `Q1=0`), unowned
+  by the a=b=0 gate;
 - the classical Artin--Schreier reduction and Lang--Weil theory (trusted).
 
 ## SHA-256 / byte counts
 
-    analyze_c210_a_nonzero_artin_schreier_form.py         12137  0eb9ad53de37e63bf1d15739e90451d30b4d0b5ac976bb66c7deed62e21017cd
-    analyze_c210_a_nonzero_artin_schreier_form_output.txt  2019  7f7d9bb9f7ab070f3cc056d70b7e3f92d5f25199942dac74b5ec8ee2de2a05b3
+    analyze_c210_a_nonzero_artin_schreier_form.py         15123  74654129056588e8e400fd17ee041e6c82be9d53607013b1ef9061f3b33d6248
+    analyze_c210_a_nonzero_artin_schreier_form_output.txt  2590  ef431d5e49faed11e46d84072a57912c6375ace480e4d71b4fe61ad118a32f2b

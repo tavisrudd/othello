@@ -45,24 +45,32 @@ re-transcription of coefficients), the following structure.
     This is verified here by direct expansion in a ``tau``-ring, not only by the
     coefficient identities ``b^2*Q^2+sigma = B2`` and ``sigma*b*Q = Q1``.
 
-4.  **One factorization divisor.** As a quadratic in ``psi``, ``F`` factors over
-    ``K`` iff the Artin--Schreier class ``R1/sigma^2`` is trivial in
-    ``K/{g^2+g}``.  Every finer split reduces to this one divisor: a linear
-    factor ``tau+phi`` forces its slope-partner ``tau+phi+bQ`` (same resolvent
-    slope ``bQ``), so ``beta = phi^2+bQ*phi`` lies in ``K`` and the (2,2) split
-    is already defined over ``K``.  Hence the a!=0 factorization locus is the
-    single Artin--Schreier divisor ``D_AS = { R1/sigma^2 in AS-image }``,
+4.  **One factorization divisor** (on ``a*delta*N*b != 0``). As a quadratic in
+    ``psi``, ``F`` factors over ``K`` via slope ``bQ`` iff the Artin--Schreier
+    class ``R1/sigma^2`` is trivial in ``K/{g^2+g}``.  The two other factorization
+    modes both collapse into this one divisor: a linear factor ``tau+phi`` forces
+    its slope-partner ``tau+phi+bQ`` (same resolvent slope ``bQ``), so
+    ``beta = phi^2+bQ*phi`` lies in ``K`` and the split is the ``bQ`` one; and the
+    alternate slope ``s'`` (root of ``X^2+bQ*X+sigma``) is excluded from ``K``
+    because ``sigma/(bQ)^2`` has polynomial part of degree
+    ``deg(sigma)-deg(bQ)^2 = 5-4 = 1`` (odd), while every ``g^2+g`` has a constant
+    or even-degree polynomial part -- so ``s' in K`` would need
+    ``a*delta*N*b = 0``.  Hence the a!=0 factorization locus is the single
+    Artin--Schreier divisor ``D_AS = { R1/sigma^2 in AS-image }``,
     ``sigma = a*delta*N*G1*G2a``, ``R1 = a^2*Q^2*B0``.
 
-Off ``D_AS`` the cover is absolutely irreducible and Lang--Weil forces
-reconstructible collisions, exactly as on the closed a=0 conic (there in ``t``;
-here in ``psi = tau^2+bQ*tau``).
+Off ``D_AS`` the cover is absolutely irreducible, so Lang--Weil forces collisions
+once the a!=0 reconstruction-split locus ``H=J=0`` is shown empty (a step-2
+deliverable, proven only on a=0 so far).  This mirrors the closed a=0 conic
+(there in ``t``; here in ``psi = tau^2+bQ*tau``).
 
 What this does NOT prove (next: step 2): the explicit branch equations of
 ``D_AS`` from the AS-residues of ``R1/sigma^2`` at the roots of ``G1`` and
-``G2a`` (where the height parameters ``e,h0,h1`` enter through ``R1``), whether
-any branch is collision-free (arc-legal) rather than collision-forcing, the
-reconstruction-split locus ``H=J=0`` on a!=0, and the classical AS-reduction /
+``G2a`` (where the height parameters ``e,h0,h1`` enter through ``R1``); whether
+any branch is collision-free (arc-legal) rather than collision-forcing; the
+reconstruction-split locus ``H=J=0`` on a!=0 (needed for the off-``D_AS``
+collisions); the ``b=0,a!=0`` degenerate stratum (``psi=tau^2`` inseparable,
+``Q1=0``), which the a=b=0 gate does not own; and the classical AS-reduction /
 Lang--Weil theory (trusted).
 """
 
@@ -77,6 +85,23 @@ from analyze_c210_a_zero_factorization_strata import (
     t_coefficient,
     trace_one_pullback,
 )
+
+
+def u_leading(poly):
+    """(u-degree, leading u-coefficient set) of a TVARS polynomial."""
+    ui = TVARS.index("u")
+    deg = max((m[ui] for m in poly), default=-1)
+    lead = set()
+    for m in poly:
+        if m[ui] == deg:
+            mm = list(m)
+            mm[ui] = 0
+            t = tuple(mm)
+            if t in lead:
+                lead.discard(t)
+            else:
+                lead.add(t)
+    return deg, frozenset(lead)
 
 
 def build(ring):
@@ -273,6 +298,23 @@ def main() -> None:
     Q1 = Mu(v["a"], Q, B1)
     assert Q1 == Mu(sigma, v["b"], Q)
 
+    # 2b. Alternate-slope exclusion (completes the "one divisor" uniqueness claim).
+    #     The other two resolvent roots solve X^2+bQ*X+sigma=0, i.e. the alternate
+    #     (2,2)-slope s' is in K iff sigma/(bQ)^2 is in the AS image ℘(K)={g^2+g}.
+    #     Any ℘(K) element has polynomial part g_poly^2+g_poly of even degree (or a
+    #     constant); the polynomial part of sigma/(bQ)^2 has degree deg(sigma)-deg(bQ)^2.
+    #     deg_u sigma = 5 (leading a*delta*N), deg_u (bQ)^2 = 4 (leading b^2): the
+    #     polynomial part is degree 1 (odd, leading a*delta*N/b^2), so s' is never in
+    #     K when a*delta*N*b != 0.  Hence only the bQ-slope (2,2)-split is over K, and
+    #     the factorization locus is the single divisor D_AS.  (b=0 excluded: there
+    #     psi=tau^2 is inseparable -- a separate degenerate stratum, see docstring.)
+    sigma_deg, sigma_lead = u_leading(sigma)
+    bq2_deg, bq2_lead = u_leading(Mu(Pw(v["b"], 2), Pw(Q, 2)))
+    assert sigma_deg == 5 and bq2_deg == 4
+    assert (sigma_deg - bq2_deg) % 2 == 1                      # odd polynomial part
+    assert sigma_lead == Mu(v["a"], v["delta"], N)            # leading a*delta*N
+    assert bq2_lead == Pw(v["b"], 2)
+
     # 3. full psi-form identity by direct tau-expansion.
     verify_psi_form(B2, B1, B0, parts)
 
@@ -315,14 +357,23 @@ def main() -> None:
         "factorization_divisor": {
             "D_AS": "{ R1/sigma^2 in the Artin-Schreier image of K=GF(2)-bar(params)(u) }",
             "uniqueness":
-                "finer splits reduce to D_AS: a linear factor tau+phi forces slope-partner "
-                "tau+phi+bQ, so beta=phi^2+bQ*phi in K and the (2,2) split is over K",
-            "off_divisor": "F absolutely irreducible; Lang-Weil forces reconstructible collisions",
+                "complete on a*delta*N*b!=0: (i) a linear factor tau+phi forces slope-partner "
+                "tau+phi+bQ, so beta=phi^2+bQ*phi in K and the (2,2) split is the bQ one; "
+                "(ii) the alternate slope s' (root of X^2+bQ*X+sigma) is excluded because "
+                "sigma/(bQ)^2 has odd (degree-1) polynomial part, never in ℘(K). So the only "
+                "(2,2)-over-K is the bQ-slope, governed by R1/sigma^2 = D_AS",
+            "off_divisor":
+                "F absolutely irreducible; collisions then follow by Lang-Weil ONCE the a!=0 "
+                "reconstruction-split locus H=J=0 is shown empty (step-2 deliverable, not yet proven)",
+            "b_zero_caveat":
+                "b=0,a!=0 is a separate degenerate stratum (psi=tau^2 inseparable, Q1=0); "
+                "not covered here and unowned by the a=b=0 gate -- see does_not_prove",
         },
         "does_not_prove": [
             "explicit branch equations of D_AS (AS-residues of R1/sigma^2 at G1,G2a roots)",
             "whether any D_AS branch is collision-free (arc-legal) rather than collision-forcing",
-            "the reconstruction-split locus H=J=0 on a!=0",
+            "the reconstruction-split locus H=J=0 on a!=0 (needed for the off-D_AS collisions)",
+            "the b=0,a!=0 degenerate stratum (psi=tau^2 inseparable)",
             "the classical Artin-Schreier reduction and Lang-Weil theory (trusted)",
         ],
         "field_conventions": "GF(2) symbolic; theta,N irreducible; GF(4)-splitting of Q,G1",
