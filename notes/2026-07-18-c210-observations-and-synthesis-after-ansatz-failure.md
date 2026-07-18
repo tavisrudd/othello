@@ -42,6 +42,28 @@ redundancy.
 allocation and the lane-finish administration remain separate decisions, but the mathematical
 program has a well-defined continuation.
 
+## Plain-language account
+
+The construction tried to build the desired arc from several regular layers of points. It had to
+keep two promises:
+
+1. no three chosen points ever lie on one line;
+2. lines through pairs of chosen points cover everything required outside the conic.
+
+C210 proved that this particular layer-and-repair recipe always breaks the first promise once the
+field is large enough. Somewhere in every permitted nonconstant specialization, a seed point and
+the relevant repair points line up. The algebraic collision curve is a machine for locating such
+bad triples. Its ordinary part always supplies one, and every special branch that might have been
+an escape was classified and shown to supply one as well. The reconstruction proof then shows that
+these algebraic solutions are three real, distinct selected points, not duplicated points or fake
+resultant roots.
+
+This is much stronger than “we searched many parameters and did not find a construction.” It says
+that every parameter choice in the certified full two-coset template is eventually bad. It is also
+much weaker than a global impossibility theorem: a different template, a partial repair domain, an
+orbit or exchange construction, or another geometric architecture may still produce
+`C`-complete arcs of order `sqrt(Q)`.
+
 ## The motivating problem and notation
 
 Let `C` be a nonsingular conic in `PG(2,Q)`. A `C`-complete arc is an arc
@@ -132,14 +154,43 @@ Every rational point of the collision resultant therefore reconstructs the uniqu
 
 The possible `H=J=0` resultant artifact is absent globally, not merely checked branch by branch.
 
+### Exact Artin--Schreier normal form
+
+**PROVED.** On the generic scope `a*delta*N*b*p != 0`, put
+
+    theta = w^2+w+1,
+    N = a^2+a+1,
+    Q = u^2+u*delta+delta^2,
+    G1 = u^2+u*p+p^2*theta,
+    G2 = u^3+u^2*delta+u*p^2*theta
+         +delta*p^2*theta+delta^2*p,
+    G2a = G2+delta*a*G1,
+    psi = tau^2+b*Q*tau,
+    sigma = a*delta*N*G1*G2a.
+
+The collision cover has the exact form
+
+    F = psi^2 + sigma*psi + R1,
+    R1 = a^2*Q^2*B0.
+
+The alternate quadratic slope is excluded on this scope, so this single Artin--Schreier form owns
+the generic factorization locus. This reduction is one of the main publishable algebraic steps: it
+turns a large quartic collision equation into one controlled factorization and second-layer
+classification problem.
+
 ### Complete factorization classification
 
 **PROVED.** On `a!=0,b!=0`, the quartic collision cover has a unique Artin--Schreier factorization
 divisor. Over every odd-degree field, the residue system has exactly three branches:
 
 1. `e=0`, with forced height `h0=0`;
-2. `e=delta`, with the explicitly forced height from the C210 packet;
-3. `delta=p`, `w in {0,1}`, with its explicitly forced height.
+2. `e=delta`, with
+
+       h0 = p^2*(w^2+w+1)+e^2+e*b+e*a*p;
+
+3. `delta=p`, `w in {0,1}`, with
+
+       h0 = e^2*a^2+e*a^2*p+e*a*p+e^2+e*b+e*p.
 
 Exact ideal memberships in the lossless `p=1` chart prove:
 
@@ -335,6 +386,31 @@ The final C210 obstruction supersedes the notebook question of whether the other
 may still be worth explaining, but they are no longer infinite-family candidates in the certified
 two-coset scope.
 
+### Minor mechanism-notebook residue
+
+The following observations are not the main C210 theorem, but they complete the record of the
+legacy mechanism notebook.
+
+- **Almost-complete conics point in the wrong direction (`REASONED`).** An almost-complete subset
+  of another conic leaves points of that conic uncovered. After projective transport, more than
+  four remaining points force the exceptional conic to be the transported conic by Bezout, placing
+  the selected points on the prescribed conic rather than avoiding it. This cheaply rejects a
+  tempting transfer; it is not a global obstruction.
+- **A third layer over the original subfield is trivially illegal (`PROVED`).** Every vertical line
+  over a subfield parameter already contains the two seed points, so a third point with the same
+  horizontal parameter makes a collinear triple. Repair layers must move to a nontrivial additive
+  coset or use a partial domain.
+- **Constant full-coset repair is sporadic (`CHECKED`, bounded).** At `s=5`, two constant repair
+  layers give complete `15`-arcs, while `s=7` has no arc-legal layer. No symbolic parameter law is
+  known, so this is not an allocated infinite-family route.
+- **Affine repair heights add no tested family (`CHECKED`, bounded).** Every arc-legal affine graph
+  in the tested orders has zero slope and merely recovers a constant layer. Re-entry requires a
+  structural theorem rather than more affine coefficient enumeration.
+- **The three `q=64` nonlinear orbits are inequivalent only relative to the fixed seed
+  (`CHECKED`).** It remains open whether representatives become equivalent after allowing the
+  two-layer seed itself to move in its larger family. Fixed-seed inequivalence is sufficient for
+  the obstruction program, but a finite-construction paper may want the full equivalence answer.
+
 ## Publishable inventory and strength assessment
 
 Grades are qualitative portfolio judgments, not claims about venue acceptance.
@@ -406,6 +482,36 @@ C84 and C294 belong together in a different manuscript:
 
 C84's failed certificate candidates are research boundaries, not an impossibility theorem unless a
 certificate language is formalized first.
+
+## Literature and novelty boundary
+
+The exact relative-conic problem is not supplied by the nearest established constructions.
+
+- Kim and Vu's general complete-arc method gives the transferred
+  `O(sqrt(Q)*(log Q)^c)` scale rather than the desired sharp `O(sqrt(Q))` family:
+  [*Small complete arcs in projective planes*](https://doi.org/10.1007/s00493-003-0024-1).
+- Prescribed-symmetry constructions give important finite examples but not this infinite
+  conic-relative theorem: Lisoněk--Marcugini--Pambianco,
+  [*Constructions of small complete arcs with prescribed symmetry*](https://cdm.ucalgary.ca/article/download/61979/46677/176938).
+- Translation and hyperfocused arcs already include additive-subgroup graph constructions and
+  examples complete off a focus line. The two-parabola and `q=64` C210 constructions therefore
+  require comparison with Faina--Parrettini--Pasticci,
+  [*Hyperfocused arcs in PG(2,32)*](https://arxiv.org/abs/0803.3933), and its cited translation-arc
+  lineage before any novelty claim.
+- Modern curve-based completeness arguments also use normalization and finite-field point bounds;
+  see Bastioni--Micheli,
+  [*On complete m-arcs*](https://doi.org/10.1016/j.jalgebra.2023.09.027). C210's distinctive claim
+  must be the prescribed-conic sharp-scale architecture and its exact collision obstruction, not
+  the generic fact that algebraic curves and Hasse--Weil can prove completeness or collision.
+
+The safe novelty posture is therefore:
+
+- claim the exact prescribed-conic definitions and obstruction only after a dedicated comparison;
+- present the divided-difference and trace-set calculus as reusable infrastructure until its
+  relationship to translation-arc formulas is settled;
+- treat the `PG(2,64)` `24/26` phenomenon as an exact finite result, with projective equivalence and
+  priority still to audit;
+- avoid describing the general use of curves, Artin--Schreier covers, or Hasse--Weil as new.
 
 ## Reusable C210 infrastructure
 
@@ -487,6 +593,46 @@ The live crowns map is
 
 ### Crown I: full-group value theory
 
+The C294 bronze theorem is exact. Let `q=p^e`, where `p>5`, `e` is odd, and
+
+    p congruent 3 or 27 (mod 40).
+
+For every parameter `b` satisfying
+
+    b notin {0,1,-1,2},
+    (b-1)^2+4 is a nonsquare,
+    F_p(b)=F_q,
+
+take the four off-conic centres
+
+    S_b = {(0,1,1), (-1,0,1), (1,b,1), (-b,-1,1)}.
+
+Together with the conic frame points
+
+    P_infinity = (1,0,0),  P_0 = (0,1,0),
+
+they form a six-arc. Their projection involutions generate the full `PGL2(q)`, and the
+fixed/dead-vertex-deleted conic residual is a Node--Kayles P-position.
+
+The strategy certificate is the fixed-point-free involution
+
+    tau(t) = -1/t,
+
+which conjugates the four generators in two pairs, preserves the deleted set, and pairs live
+nonadjacent vertices. The group proof uses a nontrivial unipotent, exclusion of Borel/torus/`S4`
+maximal overgroups, a nonsquare determinant to leave `PSL2`, and the projective trace invariant
+
+    kappa(A2*A0) = 1/(1-b)
+
+to exclude every proper definition field.
+
+For `e=1` there are exactly `(p-5)/2` admissible parameters. For `e>1` there are exactly
+
+    (1/2) * sum_{d|e} mu(e/d)*p^d,
+
+precisely half the full-degree elements. This is a one-dimensional `Theta(q)` full-group family,
+not C84's two-dimensional density statement and not the missing off-conic-to-on-conic transfer.
+
 C294 has reduced its silver boundary to a mixed-determinant-class regular `PGL2` Cayley scar. A
 right-regular pairing kills the same-class cases; the complete remaining pairing defect lies in
 one dihedral involution-centralizer coset.
@@ -548,6 +694,32 @@ two-ply adaptive automorphism certificates do not explain the observed class-D P
 
 The Grundy-zero predicate is not presently a bounded algebraic condition. Hasse--Weil cannot count
 P-positions directly.
+
+The quantitative C84 evidence behind that boundary is important:
+
+- for the rooted class-D family at `q=29`, exactly `139/753` legal fourth-centre residuals are
+  P-positions;
+- nevertheless, none of the `753` roots admits even the deliberately stronger unrestricted
+  two-ply adaptive-pairing certificate in which each first move may choose an arbitrary reply and
+  an arbitrary residual graph automorphism;
+- `739` roots have no first move covered by such a response and the remaining `14` have exactly two;
+- at `q=13`, `13/131` roots do pass the certificate, and direct Grundy recursion verifies all
+  thirteen as P, showing that the event is meaningful rather than malformed.
+
+C84 separately closes the following as uniform positive-density mechanisms:
+
+- root pairing or another larger internal automorphism search;
+- an immediate bounded reply core (`q=29` P roots have a worst first move whose winning replies
+  leave a component of size at least `14`);
+- fixed colored-word response rules (all `88` forced-reply word patterns also occur on losing
+  replies);
+- rooted-`S4` double-coset packets (no `q=23` or `q=29` P root is fully covered);
+- transport of the residual-grid ledger, whose reservoir is absent in the conic-only state;
+- static feature refinement, greedy drain, and enlarged finite selector libraries.
+
+These are bounded mechanism negatives, not evidence that the observed P-density is false. Re-entry
+requires a genuinely global recursion, averaging/distribution theorem, family-level correspondence,
+or a formally specified certificate language that evades the recorded obstruction.
 
 ### What C210 can supply after a deterministic certificate exists
 
