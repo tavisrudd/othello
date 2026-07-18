@@ -34,6 +34,8 @@ another lane's running build.
   `wrapper`, and `canonicalize` run none; `selftest` exercises the whole path against core Lean with
   no project import; `run` extracts declared units through `guarded-lean` and refuses a tree
   carrying foreign work. Metaprogram: `lean/scripts/trust-spine-export.lean`.
+- `lean/scripts/lean-blast-radius.py`: read-only `hubs`/`radius`/`targets`/`cost-model` over the
+  project-local import DAG. Blast radius is exact; cost columns are unvalidated size proxies.
 - Resource profiles: `lean/scripts/lean-build-profiles.json`.
 
 Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink).
@@ -50,11 +52,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    Reports: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md),
    [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
    Phase A's findings 1–4 are other lanes' to close; `build-sys` reports them and does not fix them.
-1. **Blast radius (C162):** parse project-local imports, compute reverse reachability, and rank hubs
-   by rebuild cost as well as dependent count. This is the lane's next actionable item: it needs no
-   build, and C326's spine already provides a tested import scanner and `source_closure` over the
-   same graph.
-2. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
+1. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior.
 3. **Restart guard:** complete hermetic failure tests and a lightweight real
    checkpoint→restart→audit→verify cycle.
@@ -74,6 +72,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 ## Reports
 
 - C162 current report: [`../2026-07-14-c162-lean-build-system.md`](../2026-07-14-c162-lean-build-system.md).
+- C162 blast radius: [`../2026-07-18-c162-blast-radius.md`](../2026-07-18-c162-blast-radius.md).
 - C205 base runner: [`../2026-07-15-c205-unattended-lean-build-queue.md`](../2026-07-15-c205-unattended-lean-build-queue.md).
 - C225 managed queue (reported): [`done/2026-07-16-c225-lean-queue-completion-notification.md`](done/2026-07-16-c225-lean-queue-completion-notification.md).
 - C326 Phase A: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).

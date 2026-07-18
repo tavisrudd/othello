@@ -1,0 +1,132 @@
+{
+  "modules": 10878,
+  "project_local_edges": 30270,
+  "ranked_by_dependents": [
+    {
+      "dependents": 10439,
+      "direct_importers": 10,
+      "module": "CapGame.BuildGame"
+    },
+    {
+      "dependents": 10373,
+      "direct_importers": 3,
+      "module": "ProjectiveCap.Grid"
+    },
+    {
+      "dependents": 10371,
+      "direct_importers": 7,
+      "module": "ProjectiveCap.GridGame"
+    },
+    {
+      "dependents": 10285,
+      "direct_importers": 5,
+      "module": "ProjectiveCap.Projective"
+    },
+    {
+      "dependents": 10281,
+      "direct_importers": 11,
+      "module": "ProjectiveCap.PlaneTransitivity"
+    },
+    {
+      "dependents": 10274,
+      "direct_importers": 2,
+      "module": "RelativeConicArcs.Plane"
+    },
+    {
+      "dependents": 10273,
+      "direct_importers": 3,
+      "module": "RelativeConicArcs.Arc"
+    },
+    {
+      "dependents": 10269,
+      "direct_importers": 7,
+      "module": "RelativeConicArcs.Moments"
+    },
+    {
+      "dependents": 10260,
+      "direct_importers": 5,
+      "module": "RelativeConicArcs.ProjectiveBridge"
+    },
+    {
+      "dependents": 10258,
+      "direct_importers": 4,
+      "module": "RelativeConicArcs.Defect"
+    },
+    {
+      "dependents": 10257,
+      "direct_importers": 2,
+      "module": "ProjectiveCap.Sym2ConicBridge"
+    },
+    {
+      "dependents": 10255,
+      "direct_importers": 6,
+      "module": "RelativeConicArcs.Conic"
+    },
+    {
+      "dependents": 10247,
+      "direct_importers": 3,
+      "module": "ProjectiveCap.GridSeed"
+    },
+    {
+      "dependents": 10246,
+      "direct_importers": 5,
+      "module": "ProjectiveCap.FrameGridBridge"
+    },
+    {
+      "dependents": 10236,
+      "direct_importers": 5,
+      "module": "RelativeConicArcs.Certificate"
+    },
+    {
+      "dependents": 10235,
+      "direct_importers": 4,
+      "module": "RelativeConicArcs.FiniteFields"
+    },
+    {
+      "dependents": 8807,
+      "direct_importers": 6,
+      "module": "FiniteGeom.Hypergraph"
+    },
+    {
+      "dependents": 8778,
+      "direct_importers": 3,
+      "module": "FiniteGeom.Completion"
+    },
+    {
+      "dependents": 8777,
+      "direct_importers": 3,
+      "module": "FiniteGeom.BaerCompletion.Obstruction"
+    },
+    {
+      "dependents": 8774,
+      "direct_importers": 3,
+      "module": "FiniteGeom.BaerCompletion.Secant"
+    },
+    {
+      "dependents": 8772,
+      "direct_importers": 4,
+      "module": "FiniteGeom.BaerCompletion.BaerPlane"
+    },
+    {
+      "dependents": 8769,
+      "direct_importers": 7,
+      "module": "FiniteGeom.BaerCompletion.PairExtension"
+    },
+    {
+      "dependents": 8761,
+      "direct_importers": 2,
+      "module": "FiniteGeom.BaerCompletion.OrbitCounting"
+    },
+    {
+      "dependents": 8760,
+      "direct_importers": 2,
+      "module": "RelativeConicArcs.ProjectiveConjugation"
+    },
+    {
+      "dependents": 8759,
+      "direct_importers": 3,
+      "module": "RelativeConicArcs.QuadraticFrobenius"
+    }
+  ],
+  "schema": "blast-radius-graph/1"
+}

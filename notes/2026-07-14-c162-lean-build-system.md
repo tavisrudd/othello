@@ -43,7 +43,9 @@ The real-toolchain lightweight-build gate remains open: by policy it requires a 
 ## Remaining C162 streams
 
 1. Exercise one disposable lightweight target through the real queue in a quiet window.
-2. Add the project-local import/reverse-dependency blast-radius analyzer.
+2. ~~Add the project-local import/reverse-dependency blast-radius analyzer.~~ Landed; the
+   dependent-count half is exact and the cost half is blocked on per-module timing that no current
+   telemetry provides → [`2026-07-18-c162-blast-radius.md`](2026-07-18-c162-blast-radius.md).
 3. Identify and version stable generated-checker/schema boundaries.
 4. Demonstrate pack/restore and evaluate per-lane build-tree isolation on disposable state.
 5. Convert the remaining restart-guard cases into hermetic tests, then run a real
