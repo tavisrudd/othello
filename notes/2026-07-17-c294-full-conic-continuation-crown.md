@@ -195,7 +195,9 @@ normalizer, the stated prime-field `S_4` exception, or an immediate proper-subfi
 which makes every possible definition field contain `b`. The full-degree hypothesis closes the
 row. This is a family-specific subfield exclusion. The companion silver report gives the general
 odd-subfield orbit decomposition, with one regular `PGL2` Cayley scar still open in extension
-degree `3 mod 4`.
+degree `3 mod 4`; a right-regular pairing further reduces it to generator triples mixing the two
+involution determinant classes and localizes the complete pairing defect to one dihedral
+involution-centralizer coset.
 
 The result crosses the full-group boundary over every odd extension of the eligible prime fields
 without borrowing the unresolved abundance or recognition mechanisms owned by C84/C199/C200.
@@ -226,7 +228,8 @@ Crown I silver asks for every tame legal configuration of one fixed size, includ
 subfield linear-group cases. The family above is a new positive-dimensional full-group stratum,
 not that classification. The minimal silver battlefield is three centres; exact q=11 data already
 show that root and two-ply pairing certificates miss most P residuals, so silver needs a genuinely
-non-pairing global recursion plus a value theorem for the remaining `PGL2` Cayley scar.
+non-pairing global recursion plus a value-preserving transfer across the remaining dihedral
+centralizer scar.
 
 ## Evidence and replay
 

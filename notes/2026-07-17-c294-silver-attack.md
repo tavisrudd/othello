@@ -2,7 +2,8 @@
 
 **Date:** 2026-07-17
 **Lane:** `crowns`
-**Status:** odd-subfield descent proved up to one explicit `PGL2` Cayley scar; silver remains open.
+**Status:** odd-subfield descent proved; the only mixed-class `PGL2` scar is localized to one
+dihedral involution-centralizer coset, but its value transfer remains open.
 
 ## Target and minimal size
 
@@ -110,6 +111,44 @@ for every odd `n`, and subfield `PGL2` descends exactly for `n=1 (mod 4)`. The s
 `Cay(PGL2(q0),S)` component. This is a genuine recursive scar, not an unstructured extension-field
 remainder.
 
+### Pairing reduction of the Cayley scar
+
+Use the left-Cayley convention, with edges `h -- si h`. For any involution `z in H`, right
+multiplication `rho_z(h)=hz` is a fixed-point-free involutory graph automorphism. A pair
+`{h,hz}` is an edge exactly when
+
+\[
+hzh^{-1}=s_i
+\]
+
+for some generator. Hence, if the conjugacy class of `z` is disjoint from `S`, `rho_z` is a
+nonadjacent pairing and `G(Cay(H,S))=0`.
+
+For odd `q0`, `PGL2(q0)` has exactly two involution classes, distinguished by the square class of
+the characteristic discriminant, equivalently by membership in the determinant-square kernel
+`PSL2(q0)`. Therefore the odd-parity `PGL2` scar vanishes whenever the generating triple omits one
+involution class. Since a triple generating `PGL2` cannot lie wholly in `PSL2`, this covers exactly
+the same-class case in which all three generators lie outside `PSL2`. The only subfield scar still
+open is a regular `PGL2(q0)` Cayley graph whose three generators mix the two determinant classes.
+
+In that mixed case, choose `z` from the conjugacy class represented by only one generator `s*`.
+The complete adjacency-defect locus of the same right-regular mirror is
+
+\[
+B_z=\{h:hzh^{-1}=s_*\}=h_0C_H(z),
+\]
+
+a single right coset of the involution centralizer. It is `rho_z`-invariant. In `PGL2(q0)` the
+centralizer is the corresponding torus normalizer, dihedral of order `2(q0-1)` for a split
+involution and `2(q0+1)` for a nonsplit involution. Thus the nonadjacent pairing is valid off one
+explicit two-colour backbone of one of those two sizes, inside a Cayley graph of size
+`q0(q0^2-1)`.
+
+This localization is not yet a value theorem: a move on `B_z` can break the mirror symmetry
+through its closed neighborhood. The remaining transfer lemma must track precisely that bounded-
+codimension interaction. But the scar is now one dihedral centralizer coset, not the full regular
+Cayley graph.
+
 ## Silver attack
 
 The remaining proof should be split by Dickson type, with no cross-stratum handwaving:
@@ -117,8 +156,9 @@ The remaining proof should be split by Dickson type, with no cross-stratum handw
 1. **Proper groups:** import the proved cyclic/dihedral/polyhedral orbit-template values and consume
    the direct-strategy layer when C199 delivers it.
 2. **Subfield groups:** the odd-extension theorem above gives exact descent for `PSL2` and for
-   `PGL2` when the extension degree is `1 mod 4`. Classify or recursively peel the single regular
-   `PGL2(q0)` Cayley scar left when the degree is `3 mod 4`.
+   `PGL2` when the extension degree is `1 mod 4`; the Cayley pairing also handles same-class
+   generators in degree `3 mod 4`. Prove a value-preserving peel for the remaining mixed-class
+   scar, now localized to one dihedral involution-centralizer coset.
 3. **Full groups:** choose one generator pair and decompose the graph into its alternating
    dihedral orbits. The third involution is then a correlated matching between those path/cycle
    backbones. The needed new theorem is a recursive scar/transfer rule that preserves P/N while
