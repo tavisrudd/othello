@@ -1,0 +1,132 @@
+{
+ "census_comparison": {
+  "class_direct_comparisons": 114,
+  "class_value_comparisons": 176,
+  "embeddings": 38,
+  "eps_comparisons": 140,
+  "m1_comparisons": 38
+ },
+ "census_file": "2026-07-17-c288-polyhedral-embedding-census.json",
+ "character_forms_on_primes": {
+  "bound": 10000,
+  "primes_checked": 1227
+ },
+ "moduli_and_balance": {
+  "A5": {
+   "(2,3,5);5": {
+    "minimal_modulus": 120,
+    "value_counts_mod_120": {
+     "0": 8,
+     "1": 8
+    }
+   },
+   "(2,5,5);3": {
+    "minimal_modulus": 24,
+    "value_counts_mod_120": {
+     "0": 8,
+     "1": 8
+    }
+   },
+   "(3,3,5);3": {
+    "minimal_modulus": 1,
+    "value_counts_mod_120": {
+     "0": 16
+    }
+   },
+   "(3,5,5);3": {
+    "minimal_modulus": 15,
+    "value_counts_mod_120": {
+     "0": 8,
+     "1": 8
+    }
+   },
+   "(3,5,5);5": {
+    "minimal_modulus": 1,
+    "value_counts_mod_120": {
+     "0": 16
+    }
+   },
+   "(5,5,5);5": {
+    "minimal_modulus": 4,
+    "value_counts_mod_120": {
+     "0": 8,
+     "1": 8
+    }
+   }
+  },
+  "A5_m1_parity": {
+   "minimal_modulus": 120,
+   "value_counts_mod_120": {
+    "0": 8,
+    "1": 8
+   }
+  },
+  "S4": {
+   "(2,3,3);4": {
+    "minimal_modulus": 8,
+    "value_counts_mod_8": {
+     "0": 2,
+     "2": 2
+    }
+   },
+   "(2,3,4);3": {
+    "minimal_modulus": 8,
+    "value_counts_mod_8": {
+     "0": 2,
+     "1": 2
+    }
+   },
+   "(3,3,3);4": {
+    "minimal_modulus": 8,
+    "value_counts_mod_8": {
+     "0": 2,
+     "1": 2
+    }
+   },
+   "(3,4,4);3": {
+    "minimal_modulus": 8,
+    "value_counts_mod_8": {
+     "0": 2,
+     "1": 2
+    }
+   }
+  },
+  "admissible_classes_mod_120_A5": [
+   1,
+   11,
+   19,
+   29,
+   31,
+   41,
+   49,
+   59,
+   61,
+   71,
+   79,
+   89,
+   91,
+   101,
+   109,
+   119
+  ]
+ },
+ "parity_sweep": {
+  "a5_orbit_eq_and_parity_checked": 799,
+  "range": [
+   5,
+   6000
+  ],
+  "s4_m1_odd_classes_mod_48": [
+   1,
+   23,
+   29,
+   31,
+   35,
+   37,
+   41,
+   43
+  ],
+  "s4_orbit_eq_checked": 1999
+ },
+ "schema": "c290-congruence-law-check-v1"
+}
