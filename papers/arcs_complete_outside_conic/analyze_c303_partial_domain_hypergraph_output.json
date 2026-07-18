@@ -1,0 +1,312 @@
+{
+  "cases": [
+    {
+      "after_mandatory_conic_deletion_missing": {
+        "deleted_vertices": 0,
+        "old_affine": 1,
+        "old_infinity": 0
+      },
+      "after_mandatory_conic_deletion_missing_points": [
+        "affine:50:46"
+      ],
+      "bad_line_size_histogram": {
+        "3": 32
+      },
+      "bad_lines": 32,
+      "case": "e0_alpha",
+      "coincidence_groups": [
+        "A0/L0",
+        "B2/L2"
+      ],
+      "collision_triples": 32,
+      "complete_arc_restriction": {
+        "exists": false,
+        "independent_direct_replay": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        },
+        "primary_search": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        }
+      },
+      "geometric_points": 30,
+      "incidence_sha256": "92ee6b305ce09f09fb82e577023b22edbf4e299de2366519e6395c28ed500b98",
+      "layer_vertices": 32,
+      "mandatory_conic_deletion": [
+        "R1"
+      ],
+      "maximum_arc": {
+        "initial_mandatory_plus_disjoint_edge_lower_bound": 9,
+        "minimum_deletions": 11,
+        "proof_search_nodes_at_optimum_budget": 11,
+        "proof_search_nodes_total": 138,
+        "size": 19,
+        "witness_deleted": [
+          "A0/L0",
+          "A1",
+          "A2",
+          "B2/L2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "B7",
+          "R1",
+          "R5"
+        ],
+        "witness_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 122,
+          "old_infinity": 5
+        }
+      },
+      "terminal_star": {
+        "after_center_deletion_collision_triples": 23,
+        "center": "A0/L0",
+        "coverage_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 1,
+          "old_infinity": 0
+        },
+        "edges": 7
+      }
+    },
+    {
+      "after_mandatory_conic_deletion_missing": {
+        "deleted_vertices": 0,
+        "old_affine": 1,
+        "old_infinity": 0
+      },
+      "after_mandatory_conic_deletion_missing_points": [
+        "affine:60:46"
+      ],
+      "bad_line_size_histogram": {
+        "3": 32
+      },
+      "bad_lines": 32,
+      "case": "e0_beta",
+      "coincidence_groups": [
+        "B0/L0",
+        "A2/L2"
+      ],
+      "collision_triples": 32,
+      "complete_arc_restriction": {
+        "exists": false,
+        "independent_direct_replay": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        },
+        "primary_search": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        }
+      },
+      "geometric_points": 30,
+      "incidence_sha256": "883277fb65e9f403822b397f42b9e2fb77132fd815aa13407ff605f83ee457b0",
+      "layer_vertices": 32,
+      "mandatory_conic_deletion": [
+        "R3"
+      ],
+      "maximum_arc": {
+        "initial_mandatory_plus_disjoint_edge_lower_bound": 9,
+        "minimum_deletions": 11,
+        "proof_search_nodes_at_optimum_budget": 11,
+        "proof_search_nodes_total": 471,
+        "size": 19,
+        "witness_deleted": [
+          "A0",
+          "B0/L0",
+          "A1",
+          "A2/L2",
+          "A3",
+          "A4",
+          "B5",
+          "A6",
+          "A7",
+          "R3",
+          "R7"
+        ],
+        "witness_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 122,
+          "old_infinity": 5
+        }
+      },
+      "terminal_star": {
+        "after_center_deletion_collision_triples": 23,
+        "center": "B0/L0",
+        "coverage_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 1,
+          "old_infinity": 0
+        },
+        "edges": 7
+      }
+    },
+    {
+      "after_mandatory_conic_deletion_missing": {
+        "deleted_vertices": 0,
+        "old_affine": 1,
+        "old_infinity": 0
+      },
+      "after_mandatory_conic_deletion_missing_points": [
+        "affine:51:46"
+      ],
+      "bad_line_size_histogram": {
+        "3": 32
+      },
+      "bad_lines": 32,
+      "case": "e1_alpha",
+      "coincidence_groups": [
+        "A1/R1",
+        "B3/R3"
+      ],
+      "collision_triples": 32,
+      "complete_arc_restriction": {
+        "exists": false,
+        "independent_direct_replay": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        },
+        "primary_search": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        }
+      },
+      "geometric_points": 30,
+      "incidence_sha256": "f5271647034501f9e15f51ee897d71ce3f8e609a48ffa259234663e32a9fa6bd",
+      "layer_vertices": 32,
+      "mandatory_conic_deletion": [
+        "L0"
+      ],
+      "maximum_arc": {
+        "initial_mandatory_plus_disjoint_edge_lower_bound": 9,
+        "minimum_deletions": 11,
+        "proof_search_nodes_at_optimum_budget": 11,
+        "proof_search_nodes_total": 474,
+        "size": 19,
+        "witness_deleted": [
+          "A0",
+          "A1/R1",
+          "A2",
+          "A3",
+          "B3/R3",
+          "A4",
+          "A5",
+          "B6",
+          "A7",
+          "L0",
+          "L4"
+        ],
+        "witness_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 122,
+          "old_infinity": 5
+        }
+      },
+      "terminal_star": {
+        "after_center_deletion_collision_triples": 23,
+        "center": "A1/R1",
+        "coverage_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 1,
+          "old_infinity": 0
+        },
+        "edges": 7
+      }
+    },
+    {
+      "after_mandatory_conic_deletion_missing": {
+        "deleted_vertices": 0,
+        "old_affine": 1,
+        "old_infinity": 0
+      },
+      "after_mandatory_conic_deletion_missing_points": [
+        "affine:61:46"
+      ],
+      "bad_line_size_histogram": {
+        "3": 32
+      },
+      "bad_lines": 32,
+      "case": "e1_beta",
+      "coincidence_groups": [
+        "B1/R1",
+        "A3/R3"
+      ],
+      "collision_triples": 32,
+      "complete_arc_restriction": {
+        "exists": false,
+        "independent_direct_replay": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        },
+        "primary_search": {
+          "coverage_prunes": 1,
+          "memo_states": 1,
+          "nodes": 1,
+          "solution_exists": false
+        }
+      },
+      "geometric_points": 30,
+      "incidence_sha256": "46602b7bf5d47d1572e7cbed6d3f7ae2d5008efbe050d2bf8efc206bcbab9a5e",
+      "layer_vertices": 32,
+      "mandatory_conic_deletion": [
+        "L2"
+      ],
+      "maximum_arc": {
+        "initial_mandatory_plus_disjoint_edge_lower_bound": 9,
+        "minimum_deletions": 11,
+        "proof_search_nodes_at_optimum_budget": 11,
+        "proof_search_nodes_total": 216,
+        "size": 19,
+        "witness_deleted": [
+          "A0",
+          "A1",
+          "B1/R1",
+          "A2",
+          "A3/R3",
+          "B4",
+          "A5",
+          "A6",
+          "A7",
+          "L2",
+          "L6"
+        ],
+        "witness_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 122,
+          "old_infinity": 5
+        }
+      },
+      "terminal_star": {
+        "after_center_deletion_collision_triples": 23,
+        "center": "B1/R1",
+        "coverage_missing": {
+          "deleted_vertices": 0,
+          "old_affine": 1,
+          "old_infinity": 0
+        },
+        "edges": 7
+      }
+    }
+  ],
+  "conclusion": "In each terminal geometry, admissibility forces deletion of one selected conic point, and that deletion already loses required coverage; no further restriction can restore it.",
+  "field": "PG(2,64) with GF(8) layer parameters",
+  "required_locus": "all projective points outside XZ=Y^2, including deleted vertices",
+  "schema": "c303-partial-domain-v1"
+}
