@@ -86,3 +86,26 @@ it. The same caution applies to `omega`-adjacent closers and to `simp` with `dec
 
 **Evidence level.** Observed elaboration failure and the working symbolic replacement; both built
 green.
+
+## 2026-07-18 — a name-resolution slip cost a full tree build to discover
+
+**Context.** First build of `Q25MinimumClassification`, the semantic normalization lift, which sits
+downstream of the 304-module conclusion dispatch tree.
+
+**Noticed.** The build ran about 30 minutes and then failed on the consuming module for a missing
+`open Q25MinimumMask`: `legalOrbitSet` was unknown, and `autoImplicit` turned it into an implicit
+binder, so the three declarations mentioning it never entered the environment and every later
+reference cascaded into an unrelated-looking "unknown identifier". Once the tree was warm, the same
+module elaborated in about 6 seconds, and the remaining real errors — an `Admissible` ambiguity
+with `Configuration.Admissible`, and a missing `orbitCodeOfNumber 5 = standardOrbit` step — took
+three fast iterations.
+
+**Why it may matter.** The cost of a mistake in a tree-consuming module is set by the tree, not by
+the mistake. Elaborating the consumer once against the already-built dependencies before committing
+to a cold full-tree build converts a 30-minute failure into a 6-second one. `autoImplicit` also
+makes the *first* reported error the least informative one: prefer the unknown-identifier hint over
+the cascade below it. The exhaustion layer is another large generated tree and will present the
+same asymmetry.
+
+**Evidence level.** Two observed build runs, the failing cold one and the passing warm one, with
+the queue's recorded timings.
