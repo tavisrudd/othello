@@ -42,12 +42,16 @@ was added later the same session; its fresh run is byte-identical to the committ
 (`diff` exit 0), and its Singular certificate re-derives the residue reduction independently of
 the Python set arithmetic.
 
-The seven `a_nonzero_*` bundles now carry the active t-degree-four line through
+The eight `a_nonzero_*` bundles now carry the active t-degree-four line through
 the exact GF(8)/GF(512) residue census, exact original-cover splits, and the
-`b=0,a!=0` closure. Their fresh runs are byte-identical to the committed
-outputs. The census directly evaluates every gcd-enumerated GF(512) root; the
-split and boundary checkers compare their displayed factors and reconstruction
-identities directly with the universal resultant.
+`b=0,a!=0` closure, then classify both second-layer components on the three
+known `b!=0` branches. Their fresh runs are byte-identical to the committed
+outputs. The residue census directly evaluates every gcd-enumerated GF(512)
+root; the split and boundary checkers compare their displayed factors and
+reconstruction identities directly with the universal resultant. The
+second-layer checker adds exact pole/normal-form identities and exhausts all
+`19,208` allowed GF(8) geometries and all `153,664` geometry/constant-class
+pairs.
 
 ## Load-bearing leaves (sha256, bytes)
 
@@ -83,9 +87,11 @@ identities directly with the universal resultant.
 | `analyze_c210_a_nonzero_exact_splits_output.txt` | `7616801d5b3979d925280f5f2aa2bd4520ff7fee1336eee8d0a6dcb2caa0d02f` | 1461 |
 | `analyze_c210_a_nonzero_b_zero.py` | `191a5257624cbea15953e76597eda367e0f3687f5522b94d712a9d49495d9894` | 8978 |
 | `analyze_c210_a_nonzero_b_zero_output.txt` | `ae8e898e35d5eb841568b6e520f1fe76fcdaa73fd7754bccac3589cbc8267ddd` | 1252 |
+| `analyze_c210_a_nonzero_second_layer.py` | `a80f2a80cde89f401f168c05bfa0ec14ee0c12e5bcdf569c37e23be216a72b9d` | 12378 |
+| `analyze_c210_a_nonzero_second_layer_output.txt` | `237e8d6fd9902e6f464556794cd65fe3a4b14356f02166f023c01ad84102b9e2` | 2383 |
 
 Full pipeline hashes: `analyze_c210_SHA256SUMS`
-(sha256 `ae5c8b81c2bc20478113f6c42ab266a34a464065ca89f9554723429794e849ff`).
+(sha256 `7f3fd7d589a01fd7b156d4e35f5a4796953dc14bcf340ec9cabad9a8997b91ee`).
 
 ## Trusted boundary
 
