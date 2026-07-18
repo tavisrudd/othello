@@ -2,7 +2,8 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-18
-**Status**: ACTIVE — C326 Phase A landed; C225 notification loop next; C162/C205 base runner remains open
+**Status**: ACTIVE — C326 exporter landed and self-validated, project extraction awaits a quiet Lean
+worktree; C225 notification loop next; C162/C205 base runner remains open
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -29,6 +30,10 @@ another lane's running build.
 - `lean/scripts/lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log.
 - `lean/scripts/lean-trust-spine.py`: read-only `audit`/`check` of declared trust boundary against
   tree facts, plus `generate`/`graph`/`render`. Declarations in `lean/trust/`. Runs no Lake build.
+- `lean/scripts/lean-trust-extract.py`: the only trust-spine component that runs Lean. `plan`,
+  `wrapper`, and `canonicalize` run none; `selftest` exercises the whole path against core Lean with
+  no project import; `run` extracts declared units through `guarded-lean` and refuses a tree
+  carrying foreign work. Metaprogram: `lean/scripts/trust-spine-export.lean`.
 - Resource profiles: `lean/scripts/lean-build-profiles.json`.
 
 Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink).
@@ -36,10 +41,15 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 ## Open work, in order
 
 0. **C326 trust spine:** Phase A landed (registry, checker, RelativeConicArcs pilot, adversarial
-   tests). Next is Lean fact extraction, which needs a build window on a quiescent worktree — all
-   five gates currently report `facts-missing`, and every declared terminal-axiom set is unverified
-   until then. Report: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).
-   Its findings 1–4 are other lanes' to close; `build-sys` reports them and does not fix them.
+   tests). The exporter and extraction driver now also landed and are validated against core Lean;
+   proof bodies are available, so the theorem graph is not partial. What remains is running
+   extraction over the project, which needs a quiet Lean worktree — all five gates still report
+   `facts-missing`, and every declared terminal-axiom set is unverified until then. The driver
+   refuses to start while the tree carries foreign work, so no judgement call is needed to tell
+   whether the window is open: `lean-trust-extract.py plan` reports it.
+   Reports: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md),
+   [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
+   Phase A's findings 1–4 are other lanes' to close; `build-sys` reports them and does not fix them.
 1. **C225 completion notification:** implement the accepted design and gates in
    [`2026-07-16-c225-lean-queue-completion-notification.md`](2026-07-16-c225-lean-queue-completion-notification.md).
 2. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
@@ -66,6 +76,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 - C162 current report: [`../2026-07-14-c162-lean-build-system.md`](../2026-07-14-c162-lean-build-system.md).
 - C205 base runner: [`../2026-07-15-c205-unattended-lean-build-queue.md`](../2026-07-15-c205-unattended-lean-build-queue.md).
 - C326 Phase A: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).
+- C326 exporter: [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
 - Full prior handoff state: archive linked above.
 
 ## Registered spin-off (no C task)
