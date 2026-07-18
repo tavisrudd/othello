@@ -2,7 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; separator census passes its reuse gate, so exact two-port semantics are next
+**Status:** active; exact two-port semantics passes its first compression gate, so bounded live
+integration is next
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -87,6 +88,18 @@ vertices. An independently organized replay verifies the first nontrivial cross-
 two-port witnesses. The unchanged traversal reproduces every predecessor invariant and still
 returns no value.
 
-The next bounded design task is to define the exact two-port live/dead transition object and a
-local replacement theorem, then falsify it on the recorded q=3/q=5 prefix before integrating it
-into a value solver. Do not repeat or enlarge the ten-million-state run.
+## Two-port transition result
+
+`notes/2026-07-17-c294-b3-two-port-transition.md` defines an exact live/dead transition DAG and
+proves its local replacement theorem for arbitrary finite two-port contexts. The q=3 control
+processes all 47 meaningful exact piece classes with no mergers or conflicts. On the fixed q=5
+prefix, the independent one-million combined interface-state cap processes 37,726 of 350,951
+classes: 37,690 transition classes, 36 genuine mergers, and zero value conflicts. An independent
+replay verifies that the first merger consists of non-isomorphic 16-vertex pieces with nimber `2`
+and equal complete transition records.
+
+The interface cap stops on the next 14-core-vertex piece, so this is not a complete-prefix quotient
+or a follower value. The next bounded step is live integration on the unchanged 100,000-state q=5
+prefix. Require a measured reduction in decompositions or materially reusable interface hits before
+any ten-million-state run; compute transition nodes only for pieces requested by the live
+decomposition.

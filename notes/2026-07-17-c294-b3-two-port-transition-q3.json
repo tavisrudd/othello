@@ -1,0 +1,23 @@
+{
+  "boundary_states": 5653,
+  "closed_states": 1036,
+  "connected_states": 108,
+  "decompositions": 680,
+  "field_order": 3,
+  "first_merger": {"current": null, "interface_id": -1, "prior": null},
+  "follower_nimber": 1,
+  "game_state_limit": 1000000,
+  "game_stopped_at_limit": false,
+  "interface_classes": 47,
+  "interface_mergers": 0,
+  "interface_nodes": 1913,
+  "interface_state_limit": 1000000,
+  "interface_stopped_at_limit": false,
+  "maximum_processed_piece_vertices": 16,
+  "piece_classes_min_8": 47,
+  "processed_piece_classes": 47,
+  "stopped_piece_vertices": -1,
+  "total_interface_states": 6689,
+  "type_index": 0,
+  "value_conflicts": 0
+}
