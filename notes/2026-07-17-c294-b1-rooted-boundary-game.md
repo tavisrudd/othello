@@ -2,7 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B1`  
-**Status:** active  
+**Status:** passed 2026-07-18; exact semantics and B2 schema are in
+`notes/2026-07-17-c294-b1-rooted-boundary-game-result.md`
 **Dependency:** current corrected component bundle only
 
 ## Goal
@@ -70,6 +71,6 @@ tuple of standalone nimbers without proving that it respects gluing.
 - Computational witnesses, if needed, use a common `2026-07-17-c294-b1-*` stem with report,
   generator/checker, canonical output, and checksums committed atomically.
 
-B1 passes only when B2 can implement the state without guessing semantics. On pass, mark B2 active;
-on failure, keep B1 active with the minimized obstruction and revised target.
-
+B1 passed with a finite recursively interned transition DAG carrying external `free`/`cut` values,
+port-preserving successor transitions with closed offsets, and port-killing transitions. B2 is
+active and can implement the record without choosing additional semantics.
