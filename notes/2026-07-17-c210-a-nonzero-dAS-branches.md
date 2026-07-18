@@ -1,4 +1,4 @@
-# C210: three explicit branches of the a!=0 D_AS divisor (a-deformed a=0 branches)
+# C210: three explicit branches of the a!=0 D_AS residue system
 
 **Lane**: `relconic` (task report; C210 remains active)
 
@@ -68,11 +68,13 @@ ideal `(delta+p, w^2+w, h0-h0_3)`; or the `A_i=0` sublocus must be shown to forc
 `minAssGTZ` returned a **wrong** decomposition on the analogous step, so this must
 use exact division/resultant/radical arguments.
 
-Also open (later parts): collision-forcing vs arc-legal per branch via the
-second-layer `tau`-quadratic trace test `Tr(A/(bQ)^2)=0` (the crux, since the
-`D_AS` components are `tau^2+bQ*tau+A`, not the a=0 `t`-linear lines); the
-reconstruction-split locus `H=J=0` on `a!=0`; and the `b=0,a!=0` degenerate
-stratum.
+Also open (later parts): exact original-cover splits on the generic `b!=0`
+scope; symbolic classification of both `tau`-quadratic components through
+`A/(bQ)^2` and `(A+sigma)/(bQ)^2`; the reconstruction-split locus `H=J=0` and
+projective genuineness needed before calling any rational root a collision; and
+the separate `b=0,a!=0` inseparable stratum. Full arithmetic completeness of
+the branch list is last and is needed only if every known branch is certified
+collision-forcing.
 
 ## Artifact and replay
 

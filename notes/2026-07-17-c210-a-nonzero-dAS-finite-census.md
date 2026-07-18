@@ -81,7 +81,13 @@ factorization on the merged-pole branch, or the second-layer trace verdict.
 ## Next gate
 
 The probe found no fourth arithmetic branch through `GF(512)`. Follow the
-planned critical path: exhibit exact quadratic splits of the original cover on
-all three known residue branches (especially merged-pole branch 3), then run
-the second-layer `Tr(A/(bQ)^2)` collision test. Full odd-tower arithmetic
-completeness remains the final gate if every branch is collision-forcing.
+planned critical path on the generic `b!=0` scope: exhibit exact quadratic
+splits of the original cover on all three known residue branches (especially
+merged-pole branch 3), allowing rational `A(u)` and auditing its denominators.
+Close the cheap `b=0,a!=0` inseparable boundary before the expensive trace
+classification. Then classify both second-layer classes `A/(bQ)^2` and
+`(A+sigma)/(bQ)^2`. A rational root is only a candidate collision until the
+`a!=0` reconstruction boundary and projective genuineness checks pass. Treat
+the branch as a construction candidate only if both components avoid genuine
+collisions. Full odd-tower arithmetic completeness remains the final gate only
+if every known branch is certified collision-forcing.
