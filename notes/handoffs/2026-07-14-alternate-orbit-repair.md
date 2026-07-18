@@ -2,11 +2,16 @@
 
 **Lane**: `alt-orbit-repair` — see CLAUDE.md § Lane routing.
 
-**Date:** 2026-07-14
+**Date:** 2026-07-18
 **Status:** OPEN — C142, C143, C148–C150 reported; C151's universal normalized-row lower bound and
-five-row attainment are checked, while the semantic normalization lift and equality-orbit
-completeness remain active
-**Tasks:** C142–C143, C148–C152
+five-row attainment are checked. The residual-orbit layer is mid-rewrite: the kernel-reducible
+evaluator has landed and stabilizer order 2 is kernel-checked for the first minimizer row, while the
+orbit–stabilizer scaffolding, the semantic normalization lift, and equality-orbit completeness
+remain active
+**Tasks:** C142–C143, C148–C152, C318–C319
+
+Companion discovery log:
+[`../2026-07-18-alt-orbit-repair-discovery-track.md`](../2026-07-18-alt-orbit-repair-discovery-track.md).
 
 > **LIVE-DOC WARNING — DO NOT LOG HERE.** This file is only the lane's current-state map. Never
 > append session history, build timings, validation transcripts, dated progress, dead ends,
@@ -86,7 +91,9 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C151 | active; universal normalized-row lower bound checked | Prove semantic normalization/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
+| C151 | active; normalized-row lower bound checked; residual-orbit layer mid-rewrite on the orbit–stabilizer route | Prove semantic normalization/orbit completeness and conclude exact Q25 minimum 32 with five equality classes |
+| C318 | queued after C151 | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
+| C319 | gated on measured C151 cost | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued behind C151 | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
 Reported: C142, C143, C148, C149, and C150; use the linked reports rather than recreating their
@@ -94,12 +101,31 @@ plans here.
 
 ## C151 — next actions
 
-1. Lift the normalized-row theorem through the existing stabilizer and base-field normalization
+Read [the C151 report](../2026-07-14-c151-q25-minimum-classification.md) § "Residual-orbit
+certification" before touching the residual layer; it records a blocker that is not visible from the
+sources and two approaches that are ruled out.
+
+1. Prove the composition law on `AdmissibleCoordinate` (recovered-parameter formula, then
+   `apply (g * h) = apply g ∘ apply h`). Riskiest step; gates everything below it.
+2. Group instance on the 20-element factor, factored `MulAction` compatibility, then bridge
+   Mathlib's orbit–stabilizer to the `Finset` cardinalities and conclude the five orbit sizes.
+3. Non-conjugacy, equal-or-disjoint, union `1600`; keep exhaustion a separate theorem against the
+   residual-cover machinery.
+4. Lift the normalized-row theorem through the existing stabilizer and base-field normalization
    maps to every semantic exceptional-profile arc.
-2. Connect the five equality representatives and their orbit sizes to the full set of 1,600
-   minimizers; state exactly what is classified up to the ordered-fixed-pair residual group.
-3. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
+5. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
    the complete semantic theorem passes.
+
+State a cold session needs before starting:
+
+- `Q25ResidualFast.lean` is committed and green; phrase every new `decide` through
+  `residualApplyFast`, never through `parameterEmbedding`.
+- `Q25ResidualMinimumOrbits.lean` is untracked and **does not compile**. Replace it wholesale; do
+  not repair its `decide`s. `Q25ResidualEquality.lean` imports it and is likewise unbuildable.
+- Orbit sizes have never been certified — `orbitSize` is schema payload consumed by no proof. The
+  only kernel-checked orbit fact is stabilizer order 2 for row `(5,58,169)`.
+- C318 (manifest rows for the residual layer) and C319 (gated canonicalizer-or-demote decision) are
+  queued behind this work.
 
 The checked valid-row cover is split into 1,036 modules under
 `lean/RelativeConicArcs/Q25ResidualTransportData/`, with at most eight valid eight-point

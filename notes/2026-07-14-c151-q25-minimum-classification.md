@@ -408,9 +408,106 @@ every semantic exceptional-profile arc normalizes into that slice or classify th
 - source/object hashes and capped-build timing recorded here;
 - manuscript promoted only after all three target claims are checked.
 
+## Residual-orbit certification: blocker, evaluator, and route (2026-07-18)
+
+### The orbit sizes were never certified
+
+`orbitSize` is a payload field in `Q25ResidualCoverData/Schema.lean` and appears in no proof; the
+bridge docstring already says the stored `legalCount`, `classIndex`, and `orbitSize` fields are not
+proof inputs. The sizes `200,400,400,200,400` have therefore been generator output throughout, not
+theorems. The first kernel-checked fact about the residual orbit structure is the stabilizer
+measurement below, dated today. Earlier text describing orbit-size certification as merely
+remaining understated this.
+
+### The blocker was one opaque atom, not size
+
+`Q25ResidualMinimumOrbits.lean` does not compile: every `decide` in it fails to reduce. The cause is
+a single kernel-opaque operation. `scale x = algebraMap F5 K25 (imagPart x)⁻¹`, and inversion on
+`F5 = ZMod 5` is `ZMod.inv`, which routes through `Nat.gcdA`/`xgcdAux` well-founded recursion that
+the kernel will not unfold. `algebraMap` is not opaque (`assemble` is proved by `decide`), and
+`GF25.inv` is a literal 25-entry table. Every generated transport leaf already works around this by
+hand, with `simp [residualApply, shift, scale, realPart, imagPart, ...] <;> decide`. No `decide`
+touching a residual image could have reduced at any problem size.
+
+`Q25ResidualFast.lean` removes the atom once and symbolically: on `F5`, inversion is cubing, since
+`a ^ 4 = 1` away from zero and both sides vanish at `0`. This needs no table and no data to audit.
+It exports `scaleFast`, `shiftFast`, `residualApplyFast`, and the bridge `residualApply_eq_fast`.
+The module elaborates warning-free in `5.7 s` and builds green as an exact queue target.
+
+### Measured cost probes
+
+Run against the fast evaluator on the first minimizer row `(5,58,169)`; both are measurements, not
+paper-facing theorems.
+
+Probe A **passes** in about three seconds, and is the fact the route depends on:
+
+```lean
+(Finset.univ.filter fun g : ResidualParameter =>
+    probeRow.image (residualApplyFast g.1.1 g.2.1) = probeRow).card = 2
+```
+
+This kernel-checks stabilizer order `2` for the row, matching the C150 scout table's prediction.
+
+Probe B **fails**: `(orbitKeys probeRow).card = 200` through sorted `rank` keys gets stuck on
+`List.decidableBAll`, because `Finset.sort` bottoms out in `List.mergeSort` — the same class of
+well-founded recursion as the original blocker. A packed-`Nat` bitmask key using the kernel's GMP
+arithmetic would avoid sorting, but is not needed by the route below.
+
+### Two approaches are ruled out
+
+- **Materializing orbits.** `Finset.image` is `Multiset.dedup ∘ Multiset.map`; deduplicating 400
+  eight-element `Finset Idx25` values is quadratic membership testing, and the 1600-element union
+  is quadratic again. The Q11 authors recorded literal blocks at smaller scale for exactly this
+  reason. Fatal independently of the opaque atom.
+- **Sorted-key fallback.** Dead by Probe B.
+
+### Route: orbit–stabilizer, which never materializes an orbit
+
+Orbit sizes come from `400 / |stab|`, so `200` is arithmetic on a verified stabilizer order. Ordered
+by risk, with the riskiest mathematics first:
+
+1. Define multiplication on `AdmissibleCoordinate` by the recovered-parameter formula and prove
+   `apply (g * h) = apply g ∘ apply h`. The scale/shift pair is a bijection onto `AGL(1,5)`, so the
+   parameter exists; the identity parameter is `x = ω`. This is the soundness lemma of the design.
+2. Group instance on the 20-element factor, axioms by `decide` (`8,000` cases); `ResidualParameter`
+   inherits the product group. Never put the group on the 400-element product: `mul_assoc` there is
+   `6.4 · 10⁷` cases.
+3. `MulAction` compatibility factored: `decide` only the two parameter-level facts over `400` pairs
+   (`scale` multiplicativity, `shift` composition); derive the `.affine` and `.infinity` cases
+   symbolically and `.vertical` by `rfl`. Deciding compatibility directly is about `10⁸` cases.
+4. Bridge Mathlib's `Set`-orbit and `Subgroup`-stabilizer to the `Finset.image`/`Finset.filter`
+   forms, then the five sizes.
+5. Non-conjugacy of the five representatives, equal-or-disjoint, and the union cardinality `1600`.
+6. Exhaustion as a separate theorem against the residual-cover machinery.
+
+Two traps recorded by the design review. Every decided statement must be phrased through
+`Finset.image` of the *fast* function with a `simp` bridge to the embedding form, never
+`Finset.map (parameterEmbedding g)`, whose `toFun` reintroduces the slow `residualApply`. And
+equal-or-disjoint requires identity, closure, and inverses: `Q25ResidualAction` proves each map
+injective but nothing about composition, so a bespoke lemma missing an inverse hypothesis can
+typecheck without yielding the union theorem. Note also that no `Finset` `Disjoint` is decided
+anywhere in the repo; decide `(A ∩ B) = ∅` explicitly and bridge.
+
+The full cost analysis and correctness flags are in
+[the design review](2026-07-18-c151-orbit-completeness-fable-review.md).
+
+### Uncommitted and broken state
+
+These paths are untracked and support no reproducibility claim yet:
+
+- `lean/RelativeConicArcs/Q25ResidualMinimumOrbits.lean` — **does not compile**. Its eleven `decide`s
+  are the wrong shape; replace it wholesale with the orbit–stabilizer version rather than repairing
+  them.
+- `lean/RelativeConicArcs/Q25ResidualEquality.lean` — imports the above, so also unbuildable.
+- `lean/RelativeConicArcs/Q25MinimumClassification.lean` and
+  `lean/RelativeConicArcs/Q25ResidualConclusionDispatchData/` — build state unverified this session.
+- `notes/2026-07-17-c151-residual-conclusion-dispatch-generator.py` and
+  `notes/2026-07-17-c151-residual-equality-generator.py`.
+- `lean/RelativeConicArcs/Q25ResidualCoverPrototype/RowConclusion.lean` is modified but uncommitted;
+  its row-conclusion change covers one class (`b=31`, 50 rows).
+
 ## Current next step
 
-Lift the universal normalized orbit-`5` row theorem through the existing stabilizer and base-field
-normalization maps to every semantic exceptional-profile arc. Then connect the five exact rows to
-their residual orbits and certify stabilizer sizes `200,400,400,200,400`; only after those checks
-should the five equality orbits be promoted as a complete classification.
+Prove the composition law on `AdmissibleCoordinate` (step 1 above). It is the riskiest step and
+gates everything after it; if the recovered-parameter formula turns ugly, stop and reconsider the
+route before building scaffolding on it.
