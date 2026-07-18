@@ -5,7 +5,9 @@ Involutions: The Dihedral Case.*
 
 **Status:** Markdown submission draft, near-complete and committed. This is the
 small-subgroup catalogue — V₄ (Klein-four boundary) + dihedral D_{4n} + the S₄/A₅
-regular-template rows. Deferred (§14): the nonregular polyhedral coset templates and their
+regular-template rows, extended (C263) with the full two-reflection `D₂ₘ` pair family for every
+`m ≥ 3` of either parity and retitled "Dihedral Subgroups of PGL₂(q)". Deferred (§15): the
+nonregular polyhedral coset templates and their
 field-dependent orbit formulas, and the full PSL₂/PGL₂ escape residual.
 
 **Technique:** Schreier-residual graph nimbers from conic involutions. Distinct from the

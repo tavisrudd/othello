@@ -13,17 +13,23 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 ## Current status
 
 - Manuscript: `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`, near-complete and
-  committed markdown. Covers V₄ (Klein-four boundary) + dihedral D_{4n} + S₄/A₅ regular-template
-  rows; §14 defers the nonregular polyhedral coset templates and the PSL₂/PGL₂ escape residual.
+  committed markdown, retitled "Dihedral Subgroups of PGL₂(q)" (C263; user may revisit the title —
+  the bare D6 phrase "finite subgroups of PGL₂(q)" was judged an overclaim while polyhedral/PSL
+  stay deferred). Covers V₄ + the full two-reflection `D₂ₘ` pair family (all `m≥3`, both parities,
+  new §14) + triple-based D_{4n} + S₄/A₅ regular-template rows; §15 defers the nonregular
+  polyhedral coset templates and the PSL₂/PGL₂ escape residual.
 - Lean: `lean/DihedralSchreier/` certifies the reduction plumbing and the V₄→K₄ core only, without
   `sorry` or `native_decide` (kernel `decide`). Template nimbers, Theorem 7.2 isomorphisms,
   Brown et al. ladder values, orbit counts, and the density theorem are not yet formalized. See
   `lean/DihedralSchreier/README.md`.
 - Solver: `rust/scripts/nodekayles_cayley.rs`. S₄ nimbers cross-checked by three independent
   solvers; all five A₅ rows independently reproduced by the C260 cross-check solver.
-- Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (bundle D₂ₘ, do not
-  spawn a sequel; escape hatch = ship the committed catalogue with §14 as the stated program),
-  and the release policy (formalization gate, adequacy appendix, provenance section).
+- Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
+  satisfied by C263, escape hatch not needed), and the release policy (formalization gate,
+  adequacy appendix, provenance section).
+- Closed: C263 D₂ₘ additions (2026-07-17) — full pair family `D₂ₘ` classified (odd dihedral always
+  P; even case `(1−δ)·𝒢(Pₘ)` Dawson), verified over all 241,344 tame legal pairs, retitle applied,
+  Discussion now §15 → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
 - Closed: C262 formalization (2026-07-17) — Φ_T (Prop 11.1 + Cor 11.2) fully Lean-proved;
   Thm 12.1's periodicity, exact 2-of-4 classification, and P/N prime infinitude proved; density
   value 1/2 gap recorded (mathlib frontier) → `notes/2026-07-17-c262-dihedral-burnside-density-formalization.md`.
@@ -40,7 +46,6 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   of primes in AP as one named axiom (RepairCodes-Stichtenoth pattern) and kernel-check the
   derivation to the ½ conclusion. Allocated as C278. Unconditional formalization (PNT in AP)
   stays out of scope; C264 states the single-axiom boundary in the paper.
-- D₂ₘ additions are owed before shipping per D6 (C263).
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
 
 ## Next steps
@@ -48,7 +53,6 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - **C264** must also apply the C261 audit's wording recommendations R1–R5 (HHS reduction citation,
   Schaefer root citation, Möbius-ladder ownership clause, optional novelty sentence, Ernst–Sieben
   distinction).
-- **C263** — generalized-D₂ₘ additions per D6, with the §14 escape hatch.
 - **C264** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle.
 
 ## Cross-lane relationships (foreign; do not re-peg without approval)

@@ -39,8 +39,11 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 **2 · Dihedral Schreier catalogue** — `dihedral-schreier-node-kayles`
 - *What:* **extended with the generalized-D₂ₘ family** before shipping; retitle toward
   "finite subgroups of PGL₂(q)".
-- *Gate:* owes Φ_T, ½-density, + the D₂ₘ additions. (The lone `native_decide` is cleared:
-  `KleinFourBridge.lean` uses kernel `decide` since 2026-07-12.)
+- *Gate:* Φ_T and the finite ½-density core are Lean-formalized (C262) and the D₂ₘ additions
+  landed with end-to-end machine verification (C263, retitled "Dihedral Subgroups of PGL₂(q)";
+  deferrals now live in §15). Remaining: the C278 single-axiom conditional density closure and the
+  C264 LaTeX + adversarial/cold-prose cycle. (The lone `native_decide` is cleared: kernel `decide`
+  since 2026-07-12.)
 
 **3 · Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9** —
 `arcs_complete_outside_conic`
@@ -148,7 +151,8 @@ so they are named, not numbered.
   review; Clebsch added 2026-07-13). Dihedral bundles D₂ₘ rather than
   spawning a sequel (anti-salami; the mandatory Φ_T/½-density formalization window is free calendar time
   for the classification). Escape hatch: if D₂ₘ stalls beyond that window, ship the committed catalogue
-  with §14 as the stated program.
+  with the deferral section (§15 after the C263 renumbering) as the stated program. The D₂ₘ
+  bundling landed 2026-07-17 (C263), so the hatch was not needed.
 
 ### Clebsch after Arcs — the novelty seam (ruled 2026-07-14)
 

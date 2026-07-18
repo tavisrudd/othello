@@ -1,4 +1,4 @@
-# Node Kayles on Fixed-Point-Deleted Schreier Graphs from Conic Involutions: The Dihedral Case
+# Node Kayles on Fixed-Point-Deleted Schreier Graphs from Conic Involutions: Dihedral Subgroups of \(PGL_2(q)\)
 
 ## Abstract
 
@@ -11,16 +11,22 @@ legal continuations form a Node-Kayles position.
 
 First, for any finite involution-generated action, we prove an orbit-template reduction:
 the residual Grundy value is the xor of the transitive-template nimbers, weighted only by
-orbit-multiplicity parity. We then compute the entire table when three legal selected
-points induce a tame dihedral subgroup, including the Klein-four boundary case. Every
-transitive projective-line template is an empty graph, a
-complete graph \(K_4\), an ordinary ladder, a prism, or a Möbius ladder. This yields a
-complete Grundy-value classification, explicit split- and nonsplit-torus formulas,
-periodicity in \(q\), an exact one-half P-position density among admissible prime fields,
-and a converse realization theorem.
+orbit-multiplicity parity. We then classify every tame dihedral subgroup that a legal
+selected set can induce. Any two selected points already induce a dihedral group
+\(D_{2m}\), for every \(m\) and either parity of the rotation order; three selected points
+add the central involution and force the even-rotation groups \(D_{4n}\). We compute the
+entire template table in both cases, including the Klein-four boundary. For three points
+every transitive projective-line template is an empty graph, a complete graph \(K_4\), an
+ordinary ladder, a prism, or a Möbius ladder, with Grundy value in \(\{0,1\}\). For two
+points the templates are exactly a cycle, a path, or an empty graph, and their nimbers are
+the classical Dawson's-chess (Node-Kayles-on-a-path) sequence, so larger nimbers occur.
+This yields a complete Grundy-value classification, explicit split- and nonsplit-torus
+formulas, periodicity in \(q\), and a converse realization theorem. The P-position density
+among admissible prime fields is one half for the even three-point families, but is one
+for every odd-order dihedral group, where the game is always a P-position.
 
 All structural and fixed-field formulas hold for odd prime powers in the tame case. The
-density theorem and the infinite-realization corollary specialize to prime fields through
+density theorems and the infinite-realization corollary specialize to prime fields through
 primes in arithmetic progressions.
 
 ## 1. Introduction
@@ -40,12 +46,15 @@ not consider this residual graph or its Node-Kayles value.
 
 The general result reduces the problem to a table of transitive-template nimbers
 \(t_K=\mathcal G(R(G,K,T))\). We compute this table completely when the generated subgroup
-is tame dihedral. The analysis is uniform in the field and has three components:
+is tame dihedral, for a legal selected set of either two or three points. The analysis is
+uniform in the field and has three components:
 
-1. a classification of legal dihedral involution triples;
+1. a classification of the legal dihedral involution configurations — pairs, which realise
+   every \(D_{2m}\), and triples, which realise the even-rotation groups \(D_{4n}\);
 2. a classification of every transitive projective-line orbit template;
 3. an evaluation of those templates using Brown et al.'s exact Node-Kayles values for
-   ladders, prisms, and the required opposite-end-pendant ladder family.
+   ladders, prisms, and the opposite-end-pendant ladder family, together with the classical
+   Dawson's-chess (Node-Kayles-on-a-path) and cycle values.
 
 All game values below refer to the continuation in which only conic points may be played.
 They need not equal the value of a larger position in which further off-conic moves remain
@@ -220,7 +229,7 @@ is known, the ambient action enters only through the parity vector
 \((m_K\bmod2)_{[K]}\). The remainder of the paper computes these \(t_K\) for tame
 dihedral conic triples.
 
-## 4. Legal dihedral triples
+## 4. Legal dihedral configurations
 
 The smallest dihedral boundary is
 \(D_4\cong V_4\). A generating involution triple is necessarily the set of all three
@@ -345,6 +354,35 @@ the parameter \(d\) changes to \(\pm ud\). Therefore:
 
 The central centre is not on the reflection-centre line, so every generating triple
 described above is geometrically legal.
+
+### 4.3 The legal dihedral configurations
+
+The preceding paragraphs classified legal *triples*. A legal selected set may have any
+size, so we record the complete taxonomy of legal sets whose induced involutions generate
+a dihedral group. Because all reflection centres are collinear, a legal set contains at
+most two reflections; it contains at most one central involution \(z\). Hence a legal
+dihedral configuration has either two or three selected points:
+
+| selected involutions | generated group | admissible \(m\) |
+|---|---|---|
+| two reflections | \(D_{2m}\) | every \(m\ge3\), both parities |
+| one reflection and the central \(z\) | \(V_4\) | \(m=2\) boundary |
+| two reflections and the central \(z\) | \(D_{4n}\), \(m=2n\) | even rotation order only |
+
+A set of four or more selected points cannot induce a dihedral group, since it would
+contain three collinear reflection centres.
+
+The three-point row is the group \(D_{4n}\) analysed in Sections 5–13. The two-point row is
+the general dihedral family: any two selected off-conic points \(x,y\) induce two
+involutions \(\sigma_x,\sigma_y\) generating
+\[
+G=\langle\sigma_x,\sigma_y\rangle\cong D_{2m},
+\qquad
+m=\operatorname{ord}(\sigma_x\sigma_y),
+\]
+and no central involution is required, so this family exists for *every* \(m\), including
+the odd rotation orders that admit no legal triple. It is analysed in Section 14; its
+templates are cycles and paths rather than Möbius ladders and ordinary ladders.
 
 ## 5. Free-orbit templates
 
@@ -1014,17 +1052,250 @@ The triples \(T_d\) are legal by Section 4. For sufficiently large primes in any
 class, equation (8.4) gives \(f>0\), so the free template occurs. Reflection and
 rotation-torus templates occur under the splitting conditions described in Section 9. ∎
 
-## 14. Discussion
+## 14. The two-selected-point family \(D_{2m}\)
 
-The classification has a simple conceptual form:
+By Section 4.3, two selected points already induce a dihedral group, for every rotation
+order and either parity. This section computes the entire template table and Grundy
+classification for that family, at the level of Sections 5–13. Throughout, \(\{x,y\}\) is a
+legal pair of selected off-conic points,
+\[
+G=\langle\sigma_x,\sigma_y\rangle\cong D_{2m}=\langle r,s:r^m=s^2=1,\ srs=r^{-1}\rangle,
+\qquad
+m=\operatorname{ord}(\sigma_x\sigma_y)\ge3,
+\]
+tame (\(p\nmid2m\)), with generating involution set
+\[
+T=\{\sigma_x,\sigma_y\}=\{s,sr^d\},\qquad\gcd(d,m)=1.
+\]
+Since \(\gcd(d,m)=1\) we may replace \(r\) by \(r^d\) and take \(d=1\), so \(T=\{s,sr\}\) and
+\(\sigma_x\sigma_y=r\). The generating set has size two: there is no central involution
+\(z\), which is why \(m\) may be odd.
 
-> A legal tame dihedral conic triple produces only \(K_4\)'s, Möbius ladders, prisms,
-> ordinary ladders, and completely deleted exceptional orbits. Its conic-only Node-Kayles
-> value is an explicit congruence function of the field and embedded triple type.
+### 14.1 Point stabilizers
+
+As in Proposition 6.1, every tame point stabilizer of \(G\) on \(\mathbf P^1(q)\) is cyclic,
+hence conjugate to \(1\), to the rotation subgroup \(\langle r\rangle\), or to a reflection
+subgroup \(\langle sr^e\rangle\). The reflections form one conjugacy class when \(m\) is odd
+and two classes, represented by \(\langle s\rangle\) and \(\langle sr\rangle\), when \(m\) is
+even.
+
+### Theorem 14.1: two-generator templates
+
+For \(T=\{s,sr\}\),
+\[
+R(D_{2m},1,T)\cong C_{2m},
+\qquad
+R(D_{2m},\langle sr^e\rangle,T)\cong P_m,
+\qquad
+R(D_{2m},\langle r\rangle,T)=\varnothing,
+\tag{14.1}
+\]
+where \(C_{2m}\) is the cycle on \(2m\) vertices and \(P_m\) the path on \(m\) vertices.
+
+### Proof
+
+*Free orbit.* The regular action has no deleted vertices. The Cayley graph
+\(\operatorname{Cay}(D_{2m},\{s,sr\})\) is \(2\)-regular; its edges alternate between the two
+involution generators, and since \(\{s,sr\}\) generates \(G\) the alternation visits all
+\(2m\) group elements in a single closed walk. Hence it is one \(2m\)-cycle.
+
+*Rotation orbit.* The two cosets of \(\langle r\rangle\) are each fixed by
+\(\sigma_x\sigma_y=r\in\langle r\rangle\), so both are deleted by (3.1) and the template is
+empty, exactly as in Proposition 6.2.
+
+*Reflection orbit.* Label the cosets \(D_{2m}/\langle s\rangle\) by \(j\in\mathbf Z/m\) via
+\(j\leftrightarrow r^j\langle s\rangle\). Left multiplication gives
+\[
+s:j\mapsto-j,\qquad sr:j\mapsto-1-j,\qquad\text{product } r:j\mapsto j+1.
+\tag{14.2}
+\]
+The deleted vertices are \(\operatorname{Fix}(\sigma_x\sigma_y)=\operatorname{Fix}(r)\) on
+this coset set; but \(r:j\mapsto j+1\) is fixed-point-free on \(\mathbf Z/m\), so no vertex of
+a reflection orbit is deleted. The two reflection maps in (14.2) have product the
+\(m\)-cycle \(r\), so their edge union is connected of maximum degree two. Their fixed
+points, which produce suppressed loops rather than edges, are the solutions of
+\(2j\equiv0\) and \(2j\equiv-1\pmod m\); counting solutions in each parity of \(m\) leaves
+exactly two vertices of degree one and \(m-2\) of degree two. A connected graph of maximum
+degree two with exactly two degree-one vertices is the path \(P_m\). For a general
+reflection stabilizer \(\langle sr^e\rangle\), the automorphism \(r\mapsto r,\ s\mapsto sr^e\)
+of \(D_{2m}\) carries \(\langle s\rangle\) to \(\langle sr^e\rangle\) and \(T=\{s,sr\}\) to
+another two-reflection set with product \(r\), so the same computation applies and the
+template is \(P_m\) independently of \(e\). ∎
+
+### 14.2 Template nimbers
+
+Node Kayles on a path is Dawson's chess: deleting a closed neighbourhood removes an interior
+vertex together with its at most two neighbours, splitting \(P_m\) into two shorter paths,
+which is the move rule of the octal game \(0{.}137\). Its Grundy sequence
+\[
+\mathcal G(P_m)=\mathrm{A}002187(m)
+=0,1,1,2,0,3,1,1,0,3,3,2,2,4,0,5,\dots\quad(m=0,1,2,\dots)
+\tag{14.3}
+\]
+is eventually periodic with period \(34\).
+
+For the cycle, every vertex of \(C_n\) has the same closed neighbourhood shape, and deleting
+it removes three consecutive vertices, leaving \(P_{n-3}\). Vertex-transitivity makes this
+the only option up to isomorphism, so
+\[
+\mathcal G(C_n)=\operatorname{mex}\{\mathcal G(P_{n-3})\}\qquad(n\ge3).
+\tag{14.4}
+\]
+
+### Lemma 14.2: free templates are neutral
+
+For every \(m\ge2\),
+\[
+\mathcal G(C_{2m})=0.
+\tag{14.5}
+\]
+
+### Proof
+
+By (14.4), \(\mathcal G(C_{2m})=\operatorname{mex}\{\mathcal G(P_{2m-3})\}\), which is zero
+unless \(\mathcal G(P_{2m-3})=0\). The index \(2m-3\) is odd, so it suffices to know that the
+Dawson sequence (14.3) has no zero at an odd index. Its period is \(34\), which is even, so
+the index parity is constant along each residue class modulo the period; hence it suffices
+to check the finitely many indices up to the end of the first full period together with the
+pre-periodic part, and there every zero of \(\mathrm{A}002187\) occurs at an even index.
+Therefore \(\mathcal G(P_{2m-3})\ne0\) and the mex is zero. ∎
+
+Consequently free orbits never contribute to the value of a two-point residual.
+
+### Theorem 14.3: orbit formula
+
+Let \(\Omega\) be a tame \(D_{2m}\)-set with \(f\) free orbits and \(\rho\) reflection orbits.
+Then
+\[
+\mathcal G(R_T(\Omega))
+=(f\bmod2)\,\mathcal G(C_{2m})\oplus(\rho\bmod2)\,\mathcal G(P_m)
+=(\rho\bmod2)\,\mathcal G(P_m).
+\tag{14.6}
+\]
+
+### Proof
+
+Theorem 3.1 gives the first equality, with the rotation orbits contributing the empty
+template. Lemma 14.2 kills the free term. ∎
+
+### 14.3 Reflection parity and closed values
+
+### Theorem 14.4: closed Grundy value of the natural action
+
+Let \(G\cong D_{2m}\) act tamely on \(\mathbf P^1(q)\) through a split torus (\(m\mid q-1\))
+or a nonsplit torus (\(m\mid q+1\)), and put \(\delta=1_{2m\mid q\mp1}\) with the upper sign
+for the split family and the lower sign for the nonsplit family. Then
+\[
+\mathcal G(R_T)=
+\begin{cases}
+0,&m\text{ odd},\\
+(1-\delta)\,\mathcal G(P_m),&m\text{ even}.
+\end{cases}
+\tag{14.7}
+\]
+
+### Proof
+
+By (14.6) the value is \((\rho\bmod2)\,\mathcal G(P_m)\), so it suffices to compute the
+parity of the number \(\rho\) of reflection orbits.
+
+*Odd \(m\).* The reflections form a single conjugacy class, so they are all split or all
+nonsplit. If nonsplit, no reflection has a rational fixed point and \(\rho=0\). If split,
+each of the \(m\) reflections has two rational fixed points, and a conic point is fixed by
+at most one reflection because a tame point stabiliser is cyclic; so the reflection fixed
+points form a set \(F\) of exactly \(2m\) points. Every point of \(F\) has stabiliser a
+reflection subgroup of order two, hence lies in an orbit of size \(|G|/2=m\). Therefore
+\(F\) splits into \(2m/m=2\) orbits and \(\rho=2\). In both cases \(\rho\) is even, so
+\((\rho\bmod2)=0\) and the value is \(0\).
+
+*Even \(m=2n\).* Now the central involution \(z=r^n\) exists. It commutes with every
+reflection \(\sigma\), so it permutes the two-point set \(\operatorname{Fix}(\sigma)\). The
+stabiliser of a reflection fixed point is exactly \(\langle\sigma\rangle\), which does not
+contain the rotation \(z\); hence \(z\) fixes neither point of \(\operatorname{Fix}(\sigma)\)
+and therefore swaps them. So for each reflection class the two rational fixed points, when
+they exist, lie in a single orbit, and each split reflection class contributes exactly one
+reflection orbit. In the split-torus model \(r:t\mapsto\omega t\), \(s:t\mapsto t^{-1}\)
+with \(\omega\) of order \(m\), the class \(\langle s\rangle\) fixes \(t=\pm1\) and is always
+split, while \(\langle sr\rangle\) fixes the solutions of \(t^2=\omega^{-1}\), which are
+rational exactly when \(\omega^{-1}\) is a square, that is when \(2m\mid q-1\); the
+nonsplit-torus model gives the same statement with \(q+1\). Therefore \(\rho=1+\delta\),
+\((\rho\bmod2)=1-\delta\), and the value is \((1-\delta)\,\mathcal G(P_m)\). ∎
+
+This even case is the two-generator counterpart of the three-generator group \(D_{4n}\) with
+\(m=2n\); the reflection-splitting condition \(2m\mid q\mp1\) is the condition \(4n\mid q\mp1\)
+of Section 9.
+
+### Corollary 14.5: P-positions and their density
+
+The two-point residual \(R_T\) is a P-position exactly when
+\[
+\boxed{\;m\text{ is odd},\quad\text{or}\quad\mathcal G(P_m)=0,\quad\text{or}\quad 2m\mid q\mp1.\;}
+\tag{14.8}
+\]
+Fix \(m\ge3\) and a torus family. Among admissible prime fields the relative Dirichlet
+density of P-positions is
+\[
+\begin{cases}
+1,&m\text{ odd, or }m\text{ even with }\mathcal G(P_m)=0,\\[2pt]
+\tfrac12,&m\text{ even with }\mathcal G(P_m)\ne0.
+\end{cases}
+\tag{14.9}
+\]
+
+### Proof
+
+Criterion (14.8) is (14.7). For the density, an odd \(m\) or a Dawson zero
+\(\mathcal G(P_m)=0\) makes every admissible field a P-position. Otherwise, with
+\(h=(q\mp1)/m\), the indicator \(\delta=1_{2m\mid q\mp1}\) is \(1_{2\mid h}\); the two
+parities of \(h\) correspond to two reduced residue classes modulo \(2m\), each of equal
+Dirichlet density among primes, so P-positions have relative density \(\tfrac12\). ∎
+
+The Dawson zeros \(\mathcal G(P_m)=0\) at even \(m\in\{4,8,14,20,24,28,34,\dots\}\) give
+infinite families of even-order dihedral groups whose two-point game is always a P-position;
+this is the two-generator analogue of the always-deleted rotation torus, but arises from a
+nontrivial path cancellation rather than from a deletion.
+
+### Theorem 14.6: converse realization
+
+For every \(m\ge3\), the cycle \(C_{2m}\) and the path \(P_m\) occur as transitive residual
+templates of legal tame conic-involution pairs over infinitely many prime fields.
+
+### Proof
+
+Choosing \(q\equiv-1\pmod m\) (nonsplit) or \(q\equiv1\pmod m\) (split) realises a
+\(D_{2m}\)-action with \(m=\operatorname{ord}(\sigma_x\sigma_y)\); for large such primes the
+orbit count gives a free orbit, hence \(C_{2m}\), while a congruence modulo \(2m\) that makes
+a reflection class split produces the reflection orbit \(P_m\). Dirichlet's theorem supplies
+infinitely many primes in each class. ∎
+
+The nimber sequences \(\mathcal G(C_{2m})\) and \(\mathcal G(P_m)\) of these templates are the
+byproduct integer sequences of the classification.
+
+The path and cycle Node-Kayles values used here, the even-index property of the Dawson zeros
+underlying Lemma 14.2, and the full two-point classification (14.1), (14.6), (14.7) were
+verified end to end by an exhaustive conic simulation over the prime fields
+\(q\in\{5,7,11,13,17,19,23\}\): for every legal pair the fixed-point-deleted residual graph
+was built directly and its Node-Kayles value matched the orbit formula, with no discrepancy.
+The source and machine-readable output are `scripts/dihedral_pair_templates.rs` and its
+companion note.
+
+## 15. Discussion
+
+The classification of legal dihedral configurations is now complete for every rotation
+order and both configuration sizes, and has a simple conceptual form:
+
+> A legal tame dihedral conic configuration produces only \(K_4\)'s, Möbius ladders,
+> prisms, ordinary ladders, cycles, paths, and completely deleted exceptional orbits. Its
+> conic-only Node-Kayles value is an explicit congruence function of the field and the
+> embedded configuration. Three selected points give the even-rotation groups \(D_{4n}\)
+> and values in \(\{0,1\}\); two selected points give every \(D_{2m}\), with path-nimber
+> (Dawson's-chess) values, and the odd-order groups are always P-positions.
 
 The fixed-point-deleted Schreier construction separates geometry from game theory. The
 abstract pair \((G,T)\) determines a finite table of transitive template nimbers; the
-ambient geometry determines only the parity vector of orbit multiplicities.
+ambient geometry determines only the parity vector of orbit multiplicities. The three-point
+and two-point families share this reduction and differ only in that table: ladders and
+Möbius ladders for the former, paths and cycles for the latter.
 
 The next subgroup in the usual polyhedral list, \(A_4\), cannot occur as a generated
 group here. Its only involutions are the three nonidentity elements of its normal Klein
@@ -1097,3 +1368,7 @@ grown to full \(PSL_2(q)\) or \(PGL_2(q)\).
    Teubner, 1901.
 7. H. Davenport, *Multiplicative Number Theory*, 3rd ed., revised by H. L. Montgomery,
    Graduate Texts in Mathematics **74**, Springer, 2000.
+8. E. R. Berlekamp, J. H. Conway, and R. K. Guy, *Winning Ways for Your Mathematical
+   Plays*, 2nd ed., A K Peters, 2001–2004 (Dawson's chess, octal game \(0{.}137\)).
+9. OEIS Foundation, “A002187: Sprague-Grundy values for Dawson's chess,” *The On-Line
+   Encyclopedia of Integer Sequences*, https://oeis.org/A002187.

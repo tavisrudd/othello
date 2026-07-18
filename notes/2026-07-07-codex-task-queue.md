@@ -68,7 +68,6 @@ unless they retain an explicit open tail.
 
 ### `dihedral`
 
-- **C263 `[dihedral]` [QUEUED]** — generalized-D₂ₘ additions per ruling D6 (bundle, do not spawn a sequel); escape hatch: if D₂ₘ stalls beyond the formalization window, ship the committed catalogue with §14 as the stated program → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
 - **C278 `[dihedral]` [QUEUED]** — conditional density-½ formalization per the 2026-07-17 `yc` ruling: quarantine equidistribution of primes in arithmetic progressions as one named axiom (RepairCodes-Stichtenoth / Q11DyeAxioms pattern) and kernel-check the derivation from it plus the proved 2-of-4 classification to Thm 12.1's relative density ½ → `notes/2026-07-17-c278-dihedral-conditional-density.md`.
 - **C264 `[dihedral]` [QUEUED]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose) for the markdown manuscript → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 
