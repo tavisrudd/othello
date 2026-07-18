@@ -1,0 +1,639 @@
+{
+ "axis_angle_dictionary": {
+  "deg36_order5_trPhi": true,
+  "deg60_order3": true,
+  "deg72_order5_trPhi-1": true,
+  "deg90_order2": true
+ },
+ "c284_residual_replay": {
+  "rho3_C2": {
+   "c284_nimber": 0,
+   "coset_size": 30,
+   "deleted": 0,
+   "deleted_per_order5_rotation_subgroup": null,
+   "independent_nimber_replay": 0,
+   "reconstruction_isomorphic_to_c284": true,
+   "reps_reconstructed": 1
+  },
+  "rho3_C3": {
+   "c284_nimber": 1,
+   "coset_size": 20,
+   "deleted": 2,
+   "deleted_per_order5_rotation_subgroup": null,
+   "independent_nimber_replay": 1,
+   "reconstruction_isomorphic_to_c284": true,
+   "reps_reconstructed": 3
+  },
+  "rho3_C5": {
+   "c284_nimber": 1,
+   "coset_size": 12,
+   "deleted": 4,
+   "deleted_per_order5_rotation_subgroup": [
+    2,
+    2
+   ],
+   "independent_nimber_replay": 1,
+   "reconstruction_isomorphic_to_c284": true,
+   "reps_reconstructed": 60
+  },
+  "rho5_C2": {
+   "c284_nimber": 0,
+   "coset_size": 30,
+   "deleted": 0,
+   "deleted_per_order5_rotation_subgroup": null,
+   "independent_nimber_replay": 0,
+   "reconstruction_isomorphic_to_c284": true,
+   "reps_reconstructed": 1
+  },
+  "rho5_C3": {
+   "c284_nimber": 0,
+   "coset_size": 20,
+   "deleted": 2,
+   "deleted_per_order5_rotation_subgroup": null,
+   "independent_nimber_replay": 0,
+   "reconstruction_isomorphic_to_c284": true,
+   "reps_reconstructed": 3
+  },
+  "rho5_C5": {
+   "c284_nimber": 0,
+   "coset_size": 12,
+   "deleted": 4,
+   "deleted_per_order5_rotation_subgroup": [
+    2,
+    2
+   ],
+   "independent_nimber_replay": 0,
+   "reconstruction_isomorphic_to_c284": true,
+   "reps_reconstructed": 60
+  }
+ },
+ "cayley_walk_moments": {
+  "first_differing_k": 8,
+  "graphs_isomorphic": false,
+  "rho3_tr_Ak_k1_16": [
+   0,
+   180,
+   0,
+   900,
+   0,
+   5340,
+   0,
+   34740,
+   360,
+   239220,
+   13200,
+   1714980,
+   255840,
+   12696780,
+   3750000,
+   96639540
+  ],
+  "rho5_tr_Ak_k1_16": [
+   0,
+   180,
+   0,
+   900,
+   0,
+   5340,
+   0,
+   35460,
+   0,
+   253620,
+   1320,
+   1905660,
+   42120,
+   14811060,
+   822360,
+   117929220
+  ]
+ },
+ "census_A5": [
+  [
+   [
+    2,
+    3,
+    5
+   ],
+   5,
+   120
+  ],
+  [
+   [
+    2,
+    5,
+    5
+   ],
+   3,
+   60
+  ],
+  [
+   [
+    3,
+    3,
+    5
+   ],
+   3,
+   60
+  ],
+  [
+   [
+    3,
+    5,
+    5
+   ],
+   3,
+   60
+  ],
+  [
+   [
+    3,
+    5,
+    5
+   ],
+   5,
+   60
+  ],
+  [
+   [
+    5,
+    5,
+    5
+   ],
+   5,
+   20
+  ]
+ ],
+ "census_S4": [
+  [
+   [
+    2,
+    3,
+    3
+   ],
+   4,
+   12
+  ],
+  [
+   [
+    2,
+    3,
+    4
+   ],
+   3,
+   24
+  ],
+  [
+   [
+    3,
+    3,
+    3
+   ],
+   4,
+   4
+  ],
+  [
+   [
+    3,
+    4,
+    4
+   ],
+   3,
+   12
+  ]
+ ],
+ "class_discriminator": {
+  "counts": {
+   "rho3_AB": 60,
+   "rho5_AA": 30,
+   "rho5_BB": 30
+  },
+  "rho5_iff_pair_products_conjugate": true,
+  "rho5_triple_product_in_opposite_class": true
+ },
+ "fricke_identity_exact_instances": 48,
+ "icosahedral_configs_355": {
+  "angles[36, 36, 60]_rho5": 30,
+  "angles[36, 60, 72]_rho3": 60,
+  "angles[60, 72, 72]_rho5": 30
+ },
+ "lemma_common_order_all_involution_triples": {
+  "A5_triples_checked": 455,
+  "S4_triples_checked": 84,
+  "all_six_orders_equal": true
+ },
+ "mirror_criterion": {
+  "A5_[2, 3, 5]_rho5": {
+   "example_w": null,
+   "mirror_forces_zero": false,
+   "mirror_w_count": 0,
+   "regular_value": 1
+  },
+  "A5_[2, 5, 5]_rho3": {
+   "example_w": null,
+   "mirror_forces_zero": false,
+   "mirror_w_count": 0,
+   "regular_value": 1
+  },
+  "A5_[3, 3, 5]_rho3": {
+   "example_w": [
+    4,
+    3,
+    2,
+    1,
+    0
+   ],
+   "mirror_forces_zero": true,
+   "mirror_w_count": 1,
+   "regular_value": 0
+  },
+  "A5_[3, 5, 5]_rho3": {
+   "example_w": null,
+   "mirror_forces_zero": false,
+   "mirror_w_count": 0,
+   "regular_value": 0
+  },
+  "A5_[3, 5, 5]_rho5": {
+   "example_w": [
+    2,
+    1,
+    0,
+    4,
+    3
+   ],
+   "mirror_forces_zero": true,
+   "mirror_w_count": 1,
+   "regular_value": 0
+  },
+  "A5_[5, 5, 5]_rho5": {
+   "example_w": [
+    0,
+    3,
+    4,
+    1,
+    2
+   ],
+   "mirror_forces_zero": true,
+   "mirror_w_count": 3,
+   "regular_value": 0
+  },
+  "S4_[2, 3, 3]_rho4": {
+   "example_w": [
+    3,
+    2,
+    1,
+    0
+   ],
+   "mirror_forces_zero": true,
+   "mirror_w_count": 1,
+   "regular_value": 0
+  },
+  "S4_[2, 3, 4]_rho3": {
+   "example_w": null,
+   "mirror_forces_zero": false,
+   "mirror_w_count": 0,
+   "regular_value": 0
+  },
+  "S4_[3, 3, 3]_rho4": {
+   "example_w": [
+    0,
+    3,
+    2,
+    1
+   ],
+   "mirror_forces_zero": true,
+   "mirror_w_count": 3,
+   "regular_value": 0
+  },
+  "S4_[3, 4, 4]_rho3": {
+   "example_w": [
+    0,
+    3,
+    2,
+    1
+   ],
+   "mirror_forces_zero": true,
+   "mirror_w_count": 1,
+   "regular_value": 0
+  }
+ },
+ "orbit_structure": {
+  "rho3": {
+   "inner_orbit_sizes": [
+    60
+   ],
+   "is_single_Aut_orbit": true,
+   "nontrivial_stabilizer_parities": [
+    1
+   ],
+   "stabilizer_order": 2
+  },
+  "rho5": {
+   "inner_orbit_sizes": [
+    30,
+    30
+   ],
+   "is_single_Aut_orbit": true,
+   "nontrivial_stabilizer_parities": [
+    0
+   ],
+   "stabilizer_order": 2
+  }
+ },
+ "regular_mirror_pairings": {
+  "[2, 3, 5]_rho5": {
+   "example": null,
+   "pairings_found": 0,
+   "rep_triple": [
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     0,
+     3,
+     4,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     2,
+     4,
+     3
+    ]
+   ]
+  },
+  "[2, 5, 5]_rho3": {
+   "example": null,
+   "pairings_found": 0,
+   "rep_triple": [
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     0,
+     3,
+     4,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     3,
+     2,
+     4
+    ]
+   ]
+  },
+  "[3, 3, 5]_rho3": {
+   "example": {
+    "h": [
+     4,
+     3,
+     2,
+     1,
+     0
+    ],
+    "h_order": 2,
+    "tau": [
+     4,
+     3,
+     2,
+     1,
+     0
+    ],
+    "tau_is_identity": false,
+    "tau_parity": 0
+   },
+   "pairings_found": 1,
+   "rep_triple": [
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     1,
+     0,
+     2,
+     4,
+     3
+    ],
+    [
+     1,
+     0,
+     3,
+     2,
+     4
+    ]
+   ]
+  },
+  "[3, 5, 5]_rho3": {
+   "example": null,
+   "pairings_found": 0,
+   "rep_triple": [
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     1,
+     0,
+     2,
+     4,
+     3
+    ],
+    [
+     2,
+     3,
+     0,
+     1,
+     4
+    ]
+   ]
+  },
+  "[3, 5, 5]_rho5": {
+   "example": {
+    "h": [
+     2,
+     1,
+     0,
+     4,
+     3
+    ],
+    "h_order": 2,
+    "tau": [
+     2,
+     1,
+     0,
+     4,
+     3
+    ],
+    "tau_is_identity": false,
+    "tau_parity": 0
+   },
+   "pairings_found": 1,
+   "rep_triple": [
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     1,
+     0,
+     2,
+     4,
+     3
+    ],
+    [
+     3,
+     1,
+     4,
+     0,
+     2
+    ]
+   ]
+  },
+  "[5, 5, 5]_rho5": {
+   "example": {
+    "h": [
+     0,
+     3,
+     4,
+     1,
+     2
+    ],
+    "h_order": 2,
+    "tau": [
+     0,
+     3,
+     4,
+     1,
+     2
+    ],
+    "tau_is_identity": false,
+    "tau_parity": 0
+   },
+   "pairings_found": 3,
+   "rep_triple": [
+    [
+     0,
+     2,
+     1,
+     4,
+     3
+    ],
+    [
+     1,
+     0,
+     3,
+     2,
+     4
+    ],
+    [
+     3,
+     4,
+     2,
+     0,
+     1
+    ]
+   ]
+  }
+ },
+ "residual_descriptions": {
+  "rho3_C3": {
+   "degree_multiset": [
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "edges": 26,
+   "vertices": 18
+  },
+  "rho3_C5": {
+   "degree_multiset": [
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3
+   ],
+   "edges": 10,
+   "vertices": 8
+  },
+  "rho5_C3": {
+   "degree_multiset": [
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "edges": 26,
+   "vertices": 18
+  },
+  "rho5_C5": {
+   "degree_multiset": [
+    1,
+    1,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "edges": 10,
+   "vertices": 8
+  }
+ },
+ "schema": "c289-a5-triple-split-v1"
+}

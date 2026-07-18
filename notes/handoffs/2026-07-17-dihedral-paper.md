@@ -40,6 +40,14 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   completeness, `ρ`-split calibrated). Title direction 1 recommended (final wording user call).
   C290 hard gate; C289 gate at elementary-proof scope; C291 post-C264. Decision appended to
   `notes/2026-07-17-dihedral-paper-spine-proposal.md`.
+- Closed: C289 conceptual `A₅ (3,5,5)` split (2026-07-17) — common-order lemma proved in any group;
+  the split proved a class discriminator via the trace-zero Fricke identity (ρ=5 iff the order-5
+  pair products are conjugate, `abc` in the opposite class); isoceles/scalene icosahedral
+  identification with matching orbit structure; a mirror lemma upgrades six polyhedral `t₁=0`
+  entries from computed to proved (the `ρ=3` regular zero stays computational); coset templates
+  shown to re-expose the rotation-subgroup conjugacy geometry the free orbit quotients away;
+  stdlib-Python certificate with independent C284 residual replay, zero mismatches; draft §6
+  paragraphs included for C264 → `notes/2026-07-17-c289-a5-triple-split.md`.
 - Closed: C278 conditional density (2026-07-17) — density-½ kernel-certified behind exactly one
   Davenport-cited equidistribution axiom (`DensityAxioms.lean` + `DensityConditional.lean`; audits
   `[propext, Classical.choice, Quot.sound, primes_equidistribute]`) →
@@ -70,8 +78,9 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - Density-½ gate CLOSED (C278, 2026-07-17): one quarantined axiom `primes_equidistribute`,
   ½ kernel-derived for all triple types and both torus signs. C264 still owes the paper's
   single-axiom boundary sentence; replace the axiom when mathlib ships PNT-in-AP.
-- Pre-submission content upgrades are C281 (dihedral census), C288 (polyhedral census), C289
-  (structural explanation of the `A₅` split), and C290 (closed congruence/P/N laws).
+- Pre-submission content upgrades are C281 (dihedral census), C288 (polyhedral census), and C290
+  (closed congruence/P/N laws; C288/C289 prerequisites — C289 done). C264 owes integration of the
+  C289 mirror-lemma upgrades (six proved `t₁=0` entries) and draft §6 paragraphs.
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264), which remains last.
 - Post-release upgrades are direct strategies/certificates (C291), wild polyhedral characteristic
   (C292), and Lean formalization of the finite table boundary (C293). The growing full-group escape
@@ -84,13 +93,11 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
    self-reported-buggy `notes/2026-07-17-c281-dihedral-census-appendix.rs` from an interrupted
    session is on disk untracked; rewrite rather than trust it (its `r^{M/2}` closure shortcut was
    wrong for gated triples).
-2. **C289** — replace the computationally discovered `A₅ (3,5,5;ρ=3/5)` split by a conceptual
-   group-theoretic lemma and calibrated interpretation.
-3. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
-4. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply C261 R1–R5,
+2. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
+3. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply C261 R1–R5,
    the C278 single-axiom boundary sentence, C260/C284 computation boundaries, the Dawson period-34
    corollary, and title/abstract calibration excluding the wild and full-group escape cases.
-5. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
+4. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
    C293 Lean formalization. Continue the full `PSL₂/PGL₂` escape program only through C84 `[cap]`.
 
 ## Cautions (standing, for any session in this lane)
