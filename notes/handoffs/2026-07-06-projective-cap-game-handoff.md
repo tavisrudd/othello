@@ -568,8 +568,13 @@ task list.  Current high-value items:
   must be Grundy-arithmetic. **Existence-strength pairing is now also closed:** an exact geometric
   plus abstract automorphism census at prime `q=7,11,13,17,19,23,29,31` found zero pairing
   children among all 753 class-D escapes at `q=29`; this needs an adaptive/non-pairing certificate
-  or an explicit exception (`notes/2026-07-17-c84-pairing-obstruction.md`). Ranking: (1) prove
-  positive-density P (S₄ then all triple types), beginning with a bounded adaptive class-D core;
+  or an explicit exception (`notes/2026-07-17-c84-pairing-obstruction.md`). **Adaptive q=29
+  follow-up:** exact solution of that entire mirror-free fiber gives `139/753` P (`0.1846`); 91/139
+  P roots have a move with a unique winning reply, while every P root has one-reply component width
+  at least 14 (range 14–20), closing immediate component cores of bound ≤13. Mine the forced-reply
+  algebra rather than another static signature (`notes/2026-07-17-c84-adaptive-core.md`). Ranking:
+  (1) prove positive-density P (S₄ then all triple types), beginning with a multi-step adaptive
+  class-D certificate;
   (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
   complete-arc/saturating-set, **not** blocking-set/Baer ({11,17} nonsquare); (4) drain minimax
   fallback. Corrections folded: order 24 ≠ S₄ (D₂₄ occurs at `12|q²−1`, separate by element-order

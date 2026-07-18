@@ -87,6 +87,15 @@ every S₄ class. The surviving existence route must use an adaptive certificate
 bounded core/quotient, or explicit exceptions. This is a bounded obstruction, not a claim that the
 q=29 children are N. Evidence: `notes/2026-07-17-c84-pairing-obstruction.md`.
 
+**The mirror-free fiber is adaptively P-rich (C84 follow-up, 2026-07-17).** Exact Node-Kayles
+solution of all 753 q=29 class-D escapes gives 139 P children (`0.1846`), so the zero-pairing result
+is a mechanism obstruction, not P-depletion. Among those P roots, 91 have an opponent move with a
+unique winning reply. Conversely, every P root has a worst opponent move for which every winning
+reply leaves a connected component of size at least 14 (one-reply component widths range 14–20),
+closing any immediate component-core theorem with bound at most 13. The next target is the
+algebraic relation carried by the unique-response transitions, not another static signature.
+Evidence: `notes/2026-07-17-c84-adaptive-core.md`.
+
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
 conic-only value 0; that does **not** by itself produce an **on-conic** P child. Closing the
 escape via (ON) needs a separate **exchange / transfer lemma** carrying an off-conic
