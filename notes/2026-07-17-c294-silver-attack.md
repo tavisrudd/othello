@@ -3,7 +3,8 @@
 **Date:** 2026-07-17
 **Lane:** `crowns`
 **Status:** odd-subfield descent proved; the only mixed-class `PGL2` scar is localized to one
-dihedral involution-centralizer coset, but its value transfer remains open.
+dihedral involution-centralizer coset. Exact `q=3,5` gates now rule out every uniform one-reply
+colour-preserving or degree-two peel, so the remaining value transfer is genuinely recursive.
 
 ## Target and minimal size
 
@@ -149,6 +150,22 @@ through its closed neighborhood. The remaining transfer lemma must track precise
 codimension interaction. But the scar is now one dihedral centralizer coset, not the full regular
 Cayley graph.
 
+### Why the localized scar cannot have a colour-preserving local patch
+
+The companion obstruction theorem proves that every colour-preserving automorphism of a connected
+left Cayley graph is a right translation. Such a fixed-point-free involutory automorphism is
+nonadjacent exactly when its involution conjugacy class misses the generator set. A mixed
+`PGL2(q0)` triple meets both classes, so no root-level colour-preserving pairing exists. Moreover,
+two colour-preserving automorphisms agreeing at one vertex agree globally: the right-regular mirror
+cannot be changed only on `B_z` while left untouched elsewhere.
+
+The exact first recursive gates are already nontrivial. At `q0=3`, all 36 legal full mixed triples
+are P by direct Grundy recursion, but the pair-order `(2,3,4)` orbit has neither a two-ply abstract
+pairing reply nor a degree-two reply. At `q0=5`, the 1,140 legal full mixed triples form twelve
+conjugacy types; five have a two-ply abstract-pairing reply and seven do not, while none has a
+degree-two reply. The checker does not determine the seven `q0=5` root values. See
+`notes/2026-07-17-c294-mixed-scar-obstruction.md` and its adjacent certificate bundle.
+
 ## Silver attack
 
 The remaining proof should be split by Dickson type, with no cross-stratum handwaving:
@@ -157,8 +174,10 @@ The remaining proof should be split by Dickson type, with no cross-stratum handw
    the direct-strategy layer when C199 delivers it.
 2. **Subfield groups:** the odd-extension theorem above gives exact descent for `PSL2` and for
    `PGL2` when the extension degree is `1 mod 4`; the Cayley pairing also handles same-class
-   generators in degree `3 mod 4`. Prove a value-preserving peel for the remaining mixed-class
-   scar, now localized to one dihedral involution-centralizer coset.
+   generators in degree `3 mod 4`. For the remaining mixed-class scar, construct a colour-changing
+   recursive transfer state on the three-colour alternating backbones. It must contain the direct
+   `(2,3,4)` `PGL2(3)` P certificate and pass all seven obstructed `PGL2(5)` types; another local
+   colour-preserving mirror or immediate degree degradation cannot be the uniform rule.
 3. **Full groups:** choose one generator pair and decompose the graph into its alternating
    dihedral orbits. The third involution is then a correlated matching between those path/cycle
    backbones. The needed new theorem is a recursive scar/transfer rule that preserves P/N while
@@ -195,6 +214,14 @@ Grundy recursion for root classification, exact abstract-automorphism backtracki
 the path/cycle recurrence for structural certificates, and exhaustive `PGL2(q)` conjugation for
 the exception-orbit audit. The computation certifies only q=5,7,11. It does not prove that the
 listed certificate hierarchy remains dense, bounded-depth, or complete for larger fields.
+
+The mixed-Cayley-scar obstruction and its independent paired-image replay are checked separately by
+
+```sh
+python3 notes/2026-07-17-c294-mixed-scar-obstruction.py \
+  --check notes/2026-07-17-c294-mixed-scar-obstruction.json
+sha256sum -c notes/2026-07-17-c294-mixed-scar-obstruction.sha256
+```
 
 | Load-bearing artifact | Bytes | SHA-256 |
 |---|---:|---|
