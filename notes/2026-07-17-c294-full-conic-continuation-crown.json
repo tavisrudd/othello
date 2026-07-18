@@ -1,0 +1,59 @@
+{
+  "cases": [
+    {
+      "cap_triples_checked": 20,
+      "conjugation_on_generators": [1, 0, 3, 2],
+      "dead_conic_vertices": 4,
+      "generated_group_order": 79464,
+      "live_conic_vertices": 40,
+      "mirror_pairs": 20,
+      "nonsquare_tests": {"-1": -1, "5": -1, "8": -1},
+      "p": 43,
+      "pgl2_order": 79464,
+      "unipotent_word": [2, 0, 2, 0, 1, 0]
+    },
+    {
+      "cap_triples_checked": 20,
+      "conjugation_on_generators": [1, 0, 3, 2],
+      "dead_conic_vertices": 8,
+      "generated_group_order": 300696,
+      "live_conic_vertices": 60,
+      "mirror_pairs": 30,
+      "nonsquare_tests": {"-1": -1, "5": -1, "8": -1},
+      "p": 67,
+      "pgl2_order": 300696,
+      "unipotent_word": [2, 0, 2, 0, 1, 0]
+    },
+    {
+      "cap_triples_checked": 20,
+      "conjugation_on_generators": [1, 0, 3, 2],
+      "dead_conic_vertices": 8,
+      "generated_group_order": 571704,
+      "live_conic_vertices": 76,
+      "mirror_pairs": 38,
+      "nonsquare_tests": {"-1": -1, "5": -1, "8": -1},
+      "p": 83,
+      "pgl2_order": 571704,
+      "unipotent_word": [2, 0, 2, 0, 1, 0]
+    },
+    {
+      "cap_triples_checked": 20,
+      "conjugation_on_generators": [1, 0, 3, 2],
+      "dead_conic_vertices": 8,
+      "generated_group_order": 1224936,
+      "live_conic_vertices": 100,
+      "mirror_pairs": 50,
+      "nonsquare_tests": {"-1": -1, "5": -1, "8": -1},
+      "p": 107,
+      "pgl2_order": 1224936,
+      "unipotent_word": [2, 0, 2, 0, 1, 0]
+    }
+  ],
+  "family": {
+    "centres": [[0, 1], [-1, 0], [1, 3], [-3, -1]],
+    "prime_condition": "p > 5 and p mod 40 in {3,27}",
+    "residual_outcome": "P by fixed-point-free nonadjacent tau pairing",
+    "tau": "t -> -1/t"
+  },
+  "schema": "c294-full-pgl-mirror-family-v1"
+}
