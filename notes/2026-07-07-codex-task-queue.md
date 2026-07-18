@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C326.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C328.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -24,6 +24,7 @@ unless they retain an explicit open tail.
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 - **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
 - **C326 `[build-sys]` [QUEUED; start with RelativeConicArcs]** — implement a declared-intent/Lean-facts trust spine with a global orphan inventory, exact per-terminal axiom checks, generated trust-document regions, strict data provenance, and canonical theorem/module/data dependency-graph JSON with filtered Mermaid/DOT renderers; all checks are read-only and adversarially tested → `notes/2026-07-18-c326-trust-spine-and-dependency-graph-plan.md`.
+- **C328 `[build-sys]` [GATED; after C326 stabilizes node IDs and the evidence-extension schema]** — operationalize the trust graph's evidence overlay for novelty assessment: freeze bounded status vocabulary and immutable/superseding assessment records, validate literature-search scope/evidence/freshness metadata, add query and renderer badges, and populate a RelativeConicArcs pilot; portfolio judgments remain with their owning lanes → `notes/2026-07-18-c326-trust-spine-and-dependency-graph-plan.md` § Evidence-extension boundary.
 - **C324 `[build-sys]` [QUEUED; before C287 extraction]** — one clean regeneration pass per paper on the pinned toolchain, confirming each frozen artifact still reproduces byte-identically; recorded hashes prove identity, not that the generator still reproduces the artifact. Record the outcome per manifest → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C287 `[build-sys]` [QUEUED]** — extract the reviewed union of all paper-facing Lean closures into one fresh-history shared repository at `~/src/papers/lean`, validate public gates, and prove guarded artifact restore semantics → `notes/2026-07-17-c287-shared-lean-extraction-plan.md`.
 ### `cap`

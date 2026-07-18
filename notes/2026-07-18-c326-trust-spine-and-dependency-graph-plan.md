@@ -197,6 +197,33 @@ producing an unreadable portfolio diagram.
 - a declared terminal is absent from all declared gates; or
 - a classified module is unreachable and lacks an explicit exclusion reason.
 
+## Evidence-extension boundary
+
+C326 freezes stable node identifiers and a generic evidence-overlay interface so later metadata
+does not require rewriting the dependency graph. The canonical schema permits immutable assessment
+nodes plus typed `supports`, `assesses`, `supersedes`, `generated_by`, and `replayed_by` edges.
+Assessments are separate records joined to graph nodes by stable ID; they never alter Lean-derived
+topology.
+
+Within C326, use the overlay only for provenance required by the trust contract and one
+RelativeConicArcs exemplar proving that references, supersession, deterministic latest-record
+selection, and generic renderer badges work. C326 does not conduct portfolio novelty searches or
+attach an unbounded `novel = true` property to theorem nodes.
+
+C328 owns the substantive novelty layer after these identifiers and interfaces stabilize:
+
+- bounded novelty-status vocabulary rather than a Boolean novelty claim;
+- immutable assessments with exact claim, search scope, method, date, evidence, known related work,
+  limitations, and optional supersession;
+- literature-search record validation and freshness policy;
+- query/filter support and novelty-specific visualization badges;
+- a populated RelativeConicArcs pilot; and
+- a protocol by which area-owning lanes supply theorem judgments without `build-sys` annexing their
+  research conclusions.
+
+Portfolio-wide assessment population is not a C328 completion condition unless separately
+allocated to the owning lanes.
+
 ## Commands and mutation contract
 
 Provide one entry point under `lean/scripts/` with these modes:

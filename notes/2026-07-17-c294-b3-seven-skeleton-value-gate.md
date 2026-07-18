@@ -2,7 +2,7 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; first exact sparse-core quotient attempt stopped at the fixed gate
+**Status:** active; exact high-core isomorphism fails its live fixed-prefix movement gate
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -62,3 +62,18 @@ Do not repeat this run or raise its cap. The next bounded design question is whe
 isomorphism canonicalization of the high two-core together with B1 attachment labels produces
 material additional mergers on the already tracked 100,000-state prefix. Require a measured
 compression gate before implementing another value solver.
+
+## High-core isomorphism result
+
+`notes/2026-07-17-c294-b3-high-core-isomorphism.md` answers that design question positively at the
+targeted layer. On the unchanged q=5 type-0 100,000-state traversal, 11,031 completed absolute
+high-core classes collapse to 10,088 exact labelled-core isomorphism classes: 943 classes, or
+8.55%, are removed with zero nimber conflicts. The independently replayed first merger has two
+32-vertex residuals, isomorphic 23-vertex labelled cores, and direct nimber 1 on both sides.
+
+The live quotient serves 693 new-absolute-key hits and reduces high-key requests by 5.66%, but
+reduces decompositions by only 0.249%, still spends 100,000 connected states, and stops at the same
+24-vertex frontier without a value. It therefore fails the material live gate. Do not run it at
+ten million states. The next bounded diagnostic is a census of repeated pieces behind one- and
+two-vertex separators in the canonical high cores; require substantial reuse before designing a
+two-port boundary algebra.
