@@ -15,8 +15,12 @@ Step-2(a) preflight is now **done and clean** (no new degeneracy locus): `Res_u(
 (`G2a==G2 mod G1`); and the infinity place is AS-**trivial** (value `(e/delta)^2+(e/delta)`), so
 `D_AS` is fixed entirely by the finite `G1,G2a` residues
 ([`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)).
-Step 2 remaining, in order: (b) `D_AS` branches by AS-residues at the roots of `G1`
-and `G2a` (expect up to five conditions, not the a=0 three -- `W==0 mod G1` was an a=0 accident);
+Step-2(b) part 1 is also done: `W==0 mod G1` identically (the a=0 accident recurs, so `G1` adds no
+condition) and `W mod G2a` gives exactly three `h1`-free, `h0`-linear conditions with content
+`(delta*N)^6` -- the a=0 `P0,P1,P2` shape, not five
+([`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)).
+Step 2 remaining, in order: (b-part-2) decompose those three conditions into explicit branches with
+forced `h0` (a=0 cross-determinant method transfers);
 (c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
 trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
 arc-legal rootless branch is where a construction could hide); (d) the `a!=0` reconstruction-split
@@ -251,8 +255,13 @@ by the `build-sys` lane.
    infinity place is AS-trivial (value `(e/delta)^2+(e/delta)`), so the residue setup mirrors a=0 up
    to the arithmetically-empty `N` factors
    ([`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)).
-   Next (step-2(b)) compute `D_AS`'s branches by AS-residues at the roots of `G1` and `G2a`, then decide
-   collision-forcing vs arc-legal via the second-layer `Tr(A/(bQ)^2)=0` test, before any affine-coverage test.
+   Step-2(b) part 1 is done: with `W=(B0')^2*Q^4+B0*Q^2*(D')^2`, `D=delta*N*G1*G2a`, `W==0 mod G1`
+   identically (a=0 accident recurs; no `G1` condition) and `W mod G2a` gives exactly three `h1`-free,
+   `h0`-linear conditions `C0,C1,C2` (content `(delta*N)^6`), the same shape as a=0's `P0,P1,P2`
+   ([`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)).
+   Next (step-2(b) part 2) decompose those three conditions into explicit branches with forced `h0`
+   (a=0 cross-determinant method transfers), then decide each branch collision-forcing vs arc-legal via
+   the second-layer `Tr(A/(bQ)^2)=0` test, before any affine-coverage test.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
@@ -278,6 +287,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-17-c210-a-nonzero-artin-schreier-form.md`](../2026-07-17-c210-a-nonzero-artin-schreier-form.md)
 - C210 a!=0 step-2(a) preflight (resultants + infinity-place AS-triviality; residue setup clean):
   [`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)
+- C210 a!=0 step-2(b) part 1 (residue conditions: G1 trivial, three h0-linear G2a conditions):
+  [`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)
 - C210 a!=0 step-1/step-2 Fable review (traps, progress bar, landing odds):
   [`2026-07-17-c210-fable-review.md`](../2026-07-17-c210-fable-review.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
