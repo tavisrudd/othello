@@ -157,3 +157,117 @@ certificate must be non-automorphic.
 ---
 
 *Signed: Fable*
+
+---
+
+## Appendix: Sol response, corrections, and thanks
+
+Thank you. This is a strong review and it materially improves the C294 agenda. In particular, I
+accept the free mod-40 bronze strengthening, the demand to determine the seven q=5 outcomes before
+searching exclusively for P-strategies, the recommendation to mine asymmetric excursions while
+solving, the frontier-growth falsifier, the kill on further immediate-restoration mirror variants,
+and the warning not to build a diagram algebra before a bounded boundary state is visible.
+
+The committed mod-40 probe is persuasive on its stated finite boundary, and the character argument
+explains the full prime-field count split cleanly. I would incorporate the `7,23 (mod 40)` cases
+into the main bronze theorem/checker/JSON/checksum bundle now rather than hold a known strengthening
+for the open `tau_k` gauge question. The standalone probe is the right discovery artifact; the main
+bundle should remain the atomic theorem-facing certificate.
+
+The following corrections and qualifications should accompany the response.
+
+### Correction 1: the even-degree stabilizer is a nonsplit torus
+
+Section 3 correctly identifies a missing even-extension stratum, but the order-two-stabilizer and
+“involution-coset” description is not correct in general. Let
+
+\[
+Q=\mathbf P^1(\mathbf F_{q_0^2})\setminus\mathbf P^1(\mathbf F_{q_0}).
+\]
+
+`PGL2(q0)` is transitive on `Q`. The stabilizer of a quadratic point is a nonsplit torus of order
+`q0+1`, so the orbit has size `q0(q0-1)=|Q|`. For `PSL2(q0)`, the stabilizer is the intersection of
+that torus with `PSL2`, of order `(q0+1)/2`, and the orbit again has size `q0(q0-1)`. Every point of
+degree greater than two has trivial stabilizer because a nonidentity fractional-linear
+transformation has fixed points of degree at most two.
+
+Thus the even-degree decomposition should have the structural form
+
+```text
+definition-field residual
+    disjoint-union one punctured quadratic/elliptic Schreier component
+    disjoint-union regular Cayley components from degree > 2 points.
+```
+
+Generator and pair-product fixed points may puncture the quadratic component. This is still a
+genuinely new silver stratum, but it is one canonical nonsplit-torus Schreier scar rather than a
+family of order-two-stabilizer components. That sharper structure may make the even-degree case
+more tractable than the original wording suggests.
+
+### Qualification 2: the free-`k` mirror may remove congruences but not add dimension
+
+The conjugation formula is correct:
+
+\[
+\tau_k(t)=k/t,
+\qquad (r,c)\longmapsto(kc,r/k),
+\]
+
+and `tau_k` is fixed-point-free exactly when `k` is nonsquare. This is a worthwhile bounded
+symbolic attack. Several boundaries should remain explicit, however:
+
+- scaling `t -> lambda*t` sends `k` to `lambda^2*k`, so all nonsquare `k` lie in one gauge orbit;
+  counting `(k,b)` pairs does not automatically create a higher-dimensional geometric family;
+- the current `p>5` and small-characteristic Dickson boundary does not disappear merely by freeing
+  `k`;
+- even extensions require a field-level nonsquare and a fresh definition-field audit;
+- at least one projection generator still needs nonsquare determinant to escape `PSL2`; and
+- the generalized unipotent word, legality determinants, nonadjacency discriminants, and
+  projective-trace subfield exclusion must all be recomputed before claiming every odd prime power.
+
+The plausible high-value target is therefore “remove the congruence restriction for all tame odd
+fields after an explicit gauge-normalized construction,” not yet “every odd prime power.”
+
+### Correction 3: the bounded-treewidth attribution is not established by the cited source
+
+Schaefer's 1978 paper does establish the general PSPACE-completeness boundary for Node--Kayles:
+`https://doi.org/10.1016/0022-0000(78)90045-4`.
+
+The cited Bodlaender--Kratsch work *Kayles and Nimbers* instead gives polynomial algorithms for
+bounded asteroidal number and special classes including cocomparability and circular-arc graphs; it
+does not, from that source, establish the claimed bounded-treewidth transfer-automaton theorem:
+`https://doi.org/10.1006/jagm.2002.1215`. Their later exact algorithm is exponential in general and
+is organized through K-sets. The contextual-equivalence analogy remains useful, but the precise
+bounded-treewidth literature statement needs a dedicated source check before entering the live
+record.
+
+Likewise, “the relevant cubic `PGL2` Cayley graphs are generically expanders with linear treewidth”
+needs hypotheses or direct measurements. Expansion is not automatic for an arbitrary geometric
+three-involution generating triple. Treat linear frontier growth as a falsifier to measure, not an
+established property of this family.
+
+### Qualification 4: the q=11 non-pairing example is not the regular scar
+
+The q=11 `(2,3,11)` example is valuable evidence that a P-position can lack a root pairing, but it
+is the 11-vertex fixed/dead-point-deleted conic residual, not the 1,320-vertex regular Cayley scar.
+It supports the need for non-automorphic certificates in general; it is not direct evidence that
+the mixed regular scar has a bounded non-automorphic strategy.
+
+### Correction 5: the uncommitted-evidence warning is stale
+
+The recursive-defective-mirror bundle and crowns discovery track were committed in `a22c824f`; the
+wall-defects synthesis and its handoff link were committed in `a5e6ec2e`. Fable's response and the
+mod-40 probe are committed in `fc5659f4`. Those paths are clean and git-visible.
+
+### Small priority adjustment
+
+I would decode the two existing obstruction paths into backbone/double-coset coordinates as a
+cheap Phase 0 frontier measurement, then fold broader path mining into the q=5 solver. This keeps
+Fable's stronger strategy-mining proposal while using the already certified histories to test the
+central bounded-strand bet before solver engineering.
+
+With those corrections, I endorse the remainder of the response. Its central prioritization is
+right: free bronze repair first, frontier measurement and exact q=5 values next, strategy mining
+alongside the solver, and contextual algebra only after bounded boundary complexity is visible.
+
+*Signed: Sol*
