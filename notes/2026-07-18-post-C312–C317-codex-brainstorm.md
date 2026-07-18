@@ -37,7 +37,7 @@ for `C`-complete `O(sqrt(Q))` arcs.
 | C312 | Basis-independent seed--repair determinant/trace theorem; necessary-and-sufficient eight-packet legality system; exact constant, affine, pole, repeated-root, and deletion strata | High foundational significance | Reusable characteristic-two incidence engine rather than a one-off calculation |
 | C313 | The normalized linear-`p` stratum is empty over every odd scalar degree by an exact trace contradiction | Medium-high, narrow but decisive | Short, clean closure theorem eliminating an apparently new branch |
 | C314 | Lossless six-stratum atlas for the constant-`p` quotient, including reconstruction, stabilizers, relabelings, semilinear sheets, and every conic/packet degeneracy | High structural significance | A genuine moduli classification; central theorem plus likely appendix material |
-| C315 | All eight legality packets force `c=K=1,B=0`; the sole survivor is a nonempty nine-dimensional constant-height `E4` open with exact seed-fiber size `Q(Q+1)/4` | Very high; the central classification theorem | Strongest positive structural result in the sequence |
+| C315 | All eight legality packets force `c=K=1,B=0`; the sole survivor is a nonempty nine-dimensional constant-height `E4` open whose single-seed safe set has exact size `Q(Q+1)/4` before the ordered-pair inequality and zero-height deletions | Very high; the central classification theorem | Strongest positive structural result in the sequence |
 | C316 | Common height cancels identically; all mixed collisions reduce losslessly to four finite relative-offset maps of generic degrees `6,6,5,5`, with degree `2` on repair-conic coincidence | High, including an important correction | Replaces an ill-specified height-image problem by four exact finite maps and branch ideals |
 | C317 | Prescribed-target reduced fibers are zero-dimensional with genus-zero translation-line components; every fixed survivor collides after odd relative degree `1`, `3`, or `5`; fresh coefficients face four exact no-root gates plus coverage | Medium-high theorem significance, moderate headline significance | A sharp fixed-tower obstruction and an honest terminal boundary, not a per-field asymptotic theorem |
 
@@ -86,6 +86,12 @@ degree-six gates retain C316's exact `S=0`, branch, pole, and `Delta_R=0` skelet
 Full symmetric monodromy would make derangement heuristics relevant, but it is not evidence by
 itself.  The target subset is cut out by absolute-trace conditions and the four maps share seed
 coordinates, so neither uniform target distribution nor independence may be assumed.
+
+There is also a geometric-base caveat: the absolute-trace subsets are not one fixed Zariski-open
+subvariety independent of `n`.  A Chebotarev argument would first need either an ambient geometric
+monodromy theorem plus character-sum control on the trace slice, or an auxiliary
+Artin--Schreier-cover formulation that geometrizes the trace conditions with all constant-field
+twists audited.  Computing a generic Galois group alone would not prove the desired density.
 
 ## Frontier B: exceptional strata as construction candidates
 
@@ -256,6 +262,29 @@ should test factorization signatures, not repeat C305's rejected census.
 The cross-lane exports are mainly methods: trace packets, invariant atlas construction,
 fiber-dimension discipline, and the odd-degree finite-fiber principle.  They should be imported by
 exact lemma or interface after a consumer-lane audit, not by analogy alone.
+
+## Red-team review after the initial commit
+
+The initial report was committed before this review, as requested.  The following are the main
+adversarial findings and their dispositions.
+
+| Risk | Adversarial finding | Disposition |
+|---|---|---|
+| Count overstatement | `Q(Q+1)/4` counts C315's one-seed safe set `T_{rho,theta}`. The ordered two-seed survivor also imposes `X_alpha!=X_beta` and zero-height deletions. | Corrected the C315 summary; no exact ordered-pair count is claimed here. |
+| Chebotarev shortcut | Absolute-trace subsets vary with the field and are not automatically a fixed geometric base. Generic monodromy does not by itself control factorization on that slice. | Added the required ambient-plus-character-sum or Artin--Schreier-cover gate. |
+| False independence | All four fibers share seed and repair parameters. A product of individual derangement probabilities could be completely wrong. | Independence remains an explicit question, not a heuristic conclusion. |
+| Computational optimism | Four root tests are conceptually smaller than a raw coefficient census, but the legal base and quotient may still be enormous. | Retained a mandatory operation-count and quotient feasibility audit before any `Q=512` run. |
+| Coverage afterthought | Even a positive-density collision-free locus may contain no relatively complete member. | Coverage is a coequal frontier and should be formulated before a large collision search. |
+| Fixed/fresh conflation | The odd-degree-five argument obstructs scalar extensions of one fixed tuple. It supplies no density bound for tuples chosen anew over each field. | The fixed, coherent, and fresh regimes remain separated throughout. |
+| External novelty | Internal theorem strength does not establish publishable novelty or priority relative to the finite-geometry literature. | Paper-weight judgments are provisional pending a targeted literature comparison and manuscript-level novelty audit. |
+| Cross-lane analogy | A method that worked for quadratic conic layers may not match another lane's objects, hypotheses, or quotient. | Every proposed export requires a consumer-owned theorem-interface audit; no cross-lane result is asserted. |
+| Paper coherence | A collection of exact classifications can still read as an appendix to a failed construction rather than a unified paper. | The proposed paper needs one central statement: ambient-moduli classification plus fixed-tower obstruction and the exact fresh-field boundary. |
+
+The review does not overturn the priority assessment.  It does lower confidence in any quick
+Chebotarev or bounded-census resolution and reinforces that coverage must be developed alongside
+factorization.  It also makes the paper-weight assessment conditional: the mathematics is
+substantial internally, but external significance requires novelty diligence and a manuscript
+that compresses the atlas and packet machinery around one visible theorem spine.
 
 ## Evidence and non-claims
 
