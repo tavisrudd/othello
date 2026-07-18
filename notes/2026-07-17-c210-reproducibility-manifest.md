@@ -42,10 +42,11 @@ was added later the same session; its fresh run is byte-identical to the committ
 (`diff` exit 0), and its Singular certificate re-derives the residue reduction independently of
 the Python set arithmetic.
 
-The four `a_nonzero_*` bundles now carry the active t-degree-four line through
-the exact GF(8)/GF(512) residue census. The census fresh run is byte-identical
-to its committed output; its direct residual evaluation independently checks
-every gcd-enumerated GF(512) root.
+The six `a_nonzero_*` bundles now carry the active t-degree-four line through
+the exact GF(8)/GF(512) residue census and the exact original-cover splits. The
+census and split fresh runs are byte-identical to their committed outputs; the
+census directly evaluates every gcd-enumerated GF(512) root, while the split
+checker compares its displayed factors directly with the universal resultant.
 
 ## Load-bearing leaves (sha256, bytes)
 
@@ -77,9 +78,11 @@ every gcd-enumerated GF(512) root.
 | `analyze_c210_a_nonzero_dAS_branches_output.txt` | `76c33187d6468785f3d122fb62b93ca84e4212cbfa593739a707a3316df3a99d` | 1835 |
 | `analyze_c210_a_nonzero_dAS_census.py` | `39889891bf98ee335ba77d131b669c03fe5ec78938ac61dece4c0dc94f89e166` | 23263 |
 | `analyze_c210_a_nonzero_dAS_census_output.txt` | `f5525fcbf2cd38b0a64a5443ba0ed875e90294889b53731e0b354d58c635c69b` | 1983 |
+| `analyze_c210_a_nonzero_exact_splits.py` | `45159c3c20732989da9798fdf4caee58a402e2b9403b1f4fdb166c8cf8b6fea3` | 7977 |
+| `analyze_c210_a_nonzero_exact_splits_output.txt` | `7616801d5b3979d925280f5f2aa2bd4520ff7fee1336eee8d0a6dcb2caa0d02f` | 1461 |
 
 Full pipeline hashes: `analyze_c210_SHA256SUMS`
-(sha256 `e9fe42494e9f7f8a7d17dba3a2966ecaa992d5b9ab2c42e1426c02c1a4be07a6`).
+(sha256 `9c24cda1a6d207151df65b0bf6b9bfef0cf87b25c47c262ab99766196721f882`).
 
 ## Trusted boundary
 

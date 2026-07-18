@@ -36,9 +36,10 @@ Established (exact, by substitution and division):
 
 - branches 1-3 lie in the three-condition residue system, each with its explicit
   forced `h0`, `h1` free (the committed certificate verifies this directly by
-  substitution/division). Original-cover factorization membership, especially
-  on merged-pole branch 3 where `K1*K2=0`, requires the explicit splits in the
-  next gate.
+  substitution/division). Their original-cover factorization membership is now
+  certified separately, including direct `w=0,1` identities on merged-pole
+  branch 3; see
+  [`2026-07-17-c210-a-nonzero-exact-splits.md`](2026-07-17-c210-a-nonzero-exact-splits.md).
 
 The branch conditions were found from the `h0`-cross-determinants
 `E_{ij} = A_i*B_j + A_j*B_i`, which factor (exploration, regenerable from the
@@ -68,13 +69,12 @@ ideal `(delta+p, w^2+w, h0-h0_3)`; or the `A_i=0` sublocus must be shown to forc
 `minAssGTZ` returned a **wrong** decomposition on the analogous step, so this must
 use exact division/resultant/radical arguments.
 
-Also open (later parts): exact original-cover splits on the generic `b!=0`
-scope; symbolic classification of both `tau`-quadratic components through
-`A/(bQ)^2` and `(A+sigma)/(bQ)^2`; the reconstruction-split locus `H=J=0` and
-projective genuineness needed before calling any rational root a collision; and
-the separate `b=0,a!=0` inseparable stratum. Full arithmetic completeness of
-the branch list is last and is needed only if every known branch is certified
-collision-forcing.
+Also open (later parts): the separate `b=0,a!=0` inseparable stratum; symbolic
+classification of both certified `tau`-quadratic components through
+`A/(bQ)^2` and `(A+sigma)/(bQ)^2`; and the reconstruction-split locus `H=J=0`
+and projective genuineness needed before calling any rational root a collision.
+Full arithmetic completeness of the branch list is last and is needed only if
+every known branch is certified collision-forcing.
 
 ## Artifact and replay
 
