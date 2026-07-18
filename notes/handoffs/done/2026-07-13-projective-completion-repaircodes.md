@@ -8,7 +8,7 @@ complete. C277 moved only paper-preparation tasks C274--C276 into the new `compl
 focused handoff; every earlier `[repaircodes]` peg and every `RepairCodes`/`RepairPorts` Lean name
 remains unchanged. The sole deep formal dependency is the quarantined Stichtenoth theorem.
 **Parent track**: [completed RepairCodes formalization](../2026-07-11-lean-formalization-plan.md)
-**Paper**: [`coding-repair-hypergraphs`](../../../papers/coding-repair-hypergraphs/README.md)
+**Paper**: [`complete-repair-ports`](../../../papers/complete-repair-ports/README.md)
 **Companion log**: [archive](2026-07-13-projective-completion-repaircodes-archive.md)
 **A+ roadmap:** [weighted-transfer upgrade and `repairports` follow-up](../../2026-07-16-repaircodes-a-plus-roadmap.md)
 
@@ -21,9 +21,9 @@ theorem-led complete-ports manuscript without exposing the monorepo or its histo
 the theorem/evidence crosswalk. C275 defines the exact clean-room export surface and is complete.
 
 **Frozen manifest:**
-[`2026-07-17-c275-m1-publication-boundary-manifest.md`](../../2026-07-17-c275-m1-publication-boundary-manifest.md)
+[`2026-07-17-c275-complete-ports-publication-boundary.md`](../../2026-07-17-c275-complete-ports-publication-boundary.md)
 and its
-[`allowlist.tsv`](../../2026-07-17-c275-m1-publication-allowlist.tsv). Do not initialize a repository,
+[`allowlist.tsv`](../../2026-07-17-c275-complete-ports-publication-allowlist.tsv). Do not initialize a repository,
 copy files, edit paper prose, or touch shared Lean/build configuration before allocating the next
 task after the user gate.
 

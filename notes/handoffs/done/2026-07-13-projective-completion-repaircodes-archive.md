@@ -374,7 +374,7 @@ as C115–C120.
 paper and registries. The sole deep formal dependency is the quarantined Stichtenoth theorem;
 external specialist citation-chain review remains a submission preflight gate, not a theorem gap.
 **Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
-**Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
+**Paper**: [`complete-repair-ports`](../../../papers/complete-repair-ports/README.md)
 **Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
 
 **Follow-up:** the twisted-cubic transversal spectrum spun off to

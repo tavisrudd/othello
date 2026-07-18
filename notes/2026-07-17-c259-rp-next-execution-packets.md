@@ -12,39 +12,39 @@ mini-packets are retained without creating a new backlog. The `rp-next` lane is 
 
 | Priority | Packet | Owner | Destination | Start condition |
 |---:|---|---|---|---|
-| 1 | M1 — focused complete-port manuscript | `complete-ports` paper lane | existing `papers/coding-repair-hypergraphs/`; decide rename versus retitle before any fork | may start now |
-| 2 | P1 — Capsule CLI and recovery digital twin | proposed new `portcaps` implementation lane | proposed `tools/repair-port-capsule/`, with language/layout fixed by its first task | may start after owner/path approval; independent of M1 prose |
-| 3 | M2 — compositional restoration semantics | proposed new `repair-semantics` paper lane | proposed `papers/bounded-restoration-semantics/` | start after M1's scope freeze prevents theorem duplication |
+| 1 | complete-ports paper — focused complete-port manuscript | `complete-ports` paper lane | existing `papers/complete-repair-ports/` | may start now |
+| 2 | P1 — Capsule CLI and recovery digital twin | proposed new `portcaps` implementation lane | proposed `tools/repair-port-capsule/`, with language/layout fixed by its first task | may start after owner/path approval; independent of complete-ports prose |
+| 3 | restoration-semantics paper — compositional restoration semantics | proposed new `repair-semantics` paper lane | proposed `papers/compositional-restoration-semantics/` | start after the complete-ports scope freeze prevents theorem duplication |
 | Bank A | N1 — TTSP reliability counterexample note | paper/literature owner selected by user | no package until novelty gate passes | dormant |
 | Bank B | F1 — coefficient-cost compiler module | future `portcaps` lane | optional module under the accepted Capsule schema | only after P1 schema stability |
 
-The recommended next lane is `complete-ports` for M1. P1 is the best choice if the next objective is
-engineering validation rather than publication. M2 is mathematically coherent but should not race
-M1 for definitions, examples, or theorem ownership.
+The recommended next lane is `complete-ports` for the complete-ports paper. P1 is the best choice if the next objective is
+engineering validation rather than publication. The restoration-semantics paper is mathematically coherent but should not race
+the complete-ports paper for definitions, examples, or theorem ownership.
 
 ## Dependency map
 
 ```text
 C215--C227 + C243--C244
         |
-        +--> M1 focused complete-port manuscript
+        +--> complete-ports focused manuscript
         |
         +--> P1 structural Capsule schema
                   |
 C229--C235 + C241 + C246
         |         +--> P1 simulator / digital twin / verifier
         |
-        +--> M2 compositional restoration semantics
+        +--> restoration-semantics manuscript
 
 C217 + C255 --> F1 coefficient-cost module (after P1 schema)
 C245 + C254 --> N1 reliability note (after novelty gate)
 ```
 
-M1 and P1 may proceed concurrently once ownership is explicit. M2 depends only on M1's scope
+The complete-ports paper and P1 may proceed concurrently once ownership is explicit. The restoration-semantics paper depends only on the complete-ports scope
 freeze, not on completion of the paper or prototype. Prototype measurements may later strengthen
 motivation, but none of the mathematical correctness claims depend on them.
 
-## Packet M1 — focused complete bounded repair ports
+## Packet complete-ports — focused complete bounded repair ports
 
 ### Objective and claim
 
@@ -58,7 +58,7 @@ capacity-region, or generic knowledge-compilation claim without new evidence.
 ### Owner and destination
 
 - **Owner:** `complete-ports`; the archived `repaircodes` lane retains the completed theorem chain.
-- **Destination:** `papers/coding-repair-hypergraphs/`.
+- **Destination:** `papers/complete-repair-ports/`.
 - **Fork rule:** do not create a second manuscript tree. The owner first chooses whether the
   existing manuscript is retitled/restructured or whether an explicitly approved new paper package
   supersedes it.
@@ -189,7 +189,7 @@ Allocate the `portcaps` lane and decide the implementation language/path using a
 packaging audit; then write schema v0 plus one matrix-to-capsule golden fixture. No scheduler is
 needed for the first commit.
 
-## Packet M2 — compositional restoration semantics
+## Packet restoration-semantics — compositional restoration semantics
 
 ### Objective and claim
 
@@ -203,9 +203,9 @@ strongest generic interface framework.
 ### Owner and destination
 
 - **Owner:** proposed new `repair-semantics` lane after user approval.
-- **Proposed destination:** `papers/bounded-restoration-semantics/`.
-- **Dependency:** M1 must first freeze its exclusions and notation ownership; no need to wait for
-  M1 completion.
+- **Proposed destination:** `papers/compositional-restoration-semantics/`.
+- **Dependency:** the complete-ports paper must first freeze its exclusions and notation ownership; no need to wait for
+  complete-ports completion.
 
 ### Inputs
 
@@ -247,7 +247,7 @@ strongest generic interface framework.
 
 ### First executable work unit
 
-After M1 scope freeze, allocate `repair-semantics` and write the theorem dependency/comparison
+After the complete-ports scope freeze, allocate `repair-semantics` and write the theorem dependency/comparison
 matrix. That matrix determines whether the one permitted generalization probe is justified.
 
 ## Banked mini-packet N1 — TTSP reliability note
@@ -282,5 +282,5 @@ Capability Compiler platform. Their negative or positioning results are already 
 
 `rp-next` has no remaining allocated mathematical, product, or consolidation work. Archive this
 handoff and update root routing only after the user approves. The recommended next selection is
-`complete-ports` to execute M1; select or create `portcaps` instead if prototype validation is the
+`complete-ports` to execute the complete-ports paper; select or create `portcaps` instead if prototype validation is the
 priority.

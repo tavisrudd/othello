@@ -3,9 +3,9 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-17
-**Status**: ACTIVE; C277 LANE SPLIT COMPLETE; PRIVATE PAPER RENAME READY / PUBLIC EXPORT GATED
+**Status**: ACTIVE; C279 PRIVATE IDENTITY MIGRATION COMPLETE; C280 SIX-PART ASSEMBLY QUEUED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
-**Current private paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
+**Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
 Reliability, and Geometric Structure*
 
@@ -26,10 +26,11 @@ names remain unchanged. Future manuscript, clean-export, citation, and paper-rel
 
 Completed preparation:
 
-- [C274 theorem/evidence crosswalk](../2026-07-17-c274-complete-port-manuscript-crosswalk.md);
-- [C275 clean-room publication boundary](../2026-07-17-c275-m1-publication-boundary-manifest.md)
-  and [allowlist](../2026-07-17-c275-m1-publication-allowlist.tsv); and
+- [C274 theorem/evidence crosswalk](../2026-07-17-c274-complete-ports-manuscript-crosswalk.md);
+- [C275 clean-room publication boundary](../2026-07-17-c275-complete-ports-publication-boundary.md)
+  and [allowlist](../2026-07-17-c275-complete-ports-publication-allowlist.tsv); and
 - [C276 paper-only rename census](../2026-07-17-c276-complete-ports-rename-census.md).
+- [C279 private identity migration](../2026-07-17-c279-complete-ports-identity-migration.md).
 
 ## Publication boundary
 
@@ -47,11 +48,10 @@ generic tract/foundation exposition. C220 remains an explicit inclusion decision
 
 ## Next step
 
-Allocate the next global C-ID in `complete-ports` and execute C276's paper-only identity migration:
-rename the private paper directory and TeX/PDF stem, C274/C275 artifacts, and expert profile; update
-M1/M2 paper shorthand, registries, links, build commands, and the C275 allowlist; preserve every
-historical `repaircodes` peg and Lean namespace. Rebuild the PDF only after the renamed source and
-new section skeleton are ready.
+Execute C280: assemble the six-part manuscript in the renamed private package. Integrate the
+reliability/bounded-EXIT, pointed-Tutte, and quartic-nucleus/harmonic sections from their exact
+evidence owners; compress and reorder the retained cubic, transfer, and prescribed-realization
+material; then synchronize the proof ledger, novelty boundary, README, citations, and rebuilt PDF.
 
 Public export remains gated on the complete-ports repository name/local destination/public remote,
 license, and C220 decision. The private rename does not authorize repository initialization, copy,

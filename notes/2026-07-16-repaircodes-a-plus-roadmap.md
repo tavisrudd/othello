@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-16
 **Lanes:** `repaircodes` (bounded manuscript upgrade), `repairports` (stand-alone follow-up)
-**Source paper:** [`coding-repair-hypergraphs`](../papers/coding-repair-hypergraphs/README.md)
+**Source paper:** [`complete-repair-ports`](../papers/complete-repair-ports/README.md)
 
 ## Executive verdict
 

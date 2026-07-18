@@ -1,4 +1,4 @@
-# Expert profile — complete repair hypergraphs under concatenation
+# Expert profile — complete bounded repair ports
 
 **Prepared:** 2026-07-15<br>
 **Affiliations verified:** 2026-07-15 from the linked institutional or personal pages.<br>
@@ -9,12 +9,14 @@ manuscript and the person's public research record, not quotations or claims abo
 
 ## Paper spine and venue fit
 
-The paper has two coupled spines:
+The paper has six coupled components:
 
-1. exact matching/transversal data for the *complete* bounded repair hypergraph of the
-   characteristic-three twisted-cubic--axis code, including `tau > nu` at every coordinate; and
-2. an exact concatenation theorem that transfers every bounded dual-support repair, not merely
-   locality or a selected recovery family, followed by fixed-alphabet asymptotic families.
+1. the complete bounded repair port and its support, coefficient, and probability layers;
+2. exact weighted-functional transfer and its pointed confinement boundary;
+3. prescribed positive-density realization in asymptotically good fixed-alphabet families;
+4. reliability and radius-truncated EXIT;
+5. the full-port pointed-Tutte/perspective structure; and
+6. cubic versus quartic-nucleus/harmonic flagships.
 
 The natural first audience is **Designs, Codes and Cryptography** or **Advances in Mathematics of
 Communications**. **Finite Fields and Their Applications** becomes plausible if the finite-field

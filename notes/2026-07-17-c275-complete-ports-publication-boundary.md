@@ -1,8 +1,8 @@
-# C275 M1 clean-room publication boundary
+# C275 complete-ports clean-room publication boundary
 
 **Lane:** `complete-ports` (re-pegged from `repaircodes` by the explicit C277 lane split)
 
-**Status:** COMPLETE — a deny-by-default M1 source/evidence allowlist and fail-closed export design
+**Status:** COMPLETE — a deny-by-default complete-ports source/evidence allowlist and fail-closed export design
 are frozen. No repository was initialized, no file was copied, and no Lean/build artifact was
 touched. Publication remains blocked on the paper repository identity/remote, a user-selected
 license, the final C220 inclusion decision, public rewrites of README/proof/evidence ledgers, and the
@@ -19,9 +19,9 @@ This rule is motivated by content scope, not merely credentials: the monorepo co
 handoffs, archives, unrelated papers, generated evidence, and work that the user does not want
 published. A secret scan cannot convert an unallowlisted file into a publication candidate.
 
-## Machine-readable M1 boundary
+## Machine-readable complete-ports boundary
 
-[`2026-07-17-c275-m1-publication-allowlist.tsv`](2026-07-17-c275-m1-publication-allowlist.tsv) is
+[`2026-07-17-c275-complete-ports-publication-allowlist.tsv`](2026-07-17-c275-complete-ports-publication-allowlist.tsv) is
 the complete v1 map. Its actions have exact meanings:
 
 - `copy`: byte-exact candidate input permitted after the final source hash is frozen;
@@ -63,7 +63,7 @@ The following remain forbidden unless a later manifest names an exact replacemen
 
 1. Choose the paper repository name, disk-backed staging path, public host/remote, visibility, and
    license. The destination must be new and empty; never place staging under `/tmp`.
-2. Freeze the M1 manuscript/evidence selection. Resolve every `conditional` row and update the TSV
+2. Freeze the complete-ports manuscript/evidence selection. Resolve every `conditional` row and update the TSV
    in the private source repository before copying anything.
 3. Record SHA-256 and byte count for every `copy` source. An exporter must parse the TSV and accept
    only exact `copy` rows; missing sources, duplicate destinations, path traversal, symlinks,
@@ -97,7 +97,7 @@ closures and explicitly reviewed additions such as shared build wrappers, toolch
 licenses, and public documentation. The closure, not the private `lean/` directory, is the export
 unit.
 
-M1 initially requests paper-facing targets `RepairCodes` and `RepairPorts.FunctionalCost`; the
+The complete-ports paper initially requests paper-facing targets `RepairCodes` and `RepairPorts.FunctionalCost`; the
 shared-export owner must replace these logical targets with the exact public module closure and
 public aggregate gates. C216's manuscript-only asymptotic steps remain identified as such rather
 than being implied by a Lean pin.
@@ -121,7 +121,7 @@ shared Lean edit.
 
 ## Next gates
 
-M1 can proceed after the user supplies or approves its repository identity/remote and license, then
+The complete-ports paper can proceed after the user supplies or approves its repository identity/remote and license, then
 decides whether C220 remains. In parallel, the global all-papers Lean export needs a separately
 lane-pegged task coordinating build-system ownership and existing public-`FiniteGeom` extraction
 work. Every other paper gets its own deny-by-default manifest before export.

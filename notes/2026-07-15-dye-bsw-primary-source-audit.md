@@ -67,7 +67,7 @@ For the Clebsch six-arc `A` and its associated conic `C` over `F_11`:
   interpretation remains Nofil-owned.
 - [x] `papers-index.md` and `papers-planning.md`: historical priority separated from internal
   publication ownership; proof architecture and result rows updated.
-- [x] `coding-repair-hypergraphs`, completion/continuation, dihedral, and cubic materials reviewed:
+- [x] `complete-repair-ports`, completion/continuation, dihedral, and cubic materials reviewed:
   no relevant claim uses this geometry, so no decorative citation added.
 - [x] Excluded by instruction and untouched: Baer-equivariant extension, alternate-orbit repair
   extensions, and all gems/gem-mining materials.

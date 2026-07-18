@@ -8,7 +8,7 @@ forms to a uniform equality and first-stability theorem over every `F_3^h`.
 **Successor:** [`rp-next`](../2026-07-16-rp-next.md)
 **Roadmap:**
 [`2026-07-16-repaircodes-a-plus-roadmap.md`](../../2026-07-16-repaircodes-a-plus-roadmap.md)
-**Parent paper:** [`coding-repair-hypergraphs`](../../../papers/coding-repair-hypergraphs/README.md)
+**Parent paper:** [`complete-repair-ports`](../../../papers/complete-repair-ports/README.md)
 **Discovery log:**
 [`2026-07-16-repairports-discovery-track.md`](../../2026-07-16-repairports-discovery-track.md)
 
@@ -42,7 +42,7 @@ require a separately allocated task if resumed.
 
 While live, this lane owned its handoff, roadmap, C215--C220 reports and explicitly named artifacts,
 future `papers/repair-ports-*` packages, and future `lean/RepairPorts/` modules. It did not own the
-current `coding-repair-hypergraphs` paper or the `lean/RepairCodes/` theorem chain; those remained
+current `complete-repair-ports` paper or the `lean/RepairCodes/` theorem chain; those remained
 with `repaircodes` unless the user explicitly moved a deliverable.
 
 ## Boundaries retained for the record

@@ -80,7 +80,7 @@ The optimal theorem spine is:
 6. use the twisted-cubic and quartic-nucleus families as contrasting infinite flagships.
 
 The local sources are the existing
-[`coding-repair-hypergraphs`](../papers/coding-repair-hypergraphs/README.md) manuscript and
+[`complete-repair-ports`](../papers/complete-repair-ports/README.md) manuscript and
 [C215](2026-07-16-c215-functional-cost-api.md),
 [C216](2026-07-16-c216-prescribed-port-realization.md),
 [C218](2026-07-16-c218-quartic-nucleus-repair.md),

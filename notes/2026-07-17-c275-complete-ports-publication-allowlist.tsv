@@ -1,14 +1,14 @@
-# schema: c275-m1-publication-allowlist-v1
+# schema: c275-complete-ports-publication-allowlist-v1
 # action<TAB>source-in-private-monorepo<TAB>destination-in-new-paper-repo<TAB>gate-or-role
-copy	papers/coding-repair-hypergraphs/complete_repair_hypergraphs.tex	paper/main.tex	rewrite-in-public-repo-after-byte-exact-export
-copy	papers/coding-repair-hypergraphs/refs.bib	paper/refs.bib	citation-audit-required
-rewrite	papers/coding-repair-hypergraphs/README.md	README.md	public-status-and-build-only; never copy private paths/status
-rewrite	papers/coding-repair-hypergraphs/proof_ledger.md	formal/PROOF_LEDGER.md	public claim/evidence ledger only
-exclude	papers/coding-repair-hypergraphs/adversarial_novelty_review.md	-	internal review record
+copy	papers/complete-repair-ports/complete_repair_ports.tex	complete_repair_ports.tex	rewrite-in-public-repo-after-byte-exact-export
+copy	papers/complete-repair-ports/refs.bib	refs.bib	citation-audit-required
+rewrite	papers/complete-repair-ports/README.md	README.md	public-status-and-build-only; never copy private paths/status
+rewrite	papers/complete-repair-ports/proof_ledger.md	formal/PROOF_LEDGER.md	public claim/evidence ledger only
+exclude	papers/complete-repair-ports/adversarial_novelty_review.md	-	internal review record
 generate	-	LICENSE	user-selected license required before publication
 generate	-	CITATION.cff	paper metadata and authorship review required
 generate	-	formal/LEAN_REVISION	pin exact commit of all-papers shared Lean monorepo
-generate	-	formal/TARGETS.txt	M1 paper-facing shared-Lean targets and gates
+generate	-	formal/TARGETS.txt	complete-ports paper-facing shared-Lean targets and gates
 generate	-	formal/PROVENANCE.sha256	hash every copied/generated public input
 copy	notes/2026-07-13-projective-completion-verifier.py	evidence/2026-07-13-projective-completion-verifier.py	dependency of C202/C218
 copy	notes/2026-07-15-c202-repair-extremizers.py	evidence/2026-07-15-c202-repair-extremizers.py	dependency of C219/C227/C244
@@ -28,4 +28,4 @@ copy	notes/2026-07-17-c243-nucleus-gated-separation-vet.json	evidence/2026-07-17
 copy	notes/2026-07-17-c244-exact-consequence-pack.py	evidence/2026-07-17-c244-exact-consequence-pack.py	exact consequence pack
 copy	notes/2026-07-17-c244-exact-consequence-pack.json	evidence/2026-07-17-c244-exact-consequence-pack.json	committed deterministic certificate
 generate	-	evidence/README.md	public replay commands, conventions, boundaries, hashes
-generate	-	paper/main.pdf	release artifact only; exclude from Git unless user policy says otherwise
+generate	-	complete_repair_ports.pdf	release artifact only; exclude from Git unless user policy says otherwise

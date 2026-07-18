@@ -1,19 +1,19 @@
-# C274 complete-port manuscript crosswalk
+# C274 complete-ports manuscript crosswalk
 
 **Lane:** `complete-ports` (re-pegged from `repaircodes` by the explicit C277 lane split)
 
-**Status:** COMPLETE — the M1 theorem spine, exclusions, evidence owners, section destinations, and
+**Status:** COMPLETE — the complete-ports paper theorem spine, exclusions, evidence owners, section destinations, and
 keep/replace/move/delete audit are frozen. No paper prose was edited. The user selected separate
 new repositories for the papers and a new shared Lean monorepo backing every exported paper under
-`papers/`, not only M1 and M2. The current
+`papers/`, not only the complete-ports and restoration-semantics papers. The current
 monorepo contains substantial nonpublication material and must never be published or exported by
 history transplant; every new repository requires a deny-by-default, clean-history allowlist.
 
 ## Decision at a glance
 
-The existing manuscript is a sound evidence-bearing base, but it is not yet the M1 paper. Its 18
+The existing manuscript is a sound evidence-bearing base, but it is not yet the complete-ports paper. Its 18
 numbered definition/theorem/proposition/corollary environments are organized around the original
-cubic seed, exact concatenation transfer, and two q=9 asymptotic lifts. M1 adds three currently
+cubic seed, exact concatenation transfer, and two q=9 asymptotic lifts. The complete-ports paper adds three currently
 absent structural sections—reliability/bounded EXIT, the pointed-Tutte identification, and the
 quartic-nucleus/harmonic flagship—and replaces the specific-lift thesis by the prescribed-port
 realization theorem.
@@ -23,7 +23,7 @@ exposing the formal theorem base needed by all of them. These are clean-room pub
 not forks of the monorepo: do not copy `.git`, publish monorepo history, or start from a broad tree
 copy. Until an allowlisted export is verified, this monorepo remains the sole authoritative source.
 The old cubic and projective-completion results remain as compressed flagship and strict-transfer
-examples, not as M1's organizing narrative.
+examples, not as the complete-ports paper's organizing narrative.
 
 ## Frozen scope
 
@@ -45,7 +45,7 @@ threshold programme.
 
 ## Theorem and evidence crosswalk
 
-| M1 slot | Retained statement | Exact owner and evidence | Current manuscript locus | Frozen action and destination |
+| Complete-ports slot | Retained statement | Exact owner and evidence | Current manuscript locus | Frozen action and destination |
 |---|---|---|---|---|
 | Object | Complete radius-`r` pointed repair hypergraph/port, minimal clutter, matching, transversal, scalar recovery layer | proof-ledger D1/P1 and D1a/C203; `FiniteGeom/Repair.lean`; `RepairCodes/OperationalCoefficients.lean`; C203 report/verifier | `def:repair-hypergraph`, `prop:basic-hypergraph`, Sections 2--4 | **KEEP/EXPAND** as Section 2. Lead with the complete pointed object; separate support, coefficient, and probability layers. Retain the operational boundary: one full symbol per helper, no minimum-access/bandwidth claim. |
 | Exact transfer | Exact zero/singleton/multisupport threshold; pointed nonembedded cost; weighted transfer; strict Singer/generalized-SPC example | C214/C221/C224 and proof-ledger T5w/T5x/T5e; `RepairCodes/WeightedTransfer*.lean`; C215 functional-cost API and prior-art audit | Section `sec:transfer`, `thm:weighted-transfer`, `thm:transfer`, `cor:exact-locality-transfer`, strict example | **KEEP/RESTATE** as Section 3. Present pointed confinement as the repair contribution. State that ordinary functional-fiber cost is classical quotient/coset-leader weight. Keep the strict natural example; demote generic fiber enumeration to cited background. |
@@ -106,11 +106,11 @@ The rewrite must preserve these claim ceilings:
   sets;
 - q=9 finite checks do not imply all-field statements;
 - harmonic consequences do not imply a threshold theorem; and
-- no storage-performance, service-region, or product claim enters M1 without new evidence.
+- no storage-performance, service-region, or product claim enters the complete-ports paper without new evidence.
 
 ## Next gate
 
-The architecture is selected; the publication boundary is now the gate. C275 must produce the M1
+The architecture is selected; the publication boundary is now the gate. C275 must produce the complete-ports paper
 clean-room export manifest before any repository is initialized or any file is copied. It must list
 every permitted paper source, bibliography entry set, evidence artifact, license/attribution file,
 and shared-Lean API dependency, plus explicit exclusions. It must also prescribe fresh Git history,

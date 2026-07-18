@@ -77,15 +77,14 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
   by the publication-allocation ruling below, but is mathematically self-contained; the remaining
   operational gate is an immutable artifact release.
 
-**5 · Complete repair hypergraphs: exact transfer under concatenation** *(conditional)* —
-`coding-repair-hypergraphs`
-- *What:* exact matching/transversal profiles for a twisted-cubic–axis seed, exact blockwise
-  transfer of the complete bounded repair hypergraph, and fixed-alphabet q9 families. The punctured
-  rate-`2/19` family is primary; the rate-`1/10` projective completion is a radius-four comparison.
-- *Gate:* the 17-page manuscript, independent verifier, internal adversarial/prose reviews, and
-  focused strict-trust Lean gates are complete. Submission still requires the external specialist
-  citation-chain review, an immutable artifact release, and the final post-C203 aggregate
-  `RepairCodes` rebuild deferred behind Q25; none is a known theorem gap.
+**5 · Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure** *(conditional)* —
+`complete-repair-ports`
+- *What:* the complete bounded port and its support/coefficient/probability layers, exact
+  weighted-functional transfer, prescribed realization, reliability/EXIT, pointed-Tutte
+  structure, and cubic versus quartic-nucleus/harmonic flagships.
+- *Gate:* the private identity migration and six-part assembly skeleton are complete. Manuscript
+  assembly of the three new structural sections, the external specialist citation-chain review,
+  an immutable artifact release, and the final post-C203 aggregate `RepairCodes` rebuild remain.
 
 **6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
@@ -427,8 +426,8 @@ Post-review dispositions:
   projection) is the live prize. Follow-up: `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`
   (C115–C120); writeup task C119.
 
-- **Coding / LRC → Paper 5 assembled and internally audited.** `coding-repair-hypergraphs/` contains
-  the 17-page manuscript, PDF, independent verifier, proof ledger, and adversarial novelty report.
+- **Coding / LRC → Paper 5 under six-part assembly.** `complete-repair-ports/` contains
+  the private manuscript, PDF, independent verifier, proof ledger, and adversarial novelty report.
   `RepairCodes` proves the exact complete-hypergraph transfer theorem, trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed
   eventual distance bound `c<39/190`, plus a bundled exact coordinate distribution, mixed

@@ -20,7 +20,7 @@ deep dependency is the quarantined
 Stichtenoth self-dual TVZ theorem (arXiv:math/0506264, Theorem 1.6(ii)).  The asymptotic strict-gate
 review is [recorded separately](../2026-07-13-repaircodes-asymptotic-adversarial-review.md).
 The assembled manuscript, PDF, proof ledger, and adversarial novelty report are in
-[`papers/coding-repair-hypergraphs/`](../../papers/coding-repair-hypergraphs/). The internal
+[`papers/complete-repair-ports/`](../../papers/complete-repair-ports/). The internal
 novelty audit returns the repair-tolerance invariant to explicit prior art and retains only
 cautious candidate claims for the exact all-symbol `(ν,τ)` separation and complete-hypergraph
 transfer. It now also includes the projectively completed `[2q+2,4,q]_q` seed, its exact full
@@ -32,7 +32,7 @@ parameters, and rate/distance arithmetic are classified as classical or derived;
 completed repair rows and bounded transfer retain cautious none-found candidate wording. An
 external specialist citation-chain review remains a submission preflight gate.
 The synchronized theorem/source/build checklist is maintained in
-[`proof_ledger.md`](../../papers/coding-repair-hypergraphs/proof_ledger.md); every internal box is
+[`proof_ledger.md`](../../papers/complete-repair-ports/proof_ledger.md); every internal box is
 checked, with only that external review left open.
 Session-by-session narrative lives in the
 [archive companion](done/2026-07-11-lean-formalization-plan-archive.md).

@@ -1,9 +1,9 @@
-# Paper: complete repair hypergraphs
+# Paper: complete bounded repair ports
 
-**Working title:** *Complete repair hypergraphs: exact transfer under
-concatenation. A twisted-cubic--axis family.* Author: Tavis Rudd.
+**Working title:** *Complete Bounded Repair Ports: Transfer, Reliability, and
+Geometric Structure.* Author: Tavis Rudd.
 
-**Status:** assembled manuscript. The original seed, support-distance transfer, and asymptotic
+**Status:** private identity migration and six-part section skeleton complete. The original seed, support-distance transfer, and asymptotic
 chain are Lean-checked under the strict trust gate, modulo exactly one quarantined literature
 theorem: Stichtenoth's self-dual TVZ-family theorem, specialized to `GF(6561)`. C214's weighted
 transfer implication is also kernel-checked. C221 kernel-checks the exact three-stratum partition,
@@ -13,7 +13,8 @@ distance five, weighted distance at least six, coordinate surjectivity, and radi
 also checked. Singer's classical regular-action theorem and the classical enumerator identity are
 explicitly cited inputs rather than manuscript proof gaps. The internal adversarial novelty review records what is
 and is not defensible as new. An external
-specialist citation-chain review remains a submission preflight gate.
+specialist citation-chain review remains a submission preflight gate. Reliability/EXIT,
+pointed-Tutte, and harmonic-flagship prose still require full manuscript assembly.
 
 ## Headline
 
@@ -65,7 +66,7 @@ relative-distance bound `c<351/1600`. Only the bounded radius-four port transfer
 
 ## Files
 
-- `complete_repair_hypergraphs.tex` / `.pdf` — manuscript and built artifact.
+- `complete_repair_ports.tex` / `.pdf` — manuscript and built artifact.
 - `refs.bib` — bibliography.
 - `proof_ledger.md` — claim-by-claim paper/Lean/import ledger.
 - `adversarial_novelty_review.md` — collision search and final novelty posture.
@@ -101,7 +102,7 @@ relative-distance bound `c<351/1600`. Only the bounded radius-four port transfer
 From this directory:
 
 ```sh
-nix shell nixpkgs#tectonic -c tectonic complete_repair_hypergraphs.tex
+nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
 ```
 
 From `lean/`:

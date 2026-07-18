@@ -16,7 +16,7 @@ willing, independent, or suitable under a particular journal's conflict policy.
 | 2 | Dihedral Schreier Node Kayles | `02-dihedral-schreier-node-kayles.md` |
 | 3 | Arcs complete outside a prescribed conic: An exact defect identity and ρ_𝒞(16) = 9 | `03-arcs-complete-outside-conic.md` |
 | 4 | Clebsch hexagon code | `04-clebsch-hexagon-code.md` |
-| 5 | Complete repair hypergraphs | `05-coding-repair-hypergraphs.md` |
+| 5 | Complete bounded repair ports | `05-complete-repair-ports.md` |
 | 6 | Frobenius-equivariant pair extension | `06-equivariant-robust-completion.md` |
 | 7 | Continuation-graph rigidity | `07-continuation-graph-rigidity.md` |
 

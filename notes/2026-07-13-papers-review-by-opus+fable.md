@@ -284,7 +284,7 @@ re-introduction:
 
 ## Verification
 
-Spot-checked against source: `complete_repair_hypergraphs.tex` L95–115 + novelty posture L155–169
+Spot-checked against the then-current source, now `complete_repair_ports.tex`: L95–115 + novelty posture L155–169
 (confirmed the PHO 2013 attribution and the narrowed novelty claim);
 `completion-core-rigidity-upgrades.md` §6.5 L746–760 (confirmed the off-cubic external-point
 definition, disjoint from coding's on-configuration τ); `arcs_complete_outside_conic.tex` abstract

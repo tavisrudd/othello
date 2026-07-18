@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C278.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C280.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -52,7 +52,7 @@ unless they retain an explicit open tail.
 
 ### `complete-ports`
 
-- No open tasks; C277 completed the lane split, and the focused handoff owns the next paper-identity migration.
+- **C280 `[complete-ports]` [QUEUED]** — assemble the six-part complete-ports manuscript: integrate reliability/bounded EXIT, pointed-Tutte structure, and the quartic-nucleus/harmonic flagship, then compress and reorder the retained cubic/transfer/realization material → `notes/2026-07-17-c280-complete-ports-six-part-assembly.md`.
 
 ### `continuation`
 

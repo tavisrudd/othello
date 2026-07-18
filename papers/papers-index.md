@@ -71,18 +71,16 @@ defect identity and ρ_𝒞(16) = 9*
   low-degree characterizations, gaps, decoding/support-bipartition structure, and finite-field boundary.
   *Added 2026-07-13, after the Fable decomposition ruling, so not among its five+1.*
 
-**5 · `coding-repair-hypergraphs`** — Complete repair hypergraphs: exact transfer under
-concatenation. A twisted-cubic–axis family
-- *Status:* self-contained 17-page manuscript + PDF + independent verifier + proof/novelty
-  ledgers + strict-trust Lean formalization. Internal adversarial and paragraph-level prose reviews
-  are complete. The remaining submission gates are an external specialist citation-chain review,
-  an immutable artifact release, and the final post-C203 aggregate `RepairCodes` rebuild currently
-  deferred behind Q25.
-- *Headline:* the primary `[19,4,8]₉` punctured seed has three exact coordinate profiles and gives
-  a q9 family of rate `2/19` with every fixed eventual distance bound `c<39/190`; a completed
-  `[20,4,9]₉` comparison transfers through radius four and gives rate `1/10` with every fixed
-  bound `c<351/1600`. The exact complete bounded repair hypergraph transfers blockwise under the
-  stated inner- and outer-dual gates.
+**5 · `complete-repair-ports`** — Complete Bounded Repair Ports: Transfer, Reliability, and
+Geometric Structure
+- *Status:* private manuscript renamed and six-part assembly skeleton established; its theorem,
+  computation, proof/novelty-ledger, and strict-trust Lean evidence base is retained. The new
+  reliability/EXIT, pointed-Tutte, and harmonic-flagship sections still require manuscript
+  assembly before submission preflight.
+- *Headline:* complete bounded repair ports unify support, coefficient, and probability layers;
+  exact weighted-functional transfer and prescribed realization connect the local object to
+  asymptotically good families; reliability/EXIT and pointed-Tutte structure culminate in a cubic
+  versus quartic-nucleus/harmonic comparison.
 - *Trust and scope:* all finite, transfer, trace-duality, coefficient, and asymptotic-reduction
   arguments are kernel-checked; the asymptotic families additionally use exactly the quarantined
   Stichtenoth self-dual TVZ theorem. Coefficients certify a direct one-symbol-per-helper scalar
@@ -151,10 +149,10 @@ repositories: an evidence-based essay and practical how-to
   scholarly-artifact gate is a stable, citable archive identifier for the source supplement; the
   shared release policy still requires the verbatim Lean adequacy appendix and explicit
   AI/provenance disclosure.
-- **Complete 17-page LaTeX manuscript (+ PDF + independent verifier + proof/novelty ledgers +
-  strict-trust Lean package):** `coding-repair-hypergraphs` — internal adversarial and prose audits
-  complete; specialist citation-chain review, immutable artifact release, and the deferred final
-  post-C203 aggregate rebuild remain submission preflight gates.
+- **Private LaTeX manuscript under six-part assembly (+ PDF + independent verifier + proof/novelty
+  ledgers + strict-trust Lean package):** `complete-repair-ports` — identity migration is complete;
+  structural-section assembly, specialist citation-chain review, immutable artifact release, and
+  the deferred final post-C203 aggregate rebuild remain submission preflight gates.
 - **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
   `clebsch-hexagon-code` — the 19-page paper cites eleven fail-closed Python replays and one Singular
   calculation. Eleven named Lean roots cover the syndrome conic, `A₅` orbits, decoding and the
@@ -228,7 +226,7 @@ Key computational results and proven lemmas/theorems, mapped to their paper and 
 `dihedral-schreier-node-kayles`; `arcs` = `arcs_complete_outside_conic`; `baer` =
 `equivariant-robust-completion`; `completion` is library-only; `continuation` =
 `continuation-graph-rigidity`; `queens-n18` = `non-formal-bloggy/queens-n18`; `oeis:*` =
-`oeis-submissions/*`; `coding` = `coding-repair-hypergraphs`; `clebsch` = `clebsch-hexagon-code`.
+`oeis-submissions/*`; `complete-ports` = `complete-repair-ports`; `clebsch` = `clebsch-hexagon-code`.
 
 **Proof-location key:** `lean <file>:<line> <ident>` = formalized, `sorry`-clean (paths under
 `lean/`); `paper §N` = proven in that manuscript; `note <file>` = proven in a research note

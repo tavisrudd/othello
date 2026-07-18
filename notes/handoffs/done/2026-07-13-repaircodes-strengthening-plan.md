@@ -4,7 +4,7 @@
 **Status**: COMPLETE. C104 and C105 are reported; their Lean, paper, trust, novelty, registry, and
 build gates pass.
 **Parent track**: [completed RepairCodes formalization](../2026-07-11-lean-formalization-plan.md)
-**Paper**: [`coding-repair-hypergraphs`](../../../papers/coding-repair-hypergraphs/README.md)
+**Paper**: [`complete-repair-ports`](../../../papers/complete-repair-ports/README.md)
 
 ## Goal and strict ledger
 

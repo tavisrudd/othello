@@ -36,8 +36,8 @@
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\Span}{\operatorname{span}}
 
-\title{Complete repair hypergraphs: exact transfer under concatenation\\
-\large A twisted-cubic--axis family}
+\title{Complete Bounded Repair Ports:\\
+\large Transfer, Reliability, and Geometric Structure}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -135,41 +135,22 @@ one additional repair radius at a modest rate cost.
 
 \subsection*{Contributions}
 
-\begin{table}[ht]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}
-  >{\raggedright\arraybackslash}X
-  >{\raggedright\arraybackslash}p{0.28\textwidth}@{}}
-\toprule
-result & mechanism & payoff \\
-\midrule
-Explicit seed
-& Complete small-circuit classification; cap-set reduction for axis
-  coordinates and a rainbow matching for cubic coordinates
-& Exact all-symbol rows with $\tau_x>\nu_x$ for $q\geq9$; three concrete
-  field-nine profiles \\
-Exact transfer
-& Exact inner-coset realization weights; a Singer-cycle generalized
-  single-parity-check example beyond the support-distance gate
-& Exact block- and witness-confinement thresholds and a sufficient criterion
-  for equality of every complete bounded repair hypergraph, hence
-  preservation of all its invariants \\
-Fixed-alphabet synthesis
-& Trace duality and a self-dual TVZ outer family
-& Unbounded $\F_9$ families with positive rate and distance and exact
-  blockwise repair profiles; a radius-four completed comparison \\
-\bottomrule
-\end{tabularx}
-\caption{The theorem hierarchy: explicit seed, reusable transfer theorem,
-and asymptotic synthesis.}
-\label{tab:contributions}
-\end{table}
-
-Sections~\ref{sec:repair}--\ref{sec:projective-completion} develop the first
-row of Table~\ref{tab:contributions}.  Sections~\ref{sec:transfer}--\ref{sec:asymptotic}
-prove the transfer mechanism, connect its functional hypothesis to ordinary
-dual distance, and derive the headline and comparison families.
+The manuscript is organized around six linked components:
+\begin{enumerate}
+\item the complete bounded repair port and its support, coefficient, and
+  probability layers;
+\item exact weighted-functional transfer and its pointed confinement boundary;
+\item prescribed positive-density realization in asymptotically good
+  fixed-alphabet families;
+\item reliability, cheapest-radius transforms, and radius-truncated BEC EXIT;
+\item the full-port pointed-Tutte/perspective identification and the boundary
+  of the radius filtration; and
+\item cubic versus quartic-nucleus/harmonic geometric flagships.
+\end{enumerate}
+The present private assembly retains the complete proofs of the earlier
+cubic, transfer, and fixed-alphabet results.  The reliability, pointed-Tutte,
+and harmonic sections below mark the exact structural destinations for the
+next manuscript assembly pass.
 
 \subsection*{Scope of the contribution}
 
@@ -180,7 +161,7 @@ point system, and equality of its \emph{complete} bounded repair hypergraph
 under an outer-dual gate.  Section~\ref{sec:prior} gives the detailed
 comparison with adjacent work.
 
-\section{Complete bounded repair hypergraphs}
+\section{Complete bounded repair ports}
 \label{sec:repair}
 
 Let $C\leq\F_q^X$ be a linear code on a finite coordinate set $X$, with
@@ -1056,8 +1037,10 @@ is exact because $5<6$, although the support-distance corollary fails its requir
 functional distance six.  This supplies a nondegenerate strict example
 using the paper's flagship inner geometry and a classical MDS outer code.
 
-\section{The trace bridge and the field-nine lift}
+\section{Prescribed positive-density realization}
 \label{sec:trace}
+
+\subsection{The trace bridge and the field-nine lift}
 
 Let $L/\F$ be a finite separable extension and let $O\leq L^J$ be an
 $L$-linear outer code.  Restricting scalars makes each outer symbol an
@@ -1153,7 +1136,7 @@ Theorem~\ref{thm:completed-port}.  As in Corollary~\ref{thm:transfer}, the
 conclusion concerns the radius-four repair hypergraph.
 \end{proof}
 
-\section{A fixed-alphabet asymptotic family}
+\subsection{Concrete fixed-alphabet asymptotic families}
 \label{sec:asymptotic}
 
 We require one deep existence theorem.
@@ -1281,6 +1264,37 @@ every fixed $c$ in the displayed range is eventually a strict lower bound on
 relative distance.}
 \label{tab:family-comparison}
 \end{table}
+
+\section{Reliability and bounded EXIT}
+\label{sec:reliability-exit}
+
+For a pointed repair port, independent helper survival turns the complete
+support layer into a reliability polynomial, while differentiating with
+respect to helper survival probabilities records coordinate influences.
+The bounded-radius filtration retains cheapest-radius information that the
+full reliability polynomial forgets.  This section is the assembly
+destination for the exact deletion--contraction, target-conditioned failure,
+and radius-truncated BEC EXIT results.
+
+\section{Pointed Tutte structure and the radius-filtration boundary}
+\label{sec:pointed-tutte}
+
+At full radius, repair reliability is governed by the pointed matroid
+perspective obtained from deletion and contraction at the target coordinate.
+The standard perspective polynomial captures the unfiltered full-port
+structure; the bounded-radius port is a filtered refinement and is not
+recovered from that polynomial alone.  This section is the assembly
+destination for the precise identification, duality, and filtration boundary.
+
+\section{Geometric flagships: cubic and quartic-nucleus ports}
+\label{sec:flagships}
+
+The cubic and completed-cubic results proved above form the first flagship.
+The second compares them with the quartic normal-rational-curve port with its
+nucleus, using exact radius-four circuits, reliability transforms, and the
+deterministic nucleus gate.  The final assembly will compress the earlier
+cubic derivation into this comparison rather than presenting a third
+independent geometric thesis.
 
 \section{Relation to prior work}
 \label{sec:prior}

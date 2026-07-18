@@ -1,7 +1,6 @@
 # Proof and claim ledger
 
-**Paper:** *Complete repair hypergraphs: exact transfer under concatenation.
-A twisted-cubic--axis family.*
+**Paper:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure.*
 
 **Ledger rule:** every mathematical assertion promoted to theorem/corollary status in the paper
 must appear below with its exact formal boundary. Context and novelty claims are listed separately
