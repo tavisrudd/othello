@@ -109,10 +109,12 @@ Read [the C151 report](../2026-07-14-c151-q25-minimum-classification.md) § "Res
 certification" before touching the residual layer; it records why the fast evaluator exists and two
 approaches that are ruled out.
 
-1. Prove exhaustion: every normalized row attaining 32 lies in `minimumOrbitUnion`. This is work on
-   the residual-cover side; `isMinimumResidualClass_iff_mem_minimumOrbitUnion` already turns the
-   goal into a membership statement. The report's "Current next step" fixes the design and names the
-   two reuse facts that keep it off the frozen checker cores.
+1. Prove exhaustion: every normalized row attaining 32 lies in `minimumOrbitUnion`. The reductions
+   are checked in `Q25ExhaustionBridge.lean`, so the remaining work is generated bulk in two layers:
+   `33 ≤ (maskOrbitSet allowed).card` for the 1,184 non-minimizer classes, reusing each committed
+   class certificate's threshold-free fields; and a per-row conclusion tree over the 46,056
+   normalized rows feeding `mem_minimumOrbitUnion_of_card_eq_32`. Expect a build cost comparable to
+   the `≥ 32` dispatch tree — that measurement is what C319 is gated on.
 2. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
    the complete semantic theorem passes.
 

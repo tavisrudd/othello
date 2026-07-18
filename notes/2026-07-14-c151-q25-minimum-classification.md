@@ -685,3 +685,34 @@ The design is fixed by what is already committed, and needs no change to any fro
 The resulting per-row terminal is a disjunction,
 `33 ≤ (legalOrbitSet (rowConfig b c)).card ∨ IsMinimumResidualClass (rowConfig b c)`, which closes
 exhaustion against `isMinimumResidualClass_iff_mem_minimumOrbitUnion`.
+
+### Exhaustion bridge (2026-07-18)
+
+`Q25ExhaustionBridge.lean` carries that design as kernel-checked lemmas, so what remains for
+exhaustion is generated bulk rather than open mathematics.
+
+| Terminal | Statement |
+|---|---|
+| `card_legalOrbitSet_ge_of_sound` | sound mask bits inject into the legal set at a free threshold `n` |
+| `ValidRowPayload.residualMapsTo_canonical` | a checked transport is a residual-action element, so its row maps to the canonical representative |
+| `isMinimumResidualClass_of_transport` | a payload naming one of the five representatives places its row in that class |
+| `mem_minimumOrbitUnion_of_card_eq_32` | the per-row disjunction plus `card = 32` yields membership in the `1600`-element union |
+
+Replay, from `/home/tavis/src/othello/lean`:
+
+```sh
+scripts/lean-build-queue.py run RelativeConicArcs.Q25ExhaustionBridge \
+  --profile single --threads 1 --cores 20-23
+```
+
+Exit status `0` at `0:08.59` wall and `3,403,736 kB` peak RSS
+(`run-20260718-235047-fa24d2d4`), followed by a passing trace-only aggregate gate. Source SHA-256
+`70ddc85cdbec74538b8ac859ad3de72451affb3fc0be089b8fadd31ecd197bbc`, `4,198` bytes. The axiom profile
+of all four terminals is `[propext, Classical.choice, Quot.sound]` with no `sorryAx`.
+
+The module contains no `decide` and no generated data; it states the reductions only. What remains
+is the two generated layers: `33 ≤ (maskOrbitSet allowed).card` for the `1,184` non-minimizer
+classes, and a per-row conclusion tree over the `46,056` normalized rows that feeds
+`mem_minimumOrbitUnion_of_card_eq_32`. Sizing evidence for that decision: the `≥ 32` conclusion
+dispatch tree is `304` modules and about `30` minutes of first build, and the exhaustion tree is
+expected to be comparable, which is the measured cost C319 is gated on.
