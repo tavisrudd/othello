@@ -68,6 +68,36 @@ The computation does not determine any hard `PGL2(5)` value, certify that cycle 
 or prove a finite quotient for the full scar. It shows that exact component isomorphism is a useful
 composition kernel but is not itself the missing contextual congruence.
 
+### Lean certificate shape
+
+The structural theorem should not intrinsically produce a large Lean proof tree. A reusable
+formalization can separate four small generic lemmas: Grundy value is invariant under graph
+isomorphism; disjoint union is nimber xor; the displayed canonical decompositions reconstruct their
+connected graphs; and equal canonical keys therefore have equal Grundy values. Lean can then check
+canonical keys and reconstruction witnesses without unfolding the full Node--Kayles game tree. The
+direct `PGL2(3)` instance should likewise admit a small finite certificate.
+
+The bounded `PGL2(5)` search has a different certificate risk. Its first 100,019 uncached connected
+masks already contain 54,055 distinct rank-two/three shapes. Translating the recursion literally
+would create a large proof tree or table. If an exact value is eventually returned, the appropriate
+architecture is a compact externally generated DAG/certificate plus a small Lean checker built on
+the generic structural lemmas. No such q=5 value certificate exists yet, because the present run
+stops before evaluating the follower.
+
+### Generalization in `q`
+
+The decomposition theorem itself is independent of `q`: it applies to every maximum-degree-three
+graph, hence to residuals of every three-generator Cayley scar in this family. Its usefulness is
+not yet uniform in `q`. Nothing here proves bounded cycle rank, finitely many canonical core types,
+eventual periodicity, or a bounded contextual interface as the field grows. The connected scar's
+cycle rank can grow with the graph, while the current kernel compresses only low-cycle pieces that
+split away from it.
+
+Thus the q=5 cache-hit counts are evidence that low-cycle debris recurs heavily, not an asymptotic
+or silver theorem. The missing q-general result is a bounded contextual interface or transfer law
+for the growing high-cycle core; further formalization of the low-cycle quotient alone cannot
+supply it.
+
 The next kernel should retain this verified component layer and add a compact rank-four/core
 representation using interned rooted-tree and skeleton IDs rather than factorial string
 serialization. Its falsification test is sharp: either it returns an exact hard follower value or
@@ -104,4 +134,3 @@ and C++ q=3 result. No independent q=5 value check exists because this bounded r
 | `2026-07-17-c294-component-nimber.cpp` | 21,143 | `970c192eff7256cb2fa8f81068f2fa3973446fb846a7341dc4f69287b0253dba` |
 | `2026-07-17-c294-component-nimber-q3.json` | 509 | `24d2575f19852c8073bafe5c42f1d60a4487e86b4a1556d1ac28dde79583d418` |
 | `2026-07-17-c294-component-nimber-q5-bounded.json` | 565 | `8b4c19c60f95ae8049cfe09e4b68e470e25fdddf0b3375c07868717381f042af` |
-
