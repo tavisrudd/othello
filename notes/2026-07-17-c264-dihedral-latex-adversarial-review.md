@@ -132,3 +132,14 @@ foreign `cap`-lane work.
 
 - 2026-07-18: Fable's adopted spine converted into the C306--C311 gated execution chain. All
   pre-submission content gates C281/C284/C288/C289/C290 were already closed. C306 is next.
+- 2026-07-18: **C306 closed.** The markdown submission is migrated into
+  `papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex` on the eight-section
+  spine (runbook filename `main.tex` superseded by the `papers/` naming convention; recorded in the
+  phase report). `make dihedral` builds clean with zero matches against the shared `warnings`
+  pattern, and the paper is registered in `papers/Makefile`. Every source theorem, proof, equation,
+  table, and remark has a named destination in the phase report's non-loss ledger; nothing was
+  dropped. Owed integrations are marked in-source by `\phasenote` boxes naming their owning phase.
+  Two items carry forward explicitly: the §7.1 formulas and P-congruences are migrated verbatim and
+  remain known-incomplete pending C281's `t`-case split (correctness hazard 1, C307), and three
+  bibliography entries are uncited in the body (C308). C309 must set `\draftnotesfalse`.
+  → `notes/2026-07-18-c306-dihedral-structural-rebuild.md`. **C307 is next.**

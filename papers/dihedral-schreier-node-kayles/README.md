@@ -2,9 +2,11 @@
 
 **Working title:** *Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates.*
 
-**Status:** All pre-submission mathematics gates are closed. The committed markdown source is
-awaiting C264's serial C306--C311 rebuild: structural LaTeX migration, correctness integration,
-scholarly/trust apparatus, reproducibility, adversarial review, and two cold-prose passes. Fable
+**Status:** All pre-submission mathematics gates are closed. C306 has migrated the markdown source
+into the canonical LaTeX manuscript `dihedral_schreier_node_kayles.tex` on the adopted eight-section
+spine; the remaining C264 phases are C307 correctness integration, C308 scholarly/trust apparatus,
+C309 reproducibility, C310 adversarial review, and C311 two cold-prose passes. The LaTeX source
+carries `\phasenote` boxes marking every owed integration, and C309 must disable them. Fable
 adopted the universal-reduction/three-applications spine, with the full `D₂ₘ` pair family first,
 the `D₄ₙ` ladder family second, and the complete tame `S₄/A₅` polyhedral boundary in the body.
 Wild polyhedral characteristic and the growing full/subfield `PSL₂/PGL₂` escape residual remain
@@ -14,9 +16,16 @@ outside the paper.
 `nofil-finite-geometry-outcomes` paper, which uses the pairing/mirror method — the two are
 split by technique, not by geometry.
 
-## Files here (symlinks into ../../notes/)
+## Files here
 
-- `2026-07-12-dihedral-schreier-node-kayles-submission.md` — **the manuscript**
+- `dihedral_schreier_node_kayles.tex` — **the manuscript**; build with `make dihedral` from
+  `papers/`
+- `dihedral_schreier_node_kayles.pdf` — the built artifact
+
+## Also here (symlinks into ../../notes/)
+
+- `2026-07-12-dihedral-schreier-node-kayles-submission.md` — the superseded markdown source,
+  retained until the LaTeX migration is verified complete (C311)
 - `2026-07-12-conic-involution-schreier-graphs.md` — the mathematical writeup (§3 V₄, enumeration)
 - `2026-07-12-conic-involution-residual-graphs.md` — game-side program integration
 - `2026-07-12-polyhedral-nk-templates.md` — S₄/A₅ regular-template nimber table (Appendix A source)

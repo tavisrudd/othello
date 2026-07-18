@@ -5,13 +5,14 @@ SOURCES := \
 	arcs_complete_outside_conic/arcs_complete_outside_conic.tex \
 	clebsch-hexagon-code/clebsch_hexagon_code.tex \
 	coding-repair-hypergraphs/complete_repair_hypergraphs.tex \
+	dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex \
 	equivariant-robust-completion/frobenius_pair_extension.tex
 
 PDFS := $(SOURCES:.tex=.pdf)
 LOGS := $(SOURCES:.tex=.log)
 
 .PHONY: all check warnings clean distclean list \
-	arcs clebsch repair-hypergraphs equivariant-completion
+	arcs clebsch dihedral repair-hypergraphs equivariant-completion
 
 all: $(PDFS)
 
@@ -22,6 +23,8 @@ check:
 arcs: arcs_complete_outside_conic/arcs_complete_outside_conic.pdf
 
 clebsch: clebsch-hexagon-code/clebsch_hexagon_code.pdf
+
+dihedral: dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.pdf
 
 repair-hypergraphs: coding-repair-hypergraphs/complete_repair_hypergraphs.pdf
 

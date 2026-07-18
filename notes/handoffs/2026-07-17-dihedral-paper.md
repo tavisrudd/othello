@@ -13,12 +13,14 @@ adversarial and cold-prose review, and a cleared novelty audit.
 
 ## Current status
 
-- Manuscript: `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`, near-complete and
-  committed markdown, retitled "Dihedral Subgroups of PGL₂(q)" (C263; revisit the title only in
-  C264 after the polyhedral additions land). Covers V₄ + the full two-reflection `D₂ₘ` pair family
-  + triple-based D_{4n} + S₄/A₅ regular-template rows; it still needs the C284 nonregular
-  polyhedral section integrated and must continue to exclude the wild and full `PSL₂/PGL₂` escape
-  residuals explicitly.
+- Manuscript: `papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex` since C306
+  (2026-07-18), on the adopted eight-section spine, working title "Node Kayles on Conic Schreier
+  Graphs: Dihedral and Polyhedral Templates" (final wording a user call). Build with
+  `make dihedral` from `papers/`; it is registered in `papers/Makefile` and builds warning-clean.
+  Owed integrations are marked in-source by `\phasenote` boxes naming their owning phase; C309 must
+  set `\draftnotesfalse`. The markdown
+  `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md` is now superseded source material
+  and is retained only until C311 verifies the migration.
 - Lean: `lean/DihedralSchreier/` certifies the reduction plumbing, the V₄→K₄ core, Φ_T
   (Prop 11.1 + Cor 11.2, `Burnside.lean`), the finite ½-density core (`Density.lean`), and the
   conditional density-½ layer behind exactly one quarantined Davenport axiom
@@ -46,6 +48,14 @@ adversarial and cold-prose review, and a cleared novelty audit.
   C306--C311, with explicit inputs, owned deliverables, correctness hazards, validation gates, and
   commit/handoff discipline. C264 is the umbrella and closes only after the final cold-prose and
   release pass → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
+- Closed: C306 structural LaTeX rebuild (2026-07-18) — the markdown submission is migrated into the
+  canonical LaTeX manuscript on the eight-section spine, two-point family first, ladder structural
+  proofs intact, density kept as a named theorem, wild case in the boundary section; `make dihedral`
+  builds clean with zero matches against the shared `warnings` pattern; every source item has a
+  named destination in the phase report's non-loss ledger. Carried forward: §7.1's formulas and
+  P-congruences are verbatim and known-incomplete pending C281's `t`-case split (C307), and three
+  bibliography entries are uncited in the body (C308) →
+  `notes/2026-07-18-c306-dihedral-structural-rebuild.md`.
 - Closed: C290 congruence laws (2026-07-18) — all seven split-indicator laws and the fixed-point
   criteria proved from `PGL₂(q)` group theory; free-orbit parity `m₁ ≡ [χ(6)=−1] + [q≡1 (5)]
   (mod 2)`; all ten closed board-value laws now hold for every admissible tame `q` (proved modulo
@@ -118,10 +128,11 @@ from the old manuscript's section order.
    authoritative over the proposal where it changes emphasis: named density theorem, intact ladder
    proofs, C283 in the boundary section, completeness-first polyhedral section, body-level ten-row
    table, Burnside as corollary + remark, and both `D₁₂` and `A₅` examples.
-4. The current source manuscript,
-   `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`, and the staging README,
-   `papers/dihedral-schreier-node-kayles/README.md`. Treat the markdown as source material, not as
-   the approved narrative order, and retain it until the LaTeX migration is verified complete.
+4. The current manuscript,
+   `papers/dihedral-schreier-node-kayles/dihedral_schreier_node_kayles.tex`, and the staging README,
+   `papers/dihedral-schreier-node-kayles/README.md`. The superseded markdown
+   `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md` is source material only, never the
+   approved narrative order, and is retained until the migration is verified complete at C311.
 5. The live `dihedral` block in `notes/2026-07-07-codex-task-queue.md`, then the current phase's
    input row below. If a predecessor has closed, read its dated `notes/YYYY-MM-DD-cNNN-*.md`
    closing report and the commit named in this handoff before editing.
@@ -130,7 +141,7 @@ from the old manuscript's section order.
 
 | Phase | Required cold-read inputs | Expected phase record |
 |---|---|---|
-| **C306 structural rebuild** | Source manuscript; Fable ruling; C263 pair-family report; runbook migration/non-loss table. No later report prose is to be integrated speculatively in this phase. | `notes/YYYY-MM-DD-c306-dihedral-structural-rebuild.md` |
+| **C306 structural rebuild** | CLOSED 2026-07-18 | `notes/2026-07-18-c306-dihedral-structural-rebuild.md` |
 | **C307 correctness integration** | C281 correction/census; C284 templates; C289 `rho` split and mirror lemmas; C290 proved arithmetic; C278 density; C283 wild pair; C288 validation census; C260 replay boundary. | `notes/YYYY-MM-DD-c307-dihedral-correctness-integration.md` plus a claim/source ledger referenced by the paper. |
 | **C308 apparatus/trust** | C261 novelty audit R1–R5; C262 formalization report; C278 axiom boundary; C260/C284 computation boundaries; `lean/DihedralSchreier/README.md`; all citations already present in the manuscript. | `notes/YYYY-MM-DD-c308-dihedral-scholarly-trust.md`, including the exact mixed-verification map, adequacy appendix, and AI/provenance boundary. |
 | **C309 artifact gate** | C306–C308 closing reports; paper README and build instructions; evidence/regeneration commands in C260/C281/C284/C288/C289/C290; `lean/DihedralSchreier/README.md`. Read `lean/AGENTS.md` before any Lean operation. | `notes/YYYY-MM-DD-c309-dihedral-artifact-reproducibility.md`, including the exact shared-Lean commit/target pin and no copied Lean source. |
@@ -197,19 +208,21 @@ the closure invariant. Never leave the only copy of a finding, decision, or requ
   proved `t₁=0` entries) and §6 paragraphs; the C288 census appendix; the C290 congruence-law
   section (drafted in its report §11) with corollaries P1–P4 and the abstract candidate sentence —
   C290's proved laws supersede C288's empirical statement of the refined `S₄` split law.
-- Manuscript is markdown with no adversarial or cold-prose review cycle. All content gates are
-  closed; C306 is now the ready first phase of the C264 execution chain.
+- Manuscript is LaTeX since C306, with no adversarial or cold-prose review cycle yet. All content
+  gates are closed; C307 correctness integration is the ready phase of the C264 execution chain.
 - Post-release upgrades are direct strategies/certificates (C291), wild polyhedral characteristic
   (C292), and Lean formalization of the finite table boundary (C293). The growing full-group escape
   residual remains C84-owned in the `cap` lane; do not duplicate it here.
 
 ## Next steps
 
-1. **C306** — structural LaTeX rebuild on the adopted eight-section spine. This is the only ready
-   C264 child; follow it serially with C307 correctness integration, C308 scholarly/trust apparatus,
-   C309 artifact reproducibility, C310 adversarial review, and C311 two-pass cold prose/release.
-   The canonical phase gates and non-loss checklist are in
-   `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
+1. **C307** — correctness-first integration, the only ready C264 child. Apply C281's `t`-case split
+   to §7.1 before any polishing (value-affecting, correctness hazard 1), then integrate C284, C289,
+   C290, C278, C283, and the C288/C281 validation appendices, and build §6 completeness-first.
+   Follow it serially with C308 scholarly/trust apparatus, C309 artifact reproducibility, C310
+   adversarial review, and C311 two-pass cold prose/release. The canonical phase gates and non-loss
+   checklist are in `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`; C306's ledger and
+   carried-forward items are in `notes/2026-07-18-c306-dihedral-structural-rebuild.md`.
 2. **After C311 closes C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
    C293 Lean formalization. Continue the full `PSL₂/PGL₂` escape program only through C84 `[cap]`.
 
@@ -228,7 +241,9 @@ the closure invariant. Never leave the only copy of a finding, decision, or requ
   regeneration commands, committed together.
 - Nontrivial proof development requires the named-expert personas read first
   (`notes/2026-07-07-named-expert-personas-context.md`).
-- The manuscript's Discussion is §15 after C263; do not reintroduce "§14 = Discussion" references.
+- The LaTeX manuscript's section numbering is the eight-section spine; the markdown's §-numbers
+  (including "Discussion = §15") survive only in the C306 non-loss ledger. Cite LaTeX labels, not
+  markdown section numbers.
 
 ## Cross-lane relationships (foreign; do not re-peg without approval)
 
