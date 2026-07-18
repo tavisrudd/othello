@@ -83,6 +83,31 @@ def residualOrbit (S : Finset Idx25) : Finset (Finset Idx25) :=
 def residualStabilizer (S : Finset Idx25) : Finset ResidualParameter :=
   Finset.univ.filter fun g => S.image (residualApplyFast g.1.1 g.2.1) = S
 
+/-- The fast action agrees with the embedding form used by the generated cover certificates.
+Statements may use either; only the fast form is ever decided. -/
+theorem smul_eq_map (g : ResidualParameter) (S : Finset Idx25) :
+    g • S = S.map (parameterEmbedding g) := by
+  rw [Finset.map_eq_image, smul_finset_def]
+  exact Finset.image_congr fun i _ => (residualApply_eq_fast _ _ i).symm
+
+theorem mem_residualOrbit_iff (S T : Finset Idx25) :
+    T ∈ residualOrbit S ↔ ∃ g : ResidualParameter, g • S = T := by
+  constructor
+  · intro h
+    obtain ⟨g, -, hg⟩ := Finset.mem_image.mp h
+    exact ⟨g, hg⟩
+  · rintro ⟨g, hg⟩
+    exact Finset.mem_image.mpr ⟨g, Finset.mem_univ g, hg⟩
+
+theorem self_mem_residualOrbit (S : Finset Idx25) : S ∈ residualOrbit S :=
+  (mem_residualOrbit_iff S S).mpr ⟨1, one_smul _ _⟩
+
+/-- Reachability is symmetric, because the parameters form a group. -/
+theorem mem_residualOrbit_comm {S T : Finset Idx25} (h : T ∈ residualOrbit S) :
+    S ∈ residualOrbit T := by
+  obtain ⟨g, hg⟩ := (mem_residualOrbit_iff S T).mp h
+  exact (mem_residualOrbit_iff T S).mpr ⟨g⁻¹, by rw [← hg, inv_smul_smul]⟩
+
 theorem coe_residualOrbit (S : Finset Idx25) :
     (residualOrbit S : Set (Finset Idx25)) = MulAction.orbit ResidualParameter S := by
   ext T
