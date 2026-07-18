@@ -2,7 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B2`  
-**Status:** waiting on B1  
+**Status:** passed 2026-07-18; exact bounded gate and compression-negative are in
+`notes/2026-07-17-c294-b2-contextual-signature.md`
 **Dependency:** a complete B1 result defining the boundary state and gluing law
 
 ## Goal
@@ -54,6 +55,7 @@ and the independent replay agrees. A conflict is a successful bounded negative o
 minimized and the B1 state is revised; then routing returns to B1. Zero conflicts do not prove a
 general theorem, but they activate B3.
 
-Forbidden continuations: increasing the generic K-set cap, deepening pairing, adding graph-shape
-layers, or claiming q-generality from the bounded pass.
-
+The gate passed with zero contextual-key mergers and zero conflicts on both mandatory domains. The
+exact interface distinguishes the old witness but merges none of the 73,911 bounded q=5 low-cycle
+shapes. B3 is active. Increasing the generic K-set cap, deepening pairing, adding graph-shape layers,
+or claiming q-generality from this bounded pass remains forbidden.
