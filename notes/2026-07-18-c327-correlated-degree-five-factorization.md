@@ -6,7 +6,8 @@
 
 **Status:** active; theorem-led analysis of C316's two seed--seed--repair eliminants, with no large
 field or coefficient census.  The first common pentic normal form and shared branch identity are
-proved below.
+proved below, together with generic geometric monodromy `S5` for each pentic separately.  Their
+shared resolvent and trace-cover correlation remain open.
 
 ## Objective
 
@@ -160,6 +161,91 @@ into the definitions of `Delta_S,Z_i,A_i`.  The identities
 `rho^2=1+d^2` and characteristic-two cancellation give `A_2=P0*(x+d)` and (7).
 
 This is a direct polynomial proof; no CAS or finite-field sample is evidence for (1)--(7).
+
+## Generic geometric monodromy of each pentic
+
+### Theorem
+
+Fix one repair orientation and work over
+
+    K=GF(2)(e,delta_0,delta_1,A),
+
+on the open `e*delta_1*M!=0`.  Regard `Z_0` as the target coordinate and put
+
+    R(p)=e^2/delta_1^2*p^4+e/delta_1*p^3
+      +A*(A+delta_1)/delta_1^2*p^2+e*p
+      +(e^2*delta_0^2+A*delta_0*delta_1)/delta_1^2
+      +e*M/(delta_1*p).                                 (8)
+
+Then `E(p)=delta_1^2*p*(Z_0+R(p))`.  The cover
+
+    R:P1_p -> P1_{Z_0}
+
+is separable of degree five, its generic defining pentic is irreducible over `K(Z_0)`, and its
+geometric monodromy group is `S5`.
+
+The substitutions (4)--(7) are dominant onto the parameters used in this theorem.  Therefore the
+result applies separately to both C316 pentics over the generic algebraic survivor base before the
+absolute-trace covers are imposed.
+
+### Degree, irreducibility, and separability
+
+The rational function (8) has a pole of order four at infinity and a simple pole at zero.  Hence
+its degree is five and
+
+    [K(p):K(R(p))]=5.
+
+The equation `Z_0=R(p)` is therefore the minimal equation of `p` over `K(Z_0)`, proving generic
+irreducibility.  From (2)--(3), or by direct differentiation of (8),
+
+    R'(p)=e*B(p)/(delta_1*p^2),                          (9)
+
+which is nonzero.  Thus the degree-five function-field extension is separable.
+
+### A generic transposition
+
+Over an algebraic closure of `K`, write
+
+    B(p)=(p^2+r*p+s)^2,
+    r^2=delta_1,                 s^2=M.
+
+Because `delta_1*M!=0`, the quadratic has two distinct nonzero roots `b,c`.  At a root `b`, expand
+`R(b+q)`.  The coefficient of `q^2` is
+
+    H_2(b)=e/b+A*(A+delta_1)/delta_1^2,                 (10)
+
+while the coefficient of `q^3` is
+
+    H_3(b)=e/b^2!=0.                                   (11)
+
+Equation (10) is not identically zero in the free parameter `A`.  On its complement, the local
+map has leading term `H_2(b)*q^2` and a nonzero odd next term, so it is a separable wild
+ramification point of index two.
+
+The two critical values are generically distinct.  Indeed, the coefficient of
+`A*(A+delta_1)/delta_1^2` in `R(b)+R(c)` is
+
+    b^2+c^2=(b+c)^2=delta_1!=0.                         (12)
+
+Thus, off one further proper divisor, a branch fiber contains exactly one index-two ramification
+point and otherwise unramified sheets.  Its geometric inertia permutation is a transposition.
+
+### Group conclusion
+
+Irreducibility makes the geometric monodromy subgroup of `S5` transitive.  Its order is therefore
+divisible by five, so it contains a 5-cycle.  A 5-cycle together with any transposition generates
+`S5`: conjugating the transposition by powers of the cycle gives the edges of a connected graph on
+the five letters.  Hence the geometric monodromy is `S5`.
+
+### Consequence and remaining caveat
+
+Individually, each ambient pentic has the largest possible geometric monodromy.  This supports no
+density conclusion on its own.  C315's trace-one conditions are imposed by Artin--Schreier
+double covers, and base change by a 2-extension can meet the unique quadratic subfield of an `S5`
+splitting field and reduce monodromy to `A5`.  Moreover the two pentics share
+`(delta_0,delta_1,M,B)` and their target coordinates are related by (4)--(7).  C327 must therefore
+compute or characterize the two sign/Berlekamp resolvent classes and their pullbacks to the trace
+covers before claiming either generic disjointness or simultaneous derangement density.
 
 ## Evidence boundary
 
