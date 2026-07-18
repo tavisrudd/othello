@@ -142,4 +142,4 @@ foreign `cap`-lane work.
   Two items carry forward explicitly: the §7.1 formulas and P-congruences are migrated verbatim and
   remain known-incomplete pending C281's `t`-case split (correctness hazard 1, C307), and three
   bibliography entries are uncited in the body (C308). C309 must set `\draftnotesfalse`.
-  → `notes/2026-07-18-c306-dihedral-structural-rebuild.md`. **C307 is next.**
+  Commit `ef86aacf`. → `notes/2026-07-18-c306-dihedral-structural-rebuild.md`. **C307 is next.**
