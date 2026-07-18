@@ -86,3 +86,27 @@ ambiguity at the main coding-theoretic consequence.  Next, insert the one-line T
 it turns an intuitive proof sentence into a checkable algebraic bridge.  Finally, add
 `\setminus\{x\}` to the cocircuit characterization so that the prose and the subsequent `-1` agree
 literally.
+
+## Resolution verification
+
+Targeted reread of the current reliability/pointed-Tutte passage after the C285/C286 edits (the
+insertions shifted the logical passage to lines 323--490):
+
+- **PASS — contraction/code notation.** The contraction is now consistently named `Q=M/x` in the
+  perspective theorem, polynomial, rank calculation, and `U_Q`; `C` is therefore unambiguous in
+  the later codeword-distance formula.
+- **PASS — explicit `Z^0` specialization.** The proof now gives
+  `S_x(u)=u^{r(M)}[Z^0]T_{D\to Q}(1+u^{-1},1+u,Z)`.  Its exponents simplify termwise to
+  `u^{|A|}` exactly when `epsilon_x(A)=0`, so it supplies the previously omitted algebraic bridge.
+- **PASS — cocircuit minus target.** Minimal blockers are now stated as
+  `$Q'\setminus\{x\}$` for cocircuits `$Q'$` containing `$x$`, in literal agreement with
+  `tau_full(x)=d_x(C)-1`.
+- **PASS — C285 citations and normalization.** The new Colbourn citation is attached only to the
+  standard deletion--contraction/pivotality identification; the EXIT citation follows the explicit
+  statement that entropy is normalized in `log_q` units; and the Las Vergnas citation identifies
+  the displayed invariant as the singleton specialization of the cited set-pointed theory.  The
+  `log_q` convention correctly makes the conditional entropy on a `q`-ary erasure channel the
+  unrecoverable-symbol indicator, so the symbol-MAP areas sum to `K` with no missing scale factor.
+
+**New defects:** none found.  All three C286 findings are resolved, and the C285 additions introduce
+no mathematical, citation-scope, normalization, or narrative defect in this passage.
