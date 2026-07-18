@@ -1,14 +1,14 @@
 # Paper: Dihedral Schreier Node-Kayles catalogue
 
-**Working title:** *Node Kayles on Fixed-Point-Deleted Schreier Graphs from Conic
-Involutions: The Dihedral Case.*
+**Working title:** *Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates.*
 
-**Status:** Markdown submission draft, near-complete and committed. This is the
-small-subgroup catalogue — V₄ (Klein-four boundary) + dihedral D_{4n} + the S₄/A₅
-regular-template rows, extended (C263) with the full two-reflection `D₂ₘ` pair family for every
-`m ≥ 3` of either parity and retitled "Dihedral Subgroups of PGL₂(q)". Deferred (§15): the
-nonregular polyhedral coset templates and their
-field-dependent orbit formulas, and the full PSL₂/PGL₂ escape residual.
+**Status:** All pre-submission mathematics gates are closed. The committed markdown source is
+awaiting C264's serial C306--C311 rebuild: structural LaTeX migration, correctness integration,
+scholarly/trust apparatus, reproducibility, adversarial review, and two cold-prose passes. Fable
+adopted the universal-reduction/three-applications spine, with the full `D₂ₘ` pair family first,
+the `D₄ₙ` ladder family second, and the complete tame `S₄/A₅` polyhedral boundary in the body.
+Wild polyhedral characteristic and the growing full/subfield `PSL₂/PGL₂` escape residual remain
+outside the paper.
 
 **Technique:** Schreier-residual graph nimbers from conic involutions. Distinct from the
 `nofil-finite-geometry-outcomes` paper, which uses the pairing/mirror method — the two are
@@ -33,3 +33,5 @@ split by technique, not by geometry.
 - Driver / next-programme: C84 in `notes/handoffs/2026-07-06-projective-cap-game-handoff.md`.
 
 See `../papers-index.md` for the registry and `../papers-planning.md` for cross-paper strategy.
+The executable C264 runbook is
+`../../notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.

@@ -41,6 +41,10 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   completeness, `ρ`-split calibrated). Title direction 1 recommended (final wording user call).
   C290 hard gate; C289 gate at elementary-proof scope; C291 post-C264. Decision appended to
   `notes/2026-07-17-dihedral-paper-spine-proposal.md`.
+- C264 execution PREPARED (2026-07-18): the rewrite is now a six-phase, one-owner-at-a-time chain,
+  C306--C311, with explicit inputs, owned deliverables, correctness hazards, validation gates, and
+  commit/handoff discipline. C264 is the umbrella and closes only after the final cold-prose and
+  release pass → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 - Closed: C290 congruence laws (2026-07-18) — all seven split-indicator laws and the fixed-point
   criteria proved from `PGL₂(q)` group theory; free-orbit parity `m₁ ≡ [χ(6)=−1] + [q≡1 (5)]
   (mod 2)`; all ten closed board-value laws now hold for every admissible tame `q` (proved modulo
@@ -98,6 +102,89 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   prior art, package verdict apparently unrecorded; wording recommendations R1–R5 pending in C264 →
   `notes/2026-07-17-c261-dihedral-novelty-audit.md`.
 
+## Cold-start packet for C264 sessions
+
+This handoff is the entry point. A cold session should not reconstruct C264 from chat history or
+from the old manuscript's section order.
+
+### Read in this order
+
+1. Repository instructions, then this handoff from top to bottom.
+2. The canonical runbook, `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`. It fixes
+   the eight-section spine, phase ownership, non-loss checklist, correctness hazards, and closure
+   invariant.
+3. Fable's ruling at the end of `notes/2026-07-17-dihedral-paper-spine-proposal.md`. The ruling is
+   authoritative over the proposal where it changes emphasis: named density theorem, intact ladder
+   proofs, C283 in the boundary section, completeness-first polyhedral section, body-level ten-row
+   table, Burnside as corollary + remark, and both `D₁₂` and `A₅` examples.
+4. The current source manuscript,
+   `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`, and the staging README,
+   `papers/dihedral-schreier-node-kayles/README.md`. Treat the markdown as source material, not as
+   the approved narrative order, and retain it until the LaTeX migration is verified complete.
+5. The live `dihedral` block in `notes/2026-07-07-codex-task-queue.md`, then the current phase's
+   input row below. If a predecessor has closed, read its dated `notes/YYYY-MM-DD-cNNN-*.md`
+   closing report and the commit named in this handoff before editing.
+
+### Phase-specific input map
+
+| Phase | Required cold-read inputs | Expected phase record |
+|---|---|---|
+| **C306 structural rebuild** | Source manuscript; Fable ruling; C263 pair-family report; runbook migration/non-loss table. No later report prose is to be integrated speculatively in this phase. | `notes/YYYY-MM-DD-c306-dihedral-structural-rebuild.md` |
+| **C307 correctness integration** | C281 correction/census; C284 templates; C289 `rho` split and mirror lemmas; C290 proved arithmetic; C278 density; C283 wild pair; C288 validation census; C260 replay boundary. | `notes/YYYY-MM-DD-c307-dihedral-correctness-integration.md` plus a claim/source ledger referenced by the paper. |
+| **C308 apparatus/trust** | C261 novelty audit R1–R5; C262 formalization report; C278 axiom boundary; C260/C284 computation boundaries; `lean/DihedralSchreier/README.md`; all citations already present in the manuscript. | `notes/YYYY-MM-DD-c308-dihedral-scholarly-trust.md` |
+| **C309 artifact gate** | C306–C308 closing reports; paper README and build instructions; evidence/regeneration commands in C260/C281/C284/C288/C289/C290; `lean/DihedralSchreier/README.md`. Read `lean/AGENTS.md` before any Lean operation. | `notes/YYYY-MM-DD-c309-dihedral-artifact-reproducibility.md` |
+| **C310 adversarial review** | Built C309 source/PDF; C307 claim ledger; C308 trust/provenance boundary; the runbook's correctness-hazard list. Review the paper as submitted, not the discovery reports as a substitute. | `notes/YYYY-MM-DD-c310-dihedral-adversarial-review.md` with finding, severity, disposition, and fixing commit for every item. |
+| **C311 cold prose/release** | Corrected C310 source/PDF and closed issue ledger; title/abstract ruling; paper registry and staging README. | `notes/YYYY-MM-DD-c311-dihedral-cold-prose-release.md` recording two separated full reads and final artifact identity. |
+
+### Mathematical source-of-truth map
+
+- **Universal reduction and existing formal boundary:** C262,
+  `notes/2026-07-17-c262-dihedral-burnside-density-formalization.md`, plus
+  `lean/DihedralSchreier/README.md`.
+- **Every-order two-point family:** C263,
+  `notes/2026-07-17-c263-dihedral-d2m-additions.md`; **wild pair boundary:** C283,
+  `notes/2026-07-17-c283-dihedral-wild-case-spike.md`.
+- **Three-point correction and exhaustive tame validation:** C281,
+  `notes/2026-07-17-c281-dihedral-census-appendix.md`. Its second-class `t=0` case corrects the
+  old manuscript and must be applied before any §7 synthesis.
+- **Polyhedral classification/table:** C284,
+  `notes/2026-07-17-c284-dihedral-polyhedral-coset-templates.md`; **conceptual split and proved
+  mirror upgrades:** C289, `notes/2026-07-17-c289-a5-triple-split.md`.
+- **Polyhedral census:** C288,
+  `notes/2026-07-17-c288-polyhedral-embedding-census.md`; **final proved congruence and value laws:**
+  C290, `notes/2026-07-17-c290-polyhedral-congruence-laws.md`. C290 supersedes C288 wherever an
+  empirical split/congruence formulation overlaps a proved one.
+- **Density-half theorem:** C278,
+  `notes/2026-07-17-c278-dihedral-conditional-density.md`. Preserve exactly its one-axiom formal
+  boundary; do not describe the Lean result as unconditional.
+- **Independent value evidence:** C260,
+  `notes/2026-07-17-c260-a5-template-nimber-crosscheck.md`, and the replay bundles named by C284.
+  The Rust reference solver is `rust/scripts/nodekayles_cayley.rs`.
+- **Literature/novelty wording:** C261,
+  `notes/2026-07-17-c261-dihedral-novelty-audit.md`; apply R1–R5 rather than improvising stronger
+  priority language.
+
+### Supersession and scope rules
+
+- Fable's adopted spine supersedes the manuscript's discovery-order organization.
+- C281 supersedes the old §9/Corollary 9.1 formulas where the missing conjugacy class matters.
+- C290 supersedes C288's empirical arithmetic wording; C288 remains validation evidence.
+- C289 is the ceiling on interpretations of `rho`: use the proved invariant account and no
+  stronger geometric language.
+- C291's direct strategies are a post-C264 upgrade. Their absence does not weaken a computed value
+  into a conjecture and does not block the paper.
+- C292 wild polyhedral characteristic, C293 finite-table formalization, and C84's growing
+  full/subfield escape program remain outside C264. Do not expand scope to absorb them.
+
+### Session close protocol
+
+Every C306--C311 session must leave the next cold reader all of the following in one coherent
+commit: the phase deliverable; a dated phase record; the runbook execution-log entry; this
+handoff's current-status/next-step update; the exact validation commands and outcomes; and the
+commit hash after commit creation (an immediate metadata-only follow-up is acceptable for recording
+the hash). Move only the completed child task to the archive. Keep C264 live until C311 satisfies
+the closure invariant. Never leave the only copy of a finding, decision, or required edit in chat.
+
 ## Open frontiers
 
 - Density-½ gate CLOSED (C278, 2026-07-17): one quarantined axiom `primes_equidistribute`,
@@ -109,18 +196,20 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   proved `t₁=0` entries) and §6 paragraphs; the C288 census appendix; the C290 congruence-law
   section (drafted in its report §11) with corollaries P1–P4 and the abstract candidate sentence —
   C290's proved laws supersede C288's empirical statement of the refined `S₄` split law.
-- Manuscript is markdown with no adversarial or cold-prose review cycle (C264), which remains last.
+- Manuscript is markdown with no adversarial or cold-prose review cycle. All content gates are
+  closed; C306 is now the ready first phase of the C264 execution chain.
 - Post-release upgrades are direct strategies/certificates (C291), wild polyhedral characteristic
   (C292), and Lean formalization of the finite table boundary (C293). The growing full-group escape
   residual remains C84-owned in the `cap` lane; do not duplicate it here.
 
 ## Next steps
 
-1. **C264** — LaTeX+PDF + adversarial/cold-prose cycle; all content has landed. Apply the C281 §9
-   t-case-split correction, C261 R1–R5, the C278 single-axiom boundary sentence, C260/C284
-   computation boundaries, the Dawson period-34 corollary, the C288/C289/C290 integrations listed
-   in Open frontiers, and title/abstract calibration excluding the wild and full-group escape cases.
-2. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
+1. **C306** — structural LaTeX rebuild on the adopted eight-section spine. This is the only ready
+   C264 child; follow it serially with C307 correctness integration, C308 scholarly/trust apparatus,
+   C309 artifact reproducibility, C310 adversarial review, and C311 two-pass cold prose/release.
+   The canonical phase gates and non-loss checklist are in
+   `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
+2. **After C311 closes C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
    C293 Lean formalization. Continue the full `PSL₂/PGL₂` escape program only through C84 `[cap]`.
 
 ## Cautions (standing, for any session in this lane)
