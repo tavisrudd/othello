@@ -164,3 +164,25 @@ before Theorem 3.1 and include it as an explicit branch of the exact minimum; (3
 invariant as coefficient-fiber uniqueness under `r<d(C^\perp)`; and (4) reverse the abstract's
 obstruction direction.  Once those are repaired, the front-half narrative should read as a coherent
 and credible route from the complete pointed object to prescribed positive-density realization.
+
+## Resolution verification
+
+Targeted sequential re-read of the revised front half on 2026-07-17; the manuscript was not edited.
+
+1. **PASS — obstruction wording (L43--46).** “Satisfying this obstruction bound” no longer reverses
+   the admissible inequality later stated as `r+1<z_x(I)`.
+2. **PASS — Proposition 2.2 and proof (L124--137).** The vacuous weight sentence and mismatched proof
+   have been removed; the proposition now states and proves only the matching/transversal facts.
+3. **PASS — normalized coefficient fibers (L139--150).** The fiber now contains ordinary normalized
+   vectors `(-w_y/w_x)`, so it retains the scalar data needed by the recovery equation.
+4. **PASS — exact zero-functional branch and the `|J|` edge (L196--246).** The definition of `z_x(I)`
+   now precedes Theorem 3.1, the exact minimum explicitly includes that branch, and the theorem assumes
+   `|J|\ge2`; the proof treats nonzero and zero functional sectors separately.
+5. **PASS — support-derived wording (L163--166).** “All support-derived invariants” is consistent with
+   both the ensuing list and the separate coefficient-fiber caveat.
+6. **PASS — strict weighted-transfer example (L248--261).** “Singer-shifted” is defined and the finite
+   numerical calculation is assigned a precise forward reference to the checked transfer chain.
+
+**New/residual defect — MINOR (L146).** After removing projective classes, “Each representative gives
+the exact recovery equation” retains quotient language.  Replace **representative** with **vector**.
+No new mathematical, narrative, or trust-boundary defect was found in the targeted range.
