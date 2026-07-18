@@ -12,7 +12,9 @@ Artin--Schreier base changes.  The generic legality cover is geometrically conne
 sixteen with constant field `GF(2)`.  On the common seed-translation line, the exact slope audit
 has seven (not four) possible dependence divisors; off them the legality cover is a rational curve,
 totally ramified only at infinity, and has exactly `Q/16` legal base parameters.  Pullback of the
-two pentic covers and an explicit effective simultaneous-derangement count remain open.
+two pentic covers now has a conditional genus bound and an effective simultaneous-derangement
+lower bound positive for `Q>=2^41`; explicit rational supply on the required skeleton open remains
+open.
 
 ## Objective
 
@@ -61,7 +63,7 @@ Do not re-solve C312's packets, C314's atlas, or C315's legality classification.
 | individual geometric monodromy | complete | `S5` by the generic transposition theorem |
 | shared resolvents/splitting fields | complete generically | distinct sign divisors give disjoint fields and `S5 times S5` |
 | trace-legality geometrization | complete generically | connected degree-sixteen `(C2)^4` cover, constant field `GF(2)` |
-| effective arithmetic point supply | open | common-translation curve, branch/genus/deletions, effective Chebotarev |
+| effective arithmetic point supply | conditional | genus at most `455701`, bound positive for `Q>=2^41`; skeleton-open supply remains |
 | exceptional survivor rows | open | `X in {0,d}`, `Delta_R=0`, repeated-root/conic and branch divisors |
 | downstream interface | open | two degree-six gates and relative coverage, conditional on degree-five survival |
 
@@ -246,6 +248,90 @@ This exact count has no Weil error and no hidden affine deletion.  C315's zero-h
 prescribed-conic exclusions, C316's pentic branch values, and any divisors needed to preserve
 `S5 times S5` on the specialized skeleton are downstream deletions and have not yet been
 subtracted from (26).
+
+### Conditional joint-cover bound and infinity inertia
+
+Assume now that a specialized skeleton on the exact independence open also has the following
+slice conditions: each pentic has `S5` geometric monodromy, its two finite critical values are
+distinct, and the four critical values of the two pentics are pairwise distinct.  These conditions
+are exact nonvanishing conditions on the critical-value resultants, not a random-polynomial
+hypothesis.  Their explicit skeleton divisors and rational-point supply remain to be exported.
+
+Let `C` be the rational legality curve above and let `M/F(C)` be the compositum of the two pentic
+splitting fields.  The finite branch locus on `C` consists of `4*16=64` geometric points.  At each,
+the inertia is a transposition in one `S5` factor, its lower filtration is `C2,C2,1`, and its
+different exponent is two.
+
+For either pentic before legality base change, the pole fiber over `h=infinity` has one unramified
+sheet at `p=0` and a totally ramified cluster of four sheets at `p=infinity`.  Riemann--Hurwitz for
+the degree-five rational map gives different exponent four for that degree-four local extension:
+the two finite wild transpositions contribute two each, so the infinity contribution is the
+remaining four.  In the Galois closure, transitivity on the four-sheet cluster and the local
+inertia structure in characteristic two force
+
+    I_0=A4,                 I_1=V4,                 I_2=1.             (27)
+
+Indeed the Artin conductor of the four-letter permutation representation is four.  Its tame
+codimension contribution is three, so the wild contribution is one.  A transitive normal
+2-subgroup must be `V4`; the only way its contribution is one is tame quotient `C3` and no second
+wild group.  This proves (27), rather than merely naming an `A4` candidate.
+
+The two local `A4` extensions share the unique tame cubic extension.  Their joint wild group `P`
+is a `C3`-stable subdirect subgroup of `V4 times V4`.  Since the two-dimensional `V4` module is
+irreducible for `C3`, semisimplicity leaves exactly
+
+    |P|=4       or       |P|=16.                                  (28)
+
+Thus the joint infinity inertia is respectively diagonal `A4` or
+`(V4 times V4) semidirect C3`; an order-eight intermediate group cannot occur.  The legality local
+extension has group `(C2)^4` and upper break one.  It has no common quotient with either group in
+(28), whose abelianization is `C3`.  Upper/lower Herbrand conversion in the direct compositum shows
+that after base change to `C` the joint pentic filtration is still
+
+    I_0=I,                  I_1=P,                  I_2=1.             (29)
+
+The infinity contribution to Galois Riemann--Hurwitz is consequently `16,800` in the diagonal
+case and `18,600` in the independent-wild case.
+
+Since `Gal(M/F(C))=S5 times S5` has order `14,400`, Galois Riemann--Hurwitz now gives
+
+    g(M)=454,801       or       455,701,             so g(M)<=455,701. (30)
+
+Here the finite contribution is `64*14,400`, the base term is `-2*14,400`, and the last term is
+one of the two infinity contributions above.
+
+Let `D` be the `44` derangements of types `(5)` and `(3,2)` in `S5`.  Kosters, Corollary 1.3,
+applied elementwise to `D times D` and summed, gives the weighted estimate with density
+
+    |D times D|/|S5 times S5|=1,936/14,400=121/900.
+
+After discarding all rational ramified points (at most the `64` finite geometric branch points and
+the point at infinity), the number `N_C` of unramified rational points of `C` with both Frobenius
+permutations in `D` satisfies
+
+    N_C >= (121/900)*(Q+1-2*455701*sqrt(Q))-65.          (31)
+
+Every legal base parameter has exactly sixteen rational lifts to `C`, and all sixteen have the
+same two pentic factor types.  Each of the two zero-seed exclusions removes at most one additional
+`h`.  Therefore the specialized skeleton has at least
+
+    (121/14400)*(Q+1-911402*sqrt(Q))-65/16-2            (32)
+
+legal, nonzero-seed translation parameters for which both pentics have no linear factor.  In
+particular (32) is positive on the odd tower for
+
+    Q>=2^41.                                             (33)
+
+This is an effective conditional theorem, not yet C327's exit theorem: the specialized skeleton
+must still be shown to have an `F`-rational point off every individual-monodromy, shared-branch,
+zero-height, and prescribed-conic divisor, with an explicit threshold.  The unresolved binary
+choice in (28) does not obstruct (31)--(33), because (30) uses its larger genus.
+
+The source used for (31) is Michiel Kosters, *A short proof of a Chebotarev density theorem for
+function fields*, Corollary 1.3, arXiv:1404.6345.  The cached PDF has SHA-256
+`a7576fd77dd933e73532f37ac8799de925c58733ddf49f9f11a049c0286a51e1`; the corollary obtains the
+explicit error from Hasse--Weil on the Frobenius twists.  It includes ramified primes through a
+probability measure, which is why (31) separately subtracts all rational ramified base points.
 
 ## First result: common pentic normal form
 
