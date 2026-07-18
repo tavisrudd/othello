@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-17
 **Lane:** `crowns`
-**Status:** theorem route isolated; silver remains open.
+**Status:** odd-subfield descent proved up to one explicit `PGL2` Cayley scar; silver remains open.
 
 ## Target and minimal size
 
@@ -61,15 +61,64 @@ Consequently a one-reply degree-two collapse cannot handle the large nearly cubi
 residuals. The q=5--11 success is a strong base layer, not an asymptotic classification theorem.
 The q=11 exceptional orbit likewise does not justify a finite-template extrapolation.
 
+## Odd-subfield descent theorem
+
+Let `q=q0^n` with `q0` odd and `n>1` odd. After conjugating to the standard subfield copy, let a
+legal triple of projection involutions `S={s1,s2,s3}` generate
+`H=PGL2(q0)` or `H=PSL2(q0)`. Write `R_q(S)` for its conic residual and `Cay(H,S)` for the
+three-colour Cayley graph on `H`. Put
+
+\[
+m=\frac{q-q_0}{|\operatorname{PGL}_2(q_0)|}
+ =\frac{q_0^{n-1}-1}{q_0^2-1}
+ =1+q_0^2+\cdots+q_0^{n-3}.
+\]
+
+Then there are coloured-graph decompositions
+
+\[
+R_q(S)\cong
+\begin{cases}
+R_{q_0}(S)\sqcup m\,\operatorname{Cay}(H,S),&H=\operatorname{PGL}_2(q_0),\\
+R_{q_0}(S)\sqcup 2m\,\operatorname{Cay}(H,S),&H=\operatorname{PSL}_2(q_0).
+\end{cases}
+\]
+
+Therefore Sprague--Grundy addition gives
+
+\[
+\mathcal G(R_q(S))=
+\begin{cases}
+\mathcal G(R_{q_0}(S))\mathbin\oplus
+ (m\bmod2)\,\mathcal G(\operatorname{Cay}(H,S)),&H=\operatorname{PGL}_2(q_0),\\
+\mathcal G(R_{q_0}(S)),&H=\operatorname{PSL}_2(q_0).
+\end{cases}
+\]
+
+Indeed, a nonidentity fractional-linear transformation over `F_q0` has fixed points of degree at
+most two over `F_q0`. Since `n` is odd, the intersection of `F_q` with `F_(q0^2)` is `F_q0`;
+hence `H` acts freely on every point outside the base subline.
+The dead points are the fixed points of the pair products `sj si`: a conic point lies on the
+secant through the corresponding two centres exactly when that product fixes it. They too lie on
+the base subline. Thus the base subline contributes `R_q0(S)`, every other `H`-orbit contributes
+one regular Cayley component, and orbit counting gives `m` components for `PGL2` and `2m` for
+`PSL2`.
+
+Because `q0` is odd, `m` has the parity of `(n-1)/2`. Subfield `PSL2` therefore descends exactly
+for every odd `n`, and subfield `PGL2` descends exactly for `n=1 (mod 4)`. The sole remaining
+`PGL2` subfield obstruction for `n=3 (mod 4)` is the explicit nimber of one regular
+`Cay(PGL2(q0),S)` component. This is a genuine recursive scar, not an unstructured extension-field
+remainder.
+
 ## Silver attack
 
 The remaining proof should be split by Dickson type, with no cross-stratum handwaving:
 
 1. **Proper groups:** import the proved cyclic/dihedral/polyhedral orbit-template values and consume
    the direct-strategy layer when C199 delivers it.
-2. **Subfield groups:** prove an orbit decomposition for `PSL2(q0),PGL2(q0)` acting on `P1(q)` and
-   an exact value-preserving descent to the definition field, including the free-orbit parity
-   contribution. A unipotent/no-common-fixed-point argument alone does not exclude this row.
+2. **Subfield groups:** the odd-extension theorem above gives exact descent for `PSL2` and for
+   `PGL2` when the extension degree is `1 mod 4`. Classify or recursively peel the single regular
+   `PGL2(q0)` Cayley scar left when the degree is `3 mod 4`.
 3. **Full groups:** choose one generator pair and decompose the graph into its alternating
    dihedral orbits. The third involution is then a correlated matching between those path/cycle
    backbones. The needed new theorem is a recursive scar/transfer rule that preserves P/N while
@@ -87,8 +136,9 @@ spectra, coherent-configuration data, or conjugacy.
 The companion C294 theorem now gives a `Theta(q)` mirror-certified full-`PGL2(q)` four-centre
 family over every odd extension of each eligible prime field: `(p-5)/2` parameters in degree one
 and exactly half the full-degree elements in higher odd degree. Its projective-trace criterion
-closes subfield exclusion for that family, but it is not the general value-preserving subfield
-descent required here and does not classify every configuration at a fixed size.
+closes subfield exclusion for that family. The theorem above supplies the arbitrary-triple
+odd-subfield decomposition, but the `PGL2` Cayley scar and the full-group recursion remain, so the
+family still does not classify every configuration at a fixed size.
 
 ## Evidence and replay
 
