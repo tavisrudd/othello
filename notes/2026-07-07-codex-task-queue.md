@@ -59,6 +59,12 @@ unless they retain an explicit open tail.
 - **C272 `[continuation]` [QUEUED]** — N1 manuscript draft per ruling D3: N1 headline (four-point-frame semilinear-rigidity Thm 7.4), N2 as a remarks subsection out of the abstract and contributions, extremal m(k),r(k) stated as open → `notes/2026-07-17-c272-continuation-n1-manuscript.md`.
 - **C273 `[continuation]` [QUEUED]** — build the `ContinuationRigidity` Lean library per the Phase 3 plan (implement, do not re-decide it); collaborator route is the recorded fallback if formalization stalls per the #7 gate → `notes/2026-07-17-c273-continuation-lean-library.md`.
 
+### `crowns`
+
+- **C294 `[crowns]` [QUEUED; coordinate C84/C199/C200]** — full conic-continuation crown: audit the exact full/subfield Dickson boundary, select the first genuine full-group residual family, and prove a value-preserving compression or direct P/N mechanism that crosses the current `PSL₂/PGL₂` escape boundary → `notes/2026-07-17-c294-full-conic-continuation-crown.md`.
+- **C295 `[crowns]` [QUEUED; after C272 N1 package]** — continuation-reconstruction crown: promote frame-graph semilinear rigidity toward intrinsic recovery of the ambient incidence geometry, selected configuration, and associated code, with an exact exceptional-field boundary → `notes/2026-07-17-c295-continuation-reconstruction-crown.md`.
+- **C296 `[crowns]` [GATED on substantive C294/C295 theorems]** — reconstruction-to-value synthesis: prove on a natural infinite class, or first on a sharply bounded Clebsch/frame pilot, that the continuation object reconstructs its algebraic geometry and that the reconstructed data determine the exact P/N or Grundy value → `notes/2026-07-17-c296-reconstruction-to-value-crown.md`.
+
 ### `cubic`
 
 - **C116 `[cubic]` [STARTED/DEFERRED]** — exact TO/RC/IC transversal spectra; resume with HiGHS → `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`.

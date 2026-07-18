@@ -53,6 +53,7 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `clebsch-next` | `notes/handoffs/2026-07-16-clebsch-next.md` |
 | `complete-ports` | `notes/handoffs/2026-07-17-complete-ports-paper.md` |
 | `continuation` | `notes/handoffs/2026-07-17-continuation-paper.md` |
+| `crowns` | `notes/handoffs/2026-07-17-crowns.md` |
 | `cubic` | `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md` |
 | `dihedral` | `notes/handoffs/2026-07-17-dihedral-paper.md` |
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
