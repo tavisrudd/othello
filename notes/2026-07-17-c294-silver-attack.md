@@ -4,7 +4,9 @@
 **Lane:** `crowns`
 **Status:** odd-subfield descent proved; the only mixed-class `PGL2` scar is localized to one
 dihedral involution-centralizer coset. Exact `q=3,5` gates now rule out every uniform one-reply
-colour-preserving or degree-two peel, so the remaining value transfer is genuinely recursive.
+colour-preserving or degree-two peel, and the `(2,4,5)` gate rules out restoring even an arbitrary
+fixed-point-free involution after every defect response. The remaining transfer needs an
+asymmetric recursive boundary state.
 
 ## Target and minimal size
 
@@ -166,6 +168,14 @@ conjugacy types; five have a two-ply abstract-pairing reply and seven do not, wh
 degree-two reply. The checker does not determine the seven `q0=5` root values. See
 `notes/2026-07-17-c294-mixed-scar-obstruction.md` and its adjacent certificate bundle.
 
+The successor obstruction strengthens this boundary on the first hard type. For the `(2,4,5)`
+`PGL2(5)` graph, both right-mirror involution classes have an explicit adversarial sequence of
+ordinary mirror rounds ending at a defect move for which no legal response leaves any
+fixed-point-free involutory abstract automorphism. Stable-colour parity excludes all 151 response
+residuals. Thus immediate restoration fails even when the replacement involution may change
+colours or patch cut components arbitrarily. The recursive state must carry an asymmetric boundary
+phase; see `notes/2026-07-17-c294-recursive-defective-mirror.md`.
+
 ## Silver attack
 
 The remaining proof should be split by Dickson type, with no cross-stratum handwaving:
@@ -174,10 +184,11 @@ The remaining proof should be split by Dickson type, with no cross-stratum handw
    the direct-strategy layer when C199 delivers it.
 2. **Subfield groups:** the odd-extension theorem above gives exact descent for `PSL2` and for
    `PGL2` when the extension degree is `1 mod 4`; the Cayley pairing also handles same-class
-   generators in degree `3 mod 4`. For the remaining mixed-class scar, construct a colour-changing
-   recursive transfer state on the three-colour alternating backbones. It must contain the direct
-   `(2,3,4)` `PGL2(3)` P certificate and pass all seven obstructed `PGL2(5)` types; another local
-   colour-preserving mirror or immediate degree degradation cannot be the uniform rule.
+   generators in degree `3 mod 4`. For the remaining mixed-class scar, construct an asymmetric
+   boundary-word transfer on the three-colour alternating backbones. It must contain the direct
+   `(2,3,4)` `PGL2(3)` P certificate and pass all seven obstructed `PGL2(5)` types; neither local
+   colour-preserving repair, immediate degree degradation, nor immediate restoration of an
+   arbitrary abstract involution can be the uniform rule.
 3. **Full groups:** choose one generator pair and decompose the graph into its alternating
    dihedral orbits. The third involution is then a correlated matching between those path/cycle
    backbones. The needed new theorem is a recursive scar/transfer rule that preserves P/N while

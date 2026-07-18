@@ -1,0 +1,375 @@
+{
+  "conventions": {
+    "canonicalization": "minimum labelled state under all right translations",
+    "cayley": "left edges h--s*h",
+    "defect_pair": "a mirror orbit {v,tau(v)} that is an edge",
+    "parity_obstruction": "a graph automorphism preserves stable 1-WL cells; a fixed-point-free involution requires every such cell to have even size"
+  },
+  "direct_pgl2_3_base": {
+    "determinant_classes": [
+      1,
+      1,
+      0
+    ],
+    "field_order": 3,
+    "legal_replies_after_identity": 20,
+    "p_replies_after_identity": 20,
+    "pair_product_orders": [
+      2,
+      3,
+      4
+    ],
+    "root_grundy": 0,
+    "vertices": 24
+  },
+  "pgl2_5_gate": {
+    "determinant_classes": [
+      0,
+      0,
+      1
+    ],
+    "involution_classes": [
+      {
+        "centralizer_order": 12,
+        "class_size": 10,
+        "generator_indices": [
+          2
+        ]
+      },
+      {
+        "centralizer_order": 8,
+        "class_size": 15,
+        "generator_indices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "orbit_size": 120,
+    "pair_product_orders": [
+      2,
+      4,
+      5
+    ],
+    "representative": [
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        2
+      ]
+    ],
+    "right_mirror_obstructions": [
+      {
+        "degree_parity_obstructed_replies": 42,
+        "exhaustive_involution_class_label": "class represented once in the generator triple",
+        "mirror_path": [
+          {
+            "defect_pairs": 6,
+            "move": 0,
+            "response": 21,
+            "state_sha256": "da0f6414309682a457c1f0580ee877d4ab50bb559d278c5a8b83ff65b38a9586",
+            "vertices": 120
+          },
+          {
+            "defect_pairs": 6,
+            "move": 0,
+            "response": 115,
+            "state_sha256": "7254fafa526566e402ced8fffeff2b9bdd3226061695279357d9ecfb7102ec59",
+            "vertices": 112
+          },
+          {
+            "defect_pairs": 6,
+            "move": 1,
+            "response": 55,
+            "state_sha256": "ada602d2ba1d1eb9586d360bb9c60e6cd9615e69164718c09bb88b1b45dd58bd",
+            "vertices": 108
+          }
+        ],
+        "reply_tests": 96,
+        "root_generator_index": 2,
+        "stable_colour_histogram": [
+          {
+            "child_vertices": 92,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 80,
+            "reply_count": 8,
+            "stable_cells": 86
+          },
+          {
+            "child_vertices": 92,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 82,
+            "reply_count": 7,
+            "stable_cells": 87
+          },
+          {
+            "child_vertices": 92,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 84,
+            "reply_count": 48,
+            "stable_cells": 88
+          },
+          {
+            "child_vertices": 92,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 86,
+            "reply_count": 8,
+            "stable_cells": 89
+          },
+          {
+            "child_vertices": 93,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 85,
+            "reply_count": 16,
+            "stable_cells": 89
+          },
+          {
+            "child_vertices": 93,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 87,
+            "reply_count": 4,
+            "stable_cells": 90
+          },
+          {
+            "child_vertices": 94,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 86,
+            "reply_count": 3,
+            "stable_cells": 90
+          },
+          {
+            "child_vertices": 94,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 90,
+            "reply_count": 2,
+            "stable_cells": 92
+          }
+        ],
+        "terminal": {
+          "defect_move": 1,
+          "defect_pairs": 6,
+          "mate": 111,
+          "state_sha256": "0e170c6a84a3ddf7758bc81ea71fae63b9163da22604f2d79bbeb281931a986c",
+          "vertices": 100
+        }
+      },
+      {
+        "degree_parity_obstructed_replies": 50,
+        "exhaustive_involution_class_label": "class represented twice in the generator triple",
+        "mirror_path": [
+          {
+            "defect_pairs": 8,
+            "move": 0,
+            "response": 2,
+            "state_sha256": "9795b448abb337181d308da138f27dea510425aeb1f42e2e5be6802188fa643a",
+            "vertices": 120
+          },
+          {
+            "defect_pairs": 7,
+            "move": 0,
+            "response": 106,
+            "state_sha256": "f39c0fffde20d8866c599082beb72dd30a1e08e1fe132ba5b4636558a7f90365",
+            "vertices": 112
+          },
+          {
+            "defect_pairs": 7,
+            "move": 1,
+            "response": 46,
+            "state_sha256": "243fd4f78d3d311afe3833e5de9807f5084abfa5c17ccfd699b15bbd376b1509",
+            "vertices": 104
+          },
+          {
+            "defect_pairs": 6,
+            "move": 0,
+            "response": 4,
+            "state_sha256": "f4e5546e4051da9124950b318832411f2e0dc39be1173a23db169dce4d90d464",
+            "vertices": 96
+          },
+          {
+            "defect_pairs": 5,
+            "move": 1,
+            "response": 93,
+            "state_sha256": "b5f7270189291396290848b1486cb5b458a1af0b19f6057b17b60e1d3fd112f1",
+            "vertices": 88
+          },
+          {
+            "defect_pairs": 5,
+            "move": 3,
+            "response": 57,
+            "state_sha256": "35081c88105269de7bf0de933c76071bd82a1bbf566d87b5206641bda19ba5e5",
+            "vertices": 82
+          },
+          {
+            "defect_pairs": 5,
+            "move": 6,
+            "response": 33,
+            "state_sha256": "90b25cf3d7a270e9993bf3aa65bb4afe2a1158cde9d64af799f9364eb56bb044",
+            "vertices": 74
+          },
+          {
+            "defect_pairs": 5,
+            "move": 7,
+            "response": 98,
+            "state_sha256": "8d2e98410b7dc82323c643c37ab4d04ae8d8b55c86a2df350635858aa7b24432",
+            "vertices": 72
+          },
+          {
+            "defect_pairs": 5,
+            "move": 12,
+            "response": 107,
+            "state_sha256": "6e35a6ac78558094e956d507825b37e1951050cdb30f6b8bda92515d03026090",
+            "vertices": 66
+          },
+          {
+            "defect_pairs": 5,
+            "move": 7,
+            "response": 98,
+            "state_sha256": "80d070d09252c41d4ff5f55457be53dfc7cef9b0c887b8f2534a5884796fe3cb",
+            "vertices": 64
+          }
+        ],
+        "reply_tests": 55,
+        "root_generator_index": 0,
+        "stable_colour_histogram": [
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 21,
+            "reply_count": 1,
+            "stable_cells": 36
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 23,
+            "reply_count": 1,
+            "stable_cells": 37
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 4,
+            "odd_stable_cells": 25,
+            "reply_count": 1,
+            "stable_cells": 37
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 25,
+            "reply_count": 4,
+            "stable_cells": 38
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 27,
+            "reply_count": 5,
+            "stable_cells": 39
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 29,
+            "reply_count": 1,
+            "stable_cells": 40
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 45,
+            "reply_count": 2,
+            "stable_cells": 48
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 47,
+            "reply_count": 6,
+            "stable_cells": 49
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 49,
+            "reply_count": 4,
+            "stable_cells": 50
+          },
+          {
+            "child_vertices": 51,
+            "largest_stable_cell": 1,
+            "odd_stable_cells": 51,
+            "reply_count": 2,
+            "stable_cells": 51
+          },
+          {
+            "child_vertices": 52,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 24,
+            "reply_count": 1,
+            "stable_cells": 38
+          },
+          {
+            "child_vertices": 52,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 28,
+            "reply_count": 6,
+            "stable_cells": 40
+          },
+          {
+            "child_vertices": 52,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 30,
+            "reply_count": 6,
+            "stable_cells": 41
+          },
+          {
+            "child_vertices": 52,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 48,
+            "reply_count": 2,
+            "stable_cells": 50
+          },
+          {
+            "child_vertices": 53,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 27,
+            "reply_count": 1,
+            "stable_cells": 40
+          },
+          {
+            "child_vertices": 53,
+            "largest_stable_cell": 2,
+            "odd_stable_cells": 31,
+            "reply_count": 6,
+            "stable_cells": 42
+          },
+          {
+            "child_vertices": 53,
+            "largest_stable_cell": 1,
+            "odd_stable_cells": 53,
+            "reply_count": 6,
+            "stable_cells": 53
+          }
+        ],
+        "terminal": {
+          "defect_move": 21,
+          "defect_pairs": 5,
+          "mate": 81,
+          "state_sha256": "b0adac0b36a101c7722078ea79ddcd848b0a79f736b9f4a72a91e83ec05898d5",
+          "vertices": 58
+        }
+      }
+    ]
+  },
+  "schema": "c294-recursive-defective-mirror-obstruction-v1"
+}

@@ -3,7 +3,9 @@
 **Date:** 2026-07-18
 **Lane:** `crowns`
 **Status:** the localized centralizer scar cannot be repaired by a colour-preserving local mirror;
-exact `q=3,5` gates separate the immediate-pairing base from the genuinely recursive cases.
+exact `q=3,5` gates separate the immediate-pairing base from the genuinely recursive cases. The
+successor `(2,4,5)` obstruction also rules out restoring an arbitrary involution after every
+defect response.
 
 ## Result
 
@@ -128,8 +130,10 @@ sha256sum -c notes/2026-07-17-c294-mixed-scar-obstruction.sha256
 ## Revised silver frontier
 
 The centralizer localization remains useful, but its transfer state must retain more than the
-uncoloured dihedral coset. The next theorem should use the three-colour alternating-backbone
-coordinates and admit a state transition after a move on the defect coset. The exact `(2,3,4)`
-`PGL2(3)` graph is the first mandatory direct base case; the seven obstructed `PGL2(5)` types are
-the first falsification gate for any proposed recursive rule. A rule that merely installs another
-colour-preserving mirror or degrades immediately to paths and cycles is now closed.
+uncoloured dihedral coset or an involution with marked adjacent pairs. The next theorem should use
+the three-colour alternating-backbone coordinates and carry an asymmetric boundary word through a
+move on the defect coset. The exact `(2,3,4)` `PGL2(3)` graph is the first mandatory direct base
+case; the seven obstructed `PGL2(5)` types are the first falsification gate for any proposed
+recursive rule. A rule that merely installs another mirror, restores an arbitrary abstract
+involution immediately, or degrades to paths and cycles is now closed. See
+`notes/2026-07-17-c294-recursive-defective-mirror.md`.
