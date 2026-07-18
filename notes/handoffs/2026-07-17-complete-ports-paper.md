@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-17
-**Status**: ACTIVE; C285 CITATION PREFLIGHT COMPLETE; CORRECTION PASS UNALLOCATED
+**Status**: ACTIVE; C286 CORRECTION AND COLD-READ PASS IN PROGRESS
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
@@ -50,11 +50,11 @@ generic tract/foundation exposition. C220 remains an explicit inclusion decision
 
 ## Next step
 
-The C285 preflight preserves the six-part theorem spine but freezes eleven required source/claim
-corrections and seven citation-chain corrections before submission. Its bounded recommendation is
-to omit C220; that remains a user decision. After the user decides C220, allocate one private-source
-correction pass to synchronize the manuscript, bibliography, proof/novelty ledgers, README, and PDF.
-Do not begin public export during that pass.
+Execute C286: apply the C285 correction list to the private manuscript package and run independent
+paragraph-by-paragraph cold reads with durable observation/editorial logs. Reconcile accepted
+findings, rebuild and inspect the private PDF, and synchronize the bibliography, proof/novelty
+ledgers, README, and handoff. Keep C220 omitted pending its separate user decision and do not begin
+public export.
 
 Public export remains gated on the complete-ports repository name/local destination/public remote,
 license, and C220 decision. The private rename does not authorize repository initialization, copy,
