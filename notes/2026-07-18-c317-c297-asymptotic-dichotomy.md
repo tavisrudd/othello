@@ -2,7 +2,8 @@
 
 **Lane**: `relconic`
 
-**Status:** gated by C316; terminal theorem before C299.
+**Status:** ready; C316 exports four finite relative-offset maps and their complete exceptional
+skeleton. This is the terminal theorem before C299.
 
 ## Objective
 

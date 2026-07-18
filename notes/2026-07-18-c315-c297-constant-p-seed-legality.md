@@ -235,14 +235,20 @@ The finite-index absolute-trace conditions (17) do not change this asymptotic pa
 (18) gives `Theta(Q^2)` choices per seed and hence `Theta(Q^9)` marked survivor tuples before the
 listed finite quotients and deletions.
 
-Two allowed coincidence loci must be retained as marked degeneracies for C316 rather than silently
-deleted:
+The allowed conic coincidences and packet repeated-root loci must be retained as marked
+degeneracies for C316 rather than silently deleted:
 
 - the repair conics coincide exactly when `P0=d` and `w in {0,1}`;
-- repair conic 1 equals seed conic `gamma` at `(X_gamma,Y_gamma)=(0,0)`, and repair conic 2 equals
-  it at `(X_gamma,Y_gamma)=(d,theta)`.
+- repair conic 1 equals seed conic `gamma` exactly when `Gamma_gamma=0`, and repair conic 2 equals
+  it exactly when `Gamma_gamma=Delta_R`, where `Gamma_gamma=gamma+C` and
+  `Delta_R=C_2+C`;
+- the layer-one packet is identically repeated-root at `(X_gamma,Y_gamma)=(0,0)`, equivalently
+  `Gamma_gamma=omega^2`, while the layer-two packet is identically repeated-root at
+  `(X_gamma,Y_gamma)=(d,theta)`, equivalently
+  `Gamma_gamma=Delta_R+rho^2*omega^2`.
 
-Both are compatible with (17) precisely when the displayed repeated-root alternative applies.
+The last two loci are compatible with (17) precisely because the displayed repeated-root
+alternative applies.  They are packet degeneracies, not conic coincidences.
 
 ## Quotient and overlap audit
 
@@ -264,7 +270,7 @@ C316 should use exactly the following base, without re-solving seed legality:
 2. two ordered points of `T_rho,theta` satisfying (19), reconstructed by (15);
 3. the opens `rho*(rho+1)*P0*alpha*beta!=0` and `X_alpha!=X_beta`;
 4. the two prescribed-conic deletions (20), when that avoidance is imposed;
-5. the repair--repair and repair--seed coincidence loci listed above as explicit, allowed rank
+5. the conic-coincidence and packet repeated-root loci listed above as explicit, allowed rank
    boundaries; and
 6. the `w` gauge, seed/repair relabelings, semilinear action, and additive `E4` stabilizer kept as
    four distinct quotient data.

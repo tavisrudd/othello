@@ -106,8 +106,7 @@ unless they retain an explicit open tail.
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C299 `[relconic]` [GATED; PAPER-II DRAFT]** — C210 invariant/residue exposition: during Paper II drafting, supply only the characteristic-two section/gauge formulation and Artin--Schreier residue arguments that materially shorten or clarify the proof; this task is not a C301 gate → `notes/2026-07-18-c299-c210-artin-schreier-conic-bundle.md`.
-- **C316 `[relconic]` [QUEUED]** — construct universal genuine-collision incidence varieties over C315's exact constant-height `E4` survivor scheme (C313 proves the linear-p base empty) and first audit whether C305's two-height affine bundle generalizes; only then prove target dimensions, lossless reconstruction, dominance/degree, and the exceptional-divisor skeleton, leaving fiber genus to C317 → `notes/2026-07-18-c316-c297-incidence-height-map.md`.
-- **C317 `[relconic]` [GATED; C316]** — prove the collision-map fiber component/constant-field/genus/deletion theorems, close or isolate every exceptional divisor, and synthesize the constant-p and linear-p strata into the terminal asymptotic construction-versus-obstruction boundary before C299 → `notes/2026-07-18-c317-c297-asymptotic-dichotomy.md`.
+- **C317 `[relconic]` [QUEUED]** — prove the component/constant-field/genus/deletion theorems for C316's four relative-offset maps, close or isolate every branch and coincidence divisor, and synthesize the constant-p and empty linear-p strata into the terminal asymptotic construction-versus-obstruction boundary before C299 → `notes/2026-07-18-c317-c297-asymptotic-dichotomy.md`.
 
 ### `rp-next`
 
