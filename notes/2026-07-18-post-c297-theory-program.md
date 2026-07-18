@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-18
 
-**Status:** active program map; C312--C316 complete, C317 ready, C299 deliberately deferred.
+**Status:** theorem program complete through C317; C299 awaits the user manuscript-scope decision.
 
 ## Purpose
 
@@ -70,14 +70,16 @@ Only C297's proved actions may be used as geometric quotients.
 | C314 | complete | six-stratum invariant atlas, reconstruction, relabeling actions, degeneracy divisors, and marked stabilizers | C315, C316, later C299 |
 | C315 | complete | the odd-degree tail survivor is exactly the nine-dimensional constant-height `E4` arithmetic open; all other atlas charts are empty | C316, C317 |
 | C316 | complete | common height cancels; four lossless relative-offset maps have degrees `6,6,5,5`, with degree two on repair-conic coincidence | C317 |
-| C317 | ready | fiber geometry and terminal asymptotic construction-versus-obstruction dichotomy | later C299 scope decision |
+| C317 | complete | zero-dimensional fiber/translation-line geometry; fixed-coefficient odd-extension obstruction of relative degree at most five; exact fresh-field no-root boundary | later C299 scope decision |
 
-The C316 relative-offset incidence interface is committed and C317 is ready. Shared handoff and
+The C316 relative-offset incidence interface and C317 terminal theorem are committed. Shared handoff and
 queue edits remain serialized. C315 solves the committed coefficient system exported by C312;
 this separation prevents a universal determinant lemma from turning into an unbounded moduli
 classification. C316 proves that C305's two-height affine-bundle picture does not survive on
 C315's `E4` family: the common height cancels, and four finite relative-offset maps replace it.
-C317 consumes their exact eliminants, degrees, branch ideals, and exceptional skeleton.
+C317 consumes their exact eliminants, degrees, branch ideals, and exceptional skeleton. It proves
+that prescribed-target reduced fibers are finite, not positive-genus curves, and leaves fresh
+per-field coefficients behind four simultaneous no-root gates plus relative coverage.
 
 ## Red-team scope controls
 
@@ -90,8 +92,9 @@ C317 consumes their exact eliminants, degrees, branch ideals, and exceptional sk
   divisors are sufficient for the core theorem program.
 - C316 first audits the dimension and losslessness of the generalized height map. Dominance,
   branch, and genus claims start only after that audit.
-- C317 applies curve theory component by component. It must not hide unresolved exceptional
-  divisors behind the word “generic.”
+- C317 applies component descent to the actual fiber dimension. It must not hide unresolved
+  exceptional divisors behind the word “generic” or apply Hasse--Weil to a zero-dimensional
+  prescribed-target fiber.
 
 ## Proof and evidence policy
 
@@ -111,8 +114,7 @@ C317 consumes their exact eliminants, degrees, branch ideals, and exceptional sk
 
 ## Program exit gate
 
-The program is ready to return to C299 only after C317 states one of the following with exact
-scope:
+The program returns to C299 only after C317 states one of the following with exact scope:
 
 1. a seed-legal positive-dimensional family and the remaining coverage theorem needed for a
    construction;
@@ -121,4 +123,7 @@ scope:
 3. a bounded mixed result that identifies the surviving moduli and explains exactly why present
    curve methods do not decide them.
 
-Until then, `layered-arcs` remains a working alias, not an agreed manuscript scope.
+C317 closes with outcome 3: fixed coefficients collide after odd relative degree at most five,
+while fresh coefficients remain behind four exact finite no-root gates and relative coverage.
+`layered-arcs` remains a working alias, not an agreed manuscript scope, until the user accepts the
+bounded mechanism-paper recommendation.
