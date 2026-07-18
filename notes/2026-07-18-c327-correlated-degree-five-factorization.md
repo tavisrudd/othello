@@ -4,17 +4,13 @@
 
 **Date:** 2026-07-18
 
-**Status:** active; theorem-led analysis of C316's two seed--seed--repair eliminants, with no large
-field or coefficient census.  The first common pentic normal form and shared branch identity are
-proved below, together with generic geometric monodromy `S5` for each pentic separately.  Their
-generic splitting fields are disjoint and retain joint monodromy `S5 times S5` after the legality
-Artin--Schreier base changes.  The generic legality cover is geometrically connected of degree
-sixteen with constant field `GF(2)`.  On the common seed-translation line, the exact slope audit
-has seven (not four) possible dependence divisors; off them the legality cover is a rational curve,
-totally ramified only at infinity, and has exactly `Q/16` legal base parameters.  Pullback of the
-two pentic covers now has a conditional genus bound and an effective simultaneous-derangement
-lower bound positive for `Q>=2^41`; explicit rational supply on the required skeleton open remains
-open.
+**Status:** complete; theorem-led analysis of C316's two seed--seed--repair eliminants, with no
+large field or coefficient census.  The common pentic form, individual `S5`, joint
+`S5 times S5`, and legality base change are proved.  On the common seed-translation line, the exact
+slope audit has seven (not four) possible dependence divisors; off them the legality cover is a
+rational curve with exactly `Q/16` legal base parameters.  Its pulled-back joint cover has genus at
+most `455701`, and effective Chebotarev plus an explicit degree-`732` skeleton open proves a
+simultaneous degree-five no-linear-factor survivor over every odd-tower field `Q>=2^41`.
 
 ## Objective
 
@@ -63,13 +59,12 @@ Do not re-solve C312's packets, C314's atlas, or C315's legality classification.
 | individual geometric monodromy | complete | `S5` by the generic transposition theorem |
 | shared resolvents/splitting fields | complete generically | distinct sign divisors give disjoint fields and `S5 times S5` |
 | trace-legality geometrization | complete generically | connected degree-sixteen `(C2)^4` cover, constant field `GF(2)` |
-| effective arithmetic point supply | conditional | genus at most `455701`, bound positive for `Q>=2^41`; skeleton-open supply remains |
-| exceptional survivor rows | open | `X in {0,d}`, `Delta_R=0`, repeated-root/conic and branch divisors |
-| downstream interface | open | two degree-six gates and relative coverage, conditional on degree-five survival |
+| effective arithmetic point supply | complete | genus at most `455701`, degree-`732` skeleton open, positive bound for `Q>=2^41` |
+| exceptional survivor rows | bounded away | the existence theorem lies on an explicit generic open; exceptional rows are not needed |
+| downstream interface | complete | exact surviving base exported to the two degree-six gates and relative coverage |
 
-C327 exits with an explicit simultaneous no-root theorem and threshold, an exact obstruction, or a
-bounded mixed theorem naming the irreducible effective-point-count obstruction.  It does not exit
-from generic monodromy or the conditional main term alone.
+C327 exits with the explicit simultaneous no-root theorem and threshold above.  It does not claim
+that the two degree-six gates or relative coverage hold.
 
 ## Guardrails and stop conditions
 
@@ -246,8 +241,8 @@ an illegal `h` has none.  Division by sixteen proves (26).
 
 This exact count has no Weil error and no hidden affine deletion.  C315's zero-height and
 prescribed-conic exclusions, C316's pentic branch values, and any divisors needed to preserve
-`S5 times S5` on the specialized skeleton are downstream deletions and have not yet been
-subtracted from (26).
+`S5 times S5` on the specialized skeleton are downstream deletions from (26); they are handled in
+the next two subsections.
 
 ### Conditional joint-cover bound and infinity inertia
 
@@ -255,7 +250,7 @@ Assume now that a specialized skeleton on the exact independence open also has t
 slice conditions: each pentic has `S5` geometric monodromy, its two finite critical values are
 distinct, and the four critical values of the two pentics are pairwise distinct.  These conditions
 are exact nonvanishing conditions on the critical-value resultants, not a random-polynomial
-hypothesis.  Their explicit skeleton divisors and rational-point supply remain to be exported.
+hypothesis.  Their explicit skeleton divisors and rational-point supply are exported below.
 
 Let `C` be the rational legality curve above and let `M/F(C)` be the compositum of the two pentic
 splitting fields.  The finite branch locus on `C` consists of `4*16=64` geometric points.  At each,
@@ -322,16 +317,90 @@ particular (32) is positive on the odd tower for
 
     Q>=2^41.                                             (33)
 
-This is an effective conditional theorem, not yet C327's exit theorem: the specialized skeleton
-must still be shown to have an `F`-rational point off every individual-monodromy, shared-branch,
-zero-height, and prescribed-conic divisor, with an explicit threshold.  The unresolved binary
-choice in (28) does not obstruct (31)--(33), because (30) uses its larger genus.
+Equations (31)--(33) are conditional only on the displayed specialized skeleton open.  The next
+subsection supplies a rational point on that open.  The unresolved binary choice in (28) does not
+obstruct the bound, because (30) uses its larger genus.
 
 The source used for (31) is Michiel Kosters, *A short proof of a Chebotarev density theorem for
 function fields*, Corollary 1.3, arXiv:1404.6345.  The cached PDF has SHA-256
 `a7576fd77dd933e73532f37ac8799de925c58733ddf49f9f11a049c0286a51e1`; the corollary obtains the
 explicit error from Hasse--Weil on the Frobenius twists.  It includes ramified primes through a
 probability measure, which is why (31) separately subtracts all rational ramified base points.
+
+### The skeleton open has rational points
+
+Take the translation origin `y_0=0,y'_0=t`; this loses no line because changing the origin only
+replaces `h`.  The skeleton variables are then
+
+    (rho,P0,w,x,x',t) in A6.
+
+The remaining slice conditions admit an exact polynomial interface over `GF(2)`.  For each repair
+orientation let `E_i(p,h)` be (1) after (4)--(7) and the common translation, and define
+
+    R_i(h)=Res_p(E_i(p,h),B(p)),
+    c_i=[h^2]R_i(h),
+    S=Res_h(R_1(h),R_2(h)).                              (34)
+
+After specialization to a finite field, `B` is the square of its reduced critical quadratic and
+`R_i` is the square of the degree-two reduced branch polynomial.  Thus `c_i!=0` says that its two
+critical values are distinct, while `S!=0` says that the two branch sets are disjoint.
+
+It remains to exclude degeneration from index two to index three at a critical source point.  Put
+
+    C_i=A_i*(A_i+delta_1),
+    W_i=e_i^4*delta_1^8+e_i^2*delta_1^5*C_i^2+C_i^4*M.   (35)
+
+If `b,c` are the roots used in (10)--(11), then `W_i` is the square of
+
+    delta_1^4*b*c*H_2(b)*H_2(c).
+
+Consequently `W_i!=0` is exactly the required index-two condition at both critical points.  The
+nonvanishing of
+
+    P_open=(standing skeleton factors)*(seven factors in the table)
+           *W_1*W_2*c_1*c_2*S                           (36)
+
+therefore implies every hypothesis used in (27)--(33): individual `S5`, disjoint finite sign
+divisors, joint `S5 times S5`, legality independence, and the sixty-four-point finite branch
+description.
+
+The polynomial (36) is nonzero.  The generic individual-monodromy proof makes `W_i*c_i` nonzero;
+the generic shared-branch proof makes `S` nonzero; and the seven explicitly different rational
+relations are nonzero in the skeleton function field.  No finite-field sample is used here.
+
+For an effective rational-point bound, the coefficients of `E_i` have skeleton degree at most
+nine and those of `B` degree at most six.  Resultant multihomogeneity gives
+
+    deg(R_i)<=4*9+5*6=66,
+    deg(c_i)<=66,                 deg(S)<=8*66=528.
+
+Equation (35) has degree at most twenty-two.  The ten standing-open factors have total degree ten,
+and the seven slope factors have total degree eighteen.  Hence
+
+    deg(P_open)<=10+18+2*22+2*66+528=732.               (37)
+
+Schwartz--Zippel shows that a nonzero polynomial of total degree at most `732` cannot vanish on all
+of `F^6` when `Q>732`.  Therefore an `F`-rational skeleton satisfying (36) exists for every such
+`F`.  The common-height parameter `H`, which does not enter the pentics or legality line, can then
+be chosen away from C316's at most four prescribed-conic/zero-height values.  The two seed-zero
+values on the translation line were already subtracted in (32).
+
+Combining (32), (33), and (37) proves the unconditional degree-five result:
+
+> For every `F=GF(2^n)` with `n` odd and `Q>=2^41`, C315's `E4` survivor contains a legal,
+> nonzero-height ordered seed pair for which both C316 seed--seed--repair pentics have factor type
+> `(5)` or `(3,2)`.  More precisely, some skeleton has at least the lower bound (32) such common
+> translation parameters.
+
+This proves simultaneous avoidance of the two degree-five collision gates.  It does not address
+the two degree-six repair--repair--seed gates or relative coverage.  The exact downstream consumer
+is the subset cut out inside the points counted by (32) by:
+
+1. no linear factor in either C316 degree-six eliminant (degree two on `Delta_R=0`); and
+2. a surviving secant through every required relative point after the C315/C316 deletions.
+
+Those are separate arithmetic and coverage conditions; the theorem above supplies their first
+nonempty, quantitatively bounded degree-five base and does not claim either condition automatically.
 
 ## First result: common pentic normal form
 
@@ -486,7 +555,7 @@ divisible by five, so it contains a 5-cycle.  A 5-cycle together with any transp
 `S5`: conjugating the transposition by powers of the cycle gives the edges of a connected graph on
 the five letters.  Hence the geometric monodromy is `S5`.
 
-### Consequence and remaining caveat
+### Consequence before the translation-line specialization
 
 Individually, each ambient pentic has the largest possible geometric monodromy.  This supports no
 density conclusion on its own.  C315's trace-one conditions are imposed by Artin--Schreier
@@ -640,6 +709,10 @@ exists over any particular field.
 
 ## Evidence boundary
 
-The task begins from proof-only closed reports.  No new theorem is claimed here yet.  The strategic
-motivation and cross-program possibilities are recorded separately in
+The common-form, monodromy, legality, ramification, genus, and skeleton-open results are exact
+symbolic proofs; no field or coefficient census is evidence.  The only new external input is the
+source-pinned effective Chebotarev/Hasse--Weil estimate stated above.  C327 proves only the two
+degree-five no-root gates and deliberately leaves the two degree-six gates and relative coverage
+to the exported consumer interface.  Strategic motivation and cross-program possibilities remain
+recorded separately in
 [`2026-07-18-post-C312–C317-codex-brainstorm.md`](2026-07-18-post-C312–C317-codex-brainstorm.md).
