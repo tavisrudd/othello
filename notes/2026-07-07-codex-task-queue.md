@@ -101,7 +101,6 @@ unless they retain an explicit open tail.
 ### `relconic`
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
-- **C210 `[relconic]` [ACTIVE]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; all factorization branches are arithmetically complete and collision-forcing for odd-tower `q>=512`, with the global off-divisor reconstruction obstruction and bounded mechanism theorem remaining → [`C210 umbrella handoff`](handoffs/2026-07-17-c210.md).
 
 ### `rp-next`
 
