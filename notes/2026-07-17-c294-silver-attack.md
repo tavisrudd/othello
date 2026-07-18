@@ -84,10 +84,11 @@ spectra, coherent-configuration data, or conjugacy.
 
 ## Relation to the strengthened bronze family
 
-The companion C294 theorem now gives exactly `(p-5)/2` mirror-certified full-`PGL2(p)` four-centre
-configurations for every eligible prime. That one-dimensional family is the first full-group
-stratum and supplies the trace/subfield test bed, but it is not silver: it does not classify every
-configuration at a fixed size.
+The companion C294 theorem now gives a `Theta(q)` mirror-certified full-`PGL2(q)` four-centre
+family over every odd extension of each eligible prime field: `(p-5)/2` parameters in degree one
+and exactly half the full-degree elements in higher odd degree. Its projective-trace criterion
+closes subfield exclusion for that family, but it is not the general value-preserving subfield
+descent required here and does not classify every configuration at a fixed size.
 
 ## Evidence and replay
 

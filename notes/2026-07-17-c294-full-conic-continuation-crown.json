@@ -289,13 +289,76 @@
       ]
     }
   ],
+  "extension_cases": [
+    {
+      "admissible_parameter_count": 39732,
+      "character_square_membership_crosschecks": 79464,
+      "coordinate_identity_samples": [
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          11,
+          1,
+          0
+        ],
+        [
+          12,
+          1,
+          0
+        ],
+        [
+          13,
+          1,
+          0
+        ],
+        [
+          14,
+          1,
+          0
+        ],
+        [
+          15,
+          1,
+          0
+        ],
+        [
+          17,
+          1,
+          0
+        ]
+      ],
+      "extension_degree": 3,
+      "full_degree_element_count": 79464,
+      "modulus_coefficients_low_to_high": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "p": 43,
+      "parameter_count_formula": "(p^3-p)/2",
+      "q": 79507,
+      "square_set_size": 39754,
+      "trace_definition_field_checks": 39732
+    }
+  ],
   "family": {
     "centres": "(0,1), (-1,0), (1,b), (-b,-1)",
-    "parameter_condition": "b not in {0,1,-1,2} and (b-1)^2+4 nonsquare",
-    "parameter_count": "(p-5)/2",
-    "prime_condition": "p > 5 and p mod 40 in {3,27}",
+    "extension_condition": "q=p^e with odd e and F_p(b)=F_q",
+    "parameter_condition": "(b-1)^2+4 nonsquare, plus base-field exclusions",
+    "parameter_count": "(p-5)/2 for e=1; half the full-degree elements for e>1",
+    "prime_condition": "p > 5 and p mod 40 in {3,27}; e odd",
     "residual_outcome": "P by fixed-point-free nonadjacent tau pairing",
-    "tau": "t -> -1/t"
+    "tau": "t -> -1/t",
+    "trace_definition_field_invariant": "tr(A2*A0)^2/det(A2*A0)=1/(1-b)"
   },
-  "schema": "c294-full-pgl-mirror-family-v2"
+  "schema": "c294-full-pgl-mirror-family-v3"
 }

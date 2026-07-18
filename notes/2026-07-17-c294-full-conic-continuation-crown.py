@@ -2,8 +2,9 @@
 """Replay the finite checks for the C294 full-PGL mirror family.
 
 The proof in the companion report is uniform.  This checker independently verifies
-all coordinate identities and enumerates the generated projective matrix group for
-the eligible primes at most 110.
+all coordinate identities, enumerates the generated projective matrix group for the
+eligible primes at most 110, and exhausts the full-degree parameter count in the
+first eligible nonprime field F_(43^3).
 """
 
 from __future__ import annotations
@@ -67,6 +68,182 @@ def projective_group_order(gens: list[tuple[int, ...]], p: int) -> int:
                 seen.add(z)
                 todo.append(z)
     return len(seen)
+
+
+class CubicField:
+    """A small deterministic polynomial-basis implementation of F_(p^3)."""
+
+    def __init__(self, p: int, modulus: tuple[int, int, int]) -> None:
+        self.p = p
+        self.q = p ** 3
+        self.modulus = modulus
+
+    def coefficients(self, value: int) -> tuple[int, int, int]:
+        return (value % self.p, value // self.p % self.p, value // (self.p * self.p))
+
+    def encode(self, coefficients: tuple[int, int, int]) -> int:
+        a, b, c = coefficients
+        return a % self.p + self.p * (b % self.p) + self.p * self.p * (c % self.p)
+
+    def constant(self, value: int) -> int:
+        return value % self.p
+
+    def add(self, left: int, right: int) -> int:
+        a = self.coefficients(left)
+        b = self.coefficients(right)
+        return self.encode(tuple(a[i] + b[i] for i in range(3)))
+
+    def neg(self, value: int) -> int:
+        return self.encode(tuple(-entry for entry in self.coefficients(value)))
+
+    def sub(self, left: int, right: int) -> int:
+        return self.add(left, self.neg(right))
+
+    def mul(self, left: int, right: int) -> int:
+        a = self.coefficients(left)
+        b = self.coefficients(right)
+        product = [0] * 5
+        for i in range(3):
+            for j in range(3):
+                product[i + j] = (product[i + j] + a[i] * b[j]) % self.p
+        for degree in (4, 3):
+            leading = product[degree]
+            for offset, coefficient in enumerate(self.modulus):
+                product[degree - 3 + offset] -= leading * coefficient
+            product[degree] = 0
+        return self.encode(tuple(product[i] for i in range(3)))
+
+    def pow(self, value: int, exponent: int) -> int:
+        result = self.constant(1)
+        base = value
+        while exponent:
+            if exponent & 1:
+                result = self.mul(result, base)
+            base = self.mul(base, base)
+            exponent >>= 1
+        return result
+
+    def inverse(self, value: int) -> int:
+        assert value
+        return self.pow(value, self.q - 2)
+
+    def character(self, value: int) -> int:
+        if value == 0:
+            return 0
+        result = self.pow(value, (self.q - 1) // 2)
+        if result == self.constant(1):
+            return 1
+        assert result == self.constant(-1)
+        return -1
+
+    def in_prime_field(self, value: int) -> bool:
+        return self.coefficients(value)[1:] == (0, 0)
+
+
+def irreducible_cubic(p: int) -> tuple[int, int, int]:
+    """Return the first x^3+c2*x^2+c1*x+c0 with no F_p root."""
+    for c2 in range(p):
+        for c1 in range(p):
+            for c0 in range(1, p):
+                if all((x ** 3 + c2 * x * x + c1 * x + c0) % p for x in range(p)):
+                    return (c0, c1, c2)
+    raise AssertionError("no irreducible cubic found")
+
+
+def extension_mat_mul(
+    field: CubicField, left: tuple[int, ...], right: tuple[int, ...]
+) -> tuple[int, ...]:
+    a, b, c, d = left
+    e, f, g, h = right
+    return (
+        field.add(field.mul(a, e), field.mul(b, g)),
+        field.add(field.mul(a, f), field.mul(b, h)),
+        field.add(field.mul(c, e), field.mul(d, g)),
+        field.add(field.mul(c, f), field.mul(d, h)),
+    )
+
+
+def check_cubic_extension(p: int) -> dict[str, object]:
+    """Exhaust the full-degree mirror parameters in the first theorem extension."""
+    assert p > 5 and p % 40 in (3, 27)
+    field = CubicField(p, irreducible_cubic(p))
+    one = field.constant(1)
+    minus_one = field.constant(-1)
+    assert field.character(minus_one) == -1
+    assert field.character(field.constant(5)) == -1
+    squares = {field.mul(value, value) for value in range(field.q)}
+    assert len(squares) == (field.q + 1) // 2
+
+    admissible = []
+    character_crosschecks = 0
+    trace_checks = 0
+    for b in range(field.q):
+        if field.in_prime_field(b):
+            continue
+        shifted = field.sub(b, one)
+        mirror_test = field.add(field.mul(shifted, shifted), field.constant(4))
+        character = field.character(mirror_test)
+        assert mirror_test != 0
+        assert (mirror_test in squares) == (character == 1)
+        character_crosschecks += 1
+        if character != -1:
+            continue
+        admissible.append(b)
+
+        denominator = field.sub(one, b)
+        trace_invariant = field.inverse(denominator)
+        assert not field.in_prime_field(trace_invariant)
+        assert field.sub(one, field.inverse(trace_invariant)) == b
+        trace_checks += 1
+
+    expected = (field.q - p) // 2
+    assert len(admissible) == expected
+
+    identity = (one, 0, 0, one)
+    coordinate_samples = admissible[:8]
+    for b in coordinate_samples:
+        gens = [
+            (one, 0, one, minus_one),
+            (one, one, 0, minus_one),
+            (one, minus_one, b, minus_one),
+            (one, b, minus_one, minus_one),
+        ]
+        word = identity
+        for index in (2, 0, 2, 0, 1, 0):
+            word = extension_mat_mul(field, word, gens[index])
+        expected_word = (
+            field.sub(field.mul(field.constant(2), b), field.constant(3)),
+            field.sub(field.constant(2), b),
+            field.sub(b, field.constant(2)),
+            one,
+        )
+        assert word == expected_word
+
+        pair_product = extension_mat_mul(field, gens[2], gens[0])
+        trace = field.add(pair_product[0], pair_product[3])
+        determinant = field.sub(
+            field.mul(pair_product[0], pair_product[3]),
+            field.mul(pair_product[1], pair_product[2]),
+        )
+        assert field.mul(field.mul(trace, trace), field.inverse(determinant)) == field.inverse(
+            field.sub(one, b)
+        )
+
+    return {
+        "admissible_parameter_count": len(admissible),
+        "character_square_membership_crosschecks": character_crosschecks,
+        "coordinate_identity_samples": [
+            list(field.coefficients(value)) for value in coordinate_samples
+        ],
+        "extension_degree": 3,
+        "full_degree_element_count": field.q - p,
+        "modulus_coefficients_low_to_high": list(field.modulus) + [1],
+        "p": p,
+        "parameter_count_formula": "(p^3-p)/2",
+        "q": field.q,
+        "square_set_size": len(squares),
+        "trace_definition_field_checks": trace_checks,
+    }
 
 
 def act(m: tuple[int, ...], t: int, p: int) -> int:
@@ -194,15 +371,18 @@ def generate() -> dict[str, object]:
     primes = [p for p in range(7, 111) if is_prime(p) and p % 40 in (3, 27)]
     return {
         "cases": [check_case(p) for p in primes],
+        "extension_cases": [check_cubic_extension(43)],
         "family": {
             "centres": "(0,1), (-1,0), (1,b), (-b,-1)",
-            "parameter_condition": "b not in {0,1,-1,2} and (b-1)^2+4 nonsquare",
-            "parameter_count": "(p-5)/2",
-            "prime_condition": "p > 5 and p mod 40 in {3,27}",
+            "extension_condition": "q=p^e with odd e and F_p(b)=F_q",
+            "parameter_condition": "(b-1)^2+4 nonsquare, plus base-field exclusions",
+            "parameter_count": "(p-5)/2 for e=1; half the full-degree elements for e>1",
+            "prime_condition": "p > 5 and p mod 40 in {3,27}; e odd",
             "residual_outcome": "P by fixed-point-free nonadjacent tau pairing",
             "tau": "t -> -1/t",
+            "trace_definition_field_invariant": "tr(A2*A0)^2/det(A2*A0)=1/(1-b)",
         },
-        "schema": "c294-full-pgl-mirror-family-v2",
+        "schema": "c294-full-pgl-mirror-family-v3",
     }
 
 
@@ -220,7 +400,13 @@ def main() -> int:
         if tracked != result:
             raise SystemExit("tracked JSON content differs from deterministic regeneration")
         parameters = sum(int(case["admissible_parameter_count"]) for case in result["cases"])
-        print(f"OK: {len(result['cases'])} prime cases, {parameters} parameters; tracked JSON matches")
+        extension_parameters = sum(
+            int(case["admissible_parameter_count"]) for case in result["extension_cases"]
+        )
+        print(
+            f"OK: {len(result['cases'])} prime cases, {parameters} prime parameters, "
+            f"{extension_parameters} extension parameters; tracked JSON matches"
+        )
     elif args.write:
         Path(__file__).with_suffix(".json").write_text(rendered)
         print(f"WROTE {Path(__file__).with_suffix('.json')}")
