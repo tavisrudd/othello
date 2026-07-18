@@ -65,6 +65,22 @@ first move.
 All twelve have zero degree-two replies. The two `(4,5,6)` rows are genuinely distinct conjugacy
 types, as are the two determinant-distinguished `(3,4,6)` rows.
 
+### Root nimbers reduce to one child outcome
+
+Every regular Cayley graph in the table is vertex-transitive under right translations. Hence all
+root moves have isomorphic followers with one common nimber `g`, so the root option-nimber set is
+the singleton `{g}`. Therefore
+
+\[
+\mathcal G(\operatorname{Cay}(H,S))=\operatorname{mex}\{g\}
+=\begin{cases}1,&g=0,\\0,&g\ne0.\end{cases}
+\]
+
+In particular, every one of the twelve root nimbers is either zero or one. Computing its exact
+nimber requires only the P/N outcome of one canonical 116-vertex follower after a move at the
+identity; it does not require a full root mex sweep. This reduction does not determine any of the
+seven obstructed values.
+
 This is a bounded negative theorem, not a value classification at `q=5`. It rules out the proposed
 uniform one-reply centralizer-coset peel and any root-level colour-preserving variant. It does not
 rule out a colour-changing or multi-stage recursive transfer, and it does not determine the P/N
