@@ -18,10 +18,12 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   stay deferred). Covers V₄ + the full two-reflection `D₂ₘ` pair family (all `m≥3`, both parities,
   new §14) + triple-based D_{4n} + S₄/A₅ regular-template rows; §15 defers the nonregular
   polyhedral coset templates and the PSL₂/PGL₂ escape residual.
-- Lean: `lean/DihedralSchreier/` certifies the reduction plumbing and the V₄→K₄ core only, without
-  `sorry` or `native_decide` (kernel `decide`). Template nimbers, Theorem 7.2 isomorphisms,
-  Brown et al. ladder values, orbit counts, and the density theorem are not yet formalized. See
-  `lean/DihedralSchreier/README.md`.
+- Lean: `lean/DihedralSchreier/` certifies the reduction plumbing, the V₄→K₄ core, Φ_T
+  (Prop 11.1 + Cor 11.2, `Burnside.lean`), the finite ½-density core (`Density.lean`), and the
+  conditional density-½ layer behind exactly one quarantined Davenport axiom
+  (`DensityAxioms.lean` + `DensityConditional.lean`) — all without `sorry` or `native_decide`.
+  Still not formalized: template nimbers, Theorem 7.2 isomorphisms, Brown et al. ladder values,
+  orbit counts, and the new §14 pair-family theorems. See `lean/DihedralSchreier/README.md`.
 - Solver: `rust/scripts/nodekayles_cayley.rs`. S₄ nimbers cross-checked by three independent
   solvers; all five A₅ rows independently reproduced by the C260 cross-check solver.
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
@@ -66,7 +68,23 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   single-axiom boundary sentence; the C260 maximal-automorphism-group remark (Appendix A); an
   eventual-periodicity-in-m corollary (Dawson period 34) if C264's read confirms §14 lacks it; and
   title/abstract calibration so nothing reads as covering the wild case.
-- **C264** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle.
+
+## Cautions (standing, for any session in this lane)
+
+- The Lean worktree may hold foreign dirty state under `RelativeConicArcs/` (alt-orbit-repair
+  lane): never build across, stage, or touch that closure. Builds go through
+  `lean/scripts/lean-build-queue.py` or `guarded-lean` only, per `lean/CLAUDE.md`.
+- `lean-build-queue.py run --detach` FAILS FAST when another owner holds the build lock — it does
+  not queue behind it. Check the launcher log for "another build owner holds"; resubmit after the
+  holder finishes.
+- Concurrent sessions allocate C-IDs and sweep the shared queue file with whole-file adds:
+  re-verify the max ID immediately before allocating, and commit with explicit pathspecs.
+- Every computational claim needs the atomic evidence bundle of CLAUDE.md "Research records and
+  computational reproducibility": tracked script + canonical JSON + SHA-256 manifest + report with
+  regeneration commands, committed together.
+- Nontrivial proof development requires the named-expert personas read first
+  (`notes/2026-07-07-named-expert-personas-context.md`).
+- The manuscript's Discussion is §15 after C263; do not reintroduce "§14 = Discussion" references.
 
 ## Cross-lane relationships (foreign; do not re-peg without approval)
 
