@@ -31,6 +31,7 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   bundle reviewed, independently re-replayed (2,160 triples, 38 templates, 0 mismatches), and
   committed; manuscript integration owed by C264 §6 under the adopted spine →
   `notes/2026-07-17-c284-dihedral-polyhedral-coset-templates.md`.
+- Discovery track: `notes/2026-07-18-dihedral-discovery-track.md` (started 2026-07-18).
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
   satisfied by C263, escape hatch not needed), and the release policy (formalization gate,
   adequacy appendix, provenance section).
