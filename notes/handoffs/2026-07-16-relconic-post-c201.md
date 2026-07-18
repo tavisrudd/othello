@@ -34,7 +34,21 @@ subtlety. Completeness must instead work with the full `D_AS` ideal `(c0,c1,c2)`
 equal to the branch-3 ideal `(delta+p, w^2+w, h0-h0_3)`; or explicitly show the `A_i=0` sublocus forces
 `theta=0` (excluded: `delta=0` / no rational `w` over the odd tower), mirroring a=0. That 3-generator
 saturation in 7 vars is heavy -- budget it, use `quit;`-terminated Singular piped via stdin, do not
-leave it orphaned;
+leave it orphaned. **Fable advice (2026-07-17, [`2026-07-17-c210-fable-completeness-advice.md`](../2026-07-17-c210-fable-completeness-advice.md)) reframes this -- follow it:**
+(0) the excess surface is NOT yet shown to be pollution -- by the char-2 identity `A_i*c_j+A_j*c_i=E_ij`,
+every base point in `V(R01,R02)` with some `A_i!=0` lifts to a genuine `D_AS` point, so the 2-dim excess
+is either true pollution (inside the common vanishing of all `(e,b)`-coefficients of the `A_i`) or a
+**missing 4th branch family** (the jackpot); decide it FIRST with a near-free `GF(8)` census + `GF(512)`
+lift probe (odd tower; `GF(64)` is a trap). (1) R1's exact ideal-equality is **wrong-shaped** (retains
+algebraically-present `theta=0` components and is non-reduced via `R_ij^2`), so state the target
+arithmetically: every rational point over `GF(8^m)`, m odd, off `delta*p*N*K1*K2=0`, lies on branch
+1/2/3. (2) The a=0->a!=0 deformation shortcut is a **trap** (non-flat, non-reduced, moving exclusion
+divisors) -- a falsifier only. (3) **Merged-pole membership gap:** branch 3 lives ENTIRELY on `K1*K2=0`
+(at `delta=p`, `K1=p^2*w^2`, `K2=p^2*(w+1)^2`) where the committed `c_i` characterization is not derived,
+so branch-3 membership is currently a closure/limit statement -- fix cheaply by exhibiting the explicit
+split `F=(tau^2+bQ*tau+A)(tau^2+bQ*tau+A')` by exact division on each branch (also hands the trace test
+its `A(u)`). Sequencing: probe (0) -> explicit splits (3) for all three branches -> second-layer trace
+test (the crux) -> full arithmetic completeness last;
 (c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
 trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
 arc-legal rootless branch is where a construction could hide); (d) the `a!=0` reconstruction-split
@@ -311,6 +325,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)
 - C210 a!=0 step-2(b) part 2 (three explicit D_AS branches + forced h0; completeness open):
   [`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)
+- C210 a!=0 completeness Fable advice (probe-first plan; arithmetic target; merged-pole membership gap):
+  [`2026-07-17-c210-fable-completeness-advice.md`](../2026-07-17-c210-fable-completeness-advice.md)
 - C210 a!=0 step-1/step-2 Fable review (traps, progress bar, landing odds):
   [`2026-07-17-c210-fable-review.md`](../2026-07-17-c210-fable-review.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
