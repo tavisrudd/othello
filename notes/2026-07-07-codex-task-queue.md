@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C325.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C326.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -23,6 +23,7 @@ unless they retain an explicit open tail.
 
 - **C162 `[build-sys]` [ACTIVE]** — quiet resource/profile/tmpfs orchestration landed; next real lightweight gate, restart tests, import blast radius, stable-checker boundaries, and artifact isolation → `notes/2026-07-14-c162-lean-build-system.md`.
 - **C225 `[build-sys]` [ACTIVE]** — roll out an adjacent systemd-managed Lean queue path observable from submission through terminal exit, without disrupting agents using the legacy Python queue or spending transcript turns on polling → `notes/handoffs/2026-07-16-c225-lean-queue-completion-notification.md`.
+- **C326 `[build-sys]` [QUEUED; start with RelativeConicArcs]** — generate the trust tables instead of hand-maintaining them: a machine-readable spine per area (terminal theorems, gate module, permitted axiom set, data trees with generator path and payload hash, named classical inputs with entry mode), tables in `lean/TRUST.md` and the per-area manifests emitted between markers from it, ground truth extracted from Lean rather than memory (transitive module list, every `axiom` declaration in each gate closure, axiom set per terminal), a `--check` drift mode that fails loudly, and a generated per-gate dependency graph with each data tree collapsed to one annotated node so a vanished consumer edge shows as a dangling node. Enforce a parseable generator/hash header on every listed data tree as an acceptance rule. Fixes the defects a hand-written pass introduced and could not catch: the two `Q11DyeAxioms` axioms absent from every manifest, `Q25ResidualTransportData` attributed to the wrong consumer, the `DO NOT EDIT` header claim false for `Q16CertificateData`/`Q16LeafData`/`Q25PairData`, the omitted `Q16CertificateRows`/`Q25PairRows` trees, `lean/Queens/` missing from every list, and the unverified `Gates.Baer` closure coverage → `notes/2026-07-18-c151-trust-doc-diff-fable-review.md` §9.
 - **C324 `[build-sys]` [QUEUED; before C287 extraction]** — one clean regeneration pass per paper on the pinned toolchain, confirming each frozen artifact still reproduces byte-identically; recorded hashes prove identity, not that the generator still reproduces the artifact. Record the outcome per manifest → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C287 `[build-sys]` [QUEUED]** — extract the reviewed union of all paper-facing Lean closures into one fresh-history shared repository at `~/src/papers/lean`, validate public gates, and prove guarded artifact restore semantics → `notes/2026-07-17-c287-shared-lean-extraction-plan.md`.
 ### `cap`
@@ -43,7 +44,7 @@ unless they retain an explicit open tail.
 
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C211 `[clebsch]` [REPORTED 2026-07-16]** — exact `A3/H3` finite-reduction bridge, intersection-lattice decoder/complement synthesis, two conic-filling cases, and narrowed novelty audit → `notes/2026-07-16-c211-clebsch-reflection-arrangements.md`.
-- **C320 `[clebsch]` [QUEUED]** — create the `lean/CERTIFICATES.md`-standard trust manifest for the Clebsch package: every claim with its exact verifier, one verify-all entry point, the Lean/Python/Singular/cited-mathematics boundary, and the two Dye assumptions as named classical imports with what remains unconditional without them (Dye is currently documented nowhere under `lean/`) → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C320 `[clebsch]` [QUEUED]** — create the `lean/CERTIFICATES.md`-standard trust manifest for the Clebsch package: every claim with its exact verifier, one verify-all entry point, the Lean/Python/Singular/cited-mathematics boundary, and the two Dye assumptions as named classical imports with what remains unconditional without them (they are stated as global axioms in `lean/RelativeConicArcs/Q11DyeAxioms.lean` but appear in no manifest) → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C321 `[clebsch]` [QUEUED; after C320]** — replace the load-bearing Singular evidence: extract cofactor/factorization certificates for positive claims and check them by exact arithmetic; for completeness-type claims re-derive the input system independently from the geometry plus invariant spot checks, since a second CAS run on the same input shares the specification and is near-zero marginal evidence → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C222 `[clebsch]` [ACTIVE; COMPACT-PROOF GATE]** — Lean-formalize the new `A3/H3` coordinate bridge, intersection ledgers, complement counts, and decoder-stratum consequences, proceeding only through compact theorem-level proofs and not large generated certificate trees → `notes/2026-07-16-c222-lean-a3-h3-closure.md`.
 
@@ -115,6 +116,7 @@ unless they retain an explicit open tail.
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C299 `[relconic]` [GATED; PAPER-II DRAFT]** — C210 invariant/residue exposition: during Paper II drafting, supply only the characteristic-two section/gauge formulation and Artin--Schreier residue arguments that materially shorten or clarify the proof; this task is not a C301 gate → `notes/2026-07-18-c299-c210-artin-schreier-conic-bundle.md`.
+- **C327 `[relconic]` [ACTIVE]** — before C299, determine whether C315's two degree-five seed--seed--repair eliminants can simultaneously have no linear factor on the trace-defined survivor base: prove their generic separability/irreducibility and monodromy or an exact substitute, audit shared resolvents and exceptional strata, geometrize the trace conditions, and export the first coverage interface; theorem-led only, with no large field or coefficient census → `notes/2026-07-18-c327-correlated-degree-five-factorization.md`.
 
 ### `rp-next`
 
