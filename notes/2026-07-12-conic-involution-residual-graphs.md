@@ -96,6 +96,14 @@ closing any immediate component-core theorem with bound at most 13. The next tar
 algebraic relation carried by the unique-response transitions, not another static signature.
 Evidence: `notes/2026-07-17-c84-adaptive-core.md`.
 
+**The first forced-reply algebra is context-dependent (C84 follow-up, 2026-07-17).** Across
+q=13,17,19,23,29, the exact extraction contains 470 opponent/unique-winning-reply pairs in 209 P
+roots. Their 88 canonical shortest coloured words in the four conic involutions all also occur on
+nonwinning legal responses; at q=29 the collision already holds internally for every one of its
+63 used words. Thus no fixed context-free involution word certifies the adaptive reply. The next
+test is the rooted-S4/fourth-centre contextual double-coset packet, not another individual static
+signature. Evidence: `notes/2026-07-17-c84-forced-reply-algebra.md`.
+
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
 conic-only value 0; that does **not** by itself produce an **on-conic** P child. Closing the
 escape via (ON) needs a separate **exchange / transfer lemma** carrying an off-conic

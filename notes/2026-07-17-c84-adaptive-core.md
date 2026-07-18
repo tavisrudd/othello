@@ -115,7 +115,7 @@ subgroup classification. The computation says nothing about non-enumerated field
 
 ## Next C84 target
 
-For the 91 q=29 P roots with (m(R)=1), extract every forcing pair `(opponent vertex, unique reply)`
-in conic coordinates and compare it across q=13,17,19,23. The discriminator is now algebraic
-adaptivity: a relation that predicts or counts forced replies without attempting another static
-P/N signature or mirror.
+Completed in `2026-07-17-c84-forced-reply-algebra.md`: all 470 forcing pairs across q=13--29 were
+extracted. Their 88 canonical shortest coloured-word patterns all collide with nonwinning legal
+responses, so no context-free involution word certifies the unique reply. The next discriminator
+must condition on root geometry or certify a multi-response packet.

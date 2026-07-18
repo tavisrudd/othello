@@ -572,7 +572,11 @@ task list.  Current high-value items:
   follow-up:** exact solution of that entire mirror-free fiber gives `139/753` P (`0.1846`); 91/139
   P roots have a move with a unique winning reply, while every P root has one-reply component width
   at least 14 (range 14–20), closing immediate component cores of bound ≤13. Mine the forced-reply
-  algebra rather than another static signature (`notes/2026-07-17-c84-adaptive-core.md`). Ranking:
+  algebra rather than another static signature (`notes/2026-07-17-c84-adaptive-core.md`). The first
+  such extraction is now complete: 470 forcing pairs across q=13--29 use 88 canonical shortest
+  coloured words, and every word also labels a nonwinning response; the next test must condition
+  on rooted-S4/fourth-centre context or use a response packet
+  (`notes/2026-07-17-c84-forced-reply-algebra.md`). Ranking:
   (1) prove positive-density P (S₄ then all triple types), beginning with a multi-step adaptive
   class-D certificate;
   (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
