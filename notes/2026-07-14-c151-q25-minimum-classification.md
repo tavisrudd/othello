@@ -615,9 +615,73 @@ the generator against the Lean tree; it is not a proof that a mask equals its le
 of this is yet a Lean theorem — it identifies which decides to run and shows the data for them is
 already committed.
 
+## Semantic normalization lift (2026-07-18)
+
+The lift is checked. `Q25MinimumClassification.lean` carries the projective statement
+
+```lean
+theorem f2_card_globalLegalPairs_ge_32 (C : Finset Point25)
+    (hArc : Arc C) (hInv : IsInvariant … C) (hcard : C.card = 8)
+    (hfixed : (fixedArcPoints F5 K25 C).card = 2) :
+    32 ≤ (globalLegalPairs F5 K25 gf25_degree C).card
+```
+
+so the `≥ 32` bound now reaches semantic invariant eight-arcs in `PG(2,25)`, not only normalized
+rows. The route is the two projective normalizations: `card_legalOrbitSet_liftMapIdx` moves the
+legal-orbit cardinality along a base-field map that sends the two fixed points to the standard pair,
+and `card_legalOrbitSet_residual` moves it along the residual map that sends the selected orbit to
+orbit number `5`; `concludeNormalizedRow` then discharges the resulting row.
+
+Replay, from `/home/tavis/src/othello/lean`:
+
+```sh
+scripts/lean-build-queue.py run \
+  RelativeConicArcs.Q25MinimumClassification \
+  RelativeConicArcs.Q25ResidualCoverPrototype.RowConclusion \
+  --profile single --threads 1 --cores 20-23
+```
+
+Exact-target queue results, one Lean worker on cores `20-23` with `choom -n 1000`, exit status `0`
+and a passing trace-only aggregate gate (`run-20260718-234601-babdf8aa`):
+`Q25MinimumClassification` `0:11.23` wall at `4,139,416 kB` peak RSS, and
+`Q25ResidualCoverPrototype.RowConclusion` `0:08.94` at `3,446,736 kB`. Those figures are rebuild
+costs against a warm dispatch tree; the first build of the tree itself took about `30` minutes.
+
+| Artifact | SHA-256 | Bytes |
+|---|---|---|
+| `Q25MinimumClassification.lean` | `cfca4eaac132b0c6e84bdda86e1ed964ed5386c8a98e2e1120bac34d8017bad1` | `14,489` |
+| `Q25ResidualConclusionDispatchData/` (304 files, tree hash) | `3c57ff993f217b6df9ece1d6067b91a0ff2bc7fdfa316766a6566f611e7e6c71` | `3,969,686` |
+| `2026-07-17-c151-residual-conclusion-dispatch-generator.py` | `1af4f75f0c6653f2813020336cd9eb5b176849d362c9cff1f3d8f4a00e16e357` | `6,185` |
+
+The tree hash follows the generators' `tree_sha256` convention: sorted relative paths, each with a
+four-byte path length, the path, an eight-byte content length, and the contents. The axiom profile
+of `f2_card_globalLegalPairs_ge_32`, `indexed_f2_card_legalOrbitSet_ge_32`, and
+`normalized_card_legalOrbitSet_ge_32` is `[propext, Classical.choice, Quot.sound]` with no
+`sorryAx`.
+
+What this does not certify: that `32` is attained, or that the rows attaining it are exactly the
+five certified orbits. This is a lower bound on every semantic exceptional-profile arc and nothing
+more.
+
 ## Current next step
 
 Exhaustion (step 6), by the route above: a class-level strict-bound layer proving
 `33 ≤ (maskOrbitSet allowed).card` for the `1,184` non-minimizer classes, then a conclusion layer
-reusing the existing dispatch payloads at that threshold. The semantic normalization lift is written
-in `Q25MinimumClassification.lean` and is under its first build.
+reusing the existing dispatch payloads at that threshold.
+
+The design is fixed by what is already committed, and needs no change to any frozen checker core:
+
+- `RowCompositionCertificate` pins only its `card_le` field at `32`; `fresh`, `secants`, and
+  `carrier` are threshold-free, and `toReflectedMaskCertificate` derives soundness from those three
+  alone. A downstream threshold-generic copy of `card_legalOrbitSet_ge_32` therefore reuses every
+  committed class certificate at `33` against a fresh `decide` on the same literal mask. Do not edit
+  `Q25MinimumMask.lean` to generalize it in place: that invalidates the whole generated closure.
+- For the five minimizer classes the transport itself supplies the membership. `TransportValid`
+  yields `(rowConfig b p.c).map (residualEmbedding p.y p.z _ _) = p.canonicalConfig`, and
+  `ResidualParameter` is exactly a pair of coordinates with nonzero imaginary part, so
+  `⟨⟨p.y, _⟩, ⟨p.z, _⟩⟩` witnesses `ResidualMapsTo`. Each `minimumRow####` is literally a `rowConfig`
+  of its canonical pair, so a payload naming that pair lands on the representative definitionally.
+
+The resulting per-row terminal is a disjunction,
+`33 ≤ (legalOrbitSet (rowConfig b c)).card ∨ IsMinimumResidualClass (rowConfig b c)`, which closes
+exhaustion against `isMinimumResidualClass_iff_mem_minimumOrbitUnion`.

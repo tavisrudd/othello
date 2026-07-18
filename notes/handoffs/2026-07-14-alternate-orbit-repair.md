@@ -4,9 +4,10 @@
 
 **Date:** 2026-07-18
 **Status:** OPEN — C142, C143, C148–C150 reported; C151's universal normalized-row lower bound and
-five-row attainment are checked. The residual-orbit layer is now certified: the parameter group,
-its action, the five orbit sizes, their disjointness, and the union `1600` are kernel-checked. The
-semantic normalization lift and equality-orbit exhaustion remain active
+five-row attainment are checked. The residual-orbit layer is certified: the parameter group, its
+action, the five orbit sizes, their disjointness, and the union `1600` are kernel-checked. The
+semantic normalization lift is now checked, so `≥ 32` holds for semantic invariant eight-arcs.
+Equality-orbit exhaustion is the sole remaining step
 **Tasks:** C142–C143, C148–C152, C318–C319
 
 Companion discovery log:
@@ -60,8 +61,10 @@ minimum of 32 legal pairs and the classification of equality cases.
 - **Residual orbits:** the parameter group, its `MulAction`, the five orbit sizes
   `200,400,400,200,400`, their pairwise disjointness, and the union `1600` are kernel-checked
   through orbit–stabilizer against decided stabilizer orders; no orbit is materialized.
-- **Remaining exactness gap:** lift the universal normalized-row `≥32` theorem to semantic
-  exceptional-profile arcs, and prove that the five certified orbits exhaust the rows attaining 32.
+- **Semantic lower bound:** `f2_card_globalLegalPairs_ge_32` carries the normalized-row `≥32`
+  theorem through both projective normalizations to every invariant eight-arc in `PG(2,25)` with
+  exactly two fixed points.
+- **Remaining exactness gap:** prove that the five certified orbits exhaust the rows attaining 32.
 
 Reported theorem and scout details live in their reports:
 [C142](../2026-07-14-c142-alternate-orbit-repair.md),
@@ -92,7 +95,7 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C151 | active; normalized-row lower bound and residual-orbit layer checked | Prove exhaustion and the semantic normalization lift, then conclude exact Q25 minimum 32 with five equality classes |
+| C151 | active; lower bound, residual-orbit layer, and semantic lift checked | Prove exhaustion, then conclude exact Q25 minimum 32 with five equality classes |
 | C318 | queued after C151 | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
 | C319 | gated on measured C151 cost | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued behind C151 | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
@@ -108,10 +111,9 @@ approaches that are ruled out.
 
 1. Prove exhaustion: every normalized row attaining 32 lies in `minimumOrbitUnion`. This is work on
    the residual-cover side; `isMinimumResidualClass_iff_mem_minimumOrbitUnion` already turns the
-   goal into a membership statement.
-2. Lift the normalized-row theorem through the existing stabilizer and base-field normalization
-   maps to every semantic exceptional-profile arc.
-3. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
+   goal into a membership statement. The report's "Current next step" fixes the design and names the
+   two reuse facts that keep it off the frozen checker cores.
+2. Run the scoped trust/axiom and source-generation audits, then update the manuscript only after
    the complete semantic theorem passes.
 
 State a cold session needs before starting:
@@ -126,11 +128,13 @@ State a cold session needs before starting:
 - Decide stabilizers and non-reachability, never orbits: `Finset.image` deduplicates quadratically.
   High-level automation can reintroduce this silently — `tauto` on a goal mentioning `Finset`
   membership tried to decide it and hit the recursion limit.
-- `lean/RelativeConicArcs/Q25MinimumClassification.lean` and
-  `lean/RelativeConicArcs/Q25ResidualConclusionDispatchData/` remain untracked with unverified build
-  state, as do the two 2026-07-17 generators under `notes/`.
-  `Q25ResidualCoverPrototype/RowConclusion.lean` is modified but uncommitted; its row-conclusion
-  change covers one class (`b=31`, 50 rows).
+- `Q25MinimumClassification.lean`, `Q25ResidualConclusionDispatchData/`, the row-conclusion
+  prototype change, and the dispatch generator are committed and green.
+- Two paths are deliberately left uncommitted. `lean/RelativeConicArcs/README.md` carries a
+  one-line pointer edit belonging to the in-flight `CERTIFICATES.md` → `TRUST.md` rename in another
+  lane; commit it there, not here. `notes/2026-07-17-c151-residual-equality-generator.py` writes a
+  `Q25ResidualEqualityData` tree that does not exist — the orbit–stabilizer route replaced it, so
+  decide whether it is superseded before committing a generator with no tracked output.
 - C318 (manifest rows for the residual layer) and C319 (gated canonicalizer-or-demote decision) are
   queued behind this work.
 
