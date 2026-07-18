@@ -2,9 +2,10 @@
 
 **Lane**: `alt-orbit-repair` — see `CLAUDE.md` § Lane routing.
 
-**Status:** ACTIVE — the universal `≥32` certificate is kernel-checked for all `1189` residual
-classes, and all five proposed minimizer representatives have kernel-checked cardinality exactly
-`32`; the checked residual cover and equality-orbit completeness remain in development.
+**Status:** ACTIVE — the universal normalized-row `≥32` theorem is kernel-checked for all `46,056`
+rows in the orbit-`5` slice, and all five proposed minimizer representatives have kernel-checked
+cardinality exactly `32`; the lift to every semantic exceptional-profile arc and equality-orbit
+completeness remain in development.
 
 ## Target
 
@@ -344,6 +345,48 @@ point-permutation patterns occur; their transport stream has FNV-1a-64 `4e503df3
 count is an engineering compression fact about the deterministic chosen transporters, not yet a
 geometric classification claim.
 
+### Normalized-row conclusion gate
+
+`Q25ResidualConclusionData/` composes every checked mixed-row dispatch with its semantic
+conclusion. A bad payload contradicts the assumed `RawCap`; a valid payload transports legal-pair
+cardinality to its linked `Q25RowCompositionData` canonical class and reuses that class's checked
+`≥32` theorem. The generated tree contains `1,071` conclusion leaves, `303` bounded `b`-aggregates,
+and one import aggregate: `1,375` files, `5,012,425` bytes, covering all `46,056` normalized rows.
+
+The exact aggregate queue target
+`RelativeConicArcs.Q25ResidualConclusionData.All` passed with one Lean worker on cores `20-23` and
+`choom -n 1000`: `4:30:31` wall, `3,903,872 kB` peak RSS, exit status `0`, followed by a successful
+trace-only aggregate gate. The run record is
+`/home/tavis/.cache/othello-lean-build/run-20260717-174300-2f6693be`.
+
+Regeneration from the independently checked canonical CSV is byte-identical:
+
+```sh
+cd /home/tavis/src/othello
+out=$(mktemp -d /home/tavis/.cache/c151-conclusion-check.XXXXXX)
+python3 notes/2026-07-17-c151-residual-conclusion-generator.py \
+  --csv /home/tavis/.cache/c151-residual-cover.csv \
+  --write-lean-modules "$out/Q25ResidualConclusionData"
+diff -qr lean/RelativeConicArcs/Q25ResidualConclusionData \
+  "$out/Q25ResidualConclusionData"
+```
+
+The canonical CSV SHA-256 is
+`62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3`; the generator SHA-256 is
+`43954385dbbf428ae1450adcb31c7cc353f5f62c1d8295113ea671041b49983c` (`7,620` bytes); and the
+generated-tree SHA-256 is
+`9cdcc9510dc573971bd326c89fbabbdcb6ab5144a527db7347f60556cf5775d2`. The aggregate source,
+object, and trace SHA-256 hashes are respectively
+`0959d27a0c6ceca1722e7ba4722eb958723ec0b4fb7cae514cebfa79f0e3bc65`,
+`f125f1dd465fc6a7ed7b409966b4b3a05f0e2d17ea89d9d5fd5128b658a9632a`, and
+`fc0c96cb71db6e158a8a0ba3677bfa912e8f38a24afab8a2a15474a724329dc2`.
+
+A forbidden-token scan is clean. Representative conclusion leaves containing valid and bad rows
+both have axiom profile `[propext, Classical.choice, Quot.sound]`. The trusted boundary remains the
+Lean kernel, the checked coordinate/action bridges, and the literal generated certificates; this
+gate proves the lower bound only for normalized orbit-`5` rows and does not by itself prove that
+every semantic exceptional-profile arc normalizes into that slice or classify the equality orbits.
+
 ## Equality classification plan
 
 - Use the checked `400`-element residual action and the now-checked exact counts on the five
@@ -367,8 +410,7 @@ geometric classification claim.
 
 ## Current next step
 
-Add a thin dispatcher for each existing payload leaf: bad entries use
-`not_rawCap_of_badWitness`, while valid entries use the checked point-permutation transport. Add
-explicit class-link theorems from transported canonical rows to the literal
-`Q25RowCompositionData` classes.  Only after that cover closes should the five equality orbits and
-their stabilizer sizes be promoted as a complete classification.
+Lift the universal normalized orbit-`5` row theorem through the existing stabilizer and base-field
+normalization maps to every semantic exceptional-profile arc. Then connect the five exact rows to
+their residual orbits and certify stabilizer sizes `200,400,400,200,400`; only after those checks
+should the five equality orbits be promoted as a complete classification.
