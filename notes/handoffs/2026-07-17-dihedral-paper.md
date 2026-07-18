@@ -40,6 +40,15 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   completeness, `ρ`-split calibrated). Title direction 1 recommended (final wording user call).
   C290 hard gate; C289 gate at elementary-proof scope; C291 post-C264. Decision appended to
   `notes/2026-07-17-dihedral-paper-spine-proposal.md`.
+- Closed: C281 dihedral census (2026-07-17) — all 255,288 tame legal pairs and 246,000 legal tame
+  dihedral triples over prime `q ≤ 23`, every value matching the orbit-template engine and a
+  corrected closed form; C263/C284/C283 overlaps reproduced exactly; **found a value-affecting §9
+  gap**: for `h` even a second `D_{4n}` conjugacy class with all-nonsplit reflections (`t=0`)
+  exists (first case `q=7` `D₈` acting freely, board `M₈`, value 1 vs boxed 0); for odd `d`
+  exactly one of the two classes is an N-position, so §9 (9.1)/(9.2)/(9.4)/(9.5) and Cor 9.1 need
+  a `t`-case split (owed by C264); the §14 pair value formula survives (`t ≡ 1+δ (mod 2)`);
+  corrected form verified on every configuration; draft appendix + Remark Y included →
+  `notes/2026-07-17-c281-dihedral-census-appendix.md`.
 - Closed: C288 polyhedral embedding census (2026-07-17) — all admissible tame `S₄`/`A₅`
   realizations for odd prime powers `q ≤ 101` (26 + 12 fields, one `PGL₂(q)`-class each, 5,912
   triples), C284 reproduced exactly on independently found subgroups; new: board Grundy value 2
@@ -85,11 +94,12 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - Density-½ gate CLOSED (C278, 2026-07-17): one quarantined axiom `primes_equidistribute`,
   ½ kernel-derived for all triple types and both torus signs. C264 still owes the paper's
   single-axiom boundary sentence; replace the axiom when mathlib ships PNT-in-AP.
-- Pre-submission content upgrades are C281 (dihedral census, in flight) and C290 (closed
-  congruence/P/N laws; its C288/C289 prerequisites are both done). C264 owes integration of the
-  C289 mirror-lemma upgrades (six proved `t₁=0` entries), the C289 §6 paragraphs, the C288
-  census appendix, and the C288 refinement of C284's `S₄` split-indicator law (value 2 exists,
-  `q ≡ 3, 5 (mod 8)`).
+- The last pre-submission content upgrade is C290 (closed congruence/P/N laws; its C288/C289
+  prerequisites are done). C264 owes integration of: the C281 census appendix AND the §9/Cor 9.1
+  `t`-case-split correction (second `D_{4n}` class, value-affecting — this is a correctness fix,
+  not just an appendix); the C289 mirror-lemma upgrades (six proved `t₁=0` entries) and §6
+  paragraphs; the C288 census appendix and its refinement of C284's `S₄` split-indicator law
+  (value 2 exists, `q ≡ 3, 5 (mod 8)`).
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264), which remains last.
 - Post-release upgrades are direct strategies/certificates (C291), wild polyhedral characteristic
   (C292), and Lean formalization of the finite table boundary (C293). The growing full-group escape
@@ -97,16 +107,11 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Next steps
 
-1. **C281** — build the dihedral census appendix as an independent evidence bundle (per the
-   adopted spine, it validates but does not set the architecture). A partial, self-reported-buggy
-   `notes/2026-07-17-c281-dihedral-census-appendix.rs` from an interrupted session is on disk
-   untracked; rewrite rather than trust it (its `r^{M/2}` closure shortcut was wrong for gated
-   triples). C288 (polyhedral census) is done.
-2. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
-3. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply C261 R1–R5,
+1. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
+2. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply the C281 §9 t-case-split correction, C261 R1–R5,
    the C278 single-axiom boundary sentence, C260/C284 computation boundaries, the Dawson period-34
    corollary, and title/abstract calibration excluding the wild and full-group escape cases.
-4. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
+3. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
    C293 Lean formalization. Continue the full `PSL₂/PGL₂` escape program only through C84 `[cap]`.
 
 ## Cautions (standing, for any session in this lane)
