@@ -107,7 +107,6 @@ unless they retain an explicit open tail.
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C299 `[relconic]` [GATED; PAPER-II DRAFT]** — C210 invariant/residue exposition: during Paper II drafting, supply only the characteristic-two section/gauge formulation and Artin--Schreier residue arguments that materially shorten or clarify the proof; this task is not a C301 gate → `notes/2026-07-18-c299-c210-artin-schreier-conic-bundle.md`.
-- **C305 `[relconic]` [QUEUED; FEASIBILITY-GATED]** — C210 generic `q=512` closure: prove the normalized scaling chart is lossless on the target specializations, identify valid symmetry/Frobenius quotients, benchmark a deterministic shard using committed `H,J` reconstruction plus direct genuineness checks, and run a full exact sweep only under a justified resource bound; otherwise record the finite gap and pursue an algebraic reduction → `notes/2026-07-18-c305-c210-q512-generic-closure.md`.
 
 ### `rp-next`
 
