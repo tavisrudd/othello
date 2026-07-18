@@ -2,7 +2,8 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — hermetic matrix and guidance complete; real lightweight gate next
+**Status**: IN PROGRESS — hermetic matrix, guidance, and the real lightweight bridge gate pass; the
+managed path has not yet carried a target to a successful Lean outcome
 
 ## Goal
 
@@ -570,8 +571,23 @@ completion redelivery preserves the stable event ID for duplicate-reader dedupli
 unchanged 17-test legacy queue suite also passes, including lock-backed live/abandoned format-1
 status behavior. `lean/AGENTS.md` documents the blocking bridge, recovery delivery, phase evidence,
 stable event IDs, the human active/recent table, and the full exact-run JSON query. Both suites are
-fully stubbed/hermetic and no real Lean target ran. Step 11 is the one disposable lightweight
-systemd-run-to-terminal gate in a confirmed shared-tree quiet window.
+fully stubbed/hermetic and no real Lean target ran.
+
+Step 11 carried real Lean targets through the managed bridge for the first time, on the C151 target
+`RelativeConicArcs.Q25ResidualEquality` with the `single` profile, one thread, and cores `20-23`. The
+first submission failed at the `lake build --no-build` probe with `lake: not found` and exit `127`:
+the transient unit starts from the user manager's environment, and the shared
+`nix develop --command bash -lc` argv then rebuilt `PATH` from `/etc/profile` and discarded the
+devshell. An agent shell exports `__NIXOS_SET_ENVIRONMENT_DONE`, so the legacy path never observed
+this. The adapter now sets that baseline on the unit and the acceptance handshake rejects a unit
+lacking it; the completion envelope also carries `failed_target` and a derived `reason`. The rerun
+elaborated for `53 s` and returned a canonical `failed`/1 naming
+`RelativeConicArcs.Q25ResidualMinimumOrbits` `decide` failures, which are a C151 proof matter and not
+a supervision defect. Both runs delivered exactly one bounded envelope with correct
+`claude`/`alt-orbit-repair`/`C151` attribution, reset their exact failed unit, and used no polling.
+Submission, InvocationID acceptance, adoption, lock ordering, phase publication, terminal
+reconciliation, and cleanup are therefore exercised against real Lean work; a successful managed Lean
+outcome still awaits a target that compiles.
 
 ## Adversarial design review
 
