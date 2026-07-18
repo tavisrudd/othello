@@ -107,7 +107,7 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Next steps
 
-1. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
+1. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries. A delegated C290 session was in flight 2026-07-17 when quota ran out: before starting fresh, check for untracked `notes/2026-07-17-c290-*` files on disk and review rather than redo them if present.
 2. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply the C281 §9 t-case-split correction, C261 R1–R5,
    the C278 single-axiom boundary sentence, C260/C284 computation boundaries, the Dawson period-34
    corollary, and title/abstract calibration excluding the wild and full-group escape cases.
