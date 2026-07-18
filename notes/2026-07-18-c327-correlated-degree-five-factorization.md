@@ -9,9 +9,10 @@ field or coefficient census.  The first common pentic normal form and shared bra
 proved below, together with generic geometric monodromy `S5` for each pentic separately.  Their
 generic splitting fields are disjoint and retain joint monodromy `S5 times S5` after the legality
 Artin--Schreier base changes.  The generic legality cover is geometrically connected of degree
-sixteen with constant field `GF(2)`.  An explicit effective finite-field point bound remains open.
-The next packet is cold-session ready: restrict to the common seed-translation line, compute its
-legality curve and joint cover explicitly, and prove an effective simultaneous-derangement count.
+sixteen with constant field `GF(2)`.  On the common seed-translation line, the exact slope audit
+has seven (not four) possible dependence divisors; off them the legality cover is a rational curve,
+totally ramified only at infinity, and has exactly `Q/16` legal base parameters.  Pullback of the
+two pentic covers and an explicit effective simultaneous-derangement count remain open.
 
 ## Objective
 
@@ -125,7 +126,8 @@ The four Artin--Schreier slopes on the `h`-line are
 Perform the following steps in order.
 
 1. Prove the four slopes (21) are `GF(2)`-independent on an explicit skeleton open; classify every
-   subset-sum dependence divisor rather than hiding it generically.
+   subset-sum dependence divisor rather than hiding it generically.  The exact answer below has
+   seven divisors: two pair, four triple, and one four-slope divisor.
 2. Construct the resulting degree-sixteen legality cover of `P1_h`; prove its geometric
    components, constant fields, genus, infinity ramification, and exact affine deletions.
 3. Pull back the two pentic splitting covers and recheck `S5 times S5` on this one-parameter slice.
@@ -160,6 +162,90 @@ Chebotarev or Lang--Weil as a label.
 No raw field/coefficient enumeration and no `Q=512` run are authorized.  Tiny-field checks may
 debug formulas but are not evidence.  Any symbolic artifact promoted into the theorem must be a
 compact deterministic script/output/checksum bundle under the C327-owned paper path.
+
+## Exact legality geometry on the common translation line
+
+Fix a skeleton as in the immediate packet and write the four right sides of the legality equations
+as
+
+    f_1=h/x^2+c_1,                 f_2=rho^2*h/(x+d)^2+c_2,
+    f_3=h/(x')^2+c_3,              f_4=rho^2*h/(x'+d)^2+c_4,             (23)
+
+where the constants `c_i` contain `y_0,y'_0,theta` and the added `1`.  Put
+
+    l_1=1/x,       l_2=rho/(x+d),       l_3=1/x',       l_4=rho/(x'+d).
+
+The slopes in (23) are `l_i^2`.  On the standing open, their complete subset-dependence list is
+the following seven divisors:
+
+| subset | divisor |
+|---|---|
+| `14` | `x'+d+rho*x=0` |
+| `23` | `x+d+rho*x'=0` |
+| `123` | `d*(x+1)*x'+x*(x+d)=0` |
+| `124` | `d*(x+1)*(x'+d)+rho*x*(x+d)=0` |
+| `134` | `d*(x'+1)*x+x'*(x'+d)=0` |
+| `234` | `d*(x'+1)*(x+d)+rho*x'*(x'+d)=0` |
+| `1234` | `x*x'+x+x'+d=0` |
+
+There are no others.  Thus the earlier cold-session phrase “four slope-dependence divisors” was
+too small: it counted neither the two surviving cross-pair relations nor the four-slope relation.
+The exact independence open is the standing skeleton open with all seven displayed factors
+deleted.
+
+Indeed, squaring is injective, so a subset of the slopes sums to zero exactly when the
+corresponding `l_i` sum does.  Singletons are nonzero.  The pairs `12`, `34`, `13`, and `24` reduce
+respectively to the already deleted factors `x+1`, `x'+1`, `x+x'`, and `x+x'`; the two remaining
+pairs give the first two rows.  Clearing denominators in the four triple sums gives the next four
+rows.  Finally
+
+    (l_1+l_2)+(l_3+l_4)
+      =d*(x+1)/(x*(x+d))+d*(x'+1)/(x'*(x'+d)),          (24)
+
+whose cleared numerator is
+
+    d*(x+x')*(x*x'+x+x'+d).
+
+The first factor is already deleted, leaving the last row.
+
+### Theorem: the independent legality cover is rational
+
+Let `F=GF(Q)` have odd degree over `GF(2)` and specialize the skeleton to an `F`-point of the exact
+independence open.  The cover of `P1_h` obtained by adjoining
+
+    u_i^2+u_i=f_i,             1<=i<=4,                 (25)
+
+is geometrically connected, Galois of degree sixteen with group `(C2)^4`, has constant field `F`,
+and has genus zero.  It is etale over `A1_h`; above `h=infinity` it has one `F`-rational point,
+with inertia group `(C2)^4`, ramification index sixteen, and different exponent thirty.  Hence it
+has exactly `Q` affine `F`-points and exactly
+
+    Q/16                                                        (26)
+
+base parameters `h in F` satisfying all four legality trace conditions.
+
+For the proof, every nonempty character sum of (25) has the form
+
+    u^2+u=a*h+c,             a!=0,
+
+by the seven-divisor audit.  It has one simple pole, at infinity, and no finite pole.  The odd pole
+shows that its Artin--Schreier class remains nontrivial after extending the constant field, proving
+geometric connectedness and full inertia.  Each of the fifteen nontrivial characters has conductor
+exponent two.  The conductor--discriminant formula therefore gives different exponent `15*2=30`,
+and Riemann--Hurwitz gives
+
+    2*g-2=16*(-2)+30=-2.
+
+Thus `g=0`.  Full inertia over the rational point at infinity leaves one rational point above it,
+so the curve is an `F`-rational projective line and has `Q+1` rational points.  Removing its unique
+point at infinity leaves `Q`.  Finally, because `Tr_F/GF(2)(1)=1`, an `h` satisfies C315 (17)
+exactly when all four equations (25) split over `F`; such an `h` has exactly sixteen lifts, while
+an illegal `h` has none.  Division by sixteen proves (26).
+
+This exact count has no Weil error and no hidden affine deletion.  C315's zero-height and
+prescribed-conic exclusions, C316's pentic branch values, and any divisors needed to preserve
+`S5 times S5` on the specialized skeleton are downstream deletions and have not yet been
+subtracted from (26).
 
 ## First result: common pentic normal form
 
