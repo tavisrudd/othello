@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-17
-**Status**: ACTIVE; C280 SIX-PART MANUSCRIPT ASSEMBLY COMPLETE; C285 CITATION PREFLIGHT QUEUED
+**Status**: ACTIVE; C285 CITATION PREFLIGHT COMPLETE; CORRECTION PASS UNALLOCATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
@@ -32,6 +32,7 @@ Completed preparation:
 - [C276 paper-only rename census](../2026-07-17-c276-complete-ports-rename-census.md).
 - [C279 private identity migration](../2026-07-17-c279-complete-ports-identity-migration.md); and
 - [C280 six-part manuscript assembly](../2026-07-17-c280-complete-ports-six-part-assembly.md).
+- [C285 submission-preflight citation and claim audit](../2026-07-17-c285-complete-ports-citation-preflight.md).
 
 ## Publication boundary
 
@@ -49,10 +50,11 @@ generic tract/foundation exposition. C220 remains an explicit inclusion decision
 
 ## Next step
 
-Execute C285: run the submission-preflight citation-chain and claim audit against the assembled
-six-part source. Check every classical attribution and candidate none-found boundary, audit theorem
-wording against the proof/evidence ledger, and produce an exact correction list. Include a bounded
-C220 inclusion recommendation, but do not decide that user gate or begin public export.
+The C285 preflight preserves the six-part theorem spine but freezes eleven required source/claim
+corrections and seven citation-chain corrections before submission. Its bounded recommendation is
+to omit C220; that remains a user decision. After the user decides C220, allocate one private-source
+correction pass to synchronize the manuscript, bibliography, proof/novelty ledgers, README, and PDF.
+Do not begin public export during that pass.
 
 Public export remains gated on the complete-ports repository name/local destination/public remote,
 license, and C220 decision. The private rename does not authorize repository initialization, copy,

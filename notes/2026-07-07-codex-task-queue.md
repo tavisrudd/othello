@@ -52,8 +52,6 @@ unless they retain an explicit open tail.
 
 ### `complete-ports`
 
-- **C285 `[complete-ports]` [QUEUED]** — run the submission-preflight citation-chain and claim audit on the six-part manuscript, including a bounded C220 inclusion recommendation without deciding the user gate; freeze the exact source/citation/evidence correction list → `notes/2026-07-17-c285-complete-ports-citation-preflight.md`.
-
 ### `continuation`
 
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
