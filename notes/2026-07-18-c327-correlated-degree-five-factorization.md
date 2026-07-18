@@ -707,6 +707,59 @@ requires a source-pinned effective Chebotarev or explicit twist-and-point-count 
 Until that bound is supplied, C327 does not claim that a simultaneous no-root rational point
 exists over any particular field.
 
+## Literature and novelty boundary
+
+A focused search on 2026-07-18 covered simultaneous irreducible/factor-type specializations over
+finite fields, prescribed-coefficient families, restricted parameter subsets, Artin--Schreier
+trace slices, and finite-geometry arcs near conics.  It found strong general precedents for the
+method, but no result matching the C315/C316 correlated pair.
+
+- Pollack proves simultaneous irreducibility for polynomial substitutions `f_i(h(T))` by explicit
+  function-field Chebotarev and notes the corresponding prescribed-cycle-type variant.  His main
+  theorem assumes `gcd(q,2n)=1` and varies a monic polynomial `h(T)`, not one scalar translation
+  constrained by four trace equations: Paul Pollack, *Simultaneous prime specializations of
+  polynomials over finite fields*, Proc. LMS 97 (2008), 545--567,
+  [doi:10.1112/plms/pdn013](https://doi.org/10.1112/plms/pdn013).
+- Bary-Soroker proves simultaneous irreducibility of shifted monic polynomials with the expected
+  asymptotic, but over odd `q`: Lior Bary-Soroker, *Hardy--Littlewood tuple conjecture over large
+  finite field*, [arXiv:1206.3930](https://arxiv.org/abs/1206.3930).
+- Entin gives factorization statistics on restricted parameter subsets under `p>d`.  His Remark 2
+  explicitly exhibits an Artin--Schreier trace-zero subset on which the predicted generic
+  distribution fails when that characteristic hypothesis is dropped.  This is direct evidence
+  that C327's trace slice cannot be discharged by a generic restricted-family slogan: Alexei
+  Entin, *Factorization Statistics of Restricted Polynomial Specializations over Large Finite
+  Fields*, [arXiv:1810.07512](https://arxiv.org/abs/1810.07512).
+- Slavov's corrected characteristic-two theorem is the closest single-family precedent: under an
+  explicit geometric gcd condition, `f(T)+sT+b` has every prescribed factorization type with the
+  symmetric-group probability and `O_d(Q^-1/2)` error.  The June 2026 corrigendum repairs a gap in
+  the 2020 statement.  It does not treat two correlated families, their shared branch quartic, or
+  an Artin--Schreier legality base change: Kaloyan Slavov, *Corrigendum to “Factorization type
+  probabilities of polynomials with prescribed coefficients over a finite field”*, Acta Arith.
+  224 (2026), 95--97,
+  [doi:10.4064/aa251204-28-5](https://doi.org/10.4064/aa251204-28-5).
+- Nearby finite-geometry literature found ordinary complete arcs with a few points outside a conic
+  and structure theorems for large planar arcs, but not this relative `C`-coverage definition or
+  the two-repair construction.  In particular, Szőnyi's 1991 survey concerns ordinary complete
+  arcs containing three points outside a conic, while Ball--Lavrauw's planar-arc theorem concerns
+  large arcs in odd characteristic.
+
+The novelty claim must therefore stay construction-specific.  Chebotarev, Frobenius cycle types,
+`S_d` monodromy, and Artin--Schreier covers are established tools.  The targeted search found no
+prior source for the combination proved here: the two exact C316 pentics, their common branch
+identity, joint `S5 times S5` after the fourfold trace-legality cover, the seven translation-line
+dependence divisors, and the resulting explicit odd-tower simultaneous-no-root theorem.  This is
+not an absolute priority claim; it is a bounded search conclusion, and manuscript language should
+say “for this relative-conic family” rather than “the first simultaneous quintic theorem.”
+
+The full texts used in this audit are cached with these SHA-256 hashes:
+
+- Pollack, DOI `10.1112/plms/pdn013`: `0e4996e48ba275acca7cfba4501afd3fefdc5b0e2b4d58d94005c7ea32fd2a2e`;
+- Bary-Soroker, arXiv:1206.3930: `aed115a867be797772c0131061d94ca54e3b61a2368ccc4834b5c2ae656bc1b0`;
+- Entin, arXiv:1810.07512: `9f4cade996bbdf255c48659f065d09420521cc6baf18da9c1141ed0b91fddea0`;
+- Slavov, corrected arXiv:1903.09050: `72da4d6238a3b0e02767d5ee51cfd77c8462d2b276b1a0db5176ff1beb6b4c7c`;
+  and
+- Kosters, arXiv:1404.6345: `a7576fd77dd933e73532f37ac8799de925c58733ddf49f9f11a049c0286a51e1`.
+
 ## Evidence boundary
 
 The common-form, monodromy, legality, ramification, genus, and skeleton-open results are exact

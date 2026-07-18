@@ -117,7 +117,6 @@ unless they retain an explicit open tail.
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C299 `[relconic]` [GATED; PAPER-II DRAFT]** — C210 invariant/residue exposition: during Paper II drafting, supply only the characteristic-two section/gauge formulation and Artin--Schreier residue arguments that materially shorten or clarify the proof; this task is not a C301 gate → `notes/2026-07-18-c299-c210-artin-schreier-conic-bundle.md`.
-- **C327 `[relconic]` [ACTIVE]** — before C299, determine whether C315's two degree-five seed--seed--repair eliminants can simultaneously have no linear factor on the trace-defined survivor base: prove their generic separability/irreducibility and monodromy or an exact substitute, audit shared resolvents and exceptional strata, geometrize the trace conditions, and export the first coverage interface; theorem-led only, with no large field or coefficient census → `notes/2026-07-18-c327-correlated-degree-five-factorization.md`.
 
 ### `rp-next`
 
