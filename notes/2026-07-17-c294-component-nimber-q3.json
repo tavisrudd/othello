@@ -1,0 +1,19 @@
+{
+  "cache_hits": 17,
+  "connected_states": 114,
+  "cyclomatic_states_0_to_15_plus": [16, 39, 20, 10, 20, 7, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  "decompositions": 716,
+  "field_order": 3,
+  "follower_nimber": 1,
+  "limit_vertices": -1,
+  "low_cyclomatic_cache_hits": 254,
+  "low_cyclomatic_shapes": 30,
+  "path_cycle_hits": 1181,
+  "state_limit": 1000000,
+  "stopped_at_limit": false,
+  "tree_cache_hits": 268,
+  "tree_shapes": 16,
+  "unicyclic_cache_hits": 442,
+  "unicyclic_shapes": 39,
+  "type_index": 0
+}
