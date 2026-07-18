@@ -42,12 +42,16 @@ was added later the same session; its fresh run is byte-identical to the committ
 (`diff` exit 0), and its Singular certificate re-derives the residue reduction independently of
 the Python set arithmetic.
 
-The nine `a_nonzero_*` bundles now carry the active t-degree-four line through
+The ten `a_nonzero_*` bundles now carry the active t-degree-four line through
 the exact GF(8)/GF(512) residue census, exact original-cover splits, and the
 `b=0,a!=0` closure, then classify both second-layer components on the three
-known `b!=0` branches. Their fresh runs are byte-identical to the committed
-outputs. The residue census directly evaluates every gcd-enumerated GF(512)
-root; the split and boundary checkers compare their displayed factors and
+known `b!=0` branches. The arithmetic-completeness checker proves by exact
+ideal membership that those three branches exhaust the full residue system
+over every odd-degree field. Their fresh runs are byte-identical to the
+committed outputs. The residue census directly evaluates every gcd-enumerated
+GF(512) root; the completeness checker separately rebuilds the residuals and
+forces the branch-3 projection and all three height coordinates symbolically.
+The split and boundary checkers compare their displayed factors and
 reconstruction identities directly with the universal resultant. The
 second-layer checker adds exact pole/normal-form identities and exhausts all
 `19,208` allowed GF(8) geometries and all `153,664` geometry/constant-class
@@ -86,6 +90,8 @@ incidence over `GF(64)`.
 | `analyze_c210_a_nonzero_dAS_branches_output.txt` | `76c33187d6468785f3d122fb62b93ca84e4212cbfa593739a707a3316df3a99d` | 1835 |
 | `analyze_c210_a_nonzero_dAS_census.py` | `39889891bf98ee335ba77d131b669c03fe5ec78938ac61dece4c0dc94f89e166` | 23263 |
 | `analyze_c210_a_nonzero_dAS_census_output.txt` | `f5525fcbf2cd38b0a64a5443ba0ed875e90294889b53731e0b354d58c635c69b` | 1983 |
+| `analyze_c210_a_nonzero_dAS_completeness.py` | `60c849b819423fe76490001da2b7a6a90e557213d3ce25dc5de5b6d1da31e4ae` | 9605 |
+| `analyze_c210_a_nonzero_dAS_completeness_output.txt` | `6f37435ffc7573cc3d69e3d8818373bfe533a4903a38b274bf6c68aaf6dc8d2d` | 1847 |
 | `analyze_c210_a_nonzero_exact_splits.py` | `45159c3c20732989da9798fdf4caee58a402e2b9403b1f4fdb166c8cf8b6fea3` | 7977 |
 | `analyze_c210_a_nonzero_exact_splits_output.txt` | `7616801d5b3979d925280f5f2aa2bd4520ff7fee1336eee8d0a6dcb2caa0d02f` | 1461 |
 | `analyze_c210_a_nonzero_b_zero.py` | `191a5257624cbea15953e76597eda367e0f3687f5522b94d712a9d49495d9894` | 8978 |
@@ -96,7 +102,7 @@ incidence over `GF(64)`.
 | `analyze_c210_a_nonzero_genuineness_output.txt` | `fb04dff45b4148b342bc0b618026f0c3efa595ccc7b3c0e566dfafef35b3243e` | 2797 |
 
 Full pipeline hashes: `analyze_c210_SHA256SUMS`
-(sha256 `d94a32d8d2cfa335af27ab9f35530658dcf742c3d2aa2d74b751d20d67b7966c`).
+(sha256 `15ed47dd3b2c1f51b81e2f97a7bdba00ba785042220176b343c5c391629e6539`).
 
 ## Trusted boundary
 
