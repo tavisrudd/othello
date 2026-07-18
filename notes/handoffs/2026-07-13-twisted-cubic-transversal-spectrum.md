@@ -11,7 +11,7 @@ Discovery-Track triage.
 **C115 report**: [twisted-cubic τ reduction](../2026-07-13-c115-twisted-cubic-tau-reduction.md).
 **Companion finding**: [discovery-track review](../2026-07-13-discovery-track-review-by-fable.md)
 (Fable triage + Opus verification addenda).
-**Related lanes**: coding [`projective-completion`](2026-07-13-projective-completion-repaircodes.md)
+**Related lanes**: coding [`projective-completion`](done/2026-07-13-projective-completion-repaircodes.md)
 (D-PC9/10/11 live here); completion §6.5 twisted-cubic transversal spectrum
 (`../../papers/completion-core-rigidity/2026-07-10-completion-core-rigidity-upgrades.md`).
 

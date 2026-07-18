@@ -1,36 +1,29 @@
-# Projectively completed cubic–axis RepairCodes — C111–C114
+# Archived projectively completed cubic–axis RepairCodes — C111–C224
 
 **Lane**: `repaircodes` — see CLAUDE.md § Lane routing.
 
 **Date**: 2026-07-13
-**Status**: ACTIVE; PAPER RENAME READY / EXPORT GATED — C274 froze the complete-ports paper's
-theorem crosswalk and rewrite bill, C275 froze its deny-by-default clean-room publication manifest,
-and [C276](../2026-07-17-c276-complete-ports-rename-census.md) inventoried the atomic paper-only
-rename. The `repaircodes` lane alias, this handoff path/field, task pegs, owner references, and Lean
-namespaces remain unchanged. The user selected
-separate clean-history repositories for each exported paper plus a new shared Lean monorepo backing
-all exported papers under `papers/`, because this monorepo contains substantial nonpublication
-material. Public export remains gated until the user supplies or approves the paper repository
-identity/remote and license and decides whether C220 remains. No repository initialization, history
-transplant, or file export is allowed before those gates pass. The older C111–C114, C214, C221, and C224 formal program remains
-complete; its sole deep formal dependency is the quarantined Stichtenoth theorem.
-**Parent track**: [completed RepairCodes formalization](2026-07-11-lean-formalization-plan.md)
-**Paper**: [`coding-repair-hypergraphs`](../../papers/coding-repair-hypergraphs/README.md)
-**Companion log**: [archive](done/2026-07-13-projective-completion-repaircodes-archive.md)
-**A+ roadmap:** [weighted-transfer upgrade and `repairports` follow-up](../2026-07-16-repaircodes-a-plus-roadmap.md)
+**Status**: LANE ARCHIVED — the C111–C114, C214, C221, and C224 theorem/formalization program is
+complete. C277 moved only paper-preparation tasks C274--C276 into the new `complete-ports` lane and
+focused handoff; every earlier `[repaircodes]` peg and every `RepairCodes`/`RepairPorts` Lean name
+remains unchanged. The sole deep formal dependency is the quarantined Stichtenoth theorem.
+**Parent track**: [completed RepairCodes formalization](../2026-07-11-lean-formalization-plan.md)
+**Paper**: [`coding-repair-hypergraphs`](../../../papers/coding-repair-hypergraphs/README.md)
+**Companion log**: [archive](2026-07-13-projective-completion-repaircodes-archive.md)
+**A+ roadmap:** [weighted-transfer upgrade and `repairports` follow-up](../../2026-07-16-repaircodes-a-plus-roadmap.md)
 
-## Active complete-ports paper packet — rename after C276
+## Transferred complete-ports paper packet
 
 **Objective:** turn the portfolio harvested by
-[C258](../2026-07-17-c258-rp-next-reward-harvest-map.md) and packaged by
-[C259](../2026-07-17-c259-rp-next-execution-packets.md) into a separately published short
+[C258](../../2026-07-17-c258-rp-next-reward-harvest-map.md) and packaged by
+[C259](../../2026-07-17-c259-rp-next-execution-packets.md) into a separately published short
 theorem-led complete-ports manuscript without exposing the monorepo or its history. C274 completed
 the theorem/evidence crosswalk. C275 defines the exact clean-room export surface and is complete.
 
 **Frozen manifest:**
-[`2026-07-17-c275-m1-publication-boundary-manifest.md`](../2026-07-17-c275-m1-publication-boundary-manifest.md)
+[`2026-07-17-c275-m1-publication-boundary-manifest.md`](../../2026-07-17-c275-m1-publication-boundary-manifest.md)
 and its
-[`allowlist.tsv`](../2026-07-17-c275-m1-publication-allowlist.tsv). Do not initialize a repository,
+[`allowlist.tsv`](../../2026-07-17-c275-m1-publication-allowlist.tsv). Do not initialize a repository,
 copy files, edit paper prose, or touch shared Lean/build configuration before allocating the next
 task after the user gate.
 
@@ -46,31 +39,29 @@ shared Lean monorepo receives one global manifest derived from the union of all 
 closures, plus a separately verified guarded `lake pack`/restore artifact path. No broad directory
 copy and no raw `.lake/build` or selected-`.olean` copy is an acceptable starting point.
 
-**Next step:** allocate one `[repaircodes]` task to execute C276's paper-only rename map while
-preserving every lane identity. After the private rename, obtain the complete-ports repository
-name/local destination/public remote and license, then decide whether C220's optional stability
-theorem remains. Separately route the all-papers shared Lean monorepo export to an owner that
-coordinates the build-system artifact path and existing public-`FiniteGeom` extraction work.
+**Destination:** all current paper preparation, publication-boundary work, and the next rename task
+are owned by [`complete-ports`](../2026-07-17-complete-ports-paper.md). This archived handoff retains
+only the completed RepairCodes theorem/formalization record.
 
 **Follow-up:** the twisted-cubic transversal spectrum spun off to
-[C115–C120](2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in
-the [companion archive](done/2026-07-13-projective-completion-repaircodes-archive.md).
+[C115–C120](../2026-07-13-twisted-cubic-transversal-spectrum.md); the cross-lane review is recorded in
+the [companion archive](2026-07-13-projective-completion-repaircodes-archive.md).
 Two bounded expert-review follow-ups do not reopen C111–C114. C202 is complete: the q=9
 radius-three extremizers and all minimum blockers are classified up to the monomial `PGL(2,9)`
 action, while an exact Burnside census shows that full-port maximum-matchings have 1,306,963 cubic
-and 4,265 axis orbits; see the [C202 report](../2026-07-15-c202-repair-extremizer-classification.md).
+and 4,265 axis orbits; see the [C202 report](../../2026-07-15-c202-repair-extremizer-classification.md).
 C203's implementation is complete. Every repair witness now exposes its exact scalar recovery equation, the
 three canonical completed-seed coefficient formulas are kernel-checked, and a concrete monomial
 rescaling theorem proves the operational boundary: the direct protocol uses one full symbol per
 helper, while raw coefficient values imply no invariant minimum-access or minimum-bandwidth claim.
-See the [C203 report](../2026-07-15-c203-operational-coefficient-boundary.md). Its focused Lean,
+See the [C203 report](../../2026-07-15-c203-operational-coefficient-boundary.md). Its focused Lean,
 axiom, PDF, and lane-wide aggregate gates pass. A focused
-[adversarial review](../2026-07-15-c203-operational-coefficient-adversarial-review.md) strengthened
+[adversarial review](../../2026-07-15-c203-operational-coefficient-adversarial-review.md) strengthened
 the coefficient-ratio gauge theorem and removed circuit-enumerator reuse from the verifier. The
 final aggregate `RepairCodes` build passed as part of the lane-wide C224 closeout.
 
 C214 is reported in
-[`2026-07-16-c214-weighted-functional-transfer.md`](../2026-07-16-c214-weighted-functional-transfer.md).
+[`2026-07-16-c214-weighted-functional-transfer.md`](../../2026-07-16-c214-weighted-functional-transfer.md).
 The manuscript now separates the exact three-case multiblock threshold from the exact two-term
 nonembedded-witness threshold; under coordinate-surjective projections they agree. Falling below
 the witness threshold is a sufficient complete-hypergraph transfer gate, with no false converse
@@ -86,7 +77,7 @@ threshold, corrective nonsurjective counterexample, exact threshold-six speciali
 Singer-action-to-disjoint-multiplier deduction are now kernel-checked in
 `WeightedTransferExact.lean`, `TransferBoundary.lean`, and `WeightedStrictExample.lean`. Focused
 elaboration, standard-axiom, PDF, and lane-wide aggregate gates pass; the successful serialized
-aggregate run is recorded in the [C224 report](../2026-07-16-c224-reviewer-hole-closure.md).
+aggregate run is recorded in the [C224 report](../../2026-07-16-c224-reviewer-hole-closure.md).
 The polynomial enumerator is an explicit cited classical input. The external coding-theory
 citation-chain review follows closure and remains a submission preflight gate.
 
@@ -232,7 +223,7 @@ the corresponding claim before xhigh review.
 ## Discovery Track register
 
 **Legacy embedded register — frozen.** These rows predate the standalone-companion convention in
-[`discovery-track-conventions.md`](../discovery-track-conventions.md). Preserve them as incidental
+[`discovery-track-conventions.md`](../../discovery-track-conventions.md). Preserve them as incidental
 history, but put new observations in a separate lane discovery log; planned work remains in the
 task/report/handoff path.
 

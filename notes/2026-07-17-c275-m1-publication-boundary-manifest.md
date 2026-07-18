@@ -1,6 +1,6 @@
 # C275 M1 clean-room publication boundary
 
-**Lane:** `repaircodes`
+**Lane:** `complete-ports` (re-pegged from `repaircodes` by the explicit C277 lane split)
 
 **Status:** COMPLETE — a deny-by-default M1 source/evidence allowlist and fail-closed export design
 are frozen. No repository was initialized, no file was copied, and no Lean/build artifact was

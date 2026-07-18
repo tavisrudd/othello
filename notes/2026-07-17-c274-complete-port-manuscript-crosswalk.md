@@ -1,6 +1,6 @@
 # C274 complete-port manuscript crosswalk
 
-**Lane:** `repaircodes`
+**Lane:** `complete-ports` (re-pegged from `repaircodes` by the explicit C277 lane split)
 
 **Status:** COMPLETE — the M1 theorem spine, exclusions, evidence owners, section destinations, and
 keep/replace/move/delete audit are frozen. No paper prose was edited. The user selected separate

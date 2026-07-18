@@ -12,13 +12,13 @@ mini-packets are retained without creating a new backlog. The `rp-next` lane is 
 
 | Priority | Packet | Owner | Destination | Start condition |
 |---:|---|---|---|---|
-| 1 | M1 — focused complete-port manuscript | existing `repaircodes` lane, unless the user creates a dedicated paper lane | existing `papers/coding-repair-hypergraphs/`; decide rename versus retitle before any fork | may start now |
+| 1 | M1 — focused complete-port manuscript | `complete-ports` paper lane | existing `papers/coding-repair-hypergraphs/`; decide rename versus retitle before any fork | may start now |
 | 2 | P1 — Capsule CLI and recovery digital twin | proposed new `portcaps` implementation lane | proposed `tools/repair-port-capsule/`, with language/layout fixed by its first task | may start after owner/path approval; independent of M1 prose |
 | 3 | M2 — compositional restoration semantics | proposed new `repair-semantics` paper lane | proposed `papers/bounded-restoration-semantics/` | start after M1's scope freeze prevents theorem duplication |
 | Bank A | N1 — TTSP reliability counterexample note | paper/literature owner selected by user | no package until novelty gate passes | dormant |
 | Bank B | F1 — coefficient-cost compiler module | future `portcaps` lane | optional module under the accepted Capsule schema | only after P1 schema stability |
 
-The recommended next lane is `repaircodes` for M1. P1 is the best choice if the next objective is
+The recommended next lane is `complete-ports` for M1. P1 is the best choice if the next objective is
 engineering validation rather than publication. M2 is mathematically coherent but should not race
 M1 for definitions, examples, or theorem ownership.
 
@@ -57,7 +57,7 @@ capacity-region, or generic knowledge-compilation claim without new evidence.
 
 ### Owner and destination
 
-- **Owner:** `repaircodes`, because it owns the current manuscript and theorem chain.
+- **Owner:** `complete-ports`; the archived `repaircodes` lane retains the completed theorem chain.
 - **Destination:** `papers/coding-repair-hypergraphs/`.
 - **Fork rule:** do not create a second manuscript tree. The owner first chooses whether the
   existing manuscript is retitled/restructured or whether an explicitly approved new paper package
@@ -282,5 +282,5 @@ Capability Compiler platform. Their negative or positioning results are already 
 
 `rp-next` has no remaining allocated mathematical, product, or consolidation work. Archive this
 handoff and update root routing only after the user approves. The recommended next selection is
-`repaircodes` to execute M1; select or create `portcaps` instead if prototype validation is the
+`complete-ports` to execute M1; select or create `portcaps` instead if prototype validation is the
 priority.

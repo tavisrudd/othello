@@ -1,10 +1,12 @@
 # C276 complete-ports and restoration-semantics rename census
 
-**Lane:** `repaircodes` (unchanged; approved paper shorthand: `complete-ports`)
+**Lane:** `complete-ports` (re-pegged from `repaircodes` by the explicit C277 lane split)
 
 **Status:** COMPLETE — the physical paper paths, public-export names, prose references, and
-validation gates for the two approved paper identities are inventoried. No path, alias, title, or
-file was renamed in C276. The `repaircodes` lane identity is explicitly out of rename scope.
+validation gates for the two approved paper identities are inventoried. No paper path, title, or
+file was renamed in C276. C277 subsequently moved only paper-prep tasks C274--C276 into the new
+`complete-ports` lane and archived the old `repaircodes` handoff; all earlier repaircodes pegs and
+Lean namespaces remain unchanged.
 
 ## Approved canonical identities
 
@@ -13,9 +15,10 @@ file was renamed in C276. The `repaircodes` lane identity is explicitly out of r
 | complete-ports paper | *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure* | `complete-ports` | `complete-repair-ports` | `complete_repair_ports.tex` / `.pdf` |
 | restoration-semantics paper | *Compositional Restoration Semantics: Finite Interfaces and Infinite Timing* | `restoration-semantics` | `compositional-restoration-semantics` | `compositional_restoration_semantics.tex` / `.pdf` |
 
-The old names `M1` and `M2` cease to be canonical. `repaircodes` remains the current lane alias,
-handoff identity, queue peg, historical provenance, and Lean-family name; it is not renamed by this
-paper census. `RepairCodes` Lean declarations/modules likewise remain unchanged.
+The old names `M1` and `M2` cease to be canonical. `repaircodes` remains the historical lane peg and
+Lean-family name for the completed theorem/formalization work; C277 created `complete-ports` for
+paper preparation rather than renaming those older records. `RepairCodes` Lean declarations/modules
+likewise remain unchanged.
 
 ## Physical rename map: complete-ports
 
@@ -46,20 +49,19 @@ The C275 allowlist must also map the private source to
 public repository remains a fresh-history allowlisted export; the private directory rename does not
 authorize publishing monorepo history.
 
-## Lane boundary: preserve `repaircodes`
+## Lane boundary after C277
 
-The paper rename must not become a lane rename. Preserve all of the following exactly:
+The paper rename did not globally rename `repaircodes`. C277 made a narrow task split:
 
-1. root `AGENTS.md` alias `repaircodes` and its current handoff target;
-2. `notes/handoffs/2026-07-13-projective-completion-repaircodes.md`, including its H1 lineage and
-   required `**Lane**: repaircodes` field;
-3. the live queue section `repaircodes`, all `[repaircodes]` task pegs, and all archived pegs;
-4. `repaircodes` owner/lane references in C259 and other planning records; and
-5. `RepairCodes`, `RepairPorts`, and every Lean declaration/module namespace.
+1. C274--C276 and future paper preparation use `complete-ports`;
+2. the completed RepairCodes handoff moved to
+   `notes/handoffs/done/2026-07-13-projective-completion-repaircodes.md` and retains its required
+   `**Lane**: repaircodes` field;
+3. every pre-C274 `[repaircodes]` task peg and historical owner reference remains unchanged; and
+4. `RepairCodes`, `RepairPorts`, and every Lean declaration/module namespace remain unchanged.
 
-Only replace `M1` wording inside the live handoff with “complete-ports paper”; do not change the
-handoff path or lane field. Current C274/C275 reports retain their historical
-`**Lane:** repaircodes` fields while their paper shorthand and filenames change.
+The new complete-ports handoff owns current paper wording. The archived repaircodes handoff remains
+the theorem/formalization record and is not a second live paper route.
 
 ## Reference census: old complete-ports identity
 
@@ -87,8 +89,8 @@ the old Lean-plan archive, and the projective-completion handoff archive. Mechan
 required if the private directory/handoff/report files move; historical prose and lane pegs should
 otherwise remain intact.
 
-The old handoff filename has six known references, but none belongs to the paper rename. Leave all
-six and the handoff path unchanged.
+The old handoff filename had six known references. C277 repaired them when archiving the handoff;
+this was lane housekeeping, not a bulk paper rename.
 
 The title-family search (`Complete repair hypergraphs`, lower-case variants, and the new bounded-port
 phrase) reaches 23 non-archive-name files. This is a semantic review set, **not** a global replace
@@ -152,7 +154,7 @@ complete-ports physical rename.
 
 ## Recommended atomic implementation order
 
-1. Allocate one `[repaircodes]` paper-identity task; do not change routing.
+1. Allocate one `[complete-ports]` paper-identity task; do not re-peg older repaircodes work.
 2. Rename the paper directory, TeX source, C274/C275 paper artifacts, and expert profile with
    explicit paths. Leave the repaircodes handoff path unchanged.
 3. In the same coherent edit, update M1/M2 paper shorthand in C259/current C274/C275/handoff prose,
@@ -170,8 +172,9 @@ complete-ports physical rename.
 
 ## Completion gate for the rename task
 
-The migration is complete only when `go repaircodes` still resolves the unchanged repaircodes
-handoff, the live queue and all lane pegs remain `repaircodes`, all moved paper/report links resolve,
+The migration is complete only when `go complete-ports` resolves the focused paper handoff, `go
+repaircodes` resolves the archived theorem/formalization handoff, all pre-C274 repaircodes pegs remain
+unchanged, all moved paper/report links resolve,
 the paper registry and expert profile use the canonical complete-ports identity, the new TeX/PDF
 stem is consistent, contextual M1/M2 paper labels are gone, the public allowlist names the new
 source/destination, and no paper-only replacement has altered a Lean or lane identifier.

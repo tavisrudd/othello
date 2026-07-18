@@ -1,7 +1,7 @@
 # Projectively completed cubic–axis RepairCodes — companion log
 
 Append-only session history for
-[`2026-07-13-projective-completion-repaircodes.md`](../2026-07-13-projective-completion-repaircodes.md).
+[`2026-07-13-projective-completion-repaircodes.md`](2026-07-13-projective-completion-repaircodes.md).
 The live handoff contains only the current claim and gate map.
 
 ## 2026-07-13 — lane opened

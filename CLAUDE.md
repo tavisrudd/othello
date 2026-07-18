@@ -51,6 +51,7 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `cap` | `notes/handoffs/2026-07-06-projective-cap-game-handoff.md` |
 | `clebsch` | `notes/handoffs/2026-07-13-clebsch-paper.md` |
 | `clebsch-next` | `notes/handoffs/2026-07-16-clebsch-next.md` |
+| `complete-ports` | `notes/handoffs/2026-07-17-complete-ports-paper.md` |
 | `continuation` | `notes/handoffs/2026-07-17-continuation-paper.md` |
 | `cubic` | `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md` |
 | `dihedral` | `notes/handoffs/2026-07-17-dihedral-paper.md` |
@@ -59,7 +60,7 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `nofil` | `notes/handoffs/2026-07-17-nofil-paper.md` |
 | `queens` | `notes/handoffs/done/2026-07-08-claude-archive-queens-othello.md` (archived) |
 | `relconic` | `notes/handoffs/2026-07-16-relconic-post-c201.md` |
-| `repaircodes` | `notes/handoffs/2026-07-13-projective-completion-repaircodes.md` |
+| `repaircodes` | `notes/handoffs/done/2026-07-13-projective-completion-repaircodes.md` (archived) |
 | `repairports` | `notes/handoffs/done/2026-07-16-repairports.md` (archived) |
 | `rp-next` | `notes/handoffs/done/2026-07-16-rp-next.md` (archived) |
 
