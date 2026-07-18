@@ -19,36 +19,25 @@ Step-2(b) part 1 is also done: `W==0 mod G1` identically (the a=0 accident recur
 condition) and `W mod G2a` gives exactly three `h1`-free, `h0`-linear conditions with content
 `(delta*N)^6` -- the a=0 `P0,P1,P2` shape, not five
 ([`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)).
-Step-2(b) part 2 gives the three explicit branches (a-deformed a=0 branches), each verified in `D_AS`:
+Step-2(b) part 2 gives the three explicit residue-system branches (a-deformed a=0 branches):
 `e=0` (`h0=0`), `e=delta` (`h0=p^2*theta+e^2+e*b+e*a*p`), `delta=p,theta=1`
 (`h0=e^2*a^2+e*a^2*p+e*a*p+e^2+e*b+e*p`), `h1` free, each recovering the a=0 value at `a=0`
 ([`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)).
-Step 2 remaining, in order: (b-part-2 completeness) show these three are ALL of `D_AS` off `delta*p*N=0`.
-**Concrete finding (2026-07-17): do NOT use the naive cross-determinant projection.** The big
-cross-determinant factors `P01,P12,P02` (from `E_ij=A_i*B_j+A_j*B_i`) have a common zero set
-`V(P01,P12,P02)` that, after eliminating `a` and saturating by `delta*p`, is **2-dimensional in
-`(delta,p,w)`** (radical strictly inside `(delta+p,w^2+w)`), i.e. polluted by the degenerate `A_i=0`
-locus (cross-dets vanish but no consistent `h0` lifts) -- the a=0 "`h0`-free / all-alpha candidate"
-subtlety. Completeness must instead work with the full `D_AS` ideal `(c0,c1,c2)` (u-free, h1-free, in
-`GF(2)[e,delta,a,b,p,w,h0]`) saturated by `e*(e+delta)` (drops branches 1,2) and `delta*p*N`, checked
-equal to the branch-3 ideal `(delta+p, w^2+w, h0-h0_3)`; or explicitly show the `A_i=0` sublocus forces
-`theta=0` (excluded: `delta=0` / no rational `w` over the odd tower), mirroring a=0. That 3-generator
-saturation in 7 vars is heavy -- budget it, use `quit;`-terminated Singular piped via stdin, do not
-leave it orphaned. **Fable advice (2026-07-17, [`2026-07-17-c210-fable-completeness-advice.md`](../2026-07-17-c210-fable-completeness-advice.md)) reframes this -- follow it:**
-(0) the excess surface is NOT yet shown to be pollution -- by the char-2 identity `A_i*c_j+A_j*c_i=E_ij`,
-every base point in `V(R01,R02)` with some `A_i!=0` lifts to a genuine `D_AS` point, so the 2-dim excess
-is either true pollution (inside the common vanishing of all `(e,b)`-coefficients of the `A_i`) or a
-**missing 4th branch family** (the jackpot); decide it FIRST with a near-free `GF(8)` census + `GF(512)`
-lift probe (odd tower; `GF(64)` is a trap). (1) R1's exact ideal-equality is **wrong-shaped** (retains
-algebraically-present `theta=0` components and is non-reduced via `R_ij^2`), so state the target
-arithmetically: every rational point over `GF(8^m)`, m odd, off `delta*p*N*K1*K2=0`, lies on branch
-1/2/3. (2) The a=0->a!=0 deformation shortcut is a **trap** (non-flat, non-reduced, moving exclusion
-divisors) -- a falsifier only. (3) **Merged-pole membership gap:** branch 3 lives ENTIRELY on `K1*K2=0`
-(at `delta=p`, `K1=p^2*w^2`, `K2=p^2*(w+1)^2`) where the committed `c_i` characterization is not derived,
-so branch-3 membership is currently a closure/limit statement -- fix cheaply by exhibiting the explicit
-split `F=(tau^2+bQ*tau+A)(tau^2+bQ*tau+A')` by exact division on each branch (also hands the trace test
-its `A(u)`). Sequencing: probe (0) -> explicit splits (3) for all three branches -> second-layer trace
-test (the crux) -> full arithmetic completeness last;
+Step 0 of the probe-first completeness plan is now **done and clean**. The exact GF(8) census covers
+all 1,404,928 parameter points and finds 48,608 residue-system solutions, exactly the three-branch
+union (no all-`A_i` base and no extra). The lossless homogeneous `p=1` GF(512) scan checks all 261,632
+`(delta,w)` pairs and finds exactly 1,022 triple-residual base roots, all on branch 3; there is no
+off-branch base to lift. This supports an arithmetically-empty excess but does not prove odd-tower
+completeness. The same exact extraction corrects the third cross-determinant identity to
+`E02=e*(e+delta)*delta^2*p^6*P02`, with nonsquare 202-term `P02` (not the prior `delta*p^6*R02^2`)
+([`2026-07-17-c210-a-nonzero-dAS-finite-census.md`](../2026-07-17-c210-a-nonzero-dAS-finite-census.md)).
+**Next:** exhibit the explicit split
+`F=(tau^2+bQ*tau+A)(tau^2+bQ*tau+A')` by exact division on all three branches. This is mandatory for
+branch 3, which lives entirely on `K1*K2=0`, and supplies the `A(u)` for the second-layer trace test.
+Then run `Tr(A/(bQ)^2)=0` branch by branch (the crux); return to full odd-tower arithmetic
+completeness only if every branch is collision-forcing. The a=0 deformation remains only a falsifier,
+and exact saturated ideal equality remains wrong-shaped. Detailed sequencing and traps:
+[`2026-07-17-c210-fable-completeness-advice.md`](../2026-07-17-c210-fable-completeness-advice.md);
 (c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
 trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
 arc-legal rootless branch is where a construction could hide); (d) the `a!=0` reconstruction-split
@@ -287,15 +276,17 @@ by the `build-sys` lane.
    identically (a=0 accident recurs; no `G1` condition) and `W mod G2a` gives exactly three `h1`-free,
    `h0`-linear conditions `C0,C1,C2` (content `(delta*N)^6`), the same shape as a=0's `P0,P1,P2`
    ([`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)).
-   Step-2(b) part 2 is done for the branches themselves: `D_AS` has the three a=0 branches, a-deformed
+   Step-2(b) part 2 is done for the residue branches themselves: the conditions have the three a=0 branches, a-deformed
    -- `e=0` (`h0=0`), `e=delta` (`h0=p^2*theta+e^2+e*b+e*a*p`), and `delta=p,theta=1`
    (`h0=e^2*a^2+e*a^2*p+e*a*p+e^2+e*b+e*p`), `h1` free, each verified to kill all three conditions and
    each recovering the a=0 value at `a=0`
    ([`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)).
-   **Completeness is still open**: the cross-determinant variety strictly contains these three, so the
-   extra locus must be shown spurious (no consistent `h0` lift) or inside `delta*p*N*K1*K2=0` by exact
-   division/resultant/radical work (NOT minAssGTZ -- wrong on the a=0 analogue). Then decide each branch
-   collision-forcing vs arc-legal via the second-layer `Tr(A/(bQ)^2)=0` test, before any affine-coverage test.
+   The exact GF(8) census and lossless `p=1` GF(512) scan find no extra arithmetic branch: 48,608 GF(8)
+   solutions equal the three-branch union, and all 1,022 GF(512) triple-residual roots are branch 3. Full
+   odd-tower arithmetic completeness remains open. Next certify original-cover membership by explicit
+   quadratic splits on all three branches, then decide collision-forcing vs arc-legal via the second-layer
+   `Tr(A/(bQ)^2)=0` test before any affine-coverage test
+   ([`2026-07-17-c210-a-nonzero-dAS-finite-census.md`](../2026-07-17-c210-a-nonzero-dAS-finite-census.md)).
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
@@ -325,6 +316,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)
 - C210 a!=0 step-2(b) part 2 (three explicit D_AS branches + forced h0; completeness open):
   [`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)
+- C210 a!=0 probe-first census (exact GF(8), exhaustive homogeneous GF(512) chart, corrected `P02`):
+  [`2026-07-17-c210-a-nonzero-dAS-finite-census.md`](../2026-07-17-c210-a-nonzero-dAS-finite-census.md)
 - C210 a!=0 completeness Fable advice (probe-first plan; arithmetic target; merged-pole membership gap):
   [`2026-07-17-c210-fable-completeness-advice.md`](../2026-07-17-c210-fable-completeness-advice.md)
 - C210 a!=0 step-1/step-2 Fable review (traps, progress bar, landing odds):

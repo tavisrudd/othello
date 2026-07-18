@@ -42,6 +42,11 @@ was added later the same session; its fresh run is byte-identical to the committ
 (`diff` exit 0), and its Singular certificate re-derives the residue reduction independently of
 the Python set arithmetic.
 
+The four `a_nonzero_*` bundles now carry the active t-degree-four line through
+the exact GF(8)/GF(512) residue census. The census fresh run is byte-identical
+to its committed output; its direct residual evaluation independently checks
+every gcd-enumerated GF(512) root.
+
 ## Load-bearing leaves (sha256, bytes)
 
 | file | sha256 | bytes |
@@ -62,14 +67,24 @@ the Python set arithmetic.
 | `analyze_c210_a_zero_factorization_strata_output.txt` | `893588118bddb76a306ceb5770d2e9d76a707c60402b40aeb935bb8469e6eed8` | 1442 |
 | `analyze_c210_a_zero_artin_schreier_divisor.py` | `9ec4f200ce84bbe2254db309e1f842d335bd7e477c21d0ecaff1e7744f4ebe89` | 28625 |
 | `analyze_c210_a_zero_artin_schreier_divisor_output.txt` | `a5e4ee96eb2bf87d36adad45a9a6a4bd2ad8f6685c236665db948d34c71b2f1f` | 2955 |
+| `analyze_c210_a_nonzero_artin_schreier_form.py` | `74654129056588e8e400fd17ee041e6c82be9d53607013b1ef9061f3b33d6248` | 15123 |
+| `analyze_c210_a_nonzero_artin_schreier_form_output.txt` | `ef431d5e49faed11e46d84072a57912c6375ace480e4d71b4fe61ad118a32f2b` | 2590 |
+| `analyze_c210_a_nonzero_preflight_resultants.py` | `7edd9fb021eb1d753bad7c1efe6403d10afe704f7ccb3ec266d3e41579a02176` | 10998 |
+| `analyze_c210_a_nonzero_preflight_resultants_output.txt` | `6b0ba16d81c6d53058181315414b27ada1b6d0a6d6581ee9a830f23902511f83` | 2082 |
+| `analyze_c210_a_nonzero_residue_conditions.py` | `461ae7dede79419567202b8a1e2e509ecf1c4cb4f63de0d091bcb5e1b62d1327` | 8514 |
+| `analyze_c210_a_nonzero_residue_conditions_output.txt` | `d291e11dec4ade16ffc302befbc609a5f63fd7b583f22fb9a15a8222d5311760` | 1770 |
+| `analyze_c210_a_nonzero_dAS_branches.py` | `b6339bfb8c1270b76fa5d93b8394409b9090e90f45414ecf2ef481585242114c` | 8995 |
+| `analyze_c210_a_nonzero_dAS_branches_output.txt` | `76c33187d6468785f3d122fb62b93ca84e4212cbfa593739a707a3316df3a99d` | 1835 |
+| `analyze_c210_a_nonzero_dAS_census.py` | `39889891bf98ee335ba77d131b669c03fe5ec78938ac61dece4c0dc94f89e166` | 23263 |
+| `analyze_c210_a_nonzero_dAS_census_output.txt` | `f5525fcbf2cd38b0a64a5443ba0ed875e90294889b53731e0b354d58c635c69b` | 1983 |
 
 Full pipeline hashes: `analyze_c210_SHA256SUMS`
-(sha256 `d6ca72d1f13ee677abdfe641aa277ada1798cec83683e863db1faa42179443df`).
+(sha256 `e9fe42494e9f7f8a7d17dba3a2966ecaa992d5b9ab2c42e1426c02c1a4be07a6`).
 
 ## Trusted boundary
 
 The checkers trust Singular's `factorize`/`gcd` over `GF(2)(params)` as the CAS oracle, and the
-pure-Python sparse GF(2)/GF(8)/GF(64) arithmetic in the `analyze_c210_*` modules (cross-checked
+pure-Python sparse GF(2)/GF(8)/GF(64)/GF(512) arithmetic in the `analyze_c210_*` modules (cross-checked
 against direct projective incidence over GF(64)/GF(8) inside `seed_cross_repair_curve`). Absolute
 (geometric) irreducibility of the generic collision curve is carried by
 `analyze_c210_collision_curve_frobenius.sing` (a degree-preserving GF(8) fiber, irreducible over

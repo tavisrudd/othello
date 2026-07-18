@@ -34,29 +34,33 @@ branches `{e=0,h0=0}`, `{e=delta,h0=p^2*theta+e^2+e*b}`,
 
 Established (exact, by substitution and division):
 
-- branches 1-3 lie in `D_AS`, each with its explicit forced `h0`, `h1` free
-  (the committed certificate verifies this directly by substitution/division).
+- branches 1-3 lie in the three-condition residue system, each with its explicit
+  forced `h0`, `h1` free (the committed certificate verifies this directly by
+  substitution/division). Original-cover factorization membership, especially
+  on merged-pole branch 3 where `K1*K2=0`, requires the explicit splits in the
+  next gate.
 
 The branch conditions were found from the `h0`-cross-determinants
 `E_{ij} = A_i*B_j + A_j*B_i`, which factor (exploration, regenerable from the
 checker's `A_i,B_i`) as
 `E01 = e*(e+delta)*N*delta^4*p^7*R01^2`,
 `E12 = e*(e+delta)*N*delta^4*p^7*R12^2`,
-`E02 = e*(e+delta)*delta*p^6*R02^2` with `gcd(R01,R12)=1`: the factors `e` and
+`E02 = e*(e+delta)*delta^2*p^6*P02` with `gcd(R01,R12)=1`: the factors `e` and
 `e+delta` give branches 1-2 directly, and `{delta=p, theta=1}` lies in
-`V(R01,R12,R02)`, giving branch 3.  These factorizations are motivation only; the
+`V(R01,R12,P02)`, giving branch 3.  These factorizations are motivation only; the
 load-bearing certification is the direct branch verification above.
 
-**Open (next sub-task): completeness.**  Branches 1-3 are not yet shown to be
-*all* of `D_AS` off `delta*p*N=0`.  A concrete negative finding narrows the route:
-the naive cross-determinant projection does **not** work.  The square-free big
-factors `P01,P12,P02` of `E_ij = A_i*B_j + A_j*B_i` have a common zero set
-`V(P01,P12,P02)` whose image under eliminating `a`, saturated by `delta*p`, is
-**2-dimensional in `(delta,p,w)`** -- its radical lies strictly inside
-`(delta+p, w^2+w)` (branch 3 is only the 1-dimensional `{delta=p, theta=1}`).  So
-`V(P01,P12,P02)` is polluted by the degenerate `A_i=0` locus (cross-determinants
-vanish but no consistent `h0` lifts), exactly the a=0 "`h0`-free / all-alpha
-candidate" subtlety.  Completeness must instead work with the full `D_AS` ideal
+Here `P02` is a nonsquare 202-term residual; the prior exploratory `R02^2`
+description was not exact. See the finite census
+[`2026-07-17-c210-a-nonzero-dAS-finite-census.md`](2026-07-17-c210-a-nonzero-dAS-finite-census.md).
+
+**Open: arithmetic completeness.** Branches 1-3 are not yet shown to be *all*
+of `D_AS` off `delta*p*N=0`. The algebraic cross-determinant projection has an
+excess component, but exact odd-tower scans find no extra arithmetic point:
+the complete GF(8) residue-system census equals the three-branch union, and the
+lossless `p=1` GF(512) scan finds only the 1,022 branch-3 base points. This
+supports, but does not prove, that the algebraic excess is arithmetically empty.
+Completeness must eventually work with the full `D_AS` ideal
 `(c0,c1,c2)` (`u`-free, `h1`-free, in `GF(2)[e,delta,a,b,p,w,h0]`) saturated by
 `e*(e+delta)` (drops branches 1,2) and `delta*p*N`, checked equal to the branch-3
 ideal `(delta+p, w^2+w, h0-h0_3)`; or the `A_i=0` sublocus must be shown to force
