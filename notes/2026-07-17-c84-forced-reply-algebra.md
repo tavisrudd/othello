@@ -78,8 +78,7 @@ chosen canonical word, a multi-response packet, another triple class, or any uni
 
 ## Next C84 target
 
-Condition the forcing transitions on the root geometry.  The smallest non-static extension is to
-classify the double-coset relation of the opponent/reply pair under the rooted S4 together with
-the fourth-centre orbit, then test packet purity rather than individual-response purity.  Stop if
-those contextual fibres again mix winning and nonwinning responses; otherwise isolate the first
-pure packet as the candidate multi-step adaptive certificate.
+Completed in `2026-07-17-c84-double-coset-packets.md`: the rooted-S4/fourth-centre layer packets
+again mix winning and nonwinning responses. No q=23 or q=29 P root is fully covered by pure
+packets, and only one of 195 q=29 forcing pairs has a singleton packet. Stop one-ply signature
+refinement; the next bounded test is two-ply forced-transition descent.

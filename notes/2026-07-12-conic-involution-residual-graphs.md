@@ -104,6 +104,14 @@ nonwinning legal responses; at q=29 the collision already holds internally for e
 test is the rooted-S4/fourth-centre contextual double-coset packet, not another individual static
 signature. Evidence: `notes/2026-07-17-c84-forced-reply-algebra.md`.
 
+**The contextual double-coset packet also fails (C84 follow-up, 2026-07-17).** Quotient replies by
+their minimum layer in `H, HsH, HsHsH, ...`, where `H≅S4` is the rooted group and `s` the fourth
+involution. No q=23 or q=29 P root has every opponent move covered by a pure-winning layer packet;
+at q=29 only one of 195 forced replies lies in a singleton packet. Stop one-ply response-signature
+refinement. The last bounded adaptive test is two-ply forced-transition descent; failure there
+returns the program to the full-dimensional spectral/probabilistic lane. Evidence:
+`notes/2026-07-17-c84-double-coset-packets.md`.
+
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
 conic-only value 0; that does **not** by itself produce an **on-conic** P child. Closing the
 escape via (ON) needs a separate **exchange / transfer lemma** carrying an off-conic

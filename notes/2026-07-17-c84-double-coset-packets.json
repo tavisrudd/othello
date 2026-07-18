@@ -1,0 +1,6005 @@
+{
+  "cases": [
+    {
+      "class": "D",
+      "first_moves_at_p_roots": 199,
+      "forcing_pairs": 30,
+      "forcing_records": [
+        {
+          "candidate": [
+            0,
+            1,
+            9
+          ],
+          "first": 6,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            5
+          ],
+          "first": 0,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            11
+          ],
+          "first": 9,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            3
+          ],
+          "first": 3,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            3
+          ],
+          "first": 5,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            7
+          ],
+          "first": 4,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            3
+          ],
+          "first": 2,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            3
+          ],
+          "first": 3,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            3
+          ],
+          "first": 10,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            5
+          ],
+          "first": 5,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            11
+          ],
+          "first": 5,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            11
+          ],
+          "first": 7,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            0
+          ],
+          "first": 4,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            0
+          ],
+          "first": 5,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            0
+          ],
+          "first": 10,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            0
+          ],
+          "first": 12,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            1
+          ],
+          "first": 9,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            0
+          ],
+          "first": 2,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            0
+          ],
+          "first": 6,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            10
+          ],
+          "first": 3,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            10
+          ],
+          "first": 10,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            2
+          ],
+          "first": 7,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            2
+          ],
+          "first": 12,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            4
+          ],
+          "first": 2,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            4
+          ],
+          "first": 4,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            4
+          ],
+          "first": 9,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            4
+          ],
+          "first": 12,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            7
+          ],
+          "first": 0,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            7
+          ],
+          "first": 6,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            7
+          ],
+          "first": 7,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        }
+      ],
+      "fully_pure_packet_covered_roots": 4,
+      "p_roots": 24,
+      "pure_packet_covered_first_moves": 90,
+      "q": 13,
+      "roots": 131,
+      "selected": [
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          0,
+          1,
+          7
+        ],
+        [
+          1,
+          10,
+          11
+        ]
+      ],
+      "summary": {
+        "forcing_packet_size_histogram": {
+          "1": 4,
+          "2": 3,
+          "3": 14,
+          "4": 6,
+          "5": 3
+        },
+        "forcing_reply_layer_histogram": {
+          "0": 2,
+          "1": 28
+        },
+        "root_pure_packet_coverage_histogram": {
+          "0/8": 1,
+          "1/7": 1,
+          "2/10": 2,
+          "2/8": 3,
+          "2/9": 1,
+          "3/10": 2,
+          "3/6": 1,
+          "3/8": 1,
+          "4/10": 1,
+          "4/4": 1,
+          "4/6": 1,
+          "4/7": 1,
+          "4/8": 1,
+          "5/10": 2,
+          "6/10": 1,
+          "7/10": 1,
+          "7/7": 2,
+          "8/8": 1
+        },
+        "singleton_forcing_packets": 4
+      },
+      "zero_pure_packet_covered_roots": 1
+    },
+    {
+      "class": "D",
+      "first_moves_at_p_roots": 522,
+      "forcing_pairs": 58,
+      "forcing_records": [
+        {
+          "candidate": [
+            0,
+            1,
+            5
+          ],
+          "first": 3,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            0,
+            1,
+            5
+          ],
+          "first": 13,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            0,
+            1,
+            8
+          ],
+          "first": 9,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            5
+          ],
+          "first": 4,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            5
+          ],
+          "first": 5,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            5
+          ],
+          "first": 16,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            6
+          ],
+          "first": 4,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            12
+          ],
+          "first": "inf",
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            2
+          ],
+          "first": 2,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            2
+          ],
+          "first": 9,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            14
+          ],
+          "first": 1,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            14
+          ],
+          "first": 4,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            14
+          ],
+          "first": 9,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            14
+          ],
+          "first": 10,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            14
+          ],
+          "first": 16,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 2,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 3,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 6,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            0
+          ],
+          "first": 4,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            0
+          ],
+          "first": 5,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            0
+          ],
+          "first": 15,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            11
+          ],
+          "first": 16,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            2
+          ],
+          "first": 10,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            8
+          ],
+          "first": 6,
+          "packet_legal": 8,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            8
+          ],
+          "first": 9,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            16
+          ],
+          "first": 0,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            16
+          ],
+          "first": 7,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            5
+          ],
+          "first": 0,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            5
+          ],
+          "first": 1,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            5
+          ],
+          "first": 2,
+          "packet_legal": 10,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            5
+          ],
+          "first": 6,
+          "packet_legal": 9,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            13
+          ],
+          "first": 4,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            13
+          ],
+          "first": 7,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            13
+          ],
+          "first": 16,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            4
+          ],
+          "first": 0,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            1
+          ],
+          "first": 5,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            1
+          ],
+          "first": 15,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            8
+          ],
+          "first": 5,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            8
+          ],
+          "first": 15,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            8
+          ],
+          "first": 16,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            0
+          ],
+          "first": 7,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            0
+          ],
+          "first": 13,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            0
+          ],
+          "first": 16,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            0
+          ],
+          "first": "inf",
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            5
+          ],
+          "first": 3,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            5
+          ],
+          "first": 10,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 4,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 5,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 7,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 15,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            14
+          ],
+          "first": 0,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            14
+          ],
+          "first": 5,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            0
+          ],
+          "first": "inf",
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            12
+          ],
+          "first": 2,
+          "packet_legal": 10,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            12
+          ],
+          "first": 6,
+          "packet_legal": 10,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            13
+          ],
+          "first": 0,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            13
+          ],
+          "first": 9,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            13
+          ],
+          "first": 10,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        }
+      ],
+      "fully_pure_packet_covered_roots": 2,
+      "p_roots": 48,
+      "pure_packet_covered_first_moves": 170,
+      "q": 17,
+      "roots": 239,
+      "selected": [
+        [
+          1,
+          0,
+          9
+        ],
+        [
+          1,
+          4,
+          8
+        ],
+        [
+          1,
+          6,
+          15
+        ]
+      ],
+      "summary": {
+        "forcing_packet_size_histogram": {
+          "1": 2,
+          "2": 5,
+          "3": 9,
+          "4": 11,
+          "5": 12,
+          "6": 7,
+          "7": 7,
+          "8": 1,
+          "9": 1,
+          "10": 3
+        },
+        "forcing_reply_layer_histogram": {
+          "0": 23,
+          "1": 35
+        },
+        "root_pure_packet_coverage_histogram": {
+          "0/10": 4,
+          "0/11": 1,
+          "0/12": 2,
+          "1/10": 2,
+          "1/12": 1,
+          "1/13": 1,
+          "10/10": 1,
+          "12/12": 1,
+          "2/10": 5,
+          "2/12": 3,
+          "3/10": 2,
+          "3/11": 2,
+          "3/12": 2,
+          "3/14": 1,
+          "4/10": 1,
+          "4/12": 2,
+          "4/14": 1,
+          "4/9": 2,
+          "5/10": 1,
+          "5/11": 2,
+          "5/12": 1,
+          "5/8": 1,
+          "5/9": 1,
+          "6/10": 1,
+          "6/11": 2,
+          "6/14": 1,
+          "6/9": 1,
+          "7/12": 1,
+          "8/10": 2
+        },
+        "singleton_forcing_packets": 2
+      },
+      "zero_pure_packet_covered_roots": 7
+    },
+    {
+      "class": "D",
+      "first_moves_at_p_roots": 525,
+      "forcing_pairs": 62,
+      "forcing_records": [
+        {
+          "candidate": [
+            1,
+            0,
+            7
+          ],
+          "first": 13,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            7
+          ],
+          "first": 14,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            7
+          ],
+          "first": 18,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            9
+          ],
+          "first": 3,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            9
+          ],
+          "first": 11,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            9
+          ],
+          "first": 15,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            2
+          ],
+          "first": 3,
+          "packet_legal": 9,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            2
+          ],
+          "first": 12,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            7
+          ],
+          "first": 2,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            8
+          ],
+          "first": 4,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            8
+          ],
+          "first": 5,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            8
+          ],
+          "first": 6,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            9
+          ],
+          "first": 4,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            11
+          ],
+          "first": 4,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            11
+          ],
+          "first": 9,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            11
+          ],
+          "first": 12,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            11
+          ],
+          "first": 13,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            14
+          ],
+          "first": 2,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            14
+          ],
+          "first": 9,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            14
+          ],
+          "first": 13,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            14
+          ],
+          "first": 18,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            9
+          ],
+          "first": 2,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            9
+          ],
+          "first": 9,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            9
+          ],
+          "first": 12,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            17
+          ],
+          "first": 12,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 0,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 2,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 5,
+          "packet_legal": 9,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 9,
+          "packet_legal": 9,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 11,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 12,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 16,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            10
+          ],
+          "first": 18,
+          "packet_legal": 9,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            6
+          ],
+          "first": 3,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            6
+          ],
+          "first": 9,
+          "packet_legal": 8,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            6
+          ],
+          "first": 11,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            6
+          ],
+          "first": 12,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            11
+          ],
+          "first": 9,
+          "packet_legal": 8,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            11
+          ],
+          "first": 12,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            11
+          ],
+          "first": 13,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            12
+          ],
+          "first": 12,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            14
+          ],
+          "first": 3,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            0
+          ],
+          "first": 8,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            10
+          ],
+          "first": 3,
+          "packet_legal": 7,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            15
+          ],
+          "first": 0,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            15
+          ],
+          "first": 3,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            13
+          ],
+          "first": 6,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            13
+          ],
+          "first": 11,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            18
+          ],
+          "first": 15,
+          "packet_legal": 9,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            18
+          ],
+          "first": 16,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            0
+          ],
+          "first": 3,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            0
+          ],
+          "first": 8,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            0
+          ],
+          "first": 9,
+          "packet_legal": 5,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            0
+          ],
+          "first": 11,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            0
+          ],
+          "first": 15,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            9
+          ],
+          "first": 2,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            9
+          ],
+          "first": 9,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            9
+          ],
+          "first": 11,
+          "packet_legal": 6,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            15
+          ],
+          "first": 12,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            15
+          ],
+          "first": 13,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            16
+          ],
+          "first": 4,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            18,
+            15
+          ],
+          "first": 12,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        }
+      ],
+      "fully_pure_packet_covered_roots": 1,
+      "p_roots": 40,
+      "pure_packet_covered_first_moves": 97,
+      "q": 19,
+      "roots": 305,
+      "selected": [
+        [
+          1,
+          6,
+          16
+        ],
+        [
+          1,
+          2,
+          18
+        ],
+        [
+          1,
+          10,
+          9
+        ]
+      ],
+      "summary": {
+        "forcing_packet_size_histogram": {
+          "2": 5,
+          "3": 5,
+          "4": 15,
+          "5": 8,
+          "6": 15,
+          "7": 7,
+          "8": 2,
+          "9": 5
+        },
+        "forcing_reply_layer_histogram": {
+          "0": 22,
+          "1": 40
+        },
+        "root_pure_packet_coverage_histogram": {
+          "0/11": 2,
+          "0/12": 2,
+          "0/13": 1,
+          "0/14": 1,
+          "0/15": 1,
+          "1/12": 2,
+          "1/14": 7,
+          "1/16": 2,
+          "10/10": 1,
+          "2/12": 1,
+          "2/13": 1,
+          "2/14": 2,
+          "2/16": 3,
+          "4/10": 3,
+          "4/11": 1,
+          "4/12": 2,
+          "4/14": 4,
+          "5/11": 1,
+          "5/14": 2,
+          "7/12": 1
+        },
+        "singleton_forcing_packets": 0
+      },
+      "zero_pure_packet_covered_roots": 7
+    },
+    {
+      "class": "D",
+      "first_moves_at_p_roots": 1478,
+      "forcing_pairs": 125,
+      "forcing_records": [
+        {
+          "candidate": [
+            1,
+            0,
+            4
+          ],
+          "first": 5,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            4
+          ],
+          "first": 8,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            4
+          ],
+          "first": 11,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            4
+          ],
+          "first": 15,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            8
+          ],
+          "first": 5,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            8
+          ],
+          "first": 8,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            8
+          ],
+          "first": 10,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            8
+          ],
+          "first": 18,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            6
+          ],
+          "first": 3,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            17
+          ],
+          "first": 7,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            17
+          ],
+          "first": 13,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            17
+          ],
+          "first": 20,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            17
+          ],
+          "first": "inf",
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 1,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 4,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 6,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 7,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 21,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            6
+          ],
+          "first": 14,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 20,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            8
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            22
+          ],
+          "first": 4,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            22
+          ],
+          "first": 10,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            22
+          ],
+          "first": 13,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            22
+          ],
+          "first": 19,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            22
+          ],
+          "first": 20,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            22
+          ],
+          "first": "inf",
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            3
+          ],
+          "first": 12,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            3
+          ],
+          "first": "inf",
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            15
+          ],
+          "first": 0,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            15
+          ],
+          "first": 8,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            15
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            15
+          ],
+          "first": 20,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            1
+          ],
+          "first": 1,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            2
+          ],
+          "first": 11,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            2
+          ],
+          "first": 21,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            13
+          ],
+          "first": 6,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            16
+          ],
+          "first": 17,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            16
+          ],
+          "first": 19,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            20
+          ],
+          "first": 9,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            7
+          ],
+          "first": 9,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            7
+          ],
+          "first": 14,
+          "packet_legal": 13,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            9
+          ],
+          "first": 11,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            9
+          ],
+          "first": 12,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            10
+          ],
+          "first": 1,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            10
+          ],
+          "first": 18,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            10
+          ],
+          "first": 22,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            21
+          ],
+          "first": 5,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            22
+          ],
+          "first": 12,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 20,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            10
+          ],
+          "first": 9,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            3
+          ],
+          "first": 13,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            15
+          ],
+          "first": 2,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            15
+          ],
+          "first": 17,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            16
+          ],
+          "first": 13,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            16
+          ],
+          "first": 19,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            19
+          ],
+          "first": 9,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            19
+          ],
+          "first": 10,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            19
+          ],
+          "first": 20,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            19
+          ],
+          "first": 22,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            21
+          ],
+          "first": 0,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            21
+          ],
+          "first": 16,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            8
+          ],
+          "first": 8,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            8
+          ],
+          "first": 18,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            8
+          ],
+          "first": 21,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            22
+          ],
+          "first": 6,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            22
+          ],
+          "first": 7,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            22
+          ],
+          "first": 11,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 20,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            22
+          ],
+          "first": 17,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            22
+          ],
+          "first": 21,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            3
+          ],
+          "first": 7,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            3
+          ],
+          "first": 12,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            3
+          ],
+          "first": 17,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            3
+          ],
+          "first": "inf",
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            13
+          ],
+          "first": 4,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            13
+          ],
+          "first": 5,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            13
+          ],
+          "first": 11,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            11,
+            22
+          ],
+          "first": 2,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            11,
+            22
+          ],
+          "first": 11,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            11,
+            22
+          ],
+          "first": 21,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            0
+          ],
+          "first": 5,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            0
+          ],
+          "first": 21,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 20,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            12
+          ],
+          "first": 15,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            16
+          ],
+          "first": 19,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            20
+          ],
+          "first": 9,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            20
+          ],
+          "first": 21,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            2
+          ],
+          "first": 20,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            7
+          ],
+          "first": 3,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            7
+          ],
+          "first": 16,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            7
+          ],
+          "first": 17,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            19
+          ],
+          "first": 8,
+          "packet_legal": 13,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            19
+          ],
+          "first": 9,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            19
+          ],
+          "first": 10,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            6
+          ],
+          "first": 1,
+          "packet_legal": 13,
+          "packet_winning": 1,
+          "reply": 20,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            6
+          ],
+          "first": 2,
+          "packet_legal": 13,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            17
+          ],
+          "first": 13,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            21
+          ],
+          "first": 9,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            21
+          ],
+          "first": 17,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            21
+          ],
+          "first": 21,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            5
+          ],
+          "first": 2,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            5
+          ],
+          "first": 3,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            5
+          ],
+          "first": 4,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 1,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            12
+          ],
+          "first": 13,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            12
+          ],
+          "first": 21,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            18,
+            3
+          ],
+          "first": 0,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            4
+          ],
+          "first": 15,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            4
+          ],
+          "first": 22,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            7
+          ],
+          "first": "inf",
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            11
+          ],
+          "first": 12,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            12
+          ],
+          "first": 18,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            19
+          ],
+          "first": 3,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            19
+          ],
+          "first": 8,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            19
+          ],
+          "first": 9,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            19
+          ],
+          "first": 19,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            0
+          ],
+          "first": 15,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            7
+          ],
+          "first": 6,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            7
+          ],
+          "first": 9,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            7
+          ],
+          "first": 17,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            13
+          ],
+          "first": 4,
+          "packet_legal": 13,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            13
+          ],
+          "first": 20,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            11
+          ],
+          "first": 0,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            11
+          ],
+          "first": 9,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            11
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            11
+          ],
+          "first": 16,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            11
+          ],
+          "first": 17,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            11
+          ],
+          "first": 20,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        }
+      ],
+      "fully_pure_packet_covered_roots": 0,
+      "p_roots": 71,
+      "pure_packet_covered_first_moves": 13,
+      "q": 23,
+      "roots": 457,
+      "selected": [
+        [
+          1,
+          21,
+          10
+        ],
+        [
+          1,
+          17,
+          15
+        ],
+        [
+          1,
+          15,
+          22
+        ]
+      ],
+      "summary": {
+        "forcing_packet_size_histogram": {
+          "13": 5,
+          "14": 5,
+          "15": 41,
+          "16": 16,
+          "17": 27,
+          "18": 8,
+          "19": 23
+        },
+        "forcing_reply_layer_histogram": {
+          "0": 125
+        },
+        "root_pure_packet_coverage_histogram": {
+          "0/18": 7,
+          "0/20": 30,
+          "0/22": 16,
+          "0/24": 10,
+          "1/20": 4,
+          "1/22": 2,
+          "2/18": 1,
+          "5/18": 1
+        },
+        "singleton_forcing_packets": 0
+      },
+      "zero_pure_packet_covered_roots": 63
+    },
+    {
+      "class": "D",
+      "first_moves_at_p_roots": 3510,
+      "forcing_pairs": 195,
+      "forcing_records": [
+        {
+          "candidate": [
+            0,
+            1,
+            9
+          ],
+          "first": 28,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            0,
+            1,
+            20
+          ],
+          "first": 10,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            0,
+            1,
+            20
+          ],
+          "first": 25,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            0,
+            1,
+            20
+          ],
+          "first": 27,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            15
+          ],
+          "first": 23,
+          "packet_legal": 23,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            26
+          ],
+          "first": 6,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            26
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            0,
+            26
+          ],
+          "first": 22,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            6
+          ],
+          "first": 22,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            11
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            11
+          ],
+          "first": 28,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            16
+          ],
+          "first": 6,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            16
+          ],
+          "first": 7,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            16
+          ],
+          "first": 12,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            16
+          ],
+          "first": 26,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 6,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            19
+          ],
+          "first": 19,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            22
+          ],
+          "first": 4,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            22
+          ],
+          "first": 12,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            1,
+            22
+          ],
+          "first": 18,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            9
+          ],
+          "first": 13,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            25
+          ],
+          "first": 27,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            25
+          ],
+          "first": 28,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            28
+          ],
+          "first": 2,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            28
+          ],
+          "first": 14,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            2,
+            28
+          ],
+          "first": 16,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            3
+          ],
+          "first": 5,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            5
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            5
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            19
+          ],
+          "first": 9,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            3,
+            19
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            6
+          ],
+          "first": 27,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            6
+          ],
+          "first": 28,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 3,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 8,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 22,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 26,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            15
+          ],
+          "first": 24,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            22
+          ],
+          "first": 3,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            22
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            22
+          ],
+          "first": 21,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            22
+          ],
+          "first": 26,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            4,
+            22
+          ],
+          "first": 27,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            9
+          ],
+          "first": 2,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            9
+          ],
+          "first": 5,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            9
+          ],
+          "first": 22,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            10
+          ],
+          "first": 18,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            10
+          ],
+          "first": 19,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            5,
+            22
+          ],
+          "first": 13,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 24,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            2
+          ],
+          "first": 9,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 27,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            6,
+            2
+          ],
+          "first": "inf",
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 4,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 6,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 8,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 12,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 15,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 19,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 22,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            7
+          ],
+          "first": 25,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 28,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            18
+          ],
+          "first": 13,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            18
+          ],
+          "first": 25,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 24,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            18
+          ],
+          "first": 26,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            7,
+            21
+          ],
+          "first": 2,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            1
+          ],
+          "first": 9,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            9
+          ],
+          "first": 23,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 28,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            13
+          ],
+          "first": 11,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            8,
+            16
+          ],
+          "first": 24,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            3
+          ],
+          "first": 12,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            3
+          ],
+          "first": 14,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 27,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            3
+          ],
+          "first": 16,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            3
+          ],
+          "first": 24,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            9,
+            3
+          ],
+          "first": 28,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            7
+          ],
+          "first": 19,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            23
+          ],
+          "first": 6,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            23
+          ],
+          "first": 22,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 5,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            26
+          ],
+          "first": 16,
+          "packet_legal": 20,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            10,
+            28
+          ],
+          "first": 12,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            11,
+            4
+          ],
+          "first": 4,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 27,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            11,
+            4
+          ],
+          "first": 19,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 27,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            11,
+            17
+          ],
+          "first": 13,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            6
+          ],
+          "first": 24,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            6
+          ],
+          "first": "inf",
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            10
+          ],
+          "first": 12,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            10
+          ],
+          "first": 15,
+          "packet_legal": 20,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            10
+          ],
+          "first": 18,
+          "packet_legal": 20,
+          "packet_winning": 1,
+          "reply": 7,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            18
+          ],
+          "first": 17,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            18
+          ],
+          "first": 18,
+          "packet_legal": 13,
+          "packet_winning": 1,
+          "reply": 28,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            18
+          ],
+          "first": 23,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            18
+          ],
+          "first": 26,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            20
+          ],
+          "first": 5,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            20
+          ],
+          "first": 21,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            22
+          ],
+          "first": 0,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            23
+          ],
+          "first": 0,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            23
+          ],
+          "first": 11,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 17,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            12,
+            27
+          ],
+          "first": 17,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            8
+          ],
+          "first": 21,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            8
+          ],
+          "first": 22,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            12
+          ],
+          "first": 0,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            12
+          ],
+          "first": 3,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            18
+          ],
+          "first": 10,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            18
+          ],
+          "first": 22,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            18
+          ],
+          "first": 24,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            19
+          ],
+          "first": 11,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            13,
+            19
+          ],
+          "first": 21,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            0
+          ],
+          "first": 15,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            3
+          ],
+          "first": 7,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            3
+          ],
+          "first": 14,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 26,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            3
+          ],
+          "first": 17,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            5
+          ],
+          "first": 15,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 16,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            14,
+            5
+          ],
+          "first": 21,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            6
+          ],
+          "first": 14,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            12
+          ],
+          "first": 4,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 5,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 25,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            13
+          ],
+          "first": 28,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            26
+          ],
+          "first": 8,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            26
+          ],
+          "first": 21,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            15,
+            26
+          ],
+          "first": 28,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            16,
+            8
+          ],
+          "first": 21,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            4
+          ],
+          "first": 5,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            4
+          ],
+          "first": 6,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            19
+          ],
+          "first": 13,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            19
+          ],
+          "first": 18,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            19
+          ],
+          "first": 24,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 0,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            20
+          ],
+          "first": 3,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            23
+          ],
+          "first": 2,
+          "packet_legal": 20,
+          "packet_winning": 1,
+          "reply": 26,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            23
+          ],
+          "first": 3,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            23
+          ],
+          "first": 5,
+          "packet_legal": 20,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            17,
+            23
+          ],
+          "first": 14,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            18,
+            21
+          ],
+          "first": 28,
+          "packet_legal": 14,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            18,
+            21
+          ],
+          "first": "inf",
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            18,
+            25
+          ],
+          "first": 15,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 28,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            6
+          ],
+          "first": 11,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            6
+          ],
+          "first": 22,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            25
+          ],
+          "first": 12,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            25
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            25
+          ],
+          "first": 16,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            25
+          ],
+          "first": 24,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            19,
+            25
+          ],
+          "first": 26,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            17
+          ],
+          "first": 8,
+          "packet_legal": 1,
+          "packet_winning": 1,
+          "reply": 27,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            17
+          ],
+          "first": 10,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            17
+          ],
+          "first": 24,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            20,
+            20
+          ],
+          "first": 2,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            5
+          ],
+          "first": 7,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 24,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            5
+          ],
+          "first": 8,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            5
+          ],
+          "first": 18,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            5
+          ],
+          "first": 25,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            5
+          ],
+          "first": 27,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            9
+          ],
+          "first": 10,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            9
+          ],
+          "first": 25,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            11
+          ],
+          "first": 5,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            11
+          ],
+          "first": 19,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 21,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            21,
+            27
+          ],
+          "first": 12,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            1
+          ],
+          "first": 22,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            1
+          ],
+          "first": 25,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            4
+          ],
+          "first": 18,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            4
+          ],
+          "first": "inf",
+          "packet_legal": 22,
+          "packet_winning": 1,
+          "reply": 3,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            7
+          ],
+          "first": 4,
+          "packet_legal": 2,
+          "packet_winning": 1,
+          "reply": 25,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            7
+          ],
+          "first": 7,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            7
+          ],
+          "first": 21,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 18,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            22,
+            18
+          ],
+          "first": 11,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            4
+          ],
+          "first": 6,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            6
+          ],
+          "first": 10,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            6
+          ],
+          "first": 16,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            6
+          ],
+          "first": "inf",
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 11,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            9
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            19
+          ],
+          "first": 18,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            23,
+            19
+          ],
+          "first": 21,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            24,
+            2
+          ],
+          "first": 12,
+          "packet_legal": 16,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            24,
+            16
+          ],
+          "first": 27,
+          "packet_legal": 23,
+          "packet_winning": 1,
+          "reply": 26,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            24,
+            24
+          ],
+          "first": 5,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            24,
+            24
+          ],
+          "first": 13,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            24,
+            24
+          ],
+          "first": 27,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 2,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            24,
+            27
+          ],
+          "first": 6,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 14,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            5
+          ],
+          "first": 4,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            5
+          ],
+          "first": 10,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 22,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            5
+          ],
+          "first": 28,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 15,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            7
+          ],
+          "first": 15,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            12
+          ],
+          "first": 4,
+          "packet_legal": 3,
+          "packet_winning": 1,
+          "reply": 23,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            12
+          ],
+          "first": 26,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            25,
+            15
+          ],
+          "first": 8,
+          "packet_legal": 15,
+          "packet_winning": 1,
+          "reply": 6,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            3
+          ],
+          "first": 5,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 19,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            3
+          ],
+          "first": 9,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 10,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            3
+          ],
+          "first": 14,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 28,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            26
+          ],
+          "first": 13,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 26,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            26
+          ],
+          "first": 15,
+          "packet_legal": 19,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            26
+          ],
+          "first": 19,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 12,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            26
+          ],
+          "first": 23,
+          "packet_legal": 21,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            27,
+            26
+          ],
+          "first": "inf",
+          "packet_legal": 22,
+          "packet_winning": 1,
+          "reply": 9,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            11
+          ],
+          "first": 3,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 4,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            13
+          ],
+          "first": 8,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": 27,
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            20
+          ],
+          "first": 12,
+          "packet_legal": 4,
+          "packet_winning": 1,
+          "reply": "inf",
+          "reply_layer": 1
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            20
+          ],
+          "first": 24,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 8,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            21
+          ],
+          "first": 6,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 13,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            21
+          ],
+          "first": 12,
+          "packet_legal": 18,
+          "packet_winning": 1,
+          "reply": 26,
+          "reply_layer": 0
+        },
+        {
+          "candidate": [
+            1,
+            28,
+            21
+          ],
+          "first": 18,
+          "packet_legal": 17,
+          "packet_winning": 1,
+          "reply": 28,
+          "reply_layer": 0
+        }
+      ],
+      "fully_pure_packet_covered_roots": 0,
+      "p_roots": 139,
+      "pure_packet_covered_first_moves": 338,
+      "q": 29,
+      "roots": 753,
+      "selected": [
+        [
+          1,
+          15,
+          7
+        ],
+        [
+          1,
+          11,
+          19
+        ],
+        [
+          1,
+          18,
+          0
+        ]
+      ],
+      "summary": {
+        "forcing_packet_size_histogram": {
+          "1": 1,
+          "2": 3,
+          "3": 6,
+          "4": 21,
+          "13": 1,
+          "14": 3,
+          "15": 23,
+          "16": 10,
+          "17": 59,
+          "18": 29,
+          "19": 16,
+          "20": 5,
+          "21": 14,
+          "22": 2,
+          "23": 2
+        },
+        "forcing_reply_layer_histogram": {
+          "0": 140,
+          "1": 55
+        },
+        "root_pure_packet_coverage_histogram": {
+          "0/22": 2,
+          "0/24": 7,
+          "0/25": 1,
+          "0/26": 22,
+          "0/27": 2,
+          "0/28": 3,
+          "1/24": 4,
+          "1/26": 6,
+          "1/28": 1,
+          "12/26": 1,
+          "2/22": 4,
+          "2/23": 1,
+          "2/24": 7,
+          "2/25": 2,
+          "2/26": 15,
+          "2/28": 1,
+          "3/22": 1,
+          "3/24": 7,
+          "3/25": 3,
+          "3/26": 9,
+          "3/27": 1,
+          "3/28": 3,
+          "4/24": 7,
+          "4/26": 9,
+          "4/28": 1,
+          "5/22": 1,
+          "5/24": 2,
+          "5/26": 4,
+          "6/22": 1,
+          "6/24": 2,
+          "6/26": 3,
+          "7/22": 1,
+          "7/24": 1,
+          "7/25": 2,
+          "8/24": 1,
+          "8/28": 1
+        },
+        "singleton_forcing_packets": 1
+      },
+      "zero_pure_packet_covered_roots": 37
+    }
+  ],
+  "schema": "c84-double-coset-packets-v1"
+}

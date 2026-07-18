@@ -576,7 +576,11 @@ task list.  Current high-value items:
   such extraction is now complete: 470 forcing pairs across q=13--29 use 88 canonical shortest
   coloured words, and every word also labels a nonwinning response; the next test must condition
   on rooted-S4/fourth-centre context or use a response packet
-  (`notes/2026-07-17-c84-forced-reply-algebra.md`). Ranking:
+  (`notes/2026-07-17-c84-forced-reply-algebra.md`). That contextual test is now also closed:
+  rooted-S4/fourth-centre double-coset packets fully cover no q=23 or q=29 P root, and only one of
+  195 q=29 forced replies is a singleton packet. Stop one-ply signatures; test two-ply forced
+  descent once, then return to the spectral/probabilistic abundance lane if it fails
+  (`notes/2026-07-17-c84-double-coset-packets.md`). Ranking:
   (1) prove positive-density P (S₄ then all triple types), beginning with a multi-step adaptive
   class-D certificate;
   (2) transfer to (ON) — needs a separate exchange lemma, abundance is off-conic; (3) sealing =
