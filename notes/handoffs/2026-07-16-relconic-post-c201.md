@@ -19,8 +19,14 @@ Step-2(b) part 1 is also done: `W==0 mod G1` identically (the a=0 accident recur
 condition) and `W mod G2a` gives exactly three `h1`-free, `h0`-linear conditions with content
 `(delta*N)^6` -- the a=0 `P0,P1,P2` shape, not five
 ([`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)).
-Step 2 remaining, in order: (b-part-2) decompose those three conditions into explicit branches with
-forced `h0` (a=0 cross-determinant method transfers);
+Step-2(b) part 2 gives the three explicit branches (a-deformed a=0 branches), each verified in `D_AS`:
+`e=0` (`h0=0`), `e=delta` (`h0=p^2*theta+e^2+e*b+e*a*p`), `delta=p,theta=1`
+(`h0=e^2*a^2+e*a^2*p+e*a*p+e^2+e*b+e*p`), `h1` free, each recovering the a=0 value at `a=0`
+([`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)).
+Step 2 remaining, in order: (b-part-2 completeness) show these three are ALL of `D_AS` off
+`delta*p*N*K1*K2=0` -- the cross-determinant variety strictly contains them, so the extra locus must be
+shown spurious (no consistent `h0` lift) or excluded, by exact division/resultant/radical work (NOT
+minAssGTZ -- wrong on the a=0 analogue);
 (c) per branch decide collision-forcing vs arc-legal via the **second-layer** `tau`-quadratic
 trace test `Tr(A/(bQ)^2)=0` (a=0's components were `t`-linear; here `tau^2+bQ*tau+A`, and an
 arc-legal rootless branch is where a construction could hide); (d) the `a!=0` reconstruction-split
@@ -259,9 +265,15 @@ by the `build-sys` lane.
    identically (a=0 accident recurs; no `G1` condition) and `W mod G2a` gives exactly three `h1`-free,
    `h0`-linear conditions `C0,C1,C2` (content `(delta*N)^6`), the same shape as a=0's `P0,P1,P2`
    ([`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)).
-   Next (step-2(b) part 2) decompose those three conditions into explicit branches with forced `h0`
-   (a=0 cross-determinant method transfers), then decide each branch collision-forcing vs arc-legal via
-   the second-layer `Tr(A/(bQ)^2)=0` test, before any affine-coverage test.
+   Step-2(b) part 2 is done for the branches themselves: `D_AS` has the three a=0 branches, a-deformed
+   -- `e=0` (`h0=0`), `e=delta` (`h0=p^2*theta+e^2+e*b+e*a*p`), and `delta=p,theta=1`
+   (`h0=e^2*a^2+e*a^2*p+e*a*p+e^2+e*b+e*p`), `h1` free, each verified to kill all three conditions and
+   each recovering the a=0 value at `a=0`
+   ([`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)).
+   **Completeness is still open**: the cross-determinant variety strictly contains these three, so the
+   extra locus must be shown spurious (no consistent `h0` lift) or inside `delta*p*N*K1*K2=0` by exact
+   division/resultant/radical work (NOT minAssGTZ -- wrong on the a=0 analogue). Then decide each branch
+   collision-forcing vs arc-legal via the second-layer `Tr(A/(bQ)^2)=0` test, before any affine-coverage test.
    Do not reopen the quadratic coefficient census or replace the symbolic gate with a larger plane census. See
    [`2026-07-16-c210-square-root-mechanism-audit.md`](../2026-07-16-c210-square-root-mechanism-audit.md).
 
@@ -289,6 +301,8 @@ before any new Lean edit, generator run, build, or staleness probe.
   [`2026-07-17-c210-a-nonzero-preflight-resultants.md`](../2026-07-17-c210-a-nonzero-preflight-resultants.md)
 - C210 a!=0 step-2(b) part 1 (residue conditions: G1 trivial, three h0-linear G2a conditions):
   [`2026-07-17-c210-a-nonzero-residue-conditions.md`](../2026-07-17-c210-a-nonzero-residue-conditions.md)
+- C210 a!=0 step-2(b) part 2 (three explicit D_AS branches + forced h0; completeness open):
+  [`2026-07-17-c210-a-nonzero-dAS-branches.md`](../2026-07-17-c210-a-nonzero-dAS-branches.md)
 - C210 a!=0 step-1/step-2 Fable review (traps, progress bar, landing odds):
   [`2026-07-17-c210-fable-review.md`](../2026-07-17-c210-fable-review.md)
 - C201 mechanism-audit notebook (legacy filename; task history, not a discovery track):
