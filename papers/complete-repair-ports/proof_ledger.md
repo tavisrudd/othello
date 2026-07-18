@@ -12,6 +12,8 @@ so that they cannot be mistaken for kernel-checked mathematics.
 |---|---|
 | `KERNEL` | Lean-checked; only `propext`, `Classical.choice`, and `Quot.sound` may appear in the axiom report. |
 | `IMPORTED-1` | Lean-checked consequence of the one named Stichtenoth literature axiom, plus the standard logical axioms. |
+| `MANUSCRIPT` | Proved in the paper or its named report; not presently kernel-formalized. |
+| `CERTIFIED` | Checked by a committed deterministic script/JSON certificate with a report recording replay and hash boundaries. |
 | `LITERATURE` | Context or provenance taken from a cited source; not part of the Lean proof chain. |
 | `PRIOR-ART` | A checked source already contains the concept or result; no novelty is claimed. |
 | `DERIVED` | A kernel-checked strengthening or consequence of listed inputs; not positioned as an independent novelty claim. |
@@ -45,6 +47,13 @@ so that they cannot be mistaken for kernel-checked mathematics.
 | T7p | Completed lift has `[20N,4K,>=9D]_9`, exact `10N/10N` partition, exact locality three/two, and exact radius-four rows `(4,8)` and `(7,15)` when `d(O^perp)>=6` | `KERNEL` | `projectiveQ9ExtensionLiftCode_parameters`, `projectiveQ9Lift_coordinate_partition`, `projectiveQ9Lift_coordinate_counts`, `projectiveQ9ExtensionLiftCode_exact_locality`, `projectiveQ9ExtensionLiftCode_row_invariants` | Equality is through radius four only; no lifted unbounded full-port claim. |
 | T8 | Unbounded `GF(9)` family with exact rate `2/19`; for every fixed `c<39/190`, eventual relative distance `>c`; bundled disjoint type distribution, exact mixed locality, rows, and thresholds | `IMPORTED-1` | `HasQ9LiftCoordinateDistribution`, `HasQ9LiftCoordinateProfile`, `HasQ9UniformRepairFamily`, `eventually_scaled_lift_distance_gt`, `stichtenoth_q9_uniform_repair_family`, `concrete_q9_uniform_repair_family` | Sole nonformalized input: `Imported.stichtenoth_selfDual_TVZ_6561`. The displayed `1/5` remains a clean explicit corollary. Quantifier order is `forall c<39/190, eventually`, so the eventual index may depend on `c`; equality at `39/190` is not claimed. |
 | T8p | Completed unbounded q9 family has exact rate `1/10`, every fixed eventual bound `c<351/1600`, clean `>=1/5`, equal coordinate classes, and exact radius-four profiles | `IMPORTED-1` | `eventually_projective_scaled_lift_distance_gt`, `stichtenoth_projective_q9_uniform_repair_family`, `concrete_projective_q9_uniform_repair_family` | Same sole Stichtenoth import. Neither the endpoint nor the lifted unbounded full port is claimed. |
+| T9 / C216 | Every fixed represented radius-`r` port with `r+1 < z_x(I)` occurs with density `1/m` in an asymptotically good fixed-alphabet concatenated family; the inequality is necessary and sufficient for eventual low-weight pointed-witness confinement | `MANUSCRIPT / KERNEL CORE` | Finite pointed-cost decomposition in `RepairPorts.FunctionalCost`; transfer in `RepairCodes.WeightedTransferExact` | Trace pairing, random-GV, AG/TVZ families, and scaled parameter arithmetic are manuscript arguments. The theorem does not claim every abstract hypergraph is representable. |
+| T10 / C219 | Complete-port reliability satisfies deletion--contraction, pivotal influence, Russo--Margulis, and the minimum-blocker high-survival expansion; the harmonic nucleus has a Poisson repair window while curve targets have a nucleus series bottleneck | `MANUSCRIPT / CERTIFIED` | `notes/2026-07-16-c219-repair-reliability.{py,json}` | General probability tools are classical. Exact q9 coefficients and design overlap counts are certified; the all-field Poisson statements have manuscript proofs. |
+| T11 / C226 | Radius-truncated extrinsic BEC failure has the erasure-sign deletion--contraction calculus; successive truncated curves give the cheapest available repair-radius distribution; blockers are target-specific one-shot failure certificates, not generic Tanner stopping sets | `MANUSCRIPT / CERTIFIED` | `notes/2026-07-16-c226-repair-port-exit-transforms.{py,json}` | Full radius is symbol-MAP. A finite radius is a bounded-query decoder and carries no EXIT-area capacity claim. |
+| T12 / C227 | Full repair reliability is a specialization of the Las Vergnas polynomial of `M\\x -> M/x`; the deletion/contraction rank-polynomial derivative gives the successful-set enumerator; pointed duality exchanges repair and failure | `LITERATURE / MANUSCRIPT / CERTIFIED` | Las Vergnas 1999; `notes/2026-07-16-c227-pointed-tutte-repair-polynomial.{py,json}` | The polynomial identification is standard, not a new invariant. The q9 full-versus-radius-four coefficient differences certify that the standard polynomial forgets the radius filtration. |
+| T13 / C218 | The quartic normal rational curve plus nucleus gives `[q+2,5,q-3]_q`, dual distance five, and exactly the harmonic `S(3,4,q+1)` radius-four circuits; q9 rows are nucleus `(2,5)` and curve `(1,1)` | `MANUSCRIPT / CERTIFIED / LITERATURE NUCLEUS` | `notes/2026-07-16-c218-quartic-nucleus-verifier.{py,json}`; Gmainer--Havlicek nucleus formula | Harmonic quadruples and Steiner systems are classical. The repair interpretation is cautiously positioned as none-found, not a priority claim. |
+| T14 / C243 | Harmonic radius-four circuit closure has the exact nucleus gate law; at q9 a block-free rank-five curve set spans linearly but is bounded-circuit inert, while adjoining the nucleus completes the missing curve points in one round | `MANUSCRIPT / CERTIFIED` | `notes/2026-07-17-c243-nucleus-gated-separation-vet.{py,json}` | This is a deterministic finite separation only. No propagation-completeness, random-cascade, threshold-location, or sharpness theorem is claimed. |
+| T15 / C244 | For the harmonic `[11,5,6]_9` code, radius-four EXIT deficits are `2/77` and `23/154`, the corrected total area is `502/77`, and the nucleus/derived-design Poisson errors are `O(n^-1/4)` and `O(n^-1/3)` | `MANUSCRIPT / CERTIFIED` | `notes/2026-07-17-c244-exact-consequence-pack.{py,json}` | The area identity is exact accounting under the extrinsic-failure convention, not a rate/locality inequality. Explicit rates use the classical Arratia--Goldstein--Gordon bound. |
 
 ## Imported theorem ledger
 
@@ -80,7 +89,7 @@ so that they cannot be mistaken for kernel-checked mathematics.
 
 ## Consistency and release checklist
 
-Last full pass: 2026-07-13. A checked box records a direct source, Lean, or build comparison, not
+Last full pass: 2026-07-17 (C280). A checked box records a direct source, Lean, or build comparison, not
 an impressionistic reread.
 
 ### Mathematical statements
@@ -114,6 +123,17 @@ an impressionistic reread.
   `[20N,4K,>=9D]_9`, with exact `10N/10N` multiplicities and radius-four rows `(4,8)`, `(7,15)`.
 - [x] Completed asymptotic arithmetic is synchronized: exact rate `1/10`, every fixed
   `c<351/1600`, clean `>=1/5`, and no endpoint assertion.
+- [x] C216's prescribed-port theorem is stated with the exact persistent obstruction `z_x(I)`,
+  target density `1/m`, and a representability boundary; random-GV and AG/TVZ regions are not
+  promoted as new coding bounds.
+- [x] C219/C226 reliability and EXIT conventions condition the target unavailable, distinguish
+  extrinsic failure from residual erasure, and reserve symbol-MAP language for the full port.
+- [x] C227 is labeled as the standard Las Vergnas perspective polynomial; the manuscript claims
+  only the exact repair specialization and the bounded-radius filtration boundary.
+- [x] C218's quartic parameters, harmonic circuit inventory, SQS repair counts, and q9 rows agree
+  with the symbolic report and the independently regenerated certificate.
+- [x] The harmonic q9 Bernstein profiles, EXIT deficits `2/77` and `23/154`, total area `502/77`,
+  Poisson limits/rates, and C243 nucleus gate agree with exact C219/C227/C243/C244 replays.
 
 ### Formal trust and source boundary
 
@@ -144,8 +164,10 @@ an impressionistic reread.
   unconditional priority or “first” claim remains.
 - [x] The legacy `[10,4,6]_9` seed is marked registry/library-only and is not substituted for the
   manuscript's `[19,4,8]_9` seed.
-- [x] README, paper index, planning registry, handoff, C97, and C98 use the same trust and novelty
-  posture.
+- [x] README, paper index, planning registry, current handoff, proof ledger, and novelty review use
+  the same six-part scope and trust posture.
 - [x] Tectonic succeeds without citation, reference, or box warnings and the PDF is regenerated.
+- [x] C218/C219/C226/C227/C243/C244 scripts regenerate their tracked JSON certificates byte for
+  byte in one clean replay.
 - [ ] External specialist citation-chain review completed (submission preflight; not a theorem or
   formalization gate).

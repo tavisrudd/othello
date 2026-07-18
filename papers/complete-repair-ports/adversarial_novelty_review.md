@@ -8,13 +8,17 @@ certificate. Lean establishes correctness of formal statements, not novelty.
 
 ## Bottom line
 
-The candidate novelty survives in two narrow places:
+The candidate novelty survives in four narrow places:
 
 1. the exact coordinatewise matching/transversal calculations for the
    characteristic-three affine-twisted-cubic plus full-axis code, including
    strict `tau > nu` at every coordinate for `q >= 9`; and
 2. equality of the complete bounded dual-support repair hypergraph under
-   concatenation, now sharpened to the exact inner-coset-weight obstruction.
+   concatenation, now sharpened to the exact inner-coset-weight obstruction;
+3. the prescribed represented-port consequence that isolates the persistent pointed obstruction
+   while keeping the random-GV and AG/TVZ ingredients explicitly classical; and
+4. the quartic--nucleus system's exact complete radius-four repair interpretation and its
+   cubic-versus-harmonic application package, all positioned as none-found rather than priority.
 
 The concatenated-dual decomposition and product-sum fiber enumerator do not survive as novelty
 claims: Chen--Ling--Xing state the direct-sum dual decomposition explicitly. The surviving C214
@@ -30,6 +34,14 @@ The full twisted cubic, characteristic-three axis, projective-system code parame
 circuit cutoff, and ordinary rate/distance concatenation are classical or derived. The
 none-found candidate contribution is limited to the exact completed-system repair rows and their
 complete bounded radius-four transfer.
+
+The C280 structural additions do not create new invariant claims. Reliability polynomials,
+deletion--contraction, pivotality, Russo--Margulis, BEC EXIT, Chen--Stein approximation, harmonic
+Steiner systems, normal-rational-curve nuclei, cocircuit blocker duality, and the Las Vergnas
+set-pointed polynomial are classical. The manuscript uses them to expose exact consequences of
+the bounded port and labels the pointed-Tutte identification as standard. The bounded-radius
+filtration boundary and exact q9 coefficient/EXIT tables are the computed application, not a new
+Tutte or EXIT theory.
 
 One novelty claim failed review and was corrected: Pamies-Juarez--Hollmann--Oggier
 explicitly define the minimum hitting set of all bounded dual repairs as *local repair
@@ -59,6 +71,12 @@ counterexamples prove exactly that restricted statement.
 | A13 / C214 | The concatenated-dual fiber decomposition or product-sum enumerator is new | Chen--Ling--Xing, IEEE TIT 47 (2001), Theorem 2.3, give the direct-sum dual decomposition; IEEE TIT 51 (2005), Theorem 2.1, recalls it. Coset weight enumerators are classical. | `blockFunctional_mem_functionalDual` proves the coordinate-free forward map; the manuscript identity is an immediate finite fiber partition | **PRIOR ART.** No novelty claim for the decomposition or enumerator identity. |
 | A14 / C214 | The roadmap formula `min(2d(I^perp),d_lambda)` is exact without qualifications | A singleton-supported functional-dual word is confined and therefore is not itself a multiblock obstruction. | Weighted sufficiency is checked by `repairHypergraph_concatenatedCode_eq_embed_weighted`; the exact three-case converse is presently a manuscript proof | **CORRECTED.** Use the zero/singleton/multisupport formula generally; the two-term formula is exact when every outer coordinate projection is onto. |
 | A15 / C214 | The strict weighted example is only a tailored boundary toy | The inner code is the flagship completed `[20,4,9]_9` seed and the outer code is an `[5,4,2]_{6561}` generalized SPC/MDS code. Singer averaging chooses one monomial coefficient. | Weighted transfer implication is kernel-checked; the orbit average and trace identification are manuscript-level | **SURVIVES, WITH BOUNDARY.** Call it a natural strict finite example, not an asymptotic improvement or a new MDS construction. |
+| A16 / C216 | Positive-density realization is a new random-code or AG bound | Random GV, trace duality, AG evaluation/differential codes, and TVZ are standard; locality-preserving concatenation is prior art | Finite pointed cost and transfer are kernel-checked; asymptotic families are manuscript arguments | **DERIVED FRAMEWORK WITH A NONE-FOUND POINTED CONSEQUENCE.** Candidate value is the exact represented-port replication criterion `r+1<z_x(I)`, not the asymptotic coding region. |
+| A17 / C219/C226 | Reliability, deletion--contraction, pivotal influence, or bounded EXIT are new invariants | Classical reliability/Boolean-function calculus; Ashikhmin--Kramer--ten Brink for EXIT; standard Tanner stopping-set literature | q9 transforms and coefficients have deterministic script/JSON certificates | **PRIOR MACHINERY; EXACT APPLICATION.** Promote the exact port transforms, cheapest-radius interpretation, and geometric contrast. Do not claim a new reliability polynomial, MAP theorem, capacity bound, or generic stopping-set identity. |
+| A18 / C227 | The paper introduces a new pointed repair polynomial | Las Vergnas 1999 literally identifies the one-element set-pointed polynomial with the elementary perspective `M\\x -> M/x`; Mazumdar uses ordinary local-code rank polynomials | q9 full/truncated profiles are independently certified | **PRIOR ART.** Say the full port is a specialization of the standard perspective polynomial. Candidate value is the explicit radius-filtration boundary, not the polynomial. |
+| A19 / C218 | The normal-rational-curve nucleus, harmonic quadruples, or Steiner system are new | Gmainer--Havlicek give the nucleus formula; harmonic quadruples and `S(3,4,q+1)` are classical | symbolic manuscript proof plus q9/q27 deterministic circuit replay | **CLASSICAL GEOMETRY; REPAIR INTERPRETATION NONE FOUND.** No priority language. The exact complete radius-four port and positive-density transfer are the candidate contribution. |
+| A20 / C219/C244 | The harmonic Poisson window or error bounds are new probability theory | Dependency-graph Poisson approximation and the Arratia--Goldstein--Gordon bound are classical | exact SQS overlap counts and q9/q27 early layers are certified | **CLASSICAL TOOL, EXACT DESIGN APPLICATION.** State the explicit limits and rates; do not call the window sharp in the Friedgut--Kalai sense or infer a random-closure threshold. |
+| A21 / C243 | The nucleus gate proves propagation completeness or an asymptotic cascade threshold | The gate compares bounded circuit closure with linear span; those are inequivalent semantics, and the finite q9 switch supplies no asymptotic threshold | exact gate law has a symbolic proof; q9 witness is certified | **FINITE DETERMINISTIC SEPARATION ONLY.** Keep one compact flagship proposition. Exclude SAT-equivalence, propagation-completeness, threshold-location, and sharpness claims. |
 
 ## Search boundary
 

@@ -82,9 +82,9 @@ formalization-to-full-trust distance, adjusted for the dependencies below.
 - *What:* the complete bounded port and its support/coefficient/probability layers, exact
   weighted-functional transfer, prescribed realization, reliability/EXIT, pointed-Tutte
   structure, and cubic versus quartic-nucleus/harmonic flagships.
-- *Gate:* the private identity migration and six-part assembly skeleton are complete. Manuscript
-  assembly of the three new structural sections, the external specialist citation-chain review,
-  an immutable artifact release, and the final post-C203 aggregate `RepairCodes` rebuild remain.
+- *Gate:* the private identity migration and six-part manuscript assembly are complete. The C220
+  inclusion decision, external specialist citation-chain review, an immutable artifact release,
+  and the final post-C203 aggregate `RepairCodes` rebuild remain.
 
 **6 · Frobenius-equivariant pair extension of eight-arcs** — `equivariant-robust-completion`
 - *What:* focused quadratic-Frobenius criterion, exact collision theory, and uniform `PG(2,25)`
@@ -426,7 +426,7 @@ Post-review dispositions:
   projection) is the live prize. Follow-up: `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`
   (C115–C120); writeup task C119.
 
-- **Coding / LRC → Paper 5 under six-part assembly.** `complete-repair-ports/` contains
+- **Coding / LRC → Paper 5 assembled in six-part form.** `complete-repair-ports/` contains
   the private manuscript, PDF, independent verifier, proof ledger, and adversarial novelty report.
   `RepairCodes` proves the exact complete-hypergraph transfer theorem, trace
   bridge, concrete degree-four lift, and unbounded q9 family of exact rate `2/19` with every fixed

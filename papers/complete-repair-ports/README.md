@@ -1,112 +1,66 @@
-# Paper: complete bounded repair ports
+# Complete bounded repair ports
 
-**Working title:** *Complete Bounded Repair Ports: Transfer, Reliability, and
-Geometric Structure.* Author: Tavis Rudd.
+**Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*<br>
+**Author:** Tavis Rudd<br>
+**Status:** private six-part manuscript assembled; publication export remains gated.
 
-**Status:** private identity migration and six-part section skeleton complete. The original seed, support-distance transfer, and asymptotic
-chain are Lean-checked under the strict trust gate, modulo exactly one quarantined literature
-theorem: Stichtenoth's self-dual TVZ-family theorem, specialized to `GF(6561)`. C214's weighted
-transfer implication is also kernel-checked. C221 kernel-checks the exact three-stratum partition,
-finite fiber/minimum attainment, the exact nonembedded-witness formula, and the
-coordinate-surjective threshold coincidence. The generalized-SPC functional dual, exact support
-distance five, weighted distance at least six, coordinate surjectivity, and radius-four transfer are now
-also checked. Singer's classical regular-action theorem and the classical enumerator identity are
-explicitly cited inputs rather than manuscript proof gaps. The internal adversarial novelty review records what is
-and is not defensible as new. An external
-specialist citation-chain review remains a submission preflight gate. Reliability/EXIT,
-pointed-Tutte, and harmonic-flagship prose still require full manuscript assembly.
+## Paper spine
 
-## Headline
+For a linear code and a target coordinate, the complete bounded repair port retains every
+dual-support repair using at most a prescribed number of helpers. The paper keeps three layers
+visible: support, scalar coefficients, and failure probability.
 
-For a linear code and a coordinate, take the complete hypergraph of all dual-support repair sets
-with at most three helpers. Its matching number `nu` measures disjoint availability and its
-transversal number `tau` measures adversarial local-repair tolerance.
+The theorem-led order is:
 
-The characteristic-three point system consisting of the affine twisted cubic and its full axis
-gives a `[2q+1,4,q-1]_q` code. Every cubic coordinate has the exact row
-`((q-1)/2,q-2)`; the axis rows are exact in terms of the affine cap number. Every coordinate
-satisfies `tau > nu` for `q >= 9`. At `q=9`, the three coordinate types have exact rows
+1. complete bounded ports and their support/coefficient/probability layers;
+2. exact weighted-functional transfer and pointed confinement;
+3. prescribed positive-density realization in asymptotically good fixed-alphabet families;
+4. reliability, cheapest-radius transforms, and radius-truncated BEC EXIT;
+5. the standard pointed-Tutte/perspective identification and its radius-filtration boundary; and
+6. cubic--axis versus quartic--nucleus/harmonic flagships.
 
-```text
-(nu,tau) = (4,7), (6,12), (7,13).
-```
+The field-nine harmonic profiles give exact reliability and EXIT deficits. The all-field harmonic
+Steiner system has a sparse Poisson repair window at the nucleus and a compulsory-helper series
+bottleneck at curve targets. The cubic family supplies exact matching/transversal rows and the
+natural strict weighted-transfer example.
 
-An exact concatenation theorem identifies both the minimum multiblock dual weight and the minimum
-nonembedded-witness weight from inner coset-leader costs. With at least two outer blocks and a
-nontrivial inner dual, the latter is
-`min(2*d(I^perp), d_lambda(O))`; for coordinate-surjective outer codes it agrees with the
-multiblock threshold. Below the witness threshold, complete repair-hypergraph equality follows;
-the previous functional-support gate is a simple sufficient corollary.
-For the completed seed, a Singer-shifted generalized single-parity-check outer code has functional
-distance five but weighted distance at least six, proving exact radius-four transfer strictly
-beyond the old distance-six gate. The exact case partition, both closed-term directions,
-the coordinate-surjective threshold coincidence, generalized-SPC identification, and the
-twenty-class unit-cost orbit identification, orbit distinctness, and averaging/five-fiber
-deduction are kernel-checked. From a presented regular Singer projective action, Lean constructs
-the disjoint unit-cost multiplier and proves the exact threshold is six. Singer regularity and the
-fiber-enumerator identity are cited classical inputs.
+## Evidence boundary
 
-The support-distance corollary preserves the complete radius-three repair hypergraph blockwise.
-Using a degree-four extension and Stichtenoth's self-dual outer codes gives an unbounded `GF(9)`
-family with exact rate `2/19` and eventual relative distance greater than every fixed
-`c < 39/190` (hence greater than `1/5`). Its disjoint exhaustive coordinate partition has exact
-multiplicities `9N,9N,N`, exact localities three, two, two, the same three rows at every block,
-and guaranteed helper-failure thresholds `6,11,12`. A generic Lean corollary also shows that the
-radius-`r` transfer gates preserve every exact inner locality `s <= r`.
-Two explicit nondegenerate `GF(3)` examples prove that the strict inner gate and the outer
-distance-`r+2` gate cannot be weakened uniformly while retaining complete-hypergraph equality;
-no necessity is claimed for a fixed concatenation.
+The finite transfer and cubic theorem chain is Lean-checked under the existing `RepairCodes` and
+`RepairPorts` namespaces. The prescribed-port asymptotics, reliability calculus, pointed-Tutte
+specialization, and all-field harmonic proofs are manuscript arguments. Exact finite harmonic,
+reliability, EXIT, and pointed-Tutte profiles are backed by the committed C218, C219, C226, C227,
+C243, and C244 script/JSON bundles recorded in the proof ledger.
 
-Restoring the projective cubic point at infinity gives a second seed `[2q+2,4,q]_q`. Its full
-inclusion-minimal inner repair port stabilizes at radius four, with uniform cubic row
-`((q-1)/2,q-1)` and axis row `((5q-3)/6,2q-3)`. At q=9 this is `[20,4,9]_9`, with two equal
-coordinate classes and rows `(4,8)` and `(7,15)`. Its degree-four lift has
-`[20N,4K,>=9D]_9`; the resulting unbounded family has exact rate `1/10` and every eventual
-relative-distance bound `c<351/1600`. Only the bounded radius-four port transfers to the lift.
+Classical ingredients remain labeled as such: concatenated-dual decomposition, Singer regularity,
+random GV and AG/TVZ codes, normal-rational-curve nuclei, harmonic Steiner systems,
+deletion--contraction reliability, BEC EXIT, Chen--Stein approximation, and the Las Vergnas
+perspective polynomial. A none-found search is not a priority certificate.
+
+C220's optional cubic blocker-stability strengthening is not included pending its separate
+decision. Sequential composition, service regions, coefficient optimization, log-concavity,
+product architecture, and random harmonic-cascade thresholds are outside scope.
 
 ## Files
 
-- `complete_repair_ports.tex` / `.pdf` — manuscript and built artifact.
+- `complete_repair_ports.tex` — main manuscript.
+- `complete_repair_ports.pdf` — rebuilt private artifact.
 - `refs.bib` — bibliography.
-- `proof_ledger.md` — claim-by-claim paper/Lean/import ledger.
-- `adversarial_novelty_review.md` — collision search and final novelty posture.
-- `../../lean/RepairCodes/` — formal theorem chain.
-- `../../lean/RepairCodes/OperationalCoefficients.lean` — coefficient-labelled scalar recovery
-  equations and the monomial gauge boundary.
-- `../../lean/RepairCodes/WeightedTransfer.lean` — weighted functional-dual gate and exact
-  repair-hypergraph transfer implication.
-- `../../lean/RepairCodes/WeightedTransferExact.lean` — exact three-stratum threshold partition,
-  exact closed terms, finite attainment, and coordinate-surjective threshold coincidence.
-- `../../lean/RepairCodes/WeightedStrictExample.lean` — generalized-SPC functional dual, strict
-  distance-five/weighted-distance-at-least-six separation, and completed-seed radius-four transfer.
-- `../../notes/2026-07-15-c203-q9-coefficient-verifier.py` / `.json` — independent q9 coefficient
-  replay and certificate.
-- `../../notes/2026-07-15-c203-operational-coefficient-adversarial-review.md` — adversarial audit
-  of coefficient gauge, verifier independence, and operational wording.
-- `../../lean/RepairCodes/TRUST.md` — stable trust boundary.
-- `../../notes/2026-07-13-repaircodes-asymptotic-adversarial-review.md` — strict formalization
-  review.
-
-## Trust boundary
-
-- No `sorry`, `admit`, `native_decide`, `unsafe`, or code-generation trust occurs in the
-  `RepairCodes` theorem chain.
-- All finite geometry, repair, concatenation, trace-duality, finite-field, and analytic-reduction
-  steps depend only on Lean's standard logical axioms.
-- `RepairCodes.Imported.stichtenoth_selfDual_TVZ_6561` is the sole project axiom consumed by the
-  asymptotic headline. It states the exact specialization of Stichtenoth, Theorem 1.6(ii), used by
-  the paper.
+- `proof_ledger.md` — exact claim, trust, and evidence boundary.
+- `adversarial_novelty_review.md` — internal novelty and overclaim audit; excluded from export.
 
 ## Build
 
 From this directory:
 
-```sh
+```bash
 nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
 ```
 
-From `lean/`:
+## Publication boundary
 
-```sh
-choom -n 1000 -- nix develop --command lake build RepairCodes
-```
+This directory belongs to the private monorepo. Publication must use the reviewed C275
+deny-by-default allowlist into a new empty destination with fresh Git history. Do not publish,
+fork, history-filter, or broadly copy the private monorepo. Repository identity/remote, license,
+C220 disposition, public rewrites, and the separately owned shared-Lean export remain explicit
+gates. No push is authorized by manuscript assembly.

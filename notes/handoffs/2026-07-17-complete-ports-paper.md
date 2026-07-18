@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-17
-**Status**: ACTIVE; C279 PRIVATE IDENTITY MIGRATION COMPLETE; C280 SIX-PART ASSEMBLY QUEUED
+**Status**: ACTIVE; C280 SIX-PART MANUSCRIPT ASSEMBLY COMPLETE; C285 CITATION PREFLIGHT QUEUED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Transfer,
@@ -30,7 +30,8 @@ Completed preparation:
 - [C275 clean-room publication boundary](../2026-07-17-c275-complete-ports-publication-boundary.md)
   and [allowlist](../2026-07-17-c275-complete-ports-publication-allowlist.tsv); and
 - [C276 paper-only rename census](../2026-07-17-c276-complete-ports-rename-census.md).
-- [C279 private identity migration](../2026-07-17-c279-complete-ports-identity-migration.md).
+- [C279 private identity migration](../2026-07-17-c279-complete-ports-identity-migration.md); and
+- [C280 six-part manuscript assembly](../2026-07-17-c280-complete-ports-six-part-assembly.md).
 
 ## Publication boundary
 
@@ -48,10 +49,10 @@ generic tract/foundation exposition. C220 remains an explicit inclusion decision
 
 ## Next step
 
-Execute C280: assemble the six-part manuscript in the renamed private package. Integrate the
-reliability/bounded-EXIT, pointed-Tutte, and quartic-nucleus/harmonic sections from their exact
-evidence owners; compress and reorder the retained cubic, transfer, and prescribed-realization
-material; then synchronize the proof ledger, novelty boundary, README, citations, and rebuilt PDF.
+Execute C285: run the submission-preflight citation-chain and claim audit against the assembled
+six-part source. Check every classical attribution and candidate none-found boundary, audit theorem
+wording against the proof/evidence ledger, and produce an exact correction list. Include a bounded
+C220 inclusion recommendation, but do not decide that user gate or begin public export.
 
 Public export remains gated on the complete-ports repository name/local destination/public remote,
 license, and C220 decision. The private rename does not authorize repository initialization, copy,

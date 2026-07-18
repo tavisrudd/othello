@@ -73,18 +73,18 @@ defect identity and ρ_𝒞(16) = 9*
 
 **5 · `complete-repair-ports`** — Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure
-- *Status:* private manuscript renamed and six-part assembly skeleton established; its theorem,
-  computation, proof/novelty-ledger, and strict-trust Lean evidence base is retained. The new
-  reliability/EXIT, pointed-Tutte, and harmonic-flagship sections still require manuscript
-  assembly before submission preflight.
+- *Status:* six-part private manuscript assembled and rebuilt, with synchronized proof and novelty
+  ledgers. Structural-section assembly is complete; citation-chain review, the C220 inclusion
+  decision, immutable artifact release, and public-export gates remain before submission.
 - *Headline:* complete bounded repair ports unify support, coefficient, and probability layers;
   exact weighted-functional transfer and prescribed realization connect the local object to
   asymptotically good families; reliability/EXIT and pointed-Tutte structure culminate in a cubic
   versus quartic-nucleus/harmonic comparison.
-- *Trust and scope:* all finite, transfer, trace-duality, coefficient, and asymptotic-reduction
-  arguments are kernel-checked; the asymptotic families additionally use exactly the quarantined
-  Stichtenoth self-dual TVZ theorem. Coefficients certify a direct one-symbol-per-helper scalar
-  protocol, not minimum bandwidth or access under subpacketization. Primary venue fit is Designs,
+- *Trust and scope:* the finite transfer/cubic core is kernel-checked; prescribed asymptotics,
+  reliability/EXIT, pointed-Tutte specialization, and all-field harmonic proofs are manuscript
+  arguments backed where finite by committed deterministic certificates. The concrete TVZ family
+  uses exactly the quarantined Stichtenoth theorem. Coefficients certify a direct
+  one-symbol-per-helper scalar protocol, not minimum bandwidth or access under subpacketization. Primary venue fit is Designs,
   Codes and Cryptography / Finite Fields and Their Applications, not IEEE-TIT in the present form.
 
 **6 · `equivariant-robust-completion`** — Frobenius-equivariant pair extension of eight-arcs in
@@ -149,9 +149,9 @@ repositories: an evidence-based essay and practical how-to
   scholarly-artifact gate is a stable, citable archive identifier for the source supplement; the
   shared release policy still requires the verbatim Lean adequacy appendix and explicit
   AI/provenance disclosure.
-- **Private LaTeX manuscript under six-part assembly (+ PDF + independent verifier + proof/novelty
-  ledgers + strict-trust Lean package):** `complete-repair-ports` — identity migration is complete;
-  structural-section assembly, specialist citation-chain review, immutable artifact release, and
+- **Six-part private LaTeX manuscript (+ PDF + deterministic replays + proof/novelty ledgers +
+  strict-trust Lean core):** `complete-repair-ports` — identity and structural assembly are
+  complete; specialist citation-chain review, C220 disposition, immutable artifact release, and
   the deferred final post-C203 aggregate rebuild remain submission preflight gates.
 - **Complete LaTeX manuscript (+ PDF + independent replays + partial formalization):**
   `clebsch-hexagon-code` — the 19-page paper cites eleven fail-closed Python replays and one Singular
