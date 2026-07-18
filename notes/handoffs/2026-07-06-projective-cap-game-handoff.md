@@ -529,13 +529,15 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
 ## C84 in the odd-q proof program
 
-C84 now has a dedicated umbrella handoff. It owns the essential odd-q relationship, Schreier
-abundance state, closed attacks, ledger boundary, and current certificate-density gate:
+C84 has stopped at its certificate-density conceptual gate. Its umbrella owns the essential odd-q
+relationship, Schreier abundance state, closed attacks, ledger boundary, and final bounded negative:
 
 > [C84 abundance-first conic Schreier handoff](c84/README.md)
 
-On a fresh C84 start, read that umbrella and its current-plan child only. Do not reconstruct C84
-from this general cap handoff or preload its dated evidence reports.
+Do not restart C84 from this general cap handoff. Re-entry must satisfy the umbrella's theorem-level
+condition rather than preload its dated evidence reports or run another census.
+The immediate broader crown is [C294](../2026-07-17-c294-full-conic-continuation-crown.md): it
+crosses the full-`PGL2` boundary with an explicit P-family but does not provide C84 density.
 
 ## Near-Term Queue
 
@@ -564,12 +566,6 @@ task list.  Current high-value items:
   defect-to-C80 levers were negative; static existence was not promoted into an (ON) or root-value
   claim. [Final map](../2026-07-12-c100-relative-conic-game-bridge.md).
 
-- **C84 [ACTIVE] — abundance-first conic-involution Schreier program.** The exact boundary
-  catalogue and q=29 abundance evidence stand; pairing, bounded one-reply cores, fixed words, and
-  rooted-S4 double-coset packets are closed as uniform mechanisms, and the residual-grid ledger
-  does not transport into the conic-only game. Adaptive finite-template mining is retired. Produce
-  at most three certificate-event theorem schemas and apply the deterministic-implication and
-  full-dimension gates before any further census. [C84 umbrella](c84/README.md).
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —

@@ -3,7 +3,7 @@
 **Lane**: `cap`
 
 **Task:** C84
-**Status:** active conceptual gate; no further census or invariant mining until the gate passes.
+**Status:** conceptually gated and deprioritized; the certificate-density gate failed.
 
 ## Essential state
 
@@ -19,19 +19,20 @@ Pairing, bounded one-reply cores, fixed involution words, rooted-S4 double-coset
 ledger transport are closed as uniform C84 mechanisms. Adaptive finite-template and feature
 mining is retired.
 
-## Current decision
+## Final decision
 
-C84 is at a certificate-density viability gate, not a computation gate. The next deliverable is a
-dossier of at most three noncircular certificate-event theorem schemas. Each must provide:
+The three-candidate dossier found no schema that passes the deterministic, complexity, dimension,
+and counting gates. An exact bounded check also found zero two-ply adaptive-pairing certificates
+among all 753 q=29 class-D roots. C84 is therefore stopped and deprioritized; do not replace the
+missing certificate with another census or classifier.
 
-1. a deterministic Node--Kayles implication `E_q(y,w) → 𝒢(R_y)=0`;
-2. a plausibly full-dimensional fourth-centre locus; and
-3. an exact counting theorem that could give positive density in the actual correlated family.
+Final report: [C84 certificate-event viability dossier](../../2026-07-17-c84-certificate-event-dossier.md).
+Re-entry requires a genuinely different global recursion, averaging identity, distribution
+theorem, or a formally specified certificate class that evades the recorded obstruction.
 
-Spectral or other counting tools may count a separately proved certificate family; they cannot
-certify P by themselves. If no candidate passes both the deterministic and dimension gates, mark
-C84 conceptually gated and
-deprioritize it. Do not replace the missing certificate with another census or classifier.
+Immediate broader context: [C294](../../2026-07-17-c294-full-conic-continuation-crown.md) proves an
+explicit full-`PGL2` mirror-certified P-family, but its `O(1)` centres per field do not supply C84's
+positive-density input.
 
 ## Facet maps
 
@@ -54,10 +55,7 @@ deprioritize it. Do not replace the missing certificate with another census or c
 The detailed integration report is
 [`notes/2026-07-12-conic-involution-residual-graphs.md`](../../2026-07-12-conic-involution-residual-graphs.md).
 
-## Owned paths for the next chunk
+## Closed scope
 
-- `notes/handoffs/c84/`
-- a new C84 certificate-event dossier under `notes/`
-- C84-specific bounded falsification code/data only after a certificate candidate passes the gate
-
-The live queue, cap parent handoff, and program map may be updated to keep routing synchronized.
+C84 has no active next chunk. The dossier, bounded checker, compact output, and checksum manifest
+are committed together; the parent cap handoff owns subsequent lane routing.

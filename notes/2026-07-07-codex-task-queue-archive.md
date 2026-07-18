@@ -4318,7 +4318,7 @@ fixed-locus / quadric-Witt dichotomy leap).
   only a structural identification or a genuinely new family →
   `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.
 
-- **C84 `[cap]` [ACTIVE 2026-07-12 — abundance-first] — conic-involution Schreier catalogue.**
+- **C84 `[cap]` [CONCEPTUALLY GATED 2026-07-17] — conic-involution Schreier abundance program.**
   Bulk = induced Schreier graph of `H_S ≤ PGL(2,q)`; value set by subgroup type. Proven+verified:
   two-centre full decomposition; `V₄`→`K₄`s (Cor 3.2 mod-8); `D₈`→`M₈⊔K₂` (Thm 4.2 mod-8); `S₄`
   classes; orbit-template theorem; `A₄` excluded. Independent field-geometry verification at
@@ -4349,7 +4349,11 @@ fixed-locus / quadric-Witt dichotomy leap).
   [program integration](2026-07-12-conic-involution-residual-graphs.md); scripts
   `c80_schreier_verify.py` (field), `s4_escape_probe.py`, `s4_abundance_check.py`,
   `pairing_witness.py`, `exact_fricke.py`, `refined_signature.py`, `three_centre_probe.py`,
-  `schreier_templates.py`.
+  `schreier_templates.py`. **Final gate:** no permitted certificate schema passed the deterministic,
+  controlled-complexity, full-dimension, and exact-counting tests; the unrestricted two-ply
+  adaptive-pairing super-event certifies 13/131 q=13 class-D roots but 0/753 at q=29. C84 is
+  deprioritized without claiming an impossibility theorem →
+  `notes/2026-07-17-c84-certificate-event-dossier.md`.
 
 - **C80 `[cap]` [ACTIVE 2026-07-12 — (c) drain proven+verified; (a) abundance / (b) descent open]** —
   game-side bulk-mechanism probe: exhaustion, abundance, descent measure. Report:

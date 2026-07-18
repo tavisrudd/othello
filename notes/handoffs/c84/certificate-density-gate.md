@@ -2,7 +2,11 @@
 
 **Lane**: `cap`
 
-**Status:** current plan; no new census or classifier before this gate is met.
+**Status:** failed 2026-07-17; C84 is conceptually gated and deprioritized.
+
+Outcome: none of the three permitted schemas passed all four gates. See the
+[certificate-event viability dossier](../../2026-07-17-c84-certificate-event-dossier.md). No new
+census or classifier is authorized by this result.
 
 The method is deliberately not fixed. Spectral, orbital, character-sum, or algebraic-geometric
 counting may be used later, but only after a deterministic P-certificate family exists.
