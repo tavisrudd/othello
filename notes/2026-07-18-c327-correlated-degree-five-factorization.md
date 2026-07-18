@@ -10,6 +10,8 @@ proved below, together with generic geometric monodromy `S5` for each pentic sep
 generic splitting fields are disjoint and retain joint monodromy `S5 times S5` after the legality
 Artin--Schreier base changes.  The generic legality cover is geometrically connected of degree
 sixteen with constant field `GF(2)`.  An explicit effective finite-field point bound remains open.
+The next packet is cold-session ready: restrict to the common seed-translation line, compute its
+legality curve and joint cover explicitly, and prove an effective simultaneous-derangement count.
 
 ## Objective
 
@@ -49,20 +51,22 @@ their first exact consumer interface if the degree-five pair survives.
 
 Do not re-solve C312's packets, C314's atlas, or C315's legality classification.
 
-## Required theorem package
+## Theorem state and exit gate
 
-1. Put both `E_i` in a common invariant coefficient form over the generic survivor base.
-2. Prove generic separability and irreducibility, or classify the exact factorization divisor.
-3. Determine the generic arithmetic/geometric monodromy groups or a resolvent-level substitute
-   sufficient to control the presence of linear factors.
-4. Determine whether the two splitting fields share a nontrivial resolvent or forced Frobenius
-   invariant.
-5. Geometrize C315's absolute-trace conditions through explicit Artin--Schreier covers, with actual
-   constant fields audited before any Chebotarev or density statement.
-6. Close or isolate `Delta_R=0`, packet repeated-root targets, repair--seed conic coincidences,
-   branch loci, and the ordered-seed deletion.
-7. If simultaneous no-root survives, state the exact degree-six and relative-coverage consumer
-   interface.  Do not infer coverage from collision-freeness.
+| Package | State | Exact boundary |
+|---|---|---|
+| common invariant pentic form | complete | equations (1)--(7) |
+| generic separability and irreducibility | complete | degree-five rational cover (8)--(9) |
+| individual geometric monodromy | complete | `S5` by the generic transposition theorem |
+| shared resolvents/splitting fields | complete generically | distinct sign divisors give disjoint fields and `S5 times S5` |
+| trace-legality geometrization | complete generically | connected degree-sixteen `(C2)^4` cover, constant field `GF(2)` |
+| effective arithmetic point supply | open | common-translation curve, branch/genus/deletions, effective Chebotarev |
+| exceptional survivor rows | open | `X in {0,d}`, `Delta_R=0`, repeated-root/conic and branch divisors |
+| downstream interface | open | two degree-six gates and relative coverage, conditional on degree-five survival |
+
+C327 exits with an explicit simultaneous no-root theorem and threshold, an exact obstruction, or a
+bounded mixed theorem naming the irreducible effective-point-count obstruction.  It does not exit
+from generic monodromy or the conditional main term alone.
 
 ## Guardrails and stop conditions
 
@@ -75,16 +79,87 @@ Do not re-solve C312's packets, C314's atlas, or C315's legality classification.
 - Stop with a bounded mixed theorem if the trace-slice step requires substantially new machinery;
   name the exact missing hypothesis rather than invoking Chebotarev heuristically.
 
-## First attack
+## Cold-session restart
 
-1. Expand `E_i` only far enough to expose its five invariant coefficients and the relation between
-   the `e=1,Z=Gamma_alpha` and `e=rho,Z=Gamma_alpha+Delta_R` cases.
-2. Compute derivative, discriminant/branch information, and low-degree resolvents symbolically.
-3. Search for an exact coefficient transformation relating `E_1` and `E_2`; prove or reject each
-   candidate directly.
-4. Choose a minimal specialization over a rational function field that can certify a lower bound
-   on generic monodromy without a field census.
-5. Pull the trace conditions back only after the ambient algebraic relation is understood.
+### Minimal reading
+
+After the root guide and relconic handoff, read this report in full.  Then use only:
+
+1. C316's seed--seed--repair equations (25)--(33) and its exceptional/deletion table;
+2. C315's survivor coordinates and trace conditions (13)--(20); and
+3. C317 only for the fixed-versus-fresh theorem boundary.
+
+Do not preload C312's packet derivation, C314's full atlas, C305's rejected census, or the old C210
+residue reports unless an exact open divisor points back to them.
+
+The closed C327 steps are committed as:
+
+- `5312e378`: common pentic normal form and branch identity;
+- `0641c949`: generic individual `S5` monodromy;
+- `bc827624`: generic disjointness and joint `S5 times S5` through legality base change; and
+- `c827582e`: connected degree-sixteen legality cover with constant field `GF(2)`.
+
+### Immediate packet: the common-translation curve
+
+Fix the invariant skeleton
+
+    (rho,P0,w,x,x',t),       t=y+y',
+
+on the open
+
+    rho*P0*(rho+1)*(x+x')*(x)*(x+d)*(x')*(x'+d)*(x+1)*(x'+1)!=0,
+    d=1+rho.
+
+Translate both seed coordinates by one parameter `h`:
+
+    y=y_0+h,                 y'=y'_0+h.
+
+Characteristic two keeps `t=y+y'`, hence `Delta_S`, fixed.  Both pentics therefore remain covers
+of one common target line while legality varies with `h`.
+
+The four Artin--Schreier slopes on the `h`-line are
+
+    1/x^2,       rho^2/(x+d)^2,
+    1/(x')^2,    rho^2/(x'+d)^2.                       (21)
+
+Perform the following steps in order.
+
+1. Prove the four slopes (21) are `GF(2)`-independent on an explicit skeleton open; classify every
+   subset-sum dependence divisor rather than hiding it generically.
+2. Construct the resulting degree-sixteen legality cover of `P1_h`; prove its geometric
+   components, constant fields, genus, infinity ramification, and exact affine deletions.
+3. Pull back the two pentic splitting covers and recheck `S5 times S5` on this one-parameter slice.
+   Generic monodromy on the full base does not automatically prove monodromy on every fiber.
+4. List the finite transposition branch values and compute the wild inertia above `h=infinity`.
+5. Construct the smallest quotient or twists detecting the derangement union
+
+       D={(5),(3,2)} subset S5,
+
+   rather than defaulting to the full `120^2*16=230400`-sheet Galois closure.
+6. Apply a source-pinned effective function-field Chebotarev or an equivalent explicit
+   twist-and-Hasse--Weil bound.  Record genus/degree, constant field, deleted points, error term, and
+   an actual odd-tower threshold.
+7. Subtract the common-height, zero-seed, branch, and other C315/C316 deletions explicitly.
+
+Conditional on the group and equidistribution surviving this slice, the predicted proportions are
+
+    legality among h:                         1/16,
+    both pentics derangements given legality: (11/30)^2=121/900,
+    combined main term among h:               121/14400.              (22)
+
+Equation (22) is a target main term, not a theorem.  The session succeeds only after producing the
+effective error and deletions needed to make its lower bound positive, or after proving the exact
+reason this slice cannot do so.
+
+### Literature and computation boundary
+
+Before fetching an effective Chebotarev source, read the shared literature-cache README and query
+the cache.  Use a curve theorem with stated hypotheses and constants; do not cite general
+Chebotarev or Lang--Weil as a label.
+
+No raw field/coefficient enumeration and no `Q=512` run are authorized.  Tiny-field checks may
+debug formulas but are not evidence.  Any symbolic artifact promoted into the theorem must be a
+compact deterministic script/output/checksum bundle under the C327-owned paper path.
 
 ## First result: common pentic normal form
 
