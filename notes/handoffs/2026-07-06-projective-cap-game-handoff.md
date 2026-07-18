@@ -551,30 +551,26 @@ generic region is P-rich rather than depleted.
 These are mechanism negatives, not evidence against the odd-q outcome. They say that P-ness is
 adaptive and context-dependent, matching the earlier C64/C69/C75 static-signature failures.
 
-**Why the ledger route survives.** The C63/C77 integer ledger
-`Ψ = reservoir_slack + 6·defect − 4·intruders − 2·[conic_xor=0]` is value-blind, but its conic
-part is proved root-peak bounded at every depth. C80 independently proves the exact drain law that a
-conic move removes `1 + degree` live conic vertices. These facts do not identify a winning reply;
-they remain candidates for an amortized strategy over a complete opponent/reply round.
+**Ledger applicability boundary.** The C63/C77 ledger remains meaningful in its full residual-grid
+domain, but it does not transport into C84's conic-only abstraction. Its reservoir requires the
+frame and burned grid directions absent from the C84 artifact, and its xor-zero term is the target
+P/N label here. The shared noncircular measures are only defect components and C80's exact
+`1 + degree` drain. A deliberate all-projective reservoir proxy has now been audited on all 470
+forced replies: winning descent drops from 30/30 at q13 to 1/62 at q19 and zero at q23/q29; at q13
+every losing alternative descends too. Greedy drain and component minimization also fail to cover
+the winning replies. This is an applicability boundary, not a refutation of the C63/C77 ledger.
 
-**Current test and stop rule.** On the 91 q=29 P roots having a forced transition, construct the
-exact two-ply forced-transition closure and measure:
-
-1. `ΔΨ` and whether accumulated ledger debt is paid or merely shifted;
-2. live-conic drain and defect/intruder retirement;
-3. descent into the certified small-zone/base families; and
-4. whether the same contract persists across q=13,17,19,23.
-
-A field-stable lexicographic or amortized descent contract is the sought multi-step certificate.
-If the exact winning transitions do not separate from losing alternatives or do not descend,
-retire adaptive finite-template mining and return C84 to the full-dimensional
-spectral/probabilistic abundance lane. Even a successful ledger contract still needs the separate
-transfer to `(ON)`.
+**Current decision.** The stop rule has triggered. Retire adaptive finite-template mining and
+return C84 to the full-dimensional spectral/probabilistic abundance lane. The first gate is to
+identify a noncircular graph event or bounded strategy certificate for the generic “rooted-S4
+gadget plus varying fourth involution” family whose probability could remain positive. Transfer to
+`(ON)` remains a separate obligation.
 
 Primary records: [program integration](../2026-07-12-conic-involution-residual-graphs.md),
 [adaptive core](../2026-07-17-c84-adaptive-core.md),
 [word obstruction](../2026-07-17-c84-forced-reply-algebra.md), and
-[double-coset obstruction](../2026-07-17-c84-double-coset-packets.md).
+[double-coset obstruction](../2026-07-17-c84-double-coset-packets.md), and
+[ledger applicability](../2026-07-17-c84-two-ply-ledger.md).
 
 ## Near-Term Queue
 
@@ -605,9 +601,10 @@ task list.  Current high-value items:
 
 - **C84 [ACTIVE] — abundance-first conic-involution Schreier program.** The exact boundary
   catalogue and q=29 abundance evidence stand; pairing, bounded one-reply cores, fixed words, and
-  rooted-S4 double-coset packets are closed as uniform mechanisms. Run the two-ply ledger/descent
-  test specified in **C84 in the odd-q proof program** above. If it fails, return to the
-  spectral/probabilistic abundance lane. [Program map](../2026-07-12-conic-involution-residual-graphs.md).
+  rooted-S4 double-coset packets are closed as uniform mechanisms, and the residual-grid ledger
+  does not transport into the conic-only game. Adaptive finite-template mining is retired. Specify
+  and gate the spectral/probabilistic abundance route described in **C84 in the odd-q proof
+  program** above. [Program map](../2026-07-12-conic-involution-residual-graphs.md).
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —

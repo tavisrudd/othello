@@ -112,6 +112,16 @@ refinement. The last bounded adaptive test is two-ply forced-transition descent;
 returns the program to the full-dimensional spectral/probabilistic lane. Evidence:
 `notes/2026-07-17-c84-double-coset-packets.md`.
 
+**The ledger does not transport into C84 (C84 follow-up, 2026-07-17).** C63's reservoir requires
+the residual-grid frame and burned row/column directions, which the conic-only Schreier artifact
+does not retain; its xor-zero term is the target P/N label in C84 and is therefore circular.
+An exact audit of the shared conic measures plus a deliberately naive reservoir proxy found no
+field-stable two-ply contract: winning proxy descent falls from 30/30 at q13 to 1/62 at q19 and
+0/125, 0/195 at q23,q29, while q13's descent holds for every losing alternative as well. This does
+not refute C63/C77 in their residual-grid domain. It triggers C84's stop rule: retire adaptive
+finite-template mining and return to the spectral/probabilistic abundance lane. Evidence:
+`notes/2026-07-17-c84-two-ply-ledger.md`.
+
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
 conic-only value 0; that does **not** by itself produce an **on-conic** P child. Closing the
 escape via (ON) needs a separate **exchange / transfer lemma** carrying an off-conic

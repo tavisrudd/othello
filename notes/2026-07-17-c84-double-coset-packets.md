@@ -76,7 +76,8 @@ or a spectral/probabilistic abundance theorem.
 
 ## Next C84 target
 
-Stop one-ply response-signature refinement.  On the 91 q=29 roots with a forced transition,
-construct the exact two-ply forced-transition closure and test for a decreasing state invariant or
-a bounded quotient after the forced reply.  If neither survives, retire adaptive finite-template
-mining and return C84 to the full-dimensional spectral/probabilistic abundance lane.
+Completed in `2026-07-17-c84-two-ply-ledger.md`. The genuine C63 reservoir is not defined on the
+C84 conic-only artifact, its xor term is circular there, and the noncircular conic measures plus a
+naive reservoir proxy have no field-stable two-ply contract. The stop rule triggered: retire
+adaptive finite-template mining and return C84 to the full-dimensional spectral/probabilistic
+abundance lane.
