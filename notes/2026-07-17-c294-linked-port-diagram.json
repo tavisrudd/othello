@@ -1,0 +1,5500 @@
+{
+  "contexts": [
+    {
+      "context": "direct-pgl2-3-base",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 2,
+          "cut_endpoints": 8,
+          "diagram_nodes": 36,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 40,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 6,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 40,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 40,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 6,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 38,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 6,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 44,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 42,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 6,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 44,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 6,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 44,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 7,
+          "cut_backbones": 2,
+          "cut_endpoints": 6,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 48,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 44,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 48,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 44,
+          "ports": 12,
+          "states": 1
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 16,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 20,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 0,
+          "diagram_nodes": 16,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 24,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 28,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 4
+        }
+      ],
+      "exact_grundy_histogram": {
+        "0": 20
+      },
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 19,
+        "largest_class": 2,
+        "states": 20
+      },
+      "linked_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 19,
+        "largest_class": 2,
+        "states": 20
+      },
+      "local_rank_children": 4218,
+      "response_states": 20,
+      "unlinked_partition": {
+        "ambiguous_classes": 2,
+        "ambiguous_states": 6,
+        "classes": 16,
+        "largest_class": 4,
+        "states": 20
+      }
+    },
+    {
+      "context": "root-type-0",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 8,
+          "cut_backbones": 2,
+          "cut_endpoints": 8,
+          "diagram_nodes": 36,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 40,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 5,
+          "anchors": 6,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 9,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 50,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 48,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 8
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 44,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 48,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 50,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 54,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 52,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 52,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 25
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 8
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 16,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 20,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 0,
+          "diagram_nodes": 16,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 7
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 8
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 24,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 28,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 12
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 44
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 24
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 3,
+        "ambiguous_states": 32,
+        "classes": 85,
+        "largest_class": 24,
+        "states": 116
+      },
+      "local_rank_children": 1405818,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 4,
+        "ambiguous_states": 86,
+        "classes": 34,
+        "largest_class": 64,
+        "states": 116
+      }
+    },
+    {
+      "context": "root-type-1",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 8,
+          "cut_backbones": 2,
+          "cut_endpoints": 8,
+          "diagram_nodes": 36,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 42,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 50,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 5
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 12
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 50,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 9,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 10
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 16,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 20,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 3
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 6
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 9
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 3
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 28,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 16
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 44
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 16
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 5,
+        "ambiguous_states": 36,
+        "classes": 85,
+        "largest_class": 16,
+        "states": 116
+      },
+      "local_rank_children": 1405818,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 4,
+        "ambiguous_states": 86,
+        "classes": 34,
+        "largest_class": 64,
+        "states": 116
+      }
+    },
+    {
+      "context": "root-type-2",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 48,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 52,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 2,
+          "cut_endpoints": 10,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 2,
+          "cut_endpoints": 12,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 54,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 60,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 9,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 9
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 23
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 3
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 8
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 2,
+          "diagram_nodes": 28,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 12
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 48
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 16
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "local_rank_children": 1405812,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 5,
+        "ambiguous_states": 88,
+        "classes": 33,
+        "largest_class": 64,
+        "states": 116
+      }
+    },
+    {
+      "context": "root-type-3",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 9,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 8,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 2,
+          "cut_endpoints": 10,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 2,
+          "cut_endpoints": 12,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 14,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 56,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 56,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 60,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 60,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 3
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 7
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 14
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 18
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 52
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 4
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "local_rank_children": 1405812,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 5,
+        "ambiguous_states": 88,
+        "classes": 33,
+        "largest_class": 64,
+        "states": 116
+      }
+    },
+    {
+      "context": "root-type-7",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 52,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 14,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 56,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 54,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 54,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 60,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 11,
+          "cut_backbones": 2,
+          "cut_endpoints": 6,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 5
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 18,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 18,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 18,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 1
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 9
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 3
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 12
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 40
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 20
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 114,
+        "largest_class": 2,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 3,
+        "ambiguous_states": 30,
+        "classes": 87,
+        "largest_class": 20,
+        "states": 116
+      },
+      "local_rank_children": 1405812,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 6,
+        "ambiguous_states": 106,
+        "classes": 16,
+        "largest_class": 88,
+        "states": 116
+      }
+    },
+    {
+      "context": "root-type-9",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "cut_backbones": 2,
+          "cut_endpoints": 6,
+          "diagram_nodes": 32,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 38,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 40,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 7,
+          "cut_backbones": 2,
+          "cut_endpoints": 6,
+          "diagram_nodes": 40,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 44,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 46,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 54,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 54,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 50,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 52,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 7,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 44,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 48,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 9,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 9,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 9,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 10,
+          "cut_backbones": 2,
+          "cut_endpoints": 6,
+          "diagram_nodes": 50,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 10,
+          "diagram_nodes": 50,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 58,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 60,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 16
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 11
+        },
+        {
+          "affected_backbones": 18,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 2
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 4,
+          "anchors": 0,
+          "diagram_nodes": 8,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 3
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 8
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 3
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 34
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 16
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 20
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 7,
+        "input_ambiguous_states": 19,
+        "radius_audits": [
+          {
+            "ambiguous_classes": 4,
+            "ambiguous_states": 8,
+            "classes": 14,
+            "largest_class": 2,
+            "maximum_diagram_nodes": 76,
+            "maximum_twist_backbones": 4,
+            "minimum_twist_backbones": 4,
+            "radius": 0,
+            "states": 19,
+            "total_backbones": 30
+          },
+          {
+            "ambiguous_classes": 0,
+            "ambiguous_states": 0,
+            "classes": 19,
+            "largest_class": 1,
+            "maximum_diagram_nodes": 204,
+            "maximum_twist_backbones": 18,
+            "minimum_twist_backbones": 15,
+            "radius": 1,
+            "states": 19,
+            "total_backbones": 30
+          }
+        ]
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 7,
+        "ambiguous_states": 19,
+        "classes": 102,
+        "largest_class": 4,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 16,
+        "ambiguous_states": 74,
+        "classes": 57,
+        "largest_class": 20,
+        "states": 116
+      },
+      "local_rank_children": 1405818,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 6,
+        "ambiguous_states": 111,
+        "classes": 11,
+        "largest_class": 84,
+        "states": 116
+      }
+    },
+    {
+      "context": "root-type-11",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 10,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 50,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 52,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 56,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 54,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 9,
+          "anchors": 12,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 58,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 62,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 9,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 56,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 10,
+          "cut_backbones": 3,
+          "cut_endpoints": 9,
+          "diagram_nodes": 54,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 60,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 64,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 11,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 10,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 11,
+          "cut_backbones": 2,
+          "cut_endpoints": 6,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 11,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 56,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 11,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 66,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 12,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 12,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 11,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 3,
+          "cut_endpoints": 13,
+          "diagram_nodes": 68,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 13,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 70,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 13
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 14,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 13,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 3,
+          "cut_endpoints": 14,
+          "diagram_nodes": 72,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 74,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 76,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 16,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 8
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 78,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 17,
+          "anchors": 15,
+          "cut_backbones": 4,
+          "cut_endpoints": 14,
+          "diagram_nodes": 80,
+          "ports": 12,
+          "states": 5
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 24,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 32,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 32,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 30
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 36
+        },
+        {
+          "affected_backbones": 14,
+          "anchors": 8,
+          "diagram_nodes": 40,
+          "ports": 12,
+          "states": 16
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 115,
+        "largest_class": 2,
+        "states": 116
+      },
+      "linked_partition": {
+        "ambiguous_classes": 8,
+        "ambiguous_states": 36,
+        "classes": 87,
+        "largest_class": 16,
+        "states": 116
+      },
+      "local_rank_children": 1405812,
+      "response_states": 116,
+      "unlinked_partition": {
+        "ambiguous_classes": 6,
+        "ambiguous_states": 106,
+        "classes": 16,
+        "largest_class": 92,
+        "states": 116
+      }
+    },
+    {
+      "context": "terminal-mirror-2",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 8,
+          "cut_endpoints": 35,
+          "diagram_nodes": 126,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 8,
+          "cut_endpoints": 38,
+          "diagram_nodes": 130,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 32,
+          "cut_backbones": 8,
+          "cut_endpoints": 35,
+          "diagram_nodes": 130,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 33,
+          "cut_backbones": 8,
+          "cut_endpoints": 36,
+          "diagram_nodes": 132,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 33,
+          "cut_backbones": 9,
+          "cut_endpoints": 35,
+          "diagram_nodes": 130,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 8,
+          "cut_endpoints": 36,
+          "diagram_nodes": 138,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 8,
+          "cut_endpoints": 42,
+          "diagram_nodes": 140,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 8,
+          "cut_endpoints": 39,
+          "diagram_nodes": 140,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 36,
+          "cut_backbones": 8,
+          "cut_endpoints": 40,
+          "diagram_nodes": 140,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 36,
+          "cut_backbones": 8,
+          "cut_endpoints": 41,
+          "diagram_nodes": 140,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 37,
+          "cut_backbones": 10,
+          "cut_endpoints": 42,
+          "diagram_nodes": 140,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 38,
+          "cut_backbones": 8,
+          "cut_endpoints": 40,
+          "diagram_nodes": 146,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 38,
+          "cut_backbones": 10,
+          "cut_endpoints": 42,
+          "diagram_nodes": 140,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 38,
+          "cut_backbones": 10,
+          "cut_endpoints": 42,
+          "diagram_nodes": 142,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 40,
+          "cut_backbones": 10,
+          "cut_endpoints": 42,
+          "diagram_nodes": 146,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 32,
+          "cut_backbones": 8,
+          "cut_endpoints": 34,
+          "diagram_nodes": 130,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 32,
+          "cut_backbones": 8,
+          "cut_endpoints": 37,
+          "diagram_nodes": 136,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 32,
+          "cut_backbones": 9,
+          "cut_endpoints": 34,
+          "diagram_nodes": 130,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 32,
+          "cut_backbones": 9,
+          "cut_endpoints": 34,
+          "diagram_nodes": 132,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 32,
+          "cut_backbones": 9,
+          "cut_endpoints": 37,
+          "diagram_nodes": 132,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 33,
+          "cut_backbones": 8,
+          "cut_endpoints": 38,
+          "diagram_nodes": 136,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 33,
+          "cut_backbones": 9,
+          "cut_endpoints": 34,
+          "diagram_nodes": 132,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 33,
+          "cut_backbones": 9,
+          "cut_endpoints": 37,
+          "diagram_nodes": 132,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 8,
+          "cut_endpoints": 39,
+          "diagram_nodes": 140,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 38,
+          "diagram_nodes": 144,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 39,
+          "diagram_nodes": 136,
+          "ports": 10,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 37,
+          "cut_backbones": 9,
+          "cut_endpoints": 39,
+          "diagram_nodes": 144,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 33,
+          "cut_backbones": 8,
+          "cut_endpoints": 36,
+          "diagram_nodes": 138,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 8,
+          "cut_endpoints": 38,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 8,
+          "cut_endpoints": 40,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 9,
+          "cut_endpoints": 38,
+          "diagram_nodes": 138,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 9,
+          "cut_endpoints": 38,
+          "diagram_nodes": 140,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 34,
+          "cut_backbones": 9,
+          "cut_endpoints": 40,
+          "diagram_nodes": 140,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 38,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 39,
+          "diagram_nodes": 140,
+          "ports": 12,
+          "states": 1
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 39,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 3
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 39,
+          "diagram_nodes": 148,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 35,
+          "cut_backbones": 9,
+          "cut_endpoints": 40,
+          "diagram_nodes": 136,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 36,
+          "cut_backbones": 9,
+          "cut_endpoints": 38,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 36,
+          "cut_backbones": 9,
+          "cut_endpoints": 39,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 36,
+          "cut_backbones": 9,
+          "cut_endpoints": 40,
+          "diagram_nodes": 140,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 36,
+          "cut_backbones": 9,
+          "cut_endpoints": 41,
+          "diagram_nodes": 144,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 37,
+          "cut_backbones": 9,
+          "cut_endpoints": 41,
+          "diagram_nodes": 148,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 37,
+          "cut_backbones": 9,
+          "cut_endpoints": 41,
+          "diagram_nodes": 152,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 38,
+          "cut_backbones": 9,
+          "cut_endpoints": 42,
+          "diagram_nodes": 146,
+          "ports": 12,
+          "states": 4
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 38,
+          "cut_backbones": 9,
+          "cut_endpoints": 42,
+          "diagram_nodes": 148,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 39,
+          "cut_backbones": 9,
+          "cut_endpoints": 41,
+          "diagram_nodes": 154,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 39,
+          "cut_backbones": 9,
+          "cut_endpoints": 41,
+          "diagram_nodes": 160,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 39,
+          "cut_backbones": 9,
+          "cut_endpoints": 42,
+          "diagram_nodes": 154,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 39,
+          "cut_backbones": 9,
+          "cut_endpoints": 42,
+          "diagram_nodes": 156,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 40,
+          "cut_backbones": 9,
+          "cut_endpoints": 42,
+          "diagram_nodes": 160,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 12,
+          "anchors": 40,
+          "cut_backbones": 9,
+          "cut_endpoints": 42,
+          "diagram_nodes": 166,
+          "ports": 12,
+          "states": 2
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 16,
+          "ports": 4,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 20,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 0,
+          "diagram_nodes": 16,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 7
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 8
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 28,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 24,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 8
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 4
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 8,
+          "diagram_nodes": 36,
+          "ports": 10,
+          "states": 4
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 28,
+          "ports": 12,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 32,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 6
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 16
+        },
+        {
+          "affected_backbones": 10,
+          "anchors": 6,
+          "diagram_nodes": 36,
+          "ports": 12,
+          "states": 22
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 96,
+        "largest_class": 1,
+        "states": 96
+      },
+      "linked_partition": {
+        "ambiguous_classes": 7,
+        "ambiguous_states": 32,
+        "classes": 68,
+        "largest_class": 20,
+        "states": 96
+      },
+      "local_rank_children": 785922,
+      "response_states": 96,
+      "unlinked_partition": {
+        "ambiguous_classes": 9,
+        "ambiguous_states": 83,
+        "classes": 22,
+        "largest_class": 44,
+        "states": 96
+      }
+    },
+    {
+      "context": "terminal-mirror-0",
+      "cut_diagram_size_histogram": [
+        {
+          "affected_backbones": 15,
+          "anchors": 54,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 162,
+          "ports": 2,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 50,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 154,
+          "ports": 4,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 46,
+          "cut_backbones": 13,
+          "cut_endpoints": 51,
+          "diagram_nodes": 164,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 50,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 156,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 51,
+          "cut_backbones": 13,
+          "cut_endpoints": 53,
+          "diagram_nodes": 164,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 52,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 170,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 53,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 164,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 53,
+          "cut_backbones": 13,
+          "cut_endpoints": 55,
+          "diagram_nodes": 164,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 54,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 170,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 54,
+          "cut_backbones": 14,
+          "cut_endpoints": 58,
+          "diagram_nodes": 170,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 57,
+          "cut_backbones": 14,
+          "cut_endpoints": 60,
+          "diagram_nodes": 180,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 47,
+          "cut_backbones": 13,
+          "cut_endpoints": 50,
+          "diagram_nodes": 166,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 48,
+          "cut_backbones": 13,
+          "cut_endpoints": 51,
+          "diagram_nodes": 168,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 48,
+          "cut_backbones": 13,
+          "cut_endpoints": 53,
+          "diagram_nodes": 166,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 49,
+          "cut_backbones": 13,
+          "cut_endpoints": 53,
+          "diagram_nodes": 158,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 49,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 172,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 51,
+          "cut_backbones": 14,
+          "cut_endpoints": 56,
+          "diagram_nodes": 164,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 52,
+          "cut_backbones": 13,
+          "cut_endpoints": 55,
+          "diagram_nodes": 166,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 53,
+          "cut_backbones": 13,
+          "cut_endpoints": 55,
+          "diagram_nodes": 168,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 48,
+          "cut_backbones": 13,
+          "cut_endpoints": 53,
+          "diagram_nodes": 162,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 49,
+          "cut_backbones": 12,
+          "cut_endpoints": 52,
+          "diagram_nodes": 170,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 49,
+          "cut_backbones": 13,
+          "cut_endpoints": 53,
+          "diagram_nodes": 168,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 51,
+          "cut_backbones": 12,
+          "cut_endpoints": 53,
+          "diagram_nodes": 174,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 51,
+          "cut_backbones": 13,
+          "cut_endpoints": 56,
+          "diagram_nodes": 174,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 52,
+          "cut_backbones": 13,
+          "cut_endpoints": 55,
+          "diagram_nodes": 176,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 52,
+          "cut_backbones": 14,
+          "cut_endpoints": 56,
+          "diagram_nodes": 178,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 53,
+          "cut_backbones": 13,
+          "cut_endpoints": 54,
+          "diagram_nodes": 172,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 53,
+          "cut_backbones": 13,
+          "cut_endpoints": 56,
+          "diagram_nodes": 172,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 53,
+          "cut_backbones": 14,
+          "cut_endpoints": 56,
+          "diagram_nodes": 172,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 55,
+          "cut_backbones": 13,
+          "cut_endpoints": 57,
+          "diagram_nodes": 176,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 55,
+          "cut_backbones": 13,
+          "cut_endpoints": 58,
+          "diagram_nodes": 176,
+          "ports": 10,
+          "states": 1
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 55,
+          "cut_backbones": 14,
+          "cut_endpoints": 59,
+          "diagram_nodes": 180,
+          "ports": 10,
+          "states": 2
+        },
+        {
+          "affected_backbones": 15,
+          "anchors": 57,
+          "cut_backbones": 14,
+          "cut_endpoints": 60,
+          "diagram_nodes": 182,
+          "ports": 10,
+          "states": 2
+        }
+      ],
+      "diagram_size_histogram": [
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 8,
+          "ports": 2,
+          "states": 1
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 12,
+          "ports": 4,
+          "states": 2
+        },
+        {
+          "affected_backbones": 3,
+          "anchors": 0,
+          "diagram_nodes": 12,
+          "ports": 6,
+          "states": 2
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 16,
+          "ports": 6,
+          "states": 1
+        },
+        {
+          "affected_backbones": 5,
+          "anchors": 4,
+          "diagram_nodes": 20,
+          "ports": 6,
+          "states": 8
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 4,
+          "diagram_nodes": 20,
+          "ports": 6,
+          "states": 6
+        },
+        {
+          "affected_backbones": 4,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 1
+        },
+        {
+          "affected_backbones": 5,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 4
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 2,
+          "diagram_nodes": 20,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 24,
+          "ports": 8,
+          "states": 2
+        },
+        {
+          "affected_backbones": 5,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 6
+        },
+        {
+          "affected_backbones": 6,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 4
+        },
+        {
+          "affected_backbones": 7,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 10
+        },
+        {
+          "affected_backbones": 8,
+          "anchors": 4,
+          "diagram_nodes": 28,
+          "ports": 10,
+          "states": 2
+        }
+      ],
+      "full_twist_refinement": {
+        "input_ambiguous_classes": 0,
+        "input_ambiguous_states": 0,
+        "radius_audits": []
+      },
+      "linked_cut_partition": {
+        "ambiguous_classes": 0,
+        "ambiguous_states": 0,
+        "classes": 55,
+        "largest_class": 1,
+        "states": 55
+      },
+      "linked_partition": {
+        "ambiguous_classes": 8,
+        "ambiguous_states": 26,
+        "classes": 33,
+        "largest_class": 4,
+        "states": 55
+      },
+      "local_rank_children": 138270,
+      "response_states": 55,
+      "unlinked_partition": {
+        "ambiguous_classes": 8,
+        "ambiguous_states": 37,
+        "classes": 23,
+        "largest_class": 10,
+        "states": 55
+      }
+    }
+  ],
+  "conventions": {
+    "anchors": "third-colour neighbours of signed boundary ports",
+    "linked_cut_diagram": "linked port diagram augmented by every live/dead transition endpoint on every cut backbone and its tau/third anchors",
+    "linked_port_diagram": "canonical coloured relational graph of signed ports, tau links, third links, and alternating-backbone segments labelled by length and incident colours",
+    "local_rank_signature": "multiset over opponent moves of the multiset of boundary ranks of every legal reply child",
+    "twist_radius": "number of successive backbone layers added through tau and third-matching neighbours, with radius zero equal to every initially cut backbone",
+    "unlinked_word": "the predecessor multiset of signed cyclic words, without tau links or third matching anchors"
+  },
+  "hybrid_within_context_partition": {
+    "ambiguous_states": 0,
+    "classes": 969,
+    "states": 983
+  },
+  "pooled_linked_cut_partition": {
+    "ambiguous_classes": 10,
+    "ambiguous_states": 25,
+    "classes": 954,
+    "largest_class": 4,
+    "states": 983
+  },
+  "pooled_linked_partition": {
+    "ambiguous_classes": 126,
+    "ambiguous_states": 448,
+    "classes": 645,
+    "largest_class": 60,
+    "states": 983
+  },
+  "pooled_unlinked_partition": {
+    "ambiguous_classes": 76,
+    "ambiguous_states": 947,
+    "classes": 109,
+    "largest_class": 300,
+    "states": 983
+  },
+  "schema": "c294-linked-port-diagram-v1",
+  "total_local_rank_children": 10769112,
+  "total_response_states": 983
+}
