@@ -33,6 +33,11 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   Davenport-cited equidistribution axiom (`DensityAxioms.lean` + `DensityConditional.lean`; audits
   `[propext, Classical.choice, Quot.sound, primes_equidistribute]`) →
   `notes/2026-07-17-c278-dihedral-conditional-density.md`.
+- Closed: C283 wild-case spike (2026-07-17) — `p | 2m` forces `D_{2p}` (unipotent rotation,
+  Borel-reducible, one deleted point, residual `P_p`, `𝒢 = A002187(p)`), breaking the tame
+  odd-order P law outside the tame hypothesis; triples cannot be wild; §15 remark applied to the
+  manuscript; wild pair classification judged a short lemma (promotable) →
+  `notes/2026-07-17-c283-dihedral-wild-case-spike.md`.
 - Closed: C263 D₂ₘ additions (2026-07-17) — full pair family `D₂ₘ` classified (odd dihedral always
   P; even case `(1−δ)·𝒢(Pₘ)` Dawson), verified over all 241,344 tame legal pairs, retitle applied,
   Discussion now §15 → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
@@ -59,8 +64,6 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   templates land before C264; the paper waits for them and earns the full finite-subgroups title.
   C264 is delayed behind C284 accordingly.
 - **C281** — exhaustive per-q census appendix (extend C263 enumerator to triples; evidence bundle).
-- **C283** — wild-case scoping spike, time-boxed: `p | 2m` examples + §15 remark + feasibility
-  frontier; no classification claim.
 - **C282** — byproduct OEIS priority-stamp drafts (program links follow C270).
 - **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Must apply: the
   C261 wording recommendations R1–R5 (HHS reduction citation, Schaefer root citation,

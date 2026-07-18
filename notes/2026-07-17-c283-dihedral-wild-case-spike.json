@@ -1,0 +1,21 @@
+{
+  "task": "C283",
+  "generated": "wild-case (p|2m) dihedral residual scoping spike",
+  "primes": [3, 5, 7, 11, 13],
+  "total_pairs": 22968,
+  "wild_pairs": 1992,
+  "wild_pairs_with_m_neq_p": 0,
+  "wild_pairs_group_order_neq_2p": 0,
+  "wild_pairs_global_fix_neq_1": 0,
+  "wild_pairs_residual_not_single_path_P_p": 0,
+  "wild_pairs_NK_neq_dawson_p": 0,
+  "rotation_fixed_point_count_histogram": {"1":1992},
+  "deleted_set_size_histogram": {"1":1992},
+  "representatives": [
+    {"q":3,"m":3,"group_order":6,"fix_sigma_x":2,"fix_sigma_y":2,"fix_rotation":1,"deleted_set_size":1,"whole_group_fixed_points":1,"orbit_sizes":[3, 1],"orbit_stabilizers":[2, 6],"residual_vertices":3,"residual_components":1,"deg1":2,"deg2":1,"is_single_path_P_p":true,"NK_residual":2,"dawson_A002187_p":2},
+    {"q":5,"m":5,"group_order":10,"fix_sigma_x":2,"fix_sigma_y":2,"fix_rotation":1,"deleted_set_size":1,"whole_group_fixed_points":1,"orbit_sizes":[5, 1],"orbit_stabilizers":[2, 10],"residual_vertices":5,"residual_components":1,"deg1":2,"deg2":3,"is_single_path_P_p":true,"NK_residual":3,"dawson_A002187_p":3},
+    {"q":7,"m":7,"group_order":14,"fix_sigma_x":2,"fix_sigma_y":2,"fix_rotation":1,"deleted_set_size":1,"whole_group_fixed_points":1,"orbit_sizes":[7, 1],"orbit_stabilizers":[2, 14],"residual_vertices":7,"residual_components":1,"deg1":2,"deg2":5,"is_single_path_P_p":true,"NK_residual":1,"dawson_A002187_p":1},
+    {"q":11,"m":11,"group_order":22,"fix_sigma_x":2,"fix_sigma_y":2,"fix_rotation":1,"deleted_set_size":1,"whole_group_fixed_points":1,"orbit_sizes":[11, 1],"orbit_stabilizers":[2, 22],"residual_vertices":11,"residual_components":1,"deg1":2,"deg2":9,"is_single_path_P_p":true,"NK_residual":2,"dawson_A002187_p":2},
+    {"q":13,"m":13,"group_order":26,"fix_sigma_x":2,"fix_sigma_y":2,"fix_rotation":1,"deleted_set_size":1,"whole_group_fixed_points":1,"orbit_sizes":[13, 1],"orbit_stabilizers":[2, 26],"residual_vertices":13,"residual_components":1,"deg1":2,"deg2":11,"is_single_path_P_p":true,"NK_residual":4,"dawson_A002187_p":4}
+  ]
+}

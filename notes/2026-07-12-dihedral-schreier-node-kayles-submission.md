@@ -1308,6 +1308,32 @@ Together with the Klein-four and dihedral results above, this completes the free
 What remains beyond the present dihedral classification is a proof-quality catalogue of
 the nonregular polyhedral coset templates and their field-dependent orbit formulas.
 
+**The wild case \(p \mid 2m\).** Every result above assumes the tame hypothesis
+\(p \nmid 2m\). When \(p \mid 2m\) — equivalently, since \(q\) is odd, \(p \mid m\) — the
+classification changes character completely, and for a single structural reason. A cyclic
+subgroup of \(PGL_2(q)\) whose order is divisible by \(p\) has order exactly \(p\), because
+a nonsemisimple element of \(PGL_2(q)\) is unipotent of order \(p\). Hence the rotation
+\(r=\sigma_x\sigma_y\) can never have order \(2p, 3p,\dots\); the only wild dihedral group
+that arises is \(D_{2p}\), with \(r\) a transvection. Three consequences follow. First,
+\(r\) has a single fixed point on \(\mathbf P^1(q)\) instead of the tame \(0\) or \(2\), so
+the deleted set \(D_S=\operatorname{Fix}(r)\) is a single point and the even orbit-deletion
+pattern of Section 14 fails. Second, that fixed point is fixed by the whole group:
+\(D_{2p}\) lies in a Borel subgroup and acts reducibly on \(\mathbf P^1(q)\), so there is
+no regular orbit and no cycle template \(C_{2p}\); the action splits into the deleted fixed
+point and one orbit of size \(p\) with stabiliser of order \(2\). The residual is therefore
+a single path,
+\[
+R_S \;\cong\; P_p, \qquad \mathcal G(R_S)=\mathcal G(P_p)=A002187(p)\ \text{(Dawson's chess)}.
+\]
+Third, because \(m=p\) is odd, this directly contradicts the tame law that odd-order
+dihedral games are P-positions (Theorem 14.4): the wild game \(D_{2p}\) is generically an
+N-position. For example, the smallest odd nontrivial case \(p=5\) gives \(D_{10}\) with
+\(r\) unipotent, \(D_S\) a single point, residual \(P_5\), and
+\(\mathcal G = A002187(5) = 3\neq 0\) — an N-position, whereas every tame \(D_{10}\) is a
+P-position. Legal triples cannot be wild at all: a wild rotation is unipotent of odd order
+and has no central involution, so no legal generating triple exists. A full wild
+classification is left open.
+
 Even a complete polyhedral table would only round out the proper-small-subgroup boundary.
 Generic fourth moves in the motivating projective-cap game typically generate full
 \(PSL_2(q)\) or \(PGL_2(q)\); evaluating or controlling those growing residual templates is
