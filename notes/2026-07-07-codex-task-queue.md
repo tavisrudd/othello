@@ -5,7 +5,7 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C276.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
+**Max allocated ID: C277.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
 lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
 globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
 unless they retain an explicit open tail.
@@ -50,6 +50,10 @@ unless they retain an explicit open tail.
 - **C212 `[clebsch-next]` [QUEUED; after C211]** — Coxeter-arrangement codes and decoder-tomography reconstruction/classification theorem → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
 - **C213 `[clebsch-next]` [QUEUED FALSIFICATION GATE]** — exact Clebsch-cubic/`E6` incidence test for `12+15`, Brianchon/Eckardt, and five-object structures → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
 
+### `complete-ports`
+
+- No open tasks; C277 completed the lane split, and the focused handoff owns the next paper-identity migration.
+
 ### `continuation`
 
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
@@ -64,7 +68,6 @@ unless they retain an explicit open tail.
 
 ### `dihedral`
 
-- **C262 `[dihedral]` [QUEUED]** — implement the recorded formalization gate: Φ_T (Burnside) and ½-density Lean formalization to `lean/TRUST.md`, or a clebsch-style declared trust boundary per the planning ruling (do not re-decide the gate) → `notes/2026-07-17-c262-dihedral-burnside-density-formalization.md`.
 - **C263 `[dihedral]` [QUEUED]** — generalized-D₂ₘ additions per ruling D6 (bundle, do not spawn a sequel); escape hatch: if D₂ₘ stalls beyond the formalization window, ship the committed catalogue with §14 as the stated program → `notes/2026-07-17-c263-dihedral-d2m-additions.md`.
 - **C264 `[dihedral]` [QUEUED]** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle (adversarial + repeated cold-prose) for the markdown manuscript → `notes/2026-07-17-c264-dihedral-latex-adversarial-review.md`.
 
@@ -92,10 +95,6 @@ unless they retain an explicit open tail.
 
 - **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
 - **C210 `[relconic]` [ACTIVE; TWO-COSET EXCEPTIONAL LOCUS]** — construct `C`-complete arcs of size `O(sqrt(q))`, or prove an infinite-family obstruction; on `a=b=0` the reconstruction boundary is absent throughout the odd tower and the inseparable divisor is collision-forcing, but 270 of 5376 normalized q=64 coefficient tuples survive both seed-color parity gates before legality; imposing arc legality empties the joint gate (arc-legal trace-one arcs all have p in {14,22,24}, never the p=1 slice, and every one collides), so `a=b=0` is closed; `a=0,b!=0` is now also closed — the Artin--Schreier divisor `D3` is explicit (three branches, all with rational splits carrying genuine collisions; `H=J=0` empty over the odd tower) — see `notes/2026-07-17-c210-a-zero-artin-schreier-divisor.md`; the `a!=0` t-degree-four factorization divisors are next → `notes/2026-07-16-arcs-sqrtq-construction-program.md`, `notes/2026-07-16-c210-square-root-mechanism-audit.md`.
-
-### `repaircodes`
-
-- No open tasks; the paper-only complete-ports rename census is complete, and the handoff owns the next atomic implementation step. The `repaircodes` lane identity remains unchanged.
 
 ### `rp-next`
 

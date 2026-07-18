@@ -24,6 +24,9 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (bundle D₂ₘ, do not
   spawn a sequel; escape hatch = ship the committed catalogue with §14 as the stated program),
   and the release policy (formalization gate, adequacy appendix, provenance section).
+- Closed: C262 formalization (2026-07-17) — Φ_T (Prop 11.1 + Cor 11.2) fully Lean-proved;
+  Thm 12.1's periodicity, exact 2-of-4 classification, and P/N prime infinitude proved; density
+  value 1/2 gap recorded (mathlib frontier) → `notes/2026-07-17-c262-dihedral-burnside-density-formalization.md`.
 - Closed: C260 A₅ nimber cross-check (2026-07-17) — all five values reproduced by an independent
   solver; evidence bundle with SHA-256 manifest; claim edits landed →
   `notes/2026-07-17-c260-a5-template-nimber-crosscheck.md`.
@@ -33,7 +36,10 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 
 ## Open frontiers
 
-- Φ_T (Burnside) and ½-density formalizations are owed (C262).
+- USER GATE (from C262): Φ_T and the finite core of ½-density are formalized; the numerical
+  density value 1/2 is blocked on prime equidistribution in AP, absent from mathlib. Rule whether
+  the delivered form satisfies the release gate or the paper adds a declared boundary sentence
+  (wording would fold into C264).
 - D₂ₘ additions are owed before shipping per D6 (C263).
 - Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
 
@@ -42,8 +48,6 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - **C264** must also apply the C261 audit's wording recommendations R1–R5 (HHS reduction citation,
   Schaefer root citation, Möbius-ladder ownership clause, optional novelty sentence, Ernst–Sieben
   distinction).
-- **C262** — implement the recorded formalization gate (Φ_T, ½-density), or a declared trust
-  boundary per the planning ruling; do not re-decide the gate.
 - **C263** — generalized-D₂ₘ additions per D6, with the §14 escape hatch.
 - **C264** — LaTeX+PDF conversion and the arcs/clebsch-bar review cycle.
 
