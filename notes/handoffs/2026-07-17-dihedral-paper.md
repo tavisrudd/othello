@@ -13,11 +13,11 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 ## Current status
 
 - Manuscript: `notes/2026-07-12-dihedral-schreier-node-kayles-submission.md`, near-complete and
-  committed markdown, retitled "Dihedral Subgroups of PGL₂(q)" (C263; user may revisit the title —
-  the bare D6 phrase "finite subgroups of PGL₂(q)" was judged an overclaim while polyhedral/PSL
-  stay deferred). Covers V₄ + the full two-reflection `D₂ₘ` pair family (all `m≥3`, both parities,
-  new §14) + triple-based D_{4n} + S₄/A₅ regular-template rows; §15 defers the nonregular
-  polyhedral coset templates and the PSL₂/PGL₂ escape residual.
+  committed markdown, retitled "Dihedral Subgroups of PGL₂(q)" (C263; revisit the title only in
+  C264 after the polyhedral additions land). Covers V₄ + the full two-reflection `D₂ₘ` pair family
+  + triple-based D_{4n} + S₄/A₅ regular-template rows; it still needs the C284 nonregular
+  polyhedral section integrated and must continue to exclude the wild and full `PSL₂/PGL₂` escape
+  residuals explicitly.
 - Lean: `lean/DihedralSchreier/` certifies the reduction plumbing, the V₄→K₄ core, Φ_T
   (Prop 11.1 + Cor 11.2, `Burnside.lean`), the finite ½-density core (`Density.lean`), and the
   conditional density-½ layer behind exactly one quarantined Davenport axiom
@@ -26,6 +26,10 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
   orbit counts, and the new §14 pair-family theorems. See `lean/DihedralSchreier/README.md`.
 - Solver: `rust/scripts/nodekayles_cayley.rs`. S₄ nimbers cross-checked by three independent
   solvers; all five A₅ rows independently reproduced by the C260 cross-check solver.
+- C284 evidence bundle is ready but uncommitted/integration-pending: `A₄` cannot be
+  involution-generated; all nonregular `S₄/A₅` coset templates are tabulated; and the old
+  `A₅ (3,5,5)` signature splits into `ρ=3/5` classes with different nonregular values →
+  `notes/2026-07-17-c284-dihedral-polyhedral-coset-templates.md`.
 - Planning rulings: `papers/papers-planning.md` ship-order entry #2, ruling D6 (D₂ₘ bundling —
   satisfied by C263, escape hatch not needed), and the release policy (formalization gate,
   adequacy appendix, provenance section).
@@ -59,20 +63,28 @@ appendix, provenance section, adversarial and cold-prose review, and a cleared n
 - Density-½ gate CLOSED (C278, 2026-07-17): one quarantined axiom `primes_equidistribute`,
   ½ kernel-derived for all triple types and both torus signs. C264 still owes the paper's
   single-axiom boundary sentence; replace the axiom when mathlib ships PNT-in-AP.
-- Manuscript is markdown with no adversarial or cold-prose review cycle (C264).
+- C284 must be reviewed, committed atomically, and integrated before its queue row can close.
+- Pre-submission content upgrades are C281 (dihedral census), C288 (polyhedral census), C289
+  (structural explanation of the `A₅` split), and C290 (closed congruence/P/N laws).
+- Manuscript is markdown with no adversarial or cold-prose review cycle (C264), which remains last.
+- Post-release upgrades are direct strategies/certificates (C291), wild polyhedral characteristic
+  (C292), and Lean formalization of the finite table boundary (C293). The growing full-group escape
+  residual remains C84-owned in the `cap` lane; do not duplicate it here.
 
 ## Next steps
 
-- **C284 — GATE DECIDED (user, 2026-07-17): pre-submission.** Polyhedral nonregular coset
-  templates land before C264; the paper waits for them and earns the full finite-subgroups title.
-  C264 is delayed behind C284 accordingly.
-- **C281** — exhaustive per-q census appendix (extend C263 enumerator to triples; evidence bundle).
-- **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Must apply: the
-  C261 wording recommendations R1–R5 (HHS reduction citation, Schaefer root citation,
-  Möbius-ladder ownership clause, optional novelty sentence, Ernst–Sieben distinction); the C278
-  single-axiom boundary sentence; the C260 maximal-automorphism-group remark (Appendix A); an
-  eventual-periodicity-in-m corollary (Dawson period 34) if C264's read confirms §14 lacks it; and
-  title/abstract calibration so nothing reads as covering the wild case.
+1. **C284** — review and atomically commit the existing report/script/JSON/manifest bundle, then
+   integrate its theorem/table text and close the live queue row through the archive invariant.
+2. **C281 + C288** — build the dihedral and polyhedral census appendices; these may proceed as
+   separate evidence bundles once C284 is committed.
+3. **C289** — replace the computationally discovered `A₅ (3,5,5;ρ=3/5)` split by a conceptual
+   group-theoretic lemma and calibrated interpretation.
+4. **C290** — derive the explicit field congruence, Grundy, P/N, periodicity, and density corollaries.
+5. **C264** — LaTeX+PDF + adversarial/cold-prose cycle, last, after content lands. Apply C261 R1–R5,
+   the C278 single-axiom boundary sentence, C260/C284 computation boundaries, the Dawson period-34
+   corollary, and title/abstract calibration excluding the wild and full-group escape cases.
+6. **Post-C264:** C291 direct strategies/certificates; post-release C292 wild polyhedral spike and
+   C293 Lean formalization. Continue the full `PSL₂/PGL₂` escape program only through C84 `[cap]`.
 
 ## Cautions (standing, for any session in this lane)
 
