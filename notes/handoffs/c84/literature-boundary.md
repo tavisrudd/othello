@@ -11,6 +11,7 @@ priority, not a claim that the search is exhaustive.
 |---|---|---|---|
 | Impartial-game semantics and certificates | Schaefer; Siegel; Huggan--Huntemann--Stevens (HHS); Bodlaender--Kratsch--Timmer; Kobayashi | Node--Kayles semantics, xor decomposition, hardness calibration, and compression under proved graph structure | General hardness is not a family lower bound; a structural parameter must actually be bounded on `R_y` |
 | `PGL_2` subgroup and trace machinery | Dickson/Faber; Macbeath; Fricke--Horowitz trace theory | Classify generated subgroups, exceptional cases, split types, word traces, and conjugacy/character coordinates | A complete orbit coordinate can be near-injective and therefore give no compression or P-certificate |
+| `PGL_2/B` permutation representation | finite-field `GL_2` representation theory; Steinberg constituent | Analyze the coloured pre-deletion Schreier operator exactly on functions on `P^1(q)` and control bounded vertex/loop corrections | Spectral information still needs a game-semantic bridge and does not survive simplification by assertion |
 | Finite-field point counting | Lang--Weil; Chatzidakis--van den Dries--Macintyre (CvdDM); theorem-specific character sums | Count a separately proved constructible/definable certificate locus with uniform complexity | Dimension, mixing, or a trace statistic does not imply Grundy zero; witness counts need projection/fiber control |
 | Product growth and expansion in `SL_2/PGL_2` | Helfgott; Bourgain--Gamburd; later uniform-expansion variants | Control word growth or mixing after their generator, field, action, and deletion hypotheses are verified | Cayley expansion does not automatically pass to this varying Schreier action or its dead-vertex induced graph, and never implies P by itself |
 | Random regular/permutation graph models | Friedman and the random-lift/permutation-model literature | Supply a null heuristic or a comparison target for spectra and local statistics | C84's projective involutions, fixed points, rooted-S4 conditioning, and deleted vertices are correlated rather than independent random matchings |
@@ -54,6 +55,16 @@ These tools justify and organize the Schreier catalogue. They do not turn Fricke
 a bounded quotient: the exact C84 coordinates measured so far are near-injective on generic
 fibers. Split type, subgroup type, orbit structure, and trace words remain useful theorem inputs,
 but a value theorem must be supplied separately.
+
+There is also a sharper spectral starting point than treating `R_y` as an arbitrary regular graph.
+The coloured pre-deletion adjacency operator is a sum of the four involution permutation operators
+on `C[P^1(q)]`. For the 2-transitive `PGL_2` action, this permutation module is the constants plus
+the Steinberg constituent. Finite-field `GL_2` representation theory can therefore replace a
+generic adjacency-matrix calculation. Passing to the actual residual still requires explicit
+control of loop removal, coincident colours, and deletion of the bounded dead set; interlacing or
+finite-rank perturbation is a tool for that passage, not permission to ignore it.
+
+- [Piatetski-Shapiro, *Complex Representations of GL(2,K) for Finite Fields K*](https://bookstore.ams.org/conm-16/)
 
 ## 3. Finite-field counting sources
 
