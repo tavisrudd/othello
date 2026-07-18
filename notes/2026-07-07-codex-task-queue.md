@@ -31,7 +31,7 @@ unless they retain an explicit open tail.
 - **C80 `[cap]` [ACTIVE]** — abundance/descent after the proven drain lemma → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
 - **C81 `[cap]` [OPEN; independent]** — characteristic-5/7 subfield descent gate → `notes/2026-07-12-c81-subfield-descent-gate.md`.
 - **C82 `[cap]` [GATED on C80]** — orbital counting for the exact packet C80 produces → `notes/2026-07-12-c82-orbital-counting.md`.
-- **C84 `[cap]` [ACTIVE]** — abundance-first conic-involution Schreier program → `notes/2026-07-12-conic-involution-residual-graphs.md`.
+- **C84 `[cap]` [ACTIVE; CONCEPTUAL GATE]** — specify a noncircular full-dimensional P-certificate event before any further Schreier census → `notes/handoffs/c84/README.md`.
 - **C189 `[cap]` [QUEUED]** — q=5 octahedral-frame game bridge → `notes/2026-07-15-c189-q5-octahedral-frame.md`.
 - **C198 `[cap]` [QUEUED]** — bounded q=7 BSW exterior-four-arc residual scout → `notes/2026-07-15-c198-q7-exterior-residual-scout.md`.
 - **C199 `[cap]` [QUEUED]** — extract direct strategies from the Schreier catalogue → `notes/2026-07-15-expert-questions-upgrade-portfolio.md`.

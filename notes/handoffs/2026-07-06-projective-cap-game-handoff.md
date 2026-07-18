@@ -529,48 +529,13 @@ Regenerate cert files on demand; `notes/certs/` is intentionally ignored.
 
 ## C84 in the odd-q proof program
 
-**Role.** C84 studies the conic-only residual after an off-conic fourth centre. It strengthens the
-odd-q conjecture by showing that generic, mirror-free escape children remain P-rich, but it does
-not prove `(ON)`: abundance is mostly off-conic, whereas `(ON)` requires an on-conic P child for
-every residual size-3 state. Any abundance proof still needs a separate exchange/transfer lemma,
-or an induction whose bad set is smaller than the certified P family.
+C84 now has a dedicated umbrella handoff. It owns the essential odd-q relationship, Schreier
+abundance state, closed attacks, ledger boundary, and current certificate-density gate:
 
-**What is established.** The conic residual is the Node--Kayles Schreier graph of
-`H_S = ⟨σ_x⟩ ≤ PGL(2,q)`. The small-subgroup catalogue is an exact boundary evaluator, including
-the `V₄`, `D₈`, and `S₄` templates, but the escape crux immediately enters generic PSL/PGL
-subgroups. In the mirror-free q=29 class-D fibre, exactly `139/753` children are P; thus the
-generic region is P-rich rather than depleted.
+> [C84 abundance-first conic Schreier handoff](c84/README.md)
 
-**Mechanisms now closed.** None of the following supplies a q-uniform one-ply certificate:
-
-- fixed-point-free pairing/mirror automorphisms;
-- an immediate one-reply component core of size at most 13;
-- a context-free coloured word in the four conic involutions; or
-- the rooted-S4/fourth-centre packets `H, HsH, HsHsH, ...`.
-
-These are mechanism negatives, not evidence against the odd-q outcome. They say that P-ness is
-adaptive and context-dependent, matching the earlier C64/C69/C75 static-signature failures.
-
-**Ledger applicability boundary.** The C63/C77 ledger remains meaningful in its full residual-grid
-domain, but it does not transport into C84's conic-only abstraction. Its reservoir requires the
-frame and burned grid directions absent from the C84 artifact, and its xor-zero term is the target
-P/N label here. The shared noncircular measures are only defect components and C80's exact
-`1 + degree` drain. A deliberate all-projective reservoir proxy has now been audited on all 470
-forced replies: winning descent drops from 30/30 at q13 to 1/62 at q19 and zero at q23/q29; at q13
-every losing alternative descends too. Greedy drain and component minimization also fail to cover
-the winning replies. This is an applicability boundary, not a refutation of the C63/C77 ledger.
-
-**Current decision.** The stop rule has triggered. Retire adaptive finite-template mining and
-return C84 to the full-dimensional spectral/probabilistic abundance lane. The first gate is to
-identify a noncircular graph event or bounded strategy certificate for the generic “rooted-S4
-gadget plus varying fourth involution” family whose probability could remain positive. Transfer to
-`(ON)` remains a separate obligation.
-
-Primary records: [program integration](../2026-07-12-conic-involution-residual-graphs.md),
-[adaptive core](../2026-07-17-c84-adaptive-core.md),
-[word obstruction](../2026-07-17-c84-forced-reply-algebra.md), and
-[double-coset obstruction](../2026-07-17-c84-double-coset-packets.md), and
-[ledger applicability](../2026-07-17-c84-two-ply-ledger.md).
+On a fresh C84 start, read that umbrella and its current-plan child only. Do not reconstruct C84
+from this general cap handoff or preload its dated evidence reports.
 
 ## Near-Term Queue
 
@@ -602,9 +567,9 @@ task list.  Current high-value items:
 - **C84 [ACTIVE] — abundance-first conic-involution Schreier program.** The exact boundary
   catalogue and q=29 abundance evidence stand; pairing, bounded one-reply cores, fixed words, and
   rooted-S4 double-coset packets are closed as uniform mechanisms, and the residual-grid ledger
-  does not transport into the conic-only game. Adaptive finite-template mining is retired. Specify
-  and gate the spectral/probabilistic abundance route described in **C84 in the odd-q proof
-  program** above. [Program map](../2026-07-12-conic-involution-residual-graphs.md).
+  does not transport into the conic-only game. Adaptive finite-template mining is retired. Produce
+  at most three certificate-event theorem schemas and apply the deterministic-implication and
+  full-dimension gates before any further census. [C84 umbrella](c84/README.md).
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
   [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —

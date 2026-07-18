@@ -8,6 +8,8 @@ independent field-geometry verification at q=11–19). This note is the game-sid
 Companions: [C80 probe](2026-07-12-c80-bulk-exhaustion-probe.md),
 [C83 quotient](2026-07-12-c83-bisimulation-quotient.md).
 
+Current routing and next-step authority: [C84 umbrella handoff](handoffs/c84/README.md).
+
 ## The object, in one line
 
 After the opening pair and some off-conic centres `S`, conic-only play is Node-Kayles on the
@@ -108,8 +110,8 @@ signature. Evidence: `notes/2026-07-17-c84-forced-reply-algebra.md`.
 their minimum layer in `H, HsH, HsHsH, ...`, where `H≅S4` is the rooted group and `s` the fourth
 involution. No q=23 or q=29 P root has every opponent move covered by a pure-winning layer packet;
 at q=29 only one of 195 forced replies lies in a singleton packet. Stop one-ply response-signature
-refinement. The last bounded adaptive test is two-ply forced-transition descent; failure there
-returns the program to the full-dimensional spectral/probabilistic lane. Evidence:
+refinement. The last bounded adaptive test was two-ply forced-transition descent; its failure below
+closed finite-template mining and led to the certificate-density viability gate. Evidence:
 `notes/2026-07-17-c84-double-coset-packets.md`.
 
 **The ledger does not transport into C84 (C84 follow-up, 2026-07-17).** C63's reservoir requires
@@ -119,7 +121,7 @@ An exact audit of the shared conic measures plus a deliberately naive reservoir 
 field-stable two-ply contract: winning proxy descent falls from 30/30 at q13 to 1/62 at q19 and
 0/125, 0/195 at q23,q29, while q13's descent holds for every losing alternative as well. This does
 not refute C63/C77 in their residual-grid domain. It triggers C84's stop rule: retire adaptive
-finite-template mining and return to the spectral/probabilistic abundance lane. Evidence:
+finite-template mining and move to the certificate-density viability gate. Evidence:
 `notes/2026-07-17-c84-two-ply-ledger.md`.
 
 **Logical separation from (ON).** These abundant P children are **off-conic** fourth centres with
@@ -127,12 +129,17 @@ conic-only value 0; that does **not** by itself produce an **on-conic** P child.
 escape via (ON) needs a separate **exchange / transfer lemma** carrying an off-conic
 conic-only-P escape to an on-conic P child. Abundance and (ON) are two problems, not one.
 
-**Revised ranking (Codex, 2026-07-12):**
-1. Prove a positive-density P bound — first for the `S₄`-rooted escape families, then uniformly
-   over all triple types.
-2. Determine whether that abundance transfers to (ON).
-3. Study relative complete arcs as the sealing alternative (below).
-4. Pursue the edge/drain minimax potential (below) if abundance fails.
+**Current ranking (2026-07-17):**
+1. Pass the C84 certificate-density gate: state a noncircular deterministic P-certificate event
+   whose fourth-centre locus could be full-dimensional.
+2. Only if that event exists, specify and prove the counting/equidistribution input for class D,
+   then extend to the other rooted triple types.
+3. Treat transfer from abundance to `(ON)` as a separate theorem.
+4. Keep relative complete arcs as a separate sealing alternative.
+
+The edge/drain minimax idea is not an active fallback. Greedy drain and the natural finite ledger
+transport have failed; reopen a global minimax route only after stating a new theorem-level
+contract that is not another local potential or feature fit.
 
 ## The frontier, stated precisely
 
@@ -162,12 +169,20 @@ homography) is a **homography fixed locus ⇒ divisor ⇒ dimension 1 ⇒ Θ(q)*
 2. The local-invariant negatives do **not** rule out a *global* full-dimensional certificate — that
 gap, on the **graph** (not the character variety), is the frontier.
 
-**The only genuine q² lane** tolerating the unbounded-complexity predicate is spectral/probabilistic
-on the Schreier-graph family: Node-Kayles on "fixed S₄-gadget-blowup + one random near-perfect
-matching," P-probability → `c > 0` via expander mixing, plus an equidistribution transfer. Long lane.
-The near-term lever remains **existence, not density**: the escape lemma needs *one* P child avoiding
-the outer induction's bad set, which a Θ(q) certificate supplies **iff** that bad set is O(1) curves
-— open; read it off the Lean `OddEscapeGameStatement` / `GridGame.TrapConverse`.
+**Spectral/probabilistic counting is conditional, not yet a proof program.** The varying fourth
+involution is algebraically correlated with its fixed points, the dead-vertex deletion, and the
+rooted-S4 action; it is not an independent random near-perfect matching. Expansion or
+equidistribution cannot imply Grundy zero by itself. The first gate is a noncircular event
+`E_q(y,w)` with a deterministic Node--Kayles proof `E_q(y,w) → 𝒢(R_y)=0` and a plausibly
+two-dimensional y-locus. Only then may spectral, orbital, or character-sum estimates be used to
+count that event. If no event passes both gates, mark C84 conceptually gated and deprioritize it.
+The exact obligations and red-team failure modes are in the dedicated
+[C84 umbrella handoff](handoffs/c84/README.md) and its
+[certificate-density child](handoffs/c84/certificate-density-gate.md).
+
+The separate existence lever remains logically available: a Θ(q) certificate family suffices
+only if the outer induction's bad set is proved to lie on O(1) curves. No such bad-set theorem is
+currently available; do not treat this observation as a C84 next step.
 
 ## Sealing is a complete-arc / saturating-set problem (ranking item #3)
 

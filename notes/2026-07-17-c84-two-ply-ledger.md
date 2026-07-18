@@ -85,8 +85,8 @@ classes or an eventual spectral theorem.
 
 ## Next C84 target
 
-Specify the generic class-D Schreier family as “fixed rooted-S4 gadget plus a varying involution”
-and measure the spectral/equidistribution inputs needed for a positive-density P theorem. The first
-gate is conceptual: identify a noncircular graph event or bounded strategy certificate whose
-probability can plausibly stay positive under the varying fourth involution. Do not resume local
-signature mining without such a certificate.
+Follow `handoffs/c84/README.md`, then `handoffs/c84/certificate-density-gate.md`. Produce at most three
+noncircular certificate-event theorem schemas and apply the deterministic Node--Kayles implication
+and full-dimension gates before any new computation. Spectrum may count a separately proved
+certificate family; it cannot certify P by itself. If no candidate passes both gates, mark C84
+conceptually gated and deprioritize it.
