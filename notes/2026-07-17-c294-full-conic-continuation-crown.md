@@ -10,7 +10,7 @@ remains open.
 Let `q=p^e`, where `p>5` is prime, `e` is odd, and
 
 \[
-p\equiv 3\text{ or }27\pmod {40}.
+p\equiv 3,7,23,\text{ or }27\pmod {40}.
 \]
 
 Use the conic (XY=Z^2), parametrized by
@@ -41,7 +41,14 @@ Schreier residual (R_{S_b}) is a P-position for Node Kayles. Equivalently,
 \mathcal G(R_{S_b})=0.
 \]
 
-For `e=1` there are exactly `(p-5)/2` admissible parameters. For `e>1` there are exactly
+For `e=1` there are exactly
+
+\[
+\frac{p-5}{2}\quad\text{if }p\equiv3,27\pmod {40},\qquad
+\frac{p-3}{2}\quad\text{if }p\equiv7,23\pmod {40}
+\]
+
+admissible parameters. For `e>1` there are exactly
 
 \[
 \frac12\sum_{d\mid e}\mu(e/d)p^d
@@ -49,7 +56,8 @@ For `e=1` there are exactly `(p-5)/2` admissible parameters. For `e>1` there are
 
 admissible parameters: precisely half of the elements of degree `e` over `F_p`. Thus this is a
 one-dimensional `Theta(q)` P-family across infinitely many genuine full-group residuals after the
-fourth off-conic centre. The old bronze configuration is the prime-field member `b=3`.
+fourth off-conic centre. The old bronze configuration `b=3` is the prime-field member in the
+residue classes `3,27 mod 40`; the other two classes require a different admissible parameter.
 
 This theorem concerns the **conic-only residual** after the four centres have been selected. It
 does not prove that an earlier game state can force entry into this family, nor does it transfer an
@@ -143,7 +151,8 @@ It remains to check that no mirror pair is an edge. Equality
 (r-c)^2+4,
 \]
 
-which is (5,5,(b-1)^2+4,(b-1)^2+4). For (p\equiv3,27\pmod {40}), quadratic
+which is (5,5,(b-1)^2+4,(b-1)^2+4). For
+(p\equiv3,7,23,27\pmod {40}), quadratic
 reciprocity gives
 
 \[
@@ -177,8 +186,11 @@ degree `e>1` is
 \]
 
 exactly half the full-degree elements. Such an element is automatically outside
-`{0,1,-1,2}`. When `e=1`, `(p+1)/2` parameters pass the nonsquare test; `b=0,-1,2` are among
-them because their tests are `5,8,5`, while `b=1` has square test `4`. This leaves `(p-5)/2`.
+`{0,1,-1,2}`. When `e=1`, `(p+1)/2` parameters pass the nonsquare test. The exclusions `b=0,2`
+always pass because their test is `5`, while `b=1` has square test `4`. The remaining exclusion
+`b=-1` has test `8`: it is nonsquare for `p ≡ 3,27 (mod 40)` and square for
+`p ≡ 7,23 (mod 40)`. Removing the passing exclusions leaves `(p-5)/2` parameters in
+the first pair of residue classes and `(p-3)/2` in the second.
 
 ## Exact Dickson/subfield boundary audit
 
@@ -237,18 +249,19 @@ The uniform theorem is the coordinate proof above, using the quadratic-character
 Möbius inversion, and Giudici's maximal-subgroup form of Dickson's classification. The finite
 checker independently:
 
-- verifies all twenty cap determinants for all 140 admissible parameters over the eligible primes
-  at most 110;
+- verifies all twenty cap determinants for all 224 admissible parameters over the eight eligible
+  primes at most 110;
 - checks the generator conjugation, deleted-set invariance, fixed-free pairing, nonadjacency, and
   unipotent word for every parameter; and
-- enumerates the complete generated projective matrix group for the (b=3) member in each field,
-  obtaining (p(p^2-1)=|PGL_2(p)|) for (p=43,67,83,107);
-- exhausts all 79,507 elements of the first eligible nonprime field `F_(43^3)`, finding exactly
-  39,732 admissible full-degree parameters, and verifies that `1/(1-b)` has full definition field
-  for every one, with Euler-character tests independently cross-checked against direct square-set
-  membership; and
+- enumerates the complete generated projective matrix group for one canonical admissible member
+  in each field, obtaining (p(p^2-1)=|PGL_2(p)|) for
+  (p=7,23,43,47,67,83,103,107);
+- exhausts all 343 elements of `F_(7^3)` and all 79,507 elements of `F_(43^3)`, finding exactly
+  168 and 39,732 admissible full-degree parameters respectively, and verifies that `1/(1-b)` has
+  full definition field for every one, with Euler-character tests independently cross-checked
+  against direct square-set membership; and
 - checks the extension-field unipotent word and trace identity on eight deterministic polynomial-
-  basis samples.
+  basis samples in each cubic field.
 
 From `/home/tavis/src/othello` run:
 
@@ -266,8 +279,8 @@ uniform full-group conclusion is the mathematical classification argument above.
 
 | Load-bearing artifact | Bytes | SHA-256 |
 |---|---:|---|
-| `notes/2026-07-17-c294-full-conic-continuation-crown.py` | 15,096 | `386de0aee798d82db74ae5cf4d6267230a63307447fe96ff0a388d1fb4fb9c46` |
-| `notes/2026-07-17-c294-full-conic-continuation-crown.json` | 6,167 | `7a011edb53ac3477391730a6532289877fbab3fa3d1ec8330d62dbfb2e488959` |
+| `notes/2026-07-17-c294-full-conic-continuation-crown.py` | 15,660 | `e0bb87fb39774f7a863d5acee4dabfbfea1ea3a172909b4a13ef315d999046c7` |
+| `notes/2026-07-17-c294-full-conic-continuation-crown.json` | 11,229 | `0c094a088b9fa1e555d5fc541dbb9cc364168cb2a4b0c1ff5faa19a4ea49905a` |
 
 Subgroup-classification references: Michael Giudici, [*Maximal subgroups of almost simple groups
 with socle `PSL(2,q)`*](https://arxiv.org/abs/math/0703685), Theorem 3.5 (cached PDF SHA-256

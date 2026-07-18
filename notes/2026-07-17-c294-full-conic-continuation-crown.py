@@ -4,7 +4,7 @@
 The proof in the companion report is uniform.  This checker independently verifies
 all coordinate identities, enumerates the generated projective matrix group for the
 eligible primes at most 110, and exhausts the full-degree parameter count in the
-first eligible nonprime field F_(43^3).
+fields F_(7^3) and F_(43^3).
 """
 
 from __future__ import annotations
@@ -18,6 +18,7 @@ from pathlib import Path
 
 STEM = "2026-07-17-c294-full-conic-continuation-crown"
 TAU = (0, -1, 1, 0)  # t |-> -1/t
+ELIGIBLE_PRIME_RESIDUES = (3, 7, 23, 27)
 
 
 def centres_for(b: int) -> tuple[tuple[int, int], ...]:
@@ -164,8 +165,8 @@ def extension_mat_mul(
 
 
 def check_cubic_extension(p: int) -> dict[str, object]:
-    """Exhaust the full-degree mirror parameters in the first theorem extension."""
-    assert p > 5 and p % 40 in (3, 27)
+    """Exhaust the full-degree mirror parameters in a theorem extension."""
+    assert p > 5 and p % 40 in ELIGIBLE_PRIME_RESIDUES
     field = CubicField(p, irreducible_cubic(p))
     one = field.constant(1)
     minus_one = field.constant(-1)
@@ -331,15 +332,20 @@ def check_parameter(p: int, b: int, enumerate_group: bool) -> dict[str, object]:
 
 
 def check_case(p: int) -> dict[str, object]:
-    assert p > 5 and p % 40 in (3, 27)
-    assert [legendre(x, p) for x in (-1, 5, 8)] == [-1, -1, -1]
+    assert p > 5 and p % 40 in ELIGIBLE_PRIME_RESIDUES
+    assert [legendre(x, p) for x in (-1, 5)] == [-1, -1]
     parameters = tuple(
         b for b in range(p)
         if b not in (0, 1, 2, p - 1) and legendre((b - 1) ** 2 + 4, p) == -1
     )
-    assert len(parameters) == (p - 5) // 2
-    rows = [check_parameter(p, b, enumerate_group=b == 3) for b in parameters]
-    sample = next(row for row in rows if row["b"] == 3)
+    eight_character = legendre(8, p)
+    expected_parameter_count = (p - 5) // 2 if eight_character == -1 else (p - 3) // 2
+    assert len(parameters) == expected_parameter_count
+    enumerated_parameter = parameters[0]
+    rows = [
+        check_parameter(p, b, enumerate_group=b == enumerated_parameter) for b in parameters
+    ]
+    sample = next(row for row in rows if row["b"] == enumerated_parameter)
     assert sample["generated_group_order"] == sample["pgl2_order"]
     return {
         "admissible_parameter_count": len(parameters),
@@ -350,7 +356,8 @@ def check_case(p: int) -> dict[str, object]:
                 int(row["dead_conic_vertices"]) for row in rows
             ).items())
         },
-        "enumerated_parameter": 3,
+        "eight_character": eight_character,
+        "enumerated_parameter": enumerated_parameter,
         "generated_group_order": sample["generated_group_order"],
         "live_vertex_histogram": {
             str(key): value for key, value in sorted(Counter(
@@ -360,7 +367,9 @@ def check_case(p: int) -> dict[str, object]:
         "mirror_checks": len(parameters),
         "nonsquare_tests": {"-1": -1, "5": -1},
         "p": p,
-        "parameter_count_formula": "(p-5)/2",
+        "parameter_count_formula": (
+            "(p-5)/2" if eight_character == -1 else "(p-3)/2"
+        ),
         "pgl2_order": sample["pgl2_order"],
         "unipotent_checks": len(parameters),
         "unipotent_word": sample["unipotent_word"],
@@ -368,21 +377,27 @@ def check_case(p: int) -> dict[str, object]:
 
 
 def generate() -> dict[str, object]:
-    primes = [p for p in range(7, 111) if is_prime(p) and p % 40 in (3, 27)]
+    primes = [
+        p for p in range(7, 111)
+        if is_prime(p) and p % 40 in ELIGIBLE_PRIME_RESIDUES
+    ]
     return {
         "cases": [check_case(p) for p in primes],
-        "extension_cases": [check_cubic_extension(43)],
+        "extension_cases": [check_cubic_extension(p) for p in (7, 43)],
         "family": {
             "centres": "(0,1), (-1,0), (1,b), (-b,-1)",
             "extension_condition": "q=p^e with odd e and F_p(b)=F_q",
             "parameter_condition": "(b-1)^2+4 nonsquare, plus base-field exclusions",
-            "parameter_count": "(p-5)/2 for e=1; half the full-degree elements for e>1",
-            "prime_condition": "p > 5 and p mod 40 in {3,27}; e odd",
+            "parameter_count": (
+                "for e=1, (p-5)/2 in residues {3,27} and (p-3)/2 in residues "
+                "{7,23}; half the full-degree elements for e>1"
+            ),
+            "prime_condition": "p > 5 and p mod 40 in {3,7,23,27}; e odd",
             "residual_outcome": "P by fixed-point-free nonadjacent tau pairing",
             "tau": "t -> -1/t",
             "trace_definition_field_invariant": "tr(A2*A0)^2/det(A2*A0)=1/(1-b)",
         },
-        "schema": "c294-full-pgl-mirror-family-v3",
+        "schema": "c294-full-pgl-mirror-family-v4",
     }
 
 
