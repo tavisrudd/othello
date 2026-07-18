@@ -2,8 +2,13 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-16
-**Status**: IN PROGRESS — hermetic matrix, guidance, and the real lightweight bridge gate pass; the
-managed path has not yet carried a target to a successful Lean outcome
+**Status**: REPORTED 2026-07-18 — implementation steps 1–11, the hermetic matrix, and operator
+guidance all landed, and the managed path was exercised end-to-end against real Lean work on the
+C151 target. The supervision contract is what that run proved: submission, InvocationID acceptance,
+adoption, lock ordering, phase publication, terminal reconciliation, attribution, and exact cleanup.
+The Lean outcome it returned was a canonical `failed`/1 naming C151 `decide` errors, so a *green*
+managed compile remains unobserved; gate 16's success path is closed by decision rather than by
+evidence, and anyone citing this work should say the bridge was proven, not that a target built.
 
 ## Goal
 
@@ -63,7 +68,7 @@ Current host capability and supervisor comparisons are recorded outside this liv
 
 ## ADR: systemd owns lifecycle; the queue owns Lean semantics
 
-**Status:** Proposed, revised after adversarial review
+**Status:** Accepted 2026-07-18, revised after adversarial review
 
 ### Context
 

@@ -3661,6 +3661,18 @@ it does not own mathematical proofs or any running lane's build process.
   ownership lock, restart-safe `lake build --no-build` skipping, and a final trace-only aggregate
   gate; hostile-review fixes cover refusal state, duplicate leaf names, and unsafe numeric controls →
   `notes/2026-07-15-c205-unattended-lean-build-queue.md`.
+- **C225 `[build-sys]` [REPORTED 2026-07-18]** — rolled out the adjacent systemd-managed Lean queue
+  path: systemd owns process lifecycle (transient user service, cgroup ownership, event-driven
+  `--wait`, exit accounting) while the Python queue keeps Lean locking, phases, and target outcomes,
+  with immutable submission/InvocationID binding, strict adoption of the adapter-owned run directory,
+  canonical-versus-effective state separation so abnormal death is reader-derived evidence rather
+  than a forged terminal record, durable completion capture before exact failed-unit cleanup, D-Bus
+  reattachment via `await`, a provenance-aware bounded listing, and stable event-ID deduplication in
+  place of a false exactly-once promise; exercised end-to-end against real Lean work on the C151
+  target, where it caught a devshell-`PATH` defect invisible to the legacy path and returned a
+  correct canonical `failed`/1 naming C151 proof errors rather than a supervision fault; the legacy
+  `--detach` contract was left unchanged beneath its active users →
+  `notes/handoffs/done/2026-07-16-c225-lean-queue-completion-notification.md`.
 
 **Alternate-orbit repair lane (`alt-orbit-repair`, 2026-07-14):** see
 [handoff](handoffs/2026-07-14-alternate-orbit-repair.md). The certificate-free `s ≥ 7` theorem is

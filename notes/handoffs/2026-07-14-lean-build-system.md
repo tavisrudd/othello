@@ -2,8 +2,8 @@
 
 **Lane**: `build-sys`
 **Date**: 2026-07-18
-**Status**: ACTIVE — C326 exporter landed and self-validated, project extraction awaits a quiet Lean
-worktree; C225 notification loop next; C162/C205 base runner remains open
+**Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
+awaits a quiet Lean worktree; C162 blast radius is next and needs no build
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -50,14 +50,14 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    Reports: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md),
    [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
    Phase A's findings 1–4 are other lanes' to close; `build-sys` reports them and does not fix them.
-1. **C225 completion notification:** implement the accepted design and gates in
-   [`2026-07-16-c225-lean-queue-completion-notification.md`](2026-07-16-c225-lean-queue-completion-notification.md).
+1. **Blast radius (C162):** parse project-local imports, compute reverse reachability, and rank hubs
+   by rebuild cost as well as dependent count. This is the lane's next actionable item: it needs no
+   build, and C326's spine already provides a tested import scanner and `source_closure` over the
+   same graph.
 2. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior.
 3. **Restart guard:** complete hermetic failure tests and a lightweight real
    checkpoint→restart→audit→verify cycle.
-4. **Blast radius:** parse project-local imports, compute reverse reachability, and rank hubs by
-   rebuild cost as well as dependent count.
 5. **Stable checker boundaries:** freeze narrow schemas/checkers; keep transport and paper-facing
    theorems downstream of generated leaves.
 6. **Isolation/recovery:** demonstrate pack/restore on disposable state and compare shared-tree
@@ -75,6 +75,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 
 - C162 current report: [`../2026-07-14-c162-lean-build-system.md`](../2026-07-14-c162-lean-build-system.md).
 - C205 base runner: [`../2026-07-15-c205-unattended-lean-build-queue.md`](../2026-07-15-c205-unattended-lean-build-queue.md).
+- C225 managed queue (reported): [`done/2026-07-16-c225-lean-queue-completion-notification.md`](done/2026-07-16-c225-lean-queue-completion-notification.md).
 - C326 Phase A: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).
 - C326 exporter: [`../2026-07-18-c326-lean-fact-exporter.md`](../2026-07-18-c326-lean-fact-exporter.md).
 - Full prior handoff state: archive linked above.
