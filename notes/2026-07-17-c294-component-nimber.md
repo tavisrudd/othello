@@ -21,10 +21,12 @@ be its cycle rank. The checker implements the following exact canonical quotient
 - Trees use the AHU rooted-tree code at their one or two centres.
 - A unicyclic graph uses the dihedral canonical word of the rooted trees attached to its unique
   cycle.
-- For `rho=2` or `rho=3`, iterated leaf removal gives the unique two-core. Suppressing its
-  degree-two paths gives a cubic multigraph on respectively two or four branch vertices. The
+- For `2<=rho<=4`, iterated leaf removal gives the unique two-core. Suppressing its
+  degree-two paths gives a cubic multigraph on respectively two, four, or six branch vertices. The
   canonical key records the rooted forest at every core vertex and the ordered attachment word on
-  every suppressed path, minimized over all branch-vertex permutations and path reversals.
+  every suppressed path. The implementation first canonicalizes the tiny cubic-multigraph topology,
+  interns exact rooted-forest labels, and minimizes attachment data only over the topology's
+  canonical labelings and path reversals.
 
 For maximum-degree-three connected graphs in these four classes, two keys agree if and only if the
 graphs are isomorphic. The forward direction follows because leaf pruning, the two-core, and path
@@ -40,27 +42,29 @@ absolute location. This is a game-aware composition law, not a heuristic pruning
 
 On the direct `(2,3,4)` `PGL2(3)` follower the component solver returns nimber `1`. This agrees
 with both independent connected-K-set engines in the predecessor exact-value gate, which visited
-758 connected absolute masks. The new solver visits 114 uncached absolute masks and uses 16 tree,
-39 unicyclic, and 30 rank-two/three canonical shapes. Thus the root again has its required sole
+758 connected absolute masks. The new solver visits 104 uncached absolute masks and uses 16 tree,
+39 unicyclic, and 40 rank-two/three/four canonical shapes. Thus the root again has its required sole
 option nimber `1` and root value zero.
 
 On the hard type-0 `(2,4,5)` `PGL2(5)` follower, a deterministic 100,000-state cap does not return
-a value. The first 100,019 uncached connected masks have cycle-rank histogram
+a value. The first 100,018 uncached connected masks have cycle-rank histogram
 
 ```text
-rho 0..9: 1853, 12675, 25998, 28057, 20890, 8154, 2035, 314, 28, 2
+rho 0..9: 1853, 12743, 26429, 28923, 18934, 8606, 2156, 331, 28, 2
 ```
 
-with 15 additional masks at larger ranks. Hence 68,583/100,019 uncached masks have `rho<=3`, and
-89,473/100,019 have `rho<=4`. The implemented quotient records 54,055 rank-two/three shapes and
-serves 1,436,003 rank-two/three cache hits, in addition to 499,638 tree and 1,231,338 unicyclic
-hits. It stops at the first unseen 30-vertex connected state.
+with 15 additional masks at larger ranks. Hence 69,948/100,018 uncached masks have `rho<=3`, and
+88,882/100,018 have `rho<=4`. The implemented quotient records 74,285 completed rank-two/three/four
+shapes and serves 1,644,303 low-cycle cache hits, in addition to 500,265 tree and 1,230,438
+unicyclic hits. It stops at the first unseen 26-vertex connected state.
 
 This is positive evidence that the recursion produces many repeated low-cycle boundary pieces,
-but it is not yet compression of the hard connected core: every first-seen rank-at-most-three mask
-in this traversal has a new canonical shape. A naive rank-four extension that serialized all
-`6!` branch permutations was also rejected as an implementation route after exceeding the bounded
-pilot window; it produced no tracked result and supports no mathematical negative claim.
+but it is not yet compression of the hard connected core. The 96 labelled low-cycle skeletons
+collapse to only seven cubic-multigraph topology classes, while the attachment words still produce
+74,285 completed exact shapes. Thus topology reuse is strong and exact attached-graph reuse among
+first-seen states is negligible. A preliminary rank-four serializer that rebuilt strings across all
+`6!` branch permutations exceeded the bounded pilot window; the tracked topology-first interning
+kernel supersedes it and supports the displayed exact result.
 
 ## Boundary and next theorem
 
@@ -77,8 +81,8 @@ connected graphs; and equal canonical keys therefore have equal Grundy values. L
 canonical keys and reconstruction witnesses without unfolding the full Node--Kayles game tree. The
 direct `PGL2(3)` instance should likewise admit a small finite certificate.
 
-The bounded `PGL2(5)` search has a different certificate risk. Its first 100,019 uncached connected
-masks already contain 54,055 distinct rank-two/three shapes. Translating the recursion literally
+The bounded `PGL2(5)` search has a different certificate risk. Its first 100,018 uncached connected
+masks already produce 74,285 completed rank-two/three/four shapes. Translating the recursion literally
 would create a large proof tree or table. If an exact value is eventually returned, the appropriate
 architecture is a compact externally generated DAG/certificate plus a small Lean checker built on
 the generic structural lemmas. No such q=5 value certificate exists yet, because the present run
@@ -98,11 +102,12 @@ or silver theorem. The missing q-general result is a bounded contextual interfac
 for the growing high-cycle core; further formalization of the low-cycle quotient alone cannot
 supply it.
 
-The next kernel should retain this verified component layer and add a compact rank-four/core
-representation using interned rooted-tree and skeleton IDs rather than factorial string
-serialization. Its falsification test is sharp: either it returns an exact hard follower value or
-it must report whether repeated canonical core shapes continue to dominate before another state-cap
-increase is considered. No larger generic K-set cap is justified by this result.
+The next theorem should retain this verified component layer but quotient the attachment words by
+actual P/N or nimber context rather than exact graph isomorphism. The seven topology classes are a
+small skeleton on which to test such a congruence. Its falsification test is sharp: equal proposed
+attachment signatures must survive direct nimber gluing tests on the q=3 base and bounded q=5
+followers before another state-cap increase is considered. No larger generic K-set cap is justified
+by this result.
 
 ## Replay and trusted boundary
 
@@ -131,6 +136,6 @@ and C++ q=3 result. No independent q=5 value check exists because this bounded r
 
 | Artifact | Bytes | SHA-256 |
 |:--|--:|:--|
-| `2026-07-17-c294-component-nimber.cpp` | 21,143 | `970c192eff7256cb2fa8f81068f2fa3973446fb846a7341dc4f69287b0253dba` |
-| `2026-07-17-c294-component-nimber-q3.json` | 509 | `24d2575f19852c8073bafe5c42f1d60a4487e86b4a1556d1ac28dde79583d418` |
-| `2026-07-17-c294-component-nimber-q5-bounded.json` | 565 | `8b4c19c60f95ae8049cfe09e4b68e470e25fdddf0b3375c07868717381f042af` |
+| `2026-07-17-c294-component-nimber.cpp` | 25,834 | `5135aa81ce33f4551bab5ba5f17209e1204f642d0ce967bfed260942b8fc2fd7` |
+| `2026-07-17-c294-component-nimber-q3.json` | 565 | `fe9c46f01f38613024df7cb3063005bb0a596cd2a84a6b7333b77d41a182f87f` |
+| `2026-07-17-c294-component-nimber-q5-bounded.json` | 621 | `46d1363bdae4bb0739e6bf9bd6aa3f069499da17100dce455521949761596362` |

@@ -10,6 +10,7 @@
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 struct Mask {
@@ -27,6 +28,17 @@ struct MaskHash {
         x ^= x >> 27;
         x *= 0x94d049bb133111ebULL;
         return static_cast<size_t>(x ^ (x >> 31));
+    }
+};
+
+struct VectorHash {
+    size_t operator()(const std::vector<int> &values) const {
+        uint64_t hash = 0x9e3779b97f4a7c15ULL;
+        for (int value : values) {
+            uint64_t item = static_cast<uint32_t>(value);
+            hash ^= item + 0x9e3779b97f4a7c15ULL + (hash << 6) + (hash >> 2);
+        }
+        return static_cast<size_t>(hash);
     }
 };
 
@@ -112,8 +124,8 @@ class Solver {
             return value;
         }
         int cyclomatic = edges - vertices + 1;
-        if (cyclomatic >= 2 && cyclomatic <= 3) {
-            std::string key = low_cyclomatic_key(mask, cyclomatic);
+        if (cyclomatic >= 2 && cyclomatic <= 4) {
+            std::vector<int> key = low_cyclomatic_key(mask, cyclomatic);
             auto found = low_cyclomatic_cache_.find(key);
             if (found != low_cyclomatic_cache_.end()) {
                 ++low_cyclomatic_cache_hits;
@@ -141,6 +153,9 @@ class Solver {
     uint64_t low_cyclomatic_shapes = 0;
     std::array<uint64_t, 17> cyclomatic_states{};
     int limit_vertices = -1;
+
+    size_t topology_classes() const { return topology_classes_.size(); }
+    size_t topology_labelled_keys() const { return topology_cache_.size(); }
 
   private:
     uint8_t recurse_connected(Mask mask) {
@@ -332,11 +347,72 @@ class Solver {
         return result;
     }
 
-    static std::string encode_piece(const std::string &piece) {
-        return std::to_string(piece.size()) + ":" + piece;
+    int intern_label(const std::string &label) {
+        auto found = label_ids_.find(label);
+        if (found != label_ids_.end()) return found->second;
+        int identifier = static_cast<int>(label_ids_.size());
+        label_ids_.emplace(label, identifier);
+        return identifier;
     }
 
-    std::string low_cyclomatic_key(Mask mask, int cyclomatic) const {
+    struct TopologyCanon {
+        std::vector<int> canonical;
+        std::vector<std::vector<int>> permutations;
+    };
+
+    TopologyCanon canonical_topology(
+        int branch_count,
+        const std::vector<std::pair<int, int>> &edges
+    ) {
+        std::vector<int> raw{branch_count};
+        std::vector<int> raw_counts(branch_count * branch_count);
+        for (auto [first, second] : edges) {
+            if (second < first) std::swap(first, second);
+            ++raw_counts[first * branch_count + second];
+        }
+        for (int first = 0; first < branch_count; ++first) {
+            for (int second = first; second < branch_count; ++second) {
+                raw.push_back(raw_counts[first * branch_count + second]);
+            }
+        }
+        auto found = topology_cache_.find(raw);
+        if (found != topology_cache_.end()) return found->second;
+
+        TopologyCanon result;
+        std::vector<int> permutation(branch_count);
+        std::iota(permutation.begin(), permutation.end(), 0);
+        do {
+            std::vector<int> inverse(branch_count);
+            for (int new_index = 0; new_index < branch_count; ++new_index) {
+                inverse[permutation[new_index]] = new_index;
+            }
+            std::vector<int> counts(branch_count * branch_count);
+            for (auto [old_first, old_second] : edges) {
+                int first = inverse[old_first];
+                int second = inverse[old_second];
+                if (second < first) std::swap(first, second);
+                ++counts[first * branch_count + second];
+            }
+            std::vector<int> candidate;
+            for (int first = 0; first < branch_count; ++first) {
+                for (int second = first; second < branch_count; ++second) {
+                    candidate.push_back(counts[first * branch_count + second]);
+                }
+            }
+            if (result.canonical.empty() || candidate < result.canonical) {
+                result.canonical = std::move(candidate);
+                result.permutations.clear();
+                result.permutations.push_back(permutation);
+            } else if (candidate == result.canonical) {
+                result.permutations.push_back(permutation);
+            }
+        } while (std::next_permutation(permutation.begin(), permutation.end()));
+        topology_cache_.emplace(std::move(raw), result);
+        topology_classes_.insert(result.canonical);
+        return result;
+    }
+
+    std::vector<int> low_cyclomatic_key(Mask mask, int cyclomatic) {
         std::vector<int> degree(128);
         std::vector<int> leaves;
         Mask core = mask;
@@ -408,41 +484,68 @@ class Solver {
             throw std::runtime_error("cycle-skeleton edge count failure");
         }
 
-        std::vector<std::string> branch_labels;
-        for (int vertex : branches) branch_labels.push_back(attachment_label(vertex, mask, core));
-        std::vector<int> permutation(branches.size());
-        std::iota(permutation.begin(), permutation.end(), 0);
-        std::string best;
-        do {
+        std::vector<int> branch_labels;
+        for (int vertex : branches) {
+            branch_labels.push_back(intern_label(attachment_label(vertex, mask, core)));
+        }
+        struct InternedEdge {
+            int first;
+            int second;
+            std::vector<int> labels;
+        };
+        std::vector<InternedEdge> interned_edges;
+        for (const SkeletonEdge &edge : skeleton_edges) {
+            std::vector<int> labels;
+            for (const std::string &label : edge.labels) labels.push_back(intern_label(label));
+            interned_edges.push_back({edge.first, edge.second, std::move(labels)});
+        }
+        std::vector<std::pair<int, int>> topology_edges;
+        for (const SkeletonEdge &edge : skeleton_edges) {
+            topology_edges.emplace_back(edge.first, edge.second);
+        }
+        TopologyCanon topology = canonical_topology(
+            static_cast<int>(branches.size()), topology_edges
+        );
+        std::vector<int> best;
+        for (const std::vector<int> &permutation : topology.permutations) {
             std::vector<int> inverse(branches.size());
             for (size_t new_index = 0; new_index < permutation.size(); ++new_index) {
                 inverse[permutation[new_index]] = static_cast<int>(new_index);
             }
-            std::string candidate = "B";
-            for (int old_index : permutation) candidate += encode_piece(branch_labels[old_index]);
-            std::vector<std::string> encoded_edges;
-            for (const SkeletonEdge &edge : skeleton_edges) {
+            std::vector<int> candidate;
+            candidate.push_back(cyclomatic);
+            candidate.push_back(static_cast<int>(branches.size()));
+            candidate.push_back(static_cast<int>(topology.canonical.size()));
+            candidate.insert(
+                candidate.end(), topology.canonical.begin(), topology.canonical.end()
+            );
+            for (int old_index : permutation) candidate.push_back(branch_labels[old_index]);
+            std::vector<std::vector<int>> encoded_edges;
+            for (const InternedEdge &edge : interned_edges) {
                 int first = inverse[edge.first];
                 int second = inverse[edge.second];
-                std::vector<std::string> labels = edge.labels;
+                std::vector<int> labels = edge.labels;
                 if (second < first) {
                     std::swap(first, second);
                     std::reverse(labels.begin(), labels.end());
                 } else if (first == second) {
-                    std::vector<std::string> reversed = labels;
+                    std::vector<int> reversed = labels;
                     std::reverse(reversed.begin(), reversed.end());
                     if (reversed < labels) labels = std::move(reversed);
                 }
-                std::string encoded = std::to_string(first) + "," + std::to_string(second) + ":";
-                for (const std::string &label : labels) encoded += encode_piece(label);
+                std::vector<int> encoded{first, second, static_cast<int>(labels.size())};
+                encoded.insert(encoded.end(), labels.begin(), labels.end());
                 encoded_edges.push_back(std::move(encoded));
             }
             std::sort(encoded_edges.begin(), encoded_edges.end());
-            candidate += "E";
-            for (const std::string &edge : encoded_edges) candidate += encode_piece(edge);
+            candidate.push_back(static_cast<int>(encoded_edges.size()));
+            for (const std::vector<int> &edge : encoded_edges) {
+                candidate.push_back(static_cast<int>(edge.size()));
+                candidate.insert(candidate.end(), edge.begin(), edge.end());
+            }
             if (best.empty() || candidate < best) best = std::move(candidate);
-        } while (std::next_permutation(permutation.begin(), permutation.end()));
-        return "R" + std::to_string(cyclomatic) + ":" + best;
+        }
+        return best;
     }
 
     void build_path_cycle_tables() {
@@ -464,7 +567,10 @@ class Solver {
     std::unordered_map<Mask, uint8_t, MaskHash> cache_;
     std::unordered_map<std::string, uint8_t> tree_cache_;
     std::unordered_map<std::string, uint8_t> unicyclic_cache_;
-    std::unordered_map<std::string, uint8_t> low_cyclomatic_cache_;
+    std::unordered_map<std::vector<int>, uint8_t, VectorHash> low_cyclomatic_cache_;
+    std::unordered_map<std::string, int> label_ids_;
+    std::unordered_map<std::vector<int>, TopologyCanon, VectorHash> topology_cache_;
+    std::unordered_set<std::vector<int>, VectorHash> topology_classes_;
     std::array<uint8_t, 129> path_nimber_{};
     std::array<uint8_t, 129> cycle_nimber_{};
 };
@@ -522,6 +628,8 @@ int main(int argc, char **argv) {
               << "  \"stopped_at_limit\": " << (stopped ? "true" : "false") << ",\n"
               << "  \"tree_cache_hits\": " << solver.tree_cache_hits << ",\n"
               << "  \"tree_shapes\": " << solver.tree_shapes << ",\n"
+              << "  \"topology_classes\": " << solver.topology_classes() << ",\n"
+              << "  \"topology_labelled_keys\": " << solver.topology_labelled_keys() << ",\n"
               << "  \"unicyclic_cache_hits\": " << solver.unicyclic_cache_hits << ",\n"
               << "  \"unicyclic_shapes\": " << solver.unicyclic_shapes << ",\n"
               << "  \"type_index\": " << type_index << "\n"
