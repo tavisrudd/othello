@@ -360,9 +360,15 @@ Archive first: if the completed row is not yet present in the companion archive,
 to deleting it, not a reason to leave `[REPORTED]` history in the live queue. Never transition a
 live queue row to `[REPORTED]`, even temporarily.
 
-Every task uses the global monotonic `CNN` sequence and is allocated in the live queue. Compute a new
-ID as `max(CNN in queue + handoffs + notes/) + 1`; never reuse or renumber a reported ID. Examples
-must use `C<id>`, never a concrete unallocated number.
+Every task uses the global monotonic `CNN` sequence and is allocated in the live queue. Before
+allocating, run `python3 notes/scripts/next_codex_task_id.py` from the repository root and use its
+single `C<id>` output. Do not replace it with an ad hoc `rg`/`grep` maximum. The helper scans isolated
+task tokens across the queue, archive, handoffs, and notes; excludes URL/link destinations; rejects
+embedded strings such as the `C7324` substring of `PMC7324030`; and fails closed unless the maximum
+has an authoritative queue/archive row or task-card heading. On failure, run it with `--explain`,
+inspect the bounded provenance, and repair the indexing inconsistency before allocating. The
+allocation remains `max(CNN in queue + handoffs + notes/) + 1`; never reuse or renumber a reported
+ID. Examples must use `C<id>`, never a concrete unallocated number.
 
 Every task row carries exactly one lane peg at allocation:
 
