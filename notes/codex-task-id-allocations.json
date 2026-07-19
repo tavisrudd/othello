@@ -8,8 +8,17 @@
       "last": 360,
       "purpose": "Reserve every ID through the text-audited historical maximum C360.",
       "sequence": 1
+    },
+    {
+      "count": 1,
+      "first": 361,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 361,
+      "purpose": "classify the C329 affine deep-hole quotient by intrinsic invariants and upgrade C348 to a complete enumerator theorem",
+      "sequence": 2
     }
   ],
-  "next_id": 361,
+  "next_id": 362,
   "schema": "codex-task-id-allocations-v1"
 }
