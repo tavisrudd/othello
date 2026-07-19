@@ -62,6 +62,22 @@ The expectation and question fields are aids, not admission tests: a worthwhile 
 speculative musing can be logged without manufacturing a violated expectation. The admission test
 is that it was incidental.
 
+## Novelty-failure adjacent-crown extraction
+
+Adjacent-crown extraction is planned work: keep its pre-emption boundary, candidates, tests,
+rejections, and at most two cheap-gate-clearing successors in the task report or owned portfolio.
+The discovery log is only for side observations outside the gaps intentionally examined; state the
+actual audit question in `Was I looking for this?`. If an older entry is promoted, add its
+`graduated -> C<id>/report` pointer only after allocation. No passing candidate is a valid outcome.
+
+### Gems spotted during literature and novelty review
+
+Log an unexpected theorem, technique, object, dataset, consumer, or analogy found outside the
+review's named questions. Record the exact source location, the question actually being checked,
+the **Gem signal**, and the cheapest discriminator; do not expand the review to test it. Direct
+answers, pre-emptions, named adjacent candidates, and literature-matrix inputs remain task-report
+material.
+
 ### Structural sibling predictions
 
 One especially useful incidental lead has the form:

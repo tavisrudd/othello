@@ -117,6 +117,10 @@ The first and third paths are the best applied EV; the second has the best chanc
 special `S_b` superposition matter. The fourth and fifth are higher-upside but require a fresh
 literature gate.
 
+The implied programs are allocated as C353--C359 in
+`notes/2026-07-18-c334-implied-crowns-portfolio.md`. That portfolio also records the bounded
+adjacent-crown extraction routine to run when a novelty gate fails.
+
 ## Literature boundary
 
 - [Ly--Soljanin, *Service Rate Regions of MDS Codes & Fractional Matchings in Quasi-uniform
