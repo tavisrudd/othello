@@ -2,9 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; the two-phase live dictionary exactly matches its uncompressed checkpoint
-control, so B3 has pivoted from generic separator enlargement to the bounded coloured-Cayley
-coordinate audit in `notes/2026-07-17-c294-b3-change-of-coordinates.md`
+**Status:** active; E0 has certified the coloured-Cayley coordinates and routes B3 next to the
+bounded scar-restricted typed-context pilot `R`
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -187,3 +186,17 @@ live integration, and a larger value-run discussion requires at least a 10% live
 the exact dictionary control or an independently checked type-0 value inside the fixed replay
 budget. A direct P/N certificate is strategically relevant but does not silently satisfy B3's
 current exact-nimber exit gate.
+
+## E0 coordinate-audit result
+
+`notes/2026-07-17-c294-b3-coordinate-audit.md` passes the no-recursion structural gate on all seven
+hard `PGL2(5)` types. It independently checks the determinant sheets, named-colour pair orders,
+pair-subgroup cosets, alternating cycles, third-colour matchings, initial defect, and every emitted
+whole-block cut width. Type 0 has one greedy `02` block order at exactly 16 live ports; its other
+directions have widths 20 and 26.
+
+This makes the `02` transfer direction eligible but does not establish interface compression or
+dominate the preregistered Track-V order. The next bounded experiment is `R` on the existing q=3
+and q=5 prefixes. It must remove at least 850 classes beyond known isomorphism removals with zero
+nimber conflicts and establish closure under the typed scar grammar before live integration. The
+generic state cap and all-seven value run remain closed.

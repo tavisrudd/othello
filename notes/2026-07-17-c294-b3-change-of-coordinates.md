@@ -4,8 +4,8 @@
 
 **Lane:** `crowns`
 
-**Status:** active design pivot; the next experiment is the bounded structural audit `E0`, not a
-larger value run or another generic separator-closure enlargement
+**Status:** E0 passed; the next experiment is the bounded scar-restricted typed-context pilot `R`,
+not a larger value run or another generic separator-closure enlargement
 
 ## Decision
 
@@ -278,6 +278,11 @@ same-absolute-key hits.
 
 ## Immediate handoff
 
-Implement only `E0`. Its report must recommend `R`, `A`, `T`, or a bounded stop based on the emitted
-geometry. No value solver, separator-cap increase, all-seven value run, Lean work, or cross-lane
-edit is part of `E0`.
+E0 is complete in `notes/2026-07-17-c294-b3-coordinate-audit.md`. Implement only the cheap fixed-
+prefix Track-V pilot `R`: define the typed scar grammar from the certified generator colour,
+determinant sheet, pair-cycle orientation, and block-constructor coordinates; minimize it on the
+existing q=3 and q=5 completed states; and test its closure and exact nimber conflicts. Do not write
+a live solver unless it removes at least 850 classes beyond the 943 known isomorphism removals with
+zero conflicts. The type-0 `02` transfer direction is eligible at exactly 16 ports but remains a
+fallback until `R` and `A` fail to dominate it. No value solver, separator-cap increase, all-seven
+value run, Lean work, or cross-lane edit is part of this next pilot.
