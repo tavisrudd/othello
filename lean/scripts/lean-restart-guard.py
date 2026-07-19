@@ -150,19 +150,32 @@ def command_checkpoint(args: argparse.Namespace) -> None:
     print("For a recovery archive, also run `lake pack /home/.../build.tgz` while Lake is stopped.")
 
 
-def verify_data(data: dict[str, object]) -> list[str]:
+def sentinel_modules(data: dict[str, object]) -> list[str]:
+    """Validate the sentinel list and return its module names.
+
+    Every consumer of a checkpoint goes through here, so a hand-edited or truncated file fails with
+    a diagnostic rather than an exception, and no command trusts a shape another one rejected.
+    """
     raw_sentinels = data.get("sentinels")
     if not isinstance(raw_sentinels, list) or not raw_sentinels:
         fail("checkpoint has no sentinels")
     modules: list[str] = []
-    expected: list[tuple[Path, str]] = []
     for raw in raw_sentinels:
         if not isinstance(raw, dict) or not isinstance(raw.get("module"), str):
             fail("checkpoint contains a malformed sentinel")
+        modules.append(raw["module"])
+    return modules
+
+
+def verify_data(data: dict[str, object]) -> list[str]:
+    modules = sentinel_modules(data)
+    raw_sentinels = data["sentinels"]
+    assert isinstance(raw_sentinels, list)
+    expected: list[tuple[Path, str]] = []
+    for raw in raw_sentinels:
         module = raw["module"]
-        modules.append(module)
         artifacts = raw.get("artifacts")
-        if not isinstance(artifacts, dict):
+        if not isinstance(artifacts, dict) or not artifacts:
             fail(f"checkpoint sentinel {module} has no artifact map")
         for relative, digest in artifacts.items():
             if not isinstance(relative, str) or not isinstance(digest, str):
@@ -171,6 +184,13 @@ def verify_data(data: dict[str, object]) -> list[str]:
             if not path.is_relative_to(BUILD_LIB.resolve()):
                 fail(f"checkpoint artifact escapes the build library: {path}")
             expected.append((path, digest))
+        absent = [
+            suffix
+            for suffix in REQUIRED_SUFFIXES
+            if not any(relative.endswith(suffix) for relative in artifacts)
+        ]
+        if absent:
+            fail(f"checkpoint sentinel {module} does not record: {', '.join(absent)}")
 
     lake_no_build(modules)
     mismatches: list[str] = []
@@ -195,9 +215,7 @@ def command_verify(args: argparse.Namespace) -> None:
 
 def command_audit_log(args: argparse.Namespace) -> None:
     data = load_checkpoint(args.directory.expanduser().resolve())
-    raw_sentinels = data.get("sentinels")
-    assert isinstance(raw_sentinels, list)
-    modules = [item["module"] for item in raw_sentinels if isinstance(item, dict)]
+    modules = sentinel_modules(data)
     try:
         lines = args.log.expanduser().read_text(errors="replace").splitlines()
     except OSError as error:

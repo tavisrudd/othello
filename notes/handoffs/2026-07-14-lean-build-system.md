@@ -3,7 +3,8 @@
 **Lane**: `build-sys`
 **Date**: 2026-07-18
 **Status**: ACTIVE — C225 reported; C326 exporter landed and self-validated, project extraction
-awaits a quiet Lean worktree; C162 blast radius is next and needs no build
+awaits a quiet Lean worktree; C162 blast radius and the restart-guard failure suite landed, and the
+remaining C162 streams need a quiet window
 
 > **LIVE MAP ONLY. DO NOT APPEND BUILD LOGS, INCIDENT NARRATIVES, MEASUREMENTS, OR
 > SUPERSEDED DESIGNS HERE.** Put history in
@@ -27,7 +28,8 @@ another lane's running build.
   atomic status, telemetry, trace-current skipping, and final aggregate gate.
 - `lean-build-queue.py status`: bounded filesystem-backed progress; no process-table polling.
 - `lean-build-queue.py pack`: locked, disk-backed, non-overwriting `lake pack` through `run-quiet`.
-- `lean/scripts/lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log.
+- `lean/scripts/lean-restart-guard.py`: trace-validated checkpoint/verify/audit-log, with a hermetic
+  failure suite in `test_lean_restart_guard.py`. Unexercised against real Lake output.
 - `lean/scripts/lean-trust-spine.py`: read-only `audit`/`check` of declared trust boundary against
   tree facts, plus `generate`/`graph`/`render`. Declarations in `lean/trust/`. Runs no Lake build.
 - `lean/scripts/lean-trust-extract.py`: the only trust-spine component that runs Lean. `plan`,
@@ -54,8 +56,13 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
    Phase A's findings 1–4 are other lanes' to close; `build-sys` reports them and does not fix them.
 1. **Real lightweight gate:** in a confirmed quiet window, run one disposable target through the
    queue and verify actual Nix/Lake/run-quiet/GNU-time behavior.
-3. **Restart guard:** complete hermetic failure tests and a lightweight real
-   checkpoint→restart→audit→verify cycle.
+3. **Restart guard:** the hermetic failure suite landed and is green; writing it exposed and closed
+   two paths that reported success without checking what they claimed (an emptied or narrowed
+   artifact map verified vacuously, and `audit-log` crashed on a malformed checkpoint instead of
+   refusing). What remains is the lightweight real checkpoint→restart→audit→verify cycle on
+   disposable state in a quiet window. The suite stubs Lake entirely, so it establishes nothing
+   about real Lake exit codes, trace semantics, or what an interrupted build leaves on disk.
+   Report: [`../2026-07-18-c162-restart-guard-failure-tests.md`](../2026-07-18-c162-restart-guard-failure-tests.md).
 5. **Stable checker boundaries:** freeze narrow schemas/checkers; keep transport and paper-facing
    theorems downstream of generated leaves.
 6. **Isolation/recovery:** demonstrate pack/restore on disposable state and compare shared-tree
@@ -73,6 +80,7 @@ Detailed operator rules are in `lean/AGENTS.md` (`lean/CLAUDE.md` is its symlink
 
 - C162 current report: [`../2026-07-14-c162-lean-build-system.md`](../2026-07-14-c162-lean-build-system.md).
 - C162 blast radius: [`../2026-07-18-c162-blast-radius.md`](../2026-07-18-c162-blast-radius.md).
+- C162 restart-guard failure tests: [`../2026-07-18-c162-restart-guard-failure-tests.md`](../2026-07-18-c162-restart-guard-failure-tests.md).
 - C205 base runner: [`../2026-07-15-c205-unattended-lean-build-queue.md`](../2026-07-15-c205-unattended-lean-build-queue.md).
 - C225 managed queue (reported): [`done/2026-07-16-c225-lean-queue-completion-notification.md`](done/2026-07-16-c225-lean-queue-completion-notification.md).
 - C326 Phase A: [`../2026-07-18-c326-trust-spine-phase-a.md`](../2026-07-18-c326-trust-spine-phase-a.md).
