@@ -100,7 +100,7 @@ restored, and the suite asserts both that every single-byte change is caught and
 tree verifies again.
 
 The independent check is that the suite discriminates: it was run against the pre-fix guard, taken
-from the commit before this one, in a throwaway directory that leaves the worktree untouched.
+from commit `29b55d38`, in a throwaway directory that leaves the worktree untouched.
 Against that version exactly the three regression tests fail — `test_an_emptied_artifact_map_
 cannot_verify_vacuously`, `test_a_dropped_artifact_entry_cannot_verify_vacuously`, and
 `test_malformed_checkpoint_is_refused_not_crashed` (one `KeyError` and three refusal subtests) —
@@ -110,7 +110,7 @@ unaffected by it.
 
 ```text
 cd "$(mktemp -d)" && git -C /home/tavis/src/othello show \
-  <commit-before-this-one>:lean/scripts/lean-restart-guard.py > lean-restart-guard.py &&
+  29b55d38:lean/scripts/lean-restart-guard.py > lean-restart-guard.py &&
 cp /home/tavis/src/othello/lean/scripts/test_lean_restart_guard.py . &&
 python3 test_lean_restart_guard.py     # expect FAILED (failures=5, errors=1)
 ```
