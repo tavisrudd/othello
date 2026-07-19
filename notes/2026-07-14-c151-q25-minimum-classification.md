@@ -662,6 +662,11 @@ of `f2_card_globalLegalPairs_ge_32`, `indexed_f2_card_legalOrbitSet_ge_32`, and
 `normalized_card_legalOrbitSet_ge_32` is `[propext, Classical.choice, Quot.sound]` with no
 `sorryAx`.
 
+The `Q25MinimumClassification.lean` hash above is the state at this date. C331 later factored the
+two normalization steps out of these proofs so the exhaustion lift could reuse them; all three
+statements above are unchanged and their axiom profile is unchanged. The current hash is in
+§ "Semantic equality-orbit exhaustion".
+
 What this does not certify: that `32` is attained, or that the rows attaining it are exactly the
 five certified orbits. This is a lower bound on every semantic exceptional-profile arc and nothing
 more.
@@ -885,7 +890,119 @@ along both normalizations in the required direction), so this is a stating step 
 mathematics, but until it lands the complete extremal classification remains a normalized-row
 statement.
 
+That gap is closed by C331; see § "Semantic equality-orbit exhaustion". The mask-cardinality and
+cover-CSV caveats in the paragraph below are unaffected and still apply.
+
 The mask cardinality remains a lower bound on the legal count rather than the exact count, except at
 the five rows where equality is separately checked; exhaustion needs only the bound. The cover CSV
 is an untracked cache, so the tracked evidence is the generated Lean trees and the parsed mask
 stream, not the CSV.
+
+## Semantic equality-orbit exhaustion (2026-07-19)
+
+**C331.** Exhaustion is lifted to semantic arcs. Every invariant eight-arc in `PG(2,25)` with
+exactly two fixed points whose semantic legal-pair count is `32` is carried by a base-field
+collineation into the `1600`-element union of the five certified minimizer orbits. With the lower
+bound already lifted by `f2_card_globalLegalPairs_ge_32`, `32` is the exact **semantic** minimum and
+the five orbits are the complete extremal set, modulo the boundary recorded below.
+
+| Module | Terminal | Statement |
+|---|---|---|
+| `Q25SemanticExhaustion.lean` | `f2_normalizes_into_minimumOrbitUnion` | an invariant eight-arc attaining `32` has a base normalization landing in `minimumOrbitUnion` |
+| `Q25SemanticExhaustion.lean` | `f2_card_globalLegalPairs_ge_33_of_not_normalizing` | the contrapositive: an arc no base normalization of which lands in the union carries at least `33` |
+| `Q25SemanticExhaustion.lean` | `indexed_exists_base_normalization_mem_minimumOrbitUnion` | the same conclusion for an indexed invariant eight-cap |
+| `Q25SemanticExhaustion.lean` | `normalized_mem_minimumOrbitUnion_of_card_eq_32` | a normalized configuration attaining `32` lies in the union, with no surviving map |
+| `Q25SemanticExhaustion.lean` | `card_legalOrbitSet_eq_32_of_globalLegalPairs_eq_32` | a semantic count of `32` pins the indexed count to `32` |
+
+### Three facts carry the lift, and none is new mathematics
+
+**The normalization steps are threshold-free, so they run in both directions.** The C151 lower-bound
+proof performed both projective normalizations inline. They are now stated separately in
+`Q25MinimumClassification.lean` as `exists_base_normalizedConfig` (a base-field collineation carries
+an indexed invariant eight-cap onto a `normalizedConfig`) and `exists_residual_rowConfig` (a member
+of the order-`400` residual action carries that configuration onto a canonical row of the orbit-`5`
+slice). Neither mentions `32`. `card_legalOrbitSet_liftMapIdx` and `card_legalOrbitSet_residual` are
+*equalities* of legal-orbit cardinality, so the same two steps that carried `≥ 32` up to a semantic
+arc carry `card = 32` down to a normalized row, where
+`mem_minimumOrbitUnion_of_normalized_card_eq_32` applies. The reported C151 terminals keep their
+statements verbatim and are re-proved from the extracted steps.
+
+**The semantic count is pinned by a sandwich, so no new bridge is needed.** The semantic theorem
+counts `globalLegalPairs`, the exhaustion tree counts `legalOrbitSet`, and only an *injection*
+`legalOrbitSet ↪ globalLegalPairs` was ever available. That suffices: it gives
+`legalOrbitSet.card ≤ 32` from the hypothesis, `indexed_f2_card_legalOrbitSet_ge_32` gives
+`32 ≤ legalOrbitSet.card`, and antisymmetry closes it. Surjectivity of that injection is never
+needed and is not proved; in the equality case it follows, but only there.
+
+**The residual step is absorbed, so only the base collineation survives into the statement.**
+`minimumOrbitUnion` is a union of five full residual orbits, hence invariant under the order-`400`
+action. `mem_minimumOrbitUnion_of_residualMapsTo` records that: a set mapping onto a member is a
+member. So `normalized_mem_minimumOrbitUnion_of_card_eq_32` concludes membership for the
+configuration itself with no existential, and the semantic statement quantifies over one map rather
+than two. These three transport lemmas are placed in the new module rather than in
+`Q25ResidualEquality.lean` because that module is imported by the generated exhaustion trees, whose
+re-elaboration is measured in hours; the Lean guide's freeze-the-core invariant applies directly.
+
+### No new generated bulk
+
+C331 adds no certificates, no `decide`, and no generated data. `Q25RowCompositionStrictData/`,
+`Q25ExhaustionConclusionData/`, `Q25ExhaustionDispatchData/`, and every C151 generator are untouched,
+so the regeneration check in § "Equality-orbit exhaustion" still verifies the tracked trees
+byte-identically and its recorded hashes stand.
+
+### Evidence bundle
+
+Replay, from `/home/tavis/src/othello/lean`:
+
+```sh
+scripts/lean-build-queue.py run \
+  RelativeConicArcs.Q25MinimumClassification \
+  RelativeConicArcs.Q25SemanticExhaustion \
+  RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum \
+  --profile single --threads 1 --cores 20-23
+```
+
+One Lean worker on cores `20-23` with `choom -n 1000`, all exit status `0`, each run followed by a
+passing trace-only aggregate gate. `Q25MinimumClassification` `0:12.16` wall at `4,140,768 kB` peak
+RSS (`run-20260719-032358-dbdcc0e1`), against the `0:11.23` at `4,139,416 kB` recorded for the
+module before the refactor; `Q25SemanticExhaustion` `0:12.87` at `4,174,396 kB` and
+`Gates.AlternateOrbitRepairQ25Minimum` `0:10.97` at `4,156,388 kB`
+(`run-20260719-032529-07b74668`). A following exact-target run reports all three trace-current
+(`run-20260719-032705-9c689b73`). These are rebuild costs against the warm C151 trees; the trees
+themselves are unchanged and were not rebuilt.
+
+| Artifact | SHA-256 | Bytes |
+|---|---|---|
+| `Q25SemanticExhaustion.lean` | `bb2023496881ef3241a86d638efa54f70631178c08c2cb9b10fb8b6ed8ff716d` | `8,707` |
+| `Q25MinimumClassification.lean` | `0d10c556513d6dcd22e7ebbd9432b0b3f8166c5bb20e1b51386e4c2f1d72d864` | `19,071` |
+| `Gates/AlternateOrbitRepairQ25Minimum.lean` | `2146cd08d6a9d5a5b550fea8e4193840db79758ceda5c18160f37e97b8ce4e4a` | `1,286` |
+
+A forbidden-token scan over the three sources is clean. The axiom profile of the five C331 terminals
+above, of `mem_minimumOrbitUnion_of_residualMapsTo`, of the refactored C151 terminals
+`f2_card_globalLegalPairs_ge_32`, `indexed_f2_card_legalOrbitSet_ge_32`, and
+`normalized_card_legalOrbitSet_ge_32`, of the two extracted normalization steps, and of
+`mem_minimumOrbitUnion_of_normalized_card_eq_32` is `[propext, Classical.choice, Quot.sound]` with no
+`sorryAx`, `native_decide`, or `Lean.ofReduceBool` — twelve declarations audited, all identical.
+
+The cross-check available here is a regression one rather than an independent recomputation, and it
+is the relevant one: this is a proof-only change over frozen data. The three reported C151 terminals
+keep their statements character-for-character, are re-proved from the extracted steps rather than
+from their former inline copies, and rebuild green at the previously measured cost with an unchanged
+axiom profile. No independent second implementation of the normalization exists, and none is claimed.
+
+### What this does not certify
+
+The classification is stated up to normalization, not as a list. `f2_normalizes_into_minimumOrbitUnion`
+asserts that *some* base-field collineation lands the arc in the union; it does not claim that
+collineation is unique, does not enumerate the semantic arcs attaining `32`, and does not count them.
+
+The hypotheses are exactly the exceptional profile: an invariant eight-arc in `PG(2,25)` with
+exactly two fixed points. Nothing is claimed for other fixed-point counts, other arc sizes, other
+`q`, or non-invariant arcs.
+
+The injection from indexed legal orbits into semantic legal pairs is used only as an inequality.
+Its surjectivity is not proved in general.
+
+Every C151 boundary still applies unchanged: the mask cardinality remains a lower bound on the legal
+count except at the five rows where equality is separately checked, and the cover CSV remains an
+untracked cache, so the tracked evidence is the generated Lean trees and the parsed mask stream.

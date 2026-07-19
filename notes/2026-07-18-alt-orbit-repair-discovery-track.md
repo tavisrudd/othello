@@ -139,3 +139,31 @@ a convention change needs a C-ID and the normal lane routing.
 **Evidence level.** Directly observed: one regeneration check reporting `239`, `1,375`, and `304`
 files differing after a comment-only generator edit, and passing on all three trees after the edit
 was reverted.
+
+## 2026-07-19 — the sandwich hides an unproved surjectivity, and it will bind away from the minimum
+
+**Observation.** C331 needed to move a semantic count of `32` onto the indexed `legalOrbitSet` the
+exhaustion tree reasons about. Only an *injection* `legalOrbitSet ↪ globalLegalPairs` exists — the
+lower-bound proof built it as a subset relation and used it only as `≤`. That turned out to be
+enough, because `32 ≤ legalOrbitSet.card ≤ globalLegalPairs.card = 32` forces equality. So the lift
+went through with no new bridge, which was the goal.
+
+The incidental part is what that argument quietly establishes and what it does not. At every arc
+attaining the minimum, the injection is forced to be a *bijection*: the index-level legal orbits
+already exhaust the semantic legal pairs there, with nothing extra on the semantic side. Whether the
+two counts agree in general was never tested and is not proved.
+
+**Why it may matter.** The sandwich is available only at an extremal value. Any semantic statement
+away from the minimum needs genuine surjectivity instead. Two foreseeable consumers: lifting the
+`32`–`47` legal-count spectrum of D-AOR8 to semantic arcs, and C152's degree identity, which sums
+`card(alternateLegalPairs(A,q))` over selected orbits at arcs that are not minimizers. Both would
+stall on exactly this gap, and the stall would look like a missing lemma rather than a missing
+theorem — the two objects are already known to be equinumerous everywhere the machinery has looked.
+
+If surjectivity does hold in general, `globalLegalPairs` and `legalOrbitSet` become interchangeable
+and every future semantic statement can be phrased at whichever level is cheaper. That would be
+worth having before C152 rather than during it.
+
+**Evidence level.** Derived, not computed. The bijection at minimizers is a consequence of the
+kernel-checked sandwich in `card_legalOrbitSet_eq_32_of_globalLegalPairs_eq_32`; the general case is
+untested in either direction, and no counterexample search was run.

@@ -3,10 +3,11 @@
 **Lane**: `alt-orbit-repair` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-19
-**Status:** OPEN — C142, C143, C148–C151 reported. C151 closed the exact Q25 minimum at the
-normalized-row level: the universal `≥ 32` bound, five-row attainment, the certified residual-orbit
-layer, the semantic lift of the lower bound, and equality-orbit exhaustion are all kernel-checked.
-The one remaining exactness step is C331, lifting exhaustion itself to semantic arcs.
+**Status:** OPEN — C142, C143, C148–C151, C331 reported. The exact Q25 minimum is closed at the
+semantic level: the universal `≥ 32` bound, five-row attainment, the certified residual-orbit layer,
+the semantic lift of the lower bound, equality-orbit exhaustion, and its semantic lift are all
+kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
+up to normalization. What remains is bookkeeping (C318, C319) and the exchange graph (C152).
 **Tasks:** C142–C143, C148–C152, C318–C319, C331
 
 Companion discovery log:
@@ -21,7 +22,7 @@ Companion discovery log:
 ## Lane scope
 
 This is the sticky `alt-orbit-repair` lane. Until the user explicitly switches lanes or this
-handoff is finished, `go` and `next?` refer to the next C151 step below.
+handoff is finished, `go` and `next?` refer to the next open-queue step below.
 
 ### Allowed paths
 
@@ -64,10 +65,15 @@ minimum of 32 legal pairs and the classification of equality cases.
   theorem through both projective normalizations to every invariant eight-arc in `PG(2,25)` with
   exactly two fixed points.
 - **Equality-orbit exhaustion:** `mem_minimumOrbitUnion_of_normalized_card_eq_32` places every
-  normalized row attaining `32` in the `1600`-element union of the five certified orbits, so within
-  the normalized-row domain `32` is exact and the five orbits are the complete minimizer set.
-- **Remaining exactness gap:** lift exhaustion to semantic arcs (C331). The lower bound is lifted;
-  exhaustion is not, so `32` is not yet presentable as the exact *semantic* minimum.
+  normalized row attaining `32` in the `1600`-element union of the five certified orbits.
+- **Semantic exhaustion:** `f2_normalizes_into_minimumOrbitUnion` carries that through both
+  normalizations, so every invariant eight-arc in `PG(2,25)` with exactly two fixed points attaining
+  `32` lands in the same union under a base-field collineation;
+  `f2_card_globalLegalPairs_ge_33_of_not_normalizing` is the contrapositive. `32` is therefore the
+  exact semantic minimum with a complete extremal classification up to normalization. Both
+  normalizations are now stated separately as threshold-free steps
+  (`exists_base_normalizedConfig`, `exists_residual_rowConfig`), which is what let the same
+  machinery run in both directions.
 
 Reported theorem and scout details live in their reports:
 [C142](../2026-07-14-c142-alternate-orbit-repair.md),
@@ -85,7 +91,7 @@ computed but not yet promoted through the complete semantic theorem.
 | ID | Surviving finding | Status | Active use |
 |---|---|---|---|
 | D-AOR2 | Orbit replacement gives a token-jumping-style graph on embedded invariant ten-arcs, fibered by the exact fixed-point subset. Dye's shared-triangle graph is a predecessor with different adjacency. | local profile inputs checked; graph theorem open | C152: prove neighbor injectivity and the degree identity before any connectivity claim |
-| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities, orbit sizes, disjointness, union 1,600, and normalized-row exhaustion `LEAN-CHECKED` | C331 semantic lift of exhaustion |
+| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities, orbit sizes, disjointness, union 1,600, and both normalized-row and semantic exhaustion `LEAN-CHECKED` | closed; supports the C318 manifest rows |
 | D-AOR5 | For an invariant old set, legality of a conjugate candidate pair reduces to freshness, one representative avoiding old secants, and its fixed carrier avoiding old points. | `LEAN-CHECKED; LIT-OPEN` | C151 certificate compression and later exposition assessment |
 | D-AOR6 | The residual order-400 group is two independent 20-element base-field affine normalizers; its executable action preserves legal-orbit cardinality. | `LEAN-CHECKED` | C151 class transport |
 | D-AOR7 | Determinant obstructions factor through 651 canonical dual-line masks; the 310 candidate carriers lie ten apiece on the 31 conjugation-fixed lines. | mask table and Boolean composition `LEAN-CHECKED` | compact C151 residual certificates |
@@ -98,39 +104,36 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C331 | queued; the lane's next step | Lift exhaustion to semantic arcs, then conclude the exact Q25 minimum 32 with five equality classes |
-| C318 | queued | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
+| C318 | queued; the lane's next step | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
-Reported: C142, C143, C148, C149, C150, and C151; use the linked reports rather than recreating
-their plans here.
+Reported: C142, C143, C148, C149, C150, C151, and C331; use the linked reports rather than
+recreating their plans here.
 
-## C331 — next actions
+## Minimum-classification layer — state a cold session needs
 
 Read [the C151 report](../2026-07-14-c151-q25-minimum-classification.md) § "Residual-orbit
 certification" before touching the residual layer; it records why the fast evaluator exists and two
-approaches that are ruled out. Read § "Equality-orbit exhaustion" for the delivered layer and the
-two definitional facts it rests on.
-
-1. Lift exhaustion to semantic arcs, mirroring the route `f2_card_globalLegalPairs_ge_32` already
-   takes for the lower bound: `card_legalOrbitSet_liftMapIdx` moves legal-orbit cardinality along
-   the base-field map sending the two fixed points to the standard pair, and
-   `card_legalOrbitSet_residual` along the residual map sending the selected orbit to orbit number
-   `5`. Both are needed in the direction that carries `card = 32` *down* to the normalized row,
-   where `mem_minimumOrbitUnion_of_normalized_card_eq_32` applies. This is a stating step over
-   existing machinery, not new mathematics, and it needs no new generated bulk.
-2. Only then may `32` be presented as the exact semantic minimum with a complete extremal
-   classification. Run the scoped trust/axiom and source-generation audits before touching the
-   manuscript.
-
-State a cold session needs before starting:
+approaches that are ruled out. Read § "Equality-orbit exhaustion" for the generated layer and the
+two definitional facts it rests on, and § "Semantic equality-orbit exhaustion" for the C331 lift and
+what it does not certify.
 
 - The exhaustion layer is committed and green: `Q25RowCompositionStrictData/` (strict bounds for the
   1,184 non-minimizer classes), `Q25ExhaustionConclusionData/` (per-row disjunctions over all 46,056
   rows), `Q25ExhaustionDispatchData/` (b-dispatchers and `concludeNormalizedRowExhaustion`),
-  `Q25Exhaustion.lean` (the terminals), and `Gates/AlternateOrbitRepairQ25Minimum.lean` (the lane
-  gate for the C151 paper-facing terminals).
+  `Q25Exhaustion.lean` (the normalized-row terminals), `Q25SemanticExhaustion.lean` (the semantic
+  terminals), and `Gates/AlternateOrbitRepairQ25Minimum.lean` (the lane gate for the C151/C331
+  paper-facing terminals).
+- The two projective normalizations are stated separately in `Q25MinimumClassification.lean` and
+  carry no threshold. Reuse `exists_base_normalizedConfig` and `exists_residual_rowConfig` rather
+  than re-deriving a normalization inline; the cardinality transports beside them are equalities and
+  run in either direction. The semantic/indexed bridge (`indexSet` and its four lemmas) is beside
+  them for the same reason.
+- Do not add transport or convenience lemmas to `Q25ResidualEquality.lean` or any module the
+  generated trees import. C331's three residual-transport lemmas sit in `Q25SemanticExhaustion.lean`
+  precisely to keep that closure frozen; a lemma added upstream costs a multi-hour re-elaboration of
+  the exhaustion trees.
 - Do not add a per-row class-link layer at a new threshold. After `fin_cases` the payload is an
   inlined structure literal whose `.canonicalConfig` is definitionally the class triple, so `exact`
   unifies a class-level bound directly and `rfl` discharges the minimizer equality. A `rewrite`
@@ -197,15 +200,15 @@ The reported general and Q25 repair theorems may be used with the cautious liter
 the [C143 literature report](../2026-07-14-c143-literature-positioning.md). Do not make a
 historical-first claim.
 
-C151 closed exhaustion for normalized rows, so 32 is exact and the five orbits are complete *within
-the normalized-row domain*, and that is the strongest form currently sayable. Do not present 32 as
-the exact **semantic** minimum, or the five classes as a complete extremal classification of
-invariant eight-arcs, until C331 lifts exhaustion through the two projective normalizations. The
-lower bound is already lifted; exhaustion is not, and the gap is exactly that asymmetry.
+C331 closed the asymmetry: 32 may now be presented as the exact **semantic** minimum for invariant
+eight-arcs in `PG(2,25)` with exactly two fixed points, and the five orbits as the complete extremal
+set. State the classification the way the theorem does — up to normalization. The terminal asserts
+that *some* base-field collineation lands the arc in the 1600-element union; it does not claim that
+collineation is unique, and it neither enumerates nor counts the semantic arcs attaining 32. Do not
+restate it as a list of arcs, and do not extend it to other fixed-point counts, arc sizes, or `q`.
 
-While C331 remains live, the `alt-orbit-repair` integrator is the sole writer of
+The `alt-orbit-repair` integrator remains the sole writer of
 `papers/equivariant-robust-completion/` and its release boundary. C270/C287 may inventory metadata
-and prospective shared-Lean targets read-only, but the release coordinator must not freeze or edit
-the manuscript around an unfinished theorem boundary. C152 becomes a release gate only if its
-exchange-graph claims are adopted. Public-release preparation resumes after the lane integrator
-records the final adopted theorem set.
+and prospective shared-Lean targets read-only. C152 becomes a release gate only if its exchange-graph
+claims are adopted. Public-release preparation resumes after the lane integrator records the final
+adopted theorem set.
