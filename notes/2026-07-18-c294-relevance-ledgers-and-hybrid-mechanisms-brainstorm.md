@@ -52,7 +52,7 @@ dispatch several concurrently.
 
 | label | status | experiment | promotion gate |
 |:--|:--|:--|:--|
-| `E1` | **ACTIVE NEXT** | proof-relevance, square-frontier, and xor-ledger audit | identify one typed coordinate with enough bounded coalescence headroom to attempt `E2`, or route directly to `E3` |
+| `E1` | **ACTIVE NEXT** | proof relevance, square frontier, xor accounting, and bottom-up terminal parity | identify one typed coordinate with enough bounded coalescence headroom to attempt `E2`, or route directly to `E3` |
 | `E2` | queued on `E1` | scar-restricted typed frontier quotient `R` | at least 850 new class removals beyond the 943 known isomorphism removals, zero conflicts, and proved typed-grammar closure |
 | `E3` | queued after the `R` decision | adaptive bulk-pairing and response-debt automaton `A` | exact closure of every legal move orbit from a finite type-0 P-template family |
 | `E4` | gated on `E0` and failure of `E2`/`E3` to dominate it | type-0 `02` block-interface diversity and transfer `T` | width at most 16, nontrivial repeated exact interfaces, then the same 1% offline and 10% live gates as `R` |
@@ -102,6 +102,66 @@ not replacement soundness and does not authorize live integration.
 
 The independent replay should recompute the emitted request slice, xor accounting, block boundary,
 and first nontrivial repeated boundary record without importing the primary canonicalizer.
+
+### `E1-P` — bottom-up terminal parity ledger
+
+Build this as a subprobe of `E1`, not a new task selector. Use the complete q=3 reachable game DAG
+and the downward-closed set of completed q=5 fixed-prefix states and component calls. A q=5 state
+belongs in the ledger only when all children required for its recorded value/outcome are complete;
+the stopped root and its incomplete ancestors are not silently labelled. The optional small-graph
+domain may use the existing Boolean `W_K/getK` recurrence, but it must not start a broader Queens
+performance task or enumerate a new large graph universe.
+
+Rank states by live vertex count and compute two parallel transition ledgers:
+
+1. a **move-labelled ledger**, in which two vertices producing the same residual count twice; and
+2. a **canonical-child ledger**, in which duplicate residuals count once.
+
+Their difference detects parity caused merely by duplicate moves. For each completed state, record
+the following preregistered fields over `F_2` as well as the exact small integer counts from which
+they were reduced:
+
+- legal moves and distinct canonical children;
+- P-children, N-children, and winning moves when the exact outcome is known;
+- child incidence by typed square-frontier class, determinant sheet, local defect motif, and
+  detached-xor emission;
+- terminal-path polynomials by remaining play length, once with move multiplicity and once with
+  canonical-child multiplicity;
+- parity of maximal independent-set completions by cardinality when it can be reconstructed from
+  the canonical selected-centre witness without identifying that history with the residual;
+- parity of legal repairing replies for every frozen `E3` debt/frame candidate that `E1` can state
+  without synthesis.
+
+For example, the move-labelled terminal polynomial is defined bottom-up by
+
+```text
+T_empty(z) = 1,
+T_G(z) = z * sum_{legal moves v} T_{G-N[v]}(z)  over F_2.
+```
+
+Compute the distinct-child version by summing once per canonical follower. Terminal path parity is
+not an outcome invariant: independent moves can commute and cancel their two play orders. Record
+the maximal-independent-set/cardinality ledger separately so that this trivial factorial
+cancellation is visible rather than misread as structure.
+
+The proof-seeking object is a small parity transition algebra. Starting from the preregistered
+static charges, repeatedly refine a state type by its typed child-incidence vector over `F_2` and by
+the zero/nonzero facts that the Boolean recurrence actually uses. Report stable class counts,
+outcome conflicts, and the first minimized witness for every failed candidate. Do not use outcome
+labels to choose feature coefficients.
+
+Three possible theorem shapes justify promotion:
+
+- a local charge or parity updated exactly by every typed constructor;
+- an involution pairing all noncanonical response candidates and leaving one distinguished reply;
+- an odd-reply theorem for every move orbit from a finite P-template, which implies existence and
+  then exports an explicit response to the exact checker.
+
+Parity of the number of P-children, by itself, does not characterize P/N: P requires zero P-children,
+while N requires at least one. Likewise, a parity signature is not a disjoint-sum law and may not
+replace the xor bank. Promote `E1-P` only when the observed parity becomes one of the exact local
+update or response theorems above. Otherwise retain its minimized counterexamples as a bounded
+negative and do not expand the feature family.
 
 ## E2 — typed square-frontier quotient
 

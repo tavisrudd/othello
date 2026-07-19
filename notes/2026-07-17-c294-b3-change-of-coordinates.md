@@ -281,9 +281,9 @@ same-absolute-key hits.
 E0 is complete in `notes/2026-07-17-c294-b3-coordinate-audit.md`. Follow the serial queue in
 `notes/2026-07-18-c294-relevance-ledgers-and-hybrid-mechanisms-brainstorm.md` and implement only
 `E1`. Replay the existing q=3 control and fixed q=5 prefix without generating deeper states; measure
-proof-DAG relevance, duplicate mex information, exact xor cancellations, actual `02` frontier
-records, local defect motifs, and the maximum possible class-reduction headroom of each proposed
-typed coordinate. Emit the `notes/2026-07-17-c294-b3-relevance-ledger.*` evidence bundle with an
+proof-DAG relevance, duplicate mex information, exact xor cancellations, bottom-up terminal parity,
+actual `02` frontier records, local defect motifs, and the maximum possible class-reduction headroom
+of each proposed typed coordinate. Emit the `notes/2026-07-17-c294-b3-relevance-ledger.*` evidence bundle with an
 independent replay. Do not implement `E2` unless one candidate has headroom for 850 genuinely new
 removals. The adaptive automaton, transfer, value solver, separator-cap increase, all-seven value
 run, Lean work, and cross-lane edits are not part of `E1`.

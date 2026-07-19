@@ -199,7 +199,8 @@ This makes the `02` transfer direction eligible but does not establish interface
 dominate the preregistered Track-V order. The serial experiment queue is now recorded in
 `notes/2026-07-18-c294-relevance-ledgers-and-hybrid-mechanisms-brainstorm.md`. Its active next item
 `E1` measures the root-relevant request slice, square-frontier diversity, exact xor garbage
-collection, and the maximum possible typed-quotient headroom on the existing q=3/q=5 prefixes.
+collection, bottom-up terminal parity on the downward-closed completed states, and the maximum
+possible typed-quotient headroom on the existing q=3/q=5 prefixes.
 Only a candidate with headroom for 850 genuinely new removals advances to the transition-closed
 typed quotient `E2`; otherwise `R` closes at preflight and the queue routes to the adaptive debt
 automaton `E3`. The generic state cap and all-seven value run remain closed.
