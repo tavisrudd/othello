@@ -4,22 +4,23 @@
 
 **Date:** 2026-07-19
 
-**Verdict:** `PUBLICATION-READY SECTION; ARCHITECTURAL NOVELTY; C361 OPTIONAL UPGRADE`
+**Verdict:** `PUBLICATION-READY SECTION; STANDARD ENUMERATOR REDUCTION; NOVELTY IN INFINITY COMPLEX`
 
 ## Signed decision
 
-C348 has clear publication value as a theorem section in the combined C329/C330/C336/C337 paper.
-Its defensible headline is not a new general deep-hole/MDS dictionary and not a parameter-free
-coset-leader enumerator.  It is the following architecture-specific synthesis:
+C348 has clear publication value as a theorem section in the combined C329/C330/C336/C337 paper,
+but a post-extraction matroid audit corrects its attribution boundary.  The scalar-extension formula
+is a rank-three specialization of Jurrius--Pellikaan's derived-arrangement theorem, not a new general
+enumerator reduction.  The defensible architecture-specific synthesis is:
 
-> The four-layer non-GRS MDS family has a scalar-extension coset-leader enumerator controlled by
-> one intrinsic base-field deep-hole count, and its exact uncovered infinity locus supports a
-> completely classified rank-two complex of one- and two-column non-GRS MDS extensions.  The base
-> count has genuine moduli dependence in the surrounding normalized architecture.
+> In the four-layer non-GRS MDS family, the standard derived-arrangement enumerator specializes to
+> one recoverable base-field deep-hole invariant; that invariant decomposes into an additive-orbit
+> term and an explicit infinity term, and the complete infinity locus supports a classified
+> rank-two complex of one- and two-column non-GRS MDS extensions.
 
 This is strong enough for a substantial final paper section without C361.  C361 can upgrade the
 section to a paper headline only by evaluating or intrinsically stratifying the remaining affine
-quotient; it is not a prerequisite for publishing the theorem below.
+quotient; it is not a prerequisite for publishing the results below.
 
 ## Paper-ready setup
 
@@ -45,7 +46,12 @@ For a scalar extension `K/E` of degree `m`, put `T=|K|=q^m`.  Let `alpha_i(T)` b
 cosets of the scalar-extended code whose minimum Hamming weight is `i`, and for `i>0` put
 `a_i(T)=alpha_i(T)/(T-1)`.
 
-## Theorem A: the complete scalar-extension enumerator
+## Proposition A: derived-arrangement specialization
+
+This proposition is the rank-three arc specialization of Jurrius--Pellikaan's general
+[derived-arrangement formula](https://doi.org/10.1090/conm/632/12631), especially Theorem 5.3 and
+Examples 5.10--5.11.  It is included with a self-contained proof as an interface to the
+family-specific geometry below, not claimed as new enumerator theory.
 
 For every `m>=1`, the complete coset-leader weight enumerator is
 
@@ -67,17 +73,27 @@ alpha_3(q)=(q-1)h(A).
 
 ### Proof
 
-Projective syndromes of minimum weights one, two, and three are respectively the columns of the
-parity-check matrix, the points on an `A`-secant but outside `A`, and the remaining projective
-points.  Since `A` is an arc, any three columns form a basis, so weight three is the maximum.
+Let `S_A` be the central arrangement in `E^3` of the `B` planes spanned by pairs of columns of the
+parity-check matrix.  Projectively, these are the secant lines of `A`; because `A` is an arc, they
+are distinct and the arrangement is essential.  A syndrome has leader weight three exactly when
+it avoids every member of `S_A`.  The finite-field characteristic-polynomial identity, equivalently
+Jurrius--Pellikaan's Theorem 5.3 for the derived code, therefore gives
 
-At the base field the weight-two projective syndromes number
-`q^2+q+1-n-h(A)`.  Over `K`, each of the `B` base-field secants contributes exactly `T-q` new
-projective points.  A non-`E`-rational point cannot lie on two distinct `E`-rational lines, because
-their intersection is `E`-rational.  Hence these new contributions are disjoint, giving `a_2(T)`.
-Subtracting `a_1(T)` and `a_2(T)` from `|PG(2,K)|=T^2+T+1` gives `a_3(T)`.  Multiplication by
-`T-1` restores the nonzero scalar syndromes.  The displayed terms sum to `T^3`, the total number
-of syndromes.  `square`
+```text
+alpha_3(T)=chi_{S_A}(T).
+```
+
+A central rank-three arrangement with `B` hyperplanes has
+
+```text
+chi_{S_A}(T)=(T-1)(T^2+(1-B)T+C).
+```
+
+At the base field its projective complement has `h(A)` points, so
+`chi_{S_A}(q)=(q-1)h(A)` and hence `C=Bq-q^2-q+h(A)`.  This gives `a_3(T)`.
+The columns give `a_1(T)=n`; subtracting `a_1(T)` and `a_3(T)` from
+`|PG(2,K)|=T^2+T+1` gives `a_2(T)`.  Any three columns form a basis, so no larger leader weight
+occurs.  Multiplication by `T-1` restores nonzero scalar syndromes.  `square`
 
 ## Proposition B: intrinsic additive quotient and moduli boundary
 
@@ -172,22 +188,24 @@ bound is simultaneous rather than a count obtained by independently reusing sing
 
 ## Submission-ready positioning paragraph
 
-The general correspondence between deep holes and MDS extensions is known, as is preservation of
-non-GRS status under the relevant shortening operation.  Our contribution is therefore not that
-dictionary.  For the explicit additive four-layer non-GRS family constructed here, we identify the
-entire infinity deep-hole locus from seven rational direction maps, prove that its simultaneous
-extension complex is the full rank-two complex and no larger, and reduce every scalar-extension
-coset-leader enumerator to one intrinsic base-field count.  The residual affine count descends to
-an `F^+`-orbit quotient and varies across the normalized parameter space, so the result records
-rather than hides the family's moduli.  This source-level comparison does not assert exhaustive
-MathSciNet or zbMATH priority closure.
+The derived-arrangement formula for extended coset-leader enumerators is known; specializing it to
+a rank-three arc expresses all scalar-extension coefficients through the base complement count
+`h(A)`.  The general deep-hole/MDS-extension dictionary and preservation of non-GRS status under
+shortening are known as well.  Our contribution is the family-specific geometry: for this explicit
+additive four-layer non-GRS family, `h(A)` splits into a recoverable `F^+`-orbit term and an exact
+infinity term; seven rational direction maps determine the entire infinity locus; and its
+simultaneous extension complex is the full rank-two complex and no larger.  The residual affine
+count varies across the normalized parameter space, so the result records rather than hides the
+family's moduli.  This source-level comparison does not assert exhaustive MathSciNet or zbMATH
+priority closure.
 
-The first two sentences delimit the overlap with Wu--Ding--Chen's general extension criterion and
-Li--Lu--Ling--Lam's shortening framework.  Blokhuis--Pellikaan--Szonyi's twisted-cubic enumerator
-should be cited as the closest enumerator model, followed immediately by the boundary: its
-irreducible simple-morphism double-point argument does not apply to the selected reducible
-three-conic carrier.  Kaipa and the recent twisted/extended-GRS deep-hole papers belong in the
-related-work paragraph, not in the novelty sentence.
+The first sentence must cite Jurrius--Pellikaan, Theorem 5.3 and Examples 5.10--5.11; their derived
+secant arrangement, not the original uniform column matroid `U_{3,n}`, controls the coset-leader
+enumerator.  The next sentence delimits the overlap with Wu--Ding--Chen's general extension criterion
+and Li--Lu--Ling--Lam's shortening framework.  Blokhuis--Pellikaan--Szonyi's twisted-cubic result is
+the closest explicit enumerator model, but its irreducible simple-morphism double-point argument
+does not apply to the selected reducible three-conic carrier.  Kaipa and the recent
+twisted/extended-GRS deep-hole papers belong in related work, not in the novelty sentence.
 
 ## Recommended paper integration
 
@@ -197,7 +215,7 @@ related-work paragraph, not in the novelty sentence.
 | evaluation-code section | C336 | gives the exact five-code tower, locality, and extremal curves |
 | intrinsic recognition section | C337 | recovers the layers and `[rho;{a,b}]`, and certifies non-GRS status |
 | transition to extensions | C330 | reframes the infinity-direction obstruction as an explicit deep-hole carrier |
-| final main-results section | C362 Theorems A and C | states the enumerator reduction and simultaneous extension complex |
+| final main-results section | C362 Proposition A and Theorem C | cites the standard enumerator specialization and states the new simultaneous extension complex |
 | computational/limitations appendix | C348 certificate | proves architectural moduli dependence and records the large-field boundary |
 
 Suggested section title:
@@ -217,10 +235,10 @@ should call Theorem C an exact extension-complex theorem, not a count of inequiv
 ## C361 upgrade slot
 
 C361 may replace the symbol `M(A)` by a closed formula or finite intrinsic stratification in
-`[rho;{a,b}]`.  If it succeeds, update Theorem A from a one-invariant reduction to an explicit
+`[rho;{a,b}]`.  If it succeeds, update Proposition A from a one-invariant reduction to an explicit
 enumerator theorem, replace the bounded moduli proposition by the large-field statement actually
 proved there, and add any exact affine extension faces it certifies.  If it stops negatively,
-nothing in Theorems A or C changes; retain the current section and report C361 only as the sharp
+nothing in Proposition A or Theorem C changes; retain the current section and report C361 only as the sharp
 boundary of explicit evaluation.
 
 ## Evidence inheritance and trusted boundary
@@ -244,9 +262,10 @@ and non-GRS certificate remain separate proved inputs; this extraction changes n
 
 This is a strong paper section and a credible coding-theoretic payoff for the combined construction.
 It is probably too narrow for a high-impact standalone paper without C361 or another theorem that
-classifies the affine quotient.  The safe novelty claim is the exact deep-hole reduction and
-rank-two simultaneous infinity extension complex for this recoverable additive four-layer non-GRS
-family.  Search absence is not used as proof of global priority.
+classifies the affine quotient.  Proposition A is standard derived-arrangement machinery.  The safe
+novelty claim is the explicit additive/infinity decomposition and exact rank-two simultaneous
+infinity extension complex for this recoverable four-layer non-GRS family.  Search absence is not
+used as proof of global priority.
 
 ## Vibe check
 

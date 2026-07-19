@@ -16,6 +16,12 @@ part to an exact orbit count.  C330 completely determines the infinity part and 
 extension theorem: every one- or two-element subset of the uncovered infinity directions extends
 the C329 non-GRS MDS code, while no three-element subset does.
 
+**Novelty correction (2026-07-19):** the reduction of the scalar-extension enumerator to the
+base-field complement count is a rank-three specialization of Jurrius--Pellikaan's general
+derived-arrangement formula, not new enumerator theory.  The family-specific content begins with
+the `F^+` decomposition, exact seven-map infinity locus, moduli behavior, and simultaneous
+non-GRS extension complex.
+
 A complete `Q=8` normalized-parameter scan finds no arc.  A deterministic `Q=32` search finds three
 genuine four-layer arcs and exhaustively classifies all `1,049,601` projective syndromes of each.
 Their deep-hole counts are respectively `936`, `965`, and `900`, with affine contributions `128`,
@@ -219,7 +225,8 @@ made.
 
 | source | exact overlap and boundary | C348 verdict |
 |---|---|---|
-| Blokhuis--Pellikaan--Szonyi, [*The extended coset leader weight enumerator of a twisted cubic code*](https://doi.org/10.1007/s10623-022-01060-0), arXiv:2103.16904v2, cached SHA-256 `b406b217...a8297` | Defines the extended enumerator and computes it for the codimension-four twisted-cubic GRS code using line orbits and double-point schemes. Its irreducible simple-morphism argument does not apply to C329's reducible selected carrier. | `SURVIVES` for the planar reduction and C329 extension family; `STOP` for importing the double-point theorem. |
+| Jurrius--Pellikaan, [*The coset leader and list weight enumerator*](https://doi.org/10.1090/conm/632/12631), Theorem 5.3 and Examples 5.10--5.11 | Expresses extended coset-leader coefficients through characteristic polynomials of the derived hyperplane arrangement; for `[n,n-3,4]` arc codes, the derived arrangement is the secant arrangement and Example 5.11 uses the same unique non-base-field secant contribution.  The original uniform column matroid does not determine the coset-leader enumerator. | `STOP` for novelty of the scalar-extension reduction; `SURVIVES` for the explicit `F^+`/infinity decomposition, moduli behavior, and simultaneous extension complex. |
+| Blokhuis--Pellikaan--Szonyi, [*The extended coset leader weight enumerator of a twisted cubic code*](https://doi.org/10.1007/s10623-022-01060-0), arXiv:2103.16904v2, cached SHA-256 `b406b217...a8297` | Defines the extended enumerator and computes it for the codimension-four twisted-cubic GRS code using line orbits and double-point schemes. Its irreducible simple-morphism argument does not apply to C329's reducible selected carrier. | `CONTEXT` as the closest explicit enumerator model; `STOP` for importing the double-point theorem. |
 | Wu--Ding--Chen, [*Extended codes and deep holes of MDS codes*](https://arxiv.org/abs/2312.05534), arXiv v1, cached SHA-256 `9fe68786...f76000` | Theorem 6 proves the general second-kind extension is MDS exactly for a dual deep hole when the covering radius is maximal. | `STOP` for novelty of the dictionary; `SURVIVES` for the explicit infinity locus and simultaneous complex. |
 | Li--Lu--Ling--Lam, [*A framework for constructing non-GRS MDS-NMDS codes from deep holes and its application*](https://arxiv.org/abs/2605.12133), arXiv v1, cached SHA-256 `8f854dcb...0fa7d` | Theorem 7 preserves MDS/NMDS and non-GRS status under a deep-hole extension by shortening. Its applications are extended subcodes of GRS codes, not the C329 orbit-union family, and it does not classify simultaneous projective extensions. | `SURVIVES`, narrowly, as an explicit input family to the framework. |
 | Kaipa, [*Deep holes and MDS extensions of Reed--Solomon codes*](https://arxiv.org/abs/1612.05447), cached SHA-256 `1fe8de83...178a4` | Classifies redundancy-three RS deep holes in stated dimension ranges and records the even-characteristic nucleus exception. C329 is non-GRS, has length `4Q` over alphabet `Q^2`, and lies outside the large-dimension RS range. | `SURVIVES`; no RS classification is generalized. |
@@ -229,8 +236,9 @@ made.
 The 2022 journal page reports forward citations, but the located 2023--2026 papers concern twisted-
 cubic incidence, twisted/extended GRS codes, or the general deep-hole extension dictionary.  None
 supplies the missing affine count for a selected reducible three-conic carrier.  Search absence is
-not used as proof of novelty; the defensible claim is the proved conditional enumerator formula and
-the explicit infinity extension family.
+not used as proof of novelty.  The conditional enumerator formula is a standard derived-arrangement
+specialization; the defensible family-specific claims are its intrinsic additive/infinity
+decomposition, bounded moduli dependence, and the explicit simultaneous infinity extension family.
 
 ## Exact boundary and next research implication
 
