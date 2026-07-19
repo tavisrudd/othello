@@ -1,0 +1,449 @@
+{
+  "bonferroni_order": 5,
+  "cases": [
+    {
+      "deleted_base_points": 65,
+      "finite_branch_points": 64,
+      "legality_degree": 16,
+      "lower_bound": "(Q+1-395983*sqrt(Q))/240-1042",
+      "max_quotient_degree": 1200,
+      "new_margin_after_squaring": 216028073981689620406849,
+      "new_odd_tower_exponent": 39,
+      "normalized_constant": 250080,
+      "normalized_sqrt_coefficient": 395983,
+      "old_odd_tower_exponent": 41,
+      "positive_even_degree_sum": 255,
+      "previous_margin_after_squaring": -2661379298966432832959,
+      "previous_odd_exponent_checked": 37,
+      "projected_boundary_constant": 1042,
+      "quotient_rows": [
+        {
+          "a": 0,
+          "b": 1,
+          "degree": 5,
+          "finite_different": 64,
+          "fixed_by_first_transposition": 5,
+          "fixed_by_second_transposition": 3,
+          "genus_upper": 31,
+          "moment_denominator": 1
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "degree": 20,
+          "finite_different": 448,
+          "fixed_by_first_transposition": 20,
+          "fixed_by_second_transposition": 6,
+          "genus_upper": 218,
+          "moment_denominator": 2
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "degree": 60,
+          "finite_different": 1728,
+          "fixed_by_first_transposition": 60,
+          "fixed_by_second_transposition": 6,
+          "genus_upper": 845,
+          "moment_denominator": 6
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "degree": 120,
+          "finite_different": 3840,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 0,
+          "genus_upper": 1881,
+          "moment_denominator": 24
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "degree": 120,
+          "finite_different": 3840,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 0,
+          "genus_upper": 1881,
+          "moment_denominator": 120
+        },
+        {
+          "a": 1,
+          "b": 0,
+          "degree": 5,
+          "finite_different": 64,
+          "fixed_by_first_transposition": 3,
+          "fixed_by_second_transposition": 5,
+          "genus_upper": 31,
+          "moment_denominator": 1
+        },
+        {
+          "a": 1,
+          "b": 1,
+          "degree": 25,
+          "finite_different": 640,
+          "fixed_by_first_transposition": 15,
+          "fixed_by_second_transposition": 15,
+          "genus_upper": 312,
+          "moment_denominator": 1
+        },
+        {
+          "a": 1,
+          "b": 2,
+          "degree": 100,
+          "finite_different": 3520,
+          "fixed_by_first_transposition": 60,
+          "fixed_by_second_transposition": 30,
+          "genus_upper": 1727,
+          "moment_denominator": 2
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "degree": 300,
+          "finite_different": 12480,
+          "fixed_by_first_transposition": 180,
+          "fixed_by_second_transposition": 30,
+          "genus_upper": 6141,
+          "moment_denominator": 6
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "degree": 600,
+          "finite_different": 26880,
+          "fixed_by_first_transposition": 360,
+          "fixed_by_second_transposition": 0,
+          "genus_upper": 13241,
+          "moment_denominator": 24
+        },
+        {
+          "a": 2,
+          "b": 0,
+          "degree": 20,
+          "finite_different": 448,
+          "fixed_by_first_transposition": 6,
+          "fixed_by_second_transposition": 20,
+          "genus_upper": 218,
+          "moment_denominator": 2
+        },
+        {
+          "a": 2,
+          "b": 1,
+          "degree": 100,
+          "finite_different": 3520,
+          "fixed_by_first_transposition": 30,
+          "fixed_by_second_transposition": 60,
+          "genus_upper": 1727,
+          "moment_denominator": 2
+        },
+        {
+          "a": 2,
+          "b": 2,
+          "degree": 400,
+          "finite_different": 17920,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 8827,
+          "moment_denominator": 4
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "degree": 1200,
+          "finite_different": 61440,
+          "fixed_by_first_transposition": 360,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 30321,
+          "moment_denominator": 12
+        },
+        {
+          "a": 3,
+          "b": 0,
+          "degree": 60,
+          "finite_different": 1728,
+          "fixed_by_first_transposition": 6,
+          "fixed_by_second_transposition": 60,
+          "genus_upper": 845,
+          "moment_denominator": 6
+        },
+        {
+          "a": 3,
+          "b": 1,
+          "degree": 300,
+          "finite_different": 12480,
+          "fixed_by_first_transposition": 30,
+          "fixed_by_second_transposition": 180,
+          "genus_upper": 6141,
+          "moment_denominator": 6
+        },
+        {
+          "a": 3,
+          "b": 2,
+          "degree": 1200,
+          "finite_different": 61440,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 360,
+          "genus_upper": 30321,
+          "moment_denominator": 12
+        },
+        {
+          "a": 4,
+          "b": 0,
+          "degree": 120,
+          "finite_different": 3840,
+          "fixed_by_first_transposition": 0,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 1881,
+          "moment_denominator": 24
+        },
+        {
+          "a": 4,
+          "b": 1,
+          "degree": 600,
+          "finite_different": 26880,
+          "fixed_by_first_transposition": 0,
+          "fixed_by_second_transposition": 360,
+          "genus_upper": 13241,
+          "moment_denominator": 24
+        },
+        {
+          "a": 5,
+          "b": 0,
+          "degree": 120,
+          "finite_different": 3840,
+          "fixed_by_first_transposition": 0,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 1881,
+          "moment_denominator": 120
+        }
+      ],
+      "weighted_genus_upper": "395983/30"
+    },
+    {
+      "deleted_base_points": 257,
+      "finite_branch_points": 256,
+      "legality_degree": 64,
+      "lower_bound": "(Q+1-1602703*sqrt(Q))/960-1030",
+      "max_quotient_degree": 1200,
+      "new_margin_after_squaring": 54777089971049902362071809,
+      "new_odd_tower_exponent": 43,
+      "normalized_constant": 988800,
+      "normalized_sqrt_coefficient": 1602703,
+      "old_odd_tower_exponent": 45,
+      "positive_even_degree_sum": 255,
+      "previous_margin_after_squaring": -812837342612341213359359,
+      "previous_odd_exponent_checked": 41,
+      "projected_boundary_constant": 1030,
+      "quotient_rows": [
+        {
+          "a": 0,
+          "b": 1,
+          "degree": 5,
+          "finite_different": 256,
+          "fixed_by_first_transposition": 5,
+          "fixed_by_second_transposition": 3,
+          "genus_upper": 127,
+          "moment_denominator": 1
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "degree": 20,
+          "finite_different": 1792,
+          "fixed_by_first_transposition": 20,
+          "fixed_by_second_transposition": 6,
+          "genus_upper": 890,
+          "moment_denominator": 2
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "degree": 60,
+          "finite_different": 6912,
+          "fixed_by_first_transposition": 60,
+          "fixed_by_second_transposition": 6,
+          "genus_upper": 3437,
+          "moment_denominator": 6
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "degree": 120,
+          "finite_different": 15360,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 0,
+          "genus_upper": 7641,
+          "moment_denominator": 24
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "degree": 120,
+          "finite_different": 15360,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 0,
+          "genus_upper": 7641,
+          "moment_denominator": 120
+        },
+        {
+          "a": 1,
+          "b": 0,
+          "degree": 5,
+          "finite_different": 256,
+          "fixed_by_first_transposition": 3,
+          "fixed_by_second_transposition": 5,
+          "genus_upper": 127,
+          "moment_denominator": 1
+        },
+        {
+          "a": 1,
+          "b": 1,
+          "degree": 25,
+          "finite_different": 2560,
+          "fixed_by_first_transposition": 15,
+          "fixed_by_second_transposition": 15,
+          "genus_upper": 1272,
+          "moment_denominator": 1
+        },
+        {
+          "a": 1,
+          "b": 2,
+          "degree": 100,
+          "finite_different": 14080,
+          "fixed_by_first_transposition": 60,
+          "fixed_by_second_transposition": 30,
+          "genus_upper": 7007,
+          "moment_denominator": 2
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "degree": 300,
+          "finite_different": 49920,
+          "fixed_by_first_transposition": 180,
+          "fixed_by_second_transposition": 30,
+          "genus_upper": 24861,
+          "moment_denominator": 6
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "degree": 600,
+          "finite_different": 107520,
+          "fixed_by_first_transposition": 360,
+          "fixed_by_second_transposition": 0,
+          "genus_upper": 53561,
+          "moment_denominator": 24
+        },
+        {
+          "a": 2,
+          "b": 0,
+          "degree": 20,
+          "finite_different": 1792,
+          "fixed_by_first_transposition": 6,
+          "fixed_by_second_transposition": 20,
+          "genus_upper": 890,
+          "moment_denominator": 2
+        },
+        {
+          "a": 2,
+          "b": 1,
+          "degree": 100,
+          "finite_different": 14080,
+          "fixed_by_first_transposition": 30,
+          "fixed_by_second_transposition": 60,
+          "genus_upper": 7007,
+          "moment_denominator": 2
+        },
+        {
+          "a": 2,
+          "b": 2,
+          "degree": 400,
+          "finite_different": 71680,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 35707,
+          "moment_denominator": 4
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "degree": 1200,
+          "finite_different": 245760,
+          "fixed_by_first_transposition": 360,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 122481,
+          "moment_denominator": 12
+        },
+        {
+          "a": 3,
+          "b": 0,
+          "degree": 60,
+          "finite_different": 6912,
+          "fixed_by_first_transposition": 6,
+          "fixed_by_second_transposition": 60,
+          "genus_upper": 3437,
+          "moment_denominator": 6
+        },
+        {
+          "a": 3,
+          "b": 1,
+          "degree": 300,
+          "finite_different": 49920,
+          "fixed_by_first_transposition": 30,
+          "fixed_by_second_transposition": 180,
+          "genus_upper": 24861,
+          "moment_denominator": 6
+        },
+        {
+          "a": 3,
+          "b": 2,
+          "degree": 1200,
+          "finite_different": 245760,
+          "fixed_by_first_transposition": 120,
+          "fixed_by_second_transposition": 360,
+          "genus_upper": 122481,
+          "moment_denominator": 12
+        },
+        {
+          "a": 4,
+          "b": 0,
+          "degree": 120,
+          "finite_different": 15360,
+          "fixed_by_first_transposition": 0,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 7641,
+          "moment_denominator": 24
+        },
+        {
+          "a": 4,
+          "b": 1,
+          "degree": 600,
+          "finite_different": 107520,
+          "fixed_by_first_transposition": 0,
+          "fixed_by_second_transposition": 360,
+          "genus_upper": 53561,
+          "moment_denominator": 24
+        },
+        {
+          "a": 5,
+          "b": 0,
+          "degree": 120,
+          "finite_different": 15360,
+          "fixed_by_first_transposition": 0,
+          "fixed_by_second_transposition": 120,
+          "genus_upper": 7641,
+          "moment_denominator": 120
+        }
+      ],
+      "weighted_genus_upper": "1602703/30"
+    }
+  ],
+  "permutation_replay": {
+    "bonferroni_density": "1/15",
+    "exact_derangement_density": "121/900",
+    "group_population": 14400
+  },
+  "schema": "c347-ordered-root-bonferroni-v1"
+}

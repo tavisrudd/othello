@@ -323,6 +323,13 @@ only if the novelty audit leaves a defensible edge-colouring or applied result.
 
 ## C347: compress the C327/C329 cover and field threshold
 
+**Status.** Complete with verdict `THEOREM; 2^41 -> 2^39 AND 2^45 -> 2^43`.  Fifth-order
+Bonferroni on twenty absolutely irreducible ordered-root quotients of maximum degree `1200`
+replaces full-closure Chebotarev and yields exact direct-Hasse--Weil bounds.  The proposed
+Korchmaros--Nagy--Szonyi transfer fails at the full-rational-locus, irreducibility, and `n=2`
+hypotheses.  See `notes/2026-07-18-c347-c329-low-genus-threshold.md` and its adjacent certificate
+bundle.
+
 **Dependency.** Begin only after C345 identifies a consistent surviving theorem and the precise
 external genericity boundary. This task changes the quantitative threshold, not the C345 verdict.
 
