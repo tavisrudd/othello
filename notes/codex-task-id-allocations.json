@@ -35,8 +35,17 @@
       "last": 363,
       "purpose": "Backward/forward citation audit gating alt-orbit-repair priority language",
       "sequence": 4
+    },
+    {
+      "count": 1,
+      "first": 364,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 364,
+      "purpose": "intrinsic complete coset-leader decoder salvaged from C361",
+      "sequence": 5
     }
   ],
-  "next_id": 364,
+  "next_id": 365,
   "schema": "codex-task-id-allocations-v1"
 }
