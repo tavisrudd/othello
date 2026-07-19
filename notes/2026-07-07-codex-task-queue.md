@@ -67,7 +67,6 @@ unless they retain an explicit open tail.
 
 ### `crowns`
 
-- **C337 `[crowns]` [QUEUED; EV2, C345 then C336-compatible]** — recognize and recover the C314/C329 layered non-GRS MDS family from an unlabelled generator matrix in expected linear time, decide its projective/semilinear equivalence, and formulate the four-additive-orbit extension beyond cyclic/Krylov MDS codes → `notes/2026-07-18-c336-c348-arc-code-crowns-portfolio.md`.
 - **C338 `[crowns]` [READY; EV3, bounded exact package]** — complete C300's nonsingular and degenerate conic distribution, derive the `[24,6,14]_64` quadratic-code weight enumerator, and classify the 171 two-direction completions as complete 26-arcs and non-GRS quasi-perfect MDS codes after a `PG(2,64)` literature/database audit → `notes/2026-07-18-c336-c348-arc-code-crowns-portfolio.md`.
 - **C339 `[crowns]` [QUEUED; EV4, Clebsch-owner and novelty gates]** — prove the exact `[(q-5)(q-9),3,(q-6)(q-9)]_q` `H3` complement-code spectrum and parent-code inverse theorem, plus the q=11 deep-hole MDS-extension complex, explicitly bounded by Kaipa and the 2023--2026 deep-hole literature; Clebsch sources remain read-only → `notes/2026-07-18-c336-c348-arc-code-crowns-portfolio.md`.
 - **C346 `[crowns]` [READY; EV5, small Grobner and arithmetic gate]** — classify good and bad prime-ideal reductions of the `H3`/Clebsch configuration over `Z[tau]`, separating split-field rationality, intersection-lattice preservation, and the projective `A5` action, with q=11 certified and q=5 explained → `notes/2026-07-18-c336-c348-arc-code-crowns-portfolio.md`.
@@ -127,7 +126,6 @@ unless they retain an explicit open tail.
 
 ### `relconic`
 
-- **C349 `[relconic]` [QUEUED; PRE-PUBLICATION NOVELTY GATE]** — before releasing *Arcs complete outside a prescribed conic*, add Korchmaros--Nagy--Szonyi as prior art for an exactly localized uncovered locus, preserve the novelty boundary around the prescribed-hole defect identity and conic specialization, and audit downstream C329/C330 code language so that incomplete-arc, extendibility, and subgeometry-localized deep-hole claims match C345 → `notes/2026-07-18-c349-arcs-prepublication-novelty-closure.md`.
 
 ### `rp-next`
 
