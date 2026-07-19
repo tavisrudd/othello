@@ -112,10 +112,6 @@ unless they retain an explicit open tail.
 - **C269 `[nofil]` [QUEUED]** — full-manuscript pass to the arcs/clebsch release bar: complete LaTeX+PDF, adversarial review, repeated cold-prose review → `notes/2026-07-17-c269-nofil-latex-adversarial-review.md`.
 - **C270 `[nofil]` [QUEUED]** — public mirror / first extraction ("do this first", `papers/papers-planning.md`): tagged public `FiniteGeom` base repo pinned by commit + the Lean-complete mirror outcomes, unblocking this paper's public-artifact citation (per the *Arcs vs Nofil* ruling), OEIS `%H` links, and arXiv posting → `notes/2026-07-17-c270-finitegeom-public-extraction.md`.
 
-### `relconic`
-
-- **C209 `[relconic]` [GATED; C201 NEGATIVE]** — polarity dual and structural rank/defect stability theorem remains dormant because C201 found no stable cross-cell feature → `notes/2026-07-16-c209-conic-rank-stability.md`.
-
 ### `rp-next`
 
 - No open tasks.

@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-16
 **Lane:** `relconic`
-**Status:** DORMANT, C201 gate not met
+**Status:** CLOSED NEGATIVE, 2026-07-18 — C201 entry gate not met
 
 ## Target
 
@@ -33,9 +33,15 @@ rank-failure with a simpler dual interpretation.  Do not start C209 from the
 repeated split-`Z3` local optimum alone; it is heuristic coverage data, not the
 required inverse-theorem evidence.
 
+## Closure
+
+C209 is closed without activation.  C201 produced neither of the two forms of
+entry evidence required above, so there is no supported inverse/stability
+theorem program to execute.  This is a bounded gate failure, not evidence that
+no polarity-dual or rank/defect stability theorem exists.
+
 ## Trust and disposition
 
-Formalize every new symbolic implication in Lean.  If a concise inverse or
-stability theorem results, integrate it into the current paper between the
-defect/stability section and the finite examples.  Otherwise retain it as a
-follow-on note.
+No new symbolic implication was asserted, so no Lean formalization or paper
+integration is required.  Any future revival needs new evidence satisfying the
+entry gate and a newly allocated task.
