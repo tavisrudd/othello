@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-19
 **Lane:** `crowns`
-**Status:** C353--C359 allocated with literature and cheap-test gates
+**Status:** C353--C360 allocated with literature and cheap-test gates
 
 ## Purpose
 
@@ -97,7 +97,21 @@ gain. Isolated targets or a bare census stop; exit with an infinite family or ob
 
 **Owned stem.** `notes/2026-07-18-c359-higher-secant-mds-service.*`
 
+## C360: symbolic basis sensitivity
+
+**Goal.** Turn C354's exact q=5 `EEE` separation into an infinite same-type, same-axis,
+different-full-SRR theorem, or a closed two-target theorem with an unbounded region-count lower
+bound.
+
+**Gates.** Close conic association-scheme/cross-ratio, product-of-involutions, coloured fractional-
+matching, parametric-LP, and generator-matrix-SRR literature. Before any larger classification,
+derive one symbolic rational allocation and one symbolic dual separating facet and replay both on
+C354's q=5,7,9,11 certificates. Stop on pair-only behavior, isolated fields, or another frame
+census.
+
+**Owned stem.** `notes/2026-07-19-c360-conic-mds-basis-sensitivity.*`
+
 ## Order and ownership
 
-Order: C354, C353, C355, C356, C357, C358, C359; an active C353 may go first. C333, C298, other
+Order: C360, C353, C355, C356, C357, C358, C359. C333, C298, other
 source lanes, and the literature cache are read-only inputs. C294 remains paused.
