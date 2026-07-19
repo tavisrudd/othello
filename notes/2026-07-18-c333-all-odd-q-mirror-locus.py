@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 STEM = "2026-07-18-c333-all-odd-q-mirror-locus"
-SCHEMA = "c333-mirror-locus-v1"
+SCHEMA = "c333-mirror-locus-v2"
 
 
 class FiniteField:
@@ -106,11 +106,31 @@ class FiniteField:
         assert result == self.constant(-1)
         return -1
 
-    def full_degree(self, value: int) -> bool:
-        for divisor in range(1, self.degree):
-            if self.degree % divisor == 0 and self.pow(value, self.p**divisor) == value:
-                return False
-        return True
+def odd_prime_divisors(value: int) -> tuple[int, ...]:
+    divisors = []
+    candidate = 3
+    while candidate * candidate <= value:
+        if value % candidate == 0:
+            divisors.append(candidate)
+            while value % candidate == 0:
+                value //= candidate
+        candidate += 2
+    if value > 1 and value % 2:
+        divisors.append(value)
+    return tuple(divisors)
+
+
+def passes_subfield_test(field: FiniteField, delta: int, b: int) -> bool:
+    """Exclude exactly the possible odd-index maximal-subfield overgroups."""
+    delta_trace = field.mul(field.sub(field.constant(2), delta),
+                            field.sub(field.constant(2), delta))
+    for index in odd_prime_divisors(field.degree):
+        subfield_size = field.p ** (field.degree // index)
+        b_inside = field.pow(b, subfield_size) == b
+        delta_trace_inside = field.pow(delta_trace, subfield_size) == delta_trace
+        if b_inside and delta_trace_inside:
+            return False
+    return True
 
 
 Matrix = tuple[int, int, int, int]
@@ -207,7 +227,7 @@ def group_order(field: FiniteField, generators: list[Matrix]) -> int:
 def admissible(field: FiniteField, delta: int, b: int) -> bool:
     one = field.constant(1)
     four = field.constant(4)
-    if not field.full_degree(b):
+    if not passes_subfield_test(field, delta, b):
         return False
     if b in (0, one, field.inverse(delta)):
         return False
@@ -276,13 +296,18 @@ def verify_parameter(field: FiniteField, delta: int, b: int, enumerate_group: bo
                              field.mul(four, determinant(field, unipotent)))
     assert discriminant == 0
     assert mat_normalize(field, unipotent) != (one, 0, 0, one)
-    invariant = field.div(
+    b_invariant = field.div(
         field.mul(trace(field, mat_mul(field, generators[2], generators[0])),
                   trace(field, mat_mul(field, generators[2], generators[0]))),
         determinant(field, mat_mul(field, generators[2], generators[0])),
     )
-    assert invariant == field.inverse(field.sub(one, b))
-    assert field.full_degree(invariant)
+    assert b_invariant == field.inverse(field.sub(one, b))
+    delta_product = mat_mul(field, generators[1], generators[0])
+    delta_invariant = field.div(field.mul(trace(field, delta_product), trace(field, delta_product)),
+                                determinant(field, delta_product))
+    assert delta_invariant == field.mul(field.sub(field.constant(2), delta),
+                                        field.sub(field.constant(2), delta))
+    assert passes_subfield_test(field, delta, b)
 
     order = group_order(field, generators) if enumerate_group else None
     expected_order = field.q * (field.q * field.q - 1)
@@ -337,12 +362,12 @@ def check_field(p: int, degree: int) -> dict[str, object]:
 
 
 def payload() -> dict[str, object]:
-    cases = [check_field(p, degree) for p, degree in ((5, 1), (7, 1), (11, 1), (13, 1), (17, 1), (3, 2), (5, 2), (3, 3), (7, 2))]
+    cases = [check_field(p, degree) for p, degree in ((5, 1), (7, 1), (11, 1), (13, 1), (17, 1), (29, 1), (3, 2), (5, 2), (3, 3), (7, 2))]
     return {
         "cases": cases,
         "conventions": {
             "centre_order": ["(0,1)", "(delta,0)", "(1,b)", "(delta*b,1/delta)"],
-            "full_degree": "F_p(b)=F_q",
+            "subfield_test": "for every odd prime r|e, b and (2-delta)^2 are not both in F_(p^(e/r))",
             "infinity_encoding": "q",
             "mirror": "tau(t)=delta/t",
             "unipotent_word_zero_based": [2, 0, 2, 0, 1, 0],

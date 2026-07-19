@@ -146,6 +146,37 @@
       }
     },
     {
+      "admissible_marked_parameter_count": 49,
+      "canonical_b_coefficients": [
+        4
+      ],
+      "canonical_delta_coefficients": [
+        3
+      ],
+      "delta_count": 7,
+      "distinct_normalized_centre_set_count": 49,
+      "extension_degree": 1,
+      "modulus_coefficients_low_to_high": [],
+      "p": 29,
+      "per_delta_count_histogram": {
+        "5": 1,
+        "6": 1,
+        "7": 2,
+        "8": 3
+      },
+      "q": 29,
+      "sample": {
+        "b_coefficients": [
+          4
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 8,
+        "generated_group_order": 24360,
+        "live_conic_vertices": 22,
+        "pgl2_order": 24360
+      }
+    },
+    {
       "admissible_marked_parameter_count": 4,
       "canonical_b_coefficients": [
         0,
@@ -303,9 +334,9 @@
       "(1,b)",
       "(delta*b,1/delta)"
     ],
-    "full_degree": "F_p(b)=F_q",
     "infinity_encoding": "q",
     "mirror": "tau(t)=delta/t",
+    "subfield_test": "for every odd prime r|e, b and (2-delta)^2 are not both in F_(p^(e/r))",
     "unipotent_word_zero_based": [
       2,
       0,
@@ -315,5 +346,5 @@
       0
     ]
   },
-  "schema": "c333-mirror-locus-v1"
+  "schema": "c333-mirror-locus-v2"
 }
