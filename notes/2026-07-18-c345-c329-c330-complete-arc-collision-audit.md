@@ -154,6 +154,37 @@ Use:
 Do not use “counterexample to Bastioni--Micheli,” “new phenomenon that curve-derived arc holes
 localize,” or “complete arc of size `4sqrt(q)`.”
 
+## Downstream manuscript and task impact
+
+Korchmaros--Nagy--Szonyi changes positioning but none of the proved arc, direction, code, or defect
+statements. Their Theorem 7.5 is prior art for an exact uncovered locus localized in a proper
+subplane: for the full rational point set of the irreducible rational BKS curve of degree `q+1`,
+over odd characteristic and in the stated extension range, the uncovered points are exactly the
+base-subplane points off the arc when the extension degree is odd. It does not supply the arbitrary
+prescribed-hole defect identity or its conic specialization, and it does not apply to C329's
+selected characteristic-two subset of a reducible three-conic pencil.
+
+The release consequences are therefore:
+
+- *Arcs complete outside a prescribed conic* keeps every theorem, bound, finite certificate,
+  title, and conic-relative conclusion. Its pre-publication literature pass must cite the BKS
+  theorem as neighboring localized-hole work and retain novelty only for the exact prescribed-hole
+  remainder, equality/stability theory, uncovered-evaluation obstruction, and certified conic
+  consequences.
+- C336 is unchanged: evaluation, extremal-word, locality, and availability statements require only
+  the arc property and carrier geometry, not completeness.
+- C337's recognition and non-GRS targets survive, but the degree-one MDS code is extendible because
+  the underlying arc is incomplete; no nonextendibility or quasi-perfect conclusion may be inferred
+  from C329.
+- C340 and C347 retain their carrier-direction and threshold targets, but cannot headline
+  localization of holes itself as new.
+- C348 retains exact coset-leader multiplicities and the MDS-extension interface as possible new
+  content, but must compare the code-theoretic implication of the BKS subplane locus and cannot
+  claim the first subgeometry-localized deep-hole family merely from C330.
+
+C349, pegged to `relconic`, owns this bounded pre-publication citation and wording closure. It
+reopens no theorem, computation, or Lean gate.
+
 ## Vibe check
 
 Decisive and healthy. The feared contradiction is absent for elementary hypothesis reasons, and

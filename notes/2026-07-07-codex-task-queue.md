@@ -125,6 +125,10 @@ unless they retain an explicit open tail.
 - **C269 `[nofil]` [QUEUED]** — full-manuscript pass to the arcs/clebsch release bar: complete LaTeX+PDF, adversarial review, repeated cold-prose review → `notes/2026-07-17-c269-nofil-latex-adversarial-review.md`.
 - **C270 `[nofil]` [QUEUED]** — public mirror / first extraction ("do this first", `papers/papers-planning.md`): tagged public `FiniteGeom` base repo pinned by commit + the Lean-complete mirror outcomes, unblocking this paper's public-artifact citation (per the *Arcs vs Nofil* ruling), OEIS `%H` links, and arXiv posting → `notes/2026-07-17-c270-finitegeom-public-extraction.md`.
 
+### `relconic`
+
+- **C349 `[relconic]` [QUEUED; PRE-PUBLICATION NOVELTY GATE]** — before releasing *Arcs complete outside a prescribed conic*, add Korchmaros--Nagy--Szonyi as prior art for an exactly localized uncovered locus, preserve the novelty boundary around the prescribed-hole defect identity and conic specialization, and audit downstream C329/C330 code language so that incomplete-arc, extendibility, and subgeometry-localized deep-hole claims match C345 → `notes/2026-07-18-c349-arcs-prepublication-novelty-closure.md`.
+
 ### `rp-next`
 
 - No open tasks.

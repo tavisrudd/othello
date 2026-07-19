@@ -207,3 +207,21 @@ exact \(q=16\) value; the paper proves that this route is too weak and uses
   obstruction, its `2630+3` profile, or the exact relative value. A targeted
   comparison found no predecessor, but it is not an exhaustive priority
   certificate; see `notes/2026-07-13-rhoc16-novelty-check.md`.
+
+## Pre-publication novelty TODO
+
+- **C349:** before release, add Korchmaros--Nagy--Szonyi, *Algebraic approach to the completeness
+  problem for `(k,n)`-arcs in planes over finite fields* (JCTA 204 (2024), 105851;
+  arXiv:2302.10162), to the introduction and bibliography. Their Theorem 7.5 gives an exact prior
+  example in which the uncovered points of a curve-derived arc are localized in the proper
+  subplane `PG(2,q)`. State this as neighboring prescribed-hole/localized-hole work, while
+  distinguishing the manuscript's exact arbitrary prescribed-hole defect identity,
+  equality/stability consequences, and conic specialization.
+- Recheck the primary paper, publication metadata, corrections, and forward citations during the
+  final novelty pass. Record the checked sources and released wording in
+  `notes/2026-07-18-c349-arcs-prepublication-novelty-closure.md`; do not infer priority from search
+  absence.
+- Propagate C345's boundary to dependent code prose: C329 is a structured incomplete `2`-arc;
+  C337 may claim recognition/non-GRS structure but not nonextendibility from completeness; and
+  C348 may claim exact syndrome multiplicities and extension structure, but not novelty of
+  subgeometry-localized deep holes by itself.
