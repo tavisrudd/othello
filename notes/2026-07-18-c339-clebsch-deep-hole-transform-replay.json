@@ -1,0 +1,82 @@
+{
+  "records": [
+    {
+      "complement_size": 140,
+      "line_intersection_spectrum": {
+        "0": 15,
+        "10": 66,
+        "6": 120,
+        "7": 80,
+        "8": 40,
+        "9": 60
+      },
+      "q": 19
+    },
+    {
+      "complement_size": 480,
+      "line_intersection_spectrum": {
+        "0": 15,
+        "15": 180,
+        "16": 270,
+        "17": 180,
+        "18": 40,
+        "19": 120,
+        "20": 66
+      },
+      "q": 29
+    },
+    {
+      "complement_size": 572,
+      "line_intersection_spectrum": {
+        "0": 15,
+        "17": 240,
+        "18": 300,
+        "19": 200,
+        "20": 40,
+        "21": 132,
+        "22": 66
+      },
+      "q": 31
+    },
+    {
+      "complement_size": 1152,
+      "line_intersection_spectrum": {
+        "0": 15,
+        "27": 660,
+        "28": 450,
+        "29": 300,
+        "30": 40,
+        "31": 192,
+        "32": 66
+      },
+      "q": 41
+    },
+    {
+      "complement_size": 2700,
+      "line_intersection_spectrum": {
+        "0": 15,
+        "45": 1920,
+        "46": 720,
+        "47": 480,
+        "48": 40,
+        "49": 300,
+        "50": 66
+      },
+      "q": 59
+    },
+    {
+      "complement_size": 2912,
+      "line_intersection_spectrum": {
+        "0": 15,
+        "47": 2100,
+        "48": 750,
+        "49": 500,
+        "50": 40,
+        "51": 312,
+        "52": 66
+      },
+      "q": 61
+    }
+  ],
+  "schema": "c339-finite-replay-v1"
+}
