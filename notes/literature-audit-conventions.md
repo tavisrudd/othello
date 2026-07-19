@@ -7,7 +7,7 @@ reader, or a referee, can tell how strong.
 
 ## Boundary
 
-Apply one question to the task at hand:
+Apply one question to the **deliverable**, not to the subtask in hand:
 
 > **Does a deliverable depend on the absence of prior work?**
 
@@ -17,19 +17,37 @@ Apply one question to the task at hand:
 - **No:** they do not. Ordinary background reading, a single lookup to settle a definition, or
   reuse of a source already recorded at full text by an earlier audit carries no obligation here.
 
-These conventions govern how a search is recorded, not how wide it must be. Scope belongs to the
-task.
+The Attribution section binds more widely than the rest: any durable report or manuscript text that
+characterises a source — a related-work section, a positioning report, an extraction task — follows
+it, whether or not an absence claim is at stake.
+
+These conventions govern how a search is recorded, with the one width exception stated in
+§ "Negatives from citation graphs". All other scope belongs to the task.
 
 ## Every cited source carries a read depth
 
 Read depth is a required field on every source the report names, drawn from this vocabulary:
 
-| Depth                    | Record                                                     |
-|--------------------------|------------------------------------------------------------|
-| `full text`              | Cache key and SHA-256; the sections relied on               |
-| `partial`                | Cache key and SHA-256; exactly which sections were read     |
-| `review only`            | Which review — zbMATH, MathSciNet, or another named service |
-| `abstract/metadata only` | What was retrieved, and from where                          |
+| Depth                    | Record                                                          |
+|--------------------------|-----------------------------------------------------------------|
+| `full text`              | How the text was accessed, the version read, sections relied on |
+| `partial`                | The same, and exactly which sections were read                  |
+| `review only`            | Which review service                                            |
+| `secondary only`         | The named secondary work, its own read depth, and where in it   |
+| `abstract/metadata only` | What was retrieved, and from where                              |
+
+**Access.** Record the cache key and SHA-256 when the bytes were cached. When they cannot be —
+institutional browser access, an interlibrary or physical copy — state how the text was reached
+instead. For the OCR scan sets described in `CLAUDE.md` § "Literature cache", state whether
+load-bearing passages were verified against the authoritative page images.
+
+**Version.** Record which version was read — preprint, published, edition, translation — whenever
+more than one exists. A verdict about a version that was not read, such as a published paper
+characterised from its preprint, is marked as such at any depth.
+
+**Standing in for a source.** Use `review only` for a review service and `secondary only` for any
+other work standing in for the source, and record the chain: a characterisation is only as strong as
+the secondary work's own read depth.
 
 The field is unconditional. A source named only in order to be dismissed carries it too. That is
 precisely where omission happens: nothing rests on a dismissal, so the marker feels unnecessary until
@@ -40,6 +58,25 @@ depends on the source.
 State in the report's opening summary how many of its sources were read at full text. A report whose
 verdicts rest largely on reviews is not thereby wrong, but it is a different object from one resting
 on full texts, and the difference must be visible without auditing the reference list.
+
+## Delegation
+
+The Boundary question is asked of the deliverable, not the subtask: work that feeds a novelty,
+priority, or forward-citation deliverable is bound by these conventions even when delegated in slices
+whose own output is not a verdict. A prompt that dispatches audit work states the read-depth
+requirement in its unconditional form. Before accepting a delegated report, the dispatching agent
+verifies that every named source carries the field and that the opening-summary full-text count
+matches the markers. A report failing either check is returned, or repaired only from the delegate's
+actual trace — never by assuming a depth.
+
+## Screened sets
+
+A verdict that rests on screening a set of works — a citing-works list, a search-result page, an MSC
+class — records the set's size and provenance, the fields the screen ran over (title, abstract, full
+metadata), and the discriminator applied, verbatim where it was mechanical. A member promoted out of
+the set for individual discussion carries the ordinary read-depth field; the rest are covered by the
+set record. "Screened" is not a read depth: it says a filter was applied, and the set record says
+which one, over what.
 
 ## Attribution
 
@@ -52,10 +89,17 @@ on full texts, and the difference must be visible without auditing the reference
 
 ## Negatives from citation graphs
 
-A zero citing-works result from a single graph is indistinguishable from an indexing gap, and the gap
-is not confined to old records. Confirm every load-bearing zero in OpenAlex, Crossref, and Semantic
-Scholar independently, and record each count separately rather than collapsing them into one
-aggregate. Disagreement between them is itself a reportable finding.
+A citing-works count from a single graph is indistinguishable from an indexing gap, and the gap is
+not confined to old records or to zeros. Whenever a verdict rests on having enumerated a citing set —
+a zero, or a set that was screened exhaustively — obtain the count from OpenAlex, Crossref, and
+Semantic Scholar independently, record each count separately rather than collapsing them into one
+aggregate, and screen the largest set. Disagreement between them is itself a reportable finding. This
+is the one width requirement these conventions impose; all other scope belongs to the task.
+
+Resolve every seed by a pinned identifier — DOI, OpenAlex ID, arXiv ID — carried in the report, never
+by title search at query time; a mis-resolved seed silently redirects its entire forward tree. Record
+each load-bearing query verbatim, and state for each service how an empty result was distinguished
+from an error.
 
 ## Coverage statement
 
@@ -80,3 +124,8 @@ The audit report is the durable artifact and owns the verdicts. Incidental obser
 searching follow [`discovery-track-conventions.md`](discovery-track-conventions.md). Recommended
 wording changes to an earlier positioning report are written up for the owning lane rather than
 applied across lanes by the auditing task.
+
+The trust graph's evidence overlay validates literature-search records as machine metadata (C328,
+scoped in [`2026-07-18-c326-trust-spine-and-dependency-graph-plan.md`](2026-07-18-c326-trust-spine-and-dependency-graph-plan.md)
+§ "Evidence-extension boundary"). The read-depth vocabulary and coverage outcomes here are the source
+of truth for that schema; change them together.

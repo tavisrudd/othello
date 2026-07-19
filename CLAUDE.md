@@ -110,9 +110,8 @@ load-bearing text or formulas against the adjacent authoritative page images and
 
 When a deliverable depends on the absence of prior work — a novelty or priority verdict,
 forward-citation closure, a manuscript-bound "to our knowledge" sentence, or a pre-emption check —
-follow [`notes/literature-audit-conventions.md`](notes/literature-audit-conventions.md). It fixes the
-required per-source read-depth field, attribution of review-derived figures, multi-graph confirmation
-of citation zeros, and the coverage statement separating "found nothing" from "could not access".
+follow [`notes/literature-audit-conventions.md`](notes/literature-audit-conventions.md) for how the
+search and every consulted source must be recorded.
 
 ## Research records and computational reproducibility
 
