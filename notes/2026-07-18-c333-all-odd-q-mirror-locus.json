@@ -1,0 +1,319 @@
+{
+  "cases": [
+    {
+      "admissible_marked_parameter_count": 1,
+      "canonical_b_coefficients": [
+        3
+      ],
+      "canonical_delta_coefficients": [
+        3
+      ],
+      "delta_count": 1,
+      "distinct_normalized_centre_set_count": 1,
+      "extension_degree": 1,
+      "modulus_coefficients_low_to_high": [],
+      "p": 5,
+      "per_delta_count_histogram": {
+        "1": 1
+      },
+      "q": 5,
+      "sample": {
+        "b_coefficients": [
+          3
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 120,
+        "live_conic_vertices": 2,
+        "pgl2_order": 120
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 4,
+      "canonical_b_coefficients": [
+        2
+      ],
+      "canonical_delta_coefficients": [
+        5
+      ],
+      "delta_count": 2,
+      "distinct_normalized_centre_set_count": 4,
+      "extension_degree": 1,
+      "modulus_coefficients_low_to_high": [],
+      "p": 7,
+      "per_delta_count_histogram": {
+        "2": 2
+      },
+      "q": 7,
+      "sample": {
+        "b_coefficients": [
+          2
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 0,
+        "generated_group_order": 336,
+        "live_conic_vertices": 8,
+        "pgl2_order": 336
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 13,
+      "canonical_b_coefficients": [
+        2
+      ],
+      "canonical_delta_coefficients": [
+        2
+      ],
+      "delta_count": 3,
+      "distinct_normalized_centre_set_count": 13,
+      "extension_degree": 1,
+      "modulus_coefficients_low_to_high": [],
+      "p": 11,
+      "per_delta_count_histogram": {
+        "4": 2,
+        "5": 1
+      },
+      "q": 11,
+      "sample": {
+        "b_coefficients": [
+          2
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 1320,
+        "live_conic_vertices": 8,
+        "pgl2_order": 1320
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 6,
+      "canonical_b_coefficients": [
+        3
+      ],
+      "canonical_delta_coefficients": [
+        5
+      ],
+      "delta_count": 3,
+      "distinct_normalized_centre_set_count": 6,
+      "extension_degree": 1,
+      "modulus_coefficients_low_to_high": [],
+      "p": 13,
+      "per_delta_count_histogram": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "q": 13,
+      "sample": {
+        "b_coefficients": [
+          3
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 2184,
+        "live_conic_vertices": 10,
+        "pgl2_order": 2184
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 16,
+      "canonical_b_coefficients": [
+        11
+      ],
+      "canonical_delta_coefficients": [
+        3
+      ],
+      "delta_count": 4,
+      "distinct_normalized_centre_set_count": 16,
+      "extension_degree": 1,
+      "modulus_coefficients_low_to_high": [],
+      "p": 17,
+      "per_delta_count_histogram": {
+        "2": 1,
+        "4": 1,
+        "5": 2
+      },
+      "q": 17,
+      "sample": {
+        "b_coefficients": [
+          11
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 4896,
+        "live_conic_vertices": 14,
+        "pgl2_order": 4896
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 4,
+      "canonical_b_coefficients": [
+        0,
+        1
+      ],
+      "canonical_delta_coefficients": [
+        1,
+        1
+      ],
+      "delta_count": 2,
+      "distinct_normalized_centre_set_count": 4,
+      "extension_degree": 2,
+      "modulus_coefficients_low_to_high": [
+        1,
+        0,
+        1
+      ],
+      "p": 3,
+      "per_delta_count_histogram": {
+        "2": 2
+      },
+      "q": 9,
+      "sample": {
+        "b_coefficients": [
+          0,
+          1
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 720,
+        "live_conic_vertices": 6,
+        "pgl2_order": 720
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 36,
+      "canonical_b_coefficients": [
+        3,
+        1
+      ],
+      "canonical_delta_coefficients": [
+        4,
+        1
+      ],
+      "delta_count": 6,
+      "distinct_normalized_centre_set_count": 36,
+      "extension_degree": 2,
+      "modulus_coefficients_low_to_high": [
+        1,
+        1,
+        1
+      ],
+      "p": 5,
+      "per_delta_count_histogram": {
+        "5": 2,
+        "6": 2,
+        "7": 2
+      },
+      "q": 25,
+      "sample": {
+        "b_coefficients": [
+          3,
+          1
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 15600,
+        "live_conic_vertices": 22,
+        "pgl2_order": 15600
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 78,
+      "canonical_b_coefficients": [
+        1,
+        1,
+        0
+      ],
+      "canonical_delta_coefficients": [
+        2,
+        0,
+        0
+      ],
+      "delta_count": 7,
+      "distinct_normalized_centre_set_count": 78,
+      "extension_degree": 3,
+      "modulus_coefficients_low_to_high": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "p": 3,
+      "per_delta_count_histogram": {
+        "11": 6,
+        "12": 1
+      },
+      "q": 27,
+      "sample": {
+        "b_coefficients": [
+          1,
+          1,
+          0
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 19656,
+        "live_conic_vertices": 24,
+        "pgl2_order": 19656
+      }
+    },
+    {
+      "admissible_marked_parameter_count": 132,
+      "canonical_b_coefficients": [
+        3,
+        1
+      ],
+      "canonical_delta_coefficients": [
+        3,
+        1
+      ],
+      "delta_count": 12,
+      "distinct_normalized_centre_set_count": 132,
+      "extension_degree": 2,
+      "modulus_coefficients_low_to_high": [
+        1,
+        0,
+        1
+      ],
+      "p": 7,
+      "per_delta_count_histogram": {
+        "11": 4,
+        "12": 2,
+        "14": 2,
+        "9": 4
+      },
+      "q": 49,
+      "sample": {
+        "b_coefficients": [
+          3,
+          1
+        ],
+        "cap_triples_checked": 20,
+        "dead_conic_vertices": 4,
+        "generated_group_order": 117600,
+        "live_conic_vertices": 46,
+        "pgl2_order": 117600
+      }
+    }
+  ],
+  "conventions": {
+    "centre_order": [
+      "(0,1)",
+      "(delta,0)",
+      "(1,b)",
+      "(delta*b,1/delta)"
+    ],
+    "full_degree": "F_p(b)=F_q",
+    "infinity_encoding": "q",
+    "mirror": "tau(t)=delta/t",
+    "unipotent_word_zero_based": [
+      2,
+      0,
+      2,
+      0,
+      1,
+      0
+    ]
+  },
+  "schema": "c333-mirror-locus-v1"
+}
