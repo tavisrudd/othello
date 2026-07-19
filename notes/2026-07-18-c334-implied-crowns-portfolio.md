@@ -62,6 +62,12 @@ exit requires a new privacy, concurrency, communication, or storage tradeoff.
 
 ## C357: service--PIR--majority-logic equivalence
 
+**Complete 2026-07-19.** Verdict: `THEOREM; EXACT SERVICE--PIR CONVERSE WITH SHARP
+MAJORITY-LOGIC EXCEPTIONS`. The service/PIR extremizers are exactly the subarcs that are unions of
+nonfixed projection-involution orbits; the exact disjoint-vote formula classifies the shortening
+exceptions and proves majority-logic radius is strictly coarser. See
+`notes/2026-07-18-c357-oval-service-extremizer-equivalence.md`.
+
 **Goal.** Prove a new converse/classification linking internality, secant partitions, maximal
 service, PIR availability, and majority-logic equality, including even-field and shortened-arc
 exceptions.
