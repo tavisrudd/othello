@@ -1,0 +1,5567 @@
+{
+  "T1_fractional_holes": [
+    {
+      "allocation": [
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            0,
+            1
+          ],
+          1,
+          1
+        ],
+        [
+          3,
+          [
+            2,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 2,
+      "demand": [
+        0,
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "allocation": [
+        [
+          2,
+          [
+            0,
+            2
+          ],
+          1,
+          1
+        ],
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 3,
+      "demand": [
+        0,
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          1,
+          [
+            0,
+            2
+          ],
+          1,
+          1
+        ],
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 3,
+      "demand": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          2,
+          [
+            0,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            4
+          ],
+          1,
+          1
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            0,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            3,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 11,
+      "demand": [
+        0,
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            0,
+            2
+          ],
+          1,
+          1
+        ],
+        [
+          3,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 14,
+      "demand": [
+        0,
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "allocation": [
+        [
+          0,
+          [
+            2,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          0,
+          [
+            0,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            0,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 14,
+      "demand": [
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          2,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            0,
+            4
+          ],
+          1,
+          1
+        ],
+        [
+          3,
+          [
+            3,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 15,
+      "demand": [
+        0,
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "allocation": [
+        [
+          0,
+          [
+            2,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          0,
+          [
+            0,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            3
+          ],
+          3,
+          4
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          4
+        ],
+        [
+          3,
+          [
+            1,
+            2
+          ],
+          1,
+          4
+        ],
+        [
+          3,
+          [
+            0,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            3,
+            5
+          ],
+          1,
+          4
+        ]
+      ],
+      "class": 15,
+      "demand": [
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          0,
+          [
+            2,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          0,
+          [
+            0,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            0,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 17,
+      "demand": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "allocation": [
+        [
+          2,
+          [
+            0,
+            1
+          ],
+          1,
+          1
+        ],
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            2,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 20,
+      "demand": [
+        0,
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          1,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            0,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            0,
+            1
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            2,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 20,
+      "demand": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          1,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            0,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            0,
+            1
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          1
+        ]
+      ],
+      "class": 20,
+      "demand": [
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "allocation": [
+        [
+          0,
+          [
+            2,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          0,
+          [
+            1,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            1,
+            3
+          ],
+          1,
+          4
+        ],
+        [
+          1,
+          [
+            0,
+            4
+          ],
+          3,
+          4
+        ],
+        [
+          2,
+          [
+            0,
+            1
+          ],
+          1,
+          4
+        ],
+        [
+          2,
+          [
+            3,
+            4
+          ],
+          1,
+          4
+        ],
+        [
+          2,
+          [
+            2,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 20,
+      "demand": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "allocation": [
+        [
+          0,
+          [
+            2,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          0,
+          [
+            0,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            0,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          3,
+          [
+            4,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 22,
+      "demand": [
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "allocation": [
+        [
+          0,
+          [
+            2,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          0,
+          [
+            0,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          1,
+          [
+            0,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            1,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          2,
+          [
+            3,
+            5
+          ],
+          1,
+          2
+        ]
+      ],
+      "class": 22,
+      "demand": [
+        1,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "c353_sha256": "d92fe4c7cb14c65391aee969ecec9d9153b567fec04814f10df0765f825dfccb",
+  "canonical_classes": 25,
+  "census": [
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 124,
+          "integral_sha256": "55d100907aef2c4b517b4b93adb3d8bd7d2df1fdecdd8f032300dda1b4d17b65"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 396,
+          "integral_sha256": "f138f607e799e45b019b69aad593aea08b1a1210813403100af1d95475b955bb"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 993,
+          "integral_sha256": "0b67db95b90ce459869a2d835baa93913796740074edfcb89ddeb180d3de1879"
+        }
+      ],
+      "class": 0,
+      "failed": [
+        1,
+        6
+      ],
+      "multiplicity": 1,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 125,
+          "integral_sha256": "d3b95ee2ff2350f1da9d491174719bdbf6ea0e7409af39f3ef6590b710b615ba"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 418,
+          "integral_sha256": "86d1d970541609a53feb11e6de255d22d404dc10efe67db061c6d3cb3ab1bf04"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 997,
+          "integral_sha256": "caca419211621080eaa49ea1d370f6bb494bf66ed19782aa76f39412bed76906"
+        }
+      ],
+      "class": 1,
+      "failed": [
+        0,
+        5
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 18,
+          "integral_sha256": "af10ad5d6c2917b63ea15eefd1180e029015d44aec845103ef64d2a57538fd3c"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 129,
+          "integral_sha256": "362eae2087e800c139d2733e3ec8d7fb8a0c8cc73b9948f466322729c1631b2c"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 439,
+          "integral_sha256": "0e3aebc630b179e6c483cd38180d163d2eb39d5ec612f1c22334cdbac435b423"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1159,
+          "integral_sha256": "e261c55060f33f89a3627e256f3d68cd41406b1793b0714c854c8aebe80f1ecc"
+        }
+      ],
+      "class": 2,
+      "failed": [
+        1,
+        4
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 21,
+          "integral_sha256": "abe9fa3cd1caf20830da4cb69232f915ab315c9f9715687b2629c972b3358387"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 143,
+          "integral_sha256": "ccb5b6425e3dd07666b595b926a99eaada7f4baf648095fbb0b09d3297983400"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 509,
+          "integral_sha256": "842dc926ac28691b35257593984e3a22f9c89b7fc4e9a3fef7336155e80ed187"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1337,
+          "integral_sha256": "3aa6b20e6aabd66a7468270708f5f52887f0e8432e50b2d85f10ce98f948d7dd"
+        }
+      ],
+      "class": 3,
+      "failed": [
+        0,
+        1
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 122,
+          "integral_sha256": "4ba05740ad3a1ec2228aab8080229f3b28e672dd528fbb2ca67b440a5b6702f1"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 392,
+          "integral_sha256": "bf3c070b0085e989f015e016ce31451dda547dac18c82f186c5a39d82a19ab74"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 985,
+          "integral_sha256": "5b8428f5a16f78ee1d17b5fc6963b823351ed3d014f7330951c725124f7e7ca9"
+        }
+      ],
+      "class": 4,
+      "failed": [
+        1,
+        5
+      ],
+      "multiplicity": 3,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 124,
+          "integral_sha256": "55d100907aef2c4b517b4b93adb3d8bd7d2df1fdecdd8f032300dda1b4d17b65"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 391,
+          "integral_sha256": "0706f2275e7cf4c2e2ce0e8fa2f927389baf0473f1e43769a2e1214af32858ed"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 993,
+          "integral_sha256": "0b67db95b90ce459869a2d835baa93913796740074edfcb89ddeb180d3de1879"
+        }
+      ],
+      "class": 5,
+      "failed": [
+        1,
+        3
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 17,
+          "integral_sha256": "4f7b54e551768ef008e919e3a6d109b9f3b939f2091f2eaae8270941ca975a19"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 127,
+          "integral_sha256": "9820fe9660ad17f95925f490a7483cd04d6809ddccf35b9105fee758c5a7b217"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 454,
+          "integral_sha256": "0c7b0c7d711b78ad149dca56493b1356692a20543d9e9166b330183c3a6f3a9b"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1186,
+          "integral_sha256": "41dd98f2c83cdf8c9dbca888534694ed4c45d01145574870b420b5e57cc17ee0"
+        }
+      ],
+      "class": 6,
+      "failed": [
+        0,
+        4
+      ],
+      "multiplicity": 4,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 17,
+          "integral_sha256": "e596f94956feee617c6f3e691dd92b78d1a64622f9ff841fe4f822a99d3b30da"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 128,
+          "integral_sha256": "e080c64e48294a78ebf6aa32914e6992c215fb14d3d785fa61e5a5ee93be29d5"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 433,
+          "integral_sha256": "9f808ce43066d1995e94c5e74f89963d5acf7596ad3c95eaecbb4dee7f4c34d6"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1145,
+          "integral_sha256": "c9db3bad1314684d64f2794186ec95cdc68ebc33795f93f6263b0dcbcb035e00"
+        }
+      ],
+      "class": 7,
+      "failed": [
+        2,
+        5
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 124,
+          "integral_sha256": "5e28c9ab4b050512af444b7d96f673cddb87b2a0e329bbeb49ab493166a67e11"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 330,
+          "integral_sha256": "eac0c4c6bacba29063f6a5cab119788d7adc048fff9e3f08aee192ec5ef53d57"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 993,
+          "integral_sha256": "e4fb270c134817e7fc5fac6885f90f7fd8b34fe518936dfdf45da89f0f264817"
+        }
+      ],
+      "class": 8,
+      "failed": [
+        0,
+        4
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 125,
+          "integral_sha256": "d3b95ee2ff2350f1da9d491174719bdbf6ea0e7409af39f3ef6590b710b615ba"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 396,
+          "integral_sha256": "ce693236b4626b390e8345d9359880d450a20ea7d40356e6060d755894f77214"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 997,
+          "integral_sha256": "caca419211621080eaa49ea1d370f6bb494bf66ed19782aa76f39412bed76906"
+        }
+      ],
+      "class": 9,
+      "failed": [
+        1,
+        2
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 18,
+          "integral_sha256": "2b57a8ffe45a17d65426092344b441e821934bf47a39c60eecbaea6e9498274e"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 131,
+          "integral_sha256": "ae0ec98530803aded23a6d8fcbd4df285aae7751f8eb4b55fb685c80796cea8f"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 474,
+          "integral_sha256": "31f4bdadc41dd072154ba7f9e912150f859a06bc30432dea2ce4a535b8aabc04"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1248,
+          "integral_sha256": "020a6d84261f8e01409572a443fd80bbde50a3173372100fdd29cd33d0d9b517"
+        }
+      ],
+      "class": 10,
+      "failed": [
+        0,
+        2
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 18,
+          "integral_sha256": "792a850443125c7f61a1657a44dbb74c3cb80f65089b568b14da78b17cdc3ca0"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 131,
+          "integral_sha256": "8f0268ba9502c09c494c36db512c08b057186956e84bc34bda1b84c19aa0c35b"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 475,
+          "integral_sha256": "f4af128728d2a8bb1060fc14807d7dc99158d836fdfd7c62c3b21775131b6b12"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1254,
+          "integral_sha256": "c620da193d169772c69cff64cfdd1d7040925cefc52e3346dc1ad9cbaaa107bf"
+        }
+      ],
+      "class": 11,
+      "failed": [
+        0,
+        1
+      ],
+      "multiplicity": 4,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 18,
+          "integral_sha256": "b3dd0fd5c1c8ee93c84283df287c275f70a37c1d8fd17c2e4797c35834e703aa"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 130,
+          "integral_sha256": "30ee5df3563877a011a6b56be9b2d7b3fa3453fb97c3b568c1b7d6375667345c"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 444,
+          "integral_sha256": "36dc80153ee5962c266ac168a5e66a6a13d8d474a9c2f01a6337daa5d69758ae"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1173,
+          "integral_sha256": "f3b66a317a3b24308f85505594b6fe30a0346ceeeb9410924cced2af10f9c07b"
+        }
+      ],
+      "class": 12,
+      "failed": [
+        1,
+        5
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 123,
+          "integral_sha256": "c9a4739ced56618af4e458ae3c7636d3fc1a8ff35bdb9d1e6ac3871d641dbcde"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 396,
+          "integral_sha256": "faa1e8fb710ff19c34147aad7c524a85faaaa22ff0098a151192cbaa1b4377d0"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 988,
+          "integral_sha256": "a1774b7bb20f945e2b3e1d47c3c46812b93d359d81298ba75cd4564a081d195a"
+        }
+      ],
+      "class": 13,
+      "failed": [
+        1,
+        3
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 21,
+          "integral_sha256": "4ef0971afac47ee139d669707bc59e71773a95e0d0cf8df229152d343980e5e2"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 143,
+          "integral_sha256": "742da5b2f68410a785cc9c6ae7564c64c56593733c1420a76bb3debdebb7de0f"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 512,
+          "integral_sha256": "3b72b270f43d86f61946b58a1ab069b0ad985cd007e96311bd8046fcd4bc38fd"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1349,
+          "integral_sha256": "5b6b310c73303cfae4b5e7b41187f482937968eb9137a9ce79791dabdfca3e99"
+        }
+      ],
+      "class": 14,
+      "failed": [
+        0,
+        2
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 18,
+          "integral_sha256": "b6c01f32acf2949238d72d8ec7a347270b9343b7050e9dd698e34440bb513edf"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 130,
+          "integral_sha256": "2626c439864da0c3794659bfd1f0322f847268bad4b4f1af642a751ebf605a09"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 465,
+          "integral_sha256": "b00c130fcfcf5a5a9c82b0c60460e8de4647b00d7769095a1637058d3afb9558"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1225,
+          "integral_sha256": "b878eb03776243be1ac858851d93a446a2c2024fc71d40a34959ea6f02c734ab"
+        }
+      ],
+      "class": 15,
+      "failed": [
+        0,
+        3
+      ],
+      "multiplicity": 4,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 122,
+          "integral_sha256": "1f354f739135f13e5e1e16fd3feca0f423447d0f3e1fbb5dfe7451621e65e01d"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 388,
+          "integral_sha256": "6ed8051fe983b0c0e77de69efbe2085612de3b073ccba48ba2c2981488275d98"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 981,
+          "integral_sha256": "24507270a293ed73c69147204364780419cdf79b2b9f42c0831d5ba4bdf5c98a"
+        }
+      ],
+      "class": 16,
+      "failed": [
+        1,
+        4
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 21,
+          "integral_sha256": "20b43752c0eacc62830f86c1853f1f04b894958cfe11eeb26b1e27481d11ac20"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 144,
+          "integral_sha256": "735021c34701641ea793d9dbf85308bc32799ec292064120863f9ec65f50ed59"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 513,
+          "integral_sha256": "d759ca2fec99d7c20fd016dec0a307cf8a678cca906b9633574fddeef52a88ff"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1349,
+          "integral_sha256": "aba10e0898fbd77eff38c067eb0587f30aea555df646772da0e385481419f44f"
+        }
+      ],
+      "class": 17,
+      "failed": [
+        0,
+        6
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 126,
+          "integral_sha256": "3db9dc7ab89eabf1c5630dff00a63001b6b891a45a74b8fffc897de904e23c57"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 459,
+          "integral_sha256": "225b8ea8a2caa4f81bcee589b9c9ef1aca162fac784a67f0cc5ea9d14f1b2883"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1001,
+          "integral_sha256": "2da1ec2f2888bf3cb0b99fe4bc4c94a7a595b105c452579f44057f32164a3292"
+        }
+      ],
+      "class": 18,
+      "failed": [
+        0,
+        7
+      ],
+      "multiplicity": 1,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 19,
+          "integral_sha256": "6b96c6d45414a5bf711d8f3a8eed5a5e4647e70e82611351441c772d3b74150d"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 135,
+          "integral_sha256": "1e14b4d21ab0b21d09828771deac4970e2c0aca927a04656517b0952b5530b4e"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 475,
+          "integral_sha256": "311e51f86c99d3edc4ecca2c78a0b7b2c2d19d6123f934ada706cbf19d2644ec"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1240,
+          "integral_sha256": "1404ee7461f4a03a1f5fb80cd27e92451753c73ac7e858ce3478ef7c912cc64c"
+        }
+      ],
+      "class": 19,
+      "failed": [
+        0,
+        3
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 21,
+          "integral_sha256": "f4eb09e481e12592959eebd7669a26105022216424c350be964fbdf296d71dae"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 146,
+          "integral_sha256": "9f85ff1ff644d5bc08db93c24abf0f943ab39ecf5b396053bf1d2839b4d5e753"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 530,
+          "integral_sha256": "afc89a3ef502f960f3cf5c7e74d435e26d6b358da9f4156a9b6971d82330bd8f"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1404,
+          "integral_sha256": "fbfda020138cece655583e34f29789c091e14ede66acdd08d1104e6e6153339f"
+        }
+      ],
+      "class": 20,
+      "failed": [
+        2,
+        4
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        6,
+        5
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 18,
+          "integral_sha256": "db24bba4dc2c0eb662ba8a7b9ea0f82045da6844339efbf39debc8d37f102bff"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 132,
+          "integral_sha256": "f6079402156c7a6264b0050f51655b189717772e8a6f0765246beb45f3535c93"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 475,
+          "integral_sha256": "7e74e38c28b66a3bce758852e91409f41f2d69b1721dae2654638cf4d553988d"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1248,
+          "integral_sha256": "68de0196fec185d261b9785cfe2916521b4ef2e0991f522d804e08932e2db1e1"
+        }
+      ],
+      "class": 21,
+      "failed": [
+        0,
+        5
+      ],
+      "multiplicity": 4,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 17,
+          "integral_sha256": "8054aa7099b524fc09d2c568a86da0a6c3ab60f1383e62ab946aced596a8f63d"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 130,
+          "integral_sha256": "d3d2503f144abe367dbb9c60f4dcdfe025eef2a5853423ac20b3cc1b89c76cf1"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 470,
+          "integral_sha256": "4457da6ea9821f660586eb9c2e34bed8c3bfccd460e9259e8389427be070dffe"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1236,
+          "integral_sha256": "ffc10f8f58cf9a772ba854e575f2b5d23bf12144e637953b058eec4362d16c0c"
+        }
+      ],
+      "class": 22,
+      "failed": [
+        0,
+        6
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 17,
+          "integral_sha256": "9caeeeaac50911ef7f6bfc53790a051f6ff3ff83b9a73d9cff8992f0e6c06d73"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 130,
+          "integral_sha256": "184b400f040553a45231424240c11f16e45aaa7852e02df93daf6c4462c1b7a5"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 477,
+          "integral_sha256": "ca4cbb55392be0e9dbbebc4645ba873ac85356b8b8382a881cf0ccc12656e8da"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1254,
+          "integral_sha256": "fa7d157082dc7dc653f6a686046cff6f5847cdddca94928820177955818e7710"
+        }
+      ],
+      "class": 23,
+      "failed": [
+        0,
+        7
+      ],
+      "multiplicity": 2,
+      "parameters": [
+        5,
+        2
+      ]
+    },
+    {
+      "capacities": [
+        {
+          "T": 1,
+          "candidate_count": 35,
+          "integral_count": 15,
+          "integral_sha256": "44c4152cb72e25d1051c508e61895d98f9b96580a15b6989310814976318ccc5"
+        },
+        {
+          "T": 2,
+          "candidate_count": 210,
+          "integral_count": 126,
+          "integral_sha256": "3db9dc7ab89eabf1c5630dff00a63001b6b891a45a74b8fffc897de904e23c57"
+        },
+        {
+          "T": 3,
+          "candidate_count": 715,
+          "integral_count": 445,
+          "integral_sha256": "7522594fd26d0d0937e77ae3c018f9ce9fd1eee4916e3683b448f6edca7f20fa"
+        },
+        {
+          "T": 4,
+          "candidate_count": 1820,
+          "integral_count": 1001,
+          "integral_sha256": "2da1ec2f2888bf3cb0b99fe4bc4c94a7a595b105c452579f44057f32164a3292"
+        }
+      ],
+      "class": 24,
+      "failed": [
+        2,
+        3
+      ],
+      "multiplicity": 1,
+      "parameters": [
+        6,
+        5
+      ]
+    }
+  ],
+  "damaged_instances": 56,
+  "family_prime_fixtures": [
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "failed": [
+        0,
+        5
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            3
+          ],
+          1,
+          2
+        ]
+      ],
+      "m_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "prime": 5,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            4
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 3,
+      "cycle": [
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "failed": [
+        2,
+        5
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            4,
+            6
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            6
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            3,
+            4
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            0,
+            7
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "prime": 7,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            6
+          ]
+        ],
+        [
+          "M",
+          [
+            0,
+            7
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          9
+        ]
+      ],
+      "failed": [
+        3,
+        8
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            9,
+            10
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            10
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            9
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            0,
+            11
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            6
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            7
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          0,
+          11
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "prime": 11,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            10
+          ]
+        ],
+        [
+          "M",
+          [
+            0,
+            11
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            6
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            7
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          2,
+          11
+        ]
+      ],
+      "failed": [
+        0,
+        13
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            11,
+            12
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            12
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            11
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            3,
+            5
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            7
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            9
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            10
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          12
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "prime": 13,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            12
+          ]
+        ],
+        [
+          "M",
+          [
+            3,
+            5
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            7
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            9
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            10
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 3,
+      "cycle": [
+        [
+          1,
+          3
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          1,
+          16
+        ],
+        [
+          3,
+          14
+        ]
+      ],
+      "failed": [
+        0,
+        17
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            14,
+            16
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            16
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            3,
+            14
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            2,
+            10
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            5
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            9
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            7,
+            15
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            11
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            12,
+            13
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          14,
+          16
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          16
+        ],
+        [
+          2,
+          15
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          9
+        ]
+      ],
+      "prime": 17,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            16
+          ]
+        ],
+        [
+          "M",
+          [
+            2,
+            10
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            5
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            9
+          ]
+        ],
+        [
+          "M",
+          [
+            7,
+            15
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            11
+          ]
+        ],
+        [
+          "M",
+          [
+            12,
+            13
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          1,
+          18
+        ],
+        [
+          2,
+          17
+        ]
+      ],
+      "failed": [
+        6,
+        13
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            17,
+            18
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            18
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            17
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            0,
+            19
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            3,
+            7
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            10
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            8
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            9,
+            15
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            11,
+            14
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            12,
+            16
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          0,
+          19
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          17,
+          18
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          18
+        ],
+        [
+          2,
+          17
+        ],
+        [
+          3,
+          16
+        ],
+        [
+          4,
+          15
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "prime": 19,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            18
+          ]
+        ],
+        [
+          "M",
+          [
+            0,
+            19
+          ]
+        ],
+        [
+          "M",
+          [
+            3,
+            7
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            10
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            8
+          ]
+        ],
+        [
+          "M",
+          [
+            9,
+            15
+          ]
+        ],
+        [
+          "M",
+          [
+            11,
+            14
+          ]
+        ],
+        [
+          "M",
+          [
+            12,
+            16
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 5,
+      "cycle": [
+        [
+          1,
+          5
+        ],
+        [
+          18,
+          22
+        ],
+        [
+          1,
+          22
+        ],
+        [
+          5,
+          18
+        ]
+      ],
+      "failed": [
+        8,
+        15
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            5
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            18,
+            22
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            22
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            5,
+            18
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            0,
+            23
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            2,
+            14
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            3,
+            17
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            7
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            20
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            9,
+            21
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            10,
+            12
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            11,
+            13
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            16,
+            19
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          0,
+          23
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          17
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          6,
+          20
+        ],
+        [
+          9,
+          21
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          16,
+          19
+        ],
+        [
+          18,
+          22
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          22
+        ],
+        [
+          2,
+          21
+        ],
+        [
+          3,
+          20
+        ],
+        [
+          4,
+          19
+        ],
+        [
+          5,
+          18
+        ],
+        [
+          6,
+          17
+        ],
+        [
+          7,
+          16
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "prime": 23,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            22
+          ]
+        ],
+        [
+          "M",
+          [
+            0,
+            23
+          ]
+        ],
+        [
+          "M",
+          [
+            2,
+            14
+          ]
+        ],
+        [
+          "M",
+          [
+            3,
+            17
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            7
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            20
+          ]
+        ],
+        [
+          "M",
+          [
+            9,
+            21
+          ]
+        ],
+        [
+          "M",
+          [
+            10,
+            12
+          ]
+        ],
+        [
+          "M",
+          [
+            11,
+            13
+          ]
+        ],
+        [
+          "M",
+          [
+            16,
+            19
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          27,
+          28
+        ],
+        [
+          1,
+          28
+        ],
+        [
+          2,
+          27
+        ]
+      ],
+      "failed": [
+        0,
+        29
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            27,
+            28
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            28
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            27
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            3,
+            20
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            15
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            12
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            10
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            7,
+            21
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            22
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            9,
+            26
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            11,
+            16
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            13,
+            18
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            14,
+            25
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            17,
+            24
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            19,
+            23
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          20
+        ],
+        [
+          4,
+          15
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          21
+        ],
+        [
+          8,
+          22
+        ],
+        [
+          9,
+          26
+        ],
+        [
+          11,
+          16
+        ],
+        [
+          13,
+          18
+        ],
+        [
+          14,
+          25
+        ],
+        [
+          17,
+          24
+        ],
+        [
+          19,
+          23
+        ],
+        [
+          27,
+          28
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          28
+        ],
+        [
+          2,
+          27
+        ],
+        [
+          3,
+          26
+        ],
+        [
+          4,
+          25
+        ],
+        [
+          5,
+          24
+        ],
+        [
+          6,
+          23
+        ],
+        [
+          7,
+          22
+        ],
+        [
+          8,
+          21
+        ],
+        [
+          9,
+          20
+        ],
+        [
+          10,
+          19
+        ],
+        [
+          11,
+          18
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          14,
+          15
+        ]
+      ],
+      "prime": 29,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            28
+          ]
+        ],
+        [
+          "M",
+          [
+            3,
+            20
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            15
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            12
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            10
+          ]
+        ],
+        [
+          "M",
+          [
+            7,
+            21
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            22
+          ]
+        ],
+        [
+          "M",
+          [
+            9,
+            26
+          ]
+        ],
+        [
+          "M",
+          [
+            11,
+            16
+          ]
+        ],
+        [
+          "M",
+          [
+            13,
+            18
+          ]
+        ],
+        [
+          "M",
+          [
+            14,
+            25
+          ]
+        ],
+        [
+          "M",
+          [
+            17,
+            24
+          ]
+        ],
+        [
+          "M",
+          [
+            19,
+            23
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 3,
+      "cycle": [
+        [
+          1,
+          3
+        ],
+        [
+          28,
+          30
+        ],
+        [
+          1,
+          30
+        ],
+        [
+          3,
+          28
+        ]
+      ],
+      "failed": [
+        11,
+        20
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            28,
+            30
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            30
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            3,
+            28
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            0,
+            31
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            2,
+            17
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            24
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            13
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            16
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            7,
+            27
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            12
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            9,
+            21
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            10,
+            22
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            14,
+            29
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            15,
+            25
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            18,
+            26
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            19,
+            23
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          0,
+          31
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          17
+        ],
+        [
+          4,
+          24
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          7,
+          27
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          21
+        ],
+        [
+          10,
+          22
+        ],
+        [
+          14,
+          29
+        ],
+        [
+          15,
+          25
+        ],
+        [
+          18,
+          26
+        ],
+        [
+          19,
+          23
+        ],
+        [
+          28,
+          30
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          30
+        ],
+        [
+          2,
+          29
+        ],
+        [
+          3,
+          28
+        ],
+        [
+          4,
+          27
+        ],
+        [
+          5,
+          26
+        ],
+        [
+          6,
+          25
+        ],
+        [
+          7,
+          24
+        ],
+        [
+          8,
+          23
+        ],
+        [
+          9,
+          22
+        ],
+        [
+          10,
+          21
+        ],
+        [
+          12,
+          19
+        ],
+        [
+          13,
+          18
+        ],
+        [
+          14,
+          17
+        ],
+        [
+          15,
+          16
+        ]
+      ],
+      "prime": 31,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            30
+          ]
+        ],
+        [
+          "M",
+          [
+            0,
+            31
+          ]
+        ],
+        [
+          "M",
+          [
+            2,
+            17
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            24
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            13
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            16
+          ]
+        ],
+        [
+          "M",
+          [
+            7,
+            27
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            12
+          ]
+        ],
+        [
+          "M",
+          [
+            9,
+            21
+          ]
+        ],
+        [
+          "M",
+          [
+            10,
+            22
+          ]
+        ],
+        [
+          "M",
+          [
+            14,
+            29
+          ]
+        ],
+        [
+          "M",
+          [
+            15,
+            25
+          ]
+        ],
+        [
+          "M",
+          [
+            18,
+            26
+          ]
+        ],
+        [
+          "M",
+          [
+            19,
+            23
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          35,
+          36
+        ],
+        [
+          1,
+          36
+        ],
+        [
+          2,
+          35
+        ]
+      ],
+      "failed": [
+        0,
+        37
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            35,
+            36
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            36
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            35
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            3,
+            13
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            19
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            30
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            25
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            7,
+            32
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            28
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            9,
+            29
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            10,
+            15
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            11,
+            17
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            12,
+            31
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            14,
+            16
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            18,
+            33
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            20,
+            26
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            21,
+            23
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            22,
+            27
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            24,
+            34
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          19
+        ],
+        [
+          5,
+          30
+        ],
+        [
+          6,
+          25
+        ],
+        [
+          7,
+          32
+        ],
+        [
+          8,
+          28
+        ],
+        [
+          9,
+          29
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          12,
+          31
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          18,
+          33
+        ],
+        [
+          20,
+          26
+        ],
+        [
+          21,
+          23
+        ],
+        [
+          22,
+          27
+        ],
+        [
+          24,
+          34
+        ],
+        [
+          35,
+          36
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          36
+        ],
+        [
+          2,
+          35
+        ],
+        [
+          3,
+          34
+        ],
+        [
+          4,
+          33
+        ],
+        [
+          5,
+          32
+        ],
+        [
+          6,
+          31
+        ],
+        [
+          7,
+          30
+        ],
+        [
+          8,
+          29
+        ],
+        [
+          9,
+          28
+        ],
+        [
+          10,
+          27
+        ],
+        [
+          11,
+          26
+        ],
+        [
+          12,
+          25
+        ],
+        [
+          13,
+          24
+        ],
+        [
+          14,
+          23
+        ],
+        [
+          15,
+          22
+        ],
+        [
+          16,
+          21
+        ],
+        [
+          17,
+          20
+        ],
+        [
+          18,
+          19
+        ]
+      ],
+      "prime": 37,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            36
+          ]
+        ],
+        [
+          "M",
+          [
+            3,
+            13
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            19
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            30
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            25
+          ]
+        ],
+        [
+          "M",
+          [
+            7,
+            32
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            28
+          ]
+        ],
+        [
+          "M",
+          [
+            9,
+            29
+          ]
+        ],
+        [
+          "M",
+          [
+            10,
+            15
+          ]
+        ],
+        [
+          "M",
+          [
+            11,
+            17
+          ]
+        ],
+        [
+          "M",
+          [
+            12,
+            31
+          ]
+        ],
+        [
+          "M",
+          [
+            14,
+            16
+          ]
+        ],
+        [
+          "M",
+          [
+            18,
+            33
+          ]
+        ],
+        [
+          "M",
+          [
+            20,
+            26
+          ]
+        ],
+        [
+          "M",
+          [
+            21,
+            23
+          ]
+        ],
+        [
+          "M",
+          [
+            22,
+            27
+          ]
+        ],
+        [
+          "M",
+          [
+            24,
+            34
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 3,
+      "cycle": [
+        [
+          1,
+          3
+        ],
+        [
+          38,
+          40
+        ],
+        [
+          1,
+          40
+        ],
+        [
+          3,
+          38
+        ]
+      ],
+      "failed": [
+        0,
+        41
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            3
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            38,
+            40
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            40
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            3,
+            38
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            2,
+            22
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            11
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            17
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            21
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            7,
+            18
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            26
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            9,
+            14
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            10,
+            29
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            12,
+            31
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            13,
+            16
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            15,
+            33
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            19,
+            39
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            20,
+            35
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            23,
+            34
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            24,
+            36
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            25,
+            28
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            27,
+            32
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            30,
+            37
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          22
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          5,
+          17
+        ],
+        [
+          6,
+          21
+        ],
+        [
+          7,
+          18
+        ],
+        [
+          8,
+          26
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          10,
+          29
+        ],
+        [
+          12,
+          31
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          15,
+          33
+        ],
+        [
+          19,
+          39
+        ],
+        [
+          20,
+          35
+        ],
+        [
+          23,
+          34
+        ],
+        [
+          24,
+          36
+        ],
+        [
+          25,
+          28
+        ],
+        [
+          27,
+          32
+        ],
+        [
+          30,
+          37
+        ],
+        [
+          38,
+          40
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          40
+        ],
+        [
+          2,
+          39
+        ],
+        [
+          3,
+          38
+        ],
+        [
+          4,
+          37
+        ],
+        [
+          5,
+          36
+        ],
+        [
+          6,
+          35
+        ],
+        [
+          7,
+          34
+        ],
+        [
+          8,
+          33
+        ],
+        [
+          9,
+          32
+        ],
+        [
+          10,
+          31
+        ],
+        [
+          11,
+          30
+        ],
+        [
+          12,
+          29
+        ],
+        [
+          13,
+          28
+        ],
+        [
+          14,
+          27
+        ],
+        [
+          15,
+          26
+        ],
+        [
+          16,
+          25
+        ],
+        [
+          17,
+          24
+        ],
+        [
+          18,
+          23
+        ],
+        [
+          19,
+          22
+        ],
+        [
+          20,
+          21
+        ]
+      ],
+      "prime": 41,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            40
+          ]
+        ],
+        [
+          "M",
+          [
+            2,
+            22
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            11
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            17
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            21
+          ]
+        ],
+        [
+          "M",
+          [
+            7,
+            18
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            26
+          ]
+        ],
+        [
+          "M",
+          [
+            9,
+            14
+          ]
+        ],
+        [
+          "M",
+          [
+            10,
+            29
+          ]
+        ],
+        [
+          "M",
+          [
+            12,
+            31
+          ]
+        ],
+        [
+          "M",
+          [
+            13,
+            16
+          ]
+        ],
+        [
+          "M",
+          [
+            15,
+            33
+          ]
+        ],
+        [
+          "M",
+          [
+            19,
+            39
+          ]
+        ],
+        [
+          "M",
+          [
+            20,
+            35
+          ]
+        ],
+        [
+          "M",
+          [
+            23,
+            34
+          ]
+        ],
+        [
+          "M",
+          [
+            24,
+            36
+          ]
+        ],
+        [
+          "M",
+          [
+            25,
+            28
+          ]
+        ],
+        [
+          "M",
+          [
+            27,
+            32
+          ]
+        ],
+        [
+          "M",
+          [
+            30,
+            37
+          ]
+        ]
+      ]
+    },
+    {
+      "a": 2,
+      "cycle": [
+        [
+          1,
+          2
+        ],
+        [
+          41,
+          42
+        ],
+        [
+          1,
+          42
+        ],
+        [
+          2,
+          41
+        ]
+      ],
+      "failed": [
+        16,
+        27
+      ],
+      "fractional_schedule": [
+        [
+          "M",
+          [
+            1,
+            2
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            41,
+            42
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            1,
+            42
+          ],
+          1,
+          2
+        ],
+        [
+          "N",
+          [
+            2,
+            41
+          ],
+          1,
+          2
+        ],
+        [
+          "M",
+          [
+            0,
+            43
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            3,
+            15
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            4,
+            22
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            5,
+            9
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            6,
+            29
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            7,
+            31
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            8,
+            11
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            10,
+            26
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            12,
+            36
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            13,
+            20
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            14,
+            37
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            17,
+            33
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            18,
+            24
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            19,
+            25
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            21,
+            39
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            23,
+            30
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            28,
+            40
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            32,
+            35
+          ],
+          1,
+          1
+        ],
+        [
+          "M",
+          [
+            34,
+            38
+          ],
+          1,
+          1
+        ]
+      ],
+      "m_edges": [
+        [
+          0,
+          43
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          15
+        ],
+        [
+          4,
+          22
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          29
+        ],
+        [
+          7,
+          31
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          10,
+          26
+        ],
+        [
+          12,
+          36
+        ],
+        [
+          13,
+          20
+        ],
+        [
+          14,
+          37
+        ],
+        [
+          17,
+          33
+        ],
+        [
+          18,
+          24
+        ],
+        [
+          19,
+          25
+        ],
+        [
+          21,
+          39
+        ],
+        [
+          23,
+          30
+        ],
+        [
+          28,
+          40
+        ],
+        [
+          32,
+          35
+        ],
+        [
+          34,
+          38
+        ],
+        [
+          41,
+          42
+        ]
+      ],
+      "n_edges": [
+        [
+          1,
+          42
+        ],
+        [
+          2,
+          41
+        ],
+        [
+          3,
+          40
+        ],
+        [
+          4,
+          39
+        ],
+        [
+          5,
+          38
+        ],
+        [
+          6,
+          37
+        ],
+        [
+          7,
+          36
+        ],
+        [
+          8,
+          35
+        ],
+        [
+          9,
+          34
+        ],
+        [
+          10,
+          33
+        ],
+        [
+          11,
+          32
+        ],
+        [
+          12,
+          31
+        ],
+        [
+          13,
+          30
+        ],
+        [
+          14,
+          29
+        ],
+        [
+          15,
+          28
+        ],
+        [
+          17,
+          26
+        ],
+        [
+          18,
+          25
+        ],
+        [
+          19,
+          24
+        ],
+        [
+          20,
+          23
+        ],
+        [
+          21,
+          22
+        ]
+      ],
+      "prime": 43,
+      "rounded_schedule": [
+        [
+          "N",
+          [
+            1,
+            42
+          ]
+        ],
+        [
+          "M",
+          [
+            0,
+            43
+          ]
+        ],
+        [
+          "M",
+          [
+            3,
+            15
+          ]
+        ],
+        [
+          "M",
+          [
+            4,
+            22
+          ]
+        ],
+        [
+          "M",
+          [
+            5,
+            9
+          ]
+        ],
+        [
+          "M",
+          [
+            6,
+            29
+          ]
+        ],
+        [
+          "M",
+          [
+            7,
+            31
+          ]
+        ],
+        [
+          "M",
+          [
+            8,
+            11
+          ]
+        ],
+        [
+          "M",
+          [
+            10,
+            26
+          ]
+        ],
+        [
+          "M",
+          [
+            12,
+            36
+          ]
+        ],
+        [
+          "M",
+          [
+            13,
+            20
+          ]
+        ],
+        [
+          "M",
+          [
+            14,
+            37
+          ]
+        ],
+        [
+          "M",
+          [
+            17,
+            33
+          ]
+        ],
+        [
+          "M",
+          [
+            18,
+            24
+          ]
+        ],
+        [
+          "M",
+          [
+            19,
+            25
+          ]
+        ],
+        [
+          "M",
+          [
+            21,
+            39
+          ]
+        ],
+        [
+          "M",
+          [
+            23,
+            30
+          ]
+        ],
+        [
+          "M",
+          [
+            28,
+            40
+          ]
+        ],
+        [
+          "M",
+          [
+            32,
+            35
+          ]
+        ],
+        [
+          "M",
+          [
+            34,
+            38
+          ]
+        ]
+      ]
+    }
+  ],
+  "schema": "c355-integral-oval-service-v1"
+}

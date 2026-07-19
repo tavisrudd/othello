@@ -38,6 +38,12 @@ an all-odd-`q` spectrum/count or a sharp obstruction; axes alone fail.
 
 ## C355: integral oval scheduling
 
+**Research gate complete 2026-07-19; queue transition pending coordinator.** Verdict:
+`THEOREM; ALL-ODD-FIELD SHARP ONE-REQUEST COLOURED BATCH
+DEFICIT`. Explicit internal/external projection matchings give a fractional but nonintegral demand
+`((q-3)/2,1)` after two helper deletions for every odd prime power `q>=5`; dropping one request is
+integrally feasible. See `notes/2026-07-18-c355-integral-oval-service.md`.
+
 **Goal.** Determine the integer demand semigroup, `T`-slot schedules, IDP/holes, and sharp rounding
 loss for coloured projection matchings, using C353 as the local gate.
 
