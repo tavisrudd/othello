@@ -1,0 +1,2687 @@
+{
+ "lane": "alt-orbit-repair",
+ "mathscinet": {
+  "observed": "HTTP 302 redirect to institutional authentication; no query executed.",
+  "reachable": false
+ },
+ "note": "Dated snapshot of live bibliographic databases. Counts grow over time; see module docstring for what --check does and does not certify.",
+ "schema_version": 1,
+ "seeds": {
+  "alderson-mds": {
+   "crossref": {
+    "is_referenced_by_count": 8
+   },
+   "doi": "10.1007/s00026-005-0245-7",
+   "openalex": {
+    "cited_by_count": 12,
+    "referenced_works_count": 22,
+    "title": "Extending MDS Codes",
+    "year": 2005
+   },
+   "openalex_citing": {
+    "n": 12,
+    "works": [
+     {
+      "doi": "10.1007/s10623-004-5659-4",
+      "title": "(6,3)-MDS Codes over an Alphabet of Size 4",
+      "year": 2005
+     },
+     {
+      "doi": "10.1016/j.jcta.2006.11.005",
+      "title": "Maximum distance separable codes and arcs in projective spaces",
+      "year": 2006
+     },
+     {
+      "doi": "10.1109/icn.2008.98",
+      "title": "Protocol Family for Optimal and Deterministic Symmetric Key Assignment",
+      "year": 2008
+     },
+     {
+      "doi": "10.1007/s11741-009-0513-3",
+      "title": "Note on maximal distance separable codes",
+      "year": 2009
+     },
+     {
+      "doi": "10.48550/arxiv.0904.4094",
+      "title": "On the Upper Bounds of MDS Codes",
+      "year": 2009
+     },
+     {
+      "doi": null,
+      "title": "The upper bound of general Maximum Distance Separable codes",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/978-3-319-17296-5_24",
+      "title": "Classification of MDS Codes over Small Alphabets",
+      "year": 2015
+     },
+     {
+      "doi": "10.1109/tit.2015.2488659",
+      "title": "On the Classification of MDS Codes",
+      "year": 2015
+     },
+     {
+      "doi": "10.7508/ijmsi.2015.01.002",
+      "title": "Optimal Linear Codes Over GF(7) and GF(11) with Dimension 3",
+      "year": 2015
+     },
+     {
+      "doi": null,
+      "title": "1 On the Classification of MDS Codes",
+      "year": 2016
+     },
+     {
+      "doi": "10.3934/amc.2020072",
+      "title": "Some optimal cyclic $ \\mathbb{F}_q $-linear $ \\mathbb{F}_{q^t} $-codes",
+      "year": 2020
+     },
+     {
+      "doi": "10.1109/tit.2024.3494813",
+      "title": "When Does the Extended Code of an MDS Code Remain MDS?",
+      "year": 2024
+     }
+    ]
+   },
+   "openalex_id": "W2058435648",
+   "semantic_scholar": {
+    "citationCount": 13,
+    "referenceCount": 41
+   }
+  },
+  "baker-wantz": {
+   "crossref": {
+    "is_referenced_by_count": 0
+   },
+   "doi": "10.2140/iig.2005.2.83",
+   "openalex": {
+    "cited_by_count": 0,
+    "referenced_works_count": 6,
+    "title": "An arc partition of the Hughes plane using a field-theoretic model",
+    "year": 2005
+   },
+   "openalex_citing": {
+    "n": 0,
+    "works": []
+   },
+   "openalex_id": "W2807335984",
+   "semantic_scholar": {
+    "citationCount": 0,
+    "referenceCount": 8
+   }
+  },
+  "ball-lavrauw": {
+   "crossref": {
+    "is_referenced_by_count": 21
+   },
+   "doi": "10.4171/emss/33",
+   "openalex": {
+    "cited_by_count": 0,
+    "referenced_works_count": 45,
+    "title": "Arcs in finite projective spaces",
+    "year": 2020
+   },
+   "openalex_citing": {
+    "n": 0,
+    "works": []
+   },
+   "openalex_id": "W2970275694",
+   "semantic_scholar": {
+    "citationCount": 49,
+    "referenceCount": 65
+   }
+  },
+  "bsw-1992": {
+   "crossref": {
+    "is_referenced_by_count": 3
+   },
+   "doi": "10.1007/BF01204717",
+   "openalex": {
+    "cited_by_count": 9,
+    "referenced_works_count": 6,
+    "title": "Characterization of complete exterior sets of conics",
+    "year": 1992
+   },
+   "openalex_citing": {
+    "n": 9,
+    "works": [
+     {
+      "doi": "10.1016/s0167-5060(08)70901-4",
+      "title": "A property of sharply 3–transitive finite permutation sets",
+      "year": 1992
+     },
+     {
+      "doi": "10.1016/s0378-3758(96)00006-7",
+      "title": "Maximal cliques in the Paley graph of square order",
+      "year": 1996
+     },
+     {
+      "doi": "10.1007/s00025-006-0210-8",
+      "title": "A Geometric Construction for Some Ovoids of the Hermitian Surface",
+      "year": 2006
+     },
+     {
+      "doi": "10.1016/j.disc.2011.07.010",
+      "title": "On sets without tangents and exterior sets of a conic",
+      "year": 2011
+     },
+     {
+      "doi": "10.48550/arxiv.1201.0484",
+      "title": "On sets without tangents and exterior sets of a conic",
+      "year": 2012
+     },
+     {
+      "doi": "10.48550/arxiv.1507.01289",
+      "title": "Designs from Paley graphs and Peisert graphs",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/s10623-022-01072-w",
+      "title": "Contributions by Aart Blokhuis to finite geometry, discrete mathematics, and combinatorics",
+      "year": 2022
+     },
+     {
+      "doi": "10.4153/s0008439524000742",
+      "title": "A strengthening of McConnel’s theorem on permutations over finite fields",
+      "year": 2024
+     },
+     {
+      "doi": "10.58088/2pkb-8z37",
+      "title": "Selected results in combinatorics and graph theory",
+      "year": 2024
+     }
+    ]
+   },
+   "openalex_id": "W2001379196",
+   "semantic_scholar": {
+    "citationCount": 11,
+    "referenceCount": 6
+   }
+  },
+  "cardinali-giuzzi-kwiatkowski": {
+   "crossref": {
+    "is_referenced_by_count": 5
+   },
+   "doi": "10.1016/j.ffa.2021.101895",
+   "openalex": {
+    "cited_by_count": 7,
+    "referenced_works_count": 8,
+    "title": "On the Grassmann graph of linear codes",
+    "year": 2021
+   },
+   "openalex_citing": {
+    "n": 7,
+    "works": [
+     {
+      "doi": "10.1016/j.jcta.2022.105720",
+      "title": "The graphs of non-degenerate linear codes",
+      "year": 2022
+     },
+     {
+      "doi": "10.1016/j.ffa.2023.102282",
+      "title": "On the graph of non-degenerate linear [n,2]2 codes",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.ffa.2023.102342",
+      "title": "Grassmannians of codes",
+      "year": 2023
+     },
+     {
+      "doi": "10.48550/arxiv.2304.08397",
+      "title": "Grassmannians of codes",
+      "year": 2023
+     },
+     {
+      "doi": "10.5614/ejgta.2023.11.2.11",
+      "title": "Linear codes and cyclic codes over finite rings and their generalizations: a survey",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/s00022-023-00709-y",
+      "title": "On maximal cliques in the graph of simplex codes",
+      "year": 2024
+     },
+     {
+      "doi": "10.1016/j.jcta.2024.105962",
+      "title": "Point-line geometries related to binary equidistant codes",
+      "year": 2024
+     }
+    ]
+   },
+   "openalex_id": "W3022201805",
+   "semantic_scholar": {
+    "citationCount": 11,
+    "referenceCount": 9
+   }
+  },
+  "dye-1991": {
+   "crossref": {
+    "is_referenced_by_count": 10
+   },
+   "doi": "10.1112/jlms/s2-44.2.270",
+   "openalex": {
+    "cited_by_count": 13,
+    "referenced_works_count": 0,
+    "title": "Hexagons, Conics, A<sub>5</sub> and PSL<sub>2</sub> (<i>K</i>)",
+    "year": 1991
+   },
+   "openalex_citing": {
+    "n": 13,
+    "works": [
+     {
+      "doi": "10.1016/0097-3165(95)90051-9",
+      "title": "Primitive arcs in PG(2, q)",
+      "year": 1995
+     },
+     {
+      "doi": "10.1007/bf02940804",
+      "title": "Double-sixers of hexagons,A 6 and PSL3(K)",
+      "year": 1996
+     },
+     {
+      "doi": "10.1017/s0013091500023452",
+      "title": "Space sextic curves with six bitangents, and some geometry of the diagonal cubic surface",
+      "year": 1997
+     },
+     {
+      "doi": "10.1007/bf02942548",
+      "title": "The Plane Sextic Curve Fixed by A6",
+      "year": 1998
+     },
+     {
+      "doi": "10.1007/bf01228679",
+      "title": "Some geometry ofA 7 andPSU 3(52)",
+      "year": 1999
+     },
+     {
+      "doi": "10.1016/j.jcta.2010.11.010",
+      "title": "Dimensions of some binary codes arising from a conic in<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.gif\" overflow=\"scroll\"><mml:mi mathvariant=\"normal\">PG</mml:mi><mml:mo stretchy=\"false\">(</mml:mo><mml:mn>2</mml:mn><mml:mo>,</mml:mo><mml:mi>q</mml:mi><mml:mo stretchy=\"false\">)</mml:mo></mml:math>",
+      "year": 2010
+     },
+     {
+      "doi": "10.1016/j.ejc.2011.08.001",
+      "title": "On binary codes from conics in <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.gif\" display=\"inline\" overflow=\"scroll\"><mml:mstyle mathvariant=\"normal\"><mml:mi>PG</mml:mi></mml:mstyle><mml:mrow><mml:mo>(</mml:mo><mml:mn>2</mml:mn><mml:mo>,</mml:mo><mml:mi>q</mml:mi><mml:mo>)</mml:mo></mml:mrow></mml:math>",
+      "year": 2011
+     },
+     {
+      "doi": "10.1007/s10623-012-9682-6",
+      "title": "Proofs of two conjectures on the dimensions of binary codes",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s10623-012-9772-5",
+      "title": "2-Ranks of incidence matrices associated with conics in finite projective planes",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s10623-013-9806-7",
+      "title": "Coset intersection of irreducible plane cubics",
+      "year": 2013
+     },
+     {
+      "doi": "10.1016/j.laa.2013.04.004",
+      "title": "Conics arising from internal points and their binary codes",
+      "year": 2013
+     },
+     {
+      "doi": "10.1016/j.jcta.2018.06.006",
+      "title": "One-factorisations of complete graphs arising from ovals in finite planes",
+      "year": 2018
+     },
+     {
+      "doi": "10.17863/cam.34879",
+      "title": "Assessing formal written ability in Mathematics",
+      "year": 2018
+     }
+    ]
+   },
+   "openalex_id": "W2026622256",
+   "semantic_scholar": {
+    "citationCount": 14,
+    "referenceCount": 0
+   }
+  },
+  "ito-reconfig": {
+   "crossref": {
+    "is_referenced_by_count": 215
+   },
+   "doi": "10.1016/j.tcs.2010.12.005",
+   "openalex": {
+    "cited_by_count": 259,
+    "referenced_works_count": 17,
+    "title": "On the complexity of reconfiguration problems",
+    "year": 2010
+   },
+   "openalex_citing": {
+    "n": 260,
+    "works": [
+     {
+      "doi": null,
+      "title": "Convexifying Polygons Without Losing Visibilities",
+      "year": 2011
+     },
+     {
+      "doi": "10.1007/978-3-642-20877-5_10",
+      "title": "An Improved Sufficient Condition for Reconfiguration of List Edge-Colorings in a Tree",
+      "year": 2011
+     },
+     {
+      "doi": "10.1007/978-3-642-20877-5_7",
+      "title": "Approximability of the Subset Sum Reconfiguration Problem",
+      "year": 2011
+     },
+     {
+      "doi": "10.1016/j.endm.2011.09.028",
+      "title": "On the diameter of reconfiguration graphs for vertex colourings",
+      "year": 2011
+     },
+     {
+      "doi": "10.1007/978-3-642-32589-2_22",
+      "title": "The Complexity of Rerouting Shortest Paths",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/978-3-642-35261-4_7",
+      "title": "Reconfiguration of List L(2,1)-Labelings in a Graph",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s10878-012-9490-y",
+      "title": "Reconfiguration graphs for vertex colourings of chordal and chordal bipartite graphs",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s10878-012-9562-z",
+      "title": "Approximability of the subset sum reconfiguration problem",
+      "year": 2012
+     },
+     {
+      "doi": "10.1016/j.dam.2012.05.014",
+      "title": "Reconfiguration of list edge-colorings in a graph",
+      "year": 2012
+     },
+     {
+      "doi": "10.1016/j.tcs.2012.03.004",
+      "title": "Complexity of independent set reconfigurability problems",
+      "year": 2012
+     },
+     {
+      "doi": "10.1587/transinf.e95.d.737",
+      "title": "An Improved Sufficient Condition for Reconfiguration of List Edge-Colorings in a Tree",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/978-3-319-03898-8_24",
+      "title": "On the Parameterized Complexity of Reconfiguration Problems",
+      "year": 2013
+     },
+     {
+      "doi": "10.1007/s00373-013-1302-3",
+      "title": "The k-Dominating Graph",
+      "year": 2013
+     },
+     {
+      "doi": "10.1016/j.endm.2013.10.040",
+      "title": "Recoloring bounded treewidth graphs",
+      "year": 2013
+     },
+     {
+      "doi": "10.1016/j.tcs.2013.09.012",
+      "title": "The complexity of rerouting shortest paths",
+      "year": 2013
+     },
+     {
+      "doi": "10.1017/cbo9781139506748.005",
+      "title": "The complexity of change",
+      "year": 2013
+     },
+     {
+      "doi": null,
+      "title": "Colouring Reconfiguration Is Fixed-Parameter Tractable ⋆",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-06089-7_24",
+      "title": "On the Parameterized Complexity for Token Jumping on Graphs",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-06686-8_27",
+      "title": "The Connectivity of Boolean Satisfiability: Dichotomies for Formulas and Circuits",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-08404-6_8",
+      "title": "Reconfiguring Independent Sets in Claw-Free Graphs",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-08783-2_35",
+      "title": "Reconfiguration of Dominating Sets",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-12340-0_9",
+      "title": "Independent Set Reconfiguration in Cographs",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-12691-3_24",
+      "title": "The List Coloring Reconfiguration Problem for Bounded Pathwidth Graphs",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-12799-6_1",
+      "title": "Introduction",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-12799-6_2",
+      "title": "The University Course Timetabling Problem",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-13075-0_17",
+      "title": "Fixed-Parameter Tractability of Token Jumping on Planar Graphs",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-13075-0_31",
+      "title": "Polynomial-Time Algorithm for Sliding Tokens on Trees",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-13075-0_36",
+      "title": "Vertex Cover Reconfiguration and Beyond",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-319-13524-3_21",
+      "title": "Reconfiguration over Tree Decompositions",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/978-3-662-44465-8_25",
+      "title": "A Reconfigurations Analogue of Brooks’ Theorem",
+      "year": 2014
+     },
+     {
+      "doi": "10.1016/j.tcs.2014.04.011",
+      "title": "Reconfiguration of list<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.gif\" overflow=\"scroll\"><mml:mi>L</mml:mi><mml:mo stretchy=\"false\">(</mml:mo><mml:mn>2</mml:mn><mml:mo>,</mml:mo><mml:mn>1</mml:mn><mml:mo stretchy=\"false\">)</mml:mo></mml:math>-labelings in a graph",
+      "year": 2014
+     },
+     {
+      "doi": "10.1145/2603088.2603126",
+      "title": "No proof nets for MLL with units",
+      "year": 2014
+     },
+     {
+      "doi": "10.48550/arxiv.1406.1433",
+      "title": "Reconfiguring Independent Sets in Cographs",
+      "year": 2014
+     },
+     {
+      "doi": "10.48550/arxiv.1406.6576",
+      "title": "Linear-Time Algorithm for Sliding Tokens on Trees",
+      "year": 2014
+     },
+     {
+      "doi": null,
+      "title": "On Reconfiguration Problems: Structure and Tractability",
+      "year": 2015
+     },
+     {
+      "doi": null,
+      "title": "On the Complexity of Reconfiguration of Clique, Cluster Vertex Deletion, and Dominating Set",
+      "year": 2015
+     },
+     {
+      "doi": "10.1002/jgt.21992",
+      "title": "Independent Set Reconfiguration in Cographs and their Generalizations",
+      "year": 2015
+     },
+     {
+      "doi": "10.1002/jgt.22000",
+      "title": "A Reconfigurations Analogue of Brooks' Theorem and Its Consequences",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-319-17142-5_19",
+      "title": "Reconfiguration of Cliques in a Graph",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-319-19315-1_15",
+      "title": "Reconfiguration of Vertex Covers in a Graph",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-319-21840-3_33",
+      "title": "The Complexity of Dominating Set Reconfiguration",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-319-21840-3_42",
+      "title": "Reconfiguration on Sparse Graphs",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-662-47672-7_50",
+      "title": "Ground State Connectivity of Local Hamiltonians",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-662-47672-7_80",
+      "title": "Shortest Reconfiguration Paths in the Solution Space of Boolean Formulas",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-662-48054-0_42",
+      "title": "Degree-Constrained Subgraph Reconfiguration is in P",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/s00224-015-9663-z",
+      "title": "The Connectivity of Boolean Satisfiability: Dichotomies for Formulas and Circuits",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/s00453-015-0009-7",
+      "title": "Finding Shortest Paths Between Graph Colourings",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/s10878-015-9947-x",
+      "title": "Reconfiguration of dominating sets",
+      "year": 2015
+     },
+     {
+      "doi": "10.1016/j.tcs.2015.07.037",
+      "title": "Linear-time algorithm for sliding tokens on trees",
+      "year": 2015
+     },
+     {
+      "doi": "10.1587/transfun.e98.a.1168",
+      "title": "The List Coloring Reconfiguration Problem for Bounded Pathwidth Graphs",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/978-3-319-30000-9_26",
+      "title": "The Complexity of Induced Tree Reconfiguration Problems",
+      "year": 2016
+     },
+     {
+      "doi": "10.1007/978-3-319-30139-6_19",
+      "title": "Shortest Reconfiguration of Sliding Tokens on a Caterpillar",
+      "year": 2016
+     },
+     {
+      "doi": "10.1007/978-3-319-44543-4_13",
+      "title": "Reconfiguration of Steiner Trees in an Unweighted Graph",
+      "year": 2016
+     },
+     {
+      "doi": "10.1007/s00453-016-0159-2",
+      "title": "On the Parameterized Complexity of Reconfiguration Problems",
+      "year": 2016
+     },
+     {
+      "doi": "10.1016/j.dam.2016.05.024",
+      "title": "Rerouting shortest paths in planar graphs",
+      "year": 2016
+     },
+     {
+      "doi": "10.1016/j.tcs.2016.05.015",
+      "title": "A dichotomy theorem for circular colouring reconfiguration",
+      "year": 2016
+     },
+     {
+      "doi": "10.1016/j.tcs.2016.07.008",
+      "title": "Inferring local transition functions of discrete dynamical systems from observations of system behavior",
+      "year": 2016
+     },
+     {
+      "doi": "10.1016/j.tcs.2016.08.016",
+      "title": "The complexity of dominating set reconfiguration",
+      "year": 2016
+     },
+     {
+      "doi": "10.1587/transinf.2015fcp0010",
+      "title": "Reconfiguration of Vertex Covers in a Graph",
+      "year": 2016
+     },
+     {
+      "doi": "10.2168/lmcs-12(1:2)2016",
+      "title": "Proof equivalence in MLL is PSPACE-complete",
+      "year": 2016
+     },
+     {
+      "doi": "10.1007/978-3-319-53925-6_27",
+      "title": "The Complexity of (List) Edge-Coloring Reconfiguration Problem",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/978-3-319-53925-6_36",
+      "title": "Sliding Tokens on Block Graphs",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/978-3-319-62389-4_24",
+      "title": "Reconfiguration of Maximum-Weight b-Matchings in a Graph",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/978-3-319-68705-6_10",
+      "title": "Token Sliding on Chordal Graphs",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/978-3-319-71150-8_15",
+      "title": "The Coloring Reconfiguration Problem on Specific Graph Classes",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/978-3-662-55751-8_12",
+      "title": "Token Jumping in Minor-Closed Classes",
+      "year": 2017
+     },
+     {
+      "doi": "10.1016/j.disc.2017.03.007",
+      "title": "Reconfiguring dominating sets in some well-covered and other classes of graphs",
+      "year": 2017
+     },
+     {
+      "doi": "10.1016/j.ejc.2017.10.010",
+      "title": "Recoloring graphs via tree decompositions",
+      "year": 2017
+     },
+     {
+      "doi": "10.1016/j.jcss.2017.11.003",
+      "title": "Reconfiguration in bounded bandwidth and tree-depth",
+      "year": 2017
+     },
+     {
+      "doi": "10.1016/j.tcs.2017.11.013",
+      "title": "Fixing improper colorings of graphs",
+      "year": 2017
+     },
+     {
+      "doi": "10.1137/16m1065288",
+      "title": "Shortest Reconfiguration Paths in the Solution Space of Boolean Formulas",
+      "year": 2017
+     },
+     {
+      "doi": "10.1587/transfun.e100.a.1532",
+      "title": "Reconfiguration of Steiner Trees in an Unweighted Graph",
+      "year": 2017
+     },
+     {
+      "doi": "10.1587/transfun.e101.a.232",
+      "title": "The Complexity of (List) Edge-Coloring Reconfiguration Problem",
+      "year": 2017
+     },
+     {
+      "doi": "10.20944/preprints201709.0055.v1",
+      "title": "Introduction to Reconfiguration",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/978-3-319-94776-1_36",
+      "title": "Reconfiguring Spanning and Induced Subgraphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1007/s00373-018-1913-9",
+      "title": "The Connectivity of Token Graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1007/s00373-018-1985-6",
+      "title": "Cut-Colorings in Coloring Graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1007/s00454-018-0035-8",
+      "title": "A Proof of the Orbit Conjecture for Flipping Edge-Labelled Triangulations",
+      "year": 2018
+     },
+     {
+      "doi": "10.1007/s10878-018-0289-3",
+      "title": "Reconfiguration of maximum-weight b-matchings in a graph",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.dam.2018.03.085",
+      "title": "The packing number of the double vertex graph of the path graph",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.dam.2018.05.029",
+      "title": "Independent-set reconfiguration thresholds of hereditary graph classes",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.disc.2018.07.007",
+      "title": "Reconfiguration graphs of shortest paths",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.disc.2018.09.006",
+      "title": "Connected <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\" overflow=\"scroll\" id=\"d1e220\" altimg=\"si33.gif\"><mml:mi>k</mml:mi></mml:math>-dominating graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.ejc.2017.10.010",
+      "title": "Recoloring graphs via tree decompositions",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.jcss.2018.02.004",
+      "title": "Reconfiguration on sparse graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.tcs.2018.05.005",
+      "title": "Parameterized complexity of the list coloring reconfiguration problem with graph parameters",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.tcs.2018.11.024",
+      "title": "Reconfiguration of colorable sets in classes of perfect graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1137/1.9781611975031.13",
+      "title": "The Complexity of Independent Set Reconfiguration on Bipartite Graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.1145/3186587",
+      "title": "Ground State Connectivity of Local Hamiltonians",
+      "year": 2018
+     },
+     {
+      "doi": "10.3390/a11020020",
+      "title": "Vertex Cover Reconfiguration and Beyond",
+      "year": 2018
+     },
+     {
+      "doi": "10.3390/a11040040",
+      "title": "Connectivity and Hamiltonicity of Canonical Colouring Graphs of Bipartite and Complete Multipartite Graphs",
+      "year": 2018
+     },
+     {
+      "doi": "10.3390/a11040052",
+      "title": "Introduction to Reconfiguration",
+      "year": 2018
+     },
+     {
+      "doi": "10.3390/a11090140",
+      "title": "Complexity of Hamiltonian Cycle Reconfiguration",
+      "year": 2018
+     },
+     {
+      "doi": "10.37236/7458",
+      "title": "Reconfiguration on Nowhere Dense Graph Classes",
+      "year": 2018
+     },
+     {
+      "doi": "10.48550/arxiv.1803.05825",
+      "title": "A Generalized Matching Reconfiguration Problem",
+      "year": 2018
+     },
+     {
+      "doi": "10.7151/dmgt.2044",
+      "title": "Reconfiguring minimum dominating sets: the γ-graph of a tree",
+      "year": 2018
+     },
+     {
+      "doi": "10.1007/978-3-030-10801-4_18",
+      "title": "On the Complexity of Optimal Matching Reconfiguration",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/978-3-030-17402-6_22",
+      "title": "Shortest Reconfiguration Sequence for Sliding Tokens on Spiders",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/978-3-030-24766-9_26",
+      "title": "Reconfiguring Undirected Paths",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/978-3-030-26176-4_26",
+      "title": "Incremental Optimization of Independent Sets Under the Reconfiguration Framework",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/978-3-030-30786-8_13",
+      "title": "Shortest Reconfiguration of Matchings",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/978-3-030-30786-8_22",
+      "title": "Independent Set Reconfiguration Parameterized by Modular-Width",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/978-3-030-30786-8_25",
+      "title": "Reconfiguring Hamiltonian Cycles in L-Shaped Grid Graphs",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/s00236-019-00336-8",
+      "title": "Using contracted solution graphs for solving reconfiguration problems",
+      "year": 2019
+     },
+     {
+      "doi": "10.1016/j.disc.2019.111640",
+      "title": "Classification of reconfiguration graphs of shortest path graphs with no induced 4-cycles",
+      "year": 2019
+     },
+     {
+      "doi": "10.1016/j.tcs.2019.05.028",
+      "title": "Reconfiguration of satisfying assignments and subset sums: Easy to find, hard to connect",
+      "year": 2019
+     },
+     {
+      "doi": "10.1587/transinf.2018fcp0005",
+      "title": "The Coloring Reconfiguration Problem on Specific Graph Classes",
+      "year": 2019
+     },
+     {
+      "doi": "10.1587/transinf.2018fcp0010",
+      "title": "The Complexity of Induced Tree Reconfiguration Problems",
+      "year": 2019
+     },
+     {
+      "doi": "10.26493/1855-3974.1813.7ae",
+      "title": "Reconfiguring vertex colourings of 2-trees",
+      "year": 2019
+     },
+     {
+      "doi": "10.48550/arxiv.1911.02786",
+      "title": "Trichotomy for the reconfiguration problem of integer linear systems",
+      "year": 2019
+     },
+     {
+      "doi": "10.48550/arxiv.1912.03127",
+      "title": "Dominating sets reconfiguration under token sliding",
+      "year": 2019
+     },
+     {
+      "doi": null,
+      "title": "Characterizing Circular Colouring Mixing for $\\frac{p}{q}<4$",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/978-3-030-39881-1_12",
+      "title": "Reconfiguring k-path Vertex Covers",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/978-3-030-39881-1_29",
+      "title": "Trichotomy for the Reconfiguration Problem of Integer Linear Systems",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/978-3-030-42071-0_17",
+      "title": "Games, Puzzles and Treewidth",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/978-3-030-48966-3_6",
+      "title": "Decremental Optimization of Dominating Sets Under the Reconfiguration Framework",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/s00224-020-09967-8",
+      "title": "Token Sliding on Split Graphs",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/s10878-020-00630-z",
+      "title": "Incremental optimization of independent sets under the reconfiguration framework",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.dam.2020.01.022",
+      "title": "Parameterized complexity of independent set reconfiguration problems",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.ejc.2020.103086",
+      "title": "Reconfiguring graph homomorphisms on the sphere",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.jcss.2020.03.003",
+      "title": "Distributed reconfiguration of maximal independent sets",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.jctb.2020.10.001",
+      "title": "Dismantlability, connectedness, and mixing in relational structures",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.tcs.2020.12.025",
+      "title": "Trichotomy for the reconfiguration problem of integer linear systems",
+      "year": 2020
+     },
+     {
+      "doi": "10.1017/s0963548320000139",
+      "title": "Frozen (Δ + 1)-colourings of bounded degree graphs",
+      "year": 2020
+     },
+     {
+      "doi": "10.4230/lipics.esa.2020.24",
+      "title": "Reconfiguration of Spanning Trees with Many or Few Leaves",
+      "year": 2020
+     },
+     {
+      "doi": "10.4230/lipics.ipec.2020.15",
+      "title": "Fixed-Parameter Algorithms for Graph Constraint Logic",
+      "year": 2020
+     },
+     {
+      "doi": "10.4230/lipics.isaac.2020.37",
+      "title": "Linear Transformations Between Dominating Sets in the TAR-Model",
+      "year": 2020
+     },
+     {
+      "doi": "10.48550/arxiv.2003.05956",
+      "title": "Reconfiguration of Colourings and Dominating Sets in Graphs: a Survey",
+      "year": 2020
+     },
+     {
+      "doi": "10.48550/arxiv.2004.10873",
+      "title": "Some results on Vertex Separator Reconfiguration",
+      "year": 2020
+     },
+     {
+      "doi": "10.5120/ijca2020920462",
+      "title": "On the Automation of the Token Graphs",
+      "year": 2020
+     },
+     {
+      "doi": "10.59254/sbpo-2020-122743",
+      "title": "Integer Linear Programming Models for Sequential and Parallel Token Swaps in Graphs",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/978-3-030-79987-8_35",
+      "title": "Reconfiguring Simple s, t Hamiltonian Paths in Rectangular Grid Graphs",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/978-3-030-86593-1_8",
+      "title": "TS-Reconfiguration of Dominating Sets in Circle and Circular-Arc Graphs",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/978-3-030-89543-3_29",
+      "title": "Reconfiguring Directed Trees in a Digraph",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/978-3-030-89543-3_30",
+      "title": "Decremental Optimization of Vertex-Coloring Under the Reconfiguration Framework",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/978-3-030-89543-3_54",
+      "title": "Computational Complexity of Jumping Block Puzzles",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/978-3-030-91081-5_40",
+      "title": "Distributed Reconfiguration of Spanning Trees",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/s00373-021-02301-0",
+      "title": "The Edge-Connectivity of Token Graphs",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/s00453-021-00848-1",
+      "title": "On Girth and the Parameterized Complexity of Token Sliding and Token Jumping",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/s00453-021-00848-1",
+      "title": "On Girth and the Parameterized Complexity of Token Sliding and Token Jumping",
+      "year": 2021
+     },
+     {
+      "doi": "10.1016/j.dam.2021.05.014",
+      "title": "Dominating sets reconfiguration under token sliding",
+      "year": 2021
+     },
+     {
+      "doi": "10.1016/j.jctb.2020.10.001",
+      "title": "Dismantlability, connectedness, and mixing in relational structures",
+      "year": 2021
+     },
+     {
+      "doi": "10.1016/j.tcs.2021.01.009",
+      "title": "Optimal reconfiguration of optimal ladder lotteries",
+      "year": 2021
+     },
+     {
+      "doi": "10.1016/j.tcs.2021.02.019",
+      "title": "Shortest reconfiguration of sliding tokens on subclasses of interval graphs",
+      "year": 2021
+     },
+     {
+      "doi": "10.4230/lipics.esa.2022.3",
+      "title": "Hardness of Token Swapping on Trees",
+      "year": 2021
+     },
+     {
+      "doi": "10.4230/lipics.itcs.2022.36",
+      "title": "Distributed Vertex Cover Reconfiguration",
+      "year": 2021
+     },
+     {
+      "doi": "10.48550/arxiv.2107.03092",
+      "title": "Reconfiguring (non-spanning) arborescences",
+      "year": 2021
+     },
+     {
+      "doi": "10.1002/jgt.22870",
+      "title": "Characterizing circular colouring mixing for pq&lt;4 $\\frac{p}{q}\\lt 4$",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-030-96731-4_22",
+      "title": "Parameterized Complexity of Reconfiguration of Atoms",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-030-96731-4_3",
+      "title": "Invitation to Combinatorial Reconfiguration",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-030-96731-4_4",
+      "title": "Reconfiguration of Regular Induced Subgraphs",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-15914-5_5",
+      "title": "Token Sliding on Graphs of Girth Five",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-20624-5_44",
+      "title": "Complexity Results on Untangling Red-Blue Matchings",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-21017-4_25",
+      "title": "Brief Announcement: Distributed Reconfiguration of Spanning Trees",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-21203-1_43",
+      "title": "On Reachable Assignments Under Dichotomous Preferences",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-22105-7_41",
+      "title": "The Hamiltonian Path Graph is Connected for Simple s, t Paths in Rectangular Grid Graphs",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/s00224-022-10069-w",
+      "title": "Multistage Vertex Cover",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/s00453-021-00909-5",
+      "title": "On the Parameterized Complexity of Reconfiguration of Connected Dominating Sets",
+      "year": 2022
+     },
+     {
+      "doi": "10.1016/j.comgeo.2022.101974",
+      "title": "Complexity results on untangling red-blue matchings",
+      "year": 2022
+     },
+     {
+      "doi": "10.1016/j.dam.2022.08.005",
+      "title": "Irredundance graphs",
+      "year": 2022
+     },
+     {
+      "doi": "10.1016/j.tcs.2022.11.036",
+      "title": "On reconfigurability of target sets",
+      "year": 2022
+     },
+     {
+      "doi": "10.1016/j.tcs.2022.12.007",
+      "title": "Reconfiguring (non-spanning) arborescences",
+      "year": 2022
+     },
+     {
+      "doi": "10.1109/focs52979.2021.00027",
+      "title": "Parameterized Problems Complete for Nondeterministic FPT time and Logarithmic Space",
+      "year": 2022
+     },
+     {
+      "doi": "10.1137/20m1364370",
+      "title": "Shortest Reconfiguration of Perfect Matchings via Alternating Cycles",
+      "year": 2022
+     },
+     {
+      "doi": "10.1145/3488560.3498382",
+      "title": "Reconfiguration Problems on Submodular Functions",
+      "year": 2022
+     },
+     {
+      "doi": "10.1587/transinf.2021edp7177",
+      "title": "Reconfiguring &lt;i&gt;k&lt;/i&gt;-Path Vertex Covers",
+      "year": 2022
+     },
+     {
+      "doi": "10.1609/aaai.v36i5.20441",
+      "title": "Reforming an Envy-Free Matching",
+      "year": 2022
+     },
+     {
+      "doi": "10.21203/rs.3.rs-2049659/v1",
+      "title": "Parameterized Complexities of Dominating and Independent Set Reconfiguration",
+      "year": 2022
+     },
+     {
+      "doi": "10.2139/ssrn.4049750",
+      "title": "Computational Complexity of Jumping Block Puzzles",
+      "year": 2022
+     },
+     {
+      "doi": "10.4036/iis.2022.r.06",
+      "title": "Computational Complexity of Puzzles and Related Topics",
+      "year": 2022
+     },
+     {
+      "doi": "10.46298/dmtcs.7538",
+      "title": "On the Connectivity of Token Graphs of Trees",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-27051-2_17",
+      "title": "Reconfiguration of Vertex-Disjoint Shortest Paths on Graphs",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-27051-2_22",
+      "title": "On the Complexity of Distance-d Independent Set Reconfiguration",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-27051-2_24",
+      "title": "Parameterized Complexity of Optimizing List Vertex-Coloring Through Reconfiguration",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-32636-3_13",
+      "title": "Card-Based Zero-Knowledge Proof Protocol for Pancake Sorting",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-32726-1_6",
+      "title": "Inapproximability of Shortest Paths on Perfect Matching Polytopes",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-33271-5_12",
+      "title": "ZDD-Based Algorithmic Framework for Solving Shortest Reconfiguration Problems",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-38906-1_34",
+      "title": "Reconfiguration of Time-Respecting Arborescences",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-43619-2_19",
+      "title": "Hamiltonian Cycle Reconfiguration with Answer Set Programming",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-43619-2_20",
+      "title": "Recongo: Bounded Combinatorial Reconfiguration with Answer Set Programming",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-49611-0_30",
+      "title": "On Connectedness of Solutions to Integer Linear Systems",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/s00373-023-02703-2",
+      "title": "On Dominating Graph of Graphs, Median Graphs, Partial Cubes and Complement of Minimal Dominating Sets",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/s00453-023-01117-z",
+      "title": "Reconfiguration of Spanning Trees with Degree Constraints or Diameter Constraints",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/s00453-023-01181-5",
+      "title": "Token Sliding on Graphs of Girth Five",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/s10107-023-02025-4",
+      "title": "Inapproximability of shortest paths on perfect matching polytopes",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.dam.2023.01.026",
+      "title": "Reconfiguration of cliques in a graph",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.tcs.2023.113863",
+      "title": "Fixed-parameter algorithms for graph constraint logic",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.tcs.2023.114158",
+      "title": "Sorting balls and water: Equivalence and computational complexity",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.tcs.2023.114188",
+      "title": "Feedback vertex set reconfiguration in planar graphs",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.tcs.2023.114196",
+      "title": "On reachable assignments under dichotomous preferences",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.tcs.2023.114292",
+      "title": "Computational complexity of jumping block puzzles",
+      "year": 2023
+     },
+     {
+      "doi": "10.1051/ro/2023134",
+      "title": "Polynomial time algorithms for the token swapping problem on cographs",
+      "year": 2023
+     },
+     {
+      "doi": "10.1080/23799927.2023.2185543",
+      "title": "Decremental optimization of vertex-colouring under the reconfiguration framework",
+      "year": 2023
+     },
+     {
+      "doi": "10.1103/physreva.108.023107",
+      "title": "Efficient algorithms to solve atom reconfiguration problems. I. Redistribution-reconfiguration algorithm",
+      "year": 2023
+     },
+     {
+      "doi": "10.1103/physreva.108.023108",
+      "title": "Efficient algorithms to solve atom reconfiguration problems. II. Assignment-rerouting-ordering algorithm",
+      "year": 2023
+     },
+     {
+      "doi": "10.1109/ictai59109.2023.00050",
+      "title": "Solving Reconfiguration Problems of First-Order Expressible Properties of Graph Vertices with Boolean Satisfiability",
+      "year": 2023
+     },
+     {
+      "doi": "10.1137/1.9781611977554.ch141",
+      "title": "Model-Checking for First-Order Logic with Disjoint Paths Predicates in Proper Minor-Closed Graph Classes",
+      "year": 2023
+     },
+     {
+      "doi": "10.1142/s0129054123470019",
+      "title": "Reconfiguration of Hamiltonian Cycles in Rectangular Grid Graphs",
+      "year": 2023
+     },
+     {
+      "doi": "10.21203/rs.3.rs-3259186/v1",
+      "title": "Parameterized complexity of reconfiguration of atoms",
+      "year": 2023
+     },
+     {
+      "doi": "10.3233/faia230303",
+      "title": "PARIS: Planning Algorithms for Reconfiguring Independent Sets",
+      "year": 2023
+     },
+     {
+      "doi": "10.3233/faia230334",
+      "title": "On Solution Discovery via Reconfiguration",
+      "year": 2023
+     },
+     {
+      "doi": "10.36001/phmap.2023.v4i1.3625",
+      "title": "Algorithmic Study for Power Restoration in Electrical Distribution Networks",
+      "year": 2023
+     },
+     {
+      "doi": "10.37236/11876",
+      "title": "Graphs Isomorphisms Under Edge-Replacements and the Family of Amoebas",
+      "year": 2023
+     },
+     {
+      "doi": "10.48550/arxiv.2310.14160",
+      "title": "Gap Amplification for Reconfiguration Problems",
+      "year": 2023
+     },
+     {
+      "doi": "10.5753/etc.2023.230681",
+      "title": "Complexidade parametrizada do problema de reconfiguração de separadores",
+      "year": 2023
+     },
+     {
+      "doi": "10.1007/978-3-031-52113-3_4",
+      "title": "On the Computational Complexity of Generalized Common Shape Puzzles",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/978-981-97-0566-5_16",
+      "title": "Reconfiguration of Multisets with Applications to Bin Packing",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/978-981-97-0566-5_17",
+      "title": "The Shortest Path Reconfiguration Problem Based on Relaxation of Reconfiguration Rules",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/978-981-97-0566-5_18",
+      "title": "Combinatorial Reconfiguration with Answer Set Programming: Algorithms, Encodings, and Empirical Analysis",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/978-981-97-0566-5_2",
+      "title": "Reasons to Fall (More) in Love with Combinatorial Reconfiguration",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/s00453-024-01261-0",
+      "title": "Algorithmic Meta-Theorems for Combinatorial Reconfiguration Revisited",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/s00453-024-01262-z",
+      "title": "Parameterized Complexity of Reconfiguration of Atoms",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/s00453-024-01271-y",
+      "title": "Reachability of Fair Allocations via Sequential Exchanges",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/s10878-024-01207-w",
+      "title": "The hamiltonian path graph is connected for simple s, t paths in rectangular grid graphs",
+      "year": 2024
+     },
+     {
+      "doi": "10.1016/j.cosrev.2024.100663",
+      "title": "A survey on the parameterized complexity of reconfiguration problems",
+      "year": 2024
+     },
+     {
+      "doi": "10.1016/j.jcss.2024.103578",
+      "title": "On finding short reconfiguration sequences between independent sets",
+      "year": 2024
+     },
+     {
+      "doi": "10.1016/j.tcs.2024.114682",
+      "title": "On the complexity of distance-d independent set reconfiguration",
+      "year": 2024
+     },
+     {
+      "doi": "10.1137/1.9781611977912.54",
+      "title": "Gap Amplification for Reconfiguration Problems",
+      "year": 2024
+     },
+     {
+      "doi": "10.1145/3618260.3649667",
+      "title": "Probabilistically Checkable Reconfiguration Proofs and Inapproximability of Reconfiguration Problems",
+      "year": 2024
+     },
+     {
+      "doi": "10.1145/3659467.3659905",
+      "title": "Card-Based Zero-Knowledge Proof Protocols for the 15-Puzzle and the Token Swapping Problem",
+      "year": 2024
+     },
+     {
+      "doi": "10.1609/aaai.v38i9.28836",
+      "title": "Reachability of Fair Allocations via Sequential Exchanges",
+      "year": 2024
+     },
+     {
+      "doi": "10.21203/rs.3.rs-4264997/v1",
+      "title": "On the Computational Complexity of Generalized Common Shape Puzzles",
+      "year": 2024
+     },
+     {
+      "doi": "10.46298/dmtcs.13116",
+      "title": "Spanning trees for many different numbers of leaves",
+      "year": 2024
+     },
+     {
+      "doi": "10.1007/978-3-031-75409-8_3",
+      "title": "Independent Set Reconfiguration in H-Free Graphs",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-3-032-00281-5_21",
+      "title": "Algorithms for Burning Schedule Reconfiguration Problem on Path Forests",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-3-032-09120-8_7",
+      "title": "Parameterised Algorithms for Temporally Satisfying Reconfiguration Problems",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-981-95-0218-9_6",
+      "title": "Reconfiguring Multiple Connected Components with Size Multiset Constraints",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-981-96-1090-7_22",
+      "title": "The Complexity of Distance-r Dominating Set Reconfiguration",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-981-96-2845-2_14",
+      "title": "Independent Set Reconfiguration Under Bounded-Hop Token Jumping",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-981-96-2845-2_22",
+      "title": "Changing Induced Subgraph Isomorphisms Under Extended Reconfiguration Rules",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/s00453-025-01294-z",
+      "title": "Reforming an Envy-Free Matching",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/s00453-025-01310-2",
+      "title": "Reconfiguration of the Union of Arborescences",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/s00453-025-01324-w",
+      "title": "Reconfiguration of Multisets with Applications to Bin Packing",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/s00453-025-01365-1",
+      "title": "Reconfiguration of Time-Respecting Arborescences",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/s40590-025-00723-x",
+      "title": "On the automorphism group of token graphs of complete bipartite graphs",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/s41468-025-00219-7",
+      "title": "Homotopy types of Hom complexes of graph homomorphisms whose codomains are cycles",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.dam.2025.12.009",
+      "title": "Complexity of action path finding with small precondition sets",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.ic.2025.105367",
+      "title": "Changing induced subgraph isomorphisms under extended reconfiguration rules",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.ipl.2024.106556",
+      "title": "On approximate reconfigurability of label cover",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.jcss.2025.103733",
+      "title": "Gap preserving reductions between reconfiguration problems",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.jcss.2025.103747",
+      "title": "On solution discovery via reconfiguration",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.tcs.2025.115502",
+      "title": "On the complexity of temporal arborescence reconfiguration",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.tcs.2025.115651",
+      "title": "Independent set reconfiguration under bounded-hop token jumping",
+      "year": 2025
+     },
+     {
+      "doi": "10.1051/ro/2025006",
+      "title": "Some results on vertex separator reconfiguration",
+      "year": 2025
+     },
+     {
+      "doi": "10.1137/23m1610938",
+      "title": "Tverberg Partition Graphs",
+      "year": 2025
+     },
+     {
+      "doi": "10.1137/23m1623690",
+      "title": "Reconfiguration of Digraph Homomorphisms",
+      "year": 2025
+     },
+     {
+      "doi": "10.1145/3715694",
+      "title": "Rerouting Planar Curves and Disjoint Paths",
+      "year": 2025
+     },
+     {
+      "doi": "10.1145/3779053",
+      "title": "Gap Amplification for Reconfiguration Problems",
+      "year": 2025
+     },
+     {
+      "doi": "10.2139/ssrn.5357566",
+      "title": "Linear Planar 3-Sat and its Applications in Planning",
+      "year": 2025
+     },
+     {
+      "doi": "10.1007/978-3-032-17801-5_1",
+      "title": "On the Complexity of Constrained Reconfiguration and Motion Planning",
+      "year": 2026
+     },
+     {
+      "doi": "10.1007/978-3-032-17801-5_4",
+      "title": "Towards an Algebraic Approach to the Reconfiguration CSP",
+      "year": 2026
+     },
+     {
+      "doi": "10.1007/978-981-95-7127-7_23",
+      "title": "How to Reconfigure Your Alliances",
+      "year": 2026
+     },
+     {
+      "doi": "10.1007/s10878-026-01406-7",
+      "title": "The complexity of distance-r dominating set reconfiguration",
+      "year": 2026
+     },
+     {
+      "doi": "10.1007/s10878-026-01406-7",
+      "title": "The complexity of distance-r dominating set reconfiguration",
+      "year": 2026
+     },
+     {
+      "doi": "10.1007/s44007-026-00207-y",
+      "title": "TAR Reconfiguration for Vertex Set Parameters",
+      "year": 2026
+     },
+     {
+      "doi": "10.1016/j.tcs.2026.115834",
+      "title": "Linear Planar 3-SAT",
+      "year": 2026
+     },
+     {
+      "doi": "10.1016/j.tcs.2026.116071",
+      "title": "Biclique reconfiguration in bipartite graphs",
+      "year": 2026
+     },
+     {
+      "doi": "10.1016/j.tcs.2026.116157",
+      "title": "On kernelization with access to NP-oracles",
+      "year": 2026
+     },
+     {
+      "doi": "10.1137/23m1552644",
+      "title": "Independent Set Reconfiguration on Directed Graphs",
+      "year": 2026
+     },
+     {
+      "doi": "10.46793/match.97-1.08626",
+      "title": "Sharp Mosaic Dimension of Matching Toggle Graphs, with an Application to Fibonaccenes",
+      "year": 2026
+     }
+    ]
+   },
+   "openalex_id": "W1997048861",
+   "semantic_scholar": {
+    "citationCount": null,
+    "note": "http-404"
+   }
+  },
+  "lmp-symmetry": {
+   "crossref": {
+    "is_referenced_by_count": null,
+    "note": "http-404"
+   },
+   "doi": "10.11575/cdm.v3i1.61979",
+   "openalex": {
+    "cited_by_count": 6,
+    "referenced_works_count": 6,
+    "title": "Constructions of small complete arcs with prescribed symmetry",
+    "year": 2006
+   },
+   "openalex_citing": {
+    "n": 6,
+    "works": [
+     {
+      "doi": "10.1007/s00022-009-0009-3",
+      "title": "On sizes of complete caps in projective spaces PG(n, q) and arcs in planes PG(2, q)",
+      "year": 2009
+     },
+     {
+      "doi": "10.1016/j.disc.2011.07.002",
+      "title": "On sizes of complete arcs in<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si125.gif\" display=\"inline\" overflow=\"scroll\"><mml:mi>P</mml:mi><mml:mi>G</mml:mi><mml:mrow><mml:mo>(</mml:mo><mml:mn>2</mml:mn><mml:mo>,</mml:mo><mml:mi>q</mml:mi><mml:mo>)</mml:mo></mml:mrow></mml:math>",
+      "year": 2011
+     },
+     {
+      "doi": null,
+      "title": "Tables of sizes of small complete arcs in the plane PG(2,q), q 360007",
+      "year": 2013
+     },
+     {
+      "doi": "10.1007/s00022-013-0154-6",
+      "title": "New upper bounds on the smallest size of a complete arc in a finite Desarguesian projective plane",
+      "year": 2013
+     },
+     {
+      "doi": "10.1134/s0032946014040036",
+      "title": "Upper bounds on the smallest size of a complete arc in PG(2, q) under a certain probabilistic conjecture",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/s00022-015-0277-z",
+      "title": "Upper bounds on the smallest size of a complete arc in a finite Desarguesian projective plane based on computer search",
+      "year": 2015
+     }
+    ]
+   },
+   "openalex_id": "W1565617150",
+   "semantic_scholar": {
+    "citationCount": 8,
+    "referenceCount": 7
+   }
+  },
+  "maurer-basis": {
+   "crossref": {
+    "is_referenced_by_count": 82
+   },
+   "doi": "10.1016/0095-8956(73)90005-1",
+   "openalex": {
+    "cited_by_count": 103,
+    "referenced_works_count": 12,
+    "title": "Matroid basis graphs. I",
+    "year": 1973
+   },
+   "openalex_citing": {
+    "n": 103,
+    "works": [
+     {
+      "doi": "10.1016/0095-8956(73)90013-0",
+      "title": "Matroid basis graphs. II",
+      "year": 1973
+     },
+     {
+      "doi": "10.1090/s0002-9904-1973-13315-4",
+      "title": "Basis graphs of pregeometries",
+      "year": 1973
+     },
+     {
+      "doi": "10.1137/0125060",
+      "title": "A Graphical Representation of Matroids",
+      "year": 1973
+     },
+     {
+      "doi": "10.1007/bfb0121247",
+      "title": "Pivotal theory of determinants",
+      "year": 1974
+     },
+     {
+      "doi": "10.1016/0012-365x(75)90007-2",
+      "title": "Intervals in matroid basis graphs",
+      "year": 1975
+     },
+     {
+      "doi": "10.1016/0024-3795(75)90004-x",
+      "title": "A maximum-rank minimum-term-rank theorem for matroids",
+      "year": 1975
+     },
+     {
+      "doi": "10.1137/0129045",
+      "title": "Some Abstract Pivot Algorithms",
+      "year": 1975
+     },
+     {
+      "doi": "10.1007/bf01836008",
+      "title": "Intersection preserving finite embedding theorems for partial quasigroups",
+      "year": 1976
+     },
+     {
+      "doi": "10.1016/0012-365x(77)90118-2",
+      "title": "The dependence graph for bases in matroids",
+      "year": 1977
+     },
+     {
+      "doi": "10.1016/0095-8956(77)90006-5",
+      "title": "A characterization of complete matroid base graphs",
+      "year": 1977
+     },
+     {
+      "doi": "10.1016/0095-8956(78)90003-5",
+      "title": "Bases in oriented matroids",
+      "year": 1978
+     },
+     {
+      "doi": "10.1016/0012-365x(80)90259-9",
+      "title": "Factor group of the automorphism group of a matroid basis graph with respect to the automorphism group of the matroid",
+      "year": 1980
+     },
+     {
+      "doi": "10.1016/s0167-5060(08)70063-3",
+      "title": "The Automorphism Group of a Matroid",
+      "year": 1980
+     },
+     {
+      "doi": "10.1016/0095-8956(81)90032-0",
+      "title": "Hamiltonicity and combinatorial polyhedra",
+      "year": 1981
+     },
+     {
+      "doi": "10.1017/s0004972700005414",
+      "title": "Clique coverings of graphs V: maximal-clique partitions",
+      "year": 1982
+     },
+     {
+      "doi": "10.1016/0012-365x(83)90249-2",
+      "title": "Arbres minimaux d'un graphe preordonne",
+      "year": 1983
+     },
+     {
+      "doi": "10.1016/0095-8956(84)90040-6",
+      "title": "Pancyclic properties of the graph of some 0–1 polyhedra",
+      "year": 1984
+     },
+     {
+      "doi": "10.1007/bfb0098461",
+      "title": "Interpolation antichains in lattices",
+      "year": 1985
+     },
+     {
+      "doi": "10.1007/bfb0121049",
+      "title": "Basis graphs of greedoids and two-connectivity",
+      "year": 1985
+     },
+     {
+      "doi": "10.1016/0196-8858(85)90021-1",
+      "title": "Homotopy properties of greedoids",
+      "year": 1985
+     },
+     {
+      "doi": "10.1007/978-1-4684-9199-9_2",
+      "title": "Linear representation of matroids",
+      "year": 1986
+     },
+     {
+      "doi": "10.1080/03081088608817702",
+      "title": "The generalized column incidence graph and a matroid base-listing algorithm",
+      "year": 1986
+     },
+     {
+      "doi": "10.1016/0012-365x(88)90177-x",
+      "title": "A lower bound on connectivities of matroid base graphs",
+      "year": 1988
+     },
+     {
+      "doi": "10.1016/0012-365x(88)90233-6",
+      "title": "Z-transformation graphs of perfect matchings of hexagonal systems",
+      "year": 1988
+     },
+     {
+      "doi": "10.1016/s0167-5060(08)70810-0",
+      "title": "Z-Transformation Graphs of Perfect Matchings of Hexagonal Systems",
+      "year": 1988
+     },
+     {
+      "doi": "10.1007/bf01788672",
+      "title": "Paths and cycles in matroid base graphs",
+      "year": 1989
+     },
+     {
+      "doi": "10.1016/0001-8708(89)90013-3",
+      "title": "Geometric algebra for combinatorial geometries",
+      "year": 1989
+     },
+     {
+      "doi": "10.1016/0012-365x(89)90267-7",
+      "title": "Basis pair graphs of transversal matroids are connected",
+      "year": 1989
+     },
+     {
+      "doi": "10.1017/s0004972700028938",
+      "title": "A generalised exchange theorem for matroid bases",
+      "year": 1991
+     },
+     {
+      "doi": "10.1007/bf01303201",
+      "title": "Bases-cobases graphs and polytopes of matroids",
+      "year": 1993
+     },
+     {
+      "doi": "10.1016/0166-218x(94)90099-x",
+      "title": "Hamiltonicity of a type of interchange graphs",
+      "year": 1994
+     },
+     {
+      "doi": "10.1016/0097-3165(95)90014-4",
+      "title": "Maurer's homotopy theory for even Δ-matroids and related combinatorial geometries",
+      "year": 1995
+     },
+     {
+      "doi": "10.1016/0166-218x(94)00088-u",
+      "title": "Finding all common bases in two matroids",
+      "year": 1995
+     },
+     {
+      "doi": "10.1016/s1570-7954(96)80009-x",
+      "title": "Matroids",
+      "year": 1996
+     },
+     {
+      "doi": "10.1007/bf02558470",
+      "title": "Coxeter matroid polytopes",
+      "year": 1997
+     },
+     {
+      "doi": "10.1006/aama.1998.0639",
+      "title": "A Unified Treatment of the Geometric Algebra of Matroids and Even Δ-Matroids",
+      "year": 1999
+     },
+     {
+      "doi": "10.1007/3-540-48340-3_30",
+      "title": "On Approximating the Number of Bases of Exchange Preserving Matroids",
+      "year": 1999
+     },
+     {
+      "doi": "10.1016/s0024-3795(98)10229-x",
+      "title": "The realization graph of a degree sequence with majorization gap 1 is Hamiltonian",
+      "year": 1999
+     },
+     {
+      "doi": "10.1006/eujc.1999.0387",
+      "title": "Problems on Discrete Metric Spaces",
+      "year": 2000
+     },
+     {
+      "doi": "10.1007/s11766-000-0025-4",
+      "title": "Degenerate optimal basis graphs in linear programming",
+      "year": 2000
+     },
+     {
+      "doi": "10.1016/b978-044488002-4/50036-1",
+      "title": "10.1016/b978-044488002-4/50036-1",
+      "year": 2000
+     },
+     {
+      "doi": "10.15760/etd.2939",
+      "title": "Tree Graphs and Orthogonal Spanning Tree Decompositions",
+      "year": 2000
+     },
+     {
+      "doi": "10.1006/aama.2000.0710",
+      "title": "Foundations of a Connectivity Theory for Simplicial Complexes",
+      "year": 2001
+     },
+     {
+      "doi": "10.1006/aama.2000.0716",
+      "title": "On Circuit Valuation of Matroids",
+      "year": 2001
+     },
+     {
+      "doi": "10.1137/s089548019936360x",
+      "title": "Graphs with Connected Medians",
+      "year": 2002
+     },
+     {
+      "doi": "10.1016/s0012-365x(02)00519-8",
+      "title": "Matching transformation graphs of cubic bipartite plane graphs",
+      "year": 2003
+     },
+     {
+      "doi": null,
+      "title": "A discrete homotopy theory for graphs, with applications to order complexes of lattices",
+      "year": 2004
+     },
+     {
+      "doi": "10.1007/s10255-004-0201-z",
+      "title": "Distance Between Two Vertices of Maximum Matching Graphs",
+      "year": 2004
+     },
+     {
+      "doi": "10.1016/j.aam.2004.11.001",
+      "title": "Families of matroids induced by classes of graphs",
+      "year": 2005
+     },
+     {
+      "doi": "10.1016/j.disc.2004.03.016",
+      "title": "Perspectives on A-homotopy theory and its applications",
+      "year": 2005
+     },
+     {
+      "doi": "10.1016/j.disc.2004.09.011",
+      "title": "Characterizations of maximum matching graphs of certain types",
+      "year": 2005
+     },
+     {
+      "doi": "10.1016/j.jctb.2006.05.003",
+      "title": "Basis graphs of even Delta-matroids",
+      "year": 2006
+     },
+     {
+      "doi": "10.1007/978-3-540-72588-6_71",
+      "title": "The Edge Connectivity of Circuit Graphs of Matroids",
+      "year": 2007
+     },
+     {
+      "doi": "10.1007/s00373-007-0739-7",
+      "title": "Cycles in Circuit Graphs of Matroids",
+      "year": 2007
+     },
+     {
+      "doi": "10.1007/s10801-007-0094-z",
+      "title": "The discrete fundamental group of the order complex of B n",
+      "year": 2007
+     },
+     {
+      "doi": "10.1016/j.camwa.2007.04.039",
+      "title": "Hamilton cycles in circuit graphs of matroids",
+      "year": 2007
+     },
+     {
+      "doi": "10.48550/arxiv.0711.0915",
+      "title": "The Discrete Fundamental Group of the Order Complex of $B_n$",
+      "year": 2007
+     },
+     {
+      "doi": "10.1016/j.endm.2008.06.028",
+      "title": "Determining the minimum rank of matroids whose basis graph is common",
+      "year": 2008
+     },
+     {
+      "doi": "10.1016/j.tcs.2008.01.033",
+      "title": "Paths in circuit graphs of matroids",
+      "year": 2008
+     },
+     {
+      "doi": "10.48550/arxiv.0812.1208",
+      "title": "Homology representations arising from the half cube, II",
+      "year": 2008
+     },
+     {
+      "doi": null,
+      "title": "Applications of linear programming to coding theory",
+      "year": 2010
+     },
+     {
+      "doi": "10.1007/s10114-010-6685-y",
+      "title": "The connectivity and minimum degree of circuit graphs of matroids",
+      "year": 2010
+     },
+     {
+      "doi": "10.1016/j.aam.2010.04.005",
+      "title": "Matroid base polytope decomposition",
+      "year": 2010
+     },
+     {
+      "doi": "10.1007/978-3-642-25070-5_1",
+      "title": "Cancellation Patterns in Automatic Geometric Theorem Proving",
+      "year": 2011
+     },
+     {
+      "doi": "10.1007/s00373-011-1074-6",
+      "title": "The Connectivity and Diameter of Second Order Circuit Graphs of Matroids",
+      "year": 2011
+     },
+     {
+      "doi": null,
+      "title": "Proof of two Maurer's conjectures on basis graphs of matroids",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s00454-012-9458-9",
+      "title": "Foundations for a Theory of Complex Matroids",
+      "year": 2012
+     },
+     {
+      "doi": "10.5772/35778",
+      "title": "The Properties of Graphs of Matroids",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s11464-013-0240-y",
+      "title": "Properties of Hamilton cycles of circuit graphs of matroids",
+      "year": 2013
+     },
+     {
+      "doi": "10.1142/s0218196713400079",
+      "title": "THE DISCRETE FUNDAMENTAL GROUP OF THE ASSOCIAHEDRON, AND THE EXCHANGE MODULE",
+      "year": 2013
+     },
+     {
+      "doi": "10.1109/globalsip.2014.7032235",
+      "title": "Combinatorial invariants of multidimensional topological network data",
+      "year": 2014
+     },
+     {
+      "doi": "10.48550/arxiv.1409.3892",
+      "title": "Weakly modular graphs and nonpositive curvature",
+      "year": 2014
+     },
+     {
+      "doi": "10.48550/arxiv.1410.4901",
+      "title": "Combinatorial Invariants of Multidimensional Topological Network Data",
+      "year": 2014
+     },
+     {
+      "doi": "10.1016/j.jctb.2015.03.004",
+      "title": "On two conjectures of Maurer concerning basis graphs of matroids",
+      "year": 2015
+     },
+     {
+      "doi": "10.48550/arxiv.1503.04047",
+      "title": "Distance-preserving subgraphs of Johnson graphs",
+      "year": 2015
+     },
+     {
+      "doi": null,
+      "title": "Degree bounds for the toric ideal of a matroid",
+      "year": 2016
+     },
+     {
+      "doi": null,
+      "title": "On two conjectures of Maurer concerning basis graphs of matroids",
+      "year": 2016
+     },
+     {
+      "doi": "10.1007/s00493-016-3421-y",
+      "title": "Distance-Preserving Subgraphs of Johnson Graphs",
+      "year": 2016
+     },
+     {
+      "doi": "10.48550/arxiv.1608.02635",
+      "title": "Matroid basis graph: Counting Hamiltonian cycles",
+      "year": 2016
+     },
+     {
+      "doi": "10.1007/s11859-017-1273-y",
+      "title": "Vertex disjoint cycles in intersection graphs of bases of matroids",
+      "year": 2017
+     },
+     {
+      "doi": "10.48550/arxiv.1711.11414",
+      "title": "On density of subgraphs of halved cubes",
+      "year": 2017
+     },
+     {
+      "doi": "10.1007/s00013-018-1216-7",
+      "title": "Multigraded shifts of matroidal ideals",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.disc.2018.10.045",
+      "title": "The <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\" overflow=\"scroll\" id=\"d1e22\" altimg=\"si10.gif\"><mml:mi>e</mml:mi></mml:math>-exchange basis graph and matroid connectedness",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.ejc.2018.02.039",
+      "title": "On density of subgraphs of halved cubes",
+      "year": 2018
+     },
+     {
+      "doi": "10.1007/s00373-019-02011-8",
+      "title": "Counting Hamiltonian Cycles in the Matroid Basis Graph",
+      "year": 2019
+     },
+     {
+      "doi": "10.1007/s10878-019-00426-w",
+      "title": "Characterizations of matroids with an element lying in a restricted number of circuits",
+      "year": 2019
+     },
+     {
+      "doi": "10.1016/j.aam.2019.04.008",
+      "title": "On powers of Plücker coordinates and representability of arithmetic matroids",
+      "year": 2019
+     },
+     {
+      "doi": null,
+      "title": "On powers of Plücker coordinates and representability of arithmetic matroids",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.disc.2020.111872",
+      "title": "Orientable arithmetic matroids",
+      "year": 2020
+     },
+     {
+      "doi": "10.1007/s00029-021-00633-6",
+      "title": "On the toric ideals of matroids of a fixed rank",
+      "year": 2021
+     },
+     {
+      "doi": "10.1090/memo/1309",
+      "title": "Weakly Modular Graphs and Nonpositive Curvature",
+      "year": 2021
+     },
+     {
+      "doi": "10.1137/20m1338484",
+      "title": "On the Vanishing of Discrete Singular Cubical Homology for Graphs",
+      "year": 2021
+     },
+     {
+      "doi": "10.1137/21m1401176",
+      "title": "Reconstructibility of Matroid Polytopes",
+      "year": 2022
+     },
+     {
+      "doi": "10.5070/c62257873",
+      "title": "From weakly separated collections to matroid subdivisions",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/s10107-023-01939-3",
+      "title": "Graphs with $$G^p$$-connected medians",
+      "year": 2023
+     },
+     {
+      "doi": "10.1016/j.dam.2024.07.023",
+      "title": "ABC(T)-graphs: An axiomatic characterization of the median procedure in graphs with connected and G<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\" id=\"d1e41\" altimg=\"si7.svg\"><mml:msup><mml:mrow/><mml:mrow><mml:mn>2</mml:mn></mml:mrow></mml:msup></mml:math>-connected medians",
+      "year": 2024
+     },
+     {
+      "doi": "10.1016/j.tcs.2024.114460",
+      "title": "First-order logic axiomatization of metric graph theory",
+      "year": 2024
+     },
+     {
+      "doi": "10.1002/jgt.23237",
+      "title": "Note on Hamiltonicity of Basis Graphs of Even Delta‐Matroids",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.aam.2024.102838",
+      "title": "The fundamental group in discrete homotopy theory",
+      "year": 2025
+     },
+     {
+      "doi": "10.1017/fms.2025.10085",
+      "title": "Orthogonal matroids over tracts",
+      "year": 2025
+     },
+     {
+      "doi": "10.1090/btran/190",
+      "title": "Criteria for smoothness of positroid varieties via pattern avoidance, Johnson graphs, and spirographs",
+      "year": 2025
+     },
+     {
+      "doi": "10.1093/imrn/rnaf094",
+      "title": "Baker–Bowler Theory for Lagrangian Grassmannians",
+      "year": 2025
+     },
+     {
+      "doi": "10.1016/j.dam.2026.02.028",
+      "title": "The spanning 3-connectivity of circuit graphs of matroids",
+      "year": 2026
+     }
+    ]
+   },
+   "openalex_id": "W1971869754",
+   "semantic_scholar": {
+    "citationCount": 90,
+    "referenceCount": 11
+   }
+  },
+  "mmp-pg225": {
+   "crossref": {
+    "is_referenced_by_count": 11
+   },
+   "doi": "10.1016/j.disc.2005.11.094",
+   "openalex": {
+    "cited_by_count": 18,
+    "referenced_works_count": 21,
+    "title": "Complete arcs in <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si98.gif\" overflow=\"scroll\"><mml:mtext>PG</mml:mtext><mml:mo stretchy=\"false\">(</mml:mo><mml:mn>2</mml:mn><mml:mo>,</mml:mo><mml:mn>25</mml:mn><mml:mo stretchy=\"false\">)</mml:mo></mml:math>: The spectrum of the sizes and the classification of the smallest complete arcs",
+    "year": 2006
+   },
+   "openalex_citing": {
+    "n": 18,
+    "works": [
+     {
+      "doi": "10.1002/jcd.20091",
+      "title": "Types of superregular matrices and the number of<i>n</i>‐arcs and complete<i>n</i>‐arcs in PG (<i>r, q</i>)",
+      "year": 2005
+     },
+     {
+      "doi": "10.1002/jcd.20211",
+      "title": "A full classification of the complete<i>k</i>‐arcs of PG(2,23) and PG(2,25)",
+      "year": 2009
+     },
+     {
+      "doi": "10.1007/s10623-009-9293-z",
+      "title": "On the maximality of linear codes",
+      "year": 2009
+     },
+     {
+      "doi": null,
+      "title": "Minimal complete arcs in PG(2,q), q<= 32",
+      "year": 2010
+     },
+     {
+      "doi": "10.3934/amc.2011.5.37",
+      "title": "The minimum order of complete caps in $PG(4,4)$",
+      "year": 2011
+     },
+     {
+      "doi": null,
+      "title": "Tables of sizes of small complete arcs in the plane PG(2,q), q 360007",
+      "year": 2013
+     },
+     {
+      "doi": "10.1002/jcd.21372",
+      "title": "On Small Complete Arcs and Transitive A5-Invariant Arcs in the Projective Plane PG(2,q)",
+      "year": 2013
+     },
+     {
+      "doi": "10.1002/jcd.21383",
+      "title": "On the Structure of Semiovals of Small Size",
+      "year": 2013
+     },
+     {
+      "doi": "10.1007/s00022-013-0178-y",
+      "title": "On the minimum size of complete arcs and minimal saturating sets in projective planes",
+      "year": 2013
+     },
+     {
+      "doi": "10.1007/s10623-013-9837-0",
+      "title": "The non-existence of some NMDS codes and the extremal sizes of complete $$(n,3)$$ ( n , 3 ) -arcs in $$PG(2,16)$$ PG ( 2 , 16 )",
+      "year": 2013
+     },
+     {
+      "doi": "10.48550/arxiv.1312.2485",
+      "title": "Semiovals in PG(2,8) and PG(2,9)",
+      "year": 2013
+     },
+     {
+      "doi": null,
+      "title": "Tables of sizes of small complete arcs in the plane PG(2,q), q 190027, obtained by an algorithm with fixed order of points (FOP)",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/s00022-014-0224-4",
+      "title": "New types of estimates for the smallest size of complete arcs in a finite Desarguesian projective plane",
+      "year": 2014
+     },
+     {
+      "doi": "10.1134/s0032946014040036",
+      "title": "Upper bounds on the smallest size of a complete arc in PG(2, q) under a certain probabilistic conjecture",
+      "year": 2014
+     },
+     {
+      "doi": "10.48550/arxiv.1405.5862",
+      "title": "Tables of sizes of random complete arcs in the plane $PG(2,q)$",
+      "year": 2014
+     },
+     {
+      "doi": "10.1007/s00022-015-0277-z",
+      "title": "Upper bounds on the smallest size of a complete arc in a finite Desarguesian projective plane based on computer search",
+      "year": 2015
+     },
+     {
+      "doi": "10.1007/s10623-018-00592-8",
+      "title": "A new lower bound for the smallest complete (k, n)-arc in $$\\mathrm {PG}(2,q)$$ PG ( 2 , q )",
+      "year": 2018
+     },
+     {
+      "doi": "10.23851/mjs.v29i2.252",
+      "title": "Conic Parameterization in PG(2,25)",
+      "year": 2018
+     }
+    ]
+   },
+   "openalex_id": "W1985188998",
+   "semantic_scholar": {
+    "citationCount": 28,
+    "referenceCount": 17
+   }
+  },
+  "ostergard-switching": {
+   "crossref": {
+    "is_referenced_by_count": 19
+   },
+   "doi": "10.1016/j.disc.2011.05.016",
+   "openalex": {
+    "cited_by_count": 25,
+    "referenced_works_count": 125,
+    "title": "Switching codes and designs",
+    "year": 2011
+   },
+   "openalex_citing": {
+    "n": 25,
+    "works": [
+     {
+      "doi": "10.1016/j.jcta.2012.03.013",
+      "title": "On triple systems and strongly regular graphs",
+      "year": 2012
+     },
+     {
+      "doi": "10.1007/s00454-013-9547-4",
+      "title": "Enumerating Cube Tilings",
+      "year": 2013
+     },
+     {
+      "doi": "10.1016/j.dam.2014.07.010",
+      "title": "On the maximum length of coil-in-the-box codes in dimension 8",
+      "year": 2014
+     },
+     {
+      "doi": "10.37236/3606",
+      "title": "Switching in One-Factorisations of Complete Graphs",
+      "year": 2014
+     },
+     {
+      "doi": "10.48550/arxiv.1405.3436",
+      "title": "Domination in designs",
+      "year": 2014
+     },
+     {
+      "doi": null,
+      "title": "On the number of latin hypercubes, pairs of orthogonal latin squares and MDS codes",
+      "year": 2015
+     },
+     {
+      "doi": "10.1016/j.disc.2015.11.002",
+      "title": "To the theory of <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" altimg=\"si1.gif\" display=\"inline\" overflow=\"scroll\"><mml:mi>q</mml:mi></mml:math>-ary Steiner and other-type trades",
+      "year": 2015
+     },
+     {
+      "doi": "10.1016/j.disc.2017.06.016",
+      "title": "The extended 1-perfect trades in small hypercubes",
+      "year": 2017
+     },
+     {
+      "doi": "10.1016/j.disc.2017.08.012",
+      "title": "The minimum volume of subspace trades",
+      "year": 2017
+     },
+     {
+      "doi": "10.1016/j.disc.2017.10.020",
+      "title": "Switching of covering codes",
+      "year": 2017
+     },
+     {
+      "doi": "10.4225/03/58b3c1865ba30",
+      "title": "Autoparatopisms of Latin squares",
+      "year": 2017
+     },
+     {
+      "doi": "10.1002/jcd.21603",
+      "title": "On the number of SQSs, latin hypercubes and MDS codes",
+      "year": 2018
+     },
+     {
+      "doi": "10.1016/j.disc.2019.01.015",
+      "title": "Minimum supports of functions on the Hamming graphs with spectral constraints",
+      "year": 2019
+     },
+     {
+      "doi": "10.1134/s0032946019040021",
+      "title": "On the Cardinality Spectrum and the Number of Latin Bitrades of Order 3",
+      "year": 2019
+     },
+     {
+      "doi": "10.1134/s0555292319040028",
+      "title": "О спектре мощностей и числе латинских битрейдов порядка 3",
+      "year": 2019
+     },
+     {
+      "doi": "10.48550/arxiv.1912.09089",
+      "title": "On existence of perfect bitrades in Hamming graphs",
+      "year": 2019
+     },
+     {
+      "doi": "10.1016/j.dam.2020.08.026",
+      "title": "New Steiner 2-designs from old ones by paramodifications",
+      "year": 2020
+     },
+     {
+      "doi": "10.1016/j.disc.2020.112128",
+      "title": "On existence of perfect bitrades in Hamming graphs",
+      "year": 2020
+     },
+     {
+      "doi": "10.14232/phd.10663",
+      "title": "Constructions, classifications and embeddings of abstract unitals",
+      "year": 2021
+     },
+     {
+      "doi": "10.1007/s10623-022-01059-7",
+      "title": "Switching for 2-designs",
+      "year": 2022
+     },
+     {
+      "doi": "10.1016/j.disc.2022.112963",
+      "title": "Switching 3-edge-colorings of cubic graphs",
+      "year": 2022
+     },
+     {
+      "doi": "10.1007/978-3-031-48679-1_9",
+      "title": "Constructing Random Steiner Triple Systems: An Experimental Study",
+      "year": 2023
+     },
+     {
+      "doi": "10.1109/redundancy59964.2023.10330180",
+      "title": "Perfect bitrades in Johnson graphs<sup>*</sup>",
+      "year": 2023
+     },
+     {
+      "doi": "10.1002/jcd.21931",
+      "title": "Constructing MRD codes by switching",
+      "year": 2024
+     },
+     {
+      "doi": "10.1002/jcd.22001",
+      "title": "Tightness of the Weight‐Distribution Bound for Strongly Regular Polar Graphs",
+      "year": 2025
+     }
+    ]
+   },
+   "openalex_id": "W2161224948",
+   "semantic_scholar": {
+    "citationCount": 30,
+    "referenceCount": 110
+   }
+  }
+ },
+ "sources": {
+  "crossref": "https://api.crossref.org/",
+  "openalex": "https://api.openalex.org/",
+  "semantic_scholar": "https://api.semanticscholar.org/graph/v1/",
+  "zbmath": "https://api.zbmath.org/v1/"
+ },
+ "task": "C363",
+ "zbmath_queries": {
+  "any:\"PG(2, 25)\" & cc:51E": {
+   "hits": [
+    {
+     "doi": "10.1016/j.disc.2005.11.094",
+     "title": "Complete arcs in \\(PG(2,25)\\): The spectrum of the sizes and the classification of the smallest complete arcs",
+     "year": "2007",
+     "zbl": "1114.51005"
+    }
+   ],
+   "n": 1
+  },
+  "cc:51E21 & any:\"Baer involution\"": {
+   "hits": [],
+   "n": 0
+  },
+  "cc:51E21 & any:\"Baer subplane\" & any:\"arc\"": {
+   "hits": [
+    {
+     "doi": "10.1007/BF01245951",
+     "title": "Enclosed (k,n)-arcs",
+     "year": "1992",
+     "zbl": "0746.51017"
+    },
+    {
+     "doi": "10.1007/BF01245952",
+     "title": "Minimal blocking sets in finite planes",
+     "year": "1992",
+     "zbl": "0746.51018"
+    },
+    {
+     "doi": "10.1016/0012-365X(94)00096-2",
+     "title": "Images of conics under derivation",
+     "year": "1996",
+     "zbl": "0854.51008"
+    },
+    {
+     "doi": "10.1007/BF01252216",
+     "title": "On the Mathon plane",
+     "year": "1997",
+     "zbl": "0890.51008"
+    },
+    {
+     "doi": "10.1023/A:1008333507040",
+     "title": "Partial unitals and related structures in Desarguesian planes",
+     "year": "1998",
+     "zbl": "0926.51011"
+    },
+    {
+     "doi": "10.1016/S0012-365X(99)00079-5",
+     "title": "A small complete arc in \\(\\text{PG}(2,q)\\), \\(q=p^2\\), \\(p\\equiv 3\\pmod 4\\)",
+     "year": "1999",
+     "zbl": "0943.51009"
+    },
+    {
+     "doi": "10.1016/S0012-365X(01)00412-5",
+     "title": "Small almost complete arcs",
+     "year": "2002",
+     "zbl": "1027.51012"
+    }
+   ],
+   "n": 7
+  },
+  "cc:51E21 & any:\"Frobenius\" & any:\"arc\"": {
+   "hits": [
+    {
+     "doi": "10.1023/A:1014979211916",
+     "title": "On complete arcs arising from plane curves",
+     "year": "2002",
+     "zbl": "1024.51009"
+    },
+    {
+     "doi": null,
+     "title": "An arc partition of the Hughes plane using a field-theoretic model",
+     "year": "2005",
+     "zbl": "1097.51003"
+    }
+   ],
+   "n": 2
+  },
+  "cc:51E21 & any:\"invariant\" & any:\"orbits\" & any:\"complete arc\"": {
+   "hits": [],
+   "n": 0
+  },
+  "cc:51E21 & any:\"involution\"": {
+   "hits": [
+    {
+     "doi": null,
+     "title": "Geometric and algebraic theory of \\(B\\)-ovals. Results and problems",
+     "year": "1993",
+     "zbl": "0791.51008"
+    },
+    {
+     "doi": null,
+     "title": "Groups of collineations which leave a complete \\(q\\)-arc of a projective plane of even order \\(q>16\\) with a point of index \\(q-4\\) invariant",
+     "year": "1993",
+     "zbl": "0796.51004"
+    },
+    {
+     "doi": "10.1006/jcta.1997.2840",
+     "title": "Invertible sharply \\(n\\)-transitive sets",
+     "year": "1998",
+     "zbl": "0898.51011"
+    },
+    {
+     "doi": "10.1006/jabr.1998.7508",
+     "title": "\\({\\mathcal J}\\)-transitive ovals in projective planes of odd order",
+     "year": "1998",
+     "zbl": "0918.51010"
+    },
+    {
+     "doi": null,
+     "title": "Oval in finite projective planes via the representation theory of the symmetric group",
+     "year": "2004",
+     "zbl": "1084.51003"
+    },
+    {
+     "doi": "10.1016/j.disc.2004.04.032",
+     "title": "On two-transitive parabolic ovals",
+     "year": "2005",
+     "zbl": "1078.51008"
+    },
+    {
+     "doi": "10.1007/s00022-005-1768-0",
+     "title": "Ovals in a plane coordinatised by a regular nearfield of dimension 2 over its centre",
+     "year": "2005",
+     "zbl": "1084.51004"
+    },
+    {
+     "doi": "10.1016/j.ejc.2009.08.004",
+     "title": "Veronesean embeddings of Hermitian unitals",
+     "year": "2010",
+     "zbl": "1202.51004"
+    }
+   ],
+   "n": 8
+  },
+  "cc:51E21 & any:\"orbit\" & any:\"extension\"": {
+   "hits": [],
+   "n": 0
+  },
+  "cc:51E21 & any:\"prescribed symmetry\"": {
+   "hits": [],
+   "n": 0
+  },
+  "cc:51E21 & ti:\"PG(2,25)\"": {
+   "hits": [
+    {
+     "doi": "10.1016/j.disc.2005.11.094",
+     "title": "Complete arcs in \\(PG(2,25)\\): The spectrum of the sizes and the classification of the smallest complete arcs",
+     "year": "2007",
+     "zbl": "1114.51005"
+    },
+    {
+     "doi": "10.1002/jcd.20211",
+     "title": "A full classification of the complete \\(k\\)-arcs of \\(\\mathrm{PG}(2,23)\\) and \\(\\mathrm{PG}(2,25)\\).",
+     "year": "2009",
+     "zbl": "1196.51006"
+    }
+   ],
+   "n": 2
+  }
+ }
+}
