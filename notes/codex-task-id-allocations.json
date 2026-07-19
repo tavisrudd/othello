@@ -26,8 +26,17 @@
       "last": 362,
       "purpose": "Package C348 as a publication result: moduli-dependent deep-hole enumerators and the exact rank-two infinity extension complex, with bounded novelty claims",
       "sequence": 3
+    },
+    {
+      "count": 1,
+      "first": 363,
+      "kind": "reservation",
+      "lane": "alt-orbit-repair",
+      "last": 363,
+      "purpose": "Backward/forward citation audit gating alt-orbit-repair priority language",
+      "sequence": 4
     }
   ],
-  "next_id": 363,
+  "next_id": 364,
   "schema": "codex-task-id-allocations-v1"
 }
