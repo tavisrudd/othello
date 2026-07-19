@@ -1,0 +1,78 @@
+{
+  "field": {
+    "E": "F[omega]/(omega^2+omega+1)",
+    "F": "GF(2^5), modulus x^5+x^2+1",
+    "basis": "a+b*omega encoded as [a,b]"
+  },
+  "fixtures": [
+    {
+      "a": [
+        27,
+        13
+      ],
+      "b": [
+        8,
+        24
+      ],
+      "projective_syndromes_checked": 1049601,
+      "quotient_fibers_solved": 32768,
+      "rho": 9,
+      "weights": {
+        "1": 128,
+        "2": 1048537,
+        "3": 936
+      }
+    },
+    {
+      "a": [
+        0,
+        24
+      ],
+      "b": [
+        31,
+        25
+      ],
+      "projective_syndromes_checked": 1049601,
+      "quotient_fibers_solved": 32768,
+      "rho": 28,
+      "weights": {
+        "1": 128,
+        "2": 1048508,
+        "3": 965
+      }
+    },
+    {
+      "a": [
+        18,
+        5
+      ],
+      "b": [
+        15,
+        31
+      ],
+      "projective_syndromes_checked": 1049601,
+      "quotient_fibers_solved": 32768,
+      "rho": 3,
+      "weights": {
+        "1": 128,
+        "2": 1048573,
+        "3": 900
+      }
+    }
+  ],
+  "independent_reference": {
+    "method": "direct affine-line incidence union, without quotient coordinates",
+    "pinned_c348_sha256": "ecc8881e02de212ed89479f8b0fa564f6db652d74a10ff65a3bf206f6a5d3eee"
+  },
+  "root_finding": {
+    "base_field_scan": false,
+    "maximum_input_degree": 8,
+    "method": "gcd(f,X^Q-X), then deterministic trace-pairing splits over an F2 basis"
+  },
+  "schema": "c364-intrinsic-complete-decoder-v1",
+  "totals": {
+    "fixtures": 3,
+    "projective_syndromes_checked": 3148803,
+    "quotient_fibers_solved": 98304
+  }
+}

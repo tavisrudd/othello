@@ -18,9 +18,10 @@ enumerator reduction.  The defensible architecture-specific synthesis is:
 > term and an explicit infinity term, and the complete infinity locus supports a classified
 > rank-two complex of one- and two-column non-GRS MDS extensions.
 
-This is strong enough for a substantial final paper section without C361.  C361 can upgrade the
-section to a paper headline only by evaluating or intrinsically stratifying the remaining affine
-quotient; it is not a prerequisite for publishing the results below.
+This is strong enough for a substantial final paper section without an evaluated affine quotient.
+C361 does not supply that evaluation, but C364 gives the complementary positive upgrade: after
+C337 recovery, the ten C361 correspondences form an intrinsic complete coset-leader decoder for
+every individual syndrome through four trace gates and six bounded-degree root problems.
 
 ## Paper-ready setup
 
@@ -214,6 +215,7 @@ twisted/extended-GRS deep-hole papers belong in related work, not in the novelty
 | construction theorem | C329 | establishes fresh `4Q` arcs on the odd tower `Q>=2^45` |
 | evaluation-code section | C336 | gives the exact five-code tower, locality, and extremal curves |
 | intrinsic recognition section | C337 | recovers the layers and `[rho;{a,b}]`, and certifies non-GRS status |
+| complete-decoding section | C364 | turns the recovered geometry into an every-syndrome minimum-weight leader algorithm |
 | transition to extensions | C330 | reframes the infinity-direction obstruction as an explicit deep-hole carrier |
 | final main-results section | C362 Proposition A and Theorem C | cites the standard enumerator specialization and states the new simultaneous extension complex |
 | computational/limitations appendix | C348 certificate | proves architectural moduli dependence and records the large-field boundary |
@@ -232,14 +234,14 @@ Suggested abstract sentence:
 The abstract must not say that the full enumerator is explicitly evaluated.  The introduction
 should call Theorem C an exact extension-complex theorem, not a count of inequivalent codes.
 
-## C361 upgrade slot
+## C361/C364 upgrade disposition
 
-C361 may replace the symbol `M(A)` by a closed formula or finite intrinsic stratification in
-`[rho;{a,b}]`.  If it succeeds, update Proposition A from a one-invariant reduction to an explicit
-enumerator theorem, replace the bounded moduli proposition by the large-field statement actually
-proved there, and add any exact affine extension faces it certifies.  If it stops negatively,
-nothing in Proposition A or Theorem C changes; retain the current section and report C361 only as the sharp
-boundary of explicit evaluation.
+C361 leaves the symbol `M(A)` unevaluated, so nothing in Proposition A or Theorem C changes and the
+present section remains the sharp boundary of explicit counting.  C364 is nevertheless a separate
+paper-facing theorem: insert it after C337 and before this section.  It decides the weight of every
+individual syndrome and reconstructs a leader without summing the joint Frobenius distribution.
+Thus complete decoding and closed enumeration are correctly separated rather than treating either
+one as a surrogate for the other.
 
 ## Evidence inheritance and trusted boundary
 
