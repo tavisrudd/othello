@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "best_genuine_headroom": 13,
+      "field_order": 3,
+      "fixed_prefix_counts_checked": true,
+      "repeated_boundary_record_checked": true,
+      "small_xor_witness_checked": true
+    },
+    {
+      "best_genuine_headroom": 80441,
+      "field_order": 5,
+      "fixed_prefix_counts_checked": true,
+      "repeated_boundary_record_checked": true,
+      "small_xor_witness_checked": true
+    }
+  ],
+  "e2_headroom_gate": true,
+  "schema": "c294-b3-relevance-ledger-replay-v1",
+  "status": "passed"
+}

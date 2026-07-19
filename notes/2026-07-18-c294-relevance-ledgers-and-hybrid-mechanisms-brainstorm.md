@@ -3,7 +3,7 @@
 **Date:** 2026-07-18  
 **Lane:** `crowns`  
 **Task:** `C294 B3`  
-**Status:** planning record; `E1` is active next, all later experiments are serially gated  
+**Status:** `E1` passed its headroom gate and closed E1-P negatively; `E2` is active next, all later experiments remain serially gated
 **Scope:** a user-requested brainstorm and preregistration, not a theorem or computational result
 
 ## Purpose
@@ -52,8 +52,8 @@ dispatch several concurrently.
 
 | label | status | experiment | promotion gate |
 |:--|:--|:--|:--|
-| `E1` | **ACTIVE NEXT** | proof relevance, square frontier, xor accounting, and bottom-up terminal parity | identify one typed coordinate with enough bounded coalescence headroom to attempt `E2`, or route directly to `E3` |
-| `E2` | queued on `E1` | scar-restricted typed frontier quotient `R` | at least 850 new class removals beyond the 943 known isomorphism removals, zero conflicts, and proved typed-grammar closure |
+| `E1` | passed 2026-07-18 | proof relevance, square frontier, xor accounting, and bottom-up terminal parity | typed-square word headroom is 28,138 genuine removals; E1-P has no parity theorem |
+| `E2` | **ACTIVE NEXT** | scar-restricted typed frontier quotient `R` | at least 850 new class removals beyond the 943 known isomorphism removals, zero conflicts, and proved typed-grammar closure |
 | `E3` | queued after the `R` decision | adaptive bulk-pairing and response-debt automaton `A` | exact closure of every legal move orbit from a finite type-0 P-template family |
 | `E4` | gated on `E0` and failure of `E2`/`E3` to dominate it | type-0 `02` block-interface diversity and transfer `T` | width at most 16, nontrivial repeated exact interfaces, then the same 1% offline and 10% live gates as `R` |
 | `E5` | support-only, opened by a concrete `E3` obstruction | coverage/chamber ledger `S` | an exact local update law that supplies a missing response rule; never promotion by classification accuracy |

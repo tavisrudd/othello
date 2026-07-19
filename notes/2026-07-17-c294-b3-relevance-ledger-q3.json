@@ -1,0 +1,14 @@
+{
+  "schema": "c294-b3-relevance-ledger-v1",
+  "field_order": 3,
+  "type_index": 0,
+  "fixed_prefix": {"connected_states": 108, "decompositions": 680, "follower_nimber": 1, "game_state_limit": 1000000, "high_key_requests": 9, "limit_vertices": -1, "low_key_requests": 246, "quotient_cache_hits": 206, "quotient_classes": 49, "stopped_at_limit": false},
+  "search_relevance": {"legal_moves": 1211, "evaluated_states_audited": 108, "incomplete_states_at_stop": 0, "distinct_exact_children": 1211, "distinct_option_nimbers": 216, "duplicate_mex_options": 995, "p_children": 457, "winning_moves": 457, "generic_high_core_leaves": 9},
+  "xor_bank": {"component_emissions": 680, "component_terms": 1591, "parity_cancelled_nonzero_terms": 792, "zero_components": 262, "zero_xor_emissions": 265},
+  "spatial_relevance": {"certified_full_graph_width": 6, "maximum_observed_residual_width": 6, "mean_partial_blocks_numerator": 145, "mean_untouched_suffix_numerator": 54, "residual_count_denominator": 49, "distinct_nonzero_boundary_records": 61},
+  "parity_ledger": {"states_with_odd_move_count": 47, "states_with_odd_distinct_child_count": 47, "states_with_odd_p_child_count": 27, "p_states": 52, "n_states": 56, "n_states_with_even_p_child_count": 29, "states_with_odd_one-ply_terminal_count": 1, "move_labelled_terminal_coefficients_above_one_are_zero_by_factorial_pairing": true},
+  "candidate_headroom": [{"name": "typed-square-word-histogram", "raw_classes": 49, "value_refined_classes": 49, "maximum_reduction": 0, "maximum_genuine_removals": 0, "raw_value_conflict": false, "first_conflict": null}, {"name": "local-defect-motif", "raw_classes": 30, "value_refined_classes": 33, "maximum_reduction": 16, "maximum_genuine_removals": 13, "raw_value_conflict": true, "first_conflict": {"current": {"hi": 0, "lo": 1435520}, "current_nimber": 0, "prior": {"hi": 0, "lo": 996560}, "prior_nimber": 1}}, {"name": "boundary-profile", "raw_classes": 46, "value_refined_classes": 49, "maximum_reduction": 0, "maximum_genuine_removals": 0, "raw_value_conflict": true, "first_conflict": {"current": {"hi": 0, "lo": 4581248}, "current_nimber": 1, "prior": {"hi": 0, "lo": 1435520}, "prior_nimber": 0}}],
+  "first_repeated_boundary_record": {"cut": 5, "live_word": 15, "ports": [8, 9, 14, 15], "prior": {"hi": 0, "lo": 2284352}, "prior_nimber": 0, "current": {"hi": 0, "lo": 1435520}, "current_nimber": 0},
+  "postprocess_invariants": {"connected_states_unchanged": true, "quotient_classes_unchanged": true},
+  "first_small_xor_witness": {"parent": {"hi": 0, "lo": 1123328}, "move": 13, "child": {"hi": 0, "lo": 1114112}, "child_nimber": 0, "components": [{"mask": {"hi": 0, "lo": 65536}, "nimber": 1}, {"mask": {"hi": 0, "lo": 1048576}, "nimber": 1}]}
+}

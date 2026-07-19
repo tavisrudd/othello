@@ -4,8 +4,8 @@
 
 **Lane:** `crowns`
 
-**Status:** E0 passed; task-local `E1`, the fixed-prefix relevance/ledger audit for `R`, is next,
-not a larger value run or another generic separator-closure enlargement
+**Status:** E0 and E1 passed their bounded gates; task-local `E2`, transition refinement of the
+typed `02` square frontier, is next, not a live replay or larger value run
 
 ## Decision
 
@@ -278,12 +278,11 @@ same-absolute-key hits.
 
 ## Immediate handoff
 
-E0 is complete in `notes/2026-07-17-c294-b3-coordinate-audit.md`. Follow the serial queue in
-`notes/2026-07-18-c294-relevance-ledgers-and-hybrid-mechanisms-brainstorm.md` and implement only
-`E1`. Replay the existing q=3 control and fixed q=5 prefix without generating deeper states; measure
-proof-DAG relevance, duplicate mex information, exact xor cancellations, bottom-up terminal parity,
-actual `02` frontier records, local defect motifs, and the maximum possible class-reduction headroom
-of each proposed typed coordinate. Emit the `notes/2026-07-17-c294-b3-relevance-ledger.*` evidence bundle with an
-independent replay. Do not implement `E2` unless one candidate has headroom for 850 genuinely new
-removals. The adaptive automaton, transfer, value solver, separator-cap increase, all-seven value
-run, Lean work, and cross-lane edits are not part of `E1`.
+E1 is complete in `notes/2026-07-17-c294-b3-relevance-ledger.md`. Its typed-square word coordinate
+has headroom for 28,138 removals beyond known isomorphisms after respecting every known value
+distinction; the q=3 static control has no conflict. The raw q=5 coordinate does have conflicts, so
+this is headroom rather than a quotient. Implement only `E2`: refine the typed `02` square frontier
+under the reachable scar transition grammar independently of nimber labels, keeping the exact xor
+bank. Require zero conflicts and at least 850 genuine surviving removals before live integration.
+E1-P is closed at its frozen feature set. The adaptive automaton, transfer, value solver,
+separator-cap increase, all-seven value run, Lean work, and cross-lane edits remain gated.

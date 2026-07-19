@@ -2,8 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; E0 has certified the coloured-Cayley coordinates and task-local `E1`, the
-fixed-prefix relevance/ledger audit for `R`, is next
+**Status:** active; E0 and E1 passed their bounded gates and task-local `E2`, transition refinement
+of the typed `02` square frontier for `R`, is next
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -204,3 +204,14 @@ possible typed-quotient headroom on the existing q=3/q=5 prefixes.
 Only a candidate with headroom for 850 genuinely new removals advances to the transition-closed
 typed quotient `E2`; otherwise `R` closes at preflight and the queue routes to the adaptive debt
 automaton `E3`. The generic state cap and all-seven value run remain closed.
+
+## E1 relevance-ledger result
+
+`notes/2026-07-17-c294-b3-relevance-ledger.md` reproduces the q=3 completion and unchanged q=5
+100,000-state prefix, distinguishing 99,981 completed q=5 evaluations from 19 incomplete ancestors
+at the stop. The typed-square word coordinate has maximum headroom for 28,138 removals beyond the
+943 known isomorphisms after splitting by every known exact nimber, while its q=3 static control is
+conflict-free. The raw q=5 coordinate has value conflicts, so E1 proves no quotient; it authorizes
+only transition-stable refinement in E2. E1-P closes negatively: factorial pairing trivializes the
+move-labelled terminal polynomial above degree one, and P-child parity fails to characterize
+outcome. E2 is active; live integration, E3, transfer, and larger caps remain gated.
