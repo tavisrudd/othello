@@ -44,8 +44,17 @@
       "last": 364,
       "purpose": "intrinsic complete coset-leader decoder salvaged from C361",
       "sequence": 5
+    },
+    {
+      "count": 1,
+      "first": 365,
+      "kind": "reservation",
+      "lane": "build-sys",
+      "last": 365,
+      "purpose": "Repo-wide literature-audit conventions doc and CLAUDE.md pointer",
+      "sequence": 6
     }
   ],
-  "next_id": 365,
+  "next_id": 366,
   "schema": "codex-task-id-allocations-v1"
 }
