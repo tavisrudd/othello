@@ -1,0 +1,328 @@
+{
+  "c354_dependency": "2026-07-18-c354-conic-mds-service-spectrum.py and .json",
+  "facet_dual": "weight 0 at infinity and weight 1 at every finite conic server",
+  "fields": [
+    {
+      "a_demand": [
+        "0",
+        "1",
+        "2"
+      ],
+      "axis_intercepts": [
+        "5/2",
+        "5/2",
+        "5/2"
+      ],
+      "b_facet_third_equality_point": [
+        "1",
+        "1",
+        "1"
+      ],
+      "b_separating_facet": [
+        1,
+        2,
+        2,
+        5
+      ],
+      "c354_orbit_a": 35,
+      "c354_orbit_b": 30,
+      "c354_region_a": 3,
+      "c354_region_b": 29,
+      "frame_a": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          4
+        ]
+      ],
+      "frame_b": [
+        [
+          1,
+          0,
+          4
+        ],
+        [
+          1,
+          3,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      "involution_relation_a": "target 1 exchanges the two fixed points of target 2",
+      "involution_relation_b": "targets 1 and 2 share exactly the fixed point infinity; their product is nonidentity unipotent",
+      "parameter_u": 2,
+      "q": 5,
+      "recovery_sets_a": 42,
+      "recovery_sets_b": 42,
+      "type": "EEE"
+    },
+    {
+      "a_demand": [
+        "0",
+        "1",
+        "3"
+      ],
+      "axis_intercepts": [
+        "7/2",
+        "7/2",
+        "7/2"
+      ],
+      "b_facet_third_equality_point": [
+        "1/3",
+        "1/3",
+        "3"
+      ],
+      "b_separating_facet": [
+        1,
+        2,
+        2,
+        7
+      ],
+      "c354_orbit_a": 72,
+      "c354_orbit_b": 49,
+      "c354_region_a": 6,
+      "c354_region_b": 52,
+      "frame_a": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          1,
+          0,
+          6
+        ]
+      ],
+      "frame_b": [
+        [
+          1,
+          0,
+          6
+        ],
+        [
+          1,
+          4,
+          0
+        ],
+        [
+          1,
+          3,
+          0
+        ]
+      ],
+      "involution_relation_a": "target 1 exchanges the two fixed points of target 2",
+      "involution_relation_b": "targets 1 and 2 share exactly the fixed point infinity; their product is nonidentity unipotent",
+      "parameter_u": 2,
+      "q": 7,
+      "recovery_sets_a": 123,
+      "recovery_sets_b": 123,
+      "type": "EEE"
+    },
+    {
+      "a_demand": [
+        "0",
+        "1",
+        "4"
+      ],
+      "axis_intercepts": [
+        "9/2",
+        "9/2",
+        "9/2"
+      ],
+      "b_facet_third_equality_point": [
+        "1/3",
+        "1/3",
+        "4"
+      ],
+      "b_separating_facet": [
+        1,
+        2,
+        2,
+        9
+      ],
+      "c354_orbit_a": 96,
+      "c354_orbit_b": 64,
+      "c354_region_a": 3,
+      "c354_region_b": 78,
+      "frame_a": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "frame_b": [
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ]
+      ],
+      "involution_relation_a": "target 1 exchanges the two fixed points of target 2",
+      "involution_relation_b": "targets 1 and 2 share exactly the fixed point infinity; their product is nonidentity unipotent",
+      "parameter_u": 3,
+      "q": 9,
+      "recovery_sets_a": 276,
+      "recovery_sets_b": 276,
+      "type": "EEE"
+    },
+    {
+      "a_demand": [
+        "0",
+        "1",
+        "5"
+      ],
+      "axis_intercepts": [
+        "11/2",
+        "11/2",
+        "11/2"
+      ],
+      "b_facet_third_equality_point": [
+        "1/3",
+        "1/3",
+        "5"
+      ],
+      "b_separating_facet": [
+        1,
+        2,
+        2,
+        11
+      ],
+      "c354_orbit_a": 168,
+      "c354_orbit_b": 109,
+      "c354_region_a": 6,
+      "c354_region_b": 187,
+      "frame_a": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          4,
+          1
+        ],
+        [
+          1,
+          0,
+          10
+        ]
+      ],
+      "frame_b": [
+        [
+          1,
+          0,
+          10
+        ],
+        [
+          1,
+          6,
+          0
+        ],
+        [
+          1,
+          5,
+          0
+        ]
+      ],
+      "involution_relation_a": "target 1 exchanges the two fixed points of target 2",
+      "involution_relation_b": "targets 1 and 2 share exactly the fixed point infinity; their product is nonidentity unipotent",
+      "parameter_u": 2,
+      "q": 11,
+      "recovery_sets_a": 525,
+      "recovery_sets_b": 525,
+      "type": "EEE"
+    }
+  ],
+  "schema": "c360-conic-mds-basis-sensitivity-v1",
+  "separating_demand": [
+    "0",
+    "1",
+    "(q-1)/2"
+  ],
+  "separating_facet_for_B": [
+    "1",
+    "2",
+    "2",
+    "q"
+  ],
+  "symbolic_frames": {
+    "A": [
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        "1",
+        "(u+u^-1)/2",
+        "1"
+      ],
+      [
+        1,
+        0,
+        -1
+      ]
+    ],
+    "B": [
+      [
+        1,
+        0,
+        -1
+      ],
+      [
+        "1",
+        "1/2",
+        "0"
+      ],
+      [
+        "1",
+        "-1/2",
+        "0"
+      ]
+    ],
+    "condition": "u in F_q^* minus {1,-1}"
+  },
+  "theorem_domain": "all odd prime powers q >= 5"
+}
