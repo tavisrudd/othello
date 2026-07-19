@@ -154,7 +154,7 @@ all affine projective syndromes, and the infinity routine checks every infinity 
 cache is populated lazily by requested syndromes; initialization does not precompute a table.  The
 exhaustive test fills that cache only because it deliberately requests every projective syndrome.
 
-The expected exact ledger is:
+The exact replay ledger is:
 
 | `(rho;a;b)` | weight 1 | weight 2 | weight 3 | projective syndromes |
 |---|---:|---:|---:|---:|
