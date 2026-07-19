@@ -108,6 +108,12 @@ RAM-backed `/tmp` tmpfs. The cache records fetched bytes, not that a paper was r
 scan sets such as `dye-1991/` and `bsw-1992/`, use the OCR reconstruction only for search and verify
 load-bearing text or formulas against the adjacent authoritative page images and `SHA256SUMS`.
 
+When a deliverable depends on the absence of prior work — a novelty or priority verdict,
+forward-citation closure, a manuscript-bound "to our knowledge" sentence, or a pre-emption check —
+follow [`notes/literature-audit-conventions.md`](notes/literature-audit-conventions.md). It fixes the
+required per-source read-depth field, attribution of review-derived figures, multi-graph confirmation
+of citation zeros, and the coverage statement separating "found nothing" from "could not access".
+
 ## Research records and computational reproducibility
 
 **Claude:** follow the evidence discipline already established in the recent C-task reports. Good
