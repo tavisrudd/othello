@@ -1,0 +1,15 @@
+{
+  "allocations": [
+    {
+      "count": 360,
+      "first": 1,
+      "kind": "legacy-bootstrap",
+      "lane": "legacy",
+      "last": 360,
+      "purpose": "Reserve every ID through the text-audited historical maximum C360.",
+      "sequence": 1
+    }
+  ],
+  "next_id": 361,
+  "schema": "codex-task-id-allocations-v1"
+}

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Return the next global Codex task ID without matching URLs or hash substrings.
+"""Audit prose task IDs against the atomic allocation ledger.
 
 The scan is deliberately fail-closed.  It finds isolated C-number tokens in every
 Markdown note, but requires the maximum to be corroborated by an authoritative
-live-queue/archive row or a task-card heading.  A larger unindexed token is
-reported with provenance instead of silently becoming the allocation maximum.
+live-queue/archive row or a task-card heading.  It never allocates an ID.
 """
 
 from __future__ import annotations
@@ -15,6 +14,8 @@ import re
 import sys
 from collections import defaultdict
 from pathlib import Path
+
+from allocate_codex_task_ids import DEFAULT_STATE, read_state
 
 
 TOKEN = re.compile(r"(?<![A-Za-z0-9_])C([1-9][0-9]*)(?![A-Za-z0-9_])")
@@ -108,16 +109,24 @@ def main() -> None:
             f"inspect {provenance}"
         )
 
+    ledger = read_state(DEFAULT_STATE)
+    ledger_next = ledger["next_id"]
+    if maximum >= ledger_next:
+        raise SystemExit(
+            f"refusing audit: prose uses C{maximum}, but the first unreserved ledger ID is C{ledger_next}"
+        )
     result = {
-        "maximum": f"C{maximum}",
-        "next": f"C{maximum + 1}",
+        "status": "consistent",
+        "text_maximum": f"C{maximum}",
+        "ledger_next_unreserved": f"C{ledger_next}",
+        "ledger_latest_reserved": f"C{ledger_next - 1}",
         "maximum_occurrences": occurrences[maximum],
         "corroborating_occurrences": corroborated[maximum],
     }
     if args.explain:
         print(json.dumps(result, indent=2, sort_keys=True))
     else:
-        print(result["next"])
+        print(f"PASS text-max=C{maximum} ledger-next=C{ledger_next}")
 
 
 if __name__ == "__main__":
