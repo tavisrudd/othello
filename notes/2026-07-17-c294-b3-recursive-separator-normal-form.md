@@ -125,7 +125,7 @@ dictionary and demonstrate an actual traversal reduction at the same 100,000-sta
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| `2026-07-17-c294-b3-recursive-separator-normal-form.cpp` | 21,716 | `c59330af691652b87a4142673f204470a026c6fa802efc7255d0aa4dbf44d615` |
+| `2026-07-17-c294-b3-recursive-separator-normal-form.cpp` | 21,917 | `f8cb7ed2789a29f205092d28e056127ae82fc7a0176baa6cd2218262bd154504` |
 | `2026-07-17-c294-b3-recursive-separator-normal-form-replay.py` | 1,605 | `54da3e0fbe37a190938c186f0f3fc1122d1d48eaeedcba72a3e2e530181ae9d4` |
 | `2026-07-17-c294-b3-recursive-separator-normal-form-q3.json` | 935 | `e41fbdeff5b1e5c990bf83833396b5e17c0cae3131da2b8a9959adbd61609351` |
 | `2026-07-17-c294-b3-recursive-separator-normal-form-q5-100k.json` | 1,640 | `7322af29e4c0f57c3417da73f579f7784b30262eb71e2132f42156589cf6438f` |

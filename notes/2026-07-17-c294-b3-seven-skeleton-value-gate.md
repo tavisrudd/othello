@@ -2,8 +2,9 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; recursive separator closure reduces the fixed-prefix quotient by three genuine
-transition classes, but the measured gain remains too small for a larger value run
+**Status:** active; the two-phase live dictionary advances the bounded frontier but exactly matches
+an uncompressed checkpoint control, so the separator-specific gain remains too small for a larger
+value run
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -159,3 +160,16 @@ genuine mergers requires multiple pieces, and no follower value is returned. Do 
 million states. The next bounded design must either enlarge the exact generator closure enough to
 produce material additional transition mergers, or compile the fixed offline partition into a
 two-phase live dictionary and reduce traversal work on the same 100,000-state gate.
+
+## Two-phase live-dictionary result
+
+`notes/2026-07-17-c294-b3-two-phase-live-dictionary.md` compiles all 84,964 completed fixed-prefix
+absolute keys into 84,018 checked value classes. A fresh recursion with a 100,000-new-state cap
+serves 681,569 dictionary hits and advances the stop frontier from 24 to 30 vertices, but still
+returns no follower value. The compressed and exact per-absolute-key dictionaries have identical
+phase-two traversal metrics; compression saves only 66 of the classes actually touched.
+
+This is exact checkpoint reuse, not a material transition-quotient gain, and does not justify the
+ten-million-state run. The next bounded design must enlarge the exact generator closure enough that
+a compressed live replay materially improves on its exact-dictionary control. Generic rolling
+checkpoint continuation is not the missing game-aware mechanism.

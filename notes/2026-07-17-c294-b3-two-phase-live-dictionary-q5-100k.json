@@ -1,0 +1,22 @@
+{
+  "compressed_dictionary_classes": 84018,
+  "dictionary_absolute_keys": 84964,
+  "exact_dictionary_classes": 84964,
+  "exact_replay": {"connected_states": 100000, "decompositions": 2166160, "dictionary_classes_used": 8984, "dictionary_hits": 681569, "dictionary_misses": 1638465, "follower_nimber": -1, "high_key_requests": 228935, "limit_vertices": 30, "low_key_requests": 2091099, "new_cache_hits": 1549199, "stopped_at_limit": true},
+  "field_order": 5,
+  "normal_replay": {"connected_states": 100000, "decompositions": 2166160, "dictionary_classes_used": 8918, "dictionary_hits": 681569, "dictionary_misses": 1638465, "follower_nimber": -1, "high_key_requests": 228935, "limit_vertices": 30, "low_key_requests": 2091099, "new_cache_hits": 1549199, "stopped_at_limit": true},
+  "replay_state_limit": 100000,
+  "selector": "two-phase-fixed-prefix-live-dictionary",
+  "train_connected_states": 100000,
+  "train_decompositions": 1946240,
+  "train_follower_nimber": -1,
+  "train_high_key_requests": 84032,
+  "train_limit_vertices": 24,
+  "train_low_key_requests": 1709077,
+  "train_normal_form_classes": 84018,
+  "train_quotient_classes": 84964,
+  "train_state_limit": 100000,
+  "train_stopped_at_limit": true,
+  "train_value_conflicts": 0,
+  "type_index": 0
+}

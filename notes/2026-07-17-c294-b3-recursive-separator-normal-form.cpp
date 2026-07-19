@@ -117,6 +117,7 @@ class RecursiveSeparatorProbe : public TwoPortLiveProbe {
         parent_.push_back(class_id);
         rank_.push_back(0);
         class_value_.push_back(value);
+        class_by_absolute_.emplace(absolute_key, class_id);
         for (const Candidate &candidate : candidates) {
             Entry represented = current;
             represented.pieces = {candidate};
@@ -391,6 +392,7 @@ class RecursiveSeparatorProbe : public TwoPortLiveProbe {
     bool interface_stopped_ = false;
     bool interface_disabled_ = false;
     std::unordered_map<std::vector<int>, Entry, VectorHash> quotient_cache_;
+    std::unordered_map<std::vector<int>, size_t, VectorHash> class_by_absolute_;
     std::unordered_map<std::vector<int>, Representation, VectorHash> representations_;
     std::vector<size_t> parent_;
     std::vector<uint8_t> rank_;
@@ -412,6 +414,7 @@ static void emit_normal_entry(std::ostream &output,
     output << "}";
 }
 
+#ifndef C294_RECURSIVE_SEPARATOR_NORMAL_FORM_NO_MAIN
 int main(int argc, char **argv) {
     if (argc < 3 || argc > 4) {
         std::cerr << "usage: c294-b3-recursive-separator-normal-form "
@@ -501,3 +504,4 @@ int main(int argc, char **argv) {
             << "  \"value_conflicts\": " << solver.value_conflicts << "\n"
             << "}\n";
 }
+#endif

@@ -1,0 +1,22 @@
+{
+  "compressed_dictionary_classes": 46,
+  "dictionary_absolute_keys": 49,
+  "exact_dictionary_classes": 49,
+  "exact_replay": {"connected_states": 0, "decompositions": 0, "dictionary_classes_used": 1, "dictionary_hits": 1, "dictionary_misses": 0, "follower_nimber": 1, "high_key_requests": 1, "limit_vertices": -1, "low_key_requests": 0, "new_cache_hits": 0, "stopped_at_limit": false},
+  "field_order": 3,
+  "normal_replay": {"connected_states": 0, "decompositions": 0, "dictionary_classes_used": 1, "dictionary_hits": 1, "dictionary_misses": 0, "follower_nimber": 1, "high_key_requests": 1, "limit_vertices": -1, "low_key_requests": 0, "new_cache_hits": 0, "stopped_at_limit": false},
+  "replay_state_limit": 1000000,
+  "selector": "two-phase-fixed-prefix-live-dictionary",
+  "train_connected_states": 108,
+  "train_decompositions": 680,
+  "train_follower_nimber": 1,
+  "train_high_key_requests": 9,
+  "train_limit_vertices": -1,
+  "train_low_key_requests": 246,
+  "train_normal_form_classes": 46,
+  "train_quotient_classes": 49,
+  "train_state_limit": 1000000,
+  "train_stopped_at_limit": false,
+  "train_value_conflicts": 0,
+  "type_index": 0
+}
