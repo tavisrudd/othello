@@ -5,10 +5,21 @@
 > [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
 > the linked dated report.
 
-**Max allocated ID: C348.** New IDs are `max(CNN in queue + handoffs + notes/) + 1`; allocate and
-lane-peg in the same edit. Never reuse an ID. The user selects a lane; this queue never selects one
-globally. The selected lane's handoff owns ordering and detail. Rows marked REPORTED leave this file
-unless they retain an explicit open tail.
+**Allocate every ID with the script, never by reading this file.** Run
+`python3 notes/scripts/allocate_codex_task_ids.py reserve --count N --lane <alias> --purpose '<bounded purpose>'`
+from the repository root, commit the updated `codex-task-id-allocations.json` ledger before using the
+returned IDs, and lane-peg each row at allocation. Never derive an ID from repository text, treat
+`peek` as an allocation, or reuse or renumber an ID; `notes/scripts/next_codex_task_id.py` is for
+auditing only. This file records no maximum allocated ID — the ledger is the sole authority.
+
+**This queue is an allocation and open-work index, not a completion ledger.** It carries no
+`[REPORTED]` rows and no other completed-task rows, and a live row is never transitioned to
+`[REPORTED]` even temporarily. On completion, append the row to the companion archive first, then
+delete it from here; an unarchived row is a blocker to deletion, not a reason to leave history in
+this file.
+
+The user selects a lane; this queue never selects one globally, and the selected lane's handoff owns
+ordering and detail.
 
 ## Open tasks by lane
 
