@@ -8,7 +8,8 @@ complex of a k-cap. Two headlines:
   automorphisms for q ≥ 13 (Thm 7.4; an M₀,₅ four-map-reduct rigidity result).
 - **N2** — the full continuation complex reconstructs the plane + secants + arc (Thm 8.4).
 
-**Status:** theorem-package plan, no manuscript. Theorems are `[PROVED]`. Audit verdict:
+**Status:** N1 working manuscript drafted in `continuation_graph_rigidity.tex`. Theorems are
+`[PROVED]`. Audit verdict:
 **N1 SURVIVES** (Bruno–Mella / cross-ratio-graph prior art provably points the other way);
 **N2 SOFTEN** (collides with the complement / pseudo-complement embedding genre — Batten,
 Drake–Sané, Beutelspacher–Metsch — but the arc-recovery chain survives; gated on a paywalled
@@ -19,7 +20,9 @@ be deferred/softened rather than carried.
 
 **Lean:** planned `ContinuationRigidity` library (Phase 3), **not yet built**.
 
-## Files here (symlinks into ../../notes/)
+## Files here
+
+- `continuation_graph_rigidity.tex` — N1-only working manuscript; N2 appears only in scope remarks.
 
 - `2026-07-10-continuation-graph-rigidity-upgrades.md` — the theorem-package note
 - `2026-07-11-continuation-rigidity-audit-scope.md` — external citation audit (N1/N2 verdicts)

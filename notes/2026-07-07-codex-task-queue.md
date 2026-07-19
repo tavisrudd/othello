@@ -72,7 +72,6 @@ ordering and detail.
 ### `continuation`
 
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.
-- **C272 `[continuation]` [QUEUED]** — N1 manuscript draft per ruling D3: N1 headline (four-point-frame semilinear-rigidity Thm 7.4), N2 as a remarks subsection out of the abstract and contributions, extremal m(k),r(k) stated as open → `notes/2026-07-17-c272-continuation-n1-manuscript.md`.
 - **C273 `[continuation]` [QUEUED]** — build the `ContinuationRigidity` Lean library per the Phase 3 plan (implement, do not re-decide it); collaborator route is the recorded fallback if formalization stalls per the #7 gate → `notes/2026-07-17-c273-continuation-lean-library.md`.
 
 ### `crowns`
