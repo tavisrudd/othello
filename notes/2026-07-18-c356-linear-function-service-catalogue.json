@@ -1,0 +1,165 @@
+{
+  "fields": [
+    {
+      "catalogue_projective_functions": 10,
+      "collusion_privacy": "not claimed",
+      "download_symbols_per_request": 2,
+      "information_dimension": 3,
+      "integral_concurrency_profile": [
+        {
+          "distinct_request_failures": 0,
+          "distinct_request_sets_checked": 10,
+          "failures": 0,
+          "first_failure": null,
+          "multisets_checked": 10,
+          "requests": 1
+        },
+        {
+          "distinct_request_failures": 0,
+          "distinct_request_sets_checked": 45,
+          "failures": 0,
+          "first_failure": null,
+          "multisets_checked": 55,
+          "requests": 2
+        },
+        {
+          "distinct_request_failures": 60,
+          "distinct_request_sets_checked": 120,
+          "failures": 120,
+          "first_failure": {
+            "request_indices": [
+              0,
+              0,
+              3
+            ],
+            "requests": [
+              [
+                1,
+                0,
+                2
+              ],
+              [
+                1,
+                0,
+                2
+              ],
+              [
+                1,
+                1,
+                4
+              ]
+            ]
+          },
+          "multisets_checked": 220,
+          "requests": 3
+        }
+      ],
+      "maximum_universal_integral_concurrency": 2,
+      "q": 5,
+      "recovery_pairs_per_function": 3,
+      "servers": 6,
+      "single_server_contact_probability": "1/3",
+      "single_server_privacy": "exact for the uniform-pair raw-symbol protocol"
+    },
+    {
+      "catalogue_projective_functions": 21,
+      "collusion_privacy": "not claimed",
+      "download_symbols_per_request": 2,
+      "information_dimension": 3,
+      "integral_concurrency_profile": [
+        {
+          "distinct_request_failures": 0,
+          "distinct_request_sets_checked": 21,
+          "failures": 0,
+          "first_failure": null,
+          "multisets_checked": 21,
+          "requests": 1
+        },
+        {
+          "distinct_request_failures": 0,
+          "distinct_request_sets_checked": 210,
+          "failures": 0,
+          "first_failure": null,
+          "multisets_checked": 231,
+          "requests": 2
+        },
+        {
+          "distinct_request_failures": 14,
+          "distinct_request_sets_checked": 1330,
+          "failures": 14,
+          "first_failure": {
+            "request_indices": [
+              0,
+              8,
+              11
+            ],
+            "requests": [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                2,
+                6
+              ],
+              [
+                1,
+                3,
+                6
+              ]
+            ]
+          },
+          "multisets_checked": 1771,
+          "requests": 3
+        },
+        {
+          "distinct_request_failures": 2121,
+          "distinct_request_sets_checked": 5985,
+          "failures": 4515,
+          "first_failure": {
+            "request_indices": [
+              0,
+              0,
+              0,
+              3
+            ],
+            "requests": [
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                1,
+                2
+              ]
+            ]
+          },
+          "multisets_checked": 10626,
+          "requests": 4
+        }
+      ],
+      "maximum_universal_integral_concurrency": 2,
+      "q": 7,
+      "recovery_pairs_per_function": 4,
+      "servers": 8,
+      "single_server_contact_probability": "1/4",
+      "single_server_privacy": "exact for the uniform-pair raw-symbol protocol"
+    }
+  ],
+  "schema": "c356-linear-function-service-catalogue-v1",
+  "scope": "prime fields q=5,7; internal projective functions; pair recoveries only"
+}
