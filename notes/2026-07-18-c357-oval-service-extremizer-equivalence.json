@@ -1,0 +1,226 @@
+{
+  "claims_checked": [
+    "secant pairs through an off-conic target form a matching",
+    "pair-partition iff every selected carrier point lies in a selected secant pair",
+    "max disjoint recovery votes = r + floor((m-2r)/3)",
+    "majority-logic radius equality can occur without pair-partition extremality"
+  ],
+  "fields": [
+    {
+      "decoder_bound_equal_cases": 325,
+      "decoder_equal_without_pair_partition": 270,
+      "full_oval": {
+        "external_signature": [
+          [
+            2,
+            2,
+            0
+          ]
+        ],
+        "external_targets": 15,
+        "internal_signature": [
+          [
+            3,
+            3,
+            1
+          ]
+        ],
+        "internal_targets": 10
+      },
+      "off_oval_targets": 25,
+      "oval_size": 6,
+      "pair_partition_cases": 55,
+      "q": 5,
+      "shortened_even_arc_cases": 400,
+      "shortened_even_arc_cases_with_secant_pair": 340,
+      "vote_formula_replay": [
+        {
+          "m": 4,
+          "max_votes": 1,
+          "pair_count": 0
+        },
+        {
+          "m": 4,
+          "max_votes": 1,
+          "pair_count": 1
+        },
+        {
+          "m": 4,
+          "max_votes": 2,
+          "pair_count": 2
+        },
+        {
+          "m": 6,
+          "max_votes": 2,
+          "pair_count": 2
+        },
+        {
+          "m": 6,
+          "max_votes": 3,
+          "pair_count": 3
+        }
+      ]
+    },
+    {
+      "decoder_bound_equal_cases": 2471,
+      "decoder_equal_without_pair_partition": 2128,
+      "full_oval": {
+        "external_signature": [
+          [
+            3,
+            3,
+            1
+          ]
+        ],
+        "external_targets": 28,
+        "internal_signature": [
+          [
+            4,
+            4,
+            1
+          ]
+        ],
+        "internal_targets": 21
+      },
+      "off_oval_targets": 49,
+      "oval_size": 8,
+      "pair_partition_cases": 343,
+      "q": 7,
+      "shortened_even_arc_cases": 4851,
+      "shortened_even_arc_cases_with_secant_pair": 3731,
+      "vote_formula_replay": [
+        {
+          "m": 4,
+          "max_votes": 1,
+          "pair_count": 0
+        },
+        {
+          "m": 4,
+          "max_votes": 1,
+          "pair_count": 1
+        },
+        {
+          "m": 4,
+          "max_votes": 2,
+          "pair_count": 2
+        },
+        {
+          "m": 6,
+          "max_votes": 2,
+          "pair_count": 1
+        },
+        {
+          "m": 6,
+          "max_votes": 2,
+          "pair_count": 2
+        },
+        {
+          "m": 6,
+          "max_votes": 3,
+          "pair_count": 3
+        },
+        {
+          "m": 8,
+          "max_votes": 3,
+          "pair_count": 3
+        },
+        {
+          "m": 8,
+          "max_votes": 4,
+          "pair_count": 4
+        }
+      ]
+    },
+    {
+      "decoder_bound_equal_cases": 13671,
+      "decoder_equal_without_pair_partition": 12240,
+      "full_oval": {
+        "external_signature": [
+          [
+            4,
+            4,
+            1
+          ]
+        ],
+        "external_targets": 45,
+        "internal_signature": [
+          [
+            5,
+            5,
+            2
+          ]
+        ],
+        "internal_targets": 36
+      },
+      "off_oval_targets": 81,
+      "oval_size": 10,
+      "pair_partition_cases": 1431,
+      "q": 9,
+      "shortened_even_arc_cases": 37746,
+      "shortened_even_arc_cases_with_secant_pair": 29466,
+      "vote_formula_replay": [
+        {
+          "m": 4,
+          "max_votes": 1,
+          "pair_count": 0
+        },
+        {
+          "m": 4,
+          "max_votes": 1,
+          "pair_count": 1
+        },
+        {
+          "m": 4,
+          "max_votes": 2,
+          "pair_count": 2
+        },
+        {
+          "m": 6,
+          "max_votes": 2,
+          "pair_count": 0
+        },
+        {
+          "m": 6,
+          "max_votes": 2,
+          "pair_count": 1
+        },
+        {
+          "m": 6,
+          "max_votes": 2,
+          "pair_count": 2
+        },
+        {
+          "m": 6,
+          "max_votes": 3,
+          "pair_count": 3
+        },
+        {
+          "m": 8,
+          "max_votes": 3,
+          "pair_count": 2
+        },
+        {
+          "m": 8,
+          "max_votes": 3,
+          "pair_count": 3
+        },
+        {
+          "m": 8,
+          "max_votes": 4,
+          "pair_count": 4
+        },
+        {
+          "m": 10,
+          "max_votes": 4,
+          "pair_count": 4
+        },
+        {
+          "m": 10,
+          "max_votes": 5,
+          "pair_count": 5
+        }
+      ]
+    }
+  ],
+  "schema": "c357-oval-service-extremizer-equivalence-v1"
+}
