@@ -2,8 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; first live two-port selector reproduces the prior whole-core quotient and adds
-no transition-specific compression
+**Status:** active; cross-class-seeking live selector reaches two genuine transition mergers, but
+the measured gain remains too small for a larger value run
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -116,3 +116,17 @@ Thus the first live selector fails the transition-specific material-gain gate. D
 million states. The next bounded design must expose different exact piece classes to the transition
 quotient without merely recoding whole-core isomorphism, and must show a new decomposition or
 contextual-hit gain on the fixed prefix before another value run.
+
+## Cross-class-seeking result
+
+`notes/2026-07-17-c294-b3-two-port-seeking-live.md` clears that narrow exposure gate. On the same
+prefix, a lazy selector inspects 334,868 eligible separator occurrences and makes two selections
+whose equal transition records join different exact piece classes. An independent replay confirms
+the first pair consists of non-isomorphic 16-vertex pieces with nimber `2` and equal complete
+two-port interfaces. Decompositions improve only `1,941,400 -> 1,941,396`, quotient classes remain
+84,903, and no follower value returns, while interface work rises to 289,185 states.
+
+This is a bridge result, not a material live quotient. Do not run it at ten million states. The
+next bounded design should compose multiple separator pieces recursively and must produce a full
+cache-key collision attributable to different exact piece classes or reduce quotient classes on
+the unchanged prefix.

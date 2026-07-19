@@ -55,6 +55,11 @@ class TwoPortLiveProbe : public SeparatorCensusProbe {
         bool used_interface = false;
     };
 
+    struct SeekerRepresentative {
+        Mask residual;
+        Candidate candidate;
+    };
+
     TwoPortLiveProbe(size_t game_limit, size_t interface_limit)
         : SeparatorCensusProbe(game_limit), interface_limit_(interface_limit) {}
 
@@ -178,6 +183,8 @@ class TwoPortLiveProbe : public SeparatorCensusProbe {
     uint64_t reusable_interface_hits = 0;
     uint64_t nonisomorphic_interface_hits = 0;
     uint64_t live_new_absolute_key_hits = 0;
+    uint64_t seeker_candidates = 0;
+    uint64_t seeker_cross_class_selections = 0;
     int maximum_requested_core_vertices = 0;
     int maximum_requested_expanded_vertices = 0;
 
@@ -200,6 +207,15 @@ class TwoPortLiveProbe : public SeparatorCensusProbe {
     Mask first_full_current_mask() const { return first_full_current_mask_; }
     const Candidate &first_full_current_candidate() const {
         return first_full_current_candidate_;
+    }
+    bool has_first_seeker_cross_class() const {
+        return has_first_seeker_cross_class_;
+    }
+    const SeekerRepresentative &first_seeker_prior() const {
+        return first_seeker_prior_;
+    }
+    const SeekerRepresentative &first_seeker_current() const {
+        return first_seeker_current_;
     }
 
   private:
@@ -270,15 +286,54 @@ class TwoPortLiveProbe : public SeparatorCensusProbe {
                     current.expanded_vertices = size(current.piece);
                     if (current.expanded_vertices > 16) continue;
                     current.exact_key = piece_key(mask, core, component, a, b);
+#ifdef C294_TWO_PORT_LIVE_SEEK_CROSS_CLASS
+                    ++seeker_candidates;
+                    auto ids = transition_->ordered_ids(
+                        current.piece, current.first_port, current.second_port
+                    );
+                    current.forward_id = ids.forward;
+                    current.reverse_id = ids.reverse;
+                    std::pair<int, int> interface = std::minmax(ids.forward, ids.reverse);
+                    auto prior = seeker_selected_classes_.find(interface);
+                    if (prior != seeker_selected_classes_.end() &&
+                        prior->second.candidate.exact_key != current.exact_key) {
+                        if (!has_first_seeker_cross_class_) {
+                            has_first_seeker_cross_class_ = true;
+                            first_seeker_prior_ = prior->second;
+                            first_seeker_current_ = {mask, current};
+                        }
+                        best = std::move(current);
+                        ++seeker_cross_class_selections;
+                        return true;
+                    }
+#endif
+#if defined(C294_TWO_PORT_LIVE_LARGEST_SELECTOR) || \
+    defined(C294_TWO_PORT_LIVE_SEEK_CROSS_CLASS)
+                    if (!found || current.expanded_vertices > best.expanded_vertices ||
+                        (current.expanded_vertices == best.expanded_vertices &&
+                         current.exact_key > best.exact_key)) {
+#else
                     if (!found || current.expanded_vertices < best.expanded_vertices ||
                         (current.expanded_vertices == best.expanded_vertices &&
                          current.exact_key < best.exact_key)) {
+#endif
                         best = std::move(current);
                         found = true;
                     }
                 }
             }
         }
+#ifdef C294_TWO_PORT_LIVE_SEEK_CROSS_CLASS
+        if (found) {
+            auto ids = transition_->ordered_ids(best.piece, best.first_port, best.second_port);
+            best.forward_id = ids.forward;
+            best.reverse_id = ids.reverse;
+            seeker_selected_classes_.try_emplace(
+                std::minmax(ids.forward, ids.reverse),
+                SeekerRepresentative{mask, best}
+            );
+        }
+#endif
         return found;
     }
 
@@ -368,6 +423,12 @@ class TwoPortLiveProbe : public SeparatorCensusProbe {
     std::unordered_map<std::vector<int>, std::vector<int>, VectorHash>
         live_key_by_absolute_;
     std::map<std::pair<int, int>, InterfaceRepresentative> interface_classes_;
+#ifdef C294_TWO_PORT_LIVE_SEEK_CROSS_CLASS
+    std::map<std::pair<int, int>, SeekerRepresentative> seeker_selected_classes_;
+#endif
+    bool has_first_seeker_cross_class_ = false;
+    SeekerRepresentative first_seeker_prior_{};
+    SeekerRepresentative first_seeker_current_{};
     bool has_first_interface_hit_ = false;
     Mask first_interface_prior_mask_;
     Mask first_interface_current_mask_;
@@ -396,6 +457,7 @@ static void emit_candidate(
            << ", \"second_port\": " << candidate.second_port << "}";
 }
 
+#ifndef C294_TWO_PORT_LIVE_NO_MAIN
 int main(int argc, char **argv) {
     if (argc < 3 || argc > 4) {
         std::cerr << "usage: c294-b3-two-port-live GAME_STATE_LIMIT "
@@ -500,3 +562,4 @@ int main(int argc, char **argv) {
             << "  \"type_index\": " << type_index << "\n"
             << "}\n";
 }
+#endif

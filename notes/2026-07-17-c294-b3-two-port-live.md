@@ -60,6 +60,10 @@ and transition semantics. The only change to the predecessor transition source i
 `C294_TWO_PORT_TRANSITION_NO_MAIN` guard so the checked kernel can be included without its CLI
 driver. Regenerated predecessor q=3, q=5, and replay outputs are byte-identical.
 
+The later cross-class-seeking diagnostic adds behavior-neutral compile-time selector hooks and a
+main-function guard to this source. With those hooks undefined, the same q=3 and q=5 artifacts are
+again byte-identical; only this source file's hash and byte count change.
+
 ## Independent replay
 
 The first q=5 full-position hit uses the same absolute 10-vertex piece and ports in two distinct
@@ -118,7 +122,7 @@ larger value run.
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| `2026-07-17-c294-b3-two-port-live.cpp` | 20,467 | `772db182080027d5ac0a7a59ae277f8482cf52f69c8c58da2c2cefb1e4c95f1e` |
+| `2026-07-17-c294-b3-two-port-live.cpp` | 23,183 | `f0c18e9f9bbbfeb00cc9b56c7612d58944b55289e45cc99bb2512967bd64cd1a` |
 | `2026-07-17-c294-b3-two-port-live-replay.py` | 8,103 | `7b4fbf26cf57f43ddd25a5b39efd1c4a6c7463ac5497082285fa08e231153f1a` |
 | `2026-07-17-c294-b3-two-port-live-q3.json` | 1,500 | `cea21d4d444642afe627e52b84c97738ba79daef43e3f1c8955ae3f606fa43ee` |
 | `2026-07-17-c294-b3-two-port-live-q5-100k.json` | 1,735 | `f5f8ec2f9032a293edaf607f45dd83b8580a5baf3a428c56af1c21aa4cfd104d` |
