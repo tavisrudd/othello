@@ -2,9 +2,9 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; the two-phase live dictionary advances the bounded frontier but exactly matches
-an uncompressed checkpoint control, so the separator-specific gain remains too small for a larger
-value run
+**Status:** active; the two-phase live dictionary exactly matches its uncompressed checkpoint
+control, so B3 has pivoted from generic separator enlargement to the bounded coloured-Cayley
+coordinate audit in `notes/2026-07-17-c294-b3-change-of-coordinates.md`
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -170,6 +170,20 @@ returns no follower value. The compressed and exact per-absolute-key dictionarie
 phase-two traversal metrics; compression saves only 66 of the classes actually touched.
 
 This is exact checkpoint reuse, not a material transition-quotient gain, and does not justify the
-ten-million-state run. The next bounded design must enlarge the exact generator closure enough that
-a compressed live replay materially improves on its exact-dictionary control. Generic rolling
-checkpoint continuation is not the missing game-aware mechanism.
+ten-million-state run. Generic rolling checkpoint continuation is not the missing game-aware
+mechanism.
+
+## Change-of-coordinates pivot
+
+`notes/2026-07-17-c294-b3-change-of-coordinates.md` replaces generic closure enlargement as the
+active design plan. The exact separator machinery remains a falsifier and certificate kernel, but
+the next experiment is `E0`: a no-recursion audit of generator colours, determinant sheets,
+pair-cycle/coset blocks, and their certified elimination boundaries.
+
+The audit routes the next bounded mechanism among a scar-restricted typed contextual quotient, an
+adaptive group-frame P/N response automaton, and a group-aligned transfer system. A quotient pilot
+must remove at least 1% of the fixed-prefix classes beyond known graph-isomorphism removals before
+live integration, and a larger value-run discussion requires at least a 10% live improvement over
+the exact dictionary control or an independently checked type-0 value inside the fixed replay
+budget. A direct P/N certificate is strategically relevant but does not silently satisfy B3's
+current exact-nimber exit gate.
