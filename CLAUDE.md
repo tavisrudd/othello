@@ -360,24 +360,13 @@ Archive first: if the completed row is not yet present in the companion archive,
 to deleting it, not a reason to leave `[REPORTED]` history in the live queue. Never transition a
 live queue row to `[REPORTED]`, even temporarily.
 
-Every task uses the global monotonic `CNN` sequence. The sole allocation authority is
-`notes/codex-task-id-allocations.json`; never derive a new ID from repository text. From the
-repository root, run `python3 notes/scripts/allocate_codex_task_ids.py reserve` with `--count N`,
-`--lane <alias>`, and `--purpose '<bounded purpose>'`. The allocator holds a lock in the Git common
-directory, validates the complete contiguous ledger, writes by same-directory `fsync` plus atomic
-replacement, and permanently burns the returned IDs even if later work is abandoned. Immediately
-commit the ledger reservation before dispatching the IDs to another worker or using them in queue
-rows. A reservation guarantees uniqueness but does not create a task; add the normal pegged queue
-row when each task is defined. The operation is atomic for processes sharing this checkout;
-independent clones remain an external coordination boundary. `peek` is read-only and is never an
-allocation; `check` validates the ledger; `self-test` exercises concurrent reservations.
-
-`notes/scripts/next_codex_task_id.py` is a migration/audit tool only. It scans isolated task tokens,
-excludes URL/link destinations and embedded strings such as the `C7324` substring of `PMC7324030`,
-and compares prose with the ledger; never use its text maximum to allocate. If the ledger and audit
-disagree, stop and repair the indexing inconsistency rather than choosing either maximum ad hoc.
-Never reuse or renumber a reserved or reported ID. Examples must use `C<id>`, never a concrete
-unallocated number.
+Every task uses the global monotonic `CNN` sequence. Allocate one ID or a contiguous block only by
+running `python3 notes/scripts/allocate_codex_task_ids.py reserve` from the repository root with
+`--count N`, `--lane <alias>`, and `--purpose '<bounded purpose>'`. Use only the returned IDs and
+immediately commit the updated allocation ledger before dispatching or using them in queue rows.
+Never derive IDs from repository text, treat `peek` as an allocation, reuse or renumber an ID, or
+use `notes/scripts/next_codex_task_id.py` for anything except auditing. Examples must use `C<id>`,
+never a concrete unallocated number.
 
 Every task row carries exactly one lane peg at allocation:
 
