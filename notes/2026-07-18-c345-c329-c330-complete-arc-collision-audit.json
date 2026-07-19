@@ -1,0 +1,98 @@
+{
+  "c329_collision_interface_replays": [
+    {
+      "Q": 8,
+      "four_distinct_layer_support_types": 4,
+      "layer_support_multisets": 20,
+      "previously_safe_support_types": 16,
+      "repair_repair_seed_cases": 128,
+      "repair_repair_seed_identity_mismatches": 0,
+      "seed_pair_sum_zero_collisions": 0,
+      "seed_seed_repair_cases": 128,
+      "seed_seed_repair_zero_equivalence_mismatches": 0
+    },
+    {
+      "Q": 32,
+      "four_distinct_layer_support_types": 4,
+      "layer_support_multisets": 20,
+      "previously_safe_support_types": 16,
+      "repair_repair_seed_cases": 2048,
+      "repair_repair_seed_identity_mismatches": 0,
+      "seed_pair_sum_zero_collisions": 0,
+      "seed_seed_repair_cases": 2048,
+      "seed_seed_repair_zero_equivalence_mismatches": 0
+    }
+  ],
+  "direction_replays": [
+    {
+      "Q": 8,
+      "ambient_order": 64,
+      "bound_7Q_minus_2": 54,
+      "bound_verified": true,
+      "delta_repair": 0,
+      "direct_direction_count": 40,
+      "explicit_uncovered_direction": 0,
+      "formula_direction_count": 40,
+      "gamma_alpha": 1,
+      "gamma_beta": 2,
+      "modulus_bits": "0b1000011",
+      "omega": 58,
+      "pairs_with_conic_infinity_direction": 8,
+      "rho": 14,
+      "uncovered_finite_direction_count": 24
+    },
+    {
+      "Q": 8,
+      "ambient_order": 64,
+      "bound_7Q_minus_2": 54,
+      "bound_verified": true,
+      "delta_repair": 2,
+      "direct_direction_count": 37,
+      "explicit_uncovered_direction": 0,
+      "formula_direction_count": 37,
+      "gamma_alpha": 1,
+      "gamma_beta": 2,
+      "modulus_bits": "0b1000011",
+      "omega": 58,
+      "pairs_with_conic_infinity_direction": 8,
+      "rho": 14,
+      "uncovered_finite_direction_count": 27
+    },
+    {
+      "Q": 32,
+      "ambient_order": 1024,
+      "bound_7Q_minus_2": 222,
+      "bound_verified": true,
+      "delta_repair": 0,
+      "direct_direction_count": 197,
+      "explicit_uncovered_direction": 0,
+      "formula_direction_count": 197,
+      "gamma_alpha": 1,
+      "gamma_beta": 2,
+      "modulus_bits": "0b10000001001",
+      "omega": 236,
+      "pairs_with_conic_infinity_direction": 32,
+      "rho": 14,
+      "uncovered_finite_direction_count": 827
+    },
+    {
+      "Q": 32,
+      "ambient_order": 1024,
+      "bound_7Q_minus_2": 222,
+      "bound_verified": true,
+      "delta_repair": 2,
+      "direct_direction_count": 209,
+      "explicit_uncovered_direction": 0,
+      "formula_direction_count": 209,
+      "gamma_alpha": 1,
+      "gamma_beta": 2,
+      "modulus_bits": "0b10000001001",
+      "omega": 236,
+      "pairs_with_conic_infinity_direction": 32,
+      "rho": 14,
+      "uncovered_finite_direction_count": 815
+    }
+  ],
+  "schema": "c345-c329-c330-collision-audit-v1",
+  "scope": "Exhaustive representative odd-tower identity checks at Q=8,32. This independently checks the lossless collision formulas and C330 direction equality; it does not instantiate C329's nonconstructive Q>=2^45 Chebotarev witness."
+}
