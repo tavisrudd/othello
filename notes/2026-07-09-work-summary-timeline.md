@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-16** — five working weeks, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-18** — five working weeks, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -22,7 +22,8 @@ provenance here. Never resolve the overlap by adding process detail to the scope
 
 The arc in one line: **Othello engine → Queens solver + open problem → CGT theory pivot →
 projective-cap program → a publication portfolio**, with Lean formalization ramping alongside from
-week 2 on and becoming the release gate in week 6.
+week 2 on, becoming the release gate in week 6, and turning at the end into a mechanically audited
+trust layer that reports on the lanes rather than being maintained by them.
 
 ---
 
@@ -146,7 +147,7 @@ game-boundary caveat).
   finite-search platform); then a three-agent key-card fanout kept separate so the independent views
   stay comparable.
 
-## Week 6 — Jul 12–16 · The portfolio: papers, lanes, and the Lean release gate
+## Week 6 — Jul 12–18 · The portfolio: papers, lanes, and the Lean release gate
 
 The centre of gravity moves from *prove the odd-plane kernel* to *ship what is already proved*. The
 spin-off theory of week 5 becomes an actual publication track (`papers/`), the single cap program
@@ -308,6 +309,207 @@ policy. The odd-plane kernel keeps running underneath as one lane among several.
   stable dedup ID. **Standing caveat across C162/C205/C225: no real Lean target has ever run through
   any of this tooling** — a policy consequence of the no-concurrent-Lake rule with a foreign build
   live all session, not an oversight.
+
+- **Jul 17 — the spin-off track dissolves into paper lanes; three separate reviews overturn results.**
+  `rp-next` ran C238–C259 in a single day and closed itself. The dominant outcome class is **bounded
+  negative or novelty-kill with a narrow retained proposition**, not new headline theory, and that
+  was the discipline working rather than failing. Proved: **C241** (truncated separator-vector
+  response maps are contextually sufficient and compose exactly by min-sum convolution plus a
+  least-feedback fixed point, giving an explicit FPT algorithm *from a supplied* width-`w` branch
+  decomposition — 5,632 checks, with the decomposition construction explicitly outside the theorem);
+  **C243** (the inert-vs-span separation holds for every `q = 3^h ≥ 9`, while the dramatic one-round
+  nucleus switch is **q=9-only** — a five-set has ten triples but must expose `q−4` points);
+  **C246** (exact realizability characterization of truncated separator profiles; C241's raw `χ` is
+  sound but neither fully abstract nor minimal, and the incoming-convolved `Φ_X` is all three);
+  **C248** (a represented full repair port is an MSP with **one row per helper, not per circuit** —
+  correcting the advisory that motivated it); **C256** (rank-cutoff rigidity with reciprocal
+  characteristic-sensitive gaps, stated as a lower bound only). **C244** corrected the EXIT ledger
+  from `redundancy + deficit` to `code dimension + deficit`. Two reviews then did the real work:
+  **C240**'s five-probe battery against two independent, deliberately blinded Fable gap reviews
+  returned 1 kill / 3 reformulate / 2 GO — **ULC refuted** by an explicit rank-five binary
+  counterexample, the **peeling / excluded-minor programme killed** (minor, dual and 2-sum closure
+  all fail, so the WQO route never reaches its antecedent), and the width-two GO is what promoted
+  C241. **C245** then retained a deliberately narrow representable-matroid LC conjecture after
+  exhausting 30,638 pointed types — and **C254 killed it nine tasks later in the same lane**, with an
+  infinite regular-graphic TTSP counterexample family whose smallest member has 14 helper edges (all
+  185,701 profiles through 13 edges pass; exactly one 14-edge profile fails, replayed by direct
+  enumeration of all `2^14` subsets). The applied/agentic cluster **C249–C253** all passed their
+  engineering gates and all failed their novelty gates — shared-risk routing, Proof-Carrying Plans,
+  targeted active learning and expanded-state planning already own every theorem-bearing part — with
+  C251 explicitly claiming **no empirical agent advantage**, since its annotations and execution share
+  one authored causal model. C258/C259 closed the lane into three execution packets and framed the
+  closed-route ledger as saved effort rather than backlog.
+
+  **The portfolio then re-cut itself into one lane per paper.** `rp-next` and `repairports` were
+  archived; `complete-ports` split out of `repaircodes` (C277, moving paper-prep only and changing no
+  Lean namespace), `nofil` and `continuation` opened with C265–C273, the `dihedral` paper lane took
+  its release-gap chain, `crowns` opened as a research-synthesis lane owning only C294–C296, and C210
+  was routed to `relconic`. C270 (public identity, metadata, DOI/OEIS) was re-pegged from `build-sys`
+  to `nofil`, leaving C287 with manifests, extraction and axiom audits — a split where **neither side
+  can act alone**: C287 never creates remotes or pushes, C270 never copies sources or runs builds.
+
+  **The dihedral content set closed, and its own manuscript was the casualty.** **C281**'s exhaustive
+  tame census (all 255,288 legal pairs and 246,000 legal triples for `q ≤ 23`) **refuted the paper's
+  own §9 boxed formula**: when `h` is even, `PGL₂(q)` carries a second `D_{4n}` conjugacy class with
+  all reflections nonsplit, which §9's normal form assumed away — 20,196 triples take a different
+  value, first case `q=7` where the boxed formula predicts 0 and the true value is 1. C263's pair
+  formula **survives**, and the reason is exactly why the earlier pair checks were blind to the gap.
+  **C283** broke another of the paper's own laws: wild `D₁₀` is an N-position at `𝒢 = 3`, so "odd
+  order ⇒ P-position" fails, though triples cannot be wild. **C284** proved `A₄` impossible as an
+  involution-generated type and introduced `(σ, ρ)` as a complete `Aut(G)`-orbit invariant, splitting
+  the old `A₅ (3,5,5)` signature into two 60-triple classes. **C288**'s `q ≤ 101` census found board
+  Grundy value **2** occurring, first at `q=5`, in a congruence class C284's sample never touched.
+  Then two computed→proved upgrades: **C289** used the Fricke identity in the binary icosahedral
+  group plus a mirror lemma to turn six polyhedral entries from computed into proved — while
+  **delimiting the two zeros that stay computational**, since exhaustive search over the order-120
+  colour group found no free non-adjacent involution — and **C290** proved the ten closed board-value
+  laws unconditionally in `q` from `PGL₂(q)` group theory, demoting C288 to independent verification.
+  **C278** closed the density-½ theorem behind **exactly one** quarantined Davenport axiom, with the
+  ½ falling out by cancellation of `φ(8n)` rather than computing it. Fable ruled the paper's spine
+  **"adopt with changes"** (four of them, including that the density theorem stay a named headline
+  with its single-axiom sentence attached, and that §8 absorb C283 as the sharpest boundary marker),
+  converting C264 into the six-phase chain C306–C311.
+
+  **C286 is where a review changed a theorem.** Three subagents were given **disjoint source ranges**
+  and barred from reading the preflight audit, the ledgers, the handoffs, or each other's reviews;
+  the front-half reader found that the exact transfer theorem **was not exact as stated** — it omitted
+  the all-zero functional sector — and classified it a blocker. The fix assumes `|J| ≥ 2` and takes a
+  minimum over the exact all-zero branch; the same three readers then re-read their ranges after the
+  correction. A vacuous dual-distance sentence was deleted rather than restated. The preceding
+  adversarial preflight (**C285**) had already returned **not submission-ready** with 11 source and 7
+  citation corrections. Meanwhile the nine-file Fable5 advisory cluster ran its own internal
+  correction: a `missed-connections` pass **overturned** the earlier draft's clutter class (the
+  nucleus port is ideal but **not** Mengerian, so Lehman's theorem was the wrong anchor), downgraded
+  its tract dictionary from exact to conjectural, and relabelled all its letter grades as strategic
+  bets — with the corrections written back into the earlier file inline. Krob 1994 bounded one
+  proposed paper to a decidable retract and Jaeger–Vertigan–Welsh closed half of another by citation;
+  four mining cells died to literature outright. **One file in that cluster carries a stated
+  provenance failure** — much of it may have been written by Opus rather than Fable 5 — and a sibling
+  notes its own attribution is likewise uncertain, so model attribution in that cluster is not
+  uniformly reliable.
+
+  On `relconic`, the C210 Artin–Schreier series established the complete factorization theory of the
+  collision cover. Two read-only Fable rounds shaped it: the first found an **alternate-slope gap** in
+  the one-divisor claim, an **unowned** `b=0 ∧ a≠0` boundary, and warned that `GF(64)` is an even-tower
+  trap; the second **rejected both proposed completeness routes** and prescribed the census-first
+  ordering that was in fact followed. A tooling caution was recorded that outlived the task:
+  `minAssGTZ` over `GF(2)` **returned a wrong minimal-prime list**, so all later decompositions use
+  only exact division, resultants, gcd and Rabinowitsch.
+
+- **Jul 18 — C210 closes obstructed, is succeeded, and the successor is killed the same day.**
+  The **bounded two-repair-coset obstruction** closed C210: every nonconstant-height specialization
+  has a reconstructible genuine collision for `q ≥ 32768`, the named branches all close at `q ≥ 512`,
+  and the constant-height case is settled by an exact `GF(8)` census (150,528 configs, 7,512
+  collision-free, **0 arc-legal**). The verdict is stated as **obstructed, bounded** — an exact
+  mechanism obstruction, explicitly *not* a nonexistence theorem for `C`-complete `O(√q)` arcs and not
+  an obstruction to other repair architectures. The succession then ran in one day. **C297** reframed
+  C210 as a codimension-three slice of a dimension-13 family — a **scope correction that narrows our
+  own citation**: C210 bounds the common-curvature slice, not all quadratic two-repair architectures.
+  **C298** proved fiber degree ≤ 9 on every collision component, forcing `Ω(q)` deletion cost, with
+  exactly two classified terminal star strata as the escape hatch. **C300** classified the twelve
+  nonlinear `PG(2,64)` repairs as three `PGL(3,64)` classes but a **single** `PΓL(3,64)` class.
+  **C302** proved the carrierwise secant-defect identity and separated the collision-transversal from
+  the coverage-support hitting problem. **C303** refuted the terminal star-deletion route at `q=8` —
+  the mandatory conic deletion already uncovers a required point, and monotonicity makes it
+  irreparable. **C305 refuted one of our own claims by exact count**: the day-earlier synthesis had
+  argued the `q=512` gap was "hours in Rust," and the true scope is `9.17 × 10¹⁸` specializations
+  leaving `≥ 9.9 × 10¹⁴` representatives after every certified quotient. C312–C317 then classified
+  the ambient family — **C313** proving the linear-`p` stratum **empty** over every odd degree by a
+  one-line trace contradiction, **C315** collapsing the entire odd-degree tail into the
+  nine-dimensional constant-height `E4`, and C316/C317 each correcting the previous step's geometric
+  picture (rank two → rank zero; expected positive-genus fibers → zero-dimensional schemes, with an
+  explicit ban on applying Hasse–Weil to them).
+
+  Then the shape of the day inverted twice. **C327 and C329 constructed** what the programme had been
+  chasing — collision-free four-layer arcs of size `4Q` for every odd-tower `Q ≥ 2^45`, via an `S₅ × S₅`
+  joint monodromy argument and a genus-zero `(C₂)^6` cover — the first positive existence result on the
+  fresh-coefficient side. **C330 then killed them on coverage the same day**: the finite secant
+  directions form exactly seven reciprocal images, so at most `7Q−2` points are covered and
+  `≥ Q²−7Q+2` required non-conic points are left uncovered, on all of `E4` and before any trace
+  condition. Net: **arc legality is solvable on the survivor family; relative coverage is not, for
+  this architecture.** The lane finished with no live item and no global nonexistence claim, and its
+  provisional working title was retired as unsupported by its own boundary.
+
+  On `crowns`, C294's bronze P-family was **repaired upward**: the theorem had been stated for
+  `p ≡ 3, 27 (mod 40)`, but its two character conditions actually give all four residues
+  `3, 7, 23, 27`, doubling the eligible primes for free — `{3,27}` only ever affected the parameter
+  count. The mixed-class Cayley scar was proved obstructed (every colour-preserving automorphism is a
+  right translation, so no mixed triple admits a colour-preserving nonadjacent pairing), the four-ply
+  pairing certificate was refuted across all seven hard types, and the B3 slice produced a long series
+  of **exact but non-compressing** results before pivoting to coloured-Cayley coordinates after an
+  E0 audit found the setwise stabilizer of the initial defect trivial in all seven cases. The
+  ten-million-state gate stays closed, with promotion gates fixed at 1% offline / 10% live and an
+  explicit ruling that **no second ten-million run is justified**.
+
+  **The three-model zoom-out exchange happened in git, not in chat** — three signed dated notes inside
+  ninety minutes. Fable opened with a one-technology diagnosis making C294 the critical path; Codex
+  answered **"the right bottleneck at the wrong scale,"** keeping every proposed experiment and killing
+  the inflation: the programme has one scalable *Grundy-zero certificate*, not one technology; the four
+  blockers share a **failed certificate language, not a proved cause**; `139/753 ≈ 18.5%` is not one
+  half, so the arithmetic probe needs a preregistered invariant sieve with a subgroup-stratum control
+  rather than a character analogy; even characteristic is a **control experiment, not the missing half**,
+  since those planes are already Lean-proved P; and the proposed Clebsch check is a **recognition
+  corollary**, not the crown, because the P conclusion comes from the icosahedron's own symmetry rather
+  than from reconstructed geometry. Fable's reply conceded nearly all of it — including that its own gem
+  inventory had **missed C298, the exact theorem its earlier round had ranked most urgent** — defended
+  only the routing conclusion in the expected-information sense, and added the sharpening that
+  `18.5% ≈ 3/16` is the natural density of a depth-two Boolean combination, plus the methodological
+  point that **Crown II must be tested against foils, not against the jewel**, since success on the
+  jewel alone is near-tautological. The lane's own status line was then calibrated down to match.
+
+  **The coordination model was written down**: parallelize task-owned theorem work, serialize shared
+  state, with four writer roles — a task worker owning only its own artifacts, a lane integrator as
+  sole writer of the handoff, a queue coordinator as sole writer of the queue and archive, and one
+  named writer per shared registry — and consumers reading a producer's artifact **by path and commit**
+  rather than editing it for convenience. An explicit anti-drift clause states that the zoom-out notes
+  allocate nothing: each proposed probe needs an owning lane and a queue row first. The commits between
+  15:00 and 20:15 interleave **at least eight lanes**.
+
+  **The trust layer stopped being maintained by hand and started auditing the lanes.** C225's ADR was
+  accepted after adversarial review, keeping three authorities separate and settling for at-least-once
+  delivery with a stable dedup ID; abnormal death is reader-derived from systemd evidence and never a
+  forged terminal state. **Step 11 put the first real Lean target through that bridge and it failed
+  twice** — first with `lake: not found`, because the transient unit inherited the user-manager
+  environment and rebuilt `PATH` in a way that discarded the devshell (invisible to the legacy path),
+  then, after the fix, with a genuine C151 `decide` failure. The supervision path was proven; **a green
+  managed Lean compile remains unobserved**, so that gate is closed by decision rather than evidence.
+  **C162**'s blast-radius analyzer mapped 10,878 modules and 30,270 import edges and found radius comes
+  from **chain depth, not fan-out** — about ten modules each invalidate ~95% of the tree on 2–11 direct
+  importers — while its **cost ranking was not delivered and its premise failed**: queue telemetry is
+  closure-level, not per-module, and an early Spearman `ρ = −0.044` is explicitly recorded as *not* a
+  finding. Writing 48 hermetic restart-guard tests exposed two real defects, both fixed: a verifier that
+  accepted an empty sentinel map and printed "verified, byte-identical" while hashing nothing, and an
+  `assert` that vanishes under `python3 -O`. **C326** built the trust spine, and its first pilot
+  immediately found what hand-maintenance had missed — 14 handwritten modules outside all five declared
+  gates, a `Gates.Baer` covering half its modules with a manifest whose validation command builds none
+  of them, a tracked module no lake target builds, and a project-local axiom absent from the trust
+  doc — all of them **other lanes' defects, reported and deliberately not fixed**. Its exporter resolved
+  a decision gate in its own disfavour: the "33 opaque proof boundaries" were an artifact of its own
+  `allowOpaque` misuse, and proof bodies are in fact available. **The standing caveat is the large
+  one — no project module has been extracted, and all five gates report `facts-missing`.**
+
+  **C151** closed the alternate-orbit exhaustion: within the normalized-row domain, 32 is the exact
+  minimum and the five certified orbits are the complete minimizer set, with the 46,056 rows accounted
+  for as 39,012 bad payload, 7,020 non-minimizer and 24 minimizer, and the 24 splitting `3,6,6,3,6`
+  in agreement with orbit sizes derived from an independent source. The orbit sizes themselves had
+  been **generator payload appearing in no proof**, read as established because they sat in a schema
+  and a report table — they are now theorems. A Fable review killed the materialize-the-orbits plan on
+  a cost estimate before it was attempted, and its own proposed fallback was then killed by
+  measurement, leaving the orbit–stabilizer route that avoided an estimated 1,036 modules and 7,044
+  class-link records. **The boundary is load-bearing: exhaustion is proved for normalized rows, not
+  semantic arcs** — the lower bound lifts, exhaustion does not — so 32 must not be presented as the
+  exact semantic minimum until C331 closes the gap. Two further Fable reviews cut across lanes: a
+  certificate-portfolio review caught an external model's inventory as **visibly doc-derived** with
+  stale counts and recommendations already implemented, and flagged that the layer it rated highest-risk
+  was **untracked in git** and therefore supported no reproducibility claim at all; a trust-doc diff
+  review found a queued task's premise **flatly false** (the axiom it said was documented nowhere has a
+  56-line file whose whole purpose is documenting it), three README claims false, and — in its closing
+  section — sketched what became the C326 design.
+
+  **Process:** the discovery-track convention produced its most useful entries yet, and they are
+  self-critical rather than opportunistic: that a schema field had been read as established fact
+  without any proof consuming it, and that a per-leaf workaround for an opaque inversion appeared in no
+  report or docstring, so the next hand-written module walked into the same wall.
 
 ---
 
