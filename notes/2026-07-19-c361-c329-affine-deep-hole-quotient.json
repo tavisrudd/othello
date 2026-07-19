@@ -1,0 +1,174 @@
+{
+  "field": {
+    "E": "F[omega]/(omega^2+omega+1)",
+    "F": "GF(2^5), modulus x^5+x^2+1",
+    "basis": "a+b*omega encoded as [a,b]"
+  },
+  "fixtures": [
+    {
+      "a": [
+        27,
+        13
+      ],
+      "affine_orbit_count": 4,
+      "affine_point_count": 128,
+      "b": [
+        8,
+        24
+      ],
+      "hole_orbits": [
+        [
+          5,
+          [
+            2,
+            13
+          ]
+        ],
+        [
+          12,
+          [
+            11,
+            5
+          ]
+        ],
+        [
+          20,
+          [
+            17,
+            3
+          ]
+        ],
+        [
+          21,
+          [
+            25,
+            30
+          ]
+        ]
+      ],
+      "rho": 9,
+      "same_layer_trace_checks": 131072
+    },
+    {
+      "a": [
+        0,
+        24
+      ],
+      "affine_orbit_count": 5,
+      "affine_point_count": 160,
+      "b": [
+        31,
+        25
+      ],
+      "hole_orbits": [
+        [
+          2,
+          [
+            14,
+            21
+          ]
+        ],
+        [
+          4,
+          [
+            31,
+            28
+          ]
+        ],
+        [
+          20,
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          22,
+          [
+            7,
+            19
+          ]
+        ],
+        [
+          29,
+          [
+            19,
+            17
+          ]
+        ]
+      ],
+      "rho": 28,
+      "same_layer_trace_checks": 131072
+    },
+    {
+      "a": [
+        18,
+        5
+      ],
+      "affine_orbit_count": 3,
+      "affine_point_count": 96,
+      "b": [
+        15,
+        31
+      ],
+      "hole_orbits": [
+        [
+          23,
+          [
+            13,
+            22
+          ]
+        ],
+        [
+          26,
+          [
+            20,
+            12
+          ]
+        ],
+        [
+          31,
+          [
+            17,
+            3
+          ]
+        ]
+      ],
+      "rho": 3,
+      "same_layer_trace_checks": 131072
+    }
+  ],
+  "pinned_independent_input": {
+    "method": "direct projective secant-line incidence census",
+    "path": "2026-07-18-c348-c329-coset-leader-enumerator.json",
+    "sha256": "ecc8881e02de212ed89479f8b0fa564f6db652d74a10ff65a3bf206f6a5d3eee"
+  },
+  "schema": "c361-affine-quotient-v1",
+  "symbolic_fiber_ledger": [
+    {
+      "gate": "one absolute-trace test",
+      "name": "within-layer",
+      "types": 4
+    },
+    {
+      "generic_elimination_degree": 5,
+      "name": "seed-seed",
+      "types": 1
+    },
+    {
+      "generic_elimination_degree": 2,
+      "name": "repair-repair",
+      "types": 1
+    },
+    {
+      "generic_elimination_degree": 8,
+      "name": "seed-repair",
+      "types": 4
+    }
+  ],
+  "totals": {
+    "fixture_count": 3,
+    "quotient_representatives_checked": 98304,
+    "same_layer_trace_checks": 393216
+  }
+}
