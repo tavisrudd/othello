@@ -1,0 +1,217 @@
+{
+  "cases": [
+    {
+      "base_dead": 1,
+      "degree": 2,
+      "extension_order": 9,
+      "group_order": 24,
+      "modulus_low_to_high": [
+        1,
+        0,
+        1
+      ],
+      "quadratic_dead": 4,
+      "quadratic_orbits": 1,
+      "quadratic_size": 6,
+      "regular_multiplicity": 0,
+      "regular_parity": 0,
+      "sheet": "PGL",
+      "total_dead": 5,
+      "total_orbits": 2
+    },
+    {
+      "base_dead": 1,
+      "degree": 3,
+      "extension_order": 27,
+      "group_order": 24,
+      "modulus_low_to_high": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "quadratic_dead": 0,
+      "quadratic_orbits": 0,
+      "quadratic_size": 0,
+      "regular_multiplicity": 1,
+      "regular_parity": 1,
+      "sheet": "PGL",
+      "total_dead": 1,
+      "total_orbits": 2
+    },
+    {
+      "base_dead": 1,
+      "degree": 4,
+      "extension_order": 81,
+      "group_order": 24,
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "quadratic_dead": 4,
+      "quadratic_orbits": 1,
+      "quadratic_size": 6,
+      "regular_multiplicity": 3,
+      "regular_parity": 1,
+      "sheet": "PGL",
+      "total_dead": 5,
+      "total_orbits": 5
+    },
+    {
+      "base_dead": 1,
+      "degree": 5,
+      "extension_order": 243,
+      "group_order": 24,
+      "modulus_low_to_high": [
+        1,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "quadratic_dead": 0,
+      "quadratic_orbits": 0,
+      "quadratic_size": 0,
+      "regular_multiplicity": 10,
+      "regular_parity": 0,
+      "sheet": "PGL",
+      "total_dead": 1,
+      "total_orbits": 11
+    },
+    {
+      "base_dead": 0,
+      "degree": 2,
+      "extension_order": 25,
+      "group_order": 120,
+      "modulus_low_to_high": [
+        1,
+        1,
+        1
+      ],
+      "quadratic_dead": 6,
+      "quadratic_orbits": 1,
+      "quadratic_size": 20,
+      "regular_multiplicity": 0,
+      "regular_parity": 0,
+      "sheet": "PGL",
+      "total_dead": 6,
+      "total_orbits": 2
+    },
+    {
+      "base_dead": 1,
+      "degree": 2,
+      "extension_order": 25,
+      "group_order": 60,
+      "modulus_low_to_high": [
+        1,
+        1,
+        1
+      ],
+      "quadratic_dead": 4,
+      "quadratic_orbits": 1,
+      "quadratic_size": 20,
+      "regular_multiplicity": 0,
+      "regular_parity": 0,
+      "sheet": "PSL",
+      "total_dead": 5,
+      "total_orbits": 2
+    },
+    {
+      "base_dead": 0,
+      "degree": 3,
+      "extension_order": 125,
+      "group_order": 120,
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "quadratic_dead": 0,
+      "quadratic_orbits": 0,
+      "quadratic_size": 0,
+      "regular_multiplicity": 1,
+      "regular_parity": 1,
+      "sheet": "PGL",
+      "total_dead": 0,
+      "total_orbits": 2
+    },
+    {
+      "base_dead": 1,
+      "degree": 3,
+      "extension_order": 125,
+      "group_order": 60,
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "quadratic_dead": 0,
+      "quadratic_orbits": 0,
+      "quadratic_size": 0,
+      "regular_multiplicity": 2,
+      "regular_parity": 0,
+      "sheet": "PSL",
+      "total_dead": 1,
+      "total_orbits": 3
+    },
+    {
+      "base_dead": 0,
+      "degree": 4,
+      "extension_order": 625,
+      "group_order": 120,
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "quadratic_dead": 6,
+      "quadratic_orbits": 1,
+      "quadratic_size": 20,
+      "regular_multiplicity": 5,
+      "regular_parity": 1,
+      "sheet": "PGL",
+      "total_dead": 6,
+      "total_orbits": 7
+    },
+    {
+      "base_dead": 1,
+      "degree": 4,
+      "extension_order": 625,
+      "group_order": 60,
+      "modulus_low_to_high": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "quadratic_dead": 4,
+      "quadratic_orbits": 1,
+      "quadratic_size": 20,
+      "regular_multiplicity": 10,
+      "regular_parity": 0,
+      "sheet": "PSL",
+      "total_dead": 5,
+      "total_orbits": 12
+    }
+  ],
+  "conventions": {
+    "base_fields": "odd prime fields",
+    "dead_points": "union of fixed points of s_j s_i for i<j",
+    "edge_action": "left fractional-linear action; colours retain generator index",
+    "infinity_encoding": null,
+    "quadratic_set": "F_(p^2) minus P1(F_p), present iff 2 divides n"
+  },
+  "exceptions": [
+    "PSL(2,3) has no involutory generating triple: its three involutions form a proper V4"
+  ],
+  "schema": "c332-all-extension-subfield-descent-v1"
+}
