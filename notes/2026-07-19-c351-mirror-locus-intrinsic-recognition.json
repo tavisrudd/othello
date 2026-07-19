@@ -1,0 +1,222 @@
+{
+  "collision_certificates": [
+    {
+      "code_projectivity_matrix": [
+        [
+          4,
+          6,
+          3
+        ],
+        [
+          0,
+          10,
+          1
+        ],
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      "determinant_sheet": "+-",
+      "full_group_order": 1320,
+      "left": [
+        2,
+        2
+      ],
+      "left_canonical_marked_configuration": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ]
+        ]
+      ],
+      "left_live_vertices": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        9,
+        10,
+        11
+      ],
+      "marked_stabilizer_stratum": "generic <tau>",
+      "repair_vertex_permutation": [
+        0,
+        1,
+        2,
+        6,
+        8,
+        9,
+        3,
+        10,
+        4,
+        5,
+        7,
+        11
+      ],
+      "residual_vertex_permutation": [
+        0,
+        1,
+        2,
+        6,
+        3,
+        4,
+        5,
+        7
+      ],
+      "right": [
+        2,
+        4
+      ],
+      "right_canonical_marked_configuration": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            4
+          ],
+          [
+            8,
+            6
+          ]
+        ]
+      ],
+      "right_live_vertices": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        7,
+        8,
+        11
+      ]
+    }
+  ],
+  "conventions": {
+    "associated_code": "unmarked projective [6,3,4]_q code on the burned pair and four centres",
+    "marked_equivalence": "C350 equivalence preserving the conic, burned orbit, and mirror while forgetting centre-orbit order and representatives",
+    "repair_object": "uncoloured loop-deleted edge-multiplicity union of the four projection matchings on P1(F_q)",
+    "residual_graph": "simple union graph on legal conic vertices after deleting every centre-pair secant endpoint"
+  },
+  "field_rows": [
+    {
+      "code_collision_pairs": 0,
+      "common_three_interface_collision_pairs": 0,
+      "parameter_count": 1,
+      "q": 5,
+      "repair_collision_pairs": 0,
+      "residual_collision_pairs": 0,
+      "small_field_automorphism_rows": [
+        {
+          "b": 3,
+          "delta": 3,
+          "live_vertices": 2,
+          "repair_automorphisms": 2,
+          "repair_mirror_candidate_classes": 1,
+          "repair_mirror_candidates": 1,
+          "residual_automorphisms": 2,
+          "residual_mirror_candidate_classes": 1,
+          "residual_mirror_candidates": 1
+        }
+      ]
+    },
+    {
+      "code_collision_pairs": 6,
+      "common_three_interface_collision_pairs": 0,
+      "parameter_count": 4,
+      "q": 7,
+      "repair_collision_pairs": 0,
+      "residual_collision_pairs": 0,
+      "small_field_automorphism_rows": [
+        {
+          "b": 2,
+          "delta": 5,
+          "live_vertices": 8,
+          "repair_automorphisms": 8,
+          "repair_mirror_candidate_classes": 1,
+          "repair_mirror_candidates": 2,
+          "residual_automorphisms": 8,
+          "residual_mirror_candidate_classes": 1,
+          "residual_mirror_candidates": 2
+        },
+        {
+          "b": 6,
+          "delta": 5,
+          "live_vertices": 6,
+          "repair_automorphisms": 16,
+          "repair_mirror_candidate_classes": 1,
+          "repair_mirror_candidates": 2,
+          "residual_automorphisms": 48,
+          "residual_mirror_candidate_classes": 1,
+          "residual_mirror_candidates": 3
+        },
+        {
+          "b": 4,
+          "delta": 6,
+          "live_vertices": 8,
+          "repair_automorphisms": 48,
+          "repair_mirror_candidate_classes": 2,
+          "repair_mirror_candidates": 4,
+          "residual_automorphisms": 48,
+          "residual_mirror_candidate_classes": 2,
+          "residual_mirror_candidates": 4
+        },
+        {
+          "b": 5,
+          "delta": 6,
+          "live_vertices": 4,
+          "repair_automorphisms": 4,
+          "repair_mirror_candidate_classes": 1,
+          "repair_mirror_candidates": 1,
+          "residual_automorphisms": 8,
+          "residual_mirror_candidate_classes": 1,
+          "residual_mirror_candidates": 1
+        }
+      ]
+    },
+    {
+      "code_collision_pairs": 26,
+      "common_three_interface_collision_pairs": 1,
+      "parameter_count": 13,
+      "q": 11,
+      "repair_collision_pairs": 3,
+      "residual_collision_pairs": 6
+    },
+    {
+      "code_collision_pairs": 1,
+      "common_three_interface_collision_pairs": 0,
+      "parameter_count": 6,
+      "q": 13,
+      "repair_collision_pairs": 0,
+      "residual_collision_pairs": 0
+    }
+  ],
+  "schema": "c351-intrinsic-recognition-obstruction-v1"
+}
