@@ -195,6 +195,18 @@ characterizations secondarily through C337/C348.  The theorem is proved independ
 audit, but any manuscript novelty sentence must retain “to our knowledge” until the open coverage
 items below are discharged.
 
+The screened set was the eight cached primary-text extractions named in the table.  On 2026-07-19
+the following discriminator was run case-insensitively over each complete extraction:
+
+```text
+coset leader|nearest|covering radius|deep hole|decod(e|er|ing)|recover(y|ing)|minimum.weight
+```
+
+It matched respectively `52,50,87,63,186,158,19,20` lines in cache-key order
+`1612.05447,2508.03552,2508.02382,2511.00766,2512.24217,1907.11658,2103.16904,2512.02325`.
+Those hits were a promotion filter into the partial readings recorded below, not a substitute for
+reading and not an exhaustive semantic classifier.
+
 | source | read record | exact overlap and boundary | verdict |
 |---|---|---|---|
 | Kaipa, [*Deep holes and MDS extensions of Reed--Solomon codes*](https://arxiv.org/abs/1612.05447) | `partial`: arXiv v1 abstract and introduction; cache key `arXiv:1612.05447`, SHA-256 `1fe8de83c0b8cd3938e1a450fd49f376de795d7a317f099a730c63ab968178a4` | Classifies redundancy-three RS deep holes and their MDS extensions. C329 is non-GRS and C364 reconstructs leaders rather than importing the RS classification. | `SURVIVES`; credit the redundancy-three/deep-hole dictionary. |
@@ -208,13 +220,36 @@ items below are discharged.
 
 ### Search record and open closure
 
-The 2026-07-19 positioning pass used the exact queries `"complete coset leader decoding" MDS
-code`, `"coset leader decoder" non-GRS MDS`, and exact-title searches for the two 2025 TGRS
-decoder papers already known to the task.  A follow-up exact-title/topic search located
-`arXiv:2511.00766` and `arXiv:2512.24217`; both were cached and promoted to individual partial
-reads above.  These were ordinary public-web/arXiv discovery searches.  Result-set sizes, screened
-fields, and a mechanical discriminator were not recorded, so they license positioning leads but no
-exhaustive negative.
+The initial discovery pass used these ordinary public-web queries verbatim:
+
+```text
+site:arxiv.org complete coset leader decoding MDS code syndrome deep holes algorithm
+site:arxiv.org twisted generalized Reed Solomon decoding algorithm error correcting pairs
+site:doi.org coset leader decoder non-GRS MDS code deep holes
+site:arxiv.org structured code recovery decoding unmarked code non-GRS MDS
+```
+
+The service exposed neither a stable result-set total nor a durable result manifest.  The returned
+top results were inspected only to promote primary sources; this pass licenses discovery, not an
+exhaustive negative.  Exact-title follow-up located `arXiv:2511.00766` and
+`arXiv:2512.24217`, which were cached and promoted to the partial reads above.
+
+A reproducible exact-phrase check was then run against the arXiv Atom API on 2026-07-19.  Each row
+used the displayed value as `search_query` with `start=0&max_results=1`; the total is the returned
+`opensearch:totalResults`.  Replay with
+`https://export.arxiv.org/api/query?search_query=<URL-encoded-query>&start=0&max_results=1`.
+
+| arXiv API `search_query` | total | promoted result |
+|---|---:|---|
+| `all:"complete coset leader decoder"` | 0 | none |
+| `all:"minimum-weight coset leader" AND all:"non-GRS"` | 0 | none |
+| `all:"twisted GRS" AND all:"covering radius" AND all:decoder` | 1 | `arXiv:2508.02382v1` |
+| `all:"structured recovery" AND all:"non-GRS MDS" AND all:decoder` | 0 | none |
+
+An arXiv zero was recorded only when the HTTP request returned a valid Atom feed containing the
+explicit element `<opensearch:totalResults>0</opensearch:totalResults>`; a transport or parse error
+therefore cannot masquerade as an empty result.  These exact phrases are intentionally narrow and
+do not turn the audit into database closure.
 
 No forward-citation set was enumerated.  OpenAlex, Crossref, and Semantic Scholar counts therefore
 remain **NOT RUN**, and no largest-set screen exists.  zbMATH Open is **NOT RUN**.  MathSciNet is
