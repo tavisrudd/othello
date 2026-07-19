@@ -1,0 +1,61 @@
+{
+  "extremal_equality_zero_counts": {
+    "d1_secant": 2,
+    "d2_repair_carrier": 16,
+    "d3_repair_carrier_times_residual_secant": 18,
+    "d4_two_carriers": 24,
+    "d5_two_carriers_times_remaining_seed_secant": 26
+  },
+  "field": {
+    "ambient": "GF(64)",
+    "element_encoding": "polynomial basis integers",
+    "modulus_bits": "0b1000011",
+    "nonzero_inverses_checked": 63,
+    "subfield": "GF(8)"
+  },
+  "fixture": {
+    "carrier_heights": [
+      0,
+      1,
+      2
+    ],
+    "is_arc": false,
+    "omega": 58,
+    "partition_size": 32,
+    "rho": 14
+  },
+  "local_interpolation": {
+    "1": {
+      "group_size": 3,
+      "recoveries_checked": 112,
+      "repair_availability": 5,
+      "seed_availability": 2
+    },
+    "2": {
+      "group_size": 5,
+      "recoveries_checked": 64,
+      "repair_availability": 3,
+      "seed_availability": 1
+    },
+    "3": {
+      "group_size": 7,
+      "recoveries_checked": 48,
+      "repair_availability": 2,
+      "seed_availability": 1
+    },
+    "4": {
+      "group_size": 9,
+      "recoveries_checked": 16,
+      "repair_availability": 1,
+      "seed_availability": 0
+    },
+    "5": {
+      "group_size": 11,
+      "recoveries_checked": 16,
+      "repair_availability": 1,
+      "seed_availability": 0
+    }
+  },
+  "schema": "c336-c329-evaluation-lrc-tower-v1",
+  "scope": "Carrier-component equality types and interpolation only. The small carrier partition is not asserted to satisfy C329's arc conditions; arc existence and the all-Q Bezout upper bounds are proof inputs, not computational claims."
+}
