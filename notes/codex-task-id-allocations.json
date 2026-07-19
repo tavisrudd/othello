@@ -53,8 +53,17 @@
       "last": 365,
       "purpose": "Repo-wide literature-audit conventions doc and CLAUDE.md pointer",
       "sequence": 6
+    },
+    {
+      "count": 5,
+      "first": 366,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 370,
+      "purpose": "Queue five low-cost cross-finding publication upgrades from the crowns synthesis",
+      "sequence": 7
     }
   ],
-  "next_id": 366,
+  "next_id": 371,
   "schema": "codex-task-id-allocations-v1"
 }
