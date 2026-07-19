@@ -4,7 +4,7 @@
 
 **Lane:** `crowns`
 
-**Status:** E0 passed; the next experiment is the bounded scar-restricted typed-context pilot `R`,
+**Status:** E0 passed; task-local `E1`, the fixed-prefix relevance/ledger audit for `R`, is next,
 not a larger value run or another generic separator-closure enlargement
 
 ## Decision
@@ -278,11 +278,12 @@ same-absolute-key hits.
 
 ## Immediate handoff
 
-E0 is complete in `notes/2026-07-17-c294-b3-coordinate-audit.md`. Implement only the cheap fixed-
-prefix Track-V pilot `R`: define the typed scar grammar from the certified generator colour,
-determinant sheet, pair-cycle orientation, and block-constructor coordinates; minimize it on the
-existing q=3 and q=5 completed states; and test its closure and exact nimber conflicts. Do not write
-a live solver unless it removes at least 850 classes beyond the 943 known isomorphism removals with
-zero conflicts. The type-0 `02` transfer direction is eligible at exactly 16 ports but remains a
-fallback until `R` and `A` fail to dominate it. No value solver, separator-cap increase, all-seven
-value run, Lean work, or cross-lane edit is part of this next pilot.
+E0 is complete in `notes/2026-07-17-c294-b3-coordinate-audit.md`. Follow the serial queue in
+`notes/2026-07-18-c294-relevance-ledgers-and-hybrid-mechanisms-brainstorm.md` and implement only
+`E1`. Replay the existing q=3 control and fixed q=5 prefix without generating deeper states; measure
+proof-DAG relevance, duplicate mex information, exact xor cancellations, actual `02` frontier
+records, local defect motifs, and the maximum possible class-reduction headroom of each proposed
+typed coordinate. Emit the `notes/2026-07-17-c294-b3-relevance-ledger.*` evidence bundle with an
+independent replay. Do not implement `E2` unless one candidate has headroom for 850 genuinely new
+removals. The adaptive automaton, transfer, value solver, separator-cap increase, all-seven value
+run, Lean work, and cross-lane edits are not part of `E1`.

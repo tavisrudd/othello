@@ -2,8 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; E0 has certified the coloured-Cayley coordinates and routes B3 next to the
-bounded scar-restricted typed-context pilot `R`
+**Status:** active; E0 has certified the coloured-Cayley coordinates and task-local `E1`, the
+fixed-prefix relevance/ledger audit for `R`, is next
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -196,7 +196,10 @@ whole-block cut width. Type 0 has one greedy `02` block order at exactly 16 live
 directions have widths 20 and 26.
 
 This makes the `02` transfer direction eligible but does not establish interface compression or
-dominate the preregistered Track-V order. The next bounded experiment is `R` on the existing q=3
-and q=5 prefixes. It must remove at least 850 classes beyond known isomorphism removals with zero
-nimber conflicts and establish closure under the typed scar grammar before live integration. The
-generic state cap and all-seven value run remain closed.
+dominate the preregistered Track-V order. The serial experiment queue is now recorded in
+`notes/2026-07-18-c294-relevance-ledgers-and-hybrid-mechanisms-brainstorm.md`. Its active next item
+`E1` measures the root-relevant request slice, square-frontier diversity, exact xor garbage
+collection, and the maximum possible typed-quotient headroom on the existing q=3/q=5 prefixes.
+Only a candidate with headroom for 850 genuinely new removals advances to the transition-closed
+typed quotient `E2`; otherwise `R` closes at preflight and the queue routes to the adaptive debt
+automaton `E3`. The generic state cap and all-seven value run remain closed.
