@@ -6,6 +6,12 @@ import RelativeConicArcs.Q25ResidualConclusionDispatchData.All
 
 This module lifts the checked orbit-`5` residual-row lower bound through the two projective
 normalizations used by the semantic exceptional-profile theorem.
+
+The two normalization steps are stated separately from the bound they carry.
+`exists_base_normalizedConfig` moves an indexed invariant eight-cap onto a `normalizedConfig`, and
+`exists_residual_rowConfig` moves that configuration onto a canonical row of the orbit-`5` slice.
+Neither mentions a threshold, so the same two steps carry the lower bound here and the equality-orbit
+exhaustion lift in `Q25SemanticExhaustion`.
 -/
 
 namespace RelativeConicArcs
@@ -137,10 +143,22 @@ theorem individuallyGood_third {a b c : OrbitCode}
 /-- The residual rows fix orbit number `5`, which is the normalization's standard orbit. -/
 theorem orbitCodeOfNumber_five : orbitCodeOfNumber (5 : Fin 310) = standardOrbit := by decide
 
-theorem normalized_card_legalOrbitSet_ge_32
-    {a b c : OrbitCode} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+/-! ## The residual normalization step
+
+`exists_residual_rowConfig` is the threshold-free content of the second normalization: a
+`normalizedConfig` on three distinct nonfixed orbits is carried by a member of the order-`400`
+residual action onto a canonical row of the orbit-`5` slice.  Both the lower bound below and the
+exhaustion lift in `Q25SemanticExhaustion` consume it through
+`card_legalOrbitSet_residual`, which transports the legal-orbit cardinality in either direction. -/
+
+/-- Every normalized invariant eight-set on three distinct nonfixed orbits maps onto a canonical
+residual row under a member of the residual action. -/
+theorem exists_residual_rowConfig {a b c : OrbitCode}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
     (hraw : RawCap (normalizedConfig a b c)) :
-    32 ≤ (legalOrbitSet (normalizedConfig a b c)).card := by
+    ∃ (y z : K25) (hy : imagPart y ≠ 0) (hz : imagPart z ≠ 0) (u v : Fin 310),
+      5 < u.val ∧ u.val < v.val ∧
+        (normalizedConfig a b c).map (residualEmbedding y z hy hz) = rowConfig u v := by
   have ha := (individuallyGood_iff_admissible a).1 (individuallyGood_first hraw)
   cases a with
   | affineY aa ab z =>
@@ -197,13 +215,10 @@ theorem normalized_card_legalOrbitSet_ge_32
         omega
       let dn : Fin 310 := ⟨orbitNumber d, orbitNumber_lt d⟩
       let en : Fin 310 := ⟨orbitNumber e, orbitNumber_lt e⟩
-      have hcard := card_legalOrbitSet_residual y z hy ha hmapResidual hraw htargetRaw
-      rw [hcard]
       by_cases hlt : orbitNumber d < orbitNumber e
       · have hrow : normalizedConfig standardOrbit d e = rowConfig dn en := by
           simp [rowConfig, dn, en, orbitCodeOfNumber_five]
-        rw [hrow] at htargetRaw ⊢
-        exact concludeNormalizedRow dn en hdgt hlt htargetRaw
+        exact ⟨y, z, hy, ha, dn, en, hdgt, hlt, hmapResidual.trans hrow⟩
       · have hne : orbitNumber d ≠ orbitNumber e := by
           intro h
           exact hde (orbitNumber_injective h)
@@ -211,16 +226,41 @@ theorem normalized_card_legalOrbitSet_ge_32
         have hrow : normalizedConfig standardOrbit d e = rowConfig en dn := by
           simp [rowConfig, dn, en, orbitCodeOfNumber_five, normalizedConfig,
             Finset.union_assoc, Finset.union_left_comm, Finset.union_comm]
-        rw [hrow] at htargetRaw ⊢
-        exact concludeNormalizedRow en dn hegt hlt' htargetRaw
+        exact ⟨y, z, hy, ha, en, dn, hegt, hlt', hmapResidual.trans hrow⟩
   | affineZ y aa ab => simp [Q25Normalization.Admissible] at ha
   | infinity aa ab => simp [Q25Normalization.Admissible] at ha
 
-/-- Every indexed invariant exceptional-profile eight-cap has at least `32` legal orbits. -/
-theorem indexed_f2_card_legalOrbitSet_ge_32 {S : Finset Idx25}
-    (hArc : RawCap S) (hInv : IsConjInvariant S)
-    (hcard : S.card = 8) (hfixed : (fixedPart S).card = 2) :
-    32 ≤ (legalOrbitSet S).card := by
+/-- The canonical row produced by `exists_residual_rowConfig` inherits the cap condition. -/
+theorem rawCap_rowConfig_of_residual {a b c : OrbitCode} {y z : K25}
+    {hy : imagPart y ≠ 0} {hz : imagPart z ≠ 0} {u v : Fin 310}
+    (hraw : RawCap (normalizedConfig a b c))
+    (hmap : (normalizedConfig a b c).map (residualEmbedding y z hy hz) = rowConfig u v) :
+    RawCap (rowConfig u v) := by
+  rw [← hmap]
+  exact (rawCap_map_residualEmbedding y z hy hz _).2 hraw
+
+theorem normalized_card_legalOrbitSet_ge_32
+    {a b c : OrbitCode} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hraw : RawCap (normalizedConfig a b c)) :
+    32 ≤ (legalOrbitSet (normalizedConfig a b c)).card := by
+  obtain ⟨y, z, hy, hz, u, v, hu, huv, hmap⟩ := exists_residual_rowConfig hab hac hbc hraw
+  have hrowRaw : RawCap (rowConfig u v) := rawCap_rowConfig_of_residual hraw hmap
+  rw [card_legalOrbitSet_residual y z hy hz hmap hraw hrowRaw]
+  exact concludeNormalizedRow u v hu huv hrowRaw
+
+/-! ## The base normalization step
+
+`exists_base_normalizedConfig` is the threshold-free content of the first normalization: an indexed
+invariant eight-cap with exactly two fixed points is carried by a base-field collineation onto a
+`normalizedConfig`.  `card_legalOrbitSet_liftMapIdx` transports the legal-orbit cardinality in
+either direction. -/
+
+/-- Every indexed invariant exceptional-profile eight-cap is carried onto a normalized
+configuration by a base-field collineation. -/
+theorem exists_base_normalizedConfig {S : Finset Idx25}
+    (hInv : IsConjInvariant S) (hcard : S.card = 8) (hfixed : (fixedPart S).card = 2) :
+    ∃ (g : Vec5 ≃ₗ[F5] Vec5) (a b c : OrbitCode), a ≠ b ∧ a ≠ c ∧ b ≠ c ∧
+      S.map (liftMapIdx g).toEmbedding = normalizedConfig a b c := by
   obtain ⟨i, j, hij, hfix⟩ := Finset.card_eq_two.mp hfixed
   have hiFix : conjIdx i = i := by
     have : i ∈ fixedPart S := by rw [hfix]; simp
@@ -234,26 +274,120 @@ theorem indexed_f2_card_legalOrbitSet_ge_32 {S : Finset Idx25}
     rw [projectiveBaseChange_basePointOfFixed, projectiveBaseChange_basePointOfFixed] at hbc
     exact hij (point_injective hbc)
   obtain ⟨g, hgi, hgj⟩ := exists_base_map_pair hpq
-  let T := S.map (liftMapIdx g).toEmbedding
-  have hTArc : RawCap T := (rawCap_liftMapIdx g S).2 hArc
-  have hTInv : IsConjInvariant T := invariant_map_liftMapIdx hInv g
-  have hTcard : T.card = 8 := by simp [T, hcard]
+  have hTInv : IsConjInvariant (S.map (liftMapIdx g).toEmbedding) :=
+    invariant_map_liftMapIdx hInv g
+  have hTcard : (S.map (liftMapIdx g).toEmbedding).card = 8 := by simp [hcard]
   have hmapI : liftMapIdx g i = .vertical := liftMapIdx_fixed_to_A hiFix hgi
   have hmapJ : liftMapIdx g j = .infinity 0 := liftMapIdx_fixed_to_B hjFix hgj
-  have hTfixed : fixedPart T = fixedPair := by
-    change fixedPart (S.map (liftMapIdx g).toEmbedding) = fixedPair
+  have hTfixed : fixedPart (S.map (liftMapIdx g).toEmbedding) = fixedPair := by
     rw [fixedPart_map_liftMapIdx, hfix]
     simp [fixedPair, hmapI, hmapJ, Finset.pair_comm]
-  have hTfixedCard : (fixedPart T).card = 2 := by rw [hTfixed, card_fixedPair]
+  have hTfixedCard : (fixedPart (S.map (liftMapIdx g).toEmbedding)).card = 2 := by
+    rw [hTfixed, card_fixedPair]
   obtain ⟨a, b, c, hab, hac, hbc, hTdecomp⟩ :=
     exists_three_orbits hTInv hTcard hTfixedCard
-  have hTnorm : T = normalizedConfig a b c := by
-    rw [hTdecomp, hTfixed]
-    simp [normalizedConfig, Finset.union_assoc]
-  have hnormArc : RawCap (normalizedConfig a b c) := by rwa [← hTnorm]
-  have hbaseCard := card_legalOrbitSet_liftMapIdx g (C := S) (D := T) rfl hArc hTArc
-  rw [hbaseCard, hTnorm]
+  refine ⟨g, a, b, c, hab, hac, hbc, ?_⟩
+  rw [hTdecomp, hTfixed]
+  simp [normalizedConfig, Finset.union_assoc]
+
+/-- Every indexed invariant exceptional-profile eight-cap has at least `32` legal orbits. -/
+theorem indexed_f2_card_legalOrbitSet_ge_32 {S : Finset Idx25}
+    (hArc : RawCap S) (hInv : IsConjInvariant S)
+    (hcard : S.card = 8) (hfixed : (fixedPart S).card = 2) :
+    32 ≤ (legalOrbitSet S).card := by
+  obtain ⟨g, a, b, c, hab, hac, hbc, hnorm⟩ := exists_base_normalizedConfig hInv hcard hfixed
+  have hTArc : RawCap (S.map (liftMapIdx g).toEmbedding) := (rawCap_liftMapIdx g S).2 hArc
+  have hnormArc : RawCap (normalizedConfig a b c) := by rwa [hnorm] at hTArc
+  rw [card_legalOrbitSet_liftMapIdx g (C := S) (D := S.map (liftMapIdx g).toEmbedding)
+      rfl hArc hTArc, hnorm]
   exact normalized_card_legalOrbitSet_ge_32 hab hac hbc hnormArc
+
+/-! ## The semantic bridge
+
+`indexSet` and the four lemmas below translate the projective hypotheses of an invariant eight-arc
+into the indexed hypotheses the normalization steps consume, and bound the indexed legal-orbit count
+by the semantic one.  They carry no threshold, so the lower bound and the exhaustion lift share
+them. -/
+
+/-- The index-level set underlying a semantic point set. -/
+noncomputable def indexSet (C : Finset Point25) : Finset Idx25 :=
+  C.map pointEquiv.symm.toEmbedding
+
+theorem mem_indexSet_iff (C : Finset Point25) (i : Idx25) : i ∈ indexSet C ↔ point i ∈ C := by
+  simp [indexSet]
+
+theorem pointSetIdx_indexSet (C : Finset Point25) : pointSetIdx (indexSet C) = C := by
+  ext p
+  simp [indexSet, pointSetIdx]
+
+theorem rawCap_indexSet (C : Finset Point25) (hArc : Arc (L := Point25) C) :
+    RawCap (indexSet C) := by
+  rw [rawCap_iff_projectiveCap, pointSetIdx_indexSet]
+  exact (ProjectiveBridge.arc_iff_projectiveCap C).mp hArc
+
+theorem isConjInvariant_indexSet (C : Finset Point25)
+    (hInv : FiniteGeom.BaerCompletion.IsInvariant
+      (QuadraticFrobenius.incidence F5 K25 Q25PairResult.gf25_degree) C) :
+    IsConjInvariant (indexSet C) := by
+  intro i hi
+  rw [mem_indexSet_iff] at hi ⊢
+  rw [point_conjIdx]
+  exact FiniteGeom.BaerCompletion.mem_of_invariant_conj
+    (QuadraticFrobenius.incidence F5 K25 Q25PairResult.gf25_degree) hInv hi
+
+theorem card_indexSet (C : Finset Point25) (hcard : C.card = 8) : (indexSet C).card = 8 := by
+  simp [indexSet, hcard]
+
+theorem pointSetIdx_fixedPart_indexSet (C : Finset Point25) :
+    pointSetIdx (fixedPart (indexSet C)) =
+      QuadraticLineCounting.fixedArcPoints F5 K25 C := by
+  classical
+  ext p
+  constructor
+  · intro hp
+    obtain ⟨i, hi, rfl⟩ := Finset.mem_map.mp hp
+    have hiparts := Finset.mem_filter.mp hi
+    apply Finset.mem_filter.mpr
+    refine ⟨(mem_indexSet_iff C i).1 hiparts.1, ?_⟩
+    change ProjectiveConjugation.projectiveEquiv
+        (QuadraticFrobenius.frobeniusRingEquiv F5 K25) (point i) = point i
+    rw [← point_conjIdx, hiparts.2]
+  · intro hp
+    have hpparts := Finset.mem_filter.mp hp
+    let i := pointEquiv.symm p
+    have hpi : point i = p := by
+      change pointEquiv i = p
+      exact pointEquiv.apply_symm_apply p
+    apply Finset.mem_map.mpr
+    refine ⟨i, Finset.mem_filter.mpr ⟨(mem_indexSet_iff C i).2 (by rw [hpi]; exact hpparts.1), ?_⟩,
+      by simp [hpi]⟩
+    apply point_injective
+    rw [point_conjIdx, hpi]
+    exact hpparts.2
+
+theorem card_fixedPart_indexSet (C : Finset Point25)
+    (hfixed : (QuadraticLineCounting.fixedArcPoints F5 K25 C).card = 2) :
+    (fixedPart (indexSet C)).card = 2 := by
+  classical
+  have hc := congrArg Finset.card (pointSetIdx_fixedPart_indexSet C)
+  simpa [pointSetIdx, hfixed] using hc
+
+/-- The legal orbits of the index set inject into the semantic legal pairs of the arc. -/
+theorem card_legalOrbitSet_le_card_globalLegalPairs (C : Finset Point25)
+    (hArc : Arc (L := Point25) C) :
+    (legalOrbitSet (indexSet C)).card ≤
+      (globalLegalPairs F5 K25 Q25PairResult.gf25_degree C).card := by
+  classical
+  let orbitEmbedding : OrbitCode ↪ Sym2 Point25 :=
+    ⟨semanticOrbitPair, semanticOrbitPair_injective⟩
+  have hsubset : (legalOrbitSet (indexSet C)).map orbitEmbedding ⊆
+      globalLegalPairs F5 K25 Q25PairResult.gf25_degree C := by
+    intro q hq
+    obtain ⟨o, ho, rfl⟩ := Finset.mem_map.mp hq
+    exact semanticOrbitPair_mem_globalLegalPairs (pointSetIdx_indexSet C)
+      (rawCap_indexSet C hArc) (Finset.mem_filter.mp ho).2
+  have hle := Finset.card_le_card hsubset
+  rwa [Finset.card_map] at hle
 
 /-- **Projective exceptional-profile minimum.** Every invariant eight-arc in `PG(2,25)` with
 exactly two fixed points has at least `32` semantic legal conjugate-pair extensions. -/
@@ -265,62 +399,9 @@ theorem f2_card_globalLegalPairs_ge_32
     (hcard : C.card = 8)
     (hfixed : (QuadraticLineCounting.fixedArcPoints F5 K25 C).card = 2) :
     32 ≤ (globalLegalPairs F5 K25 Q25PairResult.gf25_degree C).card := by
-  classical
-  let S : Finset Idx25 := C.map pointEquiv.symm.toEmbedding
-  have hmemS (i : Idx25) : i ∈ S ↔ point i ∈ C := by
-    simp [S]
-  have hpointS : pointSetIdx S = C := by
-    ext p
-    simp [S, pointSetIdx]
-  have hRaw : RawCap S := by
-    rw [rawCap_iff_projectiveCap, hpointS]
-    exact (ProjectiveBridge.arc_iff_projectiveCap C).mp hArc
-  have hSInv : IsConjInvariant S := by
-    intro i hi
-    rw [hmemS] at hi ⊢
-    rw [point_conjIdx]
-    exact FiniteGeom.BaerCompletion.mem_of_invariant_conj
-      (QuadraticFrobenius.incidence F5 K25 Q25PairResult.gf25_degree) hInv hi
-  have hScard : S.card = 8 := by simp [S, hcard]
-  have hfixedSet : pointSetIdx (fixedPart S) =
-      QuadraticLineCounting.fixedArcPoints F5 K25 C := by
-    ext p
-    constructor
-    · intro hp
-      obtain ⟨i, hi, rfl⟩ := Finset.mem_map.mp hp
-      have hiparts := Finset.mem_filter.mp hi
-      apply Finset.mem_filter.mpr
-      refine ⟨(hmemS i).1 hiparts.1, ?_⟩
-      change ProjectiveConjugation.projectiveEquiv
-          (QuadraticFrobenius.frobeniusRingEquiv F5 K25) (point i) = point i
-      rw [← point_conjIdx, hiparts.2]
-    · intro hp
-      have hpparts := Finset.mem_filter.mp hp
-      let i := pointEquiv.symm p
-      have hpi : point i = p := by
-        change pointEquiv i = p
-        exact pointEquiv.apply_symm_apply p
-      apply Finset.mem_map.mpr
-      refine ⟨i, Finset.mem_filter.mpr ⟨(hmemS i).2 (by rw [hpi]; exact hpparts.1), ?_⟩,
-        by simp [hpi]⟩
-      apply point_injective
-      rw [point_conjIdx, hpi]
-      exact hpparts.2
-  have hSfixed : (fixedPart S).card = 2 := by
-    have hc := congrArg Finset.card hfixedSet
-    simpa [pointSetIdx, hfixed] using hc
-  have hlower := indexed_f2_card_legalOrbitSet_ge_32 hRaw hSInv hScard hSfixed
-  let orbitEmbedding : OrbitCode ↪ Sym2 Point25 :=
-    ⟨semanticOrbitPair, semanticOrbitPair_injective⟩
-  have hsubset : (legalOrbitSet S).map orbitEmbedding ⊆
-      globalLegalPairs F5 K25 Q25PairResult.gf25_degree C := by
-    intro q hq
-    obtain ⟨o, ho, rfl⟩ := Finset.mem_map.mp hq
-    exact semanticOrbitPair_mem_globalLegalPairs hpointS hRaw
-      (Finset.mem_filter.mp ho).2
-  have hle := Finset.card_le_card hsubset
-  rw [Finset.card_map] at hle
-  exact hlower.trans hle
+  have hlower := indexed_f2_card_legalOrbitSet_ge_32 (rawCap_indexSet C hArc)
+    (isConjInvariant_indexSet C hInv) (card_indexSet C hcard) (card_fixedPart_indexSet C hfixed)
+  exact hlower.trans (card_legalOrbitSet_le_card_globalLegalPairs C hArc)
 
 end Q25MinimumClassification
 end RelativeConicArcs
