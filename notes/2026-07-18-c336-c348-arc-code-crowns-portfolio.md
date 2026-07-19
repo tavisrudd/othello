@@ -283,6 +283,12 @@ audit and an explicit source-lane hand-back boundary.
 
 ## C340: carrier lower bound and algebraic near-one-factorizations
 
+**Status.** Complete with verdict `THEOREM; STAGE B GATED OUT`.  The exact bound is
+`|D_fin| <= (binom(m,2)+1)Q-1-s`, with `s` the number of same-carrier layer pairs, so relative
+completeness forces `binom(m,2)>=Q` and size `(sqrt(2)+o(1))q^(3/4)` in this architecture.  The
+seven-map spectrum stopped before computation because no explicit operational parameter survived the
+application/novelty gate.  See `notes/2026-07-18-c340-carrier-direction-spectrum.md`.
+
 **Input boundary.** Consume C330's exact seven reciprocal direction images. Generalize only the
 stated constant-height, translation-covariant `F`-carrier architecture; do not claim a lower bound
 for arbitrary arcs or relative-conic constructions.
