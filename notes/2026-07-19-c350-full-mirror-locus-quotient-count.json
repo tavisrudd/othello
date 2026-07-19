@@ -1,0 +1,328 @@
+{
+  "conventions": {
+    "burned_orbit": "{infinity,0}",
+    "centre_orbit_coordinate": "(u,z)=(r+delta*c,(r-delta*c)^2)",
+    "effective_residual_action": "(u1,z1;u2,z2) -> (-u1,z1;-u2,z2)",
+    "group_order_scope": "exact for every listed field",
+    "mirror": "tau(t)=delta/t with the least encoded nonsquare delta"
+  },
+  "fields": [
+    {
+      "centre_orbit_sheets": {
+        "+": 3,
+        "-": 3
+      },
+      "centre_orbits": 6,
+      "class_sheets": {
+        "+-": 1,
+        "--": 1
+      },
+      "degree": 1,
+      "delta": 2,
+      "elliptic_family": [
+        {
+          "character_sum": 2,
+          "curve_points": 8,
+          "delta": 3,
+          "j_invariant": 1,
+          "square_minus_one_slice_count": 2
+        }
+      ],
+      "enhanced_residual_stabilizer": 1,
+      "enhanced_stabilizer_types": {
+        "orbits_swapped": 1
+      },
+      "epsilon": 1,
+      "full_pgl_classes": 1,
+      "full_psl_classes": 0,
+      "generated_group_orders": {
+        "120": 1,
+        "24": 1
+      },
+      "generated_group_orders_by_sheet": {
+        "120:+-": 1,
+        "24:--": 1
+      },
+      "incompatibility_degree_histogram": {
+        "3": 1,
+        "4": 4,
+        "5": 1
+      },
+      "legal_configurations": 3,
+      "legal_sheets": {
+        "+-": 2,
+        "--": 1
+      },
+      "modulus": [],
+      "p": 5,
+      "projective_classes": 2,
+      "q": 5,
+      "raw_pairs": 15
+    },
+    {
+      "centre_orbit_sheets": {
+        "+": 4,
+        "-": 8
+      },
+      "centre_orbits": 12,
+      "class_sheets": {
+        "++": 2,
+        "+-": 6,
+        "--": 6
+      },
+      "degree": 1,
+      "delta": 3,
+      "elliptic_family": [
+        {
+          "character_sum": -4,
+          "curve_points": 4,
+          "delta": 5,
+          "j_invariant": 2
+        },
+        {
+          "character_sum": 0,
+          "curve_points": 8,
+          "delta": 6,
+          "j_invariant": 6
+        }
+      ],
+      "enhanced_residual_stabilizer": 4,
+      "enhanced_stabilizer_types": {
+        "orbits_swapped": 4
+      },
+      "epsilon": -1,
+      "full_pgl_classes": 12,
+      "full_psl_classes": 2,
+      "generated_group_orders": {
+        "168": 2,
+        "336": 12
+      },
+      "generated_group_orders_by_sheet": {
+        "168:++": 2,
+        "336:+-": 6,
+        "336:--": 6
+      },
+      "incompatibility_degree_histogram": {
+        "6": 2,
+        "7": 8,
+        "8": 2
+      },
+      "legal_configurations": 24,
+      "legal_sheets": {
+        "++": 2,
+        "+-": 12,
+        "--": 10
+      },
+      "modulus": [],
+      "p": 7,
+      "projective_classes": 14,
+      "q": 7,
+      "raw_pairs": 66
+    },
+    {
+      "centre_orbit_sheets": {
+        "+": 10,
+        "-": 10
+      },
+      "centre_orbits": 20,
+      "class_sheets": {
+        "++": 14,
+        "+-": 20,
+        "--": 14
+      },
+      "degree": 2,
+      "delta": 4,
+      "elliptic_family": [
+        {
+          "character_sum": 2,
+          "curve_points": 12,
+          "delta": 4,
+          "j_invariant": 4,
+          "square_minus_one_slice_count": 3
+        },
+        {
+          "character_sum": 2,
+          "curve_points": 12,
+          "delta": 7,
+          "j_invariant": 7,
+          "square_minus_one_slice_count": 3
+        }
+      ],
+      "enhanced_residual_stabilizer": 6,
+      "enhanced_stabilizer_types": {
+        "orbits_swapped": 6
+      },
+      "epsilon": 1,
+      "full_pgl_classes": 34,
+      "full_psl_classes": 14,
+      "generated_group_orders": {
+        "360": 14,
+        "720": 34
+      },
+      "generated_group_orders_by_sheet": {
+        "360:++": 14,
+        "720:+-": 20,
+        "720:--": 14
+      },
+      "incompatibility_degree_histogram": {
+        "10": 8,
+        "11": 6,
+        "9": 6
+      },
+      "legal_configurations": 90,
+      "legal_sheets": {
+        "++": 26,
+        "+-": 40,
+        "--": 24
+      },
+      "modulus": [
+        1,
+        0
+      ],
+      "p": 3,
+      "projective_classes": 48,
+      "q": 9,
+      "raw_pairs": 190
+    },
+    {
+      "centre_orbit_sheets": {
+        "+": 12,
+        "-": 18
+      },
+      "centre_orbits": 30,
+      "class_sheets": {
+        "++": 23,
+        "+-": 56,
+        "--": 47
+      },
+      "degree": 1,
+      "delta": 2,
+      "elliptic_family": [
+        {
+          "character_sum": 0,
+          "curve_points": 12,
+          "delta": 2,
+          "j_invariant": 0
+        },
+        {
+          "character_sum": -4,
+          "curve_points": 8,
+          "delta": 7,
+          "j_invariant": 8
+        },
+        {
+          "character_sum": 4,
+          "curve_points": 16,
+          "delta": 8,
+          "j_invariant": 8
+        }
+      ],
+      "enhanced_residual_stabilizer": 12,
+      "enhanced_stabilizer_types": {
+        "orbits_swapped": 12
+      },
+      "epsilon": -1,
+      "full_pgl_classes": 101,
+      "full_psl_classes": 22,
+      "generated_group_orders": {
+        "1320": 101,
+        "24": 2,
+        "60": 1,
+        "660": 22
+      },
+      "generated_group_orders_by_sheet": {
+        "1320:+-": 56,
+        "1320:--": 45,
+        "24:--": 2,
+        "60:++": 1,
+        "660:++": 22
+      },
+      "incompatibility_degree_histogram": {
+        "12": 6,
+        "13": 18,
+        "14": 6
+      },
+      "legal_configurations": 240,
+      "legal_sheets": {
+        "++": 40,
+        "+-": 112,
+        "--": 88
+      },
+      "modulus": [],
+      "p": 11,
+      "projective_classes": 126,
+      "q": 11,
+      "raw_pairs": 435
+    },
+    {
+      "centre_orbit_sheets": {
+        "+": 21,
+        "-": 21
+      },
+      "centre_orbits": 42,
+      "class_sheets": {
+        "++": 69,
+        "+-": 131,
+        "--": 70
+      },
+      "degree": 1,
+      "delta": 2,
+      "elliptic_family": [
+        {
+          "character_sum": -2,
+          "curve_points": 12,
+          "delta": 5,
+          "j_invariant": 4,
+          "square_minus_one_slice_count": 3
+        },
+        {
+          "character_sum": -6,
+          "curve_points": 8,
+          "delta": 7,
+          "j_invariant": 1,
+          "square_minus_one_slice_count": 2
+        },
+        {
+          "character_sum": 2,
+          "curve_points": 16,
+          "delta": 8,
+          "j_invariant": 4,
+          "square_minus_one_slice_count": 4
+        }
+      ],
+      "enhanced_residual_stabilizer": 15,
+      "enhanced_stabilizer_types": {
+        "orbits_swapped": 15
+      },
+      "epsilon": 1,
+      "full_pgl_classes": 201,
+      "full_psl_classes": 69,
+      "generated_group_orders": {
+        "1092": 69,
+        "2184": 201
+      },
+      "generated_group_orders_by_sheet": {
+        "1092:++": 69,
+        "2184:+-": 131,
+        "2184:--": 70
+      },
+      "incompatibility_degree_histogram": {
+        "15": 11,
+        "16": 20,
+        "17": 11
+      },
+      "legal_configurations": 525,
+      "legal_sheets": {
+        "++": 132,
+        "+-": 262,
+        "--": 131
+      },
+      "modulus": [],
+      "p": 13,
+      "projective_classes": 270,
+      "q": 13,
+      "raw_pairs": 861
+    }
+  ],
+  "schema": "c350-mirror-quotient-v1"
+}
