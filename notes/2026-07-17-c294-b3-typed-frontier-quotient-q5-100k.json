@@ -1,0 +1,12 @@
+{
+  "schema": "c294-b3-typed-frontier-quotient-v1",
+  "field_order": 5,
+  "type_index": 0,
+  "fixed_prefix": {"connected_states": 100000, "completed_classes": 84964, "decompositions": 1946240, "follower_nimber": -1, "stopped_at_limit": true},
+  "typed_grammar": {"base_classes": 28505, "banked_component_terms": 3663746, "missing_symbolic_successors": 0, "symbolic_successor_terms": 1792961, "unique_typed_transitions": 2334577},
+  "refinement": {"rounds": 3, "class_counts": [28505, 84958, 84963, 84963], "stable_classes": 84963},
+  "gate": {"known_isomorphism_removals": 943, "total_removals": 1, "isomorphism_removals_inside_typed_classes": 0, "genuine_removals": 1, "combined_removals_lower_bound": 944, "nimber_conflicts": 0, "promotion_threshold": 850, "passed": false},
+  "first_merger": {"class": 587, "prior": {"hi": 9007216570941475, "lo": 1176851552699154432}, "prior_nimber": 1, "current": {"hi": 9007216602382499, "lo": 1176851552699154432}, "current_nimber": 1},
+  "first_nonisomorphic_merger": {"class": 587, "prior": {"hi": 9007216570941475, "lo": 1176851552699154432}, "prior_nimber": 1, "current": {"hi": 9007216602382499, "lo": 1176851552699154432}, "current_nimber": 1},
+  "closure": {"downward_closed": true, "stable_signatures_checked": true, "state_nimbers_used_in_refinement": false}
+}

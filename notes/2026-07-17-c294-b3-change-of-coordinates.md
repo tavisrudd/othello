@@ -4,8 +4,8 @@
 
 **Lane:** `crowns`
 
-**Status:** E0 and E1 passed their bounded gates; task-local `E2`, transition refinement of the
-typed `02` square frontier, is next, not a live replay or larger value run
+**Status:** E0 and E1 passed, E2 closed negatively, and task-local `E3`, adaptive bulk-pairing with
+a response-debt ledger, is next, not transfer or a larger value run
 
 ## Decision
 
@@ -278,11 +278,11 @@ same-absolute-key hits.
 
 ## Immediate handoff
 
-E1 is complete in `notes/2026-07-17-c294-b3-relevance-ledger.md`. Its typed-square word coordinate
-has headroom for 28,138 removals beyond known isomorphisms after respecting every known value
-distinction; the q=3 static control has no conflict. The raw q=5 coordinate does have conflicts, so
-this is headroom rather than a quotient. Implement only `E2`: refine the typed `02` square frontier
-under the reachable scar transition grammar independently of nimber labels, keeping the exact xor
-bank. Require zero conflicts and at least 850 genuine surviving removals before live integration.
-E1-P is closed at its frozen feature set. The adaptive automaton, transfer, value solver,
-separator-cap increase, all-seven value run, Lean work, and cross-lane edits remain gated.
+E2 is complete in `notes/2026-07-17-c294-b3-typed-frontier-quotient.md`. Its value-blind closure
+refines `28,505 -> 84,958 -> 84,963 -> 84,963`, with zero conflicts but only one genuine
+non-isomorphic merger. This fails the fixed 850-merger gate, so no live quotient replay is allowed.
+Implement only `E3`: freeze the group-frame palette, debt radius, template bound, and transition
+bound from E0/q=3/type-0 conventions, then test the existing four-ply obstruction corpus. Promotion
+requires an exact finite response certificate covering every legal move orbit, not a corpus fit.
+Transfer, value solver, separator-cap increase, all-seven value run, Lean work, and cross-lane edits
+remain gated.

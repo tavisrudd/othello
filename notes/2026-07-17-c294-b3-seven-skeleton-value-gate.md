@@ -2,8 +2,8 @@
 
 **Lane:** `crowns`  
 **Selector:** `C294 B3`  
-**Status:** active; E0 and E1 passed their bounded gates and task-local `E2`, transition refinement
-of the typed `02` square frontier for `R`, is next
+**Status:** active; E0 and E1 passed, E2 closed negatively, and task-local `E3`, adaptive
+bulk-pairing with a response-debt ledger, is next
 **Dependency:** a B2 signature that passes every mandatory finite gluing test
 
 ## Goal
@@ -214,4 +214,16 @@ at the stop. The typed-square word coordinate has maximum headroom for 28,138 re
 conflict-free. The raw q=5 coordinate has value conflicts, so E1 proves no quotient; it authorizes
 only transition-stable refinement in E2. E1-P closes negatively: factorial pairing trivializes the
 move-labelled terminal polynomial above degree one, and P-child parity fails to characterize
-outcome. E2 is active; live integration, E3, transfer, and larger caps remain gated.
+outcome. Those E1 results authorized only the now-completed E2 refinement; they did not authorize
+live integration, transfer, or larger caps.
+
+## E2 typed-frontier result
+
+`notes/2026-07-17-c294-b3-typed-frontier-quotient.md` closes the scar-restricted exact quotient
+pilot negatively. Value-blind typed-transition refinement on the unchanged q=5 completed prefix
+splits `28,505 -> 84,958 -> 84,963 -> 84,963`. The stable partition is downward closed, has zero
+nimber conflicts, and contains exactly one genuine non-isomorphic merger, far below the required
+850 beyond the known graph-isomorphism baseline. The q=3 control remains `49 -> 49`.
+
+Do not run a live quotient replay. E3 is active next with frozen bounds against the existing
+type-0/four-ply corpus. Transfer, larger caps, and the other six values remain gated.

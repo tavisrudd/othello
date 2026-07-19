@@ -1,0 +1,12 @@
+{
+  "schema": "c294-b3-typed-frontier-quotient-v1",
+  "field_order": 3,
+  "type_index": 0,
+  "fixed_prefix": {"connected_states": 108, "completed_classes": 49, "decompositions": 680, "follower_nimber": 1, "stopped_at_limit": false},
+  "typed_grammar": {"base_classes": 49, "banked_component_terms": 827, "missing_symbolic_successors": 0, "symbolic_successor_terms": 254, "unique_typed_transitions": 663},
+  "refinement": {"rounds": 1, "class_counts": [49, 49], "stable_classes": 49},
+  "gate": {"known_isomorphism_removals": 0, "total_removals": 0, "isomorphism_removals_inside_typed_classes": 0, "genuine_removals": 0, "combined_removals_lower_bound": 0, "nimber_conflicts": 0, "promotion_threshold": 850, "passed": false},
+  "first_merger": null,
+  "first_nonisomorphic_merger": null,
+  "closure": {"downward_closed": true, "stable_signatures_checked": true, "state_nimbers_used_in_refinement": false}
+}

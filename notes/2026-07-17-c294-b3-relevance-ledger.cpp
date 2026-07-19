@@ -415,6 +415,7 @@ static void emit_candidate(std::ostream &out, const char *name,
     out << '}';
 }
 
+#ifndef C294_RELEVANCE_LEDGER_NO_MAIN
 int main(int argc, char **argv) {
     if (argc < 3 || argc > 4) {
         std::cerr << "usage: c294-b3-relevance-ledger GAME_LIMIT INTERFACE_LIMIT [OUTPUT]\n";
@@ -682,3 +683,4 @@ int main(int argc, char **argv) {
     }
     *out << "\n}\n";
 }
+#endif

@@ -81,6 +81,8 @@ pair blocks, alternating positions, and the same deterministic greedy block orde
 primary C++ solver is the recursive-separator kernel with one added completed-evaluation hook and a
 post-run audit. Postprocessing is required to leave connected-state and quotient-class counts
 unchanged.
+The source also exposes a compile-time no-main guard for the E2 offline checker; the standalone E1
+entry point and every emitted E1 computation are unchanged.
 
 Candidate headroom is defined as
 
@@ -131,7 +133,7 @@ sha256sum -c notes/2026-07-17-c294-b3-relevance-ledger.sha256
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| `2026-07-17-c294-b3-relevance-ledger.cpp` | 28,761 | `deb9e62c302931a670ced9839ebf59e359a56d277d010fb7bd1077d7209e25c2` |
+| `2026-07-17-c294-b3-relevance-ledger.cpp` | 28,806 | `126f73d3a199a5b84256d5d25106cde9803cf9ee862faddc97bd39f00f412010` |
 | `2026-07-17-c294-b3-relevance-ledger-input.py` | 2,068 | `429ab182531aa86da5427d6b0d670b2060d540f66c4a1c17b4f33443059a5221` |
 | `2026-07-17-c294-b3-relevance-ledger-replay.py` | 7,180 | `97cf9dfb7b14fe5f5559ce4d53bca7c0cee95befe4c637cc5ec4aac539732329` |
 | `2026-07-17-c294-b3-relevance-ledger-q3.json` | 2,737 | `9947297b9e1e166ba6c393c27b1e0f8799e55d56fe56ad6a26c660ad9d4baedc` |
