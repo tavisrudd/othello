@@ -130,3 +130,17 @@ This is a bridge result, not a material live quotient. Do not run it at ten mill
 next bounded design should compose multiple separator pieces recursively and must produce a full
 cache-key collision attributable to different exact piece classes or reduce quotient classes on
 the unchanged prefix.
+
+## Multi-piece live result
+
+`notes/2026-07-17-c294-b3-multi-piece-live.md` supplies the first independently checked full
+cache-key collision attributable to different exact piece classes. The two residuals are
+non-isomorphic, their exact contexts are port-preservingly isomorphic, and their non-isomorphic
+16-vertex pieces have equal complete interfaces and nimber `2`.
+
+The simultaneous layer selects up to three pieces and does so in 4,042 fixed-prefix positions, but
+no collision yet requires more than one piece. Quotient classes remain 84,903 and decompositions
+remain 1,941,396. Thus the full-collision bridge passes while the material live gate stays closed.
+Do not run at ten million states. The next bounded design must give nested and parallel pieces a
+decomposition-independent recursive separator normal form and reduce quotient classes on the same
+prefix.
