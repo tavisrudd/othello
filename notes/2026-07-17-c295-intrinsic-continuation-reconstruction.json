@@ -1,0 +1,338 @@
+{
+  "antipodal_matching_port_decompositions": 636,
+  "antipodal_port_pairs": [
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      6,
+      9
+    ],
+    [
+      7,
+      11
+    ]
+  ],
+  "arc_centres": [
+    [
+      1,
+      10,
+      0
+    ],
+    [
+      1,
+      9,
+      1
+    ],
+    [
+      1,
+      4,
+      7
+    ],
+    [
+      1,
+      8,
+      5
+    ],
+    [
+      0,
+      1,
+      4
+    ],
+    [
+      1,
+      1,
+      7
+    ]
+  ],
+  "candidate_five_matchings_all_port_pairs": 1482,
+  "candidate_five_matchings_antipodal_ports": 132,
+  "canonical_decomposition_set_sha256": "27637ffd2d451d49c13cd1fc635e5aca7ada2a4ce328d6d3b1ab3e994d8d8e9f",
+  "concurrent_block_count_histogram": {
+    "0": 488,
+    "1": 132,
+    "2": 15,
+    "6": 1
+  },
+  "conic_points": [
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      2,
+      4
+    ],
+    [
+      1,
+      3,
+      9
+    ],
+    [
+      1,
+      4,
+      5
+    ],
+    [
+      1,
+      5,
+      3
+    ],
+    [
+      1,
+      6,
+      3
+    ],
+    [
+      1,
+      7,
+      5
+    ],
+    [
+      1,
+      8,
+      9
+    ],
+    [
+      1,
+      9,
+      4
+    ],
+    [
+      1,
+      10,
+      1
+    ]
+  ],
+  "decomposition_orbit_count": 12,
+  "decomposition_orbit_sizes": [
+    2,
+    12,
+    24,
+    24,
+    24,
+    30,
+    40,
+    60,
+    60,
+    120,
+    120,
+    120
+  ],
+  "degree_multiset": [
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "edge_count": 30,
+  "field_order": 11,
+  "fully_geometric_decomposition_count": 1,
+  "geometric_centre_set_count": 1,
+  "geometric_decomposition": [
+    [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        8
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        10
+      ],
+      [
+        5,
+        11
+      ]
+    ],
+    [
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        11
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    [
+      [
+        0,
+        9
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        10
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        8
+      ]
+    ],
+    [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        2,
+        11
+      ],
+      [
+        3,
+        8
+      ],
+      [
+        7,
+        9
+      ]
+    ],
+    [
+      [
+        0,
+        11
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        7,
+        8
+      ]
+    ],
+    [
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        7,
+        10
+      ],
+      [
+        8,
+        9
+      ]
+    ]
+  ],
+  "geometric_decomposition_orbit_index": 11,
+  "geometric_decomposition_orbit_size": 2,
+  "geometric_decomposition_stabilizer_order": 60,
+  "geometric_ports": [
+    [
+      6,
+      9
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      0,
+      3
+    ]
+  ],
+  "graph_automorphism_order": 120,
+  "maximum_simultaneous_extension_size": 3,
+  "schema": "c295-q11-matching-port-v1",
+  "simultaneous_extension_face_counts_by_size": {
+    "0": 1,
+    "1": 12,
+    "2": 36,
+    "3": 20
+  },
+  "vertex_count": 12
+}
