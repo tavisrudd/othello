@@ -189,26 +189,47 @@ both files.
 
 ## Source-level novelty matrix
 
-The decoder-specific audit was updated on 2026-07-19, including exact-title and topic searches
-through the May 2026 TGRS literature.  Full texts of the algorithm papers below are pinned in the
-shared cache; public forward-citation surfaces are not exhaustive, so the result is stated as a
-family-specific synthesis rather than a global priority claim.
+**Audit status:** positioning pass complete; citation-graph and subscription-database closure open.
+The C364 pass read zero sources at full text, six cached primary sources partially, and two source
+characterizations secondarily through C337/C348.  The theorem is proved independently of this
+audit, but any manuscript novelty sentence must retain “to our knowledge” until the open coverage
+items below are discharged.
 
-| source | exact overlap and boundary | verdict |
-|---|---|---|
-| Kaipa, [*Deep holes and MDS extensions of Reed--Solomon codes*](https://arxiv.org/abs/1612.05447) | Classifies redundancy-three RS deep holes and their MDS extensions.  C329 is non-GRS and C364 reconstructs leaders rather than importing the RS classification. | `SURVIVES`; credit the redundancy-three/deep-hole dictionary. |
-| Zhang--Lin--Chen, [*Decoding Algorithms for Twisted GRS Codes*](https://arxiv.org/abs/2508.03552), cached SHA-256 `77c9d311...a782` | Gives `O(n^3)` Gaussian-elimination decoders for TGRS MDS/NMDS codes through their guaranteed correction radii.  At redundancy three that is ordinary one-error decoding, not every coset through radius three. | `SURVIVES`; `STOP` for novelty of non-GRS unique decoding. |
-| Li--Ezerman--Lao--Ling, [*Properties and Decoding of Twisted GRS Codes and Their Extensions*](https://arxiv.org/abs/2508.02382), cached SHA-256 `e916bf5d...8b06` | Constructs error-correcting pairs and an explicit `O(n^3)` bounded-distance ETGRS decoder; it also gives a covering radius and a class of deep holes for another non-GRS family.  It neither recognizes C329 nor returns leaders for every syndrome. | `SURVIVES`, narrowly; credit ECP decoding and non-GRS deep-hole prior art. |
-| Wang--Liu--Luo, [*Improved Decoding Algorithms for MDS and Almost-MDS Codes from Twisted GRS Codes*](https://arxiv.org/abs/2511.00766), cached SHA-256 `265d6575...6a0f` | Refines key-equation bounded-distance decoding for general TGRS and twisted Goppa codes.  Its error locator has degree equal to the prescribed error count; it is not a covering-radius-three nearest-leader algorithm. | `SURVIVES`; credit the improved TGRS key-equation decoder. |
-| Zhu--Jin, [*Efficient Decoding of Twisted GRS Codes and Roth--Lempel Codes*](https://arxiv.org/abs/2512.24217), v2 accepted May 2026, cached SHA-256 `9a3be4cb...896` | Gives near-linear unique and list decoders by embedding TGRS/Roth--Lempel codes in GRS codes and applying Guruswami--Sudan under parameter-dependent radii.  Even its beyond-half-distance output is a bounded list, not a minimum leader for every syndrome. | `SURVIVES`; `STOP` for novelty of fast non-GRS unique/list decoding. |
-| Couvreur--Panaccione, [*Power Error Locating Pairs*](https://arxiv.org/abs/1907.11658), cached SHA-256 `711d769c...19dd` | Abstracts power/list decoding beyond half distance for codes with suitable locating pairs, with a bounded decoding radius and possible failure.  It is not a covering-radius coset-leader algorithm. | `SURVIVES`; `STOP` for broad claims about structured decoding beyond half distance. |
-| Blokhuis--Pellikaan--Szonyi, [*The extended coset leader weight enumerator of a twisted cubic code*](https://doi.org/10.1007/s10623-022-01060-0) | Defines coset-leader decoding and computes an enumerator geometrically, but supplies neither this reducible-carrier decoder nor endpoint reconstruction from C361's fibers. | `SURVIVES`; credit coset-leader and syndrome-geometry language. |
-| C337 and Wang--Liu--Luo's GRS recovery algorithm | Recover hidden structure from an unmarked code, but do not decode all C329 syndromes. | The combined recover-then-completely-decode theorem is the surviving statement. |
+| source | read record | exact overlap and boundary | verdict |
+|---|---|---|---|
+| Kaipa, [*Deep holes and MDS extensions of Reed--Solomon codes*](https://arxiv.org/abs/1612.05447) | `partial`: arXiv v1 abstract and introduction; cache key `arXiv:1612.05447`, SHA-256 `1fe8de83c0b8cd3938e1a450fd49f376de795d7a317f099a730c63ab968178a4` | Classifies redundancy-three RS deep holes and their MDS extensions. C329 is non-GRS and C364 reconstructs leaders rather than importing the RS classification. | `SURVIVES`; credit the redundancy-three/deep-hole dictionary. |
+| Zhang--Lin--Chen, [*Decoding Algorithms for Twisted GRS Codes*](https://arxiv.org/abs/2508.03552) | `partial`: arXiv v1 abstract and introduction; cache key `arXiv:2508.03552`, SHA-256 `77c9d311bb2a77de72b404f46494bc34d37bff012920058b24457b2953c8a782` | Gives `O(n^3)` Gaussian-elimination decoders for TGRS MDS/NMDS codes through their guaranteed correction radii. At redundancy three that is ordinary one-error decoding, not every coset through radius three. | `SURVIVES`; `STOP` for novelty of non-GRS unique decoding. |
+| Li--Ezerman--Lao--Ling, [*Properties and Decoding of Twisted GRS Codes and Their Extensions*](https://arxiv.org/abs/2508.02382) | `partial`: arXiv v1 abstract and introduction; cache key `arXiv:2508.02382`, SHA-256 `e916bf5d61ce6cf21391ab81e65fd22ad149cec513a6922c6bca2d58f2268b06` | Constructs error-correcting pairs and an explicit bounded-distance ETGRS decoder; it also gives a covering radius and a class of deep holes for another non-GRS family. It neither recognizes C329 nor returns leaders for every syndrome. | `SURVIVES`, narrowly; credit ECP decoding and non-GRS deep-hole prior art. |
+| Wang--Liu--Luo, [*Improved Decoding Algorithms for MDS and Almost-MDS Codes from Twisted GRS Codes*](https://arxiv.org/abs/2511.00766) | `partial`: arXiv v1 abstract, introduction, and key-equation setup; cache key `arXiv:2511.00766`, SHA-256 `265d657569f0842d6e265fdab75631d0e65bd7894b69983951bd2bf0c8cc6a0f` | Refines key-equation bounded-distance decoding for general TGRS and twisted Goppa codes. Its error locator has degree equal to the prescribed error count; it is not a covering-radius-three nearest-leader algorithm. | `SURVIVES`; credit the improved TGRS key-equation decoder. |
+| Zhu--Jin, [*Efficient Decoding of Twisted GRS Codes and Roth--Lempel Codes*](https://arxiv.org/abs/2512.24217) | `partial`: arXiv v2 abstract, introduction, contribution statement, and Table I; cache key `arXiv:2512.24217`, SHA-256 `9a3be4cbc9831555a83ea03c25ce01952eefcede42cbb1f49236450a792e8896` | Gives near-linear unique and list decoders by embedding TGRS/Roth--Lempel codes in GRS codes and applying Guruswami--Sudan under parameter-dependent radii. Even its beyond-half-distance output is a bounded list, not a minimum leader for every syndrome. | `SURVIVES`; `STOP` for novelty of fast non-GRS unique/list decoding. |
+| Couvreur--Panaccione, [*Power Error Locating Pairs*](https://arxiv.org/abs/1907.11658) | `partial`: arXiv v3 abstract and introduction; cache key `arXiv:1907.11658`, SHA-256 `711d769cd2580ed59465e9796776b07d21176aa25208a9760aec7ffc024c19dd` | Abstracts power/list decoding beyond half distance for codes with suitable locating pairs, with a bounded decoding radius and possible failure. It is not a covering-radius coset-leader algorithm. | `SURVIVES`; `STOP` for broad claims about structured decoding beyond half distance. |
+| Blokhuis--Pellikaan--Szonyi, [*The extended coset leader weight enumerator of a twisted cubic code*](https://doi.org/10.1007/s10623-022-01060-0) | `secondary only`: C348's source matrix and hypothesis audit; primary bytes cached as `arXiv:2103.16904`, SHA-256 `b406b2170b883eaa427649f93b92965dcac1cfbbaa537bef201bcd7a7bca8297`, but C364 did not re-read them | C348 records that the paper defines the enumerator geometrically for the irreducible twisted cubic; it supplies neither this reducible-carrier decoder nor endpoint reconstruction from C361's fibers. | `SURVIVES`; credit coset-leader and syndrome-geometry language. |
+| Wang--Liu--Luo, [*New Constructions of Non-GRS MDS Codes, Recovery and Determination Algorithms for GRS Codes*](https://arxiv.org/abs/2512.02325) | `secondary only`: C337's source matrix, which records a full-text read; primary cache key `arXiv:2512.02325`, SHA-256 `3cba91d9300c510c6b52a76a90dc1fd48a915c51238cd002d505f34d36d40720` | C337 records a GRS recovery algorithm. Neither that source nor C337 decodes all C329 syndromes; C337 instead supplies the recovered geometry consumed here. | The recover-then-completely-decode synthesis remains the candidate new statement. |
 
-The defensible paper claim is therefore exact: an unmarked member of this recoverable four-orbit
-non-GRS MDS family admits intrinsic complete coset-leader decoding through a constant number of
-trace and bounded-degree root problems.  No generic non-GRS decoder, generic complete MDS decoder,
-or novelty for finite-field root finding is claimed.
+### Search record and open closure
+
+The 2026-07-19 positioning pass used the exact queries `"complete coset leader decoding" MDS
+code`, `"coset leader decoder" non-GRS MDS`, and exact-title searches for the two 2025 TGRS
+decoder papers already known to the task.  A follow-up exact-title/topic search located
+`arXiv:2511.00766` and `arXiv:2512.24217`; both were cached and promoted to individual partial
+reads above.  These were ordinary public-web/arXiv discovery searches.  Result-set sizes, screened
+fields, and a mechanical discriminator were not recorded, so they license positioning leads but no
+exhaustive negative.
+
+No forward-citation set was enumerated.  OpenAlex, Crossref, and Semantic Scholar counts therefore
+remain **NOT RUN**, and no largest-set screen exists.  zbMATH Open is **NOT RUN**.  MathSciNet is
+**NOT COVERED** because institutional authentication was unavailable.  Google Scholar is **NOT
+RUN** because automated access is unreliable.  The closure pass must resolve each seed by DOI or
+arXiv identifier, record the three graph counts separately, screen the largest returned set over
+title and abstract/metadata with the verbatim discriminator, and distinguish empty results from
+service errors.  It must also upgrade or retain every partial read explicitly rather than inferring
+read depth from cached bytes.
+
+Subject to that open closure, the defensible candidate claim is precise: **to our knowledge, an
+unmarked member of this recoverable four-orbit non-GRS MDS family admits intrinsic complete
+coset-leader decoding through a constant number of trace and bounded-degree root problems.**  No
+generic non-GRS decoder, generic complete MDS decoder, or novelty for finite-field root finding is
+claimed.
 
 ## Paper integration
 
