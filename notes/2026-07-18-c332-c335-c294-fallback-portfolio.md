@@ -83,6 +83,14 @@ repair availability, helper load, erasure tolerance, simultaneous repair capacit
 reliability, or an explicit scheduling guarantee. A relabelling of the P-position theorem in code
 language is not sufficient.
 
+**Primary external metric.** Start with H. Ly and E. Soljanin,
+[*Service Rate Regions of MDS Codes & Fractional Matchings in Quasi-uniform Hypergraphs*](https://arxiv.org/abs/2504.17244).
+Model the superposed projection matchings as the recovery hypergraph and compute the image of its
+fractional-matching polytope. The preferred pass condition is an enlarged MDS service-rate region,
+or the same target region with fewer systematic columns, on a growing carrier. If the geometry only
+changes a repair schedule without changing service feasibility, say so and revert to an explicitly
+repair-specific metric; service and repair are not synonyms.
+
 **Exit gate.** A proved infinite family with explicit code/repair parameters and a literature-audited
 comparison to existing MDS, LRC, batch-code, or functional-repair constructions; otherwise a
 bounded negative identifying why the geometric family offers no new operational tradeoff.
@@ -110,6 +118,14 @@ addressing.
 which the algebraic coordinates can plausibly give an all-`q` theorem. Trace/GRR classification is
 a permitted mechanism, not by itself the applied deliverable.
 
+**Primary external metric and falsifier.** Use A. Patra and A. Barg,
+[*Generalized regenerating codes and node repair on graphs*](https://arxiv.org/abs/2405.11714),
+whose cost weights helper traffic by network distance. Before generating a family census, solve one
+small Cayley and one deleted-Schreier instance analytically and compare with their scalar
+specialization. If vertex transitivity makes the distance-weighted optimum depend only on the
+distance distribution, record that degeneracy as a sharp negative and stop. Do not compare a
+scalar code with vector/subpacketized regenerating-code optima as though the regimes coincided.
+
 **Exit gate.** One proved network-relevant bound with a comparison against a standard baseline and
 an explicit infinite family, or a sharp negative showing that these graphs fail the proposed
 application metric. Spectra, automorphism orders, or finite tables alone do not pass.
@@ -125,15 +141,17 @@ negative. This makes C335 deliberately high-risk.
 
 ## Order and relation to C294
 
-1. Clear urgent C323 evidence hygiene before starting a new computational bundle.
-2. C332 is the lowest-risk theorem and may proceed independently of B3.
-3. C333 is the highest-upside pure family theorem.
-4. C334 may begin on the established `S_b` family and later consume C333; it must prioritize an
-   operational repair/code result.
-5. C335 begins with literature and metric selection, not graph generation.
+1. C323 evidence hygiene is closed at commit `e0c9db85`.
+2. In the current crowns EV order, C334 precedes C333 and C332 because the 2025 service-rate-region
+   model supplies a live, falsifiable applied consumer; C333 remains the highest-upside intrinsic
+   family theorem, while C332 is the lowest-risk independent theorem.
+3. C334 may begin on the established `S_b` family, consume C298 only through an explicit repair
+   metric, and later consume C333; it must prioritize an operational repair/code result.
+4. C335 begins with literature and metric selection, not graph generation.
 
-None of C332--C335 closes C294 silver. Conversely, C294 may consume a proved result from this
-portfolio without making the fallback task part of its active B3 experiment queue.
+None of C332--C335 closes C294 silver. C294 is paused by user as of 2026-07-18; these tasks may read
+its committed inputs but do not resume B3. If C294 is explicitly resumed later, it may consume a
+proved result from this portfolio without making the fallback task part of its experiment queue.
 
 ## Focused novelty audit, 2026-07-18
 
@@ -143,8 +161,8 @@ This is a first-pass source audit, not a MathSciNet/zbMATH citation-closure clai
 |:--|:--|:--|:--|
 | C332 | **promising synthesis; classical orbit input** | Subfield-subgroup orbit sizes on the projective line are known | deleted coloured residual, quadratic scar, xor parity, and base-change theorem |
 | C333 | **strongest novelty prospect** | Fregier correspondence and generating involution triples are known | counted `tau`-stable four-centre P-locus over all odd fields |
-| C334 | **promising only after refocus** | arc--MDS equivalence, `PGL2`-based LRCs, and multiple repair alternatives are known | growing-carrier multi-target interference and an improved operational tradeoff |
-| C335 | **high-risk / go-no-go** | involution-triple hypertopes and cubic `PSL2` GRRs are known | application metric specific to the deleted Schreier or mixed-Cayley family |
+| C334 | **promising after SRR refocus** | arc--MDS equivalence, `PGL2`-based LRCs, multiple repair alternatives, and general MDS SRR machinery are known | a strictly improved service region or systematic-column tradeoff from the growing carrier |
+| C335 | **high-risk / go-no-go with a standard metric** | involution-triple hypertopes, cubic `PSL2` GRRs, and graph-constrained repair bounds are known | an exact distance-weighted repair bound for the deleted Schreier or mixed-Cayley family, or a sharp symmetry degeneracy |
 
 Primary and near-primary boundary sources:
 
@@ -153,6 +171,8 @@ Primary and near-primary boundary sources:
 - J. Thas, [*M.D.S. codes and arcs in projective spaces: a survey*](https://lematematiche.dmi.unict.it/index.php/lematematiche/article/view/593), for the classical arc--MDS equivalence.
 - L. Jin, L. Ma, and C. Xing, [*Construction of optimal locally repairable codes via automorphism groups of rational function fields*](https://arxiv.org/abs/1710.09638), for `PGL2` actions on the projective line in LRC constructions.
 - L. Pamies-Juarez, H. D. L. Hollmann, and F. Oggier, [*Locally Repairable Codes with Multiple Repair Alternatives*](https://arxiv.org/abs/1302.5518), for availability from partial geometries.
+- H. Ly and E. Soljanin, [*Service Rate Regions of MDS Codes & Fractional Matchings in Quasi-uniform Hypergraphs*](https://arxiv.org/abs/2504.17244), for the growing-carrier multi-object service metric.
+- A. Patra and A. Barg, [*Generalized regenerating codes and node repair on graphs*](https://arxiv.org/abs/2405.11714), for distance-weighted graph-constrained repair.
 - B. Xia and T. Fang, [*Cubic graphical regular representations of `PSL2(q)`*](https://arxiv.org/abs/1510.02740), for the existing GRR boundary.
 
 A targeted search found Node--Kayles work on many named graph families and structural parameters,
