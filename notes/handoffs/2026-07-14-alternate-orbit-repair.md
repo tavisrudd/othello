@@ -3,12 +3,13 @@
 **Lane**: `alt-orbit-repair` — see CLAUDE.md § Lane routing.
 
 **Date:** 2026-07-19
-**Status:** OPEN — C142, C143, C148–C151, C331 reported. The exact Q25 minimum is closed at the
+**Status:** OPEN — C142, C143, C148–C151, C331, C363 reported. The exact Q25 minimum is closed at the
 semantic level: the universal `≥ 32` bound, five-row attainment, the certified residual-orbit layer,
 the semantic lift of the lower bound, equality-orbit exhaustion, and its semantic lift are all
 kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
-up to normalization. What remains is bookkeeping (C318, C319) and the exchange graph (C152).
-**Tasks:** C142–C143, C148–C152, C318–C319, C331
+up to normalization. The citation audit gating priority language is discharged and all four lane
+claims survive. What remains is bookkeeping (C318, C319) and the exchange graph (C152).
+**Tasks:** C142–C143, C148–C152, C318–C319, C331, C363
 
 Companion discovery log:
 [`../2026-07-18-alt-orbit-repair-discovery-track.md`](../2026-07-18-alt-orbit-repair-discovery-track.md).
@@ -199,6 +200,25 @@ invariants. High degree alone does not justify connectivity, expansion, or mixin
 The reported general and Q25 repair theorems may be used with the cautious literature posture in
 the [C143 literature report](../2026-07-14-c143-literature-positioning.md). Do not make a
 historical-first claim.
+
+C363 discharged that report's residual citation diligence across zbMATH, OpenAlex, Semantic Scholar,
+Crossref and arXiv; all four claims survive with no pre-emption. See
+[the audit](../2026-07-19-c363-alt-orbit-repair-citation-audit.md). Three consequences bind the
+manuscript:
+
+- **MathSciNet remains unchecked** (HTTP 302 to institutional auth, no query executed), so "to our
+  knowledge" stays on every claim.
+- **Do not present legal-extension counting as novel.** The single-point count is standard in
+  arc-classification algorithms. Claim novelty for the orbit valuation, the conjugate-pair
+  simultaneity, and the arbitrary-erased-orbit quantifier.
+- **The Q25 minimum needs positioning C143 never gave it.** Cite Marcugini–Milani–Pambianco (2007)
+  for the size-12 complete-arc floor and Coolsaet–Sticker (2009)/Sticker (2012) for the `(k,2)`-arc
+  classification, state the `419385` PGL-inequivalent 8-arcs figure, and say plainly that those
+  classifications stratify incomplete arcs by size alone and give automorphism groups only for
+  complete arcs, so no Frobenius-invariant 8-arc stratum exists to compare against.
+
+The audit's § "Recommended language changes" carries the exact C143 diffs; applying them to the C143
+report is unallocated.
 
 C331 closed the asymmetry: 32 may now be presented as the exact **semantic** minimum for invariant
 eight-arcs in `PG(2,25)` with exactly two fixed points, and the five orbits as the complete extremal

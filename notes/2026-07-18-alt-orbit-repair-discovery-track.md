@@ -167,3 +167,27 @@ worth having before C152 rather than during it.
 **Evidence level.** Derived, not computed. The bijection at minimizers is a consequence of the
 kernel-checked sandwich in `card_legalOrbitSet_eq_32_of_globalLegalPairs_eq_32`; the general case is
 untested in either direction, and no counterexample search was run.
+
+## 2026-07-19 — a citation graph reported zero where two others reported dozens
+
+**Observed while** running the C363 forward-citation audit, not among its four audit questions.
+
+OpenAlex reports `0` citing works for the Ball--Lavrauw survey. Crossref reports `21` and Semantic
+Scholar `49` for the same DOI. The survey's DOI was also recorded incorrectly in the C143 report as
+`10.4171/emss/28`; the correct one is `10.4171/emss/33`, and `emss/28` is a different paper.
+
+**Why it may matter.** Claim 1's verdict rests on a negative — Baker--Wantz has zero forward
+citations — and a zero from a single graph source is indistinguishable from an indexing gap. C363
+happened to check Baker--Wantz against OpenAlex, Crossref and Semantic Scholar independently, so its
+zero is sound. But the same task produced, on an adjacent seed, a spurious zero from one of those
+same sources. The methodology survived by redundancy that was not deliberately chosen for this
+reason.
+
+Every "no predecessor located" verdict in this repository is a negative of exactly this shape, and
+the queue currently carries several tasks whose completion requires forward-citation novelty closure.
+A single-source zero should not be allowed to discharge one of them.
+
+**Evidence level.** Observed, from the committed citation-graph snapshot in
+`notes/2026-07-19-c363-alt-orbit-repair-citation-audit.json`; the discrepancy is reproducible through
+that report's `--check` generator. No investigation was made into why OpenAlex under-indexes this
+record, and no other seed was audited for the same gap.
