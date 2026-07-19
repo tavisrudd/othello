@@ -149,7 +149,10 @@ audit found the standard form of it in two places:
    every arc generated, for all `q ≤ 27`.
 2. Ughi, *Small almost complete arcs* (`10.1016/S0012-365X(01)00412-5`), studies arcs for which the
    ratio of points not on a secant — i.e. legal extension points — to the plane's points tends to
-   zero. Bounding the legal-extension count is a named research object there.
+   zero. Bounding the legal-extension count is a named research object there. **Provisional:
+   characterised from the zbMATH review, not from Ughi's full text, which was not obtained. The
+   "named research object" reading is an inference from the review rather than a quotation of the
+   paper's own framing; verify against the paper before this sentence carries weight in print.**
 
 Neither is orbit-valued, neither is equivariant, neither carries a deletion quantifier. But the
 paper should not present "counting legal extensions" as itself novel; the novelty is the
@@ -326,13 +329,27 @@ New in this audit (not in C143):
 - **N. Pace**, *On small complete arcs and transitive `A_5`-invariant arcs in the projective plane
   `PG(2,q)`*, J. Combin. Des. (2014), `10.1002/jcd.21372`, Zbl 1310.51009. `A_5`-invariant 30-arcs
   by computer; the closest group-invariant-arc classification located.
+  **Read depth: zbMATH review only**, plus OpenAlex title/author/year/venue metadata. Full text not
+  obtained, not cached. The `q ≥ 41` existence range and the `q ∈ {109,121,125}` completeness cases
+  are quoted from the reviewer's summary and were not verified against the paper. Provisional.
 - **M. Giulietti, E. Ughi**, *A small complete arc in `PG(2,q)`, `q = p²`, `p ≡ 3 (mod 4)`*,
-  Discrete Math. **208/209** (1999), `10.1016/S0012-365X(99)00079-5`, Zbl 0943.51009.
+  Discrete Math. (1999), `10.1016/S0012-365X(99)00079-5`, Zbl 0943.51009.
   Square-order-plane construction from two conics with symmetry-reduced completeness checking.
+  **Read depth: zbMATH review only.** Full text not obtained, not cached. The two-conics
+  construction, the arc size `k = 4(√q - 1)`, and the computer-verified completeness range are from
+  the reviewer's summary. Provisional. The volume was given as "208/209" in the first version of
+  this report; that came from background rather than from any source consulted here and has been
+  removed, leaving the DOI and Zbl number, which were checked.
 - **E. Ughi**, *Small almost complete arcs*, Discrete Math. (2002),
   `10.1016/S0012-365X(01)00412-5`, Zbl 1027.51012. Arcs whose legal-extension points are an
-  asymptotically vanishing fraction of the plane — the named-research-object form of bounding a
-  legal-extension count.
+  asymptotically vanishing fraction of the plane.
+  **Read depth: zbMATH review only.** Full text not obtained, not cached. The review states that
+  for the constructed arcs "the ratio of the number of points not on a secant of the `k`-arc to the
+  total number of points in the plane, goes to 0", and separately that an arc is complete iff every
+  point of the plane lies on a secant of it. Identifying "points not on a secant" with legal
+  extension points follows from those two review sentences. **The further gloss — that bounding the
+  legal-extension count is a named research object in this paper — is mine, inferred from the
+  review and not verified against Ughi's own framing. Provisional; carried into Claim 1.**
 - **T. Alderson**, *When arcs extend uniquely: a higher-dimensional generalization of Barlotti's
   result*, Des. Codes Cryptogr. (2026), `10.1007/s10623-026-01807-z`. Unique extension to a maximal
   arc for `(n,k+s-1)`-arcs of size `n = (s+1)(q+1)+k-3` when `s+2 | q`, `s < q-2`. Provisional,
@@ -340,6 +357,10 @@ New in this audit (not in C143):
 - **Y. Li, P. Yuan**, *Cyclic Projective Orbits on Rational Normal Curves and MDS Codes*,
   arXiv:2607.12761 (2026). Frobenius descent as a GRS-counting device; orbits of a cyclic operator.
   Checked and cleared — not conjugate-pair extension of an invariant plane arc.
+  **Read depth: abstract/metadata only**, and specifically a model-summarised rendering of the
+  arXiv `/abs/` landing page rather than the verbatim abstract. PDF not downloaded, full text not
+  obtained, not cached. The dismissal rests on the abstract's stated subject matter alone.
+  Provisional.
 
 Corrected from C143: the Ball–Lavrauw survey *Arcs in finite projective spaces* is
 **`10.4171/emss/33`** (EMS Surv. Math. Sci., 2020). C143 cites it only by arXiv link
@@ -366,6 +387,14 @@ produced a nearer successor.
   contains the same classification and *was* read in full; for Alderson the zbMATH review states the
   theorem explicitly, but the paper's own remarks on adjacent cases are unread. Kéri's paper was not
   obtained at all and is characterised from Sticker's description of it.
+- **Sticker's thesis is the only source in this report read at full text.** Every other predecessor
+  entry now carries an explicit read-depth marker in § "Closest predecessors found". Three of the
+  dismissals — Pace, Giulietti–Ughi, Ughi — rest on zbMATH reviews alone, and one, Li–Yuan, rests on
+  a model-summarised arXiv abstract page. Nothing in the four verdicts depends on those four
+  sources: each was consulted to rule a candidate out, and ruling out on an abstract is sound when
+  the abstract's stated subject matter is plainly a different object. But none of the four is
+  verified at the level Sticker is, and a reader wanting to rely on how any of them is
+  *characterised* here should obtain the paper.
 - **Absence of a search hit is not absence of a result.** The zero-hit zbMATH queries bound the
   MSC-51E21-indexed, phrase-matching literature. A predecessor phrased in coding-theoretic language,
   filed under a different MSC class, or describing the Frobenius involution as a Baer collineation
