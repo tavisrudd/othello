@@ -87,6 +87,13 @@ uniqueness or converse theorem spanning at least three metrics.
 
 ## C358: robust oval service
 
+**Complete 2026-07-19.** Verdict: `THEOREM; FIXED-POINT-FREE KLEIN FRAMES ARE GLOBALLY OPTIMAL
+AFTER TWO HELPER FAILURES`.  For every odd prime power `q>=7`, `q=3 mod 4`, a three-internal-target
+Klein frame has exact robust diagonal rates `(q+1)/6,q/6,(q-1)/6,(q-3)/6` through three failures,
+and its two-failure value is globally optimal over every projective frame.  Every frame orbit at
+`q=5,7,9,11`, `f<=3`, has an exact rational upper certificate, and every selected winner has exact
+allocations for every failure set.  See `notes/2026-07-18-c358-robust-oval-service.md`.
+
 **Goal.** Determine exact worst-case SRRs after helper deletions or under heterogeneous capacities,
 and optimize target frames against common damage, consuming C353's local result.
 
