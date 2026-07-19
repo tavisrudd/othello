@@ -109,3 +109,33 @@ same asymmetry.
 
 **Evidence level.** Two observed build runs, the failing cold one and the passing warm one, with
 the queue's recorded timings.
+
+## 2026-07-19 — a generator that hashes itself into its output cannot gain a `--check` mode
+
+**Observation.** Every C151 generator writes its own SHA-256 into the header of every file it
+emits. That makes the generator immutable once its output is committed: any edit — including a
+pure-comment one — changes the self-hash, changes all emitted headers, and so invalidates the entire
+generated tree and forces a full re-elaboration. This surfaced while adding the repo-preferred
+`--check` mode to the three exhaustion generators. The regeneration check then reported all `1,918`
+files differing, which is the correct answer to the wrong question: the trees were fine, the
+comparison baseline had moved.
+
+The fix was to put the checker in a separate script that imports the generators without touching
+them (`notes/2026-07-18-c151-exhaustion-check.py`). The `--check` edits were reverted and the three
+generator hashes confirmed back at their committed values before continuing.
+
+**Why it may matter.** This is a property of the whole repo's generator convention, not of C151.
+Any generator family that embeds `source_sha256()` in its output has the same trap, so `--check`,
+docstring fixes, and refactors on such a generator all carry a hidden full-rebuild cost — here about
+two hours. Two ways out are available for future generator families: keep the checker external, as
+done here, or hash only the *rendering* logic rather than the whole file. The second would let
+generators evolve their CLI and documentation without invalidating committed output, but nothing
+currently depends on it and changing the convention would itself invalidate every existing tree.
+
+Worth noting for the `build-sys` lane, which owns build orchestration and would feel this cost in
+any repo-wide generator maintenance pass. It is logged here only as an observation; promoting it to
+a convention change needs a C-ID and the normal lane routing.
+
+**Evidence level.** Directly observed: one regeneration check reporting `239`, `1,375`, and `304`
+files differing after a comment-only generator edit, and passing on all three trees after the edit
+was reverted.

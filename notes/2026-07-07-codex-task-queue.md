@@ -14,10 +14,10 @@ unless they retain an explicit open tail.
 
 ### `alt-orbit-repair`
 
-- **C151 `[alt-orbit-repair]` [ACTIVE]** — finish residual-cover/orbit completeness for the five Q25 minimizer classes → `notes/2026-07-14-c151-q25-minimum-classification.md`.
-- **C152 `[alt-orbit-repair]` [QUEUED; after C151]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
-- **C318 `[alt-orbit-repair]` [QUEUED; after C151]** — add the Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, and the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
-- **C319 `[alt-orbit-repair]` [GATED; after C151 lands and its kernel cost is measured]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation; do not schedule the full canonicalizer before the five-orbit cost is known → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C331 `[alt-orbit-repair]` [QUEUED]** — lift equality-orbit exhaustion from normalized rows to semantic arcs: state that every invariant eight-arc in `PG(2,25)` with exactly two fixed points attaining `32` normalizes into `minimumOrbitUnion`, reusing `card_legalOrbitSet_liftMapIdx` and `card_legalOrbitSet_residual` in the direction C151 left unstated; this is the last step before `32` may be presented as the exact semantic minimum with a complete extremal classification → `notes/2026-07-14-c151-q25-minimum-classification.md`.
+- **C152 `[alt-orbit-repair]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
+- **C318 `[alt-orbit-repair]` [QUEUED]** — add the Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, and the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C319 `[alt-orbit-repair]` [QUEUED; C151 cost now measured at 1:57:09 serial]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 
 ### `build-sys`
 

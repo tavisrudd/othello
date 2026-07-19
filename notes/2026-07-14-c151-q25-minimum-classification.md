@@ -2,10 +2,13 @@
 
 **Lane**: `alt-orbit-repair` — see `CLAUDE.md` § Lane routing.
 
-**Status:** ACTIVE — the universal normalized-row `≥32` theorem is kernel-checked for all `46,056`
-rows in the orbit-`5` slice, and all five proposed minimizer representatives have kernel-checked
-cardinality exactly `32`; the lift to every semantic exceptional-profile arc and equality-orbit
-completeness remain in development.
+**Status:** REPORTED — the universal normalized-row `≥32` theorem is kernel-checked for all `46,056`
+rows in the orbit-`5` slice, all five proposed minimizer representatives have kernel-checked
+cardinality exactly `32`, the `≥32` bound is lifted to every semantic invariant eight-arc with
+exactly two fixed points, and equality-orbit exhaustion is kernel-checked: every normalized row
+attaining `32` lies in the `1600`-element union of the five certified orbits. The matching lift of
+exhaustion to semantic arcs is the one remaining step and is stated as such in
+§ "What this does not certify".
 
 ## Target
 
@@ -663,11 +666,12 @@ What this does not certify: that `32` is attained, or that the rows attaining it
 five certified orbits. This is a lower bound on every semantic exceptional-profile arc and nothing
 more.
 
-## Current next step
+## Exhaustion design (2026-07-18)
 
-Exhaustion (step 6), by the route above: a class-level strict-bound layer proving
+Exhaustion (step 6) runs through a class-level strict-bound layer proving
 `33 ≤ (maskOrbitSet allowed).card` for the `1,184` non-minimizer classes, then a conclusion layer
-reusing the existing dispatch payloads at that threshold.
+reusing the existing dispatch payloads at that threshold. It is delivered in
+§ "Equality-orbit exhaustion".
 
 The design is fixed by what is already committed, and needs no change to any frozen checker core:
 
@@ -710,9 +714,178 @@ Exit status `0` at `0:08.59` wall and `3,403,736 kB` peak RSS
 `70ddc85cdbec74538b8ac859ad3de72451affb3fc0be089b8fadd31ecd197bbc`, `4,198` bytes. The axiom profile
 of all four terminals is `[propext, Classical.choice, Quot.sound]` with no `sorryAx`.
 
-The module contains no `decide` and no generated data; it states the reductions only. What remains
-is the two generated layers: `33 ≤ (maskOrbitSet allowed).card` for the `1,184` non-minimizer
-classes, and a per-row conclusion tree over the `46,056` normalized rows that feeds
-`mem_minimumOrbitUnion_of_card_eq_32`. Sizing evidence for that decision: the `≥ 32` conclusion
-dispatch tree is `304` modules and about `30` minutes of first build, and the exhaustion tree is
-expected to be comparable, which is the measured cost C319 is gated on.
+The module contains no `decide` and no generated data; it states the reductions only. The two
+generated layers it feeds are recorded in the next section.
+
+## Equality-orbit exhaustion (2026-07-19)
+
+Exhaustion is checked. Every normalized row attaining `32` lies in the `1600`-element union of the
+five certified minimizer orbits, so within the normalized-row domain `32` is the exact minimum and
+the five orbits are the complete set of minimizers.
+
+| Module | Terminal | Statement |
+|---|---|---|
+| `Q25Exhaustion.lean` | `mem_minimumOrbitUnion_of_normalized_card_eq_32` | a normalized row with `card = 32` lies in `minimumOrbitUnion` |
+| `Q25Exhaustion.lean` | `card_ge_33_of_not_mem_minimumOrbitUnion` | a normalized row outside the union carries at least `33` |
+| `Q25ExhaustionDispatchData/All.lean` | `concludeNormalizedRowExhaustion` | the per-row disjunction for all `46,056` normalized rows |
+
+### Two measured simplifications
+
+The route in § "Exhaustion route" projected a per-row strict class-link tree mirroring the committed
+`L_*` modules. That layer is unnecessary, and both facts were established by probe rather than
+assumed.
+
+After `fin_cases` the payload appears as an inlined structure literal, and that literal's
+`.canonicalConfig` is definitionally the class triple — which is exactly what the committed
+`_canonicalClassLink` theorems prove by `rfl`. So `exact` unifies the class-level bound against the
+per-row goal with no intermediate theorem, and the non-minimizer branch cites
+`Q25RowCompositionStrictData.class####LegalOrbitSet_card_ge_33` directly. A `rewrite` cannot do
+this: it needs a syntactic occurrence of the named payload constant, which `fin_cases` has already
+consumed. That rewrite failure is what identified the definitional route.
+
+The same defeq removes the minimizer branch's dependency: plain `rfl` discharges
+`p.canonicalConfig = minimumRow####`, because each `minimumRow####` is literally the `rowConfig` of
+its canonical pair. The exhaustion tree therefore imports only the committed dispatch payloads, the
+new strict-class layer, and `Q25ExhaustionBridge` — not the `7,044`-record class-link tree.
+
+Avoided cost: `1,036` modules and `7,044` records that would have elaborated at about `9` seconds
+per leaf, against a measured `4.5` seconds per conclusion leaf for the route taken.
+
+### Layer shapes and branch accounting
+
+`Q25RowCompositionStrictData` emits, for each of the `1,184` non-minimizer classes,
+
+```lean
+theorem class####LegalOrbitSet_card_ge_33 :
+    33 ≤ (legalOrbitSet (normalizedConfig class####A class####B class####C)).card :=
+  Q25ExhaustionBridge.card_legalOrbitSet_ge_of_sound
+    (normalizedConfig_isConjInvariant class####A class####B class####C)
+    class####ReflectedMaskCertificate.sound
+    (by decide)
+```
+
+reusing each committed certificate's threshold-free `sound` field against a fresh `decide` on the
+same literal mask. `Q25MinimumMask.lean` and `Q25RowCompositionData/` are untouched, so the
+generated `≥ 32` closure remains valid.
+
+The conclusion tree's branches partition the rows exactly:
+
+| Branch | Rows | Discharge |
+|---|---|---|
+| bad payload | `39,012` | `BadRowPayload.not_rawCap` contradicts the assumed `RawCap` |
+| valid, non-minimizer class | `7,020` | strict class bound transported by `source_card_ge_of_canonical` |
+| valid, minimizer class | `24` | `isMinimumResidualClass_of_transport` with `rfl` |
+| total | `46,056` | matches the declared row count across all `1,071` leaves |
+
+The `24` minimizer rows split `3,6,6,3,6` over classes `65,267,445,772,1002`, matching the certified
+orbit sizes `200,400,400,200,400` and the stabilizer orders `2,1,1,2,1`. This is the C150 scout's
+slice-intersection identity — size-`200` classes meet the orbit-`5` slice in `3` arcs and size-`400`
+classes in `6` — reproduced here from independent sources: the row counts come from the cover CSV
+via the generator, the orbit sizes from the orbit–stabilizer theorems. It is a consistency check on
+the residual layer, not a new fact.
+
+### Evidence bundle
+
+Regeneration check, from `/home/tavis/src/othello` — regenerates all three trees into a temporary
+location and compares file sets and contents, leaving the worktree unchanged:
+
+```sh
+python3 notes/2026-07-18-c151-exhaustion-check.py \
+  --csv /home/tavis/.cache/c151-residual-cover.csv
+```
+
+All three trees verify byte-identical to regeneration. The checker is deliberately a separate script
+rather than a `--check` mode on the generators: each generated header embeds its own generator's
+SHA-256, so editing a generator changes that hash and invalidates every file it produced, forcing a
+full re-elaboration for a comment-only change.
+
+Regeneration, from `/home/tavis/src/othello`:
+
+```sh
+python3 notes/2026-07-18-c151-strict-class-bound-generator.py \
+  --write-lean-modules lean/RelativeConicArcs/Q25RowCompositionStrictData
+python3 notes/2026-07-18-c151-exhaustion-conclusion-generator.py \
+  --csv /home/tavis/.cache/c151-residual-cover.csv \
+  --write-lean-modules lean/RelativeConicArcs/Q25ExhaustionConclusionData
+python3 notes/2026-07-18-c151-exhaustion-dispatch-generator.py \
+  --csv /home/tavis/.cache/c151-residual-cover.csv \
+  --write-lean-modules lean/RelativeConicArcs/Q25ExhaustionDispatchData
+```
+
+Both the strict-bound generator and the conclusion generator fail loudly on drift: the minimizer set
+parsed from the tracked masks must be exactly `{65,267,445,772,1002}`, no class may fall below the
+certified `32`, and every valid row must link to a class carrying a strict bound.
+
+| Artifact | SHA-256 | Bytes |
+|---|---|---|
+| `2026-07-18-c151-strict-class-bound-generator.py` | `ae3000367fb9ddc8a3f8e9d23a42af768259428444563d1620e281a4d2244e56` | `7,933` |
+| `2026-07-18-c151-exhaustion-conclusion-generator.py` | `c11d9ad4b6a684cf1a89b398e8ed41dfd4dbd233f49d7b6d93ef073ba600fef0` | `9,804` |
+| `2026-07-18-c151-exhaustion-dispatch-generator.py` | `b6781ba3803d3245c2f1b7920142b60917d0220aae4274b8aa1e580104091965` | `6,504` |
+| `2026-07-18-c151-exhaustion-check.py` | `f6fb32389f3495ad8e864e9e450ae719d07f4f5a80c990cb0e867e9a08a76b04` | `5,027` |
+| `Q25Exhaustion.lean` | `258c76b53b9978ebcddf707648331bfaa1dda989cbca496fd469441318a1662e` | `1,932` |
+| `Gates/AlternateOrbitRepairQ25Minimum.lean` | `157659964712d38b98b8747d30e21550f906cdf1a45b3de87c1f2b8ae216ee6b` | `817` |
+| `Q25RowCompositionStrictData/` (239 files, tree hash) | `06c7a32664558a087c4dddc7da22507b9bba8b7817f607edd7a1384a7607ba5c` | `601,684` |
+| `Q25ExhaustionConclusionData/` (1,375 files, tree hash) | `6618d8fb99cdf5eea4a056298afbc0a1640c751c8a484ba0540c78997669f376` | `5,555,347` |
+| `Q25ExhaustionDispatchData/` (304 files, tree hash) | `0cd8384bcb4d5ae48453fa24729713adfdf2704acdba8d3a6e4f44a4c45dcea5` | `4,133,357` |
+
+Load-bearing inputs: the canonical cover CSV
+`62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3`, which is an untracked cache, and
+the mask stream parsed from the tracked composition sources, digest
+`7b81e34650fd7f1607332cd6845a56e477a01e80b832dab06fbfcbcc0cbd55e0`. The tree hashes follow the
+generators' `tree_sha256` convention: sorted relative paths, each with a four-byte path length, the
+path, an eight-byte content length, and the contents.
+
+### Build measurements
+
+Replay, from `/home/tavis/src/othello/lean`:
+
+```sh
+scripts/lean-build-queue.py run \
+  RelativeConicArcs.Q25RowCompositionStrictData.All \
+  RelativeConicArcs.Q25ExhaustionConclusionData.All \
+  RelativeConicArcs.Q25ExhaustionDispatchData.All \
+  RelativeConicArcs.Q25Exhaustion \
+  RelativeConicArcs.Gates.AlternateOrbitRepairQ25Minimum \
+  --profile single --threads 1 --cores 20-23
+```
+
+One Lean worker on cores `20-23` with `choom -n 1000`, all exit status `0`, each run followed by a
+passing trace-only aggregate gate. First build of the three trees
+(`run-20260719-004939-a0269230`):
+
+| Target | Wall | Peak RSS |
+|---|---|---|
+| `Q25RowCompositionStrictData.All` | `15:09.37` | `3,637,608 kB` |
+| `Q25ExhaustionConclusionData.All` | `1:10:22` | `3,912,512 kB` |
+| `Q25ExhaustionDispatchData.All` | `31:38.18` | `4,033,664 kB` |
+
+Total first build `1:57:09`. The terminal and gate are cheap against the warm tree:
+`Q25Exhaustion` `0:10.35` at `3,922,432 kB` (`run-20260719-024843-88b63519`) and
+`Gates.AlternateOrbitRepairQ25Minimum` `0:16.37` at `4,142,324 kB`
+(`run-20260719-025018-2817cf83`). A following exact-target run reports all five trace-current
+(`run-20260719-025106-96ebe470`).
+
+This is the measured cost C319 is gated on. It is serial because no measured profile covers roughly
+`3.4` GiB per worker; profiles are owned by the `build-sys` lane and were not modified here.
+
+A forbidden-token scan over the new sources is clean. The axiom profile of
+`mem_minimumOrbitUnion_of_normalized_card_eq_32`, `card_ge_33_of_not_mem_minimumOrbitUnion`,
+`concludeNormalizedRowExhaustion`, `concludeExhB_058`, `concludeExhR_058_C_159_208`,
+`class0000LegalOrbitSet_card_ge_33`, and `class1188LegalOrbitSet_card_ge_33` is
+`[propext, Classical.choice, Quot.sound]` with no `sorryAx`.
+
+### What this does not certify
+
+Exhaustion is proved for normalized rows, not yet for semantic arcs. The `≥ 32` bound was carried to
+every invariant eight-arc in `PG(2,25)` with exactly two fixed points by
+`f2_card_globalLegalPairs_ge_32`; the matching lift of *exhaustion* — that every semantic arc
+attaining `32` normalizes into the orbit union — is not stated. Its ingredients exist
+(`card_legalOrbitSet_liftMapIdx` and `card_legalOrbitSet_residual` move legal-orbit cardinality
+along both normalizations in the required direction), so this is a stating step rather than open
+mathematics, but until it lands the complete extremal classification remains a normalized-row
+statement.
+
+The mask cardinality remains a lower bound on the legal count rather than the exact count, except at
+the five rows where equality is separately checked; exhaustion needs only the bound. The cover CSV
+is an untracked cache, so the tracked evidence is the generated Lean trees and the parsed mask
+stream, not the CSV.
