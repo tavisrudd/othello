@@ -1,0 +1,215 @@
+{
+  "exceptional_field_ledger": {
+    "Q=8": {
+      "arcs": 0,
+      "normalized_candidates_tested": 10416,
+      "search": "complete normalized parameter scan"
+    }
+  },
+  "field": {
+    "E": 1024,
+    "F": 32,
+    "F_modulus": "x^5+x^2+1",
+    "omega": "omega^2+omega+1=0"
+  },
+  "fixtures": [
+    {
+      "a": [
+        27,
+        13
+      ],
+      "affine_deep_holes": 128,
+      "arc_points": 128,
+      "b": [
+        8,
+        24
+      ],
+      "base_projective_weight_two": 1048537,
+      "enumerator": {
+        "a1(T)": "128",
+        "a2(T)": "8128*(T-1024)+1048537",
+        "a3(T)": "T^2+T+1-a1(T)-a2(T)",
+        "alpha_i(T)": "alpha_0=1; alpha_i=(T-1)*a_i(T) for i=1,2,3"
+      },
+      "extension_directions": {
+        "infinity_one_column": 808,
+        "infinity_three_column": 0,
+        "infinity_two_column": 326028,
+        "one_column": 936,
+        "two_column": 421772
+      },
+      "infinity_deep_holes": 808,
+      "projective_deep_holes": 936,
+      "rho": 9,
+      "secant_moment_checks": {
+        "first": 8314944,
+        "second": 32004000
+      },
+      "secant_multiplicity_histogram": {
+        "0": 936,
+        "1": 1152,
+        "10": 114272,
+        "11": 70880,
+        "12": 37984,
+        "13": 17696,
+        "14": 5984,
+        "15": 2080,
+        "16": 736,
+        "17": 480,
+        "18": 576,
+        "19": 832,
+        "2": 4800,
+        "20": 768,
+        "21": 800,
+        "22": 352,
+        "23": 224,
+        "24": 64,
+        "25": 32,
+        "3": 17568,
+        "32": 180,
+        "4": 45600,
+        "5": 88576,
+        "6": 138208,
+        "64": 37,
+        "7": 171008,
+        "8": 173792,
+        "9": 153856
+      },
+      "secants": 8128
+    },
+    {
+      "a": [
+        0,
+        24
+      ],
+      "affine_deep_holes": 160,
+      "arc_points": 128,
+      "b": [
+        31,
+        25
+      ],
+      "base_projective_weight_two": 1048508,
+      "enumerator": {
+        "a1(T)": "128",
+        "a2(T)": "8128*(T-1024)+1048508",
+        "a3(T)": "T^2+T+1-a1(T)-a2(T)",
+        "alpha_i(T)": "alpha_0=1; alpha_i=(T-1)*a_i(T) for i=1,2,3"
+      },
+      "extension_directions": {
+        "infinity_one_column": 805,
+        "infinity_three_column": 0,
+        "infinity_two_column": 323610,
+        "one_column": 965,
+        "two_column": 445930
+      },
+      "infinity_deep_holes": 805,
+      "projective_deep_holes": 965,
+      "rho": 28,
+      "secant_moment_checks": {
+        "first": 8314944,
+        "second": 32004000
+      },
+      "secant_multiplicity_histogram": {
+        "0": 965,
+        "1": 896,
+        "10": 110304,
+        "11": 70784,
+        "12": 36800,
+        "13": 18080,
+        "14": 6304,
+        "15": 2624,
+        "16": 896,
+        "17": 480,
+        "18": 448,
+        "19": 800,
+        "2": 4480,
+        "20": 704,
+        "21": 832,
+        "22": 640,
+        "23": 160,
+        "3": 17344,
+        "32": 186,
+        "4": 46912,
+        "5": 88480,
+        "6": 136768,
+        "64": 34,
+        "7": 170560,
+        "8": 177568,
+        "9": 155424
+      },
+      "secants": 8128
+    },
+    {
+      "a": [
+        18,
+        5
+      ],
+      "affine_deep_holes": 96,
+      "arc_points": 128,
+      "b": [
+        15,
+        31
+      ],
+      "base_projective_weight_two": 1048573,
+      "enumerator": {
+        "a1(T)": "128",
+        "a2(T)": "8128*(T-1024)+1048573",
+        "a3(T)": "T^2+T+1-a1(T)-a2(T)",
+        "alpha_i(T)": "alpha_0=1; alpha_i=(T-1)*a_i(T) for i=1,2,3"
+      },
+      "extension_directions": {
+        "infinity_one_column": 804,
+        "infinity_three_column": 0,
+        "infinity_two_column": 322806,
+        "one_column": 900,
+        "two_column": 392838
+      },
+      "infinity_deep_holes": 804,
+      "projective_deep_holes": 900,
+      "rho": 3,
+      "secant_moment_checks": {
+        "first": 8314944,
+        "second": 32004000
+      },
+      "secant_multiplicity_histogram": {
+        "0": 900,
+        "1": 1216,
+        "10": 110976,
+        "11": 70560,
+        "12": 35648,
+        "13": 17440,
+        "14": 6880,
+        "15": 2624,
+        "16": 672,
+        "17": 352,
+        "18": 640,
+        "19": 928,
+        "2": 5120,
+        "20": 960,
+        "21": 544,
+        "22": 512,
+        "23": 224,
+        "24": 96,
+        "26": 32,
+        "3": 17824,
+        "32": 188,
+        "4": 44192,
+        "5": 87328,
+        "6": 136320,
+        "64": 33,
+        "7": 173696,
+        "8": 179584,
+        "9": 153984
+      },
+      "secants": 8128
+    }
+  ],
+  "schema": "c348-layered-deep-hole-falsifier-v1",
+  "search": {
+    "candidate_draws": 4096,
+    "fixture_limit": 4,
+    "fixtures_found": 3,
+    "normalized_candidates_tested": 3980,
+    "order": "fixed ANSI-C LCG seed 1"
+  }
+}
