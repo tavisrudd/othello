@@ -17,8 +17,17 @@
       "last": 361,
       "purpose": "classify the C329 affine deep-hole quotient by intrinsic invariants and upgrade C348 to a complete enumerator theorem",
       "sequence": 2
+    },
+    {
+      "count": 1,
+      "first": 362,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 362,
+      "purpose": "Package C348 as a publication result: moduli-dependent deep-hole enumerators and the exact rank-two infinity extension complex, with bounded novelty claims",
+      "sequence": 3
     }
   ],
-  "next_id": 362,
+  "next_id": 363,
   "schema": "codex-task-id-allocations-v1"
 }
