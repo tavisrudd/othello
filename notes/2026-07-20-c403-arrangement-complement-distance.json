@@ -336,10 +336,36 @@
           "epsilon_4": 1
         }
       },
+      "depth_labelled_orbit_law": {
+        "aggregate_nonidentity_fixed_incidence": {
+          "0": 68,
+          "1": 42,
+          "2": 49,
+          "mirror": 18
+        },
+        "orbit_counts": {
+          "0": 7,
+          "1": 3,
+          "2": 4,
+          "mirror": 1
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "0": 100,
         "1": 30,
         "2": 47
+      },
+      "observed_nonidentity_fixed_incidence_by_depth": {
+        "0": 68,
+        "1": 42,
+        "2": 49,
+        "mirror": 18
+      },
+      "observed_orbit_counts_by_depth": {
+        "0": 7,
+        "1": 3,
+        "2": 4,
+        "mirror": 1
       },
       "orbit_count": 15,
       "orbits": [
@@ -494,6 +520,12 @@
           "weighted_depth": 5
         }
       ],
+      "projective_group_element_order_counts": {
+        "1": 1,
+        "2": 9,
+        "3": 8,
+        "4": 6
+      },
       "projective_line_count": 183,
       "projective_reflection_group_order": 24,
       "q": 13
@@ -507,12 +539,44 @@
           "epsilon_5": 0
         }
       },
+      "depth_labelled_orbit_law": {
+        "aggregate_nonidentity_fixed_incidence": {
+          "1": 120,
+          "2": 40,
+          "3": 80,
+          "5": 114,
+          "mirror": 45
+        },
+        "orbit_counts": {
+          "1": 4,
+          "2": 2,
+          "3": 2,
+          "4": 1,
+          "5": 3,
+          "mirror": 1
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "1": 120,
         "2": 80,
         "3": 40,
         "4": 60,
         "5": 66
+      },
+      "observed_nonidentity_fixed_incidence_by_depth": {
+        "1": 120,
+        "2": 40,
+        "3": 80,
+        "5": 114,
+        "mirror": 45
+      },
+      "observed_orbit_counts_by_depth": {
+        "1": 4,
+        "2": 2,
+        "3": 2,
+        "4": 1,
+        "5": 3,
+        "mirror": 1
       },
       "orbit_count": 13,
       "orbits": [
@@ -647,6 +711,12 @@
           "weighted_depth": 14
         }
       ],
+      "projective_group_element_order_counts": {
+        "1": 1,
+        "2": 15,
+        "3": 20,
+        "5": 24
+      },
       "projective_line_count": 381,
       "projective_reflection_group_order": 60,
       "q": 19
@@ -662,10 +732,36 @@
           "epsilon_4": 0
         }
       },
+      "depth_labelled_orbit_law": {
+        "aggregate_nonidentity_fixed_incidence": {
+          "0": 56,
+          "1": 24,
+          "2": 33,
+          "mirror": 18
+        },
+        "orbit_counts": {
+          "0": 5,
+          "1": 2,
+          "2": 3,
+          "mirror": 1
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "0": 64,
         "1": 24,
         "2": 39
+      },
+      "observed_nonidentity_fixed_incidence_by_depth": {
+        "0": 56,
+        "1": 24,
+        "2": 33,
+        "mirror": 18
+      },
+      "observed_orbit_counts_by_depth": {
+        "0": 5,
+        "1": 2,
+        "2": 3,
+        "mirror": 1
       },
       "orbit_count": 11,
       "orbits": [
@@ -780,6 +876,12 @@
           "weighted_depth": 5
         }
       ],
+      "projective_group_element_order_counts": {
+        "1": 1,
+        "2": 9,
+        "3": 8,
+        "4": 6
+      },
       "projective_line_count": 133,
       "projective_reflection_group_order": 24,
       "q": 11
@@ -793,11 +895,37 @@
           "epsilon_4": 0
         }
       },
+      "depth_labelled_orbit_law": {
+        "aggregate_nonidentity_fixed_incidence": {
+          "1": 36,
+          "3": 56,
+          "mirror": 39
+        },
+        "orbit_counts": {
+          "0": 1,
+          "1": 3,
+          "2": 1,
+          "3": 4,
+          "mirror": 2
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "0": 24,
         "1": 36,
         "2": 24,
         "3": 40
+      },
+      "observed_nonidentity_fixed_incidence_by_depth": {
+        "1": 36,
+        "3": 56,
+        "mirror": 39
+      },
+      "observed_orbit_counts_by_depth": {
+        "0": 1,
+        "1": 3,
+        "2": 1,
+        "3": 4,
+        "mirror": 2
       },
       "orbit_count": 11,
       "orbits": [
@@ -912,6 +1040,12 @@
           "weighted_depth": 8
         }
       ],
+      "projective_group_element_order_counts": {
+        "1": 1,
+        "2": 9,
+        "3": 8,
+        "4": 6
+      },
       "projective_line_count": 133,
       "projective_reflection_group_order": 24,
       "q": 11
@@ -925,10 +1059,36 @@
           "epsilon_5": 1
         }
       },
+      "depth_labelled_orbit_law": {
+        "aggregate_nonidentity_fixed_incidence": {
+          "3": 80,
+          "4": 48,
+          "5": 114,
+          "mirror": 45
+        },
+        "orbit_counts": {
+          "3": 2,
+          "4": 1,
+          "5": 3,
+          "mirror": 1
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "3": 40,
         "4": 12,
         "5": 66
+      },
+      "observed_nonidentity_fixed_incidence_by_depth": {
+        "3": 80,
+        "4": 48,
+        "5": 114,
+        "mirror": 45
+      },
+      "observed_orbit_counts_by_depth": {
+        "3": 2,
+        "4": 1,
+        "5": 3,
+        "mirror": 1
       },
       "orbit_count": 7,
       "orbits": [
@@ -1003,6 +1163,12 @@
           "weighted_depth": 14
         }
       ],
+      "projective_group_element_order_counts": {
+        "1": 1,
+        "2": 15,
+        "3": 20,
+        "5": 24
+      },
       "projective_line_count": 133,
       "projective_reflection_group_order": 60,
       "q": 11

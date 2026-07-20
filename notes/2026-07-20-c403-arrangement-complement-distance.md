@@ -222,10 +222,38 @@ order-three elements each fix `1+2 epsilon_3`; and the six order-four elements e
 
 from the class sizes `1,15,20,24` of the identity and elements of orders `2,3,5`.  An involution
 again fixes `q+2` projective points, while an element of odd order `m` fixes one eigenline plus two
-more exactly when its nontrivial eigenvalues lie in `F_q`.  Independent direct replays exercise the
-other splitting branches: `A3` has `15` line orbits at `q=13`, and `H3` with `tau=5` has `13` at
-`q=19`.  The remaining orbit problem is finer: derive the depth-labelled orbit sizes uniformly,
-not the total number of orbits.
+more exactly when its nontrivial eigenvalues lie in `F_q`.
+
+The Burnside argument refines completely by weighted depth.  The number `o_delta` of projective
+reflection-group orbits of nonmirror test lines at depth `delta` is
+
+| type | exact depth-labelled orbit counts | mirror orbits |
+|:---|:---|---:|
+| `A3` | `o_0=(q^2-1)/24`; `o_1=(q-3+2 epsilon_4)/4`; `o_2=(q+7+4 epsilon_3)/6` | `1` |
+| `B3` | `o_0=(q-5)(q-7)/24`; `o_1=(q-5)/2`; `o_2=(q-5+4 epsilon_3)/6`; `o_3=(q+5+2 epsilon_4)/4` | `2` |
+| `H3` | `o_0=(q-11)(q-19)/60`; `o_1=(q-11)/2`; `o_2=(q-11+4 epsilon_3)/6`; `o_3=2`; `o_4=(q-9+8 epsilon_5)/10`; `o_5=3` | `1` |
+
+To prove the refinement, diagonalize one representative of every nonidentity conjugacy class and
+sort its fixed eigenlines by weighted depth.  Summed across all nonidentity group elements, the
+fixed-incidence ledgers are
+
+```text
+A3: F_0=6q-10, F_1=3q-9+12 epsilon_4,
+    F_2=33+16 epsilon_3, F_mirror=18;
+
+B3: F_0=0, F_1=6q-30, F_2=16 epsilon_3,
+    F_3=3q+23+12 epsilon_4, F_mirror=39;
+
+H3: F_0=0, F_1=15(q-11), F_2=40 epsilon_3,
+    F_3=80, F_4=48 epsilon_5, F_5=114, F_mirror=45.
+```
+
+Adding the identity contribution `f_delta(q)` from the C399 spectrum and dividing by `24` or `60`
+gives the table.  In particular, the `B3` and `H3` depth-zero strata are free group actions; their
+orbit counts are the raw stratum sizes divided by the group order.  Independent direct replays
+exercise both eigenvalue-splitting branches: `A3` has `15` total line orbits at `q=13`, and `H3`
+with `tau=5` has `13` at `q=19`.  The checker verifies the group element-order distribution, every
+fixed-depth ledger, every labelled formula, and every orbit size directly.
 
 ## C399 recovered from external flag ledgers
 
@@ -488,12 +516,14 @@ both ambient contractions and the punctured weighted 2-adjoint.  It also verifie
 identities, intrinsic bounds, locality/availability distributions, five two-pencil parameter
 samples, both same-lattice counterexamples, and the exact `A3/B3` projective reflection-group orbit
 decompositions, the `H3` q=11 orbit decomposition, and the q=13/q=19 Burnside branch replays.  All
-projective codeword totals equal `11^3` for the q=11 code fixtures.
+projective codeword totals equal `11^3` for the q=11 code fixtures.  The orbit path additionally
+checks every group element order, nonidentity fixed-depth incidence ledger, and closed labelled
+orbit-count formula.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | `41,958` | `7bdd2bfcf40f48489bbbd4c207e7b92d62824445e25a3bd3f6b7239aaea6f7ab` |
-| certificate `.json` | `52,908` | `dd970f66b5e5135194673bca1e83677824f7f5f51bd8dc331a9b08b8e283d681` |
+| checker `.py` | `46,964` | `2545b04a71136d33cfcfa1f8f62c5bb5c01e0e0869a00482753629aa2a1eaf6e` |
+| certificate `.json` | `56,407` | `d67fa29f8e5f242e35a14a1e7669710c840ca6e072c4a57335acf57b1ed35ed2` |
 
 The trusted boundary is exact Python integer/modular arithmetic, elementary projective incidence,
 the standard rank-three supersolvable-implies-free theorem, and C339's independently replayed
@@ -558,6 +588,6 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
 - The two-pencil theorem gives an infinite irreducible supersolvable equality class, while the
   multiplicity bounds explain the extremal uniform counterexample.
 - The line sections also give exact locality-two repair and disjoint-availability profiles.
-- C403 remains the active crowns task.  Next attacks are depth-labelled uniform orbit laws, full
-  adjoint/multiarrangement source closure, and higher-degree section transforms; C404 is queued
-  behind it rather than replacing it.
+- C403 remains the active crowns task.  Next attacks are stabilizer-type refinement of the proved
+  depth-labelled orbit laws, full adjoint/multiarrangement source closure, and higher-degree section
+  transforms; C404 is queued behind it rather than replacing it.

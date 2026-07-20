@@ -335,6 +335,90 @@ def burnside_orbit_count(name: str, field_order: int) -> dict[str, object]:
     }
 
 
+def exact_quotient(numerator: int, denominator: int, label: str) -> int:
+    if numerator % denominator:
+        raise AssertionError(f"nonintegral {label}: {numerator}/{denominator}")
+    return numerator // denominator
+
+
+def depth_labelled_orbit_law(name: str, field_order: int) -> dict[str, object]:
+    epsilon_3 = int((field_order - 1) % 3 == 0)
+    if name == "A3":
+        epsilon_4 = int((field_order - 1) % 4 == 0)
+        orbit_counts = {
+            "0": exact_quotient(field_order * field_order - 1, 24, "A3 depth zero"),
+            "1": exact_quotient(field_order - 3 + 2 * epsilon_4, 4, "A3 depth one"),
+            "2": exact_quotient(field_order + 7 + 4 * epsilon_3, 6, "A3 depth two"),
+            "mirror": 1,
+        }
+        fixed_ledger = {
+            "0": 6 * field_order - 10,
+            "1": 3 * field_order - 9 + 12 * epsilon_4,
+            "2": 33 + 16 * epsilon_3,
+            "mirror": 18,
+        }
+    elif name == "B3":
+        epsilon_4 = int((field_order - 1) % 4 == 0)
+        orbit_counts = {
+            "0": exact_quotient(
+                (field_order - 5) * (field_order - 7), 24, "B3 depth zero"
+            ),
+            "1": exact_quotient(field_order - 5, 2, "B3 depth one"),
+            "2": exact_quotient(field_order - 5 + 4 * epsilon_3, 6, "B3 depth two"),
+            "3": exact_quotient(field_order + 5 + 2 * epsilon_4, 4, "B3 depth three"),
+            "mirror": 2,
+        }
+        fixed_ledger = {
+            "0": 0,
+            "1": 6 * field_order - 30,
+            "2": 16 * epsilon_3,
+            "3": 3 * field_order + 23 + 12 * epsilon_4,
+            "mirror": 39,
+        }
+    elif name == "H3":
+        epsilon_5 = int((field_order - 1) % 5 == 0)
+        orbit_counts = {
+            "0": exact_quotient(
+                (field_order - 11) * (field_order - 19), 60, "H3 depth zero"
+            ),
+            "1": exact_quotient(field_order - 11, 2, "H3 depth one"),
+            "2": exact_quotient(field_order - 11 + 4 * epsilon_3, 6, "H3 depth two"),
+            "3": 2,
+            "4": exact_quotient(field_order - 9 + 8 * epsilon_5, 10, "H3 depth four"),
+            "5": 3,
+            "mirror": 1,
+        }
+        fixed_ledger = {
+            "0": 0,
+            "1": 15 * (field_order - 11),
+            "2": 40 * epsilon_3,
+            "3": 80,
+            "4": 48 * epsilon_5,
+            "5": 114,
+            "mirror": 45,
+        }
+    else:
+        raise ValueError(f"unknown Coxeter type: {name}")
+    return {
+        "orbit_counts": {key: value for key, value in orbit_counts.items() if value},
+        "aggregate_nonidentity_fixed_incidence": {
+            key: value for key, value in fixed_ledger.items() if value
+        },
+    }
+
+
+def projective_matrix_order(
+    matrix: tuple[tuple[int, int, int], ...], prime: int
+) -> int:
+    identity = normalize_projective_matrix(((1, 0, 0), (0, 1, 0), (0, 0, 1)), prime)
+    power = identity
+    for order in range(1, 61):
+        power = normalize_projective_matrix(matrix_product(power, matrix, prime), prime)
+        if power == identity:
+            return order
+    raise AssertionError("projective matrix order exceeds Coxeter group order")
+
+
 def coxeter_orbit_certificate(
     name: str,
     prime: int,
@@ -364,7 +448,12 @@ def coxeter_orbit_certificate(
         } != line_set:
             raise AssertionError(f"{name}: generated matrix does not preserve the arrangement")
 
-    remaining = set(projective_objects(prime))
+    universe = projective_objects(prime)
+    depth_by_line = {
+        line: sum(weight for point, weight in weights.items() if incident(line, point, prime))
+        for line in universe
+    }
+    remaining = set(universe)
     orbit_rows: list[dict[str, object]] = []
     while remaining:
         seed = min(remaining)
@@ -372,10 +461,7 @@ def coxeter_orbit_certificate(
             normalize(matrix_vector(matrix, seed, prime), prime) for matrix in group
         }
         remaining -= orbit
-        depths = {
-            sum(weight for point, weight in weights.items() if incident(line, point, prime))
-            for line in orbit
-        }
+        depths = {depth_by_line[line] for line in orbit}
         mirror_flags = {line in line_set for line in orbit}
         if len(depths) != 1 or len(mirror_flags) != 1:
             raise AssertionError(f"{name}: orbit does not have constant weighted depth/type")
@@ -406,12 +492,45 @@ def coxeter_orbit_certificate(
     burnside = burnside_orbit_count(name, prime)
     if len(orbit_rows) != burnside["orbit_count"]:
         raise AssertionError(f"{name}: direct orbits disagree with Burnside formula")
+    observed_orbits_by_depth: Counter[str] = Counter(
+        "mirror" if row["mirror"] else str(row["weighted_depth"]) for row in orbit_rows
+    )
+    depth_law = depth_labelled_orbit_law(name, prime)
+    if observed_orbits_by_depth != Counter(depth_law["orbit_counts"]):
+        raise AssertionError(f"{name}: depth-labelled orbit law failed")
+    element_order_counts = Counter(projective_matrix_order(matrix, prime) for matrix in group)
+    expected_element_orders = (
+        Counter({1: 1, 2: 9, 3: 8, 4: 6})
+        if name in ("A3", "B3")
+        else Counter({1: 1, 2: 15, 3: 20, 5: 24})
+    )
+    if element_order_counts != expected_element_orders:
+        raise AssertionError(f"{name}: unexpected projective group element orders")
+    fixed_depth_incidence: Counter[str] = Counter()
+    for matrix in group:
+        if projective_matrix_order(matrix, prime) == 1:
+            continue
+        for line in universe:
+            image = normalize(matrix_vector(matrix, line, prime), prime)
+            if image == line:
+                label = "mirror" if line in line_set else str(depth_by_line[line])
+                fixed_depth_incidence[label] += 1
+    if fixed_depth_incidence != Counter(depth_law["aggregate_nonidentity_fixed_incidence"]):
+        raise AssertionError(f"{name}: fixed-depth incidence ledger failed")
     return {
         "q": prime,
         "projective_reflection_group_order": len(group),
         "projective_line_count": prime * prime + prime + 1,
         "orbit_count": len(orbit_rows),
         "burnside_orbit_count": burnside,
+        "depth_labelled_orbit_law": depth_law,
+        "projective_group_element_order_counts": {
+            str(order): count for order, count in sorted(element_order_counts.items())
+        },
+        "observed_orbit_counts_by_depth": dict(sorted(observed_orbits_by_depth.items())),
+        "observed_nonidentity_fixed_incidence_by_depth": dict(
+            sorted(fixed_depth_incidence.items())
+        ),
         "orbits": orbit_rows,
         "nonmirror_depth_counts_from_orbits": {
             str(depth): count for depth, count in sorted(nonmirror_depth_counts.items())
