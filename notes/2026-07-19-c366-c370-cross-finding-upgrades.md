@@ -37,11 +37,14 @@ compatibility check closes the task; it does not authorize a new census or proof
    `tau=8` normalization it maps exactly to `XZ=Y^2`, generates a `[12,3,10]_11` extended/projective
    GRS child, and projectivizes C341's 120-vector `deep_hole_C5` relation in the rank-eight scheme.
    See `notes/2026-07-19-c368-h3-a5-arithmetic-phase.md` and its exact checker/JSON bundle.
-4. **C369 — intrinsic reconstruction-to-service bridge.** Check whether C295's recovered frame and
-   code data determine C357's projection-involution orbit predicate and service--PIR extremizer on
-   the same object class. Success is an uncoloured-graph-intrinsic operational theorem. Object-class
-   mismatch or dependence on forgotten markings closes the task; this task does not clear C296's
-   game-value gate.
+4. **C369 — complete; intrinsic reconstruction-to-service bridge.** C295's recovered plane,
+   frame, and `[4,3,2]` code intrinsically determine the three diagonal points.  They are exactly
+   C357's targets whose projection involution pairs all four stored columns, hence exactly the
+   targets with maximal fractional service and maximal disjoint PIR availability.  The forgotten
+   containing-conic marking does not affect this four-column predicate.  Continuation vertices are
+   instead uniformly non-extremal, with exact capacity `4/3`; the positive bridge uses C295's
+   reconstructed ambient plane.  The result is operational, not a game-value theorem, and does not
+   clear C296.  See `notes/2026-07-19-c369-intrinsic-frame-service-bridge.md`.
 5. **C370 — complete; mirror-family extension periodicity.** For every C333 member over every odd
    `q>=5`, the four-coloured extension residual is exactly `B + c_n C` in odd degree and
    `B + Q + c_n C` in even degree, with the same formulas as Minkowski sums of fractional repair
