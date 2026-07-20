@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-20
 
-**Status:** `ACTIVE`
+**Status:** `COMPLETE`
 
-**Current verdict:** `WEIGHTED 2-ADJOINT ENUMERATOR; STABILIZER-STRATIFIED COXETER ORBITS; ALL-DEGREE CONIC MATCHING QUOTIENT`
+**Current verdict:** `WEIGHTED 2-ADJOINT ENUMERATOR; STABILIZER-STRATIFIED COXETER ORBITS; ALL-DEGREE CONIC MATCHING QUOTIENT; DUAL-SUPPORT GATE FACTORS THROUGH THE STANDARD GRS MATROID`
 
 ## Decision
 
@@ -32,10 +32,11 @@ characteristic polynomial of A        -> length
 weighted coboundary specialization of A^(2) -> all weights and distance.
 ```
 
-This remains an active task only for the bounded nonfactorized dual-support gate.  The coding
-specialization, structural equality classes, Coxeter orbit/stabilizer consequences, and
-factorized-support family are closed positively; stop the remaining gate immediately if it factors
-through the standard conic/GRS matroid.
+The bounded nonfactorized dual-support gate closes at its mandatory first stop.  At a conic phase
+the child is an extended GRS code, so every minimum dual support is simply a circuit of its uniform
+MDS matroid.  No Coxeter parent, matching, chirality, or fine-scheme datum survives in bare support
+data.  The coding specialization, structural equality classes, Coxeter orbit/stabilizer
+consequences, factorized-support family, and final falsifier are therefore all closed.
 
 The first higher-degree family now closes uniformly.  For every squarefree product of nonmirror
 linear forms, its support is determined by the factor depths and one complement-concurrence debt.
@@ -791,6 +792,37 @@ are not a novelty claim.  Nor does the theorem say that the entire nonmirror **v
 parent-free: an external factor has a conjugate degree-two divisor, and the collection excluded as
 Coxeter mirrors can still retain the parent decoration.
 
+## Nonfactorized dual-support gate: standard GRS stop
+
+Put `n=q+1` and let `C_r` be the complete degree-`r` conic evaluation code.  Its dimension is
+
+```text
+k=min(2r+1,n).
+```
+
+When `k<n`, the projective system is the degree-`2r` rational normal curve and any `k` columns are
+independent.  Hence every nonzero word of `C_r^perp` has support at least `k+1`.  Conversely, for
+every `(k+1)`-subset `T` of conic points, the restricted generator matrix has rank `k` and a
+one-dimensional kernel.  Every coefficient in that dependence is nonzero, since a zero
+coefficient would give a dependence among at most `k` columns.  Therefore
+
+```text
+d(C_r^perp)=k+1,
+minimum dual supports = all (k+1)-subsets of C(F_q),
+projective dual words on each minimum support = 1.
+```
+
+If `k=n`, the dual code is zero and there is no dual-support layer.  In degree one the first layer
+is thus exactly all four-subsets of the conic, numbering `binom(q+1,4)`; the three C399 phases give
+`15,70,495` supports at `q=5,7,11`.
+
+This conclusion uses no factorization of a primal form.  It is precisely the circuit set of the
+uniform matroid `U_(k,n)` underlying an extended GRS code.  Cross-ratio or Frobenius refinements
+under the full conic automorphism group are standard projective-line geometry; refining further
+under a Coxeter subgroup requires supplying the forgotten parent marking.  Thus bare
+nonfactorized dual supports retain none of the parent-, matching-, chirality-, or fine-scheme data
+required by the gate.  The prescribed stop applies before any orbit or higher-support census.
+
 ## Evidence and independent replay
 
 Run from the repository root:
@@ -833,6 +865,11 @@ the standard rank-three supersolvable-implies-free theorem, and C339's independe
 characteristic-zero `H3` special-line ledger.  The computation does not prove the general published
 adjoint-stratification theorems, an arbitrary-field stabilizer-orbit classification, or a uniform
 classification of the higher-degree joint `(c_q,i_A,delta_r)` strata.
+
+The final dual-support stop is a conventional algebraic proof, not a new computational claim.  Its
+trusted boundary is the standard extended-GRS/MDS identification of rational-normal-curve
+evaluation and the elementary rank argument displayed above; the checker and certificate are
+unchanged.
 
 ## Focused literature boundary
 
@@ -877,13 +914,15 @@ closure were not needed for the no-priority verdict and are **NOT COVERED**.
 
 ## Lean and manuscript boundary
 
-C403 remains open.  The original-arrangement flag claim is excluded from the manuscript, but the
+C403 is complete.  The original-arrangement flag claim is excluded from the manuscript, but the
 weighted 2-adjoint theorem is now a plausible replacement statement: it gives a canonical
 arrangement construction, an exact coboundary specialization, and the complete Hamming enumerator.
 The parallel-copy coboundary normalization is now source-closed and explicitly separated from the
 derivation-theoretic multiarrangement characteristic polynomial.  No Lean surface is added in this
-tranche; the Python bundle is both an
+task; the Python bundle is both an
 exact falsifier for level-zero invariants and a replay certificate for the positive adjoint formula.
+The final nonfactorized dual-support gate factors through the standard GRS matroid and adds no
+paper-facing theorem.
 
 ## Hand-back
 
@@ -912,11 +951,12 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
   forgetting for all external factors; their conjugate divisors can retain the mirror decoration.
 - The parallel-copy coboundary normalization is source-closed through Ardila's finite-field method
   and copy theorem, and is explicitly not the Abe--Terao--Wakefield multiarrangement polynomial.
-- C403 remains the active crowns task.  The pairing-forgetting/kernel and stabilizer-refinement
-  upgrades are closed positively.  The next bounded attack is nonfactorized dual-support structure
-  beyond the now-closed line-product family, with a mandatory stop if it factors through the
-  standard conic/GRS matroid.  C404 is closed by the Edge/Dye fibre-geometry pre-emption; C405 is
-  the next independent successor.
+- The first nonfactorized dual-support layer is exactly the minimum-circuit layer of the uniform
+  extended-GRS matroid: all `(k+1)`-subsets, with one projective dependence apiece.  It retains no
+  parent, matching, chirality, or fine-scheme data, so the mandatory stop closes C403 without a
+  support-orbit census.
+- C404 is closed by the Edge/Dye fibre-geometry pre-emption; C406 is the next crowns task, while
+  C405 remains the next independent successor.
 - C406 owns the downstream manuscript-facing compatibility question: whether the C399
   `5/14/22` parent markers are symmetry-selected factorizations of this report's Frobenius section,
   whether their differences carry a nontrivial conic-ideal module, and whether the H3 sheet sign
