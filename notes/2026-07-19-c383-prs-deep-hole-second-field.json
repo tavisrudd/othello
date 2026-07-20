@@ -1,0 +1,157 @@
+{
+  "apolar_colored_plane_profile_count": 4,
+  "apolar_colored_plane_profile_is_complete_orbit_invariant": true,
+  "apolar_factorization_plus_special_triad_is_complete_orbit_invariant": true,
+  "apolar_factorization_plus_special_triad_profile_count": 4,
+  "apolar_factorization_profile_count": 4,
+  "apolar_factorization_profile_is_complete_orbit_invariant": true,
+  "code": {
+    "dimension": 6,
+    "length": 12,
+    "name": "PRS_11(6)",
+    "redundancy": 6
+  },
+  "covering_radius_is_five": true,
+  "deep_hole_syndrome_points": 1584,
+  "direct_union_of_five_point_spans": 177156,
+  "direct_union_of_four_point_spans": 175572,
+  "field": {
+    "kind": "prime",
+    "q": 11
+  },
+  "normal_rational_curve_points": 12,
+  "orbits": [
+    {
+      "canonical_syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "colored_line_profile_sha256": "7e1b029e69f977c13a6ce828deb0e45a41ce23e8f80fcab22b368f92b3befb97",
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 55,
+        "1^1+1^3": 11,
+        "1^2+1^2": 11,
+        "1^2+2^1": 55,
+        "1^4": 1
+      },
+      "factorization_histogram_sha256": "4688a975639781190af8e0c92b40b5e80725f46fc3f7a8770e88c14591ef7931",
+      "has_collinear_triad_of_special_factor_type": true,
+      "orbit_size": 132,
+      "root_support_histogram_0_to_4": [
+        0,
+        56,
+        22,
+        55,
+        0
+      ]
+    },
+    {
+      "canonical_syndrome": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "colored_line_profile_sha256": "27a769f87900fde58b1785cf2724355aefd7c5144bd93f380565850d3949f55a",
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 10,
+        "1^1+1^1+2^1": 25,
+        "1^1+1^3": 11,
+        "1^1+3^1": 40,
+        "1^4": 2,
+        "2^1+2^1": 15,
+        "4^1": 30
+      },
+      "factorization_histogram_sha256": "fb0400d7de15a06467077c74b50af21626d208f0c09281aca2c0cab7bfdde17c",
+      "has_collinear_triad_of_special_factor_type": false,
+      "orbit_size": 132,
+      "root_support_histogram_0_to_4": [
+        45,
+        42,
+        36,
+        10,
+        0
+      ]
+    },
+    {
+      "canonical_syndrome": [
+        0,
+        1,
+        0,
+        2,
+        0,
+        4
+      ],
+      "colored_line_profile_sha256": "de4071bbb221101f722630d326d3ef894b1b9a898f1d50c92be711d89a7acda5",
+      "factorization_histogram": {
+        "1^1+1^1+2^1": 66,
+        "1^2+2^1": 12,
+        "2^1+2^1": 54,
+        "2^2": 1
+      },
+      "factorization_histogram_sha256": "69e8621a7d2a7d0848f118fa296dc5fb1eb47e59a0f9ca6daba45d08744d78a5",
+      "has_collinear_triad_of_special_factor_type": false,
+      "orbit_size": 660,
+      "root_support_histogram_0_to_4": [
+        55,
+        12,
+        66,
+        0,
+        0
+      ]
+    },
+    {
+      "canonical_syndrome": [
+        0,
+        1,
+        0,
+        2,
+        0,
+        10
+      ],
+      "colored_line_profile_sha256": "33998884e4062ed4fd85bc2689795689d348d9912371519eb30c0c56c4b13625",
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 7,
+        "1^1+1^1+2^1": 44,
+        "1^1+3^1": 30,
+        "1^2+1^2": 1,
+        "1^2+2^1": 3,
+        "2^1+2^1": 9,
+        "2^2": 1,
+        "4^1": 38
+      },
+      "factorization_histogram_sha256": "c83d0025ecfaf1835d702c76dcd9251540179e3dcc4516e75a72c9a77a43e0ff",
+      "has_collinear_triad_of_special_factor_type": false,
+      "orbit_size": 660,
+      "root_support_histogram_0_to_4": [
+        48,
+        33,
+        45,
+        7,
+        0
+      ]
+    }
+  ],
+  "pgl2_deep_orbit_count": 4,
+  "pgl2_deep_orbit_sizes": [
+    132,
+    132,
+    660,
+    660
+  ],
+  "pgl2_order": 1320,
+  "profile_evaluation_scope": "one canonical representative of every exact PGL2 orbit",
+  "projective_syndrome_space": {
+    "dimension": 5,
+    "point_count": 177156
+  },
+  "role": "required second-field transfer test for the q=7 C383 invariant",
+  "schema": "c383-prs11-apolar-profile-v1",
+  "special_factor_type": "1^2+2^1"
+}

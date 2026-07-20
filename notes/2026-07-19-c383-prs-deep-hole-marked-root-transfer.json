@@ -631,11 +631,72 @@
     "name": "PRS_7(2)",
     "redundancy": 6
   },
+  "covering_radius_is_five": true,
   "deep_hole_syndrome_points": 5376,
+  "direct_union_of_five_point_spans": 19608,
   "direct_union_of_four_point_spans": 14232,
   "field": {
     "kind": "prime",
     "q": 7
+  },
+  "minimal_factorization_refinement": {
+    "collision_class_splits": [
+      {
+        "factorization_histogram_sha256": "59ed0c7b84e61e2194699d14c39a06b614c67c4e72e9ad39a6f0905cfc277f4e",
+        "one_bit_refinements": [
+          {
+            "has_collinear_triad_of_special_factor_type": false,
+            "orbit_sizes": [
+              336
+            ]
+          },
+          {
+            "has_collinear_triad_of_special_factor_type": true,
+            "orbit_sizes": [
+              336
+            ]
+          }
+        ],
+        "unrefined_orbit_sizes": [
+          336,
+          336
+        ]
+      },
+      {
+        "factorization_histogram_sha256": "ff8d6697774177b0f44f26f3d0cb11efb0c37fdf6a7aafb0e0bb94e7fb17b4dc",
+        "one_bit_refinements": [
+          {
+            "has_collinear_triad_of_special_factor_type": false,
+            "orbit_sizes": [
+              336
+            ]
+          },
+          {
+            "has_collinear_triad_of_special_factor_type": true,
+            "orbit_sizes": [
+              336
+            ]
+          }
+        ],
+        "unrefined_orbit_sizes": [
+          336,
+          336
+        ]
+      }
+    ],
+    "independent_replays": [
+      "line-incidence enumeration",
+      "3-by-3 determinant enumeration"
+    ],
+    "independent_replays_agree_for_every_deep_syndrome": true,
+    "information_theoretic_lower_bound_bits": 1,
+    "is_complete_orbit_invariant": true,
+    "is_minimal_complete_refinement": true,
+    "question": "does its point set contain a projective collinear triad?",
+    "refined_profile_count": 20,
+    "refinement_bit_count": 1,
+    "special_factor_type": "1^2+2^1",
+    "unrefined_profile_count": 18
   },
   "normal_rational_curve_points": 8,
   "pgl2_deep_orbit_count": 20,
@@ -666,5 +727,5 @@
     "dimension": 5,
     "point_count": 19608
   },
-  "schema": "c383-prs7-apolar-profile-v3"
+  "schema": "c383-prs7-apolar-profile-v4"
 }
