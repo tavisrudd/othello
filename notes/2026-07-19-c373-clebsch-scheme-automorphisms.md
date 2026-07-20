@@ -313,6 +313,92 @@ Current ranking is therefore: arithmetic outer phase; bare-code C207 composition
 refinement; cospectral rigidity; C374 symplectic obstruction; symmetry taxonomy; and finally LDPC.
 The last three should not displace C374 without a positive cheap gate.
 
+### A Clebsch gateway program: theorem-shaped compositions
+
+The genuinely useful ``magic gateway'' is not another analogy.  It is the chain of reversible or
+functorial passages
+
+```text
+golden A5 representation <-> six-arc <-> [6,3,4] MDS code
+                                  |                 |
+                                  v                 v
+                         affine Cayley scheme   AME(6,11) stabilizer
+                                  |
+                                  v
+                         deep-hole conic + 10+10 torsor.
+```
+
+C373 makes the lower-left arrow unusually strong: the *unlabelled column graph* reconstructs its
+translation group, the six directions, and the chiral torsor.  Consequently a theorem proved in
+one language can potentially be transported, rather than merely compared, to every other
+language.  The following are the most concrete cross-field projects now visible.  They are
+candidate novelty directions, not priority claims.
+
+1. **One torsor, four shadows (flagship).**  Construct the golden-conjugate intertwiner over
+   `Z[tau]` and its descent cocycle, then prove that the same quadratic torsor controls (i) the two
+   three-dimensional `A5` representations, (ii) the two six-arc chiralities, (iii) the obstruction
+   to classical monomial equivalence of the corresponding codes, and (iv) the two syndrome-scheme
+   fibers.  Specialization should yield one split/inert/ramified theorem: two exchanged fibers at
+   split primes, a Frobenius-semilinear realization at inert primes, and the internal `S5` symmetry
+   at the ramified prime five.  Applying the same descent datum to the associated AME stabilizer
+   would turn this into a single bridge among algebraic number theory, modular representation
+   theory, finite geometry, coding, and quantum information.  This is stronger and cleaner than
+   proving four separate coincidences.
+
+2. **The deep-hole transform.**  C368/C373 present an exceptional operation: start from a non-GRS
+   MDS code, take the projectivized directions of its farthest syndromes, and obtain a conic—and
+   hence a GRS child.  Define this operation for an arc or MDS code whenever its deepest-syndrome
+   locus is again an arc.  The first decisive computation is to apply it to the child and test
+   whether the Clebsch example is involutive, periodic, or rigid.  Any such theorem would connect
+   covering radii and list decoding to moduli of arcs and derived algebraic-geometric codes.  The
+   generic MDS coset-count formulas do not themselves supply this parent-to-child construction.
+
+3. **A geometric local-Clifford fingerprint.**  A single `X`-syndrome scheme is presentation
+   dependent, so it is not yet an invariant of the AME state.  Instead take the multiset of
+   syndrome schemes obtained from all local Pauli Lagrangian frames, modulo the local symplectic
+   group.  Test whether this finite ``scheme profile'' separates the Clebsch AME presentation from
+   Reed--Solomon presentations.  Complete finite LC invariants are already known, so novelty would
+   lie in proving that this tiny rank-eight geometric profile is complete for the present family,
+   or in extracting a short obstruction that settles C374 without exhaustive Clifford search.
+
+4. **An eight-state Fourier--MacWilliams dynamics.**  C372's `P=Q` and equality of intersection
+   and Krein data say that the orbit algebra is closed both under syndrome convolution and under
+   Fourier-side multiplication.  Formulate this as an `A5`-equivariant MacWilliams theorem at the
+   orbit level.  On the stabilizer side, an invariant Pauli channel would then evolve exactly in
+   eight parameters, with the same tensor governing error addition and dual measurement
+   statistics.  A publishable quantum bridge needs an operational consequence—an exact decoder,
+   channel-composition law, fidelity formula, or noise-estimation reduction—not merely the phrase
+   ``Bose--Mesner algebra.''
+
+5. **Chiral list decoding as a two-sheeted local system.**  Each farthest coset has the generic 20
+   minimum leaders, but here their supports split intrinsically into `10+10`.  Build the two
+   sheetwise incidence algebras and determine their monodromy under the outer/Galois action.  The
+   attractive outcome is one double cover whose sheets are exchanged at split primes, fused or
+   internalized in characteristic five, and detected by a signed list enumerator.  This would make
+   chirality an error-decoding observable rather than decoration.  Stop if the two sheets have no
+   distinct exact design, transition, or robustness statistic.
+
+6. **A controlled ``can one hear the arc?'' laboratory.**  Every `(q,k)` arc-direction graph has
+   the same four eigenvalues, yet under the linear-representation rigidity hypotheses its graph
+   isomorphism type recovers the projective arc; at q=11 the graph even recovers the Clebsch
+   torsor.  Exhibit a bounded pair of inequivalent six-arcs and compare the exact information
+   thresholds: spectrum, coherent closure, `k`-WL refinement, and full graph isomorphism.  This
+   would connect inverse spectral graph theory, finite geometry, CI theory, and practical
+   canonicalization.  The theorem target is a proved separation, not a broad census.
+
+7. **Symmetry-reduced decoding and equivariant circuits.**  The 1,331-point linear-representation
+   incidence structure and rank-eight orbit algebra can collapse any `A5`-invariant message-passing
+   or Pauli-noise dynamics to finitely many states.  Separately, the chiral torsor may obstruct a
+   globally `A5`-equivariant factorization of the six-party perfect tensor.  These become worthwhile
+   only with, respectively, an exact decoding/threshold advantage or a representation-theoretic
+   circuit lower bound.  Existing finite-geometry LDPC and perfect-tensor machinery pre-empts the
+   bare constructions.
+
+The recommended sequence is therefore: prove the descent/intertwiner theorem; compute one step of
+the deep-hole transform; use the resulting arithmetic action to prune the C374 local-symplectic
+search; and only then promote the self-dual scheme to an operational quantum/noise theorem.  This
+sequence reuses the same exact data at every stage and has explicit stop conditions.
+
 ## Literature/read-depth boundary
 
 This amendment read zero external sources at full text.  It establishes one positive pre-emption
@@ -353,6 +439,12 @@ and maps adjacent interfaces; it does not depend on an absence-of-prior-work cla
 - Lim and Praeger, *On generalised Paley graphs and their automorphism groups*, arXiv
   `math/0605252v2`: **abstract/metadata only**, arXiv title/abstract/metadata; not cached.  Used only
   to separate the present arc-direction graphs from established affine/cyclotomic examples.
+- Van den Nest, Dehaene, and De Moor, *Finite set of invariants to characterize local Clifford
+  equivalence of stabilizer states*, arXiv [`quant-ph/0410165`](https://arxiv.org/abs/quant-ph/0410165):
+  **abstract/metadata only**, arXiv abstract and submission metadata; not cached.  Used to pre-empt
+  any claim that finiteness or completeness of LC invariants is itself new; the proposed
+  syndrome-scheme profile would need to earn novelty through geometric smallness and a
+  Clebsch-family completeness theorem.
 - Howard--Millson--Snowden--Vakil's labeled-icosahedron `10+10` dictionary: **secondary only** via
   the fully read local C371 audit and its question-to-source ledger; the external source was not
   reread in C373.  No priority beyond C371's recorded boundary is inferred.
