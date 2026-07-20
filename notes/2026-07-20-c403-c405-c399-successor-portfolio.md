@@ -4,12 +4,12 @@
 
 **Date:** 2026-07-20
 
-**Status:** queued behind C399 in descending expected-value order
+**Status:** C403 active; C404 closed at its literature gate; C405 is the next independent successor
 
 ## Significance ruling
 
-Conditional on novelty closure, C399 is a potential programme-founding result rather than another
-exceptional finite configuration.  Its theorem package has four conceptual layers:
+C399 survives the completed novelty audit as a uniform synthesis/coding theorem rather than a new
+finite-plane configuration.  Its theorem package has four conceptual layers:
 
 1. all irreducible rank-three Coxeter types `A3`, `B3`, and `H3` obey one complement-code law,
    with Coxeter number `h=4,6,10`,
@@ -22,10 +22,10 @@ exceptional finite configuration.  Its theorem package has four conceptual layer
 2. the exact Singleton defect is `q-h-1`, so `q=h+1` is precisely the MDS transition;
 3. at `q=h+1=5,7,11`, the complement is the full invariant conic and hence the
    `[q+1,3,q-1]_q` extended GRS code; and
-4. the full conic child forgets its Coxeter parent through exact normalizer-index fibres of sizes
-   `5,14,22`, while every irreducible rank-four continuation fails the necessary quadric point
-   count.  For rank-four `A4`, `h+1=6` is not a field order; the other rank-four types fail the
-   numerical identity at their actual candidate fields.
+4. the classical `5,14,22` parent-marker fibres acquire a common Coxeter/code interpretation,
+   while every irreducible rank-four continuation fails the necessary quadric point count.  For
+   rank-four `A4`, `h+1=6` is not a field order; the other rank-four types fail the numerical
+   identity at their actual candidate fields.
 
 C398 supplies the global six-arc envelope: among non-GRS six-arcs over every finite field, the
 `H3,q=11` member is the unique full-conic deepest-syndrome transform.  Thus C398 closes the
@@ -33,10 +33,12 @@ classification while C399 supplies the arithmetic mechanism and the exact inform
 maximally symmetric child.
 
 The classical layers receive no novelty wording by themselves: Coxeter exponents, characteristic-
-polynomial complement counts, conic automorphisms, the arc--MDS/GRS dictionary, and homogeneous-
-space orbit counts.  The potentially flagship content is the uniform distance law, exact
-conic--GRS transition, certified rank-four boundary, intrinsic parent-forgetting geometry, and the
-C398 uniqueness composition.
+polynomial complement counts, conic automorphisms, the arc--MDS/GRS dictionary, the individual
+q=5,7,11 configurations, the `5,14,22` counts, parent ambiguity, and much of the fibre relation
+geometry.  Edge and Dye own those finite-geometric layers.  The paper-heading content is the exact
+uniform nonmirror-line maximum and distance law, the common conic--GRS transition, the recovery and
+deepest-syndrome consequences, the rank-four scope boundary, and the C398 uniqueness composition.
+See `notes/2026-07-20-c399-literature-audit.md`.
 
 The three successors below test whether C399 begins a reusable theory.  None is manuscript weight
 unless it clears its stated theorem and literature gates.  Every paper-facing mathematical claim is
@@ -84,6 +86,18 @@ specialization.  Audit arrangement evaluation codes, coboundary/flag-Tutte polyn
 problems, and characteristic-polynomial finite-field methods before priority language.
 
 ## C404 — Coxeter parent fibres as coherent geometry
+
+### Result
+
+C404 closes with verdict `LITERATURE-PRE-EMPTED AT THE FIRST GATE`.  Edge already realizes the
+exact five canonical triangles, fourteen octahedral structures, and twenty-two Clebsch hexagons on
+the respective conics, with their `S4,S4,A5` stabilizers and substantial pairwise relation data.
+Dye independently sharpens the q=11 transitivity, adjacency graph, and intersection geometry.
+Thus the intended fibre counts, geometric-marker meaning, parent ambiguity, and much of the
+coherent relation skeleton are prior art.  A bare uniform coset repackaging would fail the task's
+own stop rule, and no distinct bounded intrinsic-recovery theorem remained after the audit.  No
+research census or new successor is authorized.  See
+`notes/2026-07-20-c399-literature-audit.md`.
 
 ### Target
 
@@ -138,10 +152,11 @@ variety-valued deep-hole conjecture from one pilot.
 
 ## Priority and manuscript boundary
 
-Run C403 first, then C404, then C405.  C403 has the greatest chance to turn C399 into reusable
-arrangement-code theory; C404 tests whether parent forgetting has geometry beyond group indices;
+Continue C403 first, then run C405.  C403 has the greatest chance to turn C399 into reusable
+arrangement-code theory.  C404 is closed by the Edge/Dye pre-emption and is not a live queue item.
 C405 is the high-upside falsifier for the larger variety-valued deep-hole programme.
 
 At most one successor enters the Clebsch grand paper, and only if it is mathematically inseparable
 from C399's proof.  Other positive outcomes are companions.  Negative outcomes remain exact
-boundaries and do not diminish the C398--C399 flagship.
+boundaries.  C404's negative materially narrows C399's novelty language but leaves its exact
+distance/phase theorem intact.

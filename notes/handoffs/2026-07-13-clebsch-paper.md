@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch` — see `AGENTS.md` § Lane routing.
 
-**Date**: 2026-07-15
+**Date**: 2026-07-20
 
 > **LIVE MAP ONLY. DO NOT APPEND SESSION LOGS, EXPLORATION, REVIEW TRANSCRIPTS, OR
 > SUPERSEDED PLANS HERE.** Put history in
@@ -13,9 +13,10 @@
 
 Finish the Clebsch-hexagon paper as a self-contained, honestly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **manuscript and local reproducibility closed; mixed-verification policy
-integration, exact shared-Lean pinning, the `arcs` publication-allocation edge, and immutable
-archival release remain**.
+Current assessment: **the existing 19-page manuscript and local reproducibility package are closed;
+the selected C399 portable theorem must now be integrated under its audited classical/new boundary,
+followed by mixed-verification policy integration, exact shared-Lean pinning, the `arcs`
+publication-allocation edge, and immutable archival release**.
 
 Authoritative manuscript and checkers:
 [`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/).
@@ -37,19 +38,27 @@ Paper registry: [`papers-index.md`](../../papers/papers-index.md), alias `clebsc
   quartic companion class begins the minimal-exact-degree ladder.
 - Small-arc classification: for `4 <= k <= 7`, a full conic extension locus occurs only
   for the `PG(2,5)` frame and the `PG(2,11)` Clebsch hexagon.
+- Selected portable upgrade: for `A3/B3/H3`, the reflection-arrangement complement code has exact
+  parameters `[(q-h/2)(q-h+1),3,(q-h/2-1)(q-h+1)]`, with nonmirror maximum `q-h+1`; at `q=h+1`
+  it becomes the full-conic extended GRS code.  Edge/Dye own the individual configurations,
+  `5,14,22` marker fibres, and substantial relation geometry.
 
 Detailed result/proof history is preserved in the archive and in reports C180–C187.
 
 ## Submission-critical work, in order
 
-1. Apply the repository mixed-verification policy: keep the existing conceptual/replay/Lean
+1. Integrate C399 as the rank-three explanation of the q=11 phase.  Lead with the exact
+   nonmirror-line/distance theorem; credit Edge and Dye for the exceptional conic geometry and
+   avoid novelty claims for `5,14,22`, parent ambiguity, the B3 `3+6` split, or conic--GRS.
+   Source of truth: [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md).
+2. Apply the repository mixed-verification policy: keep the existing conceptual/replay/Lean
    boundary explicit, print the adequacy appendix for the headline Lean statements, and add the
    final AI/provenance disclosure.
-2. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
+3. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
    sources into the paper repository.
-3. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
+4. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
    this paper's release pass.
-4. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
+5. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
    stable DOI; cite the artifact from the paper.
 
 ## Completed bounded paper upgrade
@@ -66,6 +75,17 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
 has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
+
+## Selected crowns import
+
+- **C399 selected 2026-07-20:** integrate the uniform rank-three complement-code theorem into this
+  paper rather than spawning a separate submission.  The literature audit found no exact
+  predecessor for the uniform nonmirror maximum/distance law or `q=h+1` Coxeter-number package,
+  but it found strong positive pre-emption for the surrounding geometry in Edge and Dye.  C403 may
+  later streamline the proof interface; C404 is closed as pre-empted; C405 remains a separate
+  companion gate.  The theorem report and source boundary are
+  [`2026-07-20-c399-coxeter-number-conic-phase.md`](../2026-07-20-c399-coxeter-number-conic-phase.md)
+  and [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md).
 
 ## Optional formal upgrade
 

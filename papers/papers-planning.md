@@ -74,12 +74,14 @@ adjusted only by the explicit ownership edges below.
 `clebsch-hexagon-code`
 - *What:* a symmetry-free rigidity TFAE and low-degree characterization for the `[6,3,4]₁₁`
   code, plus quantitative gaps, decoder/Brianchon reconstruction, intrinsic support chirality,
-  uniqueness of `q=11`, the all-field Clebsch formula, and the `4≤k≤7` boundary. Added
-  2026-07-13, post-review.
+  uniqueness of `q=11`, the all-field Clebsch formula, the `4≤k≤7` boundary, and the audited
+  rank-three `A3/B3/H3` reflection-arrangement complement-code phase. Added 2026-07-13,
+  post-review.
 - *Gate:* the manuscript and local mixed-verification package are closed. It ships after `arcs` by
   the publication-allocation ruling below, but is mathematically self-contained. Remaining:
   repository-policy adequacy/provenance integration, an exact shared-Lean commit/target pin, and
-  immutable artifact release (C182). C222 is an optional formal upgrade unless its claims are
+  immutable artifact release (C182), plus manuscript integration of C399 under the classical/new
+  boundary fixed by its literature audit. C222 is an optional formal upgrade unless its claims are
   labelled Lean-formalized.
 
 **5 · Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure** *(conditional)* —
@@ -197,6 +199,30 @@ inside a paper about something else and make `arcs` incoherent.
 which manuscript finishes first.** Once `arcs` is out, `clebsch` cites a published companion rather
 than a working paper; its proof remains unchanged. Lane map:
 `../notes/handoffs/2026-07-13-clebsch-paper.md`.
+
+### C399 integration ruling (2026-07-20)
+
+C399 fills the Clebsch paper's single portable-theorem slot; it does not create an eighth paper.
+Integrate it as the rank-three explanation of why the q=11 Clebsch blind spot is a conic, with the
+exact maximum nonmirror intersection and distance formula as the theorem-bearing content:
+
+```text
+n=(q-h/2)(q-h+1),
+d=(q-h/2-1)(q-h+1),
+q=h+1  =>  full-conic [q+1,3,q-1] code.
+```
+
+The ownership boundary is mandatory.  Edge and Dye already own the individual q=5,7,11 conic
+configurations, the `5,14,22` geometric markers, their stabilizers, parent ambiguity, and substantial
+relation geometry; Edge also contains the octahedral `3+6` split underlying the B3 root-length
+picture.  Coxeter complement length and conic--GRS are classical.  The manuscript claims the common
+Coxeter-number complement-code mechanism, exact line-defect/distance theorem, stable recovery, and
+deepest-syndrome consequences.  It uses neither “first” nor “Coxeter codes,” an occupied family
+name.  See `../notes/2026-07-20-c399-literature-audit.md`.
+
+C403 may simplify and generalize the proof through the weighted two-adjoint enumerator, but does not
+delay integrating the already proved C399 theorem.  C404 is closed as literature-pre-empted.  C405
+is a companion research gate and enters no manuscript absent an independently compelling theorem.
 
 ### Arcs vs Nofil — the same seam, second instance (ruled 2026-07-14)
 
@@ -400,6 +426,12 @@ deep-research pass reviewed by one specialist) clears three gates. Don't run the
 lemma; verify Clark–Mancini–Van Hook full text before any "first" language; HHS STS(7)/STS(9) are
 prior art.
 
+**4 · `clebsch-hexagon-code` / C399** — full audit closed.  Credit Edge/Dye for the exceptional
+conic configurations, `5,14,22` markers, stabilizers, parent ambiguity, and relation skeleton;
+credit arrangement and coding sources for complement counts and the conic--GRS dictionary.  Claim
+the exact uniform nonmirror maximum/distance and Coxeter-number phase without “first” language.
+Raja's inaccessible 2026 full text remains the principal access gap.
+
 **5 · Coding / LRC** — internal audit narrows candidate novelty to exact all-symbol `(ν,τ)`
 separation and complete bounded repair-hypergraph transfer. External specialist citation-chain
 review remains; ordinary repair tolerance, concatenation, trace duality, and TVZ asymptotics are
@@ -411,6 +443,7 @@ certificate. Specialist priority search follows proof.
 
 **7 · `continuation-graph-rigidity`** — N1 cleared; N2 blocked on the paywalled Metsch / Drake–Sané
 read (keep N2 out of the abstract).
+
 
 ## Planning-source docs (in ../notes/, not symlinked into a paper dir)
 

@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** exposition blueprint updated through C381 and the completed C374/C375 quantum gates;
-C382 is ready for its bounded marked-icosian comparison
+**Status:** exposition blueprint updated through C399 and its completed literature audit; C399 is
+the selected portable theorem, with Edge/Dye ownership of the classical conic markers explicit
 
 ## Governing idea
 
@@ -26,11 +26,14 @@ theorem or compatibility map.
 
 The broadest proved mathematical story is now:
 
-> The q=11 Clebsch hexagon is a non-Reed--Solomon MDS parent whose complete deepest-syndrome locus
+> The q=11 Clebsch hexagon is the `H3` member of a uniform `A3/B3/H3` Coxeter-number theorem for
+> reflection-arrangement complement codes.  Their exact nonmirror-line maximum is `q-h+1`, and at
+> `q=h+1` their complements become the full invariant conic and hence extended GRS codes.  The q=11
+> Clebsch hexagon is a non-Reed--Solomon MDS parent whose complete deepest-syndrome locus
 > is a Reed--Solomon conic.  Its affine syndrome classes form a primitive Fourier-self-dual
 > rank-eight `A5` association scheme, and the canonical coset graph of the bare code recovers the
-> hexagon and its unordered `10+10` chirality torsor.  The conic forgets 22 Clebsch parents, but a
-> canonical obstruction matching recovers each one; the 22 matchings form two
+> hexagon and its unordered `10+10` chirality torsor.  Classically, the conic supports 22 Clebsch
+> parents; a canonical obstruction matching recovers each one, and the 22 matchings form two
 > `PSL_2(11)`-invariant one-factorizations whose cross-incidence is the eleven-point biplane.
 
 Applying the standard MDS-to-AME construction adds the quantum reading:
@@ -85,14 +88,26 @@ algebra, quantum error structure, and reconstruction carried by that tensor pres
 
 Two further proved chords enrich rather than replace the spine.  C376 sends the six-point blow-up
 to the Clebsch cubic and identifies blowdown exchange with the same `S5/A5` quotient character as
-code chirality.  C379 decorates the conic by a perfect matching to reverse its 22-to-one loss; the
-binary outer passage exchanges two eleven-matching systems rather than two individual parents.
+code chirality.  Edge and Dye already own the 22-parent conic geometry and substantial relation
+data.  C379 identifies the matching datum in the present code/deep-hole model and its two
+eleven-matching systems; those classical/new boundaries must remain visible.
 
 ## A copy-ready Hexagon Spine Theorem
 
 Let `O=Z[tau]`, with `tau^2-tau-1=0`, and let `X_P` be the reduction modulo an odd prime ideal `P`
 of the six fivefold axes of the integral projectivized `H3` arrangement.  Let `C_P` be the kernel
 of the corresponding `3 x 6` parity-check matrix.
+
+Lead with the portable prelude: for every irreducible rank-three Coxeter type `T=A3,B3,H3`, the
+mirror-complement code has exact parameters
+
+```text
+[(q-h/2)(q-h+1), 3, (q-h/2-1)(q-h+1)]_q,
+```
+
+and at `q=h+1` becomes the full-conic `[q+1,3,q-1]` code.  Credit Edge and Dye for the individual
+small-field configurations and marker counts; the claim here is the common Coxeter-number
+line-defect and code mechanism.
 
 The paper should announce one theorem with six clauses.
 
@@ -384,16 +399,20 @@ last line.  A formal paper title should carry the mathematical content, for exam
 > six-party perfect tensor.  We prove that its affine syndrome orbits form a primitive
 > Fourier-self-dual rank-eight association scheme and, conversely, that the canonical coset graph
 > of the unmarked code recovers the six columns and their unordered chirality torsor.  The conic
-> initially forgets 22 possible parents, yet six elementary obstruction pairs restore the chosen
-> one; taken together, those matchings form two one-factorizations whose cross-incidence is an
+> supports the classical family of 22 Clebsch parents described by Edge and Dye; in our coding
+> model, six elementary obstruction pairs restore the chosen one.  Taken together, those matchings
+> form two one-factorizations whose cross-incidence is an
 > eleven-point biplane.  These are not numerical coincidences but different shadows of one integral
 > `A5`-symmetric object.
 
 ## Publication strength and broad interest
 
-C368 and C372--C379 now give a closed pure-mathematical spine with a substantial gateway layer:
+C368, C372--C379, and C399 now give a closed pure-mathematical spine with a substantial gateway
+layer:
 
 - an all-odd-prime arithmetic phase theorem;
+- a uniform `A3/B3/H3` reflection-arrangement complement-code theorem with exact distance and
+  Coxeter-number conic phase;
 - an exact non-GRS-parent-to-GRS-deep-hole-child transform;
 - a primitive Fourier-self-dual rank-eight `A5` fission with complete fusion data;
 - a full automorphism theorem and intrinsic recovery of affine addition, the hexagon, and its
@@ -408,13 +427,12 @@ algebraic combinatorics, representation theory, and quantum information.  C374 s
 quantum capstone, and C375 supplies its exact circuit companion; neither is a prerequisite for the
 paper's mathematical identity.
 
-The principal limitation is generality and source disposition: this remains one exceptional object
-over a special field, and the classical one-factorization/biplane literature still needs focused
-closure.
-For the broadest general-mathematics audience, one portable theorem would materially raise the
-ceiling.  The best candidates are a general reflection-orbit MDS phase mechanism, a classification
-of non-GRS-to-GRS deep-hole transforms, a reusable criterion for Fourier-self-dual orbit fissions,
-or the golden outer/Galois phase theorem.
+The portable theorem has landed, but the source disposition lowers its standalone novelty: Edge and
+Dye already own the exceptional conic markers, `5,14,22` counts, parent ambiguity, and substantial
+relation geometry.  C399 raises the paper's ceiling through the exact uniform line-defect/distance
+law and Coxeter-number code phase, not through discovery of those finite configurations.  C403 may
+still improve the proof interface through a reusable weighted-adjoint enumerator theorem; C405 is
+an independent companion gate rather than another section to accumulate automatically.
 
 If the rank-eight fission is eventually identified with a known scheme, the paper remains strong:
 the exact arithmetic transform, self-dual error algebra, closed reconstruction cycle, and C374's
@@ -425,11 +443,12 @@ proved separation from every six-point GRS `AME` class do not depend on standalo
 These are natural because each asks whether a proved map generalizes, inverts, classifies, or has
 operational force.  The bare-code reconstruction question is no longer open after amended C373.
 
-### 1. How exceptional is the integral hexagon?
+### 1. What determines reflection-complement code distance?
 
-Classify integral reflection-group orbits in `P^2` whose maximal minors remain units away from a
-finite bad-prime set and whose conic-incidence determinant has a controlled arithmetic support.
-Does the `H3/A5` construction belong to a general Coxeter-orbit source of uniformly MDS codes?
+C399 answers the first rank-three Coxeter question.  C403 now asks for the weakest intrinsic
+arrangement data that determines the nonmirror-line spectrum and complete complement-code
+enumerator.  Ordinary characteristic, Tutte, coboundary, and lattice-flag data are insufficient;
+the live candidate is the punctured weighted two-adjoint profile.
 
 ### 2. When do non-GRS errors become GRS?
 
@@ -514,7 +533,7 @@ Not yet safe without the stated gates:
 - nonlinear, coherent-layout, native-gate, experimental, or holographic circuit consequences
   beyond C375's exact linear Bell-triangle theorem;
 - that Fourier self-duality improves a physical noise or decoding quantity;
-- that the C379 one-factorization/biplane compatibility is new before focused source closure;
+- novelty for the `5,14,22` parent counts, parent ambiguity, or the Edge/Dye relation skeleton;
 - an intrinsic all-prime Frobenius action on the fission or factorization two-set;
 - any icosian/path-independence theorem before C382 clears its marked-embedding, representation,
   consequence, and literature gates; or

@@ -306,3 +306,7 @@ code interface.  No successor is allocated.
 - C372 continues to own the exact q=11 eigenmatrix and complete q=11 fusion lattice.
 - C400 adds the uniform rank/orbit/conic-role synthesis and its six-field replay, but does not take
   the portable flagship slot from C399.
+- C402 may consume the fine `C3/C5/free` orbit spectra only after proving they enter a
+  basis-independent party-permutation LU invariant of the AME tensor.  The rank-four orthogonal
+  fusion is a deliberately too-coarse control, and decoder-weight classes are not coherent; stop if
+  LU covariance collapses the fine labels or if the statistic depends on Pauli/decoder choices.

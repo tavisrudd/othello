@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Verdict:** `THEOREM; UNIFORM COXETER-NUMBER CONIC/GRS PHASE WITH ONE B3 ROOT-LENGTH DEFECT`
+**Verdict:** `THEOREM; LITERATURE-REFRAMED UNIFORM COXETER-NUMBER COMPLEMENT-CODE PHASE`
 
 ## The theorem
 
@@ -95,7 +95,10 @@ Then:
 
 This is the common theorem C399 was seeking: the field `q=h+1`, the GRS child, the length and
 distance, and the recovery threshold are all controlled by the Coxeter number.  The result is not a
-concatenation of three modular determinant tables.
+concatenation of three modular determinant tables.  The subsequent full literature audit sharpens
+the ownership boundary: the complement length and the three individual small-field conic
+configurations are classical.  The principal literature-surviving claim is the exact uniform
+nonmirror-line maximum `q-h+1`, hence the minimum-distance law and its common Coxeter-number phase.
 
 ## Proof
 
@@ -185,7 +188,7 @@ the detailed spectrum.
 
 ## Free upgrades and questions answered
 
-### The conic child forgets its Coxeter parent
+### Classical parent fibres and the Coxeter/code identification
 
 At `q=h+1`, the automorphism group of the full conic child jumps from the projective Coxeter group
 to the full conic stabilizer `PGL_2(q)`.  Exact permutation closure and normalizer computation give
@@ -200,8 +203,14 @@ Each Coxeter group is transitive on the `q+1` conic points and self-normalizing 
 group.  Thus the bare GRS child admits exactly `5,14,22` conjugate Coxeter decorations and cannot
 recover which one produced it.  Equality of two mirror decorations would recover the same
 reflection subgroup, so the coset counts are decoration counts, not merely subgroup bookkeeping.
-The H3 value is exactly C379's 22-parent Clebsch locus; C399 shows that it is the last member of a
-rank-three `5,14,22` symmetry-completion sequence.
+
+These counts, their geometric-marker interpretation, full-conic-group transitivity, and much of
+their pairwise geometry are classical: Edge gives the five canonical triangles, fourteen
+octahedral structures, and twenty-two Clebsch hexagons on the respective conics, while Dye sharpens
+the q=11 transitivity and incidence geometry.  C399 claims neither the counts nor parent ambiguity
+as new.  Its contribution here is to identify the classical markers uniformly as the Coxeter
+mirror decorations produced by the complement-code phase.  The H3 member is C379's 22-parent
+Clebsch locus.
 
 This gives a uniform answer to the most immediate inverse question:
 
@@ -233,20 +242,23 @@ isolated coincidences in every higher rank is not needed here and remains explic
 ### Other immediate boundaries
 
 - The conic child itself is classical GRS in all three cases.  The theorem's content is the exact
-  arithmetic transition and parent-forgetting geometry, not a new GRS or AME class.
-- The B3 deletion formula opens a nested-code/short-root filtration, but its unweighted code
-  parameters are already exhausted above.  No repair, PIR, or quantum advantage follows for free.
+  arithmetic/code transition and its identification with the classical parent ambiguity, not a
+  new GRS, AME, or parent-fibre geometry.
+- Edge's octahedral involution geometry already contains the underlying `3+6` split behind the B3
+  long/short-root decomposition.  The new-looking content is the exact arrangement-complement and
+  deepest-syndrome consequence, not the deletion configuration itself.  No repair, PIR, or quantum
+  advantage follows for free.
 - A decorated inverse theorem at the conic phase is possible only after supplying a Coxeter marking;
   the bare child cannot choose among the exact coset counts.  H3's matching decoration is genuinely
   extra structure, while no equally rich A3/B3 marking has yet passed a novelty gate.
 - Reducible rank-three systems have no single irreducible Coxeter number and do not belong to this
   theorem.  Adding them would produce product/pencil cases rather than strengthen the flagship.
 
-The bounded successor portfolio is now allocated as C403--C405.  C403 asks whether flag-coboundary
-data gives the distance law from one arrangement-code theorem; C404 tests a uniform intrinsic
-decoration and recovery geometry behind the `5,14,22` fibres; and C405 is the first rigorously
-field-bounded twisted-cubic deepest-syndrome pilot.  Their stop rules explicitly reject larger
-tables, bare coset reformulations, and unbounded rational-normal-curve escalation.  See
+The bounded successor portfolio is allocated as C403--C405.  C403 now owns the reusable weighted
+adjoint/enumerator abstraction of the distance law.  C404 closed at its literature gate because
+Edge and Dye already contain the intended fibre counts, marker meaning, and much of the relation
+skeleton.  C405 remains the first rigorously field-bounded twisted-cubic deepest-syndrome pilot.
+See
 `notes/2026-07-20-c403-c405-c399-successor-portfolio.md`.
 
 ## Evidence and replay
@@ -277,35 +289,26 @@ characteristic two, arbitrary complex reflection groups, or non-projective codes
 
 ## Focused source audit and claim boundary
 
-This report newly read **one external source in full** and **four external sources partially**.  The
-theorem is proved positively and does not depend on an absence claim.  The audit bounds attribution
-and asks whether a standard source already packages the Coxeter-number conic/code phase.
+The completed audit is
+`notes/2026-07-20-c399-literature-audit.md`.  It combines three independent slices, eight distinct
+full-text reads, targeted partial readings, exact-query screens, and pinned forward-citation checks
+in OpenAlex, Crossref, and Semantic Scholar.
 
-| source | read depth and access | boundary |
-|:---|:---|:---|
-| Denef--Loeser, *Character sums associated to finite Coxeter groups*, DOI `10.1090/S0002-9947-98-02025-X` | **partial**, published version, Introduction and Sections 1.1--1.5; shared-cache SHA-256 `9cd64541ae4052a871ac0b089957b88e1b4c11fc11009cb8e5b7d837e2fd2b6b` | Owns the finite-field Coxeter-arrangement triple `(V,G,Q)`, liftable good reduction, invariant quadratic form, and preserved degrees when the characteristic avoids the group order.  It studies character sums on the affine complement, not the projective complement code, the `q=h+1` conic equality, or the B3 deep-hole defect. |
-| Ehrenborg--Klivans--Reading, *Coxeter arrangements in three dimensions*, arXiv:1501.05991v1 | **full text**, shared-cache SHA-256 `8ebb11afdd402af15d2b340d05e0ae2010b1b602b728e3e47716911273562bb1` | Characterizes real three-dimensional Coxeter arrangements by congruent spherical regions and a rank-two reflection criterion.  It supplies no finite-field complement, conic, or code theorem. |
-| Monson--Schulte, *Modular Reduction in Abstract Polytopes*, arXiv:0805.1479 | **partial**, Sections 2--3.2; shared-cache SHA-256 `149eeb36d30adc3cba20813bc7dad33d7a42cc0f39de0f3f3b9e6ab501c019ee` | Owns modular reductions of crystallographic Coxeter groups and regular polytopes.  Its B-type cube family is compatible with the short/long-root split but does not supply the complement-code phase. |
-| Palezzato--Torielli, *Combinatorially equivalent hyperplane arrangements*, arXiv:1906.05463 | **partial**, Sections 4, 6, and 7; shared-cache SHA-256 `01973a6ff9a6a09303473f787afad0b15e153d6d24b6ce6b761d0d2fac9c0003` | Owns the good/lucky-prime and Smith-period machinery for preserving intersection lattices.  C399 credits that boundary and uses exact rank-three ledgers for its code theorem. |
-| Ball--Lavrauw, *Arcs in finite projective spaces*, arXiv:1908.10772v2 | **partial**, Sections 1--3; shared-cache SHA-256 `00d13c01fa869889c9ab9e4e76928235c5e7b441a815059fd0f3f177365e76a4` | Supplies the standard arc/frame, conic/normal-rational-curve, and MDS dictionaries.  None is claimed as new. |
+Its positive pre-emption is decisive.  Edge (1956) already gives the separate q=5,7,11 conic
+markers, the exact `5,14,22` counts, their stabilizers and substantial relation geometry, while
+Dye (1991) sharpens the q=11 transitivity and incidence theory.  Edge also contains the projective
+`3+6` octahedral split underlying the B3 short/long-root geometry.  Raja (2026) pre-empts the generic
+idea of evaluation codes on complements of arrangements, and Berg--Wakefield supplies an adjacent
+union-of-arrangements construction.  Coxeter exponent factorization, finite-field complement
+counts, modular reduction, and the conic--GRS dictionary remain classical infrastructure.
 
-The exact searches
-
-```text
-site:arxiv.org "Coxeter number" conic complement reflection arrangement finite field
-site:arxiv.org "reflection arrangement" conic finite field A3 B3 H3
-site:arxiv.org "Coxeter arrangement" evaluation code complement
-"reflection arrangement" "q+1" conic finite field Coxeter
-"Coxeter arrangement" finite field complement conic
-"A3" "B3" "H3" conic finite field reflection
-```
-
-were screened over returned titles/snippets on 2026-07-20.  They located general Coxeter-arrangement,
-finite-field, topology, and invariant-theory sources, including Denef--Loeser, but no record naming
-the displayed phase theorem.  This is bounded discovery coverage, not a priority proof.  MathSciNet,
-zbMATH forward coverage, Google Scholar, and citation graphs are **NOT COVERED**.  The defensible
-paper language is “a uniform Coxeter-number conic phase for these three integral rank-three models,”
-not “the first such theorem” or “to our knowledge.”
+No screened source states the exact uniform nonmirror-line maximum `q-h+1`, the resulting distance
+formula across `A3/B3/H3`, or the common Coxeter-number complement-code phase.  That negative is
+qualified: Raja's full text, Korchmaros's primary paper, Monson--Schulte Part I, MathSciNet, and
+Google Scholar remain access gaps.  The defensible language is therefore “the classical
+configurations admit a common Coxeter-number arrangement-complement code formulation,” followed by
+an exact statement of the line-defect/distance theorem.  Do not use “first,” claim the `5,14,22`
+geometry, or call the family “Coxeter codes,” which is occupied terminology.
 
 ## Lean exit
 
@@ -329,6 +332,6 @@ while the finite profile and gate theorems are axiom-free.
   than hiding it behind a false complete-deep-hole claim.
 - C403--C405 own the arrangement-code abstraction, intrinsic parent-fibre geometry, and bounded
   twisted-cubic pilot, in that order; none is silently claimed by this report.
-- This is a portable flagship candidate and therefore consumes the C398--C402 paper-promotion slot
-  only after the required Lean exit and manuscript-owner review.  It does not authorize accumulating
-  C400--C402 as additional unrelated generalizations.
+- This is the selected portable paper-heading theorem and consumes the C398--C402 promotion slot
+  under the classical/new boundary fixed by the completed audit.  It does not authorize
+  accumulating C400--C402 as additional unrelated generalizations.

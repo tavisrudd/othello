@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** C398--C400 complete; C403 is the next crowns action through the allocated C399
-successor portfolio; C399 occupies the portable flagship slot pending manuscript-owner review
+**Status:** C398--C400 complete; C399 survives its full audit as the selected portable synthesis;
+C403 is active on its strongest exact line-defect/enumerator seam
 
 ## Decision
 
@@ -70,8 +70,8 @@ higher codimension.
 
 ### Result
 
-C399 closes with verdict `THEOREM; UNIFORM COXETER-NUMBER CONIC/GRS PHASE WITH ONE B3
-ROOT-LENGTH DEFECT`.  For `A3/B3/H3`, with Coxeter number `h=4,6,10`, the projective
+C399 closes with verdict `THEOREM; LITERATURE-REFRAMED UNIFORM COXETER-NUMBER COMPLEMENT-CODE
+PHASE`.  For `A3/B3/H3`, with Coxeter number `h=4,6,10`, the projective
 reflection-arrangement complement code has uniform parameters
 
 ```text
@@ -81,11 +81,19 @@ reflection-arrangement complement code has uniform parameters
 At exactly `q=h+1=5,7,11` it is the full invariant conic and hence the
 `[q+1,3,q-1]` extended GRS code; above `q>3h/2-1` it intrinsically recovers the arrangement.
 B3 is the canonical short-root defect: its long-root frame has the A3 complete deep-hole locus,
-and its short-root triangle deletes `3(q-3)` points.  At the conic phase full `PGL_2(q)` symmetry
-forgets among exactly `5,14,22` conjugate Coxeter decorations.  Every irreducible rank-four
-candidate fails the first quadric point-count gate.  The exact certificate and dedicated/umbrella
-Lean gates are green; the focused audit makes no priority claim.  See
-`notes/2026-07-20-c399-coxeter-number-conic-phase.md`.
+and its short-root triangle deletes `3(q-3)` points.  Every irreducible rank-four candidate fails
+the first quadric point-count gate.  The exact certificate and dedicated/umbrella Lean gates are
+green.
+
+The completed literature audit materially narrows ownership.  Edge and Dye already own the
+individual q=5,7,11 conic configurations, the `5,14,22` geometric-marker fibres and much of their
+relation geometry; Edge also contains the projective `3+6` split underlying the B3 deletion.
+Complement length and conic--GRS are classical, and Raja pre-empts generic complement-code
+language.  No exact predecessor was located for the uniform nonmirror maximum `q-h+1`, hence the
+distance formula and common Coxeter-number phase.  C399 is therefore the paper-heading portable
+synthesis, not a new exceptional-configuration claim.  See
+`notes/2026-07-20-c399-coxeter-number-conic-phase.md` and
+`notes/2026-07-20-c399-literature-audit.md`.
 
 ### Target theorem
 
@@ -197,18 +205,29 @@ external GRS classes.  These are first falsifiers, not a uniform LU separator or
 copy of C402's fixed integral `H3` presentation.
 Infinite AME/LU families and the MDS--AME dictionary are prior art.
 
+C400 supplies an exact orbit-sensitive spectral substrate, but not yet an LU invariant.  Its
+rank-four orthogonal fusion is too coarse, and decoder-weight classes are not coherent.  The first
+C402 gate is therefore categorical: construct a basis-independent spectral or holonomy operator of
+the AME tensor whose party-permutation LU covariance is proved and whose spectrum retains the finer
+`C3/C5/free` orbit labels.  A Pauli-, decoder-, or chosen-syndrome-basis statistic does not pass.
+
 ### First pilot and stop
 
-Compute symbolic or exact holonomy/marginal data for the first two non-GRS good reductions beyond
-q=11 and compare them with the full GRS moduli, beginning with `q=19` and the next arithmetic phase
-representative.  Stop on the first invariant collision, any required continuous-unitary search, or
-an unbounded GRS-moduli census.  The resulting sharp failure of a proposed invariant is a valid
-bounded negative and closes the task; it does not justify inventing successively larger invariants.
+First prove LU covariance of the fine-orbit spectral/holonomy construction above.  Then run the
+first same-field `H3` versus full-GRS-moduli falsifier at `q=19`, retaining the `C3/C5/free` data and
+using the rank-four orthogonal quotient as a deliberate negative control.  Continue to one next
+arithmetic phase only after separation survives.  Stop if LU covariance forces collapse to the
+rank-four fusion, if the statistic depends on Pauli/decoder labels, on the first invariant
+collision, any required continuous-unitary search, or an unbounded GRS-moduli census.  The resulting
+sharp failure is a valid bounded negative and closes the task; it does not justify inventing
+successively larger invariants.
 
 ## Paper-promotion rule
 
-Promote at most the first theorem that lands as a portable, literature-surviving result of genuine
-scope.  Later tasks may still close their bounded pilots, but the manuscript should not accumulate
-five unrelated generalizations.  The preferred paper spine remains the exact q=11 reversible
-hexagon; a portable theorem raises the ceiling only when it explains why that exceptional object is
-forced or belongs to a coherent arithmetic family.
+C399 fills the single promotion slot, subject to manuscript-owner integration and the exact
+classical/new wording fixed by its audit.  Later tasks may still close their bounded pilots, but the
+manuscript should not accumulate unrelated generalizations.  C403 may replace C399's typewise proof
+interface if its weighted-adjoint theorem completes source closure; C404 is literature-pre-empted;
+C405 and later positives remain companions unless they are mathematically inseparable from C399.
+The preferred paper spine remains the exact q=11 reversible hexagon, with C399 explaining its place
+in the rank-three Coxeter-number family.
