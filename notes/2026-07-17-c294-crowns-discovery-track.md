@@ -369,3 +369,8 @@ multiple orbits.
 the eightfold fibre, the Hermitian matrix, and the 28-point quartic; the abstract group
 identifications and 36-class transitivity remain open.
 **Status:** open lead; unallocated
+
+**2026-07-20 status update:** graduated -> C435,
+`notes/2026-07-20-c435-hermitian-determinantal-tower.md`. The exact tower and transitivity are
+positive; the task also proves equivariant parent-decoration recovery and the semilinear
+`7+7 -> 14` Frobenius fusion now exported to C438.

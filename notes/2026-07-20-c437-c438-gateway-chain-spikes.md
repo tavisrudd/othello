@@ -54,7 +54,9 @@ informative degree?
 
 ## C438 — q=9/q=11 decorated-transform seam spike
 
-**Dependency:** C435.  The frozen C379 and C405 bundles are read-only mathematical inputs.
+**Dependency:** C435 complete. Consume
+`notes/2026-07-20-c435-hermitian-determinantal-tower.md` and its exact certificate; the frozen C379
+and C405 bundles remain read-only mathematical inputs.
 
 **Question.**  Are the q=11 conic matching-decorated deep-hole transform and the q=9 Hermitian
 Cayley-octad construction two instances of one category-correct decorated incidence/discriminant
@@ -62,8 +64,10 @@ transform, rather than two exceptional count coincidences?
 
 ### Bounded moves
 
-1. Consume C435's canonical q=9 group/transitivity dictionary and package the eight parent
-   decorations and 28 singular quadrics/bitangents as one marked incidence object.
+1. Consume C435's canonical q=9 group/transitivity dictionary. The eight parent decorations are
+   already equivariantly recovered by the eight octad points, and the projective `7+7` suborbits
+   are already proved to fuse to `14` under Frobenius; do not re-enumerate either fact. Package
+   these with the 28 singular quadrics/bitangents as one marked incidence object.
 2. Package C379's 22 matching-decorated parents, 66 child secants, obstruction pairs, and root
    intersections in the same source/child/decoration/obstruction schema.
 3. Test only three shared invariants: stabilizer-equivariant recovery of a parent from its
