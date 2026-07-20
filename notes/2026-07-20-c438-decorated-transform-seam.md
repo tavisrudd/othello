@@ -142,3 +142,13 @@ the tracked C435 certificate: `parent_decoration_recovery` has orbit sizes `8/8`
 `determinantal_class_action` and `semilinear_fusion` carry the `1,7,7,21` and `1,14,21` data.
 No new script or certificate is needed, and no statement is made for arbitrary Cayley octads,
 arbitrary deep-hole transforms, or chosen local-field lifts of the Hermitian quartic.
+
+## Postmortem continuation
+
+A subsequent bounded attack-vector search preserves this obstruction but finds a better category:
+marked Cayley-octad points are exactly the classical 288 Aronhold systems, while q=11 matchings are
+maximal isotropic kernels in the 2-torsion of the genus-five hyperelliptic curve branched at the
+twelve conic points.  This suggests a theta/Richelot bridge rather than the failed direct fibre
+square.  It also certifies that no q=9 parent stabilizer fixes one of the 63 Steiner complexes, so
+the most tempting direct six-pair shortcut is unavailable.  See
+`notes/2026-07-20-c438-postmortem-bridge-attack-vectors.md` and its exact evidence bundle.
