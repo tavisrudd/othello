@@ -4,8 +4,7 @@
 
 **Date:** 2026-07-19
 
-**Status:** updated through C379; C376, C378, and C379 have positive exact theorems; generic C377
-descent stopped as prior art; C380 remains queued
+**Status:** updated through C380; C381 weak-`E8` gate queued, C382 icosian comparison hard-gated
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -28,7 +27,11 @@ certified surface gateway C376
               |
               +---- C379 extension / decorated child - complete
               |
-              +---- C380 stable Lean seams
+              +---- C380 stable Lean seams -------- complete
+              |
+              +---- C381 weak-E8 classification
+                            |
+                            +---- C382 icosian comparison [green gate only]
                               |
                  optional quantum consequence
                               |
@@ -261,7 +264,7 @@ Lean should protect the logical seams of the gateway, not attempt to recreate th
 computational and algebro-geometric stack at once.  Its first job is to make category mistakes,
 hidden markings, and misuse of standard dictionaries impossible to state.
 
-C380 owns the first bounded formalization slice.
+C380 has completed the first bounded formalization slice described below.
 
 ### F0. Freeze typed interfaces
 
@@ -384,19 +387,19 @@ fusion, whose fixed algebra retains 12 of the rank-16 dimensions.
 
 ### 6. Scope and famous-object tourism
 
-The gateway atlas is a reservoir of later questions, not a work queue.  Genus-two theta data,
-`E8`, icosians, clusters, Hilbert modular surfaces, type-II matrices, Mathieu groups, and holography
-remain unallocated until a green transported invariant singles one out.
+The gateway atlas is a reservoir of later questions, not a work queue.  C381 is the sole bounded
+exceptional-lattice probe now allocated: it classifies the weak-degree-one effective-root data
+forced by C379.  C382 is allocated but cannot start unless C381 produces a canonical marked `E8`
+invariant.  Generic icosian/600-cell exposition, genus-two theta data, clusters, Hilbert modular
+surfaces, type-II matrices, Mathieu groups, and holography remain unallocated.
 
 ### 7. Formalization theatre
 
-Lean can prove only the stated model.  It does not validate the correspondence between an external
-JSON certificate and the intended cubic surface unless that bridge is itself checked.  C380 must
-therefore expose every computational boundary, avoid importing the desired C376 conclusion as an
-axiom, and keep generated tables behind small verified evaluators.  A green build with the wrong
-equivalence relation is a red mathematical result.  Conversely, absence of a cubic-surface library
-is not evidence against C376; the bounded formal target is the stable dictionary and quotient-
-character logic, followed by exact q=11 leaves where feasible.
+Lean can prove only the stated model.  C380 therefore exposes every computational boundary, keeps
+generated tables behind checked leaves, and formalizes only the stable dictionary,
+quotient-character logic, matching sheets, and C378 finite interfaces.  It deliberately excludes
+cubic-surface, general biplane, and `E8` foundations.  C381/C382 must first stabilize their
+mathematical categories; no Lean expansion is implied by their allocation.
 
 ## Hard stop rules
 
@@ -406,6 +409,8 @@ character logic, followed by exact q=11 leaves where feasible.
 - Never put a famous-object connection in the introduction before it produces a theorem.
 - Never let a negative quantum gate delay the pure-mathematical manuscript.
 - Never allocate a downstream destination solely because an upstream computation is pretty.
+- Never treat the universal Picard `E8` of eight blow-ups as C381's transported invariant, or
+  start C382 without a canonical effective-root datum and named `A5` comparison category.
 - Promote at most one gateway mechanism into the current paper.
 
 ## Execution order
@@ -414,13 +419,14 @@ character logic, followed by exact q=11 leaves where feasible.
    inputs; preserve their different quotient maps.
 2. Treat the bounded `11+11` one-factorization/biplane certificate extension as complete; run its
    focused source audit.  Stop there if the compatibility is already classical.
-3. Start C380 with stable generic bridges and bounded C376/C378/C379 leaves; consume the frozen
-   factorization layer only through a small finite API.
-4. Keep the Frobenius and integral-moduli companions unallocated.  If step 2 is productive, run one
+3. Treat C380's formal foundation gate as complete.
+4. Run C381's frozen `22*66` weak-`E8` extension/root classifier independently of the C379 source
+   audit.  Promote C382 only on C381's exact canonical-invariant green gate.
+5. Keep the Frobenius and integral-moduli companions unallocated.  If step 2 is productive, run one
    framed fixed-locus elimination before any stack, normalization package, or durable moduli build.
-5. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
-6. Perform claim-specific full-text and forward-citation closure.
-7. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
+6. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
+7. Perform claim-specific full-text and forward-citation closure.
+8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
 
 The decisive question at every promotion meeting is:
 

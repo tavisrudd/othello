@@ -1,7 +1,7 @@
 # C373 companion — the Clebsch gateway program
 
 Date: 2026-07-19  
-Status: research-program reservoir updated through C379; certified bridges separated from proposed doors
+Status: research-program router updated through C380; C381 queued and C382 hard-gated
 Parent: `2026-07-19-c373-clebsch-scheme-automorphisms.md`
 
 ## Executive thesis
@@ -52,6 +52,9 @@ The first gateway wave has now resolved four major questions.
   two.  Six five-parent conics give a perfect matching that recovers the parent.  The 22 matchings
   split into two `PSL_2(11)`-invariant one-factorizations of `K_12`, exchanged by the golden outer
   map; their cross-incidence is the eleven-point biplane.
+- **C380:** the stable deep-syndrome/arc-extension, quotient-character, finite matching-sheet, and
+  C378 fusion interfaces are formalized behind bounded leaves and a clean import-only gate; no
+  general surface or `E8` infrastructure was introduced.
 
 The corrected information-loss chain is therefore
 
@@ -501,6 +504,12 @@ This could turn covering-radius data into a finite-field rule for navigating the
 Dynkin tower.  Conversely, exceptional-curve incidence might classify which code extensions
 preserve the chiral torsor.
 
+For the Clebsch q=11 family, C379 blocks the smooth last two rungs in a precise way.  Every
+seven-point extension contains a six-point conic and is only weak degree two.  Any eight-point set
+containing it inherits that forbidden six-subset, so no extension through the C379 child can be a
+smooth degree-one del Pezzo.  The surviving `E8` question concerns the effective-root subsystem of
+a weak eight-point blow-up, not the existence of its abstract Picard `E8` lattice.
+
 ### 3. Gosset polytopes and minuscule representations — direct after the surface dictionary
 
 The 27 lines are the 27 vertices of the `2_21` Gosset/Schlaefli polytope and the weights of the
@@ -511,25 +520,45 @@ An explicit map from code leader supports or syndrome relations to faces of thes
 convert Hamming geometry into exceptional weight geometry.  The gate is strict: counts and group
 names do not suffice; adjacency, intersection, and the outer involution must be preserved.
 
-### 4. The 600-cell, icosians, and `E8` — a potentially spectacular closed loop
+### 4. The 600-cell, icosians, and `E8` — corrected two-stage route C381--C382
 
-There are two independent routes from the magic hexagon toward `E8`.
+There are two independent routes from the magic hexagon toward `E8`, but C379 changes the first
+endpoint.
 
 ```text
-six-arc -> extend to eight points -> degree-one del Pezzo -> E8
+six-arc -> two child points -> weak eight-point blow-up -> marked effective subsystem in E8
 
 golden A5 -> binary icosahedral group -> 600-cell / icosians -> E8 lattice.
 ```
 
-The second is classical: the icosian ring over the golden field constructs the `E8` lattice and
-links the icosahedron, quaternions, `H4`, and the 600-cell.  The first is the del Pezzo/MDS extension
-ladder.  Determine whether a canonical pair of extensions of the Clebsch six-arc makes the two
-routes land on the same `A5`-marked `E8` lattice or root subsystem.
+The second route is classical: the icosian ring over the golden field constructs the `E8` lattice
+and links the icosahedron, quaternions, `H4`, and the 600-cell.  The first route is now explicitly
+stage-gated.
 
-If yes, this would be a true path-independence theorem connecting finite-field MDS extension,
-birational geometry, noncrystallographic Coxeter symmetry, quaternions, and the exceptional
-lattice.  If the q=11 arc has no suitable eight-point extension, the obstruction itself may have
-an `E8/H4` interpretation.
+**C381** owns the bounded finite problem.  Across all 22 C379 parents and all 66 unordered pairs of
+conic points, it must classify eight-arcs, code extensions, the complete effective-root subsystem,
+the weak-degree-one criterion, and the action of the obstruction matching and two
+one-factorization sheets.  The inherited six-conic obstruction proves in advance that there is no
+smooth degree-one member.  C381 unlocks no famous-object comparison unless it produces a
+presentation-independent marked root subsystem, orbit, flag, or embedding class.
+
+**C382** is allocated but hard-gated on that exact invariant.  It first compares the two `A5`
+actions by characters, root orbits, and `W(E8)` embedding class.  Only if those match in the same
+category may it construct an integral isometry to the icosian model and test path independence and
+golden-involution compatibility.
+
+```text
+go C381
+    |
+    +-- green canonical marked-E8 invariant --> promote and go C382
+    |
+    +-- yellow/red ---------------------------> keep C382 gated; return to crowns
+```
+
+This two-stage route is fully specified in
+`notes/2026-07-19-c381-clebsch-e8-extension-obstruction.md` and
+`notes/2026-07-19-c382-clebsch-icosian-e8-path-independence.md`.  An abstract `E8` lattice, equal
+root counts, or an arbitrary comparison isometry cannot clear the gate.
 
 ### 5. Segre cubic, Igusa quartic, Kummer surfaces, and `M_0,6` — canonical six-label network
 
@@ -676,14 +705,16 @@ object—not the fame of the destinations—is the proposed novelty.
 | 11 | code-lattice comparison | low/medium | speculative | lattices are plainly isometric or theta data generic |
 | 12 | tropical and secret-sharing lifts | high | speculative | no concrete map or operational statistic |
 
-The table records the original triage; ranks 1--3 have been resolved by C376--C379.  The current
+The table records the original triage; ranks 1--3 and the foundation track have been resolved by
+C376--C380.  The current
 immediate sequence is:
 
 1. complete the focused source audit for the one-factorization/biplane compatibility;
-2. run C380 on the frozen typed seams and bounded finite leaves;
-3. let C374/C375 consume the certified symmetry restrictions;
-4. if the biplane audit leaves a novel functorial edge, run one framed integral-moduli elimination;
-5. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional
+2. run C381's bounded weak-`E8` obstruction/root classification independently;
+3. promote C382 only if C381 records its canonical marked-lattice green gate;
+4. let C374/C375 consume the certified symmetry restrictions;
+5. if the biplane audit leaves a novel functorial edge, run one framed integral-moduli elimination;
+6. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional
    canonical incidence theorem selects them.
 
 ## Claim and literature boundary

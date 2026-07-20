@@ -157,11 +157,16 @@ C379 closes the original smooth-surface, undecorated-iteration, and binary-fibre
 planned off-ramps, but the obstruction matching supplies a positive replacement: a reversible
 decorated transform on the complete 22-parent `A5_6` locus, together with a uniform weak del Pezzo
 `A1` interpretation.  The 22 matchings further form two `PSL_2(11)`-invariant
-one-factorizations exchanged by `J`, with biplane cross-incidence.  C380 may formalize the stable
-presentation-independent statements that uncovered projective points are one-column MDS
-extensions and that the full-conic second transform is empty.  The matching-decorated inversion
-and its two-one-factorization organization should enter C380 only if the finite checker interface
-remains bounded.  C380 must distinguish the unordered two-sheet system from its eleven parent
-matchings and should not formalize a two-parent quotient or tensor-extension statement.  See
+one-factorizations exchanged by `J`, with biplane cross-incidence.  C380 has formalized the stable
+presentation-independent arc/MDS bridge, empty second transform, bounded matching-decorated
+recovery, and two eleven-parent sheets without introducing a false two-parent quotient or tensor
+extension.  See
 `notes/2026-07-19-c379-one-factorization-biplane-companion.md` for the exposition, moduli hand-back,
 and focused literature gate.
+
+C381 is the automatic bounded successor for the exceptional-lattice route.  It uses the immediate
+inheritance consequence that every eight-point extension through a C379 seven-set still contains
+the forbidden six-point conic, so no smooth degree-one del Pezzo can occur.  Its task is instead to
+classify the weak-degree-one effective `E8` root subsystem across all 22 parents and 66 child-point
+pairs.  C382's icosian comparison remains hard-gated on a canonical marked-root invariant from
+C381; neither task is part of C380's Lean scope.

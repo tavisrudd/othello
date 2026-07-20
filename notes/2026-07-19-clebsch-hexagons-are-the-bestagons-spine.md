@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** exposition blueprint updated through C379, including the C379 pre-freeze
-one-factorization/biplane extension
+**Status:** exposition blueprint updated through C380; C381 queued and C382 hard-gated as future
+`E8` successors
 
 ## Governing idea
 
@@ -429,7 +429,10 @@ Does the `H3/A5` construction belong to a general Coxeter-orbit source of unifor
 Characterize rank-three non-GRS MDS codes whose complete maximum-weight projective syndrome locus
 is itself an arc, conic, or rational-normal-curve projective system.  Determine when the deep-hole
 transform is MDS or GRS, when it terminates, and when a canonical obstruction decoration recovers
-its parent.  Classify the weak-del-Pezzo root types arising from one-point extensions.
+its parent.  Classify the weak-del-Pezzo root types arising from one-point extensions.  C381 owns
+the bounded two-point continuation: the inherited six-conic obstruction rules out a smooth
+degree-one surface, so it classifies the effective subsystem of the abstract `E8` Picard lattice.
+C382 compares that marked subsystem with the icosian `E8` only if C381's canonicality gate passes.
 
 ### 3. When does a deep-hole child carry a factorization double cover?
 
@@ -498,7 +501,9 @@ Not yet safe without the stated gates:
 - that the tensor has a new minimal or equivariant circuit;
 - that Fourier self-duality improves a physical noise or decoding quantity;
 - that the C379 one-factorization/biplane compatibility is new before focused source closure;
-- an intrinsic all-prime Frobenius action on the fission or factorization two-set; or
+- an intrinsic all-prime Frobenius action on the fission or factorization two-set;
+- any icosian/path-independence theorem before C381 supplies a canonical marked `E8` invariant and
+  C382 clears its representation and literature gates; or
 - any Clebsch holographic-code claim.
 
 ## Copy-ready closing cadence
@@ -524,6 +529,8 @@ In this precise and unusually literal sense, hexagons are the bestagons.
 - `notes/2026-07-19-c378-clebsch-common-duality.md`
 - `notes/2026-07-19-c379-clebsch-deep-hole-extension.md`
 - `notes/2026-07-19-c379-one-factorization-biplane-companion.md`
+- `notes/2026-07-19-c381-clebsch-e8-extension-obstruction.md`
+- `notes/2026-07-19-c382-clebsch-icosian-e8-path-independence.md`
 - `notes/2026-07-18-c339-clebsch-deep-hole-transform.md`
 - `notes/2026-07-18-c341-a5-subgroup-decoder.md`
 - `notes/2026-07-18-c346-h3-clebsch-good-reduction.md`
