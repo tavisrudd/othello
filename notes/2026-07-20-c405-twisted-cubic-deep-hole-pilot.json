@@ -1,0 +1,565 @@
+{
+  "field_bound": 35,
+  "fields": [
+    5,
+    7,
+    8,
+    9,
+    11,
+    13,
+    16,
+    17,
+    19,
+    23,
+    25,
+    27,
+    29,
+    31,
+    32
+  ],
+  "literature_control": {
+    "locus_is_linearly_general": false,
+    "locus_on_twisted_cubic": false,
+    "locus_size": 10,
+    "parent_is_arc": true,
+    "parent_is_grs": false,
+    "parent_rows": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        3,
+        4,
+        5,
+        6,
+        7,
+        0,
+        0
+      ],
+      [
+        5,
+        9,
+        4,
+        7,
+        2,
+        1,
+        0
+      ],
+      [
+        7,
+        10,
+        5,
+        5,
+        1,
+        4,
+        1
+      ]
+    ],
+    "q": 11,
+    "source": "Li--Lu--Ling--Lam arXiv:2605.12133v1 Example 2"
+  },
+  "parent_length": 7,
+  "rows": [
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 0,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 0,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 0,
+      "q": 5,
+      "six_set_orbits": 1,
+      "six_set_presentations": 1,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 2,
+      "direct_replays": 1,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 2,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 2,
+      "q": 7,
+      "six_set_orbits": 1,
+      "six_set_presentations": 10,
+      "small_locus_presentations": 2,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 3,
+      "direct_replays": 1,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 10,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 3,
+      "q": 8,
+      "six_set_orbits": 1,
+      "six_set_presentations": 20,
+      "small_locus_presentations": 3,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 16,
+      "direct_replays": 2,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 64,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 1,
+      "near_misses": [
+        {
+          "base_six_plus_each_on_twisted_cubic": [
+            false,
+            false
+          ],
+          "free_upgrade": {
+            "base_locus_equals_locus": true,
+            "base_locus_size": 8,
+            "classification": "complete Cayley octad with Hermitian discriminant quartic",
+            "discriminant_f9_points": 28,
+            "discriminant_frobenius_matrix": [
+              [
+                0,
+                6,
+                3
+              ],
+              [
+                3,
+                0,
+                5
+              ],
+              [
+                6,
+                8,
+                0
+              ]
+            ],
+            "discriminant_is_hermitian_form": true,
+            "discriminant_matrix_determinant": 2,
+            "discriminant_quartic_terms": [
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                8
+              ],
+              [
+                [
+                  0,
+                  3,
+                  1
+                ],
+                5
+              ],
+              [
+                [
+                  1,
+                  0,
+                  3
+                ],
+                6
+              ],
+              [
+                [
+                  1,
+                  3,
+                  0
+                ],
+                3
+              ],
+              [
+                [
+                  3,
+                  0,
+                  1
+                ],
+                3
+              ],
+              [
+                [
+                  3,
+                  1,
+                  0
+                ],
+                6
+              ]
+            ],
+            "pair_semilinear_stabilizer": 42,
+            "parent_decoration_orbit_size": 8,
+            "projective_stabilizer": 168,
+            "quadratic_evaluation_rank": 7,
+            "quadric_net_basis": [
+              [
+                8,
+                4,
+                7,
+                0,
+                2,
+                7,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                6,
+                8,
+                0,
+                7,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                0,
+                2,
+                3,
+                0,
+                8,
+                1,
+                0,
+                0,
+                1
+              ]
+            ],
+            "quadric_net_rank_distribution": {
+              "3": 28,
+              "4": 63
+            },
+            "second_deep_locus_size": 0,
+            "semilinear_stabilizer": 336,
+            "weighted_self_duality_kernel": [
+              [
+                2,
+                6,
+                1,
+                3,
+                1,
+                2,
+                2,
+                1
+              ]
+            ],
+            "weighted_self_duality_vector_all_squares": true
+          },
+          "locus": [
+            [
+              1,
+              3,
+              6,
+              5
+            ],
+            [
+              1,
+              3,
+              7,
+              4
+            ],
+            [
+              1,
+              5,
+              7,
+              3
+            ],
+            [
+              1,
+              6,
+              4,
+              3
+            ],
+            [
+              1,
+              6,
+              5,
+              4
+            ],
+            [
+              1,
+              7,
+              4,
+              5
+            ],
+            [
+              1,
+              7,
+              6,
+              2
+            ],
+            [
+              1,
+              7,
+              6,
+              5
+            ]
+          ],
+          "locus_size": 8,
+          "parent": [
+            [
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              3,
+              6
+            ],
+            [
+              1,
+              4,
+              2,
+              7
+            ]
+          ],
+          "semilinear_stabilizer": 42
+        }
+      ],
+      "non_grs_presentations": 8,
+      "nonempty_presentations": 64,
+      "q": 9,
+      "six_set_orbits": 2,
+      "six_set_presentations": 35,
+      "small_locus_presentations": 64,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 4,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 490,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 490,
+      "q": 11,
+      "six_set_orbits": 4,
+      "six_set_presentations": 84,
+      "small_locus_presentations": 481,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 5,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 1648,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 1648,
+      "q": 13,
+      "six_set_orbits": 5,
+      "six_set_presentations": 165,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 4,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 3802,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 3802,
+      "q": 16,
+      "six_set_orbits": 4,
+      "six_set_presentations": 364,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 10,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 12682,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 12682,
+      "q": 17,
+      "six_set_orbits": 10,
+      "six_set_presentations": 455,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 13,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 27264,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 27264,
+      "q": 19,
+      "six_set_orbits": 13,
+      "six_set_presentations": 680,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 22,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 103768,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 103768,
+      "q": 23,
+      "six_set_orbits": 22,
+      "six_set_presentations": 1330,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 19,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 125462,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 125462,
+      "q": 25,
+      "six_set_orbits": 19,
+      "six_set_presentations": 1771,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 14,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 125108,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 125108,
+      "q": 27,
+      "six_set_orbits": 14,
+      "six_set_presentations": 2300,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 42,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 494184,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 494184,
+      "q": 29,
+      "six_set_orbits": 42,
+      "six_set_presentations": 2925,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 51,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 772138,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 772138,
+      "q": 31,
+      "six_set_orbits": 51,
+      "six_set_presentations": 3654,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    },
+    {
+      "arc_locus_presentations": 0,
+      "direct_replays": 13,
+      "duplicate_survivor_hits": 0,
+      "extension_tests": 221590,
+      "locus_size_distribution": {},
+      "near_miss_orbits": 0,
+      "near_misses": [],
+      "non_grs_presentations": 0,
+      "nonempty_presentations": 221590,
+      "q": 32,
+      "six_set_orbits": 13,
+      "six_set_presentations": 4060,
+      "small_locus_presentations": 0,
+      "survivor_orbits": 0,
+      "survivors": []
+    }
+  ],
+  "schema": "c405-twisted-cubic-deep-hole-pilot-v2"
+}
