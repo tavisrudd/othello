@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-19
 
-**Status:** protected C399 exposition baseline retained; C403--C411 are complete.  C406+C411 is now
-the recommended factorization-memory replacement and a likely-new composition within its bounded
-priority coverage, but no replacement has been selected and no manuscript expansion is implicit
+**Status:** protected C399 exposition baseline retained; the new-paper plan selects the
+C406+C411 factorization-memory replacement, selectively sharpened by C412.  Manuscript source is
+still untouched, and C412 does not license a cubic-to-depth identification
 
 ## Current paper decision
 
@@ -33,10 +33,20 @@ intertwiner; none of those stronger claims may leak into the paper.
 
 C411 has passed: `A4` marks give the two `1,4,6` orbit triples, six canonical secant-incidence
 representatives give the profiles, and the weighted barycentre plus antipodality gives the
-cubic-first pushforward.  The manuscript owner can now choose between the baseline and the
-recommended replacement.  C407's conventional corollaries, C408's pointed-forgetting theorem,
-C409's classical/formal moment normalization, C410/C418/C419, and C412--C417 do not enlarge the
+cubic-first pushforward.  C412 upgrades that argument to an all-degree antipodal parity theorem,
+shows that the primitive positive dependence of the profile rays intrinsically recovers the orbit
+sizes `1,4,6`, and identifies the depth plane as the modular quotient
+`P(1)^A4/soc(P(1))` for the `1|9|1` projective cover.  These strengthen the existing profile arrow;
+they do not create another side.  C407's conventional corollaries, C408's pointed-forgetting
+theorem, C409's classical/formal normalization, C410/C418/C419, and C413--C417 do not enlarge the
 main spine.  See `notes/2026-07-20-clebsch-paper-planning-sweep.md` for the live decision map.
+
+C412 also constructs a canonical two-dimensional Tate quotient of the relative-cubic space in two
+independent ways, with intrinsic kernel `[1:3:9]`.  That plane is valuable verification and
+appendix material, but it is not naturally identified with the depth plane: the labelled source
+and depth relations are `[2,9,1]` and `[2,8,1]`, and divided transfer kills the balanced source
+relations while fixing the depth socle.  The paper must present this as a clean boundary, never as
+a fitted bridge.
 
 ## Governing idea
 
@@ -387,25 +397,29 @@ A single recurring table can help readers keep their bearings.
 | two golden rank-eight fissions | rank-16 common refinement and rank-four `PGL_2(11)` fusion |
 | computational-support superposition | `AME(6,11)` perfect tensor |
 
-## Recommended paper architecture
+## Recommended new-paper architecture
 
-1. **Prologue: one hexagon, six identities.** Give the picture, the Hexagon Spine Theorem, the
-   contribution/prior-art boundary, and a short reader's guide.
-2. **Six points, fifteen mirrors.** Define the integral orbit, `A5/D5` action, and `H3` lattice.
-3. **The two conic phases.** Prove the minor and conic determinants and the q=5/q=11 arithmetic
-   phase theorem.
-4. **The blind spot is a conic—and the conic remembers.** Prove the syndrome-span bridge,
-   non-GRS-to-GRS deep-hole transform, weak-`E7` extensions, matching-decorated inversion, and the
-   two one-factorizations/biplane theorem.
-5. **Eight ways to be wrong.** Construct the rank-eight scheme, prove Fourier self-duality, explain
-   the branching fusion lattice, and use golden passage to reach the full conic symmetry and
-   rank-16 common refinement.
-6. **From six columns to six qudits.** State the standard AME construction and identify its exact
-   Pauli-`X` error algebra.
-7. **Closing the hexagon.** Recover the affine addition, six columns, full `A5`, scheme, and
-   unordered chirality torsor from the canonical coset graph; then identify its exchange character
-   with the Clebsch cubic's double-six blowdown exchange.
-8. **Six unclosed sides.** End with the six future questions below.
+1. **Prologue: one hexagon, one memory mechanism.** Give the reversible-object picture, state the
+   replacement theorem, and separate classical ingredients from the composite contribution.
+2. **Six points, fifteen mirrors.** Define the integral orbit and prove C399's uniform Coxeter
+   conic phase, keeping Edge/Dye ownership of the exceptional configurations explicit.
+3. **When the errors become a conic.** Prove the q=11 non-GRS-parent-to-GRS-child transform and
+   state exactly what the undecorated conic forgets.
+4. **Pairings disappear, factorizations survive.** Use C403's conic restriction and conic-ideal
+   quotient, then prove C406's harmonic/radial ranks and unique balanced halves.
+5. **Cubic memory and the depth quotient.** Derive the six `A4 \ PGL_2(11) / A5` profiles as in C411.
+   Lead with C412's all-degree antipodal formula and primitive `1:4:6` dependence; give the compact
+   `P(1)^A4/soc(P(1))` explanation of the `6 -> 2` rank drop.  Put the canonical Tate plane and
+   semi-invariant contraction in an appendix, with the divided-transfer obstruction as the final
+   non-identification remark.
+6. **Memory enters Fourier geometry and returns a parent.** Map the profiles into C378's odd
+   Fourier sector; use the singleton fibres and matchings to recover the golden parent through
+   C379.  This is the replacement spine's payoff.
+7. **The reversible Clebsch object.** Compress the rank-eight syndrome algebra, bare-code recovery,
+   cubic-surface chirality, and AME separation as consequences and endpoints rather than parallel
+   spines.
+8. **Boundaries and open directions.** State the exact prior-art, verification, and
+   non-identification boundaries before the focused future questions.
 
 “Hexagons are the bestagons” is suitable as an epigraph, talk title, informal subsection tag, or
 last line.  A formal paper title should carry the mathematical content, for example:
@@ -494,8 +508,11 @@ mixed double-coset space `A4 \ PGL_2(11) / A5` using subgroup marks and one cano
 calculation per orbit, then proves cubic-first survival by a three-term weighted identity.  The
 depth coordinates are mixed `A4`--`A5` matrix coefficients, not zonal spherical functions, and the
 rank-two linear map is not a faithful bi-Hecke quotient even though it separates the six labels.
-This source-surviving conceptual theorem is the one C406 successor admitted to the replacement
-spine; C412--C417 remain companions.
+This source-surviving conceptual theorem remains the promoted C406 successor.  C412 is a selective
+proof upgrade: parity and primitive dependence belong in the main text, the projective-cover
+quotient is a compact modular proposition, and the Tate-plane naturality belongs in an appendix.
+Its negative identification result prevents overclaim rather than opening a second theorem spine.
+C413--C417 remain companions.
 
 If the rank-eight fission is eventually identified with a known scheme, the paper remains strong:
 the exact arithmetic transform, self-dual error algebra, closed reconstruction cycle, and C374's
@@ -534,8 +551,10 @@ category-correct invariant rather than a resumed icosian search.
 C406 applies the conic-ideal quotient to the classical A3/B3/H3 factorizations, recovers the B3/H3
 sheets by balanced moments, and orients them cubically.  C411 now derives the H3 six-profile law
 conceptually from its `A4 \ PGL_2(11) / A5` double-coset structure.  Remaining companion questions
-include a natural relative-cubic rank-drop map, intrinsic singleton recovery from the rank-16
-scheme, and a genuine B3 depth--Fourier analogue.  C412--C417 own those bounded gates.
+begin after C412's bounded answer: the relative-cubic module has a canonical Tate two-plane, but
+the natural routes do not identify it with the depth plane.  Intrinsic singleton recovery from the
+rank-16 scheme, a genuine B3 depth--Fourier analogue, dual/twisted Fourier geometry, and an
+affine-cocycle formulation remain with C413--C417.
 
 ### 4. Which scalar-`A5` fusions survive uniformly?
 
@@ -605,7 +624,10 @@ Exact family-specific content established locally:
   cubic-first orientation tensor, six H3 depth-profile fibres, and explicit odd Fourier-sector map,
   with priority language restricted to the bounded audit; and
 - C411's six-representative mixed double-coset incidence derivation and three-term cubic-first
-  pushforward, with its classical Hecke/mark boundary explicit.
+  pushforward, with its classical Hecke/mark boundary explicit; and
+- C412's all-degree antipodal parity theorem, intrinsic primitive `1:4:6` recovery,
+  `P(1)^A4/soc(P(1))` depth quotient, and canonical relative-cubic Tate plane, with the two planes
+  explicitly kept distinct.
 
 Not yet safe without the stated gates:
 
@@ -619,6 +641,8 @@ Not yet safe without the stated gates:
   coarse Hadamard orbital and `A4/D10` stabilizer data;
 - uniqueness of the C406 cubic, Hessian/singular-locus recovery, a linear cubic-to-Fourier
   intertwiner, undecorated-child memory, or a universal cubic-first principle;
+- a natural identification of C412's relative-cubic Tate plane with the C411 depth plane, or a
+  general `K \ G / H` information-lattice functor beyond the proved H3 instance;
 - an intrinsic all-prime Frobenius action on the fission or factorization two-set;
 - any icosian/path-independence theorem after C382's negative marked-category comparison without a
   new category-correct invariant and consequence; or
@@ -661,6 +685,7 @@ In this precise and unusually literal sense, hexagons are the bestagons.
 - `notes/2026-07-20-c408-pointed-profile-forgetting-gate.md`
 - `notes/2026-07-20-c409-cubic-first-memory-principle.md`
 - `notes/2026-07-20-c411-double-coset-hecke.md`
+- `notes/2026-07-20-c412-relative-cubic-depth-plane.md`
 - `notes/2026-07-18-c339-clebsch-deep-hole-transform.md`
 - `notes/2026-07-18-c341-a5-subgroup-decoder.md`
 - `notes/2026-07-18-c346-h3-clebsch-good-reduction.md`

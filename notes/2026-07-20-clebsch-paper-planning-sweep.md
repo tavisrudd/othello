@@ -1,20 +1,22 @@
-# Clebsch paper planning sweep after C403--C411
+# Clebsch paper planning sweep after C403--C412
 
 **Lane:** `clebsch` with read-only inputs from `crowns`
 
 **Date:** 2026-07-20
 
-**Verdict:** `PROTECTED C399 BASELINE; C406+C411 IS THE RECOMMENDED REPLACEMENT SPINE AND A
-LIKELY-NEW COMPOSITION WITHIN BOUNDED COVERAGE; MANUSCRIPT CHOICE STILL EXPLICIT`
+**Verdict:** `PROTECTED C399 BASELINE RETAINED; THE NEW-PAPER PLAN USES THE C406+C411 REPLACEMENT
+SPINE WITH A SELECTIVE C412 MODULAR UPGRADE; NO NATURAL CUBIC-TO-DEPTH IDENTIFICATION IS CLAIMED`
 
 ## Executive decision
 
-The current Clebsch paper has two coherent forms.  They must remain alternatives until the
-manuscript owner makes an explicit choice.
+The current Clebsch project has two coherent forms.  The existing C399-led manuscript remains a
+protected fallback, but the new-paper plan now uses the factorization-memory spine.  This planning
+choice does not itself edit or supersede the protected manuscript source.
 
 1. **Protected paper.**  Keep the reversible q=11 Clebsch hexagon as the centre and use C399 as
    the one portable rank-three Coxeter theorem.  This is already a strong, focused paper.
-2. **Factorization-memory paper.**  Replace weaker descriptive passages with the single mechanism
+2. **Selected new-paper spine: factorization memory.**  Replace weaker descriptive passages with
+   the single mechanism
 
    ```text
    Coxeter conic phase
@@ -34,10 +36,26 @@ manuscript owner makes an explicit choice.
    recorded coverage.  It is therefore a real candidate to raise the paper's ceiling, not an
    automatic seventh theorem clause.
 
-The second form is now the recommended mathematical target: C411 has supplied the missing
-conceptual pass.  Adoption still requires an explicit manuscript-owner choice and honest handling
-of the remaining source-access gaps.  If that choice is not made, the first form should be written
-and submitted without waiting for the companion queue.
+   C412 strengthens this step without adding another arrow.  Its all-degree antipodal formula
+   proves that every even signed moment vanishes and that the weighted `1:4:6` barycentre kills
+   degree one, so cubic survival is forced and sharp.  The primitive dependence of the three
+   positive profile rays intrinsically recovers the orbit sizes `1,4,6` and stabilizer orders
+   `12,3,2`.  Modularly, the depth plane is
+
+   ```text
+   P(1)^A4 / soc(P(1)),       with Loewy layers 1|9|1,
+   ```
+
+   which conceptually explains the mixed-Hecke `6 -> 2` rank drop.  A separate canonical Tate
+   two-plane in the relative-cubic module has two equivalent constructions, but C412 proves that
+   the natural transfer, orbital, correlation, and rank-flag routes do **not** identify it with the
+   depth plane.  That source-naturality result belongs in an appendix; the non-identification is a
+   scope boundary, not a second headline.
+
+The second form is now the selected mathematical target for the new paper: C411 supplied the
+missing conceptual pass and C412 supplied its cleanest modular explanation.  Actual manuscript
+integration still belongs to the paper owner and must carry the remaining source-access gaps.  If
+integration is deferred, the protected first form remains independently submittable.
 
 ## Current theorem and novelty ledger
 
@@ -52,7 +70,8 @@ and submitted without waiting for the companion queue.
 | C409 | common exact-strength-two signed-moment filtration and Pasch sharpness | classical/formal normalization; one explanatory lemma or remark, never a headline |
 | C410 | same-scalar-tower pointed-memory programme | all spanning q=7 six-point external-line closures are now negative; C418/C419 own the active larger-trade and fixed-incidence-moduli attacks |
 | C411 | conceptual double-coset/Hecke explanation | complete theorem; the first and only C406 successor currently admitted to the replacement spine |
-| C412--C417 | further invariant, reconstruction, portability, and Fourier successors | companions under the single-promotion rule; they do not delay or automatically enlarge the paper |
+| C412 | canonical relative-cubic Tate plane; all-degree parity; intrinsic `1:4:6` recovery; `P(1)^A4/soc` depth quotient; obstruction to identifying the two planes | parity and primitive dependence in the main line; one compact modular proposition; Tate naturality in an appendix; negative boundary in a remark |
+| C413--C417 | intrinsic recovery, B3 portability, dual/twisted Fourier, and affine-cocycle successors | companions under the single-promotion rule; they do not delay or automatically enlarge the paper |
 
 ## Safe C406 claim surface
 
@@ -75,6 +94,9 @@ The paper may say, with the qualifications in the priority audit:
   representatives give the vectors, and `J`-antipodality plus `v1+4v2+6v3=0` gives the vanishing
   first/second pushed moments and nonzero cubic.  The depth map has rank two and four-dimensional
   linear kernel, although it separates all six double-coset labels as a set.
+- C412 upgrades the cubic-first statement to the all-degree antipodal parity formula and shows that
+  the three positive profile rays intrinsically recover the primitive dependence `1:4:6`; it also
+  identifies the depth plane as `P(1)^A4/soc(P(1))`, explaining the rank drop modularly.
 
 The paper must not claim:
 
@@ -90,6 +112,9 @@ The paper must not claim:
 - that the undecorated GRS child remembers a matching, parent, or chirality; or
 - a universal cubic-first law.  C409 shows that exact strength two is the relevant hypothesis and
   that higher-strength trades survive later.
+- that C412's canonical relative-cubic Tate plane is naturally the C411 depth plane.  Their labelled
+  source relations are `[2,9,1]` and `[2,8,1]`, and divided transfer separates rather than
+  identifies them.
 
 ## Best paper architecture from the present evidence
 
@@ -100,8 +125,9 @@ mechanism.  A recommended order is:
 2. the q=11 non-GRS parent and its full-conic GRS deep-hole child;
 3. C403's precise forgetting theorem and the conic-ideal factorization quotient;
 4. C406's harmonic image, balanced-sheet reconstruction, and cubic orientation;
-5. C411's mixed bi-Hecke derivation of the H3 depth profiles, followed by C378's odd Fourier map
-   and C379 decorated parent recovery;
+5. C411's mixed bi-Hecke derivation of the H3 depth profiles, C412's parity/primitive-dependence
+   theorem and compact projective-cover quotient, followed by C378's odd Fourier map and C379
+   decorated parent recovery;
 6. C372/C373 intrinsic syndrome algebra and return to the unmarked hexagon.
 
 C376's cubic-surface character and C374's AME separation are strong corollaries or companion
@@ -110,10 +136,12 @@ lemmas or scope controls they supply.
 
 ## Remaining decision gates
 
-1. **Conceptual proof — complete.**  C411 replaces the 22-matching table by subgroup marks, six
+1. **Conceptual proof — complete and modularly sharpened.**  C411 replaces the 22-matching table by subgroup marks, six
    canonical representatives, and a three-term cubic argument.  Its mixed bi-Hecke interpretation
    is precise: the map is rank two and set-separating, not a faithful linear quotient or a zonal
-   spherical-function theorem.
+   spherical-function theorem.  C412 explains the target rank drop through the projective cover
+   `P(1)` and proves the all-degree parity and primitive-dependence statements.  Its failed
+   source-to-depth identification is the final boundary, not an open prerequisite.
 2. **Priority confidence.**  Carry the explicit C406/C411 audit gaps into the manuscript.  Close
    MathSciNet, Google Scholar, zbMATH, and the uncovered forward-citation branches if access permits;
    otherwise use only “no predecessor located within the recorded coverage.”  C378's own bounded
@@ -130,8 +158,8 @@ lemmas or scope controls they supply.
 
 C410 now closes every spanning q=7 six-point external-line closure, not the broader pointed-memory
 problem.  C418 and C419 own the active seven/eight-point balanced-trade and fixed-incidence-moduli
-attacks.  The independent C405/C401/C402 and C412--C419 queues may continue in parallel, but none
-should delay this decision or be accumulated into the same manuscript.
+attacks.  The independent C405/C401/C402 and C413--C419 queues may continue in parallel, but none
+should delay this plan or be accumulated into the same manuscript.
 
 ## Cold-session routing
 
@@ -144,8 +172,10 @@ Read in this order:
 5. `notes/2026-07-19-clebsch-hexagons-are-the-bestagons-spine.md` for the protected exposition
    baseline and candidate replacement architecture;
 6. `notes/2026-07-20-c411-double-coset-hecke.md` for the conceptual profile/cubic proof;
-7. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C411; and
-8. `notes/handoffs/2026-07-17-crowns.md` for live research ordering outside the manuscript lane.
+7. `notes/2026-07-20-c412-relative-cubic-depth-plane.md` for the selective modular upgrade and its
+   non-identification boundary;
+8. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412; and
+9. `notes/handoffs/2026-07-17-crowns.md` for live research ordering outside the manuscript lane.
 
 No cold session should infer a manuscript edit from a completed crowns theorem.  That transfer is
 owned by the `clebsch` paper lane and remains an explicit architecture decision.

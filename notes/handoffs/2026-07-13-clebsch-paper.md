@@ -14,12 +14,12 @@
 Finish the Clebsch-hexagon paper as a self-contained, honestly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
 Current assessment: **the existing 19-page manuscript and local reproducibility package remain the
-protected baseline.  C399 is the selected portable upgrade for that version.  C406 has passed its
-mathematical gate and bounded claim-by-claim audit as a likely-new conic-quotient/moment/Fourier
-composition, and C411 has supplied the missing conceptual double-coset/Hecke derivation.  The
-C406+C411 form is therefore the recommended replacement spine.  The user has now selected that
-spine for Lean formalization, queued as C420--C428, while manuscript integration remains a separate
-owner action before release**.
+protected baseline.  C399 is the selected portable upgrade for that version.  The new-paper plan
+uses the C406+C411 replacement spine, selectively sharpened by C412's all-degree parity theorem,
+intrinsic `1:4:6` recovery, and projective-cover explanation of the depth rank drop.  C412's
+relative-cubic Tate plane is appendix-level naturality machinery and is not identified with the
+depth plane.  The user has selected the replacement spine for Lean formalization, queued as
+C420--C428, while manuscript integration remains a separate owner action before release**.
 
 The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning-sweep.md`](../2026-07-20-clebsch-paper-planning-sweep.md).
@@ -81,6 +81,13 @@ plus the weighted barycentre relation gives the cubic-first pushforward.  The co
 kernel dimension four while separating all six labels.  See
 [`2026-07-20-c411-double-coset-hecke.md`](../2026-07-20-c411-double-coset-hecke.md).
 
+C412 strengthens rather than lengthens this spine.  The all-degree antipodal formula and primitive
+`1:4:6` dependence belong in the main proof; the depth plane's modular description
+`P(1)^A4/soc(P(1))` is a compact conceptual proposition.  Two independent constructions of a
+canonical relative-cubic Tate plane belong in an appendix, together with the proved boundary that
+divided transfer and the other natural routes do not identify it with the depth plane.  See
+[`2026-07-20-c412-relative-cubic-depth-plane.md`](../2026-07-20-c412-relative-cubic-depth-plane.md).
+
 This version should replace weaker descriptive material and compress the cubic, quantum, and free
 arrangement-code consequences; it must not enlarge the paper into parallel coequal spines.
 
@@ -88,10 +95,10 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 ## Submission-critical work, in order
 
-1. **Choose the paper fork.**  C411 has passed, so the decision is ripe.  The default-safe option
-   remains the protected C399-led paper; the recommended higher-ceiling option is the C406+C411
-   replacement.  Extend only the claim-specific source gaps needed for manuscript wording.  Do not
-   wait for C405, C401, C402, C412--C419, or other companion gates.
+1. **Freeze the selected new-paper spine.**  Preserve the C399-led manuscript as a fallback, but
+   plan the new paper around C406+C411 with only the selective C412 upgrades stated above.  Extend
+   only the claim-specific source gaps needed for manuscript wording.  Do not wait for C405, C401,
+   C402, C413--C419, or other companion gates.
 2. **Integrate one spine.**  In the baseline version, integrate C399 as the rank-three explanation
    of the q=11 phase.  In the replacement version, use C399 as the phase prelude and C403/C406 as
    the central forgetting-and-memory theorem.  In either case credit Edge and Dye for the
@@ -136,11 +143,12 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 - **C403 complete:** the weighted 2-adjoint theorem, stabilizer-stratified Coxeter word orbits, and
   all-degree conic matching quotient are available.  Bare nonfactorized dual supports factor
   through the standard GRS matroid and retain no parent data.
-- **C406+C411 complete as the recommended replacement candidate:** C406's exact theorem and bounded
+- **C406+C411 complete as the selected new-paper replacement:** C406's exact theorem and bounded
   priority audit support likely-new wording only for the conic-quotient/moment/Fourier composition.
   C411 supplies the source-surviving conceptual double-coset/mixed-bi-Hecke proof and is the one
-  successor admitted under the single-promotion rule.  C412--C417 remain companions.  No manuscript
-  edit is implicit until the explicit fork decision.
+  successor admitted under the single-promotion rule.  C412 contributes a selective proof upgrade,
+  not a coequal spine; C413--C417 remain companions.  No manuscript source edit is implicit in this
+  planning decision.
 - **C407--C409 are not additional flagships:** C407 consists of conventional free corollaries;
   C408 is a companion limitation theorem showing global data forget pointed repair; and C409 is a
   classical/formal exact-strength-two normalization.  C410 now closes every spanning q=7
