@@ -331,3 +331,41 @@ possible torsion left after the rational Hecke compression.
 nonmatching index with no stabilizer formula retires the analogy.
 **Evidence:** CHECKED EXACTLY for H3; no representation-theoretic explanation or B3 check.
 **Status:** open lead; unallocated
+
+### 2026-07-20 — a `21 < 168 < 6048` tower may organize the Hermitian octad transform
+
+**Provenance:** post-close structural review of C405's unique q=9 near miss after the requested
+free-upgrade pass identified its Hermitian discriminant quartic and exact stabilizers.
+**Was I looking for this?:** no — C405 was deciding twisted-cubic containment and then classifying
+the unexpected carrier/code upgrade, not proving a global unitary action on all determinantal
+representations or identifying the abstract stabilizer groups.
+**Observed / musing:** the certified semilinear stabilizers 336 for the octad and 42 for the marked
+parent/octad pair give projective orders 168 and 21, hence an eight-element decoration fibre.  The
+Hermitian quartic over `F_9` has the classical projective-unitary order 6048, while a smooth plane
+quartic has 36 Cayley-octad/determinantal-representation classes, and
+`6048 = 36*168`.  This suggests one coherent coset tower
+
+```text
+7:3  <  PSL_2(7)  <  PGU(3,3)
+ 21       168          6048
+    index 8      index 36,
+```
+
+with the first quotient indexing C405's parent decorations and the second indexing the Hermitian
+quartic's Cayley-octad representations.
+**Why it may matter / strongest question:** does the full unitary automorphism group act
+transitively on the 36 representation classes with C405's octad stabilizer `PSL_2(7)`, and does
+that stabilizer act transitively on the eight deepest-locus parents with point stabilizer `7:3`?
+A positive answer would replace both numerical orbit-stabilizer facts by one intrinsic group-action
+explanation and may make the parent transform recoverable from the classical bitangent geometry.
+**Structural mechanism:** the Hermitian quartic's unitary action on even theta characteristics,
+followed by the octad stabilizer's degree-eight action on a marked decoration fibre.
+**Discriminator / falsifier:** extract generators from C405's exact projective stabilizers, identify
+their abstract groups and permutation actions, then compute the orbit on all 36 symmetric
+determinantal classes.  Retire the tower if the order-168 stabilizer is not `PSL_2(7)`, if the
+order-21 subgroup is not a decoration stabilizer `7:3`, or if `PGU(3,3)` splits the 36 classes into
+multiple orbits.
+**Evidence:** CHECKED ORDERS / REASONED IDENTIFICATION — C405 certifies the two stabilizer orders,
+the eightfold fibre, the Hermitian matrix, and the 28-point quartic; the abstract group
+identifications and 36-class transitivity remain open.
+**Status:** open lead; unallocated
