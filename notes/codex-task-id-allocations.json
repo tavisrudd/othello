@@ -107,8 +107,17 @@
       "last": 380,
       "purpose": "Lean foundation gates for the Clebsch gateway theorem chain",
       "sequence": 12
+    },
+    {
+      "count": 2,
+      "first": 381,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 382,
+      "purpose": "Clebsch E8 weak-degree-one obstruction gate and gated icosian path-independence successor",
+      "sequence": 13
     }
   ],
-  "next_id": 381,
+  "next_id": 383,
   "schema": "codex-task-id-allocations-v1"
 }
