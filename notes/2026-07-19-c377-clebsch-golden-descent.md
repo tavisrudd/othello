@@ -227,3 +227,9 @@ The unallocated companion
 left by the stop: recover the quadratic Frobenius character intrinsically from the unmarked
 code/syndrome graph and compare its `H^1` chirality torsor with Benson's trivial linear obstruction
 and the double-six Brauer class.  It does not reopen C377 or alter the C378--C380 order.
+
+The second unallocated companion
+`notes/2026-07-19-c377-integral-moduli-companion.md` globalizes that question: construct the integral
+orientation cover of the `A5` six-arc locus, determine its normalization, discriminant, bad fibers,
+and forgetful descent spectrum, and make the Frobenius law a consequence of one intrinsic moduli
+object.  It likewise does not reopen C377 or alter the live order.

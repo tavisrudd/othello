@@ -8,6 +8,8 @@
 
 **Parent:** `notes/2026-07-19-c377-clebsch-golden-descent.md`
 
+**Sibling:** `notes/2026-07-19-c377-integral-moduli-companion.md`
+
 ## Decision boundary
 
 C377 closed correctly at its bounded-negative gate.  Benson already proves the characteristic-zero
