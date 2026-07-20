@@ -1,0 +1,253 @@
+{
+  "common_symmetry_category": {
+    "every_2_by_3_matrix_is_covariant": true,
+    "group": "A4 semidirect <J> on the frozen source/target data",
+    "hom_dimension": 6,
+    "possible_kernel_lines": 133,
+    "rank_two_map_count": 1755600,
+    "rank_two_maps_with_any_fixed_kernel_line": 13200,
+    "signed_moment_line_is_not_selected_by_common_symmetry": true,
+    "source_character": "three copies of the outer-sign character",
+    "target_character": "two copies of the outer-sign character"
+  },
+  "covariant_boundary": {
+    "a_rank_two_fitted_matrix_can_have_any_of_133_kernel_lines": true,
+    "apolarity_requires_an_antecedent_map_to_a_binary_form_space": true,
+    "binary_catalecticant_is_target_internal": true,
+    "binary_hessian_is_target_internal": true,
+    "hessian_flag_does_not_define_a_map_from_the_relative_source": true
+  },
+  "field": 11,
+  "full_group_obstruction": {
+    "profile_partition_is_not_psl_block_system": true,
+    "there_is_no_psl_action_on_six_profiles_making_depth_map_equivariant": true,
+    "witness": {
+      "distinct_image_fibres": [
+        2,
+        5
+      ],
+      "image_matching_indices": [
+        5,
+        19
+      ],
+      "psl_generator_index": 0,
+      "same_profile_matching_indices": [
+        2,
+        16
+      ],
+      "source_fibre": 2
+    }
+  },
+  "inputs": {
+    "2026-07-20-c406-matching-module.py": {
+      "bytes": 48589,
+      "sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51"
+    },
+    "2026-07-20-c406-matching-orbit-scout.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "2026-07-20-c411-double-coset-hecke.json": {
+      "bytes": 10552,
+      "sha256": "23f0a100356f0a369f00d81011e8d8d6b9d867b9de45a7b0625fc2889323b014"
+    }
+  },
+  "schema": "c412-relative-cubic-depth-plane-v1",
+  "source": {
+    "ambient_W_dimension": 10,
+    "ambient_symmetric_cube_dimension": 220,
+    "non_descent_witness": {
+      "distinct_image_fibres": [
+        2,
+        5
+      ],
+      "image_matching_indices": [
+        5,
+        19
+      ],
+      "psl_generator_index": 0,
+      "same_profile_matching_indices": [
+        2,
+        16
+      ],
+      "source_fibre": 2
+    },
+    "profile_fibre_sizes": [
+      1,
+      1,
+      4,
+      4,
+      6,
+      6
+    ],
+    "profile_partition_is_psl_block_system": false,
+    "psl_generator_count": 3,
+    "relative_space_dimension": 3,
+    "restricted_outer_action": [
+      [
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        10
+      ]
+    ],
+    "restricted_psl_generator_actions": [
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    ],
+    "scalar_a4_order": 12,
+    "signed_moment_coordinates_in_relative_basis": [
+      2,
+      2,
+      5
+    ],
+    "signed_moment_projective_line": [
+      1,
+      1,
+      8
+    ]
+  },
+  "target": {
+    "basis": "e1=v2,e2=v3",
+    "compressed_binary_cubic_coefficients": [
+      1,
+      7,
+      5,
+      9
+    ],
+    "factorization_linear_factors": [
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        9
+      ]
+    ],
+    "first_catalecticant_matrix": [
+      [
+        3,
+        3,
+        5
+      ],
+      [
+        7,
+        10,
+        5
+      ]
+    ],
+    "first_catalecticant_rank": 2,
+    "hessian_coefficients": [
+      7,
+      8,
+      7
+    ],
+    "hessian_doubled_line": [
+      1,
+      10
+    ],
+    "outer_j_action": [
+      [
+        10,
+        0
+      ],
+      [
+        0,
+        10
+      ]
+    ],
+    "plane_equations_in_four_depth_coordinates": [
+      [
+        2,
+        2,
+        1,
+        0
+      ],
+      [
+        9,
+        8,
+        0,
+        1
+      ]
+    ],
+    "profile_plane_dimension": 2,
+    "residual_simple_line": [
+      1,
+      9
+    ],
+    "scalar_a4_action": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "verdict": "BOUNDED_NEGATIVE_NO_NATURAL_SOURCE_TO_DEPTH_PLANE_MAP"
+}
