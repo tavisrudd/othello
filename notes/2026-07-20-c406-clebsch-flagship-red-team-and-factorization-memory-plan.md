@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** `GATE 1 COMPLETE; UNIFORM MATCHING INTERFACE PASSES, GATE 2 NOT STARTED`
+**Status:** `GATES 1--3 COMPLETE; GREEN HARMONIC/CUBIC MEMORY THEOREM, PRIORITY OPEN`
 
 **Gate 1 outcome:** exact enumeration finds unique `5/14/22` perfect-matching orbits with
 stabilizers `S4/S4/A5`; in every type the parent has a unique invariant matching, and the H3 member
@@ -15,6 +15,15 @@ one-factorization of `K_6`, while B3 and H3 split under `PSL_2(q)` into two one-
 Gate 2's semisimple restricted
 augmentation-module test.  Per user scope, Gate 2 was not started.  See
 `notes/2026-07-20-c406-matching-orbit-scout.md` and its certificate bundle.
+
+**Gates 2--3 outcome:** the factorization-difference images have exact ranks `3,6,10` and are
+uniformly the top conic-harmonic layer plus the radial line in even degree.  The B3/H3 linear and
+quadratic sheet moments vanish, but the signed cubic moment is nonzero and reference-independent;
+more strongly, the two `PSL_2(q)` one-factorizations are exactly the two equal halves with vanishing
+moments through degree two.  Thus the attempted linear sign fails but a canonical cubic sheet-memory
+carrier and reconstruction theorem survives.  The focused source audit found no exact predecessor
+within its bounded coverage, but forward-database gaps prohibit priority wording.  See
+`notes/2026-07-20-c406-matching-module.md` and its checker/JSON/replay/checksum bundle.
 
 **Decision:** preserve the current C399-led Clebsch paper as the protected baseline while testing
 one stronger, tightly bounded candidate spine.  No factorization-memory, equivariant-repair,
@@ -690,10 +699,10 @@ A cold C406 session should read, in order:
 7. `notes/2026-07-20-c399-literature-audit.md` for the classical ownership boundary; and
 8. C378/C372 only after Gate 3 or Gate 4 requires the Fourier comparison.
 
-The next cold-session action is Gate 2 only: compute the fixed-matching characters and restricted
-factorization-difference modules under the frozen conventions.  Do not rerun Gate 1, start Gate 3,
-perform a new literature audit, edit Lean, or modify the manuscript before Gate 2 returns its exact
-red/yellow/green disposition.
+Gates 1--3 are closed by the scout and matching-module bundles.  No cold session should rerun their
+finite enumerations except through the recorded `--check` and independent replay commands.  Any
+paper promotion or Lean implementation consumes the theorem statement and certificate schema in
+`notes/2026-07-20-c406-matching-module.md`; neither is implicit in this planning record.
 
 The task hand-back must contain one of:
 

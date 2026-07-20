@@ -1,0 +1,641 @@
+{
+  "inputs": {
+    "2026-07-20-c399-coxeter-number-conic-phase.py": {
+      "bytes": 25983,
+      "sha256": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275"
+    },
+    "2026-07-20-c406-matching-orbit-scout.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    }
+  },
+  "schema": "c406-matching-module-v1",
+  "summary": {
+    "first_nonzero_sheet_moment_degree": 3,
+    "linear_and_quadratic_sheet_signs_vanish": true,
+    "uniform_harmonic_image": true,
+    "vanishing_moments_recover_b3_h3_sheets": true
+  },
+  "types": [
+    {
+      "all_frozen_matching_orbit_ranks": [
+        {
+          "difference_rank": 3,
+          "is_target_orbit": true,
+          "orbit_size": 5,
+          "stabilizer_order": 24
+        },
+        {
+          "difference_rank": 3,
+          "is_target_orbit": false,
+          "orbit_size": 10,
+          "stabilizer_order": 12
+        }
+      ],
+      "augmentation_dimension": 4,
+      "augmentation_module": {
+        "1": 1,
+        "3": 1
+      },
+      "character_table_mod_p": {
+        "1": {
+          "1": 1,
+          "2": 1,
+          "22": 1,
+          "3": 1,
+          "4": 1
+        },
+        "2": {
+          "1": 2,
+          "2": 0,
+          "22": 2,
+          "3": 4,
+          "4": 0
+        },
+        "3": {
+          "1": 3,
+          "2": 1,
+          "22": 4,
+          "3": 0,
+          "4": 4
+        },
+        "3sgn": {
+          "1": 3,
+          "2": 4,
+          "22": 4,
+          "3": 0,
+          "4": 1
+        },
+        "sgn": {
+          "1": 1,
+          "2": 4,
+          "22": 1,
+          "3": 1,
+          "4": 4
+        }
+      },
+      "classes": [
+        {
+          "element_order": 1,
+          "fixed_matchings": 5,
+          "label": "1",
+          "size": 1
+        },
+        {
+          "element_order": 2,
+          "fixed_matchings": 3,
+          "label": "2",
+          "size": 6
+        },
+        {
+          "element_order": 2,
+          "fixed_matchings": 1,
+          "label": "22",
+          "size": 3
+        },
+        {
+          "element_order": 3,
+          "fixed_matchings": 2,
+          "label": "3",
+          "size": 8
+        },
+        {
+          "element_order": 4,
+          "fixed_matchings": 1,
+          "label": "4",
+          "size": 6
+        }
+      ],
+      "difference_image": {
+        "3": 1
+      },
+      "difference_kernel": {
+        "1": 1
+      },
+      "factorization_difference_image_rank": 3,
+      "factorization_difference_kernel_dimension": 1,
+      "field_order": 5,
+      "full_conic_ideal_layer_dimension": 3,
+      "harmonic_dimension": 3,
+      "image_equals_top_harmonic_plus_radial_line": true,
+      "image_is_full_conic_ideal_layer": true,
+      "matching_orbit_size": 5,
+      "outer_sheet_sign": null,
+      "parent_group_order": 24,
+      "permutation_module": {
+        "1": 2,
+        "3": 1
+      },
+      "quotient_polynomial_degree": 1,
+      "type": "A3"
+    },
+    {
+      "all_frozen_matching_orbit_ranks": [
+        {
+          "difference_rank": 6,
+          "is_target_orbit": true,
+          "orbit_size": 14,
+          "stabilizer_order": 24
+        },
+        {
+          "difference_rank": 5,
+          "is_target_orbit": false,
+          "orbit_size": 21,
+          "stabilizer_order": 16
+        },
+        {
+          "difference_rank": 5,
+          "is_target_orbit": false,
+          "orbit_size": 28,
+          "stabilizer_order": 12
+        },
+        {
+          "difference_rank": 6,
+          "is_target_orbit": false,
+          "orbit_size": 42,
+          "stabilizer_order": 8
+        }
+      ],
+      "augmentation_dimension": 13,
+      "augmentation_module": {
+        "1": 3,
+        "2": 2,
+        "3": 2
+      },
+      "character_table_mod_p": {
+        "1": {
+          "1": 1,
+          "2": 1,
+          "22": 1,
+          "3": 1,
+          "4": 1
+        },
+        "2": {
+          "1": 2,
+          "2": 0,
+          "22": 2,
+          "3": 6,
+          "4": 0
+        },
+        "3": {
+          "1": 3,
+          "2": 1,
+          "22": 6,
+          "3": 0,
+          "4": 6
+        },
+        "3sgn": {
+          "1": 3,
+          "2": 6,
+          "22": 6,
+          "3": 0,
+          "4": 1
+        },
+        "sgn": {
+          "1": 1,
+          "2": 6,
+          "22": 1,
+          "3": 1,
+          "4": 6
+        }
+      },
+      "classes": [
+        {
+          "element_order": 1,
+          "fixed_matchings": 14,
+          "label": "1",
+          "size": 1
+        },
+        {
+          "element_order": 2,
+          "fixed_matchings": 6,
+          "label": "2",
+          "size": 6
+        },
+        {
+          "element_order": 2,
+          "fixed_matchings": 6,
+          "label": "22",
+          "size": 3
+        },
+        {
+          "element_order": 3,
+          "fixed_matchings": 2,
+          "label": "3",
+          "size": 8
+        },
+        {
+          "element_order": 4,
+          "fixed_matchings": 2,
+          "label": "4",
+          "size": 6
+        }
+      ],
+      "difference_image": {
+        "1": 1,
+        "2": 1,
+        "3": 1
+      },
+      "difference_kernel": {
+        "1": 2,
+        "2": 1,
+        "3": 1
+      },
+      "factorization_difference_image_rank": 6,
+      "factorization_difference_kernel_dimension": 7,
+      "field_order": 7,
+      "full_conic_ideal_layer_dimension": 6,
+      "harmonic_dimension": 5,
+      "image_equals_top_harmonic_plus_radial_line": true,
+      "image_is_full_conic_ideal_layer": true,
+      "matching_orbit_size": 14,
+      "outer_sheet_sign": {
+        "equal_halves_with_vanishing_moments_through_degree_2": 2,
+        "first_nonzero_moment_degree": 3,
+        "first_nonzero_moment_is_reference_independent": true,
+        "image_is_zero": true,
+        "image_vector": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "psl_fixed_and_outer_negated": true,
+        "signed_moments_on_image_coordinates": [
+          {
+            "degree": 1,
+            "dimension": 6,
+            "nonzero": false,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44",
+            "support": 0
+          },
+          {
+            "degree": 2,
+            "dimension": 21,
+            "nonzero": false,
+            "sha256": "c90232586b801f9558a76f2f963eccd831d9fe6775e4c8f1446b2331aa2132f2",
+            "support": 0
+          },
+          {
+            "degree": 3,
+            "dimension": 56,
+            "nonzero": true,
+            "sha256": "28e104605093c1145468df8f3c65d86cfc51b55e2c48d54592b5e2f3b75590bf",
+            "support": 9
+          }
+        ],
+        "vanishing_moment_halves_are_exactly_the_psl_sheets": true
+      },
+      "parent_group_order": 24,
+      "permutation_module": {
+        "1": 4,
+        "2": 2,
+        "3": 2
+      },
+      "quotient_polynomial_degree": 2,
+      "type": "B3"
+    },
+    {
+      "all_frozen_matching_orbit_ranks": [
+        {
+          "difference_rank": 10,
+          "is_target_orbit": true,
+          "orbit_size": 22,
+          "stabilizer_order": 60
+        },
+        {
+          "difference_rank": 9,
+          "is_target_orbit": false,
+          "orbit_size": 55,
+          "stabilizer_order": 24
+        },
+        {
+          "difference_rank": 9,
+          "is_target_orbit": false,
+          "orbit_size": 55,
+          "stabilizer_order": 24
+        },
+        {
+          "difference_rank": 9,
+          "is_target_orbit": false,
+          "orbit_size": 66,
+          "stabilizer_order": 20
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 110,
+          "stabilizer_order": 12
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 110,
+          "stabilizer_order": 12
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 110,
+          "stabilizer_order": 12
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 132,
+          "stabilizer_order": 10
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 165,
+          "stabilizer_order": 8
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 165,
+          "stabilizer_order": 8
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 165,
+          "stabilizer_order": 8
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 220,
+          "stabilizer_order": 6
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 220,
+          "stabilizer_order": 6
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 220,
+          "stabilizer_order": 6
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 330,
+          "stabilizer_order": 4
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 14,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        },
+        {
+          "difference_rank": 15,
+          "is_target_orbit": false,
+          "orbit_size": 660,
+          "stabilizer_order": 2
+        }
+      ],
+      "augmentation_dimension": 21,
+      "augmentation_module": {
+        "1": 3,
+        "4": 2,
+        "5": 2
+      },
+      "character_table_mod_p": {
+        "1": {
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "5A": 1,
+          "5B": 1
+        },
+        "3a": {
+          "1": 3,
+          "2": 10,
+          "3": 0,
+          "5A": 8,
+          "5B": 4
+        },
+        "3b": {
+          "1": 3,
+          "2": 10,
+          "3": 0,
+          "5A": 4,
+          "5B": 8
+        },
+        "4": {
+          "1": 4,
+          "2": 0,
+          "3": 1,
+          "5A": 10,
+          "5B": 10
+        },
+        "5": {
+          "1": 5,
+          "2": 1,
+          "3": 10,
+          "5A": 0,
+          "5B": 0
+        }
+      },
+      "classes": [
+        {
+          "element_order": 1,
+          "fixed_matchings": 22,
+          "label": "1",
+          "size": 1
+        },
+        {
+          "element_order": 2,
+          "fixed_matchings": 6,
+          "label": "2",
+          "size": 15
+        },
+        {
+          "element_order": 3,
+          "fixed_matchings": 4,
+          "label": "3",
+          "size": 20
+        },
+        {
+          "element_order": 5,
+          "fixed_matchings": 2,
+          "label": "5A",
+          "size": 12
+        },
+        {
+          "element_order": 5,
+          "fixed_matchings": 2,
+          "label": "5B",
+          "size": 12
+        }
+      ],
+      "difference_image": {
+        "1": 1,
+        "4": 1,
+        "5": 1
+      },
+      "difference_kernel": {
+        "1": 2,
+        "4": 1,
+        "5": 1
+      },
+      "factorization_difference_image_rank": 10,
+      "factorization_difference_kernel_dimension": 11,
+      "field_order": 11,
+      "full_conic_ideal_layer_dimension": 15,
+      "harmonic_dimension": 9,
+      "image_equals_top_harmonic_plus_radial_line": true,
+      "image_is_full_conic_ideal_layer": false,
+      "matching_orbit_size": 22,
+      "outer_sheet_sign": {
+        "equal_halves_with_vanishing_moments_through_degree_2": 2,
+        "first_nonzero_moment_degree": 3,
+        "first_nonzero_moment_is_reference_independent": true,
+        "image_is_zero": true,
+        "image_vector": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "psl_fixed_and_outer_negated": true,
+        "signed_moments_on_image_coordinates": [
+          {
+            "degree": 1,
+            "dimension": 10,
+            "nonzero": false,
+            "sha256": "01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca",
+            "support": 0
+          },
+          {
+            "degree": 2,
+            "dimension": 55,
+            "nonzero": false,
+            "sha256": "02779466cdec163811d078815c633f21901413081449002f24aa3e80f0b88ef7",
+            "support": 0
+          },
+          {
+            "degree": 3,
+            "dimension": 220,
+            "nonzero": true,
+            "sha256": "9e9443c65e9fdf0a596968efeec13fd6f09e841f035e6d13a96aa4fc12b345fd",
+            "support": 20
+          }
+        ],
+        "vanishing_moment_halves_are_exactly_the_psl_sheets": true
+      },
+      "parent_group_order": 60,
+      "permutation_module": {
+        "1": 4,
+        "4": 2,
+        "5": 2
+      },
+      "quotient_polynomial_degree": 4,
+      "type": "H3"
+    }
+  ],
+  "verdict": "GATE_2_PASS_HARMONIC_IMAGE_GATE_3_PASS_CUBIC_SHEET_MEMORY"
+}
