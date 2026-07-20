@@ -168,6 +168,13 @@ Findings and dispositions:
 
 ### Required closing review checklist
 
+**Archival gate:** the task must not be marked complete or moved from the live queue to the archive
+until its report and checklist are complete, an independent referee-style review has been explicitly
+requested and recorded, every finding has been fixed or the claimed exit has been narrowed, and a
+post-fix review records final `GO`. A green elaboration/build or an initial implementation verdict is
+not sufficient. Archive only after the final report, checklist, review dispositions, and C320 ledger
+delta agree with the committed artifacts.
+
 - [x] Read and restate every landed theorem type with its exact domain and hypotheses.
 - [x] Assign the exact landed algebraic and `Fin 4` results the full-trust Lean route, subject to the
   recorded build/axiom evidence.

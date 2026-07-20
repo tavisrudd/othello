@@ -309,6 +309,13 @@ Each C420--C428 task document must end with its own copied closing-review checkl
 ledger delta. C320 reconciles those deltas against the actual gates; it does not infer trust from a
 task verdict, module name, or aggregate import.
 
+For every C420--C428 task, completion and archival occur only after this exact sequence: finish the
+artifact and durable report; complete the local checklist and proposed ledger delta; explicitly
+request an independent referee-style review; record its findings and `GO`/`NO-GO`; fix every issue
+or narrow the claimed exit; request post-fix review; and obtain a recorded final `GO`. Keep the live
+queue row until that sequence is complete. A green build, axiom audit, implementer self-review, or
+initial `GO` followed by further changes does not by itself authorize archival.
+
 The path named for each task's evidence report is also its cold-read task specification while
 queued. It must be self-contained: exact owned files, permitted imports, mathematical obligations,
 fixed trust routes and fallbacks, exclusions, stop conditions, validation, and closing review all

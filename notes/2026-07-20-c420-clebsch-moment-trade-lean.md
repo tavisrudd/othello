@@ -190,6 +190,13 @@ internal task references or novelty claim, and the gate imports the reviewed con
 
 ### Required closing review checklist
 
+**Archival gate:** the task must not be marked complete or moved from the live queue to the archive
+until its report and checklist are complete, an independent referee-style review has been explicitly
+requested and recorded, every finding has been fixed or the claimed exit has been narrowed, and a
+post-fix review records final `GO`. A green elaboration/build or an initial implementation verdict is
+not sufficient. Archive only after the final report, checklist, review dispositions, and C320 ledger
+delta agree with the committed artifacts.
+
 - [x] State every claimed exit in ordinary mathematics, with exact domain, hypotheses, conclusion,
   and correspondence to the intended paper statement.
 - [x] Assign each exit exactly one final route: full-trust Lean, exact replay/certificate,

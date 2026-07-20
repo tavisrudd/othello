@@ -57,6 +57,12 @@ and evidence; issues a recorded `GO` or `NO-GO`; and lists every finding. The im
 each finding or narrows the claimed exit explicitly. The task cannot close until the final
 disposition and ledger delta agree with the landed artifact.
 
+**Archival gate:** keep the task row live. After implementation, explicitly request the independent
+review; do not infer that review from a build, report, or agent self-check. Any finding or `NO-GO`
+blocks completion and archival. Fix every issue, update the artifact/report/checklist/ledger delta,
+and request post-fix review. Only a recorded final `GO` permits the task to be marked complete and
+archived under the repository completion invariant.
+
 - [ ] State every claimed exit in ordinary mathematics, with exact domain, hypotheses, conclusion,
   and correspondence to the intended paper statement.
 - [ ] Assign each exit exactly one final route: full-trust Lean, exact replay/certificate,
