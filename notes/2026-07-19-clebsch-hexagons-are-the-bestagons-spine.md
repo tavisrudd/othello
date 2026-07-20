@@ -41,25 +41,42 @@ of a new local-Clifford or local-unitary AME class.
 ## The picture to show the reader
 
 ```text
-                       (1) integral H3/A5 six-orbit
-                         /                         \
-              good reduction                       minors and determinant
-                       /                               \
-          (6) recovered hexagon                 (2) arc / MDS parent
-             and 10+10 torsor                       |             \
-                       |                    minimum spans       MDS-to-AME
-               clique and orbital                     |               \
-                  reconstruction              (3) secant arrangement   AME(6,11)
-                       |                              |                 /
-          (5) Fourier-self-dual              complement at q=11      /
-              rank-eight scheme                      |               /
-                         \                    (4) deep-hole conic    /
-                          \________________ scalar-orbit lift ______/
+                              A
+                         [6] / \ [1]
+                            /   \
+                           F     B
+                       [5] |     | [2]
+                           E     C
+                            \   /
+                         [4] \ / [3]
+                              D
 ```
 
-The diagonal `MDS -> AME` is standard.  The outside path is the paper's distinctive contribution:
-it explains the arithmetic, error geometry, Fourier algebra, and reconstruction carried by that
-particular tensor presentation.
+Vertex legend:
+
+| vertex | object |
+|:---:|:---|
+| `A` | integral `H3/A5` six-orbit, recovered again at the end |
+| `B` | good-reduction projective six-arc |
+| `C` | `[6,3,4]` MDS parent and its exact GRS phase |
+| `D` | q=11 deep-hole conic and `[12,3,10]` GRS child |
+| `E` | primitive Fourier-self-dual rank-eight syndrome scheme |
+| `F` | `AME(6,11)` perfect-tensor presentation and its Pauli-error structure |
+
+Side legend:
+
+| side | proof-bearing transition |
+|:---:|:---|
+| `[1]` | integral symmetry to good-reduction arithmetic geometry |
+| `[2]` | minors and conic determinant: six-arc to MDS/GRS code |
+| `[3]` | syndrome-span lemma and secant complement: code to deep holes |
+| `[4]` | scalar `A5` orbitals and character sums: conic to self-dual scheme |
+| `[5]` | stabilizer/Pauli dictionary: scheme classes to quantum error structure |
+| `[6]` | canonical coset graph, cliques, and orbitals: derived presentation back to hexagon |
+
+The standard MDS-to-AME construction is the chord `C -> F`, not one of the six sides.  The outside
+path is the paper's distinctive contribution: it explains the arithmetic, error geometry, Fourier
+algebra, quantum error structure, and reconstruction carried by that tensor presentation.
 
 ## A copy-ready Hexagon Spine Theorem
 
