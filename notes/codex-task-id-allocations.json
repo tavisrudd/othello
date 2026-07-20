@@ -125,8 +125,17 @@
       "last": 385,
       "purpose": "famous-problem probes: PRS deep holes, AME LU-family classification, perfect one-factorizations",
       "sequence": 14
+    },
+    {
+      "count": 2,
+      "first": 386,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 387,
+      "purpose": "C382 adjacent mappings: O10-minus matching code and Bertini limit-theta bridge",
+      "sequence": 15
     }
   ],
-  "next_id": 386,
+  "next_id": 388,
   "schema": "codex-task-id-allocations-v1"
 }
