@@ -345,8 +345,16 @@ a complete database closure.  The exact-title OpenAlex query did not resolve Fil
 Crossref returned unrelated title matches, and Semantic Scholar rate-limited the query, so a new
 three-graph forward-citation closure was not obtained.  MathSciNet and Google Scholar were not
 covered; zbMATH was not closed.  Consequently the report makes no `first`, priority, or unrestricted
-absence claim.  Within the recorded coverage, the combined harmonic/cubic-memory theorem survives;
-broader priority remains open.
+absence claim.  The later claim-by-claim priority audit records six full-text and six partial or
+metadata-depth sources and sharpens this boundary: Edge and Dye own the exceptional conic-marker
+geometry, Cameron--Korchmaros own the relevant highly symmetric one-factorizations,
+Bamberg--Klawuhn place one-factorizations in the perfect-matching association scheme as Delsarte
+designs, and Pan--Wu--Yin own the `PGL_2(11)/A5` Hadamard orbital action together with its coarse
+`A4/D10` cross-sheet stabilizers.  None of those classical layers is claimed as new.  Within the
+recorded coverage, no predecessor was located for the composition of the conic-ideal quotient,
+balanced-half reconstruction, cubic orientation tensor and plane syzygies, and the exact
+depth--Fourier map.  See `notes/2026-07-20-c406-priority-audit.md` for source depth, queries,
+forward-citation counts, access gaps, and manuscript-safe wording.
 
 ## Reproducibility
 
@@ -393,8 +401,9 @@ linearly with C378's four-dimensional Fourier sector, or establish literature pr
 Gate 2 passes with a uniform nontrivial harmonic image.  Gate 3's proposed linear sign fails, but
 the mandated way-around search produces a stronger nonlinear result: the exact two-sheet partition
 is the unique balanced second-moment partition and its first signed separator is cubic.  This is a
-green mathematical mechanism, qualified yellow only on priority because forward-citation closure is
-incomplete.
+green mathematical mechanism and a likely-new composition within the bounded recorded coverage;
+unrestricted priority remains open because MathSciNet, Google Scholar, zbMATH, and part of the
+forward-citation graph were not closed.
 
 The paper-facing replacement is one concise section, not another anthology clause:
 
