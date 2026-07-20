@@ -152,8 +152,17 @@
       "last": 390,
       "purpose": "C382 free upgrades: induced Clebsch-Bring bridge, E8 norm-four cap, and matching-Lagrangian/triality gates",
       "sequence": 17
+    },
+    {
+      "count": 2,
+      "first": 391,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 392,
+      "purpose": "C369 service-spectrum upgrade and q=11 two-sheet service compatibility",
+      "sequence": 18
     }
   ],
-  "next_id": 391,
+  "next_id": 393,
   "schema": "codex-task-id-allocations-v1"
 }
