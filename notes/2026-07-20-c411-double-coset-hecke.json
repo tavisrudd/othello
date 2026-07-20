@@ -1,0 +1,614 @@
+{
+  "compressed_trade": {
+    "conceptual_reason": {
+      "degree_1": "twice the 1,4,6 weighted barycentre, which is zero",
+      "degree_2": "opposite profiles cancel in every even signed moment",
+      "degree_3": "twice the weighted odd cube; its first coordinate is nonzero"
+    },
+    "cubic_first_coordinate_witness_mod_11": 6,
+    "j_negates_profiles": true,
+    "moments": [
+      {
+        "coordinates": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "degree": 1,
+        "nonzero": false,
+        "sha256": "1c10b03518fff8fc374a20bbf5107c66496656bec0662d6c6db123d4a898f121"
+      },
+      {
+        "coordinates": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "degree": 2,
+        "nonzero": false,
+        "sha256": "6a0a26c28788b341a59f29cf4a003f7d3dda3445742d77c6d6277d7b0b76ed98"
+      },
+      {
+        "coordinates": [
+          6,
+          0,
+          10,
+          1,
+          5,
+          1,
+          4,
+          0,
+          1,
+          3,
+          10,
+          3,
+          7,
+          3,
+          0,
+          7,
+          5,
+          9,
+          2,
+          5
+        ],
+        "degree": 3,
+        "nonzero": true,
+        "sha256": "a433e89ef8d003ce446b9019140252741fe78bb7a64922b36e904960b9899476"
+      }
+    ]
+  },
+  "depth_map": {
+    "H_orbit_sizes": [
+      1,
+      5,
+      6,
+      10
+    ],
+    "bi_hecke_module_dimension": 6,
+    "derivation_matching_evaluations": 6,
+    "distinct_profile_counts_on_H_orbits": [
+      1,
+      1,
+      2,
+      2
+    ],
+    "full_replay_matching_evaluations": 22,
+    "is_H_biinvariant_or_zonal_spherical": false,
+    "is_K_H_biinvariant_matrix_coefficient_data": true,
+    "linear_kernel_dimension": 4,
+    "linear_rank_mod_11": 2,
+    "positive_profiles_in_weight_order": [
+      [
+        -6,
+        0,
+        12,
+        -12
+      ],
+      [
+        -3,
+        3,
+        0,
+        3
+      ],
+      [
+        3,
+        -2,
+        -2,
+        0
+      ]
+    ],
+    "profile_plane_equations_mod_11": [
+      [
+        2,
+        2,
+        1,
+        0
+      ],
+      [
+        9,
+        8,
+        0,
+        1
+      ]
+    ],
+    "separates_all_six_double_cosets": true,
+    "weighted_linear_relation_over_integers": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "weights": [
+      1,
+      4,
+      6
+    ]
+  },
+  "double_cosets": {
+    "count": 6,
+    "j_pairs_the_three_orbits": true,
+    "mark_decomposition": [
+      {
+        "K_set": "K/K",
+        "marks_on_orders_1_2_3": [
+          1,
+          1,
+          1
+        ],
+        "multiplicity": 1
+      },
+      {
+        "K_set": "K/C3",
+        "marks_on_orders_1_2_3": [
+          4,
+          0,
+          1
+        ],
+        "multiplicity": 1
+      },
+      {
+        "K_set": "K/C2",
+        "marks_on_orders_1_2_3": [
+          6,
+          2,
+          0
+        ],
+        "multiplicity": 1
+      }
+    ],
+    "orbit_sizes": [
+      1,
+      1,
+      4,
+      4,
+      6,
+      6
+    ],
+    "plus_sheet_permutation_character_on_K_orders_1_2_3": [
+      11,
+      3,
+      2
+    ],
+    "representatives": [
+      {
+        "depth_profile": [
+          -6,
+          0,
+          12,
+          -12
+        ],
+        "double_coset_size": 60,
+        "matching_indices": [
+          0
+        ],
+        "orbit_size": 1,
+        "relation_zero_counts": [
+          0,
+          0,
+          0,
+          0,
+          12,
+          3,
+          12,
+          0,
+          0,
+          0,
+          6,
+          12,
+          12,
+          0,
+          0,
+          0
+        ],
+        "representative_index": 0,
+        "representative_matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "sheet": 0,
+        "stabilizer_element_orders": [
+          1,
+          2,
+          3
+        ],
+        "stabilizer_order": 12
+      },
+      {
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "double_coset_size": 360,
+        "matching_indices": [
+          1,
+          7,
+          8,
+          12,
+          14,
+          21
+        ],
+        "orbit_size": 6,
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "representative_index": 1,
+        "representative_matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        "sheet": 1,
+        "stabilizer_element_orders": [
+          1,
+          2
+        ],
+        "stabilizer_order": 2
+      },
+      {
+        "depth_profile": [
+          3,
+          -3,
+          0,
+          -3
+        ],
+        "double_coset_size": 240,
+        "matching_indices": [
+          2,
+          5,
+          10,
+          16
+        ],
+        "orbit_size": 4,
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          0,
+          3,
+          3,
+          6,
+          3,
+          3,
+          6,
+          3,
+          3,
+          3,
+          6
+        ],
+        "representative_index": 2,
+        "representative_matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        "sheet": 1,
+        "stabilizer_element_orders": [
+          1,
+          3
+        ],
+        "stabilizer_order": 3
+      },
+      {
+        "depth_profile": [
+          -3,
+          3,
+          0,
+          3
+        ],
+        "double_coset_size": 240,
+        "matching_indices": [
+          3,
+          9,
+          15,
+          17
+        ],
+        "orbit_size": 4,
+        "relation_zero_counts": [
+          0,
+          3,
+          0,
+          3,
+          12,
+          0,
+          3,
+          3,
+          6,
+          6,
+          6,
+          3,
+          3,
+          0,
+          3,
+          6
+        ],
+        "representative_index": 3,
+        "representative_matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        "sheet": 0,
+        "stabilizer_element_orders": [
+          1,
+          3
+        ],
+        "stabilizer_order": 3
+      },
+      {
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "double_coset_size": 360,
+        "matching_indices": [
+          4,
+          6,
+          11,
+          13,
+          18,
+          20
+        ],
+        "orbit_size": 6,
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "representative_index": 4,
+        "representative_matching": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "sheet": 0,
+        "stabilizer_element_orders": [
+          1,
+          2
+        ],
+        "stabilizer_order": 2
+      },
+      {
+        "depth_profile": [
+          6,
+          0,
+          -12,
+          12
+        ],
+        "double_coset_size": 60,
+        "matching_indices": [
+          19
+        ],
+        "orbit_size": 1,
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          3,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0,
+          12,
+          0,
+          12,
+          0
+        ],
+        "representative_index": 19,
+        "representative_matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        "sheet": 1,
+        "stabilizer_element_orders": [
+          1,
+          2,
+          3
+        ],
+        "stabilizer_order": 12
+      }
+    ],
+    "space": "K\\G/H"
+  },
+  "field": 11,
+  "groups": {
+    "G": {
+      "name": "PGL2(11)",
+      "order": 1320
+    },
+    "G_plus": {
+      "name": "PSL2(11)",
+      "order": 660
+    },
+    "H": {
+      "name": "A5",
+      "order": 60
+    },
+    "K": {
+      "name": "A4",
+      "order": 12
+    }
+  },
+  "inputs": {
+    "2026-07-19-c378-clebsch-common-duality.json": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc",
+    "2026-07-19-c378-clebsch-common-duality.py": "e45e71c5e87ccc334fab3b926e5189373e24485adf11ed1cbaacfc6771610bdc",
+    "2026-07-20-c406-matching-module.json": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2",
+    "2026-07-20-c406-matching-module.py": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    "2026-07-20-c406-matching-orbit-scout.json": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+  },
+  "schema": "c411-double-coset-hecke-v1",
+  "verdict": "CONCEPTUAL DOUBLE-COSET DERIVATION; MIXED BI-HECKE RANK-TWO DEPTH MAP; CUBIC-FIRST PUSHFORWARD"
+}
