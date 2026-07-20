@@ -27,14 +27,16 @@ compatibility check closes the task; it does not authorize a new census or proof
    pair, compare exactly the three C351 forgetful interfaces: uncoloured residual graph, repair
    multigraph, and unmarked code. Success is one shared interface with different two-failure
    capacity, ideally all three; otherwise report the exact bounded negative and close.
-3. **C368 — H3/A5 arithmetic phase diagram.** Align C339, C341, and C346 into one theorem covering
-   odd-prime lattice preservation, the characteristic-five GRS boundary, the stable geometric
-   recovery range, and the q=11 rank-eight decoder scheme.  At q=11, prove explicitly that the
-   non-GRS six-column parent has a complete projective weight-three syndrome locus equal to the
-   twelve-point complement conic and hence, as a projective system, a `[12,3,10]_11` GRS child.
-   Present the characteristic-five source conic and q=11 deep-hole conic as two arithmetic phases
-   only after their field and projective-system conventions are aligned. Success requires a
-   logically new combined corollary; a narrative juxtaposition is not enough.
+3. **C368 — complete; one invariant conic, two arithmetic phases.**  The C339/C341/C346
+   composition is an exact theorem: every odd prime preserves the `H3/A5` lattice and six-arc,
+   characteristic five is exactly the GRS parent phase, q=9 is an empty non-GRS complement, q=11
+   is the non-GRS-parent/deep-hole-conic/projective-GRS-child phase, and every other odd-prime
+   residue has `q>=19` and lies in C339's intrinsic stable-recovery range.  In the integral `H3`
+   coordinates the same invariant conic `X^2+Y^2+Z^2=0` is the six-column source orbit at q=5 but
+   the complete twelve-direction weight-three syndrome locus at both q=11 roots.  In the manuscript
+   `tau=8` normalization it maps exactly to `XZ=Y^2`, generates a `[12,3,10]_11` extended/projective
+   GRS child, and projectivizes C341's 120-vector `deep_hole_C5` relation in the rank-eight scheme.
+   See `notes/2026-07-19-c368-h3-a5-arithmetic-phase.md` and its exact checker/JSON bundle.
 4. **C369 — intrinsic reconstruction-to-service bridge.** Check whether C295's recovered frame and
    code data determine C357's projection-involution orbit predicate and service--PIR extremizer on
    the same object class. Success is an uncoloured-graph-intrinsic operational theorem. Object-class
