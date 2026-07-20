@@ -189,3 +189,44 @@ Burke--Dailly--Oijid, arXiv:2404.10390v2, supplies the open-complexity/GI-hard r
 No novelty or priority audit was attempted.
 **Status:** incorporated -> `notes/2026-07-19-c388-cubic-mirror-isolator.md`; broader recognition
 lead graduated -> C393, with a mandatory repackaging stop.
+
+### 2026-07-20 — Structural classification of all C400 coherent fusions
+
+**Provenance:** post-C400 upgrade review after the bounded exact fusion computations and the
+Bell-number stop in `notes/2026-07-20-c400-a5-fourier-phases.md`.
+**Was I looking for this?:** no relative to C400's allocated deliverable — C400 sought the uniform
+rank/orbit law, conic-relation phases, and bounded small-field fusion data, not an all-field
+classification of every coherent fusion.
+**Observed / musing:** the complete fusion problem may admit a structural solution through the
+representation or centralizer algebra of the scalar-`A5` action, replacing fieldwise partition
+enumeration and its Bell-number explosion by an intrinsic classification theorem.
+**Why it may matter / strongest question:** can the primitive idempotents, Galois action, and
+centralizer multiplication force a finite family of fusion templates uniformly across all good
+fields, including a proof that no additional fusions occur?
+**Discriminator / falsifier:** derive a representation-theoretic necessary-and-sufficient fusion
+criterion that reproduces the complete q=5/9/11 lattices without enumerating set partitions.  The
+lead fails as a cheap upgrade if it still requires fieldwise Bell-number search or an unbounded
+case taxonomy.
+**Evidence:** OPEN — C400 supplies exact eigenmatrices, orbit types, and bounded fusion lattices,
+but no structural all-fusion theorem.  This is a substantial research programme, not a free
+corollary.
+**Status:** open lead; unallocated
+
+### 2026-07-20 — Separability/CI beyond the failed standard criteria
+
+**Provenance:** post-C400 recognition review of the q=11 scalar-`A5` translation scheme.
+**Was I looking for this?:** no relative to C400's allocated deliverable — separability was a
+boundary question, while the completed task proved rank, primitivity, Fourier self-duality, and
+bounded fusions.
+**Observed / musing:** a separability or CI theorem would need a genuinely new recognition
+argument: the standard TI and quasiregular criteria already fail at q=11, so the existing
+association-scheme criteria do not convert C400's exact parameters into uniqueness.
+**Why it may matter / strongest question:** is there an orbit-sensitive reconstruction theorem,
+perhaps using the fine `C3/C5/free` centralizer data or the ambient additive group, that proves every
+algebraic isomorphism is induced geometrically and hence establishes separability/CI?
+**Discriminator / falsifier:** construct one invariant that distinguishes every candidate algebraic
+isomorphism at q=11 and prove it is intrinsic.  A certified algebraic automorphism not induced by a
+combinatorial one, or collapse to the already-failed TI/quasiregular hypotheses, retires the lead.
+**Evidence:** OPEN WITH NEGATIVE BASELINE — C400 gives the exact q=11 scheme and verifies failure of
+the standard criteria, but supplies no new recognition mechanism.  This is not a cheap upgrade.
+**Status:** open lead; unallocated
