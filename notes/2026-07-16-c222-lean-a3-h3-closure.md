@@ -48,3 +48,58 @@ precisely.
 C222 is complete when every new C211 claim named in the objective is either supported by focused,
 axiom-audited Lean declarations or explicitly retained as computer-assisted with a documented
 compactness obstruction. No large generated certificate tree is an acceptable deliverable.
+
+## Required durable report and fixed trust standard
+
+This file is both the cold-read task specification and the required final report. Complete it in
+place with the exact mathematical statement of every C211 subclaim, its final trust route, fully
+qualified Lean theorem and gate where applicable, exact validation and `#print axioms` evidence,
+compactness measurements for any stopped subclaim, and the proposed C320 ledger rows. Do not leave
+“compact if possible,” “standard,” or “follows” as a final classification.
+
+For each subclaim choose exactly one completed route: full-trust Lean; exact replay/certificate;
+conceptual proof with named classical inputs; or an explicitly decomposed combination. A subclaim
+retained as computer-assisted must not be imported, described, or inherited as Lean-formalized by an
+aggregate gate. Lean source and referee-facing artifacts contain no task IDs, agents, sessions,
+private-note references, workflow chronology, unsupported novelty language, or comments stronger
+than the theorem type. Internal reports point forward to exact Lean declarations, never conversely.
+
+## Required judgment-call record
+
+Record every choice to formalize, rescope, stop, add a hypothesis, use a coordinate representation,
+retain external evidence, or reject a certificate tree. For each give the alternatives, mathematical
+and measured evidence, exact theorem/paper/trust impact, rejected alternatives, and reopening
+condition. A compactness stop requires the attempted theorem, first obstruction, representative
+measurement, projected artifact shape/size, and the precise weaker exit retained.
+
+## Required closing review and archival checklist
+
+Keep C222 live. After implementation and completion of this report/checklist, explicitly request an
+independent referee-style review of the actual Lean types, definitions, module prose, gate, trust
+boundary, and evidence. Any finding or `NO-GO` blocks completion and archival. Fix every issue or
+narrow the claimed exit, update the report and C320 delta, and request post-fix review. Only a
+recorded final `GO` permits C222 to be marked complete and archived.
+
+- [ ] State every objective subclaim in ordinary mathematics with exact field, coordinates,
+  quantifiers, nondegeneracy assumptions, conventions, hypotheses, and conclusion.
+- [ ] Assign every subclaim one final trust route and separate conditional/external clauses; no
+  result inherits a Lean label from sharing a module or gate.
+- [ ] Read definitions and theorem types to exclude vacuity, conclusions baked into definitions,
+  weakened quantifiers, hidden assumptions, empty domains, and prose/names stronger than types.
+- [ ] Record exact owned files, permitted imports, fully qualified terminals, import-only gate,
+  pinned commit, guarded/gate validation, and `#print axioms` for every claimed Lean terminal.
+- [ ] Confirm no `sorryAx`, `native_decide`, undisclosed project axiom, opaque oracle, large generated
+  case tree, or unreported non-kernel execution occurs in a full-trust closure.
+- [ ] For any finite computation, record checker and soundness theorem, domain/coverage,
+  generator/schema/data/hash, independent replay, and residual trusted boundary.
+- [ ] Recompute hashes/byte counts after final edits and distinguish identity/reproducibility from
+  mathematical correctness.
+- [ ] Review the entire touched Lean artifact for self-contained comments/names, exact trust prose,
+  one-way internal references, factual citations, and no novelty/strength overclaim.
+- [ ] Include the exact public theorem statements and load-bearing definitions, or a deterministic
+  extraction, for the paper adequacy appendix.
+- [ ] State every exclusion and compactness stop precisely and confirm the manuscript verification
+  map retains the correct computer-assisted label.
+- [ ] Complete the judgment-call record and proposed C320 row for every objective subclaim.
+- [ ] Record independent review findings, fixes, post-fix review, and final `GO`.
+- [ ] Only after final `GO`, archive the live task row with this completed report and evidence.

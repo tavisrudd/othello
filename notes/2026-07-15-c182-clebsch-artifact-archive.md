@@ -57,3 +57,51 @@ and cite the archived release, not a mutable branch URL.
 - the final PDF is rebuilt after inserting the DOI.
 
 Until these conditions hold, the manuscript should not claim that the artifact is archived.
+
+## Required durable report and standards
+
+This file is both the cold-read task specification and the required final report. Complete it in
+place with the exact archived commit/tag, packaging allowlist, file manifest, byte counts and
+SHA-256 hashes, DOI/version, replay commands and results, independent unpack/replay evidence, paper
+availability wording, and every deviation from the intended package. A chat summary, mutable branch,
+local cache, or claimed successful upload is not evidence.
+
+The public artifact must be self-contained for a referee. It must exclude task queues, handoffs,
+agent/session records, private notes, machine-local paths, secrets, and workflow IDs unless a file is
+itself indispensable scholarly evidence and has been rewritten for that audience. Public comments,
+names, manifests, diagnostics, and provenance use mathematical/semantic language rather than C-task
+history. Every manuscript claim names its actual trust route; archiving a checker or source does not
+upgrade an external/computer-assisted claim to Lean-formalized.
+
+## Required judgment-call record
+
+Record every choice about package contents, exclusions, version/tag, durable repository, DOI
+metadata, license, large-artifact handling, replay environment, source-versus-generated inclusion,
+and failed or partial replay. For each give the options, chosen route, evidence, effect on referee
+access and trust, rejected alternatives, and reopening condition. “Whatever Zenodo accepted” and an
+unrecorded omission are not dispositions.
+
+## Required closing review and archival checklist
+
+Keep C182 live until this checklist is complete. Explicitly request an independent referee-style
+review of the frozen download, report, manuscript wording, and replay. Any finding or `NO-GO`
+blocks task archival: fix it, mint/update the version when necessary, update hashes/report, and
+request post-fix review. Only a recorded final `GO` permits C182 to be completed and archived.
+
+- [ ] Identify the exact clean commit and immutable tag; prove all package inputs are committed.
+- [ ] Define and record a reproducible packaging allowlist and verify that no internal workflow,
+  secret, machine-local, build-cache, or unrelated Q25/foreign artifact is included.
+- [ ] Record every archived path, semantic role, byte count, SHA-256, generator/schema relationship,
+  and whether it is source, untrusted data, checker, replay, manuscript, or environment metadata.
+- [ ] Run every documented verifier from the staged archive, not the working tree, then independently
+  download/unpack and replay in a fresh disk-backed directory.
+- [ ] Confirm generated evidence matches its final generator/schema and that hashes establish
+  identity only; record the checker/soundness or external trust route establishing mathematics.
+- [ ] Reconcile every paper claim and availability citation with C320's final trust ledger and the
+  exact archived theorem/gate/checker paths.
+- [ ] Confirm DOI, version, bibliography, public URLs, license, and availability prose all identify
+  the same immutable object and that the final PDF was rebuilt from it.
+- [ ] Complete the judgment-call record and state every excluded, failed, optional, or external
+  component without implying completeness beyond the archived package.
+- [ ] Record the independent reviewer, date, findings, fixes, post-fix review, and final `GO`.
+- [ ] Only after final `GO`, archive the live task row together with this completed report.
