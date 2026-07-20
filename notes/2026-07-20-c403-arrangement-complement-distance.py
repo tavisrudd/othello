@@ -6,7 +6,9 @@ depth ledgers.  The independent path enumerates points and lines of PG(2, 11)
 for pinned arrangements, reconstructs every code weight directly, and checks
 an infinite two-pencil formula on a grid of finite-field samples.  Higher-degree
 paths certify the Veronese-adjoint identity and the all-degree squarefree
-line-product support law at the three Coxeter conic phases.
+line-product support law at the three Coxeter conic phases.  The final path
+certifies the matching-forgetting quotient, its four-endpoint exchange
+relations, and the perfect-matching evaluation-kernel boundary.
 """
 
 from __future__ import annotations
@@ -1091,6 +1093,167 @@ def conic_phase_factorized_support_formula(
     return dict(sorted(counts.items()))
 
 
+def perfect_matchings(indices: tuple[int, ...]) -> tuple[tuple[tuple[int, int], ...], ...]:
+    """Return the canonically ordered perfect matchings of an even tuple."""
+    if not indices:
+        return ((),)
+    first = indices[0]
+    result = []
+    for position in range(1, len(indices)):
+        second = indices[position]
+        remainder = indices[1:position] + indices[position + 1 :]
+        for matching in perfect_matchings(remainder):
+            result.append(((first, second),) + matching)
+    return tuple(result)
+
+
+def multiply_binary_forms(
+    first: tuple[int, ...], second: tuple[int, ...], prime: int
+) -> tuple[int, ...]:
+    """Multiply homogeneous binary forms, indexed by the power of the second variable."""
+    result = [0] * (len(first) + len(second) - 1)
+    for left_degree, left in enumerate(first):
+        for right_degree, right in enumerate(second):
+            result[left_degree + right_degree] = (
+                result[left_degree + right_degree] + left * right
+            ) % prime
+    return tuple(result)
+
+
+def bracket(first: tuple[int, int], second: tuple[int, int], prime: int) -> int:
+    return (first[0] * second[1] - first[1] * second[0]) % prime
+
+
+def normalized_secant(
+    first: tuple[int, int], second: tuple[int, int], prime: int
+) -> tuple[int, int, int]:
+    """The canonically scaled secant whose conic restriction is [first,u][second,u]."""
+    a, b = first
+    c, d = second
+    return (b * d % prime, -(a * d + b * c) % prime, a * c % prime)
+
+
+def product_of_linear_forms(
+    first: tuple[int, int, int], second: tuple[int, int, int], prime: int
+) -> tuple[int, ...]:
+    """Multiply ternary linear forms in the order X^2,Y^2,Z^2,XY,XZ,YZ."""
+    a, b, c = first
+    d, e, f = second
+    return (
+        a * d % prime,
+        b * e % prime,
+        c * f % prime,
+        (a * e + b * d) % prime,
+        (a * f + c * d) % prime,
+        (b * f + c * e) % prime,
+    )
+
+
+def evaluate_binary_form(
+    coefficients: tuple[int, ...], point: tuple[int, int], prime: int
+) -> int:
+    s, t = point
+    degree = len(coefficients) - 1
+    return sum(
+        coefficient * pow(s, degree - t_degree, prime) * pow(t, t_degree, prime)
+        for t_degree, coefficient in enumerate(coefficients)
+    ) % prime
+
+
+def matching_forgetting_certificate(prime: int) -> dict[str, object]:
+    """Replay the all-degree matching quotient on the rational normal conic."""
+    endpoints = tuple([(1, value) for value in range(prime)] + [(0, 1)])
+    q_form = (0, prime - 1, 0, 0, 1, 0)  # XZ-Y^2.
+    exchange_checks = 0
+    for a, b, c, d in combinations(range(prime + 1), 4):
+        left = product_of_linear_forms(
+            normalized_secant(endpoints[a], endpoints[b], prime),
+            normalized_secant(endpoints[c], endpoints[d], prime),
+            prime,
+        )
+        right = product_of_linear_forms(
+            normalized_secant(endpoints[a], endpoints[c], prime),
+            normalized_secant(endpoints[b], endpoints[d], prime),
+            prime,
+        )
+        coefficient = bracket(endpoints[a], endpoints[d], prime) * bracket(
+            endpoints[b], endpoints[c], prime
+        ) % prime
+        expected = tuple(coefficient * value % prime for value in q_form)
+        if tuple((x - y) % prime for x, y in zip(left, right)) != expected:
+            raise AssertionError("four-endpoint Pluecker exchange identity failed")
+        exchange_checks += 1
+
+    degree_profiles = []
+    for degree in range(1, (prime + 1) // 2 + 1):
+        matching_count = factorial(2 * degree) // (2**degree * factorial(degree))
+        endpoint_set_count = comb(prime + 1, 2 * degree)
+        restriction_forms: set[tuple[int, ...]] = set()
+        projective_words: set[tuple[int, ...]] = set()
+        products_checked = 0
+        for selected in combinations(range(prime + 1), 2 * degree):
+            expected_form = (1,)
+            for index in selected:
+                s, t = endpoints[index]
+                expected_form = multiply_binary_forms(
+                    expected_form, (t % prime, -s % prime), prime
+                )
+            matching_forms = set()
+            for matching in perfect_matchings(selected):
+                restricted = (1,)
+                for first, second in matching:
+                    restricted = multiply_binary_forms(
+                        restricted,
+                        normalized_secant(endpoints[first], endpoints[second], prime),
+                        prime,
+                    )
+                matching_forms.add(restricted)
+                products_checked += 1
+            if matching_forms != {expected_form}:
+                raise AssertionError("matching products did not have one common restriction")
+            restriction_forms.add(expected_form)
+            word = tuple(
+                evaluate_binary_form(expected_form, point, prime) for point in endpoints
+            )
+            if 2 * degree < prime + 1:
+                if sum(value != 0 for value in word) != prime + 1 - 2 * degree:
+                    raise AssertionError("matching word has the wrong nonzero support")
+                projective_words.add(normalize(word, prime))
+            elif any(word) or not any(expected_form):
+                raise AssertionError("perfect-matching boundary did not enter evaluation kernel")
+        if products_checked != endpoint_set_count * matching_count:
+            raise AssertionError("matching product count failed")
+        if len(restriction_forms) != endpoint_set_count:
+            raise AssertionError("distinct endpoint sets did not give distinct restricted forms")
+        expected_word_count = endpoint_set_count if 2 * degree < prime + 1 else 0
+        if len(projective_words) != expected_word_count:
+            raise AssertionError("projective matching quotient count failed")
+        degree_profiles.append(
+            {
+                "degree": degree,
+                "endpoint_sets": endpoint_set_count,
+                "matchings_per_endpoint_set": matching_count,
+                "line_products_checked": products_checked,
+                "matching_module_kernel_dimension": matching_count - 1,
+                "support_weight": prime + 1 - 2 * degree,
+                "distinct_nonzero_projective_codewords": len(projective_words),
+                "evaluation_kernel_boundary": 2 * degree == prime + 1,
+            }
+        )
+    return {
+        "q": prime,
+        "four_endpoint_exchange_checks": exchange_checks,
+        "exchange_identity": (
+            "L_ab L_cd-L_ac L_bd=[a,d][b,c](XZ-Y^2)"
+        ),
+        "matching_kernel": (
+            "for each endpoint set S, ker(E_S -> H^0(C,O_C(2r))) is the "
+            "augmentation space, generated by four-endpoint matching switches"
+        ),
+        "degrees": degree_profiles,
+    }
+
+
 def degree_two_veronese_adjoint_pilot() -> dict[str, object]:
     prime = 5
     lines = arrangement(
@@ -1361,7 +1524,7 @@ def build_certificate() -> dict[str, object]:
                 raise AssertionError("conic-phase factorized support enumerator formula failed")
 
     return {
-        "schema": "c403-arrangement-complement-distance-v3",
+        "schema": "c403-arrangement-complement-distance-v4",
         "field_convention": "normalized triples for points and dual lines of PG(2,p)",
         "weighted_second_adjoint_theorem": {
             "rank_three_identification": (
@@ -1414,6 +1577,20 @@ def build_certificate() -> dict[str, object]:
                 "where E=(q-1)(q-3)/2"
             ),
             **line_product_profiles,
+        },
+        "conic_matching_forgetting_quotient": {
+            "theorem": (
+                "canonically normalized secant products indexed by every perfect matching "
+                "of one 2r-endpoint set restrict to the same binary form; the matching-module "
+                "kernel is the augmentation space generated by four-endpoint switches"
+            ),
+            "sharp_boundary": (
+                "the common word has weight q+1-2r for 2r<q+1 and becomes the zero "
+                "evaluation word, while remaining a nonzero conic section, at 2r=q+1"
+            ),
+            "phase_replays": {
+                f"q{q}": matching_forgetting_certificate(q) for q in (5, 7, 11)
+            },
         },
         "fixtures": fixtures,
         "comparisons": {
