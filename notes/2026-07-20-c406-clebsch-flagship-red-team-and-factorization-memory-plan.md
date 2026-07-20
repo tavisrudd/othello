@@ -4,7 +4,14 @@
 
 **Date:** 2026-07-20
 
-**Status:** `QUEUED; BOUNDED FLAGSHIP-COMPATIBILITY GATE, NO MANUSCRIPT COMMITMENT`
+**Status:** `GATE 1 COMPLETE; UNIFORM MATCHING INTERFACE PASSES, GATE 2 NOT STARTED`
+
+**Gate 1 outcome:** exact enumeration finds unique `5/14/22` perfect-matching orbits with
+stabilizers `S4/S4/A5`; in every type the parent has a unique invariant matching, and the H3 member
+is C379's frozen obstruction matching.  The orbit alone is the classical parent-marker homogeneous
+space, but the uniform fixed-matching interface authorizes Gate 2's semisimple restricted
+augmentation-module test.  Per user scope, Gate 2 was not started.  See
+`notes/2026-07-20-c406-matching-orbit-scout.md` and its certificate bundle.
 
 **Decision:** preserve the current C399-led Clebsch paper as the protected baseline while testing
 one stronger, tightly bounded candidate spine.  No factorization-memory, equivariant-repair,
