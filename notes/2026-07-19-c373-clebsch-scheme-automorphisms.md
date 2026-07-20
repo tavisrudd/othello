@@ -315,6 +315,9 @@ The last three should not displace C374 without a positive cheap gate.
 
 ### A Clebsch gateway program: theorem-shaped compositions
 
+The expanded magic-hexagon program, including the Clebsch-cubic/`E6` bridge and additional
+theorem gates, is maintained in `2026-07-19-c373-clebsch-gateway-program.md`.
+
 The genuinely useful ``magic gateway'' is not another analogy.  It is the chain of reversible or
 functorial passages
 
