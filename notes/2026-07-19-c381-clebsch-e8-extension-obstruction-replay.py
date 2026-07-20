@@ -48,6 +48,22 @@ def rank_rational(rows):
     return rank
 
 
+def determinant_integer(matrix):
+    work = [list(row) for row in matrix]
+    if not work: return 1
+    sign, previous = 1, 1
+    for column in range(len(work)-1):
+        pivot = next(i for i in range(column,len(work)) if work[i][column])
+        if pivot != column:
+            work[column],work[pivot]=work[pivot],work[column]; sign*=-1
+        value=work[column][column]
+        for i in range(column+1,len(work)):
+            for j in range(column+1,len(work)):
+                work[i][j]=(work[i][j]*value-work[i][column]*work[column][j])//previous
+        previous=value
+    return sign*work[-1][-1]
+
+
 def intersection(left, right):
     return left[0]*right[0] - sum(a*b for a, b in zip(left[1:], right[1:]))
 
@@ -118,6 +134,32 @@ def additive_root_closure(generators):
     return frozenset(result)
 
 
+def root_discriminant(roots):
+    weights = next(
+        tuple(base**i for i in range(9)) for base in range(2,20)
+        if all(sum(a*base**i for i,a in enumerate(root)) != 0 for root in roots)
+    )
+    positive={root for root in roots if sum(a*b for a,b in zip(root,weights))>0}
+    simple=[root for root in positive if not any(
+        tuple(a+b for a,b in zip(left,right))==root for left in positive for right in positive
+    )]
+    assert len(simple)==rank_rational(list(roots))
+    gram=[[intersection(left,right) for right in simple] for left in simple]
+    return abs(determinant_integer(gram))
+
+
+def matrix_order(g, matrix):
+    power=g.I
+    for order in range(1,61):
+        power=g.normm(g.mm(power,matrix))
+        if power==g.I: return order
+    raise AssertionError("matrix order exceeds A5")
+
+
+def act_pair(g, matrix, pair):
+    return frozenset(g.normalize(g.mv(matrix,point)) for point in pair)
+
+
 def main():
     g = load_geometry()
     plane = g.projective_points()
@@ -128,6 +170,22 @@ def main():
     parents = frozenset(g.image(matrix, plus) for matrix in pgl)
     assert (len(conic), len(a5), len(pgl), len(parents)) == (12, 60, 1320, 22)
     matchings = {parent:g.obstruction_matching(parent, conic) for parent in parents}
+    assert len(set(matchings.values())) == 22
+
+    unseen_pairs={frozenset(pair) for pair in itertools.combinations(conic,2)}
+    pair_characters=[]
+    while unseen_pairs:
+        representative=min(unseen_pairs,key=lambda pair:tuple(sorted(pair)))
+        orbit=frozenset(act_pair(g,matrix,representative) for matrix in a5)
+        unseen_pairs-=orbit
+        by_order={}
+        for matrix in a5:
+            order=matrix_order(g,matrix)
+            fixed=sum(act_pair(g,matrix,pair)==pair for pair in orbit)
+            by_order.setdefault(order,set()).add(fixed)
+        assert all(len(values)==1 for values in by_order.values())
+        pair_characters.append((len(orbit),tuple(next(iter(by_order[order])) for order in (1,2,3,5))))
+    assert sorted(pair_characters)==[(6,(6,2,0,1)),(30,(30,2,0,0)),(30,(30,2,0,0))]
 
     spectrum = Counter()
     representatives = {}
@@ -161,13 +219,20 @@ def main():
         (False,0,3,0,0,False):660,
         (False,1,3,0,0,False):660,
     })
-    closure = {signature:len(additive_root_closure(generators)) for signature,generators in representatives.items()}
+    closed = {signature:additive_root_closure(generators) for signature,generators in representatives.items()}
+    closure = {signature:len(roots) for signature,roots in closed.items()}
     expected_closure = {
         (True,0,7,7,1,False):112,
         (False,0,3,0,0,False):6,
         (False,1,3,0,0,False):8,
     }
     assert closure == expected_closure, closure
+    discriminants={signature:root_discriminant(roots) for signature,roots in closed.items()}
+    assert discriminants == {
+        (True,0,7,7,1,False):4,
+        (False,0,3,0,0,False):8,
+        (False,1,3,0,0,False):16,
+    }
 
     cert=json.loads(CERT.read_text())
     assert cert["domain"]["marked_configuration_count"]==1452
@@ -180,7 +245,19 @@ def main():
                    p["seven_point_conic_count"],p["has_four_collinear"])
         got[signature]=item["count"]
         assert p["generated_root_count"]==closure[signature]
+        assert p["generated_root_discriminant"]==discriminants[signature]
+        if signature[0]:
+            assert (p["generated_root_rank"],p["ambient_e8_index"],p["ambient_e8_quotient"])==(8,2,"C2")
     assert got==spectrum
+    assert cert["free_corollaries"]["root_only_parent_inversion"]
+    assert cert["free_corollaries"]["matched_d8_glue"]["index_in_unimodular_e8"]==2
+    assert cert["free_corollaries"]["fixed_parent_pair_permutation_characters"] == {
+        "class_ordering":[1,2,3,5],
+        "A5_over_D10":[6,2,0,1],
+        "A5_over_C2":[30,2,0,0],
+        "two_size_30_orbits_have_same_character":True,
+        "character_alone_recovers_mds_status":False,
+    }
     print("replayed 1452 configurations: 132 D8 worse-than-weak; 660 weak 3A1 arcs; 660 weak 4A1 non-arcs")
 
 

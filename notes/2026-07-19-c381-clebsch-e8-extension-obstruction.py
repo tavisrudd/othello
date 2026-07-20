@@ -74,6 +74,27 @@ def vector_rank(rows):
     return rank
 
 
+def determinant_integer(matrix):
+    """Fraction-free Bareiss determinant."""
+    work = [list(row) for row in matrix]
+    if not work:
+        return 1
+    sign = 1
+    previous = 1
+    for column in range(len(work) - 1):
+        pivot = next((i for i in range(column, len(work)) if work[i][column]), None)
+        assert pivot is not None
+        if pivot != column:
+            work[column], work[pivot] = work[pivot], work[column]
+            sign *= -1
+        value = work[column][column]
+        for i in range(column + 1, len(work)):
+            for j in range(column + 1, len(work)):
+                work[i][j] = (work[i][j] * value - work[i][column] * work[column][j]) // previous
+        previous = value
+    return sign * work[-1][-1]
+
+
 def standard_roots():
     roots = set()
     for i, j in itertools.permutations(range(8), 2):
@@ -145,6 +166,29 @@ def dynkin_type(roots):
     return "+".join(sorted(components))
 
 
+def simple_root_basis(roots):
+    """Choose a positive system by a regular functional and extract its indecomposables."""
+    if not roots:
+        return []
+    weights = None
+    for base in range(2, 20):
+        candidate = tuple(base**i for i in range(9))
+        if all(sum(a * b for a, b in zip(root, candidate)) != 0 for root in roots):
+            weights = candidate
+            break
+    assert weights is not None
+    positive = {root for root in roots if sum(a * b for a, b in zip(root, weights)) > 0}
+    simple = sorted(
+        root for root in positive
+        if not any(tuple(a + b for a, b in zip(left, right)) == root for left in positive for right in positive)
+    )
+    assert len(simple) == vector_rank(list(roots))
+    gram = [[root_intersection(left, right) for right in simple] for left in simple]
+    assert all(gram[i][i] == -2 for i in range(len(simple)))
+    assert all(gram[i][j] in (0, 1) for i in range(len(simple)) for j in range(len(simple)) if i != j)
+    return simple
+
+
 def direct_effective_roots(c379, points):
     line_roots = []
     for triple in itertools.combinations(range(8), 3):
@@ -194,6 +238,16 @@ def pair_orbit(group, c379, pair):
     )
 
 
+def projective_matrix_order(c379, matrix):
+    identity = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+    power = identity
+    for order in range(1, 61):
+        power = c379.mat_normalize(c379.mat_mul(power, matrix))
+        if power == identity:
+            return order
+    raise AssertionError("matrix order exceeds A5")
+
+
 def certificate():
     c379 = load_c379()
     pinned = json.loads(C379_JSON.read_text())
@@ -228,6 +282,10 @@ def certificate():
         line_roots, conic_roots, cubic_roots = direct_effective_roots(c379, points)
         effective = frozenset(line_roots + conic_roots + cubic_roots)
         closure_roots = root_closure(effective)
+        simple = simple_root_basis(closure_roots)
+        gram = [[root_intersection(left, right) for right in simple] for left in simple]
+        discriminant = abs(determinant_integer(gram))
+        root_rank = len(simple)
         seven_conics = seven_point_conics(c379, points)
         matched = pair in matchings[parent]
 
@@ -257,6 +315,10 @@ def certificate():
             "direct_effective_root_count": len(effective),
             "generated_root_count": len(closure_roots),
             "generated_root_type": dynkin_type(closure_roots),
+            "generated_root_rank": root_rank,
+            "generated_root_discriminant": discriminant,
+            "ambient_e8_index": 2 if root_rank == 8 and discriminant == 4 else None,
+            "ambient_e8_quotient": "C2" if root_rank == 8 and discriminant == 4 else None,
             "has_four_collinear": four_line,
             "seven_point_conic_count": len(seven_conics),
             "weak_del_pezzo": weak,
@@ -288,6 +350,11 @@ def certificate():
     ]
     assert sum(item["count"] for item in classification) == 1452
     assert sum(item["count"] for item in classification if item["properties"]["matched_pair"]) == 132
+    matched_classes = [item for item in classification if item["properties"]["matched_pair"]]
+    assert len(matched_classes) == 1
+    assert matched_classes[0]["properties"]["generated_root_type"] == "D8"
+    assert matched_classes[0]["properties"]["ambient_e8_index"] == 2
+    assert pinned["decorated_transform"]["injective_on_conjugate_a5_parent_locus"]
 
     # The same three classes are the three A5-orbits on pairs for a fixed parent.
     unseen_pairs = {frozenset(pair) for pair in itertools.combinations(conic, 2)}
@@ -296,13 +363,32 @@ def certificate():
         representative = min(unseen_pairs, key=lambda pair: tuple(sorted(pair)))
         current = pair_orbit(a5, c379, representative)
         unseen_pairs -= current
+        character_values = defaultdict(set)
+        for matrix in a5:
+            order = projective_matrix_order(c379, matrix)
+            fixed = sum(
+                frozenset(c379.normalize(c379.mat_vec(matrix, point)) for point in pair) == pair
+                for pair in current
+            )
+            character_values[order].add(fixed)
+        assert all(len(values) == 1 for values in character_values.values())
         a5_pair_orbits.append({
             "size": len(current),
             "stabilizer_order": len(a5) // len(current),
+            "permutation_character_by_element_order": {
+                str(order): next(iter(values)) for order, values in sorted(character_values.items())
+            },
             "representative_pair": [list(point) for point in sorted(representative)],
             "classification": configurations[(plus, representative)],
         })
     assert sorted(item["size"] for item in a5_pair_orbits) == [6, 30, 30]
+    characters_by_size = defaultdict(set)
+    for item in a5_pair_orbits:
+        characters_by_size[item["size"]].add(json.dumps(item["permutation_character_by_element_order"], sort_keys=True))
+    assert characters_by_size == {
+        6: {'{"1": 6, "2": 2, "3": 0, "5": 1}'},
+        30: {'{"1": 30, "2": 2, "3": 0, "5": 0}'},
+    }
 
     # PSL preserves the two 11-parent sheets, so each PGL orbit splits in two; J exchanges the halves.
     unseen_psl = set(marked)
@@ -339,6 +425,29 @@ def certificate():
             "matched_inherited_type": "A2",
             "unmatched_inherited_type": "A1+A1",
             "uses_original_matching_input": False,
+        },
+        "free_corollaries": {
+            "root_only_parent_inversion": True,
+            "root_only_parent_inversion_reason": "root intersection recovers M_X and C379 proves X -> (Q,M_X) injective on the 22-parent locus",
+            "mds_from_marked_root_type": {
+                "mds_types": ["(D8,A2)", "(3A1,2A1)"],
+                "non_mds_type": "(4A1,2A1)",
+                "weak_locus_obstruction": "the fourth orthogonal A1 is the unique child-secant line root",
+            },
+            "matched_d8_glue": {
+                "rank": 8,
+                "discriminant": 4,
+                "index_in_unimodular_e8": 2,
+                "quotient": "C2",
+                "sheet_recovery_from_unmarked_type": False,
+            },
+            "fixed_parent_pair_permutation_characters": {
+                "class_ordering": [1, 2, 3, 5],
+                "A5_over_D10": [6, 2, 0, 1],
+                "A5_over_C2": [30, 2, 0, 0],
+                "two_size_30_orbits_have_same_character": True,
+                "character_alone_recovers_mds_status": False,
+            },
         },
         "information_lattice": {
             "parent_levels": [22, 2, 1],

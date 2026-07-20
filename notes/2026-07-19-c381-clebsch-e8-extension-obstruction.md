@@ -104,6 +104,42 @@ secant through one parent point; its line root is orthogonal to the three conic 
 `4A1`.  The other half are eight-arcs and remain `3A1`.  The fixed parent stabilizer has pair
 orbits `6+30+30`; conjugating through the 22 parents proves the three full-group orbit sizes.
 
+## Free corollaries and newly opened door
+
+1. **Root-only inversion.**  The family of twelve inherited extension roots recovers `M_X` as its
+   intersection-`-1` graph.  C379 proves that `X -> (Q,M_X)` is injective on the 22-parent locus.
+   Their composition reconstructs the Clebsch parent from root data alone; neither the original
+   columns nor an externally supplied matching remain necessary.
+2. **Root-to-code criterion.**  The marked types `(D8,A2)` and `(3A1,2A1)` are exactly the MDS
+   eight-arc cases, while `(4A1,2A1)` is exactly the non-MDS case.  On the weak locus, the fourth
+   orthogonal `A1`—the child-secant line root—is precisely the MDS obstruction.
+3. **Exact anticanonical singularities.**  The two weak orbits contract to anticanonical models
+   with Du Val types `3A1` and `4A1`.  The matched `D8` orbit is excluded from this sentence because
+   its seven-point conic has anticanonical degree `-1`; `D8` there is an integral Picard-root
+   closure, not a weak-surface contraction type.
+4. **Index-two glue.**  A canonical simple-root basis extracted from the matched closure has rank
+   eight and Gram determinant four.  Since `E8` is unimodular, `D8` has index two and
+   `E8/D8 ~= C2`.  This is the cheapest concrete icosian comparison target: identify the marked
+   `D8` embedding and its unique nonzero glue coset, not an arbitrary `E8` isometry.
+5. **The glue quotient is not the chirality bit.**  `Aut(C2)` is trivial, and `J` exchanges the two
+   `PSL_2(11)` sheets without changing the marked Dynkin type.  Therefore neither the abstract
+   `D8`, its index, nor the action on `E8/D8` can recover a sheet.  C382 must use the marked
+   embedding, centralizer/normalizer action, or an additional transported orbit—not reinterpret the
+   quotient as golden orientation.
+6. **Free representation input.**  For a fixed parent the three pair orbits are
+   `A5/D10`, `A5/C2`, and `A5/C2`, of sizes `6,30,30`.  Under `PSL_2(11)` they occur once in each
+   parent sheet, and `J` exchanges the copies.  In conjugacy-class order `1,2,3,5`, their exact
+   permutation characters are
+
+   ```text
+   A5/D10 : (6,2,0,1),
+   A5/C2  : (30,2,0,0).
+   ```
+
+   The two size-30 orbits have the same character, so this cheapest character test does not recover
+   MDS status or distinguish `3A1` from `4A1`.  C382 must next compare the actual integral lattice
+   action and root-orbit marking, not repeat the pair-permutation calculation.
+
 ### Presentation independence and the green gate
 
 C379 already proves that the matching-decorated child recovers `X` uniquely on the frozen locus,
@@ -137,15 +173,19 @@ python3 notes/2026-07-19-c381-clebsch-e8-extension-obstruction.py --write
 
 The primary pins C379's primary checker by SHA-256, reconstructs all 22 parents, all 66 pairs per
 parent, all `240` abstract roots, every line/conic/singular-cubic incidence, the weak criterion,
-the `A5`, `PSL_2(11)`, and `PGL_2(11)` orbits, and each integral root closure.  It canonicalizes the
-complete orbit and classification certificate.
+the `A5`, `PSL_2(11)`, and `PGL_2(11)` orbits, each integral root closure, its rank and
+discriminant, and the matched `D8` index/glue quotient.  It canonicalizes the complete orbit and
+classification certificate, including direct fixed-pair counts for every `A5` element and the two
+permutation characters above.
 
 The replay imports neither the C381 primary nor C341.  It pins C379's independently written formula
 replay, reconstructs the field geometry and all parents, checks the full 1452-member incidence
 spectrum, and obtains root subsystems by additive root closure rather than the primary's reflection
-closure.  It compares only the final canonical JSON.  Both calculations distinguish integral root
-closure from rational span; in the matched case the latter is all of `E8` and would give the wrong
-answer.
+closure.  It independently extracts simple roots and recomputes discriminants `4,8,16` for the
+`D8,3A1,4A1` rows.  It compares only the final canonical JSON.  Both calculations distinguish
+integral root closure from rational span; in the matched case the latter is all of `E8` and would
+give the wrong answer.  It also rebuilds the three `A5` pair orbits and their fixed-point
+characters independently.
 
 The trusted boundary is Python 3 exact arithmetic over `F_11`, exact rational rank for the abstract
 lattice checks, the pinned C379 finite API, and the standard blow-up/Picard and arc--MDS
@@ -187,5 +227,7 @@ uncovered as recorded by C379, so no manuscript-bound “to our knowledge” lan
 C381 closes with a green result.  The smooth route is universally obstructed; matched pairs are
 worse than weak with marked `(D8,A2)`, while unmatched pairs are weak and split into marked
 `(3A1,2A1)` eight-arcs and `(4A1,2A1)` non-arcs.  The root invariant recovers the C379 matching,
-the MDS decision, and the three group orbits, and is transported by the golden outer passage.
-C382 is ready only for the named `W(E8)` marked-embedding/centralizer comparison above.
+the parent, the MDS decision, and the three group orbits, and is transported by the golden outer
+passage.  The matched closure supplies an index-two `D8<E8` glue target, while the trivial
+automorphism group of its `C2` quotient proves that glue parity alone is not chirality.  C382 is
+ready only for the named `W(E8)` marked-embedding/centralizer comparison above.

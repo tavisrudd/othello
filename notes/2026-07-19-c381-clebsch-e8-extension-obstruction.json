@@ -4,6 +4,8 @@
     {
       "count": 132,
       "properties": {
+        "ambient_e8_index": 2,
+        "ambient_e8_quotient": "C2",
         "direct_effective_root_count": 14,
         "direct_effective_root_counts": {
           "conic": 7,
@@ -12,6 +14,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 112,
+        "generated_root_discriminant": 4,
+        "generated_root_rank": 8,
         "generated_root_type": "D8",
         "geometry": "worse_than_weak_degree_one_blowup",
         "has_four_collinear": false,
@@ -37,6 +41,8 @@
     {
       "count": 660,
       "properties": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 3,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -45,6 +51,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 6,
+        "generated_root_discriminant": 8,
+        "generated_root_rank": 3,
         "generated_root_type": "A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -70,6 +78,8 @@
     {
       "count": 660,
       "properties": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 4,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -78,6 +88,8 @@
         },
         "eight_arc": false,
         "generated_root_count": 8,
+        "generated_root_discriminant": 16,
+        "generated_root_rank": 4,
         "generated_root_type": "A1+A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -99,6 +111,8 @@
   "fixed_parent_a5_pair_orbits": [
     {
       "classification": {
+        "ambient_e8_index": 2,
+        "ambient_e8_quotient": "C2",
         "direct_effective_root_count": 14,
         "direct_effective_root_counts": {
           "conic": 7,
@@ -107,6 +121,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 112,
+        "generated_root_discriminant": 4,
+        "generated_root_rank": 8,
         "generated_root_type": "D8",
         "geometry": "worse_than_weak_degree_one_blowup",
         "has_four_collinear": false,
@@ -128,6 +144,12 @@
         "seven_point_conic_count": 1,
         "weak_del_pezzo": false
       },
+      "permutation_character_by_element_order": {
+        "1": 6,
+        "2": 2,
+        "3": 0,
+        "5": 1
+      },
       "representative_pair": [
         [
           1,
@@ -145,6 +167,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 3,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -153,6 +177,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 6,
+        "generated_root_discriminant": 8,
+        "generated_root_rank": 3,
         "generated_root_type": "A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -174,6 +200,12 @@
         "seven_point_conic_count": 0,
         "weak_del_pezzo": true
       },
+      "permutation_character_by_element_order": {
+        "1": 30,
+        "2": 2,
+        "3": 0,
+        "5": 0
+      },
       "representative_pair": [
         [
           1,
@@ -191,6 +223,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 4,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -199,6 +233,8 @@
         },
         "eight_arc": false,
         "generated_root_count": 8,
+        "generated_root_discriminant": 16,
+        "generated_root_rank": 4,
         "generated_root_type": "A1+A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -208,6 +244,12 @@
         "mds_parameters": null,
         "seven_point_conic_count": 0,
         "weak_del_pezzo": true
+      },
+      "permutation_character_by_element_order": {
+        "1": 30,
+        "2": 2,
+        "3": 0,
+        "5": 0
       },
       "representative_pair": [
         [
@@ -225,10 +267,53 @@
       "stabilizer_order": 2
     }
   ],
+  "free_corollaries": {
+    "fixed_parent_pair_permutation_characters": {
+      "A5_over_C2": [
+        30,
+        2,
+        0,
+        0
+      ],
+      "A5_over_D10": [
+        6,
+        2,
+        0,
+        1
+      ],
+      "character_alone_recovers_mds_status": false,
+      "class_ordering": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "two_size_30_orbits_have_same_character": true
+    },
+    "matched_d8_glue": {
+      "discriminant": 4,
+      "index_in_unimodular_e8": 2,
+      "quotient": "C2",
+      "rank": 8,
+      "sheet_recovery_from_unmarked_type": false
+    },
+    "mds_from_marked_root_type": {
+      "mds_types": [
+        "(D8,A2)",
+        "(3A1,2A1)"
+      ],
+      "non_mds_type": "(4A1,2A1)",
+      "weak_locus_obstruction": "the fourth orthogonal A1 is the unique child-secant line root"
+    },
+    "root_only_parent_inversion": true,
+    "root_only_parent_inversion_reason": "root intersection recovers M_X and C379 proves X -> (Q,M_X) injective on the 22-parent locus"
+  },
   "full_group_orbit_count": 3,
   "full_group_orbits": [
     {
       "classification": {
+        "ambient_e8_index": 2,
+        "ambient_e8_quotient": "C2",
         "direct_effective_root_count": 14,
         "direct_effective_root_counts": {
           "conic": 7,
@@ -237,6 +322,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 112,
+        "generated_root_discriminant": 4,
+        "generated_root_rank": 8,
         "generated_root_type": "D8",
         "geometry": "worse_than_weak_degree_one_blowup",
         "has_four_collinear": false,
@@ -308,6 +395,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 4,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -316,6 +405,8 @@
         },
         "eight_arc": false,
         "generated_root_count": 8,
+        "generated_root_discriminant": 16,
+        "generated_root_rank": 4,
         "generated_root_type": "A1+A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -376,6 +467,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 3,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -384,6 +477,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 6,
+        "generated_root_discriminant": 8,
+        "generated_root_rank": 3,
         "generated_root_type": "A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -479,6 +574,8 @@
   "psl_marked_orbits": [
     {
       "classification": {
+        "ambient_e8_index": 2,
+        "ambient_e8_quotient": "C2",
         "direct_effective_root_count": 14,
         "direct_effective_root_counts": {
           "conic": 7,
@@ -487,6 +584,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 112,
+        "generated_root_discriminant": 4,
+        "generated_root_rank": 8,
         "generated_root_type": "D8",
         "geometry": "worse_than_weak_degree_one_blowup",
         "has_four_collinear": false,
@@ -513,6 +612,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": 2,
+        "ambient_e8_quotient": "C2",
         "direct_effective_root_count": 14,
         "direct_effective_root_counts": {
           "conic": 7,
@@ -521,6 +622,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 112,
+        "generated_root_discriminant": 4,
+        "generated_root_rank": 8,
         "generated_root_type": "D8",
         "geometry": "worse_than_weak_degree_one_blowup",
         "has_four_collinear": false,
@@ -547,6 +650,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 3,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -555,6 +660,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 6,
+        "generated_root_discriminant": 8,
+        "generated_root_rank": 3,
         "generated_root_type": "A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -581,6 +688,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 3,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -589,6 +698,8 @@
         },
         "eight_arc": true,
         "generated_root_count": 6,
+        "generated_root_discriminant": 8,
+        "generated_root_rank": 3,
         "generated_root_type": "A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -615,6 +726,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 4,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -623,6 +736,8 @@
         },
         "eight_arc": false,
         "generated_root_count": 8,
+        "generated_root_discriminant": 16,
+        "generated_root_rank": 4,
         "generated_root_type": "A1+A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
@@ -638,6 +753,8 @@
     },
     {
       "classification": {
+        "ambient_e8_index": null,
+        "ambient_e8_quotient": null,
         "direct_effective_root_count": 4,
         "direct_effective_root_counts": {
           "conic": 3,
@@ -646,6 +763,8 @@
         },
         "eight_arc": false,
         "generated_root_count": 8,
+        "generated_root_discriminant": 16,
+        "generated_root_rank": 4,
         "generated_root_type": "A1+A1+A1+A1",
         "geometry": "weak_degree_one",
         "has_four_collinear": false,
