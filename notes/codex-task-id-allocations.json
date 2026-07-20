@@ -179,8 +179,17 @@
       "last": 394,
       "purpose": "portable exact-degree curve Schreier and finite-phase resource theorem",
       "sequence": 20
+    },
+    {
+      "count": 2,
+      "first": 395,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 396,
+      "purpose": "C384 portable AME pencil upgrades",
+      "sequence": 21
     }
   ],
-  "next_id": 395,
+  "next_id": 397,
   "schema": "codex-task-id-allocations-v1"
 }
