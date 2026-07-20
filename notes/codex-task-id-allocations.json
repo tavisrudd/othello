@@ -116,8 +116,17 @@
       "last": 382,
       "purpose": "Clebsch E8 weak-degree-one obstruction gate and gated icosian path-independence successor",
       "sequence": 13
+    },
+    {
+      "count": 3,
+      "first": 383,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 385,
+      "purpose": "famous-problem probes: PRS deep holes, AME LU-family classification, perfect one-factorizations",
+      "sequence": 14
     }
   ],
-  "next_id": 383,
+  "next_id": 386,
   "schema": "codex-task-id-allocations-v1"
 }
