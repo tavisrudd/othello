@@ -28,14 +28,16 @@ L_ab L_cd − L_ac L_bd = [a,d][b,c] (XZ − Y²),      [i,j] = sᵢ tⱼ − t�
 which is the plane lift of the four-endpoint switch `{ab,cd} ↦ {ac,bd}` on a matching and writes each
 switch difference as an explicit multiple of the conic form.
 
-It follows that the secant product `∏_{{i,j}∈M} L_ij` of a perfect matching `M` of a `2r`-point
-endpoint set, restricted to the conic, factors as `∏ᵢ (tᵢ s − sᵢ t)` over the endpoints alone: the
-restriction forgets the matching.  Over a field this makes the map from the free vector space on the
-perfect matchings to the section space rank one, with kernel the augmentation hyperplane
-`{∑ a_M [M] : ∑ a_M = 0}` of dimension `(2r−1)!! − 1`, spanned by the switch differences.  Over a
-finite field `𝔽_q` the conic has `q + 1` rational points; below the boundary `2r = q + 1` the
-restricted section has zero set exactly its endpoint set, while at the boundary `2r = q + 1` the
-section is proportional to `s^q t − s t^q` and vanishes at every rational point.
+The first theorem family proves that secant products with permutation-equivalent flattened endpoint
+lists have the same Veronese pullback: restriction forgets the pairing at that precise list level.
+A separate linear-algebra lemma computes the kernel and dimension of the explicitly defined generic
+rank-one map `a ↦ (∑ᵢ aᵢ)·F`.  This file does not identify that generic map with a geometric section
+map, count perfect matchings, or prove that switch differences span its kernel.
+
+The finite-field family proves pointwise factor-zero/nonzero criteria and that the binary form
+`s^q t − s t^q` vanishes on every pair over `𝔽_q`.  It does not identify factor zero sets with a
+distinct projective endpoint set, compute word weights, or prove that a full-endpoint matching
+product is proportional to the boundary form.
 
 Perfect matchings are presented by their fixed-point-free involution (mate map).  This development is
 symbolic and enumerates no matching data.
@@ -60,7 +62,8 @@ at the plane point `(X,Y,Z)`:  `L_ij = tᵢtⱼ X − (sᵢtⱼ + tᵢsⱼ) Y + 
 def secant (si ti sj tj X Y Z : R) : R :=
   ti * tj * X - (si * tj + ti * sj) * Y + si * sj * Z
 
-/-- Plücker bracket `[i,j] = sᵢtⱼ − tᵢsⱼ`; it vanishes iff `ν(sᵢ,tᵢ) = ν(sⱼ,tⱼ)` projectively. -/
+/-- Algebraic Plücker bracket `[i,j] = sᵢtⱼ − tᵢsⱼ`.  This definition is over an arbitrary
+commutative ring; no projective-validity or projective-equality criterion is asserted here. -/
 def bracket (si ti sj tj : R) : R := si * tj - ti * sj
 
 /-- The Veronese linear factor `tᵢs − sᵢt` produced by pulling back a secant through `ν(sᵢ,tᵢ)`. -/
@@ -93,8 +96,9 @@ theorem conicForm_dvd_secant_switch (sa ta sb tb sc tc sd td X Y Z : R) :
         - secant sa ta sc tc X Y Z * secant sb tb sd td X Y Z :=
   ⟨bracket sa ta sd td * bracket sb tb sc tc, by rw [secant_switch]; ring⟩
 
-/-- The Veronese factor of endpoint `(sᵢ,tᵢ)` at the point `(s,t)` is the negated Plücker bracket
-`−[i, ·]`; in particular it vanishes exactly when the two projective points coincide. -/
+/-- The Veronese factor of coordinate pair `(sᵢ,tᵢ)` at `(s,t)` is the negated algebraic bracket
+`−[i, ·]`.  No projective-validity or projective-equality criterion is asserted over the ambient
+commutative ring. -/
 theorem veroneseFactor_eq_neg_bracket (si ti s t : R) :
     veroneseFactor si ti s t = - bracket si ti s t := by
   simp only [veroneseFactor, bracket]; ring
@@ -138,10 +142,10 @@ end Forgetting
 
 /-! ## Augmentation kernel of the restriction map
 
-Every perfect matching of a fixed endpoint set restricts to the *same* nonzero section `F` on the
-conic (parent forgetting).  Modelling the free `K`-space on the matchings as `ι → K`, the restriction
-map is `a ↦ (∑ᵢ aᵢ)·F`; for `F ≠ 0` its kernel is exactly the augmentation hyperplane
-`{a : ∑ᵢ aᵢ = 0}`, of dimension `(2r−1)!! − 1`. -/
+For an arbitrary finite index type `ι` and nonzero scalar `F`, consider the explicit rank-one map
+`a ↦ (∑ᵢ aᵢ)·F` on `ι → K`.  Its kernel is the augmentation hyperplane
+`{a : ∑ᵢ aᵢ = 0}`, of dimension `card ι − 1`.  Applying this generic lemma to a geometric
+matching-restriction map requires a separate theorem identifying that map with this formula. -/
 
 section Augmentation
 
@@ -169,8 +173,7 @@ theorem ker_restriction {F : K} (hF : F ≠ 0) :
     mem_augmentation]
   exact or_iff_right hF
 
-/-- **Augmentation dimension.**  The augmentation hyperplane has dimension `card ι − 1`
-(`= (2r−1)!! − 1` for the `(2r−1)!!` perfect matchings of a `2r`-set). -/
+/-- **Augmentation dimension.**  The augmentation hyperplane has dimension `card ι − 1`. -/
 theorem finrank_augmentation [Nonempty ι] [DecidableEq ι] :
     Module.finrank K (augmentation K ι) = Fintype.card ι - 1 := by
   have hsurj : Function.Surjective (sumFunctional K ι) := by
@@ -188,28 +191,26 @@ end Augmentation
 
 /-! ## Full-rational-evaluation boundary over a finite field
 
-Over a finite field `𝔽_q` the conic has `q + 1` rational points.  Below the boundary `2r < q + 1` a
-matching section `∏_{i∈S} (tᵢ s − sᵢ t)` has zero set exactly its endpoint set `S`; at the boundary
-`2r = q + 1` the single endpoint set is all of `C(𝔽_q)`, the common section is proportional to
-`s^q t − s t^q`, and it vanishes at every rational point. -/
+This section records two pointwise algebraic facts.  A finite product of Veronese factors vanishes
+exactly when one displayed factor, equivalently one displayed bracket, vanishes.  Separately, over a
+finite field of order `q`, the binary form `s^q t − s t^q` vanishes for every `s,t`.  Projective
+endpoint validity, distinctness, zero-set cardinalities, word weights, and a bridge from a
+full-endpoint product to the boundary form are outside this module. -/
 
 section SubBoundary
 
 variable {K : Type*} [Field K]
 
-/-- **Sub-boundary section, zero set.**  For an endpoint index set `S` with data `(s·,t·)`, the
-section `∏_{i∈S} (tᵢ s − sᵢ t)` vanishes at `(s,t)` iff `(s,t)` is projectively one of the endpoints
-(some bracket `[i, (s,t)]` vanishes).  Thus the zero set of the word is exactly the endpoint set and
-distinct endpoint sets give distinct words. -/
+/-- **Factor-product zero criterion.**  For an index set `S` with coordinate data `(s·,t·)`, the
+product `∏_{i∈S} (tᵢ s − sᵢ t)` vanishes iff some displayed bracket `[i,(s,t)]` vanishes. -/
 theorem prod_veroneseFactor_eq_zero_iff {ι : Type*} (S : Finset ι)
     (sc tc : ι → K) (s t : K) :
     (∏ i ∈ S, veroneseFactor (sc i) (tc i) s t) = 0 ↔ ∃ i ∈ S, bracket (sc i) (tc i) s t = 0 := by
   rw [Finset.prod_eq_zero_iff]
   simp only [veroneseFactor_eq_neg_bracket, neg_eq_zero]
 
-/-- **Sub-boundary section, nonvanishing.**  If `(s,t)` is projectively distinct from every endpoint
-(`bracket [i, (s,t)] ≠ 0` for all `i ∈ S`), the section is nonzero at `(s,t)`.  Below the boundary
-this produces a nonzero word of weight `q + 1 − 2r`. -/
+/-- **Factor-product nonvanishing.**  If every displayed bracket `[i,(s,t)]` is nonzero, the product
+of the corresponding Veronese factors is nonzero. -/
 theorem prod_veroneseFactor_ne_zero {ι : Type*} (S : Finset ι)
     (sc tc : ι → K) (s t : K) (h : ∀ i ∈ S, bracket (sc i) (tc i) s t ≠ 0) :
     (∏ i ∈ S, veroneseFactor (sc i) (tc i) s t) ≠ 0 := by
@@ -223,13 +224,11 @@ section Boundary
 
 variable {K : Type*} [Field K] [Fintype K]
 
-/-- The boundary binary form `s^q t − s t^q`, `q = |K|`, to which the full-endpoint section
-`∏_{p ∈ C(𝔽_q)} (t_p s − s_p t)` is projectively proportional. -/
+/-- The finite-field boundary binary form `s^q t − s t^q`, where `q = |K|`. -/
 def boundaryForm (s t : K) : K := s ^ Fintype.card K * t - s * t ^ Fintype.card K
 
-/-- **Full-rational boundary.**  The boundary section vanishes at every rational point of `𝔽_q`,
-because `a^q = a` there.  Hence at `2r = q + 1` every perfect-matching product evaluates to the zero
-word — the sharp separation from the sub-boundary restriction kernel. -/
+/-- **Finite-field boundary-form identity.**  The binary form `s^q t − s t^q` vanishes for every
+`s,t : K`, because `a^q = a` in the finite field `K`. -/
 theorem boundaryForm_eq_zero (s t : K) : boundaryForm s t = 0 := by
   simp only [boundaryForm, FiniteField.pow_card]; ring
 
@@ -237,13 +236,10 @@ end Boundary
 
 /-! ## Switch connectivity of the matching graph
 
-The augmentation kernel is spanned by the local four-endpoint switches `{ab,cd} ↦ {ac,bd}`, because
-the graph of perfect matchings joined by switches is connected.  Matchings of a `2n`-endpoint set are
-presented as fixed-point-free involutions (mate maps) on `Fin (2n)`; for each fixed endpoint set
-connectivity is a finite statement.  Formalized here: switches are reversible in every size, and the
-base four-endpoint generator is a complete switch triangle, so every perfect matching of a `4`-set is
-switch-connected to a base.  The general `2n` connectivity follows from this generator by the standard
-"force one desired edge by a switch and induct on the remaining endpoints" argument. -/
+Matchings are represented as fixed-point-free involutions (mate maps) on `Fin m`.  Formalized here:
+four-endpoint switches are reversible for arbitrary `m`; the three matchings on `Fin 4` form a
+complete switch triangle; and every perfect matching on `Fin 4` is switch-connected to the chosen
+base.  No arbitrary-`2n` connectivity or switch-span theorem is asserted. -/
 
 section Connectivity
 

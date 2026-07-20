@@ -82,7 +82,10 @@ adjusted only by the explicit ownership edges below.
   repository-policy adequacy/provenance integration, an exact shared-Lean commit/target pin, and
   immutable artifact release (C182), plus manuscript integration of C399 under the classical/new
   boundary fixed by its literature audit. C222 is an optional formal upgrade unless its claims are
-  labelled Lean-formalized.
+  labelled Lean-formalized. The replacement-spine C420--C428 campaign does not change a claim's
+  trust label task by task: C320's release-blocking, independently reviewed ledger must first map
+  every adopted claim to its exact Lean, replay/certificate, conceptual/cited, or combined route and
+  pin the final gates and commit.
 
 **5 · Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure** *(conditional)* —
 `complete-repair-ports`

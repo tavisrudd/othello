@@ -4,9 +4,11 @@
 
 **Date:** 2026-07-20
 
-**Verdict:** `GREEN — reusable pairing-forgetting quotient API formalized in Lean; six exit families
-kernel-backed; switch connectivity formalized at the "purely finite" base generator with the general
-2n-endpoint case reduced to it by a declared standard induction. Axiom audit clean.`
+**Verdict:** `GREEN AFTER REFEREE-ADEQUACY REPAIR. The landed theorem types are kernel-backed at the
+exact bounded scope recorded below. The source, gate, and report now distinguish those theorems from
+the stronger projective, matching-space, boundary, counting, switch-span, and general-connectivity
+consequences that are not formalized. Axiom audit and the post-repair guarded elaborations are clean;
+no downstream exit uses the missing general switch theorem.`
 
 ## What this task formalizes
 
@@ -57,18 +59,22 @@ Parent forgetting (matchings as lists of endpoint pairs, `CommRing R`):
 Augmentation kernel (free space `ι → K` on the matchings, `Field K`, `Fintype ι`):
 
 - `sumFunctional`, `augmentation`, `mem_augmentation`: the augmentation hyperplane `{a : ∑ᵢ aᵢ = 0}`.
-- **Restriction kernel = augmentation** — `ker_restriction`: since all matchings restrict to the
-  common nonzero section `F`, the restriction map `a ↦ (∑ᵢ aᵢ)·F` has kernel exactly the augmentation.
-- **Augmentation dimension** — `finrank_augmentation`: `dim = card ι − 1` (`= (2r−1)!! − 1`).
+- **Generic rank-one kernel = augmentation** — `ker_restriction`: for an arbitrary nonzero scalar
+  `F`, the explicitly defined map `a ↦ (∑ᵢ aᵢ)·F` has kernel exactly the augmentation. Lean does not
+  define the geometric matching-restriction map or prove it equals this map.
+- **Augmentation dimension** — `finrank_augmentation`: `dim = card ι − 1`. Lean does not prove here
+  that the index type has `(2r−1)!!` elements.
 
 Full-rational-evaluation boundary (finite field, `Field K`, `Fintype K`):
 
-- **Boundary vanishing** — `boundaryForm_eq_zero`: at `2r = q + 1` the section `s^q t − s t^q`
-  vanishes at every rational point (`a^q = a`), so the boundary word is zero.
+- **Boundary-form vanishing** — `boundaryForm_eq_zero`: the defined polynomial value
+  `s^q t − s t^q` vanishes for all `s,t` in the finite field. Lean does not connect this form to a
+  full endpoint product or a matching word in this module.
 - **Sub-boundary zero set / nonvanishing** — `prod_veroneseFactor_eq_zero_iff`,
-  `prod_veroneseFactor_ne_zero`: below the boundary the section `∏_{i∈S}(tᵢ s − sᵢ t)` vanishes at a
-  rational point iff that point is projectively one of the endpoints, so the zero set is exactly `S`
-  (distinct endpoint sets give distinct words, of weight `q + 1 − 2r`).
+  `prod_veroneseFactor_ne_zero`: the product vanishes iff some displayed bracket vanishes, and it is
+  nonzero when every displayed bracket is nonzero. Lean does not impose valid/distinct projective
+  representatives, identify the zero set with `S`, compare two endpoint sets, or prove a word
+  weight in these theorems.
 
 Switch connectivity (matchings as fixed-point-free involutions on `Fin m`):
 
@@ -81,15 +87,11 @@ Switch connectivity (matchings as fixed-point-free involutions on `Fin m`):
 
 ### Scope of switch connectivity (declared boundary)
 
-The plan slices switch connectivity as "purely finite."  Formalized in-kernel here are the general
-switch reversibility and the base four-endpoint generator with its complete connectivity — the atomic
-generator on which the paper's argument rests.  The general `2n`-endpoint connectivity ("force one
-desired edge by one switch and induct on the remaining endpoints", C403) reduces to this generator by
-the standard finite induction; that induction is not brought fully in-kernel (it needs sub-involution
-restriction bookkeeping disproportionate to the light-theorem slice, per the campaign stop rule for
-finite claims that would require a monolithic case tree).  The augmentation kernel is instead
-computed directly (`finrank_augmentation`) rather than via "switches generate", so no exit depends on
-the general connectivity being in-kernel.
+Formalized in-kernel are arbitrary-size switch reversibility, the three `Fin 4` matchings, their
+complete switch triangle, and connectivity of every `Fin 4` perfect matching to the base. General
+`2n` connectivity is a familiar conceptual induction but is not a Lean theorem here. It is unused by
+the generic `ker_restriction` and `finrank_augmentation` theorems. It must be classified as external
+and unused, or separately formalized before any paper calls it Lean-backed.
 
 ## Symbolic cross-check of the load-bearing identities
 
@@ -111,16 +113,82 @@ kernel plus `ring`.
 
 ## Verification map delta
 
-All six F2 exit families are kernel-backed over the stated rings/fields, with switch connectivity at
-the declared purely-finite generator boundary above.  No `ClebschGateway*.lean` module or
-`ReflectionArrangementDecoding.lean` was edited; the task adds two new modules only.  This leaf is a
-consumer terminal for F3 (`C422`, harmonic quotient) and is imported nowhere else yet.
+The exact displayed algebraic identities, list-permutation pullback equality, generic rank-one
+kernel/dimension results, pointwise factor-zero/nonzero results, finite-field boundary-form identity,
+arbitrary-size switch reversibility, and `Fin 4` switch results are kernel-backed. The stronger
+geometric and general-connectivity consequences listed in the review below are not. No
+`ClebschGateway*.lean` module or `ReflectionArrangementDecoding.lean` was edited; the task adds two
+new modules only. F3 may consume only the exact theorem types, not the former prose gloss.
 
 ## Source artifacts
 
 | file | bytes | SHA-256 |
 |:---|---:|:---|
-| `lean/RelativeConicArcs/ClebschConicMatchingQuotient.lean` | 15,859 | `86ead26c40f22f1a4876a17b451bc3c28d0052aa68f88b413b5a821b10658a61` |
-| `lean/RelativeConicArcs/Gates/ClebschConicMatchingQuotient.lean` | 612 | `c3d6d82ef348ad7c91adc0711dea6399758667e726713b460d7b95aa5b994c63` |
+| `lean/RelativeConicArcs/ClebschConicMatchingQuotient.lean` | 15,241 | `2c355d852f02490ac2a688e0c5770c5ae829ca2ce31d4b35bfc27d54469c6df2` |
+| `lean/RelativeConicArcs/Gates/ClebschConicMatchingQuotient.lean` | 783 | `bf378789f1b2f3fd5b6e2a0731a2f153e3b819bffba55c85aafeb946ea6c4d03` |
 
 Hashes are for the committed sources; regenerate with `sha256sum` from `lean/`.
+
+## Judgment-call record
+
+- **General switch connectivity:** did not add the arbitrary-`2n` induction. The only landed
+  connectivity theorem is on `Fin 4`; arbitrary-size reversibility is separate. The general theorem
+  is unused by the direct generic augmentation calculation, so it is classified as external and
+  unused rather than opportunistically expanding F2. Reopen only if a published claim or downstream
+  theorem requires arbitrary-`2n` connectivity.
+- **Matching restriction versus generic rank-one map:** retained the useful generic theorem
+  `ker_restriction`, but stopped calling it the geometric matching-restriction map. A future
+  application must prove the missing identification and matching count before inheriting geometric
+  kernel/dimension language.
+- **Projective endpoint and boundary consequences:** retained the exact factor-product and
+  finite-field identities, but removed zero-set, word-weight, distinct-endpoint, and full-product
+  conclusions that lack validity/distinctness/counting/bridge theorems. These are not implicit
+  corollaries in the trust ledger.
+- **No matching census:** kept F2 symbolic. The three `Fin 4` matchings are a fixed base example,
+  not evidence for a general census or connectivity theorem.
+
+## Independent cold review — 2026-07-20
+
+**Reviewer:** Codex. **Disposition:** initial `NO-GO`, then `GO` after the source/gate/report adequacy
+repair. The theorem bodies were unchanged. Post-repair guarded elaboration succeeded for both
+`RelativeConicArcs/ClebschConicMatchingQuotient.lean` and its import-only gate; the terminal audit
+printed only `propext`, `Classical.choice`, and `Quot.sound` (or no axioms for `isSwitch_symm`).
+
+Findings and dispositions:
+
+1. The false arbitrary-`CommRing` projective-equality gloss on the bracket was removed.
+2. Generic augmentation kernel/dimension prose now states the missing geometric identification,
+   matching count, and switch-span boundary explicitly.
+3. Zero-set, distinct-word, and weight prose was narrowed to the proved pointwise bracket criteria.
+4. Boundary-form vanishing is no longer presented as a theorem about full-endpoint products.
+5. General `2n` connectivity is explicitly absent; only arbitrary-size reversibility and `Fin 4`
+   connectivity are claimed.
+
+### Required closing review checklist
+
+- [x] Read and restate every landed theorem type with its exact domain and hypotheses.
+- [x] Assign the exact landed algebraic and `Fin 4` results the full-trust Lean route, subject to the
+  recorded build/axiom evidence.
+- [x] Detect vacuity/definition laundering and hidden assumptions: the definitions are substantive,
+  but several prose consequences require missing projective-validity, distinctness, counting, and
+  geometric bridge hypotheses.
+- [x] Make every source comment/docstring and gate description no stronger than the theorem types;
+  findings 1--5 above were resolved and guarded elaboration remained green.
+- [x] Classify general `2n` connectivity as external and unused; do not inherit a Lean label from
+  reversibility or the `Fin 4` base.
+- [x] Confirm the named gate imports the content module and guarded-elaborate both final files.
+- [x] Identify every claimed public terminal under “Exit theorems”; C320 must extract the final
+  committed theorem statements and load-bearing definitions verbatim for the paper's adequacy
+  appendix rather than reuse the former prose gloss.
+- [x] Record exact files, terminals, landed source hashes, validation commands, and the reported
+  standard-axioms-only audit; no generated data or certificate is involved.
+- [x] Confirm no `sorry`, `native_decide`, project-local axiom, reverse internal reference, task ID,
+  or novelty claim appears in the reviewed Lean files.
+- [x] Recompute source byte counts/hashes; all four C421 source/gate values match this report.
+- [x] State the precise exclusions and trust downgrades in this review and the corrected
+  verification-map delta.
+- [x] Record the independent reviewer, date, initial `NO-GO`, repairs, and final `GO`.
+- [x] Supply C320's proposed ledger delta: exact algebraic/list/generic-linear/pointwise finite-field
+  and `Fin 4` terminals are full-trust Lean; the geometric matching-kernel identification,
+  double-factorial dimension, switch span, exact projective zero-set/weight, full-endpoint product
+  bridge, and arbitrary-`2n` connectivity are not Lean-formalized.

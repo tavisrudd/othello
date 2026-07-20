@@ -143,7 +143,7 @@ is reused.
 
 | file | bytes | SHA-256 |
 |:---|---:|:---|
-| `lean/RelativeConicArcs/ClebschMomentTrade.lean` | 12023 | `6873d542e9a5e7894fb4d0a15156881801419ee2ca1f4602f407d4ae44838976` |
+| `lean/RelativeConicArcs/ClebschMomentTrade.lean` | 12087 | `8ff1e37549cc93838533f026d9502494a5a06614657da2effb534b56b81a8251` |
 | `lean/RelativeConicArcs/Gates/ClebschMomentTrade.lean` | 452 | `9fcf52697e5db82e044306da48f179c32b44d36e19d57cfd14eb650bb0771a77` |
 
 No generated data (`.py/.json/.sha256`) is expected or produced for F1: the leaf is symbolic and
@@ -158,3 +158,68 @@ F1 is complete and green. It is the campaign root: F5 (`signedMoment_affine_succ
 (`vectorMomentForm_ne_zero_of_shadow`) import these terminals directly. The spine gate
 `RelativeConicArcs.Gates.ClebschReplacementSpine` (F8) will import the F1 gate among the F1–F8
 terminals. F2 may proceed independently.
+
+## Judgment-call record
+
+- **General strength versus only `s=2`:** chose the arbitrary-`s` affine identity because the same
+  binomial proof is shorter and strictly subsumes the downstream specialization. Trust impact: none;
+  the quantifier is present in the Lean theorem rather than inferred in prose.
+- **Functional shadows versus a symmetric-tensor library:** chose the evaluated multilinear form
+  `vectorMomentForm` and proved only diagonal-shadow recovery and the one-way nonvanishing witness.
+  The report and module explicitly do not identify this with a Mathlib tensor object or claim the
+  converse detection theorem. Reopen only if a downstream paper statement genuinely quantifies over
+  a tensor object rather than these evaluations.
+- **Concrete sharpness witness:** used four literal integer values checked by kernel `decide`; this
+  is an example establishing attainability, not a classification, search, or Clebsch-data claim.
+- **Generated evidence:** none. Creating a generator/certificate bundle would enlarge the trusted
+  and review surface without supporting any F1 theorem.
+
+## Independent cold review — 2026-07-20
+
+**Reviewer:** Codex, read-only source/gate/report review. **Disposition:** `GO` for the bounded F1
+statement-adequacy and trust claims. The review did not rerun Lean, per the owner's no-rebuild
+instruction; it checked the landed theorem types and definitions against the recorded green build
+and axiom audit. One evidence defect was corrected above: the report's source byte count and SHA-256
+predated the final committed prose, although the file is clean and the theorem surface is unchanged.
+
+The module proves exactly the advertised abstract algebra: scalar signed-moment covariance,
+recentring, antipodal even cancellation, the four-point exact-strength witness, and functional-shadow
+evaluations. It does not freeze Clebsch data, assert a concrete Clebsch cubic, or present the
+functional-evaluation model as a Mathlib symmetric-tensor object. Its comments and names contain no
+internal task references or novelty claim, and the gate imports the reviewed content module.
+
+### Required closing review checklist
+
+- [x] State every claimed exit in ordinary mathematics, with exact domain, hypotheses, conclusion,
+  and correspondence to the intended paper statement.
+- [x] Assign each exit exactly one final route: full-trust Lean, exact replay/certificate,
+  conceptual proof with named classical inputs, or an explicitly decomposed combination.
+- [x] Read the definitions and theorem types themselves: rule out vacuous predicates, conclusions
+  baked into definitions or frozen data, weakened quantifiers, hidden typeclass/characteristic or
+  nondegeneracy assumptions, empty domains, and theorem names or prose stronger than the type.
+- [x] Remove or separately classify every optional, conditional, failed, “standard,” “follows,” or
+  “if feasible” clause; no such clause inherits the module or gate's strongest label.
+- [x] Record exact owned files, fully qualified terminal names, import-only gate, landed commit
+  `bf1e8009`, validation command/result, and reported `#print axioms` output for every claimed
+  terminal.
+- [x] Identify the exact public theorem list and load-bearing definitions under “Formalized
+  terminals”; C320 must extract their final committed statements verbatim for the paper's adequacy
+  appendix rather than paraphrasing this report.
+- [x] Verify that every claimed terminal is actually imported by the named gate. The independent
+  review did not rerun the recorded trace-current validation and says so explicitly.
+- [x] Confirm from the landed source and recorded audit that no `sorryAx`, `native_decide`,
+  undisclosed project axiom, opaque oracle, or unreported non-kernel execution occurs in the claimed
+  closure.
+- [x] Classify finite/computational evidence: no generated data are used; the four explicit integer
+  sums are kernel `decide` witnesses and are not a search or completeness certificate.
+- [x] Recompute final byte counts and hashes and compare them to the committed files; corrected above.
+- [x] List cited or axiomatized inputs: none beyond the standard Mathlib axioms reported above.
+- [x] Review the entire module, names, filename, comments, docstrings, gate banner, and diagnostics
+  for mathematical accuracy and referee-facing self-containment.
+- [x] Confirm this internal report points to exact Lean declarations while the Lean artifact has no
+  reverse references, workflow language, or unsupported novelty or strength claim.
+- [x] State exclusions and negative boundaries explicitly under “Trusted boundary.”
+- [x] Record the independent reviewer, date, disposition, finding, and correction.
+- [x] Supply C320's proposed ledger delta: the terminals listed under “Formalized terminals” are
+  full-trust Lean at `bf1e8009`; concrete Clebsch cubic/nonvanishing, balance uniqueness, actions,
+  profiles, and finite exhaustion are excluded and receive separate downstream rows.

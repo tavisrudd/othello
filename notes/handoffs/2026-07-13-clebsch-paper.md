@@ -181,11 +181,14 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   `RelativeConicArcs.ClebschConicMatchingQuotient` with the import-only gate
   `RelativeConicArcs.Gates.ClebschConicMatchingQuotient` — secant/conic Veronese pullback, the
   Plücker four-endpoint switch identity `L_ab L_cd − L_ac L_bd = [a,d][b,c](XZ−Y²)` and its
-  conic-ideal divisibility, parent forgetting of the matching secant product, the augmentation
-  kernel (restriction kernel = sum-zero hyperplane, `finrank = (2r−1)!!−1`), the finite-field
-  full-rational boundary, and the purely-finite switch-connectivity generator (general reversibility
-  + complete 4-set switch triangle + base reachability); all on standard axioms, no matching census.
-  It imports the existing conic API and pinned Mathlib and is the F3 input. Report:
+  conic-ideal divisibility, list-permutation parent forgetting, the generic rank-one
+  augmentation-kernel calculation (`finrank = card ι−1`), pointwise factor-product and finite-field
+  boundary-form identities, arbitrary-size switch reversibility, and complete `Fin 4` switch
+  connectivity; all on standard axioms, no matching census. A 2026-07-20 cold review repaired prose
+  that had overstated these as a geometric restriction-map kernel, exact projective zero-set/weight,
+  full-endpoint product bridge, switch span, and arbitrary-`2n` connectivity. Those stronger claims
+  are not Lean-formalized and are unused by F3. It imports the existing conic API and pinned Mathlib
+  and is the F3 input. Report:
   [`2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`](../2026-07-20-c421-clebsch-conic-matching-quotient-lean.md).
 - **C422--C427 queued:** bounded harmonic decomposition, sharded A3/B3/H3 factorization leaves,
   balanced-sheet/cubic orientation, C411's six-representative depth--Fourier--parent bridge, q=11
@@ -196,6 +199,13 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 - **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
   separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. It consumes C222's committed
   terminal without touching `ReflectionArrangementDecoding.lean`.
+- **C320 is the release-blocking trust-ledger capstone:** after every paper-adopted C420--C428 slice,
+  it must publish one claim-by-claim ledger with exact theorem/gate/axiom evidence, external
+  certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
+  replacement-spine claim is called Lean-formalized before this reconciliation and independent
+  review. In particular, C421 proves only the `Fin 4` switch base plus arbitrary-size reversibility;
+  C426 treats Krein/intersection equality and the 877-fusion census as external exact certificates
+  unless their separate kernel checker leaves actually land.
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
   reproducible incidence/conic certificates are the entry boundary. Every new finite leaf requires
   a checker theorem, provenance, hash, independent replay, and explicit axiom audit; otherwise its
