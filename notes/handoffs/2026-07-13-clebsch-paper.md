@@ -17,12 +17,14 @@ Current assessment: **the existing 19-page manuscript and local reproducibility 
 protected baseline.  C399 is the selected portable upgrade for that version.  C406 has passed its
 mathematical gate and bounded claim-by-claim audit as a likely-new conic-quotient/moment/Fourier
 composition, and C411 has supplied the missing conceptual double-coset/Hecke derivation.  The
-C406+C411 form is therefore the recommended replacement spine, not an automatic manuscript
-addition.  The next paper action is an explicit baseline-versus-replacement decision; only then
-should the chosen theorem be integrated, formalized, and released**.
+C406+C411 form is therefore the recommended replacement spine.  The user has now selected that
+spine for Lean formalization, queued as C420--C428, while manuscript integration remains a separate
+owner action before release**.
 
 The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning-sweep.md`](../2026-07-20-clebsch-paper-planning-sweep.md).
+The red-team-approved formalization campaign is
+[`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md).
 
 Authoritative manuscript and checkers:
 [`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/).
@@ -157,6 +159,22 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   [`2026-07-16-c222-lean-a3-h3-closure.md`](../2026-07-16-c222-lean-a3-h3-closure.md).
   If the paper labels these bridge claims Lean-formalized, C222 becomes a gate for that label;
   otherwise the verification map must retain their conceptual/replay route.
+
+## Replacement-spine Lean campaign
+
+- **C420--C427 queued:** signed-moment foundation, conic pairing quotient, bounded harmonic
+  decomposition, sharded A3/B3/H3 factorization leaves, balanced-sheet/cubic orientation,
+  C411's six-representative depth--Fourier--parent bridge, q=11 Fourier self-duality, and the
+  committed C373 intrinsic chirality endpoint. C427 owns the new import-only
+  `RelativeConicArcs.Gates.ClebschReplacementSpine` gate and hands its verification-map delta to
+  C320.
+- **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
+  separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. It consumes C222's committed
+  terminal without touching `ReflectionArrangementDecoding.lean`.
+- The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
+  reproducible incidence/conic certificates are the entry boundary. Every new finite leaf requires
+  a checker theorem, provenance, hash, independent replay, and explicit axiom audit; otherwise its
+  claim remains honestly external.
 
 ## Verification map
 

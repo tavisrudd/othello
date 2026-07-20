@@ -56,14 +56,15 @@ ordering and detail.
 - **C320 `[clebsch]` [QUEUED]** — create the `lean/CERTIFICATES.md`-standard trust manifest for the Clebsch package: every claim with its exact verifier, one verify-all entry point, the Lean/Python/Singular/cited-mathematics boundary, and the two Dye assumptions as named classical imports with what remains unconditional without them (they are stated as global axioms in `lean/RelativeConicArcs/Q11DyeAxioms.lean` but appear in no manifest) → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C321 `[clebsch]` [QUEUED; after C320]** — replace the load-bearing Singular evidence: extract cofactor/factorization certificates for positive claims and check them by exact arithmetic; for completeness-type claims re-derive the input system independently from the geometry plus invariant spot checks, since a second CAS run on the same input shares the specification and is near-zero marginal evidence → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C222 `[clebsch]` [ACTIVE; COMPACT-PROOF GATE]** — Lean-formalize the new `A3/H3` coordinate bridge, intersection ledgers, complement counts, and decoder-stratum consequences, proceeding only through compact theorem-level proofs and not large generated certificate trees → `notes/2026-07-16-c222-lean-a3-h3-closure.md`.
-
-### `clebsch-next`
-
-- **C206 `[clebsch-next]` [QUEUED]** — conceptual nearest-conic gap/stability → `notes/2026-07-15-c206-clebsch-gap-stability.md`.
-- **C207 `[clebsch-next]` [QUEUED]** — intrinsic chirality and outside-`S5` normalizer meaning → `notes/2026-07-15-c207-intrinsic-clebsch-chirality.md`.
-- **C208 `[clebsch-next]` [QUEUED]** — all-field `A5` uncovered-locus orbit decomposition → `notes/2026-07-15-c208-clebsch-all-field-orbits.md`.
-- **C212 `[clebsch-next]` [QUEUED; after C211]** — Coxeter-arrangement codes and decoder-tomography reconstruction/classification theorem → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
-- **C213 `[clebsch-next]` [QUEUED FALSIFICATION GATE]** — exact Clebsch-cubic/`E6` incidence test for `12+15`, Brianchon/Eckardt, and five-object structures → `notes/2026-07-16-clebsch-a-plus-roadmap.md`.
+- **C420 `[clebsch]` [QUEUED]** — Lean signed-moment/trade foundation through cubic-first survival, affine covariance, antipodal cancellation, and barycentre cancellation → `notes/2026-07-20-c420-clebsch-moment-trade-lean.md`.
+- **C421 `[clebsch]` [QUEUED]** — Lean conic pairing-forgetting quotient: secant pullback, four-point switch, matching augmentation kernel, and full-rational evaluation boundary → `notes/2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`.
+- **C422 `[clebsch]` [QUEUED; after C421]** — Lean bounded degree-`1/2/4` conic harmonic/radial decomposition over `F_5,F_7,F_11` and quotient-span bridge → `notes/2026-07-20-c422-clebsch-harmonic-quotient-lean.md`.
+- **C423 `[clebsch]` [QUEUED; after C422]** — Lean-sharded A3/B3/H3 factorization leaves proving ranks `3/6/10`, lower-moment cancellation, and nonzero B3/H3 cubics with exact replay bundles → `notes/2026-07-20-c423-clebsch-factorization-leaves-lean.md`.
+- **C424 `[clebsch]` [QUEUED; after C420 and C423]** — Lean balanced-sheet uniqueness, abstract index-two sign theorem, concrete B3/H3 action leaves, cubic orientation stabilizer, and plane syzygies → `notes/2026-07-20-c424-clebsch-balanced-sheets-lean.md`.
+- **C425 `[clebsch]` [QUEUED; after C420 and C424]** — Lean C411 double-coset/H3 depth bridge with concrete `PGL_2(11)/A5/A4` actions, six representative profiles, cubic pushforward, odd-Fourier sign, and decorated parent recovery → `notes/2026-07-20-c425-clebsch-double-coset-depth-lean.md`.
+- **C426 `[clebsch]` [QUEUED; after C425]** — Lean q=11 rank-eight scalar-line character sum, `P=Q`, Fourier self-duality, and paper-used intersection/Krein consequence → `notes/2026-07-20-c426-clebsch-scheme-fourier-lean.md`.
+- **C427 `[clebsch]` [QUEUED; after C425 and C426]** — Lean committed C373 intrinsic six-block and unordered `10+10` chirality theorem, with sound automorphism/no-outer-lift evidence and the import-only replacement-spine gate → `notes/2026-07-20-c427-clebsch-scheme-chirality-lean.md`.
+- **C428 `[clebsch]` [QUEUED; after C222, C421, and C427]** — Lean C403 weighted 2-adjoint depth/enumerator/distance theorem with separate B3 leaf and its own import-only gate; hand trust-map results to C320 → `notes/2026-07-20-c428-clebsch-weighted-adjoint-lean.md`.
 
 ### `complete-ports`
 
@@ -76,6 +77,11 @@ ordering and detail.
 
 ### `crowns`
 
+- **C206 `[crowns]` [PAUSED; explicit resume required]** — conceptual nearest-conic gap/stability, now absorbed from `clebsch-next`; it remains mathematically distinct but is not a submission dependency → `notes/2026-07-15-c206-clebsch-gap-stability.md`.
+- **C207 `[crowns]` [GATED; lifecycle reconciliation only]** — reconcile the legacy intrinsic-chirality row against C373/C376; do not rerun the research → `notes/2026-07-20-clebsch-next-crowns-merge.md`.
+- **C208 `[crowns]` [GATED; lifecycle reconciliation only]** — reconcile the legacy all-field orbit row against C400, retaining only a strictly stronger representation-theoretic remainder if one is stated → `notes/2026-07-20-clebsch-next-crowns-merge.md`.
+- **C212 `[crowns]` [GATED; lifecycle reconciliation only]** — reconcile the legacy decoder-tomography row against C399/C403/C407/C373; no duplicate research execution → `notes/2026-07-20-clebsch-next-crowns-merge.md`.
+- **C213 `[crowns]` [GATED; lifecycle reconciliation only]** — reconcile the legacy Clebsch-cubic incidence row against C376; no repeat incidence dictionary → `notes/2026-07-20-clebsch-next-crowns-merge.md`.
 - **C412 `[crowns]` [IN PROGRESS; USER-REOPENED 2026-07-20, modular invariant-to-coinvariant attack]** — retain the certified binary flag and linear-naturality obstruction, but test the canonical characteristic-11 map from the three-dimensional outer-odd invariant space into twisted coinvariants, then its radical/socle, transfer, cohomological, nonlinear rank-locus, and twisted-target refinements under serial exact stop rules; do not replace naturality by a fitted matrix → `notes/2026-07-20-c412-relative-cubic-depth-plane.md`.
 - **C413 `[crowns]` [QUEUED; EV86, intrinsic rank-16 golden-parent recovery]** — audit translation-scheme separability/CI, `A5/A4` fissions, and intrinsic reconstruction, then recover C406's six profile classes and singleton golden matching pair from the abstract C378 common refinement and compose with C379 parent recovery; stop at any nongeometric algebraic ambiguity → `notes/2026-07-20-c411-c417-c406-successors.md`.
 - **C414 `[crowns]` [QUEUED; EV81, uniform B3/H3 depth--Fourier theorem]** — audit octahedral/icosahedral conic factorizations, exceptional-subgroup double cosets, translation schemes, and one-factorization trades, then require the B3 common refinement to reproduce a conceptual sheet-separating depth profile and cubic trade with A3 as the nonsplitting control; an orbit table stops → `notes/2026-07-20-c411-c417-c406-successors.md`.

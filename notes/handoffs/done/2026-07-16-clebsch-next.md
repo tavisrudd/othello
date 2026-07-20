@@ -1,10 +1,13 @@
-# Clebsch follow-up research (`clebsch-next`)
+# Clebsch follow-up research (`clebsch-next`) — merged into `crowns`
 
 **Lane**: `clebsch-next`
 
 **Date**: 2026-07-16
 
 **Last reconciled**: 2026-07-20
+
+**Merged:** 2026-07-20 by explicit user direction. The live research owner is now `crowns`; the
+`clebsch` lane continues to own manuscript and paper-verification work.
 
 ## Goal
 
