@@ -296,8 +296,17 @@
       "last": 438,
       "purpose": "top-ranked Clebsch gateway spikes: G7-to-G1 residual-list seam and G3 decorated-transform seam",
       "sequence": 33
+    },
+    {
+      "count": 1,
+      "first": 439,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 439,
+      "purpose": "apply C430 radical-Hadamard recovery and obstruction test across identified crowns problems",
+      "sequence": 34
     }
   ],
-  "next_id": 439,
+  "next_id": 440,
   "schema": "codex-task-id-allocations-v1"
 }
