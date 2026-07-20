@@ -219,6 +219,14 @@ stable phase: the complement code recovers its Coxeter arrangement;
 conic phase:  symmetry expands to PGL_2(q) and the unmarked child forgets among 5,14,22 parents.
 ```
 
+C403 extends this forgetting through the factorized Veronese tower in the exact safe sense.  On
+the full conic, the support of a line product is only the union of its rational endpoint sets, and
+the projective restriction of a secant/tangent product is determined only by its total endpoint
+divisor; the secant pairing and Coxeter decoration disappear.  The unrestricted degree-`r` conic
+evaluation code is therefore parent-free, with rank `min(2r+1,q+1)`.  External factors require the
+stated caution: their conjugate divisors can retain which lines were excluded as mirrors, so the
+whole nonmirror value-sector is not claimed parent-free.
+
 ### Why it does not extend one rank higher
 
 The rank-three count is forced by exponent duality: the nontrivial exponents are `h/2` and `h-1`,

@@ -109,6 +109,12 @@ and at `q=h+1` becomes the full-conic `[q+1,3,q-1]` code.  Credit Edge and Dye f
 small-field configurations and marker counts; the claim here is the common Coxeter-number
 line-defect and code mechanism.
 
+As a compact C403 corollary rather than another promoted theorem, this parent-forgetting persists
+through the factorized Veronese tower: conic restriction remembers the total endpoint divisor but
+not its secant pairing, while supports form the parent-free Boolean union filtration.  State the
+external-factor caveat explicitly—the complete conic code is parent-free, but the restricted
+nonmirror value-sector can retain the excluded mirror divisors.
+
 The paper should announce one theorem with six clauses.
 
 1. **Integral orbit and parent code.** Every odd reduction preserves the `6_5,10_3,15_2` mirror

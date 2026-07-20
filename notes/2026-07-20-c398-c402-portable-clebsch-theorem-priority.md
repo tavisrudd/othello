@@ -236,8 +236,11 @@ successively larger invariants.
 
 C399 fills the single promotion slot, subject to manuscript-owner integration and the exact
 classical/new wording fixed by its audit.  Later tasks may still close their bounded pilots, but the
-manuscript should not accumulate unrelated generalizations.  C403 may replace C399's typewise proof
-interface if its weighted-adjoint theorem completes source closure; C404 is literature-pre-empted;
-C405 and later positives remain companions unless they are mathematically inseparable from C399.
+manuscript should not accumulate unrelated generalizations.  C403's conic-divisor quotient may
+appear as a compact corollary to C399: it makes all-degree parent forgetting precise without taking
+a second promotion slot, and must preserve the external-factor caveat.  Its broader weighted-
+adjoint theorem remains a companion rather than replacing the leaner typewise proof interface;
+C404 is literature-pre-empted, and C405 and later positives remain companions unless they are
+mathematically inseparable from C399.
 The preferred paper spine remains the exact q=11 reversible hexagon, with C399 explaining its place
 in the rank-three Coxeter-number family.
