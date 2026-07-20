@@ -170,8 +170,17 @@
       "last": 393,
       "purpose": "post-Clebsch Cayley-normalizer Node/Arc-Kayles recognition gate",
       "sequence": 19
+    },
+    {
+      "count": 1,
+      "first": 394,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 394,
+      "purpose": "portable exact-degree curve Schreier and finite-phase resource theorem",
+      "sequence": 20
     }
   ],
-  "next_id": 394,
+  "next_id": 395,
   "schema": "codex-task-id-allocations-v1"
 }
