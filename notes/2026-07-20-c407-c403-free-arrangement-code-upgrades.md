@@ -493,3 +493,9 @@ primal-codeword count.  None of these conclusions makes the original arrangement
 Tutte polynomial determine the complement code, classifies arbitrary-rank higher
 weights, supplies a new decoder or secret-sharing access structure, or enters C406's
 matching-module gate.
+
+C408 subsequently proves the exact boundary: this complete global package does not determine
+coordinate repair/availability or excluded-syndrome representation multiplicities.  Its q=7
+external-line-closure pair also shows that the weighted adjoint can distinguish the scalar-
+extension towers even when the base package and original characteristic polynomial agree; see
+`notes/2026-07-20-c408-pointed-profile-forgetting-gate.md`.
