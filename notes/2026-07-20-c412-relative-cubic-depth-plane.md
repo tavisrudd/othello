@@ -323,6 +323,150 @@ its two-line rank flag to the target flag leaves ten projective maps.  Precompos
 operations with any one of those choices still assumes the missing bridge.  The target flag is
 therefore an exact output-side constraint, not a complete natural identification.
 
+## Reusable propositions and proofs
+
+The following statements are extracted for reuse and formalization.  The first seven are proved by
+the C406--C412 bundle.  The final information-lattice paragraph records the proved H3 example while
+keeping its proposed general functor explicitly open.
+
+### All-degree antipodal moment formula
+
+**Proposition.**  Over a field of odd characteristic, the degree-`d` symmetric moment of
+
+```text
+nu = sum_i n_i (delta_(v_i) - delta_(-v_i))
+```
+
+is
+
+```text
+M_d(nu) = (1-(-1)^d) sum_i n_i v_i^(symmetric d).
+```
+
+Thus every even moment vanishes.  If `sum_i n_i v_i=0`, degree one also vanishes.
+
+**Proof.**  Homogeneity gives
+`(-v_i)^(symmetric d)=(-1)^d v_i^(symmetric d)`; substitution and collection give the formula.
+For H3, `(n_1,n_2,n_3)=(1,4,6)` and the exact relation `v_1+4v_2+6v_3=0` kills degree one.
+Degree two dies by parity, while the first coordinate in degree three is
+
+```text
+2((-6)^3+4(-3)^3+6(3)^3) = 6 mod 11,
+```
+
+so the cubic is nonzero.  QED.
+
+### Recovery of the orbit weights from the profile rays
+
+**Proposition.**  The three positive integral H3 profiles have the unique primitive rational
+dependence `v_1+4v_2+6v_3=0`.  Hence their unlabeled rays recover the orbit-size multiset
+`{1,4,6}` and, for `A4`, the stabilizer-order multiset `{12,3,2}`.
+
+**Proof.**  The profiles span a rank-two plane over `Q`, so their relation space is one-dimensional.
+Direct substitution gives `(1,4,6)`.  Its positive entries have gcd one, making it the unique
+primitive positive generator.  Orbit--stabilizer gives `12/1,12/4,12/6`.  QED.
+
+### Projective-permutation-cover depth quotient
+
+**Proposition.**  For `k=F_11`, `L=PSL_2(11)`, `H=A5`, and `K=A4`, the permutation module
+`k[L/H]` is the projective cover `P(1)` and has Loewy dimensions `1|9|1`.  The C411 depth plane is
+
+```text
+P(1)^K / soc(P(1)),
+```
+
+with the paired sheet attaching the outer sign.  The kernel on the full six-dimensional mixed
+bi-Hecke space is the three-dimensional even half plus the one-dimensional odd socle.
+
+**Proof.**  Since `|H|=60` is prime to 11, its trivial module is projective; induction makes
+`k[L/H]` projective.  The degree-11 action is 2-transitive, so its commuting algebra has basis the
+identity and all-ones operator `J_11`.  In characteristic 11, `J_11^2=11J_11=0`; the commuting
+algebra is local, hence the permutation module is indecomposable.  Its trivial head occurs once,
+so it is `P(1)`.  The sum map gives the ten-dimensional radical and the constant vector gives the
+one-dimensional socle.  The remaining heart has dimension nine.  The checker generates the full
+`9^2=81`-dimensional matrix algebra on it, proving absolute irreducibility by density; it is
+`L(8)=Sym^8(k^2)`.
+
+Because `11` does not divide `|K|=12`, taking `K`-fixed points is exact.  The `K`-orbits have sizes
+`1,4,6`, hence `dim P(1)^K=3`; in the orbit-sum basis its socle is `(1,1,1)`.  The exact depth matrix
+has rank two with precisely this kernel.  Pairing sheets splits the mixed space into even and odd
+three-spaces; depth kills the even half and only the socle in the odd half.  QED.
+
+### Tate-cycle criterion for a canonical plane
+
+**Proposition.**  Let equal-dimensional spaces `A,B`, of dimension `n`, have canonical maps
+
+```text
+A --pi--> B --N--> A
+```
+
+with `N pi=0`, ranks `n-1,1`, and `im(N)=ker(pi)`.  Then `im(pi)=ker(N)`, and `pi` induces
+`A/im(N) ~= ker(N)` canonically.
+
+**Proof.**  From `N pi=0`, `im(pi) <= ker(N)`.  Both have dimension `n-1`, so they are equal.  The
+first isomorphism theorem gives `A/ker(pi) ~= im(pi)`; substitute the two image/kernel equalities.
+QED.  In C412, `n=3` and all hypotheses are verified by exact matrices.
+
+### Rank-one semi-invariant contraction
+
+**Proposition.**  If a covector `ell in W*` and a cubic tensor both transform by a quadratic
+character `chi`, contraction sends the cubic to an invariant quadratic tensor:
+
+```text
+i_ell : Sym^3(W)_chi -> Sym^2(W)^G.
+```
+
+If `k ell` is uniquely characterized by a rank-one invariant form `ell^2`, the map is canonical up
+to overall scalar.
+
+**Proof.**  Contraction is functorial.  Acting by `g` contributes one factor `chi(g)` from the cubic
+and one from `ell`; their product is one.  Uniqueness of `ell^2` makes the covector line intrinsic.
+For C412 the matrix is `[[8,1,0],[0,8,1]]`, of rank two with kernel `[1:3:9]`, the Tate kernel.
+QED.
+
+### Unique-rank-locus recognition of a quotient kernel
+
+**Proposition.**  If an intrinsic three-space `R <= Sym^3(W)` has exactly one projective line of a
+specified exceptional flattening rank, every automorphism preserving `R` and the tensor
+construction fixes that line.  It may therefore define an intrinsic quotient kernel.
+
+**Proof.**  Flattening rank is invariant under invertible coordinate changes, so automorphisms
+permute each projective rank stratum; a singleton stratum is fixed.  C412's complete 133-line census
+is one rank-one line, one rank-nine line, and 131 rank-ten lines.  The unique rank-nine line is
+`[1:3:9]`, directly verified as the common kernel of invariant projection and semi-invariant
+contraction.  QED.
+
+### Divided-transfer obstruction
+
+**Proposition.**  Let positive orbit sizes `n_1,...,n_r` sum to a prime `p`, put
+`s=(1,...,1)^T`, and define the integral transfer `B=s(n_1,...,n_r)`.  Then `B^2=pB`.  Divided
+transfer kills every integral relation `a` with `sum_i n_i a_i=0`, but fixes the socle vector `s`.
+It therefore cannot identify such a balanced relation line with the socle.
+
+**Proof.**  Writing `n` for the orbit-size column,
+
+```text
+B^2=s(n^T s)n^T=(sum_i n_i)sn^T=pB.
+```
+
+Also `Ba=s(n^T a)=0`, whereas `Bs=s(n^T s)=ps`; division by `p` fixes `s`.  For `(1,4,6)`, the
+three natural source relations lift to `(-4,1,0)`, `(2,-2,1)`, and `(-2,-1,1)`, each with integral
+weighted sum zero.  The depth socle `(1,1,1)` has weighted sum 11.  QED.
+
+### Information lattice: proved example and open abstraction
+
+The bundle proves the concrete lattice
+
+```text
+22 matchings -> 6 A4 double-coset profiles -> 2 PSL sheets -> 1 undecorated conic.
+```
+
+The first arrow is the exact `K\G/H` orbit partition, the second forgets fine profile data while
+retaining sheet sign, and the last forgets that sign.  C411/C412 prove these fibres and rank drops
+for H3.  A functor assigning such a lattice to general subgroup data `K<G>H` remains an **open
+abstraction**: mixed-Hecke coordinates need not separate double cosets and can have additional
+modular kernels, so no general proof is claimed here.
+
 ## Claim-specific literature gate
 
 This report inherits the C406 priority audit's **six full-text sources** and C411's recorded
