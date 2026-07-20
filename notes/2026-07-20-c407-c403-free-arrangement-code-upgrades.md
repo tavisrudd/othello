@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** `THEOREM PACKAGE PROVED; VALIDATION PENDING`
+**Status:** `COMPLETE; SIX CONVENTIONAL COROLLARIES PROVED AND CHECKED`
 
 **Parent:** `notes/2026-07-20-c403-arrangement-complement-distance.md`
 
@@ -394,3 +394,102 @@ The proof uses the conventional finite-field method and Ardila's indexed
 parallel-copy coboundary identity already source-closed in C403.  No novelty or
 priority claim is made for this scalar-extension packaging, generalized weights,
 matroid formulas, covering terminology, or minimal-codeword consequences.
+
+## Exact specialization checks
+
+The checks below are written out algebraically rather than delegated to a new
+generator.  The conic control is the q=11 nonsingular conic, with
+
+```text
+n=12, d=10, (f_0,f_1,f_2)=(55,12,66).
+```
+
+The nonconic control is C403's `A3_q11` fixture, with
+
+```text
+n=72, d=64, (f_0,f_6,f_7,f_8)=(6,64,24,39).
+```
+
+### q=11 conic
+
+- The primal hierarchy is `(10,11,12)`.  The first Wei range is empty and the dual
+  hierarchy is `4,5,...,12`.
+- `C_3=0` and `C_4=binom(12,4)=495`.  Since no section has size four,
+  `A_4(D^perp)/10=495`, hence `A_4(D^perp)=4,950`.
+- `T(1,1)=binom(12,3)=220`; also
+  `T(2,1)=1+12+binom(12,2)+binom(12,3)=299`.
+- The coset-leader enumerator is `1+120z+1,210z^2`, whose coefficients sum to
+  `1,331=11^3`.
+- The `66` secants are exactly the lines with section size at least two, giving
+  `10*66=660` minimal nonzero primal words.
+
+### q=11 nonconic `A3`
+
+- The primal hierarchy is `(64,71,72)`.  The dual hierarchy is `j+2` for
+  `1<=j<=6` and `j+3` for `7<=j<=69`, namely `3,...,8,10,...,72`.
+- The circuit counts are
+
+  ```text
+  C_3=64 binom(6,3)+24 binom(7,3)+39 binom(8,3)
+     =1,280+840+2,184=4,304,
+
+  C_4=binom(72,4)
+      -64(binom(6,4)+binom(6,3)66)
+      -24(binom(7,4)+binom(7,3)65)
+      -39(binom(8,4)+binom(8,3)64)
+     =1,028,790-283,386=745,404.
+  ```
+
+  Thus `(q-1)C_3=43,040`, exactly the committed direct dual-weight-three count.
+  Moreover
+
+  ```text
+  sum_s f_s binom(s,4)=64(15)+24(35)+39(70)=4,530,
+
+  C_4+8(4,530)=781,644=A_4(D^perp)/10,
+  ```
+
+  matching the committed MacWilliams value `A_4(D^perp)=7,816,440`.
+- `T(1,1)=binom(72,3)-4,304=55,336`; also
+  `T(2,1)=1+72+binom(72,2)+55,336=57,965`.
+- The coset-leader enumerator is `1+720z+610z^2`, again summing to `1,331`.
+- Exactly `64+24+39=127` lines have section size at least two, giving `1,270`
+  minimal nonzero primal words.  The six zero-section lines are precisely the
+  arrangement mirrors in this fixture.
+
+These controls exercise both the conic/GRS empty-range boundary and a nonconic code
+with collinear triples, four-circuits, and nontrivial four-collinear corrections.
+
+## Evidence and trusted boundary
+
+Run from `/home/tavis/src/othello`:
+
+```bash
+python3 -B notes/2026-07-20-c403-arrangement-complement-distance.py --check
+sha256sum -c notes/2026-07-20-c403-arrangement-complement-distance.sha256
+```
+
+On completion both commands were green.  The inherited checker is `76,339` bytes with
+SHA-256
+`136b1c0782c38542ad90832aeb9acd3859174526949e086ff0f5be1f5fa4a1e1`; the inherited
+JSON certificate is `234,075` bytes with SHA-256
+`1bc47da2bf0f2f07b5e48d7b1242c8bd104b8a98a65174e1023b7119953f6f90`.
+
+The trusted boundary for C407 is conventional finite projective geometry, the
+finite-field coboundary identity already source-closed by C403, Wei duality, Greene's
+theorem, elementary matroid subset counting, conic polarity, and exact integer
+arithmetic in the displayed controls.  The C403 checker independently supplies the
+q=11 line-section distributions and MacWilliams coefficients; C407 adds no generated
+artifact and does not modify that evidence bundle.
+
+## Hand-back
+
+One fixed weighted-adjoint coboundary polynomial now yields every scalar-extension
+Hamming enumerator.  In simple projective rank three, that same line-section profile
+then yields the complete primal and dual generalized-weight hierarchies, every circuit
+and minimal-dual-support count, the full complement-column Tutte polynomial, exact
+radius-two coset-leader data under the stated saturating criteria, and every minimal
+primal-codeword count.  None of these conclusions makes the original arrangement
+Tutte polynomial determine the complement code, classifies arbitrary-rank higher
+weights, supplies a new decoder or secret-sharing access structure, or enters C406's
+matching-module gate.
