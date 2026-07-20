@@ -1,0 +1,341 @@
+{
+  "c408_control": {
+    "depth_defect_q2_q_1": {
+      "1": [
+        0,
+        -1,
+        7
+      ],
+      "2": [
+        0,
+        2,
+        -14
+      ],
+      "4": [
+        0,
+        -2,
+        14
+      ],
+      "5": [
+        0,
+        1,
+        -7
+      ]
+    },
+    "factored_depth_defect": "(Q-7)(-x+2x^2-2x^4+x^5)=(Q-7)x(x-1)^3(x+1)",
+    "pointed_map_equal": false,
+    "universal_map_equal": false
+  },
+  "maps": {
+    "P": "sorted coordinate repair/availability pairs plus sorted excluded-syndrome multiplicities; the puncture deck is determined by repair counts",
+    "U": "original characteristic polynomial plus universal weighted-adjoint projective depth-count polynomials"
+  },
+  "result": {
+    "candidate_digest": "689a91eaa2fce576b61dd73dbff38e00c93f5a142da3f1ee85683edfeee43404",
+    "fiber_summaries": [
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 30,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            2
+          ]
+        ],
+        "universal_signature_sha256": "09140631919301ec6715729c574213a1640342791f985219a6bd4a2a22db2053"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 288,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "universal_signature_sha256": "0a626c5b7c9358794b2aa2614b88379191f108eb4652cf4fda753216c928a711"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 216,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "universal_signature_sha256": "0b11a0368d962c405ee20e24bce18ca6082937dad1fc6c7fdd8c4087b9a39f93"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 144,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "universal_signature_sha256": "0ebd6445fe74fb386cfba5dd34cc319ece07f2ed5172de949e41d04029ebfa25"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 324,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            2,
+            4
+          ]
+        ],
+        "universal_signature_sha256": "11adf43b7bdde01a581ba0546b69f6a983f2a804b849e453e6bc81930fc920c9"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 12,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            3
+          ],
+          [
+            1,
+            3,
+            1
+          ]
+        ],
+        "universal_signature_sha256": "277a9fe7efd72ad5e0872a50e41654bff95d1cea2fbbe6a8aacf2b85f28352bf"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 27,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            2,
+            1
+          ]
+        ],
+        "universal_signature_sha256": "31197b41db8052cbc5d82aba1093a32c8f83db5766061baea2c9b328a86b8d38"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 24,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            2
+          ]
+        ],
+        "universal_signature_sha256": "5a985d5b7c2a2d549f6a34158bdaf14c42c31076019f3059d0a7d58c551837fd"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 3,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            0
+          ]
+        ],
+        "universal_signature_sha256": "6b7b958a1d439673ac7afe87a61cc751543c08fcf8943179b0c81bf495e77ac4"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 96,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            3
+          ]
+        ],
+        "universal_signature_sha256": "72e91d7a5e896466096c6c512b8b4a6fe84705dede0120f66d1e4df2add75423"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 60,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            0,
+            3
+          ]
+        ],
+        "universal_signature_sha256": "984c6ba9d80fb08ba1a8739d0f3198e75dbc9b7065a89ab02106b2b2bc2eeb75"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 30,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            2
+          ]
+        ],
+        "universal_signature_sha256": "9e3d5bc71048c382c2bc1e7a7cf5d6727cc7ad117fae99175675acf00cd4dbc4"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 48,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            2,
+            4
+          ]
+        ],
+        "universal_signature_sha256": "a192b3b9be66af652e71cc92ca56416080529216ebf391f229222ff2f18d94f9"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 40,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            3,
+            4
+          ]
+        ],
+        "universal_signature_sha256": "c24d51d8559364573c63e5bad848b5b31f6576ec875701f05371a910ad4518af"
+      },
+      {
+        "global_profile_count": 1,
+        "normalized_extension_count": 36,
+        "pointed_signature_count": 1,
+        "representative_extra_points": [
+          [
+            1,
+            0,
+            2
+          ],
+          [
+            1,
+            3,
+            1
+          ]
+        ],
+        "universal_signature_sha256": "fa54c2f3031d03bf7208690b3918bc72258607fc257f7976279a2410ab4b0b34"
+      }
+    ],
+    "pointed_collision_fibers": 0,
+    "universal_fibers": 15,
+    "verdict": "BOUNDED NEGATIVE"
+  },
+  "schema": "c410-same-tower-pointed-collision-v1",
+  "scope": {
+    "complement_size": 6,
+    "completeness": "every six-point configuration containing a projective frame is projectively equivalent to at least one tested extension",
+    "field": 7,
+    "fixed_projective_frame": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ],
+    "normalized_extensions": 1378,
+    "stop_rule": "do not enlarge the field, size, or configuration family after a negative gate"
+  }
+}
