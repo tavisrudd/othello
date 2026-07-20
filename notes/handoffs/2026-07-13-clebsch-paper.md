@@ -170,10 +170,27 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 
 ## Replacement-spine Lean campaign
 
-- **C420--C427 queued:** signed-moment foundation, conic pairing quotient, bounded harmonic
-  decomposition, sharded A3/B3/H3 factorization leaves, balanced-sheet/cubic orientation,
-  C411's six-representative depth--Fourier--parent bridge, q=11 Fourier self-duality, and the
-  committed C373 intrinsic chirality endpoint. C427 owns the new import-only
+- **C420 complete (F1 foundation, reported 2026-07-20):** the signed moment/trade foundation is
+  landed and green as `RelativeConicArcs.ClebschMomentTrade` with the import-only gate
+  `RelativeConicArcs.Gates.ClebschMomentTrade` — affine covariance / first survival, antipodal
+  even-moment cancellation, degree-one barycentre cancellation, and the elementary C408 cubic
+  witness of exact strength two, plus a functional-shadow vector layer, all on standard axioms with
+  no Clebsch tables. It imports only pinned Mathlib and is the campaign root for F4/F5/F6. Report:
+  [`2026-07-20-c420-clebsch-moment-trade-lean.md`](../2026-07-20-c420-clebsch-moment-trade-lean.md).
+- **C421 complete (F2 pairing-forgetting quotient, reported 2026-07-20):** landed and green as
+  `RelativeConicArcs.ClebschConicMatchingQuotient` with the import-only gate
+  `RelativeConicArcs.Gates.ClebschConicMatchingQuotient` — secant/conic Veronese pullback, the
+  Plücker four-endpoint switch identity `L_ab L_cd − L_ac L_bd = [a,d][b,c](XZ−Y²)` and its
+  conic-ideal divisibility, parent forgetting of the matching secant product, the augmentation
+  kernel (restriction kernel = sum-zero hyperplane, `finrank = (2r−1)!!−1`), the finite-field
+  full-rational boundary, and the purely-finite switch-connectivity generator (general reversibility
+  + complete 4-set switch triangle + base reachability); all on standard axioms, no matching census.
+  It imports the existing conic API and pinned Mathlib and is the F3 input. Report:
+  [`2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`](../2026-07-20-c421-clebsch-conic-matching-quotient-lean.md).
+- **C422--C427 queued:** bounded harmonic decomposition, sharded A3/B3/H3 factorization leaves,
+  balanced-sheet/cubic orientation, C411's six-representative depth--Fourier--parent bridge, q=11
+  Fourier self-duality, and the committed C373 intrinsic chirality endpoint. F3 (C422) is unblocked
+  now that F2 is in. C427 owns the new import-only
   `RelativeConicArcs.Gates.ClebschReplacementSpine` gate and hands its verification-map delta to
   C320.
 - **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
