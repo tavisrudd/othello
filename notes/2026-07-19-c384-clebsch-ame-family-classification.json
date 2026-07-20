@@ -1,0 +1,709 @@
+{
+  "arc_failures": {
+    "0": {
+      "collinear_triples": [
+        [
+          0,
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          2,
+          4,
+          5
+        ],
+        [
+          3,
+          4,
+          5
+        ]
+      ],
+      "duplicate_pairs": [
+        [
+          4,
+          5
+        ]
+      ]
+    },
+    "1": {
+      "collinear_triples": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          3,
+          4
+        ],
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          2,
+          4,
+          5
+        ],
+        [
+          3,
+          4,
+          5
+        ]
+      ],
+      "duplicate_pairs": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ]
+    },
+    "5": {
+      "collinear_triples": [
+        [
+          0,
+          2,
+          4
+        ],
+        [
+          0,
+          3,
+          5
+        ],
+        [
+          1,
+          2,
+          5
+        ],
+        [
+          1,
+          3,
+          4
+        ]
+      ],
+      "duplicate_pairs": []
+    },
+    "9": {
+      "collinear_triples": [
+        [
+          0,
+          2,
+          4
+        ],
+        [
+          0,
+          3,
+          5
+        ],
+        [
+          1,
+          2,
+          5
+        ],
+        [
+          1,
+          3,
+          4
+        ]
+      ],
+      "duplicate_pairs": []
+    }
+  },
+  "classes": [
+    {
+      "canonical_points": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          6,
+          7
+        ]
+      ],
+      "class_id": 0,
+      "conic_evaluation_determinant": 1,
+      "cycle_signature": [
+        {
+          "determinant": 2,
+          "multiplicity": 24,
+          "trace": 1
+        },
+        {
+          "determinant": 1,
+          "multiplicity": 36,
+          "trace": 2
+        },
+        {
+          "determinant": 5,
+          "multiplicity": 12,
+          "trace": 3
+        },
+        {
+          "determinant": 10,
+          "multiplicity": 48,
+          "trace": 4
+        },
+        {
+          "determinant": 9,
+          "multiplicity": 12,
+          "trace": 5
+        },
+        {
+          "determinant": 4,
+          "multiplicity": 48,
+          "trace": 6
+        },
+        {
+          "determinant": 6,
+          "multiplicity": 24,
+          "trace": 6
+        },
+        {
+          "determinant": 8,
+          "multiplicity": 48,
+          "trace": 6
+        },
+        {
+          "determinant": 9,
+          "multiplicity": 12,
+          "trace": 6
+        },
+        {
+          "determinant": 1,
+          "multiplicity": 24,
+          "trace": 7
+        },
+        {
+          "determinant": 3,
+          "multiplicity": 48,
+          "trace": 7
+        },
+        {
+          "determinant": 10,
+          "multiplicity": 48,
+          "trace": 7
+        },
+        {
+          "determinant": 5,
+          "multiplicity": 12,
+          "trace": 8
+        },
+        {
+          "determinant": 1,
+          "multiplicity": 6,
+          "trace": 9
+        },
+        {
+          "determinant": 7,
+          "multiplicity": 48,
+          "trace": 9
+        }
+      ],
+      "grs": false,
+      "parameter_witnesses": {
+        "10": {
+          "frame": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "row_transform": [
+            [
+              6,
+              10,
+              5
+            ],
+            [
+              6,
+              1,
+              5
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            4,
+            5,
+            0,
+            3
+          ],
+          "transformed_column_scalars": [
+            9,
+            2,
+            4,
+            8,
+            1,
+            1
+          ]
+        }
+      },
+      "parameters": [
+        10
+      ],
+      "triple_moments": [
+        {
+          "moment": "11^-4",
+          "sum_rank": 4,
+          "triple_count": 66
+        },
+        {
+          "moment": "11^-6",
+          "sum_rank": 6,
+          "triple_count": 389
+        }
+      ]
+    },
+    {
+      "canonical_points": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "class_id": 1,
+      "conic_evaluation_determinant": 4,
+      "cycle_signature": [
+        {
+          "determinant": 10,
+          "multiplicity": 120,
+          "trace": 1
+        },
+        {
+          "determinant": 1,
+          "multiplicity": 60,
+          "trace": 2
+        },
+        {
+          "determinant": 1,
+          "multiplicity": 120,
+          "trace": 3
+        },
+        {
+          "determinant": 1,
+          "multiplicity": 30,
+          "trace": 9
+        },
+        {
+          "determinant": 10,
+          "multiplicity": 120,
+          "trace": 10
+        }
+      ],
+      "grs": false,
+      "parameter_witnesses": {
+        "2": {
+          "frame": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "row_transform": [
+            [
+              6,
+              8,
+              3
+            ],
+            [
+              6,
+              3,
+              3
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            5,
+            4,
+            0,
+            3
+          ],
+          "transformed_column_scalars": [
+            5,
+            6,
+            9,
+            3,
+            1,
+            1
+          ]
+        },
+        "3": {
+          "frame": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "row_transform": [
+            [
+              6,
+              7,
+              2
+            ],
+            [
+              6,
+              4,
+              2
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            4,
+            5,
+            0,
+            3
+          ],
+          "transformed_column_scalars": [
+            3,
+            8,
+            3,
+            9,
+            1,
+            1
+          ]
+        },
+        "4": {
+          "frame": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "row_transform": [
+            [
+              6,
+              1,
+              7
+            ],
+            [
+              6,
+              10,
+              7
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            4,
+            5,
+            0,
+            3
+          ],
+          "transformed_column_scalars": [
+            2,
+            9,
+            3,
+            9,
+            1,
+            1
+          ]
+        },
+        "6": {
+          "frame": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "row_transform": [
+            [
+              6,
+              6,
+              1
+            ],
+            [
+              6,
+              5,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            5,
+            4,
+            0,
+            3
+          ],
+          "transformed_column_scalars": [
+            1,
+            10,
+            9,
+            3,
+            1,
+            1
+          ]
+        },
+        "7": {
+          "frame": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "row_transform": [
+            [
+              6,
+              1,
+              9
+            ],
+            [
+              6,
+              1,
+              2
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            0,
+            3,
+            5,
+            4
+          ],
+          "transformed_column_scalars": [
+            2,
+            2,
+            1,
+            1,
+            9,
+            3
+          ]
+        },
+        "8": {
+          "frame": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "row_transform": [
+            [
+              6,
+              4,
+              1
+            ],
+            [
+              6,
+              4,
+              10
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "source_to_canonical_party": [
+            2,
+            1,
+            0,
+            3,
+            5,
+            4
+          ],
+          "transformed_column_scalars": [
+            8,
+            8,
+            1,
+            1,
+            9,
+            3
+          ]
+        }
+      },
+      "parameters": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "triple_moments": [
+        {
+          "moment": "11^-4",
+          "sum_rank": 4,
+          "triple_count": 70
+        },
+        {
+          "moment": "11^-6",
+          "sum_rank": 6,
+          "triple_count": 385
+        }
+      ]
+    }
+  ],
+  "cycle_signature_bucket_sizes": [
+    1,
+    1
+  ],
+  "field_order": 11,
+  "grs_class_ids": [],
+  "invalid_arc_parameters": [
+    0,
+    1,
+    5,
+    9
+  ],
+  "moment_bucket_sizes": [
+    1,
+    1
+  ],
+  "moment_collision_class_ids": [],
+  "monomial_class_count": 2,
+  "non_grs_class_ids": [
+    0,
+    1
+  ],
+  "parameter_domain": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "schema": "c384-clebsch-ame-pencil-v1",
+  "valid_arc_parameters": [
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    10
+  ]
+}
