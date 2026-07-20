@@ -1,6 +1,6 @@
 # Hexagons are the bestagons: a narrative and proof spine for the Clebsch paper
 
-**Lane:** `crowns`
+**Lane:** `clebsch`
 
 **Date:** 2026-07-19
 
