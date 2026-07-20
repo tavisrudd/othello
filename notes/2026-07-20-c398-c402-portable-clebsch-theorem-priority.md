@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** C398 and C399 complete; C403 is the next crowns action through the allocated C399
+**Status:** C398--C400 complete; C403 is the next crowns action through the allocated C399
 successor portfolio; C399 occupies the portable flagship slot pending manuscript-owner review
 
 ## Decision
@@ -114,6 +114,25 @@ ideals control reduction.  Modular Coxeter groups, arrangement reduction, and re
 over finite fields require a focused pre-emption audit.
 
 ## C400 — scalar-`A5` Fourier-self-dual arithmetic schemes
+
+### Result
+
+C400 closes with verdict `THEOREM; UNIFORM BURNSIDE RANK/ORBIT LAW AND SIX CONIC-RELATION
+PHASES; FLAGSHIP PRE-EMPTED`.  Every odd-good scalar-`A5` scheme is primitive and Fourier
+self-dual, with exact rank
+
+```text
+(q^2+16q+135+40e3+48e5)/60.
+```
+
+Its projective stabilizer types are exactly `D5,S3,V4,C2,C3,C5,1`; the invariant conic is one
+relation exactly at `q=5,9,11,19,29,59`, successively of type `D5,S3,C5,C3,C2,1` and with
+source/triple/deep/deep/mirror/deep roles.  The rank-four orthogonal fusion is uniform, and the
+complete q=5/9/11 fusion lattices have ranks `2,4`; `2,4,6`; and `2,4,6,8`.  Larger complete
+fusion enumeration stops at the Bell-number gate.  Cameron--Omidi--Tayfeh-Rezaie's classical
+projective-line orbit theorem pre-empts the conceptual conic ladder, so the surviving result is an
+exact scheme/code/deep-hole synthesis rather than a portable flagship.  See
+`notes/2026-07-20-c400-a5-fourier-phases.md` and its Python/JSON/checksum/Lean bundle.
 
 ### Target theorem
 
