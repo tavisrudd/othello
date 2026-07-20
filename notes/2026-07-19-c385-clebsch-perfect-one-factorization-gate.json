@@ -1,0 +1,59 @@
+{
+  "convention": "A pair is Hamiltonian iff the union of its two perfect matchings is one 12-cycle.",
+  "cross_check": {
+    "all_pairs_agree": true,
+    "method": "Compare graph connected-component sizes with cycles of the product of the two matching involutions."
+  },
+  "schema": "c385-perfect-one-factorization-gate-v1",
+  "sheets": {
+    "tau4": {
+      "composition_cycle_partition_histogram": {
+        "3+3+3+3": 55
+      },
+      "factor_count": 11,
+      "first_failure": {
+        "cycle_partition": [
+          6,
+          6
+        ],
+        "factor_indices_zero_based": [
+          0,
+          1
+        ]
+      },
+      "hamiltonian_pair_count": 0,
+      "is_perfect": false,
+      "pair_count": 55,
+      "union_cycle_partition_histogram": {
+        "6+6": 55
+      }
+    },
+    "tau8": {
+      "composition_cycle_partition_histogram": {
+        "3+3+3+3": 55
+      },
+      "factor_count": 11,
+      "first_failure": {
+        "cycle_partition": [
+          6,
+          6
+        ],
+        "factor_indices_zero_based": [
+          0,
+          1
+        ]
+      },
+      "hamiltonian_pair_count": 0,
+      "is_perfect": false,
+      "pair_count": 55,
+      "union_cycle_partition_histogram": {
+        "6+6": 55
+      }
+    }
+  },
+  "source": {
+    "path": "notes/2026-07-19-c379-clebsch-deep-hole-extension.json",
+    "sha256": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
+  },
+  "verdict": "NEITHER C379 K_12 ONE-FACTORIZATION IS PERFECT"
+}
