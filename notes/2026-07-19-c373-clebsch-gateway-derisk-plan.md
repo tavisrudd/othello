@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** updated through C380; C381 weak-`E8` gate queued, C382 icosian comparison hard-gated
+**Status:** updated through C381 and C374; C382 is ready for its bounded marked-icosian gate and
+C375 retains the circuit gate
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -29,9 +30,9 @@ certified surface gateway C376
               |
               +---- C380 stable Lean seams -------- complete
               |
-              +---- C381 weak-E8 classification
+              +---- C381 marked-E8 classification - complete
                             |
-                            +---- C382 icosian comparison [green gate only]
+                            +---- C382 marked icosian comparison [ready, bounded]
                               |
                  optional quantum consequence
                               |
@@ -48,8 +49,9 @@ promotion question.  Pass two creates a durable certificate, invariant-ring pres
 or general theory only after the scout exposes a productive theorem.  In particular no broad GIT,
 stack, normalization, or cubic-surface formalization preceded the q=11 fusion/fibre gates.  Those
 gates are now positive in corrected forms.  C379's still-smaller `11+11` matching-factorization
-gate is also certified; its focused source audit and a productive framed moduli map must precede
-moduli machinery.
+gate is also certified; its focused source audit pre-empts the abstract one-factorization/biplane
+core, so any later moduli machinery still requires a productive framed map with a genuinely
+Clebsch-specific consequence.
 
 ## Protected baseline
 
@@ -60,7 +62,8 @@ The baseline paper remains the certified hexagon spine:
 3. q=11 non-GRS parent with a GRS deep-hole conic child;
 4. primitive Fourier-self-dual rank-eight syndrome scheme;
 5. exact affine automorphism group and intrinsic bare-code reconstruction; and
-6. the standard MDS-to-AME perfect-tensor corollary with its exact error-sector interpretation.
+6. the standard MDS-to-AME perfect-tensor corollary with its exact error-sector interpretation and
+   C374's LC/LU separation from every six-point GRS class.
 
 The gateway cannot weaken this package.  Until a branch is promoted:
 
@@ -68,13 +71,14 @@ The gateway cannot weaken this package.  Until a branch is promoted:
 - the gateway hexagon appears, if at all, as a dashed future-work diagram;
 - the title and abstract do not advertise cubic surfaces, `E6/E7`, a master duality, or a master
   arithmetic torsor; and
-- C374/C375 remain optional quantum capstones, not dependencies of the pure-mathematical identity.
+- C374 is a certified quantum capstone and C375 remains an optional circuit capstone; neither is a
+  dependency of the pure-mathematical identity.
 
-The certified upgrade layer now consists of C376's blowdown/code quotient-character theorem,
-C378's `PGL_2(11)` symmetry completion and rank-16 signed Fourier refinement, and C379's reversible
-matching-decorated deep-hole transform with its uniform weak-degree-two-del-Pezzo `A1` extensions.
-These results may strengthen the same paper, but novelty wording still obeys their individual
-source boundaries.
+The certified upgrade layer now consists of C374's GRS-class LC/LU separation, C376's blowdown/code
+quotient-character theorem, C378's `PGL_2(11)` symmetry completion and rank-16 signed Fourier
+refinement, C379's reversible matching-decorated transform, C380's formal gateway seam, and C381's
+marked integral root classification.  These results may strengthen the same paper, but novelty
+wording still obeys their individual source boundaries.
 
 ## Uniform promotion gate
 
@@ -245,13 +249,13 @@ do not promote it.
 
 ## Wave III — quantum consequences
 
-C374 and C375 already own the exact quantum-equivalence and circuit gates.  They should consume a
-green classical result if available, but the classical program must not depend on them.
+C374 has closed the exact quantum-equivalence gate: the Clebsch state is LC- and LU-inequivalent,
+with party permutation, to every six-point GRS class.  C375 retains the circuit gate and may consume
+green classical restrictions, but the classical program must not depend on it.
 
 Two outcomes justify promotion:
 
-- a presentation-independent scheme profile or finite invariant separates an LC class or sharply
-  restricts every possible LC map; or
+- a finite state invariant extends C374's exact GRS separation to a bounded non-GRS family; or
 - the eight-class Fourier algebra gives an exact decoder, recovery, channel, or observable law.
 
 An `A5`-symmetric MDS-to-AME presentation, an increase from six to seven code coordinates, or
@@ -313,9 +317,10 @@ of cubic surfaces over the golden integer ring first.
 
 ### F5. Quantum bridges remain optional
 
-Formalize MDS-to-AME or local-symplectic consequences only if C374 produces a compact exact theorem
-and the necessary finite linear-algebra infrastructure is already available.  Lean is not a reason
-to broaden a presentation-dependent quantum claim.
+C374 now supplies a compact exact GRS-separation theorem, but C380 deliberately stops before the
+MDS-to-AME and local-symplectic layer.  Formalize that layer only under a separately allocated task
+with the necessary finite linear-algebra infrastructure; the positive gate is not permission to
+broaden the claim beyond the fixed Clebsch state and six-point GRS comparison family.
 
 **Lean green gate.**  A lightweight import-only gateway module reaches every paper-facing formal
 terminal, exact-target validation is trace-current, the prescribed axiom audit is clean, and no
@@ -387,19 +392,20 @@ fusion, whose fixed algebra retains 12 of the rank-16 dimensions.
 
 ### 6. Scope and famous-object tourism
 
-The gateway atlas is a reservoir of later questions, not a work queue.  C381 is the sole bounded
-exceptional-lattice probe now allocated: it classifies the weak-degree-one effective-root data
-forced by C379.  C382 is allocated but cannot start unless C381 produces a canonical marked `E8`
-invariant.  Generic icosian/600-cell exposition, genus-two theta data, clusters, Hilbert modular
-surfaces, type-II matrices, Mathieu groups, and holography remain unallocated.
+The gateway atlas is a reservoir of later questions, not a work queue.  C381 has completed the
+bounded exceptional-lattice probe and supplied the canonical marked integral `E8` invariant forced
+by C379.  C382 is therefore ready only for its cheap marked-embedding/character gate; generic
+icosian/600-cell exposition, genus-two theta data, clusters, Hilbert modular surfaces, type-II
+matrices, Mathieu groups, and holography remain unallocated.
 
 ### 7. Formalization theatre
 
 Lean can prove only the stated model.  C380 therefore exposes every computational boundary, keeps
 generated tables behind checked leaves, and formalizes only the stable dictionary,
 quotient-character logic, matching sheets, and C378 finite interfaces.  It deliberately excludes
-cubic-surface, general biplane, and `E8` foundations.  C381/C382 must first stabilize their
-mathematical categories; no Lean expansion is implied by their allocation.
+cubic-surface, general biplane, and `E8` foundations.  C381 has stabilized the marked-root category
+and C382 names its comparison category, but neither C381's completion nor C382's readiness implies
+a Lean expansion.
 
 ## Hard stop rules
 
@@ -417,14 +423,16 @@ mathematical categories; no Lean expansion is implied by their allocation.
 
 1. Treat C378's group/fusion/refinement theorem and C379's extension/matching theorem as frozen
    inputs; preserve their different quotient maps.
-2. Treat the bounded `11+11` one-factorization/biplane certificate extension as complete; run its
-   focused source audit.  Stop there if the compatibility is already classical.
+2. Treat the bounded `11+11` one-factorization/biplane certificate and focused audit as complete;
+   retain only the Clebsch compatibility corollary because the abstract core is classical.
 3. Treat C380's formal foundation gate as complete.
-4. Run C381's frozen `22*66` weak-`E8` extension/root classifier independently of the C379 source
-   audit.  Promote C382 only on C381's exact canonical-invariant green gate.
-5. Keep the Frobenius and integral-moduli companions unallocated.  If step 2 is productive, run one
-   framed fixed-locus elimination before any stack, normalization package, or durable moduli build.
-6. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
+4. Treat C381's frozen `22*66` marked-root classification as complete.  Run C382's cheap
+   marked-embedding/character gate; proceed to an integral icosian comparison only if it produces
+   an intrinsic quotient and a consequence beyond C381.
+5. Keep the Frobenius and integral-moduli companions unallocated; no productive framed moduli gate
+   survived the completed source disposition.
+6. Treat C374's GRS-class LC/LU separation as complete and run C375's circuit gate independently,
+   without making the core wait.
 7. Perform claim-specific full-text and forward-citation closure.
 8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
 

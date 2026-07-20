@@ -1,7 +1,8 @@
 # C373 companion — the Clebsch gateway program
 
 Date: 2026-07-19  
-Status: research-program router updated through C380; C381 queued and C382 hard-gated
+Status: research-program router updated through C381 and C374; C382 ready for its bounded
+marked-icosian comparison and C375 retains the circuit gate
 Parent: `2026-07-19-c373-clebsch-scheme-automorphisms.md`
 
 ## Executive thesis
@@ -139,7 +140,9 @@ The following are proved in the cited local reports and are not conjectural prem
 - The q=11 code is a non-GRS `[6,3,4]` MDS code.  Its deepest projective syndrome directions form
   a conic, hence define a GRS child.
 - The MDS code supplies a six-party minimal-support `AME(6,11)` stabilizer presentation.  Its
-  local-Clifford equivalence class relative to Reed--Solomon presentations remains open.
+  exact holonomy and triple-marginal moments prove LC and LU inequivalence, with party permutation,
+  from every six-point Reed--Solomon presentation; comparison with arbitrary non-GRS classes remains
+  outside the bounded result.
 - The arithmetic evidence gives split behavior at 11, internal `S5` behavior at the ramified
   prime 5, and a candidate Frobenius-semilinear realization at inert primes.
 
@@ -172,7 +175,7 @@ class in the Picard lattice is the `E6` root lattice, and the 27-line monodromy 
 This is remarkably close to the C373 picture: two chiral geometric presentations, individually
 preserved by `A5`, exchanged by an outer `S5` coset.
 
-### First theorem target
+### Certified theorem
 
 Construct the blow-up and anticanonical map directly from the exact q=11 six-arc and prove a
 commutative dictionary among
@@ -182,21 +185,24 @@ commutative dictionary among
 - the ten Eckardt points or the appropriate ten tritangent incidences; and
 - the outer normalizer coset exchanging chirality.
 
-The exact correspondence is deliberately not asserted yet: the counts are suggestive, but the
-incidence map must be computed.  A positive result would geometrize the code's chirality; a
-negative result would still identify which distinct classical `C2` torsors are present.
+The exact certificate proves that quintic blowdown exchange and C373 code chirality are the same
+quotient character `S5 -> C2`, without choosing a preferred sheet.  Identification of the second
+blowdown with the golden-conjugate model induces precisely `A5`; the outer normalizer coset induces
+the exchange.
 
-### Cheap exact gate
+### Exact certificate
 
-1. Form the four-dimensional linear system of plane cubics through the six q=11 points.
-2. Compute its anticanonical image and verify the resulting cubic is the mod-11 Clebsch surface.
-3. Enumerate the 27 line classes and all tritangent/Eckardt incidences symbolically.
-4. Map each of the 20 weight-three deep-hole leader supports into that incidence table.
-5. Test whether the C373 `10+10` split is one of the two invariant double-six/blowdown choices.
+1. The four-dimensional linear system of plane cubics through the six q=11 points gives the
+   anticanonical model and verifies the mod-11 Clebsch surface.
+2. The symbolic incidence table contains all 27 line classes, 45 tritangent triples, ten Eckardt
+   triples, 72 sixers, and 36 double-sixes.
+3. Exact enumeration of the two blowdowns and the golden-conjugate frame maps separates the 60
+   inner from the 60 outer label permutations.
+4. The outer permutations exchange C373's `10+10` split, proving the common quotient character.
 
-This computation is finite, exact, and likely cheaper than the remaining local-Clifford search.
+This finite computation is complete, exact, and independently replayed in C376.
 
-### Further consequences if positive
+### Consequences and remaining extensions
 
 - **Conceptual automorphisms.**  Recover `A5` as the stabilizer of a marked blowdown and the outer
   `S5` coset as blowdown exchange.  This may supply a second broad-audience explanation of why the
@@ -270,18 +276,15 @@ This is now the exact Door-III theorem; arbitrary q=11 six-arcs and other fields
 
 ## Door IV — quantum invariants and exact eight-state dynamics
 
-### Geometric local-Clifford profile
+### Exact LC/LU separation from GRS classes
 
-A single Pauli-`X` syndrome scheme depends on the chosen stabilizer presentation.  To obtain a
-state invariant, form the multiset of syndrome schemes over all local Pauli Lagrangian frames,
-quotiented by the local symplectic group.  Test whether this `scheme profile`
-
-- separates the Clebsch AME presentation from all GRS presentations;
-- yields a short invariant that is complete for the relevant `AME(6,11)` family; or
-- reduces C374 to a small number of mixed `X/Z` cases.
-
-General complete finite LC invariants are prior art.  Novelty would be the small, geometric,
-rank-eight certificate and its completeness in this exceptional family.
+**C374 outcome.**  The fixed `tau=8` CSS state is `AME(6,11)`.  Its 450-entry minimal-support
+holonomy signature differs from all four `PGL_2(11)` orbits on the 924 six-point GRS evaluation
+sets, proving LC separation with party permutation.  The stronger triple-marginal moment
+distribution has 70 copies of `11^-4` and 385 of `11^-6`, versus 60, 62, 63, or 64 copies of
+`11^-4` on the four GRS orbits, proving general LU separation.  The broad existence of many
+`AME(6,11)` LU classes is prior art; the bounded theorem is the explicit `A5`-symmetric Clebsch
+class outside every GRS class.  Arbitrary non-GRS classification remains unclaimed.
 
 ### Fourier--MacWilliams channel algebra
 
@@ -532,27 +535,27 @@ golden A5 -> binary icosahedral group -> 600-cell / icosians -> E8 lattice.
 ```
 
 The second route is classical: the icosian ring over the golden field constructs the `E8` lattice
-and links the icosahedron, quaternions, `H4`, and the 600-cell.  The first route is now explicitly
-stage-gated.
+and links the icosahedron, quaternions, `H4`, and the 600-cell.  C381 has now supplied the exact
+marked endpoint required to compare the first route without collapsing it to that dictionary.
 
-**C381** owns the bounded finite problem.  Across all 22 C379 parents and all 66 unordered pairs of
-conic points, it must classify eight-arcs, code extensions, the complete effective-root subsystem,
-the weak-degree-one criterion, and the action of the obstruction matching and two
-one-factorization sheets.  The inherited six-conic obstruction proves in advance that there is no
-smooth degree-one member.  C381 unlocks no famous-object comparison unless it produces a
-presentation-independent marked root subsystem, orbit, flag, or embedding class.
+**C381 outcome.**  The complete `22*66` domain has three marked integral root types:
+`(D8,A2)` on the 132 matched pairs, `(3A1,2A1)` on 660 weak MDS pairs, and `(4A1,2A1)` on 660 weak
+non-MDS pairs.  Root intersection recovers the obstruction matching, hence the parent, and the
+marked type decides eight-arc/MDS status.  The matched `D8` has index two in `E8`, but its abstract
+`C2` glue quotient cannot carry chirality because `Aut(C2)` is trivial.
 
-**C382** is allocated but hard-gated on that exact invariant.  It first compares the two `A5`
-actions by characters, root orbits, and `W(E8)` embedding class.  Only if those match in the same
-category may it construct an integral isometry to the icosian model and test path independence and
-golden-involution compatibility.
+**C382** is ready for the bounded marked comparison.  It first compares the `A5` actions by the
+free `A5/D10,A5/C2,A5/C2` permutation characters, root orbits, marked `D8<E8` embedding and glue,
+and centralizer/normalizer ambiguity.  Only if those match in the same category may it construct
+an integral isometry to the icosian model and test path independence and golden-involution
+compatibility; an arbitrary `E8` isometry is a red result.
 
 ```text
-go C381
+C381 green marked-E8 invariant
     |
-    +-- green canonical marked-E8 invariant --> promote and go C382
+    +-- C382 character/embedding gate --> integral comparison only on a match
     |
-    +-- yellow/red ---------------------------> keep C382 gated; return to crowns
+    +-- mismatch or abstract-C2-only result --> close the route
 ```
 
 This two-stage route is fully specified in
@@ -705,16 +708,17 @@ object—not the fame of the destinations—is the proposed novelty.
 | 11 | code-lattice comparison | low/medium | speculative | lattices are plainly isometric or theta data generic |
 | 12 | tropical and secret-sharing lifts | high | speculative | no concrete map or operational statistic |
 
-The table records the original triage; ranks 1--3 and the foundation track have been resolved by
-C376--C380.  The current
+The table records the original triage; ranks 1--3, the foundation track, C374's quantum-equivalence
+gate, and C381's marked-root classification have been resolved by C374 and C376--C381.  The current
 immediate sequence is:
 
-1. complete the focused source audit for the one-factorization/biplane compatibility;
-2. run C381's bounded weak-`E8` obstruction/root classification independently;
-3. promote C382 only if C381 records its canonical marked-lattice green gate;
-4. let C374/C375 consume the certified symmetry restrictions;
-5. if the biplane audit leaves a novel functorial edge, run one framed integral-moduli elimination;
-6. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional
+1. run C382's cheap marked-embedding/character gate and proceed to an integral icosian comparison
+   only if it yields an intrinsic quotient and a consequence beyond C381;
+2. run C375's fixed-convention minimal and `A5`-equivariant circuit gate independently of the pure
+   mathematical paper;
+3. retain the C379 one-factorization/biplane theorem only as Clebsch compatibility, without abstract
+   novelty language, because the focused audit pre-empts its classical core;
+4. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional
    canonical incidence theorem selects them.
 
 ## Claim and literature boundary

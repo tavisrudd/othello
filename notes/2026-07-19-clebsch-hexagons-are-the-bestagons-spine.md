@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** exposition blueprint updated through C380; C381 queued and C382 hard-gated as future
-`E8` successors
+**Status:** exposition blueprint updated through C381 and C374's exact LC/LU separation; C382 is
+ready for its bounded marked-icosian comparison, while C375 retains the circuit gate
 
 ## Governing idea
 
@@ -36,10 +36,12 @@ The broadest proved mathematical story is now:
 Applying the standard MDS-to-AME construction adds the quantum reading:
 
 > The same hexagon presents an `A5`-symmetric `AME(6,11)` perfect tensor whose Pauli-`X` error
-> sectors carry that self-dual eight-class algebra.
+> sectors carry that self-dual eight-class algebra.  Its exact minimal-support holonomy and
+> triple-marginal moment distributions separate it, even up to party permutation, from every
+> six-point GRS `AME(6,11)` class under local Clifford and general local unitary equivalence.
 
-The second sentence is a structured presentation and error-algebra theorem.  It is not yet a claim
-of a new local-Clifford or local-unitary AME class.
+This is an explicit `A5`-symmetric non-GRS class outside all GRS classes, not a claim that the broad
+existence of multiple `AME(6,11)` LU classes is new.
 
 ## The picture to show the reader
 
@@ -130,17 +132,20 @@ The paper should announce one theorem with six clauses.
    does not lift within one q=11 fibre.  Blowing up the six points gives the Clebsch cubic, and the
    natural quintic passage between its distinguished double-six blowdowns realizes exactly the
    same quotient character, without choosing a preferred chirality sheet.
-6. **Perfect-tensor corollary.** The standard MDS construction produces an `A5`-symmetric
-   minimal-support `AME(6,11)` stabilizer state.  Classical syndrome weight becomes minimum
-   Pauli-`X` error weight, so the conic and the eight-dimensional Bose--Mesner algebra describe
-   exact error sectors of this presentation.
+6. **Perfect-tensor corollary and GRS separation.** The standard MDS construction produces an
+   `A5`-symmetric minimal-support `AME(6,11)` stabilizer state.  Classical syndrome weight becomes
+   minimum Pauli-`X` error weight, so the conic and the eight-dimensional Bose--Mesner algebra
+   describe exact error sectors of this presentation.  Its 450-entry minimal-support holonomy
+   signature differs from all four `PGL_2(11)` orbits of six-point GRS evaluation sets, and its
+   exact triple-marginal moments prove local-unitary inequivalence, with party permutation, from
+   every such GRS class.
 
 Clauses 1--2 are the C368 arithmetic phase theorem assembled from C339/C341/C346.  Clause 3 combines
 C368's parent-to-child theorem with C379's extension, decorated inversion, and
 one-factorization/biplane certificate.  Clause 4 combines C341/C372 with C378.  Clause 5 combines
 C373's bare-code hand-back to C207 with C376's cubic compatibility.  Clause 6 uses the standard
-MDS-to-AME theorem with the preceding exact syndrome identifications.  The paper must keep those
-ownership and prior-art boundaries visible.
+MDS-to-AME theorem with the preceding exact syndrome identifications and C374's exact LC/LU
+separation.  The paper must keep those ownership and prior-art boundaries visible.
 
 ## The six proof-bearing sides
 
@@ -248,9 +253,9 @@ proved:
 - deepest projective `X`-syndrome directions form the conic;
 - Fourier self-duality identifies the error-class and character-class geometries.
 
-Do not infer a threshold, channel capacity, experimental advantage, or a new AME equivalence class.
-C374 owns local-Clifford/local-unitary classification; C375 owns minimal and `A5`-equivariant
-preparation circuits.
+Do not infer a threshold, channel capacity, experimental advantage, or classification against
+arbitrary non-GRS `AME(6,11)` states.  C374 proves exact LC/LU separation from every six-point GRS
+class; C375 owns minimal and `A5`-equivariant preparation circuits.
 
 ### Side 6 — the derived object returns to the hexagon
 
@@ -397,8 +402,9 @@ C368 and C372--C379 now give a closed pure-mathematical spine with a substantial
   cross-incidence.
 
 That is an A-range mathematical core with serious entry points for finite geometry, coding theory,
-algebraic combinatorics, representation theory, and quantum information.  C374/C375 are quantum
-capstones, not prerequisites for the paper's mathematical identity.
+algebraic combinatorics, representation theory, and quantum information.  C374 supplies a proved
+quantum capstone; C375's circuit question remains optional and is not a prerequisite for the
+paper's mathematical identity.
 
 The principal limitation is generality and source disposition: this remains one exceptional object
 over a special field, and the classical one-factorization/biplane literature still needs focused
@@ -408,10 +414,9 @@ ceiling.  The best candidates are a general reflection-orbit MDS phase mechanism
 of non-GRS-to-GRS deep-hole transforms, a reusable criterion for Fourier-self-dual orbit fissions,
 or the golden outer/Galois phase theorem.
 
-If the rank-eight fission is eventually identified with a known scheme and the AME state proves
-equivalent to a standard Reed--Solomon state, the paper remains strong: its contribution is then
-the exact arithmetic transform, self-dual error algebra, and closed reconstruction cycle rather
-than priority for new standalone objects.
+If the rank-eight fission is eventually identified with a known scheme, the paper remains strong:
+the exact arithmetic transform, self-dual error algebra, closed reconstruction cycle, and C374's
+proved separation from every six-point GRS `AME` class do not depend on standalone-scheme priority.
 
 ## Six future directions, one for each unclosed side
 
@@ -429,10 +434,11 @@ Does the `H3/A5` construction belong to a general Coxeter-orbit source of unifor
 Characterize rank-three non-GRS MDS codes whose complete maximum-weight projective syndrome locus
 is itself an arc, conic, or rational-normal-curve projective system.  Determine when the deep-hole
 transform is MDS or GRS, when it terminates, and when a canonical obstruction decoration recovers
-its parent.  Classify the weak-del-Pezzo root types arising from one-point extensions.  C381 owns
-the bounded two-point continuation: the inherited six-conic obstruction rules out a smooth
-degree-one surface, so it classifies the effective subsystem of the abstract `E8` Picard lattice.
-C382 compares that marked subsystem with the icosian `E8` only if C381's canonicality gate passes.
+its parent.  C381 has completed the bounded two-point continuation: its three marked integral root
+types `(D8,A2)`, `(3A1,2A1)`, and `(4A1,2A1)` recover the obstruction matching and decide MDS
+status, while the inherited six-conic obstruction rules out a smooth degree-one surface.  C382 is
+now ready to compare the marked `D8<E8` embedding, glue, and centralizer data with the icosian model;
+an abstract `E8` isomorphism remains a red result.
 
 ### 3. When does a deep-hole child carry a factorization double cover?
 
@@ -457,13 +463,13 @@ classes and compute their sheetwise incidence or transition algebras.  Continue 
 refinement yields an exact design, robustness, list-decoding, Pauli-channel, mixing, or observable-
 estimation invariant beyond known multiple-covering and orbit-compression theory.
 
-### 6. Is the perfect tensor intrinsically Clebsch?
+### 6. How far does the intrinsic Clebsch tensor structure extend?
 
-Decide local-Clifford equivalence, with party permutation, between the Clebsch `AME(6,11)` state
-and standard Reed--Solomon presentations; use finite exact invariants before any LU claim.  Then
-determine whether a minimal three-two-site-gate preparation exists and whether it can implement
-the `A5` action equivariantly.  An exact equivalence map and a symmetry-forced obstruction are both
-successful answers.
+C374 proves local-Clifford and general local-unitary inequivalence, with party permutation, from
+every six-point GRS presentation.  Classify the state relative to other non-GRS `AME(6,11)` classes
+only if a finite exact invariant supplies a bounded family.  Independently, determine whether a
+minimal three-two-site-gate preparation exists and whether it can implement the `A5` action
+equivariantly.  An exact circuit and a symmetry-forced obstruction are both successful answers.
 
 ## Claim boundary for the final manuscript
 
@@ -489,21 +495,25 @@ Exact family-specific content established locally:
 - the equality of cubic blowdown exchange and code chirality as quotient characters;
 - q=11 golden completion to `PGL_2(11)`, the rank-16 common coherent refinement, and its signed
   four-dimensional Fourier block;
+- exact LC and LU separation, with party permutation, of the Clebsch `AME(6,11)` state from every
+  six-point GRS class;
 - twelve uniform weak-degree-two-del-Pezzo extensions and termination of the undecorated deep-hole
   transform; and
 - reversible parent recovery by 22 obstruction matchings, their two one-factorizations, and the
-  exact `2-(11,5,2)` biplane cross-incidence.
+  exact `2-(11,5,2)` biplane cross-incidence; and
+- C381's three marked integral `E8` root types and their exact recovery of the matching, parent,
+  and MDS status.
 
 Not yet safe without the stated gates:
 
 - that the rank-eight fission is new or separable;
-- that the AME state is a new LC or LU class;
+- classification of the Clebsch state against arbitrary non-GRS `AME(6,11)` classes;
 - that the tensor has a new minimal or equivariant circuit;
 - that Fourier self-duality improves a physical noise or decoding quantity;
 - that the C379 one-factorization/biplane compatibility is new before focused source closure;
 - an intrinsic all-prime Frobenius action on the fission or factorization two-set;
-- any icosian/path-independence theorem before C381 supplies a canonical marked `E8` invariant and
-  C382 clears its representation and literature gates; or
+- any icosian/path-independence theorem before C382 clears its marked-embedding, representation,
+  consequence, and literature gates; or
 - any Clebsch holographic-code claim.
 
 ## Copy-ready closing cadence
@@ -524,11 +534,13 @@ In this precise and unusually literal sense, hexagons are the bestagons.
 - `notes/2026-07-19-c368-h3-a5-arithmetic-phase.md`
 - `notes/2026-07-19-c372-clebsch-scheme-fourier.md`
 - `notes/2026-07-19-c373-clebsch-scheme-automorphisms.md`
+- `notes/2026-07-19-c374-clebsch-ame-equivalence.md`
 - `notes/2026-07-19-c376-clebsch-cubic-chirality.md`
 - `notes/2026-07-19-c377-clebsch-golden-descent.md`
 - `notes/2026-07-19-c378-clebsch-common-duality.md`
 - `notes/2026-07-19-c379-clebsch-deep-hole-extension.md`
 - `notes/2026-07-19-c379-one-factorization-biplane-companion.md`
+- `notes/2026-07-19-c380-clebsch-gateway-lean-foundations.md`
 - `notes/2026-07-19-c381-clebsch-e8-extension-obstruction.md`
 - `notes/2026-07-19-c382-clebsch-icosian-e8-path-independence.md`
 - `notes/2026-07-18-c339-clebsch-deep-hole-transform.md`
