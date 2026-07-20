@@ -1,8 +1,11 @@
 # C389: universal exact-degree and repair base change
 
-**Date:** 2026-07-19  
-**Lane:** `crowns`  
-**Verdict:** **THEOREM; EXACT FROBENIUS-DEGREE CAYLEY LAYERS AND TWO-PHASE REPAIR GEOMETRY**  
+**Date:** 2026-07-19
+
+**Lane:** `crowns`
+
+**Verdict:** **THEOREM; EXACT FROBENIUS-DEGREE CAYLEY LAYERS AND TWO-PHASE REPAIR GEOMETRY**
+
 **Literature-audit depth:** **0 full text; 4 partial; 2 abstract/metadata only.**
 
 ## Result
