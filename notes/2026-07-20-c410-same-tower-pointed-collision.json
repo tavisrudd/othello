@@ -26,6 +26,31 @@
     "pointed_map_equal": false,
     "universal_map_equal": false
   },
+  "frame_free_followup": {
+    "candidate_digest": "bfc5924e64683784228ed6c09dc9ee82c84056489f309b617cb770ed0892f3e7",
+    "completeness": "every spanning six-point configuration contains a noncollinear triple; together with the frame-extension gate this covers every spanning six-point external-line closure in PG(2,7)",
+    "fixed_noncollinear_triple": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "frame_free_representations": 60,
+    "normalized_triple_extensions": 24804,
+    "pointed_collision_fibers": 0,
+    "universal_fibers": 1
+  },
   "maps": {
     "P": "sorted coordinate repair/availability pairs plus sorted excluded-syndrome multiplicities; the puncture deck is determined by repair counts",
     "U": "original characteristic polynomial plus universal weighted-adjoint projective depth-count polynomials"
@@ -308,7 +333,7 @@
     "universal_fibers": 15,
     "verdict": "BOUNDED NEGATIVE"
   },
-  "schema": "c410-same-tower-pointed-collision-v1",
+  "schema": "c410-same-tower-pointed-collision-v2",
   "scope": {
     "complement_size": 6,
     "completeness": "every six-point configuration containing a projective frame is projectively equivalent to at least one tested extension",
@@ -336,6 +361,6 @@
       ]
     ],
     "normalized_extensions": 1378,
-    "stop_rule": "do not enlarge the field, size, or configuration family after a negative gate"
+    "stop_rule": "after the user-authorized frame-free follow-up completes q=7 at size six, move every larger field/size or different-method attack to a separately allocated successor"
   }
 }

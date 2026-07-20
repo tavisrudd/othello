@@ -27,6 +27,21 @@ def incident(line: Vector, point: Vector, q: int) -> bool:
     return sum(a * b for a, b in zip(line, point)) % q == 0
 
 
+def determinant(a: Vector, b: Vector, c: Vector, q: int) -> int:
+    return (
+        a[0] * (b[1] * c[2] - b[2] * c[1])
+        - a[1] * (b[0] * c[2] - b[2] * c[0])
+        + a[2] * (b[0] * c[1] - b[1] * c[0])
+    ) % q
+
+
+def contains_frame(indices: tuple[int, ...], pts: tuple[Vector, ...]) -> bool:
+    return any(
+        all(determinant(pts[i], pts[j], pts[k], Q) for i, j, k in combinations(four, 3))
+        for four in combinations(indices, 4)
+    )
+
+
 def canonical(value: object) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"))
 
@@ -156,6 +171,28 @@ def main() -> None:
             }
         )
     result = expected["result"]
+    basis = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+    basis_indices = tuple(pts.index(point) for point in basis)
+    triple_remaining = tuple(i for i in range(len(pts)) if i not in basis_indices)
+    frame_free_rows = []
+    frame_free_fibers: dict[str, set[str]] = {}
+    for extra in combinations(triple_remaining, 3):
+        indices = basis_indices + extra
+        if contains_frame(indices, pts):
+            continue
+        selected = frozenset(indices)
+        arrangement = tuple(line for line in lines if all(not incident(line, pts[i], Q) for i in selected))
+        universal = {
+            "characteristic_polynomial_ascending": characteristic(arrangement, pts),
+            "weighted_adjoint": weighted_depth(arrangement, pts),
+        }
+        _, coordinate, syndrome = point_profiles(selected, pts, lines)
+        pointed = {"coordinate_repair_availability": coordinate, "syndrome_multiplicity": syndrome}
+        u_key = canonical(universal)
+        p_key = canonical(pointed)
+        frame_free_fibers.setdefault(u_key, set()).add(p_key)
+        frame_free_rows.append((digest(universal), digest(pointed), tuple(pts[i] for i in extra)))
+    followup = expected["frame_free_followup"]
     checks = {
         "normalized_extensions": len(rows) == expected["scope"]["normalized_extensions"] == 1378,
         "candidate_digest": digest(sorted(rows)) == result["candidate_digest"],
@@ -164,10 +201,16 @@ def main() -> None:
         "pointed_collision_fibers": sum(len(fiber["pointed"]) > 1 for fiber in fibers.values())
         == result["pointed_collision_fibers"]
         == 0,
+        "frame_free_representations": len(frame_free_rows) == followup["frame_free_representations"] == 60,
+        "frame_free_candidate_digest": digest(sorted(frame_free_rows)) == followup["candidate_digest"],
+        "frame_free_universal_fibers": len(frame_free_fibers) == followup["universal_fibers"] == 1,
+        "frame_free_pointed_collisions": sum(len(values) > 1 for values in frame_free_fibers.values())
+        == followup["pointed_collision_fibers"]
+        == 0,
     }
     if not all(checks.values()):
         raise AssertionError(checks)
-    print("OK independent_replay extensions=1378 U_fibers=15 pointed_collisions=0")
+    print("OK independent_replay frame_extensions=1378 frame_free=60 pointed_collisions=0")
 
 
 if __name__ == "__main__":

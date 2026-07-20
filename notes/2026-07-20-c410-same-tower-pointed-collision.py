@@ -13,7 +13,7 @@ from pathlib import Path
 
 STEM = Path(__file__).with_suffix("")
 OUTPUT = STEM.with_suffix(".json")
-SCHEMA = "c410-same-tower-pointed-collision-v1"
+SCHEMA = "c410-same-tower-pointed-collision-v2"
 Q = 7
 Vector = tuple[int, int, int]
 
@@ -46,6 +46,21 @@ def cross(a: Vector, b: Vector, q: int) -> Vector:
             a[0] * b[1] - a[1] * b[0],
         ),
         q,
+    )
+
+
+def determinant(a: Vector, b: Vector, c: Vector, q: int) -> int:
+    return (
+        a[0] * (b[1] * c[2] - b[2] * c[1])
+        - a[1] * (b[0] * c[2] - b[2] * c[0])
+        + a[2] * (b[0] * c[1] - b[1] * c[0])
+    ) % q
+
+
+def contains_frame(indices: tuple[int, ...], pts: tuple[Vector, ...], q: int) -> bool:
+    return any(
+        all(determinant(pts[i], pts[j], pts[k], q) for i, j, k in combinations(four, 3))
+        for four in combinations(indices, 4)
     )
 
 
@@ -235,6 +250,31 @@ def build_certificate() -> dict[str, object]:
     collision_count = sum(1 for fiber in summaries if fiber["pointed_signature_count"] > 1)
     if len(candidate_rows) != 1378 or len(summaries) != 15 or collision_count != 0:
         raise AssertionError("frozen gate result drift")
+    basis = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+    basis_indices = tuple(pts.index(point) for point in basis)
+    triple_remaining = tuple(i for i in range(len(pts)) if i not in basis_indices)
+    frame_free_rows = []
+    frame_free_fibers: dict[str, set[str]] = defaultdict(set)
+    for extra in combinations(triple_remaining, 3):
+        indices = basis_indices + extra
+        if contains_frame(indices, pts, Q):
+            continue
+        mask = sum(1 << i for i in indices)
+        arrangement_indices = external_arrangement(mask, line_masks)
+        arrangement = tuple(pts[i] for i in arrangement_indices)
+        universal = {
+            "characteristic_polynomial_ascending": characteristic(arrangement, Q),
+            "weighted_adjoint": weighted_depth(arrangement, Q),
+        }
+        _, coordinate, syndrome = profiles(mask, line_masks, point_lines)
+        pointed = {"coordinate_repair_availability": coordinate, "syndrome_multiplicity": syndrome}
+        u_key = canonical(universal)
+        p_key = canonical(pointed)
+        frame_free_fibers[u_key].add(p_key)
+        frame_free_rows.append((digest(universal), digest(pointed), tuple(pts[i] for i in extra)))
+    frame_free_collisions = sum(len(values) > 1 for values in frame_free_fibers.values())
+    if len(frame_free_rows) != 60 or len(frame_free_fibers) != 1 or frame_free_collisions != 0:
+        raise AssertionError("frame-free follow-up result drift")
     return {
         "schema": SCHEMA,
         "scope": {
@@ -243,7 +283,7 @@ def build_certificate() -> dict[str, object]:
             "fixed_projective_frame": frame,
             "normalized_extensions": len(candidate_rows),
             "completeness": "every six-point configuration containing a projective frame is projectively equivalent to at least one tested extension",
-            "stop_rule": "do not enlarge the field, size, or configuration family after a negative gate",
+            "stop_rule": "after the user-authorized frame-free follow-up completes q=7 at size six, move every larger field/size or different-method attack to a separately allocated successor",
         },
         "maps": {
             "U": "original characteristic polynomial plus universal weighted-adjoint projective depth-count polynomials",
@@ -256,6 +296,15 @@ def build_certificate() -> dict[str, object]:
             "pointed_collision_fibers": collision_count,
             "candidate_digest": digest(sorted(candidate_rows)),
             "fiber_summaries": summaries,
+        },
+        "frame_free_followup": {
+            "fixed_noncollinear_triple": basis,
+            "normalized_triple_extensions": 24804,
+            "frame_free_representations": len(frame_free_rows),
+            "universal_fibers": len(frame_free_fibers),
+            "pointed_collision_fibers": frame_free_collisions,
+            "candidate_digest": digest(sorted(frame_free_rows)),
+            "completeness": "every spanning six-point configuration contains a noncollinear triple; together with the frame-extension gate this covers every spanning six-point external-line closure in PG(2,7)",
         },
     }
 
@@ -279,7 +328,8 @@ def main() -> None:
     assert isinstance(result, dict)
     print(
         f"OK {OUTPUT.name} {len(data)} bytes sha256={hashlib.sha256(data).hexdigest()} "
-        f"extensions=1378 U_fibers={result['universal_fibers']} pointed_collisions={result['pointed_collision_fibers']}"
+        f"frame_extensions=1378 U_fibers={result['universal_fibers']} "
+        f"frame_free=60 pointed_collisions={result['pointed_collision_fibers']}"
     )
 
 
