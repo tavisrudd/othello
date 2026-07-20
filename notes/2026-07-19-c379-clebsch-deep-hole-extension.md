@@ -85,6 +85,26 @@ result `H_p`.  Exact enumeration gives the following complete answer.
    `2-(11,5,2)` biplane.  Thus the binary golden datum selects one of two eleven-parent systems,
    while selecting an individual parent requires its matching inside that system.
 
+7. **The factorization has a canonical Clebsch root-resolution.**  For a parent `X` and child point
+   `u in Q(F_11)`, there is a unique omitted point `rho_X(u)=x in X` for which
+   `(X-{x}) union {u}` is the conic six-subset of the extension.  The map `rho_X:Q(F_11)->X` is
+   two-to-one, and on either eleven-parent sheet
+
+   ```text
+   (X,x) |--> rho_X^(-1)(x)
+   ```
+
+   is an equivariant bijection from the 66 parent--point flags to the 66 child secants.  Each edge
+   is simultaneously a deletion-conic intersection, a puncture label, and an effective `A1`-root
+   family; `J` exchanges the two labelled resolutions.  More strongly, on the eight-point blow-up
+   for distinct child points `u,v`, the two extension-root classes intersect in `-1` exactly when
+   `rho_X(u)=rho_X(v)`, and otherwise in zero.  Thus the six matching edges are intrinsically the
+   six `A2` root pairs, while the other sixty pairs have type `A1+A1`.  The only transitive
+   `PGL_2(11)`-equivariant information levels on the 22 parents have sizes `22`, `2`, and `1`,
+   corresponding to decorated parent, chirality sheet, and undecorated child.  Finally, an
+   unchanged all-field matching cannot occur: six two-point deletion-conic fibres partition a
+   rational conic only if `q+1=6*2=12`, so `q=11`.
+
 ## Code and tensor boundary
 
 For every `p`, puncturing the `[7,3,5]` row code at the new coordinate returns the row code of
@@ -137,30 +157,42 @@ The trusted boundary is Python 3 exact prime-field arithmetic, exhaustive enumer
 displayed finite sets, the pinned C341 checker in the primary calculation, and the standard
 arc--MDS, minimal-support MDS--AME, and degree-two del Pezzo general-position dictionaries.  The
 certificate proves only the q=11 fixed-conic and fixed-`A5_6` statements above; it does not classify
-arbitrary q=11 six-arcs, arbitrary markings, or transforms over other fields.
+arbitrary q=11 six-arcs, arbitrary markings, or transforms over other fields.  The companion
+seed/root checker supplies explicit subgroup-intersection witnesses and verifies the two labelled
+root-resolutions, `J`-equivariance, and polarity diagonal counts; its commands and hashes are in
+`notes/2026-07-19-c379-one-factorization-biplane-companion.md`.
 
 ## Literature and claim boundary
 
-C379 performed no new external literature search and makes no novelty or priority claim.  In
-particular the `PGL_2(11)/PSL_2(11)` coset action, invariant one-factorizations, and eleven-point
-biplane are likely classical; a focused primary-source and forward-citation audit must separate
-those ingredients from their exact appearance as the Clebsch deep-hole obstruction.  The
-arc--MDS equivalence, the conic/extended-GRS dictionary, the MDS construction of minimal-support
-AME states, and the del Pezzo general-position criterion are used as standard dictionaries.  The
-task consumes C368's certified parent-to-conic theorem and C378's certified full child stabilizer;
-its contribution is the bounded exact compatibility and obstruction calculation requested by the
-gateway plan.
+The focused audit closes with verdict
+`CLASSICAL CORE; RETAIN AS CLEBSCH COMPATIBILITY COROLLARY; NO NOVELTY CLAIM`.  The sporadic
+`PSL_2(11)`-invariant one-factorization of `K_12`, its two-transitive factor action, the valency-five
+and valency-six orbitals of `PGL_2(11)` on 22 `A5` cosets, and the unique eleven-point biplane all
+occur in the classical literature.  Thus the abstract factorization, coset action, and design are
+pre-empted.  The surviving C379 content is their exact Clebsch compatibility and, more strongly,
+the root-resolution from every factor edge to a parent puncture, deletion conic, and effective
+root.  Targeted title/abstract and citation-set screens found no such root formulation, but access
+and database gaps prohibit an absence or priority claim.  Full source depths, identifiers, exact
+queries, forward-citation counts, and coverage gaps are recorded in the companion.
+
+The arc--MDS equivalence, conic/extended-GRS dictionary, minimal-support MDS--AME construction, and
+degree-two del Pezzo general-position criterion remain standard dictionaries.  C379 consumes
+C368's certified parent-to-conic theorem and C378's certified full child stabilizer; its contribution
+is the bounded exact compatibility, obstruction, and root-resolution calculation.
 
 ## Hand-back
 
 C379 closes the original smooth-surface, undecorated-iteration, and binary-fibre gates at their
 planned off-ramps, but the obstruction matching supplies a positive replacement: a reversible
 decorated transform on the complete 22-parent `A5_6` locus, together with a uniform weak del Pezzo
-`A1` interpretation.  The 22 matchings further form two `PSL_2(11)`-invariant
-one-factorizations exchanged by `J`, with biplane cross-incidence.  C380 has formalized the stable
-presentation-independent arc/MDS bridge, empty second transform, bounded matching-decorated
-recovery, and two eleven-parent sheets without introducing a false two-parent quotient or tensor
-extension.  See
+`A1` interpretation.  The 22 matchings form two `PSL_2(11)`-invariant one-factorizations exchanged
+by `J`, with biplane cross-incidence.  Their conceptual proof reduces to three explicit local
+subgroup-intersection seeds, and their classical status is now closed.  The stronger surviving
+statement is the equivariant 66-flag root-resolution on each sheet, its root-intersection recovery,
+the exact `22 -> 2 -> 1` information lattice, and the q=11 obstruction to an unchanged all-field
+generalization.  C380 has formalized the stable presentation-independent arc/MDS bridge, empty
+second transform, bounded matching-decorated recovery, and two eleven-parent sheets without a
+false two-parent quotient or tensor extension.  See
 `notes/2026-07-19-c379-one-factorization-biplane-companion.md` for the exposition, moduli hand-back,
 and focused literature gate.
 
