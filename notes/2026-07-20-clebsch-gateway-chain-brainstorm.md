@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** working synthesis; candidate chains are recorded, while literature depth, effort/risk,
-scores, and final rankings are still being completed
+**Status:** completed synthesis and decision ranking; literature coverage remains bounded by the
+explicit read-depth ledger below
 
 ## Question
 
@@ -57,7 +57,7 @@ The following interfaces, rather than the individual famous objects, are the reu
   to every six-point GRS class; C375 gives a three-gate preparation and an exact obstruction to a
   strictly `A5`-fixed Bell-triangle layout.
 
-## Intermediate unranked candidate chains
+## Candidate chains in brainstorm order
 
 ### G1. Finite-field orbit recovery: cubic memory -> Hecke tomography -> intrinsic reconstruction
 
@@ -66,15 +66,25 @@ moments through degree two, the third moment carries the orientation, and its st
 `PSL_2(q)`.  C411 is then a nontrivial tomographic compression: a rank-two incidence projection
 still separates all six double cosets and preserves the first informative moment degree.  C412
 adds the modular obstruction theory for why some natural compressions lose one more dimension.
+Edidin--Katz (2025) makes this much more than a metaphor: degree-at-most-three invariant tensors
+separate generic orbits whenever a finite-group orbit is linearly independent over an infinite
+field, while their complete multiplicity-free dihedral example retains a generic list of size two
+through degree three and needs degree four.  Our depth pair looks like a finite-characteristic,
+nongeneric, permutation-module cousin in which degree two leaves a list of size two and degree
+three resolves it.
 
 **Best move order.**
 
-1. Define the moment-identifiability degree of a signed pair of finite-group orbits in a module.
-2. Prove the B3/H3 cases conceptually, consuming C430/C414 rather than duplicating them.
-3. Characterize which mixed-Hecke incidence maps preserve that degree and which modular socles kill
-   it; C411/C412 are the worked example.
-4. Compose with C373/C413 so the recovered orientation selects the intrinsic geometric parent.
-5. Only then lift to noisy real or complex observations and compare with bispectrum/orbit-recovery
+1. Define the residual-list profile `L_d(x)` of a finite-group orbit from invariant tensors through
+   degree `d`; specialize it to a signed pair in a permutation or matching module.
+2. Recast B3/H3 as subregular orbit recovery and prove the degree-`2 -> 3` list drop conceptually,
+   consuming C430/C414 rather than duplicating them.
+3. Identify the exact failure of the Edidin--Katz infinite-field/linearly-independent-orbit
+   hypotheses and test whether a modular replacement is controlled by radical/socle layers.
+4. Characterize which mixed-Hecke incidence maps preserve `L_d` and which modular socles enlarge it;
+   C411/C412 are the worked example.
+5. Compose with C373/C413 so the recovered orientation selects the intrinsic geometric parent.
+6. Only then lift to noisy real or complex observations and compare with bispectrum/orbit-recovery
    algorithms.
 
 **Unlock.**  A finite-field, modular analogue of low-order invariant-moment orbit recovery, with a
@@ -82,13 +92,15 @@ proved sufficient statistic and a worked failure of semisimple intuition.  The c
 processing and cryo-EM-style tomography without pretending that the Clebsch data are physical
 images.
 
-**Cheap gate.**  On the B3 sheet pair, check whether every natural double-coset incidence map that
-separates labels preserves the cubic threshold.  One counterexample will show which extra
-representation-theoretic hypothesis the general theorem needs.
+**Cheap gate.**  Put the B3 signed-half vectors in their smallest generated group module, compute
+the orbit-span dependence and radical/socle filtration, and ask whether the second and third
+invariant tensors give residual list sizes `2` and `1`.  This decides whether the comparison is a
+theorem template or only numerology before any general statement is attempted.
 
-**Boundary.**  The ordinary real/compact-group third-moment and projected-moment theories are
-recent active prior art.  The plausible new surface is finite characteristic, signed orbit halves,
-and nonsemisimple rank-drop control.
+**Boundary.**  Generic cubic recovery for finite groups over infinite fields and preservation of
+moment order under suitable real tomographic projections are now direct recent prior art.  The
+plausible new surface is all-orbit finite characteristic, sparse/subregular permutation modules,
+signed orbit halves, Hecke compression, and nonsemisimple rank-drop control.
 
 ### G2. Arithmetic monodromy local system: code chirality -> double-six orientation -> `W(E6)`
 
@@ -281,7 +293,9 @@ the oriented invariant, or a portable classification has value.
 **Link.**  C403/C408 show that characteristic, Tutte, enumerator, low moments, and some scalar-tower
 data can forget pointed geometry.  C295/C373 show that small uncoloured graphs recover full
 projective geometry, while the q=11 pilot has exact WL dimension two.  Together they supply both
-positive and negative levels of an invariant hierarchy.
+positive and negative levels of an invariant hierarchy.  Recent WL work makes "restorability of a
+deleted fibre" inside a coherent configuration an explicit proof device, unusually well matched to
+our singleton/matching recovery maps.
 
 **Best move order.**
 
@@ -510,24 +524,31 @@ No forward-citation closure has been run for this report.
 |:---|:---|:---|
 | Tathagata Basak, [*Petersen graph and monodromy of the 27 lines on the Clebsch surface*](https://arxiv.org/abs/2607.01878), arXiv:2607.01878v1 (2026) | **partial**, official arXiv HTML: abstract, Introduction, Theorem 1.1, the 15-edge/12-pentagon labelling, the ten meridians, and the statement that their permutations generate `W(E6)`. | New decisive input for G2: supplies explicit monodromy moves at the Clebsch base point. It owns that monodromy model; the candidate addition is transport to the code torsor and arithmetic phase. |
 | Haojie Gu, Nan Wang, and Jun Zhang, [*Deep holes of a class of twisted Reed--Solomon codes*](https://arxiv.org/abs/2509.08526), arXiv:2509.08526 (2025) | **partial**, official arXiv HTML: abstract, syndrome criterion summary, Section 4 scope, and Theorem 4.6 statement. | Confirms that syndrome-level classifications and deep holes of nonclassical RS variants are an active 2025 direction; calibrates G3/G4 toward transforms and decorations rather than another isolated deep-hole list. |
+| Dan Edidin and Josh Katz, [*Orbit recovery from invariants of low degree in representations of finite groups*](https://arxiv.org/abs/2503.00009), arXiv:2503.00009 (2025) | **partial**, official arXiv HTML: abstract, Introduction, invariant/moment definitions, Theorem III.1 and proof, subregular examples, and Corollary IV.3. | The closest theorem template for G1: cubic generic recovery for linearly independent finite-group orbits over infinite fields, plus a subregular dihedral residual list of size two through degree three. It sharply exposes the finite-field, all-orbit, and modular-compression gap. |
+| Amnon Balanov, Tamir Bendory, and Dan Edidin, [*Orbit recovery under the rigid motions group*](https://arxiv.org/abs/2512.07405), arXiv:2512.07405 (2025) | **partial**, official arXiv HTML: abstract, Introduction, main recovery theorem, and sample-complexity statements. | Transfers moment identifiability to an orbit-recovery algorithm and statistical cost; motivates only the late noisy-observation move in G1. |
+| Amnon Balanov, Tamir Bendory, and Dan Edidin, [*Group-invariant moments under tomographic projections*](https://arxiv.org/abs/2604.08330), arXiv:2604.08330 (2026) | **partial**, official arXiv HTML: abstract, Introduction, Theorem 3.1, and Corollary 3.2. | Especially close recent analogue for G1/G5: for suitable real orthogonal tomography, projected moments through the projection dimension determine the corresponding full moments and preserve the least informative degree. It does not treat finite fields, Hecke incidence maps, or modular socles. |
+| Dan Edidin and Matthew Satriano, [*Orbit recovery for band-limited functions*](https://arxiv.org/abs/2306.00155), arXiv:2306.00155 (2023) | **partial**, official arXiv HTML: abstract, Introduction, and principal third-moment/bispectrum recovery statements. | Third-moment generic recovery for compact-group band-limited functions; supplies vocabulary and a priority boundary for G1. |
+| Joshua Brakensiek, Manik Dhar, and Sivakanth Gopi, [*Generalized GM-MDS: Polynomial Codes are Higher Order MDS*](https://arxiv.org/abs/2310.12888), arXiv:2310.12888 (2023) | **partial**, official arXiv HTML: abstract, Introduction, higher-order-MDS definitions, and the main polynomial/algebraic-code and list-decoding statements. | Current framework joining span intersections, higher-order MDS, and optimal list decoding; supplies G4's external second move. |
+| N. Ramadas and Arul Lakshminarayan, [*Local unitary equivalence of absolutely maximally entangled states constructed from orthogonal arrays*](https://arxiv.org/abs/2411.04096), arXiv:2411.04096 (2024) | **partial**, official arXiv HTML: abstract, Introduction, LU-invariant section, principal results, and Conclusion. | Recent LU-invariant classification and infinite inequivalent AME families; bounds G10 and reinforces the need for an exact geometric/resource formula. |
+| Frederic Sauvage and Martin Larocca, [*Classical shadows with symmetries*](https://arxiv.org/abs/2408.05279), arXiv:2408.05279 (2024) | **partial**, official arXiv HTML: abstract, symmetry-shadow setup, measurement channel and variance framework, and qudit specialization. | Recent symmetry-adapted tomography baseline for G9; an eight-parameter algebra is valuable only if it yields an exact measurement or variance advantage. |
+| Aniruddha Wadhwa et al., [*Agnostic Process Tomography*](https://arxiv.org/abs/2410.11957), arXiv:2410.11957 (2024) | **partial**, official arXiv HTML: abstract, Introduction, and the main Pauli-spectrum/Pauli-channel tomography statements. | A current process-tomography baseline for G9; clarifies that symmetry compression must buy an exact identifiability, sample, or recovery guarantee. |
+| Thomas Schneider and Pascal Schweitzer, [*An Upper Bound on the Weisfeiler--Leman Dimension*](https://arxiv.org/abs/2403.12581), arXiv:2403.12581 (2024) | **partial**, official arXiv HTML: abstract, Introduction, and proof outline including coherent-configuration fibre restorability. | Current structural-complexity context for G8 and a proof motif for singleton/matching reconstruction. It does not itself give our realization-sensitive hierarchy. |
 
 ### Abstract/metadata reads in this pass
 
 | Source | Read depth and access | Use here |
 |:---|:---|:---|
-| Amnon Balanov, Tamir Bendory, and Dan Edidin, [*Orbit recovery under the rigid motions group*](https://arxiv.org/abs/2512.07405), arXiv:2512.07405 (2025) | **abstract/metadata only**, official arXiv search result. | Recent transfer of moment identifiability to orbit-recovery algorithms and sample complexity; motivates G1's longer chain. |
-| Amnon Balanov, Tamir Bendory, and Dan Edidin, [*Group-invariant moments under tomographic projections*](https://arxiv.org/abs/2604.08330), arXiv:2604.08330 (2026) | **abstract/metadata only**, official arXiv search result. | Especially close recent analogue for G1: projected moments can retain the unprojected orbit moment order. It does not by the abstract address finite fields, signed halves, or modular socles. |
-| Dan Edidin and Matthew Satriano, [*Orbit recovery for band-limited functions*](https://arxiv.org/abs/2306.00155), arXiv:2306.00155 (2023) | **abstract/metadata only**, official arXiv search result. | Third-moment/bispectrum recovery of generic group orbits; priority boundary and conceptual vocabulary for G1. |
-| Joshua Brakensiek, Manik Dhar, and Sivakanth Gopi, [*Generalized GM-MDS: Polynomial Codes are Higher Order MDS*](https://arxiv.org/abs/2310.12888), arXiv:2310.12888 (2023) | **abstract/metadata only**, official arXiv search result. | Current higher-order-MDS framework connecting span intersections, polynomial/algebraic codes, and optimal list decoding; supplies the external second move in G4. |
 | Yansheng Wu, Ziling Heng, Chengju Li, and Cunsheng Ding, [*More MDS codes of non-Reed--Solomon type*](https://arxiv.org/abs/2401.03391), arXiv:2401.03391 (2024) | **abstract/metadata only**, official arXiv search result. | Recent non-GRS MDS families with covering radii, deep holes, and dimension-three extendability; indicates that G3/G4 must distinguish their decorated-transform theorem from construction/catalogue results. |
-| N. Ramadas and Arul Lakshminarayan, [*Local unitary equivalence of absolutely maximally entangled states constructed from orthogonal arrays*](https://arxiv.org/abs/2411.04096), arXiv:2411.04096 (2024) | **abstract/metadata only**, official arXiv search result. | Recent LU-invariant classification and infinite inequivalent AME families; bounds G10 and reinforces the need for an exact geometric/resource formula. |
 | N. Ramadas, [*Minimal decomposition entropy and optimal representations of absolutely maximally entangled states*](https://arxiv.org/abs/2512.02749), arXiv:2512.02749v2 (2026) | **abstract/metadata only**, official arXiv abstract, version dated 10 March 2026. | Supplies a recent LU invariant and sparse-representation resource measure for the G10 first gate. |
-| Frederic Sauvage and Martin Larocca, [*Classical shadows with symmetries*](https://arxiv.org/abs/2408.05279), arXiv:2408.05279 (2024) | **abstract/metadata only**, official arXiv search result. | Recent symmetry-adapted tomography baseline for G9; an eight-parameter algebra is valuable only if it produces an exact measurement/sample advantage. |
+| Simon Pichon-Pharabod and Simon Telen, [*Galois Groups of Symmetric Cubic Surfaces*](https://arxiv.org/abs/2509.06785), arXiv:2509.06785 (2025) | **abstract/metadata only**, official arXiv abstract. | Shows that monodromy/Galois groups in symmetric cubic-surface families are a current explicit-computation problem and can be proper subgroups of the generic group; raises the priority and the symmetry-loss risk of G2. |
+| Thomas Brazelton and Sachi Raman, [*Monodromy in the space of symmetric cubic surfaces with a line*](https://arxiv.org/abs/2410.09270), arXiv:2410.09270 (2024) | **abstract/metadata only**, official arXiv abstract. | A second current symmetric-cubic monodromy boundary for G2; warns that choosing the marked locus changes the group drastically. |
+| İlke Çanakçı, Alastair King, and Matthew Pressland, [*Perfect matching modules, dimer partition functions and cluster characters*](https://arxiv.org/abs/2106.15924), arXiv:2106.15924 | **abstract/metadata only**, official arXiv abstract. | Makes the matching-module/cluster-character bridge in G6 plausible in planar dimer settings, while emphasizing that our crossing complete-graph matchings may violate the hypotheses. |
+| Benjamin Elkin, Gregg Musiker, and Kayla Wright, [*Twists of Plücker coordinates as dimer partition functions*](https://arxiv.org/abs/2305.15531), arXiv:2305.15531 | **abstract/metadata only**, official arXiv abstract. | Connects higher dimer covers, Grassmannian twists, and Plücker coordinates; supports G6's proposed one-test gate but not the claimed Clebsch transport. |
 
 ### Search coverage still open
 
-- Full texts of the newly found orbit-recovery, projected-moment, higher-order-MDS, AME, and
-  symmetry-shadow sources have not yet been read in this pass.
+- The newly found sources were read only to the depths stated above; none was promoted to full-text
+  coverage and no newly opened arXiv HTML was cached as a PDF.
 - MathSciNet, Google Scholar, and forward-citation closures are not covered.
 - No absence-of-prior-work conclusion in this report may exceed the claim-specific C406/C411
   audits already cited by the local planning note.
@@ -535,16 +556,169 @@ No forward-citation closure has been run for this report.
   cubic-surface local systems (G2), higher-order MDS extension complexes (G4), and quantum channel
   tomography inside association schemes (G9).
 
-## Ranking and evidence placeholders
+## Evaluation model
 
-The final pass will add:
+These scores choose experiments; they are not calibrated probabilities or novelty claims.
 
-- probability of a positive first gate;
-- value conditional on success, separately for the home fields and for general mathematics;
-- implementation effort, proof risk, literature/priority risk, and dependency risk;
-- an expected-value score;
-- a normalized surprise score; and
-- separate `EV` and multiplicative `EV * surprise` rankings.
+- `p` is the estimated probability that the **first theorem-sized gate** is positive, not the
+  probability that the entire speculative chain succeeds.
+- `F`, `M`, and `L` score conditional value from `1` to `5` for the home fields, general
+  mathematics, and leverage on later links.
+- `C` is cost to a first theorem-sized unit: `1` = hours, `2` = days, `3` = one or two weeks,
+  `4` = multiweek, `5` = a program.  This is distinct from the cheaper falsification gate.
+- `S` is epistemic surprise from `1` to `5`: how much a positive result would change a reasonable
+  expert's map after accounting for the already-landed Clebsch results and the literature above.
+- Conditional payoff is `0.40 F + 0.35 M + 0.25 L`.  The cost penalties for `C=1,...,5` are
+  `2,6,12,22,35`.  The displayed score is
 
-Recent-source characterization and read depths will be recorded in a source ledger.  Until then,
-this document makes no new novelty or priority claim.
+  ```text
+  EV = max(0, round(20 p (0.40 F + 0.35 M + 0.25 L) - cost_penalty(C))).
+  ```
+
+- The requested secondary score is genuinely multiplicative and normalized:
+  `EVS = round(EV * S/5)`.  Thus surprise can reorder equal-value projects but cannot rescue a
+  nearly valueless one.
+
+Because G14 is a basket of already-gated satellites rather than a single chain, assigning it one
+probability would be false precision.  Its Hermitian component is charged to G3/G10/G11, its
+Mathieu component to the existing C436 gate, and its Bring component to the existing C387 gate.
+It is therefore listed in the effort audit but not double-counted in either ranking.
+
+## Implementation effort and dominant risks
+
+Gate effort is `H` (hours), `D` (one to four days), or `W` (one to two weeks).  Full-program effort
+is `M` (roughly two to six weeks), `L` (roughly two to four months), or `XL` (multi-paper).  Risk is
+ordered `L/M/H/VH`.  “Implementation” includes exact computation, label transport, proof tooling,
+and audit work; most candidates need no new software architecture before their first gate.
+
+| ID | New work required for the first real step | Gate / full | Proof; literature; implementation risk | Dependencies or reuse |
+|:---|:---|:---:|:---|:---|
+| G1 | Construct the smallest B3/H3 signed-half modules; compute orbit-span, radical/socle, and invariant tensors through degree three; then express C411 as a moment map. | `D / L` | `H; H; M` | C430/C414, C411/C412, then C413. Reuse exact group/module code. |
+| G2 | Write one exact dictionary from Basak's Petersen labels to `E_i,L_ij,Q_i` and transport a meridian through the double-six/code labellings. | `D / XL` | `H; H; M` | C376 and C429; no geometry engine is needed for the kill test. |
+| G3 | Put q=11 deep holes and q=9 Cayley-octad singular quadrics into one decorated-incidence-transform interface and compare involutivity/discriminants. | `D / L` | `M; H; M` | C379, C405, and the existing C435 incidence gate. |
+| G4 | Compute low-order generator-matrix intersection ranks for the decorated parent and child families and compare with the higher-order-MDS inequalities. | `W / XL` | `H; H; H` | Requires a positive G3 dictionary; reuse code linear algebra but expect combinatorial growth. |
+| G5 | Formalize equivariant experiments as `K\G/H` kernels, compute refinement and composition on the Clebsch example, and prove the cubic statistic is minimal sufficient. | `D / L` | `H; H; M` | Mostly C434 plus C411/C413; strongest only after G1. |
+| G6 | Test one Plücker relation or cluster exchange identity on the two conic one-factorizations, including sign and crossing data. | `D / XL` | `VH; H; M` | Reuse C403/C379 matching data. Nonplanarity may kill the bridge immediately. |
+| G7 | Prove symbolic degree-two balance and cubic separation for B3, then isolate the H3 character argument. | `D / M` | `M; M/H; L` | Exactly C430/C414, plus Filmus--Lindzey and Bamberg--Klawuhn infrastructure. |
+| G8 | Run coherent closure and 2-WL on one C408 collision and one q=11 pair; extract a human reconstruction certificate. | `D / M` | `M; M; L` | C295/C408/C413; existing graph certificates suffice. |
+| G9 | Derive the positive cone and one-round recovery map in the eight-idempotent basis; test whether the odd block survives a physical channel. | `W / L` | `H; H; H` | C372/C378/C415 and the C374 encoder. Avoid tomography software until the symbolic gate passes. |
+| G10 | Evaluate LU invariants and decomposition entropy for the explicit non-GRS AME state and its geometric transforms. | `W / L` | `H; H; M` | C374/C375, later C435. May require symbolic plus numerical optimization. |
+| G11 | Tabulate the q=9 and q=11 obstruction/divisor correspondences in root-lattice coordinates and test one `D5 -> E6 -> E7` compatibility. | `W / XL` | `H; H; H` | C386/C390/C405/C435, then a positive G3 transform. Label reconciliation is substantial. |
+| G12 | Build an exact-degree phase table over several primes and compare Frobenius/outer character with transformed-code phase. | `W / XL` | `VH; H; H` | C429/C394 and preferably a positive G2 local system. High danger of thin-data interpolation. |
+| G13 | Express C418/C419 switch generators on decorated parents and prove preservation of one recovery certificate and one obstruction. | `D / M` | `M; M; M` | Directly consumes the next allocated matching-switch tasks; explicitly does not resume C294. |
+| G14 | Run only the named one-test Mathieu, Bring, Hermitian, genus-two, or cluster gate; promote no famous object from numerology alone. | `D/W / XL` | `H/VH; H; M/H` | Existing C387/C435/C436 and per-door prerequisites. Scored through the chains they feed. |
+
+The two most important engineering hazards are data-model mismatch, not runtime: G2 can fail because
+the literature and repository label different marked moduli problems, and G6 can fail because
+planar dimer identities do not survive crossing perfect matchings.  The two largest computational
+hazards are the subset explosion in G4 and physical-cone/elimination complexity in G9.  Both have
+cheap low-order symbolic gates, so neither justifies infrastructure work yet.
+
+## Primary ranking by expected value
+
+| Rank | ID | Short name | `p` | `F/M/L` | `C` | `S` | `EV` | Why it lands here |
+|---:|:---:|:---|---:|:---:|---:|---:|---:|:---|
+| 1 | G7 | Oriented-design / balanced-half rigidity | `.80` | `5/4.5/5` | `2` | `3.5` | **71** | Two exact examples, allocated proof inputs, low cost, and it unlocks G1. |
+| 2 | G3 | Decorated deep-hole transform calculus | `.75` | `5/4.5/5` | `3` | `4.5` | **60** | q=11 and q=9 give two nontrivial positive instances; a common theorem would reorganize several fields. |
+| 3 | G8 | Exact invariant hierarchy / canonical recovery | `.75` | `4/4/4` | `2` | `3` | **54** | Cheapest likely standalone theorem and useful negative/positive benchmark, though less surprising. |
+| 4 | G1 | Finite-field Hecke orbit recovery | `.65` | `5/5/5` | `3` | `5` | **53** | Highest conditional value; Edidin--Katz and projected moments provide an exact external spine, but modular all-orbit proofs are hard. |
+| 5 | G5 | Equivariant information lattice | `.65` | `4.5/5/5` | `3` | `4` | **50** | A portable sufficiency theorem could travel widely, but much of the first layer is already C434 and it needs G1 to become more than formalism. |
+| 6 | G11 | Exceptional obstruction calculus | `.65` | `4.5/4.5/4.5` | `3` | `4.5` | **47** | Multiple landed exceptional examples, very high synthesis value, and substantial reconciliation risk. |
+| 7 | G13 | Matching switches as repair moves | `.60` | `4.5/3.5/4` | `2` | `4` | **42** | Cheap because C418/C419 are next; operational preservation is more valuable than another static orbit. |
+| 8 | G4 | Extension complexes / higher-order MDS | `.50` | `5/4.5/4.5` | `3` | `5` | **35** | Could connect deep holes to optimal list decoding, but only after G3 supplies a genuine transform and ranks can explode. |
+| 9 | G10 | AME geometric complexity | `.55` | `4.5/4/4` | `3` | `4` | **34** | Concrete state and current LU tools exist; the resource measure may still ignore the geometry. |
+| 10 | G2 | Code chirality as cubic-surface local system | `.45` | `4.5/5/4.5` | `3` | `5` | **30** | Basak supplies explicit moves and the result would be spectacular, but marked-locus functoriality is fragile. |
+| 11 | G9 | Eight-parameter quantum tomography | `.40` | `4.5/4/4.5` | `3` | `4.5` | **23** | Strong algebraic compression, high risk that the odd observable vanishes on every physical channel of interest. |
+| 12 | G6 | Plücker/cluster memory of conic factorizations | `.25` | `3.5/4.5/3.5` | `2` | `5` | **13** | Very cheap to falsify and very surprising if true; crossing/nonplanar compatibility is a severe obstacle. |
+| 13 | G12 | Arithmetic dynamics / exact-degree layers | `.35` | `4/5/4.5` | `4` | `5` | **9** | Enormous upside but currently too few exact-degree data and too many possible phase mechanisms. |
+
+## Secondary ranking by `EV * surprise`
+
+Here surprise is normalized as `S/5`; the displayed number remains on the same rough `0--100`
+scale as EV.
+
+| Rank | ID | `EVS` | What would be genuinely surprising |
+|---:|:---:|---:|:---|
+| 1 | G3 | **54** | The q=9 Cayley-octad and q=11 conic-matching phenomena are instances of one decorated transform/discriminant theorem. |
+| 2 | G1 | **53** | A finite-characteristic, all-orbit cubic recovery theorem survives Hecke compression with modular socle corrections. |
+| 3 | G7 | **50** | The balanced-half/cubic-first pattern is uniform representation theory rather than small-rank coincidence. |
+| 4 | G11 | **42** | Code extension failures are functorial shadows of root-lattice divisor transitions across several exceptional types. |
+| 5 | G5 | **40** | Double-coset experiment lattices admit a useful Blackwell-style minimal-sufficiency theory with moment-order preservation. |
+| 6 | G4 | **35** | Decorated deep-hole extension data control higher-order MDS or list-decoding obstructions. |
+| 7 | G13 | **34** | Matching switches generate repairs while preserving exact geometric/code certificates. |
+| 8 | G8 | **32** | A short invariant ladder exactly locates when pointed geometry becomes reconstructible. |
+| 9 | G2 | **30** | The code chirality torsor extends as the same two-sheeted local system seen by `W(E6)` monodromy and Frobenius. |
+| 10 | G10 | **27** | Classical exceptional geometry predicts an LU/resource invariant of a non-GRS AME state. |
+| 11 | G9 | **21** | The odd Fourier block becomes a physically measurable low-sample chirality observable. |
+| 12 | G6 | **13** | Crossing Clebsch matchings satisfy a genuine Plücker/cluster exchange law. |
+| 13 | G12 | **9** | Exact-degree arithmetic phases form a predictable dynamical law rather than scattered exceptional primes. |
+
+The multiplication does what it should: it promotes G3 over the safer G7 and keeps the extremely
+surprising but weakly supported G6/G12 near the bottom.  G2's low placement is not a verdict on
+importance; it says to buy one meridian calculation before buying a local-system program.
+
+## Recommended scientific move order
+
+This is an information-gain order, not a silent reallocation of the crowns queue.  Existing task
+ownership and the current C418/C419 lane order remain unchanged.
+
+1. **Harvest C418 -> C419 into G13.**  Record switch generators as operations on decorated parents,
+   not just matchings.  This is already allocated and may provide repair moves used by G3/G6.
+2. **Run the G7 B3 module gate.**  Establish the exact `L_2=2, L_3=1` statement and its
+   radical/socle data.  If it fails, retain C430's balanced theorem but stop the broad orbit-recovery
+   language.
+3. **Immediately chain a positive G7 gate into G1.**  First prove one preservation/failure theorem
+   for the C411 incidence map; only then formulate the general finite-field Hecke theorem.
+4. **Run the G3 Hermitian gate independently.**  Map the 28 singular quadrics/bitangents and eight
+   parent decorations into the same incidence-transform syntax as C379.  If no common invariant or
+   involution remains, do not create G4/G11 tasks from the analogy.
+5. **Take the cheap G8 certificate while the reconstruction machinery is warm.**  One exact
+   collision ladder can publish independently and calibrates how much of G1/G5 needs graph-level
+   information.
+6. **After C429, buy exactly one G2 meridian.**  Continue to a local system only if it preserves the
+   distinguished double-six/code torsor on the correctly marked locus.  A positive result earns the
+   remaining nine by symmetry; a negative result kills G12's current route.
+7. **Promote by branch, not by fame:**
+
+   ```text
+   G7 -> G1 -> G5 -> G9
+   G3 -> G4 -> G11
+   C429 -> G2 -> G12
+   C418/C419 -> G13 -> (G6 only after one exact exchange identity)
+   G8 stands alone and also audits all reconstruction branches.
+   ```
+
+8. **Defer quantum promotion.**  G9 requires a nonzero odd statistic on a physical channel and G10
+   requires an LU/resource quantity sensitive to the non-GRS geometry.  Exact algebraic compression
+   without one of those outputs is not enough.
+
+## Portfolio judgment
+
+The best near-term theorem is G7; the best surprising synthesis is G3; the highest-ceiling general
+mathematics program is G1.  The strongest combined bet is therefore not one item but the sequence
+
+```text
+balanced signed designs
+  -> finite-field residual-list orbit recovery
+  -> Hecke/minimal-sufficient tomography
+  -> intrinsic parent recovery.
+```
+
+That chain would turn the Clebsch gateway from a collection of correspondences into a theorem about
+**how much invariant information is necessary and sufficient to recover hidden finite geometry**.
+The second bet,
+
+```text
+decorated deep holes
+  -> incidence/discriminant transforms
+  -> higher-order MDS obstruction complexes
+  -> exceptional root-lattice transitions,
+```
+
+would turn isolated q=9 and q=11 miracles into an obstruction calculus.  Those are the two places
+where chaining the landed results plausibly unlocks something that was not previously formulable,
+not merely a new proof of something classical.
+
+No novelty claim here is stronger than the stated read depth.  Before any theorem title uses
+"first," "new," or an unqualified absence claim, its exact statement needs full-text backward and
+forward closure under the repository literature-audit conventions.
