@@ -537,11 +537,24 @@ already classical marker orbit.
 
 For the distinguished orbit in each type:
 
-1. map its augmentation module into `Q*R_{r-2}` by subtracting a fixed factorization;
-2. compute and then prove image rank, kernel dimension, and group-module decomposition;
-3. test whether the image is the full conic-ideal layer;
-4. identify a uniform Coxeter/exponent/root-length description; and
-5. record exactly which structures the module recovers.
+1. freeze the Gate-1 `5/14/22` orbit and base matching from
+   `notes/2026-07-20-c406-matching-orbit-scout.json`; do not regenerate the scout;
+2. restrict the distinguished-orbit permutation module and its augmentation kernel to the base
+   parent group `H=S4,S4,A5`;
+3. compute the permutation character on every parent conjugacy class from exact fixed-matching
+   counts and decompose it over `F_5,F_7,F_11` (and over a splitting closure if required);
+4. use `5,7,11 \nmid |H|` explicitly: Maschke semisimplicity permits constituent-level kernel and
+   image statements even though the ambient symmetric-group matching module is modular;
+5. map `[M]-[M_0]` to `(P_M-P_(M_0))/Q in R_(r-2)`, then prove image rank, kernel dimension, and
+   equivariant constituent decomposition;
+6. test whether the image is the full conic-ideal layer and whether the B3/H3 outer-sheet sign
+   survives; and
+7. identify a uniform Coxeter/exponent/root-length description and record exactly which structures
+   the module recovers.
+
+The Gate-2 evidence stem is `notes/2026-07-20-c406-matching-module.*`.  It must include the exact
+character tables/fixed counts, deterministic certificate, independent replay, and checksums.  Gate
+2 may consume but must not edit the frozen C399/C403/C379 and Gate-1 artifacts.
 
 **Stop yellow** if the image is nonzero but has no uniform structure or consequence beyond
 straightening.
@@ -666,14 +679,21 @@ A cold C406 session should read, in order:
 
 1. `notes/handoffs/2026-07-17-crowns.md`;
 2. this report;
-3. `notes/2026-07-20-c399-coxeter-number-conic-phase.md`, only for fixed conic/group conventions;
-4. the matching and parent-forgetting sections of
+3. `notes/2026-07-20-c406-matching-orbit-scout.md` and the compact JSON schema it describes; treat
+   its orbit, base-matching, `PSL_2` sheet, and input-hash data as frozen;
+4. `notes/2026-07-20-c399-coxeter-number-conic-phase.md`, only for fixed conic/group conventions;
+5. the matching and parent-forgetting sections of
    `notes/2026-07-20-c403-arrangement-complement-distance.md`;
-5. the matching recovery and two-sheet statements in
+6. the matching recovery and two-sheet statements in
    `notes/2026-07-19-c379-clebsch-deep-hole-extension.md` and
    `notes/2026-07-19-c379-one-factorization-biplane-companion.md`;
-6. `notes/2026-07-20-c399-literature-audit.md` for the classical ownership boundary; and
-7. C378/C372 only after Gate 3 or Gate 4 requires the Fourier comparison.
+7. `notes/2026-07-20-c399-literature-audit.md` for the classical ownership boundary; and
+8. C378/C372 only after Gate 3 or Gate 4 requires the Fourier comparison.
+
+The next cold-session action is Gate 2 only: compute the fixed-matching characters and restricted
+factorization-difference modules under the frozen conventions.  Do not rerun Gate 1, start Gate 3,
+perform a new literature audit, edit Lean, or modify the manuscript before Gate 2 returns its exact
+red/yellow/green disposition.
 
 The task hand-back must contain one of:
 
