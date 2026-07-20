@@ -26,6 +26,43 @@ single-target reliability/Tutte scope?
 multi-target transfer theorem is claimed.
 **Status:** open lead
 
+### 2026-07-19 — fixed-parent `A5` may still act on mod-two `D8` avatars
+
+**Provenance:** C382 adjacent-mapping review after the full `PGL_2(11)` icosian comparison failed.
+**Was I looking for this?:** no — the selected successors required a full-group intrinsic mapping;
+this is the lower-symmetry residue deliberately excluded from C386--C387.
+**Observed / musing:** characteristic two can identify distinctions visible in the rational
+Picard/icosian characters, so the six matched pairs of one fixed parent might still map
+`A5`-equivariantly into singular points, triality generators, or even-theta avatars of
+`E8/2E8`.
+**Why it may matter / strongest question:** does a fixed-parent mod-two construction yield a clean
+local compatibility proposition without pretending to recover the two global sheets or golden
+`J` action?
+**Discriminator / falsifier:** construct the actual eight-dimensional `A5` quadratic module and
+test the six marked `D8` classes; retire if the map needs a Picard marking, is one of the standard
+icosahedral embeddings, or has no invariant beyond the six-point permutation action.
+**Evidence:** REASONED OPEN — modular collapse is possible, but no module or orbit map has been
+constructed.
+**Status:** open lead
+
+### 2026-07-19 — the tempting `132+3=135` fit is not full-group equivariant
+
+**Provenance:** C382 adjacent-mapping review; `132` matched configurations versus
+`[W(E8):W(D8)]=135`.
+**Was I looking for this?:** no — this was a numerical coincidence noticed while seeking a
+different full-symmetry target after C382.
+**Observed / musing:** the 135 `D8` embeddings are the nonzero singular vectors of the
+eight-dimensional plus-type quadratic space `E8/2E8`, suggesting a 132-point orbit with three
+exceptional points.  This cannot carry the full group: a 132-point orbit would make the simple
+`PSL_2(11)` subgroup act faithfully, while the ATLAS characteristic-two representation table has
+minimum faithful dimension ten.
+**Why it may matter / strongest question:** the failed count is a useful guardrail against reviving
+the same correspondence through triality, norm-four packets, or even theta characteristics, which
+are only other 135-element avatars.
+**Evidence:** SOURCE-CHECKED — ATLAS `L_2(11)` representation table, read at partial web-page depth;
+no eight-dimensional faithful characteristic-two module is listed.
+**Status:** retired -> full `PGL_2(11)` equivariance is representation-theoretically impossible
+
 ### 2026-07-18 — C210 sharpens the common carrier and redundancy question
 
 **Provenance:** user-directed review of
