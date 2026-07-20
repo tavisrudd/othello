@@ -230,6 +230,11 @@ without borrowing the unresolved abundance or recognition mechanisms owned by C8
   supplies an explicit full-group off-conic P stratum, but it neither forces entry from an arbitrary
   size-three state nor identifies an on-conic P child, and it does not seal away later off-conic
   moves.
+- The later Clebsch review records three method-level, falsifier-first transfers back to silver:
+  double-coset/marks compression of invariant positions, four-endpoint-switch tests for
+  pairing-forgetting of nimbers, and a stabilizer-stratified inventory of normalizer involutions.
+  See [`Transfer to C294 and the cap lane's odd-q all-P kernel`](2026-07-20-clebsch-lean-formalization-plan-fable-review.md#transfer-to-c294-and-the-cap-lanes-odd-q-all-p-kernel).
+  None is a q=11 object overlap, a value theorem, or an implicit resumption of C294.
 - Each centre's projection matching is its radius-two pointed repair port on the conic: an edge
   `{u,v}` means `{x,u,v}` is a projective 3-circuit. Thus `R_{S_b}` is the shared-helper conflict
   graph obtained by superposing four pointed repair ports and deleting helpers killed by target

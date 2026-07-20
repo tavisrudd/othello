@@ -279,6 +279,15 @@ Current sharper target:
 This is the active mathematical kernel.  It turns the problem into a one-dimensional conic
 parameter-line game with intrusions.
 
+The Clebsch formalization review's
+[`Transfer to C294 and the cap lane's odd-q all-P kernel`](../2026-07-20-clebsch-lean-formalization-plan-fable-review.md#transfer-to-c294-and-the-cap-lanes-odd-q-all-p-kernel)
+indexes three reusable inputs for this kernel: `deepTransform` is already the exact plane move
+operator; C379/C398/C399/C403 supply orbit-canonical endgame and terminal-parity data for a future
+exact odd-q solver; and `PGL_3(q)` has no fixed-point-free even-order projectivity (while Baer
+involutions fix a subplane), so a plane proof cannot come from the mirror route.  The same review
+also gives C294-specific marks, matching-switch, and normalizer-involution falsifiers.  These are
+method transfers only: they do not prove `(ON)`, all-P, or resume C294.
+
 #### Relative-complete sealing bridge — C100 review
 
 The `RelativeConicArcs` spinoff now has a proved game-domain bridge: if `A` is complete outside a
