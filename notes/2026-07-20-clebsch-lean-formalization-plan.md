@@ -64,7 +64,12 @@ coefficient ring/module interface: finite signed moments through
 degree three, affine translation/base-point independence under vanishing lower moments,
 antipodal cancellation of even moments, weighted-barycentre cancellation in degree one, and a
 nonzero cubic witness as the first surviving signed power sum. Prefer a small finite
-multilinear/polynomial interface over a new general symmetric-tensor library.
+multilinear/polynomial interface over a new general symmetric-tensor library. Before creating
+`ClebschMomentTrade.lean`, check the existing `RelativeConicArcs.Moments` module (classical unsigned
+arc/line index moments): it shares the namespace but not the content, and its arc-moment lemmas may
+be partially reusable here and in F2/F9. State affine covariance at general strength `s` — C409
+proves it by one tensor expansion for arbitrary `s`, so the general statement is the cheaper one —
+and specialize to `s=2` only where a downstream slice needs it.
 
 **Exit:** symbolic theorems, no Clebsch tables; guarded elaboration; axiom audit.
 
@@ -99,8 +104,11 @@ coordinate tables.
 Split A3, B3, and H3 across module boundaries. Freeze the quotient vectors and prove image ranks
 `3,6,10`; for B3/H3 prove the signed first and second moments vanish and the cubic is nonzero.
 Expose character/kernel/image dimensions only to the extent used by the paper theorem. The H3
-symmetric-cube calculation is its own leaf. Each accepted table has a theorem connecting the data
-to the stated rank/moment proposition, canonical hashes, source-report provenance, and an
+symmetric-cube calculation is its own leaf, `ClebschFactorizationH3` (the module named in the
+ownership table), kept on a separate module boundary from A3/B3. For the nonzero-cubic witness,
+freeze one linear functional `ell` and certify `sum_M eps(M) ell(Phi_M)^3 != 0` as a scalar sum over
+the matchings (22 terms for H3, 14 for B3) rather than a full symmetric-tensor comparison. Each accepted table has a theorem connecting the
+data to the stated rank/moment proposition, canonical hashes, source-report provenance, and an
 independent replay.
 
 **Exit:** three bounded leaves plus a light aggregator; generator/schema/checksum bundle; no full
@@ -108,45 +116,92 @@ group-algebra development in characteristic 11.
 
 ### C424 / F5 — balanced sheets and cubic orientation
 
-Use compact certificate leaves for the statement that the two `q`-element sheets are the only
-complementary halves with equal first and second moments. Prove symbolically that this recovers the
-unordered pair. Add an abstract index-two action theorem and separate concrete B3/H3 permutation-
-action leaves that instantiate the supplied `PGL_2/PSL_2` hypotheses and anti-invariance. Only
-then conclude that the nonzero signed cubic is fixed by `PSL_2(q)`, negated by the outer coset, and
-has stabilizer `PSL_2(q)` inside the certified action. Derive the plane syzygies by expanding
-`P_M=P_0+Q Phi_M`.
+The balanced-half uniqueness claim — the two `q`-element sheets are the only complementary halves of
+the `2q` quotient points with equal first and second moments — is the campaign's only universal
+finite-exhaustion claim, so its verification route is fixed here, before dispatch, not chosen
+mid-task:
 
-**Exit:** paper-facing reconstruction/orientation theorem with finite uniqueness isolated from the
-generic moment proof. Do not formalize the false uniqueness, Hessian, contraction, singular-locus,
-or linear cubic-to-Fourier claims.
+- **B3 (`2q=14`, `binom(14,7)=3432` halves):** direct in-kernel exhaustion with a checker theorem
+  over all balanced halves.
+- **H3 (`2q=22`, `binom(22,11)=705432` halves):** a meet-in-the-middle checker. Fix an `11+11`
+  split of the 22 quotient points; enumerate the `2^11` partial moment sums on each side; every
+  balanced `11`-subset decomposes uniquely across the two sides, so a sorted join over the two
+  `2^11` tables is exhaustive. The checker theorem certifies (i) each listed moment-balanced half is
+  genuinely balanced, (ii) the two sheets are listed, and (iii) a sorted-join soundness lemma, so no
+  balanced half is missed. The `2^11` enumeration, not the `binom(22,11)` one, is the object the
+  leaf carries.
+
+If the meet-in-the-middle leaf cannot meet the measured `single` profile, F5 falls back to a
+two-tier exit: kernel tier — B3 uniqueness, vanishing of both sheets' first and second moments (a
+22-coordinate check), the abstract index-two sign theorem, and the orientation theorem stated
+*conditional on* the H3 uniqueness hypothesis; certificate tier — H3 uniqueness carried as a
+Python-backed leaf and declared as such in the verification map. The fallback is taken only on a
+measured failure, and the choice is recorded in the report.
+
+The rest of F5 stays kernel-backed either way. Anti-invariance of the signed cubic reduces, via the
+abstract index-two theorem, to the permutation action on the 22 quotient vectors plus sheet parity
+(no 220-dimensional linear algebra); `mu_3 != 0` needs one nonzero coordinate. Add the abstract
+index-two action theorem and separate concrete B3/H3 permutation-action leaves that instantiate the
+supplied `PGL_2/PSL_2` hypotheses and anti-invariance. Only then conclude that the nonzero signed
+cubic is fixed by `PSL_2(q)`, negated by the outer coset, and has stabilizer `PSL_2(q)` inside the
+certified action. Derive the plane syzygies by expanding `P_M=P_0+Q Phi_M`.
+
+**Exit:** paper-facing reconstruction/orientation theorem with balanced-half uniqueness carried by
+the fixed route above (kernel for B3 and, if feasible, H3; else the declared two-tier boundary). Do
+not formalize the false uniqueness, Hessian, contraction, singular-locus, or linear cubic-to-Fourier
+claims.
 
 ### C425 / F6 — C411 double-coset and H3 depth--Fourier--parent bridge
 
 Create a definitions-only concrete `G=PGL_2(11)`, `H=A5`, `K=A4` permutation-action base. Add a
-subgroup-mark leaf, the six representative incidence leaves, and a light aggregator. Formalize the
-group-action seam deriving `1+4+6` on each sheet, the six double cosets, `K`-invariance and
-`J`-antipodality, and the abstract three-profile cubic-first pushforward. State the mixed `K`--`H`
-matrix-coefficient interpretation only at the needed level: six-dimensional double-coset domain,
-rank-two image, four-dimensional kernel, and set-theoretic separation. Do not build general
-modular Hecke theory.
+subgroup-mark leaf, the six representative incidence rows sharded across a positive-sheet and a
+negative-sheet leaf (`ClebschDoubleCosetDepthPositive`, `ClebschDoubleCosetDepthNegative`), and a
+light aggregator. Formalize the group-action seam deriving `1+4+6` on each sheet, the six double
+cosets, `K`-invariance and `J`-antipodality, and the abstract three-profile cubic-first pushforward.
+State the mixed `K`--`H` matrix-coefficient interpretation only at the needed level: six-dimensional
+double-coset domain, rank-two image, four-dimensional kernel, and set-theoretic separation. Do not
+build general modular Hecke theory.
 
-The same task freezes the six representative incidence rows and certifies the profiles
-`+/-v_1,+/-v_2,+/-v_3`, fibre sizes `1,4,6 / 1,4,6`, the two plane equations, and
-`v_1+4v_2+6v_3=0`. Prove `D(JM)=-D(M)`, compose with the existing odd Fourier and matching leaves,
-and show that a singleton profile recovers the unordered golden matching pair; a chosen singleton
-matching then invokes `decorated_child_recovers_parent`.
+The equivariance content must be a theorem, not a definition. Do not freeze the six signed profile
+vectors as the only data: freezing them makes `D(JM)=-D(M)` and `K`-orbit constancy true by
+construction, so the leaf would silently trust the generator for exactly the geometry it exists to
+certify. Instead freeze the six representative secant unions, the sixteen relation cells, and the
+`K`/`J` generators as data; prove in-kernel that the cells partition the relevant projective sets,
+are scalar-closed and `K`-invariant, and that recounting reproduces the profiles
+`+/-v_1,+/-v_2,+/-v_3` with fibre sizes `1,4,6 / 1,4,6`, the two plane equations, and
+`v_1+4v_2+6v_3=0`; prove that `J` carries each representative's secant union to its mate's; then
+*derive* `D(JM)=-D(M)` from that geometry. Compose with the existing odd-Fourier and matching
+leaves, and show that a singleton profile recovers the unordered golden matching pair; a chosen
+singleton matching then invokes
+`RelativeConicArcs.ClebschGateway.Q11Matching.decorated_child_recovers_parent`.
+
+Optional non-gating strengthenings, absorbed only if free: state the cubic-first pushforward at all
+degrees `k` via the compressed-moment parity identity (one induction on the same three-term
+relation, strictly stronger than the degree-`<=3` statement); and add the elementary lemma that
+`v_1+4v_2+6v_3=0` is the unique primitive integral dependence, so the unlabeled three-ray profile
+recovers the orbit sizes `1,4,6` and stabilizer orders `12,3,2`.
 
 **Exit:** the complete conceptual C411 theorem and C406 -> C378 -> C379 arrow; six representatives
-replace a 22-row proof. No spine gate yet.
+replace a 22-row proof, with the sign law derived from frozen geometry rather than frozen. No spine
+gate yet.
 
 ### C426 / F7 — q=11 rank-eight Fourier self-duality
 
 Formalize C372's scalar-line character sum and connect the frozen hyperplane-count/eigenmatrix leaf
-to `P=Q`, multiplicity--valency equality, Fourier self-duality, and the intersection/Krein
-consequence used by the paper. The 877-partition fusion census and primitivity exhaustion remain
-separate bounded leaves with checker theorems if kernel-feasible; do not infer separability.
+to `P=Q`, multiplicity--valency equality, and Fourier self-duality; `P=Q` and `P^2=1331 I` are
+kernel-feasible directly from the frozen class data (eight dual representatives against 133
+projective lines). The intersection/Krein equality additionally needs the full intersection tensor
+(the 512 numbers `p^k_ij`), which no existing leaf supplies and which sits at the top of the
+measured kernel scale; carry the Krein clause either behind an explicit intersection-tensor leaf
+(`ClebschSchemeIntersectionTensor`) or under the same "if kernel-feasible" qualifier as the census,
+and state which route was taken in the verification map. Prescribe the compact primitivity
+certificate: for each of the 126 proper nonempty unions of nonidentity classes, one witness pair
+`(x,y)` in the union with `x+y` outside it — this makes primitivity a definite in-kernel yes. The
+877-partition fusion census remains a separate bounded leaf with a checker theorem if
+kernel-feasible; do not infer separability.
 
-**Exit:** a dedicated q=11 Fourier-scheme gate, separate from the chirality endpoint.
+**Exit:** a dedicated q=11 Fourier-scheme gate, separate from the chirality endpoint, with the
+Krein consequence's verification tier stated explicitly.
 
 ### C427 / F8 — q=11 intrinsic chirality and replacement-spine gate
 
@@ -154,8 +209,18 @@ Formalize only the committed C373 result, not new C207/outside-`S5` research: in
 the six scalar-line blocks, their two ten-element three-subset orbits, and the unordered chirality
 torsor. Supply either the compact affine-rigidity proof or a sound completeness-certificate theorem
 for the full color-preserving automorphism/no-outer-lift claims; keep the verification boundary
-explicit if the finite completeness check remains external. Reuse the existing abstract two-sheet
-character theorem.
+explicit if the finite completeness check remains external. For the order-60 projective stabilizer
+`Stab(hexagon)=A5`, the intended kernel route is the frame-transport bound: a stabilizing
+projectivity permutes the six arc points and is determined by its action on any four of them (an
+ordered four-point frame), so at most `6*5*4*3 = 360` candidate projectivities are checked, never an
+enumeration of `PGL_3(11)`. Keep the
+equitable-refinement bound `|Aut(X)| <= 1331*60*10` over the 1331-vertex edge-colored graph
+external, with its declared trust boundary. Reuse the existing abstract two-sheet character theorem.
+
+Record in the verification-map delta that spine clause 4's rank-16 statements are only partially
+kernel-backed: `M_odd^2 = 1331 I_4` and the four exchanged pairs are formal (existing leaf), while
+`P_16^2 = 1331 I`, the full rank-16 eigenmatrix, and minimality of the common coherent refinement
+remain certificate-backed and are not brought in-kernel by any F1--F8 terminal.
 
 **Exit:** `RelativeConicArcs.Gates.ClebschReplacementSpine` imports the existing C380 gate and the
 F1--F8 terminals without modifying stable C380 modules. Exact-target `--no-build` and the terminal
@@ -186,9 +251,9 @@ All paths are relative to the repository root. The allocator reserved C420--C428
 | C421 / F2 | `lean/RelativeConicArcs/ClebschConicMatchingQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschConicMatchingQuotient.lean` | `notes/2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`; no generated data expected | imports the existing conic/projective API; exits through secant pullback, four-point switch, quotient divisibility, switch connectivity, augmentation kernel, full-rational-boundary theorem |
 | C422 / F3 | `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | `notes/2026-07-20-c422-clebsch-harmonic-quotient-lean.md`; no generated data expected | imports F2; exits through the degree `1/2/4` `F_5/F_7/F_11` Laplacian decompositions and quotient-span bridge |
 | C423 / F4 | `lean/RelativeConicArcs/ClebschFactorizationData.lean`; separate `lean/RelativeConicArcs/ClebschFactorizationA3.lean`, `ClebschFactorizationB3.lean`, and `ClebschFactorizationH3.lean` leaves; `lean/RelativeConicArcs/Gates/ClebschFactorization.lean` | `notes/2026-07-20-c423-clebsch-factorization-leaves-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F3 and newly generated data from the frozen C406 coordinates; exits through ranks `3/6/10`, lower-moment cancellation, and nonzero B3/H3 cubic |
-| C424 / F5 | `lean/RelativeConicArcs/ClebschBalancedSheets.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean`; `lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean` | `notes/2026-07-20-c424-clebsch-balanced-sheets-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F4; exits through unique complementary halves, abstract index-two sign theorem, concrete anti-invariance/stabilizer, and plane syzygies |
+| C424 / F5 | `lean/RelativeConicArcs/ClebschBalancedSheets.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean`; `lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean` | `notes/2026-07-20-c424-clebsch-balanced-sheets-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F4; exits through balanced-half uniqueness (B3 in-kernel; H3 meet-in-the-middle or declared certificate tier), abstract index-two sign theorem, concrete anti-invariance/stabilizer, and plane syzygies |
 | C425 / F6 | `lean/RelativeConicArcs/ClebschDoubleCosetDepthData.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthBase.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthPositive.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthNegative.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepth.lean`; `lean/RelativeConicArcs/Gates/ClebschDoubleCosetDepth.lean` | `notes/2026-07-20-c425-clebsch-double-coset-depth-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F5 plus `RelativeConicArcs.ClebschGatewayQ11Fusion` and `RelativeConicArcs.ClebschGatewayQ11Matching`; exits through `1,4,6 / 1,4,6`, six profiles, rank-two plane, cubic pushforward, odd-Fourier sign, and decorated parent recovery |
-| C426 / F7 | `lean/RelativeConicArcs/ClebschSchemeFourierData.lean`; `lean/RelativeConicArcs/ClebschSchemeFourier.lean`; `lean/RelativeConicArcs/Gates/ClebschSchemeFourier.lean` | `notes/2026-07-20-c426-clebsch-scheme-fourier-lean.md`, `.py`, `.json`, and `.sha256` with that same stem; the new data module is generated from C372's frozen artifact | imports existing `RelativeConicArcs.ClebschGatewayA5FourierPhase` for the C400 arithmetic interface; exits through the scalar-line sum, `P=Q`, Fourier self-duality, and the paper-used intersection/Krein consequence |
+| C426 / F7 | `lean/RelativeConicArcs/ClebschSchemeFourierData.lean`; `lean/RelativeConicArcs/ClebschSchemeFourier.lean`; optional `lean/RelativeConicArcs/ClebschSchemeIntersectionTensor.lean` if the Krein clause is brought in-kernel; `lean/RelativeConicArcs/Gates/ClebschSchemeFourier.lean` | `notes/2026-07-20-c426-clebsch-scheme-fourier-lean.md`, `.py`, `.json`, and `.sha256` with that same stem; the new data module is generated from C372's frozen artifact | imports existing `RelativeConicArcs.ClebschGatewayA5FourierPhase` for the C400 arithmetic interface; exits through the scalar-line sum, `P=Q`, Fourier self-duality, the primitivity certificate, and the intersection/Krein consequence where kernel-feasible |
 | C427 / F8 | `lean/RelativeConicArcs/ClebschSchemeChiralityData.lean`; `lean/RelativeConicArcs/ClebschSchemeChirality.lean`; `lean/RelativeConicArcs/Gates/ClebschReplacementSpine.lean` | `notes/2026-07-20-c427-clebsch-scheme-chirality-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F6/F7 and existing `RelativeConicArcs.Gates.ClebschGateway`; exits through six intrinsic blocks, unordered `10+10`, full/no-outer-lift evidence at its declared trust boundary, and the replacement-spine aggregate |
 | C428 / F9 | `lean/RelativeConicArcs/ArrangementWeightedAdjoint.lean`; `lean/RelativeConicArcs/ClebschWeightedAdjointB3.lean`; `lean/RelativeConicArcs/Gates/ClebschWeightedAdjoint.lean` | `notes/2026-07-20-c428-clebsch-weighted-adjoint-lean.md`; add same-stem `.py/.json/.sha256` only for the B3 leaf | imports F2, existing `RelativeConicArcs.ClebschGatewayCoxeterPhase`, and C222's committed `RelativeConicArcs.ReflectionArrangementDecoding` terminal; exits through weighted depth, punctured enumerator, Hamming/distance theorem, and all three C399 specializations |
 
@@ -202,17 +267,20 @@ plan before generation.
 ```text
 C222 (existing) -------------------------------> F9
 F1 -------------------------> F5 ----\
-F2 -> F3 -> F4 ------------> F5 -----+-> F6 -> F7 -> F8 [spine gate]
+F2 -> F3 -> F4 ------------> F5 -----+-> F6 -> F8 [spine gate]   (F7 joins F8 independently)
 F1 -------------------------------> F6 -/
 existing C378/C379/C380 -----------------------> F6/F8
-existing C398/C399/C400 -----------------------> F7/F9
+existing C398/C399/C400 --------------> F7 -> F8; and -> F9
 C222 + F2 -------------------------------------> F9 [separate gate]
 ```
 
 Dispatch is serial at the dependency level but permits bounded parallel work after foundations:
-F1 and F2 may proceed independently; after F2, F3 may proceed while F1 finishes. Heavy finite leaves
-remain serialized through the shared build-owner queue. No worker receives a broad umbrella target
-until its leaves are individually trace-current.
+F1 and F2 may proceed independently; after F2, F3 may proceed while F1 finishes. F7 depends only on
+the existing `ClebschGatewayA5FourierPhase` terminal, not on F1--F6, so any serialization of F7
+after F6 in the build queue is dispatch-order only; F7 may run in parallel with the whole F1--F6
+chain, and only F8 logically consumes both F6 and F7. Heavy finite leaves remain serialized through
+the shared build-owner queue. No worker receives a broad umbrella target until its leaves are
+individually trace-current.
 
 ## Validation and evidence contract
 
@@ -259,3 +327,12 @@ are separate tasks; C411's duplicated slices are merged; concrete group/action l
 C399 is an honest mixed-verification entry boundary; C222 and B3 ownership are named; field and
 characteristic assumptions are bounded; and every certificate leaf has a checker-theorem,
 provenance, replay, hash, and axiom-audit contract.
+
+A subsequent Fable review (`notes/2026-07-20-clebsch-lean-formalization-plan-fable-review.md`) found
+no blocking defect and drove the revisions folded in above: the F5 balanced-half verification route
+(B3 in-kernel; H3 meet-in-the-middle checker, else a declared two-tier exit), the F6
+derived-not-frozen sign-law obligation, the F7 intersection-tensor scoping and 126-pair primitivity
+certificate, the F8 frame-transport stabilizer bound and rank-16 verification-map note, the F6->F7
+dispatch-order clarification, and the F1 `Moments` namespace check. The two documentation errors it
+caught — the spine's biplane-vs-design wording and the C378 `J`-fixed relation count — are corrected
+at their sources, not here.

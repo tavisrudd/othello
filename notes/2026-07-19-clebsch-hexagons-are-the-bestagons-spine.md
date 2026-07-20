@@ -65,7 +65,7 @@ The broadest proved mathematical story is now:
 > rank-eight `A5` association scheme, and the canonical coset graph of the bare code recovers the
 > hexagon and its unordered `10+10` chirality torsor.  Classically, the conic supports 22 Clebsch
 > parents; a canonical obstruction matching recovers each one, and the 22 matchings form two
-> `PSL_2(11)`-invariant one-factorizations whose cross-incidence is the eleven-point biplane.
+> `PSL_2(11)`-invariant one-factorizations whose disjointness matrix is the eleven-point biplane.
 
 Applying the standard MDS-to-AME construction adds the quantum reading:
 
@@ -443,7 +443,7 @@ last line.  A formal paper title should carry the mathematical content, for exam
 > of the unmarked code recovers the six columns and their unordered chirality torsor.  The conic
 > supports the classical family of 22 Clebsch parents described by Edge and Dye; in our coding
 > model, six elementary obstruction pairs restore the chosen one.  Taken together, those matchings
-> form two one-factorizations whose cross-incidence is an
+> form two one-factorizations whose disjointness matrix is an
 > eleven-point biplane.  These are not numerical coincidences but different shadows of one integral
 > `A5`-symmetric object.
 

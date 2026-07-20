@@ -52,7 +52,7 @@ The first gateway wave has now resolved four major questions.
 - **C379:** the undecorated deep-hole transform terminates and its parent fibre has 22 elements, not
   two.  Six five-parent conics give a perfect matching that recovers the parent.  The 22 matchings
   split into two `PSL_2(11)`-invariant one-factorizations of `K_12`, exchanged by the golden outer
-  map; their cross-incidence is the eleven-point biplane.
+  map; their disjointness matrix is the eleven-point biplane.
 - **C380:** the stable deep-syndrome/arc-extension, quotient-character, finite matching-sheet, and
   C378 fusion interfaces are formalized behind bounded leaves and a clean import-only gate; no
   general surface or `E8` infrastructure was introduced.

@@ -91,7 +91,7 @@ A second step is stable.  Hence the smallest common coherent refinement is the r
 scalar-`A4` translation scheme, not a direct sum of the two rank-eight Bose--Mesner algebras.
 
 This scheme is again Fourier self-dual under the dot product: its exact eigenmatrix `P_16` satisfies
-`P_16^2=1331 I`.  The map `J` fixes eight nonzero relations and exchanges four pairs,
+`P_16^2=1331 I`.  The map `J` fixes eight relations (the identity and seven nonzero) and exchanges four pairs,
 
 ```text
 (1,10), (3,13), (6,14), (9,11).

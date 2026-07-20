@@ -346,7 +346,7 @@ The useful theorem is not merely that a biplane occurs.  The certified strong co
 
 > The 22 Clebsch parents lost by the deep-hole transform are exactly the perfect matchings in two
 > `PSL_2(11)`-invariant one-factorizations of the child conic; the golden outer passage exchanges
-> the factorizations, and their cross-incidence is the eleven-point biplane.
+> the factorizations, and their disjointness matrix is the eleven-point biplane.
 
 That statement links four structures by explicit natural maps:
 
