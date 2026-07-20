@@ -224,8 +224,17 @@
       "last": 406,
       "purpose": "bounded Coxeter factorization-memory and flagship compatibility gate",
       "sequence": 25
+    },
+    {
+      "count": 1,
+      "first": 407,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 407,
+      "purpose": "execute six C403 free arrangement-code upgrades",
+      "sequence": 26
     }
   ],
-  "next_id": 407,
+  "next_id": 408,
   "schema": "codex-task-id-allocations-v1"
 }
