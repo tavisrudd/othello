@@ -1,0 +1,87 @@
+{
+  "c381_family": {
+    "a5_pair_character_by_order": {
+      "1": 6,
+      "2": 2,
+      "3": 0,
+      "5": 1
+    },
+    "matched_base_orbit": "A5/D10",
+    "matched_base_orbit_size": 6,
+    "single_fibre_d10_rational_character_by_order": {
+      "1": 8,
+      "2": 2,
+      "5": 3
+    },
+    "single_fibre_has_a5_action": false,
+    "single_fibre_stabilizer": "D10"
+  },
+  "forced_fixed_child_trivialization": {
+    "description": "permute six parent exceptional classes and fix H,E7,E8",
+    "first_character_mismatch_class": "2",
+    "preserves_geometric_marked_family": false,
+    "rational_decomposition": "3*1 + 5",
+    "rational_e8_character_by_class": {
+      "1": 8,
+      "2": 4,
+      "3": 2,
+      "5a": 3,
+      "5b": 3
+    }
+  },
+  "gate": {
+    "failed_step": 2,
+    "full_isometry_search_authorized": false,
+    "reason": "C381 has an A5-equivariant six-fibre family with D10 fibre stabilizer; the natural icosian linear action is 2.A5, and descended conjugation already has a different involution trace after restriction to the legitimate D10 fibre action.",
+    "verdict": "RED_CATEGORY_MISMATCH"
+  },
+  "icosian_actions": {
+    "conjugation": {
+      "acting_group": "A5",
+      "rational_character_by_class": {
+        "1": 8,
+        "2": 0,
+        "3": 2,
+        "5a": 3,
+        "5b": 3
+      },
+      "rational_decomposition": "2*1 + 3 + 3'",
+      "restricted_d10_character_by_order": {
+        "1": 8,
+        "2": 0,
+        "5": 3
+      }
+    },
+    "left_multiplication": {
+      "acting_group": "2.A5",
+      "central_minus_one_action": "-I",
+      "descends_to_a5": false
+    }
+  },
+  "marked_d8": {
+    "action_on_e8_mod_d8": "trivial",
+    "ambient_e8_root_count": 240,
+    "ambient_normalizer": "W(D8)",
+    "ambient_normalizer_index_in_w_e8": 135,
+    "ambient_normalizer_order": 5160960,
+    "centralizer_of_w_d8_in_w_e8": [
+      "+I",
+      "-I"
+    ],
+    "centralizer_order": 2,
+    "discriminant_classes": [
+      "0",
+      "vector",
+      "spinor",
+      "cospinor"
+    ],
+    "e8_glue_class": "spinor",
+    "index_in_e8": 2,
+    "quotient": "C2",
+    "root_count": 112,
+    "unordered_a2_marking_orbit_count": 1,
+    "unordered_a2_marking_orbit_size": 1344,
+    "unordered_a2_marking_stabilizer_order": 3840
+  },
+  "schema": "c382-cheap-gate-v1"
+}
