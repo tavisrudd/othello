@@ -4,8 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** queued task design; formulas below are targets and cheap-gate evidence, not yet a
-replacement for the required theorem/certificate bundles
+**Status:** C395 complete with theorem/certificate bundle; C396 remains queued
 
 ## Starting point
 
@@ -81,6 +80,21 @@ MDS sources already recorded by C341/C374/C384; perform a focused primary/forwar
 novelty or priority wording about the tetrahedral/octahedral/icosahedral phase.
 
 ## C396 — holonomy completeness and LU-invariant failure on the pencil
+
+### C395 hand-back
+
+C395 proves the exact admissible and GRS factors, so C396 should canonicalize only parameters with
+
+```text
+t(t-1)(t^2-t+1)(t^2-3t+1)(t^4-4t^3+7t^2-4t+1) != 0.
+```
+
+The GRS-root count splits into the four exact phases `0,2,3,0/4` according to `chi(-1)`,
+`chi(17)`, and characteristic 17.  Use those phases to choose prime-power comparison fields rather
+than rerunning a blind parameter census.  The extension-stable `t=-1` controls are GRS with `S4`
+in characteristic 17 and non-GRS with `A5` in characteristic 31.  None of this determines the
+projective parameter quotient or holonomy equality; those remain C396's gates.  See
+`notes/2026-07-20-c395-clebsch-ame-pencil-arithmetic.md`.
 
 ### Mandatory first result
 

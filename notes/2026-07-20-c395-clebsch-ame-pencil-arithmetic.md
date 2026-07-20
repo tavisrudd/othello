@@ -58,6 +58,24 @@ Write `chi` for the quadratic character of `F_q`, extended by `chi(0)=0`. Then:
    This expression is independent of the choice of `i`. Thus the pencil has exactly
    `q-4-chi(-3)-chi(5)-R_q` admitted non-GRS parameters.
 
+   More explicitly, the GRS root count has the four arithmetic phases
+
+   | condition | `R_q` |
+   |:---|---:|
+   | `chi(-1)=-1` | `0` |
+   | `chi(-1)=1`, `char(F_q) != 17`, and `chi(17)=-1` | `2` |
+   | `char(F_q)=17` | `3` |
+   | `chi(-1)=chi(17)=1` and `char(F_q) != 17` | `2+2chi(-1+4i)`, hence `0` or `4` |
+
+   The phase split follows particularly cleanly from
+
+   ```text
+   (-1+4i)(-1-4i)=17.
+   ```
+
+   Thus `chi(17)=-1` forces the two characters to be opposite, `chi(17)=1` forces them
+   to agree, and characteristic 17 is the ramified three-root case.
+
 3. The admitted specialization `t=-1` exists in every odd characteristic other than `3` and `5`.
    Its full projective stabilizer over `F_q` is
 
@@ -68,6 +86,10 @@ Write `chi` for the quadratic character of `F_q`, extended by `chi(0)=0`. Then:
    | every other admitted odd characteristic | `A4` | 12 | no |
 
    This classification is unchanged by extending the field within a fixed characteristic.
+
+4. Consequently `t=-1` gives two infinite, extension-stable comparison towers: an `S4`-symmetric
+   GRS `AME(6,17^n)` member for every `n>=1`, and an `A5`-symmetric non-GRS `AME(6,31^n)` member
+   for every `n>=1`.
 
 For every admitted parameter, `ker(H_t)` is an `[6,3,4]_q` MDS code and the standard equal-phase
 CSS construction gives a minimal-support stabilizer `AME(6,q)` state. The non-GRS count above
@@ -160,6 +182,34 @@ an extension field cannot create another permutation. Finally,
 so the characteristic-17 enhancement is exactly simultaneous with the GRS transition, whereas the
 characteristic-31 enhancement remains non-GRS.
 
+## Free corollaries and bounded hand-backs
+
+- **C396:** use the exact arc and quartic factors to delete degenerate and GRS parameters before
+  projective canonicalization.  The four root-count phases provide arithmetic strata for selecting
+  prime-power controls.  They do not determine the projective quotient or prove holonomy
+  completeness.
+- **C397:** LU or Clifford equivalence is never compared across different local dimensions.  Over
+  each characteristic-17 field, compare the `S4`-symmetric GRS member only with non-GRS members
+  over that same field.  Over each characteristic-31 field, compare the `A5`-symmetric non-GRS
+  member only with GRS classes over that same field.  In `F_31` itself the pencil has no GRS
+  parameter because `chi(-1)=-1`, so those controls must be external GRS classes.  Stage B remains
+  gated on an operational Clifford, logical, or operator-pushing invariant; projective stabilizer
+  order alone is not an operational advantage.
+- **C399:** the 720-permutation obstruction-gcd argument is a portable template for proving that a
+  fixed integral orbit configuration has only finitely many modular stabilizer jumps.  C399 must
+  still construct one canonical `A3/B3/H3` orbit functor; this pencil does not supply that missing
+  common mechanism.
+- **C402:** characteristic 31 is an exact infinite non-GRS `A5` control tower and characteristic 17
+  an enhanced-symmetry GRS control tower, but every LU comparison must stay within one field.  In
+  `F_31`, use external GRS classes because the pencil itself has none.  An explicit identification
+  with C402's fixed integral `H3` presentation and a uniform LU invariant remain required.
+- **No C398 shortcut:** source conic membership of a six-arc and containment of its complete
+  deepest-syndrome locus in a conic are different predicates.  C395 proves nothing about the latter
+  and does not bypass C398's incidence bound or semilinear pilot.
+
+All substantive follow-ups are already allocated as C396, C397, C399, and C402.  The phase table
+and extension towers are absorbed here and require no new queue ID.
+
 ## Exact evidence and replay
 
 Run from the repository root:
@@ -172,12 +222,13 @@ sha256sum -c notes/2026-07-20-c395-clebsch-ame-pencil-arithmetic.sha256
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | 22,548 | `3e39b69682ac38d571179f91e533c4c9cfdf36354537e50a3b597747917cf826` |
-| certificate `.json` | 9,920 | `70ede2c3797613014815b8eecb371139e3068d85bd05723584545692a82c2e53` |
+| checker `.py` | 24,069 | `a9dd5ba6e4344142a6ec368c86310a08bd307a2a78501c9af708ac7e2abb6b52` |
+| certificate `.json` | 11,632 | `fb3caffc82601e85b9594424154cfaf9b44d4f95bce856a50ba0ec9a739cb6d8` |
 
 The deterministic standard-library checker uses exact integer polynomials, Bareiss resultants,
 rational projective transformations, and direct arithmetic in explicit finite-field quotients. It
-replays the formulas over prime fields `7,11,13,17,19,23,29,31,37` and genuine extension fields
+replays the formulas and the refined GRS phase table over prime fields
+`7,11,13,17,19,23,29,31,37` and genuine extension fields
 `F_9,F_25,F_27,F_49`. The symbolic identities prove the all-field statement; the field list is a
 regression replay, not an extrapolation.
 

@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** queued; exact operational-invariant gate, dependent on C395 for the all-field pencil
+**Status:** queued; C395 dependency complete, Stage B still gated on a positive Stage-A invariant
 
 ## Purpose
 
@@ -20,7 +20,8 @@ The inputs are deliberately separated:
 - C375 gives exact three-gate preparation, all six `[[5,1,3]]_11` encoder views, and all twenty
   permutation-multiunitary flattenings.
 - C384 gives the two non-GRS monomial/LU classes in the `q=11` pencil.
-- C395 owns the all-odd-field admissibility count, GRS boundary, and `t=-1` symmetry jumps.
+- C395 proves the all-odd-field admissibility/GRS counts and the extension-stable `t=-1` towers:
+  GRS/`S4` in characteristic 17 and non-GRS/`A5` in characteristic 31.
 - C396 owns pencil-internal holonomy completeness or its first exact failure; C397 does not absorb
   that classification problem.
 
@@ -49,9 +50,12 @@ a bounded negative.  Do not build tensor networks or launch an all-field census.
 
 ## Stage B — arithmetic symmetry phase
 
-Stage B requires C395's theorem-level pencil and a positive Stage-A invariant.  Evaluate the
-invariant symbolically where possible and at the bounded `t=-1` pilots, including the predicted
-characteristic-17 order-24 and characteristic-31 order-60 enhancements.  The target theorem is an
+Stage B now requires only a positive Stage-A invariant.  Evaluate it symbolically where possible.
+Equivalence comparisons must stay within a fixed local dimension: over `F_(17^n)`, compare the
+GRS/`S4` member with non-GRS members over that same field; over `F_(31^n)`, compare the non-GRS/`A5`
+member with GRS classes over that same field.  Over `F_31` the pencil has no GRS parameter because
+`chi(-1)=-1`, so the latter controls are external GRS classes.  Do not compare the 17- and 31-
+dimensional states directly, and do not rerun the projective stabilizer census.  The target is an
 exact arithmetic classification of the resulting Clifford/logical/operator-pushing symmetry
 phase, not a claim of a thermodynamic phase transition.
 

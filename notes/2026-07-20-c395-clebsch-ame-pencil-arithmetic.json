@@ -3,7 +3,10 @@
     {
       "arc_count": 4,
       "characteristic": 3,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
       "grs_count": 0,
+      "grs_phase": "fully_split_0",
       "modulus_ascending": [
         1,
         0,
@@ -16,7 +19,10 @@
     {
       "arc_count": 20,
       "characteristic": 5,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
       "grs_count": 4,
+      "grs_phase": "fully_split_4",
       "modulus_ascending": [
         2,
         0,
@@ -29,7 +35,10 @@
     {
       "arc_count": 24,
       "characteristic": 3,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
       "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
       "modulus_ascending": [
         2,
         2,
@@ -43,7 +52,10 @@
     {
       "arc_count": 43,
       "characteristic": 7,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
       "grs_count": 0,
+      "grs_phase": "fully_split_0",
       "modulus_ascending": [
         1,
         0,
@@ -56,7 +68,10 @@
     {
       "arc_count": 3,
       "characteristic": 7,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
       "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -68,7 +83,10 @@
     {
       "arc_count": 7,
       "characteristic": 11,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
       "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -80,7 +98,10 @@
     {
       "arc_count": 9,
       "characteristic": 13,
+      "chi_minus_one": 1,
+      "chi_seventeen": 1,
       "grs_count": 0,
+      "grs_phase": "fully_split_0",
       "modulus_ascending": [
         0,
         1
@@ -92,7 +113,10 @@
     {
       "arc_count": 15,
       "characteristic": 17,
+      "chi_minus_one": 1,
+      "chi_seventeen": 0,
       "grs_count": 3,
+      "grs_phase": "characteristic_17_double_root",
       "modulus_ascending": [
         0,
         1
@@ -104,7 +128,10 @@
     {
       "arc_count": 13,
       "characteristic": 19,
+      "chi_minus_one": -1,
+      "chi_seventeen": 1,
       "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -116,7 +143,10 @@
     {
       "arc_count": 21,
       "characteristic": 23,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
       "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -128,7 +158,10 @@
     {
       "arc_count": 25,
       "characteristic": 29,
+      "chi_minus_one": 1,
+      "chi_seventeen": -1,
       "grs_count": 2,
+      "grs_phase": "seventeen_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -140,7 +173,10 @@
     {
       "arc_count": 25,
       "characteristic": 31,
+      "chi_minus_one": -1,
+      "chi_seventeen": -1,
       "grs_count": 0,
+      "grs_phase": "minus_one_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -152,7 +188,10 @@
     {
       "arc_count": 33,
       "characteristic": 37,
+      "chi_minus_one": 1,
+      "chi_seventeen": -1,
       "grs_count": 2,
+      "grs_phase": "seventeen_nonsquare",
       "modulus_ascending": [
         0,
         1
@@ -162,7 +201,7 @@
       "reciprocal_quartic_character_count": 2
     }
   ],
-  "schema": "c395-clebsch-ame-pencil-arithmetic-v1",
+  "schema": "c395-clebsch-ame-pencil-arithmetic-v2",
   "symbolic": {
     "arc_radical_product_coefficients_ascending": [
       0,
@@ -192,6 +231,13 @@
       -4,
       1
     ],
+    "reciprocal_quartic_root_phases": {
+      "characteristic_17": 3,
+      "chi_minus_one_equals_minus_one": 0,
+      "chi_minus_one_equals_one_and_chi_seventeen_equals_minus_one": 2,
+      "conjugate_discriminant_product": 17,
+      "remaining_split_case": "2+2*chi(-1+4i), hence 0 or 4, for i^2=-1"
+    },
     "resultants": {
       "t2_minus_3t_plus_1": 4,
       "t2_minus_t_plus_1": 4
@@ -205,6 +251,10 @@
         3,
         5
       ],
+      "extension_towers": {
+        "characteristic_17": "S4 and GRS over every finite extension",
+        "characteristic_31": "A5 and non-GRS over every finite extension"
+      },
       "grs_transition_characteristic": 17,
       "reciprocal_quartic_value": 17
     },

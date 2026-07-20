@@ -275,10 +275,32 @@ def finite_field_replay(p: int, modulus: Sequence[int]) -> dict[str, object]:
         for s in field.elements()
         if field.mul(s, s) == field.element(-1)
     )
+    chi_minus_one = field.chi(field.element(-1))
+    chi_seventeen = field.chi(field.element(17))
+    if chi_minus_one == -1:
+        phase = "minus_one_nonsquare"
+        phase_count = 0
+    elif p == 17:
+        phase = "characteristic_17_double_root"
+        phase_count = 3
+    elif chi_seventeen == -1:
+        phase = "seventeen_nonsquare"
+        phase_count = 2
+    else:
+        square_root_minus_one = next(
+            s for s in field.elements() if field.mul(s, s) == field.element(-1)
+        )
+        residual_character = field.chi(
+            field.add(field.element(-1), field.mul(field.element(4), square_root_minus_one))
+        )
+        phase_count = 2 + 2 * residual_character
+        phase = f"fully_split_{phase_count}"
     if len(valid) != predicted_arc_count:
         raise AssertionError("quadratic-character arc count failed")
     if len(grs) != root_count or len(direct_quartic) != root_count:
         raise AssertionError("quadratic-character reciprocal-quartic count failed")
+    if root_count != phase_count:
+        raise AssertionError("reciprocal-quartic phase refinement failed")
     return {
         "order": field.order,
         "characteristic": p,
@@ -287,6 +309,9 @@ def finite_field_replay(p: int, modulus: Sequence[int]) -> dict[str, object]:
         "predicted_arc_count": predicted_arc_count,
         "grs_count": len(grs),
         "reciprocal_quartic_character_count": root_count,
+        "grs_phase": phase,
+        "chi_minus_one": chi_minus_one,
+        "chi_seventeen": chi_seventeen,
     }
 
 
@@ -538,6 +563,17 @@ def symbolic_certificate() -> dict[str, object]:
             "reciprocal_quartic_value": 17,
             "admissible_odd_characteristics_excluded": [3, 5],
             "grs_transition_characteristic": 17,
+            "extension_towers": {
+                "characteristic_17": "S4 and GRS over every finite extension",
+                "characteristic_31": "A5 and non-GRS over every finite extension",
+            },
+        },
+        "reciprocal_quartic_root_phases": {
+            "conjugate_discriminant_product": 17,
+            "chi_minus_one_equals_minus_one": 0,
+            "chi_minus_one_equals_one_and_chi_seventeen_equals_minus_one": 2,
+            "characteristic_17": 3,
+            "remaining_split_case": "2+2*chi(-1+4i), hence 0 or 4, for i^2=-1",
         },
     }
 
@@ -552,7 +588,7 @@ def build_certificate() -> dict[str, object]:
         (19, (0, 1)), (23, (0, 1)), (29, (0, 1)), (31, (0, 1)), (37, (0, 1)),
     )
     return {
-        "schema": "c395-clebsch-ame-pencil-arithmetic-v1",
+        "schema": "c395-clebsch-ame-pencil-arithmetic-v2",
         "symbolic": symbolic_certificate(),
         "finite_field_replays": [finite_field_replay(p, modulus) for p, modulus in field_specs],
         "tetrahedral_stabilizer": stabilizer_certificate(),

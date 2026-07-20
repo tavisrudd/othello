@@ -38,7 +38,8 @@ equivalently for codimension-three MDS codes and one-column MDS extensions.
 C341 supplies the all-odd-prime non-GRS parent boundary, and C368 supplies the exact q=11
 non-GRS-parent/full-conic-deep-hole/GRS-child example.  Kaipa's redundancy-three result is a
 mandatory boundary for GRS parents; novelty must lie in the non-GRS classification and geometric
-deep-hole locus.
+deep-hole locus.  C395's source-conic determinant does not classify the deepest-syndrome locus and
+does not bypass the incidence bound or semilinear pilot below.
 
 ### First pilot and stop
 
@@ -68,7 +69,10 @@ For the distinguished integral projective orbit systems attached functorially to
 
 C346 and C368 already provide the complete good-reduction and arithmetic-phase theorems for the
 `H3` member.  The portable result must explain a common reflection-orbit mechanism across types,
-not concatenate three determinant tables.
+not concatenate three determinant tables.  C395 supplies a reusable finite proof pattern: solve
+all candidate projectivities over `Q` and factor their cleared residual gcds to obtain the complete
+modular stabilizer-jump set.  Its generic `A4`, characteristic-17 `S4`, characteristic-31 `A5`
+pencil phase is evidence for the target shape, not the missing `A3/B3/H3` orbit functor.
 
 ### First pilot and stop
 
@@ -136,7 +140,13 @@ invariant and an explicit account of all arithmetic exceptions.
 
 C374 proves the q=11 separation.  C384--C396 show why a single marginal-moment statistic is not a
 reliable family classifier, and C397 separates the easier Clifford/logical question from arbitrary
-LU equivalence.  Infinite AME/LU families and the MDS--AME dictionary are prior art.
+LU equivalence.  C395 adds an extension-stable characteristic-31 non-GRS `A5` control tower and a
+characteristic-17 GRS `S4` tower in the same pencil presentation.  They are not cross-dimension
+comparison objects: each must be tested only against GRS/non-GRS controls over the same field.  In
+`F_31`, `chi(-1)=-1`, so the pencil has no GRS parameter and the same-field controls must come from
+external GRS classes.  These are first falsifiers, not a uniform LU separator or yet an identified
+copy of C402's fixed integral `H3` presentation.
+Infinite AME/LU families and the MDS--AME dictionary are prior art.
 
 ### First pilot and stop
 
