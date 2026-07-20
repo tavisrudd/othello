@@ -57,20 +57,47 @@ missing conceptual pass and C412 supplied its cleanest modular explanation.  Act
 integration still belongs to the paper owner and must carry the remaining source-access gaps.  If
 integration is deferred, the protected first form remains independently submittable.
 
-## Crowns results -> paper -> proofs ledger
+## Complete results -> paper -> proofs ledger
+
+### Retained original-paper results
+
+These rows reuse the canonical IDs already allocated in `papers/papers-index.md`.  They make the
+baseline inheritance explicit: the replacement spine changes the organizing mechanism, not the
+identity or provenance of the original theorems it still consumes.
+
+| ID | Source / task | Result | Origin / boundary | In new paper? | Proof or evidence location |
+|:---|:---|:---|:---|:---|:---|
+| `comp-clebsch-a5-point-orbits` | Original manuscript | Full `A5` point-orbit profile `[6,10,12,15,30,30,30]` | Classical Dye orbit geometry; local derivation, identification, and verification | **Yes — geometric setup** | paper §3 Prop `prop:a5-point-orbits`; registry `papers-index.md` |
+| `thm-clebsch-rigidity` | Original manuscript | Five-way rigidity theorem recovering the Clebsch class and `A5` from the conic deep-hole condition | Local theorem using Dye's classical equality classification at one boundary | **Yes — central/closing theorem** | paper §4 Thm 4.3; conceptual proof plus bounded census; registry `papers-index.md` |
+| `thm-clebsch-gap` | Original manuscript | Sharp global and one-point-perturbation gap from the Clebsch conic locus | Local finite theorem | **Yes — retained quantitative rigidity** | paper §4 Thm 4.7; `check_global_conic_gap.py`, `check_perturbation_gap.py` |
+| `comp-clebsch-low-degree-loci` | Original manuscript | Degree-at-most-three rigidity and sharp quartic companion | Local computed classification with independent algebra replay | **Yes — compact retained result** | paper §4 Prop 4.4 and Remark 4.6; `check_low_degree_loci.py`; Singular replay |
+| `comp-clebsch-u-spectrum` | Original manuscript | Six-arc uncovered-locus spectrum in `PG(2,11)` | Classical Hirschfeld--Sadeh/Sadeh classification; locally recomputed only | **Yes — classical context, no local claim** | paper §4; priority and verification record in `papers-index.md` |
+| `thm-clebsch-chirality` | Original manuscript | Intrinsic unordered `10+10` support bipartition of deep-hole leaders | Local family-specific theorem; outer-`S6` dictionary classical | **Yes — reconstruction endpoint** | paper §5 Props 5.1, 5.3; checkers; `Q11DecodingSynthesis.lean` |
+| `thm-clebsch-decoding` | Original manuscript | Complete distance oracle and decoder-ambiguity geometry | Local synthesis; Brianchon/Petersen geometry classical | **Yes — operational bridge** | paper §3 Prop 3.5 and §5 Cor 5.2; `check_decoding.py`; `Q11DecodingSynthesis.lean` |
+| `thm-clebsch-why11` | Original manuscript | Classification-free uniqueness of q=11 for conic-filling six-arcs | Local theorem using classical small-field facts | **Yes — compact uniqueness theorem** | paper §6 Thm 6.2; `check_small_q_uniqueness.py`; `ClebschChordDefect.lean`, `Q9Sylvester.lean` |
+| `thm-clebsch-family-uncovered` | Original manuscript | All-field uncovered formula `q^2-14q+45` and isolated conic filling at q=11 | Local exact formula; Dye's non-secant criterion classical | **Yes — arithmetic-phase context** | paper §6 Prop 6.3; hand proof; q=19 independent replay |
+| `thm-clebsch-reflection-arrangements` | Original manuscript / C211 | Exact `A3/H3` organization of the q=5 and q=11 conic-filling cases | Local compatibility theorem; reflection arrangements classical | **Yes — bridge into C399** | paper §6 Prop `prop:h3-arrangement`; `check_reflection_arrangements.py`; Lean terminals in registry |
+| `thm-conic-filling-kle7` | Original manuscript | Classification of full-conic extension loci for `4<=k<=7` | Local theorem with finite checker leaves | **Yes — compact classification** | paper §6 Thm 6.6; `check_small_k_conic_filling.py`; `SmallKChordMoments.lean`, `SmallKGeometricBridge.lean` |
+| `comp-q9-exclusion` | Original side computation | q=9 icosahedral six-arc is complete | Classical SVM result independently reverified | **No — not a claim or dependency** | `check_q9_exclusion.py`; registry `papers-index.md` |
+| `comp-q19-nonexample` | Original manuscript remark | q=19 icosahedral six-arc has exactly 140 deep holes | Classical Dye geometry plus local independent replay | **Yes — boundary example** | paper §6 Remark 6.4; `check_q19_nonexample.py` |
+| `comp-clebsch-dual` | Original side computation | Dual code is again a Clebsch hexagon code | Local computation | **No — deliberately omitted** | `check_dual_code.py` |
+| `comp-clebsch-mathieu` | Original side computation | Two icosahedral hexads are transverse to the Mathieu hexads | Local computation; Steiner system classical | **No — deliberately omitted** | `check_mathieu_hexads.py` |
+| `comp-clebsch-ten-arc-foil` | Original side computation | Same-`A5` ten-arc foil has no deep holes | Local computation | **No — deliberately omitted** | `check_ten_arc_foil.py` |
+
+### Crowns intake results
 
 This is the intake index for completed Clebsch-facing and Clebsch-adjacent results from the
 2026-07-19/20 crowns push.  It includes rejected imports so that “not in the paper” is an explicit
 decision rather than an omission.  It does not index unrelated crowns work on the cap game or the
 other arc/code manuscripts, and it does not mix queued C413--C419 work with landed results.
 
-The **ID** column uses stable result IDs in the `papers-index.md` style; the **source task** column
+The **ID** column uses stable result IDs in the `papers-index.md` style; the **source / task** column
 records where the result landed.  The **origin / boundary** column separates locally established claims from classical machinery and
 pre-emption.  “Local synthesis; classical inputs” means the stated composition or compatibility is
 ours, while its named configurations, dictionaries, or general formalism are not.  “Local
 negative” records a proved obstruction or bounded stop, not a failed theorem silently discarded.
 
-| ID | Source task | Result | Origin / boundary | In new paper? | Proof or evidence location |
+| ID | Source / task | Result | Origin / boundary | In new paper? | Proof or evidence location |
 |:---|:---|:---|:---|:---|:---|
 | `thm-clebsch-arithmetic-phase` | C368 | All-odd arithmetic phase; q=11 non-GRS parent to full-conic GRS child | Local theorem; conic--GRS and reduction dictionaries classical | **Yes — main input** | note `2026-07-19-c368-h3-a5-arithmetic-phase.md` |
 | `thm-frame-service-target-recovery` | C369 | Uncoloured frame graph recovers maximal-service target triple | Local bridge; service/PIR language classical | **No — separate application** | note `2026-07-19-c369-intrinsic-frame-service-bridge.md` |
@@ -96,7 +123,7 @@ negative” records a proved obstruction or bounded stop, not a failed theorem s
 | `thm-clebsch-sheet-service-obstruction` | C392 | Uncoloured q=11 graph forgets which sheet defines projection targets | Local obstruction | **No — service boundary** | note `2026-07-19-c392-clebsch-two-sheet-service.md` |
 | `thm-clebsch-ame-pencil-arithmetic` | C395 | All-odd-field AME pencil and exact symmetry-enhancement primes | Local arithmetic theorem; GRS/AME dictionaries classical | **No — companion context** | note `2026-07-20-c395-clebsch-ame-pencil-arithmetic.md` |
 | `comp-clebsch-fullconic-classification` | C398 | Four semilinear classes of full-conic deepest-syndrome six-arcs | Local exact classification; q=11 exterior six-arc classical | **Yes — compact global envelope** | note `2026-07-20-c398-conic-deep-hole-classification.md` |
-| `thm-coxeter-conic-code-phase` | C399 | Uniform `A3/B3/H3` nonmirror maximum, distance, and Coxeter conic phase | Local synthesis; individual configurations and marker fibres classical Edge/Dye results | **Yes — portable prelude** | note `2026-07-20-c399-coxeter-number-conic-phase.md`; audit `2026-07-20-c399-literature-audit.md` |
+| `thm-rank3-reflection-complement-code` | C399 | Uniform `A3/B3/H3` nonmirror maximum, distance, and Coxeter conic phase | Local synthesis; individual configurations and marker fibres classical Edge/Dye results | **Yes — portable prelude** | note `2026-07-20-c399-coxeter-number-conic-phase.md`; audit `2026-07-20-c399-literature-audit.md` |
 | `thm-a5-fourier-phase-law` | C400 | Uniform scalar-`A5` rank/orbit law and six conic-relation phases | Local exact synthesis; projective-line orbit ladder pre-empted | **No — optional context only** | note `2026-07-20-c400-a5-fourier-phases.md` |
 | `thm-weighted-adjoint-code-enumerator` | C403 | Weighted 2-adjoint enumerator, Coxeter word orbits, and all-degree pairing-forgetting quotient | Local theorem; finite-field/coboundary method and GRS matroid classical | **Yes — main forgetting theorem** | note `2026-07-20-c403-arrangement-complement-distance.md` |
 | `lem-clebsch-marker-priority-boundary` | C404 | Proposed marker flagship pre-empted at its first literature gate | Classical/pre-empted result; no local flagship claim | **No** | portfolio note `2026-07-20-c403-c405-c399-successor-portfolio.md` |
