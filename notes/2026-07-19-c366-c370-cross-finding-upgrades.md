@@ -29,9 +29,12 @@ compatibility check closes the task; it does not authorize a new census or proof
    capacity, ideally all three; otherwise report the exact bounded negative and close.
 3. **C368 — H3/A5 arithmetic phase diagram.** Align C339, C341, and C346 into one theorem covering
    odd-prime lattice preservation, the characteristic-five GRS boundary, the stable geometric
-   recovery range, and the q=11 rank-eight decoder scheme. Success requires a logically new
-   combined corollary with consistent field and reduction conventions; a narrative juxtaposition
-   is not enough.
+   recovery range, and the q=11 rank-eight decoder scheme.  At q=11, prove explicitly that the
+   non-GRS six-column parent has a complete projective weight-three syndrome locus equal to the
+   twelve-point complement conic and hence, as a projective system, a `[12,3,10]_11` GRS child.
+   Present the characteristic-five source conic and q=11 deep-hole conic as two arithmetic phases
+   only after their field and projective-system conventions are aligned. Success requires a
+   logically new combined corollary; a narrative juxtaposition is not enough.
 4. **C369 — intrinsic reconstruction-to-service bridge.** Check whether C295's recovered frame and
    code data determine C357's projection-involution orbit predicate and service--PIR extremizer on
    the same object class. Success is an uncoloured-graph-intrinsic operational theorem. Object-class
