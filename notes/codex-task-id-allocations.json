@@ -251,8 +251,17 @@
       "last": 410,
       "purpose": "C408 successors: cubic memory principle and same-tower composite trade",
       "sequence": 28
+    },
+    {
+      "count": 7,
+      "first": 411,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 417,
+      "purpose": "C406 depth-Fourier, double-coset, twisted-transform, and reconstruction successors",
+      "sequence": 29
     }
   ],
-  "next_id": 411,
+  "next_id": 418,
   "schema": "codex-task-id-allocations-v1"
 }
