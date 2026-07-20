@@ -1,0 +1,596 @@
+{
+  "finite_field_replays": [
+    {
+      "arc_count": 4,
+      "characteristic": 3,
+      "grs_count": 0,
+      "modulus_ascending": [
+        1,
+        0,
+        1
+      ],
+      "order": 9,
+      "predicted_arc_count": 4,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 20,
+      "characteristic": 5,
+      "grs_count": 4,
+      "modulus_ascending": [
+        2,
+        0,
+        1
+      ],
+      "order": 25,
+      "predicted_arc_count": 20,
+      "reciprocal_quartic_character_count": 4
+    },
+    {
+      "arc_count": 24,
+      "characteristic": 3,
+      "grs_count": 0,
+      "modulus_ascending": [
+        2,
+        2,
+        0,
+        1
+      ],
+      "order": 27,
+      "predicted_arc_count": 24,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 43,
+      "characteristic": 7,
+      "grs_count": 0,
+      "modulus_ascending": [
+        1,
+        0,
+        1
+      ],
+      "order": 49,
+      "predicted_arc_count": 43,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 3,
+      "characteristic": 7,
+      "grs_count": 0,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 7,
+      "predicted_arc_count": 3,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 7,
+      "characteristic": 11,
+      "grs_count": 0,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 11,
+      "predicted_arc_count": 7,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 9,
+      "characteristic": 13,
+      "grs_count": 0,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 13,
+      "predicted_arc_count": 9,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 15,
+      "characteristic": 17,
+      "grs_count": 3,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 17,
+      "predicted_arc_count": 15,
+      "reciprocal_quartic_character_count": 3
+    },
+    {
+      "arc_count": 13,
+      "characteristic": 19,
+      "grs_count": 0,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 19,
+      "predicted_arc_count": 13,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 21,
+      "characteristic": 23,
+      "grs_count": 0,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 23,
+      "predicted_arc_count": 21,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 25,
+      "characteristic": 29,
+      "grs_count": 2,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 29,
+      "predicted_arc_count": 25,
+      "reciprocal_quartic_character_count": 2
+    },
+    {
+      "arc_count": 25,
+      "characteristic": 31,
+      "grs_count": 0,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 31,
+      "predicted_arc_count": 25,
+      "reciprocal_quartic_character_count": 0
+    },
+    {
+      "arc_count": 33,
+      "characteristic": 37,
+      "grs_count": 2,
+      "modulus_ascending": [
+        0,
+        1
+      ],
+      "order": 37,
+      "predicted_arc_count": 33,
+      "reciprocal_quartic_character_count": 2
+    }
+  ],
+  "schema": "c395-clebsch-ame-pencil-arithmetic-v1",
+  "symbolic": {
+    "arc_radical_product_coefficients_ascending": [
+      0,
+      -1,
+      5,
+      -9,
+      9,
+      -5,
+      1
+    ],
+    "conic_determinant_coefficients_ascending": [
+      0,
+      8,
+      -48,
+      128,
+      -176,
+      128,
+      -48,
+      8
+    ],
+    "minor_count": 20,
+    "quartic_discriminant": 272,
+    "reciprocal_quartic_coefficients_ascending": [
+      1,
+      -4,
+      7,
+      -4,
+      1
+    ],
+    "resultants": {
+      "t2_minus_3t_plus_1": 4,
+      "t2_minus_t_plus_1": 4
+    },
+    "t_minus_one_specialization": {
+      "admissible_odd_characteristics_excluded": [
+        3,
+        5
+      ],
+      "arc_quadratic_values": [
+        3,
+        5
+      ],
+      "grs_transition_characteristic": 17,
+      "reciprocal_quartic_value": 17
+    },
+    "three_column_minors": [
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          2
+        ],
+        "triple": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -2,
+          4,
+          -2
+        ],
+        "triple": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          3,
+          -1
+        ],
+        "triple": [
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          1,
+          -1
+        ],
+        "triple": [
+          0,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -1,
+          1
+        ],
+        "triple": [
+          0,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -3,
+          1
+        ],
+        "triple": [
+          0,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2
+        ],
+        "triple": [
+          0,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          2,
+          -4,
+          2
+        ],
+        "triple": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -1,
+          1
+        ],
+        "triple": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          1,
+          -3,
+          1
+        ],
+        "triple": [
+          1,
+          2,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          3,
+          -1
+        ],
+        "triple": [
+          1,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          -1,
+          1,
+          -1
+        ],
+        "triple": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2
+        ],
+        "triple": [
+          1,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          2,
+          -2
+        ],
+        "triple": [
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2,
+          2
+        ],
+        "triple": [
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          -2,
+          2
+        ],
+        "triple": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "coefficients_ascending": [
+          0,
+          2,
+          -2
+        ],
+        "triple": [
+          3,
+          4,
+          5
+        ]
+      }
+    ]
+  },
+  "tetrahedral_stabilizer": {
+    "admissible_odd_enhancement_primes": [
+      17,
+      31
+    ],
+    "alternate_frame_replay": [
+      0,
+      2,
+      3,
+      5
+    ],
+    "full_stabilizers": {
+      "17": {
+        "abstract_group": "S4",
+        "element_order_profile": {
+          "1": 1,
+          "2": 9,
+          "3": 8,
+          "4": 6
+        },
+        "extra_generator_matrix_mod_p": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            15
+          ],
+          [
+            0,
+            9,
+            0
+          ]
+        ],
+        "extra_generator_permutation": [
+          0,
+          1,
+          4,
+          5,
+          3,
+          2
+        ],
+        "order": 24
+      },
+      "31": {
+        "abstract_group": "A5",
+        "element_order_profile": {
+          "1": 1,
+          "2": 15,
+          "3": 20,
+          "5": 24
+        },
+        "extra_generator_matrix_mod_p": [
+          [
+            1,
+            15,
+            8
+          ],
+          [
+            22,
+            11,
+            22
+          ],
+          [
+            19,
+            24,
+            12
+          ]
+        ],
+        "extra_generator_permutation": [
+          0,
+          2,
+          1,
+          4,
+          3,
+          5
+        ],
+        "order": 60
+      },
+      "7": {
+        "abstract_group": "A4",
+        "element_order_profile": {
+          "1": 1,
+          "2": 3,
+          "3": 8
+        },
+        "extra_generator_matrix_mod_p": null,
+        "extra_generator_permutation": null,
+        "order": 12
+      }
+    },
+    "generic_generator_matrices_over_Z": {
+      "[1, 0, 2, 3, 5, 4]": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      "[2, 3, 4, 5, 0, 1]": [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0
+        ]
+      ]
+    },
+    "generic_group": "A4",
+    "generic_order": 12,
+    "nonzero_obstruction_gcd_counts": {
+      "1": 632,
+      "16": 4,
+      "17": 8,
+      "2": 4,
+      "31": 48,
+      "34": 4,
+      "8": 8
+    },
+    "permutations_checked": 720,
+    "prime_divisor_permutation_counts": {
+      "17": 12,
+      "2": 20,
+      "31": 48
+    }
+  }
+}
