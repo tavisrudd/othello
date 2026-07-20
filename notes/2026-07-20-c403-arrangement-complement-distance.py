@@ -424,6 +424,93 @@ def projective_matrix_order(
     raise AssertionError("projective matrix order exceeds Coxeter group order")
 
 
+def stabilizer_type(
+    signature: Counter[tuple[int, int]], name: str
+) -> str:
+    """Identify the subgroup type, retaining the two B3 involution classes."""
+    order_histogram = Counter()
+    for (order, _), count in signature.items():
+        order_histogram[order] += count
+    histogram = tuple(sorted(order_histogram.items()))
+    names = {
+        ((1, 1),): "1",
+        ((1, 1), (2, 1)): "C2",
+        ((1, 1), (3, 2)): "C3",
+        ((1, 1), (2, 1), (4, 2)): "C4",
+        ((1, 1), (5, 4)): "C5",
+        ((1, 1), (2, 3)): "V4",
+        ((1, 1), (2, 3), (3, 2)): "S3",
+        ((1, 1), (2, 5), (4, 2)): "D8",
+        ((1, 1), (2, 5), (5, 4)): "D10",
+    }
+    if histogram not in names:
+        raise AssertionError(f"unclassified stabilizer order histogram: {histogram}")
+    result = names[histogram]
+    if name == "B3" and result == "C2":
+        fixed_mirrors = next(
+            fixed for (order, fixed), count in signature.items() if order == 2 and count == 1
+        )
+        return f"C2_fixed_{fixed_mirrors}_mirrors"
+    return result
+
+
+def stabilizer_refinement_law(name: str, field_order: int) -> dict[str, object]:
+    """Uniform orbit counts refined by abstract point-stabilizer type."""
+    epsilon_3 = int((field_order - 1) % 3 == 0)
+    epsilon_4 = int((field_order - 1) % 4 == 0)
+    epsilon_5 = int((field_order - 1) % 5 == 0)
+    rows: list[tuple[str, str, int]]
+    if name == "A3":
+        rows = [
+            ("0", "1", exact_quotient((field_order - 5) * (field_order - 7), 24, "A3 d0 trivial")),
+            ("0", "C2", exact_quotient(field_order - 5, 2, "A3 d0 C2")),
+            ("0", "S3", 1),
+            ("1", "C2", exact_quotient(field_order - 3 - 2 * epsilon_4, 4, "A3 d1 C2")),
+            ("1", "C4", epsilon_4),
+            ("2", "1", exact_quotient(field_order - 5 - 2 * epsilon_3, 6, "A3 d2 trivial")),
+            ("2", "C2", 1),
+            ("2", "C3", epsilon_3),
+            ("2", "D8", 1),
+            ("mirror", "V4", 1),
+        ]
+    elif name == "B3":
+        rows = [
+            ("0", "1", exact_quotient((field_order - 5) * (field_order - 7), 24, "B3 d0 trivial")),
+            ("1", "C2_fixed_3_mirrors", exact_quotient(field_order - 5, 2, "B3 d1 C2")),
+            ("2", "1", exact_quotient(field_order - 5 - 2 * epsilon_3, 6, "B3 d2 trivial")),
+            ("2", "C3", epsilon_3),
+            ("3", "C2_fixed_3_mirrors", 1),
+            ("3", "C2_fixed_5_mirrors", exact_quotient(field_order - 3 - 2 * epsilon_4, 4, "B3 d3 C2")),
+            ("3", "C4", epsilon_4),
+            ("3", "S3", 1),
+            ("mirror", "V4", 1),
+            ("mirror", "D8", 1),
+        ]
+    elif name == "H3":
+        rows = [
+            ("0", "1", exact_quotient((field_order - 11) * (field_order - 19), 60, "H3 d0 trivial")),
+            ("1", "C2", exact_quotient(field_order - 11, 2, "H3 d1 C2")),
+            ("2", "1", exact_quotient(field_order - 11 - 2 * epsilon_3, 6, "H3 d2 trivial")),
+            ("2", "C3", epsilon_3),
+            ("3", "C2", 1),
+            ("3", "S3", 1),
+            ("4", "1", exact_quotient(field_order - 9 - 2 * epsilon_5, 10, "H3 d4 trivial")),
+            ("4", "C5", epsilon_5),
+            ("5", "C2", 2),
+            ("5", "D10", 1),
+            ("mirror", "V4", 1),
+        ]
+    else:
+        raise ValueError(f"unknown Coxeter type: {name}")
+    return {
+        "orbit_counts": [
+            {"depth": depth, "stabilizer_type": subgroup, "orbit_count": count}
+            for depth, subgroup, count in rows
+            if count
+        ]
+    }
+
+
 def coxeter_orbit_certificate(
     name: str,
     prime: int,
@@ -453,6 +540,17 @@ def coxeter_orbit_certificate(
         } != line_set:
             raise AssertionError(f"{name}: generated matrix does not preserve the arrangement")
 
+    matrix_invariants = {
+        matrix: (
+            projective_matrix_order(matrix, prime),
+            sum(
+                normalize(matrix_vector(matrix, line, prime), prime) == line
+                for line in lines
+            ),
+        )
+        for matrix in group
+    }
+
     universe = projective_objects(prime)
     depth_by_line = {
         line: sum(weight for point, weight in weights.items() if incident(line, point, prime))
@@ -470,12 +568,30 @@ def coxeter_orbit_certificate(
         mirror_flags = {line in line_set for line in orbit}
         if len(depths) != 1 or len(mirror_flags) != 1:
             raise AssertionError(f"{name}: orbit does not have constant weighted depth/type")
+        stabilizer = tuple(
+            matrix
+            for matrix in group
+            if normalize(matrix_vector(matrix, seed, prime), prime) == seed
+        )
+        stabilizer_signature = Counter(matrix_invariants[matrix] for matrix in stabilizer)
+        if len(stabilizer) * len(orbit) != len(group):
+            raise AssertionError(f"{name}: orbit-stabilizer identity failed")
         orbit_rows.append(
             {
                 "representative": list(seed),
                 "size": len(orbit),
                 "weighted_depth": next(iter(depths)),
                 "mirror": next(iter(mirror_flags)),
+                "stabilizer_order": len(stabilizer),
+                "stabilizer_type": stabilizer_type(stabilizer_signature, name),
+                "stabilizer_signature": [
+                    {
+                        "element_order": order,
+                        "fixed_mirrors": fixed_mirrors,
+                        "count": count,
+                    }
+                    for (order, fixed_mirrors), count in sorted(stabilizer_signature.items())
+                ],
             }
         )
     orbit_rows.sort(
@@ -500,10 +616,35 @@ def coxeter_orbit_certificate(
     observed_orbits_by_depth: Counter[str] = Counter(
         "mirror" if row["mirror"] else str(row["weighted_depth"]) for row in orbit_rows
     )
+    stabilizer_refinement: Counter[
+        tuple[str, int, tuple[tuple[int, int, int], ...]]
+    ] = Counter()
+    observed_stabilizer_types: Counter[tuple[str, str]] = Counter()
+    for row in orbit_rows:
+        depth_label = "mirror" if row["mirror"] else str(row["weighted_depth"])
+        observed_stabilizer_types[(depth_label, str(row["stabilizer_type"]))] += 1
+        signature = tuple(
+            (
+                int(entry["element_order"]),
+                int(entry["fixed_mirrors"]),
+                int(entry["count"]),
+            )
+            for entry in row["stabilizer_signature"]  # type: ignore[union-attr]
+        )
+        stabilizer_refinement[(depth_label, int(row["stabilizer_order"]), signature)] += 1
+    expected_stabilizer_law = stabilizer_refinement_law(name, prime)
+    expected_stabilizer_types = Counter(
+        {
+            (str(row["depth"]), str(row["stabilizer_type"])): int(row["orbit_count"])
+            for row in expected_stabilizer_law["orbit_counts"]  # type: ignore[union-attr]
+        }
+    )
+    if observed_stabilizer_types != expected_stabilizer_types:
+        raise AssertionError(f"{name}: stabilizer-refined orbit law failed")
     depth_law = depth_labelled_orbit_law(name, prime)
     if observed_orbits_by_depth != Counter(depth_law["orbit_counts"]):
         raise AssertionError(f"{name}: depth-labelled orbit law failed")
-    element_order_counts = Counter(projective_matrix_order(matrix, prime) for matrix in group)
+    element_order_counts = Counter(order for order, _ in matrix_invariants.values())
     expected_element_orders = (
         Counter({1: 1, 2: 9, 3: 8, 4: 6})
         if name in ("A3", "B3")
@@ -533,6 +674,25 @@ def coxeter_orbit_certificate(
             str(order): count for order, count in sorted(element_order_counts.items())
         },
         "observed_orbit_counts_by_depth": dict(sorted(observed_orbits_by_depth.items())),
+        "stabilizer_refined_orbit_law": expected_stabilizer_law,
+        "observed_orbit_counts_by_depth_and_stabilizer_signature": [
+            {
+                "depth": depth,
+                "stabilizer_order": stabilizer_order,
+                "stabilizer_signature": [
+                    {
+                        "element_order": order,
+                        "fixed_mirrors": fixed_mirrors,
+                        "count": count,
+                    }
+                    for order, fixed_mirrors, count in signature
+                ],
+                "orbit_count": count,
+            }
+            for (depth, stabilizer_order, signature), count in sorted(
+                stabilizer_refinement.items()
+            )
+        ],
         "observed_nonidentity_fixed_incidence_by_depth": dict(
             sorted(fixed_depth_incidence.items())
         ),
@@ -1524,7 +1684,7 @@ def build_certificate() -> dict[str, object]:
                 raise AssertionError("conic-phase factorized support enumerator formula failed")
 
     return {
-        "schema": "c403-arrangement-complement-distance-v4",
+        "schema": "c403-arrangement-complement-distance-v5",
         "field_convention": "normalized triples for points and dual lines of PG(2,p)",
         "weighted_second_adjoint_theorem": {
             "rank_three_identification": (
@@ -1545,8 +1705,17 @@ def build_certificate() -> dict[str, object]:
         },
         "coxeter_orbit_law_branch_replays": {
             "A3_q13_all_roots_split": coxeter_orbit_certificate("A3", 13),
+            "B3_q13_cubic_and_fourth_roots_split": coxeter_orbit_certificate("B3", 13),
+            "B3_q17_fourth_roots_split": coxeter_orbit_certificate("B3", 17),
+            "B3_q19_cubic_roots_split": coxeter_orbit_certificate("B3", 19),
             "H3_q19_cubic_split_fifth_roots_nonsplit": coxeter_orbit_certificate(
                 "H3", 19, h3_roots(5)
+            ),
+            "H3_q29_cubic_and_fifth_roots_nonsplit": coxeter_orbit_certificate(
+                "H3", 29, h3_roots(6)
+            ),
+            "H3_q31_cubic_and_fifth_roots_split": coxeter_orbit_certificate(
+                "H3", 31, h3_roots(19)
             ),
         },
         "coxeter_conic_phase_full_weight_lines": {

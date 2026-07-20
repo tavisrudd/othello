@@ -6,7 +6,7 @@
 
 **Status:** `ACTIVE`
 
-**Current verdict:** `ORIGINAL-LATTICE OBSTRUCTION; WEIGHTED 2-ADJOINT ENUMERATOR; ALL-DEGREE CONIC MATCHING-QUOTIENT LAW`
+**Current verdict:** `WEIGHTED 2-ADJOINT ENUMERATOR; STABILIZER-STRATIFIED COXETER ORBITS; ALL-DEGREE CONIC MATCHING QUOTIENT`
 
 ## Decision
 
@@ -278,6 +278,49 @@ orbit counts are the raw stratum sizes divided by the group order.  Independent 
 exercise both eigenvalue-splitting branches: `A3` has `15` total line orbits at `q=13`, and `H3`
 with `tau=5` has `13` at `q=19`.  The checker verifies the group element-order distribution, every
 fixed-depth ledger, every labelled formula, and every orbit size directly.
+
+### Stabilizer-stratified orbit theorem
+
+The depth-labelled laws refine uniformly by the exact projective point stabilizer.  Write
+`epsilon_m=epsilon_m(q)`.  For `B3`, the two involution classes are distinguished as `C2[3]` and
+`C2[5]` according as their nonidentity element fixes three or five arrangement mirrors.  Zero
+entries are omitted.
+
+| type | depth | stabilizer type and number of orbits |
+|:---|:---:|:---|
+| `A3` | `0` | `1: (q-5)(q-7)/24`; `C2: (q-5)/2`; `S3: 1` |
+|  | `1` | `C2: (q-3-2epsilon_4)/4`; `C4: epsilon_4` |
+|  | `2` | `1: (q-5-2epsilon_3)/6`; `C2: 1`; `C3: epsilon_3`; `D8: 1` |
+|  | mirror | `V4: 1` |
+| `B3` | `0` | `1: (q-5)(q-7)/24` |
+|  | `1` | `C2[3]: (q-5)/2` |
+|  | `2` | `1: (q-5-2epsilon_3)/6`; `C3: epsilon_3` |
+|  | `3` | `C2[3]: 1`; `C2[5]: (q-3-2epsilon_4)/4`; `C4: epsilon_4`; `S3: 1` |
+|  | mirror | `V4: 1`; `D8: 1` |
+| `H3` | `0` | `1: (q-11)(q-19)/60` |
+|  | `1` | `C2: (q-11)/2` |
+|  | `2` | `1: (q-11-2epsilon_3)/6`; `C3: epsilon_3` |
+|  | `3` | `C2: 1`; `S3: 1` |
+|  | `4` | `1: (q-9-2epsilon_5)/10`; `C5: epsilon_5` |
+|  | `5` | `C2: 2`; `D10: 1` |
+|  | mirror | `V4: 1` |
+
+Here `1` denotes the trivial stabilizer.  The proof is the eigenspace refinement of the preceding
+Burnside calculation.  A point with nontrivial stabilizer is an eigenline of a nonidentity group
+element.  Involutions contribute a projective eigenspace line and hence the linear `C2` families;
+orders `3,4,5` contribute their two additional eigenlines exactly when the corresponding roots of
+unity split.  Intersections of these fixed loci are the displayed field-independent
+`S3,V4,D8,D10` exceptional orbits.  Evaluating weighted depth on one representative of every
+fixed-locus intersection places each subgroup in the displayed row.  The remaining points have
+trivial stabilizer, and subtracting the exceptional and cyclic orbits from the already proved
+depth-orbit totals gives the residual formulas.  Summing each row recovers the depth-labelled
+Burnside table exactly.
+
+This is useful beyond compression: weighted-adjoint depth alone does not determine local symmetry,
+but the pair `(depth, stabilizer type)` has a uniform arithmetic phase law.  The statement is a
+finite-field specialization of elementary subgroup/eigenspace geometry, so no priority claim is
+made.  Exact replays cover `A3` at q=11/13, all four `(epsilon_3,epsilon_4)` branches for `B3` at
+q=11/13/17/19, and all four `(epsilon_3,epsilon_5)` branches for split `H3` at q=11/19/29/31.
 
 ## C399 recovered from external flag ledgers
 
@@ -765,7 +808,9 @@ samples, both same-lattice counterexamples, and the exact `A3/B3` projective ref
 decompositions, the `H3` q=11 orbit decomposition, and the q=13/q=19 Burnside branch replays.  All
 projective codeword totals equal `11^3` for the q=11 code fixtures.  The orbit path additionally
 checks every group element order, nonidentity fixed-depth incidence ledger, and closed labelled
-orbit-count formula.  The higher-degree path checks all `15,624` nonzero quadrics in the `A3/F_5`
+orbit-count formula.  It now classifies every orbit stabilizer by element order and fixed-mirror
+signature, verifies the closed stabilizer-refined law, and exercises all four splitting branches
+for `B3` and `H3`.  The higher-degree path checks all `15,624` nonzero quadrics in the `A3/F_5`
 pilot, its one-dimensional evaluation kernel, and all `53` joint statistic strata.  It also checks
 every squarefree nonmirror line product of degrees two and three in the three Coxeter conic phases,
 compares direct support unions with the depth/debt transition law, and independently matches the
@@ -777,8 +822,8 @@ every q=11 fixture and agrees with the direct collinear-triple count at dual wei
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | `69,223` | `84f92c08048fd804468eec1cc4373082e523addd23542c48ee141ca8dbced5bc` |
-| certificate `.json` | `98,354` | `3b668e202a7ca7f12d0bbd9b76d5ff63333cf50faa46909452bc6bc9e0446630` |
+| checker `.py` | `76,339` | `136b1c0782c38542ad90832aeb9acd3859174526949e086ff0f5be1f5fa4a1e1` |
+| certificate `.json` | `234,075` | `1bc47da2bf0f2f07b5e48d7b1242c8bd104b8a98a65174e1023b7119953f6f90` |
 
 The trusted boundary is exact Python integer/modular arithmetic, elementary projective incidence,
 the standard MacWilliams identity,
@@ -856,13 +901,17 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
   is the matching-module augmentation space generated by four-endpoint Pluecker exchanges, and
   `2r=q+1` is the sharp transition from nonzero minimum words to nonzero sections with zero
   rational evaluation.
+- Every `A3/B3/H3` weighted-depth orbit has one of the displayed cyclic or exceptional stabilizer
+  types, with exact uniform orbit counts and root-splitting phases.  Thus `(depth,stabilizer type)`
+  is a strictly finer arithmetic profile than depth alone.
 - The complete support tower is the parent-free Boolean union filtration.  Each endpoint-union
   transition has the displayed closed rank and nullity, while the full degree-r conic code has rank
   `min(2r+1,q+1)` and kernel dimension `binom(r,2)+max(0,2r-q)`.  Do not extend this to value-level
   forgetting for all external factors; their conjugate divisors can retain the mirror decoration.
 - The parallel-copy coboundary normalization is source-closed through Ardila's finite-field method
   and copy theorem, and is explicitly not the Abe--Terao--Wakefield multiarrangement polynomial.
-- C403 remains the active crowns task.  The pairing-forgetting/kernel upgrade is closed positively,
-  so the next attack returns to stabilizer-type refinement or nonfactorized dual-support structure
-  beyond the now-closed line-product family.  C404 is closed by the Edge/Dye fibre-geometry
-  pre-emption; C405 is the next independent successor.
+- C403 remains the active crowns task.  The pairing-forgetting/kernel and stabilizer-refinement
+  upgrades are closed positively.  The next bounded attack is nonfactorized dual-support structure
+  beyond the now-closed line-product family, with a mandatory stop if it factors through the
+  standard conic/GRS matroid.  C404 is closed by the Edge/Dye fibre-geometry pre-emption; C405 is
+  the next independent successor.
