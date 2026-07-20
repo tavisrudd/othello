@@ -1,7 +1,7 @@
 # C370: all-extension periodicity for the full-`PGL2` mirror family
 
-**Date:** 2026-07-19  
-**Lane:** `crowns`  
+**Date:** 2026-07-19
+**Lane:** `crowns`
 **Verdict:** **THEOREM; FOUR-PHASE STRUCTURAL BASE CHANGE FOR EVERY ODD-FIELD MIRROR FAMILY**
 
 ## Result
