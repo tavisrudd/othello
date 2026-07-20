@@ -80,8 +80,17 @@
       "last": 375,
       "purpose": "High-priority Clebsch scheme Fourier classification, intrinsic chirality, AME equivalence, and symmetric circuit gates",
       "sequence": 9
+    },
+    {
+      "count": 1,
+      "first": 376,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 376,
+      "purpose": "Clebsch cubic double-six and code chirality compatibility gate",
+      "sequence": 10
     }
   ],
-  "next_id": 376,
+  "next_id": 377,
   "schema": "codex-task-id-allocations-v1"
 }
