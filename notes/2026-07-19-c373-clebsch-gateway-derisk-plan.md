@@ -218,6 +218,77 @@ An `A5`-symmetric MDS-to-AME presentation, an increase from six to seven code co
 presentation-dependent syndrome names are yellow corollaries, not gateway theorems.  Failure here
 leaves the pure-mathematical paper intact.
 
+## Lean foundation track
+
+Lean should protect the logical seams of the gateway, not attempt to recreate the whole
+computational and algebro-geometric stack at once.  Its first job is to make category mistakes,
+hidden markings, and misuse of standard dictionaries impossible to state.
+
+C380 owns the first bounded formalization slice.
+
+### F0. Freeze typed interfaces
+
+Record separate types and equivalences for labelled projective configurations, arcs, parity-check
+column systems, linear codes, syndrome points, and permutation torsors.  Do not identify projective
+equivalence with monomial code equivalence or a labelled configuration with its unmarked quotient
+by definitional convenience.
+
+### F1. Formalize the generic bridge
+
+Build on the existing `Arc.lean` and `CodingBridge.lean` results to prove one paper-facing theorem:
+for a spanning triple-independent column system in projective dimension two, a nonzero projective
+syndrome has minimum weight three exactly when its point is outside every secant, exactly when it
+can be inserted while preserving the arc condition.
+
+This formalizes the seam
+
+```text
+deep syndrome <-> uncovered projective point <-> one-point MDS extension
+```
+
+and prevents the later `E7` and AME discussions from silently switching between a parity-check
+kernel and its dual generator code.
+
+### F2. Certify the q=11 instance narrowly
+
+Give the six q=11 columns and conic in fixed conventions.  Prove, through small reducible finite
+evaluators or generated leaf certificates, that the six columns form an arc and that their
+uncovered projective set is exactly the twelve conic points.  Shard finite certificates across
+module boundaries if needed; do not place a large `decide` proof in a paper-facing module.
+
+### F3. Formalize the quotient-character inference
+
+Do not formalize the entire cubic-surface construction in the first slice.  Instead formalize the
+abstract inference used by C376: if the natural blowdown transition induces precisely the outer
+normalizer coset and the second-model identification induces precisely `A5`, then the two exchange
+operations define the same quotient character `S5 -> C2`; no preferred element of the resulting
+two-set follows.  The heavy quintic and 27-line enumeration remains an exact external certificate
+behind an explicit trusted boundary.
+
+### F4. Add arithmetic only after C377 stabilizes
+
+Once C377 has a final symbolic `J(tau)` and cocycle statement, formalize its algebraic identities
+and specialization lemmas.  Do not formalize a moving conjectural API or attempt a general theory
+of cubic surfaces over the golden integer ring first.
+
+### F5. Quantum bridges remain optional
+
+Formalize MDS-to-AME or local-symplectic consequences only if C374 produces a compact exact theorem
+and the necessary finite linear-algebra infrastructure is already available.  Lean is not a reason
+to broaden a presentation-dependent quantum claim.
+
+**Lean green gate.**  A lightweight import-only gateway module reaches every paper-facing formal
+terminal, exact-target validation is trace-current, the prescribed axiom audit is clean, and no
+generated finite leaf is trusted without its checker/schema boundary.
+
+**Lean yellow off-ramp.**  The generic deep-syndrome/arc-extension theorem and abstract quotient-
+character inference land, while q=11 enumeration remains externally certified.  This still
+substantially derisks the manuscript's most error-prone changes of language.
+
+**Lean red off-ramp.**  Cubic-surface infrastructure would require a new foundational library or
+finite reflection creates an unbounded elaboration target.  Stop at the typed interfaces and
+generic bridge; do not equate absence of formalization with a failed mathematical theorem.
+
 ## Literature and reproducibility gates
 
 Run the expensive literature audit only after a candidate theorem is written exactly.  Cover the
@@ -275,6 +346,16 @@ The gateway atlas is a reservoir of later questions, not a work queue.  Genus-tw
 `E8`, icosians, clusters, Hilbert modular surfaces, type-II matrices, Mathieu groups, and holography
 remain unallocated until a green transported invariant singles one out.
 
+### 7. Formalization theatre
+
+Lean can prove only the stated model.  It does not validate the correspondence between an external
+JSON certificate and the intended cubic surface unless that bridge is itself checked.  C380 must
+therefore expose every computational boundary, avoid importing the desired C376 conclusion as an
+axiom, and keep generated tables behind small verified evaluators.  A green build with the wrong
+equivalence relation is a red mathematical result.  Conversely, absence of a cubic-surface library
+is not evidence against C376; the bounded formal target is the stable dictionary and quotient-
+character logic, followed by exact q=11 leaves where feasible.
+
 ## Hard stop rules
 
 - Never promote a match based only on `6`, `10`, `12`, `27`, `A5`, `E6`, or a familiar graph.
@@ -288,12 +369,14 @@ remain unallocated until a green transported invariant singles one out.
 ## Execution order
 
 1. Close C376 administratively without weakening its exact quotient-character statement.
-2. Launch the now-unblocked golden descent theorem as the primary gateway successor.
-3. Run the bounded common-duality kill test and deep-hole-extension gate independently.
-4. Promote duality or extension only if it supplies a consequence beyond C376's flagship path.
-5. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
-6. Perform claim-specific full-text and forward-citation closure.
-7. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
+2. Run C377, the now-unblocked golden descent theorem, as the primary gateway successor.
+3. Run C378's bounded common-duality kill test and C379's deep-hole-extension gate independently.
+4. Start C380 with the stable generic bridge and quotient-character inference; add C377 only after
+   its symbolic statement freezes.
+5. Promote duality or extension only if it supplies a consequence beyond C376's flagship path.
+6. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
+7. Perform claim-specific full-text and forward-citation closure.
+8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
 
 The decisive question at every promotion meeting is:
 
