@@ -143,8 +143,17 @@
       "last": 389,
       "purpose": "C370 cubic scar isolation and universal exact-degree/repair base-change upgrades",
       "sequence": 16
+    },
+    {
+      "count": 1,
+      "first": 390,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 390,
+      "purpose": "C382 free upgrades: induced Clebsch-Bring bridge, E8 norm-four cap, and matching-Lagrangian/triality gates",
+      "sequence": 17
     }
   ],
-  "next_id": 390,
+  "next_id": 391,
   "schema": "codex-task-id-allocations-v1"
 }
