@@ -423,6 +423,133 @@ These are experiments, not queue rows or task allocations.
 The first, third, and fourth are finite permutation/incidence calculations.  They should be cheap
 enough to decide whether the candidate is a theorem path or only a famous-object coincidence.
 
+## Bounded novelty check on ranks 1--3
+
+### Scope and bottom line
+
+This check covers only G15--G17 and only the proposed seams joining the local C405/C406/C379/C399
+objects to the named classical carriers.  It is not a forward-citation closure or an unrestricted
+priority audit.  Of the six individually discussed sources below, **zero were read at `full text`**:
+five were read `partial` (one through publisher HTML) and one `abstract/metadata only`.  The
+verdicts therefore license experiment triage and conservative claim boundaries, not a
+paper-facing "first" claim.
+
+| Candidate | Bounded verdict | What is already pre-empted | Narrow seam that survives |
+|:---|:---|:---|:---|
+| G15 B3/Fano/Klein/Hoggar | **PARTLY PRE-EMPTED; MARKED CUBIC SEAM SURVIVES** | Stacey explicitly passes from the 28 zero entries of a twin-Hoggar probability vector to Fano anti-flags and from the same binary odd-pairing equation to the 28 bitangents of a plane quartic.  A bare 28-object anti-flag/bitangent/Hoggar dictionary is therefore prior art. | No predecessor was located in the bounded coverage for an equivariant map from the frozen B3 sheet orientation or the C405 parent decoration to a Hoggar triple-product sign, twin choice, or other measurable cubic statistic.  Klein-quartic specialization alone is not enough. |
+| G16 C379 sheets/11-cell | **CLASSICAL UNMARKED CORE; MARKED COMMUTING DIAGRAM SURVIVES** | The self-dual 11-cell, its two degree-11 `PSL_2(11)` actions, and the `2-(11,5,2)` biplane are classical.  From the published face counts and local incidences, the complementary vertex--facet design is the biplane; that identification should not carry novelty wording. | No predecessor was located for identifying the *specific C379 one-factorization sheets* with the vertex/facet sides while also transporting golden exchange, parent recovery, C403 switches, or cubic orientation through the face poset. |
+| G17 q=19/57-cell/Perkel | **FIRST TWO GATES PRE-EMPTED; CODE TRANSPORT REMAINS OPEN** | Leemans--Schulte and Monson--Schulte give the self-dual 57-cell with group `PSL_2(19)` from the golden modular-reduction setting.  The 57-vertex `A5`-coset action and its valency-six Perkel coset graph are also explicit in the graph literature.  Thus identifying the C399 `A5` merely as a vertex stabilizer and recovering the Perkel orbital are normalization checks, not new results. | No predecessor was located for a nonconstant q=19 deep-hole, uncovered-point, secant, or code relation factoring through the 57-cell face poset, nor for one construction producing both the q=11 and q=19 carriers from the C399 arithmetic phases. |
+
+The novelty-adjusted order remains G15, G16, G17, but for a stricter reason than the executive
+ranking: each survives only if it transports the *forgotten decoration or operational statistic*.
+G17 suffered the largest collision.  Its first novelty-bearing computation is current gate 3, not
+gates 1--2.  G15 should likewise skip any claim based only on the degree-28 set and go directly to
+the richer triple/cubic relations.
+
+### Candidate-specific findings
+
+#### G15
+
+Stacey's equations (116)--(117) are a direct collision with the corridor's unmarked middle.  The
+odd symplectic pairing labels both quartic bitangents and Fano anti-flags, and each zero in the four
+displayed twin-Hoggar probability vectors is identified with an anti-flag.  The same paper treats
+Hoggar triple products and the twin as substantive quantum data, but does not identify the local
+B3 factorization sheets, the q=9 C405 octad parents, or a Klein-specific marked cubic transport.
+This leaves a plausible theorem seam, but it is substantially narrower than the original chain:
+
+```text
+not novel: 28 zeros <-> Fano anti-flags <-> general-quartic bitangent labels
+still live: B3/C405 parent orientation -> a specified Hoggar cubic or twin statistic
+```
+
+The query screen found the expected classical `PSL_2(7)` action on Klein-quartic bitangents, so an
+agreement of degree-28 permutation characters would still be infrastructure.  Promotion should
+require preservation of the B3 signed cubic or a C405 parent relation, exactly as the existing stop
+rule says.
+
+#### G16
+
+Leemans--Schulte record that the self-dual 11-cell has 11 facets, 11 vertices, 55 edges, 55
+triangular faces, and complete vertex graph `K_11`.  Martín--Singerman separately identify the
+simplest biplane on eleven points and its automorphism group `PSL_2(11)`.  Together with the local
+hemi-icosahedral incidence, this makes the complementary vertex--facet `2-(11,5,2)` design a
+classical consequence, not the target theorem.
+
+The bounded searches did not locate any source connecting a pair of `K_12` one-factorizations to
+the two face ranks of the 11-cell, or interpreting four-endpoint matching switches as residues or
+flag moves.  Accordingly, the useful exact gate is not "is the biplane the same?" but "does the
+fixed C379 equivariant identification extend to edges, faces, self-duality, and the retained parent
+decoration?"  That is still a clean and cheap finite test.
+
+#### G17
+
+The classical collision is stronger here.  Leemans--Schulte's classification fixes the 57-cell as
+the q=19 rank-four `L_2(q)` polytope; Monson--Schulte obtain it from the `Z[tau]` modular-reduction
+family; and Xiao--Zhang--Zhang explicitly construct the 57-vertex valency-six coset graph from
+`PSL_2(19)` with vertex stabilizer `A5`.  This is the Perkel carrier.  Hence the order calculation
+`3420/60=57`, the coset set, and the standard orbital graph cannot support novelty.
+
+The surviving question is more interesting and more falsifiable: does any *C399-defined* q=19
+incidence or syndrome statistic descend nontrivially to that already-known coset geometry?  A
+constant or purely group-orbital pushforward closes G17.  A nonconstant relation with a q=11
+analogue would be the first result not located in this pass.
+
+### Search record
+
+The general web index was queried in three batches and all 71 displayed title/snippet records were
+screened.  The mechanical discriminator was: retain a work only if its title or snippet mentioned
+at least two named endpoints of the candidate seam, or one endpoint together with the load-bearing
+group/action term.  The exact queries were:
+
+```text
+Hoggar SIC Klein quartic bitangents Fano anti-flags PSL(2,7) cubic orientation
+regular 11-cell biplane one-factorization K12 PSL(2,11) self-duality
+57-cell Perkel graph geometry PSL(2,19) A5 vertex stabilizer code
+H3 modular reduction 57-cell q=19 coding theory deep holes
+site:arxiv.org "11-cell" biplane PSL_2(11) vertices facets incidence
+site:doi.org 11-cell biplane PSL(2,11) one-factorization
+site:arxiv.org Hoggar lines "Klein quartic" bitangents
+site:arxiv.org Perkel graph code PSL(2,19) 57-cell
+"11-cell" "2-(11,5,2)"
+"11-cell" biplane "one-factorization"
+"PSL(2,11)" biplane regular 11-cell vertices facets
+"57-cell" code "deep hole"
+```
+
+Crossref `query.bibliographic` screens used the exact strings `Hoggar Klein quartic bitangents`,
+`Hoggar Fano anti flags`, `regular 11-cell biplane one-factorization`, and
+`57-cell Perkel graph code deep hole`.  Crossref reported respectively 183,473; 670,196;
+9,598,152; and 5,240,615 loose matches.  The top ten metadata records from each set were screened;
+all forty were single-endpoint or lexical false positives and none described a proposed seam.
+These enormous counts are search-noise measures, not coverage claims.
+
+OpenAlex default-search controls were also run.  The most selective useful result was
+`"Perkel graph" code`: ten records, all ten screened, with no q=19 deep-hole/code transport.
+The supposedly exact `"Hoggar" "Klein quartic"` and `"Hoggar" "anti-flags"` controls returned
+zero, despite Stacey's known full-text collision, while the cell queries were polluted by
+biological uses of "cell".  OpenAlex default search is therefore demonstrably not a reliable
+negative for these seams and carries no verdict weight.  Semantic Scholar returned HTTP 429 for
+all four attempted seam queries, so it is **NOT COVERED**, not a zero-result search.
+
+No forward-citation enumeration was used to support a negative, so the three-graph
+OpenAlex/Crossref/Semantic-Scholar citing-count rule was not triggered.  MathSciNet, zbMATH Open,
+Google Scholar, and citation-graph closure remain **NOT COVERED**.  Google Scholar was not queried
+because automated access is blocked; MathSciNet requires unavailable institutional access.
+
+### Sources consulted for this bounded check
+
+| Source | Read depth and access | Audit use |
+|:---|:---|:---|
+| B. C. Stacey, [*Geometric and Information-Theoretic Properties of the Hoggar Lines*](https://arxiv.org/abs/1609.03075) | `partial`: arXiv version; §§VI and the bitangent/Fano anti-flag discussion around equations (116)--(117). Cache key `arXiv:1609.03075`, SHA-256 `20486414437b34dcd0609b539fd4af92a14b9e8174f5cfda6ae2f68b37db3db3`. | Direct pre-emption of the unmarked Hoggar-zero/Fano-anti-flag/general-quartic-bitangent dictionary; confirms triple products and the twin as richer data. |
+| D. Leemans and E. Schulte, [*Groups of type `L_2(q)` acting on polytopes*](https://arxiv.org/abs/math/0606660) | `partial`: arXiv version; introduction, classification argument as needed, and Theorem 4/§ "The 11-cell and 57-cell". Cache key `arXiv:math/0606660`, SHA-256 `80a87dddf2549f3a16feaf2fb13b859680bfafc7b78103cea95f167a0df20b11`. | Exact q=11/q=19 classification, self-duality, face counts, and local projective types. |
+| B. Monson and E. Schulte, [*Modular Reduction in Abstract Polytopes*](https://arxiv.org/abs/0805.1479) | `partial`: arXiv version; introduction and the q=11/q=19 singular reductions in the `[3,5,3]` and `[5,3,5]` sections. Cache key `arXiv:0805.1479`, SHA-256 `149eeb36d30adc3cba20813bc7dad33d7a42cc0f39de0f3f3b9e6ab501c019ee`. | Golden-integer construction of the 11-cell and 57-cell; pre-empts the raw arithmetic-polytope corridor. |
+| M. E. Fernandes, C. A. Piedade, and O. Reade, [*String C-group representations of transitive Groups: a case study with degree 11*](https://arxiv.org/abs/2302.11943) | `partial`: arXiv version; abstract, introduction, and the theorem-level uniqueness/self-duality statements for the 11-cell. Cache key `arXiv:2302.11943`, SHA-256 `ccff111253ad5a5a9c17d5eb6648f7e8b77dc297f57c03584ccb6ac88a6d5b9a`. | Modern control on the degree-11 string-C-group interpretation; no C379 matching decoration found. |
+| P. Martín and D. Singerman, [*The geometry behind Galois' final theorem*](https://doi.org/10.1016/j.ejc.2012.03.022) | `abstract/metadata only`: publisher page for the published version; PDF/full text not read and no cache blob. | Confirms that the eleven-point biplane and its `PSL_2(11)` action are explicit classical geometry. |
+| R. Xiao, X. Zhang, and H. Zhang, [*On Edge-Primitive Graphs of Order as a Product of Two Distinct Primes*](https://doi.org/10.3390/math11183896) | `partial`: published open-access HTML, §2 Example 3 and its coset-graph setup; the PDF endpoint returned HTTP 429, so no cache blob was created. | Explicit `PSL_2(19)/A5` 57-vertex, valency-six coset graph; pre-empts G17 gates 1--2 at the unmarked graph level. |
+
+The earlier targeted literature table remains the source record for the other classical endpoints.
+Nothing in this bounded check licenses a novelty verdict for G18--G20.
+
 ## Targeted literature record
 
 The sources below were used to verify the classical endpoints and formulate gates.  Read depth is
