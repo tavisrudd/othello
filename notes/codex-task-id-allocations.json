@@ -242,8 +242,17 @@
       "last": 408,
       "purpose": "bounded pointed-profile and syndrome-multiplicity forgetting gate after C403/C407",
       "sequence": 27
+    },
+    {
+      "count": 2,
+      "first": 409,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 410,
+      "purpose": "C408 successors: cubic memory principle and same-tower composite trade",
+      "sequence": 28
     }
   ],
-  "next_id": 409,
+  "next_id": 411,
   "schema": "codex-task-id-allocations-v1"
 }
