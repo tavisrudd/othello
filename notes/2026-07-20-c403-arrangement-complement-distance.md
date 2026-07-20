@@ -176,10 +176,10 @@ Z_A(x) = sum_(G-orbits O on nonmirrors) |O| x^depth(O).
 
 This is the useful computational attack for reflection arrangements: classify finite-field
 orbits of test lines and evaluate one representative per orbit.  The C399 ledgers are already a
-coarser hand-compressed version of this orbit sum.  The certificate now performs the orbit replay
-for `A3` and `B3` over `F_11`.  In each case the projective reflection group has order `24` (`B3`'s
-central inversion acts trivially) and
-compresses all `133` projective lines to `11` orbits.  Grouping their sizes by nonmirror depth gives
+coarser hand-compressed version of this orbit sum.  The certificate performs the orbit replay for
+all three types over `F_11`.  For `A3/B3`, the projective reflection group has order `24` (`B3`'s
+central inversion acts trivially) and compresses all `133` projective lines to `11` orbits.
+Grouping their sizes by nonmirror depth gives
 
 ```text
 A3: depth 0: 4+12+12+12+24 = 64
@@ -194,9 +194,38 @@ B3: depth 0: 24             = 24
     mirrors: 3+6            = 9.
 ```
 
-These sums exactly recover the symbolic spectra.  Extending this from the two crystallographic
-fixtures to a uniform `A3/B3/H3` orbit theorem remains open; `H3` requires controlling the
-finite-field icosahedral representation and its good-characteristic orbit splitting.
+For `H3`, take the split golden root `tau=4` in `F_11`.  The projective `A5` has order `60` and
+compresses the same `133` lines to only `7` orbits:
+
+```text
+H3: depth 3: 10+30          = 40
+    depth 4: 12             = 12
+    depth 5: 6+30+30        = 66
+    mirrors: 15.
+```
+
+These sums exactly recover all three symbolic spectra.  Burnside gives a uniform orbit-count law,
+not merely a q=11 census.  Let `epsilon_m(q)=1` when `m` divides `q-1`, and `0` otherwise.  In good
+characteristic, for the common projective `S4` representation underlying `A3/B3`,
+
+```text
+|PG(2,q)/S4| = (q^2+10q+33+16 epsilon_3+12 epsilon_4)/24.
+```
+
+Indeed, the identity fixes `q^2+q+1` points; the nine involutions each fix `q+2`; the eight
+order-three elements each fix `1+2 epsilon_3`; and the six order-four elements each fix
+`1+2 epsilon_4`.  For the good-residue-field icosahedral representation,
+
+```text
+|PG(2,q)/A5| = (q^2+16q+75+40 epsilon_3+48 epsilon_5)/60,
+```
+
+from the class sizes `1,15,20,24` of the identity and elements of orders `2,3,5`.  An involution
+again fixes `q+2` projective points, while an element of odd order `m` fixes one eigenline plus two
+more exactly when its nontrivial eigenvalues lie in `F_q`.  Independent direct replays exercise the
+other splitting branches: `A3` has `15` line orbits at `q=13`, and `H3` with `tau=5` has `13` at
+`q=19`.  The remaining orbit problem is finer: derive the depth-labelled orbit sizes uniformly,
+not the total number of orbits.
 
 ## C399 recovered from external flag ledgers
 
@@ -458,12 +487,13 @@ each complement directly, counts every line section, and reconstructs the weight
 both ambient contractions and the punctured weighted 2-adjoint.  It also verifies the adjoint moment
 identities, intrinsic bounds, locality/availability distributions, five two-pencil parameter
 samples, both same-lattice counterexamples, and the exact `A3/B3` projective reflection-group orbit
-decompositions.  All projective codeword totals equal `11^3`.
+decompositions, the `H3` q=11 orbit decomposition, and the q=13/q=19 Burnside branch replays.  All
+projective codeword totals equal `11^3` for the q=11 code fixtures.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | `39,486` | `340b6d40a0d7954b20e4f65cf407b23e75c261b0d75998e194659d8e3ac3298c` |
-| certificate `.json` | `44,265` | `be61d311f738cf68cd08b212bbd236d7daaa4ff9101245f0a41df989c549012c` |
+| checker `.py` | `41,958` | `7bdd2bfcf40f48489bbbd4c207e7b92d62824445e25a3bd3f6b7239aaea6f7ab` |
+| certificate `.json` | `52,908` | `dd970f66b5e5135194673bca1e83677824f7f5f51bd8dc331a9b08b8e283d681` |
 
 The trusted boundary is exact Python integer/modular arithmetic, elementary projective incidence,
 the standard rank-three supersolvable-implies-free theorem, and C339's independently replayed
@@ -528,6 +558,6 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
 - The two-pencil theorem gives an infinite irreducible supersolvable equality class, while the
   multiplicity bounds explain the extremal uniform counterexample.
 - The line sections also give exact locality-two repair and disjoint-availability profiles.
-- C403 remains the active crowns task.  Next attacks are the `H3`/uniform reflection-orbit theorem,
-  full adjoint/multiarrangement source closure, and higher-degree section transforms; C404 is
-  queued behind it rather than replacing it.
+- C403 remains the active crowns task.  Next attacks are depth-labelled uniform orbit laws, full
+  adjoint/multiarrangement source closure, and higher-degree section transforms; C404 is queued
+  behind it rather than replacing it.

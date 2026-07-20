@@ -278,8 +278,69 @@ COXETER_ROOTS["B3"] = (
 ) + COXETER_ROOTS["A3"]
 
 
-def coxeter_orbit_certificate(name: str, prime: int) -> dict[str, object]:
-    roots = COXETER_ROOTS[name]
+def h3_roots(tau: int) -> tuple[tuple[int, int, int], ...]:
+    tau_minus_one = tau - 1
+    return tuple(
+        [(1, 0, 0), (0, 1, 0), (0, 0, 1)]
+        + [
+            cyclic
+            for left_sign in (-1, 1)
+            for right_sign in (-1, 1)
+            for cyclic in (
+                (1, left_sign * tau, right_sign * tau_minus_one),
+                (left_sign * tau, right_sign * tau_minus_one, 1),
+                (right_sign * tau_minus_one, 1, left_sign * tau),
+            )
+        ]
+    )
+
+
+COXETER_ROOTS["H3"] = h3_roots(4)
+
+
+def burnside_orbit_count(name: str, field_order: int) -> dict[str, object]:
+    epsilon_3 = int((field_order - 1) % 3 == 0)
+    if name in ("A3", "B3"):
+        epsilon_4 = int((field_order - 1) % 4 == 0)
+        numerator = (
+            field_order * field_order
+            + 10 * field_order
+            + 33
+            + 16 * epsilon_3
+            + 12 * epsilon_4
+        )
+        denominator = 24
+        formula = "(q^2+10q+33+16 epsilon_3+12 epsilon_4)/24"
+        indicators = {"epsilon_3": epsilon_3, "epsilon_4": epsilon_4}
+    elif name == "H3":
+        epsilon_5 = int((field_order - 1) % 5 == 0)
+        numerator = (
+            field_order * field_order
+            + 16 * field_order
+            + 75
+            + 40 * epsilon_3
+            + 48 * epsilon_5
+        )
+        denominator = 60
+        formula = "(q^2+16q+75+40 epsilon_3+48 epsilon_5)/60"
+        indicators = {"epsilon_3": epsilon_3, "epsilon_5": epsilon_5}
+    else:
+        raise ValueError(f"unknown Coxeter type: {name}")
+    if numerator % denominator:
+        raise AssertionError(f"{name}: Burnside orbit formula is not integral")
+    return {
+        "formula": formula,
+        "root_of_unity_indicators": indicators,
+        "orbit_count": numerator // denominator,
+    }
+
+
+def coxeter_orbit_certificate(
+    name: str,
+    prime: int,
+    roots: tuple[tuple[int, int, int], ...] | None = None,
+) -> dict[str, object]:
+    roots = COXETER_ROOTS[name] if roots is None else roots
     lines = arrangement(roots, prime)
     line_set = set(lines)
     blocks = intersection_blocks(lines, prime)
@@ -338,14 +399,19 @@ def coxeter_orbit_certificate(name: str, prime: int) -> dict[str, object]:
     expected = {
         depth: polynomial_value(coefficients, prime)
         for depth, coefficients in EXPECTED_COXETER_POLYNOMIALS[name].items()
+        if polynomial_value(coefficients, prime) > 0
     }
     if nonmirror_depth_counts != Counter(expected):
         raise AssertionError(f"{name}: orbit sum does not recover the weighted depth spectrum")
+    burnside = burnside_orbit_count(name, prime)
+    if len(orbit_rows) != burnside["orbit_count"]:
+        raise AssertionError(f"{name}: direct orbits disagree with Burnside formula")
     return {
         "q": prime,
         "projective_reflection_group_order": len(group),
         "projective_line_count": prime * prime + prime + 1,
         "orbit_count": len(orbit_rows),
+        "burnside_orbit_count": burnside,
         "orbits": orbit_rows,
         "nonmirror_depth_counts_from_orbits": {
             str(depth): count for depth, count in sorted(nonmirror_depth_counts.items())
@@ -865,7 +931,13 @@ def build_certificate() -> dict[str, object]:
         },
         "coxeter_external_flag_ledgers": coxeter,
         "coxeter_projective_orbit_compression_q11": {
-            name: coxeter_orbit_certificate(name, prime) for name in ("A3", "B3")
+            name: coxeter_orbit_certificate(name, prime) for name in ("A3", "B3", "H3")
+        },
+        "coxeter_orbit_law_branch_replays": {
+            "A3_q13_all_roots_split": coxeter_orbit_certificate("A3", 13),
+            "H3_q19_cubic_split_fifth_roots_nonsplit": coxeter_orbit_certificate(
+                "H3", 19, h3_roots(5)
+            ),
         },
         "coxeter_conic_phase_full_weight_lines": {
             name: {

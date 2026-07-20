@@ -326,8 +326,342 @@
       }
     }
   },
+  "coxeter_orbit_law_branch_replays": {
+    "A3_q13_all_roots_split": {
+      "burnside_orbit_count": {
+        "formula": "(q^2+10q+33+16 epsilon_3+12 epsilon_4)/24",
+        "orbit_count": 15,
+        "root_of_unity_indicators": {
+          "epsilon_3": 1,
+          "epsilon_4": 1
+        }
+      },
+      "nonmirror_depth_counts_from_orbits": {
+        "0": 100,
+        "1": 30,
+        "2": 47
+      },
+      "orbit_count": 15,
+      "orbits": [
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            1
+          ],
+          "size": 4,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            3
+          ],
+          "size": 12,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            4
+          ],
+          "size": 12,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            5
+          ],
+          "size": 12,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            6
+          ],
+          "size": 12,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            2,
+            4
+          ],
+          "size": 24,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            2,
+            5
+          ],
+          "size": 24,
+          "weighted_depth": 0
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            5
+          ],
+          "size": 6,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            2
+          ],
+          "size": 12,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            3
+          ],
+          "size": 12,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            0,
+            1
+          ],
+          "size": 3,
+          "weighted_depth": 2
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            3,
+            4
+          ],
+          "size": 8,
+          "weighted_depth": 2
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            2
+          ],
+          "size": 12,
+          "weighted_depth": 2
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            2,
+            3
+          ],
+          "size": 24,
+          "weighted_depth": 2
+        },
+        {
+          "mirror": true,
+          "representative": [
+            0,
+            1,
+            1
+          ],
+          "size": 6,
+          "weighted_depth": 5
+        }
+      ],
+      "projective_line_count": 183,
+      "projective_reflection_group_order": 24,
+      "q": 13
+    },
+    "H3_q19_cubic_split_fifth_roots_nonsplit": {
+      "burnside_orbit_count": {
+        "formula": "(q^2+16q+75+40 epsilon_3+48 epsilon_5)/60",
+        "orbit_count": 13,
+        "root_of_unity_indicators": {
+          "epsilon_3": 1,
+          "epsilon_5": 0
+        }
+      },
+      "nonmirror_depth_counts_from_orbits": {
+        "1": 120,
+        "2": 80,
+        "3": 40,
+        "4": 60,
+        "5": 66
+      },
+      "orbit_count": 13,
+      "orbits": [
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            2
+          ],
+          "size": 30,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            7
+          ],
+          "size": 30,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            8
+          ],
+          "size": 30,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            9
+          ],
+          "size": 30,
+          "weighted_depth": 1
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            6
+          ],
+          "size": 20,
+          "weighted_depth": 2
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            2
+          ],
+          "size": 60,
+          "weighted_depth": 2
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            6
+          ],
+          "size": 10,
+          "weighted_depth": 3
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            3
+          ],
+          "size": 30,
+          "weighted_depth": 3
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            4
+          ],
+          "size": 60,
+          "weighted_depth": 4
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            4
+          ],
+          "size": 6,
+          "weighted_depth": 5
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            1
+          ],
+          "size": 30,
+          "weighted_depth": 5
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            5
+          ],
+          "size": 30,
+          "weighted_depth": 5
+        },
+        {
+          "mirror": true,
+          "representative": [
+            0,
+            0,
+            1
+          ],
+          "size": 15,
+          "weighted_depth": 14
+        }
+      ],
+      "projective_line_count": 381,
+      "projective_reflection_group_order": 60,
+      "q": 19
+    }
+  },
   "coxeter_projective_orbit_compression_q11": {
     "A3": {
+      "burnside_orbit_count": {
+        "formula": "(q^2+10q+33+16 epsilon_3+12 epsilon_4)/24",
+        "orbit_count": 11,
+        "root_of_unity_indicators": {
+          "epsilon_3": 0,
+          "epsilon_4": 0
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "0": 64,
         "1": 24,
@@ -451,6 +785,14 @@
       "q": 11
     },
     "B3": {
+      "burnside_orbit_count": {
+        "formula": "(q^2+10q+33+16 epsilon_3+12 epsilon_4)/24",
+        "orbit_count": 11,
+        "root_of_unity_indicators": {
+          "epsilon_3": 0,
+          "epsilon_4": 0
+        }
+      },
       "nonmirror_depth_counts_from_orbits": {
         "0": 24,
         "1": 36,
@@ -572,6 +914,97 @@
       ],
       "projective_line_count": 133,
       "projective_reflection_group_order": 24,
+      "q": 11
+    },
+    "H3": {
+      "burnside_orbit_count": {
+        "formula": "(q^2+16q+75+40 epsilon_3+48 epsilon_5)/60",
+        "orbit_count": 7,
+        "root_of_unity_indicators": {
+          "epsilon_3": 0,
+          "epsilon_5": 1
+        }
+      },
+      "nonmirror_depth_counts_from_orbits": {
+        "3": 40,
+        "4": 12,
+        "5": 66
+      },
+      "orbit_count": 7,
+      "orbits": [
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            5
+          ],
+          "size": 10,
+          "weighted_depth": 3
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            2
+          ],
+          "size": 30,
+          "weighted_depth": 3
+        },
+        {
+          "mirror": false,
+          "representative": [
+            1,
+            1,
+            3
+          ],
+          "size": 12,
+          "weighted_depth": 4
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            3
+          ],
+          "size": 6,
+          "weighted_depth": 5
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            1
+          ],
+          "size": 30,
+          "weighted_depth": 5
+        },
+        {
+          "mirror": false,
+          "representative": [
+            0,
+            1,
+            4
+          ],
+          "size": 30,
+          "weighted_depth": 5
+        },
+        {
+          "mirror": true,
+          "representative": [
+            0,
+            0,
+            1
+          ],
+          "size": 15,
+          "weighted_depth": 14
+        }
+      ],
+      "projective_line_count": 133,
+      "projective_reflection_group_order": 60,
       "q": 11
     }
   },
