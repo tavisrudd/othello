@@ -259,3 +259,16 @@ C332's checker independently exercises the base/quadratic/regular orbit decompos
 support for representative prime-field extensions.  C333's checker independently exercises the
 six-arc, mirror, determinant, subfield, and full-group certificates in ten odd fields.  Neither
 checker evaluates the regular or quadratic scar value, and C370 does not add such an evaluation.
+
+## Allocated adjacent upgrades
+
+A bounded post-audit extraction found two proof-level upgrades and allocated them without reopening
+C370:
+
+- **C388:** extend C333's mirror certificate to odd extension degree, use the unique cubic regular
+  orbit to isolate `G(C)=0`, and reduce the whole tower to `0` in odd degree and `G(Q)` in even
+  degree;
+- **C389:** refine the residual by exact Frobenius degree for arbitrary finite
+  `H<=PGL_2(q)` and derive support-function, stable-normal-fan, and mixed-volume repair laws.
+
+The proof cards and stop rules are in `notes/2026-07-19-c370-free-upgrades.md`.
