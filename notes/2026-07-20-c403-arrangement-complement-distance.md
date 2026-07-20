@@ -32,8 +32,10 @@ characteristic polynomial of A        -> length
 weighted coboundary specialization of A^(2) -> all weights and distance.
 ```
 
-This is an active proof tranche, not a task close.  The coding specialization, structural equality
-classes, and Coxeter consequences remain under attack in C403.
+This remains an active task only for the bounded nonfactorized dual-support gate.  The coding
+specialization, structural equality classes, Coxeter orbit/stabilizer consequences, and
+factorized-support family are closed positively; stop the remaining gate immediately if it factors
+through the standard conic/GRS matroid.
 
 The first higher-degree family now closes uniformly.  For every squarefree product of nonmirror
 linear forms, its support is determined by the factor depths and one complement-concurrence debt.
