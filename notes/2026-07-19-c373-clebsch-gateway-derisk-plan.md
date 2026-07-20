@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-19
 
-**Status:** stage-gated research plan updated after C376; Door I green; certified core protected
+**Status:** updated through C377; Door I green; generic Door II descent stopped; C378--C380 queued
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -19,13 +19,15 @@ nontriviality, consequence, and literature gates.
 certified six-side paper
           |
           v
-three bounded first gates
-  surface incidence   extension geometry   common duality
-       GREEN                |                 |
-          \                 |                 /
-           +------- champion selection ------+
-                              |
-                    golden arithmetic descent
+certified surface gateway C376
+              |
+              +---- C377 golden descent ---- standard-descent stop
+              |
+              +---- C378 golden fusion / duality
+              |
+              +---- C379 extension / deep-hole quotient
+              |
+              +---- C380 stable Lean seams
                               |
                  optional quantum consequence
                               |
@@ -35,6 +37,12 @@ three bounded first gates
 The program should promote at most one new flagship mechanism into the present paper.  C376 makes
 the surface/blowdown character the provisional champion.  Independent successes become supporting
 lemmas or sequels rather than extra vertices forced into one manuscript.
+
+For fast progress, every speculative global construction has two passes.  Pass one is a disposable
+bounded scout using fixed coordinates and existing exact infrastructure; it answers only the
+promotion question.  Pass two creates a durable certificate, invariant-ring presentation, stack,
+or general theory only after the scout exposes a productive theorem.  In particular no broad GIT,
+stack, normalization, or cubic-surface formalization precedes a positive q=11 fusion/fiber gate.
 
 ## Protected baseline
 
@@ -179,10 +187,11 @@ Possible decisions:
 | several unrelated green branches | keep the core focused and allocate a sequel |
 | only a quantum branch later turns green | produce a separate quantum-facing paper or capstone |
 
-## Wave II — golden arithmetic descent
+## Wave II — golden arithmetic descent, closed at C377's red off-ramp
 
-This branch was gated on a green surface or common-duality result.  C376 has now opened it.  It must
-still prove more than the expected split/inert/ramified behavior of `Q(sqrt(5))`.
+C377 found the exact integral map, cocycle, Pluecker action, double-six action, and specializations,
+but Benson pre-empts the representation-theoretic mechanism.  The clean specialization remains
+credited glue.  It is not the flagship and no further intertwiner search is authorized.
 
 Required deliverables are:
 
@@ -368,12 +377,14 @@ character logic, followed by exact q=11 leaves where feasible.
 
 ## Execution order
 
-1. Close C376 administratively without weakening its exact quotient-character statement.
-2. Run C377, the now-unblocked golden descent theorem, as the primary gateway successor.
-3. Run C378's bounded common-duality kill test and C379's deep-hole-extension gate independently.
-4. Start C380 with the stable generic bridge and quotient-character inference; add C377 only after
-   its symbolic statement freezes.
-5. Promote duality or extension only if it supplies a consequence beyond C376's flagship path.
+1. Run C378's small q=11 golden-fusion scout first, then package it only if the exact relation sets
+   and a nonclassical compatibility statement pass.
+2. Run C379's marked deep-hole-fiber and extension scout independently.
+3. Start C380 with stable generic bridges; add C378 only after its theorem API freezes.
+4. Keep the Frobenius and integral-moduli companions unallocated until C378 or C379 supplies their
+   required intrinsic fission/fiber consequence.
+5. If that gate opens, begin moduli with one framed fixed-locus elimination; do not build the stack,
+   normalization package, or durable certificate before the quadratic locus and forgetful map pass.
 6. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
 7. Perform claim-specific full-text and forward-citation closure.
 8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
