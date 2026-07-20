@@ -89,8 +89,17 @@
       "last": 376,
       "purpose": "Clebsch cubic double-six and code chirality compatibility gate",
       "sequence": 10
+    },
+    {
+      "count": 3,
+      "first": 377,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 379,
+      "purpose": "Clebsch gateway derisk gates: golden descent, extension geometry, and common duality",
+      "sequence": 11
     }
   ],
-  "next_id": 377,
+  "next_id": 380,
   "schema": "codex-task-id-allocations-v1"
 }
