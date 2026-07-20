@@ -1,0 +1,88 @@
+{
+  "fusion": {
+    "blocks": [
+      [
+        0
+      ],
+      [
+        3
+      ],
+      [
+        1,
+        5,
+        6
+      ],
+      [
+        2,
+        4,
+        7
+      ]
+    ],
+    "common_refinement_J": [
+      0,
+      10,
+      2,
+      13,
+      4,
+      5,
+      14,
+      7,
+      8,
+      11,
+      1,
+      9,
+      12,
+      3,
+      6,
+      15
+    ],
+    "fused_orbit_sizes_in_block_order": [
+      1,
+      120,
+      660,
+      550
+    ],
+    "odd_fourier_square": "1331 I_4"
+  },
+  "inputs": {
+    "notes/2026-07-19-c378-clebsch-common-duality.json": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc",
+    "notes/2026-07-19-c379-clebsch-deep-hole-extension.json": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
+  },
+  "lean_sources": {
+    "lean/RelativeConicArcs/ClebschGateway.lean": {
+      "bytes": 15092,
+      "sha256": "a8f9302bce0495b396b49151ed7c441c4e66c1615d229e6766d2d9940cd286c5"
+    },
+    "lean/RelativeConicArcs/ClebschGatewayQ11Conic.lean": {
+      "bytes": 2732,
+      "sha256": "504488ef40f27e4714db84aed164027e33f259f7139497fb942f393a00db03cc"
+    },
+    "lean/RelativeConicArcs/ClebschGatewayQ11Extension.lean": {
+      "bytes": 4374,
+      "sha256": "953c2a161ffb693dc2928d047e2112b39d320c87b78099d5418ec5911c62065e"
+    },
+    "lean/RelativeConicArcs/ClebschGatewayQ11Fusion.lean": {
+      "bytes": 2802,
+      "sha256": "b8fa03711aaf998aa4fb436bcdcd61908bedf04703e3eeccd72f50625e891170"
+    },
+    "lean/RelativeConicArcs/ClebschGatewayQ11Matching.lean": {
+      "bytes": 3956,
+      "sha256": "1b2c959a5602257a303e7a16fe6c8304e507eb06453e68b7cca6610af30175b1"
+    },
+    "lean/RelativeConicArcs/Gates/ClebschGateway.lean": {
+      "bytes": 501,
+      "sha256": "773786e46a43adc6ea399ad52f9ad0a32842dfa173918068dad8c3d96fcc7469"
+    }
+  },
+  "matching": {
+    "decorated_parent_map_injective": true,
+    "distinct_matchings": 22,
+    "each_sheet_is_k12_one_factorization": true,
+    "parent_count": 22,
+    "sheet_sizes": [
+      11,
+      11
+    ]
+  },
+  "schema": "c380-clebsch-gateway-lean-foundations-v1"
+}
