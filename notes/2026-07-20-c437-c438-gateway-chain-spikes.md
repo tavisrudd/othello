@@ -87,10 +87,76 @@ transform, rather than two exceptional count coincidences?
 
 Both spikes inherit the read-depth ledger in the gateway brainstorm.  C437 must treat generic
 cubic orbit recovery over infinite fields and real projected-moment preservation as direct prior
-art; its candidate novelty is finite characteristic, all-orbit residual lists, Hecke compression,
-and modular radical/socle control.  C438 must treat deep-hole classifications, Cayley-octad and
-Hermitian-quartic geometry, and the individual q=9/q=11 configurations as prior art; its candidate
-addition is only a shared decorated transform that consumes both examples.
+art.  Finite-field separating invariants and low-degree generic separation for modular cyclic
+modules are also direct prior art: finite characteristic by itself is not a novelty claim.  C437's
+candidate novelty is the exact all-orbit `L_2=2`, `L_3=1` signed-half profile, its radical/socle
+explanation, and preservation or obstruction under the specific mixed-Hecke compression.  C438
+must treat deep-hole classifications, Cayley-octad and Hermitian-quartic geometry, modern
+Cayley-octad obstruction pictures, and the individual q=9/q=11 configurations as prior art; its
+candidate addition is only a shared decorated transform that consumes both examples.
 
 No paper-facing priority wording is authorized without a claim-specific full-text and citation
 closure under `notes/literature-audit-conventions.md`.
+
+## Shallow literature check (2026-07-20)
+
+**Depth and verdict.**  This was a bounded discovery check, not a novelty audit: **0 of 6 newly
+consulted sources were read at full text**.  It found no direct statement of either spike, but that
+is not an absence-of-prior-work conclusion.  It did find close work that materially narrows C437
+and supplies a better prior-art substrate for C438.  The two spikes remain sensible, with the
+following boundaries.
+
+- **C437 / G7 -> G1: proceed only with the narrowed claim above.**  Kemper--Lopatin--Reimers
+  already study all-orbit separating invariants over finite fields, including permutation-group
+  examples.  Reimers--Sezer already obtain mostly degree-at-most-three generic separating
+  invariants for modular cyclic modules, together with one degree-`p` invariant.  Two 2026
+  projected-MRA papers also make third-moment recovery after an orientation-losing projection
+  direct prior art.  None of these sources, at the depths read, gives the H3 signed-half residual
+  list, its `2 -> 1` drop, or preservation by a mixed finite-field Hecke incidence map.  Thus
+  “finite characteristic” and “projection preserves cubic recovery” are pre-empted umbrellas; the
+  exact all-orbit list profile plus modular-module and Hecke mechanism is the remaining seam.
+- **G7 terminology: use “first nonzero odd invariant” carefully.**  Misawa--Munemasa--Sawa study
+  spherical designs with prescribed odd harmonic indices and antipodality.  Their abstract does
+  not address signed halves in the perfect-matching scheme or cubic orientation recovery, but it
+  makes raw odd-moment/antipodality language prior art rather than a contribution.
+- **C438 / G3: proceed, but consume octad pictures rather than rebuilding them.**  Van Bommel et
+  al. construct coordinate-invariant Cayley-octad pictures from degeneration data, an explicit map
+  from those decorated pictures to stable-reduction types, and a compatible `Sp(6,2)`/Cremona
+  action proved for a single building block and conjectured generally.  This is close structural
+  prior art for a marked obstruction transform on the q=9 side.  It does not connect Cayley octads
+  to q=11 conic matching-decorated deep holes or provide the cross-field commuting square.  C438
+  should therefore import the octad-picture invariant as the q=9 obstruction object and reserve
+  its claim for the category-correct q=9/q=11 bridge and shared involutivity/discriminant law.
+- **Ranking effect:** no reranking is justified by this shallow pass.  C438 gains external
+  structural support but loses any claim to inventing the q=9 decorated obstruction map; C437
+  remains sharper and riskier because its defensible contribution is now representation-specific.
+
+### Sources consulted in this check
+
+| Source | Read depth and access | Effect on the spikes |
+|:---|:---|:---|
+| Gregor Kemper, Artem Lopatin, and Fabian Reimers, *Separating invariants over finite fields*, DOI `10.1016/j.jpaa.2021.106904`, arXiv:2011.07408 | **partial**: publisher preview abstract and Introduction, including the all-orbit definition, general finite-field construction, and permutation-group scope.  The PDF was not cached (`litcache get arXiv:2011.07408`: not cached). | Direct boundary for “finite-field/all-orbit separating invariants”; does not settle low-degree H3 residual lists. |
+| Fabian Reimers and Müfit Sezer, *Generic separation for modular invariants*, arXiv:2505.20895; published DOI `10.1016/j.laa.2026.06.018` | **partial**: official arXiv abstract/metadata and publisher-preview Introduction/main-result summary; published full text not accessed.  The PDF was not cached (`litcache get arXiv:2505.20895`: not cached). | Direct boundary for modular generic low-degree separation; the degree-`p` invariant also warns that cubic data need not suffice throughout a modular module. |
+| Amnon Balanov, Josh Katz, Tamir Bendory, and Dan Edidin, *Projected multi-reference alignment*, arXiv:2605.25533v1 | **abstract/metadata only**, official arXiv abstract, version dated 25 May 2026.  The PDF was not cached. | First three projected moments recover a generic dihedral orbit even though the projection discards orientation; close real/generic projection prior art for C437. |
+| Tait Weicht and Alexander S. Wein, *Beyond Frequency Marching: Orbit Recovery in Dihedral and Projected Multireference Alignment*, arXiv:2606.11701v1 | **abstract/metadata only**, official arXiv abstract, version dated 10 June 2026.  The PDF was not cached. | Adds an algorithmic third-moment boundary for projected and dihedral recovery; its guarantee is generic, power-of-two, and conditional on symbolic ranks. |
+| Ryutaro Misawa, Akihiro Munemasa, and Masanori Sawa, *Antipodality of spherical designs with odd harmonic indices*, arXiv:2410.09471v6 | **abstract/metadata only**, official arXiv abstract, revision dated 5 January 2026.  The PDF was not cached. | Bounds generic odd-harmonic/antipodality language around G7, without addressing matching-scheme signed halves. |
+| Raymond van Bommel, Jordan Docking, Vladimir Dokchitser, Reynald Lercier, and Elisa Lorenzo García, *Reduction of Plane Quartics and Cayley Octads*, arXiv:2309.17381 / DOI `10.1007/s10208-025-09704-y` | **partial**: cached preprint Introduction and Section 1.2 (`Octad Pictures as Invariants`), checked against the publisher HTML for the version-of-record metadata.  Cache key `arXiv:2309.17381`, SHA-256 `1ca4b91e0e9daf15527ee922f90a2754d9a7a087f4873a35fc62826f6b12d925`. | Strong prior-art template for an intrinsic decorated obstruction map and commuting group action on the q=9 side; no q=11/MDS bridge. |
+
+### Search coverage and limits
+
+The load-bearing discovery queries were the following exact web searches, screened over returned
+titles and snippets/abstracts: `finite field orbit recovery invariant moments modular
+representation cubic moments`; `oriented spherical design odd moments signed design trade
+invariant tensors`; `MDS codes deep holes decorated transform discriminant Cayley octad
+bitangents`; `association schemes perfect matchings signed designs odd degree harmonic`; `orbit
+recovery finite fields moments invariants`; `Cayley octad discriminant transform bitangents net of
+quadrics`; `modular invariant theory separating invariants finite groups degree bounds finite
+fields`; and the exact phrases `"decorated transform" "MDS" code`, `"deep-hole transform"
+coding theory`, and `"Hecke" "orbit recovery" moments`.  The search provider exposed no stable
+total-result counts, so these results are not an exhaustively screened set.
+
+No forward citations were enumerated.  MathSciNet, zbMATH, Google Scholar, and citation-graph
+closure were not covered.  The five uncached arXiv sources require full-text reading before
+theorem-level positioning; C438 additionally needs a
+claim-specific search connecting deep holes/MDS extension to discriminants, Cremona actions, and
+Cayley-octad pictures.  These gaps license no priority wording.
