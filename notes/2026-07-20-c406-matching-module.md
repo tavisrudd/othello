@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Verdict:** `GREEN EXACT THEOREM; LINEAR MEMORY DIES, CUBIC MOMENT RECOVERS THE B3/H3 SHEETS; PRIORITY OPEN`
+**Verdict:** `GREEN EXACT THEOREM; SHARP CUBIC ORIENTATION CHARACTER AND DEPTH--FOURIER SHEET BRIDGE; UNIQUENESS AND FIRST HESSIAN SPLITTING FAIL; PRIORITY OPEN`
 
 ## The theorem
 
@@ -84,8 +84,133 @@ the **unordered** B3/H3 sheet pair, and the nonzero cubic tensor carries its out
 
 This is the route around the failed linear test.  The classical one-factorizations are not being
 renamed as new: the new mechanism is that C403's conic-ideal quotient turns them into a common
-harmonic image, loses their sign through degree two, and recovers their exact two-sheet partition
-at cubic order.
+harmonic image, recovers their unordered two-sheet partition by the balanced degree-two condition,
+and has its first nonzero signed orientation carrier at cubic order.
+
+## Reopened cubic-classification addendum
+
+The signed moment has a sharp group-theoretic interpretation.  For `G=PGL_2(q)` and
+`G^+=PSL_2(q)`, in both B3 and H3,
+
+```text
+Stab_G(mu_3)=G^+,                 Stab_G(F_q mu_3)=G.
+```
+
+Indeed `mu_3` is nonzero, every element of `G^+` fixes it, and every element of the outer coset
+negates it.  Thus the tensor realizes the determinant-square character and its projective line is
+an unoriented orientation form.  These stabilizers are inside the conic stabilizer `G`; no claim
+is made about the full linear stabilizer in `GL(W)`.
+
+The cubic degree is also minimal in the precise moment sense.  If `epsilon` is the sheet sign and
+`Phi_M=(P_M-P_0)/Q`, then
+
+```text
+sum epsilon(M) Phi_M                         = 0,
+sum epsilon(M) Phi_M^(symmetric 2)           = 0,
+sum epsilon(M) Phi_M^(symmetric 3)           = mu_3 != 0.
+```
+
+Consequently no signed power-sum statistic of degree one or two or any linear functional thereof
+orients the sheets, while degree three does.  This is not a claim about every conceivable
+nonlinear statistic.  The low moments nevertheless recover the **unordered** pair: the exhaustive
+balanced-half theorem says that the two sheets are the only complementary halves with equal first
+and second moments.  The cubic supplies the sign exchanged when those two halves are swapped.
+
+These moment equalities give explicit plane syzygies before conic restriction.  Since each sheet
+has `q=0` members in `F_q`, expansion of `P_M=P_0+Q Phi_M` gives
+
+```text
+sum_(M in F_+) P_M = sum_(M in F_-) P_M,
+sum_(M in F_+) P_M^(symmetric 2) = sum_(M in F_-) P_M^(symmetric 2),
+sum_M epsilon(M) P_M^(symmetric 3) = Q^(symmetric 3) mu_3 != 0.
+```
+
+The first identity is an equality between `q+q` secant-product factorizations as ternary forms;
+the second lies in the symmetric square of that form space (and hence also yields equality after
+ordinary polynomial multiplication).  The third records the first surviving tensor syzygy.
+
+The A3 exception has one uniform index-two explanation.  Restriction of a transitive `G/H` action
+to `G^+` splits into two orbits exactly when `H` lies in `G^+`.  The B3 `S4` and H3 `A5` parents
+do lie in `PSL_2(7)` and `PSL_2(11)`, producing `7+7` and `11+11`.  The A3 `S4` parent cannot lie
+in `PSL_2(5) ~= A5` (already its order 24 does not divide 60), so its five markers remain one
+`PSL_2(5)` orbit.
+
+Two attractive stronger claims fail exactly:
+
+1. The space of `PSL_2(q)`-fixed, outer-odd tensors in `Sym^3(W)` has dimension **three** in both
+   B3 and H3 (`Sym^3(W)` has dimensions 56 and 220).  Hence `mu_3` is not the unique relative
+   invariant.  Even requiring contraction along the unique parent-fixed covector to be proportional
+   to the canonical second moment leaves a two-dimensional solution space.
+2. That contraction does not recover the parent-module summands.  The second-moment form and the
+   contracted cubic have the same one-dimensional radical and ranks `5/5` in B3 and `9/9` in H3;
+   in the frozen normalization the contraction is respectively `3` and `8` times the second
+   moment.  It therefore does not split H3's `4+5` quotient.  The cubic's first flattening still
+   has full rank `6/10`, so this is a failure of the proposed eigensplitting, not degeneracy of the
+   cubic itself.
+
+The cheapest singular-locus recovery also fails: in the frozen affine gauge none of the nonzero
+`14/22` quotient vectors is singular for the cubic; the sole zero vector is the chosen base and is
+not a projective point.  More fundamentally, changing the base translates all quotient vectors
+while leaving `mu_3` unchanged because the lower signed moments vanish, so an intrinsic
+point-recovery claim needs a translation-invariant singular scheme, not this naive comparison.
+
+No **linear cubic-to-C378 intertwiner** follows from the shared dimension four.  C378's odd sector
+is a four-dimensional subspace of the scalar-`A4` common-refinement relation algebra, whereas the
+H3 summand is a geometric nontrivial `A5` module.  There is also a central-character obstruction:
+quartic evaluation has scalar weight four, while the ordinary scalar-line relation algebra has
+trivial scalar weight, so every scalar-equivariant linear map between these objects is zero.
+
+The portfolio nevertheless supplies a different, exact bridge.  Let `R_0,...,R_15` be C378's
+projective scalar-`A4` common-refinement relations, with oriented `J`-pairs
+
+```text
+(R_1,R_10), (R_3,R_13), (R_6,R_14), (R_9,R_11).
+```
+
+For the original degree-six secant product `P_M`, not the base-dependent quartic quotient, define
+
+```text
+D(M)_i = # {projective x in R_left(i) : P_M(x)=0}
+         - # {projective x in R_right(i) : P_M(x)=0}.
+```
+
+Zero evaluation is projectively well-defined and removes the scalar-weight obstruction.  Exact
+calculation gives six profiles:
+
+```text
+sheet +:  (-6,0,12,-12) [1],  (-3,3,0,3) [4],  (3,-2,-2,0) [6],
+sheet -:   (6,0,-12,12) [1],   (3,-3,0,-3) [4], (-3,2,2,0) [6].
+```
+
+The bracketed numbers are fibre sizes.  These six fibres are exactly the scalar-`A4` orbits on the
+22 matchings.  Hence `D` recovers the sheet and the common-refinement matching orbit, though not an
+individual matching, and
+
+```text
+D(JM) = -D(M)
+```
+
+for every matching.  Since these four coordinates are C378's oriented odd-relation coordinates,
+its certified matrix `M_odd` gives the commutative outer-sign consequence
+
+```text
+M_odd D(JM) = -M_odd D(M).
+```
+
+This is a genuine explicit factorization-depth map into the Fourier-stable odd sector.  It is not
+an isomorphism from the cubic tensor, and `M_odd` does not permute the six raw profile vectors.
+
+The resulting information lattice is therefore exact but decorated, with one new intermediate
+common-refinement level:
+
+```text
+22 matchings  ->  6 scalar-A4 depth profiles  ->  2 PSL_2 sheets  ->  1 undecorated conic.
+```
+
+The balanced first/second moments recover the middle level from the full factorization-point
+configuration; the cubic line is its orientation form.  Adding one recovered matching invokes
+C379 and recovers the individual H3 parent.  None of this makes the cubic an invariant of the bare
+GRS child.
 
 ## Proof and exact finite obligations
 
@@ -111,6 +236,23 @@ degrees one and two and a nonzero cubic.  A meet-in-the-middle exhaustion of all
 uses the concatenated degree-one and degree-two coordinates; it finds exactly two solutions in
 each type and checks that they are the frozen `PSL_2(q)` sheets.  This exhaustive uniqueness is
 the reconstruction clause.
+
+The reopened checker derives the affine linear action on the rank-`6/10` image directly from the
+permuted quotient-point configuration.  Three certified generators generate each full `PSL_2(q)`;
+adjoining one outer element gives the fixed/anti-fixed equations on the 56- and 220-dimensional
+symmetric cubes.  Exact row reduction gives relative-invariant dimension three and verifies that
+the signed cubic lies in it.  The parent-fixed covector, second-moment matrix, cubic contraction,
+flattening, proportional-contraction space, and gradients at every quotient vector are then
+computed exactly.  The independent replay reconstructs these matrices without importing the
+primary implementation.
+
+For the depth--Fourier bridge, the primary checker fits and verifies the exact projectivity from
+the standard secant-product conic to C378's reduced H3 coordinates, reconstructs the sixteen
+scalar-`A4` relations, evaluates all 22 plane products on their projective lines, and compares the
+six depth-profile fibres with the independently computed `A4` matching orbits.  It verifies `J`
+negation before and after the frozen odd Fourier matrix.  The replay rebuilds the H3 conic,
+projectivity, two `A5` groups, common `A4`, relation pairs, all depth profiles, and all matching
+orbits from the independent C378 root/reflection implementation.
 
 The full frozen matching-orbit rank census supplies a falsifier.  A3's other orbit also has rank
 three.  In B3 the four orbit ranks are `6,5,5,6`.  In H3 the 31 frozen orbits have ranks among
@@ -187,22 +329,26 @@ python3 notes/2026-07-20-c406-matching-module.py --write
 The primary checker consumes but does not regenerate Gate 1's frozen JSON.  It reconstructs each
 target orbit from the frozen base matching, computes every quotient polynomial, fixed character,
 central-idempotent decomposition, harmonic/radial equality, complete frozen-orbit rank census,
-sheet moment, and equal-half reconstruction.  The independent replay imports neither the primary
+sheet moment, equal-half reconstruction, relative-invariant space, polarization tests, and the
+depth--Fourier bridge.  The
+independent replay imports neither the primary
 checker nor C399/C379 code.  From the frozen endpoints and base matchings it independently rebuilds
 `PGL_2/PSL_2`, the matching stabilizer, quotient ranks, conic Laplacian, moment vanishing/nonvanishing,
-and the exact two-solution reconstruction.
+the exact two-solution reconstruction, the induced symmetric-cube action, the polarization
+matrices, and the independent C378 scalar-`A4` relation model.
 
 The trusted boundary is exact Python prime-field arithmetic, the frozen Gate-1 conventions, and
 standard unique factorization, Maschke, character-idempotent, and harmonic decomposition facts.  The
-bundle proves the three finite module statements and the B3/H3 cubic reconstruction.  It does not
-prove an all-field theorem, identify the cubic tensor with C378's four-dimensional Fourier sector,
-or establish literature priority.
+bundle proves the three finite module statements, B3/H3 cubic orientation character, bounded
+uniqueness/polarization/singular-point negatives, and the H3 depth--Fourier sheet bridge.  It does
+not classify the full cubic singular scheme, prove an all-field theorem, identify the cubic tensor
+linearly with C378's four-dimensional Fourier sector, or establish literature priority.
 
 | load-bearing artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker | 26,514 | `4337c7b29c9916903d52c74e5036369f03f64d3d4cdc8ab1e4588fe76fc8c365` |
-| independent replay | 10,312 | `d0198315709dfd0a64afd99ec1a4e7076f459a2c24caa145e1a83f2fba6798ba` |
-| canonical JSON | 15,208 | `ea834aba8f4b7a42108a25ec9d1731e63972b16558a2d7431c0404a9f18be545` |
+| primary checker | 45,928 | `5aa173195b91fada0592523852606c02e6fa8083a9c7e11c7e7479b731518307` |
+| independent replay | 27,448 | `dedf424a012071ff8dfe9c8142b9486a5b45379303d1a3cc268b3ec5ac10295e` |
+| canonical JSON | 20,547 | `39949eed9e53b414aac1a93e918c78683db067e572952bb51c286921967d8dd0` |
 
 ## Gate and manuscript disposition
 
@@ -217,8 +363,9 @@ The paper-facing replacement is one concise section, not another anthology claus
 ```text
 canonical Frobenius secant products
   -> conic-ideal harmonic quotient
-  -> linear/quadratic sheet forgetting
-  -> cubic recovery of the B3/H3 one-factorization sheets
+  -> balanced quadratic recovery of the unordered sheets
+  -> cubic orientation character of the B3/H3 sheets
+  -> H3 scalar-A4 depth profiles in C378's odd Fourier sector
   -> H3 matching-decorated recovery of the Clebsch parent.
 ```
 
@@ -226,5 +373,6 @@ The last arrow consumes C379 and is specific to H3: the recovered sheet is an el
 while an individual parent still requires its matching.  No manuscript file is edited here.  A Lean
 exit should formalize the generic quotient, Laplacian decomposition, lower-moment base-point
 independence, and cubic-sign implication, with the finite ranks and uniqueness counts exposed as
-checked certificate leaves.  A direct C378 Fourier identification remains unproved and must not be
-inferred from the outer sign alone.
+checked certificate leaves.  The explicit H3 depth map is available, but a linear identification
+of the cubic tensor with C378's Fourier sector remains obstructed and must not be inferred from the
+outer sign alone.

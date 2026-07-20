@@ -12,11 +12,12 @@ import json
 from pathlib import Path
 
 
-SCHEMA = "c406-matching-module-v1"
+SCHEMA = "c406-matching-module-v2"
 HERE = Path(__file__).resolve().parent
 OUTPUT = Path(__file__).with_suffix(".json")
 SCOUT_PATH = HERE / "2026-07-20-c406-matching-orbit-scout.json"
 C399_PATH = HERE / "2026-07-20-c399-coxeter-number-conic-phase.py"
+C378_PATH = HERE / "2026-07-19-c378-clebsch-common-duality.py"
 
 
 def load_module(name: str, path: Path):
@@ -28,6 +29,7 @@ def load_module(name: str, path: Path):
 
 
 C399 = load_module("c406_gate2_c399", C399_PATH)
+C378 = load_module("c406_gate3_c378", C378_PATH)
 
 
 def compose(left, right):
@@ -377,6 +379,59 @@ def transpose(columns):
     return [list(row) for row in zip(*columns)] if columns else []
 
 
+def matrix_inverse(matrix, prime):
+    size = len(matrix)
+    augmented = [
+        list(row) + [1 if row_index == column_index else 0 for column_index in range(size)]
+        for row_index, row in enumerate(matrix)
+    ]
+    reduced, pivots = rref(augmented, prime)
+    assert pivots[:size] == list(range(size))
+    return [row[size:] for row in reduced]
+
+
+def matrix_product(left, right, prime):
+    return [
+        [sum(a * b for a, b in zip(row, column)) % prime for column in zip(*right)]
+        for row in left
+    ]
+
+
+def matrix_vector(matrix, vector, prime):
+    return [sum(a * b for a, b in zip(row, vector)) % prime for row in matrix]
+
+
+def permutation_generators(group):
+    identity = tuple(range(len(next(iter(group)))))
+    generators = []
+    generated = {identity}
+    for element in sorted(group):
+        if element not in generated:
+            generators.append(element)
+            generated = C399.generated_permutation_group(generators)
+        if generated == group:
+            break
+    assert generated == group
+    return generators
+
+
+def symmetric_cube_action(matrix, prime):
+    dimension = len(matrix)
+    basis = list(itertools.combinations_with_replacement(range(dimension), 3))
+    basis_index = {indices: index for index, indices in enumerate(basis)}
+    action = [[0] * len(basis) for _ in basis]
+    for row, (i, j, k) in enumerate(basis):
+        for left in range(dimension):
+            for middle in range(dimension):
+                for right in range(dimension):
+                    column = basis_index[tuple(sorted((left, middle, right)))]
+                    action[row][column] = (
+                        action[row][column]
+                        + matrix[i][left] * matrix[j][middle] * matrix[k][right]
+                    ) % prime
+    return action
+
+
 def constituent_multiplicities(subspace_columns, tables, group_actions, prime):
     result = {}
     for character_name, values in tables.items():
@@ -407,8 +462,10 @@ def type_certificate(record):
     base_product = matching_product(base_matching, endpoints, prime)
     degree = (prime + 1) // 2
     quotient_vectors = []
+    orbit_products = []
     for matching in orbit:
         product = matching_product(matching, endpoints, prime)
+        orbit_products.append(product)
         difference = {
             exponent: (product.get(exponent, 0) - base_product.get(exponent, 0)) % prime
             for exponent in set(product) | set(base_product)
@@ -480,15 +537,19 @@ def type_certificate(record):
     }
     assert all(value > 0 for value in image_decomposition.values())
 
+    psl_orbits = []
+    unseen_psl = set(orbit)
+    while unseen_psl:
+        representative = min(unseen_psl)
+        psl_orbit = {matching_image(element, representative) for element in psl_group}
+        unseen_psl -= psl_orbit
+        psl_orbits.append(psl_orbit)
+    parent_is_subgroup_of_psl = parent_group <= psl_group
+    assert (len(psl_orbits) == 2) == parent_is_subgroup_of_psl
+
     sheet_sign = None
     if name in ("B3", "H3"):
-        unseen = set(orbit)
-        sheets = []
-        while unseen:
-            representative = min(unseen)
-            sheet = {matching_image(element, representative) for element in psl_group}
-            unseen -= sheet
-            sheets.append(sheet)
+        sheets = psl_orbits
         assert len(sheets) == 2 and len(sheets[0]) == len(sheets[1]) == prime
         sign_vector = [1 if matching in sheets[0] else -1 % prime for matching in orbit]
         sign_image = [
@@ -506,6 +567,39 @@ def type_certificate(record):
         reduced_vectors = [
             [vector[index] for index in coordinate_pivots] for vector in quotient_vectors
         ]
+        _point_reduced, point_basis_indices = rref(transpose(reduced_vectors), prime)
+        assert len(point_basis_indices) == image_rank
+        point_basis_matrix = transpose(
+            [reduced_vectors[index] for index in point_basis_indices]
+        )
+        point_basis_inverse = matrix_inverse(point_basis_matrix, prime)
+        base_index = orbit_index[base_matching]
+
+        def induced_action(element):
+            action = action_permutation(element, orbit, orbit_index)
+            moved_base = action[base_index]
+            target_basis = transpose(
+                [
+                    [
+                        (reduced_vectors[action[index]][coordinate] - reduced_vectors[moved_base][coordinate])
+                        % prime
+                        for coordinate in range(image_rank)
+                    ]
+                    for index in point_basis_indices
+                ]
+            )
+            matrix = matrix_product(target_basis, point_basis_inverse, prime)
+            assert all(
+                matrix_vector(matrix, reduced_vectors[index], prime)
+                == [
+                    (reduced_vectors[action[index]][coordinate] - reduced_vectors[moved_base][coordinate])
+                    % prime
+                    for coordinate in range(image_rank)
+                ]
+                for index in range(len(orbit))
+            )
+            return matrix
+
         degree_two_features = [
             vector + symmetric_power(vector, 2, prime) for vector in reduced_vectors
         ]
@@ -515,6 +609,7 @@ def type_certificate(record):
         assert recovered_sheets == certified_sheets
         signed_moments = []
         first_nonzero_moment_degree = None
+        cubic_moment = None
         for moment_degree in range(1, 9):
             moment = None
             for coefficient, vector in zip(sign_vector, reduced_vectors):
@@ -536,9 +631,137 @@ def type_certificate(record):
                     "sha256": hashlib.sha256(bytes(moment)).hexdigest(),
                 }
             )
+            if moment_degree == 3:
+                cubic_moment = moment
             if nonzero:
                 first_nonzero_moment_degree = moment_degree
                 break
+        assert cubic_moment is not None and any(cubic_moment)
+
+        psl_generators = permutation_generators(psl_group)
+        outer_element = min(full_group - psl_group)
+        relative_actions = [
+            symmetric_cube_action(induced_action(element), prime)
+            for element in psl_generators + [outer_element]
+        ]
+        symmetric_cube_dimension = len(relative_actions[0])
+        relative_equations = []
+        for action_index, action in enumerate(relative_actions):
+            eigenvalue = 1 if action_index < len(psl_generators) else -1 % prime
+            relative_equations.extend(
+                [
+                    [
+                        (action[row][column] - (eigenvalue if row == column else 0)) % prime
+                        for column in range(symmetric_cube_dimension)
+                    ]
+                    for row in range(symmetric_cube_dimension)
+                ]
+            )
+        outer_odd_basis = nullspace(relative_equations, prime)
+        assert all(
+            sum(row[column] * cubic_moment[column] for column in range(len(cubic_moment))) % prime == 0
+            for row in relative_equations
+        )
+
+        parent_generators = permutation_generators(parent_group)
+        parent_actions = [induced_action(element) for element in parent_generators]
+        invariant_covector_equations = []
+        for action in parent_actions:
+            invariant_covector_equations.extend(
+                [
+                    [
+                        (action[column][row] - (1 if row == column else 0)) % prime
+                        for column in range(image_rank)
+                    ]
+                    for row in range(image_rank)
+                ]
+            )
+        invariant_covectors = nullspace(invariant_covector_equations, prime)
+        assert len(invariant_covectors) == 1
+        invariant_covector = invariant_covectors[0]
+        cube_basis = list(itertools.combinations_with_replacement(range(image_rank), 3))
+
+        def contract_cubic(cubic):
+            cubic_by_index = dict(zip(cube_basis, cubic))
+            return [
+                [
+                    sum(
+                        cubic_by_index[tuple(sorted((row, column, index)))]
+                        * invariant_covector[index]
+                        for index in range(image_rank)
+                    )
+                    % prime
+                    for column in range(image_rank)
+                ]
+                for row in range(image_rank)
+            ]
+
+        cubic_by_index = dict(zip(cube_basis, cubic_moment))
+        second_moment_matrix = [
+            [
+                sum(vector[row] * vector[column] for vector in reduced_vectors) % prime
+                for column in range(image_rank)
+            ]
+            for row in range(image_rank)
+        ]
+        contracted_matrix = contract_cubic(cubic_moment)
+        second_rank = rank(second_moment_matrix, prime)
+        contracted_rank = rank(contracted_matrix, prime)
+        assert second_rank == contracted_rank == image_rank - 1
+        second_radical = nullspace(second_moment_matrix, prime)
+        contracted_radical = nullspace(contracted_matrix, prime)
+        assert len(second_radical) == len(contracted_radical) == 1
+        assert column_rank(second_radical + contracted_radical, prime) == 1
+        contraction_scalar = next(
+            contracted_matrix[row][column] * pow(second_moment_matrix[row][column], -1, prime) % prime
+            for row in range(image_rank)
+            for column in range(image_rank)
+            if second_moment_matrix[row][column]
+        )
+        assert contracted_matrix == [
+            [contraction_scalar * value % prime for value in row]
+            for row in second_moment_matrix
+        ]
+
+        relative_contractions = [contract_cubic(cubic) for cubic in outer_odd_basis]
+        proportional_equations = [
+            [
+                *[
+                    relative_contractions[index][row][column]
+                    for index in range(len(outer_odd_basis))
+                ],
+                -second_moment_matrix[row][column] % prime,
+            ]
+            for row in range(image_rank)
+            for column in range(row, image_rank)
+        ]
+        proportional_solution_dimension = len(nullspace(proportional_equations, prime))
+
+        flattening = [
+            [cubic_by_index[tuple(sorted((row, column, index)))] for index in range(image_rank)]
+            for row in range(image_rank)
+            for column in range(row, image_rank)
+        ]
+        singular_nonzero_quotient_points = []
+        zero_quotient_vector_count = 0
+        for point_index, vector in enumerate(reduced_vectors):
+            if not any(vector):
+                zero_quotient_vector_count += 1
+                continue
+            gradient = [
+                sum(
+                    cubic_by_index[tuple(sorted((row, left, right)))]
+                    * vector[left]
+                    * vector[right]
+                    for left in range(image_rank)
+                    for right in range(image_rank)
+                )
+                % prime
+                for row in range(image_rank)
+            ]
+            if not any(gradient):
+                singular_nonzero_quotient_points.append(point_index)
+
         sheet_sign = {
             "image_is_zero": not any(sign_image),
             "image_vector": sign_image,
@@ -549,7 +772,221 @@ def type_certificate(record):
             and all(not record["nonzero"] for record in signed_moments[:-1]),
             "equal_halves_with_vanishing_moments_through_degree_2": len(balanced_solutions),
             "vanishing_moment_halves_are_exactly_the_psl_sheets": True,
+            "minimal_nonzero_signed_moment_degree": 3,
+            "plane_secant_product_tensor_syzygies_vanish_through_degree_2": True,
+            "cubic_relative_invariant": {
+                "ambient_symmetric_cube_dimension": symmetric_cube_dimension,
+                "psl_generator_count": len(psl_generators),
+                "psl_fixed_outer_odd_dimension": len(outer_odd_basis),
+                "signed_cubic_lies_in_relative_invariant_space": True,
+                "signed_cubic_is_unique_relative_invariant": len(outer_odd_basis) == 1,
+                "tensor_stabilizer_order": len(psl_group),
+                "tensor_projective_line_stabilizer_order": len(full_group),
+            },
+            "polarization": {
+                "parent_generator_count": len(parent_generators),
+                "parent_fixed_covector_dimension": len(invariant_covectors),
+                "second_moment_rank": second_rank,
+                "invariant_covector_contraction_rank": contracted_rank,
+                "common_radical_dimension": len(second_radical),
+                "contraction_is_scalar_second_moment": True,
+                "contraction_scalar": contraction_scalar,
+                "proportional_contraction_solution_dimension": proportional_solution_dimension,
+                "cubic_first_flattening_rank": rank(flattening, prime),
+                "nonzero_quotient_points_singular_in_frozen_gauge": singular_nonzero_quotient_points,
+                "zero_quotient_vector_count": zero_quotient_vector_count,
+            },
         }
+
+        if name == "H3":
+            c341 = C378.load_c341()
+            plus_group, labels, plus_relations = C378.scheme(c341, 8)
+            minus_group, minus_labels, minus_relations = C378.scheme(c341, 4)
+            assert labels == minus_labels
+            intersection_group = plus_group & minus_group
+            assert len(intersection_group) == 12
+            common_relations = C378.orbits(
+                c341, C378.linear_group(intersection_group), c341.all_vectors(prime)
+            )
+            common_metadata = []
+            for relation in common_relations:
+                plus_index = next(
+                    index for index, target in enumerate(plus_relations) if relation <= target
+                )
+                minus_index = next(
+                    index for index, target in enumerate(minus_relations) if relation <= target
+                )
+                common_metadata.append((plus_index, minus_index, min(relation), relation))
+            common_metadata.sort(key=lambda item: item[:3])
+            common_relations = [item[3] for item in common_metadata]
+            j_relation_permutation = []
+            for relation in common_relations:
+                image = {c341.mat_vec(C378.J, vector, prime) for vector in relation}
+                j_relation_permutation.append(
+                    next(index for index, target in enumerate(common_relations) if image == target)
+                )
+            odd_pairs = [
+                (index, image)
+                for index, image in enumerate(j_relation_permutation)
+                if index < image
+            ]
+            assert odd_pairs == [(1, 10), (3, 13), (6, 14), (9, 11)]
+
+            projectivity_rows = []
+            for point_index, (point, (left, right)) in enumerate(zip(conic[:5], endpoints[:5])):
+                standard_point = (
+                    left * left % prime,
+                    left * right % prime,
+                    right * right % prime,
+                )
+                for output_coordinate in range(3):
+                    row = [0] * 14
+                    for input_coordinate in range(3):
+                        row[3 * output_coordinate + input_coordinate] = standard_point[input_coordinate]
+                    row[9 + point_index] = -point[output_coordinate] % prime
+                    projectivity_rows.append(row)
+            projectivity_solutions = nullspace(projectivity_rows, prime)
+            assert len(projectivity_solutions) == 1
+            standard_to_h3 = [
+                projectivity_solutions[0][3 * row : 3 * row + 3] for row in range(3)
+            ]
+            h3_to_standard = matrix_inverse(standard_to_h3, prime)
+            assert all(
+                C399.normalize_mod(
+                    matrix_vector(
+                        standard_to_h3,
+                        (left * left % prime, left * right % prime, right * right % prime),
+                        prime,
+                    ),
+                    prime,
+                )
+                == point
+                for point, (left, right) in zip(conic, endpoints)
+            )
+
+            projective_relations = [
+                sorted(
+                    {
+                        c341.normalize(vector, prime)
+                        for vector in relation
+                        if vector != (0, 0, 0)
+                    }
+                )
+                for relation in common_relations
+            ]
+
+            def product_vanishes(product, point):
+                standard_point = matrix_vector(h3_to_standard, point, prime)
+                return (
+                    sum(
+                        coefficient
+                        * pow(standard_point[0], exponent[0], prime)
+                        * pow(standard_point[1], exponent[1], prime)
+                        * pow(standard_point[2], exponent[2], prime)
+                        for exponent, coefficient in product.items()
+                    )
+                    % prime
+                    == 0
+                )
+
+            depth_profiles = []
+            for product in orbit_products:
+                zero_counts = [
+                    sum(product_vanishes(product, point) for point in relation)
+                    for relation in projective_relations
+                ]
+                depth_profiles.append(
+                    tuple(zero_counts[left] - zero_counts[right] for left, right in odd_pairs)
+                )
+
+            conic_index = {point: index for index, point in enumerate(conic)}
+            j_point_permutation = tuple(
+                conic_index[
+                    C399.normalize_mod(c341.mat_vec(C378.J, point, prime), prime)
+                ]
+                for point in conic
+            )
+            j_matching_permutation = [
+                orbit_index[matching_image(j_point_permutation, matching)] for matching in orbit
+            ]
+            assert all(
+                depth_profiles[j_matching_permutation[index]]
+                == tuple(-value for value in depth_profiles[index])
+                for index in range(len(orbit))
+            )
+
+            profile_fibres = {}
+            for index, profile in enumerate(depth_profiles):
+                profile_fibres.setdefault(profile, set()).add(index)
+            assert len(profile_fibres) == 6
+            sheet_index_by_matching = {
+                orbit_index[matching]: sheet_index
+                for sheet_index, sheet in enumerate(sheets)
+                for matching in sheet
+            }
+            assert all(
+                len({sheet_index_by_matching[index] for index in fibre}) == 1
+                for fibre in profile_fibres.values()
+            )
+
+            intersection_point_actions = []
+            for matrix in intersection_group:
+                intersection_point_actions.append(
+                    tuple(
+                        conic_index[
+                            C399.normalize_mod(c341.mat_vec(matrix, point, prime), prime)
+                        ]
+                        for point in conic
+                    )
+                )
+            intersection_matching_orbits = []
+            unseen_matchings = set(range(len(orbit)))
+            while unseen_matchings:
+                representative = min(unseen_matchings)
+                matching_orbit = {
+                    orbit_index[
+                        matching_image(point_action, orbit[representative])
+                    ]
+                    for point_action in intersection_point_actions
+                }
+                unseen_matchings -= matching_orbit
+                intersection_matching_orbits.append(matching_orbit)
+            assert {frozenset(fibre) for fibre in profile_fibres.values()} == {
+                frozenset(matching_orbit) for matching_orbit in intersection_matching_orbits
+            }
+
+            c378_certificate = C378.certificate()
+            odd_fourier_matrix = c378_certificate["odd_fourier_matrix"]
+            fourier_profiles = [
+                [sum(row[column] * profile[column] for column in range(4)) for row in odd_fourier_matrix]
+                for profile in depth_profiles
+            ]
+            assert all(
+                fourier_profiles[j_matching_permutation[index]]
+                == [-value for value in fourier_profiles[index]]
+                for index in range(len(orbit))
+            )
+            sheet_sign["c378_depth_fourier_bridge"] = {
+                "standard_to_h3_projectivity": standard_to_h3,
+                "oriented_relation_pairs": [list(pair) for pair in odd_pairs],
+                "distinct_depth_profiles": len(profile_fibres),
+                "profile_fibre_sizes": sorted(len(fibre) for fibre in profile_fibres.values()),
+                "profile_fibres_equal_scalar_a4_matching_orbits": True,
+                "j_negates_every_depth_profile": True,
+                "depth_profile_recovers_sheet": True,
+                "depth_profile_recovers_individual_matching": all(
+                    len(fibre) == 1 for fibre in profile_fibres.values()
+                ),
+                "profile_records": [
+                    {
+                        "profile": list(profile),
+                        "fibre_size": len(fibre),
+                        "sheet_index": sheet_index_by_matching[min(fibre)],
+                    }
+                    for profile, fibre in sorted(profile_fibres.items())
+                ],
+                "odd_fourier_commutes_with_outer_negation": True,
+            }
 
     orbit_rank_census = []
     for orbit_record in record["all_orbits"]:
@@ -603,6 +1040,8 @@ def type_certificate(record):
         "augmentation_module": augmentation_decomposition,
         "difference_kernel": kernel_decomposition,
         "difference_image": image_decomposition,
+        "parent_is_subgroup_of_psl": parent_is_subgroup_of_psl,
+        "psl_orbit_sizes_on_parent_markers": sorted(len(item) for item in psl_orbits),
         "image_is_full_conic_ideal_layer": image_rank == len(homogeneous_basis(quotient_degree)),
         "harmonic_dimension": len(harmonic_basis),
         "image_equals_top_harmonic_plus_radial_line": True,
@@ -619,20 +1058,24 @@ def build_certificate():
     types = [type_certificate(record) for record in scout["types"]]
     return {
         "schema": SCHEMA,
-        "verdict": "GATE_2_PASS_HARMONIC_IMAGE_GATE_3_PASS_CUBIC_SHEET_MEMORY",
+        "verdict": "GATES_2_3_PASS_CUBIC_RELATIVE_INVARIANT_UNIQUENESS_AND_HESSIAN_SPLITTING_FAIL",
         "types": types,
         "summary": {
             "uniform_harmonic_image": True,
             "linear_and_quadratic_sheet_signs_vanish": True,
             "first_nonzero_sheet_moment_degree": 3,
             "vanishing_moments_recover_b3_h3_sheets": True,
+            "outer_odd_cubic_space_dimension": 3,
+            "cubic_tensor_stabilizer_is_psl": True,
+            "parent_fixed_polarization_does_not_split_harmonic_summands": True,
+            "h3_c378_depth_profile_recovers_sheet": True,
         },
         "inputs": {
             path.name: {
                 "bytes": path.stat().st_size,
                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             }
-            for path in (SCOUT_PATH, C399_PATH)
+            for path in (SCOUT_PATH, C399_PATH, C378_PATH)
         },
     }
 

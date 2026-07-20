@@ -1,5 +1,9 @@
 {
   "inputs": {
+    "2026-07-19-c378-clebsch-common-duality.py": {
+      "bytes": 12219,
+      "sha256": "e45e71c5e87ccc334fab3b926e5189373e24485adf11ed1cbaacfc6771610bdc"
+    },
     "2026-07-20-c399-coxeter-number-conic-phase.py": {
       "bytes": 25983,
       "sha256": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275"
@@ -9,10 +13,14 @@
       "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
     }
   },
-  "schema": "c406-matching-module-v1",
+  "schema": "c406-matching-module-v2",
   "summary": {
+    "cubic_tensor_stabilizer_is_psl": true,
     "first_nonzero_sheet_moment_degree": 3,
+    "h3_c378_depth_profile_recovers_sheet": true,
     "linear_and_quadratic_sheet_signs_vanish": true,
+    "outer_odd_cubic_space_dimension": 3,
+    "parent_fixed_polarization_does_not_split_harmonic_summands": true,
     "uniform_harmonic_image": true,
     "vanishing_moments_recover_b3_h3_sheets": true
   },
@@ -122,10 +130,14 @@
       "matching_orbit_size": 5,
       "outer_sheet_sign": null,
       "parent_group_order": 24,
+      "parent_is_subgroup_of_psl": false,
       "permutation_module": {
         "1": 2,
         "3": 1
       },
+      "psl_orbit_sizes_on_parent_markers": [
+        5
+      ],
       "quotient_polynomial_degree": 1,
       "type": "A3"
     },
@@ -250,6 +262,15 @@
       "image_is_full_conic_ideal_layer": true,
       "matching_orbit_size": 14,
       "outer_sheet_sign": {
+        "cubic_relative_invariant": {
+          "ambient_symmetric_cube_dimension": 56,
+          "psl_fixed_outer_odd_dimension": 3,
+          "psl_generator_count": 3,
+          "signed_cubic_is_unique_relative_invariant": false,
+          "signed_cubic_lies_in_relative_invariant_space": true,
+          "tensor_projective_line_stabilizer_order": 336,
+          "tensor_stabilizer_order": 168
+        },
         "equal_halves_with_vanishing_moments_through_degree_2": 2,
         "first_nonzero_moment_degree": 3,
         "first_nonzero_moment_is_reference_independent": true,
@@ -262,6 +283,21 @@
           0,
           0
         ],
+        "minimal_nonzero_signed_moment_degree": 3,
+        "plane_secant_product_tensor_syzygies_vanish_through_degree_2": true,
+        "polarization": {
+          "common_radical_dimension": 1,
+          "contraction_is_scalar_second_moment": true,
+          "contraction_scalar": 3,
+          "cubic_first_flattening_rank": 6,
+          "invariant_covector_contraction_rank": 5,
+          "nonzero_quotient_points_singular_in_frozen_gauge": [],
+          "parent_fixed_covector_dimension": 1,
+          "parent_generator_count": 2,
+          "proportional_contraction_solution_dimension": 2,
+          "second_moment_rank": 5,
+          "zero_quotient_vector_count": 1
+        },
         "psl_fixed_and_outer_negated": true,
         "signed_moments_on_image_coordinates": [
           {
@@ -289,11 +325,16 @@
         "vanishing_moment_halves_are_exactly_the_psl_sheets": true
       },
       "parent_group_order": 24,
+      "parent_is_subgroup_of_psl": true,
       "permutation_module": {
         "1": 4,
         "2": 2,
         "3": 2
       },
+      "psl_orbit_sizes_on_parent_markers": [
+        7,
+        7
+      ],
       "quotient_polynomial_degree": 2,
       "type": "B3"
     },
@@ -580,6 +621,128 @@
       "image_is_full_conic_ideal_layer": false,
       "matching_orbit_size": 22,
       "outer_sheet_sign": {
+        "c378_depth_fourier_bridge": {
+          "depth_profile_recovers_individual_matching": false,
+          "depth_profile_recovers_sheet": true,
+          "distinct_depth_profiles": 6,
+          "j_negates_every_depth_profile": true,
+          "odd_fourier_commutes_with_outer_negation": true,
+          "oriented_relation_pairs": [
+            [
+              1,
+              10
+            ],
+            [
+              3,
+              13
+            ],
+            [
+              6,
+              14
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "profile_fibre_sizes": [
+            1,
+            1,
+            4,
+            4,
+            6,
+            6
+          ],
+          "profile_fibres_equal_scalar_a4_matching_orbits": true,
+          "profile_records": [
+            {
+              "fibre_size": 1,
+              "profile": [
+                -6,
+                0,
+                12,
+                -12
+              ],
+              "sheet_index": 0
+            },
+            {
+              "fibre_size": 6,
+              "profile": [
+                -3,
+                2,
+                2,
+                0
+              ],
+              "sheet_index": 1
+            },
+            {
+              "fibre_size": 4,
+              "profile": [
+                -3,
+                3,
+                0,
+                3
+              ],
+              "sheet_index": 0
+            },
+            {
+              "fibre_size": 4,
+              "profile": [
+                3,
+                -3,
+                0,
+                -3
+              ],
+              "sheet_index": 1
+            },
+            {
+              "fibre_size": 6,
+              "profile": [
+                3,
+                -2,
+                -2,
+                0
+              ],
+              "sheet_index": 0
+            },
+            {
+              "fibre_size": 1,
+              "profile": [
+                6,
+                0,
+                -12,
+                12
+              ],
+              "sheet_index": 1
+            }
+          ],
+          "standard_to_h3_projectivity": [
+            [
+              10,
+              2,
+              1
+            ],
+            [
+              1,
+              2,
+              10
+            ],
+            [
+              3,
+              0,
+              3
+            ]
+          ]
+        },
+        "cubic_relative_invariant": {
+          "ambient_symmetric_cube_dimension": 220,
+          "psl_fixed_outer_odd_dimension": 3,
+          "psl_generator_count": 3,
+          "signed_cubic_is_unique_relative_invariant": false,
+          "signed_cubic_lies_in_relative_invariant_space": true,
+          "tensor_projective_line_stabilizer_order": 1320,
+          "tensor_stabilizer_order": 660
+        },
         "equal_halves_with_vanishing_moments_through_degree_2": 2,
         "first_nonzero_moment_degree": 3,
         "first_nonzero_moment_is_reference_independent": true,
@@ -601,6 +764,21 @@
           0,
           0
         ],
+        "minimal_nonzero_signed_moment_degree": 3,
+        "plane_secant_product_tensor_syzygies_vanish_through_degree_2": true,
+        "polarization": {
+          "common_radical_dimension": 1,
+          "contraction_is_scalar_second_moment": true,
+          "contraction_scalar": 8,
+          "cubic_first_flattening_rank": 10,
+          "invariant_covector_contraction_rank": 9,
+          "nonzero_quotient_points_singular_in_frozen_gauge": [],
+          "parent_fixed_covector_dimension": 1,
+          "parent_generator_count": 3,
+          "proportional_contraction_solution_dimension": 2,
+          "second_moment_rank": 9,
+          "zero_quotient_vector_count": 1
+        },
         "psl_fixed_and_outer_negated": true,
         "signed_moments_on_image_coordinates": [
           {
@@ -628,14 +806,19 @@
         "vanishing_moment_halves_are_exactly_the_psl_sheets": true
       },
       "parent_group_order": 60,
+      "parent_is_subgroup_of_psl": true,
       "permutation_module": {
         "1": 4,
         "4": 2,
         "5": 2
       },
+      "psl_orbit_sizes_on_parent_markers": [
+        11,
+        11
+      ],
       "quotient_polynomial_degree": 4,
       "type": "H3"
     }
   ],
-  "verdict": "GATE_2_PASS_HARMONIC_IMAGE_GATE_3_PASS_CUBIC_SHEET_MEMORY"
+  "verdict": "GATES_2_3_PASS_CUBIC_RELATIVE_INVARIANT_UNIQUENESS_AND_HESSIAN_SPLITTING_FAIL"
 }
