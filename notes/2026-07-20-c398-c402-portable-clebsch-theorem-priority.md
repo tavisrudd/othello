@@ -142,11 +142,12 @@ projective-line orbit theorem pre-empts the conceptual conic ladder, so the surv
 exact scheme/code/deep-hole synthesis rather than a portable flagship.  See
 `notes/2026-07-20-c400-a5-fourier-phases.md` and its Python/JSON/checksum/Lean bundle.
 
-The free publication extraction is now integrated into the Hexagon Spine: C400 is the all-field
-arithmetic halo around the q=11 rank-eight jewel, the six conic-relation phases replace the former
-two-phase shorthand, q=59 closes the stabilizer ladder, and `q*z-ell` plus the rank-four orthogonal
-fusion form the exact downstream interface.  This packaging adds no priority claim and leaves
-all-field fusion classification and separability behind their structural gates.
+C400 supplies an optional all-field context paragraph around the q=11 rank-eight jewel: its
+six conic-relation phases, q=59 regular endpoint, `q*z-ell` character formula, and rank-four
+orthogonal fusion are reusable without reopening the theorem.  They do not replace the paper's
+two code-changing conic phases, consume a second promotion slot, or enter the main theorem spine
+without an explicit manuscript-owner scope decision.  All-field fusion classification and
+separability remain behind their structural gates.
 
 ### Target theorem
 
@@ -214,14 +215,17 @@ Infinite AME/LU families and the MDS--AME dictionary are prior art.
 C400 supplies an exact orbit-sensitive spectral substrate, but not yet an LU invariant.  Its
 rank-four orthogonal fusion is too coarse, and decoder-weight classes are not coherent.  The first
 C402 gate is therefore categorical: construct a basis-independent spectral or holonomy operator of
-the AME tensor whose party-permutation LU covariance is proved and whose spectrum retains the finer
-`C3/C5/free` orbit labels.  A Pauli-, decoder-, or chosen-syndrome-basis statistic does not pass.
+the AME tensor whose party-permutation LU covariance is proved and whose spectrum retains every
+individual scalar-`A5` relation/eigenrow in the `C3`, `C5`, and regular-orbit sectors.  Stabilizer
+type alone is not the fine datum: q=19 already has two distinct regular relations.  A Pauli-,
+decoder-, or chosen-syndrome-basis statistic does not pass.
 
 ### First pilot and stop
 
 First prove LU covariance of the fine-orbit spectral/holonomy construction above.  Then run the
-first same-field `H3` versus full-GRS-moduli falsifier at `q=19`, retaining the `C3/C5/free` data and
-using the rank-four orthogonal quotient as a deliberate negative control.  Continue to one next
+first same-field `H3` versus full-GRS-moduli falsifier at `q=19`, retaining both distinct regular
+relations separately alongside the `C3` relation, and use the rank-four orthogonal quotient as a
+deliberate negative control.  Continue to one next
 arithmetic phase only after separation survives.  Stop if LU covariance forces collapse to the
 rank-four fusion, if the statistic depends on Pauli/decoder labels, on the first invariant
 collision, any required continuous-unitary search, or an unbounded GRS-moduli census.  The resulting

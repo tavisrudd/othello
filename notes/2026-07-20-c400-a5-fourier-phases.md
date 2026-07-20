@@ -154,15 +154,16 @@ phase theorem into a constant-rank decoding algebra.  Exhausting every set parti
 and the complete small-rank fusion lattices, not a complete coherent-fusion classification for all
 larger fields.  Separability also remains open.
 
-## Publication-ready corollaries and reuse contract
+## Available corollaries and reuse contract
 
-The paper-facing form is an **arithmetic halo theorem** around the q=11 Clebsch hexagon.  The
-isolated rank-eight algebra is the q=11 member of a primitive Fourier-self-dual family with the
+The isolated rank-eight algebra is the q=11 member of a primitive Fourier-self-dual family with the
 displayed Burnside rank law, seven possible stabilizer types, and a uniform orthogonal quotient.
-This strengthens the exposition without claiming that the classical projective-line orbit ladder
-is new.
+This can support a compact contextual remark without claiming that the classical projective-line
+orbit ladder is new.  It is not automatically a second portable theorem in the Clebsch manuscript:
+C399 retains the paper's single promotion slot unless the manuscript owner explicitly changes
+scope.
 
-Four consequences can be imported without further computation:
+Four proved consequences are available for reuse:
 
 1. the six-column source code is always the `D5` relation of valency `6(q-1)`;
 2. the projective deep-hole locus is exactly the union of the `C3`, `C5`, and free relations and has
@@ -180,7 +181,9 @@ scheme.”  A candidate AME invariant must:
 
 - be defined from the tensor without choosing a Pauli frame, decoder, or syndrome basis;
 - have proved covariance under local unitaries and party permutations;
-- retain the fine `C3`, `C5`, and free-orbit data rather than factor through quadratic norm type;
+- retain every individual scalar-`A5` relation and eigenrow in the `C3`, `C5`, and regular-orbit
+  sectors rather than factor through stabilizer type or quadratic norm type; at q=19 the two
+  regular relations must remain distinct;
 - compare the q=19 `H3` state with the full same-field GRS moduli; and
 - use the rank-four orthogonal spectrum as a mandatory collapse control.
 
@@ -340,7 +343,9 @@ code interface.  No successor is allocated.
 - C372 continues to own the exact q=11 eigenmatrix and complete q=11 fusion lattice.
 - C400 adds the uniform rank/orbit/conic-role synthesis and its six-field replay, but does not take
   the portable flagship slot from C399.
-- C402 may consume the fine `C3/C5/free` orbit spectra only after proving they enter a
-  basis-independent party-permutation LU invariant of the AME tensor.  The rank-four orthogonal
-  fusion is a deliberately too-coarse control, and decoder-weight classes are not coherent; stop if
-  LU covariance collapses the fine labels or if the statistic depends on Pauli/decoder choices.
+- C402 may consume the fine orbit spectra only after proving they enter a basis-independent
+  party-permutation LU invariant of the AME tensor.  It must retain every individual relation and
+  eigenrow in the `C3`, `C5`, and regular-orbit sectors; q=19's two regular relations are not one
+  `free` label.  The rank-four orthogonal fusion is a deliberately too-coarse control, and
+  decoder-weight classes are not coherent; stop if LU covariance collapses the fine relations or
+  if the statistic depends on Pauli/decoder choices.
