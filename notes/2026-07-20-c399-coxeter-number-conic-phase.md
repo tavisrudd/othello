@@ -269,6 +269,15 @@ skeleton.  C405 remains the first rigorously field-bounded twisted-cubic deepest
 See
 `notes/2026-07-20-c403-c405-c399-successor-portfolio.md`.
 
+C406 is the later bounded manuscript-compatibility gate exposed by C403's matching kernel and
+stabilizer theorem.  It does not reopen C404's marker census: it tests whether the classical
+`5/14/22` parent markers are intrinsically the symmetry-selected factorizations of the canonical
+Frobenius zero section, whether their factorization differences carry a nontrivial conic-ideal
+module, and whether the H3 sheet sign has a genuine Fourier/reconstruction consequence.  C399
+remains the protected portable theorem unless that gate passes and a separate replacement decision
+is made; see
+`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
+
 ## Evidence and replay
 
 Run from the repository root:

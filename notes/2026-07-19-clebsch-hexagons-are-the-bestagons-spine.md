@@ -4,8 +4,10 @@
 
 **Date:** 2026-07-19
 
-**Status:** exposition blueprint updated through C399 and its completed literature audit; C399 is
-the selected portable theorem, with Edge/Dye ownership of the classical conic markers explicit
+**Status:** protected exposition baseline updated through C399 and its completed literature audit;
+C399 remains the selected portable theorem, with Edge/Dye ownership of the classical conic markers
+explicit.  C406 is a queued red-team gate for a possible factorization-memory replacement spine,
+not a selected manuscript expansion
 
 ## Governing idea
 
@@ -444,6 +446,15 @@ relation geometry.  C399 raises the paper's ceiling through the exact uniform li
 law and Coxeter-number code phase, not through discovery of those finite configurations.  C403 may
 still improve the proof interface through a reusable weighted-adjoint enumerator theorem; C405 is
 an independent companion gate rather than another section to accumulate automatically.
+
+C403's later matching-kernel and stabilizer theorems expose one bounded alternative now owned by
+C406.  At the conic phases, every perfect matching factors the same Frobenius section and the q=11
+stabilizer classes already force the rank-eight valency passport.  C406 tests whether the classical
+`5/14/22` Coxeter parents are intrinsically the symmetry-selected factorization orbits, whether
+their differences carry a nontrivial conic-ideal module, and whether the H3 sheet sign has a genuine
+Fourier or reconstruction consequence.  Until those gates and the exact Edge/Dye source boundary
+close, none of this changes the theorem above, its title, or the single-promotion rule.  See
+`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
 
 If the rank-eight fission is eventually identified with a known scheme, the paper remains strong:
 the exact arithmetic transform, self-dual error algebra, closed reconstruction cycle, and C374's

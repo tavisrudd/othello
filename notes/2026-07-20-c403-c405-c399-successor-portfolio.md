@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** C403 active; C404 closed at its literature gate; C405 is the next independent successor
+**Status:** C403 active; C404 closed at its literature gate; C406 is the next manuscript-facing
+compatibility gate, while C405 remains the next independent successor
 
 ## Significance ruling
 
@@ -100,6 +101,32 @@ exchanges, and `2r=q+1` is the sharp zero-evaluation boundary.  The next gate is
 stabilizer refinement or nonfactorized higher-degree/dual-support structure; do not reopen the
 closed factorized-support census.
 
+The stabilizer refinement has since landed positively.  It gives the exact parent-group stabilizer
+type of every projective word orbit and, at `H3/F11`, invariant polarity plus scalar lifting yields
+the seven nonzero rank-eight scheme valencies directly.  The nonfactorized dual-support layer
+remains only a hard falsifier: continue under C403 if it retains parent, matching, chirality, or
+fine-scheme data after factorization is forgotten; otherwise stop.
+
+## C406 — Coxeter factorization-memory and flagship compatibility
+
+C406 is queued as a bounded synthesis gate, not a positive successor theorem.  It tests whether
+C403's perfect-matching kernel makes the classical C399 parent fibres algebraically productive:
+
+1. identify the full perfect-matching orbits at `A3/F5`, `B3/F7`, and `H3/F11`;
+2. determine whether the `5/14/22` Coxeter parent markers are intrinsically the
+   `S4/S4/A5` symmetry-selected factorization orbits;
+3. map their augmentation modules into the appropriate conic-ideal layer and require a nontrivial
+   uniform span, kernel, decomposition, or recovery theorem;
+4. test the H3 difference of the two eleven-matching sheets against the frozen C378 signed Fourier
+   sector through explicit maps; and
+5. independently prove the low-cost C403-polarity-C372 stabilizer/valency compatibility.
+
+Edge/Dye ownership of the individual markers, counts, and relation geometry is fixed.  A bare coset
+orbit, a nonuniform A3/B3 interface, or the obvious `PGL_2/PSL_2` sign is a red/yellow stop.  Only a
+literature-surviving module, parent-inverse, or Fourier consequence can compete with C399's current
+spine, and even green requires a separate replacement decision.  See
+`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
+
 ## C404 — Coxeter parent fibres as coherent geometry
 
 ### Result
@@ -167,9 +194,11 @@ variety-valued deep-hole conjecture from one pilot.
 
 ## Priority and manuscript boundary
 
-Continue C403 first, then run C405.  C403 has the greatest chance to turn C399 into reusable
-arrangement-code theory.  C404 is closed by the Edge/Dye pre-emption and is not a live queue item.
-C405 is the high-upside falsifier for the larger variety-valued deep-hole programme.
+Continue C403 first, then run C406 before the independent C405 pilot.  C403 has already supplied
+the exact matching kernel and stabilizer theorem consumed by C406.  C406 tests whether those
+results strengthen the existing paper through one inseparable mechanism; it does not reopen C404's
+pre-empted fibre census.  C405 remains the high-upside falsifier for the separate larger
+variety-valued deep-hole programme.
 
 At most one successor enters the Clebsch grand paper, and only if it is mathematically inseparable
 from C399's proof.  Other positive outcomes are companions.  Negative outcomes remain exact

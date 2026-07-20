@@ -5,7 +5,8 @@
 **Date:** 2026-07-20
 
 **Status:** C398--C400 complete; C399 survives its full audit as the selected portable synthesis;
-C403 is active on its strongest exact line-defect/enumerator seam
+C403 is active on its strongest exact line-defect/enumerator seam; C406 is queued to test one
+factorization-memory replacement spine without consuming a second promotion slot
 
 ## Decision
 
@@ -244,3 +245,12 @@ C404 is literature-pre-empted, and C405 and later positives remain companions un
 mathematically inseparable from C399.
 The preferred paper spine remains the exact q=11 reversible hexagon, with C399 explaining its place
 in the rank-three Coxeter-number family.
+
+C406 is the one explicit exception to “later positives remain companions,” because it asks whether
+C399, C403, and C379 already contain one mathematically inseparable replacement mechanism.  The
+target is not another generalization: it is a uniform identification of the classical `5/14/22`
+Coxeter parents with symmetry-selected perfect-matching factorizations of the canonical Frobenius
+zero section, together with a nontrivial factorization-difference module or H3 Fourier/recovery
+consequence.  Red or yellow leaves this promotion rule unchanged.  Green triggers a separate
+manuscript-owner decision and must replace weaker clauses rather than add a second flagship.  See
+`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.

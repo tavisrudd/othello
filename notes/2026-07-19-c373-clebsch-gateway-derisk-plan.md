@@ -4,8 +4,9 @@
 
 **Date:** 2026-07-19
 
-**Status:** updated through C381 and the completed C374/C375 quantum gates; C382 is ready for its
-bounded marked-icosian gate
+**Status:** historical gateway derisk plan updated by the C406 flagship review; the certified core
+remains protected, C382 later closed negatively in its marked icosian category, and C406 is queued
+as a bounded factorization-memory compatibility gate with no manuscript commitment
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -79,6 +80,20 @@ quotient-character theorem, C378's `PGL_2(11)` symmetry completion and rank-16 s
 refinement, C379's reversible matching-decorated transform, C380's formal gateway seam, and C381's
 marked integral root classification.  These results may strengthen the same paper, but novelty
 wording still obeys their individual source boundaries.
+
+### Post-C403 flagship gate
+
+C399 now owns the single portable promotion slot.  C403 subsequently proved both the exact
+perfect-matching factorization kernel at the conic zero-evaluation boundary and a
+stabilizer-stratified word-orbit theorem whose q=11 scalar lifts force C372's rank-eight valencies.
+C406 is the bounded decision gate for the only resulting alternative spine: test whether the
+classical `5/14/22` Coxeter parent markers are intrinsically the symmetry-selected factorizations of
+the canonical Frobenius section, whether their differences form a nontrivial uniform conic-ideal
+module, and whether the H3 two-sheet sign has a genuine C378 Fourier or reconstruction consequence.
+It is red if this is only Edge/Dye marker geometry or orbit--stabilizer bookkeeping, yellow if it is
+an exact but nonproductive compatibility, and green only if it replaces rather than enlarges the
+current spine.  Full routing and stop rules are in
+`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
 
 ## Uniform promotion gate
 

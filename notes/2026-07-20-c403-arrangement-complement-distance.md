@@ -915,3 +915,9 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
   beyond the now-closed line-product family, with a mandatory stop if it factors through the
   standard conic/GRS matroid.  C404 is closed by the Edge/Dye fibre-geometry pre-emption; C405 is
   the next independent successor.
+- C406 owns the downstream manuscript-facing compatibility question: whether the C399
+  `5/14/22` parent markers are symmetry-selected factorizations of this report's Frobenius section,
+  whether their differences carry a nontrivial conic-ideal module, and whether the H3 sheet sign
+  has a genuine Fourier/reconstruction consequence.  C406 is a bounded gate, not a current C403
+  theorem or manuscript commitment; see
+  `notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.

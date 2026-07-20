@@ -202,3 +202,10 @@ the forbidden six-point conic, so no smooth degree-one del Pezzo can occur.  Its
 classify the weak-degree-one effective `E8` root subsystem across all 22 parents and 66 child-point
 pairs.  C382's icosian comparison remains hard-gated on a canonical marked-root invariant from
 C381; neither task is part of C380's Lean scope.
+
+C406 is the separate downstream paper-synthesis gate that may consume the frozen 22 obstruction
+matchings and their two sheets.  It tests whether these are the H3 member of a uniform
+`A3/B3/H3` family of symmetry-selected factorizations of C403's canonical Frobenius zero section,
+and whether the two-sheet difference has a nontrivial factorization-module or Fourier consequence.
+It does not reopen the classical one-factorization/biplane census or modify C379's theorem; see
+`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
