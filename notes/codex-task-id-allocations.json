@@ -260,8 +260,17 @@
       "last": 417,
       "purpose": "C406 depth-Fourier, double-coset, twisted-transform, and reconstruction successors",
       "sequence": 29
+    },
+    {
+      "count": 2,
+      "first": 418,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 419,
+      "purpose": "C410 successors: larger balanced trades and fixed-incidence moduli/kernel realizability",
+      "sequence": 30
     }
   ],
-  "next_id": 418,
+  "next_id": 420,
   "schema": "codex-task-id-allocations-v1"
 }
