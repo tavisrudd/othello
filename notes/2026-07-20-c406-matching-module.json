@@ -685,6 +685,20 @@
             6
           ],
           "profile_fibres_equal_scalar_a4_matching_orbits": true,
+          "profile_plane_equations": [
+            [
+              2,
+              2,
+              1,
+              0
+            ],
+            [
+              9,
+              8,
+              0,
+              1
+            ]
+          ],
           "profile_records": [
             {
               "fibre_size": 1,

@@ -966,6 +966,10 @@ def type_certificate(record):
             assert len(positive_profiles) == 3
             profile_span_dimension = rank([list(profile) for profile in positive_profiles], prime)
             assert profile_span_dimension == 2
+            profile_plane_equations = nullspace(
+                [list(profile) for profile in positive_profiles], prime
+            )
+            assert profile_plane_equations == [[2, 2, 1, 0], [9, 8, 0, 1]]
             compressed_signed_moments = []
             for moment_degree in (1, 2, 3):
                 powers = [
@@ -1013,6 +1017,7 @@ def type_certificate(record):
                 "profile_fibres_equal_scalar_a4_matching_orbits": True,
                 "double_coset_realization": "A4\\PGL2(11)/A5",
                 "positive_profile_span_dimension": profile_span_dimension,
+                "profile_plane_equations": profile_plane_equations,
                 "compressed_signed_moments": compressed_signed_moments,
                 "j_negates_every_depth_profile": True,
                 "depth_profile_recovers_sheet": True,

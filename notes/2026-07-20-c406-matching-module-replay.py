@@ -668,6 +668,7 @@ def replay_type(scout_record, primary_record):
                 }
             )
             assert matrix_rank([list(profile) for profile in positive_profiles], q) == 2
+            assert nullspace([list(profile) for profile in positive_profiles], q) == bridge["profile_plane_equations"]
             compressed_moments = []
             for degree in (1, 2, 3):
                 powers = [

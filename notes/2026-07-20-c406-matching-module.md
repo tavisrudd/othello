@@ -196,6 +196,12 @@ relation
 1*(-6,0,12,-12) + 4*(-3,3,0,3) + 6*(3,-2,-2,0) = 0.
 ```
 
+Writing odd-sector coordinates as `(a,b,c,d)`, the plane is cut out exactly by
+
+```text
+2a+2b+c=0,                 9a+8b+d=0                  in F_11.
+```
+
 Pushing the signed 22-point configuration through `D` therefore preserves the cubic-first trade:
 its signed symmetric moments vanish in degrees one and two and are nonzero in degree three.  This
 is an explicit compressed realization of C406's orientation memory inside C378's odd sector.
@@ -368,9 +374,9 @@ linearly with C378's four-dimensional Fourier sector, or establish literature pr
 
 | load-bearing artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker | 48,311 | `f77d5fe8d44301b538c01e31cc80c99b29a4daa0a9800ba879accd402bceced9` |
-| independent replay | 28,819 | `fee181327a48460708960a56897a6d358b9e00491099f7f1e52406585087a72b` |
-| canonical JSON | 21,753 | `992847bcc974ca2d4e3af546c9b0954ae806170911f9ddb3a71f4049aff9787c` |
+| primary checker | 48,589 | `a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51` |
+| independent replay | 28,938 | `3d7a2288822531837b429c7151be69f1537ba060566fde35248a624df41c556d` |
+| canonical JSON | 21,996 | `e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2` |
 
 ## Gate and manuscript disposition
 
