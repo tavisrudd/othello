@@ -1,0 +1,675 @@
+{
+  "chirality": {
+    "descent_exchanges_orbits": true,
+    "outer_class": "nontrivial in S5/A5",
+    "three_subset_orbit_sizes": [
+      10,
+      10
+    ]
+  },
+  "code_and_scheme": {
+    "chirality_exchanged": true,
+    "column_relation": "J P_i(tau)=lambda_i P_pi(i)(sigma(tau))",
+    "monomial_code_equivalence": true,
+    "syndrome_direction_equivalence": true
+  },
+  "disposition": {
+    "brauer_obstruction": "trivial",
+    "crown_gate": "STOPPED: Benson 2024 already proves the A5 golden outer descent and lambda=1",
+    "generic_descent_is_standard": true,
+    "surviving_scope": "exact Clebsch six-arc, Pluecker, double-six, code, and q=11/q=5 specialization"
+  },
+  "double_six": {
+    "E_row_action": [
+      1,
+      0,
+      4,
+      5,
+      2,
+      3
+    ],
+    "Q_row_action": [
+      1,
+      0,
+      4,
+      5,
+      2,
+      3
+    ],
+    "incidence_preserved": true,
+    "intersecting_pairs": 135,
+    "line_count": 27,
+    "picard_action": "H fixed; E_i maps to E_pi(i); Q_i maps to Q_pi(i)",
+    "rows_exchanged": false
+  },
+  "exact_projective_equivalences": {
+    "cross_cycle_types": {
+      "2.2.2": 10,
+      "4.1.1": 30,
+      "6": 20
+    },
+    "cross_fiber": 60,
+    "cross_fiber_parity": "odd",
+    "involutive_outer_permutations": 10,
+    "normalizer": 120,
+    "same_fiber": 60,
+    "same_fiber_parity": "even",
+    "selected_integral_datum_has_identity_cocycle": true
+  },
+  "pluecker": {
+    "checked_minors": 20,
+    "ledger": [
+      {
+        "column_scale": [
+          -2,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          1,
+          2
+        ],
+        "source_minor": [
+          -2,
+          2
+        ],
+        "target": [
+          0,
+          1,
+          4
+        ],
+        "target_minor": [
+          0,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          -2,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          1,
+          3
+        ],
+        "source_minor": [
+          -2,
+          2
+        ],
+        "target": [
+          0,
+          1,
+          5
+        ],
+        "target_minor": [
+          0,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          -2,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          1,
+          4
+        ],
+        "source_minor": [
+          -2,
+          2
+        ],
+        "target": [
+          0,
+          1,
+          2
+        ],
+        "target_minor": [
+          0,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          -2,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          1,
+          5
+        ],
+        "source_minor": [
+          -2,
+          2
+        ],
+        "target": [
+          0,
+          1,
+          3
+        ],
+        "target_minor": [
+          0,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          -1,
+          1
+        ],
+        "reordering_sign": 1,
+        "source": [
+          0,
+          2,
+          3
+        ],
+        "source_minor": [
+          -4,
+          2
+        ],
+        "target": [
+          1,
+          4,
+          5
+        ],
+        "target_minor": [
+          -2,
+          2
+        ]
+      },
+      {
+        "column_scale": [
+          -1,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          2,
+          4
+        ],
+        "source_minor": [
+          -2,
+          2
+        ],
+        "target": [
+          1,
+          2,
+          4
+        ],
+        "target_minor": [
+          2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          -1,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          2,
+          5
+        ],
+        "source_minor": [
+          -2,
+          0
+        ],
+        "target": [
+          1,
+          3,
+          4
+        ],
+        "target_minor": [
+          0,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          -1,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          3,
+          4
+        ],
+        "source_minor": [
+          2,
+          0
+        ],
+        "target": [
+          1,
+          2,
+          5
+        ],
+        "target_minor": [
+          0,
+          2
+        ]
+      },
+      {
+        "column_scale": [
+          -1,
+          1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          0,
+          3,
+          5
+        ],
+        "source_minor": [
+          2,
+          -2
+        ],
+        "target": [
+          1,
+          3,
+          5
+        ],
+        "target_minor": [
+          -2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          -1,
+          1
+        ],
+        "reordering_sign": 1,
+        "source": [
+          0,
+          4,
+          5
+        ],
+        "source_minor": [
+          0,
+          -2
+        ],
+        "target": [
+          1,
+          2,
+          3
+        ],
+        "target_minor": [
+          2,
+          2
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          -1
+        ],
+        "reordering_sign": 1,
+        "source": [
+          1,
+          2,
+          3
+        ],
+        "source_minor": [
+          4,
+          -2
+        ],
+        "target": [
+          0,
+          4,
+          5
+        ],
+        "target_minor": [
+          -2,
+          2
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          -1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          1,
+          2,
+          4
+        ],
+        "source_minor": [
+          2,
+          0
+        ],
+        "target": [
+          0,
+          2,
+          4
+        ],
+        "target_minor": [
+          0,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          -1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          1,
+          2,
+          5
+        ],
+        "source_minor": [
+          2,
+          -2
+        ],
+        "target": [
+          0,
+          3,
+          4
+        ],
+        "target_minor": [
+          2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          -1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          1,
+          3,
+          4
+        ],
+        "source_minor": [
+          -2,
+          2
+        ],
+        "target": [
+          0,
+          2,
+          5
+        ],
+        "target_minor": [
+          -2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          -1
+        ],
+        "reordering_sign": -1,
+        "source": [
+          1,
+          3,
+          5
+        ],
+        "source_minor": [
+          -2,
+          0
+        ],
+        "target": [
+          0,
+          3,
+          5
+        ],
+        "target_minor": [
+          0,
+          2
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          -1
+        ],
+        "reordering_sign": 1,
+        "source": [
+          1,
+          4,
+          5
+        ],
+        "source_minor": [
+          0,
+          -2
+        ],
+        "target": [
+          0,
+          2,
+          3
+        ],
+        "target_minor": [
+          -2,
+          -2
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          0
+        ],
+        "reordering_sign": 1,
+        "source": [
+          2,
+          3,
+          4
+        ],
+        "source_minor": [
+          -2,
+          0
+        ],
+        "target": [
+          2,
+          4,
+          5
+        ],
+        "target_minor": [
+          2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          0
+        ],
+        "reordering_sign": 1,
+        "source": [
+          2,
+          3,
+          5
+        ],
+        "source_minor": [
+          2,
+          0
+        ],
+        "target": [
+          3,
+          4,
+          5
+        ],
+        "target_minor": [
+          -2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          0
+        ],
+        "reordering_sign": 1,
+        "source": [
+          2,
+          4,
+          5
+        ],
+        "source_minor": [
+          2,
+          0
+        ],
+        "target": [
+          2,
+          3,
+          4
+        ],
+        "target_minor": [
+          -2,
+          0
+        ]
+      },
+      {
+        "column_scale": [
+          1,
+          0
+        ],
+        "reordering_sign": 1,
+        "source": [
+          3,
+          4,
+          5
+        ],
+        "source_minor": [
+          -2,
+          0
+        ],
+        "target": [
+          2,
+          3,
+          5
+        ],
+        "target_minor": [
+          2,
+          0
+        ]
+      }
+    ]
+  },
+  "ring": {
+    "bad_characteristic_excluded": 2,
+    "conjugation": "sigma(tau)=1-tau",
+    "definition": "Z[tau]/(tau^2-tau-1)"
+  },
+  "schema": "c377-clebsch-golden-descent-v1",
+  "specializations": {
+    "inert": "J composed with Frobenius is a semilinear involution; outer label class",
+    "q11": {
+      "cross_fiber_projectivities": 60,
+      "roots": [
+        8,
+        4
+      ],
+      "same_fiber_projectivities": 60,
+      "selected_permutation_is_outer": true
+    },
+    "ramified_5": {
+      "A5_index": 2,
+      "linear_stabilizer_order": 120,
+      "six_points_on_conic_x2_y2_z2": true,
+      "tau": 3
+    },
+    "split": "two linear fibers exchanged by J; outer label class"
+  },
+  "symbolic_intertwiner": {
+    "cocycle_square": "identity",
+    "column_scalars": [
+      [
+        -1,
+        1
+      ],
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "determinant": [
+      -1,
+      0
+    ],
+    "label_cycle_type": "2.2.2",
+    "label_permutation": [
+      1,
+      0,
+      4,
+      5,
+      2,
+      3
+    ],
+    "matrix": [
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    ]
+  }
+}
