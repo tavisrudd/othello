@@ -2,6 +2,7 @@ import RelativeConicArcs.ClebschGatewayQ11Extension
 import RelativeConicArcs.ClebschGatewayQ11Conic
 import RelativeConicArcs.ClebschGatewayQ11Matching
 import RelativeConicArcs.ClebschGatewayQ11Fusion
+import RelativeConicArcs.ClebschGatewayCoxeterPhase
 
 /-!
 # Import-only validation gate for C380

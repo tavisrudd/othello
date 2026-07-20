@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** C398 complete; C399 is the next crowns action
+**Status:** C398 and C399 complete; C403 is the next crowns action through the allocated C399
+successor portfolio; C399 occupies the portable flagship slot pending manuscript-owner review
 
 ## Decision
 
@@ -66,6 +67,25 @@ sharp bounded census and obstruction are then the deliverable.  Do not continue 
 higher codimension.
 
 ## C399 — rank-three reflection-orbit arithmetic phase classification
+
+### Result
+
+C399 closes with verdict `THEOREM; UNIFORM COXETER-NUMBER CONIC/GRS PHASE WITH ONE B3
+ROOT-LENGTH DEFECT`.  For `A3/B3/H3`, with Coxeter number `h=4,6,10`, the projective
+reflection-arrangement complement code has uniform parameters
+
+```text
+[(q-h/2)(q-h+1), 3, (q-h/2-1)(q-h+1)]_q.
+```
+
+At exactly `q=h+1=5,7,11` it is the full invariant conic and hence the
+`[q+1,3,q-1]` extended GRS code; above `q>3h/2-1` it intrinsically recovers the arrangement.
+B3 is the canonical short-root defect: its long-root frame has the A3 complete deep-hole locus,
+and its short-root triangle deletes `3(q-3)` points.  At the conic phase full `PGL_2(q)` symmetry
+forgets among exactly `5,14,22` conjugate Coxeter decorations.  Every irreducible rank-four
+candidate fails the first quadric point-count gate.  The exact certificate and dedicated/umbrella
+Lean gates are green; the focused audit makes no priority claim.  See
+`notes/2026-07-20-c399-coxeter-number-conic-phase.md`.
 
 ### Target theorem
 
