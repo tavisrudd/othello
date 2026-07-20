@@ -221,3 +221,9 @@ C377 closes Door II at its red off-ramp.  C378 and C379 remain independent bound
 neither may cite C377 as a new arithmetic crown.  C380 may use the displayed integral identity as
 a small specialization lemma only if useful, while crediting Benson for the general descent
 mechanism and keeping C376's quotient-character theorem as the substantive gateway result.
+
+The unallocated companion
+`notes/2026-07-19-c377-frobenius-chirality-companion.md` records the strongest creative question
+left by the stop: recover the quadratic Frobenius character intrinsically from the unmarked
+code/syndrome graph and compare its `H^1` chirality torsor with Benson's trivial linear obstruction
+and the double-six Brauer class.  It does not reopen C377 or alter the C378--C380 order.
