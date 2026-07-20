@@ -287,8 +287,17 @@
       "last": 436,
       "purpose": "Fable-review EV-ranked crowns upgrades and bounded adjacent gates",
       "sequence": 32
+    },
+    {
+      "count": 2,
+      "first": 437,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 438,
+      "purpose": "top-ranked Clebsch gateway spikes: G7-to-G1 residual-list seam and G3 decorated-transform seam",
+      "sequence": 33
     }
   ],
-  "next_id": 437,
+  "next_id": 439,
   "schema": "codex-task-id-allocations-v1"
 }
