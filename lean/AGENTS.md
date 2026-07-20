@@ -169,6 +169,85 @@ lean/scripts/lean-restart-guard.py verify /home/<checkpoint>
   unrelated siblings. Use the profile's serial-first boundary rather than assuming all workers have
   the same peak.
 
+## Referee-facing prose and names
+
+Treat every tracked Lean source as part of the permanent scholarly record. A reader with the Lean
+tree and the cited public literature must be able to understand its mathematical intent without
+access to task queues, handoffs, agent sessions, chat transcripts, or private planning documents.
+This applies equally to module headers, docstrings, ordinary comments, declaration and namespace
+names, filenames, generated-source banners, and user-facing diagnostic text.
+
+### Comments and docstrings
+
+- Explain mathematics and verification: state the objects and conventions in use, the role of a
+  non-obvious definition or lemma, the reason a proof step is valid, and the exact proposition a
+  finite certificate checks. Prefer a precise invariant or proof idea over a narration of tactics.
+- Give each paper-facing theorem and each non-obvious public definition a docstring that can stand
+  on its own. A module header should delimit the module's mathematical scope and, when relevant,
+  identify its public terminal results and trusted computational boundary.
+- Never mention internal `C<id>` task IDs, lane names, handoffs, agents or models, session state,
+  private reports, or the chronology of attempts. Replace such references with the mathematical
+  object, theorem, dependency, or limitation they were being used to denote. The reference
+  direction is strictly one way: task reports, handoffs, queues, and other internal notes may point
+  forward to exact Lean modules and declarations, but Lean source must never point back to those
+  records or require them for interpretation. A Lean comment may point to a tracked generator,
+  schema, or certificate that is part of the enduring verification apparatus, provided it says
+  what evidence the artifact supplies.
+- Do not leave status prose such as “remaining seam,” “current approach,” “prototype for the next
+  task,” or “will be proved later” in paper-facing modules. An honest, mathematically precise
+  limitation is acceptable when it describes the present statement or trust boundary rather than
+  project management. Put work history and plans in the owning handoff or report.
+- Generated sources must identify themselves as generated, name the semantic data they encode, and
+  point to a tracked generator or schema when useful. Generation metadata must not substitute for a
+  mathematical description and must not contain private workflow identifiers.
+- Cite external results with enough stable public bibliographic information to locate them and say
+  exactly what is imported from the source. Do not cite an internal task report as mathematical
+  authority. Keep long literature discussion in the paper, but make any load-bearing attribution in
+  Lean independently intelligible.
+- Comments must agree with the elaborated statement. Update or remove them in the same change when
+  hypotheses, conventions, scope, or trust assumptions change. Do not use comments to imply a
+  stronger theorem than Lean checks.
+
+### Names
+
+- Choose stable mathematical names that describe the object or proposition: the subject, relevant
+  hypotheses or construction, and conclusion when distinction is needed. Names should remain
+  sensible after task completion and outside the paper's current section numbering.
+- Never encode a task ID, lane, agent, date, attempt number, or planning status in a module,
+  namespace, declaration, or paper-facing filename. Avoid workflow labels such as `Prototype`,
+  `Draft`, `Temporary`, `Final`, or `MainTheorem`; say what the object is. Legacy names that violate
+  this rule should not be copied into new APIs and should be replaced through an explicit,
+  compatibility-aware cleanup rather than casually proliferated.
+- Do not build an unproved mathematical or historical claim into a name. Words such as `complete`,
+  `classification`, `unique`, `optimal`, `minimal`, `sharp`, or `canonical` are appropriate only
+  when the declaration's type establishes the corresponding property or the definition explicitly
+  specifies the relevant convention. Use neutral descriptive names otherwise.
+- Local names may be concise, but avoid unexplained project-specific abbreviations. Public names
+  should follow the terminology and spelling used in the accompanying paper, with distinctions
+  made by mathematics rather than implementation history.
+
+### Novelty and priority claims
+
+Lean establishes that a formal statement follows from its declared assumptions; it does not
+establish that the result is new, first, previously unknown, or absent from the literature. Do not
+make novelty or priority claims in Lean names or prose. Put any such claim in the paper or its
+literature-audit record, with the scope, date, search method, and sources required by the parent
+guide. In Lean, state only the formal mathematical contribution and cite known antecedents
+factually. Claims of sharpness, optimality, completeness, or classification are mathematical rather
+than historical, but may be used only to the exact extent witnessed by the theorem statement.
+
+### Review gate
+
+Before landing a new or materially edited Lean module, review all changed Lean prose and public
+names as a skeptical journal referee would. Confirm that every reference resolves within the
+tracked scholarly record or stable public literature; every scope and strength claim matches a
+formal statement; computational claims identify their certificate and trust boundary; and no
+private workflow vocabulary or reverse reference to an internal note remains. Internal records
+that discuss a formal result should instead name its exact Lean file and declaration. A search for
+`C` followed by digits in changed `.lean` files is a required task-ID leakage check; inspect each
+hit because ordinary mathematical notation can also match. This prose review is required in
+addition to elaboration, gate builds, and axiom audits.
+
 ## Failure and ownership discipline
 
 - Do not poll a healthy build. Read the runner's atomic `status` only when needed; it distinguishes
