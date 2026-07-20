@@ -161,8 +161,17 @@
       "last": 392,
       "purpose": "C369 service-spectrum upgrade and q=11 two-sheet service compatibility",
       "sequence": 18
+    },
+    {
+      "count": 1,
+      "first": 393,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 393,
+      "purpose": "post-Clebsch Cayley-normalizer Node/Arc-Kayles recognition gate",
+      "sequence": 19
     }
   ],
-  "next_id": 393,
+  "next_id": 394,
   "schema": "codex-task-id-allocations-v1"
 }
