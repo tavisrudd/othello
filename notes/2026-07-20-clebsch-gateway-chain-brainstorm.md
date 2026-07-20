@@ -7,6 +7,10 @@
 **Status:** completed synthesis and decision ranking; literature coverage remains bounded by the
 explicit read-depth ledger below
 
+**Queued follow-through:** C437 is the G7 -> G1 residual-list seam spike after C430; C438 is the
+G3 q=9/q=11 decorated-transform seam spike after C435.  Their bounded specifications are in
+`notes/2026-07-20-c437-c438-gateway-chain-spikes.md`.
+
 ## Question
 
 What becomes possible only after the Clebsch results are composed with one another and with
