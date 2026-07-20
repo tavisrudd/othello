@@ -98,8 +98,17 @@
       "last": 379,
       "purpose": "Clebsch gateway derisk gates: golden descent, extension geometry, and common duality",
       "sequence": 11
+    },
+    {
+      "count": 1,
+      "first": 380,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 380,
+      "purpose": "Lean foundation gates for the Clebsch gateway theorem chain",
+      "sequence": 12
     }
   ],
-  "next_id": 380,
+  "next_id": 381,
   "schema": "codex-task-id-allocations-v1"
 }
