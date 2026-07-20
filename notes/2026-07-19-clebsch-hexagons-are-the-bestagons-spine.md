@@ -4,10 +4,39 @@
 
 **Date:** 2026-07-19
 
-**Status:** protected exposition baseline updated through C399 and its completed literature audit;
-C399 remains the selected portable theorem, with Edge/Dye ownership of the classical conic markers
-explicit.  C406 is a queued red-team gate for a possible factorization-memory replacement spine,
-not a selected manuscript expansion
+**Status:** protected C399 exposition baseline retained; C403--C411 are complete.  C406+C411 is now
+the recommended factorization-memory replacement and a likely-new composition within its bounded
+priority coverage, but no replacement has been selected and no manuscript expansion is implicit
+
+## Current paper decision
+
+The six-side theorem below remains the protected copy-ready baseline.  C406 has opened one coherent
+alternative, not a seventh side:
+
+```text
+C399 Coxeter conic phase
+  -> C403 pairing-forgetting and conic-ideal quotient
+  -> C406 harmonic factorization memory
+  -> balanced recovery and cubic sheet orientation
+  -> C411 mixed-bi-Hecke derivation of the H3 depth profiles
+  -> C378's odd Fourier sector
+  -> C379 decorated parent recovery
+  -> C373 recovery of the unmarked hexagon.
+```
+
+The raw `5/14/22` marker spaces, exceptional one-factorizations, matching-design status, and coarse
+Hadamard orbital geometry are classical.  The likely-new paper-facing content is their composition
+with the conic-ideal quotient, exact balanced-half reconstruction, cubic-first tensor memory, and
+explicit depth--Fourier map.  The outer-odd cubic space is three-dimensional, the naive
+Hessian/singular-locus recovery fails, and there is no scalar-equivariant linear cubic-to-Fourier
+intertwiner; none of those stronger claims may leak into the paper.
+
+C411 has passed: `A4` marks give the two `1,4,6` orbit triples, six canonical secant-incidence
+representatives give the profiles, and the weighted barycentre plus antipodality gives the
+cubic-first pushforward.  The manuscript owner can now choose between the baseline and the
+recommended replacement.  C407's conventional corollaries, C408's pointed-forgetting theorem,
+C409's classical/formal moment normalization, C410/C418/C419, and C412--C417 do not enlarge the
+main spine.  See `notes/2026-07-20-clebsch-paper-planning-sweep.md` for the live decision map.
 
 ## Governing idea
 
@@ -440,21 +469,33 @@ algebraic combinatorics, representation theory, and quantum information.  C374 s
 quantum capstone, and C375 supplies its exact circuit companion; neither is a prerequisite for the
 paper's mathematical identity.
 
-The portable theorem has landed, but the source disposition lowers its standalone novelty: Edge and
-Dye already own the exceptional conic markers, `5,14,22` counts, parent ambiguity, and substantial
+The portable theorem has landed, but its source disposition lowers its standalone novelty: Edge and
+Dye already own the exceptional conic markers, `5/14/22` counts, parent ambiguity, and substantial
 relation geometry.  C399 raises the paper's ceiling through the exact uniform line-defect/distance
-law and Coxeter-number code phase, not through discovery of those finite configurations.  C403 may
-still improve the proof interface through a reusable weighted-adjoint enumerator theorem; C405 is
-an independent companion gate rather than another section to accumulate automatically.
+law and Coxeter-number code phase, not through discovery of those finite configurations.  C403 now
+supplies the reusable weighted-adjoint enumerator, exact matching quotient, and stabilizer theorem;
+its bare nonfactorized dual-support gate stops at the standard GRS matroid.  C407 adds only
+conventional corollaries, while C408 proves that the complete global package can still forget
+pointed repair data.
 
-C403's later matching-kernel and stabilizer theorems expose one bounded alternative now owned by
-C406.  At the conic phases, every perfect matching factors the same Frobenius section and the q=11
-stabilizer classes already force the rank-eight valency passport.  C406 tests whether the classical
-`5/14/22` Coxeter parents are intrinsically the symmetry-selected factorization orbits, whether
-their differences carry a nontrivial conic-ideal module, and whether the H3 sheet sign has a genuine
-Fourier or reconstruction consequence.  Until those gates and the exact Edge/Dye source boundary
-close, none of this changes the theorem above, its title, or the single-promotion rule.  See
-`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
+C406 has passed the mathematical gate.  Its conic-ideal factorization images have exact ranks
+`3,6,10`; in B3/H3 the two factorization sheets are the unique balanced halves through degree two,
+their first signed tensor memory is cubic, and the H3 secant products give six depth fibres
+`1,4,6 / 1,4,6` inside C378's odd Fourier sector.  The claim-by-claim audit pre-empts the raw
+one-factorization/design/Hadamard layers but locates no predecessor for this composition within its
+bounded coverage.  That makes C406 a credible replacement spine, with unrestricted priority still
+qualified by explicit database and forward-citation gaps.  C409 explains the cubic-first filtration
+formally but is classical rather than another novelty claim.  See
+`notes/2026-07-20-c406-matching-module.md` and
+`notes/2026-07-20-c406-priority-audit.md`.
+
+C411 clears the main exposition risk in that result.  It derives the six H3 profiles from the
+mixed double-coset space `A4 \ PGL_2(11) / A5` using subgroup marks and one canonical incidence
+calculation per orbit, then proves cubic-first survival by a three-term weighted identity.  The
+depth coordinates are mixed `A4`--`A5` matrix coefficients, not zonal spherical functions, and the
+rank-two linear map is not a faithful bi-Hecke quotient even though it separates the six labels.
+This source-surviving conceptual theorem is the one C406 successor admitted to the replacement
+spine; C412--C417 remain companions.
 
 If the rank-eight fission is eventually identified with a known scheme, the paper remains strong:
 the exact arithmetic transform, self-dual error algebra, closed reconstruction cycle, and C374's
@@ -467,10 +508,14 @@ operational force.  The bare-code reconstruction question is no longer open afte
 
 ### 1. What determines reflection-complement code distance?
 
-C399 answers the first rank-three Coxeter question.  C403 now asks for the weakest intrinsic
-arrangement data that determines the nonmirror-line spectrum and complete complement-code
-enumerator.  Ordinary characteristic, Tutte, coboundary, and lattice-flag data are insufficient;
-the live candidate is the punctured weighted two-adjoint profile.
+C403 answers the global rank-three question: the original characteristic, Tutte, coboundary, and
+lattice-flag data do not suffice, while the weighted two-adjoint depth enumerator determines the
+complete complement-code enumerator.  C407 derives the conventional global corollaries.  The live
+boundary is pointed: C408 shows that this global package forgets coordinate repair and sometimes
+syndrome multiplicity.  C410 found no same-scalar-tower pointed collision among any spanning q=7
+six-point external-line closures.  Other structural constructions remain open: C418 owns named
+seven/eight-point balanced trades and C419 fixed-incidence realization moduli; neither is a larger
+replay of the failed census.
 
 ### 2. When do non-GRS errors become GRS?
 
@@ -480,16 +525,17 @@ transform is MDS or GRS, when it terminates, and when a canonical obstruction de
 its parent.  C381 has completed the bounded two-point continuation: its three marked integral root
 types `(D8,A2)`, `(3A1,2A1)`, and `(4A1,2A1)` recover the obstruction matching and decide MDS
 status, while the inherited six-conic obstruction rules out a smooth degree-one surface.  C382 is
-now ready to compare the marked `D8<E8` embedding, glue, and centralizer data with the icosian model;
-an abstract `E8` isomorphism remains a red result.
+closed negatively in its marked icosian comparison category; an abstract `E8` isomorphism does not
+repair that failed compatibility.  Any higher-dimensional continuation therefore needs a new
+category-correct invariant rather than a resumed icosian search.
 
 ### 3. When does a deep-hole child carry a factorization double cover?
 
-Generalize C379's decomposition of 22 parent matchings into two `PSL_2(11)`-invariant
-one-factorizations.  Determine which conic children canonically carry such an unordered pair,
-whether Frobenius acts on it arithmetically, and when cross-incidence produces a biplane or another
-symmetric design.  The finite q=11 theorem is certified; its classical-source disposition and any
-all-prime transport remain open.
+C406 applies the conic-ideal quotient to the classical A3/B3/H3 factorizations, recovers the B3/H3
+sheets by balanced moments, and orients them cubically.  C411 now derives the H3 six-profile law
+conceptually from its `A4 \ PGL_2(11) / A5` double-coset structure.  Remaining companion questions
+include a natural relative-cubic rank-drop map, intrinsic singleton recovery from the rank-16
+scheme, and a genuine B3 depth--Fourier analogue.  C412--C417 own those bounded gates.
 
 ### 4. Which scalar-`A5` fusions survive uniformly?
 
@@ -528,11 +574,13 @@ Already classical or externally pre-empted:
 - the Clebsch/icosahedral six-point geometry and `10+10` outer-`S6` dictionary;
 - arc--MDS, conic--GRS, and MDS--AME correspondences;
 - general arrangement-to-coset-leader machinery;
-- generic automorphism-aided decoding; and
+- generic automorphism-aided decoding;
 - general odd-prime affine rigidity of spanning arc-direction graphs;
-- general outer-Galois descent of the golden three-dimensional `A5` representation; and
-- the classical `PGL_2(11)`, one-factorization, and eleven-point biplane ingredients, pending exact
-  source attribution.
+- general outer-Galois descent of the golden three-dimensional `A5` representation;
+- the classical `PGL_2(11)`, one-factorization, eleven-point biplane, matching-design, and coarse
+  `PGL_2(11)/A5` Hadamard-orbital ingredients under the exact C399/C406 source attribution; and
+- double-coset enumeration, subgroup marks, mixed Hecke bimodules, and general matrix-coefficient
+  language; C411's content is their exact secant-depth/cubic realization.
 
 Exact family-specific content established locally:
 
@@ -541,18 +589,23 @@ Exact family-specific content established locally:
 - the primitive Fourier-self-dual rank-eight `A5` fission, exact eigen/Krein data, and all fusions;
 - the exact full automorphism group of the scheme and column graph;
 - intrinsic recovery of syndrome addition, the six columns, deep-hole relation, and unordered
-  chirality torsor from the canonical bare-code coset graph; and
+  chirality torsor from the canonical bare-code coset graph;
 - the equality of cubic blowdown exchange and code chirality as quotient characters;
 - q=11 golden completion to `PGL_2(11)`, the rank-16 common coherent refinement, and its signed
   four-dimensional Fourier block;
 - exact LC and LU separation, with party permutation, of the Clebsch `AME(6,11)` state from every
   six-point GRS class;
 - twelve uniform weak-degree-two-del-Pezzo extensions and termination of the undecorated deep-hole
-  transform; and
+  transform;
 - reversible parent recovery by 22 obstruction matchings, their two one-factorizations, and the
-  exact `2-(11,5,2)` biplane cross-incidence; and
+  exact `2-(11,5,2)` biplane cross-incidence;
 - C381's three marked integral `E8` root types and their exact recovery of the matching, parent,
-  and MDS status.
+  and MDS status;
+- C406's conic-ideal harmonic/radial image ranks `3,6,10`, unique balanced B3/H3 sheets,
+  cubic-first orientation tensor, six H3 depth-profile fibres, and explicit odd Fourier-sector map,
+  with priority language restricted to the bounded audit; and
+- C411's six-representative mixed double-coset incidence derivation and three-term cubic-first
+  pushforward, with its classical Hecke/mark boundary explicit.
 
 Not yet safe without the stated gates:
 
@@ -562,9 +615,13 @@ Not yet safe without the stated gates:
   beyond C375's exact linear Bell-triangle theorem;
 - that Fourier self-duality improves a physical noise or decoding quantity;
 - novelty for the `5,14,22` parent counts, parent ambiguity, or the Edge/Dye relation skeleton;
+- novelty for the exceptional one-factorizations, their matching-scheme design status, or the
+  coarse Hadamard orbital and `A4/D10` stabilizer data;
+- uniqueness of the C406 cubic, Hessian/singular-locus recovery, a linear cubic-to-Fourier
+  intertwiner, undecorated-child memory, or a universal cubic-first principle;
 - an intrinsic all-prime Frobenius action on the fission or factorization two-set;
-- any icosian/path-independence theorem before C382 clears its marked-embedding, representation,
-  consequence, and literature gates; or
+- any icosian/path-independence theorem after C382's negative marked-category comparison without a
+  new category-correct invariant and consequence; or
 - any Clebsch holographic-code claim.
 
 ## Copy-ready closing cadence
@@ -595,6 +652,15 @@ In this precise and unusually literal sense, hexagons are the bestagons.
 - `notes/2026-07-19-c380-clebsch-gateway-lean-foundations.md`
 - `notes/2026-07-19-c381-clebsch-e8-extension-obstruction.md`
 - `notes/2026-07-19-c382-clebsch-icosian-e8-path-independence.md`
+- `notes/2026-07-20-c399-coxeter-number-conic-phase.md`
+- `notes/2026-07-20-c399-literature-audit.md`
+- `notes/2026-07-20-c403-arrangement-complement-distance.md`
+- `notes/2026-07-20-c406-matching-module.md`
+- `notes/2026-07-20-c406-priority-audit.md`
+- `notes/2026-07-20-c407-c403-free-arrangement-code-upgrades.md`
+- `notes/2026-07-20-c408-pointed-profile-forgetting-gate.md`
+- `notes/2026-07-20-c409-cubic-first-memory-principle.md`
+- `notes/2026-07-20-c411-double-coset-hecke.md`
 - `notes/2026-07-18-c339-clebsch-deep-hole-transform.md`
 - `notes/2026-07-18-c341-a5-subgroup-decoder.md`
 - `notes/2026-07-18-c346-h3-clebsch-good-reduction.md`

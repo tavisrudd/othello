@@ -4,9 +4,10 @@
 
 **Date:** 2026-07-19
 
-**Status:** historical gateway derisk plan updated by the C406 flagship review; the certified core
-remains protected, C382 later closed negatively in its marked icosian category, and C406 is queued
-as a bounded factorization-memory compatibility gate with no manuscript commitment
+**Status:** historical gateway derisk plan reconciled through C411; the certified core remains
+protected, C382 closed negatively in its marked icosian category, and C406+C411 is the recommended
+factorization-memory replacement with likely-new composite content under bounded priority coverage
+and no automatic manuscript commitment
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -33,16 +34,19 @@ certified surface gateway C376
               |
               +---- C381 marked-E8 classification - complete
                             |
-                            +---- C382 marked icosian comparison [ready, bounded]
+                            +---- C382 marked icosian comparison [complete, negative]
                               |
                  optional quantum consequence
                               |
               source closure and paper decision
 ```
 
-The program should promote at most one new flagship mechanism into the present paper.  C376 makes
-the surface/blowdown character the provisional champion.  Independent successes become supporting
-lemmas or sequels rather than extra vertices forced into one manuscript.
+The program should promote at most one new flagship mechanism into the present paper.  C376's
+surface/blowdown character remains a strong family-specific corollary.  C406+C411 is now the
+recommended replacement spine because it composes C399's portable phase, C403's exact forgetting
+quotient, a conceptual mixed-bi-Hecke profile derivation, C378's Fourier sector, and C379's parent
+recovery in one mechanism.  Independent successes become supporting lemmas or sequels rather than
+extra vertices forced into one manuscript.
 
 For fast progress, every speculative global construction has two passes.  Pass one is a disposable
 bounded scout using fixed coordinates and existing exact infrastructure; it answers only the
@@ -83,17 +87,27 @@ wording still obeys their individual source boundaries.
 
 ### Post-C403 flagship gate
 
-C399 now owns the single portable promotion slot.  C403 subsequently proved both the exact
-perfect-matching factorization kernel at the conic zero-evaluation boundary and a
-stabilizer-stratified word-orbit theorem whose q=11 scalar lifts force C372's rank-eight valencies.
-C406 is the bounded decision gate for the only resulting alternative spine: test whether the
-classical `5/14/22` Coxeter parent markers are intrinsically the symmetry-selected factorizations of
-the canonical Frobenius section, whether their differences form a nontrivial uniform conic-ideal
-module, and whether the H3 two-sheet sign has a genuine C378 Fourier or reconstruction consequence.
-It is red if this is only Edge/Dye marker geometry or orbit--stabilizer bookkeeping, yellow if it is
-an exact but nonproductive compatibility, and green only if it replaces rather than enlarges the
-current spine.  Full routing and stop rules are in
-`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
+C399 owns the protected portable promotion slot.  C403 is complete: it proves the weighted
+2-adjoint enumerator, exact perfect-matching quotient, and stabilizer-stratified word-orbit theorem;
+its bare nonfactorized dual-support gate factors through the standard GRS matroid and stops.
+
+C406 has passed the mathematical gate.  The factorization-difference images have ranks `3,6,10`
+and a uniform conic-harmonic/radial description.  In B3/H3 the two factorization sheets are the
+unique balanced halves through degree two and their first signed tensor separator is cubic.  In H3,
+six secant-depth profiles of sizes `1,4,6 / 1,4,6` give an exact map into C378's odd Fourier sector
+and singleton recovery of the unordered golden matching/parent pair through C379.
+
+The claim-by-claim audit pre-empts novelty for the raw factorization/design and coarse Hadamard
+layers but locates no predecessor for the conic-quotient/moment/Fourier composition within bounded
+coverage.  Unrestricted priority remains open behind named database and forward-citation gaps.
+Thus C406 is green as mathematics.  C411 has now supplied the conceptual double-coset/mixed-bi-Hecke
+derivation: subgroup marks and six canonical incidence representatives recover the profile plane
+and cubic-first pushforward.  C406+C411 is therefore the recommended replacement spine, but
+promotion still requires a shorter manuscript and an explicit owner decision.  C407 is
+conventional, C408 is a separate pointed-forgetting boundary, and C409 is a classical/formal
+normalization; none consumes a promotion slot.  See
+`notes/2026-07-20-clebsch-paper-planning-sweep.md` and
+`notes/2026-07-20-c406-priority-audit.md`.
 
 ## Uniform promotion gate
 
@@ -232,7 +246,7 @@ Possible decisions:
 | gate outcome | manuscript decision |
 |:---|:---|
 | no green branch | submit the certified six-side paper; retain six future questions |
-| exactly one green branch | add one major theorem or diagonal to the proof hexagon |
+| exactly one green branch | choose explicitly between the protected paper and one replacement theorem/diagonal |
 | two green branches with the same mechanism | reframe around a gateway/path-independence theorem |
 | several unrelated green branches | keep the core focused and allocate a sequel |
 | only a quantum branch later turns green | produce a separate quantum-facing paper or capstone |
@@ -411,9 +425,9 @@ fusion, whose fixed algebra retains 12 of the rank-16 dimensions.
 
 The gateway atlas is a reservoir of later questions, not a work queue.  C381 has completed the
 bounded exceptional-lattice probe and supplied the canonical marked integral `E8` invariant forced
-by C379.  C382 is therefore ready only for its cheap marked-embedding/character gate; generic
-icosian/600-cell exposition, genus-two theta data, clusters, Hilbert modular surfaces, type-II
-matrices, Mathieu groups, and holography remain unallocated.
+by C379.  C382's marked-embedding/character comparison then closed negatively in the required
+icosian category.  Generic icosian/600-cell exposition, genus-two theta data, clusters, Hilbert
+modular surfaces, type-II matrices, Mathieu groups, and holography remain unallocated.
 
 ### 7. Formalization theatre
 
@@ -438,18 +452,21 @@ a Lean expansion.
 
 ## Execution order
 
-1. Treat C378's group/fusion/refinement theorem and C379's extension/matching theorem as frozen
-   inputs; preserve their different quotient maps.
-2. Treat the bounded `11+11` one-factorization/biplane certificate and focused audit as complete;
-   retain only the Clebsch compatibility corollary because the abstract core is classical.
-3. Treat C380's formal foundation gate as complete.
-4. Treat C381's frozen `22*66` marked-root classification as complete.  Run C382's cheap
-   marked-embedding/character gate; proceed to an integral icosian comparison only if it produces
-   an intrinsic quotient and a consequence beyond C381.
-5. Keep the Frobenius and integral-moduli companions unallocated; no productive framed moduli gate
-   survived the completed source disposition.
-6. Treat C374's GRS-class LC/LU separation and C375's exact circuit/fixed-layout obstruction as
-   complete.
+1. Treat C374--C381 as frozen inputs with their individual source boundaries; preserve C378's
+   scheme refinement and C379's matching-decorated recovery as different quotient levels.
+2. Treat C382 as a completed negative in the marked icosian category.  Do not reopen it from an
+   abstract `E8` match.
+3. Keep C399 as the protected portable theorem and C403/C407 as completed arrangement-code inputs.
+   C408/C409 are completed companion results.  C410 closes all spanning q=7 six-point
+   external-line closures, not the broader pointed-memory question; C418/C419 own the active
+   larger-trade and fixed-incidence-moduli attacks, all outside the paper.
+4. Treat C406, its priority audit, and C411's conceptual theorem as complete.  C411 is the first
+   source-surviving successor admitted under the promotion rule; C412--C417 remain companions.
+5. Make the explicit manuscript choice recorded in
+   `notes/2026-07-20-clebsch-paper-planning-sweep.md` now.  Freeze one theorem spine before Lean or
+   exposition work; do not merge the protected and replacement outlines.
+6. Keep Frobenius/moduli, higher-rank, quantum, repair, Bring/icosian, and other famous-object
+   branches separate unless a newly allocated gate proves a consequence used by the chosen spine.
 7. Perform claim-specific full-text and forward-citation closure.
 8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
 

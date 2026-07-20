@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-20
 
-**Status:** C398--C400 complete; C399 survives its full audit as the selected portable synthesis;
-C403 is active on its strongest exact line-defect/enumerator seam; C406 is queued to test one
-factorization-memory replacement spine without consuming a second promotion slot
+**Status:** C398--C400 and C403--C411 complete; C399 remains the protected portable synthesis;
+C406+C411 is the recommended factorization-memory replacement whose composite claim is likely new
+within bounded audit coverage; C401/C402 remain independent queued pilots
 
 ## Decision
 
@@ -27,6 +27,12 @@ Run the tasks serially in this order unless a task's own stop rule closes it ear
 negative does not authorize broadening the census; it hands control to the next task.  Every
 paper-facing mathematical conclusion is a Lean target under the Clebsch trust policy, with exact
 external certificates retained for discovery and independent replay.
+
+The table is the historical EV ordering that opened the programme, not the live paper queue.  The
+current manuscript decision is recorded in
+`notes/2026-07-20-clebsch-paper-planning-sweep.md`: C399 protects the existing paper, while C406 may
+replace weaker material only after an explicit owner decision.  C407--C410 and C401/C402 are not
+submission dependencies.
 
 ## C398 — classify non-GRS-to-GRS conic deep-hole transforms
 
@@ -235,22 +241,25 @@ successively larger invariants.
 
 ## Paper-promotion rule
 
-C399 fills the single promotion slot, subject to manuscript-owner integration and the exact
-classical/new wording fixed by its audit.  Later tasks may still close their bounded pilots, but the
-manuscript should not accumulate unrelated generalizations.  C403's conic-divisor quotient may
-appear as a compact corollary to C399: it makes all-degree parent forgetting precise without taking
-a second promotion slot, and must preserve the external-factor caveat.  Its broader weighted-
-adjoint theorem remains a companion rather than replacing the leaner typewise proof interface;
-C404 is literature-pre-empted, and C405 and later positives remain companions unless they are
-mathematically inseparable from C399.
-The preferred paper spine remains the exact q=11 reversible hexagon, with C399 explaining its place
-in the rank-three Coxeter-number family.
+C399 fills the protected promotion slot, subject to manuscript-owner integration and the exact
+classical/new wording fixed by its audit.  C403 may appear compactly as the exact all-degree
+pairing-forgetting and conic-ideal quotient interface, with the external-factor caveat preserved;
+its broader weighted-adjoint theory and C407's conventional corollaries need not displace the
+leaner typewise proof.  C404 is literature-pre-empted.  C408's pointed-forgetting theorem, C409's
+classical/formal moment normalization, C410's completed q=7 six-point negative, C405, C401, and
+C402 remain companions.  C410 does not close the broader same-tower pointed-memory question;
+C418/C419 own the active larger-trade and fixed-incidence-moduli attacks.
 
-C406 is the one explicit exception to “later positives remain companions,” because it asks whether
-C399, C403, and C379 already contain one mathematically inseparable replacement mechanism.  The
-target is not another generalization: it is a uniform identification of the classical `5/14/22`
-Coxeter parents with symmetry-selected perfect-matching factorizations of the canonical Frobenius
-zero section, together with a nontrivial factorization-difference module or H3 Fourier/recovery
-consequence.  Red or yellow leaves this promotion rule unchanged.  Green triggers a separate
-manuscript-owner decision and must replace weaker clauses rather than add a second flagship.  See
-`notes/2026-07-20-c406-clebsch-flagship-red-team-and-factorization-memory-plan.md`.
+C406 is the single explicit replacement exception, and it has now passed its mathematical gate.
+It composes the classical symmetry-selected factorizations with C403's conic-ideal quotient, exact
+harmonic/radial images of ranks `3,6,10`, unique balanced B3/H3 halves, cubic-first orientation, and
+the H3 depth--Fourier/recovery bridge.  The audit pre-empts novelty for the raw factorization,
+matching-design, and coarse Hadamard layers but finds the composition likely new within bounded
+coverage.  Green therefore triggers the promised separate manuscript-owner decision; it does not
+create a second promotion slot.  C411 has now passed as the first source-surviving conceptual
+successor: it derives the six profiles from subgroup marks and mixed double-coset incidence and
+reduces cubic-first survival to a three-term weighted identity.  C406+C411 is therefore the
+recommended replacement and C412--C417 remain companions.  Otherwise the protected spine remains
+the q=11 reversible hexagon with C399 as its portable explanation.  See
+`notes/2026-07-20-c406-matching-module.md`, `notes/2026-07-20-c406-priority-audit.md`,
+`notes/2026-07-20-c411-double-coset-hecke.md`, and the current planning sweep.

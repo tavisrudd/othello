@@ -4,7 +4,9 @@
 
 **Date:** 2026-07-20
 
-**Verdict:** `GREEN EXACT THEOREM; SHARP CUBIC ORIENTATION CHARACTER AND DEPTH--FOURIER SHEET BRIDGE; UNIQUENESS AND FIRST HESSIAN SPLITTING FAIL; PRIORITY OPEN`
+**Verdict:** `GREEN EXACT THEOREM; SHARP CUBIC ORIENTATION CHARACTER AND DEPTH--FOURIER SHEET BRIDGE;
+UNIQUENESS AND FIRST HESSIAN SPLITTING FAIL; LIKELY-NEW COMPOSITION IN BOUNDED AUDIT,
+UNRESTRICTED PRIORITY OPEN`
 
 ## The theorem
 
@@ -423,3 +425,10 @@ independence, and cubic-sign implication, with the finite ranks and uniqueness c
 checked certificate leaves.  The explicit H3 depth map is available, but a linear identification
 of the cubic tensor with C378's Fourier sector remains obstructed and must not be inferred from the
 outer sign alone.
+
+C411 subsequently replaces the 22-term depth-profile table by an exact conceptual derivation:
+`A4` subgroup marks give the orbit sizes `1,4,6 / 1,4,6`, one secant-incidence representative per
+double coset gives the six profiles, and the weighted barycentre plus antipodality proves the
+cubic-first pushforward.  The coordinates form a rank-two mixed `A4`--`A5` bi-Hecke map that
+separates the six labels as a set but is not a faithful linear quotient or a zonal spherical
+function.  See `notes/2026-07-20-c411-double-coset-hecke.md`.

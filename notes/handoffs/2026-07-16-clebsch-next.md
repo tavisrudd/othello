@@ -4,6 +4,8 @@
 
 **Date**: 2026-07-16
 
+**Last reconciled**: 2026-07-20
+
 ## Goal
 
 Develop the research program opened by the Clebsch code without widening the submission paper:
@@ -15,38 +17,51 @@ Roadmap and mathematical rationale:
 
 ## Current status
 
-The lane is queued, not started. The current `clebsch` paper owns the bounded C211 `A3/H3`
-identification and manuscript synthesis. This lane consumes that result after it is settled; it
-does not edit the paper unless the user explicitly switches scope.
+This is now a **legacy reconciliation queue**, not a cold-start execution order.  Later `crowns`
+tasks answered or superseded most of its original gates under different task IDs.  The original
+C206--C208 and C212--C213 rows remain lane-owned until their task-lifecycle disposition is changed
+explicitly; do not start them merely because they still appear queued.  The `clebsch` paper owns
+manuscript synthesis and the current baseline-versus-C406+C411 decision.  See
+[`2026-07-20-clebsch-paper-planning-sweep.md`](../2026-07-20-clebsch-paper-planning-sweep.md).
 
-## Ordered research frontiers
+## Reconciled research frontiers
 
-1. **C213 — cheap cubic-surface falsification gate.** Test the proposed
-   `12+15 -> 27 lines`, `10 Brianchon -> 10 Eckardt`, and five-triangle/Sylvester-pentahedron
-   incidence dictionaries. Stop on a cardinality-only match.
-2. **C212 — Coxeter-arrangement codes and decoder tomography.** After C211 fixes the `A3/H3`
-   seed, seek a general reconstruction or classification theorem rather than an example atlas.
-3. **C206 — nearest-conic stability.** Use arrangement deformation/intersection-lattice ideas to
-   replace the q=11 census gap by a smaller invariant proof or a parameterized stability theorem.
-4. **C207 — intrinsic chirality.** Recover the unordered support-halving torsor from the abstract
-   code/decoder and identify the obstruction to the outside exotic `S5` coset.
-5. **C208 — all-field uncovered orbits.** Decompose the `A5`-invariant arrangement complement by
-   congruence class and explain the `q=19` `20+120` split representation-theoretically.
+1. **C213 — substantially superseded by C376.**  C376 constructs the exact Clebsch cubic,
+   certifies its `6+15+6` line decomposition and distinguished double-six, and proves that blowdown
+   exchange and code chirality are the same `S5/A5` quotient character.  Reconcile/close the old
+   row rather than rerunning cardinality dictionaries.  Any new cubic question needs a distinct
+   theorem beyond C376.
+2. **C212 — substantially answered by C399/C403/C407 and C373.**  C399 gives the uniform
+   `A3/B3/H3` complement-code phase, C403 gives the weighted 2-adjoint enumerator and stabilizer
+   refinement, C407 closes the conventional code consequences, and C373 gives the q=11 intrinsic
+   reconstruction.  The old row survives only if it can state a genuinely broader portable
+   decoder-tomography theorem not already contained in those results.
+3. **C206 — still potentially distinct.**  The conceptual nearest-conic stability question is not
+   closed by the later arrangement-code results.  It remains the only clearly live original
+   frontier, but it is not a current Clebsch submission dependency.
+4. **C207 — superseded by C373/C376.**  The bare-code coset graph recovers the unordered chirality
+   torsor, and the cubic blowdown exchange realizes the same outside quotient character.  Reconcile
+   the row; do not rerun intrinsic chirality from scratch.
+5. **C208 — substantially superseded by C400.**  C400 gives the all-good-field scalar-`A5` orbit
+   and rank law, including the q=19 `C3` relation and two distinct regular relations, and explains
+   the conic stabilizer ladder.  Retain the row only if the original `20+120` complement split
+   demands a representation-theoretic statement not implied by C400's certified orbit data.
 
-The order is a value/risk ordering, not a dependency chain except that C212 consumes the exact C211
-identification.
+The list is now a reconciliation map, not a value/risk ordering.  C206 is the only row that should
+be presumed mathematically open; even it requires an explicit resume instruction.
 
 ## Success gates
 
-- C212 succeeds only with a theorem extending beyond the `A3/H3` examples.
-- C213 succeeds only with an exact equivariant incidence map into cubic-surface geometry.
+- C212 succeeds only with a theorem strictly beyond C399/C403/C407 and C373.
+- C213 may resume only with a theorem strictly beyond C376's exact equivariant cubic-surface map.
 - C206 succeeds only with a conceptual invariant proof or a parameterized stability statement.
-- C207 succeeds with a canonical obstruction/torsor or a precise impossibility theorem.
-- C208 succeeds with certified orbit data plus a uniform representation-theoretic explanation.
+- C207 is presumed closed mathematically by C373/C376 unless a sharper invariant is stated first.
+- C208 resumes only for a representation-theoretic consequence not already certified by C400.
 
 ## Lane boundaries
 
 This lane owns its roadmap, C206--C208 reports, and new C212--C213 follow-up reports and artifacts.
 The `clebsch` lane retains the manuscript, paper-package checkers, C182 archive release, and C211
-paper upgrade. Cubic-surface work here is limited to the Clebsch-code incidence gate and does not
-take ownership of the separate `cubic` lane.
+paper upgrade.  The later `crowns` reports are read-only evidence for reconciling these old rows;
+they do not silently transfer task ownership or authorize queue/archive edits.  Cubic-surface work
+here is limited to a theorem beyond C376 and does not take ownership of the separate `cubic` lane.

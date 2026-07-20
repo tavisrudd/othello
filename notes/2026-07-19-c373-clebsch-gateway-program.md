@@ -1,8 +1,8 @@
 # C373 companion — the Clebsch gateway program
 
 Date: 2026-07-19  
-Status: research-program router updated through C381 and the completed C374/C375 quantum gates;
-C382 is ready for its bounded marked-icosian comparison
+Status: historical research-program router reconciled through C411; C382 closed red at its
+category/character gate, and C406+C411 is the recommended manuscript-replacement candidate
 Parent: `2026-07-19-c373-clebsch-scheme-automorphisms.md`
 
 ## Executive thesis
@@ -544,18 +544,19 @@ non-MDS pairs.  Root intersection recovers the obstruction matching, hence the p
 marked type decides eight-arc/MDS status.  The matched `D8` has index two in `E8`, but its abstract
 `C2` glue quotient cannot carry chirality because `Aut(C2)` is trivial.
 
-**C382** is ready for the bounded marked comparison.  It first compares the `A5` actions by the
-free `A5/D10,A5/C2,A5/C2` permutation characters, root orbits, marked `D8<E8` embedding and glue,
-and centralizer/normalizer ambiguity.  Only if those match in the same category may it construct
-an integral isometry to the icosian model and test path independence and golden-involution
-compatibility; an arbitrary `E8` isometry is a red result.
+**C382 outcome.**  The bounded comparison closes red before the isometry gate.  A fixed Clebsch
+marked fibre has only its `D10` stabilizer, while the natural single-sided icosian action is by
+`2.A5` and does not descend; the artificial coordinate-fixed `A5` comparison has the wrong
+character, and even the legitimate `D10` restrictions have different involution traces.  The
+marked `D8<E8` glue and centralizer also carry no sheet character.  No integral isometry or
+path-independence search is authorized from an abstract `E8` match.
 
 ```text
 C381 green marked-E8 invariant
     |
-    +-- C382 character/embedding gate --> integral comparison only on a match
+    +-- C382 category/character gate --> mismatch
     |
-    +-- mismatch or abstract-C2-only result --> close the route
+    +-- route closed; no integral comparison
 ```
 
 This two-stage route is fully specified in
@@ -708,17 +709,21 @@ object—not the fame of the destinations—is the proposed novelty.
 | 11 | code-lattice comparison | low/medium | speculative | lattices are plainly isometric or theta data generic |
 | 12 | tropical and secret-sharing lifts | high | speculative | no concrete map or operational statistic |
 
-The table records the original triage; ranks 1--3, the foundation track, C374's quantum-equivalence
-gate, and C381's marked-root classification have been resolved by C374 and C376--C381.  The current
-immediate sequence is:
+The table records the original triage, not the live queue.  Ranks 1--3, the foundation track,
+C374's quantum-equivalence gate, and C381's marked-root classification were resolved by C374 and
+C376--C381; C382 then closed the icosian route negatively.  The current sequence is:
 
-1. run C382's cheap marked-embedding/character gate and proceed to an integral icosian comparison
-   only if it yields an intrinsic quotient and a consequence beyond C381;
-2. treat C375's exact three-gate circuit and sharp fixed-layout obstruction as complete;
-3. retain the C379 one-factorization/biplane theorem only as Clebsch compatibility, without abstract
-   novelty language, because the focused audit pre-empts its classical core;
-4. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional
-   canonical incidence theorem selects them.
+1. retain C375's circuit result, C376's cubic character, C378's Fourier refinement, and C379's
+   one-factorization/biplane theorem as frozen inputs under their individual source boundaries;
+2. treat C399 as the protected portable paper theorem and C406+C411 as the recommended replacement
+   spine; C411 has passed the conceptual double-coset/mixed-bi-Hecke gate and is the first
+   source-surviving successor admitted under the promotion rule;
+3. make the exact manuscript choice in `notes/2026-07-20-clebsch-paper-planning-sweep.md` without
+   waiting for C412--C417;
+4. allow C418/C419 to pursue the larger-trade and fixed-incidence-moduli pointed-memory attacks
+   without making them Clebsch manuscript gates; and
+5. keep genus-two, Mathieu/Witt, Jordan, icosian, and other famous-object doors closed until an
+   additional canonical incidence theorem selects them.
 
 ## Claim and literature boundary
 

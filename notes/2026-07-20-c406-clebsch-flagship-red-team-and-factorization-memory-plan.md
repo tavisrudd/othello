@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** `GATES 1--3 COMPLETE; GREEN HARMONIC/CUBIC MEMORY THEOREM, PRIORITY OPEN`
+**Status:** `GATES 1--3, BOUNDED PRIORITY AUDIT, AND C411 CONCEPTUAL DERIVATION COMPLETE; GREEN
+HARMONIC/CUBIC MEMORY THEOREM; COMPOSITE CLAIM LIKELY NEW WITHIN COVERAGE; MANUSCRIPT DECISION OPEN`
 
 **Gate 1 outcome:** exact enumeration finds unique `5/14/22` perfect-matching orbits with
 stabilizers `S4/S4/A5`; in every type the parent has a unique invariant matching, and the H3 member
@@ -13,7 +14,7 @@ space, but the target orbit has an exact factorization-design refinement: A3 is 
 one-factorization of `K_6`, while B3 and H3 split under `PSL_2(q)` into two one-factorizations of
 `K_8` and `K_12` exchanged by the outer coset.  This uniform fixed-matching interface authorizes
 Gate 2's semisimple restricted
-augmentation-module test.  Per user scope, Gate 2 was not started.  See
+augmentation-module test.  At that checkpoint, per user scope, Gate 2 had not started.  See
 `notes/2026-07-20-c406-matching-orbit-scout.md` and its certificate bundle.
 
 **Gates 2--3 outcome:** the factorization-difference images have exact ranks `3,6,10` and are
@@ -21,15 +22,21 @@ uniformly the top conic-harmonic layer plus the radial line in even degree.  The
 quadratic sheet moments vanish, but the signed cubic moment is nonzero and reference-independent;
 more strongly, the two `PSL_2(q)` one-factorizations are exactly the two equal halves with vanishing
 moments through degree two.  Thus the attempted linear sign fails but a canonical cubic sheet-memory
-carrier and reconstruction theorem survives.  The focused source audit found no exact predecessor
-within its bounded coverage, but forward-database gaps prohibit priority wording.  See
-`notes/2026-07-20-c406-matching-module.md` and its checker/JSON/replay/checksum bundle.
+carrier and reconstruction theorem survives.  The later claim-by-claim source audit pre-empts the
+raw one-factorization, matching-design, and coarse Hadamard-orbital layers, but finds no predecessor
+for the conic-quotient/moment/Fourier composition within bounded coverage.  Unrestricted priority
+wording remains prohibited by named database and forward-citation gaps.  See
+`notes/2026-07-20-c406-matching-module.md`, `notes/2026-07-20-c406-priority-audit.md`, and the exact
+checker/JSON/replay/checksum bundle.
 
-**Decision:** preserve the current C399-led Clebsch paper as the protected baseline while testing
-one stronger, tightly bounded candidate spine.  No factorization-memory, equivariant-repair,
-Fourier-sign, cubic, quantum, or higher-rank direction enters the manuscript merely because it is
-attractive.  Promotion requires an exact theorem, a nonclassical consequence, a claim-specific
-source audit, and a shorter or stronger manuscript rather than a larger one.
+**Decision:** preserve the current C399-led Clebsch paper as the protected baseline while the
+manuscript owner chooses whether C406 replaces weaker material.  The exact theorem, nonclassical
+consequence, bounded claim-specific audit, and C411 conceptual exposition are now present; the
+remaining paper gate is the explicit architecture choice and honest priority qualification.  No
+factorization-memory, equivariant-repair, Fourier-sign, cubic, quantum, or higher-rank direction
+enters merely because it is attractive.  The replacement must make the manuscript shorter or
+stronger rather than larger.  The live paper decision is in
+`notes/2026-07-20-clebsch-paper-planning-sweep.md`.
 
 ## Purpose of this report
 
@@ -687,29 +694,30 @@ forgetting factorization and marking.  Otherwise close that door without a censu
 A cold C406 session should read, in order:
 
 1. `notes/handoffs/2026-07-17-crowns.md`;
-2. this report;
-3. `notes/2026-07-20-c406-matching-orbit-scout.md` and the compact JSON schema it describes; treat
+2. `notes/2026-07-20-clebsch-paper-planning-sweep.md` for the current manuscript decision;
+3. this report;
+4. `notes/2026-07-20-c406-matching-orbit-scout.md` and the compact JSON schema it describes; treat
    its orbit, base-matching, `PSL_2` sheet, and input-hash data as frozen;
-4. `notes/2026-07-20-c399-coxeter-number-conic-phase.md`, only for fixed conic/group conventions;
-5. the matching and parent-forgetting sections of
+5. `notes/2026-07-20-c406-matching-module.md` for the final theorem and exact negative boundaries;
+6. `notes/2026-07-20-c406-priority-audit.md` for classical ownership, likely-new wording, and
+   access gaps;
+7. `notes/2026-07-20-c399-coxeter-number-conic-phase.md`, only for fixed conic/group conventions;
+8. the matching and parent-forgetting sections of
    `notes/2026-07-20-c403-arrangement-complement-distance.md`;
-6. the matching recovery and two-sheet statements in
+9. the matching recovery and two-sheet statements in
    `notes/2026-07-19-c379-clebsch-deep-hole-extension.md` and
    `notes/2026-07-19-c379-one-factorization-biplane-companion.md`;
-7. `notes/2026-07-20-c399-literature-audit.md` for the classical ownership boundary; and
-8. C378/C372 only after Gate 3 or Gate 4 requires the Fourier comparison.
+10. `notes/2026-07-20-c399-literature-audit.md` for the classical ownership boundary;
+11. `notes/2026-07-20-c411-double-coset-hecke.md` for the completed conceptual derivation; and
+12. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion work after C411.
 
-Gates 1--3 are closed by the scout and matching-module bundles.  No cold session should rerun their
-finite enumerations except through the recorded `--check` and independent replay commands.  Any
-paper promotion or Lean implementation consumes the theorem statement and certificate schema in
-`notes/2026-07-20-c406-matching-module.md`; neither is implicit in this planning record.
+Gates 1--3 and the bounded audit are closed.  No cold session should rerun their finite enumerations
+except through the recorded `--check` and independent replay commands.  Any paper promotion or Lean
+implementation consumes the theorem statement and certificate schema in the matching-module
+report; neither is implicit in this planning record.
 
-The task hand-back must contain one of:
-
-- a red theorem-level obstruction and exact stop;
-- a yellow exact compatibility statement with no promotion; or
-- a green theorem, source disposition, certificate bundle, Lean exit plan, and a proposed
-  replacement manuscript spine.
-
-No outcome silently edits the main paper.  Manuscript promotion remains a separate explicit
-decision after the C406 evidence is reviewed.
+C406's hand-back is the third case: a green theorem, bounded source disposition, certificate bundle,
+Lean exit plan, and proposed replacement spine.  No result silently edits the main paper.
+Manuscript promotion remains the separate explicit decision in the `clebsch` handoff.  C411 is the
+completed first conceptual successor admitted to the candidate spine; C412--C417 are companions,
+not unfinished C406 gates.

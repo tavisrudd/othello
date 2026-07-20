@@ -259,8 +259,10 @@ and the fourth is `144(Q-7)`.  The base-field collision is the factor `Q-7`; the
 triple zero at `x=1` says that all aggregate depth information through quadratic order
 is balanced by the trade.  This is an exact third instance of “cubic first memory”
 beside C403's line-depth moments and C406's signed sheet moments, but those three use
-different objects and conventions.  C409 is queued to determine whether they admit a
-single normalized theorem rather than merely the same algebraic silhouette.
+different objects and conventions.  C409 has since proved that they form one exact-strength-two
+signed-feature filtration, with cubic sharpness on the Pasch/common-core family but not universally
+for higher-strength trades.  C410 then closed negatively over all spanning q=7 six-point
+external-line closures; C418/C419 carry the larger-trade and fixed-incidence-moduli attacks.
 
 ## Failed direct census and why it mattered
 

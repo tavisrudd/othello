@@ -13,10 +13,16 @@
 
 Finish the Clebsch-hexagon paper as a self-contained, honestly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
-Current assessment: **the existing 19-page manuscript and local reproducibility package are closed;
-the selected C399 portable theorem must now be integrated under its audited classical/new boundary,
-followed by mixed-verification policy integration, exact shared-Lean pinning, the `arcs`
-publication-allocation edge, and immutable archival release**.
+Current assessment: **the existing 19-page manuscript and local reproducibility package remain the
+protected baseline.  C399 is the selected portable upgrade for that version.  C406 has passed its
+mathematical gate and bounded claim-by-claim audit as a likely-new conic-quotient/moment/Fourier
+composition, and C411 has supplied the missing conceptual double-coset/Hecke derivation.  The
+C406+C411 form is therefore the recommended replacement spine, not an automatic manuscript
+addition.  The next paper action is an explicit baseline-versus-replacement decision; only then
+should the chosen theorem be integrated, formalized, and released**.
+
+The current decision and novelty map is
+[`2026-07-20-clebsch-paper-planning-sweep.md`](../2026-07-20-clebsch-paper-planning-sweep.md).
 
 Authoritative manuscript and checkers:
 [`papers/clebsch-hexagon-code/`](../../papers/clebsch-hexagon-code/).
@@ -24,7 +30,7 @@ Rendered paper:
 [`clebsch_hexagon_code.pdf`](../../papers/clebsch-hexagon-code/clebsch_hexagon_code.pdf).
 Paper registry: [`papers-index.md`](../../papers/papers-index.md), alias `clebsch`.
 
-## Integrated theorem spine
+## Protected theorem spine
 
 - Rigidity: among six-arcs of `PG(2,11)`, conic containment of the full
   maximum-distance syndrome locus characterizes the Clebsch class and recovers `A5`.
@@ -43,22 +49,63 @@ Paper registry: [`papers-index.md`](../../papers/papers-index.md), alias `clebsc
   it becomes the full-conic extended GRS code.  Edge/Dye own the individual configurations,
   `5,14,22` marker fibres, and substantial relation geometry.
 
+## Candidate C406+C411 replacement spine
+
+C403--C406 now support one tighter mechanism:
+
+```text
+Coxeter conic phase
+  -> conic restriction forgets secant pairing
+  -> conic-ideal quotient remembers the symmetry-selected factorizations
+  -> balanced second moments recover the two sheets
+  -> cubic signed memory orients them
+  -> H3 depth profiles enter C378's odd Fourier sector
+  -> singleton matching data recover the Clebsch parent through C379.
+```
+
+The exact C406 theorem has harmonic/radial image ranks `3,6,10`, unique balanced halves in B3/H3,
+first nonzero signed tensor moment in degree three, and an H3 six-profile information lattice of
+sizes `1,4,6 / 1,4,6`.  The raw one-factorizations, matching-design interpretation, `5/14/22`
+marker spaces, and coarse Hadamard orbital geometry are classical.  What the audit finds likely new
+within bounded coverage is their composition with the conic-ideal quotient, balanced reconstruction,
+cubic tensor memory, and explicit depth--Fourier map.  Unrestricted priority remains open behind
+the access gaps recorded in
+[`2026-07-20-c406-priority-audit.md`](../2026-07-20-c406-priority-audit.md).
+
+C411 makes the profile step conceptual: `A4` subgroup marks derive the two `1,4,6` triples, one
+canonical secant-incidence evaluation per double coset derives the six vectors, and antipodality
+plus the weighted barycentre relation gives the cubic-first pushforward.  The coordinates are mixed
+`A4`--`A5` matrix-coefficient data, not zonal spherical functions; the linear map has rank two and
+kernel dimension four while separating all six labels.  See
+[`2026-07-20-c411-double-coset-hecke.md`](../2026-07-20-c411-double-coset-hecke.md).
+
+This version should replace weaker descriptive material and compress the cubic, quantum, and free
+arrangement-code consequences; it must not enlarge the paper into parallel coequal spines.
+
 Detailed result/proof history is preserved in the archive and in reports C180–C187.
 
 ## Submission-critical work, in order
 
-1. Integrate C399 as the rank-three explanation of the q=11 phase.  Lead with the exact
-   nonmirror-line/distance theorem; credit Edge and Dye for the exceptional conic geometry and
-   avoid novelty claims for `5,14,22`, parent ambiguity, the B3 `3+6` split, or conic--GRS.
-   Source of truth: [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md).
-2. Apply the repository mixed-verification policy: keep the existing conceptual/replay/Lean
+1. **Choose the paper fork.**  C411 has passed, so the decision is ripe.  The default-safe option
+   remains the protected C399-led paper; the recommended higher-ceiling option is the C406+C411
+   replacement.  Extend only the claim-specific source gaps needed for manuscript wording.  Do not
+   wait for C405, C401, C402, C412--C419, or other companion gates.
+2. **Integrate one spine.**  In the baseline version, integrate C399 as the rank-three explanation
+   of the q=11 phase.  In the replacement version, use C399 as the phase prelude and C403/C406 as
+   the central forgetting-and-memory theorem.  In either case credit Edge and Dye for the
+   exceptional conic geometry and avoid novelty claims for `5/14/22`, parent ambiguity, the B3
+   `3+6` split, or conic--GRS.  Sources of truth are
+   [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md),
+   [`2026-07-20-c406-matching-module.md`](../2026-07-20-c406-matching-module.md), and the C406
+   priority audit above.
+3. Apply the repository mixed-verification policy: keep the existing conceptual/replay/Lean
    boundary explicit, print the adequacy appendix for the headline Lean statements, and add the
    final AI/provenance disclosure.
-3. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
+4. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
    sources into the paper repository.
-4. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
+5. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
    this paper's release pass.
-5. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
+6. **Immutable artifact — C182.** Archive code, certificates, sources, and rendered PDF under a
    stable DOI; cite the artifact from the paper.
 
 ## Completed bounded paper upgrade
@@ -78,14 +125,25 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
 
 ## Selected crowns import
 
-- **C399 selected 2026-07-20:** integrate the uniform rank-three complement-code theorem into this
-  paper rather than spawning a separate submission.  The literature audit found no exact
-  predecessor for the uniform nonmirror maximum/distance law or `q=h+1` Coxeter-number package,
-  but it found strong positive pre-emption for the surrounding geometry in Edge and Dye.  C403 may
-  later streamline the proof interface; C404 is closed as pre-empted; C405 remains a separate
-  companion gate.  The theorem report and source boundary are
+- **C399 selected as the protected upgrade:** integrate the uniform rank-three complement-code
+  theorem rather than spawning a separate submission.  The audit found no exact predecessor for
+  the uniform nonmirror maximum/distance law or `q=h+1` package, but strong pre-emption for the
+  surrounding geometry in Edge and Dye.  The theorem report and source boundary are
   [`2026-07-20-c399-coxeter-number-conic-phase.md`](../2026-07-20-c399-coxeter-number-conic-phase.md)
   and [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md).
+- **C403 complete:** the weighted 2-adjoint theorem, stabilizer-stratified Coxeter word orbits, and
+  all-degree conic matching quotient are available.  Bare nonfactorized dual supports factor
+  through the standard GRS matroid and retain no parent data.
+- **C406+C411 complete as the recommended replacement candidate:** C406's exact theorem and bounded
+  priority audit support likely-new wording only for the conic-quotient/moment/Fourier composition.
+  C411 supplies the source-surviving conceptual double-coset/mixed-bi-Hecke proof and is the one
+  successor admitted under the single-promotion rule.  C412--C417 remain companions.  No manuscript
+  edit is implicit until the explicit fork decision.
+- **C407--C409 are not additional flagships:** C407 consists of conventional free corollaries;
+  C408 is a companion limitation theorem showing global data forget pointed repair; and C409 is a
+  classical/formal exact-strength-two normalization.  C410 now closes every spanning q=7
+  six-point external-line closure; C418/C419 own its active larger-trade and fixed-incidence-moduli
+  successors.  C405 is independent, and none of these directions delays the paper decision.
 
 ## Optional formal upgrade
 
