@@ -48,7 +48,10 @@ compatibility check closes the task; it does not authorize a new census or proof
    regions and as sums of integral scheduling semigroups.  The determinant sheet persists exactly
    in odd degree, the quadratic block occurs exactly in even degree, and `c_n` is odd exactly for
    `n=3,0 mod 4`.  The proof supplies the four-generator orbit/Cayley compatibility map and makes
-   no Grundy or P/N claim.  See `notes/2026-07-19-c370-mirror-extension-periodicity.md`.
+   no Grundy or P/N claim.  A focused audit pre-empts novelty for the classical orbit blocks and
+   for disjoint-helper Minkowski additivity; no direct predecessor for the exact four-centre
+   composition was located, but database and forward-citation gaps keep priority explicitly open.
+   See `notes/2026-07-19-c370-mirror-extension-periodicity.md`.
 
 ## Shared publication gate
 
