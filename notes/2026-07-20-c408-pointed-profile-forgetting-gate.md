@@ -180,6 +180,88 @@ weighted-adjoint scalar-extension package
   detects the difference.
 ```
 
+## Free post-close consequences
+
+The same witness gives several exact refinements without a new search or a stronger
+trusted boundary.
+
+### Same global package, different all-symbol locality and puncture deck
+
+The two codes have identical ordinary weight enumerator, generalized weights, Tutte
+polynomial, and total circuit counts, but their coordinatewise locality data are
+different.  In `B_dis` every coordinate has locality two and one disjoint repair pair.
+In `B_sh`, the common point of the two three-secants has locality two and two disjoint
+repair pairs, four points have locality two and one repair pair, and the sixth point has
+no locality-two repair.  The latter has locality exactly three: together with one point
+from each three-secant away from the common point and the common point itself, it forms
+a four-circuit.
+
+There is also a smallest pointed enumerator that sees the distinction.  Since the
+projective dual code has no words of weight below three, puncturing `D^perp` at a
+coordinate `P` gives
+
+```text
+A_2(puncture_P(D^perp))=(q-1)R(P).
+```
+
+Thus at q=7 the unordered one-coordinate puncture decks have weight-two entries
+
+```text
+B_dis: {6,6,6,6,6,6},
+B_sh:  {0,6,6,6,6,12}.
+```
+
+This is a compact pointed refinement of C407's global enumerator package.
+
+### Tutte-equivalent but nonisomorphic representable matroids
+
+The complement-column matroids are simple rank-three `F_q`-representable matroids with
+the same Tutte polynomial, but they are not isomorphic.  Their complete three-circuit
+hypergraphs consist respectively of two disjoint triples and two triples meeting in one
+element, an isomorphism-invariant distinction.  Consequently the corresponding
+projective codes are not monomially equivalent, despite agreement of every global
+C403/C407 invariant listed above.
+
+### Same aggregate covering data, different local lists
+
+The common coset-leader enumerator records only whether a syndrome has a representative
+of weight at most two.  The displayed `mu` distributions sharpen this: even when that
+aggregate enumerator agrees, individual weight-two list sizes do not.  Equivalently,
+the pair has the same radius-two covering census but different syndrome-by-syndrome
+decoding ambiguity.
+
+For the conventional code-based secret-sharing construction with a chosen dealer
+coordinate, the size-two minimal access sets arising from weight-three dual checks are
+counted by the same `R(P)`.  The dealer profiles are therefore `1^6` versus
+`0,1^4,2`.  This is an interface consequence, not a novelty claim about secret sharing.
+
+### The scalar-tower defect is exactly cubic
+
+Let `P_dis,Q(x)` and `P_sh,Q(x)` denote the two weighted-adjoint projective depth
+polynomials, with the coefficient of `x^d` equal to the number of projective test
+points of depth `d` over an extension field of size `Q`.  The four coefficient
+differences in the table factor as
+
+```text
+P_dis,Q(x)-P_sh,Q(x)
+  =(Q-7)(-x+2x^2-2x^4+x^5)
+  =(Q-7)x(x-1)^3(x+1).
+```
+
+Hence its depth moments of orders zero, one, and two vanish, while the first surviving
+raw moment is
+
+```text
+sum_d d^3 [x^d](P_dis,Q-P_sh,Q)=12(Q-7),
+```
+
+and the fourth is `144(Q-7)`.  The base-field collision is the factor `Q-7`; the
+triple zero at `x=1` says that all aggregate depth information through quadratic order
+is balanced by the trade.  This is an exact third instance of “cubic first memory”
+beside C403's line-depth moments and C406's signed sheet moments, but those three use
+different objects and conventions.  C409 is queued to determine whether they admit a
+single normalized theorem rather than merely the same algebraic silhouette.
+
 ## Failed direct census and why it mattered
 
 Before the closure construction, the checker exhausted small arrangements directly:
@@ -243,6 +325,9 @@ specialization, not the restriction classification itself.
 The general multiplicity notion is classical: Bartoli--Davydov--Giulietti--Marcugini--
 Pambianco define `(1,mu)`-saturating sets by secants counted with multiplicity and
 translate them to covering codes (arXiv:1505.01426, consulted at abstract level).
+The minimal-codeword/access-structure interface is likewise classical; Song--Li treat
+access structures from minimal linear codes (arXiv:1202.4058, consulted at abstract
+level).
 C408 claims neither that definition nor generic locality/availability terminology as
 new.  No dedicated search for the exact external-line-closure trade or its
 arrangement-code formulation was run, so the theorem carries no novelty or priority
@@ -289,6 +374,8 @@ forgotten by `f_s`.
 C408 passes Doors 1 and 2 and closes the bounded gate.  It adds an all-`q>=7`
 second-forgetting theorem for coordinate repair, an exact q=7 syndrome-multiplicity
 separation, and a q=7 demonstration that the weighted adjoint is precisely the stronger
-scalar-extension repair.  A silver same-tower collision remains unallocated and should
-begin with balanced incidence switching, not a larger raw census.  C406 otherwise
-returns to the front of the crowns queue.
+scalar-extension repair.  Its free consequences include a puncture-deck separator,
+Tutte-equivalent nonisomorphic representable matroids, heterogeneous decoding-list and
+dealer profiles, and the cubic defect `(Q-7)x(x-1)^3(x+1)`.  C409 now owns the bounded
+cubic-memory normalization gate; C410 owns the silver same-tower collision and begins
+with balanced incidence switching, not a larger raw census.
