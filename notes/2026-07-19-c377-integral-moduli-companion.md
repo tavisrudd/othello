@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-19
 
-**Status:** unallocated successor design; does not reopen C377
+**Status:** unallocated successor design, recalibrated after C378/C379; does not reopen C377
 
 **Parent:** `notes/2026-07-19-c377-clebsch-golden-descent.md`
 
@@ -24,7 +24,8 @@ The provisional flagship is:
 > Benson's descended representation.
 
 This companion designs that project and ranks the genuinely different alternatives behind it.  It
-allocates no task, asserts no theorem or novelty, and does not change the live C378--C380 order.
+allocates no task, asserts no theorem or novelty, and does not displace the live C380 foundation
+gate.
 
 ## Why moduli is the right next level
 
@@ -50,6 +51,26 @@ A moduli construction can say exactly where the quadratic choice enters, where i
 two-cover, where it ramifies, and at which forgetful map it ceases to be an obstruction while
 remaining intrinsically recoverable.  A list of finite-field specializations cannot by itself make
 those distinctions canonical.
+
+## C378/C379 calibration: two covers are not one fibre
+
+C378 makes the orientation-cover idea more productive: the two golden rank-eight syndrome
+fissions have a certified Fourier-self-dual rank-16 common refinement and a nonzero `J`-odd
+sector.  A moduli orientation can therefore parameterize genuinely different algebraic structure,
+not just the two roots of `tau^2-tau-1`.
+
+C379 imposes a necessary correction.  Over the fixed q=11 deep-hole conic, the marked parent fibre
+has 22 elements, not the two golden parents.  An individual parent is recovered by decorating the
+conic with its canonical obstruction matching.  C379's independently replayed pre-freeze extension
+proves that the 22 matchings split into two eleven-element `PSL_2(11)` orbits, each a
+one-factorization of `K_12`, and that `J` exchanges the two systems.  See
+`notes/2026-07-19-c379-one-factorization-biplane-companion.md`.
+
+Thus the proposed global golden orientation cover may still be degree two, but its q=11 image in
+the deep-hole construction would select one of two **eleven-parent systems**, not one of two
+individual parents.  Recovering a parent requires the additional matching choice.  This finite
+distinction is now certified; its focused source audit and a productive framed moduli map must
+still precede any stack, normalization, or field-of-moduli build-up.
 
 ## Flagship theorem candidate
 
@@ -175,7 +196,9 @@ Preferred consequences are:
 4. the characteristic-five stabilizer jump is proved to be the ramified fiber of the same cover;
 5. the exact field of moduli versus field of definition is computed at every marking level; or
 6. a valid cohomological comparison computes the image of the orientation class in the cubic
-   surface's double-six obstruction theory.
+   surface's double-six obstruction theory; or
+7. the orientation cover maps functorially to the unordered pair of q=11 one-factorizations, while
+   the matching-decorated fibre records the strictly finer 22-parent choice.
 
 The statement “the moduli coordinate is `tau`” does not pass.  Neither does rephrasing the
 discriminant of `x^2-x-1` as a moduli discriminant without proving representability and intrinsic
@@ -298,16 +321,20 @@ bad-prime theorem beyond C346.
 
 ## Ranked research order
 
-1. integral moduli orientation cover;
-2. intrinsic Frobenius--chirality theorem from the sibling companion;
-3. forgetful descent spectrum;
-4. exact obstruction-separation theorem;
-5. two-axis modular reduction phase diagram;
-6. arithmetic 27-line observable; and
-7. integral-lattice refinement of Benson.
+1. finish the focused source audit of the now-certified q=11 `11+11`
+   one-factorization/biplane theorem;
+2. run one framed fixed-locus elimination for the integral orientation cover;
+3. continue to normalization or a moduli object only if steps 1--2 give a functorial productivity
+   map rather than only the golden polynomial;
+4. intrinsic Frobenius--chirality theorem from the sibling companion;
+5. forgetful descent spectrum;
+6. exact obstruction-separation theorem;
+7. two-axis modular reduction phase diagram;
+8. arithmetic 27-line observable; and
+9. integral-lattice refinement of Benson.
 
-The first four may be different faces of one successful project.  The last three are fallback
-routes, not reasons to broaden the first computation.
+The middle arithmetic and descent questions may be different faces of one successful project.  The
+last three are fallback routes, not reasons to broaden the first computation.
 
 ## Evidence bundle if promoted
 
@@ -364,10 +391,11 @@ load-bearing moduli and double-six source and forward-citation closure.
 
 ## Promotion and hand-back
 
-Run only the fixed elimination falsifier before deciding whether this design deserves allocation.
-If it returns the expected finite quadratic algebra and the intrinsic-recovery consequence remains
-plausible, allocate a new `crowns` C-ID for the integral moduli orientation cover.  Never reuse C377
-or silently expand C378, C379, or C380.
+The smaller C379 one-factorization certificate is complete; finish its focused audit.  Then run
+only the fixed elimination falsifier before deciding whether this design deserves allocation.  If
+both expose a functorial orientation-to-structure map and the intrinsic-recovery consequence remains plausible,
+allocate a new `crowns` C-ID for the integral moduli orientation cover.  Never reuse C377 or
+silently expand C378, C379, or C380.
 
 If the elimination gives only the classical golden polynomial with no moduli-level consequence,
 retain this file as an unpromoted companion.  If the global moduli construction fails but the

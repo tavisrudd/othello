@@ -218,6 +218,8 @@ order 1331, or establish a marked deep-hole fibre theorem.
 ## Hand-back
 
 C378's required first gate is green and the signed/Fourier gate yields one exact new structural
-consequence.  It does not authorize a broader AME, surface, Gale, or all-prime program.  C379 remains
-the independent marked deep-hole-fibre/iteration probe; C380 may formalize only the stable group-
-orbit-to-fusion seam and the signed finite matrix identity.
+consequence.  It does not authorize a broader AME, surface, Gale, or all-prime program.  C379 has
+since completed the independent marked deep-hole-fibre/iteration probe: the undecorated transform
+terminates, matching decoration recovers all 22 parents, and `PSL_2(11)` organizes the matchings
+into two one-factorizations with biplane cross-incidence.  C380 may formalize only the stable
+group-orbit-to-fusion seam, signed finite matrix identity, and bounded C379 leaves.

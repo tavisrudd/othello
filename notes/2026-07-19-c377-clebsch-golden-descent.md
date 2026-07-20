@@ -217,19 +217,23 @@ knowledge” claim for the surviving exact specialization.
 
 ## Hand-back
 
-C377 closes Door II at its red off-ramp.  C378 and C379 remain independent bounded falsifiers;
-neither may cite C377 as a new arithmetic crown.  C380 may use the displayed integral identity as
-a small specialization lemma only if useful, while crediting Benson for the general descent
-mechanism and keeping C376's quotient-character theorem as the substantive gateway result.
+C377 closes Door II at its red off-ramp.  The independent falsifiers have since landed: C378 uses
+the displayed involution to complete `A5` to `PGL_2(11)` and obtain the rank-16 signed Fourier
+refinement; C379 uses it to exchange two `PSL_2(11)`-invariant one-factorizations of the 22
+matching-decorated parents above the deep-hole conic.  Neither may cite C377 as a new arithmetic
+crown.  C380 may use the integral identity as a small specialization lemma only if useful, while
+crediting Benson for the general descent mechanism and keeping the downstream compatibility
+theorems separate.
 
 The unallocated companion
 `notes/2026-07-19-c377-frobenius-chirality-companion.md` records the strongest creative question
 left by the stop: recover the quadratic Frobenius character intrinsically from the unmarked
 code/syndrome graph and compare its `H^1` chirality torsor with Benson's trivial linear obstruction
-and the double-six Brauer class.  It does not reopen C377 or alter the C378--C380 order.
+and the double-six Brauer class.  It does not reopen C377 or displace C380.
 
 The second unallocated companion
 `notes/2026-07-19-c377-integral-moduli-companion.md` globalizes that question: construct the integral
 orientation cover of the `A5` six-arc locus, determine its normalization, discriminant, bad fibers,
 and forgetful descent spectrum, and make the Frobenius law a consequence of one intrinsic moduli
-object.  It likewise does not reopen C377 or alter the live order.
+object.  It likewise does not reopen C377 or alter the live order; C379's certified pair of
+one-factorizations is now its finite productivity target, not a two-parent deep-hole fibre.

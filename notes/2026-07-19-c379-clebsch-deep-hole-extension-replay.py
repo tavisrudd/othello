@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import itertools
 import json
-from collections import deque
+from collections import Counter, deque
 from pathlib import Path
 
 Q = 11
@@ -188,6 +188,18 @@ def obstruction_matching(parent, child_conic):
     return frozenset(pairs)
 
 
+def matching_key(matching):
+    return tuple(sorted(tuple(sorted(pair)) for pair in matching))
+
+
+def encode_matching(matching):
+    return [[list(point) for point in pair] for pair in matching_key(matching)]
+
+
+def act_on_matching(matrix, matching):
+    return frozenset(frozenset(normalize(mv(matrix, point)) for point in pair) for pair in matching)
+
+
 def minimum_distance(generator):
     minimum = len(generator[0]) + 1
     count = 0
@@ -212,9 +224,15 @@ def conjugate(matrix, group):
     return frozenset(normm(mm(mm(matrix, element), transpose)) for element in group)
 
 
+def commutator(left, right):
+    left_inverse = tuple(zip(*left))
+    right_inverse = tuple(zip(*right))
+    return normm(mm(mm(mm(left, right), left_inverse), right_inverse))
+
+
 def main():
     cert = json.loads(CERT.read_text())
-    assert cert["schema"] == "othello.c379.clebsch_deep_hole_extension.v1"
+    assert cert["schema"] == "othello.c379.clebsch_deep_hole_extension.v2"
     plane = projective_points()
     plus = six_points(8)
     minus = six_points(4)
@@ -269,15 +287,88 @@ def main():
     matching_stabilizer = {
         matrix
         for matrix in full
-        if frozenset(frozenset(normalize(mv(matrix, point)) for point in pair) for pair in plus_matching)
-        == plus_matching
+        if act_on_matching(matrix, plus_matching) == plus_matching
     }
     assert matching_stabilizer == group
-    assert frozenset(
-        frozenset(normalize(mv(J, point)) for point in pair) for pair in plus_matching
-    ) == minus_matching
+    assert act_on_matching(J, plus_matching) == minus_matching
+    assert all(
+        matchings[image(matrix, arc)] == act_on_matching(matrix, matching)
+        for matrix in full
+        for arc, matching in matchings.items()
+    )
     assert cert["decorated_transform"]["distinct_obstruction_matching_count"] == 22
     assert cert["decorated_transform"]["injective_on_conjugate_a5_parent_locus"] is True
+    assert cert["decorated_transform"]["pgl_equivariant"] is True
+
+    # Reconstruct the index-two subgroup independently as the commutator subgroup of PGL_2(11).
+    psl = closure([commutator(matrix, J) for matrix in full])
+    assert len(psl) == 660 and psl < full and J not in psl
+    remaining = set(arcs)
+    sheets = []
+    while remaining:
+        representative = min(remaining, key=lambda arc: tuple(sorted(arc)))
+        sheet = frozenset(image(matrix, representative) for matrix in psl)
+        remaining -= sheet
+        sheets.append(sheet)
+    assert sorted(map(len, sheets)) == [11, 11]
+    plus_sheet = next(sheet for sheet in sheets if plus in sheet)
+    minus_sheet = next(sheet for sheet in sheets if minus in sheet)
+    assert plus_sheet != minus_sheet
+    assert frozenset(image(J, arc) for arc in plus_sheet) == minus_sheet
+
+    plus_factorization = sorted((matchings[arc] for arc in plus_sheet), key=matching_key)
+    minus_factorization = sorted((matchings[arc] for arc in minus_sheet), key=matching_key)
+    all_edges = frozenset(frozenset(pair) for pair in itertools.combinations(conic, 2))
+    for factorization in (plus_factorization, minus_factorization):
+        multiplicities = Counter(edge for matching in factorization for edge in matching)
+        assert frozenset(multiplicities) == all_edges
+        assert Counter(multiplicities.values()) == Counter({1: 66})
+    assert {act_on_matching(J, matching) for matching in plus_factorization} == set(minus_factorization)
+
+    intersections = [[len(left & right) for right in minus_factorization] for left in plus_factorization]
+    assert Counter(value for row in intersections for value in row) == Counter({1: 66, 0: 55})
+    incidence = [[int(value == 1) for value in row] for row in intersections]
+    columns = list(zip(*incidence))
+    assert {sum(row) for row in incidence} == {6} and {sum(column) for column in columns} == {6}
+    assert {
+        sum(a * b for a, b in zip(incidence[i], incidence[j]))
+        for i, j in itertools.combinations(range(11), 2)
+    } == {3}
+    assert {
+        sum(a * b for a, b in zip(columns[i], columns[j]))
+        for i, j in itertools.combinations(range(11), 2)
+    } == {3}
+    complement = [[1 - value for value in row] for row in incidence]
+    complement_columns = list(zip(*complement))
+    assert {sum(row) for row in complement} == {5}
+    assert {sum(column) for column in complement_columns} == {5}
+    assert {
+        sum(a * b for a, b in zip(complement[i], complement[j]))
+        for i, j in itertools.combinations(range(11), 2)
+    } == {2}
+    assert {
+        sum(a * b for a, b in zip(complement_columns[i], complement_columns[j]))
+        for i, j in itertools.combinations(range(11), 2)
+    } == {2}
+
+    recorded_factorization = cert["one_factorization_biplane"]
+    assert recorded_factorization["psl_subgroup_order"] == 660
+    assert recorded_factorization["pgl_over_psl_index"] == 2
+    assert recorded_factorization["parent_sheet_sizes"] == [11, 11]
+    assert recorded_factorization["matching_sheet_sizes"] == [11, 11]
+    assert recorded_factorization["child_edge_count"] == 66
+    assert recorded_factorization["edge_multiplicity_spectra"] == [{"1": 66}, {"1": 66}]
+    assert recorded_factorization["tau8_sheet_matchings"] == [
+        encode_matching(matching) for matching in plus_factorization
+    ]
+    assert recorded_factorization["tau4_sheet_matchings"] == [
+        encode_matching(matching) for matching in minus_factorization
+    ]
+    assert recorded_factorization["golden_J_exchanges_sheets"] is True
+    assert recorded_factorization["cross_matching_intersection_histogram"] == {"0": 55, "1": 66}
+    assert recorded_factorization["share_edge_design_parameters"] == [11, 6, 3]
+    assert recorded_factorization["disjointness_biplane_parameters"] == [11, 5, 2]
+    assert recorded_factorization["share_edge_incidence_matrix"] == incidence
 
     unseen = set(arcs)
     orbit_records = []
@@ -292,7 +383,7 @@ def main():
     assert next(size for size, _, has_minus in orbit_records if has_minus) == 5
     assert cert["marked_fibre"]["same_fibre_fixed_a5_orbit_sizes"] == [1, 5, 6, 10]
     assert cert["marked_fibre"]["golden_pair_is_complete"] is False
-    print("independent replay: 12 MDS extensions; 12 A1 weak-del-Pezzo roots; D^2 empty; decorated transform 22 <-> 22")
+    print("independent replay: 12 MDS extensions; 12 A1 roots; D^2 empty; two K12 one-factorizations; biplane 2-(11,5,2)")
 
 
 if __name__ == "__main__":

@@ -1,49 +1,55 @@
-# C377 companion — golden fusion and the chirality-forgetting quotient
+# C377 companion — golden fusion and the matching-decorated child
 
 **Lane:** `crowns`
 
 **Date:** 2026-07-19
 
-**Status:** unallocated theorem design and bounded pilot observation; no paper-facing computational
-claim yet
+**Status:** updated through certified C378 and the C379 pre-freeze extension; fusion theorem landed,
+binary deep-hole-fibre proposal refuted and replaced by matching-decorated inversion organized into
+two one-factorizations
 
 **Parent:** `notes/2026-07-19-c377-clebsch-golden-descent.md`
 
 **Siblings:** `notes/2026-07-19-c377-frobenius-chirality-companion.md` and
 `notes/2026-07-19-c377-integral-moduli-companion.md`
 
-## Executive thesis
+## Executive thesis and disposition
 
 C377's descent mechanism is prior art, but its exact integral map can still be productive when
 transported into structures not studied by that prior art.  The best candidate is the relation
 between the primitive rank-eight Clebsch syndrome scheme and its rank-four affine orthogonal
 fusion.
 
-The proposed central theorem is:
+The proposed central theorem has now landed in C378:
 
 > The golden passage exchanging the two Clebsch presentations completes the projective `A5`
 > syndrome action to the full conic stabilizer `PGL_2(11)`.  Its affine orbit scheme is exactly the
-> rank-four orthogonal fusion of the rank-eight Clebsch scheme.  Thus golden chirality is fission
-> data: adjoining or descending the golden orientation forgets that data and restores the full
-> conic symmetry.
+> rank-four orthogonal fusion of the rank-eight Clebsch scheme.
 
-A stronger companion theorem would identify the q=11 deep-hole transform on marked Clebsch parents
-as the quotient that forgets precisely this chirality:
+C378 also proves that the two conjugate rank-eight schemes have a Fourier-self-dual rank-16 common
+coherent refinement with a four-dimensional `J`-odd sector.  This makes golden passage productive,
+but corrects the original slogan: the rank-four fusion is not obtained by forgetting precisely one
+chirality bit, since the `J`-fixed part of the rank-16 refinement has dimension 12.
+
+C379 refuted the proposed binary deep-hole fibre.  The actual diagram is:
 
 ```text
-                         golden outer passage
-         C_plus  -------------------------------->  C_minus
-            \                                             /
-             \                                           /
-              \ D                                     D /
-               \                                       /
-                    common GRS deep-hole conic Q
-                              |
-                              v
-                 rank-four PGL_2(11) orthogonal scheme.
+        22 Clebsch parents X
+                 |
+                 | reversible decorated transform
+                 v
+             (Q, M_X)             M_X = perfect matching of Q(F_11)
+                 |
+                 | forget M_X
+                 v
+          common GRS conic Q       full symmetry PGL_2(11).
 ```
 
-This is a new use of C377 rather than a claim that its representation-theoretic descent is new.
+The 22 matchings are distinct and each has stabilizer exactly its parent `A5`; `J` exchanges the
+two golden matchings.  C379's pre-freeze extension further splits them into two eleven-element
+`PSL_2(11)` orbits, each a one-factorization of `K_12`, with complementary cross-incidence the
+`2-(11,5,2)` biplane.  The finite result is independently replayed; its focused literature audit
+remains open.  See `notes/2026-07-19-c379-one-factorization-biplane-companion.md`.
 
 ## Reaction to the integral-moduli companion
 
@@ -72,9 +78,10 @@ Accordingly the fixed elimination falsifier should be followed, not preceded, by
 gate below.  If no fission or deep-hole information descends functorially from the moduli cover,
 the global stack project should take its yellow off-ramp.
 
-## Bounded q=11 pilot observation
+## C378 disposition of the q=11 pilot
 
-A scratch calculation using C341's exact q=11 `A5` matrices and C377's displayed matrix
+C378 certified, independently replayed, and source-bounded the scratch calculation using C341's
+exact q=11 `A5` matrices and C377's displayed matrix
 
 ```text
 J = [ 1  0  0 ]
@@ -105,10 +112,9 @@ stabilizer, so the intended identification is
 <A5,J> = Stab_PGL3(Q) ~= PGL_2(11).
 ```
 
-This is only a bounded scratch observation.  It is not yet backed by a task-owned generator,
-canonical certificate, independent replay, or source audit and therefore is not released as a
-paper-facing theorem.  C378 is the natural owner of its exact certification because C378 already
-tests how C377's map interacts with the `H3` pairing and C372 Fourier duality.
+The group closure, exact fusion blocks, rank-16 common refinement, and signed four-dimensional
+Fourier block are now paper-facing C378 theorems, subject to C378's explicit source boundary and no
+priority claim.
 
 The pilot also kills one tempting route.  C372's unexplained rank-six fusion has projective block
 sizes `10,18,45,30,30`, which suggested an `A6` or Valentiner action.  The actual golden closure is
@@ -146,40 +152,29 @@ paper-facing contribution must be the compatibility statement:
 
 If source audit finds this compatibility already stated, retain it only as explanatory glue.
 
-## Theorem B — deep-hole transform as a chirality quotient
+## Theorem B — corrected by C379: matching-decorated inversion
 
-C368 already proves that both q=11 golden parents have the same complete projective deepest-
-syndrome locus `Q(F_11)`, and C377's `J` preserves `Q`.  This gives equivariance but not yet a
-two-to-one quotient theorem.
+C379 ran the prescribed exact `A5_6`-equivariant gate.  The common conic has 22 conjugate parents,
+and quotienting by the fixed same-fibre `A5` gives orbit sizes `1,5,6,10`.  Thus the golden pair is
+not a complete fibre in that category.  Quotienting by the full child stabilizer collapses all 22
+parents, so no alternative unmarked quotient produces the desired two-set.
 
-The stronger target requires a precise moduli category.  Restrict first to `A5`-marked six-arcs
-with the fixed invariant form and degree-six action.  Prove that:
+The positive replacement is canonical.  The six conics through five points of a parent cut the
+twelve child points into a perfect matching `M_X`; across the 22-parent locus these matchings are
+all distinct and `Stab(M_X)=Stab(X)`.  Hence
 
-1. the two golden Clebsch markings are the complete fiber of the deep-hole transform above the
-   marked conic child;
-2. the outer character exchanges the two parents and acts trivially on the child;
-3. forgetting the `A5` orientation identifies the two parents; and
-4. the child's full `PGL_2(11)` symmetry is the symmetry completion in Theorem A.
+```text
+X |--> (Q,M_X)
+```
 
-The phrase “two-to-one” is invalid on unmarked projective or monomial-equivalence classes if the
-two parents are already equivalent there.  The theorem must state exactly which marking makes the
-fiber a torsor.
+is equivariant, presentation-independent, injective, and uniquely invertible on the fixed locus.
+Forgetting `M_X` is exactly the 22-to-one information loss.  This decorated transform, not a
+binary parent fibre, is the stable theorem to transport.
 
-### Cheap classification gate
-
-Avoid a census of all six-arcs.  Solve only the `A5_6`-equivariant fiber over `Q`:
-
-1. classify six-point `A5/D5` orbits compatible with the fixed conic form;
-2. impose that their fifteen secants have complement exactly `Q(F_11)`;
-3. quotient by same-fiber `A5`, not the outer normalizer; and
-4. check whether exactly the two golden markings remain.
-
-**Green:** the fiber is exactly one free `C2` torsor and this identification is intrinsic.
-
-**Yellow:** both parents map to the same child but the fiber contains other marked parents or the
-two-point statement is only a coordinate artifact.
-
-**Red:** the transform is not well-defined on the proposed marked moduli category.
+The pre-freeze extension certifies that the 22 matchings split canonically under `PSL_2(11)` into
+two one-factorizations exchanged by `J`, with biplane cross-incidence.  The binary golden datum
+lives at the level of two eleven-parent systems; choosing a particular parent still requires one
+matching inside the selected system.
 
 ## Theorem C — conjugate fissions and a signed Fourier algebra
 
@@ -242,7 +237,8 @@ classical ingredients.
 
 ## Arithmetic and moduli integration
 
-If Theorems A and B pass, the integral-moduli companion gains a concrete functor:
+With Theorem A and corrected Theorem B established, the integral-moduli companion has two distinct
+candidate functors:
 
 ```text
 oriented A5 six-arc moduli
@@ -256,9 +252,24 @@ rank-eight Clebsch fission
 rank-four orthogonal scheme.
 ```
 
-The moduli orientation cover is then productive because its two sheets parameterize fissions of a
-common descended algebra.  The characteristic-five fiber should test whether this fission cover
-ramifies, coalesces, or becomes internally oriented when the parent itself becomes the conic.
+and, after the new finite gate is certified,
+
+```text
+golden orientation sheet
+          |
+          v
+one of two 11-matching one-factorizations
+          |
+          | choose M_X
+          v
+matching-decorated child (Q,M_X).
+```
+
+The first functor is supported by C378 and the second by C379's finite theorem.  Their existence
+still does not justify stack or normalization machinery before a framed moduli falsifier and the
+focused biplane source audit.  The characteristic-five fiber should test
+whether the fission cover and any factorization cover ramify, coalesce, or become internally
+oriented when the parent itself becomes the conic.
 
 The Frobenius companion should likewise be sharpened.  Recovering `chi_5(p)` from the field
 characteristic is tautological.  A genuine arithmetic theorem would show that Frobenius acts on an
@@ -295,31 +306,28 @@ test of whether the same oriented fission is visible in Picard geometry.
 
 ## Ranked execution plan
 
-1. **Certify the q=11 group closure and fusion equality.**  Produce a task-owned exact bundle and
-   independent replay; identify the group conceptually as the full conic stabilizer.
-2. **Run a claim-specific source audit.**  Search for this `A5`-to-`PGL_2(11)` completion, the exact
-   orbital fission/fusion, and Galois descent of association schemes or coherent configurations.
-3. **Classify the marked deep-hole-transform fiber.**  Stop at the `A5_6`-equivariant locus rather
-   than enumerating all q=11 six-arcs.
-4. **Compute the conjugate-fission coherent closure and signed algebra.**  Continue only with a
-   nontrivial canonical odd component.
-5. **Attach the integral moduli orientation cover.**  Promote the global stack only if it
-   parameterizes the fission or quotient established above.
-6. **Run the split/inert pilot.**  Ask whether Frobenius acts on the intrinsic fission data, not
-   whether one can recompute the Legendre symbol.
-7. **Compare the cubic-surface obstruction classes.**  This remains last because its maps and
-   source boundaries are least mature.
-
-The first step fits C378's existing common-duality/Fourier scope.  No additional task should be
-allocated before its exact gate and literature disposition.
+1. **C378 complete:** group closure, fusion equality, common refinement, and signed Fourier block
+   have a task-owned exact bundle and independent replay.
+2. **C379 complete:** the marked fibre, weak-del-Pezzo extensions, terminating undecorated
+   transform, and reversible matching-decorated transform have a separate exact bundle.
+3. **C379 pre-freeze extension complete:** the `11+11` one-factorizations and biplane incidence are
+   in the bounded certificate/replay; run the focused classical-source audit.
+4. **C380 next:** formalize only stable typed bridges and bounded leaves; consume the factorization
+   layer only through its frozen finite API.
+5. **Attach integral moduli only after step 3 is productive:** begin with one framed elimination,
+   not a stack build-up.
+6. **Run the split/inert pilot:** ask whether Frobenius acts on the intrinsic pair of fissions or
+   one-factorizations, not whether one can recompute the Legendre symbol.
+7. **Compare cubic-surface obstruction classes last:** their maps and source boundaries remain the
+   least mature.
 
 ## Red-team stops
 
 - The rank-four affine orthogonal scheme and its full conic symmetry are classical.  Novelty must
   lie in the exact arithmetic/code/fission compatibility.
 - C377's `J` is not C376's row-exchanging Cremona transformation.
-- The two golden parents are projectively or monomially equivalent after allowing the outer map;
-  a two-point fiber exists only in a correctly marked category.
+- The two golden parents are not the complete fibre even in the prescribed fixed-`A5` category;
+  C379 finds 22 parents.  Never restore the discarded two-point claim by changing quotients.
 - The rank-six fusion is not explained by adjoining any C377 outer cross-fiber map.
 - A quadratic cover, Legendre symbol, Artin `L`-function, or Hilbert-90 identity is not productive
   without an intrinsically recovered fission or signed statistic.
@@ -335,7 +343,8 @@ allocated before its exact gate and literature disposition.
 
 1. **A only:** use golden symmetry completion as the conceptual explanation of C372's rank-four
    fusion and C368's conic child.
-2. **A plus B:** promote the deep-hole transform as the marked chirality quotient.
+2. **A plus B:** use the matching-decorated transform as the reversible refinement of the common
+   conic; do not call it a chirality quotient.
 3. **A plus C:** promote arithmetic orientation as a Fourier-stable fission datum.
 4. **Moduli only:** retain a precise field-of-moduli/field-of-definition theorem without claiming
    a new scheme.
@@ -359,11 +368,11 @@ association-scheme library, and integral moduli stack remain outside the first L
 ## Promotion standard
 
 The decisive paper-facing sentence must be stronger than “golden conjugation acts in several
-places.”  The target is:
+places.”  The corrected target is:
 
-> Golden orientation is exactly the extra datum that fissions the conic's orthogonal error algebra;
-> arithmetic descent and the deep-hole transform forget that datum in two different mathematical
-> languages.
+> Golden passage completes the conic symmetry and exchanges two Clebsch fissions; independently,
+> the deep-hole conic becomes reversible when decorated by its parent obstruction matching.
 
-If exact work cannot make “exactly” true, the companion remains a source of exposition and bounded
-future questions rather than a new crown.
+The `11+11` certificate now permits the additional sentence that the binary passage exchanges two
+one-factorizations containing all 22 decorated parents.  It still does not identify the rank-four
+fusion, binary orientation, and individual-parent recovery as the same quotient.

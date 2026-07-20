@@ -162,14 +162,16 @@ reconstructed outer chirality character.
 
 ## Hand-back
 
-Door I is positive.  The next theorem-scale step is Door II:
+Door I is positive.  The originally proposed Door II was:
 
 1. lift the two blowdowns and quintic contraction over the golden integer ring;
 2. compute the descent cocycle on the six points, Picard lattice, and double-six;
 3. prove that its code/scheme action specializes to the q=11 outer coset certified here; and
 4. verify the predicted inert-semilinear and ramified-characteristic-five behavior.
 
-In parallel, one low-cost computation remains useful: apply the deep-hole transform once to the
-q=11 GRS child and determine whether the parent-to-child operation is involutive, periodic, or
-terminating.
-
+Subsequent disposition: C377 found the exact integral involution and specializations, but Benson
+pre-empts the generic descent mechanism.  C378 then used the involution productively to complete
+`A5` to `PGL_2(11)` and construct the rank-16 signed Fourier refinement.  C379 proves that the
+undecorated q=11 transform terminates, while a canonical obstruction matching reverses it on a
+22-parent locus; those matchings form two one-factorizations with eleven-point-biplane
+cross-incidence.  C380 is now the remaining gateway task.

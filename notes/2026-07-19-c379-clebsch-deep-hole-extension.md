@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-19
 
-**Verdict:** `THEOREM WITH SHARP OFF-RAMPS; REVERSIBLE MATCHING-DECORATED TRANSFORM, TWELVE WEAK DEL PEZZO EXTENSIONS, NON-BINARY UNDECORATED FIBRE`
+**Verdict:** `THEOREM WITH SHARP OFF-RAMPS; REVERSIBLE MATCHING-DECORATED TRANSFORM, TWO K12 ONE-FACTORIZATIONS AND AN 11-POINT BIPLANE, TWELVE WEAK DEL PEZZO EXTENSIONS`
 
 ## Result
 
@@ -76,6 +76,14 @@ result `H_p`.  Exact enumeration gives the following complete answer.
    unique there.  Forgetting `M_X` is precisely the coarse step that collapses 22 parents to the
    common GRS child.  The correct rescue is therefore a matching-decorated transform, not a binary
    chirality fibre of the undecorated conic.
+6. **The 22 decorated parents split into two one-factorizations and a biplane.**  The canonical
+   index-two subgroup `PSL_2(11)<PGL_2(11)` has two orbits of size 11 on the parent/matching locus.
+   Within either orbit, the eleven perfect matchings partition the 66 edges on the twelve conic
+   points exactly once, so each orbit is a one-factorization of `K_12`.  The outer map `J` exchanges
+   the two one-factorizations.  Across the two sheets, 66 pairs of matchings share one edge and 55
+   are disjoint.  “Share an edge” is a symmetric `2-(11,6,3)` design; its complement is a symmetric
+   `2-(11,5,2)` biplane.  Thus the binary golden datum selects one of two eleven-parent systems,
+   while selecting an individual parent requires its matching inside that system.
 
 ## Code and tensor boundary
 
@@ -106,19 +114,24 @@ The primary checker independently tests all 35 triples in each of the twelve sev
 enumerates all words in every dimension-four kernel and dimension-three dual, tests all 84
 six-subsets for conic dependence, constructs the six two-point obstruction fibres, covers the
 plane by the child's 66 secants, computes the complete finite group orbit calculation, and proves
-that all 22 obstruction matchings are distinct with exact order-60 stabilizer.
+that all 22 obstruction matchings are distinct with exact order-60 stabilizer.  It constructs the
+index-two subgroup as the normal closure of the parent `A5` under `J`, proves the two size-11
+parent orbits are one-factorizations of `K_12`, and checks the exact design parameters of both
+cross-incidence relations.
 
 The replay imports neither the primary checker nor C341.  It reconstructs the `H3` roots and
 reflection group from formulas, rebuilds `A5`, `PGL_2(11)`, all 22 parents, both code enumerations,
 the conic obstructions, the second transform, the `1+5+6+10` marked quotient, and the bijection
-between 22 parents and 22 obstruction matchings.  It reads the JSON only to compare the primary's
-canonical output.
+between 22 parents and 22 obstruction matchings.  Independently of the primary subgroup recipe, it
+reconstructs `PSL_2(11)` as the commutator subgroup, rechecks both one-factorizations, and verifies
+the row and column design parameters of the biplane and its complement.  It reads the JSON only to
+compare the primary's canonical output.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker `.py` | 14,289 | `53967ebdb09b8957bfaec7385dede642f64fa1c3de61536e72b26979a44dc317` |
-| independent replay `.py` | 10,240 | `d099f8582a6eda1c1031973d145dc1c01fb396ba390527b9b1fd7abb4e79e622` |
-| canonical certificate `.json` | 20,433 | `6315e90d305329bd757d959ba0e2a7e431a965702651c89bfe1b21b20836c0f5` |
+| primary checker `.py` | 18,732 | `ca8024023173aaa09e0252780b8297ebac06bcc920115e3b9b808059d4b0d587` |
+| independent replay `.py` | 14,727 | `515d45ee2a30a9381c446c035ff7cea7ae4c919faa1a3d3db205ee40a6e522f8` |
+| canonical certificate `.json` | 43,991 | `3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d` |
 
 The trusted boundary is Python 3 exact prime-field arithmetic, exhaustive enumeration in the
 displayed finite sets, the pinned C341 checker in the primary calculation, and the standard
@@ -128,7 +141,10 @@ arbitrary q=11 six-arcs, arbitrary markings, or transforms over other fields.
 
 ## Literature and claim boundary
 
-C379 performed no new external literature search and makes no novelty or priority claim.  The
+C379 performed no new external literature search and makes no novelty or priority claim.  In
+particular the `PGL_2(11)/PSL_2(11)` coset action, invariant one-factorizations, and eleven-point
+biplane are likely classical; a focused primary-source and forward-citation audit must separate
+those ingredients from their exact appearance as the Clebsch deep-hole obstruction.  The
 arc--MDS equivalence, the conic/extended-GRS dictionary, the MDS construction of minimal-support
 AME states, and the del Pezzo general-position criterion are used as standard dictionaries.  The
 task consumes C368's certified parent-to-conic theorem and C378's certified full child stabilizer;
@@ -140,8 +156,12 @@ gateway plan.
 C379 closes the original smooth-surface, undecorated-iteration, and binary-fibre gates at their
 planned off-ramps, but the obstruction matching supplies a positive replacement: a reversible
 decorated transform on the complete 22-parent `A5_6` locus, together with a uniform weak del Pezzo
-`A1` interpretation.  C380 may formalize the stable
-presentation-independent statements that uncovered projective points are one-column MDS extensions
-and that the full-conic second transform is empty.  The matching-decorated inversion is now stable
-mathematically but should enter C380 only if its finite checker interface remains bounded; C380
-should not formalize a two-sheet quotient or tensor-extension statement.
+`A1` interpretation.  The 22 matchings further form two `PSL_2(11)`-invariant
+one-factorizations exchanged by `J`, with biplane cross-incidence.  C380 may formalize the stable
+presentation-independent statements that uncovered projective points are one-column MDS
+extensions and that the full-conic second transform is empty.  The matching-decorated inversion
+and its two-one-factorization organization should enter C380 only if the finite checker interface
+remains bounded.  C380 must distinguish the unordered two-sheet system from its eleven parent
+matchings and should not formalize a two-parent quotient or tensor-extension statement.  See
+`notes/2026-07-19-c379-one-factorization-biplane-companion.md` for the exposition, moduli hand-back,
+and focused literature gate.

@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** exposition blueprint updated through C368, C372, and the amended C373
+**Status:** exposition blueprint updated through C379, including the C379 pre-freeze
+one-factorization/biplane extension
 
 ## Governing idea
 
@@ -28,7 +29,9 @@ The broadest proved mathematical story is now:
 > The q=11 Clebsch hexagon is a non-Reed--Solomon MDS parent whose complete deepest-syndrome locus
 > is a Reed--Solomon conic.  Its affine syndrome classes form a primitive Fourier-self-dual
 > rank-eight `A5` association scheme, and the canonical coset graph of the bare code recovers the
-> hexagon and its unordered `10+10` chirality torsor.
+> hexagon and its unordered `10+10` chirality torsor.  The conic forgets 22 Clebsch parents, but a
+> canonical obstruction matching recovers each one; the 22 matchings form two
+> `PSL_2(11)`-invariant one-factorizations whose cross-incidence is the eleven-point biplane.
 
 Applying the standard MDS-to-AME construction adds the quantum reading:
 
@@ -59,8 +62,8 @@ Vertex legend:
 | `A` | integral `H3/A5` six-orbit, recovered again at the end |
 | `B` | good-reduction projective six-arc |
 | `C` | `[6,3,4]` MDS parent and its exact GRS phase |
-| `D` | q=11 deep-hole conic and `[12,3,10]` GRS child |
-| `E` | primitive Fourier-self-dual rank-eight syndrome scheme |
+| `D` | q=11 deep-hole conic, matching-decorated parent memory, and `[12,3,10]` GRS child |
+| `E` | rank-eight syndrome fission, rank-16 golden refinement, and rank-four orthogonal fusion |
 | `F` | `AME(6,11)` perfect-tensor presentation and its Pauli-error structure |
 
 Side legend:
@@ -69,14 +72,19 @@ Side legend:
 |:---:|:---|
 | `[1]` | integral symmetry to good-reduction arithmetic geometry |
 | `[2]` | minors and conic determinant: six-arc to MDS/GRS code |
-| `[3]` | syndrome-span lemma and secant complement: code to deep holes |
-| `[4]` | scalar `A5` orbitals and character sums: conic to self-dual scheme |
+| `[3]` | secant complement and five-parent conics: code to deep holes and obstruction matchings |
+| `[4]` | scalar orbitals, golden symmetry completion, and character sums: conic to self-dual schemes |
 | `[5]` | stabilizer/Pauli dictionary: scheme classes to quantum error structure |
 | `[6]` | canonical coset graph, cliques, and orbitals: derived presentation back to hexagon |
 
 The standard MDS-to-AME construction is the chord `C -> F`, not one of the six sides.  The outside
 path is the paper's distinctive contribution: it explains the arithmetic, error geometry, Fourier
 algebra, quantum error structure, and reconstruction carried by that tensor presentation.
+
+Two further proved chords enrich rather than replace the spine.  C376 sends the six-point blow-up
+to the Clebsch cubic and identifies blowdown exchange with the same `S5/A5` quotient character as
+code chirality.  C379 decorates the conic by a perfect matching to reverse its 22-to-one loss; the
+binary outer passage exchanges two eleven-matching systems rather than two individual parents.
 
 ## A copy-ready Hexagon Spine Theorem
 
@@ -94,13 +102,21 @@ The paper should announce one theorem with six clauses.
    `Q:X^2+Y^2+Z^2=0`.
 3. **Deep-hole transform.** At both q=11 split fibres the parent is non-GRS, but its complete
    projective weight-three syndrome locus is `Q(F_11)`.  As a generator-column system this is an
-   extended GRS `[12,3,10]_11` child.  Away from the small exceptional fibres and for `q>14`, the
-   larger deep-hole child intrinsically recovers the mirrors and parent.
+   extended GRS `[12,3,10]_11` child.  Its twelve points all extend the parent to `[7,4,4]` MDS
+   kernels and uniform weak degree-two del Pezzo surfaces with one `A1` singularity, while the
+   undecorated transform terminates at the next step.  On the complete 22-parent `A5_6` locus, six
+   five-parent conics give a perfect matching that recovers the parent; the matchings form two
+   `PSL_2(11)`-invariant one-factorizations of `K_12`, exchanged by the golden outer map, with
+   complementary `2-(11,5,2)` biplane cross-incidence.  Away from the small exceptional fibres and
+   for `q>14`, the larger deep-hole child intrinsically recovers the mirrors and parent.
 4. **Fourier syndrome algebra.** At q=11 the eight scalar-closed `A5` syndrome orbits form a
    primitive Fourier-self-dual translation association scheme.  In the intrinsic ordering,
    `P=Q`, `P^2=1331I`, and the entire Krein tensor equals the intersection tensor.  The scheme is
    a rank-eight `A5`-Schurian fission of the rank-four affine orthogonal scheme and has exactly one
-   additional proper rank-six fusion.
+   additional proper rank-six fusion.  Adjoining the golden outer map completes `A5` to
+   `PGL_2(11)` and gives exactly the rank-four fusion.  The two conjugate rank-eight schemes have a
+   Fourier-self-dual rank-16 scalar-`A4` common coherent refinement with an exact four-dimensional
+   signed Fourier block.
 5. **Intrinsic reconstruction and chirality.** The full automorphism group of the scheme, already
    of its single 60-valent column constituent, is
 
@@ -111,14 +127,18 @@ The paper should announce one theorem with six clauses.
    The canonical quotient graph of the bare Hamming code recovers syndrome addition, six
    projective column directions, the degree-six `A5`, and the unordered pair of ten-element
    triple classes.  The outer coset in the order-120 `S6` normalizer exchanges the two classes but
-   does not lift within one q=11 fibre.
+   does not lift within one q=11 fibre.  Blowing up the six points gives the Clebsch cubic, and the
+   natural quintic passage between its distinguished double-six blowdowns realizes exactly the
+   same quotient character, without choosing a preferred chirality sheet.
 6. **Perfect-tensor corollary.** The standard MDS construction produces an `A5`-symmetric
    minimal-support `AME(6,11)` stabilizer state.  Classical syndrome weight becomes minimum
    Pauli-`X` error weight, so the conic and the eight-dimensional Bose--Mesner algebra describe
    exact error sectors of this presentation.
 
-Clauses 1--3 are the C368 arithmetic phase theorem assembled from C339/C341/C346.  Clause 4 is
-C341/C372.  Clause 5 is C373 with the bare-code hand-back to C207.  Clause 6 uses the standard
+Clauses 1--2 are the C368 arithmetic phase theorem assembled from C339/C341/C346.  Clause 3 combines
+C368's parent-to-child theorem with C379's extension, decorated inversion, and
+one-factorization/biplane certificate.  Clause 4 combines C341/C372 with C378.  Clause 5 combines
+C373's bare-code hand-back to C207 with C376's cubic compatibility.  Clause 6 uses the standard
 MDS-to-AME theorem with the preceding exact syndrome identifications.  The paper must keep those
 ownership and prior-art boundaries visible.
 
@@ -171,6 +191,14 @@ At q=11 the complement equals `Q(F_11)`, giving the sharp reversal:
 Be precise that the child is the generator-column `[12,3,10]` code, not the unrelated kernel
 `[12,9,4]` code.
 
+C379 gives this side a second movement.  Every child point grows the parent to a seven-arc, but the
+unique six-point conic in each extension produces one effective `E7` root, so the surface is weak
+degree two with one `A1` rather than smooth.  The six five-parent conics pair the twelve child
+points.  That matching is exactly the datum needed to reverse the transform on the 22-parent
+locus.  The 22 matchings then split into two one-factorizations of `K_12`, and their disjointness
+matrix is the `2-(11,5,2)` biplane.  This is a particularly reader-friendly surprise: the failed
+smooth extension supplies the memory that makes the lossy code transform reversible.
+
 ### Side 4 — the deep-hole geometry becomes an eight-class algebra
 
 Lift projective directions to `V=F_11^3` and act by `F_11^* x A5`.  The eight orbit valencies are
@@ -199,6 +227,13 @@ fusions are distinct branches, not a nested chain:
 
 Do not print the full `8 x 8` eigenmatrix in the introduction.  State `P=Q`, the orthogonal fission,
 and the error/observable meaning there; give the exact matrix in the theorem section.
+
+C378 supplies the symmetry bridge.  The same integral outer map used for golden conjugation
+completes the projective `A5` to the full conic group `PGL_2(11)`, and its three affine nonzero
+orbits are exactly the rank-four fusion blocks.  Place the rank-16 common coherent refinement above
+the two conjugate rank-eight fissions and show the four-dimensional odd Fourier block explicitly.
+Do not say that rank four merely forgets one chirality bit: `J` has a twelve-dimensional fixed
+algebra in the rank-16 refinement.
 
 ### Side 5 — the algebra becomes quantum error structure
 
@@ -261,13 +296,17 @@ roots coalesce and this outer symmetry becomes internal in
 A5 < PGL_2(5) ~= S5.
 ```
 
-This motivates a strong future theorem:
+That arithmetic passage is now exact:
 
-> Golden conjugation is an external chirality symmetry between split fibres, becomes semilinear
-> after inert descent, and becomes internal linearly exactly at the ramified GRS phase.
+> The integral involution `J(x,y,z)=(x,-z,-y)` carries the ordered golden model to its conjugate,
+> has cocycle square one, specializes to the q=11 outer passage, and lies inside the enhanced
+> characteristic-five conic stabilizer.
 
-Only the q=11 split and q=5 ramified clauses are currently certified.  The all-good-prime statement
-requires a symbolic outer intertwiner, its cocycle square, and its inert-prime specialization.
+C377 certifies those identities and specializations, but Benson already owns the general
+three-dimensional `A5` outer-Galois descent and trivial Brauer obstruction.  Use C377 as exact
+Clebsch glue, not as a new generic descent theorem.  The new q=11 consequences are downstream:
+`J` completes the syndrome action to `PGL_2(11)` in C378 and exchanges the two
+one-factorizations of the matching-decorated child in C379.
 
 ## The “hexagon passport”
 
@@ -279,7 +318,9 @@ A single recurring table can help readers keep their bearings.
 | fifteen pairs | secants and projectivized `H3` mirrors |
 | twenty triples | two intrinsic ten-element chirality classes |
 | twelve q=11 uncovered directions | conic and `[12,3,10]` GRS deep-hole child |
+| 22 obstruction matchings | two one-factorizations of `K_12` and the eleven-point biplane |
 | eight affine syndrome orbits | primitive Fourier-self-dual translation scheme |
+| two golden rank-eight fissions | rank-16 common refinement and rank-four `PGL_2(11)` fusion |
 | computational-support superposition | `AME(6,11)` perfect tensor |
 
 ## Recommended paper architecture
@@ -289,14 +330,17 @@ A single recurring table can help readers keep their bearings.
 2. **Six points, fifteen mirrors.** Define the integral orbit, `A5/D5` action, and `H3` lattice.
 3. **The two conic phases.** Prove the minor and conic determinants and the q=5/q=11 arithmetic
    phase theorem.
-4. **The blind spot is a conic.** Prove the syndrome-span bridge and non-GRS-to-GRS deep-hole
-   transform.
-5. **Eight ways to be wrong.** Construct the rank-eight scheme, prove Fourier self-duality, and
-   explain the branching fusion lattice.
+4. **The blind spot is a conic—and the conic remembers.** Prove the syndrome-span bridge,
+   non-GRS-to-GRS deep-hole transform, weak-`E7` extensions, matching-decorated inversion, and the
+   two one-factorizations/biplane theorem.
+5. **Eight ways to be wrong.** Construct the rank-eight scheme, prove Fourier self-duality, explain
+   the branching fusion lattice, and use golden passage to reach the full conic symmetry and
+   rank-16 common refinement.
 6. **From six columns to six qudits.** State the standard AME construction and identify its exact
    Pauli-`X` error algebra.
 7. **Closing the hexagon.** Recover the affine addition, six columns, full `A5`, scheme, and
-   unordered chirality torsor from the canonical coset graph.
+   unordered chirality torsor from the canonical coset graph; then identify its exchange character
+   with the Clebsch cubic's double-six blowdown exchange.
 8. **Six unclosed sides.** End with the six future questions below.
 
 “Hexagons are the bestagons” is suitable as an epigraph, talk title, informal subsection tag, or
@@ -332,24 +376,33 @@ last line.  A formal paper title should carry the mathematical content, for exam
 > those joins form a conic.  The same six points define a non-Reed--Solomon MDS code and hence a
 > six-party perfect tensor.  We prove that its affine syndrome orbits form a primitive
 > Fourier-self-dual rank-eight association scheme and, conversely, that the canonical coset graph
-> of the unmarked code recovers the six columns and their unordered chirality torsor.  These are not
-> numerical coincidences but different shadows of one integral `A5`-symmetric object.
+> of the unmarked code recovers the six columns and their unordered chirality torsor.  The conic
+> initially forgets 22 possible parents, yet six elementary obstruction pairs restore the chosen
+> one; taken together, those matchings form two one-factorizations whose cross-incidence is an
+> eleven-point biplane.  These are not numerical coincidences but different shadows of one integral
+> `A5`-symmetric object.
 
 ## Publication strength and broad interest
 
-C368, C372, and C373 now give a closed pure-mathematical spine rather than a proposed one:
+C368 and C372--C379 now give a closed pure-mathematical spine with a substantial gateway layer:
 
 - an all-odd-prime arithmetic phase theorem;
 - an exact non-GRS-parent-to-GRS-deep-hole-child transform;
 - a primitive Fourier-self-dual rank-eight `A5` fission with complete fusion data;
 - a full automorphism theorem and intrinsic recovery of affine addition, the hexagon, and its
-  unordered chirality torsor from the bare-code coset graph.
+  unordered chirality torsor from the bare-code coset graph;
+- the equality of Clebsch-cubic blowdown exchange and code chirality as one quotient character;
+- golden completion to `PGL_2(11)`, a rank-16 common refinement, and a signed Fourier sector; and
+- a reversible matching-decorated child whose 22 parents form two one-factorizations with biplane
+  cross-incidence.
 
 That is an A-range mathematical core with serious entry points for finite geometry, coding theory,
 algebraic combinatorics, representation theory, and quantum information.  C374/C375 are quantum
 capstones, not prerequisites for the paper's mathematical identity.
 
-The principal limitation is generality: this remains one exceptional object over a special field.
+The principal limitation is generality and source disposition: this remains one exceptional object
+over a special field, and the classical one-factorization/biplane literature still needs focused
+closure.
 For the broadest general-mathematics audience, one portable theorem would materially raise the
 ceiling.  The best candidates are a general reflection-orbit MDS phase mechanism, a classification
 of non-GRS-to-GRS deep-hole transforms, a reusable criterion for Fourier-self-dual orbit fissions,
@@ -375,21 +428,24 @@ Does the `H3/A5` construction belong to a general Coxeter-orbit source of unifor
 
 Characterize rank-three non-GRS MDS codes whose complete maximum-weight projective syndrome locus
 is itself an arc, conic, or rational-normal-curve projective system.  Determine when the deep-hole
-transform is MDS or GRS and when it recovers its parent.
+transform is MDS or GRS, when it terminates, and when a canonical obstruction decoration recovers
+its parent.  Classify the weak-del-Pezzo root types arising from one-point extensions.
 
-### 3. Where does the outer symmetry live arithmetically?
+### 3. When does a deep-hole child carry a factorization double cover?
 
-Construct the symbolic golden-conjugate outer intertwiner over `Z[tau]`, compute its cocycle square,
-and prove the split/inert/ramified trichotomy suggested by C373: cross-fibre projective at split
-primes, internal semilinear after inert descent, and internal linear at the ramified characteristic-
-five GRS phase.
+Generalize C379's decomposition of 22 parent matchings into two `PSL_2(11)`-invariant
+one-factorizations.  Determine which conic children canonically carry such an unordered pair,
+whether Frobenius acts on it arithmetically, and when cross-incidence produces a biplane or another
+symmetric design.  The finite q=11 theorem is certified; its classical-source disposition and any
+all-prime transport remain open.
 
 ### 4. Why is the syndrome algebra an eight-class fission?
 
 Decide separability and give a conceptual geometric or group-theoretic meaning to the unexplained
-rank-six fusion.  Determine whether the Clebsch fission occurs in a wider family and which of its
-intersection, spectral, fusion, or automorphism data characterize it up to combinatorial
-isomorphism.
+rank-six fusion.  Explain the rank-16 common refinement and four-dimensional signed Fourier block
+representation-theoretically, and determine whether the Clebsch pair of fissions occurs in a wider
+family.  Identify which intersection, spectral, fusion, or automorphism data characterize it up to
+combinatorial isomorphism.
 
 ### 5. Does the chiral self-dual error algebra have operational force?
 
@@ -414,7 +470,10 @@ Already classical or externally pre-empted:
 - arc--MDS, conic--GRS, and MDS--AME correspondences;
 - general arrangement-to-coset-leader machinery;
 - generic automorphism-aided decoding; and
-- general odd-prime affine rigidity of spanning arc-direction graphs.
+- general odd-prime affine rigidity of spanning arc-direction graphs;
+- general outer-Galois descent of the golden three-dimensional `A5` representation; and
+- the classical `PGL_2(11)`, one-factorization, and eleven-point biplane ingredients, pending exact
+  source attribution.
 
 Exact family-specific content established locally:
 
@@ -424,7 +483,13 @@ Exact family-specific content established locally:
 - the exact full automorphism group of the scheme and column graph;
 - intrinsic recovery of syndrome addition, the six columns, deep-hole relation, and unordered
   chirality torsor from the canonical bare-code coset graph; and
-- the exact q=11 split-fibre and q=5 ramified outer-symmetry behavior.
+- the equality of cubic blowdown exchange and code chirality as quotient characters;
+- q=11 golden completion to `PGL_2(11)`, the rank-16 common coherent refinement, and its signed
+  four-dimensional Fourier block;
+- twelve uniform weak-degree-two-del-Pezzo extensions and termination of the undecorated deep-hole
+  transform; and
+- reversible parent recovery by 22 obstruction matchings, their two one-factorizations, and the
+  exact `2-(11,5,2)` biplane cross-incidence.
 
 Not yet safe without the stated gates:
 
@@ -432,17 +497,20 @@ Not yet safe without the stated gates:
 - that the AME state is a new LC or LU class;
 - that the tensor has a new minimal or equivariant circuit;
 - that Fourier self-duality improves a physical noise or decoding quantity;
-- the proposed all-good-prime outer/Galois phase; or
+- that the C379 one-factorization/biplane compatibility is new before focused source closure;
+- an intrinsic all-prime Frobenius action on the fission or factorization two-set; or
 - any Clebsch holographic-code claim.
 
 ## Copy-ready closing cadence
 
 > The Clebsch hexagon begins as six points, becomes a code, turns its failures into a conic, and
 > organizes those failures into a Fourier-self-dual algebra.  The process is reversible: the
-> canonical coset graph returns the six directions and their two icosahedral triple classes.  At
-> characteristic five the hexagon itself is the conic; at eleven its blind spot is.  The six open
-> questions above ask how much of this cycle belongs to the exceptional hexagon and how much is the
-> first visible instance of a wider theory.
+> canonical coset graph returns the six directions and their two icosahedral triple classes, while
+> an obstruction matching lets the conic return any one of its 22 Clebsch parents.  Those matchings
+> arrange themselves into two one-factorizations and an eleven-point biplane.  At characteristic
+> five the hexagon itself is the conic; at eleven its blind spot is—and even the blind spot
+> remembers.  The six open questions above ask how much of this cycle belongs to the exceptional
+> hexagon and how much is the first visible instance of a wider theory.
 
 In this precise and unusually literal sense, hexagons are the bestagons.
 
@@ -451,6 +519,11 @@ In this precise and unusually literal sense, hexagons are the bestagons.
 - `notes/2026-07-19-c368-h3-a5-arithmetic-phase.md`
 - `notes/2026-07-19-c372-clebsch-scheme-fourier.md`
 - `notes/2026-07-19-c373-clebsch-scheme-automorphisms.md`
+- `notes/2026-07-19-c376-clebsch-cubic-chirality.md`
+- `notes/2026-07-19-c377-clebsch-golden-descent.md`
+- `notes/2026-07-19-c378-clebsch-common-duality.md`
+- `notes/2026-07-19-c379-clebsch-deep-hole-extension.md`
+- `notes/2026-07-19-c379-one-factorization-biplane-companion.md`
 - `notes/2026-07-18-c339-clebsch-deep-hole-transform.md`
 - `notes/2026-07-18-c341-a5-subgroup-decoder.md`
 - `notes/2026-07-18-c346-h3-clebsch-good-reduction.md`

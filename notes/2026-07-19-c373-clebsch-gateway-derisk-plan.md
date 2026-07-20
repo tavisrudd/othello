@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** updated through C377; Door I green; generic Door II descent stopped; C378--C380 queued
+**Status:** updated through C379; C376, C378, and C379 have positive exact theorems; generic C377
+descent stopped as prior art; C380 remains queued
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -23,9 +24,9 @@ certified surface gateway C376
               |
               +---- C377 golden descent ---- standard-descent stop
               |
-              +---- C378 golden fusion / duality
+              +---- C378 golden fusion / duality ---- complete
               |
-              +---- C379 extension / deep-hole quotient
+              +---- C379 extension / decorated child - complete
               |
               +---- C380 stable Lean seams
                               |
@@ -42,7 +43,10 @@ For fast progress, every speculative global construction has two passes.  Pass o
 bounded scout using fixed coordinates and existing exact infrastructure; it answers only the
 promotion question.  Pass two creates a durable certificate, invariant-ring presentation, stack,
 or general theory only after the scout exposes a productive theorem.  In particular no broad GIT,
-stack, normalization, or cubic-surface formalization precedes a positive q=11 fusion/fiber gate.
+stack, normalization, or cubic-surface formalization preceded the q=11 fusion/fibre gates.  Those
+gates are now positive in corrected forms.  C379's still-smaller `11+11` matching-factorization
+gate is also certified; its focused source audit and a productive framed moduli map must precede
+moduli machinery.
 
 ## Protected baseline
 
@@ -62,6 +66,12 @@ The gateway cannot weaken this package.  Until a branch is promoted:
 - the title and abstract do not advertise cubic surfaces, `E6/E7`, a master duality, or a master
   arithmetic torsor; and
 - C374/C375 remain optional quantum capstones, not dependencies of the pure-mathematical identity.
+
+The certified upgrade layer now consists of C376's blowdown/code quotient-character theorem,
+C378's `PGL_2(11)` symmetry completion and rank-16 signed Fourier refinement, and C379's reversible
+matching-decorated deep-hole transform with its uniform weak-degree-two-del-Pezzo `A1` extensions.
+These results may strengthen the same paper, but novelty wording still obeys their individual
+source boundaries.
 
 ## Uniform promotion gate
 
@@ -141,6 +151,16 @@ can grow.”
 **Red off-ramp.**  Surface general position fails or `D(D(C))` is essentially presentation-
 dependent.  Classify the finite obstruction only if it has a clean invariant statement.
 
+**C379 disposition.**  Every deep-hole point gives a seven-arc and `[7,4,4]`/`[7,3,5]` MDS pair,
+but every blow-up is a weak degree-two del Pezzo with one effective `E7` root and `A1` singularity.
+The undecorated transform terminates because `D(Q)=empty`.  The proposed two-parent marked fibre
+also fails: the child has 22 parents.  The obstruction supplies the positive theorem instead—six
+five-parent conics give a perfect matching `M_X` of `Q`, and `(Q,M_X)` recovers `X` uniquely on the
+complete locus.  C379's pre-freeze extension certifies a further `11+11`
+one-factorization/biplane refinement; see
+`notes/2026-07-19-c379-one-factorization-biplane-companion.md`.  The exact finite theorem is green,
+while novelty remains ungraded pending its focused source audit.
+
 ### C. One common duality
 
 Run cheap kill tests before constructing a grand duality.
@@ -164,11 +184,19 @@ conceptual proof without claiming one duality in six languages.
 **Red off-ramp.**  The code is not isodual, Gale duality chooses extra data, or the surface and AME
 operations are unrelated.  A sharp non-isodual or non-Lagrangian result may instead constrain C374.
 
+**C378 disposition.**  The exact surviving common map is the invariant quadratic pairing.  Adjoining
+C377's `J` completes `A5` to `PO_3(11)~=PGL_2(11)` and gives exactly C372's rank-four orthogonal
+fusion.  The conjugate rank-eight schemes have a Fourier-self-dual rank-16 scalar-`A4` common
+refinement and a four-dimensional `J`-odd signed Fourier block.  This is a positive compatibility
+theorem, but not a literal statement that rank four forgets precisely one chirality bit: the
+`J`-fixed algebra has dimension 12.
+
 ## Champion selection
 
-C376 has already supplied a green branch, so the surface/blowdown character is the provisional
-champion and golden descent is unblocked.  Complete the extension and duality first gates before
-adding either as a second headline.  Judge them by the following lexicographic order:
+C376 remains the clean provisional champion.  C378 and C379 have now supplied exact supporting
+theorems with distinct information-loss maps; neither should be advertised as the same binary
+quotient.  The `11+11` refinement could connect them more tightly, but only after certification and
+source closure.  Judge any promotion by the following lexicographic order:
 
 1. a new theorem forced by transport;
 2. canonicity and reversibility;
@@ -349,6 +377,11 @@ Projective, monomial, graph, marked-surface, and LC quotients forget different d
 must name its markings and prove descent through the relevant quotient before using “intrinsic” or
 “the same.”
 
+C379 makes this concrete.  Forgetting `M_X` collapses 22 parent arcs to one conic.  Its certified
+`PSL_2(11)` split shows that a binary orientation chooses one of two eleven-matching systems, while
+choosing a parent requires one matching inside that system.  Neither operation is C378's rank-four
+fusion, whose fixed algebra retains 12 of the rank-16 dimensions.
+
 ### 6. Scope and famous-object tourism
 
 The gateway atlas is a reservoir of later questions, not a work queue.  Genus-two theta data,
@@ -377,17 +410,17 @@ character logic, followed by exact q=11 leaves where feasible.
 
 ## Execution order
 
-1. Run C378's small q=11 golden-fusion scout first, then package it only if the exact relation sets
-   and a nonclassical compatibility statement pass.
-2. Run C379's marked deep-hole-fiber and extension scout independently.
-3. Start C380 with stable generic bridges; add C378 only after its theorem API freezes.
-4. Keep the Frobenius and integral-moduli companions unallocated until C378 or C379 supplies their
-   required intrinsic fission/fiber consequence.
-5. If that gate opens, begin moduli with one framed fixed-locus elimination; do not build the stack,
-   normalization package, or durable certificate before the quadratic locus and forgetful map pass.
-6. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
-7. Perform claim-specific full-text and forward-citation closure.
-8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
+1. Treat C378's group/fusion/refinement theorem and C379's extension/matching theorem as frozen
+   inputs; preserve their different quotient maps.
+2. Treat the bounded `11+11` one-factorization/biplane certificate extension as complete; run its
+   focused source audit.  Stop there if the compatibility is already classical.
+3. Start C380 with stable generic bridges and bounded C376/C378/C379 leaves; consume the frozen
+   factorization layer only through a small finite API.
+4. Keep the Frobenius and integral-moduli companions unallocated.  If step 2 is productive, run one
+   framed fixed-locus elimination before any stack, normalization package, or durable moduli build.
+5. Let C374/C375 consume certified symmetry restrictions, without making the core wait.
+6. Perform claim-specific full-text and forward-citation closure.
+7. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
 
 The decisive question at every promotion meeting is:
 

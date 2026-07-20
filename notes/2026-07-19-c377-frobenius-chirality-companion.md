@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-19
 
-**Status:** unallocated successor design; does not reopen C377
+**Status:** unallocated successor design, recalibrated after C378/C379; does not reopen C377
 
 **Parent:** `notes/2026-07-19-c377-clebsch-golden-descent.md`
 
@@ -24,8 +24,27 @@ The surviving question is not how to find another intertwiner.  It is:
 > graph, and double-six after ordinary linear descent has become unobstructed?
 
 This companion scopes one creative answer.  It allocates no task, asserts no novelty, and does not
-alter the C378--C380 execution order.  Promotion requires a fresh global C-ID and a claim-specific
-literature audit.
+displace the live C380 foundation gate.  Promotion requires a fresh global C-ID and a
+claim-specific literature audit.
+
+## C378/C379 calibration
+
+C378 supplies one intrinsic target that did not exist when this design was drafted: the two
+golden-conjugate rank-eight syndrome fissions have a certified rank-16 common coherent refinement,
+and C377's `J` has a nonzero four-dimensional odd Fourier sector.  Frobenius on that pair or signed
+sector could therefore be productive if it can be reconstructed without supplied coordinates.
+
+C379 rules out a different target.  The common q=11 deep-hole conic does **not** have the two
+golden parents as its complete marked fibre.  It has 22 `A5_6` parents, recovered individually by
+22 obstruction matchings.  C379's independently replayed pre-freeze extension splits those
+matchings into two eleven-element `PSL_2(11)` orbits, two one-factorizations of `K_12` exchanged by
+`J`, with biplane cross-incidence.  See
+`notes/2026-07-19-c379-one-factorization-biplane-companion.md`.
+
+Consequently there are now two possible binary arithmetic objects—the unordered pair of syndrome
+fissions and the certified unordered pair of one-factorizations.  Neither is the set of
+individual deep-hole parents.  Moreover `J` exchanging the two q=11 sheets is a geometric outer
+action, not by itself a computation of arithmetic Frobenius.
 
 ## Questions exposed by C377 and Benson
 
@@ -100,7 +119,9 @@ pass.  At least one of the following must be proved intrinsically:
 - the minimal field of monomial equivalence between the two golden fibers is reconstructed from
   the unmarked code; or
 - a comparison map places the chirality class nontrivially in the cubic-surface obstruction
-  sequence and computes its image.
+  sequence and computes its image; or
+- the unmarked or matching-decorated child reconstructs C379's certified unordered pair of
+  one-factorizations and Frobenius acts on that pair by a proved arithmetic character.
 
 An `L`-function sentence is not by itself productive: the zeta function of a manually supplied
 quadratic two-set simply repackages the Dirichlet character.  Such a consequence counts only if the
@@ -172,6 +193,10 @@ This is a falsifier, not evidence for an all-prime theorem.  Its canonical outpu
 the exact recovered objects, automorphism orders, Frobenius permutation, exception reason, and an
 independent replay from the code rather than the original coordinates.
 
+At q=11, the cheaper finite prerequisite is complete: C379 certifies the `11+11` splitting, the two
+one-factorizations, and their biplane cross-incidence in exact conventions.  The remaining local
+prerequisite is the focused source audit; the all-prime Frobenius claim still requires a new task.
+
 ## Stage gates
 
 ### F0 — intrinsic-object gate
@@ -223,6 +248,9 @@ precedes this gate.
 - Do not claim novelty for quadratic splitting, Hilbert 90, the Legendre symbol, or an `A5` outer
   automorphism.
 - Do not call a supplied two-sheet set intrinsic.
+- Do not replace C379's 22-parent fibre by the golden pair.  If the factorization refinement is
+  certified, the binary object is a pair of eleven-parent systems, not two individual parents.
+- Do not identify the outer map `J` at a split prime with arithmetic Frobenius.
 - Do not identify C376's row-exchanging Cremona map with C377's row-preserving projectivity.
 - Do not call a code equivalence a physical or quantum equivalence.
 - Do not generalize to other finite groups before the Clebsch pilot produces a new consequence.

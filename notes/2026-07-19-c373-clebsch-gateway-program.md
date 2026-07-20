@@ -1,7 +1,7 @@
 # C373 companion — the Clebsch gateway program
 
 Date: 2026-07-19  
-Status: research-program note; exact C368/C372/C373 results separated from proposed bridges  
+Status: research-program reservoir updated through C379; certified bridges separated from proposed doors
 Parent: `2026-07-19-c373-clebsch-scheme-automorphisms.md`
 
 ## Executive thesis
@@ -18,7 +18,7 @@ icosahedral A5 representation <-> six points in P2 <-> [6,3,4] MDS code
       split/inert/ramified     affine Cayley graph <-> rank-eight Fourier scheme
                                        |
                                        v
-                              deep-hole conic + 10+10 torsor
+                    deep-hole conic + matching sheets + 10+10 torsor
 ```
 
 The crucial C373 input is reconstruction: the unlabelled q=11 column graph recovers the unique
@@ -35,6 +35,44 @@ The flagship program is now the combination of two ideas:
 
 The second fact provides a classical algebro-geometric candidate for what the C373 chirality
 torsor *is*.  Establishing or refuting that identification is the highest-value next check.
+
+## Disposition through C379
+
+The first gateway wave has now resolved four major questions.
+
+- **C376:** the natural quintic passage between the two rows of the Clebsch double-six induces
+  exactly the outer `S5-A5` coset, so cubic blowdown exchange and code chirality are the same
+  quotient character.
+- **C377:** the integral golden involution and its specializations are exact, but Benson pre-empts
+  the generic three-dimensional `A5` descent mechanism.
+- **C378:** adjoining that involution completes `A5` to `PGL_2(11)`, gives exactly the rank-four
+  orthogonal fusion, and places the two golden rank-eight schemes inside a Fourier-self-dual
+  rank-16 common refinement with a four-dimensional odd block.
+- **C379:** the undecorated deep-hole transform terminates and its parent fibre has 22 elements, not
+  two.  Six five-parent conics give a perfect matching that recovers the parent.  The 22 matchings
+  split into two `PSL_2(11)`-invariant one-factorizations of `K_12`, exchanged by the golden outer
+  map; their cross-incidence is the eleven-point biplane.
+
+The corrected information-loss chain is therefore
+
+```text
+two golden orientation sheets
+          |
+          v
+two eleven-matching one-factorizations
+          |
+          | choose one matching
+          v
+matching-decorated child (Q,M_X) <-> one of 22 Clebsch parents
+          |
+          | forget M_X
+          v
+undecorated GRS conic Q.
+```
+
+This is not the same quotient as C378's rank-four fusion.  The speculative doors below remain a
+reservoir, but no moduli, Mathieu, or exceptional-geometry expansion is authorized merely by these
+positive finite theorems.
 
 ## The magic hexagon and the novelty standard
 
@@ -192,8 +230,11 @@ Specialization should give a unified phase theorem:
 | ramified at 5 | the distinction collapses or becomes internal under `S5` |
 
 The best formulation may be a moduli stack of marked six-point configurations or marked Clebsch
-cubic surfaces over the golden integer ring.  Its two-sheeted cover would be the master object;
-the codes, graphs, and tensors would be associated realizations.
+cubic surfaces over the golden integer ring.  Its two-sheeted orientation cover would be the
+master object; the codes, graphs, and tensors would be associated realizations.  C379 shows that
+this binary orientation cannot be identified with the individual-parent fibre of the q=11 conic:
+it selects one of two eleven-parent factorization systems, and a further matching selects the
+parent.
 
 ## Door III — the deep-hole transform
 
@@ -217,6 +258,12 @@ The first questions are exact and bounded.
 
 A positive rigidity theorem would join covering codes, list decoding, moduli of arcs, and derived
 algebraic-geometric codes.  Generic MDS coset-weight formulas do not provide this transform.
+
+**C379 outcome.**  `D(D(C))` is empty because the 66 conic secants cover `PG(2,11)`.  All twelve
+one-point extensions are `[7,4,4]` MDS but give weak degree-two del Pezzo surfaces with one `A1`.
+The transform becomes reversible on the 22-parent locus after decorating the conic by its six-pair
+obstruction matching.  Those matchings form two one-factorizations with biplane cross-incidence.
+This is now the exact Door-III theorem; arbitrary q=11 six-arcs and other fields remain open.
 
 ## Door IV — quantum invariants and exact eight-state dynamics
 
@@ -566,15 +613,17 @@ The same 12-point set is a classical model for the Witt design `S(5,6,12)`, with
 the Mathieu group `M12`; the ternary Golay code is another famous 12-point realization.
 
 The corridor becomes real only if the Clebsch construction canonically selects Witt hexads or the
-Witt incidence relation on its 12 conic points.  Concrete gates are:
+Witt incidence relation on its 12 conic points.  C379 now selects two one-factorizations and an
+eleven-point biplane, which is genuine extra incidence but is not a Witt `5-(12,6,1)` design.
+Concrete gates are:
 
 1. transport the original six-arc/deep-hole incidence to six-subsets of the conic;
 2. test the Steiner `5-(12,6,1)` property;
 3. compare the induced automorphism group with `PSL2(11)` and `M12`; and
 4. determine whether chirality becomes a choice of complementary hexad.
 
-Failure of the Steiner property closes the door.  No Golay or Mathieu claim follows merely from
-the numbers 11 and 12.
+Failure of the Steiner property closes the door.  No Golay or Mathieu claim follows from the
+numbers 11 and 12, from `PSL_2(11)`, or from the biplane alone.
 
 ### 11. Automorphic forms and Galois representations — conditional on the Hilbert route
 
@@ -627,14 +676,15 @@ object—not the fame of the destinations—is the proposed novelty.
 | 11 | code-lattice comparison | low/medium | speculative | lattices are plainly isometric or theta data generic |
 | 12 | tropical and secret-sharing lifts | high | speculative | no concrete map or operational statistic |
 
-Recommended immediate sequence:
+The table records the original triage; ranks 1--3 have been resolved by C376--C379.  The current
+immediate sequence is:
 
-1. compute the Clebsch cubic and 27-line incidence dictionary from the exact six-arc;
-2. test complementary leader supports against the two sheets and genus-two `3+3` partitions;
-3. compute `D(D(C))`;
-4. derive the symbolic golden intertwiner and compare its action on the surface marking;
-5. feed the resulting symmetry restrictions into C374;
-6. run the type-II/Hadamard equations as an independent cheap surprise gate.
+1. complete the focused source audit for the one-factorization/biplane compatibility;
+2. run C380 on the frozen typed seams and bounded finite leaves;
+3. let C374/C375 consume the certified symmetry restrictions;
+4. if the biplane audit leaves a novel functorial edge, run one framed integral-moduli elimination;
+5. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional
+   canonical incidence theorem selects them.
 
 ## Claim and literature boundary
 
