@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** `ACTIVE; UPGRADE 1 PROVED`
+**Status:** `ACTIVE; UPGRADES 1--4 PROVED`
 
 **Parent:** `notes/2026-07-20-c403-arrangement-complement-distance.md`
 
@@ -114,10 +114,166 @@ is scalar extension in one characteristic, not variation of an integral model ac
 good characteristics.  It also neither refines points by exact Frobenius degree nor
 asserts the curve/zeta and exact-degree layer theorem of C389.
 
+## 2. Complete generalized Hamming-weight hierarchy
+
+Write `d=d_1(D)`.  Then
+
+```text
+d_1(D)=d,   d_2(D)=n-1,   d_3(D)=n.
+```
+
+Indeed, for a code represented by a spanning projective system, the projective-system
+formula is
+
+```text
+d_r(D)=n-max_Pi |B cap Pi|,
+```
+
+where `Pi` ranges over projective subspaces of codimension `r`.  For `r=1` this
+recovers the ordinary minimum distance.  For `r=2`, `Pi` is a point; the columns are
+distinct projective points, so the maximum intersection is one.  For `r=3`, `Pi` is
+empty.  This proves the three values.
+
+Assume `n>3`, so `D^perp` has dimension `n-3`.  Wei duality says that
+
+```text
+{d_i(D):1<=i<=3}
+```
+
+and
+
+```text
+{n+1-d_j(D^perp):1<=j<=n-3}
+```
+
+partition `{1,...,n}`.  Removing `{d,n-1,n}` and reading the remaining integers in
+decreasing order gives
+
+```text
+d_j(D^perp)=j+2,  1<=j<=n-d-2,
+d_j(D^perp)=j+3,  n-d-1<=j<=n-3.
+```
+
+Either range may be empty.  The jump skips `n-d+1` in the dual hierarchy because its
+Wei reflection is `d`; equivalently, the two integers absent from the descending
+complement at the upper end reflect `n-1,n`.  At a conic/GRS phase `d=n-2`, the first
+range is empty and `d_j(D^perp)=j+3` throughout.
+
+This conclusion uses simple projective rank three.  A one-variable enumerator does not
+in general recover higher generalized weights in larger rank, where higher-codimension
+section data are required.
+
+## 3. Circuits and minimal dual supports
+
+The complement-column matroid `M(B)` is simple and has rank three.  Hence its circuits
+have sizes three or four.  Their numbers are
+
+```text
+C_3=sum_s f_s binom(s,3),
+
+C_4=binom(n,4)
+    -sum_s f_s (binom(s,4)+binom(s,3)(n-s)).
+```
+
+Every collinear triple lies on a unique projective line, proving the first formula.  A
+four-set is not a circuit precisely when it contains a dependent proper subset.  In a
+simple rank-three projective system this means either all four points are collinear or
+exactly three are collinear.  The first kind is counted by `sum_s f_s binom(s,4)`.
+For the second kind, the unique line containing the dependent triple, the triple on
+that line, and the fourth point off it give the count
+`sum_s f_s binom(s,3)(n-s)`.  The two kinds are disjoint, and every remaining four-set
+is a rank-three circuit, proving the second formula.
+
+A circuit dependency is one-dimensional and has no zero coefficient; conversely a
+minimal dual support is a circuit.  Thus each circuit supports one projective dual
+word, and the numbers of nonzero minimal dual words of weights three and four are
+
+```text
+(q-1)C_3,   (q-1)C_4.
+```
+
+There is also an independent coefficient-level consistency identity:
+
+```text
+A_4(D^perp)/(q-1)
+  =C_4+(q-3)sum_s f_s binom(s,4).
+```
+
+To prove it, classify a four-coordinate support.  A four-circuit contributes its
+unique projective full-support dependency.  Four collinear columns have a
+two-dimensional dependency code, the `[4,2,3]_q` MDS code, whose weight-four count is
+`(q-1)(q-3)` and hence whose projective full-support count is `q-3`.  A four-set with
+exactly one collinear triple has a unique dependency supported on that triple and no
+full-support dependency.  All other four-sets are independent.  Summing these cases
+proves the identity, which must agree with the weight-four MacWilliams coefficient.
+
+At a conic phase no line contains three columns.  Therefore
+
+```text
+C_3=0,   C_4=binom(q+1,4),
+```
+
+as for the uniform matroid underlying an extended GRS code.  These are support counts;
+the one-variable polynomial does not canonically identify or orbit-classify the
+supports.
+
+## 4. Full Tutte polynomial of the complement-column matroid
+
+Put
+
+```text
+R_k=sum_s f_s binom(s,k).
+```
+
+Then the Hamming enumerator determines the entire Tutte polynomial of `M(B)`:
+
+```text
+T_(M(B))(x,y)
+  =(x-1)^3+n(x-1)^2
+   +sum_(k=2)^n R_k (x-1)(y-1)^(k-2)
+   +sum_(k=3)^n (binom(n,k)-R_k)(y-1)^(k-3).
+```
+
+For the subset expansion of the Tutte polynomial, the empty set has rank zero and the
+`n` singletons have rank one.  For `k>=2`, a rank-two `k`-subset is contained in a
+unique projective line, and therefore there are exactly `R_k` such subsets.  Every
+remaining subset of size at least three has rank three.  Their respective contributions
+are
+
+```text
+(x-1)^(3-2)(y-1)^(k-2)
+```
+
+and
+
+```text
+(x-1)^(3-3)(y-1)^(k-3),
+```
+
+which proves the formula after adding the empty-set and singleton terms.
+
+The two standard evaluations give direct checks:
+
+```text
+T(1,1)=binom(n,3)-C_3,
+
+T(2,1)=1+n+binom(n,2)+binom(n,3)-C_3.
+```
+
+They count respectively the bases and all independent subsets.  Conversely, Greene's
+theorem recovers the Hamming enumerator from the Tutte polynomial at the usual
+code-dependent specialization.  Together with `f_s=A_(n-s)/(q-1)` and the displayed
+rank-three formula, this proves an equivalence among the Hamming enumerator, the
+line-section distribution, and `T_(M(B))` inside the category of spanning simple
+rank-three projective systems.
+
+This is the Tutte polynomial of the complement columns, not of the original
+arrangement.  No analogous recovery claim is made for arbitrary rank or nonprojective
+codes.
+
 ## Attribution and claim boundary
 
 The proof uses the conventional finite-field method and Ardila's indexed
 parallel-copy coboundary identity already source-closed in C403.  No novelty or
 priority claim is made for this scalar-extension packaging, generalized weights,
 matroid formulas, covering terminology, or minimal-codeword consequences.
-
