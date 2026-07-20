@@ -12,11 +12,17 @@ compatibility check closes the task; it does not authorize a new census or proof
 
 ## Ranked tasks
 
-1. **C366 — intrinsic recognition-to-decoding theorem.** Compose C336's exact code tower, C337's
-   recovery algorithm, and C364's every-syndrome decoder into one end-to-end theorem whose input is
-   the unmarked layered code. State the recovered equivalence class, deterministic complexity, and
-   all exceptional cases. Success is a proof that the decoder consumes only intrinsically
-   recovered data; stop if an unrecorded marking or oracle remains.
+1. **C366 — complete; intrinsic recognition-to-decoding theorem.** The degree-one C336 code,
+   C337 recovery, and C364 every-syndrome decoder compose from an arbitrary unmarked `3 x 4Q`
+   generator/parity-check presentation.  Retaining C337's actual row transformation `U` and the
+   nonzero projectivization scalars `kappa_j` gives the missing weight-preserving descent from the
+   normalized decoder to the input syndrome basis.  The complete gauge-free class is recovered;
+   preprocessing is Las Vegas expected `O(N)` with deterministic `O(N^6)` fallback, and each
+   syndrome is decoded deterministically in `O(m^2)` base-field operations through all recorded
+   affine, infinity, exceptional-divisor, and deep-hole branches.  No prescribed conic, layer
+   marking, secant table, or factorization oracle is consumed.  The theorem applies to the dual of
+   `C_1(A)`, not to C336's other four rows.  See
+   `notes/2026-07-19-c366-intrinsic-recognition-to-decoding.md`.
 2. **C367 — forgotten-interface robust-service separator.** On C353's certified q=7 separating
    pair, compare exactly the three C351 forgetful interfaces: uncoloured residual graph, repair
    multigraph, and unmarked code. Success is one shared interface with different two-failure
