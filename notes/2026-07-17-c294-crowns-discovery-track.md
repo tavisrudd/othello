@@ -165,3 +165,27 @@ on every AME state or is not implied by the Bell-triangle network.
 **Evidence:** STRUCTURAL OPEN — both endpoint computations are exact, but no cross-invariant or
 nonlinear elimination has been derived.
 **Status:** open lead
+
+### 2026-07-19 — C388 Cayley normalizer also pairs Arc--Kayles edges
+
+**Provenance:** post-completion external-application review of C388's cubic mirror isolator and
+the left-Cayley convention fixed by C370.
+**Was I looking for this?:** no relative to the original C388 deliverable — C388 asked for cubic
+isolation of the Node--Kayles regular scar and the tower value, not a direct group-only proof or a
+transfer to the different Arc--Kayles ruleset.
+**Observed / musing:** if `u` is an involution in `N_H(S) setminus S`, left multiplication by `u`
+is fixed-point-free and nonadjacent on `Cay_L(H,S)`, so the standard Node--Kayles pairing theorem
+gives nimber zero without cubic isolation.  The same map pairs every edge with a vertex-disjoint
+edge, giving an Arc--Kayles P-position.  C333's `tau` satisfies these hypotheses, and its odd-degree
+full residual mirror also gives the Arc--Kayles pairing.
+**Why it may matter / strongest question:** the immediate theorem is now incorporated into C388.
+The remaining worthwhile question is whether normalizer-paired four-involution `PGL_2(q)` Cayley
+graphs admit a substantive algebraic recognition/classification theorem beyond rewriting the
+standard graph-involution lemma, and whether that yields a meaningful tractable subclass beside
+the GI-hard general symmetry-recognition boundary for Arc--Kayles.
+**Evidence:** CHECKED PROOF / SOURCED BOUNDARY — the group equalities prove both pairings; Brown et
+al., *Nimber Sequences of Node-Kayles Games*, Theorem 4, is the standard Node--Kayles source, and
+Burke--Dailly--Oijid, arXiv:2404.10390v2, supplies the open-complexity/GI-hard recognition boundary.
+No novelty or priority audit was attempted.
+**Status:** incorporated -> `notes/2026-07-19-c388-cubic-mirror-isolator.md`; broader recognition
+lead graduated -> C393, with a mandatory repackaging stop.
