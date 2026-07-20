@@ -1,0 +1,670 @@
+{
+  "apolar_colored_plane_profile_count": 20,
+  "apolar_colored_plane_profile_is_complete_orbit_invariant": true,
+  "apolar_colored_plane_profiles": [
+    {
+      "distinct_line_color_profiles": 36,
+      "line_profile_sha256": "f6d260d01bae19bcafd274f634e3587c5ce92b7b413b79394ac9ded5acb629ff",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 36,
+      "line_profile_sha256": "e2a931da7b38dc706799349924c46eece178539b6948450d8fe3964d59fd283c",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 41,
+      "line_profile_sha256": "4456016fceb57351d2584786ee2eb03f65f71a279323cd0279488feb236ab3c4",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 30,
+      "line_profile_sha256": "fab17b362dbc908e5c90a0ddfcb435a302d023e48ce2c56813d9df6a466ef2a5",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 33,
+      "line_profile_sha256": "e545d9968d27278a6acd6406020254880616379d71d23ea19077d9257a1eef94",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 25,
+      "line_profile_sha256": "9952d5716aa08f63b803746b21f7ee226cdbb07b06d55ad4ba5058919c8005bf",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "distinct_line_color_profiles": 28,
+      "line_profile_sha256": "502cd90972c79fd4b5804f8f34433af11467261ed244934aefc862173e7e5678",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "distinct_line_color_profiles": 38,
+      "line_profile_sha256": "69a29b16cc523af105f00aad5b40584d06539ac84a5c2e7f70b914beacaa1e50",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 30,
+      "line_profile_sha256": "49c2402309f5a7464eabb14dfa3b64240f4a06516790a492c84158b14bf8b9bf",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 37,
+      "line_profile_sha256": "d98319409d5adaae9230b2506288cba0f501dbdf7a5d81edb9f1b52f93526931",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 37,
+      "line_profile_sha256": "02c0c865a6c7e33c5eef0e2dc693ee62cee49421145a4004691d3780101ab49b",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 28,
+      "line_profile_sha256": "e1364b6470a65462ab0b30a47109b36cc80b682a4316b0d6f8b61f82b1329974",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "distinct_line_color_profiles": 26,
+      "line_profile_sha256": "9cd91ed561d11850a088ccd3db7e32e97aa7639e61f98b96ac70fadd1f362f34",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 39,
+      "line_profile_sha256": "896616775cde514f242598317bba7e825553867206a5e342ae40f31b758950a3",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 32,
+      "line_profile_sha256": "8850a542e4a86f2d505f1f67e23887ac827ee6166cece8d00a53b4d4ced461db",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 25,
+      "line_profile_sha256": "1ac8230ebaed6cb40407341cb63ee18481bcec9ad425a57fb345d9beddbe3ab2",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "distinct_line_color_profiles": 34,
+      "line_profile_sha256": "a924433a8ad5f14110a23e940796dcf6837214b9fdd64bd103389c5980213030",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "distinct_line_color_profiles": 16,
+      "line_profile_sha256": "7f6949dff9ceb51bc478fca8374b87d27c1723d4f74645a7508891e63231428a",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        112
+      ],
+      "point_count": 112
+    },
+    {
+      "distinct_line_color_profiles": 5,
+      "line_profile_sha256": "d090954c6059951f3b7596636d6f0869a7fcb8e66357adb69b4e3baa3bcce61e",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        56
+      ],
+      "point_count": 56
+    },
+    {
+      "distinct_line_color_profiles": 5,
+      "line_profile_sha256": "86fb34c3f020ec1bd0bb20f5c9d22e9742a33cb1d10d685ea78021a22aebd083",
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    }
+  ],
+  "apolar_factorization_profile_count": 18,
+  "apolar_factorization_profile_is_complete_orbit_invariant": false,
+  "apolar_factorization_profiles": [
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 3,
+        "1^1+1^1+2^1": 11,
+        "1^1+1^3": 7,
+        "1^1+3^1": 14,
+        "1^2+1^2": 1,
+        "1^2+2^1": 2,
+        "1^4": 1,
+        "2^1+2^1": 4,
+        "4^1": 14
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 3,
+        "1^1+1^1+2^1": 16,
+        "1^1+1^3": 2,
+        "1^1+3^1": 16,
+        "1^2+1^2": 1,
+        "1^2+2^1": 1,
+        "2^1+2^1": 5,
+        "2^2": 1,
+        "4^1": 12
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 3,
+        "1^1+1^1+2^1": 16,
+        "1^1+1^3": 3,
+        "1^1+3^1": 15,
+        "1^2+2^1": 2,
+        "2^1+2^1": 5,
+        "4^1": 13
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 3,
+        "1^1+1^1+2^1": 18,
+        "1^1+1^3": 1,
+        "1^1+3^1": 13,
+        "1^2+2^1": 4,
+        "2^1+2^1": 3,
+        "4^1": 15
+      },
+      "orbit_count": 2,
+      "orbit_sizes": [
+        336,
+        336
+      ],
+      "point_count": 672
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 3,
+        "1^1+1^1+2^1": 18,
+        "1^1+3^1": 14,
+        "1^2+1^2": 1,
+        "1^2+2^1": 3,
+        "2^1+2^1": 3,
+        "2^2": 1,
+        "4^1": 14
+      },
+      "orbit_count": 2,
+      "orbit_sizes": [
+        336,
+        336
+      ],
+      "point_count": 672
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 4,
+        "1^1+1^1+2^1": 15,
+        "1^1+1^3": 1,
+        "1^1+3^1": 17,
+        "1^2+2^1": 3,
+        "2^1+2^1": 5,
+        "4^1": 12
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 4,
+        "1^1+1^1+2^1": 16,
+        "1^1+3^1": 16,
+        "1^2+2^1": 4,
+        "2^1+2^1": 4,
+        "4^1": 13
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 5,
+        "1^1+1^1+2^1": 12,
+        "1^1+1^3": 1,
+        "1^1+3^1": 21,
+        "1^2+2^1": 1,
+        "1^4": 1,
+        "2^1+2^1": 4,
+        "4^1": 12
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 5,
+        "1^1+1^1+2^1": 12,
+        "1^1+3^1": 22,
+        "1^2+1^2": 1,
+        "1^2+2^1": 1,
+        "2^1+2^1": 4,
+        "4^1": 12
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 5,
+        "1^1+1^1+2^1": 13,
+        "1^1+3^1": 20,
+        "1^2+2^1": 3,
+        "2^1+2^1": 5,
+        "2^2": 2,
+        "4^1": 9
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 6,
+        "1^1+1^1+2^1": 9,
+        "1^1+3^1": 26,
+        "1^2+1^2": 1,
+        "2^1+2^1": 6,
+        "4^1": 9
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        112
+      ],
+      "point_count": 112
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 7,
+        "1^1+1^1+2^1": 10,
+        "1^1+1^3": 3,
+        "1^1+3^1": 12,
+        "1^2+1^2": 1,
+        "1^2+2^1": 3,
+        "2^1+2^1": 4,
+        "4^1": 17
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 8,
+        "1^1+1^1+2^1": 8,
+        "1^1+1^3": 1,
+        "1^1+3^1": 16,
+        "1^2+1^2": 2,
+        "1^2+2^1": 1,
+        "1^4": 1,
+        "2^1+2^1": 6,
+        "4^1": 14
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 8,
+        "1^1+1^1+2^1": 8,
+        "1^1+1^3": 2,
+        "1^1+3^1": 15,
+        "1^2+1^2": 1,
+        "1^2+2^1": 3,
+        "2^1+2^1": 4,
+        "2^2": 2,
+        "4^1": 14
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 8,
+        "1^1+1^1+2^1": 9,
+        "1^1+1^3": 1,
+        "1^1+3^1": 14,
+        "1^2+1^2": 1,
+        "1^2+2^1": 4,
+        "2^1+2^1": 4,
+        "4^1": 16
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 9,
+        "1^1+1^1+2^1": 5,
+        "1^1+1^3": 2,
+        "1^1+3^1": 19,
+        "1^2+1^2": 1,
+        "1^2+2^1": 2,
+        "2^1+2^1": 7,
+        "4^1": 12
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+1^2": 21,
+        "1^1+1^3": 7,
+        "1^2+1^2": 7,
+        "1^2+2^1": 21,
+        "1^4": 1
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        56
+      ],
+      "point_count": 56
+    },
+    {
+      "factorization_histogram": {
+        "1^1+1^1+2^1": 28,
+        "1^2+2^1": 8,
+        "2^1+2^1": 20,
+        "2^2": 1
+      },
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168
+    }
+  ],
+  "apolar_rational_root_profile_count": 9,
+  "apolar_rational_root_profile_is_complete_orbit_invariant": false,
+  "apolar_rational_root_profiles": [
+    {
+      "orbit_count": 1,
+      "orbit_sizes": [
+        56
+      ],
+      "point_count": 56,
+      "root_support_histogram_0_to_4": [
+        0,
+        22,
+        14,
+        21,
+        0
+      ]
+    },
+    {
+      "orbit_count": 1,
+      "orbit_sizes": [
+        112
+      ],
+      "point_count": 112,
+      "root_support_histogram_0_to_4": [
+        15,
+        26,
+        10,
+        6,
+        0
+      ]
+    },
+    {
+      "orbit_count": 3,
+      "orbit_sizes": [
+        168,
+        336,
+        336
+      ],
+      "point_count": 840,
+      "root_support_histogram_0_to_4": [
+        16,
+        23,
+        13,
+        5,
+        0
+      ]
+    },
+    {
+      "orbit_count": 2,
+      "orbit_sizes": [
+        336,
+        336
+      ],
+      "point_count": 672,
+      "root_support_histogram_0_to_4": [
+        17,
+        20,
+        16,
+        4,
+        0
+      ]
+    },
+    {
+      "orbit_count": 7,
+      "orbit_sizes": [
+        168,
+        168,
+        336,
+        336,
+        336,
+        336,
+        336
+      ],
+      "point_count": 2016,
+      "root_support_histogram_0_to_4": [
+        18,
+        17,
+        19,
+        3,
+        0
+      ]
+    },
+    {
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336,
+      "root_support_histogram_0_to_4": [
+        19,
+        21,
+        8,
+        9,
+        0
+      ]
+    },
+    {
+      "orbit_count": 3,
+      "orbit_sizes": [
+        168,
+        336,
+        336
+      ],
+      "point_count": 840,
+      "root_support_histogram_0_to_4": [
+        20,
+        18,
+        11,
+        8,
+        0
+      ]
+    },
+    {
+      "orbit_count": 1,
+      "orbit_sizes": [
+        168
+      ],
+      "point_count": 168,
+      "root_support_histogram_0_to_4": [
+        21,
+        8,
+        28,
+        0,
+        0
+      ]
+    },
+    {
+      "orbit_count": 1,
+      "orbit_sizes": [
+        336
+      ],
+      "point_count": 336,
+      "root_support_histogram_0_to_4": [
+        21,
+        15,
+        14,
+        7,
+        0
+      ]
+    }
+  ],
+  "apolar_split_quartic_zero_set_matches_direct_deep_set": true,
+  "code": {
+    "dimension": 2,
+    "length": 8,
+    "name": "PRS_7(2)",
+    "redundancy": 6
+  },
+  "deep_hole_syndrome_points": 5376,
+  "direct_union_of_four_point_spans": 14232,
+  "field": {
+    "kind": "prime",
+    "q": 7
+  },
+  "normal_rational_curve_points": 8,
+  "pgl2_deep_orbit_count": 20,
+  "pgl2_deep_orbit_sizes": [
+    56,
+    112,
+    168,
+    168,
+    168,
+    168,
+    168,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336,
+    336
+  ],
+  "pgl2_order": 336,
+  "projective_syndrome_space": {
+    "dimension": 5,
+    "point_count": 19608
+  },
+  "schema": "c383-prs7-apolar-profile-v3"
+}
