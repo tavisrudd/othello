@@ -1,8 +1,8 @@
 # C373 companion — the Clebsch gateway program
 
 Date: 2026-07-19  
-Status: research-program router updated through C381 and C374; C382 ready for its bounded
-marked-icosian comparison and C375 retains the circuit gate
+Status: research-program router updated through C381 and the completed C374/C375 quantum gates;
+C382 is ready for its bounded marked-icosian comparison
 Parent: `2026-07-19-c373-clebsch-scheme-automorphisms.md`
 
 ## Executive thesis
@@ -301,13 +301,13 @@ The operational gate is mandatory.  `P=Q` alone is algebraic combinatorics; an e
 channel law, noise-estimation reduction, or experimentally measurable statistic makes it a
 quantum-information theorem.
 
-### Equivariant circuit obstruction
+### Exact circuit and fixed-layout obstruction
 
-The two-sheeted chirality may obstruct choosing a globally `A5`-equivariant factorization of the
-six-party tensor.  Express a proposed two-site-gate circuit as intertwining equations for the
-relevant `A5` modules.  A nonzero cocycle or incompatible decomposition could give a circuit lower
-bound; otherwise the same calculation constructs an equivariant preparation.  This is a more
-specific target than generic perfect-tensor holography, whose known cells have the wrong arity.
+**C375 outcome.**  Three explicit linear two-site permutation gates prepare the Clebsch state from
+three Bell pairs.  Of the 120 oriented Bell-triangle layouts, 100 factor and 20 do not; the
+factorable layouts form exact `A5`-covariant orbit families, but every factorable layout has
+stabilizer at most three, so no single strict fixed-layout `A5` intertwiner exists.  This is not a
+nonlinear, coherent-layout, native-gate, experimental, or holographic lower bound.
 
 ## Door V — chirality as data, not decoration
 
@@ -714,8 +714,7 @@ immediate sequence is:
 
 1. run C382's cheap marked-embedding/character gate and proceed to an integral icosian comparison
    only if it yields an intrinsic quotient and a consequence beyond C381;
-2. run C375's fixed-convention minimal and `A5`-equivariant circuit gate independently of the pure
-   mathematical paper;
+2. treat C375's exact three-gate circuit and sharp fixed-layout obstruction as complete;
 3. retain the C379 one-factorization/biplane theorem only as Clebsch compatibility, without abstract
    novelty language, because the focused audit pre-empts its classical core;
 4. keep genus-two, Mathieu/Witt, Jordan, and other famous-object doors closed until an additional

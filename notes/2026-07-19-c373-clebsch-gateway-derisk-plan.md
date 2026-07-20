@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** updated through C381 and C374; C382 is ready for its bounded marked-icosian gate and
-C375 retains the circuit gate
+**Status:** updated through C381 and the completed C374/C375 quantum gates; C382 is ready for its
+bounded marked-icosian gate
 
 **Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
 
@@ -71,8 +71,8 @@ The gateway cannot weaken this package.  Until a branch is promoted:
 - the gateway hexagon appears, if at all, as a dashed future-work diagram;
 - the title and abstract do not advertise cubic surfaces, `E6/E7`, a master duality, or a master
   arithmetic torsor; and
-- C374 is a certified quantum capstone and C375 remains an optional circuit capstone; neither is a
-  dependency of the pure-mathematical identity.
+- C374 and C375 are certified quantum capstones; neither is a dependency of the pure-mathematical
+  identity.
 
 The certified upgrade layer now consists of C374's GRS-class LC/LU separation, C376's blowdown/code
 quotient-character theorem, C378's `PGL_2(11)` symmetry completion and rank-16 signed Fourier
@@ -250,8 +250,10 @@ do not promote it.
 ## Wave III — quantum consequences
 
 C374 has closed the exact quantum-equivalence gate: the Clebsch state is LC- and LU-inequivalent,
-with party permutation, to every six-point GRS class.  C375 retains the circuit gate and may consume
-green classical restrictions, but the classical program must not depend on it.
+with party permutation, to every six-point GRS class.  C375 has also closed the circuit gate with
+an exact three-gate construction, an `A5`-covariant orbit family, and a sharp obstruction to one
+strictly `A5`-fixed factorable Bell-triangle layout.  The classical program does not depend on
+either result.
 
 Two outcomes justify promotion:
 
@@ -431,8 +433,8 @@ a Lean expansion.
    an intrinsic quotient and a consequence beyond C381.
 5. Keep the Frobenius and integral-moduli companions unallocated; no productive framed moduli gate
    survived the completed source disposition.
-6. Treat C374's GRS-class LC/LU separation as complete and run C375's circuit gate independently,
-   without making the core wait.
+6. Treat C374's GRS-class LC/LU separation and C375's exact circuit/fixed-layout obstruction as
+   complete.
 7. Perform claim-specific full-text and forward-citation closure.
 8. Choose among the certified core paper, one upgraded paper, or a core-plus-sequel split.
 

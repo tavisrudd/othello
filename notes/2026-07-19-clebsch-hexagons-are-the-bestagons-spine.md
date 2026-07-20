@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-19
 
-**Status:** exposition blueprint updated through C381 and C374's exact LC/LU separation; C382 is
-ready for its bounded marked-icosian comparison, while C375 retains the circuit gate
+**Status:** exposition blueprint updated through C381 and the completed C374/C375 quantum gates;
+C382 is ready for its bounded marked-icosian comparison
 
 ## Governing idea
 
@@ -255,7 +255,9 @@ proved:
 
 Do not infer a threshold, channel capacity, experimental advantage, or classification against
 arbitrary non-GRS `AME(6,11)` states.  C374 proves exact LC/LU separation from every six-point GRS
-class; C375 owns minimal and `A5`-equivariant preparation circuits.
+class.  C375 gives an exact three-two-site-gate preparation from three Bell pairs and an
+`A5`-covariant circuit family, while proving that no factorable fixed Bell-triangle layout is
+strictly `A5`-invariant.
 
 ### Side 6 — the derived object returns to the hexagon
 
@@ -403,7 +405,7 @@ C368 and C372--C379 now give a closed pure-mathematical spine with a substantial
 
 That is an A-range mathematical core with serious entry points for finite geometry, coding theory,
 algebraic combinatorics, representation theory, and quantum information.  C374 supplies a proved
-quantum capstone; C375's circuit question remains optional and is not a prerequisite for the
+quantum capstone, and C375 supplies its exact circuit companion; neither is a prerequisite for the
 paper's mathematical identity.
 
 The principal limitation is generality and source disposition: this remains one exceptional object
@@ -466,10 +468,11 @@ estimation invariant beyond known multiple-covering and orbit-compression theory
 ### 6. How far does the intrinsic Clebsch tensor structure extend?
 
 C374 proves local-Clifford and general local-unitary inequivalence, with party permutation, from
-every six-point GRS presentation.  Classify the state relative to other non-GRS `AME(6,11)` classes
-only if a finite exact invariant supplies a bounded family.  Independently, determine whether a
-minimal three-two-site-gate preparation exists and whether it can implement the `A5` action
-equivariantly.  An exact circuit and a symmetry-forced obstruction are both successful answers.
+every six-point GRS presentation.  C375 gives a three-two-site-gate preparation and classifies all
+120 oriented linear Bell-triangle layouts: 100 factor, but none is strictly `A5`-fixed; the circuits
+instead form exact `A5`-covariant orbit families.  The remaining open direction is classification
+relative to bounded non-GRS `AME(6,11)` families or a sharper theorem for nonlinear, coherent-layout,
+or native-gate circuit models.
 
 ## Claim boundary for the final manuscript
 
@@ -508,7 +511,8 @@ Not yet safe without the stated gates:
 
 - that the rank-eight fission is new or separable;
 - classification of the Clebsch state against arbitrary non-GRS `AME(6,11)` classes;
-- that the tensor has a new minimal or equivariant circuit;
+- nonlinear, coherent-layout, native-gate, experimental, or holographic circuit consequences
+  beyond C375's exact linear Bell-triangle theorem;
 - that Fourier self-duality improves a physical noise or decoding quantity;
 - that the C379 one-factorization/biplane compatibility is new before focused source closure;
 - an intrinsic all-prime Frobenius action on the fission or factorization two-set;
@@ -535,6 +539,7 @@ In this precise and unusually literal sense, hexagons are the bestagons.
 - `notes/2026-07-19-c372-clebsch-scheme-fourier.md`
 - `notes/2026-07-19-c373-clebsch-scheme-automorphisms.md`
 - `notes/2026-07-19-c374-clebsch-ame-equivalence.md`
+- `notes/2026-07-19-c375-clebsch-ame-circuit.md`
 - `notes/2026-07-19-c376-clebsch-cubic-chirality.md`
 - `notes/2026-07-19-c377-clebsch-golden-descent.md`
 - `notes/2026-07-19-c378-clebsch-common-duality.md`

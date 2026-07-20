@@ -42,10 +42,13 @@ compatibility check closes the task; it does not authorize a new census or proof
    the same object class. Success is an uncoloured-graph-intrinsic operational theorem. Object-class
    mismatch or dependence on forgotten markings closes the task; this task does not clear C296's
    game-value gate.
-5. **C370 — mirror-family extension periodicity.** Instantiate C332's all-extension decomposition
-   and repair-port Minkowski base change on C333's all-odd-field full-PGL2 mirror family. Success is
-   an explicit extension-degree periodic structural corollary with all determinant and parity
-   cases. Claim no Grundy or P/N value without a separately proved scar value.
+5. **C370 — complete; mirror-family extension periodicity.** For every C333 member over every odd
+   `q>=5`, the four-coloured extension residual is exactly `B + c_n C` in odd degree and
+   `B + Q + c_n C` in even degree, with the same formulas as Minkowski sums of fractional repair
+   regions and as sums of integral scheduling semigroups.  The determinant sheet persists exactly
+   in odd degree, the quadratic block occurs exactly in even degree, and `c_n` is odd exactly for
+   `n=3,0 mod 4`.  The proof supplies the four-generator orbit/Cayley compatibility map and makes
+   no Grundy or P/N claim.  See `notes/2026-07-19-c370-mirror-extension-periodicity.md`.
 
 ## Shared publication gate
 
