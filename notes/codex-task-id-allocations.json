@@ -71,8 +71,17 @@
       "last": 371,
       "purpose": "Bounded Clebsch cross-field novelty audit for quantum, modular, scheme, holographic, and matroid connections",
       "sequence": 8
+    },
+    {
+      "count": 4,
+      "first": 372,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 375,
+      "purpose": "High-priority Clebsch scheme Fourier classification, intrinsic chirality, AME equivalence, and symmetric circuit gates",
+      "sequence": 9
     }
   ],
-  "next_id": 372,
+  "next_id": 376,
   "schema": "codex-task-id-allocations-v1"
 }
