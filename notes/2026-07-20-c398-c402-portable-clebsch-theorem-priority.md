@@ -142,6 +142,12 @@ projective-line orbit theorem pre-empts the conceptual conic ladder, so the surv
 exact scheme/code/deep-hole synthesis rather than a portable flagship.  See
 `notes/2026-07-20-c400-a5-fourier-phases.md` and its Python/JSON/checksum/Lean bundle.
 
+The free publication extraction is now integrated into the Hexagon Spine: C400 is the all-field
+arithmetic halo around the q=11 rank-eight jewel, the six conic-relation phases replace the former
+two-phase shorthand, q=59 closes the stabilizer ladder, and `q*z-ell` plus the rank-four orthogonal
+fusion form the exact downstream interface.  This packaging adds no priority claim and leaves
+all-field fusion classification and separability behind their structural gates.
+
 ### Target theorem
 
 For every odd good reduction of the integral three-dimensional `A5` representation, construct the

@@ -109,6 +109,18 @@ and at `q=h+1` becomes the full-conic `[q+1,3,q-1]` code.  Credit Edge and Dye f
 small-field configurations and marker counts; the claim here is the common Coxeter-number
 line-defect and code mechanism.
 
+Around the q=11 spine sits an all-field arithmetic halo.  For every odd good residue field `k` of
+order `q`, the scalar-`A5` syndrome scheme is primitive and Fourier self-dual, its nonzero
+projective stabilizers are exactly `D5,S3,V4,C2,C3,C5,1`, and its rank is
+
+```text
+(q^2+16q+135+40e3+48e5)/60,
+```
+
+where `e3` and `e5` record the available `C3` and `C5` eigenlines.  This is the portable envelope
+in which the exceptional q=11 hexagon lives; state it before specializing to the richer
+reconstruction and tensor conclusions.
+
 The paper should announce one theorem with six clauses.
 
 1. **Integral orbit and parent code.** Every odd reduction preserves the `6_5,10_3,15_2` mirror
@@ -126,14 +138,16 @@ The paper should announce one theorem with six clauses.
    `PSL_2(11)`-invariant one-factorizations of `K_12`, exchanged by the golden outer map, with
    complementary `2-(11,5,2)` biplane cross-incidence.  Away from the small exceptional fibres and
    for `q>14`, the larger deep-hole child intrinsically recovers the mirrors and parent.
-4. **Fourier syndrome algebra.** At q=11 the eight scalar-closed `A5` syndrome orbits form a
-   primitive Fourier-self-dual translation association scheme.  In the intrinsic ordering,
-   `P=Q`, `P^2=1331I`, and the entire Krein tensor equals the intersection tensor.  The scheme is
-   a rank-eight `A5`-Schurian fission of the rank-four affine orthogonal scheme and has exactly one
-   additional proper rank-six fusion.  Adjoining the golden outer map completes `A5` to
-   `PGL_2(11)` and gives exactly the rank-four fusion.  The two conjugate rank-eight schemes have a
-   Fourier-self-dual rank-16 scalar-`A4` common coherent refinement with an exact four-dimensional
-   signed Fourier block.
+4. **Fourier syndrome algebra and arithmetic halo.** At every odd good reduction the scalar-closed
+   `A5` syndrome orbits form a primitive Fourier-self-dual translation association scheme of the
+   displayed rank.  A projective relation containing `ell` lines has character eigenvalue
+   `q*z-ell`, where `z` is the number perpendicular to the character direction, and the full
+   orthogonal group gives the uniform rank-four isotropic/square/nonsquare fusion.  At q=11 this
+   specializes to the rank-eight scheme with `P=Q`, `P^2=1331I`, equality of Krein and intersection
+   tensors, and exactly one additional proper rank-six fusion.  Adjoining the golden outer map
+   completes `A5` to `PGL_2(11)` and gives exactly the rank-four fusion.  The two conjugate
+   rank-eight schemes have a Fourier-self-dual rank-16 scalar-`A4` common coherent refinement with
+   an exact four-dimensional signed Fourier block.
 5. **Intrinsic reconstruction and chirality.** The full automorphism group of the scheme, already
    of its single 60-valent column constituent, is
 
@@ -157,7 +171,8 @@ The paper should announce one theorem with six clauses.
 
 Clauses 1--2 are the C368 arithmetic phase theorem assembled from C339/C341/C346.  Clause 3 combines
 C368's parent-to-child theorem with C379's extension, decorated inversion, and
-one-factorization/biplane certificate.  Clause 4 combines C341/C372 with C378.  Clause 5 combines
+one-factorization/biplane certificate.  Clause 4 combines C341/C372/C378 with C400's all-field
+orbit, rank, conic-role, and orthogonal-fusion theorem.  Clause 5 combines
 C373's bare-code hand-back to C207 with C376's cubic compatibility.  Clause 6 uses the standard
 MDS-to-AME theorem with the preceding exact syndrome identifications and C374's exact LC/LU
 separation.  The paper must keep those ownership and prior-art boundaries visible.
@@ -295,7 +310,7 @@ give C373's elementary rook-grid proof because it is illuminating, but must not 
 odd-prime rigidity theorem as new.  The exact Clebsch recovery, fission, and chirality verdict are
 the family-specific content.
 
-## The arithmetic refrain: two conic phases and one outer symmetry
+## The arithmetic refrain: six conic-relation phases and one outer symmetry
 
 Two statements should recur at the relevant transitions:
 
@@ -303,11 +318,20 @@ Two statements should recur at the relevant transitions:
 
 More formally:
 
-```text
-q=5:   Q is the six-column source orbit       -> GRS parent, empty complement;
-q=11:  Q is the twelve-direction deep locus  -> non-GRS parent, GRS child;
-q>14:  the larger deep locus                 -> intrinsically recovers the parent.
-```
+The invariant conic is a single scalar-`A5` relation at exactly six odd good residue-field sizes:
+
+| `q` | stabilizer | scheme rank | relation role |
+|---:|:---|---:|:---|
+| 5 | `D5` | 4 | six source columns; GRS parent |
+| 9 | `S3` | 6 | ten triple-ambiguity points; empty deep locus |
+| 11 | `C5` | 8 | complete twelve-point deep locus; GRS child |
+| 19 | `C3` | 14 | one deep-hole constituent |
+| 29 | `C2` | 24 | mirror constituent, not deep |
+| 59 | `1` | 76 | regular sixty-point deep-hole constituent |
+
+Thus q=59 is the clean endpoint of the stabilizer ladder: the conic loses its last point
+stabilizer precisely when it returns as a deep relation.  Independently, for `q>14` the full,
+usually multi-relation deep locus intrinsically recovers the parent arrangement.
 
 C373 adds the chirality interpretation.  In one q=11 fibre the outer normalizer coset is absent
 from the automorphism group, but exactly sixty cross-fibre projectivities exchange the golden-
@@ -342,6 +366,8 @@ A single recurring table can help readers keep their bearings.
 | twelve q=11 uncovered directions | conic and `[12,3,10]` GRS deep-hole child |
 | 22 obstruction matchings | two one-factorizations of `K_12` and the eleven-point biplane |
 | eight affine syndrome orbits | primitive Fourier-self-dual translation scheme |
+| all odd-good scalar closures | exact Burnside rank law and uniform orthogonal fusion |
+| q=59 conic | regular 60-point deep relation, closing the stabilizer ladder |
 | two golden rank-eight fissions | rank-16 common refinement and rank-four `PGL_2(11)` fusion |
 | computational-support superposition | `AME(6,11)` perfect tensor |
 
@@ -350,14 +376,14 @@ A single recurring table can help readers keep their bearings.
 1. **Prologue: one hexagon, six identities.** Give the picture, the Hexagon Spine Theorem, the
    contribution/prior-art boundary, and a short reader's guide.
 2. **Six points, fifteen mirrors.** Define the integral orbit, `A5/D5` action, and `H3` lattice.
-3. **The two conic phases.** Prove the minor and conic determinants and the q=5/q=11 arithmetic
-   phase theorem.
+3. **The six conic-relation phases.** Prove the orbit/rank law and conic stabilizer ladder, then
+   isolate the q=5 source-GRS and q=11 deep-GRS transformations as the two code-changing phases.
 4. **The blind spot is a conic—and the conic remembers.** Prove the syndrome-span bridge,
    non-GRS-to-GRS deep-hole transform, weak-`E7` extensions, matching-decorated inversion, and the
    two one-factorizations/biplane theorem.
-5. **Eight ways to be wrong.** Construct the rank-eight scheme, prove Fourier self-duality, explain
-   the branching fusion lattice, and use golden passage to reach the full conic symmetry and
-   rank-16 common refinement.
+5. **Eight ways to be wrong.** Construct the all-field scalar-`A5` schemes and their uniform
+   orthogonal quotient, specialize to the complete q=11 fusion lattice, and use golden passage to
+   reach the full conic symmetry and rank-16 common refinement.
 6. **From six columns to six qudits.** State the standard AME construction and identify its exact
    Pauli-`X` error algebra.
 7. **Closing the hexagon.** Recover the affine addition, six columns, full `A5`, scheme, and
@@ -383,8 +409,8 @@ last line.  A formal paper title should carry the mathematical content, for exam
   For C373, the clique/rook-grid proof should lead and equitable refinement should certify it.
 - Let the central diagram fill in as the paper proceeds.  Each completed side should visibly hand
   its output to the next proof.
-- Use memorable theorem names for genuine structure—“Two Conic Phases,” “The Blind Spot Is a
-  Conic,” and “Closing the Hexagon”—while keeping lemma names conventional.
+- Use memorable theorem names for genuine structure—“Six Conic-Relation Phases,” “The Blind Spot
+  Is a Conic,” and “Closing the Hexagon”—while keeping lemma names conventional.
 - Credit the classical Clebsch/icosahedral geometry, conic--GRS and MDS--AME dictionaries,
   outer-`S6` `10+10` model, arrangement-to-coset-leader machinery, and general affine rigidity.
 - Do not force every list or proof into length six.  The spine is useful because the maps are real,
@@ -469,20 +495,25 @@ whether Frobenius acts on it arithmetically, and when cross-incidence produces a
 symmetric design.  The finite q=11 theorem is certified; its classical-source disposition and any
 all-prime transport remain open.
 
-### 4. Why is the syndrome algebra an eight-class fission?
+### 4. Which scalar-`A5` fusions survive uniformly?
 
-Decide separability and give a conceptual geometric or group-theoretic meaning to the unexplained
-rank-six fusion.  Explain the rank-16 common refinement and four-dimensional signed Fourier block
-representation-theoretically, and determine whether the Clebsch pair of fissions occurs in a wider
-family.  Identify which intersection, spectral, fusion, or automorphism data characterize it up to
-combinatorial isomorphism.
+C400 gives the full rank/orbit law, the uniform rank-four orthogonal fusion, and the complete
+q=5/9/11 fusion lattices.  A genuine continuation must replace Bell-number partition enumeration
+by a structural centralizer- or representation-algebra theorem.  Separability also remains open:
+the standard TI and quasiregular criteria already fail at q=11.  Explain the exceptional q=11
+rank-six fusion, the rank-16 common refinement, and the signed Fourier block without promoting a
+larger finite census.
 
 ### 5. Does the chiral self-dual error algebra have operational force?
 
 Split the twenty minimum-weight leaders of each farthest coset into the intrinsic `10+10` support
 classes and compute their sheetwise incidence or transition algebras.  Continue only if the
 refinement yields an exact design, robustness, list-decoding, Pauli-channel, mixing, or observable-
-estimation invariant beyond known multiple-covering and orbit-compression theory.
+estimation invariant beyond known multiple-covering and orbit-compression theory.  C402 is the
+all-field quantum gate: first construct a basis-independent LU-covariant spectral or holonomy
+operator that retains C400's fine `C3/C5/free` orbit labels.  The rank-four orthogonal quotient is
+the mandatory negative control, and decoder-weight classes cannot be used because they are not a
+coherent fusion.
 
 ### 6. How far does the intrinsic Clebsch tensor structure extend?
 

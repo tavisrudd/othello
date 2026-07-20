@@ -154,6 +154,40 @@ phase theorem into a constant-rank decoding algebra.  Exhausting every set parti
 and the complete small-rank fusion lattices, not a complete coherent-fusion classification for all
 larger fields.  Separability also remains open.
 
+## Publication-ready corollaries and reuse contract
+
+The paper-facing form is an **arithmetic halo theorem** around the q=11 Clebsch hexagon.  The
+isolated rank-eight algebra is the q=11 member of a primitive Fourier-self-dual family with the
+displayed Burnside rank law, seven possible stabilizer types, and a uniform orthogonal quotient.
+This strengthens the exposition without claiming that the classical projective-line orbit ladder
+is new.
+
+Four consequences can be imported without further computation:
+
+1. the six-column source code is always the `D5` relation of valency `6(q-1)`;
+2. the projective deep-hole locus is exactly the union of the `C3`, `C5`, and free relations and has
+   size `(q-5)(q-9)`;
+3. the conic is one relation exactly in the six phases `q=5,9,11,19,29,59`; and
+4. every relation eigenvalue is obtained from the incidence integer `q*z-ell`, while the
+   isotropic/square/nonsquare coarsening supplies a rank-four negative control in every field.
+
+For exposition, q=59 should close the stabilizer ladder: the conic has become a regular sixty-point
+orbit, and that orbit is again a deep relation.  The q=5 and q=11 rows remain the two code-changing
+phases—source GRS at five and deep-hole child GRS at eleven—rather than the whole arithmetic story.
+
+The exact downstream contract for C402 is deliberately narrower than “use the association
+scheme.”  A candidate AME invariant must:
+
+- be defined from the tensor without choosing a Pauli frame, decoder, or syndrome basis;
+- have proved covariance under local unitaries and party permutations;
+- retain the fine `C3`, `C5`, and free-orbit data rather than factor through quadratic norm type;
+- compare the q=19 `H3` state with the full same-field GRS moduli; and
+- use the rank-four orthogonal spectrum as a mandatory collapse control.
+
+Failure of any item is a categorical stop, not an invitation to enlarge a finite census.  Likewise,
+complete all-field fusion classification and separability are not free corollaries: they require a
+structural centralizer/representation-algebra theorem or a new CI criterion, respectively.
+
 ## Proof
 
 The fifteen involutions fix their projective axis and mirror, hence `q+2` points each.  The twenty
