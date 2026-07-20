@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** C437--C438 queued; dependency-gated
+**Status:** C437 queued; C438 closed at its category gate
 
 ## Selection rule
 
@@ -53,6 +53,15 @@ informative degree?
   or tensor check.
 
 ## C438 — q=9/q=11 decorated-transform seam spike
+
+**Outcome (post-C435):** sharp obstruction.  C435's `7+7 -> 14` Frobenius fusion lives on the
+36-element determinantal-class fibre, not on the eight-element parent-decoration fibre.  The q=9
+parent is recovered by an octad-point mark; the 28 bitangents carry all octad-pair labels, while
+C405 leaves their dictionary with the 28 singular net quadrics open, and neither unmarked set
+selects a parent.  At q=11, by contrast, the root-intersection matching is
+itself the parent-recovering decoration and the `11+11` split lives on that same parent/matching
+fibre.  Thus no category-correct obstruction square survives, and G4/G11 are not promoted.  See
+`notes/2026-07-20-c438-decorated-transform-seam.md`.
 
 **Dependency:** C435 complete. Consume
 `notes/2026-07-20-c435-hermitian-determinantal-tower.md` and its exact certificate; the frozen C379
@@ -107,8 +116,8 @@ closure under `notes/literature-audit-conventions.md`.
 **Depth and verdict.**  This was a bounded discovery check, not a novelty audit: **0 of 6 newly
 consulted sources were read at full text**.  It found no direct statement of either spike, but that
 is not an absence-of-prior-work conclusion.  It did find close work that materially narrows C437
-and supplies a better prior-art substrate for C438.  The two spikes remain sensible, with the
-following boundaries.
+and supplied a prior-art template for C438.  The post-C435 category review above subsequently
+closed C438; the source result itself did not supply the missing finite-field obstruction object.
 
 - **C437 / G7 -> G1: proceed only with the narrowed claim above.**  Kemper--Lopatin--Reimers
   already study all-orbit separating invariants over finite fields, including permutation-group
@@ -123,17 +132,18 @@ following boundaries.
   spherical designs with prescribed odd harmonic indices and antipodality.  Their abstract does
   not address signed halves in the perfect-matching scheme or cubic orientation recovery, but it
   makes raw odd-moment/antipodality language prior art rather than a contribution.
-- **C438 / G3: proceed, but consume octad pictures rather than rebuilding them.**  Van Bommel et
-  al. construct coordinate-invariant Cayley-octad pictures from degeneration data, an explicit map
-  from those decorated pictures to stable-reduction types, and a compatible `Sp(6,2)`/Cremona
-  action proved for a single building block and conjectured generally.  This is close structural
-  prior art for a marked obstruction transform on the q=9 side.  It does not connect Cayley octads
-  to q=11 conic matching-decorated deep holes or provide the cross-field commuting square.  C438
-  should therefore import the octad-picture invariant as the q=9 obstruction object and reserve
-  its claim for the category-correct q=9/q=11 bridge and shared involutivity/discriminant law.
-- **Ranking effect:** no reranking is justified by this shallow pass.  C438 gains external
-  structural support but loses any claim to inventing the q=9 decorated obstruction map; C437
-  remains sharper and riskier because its defensible contribution is now representation-specific.
+- **C438 / G3 post-C435 correction: use octad pictures as a prior-art boundary, not as the q=9
+  obstruction object.**  Van Bommel et al.'s pictures encode valuation/degeneration data over a
+  non-archimedean local field and map to stable-reduction types.  C405/C435 supply a smooth
+  finite-field Hermitian quartic but no lift or degeneration datum, so importing a picture here
+  would change categories.  More decisively, C435's parent-recovering mark is one octad point,
+  whereas its Frobenius `7+7 -> 14` fusion is on the separate 36-class determinantal fibre.  The
+  q=9 singular-quadric/bitangent incidence dictionary also remains open.  The q=11 matching, root
+  obstruction, and `11+11` split all live on one 22-parent fibre.  The
+  cross-field commuting square therefore fails before novelty is at issue; see C438's report.
+- **Ranking effect:** the shallow pass alone justified no reranking.  The later C435 comparison
+  closes C438 on internal compatibility, not literature pre-emption.  C437 remains open and risky
+  because its defensible contribution is representation-specific.
 
 ### Sources consulted in this check
 

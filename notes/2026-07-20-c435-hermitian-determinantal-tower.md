@@ -133,6 +133,12 @@ object; it does not claim the same for arbitrary Cayley octads.
 
 ### Frobenius supplies the q=9 two-sheet analogue needed by C438
 
+**Post-C438 clarification.**  The analogy is only at the level of an outer fusion pattern.  The
+`7+7 -> 14` fusion below acts on the 36 determinantal classes, whereas the eight C405 parents form
+a different transitive fibre recovered by octad-point marks.  C438 therefore cannot use this
+fusion as the q=9 counterpart of C379's `11+11` split on the parent/matching fibre; see
+`notes/2026-07-20-c438-decorated-transform-seam.md`.
+
 The projective rank-four action has two distinct suborbits of size seven. An independently
 enumerated semilinear decorated-octad symmetry normalizes the entire tower. On the 36 classes it
 exchanges those two seven-point suborbits while fixing the `1` and `21` levels. Consequently

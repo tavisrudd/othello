@@ -7,9 +7,11 @@
 **Status:** completed synthesis and decision ranking; literature coverage remains bounded by the
 explicit read-depth ledger below
 
-**Queued follow-through:** C437 is the G7 -> G1 residual-list seam spike after C430; C438 is the
-G3 q=9/q=11 decorated-transform seam spike after C435.  Their bounded specifications are in
-`notes/2026-07-20-c437-c438-gateway-chain-spikes.md`.
+**Follow-through:** C437 remains queued as the G7 -> G1 residual-list seam spike after C430. C438's
+G3 q=9/q=11 decorated-transform spike closed at its category gate after C435: the q=9 Frobenius
+fusion is on the 36 determinantal classes, not the eight-parent fibre, while q=11's outer split and
+root matching share the 22-parent fibre.  See `notes/2026-07-20-c438-decorated-transform-seam.md`
+and the bounded specifications in `notes/2026-07-20-c437-c438-gateway-chain-spikes.md`.
 
 ## Question
 
@@ -172,6 +174,12 @@ not duplicated.
 
 **Boundary.**  Deep-hole/MDS-extension equivalence, Cayley octads, and bitangent dictionaries are
 classical.  The possible new object is the decorated transform and its inversion/termination law.
+
+**C438 outcome.**  C435 recovers a q=9 parent from an octad-point mark but puts its `7+7 -> 14`
+Frobenius fusion on the separate 36-class determinantal fibre.  C405's incidence dictionary between
+the 28 singular net quadrics and the 28 pair-labelled bitangents remains open.  This is incompatible
+with q=11, where the root-intersection matching and `11+11` outer split both live on the same
+22-parent fibre, so the required shared obstruction square does not exist in the proposed category.
 
 ### G4. Extension complexes -> higher-order MDS -> exact list-decoding obstructions
 
