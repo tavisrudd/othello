@@ -197,8 +197,17 @@
       "last": 397,
       "purpose": "AME pencil perfect-tensor Clifford and operator-pushing physics gate",
       "sequence": 22
+    },
+    {
+      "count": 5,
+      "first": 398,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 402,
+      "purpose": "EV-ranked portable Clebsch theorem candidates",
+      "sequence": 23
     }
   ],
-  "next_id": 398,
+  "next_id": 403,
   "schema": "codex-task-id-allocations-v1"
 }
