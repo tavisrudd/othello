@@ -1,0 +1,171 @@
+{
+  "bring_theta_centralizer": {
+    "dimension": 8,
+    "fixes_unique_even_theta_and_size_60_odd_orbit": true,
+    "linear_commutant_dimension": 4,
+    "model": "deleted_permutation_module_W_direct_sum_W",
+    "normalizer_order": 720,
+    "normalizer_quotient_is_S3": true,
+    "normalizer_quotient_order": 6,
+    "orthogonal_centralizer_element_orders": {
+      "1": 1,
+      "2": 3,
+      "3": 2
+    },
+    "orthogonal_centralizer_is_GL2_2_is_S3": true,
+    "orthogonal_centralizer_order": 6,
+    "quadratic_form": "q(x,y)=dot(x,y)",
+    "simultaneously_permutes_all_four_orbit_triples": true,
+    "theta_orbit_spectrum": {
+      "parity=0,size=1": 1,
+      "parity=0,size=10": 3,
+      "parity=0,size=30": 3,
+      "parity=0,size=5": 3,
+      "parity=1,size=20": 3,
+      "parity=1,size=60": 1
+    },
+    "type": "plus"
+  },
+  "e8_norm_four": {
+    "canonical_pairing_spectrum": {
+      "-1": 64,
+      "-2": 14,
+      "0": 84,
+      "1": 64,
+      "2": 14
+    },
+    "effective_cap_root_count": 14,
+    "k8_star_exhausts_lift_lines": true,
+    "k8_star_neighbour_count": 7,
+    "lift_lines_per_coset": 8,
+    "nonzero_singular_coset_count": 135,
+    "norm_four_count": 2160,
+    "norm_four_lifts_per_coset": [
+      16
+    ],
+    "orthogonal_decomposition_count": 7,
+    "parity_kernel_root_count": 112,
+    "root_count": 240
+  },
+  "golden_reduction": {
+    "common_discriminant_coefficients_increasing_degree": [
+      0,
+      0,
+      0,
+      -4,
+      0,
+      0,
+      0,
+      0,
+      -44,
+      0,
+      0,
+      0,
+      0,
+      4
+    ],
+    "common_discriminant_factorization": "4*t^3*(t^2-t-1)*(t^4-2*t^3+4*t^2-3*t+1)*(t^4+3*t^3+4*t^2+2*t+1)",
+    "finite_branch_support": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "golden_roots_mod_11": [
+      4,
+      8
+    ],
+    "hc_trigonal_fibre_equations": [
+      "y^3+t^3*y^2+t*y-t^4",
+      "t^3*y^3-t^4*y^2+y+t"
+    ],
+    "mod_11_discriminant": "4*t^3*(t^10-1)",
+    "pairing_identification": "Dye Theorem 8 double-contact pairs = C379 five-parent-conic obstruction pairs",
+    "projective_branch_support": "P1(F_11), including infinity",
+    "ruling_parameters_match_C376_tau_values": true
+  },
+  "induced_homogeneous_spaces": {
+    "element_order_spectra": {
+      "A5": {
+        "1": 1,
+        "2": 15,
+        "3": 20,
+        "5": 24
+      },
+      "C5": {
+        "1": 1,
+        "5": 4
+      },
+      "D10": {
+        "1": 1,
+        "2": 5,
+        "5": 4
+      }
+    },
+    "golden_J_outside_PSL2_11": true,
+    "homogeneous_space_sizes": {
+      "PGL2_11/A5": 22,
+      "PGL2_11/C5": 264,
+      "PGL2_11/D10": 132
+    },
+    "orders": {
+      "A5": 60,
+      "C5": 5,
+      "D10": 10,
+      "PGL2_11": 1320,
+      "PSL2_11": 660
+    }
+  },
+  "matching_lagrangians": {
+    "factorization_cycle_spectra": [
+      {
+        "2": 55
+      },
+      {
+        "2": 55
+      }
+    ],
+    "factorization_is_perfect": [
+      false,
+      false
+    ],
+    "flag_count": 132,
+    "intersection_cycle_spectrum": {
+      "dim=1,cycles=2": 176,
+      "dim=2,cycles=3": 55
+    },
+    "lagrangian_count": 22,
+    "lagrangian_dimension": 5,
+    "matching_count": 22,
+    "matching_recovery_verified": true,
+    "point_count": 12,
+    "pointed_flag_count": 264,
+    "q_one_minimum_weight_spectrum": {
+      "2": 6,
+      "6": 10
+    },
+    "singular_kernel_dimension": 4,
+    "subspace_distance_spectrum": {
+      "6": 55,
+      "8": 176
+    }
+  },
+  "schema": "othello.c390.free_upgrades.v1",
+  "trusted_inputs": {
+    "2026-07-19-c379-clebsch-deep-hole-extension.json": {
+      "bytes": 43991,
+      "sha256": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
+    },
+    "2026-07-19-c379-clebsch-deep-hole-extension.py": {
+      "bytes": 18732,
+      "sha256": "ca8024023173aaa09e0252780b8297ebac06bcc920115e3b9b808059d4b0d587"
+    }
+  }
+}

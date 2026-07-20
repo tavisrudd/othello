@@ -1,0 +1,7 @@
+# byte-counts: report=12730 primary=27046 replay=10940 certificate=3890 homology-sage=9567 homology-json=5059
+f8c5e70ac03814545c7cdb30c5c7faf91f29ff323690e5e2c95b96b5c5a0e74c  notes/2026-07-19-c390-clebsch-bring-e8-lagrangian-upgrades.md
+baf4a15f106837430d361535058bf556e64142b044a17d92e81239f8e8911325  notes/2026-07-19-c390-clebsch-bring-e8-lagrangian-upgrades.py
+a4b9e3be7f9f0b956b90ec999a780e09e1c61e0332b1fd2d8e7deaa7c98662bb  notes/2026-07-19-c390-clebsch-bring-e8-lagrangian-upgrades-replay.py
+f79288095af00a42dc7f1d9d7807e76da618634ae611a053bd5e297d80fad7b5  notes/2026-07-19-c390-clebsch-bring-e8-lagrangian-upgrades.json
+76a09439cc5db9fd9338021b7c9741712e48c549ea49b8c656a57c44fd704b03  notes/2026-07-20-c390-bring-homology-module.sage
+135116d327909335872eb63e94fc871d4a72d2853216f3f63f452265a58b7768  notes/2026-07-20-c390-bring-homology-module.json
