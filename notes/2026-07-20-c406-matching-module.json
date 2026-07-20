@@ -1,5 +1,9 @@
 {
   "inputs": {
+    "2026-07-19-c378-clebsch-common-duality.json": {
+      "bytes": 7431,
+      "sha256": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc"
+    },
     "2026-07-19-c378-clebsch-common-duality.py": {
       "bytes": 12219,
       "sha256": "e45e71c5e87ccc334fab3b926e5189373e24485adf11ed1cbaacfc6771610bdc"

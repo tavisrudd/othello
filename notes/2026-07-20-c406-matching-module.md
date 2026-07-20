@@ -368,9 +368,9 @@ linearly with C378's four-dimensional Fourier sector, or establish literature pr
 
 | load-bearing artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker | 48,147 | `3adeb480799bf10aaefb5b6b67f1f4ab27ecfecdf93a285f7b3b3b14573e8b6d` |
+| primary checker | 48,311 | `f77d5fe8d44301b538c01e31cc80c99b29a4daa0a9800ba879accd402bceced9` |
 | independent replay | 28,819 | `fee181327a48460708960a56897a6d358b9e00491099f7f1e52406585087a72b` |
-| canonical JSON | 21,589 | `839034b6be9ed63827bd996b952db56c8ab9b610e371b64d6d92ecdc8408bf73` |
+| canonical JSON | 21,753 | `992847bcc974ca2d4e3af546c9b0954ae806170911f9ddb3a71f4049aff9787c` |
 
 ## Gate and manuscript disposition
 

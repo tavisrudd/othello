@@ -18,6 +18,7 @@ OUTPUT = Path(__file__).with_suffix(".json")
 SCOUT_PATH = HERE / "2026-07-20-c406-matching-orbit-scout.json"
 C399_PATH = HERE / "2026-07-20-c399-coxeter-number-conic-phase.py"
 C378_PATH = HERE / "2026-07-19-c378-clebsch-common-duality.py"
+C378_CERT_PATH = HERE / "2026-07-19-c378-clebsch-common-duality.json"
 
 
 def load_module(name: str, path: Path):
@@ -993,6 +994,7 @@ def type_certificate(record):
             assert {j_matching_permutation[index] for index in singleton_indices} == singleton_indices
 
             c378_certificate = C378.certificate()
+            assert c378_certificate == json.loads(C378_CERT_PATH.read_text())
             odd_fourier_matrix = c378_certificate["odd_fourier_matrix"]
             fourier_profiles = [
                 [sum(row[column] * profile[column] for column in range(4)) for row in odd_fourier_matrix]
@@ -1118,7 +1120,7 @@ def build_certificate():
                 "bytes": path.stat().st_size,
                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             }
-            for path in (SCOUT_PATH, C399_PATH, C378_PATH)
+            for path in (SCOUT_PATH, C399_PATH, C378_PATH, C378_CERT_PATH)
         },
     }
 
