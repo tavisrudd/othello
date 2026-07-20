@@ -233,8 +233,17 @@
       "last": 407,
       "purpose": "execute six C403 free arrangement-code upgrades",
       "sequence": 26
+    },
+    {
+      "count": 1,
+      "first": 408,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 408,
+      "purpose": "bounded pointed-profile and syndrome-multiplicity forgetting gate after C403/C407",
+      "sequence": 27
     }
   ],
-  "next_id": 408,
+  "next_id": 409,
   "schema": "codex-task-id-allocations-v1"
 }
