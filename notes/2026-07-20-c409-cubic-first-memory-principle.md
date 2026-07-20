@@ -166,6 +166,54 @@ degree three is the first **possible** memory after quadratic balance, not the f
 such configuration.  Any `3`-trade has `M_3=0`; more generally the first moment that remembers a
 trade is one above its exact strength.
 
+## Free corollary: the binomial-moment collinearity tower
+
+For a simple finite point set `S` in `PG(2,q)`, put `D(L)=|S cap L|` and
+
+```text
+B_r(S)=sum_(projective lines L) binom(D(L),r).
+```
+
+Double-counting pairs `(L,R)` with `R subset S cap L` gives
+
+```text
+B_0=q^2+q+1,
+B_1=(q+1)|S|,
+B_r=#{collinear r-subsets of S}                 for r>=2.
+```
+
+For `r=2`, every pair determines one line, so `B_2=binom(|S|,2)` is still forced.  The first
+realization-sensitive term is therefore `B_3`, the number of collinear triples.  This is the
+integral falling-factorial form of C403's cubic barrier, without converting to raw powers.
+
+The full sequence is complete for the scalar depth distribution.  If `h_d` is the number of lines
+of depth `d` and `m=max d`, then
+
+```text
+B_r=sum_(d=0)^m h_d binom(d,r),                 0<=r<=m.
+```
+
+The binomial-coefficient matrix is triangular with diagonal one, so `B_0,...,B_m` recover every
+`h_d` by integral inversion.  Thus the complete scalar depth polynomial and the complete
+aggregated collinear-subset spectrum are equivalent data; neither records which named point sees
+which lines.
+
+The weighted version is equally direct.  Replace a point `X` of integer weight `w_X` by `w_X`
+labelled clones.  An `r`-subset of clones supported at one point is counted on `q+1` lines; one
+supported on at least two distinct collinear points is counted on its unique line.  Hence
+
+```text
+B_r=(q+1) sum_X binom(w_X,r)
+    + #{collinear clone r-subsets with support size at least two}.
+```
+
+After the single-support correction, the binomial moments are precisely the weighted collinearity
+tower.  When the point-weight multiset is fixed, the first new projective datum again occurs at
+three-point support.  This proof-only corollary is an elementary incidence normalization, not a
+novelty claim.  For C410 it says that equality of the universal scalar tower is equality of every
+aggregated collinearity layer, while a pointed profile can still distinguish how those layers are
+attached to individual complement points.
+
 ## Literature disposition
 
 This pass read **zero external sources in full**, one partially, and three at
@@ -197,6 +245,12 @@ The deliverable makes no novelty, priority, or unrestricted absence claim.
   readings.**  They delimit matching harmonics and real group-orbit moment designs; C409 does not
   re-open C406's priority boundary.
 
+The later claim-by-claim audit `notes/2026-07-20-c406-priority-audit.md` sharpens that boundary
+without changing C409's theorem: the raw exceptional one-factorizations and their matching-design
+status are classical, while the conic-quotient/moment/Fourier composition remains likely new only
+within the audit's bounded coverage.  C409's general filtration and the binomial-moment corollary
+remain elementary/classical normalizations and claim no share of that priority.
+
 Exact title/abstract searches covered design trades and Pasch trades, harmonic/design moments,
 matroid relaxation and switching, gain-graph arrangement switching, and arrangement realization
 moduli.  The searches located the classical trade framework and several unrelated meanings of
@@ -214,7 +268,7 @@ C408 bundles:
 | input | bytes | SHA-256 | consumed fact |
 |:---|---:|:---|:---|
 | `notes/2026-07-20-c403-arrangement-complement-distance.json` | `234075` | `1bc47da2bf0f2f07b5e48d7b1242c8bd104b8a98a65174e1023b7119953f6f90` | the pinned scalar moment pairs and nonzero cubic differences |
-| `notes/2026-07-20-c406-matching-module.json` | `20547` | `39949eed9e53b414aac1a93e918c78683db067e572952bb51c286921967d8dd0` | `mu_1=mu_2=0`, `mu_3!=0`, reference independence, and exact sheet recovery |
+| `notes/2026-07-20-c406-matching-module.json` | `21996` | `e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2` | `mu_1=mu_2=0`, `mu_3!=0`, reference independence, and exact sheet recovery; the later depth-profile extension leaves these inputs unchanged |
 | `notes/2026-07-20-c408-pointed-profile-forgetting-gate.json` | `10089` | `2d29cc235b22944589d813f73660597c12b9745152055cadcee3e2ff0a746ebd` | the four universal depth-coefficient differences |
 
 The displayed tensor, generating-function, C408-ledger, and Pasch-family arguments independently
