@@ -134,8 +134,17 @@
       "last": 387,
       "purpose": "C382 adjacent mappings: O10-minus matching code and Bertini limit-theta bridge",
       "sequence": 15
+    },
+    {
+      "count": 2,
+      "first": 388,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 389,
+      "purpose": "C370 cubic scar isolation and universal exact-degree/repair base-change upgrades",
+      "sequence": 16
     }
   ],
-  "next_id": 388,
+  "next_id": 390,
   "schema": "codex-task-id-allocations-v1"
 }
