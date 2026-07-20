@@ -1,0 +1,4 @@
+e01fc095bb51dd561d5b71c91d0f775b24ec1d97c8909d7879f3bd7fa499dcfc  notes/2026-07-20-c398-conic-deep-hole-classification.py
+e68bd03d88afd2c6c05a76fe9ef9b4254cb614c3b2f9f4c252c60222289e6f68  notes/2026-07-20-c398-conic-deep-hole-classification.json
+a30e341de6dc5310c052098ae87430d729262c969f8c84662d00f1eaae056827  lean/RelativeConicArcs/ClebschGatewayConicDeepHole.lean
+66e67502e7c18e083cb2b7f717ba8dc3e8d0eef895713c5749cb8294fc756f11  lean/RelativeConicArcs/Gates/ClebschGatewayConicDeepHole.lean

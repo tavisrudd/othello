@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** queued in descending expected-value order; C398 is the next crowns action
+**Status:** C398 complete; C399 is the next crowns action
 
 ## Decision
 
@@ -27,6 +27,16 @@ paper-facing mathematical conclusion is a Lean target under the Clebsch trust po
 external certificates retained for discovery and independent replay.
 
 ## C398 — classify non-GRS-to-GRS conic deep-hole transforms
+
+### Result
+
+C398 closes with verdict `ALL-FIELD EXACT CLASSIFICATION; FOUR SEMILINEAR CLASSES; UNIQUE
+FULL-CONIC CLASS IS CLASSICAL`.  The incidence inequality `q^2<=15(q+1)` forces `q<=15`, and the
+complete `PGammaL_3(q)` quotient leaves one q=8 class with locus size four, two q=9 classes with
+locus sizes six and seven, and the unique q=11 full-conic class.  The q=11 exterior six-arc is
+already recorded by Korchmaros and Blokhuis--Seress--Wilbrink, so the result survives as a sharp
+portable synthesis but does not trigger the flagship paper-promotion rule.  See
+`notes/2026-07-20-c398-conic-deep-hole-classification.md` and its Python/JSON/checksum/Lean bundle.
 
 ### Target theorem
 
