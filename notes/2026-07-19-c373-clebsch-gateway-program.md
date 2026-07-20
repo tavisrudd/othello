@@ -104,6 +104,15 @@ The following are proved in the cited local reports and are not conjectural prem
 
 ## Door I — the Clebsch cubic surface, 27 lines, and `E6`
 
+**C376 status: positive.**  The exact q=11 quintic contraction from the `E_i` blowdown to the
+`Q_i` blowdown induces precisely `N_S6(A5) \ A5` on the six labels.  It therefore exchanges the
+same two triple orbits as C373 chirality.  The second blowdown is projectively the golden-conjugate
+`tau=4` configuration; its equivalences to that model induce precisely `A5`.  The checker also
+recovers all 27 lines, 45 tritangent triples, ten Eckardt triples, 72 sixers, and 36 double-sixes,
+with an independent replay.  See `2026-07-19-c376-clebsch-cubic-chirality.md`.  Door I is no longer
+a candidate edge: over q=11 it is certified.  Integral descent and all-prime compatibility remain
+Door II.
+
 ### Classical bridge
 
 The six projective points coming from the long axes of the icosahedron are also a blow-up model of

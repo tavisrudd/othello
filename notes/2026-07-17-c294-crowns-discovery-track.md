@@ -56,3 +56,26 @@ claimed common mechanism.
 exact in their source reports, but the combined identity and every game-value consequence remain
 open.
 **Status:** open lead
+
+### 2026-07-19 — Bring's curve shares the two-contraction and twelve-branch geometry
+
+**Provenance:** C376 full-text read of Prokhorov, *Icosahedron in birational geometry*, arXiv
+`2411.15334v2`, Section 3.3 immediately after the load-bearing Clebsch-cubic section.
+**Was I looking for this?:** no — C376 was checking the two `A5`-equivariant cubic-surface
+blowdowns and their action on code chirality.
+**Observed / musing:** Bring's genus-four curve lies on the same Clebsch cubic and has two
+`A5`-equivariant trigonal maps to `P1`, each branched over an `A5` orbit of length 12.  Under a
+Clebsch contraction its image lies in the same invariant sextic pencil used to obtain the cubic by
+blowing up six nodes.
+**Why it may matter / strongest question:** the magic hexagon already has two blowdowns, a
+12-direction deep-hole conic, and a six-party tensor.  Is there a commuting restriction in which
+the two surface blowdowns induce the two trigonal maps and the q=11 twelve-point conic is a finite
+reduction of their branch orbit?
+**Structural mechanism:** the same `A5` action on the Clebsch cubic controls a two-element choice of
+maps and a distinguished orbit of length 12.
+**Discriminator / falsifier:** compute the branch divisors and their integral reduction; the lead
+fails if their q=11 reductions do not identify with the C368 deep-hole conic under the C376
+coordinates.
+**Evidence:** SOURCE-SPECIFIC OPEN — Prokhorov states the classical surface/curve/maps/branch
+orbits; no connection to the code or finite deep-hole conic was checked.
+**Status:** open lead
