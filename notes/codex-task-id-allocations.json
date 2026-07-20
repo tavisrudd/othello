@@ -278,8 +278,17 @@
       "last": 428,
       "purpose": "Clebsch replacement-spine Lean formalization and weighted-adjoint closure",
       "sequence": 31
+    },
+    {
+      "count": 8,
+      "first": 429,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 436,
+      "purpose": "Fable-review EV-ranked crowns upgrades and bounded adjacent gates",
+      "sequence": 32
     }
   ],
-  "next_id": 429,
+  "next_id": 437,
   "schema": "codex-task-id-allocations-v1"
 }
