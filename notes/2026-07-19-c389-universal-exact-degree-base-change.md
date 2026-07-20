@@ -6,7 +6,7 @@
 
 **Verdict:** **THEOREM; EXACT FROBENIUS-DEGREE CAYLEY LAYERS AND TWO-PHASE REPAIR GEOMETRY**
 
-**Literature-audit depth:** **0 full text; 4 partial; 2 abstract/metadata only.**
+**Literature-audit depth:** **0 full text; 7 partial; 2 abstract/metadata only.**
 
 ## Result
 
@@ -19,8 +19,10 @@ D=\bigcup_{w\in W}\operatorname{Fix}(w)
 \]
 
 from the projective line.  Edges of colour `s` join `x` to `sx`; loops and edges incident with
-deleted vertices are omitted.  This includes the conic residual convention, where `W` contains
-the prescribed pair products.
+deleted vertices are omitted.  Formally this is the `S`-labelled directed Schreier graph; when
+inverse generators share a colour it is the corresponding undirected coloured graph, and for the
+conic application every generator is an involution.  This includes the conic residual convention,
+where `W` contains the prescribed pair products.
 
 For `d>1`, let `E_d` be the geometric projective points whose least field of definition over `k`
 is `F_(q^d)`.  Then
@@ -81,20 +83,21 @@ count divided by the group order.
 
 ## Proof
 
-For `d>1`, the projective point at infinity has degree one, so `E_d` is the set of elements of
-`F_(q^d)` lying in no proper subfield.  The usual divisor-lattice identity
+For every `d>=1`, let `A_d` be the affine elements of exact degree `d`.  The projective point at
+infinity has degree one, so `E_d=A_d` for `d>1`.  The divisor-lattice identity
 
 \[
-q^d=\sum_{e\mid d}|E_e|
+q^d=\sum_{e\mid d}|A_e|
 \]
 
-and Möbius inversion prove (1).
+and Möbius inversion give `|A_d|=N_d(q)`, proving (1) without treating infinity as an
+exact-degree-one affine element.
 
 If a nonidentity element of `PGL_2(k)` represented by
-`[[a,b],[c,d]]` fixes an affine point `x`, then
+`[[a,b],[c,e]]` fixes an affine point `x`, then
 
 \[
-cx^2+(d-a)x-b=0.
+cx^2+(e-a)x-b=0.
 \]
 
 The polynomial is nonzero, and the point at infinity is already rational.  Hence every fixed point
@@ -231,6 +234,26 @@ unqualified “to our knowledge” sentence.
   lemmas of Section 2.  It studies `PGL_2(F_q)` fixed points on irreducible polynomials and shows
   why geometric-point freeness must not be transferred to places.  Cache key `arXiv:1811.02537`,
   SHA-256 `180b0a3682bbf0595823c090509ed6939d3da3d49868ef89848fbc14b64b47cd`.
+- **Lucas Reis,** *Invariant theory of a special group action on irreducible polynomials over
+  finite fields*. **Read depth: partial**, cached arXiv v1, the Introduction's prior-results and
+  main-results survey and the opening of Section 3 through Theorems 3.1--3.2.  It gives the broader
+  invariant-polynomial boundary, including the degree-two restriction for a polynomial fixed by a
+  noncyclic subgroup; it does not identify geometric residual vertices with polynomial places.
+  Cache key `arXiv:1708.06862`, SHA-256
+  `efdf0d83b275ff4ec58364f3ad3d2a074e586ba4bd3079fc4af8ed299a882a80`.
+- **Lucas Reis,** *The action of `GL_2(F_q)` on irreducible polynomials over `F_q`*. **Read depth:
+  partial**, cached arXiv v2, abstract and Introduction through the roadmap of Sections 2--4.  It
+  confirms that the action under discussion is on irreducible polynomials and surveys the earlier
+  full-`PGL_2` invariant-polynomial result; it supplies no deleted coloured residual theorem.
+  Cache key `arXiv:1608.03915`, SHA-256
+  `521bab5bbe9d38454b32a870eb3de4970b3b24a68a10e4f95b0dd94987717273`.
+- **Rod Gow and Gary McGuire,** *Invariant Rational Functions, Linear Fractional Transformations
+  and Irreducible Polynomials over Finite Fields*. **Read depth: partial**, cached arXiv v1,
+  Section 2.3's orbit/stabilizer setup and the opening of Section 3.2 through Lemma 3 on nonregular
+  projective-line orbits.  It confirms the classical regular/nonregular orbit boundary for finite
+  subgroups of `PGL_2`; it does not state the exact-degree deleted-coloured composition.
+  Cache key `arXiv:2105.11247`, SHA-256
+  `122c40262d91d731406836d437db3dd89acd448f5e47f2660998515e4eae9166`.
 - **Everett W. Howe,** *Enumerating places of `P1` up to automorphisms of `P1` in quasilinear
   time*. **Read depth: partial**, cached arXiv v2 (2025-10-21), Introduction through Theorem 1.1
   and Corollary 1.2.  It enumerates `PGL_2(F_q)`-orbits on degree-`n` places and uses Frobenius
@@ -265,8 +288,20 @@ was distinguished from an API error.  The first three title/year/DOI rows of the
 were screened and were unrelated algebraic-geometry/group-cohomology results; its poor precision
 licenses no negative.  Both title/year/DOI rows of the third set were screened and were unrelated
 topology/computer-science records.  The exact web searches for `PGL_2` exact-degree actions,
-fixed-point-deleted residuals, and service-region Minkowski sums promoted Howe, Reis, and the
-already-recorded service-polytope paper; no direct composition appeared in the returned results.
+fixed-point-deleted residuals, and service-region Minkowski sums promoted Howe, the three Reis
+papers, Gow--McGuire, and the already-recorded service-polytope paper; no direct composition
+appeared in the returned results.
+
+On 2026-07-20, four supplementary OpenAlex searches were recorded verbatim as
+`"PGL(2,q)" "exact degree" orbit`, `"PGL(2,q)" "irreducible polynomials" Cayley graph`,
+`"service rate region" "direct sum" codes`, and `"service rate region" "Minkowski sum"`.
+Their successful `meta.count` values were respectively `0,5,0,0`; all five title/year/ID rows in
+the only nonempty set were screened and were unrelated graph/group records.  Broader diagnostic
+queries for `"PGL(2,q)" irreducible polynomial orbit`, `"PGL(2,q)" invariant irreducible
+polynomials`, `"service rate region" disjoint blocks`, and `"recovery set" "Minkowski sum"`
+returned `206,235,8,2` records.  Only the first ten metadata rows of each of the first two and all
+rows of the latter two were screened; because those searches were visibly tokenized and
+low-precision, they license no negative beyond selecting the individually read sources above.
 
 The same two focused composition searches sent to the Semantic Scholar Graph API failed with HTTP
 429, so Semantic Scholar is **NOT COVERED**.  zbMATH and MathSciNet were not covered in this bounded
