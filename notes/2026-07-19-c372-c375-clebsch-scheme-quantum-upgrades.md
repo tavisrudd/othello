@@ -83,6 +83,18 @@ a new quantum state class.
 
 ## C375 — Clebsch-specific minimal and `A5`-equivariant preparation circuits
 
+**Completed 2026-07-19 — theorem, positive circuit and sharp fixed-layout obstruction.**  From
+Bell pairs `(1,4),(2,5),(3,6)`, the three linear permutation gates
+`A_45=[[1,1],[10,1]]`, `B_46=[[3,1],[7,1]]`, and `C_56=[[8,10],[3,10]]`
+prepare the fixed Clebsch state exactly.  The full linear Pozsgay--Wanless census has 100
+factorable and 20 nonfactorable oriented layouts.  Their `A5` orbits have sizes
+`10,10,20,20,30,30`; the two size-ten orbits fail, so a factorable layout has stabilizer at most
+three and no single strict fixed-layout `A5` intertwiner exists.  The circuits nevertheless form
+exact `A5`-covariant orbit families.  The same certificate checks all six `[[5,1,3]]_11` encoders
+and all twenty permutation-multiunitary flattenings.  No arbitrary nonlinear, coherent-layout, or
+native-gate lower bound is claimed.  See `notes/2026-07-19-c375-clebsch-ame-circuit.md` and its
+checker/JSON/checksum bundle.
+
 After C374 fixes the relevant equivalence class and conventions, apply the exact six-party AME
 tensor-decomposition criteria to the Clebsch presentation.  Decide whether it can be prepared from
 three Bell pairs by three two-site unitaries, and whether a minimal circuit can be chosen

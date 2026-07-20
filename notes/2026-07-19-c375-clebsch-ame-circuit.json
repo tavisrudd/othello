@@ -1,0 +1,421 @@
+{
+  "a5_and_layout_census": {
+    "canonical_outer_permutation_zero_based": [
+      0,
+      1,
+      4,
+      5,
+      3,
+      2
+    ],
+    "directed_factorization_tests": 1440,
+    "factorizable_layouts": 100,
+    "fixed_circuit_layout_orbit_size": 20,
+    "fixed_circuit_layout_stabilizer_order": 3,
+    "independent_720_permutation_replay_matches": true,
+    "largest_factorizable_layout_stabilizer_order": 3,
+    "layout_orbits": [
+      {
+        "a5_layout_stabilizer_order": 6,
+        "factorizable": false,
+        "factorization_profile_right_left_union_over_six_pair_orderings": [
+          0,
+          0,
+          0
+        ],
+        "orbit": 1,
+        "representative": {
+          "gate_side_one_based": [
+            1,
+            2,
+            3
+          ],
+          "matched_side_one_based": [
+            5,
+            6,
+            4
+          ]
+        },
+        "size": 10
+      },
+      {
+        "a5_layout_stabilizer_order": 6,
+        "factorizable": false,
+        "factorization_profile_right_left_union_over_six_pair_orderings": [
+          0,
+          0,
+          0
+        ],
+        "orbit": 2,
+        "representative": {
+          "gate_side_one_based": [
+            1,
+            2,
+            5
+          ],
+          "matched_side_one_based": [
+            4,
+            3,
+            6
+          ]
+        },
+        "size": 10
+      },
+      {
+        "a5_layout_stabilizer_order": 3,
+        "factorizable": true,
+        "factorization_profile_right_left_union_over_six_pair_orderings": [
+          3,
+          3,
+          6
+        ],
+        "orbit": 3,
+        "representative": {
+          "gate_side_one_based": [
+            1,
+            2,
+            3
+          ],
+          "matched_side_one_based": [
+            4,
+            5,
+            6
+          ]
+        },
+        "size": 20
+      },
+      {
+        "a5_layout_stabilizer_order": 3,
+        "factorizable": true,
+        "factorization_profile_right_left_union_over_six_pair_orderings": [
+          3,
+          3,
+          6
+        ],
+        "orbit": 4,
+        "representative": {
+          "gate_side_one_based": [
+            1,
+            2,
+            5
+          ],
+          "matched_side_one_based": [
+            3,
+            6,
+            4
+          ]
+        },
+        "size": 20
+      },
+      {
+        "a5_layout_stabilizer_order": 2,
+        "factorizable": true,
+        "factorization_profile_right_left_union_over_six_pair_orderings": [
+          2,
+          2,
+          2
+        ],
+        "orbit": 5,
+        "representative": {
+          "gate_side_one_based": [
+            1,
+            2,
+            3
+          ],
+          "matched_side_one_based": [
+            4,
+            6,
+            5
+          ]
+        },
+        "size": 30
+      },
+      {
+        "a5_layout_stabilizer_order": 2,
+        "factorizable": true,
+        "factorization_profile_right_left_union_over_six_pair_orderings": [
+          2,
+          2,
+          2
+        ],
+        "orbit": 6,
+        "representative": {
+          "gate_side_one_based": [
+            1,
+            2,
+            5
+          ],
+          "matched_side_one_based": [
+            3,
+            4,
+            6
+          ]
+        },
+        "size": 30
+      }
+    ],
+    "linear_a5_order": 60,
+    "matching_orbit_sizes": [
+      5,
+      10
+    ],
+    "monomial_actions_checked_on_codewords": 79860,
+    "nonfactorizable_layouts": 20,
+    "normalizer_order": 120,
+    "oriented_bell_triangle_layouts": 120,
+    "outer_layout_orbit_pairs": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        5
+      ]
+    ],
+    "passing_directed_factorization_tests": 480,
+    "passing_layout_orderings_after_direction_union": 360,
+    "profile_histogram": [
+      {
+        "layouts": 20,
+        "profile_right_left_union": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "layouts": 60,
+        "profile_right_left_union": [
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "layouts": 40,
+        "profile_right_left_union": [
+          3,
+          3,
+          6
+        ]
+      }
+    ],
+    "projective_action_order": 60,
+    "strict_full_a5_fixed_layout_exists": false
+  },
+  "fixed_three_gate_circuit": {
+    "arbitrary_two_site_gate_count_after_bell_pairs": 3,
+    "arbitrary_two_site_gate_count_from_product_in_source_model": 6,
+    "direct_css_baseline": {
+      "one_site_fourier_gates": 3,
+      "weighted_sum_gates": 9
+    },
+    "each_gate_is_four_leg_perfect_tensor": true,
+    "gate_order_one_based": [
+      [
+        4,
+        5
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        6
+      ]
+    ],
+    "initial_bell_pairs_one_based": [
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        6
+      ]
+    ],
+    "linear_permutation_gates": {
+      "A_45": [
+        [
+          1,
+          1
+        ],
+        [
+          10,
+          1
+        ]
+      ],
+      "B_46": [
+        [
+          3,
+          1
+        ],
+        [
+          7,
+          1
+        ]
+      ],
+      "C_56": [
+        [
+          8,
+          10
+        ],
+        [
+          3,
+          10
+        ]
+      ]
+    },
+    "product_C56_B46_A45": [
+      [
+        3,
+        3,
+        1
+      ],
+      [
+        7,
+        1,
+        10
+      ],
+      [
+        1,
+        7,
+        10
+      ]
+    ],
+    "support_rows_checked": 1331
+  },
+  "free_corollaries": {
+    "encoder_erasure_checks": 60,
+    "erasure_subsets_checked_per_encoder": 10,
+    "explicit_five_leg_encoders": 6,
+    "flattening_determinants": [
+      7,
+      4,
+      4,
+      7,
+      9,
+      7,
+      8,
+      8,
+      7,
+      6,
+      2,
+      8,
+      7,
+      7,
+      8,
+      5,
+      8,
+      3,
+      3,
+      8
+    ],
+    "grs_encoder_local_unitary_inequivalence_follows_from_c374": true,
+    "permutation_multiunitary_flattenings_checked": 20,
+    "qmds_parameters": "[[5,1,3]]_11"
+  },
+  "inputs": {
+    "c341_dependency_sha256": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be",
+    "field_order": 11,
+    "generator_rref": [
+      [
+        1,
+        0,
+        0,
+        3,
+        7,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        3,
+        1,
+        7
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        10,
+        10
+      ]
+    ],
+    "paper_column_map": [
+      [
+        3,
+        3,
+        1
+      ],
+      [
+        7,
+        1,
+        10
+      ],
+      [
+        1,
+        7,
+        10
+      ]
+    ],
+    "parity_block_row_convention": [
+      [
+        3,
+        7,
+        1
+      ],
+      [
+        3,
+        1,
+        7
+      ],
+      [
+        1,
+        10,
+        10
+      ]
+    ],
+    "pozsgay_wanless_source": "arXiv:2308.07042v3, equations (3.4), (4.5), and (5.1)-(5.13)"
+  },
+  "schema": "c375-clebsch-ame-circuit-v1",
+  "trusted_boundary": {
+    "does_not_prove": [
+      "a lower bound against arbitrary nonlinear two-site-unitary circuits outside the Bell-triangle architecture",
+      "an ancilla-assisted or coherent-layout A5-equivariant circuit obstruction",
+      "minimal cost in a fixed hardware or fault-tolerant gate library",
+      "noise, experimental, or holographic performance"
+    ],
+    "proves": [
+      "the displayed three linear two-site permutation gates prepare the fixed Clebsch state from three Bell pairs",
+      "the complete 120-layout linear Pozsgay-Wanless census and its six A5 orbits",
+      "no single fixed Bell-triangle layout is strictly A5-invariant; factorable layouts have stabilizer order at most three",
+      "A5 nevertheless transports each factorable circuit through an exact covariant orbit family",
+      "the six explicit [[5,1,3]]_11 encoder maps and all 3|3 permutation-unitary flattenings"
+    ]
+  }
+}

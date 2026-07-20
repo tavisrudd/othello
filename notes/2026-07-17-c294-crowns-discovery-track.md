@@ -79,3 +79,52 @@ coordinates.
 **Evidence:** SOURCE-SPECIFIC OPEN — Prokhorov states the classical surface/curve/maps/branch
 orbits; no connection to the code or finite deep-hole conic was checked.
 **Status:** open lead
+
+### 2026-07-19 — induced layout registers may restore coherent `A5` equivariance
+
+**Provenance:** C375's exact `A5` census of the 120 oriented three-Bell-pair/three-gate layouts.
+**Was I looking for this?:** no — C375 asked for one strictly fixed minimal layout or its exact
+obstruction, not an ancilla-assisted coherent family.
+**Observed / musing:** although no single factorable layout is `A5`-fixed, the factorable circuits
+form two orbits of size 20 and two of size 30, and the exact monomial physical action transports
+the gates within each orbit.  Adjoining a layout register carrying the permutation module on one
+orbit therefore gives a formal direct-sum intertwiner for free; what is not free is coherently
+preparing, controlling, and erasing that register without losing the three-gate advantage.
+**Why it may matter / strongest question:** is there an induced-representation compression, perhaps
+through the order-three stabilizer of the displayed circuit, that realizes an exact coherent
+`A5` intertwiner with bounded ancilla and strictly fewer controlled two-site gates than naive
+20-branch multiplexing?
+**Discriminator / falsifier:** specify a gate-cost model and either exhibit a coherent circuit whose
+layout register returns to a product state or prove that the relevant permutation module leaves
+unavoidable which-layout information.  A formal direct sum alone does not pass.
+**Evidence:** CHECKED SEED / OPEN CIRCUIT — C375 certifies the orbit actions and covariant circuit
+family; no coherent implementation or lower bound was attempted.
+**Status:** open lead
+
+### 2026-07-19 — marginal moments may detect nonlinear Bell-triangle factorizability
+
+**Provenance:** juxtaposing C374's LU-invariant triple-marginal moment distribution with C375's
+linear Pozsgay--Wanless factorization census.
+**Was I looking for this?:** no — C375 was required to apply the published linear decomposition
+equations to the fixed Clebsch presentation and delimit the nonlinear case.
+**Observed / musing:** C375's twenty failed linear layouts are exactly the two layout orbits with
+the largest `A5` stabilizer (order six), while C374 already supplies party-symmetric LU moments
+computed only from shortening-subspace ranks.  A three-tensor Bell-triangle network may impose
+additional polynomial identities on these embedded marginal products even when its three tensors
+are arbitrary unitaries rather than linear permutation gates.
+**Why it may matter / strongest question:** can one eliminate the three four-leg tensors and derive
+an LU-invariant moment identity that either rules out nonlinear factorizations at the twenty failed
+layouts or proves that the symmetry--factorizability tradeoff is only a linear-coordinate artifact?
+**Structural mechanism:** both tests constrain how three complementary maximally entangled bonds
+can be re-routed across the ten `3|3` cuts; C374 measures intersections of shortened Lagrangians,
+while C375 measures vanishing three-factor elimination minors.
+**Predicted siblings:** other highly symmetric non-GRS linear AMEs — the layouts with the largest
+symmetry stabilizer are predicted to be exceptional zeros of the linear factorization criterion;
+nonlinear deformations — either the same marginal identity persists or they explicitly break this
+tradeoff.
+**Discriminator / falsifier:** derive one tensor-network polynomial invariant and test it on the
+two failed and four passing C375 orbit representatives; the lead fails if the invariant is constant
+on every AME state or is not implied by the Bell-triangle network.
+**Evidence:** STRUCTURAL OPEN — both endpoint computations are exact, but no cross-invariant or
+nonlinear elimination has been derived.
+**Status:** open lead
