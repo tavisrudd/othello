@@ -1,176 +1,191 @@
-# C381 — Clebsch eight-point extensions and the weak-`E8` obstruction
+# C381 — Clebsch eight-point extensions and the marked `E8` obstruction
 
 **Lane:** `crowns`
 
 **Date:** 2026-07-19
 
-**Status:** queued bounded exact gate; may run independently of C379's literature closure
+**Verdict:** `GREEN GATE; EXACT THREE-ORBIT ROOT CLASSIFICATION; ROOT DATA RECOVERS THE MATCHING AND MDS STATUS`
 
-**Parent:** `notes/2026-07-19-c373-clebsch-gateway-program.md`
+## Theorem
 
-**Inputs:** C379's fixed q=11 conic, complete 22-parent matching-decorated locus, two
-one-factorizations, and independently replayed certificate
-
-## Routing contract
-
-Enter with:
+Let `Q(F_11)` be C379's twelve-point child conic and let `X` range over its complete
+22-parent Clebsch locus.  For every unordered pair `{u,v}` in `Q(F_11)`, blow up
 
 ```text
-go C381
+S(X;u,v) = X union {u,v}.
 ```
 
-C381 owns the finite eight-point/weak-degree-one question.  It does not own the icosian lattice
-comparison.  On completion:
+The complete marked domain has `22*66=1452` members and exactly three
+`PGL_2(11)`-orbits:
 
-- if the green gate below is recorded in the report and crowns handoff, promote C382 from gated to
-  ready and hand back `go C382`;
-- otherwise leave C382 gated, archive C381's exact theorem or bounded negative, and route through
-  the next live `crowns` priority.
+| configurations | fixed-parent `A5` orbit | eight-arc / codes | geometry | direct effective roots | integral root closure |
+|---:|---:|---|---|---|---|
+| `132=22*6` | `6` | yes; `[8,5,4]` and `[8,3,6]` | worse than weak | `7` conic + `7` singular-cubic | `D8` (`112` roots) |
+| `660=22*30` | `30` | yes; `[8,5,4]` and `[8,3,6]` | weak degree one | `3` conic | `3A1` (`6` roots) |
+| `660=22*30` | `30` | no | weak degree one | `1` line + `3` conic | `4A1` (`8` roots) |
 
-No worker may infer C382 readiness merely from the occurrence of an abstract `E8` Picard lattice.
+The first row consists exactly of the six matching edges of each parent.  The other sixty pairs
+split equally according to whether their secant contains a parent point.  Under
+`PSL_2(11)` each displayed orbit splits into two equal orbits, of sizes `66`, `330`, and `330`,
+one in each eleven-parent sheet; the golden map `J` exchanges the two copies.  Thus neither sheet
+changes the unmarked root type.
 
-## Exact starting correction
-
-The smooth del Pezzo route proposed in the original C373 atlas is already obstructed by C379.
-For every parent `X` in the complete 22-parent locus and every `p` on the child conic, the
-seven-point set `X union {p}` contains a six-point conic.  Hence every eight-point extension
+For a child point `w`, let `alpha_w` be C379's inherited conic-root class.  Then
 
 ```text
-X union {p,q}
+alpha_u . alpha_v = -1  iff {u,v} is an edge of M_X,
+                      0  otherwise.
 ```
 
-contains that same forbidden six-point subset.  It cannot be in the general position required for
-a smooth degree-one del Pezzo surface.  C381 must state this inheritance as a short conventional
-proof before any enumeration.  A search for a smooth member is not authorized.
-
-The surviving question is sharper:
-
-> What weak degree-one surface and effective-root subsystem arise from each two-point extension,
-> and does C379's matching/factorization structure canonically control that `E8` data?
-
-## Frozen finite domain
-
-Use the exact q=11 conventions and all 22 parents from C379.  For each parent `X` and each of the
-66 unordered pairs `{p,q}` in `Q(F_11)`:
-
-1. form the eight-point configuration `S=X union {p,q}`;
-2. test whether `S` is an eight-arc and, when it is, certify the `[8,5,4]_11` parity-check kernel
-   and `[8,3,6]_11` row dual;
-3. classify the pair relative to the parent matching `M_X`, the two one-factorization sheets, and
-   the exact `A5`, `PSL_2(11)`, and `PGL_2(11)` actions; and
-4. compute the complete effective `(-2)`-root subsystem in `K^perp` for the blow-up at `S`.
-
-The raw domain has only `22*66=1452` marked configurations.  Use group orbits for the proof and
-the full domain for a bounded certificate; do not expand to arbitrary q=11 six-arcs.
-
-## Full degree-one geometry test
-
-For eight distinct planar points, “no three collinear” and “no six on a conic” are not the entire
-degree-one general-position test.  C381 must also test the cubic root classes corresponding to a
-cubic through all eight points with a double point at one of them.  In the standard blow-up basis,
-enumerate all 240 roots of the abstract `E8` lattice, including the line, conic, and singular-cubic
-types, and decide effectivity in fixed conventions.
-
-With blow-up basis `H,E_1,...,E_8`, use the complete standard list
+Consequently the inherited marked subsystem is `A2` on matched pairs and `A1+A1` otherwise.
+The matching is therefore recoverable from root intersections alone.  More strongly, the complete
+marked invariant
 
 ```text
-E_i-E_j                                             (56 roots),
-+/-(H-E_i-E_j-E_k)                                (112 roots),
-+/-(2H-E_i1-E_i2-E_i3-E_i4-E_i5-E_i6)             (56 roots),
-+/-(3H-2E_i-sum_(j != i) E_j)                      (16 roots).
+( R(S) <= K^perp ~= E8, {alpha_u,alpha_v} )
 ```
 
-For distinct points the first type records no infinitely-near effectivity.  The other positive
-types are tested respectively by collinear triples, six-point conics, and cubics through all eight
-with a double point at the distinguished point.  Verify the list and sign convention against the
-chosen primary surface source before making it a trusted mathematical boundary.
+has exactly the three forms `(D8,A2)`, `(3A1,2A1)`, and `(4A1,2A1)`.  Here `R(S)` means the
+integral root subsystem generated by all directly effective root classes, not the rational span.
+This invariant is taken up to canonical-class-preserving Picard isometry, equivalently the relevant
+`W(E8)` embedding class with its unordered inherited pair.  It recovers both the C379 obstruction
+matching and whether the extension is an eight-arc, hence whether the two displayed MDS parameters
+apply.
 
-Do not label a surface weak del Pezzo merely from a root count.  State and source the exact nef/big
-criterion being used, test every required incidence, and record the resulting Dynkin type of the
-effective-root subsystem.  Distinguish:
+## Geometry and proof
 
-- the abstract Picard lattice `K^perp ~= E8` present for any eight blow-ups;
-- effective `(-2)` roots caused by the special point configuration;
-- the root subsystem contracted by the anticanonical model; and
-- smooth, weak, and worse-than-weak degree-one behavior.
+### Smooth obstruction and the weak boundary
 
-## Matching and orbit questions
+Every seven-set `X union {u}` already contains C379's six-point deletion conic.  Every eight-set
+through it inherits that subset, so no member is in degree-one del Pezzo general position.  This is
+conceptual and requires no search.
 
-The first predicted split is between the six edges of `M_X` and the other sixty pairs of conic
-points.  Do not assume that this is the complete classification.  Compute the stabilizer orbits and
-ask:
+For distinct planar blow-up points, the almost-general-position criterion is applied sequentially:
+a new point may not lie on an existing `(-2)`-curve.  In this domain no four points are collinear.
+An unmatched pair lies on no seven-point conic, so its blow-up is weak degree one; its effective
+roots are contracted by the anticanonical model.  A matched pair lies with five parent points on
+one conic.  That conic's strict transform has class
 
-1. Does a matched pair, whose two points lie with five parent points on one conic, create a
-   different effective-root type from an unmatched pair?
-2. Do the two eleven-matching one-factorization sheets select different marked root systems, or are
-   they exchanged without changing the unmarked type?
-3. Is the root subsystem recoverable from `(Q,M_X,{p,q})` without the original six columns?
-4. Does `J` exchange two root markings by the same quotient character as the cubic, code, scheme,
-   and factorization sheets?
-5. Is there a canonical root, root orbit, parabolic subsystem, or lattice flag that survives the
-   relevant equivalence quotient?
+```text
+2H - E_i1 - ... - E_i7,
+```
 
-Counts, equal Dynkin types, or the mere presence of 240 abstract roots do not answer these
-questions.
+self-intersection `-3`, and anticanonical intersection `-1`.  Hence the blow-up is not weak.  Its
+root classes remain meaningful in the abstract Picard `E8`, but its `D8` closure is not advertised
+as the Dynkin type of a weak anticanonical contraction.
 
-## Promotion gates
+### The 240-root boundary
 
-### Green — unlock C382
+In the basis `H,E_1,...,E_8`, the checker constructs exactly
 
-All of the following are required:
+```text
+E_i-E_j                                                56
++/-(H-E_i-E_j-E_k)                                   112
++/-(2H-E_i1-E_i2-E_i3-E_i4-E_i5-E_i6)                56
++/-(3H-2E_i-sum_(j != i) E_j)                         16
+                                                       ---
+                                                       240.
+```
 
-1. a complete exact orbit/root classification with a conceptual proof;
-2. a presentation-independent construction from C379's matching-decorated child;
-3. a nontrivial marked `E8` invariant—root subsystem, orbit, flag, or embedding class—transported
-   by the golden outer passage;
-4. a consequence not implied solely by the standard blow-up/Picard dictionary; and
-5. source closure showing exactly which compatibility, rather than which ingredients, remains.
+Distinct points rule out effective `E_i-E_j`.  Determinant, conic interpolation, and ten-coefficient
+cubic interpolation with the three derivative equations test the remaining positive classes.
+Euler's relation makes the derivative system projectively consistent.  Every resulting class has
+square `-2` and canonical intersection zero.
 
-### Yellow — close C381; keep C382 gated
+For a matched pair, one plane conic contains seven blown-up points.  Omitting each of those points
+gives seven effective conic-root classes.  Adding the line from each conic point to the remaining
+parent point gives the seven reducible singular cubics, hence seven cubic-root classes.  Additive
+root closure gives `112` roots of rank eight, the `D8` subsystem.  This also explains why the
+inherited `A2` is only the first visible part of the degeneration.
 
-The smooth obstruction and weak-surface/root census are exact and useful, but the matching sheets
-select no canonical marked `E8` datum.  Retain the result as a sharp endpoint of the extension
-ladder and do not invoke icosians.
+For an unmatched pair the two inherited conic roots are orthogonal.  There is exactly one further
+conic root, orthogonal to both, giving `3A1`.  Exactly half of the unmatched pairs have their child
+secant through one parent point; its line root is orthogonal to the three conic roots and gives
+`4A1`.  The other half are eight-arcs and remain `3A1`.  The fixed parent stabilizer has pair
+orbits `6+30+30`; conjugating through the 22 parents proves the three full-group orbit sizes.
 
-### Red — close C381; keep C382 gated
+### Presentation independence and the green gate
 
-No eight-arcs exist in the frozen domain, the configurations fall outside the weak-del-Pezzo
-criterion without a clean classification, or every apparent `E8` connection is only the universal
-Picard lattice of eight blow-ups.
+C379 already proves that the matching-decorated child recovers `X` uniquely on the frozen locus,
+and, more strongly, that the matching itself is the `-1` root-intersection graph.  Thus the marked
+subsystem above is constructed without a chosen six-column presentation.  The acting groups are
+`A5 < PSL_2(11) < PGL_2(11)`; `PSL_2(11)` preserves the unordered pair of eleven-parent sheets and
+`J` transports the marked subsystem between them.  The equivalence category for C382 is therefore
+canonical-class-preserving integral Picard isometry, retaining `R(S)` and the unordered inherited
+root pair, modulo its centralizer in `W(E8)`.
 
-## Evidence bundle
+This clears C381's green gate.  The non-dictionary consequence is exact recovery of the obstruction
+matching and the arc/MDS decision from marked root data.  C382 may compare this precise marked
+embedding—not the universal Picard `E8`, a root count, or an arbitrary lattice isometry—with the
+icosian model.
 
-If computation is used, commit atomically under the C381 stem:
+## Exact evidence and independent replay
 
-- this report with the final theorem or bounded negative;
-- a deterministic primary generator/checker;
-- a compact canonical JSON containing orbit representatives, incidence tests, code parameters,
-  effective roots, Dynkin types, and stabilizers;
-- an independent replay that reconstructs the parents and roots without importing the primary;
-  and
-- a checksum manifest with byte counts and exact commands.
+Run from `/home/tavis/src/othello`:
 
-The primary may consume C379 only through its pinned public certificate/checker boundary.  The
-replay should reconstruct the finite geometry from formulas.  Canonically sort parent, pair, root,
-and orbit labels; regeneration must be byte-identical.
+```bash
+python3 notes/2026-07-19-c381-clebsch-e8-extension-obstruction.py --check
+python3 notes/2026-07-19-c381-clebsch-e8-extension-obstruction-replay.py
+sha256sum -c notes/2026-07-19-c381-clebsch-e8-extension-obstruction.sha256
+```
 
-## Literature gate
+Intentional regeneration is:
 
-Before novelty language, follow the repository audit protocol for:
+```bash
+python3 notes/2026-07-19-c381-clebsch-e8-extension-obstruction.py --write
+```
 
-- eight-point general position and weak degree-one del Pezzo classifications;
-- effective `E8` root subsystems and singular anticanonical models;
-- finite-field eight-arcs and `[8,3,6]` MDS extensions over `F_11`;
-- `A5` actions on degree-one del Pezzo surfaces and `E8`; and
-- constructions relating matchings, one-factorizations, or biplanes to marked `E8` root systems.
+The primary pins C379's primary checker by SHA-256, reconstructs all 22 parents, all 66 pairs per
+parent, all `240` abstract roots, every line/conic/singular-cubic incidence, the weak criterion,
+the `A5`, `PSL_2(11)`, and `PGL_2(11)` orbits, and each integral root closure.  It canonicalizes the
+complete orbit and classification certificate.
 
-C373's Baez and Manivel entries were read only at abstract/metadata depth.  They cannot support a
-classification, novelty verdict, or icosian comparison.
+The replay imports neither the C381 primary nor C341.  It pins C379's independently written formula
+replay, reconstructs the field geometry and all parents, checks the full 1452-member incidence
+spectrum, and obtains root subsystems by additive root closure rather than the primary's reflection
+closure.  It compares only the final canonical JSON.  Both calculations distinguish integral root
+closure from rational span; in the matched case the latter is all of `E8` and would give the wrong
+answer.
 
-## Hard exclusions
+The trusted boundary is Python 3 exact arithmetic over `F_11`, exact rational rank for the abstract
+lattice checks, the pinned C379 finite API, and the standard blow-up/Picard and arc--MDS
+dictionaries.  The certificate proves only the frozen q=11 22-parent domain.  It does not classify
+arbitrary q=11 six-arcs or produce an all-field family.
 
-- No search for smooth degree-one examples after the inherited six-conic obstruction is proved.
-- No all-prime or arbitrary-arc census.
-- No claim that `[8,3,6]` alone supplies a canonical eight-party quantum extension.
-- No 600-cell, icosian, Kleinian, Mathieu, or Witt escalation inside C381.
-- No C382 hand-back without the exact green invariant and named comparison category.
+## Source and claim boundary
+
+Two C381-specific sources were read at `full text`; the C379 companion separately records one
+full-text, two partial, and one abstract/metadata-only source for the classical one-factorization,
+biplane, and 22-coset core.
+
+- **U. Derenthal, M. Joyce, and Z. Teitler, “The nef cone volume of generalized del Pezzo
+  surfaces.”** Read depth: `full text`, arXiv version, especially the introduction and Section 3.
+  Shared-cache key `arXiv:math/0703202`, SHA-256
+  `06da38d565efc7e57d38321e5e12e1de2db0ae04a17e5227491b72e9a1c675b3`.  It supplies the
+  big-and-nef definition, the sequential almost-general-position criterion, and the role of
+  effective `(-2)` classes.
+- **U. Derenthal, “Cox rings of generalized del Pezzo surfaces.”** Read depth: `full text`, arXiv
+  version, especially Section 2.1 and the degree-one classification tables.  Shared-cache key
+  `arXiv:math/0604194`, SHA-256
+  `3afa85f837868aecfe5a5084fa9d4652c4ea5baef5c0388226fc2201112a5276`.  It fixes the blow-up
+  basis, intersection convention, `K`-orthogonal root-system dictionary, and the distinction
+  between abstractly isomorphic root systems and their embeddings in the ambient system.
+- **C379 focused audit.** Read depth: the complete local report
+  `notes/2026-07-19-c379-one-factorization-biplane-companion.md`.  Its primary-source ledger and
+  citation screens pre-empt the abstract one-factorization/biplane/coset core and retain the
+  Clebsch root-resolution only as an exact compatibility corollary without novelty or priority
+  wording.
+
+The `E8` list used here is also verified internally from `D^2=-2` and `D.K=0`: the displayed four
+families are disjoint, have total size 240, and are closed under negation and root reflections.
+The finite-field incidence and code conclusions are direct exact linear algebra, not an absence
+claim.  This report makes no novelty or priority claim.  MathSciNet and Google Scholar remain
+uncovered as recorded by C379, so no manuscript-bound “to our knowledge” language is authorized.
+
+## Hand-back
+
+C381 closes with a green result.  The smooth route is universally obstructed; matched pairs are
+worse than weak with marked `(D8,A2)`, while unmatched pairs are weak and split into marked
+`(3A1,2A1)` eight-arcs and `(4A1,2A1)` non-arcs.  The root invariant recovers the C379 matching,
+the MDS decision, and the three group orbits, and is transported by the golden outer passage.
+C382 is ready only for the named `W(E8)` marked-embedding/centralizer comparison above.

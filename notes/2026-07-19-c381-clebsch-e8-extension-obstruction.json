@@ -1,0 +1,668 @@
+{
+  "abstract_e8_root_count": 240,
+  "classification_spectrum": [
+    {
+      "count": 132,
+      "properties": {
+        "direct_effective_root_count": 14,
+        "direct_effective_root_counts": {
+          "conic": 7,
+          "line": 0,
+          "singular_cubic": 7
+        },
+        "eight_arc": true,
+        "generated_root_count": 112,
+        "generated_root_type": "D8",
+        "geometry": "worse_than_weak_degree_one_blowup",
+        "has_four_collinear": false,
+        "inherited_root_intersection": -1,
+        "inherited_root_type": "A2",
+        "matched_pair": true,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 1,
+        "weak_del_pezzo": false
+      }
+    },
+    {
+      "count": 660,
+      "properties": {
+        "direct_effective_root_count": 3,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 0,
+          "singular_cubic": 0
+        },
+        "eight_arc": true,
+        "generated_root_count": 6,
+        "generated_root_type": "A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      }
+    },
+    {
+      "count": 660,
+      "properties": {
+        "direct_effective_root_count": 4,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 1,
+          "singular_cubic": 0
+        },
+        "eight_arc": false,
+        "generated_root_count": 8,
+        "generated_root_type": "A1+A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": null,
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      }
+    }
+  ],
+  "domain": {
+    "marked_configuration_count": 1452,
+    "pairs_per_parent": 66,
+    "parent_count": 22
+  },
+  "field": 11,
+  "fixed_parent_a5_pair_orbits": [
+    {
+      "classification": {
+        "direct_effective_root_count": 14,
+        "direct_effective_root_counts": {
+          "conic": 7,
+          "line": 0,
+          "singular_cubic": 7
+        },
+        "eight_arc": true,
+        "generated_root_count": 112,
+        "generated_root_type": "D8",
+        "geometry": "worse_than_weak_degree_one_blowup",
+        "has_four_collinear": false,
+        "inherited_root_intersection": -1,
+        "inherited_root_type": "A2",
+        "matched_pair": true,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 1,
+        "weak_del_pezzo": false
+      },
+      "representative_pair": [
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          10,
+          8
+        ]
+      ],
+      "size": 6,
+      "stabilizer_order": 10
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 3,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 0,
+          "singular_cubic": 0
+        },
+        "eight_arc": true,
+        "generated_root_count": 6,
+        "generated_root_type": "A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "representative_pair": [
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          1,
+          8
+        ]
+      ],
+      "size": 30,
+      "stabilizer_order": 2
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 4,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 1,
+          "singular_cubic": 0
+        },
+        "eight_arc": false,
+        "generated_root_count": 8,
+        "generated_root_type": "A1+A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": null,
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "representative_pair": [
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          3,
+          1
+        ]
+      ],
+      "size": 30,
+      "stabilizer_order": 2
+    }
+  ],
+  "full_group_orbit_count": 3,
+  "full_group_orbits": [
+    {
+      "classification": {
+        "direct_effective_root_count": 14,
+        "direct_effective_root_counts": {
+          "conic": 7,
+          "line": 0,
+          "singular_cubic": 7
+        },
+        "eight_arc": true,
+        "generated_root_count": 112,
+        "generated_root_type": "D8",
+        "geometry": "worse_than_weak_degree_one_blowup",
+        "has_four_collinear": false,
+        "inherited_root_intersection": -1,
+        "inherited_root_type": "A2",
+        "matched_pair": true,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 1,
+        "weak_del_pezzo": false
+      },
+      "orbit": 0,
+      "representative_pair": [
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          10,
+          8
+        ]
+      ],
+      "representative_parent": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          7
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          4,
+          9
+        ],
+        [
+          1,
+          7,
+          2
+        ],
+        [
+          1,
+          10,
+          9
+        ]
+      ],
+      "size": 132,
+      "stabilizer_order": 10
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 4,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 1,
+          "singular_cubic": 0
+        },
+        "eight_arc": false,
+        "generated_root_count": 8,
+        "generated_root_type": "A1+A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": null,
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "orbit": 1,
+      "representative_pair": [
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          1,
+          8
+        ]
+      ],
+      "representative_parent": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          7
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          4,
+          9
+        ],
+        [
+          1,
+          7,
+          2
+        ],
+        [
+          1,
+          10,
+          9
+        ]
+      ],
+      "size": 660,
+      "stabilizer_order": 2
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 3,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 0,
+          "singular_cubic": 0
+        },
+        "eight_arc": true,
+        "generated_root_count": 6,
+        "generated_root_type": "A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "orbit": 2,
+      "representative_pair": [
+        [
+          1,
+          1,
+          3
+        ],
+        [
+          1,
+          3,
+          1
+        ]
+      ],
+      "representative_parent": [
+        [
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          7
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          4,
+          9
+        ],
+        [
+          1,
+          7,
+          2
+        ],
+        [
+          1,
+          10,
+          9
+        ]
+      ],
+      "size": 660,
+      "stabilizer_order": 2
+    }
+  ],
+  "information_lattice": {
+    "golden_J_exchanges_psl_sheets": true,
+    "groups": [
+      "A5 parent stabilizer",
+      "PSL2(11)",
+      "PGL2(11)"
+    ],
+    "parent_levels": [
+      22,
+      2,
+      1
+    ],
+    "root_classification_is_sheet_independent": true
+  },
+  "matching_recovery": {
+    "criterion": "the two inherited conic-root classes have intersection -1",
+    "matched_configuration_count": 132,
+    "matched_inherited_type": "A2",
+    "unmatched_configuration_count": 1320,
+    "unmatched_inherited_type": "A1+A1",
+    "uses_original_matching_input": false
+  },
+  "psl_marked_orbits": [
+    {
+      "classification": {
+        "direct_effective_root_count": 14,
+        "direct_effective_root_counts": {
+          "conic": 7,
+          "line": 0,
+          "singular_cubic": 7
+        },
+        "eight_arc": true,
+        "generated_root_count": 112,
+        "generated_root_type": "D8",
+        "geometry": "worse_than_weak_degree_one_blowup",
+        "has_four_collinear": false,
+        "inherited_root_intersection": -1,
+        "inherited_root_type": "A2",
+        "matched_pair": true,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 1,
+        "weak_del_pezzo": false
+      },
+      "size": 66,
+      "stabilizer_order": 10
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 14,
+        "direct_effective_root_counts": {
+          "conic": 7,
+          "line": 0,
+          "singular_cubic": 7
+        },
+        "eight_arc": true,
+        "generated_root_count": 112,
+        "generated_root_type": "D8",
+        "geometry": "worse_than_weak_degree_one_blowup",
+        "has_four_collinear": false,
+        "inherited_root_intersection": -1,
+        "inherited_root_type": "A2",
+        "matched_pair": true,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 1,
+        "weak_del_pezzo": false
+      },
+      "size": 66,
+      "stabilizer_order": 10
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 3,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 0,
+          "singular_cubic": 0
+        },
+        "eight_arc": true,
+        "generated_root_count": 6,
+        "generated_root_type": "A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "size": 330,
+      "stabilizer_order": 2
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 3,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 0,
+          "singular_cubic": 0
+        },
+        "eight_arc": true,
+        "generated_root_count": 6,
+        "generated_root_type": "A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": [
+          [
+            8,
+            5,
+            4
+          ],
+          [
+            8,
+            3,
+            6
+          ]
+        ],
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "size": 330,
+      "stabilizer_order": 2
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 4,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 1,
+          "singular_cubic": 0
+        },
+        "eight_arc": false,
+        "generated_root_count": 8,
+        "generated_root_type": "A1+A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": null,
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "size": 330,
+      "stabilizer_order": 2
+    },
+    {
+      "classification": {
+        "direct_effective_root_count": 4,
+        "direct_effective_root_counts": {
+          "conic": 3,
+          "line": 1,
+          "singular_cubic": 0
+        },
+        "eight_arc": false,
+        "generated_root_count": 8,
+        "generated_root_type": "A1+A1+A1+A1",
+        "geometry": "weak_degree_one",
+        "has_four_collinear": false,
+        "inherited_root_intersection": 0,
+        "inherited_root_type": "A1+A1",
+        "matched_pair": false,
+        "mds_parameters": null,
+        "seven_point_conic_count": 0,
+        "weak_del_pezzo": true
+      },
+      "size": 330,
+      "stabilizer_order": 2
+    }
+  ],
+  "schema": "c381-clebsch-e8-extension-obstruction-v1",
+  "trusted_input": {
+    "c379_primary_sha256": "ca8024023173aaa09e0252780b8297ebac06bcc920115e3b9b808059d4b0d587",
+    "c379_schema": "othello.c379.clebsch_deep_hole_extension.v2"
+  }
+}
