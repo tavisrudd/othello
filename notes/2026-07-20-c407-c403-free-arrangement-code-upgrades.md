@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** `ACTIVE; UPGRADES 1--4 PROVED`
+**Status:** `THEOREM PACKAGE PROVED; VALIDATION PENDING`
 
 **Parent:** `notes/2026-07-20-c403-arrangement-complement-distance.md`
 
@@ -270,6 +270,123 @@ rank-three projective systems.
 This is the Tutte polynomial of the complement columns, not of the original
 arrangement.  No analogous recovery claim is made for arbitrary rank or nonprojective
 codes.
+
+## 5. Covering radius, quasi-perfect duals, and coset leaders
+
+Assume first that `PG(2,q)\B` is nonempty and `n>q+1`.  Fix an excluded point `P`.
+The `q+1` projective lines through `P` partition the `n` points of `B`: every point of
+`B` lies on exactly one such line.  By the pigeonhole principle one of those lines
+contains at least two complement points.  Thus every excluded point lies on a secant
+of `B`.
+
+Regard the columns of `D` as a parity-check matrix for `D^perp`.  A nonzero syndrome
+whose projective direction belongs to `B` has a weight-one leader.  A direction
+outside `B` has no weight-one representative, but the secant property expresses it as
+a linear combination of two distinct complement columns, with both coefficients
+nonzero, and hence gives a weight-two leader.  Since an excluded direction exists,
+
+```text
+rho(D^perp)=2.
+```
+
+The boundary `n=q+1` for a nonsingular conic over odd `q` requires a separate
+argument.  Through a point `P` outside the conic, let `a` and `b` be the numbers of
+secants and tangents.  Counting incidences of the `q+1` conic points with the pencil
+through `P` gives
+
+```text
+2a+b=q+1.
+```
+
+The tangent contact points whose tangents contain `P` lie on the polar line of `P`;
+that line meets a nonsingular conic in at most two points, so `b<=2`.  Since odd
+`q>=3` gives `q+1>=4`, it follows that `a>=1`.  Every point off the conic therefore
+lies on a secant, and the same syndrome argument proves radius two at the conic phase.
+
+In either case the exact coset-leader enumerator is
+
+```text
+1+(q-1)n z+(q-1)(q^2+q+1-n)z^2.
+```
+
+There is one zero syndrome.  Each of the `n` complement directions has `q-1`
+nonzero scalar representatives and leader weight one; each of the remaining
+`q^2+q+1-n` directions has `q-1` representatives and leader weight two.  As a check,
+the sum of the coefficients is
+
+```text
+1+(q-1)(q^2+q+1)=q^3,
+```
+
+the number of syndromes.
+
+The projective parity-check columns imply `d(D^perp)>=3`, while any four columns are
+dependent in rank three, so (in these nontrivial cases) `d(D^perp)` is three or four.
+At the nonsingular-conic boundary no three columns are collinear, so it is four.  In
+either case the packing radius is one and the covering radius is two: these dual codes
+are quasi-perfect.
+
+For the C399 formulas, the large-complement inequality reduces to
+
+```text
+A3: (q-2)(q-3)>q+1  iff q>5,
+B3: (q-3)(q-5)>q+1  iff q>7,
+H3: (q-5)(q-9)>q+1  iff q>11
+```
+
+in the relevant positive ranges.  Thus every stable field above the respective conic
+phase satisfies the criterion, and arrangement-mirror points provide excluded
+directions.  The conic phases themselves use the separate polarity argument.  The
+inequality is only sufficient: no classification of smaller saturating sets is
+claimed, and the result supplies a two-column syndrome-search interface rather than a
+new decoder.
+
+## 6. Exact minimal primal codewords
+
+Let `c_L` be a nonzero projective codeword whose kernel is the projective line `L`.
+Then
+
+```text
+c_L is minimal if and only if s_L>=2.
+```
+
+Indeed,
+
+```text
+supp(c_M) properly contained in supp(c_L)
+```
+
+holds exactly when
+
+```text
+B cap M properly contains B cap L.
+```
+
+If `s_L>=2`, two points of `B cap L` determine `L`, so no distinct projective line
+can contain that zero set and enlarge it.  Hence `c_L` is minimal.  If `s_L=1`, let
+`P` be the unique zero column.  Since `B` spans, choose `Q in B` off `L`; the line
+`PQ` strictly enlarges the zero set.  If `s_L=0`, any line through two complement
+points (indeed, any line meeting `B`) has a nonempty zero set and again gives strict
+support containment.  These cases prove the equivalence.
+
+Each projective kernel line represents `q-1` nonzero scalar codewords.  Therefore
+
+```text
+# minimal nonzero codewords=(q-1)sum_(s>=2) f_s.
+```
+
+At a nonsingular-conic phase, the lines with at least two conic points are exactly the
+secants.  Each pair determines one and no three conic points are collinear, so the
+number of minimal nonzero primal words is
+
+```text
+(q-1)binom(q+1,2).
+```
+
+More generally, if every nonmirror has section size at least two, precisely the
+nonmirror-kernel words are minimal and the mirror-kernel full-weight words are not.
+This is only the standard minimal-codeword interface to secret sharing; no minimal
+access structure is asserted without a distinguished coordinate and normalization.
 
 ## Attribution and claim boundary
 
