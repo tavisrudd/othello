@@ -49,6 +49,22 @@ of sizes `5,14,22`.  Thus the matching orbit by itself is exactly the already-cl
 marker space `G/H` with its points renamed.  The child conic alone does not select a matching; the
 unique matching appears only after the parent subgroup has been supplied.
 
+There is, however, a stronger exact design consequence.  Restriction from `PGL_2(q)` to its
+canonical index-two subgroup `PSL_2(q)` resolves the target matching orbit as follows:
+
+| type | target orbit | `PSL_2(q)` sheets | edge law |
+|:---|---:|:---|:---|
+| `A3` | 5 | one orbit of 5 | one one-factorization of `K_6` |
+| `B3` | 14 | two orbits of 7 | two one-factorizations of `K_8` |
+| `H3` | 22 | two orbits of 11 | two one-factorizations of `K_12` |
+
+Thus every child edge occurs once in the A3 orbit and twice in the full B3/H3 orbit; in the latter
+two types each `PSL_2` sheet contains it exactly once, and the outer determinant coset exchanges the
+sheets.  The H3 statement recovers C379's frozen pair of one-factorizations, while B3 supplies a
+previously unrecorded connection inside this project: the same determinant-sheet resolution already
+occurs for the octahedral conic phase.  No literature novelty is claimed for this formulation before
+a factorization-design source check.
+
 This nevertheless passes Gate 1's uniform-interface requirement: all three parent actions select
 their matching by the same intrinsic fixed-block predicate, and the H3 member agrees with the frozen
 C379 construction.  The orbit calculation does **not** decide the stronger C403 question.  The
@@ -108,6 +124,7 @@ python3 notes/2026-07-20-c406-matching-orbit-scout.py --write
 
 The primary checker imports the pinned C399 coordinate/group implementation and C379 H3 fixture,
 then constructs every matching, every full `PGL_2(q)` orbit, exact stabilizers and normalizers,
+the determinant-square `PSL_2(q)` sheets and their exact one-factorization edge multiplicities,
 the parent-subgroup/matching bijection, the frozen H3 comparison, and all canonical restricted
 products.  The replay imports neither the primary checker nor those source implementations.  It
 rebuilds the three Mobius permutation groups directly, re-enumerates the complete orbit

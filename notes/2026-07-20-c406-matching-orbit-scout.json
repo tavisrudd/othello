@@ -127,6 +127,7 @@
       "full_pgl_order": 120,
       "matches_frozen_c379_obstruction_matching": null,
       "matching_stabilizer_equals_parent_subgroup": true,
+      "outer_coset_exchanges_sheets": false,
       "p1_endpoints": [
         [
           1,
@@ -155,6 +156,12 @@
       ],
       "parent_subgroup_to_matching_is_bijective": true,
       "perfect_matching_count": 15,
+      "psl_orbits_are_one_factorizations": true,
+      "psl_order": 60,
+      "psl_target_orbit_sizes": [
+        5
+      ],
+      "target_orbit_edge_multiplicity": 1,
       "target_orbit_size": 5,
       "type": "A3"
     },
@@ -330,6 +337,7 @@
       "full_pgl_order": 336,
       "matches_frozen_c379_obstruction_matching": null,
       "matching_stabilizer_equals_parent_subgroup": true,
+      "outer_coset_exchanges_sheets": true,
       "p1_endpoints": [
         [
           1,
@@ -366,6 +374,13 @@
       ],
       "parent_subgroup_to_matching_is_bijective": true,
       "perfect_matching_count": 105,
+      "psl_orbits_are_one_factorizations": true,
+      "psl_order": 168,
+      "psl_target_orbit_sizes": [
+        7,
+        7
+      ],
+      "target_orbit_edge_multiplicity": 2,
       "target_orbit_size": 14,
       "type": "B3"
     },
@@ -1415,6 +1430,7 @@
       "full_pgl_order": 1320,
       "matches_frozen_c379_obstruction_matching": true,
       "matching_stabilizer_equals_parent_subgroup": true,
+      "outer_coset_exchanges_sheets": true,
       "p1_endpoints": [
         [
           1,
@@ -1467,6 +1483,13 @@
       ],
       "parent_subgroup_to_matching_is_bijective": true,
       "perfect_matching_count": 10395,
+      "psl_orbits_are_one_factorizations": true,
+      "psl_order": 660,
+      "psl_target_orbit_sizes": [
+        11,
+        11
+      ],
+      "target_orbit_edge_multiplicity": 2,
       "target_orbit_size": 22,
       "type": "H3"
     }

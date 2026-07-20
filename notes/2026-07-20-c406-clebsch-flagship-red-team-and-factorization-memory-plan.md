@@ -9,7 +9,10 @@
 **Gate 1 outcome:** exact enumeration finds unique `5/14/22` perfect-matching orbits with
 stabilizers `S4/S4/A5`; in every type the parent has a unique invariant matching, and the H3 member
 is C379's frozen obstruction matching.  The orbit alone is the classical parent-marker homogeneous
-space, but the uniform fixed-matching interface authorizes Gate 2's semisimple restricted
+space, but the target orbit has an exact factorization-design refinement: A3 is one
+one-factorization of `K_6`, while B3 and H3 split under `PSL_2(q)` into two one-factorizations of
+`K_8` and `K_12` exchanged by the outer coset.  This uniform fixed-matching interface authorizes
+Gate 2's semisimple restricted
 augmentation-module test.  Per user scope, Gate 2 was not started.  See
 `notes/2026-07-20-c406-matching-orbit-scout.md` and its certificate bundle.
 

@@ -29,15 +29,19 @@ def mobius_group(q):
         pivot = next(value for value in entries if value)
         scale = pow(pivot, -1, q)
         matrices.add(tuple(value * scale % q for value in entries))
-    group = {
+    actions = {
         tuple(
             point_index[normalize_pair((a * x + b * y, c * x + d * y), q)]
             for x, y in points
-        )
+        ): (a * d - b * c) % q
         for a, b, c, d in matrices
     }
+    group = set(actions)
+    squares = {value * value % q for value in range(1, q)}
+    psl = {permutation for permutation, determinant in actions.items() if determinant in squares}
     assert len(group) == q * (q * q - 1)
-    return points, group
+    assert len(psl) * 2 == len(group)
+    return points, group, psl
 
 
 def matchings(indices):
@@ -116,7 +120,7 @@ def main():
     for record in certificate["types"]:
         name = record["type"]
         q = record["field_order"]
-        points, full_group = mobius_group(q)
+        points, full_group, psl_group = mobius_group(q)
         all_matchings = tuple(matchings(tuple(range(q + 1))))
         unseen = set(all_matchings)
         distribution = Counter()
@@ -146,6 +150,19 @@ def main():
         ]
         assert fixed == [base_matching]
         assert {act(element, base_matching) for element in full_group} == target
+
+        unseen_target = set(target)
+        sheet_sizes = []
+        all_edges = set(itertools.combinations(range(q + 1), 2))
+        while unseen_target:
+            representative = min(unseen_target)
+            sheet = {act(element, representative) for element in psl_group}
+            unseen_target -= sheet
+            edge_counts = Counter(edge for matching in sheet for edge in matching)
+            assert set(edge_counts) == all_edges and set(edge_counts.values()) == {1}
+            sheet_sizes.append(len(sheet))
+        assert sorted(sheet_sizes) == record["psl_target_orbit_sizes"]
+        assert record["psl_orbits_are_one_factorizations"] is True
 
         common = endpoint_product(points, q)
         expected = [0] * (q + 2)

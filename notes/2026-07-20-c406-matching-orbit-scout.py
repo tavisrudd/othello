@@ -71,17 +71,21 @@ def full_pgl(prime, parameters):
         pivot = next(value for value in entries if value)
         scale = pow(pivot, -1, prime)
         normalized.add(tuple(value * scale % prime for value in entries))
-    group = {
+    actions = {
         tuple(
             parameter_index[
                 C399.normalize_pair((a * left + b * right, c * left + d * right), prime)
             ]
             for left, right in parameters
-        )
+        ): (a * d - b * c) % prime
         for a, b, c, d in normalized
     }
+    group = set(actions)
+    squares = {value * value % prime for value in range(1, prime)}
+    psl = {permutation for permutation, determinant in actions.items() if determinant in squares}
     assert len(group) == prime * (prime * prime - 1)
-    return group
+    assert len(psl) * 2 == len(group)
+    return group, psl
 
 
 def coxeter_group(name, prime, conic):
@@ -137,7 +141,7 @@ def type_certificate(name, prime, expected_orbit):
     conic, parameters = C399.conic_parameterization(prime)
     endpoints = tuple([(1, value) for value in range(prime)] + [(0, 1)])
     assert tuple(parameters) == endpoints
-    full_group = full_pgl(prime, parameters)
+    full_group, psl_group = full_pgl(prime, parameters)
     parent_group = coxeter_group(name, prime, conic)
     expected_parent_order = 60 if name == "H3" else 24
     assert len(parent_group) == expected_parent_order and parent_group <= full_group
@@ -181,6 +185,23 @@ def type_certificate(name, prime, expected_orbit):
     assert stabilizer == parent_group == normalizer
     assert {matching_image(element, parent_matching) for element in full_group} == target_orbit
 
+    unseen_target = set(target_orbit)
+    psl_sheets = []
+    all_edges = {tuple(pair) for pair in itertools.combinations(range(prime + 1), 2)}
+    while unseen_target:
+        representative = min(unseen_target)
+        sheet = {matching_image(element, representative) for element in psl_group}
+        unseen_target -= sheet
+        edge_counts = Counter(edge for matching in sheet for edge in matching)
+        assert set(edge_counts) == all_edges and set(edge_counts.values()) == {1}
+        psl_sheets.append(sheet)
+    expected_sheet_count = 1 if name == "A3" else 2
+    assert len(psl_sheets) == expected_sheet_count
+    assert sorted(map(len, psl_sheets)) == [prime] * expected_sheet_count
+    full_edge_counts = Counter(edge for matching in target_orbit for edge in matching)
+    assert set(full_edge_counts) == all_edges
+    assert set(full_edge_counts.values()) == {expected_sheet_count}
+
     subgroup_to_matching = {}
     for element in full_group:
         child_group = conjugate(element, parent_group)
@@ -223,6 +244,11 @@ def type_certificate(name, prime, expected_orbit):
         "coxeter_invariant_matching_count": len(fixed),
         "coxeter_invariant_matching": encode_matching(parent_matching),
         "target_orbit_size": len(target_orbit),
+        "psl_order": len(psl_group),
+        "psl_target_orbit_sizes": sorted(map(len, psl_sheets)),
+        "psl_orbits_are_one_factorizations": True,
+        "target_orbit_edge_multiplicity": expected_sheet_count,
+        "outer_coset_exchanges_sheets": expected_sheet_count == 2,
         "conjugate_parent_subgroup_count": len(subgroup_to_matching),
         "parent_subgroup_to_matching_is_bijective": True,
         "matching_stabilizer_equals_parent_subgroup": True,
