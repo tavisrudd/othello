@@ -62,8 +62,17 @@
       "last": 370,
       "purpose": "Queue five low-cost cross-finding publication upgrades from the crowns synthesis",
       "sequence": 7
+    },
+    {
+      "count": 1,
+      "first": 371,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 371,
+      "purpose": "Bounded Clebsch cross-field novelty audit for quantum, modular, scheme, holographic, and matroid connections",
+      "sequence": 8
     }
   ],
-  "next_id": 371,
+  "next_id": 372,
   "schema": "codex-task-id-allocations-v1"
 }
