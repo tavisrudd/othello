@@ -2,11 +2,16 @@ import RelativeConicArcs.ClebschGateway
 import RelativeConicArcs.Q11Coding
 
 /-!
-# C380 q=11 leaf: deep directions are one-column MDS extensions
+# Deep directions of a six-column system over `F_11`
 
-This leaf reuses the certified six-column witness and twelve-point conic.  Its only new finite
-check is distinctness of the six raw projective columns; all geometry and syndrome classification
-come from the existing q=11 semantic terminal.
+The six displayed projective columns are those in `RelativeConicArcs.Examples.q11Witness`.  The
+kernel-checked relative-completeness certificate and singleton extension checks prove that their
+projective distance-three locus is the twelve-point standard conic.  This module checks that the
+six columns are projectively distinct and transports the arc theorem to a transparent
+seven-column parity-check system for each conic point.
+
+The conclusions concern this displayed coordinate system.  No theorem in this module identifies it
+with an independently defined group orbit or classifies all six-arcs over `F_11`.
 -/
 
 namespace RelativeConicArcs
@@ -32,6 +37,7 @@ theorem parent_rays_distinct :
       rayEq (q11Witness.get i).1 (q11Witness.get j).1 = false := by
   decide
 
+/-- The six displayed projective columns are pairwise distinct. -/
 theorem parentPoint_injective : Function.Injective parentPoint := by
   intro i j hij
   by_contra hne
@@ -42,6 +48,8 @@ theorem parentPoint_injective : Function.Injective parentPoint := by
   rw [parent_rays_distinct i j hne] at htrue
   contradiction
 
+/-- The image of the indexed projective columns is the projectivization of the displayed raw
+witness list. -/
 theorem parentPoint_image :
     Finset.univ.image parentPoint = pointSet q11Witness := by
   classical
@@ -58,6 +66,7 @@ theorem parentPoint_image :
       exact congrArg toPoint hi
     exact Finset.mem_image.mpr ⟨i, Finset.mem_univ _, hpoint⟩
 
+/-- The six displayed projective columns form an arc. -/
 theorem parent_arc :
     Arc (L := Conic.Point (ZMod 11)) (Finset.univ.image parentPoint) := by
   rw [parentPoint_image]

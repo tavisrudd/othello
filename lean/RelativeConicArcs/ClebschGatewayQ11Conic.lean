@@ -2,11 +2,12 @@ import RelativeConicArcs.ClebschGateway
 import RelativeConicArcs.Q11Residual
 
 /-!
-# C380 q=11 leaf: the full-conic second transform is empty
+# The standard conic over `F_11` has empty second deep transform
 
-The checker ranges only over the twelve displayed conic representatives and the 133 canonical
-projective representatives.  Its semantic conclusion uses `rawArc_complete_empty` from the frozen
-C380 foundation.
+Kernel reduction checks that the twelve displayed conic representatives form an arc and that every
+one of the 133 normalized projective representatives is either on the conic or on a secant of it.
+The soundness theorem `ClebschGateway.rawArc_complete_empty` turns those finite predicates into
+ordinary projective completeness, from which the empty second transform follows.
 -/
 
 namespace RelativeConicArcs
@@ -23,7 +24,8 @@ private instance : Fact (Nat.Prime 11) := ⟨by decide⟩
 noncomputable local instance : Fintype (Conic.Point (ZMod 11)) := Fintype.ofFinite _
 noncomputable local instance : DecidableEq (Conic.Point (ZMod 11)) := Classical.decEq _
 
-/-- The twelve conic representatives in the existing q=11 parameter order. -/
+/-- The twelve standard-conic representatives, ordered by the eleven affine parameters and then
+the point at infinity. -/
 def conicRawList : List (RawPoint (ZMod 11)) :=
   List.ofFn conicRaw
 
@@ -36,6 +38,7 @@ projective representative. -/
 theorem conicRawList_ordinaryCoverage : RawOrdinaryCoverage conicRawList := by
   decide
 
+/-- Projectivizing the displayed raw representatives gives exactly the standard conic. -/
 theorem pointSet_conicRawList :
     pointSet conicRawList = standardConic (K := ZMod 11) := by
   ext x

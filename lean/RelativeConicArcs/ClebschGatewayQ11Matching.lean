@@ -1,11 +1,16 @@
 import RelativeConicArcs.ClebschGateway
 
 /-!
-# C380 q=11 leaf: matching-decorated parent recovery and the 11+11 sheets
+# A displayed pair of one-factorizations of `K_12`
 
-The table is the compact finite interface frozen by C379.  Rows are the 22 parent matchings and
-columns are the twelve child-conic points in C379's canonical order.  This leaf proves only the
-bounded matching facts needed by C380; it deliberately develops no general biplane foundation.
+The input is a literal table of 22 fixed-point-free mate maps on twelve labels.  Kernel reduction
+checks that the rows are distinct perfect matchings and that the two consecutive blocks of eleven
+rows are one-factorizations of the complete graph on those labels.
+
+`Parent` below means a row index.  This module does not define projective six-arcs, derive the table
+from conic geometry, prove that the index partition is a group-orbit partition, or establish
+equivariance.  Consequently its decorated-recovery theorem recovers a table row, not a geometric
+parent.  Any geometric identification of these rows is a separate verification obligation.
 -/
 
 namespace RelativeConicArcs
@@ -14,12 +19,18 @@ namespace Q11Matching
 
 open Finset
 
+/-- An index for one of the 22 displayed matching rows. -/
 abbrev Parent := Fin 22
+
+/-- A vertex label for the displayed complete graph on twelve vertices. -/
 abbrev ChildPoint := Fin 12
+
+/-- A mate map on the twelve displayed vertex labels. -/
 abbrev Matching := ChildPoint → ChildPoint
 
-/-- The 22 obstruction matchings as fixed-point-free mate maps.  Rows `0..10` and `11..21` are
-the two orientation sheets from C379. -/
+/-- The 22 displayed mate maps.  Their fixed-point-free and involutive properties are proved below.
+Rows `0..10` and `11..21` form the two blocks used by `sheet`; no geometric or group-theoretic
+meaning for that partition is asserted in this module. -/
 def matchingMate : Parent → Matching := ![
   ![1, 0, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2],
   ![2, 6, 0, 5, 8, 3, 1, 11, 4, 10, 9, 7],
@@ -60,30 +71,32 @@ theorem matchingMate_involutive :
 theorem matchingMate_injective : Function.Injective matchingMate := by
   decide
 
-/-- The binary orientation sheet.  A sheet is a system of eleven parent matchings, not a parent. -/
+/-- The chosen partition of the 22 row indices into two consecutive blocks of eleven. -/
 def sheet (p : Parent) : Fin 2 :=
   if p.1 < 11 then 0 else 1
 
+/-- The row indices in one block of the chosen binary partition. -/
 def sheetParents (s : Fin 2) : Finset Parent :=
   Finset.univ.filter fun p => sheet p = s
 
-/-- Each orientation sheet contains exactly eleven decorated parents. -/
+/-- Each block of the chosen row partition has eleven elements. -/
 theorem sheetParents_card : ∀ s : Fin 2, (sheetParents s).card = 11 := by
   decide
 
-/-- The binary sheet alone cannot recover an individual parent. -/
+/-- The binary block label does not determine a matching-row index. -/
 theorem sheet_not_injective : ¬Function.Injective sheet := by
   decide
 
-/-- Each sheet is a one-factorization: every edge of `K_12` occurs in exactly one of its eleven
-perfect matchings. -/
+/-- Each displayed block is a one-factorization: every ordered pair of distinct vertex labels has
+the prescribed mate relation in exactly one of its eleven rows. -/
 theorem sheet_edge_unique :
     ∀ s : Fin 2, ∀ x y : ChildPoint, x ≠ y →
       (Finset.univ.filter fun p : Parent =>
         sheet p = s ∧ matchingMate p x = y).card = 1 := by
   decide
 
-/-- The common child plus the obstruction matching is a faithful decorated transform. -/
+/-- Regard a matching row as a decoration of a constant child.  Faithfulness is precisely the
+proved injectivity of the displayed mate table. -/
 def decoratedTransform : DecoratedTransform Parent PUnit Matching where
   child := fun _ => PUnit.unit
   decoration := matchingMate
@@ -91,7 +104,8 @@ def decoratedTransform : DecoratedTransform Parent PUnit Matching where
     intro p q h
     exact matchingMate_injective (congrArg Prod.snd h)
 
-/-- Equality of matching-decorated children is exactly equality of parents. -/
+/-- Equality of the displayed matching decorations is equivalent to equality of their row
+indices.  This statement contains no geometric parent object. -/
 theorem decorated_child_recovers_parent {p q : Parent} :
     (decoratedTransform.child p, decoratedTransform.decoration p) =
       (decoratedTransform.child q, decoratedTransform.decoration q) ↔ p = q :=

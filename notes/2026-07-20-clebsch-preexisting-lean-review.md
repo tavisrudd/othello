@@ -334,3 +334,117 @@ parent-recovery and scheme-semantic claims from receiving a full-trust Lean labe
 4. **No unsafe API rename was attempted during initial review.**  A live downstream Fourier module
    already consumes `certifiedPhaseProfile`; changing it would overlap an excluded active task.
 
+## Repair pass after the frozen initial review
+
+The user subsequently authorized repairs within the reviewed pre-existing Lean modules and gates.
+The repair pass did not edit any new campaign module, Q25 path, active C222 path, generator,
+certificate, task queue, handoff, or earlier report.
+
+### Repairs made
+
+1. **Removed every reverse workflow reference in the reviewed Lean surface.**  The twelve touched
+   modules/gates no longer mention internal task identifiers, lanes, reports, agents, sessions, or
+   workflow chronology.  Module headers now describe mathematical objects, finite domains, checking
+   methods, and limitations directly.
+2. **Made the mixed trust boundary explicit at the point of use.**  The matching module now says
+   that `Parent` is a row index and that the concrete decorated theorem recovers only that index.
+   The fusion module now says that its permutation, valencies, and matrix are literal data whose
+   scheme semantics are not established there.  All four gate headers distinguish elaboration and
+   literal-data arithmetic from semantic certification.
+3. **Removed unsupported classification language where no live consumer prevented it.**
+   `ClebschGatewayConicDeepHole` now uses `RecordedProfile`, `recordedProfiles`, and
+   `recordedFullConicField`.  `ClebschGatewayCoxeterPhase` now uses `RecordedPhaseProfile`,
+   `recordedPhaseProfile`, `RankFourCardinalityProfile`, and
+   `recordedRankFourProfiles_fail_cardinality_test`.  Their docstrings state that Lean has no
+   geometric witness or coverage theorem for the supplied rows.
+4. **Qualified all strength-bearing prose.**  Claims previously described as a complete rank-four
+   gate, exhaustive fusion census, geometric orientation sheet, exact orbit fusion, or concrete
+   parent recovery now describe the literal proposition in the theorem type.
+5. **Added missing public API explanations in touched modules.**  Non-obvious row labels, maps,
+   appended columns, fibre calculations, recorded formulas, and conditional constructors now state
+   their quantifier domain and trust role in ordinary mathematical language.
+
+The active Fourier consumer prevented renaming
+`ClebschGateway.A5FourierPhase.certifiedPhaseProfile`.  Its source header and declaration docstrings
+now state the exact limitation, but the unsupported strength-bearing public name remains finding F1
+until the consumer and provider can be migrated together.
+
+### Validation performed
+
+All twelve touched Lean modules/gates passed guarded single-file elaboration under the repository's
+default `single` controls:
+
+- `RelativeConicArcs.ClebschGateway`;
+- `RelativeConicArcs.ClebschGatewayQ11Extension`;
+- `RelativeConicArcs.ClebschGatewayQ11Conic`;
+- `RelativeConicArcs.ClebschGatewayQ11Matching`;
+- `RelativeConicArcs.ClebschGatewayQ11Fusion`;
+- `RelativeConicArcs.ClebschGatewayConicDeepHole`;
+- `RelativeConicArcs.ClebschGatewayCoxeterPhase`;
+- `RelativeConicArcs.ClebschGatewayA5FourierPhase`;
+- the four corresponding `RelativeConicArcs.Gates.ClebschGateway*` modules.
+
+The in-source `#print axioms` output contained only the permitted standard axioms (`propext`,
+`Classical.choice`, and `Quot.sound`, with some arithmetic/table theorems using fewer or none).
+No `sorryAx`, `native_decide`, or project-local axiom appeared.  This was single-file elaboration,
+not an exact-target Lake build or a replay of the external certificates.
+
+Post-repair source identities are:
+
+| file | SHA-256 |
+|:---|:---|
+| `ClebschGateway.lean` | `24e786a37ad2dab7d91651e51d5dbb5427fc26bd9e22c6a54fddda97abc66fd8` |
+| `ClebschGatewayQ11Extension.lean` | `501c1a378d0f1596d4830504c4cb1b6bd7c584791ee695d68647c8818c067890` |
+| `ClebschGatewayQ11Conic.lean` | `1c0ec7d04457717e1447b395c7cd9cfbdce7739c8fea877348ecf6cded8bc5ee` |
+| `ClebschGatewayQ11Matching.lean` | `010c59e1310cb13df0594ffc3db5a346c048a1c66c2b91d6f6d2639a0ea19ec7` |
+| `ClebschGatewayQ11Fusion.lean` | `b27929ee0834d64ccaaaba13114fbee0f14949eaeded8fbdac1fb9f511c45c3e` |
+| `ClebschGatewayConicDeepHole.lean` | `da3053afd394e2e5f30274c97c896c41f626a7f8d64c483fa1e56953b8d97898` |
+| `ClebschGatewayCoxeterPhase.lean` | `8c3b5bc56e3db03024a09e714bc777e15e491155edd6c228697f4f559545d140` |
+| `ClebschGatewayA5FourierPhase.lean` | `c95b3cd0c46b20f85004e104ea9b0eddf7e06621bad9ad2e6ad13a690d2e0064` |
+| `Gates/ClebschGateway.lean` | `8f2d07c6c91e1b1b0f1eb133d2bbc7f4b8702dd3edb23d8c4342b16e10ea2478` |
+| `Gates/ClebschGatewayConicDeepHole.lean` | `db9e27061b9c82ae2701332f2ba72d549f8c0b9315ae7b3e143b9f54f14b7e46` |
+| `Gates/ClebschGatewayCoxeterPhase.lean` | `e9adb3cee2d7a3d5c103b7160c95894a1728e9f4e2b83656af9735801e66a689` |
+| `Gates/ClebschGatewayA5FourierPhase.lean` | `1e4cef0d215124bc9461c398b9d05dd58871626034f9991ea1d84ca5fa71cc60` |
+
+The older internal checksum manifests for the gateway and conic-profile work include pre-repair
+Lean hashes and are consequently stale.  They were not edited because checksum manifests and
+external evidence were outside the authorized repair surface.  They must not be represented as a
+green replay of the repaired source until their owners reconcile them in an authorized evidence
+update.  The Coxeter and scalar-`A5` checksum files hash only their script/JSON pair, so their
+external data identities are unchanged; that fact still does not supply the missing Lean semantic
+bridge.
+
+### Remaining blockers after repair
+
+| finding | post-repair status | required next action |
+|:---|:---|:---|
+| F1, scalar-`A5` `certified*` API | **open/blocking** | coordinate migration with the active Fourier consumer, or add a sound semantic checker and completeness theorem |
+| F1, deep-hole/Coxeter naming and prose | **source fixed; semantics remain external** | ledger must retain exact replay/certificate tier unless checker architecture is added |
+| F2, geometric parent recovery | **open/blocking** | define/check semantic parents, obstruction map, injectivity, completeness, and required equivariance |
+| F3, scheme fusion/Fourier identification | **open/blocking** | derive the data from defined relations/character sums or retain a decomposed external-identification trust row |
+| F4, reverse references | **fixed in reviewed Lean surface** | post-fix reviewer should repeat the closure search |
+| F5, displayed witness versus intrinsic Clebsch object | **open/claim-dependent** | exact coordinate correspondence in Lean or a separately declared conceptual/certificate route |
+| F6, gate overstatement | **fixed in reviewed gate prose** | final trust comes from the claim ledger, never the import gate alone |
+| F7, unsupported strength prose | **fixed except blocked scalar-`A5` public names** | migrate the remaining names with their live consumer |
+| stale pre-repair source hashes in older internal manifests | **open/evidence hygiene** | owner-authorized manifest/checker reconciliation without regenerating mathematical data unless required |
+
+### Post-repair checklist
+
+- [x] Preserved the initial findings in a standalone pre-fix commit.
+- [x] Touched only the reviewed pre-existing Lean modules/gates and this report.
+- [x] Did not edit Q25, active C222, `ReflectionArrangementDecoding.lean`, new campaign modules,
+  certificates, generators, queues, handoffs, or other reports.
+- [x] Re-read the complete touched modules and checked their comments/names against the
+  referee-facing standard.
+- [x] Removed internal task/lane/report/agent/session references from the touched Lean surface.
+- [x] Rechecked that comments do not promote literal data into geometric certification.
+- [x] Ran guarded elaboration on every touched module and gate.
+- [x] Recorded the actual axiom output boundary and current source hashes.
+- [x] Recorded rather than concealed the evidence manifests made stale by source edits.
+- [x] Kept architectural/certificate gaps as blockers rather than inventing new proof scope.
+- [x] Did not issue a post-fix `GO`; the repair implementer cannot review its own changes.
+
+**Status: READY FOR USER-LAUNCHED POST-FIX REVIEW.**  The post-fix reviewer should determine whether
+the prose/API repairs are adequate, confirm the remaining blocker classification, and specifically
+audit the live Fourier consumer's use of `certifiedPhaseProfile` before any full-trust label or task
+archival is permitted.

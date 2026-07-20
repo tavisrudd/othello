@@ -1,8 +1,9 @@
 import RelativeConicArcs.ClebschGatewayA5FourierPhase
 
 /-!
-# Import-only validation gate for C400
+# Import-only gate for scalar-`A5` profile arithmetic
 
-This gate exposes the kernel-checked Burnside, transitive-conic, deep-hole-count, orthogonal-fusion,
-and bounded small-field fusion interfaces for the scalar-`A5` arithmetic phase theorem.
+This gate exposes a symbolic valency identity and kernel-checked arithmetic about literal profile
+and fusion-rank tables.  It does not construct the scalar-`A5` actions, check eigenmatrices, or prove
+orbit, deep-hole, orthogonal-fusion, or exhaustive-fusion semantics.
 -/

@@ -1,11 +1,14 @@
 import Mathlib.Tactic
 
 /-!
-# C400: arithmetic phases of the scalar-A5 Fourier schemes
+# Recorded arithmetic profiles for scalar-`A5` actions
 
-The uniform orbit and Burnside arguments are mathematical proofs in the adjacent C400 report.  The
-external certificate independently constructs the six finite-field controls, their eigenmatrices,
-and the orthogonal fusions.  This module freezes the compact paper-facing arithmetic interface.
+The six profile rows and the three lists of fusion ranks are literal external inputs.  Kernel
+reduction checks arithmetic identities about those values, and `orthogonalFusionValencyIdentity`
+is a symbolic polynomial identity.  This module does not construct the scalar-`A5` actions, define
+their orbit relations or eigenmatrices, run a Bannai--Muzychuk checker, or prove that the displayed
+phase and fusion lists are exhaustive.  Thus the declarations retaining the legacy `certified*`
+names certify only arithmetic about the displayed definitions, not their geometric semantics.
 -/
 
 namespace RelativeConicArcs
@@ -24,8 +27,10 @@ inductive TransitiveConicPhase
 
 open TransitiveConicPhase
 
+/-- The six phase labels represented by the external profile table. -/
 def allPhases : List TransitiveConicPhase := [.q5, .q9, .q11, .q19, .q29, .q59]
 
+/-- Descriptive labels attached to the six externally supplied profile rows. -/
 inductive ConicRelationRole
   | sourceD5
   | tripleS3
@@ -35,6 +40,8 @@ inductive ConicRelationRole
   | deepFree
   deriving DecidableEq, Repr
 
+/-- Numeric fields retained from an external scalar-`A5` calculation.  This structure carries no
+orbit witnesses or checker proof. -/
 structure CertifiedPhaseProfile where
   fieldOrder : ℕ
   schemeRank : ℕ
@@ -44,7 +51,8 @@ structure CertifiedPhaseProfile where
   deepProjectiveCount : ℕ
   deriving DecidableEq, Repr
 
-/-- Compact output of the exact scalar-`A5` orbit/eigenmatrix certificate. -/
+/-- The six externally supplied arithmetic profile rows.  The legacy name does not make their
+geometric interpretation a Lean theorem. -/
 def certifiedPhaseProfile : TransitiveConicPhase → CertifiedPhaseProfile
   | .q5 => ⟨5, 4, 6, 10, .sourceD5, 0⟩
   | .q9 => ⟨9, 6, 10, 6, .tripleS3, 0⟩
@@ -53,46 +61,55 @@ def certifiedPhaseProfile : TransitiveConicPhase → CertifiedPhaseProfile
   | .q29 => ⟨29, 24, 30, 2, .mirrorC2, 480⟩
   | .q59 => ⟨59, 76, 60, 1, .deepFree, 2700⟩
 
+/-- The displayed correction indicator for elements of order three. -/
 def splitThree : TransitiveConicPhase → ℕ
   | .q19 => 1
   | _ => 0
 
+/-- The displayed correction indicator for elements of order five. -/
 def splitFive : TransitiveConicPhase → ℕ
   | .q11 => 1
   | _ => 0
 
-/-- Burnside numerator for the affine rank, including the zero relation. -/
+/-- The displayed polynomial numerator used in the recorded affine-rank identity, including its
+zero-relation term and the two correction indicators. -/
 def rankNumerator (T : TransitiveConicPhase) : ℕ :=
   let q := (certifiedPhaseProfile T).fieldOrder
   q ^ 2 + 16 * q + 135 + 40 * splitThree T + 48 * splitFive T
 
-/-- The certified ranks satisfy the uniform Burnside formula. -/
+/-- The recorded rank values satisfy the displayed Burnside-numerator arithmetic identity.  This
+does not formalize the orbit-counting argument. -/
 theorem certifiedRank_eq_burnside (T : TransitiveConicPhase) :
     60 * (certifiedPhaseProfile T).schemeRank = rankNumerator T := by
   cases T <;> decide
 
-/-- The conic is transitive precisely through the complete stabilizer ladder. -/
+/-- Each recorded orbit-size/stabilizer-order pair has product 60 and orbit size `q+1`.  No action
+or transitivity predicate occurs in the statement. -/
 theorem certifiedConicOrbitStabilizer (T : TransitiveConicPhase) :
     let profile := certifiedPhaseProfile T
     profile.conicOrbitSize = profile.fieldOrder + 1 ∧
       profile.conicOrbitSize * profile.conicPointStabilizerOrder = 60 := by
   cases T <;> decide
 
-/-- The projective deep-hole union always has the arrangement-complement count. -/
+/-- Each recorded projective-count value equals the displayed polynomial in its recorded field
+order.  No deep-hole locus is defined in the statement. -/
 theorem certifiedDeepProjectiveCount (T : TransitiveConicPhase) :
     let profile := certifiedPhaseProfile T
     profile.deepProjectiveCount =
       (profile.fieldOrder - 5) * (profile.fieldOrder - 9) := by
   cases T <;> decide
 
+/-- The recorded field-order values in phase-label order. -/
 theorem certifiedFieldOrders :
     allPhases.map (fun T => (certifiedPhaseProfile T).fieldOrder) = [5, 9, 11, 19, 29, 59] := by
   decide
 
+/-- The recorded scheme-rank values in phase-label order. -/
 theorem certifiedSchemeRanks :
     allPhases.map (fun T => (certifiedPhaseProfile T).schemeRank) = [4, 6, 8, 14, 24, 76] := by
   decide
 
+/-- The recorded point-stabilizer orders in phase-label order. -/
 theorem certifiedConicStabilizerOrders :
     allPhases.map (fun T => (certifiedPhaseProfile T).conicPointStabilizerOrder) =
       [10, 6, 5, 3, 2, 1] := by
@@ -108,18 +125,22 @@ theorem orthogonalFusionValencyIdentity (q delta : ℤ) :
       2 * (q ^ 3 - 1) := by
   ring
 
+/-- Labels for the three externally supplied small-field fusion-rank lists.  The type name records
+the intended provenance; exhaustiveness is not formalized in this module. -/
 inductive ExhaustiveFusionPilot
   | q5
   | q9
   | q11
   deriving DecidableEq, Repr
 
+/-- The externally supplied lists of fusion ranks for three small phase labels. -/
 def fusionRanks : ExhaustiveFusionPilot → List ℕ
   | .q5 => [2, 4]
   | .q9 => [2, 4, 6]
   | .q11 => [2, 4, 6, 8]
 
-/-- Exact Bannai--Muzychuk exhaustions in the three feasible small ranks. -/
+/-- The three recorded fusion-rank lists unfold to the displayed values.  This is not an exhaustive
+Bannai--Muzychuk theorem because no fusion predicate or partition domain occurs in the statement. -/
 theorem certifiedSmallFusionRanks :
     [fusionRanks .q5, fusionRanks .q9, fusionRanks .q11] =
       [[2, 4], [2, 4, 6], [2, 4, 6, 8]] := by

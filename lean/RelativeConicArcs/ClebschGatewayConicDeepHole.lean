@@ -1,13 +1,14 @@
 import Mathlib.Tactic
 
 /-!
-# C398: the universal field bound and checked finite-classification interface
+# A field-order bound and recorded finite-classification profiles
 
 The geometric input to the first theorem is the incidence inequality obtained by covering the
 `q^2` points off a nonsingular conic with the fifteen secants of a six-arc.  The exact finite-field
-geometry behind `certifiedProfiles` is checked by the adjacent external C398 certificate; this
-module deliberately records its small paper-facing interface rather than pretending that a JSON
-computation is a kernel proof.
+geometry represented by `recordedProfiles` is not checked in this module: the profiles are literal
+external-input records.  Lean proves arithmetic and Boolean statements about those records only.
+In particular, no theorem here connects them to semilinear equivalence classes or proves that they
+exhaust a geometric census.
 -/
 
 namespace RelativeConicArcs
@@ -22,17 +23,18 @@ theorem fieldOrder_le_fifteen (q : ℕ) (cover : q * q ≤ 15 * (q + 1)) : q ≤
   have growth : 16 * q ≤ q * q := Nat.mul_le_mul_right q h16
   omega
 
-/-- Compact output type for the exact semilinear certificate. -/
-structure CertifiedProfile where
+/-- The invariant fields retained from an external finite classification.  Values of this type do
+not by themselves carry a witness or a proof of their geometric meaning. -/
+structure RecordedProfile where
   locusSize : ℕ
   containingNonsingularConics : ℕ
   semilinearStabilizerOrder : ℕ
   fullConic : Bool
   deriving DecidableEq, Repr
 
-/-- The four surviving semilinear classes.  Polynomial-basis coordinates and representatives stay
-in the external certificate; only invariant profile data cross the paper-facing seam. -/
-def certifiedProfiles (q : ℕ) : List CertifiedProfile :=
+/-- The four externally supplied profile rows.  This definition records claimed output; it is not a
+checker for semilinear classes or completeness of the underlying search. -/
+def recordedProfiles (q : ℕ) : List RecordedProfile :=
   if q = 8 then
     [⟨4, 6, 12, false⟩]
   else if q = 9 then
@@ -42,32 +44,37 @@ def certifiedProfiles (q : ℕ) : List CertifiedProfile :=
   else
     []
 
-theorem certifiedProfiles_eq_nil_of_other
+/-- The recorded list is empty away from the three field orders represented in the definition. -/
+theorem recordedProfiles_eq_nil_of_other
     (q : ℕ) (h8 : q ≠ 8) (h9 : q ≠ 9) (h11 : q ≠ 11) :
-    certifiedProfiles q = [] := by
-  simp [certifiedProfiles, h8, h9, h11]
+    recordedProfiles q = [] := by
+  simp [recordedProfiles, h8, h9, h11]
 
-theorem certifiedProfiles_8 :
-    certifiedProfiles 8 = [⟨4, 6, 12, false⟩] := by
+/-- The recorded profile list at field-order label eight. -/
+theorem recordedProfiles_8 :
+    recordedProfiles 8 = [⟨4, 6, 12, false⟩] := by
   decide
 
-theorem certifiedProfiles_9 :
-    certifiedProfiles 9 = [⟨6, 1, 6, false⟩, ⟨7, 1, 6, false⟩] := by
+/-- The recorded profile list at field-order label nine. -/
+theorem recordedProfiles_9 :
+    recordedProfiles 9 = [⟨6, 1, 6, false⟩, ⟨7, 1, 6, false⟩] := by
   decide
 
-theorem certifiedProfiles_11 :
-    certifiedProfiles 11 = [⟨12, 1, 60, true⟩] := by
+/-- The recorded profile list at field-order label eleven. -/
+theorem recordedProfiles_11 :
+    recordedProfiles 11 = [⟨12, 1, 60, true⟩] := by
   decide
 
-/-- The external census has a full-conic row exactly at `q=11`. -/
-theorem certifiedFullConicField (q : ℕ) :
-    (certifiedProfiles q).any (fun profile => profile.fullConic) = true ↔ q = 11 := by
-  simp only [certifiedProfiles]
+/-- Among the recorded rows, the Boolean `fullConic` field occurs exactly at `q=11`.  This theorem
+does not establish that the rows form a complete geometric census. -/
+theorem recordedFullConicField (q : ℕ) :
+    (recordedProfiles q).any (fun profile => profile.fullConic) = true ↔ q = 11 := by
+  simp only [recordedProfiles]
   split_ifs with h8 h9 h11 <;> simp_all
 
 #print axioms fieldOrder_le_fifteen
-#print axioms certifiedProfiles_eq_nil_of_other
-#print axioms certifiedFullConicField
+#print axioms recordedProfiles_eq_nil_of_other
+#print axioms recordedFullConicField
 
 end ConicDeepHole
 end ClebschGateway

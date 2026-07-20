@@ -5,7 +5,7 @@ import Mathlib.GroupTheory.Perm.Sign
 /-!
 # Stable foundations for the Clebsch gateway
 
-This module contains only the presentation-independent seams used by C380:
+This module contains presentation-independent interfaces for the following constructions:
 
 * projective distance-three directions are uncovered one-column arc extensions;
 * an indexed projective arc gives transparent codimension-three MDS columns;
@@ -13,8 +13,9 @@ This module contains only the presentation-independent seams used by C380:
 * two actions on two-element torsors with the same kernel have the same character; and
 * an exact orbit classifier can be transported across a certified fusion.
 
-The fixed `q = 11` computations live in bounded downstream leaves.  No cubic-surface, tensor,
-or binary deep-hole-fibre foundation is introduced here.
+The fixed `q = 11` computations live in separate bounded modules.  This module does not define a
+cubic-surface or tensor interpretation, nor does it assert that a concrete geometric transform has
+a two-element fibre.
 -/
 
 open scoped LinearAlgebra.Projectivization
@@ -63,6 +64,7 @@ def appendPoint (p : ι → PlanePoint K) (x : PlanePoint K) : Option ι → Pla
   | none => x
   | some i => p i
 
+/-- Appending a point outside the image of an injective indexed family preserves injectivity. -/
 theorem appendPoint_injective (p : ι → PlanePoint K) (x : PlanePoint K)
     (hp : Function.Injective p) (hx : x ∉ Finset.univ.image p) :
     Function.Injective (appendPoint p x) := by
@@ -82,6 +84,7 @@ theorem appendPoint_injective (p : ι → PlanePoint K) (x : PlanePoint K)
       | some j =>
           exact congrArg some (hp hij)
 
+/-- The image of an appended indexed family is the old image with the new point inserted. -/
 theorem image_appendPoint (p : ι → PlanePoint K) (x : PlanePoint K) :
     Finset.univ.image (appendPoint p x) = insert x (Finset.univ.image p) := by
   classical
@@ -239,8 +242,8 @@ private theorem gateway_normalized_rep (p : Conic.Point K) :
     funext i
     fin_cases i <;> simp [y, z, h0, div_eq_mul_inv] <;> ac_rfl
 
-/-- A raw determinant arc plus ordinary canonical coverage is an ordinary complete arc.  This is
-the off-conic-free soundness seam needed for the bounded full-conic termination leaf. -/
+/-- A raw determinant arc plus coverage of every normalized projective representative is an
+ordinary complete arc. -/
 theorem rawArc_complete_empty {xs : List (RawPoint K)} (hArc : RawArc xs)
     (hcoverage : RawOrdinaryCoverage xs) :
     CompleteOutside (L := Conic.Point K) (pointSet xs) ∅ := by
@@ -279,7 +282,9 @@ end RawCoverage
 
 section DecoratedTransform
 
-/-- A transform whose child together with its decoration faithfully remembers the parent. -/
+/-- A transform equipped with the hypothesis that its child and decoration jointly determine the
+parent.  The `faithful` field is an assumption about a concrete transform, not a consequence of
+bundling its three underlying maps. -/
 structure DecoratedTransform (Parent Child Decoration : Type*) where
   child : Parent → Child
   decoration : Parent → Decoration
@@ -317,6 +322,7 @@ theorem perm_fin_two_eq_one_or_swap (σ : Equiv.Perm (Fin 2)) :
   · exfalso
     exact (by decide : (0 : Fin 2) ≠ 1) (σ.injective (h0.trans h1.symm))
 
+/-- Any two nonidentity permutations of a two-element set are equal. -/
 theorem perm_fin_two_eq_of_ne_one {σ τ : Equiv.Perm (Fin 2)}
     (hσ : σ ≠ 1) (hτ : τ ≠ 1) : σ = τ := by
   rcases perm_fin_two_eq_one_or_swap σ with h | h
@@ -339,8 +345,9 @@ theorem twoSheetCharacter_eq_of_ker_eq {G : Type*} [Group G]
   · have h₂ : χ₂ g ≠ 1 := fun h => h₁ (hk.mpr h)
     exact perm_fin_two_eq_of_ne_one h₁ h₂
 
-/-- C376's `S5/A5` inference in a fixed group type: if both two-sheet actions are trivial exactly
-on the even permutations, then their exchange characters agree. -/
+/-- If two actions of `S5` on a two-element set are trivial exactly on the even permutations, then
+their permutation characters agree.  This theorem is conditional: it does not construct either
+action or prove the two kernel hypotheses for a geometric example. -/
 theorem s5_quotientCharacter_inference
     (blowdown codeChirality : Equiv.Perm (Fin 5) →* Equiv.Perm (Fin 2))
     (hblowdown : ∀ g, blowdown g = 1 ↔ Equiv.Perm.sign g = 1)
@@ -361,8 +368,9 @@ structure OrbitClassifier (G X Color : Type*) [Group G] [MulAction G X] where
   color : X → Color
   color_eq_iff_orbit : ∀ x y, color x = color y ↔ y ∈ MulAction.orbit G x
 
-/-- Once the orbit equivalence for a fused color is certified, the fused color is itself an exact
-orbit classifier.  This keeps group closure in bounded leaves and the mathematical API abstract. -/
+/-- If equality of fused colors is equivalent to membership in an `H`-orbit for every pair of
+points, then the fused color is an orbit classifier for the `H`-action.  The orbit equivalence is
+an explicit hypothesis; this constructor does not verify a concrete finite group closure. -/
 def OrbitClassifier.fuse {G H X Fine Coarse : Type*}
     [Group G] [Group H] [MulAction G X] [MulAction H X]
     (fine : OrbitClassifier G X Fine) (fusion : Fine → Coarse)
