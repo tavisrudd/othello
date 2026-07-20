@@ -206,8 +206,17 @@
       "last": 402,
       "purpose": "EV-ranked portable Clebsch theorem candidates",
       "sequence": 23
+    },
+    {
+      "count": 3,
+      "first": 403,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 405,
+      "purpose": "C399 arrangement-code parent-fibre and decorated-inversion successors",
+      "sequence": 24
     }
   ],
-  "next_id": 403,
+  "next_id": 406,
   "schema": "codex-task-id-allocations-v1"
 }
