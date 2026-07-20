@@ -398,6 +398,209 @@ the golden integral model might convert prime degeneration into a tropical marke
 combinatorial type predicts code degeneration.  This is a third-tier direction until the ordinary
 surface dictionary and Frobenius action are explicit.
 
+## Atlas of famous objects reachable from the hexagon
+
+This section asks for recognizable destinations, not merely neighboring theories.  The entries are
+ranked by how canonical the path from the present six-arc appears.  Prior art may establish every
+intermediate construction; the proposed contribution is the marked path, commuting diagram, or
+transported chirality invariant.
+
+### 1. The Clebsch graph and Schlaefli graph — direct
+
+The del Pezzo blow-up ladder immediately reaches two famous strongly regular graphs.
+
+- Blowing up five points gives a degree-four del Pezzo with 16 exceptional curves and root system
+  `D5`; their incidence/skewness graph gives the 16-vertex Clebsch-graph geometry.
+- Blowing up six points gives the cubic surface with 27 lines and root system `E6`; skewness of the
+  lines gives the 27-vertex Schlaefli graph.
+- Equivalently, fixing one line in the 27-line geometry leaves a 16-line residue whose appropriate
+  incidence complement is the Clebsch graph.
+
+Thus puncturing one coordinate of the `[6,3,4]` code should have a geometric shadow
+
+```text
+Schlaefli / E6  ->  Clebsch / D5.
+```
+
+The new theorem target is functoriality: code puncturing, surface blowdown, root-system deletion,
+and graph residue should form a commuting square, with the `A5` marking tracked throughout.
+
+### 2. The exceptional del Pezzo--Lie--Gosset ladder — direct infrastructure, new marked path
+
+Extending or deleting points in a planar arc matches the standard del Pezzo ladder:
+
+| arc size | code | blow-up surface | root system | famous configuration |
+|---:|---|---|---|---|
+| 5 | `[5,3,3]` | degree 4 | `D5` | 16 exceptional curves / Clebsch graph |
+| 6 | `[6,3,4]` | degree 3 | `E6` | 27 lines / Schlaefli graph / `2_21` Gosset polytope |
+| 7 | `[7,3,5]` | degree 2 | `E7` | 56 exceptional curves / 28 bitangents |
+| 8 | `[8,3,6]` | degree 1 | `E8` | 240 exceptional curves / `E8` roots |
+
+For a code theorist, adding a column is an MDS extension problem.  For an algebraic geometer it is
+another blow-up.  For Lie theory it advances from `D5` through `E6,E7,E8`.  The magic-hexagon
+question is whether the Clebsch arithmetic marking selects distinguished extensions and whether
+deep-hole directions are precisely the allowable or obstructed blow-up points.
+
+This could turn covering-radius data into a finite-field rule for navigating the exceptional
+Dynkin tower.  Conversely, exceptional-curve incidence might classify which code extensions
+preserve the chiral torsor.
+
+### 3. Gosset polytopes and minuscule representations — direct after the surface dictionary
+
+The 27 lines are the 27 vertices of the `2_21` Gosset/Schlaefli polytope and the weights of the
+minuscule 27-dimensional `E6` representation.  The 56 exceptional curves at degree two similarly
+belong to the minuscule `E7` geometry, while degree one reaches the 240 `E8` roots.
+
+An explicit map from code leader supports or syndrome relations to faces of these polytopes would
+convert Hamming geometry into exceptional weight geometry.  The gate is strict: counts and group
+names do not suffice; adjacency, intersection, and the outer involution must be preserved.
+
+### 4. The 600-cell, icosians, and `E8` — a potentially spectacular closed loop
+
+There are two independent routes from the magic hexagon toward `E8`.
+
+```text
+six-arc -> extend to eight points -> degree-one del Pezzo -> E8
+
+golden A5 -> binary icosahedral group -> 600-cell / icosians -> E8 lattice.
+```
+
+The second is classical: the icosian ring over the golden field constructs the `E8` lattice and
+links the icosahedron, quaternions, `H4`, and the 600-cell.  The first is the del Pezzo/MDS extension
+ladder.  Determine whether a canonical pair of extensions of the Clebsch six-arc makes the two
+routes land on the same `A5`-marked `E8` lattice or root subsystem.
+
+If yes, this would be a true path-independence theorem connecting finite-field MDS extension,
+birational geometry, noncrystallographic Coxeter symmetry, quaternions, and the exceptional
+lattice.  If the q=11 arc has no suitable eight-point extension, the obstruction itself may have
+an `E8/H4` interpretation.
+
+### 5. Segre cubic, Igusa quartic, Kummer surfaces, and `M_0,6` — canonical six-label network
+
+Six labeled objects carry a famous `S6` moduli web:
+
+- six points on a projective line describe genus-two branch data and `M_0,6`;
+- the Segre cubic and its dual Igusa quartic encode closely related six-point quotients;
+- the Segre cubic has the characteristic `10`-node and `15`-plane combinatorics;
+- genus-two Jacobians lead to Kummer surfaces with 16 nodes/tropes; and
+- `S6 ~= Sp4(F2)` organizes the six odd and ten even theta characteristics.
+
+The Clebsch data already carries the same raw numbers—six labels, fifteen pairs, twenty oriented
+triples, ten complementary `3+3` partitions, and an intrinsic `10+10` cover.  The theorem target is
+to construct a canonical point or cycle in this moduli web from the six-arc or cubic-surface
+marking, then show that its theta orientation equals C373 chirality.
+
+This route is especially attractive because it can explain the outer `S6` combinatorics while the
+cubic-surface route explains the outer `S5` geometry.  A compatibility theorem between the two
+would connect two famously exceptional symmetric-group phenomena.
+
+### 6. Hilbert modular surfaces over `Q(sqrt(5))` — direct classical destination
+
+Hirzebruch classically related the Clebsch--Klein cubic to the Hilbert modular group of the golden
+field: blowing up the ten Eckardt points gives the relevant level-two Hilbert modular surface.
+This makes the golden arithmetic in C368 more than coefficient arithmetic.
+
+The new route to test is
+
+```text
+code chirality -> Eckardt/double-six orientation -> Hilbert modular involution
+              -> split/inert/ramified reduction of the syndrome scheme.
+```
+
+If the same involution acts on modular forms and on the code torsor, the finite-field phase theorem
+could become a reduction theorem for a Hilbert modular surface.  Point counts or Frobenius traces
+would then provide arithmetic invariants independent of the graph computation.
+
+### 7. Petersen graph and monodromy of 27 lines — direct literature, new code interpretation
+
+Recent work describes monodromy of the 27 lines on the Clebsch surface using the Petersen graph.
+Once the six-arc-to-surface dictionary is explicit, pull that Petersen structure back to code
+supports or syndrome orbits.  The useful outcome would be a ten-object code configuration whose
+monodromy generates or detects the C373 outer torsor.
+
+This is another possible explanation for the repeated ten-element sets, but it must be matched by
+an exact incidence map; the shared number ten is not evidence by itself.
+
+### 8. Type `D4` cluster algebras and tropical Grassmannians — direct from the parity-check matrix
+
+A full-rank `3 x 6` parity-check matrix is a point of `Gr(3,6)`, with its `3 x 3` minors as Pluecker
+coordinates; the MDS condition says those coordinates do not vanish.  The positive tropical
+Grassmannian `Gr(3,6)` is governed by cluster combinatorics of type `D4`.
+
+This supplies a new coordinate language for the Clebsch point.  Compute its cluster variables and
+ask whether
+
+- golden conjugation is a cluster automorphism;
+- the two chiral sheets are chambers or seeds exchanged by that automorphism;
+- the deep-hole transform is a mutation sequence; or
+- finite-field degeneration is tropical wall crossing.
+
+A single explicit mutation identity linking chirality or the GRS child would be a meaningful new
+edge between coding and cluster geometry.  Merely locating the matrix in `Gr(3,6)` is prior
+infrastructure.
+
+### 9. Exceptional Jordan algebra and the cubic norm — conditional
+
+The 27-line configuration realizes the 27-dimensional minuscule `E6` geometry, while the
+exceptional Jordan algebra also carries a 27-dimensional representation with an invariant cubic
+norm.  The Clebsch surface is itself cubic.  After the 27-line dictionary, test whether the
+weight-three leader incidence or anticanonical cubic embeds naturally into this cubic norm
+structure.
+
+This could connect the code to octonionic/projective-plane geometry, but it is a second-stage door:
+without an explicit cubic-form or incidence-preserving map it is only an `E6` association.
+
+### 10. The Witt design, `M12`, and the ternary Golay corridor — speculative but sharply gated
+
+The deep-hole conic has `q+1=12` rational points and is canonically a projective line over `F11`.
+The same 12-point set is a classical model for the Witt design `S(5,6,12)`, with `PSL2(11)` inside
+the Mathieu group `M12`; the ternary Golay code is another famous 12-point realization.
+
+The corridor becomes real only if the Clebsch construction canonically selects Witt hexads or the
+Witt incidence relation on its 12 conic points.  Concrete gates are:
+
+1. transport the original six-arc/deep-hole incidence to six-subsets of the conic;
+2. test the Steiner `5-(12,6,1)` property;
+3. compare the induced automorphism group with `PSL2(11)` and `M12`; and
+4. determine whether chirality becomes a choice of complementary hexad.
+
+Failure of the Steiner property closes the door.  No Golay or Mathieu claim follows merely from
+the numbers 11 and 12.
+
+### 11. Automorphic forms and Galois representations — conditional on the Hilbert route
+
+The cubic-surface literature already connects Frobenius on 27 lines, `W(E6)`-valued Galois
+representations, and automorphic forms in other settings.  The Clebsch gateway offers a concrete
+finite combinatorial observable—the syndrome scheme—on which to see the same Frobenius.
+
+The theorem target is equality of two characteristic polynomials or `L`-factors: one from the
+Picard/27-line representation, another from an explicitly defined code/scheme module.  This would
+connect a finite decoder geometry to arithmetic automorphic data.  It is high upside but should
+follow, not precede, the exact surface and Frobenius dictionaries.
+
+### Recommended famous-object sequence
+
+The shortest credible chain is
+
+```text
+Clebsch code
+  -> marked Clebsch cubic
+  -> 27 lines / Schlaefli graph / E6
+  -> puncture and extend through Clebsch graph, 28 bitangents, and E8
+  -> compare the E8 endpoint with the icosian / 600-cell endpoint.
+```
+
+In parallel, use the `20 -> 10` complementary-support quotient to enter
+
+```text
+genus-two theta characteristics -> Segre/Igusa/Kummer moduli
+                               -> Hilbert modular surface over Q(sqrt(5)).
+```
+
+Those two chains are largely classical internally but appear capable of carrying the *same exact
+chiral torsor* from coding theory into exceptional geometry and arithmetic.  That transported
+object—not the fame of the destinations—is the proposed novelty.
+
 ## Ranked execution plan
 
 | rank | project | cost of first gate | upside | stop condition |
@@ -459,7 +662,31 @@ External sources consulted for this companion note:
 - The genus-two fact that there are six odd and ten even theta characteristics, with the even ones
   indexed by `3+3` partitions of six Weierstrass points, was checked only through search-result
   snippets and secondary expository material.  It requires a primary-source audit before use.
+- Baez, [*From the Icosahedron to E8*](https://arxiv.org/abs/1712.06436), arXiv `1712.06436`:
+  **abstract/metadata only**.  Used for the classical icosian and Kleinian-singularity routes from
+  the icosahedron to the `E8` lattice.
+- Manivel, [*Configurations of lines and models of Lie algebras*](https://arxiv.org/abs/math/0507118),
+  arXiv `math/0507118`: **abstract/metadata only**.  Used for the established `E6`/27-lines and
+  `E7`/28-bitangents boundary and the exceptional-Lie interpretation of double-sixes and Steiner
+  sets.
+- Ren, Sam, and Sturmfels,
+  [*Tropicalization of classical moduli spaces*](https://arxiv.org/abs/1303.1132), arXiv
+  `1303.1132`: **abstract/metadata only**.  Used to establish that the Segre cubic, Igusa quartic,
+  genus-two moduli, and marked del Pezzo spaces already form a classical/tropical network.
+- Brodsky, Ceballos, and Labbe,
+  [*Cluster Algebras of Type D4, Tropical Planes, and the Positive Tropical Grassmannian*](https://arxiv.org/abs/1511.02699),
+  arXiv `1511.02699`: **abstract/metadata only**.  Used for the `Gr(3,6)`/type-`D4` cluster boundary.
+- Hirzebruch,
+  [*Hilbert's modular group of the field Q(sqrt(5)) and the cubic diagonal surface of Clebsch and Klein*](https://doi.org/10.1070/RM1976v031n05ABEH004190):
+  **metadata and repository summary only**; full text not read.  Used for the classical Hilbert
+  modular surface bridge.
+- Darwin, [*A quadratically enriched count of lines on a degree 4 del Pezzo surface*](https://arxiv.org/abs/2205.04456),
+  and Desjardins--Winter,
+  [*Torsion points and concurrent exceptional curves on del Pezzo surfaces of degree one*](https://arxiv.org/abs/2210.11659):
+  **abstract/metadata only**.  Used only to check the standard counts of 16 and 240 exceptional
+  curves.  The full del Pezzo/code ladder still needs a dedicated source audit.
 
 Not covered: MathSciNet, zbMATH, Google Scholar, forward citations, the full cubic-surface
 literature, the full genus-two/theta literature, or prior classifications of type-II matrices in
-rank-eight translation schemes.
+rank-eight translation schemes.  No primary source was located in this amendment for the proposed
+`P1(F11)`--Witt-design corridor, so it remains deliberately speculative.
