@@ -25,7 +25,7 @@ tasks answered or superseded most of its original gates under different task IDs
 C206--C208 and C212--C213 rows remain lane-owned until their task-lifecycle disposition is changed
 explicitly; do not start them merely because they still appear queued.  The `clebsch` paper owns
 manuscript synthesis and the current baseline-versus-C406+C411 decision.  See
-[`2026-07-20-clebsch-paper-planning-sweep.md`](../2026-07-20-clebsch-paper-planning-sweep.md).
+[`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md).
 
 ## Reconciled research frontiers
 

@@ -22,7 +22,7 @@ depth plane.  The user has selected the replacement spine for Lean formalization
 C420--C428, while manuscript integration remains a separate owner action before release**.
 
 The current decision and novelty map is
-[`2026-07-20-clebsch-paper-planning-sweep.md`](../2026-07-20-clebsch-paper-planning-sweep.md).
+[`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md).
 The red-team-approved formalization campaign is
 [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md).
 

@@ -36,7 +36,7 @@ remaining paper gate is the explicit architecture choice and honest priority qua
 factorization-memory, equivariant-repair, Fourier-sign, cubic, quantum, or higher-rank direction
 enters merely because it is attractive.  The replacement must make the manuscript shorter or
 stronger rather than larger.  The live paper decision is in
-`notes/2026-07-20-clebsch-paper-planning-sweep.md`.
+`notes/2026-07-20-clebsch-paper-planning.md`.
 
 ## Purpose of this report
 
@@ -694,7 +694,7 @@ forgetting factorization and marking.  Otherwise close that door without a censu
 A cold C406 session should read, in order:
 
 1. `notes/handoffs/2026-07-17-crowns.md`;
-2. `notes/2026-07-20-clebsch-paper-planning-sweep.md` for the current manuscript decision;
+2. `notes/2026-07-20-clebsch-paper-planning.md` for the current manuscript decision;
 3. this report;
 4. `notes/2026-07-20-c406-matching-orbit-scout.md` and the compact JSON schema it describes; treat
    its orbit, base-matching, `PSL_2` sheet, and input-hash data as frozen;

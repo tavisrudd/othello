@@ -718,7 +718,7 @@ C376--C381; C382 then closed the icosian route negatively.  The current sequence
 2. treat C399 as the protected portable paper theorem and C406+C411 as the recommended replacement
    spine; C411 has passed the conceptual double-coset/mixed-bi-Hecke gate and is the first
    source-surviving successor admitted under the promotion rule;
-3. make the exact manuscript choice in `notes/2026-07-20-clebsch-paper-planning-sweep.md` without
+3. make the exact manuscript choice in `notes/2026-07-20-clebsch-paper-planning.md` without
    waiting for C412--C417;
 4. allow C418/C419 to pursue the larger-trade and fixed-incidence-moduli pointed-memory attacks
    without making them Clebsch manuscript gates; and

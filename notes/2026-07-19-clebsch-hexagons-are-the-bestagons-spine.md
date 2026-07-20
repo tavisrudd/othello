@@ -39,7 +39,7 @@ sizes `1,4,6`, and identifies the depth plane as the modular quotient
 `P(1)^A4/soc(P(1))` for the `1|9|1` projective cover.  These strengthen the existing profile arrow;
 they do not create another side.  C407's conventional corollaries, C408's pointed-forgetting
 theorem, C409's classical/formal normalization, C410/C418/C419, and C413--C417 do not enlarge the
-main spine.  See `notes/2026-07-20-clebsch-paper-planning-sweep.md` for the live decision map.
+main spine.  See `notes/2026-07-20-clebsch-paper-planning.md` for the live decision map.
 
 C412 also constructs a canonical two-dimensional Tate quotient of the relative-cubic space in two
 independent ways, with intrinsic kernel `[1:3:9]`.  That plane is valuable verification and

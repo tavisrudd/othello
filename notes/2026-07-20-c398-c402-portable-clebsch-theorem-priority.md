@@ -30,7 +30,7 @@ external certificates retained for discovery and independent replay.
 
 The table is the historical EV ordering that opened the programme, not the live paper queue.  The
 current manuscript decision is recorded in
-`notes/2026-07-20-clebsch-paper-planning-sweep.md`: C399 protects the existing paper, while C406 may
+`notes/2026-07-20-clebsch-paper-planning.md`: C399 protects the existing paper, while C406 may
 replace weaker material only after an explicit owner decision.  C407--C410 and C401/C402 are not
 submission dependencies.
 

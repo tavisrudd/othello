@@ -106,7 +106,7 @@ and cubic-first pushforward.  C406+C411 is therefore the recommended replacement
 promotion still requires a shorter manuscript and an explicit owner decision.  C407 is
 conventional, C408 is a separate pointed-forgetting boundary, and C409 is a classical/formal
 normalization; none consumes a promotion slot.  See
-`notes/2026-07-20-clebsch-paper-planning-sweep.md` and
+`notes/2026-07-20-clebsch-paper-planning.md` and
 `notes/2026-07-20-c406-priority-audit.md`.
 
 ## Uniform promotion gate
@@ -463,7 +463,7 @@ a Lean expansion.
 4. Treat C406, its priority audit, and C411's conceptual theorem as complete.  C411 is the first
    source-surviving successor admitted under the promotion rule; C412--C417 remain companions.
 5. Make the explicit manuscript choice recorded in
-   `notes/2026-07-20-clebsch-paper-planning-sweep.md` now.  Freeze one theorem spine before Lean or
+   `notes/2026-07-20-clebsch-paper-planning.md` now.  Freeze one theorem spine before Lean or
    exposition work; do not merge the protected and replacement outlines.
 6. Keep Frobenius/moduli, higher-rank, quantum, repair, Bring/icosian, and other famous-object
    branches separate unless a newly allocated gate proves a consequence used by the chosen spine.
