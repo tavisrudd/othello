@@ -171,39 +171,72 @@ lean/scripts/lean-restart-guard.py verify /home/<checkpoint>
 
 ## Referee-facing prose and names
 
-Treat every tracked Lean source as part of the permanent scholarly record. A reader with the Lean
-tree and the cited public literature must be able to understand its mathematical intent without
-access to task queues, handoffs, agent sessions, chat transcripts, or private planning documents.
-This applies equally to module headers, docstrings, ordinary comments, declaration and namespace
-names, filenames, generated-source banners, and user-facing diagnostic text.
+The referee-facing Lean artifact comprises every tracked `.lean` file, whether human-written or
+generated, and every generator, schema, template, certificate, data file, banner, and diagnostic
+needed to understand, reproduce, or check those files. Treat it as part of the permanent scholarly
+record. A reader with that artifact and the cited public literature must be able to understand its
+mathematical intent and verification boundary without task queues, handoffs, agent sessions, chat
+transcripts, private planning documents, or machine-local state.
+
+Operational guides and orchestration state are not scholarly evidence and the artifact must never
+refer to them. If the distributed artifact is the entire `lean/` directory, either move such files
+outside the distribution or define a declared, reproducible packaging allowlist that excludes them.
+This standard applies to module headers, docstrings, ordinary comments, private and public names,
+filenames, generated-source banners, paths, and user-facing diagnostic text. It does not authorize
+cross-lane edits, certificate regeneration, or rebuilds outside the ownership rules above.
 
 ### Comments and docstrings
 
 - Explain mathematics and verification: state the objects and conventions in use, the role of a
   non-obvious definition or lemma, the reason a proof step is valid, and the exact proposition a
   finite certificate checks. Prefer a precise invariant or proof idea over a narration of tactics.
-- Give each paper-facing theorem and each non-obvious public definition a docstring that can stand
-  on its own. A module header should delimit the module's mathematical scope and, when relevant,
-  identify its public terminal results and trusted computational boundary.
-- Never mention internal `C<id>` task IDs, lane names, handoffs, agents or models, session state,
-  private reports, or the chronology of attempts. Replace such references with the mathematical
-  object, theorem, dependency, or limitation they were being used to denote. The reference
-  direction is strictly one way: task reports, handoffs, queues, and other internal notes may point
-  forward to exact Lean modules and declarations, but Lean source must never point back to those
-  records or require them for interpretation. A Lean comment may point to a tracked generator,
-  schema, or certificate that is part of the enduring verification apparatus, provided it says
-  what evidence the artifact supplies.
+- A declaration is scholarly-public when it is non-`private` and imported across a module boundary,
+  exported by a terminal or gate, cited by a paper, or intended for reuse in another proof. Give
+  every scholarly-public theorem and every non-obvious scholarly-public definition a self-contained
+  docstring. The workflow-reference, status-prose, naming, and filename bans apply to the entire
+  referee-facing artifact, including private helpers and generated leaves.
+- A self-contained module header or docstring identifies the mathematical objects, ambient
+  structures, quantifier domain, nonstandard notation, normalization and degeneracy conventions,
+  and the exact hypotheses and conclusion in ordinary mathematical language to the extent needed
+  to remove ambiguity. Do not rely on “as above,” “as in the paper,” a mutable section or equation
+  number, “the usual convention,” or a declaration name as the only explanation. A module header
+  must delimit its scope and, when relevant, identify its terminal results and trust boundary.
+- Reference direction is mandatory and one way. An internal queue, handoff, report, or note that
+  states or relies on a formal result must cite its exact Lean module and fully qualified
+  declaration. No Lean source or enduring verification artifact may mention, link to, derive
+  authority from, or require an internal record. This ban includes `C<id>` task IDs and spelling
+  variants, lane and work-item labels, agents or models, session identifiers, private URLs, issue or
+  review identifiers, commits, attempt chronology, and local filesystem paths. Trackedness does not
+  create an exception. Replace such references with the mathematical object, formal dependency, or
+  precise limitation they were being used to denote.
+- A repository-local artifact may be cited only when it is part of the enduring verification
+  apparatus: it has a stable repository-relative path outside internal-note and workflow
+  directories; contains no private workflow identifiers; states its mathematical semantics and
+  trust role independently; and is either consumed by the formal check or is the tracked
+  reproducibility source for data consumed by it. Name the exact artifact and explain what it
+  establishes and what remains trusted. A merely tracked report, log, transcript, or ad hoc output
+  never qualifies.
 - Do not leave status prose such as “remaining seam,” “current approach,” “prototype for the next
-  task,” or “will be proved later” in paper-facing modules. An honest, mathematically precise
-  limitation is acceptable when it describes the present statement or trust boundary rather than
-  project management. Put work history and plans in the owning handoff or report.
-- Generated sources must identify themselves as generated, name the semantic data they encode, and
-  point to a tracked generator or schema when useful. Generation metadata must not substitute for a
-  mathematical description and must not contain private workflow identifiers.
-- Cite external results with enough stable public bibliographic information to locate them and say
-  exactly what is imported from the source. Do not cite an internal task report as mathematical
-  authority. Keep long literature discussion in the paper, but make any load-bearing attribution in
-  Lean independently intelligible.
+  task,” “will be proved later,” `TODO`, `FIXME`, “future work,” “pending,” “next,” “temporary,”
+  “fallback,” “for now,” or “known issue” in the artifact. A limitation is admissible only when it
+  is a precise restriction on hypotheses, conclusion, coverage, or trusted base, with no plan or
+  forecast. Put work history and plans in the owning handoff or report.
+- Generated sources must identify themselves as generated and name the semantic data they encode.
+  Whenever generated content is load-bearing, name its tracked generator and schema. Generation
+  metadata must not substitute for a mathematical description or contain private workflow
+  identifiers. Never hand-edit generated output to repair its prose; fix the generator and
+  regenerate it only in the owning, validated build window.
+- For every computationally discharged claim, state whether checking occurs by kernel reduction, a
+  proved checker, native evaluation, an imported certificate, or an axiom; identify the finite
+  domain and the theorem connecting the computation to the mathematical statement; distinguish
+  exhaustive checking from sampled or search evidence; and state what remains trusted. Do not call
+  externally generated data “proved by Lean” unless Lean checks both its semantics and coverage.
+  Disclose any `sorry`, axiom, opaque oracle, or non-kernel execution in the dependency closure in
+  the module header and cover it in the axiom audit.
+- Cite an external result with its authors, title, year, stable identifier and version when
+  available, and a pinpoint theorem, lemma, or page; state exactly what is used. A bare bibliography
+  key, author-year, URL, or paper-section reference is insufficient. Do not cite an internal report
+  as mathematical authority or imply that uncited literature does not exist.
 - Comments must agree with the elaborated statement. Update or remove them in the same change when
   hypotheses, conventions, scope, or trust assumptions change. Do not use comments to imply a
   stronger theorem than Lean checks.
@@ -214,17 +247,27 @@ names, filenames, generated-source banners, and user-facing diagnostic text.
   hypotheses or construction, and conclusion when distinction is needed. Names should remain
   sensible after task completion and outside the paper's current section numbering.
 - Never encode a task ID, lane, agent, date, attempt number, or planning status in a module,
-  namespace, declaration, or paper-facing filename. Avoid workflow labels such as `Prototype`,
-  `Draft`, `Temporary`, `Final`, or `MainTheorem`; say what the object is. Legacy names that violate
-  this rule should not be copied into new APIs and should be replaced through an explicit,
-  compatibility-aware cleanup rather than casually proliferated.
-- Do not build an unproved mathematical or historical claim into a name. Words such as `complete`,
-  `classification`, `unique`, `optimal`, `minimal`, `sharp`, or `canonical` are appropriate only
-  when the declaration's type establishes the corresponding property or the definition explicitly
-  specifies the relevant convention. Use neutral descriptive names otherwise.
+  namespace, declaration, or `.lean` filename. Avoid workflow labels such as `Prototype`,
+  `Draft`, `Temporary`, `Final`, or `MainTheorem`; say what the object is. A legacy identifier may
+  survive only during an explicit compatibility migration; it must not be imported, re-exported, or
+  cited by a new scholarly API, and it must be removed before the referee-facing artifact is cut.
+  Schedule generated or certificate cleanup under its owner rather than editing it incidentally.
+- A strength-bearing name such as `complete`, `classification`, `unique`, `optimal`, `minimal`,
+  `maximal`, `sharp`, `canonical`, or `universal` is permitted only when the declaration's type
+  proves that property on an explicit domain relative to an explicit comparison relation, or its
+  docstring points to an exact Lean theorem that does so. A definition that merely chooses a
+  representative does not establish canonicity. Use `chosen`, `normalized`, or another qualified
+  descriptive term unless choice-independence, invariance, or a precisely named standard convention
+  is formally established. State the domain, comparator, and witness or converse supplying the
+  advertised strength.
+- Semantic schema or format versions are allowed only when documented as such. Dates, run numbers,
+  shard build order, task numbers, and attempt numbers are not semantic versions; shard names must
+  encode a mathematical partition, not generation chronology.
 - Local names may be concise, but avoid unexplained project-specific abbreviations. Public names
-  should follow the terminology and spelling used in the accompanying paper, with distinctions
-  made by mathematics rather than implementation history.
+  use stable standard mathematical terminology, expanded enough to be intelligible without the
+  accompanying paper. Papers and internal records cite the exact Lean names. If a paper uses
+  different notation or terminology, explain the correspondence in prose rather than encoding
+  mutable manuscript labels or chronology in Lean names.
 
 ### Novelty and priority claims
 
@@ -232,21 +275,39 @@ Lean establishes that a formal statement follows from its declared assumptions; 
 establish that the result is new, first, previously unknown, or absent from the literature. Do not
 make novelty or priority claims in Lean names or prose. Put any such claim in the paper or its
 literature-audit record, with the scope, date, search method, and sources required by the parent
-guide. In Lean, state only the formal mathematical contribution and cite known antecedents
-factually. Claims of sharpness, optimality, completeness, or classification are mathematical rather
-than historical, but may be used only to the exact extent witnessed by the theorem statement.
+guide. The ban includes direct and indirect claims such as `novel`, `new`, `first`, `previously
+unknown`, `apparently`, `to our knowledge`, `we introduce`, `our improvement`, `stronger than
+previously known`, `only known proof`, `first formalization`, and any claim that a literature search
+is exhaustive. Lean may state a precise formal implication between internally formalized theorems,
+but may not turn it into a historical or priority comparison. In Lean, state only the formal
+mathematical result and cite known antecedents factually. Claims of sharpness, optimality,
+completeness, or classification are mathematical rather than historical, but may be used only to
+the exact extent witnessed by a theorem as required under Names above.
 
 ### Review gate
 
-Before landing a new or materially edited Lean module, review all changed Lean prose and public
-names as a skeptical journal referee would. Confirm that every reference resolves within the
-tracked scholarly record or stable public literature; every scope and strength claim matches a
-formal statement; computational claims identify their certificate and trust boundary; and no
-private workflow vocabulary or reverse reference to an internal note remains. Internal records
-that discuss a formal result should instead name its exact Lean file and declaration. A search for
-`C` followed by digits in changed `.lean` files is a required task-ID leakage check; inspect each
-hit because ordinary mathematical notation can also match. This prose review is required in
-addition to elaboration, gate builds, and axiom audits.
+Before landing an added, renamed, or modified module, audit the entire module, not only changed
+lines, plus every changed name, pathname, generated banner, template, generator, schema,
+certificate, and user-facing diagnostic in its verification closure. No grandfathering applies to
+comments or docstrings in a touched module. Confirm that every repository-local reference resolves
+to a Lean module or declaration or to an enduring verification artifact satisfying the closed
+definition above; external references must resolve to stable public literature. Confirm that every
+scope and strength claim matches a formal statement, computational claims disclose their method and
+trust boundary, and no private workflow vocabulary or reverse reference remains.
+
+Check contents and pathnames for task-ID variants, including case changes, separators, bare work
+item numbers in workflow context, and placeholders such as `C<id>`. Semantically inspect for lane
+names, agents or models, sessions, internal paths or URLs, status language, and indirect reverse
+references. Ordinary mathematical notation can resemble an ID, so automated searches are a
+backstop rather than a substitute for referee review.
+
+Before claiming that a module or gate backs a paper, apply the same review to every project-owned
+file in its transitive verification closure, including generated modules and load-bearing non-Lean
+artifacts; reviewing only files changed by the current task is insufficient. Legacy violations
+outside the current owner's safe edit scope must be recorded for an explicit cleanup rather than
+silently waived or opportunistically edited. The artifact cannot be declared referee-ready until
+they are resolved. This prose review is required in addition to elaboration, gate builds, and axiom
+audits.
 
 ## Failure and ownership discipline
 
