@@ -467,6 +467,48 @@ for H3.  A functor assigning such a lattice to general subgroup data `K<G>H` rem
 abstraction**: mixed-Hecke coordinates need not separate double cosets and can have additional
 modular kernels, so no general proof is claimed here.
 
+## Paper-bearing recommendation
+
+These reusable results are valuable to the Clebsch paper, but they should be integrated
+selectively rather than promoted at equal weight.
+
+**Main text.**  Promote the all-degree antipodal moment formula and the unique primitive
+`1:4:6` dependence.  The first upgrades “cubic-first memory” from a degree-three observation to a
+complete parity theorem with essentially the same proof.  The second shows that the profile rays
+intrinsically recover the `1,4,6` orbit sizes and stabilizer orders `12,3,2`, strengthening the
+paper's reconstruction narrative.  These are short, geometric, and directly support the central
+Clebsch story.
+
+**Compact modular subsection, if space permits.**  State the projective-cover result
+
+```text
+P ~= P(1)^A4 / soc(P(1))
+```
+
+as the conceptual explanation of the mixed-Hecke `6 -> 2` rank drop.  Its proof can be compressed
+to projectivity from the `A5` stabilizer, locality of the degree-11 orbital algebra, the `1|9|1`
+Loewy structure, and exactness of `A4`-fixed points.  This gives “cubic-first memory” a genuine
+modular-representation-theoretic meaning.  If that language interrupts the main narrative, place
+the proposition in an appendix and cite it from the depth-map theorem.
+
+**Technical appendix or certificate discussion.**  Combine the Tate-cycle criterion,
+semi-invariant contraction, and unique rank-locus characterization into one source-naturality
+proposition: two independent constructions produce the same canonical two-plane and the same
+kernel `[1:3:9]`.  Their value is intrinsicity and verification strength, not another headline.
+
+**Boundary remark only.**  Give the divided-transfer obstruction in one paragraph.  It explains
+why the natural source and depth planes remain distinct: divided transfer kills the balanced source
+relations but fixes the depth socle.  This is useful protection against an overclaim, but should not
+be presented as a principal negative theorem.
+
+**Do not promote yet.**  Keep the general `K\G/H` information-lattice functor as a future direction.
+Only its H3 instance is proved, and a broad formulation would make the paper appear to claim a
+general modular-Hecke theory that the current bundle does not establish.
+
+The recommended paper hierarchy is therefore: parity theorem and primitive dependence in the main
+line; one compact Brauer-tree proposition; source-naturality machinery in an appendix; divided
+transfer as a boundary remark; general information lattices deferred.
+
 ## Claim-specific literature gate
 
 This report inherits the C406 priority audit's **six full-text sources** and C411's recorded
