@@ -6,7 +6,7 @@
 
 **Status:** `ACTIVE`
 
-**Current verdict:** `ORIGINAL-LATTICE OBSTRUCTION PROVED; WEIGHTED 2-ADJOINT COBBOUNDARY THEOREM FOUND`
+**Current verdict:** `ORIGINAL-LATTICE OBSTRUCTION; WEIGHTED 2-ADJOINT ENUMERATOR; ALL-DEGREE CONIC FACTORIZED-SUPPORT LAW`
 
 ## Decision
 
@@ -34,6 +34,11 @@ weighted coboundary specialization of A^(2) -> all weights and distance.
 
 This is an active proof tranche, not a task close.  The coding specialization, structural equality
 classes, and Coxeter consequences remain under attack in C403.
+
+The first higher-degree family now closes uniformly.  For every squarefree product of nonmirror
+linear forms, its support is determined by the factor depths and one complement-concurrence debt.
+At all three C399 conic phases this gives a closed all-degree coefficient formula, not merely the
+previous `A3/F5` quadratic census.  Minimum factorized words are exactly matchings of conic secants.
 
 ## Exact ambient formula
 
@@ -128,8 +133,8 @@ d(D(A)) = n-q-1+N-deg Z_A.
 ```
 
 Equivalently, replace each adjoint hyperplane `H(X)` by `w_X` labelled parallel copies, producing an
-indexed central multiarrangement `B_A` of rank `r_B`.  Put `M=sum_X w_X`.  Ardila's finite-field
-coboundary identity, applied to this actual finite-field arrangement, gives the exact normalization
+indexed central hyperplane list `B_A` of rank `r_B`.  Put `M=sum_X w_X`.  Ardila's finite-field
+coboundary identity, applied to the represented matroid with those parallel elements, gives the exact normalization
 
 ```text
 q^(3-r_B) chibar_(B_A)(q,x) = sum_(v in F_q^3) x^h(v),
@@ -141,6 +146,17 @@ The `x^M` term is the zero vector; every nonzero projective point has `q-1` repr
 displayed `N x^(N-1)` puncture then removes the mirrors.  This gives a precise positive repair of
 the failed original-arrangement theorem.  It is not determined by `L(A)` alone: the lattice of the
 adjoint detects when several distinct singular flats of `A` become collinear on a missing line.
+
+This parallel-copy use is now source-closed rather than implicit.  Ardila's 2007 proof sums over
+indexed subfamilies, explicitly discusses repeated hyperplanes as the deletion--contraction closure,
+and therefore applies verbatim.  More directly, his 2017 survey states the finite-field method over
+`F_q`, defines `A(a)` by replacing each hyperplane by `a_e` copies, and gives its Tutte polynomial
+through the multivariate Tutte polynomial.  The resulting copy count is exactly the exponent
+`h(v)=sum_(H contains v) a_H` used above.  This is **not** the Abe--Terao--Wakefield characteristic
+polynomial of a multiarrangement, which is defined from derivation-module Hilbert series and is a
+different invariant.  The safe name here is “parallel-copy coboundary polynomial” or “coboundary
+polynomial of the indexed adjoint list,” not an unqualified multiarrangement characteristic
+polynomial.
 
 For the certified uniform pair, all weights are one.  The high-collision realization creates a
 triple concurrence in the 2-adjoint that is absent in the other realization.  For the Coxeter
@@ -541,6 +557,66 @@ All forms satisfy the displayed identity, and their `53` distinct
 `(c_q,i_A,delta_r,weight)` strata are recorded.  “Veronese-adjoint” is used descriptively here;
 no literature-priority claim is made for the construction or formula.
 
+## Squarefree line-product support theorem
+
+One nontrivial higher-degree family admits a complete classification for every degree.  Let
+`f=prod_(i=1)^r ell_i` be a squarefree product of distinct **nonmirror** lines, write
+`delta_i=delta_A(L_i)`, and for `P in B` let `k_P` be the number of selected factors through `P`.
+Since each selected line has `q+1-N+delta_i` complement points and a point covered `k_P` times must
+be counted once, inclusion--exclusion collapses to
+
+```text
+|B cap V(f)| = sum_i (q+1-N+delta_i) - sum_(P in B) (k_P-1)_+,
+
+wt(ev_B(f)) = n - sum_i (q+1-N+delta_i) + sum_(P in B) (k_P-1)_+.
+```
+
+Thus the full joint stratum is the multiset of weighted 2-adjoint factor depths together with one
+**complement-concurrence debt**.  For `r=2` this debt is simply the indicator that the two factors
+meet in `B`; adjoining one more factor changes the support by exactly the previously uncovered
+complement points on that line.  This is an exact support-transition law for every rank-three
+arrangement, not a Coxeter-only observation.
+
+At the C399 conic phase `q=h+1`, the complement `B` is the full conic of `v=q+1` points.  The
+allowable nonmirror factors consist of
+
+```text
+E=(q-1)(q-3)/2  empty conic lines,  v tangents,  and  binom(v,2) secants.
+```
+
+Hence squarefree factorized supports are exactly unions of `r` distinct objects chosen from `E`
+null tokens, the singleton subsets of a `v`-set, and its two-subsets.  If `A_(r,v-j)` denotes the
+number of projective products of support weight `v-j`, elementary subset inclusion--exclusion gives
+
+```text
+A_(r,v-j) = binom(v,j) sum_(k=0)^r binom(E,r-k)
+              sum_(i=0)^j (-1)^(j-i) binom(j,i) binom(i(i+1)/2,k).
+```
+
+This is the complete factorized-support enumerator in every degree.  In particular, for
+`1<=r<=v/2`, its minimum weight is `v-2r`; equality holds exactly for `r` secants whose endpoint
+pairs form a matching, and the number of minimum projective products is
+
+```text
+v! / ((v-2r)! 2^r r!).
+```
+
+The direct incidence replay verifies the complete degree-two and degree-three distributions in all
+three phases.  Their joint depth/debt stratifications have respectively `8` and `19` classes, and
+the minima are
+
+| phase | degree 2: weight / forms | degree 3: weight / forms |
+|:---|---:|---:|
+| `A3/F5` | `2 / 45` | `0 / 15` |
+| `B3/F7` | `4 / 210` | `2 / 420` |
+| `H3/F11` | `8 / 1,485` | `6 / 13,860` |
+
+This family is the factorized sector of the standard conic/GRS evaluation code, so no novelty is
+claimed for the minimum-distance phenomenon.  Its value here is sharper and internal: it gives an
+all-degree structural equality class for the Veronese-adjoint formula, a closed support-transition
+enumerator, and a precise statement of how the Coxeter parent disappears from factorized supports
+at the conic phase.
+
 ## Evidence and independent replay
 
 Run from the repository root:
@@ -561,14 +637,19 @@ decompositions, the `H3` q=11 orbit decomposition, and the q=13/q=19 Burnside br
 projective codeword totals equal `11^3` for the q=11 code fixtures.  The orbit path additionally
 checks every group element order, nonidentity fixed-depth incidence ledger, and closed labelled
 orbit-count formula.  The higher-degree path checks all `15,624` nonzero quadrics in the `A3/F_5`
-pilot, its one-dimensional evaluation kernel, and all `53` joint statistic strata.
+pilot, its one-dimensional evaluation kernel, and all `53` joint statistic strata.  It also checks
+every squarefree nonmirror line product of degrees two and three in the three Coxeter conic phases,
+compares direct support unions with the depth/debt transition law, and independently matches the
+closed all-degree coefficient formula.  A full MacWilliams replay checks the dual enumerator of
+every q=11 fixture and agrees with the direct collinear-triple count at dual weight three.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | `51,034` | `bd15507e261e80bd0389ebf2aeda2b36c8a1ec521841b63202955c0486ee6482` |
-| certificate `.json` | `65,970` | `da0c06c2f37d220041fe7f6b24999f37f65c14ba1114f3bc6d1c68ca65f49a65` |
+| checker `.py` | `61,534` | `23e105fc3a2203d58a7e822f08edbb9aef26916489c6d90cd5629c7295f25dc0` |
+| certificate `.json` | `92,168` | `1386250e4c5bafcf16dc310f9ee0a45f93df77af3ccc4ffcec30892db963116c` |
 
 The trusted boundary is exact Python integer/modular arithmetic, elementary projective incidence,
+the standard MacWilliams identity,
 the standard rank-three supersolvable-implies-free theorem, and C339's independently replayed
 characteristic-zero `H3` special-line ledger.  The computation does not prove the general published
 adjoint-stratification theorems, an arbitrary-field stabilizer-orbit classification, or a uniform
@@ -577,7 +658,7 @@ classification of the higher-degree joint `(c_q,i_A,delta_r)` strata.
 ## Focused literature boundary
 
 This report and its completed C399 audit continuation read **three external sources in full**,
-**four partially**, and **two at abstract/metadata depth**.  The mathematical verdict does not
+**five partially**, and **three at abstract/metadata depth**.  The mathematical verdict does not
 depend on an absence-of-prior-work
 claim, and no novelty or priority wording is made.  The audit instead checks the four mandatory
 interfaces: arrangement evaluation codes, finite-field characteristic/coboundary methods,
@@ -586,6 +667,8 @@ lattice-flag invariants, matroid/code weight enumerators, and adjoint arrangemen
 | source | read depth and access | boundary |
 |:---|:---|:---|
 | Federico Ardila, *Computing the Tutte polynomial of a hyperplane arrangement*, arXiv:math/0409211 | **full text**, arXiv preprint; cache SHA-256 `8d67ee9aa7b1f2948ead7fdfba545fe48c7da78a5fff3e79451545d1a96f5eaf` | The coboundary polynomial is equivalent to the arrangement Tutte polynomial and its finite-field formula counts points by the number of containing arrangement hyperplanes.  It factors through the arrangement matroid and does not record collinearities among distinct singular flats on missing lines. |
+| Federico Ardila, *Tutte polynomials of hyperplane arrangements and the finite field method*, arXiv:1710.01424 | **partial**, official arXiv HTML, Sections 5 and 7.1 including Theorems 5.2 and 7.2 | The finite-field identity is stated directly for finite-field arrangements, and `A(a)` explicitly replaces each hyperplane by `a_e` copies.  Together with the 2007 indexed-subfamily proof this source-closes the weighted adjoint as the coboundary polynomial of a represented matroid with parallel elements. |
+| Takuro Abe, Hiroaki Terao, and Max Wakefield, *The characteristic polynomial of a multiarrangement*, arXiv:math/0611742 | **abstract/metadata only**, official arXiv record | Defines a different characteristic polynomial through derivation-module Hilbert series.  C403 does not identify its parallel-copy coboundary polynomial with this invariant and avoids unqualified “multiarrangement characteristic polynomial” terminology. |
 | Weikang Liang, Suijie Wang, and Chengdong Zhao, *k-Adjoint of Hyperplane Arrangements*, arXiv:2412.06633 | **partial**, arXiv v2, Introduction, Definition 2.1, Lemma 2.1, adjoint-stratum definition, and Theorem 1.1 statement; cache PDF SHA-256 `59050f6a6ca38f1d9fdf7c747612814cde26e2b7aa3ac777fe6687624c11eef7` | Defines the `k`-adjoint from rank-`k` flats and proves that its Grassmannian decomposition classifies restriction matroids over the stated real setting.  Lemma 2.1 is the determinant identity behind C403's direct finite-field rank-three specialization.  The weighting, mirror puncture, and code-enumerator formula here are not attributed to that paper. |
 | Hang Cai, Houshan Fu, and Suijie Wang, *One-element Extensions of Hyperplane Arrangements*, arXiv:2308.09885 | **partial**, arXiv preprint, Sections 2.2--2.3 and Section 6 through Corollary 6.2; cache SHA-256 `8894bce42157aba3655b60a43ac8a6385c68d02ab4df2c11b851230dc92e5f37` | The induced adjoint arrangement classifies one-element extensions and restrictions, and their Theorem 2.3 includes a finite-field characteristic convolution.  This pre-empts any claim that C403 introduced the extension/adjoint interface.  C403 instead extracts the weighted restriction-line count, projective mirror puncture, and coding enumerator. |
 | Joshua Maglione and Christopher Voll, *Flag Hilbert--Poincare series of hyperplane arrangements and their Igusa zeta functions*, arXiv:2103.03640 | **partial**, arXiv preprint, Introduction through Definition 1.1; cache SHA-256 `61454bf1c532eacf416b9cb692bc080321a3eab4983c4048bfe2d3aa916685c6` | The flag series is explicitly built from flags and restrictions in the intersection poset.  Therefore the certified `U_(3,6)` pair has the same series. |
@@ -606,6 +689,7 @@ critical problem matroid characteristic polynomial finite fields Crapo Rota pdf
 site:arxiv.org hyperplane arrangement linear code finite field complement evaluation
 "k-adjoint" hyperplane arrangement restrictions Grassmannian
 "one-element extensions" "adjoint arrangement" hyperplane restrictions
+"multiarrangement" coboundary polynomial repeated hyperplanes finite field method
 ```
 
 The screen located the sources above and the standard Greene/code-matroid interface through
@@ -617,8 +701,9 @@ closure were not needed for the no-priority verdict and are **NOT COVERED**.
 C403 remains open.  The original-arrangement flag claim is excluded from the manuscript, but the
 weighted 2-adjoint theorem is now a plausible replacement statement: it gives a canonical
 arrangement construction, an exact coboundary specialization, and the complete Hamming enumerator.
-It should not be promoted or assigned novelty wording until the adjoint/multiarrangement literature
-boundary is tightened.  No Lean surface is added in this tranche; the Python bundle is both an
+The parallel-copy coboundary normalization is now source-closed and explicitly separated from the
+derivation-theoretic multiarrangement characteristic polynomial.  No Lean surface is added in this
+tranche; the Python bundle is both an
 exact falsifier for level-zero invariants and a replay certificate for the positive adjoint formula.
 
 ## Hand-back
@@ -632,7 +717,12 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
 - The two-pencil theorem gives an infinite irreducible supersolvable equality class, while the
   multiplicity bounds explain the extremal uniform counterexample.
 - The line sections also give exact locality-two repair and disjoint-availability profiles.
+- Squarefree nonmirror line products have an exact all-degree depth/debt support-transition law.
+  At the three conic phases the entire factorized-support enumerator has one coefficient formula;
+  minimum products are precisely secant matchings.
+- The parallel-copy coboundary normalization is source-closed through Ardila's finite-field method
+  and copy theorem, and is explicitly not the Abe--Terao--Wakefield multiarrangement polynomial.
 - C403 remains the active crowns task.  Next attacks are stabilizer-type refinement of the proved
-  depth-labelled orbit laws, full adjoint/multiarrangement source closure, and a nontrivial uniform
-  classification of higher-degree joint strata.  C404 is closed by the Edge/Dye fibre-geometry
-  pre-emption; C405 is the next independent successor.
+  depth-labelled orbit laws and nonfactorized higher-degree or dual-support structure beyond the
+  now-closed line-product family.  C404 is closed by the Edge/Dye fibre-geometry pre-emption; C405
+  is the next independent successor.

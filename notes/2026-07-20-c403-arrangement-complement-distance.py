@@ -4,7 +4,9 @@
 The primary path derives Coxeter line spectra from weighted second-adjoint
 depth ledgers.  The independent path enumerates points and lines of PG(2, 11)
 for pinned arrangements, reconstructs every code weight directly, and checks
-an infinite two-pencil formula on a grid of finite-field samples.
+an infinite two-pencil formula on a grid of finite-field samples.  Higher-degree
+paths certify the Veronese-adjoint identity and the all-degree squarefree
+line-product support law at the three Coxeter conic phases.
 """
 
 from __future__ import annotations
@@ -14,6 +16,7 @@ import hashlib
 import json
 from collections import Counter, defaultdict
 from itertools import combinations, product
+from math import comb, factorial
 from pathlib import Path
 from typing import Iterable
 
@@ -740,6 +743,31 @@ def analyze_arrangement(
         count * (section * (section - 1) * (section - 2) // 6)
         for section, count in section_counts.items()
     )
+    dual_weight_counts: Counter[int] = Counter()
+    for dual_weight in range(len(complement) + 1):
+        numerator = 0
+        for primal_weight, count in weight_counts.items():
+            krawtchouk = sum(
+                (-1) ** selected
+                * (prime - 1) ** (dual_weight - selected)
+                * comb(primal_weight, selected)
+                * comb(len(complement) - primal_weight, dual_weight - selected)
+                for selected in range(dual_weight + 1)
+                if selected <= primal_weight
+                and dual_weight - selected <= len(complement) - primal_weight
+            )
+            numerator += count * krawtchouk
+        if numerator % prime**3:
+            raise AssertionError(f"{name}: nonintegral MacWilliams coefficient")
+        coefficient = numerator // prime**3
+        if coefficient < 0:
+            raise AssertionError(f"{name}: negative MacWilliams coefficient")
+        if coefficient:
+            dual_weight_counts[dual_weight] = coefficient
+    if dual_weight_counts[3] != dual_weight_three:
+        raise AssertionError(f"{name}: direct/MacWilliams dual weight-three mismatch")
+    if sum(dual_weight_counts.values()) != prime ** (len(complement) - 3):
+        raise AssertionError(f"{name}: dual MacWilliams enumerator has wrong total")
     repair_pair_distribution: Counter[int] = Counter()
     disjoint_availability_distribution: Counter[int] = Counter()
     for point in complement:
@@ -836,6 +864,13 @@ def analyze_arrangement(
             str(weight): count for weight, count in sorted(weight_counts.items())
         },
         "dual_weight_three_codewords": dual_weight_three,
+        "dual_macwilliams_check": {
+            "minimum_distance": min(weight for weight in dual_weight_counts if weight),
+            "weights_zero_through_five": {
+                str(weight): dual_weight_counts[weight] for weight in range(6)
+            },
+            "total_codewords": sum(dual_weight_counts.values()),
+        },
         "locality_two_profile": {
             "repair_pair_count_distribution": {
                 str(repair_pairs): count
@@ -917,6 +952,143 @@ def quadratic_value(
     x, y, z = point
     monomials = (x * x, y * y, z * z, x * y, x * z, y * z)
     return sum(coefficient * monomial for coefficient, monomial in zip(coefficients, monomials)) % prime
+
+
+def squarefree_line_product_profile(
+    name: str,
+    lines: tuple[tuple[int, int, int], ...],
+    prime: int,
+    degrees: tuple[int, ...] = (2, 3),
+) -> dict[str, object]:
+    """Classify supports of squarefree products of nonmirror linear forms.
+
+    The primary count uses weighted-adjoint line depths and the concurrence
+    debt on complement points.  A separate bit-set union computes the zero
+    support directly.
+    """
+    universe = projective_objects(prime)
+    line_set = set(lines)
+    complement = tuple(
+        point for point in universe if not any(incident(line, point, prime) for line in lines)
+    )
+    blocks = intersection_blocks(lines, prime)
+    singular_weights = {point: len(indices) - 1 for point, indices in blocks.items()}
+    nonmirrors = tuple(line for line in universe if line not in line_set)
+    masks: dict[tuple[int, int, int], int] = {}
+    depths: dict[tuple[int, int, int], int] = {}
+    for line in nonmirrors:
+        mask = 0
+        for index, point in enumerate(complement):
+            if incident(line, point, prime):
+                mask |= 1 << index
+        masks[line] = mask
+        depths[line] = sum(
+            weight for point, weight in singular_weights.items() if incident(line, point, prime)
+        )
+        if mask.bit_count() != prime + 1 - len(lines) + depths[line]:
+            raise AssertionError(f"{name}: line-product section/depth identity failed")
+
+    profiles: dict[str, object] = {}
+    for degree in degrees:
+        joint_counts: Counter[tuple[tuple[int, ...], int, int]] = Counter()
+        weight_counts: Counter[int] = Counter()
+        direct_checks = 0
+        for selected in combinations(nonmirrors, degree):
+            selected_masks = tuple(masks[line] for line in selected)
+            union_mask = 0
+            for mask in selected_masks:
+                union_mask |= mask
+            concurrence_debt = 0
+            for size in range(2, degree + 1):
+                sign = 1 if size % 2 == 0 else -1
+                concurrence_debt += sign * sum(
+                    _intersection_mask(subset).bit_count()
+                    for subset in combinations(selected_masks, size)
+                )
+            depth_multiset = tuple(sorted(depths[line] for line in selected))
+            predicted_zeros = sum(
+                prime + 1 - len(lines) + depths[line] for line in selected
+            ) - concurrence_debt
+            direct_zeros = union_mask.bit_count()
+            if predicted_zeros != direct_zeros:
+                raise AssertionError(f"{name}: squarefree line-product support formula failed")
+            weight = len(complement) - direct_zeros
+            joint_counts[(depth_multiset, concurrence_debt, weight)] += 1
+            weight_counts[weight] += 1
+            direct_checks += 1
+        profiles[str(degree)] = {
+            "projective_squarefree_forms": direct_checks,
+            "joint_stratum_count": len(joint_counts),
+            "minimum_support_weight": min(weight_counts),
+            "minimum_support_form_count": weight_counts[min(weight_counts)],
+            "weight_counts": {
+                str(weight): count for weight, count in sorted(weight_counts.items())
+            },
+            "joint_strata": [
+                {
+                    "depth_multiset": list(depth_multiset),
+                    "complement_concurrence_debt": debt,
+                    "support_weight": weight,
+                    "form_count": count,
+                }
+                for (depth_multiset, debt, weight), count in sorted(joint_counts.items())
+            ],
+        }
+    return {
+        "arrangement": name,
+        "q": prime,
+        "complement_length": len(complement),
+        "nonmirror_linear_factors": len(nonmirrors),
+        "formula": (
+            "wt(prod_i ell_i)=n-sum_i(q+1-N+delta(L_i))"
+            "+sum_(P in B)(k_P-1)_+"
+        ),
+        "profiles": profiles,
+    }
+
+
+def _intersection_mask(values: tuple[int, ...]) -> int:
+    result = values[0]
+    for value in values[1:]:
+        result &= value
+    return result
+
+
+def binomial_or_zero(size: int, selection: int) -> int:
+    if selection < 0 or selection > size:
+        return 0
+    return comb(size, selection)
+
+
+def conic_phase_factorized_support_formula(
+    prime: int, mirror_count: int, degree: int
+) -> dict[int, int]:
+    """Count squarefree products of nonmirror lines by support weight on a conic."""
+    conic_points = prime + 1
+    null_factors = prime * (prime - 1) // 2 - mirror_count
+    counts: Counter[int] = Counter()
+    for covered_points in range(conic_points + 1):
+        total = 0
+        for nonnull_factors in range(degree + 1):
+            exact_union_count = sum(
+                (-1) ** (covered_points - subset_points)
+                * comb(covered_points, subset_points)
+                * binomial_or_zero(
+                    subset_points * (subset_points + 1) // 2, nonnull_factors
+                )
+                for subset_points in range(covered_points + 1)
+            )
+            total += binomial_or_zero(
+                null_factors, degree - nonnull_factors
+            ) * exact_union_count
+        if total:
+            counts[conic_points - covered_points] = (
+                comb(conic_points, covered_points) * total
+            )
+    expected_total = comb(prime * prime + prime + 1 - mirror_count, degree)
+    if sum(counts.values()) != expected_total:
+        raise AssertionError("conic-phase factorized support formula has wrong total")
+    return dict(sorted(counts.items()))
 
 
 def degree_two_veronese_adjoint_pilot() -> dict[str, object]:
@@ -1039,6 +1211,32 @@ def build_certificate() -> dict[str, object]:
         ),
         prime,
     )
+    h3 = arrangement(h3_roots(4), prime)
+    a3_conic = arrangement(
+        (
+            (1, 0, 0),
+            (0, 1, 0),
+            (0, 0, 1),
+            (1, -1, 0),
+            (1, 0, -1),
+            (0, 1, -1),
+        ),
+        5,
+    )
+    b3_conic = arrangement(
+        (
+            (1, 0, 0),
+            (0, 1, 0),
+            (0, 0, 1),
+            (1, 1, 0),
+            (1, -1, 0),
+            (1, 0, 1),
+            (1, 0, -1),
+            (0, 1, 1),
+            (0, 1, -1),
+        ),
+        7,
+    )
     free_dual_pencil = arrangement(
         (
             (0, 0, 1),
@@ -1133,8 +1331,37 @@ def build_certificate() -> dict[str, object]:
     if balanced_collinear["external_delta_counts"] == balanced_generic["external_delta_counts"]:
         raise AssertionError("balanced two-pencil enumerator counterexample did not separate")
 
+    line_product_profiles = {
+        "A3_q5": squarefree_line_product_profile("A3", a3_conic, 5),
+        "B3_q7": squarefree_line_product_profile("B3", b3_conic, 7),
+        "H3_q11": squarefree_line_product_profile("H3", h3, prime),
+    }
+    for profile in line_product_profiles.values():
+        q = int(profile["q"])
+        mirror_count = (3 * (q - 1)) // 2
+        if profile["complement_length"] != q + 1:
+            raise AssertionError("Coxeter conic-phase complement does not have q+1 points")
+        for degree_text, degree_profile in profile["profiles"].items():  # type: ignore[union-attr]
+            degree = int(degree_text)
+            expected_weight = q + 1 - 2 * degree
+            expected_count = (
+                comb(q + 1, 2 * degree)
+                * factorial(2 * degree)
+                // (2**degree * factorial(degree))
+            )
+            if degree_profile["minimum_support_weight"] != expected_weight:
+                raise AssertionError("conic-phase factorized minimum support formula failed")
+            if degree_profile["minimum_support_form_count"] != expected_count:
+                raise AssertionError("conic-phase matching count failed")
+            formula_counts = conic_phase_factorized_support_formula(q, mirror_count, degree)
+            direct_counts = {
+                int(weight): count for weight, count in degree_profile["weight_counts"].items()
+            }
+            if formula_counts != direct_counts:
+                raise AssertionError("conic-phase factorized support enumerator formula failed")
+
     return {
-        "schema": "c403-arrangement-complement-distance-v2",
+        "schema": "c403-arrangement-complement-distance-v3",
         "field_convention": "normalized triples for points and dual lines of PG(2,p)",
         "weighted_second_adjoint_theorem": {
             "rank_three_identification": (
@@ -1171,6 +1398,23 @@ def build_certificate() -> dict[str, object]:
         },
         "two_pencil_supersolvable_family": certify_two_pencil_samples(prime),
         "degree_two_veronese_adjoint_pilot": degree_two_veronese_adjoint_pilot(),
+        "squarefree_line_product_support_profiles": {
+            "theorem": (
+                "for distinct nonmirror lines L_i, the complement zero count is the sum of "
+                "their section sizes minus sum_(P in B)(k_P-1)_+"
+            ),
+            "conic_phase_minimum_support_theorem": (
+                "at q=h+1 and 1<=r<=(q+1)/2, the minimum squarefree factorized "
+                "support is q+1-2r; equality means r secants with disjoint endpoint pairs, "
+                "count (q+1)!/((q+1-2r)! 2^r r!)"
+            ),
+            "conic_phase_all_degree_coefficient_formula": (
+                "A_(r,q+1-j)=C(q+1,j) sum_(k=0)^r C(E,r-k) "
+                "sum_(i=0)^j (-1)^(j-i) C(j,i) C(i(i+1)/2,k), "
+                "where E=(q-1)(q-3)/2"
+            ),
+            **line_product_profiles,
+        },
         "fixtures": fixtures,
         "comparisons": {
             "ordinary_characteristic_failure": {
@@ -1212,9 +1456,12 @@ def build_certificate() -> dict[str, object]:
         "trusted_boundary": {
             "primary": (
                 "weighted second-adjoint depth ledger, external singular-line ledger, "
-                "and exact integer polynomial algebra"
+                "squarefree line-product depth/debt formula, and exact integer polynomial algebra"
             ),
-            "independent_replay": "direct point/line incidence enumeration in PG(2,11)",
+            "independent_replay": (
+                "direct point/line incidence enumeration, direct product-support unions at the "
+                "three conic phases, and MacWilliams/direct dual-weight-three agreement"
+            ),
             "not_certified": [
                 "the general supersolvable-implies-free theorem",
                 "the C339 characteristic-zero H3 special-line ledger",

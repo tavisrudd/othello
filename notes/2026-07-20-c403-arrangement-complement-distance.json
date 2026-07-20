@@ -1577,6 +1577,18 @@
       "complement_length": 72,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 717951778908581106757180798591346349776429989266820369060234717700939291,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 43040,
+          "4": 7816440,
+          "5": 1050212640
+        }
+      },
       "dual_weight_three_codewords": 43040,
       "external_delta_counts": {
         "0": 64,
@@ -1795,6 +1807,18 @@
       "complement_length": 48,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 72890483685103052142902866787761839379440139451,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 12080,
+          "4": 1485360,
+          "5": 128480880
+        }
+      },
       "dual_weight_three_codewords": 12080,
       "external_delta_counts": {
         "0": 24,
@@ -2057,6 +2081,18 @@
       "complement_length": 72,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 717951778908581106757180798591346349776429989266820369060234717700939291,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 43120,
+          "4": 7816200,
+          "5": 1050186480
+        }
+      },
       "dual_weight_three_codewords": 43120,
       "external_delta_counts": {
         "0": 56,
@@ -2271,6 +2307,18 @@
       "complement_length": 64,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 3349298034955599095318942248963066521029422565733678974841423611,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 29880,
+          "4": 4834680,
+          "5": 572184000
+        }
+      },
       "dual_weight_three_codewords": 29880,
       "external_delta_counts": {
         "0": 36,
@@ -2504,6 +2552,18 @@
       "complement_length": 64,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 3349298034955599095318942248963066521029422565733678974841423611,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 29860,
+          "4": 4834800,
+          "5": 572189200
+        }
+      },
       "dual_weight_three_codewords": 29860,
       "external_delta_counts": {
         "0": 38,
@@ -2737,6 +2797,18 @@
       "complement_length": 76,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 10511531995000535984031884072175901907076711472855517023410896501859452159531,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 50610,
+          "4": 9749680,
+          "5": 1386752430
+        }
+      },
       "dual_weight_three_codewords": 50610,
       "external_delta_counts": {
         "0": 21,
@@ -2959,6 +3031,18 @@
       "complement_length": 76,
       "connected_matroid": true,
       "dimension": 3,
+      "dual_macwilliams_check": {
+        "minimum_distance": 3,
+        "total_codewords": 10511531995000535984031884072175901907076711472855517023410896501859452159531,
+        "weights_zero_through_five": {
+          "0": 1,
+          "1": 0,
+          "2": 0,
+          "3": 50600,
+          "4": 9749750,
+          "5": 1386755520
+        }
+      },
       "dual_weight_three_codewords": 50600,
       "external_delta_counts": {
         "0": 22,
@@ -3163,16 +3247,930 @@
       }
     }
   },
-  "schema": "c403-arrangement-complement-distance-v2",
+  "schema": "c403-arrangement-complement-distance-v3",
+  "squarefree_line_product_support_profiles": {
+    "A3_q5": {
+      "arrangement": "A3",
+      "complement_length": 6,
+      "formula": "wt(prod_i ell_i)=n-sum_i(q+1-N+delta(L_i))+sum_(P in B)(k_P-1)_+",
+      "nonmirror_linear_factors": 25,
+      "profiles": {
+        "2": {
+          "joint_strata": [
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                0
+              ],
+              "form_count": 6,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                1
+              ],
+              "form_count": 24,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                2
+              ],
+              "form_count": 60,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1
+              ],
+              "form_count": 15,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                2
+              ],
+              "form_count": 60,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                1,
+                2
+              ],
+              "form_count": 30,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                2
+              ],
+              "form_count": 45,
+              "support_weight": 2
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                2,
+                2
+              ],
+              "form_count": 60,
+              "support_weight": 3
+            }
+          ],
+          "joint_stratum_count": 8,
+          "minimum_support_form_count": 45,
+          "minimum_support_weight": 2,
+          "projective_squarefree_forms": 300,
+          "weight_counts": {
+            "2": 45,
+            "3": 120,
+            "4": 105,
+            "5": 24,
+            "6": 6
+          }
+        },
+        "3": {
+          "joint_strata": [
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                0,
+                0
+              ],
+              "form_count": 4,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                0,
+                1
+              ],
+              "form_count": 36,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                0,
+                2
+              ],
+              "form_count": 90,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                1,
+                1
+              ],
+              "form_count": 60,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                1,
+                2
+              ],
+              "form_count": 240,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                0,
+                1,
+                2
+              ],
+              "form_count": 120,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                0,
+                2,
+                2
+              ],
+              "form_count": 180,
+              "support_weight": 2
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                0,
+                2,
+                2
+              ],
+              "form_count": 240,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1,
+                1
+              ],
+              "form_count": 20,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1,
+                2
+              ],
+              "form_count": 90,
+              "support_weight": 2
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                1,
+                1,
+                2
+              ],
+              "form_count": 120,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                1,
+                1,
+                2
+              ],
+              "form_count": 15,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                2,
+                2
+              ],
+              "form_count": 90,
+              "support_weight": 1
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                1,
+                2,
+                2
+              ],
+              "form_count": 360,
+              "support_weight": 2
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                1,
+                2,
+                2
+              ],
+              "form_count": 180,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                2,
+                2
+              ],
+              "form_count": 15,
+              "support_weight": 0
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                2,
+                2,
+                2
+              ],
+              "form_count": 180,
+              "support_weight": 1
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                2,
+                2,
+                2
+              ],
+              "form_count": 240,
+              "support_weight": 2
+            },
+            {
+              "complement_concurrence_debt": 3,
+              "depth_multiset": [
+                2,
+                2,
+                2
+              ],
+              "form_count": 20,
+              "support_weight": 3
+            }
+          ],
+          "joint_stratum_count": 19,
+          "minimum_support_form_count": 15,
+          "minimum_support_weight": 0,
+          "projective_squarefree_forms": 2300,
+          "weight_counts": {
+            "0": 15,
+            "1": 270,
+            "2": 870,
+            "3": 820,
+            "4": 285,
+            "5": 36,
+            "6": 4
+          }
+        }
+      },
+      "q": 5
+    },
+    "B3_q7": {
+      "arrangement": "B3",
+      "complement_length": 8,
+      "formula": "wt(prod_i ell_i)=n-sum_i(q+1-N+delta(L_i))+sum_(P in B)(k_P-1)_+",
+      "nonmirror_linear_factors": 48,
+      "profiles": {
+        "2": {
+          "joint_strata": [
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1
+              ],
+              "form_count": 66,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                2
+              ],
+              "form_count": 96,
+              "support_weight": 7
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                3
+              ],
+              "form_count": 336,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                2
+              ],
+              "form_count": 28,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                3
+              ],
+              "form_count": 168,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                2,
+                3
+              ],
+              "form_count": 56,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                3
+              ],
+              "form_count": 210,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                3,
+                3
+              ],
+              "form_count": 168,
+              "support_weight": 5
+            }
+          ],
+          "joint_stratum_count": 8,
+          "minimum_support_form_count": 210,
+          "minimum_support_weight": 4,
+          "projective_squarefree_forms": 1128,
+          "weight_counts": {
+            "4": 210,
+            "5": 336,
+            "6": 420,
+            "7": 96,
+            "8": 66
+          }
+        },
+        "3": {
+          "joint_strata": [
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1,
+                1
+              ],
+              "form_count": 220,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1,
+                2
+              ],
+              "form_count": 528,
+              "support_weight": 7
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                1,
+                3
+              ],
+              "form_count": 1848,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                2,
+                2
+              ],
+              "form_count": 336,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                2,
+                3
+              ],
+              "form_count": 2016,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                1,
+                2,
+                3
+              ],
+              "form_count": 672,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                1,
+                3,
+                3
+              ],
+              "form_count": 2520,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                1,
+                3,
+                3
+              ],
+              "form_count": 2016,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                2,
+                2
+              ],
+              "form_count": 56,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                2,
+                3
+              ],
+              "form_count": 420,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                2,
+                2,
+                3
+              ],
+              "form_count": 336,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                2,
+                2,
+                3
+              ],
+              "form_count": 28,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                2,
+                3,
+                3
+              ],
+              "form_count": 840,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                2,
+                3,
+                3
+              ],
+              "form_count": 1680,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                2,
+                3,
+                3
+              ],
+              "form_count": 504,
+              "support_weight": 5
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                3,
+                3
+              ],
+              "form_count": 420,
+              "support_weight": 2
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                3,
+                3,
+                3
+              ],
+              "form_count": 1680,
+              "support_weight": 3
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                3,
+                3,
+                3
+              ],
+              "form_count": 1120,
+              "support_weight": 4
+            },
+            {
+              "complement_concurrence_debt": 3,
+              "depth_multiset": [
+                3,
+                3,
+                3
+              ],
+              "form_count": 56,
+              "support_weight": 5
+            }
+          ],
+          "joint_stratum_count": 19,
+          "minimum_support_form_count": 420,
+          "minimum_support_weight": 2,
+          "projective_squarefree_forms": 17296,
+          "weight_counts": {
+            "2": 420,
+            "3": 2520,
+            "4": 5740,
+            "5": 4984,
+            "6": 2884,
+            "7": 528,
+            "8": 220
+          }
+        }
+      },
+      "q": 7
+    },
+    "H3_q11": {
+      "arrangement": "H3",
+      "complement_length": 12,
+      "formula": "wt(prod_i ell_i)=n-sum_i(q+1-N+delta(L_i))+sum_(P in B)(k_P-1)_+",
+      "nonmirror_linear_factors": 118,
+      "profiles": {
+        "2": {
+          "joint_strata": [
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                3
+              ],
+              "form_count": 780,
+              "support_weight": 12
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                4
+              ],
+              "form_count": 480,
+              "support_weight": 11
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                5
+              ],
+              "form_count": 2640,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                4,
+                4
+              ],
+              "form_count": 66,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                4,
+                5
+              ],
+              "form_count": 660,
+              "support_weight": 9
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                4,
+                5
+              ],
+              "form_count": 132,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                5,
+                5
+              ],
+              "form_count": 1485,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                5,
+                5
+              ],
+              "form_count": 660,
+              "support_weight": 9
+            }
+          ],
+          "joint_stratum_count": 8,
+          "minimum_support_form_count": 1485,
+          "minimum_support_weight": 8,
+          "projective_squarefree_forms": 6903,
+          "weight_counts": {
+            "10": 2838,
+            "11": 480,
+            "12": 780,
+            "8": 1485,
+            "9": 1320
+          }
+        },
+        "3": {
+          "joint_strata": [
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                3,
+                3
+              ],
+              "form_count": 9880,
+              "support_weight": 12
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                3,
+                4
+              ],
+              "form_count": 9360,
+              "support_weight": 11
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                3,
+                5
+              ],
+              "form_count": 51480,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                4,
+                4
+              ],
+              "form_count": 2640,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                4,
+                5
+              ],
+              "form_count": 26400,
+              "support_weight": 9
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                3,
+                4,
+                5
+              ],
+              "form_count": 5280,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                3,
+                5,
+                5
+              ],
+              "form_count": 59400,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                3,
+                5,
+                5
+              ],
+              "form_count": 26400,
+              "support_weight": 9
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                4,
+                4,
+                4
+              ],
+              "form_count": 220,
+              "support_weight": 9
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                4,
+                4,
+                5
+              ],
+              "form_count": 2970,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                4,
+                4,
+                5
+              ],
+              "form_count": 1320,
+              "support_weight": 9
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                4,
+                4,
+                5
+              ],
+              "form_count": 66,
+              "support_weight": 10
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                4,
+                5,
+                5
+              ],
+              "form_count": 11880,
+              "support_weight": 7
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                4,
+                5,
+                5
+              ],
+              "form_count": 11880,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                4,
+                5,
+                5
+              ],
+              "form_count": 1980,
+              "support_weight": 9
+            },
+            {
+              "complement_concurrence_debt": 0,
+              "depth_multiset": [
+                5,
+                5,
+                5
+              ],
+              "form_count": 13860,
+              "support_weight": 6
+            },
+            {
+              "complement_concurrence_debt": 1,
+              "depth_multiset": [
+                5,
+                5,
+                5
+              ],
+              "form_count": 23760,
+              "support_weight": 7
+            },
+            {
+              "complement_concurrence_debt": 2,
+              "depth_multiset": [
+                5,
+                5,
+                5
+              ],
+              "form_count": 7920,
+              "support_weight": 8
+            },
+            {
+              "complement_concurrence_debt": 3,
+              "depth_multiset": [
+                5,
+                5,
+                5
+              ],
+              "form_count": 220,
+              "support_weight": 9
+            }
+          ],
+          "joint_stratum_count": 19,
+          "minimum_support_form_count": 13860,
+          "minimum_support_weight": 6,
+          "projective_squarefree_forms": 266916,
+          "weight_counts": {
+            "10": 59466,
+            "11": 9360,
+            "12": 9880,
+            "6": 13860,
+            "7": 35640,
+            "8": 82170,
+            "9": 56540
+          }
+        }
+      },
+      "q": 11
+    },
+    "conic_phase_all_degree_coefficient_formula": "A_(r,q+1-j)=C(q+1,j) sum_(k=0)^r C(E,r-k) sum_(i=0)^j (-1)^(j-i) C(j,i) C(i(i+1)/2,k), where E=(q-1)(q-3)/2",
+    "conic_phase_minimum_support_theorem": "at q=h+1 and 1<=r<=(q+1)/2, the minimum squarefree factorized support is q+1-2r; equality means r secants with disjoint endpoint pairs, count (q+1)!/((q+1-2r)! 2^r r!)",
+    "theorem": "for distinct nonmirror lines L_i, the complement zero count is the sum of their section sizes minus sum_(P in B)(k_P-1)_+"
+  },
   "trusted_boundary": {
-    "independent_replay": "direct point/line incidence enumeration in PG(2,11)",
+    "independent_replay": "direct point/line incidence enumeration, direct product-support unions at the three conic phases, and MacWilliams/direct dual-weight-three agreement",
     "not_certified": [
       "the general supersolvable-implies-free theorem",
       "the C339 characteristic-zero H3 special-line ledger",
       "the published general k-adjoint decomposition theorem over arbitrary fields",
       "any claim beyond the proved symbolic formulas and pinned finite-field samples"
     ],
-    "primary": "weighted second-adjoint depth ledger, external singular-line ledger, and exact integer polynomial algebra"
+    "primary": "weighted second-adjoint depth ledger, external singular-line ledger, squarefree line-product depth/debt formula, and exact integer polynomial algebra"
   },
   "two_pencil_supersolvable_family": {
     "central_characteristic_polynomial": "(t-1)(t-r)(t-s)",
