@@ -55,6 +55,15 @@ dictionary: Howard--Millson--Snowden--Vakil already own it.
 
 ## C374 — local equivalence class of the Clebsch `AME(6,11)` state
 
+**Complete 2026-07-19.**  Verdict:
+`THEOREM; EXACT LC AND LU SEPARATION FROM EVERY SIX-POINT GRS AME CLASS`.  The fixed
+`tau=8` CSS stabilizer has a complete minimal-support holonomy obstruction to all four
+`PGL_2(11)` GRS evaluation-set orbits.  More strongly, the multiset of triple products of
+identity-extended four-party marginals has `70` moments `11^-4`, whereas the four GRS
+orbits have `60,62,63,64`; this is invariant under arbitrary local unitaries and party
+permutation.  See `notes/2026-07-19-c374-clebsch-ame-equivalence.md` and its adjacent
+checker/JSON/checksum bundle.
+
 Construct the q=11 minimal-support stabilizer state attached to C341's `[6,3,4]_11` code in a fixed
 Pauli convention.  Compute an exact stabilizer/symplectic canonical form and decide local-Clifford
 equivalence to the standard extended/Reed--Solomon `AME(6,11)` presentations, allowing party
