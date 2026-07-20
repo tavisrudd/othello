@@ -230,3 +230,50 @@ combinatorial one, or collapse to the already-failed TI/quasiregular hypotheses,
 **Evidence:** OPEN WITH NEGATIVE BASELINE — C400 gives the exact q=11 scheme and verifies failure of
 the standard criteria, but supplies no new recognition mechanism.  This is not a cheap upgrade.
 **Status:** open lead; unallocated
+
+### 2026-07-20 — Scalar cubic probes can compress the C406 sheet witness
+
+**Provenance:** post-C409 free-upgrade review of C406's nonzero signed cubic tensor over
+`F_7` and `F_11`.
+**Was I looking for this?:** no — C409's allocated deliverable was the common moment-trade
+filtration and its Pasch sharpness test, not certificate compression or a scalar probe for C406.
+**Observed / musing:** contracting C406's signed moments with any linear functional preserves the
+degree-one and degree-two cancellations.  Since the characteristic is greater than three, the
+nonzero symmetric cubic tensor has a nonzero diagonal cubic polynomial by polarization; a nonzero
+degree-three polynomial cannot vanish on all of `F_q^n` for `q=7,11`.  Hence some linear
+functional `ell` satisfies
+`sum_M epsilon(M) ell(Phi_M)^3 != 0`, giving a one-dimensional scalar witness to the sheet
+orientation.
+**Why it may matter / strongest question:** an explicit small-support `ell` could compress the
+C406 certificate or simplify a Lean/manuscript statement.  Is there an intrinsically characterized
+probe orbit, rather than an arbitrary symmetry-breaking coordinate choice?
+**Discriminator / falsifier:** extract one explicit probe from the frozen C406 tensor and compute
+its stabilizer/orbit.  The broader lead fails if every witness is noncanonical and the orbit data
+adds nothing beyond the full tensor already certified by C406.
+**Evidence:** REASONED — existence follows formally from C406's checked `mu_3 != 0`, polarization,
+and the finite-field polynomial bound; no explicit probe or compression gain has been computed.
+**Status:** open lead; unallocated
+
+### 2026-07-20 — Additive-depth convolution produces arbitrarily delayed memory
+
+**Provenance:** post-C409 free-upgrade review of the scalar generating-function filtration and
+C408's triple-root defect.
+**Was I looking for this?:** no — C409 tested exact strength two and cubic sharpness, not products
+of independent trades or higher-strength realization families.
+**Observed / musing:** additive-depth convolution of two signed scalar trades multiplies their
+generating polynomials, so their root orders at `x=1` add.  C408's defect has exact root order
+three; its self-convolution therefore has exact root order six, hence exact strength five and first
+survival in degree six.  Iterated convolution gives formal trades with arbitrarily delayed first
+memory.
+**Why it may matter / strongest question:** can any projective or weighted-adjoint composition make
+depths genuinely additive, turning this formal product law into geometric arrangement/code
+families with prescribed first-memory degree?
+**Structural mechanism:** multiplication of signed generating functions under independent product
+and addition of feature depths.
+**Discriminator / falsifier:** exhibit one incidence construction whose global depth defect is the
+product of its local defects and verify that cross-incidences introduce no correction.  The lead
+fails geometrically if projective cross-lines inevitably destroy factorization or force only a
+disconnected/non-paper-facing construction.
+**Evidence:** CHECKED ALGEBRA / OPEN GEOMETRY — root-order addition is exact over `Z[x]`; no
+projective realization or operational consequence has been tested.
+**Status:** open lead; unallocated
