@@ -67,7 +67,7 @@ q>14 recovery threshold (`N-1=14` for H3); and the six-field ladder `5,9,11,19,2
 
 Ranked most severe first.
 
-1. **F5 balanced-half uniqueness is the one finite claim with no committed compact-checker
+1. **RESOLVED BY C430 — F5 balanced-half uniqueness was the one finite claim with no committed compact-checker
    design (plan §C424, lines 109–121; C406 report lines 83–85 and 276–278).** The claim
    quantifies over all complementary halves of the `2q` quotient points: `C(14,7)=3432` cases
    for B3 (kernel-feasible directly) but `C(22,11)=705432` for H3. A "compact certificate leaf"
@@ -80,6 +80,9 @@ Ranked most severe first.
    anti-invariance of `mu_3` needs no 220-dimensional linear algebra (it reduces, via the plan's
    own abstract index-two theorem, to the permutation action on the 22 quotient vectors — 22
    ten-coordinate checks — plus sheet parity), and `mu_3 != 0` needs one nonzero coordinate
+   comparison.  C430 subsequently replaces this entire exhaustion boundary with the symbolic
+   radical--Hadamard theorem and bounded rank/radical leaves; see
+   `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`.
    (a 22-term sum). The uniqueness exhaustion is the sole heavy piece. See revision 1.
 2. **F6's equivariance statements risk being definitional rather than theorems (plan §C425,
    lines 123–139; C411 report lines 98–125).** In C411 the negative-sheet rows are the
@@ -155,14 +158,10 @@ dependency annotations matching the plan.
 
 ## Suggested revisions
 
-1. **(F5, highest priority) Pre-commit the uniqueness verification design or split the exit.**
-   Either specify a meet-in-the-middle checker theorem now (enumerate the 2^11 moment-vector
-   sums over each half of a fixed 11+11 split of the 22 quotient points, with a sorted-join
-   soundness lemma; every 11-subset splits uniquely across the two halves, so the join is
-   exhaustive), or restate F5's exit in two tiers: kernel tier — B3 uniqueness (3432 cases,
-   feasible), both sheets' moment vanishing, and the orientation theorem *conditional on* the
-   uniqueness hypothesis; certificate tier — H3 uniqueness, declared Python-backed in the
-   verification map. Decide before dispatch, not mid-task.
+1. **(F5, resolved by C430) Use the symbolic uniqueness route.**  Formalize the abstract
+   radical--Hadamard product-space lemma, then freeze only restriction ranks, second-moment
+   ranks/radicals, and the two radical levels for B3/H3.  No subset enumeration or conditional
+   certificate tier remains.
 2. **(F6) Write the checker-theorem obligation into the slice text:** frozen secant unions +
    relation cells + `K`/`J` generators as data; partition/scalar-closure/invariance
    side-theorems; in-kernel recomputation of the six incidence rows; `D(JM)=-D(M)` derived, not
@@ -310,16 +309,15 @@ promotion of any lead goes through the normal C-ID process.
    representations, the two arc chiralities, the monomial-equivalence obstruction, and the two
    scheme fibres, with the q=5 internalization and a Frobenius-semilinear inert statement. The
    plan defers it correctly; it deserves its own allocation after F8. REASONED, with the split
-   and ramified endpoints already certified (C373/C377).
-2. **A conceptual balanced-half rigidity theorem.** F5's uniqueness is the campaign's only
-   brute-force exhaustion. The statement has a design-theoretic shape: the sheet split is the
-   unique partition of the `2q` quotient points into halves whose difference indicator is
-   orthogonal to degree ≤ 2 — a minimum-strength-two signed trade supported on one orbit pair.
-   A Delsarte/interlacing-style proof (via the certified second-moment form ranks `5/9` with
-   one-dimensional radical, C406 lines 145–151) would replace the 705432-case leaf with a
-   symbolic one and generalize to any `PSL_2(q)` sheet pair. Adjacent read: the Chien–Kang
-   two-orbit design classification already in C406's audit. If it works, F5's red flag 1
-   dissolves. REASONED; no proof attempt yet.
+   and ramified endpoints already certified (C373/C377).  C430 now supplies a canonical fibrewise
+   outer-odd line: the difference of the two projective-cover socles.  C429 should track this
+   radical line integrally and under Frobenius before introducing any larger descent object.
+2. **A conceptual balanced-half rigidity theorem — COMPLETE (C430).**  The radical--Hadamard
+   theorem proves that the degree-at-most-two evaluation space is the equal-sheet-sum hyperplane
+   and its entire trade kernel is the sheet-sign line.  The B3/H3 ranks/radicals are `5/1` and
+   `9/1`; the H3 odd line is exactly C412's projective-cover depth socle.  This replaces the
+   705432-case leaf and dissolves F5 red flag 1 without a Delsarte census.  See
+   `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`.
 3. **Rank-`r` weighted-adjoint enumerator law.** C403 proves the rank-three case; Liang–Wang–
    Zhao own general `k`-adjoints and Cai–Fu–Wang the extension classification. The bounded
    conjecture — the finite-field weighted `(r-1)`-adjoint depth spectrum, punctured at
@@ -336,16 +334,21 @@ promotion of any lead goes through the normal C-ID process.
    `PGL_2(11)` has cyclic Sylow-11, so its mod-11 category is Brauer-tree-controlled, and the
    22-dimensional permutation module `F_11[G/A5]`, the four-dimensional odd Fourier block, and
    the rank-two profile plane with dimension-four kernel all live where decomposition data are
-   completely known. Identifying the rank drop with a named Brauer-tree constituent would give
-   "cubic-first memory" a modular-representation-theoretic meaning and a second proof route.
-   Bounded finite computation; REASONED, unallocated.
+   completely known.  C412 identifies each sheet as `P(1)` with Loewy series `1|9|1` and the depth
+   kernel as its `[1,1,1]` socle; C430 now proves that the outer-odd combination of the two sheet
+   socles is exactly the unique degree-two trade line.  C433's remaining positive target is the
+   canonical placement of the odd Fourier block and profile map relative to this fixed socle seam,
+   not another decomposition or rank-drop computation.  PARTLY SOLVED; bounded canonical-map gate.
 6. **A `K\G/H` information-lattice functor.** C403's matching quotient, C406's balanced
    recovery, C411's six profiles, and C379's decorated inversion compose into the exact lattice
    `22 -> 6 -> 2 -> 1`. The portable statement — for a subgroup `H <= PGL_2(q)` transitive on a
    decorated endpoint configuration, the recoverable-information levels are exactly the
    `K`-coset strata for the relevant scalar intersection subgroup `K` — is the natural
-   second-paper theorem over the same machinery the campaign is about to formalize. REASONED
-   synthesis.
+   second-paper theorem over the same machinery the campaign is about to formalize.  C430 adds the
+   intrinsic algebraic rung `affine radical -> sheet indicators -> equal-sum product algebra ->
+   sign line`; C434 should require this rung to be functorial under the proposed coset maps and to
+   yield decorated inversion, not merely reproduce subgroup strata. REASONED synthesis with one
+   exact local model.
 
 ### Doors opened, and standing open problems where progress is plausible
 

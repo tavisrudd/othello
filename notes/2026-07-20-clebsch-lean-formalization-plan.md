@@ -26,8 +26,8 @@ This adopts the replacement-spine direction for formalization planning. It does 
 manuscript or claim unrestricted priority. C399's current Lean arithmetic terminals plus its
 reproducible incidence/conic certificates are the explicit entry boundary; this campaign does not
 pretend to internalize their finite geometry or full group closures. Downstream symbolic
-implications become kernel-backed. Exhaustive ranks, balanced-half uniqueness, orbit tables, and
-coordinate incidence rows become compact Lean certificate leaves only when a sound checker theorem
+implications become kernel-backed. Exhaustive ranks, orbit tables, and coordinate incidence rows
+become compact Lean certificate leaves only when a sound checker theorem
 connects accepted data to the quantified proposition; otherwise they remain honestly Python-backed
 in the verification map.
 
@@ -132,27 +132,19 @@ group-algebra development in characteristic 11.
 
 ### C424 / F5 — balanced sheets and cubic orientation
 
-The balanced-half uniqueness claim — the two `q`-element sheets are the only complementary halves of
-the `2q` quotient points with equal first and second moments — is the campaign's only universal
-finite-exhaustion claim, so its verification route is fixed here, before dispatch, not chosen
-mid-task:
+The balanced-half uniqueness claim — the two `q`-element sheets are the only complementary halves
+of the `2q` quotient points with equal first and second moments — now uses C430's symbolic
+radical--Hadamard theorem; neither B3 nor H3 carries a subset-exhaustion leaf.  Formalize one
+abstract lemma for a two-sheet affine evaluation space: restriction surjectivity onto the two
+zero-sum hyperplanes, a one-dimensional second-moment radical whose evaluation separates the
+sheets, and equality of the two second moments imply that coordinatewise products fill the
+equal-sheet-sum hyperplane, whose orthogonal complement is the sheet-sign line.
 
-- **B3 (`2q=14`, `binom(14,7)=3432` halves):** direct in-kernel exhaustion with a checker theorem
-  over all balanced halves.
-- **H3 (`2q=22`, `binom(22,11)=705432` halves):** a meet-in-the-middle checker. Fix an `11+11`
-  split of the 22 quotient points; enumerate the `2^11` partial moment sums on each side; every
-  balanced `11`-subset decomposes uniquely across the two sides, so a sorted join over the two
-  `2^11` tables is exhaustive. The checker theorem certifies (i) each listed moment-balanced half is
-  genuinely balanced, (ii) the two sheets are listed, and (iii) a sorted-join soundness lemma, so no
-  balanced half is missed. The `2^11` enumeration, not the `binom(22,11)` one, is the object the
-  leaf carries.
-
-If the meet-in-the-middle leaf cannot meet the measured `single` profile, F5 falls back to a
-two-tier exit: kernel tier — B3 uniqueness, vanishing of both sheets' first and second moments (a
-22-coordinate check), the abstract index-two sign theorem, and the orientation theorem stated
-*conditional on* the H3 uniqueness hypothesis; certificate tier — H3 uniqueness carried as a
-Python-backed leaf and declared as such in the verification map. The fallback is taken only on a
-measured failure, and the choice is recorded in the report.
+The concrete B3/H3 leaves freeze only the ranks `6/10` on each sheet restriction, second-moment
+ranks/radicals `5/1` and `9/1`, and the two distinct radical levels.  C430's exact certificate and
+independent row-reduction replay provide the source data.  In H3 the two-dimensional affine-pairing
+radical is additionally the sum of the two C412 `P(1)` socles; its outer-odd line is the sheet-sign
+trade.  See `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`.
 
 The rest of F5 stays kernel-backed either way. Anti-invariance of the signed cubic reduces, via the
 abstract index-two theorem, to the permutation action on the 22 quotient vectors plus sheet parity
@@ -163,9 +155,8 @@ cubic is fixed by `PSL_2(q)`, negated by the outer coset, and has stabilizer `PS
 certified action. Derive the plane syzygies by expanding `P_M=P_0+Q Phi_M`.
 
 **Exit:** paper-facing reconstruction/orientation theorem with balanced-half uniqueness carried by
-the fixed route above (kernel for B3 and, if feasible, H3; else the declared two-tier boundary). Do
-not formalize the false uniqueness, Hessian, contraction, singular-locus, or linear cubic-to-Fourier
-claims.
+the symbolic C430 lemma and the bounded B3/H3 rank/radical leaves. Do not formalize the false
+uniqueness, Hessian, contraction, singular-locus, or linear cubic-to-Fourier claims.
 
 ### C425 / F6 — C411 double-coset and H3 depth--Fourier--parent bridge
 
@@ -275,7 +266,7 @@ All paths are relative to the repository root. The allocator reserved C420--C428
 | C421 / F2 | `lean/RelativeConicArcs/ClebschConicMatchingQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschConicMatchingQuotient.lean` | `notes/2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`; no generated data expected | imports the existing conic API; exits through exact secant/list pullbacks, four-point switch/divisibility, generic rank-one augmentation kernel, pointwise factor and boundary-form identities, arbitrary-size switch reversibility, and `Fin 4` connectivity; no geometric restriction-map bridge, matching count/switch span, word weight, full-product boundary bridge, or general-`2n` connectivity |
 | C422 / F3 | `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | `notes/2026-07-20-c422-clebsch-harmonic-quotient-lean.md`; no generated data expected | imports F2; exits through the degree `1/2/4` `F_5/F_7/F_11` Laplacian decompositions and quotient-span bridge |
 | C423 / F4 | `lean/RelativeConicArcs/ClebschFactorizationData.lean`; separate `lean/RelativeConicArcs/ClebschFactorizationA3.lean`, `ClebschFactorizationB3.lean`, and `ClebschFactorizationH3.lean` leaves; `lean/RelativeConicArcs/Gates/ClebschFactorization.lean` | `notes/2026-07-20-c423-clebsch-factorization-leaves-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F3 and newly generated data from the frozen C406 coordinates; exits through ranks `3/6/10`, lower-moment cancellation, and nonzero B3/H3 cubic |
-| C424 / F5 | `lean/RelativeConicArcs/ClebschBalancedSheets.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean`; `lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean` | `notes/2026-07-20-c424-clebsch-balanced-sheets-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F4; exits through balanced-half uniqueness (B3 in-kernel; H3 meet-in-the-middle or declared certificate tier), abstract index-two sign theorem, concrete anti-invariance/stabilizer, and plane syzygies |
+| C424 / F5 | `lean/RelativeConicArcs/ClebschBalancedSheets.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean`; `lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean` | `notes/2026-07-20-c424-clebsch-balanced-sheets-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F4; exits through C430 radical--Hadamard balanced-half rigidity with B3/H3 rank/radical leaves, abstract index-two sign theorem, concrete anti-invariance/stabilizer, and plane syzygies |
 | C425 / F6 | `lean/RelativeConicArcs/ClebschDoubleCosetDepthData.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthBase.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthPositive.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthNegative.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepth.lean`; `lean/RelativeConicArcs/Gates/ClebschDoubleCosetDepth.lean` | `notes/2026-07-20-c425-clebsch-double-coset-depth-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F5 plus `RelativeConicArcs.ClebschGatewayQ11Fusion` and `RelativeConicArcs.ClebschGatewayQ11Matching`; exits through `1,4,6 / 1,4,6`, six profiles, rank-two plane, cubic pushforward, odd-Fourier sign, and decorated parent recovery |
 | C426 / F7 | `lean/RelativeConicArcs/ClebschSchemeFourierData.lean`; `lean/RelativeConicArcs/ClebschSchemeFourier.lean`; optional `lean/RelativeConicArcs/ClebschSchemeIntersectionTensor.lean`; `lean/RelativeConicArcs/Gates/ClebschSchemeFourier.lean` | `notes/2026-07-20-c426-clebsch-scheme-fourier-lean.md`, `.py`, `.json`, and `.sha256` with that same stem; generated mathematical data use stable semantic provenance without task IDs in Lean | imports existing `RelativeConicArcs.ClebschGatewayA5FourierPhase`; mandatory full-trust exits are the scalar-line sum, `P=Q`, `P²=1331I`, multiplicity--valency equality, Fourier self-duality, and primitivity; intersection/Krein equality and the separate 877-fusion census remain exact external certificates unless their own checker leaves actually land |
 | C427 / F8 | `lean/RelativeConicArcs/ClebschSchemeChiralityData.lean`; `lean/RelativeConicArcs/ClebschSchemeChirality.lean`; `lean/RelativeConicArcs/Gates/ClebschReplacementSpine.lean` | `notes/2026-07-20-c427-clebsch-scheme-chirality-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F6/F7 and existing `RelativeConicArcs.Gates.ClebschGateway`; exits through six intrinsic blocks, unordered `10+10`, full/no-outer-lift evidence at its declared trust boundary, and the replacement-spine aggregate |
@@ -402,8 +393,8 @@ characteristic assumptions are bounded; and every certificate leaf has a checker
 provenance, replay, hash, and axiom-audit contract.
 
 A subsequent Fable review (`notes/2026-07-20-clebsch-lean-formalization-plan-fable-review.md`) found
-no blocking defect and drove the revisions folded in above: the F5 balanced-half verification route
-(B3 in-kernel; H3 meet-in-the-middle checker, else a declared two-tier exit), the F6
+no blocking defect and drove the revisions folded in above: the original F5 balanced-half
+verification route (subsequently replaced by C430's symbolic radical--Hadamard theorem), the F6
 derived-not-frozen sign-law obligation, the F7 intersection-tensor scoping and 126-pair primitivity
 certificate, the F8 frame-transport stabilizer bound and rank-16 verification-map note, the F6->F7
 dispatch-order clarification, and the F1 `Moments` namespace check. The two documentation errors it

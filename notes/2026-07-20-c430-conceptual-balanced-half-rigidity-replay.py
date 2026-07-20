@@ -13,6 +13,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 C406_PATH = HERE / "2026-07-20-c406-matching-module.py"
 CERT_PATH = HERE / "2026-07-20-c430-conceptual-balanced-half-rigidity.json"
+C412_CERT_PATH = HERE / "2026-07-20-c412-relative-cubic-depth-plane.json"
 
 
 def load_module(name: str, path: Path):
@@ -160,6 +161,51 @@ def replay_case(record):
     sheet_values = [sorted({values[position] for position in sheet}) for sheet in sheets]
     assert all(len(items) == 1 for items in sheet_values)
     assert sheet_values[0] != sheet_values[1]
+    socle_identification = None
+    if name == "H3":
+        affine_features = [[1] + vector for vector in vectors]
+        affine_rows = transpose(affine_features)
+        affine_gram = [
+            [sum(x * y for x, y in zip(left, right)) % prime for right in affine_rows]
+            for left in affine_rows
+        ]
+        affine_radical = nullspace(affine_gram, prime)
+        radical_functions = [
+            [sum(x * y for x, y in zip(coefficients, point)) % prime for point in affine_features]
+            for coefficients in affine_radical
+        ]
+        indicators = [
+            [1 if position in set(sheet) else 0 for position in range(2 * prime)]
+            for sheet in sheets
+        ]
+        assert rank(affine_gram, prime) == 9 and len(affine_radical) == 2
+        assert rank(transpose(radical_functions), prime) == 2
+        assert rank(transpose(radical_functions + indicators), prime) == 2
+        outer_element = min(full_group - psl_group)
+        outer_action = C406.action_permutation(outer_element, orbit, index)
+        assert all(
+            indicators[0][outer_action[position]] == indicators[1][position]
+            and indicators[1][outer_action[position]] == indicators[0][position]
+            and sign[outer_action[position]] == -sign[position] % prime
+            for position in range(2 * prime)
+        )
+        c412 = json.loads(C412_CERT_PATH.read_text())
+        brauer = c412["source"]["twisted_coinvariants"]["brauer_tree_depth_identification"]
+        assert brauer["loewy_layer_dimensions"] == [1, 9, 1]
+        assert brauer["odd_orbit_sum_depth_kernel"] == [[1, 1, 1]]
+        assert brauer["depth_kernel_is_projective_cover_socle_line"]
+        socle_identification = {
+            "affine_evaluation_pairing_rank": 9,
+            "affine_evaluation_pairing_radical_dimension": 2,
+            "affine_radical_evaluation_space_equals_two_sheet_indicator_span": True,
+            "even_radical_line": "constant function",
+            "outer_odd_radical_line": "sheet sign",
+            "outer_element_swaps_sheet_socles_and_negates_trade_line": True,
+            "each_sheet_module": "P(1)",
+            "loewy_layer_dimensions": [1, 9, 1],
+            "a4_fixed_depth_socle_coordinates": [1, 1, 1],
+            "c430_trade_line_is_c412_outer_odd_socle_line": True,
+        }
     return {
         "type": name,
         "field_order": prime,
@@ -168,6 +214,7 @@ def replay_case(record):
         "radical_sheet_values": sheet_values,
         "direct_degree_two_rank_crosscheck": feature_rank,
         "direct_trade_kernel_dimension_crosscheck": len(kernel),
+        "socle_identification": socle_identification,
     }
 
 

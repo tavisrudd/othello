@@ -79,10 +79,12 @@ mu_1=mu_2=0,             mu_3 != 0.
 
 Because each sheet has `q=0` elements in `F_q` and all lower signed moments vanish, `mu_3` is
 independent of `M_0`.  It is fixed by `PSL_2(q)` and negated by the outer coset under the induced
-polynomial action.  More strongly, among all `q`-subsets of the `2q` quotient points there are
-exactly two whose signed first and second moments vanish; they are the two complementary
-one-factorization sheets.  Hence the factorization-difference configuration intrinsically recovers
-the **unordered** B3/H3 sheet pair, and the nonzero cubic tensor carries its outer sign.
+polynomial action.  More strongly, C430 now proves symbolically that every field-valued signed
+trade orthogonal through degree two is a scalar sheet sign.  Thus the two complementary
+one-factorization sheets are the only balanced halves, and the second-moment radical itself gives
+a direct two-level recovery algorithm.  Hence the factorization-difference configuration
+intrinsically recovers the **unordered** B3/H3 sheet pair, and the nonzero cubic tensor carries its
+outer sign.  See `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`.
 
 This is the route around the failed linear test.  The classical one-factorizations are not being
 renamed as new: the new mechanism is that C403's conic-ideal quotient turns them into a common
@@ -114,9 +116,10 @@ sum epsilon(M) Phi_M^(symmetric 3)           = mu_3 != 0.
 
 Consequently no signed power-sum statistic of degree one or two or any linear functional thereof
 orients the sheets, while degree three does.  This is not a claim about every conceivable
-nonlinear statistic.  The low moments nevertheless recover the **unordered** pair: the exhaustive
-balanced-half theorem says that the two sheets are the only complementary halves with equal first
-and second moments.  The cubic supplies the sign exchanged when those two halves are swapped.
+nonlinear statistic.  The low moments nevertheless recover the **unordered** pair: C430's
+radical--Hadamard theorem says that the entire degree-two trade kernel is the sheet-sign line, so
+the two sheets are the only complementary halves with equal first and second moments.  The cubic
+supplies the sign exchanged when those two halves are swapped.
 
 These moment equalities give explicit plane syzygies before conic restriction.  Since each sheet
 has `q=0` members in `F_q`, expansion of `P_M=P_0+Q Phi_M` gives
@@ -247,7 +250,9 @@ common-refinement level:
 ```
 
 The balanced first/second moments recover the sheet level from the full factorization-point
-configuration; the cubic line is its orientation form.  C378's common refinement recovers the six
+configuration; C430 identifies the recovery map with the unique second-moment radical and the
+trade line with the outer-odd projective-cover socle.  The cubic line is its orientation form.
+C378's common refinement recovers the six
 double-coset classes and its singleton class supplies the golden matching pair; adding either
 oriented singleton matching invokes C379 and recovers the individual H3 parent.  None of this makes
 the cubic an invariant of the bare GRS child.

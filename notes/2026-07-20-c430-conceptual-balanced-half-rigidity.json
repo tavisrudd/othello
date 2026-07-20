@@ -39,6 +39,7 @@
         7,
         7
       ],
+      "socle_identification": null,
       "symbolically_predicted_degree_two_rank": 13,
       "type": "B3",
       "zero_sum_space_dimension_per_sheet": 6
@@ -86,6 +87,26 @@
         11,
         11
       ],
+      "socle_identification": {
+        "a4_fixed_depth_socle_coordinates": [
+          1,
+          1,
+          1
+        ],
+        "affine_evaluation_pairing_radical_dimension": 2,
+        "affine_evaluation_pairing_rank": 9,
+        "affine_radical_evaluation_space_equals_two_sheet_indicator_span": true,
+        "c430_trade_line_is_c412_outer_odd_socle_line": true,
+        "each_sheet_module": "P(1)",
+        "even_radical_line": "constant function",
+        "loewy_layer_dimensions": [
+          1,
+          9,
+          1
+        ],
+        "outer_element_swaps_sheet_socles_and_negates_trade_line": true,
+        "outer_odd_radical_line": "sheet sign"
+      },
       "symbolically_predicted_degree_two_rank": 21,
       "type": "H3",
       "zero_sum_space_dimension_per_sheet": 10
@@ -107,19 +128,26 @@
     "2026-07-20-c406-matching-orbit-scout.json": {
       "bytes": 25443,
       "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "2026-07-20-c412-relative-cubic-depth-plane.json": {
+      "bytes": 81411,
+      "sha256": "01aaf1169e7747724c51969a78234e9fe0a3c62061f557d19e9f7b5d7ce11c84"
     }
   },
-  "schema": "c430-conceptual-balanced-half-rigidity-v1",
+  "schema": "c430-conceptual-balanced-half-rigidity-v2",
   "summary": {
     "all_degree_at_most_two_signed_trades_are_scalar_sheet_signs": true,
     "b3_and_h3_inputs_satisfy_symbolic_hypotheses": true,
     "equal_half_sign_trade_is_unique_up_to_complement": true,
-    "finite_subset_exhaustion_is_not_load_bearing": true
+    "finite_subset_exhaustion_is_not_load_bearing": true,
+    "h3_affine_radical_is_the_sum_of_the_two_sheet_socles": true,
+    "h3_trade_line_is_the_outer_odd_c412_socle_line": true
   },
   "theorem": {
     "degree_at_most_two_evaluation_space": "equal_sheet_sum_hyperplane",
     "name": "radical_hadamard_trade_rigidity",
     "orthogonal_trade_space": "sheet_sign_line",
+    "recovery_algorithm": "compute the second-moment radical covector and split its two evaluation levels",
     "scope": "any two-sheet field configuration satisfying the certified first/second-moment, restriction-surjectivity, and radical-separation hypotheses"
   },
   "verdict": "SYMBOLIC_RADICAL_HADAMARD_RIGIDITY_REPLACES_HALF_EXHAUSTION"

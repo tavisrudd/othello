@@ -50,6 +50,13 @@ classical exceptional one-factorizations
   + the H3 scalar-A4 depth--Fourier bridge.
 ```
 
+**C430 post-audit upgrade.**  The balanced-half clause is no longer an exhaustive finite theorem.
+The symbolic radical--Hadamard argument proves that every field-valued degree-two trade is a scalar
+sheet sign, and the unique second-moment radical gives direct sheet recovery.  Its H3 odd line is
+also exactly C412's projective-cover socle line.  This strengthens the likely-new composition while
+leaving the classical one-factorization/Delsarte-design ownership and the bounded priority language
+unchanged; see `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`.
+
 The three-dimensional relative-invariant space, failed polarization/singular-locus recovery,
 and scalar-weight obstruction are valuable positioning and scope controls. They are not novelty
 headlines.

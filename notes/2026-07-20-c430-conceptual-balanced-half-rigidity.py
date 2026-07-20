@@ -10,11 +10,12 @@ import json
 from pathlib import Path
 
 
-SCHEMA = "c430-conceptual-balanced-half-rigidity-v1"
+SCHEMA = "c430-conceptual-balanced-half-rigidity-v2"
 HERE = Path(__file__).resolve().parent
 OUTPUT = Path(__file__).with_suffix(".json")
 C406_PATH = HERE / "2026-07-20-c406-matching-module.py"
 C406_CERT_PATH = HERE / "2026-07-20-c406-matching-module.json"
+C412_CERT_PATH = HERE / "2026-07-20-c412-relative-cubic-depth-plane.json"
 
 
 def load_module(name: str, path: Path):
@@ -141,6 +142,68 @@ def case_certificate(record):
     assert len(trade_kernel) == 1
     assert projectively_equal(trade_kernel[0], sign, prime)
 
+    socle_identification = None
+    if name == "H3":
+        affine_evaluation_matrix = C406.transpose(affine_features)
+        affine_gram = [
+            [
+                sum(left * right for left, right in zip(left_row, right_row)) % prime
+                for right_row in affine_evaluation_matrix
+            ]
+            for left_row in affine_evaluation_matrix
+        ]
+        affine_gram_radical = C406.nullspace(affine_gram, prime)
+        assert C406.rank(affine_gram, prime) == prime - 2
+        assert len(affine_gram_radical) == 2
+        radical_functions = [
+            [
+                sum(coefficient * feature for coefficient, feature in zip(vector, point))
+                % prime
+                for point in affine_features
+            ]
+            for vector in affine_gram_radical
+        ]
+        sheet_indicators = [
+            [1 if index in set(sheet) else 0 for index in range(2 * prime)]
+            for sheet in sheets
+        ]
+        assert C406.column_rank(radical_functions, prime) == 2
+        assert C406.column_rank(sheet_indicators, prime) == 2
+        assert C406.column_rank(radical_functions + sheet_indicators, prime) == 2
+
+        outer_element = min(full_group - psl_group)
+        outer_action = C406.action_permutation(outer_element, orbit, orbit_index)
+        assert all(
+            sheet_indicators[0][outer_action[index]] == sheet_indicators[1][index]
+            and sheet_indicators[1][outer_action[index]] == sheet_indicators[0][index]
+            for index in range(2 * prime)
+        )
+        assert all(sign[outer_action[index]] == -sign[index] % prime for index in range(2 * prime))
+
+        c412 = json.loads(C412_CERT_PATH.read_text())
+        c412_source = c412["source"]
+        c412_brauer = c412_source["twisted_coinvariants"]["brauer_tree_depth_identification"]
+        assert c412_source["sheet_affine_ranks"] == [9, 9]
+        assert c412_source["sheet_affine_dependencies"] == [[[1] * 11], [[1] * 11]]
+        assert c412_source["each_sheet_is_the_nine_dimensional_permutation_heart_affinely"]
+        assert c412_brauer["psl_permutation_module_is_projective_indecomposable_cover_of_trivial"]
+        assert c412_brauer["loewy_layer_dimensions"] == [1, 9, 1]
+        assert c412_brauer["odd_orbit_sum_depth_kernel"] == [[1, 1, 1]]
+        assert c412_brauer["depth_kernel_is_projective_cover_socle_line"]
+        assert c412_brauer["j_odd_paired_slice_is_the_a4_fixed_projective_cover_slice_with_sign_attached"]
+        socle_identification = {
+            "affine_evaluation_pairing_rank": C406.rank(affine_gram, prime),
+            "affine_evaluation_pairing_radical_dimension": len(affine_gram_radical),
+            "affine_radical_evaluation_space_equals_two_sheet_indicator_span": True,
+            "even_radical_line": "constant function",
+            "outer_odd_radical_line": "sheet sign",
+            "outer_element_swaps_sheet_socles_and_negates_trade_line": True,
+            "each_sheet_module": "P(1)",
+            "loewy_layer_dimensions": c412_brauer["loewy_layer_dimensions"],
+            "a4_fixed_depth_socle_coordinates": c412_brauer["odd_orbit_sum_depth_kernel"][0],
+            "c430_trade_line_is_c412_outer_odd_socle_line": True,
+        }
+
     for degree in (0, 1, 2):
         signed_moment = []
         for coefficient, vector in zip(sign, vectors):
@@ -174,6 +237,7 @@ def case_certificate(record):
         "direct_degree_two_rank_crosscheck": direct_degree_two_rank,
         "direct_trade_kernel_dimension_crosscheck": len(trade_kernel),
         "direct_trade_kernel_is_sheet_sign_crosscheck": True,
+        "socle_identification": socle_identification,
         "exhaustive_half_search_used": False,
     }
 
@@ -196,12 +260,15 @@ def build_certificate():
             "degree_at_most_two_evaluation_space": "equal_sheet_sum_hyperplane",
             "orthogonal_trade_space": "sheet_sign_line",
             "scope": "any two-sheet field configuration satisfying the certified first/second-moment, restriction-surjectivity, and radical-separation hypotheses",
+            "recovery_algorithm": "compute the second-moment radical covector and split its two evaluation levels",
         },
         "cases": cases,
         "summary": {
             "b3_and_h3_inputs_satisfy_symbolic_hypotheses": True,
             "all_degree_at_most_two_signed_trades_are_scalar_sheet_signs": True,
             "equal_half_sign_trade_is_unique_up_to_complement": True,
+            "h3_affine_radical_is_the_sum_of_the_two_sheet_socles": True,
+            "h3_trade_line_is_the_outer_odd_c412_socle_line": True,
             "finite_subset_exhaustion_is_not_load_bearing": True,
         },
         "inputs": {
@@ -209,6 +276,7 @@ def build_certificate():
             for path in (
                 C406_PATH,
                 C406_CERT_PATH,
+                C412_CERT_PATH,
                 C406.SCOUT_PATH,
                 C406.C399_PATH,
             )

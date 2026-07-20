@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Verdict:** `THEOREM; RADICAL--HADAMARD RIGIDITY REPLACES THE H3 HALF EXHAUSTION`
+**Verdict:** `THEOREM; RADICAL--HADAMARD RIGIDITY REPLACES THE H3 HALF EXHAUSTION; TRADE LINE IS THE OUTER-ODD PROJECTIVE-COVER SOCLE`
 
 ## Result
 
@@ -17,6 +17,9 @@ and second moments.
 This is stronger than the former `binom(22,11)=705432` H3 check: it classifies **every**
 field-valued signed trade orthogonal through degree two, not only `+-1` vectors of Hamming weight
 eleven.  No subset exhaustion or meet-in-the-middle join is load-bearing.
+
+It also gives a direct recovery algorithm: compute the unique linear second-moment radical,
+evaluate it on the `2q` points, and take its two level sets.  These are exactly the two sheets.
 
 ## Abstract theorem
 
@@ -105,6 +108,54 @@ In both cases the certificate also checks separate zero first moments, equality 
 moments, and that the direct degree-two trade kernel is the sheet-sign line.  The H3 input therefore
 uses the certified `9+1` rank/radical structure requested by C430; it does not enumerate 11-subsets.
 
+## C412 socle identification
+
+The modular interpretation suggested after C430 is exact, not merely an analogy.  Let `L` be the
+eleven-dimensional H3 affine evaluation space on the 22 quotient points.  Its evaluation pairing
+has rank nine and a two-dimensional radical.  Direct calculation gives
+
+```text
+rad(L) = span {e_+,e_-},
+```
+
+where `e_+` and `e_-` are the two sheet indicators.  C412 independently identifies the
+permutation module on each sheet with the projective cover `P(1)` having Loewy series `1|9|1`; its
+constant line is `soc(P(1))`.  Therefore
+
+```text
+rad(L) = soc(P(1)_+) direct_sum soc(P(1)_-).
+```
+
+The outer element swaps these two socles.  Their even line is the global constant function, while
+their outer-odd line is `e_+-e_-`, exactly C430's one-dimensional degree-two trade kernel.  On the
+`A4`-fixed orbit-sum slice this same line has C412 coordinates `[1,1,1]` and is precisely the depth
+socle killed by the rank-two depth map.
+
+This closes the proposed C430--C412 identification:
+
+```text
+C430 sheet-sign trade line = C412 outer-odd projective-cover socle line.
+```
+
+It does **not** identify the relative-cubic Tate plane with the depth plane; C412's divided-transfer
+obstruction remains unchanged.
+
+## Free corollaries and reuse test
+
+1. **Recognition:** the unordered sheets are recovered by one nullspace and two-level evaluation,
+   rather than balanced-subset search.
+2. **Formalization:** C424/F5 needs one abstract radical--Hadamard lemma and small rank/radical
+   leaves, not a `2^11` meet-in-the-middle checker.
+3. **Portable obstruction:** any proposed two-sheet strength-two trade is killed once restriction
+   surjectivity and radical separation are proved.  Failure of either condition localizes the only
+   place an exotic trade can live.
+4. **Modular meaning:** in the H3 case the constant and signed radical lines are the even and odd
+   combinations of the two projective-cover socles.  This is the canonical starting point for
+   C433, while the integral/Frobenius behavior of the odd line is a bounded input to C429.
+5. **Information lattice:** the intrinsic algebra chain is now
+   `affine radical -> sheet indicators -> equal-sheet-sum product algebra -> sheet-sign trade line`,
+   a concrete local model for C434's proposed `K\G/H` functor.
+
 ## Reproducibility
 
 Run from the repository root with Python 3.13.12:
@@ -123,15 +174,17 @@ geometric constructor with the primary calculation.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| `2026-07-20-c430-conceptual-balanced-half-rigidity.py` | 8,899 | `8c10f29ff56cbda95dcb522b9cafc8196640bbe0ee9e9f93a59202d206ef9a95` |
-| `2026-07-20-c430-conceptual-balanced-half-rigidity-replay.py` | 6,407 | `634181cf3780e83f337469e31d40eb3b92196d08860c68cca35fc5776a7673b2` |
-| `2026-07-20-c430-conceptual-balanced-half-rigidity.json` | 3,533 | `7821439c325204b45269e2b1b29ca6174c448243d1803c9b690d9c4811def96e` |
+| `2026-07-20-c430-conceptual-balanced-half-rigidity.py` | 12,559 | `ef2e6f0c9249ebf038f9d54ec80ceb48abdfe8601e89d4da3d34a5c9a6b9c337` |
+| `2026-07-20-c430-conceptual-balanced-half-rigidity-replay.py` | 8,869 | `20e6c214786aab7ae2be7e512fa01774a6bafd08d6153941c3880acadb8a2a8c` |
+| `2026-07-20-c430-conceptual-balanced-half-rigidity.json` | 4,646 | `eebfd0525c94ac0bcb7965ab33b6d11a698242e608d9d1a40cebaa0a2b451098` |
 
 The trusted computational boundary is exact finite-field arithmetic in the two scripts plus the
 committed C406/C399 matching and conic-quotient constructors whose hashes are embedded in the JSON.
-The abstract proof above is not machine-checked here.  The certificate proves the hypotheses for
-the frozen `q=7,11` configurations; it does not assert that every unrelated index-two group orbit
-automatically satisfies radical separation or restriction surjectivity.
+The socle identification additionally consumes C412's committed projective-cover certificate,
+whose hash is also embedded in the JSON.  The abstract proof above is not machine-checked here.
+The certificate proves the hypotheses for the frozen `q=7,11` configurations; it does not assert
+that every unrelated index-two group orbit automatically satisfies radical separation or
+restriction surjectivity.
 
 ## Claim and formalization boundary
 

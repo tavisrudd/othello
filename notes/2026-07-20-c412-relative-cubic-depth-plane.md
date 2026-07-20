@@ -132,6 +132,13 @@ bi-Hecke space, the kernel is the three-dimensional even half plus this one-dime
 socle.  This gives a Brauer-tree second proof of C411's `6 -> 2` rank drop and a modular meaning for
 the depth trade.
 
+C430 subsequently identifies this socle directly in the factorization-difference geometry.  The
+rank-nine affine evaluation pairing on the 22 H3 points has two-dimensional radical exactly
+`soc(P(1)_+) direct_sum soc(P(1)_-)`; its even line is constant and its outer-odd line is both the
+unique degree-two sheet-sign trade and the `[1,1,1]` depth socle above.  Thus the proposed
+C430--C412 socle identification is positive and canonical.  See
+`notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`.
+
 It does not yet identify `P` with the relative-cubic Tate plane.  The projective cover's ordinary
 endomorphisms are `aI+bJ_11` and preserve its socle, so they cannot change the source relation line
 into the depth socle line.  Any remaining correction must be derived rather than an ordinary
