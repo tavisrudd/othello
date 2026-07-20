@@ -494,10 +494,52 @@ The ambient formula yields several exact consequences without reopening the fail
    collapse back to exactly the mirrors.  This is C399 reconstruction viewed as a literal
    coefficient crossing in the weighted-adjoint spectrum.
 
-The analogous higher-degree object would replace the Grassmannian of lines by the parameter space
-of degree-`r` zero loci and stratify it by weighted incidence with the arrangement complement.  The
-2-adjoint theorem identifies the degree-one base case; constructing a comparably canonical
-higher-degree transform remains an active C403 attack rather than a claim in this tranche.
+## Higher-degree Veronese-adjoint transform
+
+The degree-one theorem has an exact higher-degree extension, but it exposes two additional
+statistics.  Let `R_r=H^0(PG(2,q),O(r))`, let `C_f=V(f)` for a nonzero homogeneous form, and define
+
+```text
+c_q(f)     = |C_f(F_q)|,
+i_A(f)     = sum_(H in A) |C_f(F_q) cap H|,
+delta_r(f) = sum_(X singular, f(X)=0) (m(X)-1).
+```
+
+For every singular point `X`, the condition `f(X)=0` is a hyperplane in the coefficient space
+`R_r`; its normal is the degree-`r` Veronese image of `X`.  Weighting this evaluation hyperplane by
+`m(X)-1` makes `delta_r` the depth in a canonical weighted **Veronese-adjoint** arrangement.
+Pointwise inclusion--exclusion across the mirrors gives
+
+```text
+|B cap C_f| = c_q(f)-i_A(f)+delta_r(f),
+
+wt(ev_B(f)) = n-c_q(f)+i_A(f)-delta_r(f).
+```
+
+If the degree-`r` evaluation map on `B` has kernel dimension `kappa`, the exact Hamming enumerator is
+
+```text
+W_(C_r)(z) = q^(-kappa) (
+    1 + (q-1) sum_([f] in P(R_r)) z^(n-c_q(f)+i_A(f)-delta_r(f)) ).
+```
+
+Projective kernel classes simply contribute weight zero, so the fibre division by `q^kappa` is
+exact.  For `r=1`, a nonmirror line has `c_q=q+1` and `i_A=N`, while a mirror has `i_A=q+N`;
+the formula collapses to the punctured weighted 2-adjoint theorem above.  For `r>=2`, adjoint depth
+alone cannot suffice: curve point count and total mirror-section count genuinely vary.  This
+pinpoints the extra state a higher-order section profile must retain.
+
+The certificate exhaustively checks the first pilot: all `5^6-1=15,624` nonzero quadrics on the
+`A3` conic-phase complement over `F_5`.  The complement has length `6`, the quadratic evaluation
+kernel has dimension `1`, and the resulting `[6,5,2]_5` code has
+
+```text
+W(z) = 1 + 60z^2 + 240z^3 + 780z^4 + 1224z^5 + 820z^6.
+```
+
+All forms satisfy the displayed identity, and their `53` distinct
+`(c_q,i_A,delta_r,weight)` strata are recorded.  “Veronese-adjoint” is used descriptively here;
+no literature-priority claim is made for the construction or formula.
 
 ## Evidence and independent replay
 
@@ -518,18 +560,19 @@ samples, both same-lattice counterexamples, and the exact `A3/B3` projective ref
 decompositions, the `H3` q=11 orbit decomposition, and the q=13/q=19 Burnside branch replays.  All
 projective codeword totals equal `11^3` for the q=11 code fixtures.  The orbit path additionally
 checks every group element order, nonidentity fixed-depth incidence ledger, and closed labelled
-orbit-count formula.
+orbit-count formula.  The higher-degree path checks all `15,624` nonzero quadrics in the `A3/F_5`
+pilot, its one-dimensional evaluation kernel, and all `53` joint statistic strata.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | `46,964` | `2545b04a71136d33cfcfa1f8f62c5bb5c01e0e0869a00482753629aa2a1eaf6e` |
-| certificate `.json` | `56,407` | `d67fa29f8e5f242e35a14a1e7669710c840ca6e072c4a57335acf57b1ed35ed2` |
+| checker `.py` | `51,034` | `bd15507e261e80bd0389ebf2aeda2b36c8a1ec521841b63202955c0486ee6482` |
+| certificate `.json` | `65,970` | `da0c06c2f37d220041fe7f6b24999f37f65c14ba1114f3bc6d1c68ca65f49a65` |
 
 The trusted boundary is exact Python integer/modular arithmetic, elementary projective incidence,
 the standard rank-three supersolvable-implies-free theorem, and C339's independently replayed
 characteristic-zero `H3` special-line ledger.  The computation does not prove the general published
-adjoint-stratification theorems, an arbitrary-field orbit classification, or any higher-degree
-section-profile claim.
+adjoint-stratification theorems, an arbitrary-field stabilizer-orbit classification, or a uniform
+classification of the higher-degree joint `(c_q,i_A,delta_r)` strata.
 
 ## Focused literature boundary
 
@@ -589,5 +632,5 @@ exact falsifier for level-zero invariants and a replay certificate for the posit
   multiplicity bounds explain the extremal uniform counterexample.
 - The line sections also give exact locality-two repair and disjoint-availability profiles.
 - C403 remains the active crowns task.  Next attacks are stabilizer-type refinement of the proved
-  depth-labelled orbit laws, full adjoint/multiarrangement source closure, and higher-degree section
-  transforms; C404 is queued behind it rather than replacing it.
+  depth-labelled orbit laws, full adjoint/multiarrangement source closure, and a nontrivial uniform
+  classification of higher-degree joint strata; C404 is queued behind it rather than replacing it.

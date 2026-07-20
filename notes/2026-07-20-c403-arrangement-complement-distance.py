@@ -13,7 +13,7 @@ import argparse
 import hashlib
 import json
 from collections import Counter, defaultdict
-from itertools import combinations
+from itertools import combinations, product
 from pathlib import Path
 from typing import Iterable
 
@@ -911,6 +911,107 @@ def certify_two_pencil_samples(prime: int) -> dict[str, object]:
     }
 
 
+def quadratic_value(
+    coefficients: tuple[int, ...], point: tuple[int, int, int], prime: int
+) -> int:
+    x, y, z = point
+    monomials = (x * x, y * y, z * z, x * y, x * z, y * z)
+    return sum(coefficient * monomial for coefficient, monomial in zip(coefficients, monomials)) % prime
+
+
+def degree_two_veronese_adjoint_pilot() -> dict[str, object]:
+    prime = 5
+    lines = arrangement(
+        (
+            (1, 0, 0),
+            (0, 1, 0),
+            (0, 0, 1),
+            (1, -1, 0),
+            (1, 0, -1),
+            (0, 1, -1),
+        ),
+        prime,
+    )
+    universe = projective_objects(prime)
+    complement = tuple(
+        point for point in universe if not any(incident(line, point, prime) for line in lines)
+    )
+    blocks = intersection_blocks(lines, prime)
+    singular_weights = {point: len(indices) - 1 for point, indices in blocks.items()}
+    preimage_weight_counts: Counter[int] = Counter()
+    joint_statistic_counts: Counter[tuple[int, int, int, int]] = Counter()
+    identity_checks = 0
+    for coefficients in product(range(prime), repeat=6):
+        direct_weight = sum(
+            quadratic_value(coefficients, point, prime) != 0 for point in complement
+        )
+        preimage_weight_counts[direct_weight] += 1
+        if not any(coefficients):
+            continue
+        curve = {
+            point for point in universe if quadratic_value(coefficients, point, prime) == 0
+        }
+        curve_points = len(curve)
+        mirror_section_sum = sum(
+            sum(point in curve and incident(line, point, prime) for point in universe)
+            for line in lines
+        )
+        veronese_adjoint_depth = sum(
+            weight
+            for point, weight in singular_weights.items()
+            if quadratic_value(coefficients, point, prime) == 0
+        )
+        complement_zeros = curve_points - mirror_section_sum + veronese_adjoint_depth
+        if len(complement) - direct_weight != complement_zeros:
+            raise AssertionError("quadratic Veronese-adjoint zero-count identity failed")
+        joint_statistic_counts[
+            (curve_points, mirror_section_sum, veronese_adjoint_depth, direct_weight)
+        ] += 1
+        identity_checks += 1
+    kernel_size = preimage_weight_counts[0]
+    kernel_dimension = 0
+    residual = kernel_size
+    while residual > 1 and residual % prime == 0:
+        residual //= prime
+        kernel_dimension += 1
+    if residual != 1:
+        raise AssertionError("quadratic evaluation kernel size is not a field power")
+    if any(count % kernel_size for count in preimage_weight_counts.values()):
+        raise AssertionError("quadratic codeword fibres do not have constant kernel size")
+    code_weight_counts = {
+        weight: count // kernel_size for weight, count in sorted(preimage_weight_counts.items())
+    }
+    if sum(code_weight_counts.values()) != prime ** (6 - kernel_dimension):
+        raise AssertionError("quadratic codeword enumerator has wrong total")
+    return {
+        "arrangement": "A3",
+        "q": prime,
+        "degree": 2,
+        "complement_length": len(complement),
+        "ambient_form_dimension": 6,
+        "evaluation_kernel_dimension": kernel_dimension,
+        "code_dimension": 6 - kernel_dimension,
+        "nonzero_form_identity_checks": identity_checks,
+        "formula": (
+            "|B cap V(f)|=|V(f)(F_q)|-sum_H |V(f) cap H|"
+            "+sum_(P singular, f(P)=0)(m(P)-1)"
+        ),
+        "code_weight_enumerator": {
+            str(weight): count for weight, count in code_weight_counts.items()
+        },
+        "joint_statistic_counts": [
+            {
+                "curve_points": statistics[0],
+                "mirror_section_sum": statistics[1],
+                "veronese_adjoint_depth": statistics[2],
+                "codeword_weight": statistics[3],
+                "form_count": count,
+            }
+            for statistics, count in sorted(joint_statistic_counts.items())
+        ],
+    }
+
+
 def build_certificate() -> dict[str, object]:
     prime = 11
     a3 = arrangement(
@@ -1069,6 +1170,7 @@ def build_certificate() -> dict[str, object]:
             for name, q in (("A3", 5), ("B3", 7), ("H3", 11))
         },
         "two_pencil_supersolvable_family": certify_two_pencil_samples(prime),
+        "degree_two_veronese_adjoint_pilot": degree_two_veronese_adjoint_pilot(),
         "fixtures": fixtures,
         "comparisons": {
             "ordinary_characteristic_failure": {

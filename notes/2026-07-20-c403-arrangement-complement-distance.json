@@ -1174,6 +1174,398 @@
       "q": 11
     }
   },
+  "degree_two_veronese_adjoint_pilot": {
+    "ambient_form_dimension": 6,
+    "arrangement": "A3",
+    "code_dimension": 5,
+    "code_weight_enumerator": {
+      "0": 1,
+      "2": 60,
+      "3": 240,
+      "4": 780,
+      "5": 1224,
+      "6": 820
+    },
+    "complement_length": 6,
+    "degree": 2,
+    "evaluation_kernel_dimension": 1,
+    "formula": "|B cap V(f)|=|V(f)(F_q)|-sum_H |V(f) cap H|+sum_(P singular, f(P)=0)(m(P)-1)",
+    "joint_statistic_counts": [
+      {
+        "codeword_weight": 5,
+        "curve_points": 1,
+        "form_count": 240,
+        "mirror_section_sum": 0,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 1,
+        "form_count": 720,
+        "mirror_section_sum": 1,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 1,
+        "form_count": 120,
+        "mirror_section_sum": 2,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 1,
+        "form_count": 160,
+        "mirror_section_sum": 3,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 0,
+        "curve_points": 6,
+        "form_count": 4,
+        "mirror_section_sum": 0,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 2,
+        "curve_points": 6,
+        "form_count": 72,
+        "mirror_section_sum": 2,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 6,
+        "form_count": 288,
+        "mirror_section_sum": 3,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 2,
+        "curve_points": 6,
+        "form_count": 48,
+        "mirror_section_sum": 3,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 792,
+        "mirror_section_sum": 4,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 6,
+        "form_count": 96,
+        "mirror_section_sum": 4,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 912,
+        "mirror_section_sum": 5,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 720,
+        "mirror_section_sum": 5,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 6,
+        "form_count": 192,
+        "mirror_section_sum": 5,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 224,
+        "mirror_section_sum": 6,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 984,
+        "mirror_section_sum": 6,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 828,
+        "mirror_section_sum": 6,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 6,
+        "form_count": 96,
+        "mirror_section_sum": 6,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 384,
+        "mirror_section_sum": 7,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 1440,
+        "mirror_section_sum": 7,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 384,
+        "mirror_section_sum": 7,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 888,
+        "mirror_section_sum": 8,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 1056,
+        "mirror_section_sum": 8,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 192,
+        "mirror_section_sum": 8,
+        "veronese_adjoint_depth": 4
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 6,
+        "form_count": 48,
+        "mirror_section_sum": 8,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 640,
+        "mirror_section_sum": 9,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 816,
+        "mirror_section_sum": 9,
+        "veronese_adjoint_depth": 4
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 96,
+        "mirror_section_sum": 9,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 480,
+        "mirror_section_sum": 10,
+        "veronese_adjoint_depth": 4
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 336,
+        "mirror_section_sum": 10,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 96,
+        "mirror_section_sum": 10,
+        "veronese_adjoint_depth": 6
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 216,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 6,
+        "form_count": 96,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 6
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 6,
+        "form_count": 88,
+        "mirror_section_sum": 12,
+        "veronese_adjoint_depth": 6
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 6,
+        "form_count": 12,
+        "mirror_section_sum": 12,
+        "veronese_adjoint_depth": 8
+      },
+      {
+        "codeword_weight": 2,
+        "curve_points": 11,
+        "form_count": 48,
+        "mirror_section_sum": 9,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 11,
+        "form_count": 12,
+        "mirror_section_sum": 10,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 11,
+        "form_count": 48,
+        "mirror_section_sum": 10,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 2,
+        "curve_points": 11,
+        "form_count": 12,
+        "mirror_section_sum": 10,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 11,
+        "form_count": 24,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 0
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 11,
+        "form_count": 96,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 1
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 11,
+        "form_count": 288,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 2
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 11,
+        "form_count": 192,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 2,
+        "curve_points": 11,
+        "form_count": 120,
+        "mirror_section_sum": 11,
+        "veronese_adjoint_depth": 4
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 11,
+        "form_count": 120,
+        "mirror_section_sum": 12,
+        "veronese_adjoint_depth": 3
+      },
+      {
+        "codeword_weight": 3,
+        "curve_points": 11,
+        "form_count": 240,
+        "mirror_section_sum": 12,
+        "veronese_adjoint_depth": 4
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 11,
+        "form_count": 144,
+        "mirror_section_sum": 14,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 11,
+        "form_count": 48,
+        "mirror_section_sum": 15,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 11,
+        "form_count": 48,
+        "mirror_section_sum": 15,
+        "veronese_adjoint_depth": 6
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 11,
+        "form_count": 96,
+        "mirror_section_sum": 16,
+        "veronese_adjoint_depth": 5
+      },
+      {
+        "codeword_weight": 5,
+        "curve_points": 11,
+        "form_count": 96,
+        "mirror_section_sum": 16,
+        "veronese_adjoint_depth": 6
+      },
+      {
+        "codeword_weight": 4,
+        "curve_points": 11,
+        "form_count": 168,
+        "mirror_section_sum": 16,
+        "veronese_adjoint_depth": 7
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 11,
+        "form_count": 48,
+        "mirror_section_sum": 19,
+        "veronese_adjoint_depth": 8
+      },
+      {
+        "codeword_weight": 6,
+        "curve_points": 11,
+        "form_count": 12,
+        "mirror_section_sum": 20,
+        "veronese_adjoint_depth": 9
+      }
+    ],
+    "nonzero_form_identity_checks": 15624,
+    "q": 5
+  },
   "field_convention": "normalized triples for points and dual lines of PG(2,p)",
   "fixtures": {
     "A3_q11": {
