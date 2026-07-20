@@ -215,8 +215,17 @@
       "last": 405,
       "purpose": "C399 arrangement-code parent-fibre and decorated-inversion successors",
       "sequence": 24
+    },
+    {
+      "count": 1,
+      "first": 406,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 406,
+      "purpose": "bounded Coxeter factorization-memory and flagship compatibility gate",
+      "sequence": 25
     }
   ],
-  "next_id": 406,
+  "next_id": 407,
   "schema": "codex-task-id-allocations-v1"
 }
