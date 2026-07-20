@@ -125,6 +125,178 @@ def column_components(
     return sorted(components)
 
 
+def ordered_six_points(c341, q: int, tau: int) -> list[tuple[int, int, int]]:
+    raw = [
+        (0, 1, 1 - tau),
+        (0, 1, tau - 1),
+        (1, 1 - tau, 0),
+        (1, tau - 1, 0),
+        (1, 0, -tau),
+        (1, 0, tau),
+    ]
+    return [c341.normalize(point, q) for point in raw]
+
+
+def projective_equivalences(
+    c341, source: list[tuple[int, int, int]], target: list[tuple[int, int, int]], q: int
+) -> list[tuple[int, ...]]:
+    passing: list[tuple[int, ...]] = []
+    for permutation in itertools.permutations(range(6)):
+        matrix = c341.frame_map(
+            source[:4], [target[permutation[index]] for index in range(4)], q
+        )
+        if all(
+            c341.normalize(c341.mat_vec(matrix, source[index], q), q)
+            == target[permutation[index]]
+            for index in range(6)
+        ):
+            passing.append(permutation)
+    return passing
+
+
+def induced_six_point_action(
+    c341, matrices, points: list[tuple[int, int, int]], q: int
+) -> set[tuple[int, ...]]:
+    point_index = {point: index for index, point in enumerate(points)}
+    return {
+        tuple(
+            point_index[c341.normalize(c341.mat_vec(matrix, point, q), q)]
+            for point in points
+        )
+        for matrix in matrices
+    }
+
+
+def graph_distances(
+    vectors: list[tuple[int, int, int]], steps: set[tuple[int, int, int]], q: int
+) -> dict[tuple[int, int, int], int]:
+    zero = (0, 0, 0)
+    distances = {zero: 0}
+    queue = deque([zero])
+    while queue:
+        point = queue.popleft()
+        for step in steps:
+            neighbor = tuple((point[index] + step[index]) % q for index in range(3))
+            if neighbor not in distances:
+                distances[neighbor] = distances[point] + 1
+                queue.append(neighbor)
+    assert len(distances) == len(vectors)
+    return distances
+
+
+def det3_mod(matrix: tuple[tuple[int, int, int], ...], q: int) -> int:
+    return (
+        matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1])
+        - matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0])
+        + matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
+    ) % q
+
+
+def binary_refinement(
+    rows: list[bytes], cells: list[list[int]], point: int | None = None
+) -> list[list[int]]:
+    if point is not None:
+        cells = split_singleton(cells, point)
+    while len(cells) < len(rows):
+        cell_of = [0] * len(rows)
+        for cell_index, cell in enumerate(cells):
+            for vertex in cell:
+                cell_of[vertex] = cell_index
+        buckets: dict[tuple[object, ...], list[int]] = {}
+        for old_cell, cell in enumerate(cells):
+            for vertex in cell:
+                counts = [[0, 0] for _ in cells]
+                for neighbor, adjacent in enumerate(rows[vertex]):
+                    counts[cell_of[neighbor]][adjacent] += 1
+                signature = (old_cell, tuple(tuple(item) for item in counts))
+                buckets.setdefault(signature, []).append(vertex)
+        refined = [buckets[key] for key in sorted(buckets)]
+        if len(refined) == len(cells):
+            return refined
+        cells = refined
+    return cells
+
+
+def arc_graph_refinement_bound(
+    directions: tuple[tuple[int, int, int], ...], q: int
+) -> tuple[int, tuple[int, ...]]:
+    vectors = list(itertools.product(range(q), repeat=3))
+    vector_index = {vector: index for index, vector in enumerate(vectors)}
+    steps = {
+        tuple(scale * coordinate % q for coordinate in direction)
+        for direction in directions
+        for scale in range(1, q)
+    }
+    rows = [
+        bytes(
+            tuple((right[index] - left[index]) % q for index in range(3)) in steps
+            for right in vectors
+        )
+        for left in vectors
+    ]
+    cells = binary_refinement(
+        rows, [list(range(len(vectors)))], vector_index[(0, 0, 0)]
+    )
+    bound = len(vectors)
+    chain: list[int] = []
+    while len(cells) < len(vectors):
+        cell = min(
+            (candidate for candidate in cells if len(candidate) > 1),
+            key=lambda candidate: (len(candidate), candidate[0]),
+        )
+        bound *= len(cell)
+        chain.append(len(cell))
+        cells = binary_refinement(rows, cells, cell[0])
+    return bound, tuple(chain)
+
+
+def frame_normalized_arcs(c341, q: int) -> list[tuple[tuple[int, int, int], ...]]:
+    frame = ((1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1))
+    projective_points = sorted(
+        {
+            c341.normalize(vector, q)
+            for vector in itertools.product(range(q), repeat=3)
+            if any(vector)
+        }
+    )
+    candidates = [
+        point
+        for point in projective_points
+        if point not in frame
+        and all(
+            det3_mod((left, right, point), q)
+            for left, right in itertools.combinations(frame, 2)
+        )
+    ]
+    arcs = []
+    for extra_count in range(q - 2):
+        for extras in itertools.combinations(candidates, extra_count):
+            arc = frame + extras
+            if all(
+                det3_mod(triple, q)
+                for triple in itertools.combinations(arc, 3)
+            ):
+                arcs.append(arc)
+    return arcs
+
+
+def projective_arc_stabilizer_order(c341, arc, q: int) -> int:
+    frame = [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)]
+    arc_set = set(arc)
+    matrices = set()
+    for target in itertools.permutations(arc, 4):
+        if not all(
+            det3_mod(triple, q) for triple in itertools.combinations(target, 3)
+        ):
+            continue
+        matrix = c341.frame_map(frame, list(target), q)
+        if {
+            c341.normalize(c341.mat_vec(matrix, point, q), q) for point in arc
+        } == arc_set:
+            matrices.add(c341.mat_normalize(matrix, q))
+    return len(matrices)
+
+
 def certificate() -> dict[str, object]:
     c341 = load_c341()
     q, tau = 11, 8
@@ -278,8 +450,143 @@ def certificate() -> dict[str, object]:
         for permutation in outer_coset
     )
 
+    # Metric and spectral information retained by the single column constituent.
+    distances = graph_distances(vectors, classes[1], q)
+    distance_shells = Counter(distances.values())
+    assert distance_shells == Counter({0: 1, 1: 60, 2: 1150, 3: 120})
+    relation_distances = {
+        labels[index]: sorted({distances[vector] for vector in orbit})
+        for index, orbit in enumerate(classes)
+    }
+    assert relation_distances["deep_hole_C5"] == [3]
+    distance_neighbor_types: dict[str, list[list[int]]] = {}
+    for level in sorted(distance_shells):
+        types = set()
+        for point, point_distance in distances.items():
+            if point_distance != level:
+                continue
+            counts = Counter(
+                distances[
+                    tuple((point[index] + step[index]) % q for index in range(3))
+                ]
+                for step in classes[1]
+            )
+            types.add(tuple(counts[index] for index in range(4)))
+        distance_neighbor_types[str(level)] = [list(item) for item in sorted(types)]
+    assert len(distance_neighbor_types["2"]) == 4
+
+    dual_lines = {
+        c341.normalize(vector, q) for vector in vectors if vector != (0, 0, 0)
+    }
+    hyperplane_intersections = Counter(
+        sum(c341.dot(dual, column, q) == 0 for column in columns) for dual in dual_lines
+    )
+    assert hyperplane_intersections == Counter({0: 76, 1: 42, 2: 15})
+    spectrum = {60: 1}
+    for intersection_size, line_count in hyperplane_intersections.items():
+        spectrum[q * intersection_size - 6] = (q - 1) * line_count
+    assert spectrum == {60: 1, -6: 760, 5: 420, 16: 150}
+    assert 1 - 60 // min(spectrum) == 11
+
+    # The golden-conjugate q=11 fibers are related by precisely the outer normalizer coset.
+    points8 = ordered_six_points(c341, 11, 8)
+    points4 = ordered_six_points(c341, 11, 4)
+    action8 = induced_six_point_action(c341, projective_group, points8, 11)
+    group4 = c341.reflection_group(11, c341.h3_roots(11, 4))
+    action4 = induced_six_point_action(c341, group4, points4, 11)
+    assert action8 == action4 and len(action8) == 60
+    ordered_normalizer = set()
+    for permutation in s6:
+        inverse = inverse_permutation(permutation)
+        if {
+            compose(compose(permutation, group_element), inverse)
+            for group_element in action8
+        } == action8:
+            ordered_normalizer.add(permutation)
+    cross_fiber = set(projective_equivalences(c341, points8, points4, 11))
+    assert len(ordered_normalizer) == 120
+    assert cross_fiber == ordered_normalizer - action8
+    ordered_triple_orbits = set_orbits(action8, 3)
+    ordered_chirality = {
+        triple: index for index, orbit in enumerate(ordered_triple_orbits) for triple in orbit
+    }
+    assert all(
+        {
+            ordered_chirality[tuple(sorted(permutation[index] for index in triple))]
+            for triple in ordered_triple_orbits[0]
+        }
+        == {1}
+        for permutation in cross_fiber
+    )
+
+    # At the ramified characteristic-five fiber the two sheets coalesce and S5 is internal.
+    points5 = ordered_six_points(c341, 5, 3)
+    projective5 = set(projective_equivalences(c341, points5, points5, 5))
+    a5_matrices5 = c341.reflection_group(5, c341.h3_roots(5, 3))
+    action5 = induced_six_point_action(c341, a5_matrices5, points5, 5)
+    assert len(projective5) == 120 and len(action5) == 60 and action5 < projective5
+    assert all(
+        {
+            ordered_chirality[tuple(sorted(permutation[index] for index in triple))]
+            for triple in ordered_triple_orbits[0]
+        }
+        == {1}
+        for permutation in projective5 - action5
+    )
+
+    # The exact p=2 exception: the unique frame four-arc gives K_4,4.
+    vectors2 = list(itertools.product(range(2), repeat=3))
+    directions2 = {(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 1)}
+    assert all(
+        (tuple((left[index] - right[index]) % 2 for index in range(3)) in directions2)
+        == (sum(left) % 2 != sum(right) % 2)
+        for left in vectors2
+        for right in vectors2
+    )
+    gl32 = {
+        tuple(tuple(flat[3 * row + column] for column in range(3)) for row in range(3))
+        for flat in itertools.product(range(2), repeat=9)
+        if det3_mod(
+            tuple(tuple(flat[3 * row + column] for column in range(3)) for row in range(3)),
+            2,
+        )
+        != 0
+    }
+    stabilizer2_arc = {
+        matrix
+        for matrix in gl32
+        if {c341.mat_vec(matrix, point, 2) for point in directions2} == directions2
+    }
+    assert len(gl32) == 168 and len(stabilizer2_arc) == 24
+    assert 2 * 24**2 == 1152 and 2**3 * len(stabilizer2_arc) == 192
+
+    # Exhaust every frame-marked normalized arc at p=3,5,7.
+    small_prime_census: dict[str, object] = {}
+    expected_counts = {3: 1, 5: 10, 7: 116}
+    for prime in (3, 5, 7):
+        arcs = frame_normalized_arcs(c341, prime)
+        assert len(arcs) == expected_counts[prime]
+        stabilizer_distribution: Counter[tuple[int, int]] = Counter()
+        refinement_chains = set()
+        for arc in arcs:
+            stabilizer_order = projective_arc_stabilizer_order(c341, arc, prime)
+            upper_bound, chain = arc_graph_refinement_bound(arc, prime)
+            affine_lower_bound = prime**3 * (prime - 1) * stabilizer_order
+            assert upper_bound == affine_lower_bound
+            stabilizer_distribution[(len(arc), stabilizer_order)] += 1
+            refinement_chains.add(chain)
+        small_prime_census[str(prime)] = {
+            "frame_marked_arc_count": len(arcs),
+            "all_refinement_bounds_equal_affine_lower_bounds": True,
+            "stabilizer_distribution": {
+                f"size_{size}_order_{order}": count
+                for (size, order), count in sorted(stabilizer_distribution.items())
+            },
+            "refinement_chains": [list(chain) for chain in sorted(refinement_chains)],
+        }
+
     return {
-        "schema": "c373-clebsch-scheme-automorphisms-v1",
+        "schema": "c373-clebsch-scheme-automorphisms-v2",
         "inputs": {
             "c341_checker_sha256": C341_SHA256,
             "field_order": q,
@@ -336,11 +643,46 @@ def certificate() -> dict[str, object]:
             "translation_group_is_unique_normal_sylow_11": True,
             "affine_addition_recovered_up_to_origin": True,
         },
+        "column_graph_metric_and_spectrum": {
+            "distance_shells": {
+                str(level): distance_shells[level] for level in sorted(distance_shells)
+            },
+            "relation_distances": relation_distances,
+            "distance_neighbor_types": distance_neighbor_types,
+            "distance_regular": False,
+            "spectrum": {
+                str(eigenvalue): multiplicity
+                for eigenvalue, multiplicity in sorted(spectrum.items())
+            },
+            "dual_line_intersection_distribution": {
+                str(size): count for size, count in sorted(hyperplane_intersections.items())
+            },
+            "hoffman_clique_bound": 11,
+            "deep_hole_relation_is_distance_three": True,
+        },
+        "arithmetic_outer_symmetry": {
+            "q11_tau8_to_tau4_projectivities": len(cross_fiber),
+            "q11_cross_fiber_set_is_outer_normalizer_coset": True,
+            "q11_cross_fiber_maps_exchange_chirality": True,
+            "q5_projective_stabilizer_order": len(projective5),
+            "q5_a5_subgroup_order": len(action5),
+            "q5_outer_coset_is_internal_and_exchanges_chirality": True,
+        },
+        "general_arc_direction_rigidity_checks": {
+            "p2": {
+                "graph": "K_4,4",
+                "full_automorphism_group_order": 1152,
+                "affine_subgroup_order": 192,
+                "enlargement_factor": 6,
+            },
+            "odd_prime_frame_marked_census": small_prime_census,
+        },
         "trusted_boundary": {
             "edge_color_entries_checked": 1331 * 1331,
             "relation_tensor_entries_checked_per_candidate": 8**3,
             "s6_permutations_checked": 720,
-            "method": "exact finite-field enumeration and equitable color refinement",
+            "small_prime_frame_marked_arcs_checked": sum(expected_counts.values()),
+            "method": "exact finite-field enumeration, projective frame normalization, and equitable color refinement",
         },
     }
 

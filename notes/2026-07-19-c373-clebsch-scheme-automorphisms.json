@@ -15,6 +15,14 @@
       ]
     ]
   },
+  "arithmetic_outer_symmetry": {
+    "q11_cross_fiber_maps_exchange_chirality": true,
+    "q11_cross_fiber_set_is_outer_normalizer_coset": true,
+    "q11_tau8_to_tau4_projectivities": 60,
+    "q5_a5_subgroup_order": 60,
+    "q5_outer_coset_is_internal_and_exchanges_chirality": true,
+    "q5_projective_stabilizer_order": 120
+  },
   "color_preserving_vertex_group": {
     "affine_group_order": 798600,
     "base_vectors": [
@@ -126,6 +134,205 @@
       10
     ]
   },
+  "column_graph_metric_and_spectrum": {
+    "deep_hole_relation_is_distance_three": true,
+    "distance_neighbor_types": {
+      "0": [
+        [
+          0,
+          60,
+          0,
+          0
+        ]
+      ],
+      "1": [
+        [
+          1,
+          9,
+          50,
+          0
+        ]
+      ],
+      "2": [
+        [
+          0,
+          2,
+          50,
+          8
+        ],
+        [
+          0,
+          2,
+          52,
+          6
+        ],
+        [
+          0,
+          4,
+          52,
+          4
+        ],
+        [
+          0,
+          6,
+          54,
+          0
+        ]
+      ],
+      "3": [
+        [
+          0,
+          0,
+          55,
+          5
+        ]
+      ]
+    },
+    "distance_regular": false,
+    "distance_shells": {
+      "0": 1,
+      "1": 60,
+      "2": 1150,
+      "3": 120
+    },
+    "dual_line_intersection_distribution": {
+      "0": 76,
+      "1": 42,
+      "2": 15
+    },
+    "hoffman_clique_bound": 11,
+    "relation_distances": {
+      "column_D5": [
+        1
+      ],
+      "deep_hole_C5": [
+        3
+      ],
+      "double_V4": [
+        2
+      ],
+      "single_secant_C2_1": [
+        2
+      ],
+      "single_secant_C2_2": [
+        2
+      ],
+      "single_secant_C2_3": [
+        2
+      ],
+      "triple_S3": [
+        2
+      ],
+      "zero": [
+        0
+      ]
+    },
+    "spectrum": {
+      "-6": 760,
+      "16": 150,
+      "5": 420,
+      "60": 1
+    }
+  },
+  "general_arc_direction_rigidity_checks": {
+    "odd_prime_frame_marked_census": {
+      "3": {
+        "all_refinement_bounds_equal_affine_lower_bounds": true,
+        "frame_marked_arc_count": 1,
+        "refinement_chains": [
+          [
+            6,
+            4,
+            2
+          ]
+        ],
+        "stabilizer_distribution": {
+          "size_4_order_24": 1
+        }
+      },
+      "5": {
+        "all_refinement_bounds_equal_affine_lower_bounds": true,
+        "frame_marked_arc_count": 10,
+        "refinement_chains": [
+          [
+            4,
+            10,
+            2
+          ],
+          [
+            12,
+            4,
+            2
+          ],
+          [
+            24,
+            10,
+            2
+          ]
+        ],
+        "stabilizer_distribution": {
+          "size_4_order_24": 1,
+          "size_5_order_20": 6,
+          "size_6_order_120": 3
+        }
+      },
+      "7": {
+        "all_refinement_bounds_equal_affine_lower_bounds": true,
+        "frame_marked_arc_count": 116,
+        "refinement_chains": [
+          [
+            6,
+            3,
+            2
+          ],
+          [
+            6,
+            6,
+            2
+          ],
+          [
+            6,
+            21,
+            2
+          ],
+          [
+            18,
+            2,
+            2
+          ],
+          [
+            18,
+            4,
+            2
+          ],
+          [
+            36,
+            3,
+            2
+          ],
+          [
+            48,
+            21,
+            2
+          ]
+        ],
+        "stabilizer_distribution": {
+          "size_4_order_24": 1,
+          "size_5_order_6": 20,
+          "size_6_order_12": 60,
+          "size_6_order_36": 10,
+          "size_7_order_42": 20,
+          "size_8_order_336": 5
+        }
+      }
+    },
+    "p2": {
+      "affine_subgroup_order": 192,
+      "enlargement_factor": 6,
+      "full_automorphism_group_order": 1152,
+      "graph": "K_4,4"
+    }
+  },
   "inputs": {
     "c341_checker_sha256": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be",
     "field_order": 11,
@@ -160,7 +367,7 @@
     ],
     "verdict": "the unmarked colored scheme intrinsically recovers the unordered 10+10 chirality torsor"
   },
-  "schema": "c373-clebsch-scheme-automorphisms-v1",
+  "schema": "c373-clebsch-scheme-automorphisms-v2",
   "structural_corollaries": {
     "affine_addition_recovered_up_to_origin": true,
     "affine_group_is_2_closed": true,
@@ -170,8 +377,9 @@
   },
   "trusted_boundary": {
     "edge_color_entries_checked": 1771561,
-    "method": "exact finite-field enumeration and equitable color refinement",
+    "method": "exact finite-field enumeration, projective frame normalization, and equitable color refinement",
     "relation_tensor_entries_checked_per_candidate": 512,
-    "s6_permutations_checked": 720
+    "s6_permutations_checked": 720,
+    "small_prime_frame_marked_arcs_checked": 127
   }
 }
