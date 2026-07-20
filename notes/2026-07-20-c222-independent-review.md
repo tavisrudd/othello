@@ -4,7 +4,8 @@
 
 **Review authority:** user-launched Codex review
 
-**Disposition:** **READY FOR FIXES**. This is not `GO`, and C222 must remain active.
+**Disposition:** **NO-GO — READY FOR FIXES**. The post-fix remediation is interrupted and not a
+coherent committed artifact. This is not `GO`, and C222 must remain active.
 
 ## Scope and method
 
@@ -271,3 +272,193 @@ and its prose/trust report currently overstates the types. After the implementin
 narrows every finding, completes the gate and evidence, and updates the judgment log and C320 delta,
 it must stop and ask the user to launch Codex for post-fix review. This review does not authorize
 archival.
+
+## Post-fix review — 2026-07-20
+
+**Disposition:** **NO-GO — READY FOR FIXES**. The remediation agent stopped before producing a
+coherent committed bundle. Only committed evidence is eligible for a final disposition; the current
+dirty source and report are provisional.
+
+### What was inspected and replayed
+
+This user-launched post-fix review reread the complete current C222 report, both C222 Lean modules,
+the claimed adequacy extraction, the proposed C320 ledger delta, and the initial review above. It
+inspected scoped Git status, current and committed hashes, last commits by path, the exact
+project-owned import closure, and the gate directory. It replayed no Lean elaboration or Lake build:
+there is no C222 gate to validate, the purported repairs are uncommitted, and the report itself says
+the shared-lock validation and axiom audit have not occurred. It did replay the bounded source scan
+over the 33-file project-owned closure; no `sorry`, `native_decide`, local `axiom`, or `opaque`
+declaration was found. `git diff --check` found no whitespace error. Neither check establishes
+elaboration or an axiom closure.
+
+No obvious end-of-file truncation was found in the dirty coordinate module or report, but the
+remediation is incomplete in content and Git state.
+
+### PF1 — blocking: the remediation is not a committed atomic artifact
+
+**Locations:** `lean/RelativeConicArcs/ReflectionArrangements.lean` (dirty),
+`notes/2026-07-16-c222-lean-a3-h3-closure.md` (dirty), and the unchanged
+`lean/RelativeConicArcs/ReflectionArrangementDecoding.lean`.
+
+Scoped status shows 91 insertions/23 deletions in `ReflectionArrangements.lean` and 289
+insertions/123 deletions in the C222 report, neither committed. The last committed versions remain:
+
+- `ReflectionArrangements.lean`: commit `462905ff`, sha256
+  `9154964eb896470a61d222798cff654ad41343f3248b256939a08566d2d2ef82`;
+- `ReflectionArrangementDecoding.lean`: commit `97bd8fb2`, sha256
+  `11c6bf272e233fd137bcbeb2ae4d62231983ab91c791fe0bba886026624a519b`;
+- C222 report: commit `a9925548`.
+
+The dirty coordinate module instead has sha256
+`6d1fa115246c0ddfcffc0a69e2b888a6755056a2eab5d0e8f18f316931d130f1` and 16165 bytes. The dirty
+report still records the old 11202-byte committed hash at
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:265-272`, while its status paragraph at lines 5-15 says
+the task modules are committed and describes the provisional docstring work as the completed record.
+Its checklist at lines 320-322 concedes that hashes must be recomputed after those edits land.
+
+**Impact:** there is no immutable post-fix object to review, no pinned repair commit, and the report
+does not identify its actual working source. A final `GO` is impossible irrespective of mathematical
+quality.
+
+**Required fix:** finish all intended source/report/gate edits, recompute hashes and byte counts,
+validate the exact final files, and commit the complete task-owned bundle. Do not claim committed or
+final evidence while a described file is dirty. Then have the user launch another post-fix review.
+
+### PF2 — blocking: initial finding 1 remains verbatim in the actual decoder source
+
+**Location:** `lean/RelativeConicArcs/ReflectionArrangementDecoding.lean:7-18` versus C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:162-176,351-354`.
+
+The report says the decoder docstring was narrowed to a joint census. It was not. The committed and
+working decoder module still says the two strata “agree at the paper-facing level” and that
+`h3_dual_projectivity_maps_mirrors` supplies their “exact geometric identification.” Its theorem
+remains only the same conjunction of eight cardinality equalities. The module header also retains
+the strength-bearing phrase “existing complete nearest-codeword ambiguity theorem.”
+
+**Impact:** the referee-facing source still asserts the exact semantic conclusion that the theorem
+does not prove. The report's remediation narrative is factually false.
+
+**Required fix:** either implement the point/ray and leader-count equivalence theorem described in
+the initial review, or actually narrow the module header and theorem docstring to a joint numerical
+census with no identification language. Commit that change and update its hash.
+
+### PF3 — blocking: objective 3/4 exits were narrowed without satisfying the task's fallback rule
+
+**Locations:** C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:53-57,147-176,193-221,240-263,383-384`;
+`lean/RelativeConicArcs/ReflectionArrangements.lean:282-290`.
+
+The provisional report now accurately admits that the `A3` theorem is one-sided and the decoder
+terminal is census-only. That is an honest improvement, but it does not complete the stated
+objectives. The success criterion requires every omitted objective claim to be retained as
+computer-assisted with a documented compactness obstruction. Instead the report says no compactness
+stop occurred and calls both missing results “deferred build-gated” strengthenings. No attempted
+theorem, first obstruction, measurement, projected certificate shape, exact replay artifact, or
+completed external trust route is supplied. “Build-gated” is also inaccurate when new definitions
+and proofs have not been written.
+
+**Impact:** full `A3` arrangement equality and the decoder-stratum correspondence have neither a Lean
+route nor the task's required completed fallback route. The report cannot call its subclaim ledger or
+judgment record complete.
+
+**Required fix:** either land the compact two-sided `A3` theorem and genuine decoder bridge, or
+record the exact external conceptual/replay route and the required measured compactness stop for
+each omitted objective. If the intended task scope is being reduced without such a stop, obtain and
+record an explicit scope decision rather than silently treating deferral as completion.
+
+### PF4 — major: projectivity/inverse-dual transport remains implicit and source prose still asserts it
+
+**Locations:** `lean/RelativeConicArcs/ReflectionArrangements.lean:138-176`; C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:120-145,234-235,259-262`.
+
+The provisional report now honestly says that only `det T = 3` and row-by-row identities are exposed.
+The source still names the map `h3Projectivity`, describes `h3DualProjectivity` as “the displayed
+inverse of `T`,” and has no theorem for nonzero determinant, inverse-transpose compatibility, or a
+bijection on normalized projective representatives. The report itself lists that API as an optional
+deferred strengthening even though its original objective and decoder-transport explanation use the
+global projectivity semantics.
+
+**Impact:** the row identities are safe candidate Lean facts, but projective transport is not a
+paper-facing terminal and cannot support the decoder identification.
+
+**Required fix:** expose and audit the compact nonzero-determinant, inverse-dual, and induced
+projective-bijection theorems, or remove every claim that uses global transport and phrase the dual
+definition as an explicit coordinate map rather than an established inverse action.
+
+### PF5 — major: the provisional documentation pass still fails the referee-facing standard
+
+**Locations:** `lean/RelativeConicArcs/ReflectionArrangements.lean:11-24,42-44,91-92,146-147,
+314-330`; `lean/RelativeConicArcs/ReflectionArrangementDecoding.lean:4-18`.
+
+In addition to PF2 and PF4:
+
+- `SameDirection` is called projective equality without stating its zero-vector degeneracy: as
+  defined, `SameDirection 0 0` holds although zero is not a projective point or line.
+- `h3Joins` is described as a set of “normalized directions,” but it is the raw image of cross
+  products and performs no normalization.
+- the Orlik–Terao citation gives authors, title, year, and a broad section/table description in the
+  internal report, but the Lean header has no stable identifier/version and no pinpoint theorem,
+  lemma, or page as required by the Lean citation standard;
+- the unchanged decoder source contains vague workflow/strength language (`existing`, `complete`,
+  `paper-facing`) and the false agreement claim.
+
+The dirty documentation is therefore not ready even if it later elaborates.
+
+**Required fix:** state degeneracy and normalization conventions exactly; correct the raw-join
+description; provide a standards-compliant public citation pinpoint for each classical semantic
+input or remove the source-level attribution-dependent claim; and complete the decoder prose repair.
+
+### PF6 — blocking: gate, validation, axiom evidence, and trust pin are all absent
+
+**Location:** C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:227-263,305-314`.
+
+No module under `lean/RelativeConicArcs/Gates/` imports either C222 module. The report explicitly says
+that focused elaboration, exact-target gate confirmation, terminal-by-terminal `#print axioms`
+output, a Clebsch manifest row, and a pinned validated commit are pending. The added axiom probes in
+the dirty coordinate source have not been run. The source-only closure scan is not a substitute.
+
+**Impact:** no claim in C222 currently satisfies the repository's full-trust release policy.
+
+**Required fix:** after committing a coherent source, create the import-only C222 gate, run the
+guarded/focused and exact-target validations through the authorized build owner, record every
+terminal's actual axiom output, pin the validated commit and hashes, and supply the C320/manifest
+delta. Review the gate's complete imported terminal surface, not just its existence.
+
+### PF7 — major: appendix and checklist evidence remain incomplete
+
+**Location:** C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:290-342,386-451`.
+
+The adequacy section copies theorem signatures, but its “load-bearing definitions” are only a list of
+names. It gives neither their verbatim definitions nor a deterministic extraction artifact/command,
+so checklist lines 328-330 are over-ticked. Checklist lines 315-319 say no external replay artifact
+exists because the implemented `decide` checks use no generator, while the same report leaves the
+full `A3` and decoder-identification objectives computer-assisted without naming their exact replay
+evidence. The hash box is checked despite the acknowledged stale hash. The statement, route, prose,
+gate, trust, and review boxes correctly remain open; those open boxes themselves preclude `GO`.
+
+**Required fix:** include or deterministically extract the actual load-bearing definitions; separate
+the in-kernel finite checks from every externally retained objective and name the latter's durable
+replay/citation evidence; recompute identity evidence only after final edits; and leave no box checked
+without the referenced artifact.
+
+### Prior-finding disposition
+
+- **Initial F1 (decoder agreement): unresolved** — PF2.
+- **Initial F2 (`A3` equality): prose provisionally narrowed in the dirty coordinate source, but the
+  objective/fallback remains unresolved** — PF3.
+- **Initial F3 (premature trust): wording provisionally improved, evidence unresolved** — PF1/PF6.
+- **Initial F4 (semantics exceed types): partially narrowed; classical citation and completed route
+  remain inadequate** — PF3/PF5.
+- **Initial F5 (projectivity API): unresolved** — PF4.
+- **Initial F6 (documentation): partially repaired in one dirty module, unresolved overall** — PF2/PF5.
+- **Initial F7 (checklist/report): unresolved** — PF1/PF3/PF7.
+
+### Final post-fix disposition
+
+**NO-GO — READY FOR FIXES.** The artifact is not a coherent committed bundle, the decoder overclaim
+survives verbatim, two objective exits have no completed trust route, and all release evidence is
+still absent. C222 must remain active. The implementer should complete the minimal fixes above,
+commit them atomically, stop, and ask the user to launch another Codex post-fix review. This review
+does not authorize archival or task completion.
