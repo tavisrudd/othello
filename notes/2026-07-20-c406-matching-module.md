@@ -159,6 +159,16 @@ is a four-dimensional subspace of the scalar-`A4` common-refinement relation alg
 H3 summand is a geometric nontrivial `A5` module.  There is also a central-character obstruction:
 quartic evaluation has scalar weight four, while the ordinary scalar-line relation algebra has
 trivial scalar weight, so every scalar-equivariant linear map between these objects is zero.
+Explicitly, if `lambda` generates `F_11^*`, then dilation acts on a homogeneous degree-`d` form by
+the nontrivial character `lambda^d` for `d=4` (and on a secant product by `lambda^6`), but fixes
+each scalar-line relation indicator.  Equivariance would force
+
+```text
+T(f)=T(lambda.f)=lambda^d T(f),
+```
+
+and `lambda^d != 1`, hence `T(f)=0`.  This rules out only linear maps to the ordinary relation
+algebra; character-twisted targets and nonlinear projective zero statistics remain available.
 
 The portfolio nevertheless supplies a different, exact bridge.  Let `R_0,...,R_15` be C378's
 projective scalar-`A4` common-refinement relations, with oriented `J`-pairs
