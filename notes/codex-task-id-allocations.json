@@ -269,8 +269,17 @@
       "last": 419,
       "purpose": "C410 successors: larger balanced trades and fixed-incidence moduli/kernel realizability",
       "sequence": 30
+    },
+    {
+      "count": 9,
+      "first": 420,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 428,
+      "purpose": "Clebsch replacement-spine Lean formalization and weighted-adjoint closure",
+      "sequence": 31
     }
   ],
-  "next_id": 420,
+  "next_id": 429,
   "schema": "codex-task-id-allocations-v1"
 }
