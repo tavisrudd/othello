@@ -4,18 +4,17 @@
 
 **Date:** 2026-07-20
 
-**Status:** `PLANNED; EXECUTION UNALLOCATED`
+**Status:** `EXECUTED AS C407; COMPLETE`
 
 **Parent theorem:** `notes/2026-07-20-c403-arrangement-complement-distance.md`
 
 ## Routing and ownership
 
-C403 is complete and archived at commit `1a479963`.  This file is a post-close execution blueprint,
-not a reopening of that task.  Do not restore C403 to the live queue, remove its archive row, or
-reuse its ID.  A cold session must be explicitly routed to this file or to the `crowns` lane; bare
-`C403` is no longer a live task selector.
+C403 is complete and archived at commit `1a479963`.  This post-close blueprint was executed and
+closed as C407 in `notes/2026-07-20-c407-c403-free-arrangement-code-upgrades.md`; it did not reopen
+C403.  Do not restore C403 to the live queue, remove its archive row, or reuse its ID.
 
-Before executing the package, reserve one new global task ID from the repository root:
+The execution reserved C407 through the required allocator invocation:
 
 ```bash
 python3 notes/scripts/allocate_codex_task_ids.py reserve \
@@ -24,9 +23,9 @@ python3 notes/scripts/allocate_codex_task_ids.py reserve \
   --purpose 'execute six C403 free arrangement-code upgrades'
 ```
 
-Commit the allocation ledger immediately, add one `[crowns]` queue row using the returned ID, and
-use that successor ID for the report and queue lifecycle.  The six upgrades belong in one task:
-they all factor through the same line-section profile and require no independent census.
+The allocation ledger was committed before the C407 queue lifecycle began.  The six upgrades were
+kept in one task because they factor through the same line-section profile and require no
+independent census.
 
 Allowed execution paths are the new successor's dated `notes/` report/evidence stem, this plan, the
 parent C403 report, and the crowns handoff.  The C403 Python/JSON/checksum bundle stays unchanged

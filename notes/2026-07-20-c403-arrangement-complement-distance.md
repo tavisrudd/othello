@@ -959,9 +959,9 @@ paper-facing theorem.
   C405 remains the next independent successor.
 - Six post-close conventional corollaries—scalar-extension enumerators, generalized weights,
   circuit counts, the complement-matroid Tutte polynomial, quasi-perfect duals, and minimal primal
-  codewords—are specified for a newly allocated successor in
-  `notes/2026-07-20-c403-free-upgrades-execution-plan.md`.  C403 stays archived and its ID is not
-  reused.
+  codewords—are proved and checked by C407 in
+  `notes/2026-07-20-c407-c403-free-arrangement-code-upgrades.md`.  C403 stays archived and its ID
+  is not reused.
 - C406 owns the downstream manuscript-facing compatibility question: whether the C399
   `5/14/22` parent markers are symmetry-selected factorizations of this report's Frobenius section,
   whether their differences carry a nontrivial conic-ideal module, and whether the H3 sheet sign
