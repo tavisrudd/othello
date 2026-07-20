@@ -1,0 +1,177 @@
+{
+  "algebraic_automorphism_group": {
+    "candidate_relation_permutations_checked": 5040,
+    "order": 1,
+    "permutations": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    ]
+  },
+  "color_preserving_vertex_group": {
+    "affine_group_order": 798600,
+    "base_vectors": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        1,
+        0,
+        9
+      ]
+    ],
+    "linear_point_stabilizer_order": 600,
+    "projective_factor_order": 60,
+    "refinement_profiles": [
+      {
+        "cell_count": 8,
+        "cell_size_histogram": {
+          "1": 1,
+          "100": 1,
+          "120": 1,
+          "150": 1,
+          "300": 3,
+          "60": 1
+        },
+        "largest_cell": 300,
+        "vertex_count": 1331
+      },
+      {
+        "cell_count": 198,
+        "cell_size_histogram": {
+          "1": 11,
+          "10": 77,
+          "5": 110
+        },
+        "largest_cell": 10,
+        "vertex_count": 1331
+      },
+      {
+        "cell_count": 1331,
+        "cell_size_histogram": {
+          "1": 1331
+        },
+        "largest_cell": 1,
+        "vertex_count": 1331
+      }
+    ],
+    "scalar_kernel_order": 10,
+    "structure": "F_11^3 semidirect (F_11^* x A5)",
+    "successive_known_stabilizer_orders": [
+      798600,
+      600,
+      10,
+      1
+    ],
+    "successive_upper_bound_factors": [
+      1331,
+      60,
+      10
+    ]
+  },
+  "column_graph_alone": {
+    "automorphism_group_order": 798600,
+    "equals_full_scheme_automorphism_group": true,
+    "refinement_profiles": [
+      {
+        "cell_count": 7,
+        "cell_size_histogram": {
+          "1": 1,
+          "100": 1,
+          "120": 1,
+          "150": 1,
+          "300": 1,
+          "60": 1,
+          "600": 1
+        },
+        "largest_cell": 600,
+        "vertex_count": 1331
+      },
+      {
+        "cell_count": 198,
+        "cell_size_histogram": {
+          "1": 11,
+          "10": 77,
+          "5": 110
+        },
+        "largest_cell": 10,
+        "vertex_count": 1331
+      },
+      {
+        "cell_count": 1331,
+        "cell_size_histogram": {
+          "1": 1331
+        },
+        "largest_cell": 1,
+        "vertex_count": 1331
+      }
+    ],
+    "successive_upper_bound_factors": [
+      1331,
+      60,
+      10
+    ]
+  },
+  "inputs": {
+    "c341_checker_sha256": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be",
+    "field_order": 11,
+    "relation_labels": [
+      "zero",
+      "column_D5",
+      "triple_S3",
+      "deep_hole_C5",
+      "double_V4",
+      "single_secant_C2_1",
+      "single_secant_C2_2",
+      "single_secant_C2_3"
+    ]
+  },
+  "intrinsic_chirality": {
+    "column_neighbor_component_sizes": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "induced_group_on_six_blocks_order": 60,
+    "normalizer_in_S6_order": 120,
+    "outer_coset_exchanges_both_classes": true,
+    "outer_coset_lifts_to_scheme_automorphisms": false,
+    "outer_coset_size": 60,
+    "three_subset_orbit_sizes": [
+      10,
+      10
+    ],
+    "verdict": "the unmarked colored scheme intrinsically recovers the unordered 10+10 chirality torsor"
+  },
+  "schema": "c373-clebsch-scheme-automorphisms-v1",
+  "structural_corollaries": {
+    "affine_addition_recovered_up_to_origin": true,
+    "affine_group_is_2_closed": true,
+    "column_graph_is_normal_cayley": true,
+    "translation_group": "elementary abelian of order 11^3",
+    "translation_group_is_unique_normal_sylow_11": true
+  },
+  "trusted_boundary": {
+    "edge_color_entries_checked": 1771561,
+    "method": "exact finite-field enumeration and equitable color refinement",
+    "relation_tensor_entries_checked_per_candidate": 512,
+    "s6_permutations_checked": 720
+  }
+}

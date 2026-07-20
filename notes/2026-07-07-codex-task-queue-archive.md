@@ -15,6 +15,8 @@ C1–C74 write-ups, `- **C99 `[baer]` …` for the row-form entries — using th
 *not* pegged: they are progress logs for a task whose row is pegged already, so a peg here would be a
 second copy of that fact, free to drift from the first. The task entry is where a lane is recorded.
 
+- **C373 `[crowns]` [REPORTED 2026-07-19 — THEOREM; FULL AFFINE A5 AUTOMORPHISM GROUP; INTRINSIC UNORDERED 10+10 CHIRALITY TORSOR]** — proved that the q=11 rank-eight syndrome scheme, and already its unique valency-60 column constituent graph, have full vertex group `F_11^3 semidirect (F_11^* x A5)` of order `798600`, conceptually by six-direction rook-grid affine rigidity and independently by a sharp `1331*60*10` refinement bound matched by direct matrix enumeration; exhausted all `7!=5040` relation permutations and found the algebraic automorphism group trivial; intrinsically reconstructed the six scalar-line column blocks and their two `A5` triple orbits of size ten; and exhausted `S6` to show that the classical 60-element outer-normalizer coset exchanges the two halves but does not lift to a scheme automorphism, so the unmarked colored scheme recovers rather than forgets the unordered chirality torsor → `notes/2026-07-19-c373-clebsch-scheme-automorphisms.md`.
+
 ## Archived 2026-07-11 from the live queue
 
 Block groups moved (all verbatim, in original file order, contiguous below):
