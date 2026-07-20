@@ -188,8 +188,17 @@
       "last": 396,
       "purpose": "C384 portable AME pencil upgrades",
       "sequence": 21
+    },
+    {
+      "count": 1,
+      "first": 397,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 397,
+      "purpose": "AME pencil perfect-tensor Clifford and operator-pushing physics gate",
+      "sequence": 22
     }
   ],
-  "next_id": 397,
+  "next_id": 398,
   "schema": "codex-task-id-allocations-v1"
 }
