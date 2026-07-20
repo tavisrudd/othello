@@ -168,6 +168,14 @@ Findings and dispositions:
 
 ### Required closing review checklist
 
+**Reviewer-launch authority:** the implementing agent must not spawn, delegate to, select, simulate,
+or substitute for the independent reviewer. After completing the artifact, durable report, checklist,
+and proposed ledger delta, it must stop, keep the task live, and tell the user that the task is ready
+for review. The user will launch Codex as the reviewer. After fixing review findings, the implementer
+must stop again and ask the user to launch the post-fix review. Only a review explicitly launched by
+the user counts toward the required final `GO`.
+
+
 **Archival gate:** the task must not be marked complete or moved from the live queue to the archive
 until its report and checklist are complete, an independent referee-style review has been explicitly
 requested and recorded, every finding has been fixed or the claimed exit has been narrowed, and a

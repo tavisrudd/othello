@@ -316,6 +316,12 @@ or narrow the claimed exit; request post-fix review; and obtain a recorded final
 queue row until that sequence is complete. A green build, axiom audit, implementer self-review, or
 initial `GO` followed by further changes does not by itself authorize archival.
 
+The user owns reviewer launch. An implementing agent, including Opus, must not spawn, delegate to,
+choose, simulate, or stand in for the independent reviewer. When its artifact/report/checklist and
+ledger delta are ready, it stops and tells the user to launch Codex for review. After addressing
+findings, it stops again and asks the user to launch Codex for post-fix review. Only a user-launched
+review and recorded final `GO` satisfy the archival gate.
+
 The path named for each task's evidence report is also its cold-read task specification while
 queued. It must be self-contained: exact owned files, permitted imports, mathematical obligations,
 fixed trust routes and fallbacks, exclusions, stop conditions, validation, and closing review all

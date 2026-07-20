@@ -203,7 +203,9 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   it must publish one claim-by-claim ledger with exact theorem/gate/axiom evidence, external
   certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
   replacement-spine claim is called Lean-formalized before this reconciliation and independent
-  review. In particular, C421 proves only the `Fin 4` switch base plus arbitrary-size reversibility;
+  review. The user, not the implementing agent, launches Codex for the initial and post-fix reviews;
+  the implementer stops and requests each review and may not spawn or simulate its reviewer. In
+  particular, C421 proves only the `Fin 4` switch base plus arbitrary-size reversibility;
   C426 treats Krein/intersection equality and the 877-fusion census as external exact certificates
   unless their separate kernel checker leaves actually land.
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and

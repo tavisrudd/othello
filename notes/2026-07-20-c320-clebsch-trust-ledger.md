@@ -61,6 +61,14 @@ leaving “if feasible” in the final ledger.
 
 ## Required closing review and archival checklist
 
+**Reviewer-launch authority:** the implementing agent must not spawn, delegate to, select, simulate,
+or substitute for the independent reviewer. After completing the artifact, durable report, checklist,
+and proposed ledger delta, it must stop, keep the task live, and tell the user that the task is ready
+for review. The user will launch Codex as the reviewer. After fixing review findings, the implementer
+must stop again and ask the user to launch the post-fix review. Only a review explicitly launched by
+the user counts toward the required final `GO`.
+
+
 Keep C320 live. After the ledger, manifest, adequacy extraction, and verify-all entry point are
 complete, explicitly request an independent referee-style review that samples the paper-to-ledger,
 ledger-to-terminal, gate-to-import, certificate-to-checker, and command-to-artifact links. Any finding
