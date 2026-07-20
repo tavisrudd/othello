@@ -152,7 +152,9 @@ Hashes are for the committed sources; regenerate with `sha256sum` from `lean/`.
 **Reviewer:** Codex. **Disposition:** initial `NO-GO`, then `GO` after the source/gate/report adequacy
 repair. The theorem bodies were unchanged. Post-repair guarded elaboration succeeded for both
 `RelativeConicArcs/ClebschConicMatchingQuotient.lean` and its import-only gate; the terminal audit
-printed only `propext`, `Classical.choice`, and `Quot.sound` (or no axioms for `isSwitch_symm`).
+printed only `propext`, `Classical.choice`, and `Quot.sound` (or no axioms for `isSwitch_symm`). The
+theorem implementation landed in `5db65a06`; the referee-adequacy repair and final hashes landed in
+`86ee1547`.
 
 Findings and dispositions:
 
