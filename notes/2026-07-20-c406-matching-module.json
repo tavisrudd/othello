@@ -622,9 +622,35 @@
       "matching_orbit_size": 22,
       "outer_sheet_sign": {
         "c378_depth_fourier_bridge": {
+          "base_and_j_mate_are_the_singleton_profiles": true,
+          "choosing_a_sheet_recovers_its_singleton_matching": true,
+          "compressed_signed_moments": [
+            {
+              "degree": 1,
+              "dimension": 4,
+              "nonzero": false,
+              "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+              "support": 0
+            },
+            {
+              "degree": 2,
+              "dimension": 10,
+              "nonzero": false,
+              "sha256": "01d448afd928065458cf670b60f5a594d735af0172c8d67f22a81680132681ca",
+              "support": 0
+            },
+            {
+              "degree": 3,
+              "dimension": 20,
+              "nonzero": true,
+              "sha256": "f8c6e0f5ff3fba104d32d16b706d02cc9d6d9c9cb8ae5017e2149f7140ef4dc4",
+              "support": 17
+            }
+          ],
           "depth_profile_recovers_individual_matching": false,
           "depth_profile_recovers_sheet": true,
           "distinct_depth_profiles": 6,
+          "double_coset_realization": "A4\\PGL2(11)/A5",
           "j_negates_every_depth_profile": true,
           "odd_fourier_commutes_with_outer_negation": true,
           "oriented_relation_pairs": [
@@ -645,6 +671,7 @@
               11
             ]
           ],
+          "positive_profile_span_dimension": 2,
           "profile_fibre_sizes": [
             1,
             1,
@@ -716,6 +743,7 @@
               "sheet_index": 1
             }
           ],
+          "singleton_profile_fibres": 2,
           "standard_to_h3_projectivity": [
             [
               10,

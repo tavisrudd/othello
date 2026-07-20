@@ -955,6 +955,43 @@ def type_certificate(record):
                 frozenset(matching_orbit) for matching_orbit in intersection_matching_orbits
             }
 
+            positive_profiles = sorted(
+                {
+                    depth_profiles[index]
+                    for index in range(len(orbit))
+                    if sheet_index_by_matching[index] == 0
+                }
+            )
+            assert len(positive_profiles) == 3
+            profile_span_dimension = rank([list(profile) for profile in positive_profiles], prime)
+            assert profile_span_dimension == 2
+            compressed_signed_moments = []
+            for moment_degree in (1, 2, 3):
+                powers = [
+                    symmetric_power([value % prime for value in profile], moment_degree, prime)
+                    for profile in depth_profiles
+                ]
+                moment = [
+                    sum(sign * power[index] for sign, power in zip(sign_vector, powers)) % prime
+                    for index in range(len(powers[0]))
+                ]
+                compressed_signed_moments.append(
+                    {
+                        "degree": moment_degree,
+                        "dimension": len(moment),
+                        "nonzero": any(moment),
+                        "support": sum(value != 0 for value in moment),
+                        "sha256": hashlib.sha256(bytes(moment)).hexdigest(),
+                    }
+                )
+            assert [record["nonzero"] for record in compressed_signed_moments] == [False, False, True]
+
+            singleton_fibres = [fibre for fibre in profile_fibres.values() if len(fibre) == 1]
+            assert len(singleton_fibres) == 2
+            singleton_indices = {next(iter(fibre)) for fibre in singleton_fibres}
+            assert base_index in singleton_indices
+            assert {j_matching_permutation[index] for index in singleton_indices} == singleton_indices
+
             c378_certificate = C378.certificate()
             odd_fourier_matrix = c378_certificate["odd_fourier_matrix"]
             fourier_profiles = [
@@ -972,6 +1009,9 @@ def type_certificate(record):
                 "distinct_depth_profiles": len(profile_fibres),
                 "profile_fibre_sizes": sorted(len(fibre) for fibre in profile_fibres.values()),
                 "profile_fibres_equal_scalar_a4_matching_orbits": True,
+                "double_coset_realization": "A4\\PGL2(11)/A5",
+                "positive_profile_span_dimension": profile_span_dimension,
+                "compressed_signed_moments": compressed_signed_moments,
                 "j_negates_every_depth_profile": True,
                 "depth_profile_recovers_sheet": True,
                 "depth_profile_recovers_individual_matching": all(
@@ -985,6 +1025,9 @@ def type_certificate(record):
                     }
                     for profile, fibre in sorted(profile_fibres.items())
                 ],
+                "singleton_profile_fibres": len(singleton_fibres),
+                "base_and_j_mate_are_the_singleton_profiles": True,
+                "choosing_a_sheet_recovers_its_singleton_matching": True,
                 "odd_fourier_commutes_with_outer_negation": True,
             }
 

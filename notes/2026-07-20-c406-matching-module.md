@@ -183,8 +183,27 @@ sheet -:   (6,0,-12,12) [1],   (3,-3,0,-3) [4], (-3,2,2,0) [6].
 ```
 
 The bracketed numbers are fibre sizes.  These six fibres are exactly the scalar-`A4` orbits on the
-22 matchings.  Hence `D` recovers the sheet and the common-refinement matching orbit, though not an
-individual matching, and
+22 matchings, hence give an explicit realization of the six double cosets
+
+```text
+A4 \\ PGL_2(11) / A5.
+```
+
+The three positive profiles span a plane over `F_11`, not a three-space, and obey the exact weighted
+relation
+
+```text
+1*(-6,0,12,-12) + 4*(-3,3,0,3) + 6*(3,-2,-2,0) = 0.
+```
+
+Pushing the signed 22-point configuration through `D` therefore preserves the cubic-first trade:
+its signed symmetric moments vanish in degrees one and two and are nonzero in degree three.  This
+is an explicit compressed realization of C406's orientation memory inside C378's odd sector.
+
+The two size-one fibres are the base matching and its `J`-mate.  Thus the oriented common
+refinement plus a sheet choice recovers one individual singleton matching and C379 then recovers
+its Clebsch parent; without a sheet choice it recovers the unordered golden matching/parent pair.
+The size-four and size-six profiles do not recover their individual matchings.  In all cases
 
 ```text
 D(JM) = -D(M)
@@ -198,7 +217,9 @@ M_odd D(JM) = -M_odd D(M).
 ```
 
 This is a genuine explicit factorization-depth map into the Fourier-stable odd sector.  It is not
-an isomorphism from the cubic tensor, and `M_odd` does not permute the six raw profile vectors.
+an isomorphism from the cubic tensor, and `M_odd` does not permute the six raw profile vectors.  The
+rank drop from the three-dimensional outer-odd cubic space to the two-dimensional profile plane is
+an exact constraint, not evidence for a dimension-matching identification.
 
 The resulting information lattice is therefore exact but decorated, with one new intermediate
 common-refinement level:
@@ -207,10 +228,11 @@ common-refinement level:
 22 matchings  ->  6 scalar-A4 depth profiles  ->  2 PSL_2 sheets  ->  1 undecorated conic.
 ```
 
-The balanced first/second moments recover the middle level from the full factorization-point
-configuration; the cubic line is its orientation form.  Adding one recovered matching invokes
-C379 and recovers the individual H3 parent.  None of this makes the cubic an invariant of the bare
-GRS child.
+The balanced first/second moments recover the sheet level from the full factorization-point
+configuration; the cubic line is its orientation form.  C378's common refinement recovers the six
+double-coset classes and its singleton class supplies the golden matching pair; adding either
+oriented singleton matching invokes C379 and recovers the individual H3 parent.  None of this makes
+the cubic an invariant of the bare GRS child.
 
 ## Proof and exact finite obligations
 
@@ -346,9 +368,9 @@ linearly with C378's four-dimensional Fourier sector, or establish literature pr
 
 | load-bearing artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker | 45,928 | `5aa173195b91fada0592523852606c02e6fa8083a9c7e11c7e7479b731518307` |
-| independent replay | 27,448 | `dedf424a012071ff8dfe9c8142b9486a5b45379303d1a3cc268b3ec5ac10295e` |
-| canonical JSON | 20,547 | `39949eed9e53b414aac1a93e918c78683db067e572952bb51c286921967d8dd0` |
+| primary checker | 48,147 | `3adeb480799bf10aaefb5b6b67f1f4ab27ecfecdf93a285f7b3b3b14573e8b6d` |
+| independent replay | 28,819 | `fee181327a48460708960a56897a6d358b9e00491099f7f1e52406585087a72b` |
+| canonical JSON | 21,589 | `839034b6be9ed63827bd996b952db56c8ab9b610e371b64d6d92ecdc8408bf73` |
 
 ## Gate and manuscript disposition
 

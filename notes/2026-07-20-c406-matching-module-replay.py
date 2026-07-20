@@ -660,6 +660,33 @@ def replay_type(scout_record, primary_record):
                 }
                 for profile, fibre in sorted(profile_fibres.items())
             ] == bridge["profile_records"]
+            positive_profiles = sorted(
+                {
+                    depth_profiles[index]
+                    for index in range(len(orbit))
+                    if sheet_indices[index] == 0
+                }
+            )
+            assert matrix_rank([list(profile) for profile in positive_profiles], q) == 2
+            compressed_moments = []
+            for degree in (1, 2, 3):
+                powers = [
+                    power_coordinates([value % q for value in profile], degree, q)
+                    for profile in depth_profiles
+                ]
+                moment = [
+                    sum(sign * power[index] for sign, power in zip(signs, powers)) % q
+                    for index in range(len(powers[0]))
+                ]
+                compressed_moments.append(any(moment))
+            assert compressed_moments == [False, False, True]
+            assert [record["nonzero"] for record in bridge["compressed_signed_moments"]] == compressed_moments
+            singleton_indices = {
+                next(iter(fibre)) for fibre in profile_fibres.values() if len(fibre) == 1
+            }
+            assert len(singleton_indices) == bridge["singleton_profile_fibres"] == 2
+            assert orbit_index[base] in singleton_indices
+            assert {j_matching_permutation[index] for index in singleton_indices} == singleton_indices
 
 
 def main():
