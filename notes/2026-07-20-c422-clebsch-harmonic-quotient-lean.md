@@ -4,10 +4,10 @@
 
 **Date:** 2026-07-21
 
-**Verdict:** `INITIAL REVIEW NO-GO; ALL THREE FINDINGS FIXED; POST-FIX REVIEW PENDING. The bridge
-prose and campaign exit now state only the exact switch-radial theorem, and a committed 34-terminal
-axiom-audit module makes the trust check independently reproducible. C422 remains live for the
-same user-launched reviewer to record final disposition.`
+**Verdict:** `FINAL GO. The initial reviewer returned NO-GO on three boundary/evidence findings;
+all three were fixed, revalidated, and accepted by the same user-launched reviewer on the post-fix
+pass. The bridge and campaign exit state only the exact switch-radial theorem, and the committed
+34-terminal axiom-audit module makes the standard-axioms-only trust check reproducible.`
 
 ## What this task formalizes
 
@@ -129,7 +129,7 @@ Hashes are for the committed post-review-repair sources; regenerate with `sha256
 
 ## Verification-map delta proposed for C320
 
-Full-trust Lean candidates, subject to the pending post-fix review closure, are the displayed
+With the final independent `GO`, the full-trust Lean candidates for C320 are the displayed
 Laplacian identities, bounded decompositions and uniqueness theorems, explicit characteristic
 obstructions, dimensions `1,3,6,15 / 1,6 / 3,5,9`, their stated prime-field instances, and the
 exact `secant_switch_radial` bridge. A general Fischer theorem, switch-span theorem, complete
@@ -138,10 +138,9 @@ formalized here and inherit no Lean label from F3.
 
 ## Required independent review
 
-The replacement-spine campaign requires a user-launched independent referee-style review. The
-implementing agent must stop after completing the artifact, report, checklist, and proposed ledger
-delta; it may not launch, delegate, simulate, or substitute for that reviewer. C422 remains in the
-live queue until the review records final `GO` and every finding is fixed or the exit is narrowed.
+The replacement-spine campaign requires a user-launched independent referee-style review. The user
+launched the reviewer, the implementing agent fixed its initial findings, and the same reviewer
+performed the post-fix pass recorded below.
 
 - [x] Read every landed theorem type and record its exact ring/field and invertibility hypotheses.
 - [x] Separate the exact F2 switch-radial theorem from absent switch-span and quotient-isomorphism
@@ -158,7 +157,7 @@ live queue until the review records final `GO` and every finding is fixed or the
 - [x] Run and record the 34-terminal standard-axioms-only audit.
 - [x] Obtain the user-launched initial review and record its `NO-GO` findings.
 - [x] Fix all three initial findings and prepare the same reviewer for the post-fix pass.
-- [ ] Obtain final `GO` from the same user-launched reviewer.
+- [x] Obtain final `GO` from the same user-launched reviewer.
 
 ## Initial independent review — 2026-07-21
 
@@ -177,3 +176,16 @@ the reviewer edited no files.
    report's word `exactly` was stronger than a reproducible per-terminal record.
    **Fixed in `0373a6db`:** a committed audit module enumerates all 34 fully qualified terminals;
    this report states the per-terminal upper bound and union and gives the replay command.
+
+## Post-fix independent review — 2026-07-21
+
+**Reviewer:** the same user-launched Codex subagent. **Disposition:** `GO`; no files edited.
+
+The reviewer confirmed that the source and gate now claim only exact `Q`-multiple/principal-ideal
+membership; the plan, ownership table, queue, handoff, and report consistently exclude switch span
+and quotient isomorphism; the committed audit contains 34 unique fully qualified terminals whose
+axiom sets lie within `[propext, Classical.choice, Quot.sound]` with exactly that union; all three
+source byte counts and hashes match; and post-fix run
+`/home/tavis/.cache/othello-lean-build/run-20260721-184621-93dac3d5` is `success` with its aggregate
+exact-target gate passed. The mathematical theorem types were unchanged by the prose/evidence
+repair, and the reviewer found no new adequacy issue.
