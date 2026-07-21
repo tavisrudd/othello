@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation complete; independent review required before closure
+**Status:** initial review `NO-GO` resolved; post-fix independent review required before closure
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place; do not substitute a chat summary or a second transient document. The finished report
@@ -113,7 +113,9 @@ Owned Lean files:
 - `lean/RelativeConicArcs/ClebschFactorizationA3.lean`;
 - `lean/RelativeConicArcs/ClebschFactorizationB3.lean`;
 - `lean/RelativeConicArcs/ClebschFactorizationH3.lean`; and
-- import-only gate `lean/RelativeConicArcs/Gates/ClebschFactorization.lean`.
+- import-only gate `lean/RelativeConicArcs/Gates/ClebschFactorization.lean`;
+- reproducible statement/axiom harness
+  `lean/RelativeConicArcs/Gates/ClebschFactorizationAxiomAudit.lean`.
 
 The evidence bundle is this report plus the same-stem `.py`, `.json`, and `.sha256` files.  From
 `/home/tavis/src/othello`, replay it with:
@@ -129,7 +131,8 @@ Intentional JSON regeneration is:
 python3 notes/2026-07-20-c423-clebsch-factorization-leaves-lean.py --write
 ```
 
-The schema is `clebsch-factorization-leaves-v1`.  Enumeration and serialization are deterministic:
+The post-review schema is `clebsch-factorization-leaves-v2`; version 2 adds the mechanical
+Lean-literal binding record.  Enumeration and serialization are deterministic:
 matching orbits, PSL₂ sheets, monomial coordinates, point-basis columns, and JSON keys are sorted;
 there is no random seed or timestamp.  The primary reconstruction consumes the frozen
 `2026-07-20-c406-matching-orbit-scout.json` (25,443 bytes, SHA-256
@@ -140,13 +143,18 @@ there is no random seed or timestamp.  The primary reconstruction consumes the f
 As an independent invariant check, the generator uses a second modular row-reduction
 implementation, verifies every selected standard-basis column, recomputes all three ranks, directly
 recomputes both lower signed power sums, and independently reevaluates the named cubic scalar.
+Its `--check` path also parses all eight literal declarations in
+`ClebschFactorizationData.lean`—the three vector arrays, three basis-column arrays, and two sheet-sign
+arrays—and requires exact equality with the reconstructed JSON payload.  The canonical joined
+payload hash is `355a0810a6fcf4b3f8c3bf68791b33f196a4d39e59eb85f8b2b3c6b1024afa02`.
 This is exhaustive over all `5/14/22` displayed points and all `3/6/10` coordinates, not sampled or
 searched evidence.  It does not independently reconstruct the upstream C406 endpoints or group
 orbits; those pinned inputs remain the replay boundary.
 
-The checksum manifest records the generator, JSON, all four Lean modules, and the gate.  Byte counts
-before the final report-only commit are `8,205`, `9,221`, `5,519`, `2,552`, `4,658`, `4,670`, and
-`366`, respectively; the manifest is authoritative for final hashes.
+The checksum manifest records the generator, JSON, all four Lean modules, the import gate, and the
+audit harness.  Byte counts before the final report-only commit are `10,442`, `9,728`, `5,519`,
+`2,552`, `4,658`, `4,670`, `366`, and `2,596`, respectively; the manifest is authoritative for
+final hashes.
 
 ## Validation and axiom evidence
 
@@ -158,6 +166,9 @@ target, the trace-only aggregate passed.  The post-audit import-only source is t
 aggregate gate passed in
 `/home/tavis/.cache/othello-lean-build/run-20260721-193555-3ac41388` (runner state `success`, exact
 target skipped as trace-current, aggregate `gate-passed`).
+The post-fix audit target and the unchanged import gate then passed in
+`/home/tavis/.cache/othello-lean-build/run-20260721-194600-ab13d396`: the audit built in 6.49 seconds
+at 1,796,344 KiB maximum RSS and the trace-only aggregate gate passed.
 
 Commands:
 
@@ -175,15 +186,22 @@ lean/scripts/lean-build-queue.py run \
   RelativeConicArcs.Gates.ClebschFactorization \
   --profile single --threads 1 \
   --aggregate RelativeConicArcs.Gates.ClebschFactorization --cores 20-23
+
+lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.Gates.ClebschFactorizationAxiomAudit \
+  --profile single --threads 1 \
+  --aggregate RelativeConicArcs.Gates.ClebschFactorization --cores 20-23
 ```
 
-An exact temporary `#check` harness recorded the eleven claim types above, and a post-refactor
-`#print axioms` harness over all sixteen public checker and claim terminals elaborated successfully.
+The committed `RelativeConicArcs.Gates.ClebschFactorizationAxiomAudit` harness prints the exact
+eleven claim types and audits all sixteen public checker and claim terminals.
 Every terminal reports exactly `[propext, Classical.choice, Quot.sound]`; none reports
-`sorryAx`, `native_decide`, a project axiom, or non-kernel execution.  The commands were removed
-from the final import-only gate, which contains imports and mathematical scope prose only.
+`sorryAx`, `native_decide`, a project axiom, or non-kernel execution.  The main gate remains
+import-only.  The successful build log contains eleven `#check` commands from the committed source
+and sixteen C423 `depends on axioms` records.
 
-Pinned implementation commit: `21e9ce6a70858ad653fecdf2219a836fe845168f`.
+Initial implementation commit: `21e9ce6a70858ad653fecdf2219a836fe845168f`.
+Post-fix evidence commit: `<POST_FIX_COMMIT>`.
 
 ## Trust and exclusion boundary
 
@@ -288,6 +306,26 @@ Verify-all entry-point delta: add
 `RelativeConicArcs.Gates.ClebschFactorization` after the existing harmonic-quotient gate.  The gate
 imports all three leaves.  C320 must retain the exact-replay provenance qualifier and must not use
 this gate for balanced-half uniqueness, group-character, or depth--Fourier claims.
+
+## Independent review record
+
+The user explicitly launched the dedicated Codex reviewer `/root/c423_reviewer` on 2026-07-21.
+Its initial verdict was **NO-GO** with two blocking evidence findings and no mathematical,
+naming/prose, exclusion, judgment-call, or ledger-scope objection.
+
+1. **Lean-literal provenance was not mechanically bound.**  The initial generator reconstructed the
+   JSON but neither generated nor parsed `ClebschFactorizationData.lean`; the checksum manifest
+   established only separate identities.  **Disposition:** fixed.  The generator now parses and
+   compares every vector, basis-column, and sign literal against its reconstructed payload during
+   both `--write` and `--check`, records the eight declaration names, includes the Lean source hash
+   as an input, and records the canonical payload hash.  A mismatch fails loudly.
+2. **Statement adequacy and axiom evidence were transient.**  The initial report referred to
+   temporary commands removed from the gate.  **Disposition:** fixed.  The new committed
+   `RelativeConicArcs.Gates.ClebschFactorizationAxiomAudit` deterministically `#check`s all eleven
+   claim terminals and `#print axioms` for all sixteen public checker/claim terminals while the main
+   gate remains import-only.  It is in the checksum manifest and validation command set.
+
+The same reviewer must now perform the post-fix review.  Final verdict: **pending**.
 
 ## Required judgment-call record
 

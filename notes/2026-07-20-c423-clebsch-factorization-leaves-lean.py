@@ -4,18 +4,21 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import importlib.util
 import itertools
 import json
+import re
 from pathlib import Path
 
 
-SCHEMA = "clebsch-factorization-leaves-v1"
+SCHEMA = "clebsch-factorization-leaves-v2"
 HERE = Path(__file__).resolve().parent
 OUTPUT = Path(__file__).with_suffix(".json")
 SCOUT = HERE / "2026-07-20-c406-matching-orbit-scout.json"
 SOURCE = HERE / "2026-07-20-c406-matching-module.py"
+LEAN_DATA = HERE.parent / "lean/RelativeConicArcs/ClebschFactorizationData.lean"
 
 
 def load_module(path: Path):
@@ -69,6 +72,54 @@ def independent_rank(rows, prime):
         if rank == len(work):
             break
     return rank
+
+
+def lean_vector_literal(source, declaration):
+    """Parse one `![...]` literal following a named Lean definition."""
+    match = re.search(rf"\bdef\s+{re.escape(declaration)}\b[\s\S]*?:=", source)
+    if match is None:
+        raise AssertionError(f"missing Lean declaration: {declaration}")
+    literal = re.match(r"\s*!\[", source[match.end() :])
+    if literal is None:
+        raise AssertionError(f"missing vector literal: {declaration}")
+    start = match.end() + literal.end() - 2
+    depth = 0
+    end = None
+    for index in range(start + 1, len(source)):
+        if source[index] == "[":
+            depth += 1
+        elif source[index] == "]":
+            depth -= 1
+            if depth == 0:
+                end = index + 1
+                break
+    if end is None:
+        raise AssertionError(f"unterminated vector literal: {declaration}")
+    return ast.literal_eval(source[start:end].replace("!", ""))
+
+
+def check_lean_literals(records):
+    """Mechanically bind every tracked Lean coordinate/sign literal to the certificate payload."""
+    by_type = {record["type"].lower(): record for record in records}
+    expected = {
+        "a3Vectors": by_type["a3"]["vectors"],
+        "a3BasisColumns": by_type["a3"]["basis_columns"],
+        "b3Vectors": by_type["b3"]["vectors"],
+        "b3BasisColumns": by_type["b3"]["basis_columns"],
+        "b3SheetSigns": by_type["b3"]["sheet_signs"],
+        "h3Vectors": by_type["h3"]["vectors"],
+        "h3BasisColumns": by_type["h3"]["basis_columns"],
+        "h3SheetSigns": by_type["h3"]["sheet_signs"],
+    }
+    source = LEAN_DATA.read_text()
+    actual = {name: lean_vector_literal(source, name) for name in expected}
+    assert actual == expected, "Lean factorization literals differ from reconstructed certificate"
+    return {
+        "declarations": sorted(expected),
+        "payload_sha256": hashlib.sha256(
+            json.dumps(actual, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+    }
 
 
 def build_type(source, record):
@@ -174,6 +225,7 @@ def build_certificate():
         ("B3", 6),
         ("H3", 10),
     ]
+    lean_binding = check_lean_literals(records)
     return {
         "schema": SCHEMA,
         "semantics": (
@@ -188,13 +240,15 @@ def build_certificate():
             "all_reported_ranks_recomputed": True,
             "lower_signed_moments_recomputed": True,
             "named_cubic_functionals_recomputed": True,
+            "lean_literal_payload_matches": True,
         },
+        "lean_binding": lean_binding,
         "inputs": {
             path.name: {
                 "bytes": path.stat().st_size,
                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             }
-            for path in (SCOUT, SOURCE)
+            for path in (SCOUT, SOURCE, LEAN_DATA)
         },
     }
 

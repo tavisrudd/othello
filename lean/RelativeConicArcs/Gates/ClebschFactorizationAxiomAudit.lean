@@ -1,0 +1,38 @@
+import RelativeConicArcs.Gates.ClebschFactorization
+
+/-!
+# Statement and axiom audit for the Coxeter factorization quotient leaves
+
+This reproducible audit prints the exact types of the eleven rank, lower-moment, and cubic-witness
+claims and the axiom dependencies of every public checker and claim terminal imported by
+`RelativeConicArcs.Gates.ClebschFactorization`.  It adds no definitions or theorems.
+-/
+
+#check RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank
+#check RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank
+#check RelativeConicArcs.ClebschFactorization.b3_signedFirstMoment_eq_zero
+#check RelativeConicArcs.ClebschFactorization.b3_signedSecondMoment_eq_zero
+#check RelativeConicArcs.ClebschFactorization.b3_signedCubicCoordinate_zero_zero_zero
+#check RelativeConicArcs.ClebschFactorization.b3_signedCubicCoordinate_ne_zero
+#check RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank
+#check RelativeConicArcs.ClebschFactorization.h3_signedFirstMoment_eq_zero
+#check RelativeConicArcs.ClebschFactorization.h3_signedSecondMoment_eq_zero
+#check RelativeConicArcs.ClebschFactorization.h3_signedCubicCoordinate_zero_zero_zero
+#check RelativeConicArcs.ClebschFactorization.h3_signedCubicCoordinate_ne_zero
+
+#print axioms RelativeConicArcs.ClebschFactorization.a3_hasCoordinateBasis
+#print axioms RelativeConicArcs.ClebschFactorization.a3_factorizationImage_finrank
+#print axioms RelativeConicArcs.ClebschFactorization.b3_hasCoordinateBasis
+#print axioms RelativeConicArcs.ClebschFactorization.b3_factorizationImage_finrank
+#print axioms RelativeConicArcs.ClebschFactorization.b3_checksSignedMomentWitness
+#print axioms RelativeConicArcs.ClebschFactorization.b3_signedFirstMoment_eq_zero
+#print axioms RelativeConicArcs.ClebschFactorization.b3_signedSecondMoment_eq_zero
+#print axioms RelativeConicArcs.ClebschFactorization.b3_signedCubicCoordinate_zero_zero_zero
+#print axioms RelativeConicArcs.ClebschFactorization.b3_signedCubicCoordinate_ne_zero
+#print axioms RelativeConicArcs.ClebschFactorization.h3_hasCoordinateBasis
+#print axioms RelativeConicArcs.ClebschFactorization.h3_factorizationImage_finrank
+#print axioms RelativeConicArcs.ClebschFactorization.h3_checksSignedMomentWitness
+#print axioms RelativeConicArcs.ClebschFactorization.h3_signedFirstMoment_eq_zero
+#print axioms RelativeConicArcs.ClebschFactorization.h3_signedSecondMoment_eq_zero
+#print axioms RelativeConicArcs.ClebschFactorization.h3_signedCubicCoordinate_zero_zero_zero
+#print axioms RelativeConicArcs.ClebschFactorization.h3_signedCubicCoordinate_ne_zero

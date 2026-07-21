@@ -7,16 +7,34 @@
     "2026-07-20-c406-matching-orbit-scout.json": {
       "bytes": 25443,
       "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "ClebschFactorizationData.lean": {
+      "bytes": 5519,
+      "sha256": "36dd8ad78d23f0e5dbc5b94b8b08b66ec88d6f529b36bdcfbb9e72d7423f834d"
     }
   },
   "invariant_check": {
     "all_basis_columns_are_standard": true,
     "all_reported_ranks_recomputed": true,
+    "lean_literal_payload_matches": true,
     "lower_signed_moments_recomputed": true,
     "method": "independent modular row reduction plus direct signed power sums",
     "named_cubic_functionals_recomputed": true
   },
-  "schema": "clebsch-factorization-leaves-v1",
+  "lean_binding": {
+    "declarations": [
+      "a3BasisColumns",
+      "a3Vectors",
+      "b3BasisColumns",
+      "b3SheetSigns",
+      "b3Vectors",
+      "h3BasisColumns",
+      "h3SheetSigns",
+      "h3Vectors"
+    ],
+    "payload_sha256": "355a0810a6fcf4b3f8c3bf68791b33f196a4d39e59eb85f8b2b3c6b1024afa02"
+  },
+  "schema": "clebsch-factorization-leaves-v2",
   "semantics": "Rows are factorization-difference quotient vectors in audited monomial coordinates, then transported so the listed basis columns are the standard coordinate basis. Sheet signs are +1 and -1 on the two PSL_2 orbits.",
   "types": [
     {
