@@ -414,3 +414,39 @@ survives at a prime not dividing the orbit size.
 **Evidence:** CHECKED (unique-bad-prime witness, A3/B3/H3) | REASONED (first-degree, compression
 unification, integral-sqrt-q) | LEAN (rank/`H_4` tower).
 **Status:** open leads; unallocated. Promote any via the normal C-ID/lane process.
+
+### 2026-07-20 — Clebsch sheets realize self-dual designs + perfect codes; chirality = self-duality
+
+**Provenance:** autonomous spikes connecting C417 to the gateway-objects map
+(`notes/2026-07-20-cocycle-gateway-explorations.md` and its reproducible `.py`).
+**Was I looking for this?:** no — C417's deliverable was the base-change cocycle; these connections
+to designs/codes/polytopes were thrown off while asking how the cocycle "gets used."
+**Observed / musing (all CHECKED unless noted):**
+- The cross-sheet incidence of the C406/C379 matching sheets is a self-dual exceptional design:
+  B3/q=7 = the Fano plane `2-(7,3,1)` / complement `2-(7,4,2)`; H3/q=11 = the 11-cell
+  `2-(11,6,3)` / biplane `2-(11,5,2)`.
+- Uniformly `Aut(design) = PSL_2(q)` and the self-dualities (polarities) are exactly the outer
+  coset = the C417 chirality = C413's bare `Aut = C2` = C379's golden swap. Four descriptions of
+  one bit.
+- The disjoint designs carry the exceptional PERFECT codes: Fano -> `[7,4,3]` Hamming (F_2);
+  2-(11,5,2) biplane -> `[11,6,5]` ternary Golay (F_3); both perfect (sphere-packing equality).
+- The one bit is constructively measurable: the signed cubic moment `M_3[0,0,0] = 6 mod 11` flips to
+  `-6` under the sheet swap, so `sign(mu_3)` reads off the sheet / vertex-facet orientation.
+**Why it may matter / strongest question:** this is the operational payoff of C417 — the "forgotten
+decoration" of the gateway framework is one chirality bit, both cohomological (the cocycle) and
+measurable (`mu_3`), and it is the self-duality of an exceptional geometry. It grounds the C366/C413
+reconstruction bound in a concrete object and supplies the gateway program's G15/G16/G19 gate-1
+inputs.
+**Structural mechanism:** a reflection group on the quadric; matchings = one-factorizations; the two
+sheets swapped by the outer coset give a self-dual `PSL_2(q)` design whose polarity is the chirality.
+**Predicted siblings / forecast:** the *code* tower stops at q=11 (no third perfect code) while the
+*polytope* tower continues to q=19 (57-cell) — so a single "convergence object" cannot be a uniform
+code family; a spurious q=19 perfect code falsifies it. Rank-4 golden `H_4`/q=31 (600-cell) is the
+predicted next gateway with its own cocycle + cubic bit.
+**Discriminator / falsifier:** the perfect-code claims are exact `[n,k,d]` + sphere-packing checks
+(done); the self-duality is the full outer-coset polarity census (done). The M_12/Golay-outer
+identification of the chirality and the H_4 tower remain LEAN.
+**Evidence:** CHECKED (designs, self-duality, perfect codes, cubic statistic) | LEAN (M_12
+identification, H_4 tower).
+**Status:** open leads; unallocated. The gateway report already flags G15/G16/G19; these spikes
+clear their first exact gates but allocate nothing.
