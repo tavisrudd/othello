@@ -7,6 +7,7 @@ import hashlib
 import importlib.util
 import itertools
 import json
+import math
 from collections import Counter
 from pathlib import Path
 
@@ -189,6 +190,40 @@ def reconstruct_tomography():
     assert dict(sorted(triples.items())) == {int(k): v for k, v in target["triple_cell_count_spectrum"].items()}
     assert triples[22] == target["separating_triple_count"]
     assert hashlib.sha256(canonical_bytes(views)).hexdigest() == target["all_views_sha256"]
+
+    view_index = {view: i for i, view in enumerate(views)}
+    view_actions = [tuple(view_index[move(view, action)] for view in views) for action in actions]
+
+    def permutation_order(permutation):
+        seen = [False] * len(permutation)
+        answer = 1
+        for start in range(len(permutation)):
+            if seen[start]:
+                continue
+            current, length = start, 0
+            while not seen[current]:
+                seen[current] = True
+                length += 1
+                current = permutation[current]
+            answer = math.lcm(answer, length)
+        return answer
+
+    for record in target["separating_triple_orbits"]:
+        triple = tuple(record["representative"])
+        stabilizer = [
+            action for action in view_actions if tuple(sorted(action[i] for i in triple)) == triple
+        ]
+        order_counts = Counter(permutation_order(action) for action in stabilizer)
+        induced_actions = {
+            tuple(triple.index(action[i]) for i in triple) for action in stabilizer
+        }
+        assert len(stabilizer) == record["setwise_stabilizer_order"]
+        assert dict(sorted(order_counts.items())) == {
+            int(k): v for k, v in record["stabilizer_element_order_counts"].items()
+        }
+        expected_type = "S3" if order_counts == Counter({2: 3, 3: 2, 1: 1}) else "C2"
+        assert expected_type == record["stabilizer_type"]
+        assert len(induced_actions) == record["induced_channel_permutation_order"]
 
 
 def main():

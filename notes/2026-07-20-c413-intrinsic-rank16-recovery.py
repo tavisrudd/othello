@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import itertools
 import json
+import math
 from collections import Counter
 from pathlib import Path
 
@@ -217,14 +218,51 @@ def tomography():
     unseen = set(separating)
     orbit_sizes = []
     orbit_representatives = []
+    orbit_records = []
+
+    def permutation_order(permutation):
+        seen = [False] * len(permutation)
+        answer = 1
+        for start in range(len(permutation)):
+            if seen[start]:
+                continue
+            current = start
+            length = 0
+            while not seen[current]:
+                seen[current] = True
+                length += 1
+                current = permutation[current]
+            answer = math.lcm(answer, length)
+        return answer
+
     while unseen:
         representative = min(unseen)
         orbit = {
             tuple(sorted(permutation[i] for i in representative)) for permutation in view_actions
         }
+        stabilizer = [
+            permutation
+            for permutation in view_actions
+            if tuple(sorted(permutation[i] for i in representative)) == representative
+        ]
+        order_counts = Counter(permutation_order(permutation) for permutation in stabilizer)
+        induced_actions = {
+            tuple(representative.index(permutation[i]) for i in representative)
+            for permutation in stabilizer
+        }
         unseen -= orbit
         orbit_representatives.append(list(representative))
         orbit_sizes.append(len(orbit))
+        orbit_records.append(
+            {
+                "representative": list(representative),
+                "orbit_size": len(orbit),
+                "setwise_stabilizer_order": len(stabilizer),
+                "stabilizer_element_order_counts": dict(sorted(order_counts.items())),
+                "stabilizer_type": "S3" if order_counts == Counter({2: 3, 3: 2, 1: 1}) else "C2",
+                "induced_channel_permutation_order": len(induced_actions),
+            }
+        )
 
     singleton_parts = sorted(part for part in base_partition if len(part) == 1)
     return {
@@ -240,6 +278,7 @@ def tomography():
         "separating_triple_count": len(separating),
         "separating_triple_orbit_sizes": sorted(orbit_sizes),
         "separating_triple_orbit_representatives": orbit_representatives,
+        "separating_triple_orbits": sorted(orbit_records, key=lambda record: record["orbit_size"]),
         "canonical_first_separating_triple": list(min(separating)),
         "all_views_sha256": hashlib.sha256(canonical_bytes(views)).hexdigest(),
     }

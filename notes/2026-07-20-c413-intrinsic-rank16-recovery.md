@@ -43,6 +43,19 @@ of sizes 220 and 660.  Thus three is the sharp number of conjugate rank-two Heck
 parent-label recovery.  An individual triple is a choice, while the full 55-view family and the two
 separating-triple orbits are canonical.
 
+There is a further intrinsic distinction between those two orbits.  A triple in the orbit of size
+220 has setwise stabilizer of order six, with element-order distribution `1,2^3,3^2`; it is `S3`,
+and its induced action on the three channels is the full symmetric group.  A triple in the orbit
+of size 660 has only a `C2` setwise stabilizer, acting through two channel permutations.  Thus the
+220-orbit is the unique maximally symmetric family of minimal separating instruments.  This
+canonically selects a family, not an individual member of that family.
+
+Finally, C378's exact Fourier self-duality transports the intrinsic recovery theorem to the dual
+side: because `P_16^2=1331 I`, the same recovered `J`-pairs and unordered golden fusion pair can be
+read from the primitive-idempotent/Krein presentation after the Fourier identification.  This is
+an algebraic dual recovery statement only; it does not supply the geometric interpretation of the
+odd Fourier image sought by C415.
+
 ## Intrinsic relation recovery
 
 Start only with the rank-16 intersection tensor and valencies.  Iteratively color a relation by
@@ -138,6 +151,11 @@ Thus two views never suffice and three sometimes do.  The 880 separating triples
 `G`-orbits of sizes `220+660`.  This is stronger than merely observing that all conjugates must
 separate in a primitive action: it gives the sharp tomography width and exact orbit structure.
 
+Orbit--stabilizer sharpens the canonicality statement.  The size-220 orbit has stabilizer `S3`
+and the induced channel action has order six, whereas the size-660 orbit has stabilizer `C2` and
+induced channel action of order two.  Hence “minimal, separating, and maximally channel-symmetric”
+intrinsically specifies exactly the 220-member orbit.
+
 The result lessens, but does not repeal, C437's obstruction.  No higher polynomial in one view can
 separate points in the same fibre.  Separation comes from adding independently positioned Hecke
 channels.  A canonical system uses all 55 channels or one entire orbit of separating triples; a
@@ -186,9 +204,9 @@ python3 notes/2026-07-20-c413-intrinsic-rank16-recovery.py --write
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker | 13,309 | `152bda1faf79a42fb8e376adc65f4ffda0db004ce43f12bdaed3a7d839e5f4e0` |
-| independent replay | 8,016 | `20120c3dac57a11308bdc6cb96321bab994bd79d6000009b358547c7778af7b4` |
-| canonical JSON | 2,372 | `d3bc2c9d2138bb52c6cbe08e41f7bb93fa364f5378644d7651846ab56a5f602d` |
+| primary checker | 14,842 | `0e24dd3f556247f2015cd37a7a32467881925cfdbde67aa673920b5f6cd1f18d` |
+| independent replay | 9,531 | `faf282965ead20b06422ef032ab170e4bd88b7e933e47806d3d9d749a2d5c6bb` |
+| canonical JSON | 2,773 | `4b094a336e975cd446113a33685ddb9c2b5aa02bb28bd599496a33f4366c9303` |
 
 The primary rebuilds C378's exact rank-16 tensor/eigenmatrix and C411's group/matching action from
 their frozen constructors.  The replay independently reconstructs the H3 reflection groups,
@@ -199,7 +217,9 @@ C373's proved intrinsic rank-eight reconstruction theorem, and C379's proved fai
 matching-decoration recovery.
 
 The certificate does not prove general separability of the rank-16 scheme, a portable theorem for
-all `A5--A4--A5` geometries, or a canonical choice of one separating triple.
+all `A5--A4--A5` geometries, or a canonical choice of one separating triple.  It canonically
+distinguishes the maximally symmetric orbit of 220 triples, and Fourier self-duality gives a dual
+algebraic recovery, but neither assertion supplies C415's missing geometric odd-sector map.
 
 ## Disposition
 
