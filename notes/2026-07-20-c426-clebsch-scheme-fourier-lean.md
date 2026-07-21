@@ -69,7 +69,7 @@ fully forced by this brief.
 [`2026-07-21-c426-clebsch-scheme-fourier-initial-review.md`](2026-07-21-c426-clebsch-scheme-fourier-initial-review.md),
 commit `b058a9a481e10c16c41acbd1f80118725eecfb48`, verdict `NO-GO`. Every finding has a
 concrete repair below. The exact gate and axiom audit are green; the pinned implementation commit
-is filled immediately after the atomic commit; post-fix review remains required.
+is `4c7a848291906b3961f8af9eb86dd30da30e0f9b`; post-fix review remains required.
 
 Owned implementation paths:
 
@@ -400,7 +400,7 @@ archived under the repository completion invariant.
   authoritative-sounding filename is not evidence for an omitted theorem.
 - [x] Remove or separately classify every optional, conditional, failed, “standard,” “follows,” or
   “if feasible” clause; no such clause inherits the module or gate's strongest label.
-- [ ] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
+- [x] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
   validation command/result, and `#print axioms` output for every terminal.
 - [x] Include the exact public theorem statements and load-bearing definitions, or a deterministic
   extraction committed with the report, for the paper's verbatim statement-adequacy appendix.
