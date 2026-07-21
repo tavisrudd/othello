@@ -1,0 +1,361 @@
+{
+  "acceptance": {
+    "d10_stabilizer_each": true,
+    "explicit_cap_to_frozen_c406_projectivity_each": true,
+    "golden_singleton_identification": "REFUTED_AS_AN_EQUIVARIANT_IDENTIFICATION",
+    "p2_n5_orbits_each": true,
+    "seven_on_conic_children_each": true
+  },
+  "frozen_c406": {
+    "base_and_j_mate_stabilizer_orders": [
+      60,
+      60
+    ],
+    "base_and_j_mate_stabilizers_lie_in_PSL2": true,
+    "base_singleton_matching": [
+      [
+        0,
+        1
+      ],
+      [
+        10,
+        "inf"
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        6,
+        8
+      ]
+    ],
+    "j_mate_singleton_matching": [
+      [
+        0,
+        10
+      ],
+      [
+        1,
+        "inf"
+      ],
+      [
+        2,
+        7
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        6,
+        9
+      ]
+    ],
+    "standard_conic": "XZ-Y^2=0",
+    "standard_to_h3_projectivity": [
+      [
+        10,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        10
+      ],
+      [
+        3,
+        0,
+        3
+      ]
+    ],
+    "unordered_singleton_pair_stabilizer_det_square_nonsquare": [
+      12,
+      12
+    ],
+    "unordered_singleton_pair_stabilizer_order": 24,
+    "unordered_singleton_pair_stabilizer_type": "S4"
+  },
+  "inputs": {
+    "c406_gate1": {
+      "bytes": 25443,
+      "path": "notes/2026-07-20-c406-matching-orbit-scout.json",
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "c406_module": {
+      "bytes": 21996,
+      "path": "notes/2026-07-20-c406-matching-module.json",
+      "sha256": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2"
+    },
+    "c458_freeze": {
+      "bytes": 13379,
+      "path": "notes/2026-07-21-c458-golden-sheet-frame-freeze.json",
+      "sha256": "9e93de4567443726896bf613971d2b7e3c7054874b4bf4810ca74a08384ff620"
+    },
+    "cap_feat": {
+      "bytes": 12245,
+      "path": "notes/data/codex-feat11-c15.out",
+      "sha256": "2d1efcb70821ca64bcb02d5d922107bd960b22224cfbedce8f8cc66cfb451755"
+    }
+  },
+  "knife_edge_classes": [
+    {
+      "S3": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "cap_to_frozen_h3_projectivity": [
+        [
+          1,
+          2,
+          9
+        ],
+        [
+          10,
+          9,
+          6
+        ],
+        [
+          3,
+          5,
+          2
+        ]
+      ],
+      "cap_to_standard_projectivity": [
+        [
+          0,
+          9,
+          6
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      "child_orbits": [
+        {
+          "parameters": [
+            1,
+            4
+          ],
+          "size": 2,
+          "value": "P"
+        },
+        {
+          "parameters": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "size": 5,
+          "value": "N"
+        }
+      ],
+      "class": 4,
+      "frame_parameters": [
+        0,
+        2,
+        3,
+        5,
+        "inf"
+      ],
+      "frame_stabilizer": {
+        "abstract_type": "D10",
+        "determinant_nonsquare_count": 5,
+        "determinant_square_count": 5,
+        "order": 10
+      },
+      "hyperbola": {
+        "A": 3,
+        "B": 5,
+        "equation": "(r-9)(c-3)=5 mod 11",
+        "rho": 9
+      },
+      "natural_p_pair_is_edge_of_base_singleton": false,
+      "natural_p_pair_is_edge_of_j_mate_singleton": false,
+      "standard_to_cap_projectivity": [
+        [
+          0,
+          9,
+          1
+        ],
+        [
+          5,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "symmetry_compatible_projectivities_to_singleton": {
+        "base": 0,
+        "j_mate": 0
+      },
+      "symmetry_compatible_projectivities_to_unordered_singleton_pair": 0,
+      "unframed_projectivities_forcing_p_pair_to_singleton_edge": {
+        "base": 120,
+        "j_mate": 120
+      }
+    },
+    {
+      "S3": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "cap_to_frozen_h3_projectivity": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          10,
+          10,
+          3
+        ],
+        [
+          3,
+          8,
+          1
+        ]
+      ],
+      "cap_to_standard_projectivity": [
+        [
+          0,
+          10,
+          8
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          7
+        ]
+      ],
+      "child_orbits": [
+        {
+          "parameters": [
+            3,
+            4
+          ],
+          "size": 2,
+          "value": "P"
+        },
+        {
+          "parameters": [
+            1,
+            2,
+            5,
+            6,
+            9
+          ],
+          "size": 5,
+          "value": "N"
+        }
+      ],
+      "class": 7,
+      "frame_parameters": [
+        0,
+        10,
+        7,
+        8,
+        "inf"
+      ],
+      "frame_stabilizer": {
+        "abstract_type": "D10",
+        "determinant_nonsquare_count": 5,
+        "determinant_square_count": 5,
+        "order": 10
+      },
+      "hyperbola": {
+        "A": 8,
+        "B": 10,
+        "equation": "(r-4)(c-8)=10 mod 11",
+        "rho": 4
+      },
+      "natural_p_pair_is_edge_of_base_singleton": false,
+      "natural_p_pair_is_edge_of_j_mate_singleton": false,
+      "standard_to_cap_projectivity": [
+        [
+          0,
+          4,
+          1
+        ],
+        [
+          10,
+          8,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ],
+      "symmetry_compatible_projectivities_to_singleton": {
+        "base": 0,
+        "j_mate": 0
+      },
+      "symmetry_compatible_projectivities_to_unordered_singleton_pair": 0,
+      "unframed_projectivities_forcing_p_pair_to_singleton_edge": {
+        "base": 120,
+        "j_mate": 120
+      }
+    }
+  ],
+  "schema": "c447-cap-knife-edge-v1",
+  "task": "C447",
+  "verdict": {
+    "reason": "The cap P orbit is a two-point conic orbit, whereas the golden singleton pair consists of two perfect matchings. Under the frozen parameter projectivity neither P pair is an edge of either singleton. More invariantly, each cap D10 contains five determinant-nonsquare elements, while each singleton A5 lies in PSL2, and the unordered singleton-pair stabilizer is S4 of order 24. Hence no projectivity makes the proposed identification equivariant. An unframed PGL2 map can force either P pair onto an arbitrary singleton edge (120 maps for each singleton), showing why bare incidence is coordinate choice rather than a correspondence.",
+    "register_row_35": "SHARP_NEGATIVE",
+    "x3_consequence": "Only the abstract orbit-valued-selector statement survives; row 35 supplies no cap/golden identification."
+  }
+}
