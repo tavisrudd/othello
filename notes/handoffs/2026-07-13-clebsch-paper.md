@@ -209,14 +209,15 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   tensor/fusion certificate, Lean data, and six-entry manifest. Two review repair rounds closed the
   trust/provenance findings; exact terminals, hashes, build/axiom evidence, exclusions, and C320 rows
   are in [`2026-07-20-c426-clebsch-scheme-fourier-lean.md`](../2026-07-20-c426-clebsch-scheme-fourier-lean.md).
-- **C423 complete; C424 is now unblocked, while C425 and C427 remain queued behind it:** the sharded
-  A3/B3/H3 leaves prove ranks `3/6/10`, B3/H3 signed first/second-moment cancellation, and named
-  nonzero cubic witnesses.  A v2 replay mechanically binds all eight Lean literals, and the committed
-  11-statement/16-terminal audit plus import-only gate passed final independent review `GO`.  C424 owns
-  balanced-sheet/cubic orientation; C425 owns C411's six-representative depth--Fourier--parent bridge;
-  C427 owns the committed C373 intrinsic chirality endpoint and the new import-only
-  `RelativeConicArcs.Gates.ClebschReplacementSpine` gate and hands its verification-map delta to
-  C320.  Exact evidence and exclusions: [`2026-07-20-c423-clebsch-factorization-leaves-lean.md`](../2026-07-20-c423-clebsch-factorization-leaves-lean.md).
+- **C423 and C424 complete; C425 is now unblocked, while C427 remains queued behind C425:** C423's
+  sharded A3/B3/H3 leaves prove ranks `3/6/10`, signed first/second-moment cancellation, and named
+  nonzero cubic witnesses. C424 formalizes the abstract radical--Hadamard balanced-sheet theorem,
+  concrete B3/H3 signed actions, cubic orientation and exact stabilizers, and plane syzygies without
+  balanced-half enumeration. Both import-only gates and audit surfaces passed final independent
+  review `GO`. C425 owns C411's six-representative depth--Fourier--parent bridge; C427 owns the
+  committed C373 intrinsic chirality endpoint and replacement-spine gate and hands its verification-map
+  delta to C320. Exact evidence and exclusions: [`2026-07-20-c423-clebsch-factorization-leaves-lean.md`](../2026-07-20-c423-clebsch-factorization-leaves-lean.md)
+  and [`2026-07-20-c424-clebsch-balanced-sheets-lean.md`](../2026-07-20-c424-clebsch-balanced-sheets-lean.md).
 - **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
   separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. It consumes C222's committed
   terminal without touching `ReflectionArrangementDecoding.lean`.
