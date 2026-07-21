@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-20
 
-**Status:** `CONJECTURAL SYNTHESIS WITH PROVED FORMAL CONSTRAINTS; EXACT TWISTED-FOURIER PREFLIGHT IN PROGRESS`
+**Status:** `STAGE T0 THEOREM; CONJECTURAL EXCEPTIONAL RESTRICTION AND MODULAR SYNTHESIS`
 
 **Literature depth:** zero sources were read at full text for this synthesis.  Two sources were
 read partially and three at abstract/metadata depth, as itemized below.  This is a background
@@ -59,8 +59,44 @@ The target theorem is deliberately sharper than “the four constructions are re
 > characteristic to the nonsplit projective-cover/Tate picture, so the depth and cubic planes are
 > related boundary quotients rather than canonically equal planes.
 
-Nothing below promotes this conjecture to a theorem.  It records the constraints and the exact
-falsifiers by which C414--C417 should settle it.
+Nothing below promotes the full conjecture to a theorem.  Stage T0 is a theorem; the exceptional
+restriction, matching identity, geometric shadow, and modular comparison remain gated.
+
+## Stage T0 result
+
+The first Tao-style gate passes exactly.  For each `q=5,7,11`, choose a generator `chi` of the
+multiplicative character group and one representative of every projective line in `F_q^3`.  After
+factoring out the one-dimensional Gauss sum, Fourier on scalar-weight `r` sections has projective
+kernel
+
+```text
+K_r([y],[x]) = 0                         if <x,y>=0,
+                chi(<x,y>)^(-r)          otherwise.
+```
+
+Exact cyclotomic-integer calculation gives both ordered compositions
+
+```text
+K_1 K_-1 = q^2 I,                 K_-1 K_1 = q^2 I.
+```
+
+The checked dimensions and row supports are:
+
+| type | q | projective lines | orthogonal zeros/row | nonzero entries/row | composition scalar |
+|:---:|---:|---:|---:|---:|---:|
+| A3 | 5 | 31 | 6 | 25 | 25 |
+| B3 | 7 | 57 | 8 | 49 | 49 |
+| H3 | 11 | 133 | 12 | 121 | 121 |
+
+The primary checker reduces every entry of both matrix products modulo
+`Phi_4,Phi_6,Phi_10`, respectively.  The independent replay chooses a different projective gauge
+and constructs each root-of-unity power recursively in the cyclotomic basis.  It also rebuilds the
+primary gauge to cross-check the stored kernel hashes.  No floating-point or fitted cyclotomic
+embedding is used.
+
+This proves the ambient complementary-weight transform and its normalization.  It does not yet
+show that the B3/H3 factorization sections occupy the needed exceptional-subgroup blocks.  Stage
+T1—the projective scalar cocycle and `A4` Hom-space computation—is now the live C414/C416 gate.
 
 ## Constraints already proved
 
@@ -331,6 +367,34 @@ obstruction, C411's double-coset depth map, C412's Tate/projective-cover boundar
 recovery and tomography theorem, and C438's different-fibre obstruction.  The complementary-degree
 and weight-reversal formulas are formal consequences of those definitions.
 
-The first new computational bundle will certify only Stage T0.  It will not certify the exceptional
-`A4` restriction, a matching-section Fourier identity, the geometric meaning of `M_odd D(M)`, the
-`8/9` extension class, a portable B3/H3 theorem, or novelty.
+The computational bundle certifies only Stage T0.  It does not certify the exceptional `A4`
+restriction, a matching-section Fourier identity, the geometric meaning of `M_odd D(M)`, the `8/9`
+extension class, existence of an A3 sheet orientation, a portable B3/H3 theorem, or novelty.
+
+## Reproducibility
+
+Run from `/home/tavis/src/othello` with Python 3.13.12:
+
+```bash
+python3 notes/2026-07-20-c414-tautological-fourier-preflight.py --check
+python3 notes/2026-07-20-c414-tautological-fourier-preflight-replay.py
+sha256sum -c notes/2026-07-20-c414-tautological-fourier-preflight.sha256
+```
+
+Intentional regeneration is:
+
+```bash
+python3 notes/2026-07-20-c414-tautological-fourier-preflight.py --write
+```
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| primary checker | 7,394 | `889bf618995cebf69325d4359272342b88094d86dfe6efd173ace2a0074c4670` |
+| independent replay | 5,178 | `1206cdae50c23367f68cd4fb79e5a4ec9779c0e643d7473e83664702499a999e` |
+| canonical JSON | 4,448 | `faeca37b580ef5a8f3278c1f2f82fd81af49030d99f2a5374abafb3f7bcc8863` |
+
+The trusted boundary is elementary arithmetic in the three prime fields, the standard dot pairing,
+the definition of a multiplicative character through a primitive generator, and exact reduction in
+the displayed cyclotomic integer bases.  The checker does not import the B3/H3 factorization
+certificates; the degree data are frozen parameters whose geometric realization remains a T1/T2
+obligation.
