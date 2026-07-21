@@ -89,13 +89,15 @@ char-0 roots to conic points at each prime. Deliverable: one conventions JSON + 
 certificate. Falsifier: no integral form compatible with C377 exists ⇒ blocker note, Fable
 review of the model before M1 runs. Model: Opus.
 
-**M0 ADDENDUM REQUIRED (C458, allocated 2026-07-21, from M2/C442).** M2 proved that the frozen
+**M0 ADDENDUM OUTCOME (C458, 2026-07-21) — GREEN; M2 AMBER→GREEN.** M2 proved that the frozen
 Klein binary form is *sheet-blind* (rational ⇒ `sigma`-invariant `A5` ⇒ prime-independent
 reduction): it is the correct vertex-set model but cannot carry the sheet bit. C458 promotes the
 golden six-arc + invariant anisotropic conic + polar-pair matching (already frozen de facto in
 C379) to a **co-equal frozen sheet-carrying object** under M0's JSON discipline, states the
-two-frame theorem, and records the bridge. Convention *extension*, not change: nothing frozen
-becomes wrong and M1 is untouched. Model: Opus (Fable gate on the two-frame theorem wording).
+two-frame theorem, and records the bridge. The certificate and independent Fable review are GREEN;
+claim 3 now has a frozen antecedent. Convention *extension*, not change: nothing frozen becomes
+wrong and M1 is untouched. All downstream golden-frame work consumes
+`notes/2026-07-21-c458-golden-sheet-frame-freeze.{md,py,json,sha256}` and `-replay.py`.
 
 **M1 — vertex-reduction bijection (the load-bearing miracle).**
 Goal: certify that the M0 vertex set reduces **bijectively onto `P^1(F_11)`** (the full conic)
@@ -179,6 +181,10 @@ the icosahedral quaternion (Schur-index-2) obstruction at 11. Candidate germs fo
 gluing certificate: (a) the `sigma`-stable **perpendicularity pairing** between the two sheets' axis
 systems (prime-independent, available before any char-11 choice); (b) the two-frame/quaternion
 mechanism above. (See findings 4–5 of `notes/2026-07-21-c442-antipodal-singleton-reduction.md`.)
+**Conditional C460 input.** If C460 identifies the golden clouds' common three-point triangle with
+the prime-independent perpendicularity germ, M5 may use that identification as a concrete finite
+shadow of the gluing. If the comparison fails, or remains merely cardinal, omit it completely; the
+quaternion/two-frame mechanism and M5 acceptance criteria are unchanged.
 
 ## Phase 1b — cap-bridge chain (parallel, non-blocking)
 
@@ -209,6 +215,32 @@ full matching replay finds exactly `10/21/55` genuine secant-pencil matchings am
 are no intruder-point orbits or sheet correspondence to identify, and X3 loses X1's proposed
 geometric leg. See `notes/2026-07-21-c446-marker-matching-concurrency.{md,py,json,sha256}`.
 
+**X1+ — golden–Frégier cloud bridge (C460; after C458; parallel and non-blocking).**
+Goal: replace the failed point-valued concurrency guess by the exact orbit-valued geometry it
+exposes. Consume C446 and C458 by SHA. First prove for every odd `q` that concurrent perfect matchings of `P^1(F_q)` are exactly
+the fixed-point-free projective involutions / secant pencils through interior conic points, one
+`PGL_2(q)/D_{2(q+1)}` orbit of size `q(q-1)/2`; deduce conceptually that an `S4`- or `A5`-fixed
+matching cannot be concurrent. Then, in C458's frozen golden frame, certify:
+
+- B3's `14` clouds of size `6` on `21` interior points and H3's `22` clouds of size `15` on `55`
+  interior points, with all incidences and stabilizers;
+- for H3, the cloud-overlap graph at intersection size five is connected, 6-regular, bipartite
+  `11+11`, and recovers exactly the unordered `PSL` sheets;
+- the golden base/J-mate clouds meet in a three-point set whose setwise stabilizer is exactly the
+  rational octahedral `S4`, with common `A4` fixing the two matchings, and whose unique invariant
+  matching is the nonconcurrent q=11 B3/cube matching;
+- whether that common triangle is exactly C442's prime-independent perpendicularity-pairing germ;
+  a negative answer is an accepted sharp stop and must not be repaired by changing conventions;
+- the exact `22×55` incidence ranks over `Q` and the relevant small fields, including whether the
+  sheet-sign line is the full left kernel; export this only as a secondary T3 control.
+
+Deliverable: report + exact primary/replay certificate + canonical JSON + checksum manifest. Give
+the conceptual double-coset proof (`A5\PGL_2(11)/D_24`, and the B3 analogue) rather than presenting
+only a census. Literature scope is the classical Frégier/involution theorem and the immediately
+relevant `PGL/A5/S4` orbitals; no broad matching census or novelty claim. Paper-facing output is at
+most one proposition and one diagram after the two-frame theorem; Phase 3 decides whether it earns
+that slot. Model: Opus; Fable gate only on the M5/X3 interpretation.
+
 **X2 — knife-edge identification (register row 35).**
 Goal: reconstruct, from committed cap-lane artifacts only, the q=11 knife-edge on-conic
 situation (the 7 on-conic children, the D10 stabilizer, the size-2 P orbit vs size-5 N orbit);
@@ -220,11 +252,12 @@ committed artifacts cannot pin the knife-edge classes. Falsifier: no corresponde
 closes negative; the advice-complexity bridge (X3) survives only in its abstract form. Model:
 Opus; **Fable gate** on the identification verdict before it is stated anywhere.
 
-**X3 — orbit-valued selector lemma (rows 35 + 38; conditional on X1/X2 outcomes).**
+**X3 — orbit-valued selector lemma (rows 35 + 38; after C460 and the X2 verdict).**
 Goal: state and prove the bridging lemma: at a position whose stabilizer acts on a distinguished
 child-pair through the chirality `C2` (C413/C417 data), no equivariant pointwise selector exists,
-while orbit-valued selectors evade the obstruction; connect, with exact scope qualifiers, to the
-cap lane's C75 feature-completeness wall, L1's q=11 failures, and the q=5 antipodal-copycat
+while orbit-valued selectors evade the obstruction. Consume C460's 15-point cloud selector and
+overlap-graph recovery of the unordered sheets as the exact positive geometry; connect, with exact
+scope qualifiers, to the cap lane's C75 feature-completeness wall, L1's q=11 failures, and the q=5 antipodal-copycat
 success (canonical involution = nonsplitting case). Deliverable: a short theorem note with the
 cap-lane connection stated as consistency, not causation, unless X2 landed positive. Model:
 **Fable** (cross-lane theorem wording), with Opus doing any supporting checks.
@@ -270,6 +303,11 @@ literature only after resolving and caching the reference.
 Deliverable: certificate + verdict on roof sub-statement (a). Falsifier: decomposition does not
 match the Weil components ⇒ the roof's sharpest clause dies; the conjecture reverts to its weaker
 form. Model: Opus; **Fable gate** on the module-identification verdict.
+**Secondary C460 control (not a T3 gate).** Consume the certified `22×55` cloud-incidence module,
+its exact rank/kernel profile, and its sheet-balanced columns as a derived comparison: test whether
+its unique sheet-sign kernel and modular rank drops are explained by the same computed character
+decomposition. Do not promote the observed mod-2/mod-3 drops into the Hamming/Golay or Weil story
+without an exact constituent-level explanation.
 
 **T4 — Roquette curve: Lagrangians, supersingularity, theta parity.**
 Goal: (i) certify matchings ↦ Lagrangians in `J[2]` (even-subset model) and sheets ↦ Lagrangian

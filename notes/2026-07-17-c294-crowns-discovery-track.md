@@ -509,3 +509,8 @@ scope.
 **Status:** open lead; unallocated. Candidate for a new C-ID (Frégier-cloud sheet-carrier `Ω±` +
 `|Ω+∩Ω-|=3` ↔ perpendicularity-pairing/M5 check + the sharper X3 form) *after* the cloud claims get a
 verified certificate. Coordinator following up per the C458 Fable review §4.
+
+**Promotion (2026-07-21):** graduated → **C460**, the bounded golden–Frégier cloud bridge in
+`notes/2026-07-21-clebsch-weil-roof-program.md`. C460 owns verification of the unverified cloud half,
+the common-triangle/perpendicularity test, the sharper X3 geometry, and the secondary T3 incidence
+control; the original discovery entry remains the provenance record.
