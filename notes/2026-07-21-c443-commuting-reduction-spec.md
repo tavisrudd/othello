@@ -6,11 +6,14 @@
 
 **Status:** frozen formulation for M3b; no computational verdict
 
-This note is the Fable formulation gate required by M3 of the Weil-roof execution program.  M3b
-must implement this specification verbatim.  In particular, it may not manufacture an integral
-answer by applying the Chinese remainder theorem to the already-known mod-11 tensors.  The generic
-object must be constructed first from C458's frozen golden sheet frame; the two reductions are
-then tests of that object.
+**Executor:** `5.6-sol-xhigh`, standing in for the program's Fable formulation role
+
+This note discharges the formulation gate that the Weil-roof execution program labels “Fable.”
+It was produced by `5.6-sol-xhigh` as the explicit stand-in for that role.  M3b must implement this
+specification verbatim.  In particular, it may not manufacture an integral answer by applying the
+Chinese remainder theorem to the already-known mod-11 tensors.  The generic object must be
+constructed first from C458's frozen golden sheet frame; the two reductions are then tests of that
+object.
 
 ## 1. Rings, automorphisms, and prohibited denominators
 
@@ -241,4 +244,3 @@ The task stops with a dated blocker note if any one of the following occurs:
 
 If a falsifier triggers, M1--M2 and C458 remain intact.  The integral theorem retreats to the
 sheet/matching level, and the tensor clause is cut exactly as prescribed by the Weil-roof program.
-
