@@ -1,0 +1,169 @@
+{
+  "boundary_not_certified_here": [
+    "the bijectivity of the vertex->conic reduction and the explicit per-root table (M1)",
+    "uniqueness of the antipodal A5-invariant matching (M2)",
+    "commuting-with-reduction of the quotient constructions mu1,mu2,mu3 (M3)",
+    "the B3 sqrt2 and A3 inert-fusion reduction theory in full (M4)",
+    "the char-11 gluing of the two sheets into one PGL2(11) orbit (M5)"
+  ],
+  "c377_compatibility": {
+    "J_matrix": "J(x,y,z) = (x, -z, -y)   (C377 six-arc frame)",
+    "golden_conjugate_reduction_gives": {
+      "phi": 4,
+      "sheet": "tau=4",
+      "sqrt5": 7
+    },
+    "identification": "J is the six-arc-frame realization of golden conjugation sigma = Gal(Q(sqrt5)/Q); the icosahedral A5 trace field is Q(sqrt5), so the group is golden.",
+    "reduction_zeta5_to_3_gives": {
+      "phi": 8,
+      "sheet": "tau=8 (C377/C379)",
+      "sqrt5": 4
+    },
+    "sigma_swaps_pentagons_equals_sheet_swap": true
+  },
+  "cases": {
+    "A3_octahedron": {
+      "coxeter_number_h": 4,
+      "form_field": "Z",
+      "form_invariant_under_group": true,
+      "group_order": 24,
+      "identity_h_plus_2_eq_q_plus_1": true,
+      "inert_fused": true,
+      "middle_coefficient": 0,
+      "prime_q": 5,
+      "reduces_mod_5_to": "x y (x^4 - y^4)  ->  P^1(F_5)",
+      "spin_field": "Q(sqrt2)",
+      "split_at_q": false,
+      "symmetry_group": "O = S4 (octahedral rotation group)",
+      "vertex_count": 6,
+      "vertex_form": "t = x y (x^4 - y^4)",
+      "vertices_are_root_set": true
+    },
+    "B3_cube": {
+      "coxeter_number_h": 6,
+      "form_field": "Z[sqrt2]",
+      "form_invariant_under_group": true,
+      "group_order": 24,
+      "identity_h_plus_2_eq_q_plus_1": true,
+      "middle_coefficient": "7 sqrt2",
+      "prime_q": 7,
+      "reduces_mod_7_to": "4 x y (x^6 - y^6)  ->  P^1(F_7)   (sqrt2 == 3 mod 7)",
+      "spin_field": "Q(sqrt2)",
+      "split_at_q": true,
+      "symmetry_group": "O = S4 (octahedral rotation group)",
+      "vertex_count": 8,
+      "vertex_form": "W = x y (4 x^6 + 7 sqrt2 x^3 y^3 - 4 y^6)",
+      "vertices_are_root_set": true
+    },
+    "H3_icosahedron": {
+      "antipodal_perfect_matching_pairs": 6,
+      "coxeter_number_h": 10,
+      "f_invariant_under_group": true,
+      "form_field": "Z",
+      "group_generators": {
+        "S": "diag(zeta5, zeta5^{-1}), order 5, in SL2(Z[zeta5])",
+        "T": "(1/sqrt5)[[-(zeta-zeta^4), zeta^2-zeta^3],[zeta^2-zeta^3, zeta-zeta^4]], order 2; inverts only the spin prime sqrt5 (never 11)",
+        "presentation": "<S, T> = A5, order 60"
+      },
+      "group_order": 60,
+      "identity_h_plus_2_eq_q_plus_1": true,
+      "middle_coefficient": 11,
+      "prime_q": 11,
+      "reduces_mod_11_to": "x y (x^10 - y^10)  ->  P^1(F_11)",
+      "roots_are_single_orbit_of_size_12": true,
+      "spin_field": "Q(sqrt5)",
+      "split_at_q": true,
+      "symmetry_group": "A5",
+      "trace_field": "Q(sqrt5)",
+      "vertex_count": 12,
+      "vertex_form": "f = x y (x^10 + 11 x^5 y^5 - y^10)"
+    }
+  },
+  "conic": {
+    "P1_to_conic": "[s:t] |-> [s^2 : s t : t^2]   (discriminant Veronese)",
+    "note": "the six-arc frame of C341/C377 carries the anisotropic invariant conic X^2+Y^2+Z^2=0 and is Q(phi)-rational as 3x3 matrices (its A5 has order 60 over Q(phi)); over Q(phi) that definite conic is inequivalent to the isotropic X Z - Y^2, so the two frames agree only after reduction mod q, and the standard conic X Z - Y^2 is the finite-field normalization used from q on.  The integral golden model is the binary-form frame: Klein's f a binary form over Z, the icosahedral A5 realized over Z[zeta5] (S in SL2(Z[zeta5]); T inverts only the spin prime sqrt5, never 11) with trace field Q(sqrt5)=Q(phi) -- that trace field is what 'golden' means and is the source of the split-prime sheet structure; the conic is the discriminant X Z - Y^2 with the Veronese above.",
+    "standard_conic": "Q = X Z - Y^2   (C406 Gate-1 frozen conic coordinates)"
+  },
+  "labeling": {
+    "q11": {
+      "alpha": 10,
+      "beta": 1,
+      "pentagon_alpha": [
+        2,
+        6,
+        7,
+        8,
+        10
+      ],
+      "pentagon_beta": [
+        1,
+        3,
+        4,
+        5,
+        9
+      ],
+      "phi": 8,
+      "pole_labels": {
+        "v0": 0,
+        "vinf": "inf"
+      },
+      "sqrt5_frozen": 4
+    },
+    "q11_conjugate": {
+      "alpha": 1,
+      "beta": 10,
+      "pentagon_alpha": [
+        1,
+        3,
+        4,
+        5,
+        9
+      ],
+      "pentagon_beta": [
+        2,
+        6,
+        7,
+        8,
+        10
+      ],
+      "phi": 4,
+      "sqrt5": 7
+    },
+    "q5": {
+      "nonpole": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "pole_labels": {
+        "v0": 0,
+        "vinf": "inf"
+      }
+    },
+    "q7": {
+      "nonpole": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "pole_labels": {
+        "v0": 0,
+        "vinf": "inf"
+      },
+      "sqrt2_frozen": 3
+    }
+  },
+  "ring": {
+    "definition": "Z[phi], phi^2 = phi + 1 (phi = golden ratio)",
+    "golden_conjugation": "sigma(phi) = 1 - phi   (Gal(Q(sqrt5)/Q))",
+    "silver_ring": "Z[sqrt2] for B3/A3 (spin field Q(sqrt2))",
+    "sqrt5": "sqrt5 = 2 phi - 1"
+  },
+  "schema": "c440-conventions-freeze-v1",
+  "task": "C440 / Weil-roof battery M0 \u2014 shared conventions freeze",
+  "trusted_boundary": "exact rational arithmetic in Q(zeta5), Q(i), Q(sqrt2,omega) and prime fields F_q; polytope groups are the full sets of projectivities permuting the vertex root sets"
+}
