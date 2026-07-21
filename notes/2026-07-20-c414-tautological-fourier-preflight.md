@@ -20,9 +20,11 @@ same structural law as H3's `1,4,6` profile.  A3 remains the nonsplitting contro
 claim-specific source audit, and certificate bundle are in
 `notes/2026-07-20-c414-b3-h3-oriented-depth-theorem.md`.
 
-This closes C414, not the full conjecture below.  The zero-depth plane is a nonlinear compression
-of the rank-four section space; C416 still owns the section-level twisted-Fourier identity, while
-C415 and C417 own the geometric transformed statistic and modular filtered-lattice comparison.
+This closes C414, not the full conjecture below.  Zero counting is nonlinear on arbitrary forms,
+but on every frozen moving family it linearizes exactly: the depth plane is the common-seam
+coinvariant quotient, with source/kernel/depth dimensions `4/2/2` on both B3 seams and `6/4/2` on
+H3.  C416 still owns the section-level twisted-Fourier identity, while C415 and C417 own the
+pointwise geometric formula and modular filtered-lattice comparison.
 
 ## Executive picture
 
@@ -353,8 +355,10 @@ factorization sections / defect  <--Fourier-->  depth sections / defect,
 ```
 
 where the first defect candidates are the zero-divisor/depth-compression kernel and the modular
-socle.  This is an attack template, not an identification: neither defect quotient has yet been
-constructed on the certified odd four-space.
+socle.  C414's free upgrade constructs the first defect exactly on the moving section modules: it
+is the common-seam augmentation image, and the quotient is the depth plane.  This is not yet an
+identification on the certified Fourier odd four-space; in H3 the moving section source has
+dimension six, so a further section-to-Fourier reduction is unavoidable.
 
 The actionable T2 gate is to build canonical source and target filtrations from multiplication by
 `Q`, zero-divisor compression, the rank-two depth image, and the Tate/socle boundary.  Compute the
@@ -399,15 +403,15 @@ The following list is the durable boundary for C414--C417.
    group, or does it require another orientation datum?
 6. **Odd Fourier geometry.**  Which exact dual incidence statistic is the shadow of the twisted
    section, and how does it yield all four coordinates of `M_odd D(M)` without numerical fitting?
-7. **Depth compression.**  Is zero-divisor projection followed by common-subgroup radialization
-   exactly the passage from the twisted section to the six depth profiles?  Is its kernel the
-   finite analogue of a lower-dimensional Fourier--Mukai defect category?
+7. **Depth compression — resolved on the moving family.**  Zero depth is exactly the unique
+   linear common-seam coinvariant quotient of the moving odd sections, and its kernel is the
+   common-seam augmentation image.  A pointwise incidence formula and its relation to the
+   exceptional Fourier block remain open.
 8. **The `8/9` extension.**  Are `[2,8,1]` and `[2,9,1]` associated-graded boundary maps of one
    filtered integral Fourier/Radon lattice, with their difference supported on the modular socle,
    or does the filtered-lattice comparison give a sharp obstruction?
-9. **Geometric portability.**  The q=7 representation block now passes for both seams.  Does either
-   seam reproduce the H3 cubic-first trade and signed depth law, and does q=5 explain nonsplitting
-   rather than merely supply another table?
+9. **Geometric portability — resolved.**  Both q=7 seams reproduce the H3 cubic-first signed depth
+   law, and q=5 is the nonsplitting subgroup control rather than a failed table.
 10. **Orientation versus parent choice.**  A sheet choice or nonzero vector in the orientation line
    selects a parent, but is there a natural external geometric source of that choice in any intended
    application?
@@ -449,23 +453,25 @@ cocycle.  **Complete with a correction:** determinant one splits the cocycle, we
 the four-dimensional odd block, and `-1/+1` do not.  Repeat the structural test at q=7.
 
 The q=7 test is also **complete at representation level**.  There are `S3` and `D8` common seams,
-and both true weight-`2/4` sectors have exact four-dimensional odd Fourier blocks.  The remaining
-T1 question is geometric: select a seam or prove compatible factorization/depth statements on
-both, then determine whether the relevant section line is forced inside the four-space.
+and both true weight-`2/4` sectors have exact four-dimensional odd Fourier blocks.  C414 completes
+the geometric branch on both seams and identifies their depth planes as section coinvariants.  The
+remaining question is whether the relevant Fourier line is forced before that quotient.
 
 ### Stage T2 — global section module and one-point normalization
 
 Represent the actual-degree `Phi_M` and `P_M` as sections and keep the full family as the parent
-pair moves.  Determine the global induced/Hecke module and the extra operator that reduces the
-local 16-dimensional Hom space.  In parallel, build the `Q`/zero-divisor/depth/socle filtrations
-and measure the filtered, pairing-preserving Hecke Hom space.  Only if that space is one-dimensional
+pair moves.  The common-seam augmentation kernel and rank-two depth quotient are now exact; use
+them as the first filtration step.  Determine the global induced/Hecke module and the extra
+operator that reduces the local 16-dimensional Hom space, then add the `Q`/socle filtration and
+measure the filtered, pairing-preserving Hecke Hom space.  Only if that space is one-dimensional
 should one singleton and its mate determine the Gauss scalar.  Then prove the all-matching identity
 by equivariance, not by 22 independent fits; at q=7, run the test on both seam classes until a
 geometric selector is proved.
 
 ### Stage T3 — shadows and modular reduction
 
-Factor the known depth map through zero-divisor incidence and radialization.  Choose an integral
+Upgrade the certified module-level coinvariant factorization to a pointwise zero-divisor incidence
+formula.  Choose an integral
 cyclotomic lattice for the twisted transform and package its prime-above-11 filtration as a Rees
 module.  Seek a corrected basis in which the generic transform is complementary-block exchange;
 then compare the special-fibre radical/socle and Tate boundary maps.  The success criterion is an
@@ -548,16 +554,17 @@ obstruction, C411's double-coset depth map, C412's Tate/projective-cover boundar
 recovery and tomography theorem, and C438's different-fibre obstruction.  The complementary-degree
 and weight-reversal formulas are formal consequences of those definitions.
 
-Four atomic bundles now certify: the ambient q=5/7/11 complementary kernels; the q=11 projective
+Five atomic bundles now certify: the ambient q=5/7/11 complementary kernels; the q=11 projective
 lift splitting and exact `4/6` odd block; the q=7 `S3/D8` seam census; and the exact `2/4` odd blocks
-on all seven q=7 seams.  Each bundle has a primary checker, canonical JSON, checksum manifest, and
-an independent replay using a different construction or projective gauge.
+on all seven q=7 seams; plus C414's B3/H3 factorization-depth and common-seam coinvariant theorem.
+Each bundle has a primary checker, canonical JSON, checksum manifest, and an independent replay
+using a different construction or projective gauge.
 
 They do not certify a matching-section Fourier identity, uniqueness of the section line inside the
-odd four-space, a q=7 seam selector, an oriented B3 depth profile, the geometric meaning of
-`M_odd D(M)`, the `8/9` extension class, existence of an A3 sheet orientation, or novelty.  Thus
-“portable B3/H3 theorem” currently means only the representation-theoretic Fourier core, not the
-full factorization/depth theorem requested by C414.
+odd four-space, a q=7 seam selector, a pointwise formula relating the coinvariant quotient to
+`M_odd D(M)`, the `8/9` extension class, existence of an A3 sheet orientation, or novelty.  The
+portable B3/H3 factorization-depth theorem and its exact linear shadow are now certified; their
+identification with the exceptional twisted-Fourier block is not.
 
 ## Reproducibility
 

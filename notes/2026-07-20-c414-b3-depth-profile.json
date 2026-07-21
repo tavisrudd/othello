@@ -28,7 +28,7 @@
     ]
   ],
   "base_parent": "S4",
-  "boundary": "Both intrinsic B3 seam classes survive; the theorem does not select one. The depth profile is a nonlinear rank-two zero-locus compression of rank-four factorization sections, not a linear identification with the twisted Fourier block. No all-field, q=9, section-level Fourier, or novelty claim is certified.",
+  "boundary": "Both intrinsic B3 seam classes survive; the theorem does not select one. Zero counting is nonlinear on arbitrary forms, but on each frozen moving family it linearizes exactly to the common-seam coinvariant quotient. This does not identify that quotient with the twisted Fourier block or provide a pointwise incidence formula for the linear map. No all-field, q=9, section-level Fourier, or unrestricted novelty claim is certified.",
   "factorization_degrees": {
     "quotient": 2,
     "secant_product": 4
@@ -44,13 +44,43 @@
       "geometric_conjugacy_class_count": 1
     }
   },
+  "h3_section_depth_linearization": {
+    "coinvariant_to_depth_plane_isomorphism": true,
+    "common_seam": "A4",
+    "common_seam_augmentation_image_rank_on_products": 4,
+    "common_seam_augmentation_image_rank_on_quotients": 4,
+    "depth_map_rank": 2,
+    "field": 11,
+    "induced_coinvariant_dimension": 2,
+    "kernel_equals_common_seam_augmentation_image": true,
+    "odd_product_section_matrix_sha256": "3df8154572621e368fa6748dc8219a376267725acaa2254ebf023116752c84c0",
+    "odd_product_section_rank": 6,
+    "odd_quotient_section_matrix_sha256": "1bc3db2302f4d18e5e31e7aed633b2a0945c3e4b6d978fa5bea8ade9aa40e710",
+    "odd_quotient_section_rank": 6,
+    "odd_section_linear_moment_vanishes": true,
+    "product_kernel_dimension": 4,
+    "product_profile_joint_rank": 6,
+    "profile_matrix_sha256": "52ba714c253a3ee3bce2eb9d8b9541e7a9831b96d33795fa00068f3a8135fc66",
+    "quotient_kernel_dimension": 4,
+    "quotient_profile_joint_rank": 6,
+    "sheet_orbit_weights": [
+      1,
+      4,
+      6
+    ],
+    "unique_linear_map_on_moving_section_span": true
+  },
   "inputs": {
     "2026-07-18-c341-a5-subgroup-decoder.py": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be",
+    "2026-07-19-c378-clebsch-common-duality.json": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc",
+    "2026-07-19-c378-clebsch-common-duality.py": "e45e71c5e87ccc334fab3b926e5189373e24485adf11ed1cbaacfc6771610bdc",
+    "2026-07-20-c399-coxeter-number-conic-phase.py": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275",
     "2026-07-20-c406-matching-module.py": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    "2026-07-20-c406-matching-orbit-scout.json": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246",
     "2026-07-20-c411-double-coset-hecke.json": "23f0a100356f0a369f00d81011e8d8d6b9d867b9de45a7b0625fc2889323b014",
     "2026-07-20-c414-b3-seam-preflight.json": "64cd62069d20a35d320e426f7181c9fa44fef1c6bb201ae930c7d02f8ac63af4"
   },
-  "schema": "c414-b3-depth-profile-v1",
+  "schema": "c414-b3-depth-profile-v2",
   "seam_type_counts": {
     "D8": 3,
     "S3": 4
@@ -192,8 +222,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "db6056e822847a233f86b093cbbd2a68263e41f8da68ea7473040c6dcf6b1b2e",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -384,6 +416,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -543,8 +587,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "db6056e822847a233f86b093cbbd2a68263e41f8da68ea7473040c6dcf6b1b2e",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -735,6 +781,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -894,8 +952,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "db6056e822847a233f86b093cbbd2a68263e41f8da68ea7473040c6dcf6b1b2e",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -1086,6 +1146,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -1245,8 +1317,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "db6056e822847a233f86b093cbbd2a68263e41f8da68ea7473040c6dcf6b1b2e",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -1437,6 +1511,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -1606,8 +1692,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "61939a64d0a8a79c17ba5b611eccf216353236d9c13ba0d86cf8f0c80c4396e8",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -1786,6 +1874,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -1941,8 +2041,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "61939a64d0a8a79c17ba5b611eccf216353236d9c13ba0d86cf8f0c80c4396e8",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -2121,6 +2223,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -2276,8 +2390,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "61939a64d0a8a79c17ba5b611eccf216353236d9c13ba0d86cf8f0c80c4396e8",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -2456,6 +2572,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -2611,8 +2739,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "61939a64d0a8a79c17ba5b611eccf216353236d9c13ba0d86cf8f0c80c4396e8",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -2791,6 +2921,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -2964,8 +3106,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "1907abe44433fc25e2eda9b8e7385372f1636943c0bb56ea263e60af7cb9aaa0",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -3156,6 +3300,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -3315,8 +3471,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "1907abe44433fc25e2eda9b8e7385372f1636943c0bb56ea263e60af7cb9aaa0",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -3507,6 +3665,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -3666,8 +3836,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "1907abe44433fc25e2eda9b8e7385372f1636943c0bb56ea263e60af7cb9aaa0",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -3858,6 +4030,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -4017,8 +4201,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "1907abe44433fc25e2eda9b8e7385372f1636943c0bb56ea263e60af7cb9aaa0",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -4209,6 +4395,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -4382,8 +4580,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "439ea665a88a5cd15c918887ab1ba76d510e8cc03045ae399df0cde8be7f1384",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -4574,6 +4774,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -4733,8 +4945,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "439ea665a88a5cd15c918887ab1ba76d510e8cc03045ae399df0cde8be7f1384",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -4925,6 +5139,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -5084,8 +5310,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "439ea665a88a5cd15c918887ab1ba76d510e8cc03045ae399df0cde8be7f1384",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -5276,6 +5504,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -5435,8 +5675,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "439ea665a88a5cd15c918887ab1ba76d510e8cc03045ae399df0cde8be7f1384",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -5627,6 +5869,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -5796,8 +6050,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "0f8711ff2585aadc95f6615e76242b8399b3d02d56b8af3e1c7a69d0450ef8c3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -5976,6 +6232,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -6131,8 +6399,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "0f8711ff2585aadc95f6615e76242b8399b3d02d56b8af3e1c7a69d0450ef8c3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -6311,6 +6581,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -6466,8 +6748,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "0f8711ff2585aadc95f6615e76242b8399b3d02d56b8af3e1c7a69d0450ef8c3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -6646,6 +6930,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -6801,8 +7097,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "0f8711ff2585aadc95f6615e76242b8399b3d02d56b8af3e1c7a69d0450ef8c3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -6981,6 +7279,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -7150,8 +7460,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "cde2059bae3dd8cb3e127cd805256a49b2719025a6b164d3d34dc2e2377867e1",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -7330,6 +7642,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -7485,8 +7809,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "cde2059bae3dd8cb3e127cd805256a49b2719025a6b164d3d34dc2e2377867e1",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -7665,6 +7991,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -7820,8 +8158,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "cde2059bae3dd8cb3e127cd805256a49b2719025a6b164d3d34dc2e2377867e1",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -8000,6 +8340,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -8155,8 +8507,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "cde2059bae3dd8cb3e127cd805256a49b2719025a6b164d3d34dc2e2377867e1",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -8335,6 +8689,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -8508,8 +8874,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "d0189d25e66b74c5597f5ee0315e8053d7e5f6015c7910d6831d233caf82bbb3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -8700,6 +9068,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -8859,8 +9239,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "d0189d25e66b74c5597f5ee0315e8053d7e5f6015c7910d6831d233caf82bbb3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -9051,6 +9433,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -9210,8 +9604,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "d0189d25e66b74c5597f5ee0315e8053d7e5f6015c7910d6831d233caf82bbb3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -9402,6 +9798,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -9561,8 +9969,10 @@
               1
             ]
           ],
+          "product_profile_joint_rank_mod_7": 4,
           "profile_linear_rank_mod_7": 2,
           "profile_sha256": "d0189d25e66b74c5597f5ee0315e8053d7e5f6015c7910d6831d233caf82bbb3",
+          "quotient_profile_joint_rank_mod_7": 4,
           "representatives": [
             {
               "depth_profile": [
@@ -9753,6 +10163,18 @@
               ]
             }
           ],
+          "section_depth_linearization": {
+            "coinvariant_to_depth_plane_isomorphism": true,
+            "common_seam_augmentation_image_rank_on_products": 2,
+            "common_seam_augmentation_image_rank_on_quotients": 2,
+            "depth_map_rank_mod_7": 2,
+            "induced_coinvariant_dimension": 2,
+            "kernel_equals_common_seam_augmentation_image": true,
+            "odd_section_linear_moment_vanishes": true,
+            "product_kernel_dimension": 2,
+            "quotient_kernel_dimension": 2,
+            "unique_linear_map_on_moving_section_span": true
+          },
           "signed_profile_moments_mod_7": [
             {
               "coordinate_count": 4,
@@ -9828,7 +10250,8 @@
         6
       ]
     },
-    "conceptual_formula": "each common seam has three matching orbits per determinant sheet; J pairs their four oriented line-orbit coordinates, the weighted sheet barycentre vanishes, all even signed moments cancel, and the cubic signed moment survives"
+    "conceptual_formula": "each common seam has three matching orbits per determinant sheet; J pairs their four oriented line-orbit coordinates, the weighted sheet barycentre vanishes, all even signed moments cancel, and the cubic signed moment survives",
+    "linear_shadow_upgrade": "on every moving odd factorization-section span, zero-depth agrees with the unique linear quotient by the common-seam augmentation image; the source, kernel, and depth dimensions are 4/2/2 for both B3 seams and 6/4/2 for H3"
   },
-  "verdict": "THEOREM; BOTH B3 SEAMS HAVE CANONICAL FOUR-COORDINATE, RANK-TWO, CUBIC-FIRST ORIENTED DEPTH PROFILES AND FOUR-DIMENSIONAL ODD QUOTIENT/PRODUCT SECTION SPACES; H3 HAS THE SAME LAW AND A3 DOES NOT SPLIT"
+  "verdict": "THEOREM; BOTH B3 SEAMS HAVE CANONICAL FOUR-COORDINATE, RANK-TWO, CUBIC-FIRST ORIENTED DEPTH PROFILES AND FOUR-DIMENSIONAL ODD QUOTIENT/PRODUCT SECTION SPACES; ON B3 AND H3 THE DEPTH PLANE IS THE EXACT COMMON-SEAM COINVARIANT QUOTIENT OF THE MOVING ODD SECTIONS; A3 DOES NOT SPLIT"
 }
