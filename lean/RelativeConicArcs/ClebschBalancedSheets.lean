@@ -553,7 +553,7 @@ end RelativeInvariant
 
 section CubicOrientation
 
-variable {G K : Type*} [Group G] [Field K]
+variable {K : Type*} [Field K]
 
 /-- Ordered-coordinate model of a symmetric cubic tensor.  Symmetry is automatic for tensors
 constructed by `cubicFeature`; keeping ordered coordinates makes finite witnesses inexpensive. -/
@@ -574,39 +574,192 @@ def signedCubicTensor {n d : ℕ} (vectors : Fin n → Fin d → K)
       ∑ column, epsilon column * vectors column i * vectors column j * vectors column k := by
   simp [signedCubicTensor, cubicFeature, mul_assoc]
 
-/-- A supplied group action on cubic tensors, certified to permute the rank-one orbit features and
-to carry the sheet weights by a two-valued character.  This packages exactly the hypotheses at the
-classical `PGL₂/PSL₂` boundary; no classification of the supplied group is hidden here. -/
-structure CertifiedCubicAction (G K : Type*) [Group G] [Field K] (n d : ℕ)
-    (epsilon : Fin n → K) (feature : Fin n → CubicTensor d K) where
-  action : G → CubicTensor d K →ₗ[K] CubicTensor d K
-  action_mul : ∀ g h, action (g * h) = (action g).comp (action h)
-  action_one : action 1 = LinearEquiv.refl K (CubicTensor d K)
-  permutation : G → Equiv.Perm (Fin n)
-  chi : G →* Kˣ
-  feature_covariant : ∀ g i, action g (feature i) = feature (permutation g i)
-  sign_covariant : ∀ g i, epsilon ((permutation g).symm i) = (chi g : K) * epsilon i
-  two_valued : ∀ g, chi g = 1 ∨ chi g = -1
+/-- Permutations paired with their exact multiplier on a nonzero signed orbit.  Unlike a
+"certified action" record, membership is the covariance equation itself and the group operations
+are proved from it. -/
+def signedSymmetryGroup {n : ℕ} (epsilon : Fin n → K) :
+    Subgroup (Equiv.Perm (Fin n) × Kˣ) where
+  carrier := {g | ∀ i, epsilon (g.1 i) = (g.2 : K) * epsilon i}
+  one_mem' := by simp
+  mul_mem' := by
+    rintro ⟨p, u⟩ ⟨q, v⟩ hp hq i
+    change epsilon (p (q i)) = ((u * v : Kˣ) : K) * epsilon i
+    rw [hp, hq]
+    simp [mul_assoc]
+  inv_mem' := by
+    rintro ⟨p, u⟩ hp i
+    change epsilon (p.symm i) = ((u⁻¹ : Kˣ) : K) * epsilon i
+    have hi := hp (p.symm i)
+    simp only [p.apply_symm_apply] at hi
+    calc
+      epsilon (p.symm i) = ((u⁻¹ : Kˣ) : K) * ((u : K) * epsilon (p.symm i)) := by simp
+      _ = ((u⁻¹ : Kˣ) : K) * epsilon i := by rw [hi]
 
-/-- A certified cubic action carries its concrete signed cubic by its character. -/
-theorem CertifiedCubicAction.signedCubic_isRelativeInvariant {n d : ℕ}
-    {epsilon : Fin n → K} {feature : Fin n → CubicTensor d K}
-    (data : CertifiedCubicAction G K n d epsilon feature) :
-    data.action g (∑ i, epsilon i • feature i) =
-      (data.chi g : K) • (∑ i, epsilon i • feature i) := by
-  exact signedOrbitSum_isRelativeInvariant (data.action g) (data.permutation g) epsilon feature
-    (data.chi g : K) (data.feature_covariant g) (data.sign_covariant g)
+/-- The permutation underlying a signed symmetry. -/
+def signedSymmetryPermutation {n : ℕ} {epsilon : Fin n → K}
+    (g : signedSymmetryGroup epsilon) : Equiv.Perm (Fin n) := g.1.1
 
-/-- Inside a supplied certified action, the stabilizer of a nonzero signed cubic is exactly the
-kernel of the sheet character. -/
-theorem CertifiedCubicAction.signedCubic_stabilizer_eq_characterKernel {n d : ℕ}
-    {epsilon : Fin n → K} {feature : Fin n → CubicTensor d K}
-    (data : CertifiedCubicAction G K n d epsilon feature)
-    (hmu : (∑ i, epsilon i • feature i) ≠ 0) (htwo : (2 : K) ≠ 0) :
-    {g | data.action g (∑ i, epsilon i • feature i) =
-      (∑ i, epsilon i • feature i)} = ↑(MonoidHom.ker data.chi) := by
-  exact stabilizer_eq_ker_of_relative_invariant data.action data.action_mul data.action_one data.chi
-    _ hmu htwo (fun g ↦ data.signedCubic_isRelativeInvariant (g := g)) data.two_valued
+/-- The multiplier character of the explicit signed-symmetry group. -/
+def signedSymmetryCharacter {n : ℕ} {epsilon : Fin n → K} :
+    signedSymmetryGroup epsilon →* Kˣ where
+  toFun g := g.1.2
+  map_one' := rfl
+  map_mul' _ _ := rfl
+
+/-- The signed evaluation functional on all functions on the finite orbit.  Its first nonzero
+graded restriction is cubic when the signed moments through degree two vanish. -/
+def signedEvaluationFunctional {n : ℕ} (epsilon : Fin n → K) :
+    (Fin n → K) →ₗ[K] K where
+  toFun f := ∑ i, epsilon i * f i
+  map_add' left right := by
+    rw [← Finset.sum_add_distrib]
+    apply Finset.sum_congr rfl
+    intro i _
+    simp [mul_add]
+  map_smul' c f := by
+    change (∑ i, epsilon i * (c * f i)) = c * ∑ i, epsilon i * f i
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    ring
+
+/-- Pull a function back through the inverse of a permutation. -/
+def permutationPullback {n : ℕ} (p : Equiv.Perm (Fin n)) :
+    (Fin n → K) →ₗ[K] (Fin n → K) where
+  toFun f := fun i ↦ f (p.symm i)
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+/-- Explicit action of a signed symmetry on the signed evaluation functional. -/
+def signedFunctionalAction {n : ℕ} {epsilon : Fin n → K}
+    (g : signedSymmetryGroup epsilon) : (Fin n → K) →ₗ[K] K :=
+  (signedEvaluationFunctional epsilon).comp
+    (permutationPullback (signedSymmetryPermutation g))
+
+/-- Reindexing proves relative invariance for the explicit signed-permutation action. -/
+theorem signedFunctionalAction_eq_character_smul {n : ℕ} {epsilon : Fin n → K}
+    (g : signedSymmetryGroup epsilon) :
+    signedFunctionalAction g =
+      (signedSymmetryCharacter g : K) • signedEvaluationFunctional epsilon := by
+  apply LinearMap.ext
+  intro f
+  let p := signedSymmetryPermutation g
+  change (∑ i, epsilon i * f (p.symm i)) =
+    (signedSymmetryCharacter (epsilon := epsilon) g : K) * ∑ i, epsilon i * f i
+  calc
+    _ = ∑ i, epsilon (p i) * f i := by
+      rw [← Equiv.sum_comp p (fun i ↦ epsilon i * f (p.symm i))]
+      simp
+    _ = ∑ i, (signedSymmetryCharacter (epsilon := epsilon) g : K) * epsilon i * f i := by
+      apply Finset.sum_congr rfl
+      intro i _
+      have hcov := g.property i
+      change epsilon (p i) = (signedSymmetryCharacter (epsilon := epsilon) g : K) * epsilon i at hcov
+      rw [hcov]
+    _ = _ := by
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro i _
+      ring
+
+/-- If the signed functional is nonzero on one displayed cubic evaluation and the character is
+two-valued, its stabilizer in the explicit signed-symmetry action is exactly the character kernel. -/
+theorem signedFunctional_stabilizer_eq_characterKernel {n : ℕ} {epsilon : Fin n → K}
+    (witness : Fin n → K) (hwitness : signedEvaluationFunctional epsilon witness ≠ 0)
+    (htwo : (2 : K) ≠ 0)
+    (hpm : ∀ g : signedSymmetryGroup epsilon,
+      signedSymmetryCharacter (epsilon := epsilon) g = 1 ∨
+        signedSymmetryCharacter (epsilon := epsilon) g = -1) :
+    {g : signedSymmetryGroup epsilon |
+      signedFunctionalAction g = signedEvaluationFunctional epsilon} =
+      {g : signedSymmetryGroup epsilon |
+        signedSymmetryCharacter (epsilon := epsilon) g = 1} := by
+  ext g
+  simp only [Set.mem_setOf_eq]
+  constructor
+  · intro hfixed
+    rcases hpm g with hplus | hminus
+    · exact hplus
+    · exfalso
+      have hrelative := signedFunctionalAction_eq_character_smul g
+      rw [hfixed, hminus] at hrelative
+      have heval := LinearMap.congr_fun hrelative witness
+      have hzero : (2 : K) * signedEvaluationFunctional epsilon witness = 0 := by
+        simpa [two_mul] using congrArg
+          (fun x ↦ signedEvaluationFunctional epsilon witness - x) heval |>.symm
+      exact hwitness ((mul_eq_zero.mp hzero).resolve_left htwo)
+  · intro hker
+    rw [signedFunctionalAction_eq_character_smul, hker]
+    simp
+
+/-- Pointwise `±1` weights force every multiplier in the explicit signed-symmetry group to be
+two-valued. -/
+theorem signedSymmetryCharacter_eq_one_or_neg_one {n : ℕ} {epsilon : Fin n → K}
+    (i₀ : Fin n) (hbase : epsilon i₀ = 1)
+    (hvalues : ∀ i, epsilon i = 1 ∨ epsilon i = -1)
+    (g : signedSymmetryGroup epsilon) :
+    signedSymmetryCharacter (epsilon := epsilon) g = 1 ∨
+      signedSymmetryCharacter (epsilon := epsilon) g = -1 := by
+  have hcov := g.property i₀
+  rcases hvalues (signedSymmetryPermutation g i₀) with hplus | hminus
+  · left
+    apply Units.ext
+    change (g.1.2 : K) = 1
+    change epsilon (g.1.1 i₀) = 1 at hplus
+    calc
+      (g.1.2 : K) = epsilon (g.1.1 i₀) := by simpa [hbase] using hcov.symm
+      _ = 1 := hplus
+  · right
+    apply Units.ext
+    change (g.1.2 : K) = -1
+    change epsilon (g.1.1 i₀) = -1 at hminus
+    calc
+      (g.1.2 : K) = epsilon (g.1.1 i₀) := by simpa [hbase] using hcov.symm
+      _ = -1 := hminus
+
+/-- Character restricted to an explicitly generated subgroup of signed symmetries. -/
+def signedSubgroupCharacter {n : ℕ} {epsilon : Fin n → K}
+    (H : Subgroup (signedSymmetryGroup epsilon)) : H →* Kˣ where
+  toFun g := signedSymmetryCharacter (epsilon := epsilon) g.1
+  map_one' := rfl
+  map_mul' _ _ := rfl
+
+/-- Functional action restricted to an explicitly generated subgroup. -/
+def signedSubgroupAction {n : ℕ} {epsilon : Fin n → K}
+    {H : Subgroup (signedSymmetryGroup epsilon)} (g : H) : (Fin n → K) →ₗ[K] K :=
+  signedFunctionalAction g.1
+
+theorem signedSubgroupAction_eq_character_smul {n : ℕ} {epsilon : Fin n → K}
+    {H : Subgroup (signedSymmetryGroup epsilon)} (g : H) :
+    signedSubgroupAction g =
+      (signedSubgroupCharacter H g : K) • signedEvaluationFunctional epsilon := by
+  exact signedFunctionalAction_eq_character_smul g.1
+
+/-- Exact character-kernel stabilizer inside any explicitly generated signed-symmetry subgroup. -/
+theorem signedSubgroup_stabilizer_eq_characterKernel {n : ℕ} {epsilon : Fin n → K}
+    (H : Subgroup (signedSymmetryGroup epsilon))
+    (witness : Fin n → K) (hwitness : signedEvaluationFunctional epsilon witness ≠ 0)
+    (htwo : (2 : K) ≠ 0)
+    (hpm : ∀ g : H, signedSubgroupCharacter H g = 1 ∨ signedSubgroupCharacter H g = -1) :
+    {g : H | signedSubgroupAction g = signedEvaluationFunctional epsilon} =
+      {g : H | signedSubgroupCharacter H g = 1} := by
+  ext g
+  simp only [Set.mem_setOf_eq]
+  constructor
+  · intro hfixed
+    rcases hpm g with hplus | hminus
+    · exact hplus
+    · exfalso
+      have hrelative := signedSubgroupAction_eq_character_smul g
+      rw [hfixed, hminus] at hrelative
+      have heval := LinearMap.congr_fun hrelative witness
+      have hzero : (2 : K) * signedEvaluationFunctional epsilon witness = 0 := by
+        simpa [two_mul] using (congrArg
+          (fun x ↦ signedEvaluationFunctional epsilon witness - x) heval).symm
+      exact hwitness ((mul_eq_zero.mp hzero).resolve_left htwo)
+  · intro hker
+    rw [signedSubgroupAction_eq_character_smul, hker]
+    simp
 
 end CubicOrientation
 
