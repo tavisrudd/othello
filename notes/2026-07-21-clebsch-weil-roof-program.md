@@ -415,9 +415,11 @@ Model: Opus.
 
 Each is a writing task with a bounded literature audit; no new computation beyond small checks.
 
-- **P2a — equivariant advice complexity.** Definitions + theorem (complexity exactly one) from
-  C413/C417/C379; symmetry-breaking and access-structure corollaries; the PIR/service unification
-  remark (C369/C391/C392 cited, not imported).
+- **P2a — equivariant advice complexity.** Consume C448 rather than re-proving its selector lemma;
+  use C447's cap `D10` endpoint/cross-sheet-pair determinant torsor as the exact local
+  complexity-one model and C460's clouds as the orbit-valued geometric realization, on top of
+  C413/C417/C379. Add symmetry-breaking and access-structure corollaries and the PIR/service
+  unification remark (C369/C391/C392 cited, not imported).
 - **P2b — exactly solved low-degree threshold.** The KWB-frame statement of
   C406/C409/C430/C412, with the bounded audit that no exact finite instance exists in that
   literature (three-graph rule applies to any absence wording).
@@ -446,9 +448,11 @@ Each is a writing task with a bounded literature audit; no new computation beyon
    manuscript decision and any edit belong to the `clebsch` lane and its handoff process.**
 4. **Program disposition.** Close or re-scope every register item (dossier §13) with an explicit
    verdict; append incidental observations to the lane's discovery log per conventions; update
-   the crowns handoff; archive completed queue rows per the completion invariant. If X1/X2
-   produced positive identifications, draft the one-line cross-lane pointer and leave the
-   decision to surface it with the cap lane's owner — no cap-lane edits from this program.
+   the crowns handoff; archive completed queue rows per the completion invariant. Treat C447's
+   GREEN shared-edge repair as the positive X2-derived identification for this purpose (while
+   retaining the negative singleton verdict): draft the one-line cross-lane pointer after C448
+   fixes the theorem wording and leave the decision to surface it with the cap lane's owner — no
+   cap-lane edits from this program.
 5. **Paper 2 go/no-go (Fable).** If roof sub-statements survived: scope the metaplectic paper
    (canonicity theorem target, mechanism section from T2, continuation section from T5/T6) as a
    new allocation request. If the roof died: scope the refutation/boundary note instead. Either
