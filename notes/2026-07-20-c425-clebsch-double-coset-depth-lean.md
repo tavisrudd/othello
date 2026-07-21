@@ -6,8 +6,7 @@
 
 **Date:** 2026-07-21
 
-**Implementation commit:** pinned by the immediate follow-up report commit after the atomic artifact
-commit described below.
+**Implementation commit:** `d60be942b828950173d6d970fe65762c07628fc6`
 
 ## Result
 
@@ -120,6 +119,9 @@ then passed the exact trace-only aggregate gate.  Peak RSS was `2,402,140` KiB f
 its measured peaks were `4,405,300` KiB positive and `6,630,756` KiB negative.  The gate's 27 selected
 terminal audits report only `propext`, `Classical.choice`, and `Quot.sound`; no `sorryAx`,
 `native_decide`, project axiom, or opaque external oracle occurs in the claimed terminal surface.
+After final regeneration, exact-target confirmation
+`/home/tavis/.cache/othello-lean-build/run-20260721-230329-24fa5775` found the gate trace-current,
+skipped rebuilding it, and passed the trace-only aggregate gate.
 
 ## Exclusions
 
