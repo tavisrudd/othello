@@ -2,8 +2,9 @@
 
 **Lane:** `clebsch`
 
-**Status:** ACTIVE; compact-proof gate. Five user-authorized reviews returned **READY FOR FIXES** (see
-the independent-review record). The current implementation closes the two theorem gaps identified by
+**Status:** **COMPLETED — FINAL INDEPENDENT REVIEW GO.** Five user-authorized review rounds returned
+**READY FOR FIXES**, and the final post-fix confirmation returned **GO** (see the independent-review
+record). The implementation closes the two theorem gaps identified by
 the latest review: the `A3`- and `H3`-labelled tables now have explicit pairwise projective
 injectivity in addition to two-sided coverage; the projective-point/nonzero-scalar map is bijective
 onto all nonzero syndromes; and the disjoint `90+6` union is proved equal to
@@ -11,8 +12,8 @@ onto all nonzero syndromes; and the disjoint `90+6` union is proved equal to
 gives counts `20,1,2,3,1` on incidence multiplicities `0,1,2,3,5`. The coordinate map also
 has an explicit inverse, contragredient pairing theorem, and induced bijection on the 133 normalized
 projective points. All proofs remain compact kernel proofs with no generated certificate tree. The
-Lean-formalized label remains withheld until a post-fix review of the final prose corrections
-returns `GO`. The gate/build/axiom/trust evidence is committed and pinned. C222 stays live.
+The gate/build/axiom/trust evidence is committed and pinned, and the manuscript verification row now
+records the two kernel-checked modules.
 
 ## Objective
 
@@ -357,16 +358,15 @@ recorded final `GO` permits C222 to be marked complete and archived.
 - [x] Complete the judgment-call record and proposed C320 row for every objective subclaim. —
   recorded above; the conjugate-root claim and the pointwise-bridge overstatement were corrected per
   findings 6 and 7.
-- [ ] Record independent review findings, fixes, post-fix review, and final `GO`. — all four
-  `READY FOR FIXES` reviews and the current remediation are recorded; the new post-fix review and
-  `GO` are pending.
-- [ ] Only after final `GO`, archive the live task row with this completed report and evidence. —
-  pending: C222 stays live until a recorded `GO`.
+- [x] Record independent review findings, fixes, post-fix review, and final `GO`. — five
+  `READY FOR FIXES` rounds and the final `GO` are recorded in the independent-review note.
+- [x] Only after final `GO`, archive the live task row with this completed report and evidence. —
+  archived in the same coherent completion commit as this final status update.
 
 ## Independent review and remediation
 
-A user-launched initial review and three user-launched post-fix reviews are recorded at
-`notes/2026-07-20-c222-independent-review.md`; every disposition was **READY FOR FIXES**, not `GO`.
+A user-launched initial review, four user-authorized post-fix repair rounds, and the final post-fix
+`GO` are recorded at `notes/2026-07-20-c222-independent-review.md`.
 The first review found seven type/prose/trust defects. The interrupted first remediation was then
 committed coherently, and the second post-fix review isolated five remaining defects SF1--SF5.
 The third post-fix review confirmed the build/axiom repairs but found four residual strength/prose
@@ -403,8 +403,7 @@ explicit citation route; every terminal gets its own fully qualified name, gate 
 entry; strength words require a matching theorem or neutral replacement; a checked box must point to
 durable evidence.
 
-Remaining for `GO`: obtain post-fix reviewer confirmation after the final prose corrections. The
-user's review-sub instruction authorizes reusing the same independent reviewer for that pass.
+The final post-fix reviewer confirmed both prose corrections and returned `GO`.
 
 ## Adequacy-appendix extraction
 

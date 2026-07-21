@@ -680,3 +680,11 @@ evidence is sound. Only two narrow prose/status defects remained:
 
 The implementing agent accepted both findings. The next pass must confirm the neutralized docstring
 and reconciled report status before returning `GO`.
+
+## Final post-fix confirmation — 2026-07-21
+
+**Disposition:** **GO.** The same independent reviewer confirmed that commit `098fa74b` neutralizes
+the `tau11` docstring and commit `7d6890ff` reconciles the report status. Fresh exact run
+`run-20260721-194522-4f2376cd` passed both leaves, the import-only gate, and the trace-only aggregate;
+all 47 task probes occurred and their axiom union is exactly `propext`, `Classical.choice`, and
+`Quot.sound`. No reviewed finding remains open.
