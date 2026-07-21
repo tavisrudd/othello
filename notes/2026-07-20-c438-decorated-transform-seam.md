@@ -152,3 +152,12 @@ twelve conic points.  This suggests a theta/Richelot bridge rather than the fail
 square.  It also certifies that no q=9 parent stabilizer fixes one of the 63 Steiner complexes, so
 the most tempting direct six-pair shortcut is unavailable.  See
 `notes/2026-07-20-c438-postmortem-bridge-attack-vectors.md` and its exact evidence bundle.
+
+## C414 consumption boundary
+
+C414's later twisted-Fourier synthesis consumes this report only as a category stop: its
+q=7/q=11 factorization-sector statement lives on conic parent/matching fibres and must not be
+advertised as a q=9 decorated-transform specialization.  The corrected scalar-weight versus sheet-
+parity distinction and the exact B3/H3 exceptional blocks are recorded in
+`notes/2026-07-20-c414-tautological-fourier-preflight.md`; they do not weaken the different-fibre
+obstruction proved here.

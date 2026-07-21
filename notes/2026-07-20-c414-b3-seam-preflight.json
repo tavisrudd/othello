@@ -1,0 +1,272 @@
+{
+  "base_matching": [
+    [
+      0,
+      2
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      5,
+      6
+    ]
+  ],
+  "base_parent_group": "S4",
+  "base_parent_group_order": 24,
+  "base_parent_is_contained_in_psl": true,
+  "base_parent_orbits_on_opposite_sheet": [
+    {
+      "common_group_order": 8,
+      "common_group_type": "D8",
+      "orbit_size": 3
+    },
+    {
+      "common_group_order": 6,
+      "common_group_type": "S3",
+      "orbit_size": 4
+    }
+  ],
+  "boundary": "The phrase 'the two outer-conjugate S4 parents' does not specify a unique B3 common refinement. A portable B3/H3 theorem must select a seam type by an extra geometric predicate or prove compatible statements for both types. No twisted Fourier block, depth profile, matching-section identity, or novelty is certified.",
+  "determinant_square_subgroup": "PSL2(7)",
+  "determinant_square_subgroup_order": 168,
+  "field": 7,
+  "full_conic_group": "PGL2(7)",
+  "full_conic_group_order": 336,
+  "opposite_seam_type_counts": {
+    "D8": 3,
+    "S3": 4
+  },
+  "opposite_seams": [
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 3,
+        "3": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        2,
+        6
+      ],
+      "common_group_order": 6,
+      "common_group_type": "S3",
+      "other_matching": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "shared_matching_edges": 1
+    },
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 3,
+        "3": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        2,
+        6
+      ],
+      "common_group_order": 6,
+      "common_group_type": "S3",
+      "other_matching": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "shared_matching_edges": 1
+    },
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 3,
+        "3": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        2,
+        6
+      ],
+      "common_group_order": 6,
+      "common_group_type": "S3",
+      "other_matching": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "shared_matching_edges": 1
+    },
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 3,
+        "3": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        2,
+        6
+      ],
+      "common_group_order": 6,
+      "common_group_type": "S3",
+      "other_matching": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "shared_matching_edges": 1
+    },
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 5,
+        "4": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        8
+      ],
+      "common_group_order": 8,
+      "common_group_type": "D8",
+      "other_matching": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "shared_matching_edges": 0
+    },
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 5,
+        "4": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        8
+      ],
+      "common_group_order": 8,
+      "common_group_type": "D8",
+      "other_matching": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          7
+        ]
+      ],
+      "shared_matching_edges": 0
+    },
+    {
+      "common_group_element_order_counts": {
+        "1": 1,
+        "2": 5,
+        "4": 2
+      },
+      "common_group_endpoint_orbit_sizes": [
+        8
+      ],
+      "common_group_order": 8,
+      "common_group_type": "D8",
+      "other_matching": [
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "shared_matching_edges": 0
+    }
+  ],
+  "opposite_sheet_parent_count": 7,
+  "same_sheet_parent_count": 7,
+  "schema": "c414-b3-seam-preflight-v1",
+  "verdict": "THEOREM; THE SEVEN OUTER-SHEET S4 PARENTS SPLIT INTRINSICALLY INTO FOUR S3 SEAMS SHARING ONE MATCHING EDGE AND THREE D8 SEAMS SHARING NONE"
+}

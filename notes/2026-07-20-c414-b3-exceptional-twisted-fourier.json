@@ -1,0 +1,3085 @@
+{
+  "all_seven_seams_and_all_four_involutive_pair_exchanges_have_factorization_J_odd_dimension_four": true,
+  "all_stored_factorization_odd_blocks_have_reverse_composition_49_I": true,
+  "boundary": "The representation-theoretic portability gate passes for both seam types, but this does not select a seam, identify quotient and secant-product sections, construct the oriented depth profile, compare to H3 coordinates, or establish novelty.",
+  "canonical_linearization": "unique determinant-one orthogonal lift PGL2(7) -> SO3(7)",
+  "cyclotomic_basis": "1,zeta_6",
+  "cyclotomic_polynomial_low_to_high": [
+    1,
+    -1,
+    1
+  ],
+  "field": 7,
+  "multiplicative_generator": 3,
+  "projective_line_count": 57,
+  "schema": "c414-b3-exceptional-twisted-fourier-v1",
+  "seams": [
+    {
+      "common_group_order": 6,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              6,
+              -4
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              2,
+              -6
+            ]
+          ],
+          [
+            [
+              5,
+              -1
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              -6,
+              4
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              -3
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              3,
+              -1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              5,
+              -4
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              -4,
+              6
+            ]
+          ],
+          [
+            [
+              4,
+              1
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              3,
+              -1
+            ],
+            [
+              -2,
+              -4
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              -2,
+              3
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              3,
+              -1
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "6": 2
+      },
+      "pair_exchange_elements": 6,
+      "seam_type": "S3",
+      "weight_records": [
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "e7663a8fad91fb23e4a0b9bbcaeffa525c6c332e1daa64664d4a62a2563964da",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "cea55f39c569c307ad3ffecf477abd693cce3a1b12d7f33fb072093047491ace",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              11,
+              2
+            ],
+            [
+              10,
+              4
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "c3bc130a21ccaa232d9f9737c99603ae602746c7a1908410962f306ae8921eae",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              10,
+              2
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "ed62dfe175c17fe51c6472b606415a48a1c6f79c9d16fb4f2ac5898db1262710",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "common_group_order": 6,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              -2,
+              6
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              4,
+              2
+            ]
+          ],
+          [
+            [
+              5,
+              -1
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              -6
+            ]
+          ],
+          [
+            [
+              -1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              -3
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              3,
+              -1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              -6
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              5,
+              -4
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              6,
+              -2
+            ]
+          ],
+          [
+            [
+              4,
+              1
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              3,
+              -1
+            ],
+            [
+              -4,
+              6
+            ]
+          ],
+          [
+            [
+              2,
+              -3
+            ],
+            [
+              3,
+              -1
+            ],
+            [
+              -2,
+              3
+            ],
+            [
+              -2,
+              3
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "6": 2
+      },
+      "pair_exchange_elements": 6,
+      "seam_type": "S3",
+      "weight_records": [
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "b7202e94229f97555d52c25a137c2ab92219d0a0ea9e6e8c3ac271c269bf2f31",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "7d99c6862819cd60d5b77a57d5b66f7064e78a0c5cee8c50aba0d2d5ebdd74ce",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "6f59566b2029cee9fcc31cf57b31bb4f311ac2e0e435ba01fed2f38f54ea6459",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              11,
+              2
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "cec1d805bbf03a63333a93027f3fc3744a470b7c8dc245840b076fb00a3af498",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "common_group_order": 6,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              6,
+              -4
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              -2,
+              -1
+            ],
+            [
+              2,
+              -6
+            ]
+          ],
+          [
+            [
+              1,
+              4
+            ],
+            [
+              -2,
+              -1
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              -4,
+              -2
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              -3
+            ],
+            [
+              -2,
+              -1
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              3,
+              -1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              5,
+              -4
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              5,
+              -4
+            ],
+            [
+              -3,
+              1
+            ],
+            [
+              -4,
+              6
+            ]
+          ],
+          [
+            [
+              5,
+              -4
+            ],
+            [
+              -3,
+              1
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              -6,
+              2
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              -2,
+              3
+            ],
+            [
+              -3,
+              1
+            ],
+            [
+              3,
+              -1
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "6": 2
+      },
+      "pair_exchange_elements": 6,
+      "seam_type": "S3",
+      "weight_records": [
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "d10b6806b04b0921a42f270c743a5529bf9010017e8f1c914e5c13d6f9bb168b",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              2,
+              5
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "d9b8f0f48a1411f45e4eba502839a54f11d3f833f5e296bc60c78643cc6f6982",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              13,
+              2
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              10,
+              4
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "3b665241076d1a8f052dfd8fd33ba21e99462679196c92b8618fd61ab8e89205",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              10,
+              2
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "7e1e520ff610227b498a1f68136c6a839c495621293fe059be9655c14b73c872",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "common_group_order": 6,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              2,
+              1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              -2,
+              6
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              4,
+              2
+            ]
+          ],
+          [
+            [
+              5,
+              -1
+            ],
+            [
+              -3,
+              2
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              -6
+            ]
+          ],
+          [
+            [
+              -1,
+              3
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              1,
+              -3
+            ],
+            [
+              1,
+              -3
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              3,
+              -1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              -6
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              5,
+              -4
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              6,
+              -2
+            ]
+          ],
+          [
+            [
+              4,
+              1
+            ],
+            [
+              -1,
+              -2
+            ],
+            [
+              3,
+              -1
+            ],
+            [
+              -4,
+              6
+            ]
+          ],
+          [
+            [
+              2,
+              -3
+            ],
+            [
+              3,
+              -1
+            ],
+            [
+              -2,
+              3
+            ],
+            [
+              -2,
+              3
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "6": 2
+      },
+      "pair_exchange_elements": 6,
+      "seam_type": "S3",
+      "weight_records": [
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "37de7a8592e38281039d0627e702df60cb1551bbbf14b2c32441b953ddac56c0",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 1,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "J_odd_dimension": 5,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "section_basis_sha256": "282c3c5322cde49bff7263d585a48be2d376bd0f0b31314a31872f843c1ef252",
+          "surviving_orbit_sizes": [
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 6,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "a9379909a9993688ba16b559c2e4e6d3934cec2dccf56ce4fa6811c61507577d",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 10,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              11,
+              2
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [
+            2
+          ],
+          "section_basis_sha256": "90a0033cb7b64397e3611f73d55aa4eedefd983d07aa7da582ed843fbc18df35",
+          "surviving_orbit_sizes": [
+            1,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "twisted_invariant_dimension": 14,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "common_group_order": 8,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              6,
+              -4
+            ],
+            [
+              -2,
+              6
+            ],
+            [
+              -4,
+              -2
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              3,
+              -2
+            ]
+          ],
+          [
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ]
+          ],
+          [
+            [
+              -2,
+              -1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              -6
+            ],
+            [
+              -6,
+              2
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          [
+            [
+              2,
+              -3
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ]
+          ],
+          [
+            [
+              -3,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              4,
+              1
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "8": 4
+      },
+      "pair_exchange_elements": 8,
+      "seam_type": "D8",
+      "weight_records": [
+        {
+          "J_even_dimension": 0,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "J_odd_dimension": 3,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "section_basis_sha256": "71a2b1aa85c874c4957bee8aabd96f0a6809083f909f5d489b8550fa3f0593b3",
+          "surviving_orbit_sizes": [
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 3,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 0,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "J_odd_dimension": 3,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "section_basis_sha256": "319b7be3e53773a9d6f244aa1c19b077dcd734ab9114df1ba018e332bc266110",
+          "surviving_orbit_sizes": [
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 3,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 9,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [],
+          "section_basis_sha256": "f4e773eb698ec32e593367c1abac7999f8a6a6aceef257c6569a0516356568a1",
+          "surviving_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 13,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 9,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [],
+          "section_basis_sha256": "5a0f6b881f320dc20650bc938a8ae948f6a3e6858fc28e400cc31ff2f6e5c2c3",
+          "surviving_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 13,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "common_group_order": 8,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              6,
+              -4
+            ],
+            [
+              6,
+              -4
+            ],
+            [
+              6,
+              -4
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -1,
+              -4
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -1,
+              -4
+            ],
+            [
+              -1,
+              3
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              -4
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              -1,
+              3
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              -5,
+              4
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              -5,
+              4
+            ],
+            [
+              2,
+              -3
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              -5,
+              4
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              2,
+              -3
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          7
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "8": 4
+      },
+      "pair_exchange_elements": 8,
+      "seam_type": "D8",
+      "weight_records": [
+        {
+          "J_even_dimension": 0,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "J_odd_dimension": 3,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "section_basis_sha256": "3e9ec7bf2874597eb3a4de8d1c6d3634f96cd0b601bd64379e3b7f803eaa5d9e",
+          "surviving_orbit_sizes": [
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 3,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 0,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "J_odd_dimension": 3,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "section_basis_sha256": "7d342377cbb172a3c3b9b15efe6a36021049d665fc97a57cd4d2eaedbf2b1bff",
+          "surviving_orbit_sizes": [
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 3,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 9,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              4
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [],
+          "section_basis_sha256": "8795799278ced6ef9f6f65dccd3118266be885bd495bfd969677a89ee73685cb",
+          "surviving_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 13,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 9,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [],
+          "section_basis_sha256": "8a303d2b76c39cf796e67c410ef6b6f917e0e00bf0469b903ffaa654c2080c03",
+          "surviving_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 13,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "common_group_order": 8,
+      "factorization_odd_block": {
+        "dimension": 4,
+        "forward": [
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              6,
+              -4
+            ],
+            [
+              -2,
+              6
+            ],
+            [
+              -4,
+              -2
+            ]
+          ],
+          [
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              3,
+              -2
+            ]
+          ],
+          [
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ]
+          ],
+          [
+            [
+              -2,
+              -1
+            ],
+            [
+              3,
+              -2
+            ],
+            [
+              -1,
+              3
+            ],
+            [
+              5,
+              -1
+            ]
+          ]
+        ],
+        "reverse": [
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              4,
+              -6
+            ],
+            [
+              -6,
+              2
+            ]
+          ],
+          [
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          [
+            [
+              2,
+              -3
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ]
+          ],
+          [
+            [
+              -3,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              -3
+            ],
+            [
+              4,
+              1
+            ]
+          ]
+        ],
+        "reverse_times_forward": "49 I_4",
+        "source_weight": 2,
+        "target_weight": 4
+      },
+      "involutive_pair_exchanges": 4,
+      "other_matching": [
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "pair_exchange_element_order_counts": {
+        "2": 4,
+        "8": 4
+      },
+      "pair_exchange_elements": 8,
+      "seam_type": "D8",
+      "weight_records": [
+        {
+          "J_even_dimension": 0,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "J_odd_dimension": 3,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "section_basis_sha256": "82d7975f6ff829e9f350626303e5843d6dad9c3dba8a8780b51e2e333565eebd",
+          "surviving_orbit_sizes": [
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 3,
+          "weight": -1
+        },
+        {
+          "J_even_dimension": 0,
+          "J_monomial_action": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "J_odd_dimension": 3,
+          "killed_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "section_basis_sha256": "82d7975f6ff829e9f350626303e5843d6dad9c3dba8a8780b51e2e333565eebd",
+          "surviving_orbit_sizes": [
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 3,
+          "weight": 1
+        },
+        {
+          "J_even_dimension": 9,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [],
+          "section_basis_sha256": "436a0fbc3ebf69e51006ac4190f7c9f6c815128649346ea930ce28ebbfa17a20",
+          "surviving_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 13,
+          "weight": 2
+        },
+        {
+          "J_even_dimension": 9,
+          "J_monomial_action": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ]
+          ],
+          "J_odd_dimension": 4,
+          "killed_orbit_sizes": [],
+          "section_basis_sha256": "5c6fe6c59ca25a47db0dd166bde159065ffff11554d5e88f86fb6804cabad417",
+          "surviving_orbit_sizes": [
+            1,
+            2,
+            2,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            8,
+            8,
+            8
+          ],
+          "twisted_invariant_dimension": 13,
+          "weight": 4
+        }
+      ]
+    }
+  ],
+  "verdict": "THEOREM; BOTH THE S3 AND D8 B3 SEAMS HAVE A FOUR-DIMENSIONAL J-ODD WEIGHT-2/4 SECTOR EXCHANGED INVERTIBLY BY THE EXACT TWISTED FOURIER TRANSFORM"
+}

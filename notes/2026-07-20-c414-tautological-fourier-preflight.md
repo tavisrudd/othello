@@ -1,20 +1,21 @@
-# C414--C417 — tautological twisted-Fourier synthesis and attack preflight
+# C414--C417 — factorization-sector twisted-Fourier synthesis and attack
 
 **Lane:** `crowns`
 
 **Date:** 2026-07-20
 
-**Status:** `STAGE T0 THEOREM; CONJECTURAL EXCEPTIONAL RESTRICTION AND MODULAR SYNTHESIS`
+**Status:** `STAGES T0/T1 THEOREMS; B3 SEAM SPLIT CERTIFIED; SECTION/DEPTH/MODULAR SYNTHESIS OPEN`
 
 **Literature depth:** zero sources were read at full text for this synthesis.  Two sources were
-read partially and three at abstract/metadata depth, as itemized below.  This is a background
+read partially and five at abstract/metadata depth, as itemized below.  This is a background
 comparison, not a novelty or priority audit, and it licenses no absence claim.
 
 ## Executive picture
 
 The current evidence does not support a canonical identification of C406's cubic/Tate plane with
-C411's depth plane.  It supports a more structured statement: both should be shadows of a
-character-twisted Fourier transform on the ternary quadratic space
+C411's depth plane.  It supports a more structured statement: the quartic quotient and sextic
+product live in complementary character sectors of a twisted Fourier transform on the ternary
+quadratic space
 
 ```text
 V = Sym^2(F_q^2),                    Q = XZ-Y^2.
@@ -30,37 +31,43 @@ P_M=product of the matching secants, deg(P_M)=h+1,
 
 one has `(h-1)+(h+1)=q-1`.  Additive Fourier transform sends scalar-character
 weight `r` to weight `-r`; it therefore has exactly the covariance needed to exchange the
-quotient and product sectors.  After tensoring by the quadratic sheet-orientation character of
-weight `h`, their weights become
+quotient and product sectors directly.  Adding the quadratic exponent `h` formally regrades the
+two scalar weights to
 
 ```text
 (h-1)+h = q-2 = -1 mod (q-1),
 (h+1)+h = q   =  1 mod (q-1).
 ```
 
-Thus the candidate primary object is the dual pair of tautological character sectors
+Stage T0 proved that the ambient kernels on those regraded sectors are inverse up to `q^2`.
+Stage T1 then supplied the decisive falsifier: this scalar regrading is **not** the sheet
+orientation and is not the primary exceptional object.  Over `F_11`, the regraded `-1/+1`
+`A4`-invariant sectors have only a two-dimensional `J`-odd part.  The actual four-dimensional
+exceptional block is
 
 ```text
-H_-1  <--finite Fourier-->  H_+1,
+((H_4)^A4)^(J=-1)  <--finite Fourier-->  ((H_6)^A4)^(J=-1).
 ```
 
-not a map from the quartic quotient into C378's scalar-trivial relation algebra.  The ordinary
-rank-16 Fourier block, zero-depth profiles, cubic/Tate quotient, and characteristic-11 projective
-cover should be obtained only after restriction, nonlinear zero-divisor compression, or modular
-reduction.
+Scalar homogeneity and sheet parity must therefore remain separate gradings.  The ordinary rank-16
+Fourier block, zero-depth profiles, cubic/Tate quotient, and characteristic-11 projective cover
+should be obtained only after exceptional restriction, nonlinear zero-divisor compression, or
+modular reduction.
 
 The target theorem is deliberately sharper than “the four constructions are related”:
 
-> **Tautological Fourier conjecture.**  For the B3/H3 conic-factorization configurations, the
-> orientation-twisted factorization quotient and secant product define canonical sections in
-> mutually dual scalar-character sectors `H_-1,H_+1`.  Their finite Fourier functional equation,
-> restricted to the exceptional parent/intersection subgroup, has C378's odd block and C411's
-> signed depth profile as explicit shadows.  An integral lattice degenerates in defining
+> **Factorization-sector Fourier conjecture.**  For the B3/H3 conic-factorization configurations,
+> the quotient and secant product define canonical sections in the complementary scalar sectors
+> `H_(h-1),H_(h+1)`.  After restriction to the common parent subgroup and then to external
+> sheet-odd parity, their finite Fourier functional equation has the observed four-coordinate odd
+> block and signed depth profile as explicit shadows.  An integral lattice degenerates in defining
 > characteristic to the nonsplit projective-cover/Tate picture, so the depth and cubic planes are
 > related boundary quotients rather than canonically equal planes.
 
-Nothing below promotes the full conjecture to a theorem.  Stage T0 is a theorem; the exceptional
-restriction, matching identity, geometric shadow, and modular comparison remain gated.
+Nothing below promotes the full conjecture to a theorem.  The ambient transform, the q=11
+exceptional restriction, and both q=7 representation-theoretic seam branches are theorems.  The
+matching identity, oriented depth construction, seam selection, geometric shadow, and modular
+comparison remain gated.
 
 ## Stage T0 result
 
@@ -94,9 +101,77 @@ and constructs each root-of-unity power recursively in the cyclotomic basis.  It
 primary gauge to cross-check the stored kernel hashes.  No floating-point or fitted cyclotomic
 embedding is used.
 
-This proves the ambient complementary-weight transform and its normalization.  It does not yet
-show that the B3/H3 factorization sections occupy the needed exceptional-subgroup blocks.  Stage
-T1—the projective scalar cocycle and `A4` Hom-space computation—is now the live C414/C416 gate.
+This proves the ambient complementary-weight transform and its normalization.  Its `+-1`
+interpretation is only a quadratic scalar regrading.  It does not authorize identifying that
+regrading with the external `J`-orientation, and it does not by itself locate the factorization
+sections in an exceptional block.
+
+## Stage T1 result: q=11 exceptional restriction
+
+The q=11 scalar-cocycle gate passes, but it corrects the original conjecture.  The normalized
+projective `A4` section picks up `-I` in 48 products.  Adjoining those signs produces a group of
+order 24 with order distribution
+
+```text
+1^1 2^7 3^8 6^8,
+```
+
+so it is `A4 x C2`, not the binary tetrahedral group.  In odd dimension, determinant one selects
+the unique rotational `A4` splitting, with order distribution `1^1 2^3 3^8`.  This removes the
+odd-weight lift ambiguity canonically.
+
+On the 133 projective lines, exact cyclotomic calculation then gives:
+
+| scalar weights | invariant dimension | `J`-even | `J`-odd | killed projective `A4` orbits |
+|---|---:|---:|---:|---|
+| `-1,+1` | 9 each | 7 | 2 | `3,6,6,6,6,6` |
+| `4,6` | 15 each | 11 | 4 | none |
+
+Both weight pairs are exchanged by exact Fourier blocks whose reverse compositions are `121 I`.
+Only the original polynomial weights `4/6` have the required four-dimensional odd block.  Thus
+the T0 `-1/+1` transform remains a valid ambient identity but fails as an explanation of C378's
+four odd coordinates.  The corrected primary object is the `A4`-invariant, `J`-odd part of the
+actual factorization sectors.
+
+## Stage T1B result: q=7 has two seams, and both Fourier cores pass
+
+A fixed B3 `S4 < PSL_2(7)` parent has seven opposite determinant-sheet mates, not one.  Its action
+on those mates has two orbits:
+
+| common seam | number of mates | matching overlap | endpoint orbits |
+|---|---:|---:|---|
+| `S3` | 4 | one common edge | `2+6` |
+| `D8` | 3 | no common edge | `8` |
+
+Hence the phrase “the two outer-conjugate `S4` parents” did not specify a unique common
+refinement.  The matching overlap gives an intrinsic seam predicate, but no current geometry
+chooses between its two values.
+
+This ambiguity does **not** kill the Fourier mechanism.  Using the unique determinant-one
+orthogonal lift `PGL_2(7) -> SO_3(7)`, every parent pair has four involutive pair exchanges.  For
+all seven pairs and all four choices, the true factorization weights `2/4` have a four-dimensional
+`J`-odd sector.  The exact restricted kernels compose to `49 I_4` on it.  The ambient `-1/+1`
+regrading again has the wrong odd dimension:
+
+| seam | weights | invariant dimension | `J`-even | `J`-odd |
+|---|---|---:|---:|---:|
+| `S3` | `-1,+1` | 6 | 1 | 5 |
+| `S3` | `2,4` | 14 | 10 | 4 |
+| `D8` | `-1,+1` | 3 | 0 | 3 |
+| `D8` | `2,4` | 13 | 9 | 4 |
+
+The representation-theoretic B3/H3 portability gate therefore passes in a sharply qualified form:
+the four-dimensional odd factorization block is uniform, while the ambient invariant sector and
+the seam geometry are not.  The next gate must construct the actual quotient/product sections and
+depth profile on both seam types or give a geometric reason to select one.
+
+There is also a clean negative conclusion about the proposed uniqueness shortcut.  After taking
+common-subgroup invariants, that subgroup acts trivially, and `J` acts as `-I` on each odd
+four-space.  Consequently the local equivariant Hom space between source and target has dimension
+`4*4=16`, not one, in both B3 and H3.  Fourier is canonical because it descends from the ambient
+pairing, but subgroup symmetry alone cannot identify a proposed section from one evaluation.  Any
+one-point proof must first retain the full moving-parent equivariance, or add a multiplication,
+incidence, or Hecke constraint that cuts the 16-dimensional local Hom space to a line.
 
 ## Constraints already proved
 
@@ -115,6 +190,10 @@ These are realizations of the determinant-square orientation character
 ```text
 epsilon : PGL_2(q)/PSL_2(q) -> {+1,-1}.
 ```
+
+Stage T1 shows that this is a grading of the parent/sheet action, not a scalar-dilation weight on
+`V`.  It must be imposed as `J`-parity after scalar-weight restriction rather than added to the
+polynomial degree.
 
 ### 2. Ordinary scalar-line Fourier is the wrong source category
 
@@ -232,7 +311,7 @@ The ingredients belong to three established frameworks.
 1. `V=Sym^2(F_q^2)` with relative invariant `Q` is the binary-quadratic prehomogeneous vector
    space.  Kazhdan--Polishchuk study finite-field functional equations for regular
    prehomogeneous spaces with character/local-system twists.  Their framework is the closest
-   known home for the proposed `H_-1 <-> H_+1` equation.
+   known home for the complementary `H_(h-1) <-> H_(h+1)` equation.
 2. Additive Fourier on a finite quadratic space is the Weyl element in the oscillator/Weil
    representation.  Multiplication by `Q`, the `Q`-Laplacian, and harmonic decomposition are the
    raising/lowering package that should organize C406's identity `P_M-P_0=Q Phi_M`.
@@ -244,36 +323,49 @@ These comparisons identify a category and standard machinery.  They do not estab
 specific `A5/A4` matching sections satisfy the proposed functional equation or that the modular
 extension is its reduction.
 
-## Unanswered questions
+## Resolved gates and unanswered questions
 
 The following list is the durable boundary for C414--C417.
 
-1. **Twisted block existence.**  After accounting for the scalar cocycle of projective `A4`
-   matrices, do the relevant `H_-1,H_+1` subspaces have the predicted dimensions, and is their
-   Fourier `Hom` space one-dimensional?
-2. **Matching-section identity.**  Does the twisted Fourier transform of the oriented quotient
-   section equal the oriented secant-product section up to the forced Gauss scalar?  A single
-   singleton evaluation determines the scalar only after uniqueness is proved.
-3. **Odd Fourier geometry.**  Which exact dual incidence statistic is the shadow of the twisted
+1. **Exceptional block existence — resolved.**  The q=11 weight-`4/6` `A4`-invariant `J`-odd
+   blocks and both q=7 weight-`2/4` seam blocks have dimension four and exact inverse Fourier maps.
+   The quadratically regraded `-1/+1` blocks have the wrong odd dimensions and are excluded as the
+   exceptional explanation.
+2. **Local intertwiner uniqueness — resolved negatively.**  Fixing scalar weight, common-subgroup
+   invariance, and odd `J` parity leaves four copies of the same sign representation, so the local
+   Hom space has dimension 16.  The replacement question is whether the full moving-parent bundle,
+   a Hecke constraint, or multiplication by `Q` isolates the Fourier line globally.
+3. **Matching-section identity.**  Does the twisted Fourier transform of the `J`-odd quotient
+   section equal the `J`-odd secant-product section up to the forced Gauss scalar?  A single
+   singleton evaluation determines the scalar only after the relevant line is isolated.
+4. **B3 seam selection.**  Does the intended geometry choose the four-member `S3` class, the
+   three-member `D8` class, or require compatible depth theorems for both?  Matching overlap
+   distinguishes them but does not privilege either.
+5. **Pair-exchange independence.**  Each q=7 pair has four involutive exchanges.  The odd dimension
+   is independent of that choice; is the actual section/profile independent up to the common seam
+   group, or does it require another orientation datum?
+6. **Odd Fourier geometry.**  Which exact dual incidence statistic is the shadow of the twisted
    section, and how does it yield all four coordinates of `M_odd D(M)` without numerical fitting?
-4. **Depth compression.**  Is zero-divisor projection followed by `A4` radialization exactly the
+7. **Depth compression.**  Is zero-divisor projection followed by common-subgroup radialization exactly the
    passage from the twisted section to the six depth profiles?  Where does its rank-two image enter
    conceptually?
-5. **The `8/9` extension.**  Are `[2,8,1]` and `[2,9,1]` the two boundary maps of one integral
+8. **The `8/9` extension.**  Are `[2,8,1]` and `[2,9,1]` the two boundary maps of one integral
    Fourier/Radon lattice, and is their difference the unique nonzero extension or affine cocycle?
-6. **Portability.**  Does q=7 reproduce the same tautological transform and cubic-first trade, and
-   does q=5 explain nonsplitting rather than merely supply another table?
-7. **Orientation versus parent choice.**  A sheet choice or nonzero vector in the orientation line
+9. **Geometric portability.**  The q=7 representation block now passes for both seams.  Does either
+   seam reproduce the H3 cubic-first trade and signed depth law, and does q=5 explain nonsplitting
+   rather than merely supply another table?
+10. **Orientation versus parent choice.**  A sheet choice or nonzero vector in the orientation line
    selects a parent, but is there a natural external geometric source of that choice in any intended
    application?
-8. **Minimal tomography choice.**  The 220-element `S3`-symmetric orbit is canonical; no intrinsic
+11. **Minimal tomography choice.**  The 220-element `S3`-symmetric orbit is canonical; no intrinsic
    member is known.  Does the twisted line bundle canonically decorate a triple, or does `J/G`
    symmetry prove that impossible too?
-9. **Separability boundary.**  C413 recovers every structure needed here but does not prove general
+12. **Separability boundary.**  C413 recovers every structure needed here but does not prove general
    separability of the rank-16 scheme.
-10. **Cross-category boundary.**  Can C438's theta/Richelot postmortem construct a new functor
+13. **Cross-category boundary.**  Can C438's theta/Richelot postmortem construct a new functor
     between the q=9 and q=11 marking categories, or is the different-fibre obstruction permanent?
-11. **Priority boundary.**  Which parts of the exceptional `A5/A4` restriction and modular
+14. **Priority boundary.**  Which parts of the exceptional `A5/A4`, `S4/S3`, and `S4/D8`
+    restrictions and modular
     degeneration survive a claim-specific full-text/forward-citation audit?  No answer is claimed
     by this synthesis.
 
@@ -292,22 +384,29 @@ counts rather than floating roots of unity.  Verify
 K_-r K_r = q^2 I
 ```
 
-and the degree/orientation identities above.  This proves the ambient transform and fixes all
-normalizations before exceptional-subgroup restriction.
+and the complementary-degree/quadratic-regrading identities above.  **Complete.**  This proves the
+ambient transform and fixes all normalizations before exceptional-subgroup restriction; it does
+not merge scalar degree with sheet parity.
 
 ### Stage T1 — exceptional restriction and uniqueness
 
 Restrict at q=11 to the scalar-`A4` common-refinement action, retaining its projective scalar
-cocycle.  Compute the relevant twisted invariant/isotypic spaces and
-`Hom_A4(H_-1,H_+1)`.  Stop if the expected four-coordinate block is absent or the Hom space is too
-large to force an intertwiner.  Repeat the structural test at q=7 before deriving any uniform
-theorem.
+cocycle.  **Complete with a correction:** determinant one splits the cocycle, weights `4/6` have
+the four-dimensional odd block, and `-1/+1` do not.  Repeat the structural test at q=7.
 
-### Stage T2 — one-point normalization
+The q=7 test is also **complete at representation level**.  There are `S3` and `D8` common seams,
+and both true weight-`2/4` sectors have exact four-dimensional odd Fourier blocks.  The remaining
+T1 question is geometric: select a seam or prove compatible factorization/depth statements on
+both, then determine whether the relevant section line is forced inside the four-space.
 
-Represent the oriented `Phi_M` and `P_M` as twisted sections.  Once T1 proves uniqueness, evaluate
-one singleton matching and its `J`-mate to determine the Gauss scalar.  Then prove the all-matching
-identity by equivariance, not by 22 independent fits.
+### Stage T2 — global section module and one-point normalization
+
+Represent the actual-degree `Phi_M` and `P_M` as sections and keep the full family as the parent
+pair moves.  Determine the global induced/Hecke module and the extra operator that reduces the
+local 16-dimensional Hom space.  Only after that uniqueness gate passes should one singleton and
+its mate determine the Gauss scalar.  Then prove the all-matching identity by equivariance, not by
+22 independent fits; at q=7, run the test on both seam classes until a geometric selector is
+proved.
 
 ### Stage T3 — shadows and modular reduction
 
@@ -318,15 +417,17 @@ of the `8/9` shift; a proof that the extension classes differ is also a valid sh
 
 ## Ownership by queued task
 
-- **C414:** T0's q=7 control, then the B3/H3 common statement and A3 nonsplitting boundary.
+- **C414:** the certified two-seam q=7 control, then the B3/H3 section/depth statement and A3
+  nonsplitting boundary.
 - **C415:** T2/T3's geometric incidence shadow of all four transformed odd coordinates.
-- **C416:** T0/T1's multiplicative-character Fourier sectors, Gauss kernels, and nonzero
-  intertwiner.
+- **C416:** T0/T1's multiplicative-character Fourier sectors, Gauss kernels, and the remaining
+  section-level intertwiner/uniqueness question.
 - **C417:** T3's affine base-choice cocycle, integral lattice, and modular extension class.
 
 The scientific dependency exposed here is `T0 -> T1 -> T2 -> T3`.  It does not administratively
-close or re-peg any queued task.  C414 remains the active entry because q=7 is the first portability
-falsifier; a positive T0 should promote the narrow C416 block before a broad untwisted C415 search.
+close or re-peg any queued task.  C414 remains the active entry because the q=7 representation gate
+has passed but the two-seam geometric portability gate remains open.  The exact results narrow
+C416 to the section identity and keep a broad untwisted C415 search behind that gate.
 
 ## Literature boundary
 
@@ -356,6 +457,21 @@ forward-citation negative is drawn.
   only**, official arXiv HTML.  Its general theorem explicitly excludes the cyclic-Sylow rank-one
   cases such as `SL_2(p)`; it is background for why the exact C412 module must be treated
   separately, not evidence for C412's `1|9|1` computation.  No cache blob was created.
+- Fredrik Strömberg, *Weil Representations Associated to Finite Quadratic Modules*,
+  arXiv:1108.0202: **abstract/metadata only**, official arXiv abstract.  It gives explicit matrix
+  coefficients for the standard Weil representation of a finite quadratic module.  It is broad
+  representation-theoretic background and was not read as a source for the exceptional
+  `A4/S3/D8` restrictions here.  No cache blob was created.
+- Andrzej K. Brodzik and Richard Tolimieri, *Fourier and Zak Transforms of Multiplicative
+  Characters*, arXiv:2104.09295: **abstract/metadata only**, official arXiv abstract.  It treats
+  finite Fourier/Zak formulas for multiplicative characters on cyclic rings.  It confirms that
+  multiplicative-character Fourier transforms are standard background; it does not state the
+  ternary projective exceptional blocks certified here.  No cache blob was created.
+
+A post-T1 bounded search also queried binary-quadratic finite-field Fourier transforms,
+`Sym^2` Weil restrictions, twisted Gelfand pairs, and `A4/S3/D8` association-scheme blocks.  It
+returned the broad sources above and no claim-level match was inspected at full text.  This is a
+routing observation only, not an absence result.
 
 MathSciNet, zbMATH, Google Scholar, and forward citations were not searched for this synthesis.
 That is acceptable only because no absence, novelty, or priority verdict is made.
@@ -367,9 +483,16 @@ obstruction, C411's double-coset depth map, C412's Tate/projective-cover boundar
 recovery and tomography theorem, and C438's different-fibre obstruction.  The complementary-degree
 and weight-reversal formulas are formal consequences of those definitions.
 
-The computational bundle certifies only Stage T0.  It does not certify the exceptional `A4`
-restriction, a matching-section Fourier identity, the geometric meaning of `M_odd D(M)`, the `8/9`
-extension class, existence of an A3 sheet orientation, a portable B3/H3 theorem, or novelty.
+Four atomic bundles now certify: the ambient q=5/7/11 complementary kernels; the q=11 projective
+lift splitting and exact `4/6` odd block; the q=7 `S3/D8` seam census; and the exact `2/4` odd blocks
+on all seven q=7 seams.  Each bundle has a primary checker, canonical JSON, checksum manifest, and
+an independent replay using a different construction or projective gauge.
+
+They do not certify a matching-section Fourier identity, uniqueness of the section line inside the
+odd four-space, a q=7 seam selector, an oriented B3 depth profile, the geometric meaning of
+`M_odd D(M)`, the `8/9` extension class, existence of an A3 sheet orientation, or novelty.  Thus
+“portable B3/H3 theorem” currently means only the representation-theoretic Fourier core, not the
+full factorization/depth theorem requested by C414.
 
 ## Reproducibility
 
@@ -379,22 +502,47 @@ Run from `/home/tavis/src/othello` with Python 3.13.12:
 python3 notes/2026-07-20-c414-tautological-fourier-preflight.py --check
 python3 notes/2026-07-20-c414-tautological-fourier-preflight-replay.py
 sha256sum -c notes/2026-07-20-c414-tautological-fourier-preflight.sha256
+
+python3 notes/2026-07-20-c414-exceptional-twisted-fourier.py --check
+python3 notes/2026-07-20-c414-exceptional-twisted-fourier-replay.py
+sha256sum -c notes/2026-07-20-c414-exceptional-twisted-fourier.sha256
+
+python3 notes/2026-07-20-c414-b3-seam-preflight.py --check
+python3 notes/2026-07-20-c414-b3-seam-preflight-replay.py
+sha256sum -c notes/2026-07-20-c414-b3-seam-preflight.sha256
+
+python3 notes/2026-07-20-c414-b3-exceptional-twisted-fourier.py --check
+python3 notes/2026-07-20-c414-b3-exceptional-twisted-fourier-replay.py
+sha256sum -c notes/2026-07-20-c414-b3-exceptional-twisted-fourier.sha256
 ```
 
 Intentional regeneration is:
 
 ```bash
 python3 notes/2026-07-20-c414-tautological-fourier-preflight.py --write
+python3 notes/2026-07-20-c414-exceptional-twisted-fourier.py --write
+python3 notes/2026-07-20-c414-b3-seam-preflight.py --write
+python3 notes/2026-07-20-c414-b3-exceptional-twisted-fourier.py --write
 ```
 
-| artifact | bytes | SHA-256 |
+| bundle/artifact | bytes | SHA-256 |
 |---|---:|---|
-| primary checker | 7,394 | `889bf618995cebf69325d4359272342b88094d86dfe6efd173ace2a0074c4670` |
-| independent replay | 5,178 | `1206cdae50c23367f68cd4fb79e5a4ec9779c0e643d7473e83664702499a999e` |
-| canonical JSON | 4,448 | `faeca37b580ef5a8f3278c1f2f82fd81af49030d99f2a5374abafb3f7bcc8863` |
+| T0 primary | 7,554 | `253ba6c69bb965d98adc811d188b71471a7d4ef5ec916fde71a26e01b070b672` |
+| T0 replay | 5,178 | `1206cdae50c23367f68cd4fb79e5a4ec9779c0e643d7473e83664702499a999e` |
+| T0 JSON | 4,635 | `cbd90ee4ee861122fa9d1af580b581ac8d58eb566f02916d7328c45ab8d8ba04` |
+| q=11 primary | 17,901 | `7ef5dfffb7231c56cd2cd32bb29ba206876e12531596d79a2e38dd94824c4fbe` |
+| q=11 replay | 11,713 | `b0294be985c9a13eae14b6c9a7490df34e75d987e729397dd97b8bd7fff5d03c` |
+| q=11 JSON | 90,668 | `7062aae1e519a7dceaba888aa60f1bfacf286f4adf59953bb25eb6d0ceb304e8` |
+| q=7 seam primary | 6,578 | `930b7730574c597f23f98d1839e7037659557db89223eabaaf12601002a42511` |
+| q=7 seam replay | 4,716 | `d2de505a5378cf68a17f352a9016a9a23dfbac94f1d0426f1f0a94f46477d24f` |
+| q=7 seam JSON | 4,849 | `64cd62069d20a35d320e426f7181c9fa44fef1c6bb201ae930c7d02f8ac63af4` |
+| q=7 block primary | 11,936 | `4c8580eaddb53be1aae495a6cbb08a97b5ff3a8631867ca68a218309f3f0e66c` |
+| q=7 block replay | 15,623 | `80f70369ced20fa9aeac148c4331c1e968d61c47ed839afdf4c100478f418764` |
+| q=7 block JSON | 54,170 | `8d587172551ae0623110d3a44a4325545470579ed256f6b49606fe74c3f21a76` |
 
 The trusted boundary is elementary arithmetic in the three prime fields, the standard dot pairing,
-the definition of a multiplicative character through a primitive generator, and exact reduction in
-the displayed cyclotomic integer bases.  The checker does not import the B3/H3 factorization
-certificates; the degree data are frozen parameters whose geometric realization remains a T1/T2
-obligation.
+the certified B3/H3 parent actions, the definition of a multiplicative character through a
+primitive generator, and exact reduction in the displayed cyclotomic integer bases.  The replays
+rebuild q=11 from an independent H3 implementation and q=7 from matching stabilizers rather than
+the B3 root generators.  None imports or assumes the desired factorization-section identity; that
+geometric realization remains the live T2 obligation.

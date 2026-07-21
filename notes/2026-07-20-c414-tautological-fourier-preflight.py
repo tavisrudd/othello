@@ -146,9 +146,9 @@ def case_certificate(name: str, prime: int) -> dict[str, object]:
         "nonzero_entries_per_kernel_row": nonzero_counts[0],
         "quotient_degree": quotient_degree,
         "product_degree": product_degree,
-        "quadratic_orientation_exponent": half,
-        "oriented_quotient_weight_mod_q_minus_1": (quotient_degree + half) % order,
-        "oriented_product_weight_mod_q_minus_1": (product_degree + half) % order,
+        "quadratic_regrading_exponent": half,
+        "quadratically_regraded_quotient_weight_mod_q_minus_1": (quotient_degree + half) % order,
+        "quadratically_regraded_product_weight_mod_q_minus_1": (product_degree + half) % order,
         "forward_source_weight": -1,
         "forward_target_weight": 1,
         "forward_kernel_sha256": matrix_hash(forward),
@@ -170,12 +170,14 @@ def build() -> dict[str, object]:
         "character_sector_rule": "Fourier sends H_r to H_-r",
         "cases": cases,
         "verdict": (
-            "THEOREM; ORIENTATION-TWISTED FACTORIZATION DEGREES ARE TAUTOLOGICAL +/-1 WEIGHTS, "
-            "AND BOTH ORDERS OF THEIR EXACT PROJECTIVE FOURIER KERNELS COMPOSE TO q^2 I"
+            "THEOREM; QUADRATICALLY REGRADING THE COMPLEMENTARY FACTORIZATION DEGREES GIVES "
+            "+/-1 SCALAR WEIGHTS, AND BOTH ORDERS OF THE EXACT PROJECTIVE FOURIER KERNELS "
+            "COMPOSE TO q^2 I"
         ),
         "boundary": (
-            "No exceptional A4 restriction, matching-section identity, depth shadow, modular extension, "
-            "existence of an A3 sheet orientation, or novelty claim is certified."
+            "This ambient arithmetic does not identify the quadratic scalar regrading with the "
+            "independent sheet-orientation involution. No exceptional restriction, matching-section "
+            "identity, depth shadow, modular extension, A3 orientation, or novelty is certified."
         ),
     }
 
@@ -192,7 +194,7 @@ def main() -> None:
         OUTPUT.write_bytes(payload)
     else:
         assert OUTPUT.read_bytes() == payload
-    print("C414 tautological Fourier Stage-T0 certificate OK")
+    print("C414 ambient Fourier Stage-T0 certificate OK")
 
 
 if __name__ == "__main__":
