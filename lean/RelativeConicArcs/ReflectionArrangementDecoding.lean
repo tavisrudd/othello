@@ -14,11 +14,19 @@ namespace RelativeConicArcs.Examples.ReflectionArrangements
 open Certificate
 open RelativeConicArcs.Examples.Q11Coding
 
+set_option maxHeartbeats 30000000
+set_option maxRecDepth 100000
+
 /-- The affine syndrome obtained from a normalized arrangement point after applying the displayed
 invertible coordinate map, renormalizing its projective direction, and multiplying by a chosen
 nonzero scalar.  The scalar ranges over all ten elements of `NonzeroScalar`. -/
 def h3AffineSyndrome (p : Fin 133) (a : NonzeroScalar) : Vec (ZMod 11) :=
   affineRayVec (h3ProjectiveIndex p, a)
+
+/-- The nonzero-syndrome subtype associated to an arrangement point and nonzero scalar. -/
+def h3AffineSyndromeNonzero (pa : Fin 133 × NonzeroScalar) :
+    {s : Vec (ZMod 11) // s ≠ 0} :=
+  ⟨h3AffineSyndrome pa.1 pa.2, affineRayVec_ne_zero (h3ProjectiveIndex pa.1, pa.2)⟩
 
 /-- Distinct pairs of an arrangement point and a nonzero scalar give distinct affine syndromes. -/
 theorem h3_affine_syndrome_injective :
@@ -33,6 +41,20 @@ theorem h3_affine_syndrome_injective :
   have hp : p = q := h3_projective_index_bijective.1 (congrArg Prod.fst hpairs)
   have ha : a = b := congrArg Prod.snd hpairs
   exact Prod.ext hp ha
+
+/-- Arrangement points paired with nonzero scalars are in bijection with all nonzero affine
+syndromes. -/
+theorem h3_affine_syndrome_bijective : Function.Bijective h3AffineSyndromeNonzero := by
+  constructor
+  · intro pa pb hab
+    apply h3_affine_syndrome_injective
+    exact congrArg Subtype.val hab
+  · intro s
+    obtain ⟨ray, hray⟩ := affineRayVec_bijective.2 s
+    obtain ⟨p, hp⟩ := h3_projective_index_bijective.2 ray.1
+    refine ⟨(p, ray.2), ?_⟩
+    apply Subtype.ext
+    simpa [h3AffineSyndromeNonzero, h3AffineSyndrome, hp] using congrArg Subtype.val hray
 
 /-- The affine syndromes above arrangement points of incidence multiplicity `m`, including all ten
 nonzero scalar representatives of each projective direction. -/
@@ -108,6 +130,95 @@ theorem h3_one_leader_strata_card :
   rw [h3_affine_syndromes_card, h3_affine_syndromes_card,
     h3_intersection_spectrum.2.1, h3_intersection_spectrum.2.2.2.2]
 
+/-- The union of the incidence-one and incidence-five affine images. -/
+def h3OneLeaderSyndromes : Finset (Vec (ZMod 11)) :=
+  h3AffineSyndromesOfMultiplicity 1 ∪ h3AffineSyndromesOfMultiplicity 5
+
+/-- Affine images of distinct incidence-multiplicity strata are disjoint. -/
+theorem h3_affine_syndromes_disjoint_of_ne {m n : ℕ} (hmn : m ≠ n) :
+    Disjoint (h3AffineSyndromesOfMultiplicity m) (h3AffineSyndromesOfMultiplicity n) := by
+  refine Finset.disjoint_left.mpr ?_
+  intro s hsm hsn
+  obtain ⟨pa, hpa, hpas⟩ := Finset.mem_image.mp hsm
+  obtain ⟨pb, hpb, hpbs⟩ := Finset.mem_image.mp hsn
+  have hpab : pa = pb := h3_affine_syndrome_injective (hpas.trans hpbs.symm)
+  have hm : h3Multiplicity pa.1 = m :=
+    (Finset.mem_filter.mp (Finset.mem_product.mp hpa).1).2
+  have hn : h3Multiplicity pb.1 = n :=
+    (Finset.mem_filter.mp (Finset.mem_product.mp hpb).1).2
+  subst pb
+  exact hmn (hm.symm.trans hn)
+
+/-- The union of the incidence-one and incidence-five affine images has cardinality 960. -/
+theorem h3_one_leader_syndromes_card : h3OneLeaderSyndromes.card = 960 := by
+  unfold h3OneLeaderSyndromes
+  rw [Finset.card_union_of_disjoint (h3_affine_syndromes_disjoint_of_ne (by omega)),
+    h3_one_leader_strata_card]
+
+/-- Every syndrome in the incidence-one/incidence-five union has exactly one nearest leader. -/
+theorem h3_one_leader_syndromes_sound :
+    ∀ s ∈ h3OneLeaderSyndromes, nearestLeaderCount s = 1 := by
+  intro s hs
+  rw [h3OneLeaderSyndromes] at hs
+  rcases Finset.mem_union.mp hs with hs | hs
+  · obtain ⟨pa, hpa, hpas⟩ := Finset.mem_image.mp hs
+    have hp : h3Multiplicity pa.1 = 1 :=
+      (Finset.mem_filter.mp (Finset.mem_product.mp hpa).1).2
+    rw [← hpas]
+    simpa [hp] using h3_affine_syndrome_nearestLeaderCount pa.1 pa.2
+  · obtain ⟨pa, hpa, hpas⟩ := Finset.mem_image.mp hs
+    have hp : h3Multiplicity pa.1 = 5 :=
+      (Finset.mem_filter.mp (Finset.mem_product.mp hpa).1).2
+    rw [← hpas]
+    simpa [hp] using h3_affine_syndrome_nearestLeaderCount pa.1 pa.2
+
+/-- The incidence-one/incidence-five union is exactly the semantic one-nearest-leader syndrome
+stratum. -/
+theorem h3_one_leader_syndromes_eq_ambiguityOne :
+    h3OneLeaderSyndromes = ambiguityOneSyndromes := by
+  apply Finset.eq_of_subset_of_card_le
+  · intro s hs
+    rw [h3OneLeaderSyndromes] at hs
+    rcases Finset.mem_union.mp hs with hs | hs
+    · obtain ⟨pa, hpa, hpas⟩ := Finset.mem_image.mp hs
+      subst s
+      have hp : h3Multiplicity pa.1 = 1 :=
+        (Finset.mem_filter.mp (Finset.mem_product.mp hpa).1).2
+      let ray : AffineRay := (h3ProjectiveIndex pa.1, pa.2)
+      have hindex : rawPointIndex (projectiveVec ray.1) = 1 := by
+        calc
+          rawPointIndex (projectiveVec ray.1) = h3Multiplicity pa.1 := by
+            simpa [ray, h3Multiplicity] using
+              (h3_multiplicity_eq_normalized_rawPointIndex pa.1).symm
+          _ = 1 := hp
+      have hcanonical : canonicalSyndromeDistance ray.1 = 2 := by
+        simp [canonicalSyndromeDistance, hindex]
+      apply Finset.mem_union_right
+      apply Finset.mem_filter.mpr
+      refine ⟨mem_affineSyndromesOfDistance_iff.mpr ⟨affineRayVec_ne_zero ray, ?_⟩, ?_⟩
+      · simpa [h3AffineSyndrome, ray, hcanonical] using
+          affineRay_syndromeDistance_exact ray
+      · exact (affineRay_weightTwo_leader_count ray hcanonical).trans hindex
+    · obtain ⟨pa, hpa, hpas⟩ := Finset.mem_image.mp hs
+      subst s
+      have hp : h3Multiplicity pa.1 = 5 :=
+        (Finset.mem_filter.mp (Finset.mem_product.mp hpa).1).2
+      let ray : AffineRay := (h3ProjectiveIndex pa.1, pa.2)
+      have hindex : rawPointIndex (projectiveVec ray.1) = 5 := by
+        calc
+          rawPointIndex (projectiveVec ray.1) = h3Multiplicity pa.1 := by
+            simpa [ray, h3Multiplicity] using
+              (h3_multiplicity_eq_normalized_rawPointIndex pa.1).symm
+          _ = 5 := hp
+      have hcanonical : canonicalSyndromeDistance ray.1 = 1 := by
+        simp [canonicalSyndromeDistance, hindex]
+      apply Finset.mem_union_left
+      apply mem_affineSyndromesOfDistance_iff.mpr
+      refine ⟨affineRayVec_ne_zero ray, ?_⟩
+      simpa [h3AffineSyndrome, ray, hcanonical] using
+        affineRay_syndromeDistance_exact ray
+  · rw [h3_one_leader_syndromes_card, ambiguity_strata_counts.1]
+
 /-- Joint numerical census: the reduced-`H3` incidence-stratum sizes for incidence `0,1,2,3` together
 with the Clebsch nearest-codeword ambiguity-census sizes.  This is a conjunction of cardinality
 equalities only; it asserts no map, membership, or leader-count equivalence between the two
@@ -128,8 +239,13 @@ theorem h3_decoder_strata :
 
 #print axioms h3_decoder_strata
 #print axioms h3_affine_syndrome_injective
+#print axioms h3_affine_syndrome_bijective
 #print axioms h3_affine_syndromes_card
 #print axioms h3_affine_syndrome_nearestLeaderCount
 #print axioms h3_one_leader_strata_card
+#print axioms h3_affine_syndromes_disjoint_of_ne
+#print axioms h3_one_leader_syndromes_card
+#print axioms h3_one_leader_syndromes_sound
+#print axioms h3_one_leader_syndromes_eq_ambiguityOne
 
 end RelativeConicArcs.Examples.ReflectionArrangements

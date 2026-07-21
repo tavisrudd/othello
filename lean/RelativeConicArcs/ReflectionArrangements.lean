@@ -15,9 +15,10 @@ when nonzeroness is known.  The operations `cross` and `dot` are the triple prod
 Projective points of `PG(2,11)` and `PG(2,5)` are the fixed
 first-nonzero-coordinate-normalized enumerations `projectiveVec` and `projectiveVec5`.
 
-Scope and trust boundary.  Lean here checks coordinate tables and arithmetic only.  This file does
-not prove the external arrangement-theoretic identification of the displayed coordinate models or
-interpret the integer factorizations as characteristic polynomials.  The terminal results are the `tau`
+Scope and trust boundary.  Lean here checks coordinate tables and arithmetic only.  The `A3` and
+`H3` labels are mnemonic names for the displayed tables; this file asserts no identification with
+abstract Coxeter arrangements and does not interpret the integer factorizations as characteristic
+polynomials.  The terminal results are the `tau`
 relations, the fivefold-arc and line-coincidence theorems, the projectivity row identities, the
 `H3` and `A3` incidence spectra, the pointwise incidence-index equality, and the integer identities;
 each carries a `#print axioms` probe at the end of the file.
@@ -42,6 +43,11 @@ abbrev Point5 := Vec (ZMod 5)
 vectors this is projective equality; the definition also makes `SameDirection 0 0` true. -/
 def SameDirection {K : Type*} [Field K] (u v : Fin 3 → K) : Prop :=
   ∃ a : K, a ≠ 0 ∧ a • u = v
+
+/-- An indexed coordinate table is projectively injective when vectors at distinct indices are not
+equal up to multiplication by a nonzero scalar. -/
+def ProjectivelyInjective {n : ℕ} {K : Type*} [Field K] (f : Fin n → Fin 3 → K) : Prop :=
+  ∀ i j, SameDirection (f i) (f j) → i = j
 
 instance {K : Type*} [Field K] [Fintype K] [DecidableEq K] (u v : Fin 3 → K) :
     Decidable (SameDirection u v) := by
@@ -91,7 +97,7 @@ def h3Join (i : Fin 15) : Point11 :=
 /-- The fifteen raw cross-product vectors of the join-lines, collected as a finite set. -/
 def h3Joins : Finset Point11 := Finset.univ.image h3Join
 
-/-- The specialized positive-root directions obtained from
+/-- The fifteen displayed directions obtained from
 `(1,0,0)`, `(0,1,0)`, `(0,0,1)`, and cyclic permutations of
 `(1, ±tau11, ±(tau11-1))`. -/
 def h3RootDirection (i : Fin 15) : Point11 :=
@@ -112,9 +118,10 @@ theorem h3_fivefold_points_arc :
   intro i j k hij hik hjk
   fin_cases i <;> fin_cases j <;> fin_cases k <;> simp_all [h3FivefoldPoint, tau11] <;> decide
 
-/-- The fifteen joins of the six fivefold points and the fifteen displayed root directions are equal
-as projective sets: both have cardinality fifteen and each join matches some displayed direction
-under `SameDirection` and conversely. -/
+/-- The raw join and displayed-direction tables both have cardinality fifteen, and every indexed
+entry of either table matches an entry of the other under `SameDirection`. Projective distinctness
+of the two tables is stated separately by `h3_join_directions_injective` and
+`h3_root_directions_injective`. -/
 theorem h3_joins_are_root_directions :
     h3Joins.card = 15 ∧ h3RootDirections.card = 15 ∧
       (∀ i : Fin 15, ∃ j : Fin 15, SameDirection (h3Join i) (h3RootDirection j)) ∧
@@ -127,6 +134,7 @@ theorem h3_joins_are_root_directions :
       exact ⟨8, by decide⟩ | exact ⟨9, by decide⟩ | exact ⟨10, by decide⟩ |
       exact ⟨11, by decide⟩ | exact ⟨12, by decide⟩ | exact ⟨13, by decide⟩ |
       exact ⟨14, by decide⟩
+
   · intro j
     fin_cases j <;> first | exact ⟨0, by decide⟩ | exact ⟨1, by decide⟩ |
       exact ⟨2, by decide⟩ | exact ⟨3, by decide⟩ | exact ⟨4, by decide⟩ |
@@ -134,6 +142,18 @@ theorem h3_joins_are_root_directions :
       exact ⟨8, by decide⟩ | exact ⟨9, by decide⟩ | exact ⟨10, by decide⟩ |
       exact ⟨11, by decide⟩ | exact ⟨12, by decide⟩ | exact ⟨13, by decide⟩ |
       exact ⟨14, by decide⟩
+
+/-- Distinct join indices represent distinct projective directions. -/
+theorem h3_join_directions_injective : ProjectivelyInjective h3Join := by
+  intro i j
+  revert i j
+  decide
+
+/-- Distinct displayed-direction indices represent distinct projective directions. -/
+theorem h3_root_directions_injective : ProjectivelyInjective h3RootDirection := by
+  intro i j
+  revert i j
+  decide
 
 /-- The displayed 3×3 map `T` over `ZMod 11`, acting on column coordinate vectors. -/
 def h3Projectivity (p : Point11) : Point11 :=
@@ -159,8 +179,8 @@ def h3ProjectivityInverse (p : Point11) : Point11 :=
     10 * p 0 + 8 * p 1 + 5 * p 2
   ]
 
-/-- The displayed matrix of `T` has determinant `3` in `ZMod 11`. This is the only invertibility
-fact proved here; `T` is not packaged as a linear or projective bijection. -/
+/-- The displayed matrix of `T` has determinant `3` in `ZMod 11`; the following declarations prove
+nonvanishing, give its explicit inverse, and package its action on normalized projective indices. -/
 theorem h3_projectivity_det :
     Matrix.det (![![2, 3, 8], ![10, 6, 9], ![2, 2, 5]] : Matrix (Fin 3) (Fin 3) (ZMod 11)) = 3 := by
   decide
@@ -494,7 +514,7 @@ def a3Pair (i : Fin 6) : Fin 4 × Fin 4 :=
 def a3Join (i : Fin 6) : Point5 :=
   cross (a3FramePoint (a3Pair i).1) (a3FramePoint (a3Pair i).2)
 
-/-- The six essentialized braid directions `X, Y, Z, X-Y, X-Z, Y-Z`. -/
+/-- The six displayed braid-form directions `X, Y, Z, X-Y, X-Z, Y-Z`. -/
 def a3RootDirection (i : Fin 6) : Point5 :=
   ![![1, 0, 0], ![0, 1, 0], ![0, 0, 1], ![1, -1, 0], ![1, 0, -1], ![0, 1, -1]] i
 
@@ -504,9 +524,9 @@ def a3Joins : Finset Point5 := Finset.univ.image a3Join
 /-- The six displayed braid directions, collected as a finite set. -/
 def a3RootDirections : Finset Point5 := Finset.univ.image a3RootDirection
 
-/-- The six frame joins and the six displayed braid directions are equal as projective sets: both
-finite sets have cardinality six, and each indexed vector matches a vector from the other table up
-to a nonzero scalar. -/
+/-- The two raw vector tables both have cardinality six, and each indexed frame join matches a
+displayed braid-form direction under `SameDirection` and conversely. Projective distinctness is
+stated separately by `a3_join_directions_injective` and `a3_root_directions_injective`. -/
 theorem a3_frame_joins_are_braid_mirrors :
     a3Joins.card = 6 ∧ a3RootDirections.card = 6 ∧
       (∀ i : Fin 6, ∃ j : Fin 6, SameDirection (a3Join i) (a3RootDirection j)) ∧
@@ -516,10 +536,23 @@ theorem a3_frame_joins_are_braid_mirrors :
     fin_cases i <;> first | exact ⟨0, by decide⟩ | exact ⟨1, by decide⟩ |
       exact ⟨2, by decide⟩ | exact ⟨3, by decide⟩ | exact ⟨4, by decide⟩ |
       exact ⟨5, by decide⟩
+
   · intro j
     fin_cases j <;> first | exact ⟨0, by decide⟩ | exact ⟨1, by decide⟩ |
       exact ⟨2, by decide⟩ | exact ⟨3, by decide⟩ | exact ⟨4, by decide⟩ |
       exact ⟨5, by decide⟩
+
+/-- Distinct frame-join indices represent distinct projective directions. -/
+theorem a3_join_directions_injective : ProjectivelyInjective a3Join := by
+  intro i j
+  revert i j
+  decide
+
+/-- Distinct braid-form indices represent distinct projective directions. -/
+theorem a3_root_directions_injective : ProjectivelyInjective a3RootDirection := by
+  intro i j
+  revert i j
+  decide
 
 /-- Incidence count of the normalized point `projectiveVec5 p` with the six frame join-lines. -/
 def a3Multiplicity (p : Fin 31) : ℕ :=
@@ -543,13 +576,11 @@ theorem a3_intersection_spectrum :
 /-- Integer identity `6*(5-1) + 10*(3-1) + 15*(2-1) = 59` for the weighted incidence sum. -/
 theorem h3_mobius_sum : 6 * (5 - 1) + 10 * (3 - 1) + 15 * (2 - 1) = 59 := by norm_num
 
-/-- Integer polynomial factorization `t^3 - 15 t^2 + 59 t - 45 = (t-1)(t-5)(t-9)`; the roots are
-`1 +` the `H3` exponents `{1,5,9}`, matching the classical `H3` characteristic polynomial. -/
+/-- Integer polynomial factorization `t^3 - 15 t^2 + 59 t - 45 = (t-1)(t-5)(t-9)`. -/
 theorem h3_characteristic_polynomial (t : ℤ) :
     t ^ 3 - 15 * t ^ 2 + 59 * t - 45 = (t - 1) * (t - 5) * (t - 9) := by ring
 
-/-- Integer polynomial factorization `t^3 - 6 t^2 + 11 t - 6 = (t-1)(t-2)(t-3)`; the roots are
-`1 +` the `A3` exponents `{1,2,3}`, matching the classical `A3` characteristic polynomial. -/
+/-- Integer polynomial factorization `t^3 - 6 t^2 + 11 t - 6 = (t-1)(t-2)(t-3)`. -/
 theorem a3_characteristic_polynomial (t : ℤ) :
     t ^ 3 - 6 * t ^ 2 + 11 * t - 6 = (t - 1) * (t - 2) * (t - 3) := by ring
 
@@ -567,6 +598,8 @@ theorem a3_conic_size_factorization (q : ℤ) :
 #print axioms tau5_relation
 #print axioms h3_fivefold_points_arc
 #print axioms h3_joins_are_root_directions
+#print axioms h3_join_directions_injective
+#print axioms h3_root_directions_injective
 #print axioms h3_projectivity_det
 #print axioms h3_projectivity_det_ne_zero
 #print axioms h3_projectivity_inverse_apply
@@ -590,6 +623,8 @@ theorem a3_conic_size_factorization (q : ℤ) :
 #print axioms h3_characteristic_two_boundary
 #print axioms h3_characteristic_five_spectrum
 #print axioms a3_frame_joins_are_braid_mirrors
+#print axioms a3_join_directions_injective
+#print axioms a3_root_directions_injective
 #print axioms a3_intersection_spectrum
 #print axioms h3_mobius_sum
 #print axioms h3_characteristic_polynomial

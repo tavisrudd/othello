@@ -14,14 +14,15 @@ SOURCES = [
     ROOT / "lean/RelativeConicArcs/ReflectionArrangementDecoding.lean",
 ]
 DEFINITIONS = [
-    "SameDirection", "cross", "dot", "tau11", "h3FivefoldPoint", "h3Join",
+    "SameDirection", "ProjectivelyInjective", "cross", "dot", "tau11", "h3FivefoldPoint", "h3Join",
     "h3RootDirection", "h3Projectivity", "h3DualProjectivity",
     "h3ProjectivityInverse", "projectiveIndex11", "h3ProjectiveIndex",
     "h3Multiplicity", "h3PointsOfMultiplicity", "h3FivefoldIndex", "tau5",
     "projectiveVec5", "h3RootDirection5", "h3Multiplicity5",
     "h3PointsOfMultiplicity5", "a3FramePoint", "a3Join", "a3RootDirection",
     "a3Joins", "a3RootDirections", "a3Multiplicity", "a3PointsOfMultiplicity",
-    "h3AffineSyndrome", "h3AffineSyndromesOfMultiplicity",
+    "h3AffineSyndrome", "h3AffineSyndromeNonzero", "h3AffineSyndromesOfMultiplicity",
+    "h3OneLeaderSyndromes",
 ]
 
 
