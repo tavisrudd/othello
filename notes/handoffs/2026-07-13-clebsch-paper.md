@@ -166,7 +166,8 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   bridge, factor-ten count, and `90+6` one-leader decomposition. Both leaves and the import-only gate
   `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` build cleanly; all 38 terminal probes
   report only `propext`, `Classical.choice`, and `Quot.sound`, and the bounded Clebsch slice manifest
-  is present. The coherent remediation bundle awaits the required user-launched post-fix review;
+  is present. The validated bundle is pinned at `006b3afb47c4bdc02ab480ffab23661c1e6c70d5` and awaits
+  the required user-launched post-fix review;
   C222 stays live until that review returns `GO`. Task boundary and success criteria:
   [`2026-07-16-c222-lean-a3-h3-closure.md`](../2026-07-16-c222-lean-a3-h3-closure.md).
   If the paper labels these bridge claims Lean-formalized, C222 becomes a gate for that label;

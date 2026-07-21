@@ -282,9 +282,10 @@ Source identity at report time (identity, not mathematical correctness):
 - `notes/scripts/extract_c222_adequacy.py` — sha256
   `896bad841deacc5445eea55fc427962a2694fd914fcfba0781fd669ced03ae94`, 2343 bytes.
 
-The validated commit pin and manuscript verification-table delta are recorded after the coherent
-bundle is committed. The Lean-formalized label remains withheld until the required user-launched
-post-fix review returns `GO`.
+The validated source/gate/trust bundle is pinned at commit
+`006b3afb47c4bdc02ab480ffab23661c1e6c70d5`. The manuscript verification-table delta is deliberately
+deferred until the required user-launched post-fix review returns `GO`; no paper claim is upgraded
+from an unreviewed candidate route.
 
 ## Required closing review and archival checklist
 
@@ -314,10 +315,10 @@ recorded final `GO` permits C222 to be marked complete and archived.
   `SameDirection` is a genuine `∃ a ≠ 0`; cardinalities are computed by `decide`, not asserted;
   incidence is a filter count over a nonempty `Fin` domain, not baked into a definition; the
   projective and decoder maps now occur explicitly in the relevant theorem types.
-- [ ] Record exact owned files, permitted imports, fully qualified terminals, import-only gate,
-  pinned commit, guarded/gate validation, and `#print axioms` for every claimed Lean terminal. — all
-  evidence except the final commit pin is recorded above; this box is checked after the coherent
-  bundle commit is named.
+- [x] Record exact owned files, permitted imports, fully qualified terminals, import-only gate,
+  pinned commit, guarded/gate validation, and `#print axioms` for every claimed Lean terminal. — the
+  validated bundle is pinned at `006b3afb47c4bdc02ab480ffab23661c1e6c70d5`; the build runs, gate,
+  hashes, 38 probes, and trust manifest are recorded above.
 - [x] Confirm no `sorryAx`, `native_decide`, undisclosed project axiom, opaque oracle, large generated
   case tree, or unreported non-kernel execution occurs in a full-trust closure. — all 38 terminal
   probes report exactly `propext`, `Classical.choice`, and `Quot.sound`; source and manifest record the
