@@ -205,7 +205,17 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   in [`2026-07-20-c422-clebsch-harmonic-quotient-lean.md`](../2026-07-20-c422-clebsch-harmonic-quotient-lean.md).
   The same user-launched reviewer accepted all fixes and returned final `GO`; the completed record is
   archived from the live queue.
-- **C423 is now unblocked; C424--C427 remain queued behind it:** sharded A3/B3/H3 factorization leaves,
+- **C426 complete (F7, final independent review `GO` 2026-07-21):** landed the abstract `F_11`
+  character identity and scalar-line `11z-ell` aggregation plus exact kernel checks of the frozen
+  candidate `P/Q` tables (`P=Q`, `PQ=P^2=1331I`, shape and row-zero/valency identities) and all 126
+  option-safe additive-nonclosure witnesses. The gate deliberately exports literal checks only:
+  geometric scheme rank, Fourier self-duality, and primitivity remain decomposed with the exact
+  external orbit bridge; intersection/Krein equality and the 877-partition fusion census remain
+  external certificates. A stable neutral bundle now reproduces the orbit construction, complete
+  tensor/fusion certificate, Lean data, and six-entry manifest. Two review repair rounds closed the
+  trust/provenance findings; exact terminals, hashes, build/axiom evidence, exclusions, and C320 rows
+  are in [`2026-07-20-c426-clebsch-scheme-fourier-lean.md`](../2026-07-20-c426-clebsch-scheme-fourier-lean.md).
+- **C423 is now unblocked; C424--C425 and C427 remain queued behind it:** sharded A3/B3/H3 factorization leaves,
   balanced-sheet/cubic orientation, C411's six-representative depth--Fourier--parent bridge, q=11
   Fourier self-duality, and the committed C373 intrinsic chirality endpoint. C427 owns the new import-only
   `RelativeConicArcs.Gates.ClebschReplacementSpine` gate and hands its verification-map delta to

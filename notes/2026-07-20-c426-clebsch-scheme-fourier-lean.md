@@ -65,7 +65,7 @@ fully forced by this brief.
 
 ## Implementation result and validation status (implementer)
 
-**Status: second post-review repair implemented.** The initial independent review is
+**Status: complete; final independent review `GO` 2026-07-21.** The initial independent review is
 [`2026-07-21-c426-clebsch-scheme-fourier-initial-review.md`](2026-07-21-c426-clebsch-scheme-fourier-initial-review.md),
 commit `b058a9a481e10c16c41acbd1f80118725eecfb48`, verdict `NO-GO`. Every finding has a
 concrete repair below. The first post-fix review is
@@ -73,7 +73,11 @@ concrete repair below. The first post-fix review is
 commit `3c4fe4c529c5baccd33de9478a856cf7a5d0bebd`, verdict `NO-GO` solely on enduring
 evidence provenance. Its bounded fixes are implemented below. The exact gate and axiom audit are
 green; the pinned evidence-repair commit is
-`517faaf625136e4b96a33d43aa2e54e33f3396e6`; another review is required.
+`517faaf625136e4b96a33d43aa2e54e33f3396e6`. The second post-fix review is
+[`2026-07-21-c426-clebsch-scheme-fourier-second-post-fix-review.md`](2026-07-21-c426-clebsch-scheme-fourier-second-post-fix-review.md),
+commit `fe9b5be9f73f47a3b3a3bfa79b9c8e05c0ccdc88`, verdict **GO**. It directly replayed
+both stable checkers and the six-entry manifest, inspected the final build run and trust boundary,
+and accepted every R1--R9 and P1--P4 disposition.
 
 Owned implementation paths:
 
