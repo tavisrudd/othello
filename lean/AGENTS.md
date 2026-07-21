@@ -136,6 +136,24 @@ lean/scripts/lean-build-queue.py pack ~/lean-backups/<name>.tgz
 `pack` takes the same ownership lock, refuses active foreign Lean work, refuses overwrite and
 memory-backed destinations, and runs `lake pack` through `run-quiet`.
 
+## Shared-library validation
+
+- A lane that consumes `RelativeConicArcs` exits through its documented import-only module set under
+  `RelativeConicArcs.Gates`, followed by an exact-target `--no-build` confirmation and the lane's
+  documented axiom audit. The gate set must import every paper-facing terminal the lane claims;
+  separate modules are allowed when independently compiled terminals cannot share one environment.
+- If a change touches a module imported by another lane's gate, widen validation to every affected
+  gate found by the reverse-import closure, or defer completion to the next quiescent aggregate
+  check. Import-graph tooling and build orchestration remain owned by the `build-sys` lane.
+- `RelativeConicArcs` itself is a repo-health check, not a lane exit gate. Run it only through the
+  unattended build queue while that queue holds the shared build-owner lock and the Lean worktree is
+  otherwise clean.
+- Regenerate certificate sources only while holding that build window, against explicit generator
+  roots. Commit the checker/schema change, every regenerated tracked leaf, and its green subtree
+  gate atomically before releasing the window; never leave a regenerated tree between commits.
+- Snapshot artifacts only through the guarded `pack` command above; do not copy partial build
+  directories or rely on a local Lake cache until its restore semantics are separately verified.
+
 ## Staleness, restart, and recovery
 
 - Content traces and exact-target `lake build --no-build` are authoritative. Mtimes and existing

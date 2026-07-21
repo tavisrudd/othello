@@ -171,38 +171,9 @@ sibling `lean/CLAUDE.md` symlink to the same file. Discussion and document revie
 trigger it. Any future nested shared guide must likewise provide both names as one file plus a
 symlink; agent-specific guidance must say so explicitly instead.
 
-Always-on Lean safety summary:
-
-- Never run two heavyweight Lake builds concurrently or build across a foreign dirty/stale closure.
-- Use explicit targets, measured `LEAN_NUM_THREADS`, `choom`, and the prescribed CPU set; affinity
-  does not limit Lake's worker count.
-- Use `lean/scripts/guarded-lean` for guarded single-file elaboration and the unattended queue runner
-  for long explicit target sequences. Do not repeatedly poll `ps` or watch healthy builds.
-- Use trace/no-build checks for staleness; mtimes and existing oleans are not proof of freshness.
-- `/tmp` is tmpfs: keep build trees, caches, backups, and multi-GB artifacts on disk under `/home`.
-- Never `lake clean` while another lane may be using the shared build tree.
-
-Shared-library validation:
-
-- A lane that consumes `RelativeConicArcs` exits through its documented import-only module set under
-  `RelativeConicArcs.Gates`, followed by an exact-target `--no-build` confirmation and the lane's
-  documented axiom audit. The gate set must import every paper-facing terminal the lane claims;
-  separate modules are allowed when independently compiled terminals cannot share one environment.
-- If a change touches a module imported by another lane's gate, widen validation to every affected
-  gate found by the reverse-import closure, or defer completion to the next quiescent aggregate
-  check. Import-graph tooling and build orchestration remain owned by the `build-sys` lane.
-- `RelativeConicArcs` itself is a repo-health check, not a lane exit gate. Run it only through the
-  unattended build queue while that queue holds the shared build-owner lock and the Lean worktree
-  is otherwise clean.
-- Regenerate certificate sources only while holding that build window, against explicit generator
-  roots. Commit the checker/schema change, every regenerated tracked leaf, and its green subtree
-  gate atomically before releasing the window; never leave a regenerated tree between commits.
-- Use the `build-sys`-owned guarded `lake pack` wrapper for artifact snapshots. Do not copy partial
-  build directories or rely on a local Lake cache until its restore semantics have been separately
-  verified.
-
-The nested guide contains the measured memory caps, restart-sentinel protocol, process ancestry
-checks, finite-certificate sharding rules, and exact command forms.
+The nested guide holds the always-on build-safety rules, the shared-library
+(`RelativeConicArcs.Gates`) validation and exit protocol, measured memory caps, the restart-sentinel
+protocol, process ancestry checks, finite-certificate sharding rules, and exact command forms.
 
 ## Intent-based mode and short commands
 
