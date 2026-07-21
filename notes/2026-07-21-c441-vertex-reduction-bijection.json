@@ -1,0 +1,452 @@
+{
+  "boundary_not_certified_here": [
+    "uniqueness of the antipodal A5-invariant matching (M2)",
+    "identification of the two C406 singleton depth fibres with the two prime-reductions (M2)",
+    "commuting-with-reduction of mu1,mu2,mu3 and the denominator set N (M3)",
+    "the B3 sqrt2 and A3 inert-fusion SHEET reduction theory in full (M4)",
+    "the char-11 gluing of the two sheets into one PGL_2(11) orbit (M5)"
+  ],
+  "cases": {
+    "A3_octahedron": {
+      "bijection_table": [
+        {
+          "block": "v0",
+          "char0_x_over_Qi": "0",
+          "point": 0,
+          "point_iconj": 0
+        },
+        {
+          "block": "vinf",
+          "char0_x_over_Qi": "inf",
+          "point": "inf",
+          "point_iconj": "inf"
+        },
+        {
+          "block": "real",
+          "char0_x_over_Qi": "('1', '0')",
+          "point": 1,
+          "point_iconj": 1
+        },
+        {
+          "block": "real",
+          "char0_x_over_Qi": "('-1', '0')",
+          "point": 4,
+          "point_iconj": 4
+        },
+        {
+          "block": "imag",
+          "char0_x_over_Qi": "('0', '1')",
+          "point": 2,
+          "point_iconj": 3
+        },
+        {
+          "block": "imag",
+          "char0_x_over_Qi": "('0', '-1')",
+          "point": 3,
+          "point_iconj": 2
+        }
+      ],
+      "coxeter_number_h": 4,
+      "image": {
+        "finite": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "has_infinity": true,
+        "size": 6
+      },
+      "is_bijection": true,
+      "note_conjugate": "i -> 3 (the conjugate prime of Z[i] above 5) gives the same point set of P^1(F_5); it swaps i <-> -i.  The sheet FUSION is a statement about the spin embedding (M4), not about the vertex reduction, which is a clean bijection.",
+      "prime": "5 (fused: 5 is INERT in the spin ring Z[sqrt2], so the two would-be sheets are Frobenius-conjugate over F_25 and fuse -> one vertex sheet, no bit).  The vertex set itself lives in Q(i), in which 5 = (2+i)(2-i) splits; i -> 2 realizes the reduction.",
+      "prime_q": 5,
+      "twist_search": {
+        "every_twist_bijects": true,
+        "reason": "A3 vertex form t = xy(x^4 - y^4) has rational coefficients (middle coeff 0), so its reduction is twist-invariant; both primes of Z[i] above 5 give the same bijection.  The fused/inert phenomenon is a spin-field (Q(sqrt2)) statement, not a vertex-form twist.  No twist needed.",
+        "reduced_form_twist_invariant": true,
+        "reduced_root_set_is_full_P1": true,
+        "reduced_vertex_form_coeffs": {
+          "1": 4,
+          "5": 1
+        },
+        "repairing_twist": null,
+        "repairing_twist_needed": false,
+        "twist_family": [
+          "i -> 2",
+          "i -> 3 (conjugate prime above 5)"
+        ]
+      },
+      "vertex_count": 6,
+      "vertex_count_identity": {
+        "coxeter_number_h": 4,
+        "h_plus_2_equals_q_plus_1": true,
+        "h_plus_2_equals_vertex_count": true,
+        "prime_q": 5,
+        "q_equals_h_plus_1": true,
+        "q_plus_1_equals_vertex_count": true,
+        "remark": "|P^1(F_q)| = q + 1 = h + 2 = #vertices exactly when q = h + 1; this Coxeter-number coincidence is what makes the vertex->conic reduction a BIJECTION (equal finite cardinalities) rather than merely an injection.",
+        "vertex_count": 6
+      }
+    },
+    "B3_cube": {
+      "bijection_table": [
+        {
+          "block": "v0",
+          "char0_x_over_Qsqrt2omega": "0",
+          "point_pi": 0,
+          "point_pi_bar": 0
+        },
+        {
+          "block": "vinf",
+          "char0_x_over_Qsqrt2omega": "inf",
+          "point_pi": "inf",
+          "point_pi_bar": "inf"
+        },
+        {
+          "block": "upper",
+          "char0_x_over_Qsqrt2omega": "('0', '0', '0', '1/2')",
+          "point_pi": 3,
+          "point_pi_bar": 4
+        },
+        {
+          "block": "upper",
+          "char0_x_over_Qsqrt2omega": "('0', '1/2', '0', '0')",
+          "point_pi": 5,
+          "point_pi_bar": 2
+        },
+        {
+          "block": "upper",
+          "char0_x_over_Qsqrt2omega": "('0', '-1/2', '0', '-1/2')",
+          "point_pi": 6,
+          "point_pi_bar": 1
+        },
+        {
+          "block": "lower",
+          "char0_x_over_Qsqrt2omega": "('0', '0', '0', '-1')",
+          "point_pi": 1,
+          "point_pi_bar": 6
+        },
+        {
+          "block": "lower",
+          "char0_x_over_Qsqrt2omega": "('0', '1', '0', '1')",
+          "point_pi": 2,
+          "point_pi_bar": 5
+        },
+        {
+          "block": "lower",
+          "char0_x_over_Qsqrt2omega": "('0', '-1', '0', '0')",
+          "point_pi": 4,
+          "point_pi_bar": 3
+        }
+      ],
+      "block_coset_map": {
+        "note": "the two triangles (x^3 = sqrt2/4 resp. -2 sqrt2, product -1) map to the two cube-power cosets of F_7^* and SWAP between the two primes above 7 -- the silver analogue of the golden sheet swap.",
+        "pi_bar_sqrt2_4": {
+          "lower": [
+            3,
+            5,
+            6
+          ],
+          "upper": [
+            1,
+            2,
+            4
+          ]
+        },
+        "pi_sqrt2_3": {
+          "lower": [
+            1,
+            2,
+            4
+          ],
+          "upper": [
+            3,
+            5,
+            6
+          ]
+        }
+      },
+      "coxeter_number_h": 6,
+      "image_at_pi": {
+        "finite": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "has_infinity": true,
+        "size": 8
+      },
+      "image_at_pi_bar": {
+        "finite": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "has_infinity": true,
+        "size": 8
+      },
+      "is_bijection_at_pi": true,
+      "is_bijection_at_pi_bar": true,
+      "prime_q": 7,
+      "primes": "7 = (3 - sqrt2)(3 + sqrt2) in Z[sqrt2] (split; both give residue field F_7)",
+      "sheets": {
+        "pi": {
+          "omega": 2,
+          "sqrt2": 3
+        },
+        "pi_bar": {
+          "omega": 2,
+          "sqrt2": 4
+        }
+      },
+      "twist_search": {
+        "every_twist_bijects": true,
+        "reason": "B3 vertex form W = xy(4 x^6 + 7 sqrt2 x^3 y^3 - 4 y^6): the only sqrt2-dependent coefficient is the middle one, 7 sqrt2 == 0 mod 7, so W mod 7 = 4 xy(x^6 - y^6) independent of the sqrt2 twist.  No twist needed.",
+        "reduced_form_twist_invariant": true,
+        "reduced_root_set_is_full_P1": true,
+        "reduced_vertex_form_coeffs": {
+          "1": 3,
+          "7": 4
+        },
+        "repairing_twist": null,
+        "repairing_twist_needed": false,
+        "twist_family": [
+          "sqrt2 -> 3",
+          "sqrt2 -> 4 (= -3)"
+        ]
+      },
+      "vertex_count": 8,
+      "vertex_count_identity": {
+        "coxeter_number_h": 6,
+        "h_plus_2_equals_q_plus_1": true,
+        "h_plus_2_equals_vertex_count": true,
+        "prime_q": 7,
+        "q_equals_h_plus_1": true,
+        "q_plus_1_equals_vertex_count": true,
+        "remark": "|P^1(F_q)| = q + 1 = h + 2 = #vertices exactly when q = h + 1; this Coxeter-number coincidence is what makes the vertex->conic reduction a BIJECTION (equal finite cardinalities) rather than merely an injection.",
+        "vertex_count": 8
+      },
+      "within_sheet_residual": "omega -> 2 fixed; omega -> 4 is the residual conjugate prime of Z[sqrt2, omega] above each Z[sqrt2]-prime, relabeling within a sheet."
+    },
+    "H3_icosahedron": {
+      "A5_equivariant_at_pi": true,
+      "A5_equivariant_at_pi_bar": true,
+      "bijection_table": [
+        {
+          "block": "v0",
+          "char0_x_over_Qzeta5": "0",
+          "point_pi": 0,
+          "point_pi_bar": 0
+        },
+        {
+          "block": "vinf",
+          "char0_x_over_Qzeta5": "inf",
+          "point_pi": "inf",
+          "point_pi_bar": "inf"
+        },
+        {
+          "block": "alpha",
+          "char0_x_over_Qzeta5": "('-1', '-1', '0', '-1')",
+          "point_pi": 2,
+          "point_pi_bar": 9
+        },
+        {
+          "block": "alpha",
+          "char0_x_over_Qzeta5": "('1', '0', '0', '1')",
+          "point_pi": 6,
+          "point_pi_bar": 4
+        },
+        {
+          "block": "alpha",
+          "char0_x_over_Qzeta5": "('-1', '0', '-1', '-1')",
+          "point_pi": 7,
+          "point_pi_bar": 3
+        },
+        {
+          "block": "alpha",
+          "char0_x_over_Qzeta5": "('0', '1', '0', '1')",
+          "point_pi": 8,
+          "point_pi_bar": 1
+        },
+        {
+          "block": "alpha",
+          "char0_x_over_Qzeta5": "('1', '0', '1', '0')",
+          "point_pi": 10,
+          "point_pi_bar": 5
+        },
+        {
+          "block": "beta",
+          "char0_x_over_Qzeta5": "('0', '1', '1', '0')",
+          "point_pi": 1,
+          "point_pi_bar": 2
+        },
+        {
+          "block": "beta",
+          "char0_x_over_Qzeta5": "('0', '0', '1', '1')",
+          "point_pi": 3,
+          "point_pi_bar": 7
+        },
+        {
+          "block": "beta",
+          "char0_x_over_Qzeta5": "('1', '1', '0', '0')",
+          "point_pi": 4,
+          "point_pi_bar": 10
+        },
+        {
+          "block": "beta",
+          "char0_x_over_Qzeta5": "('0', '-1', '-1', '-1')",
+          "point_pi": 5,
+          "point_pi_bar": 6
+        },
+        {
+          "block": "beta",
+          "char0_x_over_Qzeta5": "('-1', '-1', '-1', '0')",
+          "point_pi": 9,
+          "point_pi_bar": 8
+        }
+      ],
+      "block_pentagon_map": {
+        "note": "the alpha/beta blocks (fixed char-0 data: x^5 = alpha resp. beta) map to the two Legendre cosets and SWAP between pi and pi_bar -- this is C377/C379's golden sheet swap sigma realized as reduction at the two primes above 11.",
+        "pi_bar_tau4": {
+          "alpha": [
+            1,
+            3,
+            4,
+            5,
+            9
+          ],
+          "beta": [
+            2,
+            6,
+            7,
+            8,
+            10
+          ]
+        },
+        "pi_tau8": {
+          "alpha": [
+            2,
+            6,
+            7,
+            8,
+            10
+          ],
+          "beta": [
+            1,
+            3,
+            4,
+            5,
+            9
+          ]
+        }
+      },
+      "coxeter_number_h": 10,
+      "image_at_pi": {
+        "finite": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "has_infinity": true,
+        "size": 12
+      },
+      "image_at_pi_bar": {
+        "finite": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "has_infinity": true,
+        "size": 12
+      },
+      "is_bijection_at_pi": true,
+      "is_bijection_at_pi_bar": true,
+      "prime_q": 11,
+      "primes": "11 = pi * pi_bar in Z[phi] (split; both give residue field F_11)",
+      "reduced_A5_order": {
+        "pi": 60,
+        "pi_bar": 60
+      },
+      "sheets": {
+        "pi": {
+          "phi": 8,
+          "sqrt5": 4,
+          "tau": 8,
+          "zeta5": 3
+        },
+        "pi_bar": {
+          "phi": 4,
+          "sqrt5": 7,
+          "tau": 4,
+          "zeta5": 9
+        }
+      },
+      "twist_search": {
+        "every_twist_bijects": true,
+        "reason": "H3 vertex form f = xy(x^10 + 11 x^5 y^5 - y^10) has purely rational coefficients; the golden/spin data lives in the A5 embedding, not in f.  The middle coefficient 11 == 0 mod 11, so f mod 11 = xy(x^10 - y^10) independent of the sqrt5 twist.  No twist is needed; the falsifier does not trigger.",
+        "reduced_form_twist_invariant": true,
+        "reduced_root_set_is_full_P1": true,
+        "reduced_vertex_form_coeffs": {
+          "1": 10,
+          "11": 1
+        },
+        "repairing_twist": null,
+        "repairing_twist_needed": false,
+        "twist_family": [
+          "sqrt5 -> 4 (tau=8 sheet)",
+          "sqrt5 -> 7 (tau=4 sheet)"
+        ]
+      },
+      "vertex_count": 12,
+      "vertex_count_identity": {
+        "coxeter_number_h": 10,
+        "h_plus_2_equals_q_plus_1": true,
+        "h_plus_2_equals_vertex_count": true,
+        "prime_q": 11,
+        "q_equals_h_plus_1": true,
+        "q_plus_1_equals_vertex_count": true,
+        "remark": "|P^1(F_q)| = q + 1 = h + 2 = #vertices exactly when q = h + 1; this Coxeter-number coincidence is what makes the vertex->conic reduction a BIJECTION (equal finite cardinalities) rather than merely an injection.",
+        "vertex_count": 12
+      },
+      "within_sheet_residual": "each prime of Z[phi] above 11 has two primes of Z[zeta5] above it (zeta5 -> 3 or 4 for tau=8; zeta5 -> 9 or 5 for tau=4), related by zeta5 -> zeta5^{-1}; the residual C2 = N(C5)/C5 relabels roots within a sheet but fixes the point set and the block->coset map.  zeta5 -> 3, 9 are the frozen canonical representatives (M0)."
+    }
+  },
+  "consumes": {
+    "m0_conventions": "2026-07-21-c440-conventions-freeze.json",
+    "m0_sha256_manifest": "2026-07-21-c440-conventions-freeze.sha256",
+    "note": "M0 forms, generators, conic and labeling are consumed verbatim and hash-checked at runtime; no new conventions are introduced (program guardrail 2)."
+  },
+  "master_stroke_claim_1_status": "CERTIFIED (untwisted, no repair): claim 1 of 2026-07-21-clebsch-master-stroke-integral-golden-model.md holds in the frozen normalization; the integral golden model's load-bearing bijection is not falsified.",
+  "method": "reduce each char-0 vertex root (all in the M0 field) at each prime above q; the image is certified equal to all of P^1(F_q) (bijection, equal cardinality q+1); for H3 the reduction is additionally certified A5-equivariant against the reduced order-60 group; the block (pentagon/triangle) -> Legendre/cube-coset map and its swap between the two primes are exhibited.",
+  "novelty_claim": "none.  The bijective reduction of icosahedral/octahedral vertices onto P^1(F_q) at q=h+1 is classical (Klein, Edge, Kostant; see register row 33 of the dossier).  M1 is verification, not a research/priority result.",
+  "schema": "c441-vertex-reduction-bijection-v1",
+  "task": "C441 / Weil-roof battery M1 -- vertex-reduction bijection onto P^1(F_q)",
+  "trusted_boundary": "exact arithmetic in Q(zeta5), Q(i), Q(sqrt2,omega) (M0 field code) and prime fields F_11, F_7, F_5; groups and root sets are M0's, recomputed.",
+  "verdict": "GREEN -- vertex set reduces BIJECTIVELY onto P^1(F_q) at every prime above q for H3/B3/A3; A5-equivariant at q=11; twist falsifier does NOT trigger."
+}
