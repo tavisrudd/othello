@@ -302,6 +302,21 @@ failed singleton connection stated as consistency only, while the shared-edge bi
 exact positive orbit-valued input. Model:
 **Fable** (cross-lane theorem wording), with Opus doing any supporting checks.
 
+**X3 OUTCOME (C448, 2026-07-21) — GREEN THEOREM; EXACT ORBIT-VALUED REPAIRS; SCOPE WALLS
+PRESERVED.**  For an equivariant two-fibre whose stabilizer acts through a surjective chirality
+character, an equivariant point section is impossible, while the unordered fibre is a canonical
+orbit-valued output; choosing a member has exact local advice complexity one.  C460's faithful
+15-point clouds and unique overlap-graph bipartition realize the global unordered-sheet recovery.
+C447's `66↔66` shared-edge bijection realizes the cap-facing local torsor: the cap `D10`
+determinant character swaps edge endpoints exactly when it swaps the selected cross-sheet
+matchings.  The rejected singleton comparison remains negative.  C75 remains only a
+feature-completeness obstruction, and L1's q=11 N choice is not repaired by symmetry; the
+smallest-orbit selector instead returns the unordered P edge.  A compact exact q=5 certificate
+closes the comparison premise: the frame residual is `K6` minus a perfect matching, so the marked
+opponent move has a unique antipodal reply; this is a response map in the nonsplit one-sheet
+control, not a choice from an unmarked two-fibre.  See
+`notes/2026-07-21-c448-orbit-valued-selector.{md,py,json,sha256}`.
+
 **X4 — C187 asymmetry via D1 (register row 37; GATED, do not start).**
 Not a task now: when (if) depth-injection D1 produces the octahedral/tetrahedral all-q uncovered
 formulas, evaluate at q=7 to explain the cap lane's {5,11}-not-7 filling asymmetry and record the
