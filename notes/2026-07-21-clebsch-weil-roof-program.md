@@ -10,7 +10,9 @@ other phase. Source dossier:
 Updated 2026-07-21 (same day): Phase 1a inserted as the critical path, de-risking the
 master stroke of
 [`2026-07-21-clebsch-master-stroke-integral-golden-model.md`](2026-07-21-clebsch-master-stroke-integral-golden-model.md);
-T1 is absorbed into M2; T10's gate moved to M2; Phase 3 gains the promotion gate.
+T1 is absorbed into M2; T10's gate moved to M2; Phase 3 gains the promotion gate. Second
+same-day update: Phase 1b (cap-bridge chain, register rows 35–38) added as a parallel
+non-blocking track with explicit cross-lane hygiene.
 
 **Intended executor:** Opus-level sessions/sub-agents for all computational, literature, and
 writing tasks; escalate to Fable only at the marked verification/judgment gates and for any
@@ -138,6 +140,53 @@ boundary stated as a feature; decide which part is provable now, which belongs t
 mechanism (Weil roof), and how the paper-1 closing theorem is phrased if M1–M3 landed.
 Deliverable: statement note feeding Phase 3's promotion gate. Model: Fable.
 
+## Phase 1b — cap-bridge chain (parallel, non-blocking)
+
+Tests the cap-lane connections (dossier register rows 35–38). This track is **parallel and
+non-blocking**: it must never displace an M-task's execution slot, and nothing in Phases 1a/1/3
+gates on it. Cross-lane hygiene binds every task: cap-lane artifacts (`notes/handoffs/
+2026-07-06-projective-cap-game-handoff.md` §§ conic localization / A5 anchor, the
+`2026-07-10-a5-symmetric-completion-anchor.md` report, committed `notes/data/` bucket files) are
+**read-only inputs**; no cap-lane handoff, queue-row, solver-run, or Lean edit is authorized from
+this program. If committed artifacts are insufficient to reconstruct a needed cap-lane object,
+that is a guardrail-3 blocker (escalate; do not run foreign solvers). Results land in crowns
+notes; a one-line pointer is *offered* to the cap lane at Phase 3 disposition, nothing more.
+
+**X1 — concurrency of the marker matchings (register row 36).**
+Goal: for each frozen H3 matching (all 22), test whether its six secants are concurrent (share a
+common point); uniform analogues at B3 (14 matchings, 4 secants; exterior points at q=7 lie on 4
+secants) and A3 (5 matchings, 3 secants). If concurrent: identify the resulting exterior points,
+their `PGL`/`PSL` orbits and stabilizers, and the sheet correspondence (sheets as two `PSL`
+orbits of exterior intruder points). Method: exact linear algebra on the frozen C406 geometry
+only — no cap-lane inputs needed. Deliverable: certificate; per-matching yes/no is the acceptance
+object. Falsifier: non-concurrency ⇒ row 36 closes negative and X3 loses its geometric leg;
+record cleanly. Model: Opus. Fully parallel to M0–M3.
+
+**X2 — knife-edge identification (register row 35).**
+Goal: reconstruct, from committed cap-lane artifacts only, the q=11 knife-edge on-conic
+situation (the 7 on-conic children, the D10 stabilizer, the size-2 P orbit vs size-5 N orbit);
+exhibit an explicit projectivity carrying the cap frame's conic to the frozen C406 conic; test
+whether the size-2 P orbit corresponds to the golden singleton pair (the two C406 singleton
+fibres / their conic data) under that projectivity. Deliverable: certificate with the
+projectivity and the orbit correspondence, or a refutation, or a guardrail-3 blocker if the
+committed artifacts cannot pin the knife-edge classes. Falsifier: no correspondence ⇒ row 35
+closes negative; the advice-complexity bridge (X3) survives only in its abstract form. Model:
+Opus; **Fable gate** on the identification verdict before it is stated anywhere.
+
+**X3 — orbit-valued selector lemma (rows 35 + 38; conditional on X1/X2 outcomes).**
+Goal: state and prove the bridging lemma: at a position whose stabilizer acts on a distinguished
+child-pair through the chirality `C2` (C413/C417 data), no equivariant pointwise selector exists,
+while orbit-valued selectors evade the obstruction; connect, with exact scope qualifiers, to the
+cap lane's C75 feature-completeness wall, L1's q=11 failures, and the q=5 antipodal-copycat
+success (canonical involution = nonsplitting case). Deliverable: a short theorem note with the
+cap-lane connection stated as consistency, not causation, unless X2 landed positive. Model:
+**Fable** (cross-lane theorem wording), with Opus doing any supporting checks.
+
+**X4 — C187 asymmetry via D1 (register row 37; GATED, do not start).**
+Not a task now: when (if) depth-injection D1 produces the octahedral/tetrahedral all-q uncovered
+formulas, evaluate at q=7 to explain the cap lane's {5,11}-not-7 filling asymmetry and record the
+cross-lane corollary. Gated on D1 allocation; listed here so it is not re-invented.
+
 ## Phase 1 — verification battery
 
 Ordering respects information-per-hour and dependencies; Phase 1a preempts this phase, and its
@@ -264,7 +313,9 @@ Each is a writing task with a bounded literature audit; no new computation beyon
    manuscript decision and any edit belong to the `clebsch` lane and its handoff process.**
 4. **Program disposition.** Close or re-scope every register item (dossier §13) with an explicit
    verdict; append incidental observations to the lane's discovery log per conventions; update
-   the crowns handoff; archive completed queue rows per the completion invariant.
+   the crowns handoff; archive completed queue rows per the completion invariant. If X1/X2
+   produced positive identifications, draft the one-line cross-lane pointer and leave the
+   decision to surface it with the cap lane's owner — no cap-lane edits from this program.
 5. **Paper 2 go/no-go (Fable).** If roof sub-statements survived: scope the metaplectic paper
    (canonicity theorem target, mechanism section from T2, continuation section from T5/T6) as a
    new allocation request. If the roof died: scope the refutation/boundary note instead. Either
