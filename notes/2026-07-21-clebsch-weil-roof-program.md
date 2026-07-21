@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-21
 
-**Status:** design document, pre-allocation. No task below is allocated. Execute Phase 0 before any
-other phase. Source dossier:
+**Status:** active allocated battery. M0--M3 and X1--X3 have dispositions recorded below; C444/M4
+is the next critical-path task. Source dossier and provenance archive:
 [`2026-07-21-clebsch-weil-roof-conversation-report.md`](2026-07-21-clebsch-weil-roof-conversation-report.md).
 Updated 2026-07-21 (same day): Phase 1a inserted as the critical path, de-risking the
 master stroke of
@@ -21,9 +21,10 @@ paths, not transcripts.
 
 ## Cold-start context load (every executing session)
 
-Read, in order, nothing else: (1) this program; (2) the source dossier above; (3) only the
-per-task inputs named in the task spec being executed. Do not preload the manuscript, archives, or
-other lanes' handoffs.
+Read this program and then only the per-task inputs named in the selected task spec. The source
+dossier above is provenance/background and is not a routine executor preload; its load-bearing M4
+spin-prime hypothesis is reproduced below. Do not preload the manuscript, archives, other lanes'
+handoffs, or unrelated persona dossiers.
 
 ## Executor guardrails (Opus-level execution)
 
@@ -188,6 +189,24 @@ coefficient) is silver — the bit lives in the form/labeling and the spin cover
 group-embedding. M4 must be specified against this dualization. The rational skeleton of the H3
 golden pair is itself the cube group (B3 inside H3), so B3 is the sheet-blind core of H3, not a
 parallel copy. (See finding 3 of `notes/2026-07-21-c442-antipodal-singleton-reduction.md`.)
+
+**M4 SPIN-PRIME HYPOTHESIS AND ACCEPTANCE TEST (provenance: dossier section 7, status
+`REASONED`, not yet a theorem).** The arithmetic proposal is that a sheet is a choice of prime in
+the relevant spin ring: `7=(3-sqrt2)(3+sqrt2)` in `Z[sqrt2]`, while `5` is inert there. M4 must
+therefore test the following literal reduction statement, not cite the proposal as explanation:
+
+- at B3, reduction at `(3-sqrt2)` and `(3+sqrt2)` gives two distinct silver
+  form/labeling fibres matching C406, Galois conjugation exchanges them, and the frozen signed
+  cubic readout covaries with that exchange; the rational `S4` subgroup alone must not be used to
+  distinguish them;
+- at A3, the residue field at `(5)` is `F_25`; the two geometric orientations are Frobenius
+  conjugate there and descend to one `F_5` fibre, reproducing C406's fused row and its absence of a
+  rational advice bit.
+
+Acceptance requires explicit prime ideals, residue maps, reduced labeling tables, the comparison
+to the frozen C406 fibres/moments, and the Galois/Frobenius action. Distinctness or fusion by a
+cardinality count alone is insufficient. Quaternion-order reduction remains T10's stronger
+structural claim; M4 neither assumes nor proves it merely by passing these reduction tests.
 
 **M5 — the gluing statement (Fable).**
 Goal: write the exact mathematical statement of master-stroke claim 4 (the characteristic-11
