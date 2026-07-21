@@ -291,25 +291,25 @@ theorem finrank_homogeneous (d : ℕ) :
 theorem finrank_homogeneous_zero :
     Module.finrank K (homogeneousSubmodule (Fin 3) K 0) = 1 := by
   rw [finrank_homogeneous]
-  native_decide
+  decide
 
 /-- There are three ternary monomials of degree one. -/
 theorem finrank_homogeneous_one :
     Module.finrank K (homogeneousSubmodule (Fin 3) K 1) = 3 := by
   rw [finrank_homogeneous]
-  native_decide
+  decide
 
 /-- There are six ternary monomials of degree two. -/
 theorem finrank_homogeneous_two :
     Module.finrank K (homogeneousSubmodule (Fin 3) K 2) = 6 := by
   rw [finrank_homogeneous]
-  native_decide
+  decide
 
 /-- There are fifteen ternary monomials of degree four. -/
 theorem finrank_homogeneous_four :
     Module.finrank K (homogeneousSubmodule (Fin 3) K 4) = 15 := by
   rw [finrank_homogeneous]
-  native_decide
+  decide
 
 /-- A polynomial is **harmonic** for the conic Laplacian when `Δ` annihilates it. -/
 def IsHarmonic (P : MvPolynomial (Fin 3) K) : Prop := lapl K P = 0
