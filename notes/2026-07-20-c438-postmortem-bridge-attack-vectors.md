@@ -10,6 +10,10 @@
 below were read at the stated partial or abstract/metadata depth.  This is a route-design report,
 not a novelty or priority audit.
 
+**Continuation:** `notes/2026-07-20-c438-continuation-e7-mathieu-klein.md` records the next gates:
+the q=11 matching as a cubic-surface double-six row, two exact Witt designs on the twelve-set, and
+the nontrivial `F_9` twist obstructing a naive Klein lift.
+
 ## Executive answer
 
 C438 killed the direct identification, but not the programme.  The best repair is to move both

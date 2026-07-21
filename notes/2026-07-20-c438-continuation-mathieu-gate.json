@@ -1,0 +1,79 @@
+{
+  "disposition": {
+    "canonical_parent_recovery": "negative: profiles are identical on all 22 matchings",
+    "mathieu_host": "positive",
+    "new_orientation_torsor": "two PSL2(11)-invariant Witt designs exchanged by PGL2(11)"
+  },
+  "q11_witt_gate": {
+    "blocks_per_design": [
+      132,
+      132
+    ],
+    "each_design_closed_under_complement": true,
+    "each_five_subset_occurs_once": true,
+    "matching_profiles": {
+      "tau4_sheet_matchings": [
+        {
+          "contained_matching_edge_profile": {
+            "0": 12,
+            "1": 60,
+            "2": 60
+          },
+          "three_edge_union_hexads": 0,
+          "transversal_hexads": 12
+        },
+        {
+          "contained_matching_edge_profile": {
+            "0": 12,
+            "1": 60,
+            "2": 60
+          },
+          "three_edge_union_hexads": 0,
+          "transversal_hexads": 12
+        }
+      ],
+      "tau8_sheet_matchings": [
+        {
+          "contained_matching_edge_profile": {
+            "0": 12,
+            "1": 60,
+            "2": 60
+          },
+          "three_edge_union_hexads": 0,
+          "transversal_hexads": 12
+        },
+        {
+          "contained_matching_edge_profile": {
+            "0": 12,
+            "1": 60,
+            "2": 60
+          },
+          "three_edge_union_hexads": 0,
+          "transversal_hexads": 12
+        }
+      ]
+    },
+    "outer_pgl_element_exchanges_designs": true,
+    "psl2_11_order": 660,
+    "psl_invariant_W12_designs": 2,
+    "six_subset_orbit_sizes": [
+      110,
+      110,
+      110,
+      132,
+      132,
+      330
+    ]
+  },
+  "q9_klein_twist_gate": {
+    "F9_isomorphic": false,
+    "frozen_hermitian_F9_points": 28,
+    "reason": "different rational point counts",
+    "standard_klein_reduction_F9_points": 10
+  },
+  "schema": "c438-continuation-mathieu-gate-v1",
+  "trusted_input": {
+    "path": "notes/2026-07-19-c379-clebsch-deep-hole-extension.json",
+    "sha256": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
+  }
+}
