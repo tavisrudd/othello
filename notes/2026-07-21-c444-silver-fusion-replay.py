@@ -97,11 +97,20 @@ def listed_matching(key):
     return canon_matching(tuple(edge) for edge in CERT["B3"]["reductions"][key]["matching"])
 
 
+spins={}; parents={}
 for s,key in ((3,"sqrt2_3"),(4,"sqrt2_4")):
     spin,parent=b3_spin(s)
+    spins[s]=spin; parents[s]=parent
     matching=listed_matching(key)
     assert len(spin)==48 and len(parent)==24
     assert all(image(g,matching,7)==matching for g in parent)
+    assert {g for g in spin if pnorm(g,7)==(1,0,0,1)} == {(1,0,0,1),(6,0,0,6)}
+
+silver_j=pnorm((6,0,0,1),7)
+assert image(silver_j,listed_matching("sqrt2_3"),7)==listed_matching("sqrt2_4")
+assert {pnorm(mmul(mmul(silver_j,g,7),inv(silver_j,7),7),7) for g in parents[3]}==parents[4]
+assert len(parents[3]&parents[4])==6
+assert CERT["B3"]["c406_moment_comparison"]["orientation_scalars"]=={"sqrt2_3":6,"sqrt2_4":1}
 
 
 # Rebuild C406's B3 certificate with the frozen checker, including the quotient moments.
@@ -156,6 +165,10 @@ assert tuple((x[0],-x[1]%5) for x in rr)==tuple(fn(x) for x in rr)
 spin=fclosure((ii,jj,qq,rr)); proj=fclosure((ii,jj,qq,rr),True)
 assert len(spin)==48 and len(proj)==24
 assert all(x[1]==0 for matrix in proj for x in matrix)
+assert {m for m in spin if fpn(m)==one} == {one,tuple(fn(x) for x in one)}
+proj5={tuple(x[0] for x in matrix) for matrix in proj}
+squares5={1,4}
+assert len({g for g in proj5 if (g[0]*g[3]-g[1]*g[2])%5 in squares5})==12
 
 a3_record=next(record for record in SCOUT["types"] if record["type"]=="A3")
 a3_rebuilt=C406.type_certificate(a3_record)

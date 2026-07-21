@@ -37,7 +37,7 @@ selected card names it as a load-bearing input.
 | C460 | X1+ | GREEN: Frégier clouds recover unordered H3 sheets and the perpendicularity germ | usable by M5 and as T3 control |
 | C447 | X2 | singleton comparison negative; shared-edge cross-sheet repair GREEN | exact local torsor for X3 |
 | C448 | X3 | GREEN: orbit-valued selector theorem; point section costs one bit | framing input only |
-| C444 | M4 | GREEN: B3 opposite split fibres and cubic sign; A3 Frobenius-conjugate spin lifts fuse projectively | unlocks M5 and strengthens T10 input |
+| C444 | M4 | GREEN: B3 split fibres exchanged by outer `x->-x`, cubic scalar `2 sqrt2`, common `S3` seam; A3 central lifts fuse over one projective `S4` | unlocks M5 and strengthens T10 input |
 | C445 | M5 | **NEXT** after C444 GREEN | closes master-stroke statement boundary |
 | C449 | T2 | queued after M4 chain | split-Coxeter-torus mechanism |
 | C450 | T3 | queued; independent after frozen inputs | Weil-module roof test |

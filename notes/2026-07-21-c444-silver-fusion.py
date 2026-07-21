@@ -133,6 +133,16 @@ def matrix_closure(generators, p, projective=False):
     return group
 
 
+def projective_matrix_order(matrix, p):
+    identity = pnorm((1, 0, 0, 1), p)
+    value = identity
+    for order in range(1, 25):
+        value = pnorm(mmul(value, matrix, p), p)
+        if value == identity:
+            return order
+    raise AssertionError("projective order exceeds 24")
+
+
 def pact(matrix, point, p):
     a, b, c, d = matrix
     if point == "inf":
@@ -454,6 +464,9 @@ def a3_spin_model():
     spin = f25_closure((i, j, q, r_plus), projective=False)
     assert len(spin) == 48
     assert {tuple(f25_frob(value) for value in matrix) for matrix in spin} == spin
+    identity_f25 = (FONE, FZERO, FZERO, FONE)
+    central_kernel = {matrix for matrix in spin if f25_pnorm(matrix) == identity_f25}
+    assert central_kernel == {identity_f25, tuple(f25_neg(value) for value in identity_f25)}
     projective_f25 = f25_closure((i, j, q, r_plus), projective=True)
     assert len(projective_f25) == 24
     assert all(value[1] == 0 for matrix in projective_f25 for value in matrix)
@@ -462,6 +475,8 @@ def a3_spin_model():
     matching = canon_matching(((0, "inf"), (1, 4), (2, 3)))
     assert invariant_matchings(projective, 5) == [matching]
     pgl, psl = full_pgl(5)
+    full_stabilizer = {matrix for matrix in pgl if matching_image(matrix, matching, 5) == matching}
+    assert projective == full_stabilizer
     pgl_orbit = orbit(pgl, matching, 5)
     psl_orbit = orbit(psl, matching, 5)
     assert len(pgl_orbit) == len(psl_orbit) == 5 and pgl_orbit == psl_orbit
@@ -474,13 +489,18 @@ def a3_spin_model():
         "orientation_minus_R": [[list(value) for value in r_minus[:2]], [list(value) for value in r_minus[2:]]],
         "frobenius_swaps_orientations": True,
         "binary_octahedral_order": len(spin),
+        "spin_to_projective_kernel": ["+I", "-I"],
+        "spin_to_projective_kernel_order": len(central_kernel),
         "projective_group_order": len(projective),
+        "projective_group_is_full_matching_stabilizer": projective == full_stabilizer,
         "projective_group_defined_over_F5": True,
         "unique_invariant_matching": [list(edge) for edge in matching],
         "pgl_marker_orbit_size": len(pgl_orbit),
         "psl_marker_orbit_size": len(psl_orbit),
         "pgl_and_psl_marker_orbits_equal": pgl_orbit == psl_orbit,
         "parent_is_subgroup_of_psl": projective <= psl,
+        "parent_intersection_psl_order": len(projective & psl),
+        "parent_intersection_psl_is_A4": len(projective & psl) == 12,
         "parent_nonsquare_determinants": nonsquare_determinants,
         "sheet_sign_exists": False,
     }
@@ -532,8 +552,34 @@ def build_certificate():
     pgl7, psl7 = full_pgl(7)
     for sqrt2 in (3, 4):
         assert b3_groups[sqrt2][1] <= psl7
+        full_stabilizer = {
+            matrix for matrix in pgl7
+            if matching_image(matrix, b3_matchings[sqrt2], 7) == b3_matchings[sqrt2]
+        }
+        assert b3_groups[sqrt2][1] == full_stabilizer
+        identity = (1, 0, 0, 1)
+        central_kernel = {matrix for matrix in b3_groups[sqrt2][0] if pnorm(matrix, 7) == identity}
+        assert central_kernel == {identity, (-1 % 7, 0, 0, -1 % 7)}
     assert len(orbit(pgl7, b3_matchings[3], 7)) == 14
     assert sorted(len(orbit(psl7, matching, 7)) for matching in b3_matchings.values()) == [7, 7]
+    silver_j = pnorm((-1 % 7, 0, 0, 1), 7)
+    assert all(
+        right == ("inf" if left == "inf" else -left % 7)
+        for left, right in (
+            (row["point_sqrt2_3"], row["point_sqrt2_4"]) for row in b3_rows
+        )
+    )
+    assert silver_j in pgl7 - psl7
+    assert matching_image(silver_j, b3_matchings[3], 7) == b3_matchings[4]
+    silver_ji = minv(silver_j, 7)
+    conjugated_parent = {
+        pnorm(mmul(mmul(silver_j, matrix, 7), silver_ji, 7), 7)
+        for matrix in b3_groups[3][1]
+    }
+    assert conjugated_parent == b3_groups[4][1]
+    parent_intersection = b3_groups[3][1] & b3_groups[4][1]
+    intersection_orders = sorted(projective_matrix_order(matrix, 7) for matrix in parent_intersection)
+    assert intersection_orders == [1, 2, 2, 2, 3, 3]
 
     a3_rows = a3_label_table()
     a3_matching_i2 = canon_matching(((0, "inf"), (1, 4), (2, 3)))
@@ -548,6 +594,11 @@ def build_certificate():
 
     cubic = moments[2]["vector"]
     negative_cubic = [(-value) % 7 for value in cubic]
+    assert [(2 * sqrt2) % 7 for sqrt2 in (3, 4)] == [6, 1]
+    assert {
+        sqrt2: [(2 * sqrt2 * value) % 7 for value in cubic]
+        for sqrt2 in (3, 4)
+    } == {3: negative_cubic, 4: cubic}
     cert = {
         "schema": SCHEMA,
         "task": "C444 / M4 -- B3 silver split and A3 inert fusion",
@@ -590,7 +641,18 @@ def build_certificate():
                 "description": "I^2=J^2=-1, IJ=-JI; Q=(1+I+J+IJ)/2, R=(1+I)/sqrt2; conjugate by C=[[1,sqrt2],[0,1]] into the frozen vertex labels",
                 "silver_conjugation_swaps_reductions": True,
                 "each_binary_octahedral_order": 48,
+                "each_spin_to_projective_kernel": ["+I", "-I"],
+                "each_spin_to_projective_kernel_order": 2,
                 "each_projective_parent_order": 24,
+                "each_projective_parent_is_full_matching_stabilizer": True,
+                "silver_conjugation_on_frozen_labels": "J_silver(x)=-x",
+                "silver_conjugation_matrix": [list(silver_j[:2]), list(silver_j[2:])],
+                "silver_conjugation_determinant_class": "nonsquare",
+                "silver_conjugation_is_outer": True,
+                "silver_conjugation_maps_matchings_and_conjugates_parents": True,
+                "two_parent_intersection_order": len(parent_intersection),
+                "two_parent_intersection_element_orders": intersection_orders,
+                "two_parent_intersection_is_S3": True,
             },
             "c406_split_criterion": {
                 "statement": "A transitive PGL_2(q)/H marker orbit splits into two PSL_2(q) orbits iff H is contained in PSL_2(q)",
@@ -605,6 +667,8 @@ def build_certificate():
                 "lower_signed_moments_vanish": not moments[0]["nonzero"] and not moments[1]["nonzero"],
                 "cubic_nonzero": moments[2]["nonzero"],
                 "sqrt2_4_is_positive_and_sqrt2_3_is_negative": True,
+                "orientation_scalar_law": "mu_3(sqrt2) = 2*sqrt2*mu_3(sqrt2=4) in F_7",
+                "orientation_scalars": {"sqrt2_3": 6, "sqrt2_4": 1},
             },
         },
         "A3": {

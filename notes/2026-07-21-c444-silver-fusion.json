@@ -127,6 +127,8 @@
           ]
         ]
       ],
+      "parent_intersection_psl_is_A4": true,
+      "parent_intersection_psl_order": 12,
       "parent_is_subgroup_of_psl": false,
       "parent_nonsquare_determinants": [
         2,
@@ -135,9 +137,15 @@
       "pgl_and_psl_marker_orbits_equal": true,
       "pgl_marker_orbit_size": 5,
       "projective_group_defined_over_F5": true,
+      "projective_group_is_full_matching_stabilizer": true,
       "projective_group_order": 24,
       "psl_marker_orbit_size": 5,
       "sheet_sign_exists": false,
+      "spin_to_projective_kernel": [
+        "+I",
+        "-I"
+      ],
+      "spin_to_projective_kernel_order": 2,
       "unique_invariant_matching": [
         [
           0,
@@ -278,6 +286,11 @@
           ]
         }
       ],
+      "orientation_scalar_law": "mu_3(sqrt2) = 2*sqrt2*mu_3(sqrt2=4) in F_7",
+      "orientation_scalars": {
+        "sqrt2_3": 6,
+        "sqrt2_4": 1
+      },
       "sqrt2_4_is_positive_and_sqrt2_3_is_negative": true
     },
     "c406_split_criterion": {
@@ -512,8 +525,38 @@
     "spin_model": {
       "description": "I^2=J^2=-1, IJ=-JI; Q=(1+I+J+IJ)/2, R=(1+I)/sqrt2; conjugate by C=[[1,sqrt2],[0,1]] into the frozen vertex labels",
       "each_binary_octahedral_order": 48,
+      "each_projective_parent_is_full_matching_stabilizer": true,
       "each_projective_parent_order": 24,
-      "silver_conjugation_swaps_reductions": true
+      "each_spin_to_projective_kernel": [
+        "+I",
+        "-I"
+      ],
+      "each_spin_to_projective_kernel_order": 2,
+      "silver_conjugation_determinant_class": "nonsquare",
+      "silver_conjugation_is_outer": true,
+      "silver_conjugation_maps_matchings_and_conjugates_parents": true,
+      "silver_conjugation_matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "silver_conjugation_on_frozen_labels": "J_silver(x)=-x",
+      "silver_conjugation_swaps_reductions": true,
+      "two_parent_intersection_element_orders": [
+        1,
+        2,
+        2,
+        2,
+        3,
+        3
+      ],
+      "two_parent_intersection_is_S3": true,
+      "two_parent_intersection_order": 6
     }
   },
   "boundary": {

@@ -127,6 +127,53 @@ classes).  Its five-element `PGL_2(5)` marker orbit remains the same five-elemen
 marker fibre: there is no second sheet and no sign character.  This directly reproduces the A3
 half of C406's split criterion rather than arguing only from the six vertex labels.
 
+## Post-close free upgrades
+
+Three exact strengthenings fall out without changing the theorem boundary.
+
+**The silver swap is one explicit outer projectivity.** Row by row in the frozen cube table,
+changing `sqrt2=3` to `sqrt2=4=-3` is exactly
+
+```text
+J_silver : x |-> -x,            J_silver = [[-1,0],[0,1]].
+```
+
+It fixes `0,inf`, exchanges the other labels in opposite pairs, maps the `sqrt2=3` antipodal
+matching to the `sqrt2=4` matching, and conjugates the corresponding full matching stabilizers:
+
+```text
+J_silver H_3 J_silver^-1 = H_4,        H_3,H_4 ~= S4.
+```
+
+Its determinant class is `-1`, a nonsquare in `F_7`, so it is an outer `PGL_2(7)` element.  This
+gives a direct transporter proof that the two matchings occupy opposite `PSL_2(7)` fibres.  The two
+`S4` parents intersect in order six with element orders `1,2,2,2,3,3`, hence in an `S3` seam.  This
+is the same subgroup type as C414's B3 `S3` seams; no identification with a particular C414 seam is
+needed or claimed here.
+
+**The cubic sign is literally the silver Kummer coordinate.** With C406's positive vector
+normalized at `sqrt2=4`, the two vectors obey the single formula
+
+```text
+mu_3(s) = 2 s mu_3(4) in F_7,          s^2=2.
+```
+
+Indeed `2*4=1` and `2*3=6=-1`.  Thus the first surviving moment does not merely covary with the
+prime choice: its scalar is the normalized residue of `sqrt2` itself.
+
+**Both spin/projective boundaries are exact central extensions.** In each B3 reduction the map
+`2.S4 -> S4` has kernel exactly `{+I,-I}`, and the order-24 image equals the full `PGL_2(7)`
+stabilizer of its antipodal matching.  In A3 the order-48 spin group again has kernel exactly
+`{+I,-I}`; Frobenius sends the chosen lift `R_+` to `-R_+`, so it changes only that central lift.
+The descended order-24 projective group is the full matching stabilizer, and its intersection with
+`PSL_2(5)` has order 12, the `A4` kernel of the determinant character.  This pins the fusion as
+
+```text
+2.S4 --/{+-I}--> S4,       S4 intersect PSL_2(5)=A4,
+```
+
+rather than only the earlier five-orbit cardinality statement.
+
 ## Reproducibility
 
 Run from `/home/tavis/src/othello`:
@@ -146,9 +193,9 @@ spin reductions.
 
 | load-bearing artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary checker | 25,666 | `c802d70b787e51ec74cf1492d1b18da76c61076cfc2a52df33c9dec12b1ba9d8` |
-| independent replay | 6,126 | `0c44582a0944e435b20fe3b36b98aab10196b74a6cba7f48f2dd8a6afd42d329` |
-| canonical JSON | 13,127 | `51caaaa71ff48e621055e69ad3f2d5cec9a209f3a4bce8805fa39e2aa13488b7` |
+| primary checker | 28,982 | `b38569788639b10af53e97324efb3a38f9bd3a80c474bb75fa63dd5f537e2f6d` |
+| independent replay | 6,815 | `109798c98fc4e62828a9eee8e3d274a90bc9be6c05c3f8aa93a5e302c8f7392a` |
+| canonical JSON | 14,331 | `311dd3eba6ad7b2926cb4aa38dc240093f9611ffbcd0640d69becc7112dfa465` |
 
 Trusted boundary: exact arithmetic and exhaustive finite closure/enumeration in `F_5`, `F_7`, and
 `F_25`; the frozen M0/M1 labeling and C406 scout/moment certificates; and the displayed quaternion
