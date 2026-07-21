@@ -12,7 +12,9 @@ work is dormant unless explicitly resumed.
 
 ## Startup context: load only what the task needs
 
-This file is the always-loaded rules layer. Keep it short and stable.
+This file is the always-loaded rules layer. Keep it short and stable. Follow it silently — do not
+narrate or repeat these rules as you apply them; e.g., run the session-start C-task lane routing
+without announcing the steps.
 
 At the start of a session:
 
@@ -30,17 +32,13 @@ At the start of a session:
 5. Do not preload archives, discovery logs, expert dossiers, paper sources, build manuals, or
    performance playbooks. Load them when the task or handoff points to them.
 
-Live docs must not contain timelines, transcripts, validation output, or superseded plans. Put those
-in companion archives or dated reports.
-
 Every proof/math lane keeps one append-only discovery-track companion for incidental observations
 and musings found during planned work. Discriminator — “was I looking for this?”: if yes, it is a
 deliverable for the task report/ledger/handoff, not the discovery track. Logging a lead does not
 allocate work, expand scope, or make it a handoff frontier; promotion uses the normal C-ID and
 lane-routing process. Do not preload the log; open it to record an incidental observation and
-review it at handoff. Follow
-`notes/discovery-track-conventions.md` when creating,
-appending, promoting, or handing off a log.
+review it at handoff. Follow `notes/discovery-track-conventions.md` when creating, appending,
+promoting, or handing off a log.
 
 ### Novelty failures and adjacent-crown extraction
 
@@ -57,8 +55,9 @@ or cross-lane edits.
 
 ## Lane routing
 
-Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken synonym for
-`clebsch`, but docs and task pegs use `clebsch`.
+A bare alias or `go <alias>` selects that lane; `hexagon` is a spoken synonym for `clebsch` (docs
+and task pegs use `clebsch`). Bare `go` or `next?` means the next step in the selected lane, or —
+with no lane selected — ask which lane. An explicit alias switches lanes.
 
 | Alias | Entry handoff |
 |---|---|
@@ -75,17 +74,13 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
 | `nofil` | `notes/handoffs/2026-07-17-nofil-paper.md` |
-| `queens` | `notes/handoffs/done/2026-07-08-claude-archive-queens-othello.md` (archived) |
 | `relconic` | `notes/handoffs/2026-07-17-c210.md` |
-| `repaircodes` | `notes/handoffs/done/2026-07-13-projective-completion-repaircodes.md` (archived) |
-| `repairports` | `notes/handoffs/done/2026-07-16-repairports.md` (archived) |
-| `rp-next` | `notes/handoffs/done/2026-07-16-rp-next.md` (archived) |
+
+Archived lanes (handoffs under `notes/handoffs/done/`): `queens`, `repaircodes`, `repairports`,
+`rp-next`.
 
 Each handoff must declare exactly one `**Lane**: \`alias\`` directly under its H1. A cross-lane
 deliverable is pegged to the lane that owns it, or split into separate tasks.
-
-Bare `go` or `next?` at the start of a session, with no selected lane, means ask which lane. Within a
-session it means the next step in the selected lane. An explicit alias switches lanes.
 
 When a selected lane finishes, stop and ask separately whether to archive its handoff, update this
 routing table, and which lane to select next.
@@ -348,7 +343,8 @@ levers; the user decides what constitutes a limit.
 All durable state lives in git-visible docs:
 
 - A live handoff and the live queue are crisp state maps only: goal, current status, open frontiers,
-  next steps, and one-line links to closed work.
+  next steps, and one-line links to closed work — never timelines, transcripts, validation output,
+  or superseded plans.
 - Companion `-archive.md` files are append-only history. Dated findings get their own `notes/` file.
 - Write current conclusions cleanly; put correction trails and superseded reasoning in the archive.
 
