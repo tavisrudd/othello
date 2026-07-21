@@ -639,3 +639,27 @@ conic-code conclusions without the cited conceptual layer, or archival completio
 bundle, but it intentionally leaves essential task and release obligations open. C222 must remain
 active. After the implementing/build owners complete SF1–SF5, the implementer must stop and ask the
 user to launch another Codex post-fix review. This review does not authorize archival.
+
+## Third post-fix review — 2026-07-21
+
+**Disposition:** **NO-GO — READY FOR FIXES**. This review was explicitly launched by the user against
+the pinned `006b3afb` implementation and `6696e0de` report pin. The adequacy extractor passed, hashes
+matched, all 38 task probes occurred with only `propext`, `Classical.choice`, and `Quot.sound`, and
+the import-only gate succeeded. Four findings still blocked `GO`:
+
+1. The cardinalities in `h3_joins_are_root_directions` and
+   `a3_frame_joins_are_braid_mirrors` counted raw vectors rather than `SameDirection` classes;
+   mutual coverage did not exclude projective duplicates. Explicit pairwise projective injectivity
+   was required for both join and displayed-direction tables.
+2. `h3_one_leader_strata_card` proved only a sum of two image cardinalities. Its type did not state
+   disjointness, nearest-leader soundness, surjectivity onto nonzero syndromes, or equality with
+   `ambiguityOneSyndromes`, so the report's exact `90+6` decomposition claim was too strong.
+3. The report still called completed routes candidate/pending near S1--S7 despite the later committed
+   gate and axiom evidence.
+4. Referee-facing prose incorrectly said no invertibility API was packaged, incorrectly called the
+   characteristic-polynomial roots `1 +` the exponents, and retained uncited semantic
+   arrangement/characteristic-polynomial claims.
+
+The implementing agent accepted every finding. The next review must inspect the strengthened
+projective-distinctness terminals, exact semantic one-leader equality, reconciled trust prose, and
+fresh build/axiom evidence before returning `GO`.
