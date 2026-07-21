@@ -13,12 +13,15 @@
       "sheet": "tau=4",
       "sqrt5": 7
     },
+    "group_reduces_mod_11_to_order": 60,
+    "group_reduction_note": "the golden A5 itself (S,T reduced with zeta5->3) is a subgroup of PGL_2(F_11) of order exactly 60 -- the group action reduces, not only phi/sqrt5.  Matching it to C379's specific tau=8 A5 up to PGL_2(11) conjugacy is deferred to M1/M4.",
     "identification": "J is the six-arc-frame realization of golden conjugation sigma = Gal(Q(sqrt5)/Q); the icosahedral A5 trace field is Q(sqrt5), so the group is golden.",
     "reduction_zeta5_to_3_gives": {
       "phi": 8,
       "sheet": "tau=8 (C377/C379)",
       "sqrt5": 4
     },
+    "sheet_independence_of_vertex_reduction": "f in Z[x,y] => the vertex->conic reduction is identical for both sqrt5 choices; the sheet bit lives entirely in the A5 embedding, not in the vertex/root set (de-risks M1).",
     "sigma_swaps_pentagons_equals_sheet_swap": true
   },
   "cases": {
@@ -56,6 +59,7 @@
       "vertices_are_root_set": true
     },
     "H3_icosahedron": {
+      "antipodal_pairing_source": "alpha*beta = (121-125)/4 = -1 in f's coefficients",
       "antipodal_perfect_matching_pairs": 6,
       "coxeter_number_h": 10,
       "f_invariant_under_group": true,
@@ -75,6 +79,8 @@
       "split_at_q": true,
       "symmetry_group": "A5",
       "trace_field": "Q(sqrt5)",
+      "trace_field_is_exactly_Q_sqrt5": true,
+      "trace_field_note": "H3 is the only case whose *projective* (PGL2) trace field is the spin field: S has tr^2/det = 2-phi (not in Q).  For B3/A3 the projective trace field is Q and Q(sqrt2) appears only in the SL2 spin cover 2.S4.",
       "vertex_count": 12,
       "vertex_form": "f = x y (x^10 + 11 x^5 y^5 - y^10)"
     }

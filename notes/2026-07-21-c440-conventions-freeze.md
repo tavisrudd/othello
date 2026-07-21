@@ -60,6 +60,23 @@ so the root set reduces to `{0, inf} u F_q^* = P^1(F_q)`. The middle coefficient
   fifth-power pentagons `{x^5 = alpha}` and `{x^5 = beta}` (`alpha = 10`, `beta = 1` at `tau=8`) are
   swapped by `sigma` — i.e. `sigma` (`= C377's J` at the Galois level) is the sheet swap.
 
+## Free hardenings folded in (still M0-scope: they strengthen the freeze, not M1+ deliverables)
+
+- **Group reduction, not just field reduction.** The golden `A5` *itself* — `S, T` reduced with
+  `zeta5 -> 3` — is a subgroup of `PGL_2(F_11)` of order exactly **60** (good reduction: `11` does
+  not divide `|A5|`). So C377-compatibility holds at the level of the whole group action, not merely
+  `phi -> 8`, `sqrt5 -> 4`. (Matching it to C379's *specific* `tau=8` `A5` up to `PGL_2(11)`
+  conjugacy is left to M1/M4.)
+- **The projective trace field is *exactly* `Q(sqrt5)`.** `S` witnesses `tr^2/det = 2 - phi` (not
+  rational). H3 is the only case whose *projective* (`PGL_2`) trace field is already the spin field;
+  for B3/A3 the projective trace field is `Q`, and `Q(sqrt2)` appears only in the `SL_2` spin cover
+  `2.S4` — a clean statement of why H3 is the sharpest of the three.
+- **Sheet-independence of the vertex reduction (de-risks M1).** Because `f` has integer coefficients,
+  the vertex-to-conic reduction is identical for both `sqrt5` choices; the sheet bit lives entirely
+  in the `A5` embedding, never in the vertex/root set. M1's bijection therefore need not track sheets.
+- **The antipodal pairing is in `f`'s coefficients.** `alpha*beta = (121-125)/4 = -1`, so the two
+  pentagon radii are reciprocal-up-to-sign — the antipodal matching is forced by the form itself.
+
 ## Frozen per-prime labeling (deliverable iii)
 
 Poles `v0 -> 0`, `vinf -> inf` at every prime. At `q = 11`, frozen `sqrt5 = 4` (`= tau=8`):

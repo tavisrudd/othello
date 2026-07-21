@@ -376,14 +376,56 @@ def build_h3():
                   + Z5((c3, 0, 0, 0)) * (zeta * zeta))
         return mapped == x
 
+    trace_field_is_exactly_sqrt5 = False
     for M in grp:
         a, b, c, d = M
         tr2 = (a + d) * (a + d)
         det = a * d - b * c
-        assert sigma2_fixed(o["div"](tr2, det))
+        val = o["div"](tr2, det)
+        assert sigma2_fixed(val)               # every tr^2/det lies in Q(sqrt5)
+        if not (val.c[1] == 0 and val.c[2] == 0 and val.c[3] == 0):
+            trace_field_is_exactly_sqrt5 = True  # some tr^2/det is NOT rational -> field is exactly Q(sqrt5)
+    assert trace_field_is_exactly_sqrt5        # witness: S has tr^2/det = 2 - phi (not in Q)
+
+    # Free hardening: the golden A5 itself (not merely phi/sqrt5) reduces mod 11 with zeta5 -> 3
+    # (phi -> 8, sqrt5 -> 4) to a subgroup of PGL_2(F_11) of order exactly 60 -- good reduction.
+    def reduce_z5(x, prime, z5val):
+        def num(fr):
+            return (fr.numerator % prime) * pow(fr.denominator % prime, prime - 2, prime) % prime
+        c0, c1, c2, c3 = x.c
+        return (num(c0) + num(c1) * z5val + num(c2) * pow(z5val, 2, prime)
+                + num(c3) * pow(z5val, 3, prime)) % prime
+
+    prime, z5val = 11, 3
+    Sr = tuple(reduce_z5(v, prime, z5val) for v in S)
+    Tr = tuple(reduce_z5(v, prime, z5val) for v in T)
+
+    def pnorm(M):
+        piv = next(x for x in M if x % prime)
+        inv = pow(piv, prime - 2, prime)
+        return tuple((x * inv) % prime for x in M)
+
+    def pmul(A, B):
+        return ((A[0] * B[0] + A[1] * B[2]) % prime, (A[0] * B[1] + A[1] * B[3]) % prime,
+                (A[2] * B[0] + A[3] * B[2]) % prime, (A[2] * B[1] + A[3] * B[3]) % prime)
+
+    ident = pnorm((1, 0, 0, 1))
+    rgrp = {ident}
+    frontier = [ident]
+    rgens = [pnorm(Sr), pnorm(Tr)]
+    while frontier:
+        P = frontier.pop()
+        for g in rgens:
+            R = pnorm(pmul(P, g))
+            if R not in rgrp:
+                rgrp.add(R)
+                frontier.append(R)
+    assert len(rgrp) == 60
 
     return dict(phi=phi, s5=s5, zeta=zeta, form=f, group_order=len(grp),
-                orbit_size=12, antipode_pairs=6)
+                orbit_size=12, antipode_pairs=6,
+                trace_field_exactly_sqrt5=trace_field_is_exactly_sqrt5,
+                reduced_group_order_mod11=len(rgrp))
 
 
 # --------------------------------------------------------------------------------------------------
@@ -545,7 +587,13 @@ def build_certificate():
                 "f_invariant_under_group": True,
                 "roots_are_single_orbit_of_size_12": h3["orbit_size"] == 12,
                 "antipodal_perfect_matching_pairs": h3["antipode_pairs"],
+                "antipodal_pairing_source": "alpha*beta = (121-125)/4 = -1 in f's coefficients",
                 "trace_field": "Q(sqrt5)",
+                "trace_field_is_exactly_Q_sqrt5": h3["trace_field_exactly_sqrt5"],
+                "trace_field_note": (
+                    "H3 is the only case whose *projective* (PGL2) trace field is the spin field: "
+                    "S has tr^2/det = 2-phi (not in Q).  For B3/A3 the projective trace field is Q "
+                    "and Q(sqrt2) appears only in the SL2 spin cover 2.S4."),
                 "reduces_mod_11_to": "x y (x^10 - y^10)  ->  P^1(F_11)",
             },
             "B3_cube": {
@@ -582,6 +630,14 @@ def build_certificate():
             "reduction_zeta5_to_3_gives": {"phi": 8, "sqrt5": 4, "sheet": "tau=8 (C377/C379)"},
             "golden_conjugate_reduction_gives": {"phi": 4, "sqrt5": 7, "sheet": "tau=4"},
             "sigma_swaps_pentagons_equals_sheet_swap": True,
+            "group_reduces_mod_11_to_order": h3["reduced_group_order_mod11"],
+            "group_reduction_note": (
+                "the golden A5 itself (S,T reduced with zeta5->3) is a subgroup of PGL_2(F_11) of "
+                "order exactly 60 -- the group action reduces, not only phi/sqrt5.  Matching it to "
+                "C379's specific tau=8 A5 up to PGL_2(11) conjugacy is deferred to M1/M4."),
+            "sheet_independence_of_vertex_reduction": (
+                "f in Z[x,y] => the vertex->conic reduction is identical for both sqrt5 choices; the "
+                "sheet bit lives entirely in the A5 embedding, not in the vertex/root set (de-risks M1)."),
         },
         "boundary_not_certified_here": [
             "the bijectivity of the vertex->conic reduction and the explicit per-root table (M1)",
