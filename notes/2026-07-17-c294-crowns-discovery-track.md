@@ -450,3 +450,25 @@ identification of the chirality and the H_4 tower remain LEAN.
 identification, H_4 tower).
 **Status:** open leads; unallocated. The gateway report already flags G15/G16/G19; these spikes
 clear their first exact gates but allocate nothing.
+
+### 2026-07-21 — H3 is the only rank-3 case whose spin field is visible in the *projective* trace field
+
+**Provenance:** C440/M0 conventions freeze
+(`notes/2026-07-21-c440-conventions-freeze.{md,py,json}`), the "trace-field-exactly-Q(sqrt5)" free
+hardening — the check that some `tr^2/det` is irrational.
+**Was I looking for this?:** no — M0 was fixing the shared conventions and verifying Klein's `f`,
+not characterizing what distinguishes H3 from B3/A3.
+**Observed / musing:** for the icosahedral `A5` on `P^1`, the projective (`PGL_2`) trace invariant
+`tr^2/det` of the order-5 generator is `2 - phi`, irrational, so the projective trace field is
+exactly `Q(sqrt5)`. For the octahedral `B3`/`A3` cases the order-4 elements give `tr^2/det = 2 in Q`,
+so their projective trace field is `Q`; `sqrt2` surfaces only in the `SL_2` spin cover `2.S4`
+(character field `Q(sqrt2)`). So among the three conic-phase cases, only H3 wears its spin field
+already at the projective level.
+**Why it may matter / strongest question:** this may be the precise sense in which "the Clebsch
+hexagon is the apex" — a structural, not rhetorical, statement of H3's sharpness that could seed a
+row of the Phase-3 Rosetta framing or the paper's positioning. Question: does this
+projective-vs-spin split predict any observable difference between the H3 sheet phenomena and the
+B3/A3 analogues (e.g. in whether a construction descends to `PGL_2` without a spin choice)?
+**Evidence:** CHECKED (exact `tr^2/det` census over the frozen groups in the M0 certificate).
+**Status:** open lead; unallocated. Interpretive framing only — allocates no C-ID; the underlying
+computed fact is already a committed M0 deliverable.
