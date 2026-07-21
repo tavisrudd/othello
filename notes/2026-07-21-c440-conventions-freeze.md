@@ -45,9 +45,16 @@ so the root set reduces to `{0, inf} u F_q^* = P^1(F_q)`. The middle coefficient
   `SL2(Z[zeta5])`) and Klein's `T` (order 2; inverts only the spin prime `sqrt5`, never 11) generate
   a `PGL_2` group of order exactly **60** (`A5`). `f` is invariant (up to scalar) under **all 60**
   elements. Its **12** roots form a single `A5`-orbit (`= orbit of [0:1]`), all lying on `f = 0`. The
-  antipodal involution `z -> -1/z` fixes `f` and pairs the 12 roots into exactly **6** pairs (the
-  antipodal matching). Every projective trace invariant `tr^2/det` lies in `Q(sqrt5) = Q(phi)` — the
-  group is golden.
+  antipodal involution `z -> -1/z` fixes `f` and pairs the 12 roots into exactly **6** pairs.
+  Every projective trace invariant `tr^2/det` lies in `Q(sqrt5) = Q(phi)` — the group is golden.
+
+  > **Erratum (2026-07-21, from the C458 / M2 Fable review).** The `z -> -1/z` pairing above is *not*
+  > the `A5`-invariant "antipodal matching" that M2/C458 use downstream: the unique `A5`-invariant
+  > matching of the reduced Klein `A5` (identical at both primes) is `{0,inf}{1,6}{2,4}{3,7}{5,8}{9,10}`
+  > (the same-phase pairing), whereas `z -> -1/z` reduces to a different, non-invariant matching. No
+  > Möbius involution can induce the invariant matching. The `alpha*beta = -1` coefficient identity is
+  > unaffected, and the C440 JSON records only the pair count and that identity, so nothing frozen
+  > changes — this corrects the parenthetical label only.
 - **B3 / cube and A3 / octahedron.** Building the group as the full set of projectivities permuting
   the vertex root set gives order exactly **24** in each case; each recorded form vanishes on all
   vertices and is invariant (up to scalar) under all 24 elements. (The cube form's roots are `{0,

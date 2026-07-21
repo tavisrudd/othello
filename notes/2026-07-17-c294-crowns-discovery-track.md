@@ -472,3 +472,40 @@ B3/A3 analogues (e.g. in whether a construction descends to `PGL_2` without a sp
 **Evidence:** CHECKED (exact `tr^2/det` census over the frozen groups in the M0 certificate).
 **Status:** open lead; unallocated. Interpretive framing only — allocates no C-ID; the underlying
 computed fact is already a committed M0 deliverable.
+
+### 2026-07-21 — the rational octahedral skeleton of the golden pair is an `S4` matching-stabilizer, and codex's Frégier-cloud synthesis
+
+**Provenance.** Encountered while closing C458 (M0 addendum): codex (working on C446) relayed, via the
+user, a Frégier-cloud synthesis of the two golden singleton matchings. Its self-contained `S4` half
+was verified here (own PGL check reusing frozen C442 helpers); its 15-cloud half was not.
+
+**What was noticed (the `S4` half — CHECKED).** The setwise stabilizer in `PGL_2(11)` of the unordered
+golden pair `{base, J-mate}` (C442's `M+, M-`) is exactly `S4` of order 24 (element-order distribution
+`1, 2^9, 3^8, 4^6`); its index-two pointwise stabilizer is the common `A4` (order 12) that fixes both
+matchings — i.e. `a5(8) ∩ a5(4)`. That `S4` has a *unique* invariant perfect matching, and it is the
+q=11 B3/cube matching `{0,∞}{1,10}{2,3}{4,6}{5,7}{8,9}` (nonconcurrent, rank three). So C442 finding 3
+("the rational octahedral skeleton of the golden pair is the cube group") acquires a concrete
+finite-geometric realization: the stabilizer of the unordered golden pair, owning the separate
+size-55 `S4` matching orbit — kept distinct from the rational binary-form `A5`, which is one
+sheet-blind member of the size-22 orbit.
+
+**Codex's lead (the cloud half — NOT verified here).** codex proposes the two 15-point Frégier clouds
+`Ω±` of `base`/`J-mate`, with `σ`/`Rz` exchanging `Ω+ ↔ Ω-`, and the claim `|Ω+ ∩ Ω-| = 3` being
+exactly the `S4`-triangle above; separating the two order-24 q=11 matching orbits as `D24` (concurrent
+Frégier) vs `S4` (nonconcurrent B3 skeleton). Verifying `|Ω+ ∩ Ω-| = 3` needs codex's exact
+Frégier-cloud definition.
+
+**Why it may matter / questions.** (a) A sharper geometric form of **X3**: no rational point-valued
+selector exists, but the golden decoration selects one of two conjugate 15-clouds, and forgetting it
+retains their common rational triangle. (b) A candidate **M5** germ: is the common triangle the same
+`σ`-stable object as C442 finding 4's prime-independent perpendicularity pairing? (unchecked). (c) A
+clean conceptual separation of the two size-24 q=11 matching orbits.
+
+**Evidence.** `S4` claims CHECKED (`scratchpad/verify_codex_s4.py`, exact `F_11`, reusing frozen C442
+`group_closure`/`pact`); the cloud/triangle claims are codex's, unverified here. The C458 freeze was
+kept intentionally minimal (Fable gate §4 concurs); freezing derived cloud/triangle objects is new
+scope.
+
+**Status:** open lead; unallocated. Candidate for a new C-ID (Frégier-cloud sheet-carrier `Ω±` +
+`|Ω+∩Ω-|=3` ↔ perpendicularity-pairing/M5 check + the sharper X3 form) *after* the cloud claims get a
+verified certificate. Coordinator following up per the C458 Fable review §4.
