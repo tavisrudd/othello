@@ -375,6 +375,10 @@ and the table is the paper.
 | 28 | Weil roof: cross-sheet module = 5/6 Weil components             | SPECULATIVE | a day      |
 | 29 | C372 Fourier self-duality = Weil-operator fixed point           | SPECULATIVE | rereading  |
 | 30 | Outer swap conjugates `sqrt 5` and `sqrt −11` simultaneously    | REASONED    | hours      |
+| 31 | Dual-code involution (`comp-clebsch-dual`) as a seventh shadow: does the code's self-duality swap the sheets? | SPECULATIVE | hours      |
+| 32 | Char-0 form of the sheets: two conjugate `A5`-invariant one-factorizations of the icosahedron over `Q(sqrt 5)` (strengthens M2) | SPECULATIVE | hours      |
+| 33 | M1's reduction statement is likely Edge/Klein-classical; the integral model's novelty rests on the memory-spine identification | calibration | lit check  |
+| 34 | Rank-2 floor: `I2(m)` conic phases (`H2` pentagon at q=11 inside the H3 story) | DECORATION  | hours      |
 
 PROVED* = follows from committed certificates plus definitions/framing; still needs its bounded
 literature audit before any "no prior instance" wording.
