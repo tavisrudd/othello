@@ -4,7 +4,8 @@
     "explicit_cap_to_frozen_c406_projectivity_each": true,
     "golden_singleton_identification": "REFUTED_AS_AN_EQUIVARIANT_IDENTIFICATION",
     "p2_n5_orbits_each": true,
-    "seven_on_conic_children_each": true
+    "seven_on_conic_children_each": true,
+    "type_correct_cross_sheet_repair": "GREEN_CANONICAL_SHARED_EDGE_BIJECTION"
   },
   "cap_knife_edge_class_equivalence": {
     "consequence": "The two cap knife-edge conic configurations form one PGL2 orbit and cannot canonically label the two golden sheets.",
@@ -21,6 +22,555 @@
     ],
     "maps_class_4_frame_p_n_to_class_7_frame_p_n": true,
     "projectivity_count": 10
+  },
+  "free_upgrade_shared_edge_cross_sheet_bijection": {
+    "bijection": true,
+    "boundary": "This repairs the object type and gives an orbit-valued bridge, but it does not identify the P orbit with the base/J-mate singleton pair or canonically orient either two-set.",
+    "cap_interpretation": "Each knife-edge P orbit is canonically the shared edge of one cross-sheet matching pair; its D10 determinant character swaps endpoints exactly when it swaps the two matchings.",
+    "codomain": "66 cross-sheet matching pairs sharing one edge",
+    "domain": "66 unordered pairs of points of P1(F11)",
+    "pgl2_equivariant": true,
+    "records": [
+      {
+        "edge": [
+          0,
+          1
+        ],
+        "minus_matching_index": 5,
+        "plus_matching_index": 4
+      },
+      {
+        "edge": [
+          0,
+          10
+        ],
+        "minus_matching_index": 2,
+        "plus_matching_index": 3
+      },
+      {
+        "edge": [
+          0,
+          2
+        ],
+        "minus_matching_index": 6,
+        "plus_matching_index": 7
+      },
+      {
+        "edge": [
+          0,
+          3
+        ],
+        "minus_matching_index": 9,
+        "plus_matching_index": 8
+      },
+      {
+        "edge": [
+          0,
+          4
+        ],
+        "minus_matching_index": 10,
+        "plus_matching_index": 11
+      },
+      {
+        "edge": [
+          0,
+          5
+        ],
+        "minus_matching_index": 12,
+        "plus_matching_index": 13
+      },
+      {
+        "edge": [
+          0,
+          6
+        ],
+        "minus_matching_index": 15,
+        "plus_matching_index": 14
+      },
+      {
+        "edge": [
+          0,
+          7
+        ],
+        "minus_matching_index": 17,
+        "plus_matching_index": 16
+      },
+      {
+        "edge": [
+          0,
+          8
+        ],
+        "minus_matching_index": 18,
+        "plus_matching_index": 19
+      },
+      {
+        "edge": [
+          0,
+          9
+        ],
+        "minus_matching_index": 20,
+        "plus_matching_index": 21
+      },
+      {
+        "edge": [
+          0,
+          "inf"
+        ],
+        "minus_matching_index": 1,
+        "plus_matching_index": 0
+      },
+      {
+        "edge": [
+          1,
+          10
+        ],
+        "minus_matching_index": 10,
+        "plus_matching_index": 16
+      },
+      {
+        "edge": [
+          1,
+          2
+        ],
+        "minus_matching_index": 18,
+        "plus_matching_index": 0
+      },
+      {
+        "edge": [
+          1,
+          3
+        ],
+        "minus_matching_index": 12,
+        "plus_matching_index": 19
+      },
+      {
+        "edge": [
+          1,
+          4
+        ],
+        "minus_matching_index": 20,
+        "plus_matching_index": 3
+      },
+      {
+        "edge": [
+          1,
+          5
+        ],
+        "minus_matching_index": 6,
+        "plus_matching_index": 8
+      },
+      {
+        "edge": [
+          1,
+          6
+        ],
+        "minus_matching_index": 1,
+        "plus_matching_index": 11
+      },
+      {
+        "edge": [
+          1,
+          7
+        ],
+        "minus_matching_index": 9,
+        "plus_matching_index": 21
+      },
+      {
+        "edge": [
+          1,
+          8
+        ],
+        "minus_matching_index": 15,
+        "plus_matching_index": 7
+      },
+      {
+        "edge": [
+          1,
+          9
+        ],
+        "minus_matching_index": 17,
+        "plus_matching_index": 13
+      },
+      {
+        "edge": [
+          1,
+          "inf"
+        ],
+        "minus_matching_index": 2,
+        "plus_matching_index": 14
+      },
+      {
+        "edge": [
+          10,
+          2
+        ],
+        "minus_matching_index": 15,
+        "plus_matching_index": 11
+      },
+      {
+        "edge": [
+          10,
+          3
+        ],
+        "minus_matching_index": 20,
+        "plus_matching_index": 13
+      },
+      {
+        "edge": [
+          10,
+          4
+        ],
+        "minus_matching_index": 6,
+        "plus_matching_index": 19
+      },
+      {
+        "edge": [
+          10,
+          5
+        ],
+        "minus_matching_index": 17,
+        "plus_matching_index": 0
+      },
+      {
+        "edge": [
+          10,
+          6
+        ],
+        "minus_matching_index": 18,
+        "plus_matching_index": 21
+      },
+      {
+        "edge": [
+          10,
+          7
+        ],
+        "minus_matching_index": 5,
+        "plus_matching_index": 7
+      },
+      {
+        "edge": [
+          10,
+          8
+        ],
+        "minus_matching_index": 9,
+        "plus_matching_index": 14
+      },
+      {
+        "edge": [
+          10,
+          9
+        ],
+        "minus_matching_index": 1,
+        "plus_matching_index": 8
+      },
+      {
+        "edge": [
+          10,
+          "inf"
+        ],
+        "minus_matching_index": 12,
+        "plus_matching_index": 4
+      },
+      {
+        "edge": [
+          2,
+          3
+        ],
+        "minus_matching_index": 17,
+        "plus_matching_index": 14
+      },
+      {
+        "edge": [
+          2,
+          4
+        ],
+        "minus_matching_index": 1,
+        "plus_matching_index": 13
+      },
+      {
+        "edge": [
+          2,
+          5
+        ],
+        "minus_matching_index": 10,
+        "plus_matching_index": 4
+      },
+      {
+        "edge": [
+          2,
+          6
+        ],
+        "minus_matching_index": 12,
+        "plus_matching_index": 3
+      },
+      {
+        "edge": [
+          2,
+          7
+        ],
+        "minus_matching_index": 2,
+        "plus_matching_index": 8
+      },
+      {
+        "edge": [
+          2,
+          8
+        ],
+        "minus_matching_index": 20,
+        "plus_matching_index": 16
+      },
+      {
+        "edge": [
+          2,
+          9
+        ],
+        "minus_matching_index": 9,
+        "plus_matching_index": 19
+      },
+      {
+        "edge": [
+          2,
+          "inf"
+        ],
+        "minus_matching_index": 5,
+        "plus_matching_index": 21
+      },
+      {
+        "edge": [
+          3,
+          4
+        ],
+        "minus_matching_index": 15,
+        "plus_matching_index": 21
+      },
+      {
+        "edge": [
+          3,
+          5
+        ],
+        "minus_matching_index": 2,
+        "plus_matching_index": 11
+      },
+      {
+        "edge": [
+          3,
+          6
+        ],
+        "minus_matching_index": 6,
+        "plus_matching_index": 0
+      },
+      {
+        "edge": [
+          3,
+          7
+        ],
+        "minus_matching_index": 1,
+        "plus_matching_index": 4
+      },
+      {
+        "edge": [
+          3,
+          8
+        ],
+        "minus_matching_index": 5,
+        "plus_matching_index": 3
+      },
+      {
+        "edge": [
+          3,
+          9
+        ],
+        "minus_matching_index": 10,
+        "plus_matching_index": 7
+      },
+      {
+        "edge": [
+          3,
+          "inf"
+        ],
+        "minus_matching_index": 18,
+        "plus_matching_index": 16
+      },
+      {
+        "edge": [
+          4,
+          5
+        ],
+        "minus_matching_index": 9,
+        "plus_matching_index": 16
+      },
+      {
+        "edge": [
+          4,
+          6
+        ],
+        "minus_matching_index": 5,
+        "plus_matching_index": 8
+      },
+      {
+        "edge": [
+          4,
+          7
+        ],
+        "minus_matching_index": 12,
+        "plus_matching_index": 14
+      },
+      {
+        "edge": [
+          4,
+          8
+        ],
+        "minus_matching_index": 2,
+        "plus_matching_index": 0
+      },
+      {
+        "edge": [
+          4,
+          9
+        ],
+        "minus_matching_index": 18,
+        "plus_matching_index": 4
+      },
+      {
+        "edge": [
+          4,
+          "inf"
+        ],
+        "minus_matching_index": 17,
+        "plus_matching_index": 7
+      },
+      {
+        "edge": [
+          5,
+          6
+        ],
+        "minus_matching_index": 20,
+        "plus_matching_index": 7
+      },
+      {
+        "edge": [
+          5,
+          7
+        ],
+        "minus_matching_index": 18,
+        "plus_matching_index": 3
+      },
+      {
+        "edge": [
+          5,
+          8
+        ],
+        "minus_matching_index": 1,
+        "plus_matching_index": 21
+      },
+      {
+        "edge": [
+          5,
+          9
+        ],
+        "minus_matching_index": 5,
+        "plus_matching_index": 14
+      },
+      {
+        "edge": [
+          5,
+          "inf"
+        ],
+        "minus_matching_index": 15,
+        "plus_matching_index": 19
+      },
+      {
+        "edge": [
+          6,
+          7
+        ],
+        "minus_matching_index": 10,
+        "plus_matching_index": 19
+      },
+      {
+        "edge": [
+          6,
+          8
+        ],
+        "minus_matching_index": 17,
+        "plus_matching_index": 4
+      },
+      {
+        "edge": [
+          6,
+          9
+        ],
+        "minus_matching_index": 2,
+        "plus_matching_index": 16
+      },
+      {
+        "edge": [
+          6,
+          "inf"
+        ],
+        "minus_matching_index": 9,
+        "plus_matching_index": 13
+      },
+      {
+        "edge": [
+          7,
+          8
+        ],
+        "minus_matching_index": 6,
+        "plus_matching_index": 13
+      },
+      {
+        "edge": [
+          7,
+          9
+        ],
+        "minus_matching_index": 15,
+        "plus_matching_index": 0
+      },
+      {
+        "edge": [
+          7,
+          "inf"
+        ],
+        "minus_matching_index": 20,
+        "plus_matching_index": 11
+      },
+      {
+        "edge": [
+          8,
+          9
+        ],
+        "minus_matching_index": 12,
+        "plus_matching_index": 11
+      },
+      {
+        "edge": [
+          8,
+          "inf"
+        ],
+        "minus_matching_index": 10,
+        "plus_matching_index": 8
+      },
+      {
+        "edge": [
+          9,
+          "inf"
+        ],
+        "minus_matching_index": 6,
+        "plus_matching_index": 3
+      }
+    ],
+    "uniform_pair_stabilizer": {
+      "abstract_type": "D20",
+      "element_order_distribution": {
+        "1": 1,
+        "10": 4,
+        "2": 11,
+        "5": 4
+      },
+      "equals_edge_stabilizer": true,
+      "order": 20
+    }
   },
   "frozen_c406": {
     "base_and_j_mate_stabilizer_element_order_distributions": [
@@ -163,6 +713,72 @@
           4
         ]
       ],
+      "canonical_shared_edge_cross_sheet_pair": {
+        "determinant_nonsquare_frame_coset_swaps_endpoints_and_matchings": true,
+        "determinant_square_frame_kernel_fixes_endpoints_and_matchings_pointwise": true,
+        "frame_d10_is_subgroup": true,
+        "minus_matching": [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            10,
+            3
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            "inf"
+          ]
+        ],
+        "minus_matching_index": 20,
+        "pair_stabilizer_equals_edge_stabilizer": true,
+        "pair_stabilizer_order": 20,
+        "pair_stabilizer_type": "D20",
+        "plus_matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            9,
+            "inf"
+          ]
+        ],
+        "plus_matching_index": 3,
+        "shared_p_edge": [
+          1,
+          4
+        ]
+      },
       "cap_to_frozen_h3_projectivity": [
         [
           1,
@@ -287,6 +903,72 @@
           9
         ]
       ],
+      "canonical_shared_edge_cross_sheet_pair": {
+        "determinant_nonsquare_frame_coset_swaps_endpoints_and_matchings": true,
+        "determinant_square_frame_kernel_fixes_endpoints_and_matchings_pointwise": true,
+        "frame_d10_is_subgroup": true,
+        "minus_matching": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            10,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            "inf"
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        "minus_matching_index": 15,
+        "pair_stabilizer_equals_edge_stabilizer": true,
+        "pair_stabilizer_order": 20,
+        "pair_stabilizer_type": "D20",
+        "plus_matching": [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            10,
+            6
+          ],
+          [
+            2,
+            "inf"
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            8
+          ]
+        ],
+        "plus_matching_index": 21,
+        "shared_p_edge": [
+          3,
+          4
+        ]
+      },
       "cap_to_frozen_h3_projectivity": [
         [
           1,
@@ -400,8 +1082,9 @@
   "schema": "c447-cap-knife-edge-v1",
   "task": "C447",
   "verdict": {
+    "free_upgrade": "The cap P pair canonically selects the unique cross-sheet matching pair sharing that edge. This is a PGL2-equivariant 66-to-66 bijection and an exact positive orbit-valued input for X3, without restoring the failed singleton identification.",
     "reason": "The cap P orbit is a two-point conic orbit, whereas the golden singleton pair consists of two perfect matchings. Under the frozen parameter projectivity neither P pair is an edge of either singleton. More invariantly, each cap D10 contains five determinant-nonsquare elements, while each singleton A5 lies in PSL2, and the unordered singleton-pair stabilizer is S4 of order 24. Hence no projectivity makes the proposed identification equivariant. An unframed PGL2 map can force either P pair onto an arbitrary singleton edge (120 maps for each singleton), showing why bare incidence is coordinate choice rather than a correspondence.",
     "register_row_35": "SHARP_NEGATIVE",
-    "x3_consequence": "X3 retains its abstract obstruction and C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not causation."
+    "x3_consequence": "X3 retains its abstract obstruction and C460's exact orbit-valued geometry. The failed cap-to-singleton comparison is consistency only, while the canonical cap-P-edge to shared-edge cross-sheet-pair bijection is an exact positive cap input."
   }
 }

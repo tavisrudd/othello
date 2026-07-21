@@ -132,6 +132,14 @@ def matching_image(g: tuple[int, int, int, int], matching: set[tuple[int | str, 
     return {edge(act(g, a), act(g, b)) for a, b in matching}
 
 
+def matching_key(matching) -> str:
+    return json.dumps(sorted([list(pair) for pair in matching], key=str), separators=(",", ":"))
+
+
+def matching_json(matching) -> list[list[int | str]]:
+    return sorted([list(pair) for pair in matching], key=str)
+
+
 def parse_cap() -> dict[int, dict]:
     classes: dict[int, dict] = {}
     cls_re = re.compile(
@@ -214,6 +222,49 @@ def build() -> dict:
     assert order_distribution(plus_stab) == order_distribution(minus_stab) == {"1": 1, "2": 15, "3": 20, "5": 24}
     assert order_distribution(pair_stab) == {"1": 1, "2": 9, "3": 8, "4": 6}
 
+    matching_orbit = sorted(
+        {frozenset(matching_image(g, plus)) for g in group}, key=matching_key
+    )
+    matching_index = {matching: index for index, matching in enumerate(matching_orbit)}
+    sheet_plus = {
+        matching_index[frozenset(matching_image(g, plus))] for g in group if det_is_square(g)
+    }
+    sheet_minus = set(range(len(matching_orbit))) - sheet_plus
+    assert len(matching_orbit) == 22 and len(sheet_plus) == len(sheet_minus) == 11
+    edge_to_cross_pair = {}
+    cross_pair_records = []
+    for plus_index in sorted(sheet_plus):
+        for minus_index in sorted(sheet_minus):
+            common = matching_orbit[plus_index] & matching_orbit[minus_index]
+            if len(common) != 1:
+                continue
+            shared_edge = next(iter(common))
+            assert shared_edge not in edge_to_cross_pair
+            cross_pair = {matching_orbit[plus_index], matching_orbit[minus_index]}
+            cross_stabilizer = {
+                g for g in group
+                if {
+                    frozenset(matching_image(g, set(matching_orbit[plus_index]))),
+                    frozenset(matching_image(g, set(matching_orbit[minus_index]))),
+                }
+                == cross_pair
+            }
+            edge_stabilizer = {
+                g for g in group if edge(act(g, shared_edge[0]), act(g, shared_edge[1])) == shared_edge
+            }
+            assert cross_stabilizer == edge_stabilizer
+            assert len(cross_stabilizer) == 20
+            assert order_distribution(cross_stabilizer) == {"1": 1, "2": 11, "5": 4, "10": 4}
+            edge_to_cross_pair[shared_edge] = (plus_index, minus_index)
+            cross_pair_records.append({
+                "edge": list(shared_edge),
+                "plus_matching_index": plus_index,
+                "minus_matching_index": minus_index,
+            })
+    assert len(edge_to_cross_pair) == 66
+    assert set(edge_to_cross_pair) == {edge(a, b) for a in range(Q) for b in list(range(a + 1, Q)) + [INF]}
+    cross_pair_records.sort(key=lambda record: (point_key(record["edge"][0]), point_key(record["edge"][1])))
+
     knife_edges = []
     for cls, record in sorted(cap.items()):
         if (record["onP"], record["onN"]) != (2, 5):
@@ -250,6 +301,22 @@ def build() -> dict:
         orbits.sort(key=lambda item: (item["size"], item["parameters"]))
         assert [(o["size"], o["value"]) for o in orbits] == [(2, "P"), (5, "N")]
         p_pair = set(orbits[0]["parameters"])
+        p_edge = edge(*p_pair)
+        cross_plus_index, cross_minus_index = edge_to_cross_pair[p_edge]
+        cross_plus = matching_orbit[cross_plus_index]
+        cross_minus = matching_orbit[cross_minus_index]
+        assert all(
+            frozenset(matching_image(g, set(cross_plus))) == cross_plus
+            and frozenset(matching_image(g, set(cross_minus))) == cross_minus
+            for g in frame_stab if det_is_square(g)
+        )
+        assert all(
+            frozenset(matching_image(g, set(cross_plus))) == cross_minus
+            and frozenset(matching_image(g, set(cross_minus))) == cross_plus
+            for g in frame_stab if not det_is_square(g)
+        )
+        assert all(all(act(g, x) == x for x in p_pair) for g in frame_stab if det_is_square(g))
+        assert all(all(act(g, x) == next(iter(p_pair - {x})) for x in p_pair) for g in frame_stab if not det_is_square(g))
 
         standard_to_cap = [[0, rho, 1], [B, A, 0], [0, 1, 0]]
         cap_to_standard = matrix_inverse(standard_to_cap)
@@ -309,6 +376,19 @@ def build() -> dict:
             "unframed_projectivities_forcing_p_pair_to_singleton_edge": forced_edge_maps,
             "symmetry_compatible_projectivities_to_singleton": compatible_singleton,
             "symmetry_compatible_projectivities_to_unordered_singleton_pair": compatible_pair,
+            "canonical_shared_edge_cross_sheet_pair": {
+                "shared_p_edge": list(p_edge),
+                "plus_matching_index": cross_plus_index,
+                "minus_matching_index": cross_minus_index,
+                "plus_matching": matching_json(cross_plus),
+                "minus_matching": matching_json(cross_minus),
+                "pair_stabilizer_equals_edge_stabilizer": True,
+                "pair_stabilizer_order": 20,
+                "pair_stabilizer_type": "D20",
+                "frame_d10_is_subgroup": True,
+                "determinant_square_frame_kernel_fixes_endpoints_and_matchings_pointwise": True,
+                "determinant_nonsquare_frame_coset_swaps_endpoints_and_matchings": True,
+            },
         })
 
     assert [record["class"] for record in knife_edges] == [4, 7]
@@ -360,12 +440,28 @@ def build() -> dict:
             ],
             "consequence": "The two cap knife-edge conic configurations form one PGL2 orbit and cannot canonically label the two golden sheets.",
         },
+        "free_upgrade_shared_edge_cross_sheet_bijection": {
+            "domain": "66 unordered pairs of points of P1(F11)",
+            "codomain": "66 cross-sheet matching pairs sharing one edge",
+            "bijection": True,
+            "pgl2_equivariant": True,
+            "records": cross_pair_records,
+            "uniform_pair_stabilizer": {
+                "equals_edge_stabilizer": True,
+                "order": 20,
+                "abstract_type": "D20",
+                "element_order_distribution": {"1": 1, "2": 11, "5": 4, "10": 4},
+            },
+            "cap_interpretation": "Each knife-edge P orbit is canonically the shared edge of one cross-sheet matching pair; its D10 determinant character swaps endpoints exactly when it swaps the two matchings.",
+            "boundary": "This repairs the object type and gives an orbit-valued bridge, but it does not identify the P orbit with the base/J-mate singleton pair or canonically orient either two-set.",
+        },
         "acceptance": {
             "seven_on_conic_children_each": True,
             "d10_stabilizer_each": True,
             "p2_n5_orbits_each": True,
             "explicit_cap_to_frozen_c406_projectivity_each": True,
             "golden_singleton_identification": "REFUTED_AS_AN_EQUIVARIANT_IDENTIFICATION",
+            "type_correct_cross_sheet_repair": "GREEN_CANONICAL_SHARED_EDGE_BIJECTION",
         },
         "verdict": {
             "register_row_35": "SHARP_NEGATIVE",
@@ -378,7 +474,8 @@ def build() -> dict:
                 "force either P pair onto an arbitrary singleton edge (120 maps for each singleton), showing why "
                 "bare incidence is coordinate choice rather than a correspondence."
             ),
-            "x3_consequence": "X3 retains its abstract obstruction and C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not causation.",
+            "x3_consequence": "X3 retains its abstract obstruction and C460's exact orbit-valued geometry. The failed cap-to-singleton comparison is consistency only, while the canonical cap-P-edge to shared-edge cross-sheet-pair bijection is an exact positive cap input.",
+            "free_upgrade": "The cap P pair canonically selects the unique cross-sheet matching pair sharing that edge. This is a PGL2-equivariant 66-to-66 bijection and an exact positive orbit-valued input for X3, without restoring the failed singleton identification.",
         },
     }
 

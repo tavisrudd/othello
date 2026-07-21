@@ -68,6 +68,10 @@ def distribution(H):
     return {str(n): sum(order(g) == n for g in H) for n in sorted({order(g) for g in H})}
 
 
+def matching_key(M):
+    return str(sorted(M))
+
+
 def mat_vec(m, v):
     return tuple(sum(m[i][j] * v[j] for j in range(3)) % Q for i in range(3))
 
@@ -89,6 +93,26 @@ def main():
     assert all(pow((g[0] * g[3] - g[1] * g[2]) % Q, 5, Q) == 1 for g in Aplus | Aminus)
     assert distribution(Aplus) == distribution(Aminus) == {"1": 1, "2": 15, "3": 20, "5": 24}
     assert distribution(pair_stab) == {"1": 1, "2": 9, "3": 8, "4": 6}
+
+    matching_orbit = sorted({frozenset(image(g, plus)) for g in G}, key=matching_key)
+    matching_index = {M: i for i, M in enumerate(matching_orbit)}
+    sheet_plus = {matching_index[frozenset(image(g, plus))] for g in G if pow((g[0] * g[3] - g[1] * g[2]) % Q, 5, Q) == 1}
+    sheet_minus = set(range(22)) - sheet_plus
+    edge_map = {}
+    for i in sheet_plus:
+        for j in sheet_minus:
+            common = matching_orbit[i] & matching_orbit[j]
+            if len(common) != 1:
+                continue
+            shared = next(iter(common))
+            assert shared not in edge_map
+            pair = {matching_orbit[i], matching_orbit[j]}
+            H = {g for g in G if {frozenset(image(g, set(matching_orbit[i]))), frozenset(image(g, set(matching_orbit[j])))} == pair}
+            E = {g for g in G if edge(act(g, shared[0]), act(g, shared[1])) == shared}
+            assert H == E and len(H) == 20
+            assert distribution(H) == {"1": 1, "2": 11, "5": 4, "10": 4}
+            edge_map[shared] = (i, j)
+    assert len(edge_map) == 66 and set(edge_map) == {edge(a, b) for a in range(12) for b in range(a + 1, 12)}
 
     class_lines = {}
     child_lines = {4: [], 7: []}
@@ -123,6 +147,19 @@ def main():
             assert pnorm(mat_vec(cap_to_standard, (r, c, 1))) == pnorm((1, w, w * w % Q))
         assert record["symmetry_compatible_projectivities_to_singleton"] == {"base": 0, "j_mate": 0}
         assert record["symmetry_compatible_projectivities_to_unordered_singleton_pair"] == 0
+        i, j = edge_map[edge(*p_pair)]
+        cross = record["canonical_shared_edge_cross_sheet_pair"]
+        assert (cross["plus_matching_index"], cross["minus_matching_index"]) == (i, j)
+        assert all(
+            frozenset(image(g, set(matching_orbit[i]))) == matching_orbit[i]
+            and frozenset(image(g, set(matching_orbit[j]))) == matching_orbit[j]
+            for g in D if pow((g[0] * g[3] - g[1] * g[2]) % Q, 5, Q) == 1
+        )
+        assert all(
+            frozenset(image(g, set(matching_orbit[i]))) == matching_orbit[j]
+            and frozenset(image(g, set(matching_orbit[j]))) == matching_orbit[i]
+            for g in D if pow((g[0] * g[3] - g[1] * g[2]) % Q, 5, Q) != 1
+        )
 
     r4, r7 = CERT["knife_edge_classes"]
     frame4 = {INF if x == "inf" else x for x in r4["frame_parameters"]}
@@ -136,7 +173,8 @@ def main():
     assert CERT["cap_knife_edge_class_equivalence"]["projectivity_count"] == 10
 
     assert CERT["acceptance"]["golden_singleton_identification"] == "REFUTED_AS_AN_EQUIVARIANT_IDENTIFICATION"
-    assert CERT["verdict"]["x3_consequence"] == "X3 retains its abstract obstruction and C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not causation."
+    assert CERT["acceptance"]["type_correct_cross_sheet_repair"] == "GREEN_CANONICAL_SHARED_EDGE_BIJECTION"
+    assert CERT["verdict"]["x3_consequence"] == "X3 retains its abstract obstruction and C460's exact orbit-valued geometry. The failed cap-to-singleton comparison is consistency only, while the canonical cap-P-edge to shared-edge cross-sheet-pair bijection is an exact positive cap input."
     print("C447 independent replay: PASS")
 
 
