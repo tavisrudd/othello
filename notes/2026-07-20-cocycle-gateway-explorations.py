@@ -63,7 +63,17 @@ def rank_mod(M, p):
 def run(typ):
     p, orbit, oidx, sh, psl, permmats = sheets_of(typ)
     if len(sh) != 2:
-        print(f"{typ} q={p}: {len(sh)} sheet(s) (nonsplitting control); no cross-sheet design."); return
+        # A3 nonsplitting: the orbit is a one-factorization of K_{q+1} = a doily total (six labels).
+        alle = set()
+        for i in range(len(orbit)):
+            alle |= edges(orbit, i)
+        disjoint = all(len(edges(orbit, i) & edges(orbit, j)) == 0
+                       for i in range(len(orbit)) for j in range(i+1, len(orbit)))
+        npts = 2 * len(orbit[0]); tot = npts * (npts - 1) // 2
+        print(f"{typ} q={p}: {len(sh)} sheet (nonsplitting); orbit = {len(orbit)} synthemes of {npts} labels; "
+              f"pairwise disjoint={disjoint}, cover {len(alle)}/{tot} duads "
+              f"=> one-factorization of K_{npts} = doily GQ(2,2) total (G18)")
+        return
     A, B = sh; Ai = {a: k for k, a in enumerate(A)}; Bi = {b: k for k, b in enumerate(B)}
     shared = {(a, b): len(edges(orbit, a) & edges(orbit, b)) for a in A for b in B}
     print(f"{typ} q={p}: sheets {len(A)}+{len(B)}; cross-sheet shared-edge dist {dict(sorted(Counter(shared.values()).items()))}")

@@ -153,6 +153,28 @@ its value selects the sheet / vertex-facet labeling / self-duality orientation. 
 framework's wish for "a measurable cubic observable that restores a forgotten choice" is realized by
 `mu_3` on the Clebsch configuration, with the explicit `±6` readout at q=11.
 
+## Spike 6 — A3/q=5 is the doily (gateway G18), the nonsplitting endpoint of the family
+
+**Result — CHECKED.** The A3 orbit is 5 perfect matchings of `K_6` (each a *syntheme* of the 6 conic
+points). They are **pairwise disjoint** (shared-edge distribution `{0: 10}`) and together cover all 15
+duads exactly once — i.e. a **one-factorization of `K_6` = a Sylvester synthematic total = a spread of
+the doily `GQ(2,2)`**. The acting group is `PGL_2(5) ≅ S_5`, the total-stabilizer inside the outer
+`S_6` (which permutes the 6 totals). So the gateway map's G18 doily is the **A3 endpoint** — and it is
+the *nonsplitting* case (A3 has one sheet, no chirality), structurally distinct from the self-dual /
+perfect-code / chirality cases at B3 and H3.
+
+This places the whole family on one axis by the parent's relation to `PSL`:
+
+```text
+A3 q=5  (parent not in PSL, NONSPLITTING):  doily GQ(2,2) / six-label synthemes / S6 total   [no chirality]
+B3 q=7  (splitting):                         Fano plane / [7,4,3] Hamming / 11-cell? no        [chirality]
+H3 q=11 (splitting):                         11-cell / [11,6,5] ternary Golay                  [chirality]
+```
+
+So the "six labels / doily" and the "self-dual design + perfect code + chirality" are the two faces of
+the same construction, separated exactly by whether the Coxeter parent lies in `PSL_2(q)` (C406's
+nonsplitting criterion). The chirality bit exists precisely in the splitting cases.
+
 ## Synthesis — one narrative across C406–C417 and the gateway map
 
 The spikes above collapse a large part of the branch into a single picture:
