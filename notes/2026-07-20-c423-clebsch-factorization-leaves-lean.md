@@ -201,7 +201,7 @@ import-only.  The successful build log contains eleven `#check` commands from th
 and sixteen C423 `depends on axioms` records.
 
 Initial implementation commit: `21e9ce6a70858ad653fecdf2219a836fe845168f`.
-Post-fix evidence commit: `<POST_FIX_COMMIT>`.
+Post-fix evidence commit: `da07d60d6769120a8a68767fd4af66b4256da7f9`.
 
 ## Trust and exclusion boundary
 
