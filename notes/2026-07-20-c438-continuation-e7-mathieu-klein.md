@@ -8,6 +8,11 @@
 
 **Verdict:** `TWO NEW CLASSICAL HOSTS; NEITHER YET GIVES CANONICAL CROSS-FIELD RECOVERY`
 
+**Free upgrades:** `notes/2026-07-20-c438-free-signed-theta-upgrades.md` completes the common
+36-theta calculation.  It constructs the unique signed lines, proves the shared rank-one
+projector law, lifts q=11 to the existing pointed-edge cover, and records exactly which parent
+information the projector forgets.
+
 ## Executive answer
 
 The best remaining attack is no longer a direct comparison of the `8` and `6` local fibres.  It

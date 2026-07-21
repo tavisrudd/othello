@@ -1,0 +1,160 @@
+{
+  "common_theta_host": {
+    "model": "q=0 classes in even subsets of 8 modulo complementation",
+    "nonbase_tetrad_classes": 35,
+    "size": 36
+  },
+  "common_transform_law": {
+    "anti_invariant_dimension_inside_inner_invariants": 1,
+    "descended_action": "P_m -> P_m",
+    "outer_or_deck_action": "v_m -> -v_m",
+    "portable_result": "the common bridge is a rank-one signed local system/projector, not an identification of the full Hecke schemes",
+    "projectors": "P_m = v_m v_m^T / (v_m^T v_m)",
+    "q11_norm": 20,
+    "q9_norm": 14,
+    "signed_vectors": "v_m = indicator(orbit_plus) - indicator(orbit_minus)"
+  },
+  "information_verdict": {
+    "bridge": "both sides retain the same outer-anti line and invariant projector, but parent recovery still requires their existing decorations",
+    "q11": "the sign distinguishes the two pointed endpoints; forgetting the endpoint retains exactly the rank-one projector",
+    "q9": "the sign detects Frobenius orientation but does not distinguish the eight Aronhold marks over a fixed theta class"
+  },
+  "q11": {
+    "A5_by_twisted_D10_intersection_matrix": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        5
+      ],
+      [
+        0,
+        5,
+        5,
+        5,
+        0,
+        0
+      ]
+    ],
+    "descent": {
+      "deck_involution": "D10/C5 swaps endpoints and negates the signed vector",
+      "projector_is_deck_invariant": true,
+      "rank_one_projector_defined_on": "132 unpointed parent-edge flags",
+      "signed_vector_defined_on": "264 pointed parent-edge flags"
+    },
+    "edge_endpoint_swap_action_on_signed_vector": -1,
+    "golden_S5_outer_action_on_signed_vector": -1,
+    "groups": {
+      "A5": 60,
+      "C5": 5,
+      "D10": 10,
+      "S5": 120,
+      "centralizer_in_S8": 2,
+      "normalizer_in_S8": 240,
+      "normalizer_quotient_over_A5": 4,
+      "normalizer_quotient_structure": "C2 x C2"
+    },
+    "homogeneous_counts": {
+      "parents": 22,
+      "pointed_orientations_per_edge": 2,
+      "pointed_parent_edges": 264,
+      "theta_points_per_local_edge_fibre": 36,
+      "total_unpointed_edge_theta_points": 4752,
+      "unpointed_parent_edges": 132
+    },
+    "normalizer_orbit_permutation_counts": {
+      "(0, 1, 2, 3)": 120,
+      "(0, 2, 1, 3)": 120
+    },
+    "product_of_two_outer_involutions_on_signed_vector": 1,
+    "projector_over_characteristic_11": {
+      "denominator_inverse": 5,
+      "denominator_mod_characteristic": 9,
+      "idempotent": true,
+      "integer_norm": 20,
+      "rank": 1,
+      "trace": 1
+    },
+    "signed_support": [
+      10,
+      10
+    ],
+    "theta_orbits_A5": [
+      1,
+      10,
+      10,
+      15
+    ],
+    "theta_orbits_edge_twisted_D10": [
+      1,
+      5,
+      5,
+      5,
+      10,
+      10
+    ]
+  },
+  "q9": {
+    "groups": {
+      "PSL2_7": 168,
+      "outer_extension": 42,
+      "parent_7_colon_3": 21
+    },
+    "homogeneous_counts": {
+      "aronhold_marks": 288,
+      "distinct_signed_rows_on_288_marks": 36,
+      "marks_per_theta_class": 8,
+      "signed_row_multiplicity": 8,
+      "theta_classes": 36
+    },
+    "information_boundary": "the signed row descends to the 36 theta classes; the eight Aronhold marks over one class give the same row",
+    "outer_action_on_signed_vector": -1,
+    "projector_over_characteristic_3": {
+      "denominator_inverse": 2,
+      "denominator_mod_characteristic": 2,
+      "idempotent": true,
+      "integer_norm": 14,
+      "rank": 1,
+      "trace": 1
+    },
+    "signed_support": [
+      7,
+      7
+    ],
+    "theta_orbits_PSL2_7": [
+      1,
+      7,
+      7,
+      21
+    ],
+    "theta_orbits_parent_7_colon_3": [
+      1,
+      7,
+      7,
+      21
+    ]
+  },
+  "schema": "c438-free-signed-theta-upgrades-v1",
+  "trusted_input": {
+    "path": "notes/2026-07-20-c438-continuation-mathieu-gate.json",
+    "sha256": "4f9d6ff70ab80bcf51dfc3aee609f6eff58a9ec2d3541f5b61dac99286f5c8ec"
+  }
+}
