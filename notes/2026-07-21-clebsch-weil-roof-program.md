@@ -262,8 +262,22 @@ whether the size-2 P orbit corresponds to the golden singleton pair (the two C40
 fibres / their conic data) under that projectivity. Deliverable: certificate with the
 projectivity and the orbit correspondence, or a refutation, or a guardrail-3 blocker if the
 committed artifacts cannot pin the knife-edge classes. Falsifier: no correspondence ⇒ row 35
-closes negative; the advice-complexity bridge (X3) survives only in its abstract form. Model:
+closes negative; X3 retains its abstract obstruction and C460 geometry, with the cap comparison
+limited to consistency rather than causation. Model:
 Opus; **Fable gate** on the identification verdict before it is stated anywhere.
+
+**X2 OUTCOME (C447, 2026-07-21) — SHARP NEGATIVE; ROW 35 CLOSES; FABLE GATE GREEN.** The two
+committed knife-edge classes reconstruct exactly: seven on-conic children, `D10` frame stabilizer,
+and `P2+N5`, with explicit projectivities from each cap hyperbola through `XZ-Y^2` into C406's
+frozen H3 coordinates. The proposed golden identification is not equivariant. Each cap `D10`
+crosses the determinant boundary `5+5`; each singleton matching has an `A5` stabilizer wholly in
+`PSL_2(11)`; and their unordered pair has `S4` stabilizer, which has no factor five. Exhaustion
+finds zero compatible projectivities, while 120 unframed maps can force either P pair onto an edge
+of either singleton, proving bare incidence is coordinate choice. Moreover, ten projectivities
+carry the complete class-4 frame/P/N partition to class 7, so the cap pair itself supplies no
+binary label. X3 is now unblocked: retain C460's positive cloud geometry and state the cap link as
+consistency only. See `notes/2026-07-21-c447-cap-knife-edge.{md,py,json,sha256}`, `-replay.py`, and
+`notes/2026-07-21-c447-cap-knife-edge-fable-review.md`.
 
 **X3 — orbit-valued selector lemma (rows 35 + 38; after C460 and the X2 verdict).**
 Goal: state and prove the bridging lemma: at a position whose stabilizer acts on a distinguished
