@@ -7,6 +7,10 @@
 **Status:** design document, pre-allocation. No task below is allocated. Execute Phase 0 before any
 other phase. Source dossier:
 [`2026-07-21-clebsch-weil-roof-conversation-report.md`](2026-07-21-clebsch-weil-roof-conversation-report.md).
+Updated 2026-07-21 (same day): Phase 1a inserted as the critical path, de-risking the
+master stroke of
+[`2026-07-21-clebsch-master-stroke-integral-golden-model.md`](2026-07-21-clebsch-master-stroke-integral-golden-model.md);
+T1 is absorbed into M2; T10's gate moved to M2; Phase 3 gains the promotion gate.
 
 **Intended executor:** Opus-level sessions/sub-agents for all computational, literature, and
 writing tasks; escalate to Fable only at the marked verification/judgment gates and for any
@@ -37,12 +41,68 @@ other lanes' handoffs.
    consuming task, not optional. Zero-citation or absence findings need three graphs (OpenAlex,
    Crossref, Semantic Scholar).
 
+## Phase 1a — master-stroke chain (critical path, run first)
+
+De-risks the integral golden model claim by claim, cheapest and most load-bearing first. Same
+evidence-bundle rules as Phase 1. Risk register mapping: R1 bijection/twist → M1; R2 singleton
+identification → M2; R3 denominators at 11 → M3; R4 char-0 lift boundary (the 22-point `PGL`
+orbit does not lift) → M5 phrasing; R5 classical-boundary citations (Kostant, Serre, golden
+reduction folklore) → Phase 0 citation rules.
+
+**M1 — vertex-reduction bijection (the load-bearing miracle).**
+Goal: certify that the icosahedron's 12 vertices in the frozen C377/C399 integral golden
+coordinates reduce **bijectively onto `P^1(F_11)`** (the full conic) at both primes π, π̄ of
+`Z[φ]`; same for the cube's 8 vertices over `Z[sqrt 2]` at both primes above 7, and the
+octahedron's 6 vertices at 5. Method: exact reduction of the frozen integral coordinates; no new
+conventions. Deliverable: certificate + the vertex-count identity remark (`h + 2 = q + 1`).
+Falsifier: bijection fails ⇒ search the finite set of quadratic twists of the embedding for the
+repairing twist and record it; if no twist repairs, the integral model dies in its strong form
+and the master-stroke note is amended before any dependent task runs. Model: Opus. **Run before
+everything else in the program.**
+
+**M2 — antipodal uniqueness and singleton identification (absorbs T1).**
+Goal: (i) certify integrally that the antipodal matching is the unique `A5`-invariant perfect
+matching of the 12 vertices (orbit argument: vertex-pair orbits 6/30/30, only the size-6 orbit
+can be a matching); (ii) identify the two C406 singleton depth fibres as the reductions at π and
+π̄ of that one antipodal matching; (iii) run T1's covariation spec (sheet labeling and `mu_3`
+sign covary with the choice of `sqrt 5` = 4 vs 7; B3 analogue with `sqrt 2`) as the corollary
+check. Deliverable: certificate; on success this is the first certificate of the integral-model
+theorem, not a Rosetta row. Falsifier: singletons are not the reductions ⇒ claim 3 of the master
+stroke dies; T1's weaker covariation may still hold — record both outcomes separately. Model:
+Opus.
+
+**M3 — commuting-with-reduction (the subtle-failure step).**
+Goal: build the conic-quotient and moment machinery over `Z[φ, 1/N]` with 11 **not** inverted:
+integral secant products, factorization differences, `mu_1, mu_2, mu_3`; verify each commutes
+with reduction at π and π̄; exhibit `mu_3` as an integral tensor on which the golden conjugation
+acts by −1, with ±6 as its mod-π shadow. Deliverable: certificate + the exact denominator set N.
+Falsifier: an uncontrollable denominator at 11 ⇒ record exactly which construction obstructs;
+the theorem retreats to the sheet/matching level (M1–M2 claims) without the tensor clause, and
+the paper-facing statement is cut accordingly. Model: Opus; **Fable gate** on the integral-model
+formulation before coding.
+
+**M4 — silver and fused cases (uniformity).**
+Goal: B3 over `Z[sqrt 2]` at both primes above 7 (full M1–M3 analogue); A3 at 5: certify the
+fusion mechanism (5 inert ⇒ the two would-be fibers are Frobenius-conjugate over `F_25` and fuse
+over `F_5` ⇒ one sheet, no bit), reproducing C406's splitting criterion as reduction theory.
+Deliverable: uniformity certificate across all three rows of the family. Model: Opus.
+
+**M5 — the gluing statement (Fable).**
+Goal: write the exact mathematical statement of master-stroke claim 4 (the characteristic-11
+gluing of the two Galois-conjugate fibers into one `PGL_2(11)` orbit), with the char-0 lift
+boundary stated as a feature; decide which part is provable now, which belongs to paper 2's
+mechanism (Weil roof), and how the paper-1 closing theorem is phrased if M1–M3 landed.
+Deliverable: statement note feeding Phase 3's promotion gate. Model: Fable.
+
 ## Phase 1 — verification battery
 
-Ordering respects information-per-hour and dependencies. T1–T5 are the decisive week. Each spec:
+Ordering respects information-per-hour and dependencies; Phase 1a preempts this phase, and its
+outcomes may re-scope tasks here. T2–T5 remain the decisive week alongside M1–M3. T1 is absorbed
+into M2 (its spec is unchanged and executes there). Each spec:
 **Goal / Method / Deliverable / Falsifier / Model**.
 
-**T1 — spin-prime covariation (sheets = primes above q).**
+**T1 — spin-prime covariation (sheets = primes above q). [ABSORBED into M2; spec retained for
+reference and executes there.]**
 Goal: verify the sheet labeling and the sign of `mu_3` covary with the choice of `sqrt 5` in
 `F_11` (4 vs 7), and the B3 analogue with `sqrt 2` in `F_7`; exhibit the bijection
 {sheets} ↔ {primes above q} in `Z[φ]` resp. `Z[sqrt 2]` via the trace data of order-5/order-4
@@ -117,7 +177,7 @@ party-permutation trap is the first check); if inequivalent, find the lowest sep
 LU-invariant degree. Deliverable: certificate + a recommendation (quantum row vs labeled/advice
 framing). Model: Opus.
 
-**T10 — quaternion-order reduction (conditional on T1 passing).**
+**T10 — quaternion-order reduction (conditional on M2 passing).**
 Goal: certify that reducing the icosian / binary octahedral maximal orders at the two primes
 above q yields the two sheet embeddings, in the exact frozen conventions. Deliverable:
 certificate; upgrades the T1 theorem to its structural form; reframes C382's negative.
@@ -146,14 +206,20 @@ Each is a writing task with a bounded literature audit; no new computation beyon
    table with per-row status (proved / checked / dead); state the sheet-reciprocity verdict: do
    the surviving identities (T1, T4, `mu_3`) agree canonically, agree by computation only, or
    disagree? This is the load-bearing judgment of the program.
-2. **Ending design freeze.** Produce the recommended closing-section draft (table + three-beat
+2. **Promotion gate (Fable).** If M1–M3 landed: promote the integral golden model to the
+   recommended paper-1 closing theorem; the Rosetta rows become corollaries of specialization;
+   the surviving paper-2 conjecture narrows to the char-11 gluing mechanism (Weil roof; M5's
+   statement). If M1–M2 landed without M3: the closing theorem is the sheet/matching-level
+   model and the tensor clause stays a checked row. If M1 failed untwisted and unrepaired: the
+   ending reverts to the six-row table + conjecture form, and the master-stroke note is amended.
+3. **Ending design freeze.** Produce the recommended closing-section draft (table + three-beat
    cliffhanger calibrated to what actually landed; the dossier's draft paragraph is the template,
    rewritten to the surviving evidence). Deliverable: a design note. **This note is advisory: the
    manuscript decision and any edit belong to the `clebsch` lane and its handoff process.**
-3. **Program disposition.** Close or re-scope every register item (dossier §13) with an explicit
+4. **Program disposition.** Close or re-scope every register item (dossier §13) with an explicit
    verdict; append incidental observations to the lane's discovery log per conventions; update
    the crowns handoff; archive completed queue rows per the completion invariant.
-4. **Paper 2 go/no-go (Fable).** If roof sub-statements survived: scope the metaplectic paper
+5. **Paper 2 go/no-go (Fable).** If roof sub-statements survived: scope the metaplectic paper
    (canonicity theorem target, mechanism section from T2, continuation section from T5/T6) as a
    new allocation request. If the roof died: scope the refutation/boundary note instead. Either
    way the verdict is written before new generative work is permitted.
