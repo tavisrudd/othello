@@ -323,8 +323,17 @@
       "last": 459,
       "purpose": "M2 follow-ups: M0 addendum (golden six-arc co-equal sheet-carrying freeze) and Q-descent/Q-forms classification of the six-arc (C417 impossibility boundary)",
       "sequence": 36
+    },
+    {
+      "count": 1,
+      "first": 460,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 460,
+      "purpose": "Golden-Fregier cloud bridge and Weil-roof feed-forward",
+      "sequence": 37
     }
   ],
-  "next_id": 460,
+  "next_id": 461,
   "schema": "codex-task-id-allocations-v1"
 }
