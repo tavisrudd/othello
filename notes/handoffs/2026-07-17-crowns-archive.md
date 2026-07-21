@@ -91,3 +91,11 @@ that no longer belong in the live router.
 The pre-trim live handoff also carried a long completed-task allowlist and repeated theorem prose.
 Those reports remain authoritative and git history preserves the exact former snapshot; they are
 intentionally not repeated in the live state map.
+
+## 2026-07-21 — Weil-roof task-card split
+
+The 526-line execution programme was refactored into a compact shared controller plus one card per
+active C-ID. The controller retains the complete result/dependency map and universal guardrails;
+task goals, methods, inputs, acceptance objects, and falsifiers now load only with the selected
+card. Completed M0--M3/X1--X3 outcome prose remains recoverable from the reports linked above and
+from git history. Phase-2/3 framing moved to a separate card that is not routine battery context.
