@@ -1,0 +1,2517 @@
+{
+  "A3_control": {
+    "field": 5,
+    "reason": "no determinant-sheet exchange exists, so the odd families are empty and only the ambient lemma/intertwiner content survives; A3 remains the nonsplitting control"
+  },
+  "B3": {
+    "character": {
+      "generator": 3,
+      "order": 6
+    },
+    "field": 7,
+    "frame": "Coxeter frame, invariant conic X^2+Y^2+Z^2, dot polarity",
+    "intertwiner": {
+      "matchings": 14,
+      "weights": [
+        2,
+        4
+      ]
+    },
+    "lemma": {
+      "all_projective_lines_checked": 57,
+      "tangent_lines_included": true,
+      "value": "q^2 times canonical twisted delta at the self-pole [a]",
+      "weights": [
+        2,
+        4
+      ]
+    },
+    "seams": [
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              0,
+              2,
+              1,
+              7,
+              5,
+              4,
+              6,
+              3
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 2,
+            "odd_family_sha256": "be61d23a929cabb550007ac445d0b65d9224b144fc65568ed6f1d1ad99bfaab7",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              4,
+              1,
+              6,
+              7,
+              0,
+              5,
+              2,
+              3
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 2,
+            "odd_family_sha256": "be61d23a929cabb550007ac445d0b65d9224b144fc65568ed6f1d1ad99bfaab7",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              5,
+              6,
+              2,
+              7,
+              4,
+              0,
+              1,
+              3
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 2,
+            "odd_family_sha256": "be61d23a929cabb550007ac445d0b65d9224b144fc65568ed6f1d1ad99bfaab7",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 2,
+            "odd_family_sha256": "be61d23a929cabb550007ac445d0b65d9224b144fc65568ed6f1d1ad99bfaab7",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          }
+        ],
+        "seam_type": "S3"
+      },
+      {
+        "common_group_order": 8,
+        "exchanges": [
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              0,
+              5,
+              7,
+              6,
+              4,
+              1,
+              3,
+              2
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "440b55fe79dd44b8da178fdbe01f8d02c6c0ec8c8b4e7b4a2279a1dfa7b88ab4",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              3,
+              2,
+              1,
+              0,
+              6,
+              5,
+              4,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "440b55fe79dd44b8da178fdbe01f8d02c6c0ec8c8b4e7b4a2279a1dfa7b88ab4",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              4,
+              7,
+              5,
+              3,
+              0,
+              2,
+              6,
+              1
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "440b55fe79dd44b8da178fdbe01f8d02c6c0ec8c8b4e7b4a2279a1dfa7b88ab4",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              6,
+              1,
+              2,
+              4,
+              3,
+              7,
+              0,
+              5
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "440b55fe79dd44b8da178fdbe01f8d02c6c0ec8c8b4e7b4a2279a1dfa7b88ab4",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          }
+        ],
+        "seam_type": "D8"
+      },
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_directions": 2,
+            "exchange_permutation": [
+              0,
+              1,
+              3,
+              2,
+              7,
+              6,
+              5,
+              4
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 3,
+            "odd_family_sha256": "8e8cd5f5f414828206612fd1d65e488a59aecb907f978734046beccd606fb877",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          },
+          {
+            "distinct_directions": 2,
+            "exchange_permutation": [
+              1,
+              0,
+              7,
+              4,
+              3,
+              5,
+              6,
+              2
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 3,
+            "odd_family_sha256": "8e8cd5f5f414828206612fd1d65e488a59aecb907f978734046beccd606fb877",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          },
+          {
+            "distinct_directions": 2,
+            "exchange_permutation": [
+              4,
+              3,
+              2,
+              1,
+              0,
+              6,
+              5,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 3,
+            "odd_family_sha256": "8e8cd5f5f414828206612fd1d65e488a59aecb907f978734046beccd606fb877",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          },
+          {
+            "distinct_directions": 2,
+            "exchange_permutation": [
+              7,
+              2,
+              1,
+              3,
+              4,
+              6,
+              5,
+              0
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 3,
+            "odd_family_sha256": "8e8cd5f5f414828206612fd1d65e488a59aecb907f978734046beccd606fb877",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 1
+          }
+        ],
+        "seam_type": "S3"
+      },
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              0,
+              7,
+              2,
+              5,
+              6,
+              3,
+              4,
+              1
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "1dda996d95f9723af35279e035d33c37f58a8bcc106271f1ad7a5b2a38ccda88",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              2,
+              1,
+              0,
+              6,
+              5,
+              4,
+              3,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "1dda996d95f9723af35279e035d33c37f58a8bcc106271f1ad7a5b2a38ccda88",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              2,
+              3,
+              0,
+              1,
+              4,
+              7,
+              6,
+              5
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "1dda996d95f9723af35279e035d33c37f58a8bcc106271f1ad7a5b2a38ccda88",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              2,
+              6,
+              0,
+              3,
+              7,
+              5,
+              1,
+              4
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "1dda996d95f9723af35279e035d33c37f58a8bcc106271f1ad7a5b2a38ccda88",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          }
+        ],
+        "seam_type": "S3"
+      },
+      {
+        "common_group_order": 8,
+        "exchanges": [
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              0,
+              3,
+              4,
+              1,
+              2,
+              5,
+              7,
+              6
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "735ca3d619d831672953985a1a6342174068198221e666a973dbad988014c18f",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              1,
+              0,
+              6,
+              5,
+              4,
+              3,
+              2,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "735ca3d619d831672953985a1a6342174068198221e666a973dbad988014c18f",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              3,
+              5,
+              2,
+              0,
+              7,
+              1,
+              6,
+              4
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "735ca3d619d831672953985a1a6342174068198221e666a973dbad988014c18f",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 5,
+            "exchange_permutation": [
+              5,
+              1,
+              7,
+              3,
+              6,
+              0,
+              4,
+              2
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "735ca3d619d831672953985a1a6342174068198221e666a973dbad988014c18f",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          }
+        ],
+        "seam_type": "D8"
+      },
+      {
+        "common_group_order": 8,
+        "exchanges": [
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              0,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "a193711c819d79a598ae767a6288ef08f731a058e119d213a7cde2310951dc48",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              1,
+              0,
+              2,
+              3,
+              5,
+              4,
+              7,
+              6
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "a193711c819d79a598ae767a6288ef08f731a058e119d213a7cde2310951dc48",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              6,
+              7,
+              3,
+              2,
+              4,
+              5,
+              0,
+              1
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "a193711c819d79a598ae767a6288ef08f731a058e119d213a7cde2310951dc48",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              7,
+              1,
+              4,
+              5,
+              2,
+              3,
+              6,
+              0
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "a193711c819d79a598ae767a6288ef08f731a058e119d213a7cde2310951dc48",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          }
+        ],
+        "seam_type": "D8"
+      },
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              0,
+              4,
+              6,
+              3,
+              1,
+              7,
+              2,
+              5
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "19a8603f8e5d44b19b708d245617a5d85079860ee0af9afa2634cde4ddffa179",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              3,
+              1,
+              5,
+              0,
+              4,
+              2,
+              7,
+              6
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "19a8603f8e5d44b19b708d245617a5d85079860ee0af9afa2634cde4ddffa179",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              5,
+              4,
+              3,
+              2,
+              1,
+              0,
+              6,
+              7
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "19a8603f8e5d44b19b708d245617a5d85079860ee0af9afa2634cde4ddffa179",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          },
+          {
+            "distinct_directions": 4,
+            "exchange_permutation": [
+              7,
+              4,
+              2,
+              6,
+              1,
+              5,
+              3,
+              0
+            ],
+            "forward_proportionality": [
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 8,
+                "target_support": 41,
+                "transform_nonzero_where_target_zero": 16,
+                "transform_support": 49
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              },
+              {
+                "proportional": false,
+                "target_nonzero_where_transform_zero": 42,
+                "target_support": 43,
+                "transform_nonzero_where_target_zero": 0,
+                "transform_support": 1
+              }
+            ],
+            "isolation_nullity": 1,
+            "odd_family_sha256": "19a8603f8e5d44b19b708d245617a5d85079860ee0af9afa2634cde4ddffa179",
+            "odd_pole_delta_span_dimension": 2,
+            "odd_power_sum_span_dimension": 2,
+            "vanishing_odd_sections": 0
+          }
+        ],
+        "seam_type": "S3"
+      }
+    ]
+  },
+  "H3": {
+    "character": {
+      "generator": 2,
+      "order": 10
+    },
+    "field": 11,
+    "frame": "standard Veronese, conic XZ-Y^2, polar Gram pairing",
+    "golden_pairs": [
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 118,
+          "transform_nonzero_where_target_zero": 15,
+          "transform_support": 133
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 106,
+          "transform_nonzero_where_target_zero": 27,
+          "transform_support": 133
+        },
+        "matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 118,
+          "transform_nonzero_where_target_zero": 15,
+          "transform_support": 133
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 106,
+          "transform_nonzero_where_target_zero": 27,
+          "transform_support": 133
+        },
+        "matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            10
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 111,
+          "transform_nonzero_where_target_zero": 20,
+          "transform_support": 131
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 10,
+          "target_support": 101,
+          "transform_nonzero_where_target_zero": 30,
+          "transform_support": 121
+        },
+        "matching": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            10
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 111,
+          "transform_nonzero_where_target_zero": 20,
+          "transform_support": 131
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 10,
+          "target_support": 101,
+          "transform_nonzero_where_target_zero": 30,
+          "transform_support": 121
+        },
+        "matching": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            8,
+            9
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 111,
+          "transform_nonzero_where_target_zero": 20,
+          "transform_support": 131
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 10,
+          "target_support": 101,
+          "transform_nonzero_where_target_zero": 30,
+          "transform_support": 121
+        },
+        "matching": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            7,
+            8
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 118,
+          "transform_nonzero_where_target_zero": 15,
+          "transform_support": 133
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 106,
+          "transform_nonzero_where_target_zero": 27,
+          "transform_support": 133
+        },
+        "matching": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            8,
+            10
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 111,
+          "transform_nonzero_where_target_zero": 20,
+          "transform_support": 131
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 10,
+          "target_support": 101,
+          "transform_nonzero_where_target_zero": 30,
+          "transform_support": 121
+        },
+        "matching": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            10
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            9
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 111,
+          "transform_nonzero_where_target_zero": 20,
+          "transform_support": 131
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 10,
+          "target_support": 101,
+          "transform_nonzero_where_target_zero": 30,
+          "transform_support": 121
+        },
+        "matching": [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            6,
+            7
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 118,
+          "transform_nonzero_where_target_zero": 15,
+          "transform_support": 133
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 106,
+          "transform_nonzero_where_target_zero": 27,
+          "transform_support": 133
+        },
+        "matching": [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            10
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 118,
+          "transform_nonzero_where_target_zero": 15,
+          "transform_support": 133
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 106,
+          "transform_nonzero_where_target_zero": 27,
+          "transform_support": 133
+        },
+        "matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            9,
+            11
+          ]
+        ]
+      },
+      {
+        "backward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 0,
+          "target_support": 111,
+          "transform_nonzero_where_target_zero": 20,
+          "transform_support": 131
+        },
+        "forward": {
+          "proportional": false,
+          "target_nonzero_where_transform_zero": 10,
+          "target_support": 101,
+          "transform_nonzero_where_target_zero": 30,
+          "transform_support": 121
+        },
+        "matching": [
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            7,
+            9
+          ]
+        ]
+      }
+    ],
+    "intertwiner": {
+      "matchings": 22,
+      "statement": "F_r(power-sum section) = q^2 * dual pole-delta measure",
+      "weights": [
+        4,
+        6
+      ]
+    },
+    "isolation": {
+      "distinct_directions": 7,
+      "nullity": 1,
+      "statement": "moving-matching equivariance cuts the Hom space to the Fourier line on the power-sum plane",
+      "unknowns": 15,
+      "vanishing_sections": 0
+    },
+    "lemma": {
+      "all_projective_lines_checked": 133,
+      "secants_checked_at_weight_one": 66,
+      "tangent_lines_included": true,
+      "value": "q^2 times canonical twisted delta at the pole",
+      "weights": [
+        4,
+        6
+      ]
+    },
+    "odd_family_sha256": "049b78e9ca676cb79af0185803f8004fb27de60ada58c6122f8e546da11527b0",
+    "odd_pole_delta_span_dimension": 2,
+    "odd_power_sum_span_dimension": 2,
+    "odd_quotient_family_vanishes": true
+  },
+  "boundary": "No claim about the full four-dimensional odd block being spanned by matching families (they span rank-2 planes), no modular lattice comparison (C417), no seam selector, and no novelty claim; the lemma's orthogonality core is classical Gauss-sum territory.",
+  "schema": "c416-twisted-power-sum-duality-v1",
+  "theorem": "The projective twisted Fourier kernel sends every line section (chi o ell)^r to q^2 times the canonical twisted delta at the pole of ell, hence maps every matching's secant power-sum section exactly to q^2 times the dual-matching pole-delta measure; the multiplicative product/quotient sections fail the proportional functional equation in both directions and their symmetrized odd parts vanish identically; the odd power-sum and pole-delta families span rank-2 planes and the moving-matching system T p_M = lambda_M d_M has nullity exactly 1 plus one per vanishing section plus one when the nonzero sections span only two projective directions.",
+  "trusted_inputs": {
+    "2026-07-18-c341-a5-subgroup-decoder.py": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be",
+    "2026-07-19-c378-clebsch-common-duality.json": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc",
+    "2026-07-20-c406-matching-module.py": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    "2026-07-20-c406-matching-orbit-scout.json": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+  },
+  "verdict": "THEOREM; TWISTED FOURIER DIAGONALIZES LINE SECTIONS INTO GAUSS-FREE q^2 POLE DELTAS; THE MATCHING POWER-SUM SECTION MAPS TO THE DUAL-MATCHING POLE-DELTA MEASURE; THE MULTIPLICATIVE SECTION IDENTITY FAILS SHARPLY AND ITS ODD SYMMETRIZATION IS ZERO; MOVING-MATCHING EQUIVARIANCE ISOLATES THE FOURIER LINE ON THE RANK-2 POWER-SUM PLANE"
+}
