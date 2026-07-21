@@ -2,7 +2,7 @@
 
 > **LIVE MAP ONLY. DO NOT APPEND RESULTS, SESSION LOGS, REVIEW TRANSCRIPTS, OR
 > SUPERSEDED PLANS HERE.** A task row is one line. Put full task bodies and completed work in
-> [`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md) and findings in
+> `2026-07-07-codex-task-queue-archive.md` and findings in
 > the linked dated report.
 
 **Allocate every ID with the script, never by reading this file.** Run
@@ -172,5 +172,5 @@ ordering and detail.
 ## Settled work
 
 All completed rows, original rankings, amendments, and detailed task bodies are preserved in
-[`2026-07-07-codex-task-queue-archive.md`](2026-07-07-codex-task-queue-archive.md). Do not copy them
+`2026-07-07-codex-task-queue-archive.md`. Do not copy them
 back into this live registry.

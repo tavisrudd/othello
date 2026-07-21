@@ -6,15 +6,9 @@ work is dormant unless explicitly resumed.
 
 ## Short commands
 
-| Command        | Means                                                     | Detail in         |
-|----------------|-----------------------------------------------------------|-------------------|
-| `mi`           | enable intent-based mode for the rest of the session      | Intent-based mode |
-| `yc`           | “your call” — you decide when the choice is mine to make  | Intent-based mode |
-| `vb`           | “vibe check” — candid progress read, **not** Visual Basic | Intent-based mode |
-| `go <alias>`   | select that lane (a bare alias also selects it)           | Lane routing      |
-| `go C<id>`     | select that task **and its lane**                         | Startup context   |
-| `go` / `next?` | next step in the selected lane; if none, ask which        | Lane routing      |
-| `hexagon`      | spoken synonym for `clebsch`                              | Lane routing      |
+- **Intent-based mode:** `mi` enter it · `yc` your call · `vb` vibe check, not Visual Basic
+- **Lane routing:** `go <alias>` / bare alias select lane · `go` / `next?` next step, else ask
+- **Startup context:** `go C<id>` select task + lane
 
 ## Startup context: load only what the task needs
 
@@ -40,12 +34,13 @@ Live docs must not contain timelines, transcripts, validation output, or superse
 in companion archives or dated reports.
 
 Every proof/math lane keeps one append-only discovery-track companion for incidental observations
-and musings found during planned work. Discriminator — “was I looking for this?”: if yes, it is a deliverable
-for the task report/ledger/handoff, not the discovery track. Logging a lead does not allocate work,
-expand scope, or make it a handoff frontier; promotion uses the normal C-ID and lane-routing
-process. Do not preload the log; open it to record an incidental observation and review it at
-handoff. Follow [`notes/discovery-track-conventions.md`](notes/discovery-track-conventions.md) when
-creating, appending, promoting, or handing off a log.
+and musings found during planned work. Discriminator — “was I looking for this?”: if yes, it is a
+deliverable for the task report/ledger/handoff, not the discovery track. Logging a lead does not
+allocate work, expand scope, or make it a handoff frontier; promotion uses the normal C-ID and
+lane-routing process. Do not preload the log; open it to record an incidental observation and
+review it at handoff. Follow
+`notes/discovery-track-conventions.md` when creating,
+appending, promoting, or handing off a log.
 
 ### Novelty failures and adjacent-crown extraction
 
@@ -120,16 +115,16 @@ load-bearing text or formulas against the adjacent authoritative page images and
 
 When a deliverable depends on the absence of prior work — a novelty or priority verdict,
 forward-citation closure, a manuscript-bound "to our knowledge" sentence, or a pre-emption check —
-follow [`notes/literature-audit-conventions.md`](notes/literature-audit-conventions.md) for how the
+follow `notes/literature-audit-conventions.md` for how the
 search and every consulted source must be recorded.
 
 ## Research records and computational reproducibility
 
 **Claude:** follow the evidence discipline in recent C-task reports. Models:
-[`C246`](notes/2026-07-17-c246-contextual-minimality.md) for a report/script/JSON certificate
-bundle, [`C254`](notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md) for an exact sweep
+`notes/2026-07-17-c246-contextual-minimality.md` for a report/script/JSON certificate
+bundle, `notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md` for an exact sweep
 plus an independent direct-enumeration replay,
-[`C255`](notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md) for exact optima with a stated
+`notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md` for exact optima with a stated
 literature boundary. Copy their pattern: state the theorem or bounded negative cleanly, name the
 artifact supporting it, give the replay command, report exact checked counts and conventions, and
 delimit what the computation does not prove. Do not replace that evidence with a narrative of what
@@ -176,7 +171,7 @@ nonexistence claim.
 ## Lean: load the detailed rules on demand
 
 Before any Lean edit, generator run, build, staleness probe, or process intervention, read the
-nested Lean guide completely: Codex uses [`lean/AGENTS.md`](lean/AGENTS.md), and Claude uses the
+nested Lean guide completely: Codex uses `lean/AGENTS.md`, and Claude uses the
 sibling `lean/CLAUDE.md` symlink to the same file. Discussion and document review alone do not
 trigger it. Any future nested shared guide must likewise provide both names as one file plus a
 symlink; agent-specific guidance must say so explicitly instead.
