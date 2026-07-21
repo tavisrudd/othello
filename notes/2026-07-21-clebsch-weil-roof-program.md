@@ -279,14 +279,27 @@ binary label. X3 is now unblocked: retain C460's positive cloud geometry and sta
 consistency only. See `notes/2026-07-21-c447-cap-knife-edge.{md,py,json,sha256}`, `-replay.py`, and
 `notes/2026-07-21-c447-cap-knife-edge-fable-review.md`.
 
+**X2 POST-CLOSE FREE UPGRADE — GREEN TYPE-CORRECT REPAIR; FABLE ADDENDUM GATE GREEN.** The failed
+singleton target has a canonical replacement in the frozen 22-matching geometry. Exactly 66 of
+the 121 cross-sheet matching pairs share one conic edge, and every one of the 66 edges occurs
+once. Shared-edge intersection is therefore a `PGL_2(11)`-equivariant bijection, with every
+pair stabilizer equal to its edge stabilizer (`D20`, order 20). Each cap P orbit selects the
+unique cross-sheet pair sharing that edge; its frame `D10` fixes/swaps the two endpoints exactly
+when it fixes/swaps the two matchings, through the determinant character. This gives X3 an exact
+positive cap input and local one-bit advice model, but does not orient either two-set or restore
+the base/J-mate singleton claim. The construction is relative to frozen C379/C406 geometry and
+makes no novelty claim. Certified in the revised C447 bundle and its GREEN Fable review.
+
 **X3 — orbit-valued selector lemma (rows 35 + 38; after C460 and the X2 verdict).**
 Goal: state and prove the bridging lemma: at a position whose stabilizer acts on a distinguished
 child-pair through the chirality `C2` (C413/C417 data), no equivariant pointwise selector exists,
 while orbit-valued selectors evade the obstruction. Consume C460's 15-point cloud selector and
 overlap-graph recovery of the unordered sheets as the exact positive geometry; connect, with exact
-scope qualifiers, to the cap lane's C75 feature-completeness wall, L1's q=11 failures, and the q=5 antipodal-copycat
+scope qualifiers, the C447 shared-edge cross-sheet bijection, the cap lane's C75
+feature-completeness wall, L1's q=11 failures, and the q=5 antipodal-copycat
 success (canonical involution = nonsplitting case). Deliverable: a short theorem note with the
-cap-lane connection stated as consistency, not causation, unless X2 landed positive. Model:
+failed singleton connection stated as consistency only, while the shared-edge bijection is an
+exact positive orbit-valued input. Model:
 **Fable** (cross-lane theorem wording), with Opus doing any supporting checks.
 
 **X4 — C187 asymmetry via D1 (register row 37; GATED, do not start).**
