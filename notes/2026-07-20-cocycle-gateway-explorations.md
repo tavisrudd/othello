@@ -166,14 +166,21 @@ perfect-code / chirality cases at B3 and H3.
 This places the whole family on one axis by the parent's relation to `PSL`:
 
 ```text
-A3 q=5  (parent not in PSL, NONSPLITTING):  doily GQ(2,2) / six-label synthemes / S6 total   [no chirality]
-B3 q=7  (splitting):                         Fano plane / [7,4,3] Hamming / 11-cell? no        [chirality]
-H3 q=11 (splitting):                         11-cell / [11,6,5] ternary Golay                  [chirality]
+A3 q=5  (parent not in PSL, NONSPLITTING):  doily GQ(2,2) / six-label synthemes / Sylvester total  [no chirality]
+B3 q=7  (splitting):                         Fano plane 2-(7,3,1) / [7,4,3] Hamming perfect code    [chirality]
+H3 q=11 (splitting):                         11-cell 2-(11,6,3) / [11,6,5] ternary Golay perfect     [chirality]
 ```
 
 So the "six labels / doily" and the "self-dual design + perfect code + chirality" are the two faces of
 the same construction, separated exactly by whether the Coxeter parent lies in `PSL_2(q)` (C406's
 nonsplitting criterion). The chirality bit exists precisely in the splitting cases.
+
+Because A3/B3/H3 are the *complete* list of irreducible rank-3 finite Coxeter groups, this is a
+finished small statement, not a fragment of a tower: **each irreducible rank-3 Coxeter conic marker,
+at its conic phase `q = h_cox + 1`, realizes an exceptional self-dual geometry (doily / Fano /
+11-cell) whose classical code is a perfect code (—/Hamming/ternary Golay), with a chirality bit
+present exactly when the parent leaves `PSL_2(q)`.** The rank-4 continuation (`H_4`/q=31, 57-cell at
+q=19) is the genuine open frontier.
 
 ## Synthesis — one narrative across C406–C417 and the gateway map
 
