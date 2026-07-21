@@ -332,8 +332,17 @@
       "last": 460,
       "purpose": "Golden-Fregier cloud bridge and Weil-roof feed-forward",
       "sequence": 37
+    },
+    {
+      "count": 1,
+      "first": 461,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 461,
+      "purpose": "Four-companion saturated weight-line test for abstract integral cubic lift",
+      "sequence": 38
     }
   ],
-  "next_id": 461,
+  "next_id": 462,
   "schema": "codex-task-id-allocations-v1"
 }
