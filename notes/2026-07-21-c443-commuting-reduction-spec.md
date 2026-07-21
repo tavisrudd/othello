@@ -64,10 +64,19 @@ q(B[X,Y,Z])=4(XZ-Y^2).
 ```
 
 The order-60 golden reflection group `H` is exactly the hash-pinned C442/C458 group over `O_0`.
-Its orbit `V_+=H.u` must have 12 projective points.  The conjugate set is
-`V_-=sigma(V_+)`, and both lie on the same frozen conic.  The matrix `B` supplies the split-conic
-coordinates used only to scale secants canonically: for `p in V_+`, recover the unique normalized
-`[s:t]` from `B^(-1)p=[s^2:st:t^2]`; use `sigma(B)` for `V_-`.
+Let `R` be C440's frozen 12-element orbit of **primitive homogeneous** root vectors `[s:t]` in
+`E_0^2`; C440/M1 already verify that these vectors have good reduction at all four roots
+`zeta=3,4,5,9`.  Define
+
+```text
+V_+={B[s^2,st,t^2] : [s:t] in R}.
+```
+
+M3b must verify that `V_+=H.u` as a projective set and has 12 points.  The conjugate set is
+`V_-=sigma(V_+)`, and both lie on the same frozen conic.  The primitive vectors from `R`, not an
+affine chart normalization of `B^(-1)p`, are the representatives used to scale secants.  This is
+load-bearing: a point specializing to infinity may not be normalized by inverting a coordinate
+that lies above 11.
 
 On the 12 points of `V_+`, compute the `H`-orbits of perfect matchings.  Let `M_0` be the unique
 `H`-fixed polar matching.  The positive sheet `F_+` is required to be
@@ -93,15 +102,20 @@ Let `S_d(A)` denote degree-`d` ternary forms.  Freeze the lexicographic monomial
 B_d=((a,b,d-a-b): 0<=a<=d, 0<=b<=d-a)
 ```
 
-in that order.  For the standard conic endpoints `[s_i:t_i]`, use C406's exact secant scaling
+in that order.  For the standard conic endpoints given by C440's primitive vectors `[s_i:t_i]`,
+use C406's exact secant scaling
 
 ```text
 L_ij=t_i t_j X-(s_i t_j+t_i s_j)Y+s_i s_j Z.
 ```
 
 Pull `L_ij` back to the golden plane through `B^(-1)` (respectively `sigma(B)^(-1)`) and let
-`P_M` be the product of its six secants.  M3b must check, rather than assume, that all `P_M` within
-one sheet have one common restriction to `C` with this scaling and that `sigma(P_M)=P_sigma(M)`.
+`P_M` be the product of its six secants.  The product of the twelve endpoint factors is common to
+every matching.  Normalize it once, sheetwise and before taking moments, to C440's frozen Klein
+form `xy(x^10+11x^5y^5-y^10)`; the normalization divisor and its norm belong in the denominator
+ledger and must be an 11-unit.  Pointwise or matching-dependent rescaling is forbidden.  M3b must
+check, rather than assume, that all normalized `P_M` within one sheet have one common restriction
+to `C` and that `sigma(P_M)=P_sigma(M)`.
 
 The quotient construction is the integral, coefficient-one division
 
@@ -166,7 +180,8 @@ matching on P^1(F_11)  --C406 scaling-->  P_M over F_11.
 At `pi`, `F_+` must reduce to the C406 sheet containing the base singleton and `F_-` to its other
 sheet.  At `pibar` the roles must reverse.  The reduced polar matchings must be exactly C458's
 base/J-mate records.  The four `zeta` roots `3,4,5,9` must give pairwise-identical descended data
-over their common `O` prime.
+over their common `O` prime.  After the single common Klein-section normalization, the products
+must equal C406's products exactly; no per-matching scalar comparison is accepted.
 
 ### Square Q — conic division
 
