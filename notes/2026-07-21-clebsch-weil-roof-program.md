@@ -89,6 +89,14 @@ char-0 roots to conic points at each prime. Deliverable: one conventions JSON + 
 certificate. Falsifier: no integral form compatible with C377 exists ⇒ blocker note, Fable
 review of the model before M1 runs. Model: Opus.
 
+**M0 ADDENDUM REQUIRED (C458, allocated 2026-07-21, from M2/C442).** M2 proved that the frozen
+Klein binary form is *sheet-blind* (rational ⇒ `sigma`-invariant `A5` ⇒ prime-independent
+reduction): it is the correct vertex-set model but cannot carry the sheet bit. C458 promotes the
+golden six-arc + invariant anisotropic conic + polar-pair matching (already frozen de facto in
+C379) to a **co-equal frozen sheet-carrying object** under M0's JSON discipline, states the
+two-frame theorem, and records the bridge. Convention *extension*, not change: nothing frozen
+becomes wrong and M1 is untouched. Model: Opus (Fable gate on the two-frame theorem wording).
+
 **M1 — vertex-reduction bijection (the load-bearing miracle).**
 Goal: certify that the M0 vertex set reduces **bijectively onto `P^1(F_11)`** (the full conic)
 at both primes π, π̄ of `Z[φ]`; same for the cube's 8 vertices over `Z[sqrt 2]` at both primes
@@ -114,6 +122,23 @@ theorem, not a Rosetta row. Falsifier: singletons are not the reductions ⇒ cla
 stroke dies; T1's weaker covariation may still hold — record both outcomes separately. Model:
 Opus.
 
+**M2 OUTCOME (C442, 2026-07-21) — AMBER; falsifier did NOT trigger; claim 3 confirmed and exhibited
+in the golden frame.** Clause (i) GREEN (orbits 6/30/30, unique antipodal matching). Clause (ii):
+the two C406 singletons ARE the two prime-reductions of ONE golden antipodal matching — the char-0
+golden six-arc's polar-pair matching reduces to base at `pi` (`phi->8`) and J-mate at `pibar`
+(`phi->4`), exhibited by direct construction. But M0's frozen *rational* binary form is sheet-blind
+by theorem (`sigma` normalizes its `A5`, so both prime-reductions coincide), so the sheet-carrying
+object is the golden six-arc, not the binary form. Claim 4 re-scoped: the swap is the mod-11 shadow
+of the RATIONAL rotation `Rz` (spinor norm 2), outer iff 2 is a nonsquare mod `q`; purely char-11
+are the vertex collision onto one `P^1(F_q)` and the finite closure `<a5(8),a5(4)> = PSL_2(11)`.
+Clause (iii) GREEN. Corrected paper wording and five review findings are in
+`notes/2026-07-21-c442-antipodal-singleton-reduction.md`; independent review in
+`notes/2026-07-21-c442-m2-fable-review.md`. **AMBER because an M0 addendum (C458) is required to
+bind claim 3 to a frozen antecedent.** Next live entry after M2: C458 (M0 addendum, to bind), then
+C443 (M3). Also allocated from M2: **C459** — classify the `Q`-forms of the six-arc (the six-arc
+descends to `Q`; only its golden *labeling* does not — C417's sharp boundary), parallel and
+non-blocking, feeding P2e/C417 positioning.
+
 **M3 — commuting-with-reduction (the subtle-failure step; split into formulation + execution).**
 **M3a (Fable):** write the exact computational specification before any coding: the `Z[φ, 1/N]`
 lattices and bases for the quotient spaces, which constructions may invert what (11 never
@@ -132,6 +157,13 @@ Goal: B3 over `Z[sqrt 2]` at both primes above 7 (full M1–M3 analogue); A3 at 
 fusion mechanism (5 inert ⇒ the two would-be fibers are Frobenius-conjugate over `F_25` and fuse
 over `F_5` ⇒ one sheet, no bit), reproducing C406's splitting criterion as reduction theory.
 Deliverable: uniformity certificate across all three rows of the family. Model: Opus.
+**M4 DISANALOGY WARNING (from M2/C442; do NOT copy the H3 template).** For H3 the bit-carrier is
+the golden `A5`-*embedding* (the group), the rational vertex form being sheet-blind. For B3 this
+DUALIZES: the group `S4` is rational and sheet-blind while the *form* (`7 sqrt2` middle
+coefficient) is silver — the bit lives in the form/labeling and the spin cover `2.S4`, not the
+group-embedding. M4 must be specified against this dualization. The rational skeleton of the H3
+golden pair is itself the cube group (B3 inside H3), so B3 is the sheet-blind core of H3, not a
+parallel copy. (See finding 3 of `notes/2026-07-21-c442-antipodal-singleton-reduction.md`.)
 
 **M5 — the gluing statement (Fable).**
 Goal: write the exact mathematical statement of master-stroke claim 4 (the characteristic-11
@@ -139,6 +171,14 @@ gluing of the two Galois-conjugate fibers into one `PGL_2(11)` orbit), with the 
 boundary stated as a feature; decide which part is provable now, which belongs to paper 2's
 mechanism (Weil roof), and how the paper-1 closing theorem is phrased if M1–M3 landed.
 Deliverable: statement note feeding Phase 3's promotion gate. Model: Fable.
+**M5 INPUTS FROM M2/C442 (claim 4 already re-scoped; two candidate germs).** The swap element is
+NOT char-11: it is the mod-`q` shadow of the rational rotation `Rz` (spinor norm 2), outer iff 2 is
+a nonsquare mod `q`. Purely char-11: the vertex collision onto one `P^1(F_q)` at `q = h+1`, and the
+finite closure `<a5(8),a5(4)> = PSL_2(11)`. Mechanism in one phrase: char-11 gluing = splitting of
+the icosahedral quaternion (Schur-index-2) obstruction at 11. Candidate germs for the integral
+gluing certificate: (a) the `sigma`-stable **perpendicularity pairing** between the two sheets' axis
+systems (prime-independent, available before any char-11 choice); (b) the two-frame/quaternion
+mechanism above. (See findings 4–5 of `notes/2026-07-21-c442-antipodal-singleton-reduction.md`.)
 
 ## Phase 1b — cap-bridge chain (parallel, non-blocking)
 
@@ -252,6 +292,14 @@ mean and whether any part is decidable by order/character arithmetic now. Delive
 prediction note (feeds cliffhanger beat 2); explicitly labels everything conditional. Falsifier:
 none (this task only sharpens predictions); it must not silently become construction work.
 Model: Opus.
+**T6 INPUT FROM M2/C442 — the `(2/p)` sheet-fidelity law (verified, six primes).** The bit is
+PSL-visible iff 2 is a nonsquare mod `p`; verified distinct at `p = 11, 19, 29, 59` and **FUSED at
+`31` and `41`**. So the H4/600-cell cliffhanger prime `31` is a **fusion prime at the H3 level** —
+`31 ≡ 1 mod 5` gives the bit, but 2 is a *square* mod 31 so the H3 sheets fuse in `PSL`. The
+"why 11" story is now three simultaneous conditions (splits in `Q(sqrt5)`; 2 nonsquare mod `p`;
+`q = h+1`); the composite is a Chebotarev class in `Q(sqrt2, sqrt5)`. T6 owns proving/evaluating
+the law; the finding is verified in `notes/2026-07-21-c442-m2-fable-review.md`. This directly
+re-shapes cliffhanger beat 2 (the 31 prophecy) — surface the fusion before that paragraph is drafted.
 
 **T7 — Klein-invariant probe.**
 Goal: decompose the H3 quotient module `W` over char 0 and `F_11` as a `PSL_2(11)`-module;

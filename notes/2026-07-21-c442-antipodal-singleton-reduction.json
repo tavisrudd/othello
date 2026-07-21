@@ -1,0 +1,394 @@
+{
+  "boundary_not_certified_here": [
+    "the char-11 gluing of the two sheets into one PGL_2(11) orbit as an integral statement (M5)",
+    "commuting-with-reduction of mu1,mu2,mu3 and the denominator set N (M3)",
+    "the full B3 sqrt2 and A3 inert-fusion sheet reduction theory (M4)",
+    "an integral (Z[phi]) construction of the golden six-arc's antipodal matching reducing to base at pi and jmate at pibar -- exhibited here at the reduced (F_11) level via a5(8)/a5(4); a char-0 Z[phi] lift is deferred/M5."
+  ],
+  "clause_i_antipodal_uniqueness": {
+    "antipodal_matching_index_pairs": [
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        2,
+        11
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        8,
+        9
+      ]
+    ],
+    "is_perfect_matching": true,
+    "num_A5_invariant_perfect_matchings": 1,
+    "orbit_size_meaning": {
+      "30a": "icosahedron edges",
+      "30b": "short diagonals",
+      "6": "antipodal axes"
+    },
+    "pair_orbit_sizes": [
+      6,
+      30,
+      30
+    ],
+    "unique": true,
+    "uniqueness_argument": "An A5-invariant perfect matching is an A5-invariant 6-subset of vertex-pairs, hence a union of A5-orbits of pairs.  The 66 = C(12,2) pairs form exactly three A5-orbits of sizes 6 (antipodal axes), 30 (icosahedron edges), 30 (short diagonals).  Only the size-6 orbit is itself a perfect matching (6 disjoint pairs covering all 12 vertices); no union including a size-30 orbit has 6 pairs.  Hence the antipodal matching is the unique A5-invariant perfect matching."
+  },
+  "clause_ii_singleton_identification": {
+    "binary_form_frame_M0_frozen": {
+      "M0_at_pi": [
+        [
+          "0",
+          "inf"
+        ],
+        [
+          "1",
+          "6"
+        ],
+        [
+          "10",
+          "9"
+        ],
+        [
+          "2",
+          "4"
+        ],
+        [
+          "3",
+          "7"
+        ],
+        [
+          "5",
+          "8"
+        ]
+      ],
+      "M0_at_pibar": [
+        [
+          "0",
+          "inf"
+        ],
+        [
+          "1",
+          "6"
+        ],
+        [
+          "10",
+          "9"
+        ],
+        [
+          "2",
+          "4"
+        ],
+        [
+          "3",
+          "7"
+        ],
+        [
+          "5",
+          "8"
+        ]
+      ],
+      "M0_pgl_orbit_size": 22,
+      "M0_pgl_stabilizer_order": 60,
+      "M0_psl_orbit_size": 11,
+      "M0_stabilizer_in_PSL": true,
+      "M0_stabilizer_is_reduced_golden_A5": true,
+      "conclusion": "In M0's frozen binary-form frame the two C406 singletons are NOT the two prime-reductions (those coincide, = M0): ONE singleton is the prime-independent reduction M0, the OTHER is its image under the characteristic-11 outer element J (det non-square) -- exactly master-stroke claim 4 (char-11 gluing).  Claim 3's literal 'two reductions' fails here.",
+      "frame_bridge_projectivities_to_C406_base": 60,
+      "frame_bridge_projectivities_to_C406_jmate": 60,
+      "reason": "reduce_pibar = reduce_pi o sigma, and sigma (golden conjugation, zeta5->zeta5^2) NORMALIZES the char-0 A5 (sigma(S)=S^2 in A5; sigma(T) in A5), hence fixes the unique A5-invariant matching (clause i).  So both prime-reductions of the ONE antipodal matching give the SAME matching M0 -- the binary form f is rational (sigma-invariant) and cannot separate the two sheets at the matching level.",
+      "sigma_S_in_A5": true,
+      "sigma_S_is_S_squared": true,
+      "sigma_T_in_A5": true,
+      "two_prime_reductions_coincide": true
+    },
+    "char0_golden_exhibition": {
+      "A5_frames_distinct_intersection_order": 12,
+      "CRUX_reduce_pi_equals_C406_base": true,
+      "CRUX_reduce_pi_golden_matching": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          10,
+          "inf"
+        ]
+      ],
+      "CRUX_reduce_pibar_equals_C406_jmate": true,
+      "CRUX_reduce_pibar_golden_matching": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          "inf"
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          6,
+          9
+        ]
+      ],
+      "char0_conjugate_closure_order": 60,
+      "char0_golden_reflection_closure_order": 60,
+      "char11_collision_disjoint_char0_reduce_onto_one_P1": true,
+      "char11_finite_closure_a5_8_a5_4_order": 660,
+      "char11_finite_closure_is_PSL_2_11": true,
+      "golden_A5_permutes_golden_six_arc": true,
+      "golden_and_conjugate_six_arcs_disjoint": true,
+      "rational_transporter_Rz_conjugates_A5": true,
+      "rational_transporter_Rz_maps_six_arc": true,
+      "reduce_pi_gives_a5_8": true,
+      "reduce_pi_of_sigma_equals_reduce_pibar": true,
+      "reduce_pibar_gives_a5_4": true,
+      "sigma_maps_golden_A5_to_conjugate_A5": true,
+      "sigma_maps_golden_six_arc_to_conjugate": true,
+      "statement": "Claim 3 EXHIBITED (not inferred): the char-0 golden six-arc over Q(phi) (C379's reflection/six-arc formulas at tau=phi; closure order 60) has polar-pair antipodal matching that reduces at pi (phi->8) to C406's BASE and at pibar (phi->4) to C406's J-MATE; sigma exchanges the two reductions and is implemented over Q by the rational rotation Rz (90 deg about z).  The two reduced sheets generate exactly PSL_2(11) (order 660); what is purely char-11 is the collision (disjoint char-0 vertex sets forced onto one P^1(F_11) at q=h+1) and this finite closure, NOT the swap element."
+    },
+    "golden_six_arc_frame_reduced": {
+      "a5_4_matching_equals_C406_jmate": true,
+      "a5_4_order": 60,
+      "a5_4_unique_invariant_matching": [
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          "inf"
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          6,
+          9
+        ]
+      ],
+      "a5_8_a5_4_distinct": true,
+      "a5_8_a5_4_intersection_order": 12,
+      "a5_8_matching_equals_C406_base": true,
+      "a5_8_order": 60,
+      "a5_8_unique_invariant_matching": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          10,
+          "inf"
+        ]
+      ],
+      "conclusion": "In the golden six-arc frame claim 3 HOLDS: the two DISTINCT sheets a5(8) (sqrt5=4, pi) and a5(4) (sqrt5=7, pibar) have unique invariant matchings equal to C406's base and J-mate singletons, and sigma swaps them.  The two prime-reductions of the one (golden) antipodal matching ARE the two singletons.",
+      "golden_conjugation_link": "roots(tau) is built from tau and tau-1; golden conjugation sigma sends tau=8 <-> tau=4 (phi: 8<->4, sqrt5: 4<->7), so roots(8) (using 8,7) <-> roots(4) (using 4,3) and sigma(a5(8)) = a5(4).  The two sheets ARE golden-conjugate in the six-arc frame.",
+      "roots_tau4_sample": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          8
+        ],
+        [
+          1,
+          4,
+          3
+        ]
+      ],
+      "roots_tau8_sample": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          3,
+          7
+        ]
+      ]
+    },
+    "synthesis": "Master-stroke claim 3 holds in the GOLDEN six-arc frame and is EXHIBITED at char 0 (char0_golden_exhibition): the one golden antipodal matching reduces to C406 base at pi and J-mate at pibar.  It COLLAPSES in M0's frozen rational binary-form frame (the two prime-reductions coincide, being sigma-symmetric -- sheet-blind by theorem, not accident).  The sheet-carrying integral object is the golden six-arc, not Klein's rational binary form.  Claim 4 re-scoped (Fable ruling B): the swap element is the char-11 shadow of the RATIONAL rotation Rz (spinor norm 2), outer precisely because 2 is a nonsquare mod 11; purely char-11 are the vertex collision onto one P^1(F_11) and the finite closure <a5(8),a5(4)> = PSL_2(11)."
+  },
+  "clause_iii_T1_covariation": {
+    "B3_analogue": "The silver analogue uses sqrt2 = 3 vs 4 in F_7 (7 = (3-sqrt2)(3+sqrt2)); the cube sheets and their outer sign covary with the sqrt2 choice by the same mechanism.  The full B3 sheet reduction theory is owned by M4 (C444).",
+    "mu3_negates_under_sqrt5_swap": true,
+    "note_sigma_odd": "mu_3 is Galois-ODD: sigma (which swaps the sheets in the golden frame) negates it, consistent with the covariation.  In the rational binary-form frame sigma fixes the single matching M0 but the mu_3 sign is not even defined there without the golden sqrt5 datum -- another symptom that the sheet/mu_3 structure lives in the golden embedding.",
+    "sheet_and_mu3_sign_covary_as_one_bit": true,
+    "statement": "Choosing sqrt5 in {4,7} (equivalently the prime pi/pibar, tau=8/4) simultaneously selects the sheet (a5(8) vs a5(4)), its reference singleton matching (base vs J-mate), and the mu_3 sign (leading depth coordinate -6 vs +6, D(jmate) = -D(base) over Z).  Sheet labeling and mu_3 sign covary as one bit -- the chirality torsor is the Kummer torsor of the spin discriminant sqrt5.",
+    "table": [
+      {
+        "mu3_D_profile": [
+          -6,
+          0,
+          12,
+          -12
+        ],
+        "mu3_leading_sign": -6,
+        "prime": "pi",
+        "reference_singleton": "base",
+        "sheet": "a5(8)/sheet0",
+        "sqrt5": 4,
+        "tau": 8
+      },
+      {
+        "mu3_D_profile": [
+          6,
+          0,
+          -12,
+          12
+        ],
+        "mu3_leading_sign": 6,
+        "prime": "pibar",
+        "reference_singleton": "jmate",
+        "sheet": "a5(4)/sheet1",
+        "sqrt5": 7,
+        "tau": 4
+      }
+    ]
+  },
+  "consumes": {
+    "2026-07-19-c379-clebsch-deep-hole-extension-replay.py": {
+      "bytes": 14727,
+      "sha256": "515d45ee2a30a9381c446c035ff7cea7ae4c919faa1a3d3db205ee40a6e522f8"
+    },
+    "2026-07-20-c399-coxeter-number-conic-phase.py": {
+      "bytes": 25983,
+      "sha256": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275"
+    },
+    "2026-07-20-c406-matching-module.json": {
+      "bytes": 21996,
+      "sha256": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2"
+    },
+    "2026-07-21-c440-conventions-freeze.json": {
+      "bytes": 6436,
+      "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+    },
+    "2026-07-21-c440-conventions-freeze.py": {
+      "bytes": 29193,
+      "sha256": "8dd5a690129f8437a447d40df4e6cdac8f47fcf481987b95bfe817c074af6bb7"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.py": {
+      "bytes": 32375,
+      "sha256": "908e3afe8ba755b112349e8fc57fc20768555bb3d0df25fa36612696270adb0f"
+    },
+    "note": "M0 forms/generators consumed verbatim (hash-checked vs M0 manifest); C406 singleton D-profiles consumed by SHA; C379/C399 provide the reflection groups a5(tau) and conic points; no new conventions introduced (guardrail 2)."
+  },
+  "review_findings_noted_in_report_and_program": {
+    "note": "Findings opened during the Fable review (notes/2026-07-21-c442-m2-fable-review.md), recorded in the M2 report and folded into the Weil-roof program plan per user direction; each has a follow-up disposition (new task or xref to a downstream task spec).",
+    "perpendicularity_pairing": "a sigma-stable (hence prime-independent) canonical bijection between the two sheets' axis systems.  Follow-up: xref into M5 spec as the gluing germ.",
+    "rational_skeleton_is_octahedral_B3_disanalogy": "the rational skeleton of the golden pair is the cube group (B3 inside H3); for B3 the GROUP is rational/sheet-blind while the FORM is silver -- the bit-carrier dualizes.  Follow-up: xref into M4 spec (M4 must NOT copy the H3 template).",
+    "sheet_fidelity_2_over_p_law": "sheets are PSL-distinct iff 2 is a nonsquare mod p; verified p=11,19,29,31,41,59 (distinct at 11,19,29,59; FUSED at 31,41).  q=11 is special three times: splits in Q(sqrt5), 2 nonsquare mod 11, q=h+1.  The H4/600-cell cliffhanger prime 31 FUSES the H3 sheets.  Follow-up: xref into T6 spec + Phase-3 cliffhanger.",
+    "six_arc_descends_to_Q": "the six-arc configuration has a Q-rational model (Hilbert 90); C417's impossibility is about the golden LABELING, not the object.  Follow-up: new task (Q-forms classification) + xref into P2e/C417 positioning.",
+    "two_frame_quaternion_mechanism": "char-11 gluing = splitting of the icosahedral quaternion (Schur-index-2) obstruction at 11.  Follow-up: xref into M5 + the M0 addendum task."
+  },
+  "schema": "c442-antipodal-singleton-reduction-v1",
+  "task": "C442 / Weil-roof battery M2 -- antipodal-matching uniqueness and singleton identification (absorbs T1)",
+  "trusted_boundary": "exact arithmetic in Q(zeta5) (M0/C441 field code) and F_11; the A5, roots, reflection groups a5(8)/a5(4) and 12 conic points are recomputed from frozen machinery, not assumed.",
+  "verdict": "AMBER -- claim 3 CONFIRMED and exhibited directly in the golden six-arc frame (char-0 golden antipodal matching reduces to C406 base at pi and J-mate at pibar); clause (i) uniqueness and clause (iii) covariation GREEN; but M0's frozen rational binary-form model is sheet-blind by theorem (its two prime-reductions coincide), so an M0 ADDENDUM promoting the golden six-arc to a co-equal frozen sheet-carrying object is required before the certificate binds claim 3 to a frozen antecedent.  The M2 falsifier did NOT trigger: the two singletons ARE the two reductions of one (golden) antipodal matching.  Independent Fable review: notes/2026-07-21-c442-m2-fable-review.md."
+}
