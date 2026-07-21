@@ -379,6 +379,10 @@ and the table is the paper.
 | 32 | Char-0 form of the sheets: two conjugate `A5`-invariant one-factorizations of the icosahedron over `Q(sqrt 5)` (strengthens M2) | SPECULATIVE | hours      |
 | 33 | M1's reduction statement is likely Edge/Klein-classical; the integral model's novelty rests on the memory-spine identification | calibration | lit check  |
 | 34 | Rank-2 floor: `I2(m)` conic phases (`H2` pentagon at q=11 inside the H3 story) | DECORATION  | hours      |
+| 35 | Cap-lane selector wall = one-bit theorem: q=11 knife-edge size-2 P orbit is the golden pair; orbit-valued-selectors-only as a C417 consequence | SPECULATIVE | hours      |
+| 36 | Are the 22 H3 matchings concurrent (exterior-point pencil) matchings? Sheets as two `PSL` orbits of intruders; golden skeleton for cap intrusion calculus | SPECULATIVE | afternoon  |
+| 37 | D1's octahedral/tetrahedral all-q uncovered formulas would explain C187's {5,11}-not-7 filling asymmetry (cross-lane with `cap`) | REASONED    | with D1    |
+| 38 | q=5 copycat works / q=11 mirrors fail = nonsplitting/splitting divide; mirror failure at 11 as cocycle obstruction | SPECULATIVE | days       |
 
 PROVED* = follows from committed certificates plus definitions/framing; still needs its bounded
 literature audit before any "no prior instance" wording.
