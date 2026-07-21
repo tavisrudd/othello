@@ -2,6 +2,8 @@ import RelativeConicArcs.ClebschConicMatchingQuotient
 import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 import Mathlib.RingTheory.MvPolynomial.Basic
 import Mathlib.Algebra.Field.ZMod
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.Finsupp.Supported
 
 /-!
 # The conic Laplacian and the low-degree harmonic/radial decomposition
@@ -236,8 +238,113 @@ section Decomposition
 
 variable {K : Type*} [Field K]
 
+/-! ### Dimensions of the homogeneous pieces -/
+
+/-- Bounded exponent triples of total degree `d`.  The bound makes this a computationally finite
+model of the monomials in three variables of degree `d`. -/
+def BoundedExponents (d : ℕ) := {e : Fin 3 → Fin (d + 1) // ∑ i, (e i).val = d}
+  deriving Fintype
+
+/-- Exponent vectors of total degree `d` are equivalent to bounded exponent triples. -/
+noncomputable def homogeneousExponentEquiv (d : ℕ) :
+    {e : Fin 3 →₀ ℕ // e.degree = d} ≃ BoundedExponents d where
+  toFun e := ⟨fun i => ⟨e.1 i, by
+    have hi : e.1 i ≤ ∑ j, e.1 j :=
+      Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ i)
+    rw [← Finsupp.degree_eq_sum, e.2] at hi
+    omega⟩, by
+      simpa [BoundedExponents, ← Finsupp.degree_eq_sum] using e.2⟩
+  invFun e := ⟨Finsupp.equivFunOnFinite.symm (fun i => (e.1 i).val), by
+    rw [Finsupp.degree_eq_sum]
+    simpa [BoundedExponents] using e.2⟩
+  left_inv e := by
+    apply Subtype.ext
+    ext i
+    simp
+  right_inv e := by
+    apply Subtype.ext
+    funext i
+    apply Fin.ext
+    simp
+
+/-- The degree-`d` homogeneous piece has the monomial-coordinate model indexed by the bounded
+exponent triples of total degree `d`. -/
+noncomputable def homogeneousLinearEquiv (d : ℕ) :
+    homogeneousSubmodule (Fin 3) K d ≃ₗ[K] BoundedExponents d →₀ K := by
+  rw [homogeneousSubmodule_eq_finsupp_supported]
+  exact Finsupp.supportedEquivFinsupp {e : Fin 3 →₀ ℕ | e.degree = d} ≪≫ₗ
+    Finsupp.domLCongr (homogeneousExponentEquiv d)
+
+/-- Each bounded-degree homogeneous piece in three variables is finite-dimensional. -/
+noncomputable instance finiteDimensionalHomogeneous (d : ℕ) :
+    FiniteDimensional K (homogeneousSubmodule (Fin 3) K d) :=
+  FiniteDimensional.of_injective (homogeneousLinearEquiv d).toLinearMap
+    (homogeneousLinearEquiv d).injective
+
+/-- The dimension of the degree-`d` homogeneous piece is the number of bounded exponent triples of
+total degree `d`. -/
+theorem finrank_homogeneous (d : ℕ) :
+    Module.finrank K (homogeneousSubmodule (Fin 3) K d) = Fintype.card (BoundedExponents d) := by
+  rw [(homogeneousLinearEquiv (K := K) d).finrank_eq, Module.finrank_finsupp_self]
+
+/-- There is one ternary monomial of degree zero. -/
+theorem finrank_homogeneous_zero :
+    Module.finrank K (homogeneousSubmodule (Fin 3) K 0) = 1 := by
+  rw [finrank_homogeneous]
+  native_decide
+
+/-- There are three ternary monomials of degree one. -/
+theorem finrank_homogeneous_one :
+    Module.finrank K (homogeneousSubmodule (Fin 3) K 1) = 3 := by
+  rw [finrank_homogeneous]
+  native_decide
+
+/-- There are six ternary monomials of degree two. -/
+theorem finrank_homogeneous_two :
+    Module.finrank K (homogeneousSubmodule (Fin 3) K 2) = 6 := by
+  rw [finrank_homogeneous]
+  native_decide
+
+/-- There are fifteen ternary monomials of degree four. -/
+theorem finrank_homogeneous_four :
+    Module.finrank K (homogeneousSubmodule (Fin 3) K 4) = 15 := by
+  rw [finrank_homogeneous]
+  native_decide
+
 /-- A polynomial is **harmonic** for the conic Laplacian when `Δ` annihilates it. -/
 def IsHarmonic (P : MvPolynomial (Fin 3) K) : Prop := lapl K P = 0
+
+/-- The conic Laplacian restricted from the degree-`d` homogeneous piece to degree `d - 2`. -/
+noncomputable def laplHomogeneous (d : ℕ) :
+    homogeneousSubmodule (Fin 3) K d →ₗ[K] homogeneousSubmodule (Fin 3) K (d - 2) where
+  toFun P := ⟨lapl K P.1, lapl_isHomogeneous P.2⟩
+  map_add' P S := Subtype.ext (map_add (lapl K) P.1 S.1)
+  map_smul' c P := Subtype.ext (map_smul (lapl K) c P.1)
+
+/-- Multiplication by the conic embeds the degree-`d` homogeneous piece into the radial part of
+degree `d + 2`. -/
+noncomputable def conicMulHomogeneous (d : ℕ) :
+    homogeneousSubmodule (Fin 3) K d →ₗ[K] homogeneousSubmodule (Fin 3) K (d + 2) where
+  toFun P := ⟨conic K * P.1, by simpa [Nat.add_comm] using conic_isHomogeneous.mul P.2⟩
+  map_add' P S := Subtype.ext (mul_add (conic K) P.1 S.1)
+  map_smul' c P := Subtype.ext (mul_smul_comm c (conic K) P.1)
+
+/-- Multiplication by the nonzero conic polynomial is injective over a field. -/
+theorem conicMulHomogeneous_injective (d : ℕ) :
+    Function.Injective (conicMulHomogeneous (K := K) d) := by
+  intro P S hPS
+  apply Subtype.ext
+  exact mul_left_cancel₀ conic_ne_zero (Subtype.ext_iff.mp hPS)
+
+/-- The radial degree-two subspace has dimension one. -/
+theorem finrank_radial_two :
+    Module.finrank K (LinearMap.range (conicMulHomogeneous (K := K) 0)) = 1 := by
+  rw [LinearMap.finrank_range_of_inj (conicMulHomogeneous_injective 0), finrank_homogeneous_zero]
+
+/-- The radial degree-four subspace has dimension six. -/
+theorem finrank_radial_four :
+    Module.finrank K (LinearMap.range (conicMulHomogeneous (K := K) 2)) = 6 := by
+  rw [LinearMap.finrank_range_of_inj (conicMulHomogeneous_injective 2), finrank_homogeneous_two]
 
 /-- **Degree one: everything is harmonic.**  Every homogeneous polynomial of degree one lies in the
 kernel of the conic Laplacian; the radial part is zero. -/
@@ -307,6 +414,81 @@ theorem radial_eq_zero_four {R' : MvPolynomial (Fin 3) K} (h : R'.IsHomogeneous 
   rw [hlaplR, mul_zero, add_zero] at hker
   exact (smul_eq_zero.mp hker).resolve_left h14
 
+/-! ### Dimensions of the harmonic pieces -/
+
+/-- When `6 ≠ 0`, the Laplacian maps the degree-two homogeneous piece onto the constants. -/
+theorem laplHomogeneous_surjective_two (h6 : (6 : K) ≠ 0) :
+    Function.Surjective (laplHomogeneous (K := K) 2) := by
+  intro c
+  have hc : ((6 : K)⁻¹ • c.1).IsHomogeneous 0 := smul_isHomogeneous _ c.2
+  refine ⟨⟨conic K * ((6 : K)⁻¹ • c.1), by simpa using conic_isHomogeneous.mul hc⟩, ?_⟩
+  apply Subtype.ext
+  change lapl K (conic K * ((6 : K)⁻¹ • c.1)) = c.1
+  rw [lapl_conic_mul_homog_zero hc, smul_smul, mul_inv_cancel₀ h6, one_smul]
+
+/-- When `14,20 ≠ 0`, the Laplacian maps the degree-four homogeneous piece onto the degree-two
+piece. -/
+theorem laplHomogeneous_surjective_four (h14 : (14 : K) ≠ 0) (h20 : (20 : K) ≠ 0) :
+    Function.Surjective (laplHomogeneous (K := K) 4) := by
+  intro S
+  have hT : (lapl K S.1).IsHomogeneous 0 := lapl_isHomogeneous S.2
+  set R' : MvPolynomial (Fin 3) K :=
+    (14 : K)⁻¹ • S.1 - ((14 : K)⁻¹ * (20 : K)⁻¹) • (conic K * lapl K S.1) with hR'
+  have hR'h : R'.IsHomogeneous 2 :=
+    (smul_isHomogeneous _ S.2).sub (smul_isHomogeneous _ (conic_isHomogeneous.mul hT))
+  refine ⟨⟨conic K * R', by simpa using conic_isHomogeneous.mul hR'h⟩, ?_⟩
+  apply Subtype.ext
+  change lapl K (conic K * R') = S.1
+  rw [lapl_conic_mul_homog_two hR'h]
+  have hLR : lapl K R' =
+      (14 : K)⁻¹ • lapl K S.1
+        - ((14 : K)⁻¹ * (20 : K)⁻¹) • ((6 : K) • lapl K S.1) := by
+    rw [hR', map_sub, map_smul, map_smul, lapl_conic_mul_homog_zero hT]
+  rw [hR', hLR]
+  calc
+    (14 : K) •
+          ((14 : K)⁻¹ • S.1
+            - ((14 : K)⁻¹ * (20 : K)⁻¹) • (conic K * lapl K S.1))
+        + conic K *
+          ((14 : K)⁻¹ • lapl K S.1
+            - ((14 : K)⁻¹ * (20 : K)⁻¹) • ((6 : K) • lapl K S.1)) =
+      ((14 : K) * (14 : K)⁻¹) • S.1
+        + ((14 : K)⁻¹ - ((14 : K)⁻¹ * (20 : K)⁻¹) * 20) •
+          (conic K * lapl K S.1) := by
+      simp only [smul_sub, smul_smul, mul_sub, mul_smul_comm]
+      module
+    _ = S.1 := by
+      rw [mul_inv_cancel₀ h14, one_smul, mul_assoc, inv_mul_cancel₀ h20, mul_one,
+        sub_self, zero_smul, add_zero]
+
+/-- The degree-one harmonic space has dimension three. -/
+theorem finrank_harmonic_one :
+    Module.finrank K (LinearMap.ker (laplHomogeneous (K := K) 1)) = 3 := by
+  have hzero : laplHomogeneous (K := K) 1 = 0 := by
+    apply LinearMap.ext
+    intro P
+    apply Subtype.ext
+    exact lapl_of_isHomogeneous_one P.2
+  rw [hzero, LinearMap.ker_zero, finrank_top, finrank_homogeneous_one]
+
+/-- When `6 ≠ 0`, the degree-two harmonic space has dimension five. -/
+theorem finrank_harmonic_two (h6 : (6 : K) ≠ 0) :
+    Module.finrank K (LinearMap.ker (laplHomogeneous (K := K) 2)) = 5 := by
+  have hrange : LinearMap.range (laplHomogeneous (K := K) 2) = ⊤ :=
+    LinearMap.range_eq_top.mpr (laplHomogeneous_surjective_two h6)
+  have hdim := LinearMap.finrank_range_add_finrank_ker (laplHomogeneous (K := K) 2)
+  rw [hrange, finrank_top, finrank_homogeneous_zero, finrank_homogeneous_two] at hdim
+  omega
+
+/-- When `14,20 ≠ 0`, the degree-four harmonic space has dimension nine. -/
+theorem finrank_harmonic_four (h14 : (14 : K) ≠ 0) (h20 : (20 : K) ≠ 0) :
+    Module.finrank K (LinearMap.ker (laplHomogeneous (K := K) 4)) = 9 := by
+  have hrange : LinearMap.range (laplHomogeneous (K := K) 4) = ⊤ :=
+    LinearMap.range_eq_top.mpr (laplHomogeneous_surjective_four h14 h20)
+  have hdim := LinearMap.finrank_range_add_finrank_ker (laplHomogeneous (K := K) 4)
+  rw [hrange, finrank_top, finrank_homogeneous_two, finrank_homogeneous_four] at hdim
+  omega
+
 /-! ### Characteristic obstructions to the degree-four decomposition
 
 When a radial ladder scalar vanishes, the harmonic and radial subspaces of the degree-four space
@@ -359,6 +541,21 @@ theorem decomposition_two_zmod11 {P : MvPolynomial (Fin 3) (ZMod 11)} (h : P.IsH
     ∃ H R', P = H + conic (ZMod 11) * R' ∧ IsHarmonic H ∧ H.IsHomogeneous 2 ∧ R'.IsHomogeneous 0 :=
   decomposition_two h (by decide)
 
+/-- The degree-two harmonic space over `𝔽₅` has dimension five. -/
+theorem finrank_harmonic_two_zmod5 :
+    Module.finrank (ZMod 5) (LinearMap.ker (laplHomogeneous (K := ZMod 5) 2)) = 5 :=
+  finrank_harmonic_two (by decide)
+
+/-- The degree-two harmonic space over `𝔽₇` has dimension five. -/
+theorem finrank_harmonic_two_zmod7 :
+    Module.finrank (ZMod 7) (LinearMap.ker (laplHomogeneous (K := ZMod 7) 2)) = 5 :=
+  finrank_harmonic_two (by decide)
+
+/-- The degree-two harmonic space over `𝔽₁₁` has dimension five. -/
+theorem finrank_harmonic_two_zmod11 :
+    Module.finrank (ZMod 11) (LinearMap.ker (laplHomogeneous (K := ZMod 11) 2)) = 5 :=
+  finrank_harmonic_two (by decide)
+
 /-- Degree-four decomposition over `𝔽₁₁` (existence). -/
 theorem decomposition_four_zmod11 {P : MvPolynomial (Fin 3) (ZMod 11)} (h : P.IsHomogeneous 4) :
     ∃ H R', P = H + conic (ZMod 11) * R' ∧ IsHarmonic H ∧ H.IsHomogeneous 4 ∧ R'.IsHomogeneous 2 :=
@@ -368,6 +565,11 @@ theorem decomposition_four_zmod11 {P : MvPolynomial (Fin 3) (ZMod 11)} (h : P.Is
 theorem radial_eq_zero_four_zmod11 {R' : MvPolynomial (Fin 3) (ZMod 11)} (h : R'.IsHomogeneous 2)
     (hker : IsHarmonic (conic (ZMod 11) * R')) : R' = 0 :=
   radial_eq_zero_four h hker (by decide) (by decide)
+
+/-- The degree-four harmonic space over `𝔽₁₁` has dimension nine. -/
+theorem finrank_harmonic_four_zmod11 :
+    Module.finrank (ZMod 11) (LinearMap.ker (laplHomogeneous (K := ZMod 11) 4)) = 9 :=
+  finrank_harmonic_four (by decide) (by decide)
 
 /-- **Degree-four decomposition fails over `𝔽₅`**: `Q²` lies in the harmonic and radial subspaces. -/
 theorem decomposition_four_fails_zmod5 :
