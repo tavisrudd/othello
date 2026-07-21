@@ -202,6 +202,13 @@ only — no cap-lane inputs needed. Deliverable: certificate; per-matching yes/n
 object. Falsifier: non-concurrency ⇒ row 36 closes negative and X3 loses its geometric leg;
 record cleanly. Model: Opus. Fully parallel to M0–M3.
 
+**X1 OUTCOME (C446, 2026-07-21) — SHARP NEGATIVE; ROW 36 CLOSES.** Every frozen target matching
+has secant-line rank three: concurrency counts are A3 `0/5`, B3 `0/14`, H3 `0/22`. An independent
+full matching replay finds exactly `10/21/55` genuine secant-pencil matchings among all
+`15/105/10,395` matchings and verifies that the target orbits are disjoint from them. Thus there
+are no intruder-point orbits or sheet correspondence to identify, and X3 loses X1's proposed
+geometric leg. See `notes/2026-07-21-c446-marker-matching-concurrency.{md,py,json,sha256}`.
+
 **X2 — knife-edge identification (register row 35).**
 Goal: reconstruct, from committed cap-lane artifacts only, the q=11 knife-edge on-conic
 situation (the 7 on-conic children, the D10 stabilizer, the size-2 P orbit vs size-5 N orbit);

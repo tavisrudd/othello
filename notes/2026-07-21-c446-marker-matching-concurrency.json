@@ -1,0 +1,2606 @@
+{
+  "input": {
+    "bytes": 25443,
+    "path": "2026-07-20-c406-matching-orbit-scout.json",
+    "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+  },
+  "schema": "c446-marker-matching-concurrency-v1",
+  "summary": {
+    "concurrent_records": 0,
+    "conditional_orbit_identification_triggered": false,
+    "h3_geometric_leg_for_x3": false,
+    "matching_records_checked": 41
+  },
+  "types": [
+    {
+      "concurrent_count": 0,
+      "exterior_point_identification": null,
+      "field_order": 5,
+      "line_rank_histogram": {
+        "3": 5
+      },
+      "matching_count": 5,
+      "matching_records": [
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              3,
+              3
+            ],
+            [
+              1,
+              2,
+              1
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 3,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              3,
+              1
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              2,
+              3
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              3,
+              2
+            ],
+            [
+              1,
+              1,
+              3
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              4,
+              3
+            ],
+            [
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 1,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ]
+          ]
+        }
+      ],
+      "orbit_stabilizer_cross_check": {
+        "secant_pencil_point_stabilizer_order": 12,
+        "target_matching_stabilizer_order": 24,
+        "target_stabilizer_cannot_fix_secant_pencil_point": true
+      },
+      "psl_sheet_sizes": [
+        5
+      ],
+      "secants_per_matching": 3,
+      "type": "A3"
+    },
+    {
+      "concurrent_count": 0,
+      "exterior_point_identification": null,
+      "field_order": 7,
+      "line_rank_histogram": {
+        "3": 14
+      },
+      "matching_count": 14,
+      "matching_records": [
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              5,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              3,
+              3
+            ],
+            [
+              1,
+              4,
+              4
+            ],
+            [
+              0,
+              1,
+              5
+            ],
+            [
+              0,
+              1,
+              3
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              6
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              3,
+              3
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              6,
+              6
+            ],
+            [
+              1,
+              6,
+              5
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 3,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              6,
+              1
+            ],
+            [
+              1,
+              1,
+              6
+            ],
+            [
+              1,
+              6,
+              6
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 1,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              6,
+              1
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              5,
+              1
+            ],
+            [
+              1,
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 5,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              5,
+              0
+            ],
+            [
+              1,
+              1,
+              5
+            ],
+            [
+              1,
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 5,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              4,
+              4
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 5,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              0,
+              1,
+              4
+            ],
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              1,
+              4,
+              3
+            ],
+            [
+              1,
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              5,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              0,
+              1,
+              4
+            ],
+            [
+              1,
+              5,
+              0
+            ],
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              1,
+              3
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 3,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              0,
+              5
+            ],
+            [
+              0,
+              1,
+              2
+            ],
+            [
+              0,
+              1,
+              5
+            ],
+            [
+              1,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 3,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              0,
+              5
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              5,
+              1
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              4,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 6,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              1,
+              0,
+              4
+            ],
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              0,
+              2
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              5
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 1,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              1,
+              1,
+              6
+            ],
+            [
+              1,
+              1,
+              5
+            ],
+            [
+              1,
+              4,
+              3
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              0,
+              4
+            ],
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              6
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              1,
+              6,
+              5
+            ]
+          ]
+        }
+      ],
+      "orbit_stabilizer_cross_check": {
+        "secant_pencil_point_stabilizer_order": 16,
+        "target_matching_stabilizer_order": 24,
+        "target_stabilizer_cannot_fix_secant_pencil_point": true
+      },
+      "psl_sheet_sizes": [
+        7,
+        7
+      ],
+      "secants_per_matching": 4,
+      "type": "B3"
+    },
+    {
+      "concurrent_count": 0,
+      "exterior_point_identification": null,
+      "field_order": 11,
+      "line_rank_histogram": {
+        "3": 22
+      },
+      "matching_count": 22,
+      "matching_records": [
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              6,
+              8
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 10,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              0,
+              1,
+              7
+            ],
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              7,
+              0
+            ],
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              0,
+              8
+            ],
+            [
+              0,
+              1,
+              4
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              7,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 3,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              0,
+              1,
+              7
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              10,
+              9
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              4,
+              9
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              7,
+              8
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 1,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              3,
+              3
+            ],
+            [
+              1,
+              9,
+              4
+            ],
+            [
+              1,
+              9,
+              6
+            ],
+            [
+              1,
+              7,
+              10
+            ],
+            [
+              1,
+              1,
+              7
+            ],
+            [
+              1,
+              8,
+              6
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              3,
+              3
+            ],
+            [
+              1,
+              7,
+              1
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              6,
+              9
+            ],
+            [
+              1,
+              10,
+              7
+            ],
+            [
+              1,
+              4,
+              9
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              8,
+              11
+            ],
+            [
+              9,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              2,
+              7
+            ],
+            [
+              1,
+              9,
+              4
+            ],
+            [
+              0,
+              1,
+              8
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              9,
+              10
+            ],
+            [
+              1,
+              2,
+              1
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 7,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              2,
+              7
+            ],
+            [
+              1,
+              8,
+              8
+            ],
+            [
+              1,
+              10,
+              4
+            ],
+            [
+              1,
+              2,
+              5
+            ],
+            [
+              1,
+              4,
+              1
+            ],
+            [
+              1,
+              3,
+              5
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              7,
+              11
+            ],
+            [
+              8,
+              9
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              9,
+              1
+            ],
+            [
+              1,
+              2,
+              10
+            ],
+            [
+              1,
+              9,
+              7
+            ],
+            [
+              0,
+              1,
+              3
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              0,
+              1,
+              10
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              6,
+              7
+            ],
+            [
+              8,
+              11
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 5,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              9,
+              1
+            ],
+            [
+              1,
+              10,
+              0
+            ],
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              6,
+              8
+            ],
+            [
+              1,
+              6,
+              3
+            ],
+            [
+              1,
+              9,
+              10
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              8,
+              9
+            ],
+            [
+              10,
+              11
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              7,
+              9
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              1,
+              9
+            ],
+            [
+              1,
+              10,
+              2
+            ],
+            [
+              0,
+              1,
+              10
+            ],
+            [
+              0,
+              1,
+              4
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              6,
+              11
+            ],
+            [
+              7,
+              8
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              7,
+              9
+            ],
+            [
+              1,
+              5,
+              9
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              8,
+              3
+            ],
+            [
+              1,
+              4,
+              1
+            ],
+            [
+              1,
+              1,
+              7
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              8
+            ],
+            [
+              2,
+              10
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              7,
+              9
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              8,
+              5
+            ],
+            [
+              1,
+              7,
+              1
+            ],
+            [
+              1,
+              9,
+              7
+            ],
+            [
+              1,
+              1,
+              4
+            ],
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              1,
+              9,
+              5
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              11
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              7
+            ],
+            [
+              5,
+              9
+            ],
+            [
+              8,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              8,
+              5
+            ],
+            [
+              1,
+              0,
+              7
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              10,
+              2
+            ],
+            [
+              1,
+              1,
+              2
+            ],
+            [
+              1,
+              3,
+              5
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              9
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              11
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              6,
+              8
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              5,
+              9
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              6,
+              9
+            ],
+            [
+              1,
+              6,
+              6
+            ],
+            [
+              1,
+              0,
+              8
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              7
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              6,
+              9
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 4,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              5,
+              6
+            ],
+            [
+              1,
+              10,
+              0
+            ],
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              1,
+              5,
+              5
+            ],
+            [
+              1,
+              2,
+              5
+            ],
+            [
+              1,
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              11
+            ],
+            [
+              4,
+              9
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              6,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 3,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              5,
+              5
+            ],
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              0,
+              10
+            ],
+            [
+              1,
+              5,
+              2
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              8
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              11
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 7,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              6,
+              2
+            ],
+            [
+              1,
+              4,
+              2
+            ],
+            [
+              1,
+              10,
+              4
+            ],
+            [
+              1,
+              7,
+              10
+            ],
+            [
+              1,
+              3,
+              8
+            ],
+            [
+              1,
+              6,
+              3
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              8
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              5,
+              6
+            ],
+            [
+              7,
+              11
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 7,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              1,
+              8,
+              3
+            ],
+            [
+              1,
+              10,
+              7
+            ],
+            [
+              1,
+              2,
+              4
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              9
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              11
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              6,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 7,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              4,
+              10
+            ],
+            [
+              1,
+              8,
+              8
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              1,
+              4
+            ],
+            [
+              1,
+              5,
+              3
+            ],
+            [
+              1,
+              5,
+              2
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              10
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              5,
+              7
+            ],
+            [
+              9,
+              11
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 2,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              0,
+              4
+            ],
+            [
+              1,
+              3,
+              6
+            ],
+            [
+              1,
+              1,
+              9
+            ],
+            [
+              1,
+              10,
+              9
+            ],
+            [
+              1,
+              0,
+              10
+            ],
+            [
+              1,
+              8,
+              6
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              10
+            ],
+            [
+              1,
+              11
+            ],
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              6,
+              9
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 8,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              0,
+              4
+            ],
+            [
+              1,
+              0,
+              7
+            ],
+            [
+              0,
+              1,
+              8
+            ],
+            [
+              0,
+              1,
+              3
+            ],
+            [
+              1,
+              8,
+              0
+            ],
+            [
+              1,
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              11
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              5,
+              10
+            ],
+            [
+              7,
+              9
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 1,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 0,
+          "secant_lines": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              6,
+              5
+            ],
+            [
+              1,
+              9,
+              6
+            ],
+            [
+              1,
+              8,
+              0
+            ],
+            [
+              1,
+              6,
+              6
+            ],
+            [
+              1,
+              9,
+              5
+            ]
+          ]
+        },
+        {
+          "concurrent": false,
+          "line_rank": 3,
+          "matching": [
+            [
+              0,
+              11
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              5,
+              8
+            ],
+            [
+              9,
+              10
+            ]
+          ],
+          "nonconcurrency_witness": {
+            "determinant": 1,
+            "line_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          "psl_sheet": 1,
+          "secant_lines": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              10
+            ],
+            [
+              1,
+              5,
+              8
+            ],
+            [
+              1,
+              7,
+              0
+            ],
+            [
+              1,
+              5,
+              3
+            ],
+            [
+              1,
+              2,
+              1
+            ]
+          ]
+        }
+      ],
+      "orbit_stabilizer_cross_check": {
+        "secant_pencil_point_stabilizer_order": 24,
+        "target_matching_stabilizer_order": 60,
+        "target_stabilizer_cannot_fix_secant_pencil_point": true
+      },
+      "psl_sheet_sizes": [
+        11,
+        11
+      ],
+      "secants_per_matching": 6,
+      "type": "H3"
+    }
+  ],
+  "verdict": "ROW_36_CLOSES_NEGATIVE_NO_FROZEN_MARKER_MATCHING_IS_CONCURRENT"
+}
