@@ -69,8 +69,8 @@ def dot {K : Type*} [CommRing K] (u v : Fin 3 → K) : K :=
 
 /-! ## The `H3` reduction over `F_11` -/
 
-/-- The chosen root of `x^2 = x + 1` in `ZMod 11`, used as the projectivized-`H3` golden-ratio
-parameter. -/
+/-- The chosen root of `x^2 = x + 1` in `ZMod 11`, used as a parameter in the displayed
+coordinate table below. -/
 def tau11 : ZMod 11 := 8
 
 /-- The chosen parameter satisfies the golden-ratio relation `tau^2 = tau + 1` in `ZMod 11`. -/
