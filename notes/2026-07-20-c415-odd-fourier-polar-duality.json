@@ -1,0 +1,8356 @@
+{
+  "A3_control": {
+    "field": 5,
+    "reason": "the S4 parent meets the outer determinant coset, so there is no two-sheet exchange, no odd orbit pairs, and the duality statement is vacuous; A3 remains the nonsplitting control"
+  },
+  "B3": {
+    "field": 7,
+    "matching_count": 14,
+    "seam_type_counts": {
+      "D8": 3,
+      "S3": 4
+    },
+    "seams": [
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              2,
+              1,
+              7,
+              5,
+              4,
+              6,
+              3
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "184df3f2413561e3d9b3b186613ecd3783804ceeca58020e63f787e1820146c5",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  6
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  -4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  -3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  -3,
+                  0,
+                  -6,
+                  6
+                ],
+                "depth_profile": [
+                  0,
+                  -3,
+                  3,
+                  6
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  3,
+                  0,
+                  -15,
+                  -6
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -3,
+                  0
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              4,
+              1,
+              6,
+              7,
+              0,
+              5,
+              2,
+              3
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "184df3f2413561e3d9b3b186613ecd3783804ceeca58020e63f787e1820146c5",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  6
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  -4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  -3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  -3,
+                  0,
+                  -6,
+                  6
+                ],
+                "depth_profile": [
+                  0,
+                  -3,
+                  3,
+                  6
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  3,
+                  0,
+                  -15,
+                  -6
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -3,
+                  0
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              5,
+              6,
+              2,
+              7,
+              4,
+              0,
+              1,
+              3
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "184df3f2413561e3d9b3b186613ecd3783804ceeca58020e63f787e1820146c5",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  6
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  -4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  -3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  -3,
+                  0,
+                  -6,
+                  6
+                ],
+                "depth_profile": [
+                  0,
+                  -3,
+                  3,
+                  6
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  3,
+                  0,
+                  -15,
+                  -6
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -3,
+                  0
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              0,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "184df3f2413561e3d9b3b186613ecd3783804ceeca58020e63f787e1820146c5",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  6
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  -4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  -3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  -3,
+                  0,
+                  -6,
+                  6
+                ],
+                "depth_profile": [
+                  0,
+                  -3,
+                  3,
+                  6
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  3,
+                  0,
+                  -15,
+                  -6
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -3,
+                  0
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "seam_type": "S3"
+      },
+      {
+        "common_group_order": 8,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              5,
+              7,
+              6,
+              4,
+              1,
+              3,
+              2
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "de7c5294132884ebf679e25333f6d7760beb45fa5006f8db1c0623d791427c7d",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  0,
+                  4,
+                  -2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  2,
+                  -12,
+                  2
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -2,
+                  0
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              3,
+              2,
+              1,
+              0,
+              6,
+              5,
+              4,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "de7c5294132884ebf679e25333f6d7760beb45fa5006f8db1c0623d791427c7d",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  0,
+                  4,
+                  -2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  2,
+                  -12,
+                  2
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -2,
+                  0
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              4,
+              7,
+              5,
+              3,
+              0,
+              2,
+              6,
+              1
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "de7c5294132884ebf679e25333f6d7760beb45fa5006f8db1c0623d791427c7d",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  0,
+                  4,
+                  -2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  2,
+                  -12,
+                  2
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -2,
+                  0
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              6,
+              1,
+              2,
+              4,
+              3,
+              7,
+              0,
+              5
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "de7c5294132884ebf679e25333f6d7760beb45fa5006f8db1c0623d791427c7d",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  2
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  3,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  0,
+                  4,
+                  -2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  2,
+                  -12,
+                  2
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -2,
+                  0
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          8,
+          8,
+          8
+        ],
+        "seam_type": "D8"
+      },
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              1,
+              3,
+              2,
+              7,
+              6,
+              5,
+              4
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                -14,
+                -14
+              ],
+              [
+                0,
+                -14,
+                -7,
+                14
+              ],
+              [
+                7,
+                -7,
+                7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "462afca5fc5b887023b088a24753abb86e62e1a8907bb1141c6d6cd9f677e5a0",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                -2,
+                -1
+              ],
+              [
+                0,
+                -2,
+                -1,
+                1
+              ],
+              [
+                2,
+                -2,
+                2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  6
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  2,
+                  6
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              1,
+              0,
+              7,
+              4,
+              3,
+              5,
+              6,
+              2
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                -14,
+                -14
+              ],
+              [
+                0,
+                -14,
+                -7,
+                14
+              ],
+              [
+                7,
+                -7,
+                7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "462afca5fc5b887023b088a24753abb86e62e1a8907bb1141c6d6cd9f677e5a0",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                -2,
+                -1
+              ],
+              [
+                0,
+                -2,
+                -1,
+                1
+              ],
+              [
+                2,
+                -2,
+                2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  6
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  2,
+                  6
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              4,
+              3,
+              2,
+              1,
+              0,
+              6,
+              5,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                -14,
+                -14
+              ],
+              [
+                0,
+                -14,
+                -7,
+                14
+              ],
+              [
+                7,
+                -7,
+                7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "462afca5fc5b887023b088a24753abb86e62e1a8907bb1141c6d6cd9f677e5a0",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                -2,
+                -1
+              ],
+              [
+                0,
+                -2,
+                -1,
+                1
+              ],
+              [
+                2,
+                -2,
+                2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  6
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  2,
+                  6
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              7,
+              2,
+              1,
+              3,
+              4,
+              6,
+              5,
+              0
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                -14,
+                -14
+              ],
+              [
+                0,
+                -14,
+                -7,
+                14
+              ],
+              [
+                7,
+                -7,
+                7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "462afca5fc5b887023b088a24753abb86e62e1a8907bb1141c6d6cd9f677e5a0",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                -2,
+                -1
+              ],
+              [
+                0,
+                -2,
+                -1,
+                1
+              ],
+              [
+                2,
+                -2,
+                2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  6
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  2,
+                  6
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  6
+                ],
+                "depth_profile": [
+                  1,
+                  -2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  -1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "seam_type": "S3"
+      },
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              7,
+              2,
+              5,
+              6,
+              3,
+              4,
+              1
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "c3018f9123d59959eb020cb3a9bd883ceee9e13832dab5d78a719fcf019589d2",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              2,
+              1,
+              0,
+              6,
+              5,
+              4,
+              3,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "c3018f9123d59959eb020cb3a9bd883ceee9e13832dab5d78a719fcf019589d2",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              2,
+              3,
+              0,
+              1,
+              4,
+              7,
+              6,
+              5
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "c3018f9123d59959eb020cb3a9bd883ceee9e13832dab5d78a719fcf019589d2",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              2,
+              6,
+              0,
+              3,
+              7,
+              5,
+              1,
+              4
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "c3018f9123d59959eb020cb3a9bd883ceee9e13832dab5d78a719fcf019589d2",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  2,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "seam_type": "S3"
+      },
+      {
+        "common_group_order": 8,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              3,
+              4,
+              1,
+              2,
+              5,
+              7,
+              6
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "01b928bc32fc7a1be211c95954917baff88462294f03c8dbc84e4bb8e8b03eba",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  2,
+                  4
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  5,
+                  3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              1,
+              0,
+              6,
+              5,
+              4,
+              3,
+              2,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "01b928bc32fc7a1be211c95954917baff88462294f03c8dbc84e4bb8e8b03eba",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  2,
+                  4
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  5,
+                  3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              3,
+              5,
+              2,
+              0,
+              7,
+              1,
+              6,
+              4
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "01b928bc32fc7a1be211c95954917baff88462294f03c8dbc84e4bb8e8b03eba",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  2,
+                  4
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  5,
+                  3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              5,
+              1,
+              7,
+              3,
+              6,
+              0,
+              4,
+              2
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                0,
+                -14
+              ],
+              [
+                7,
+                0,
+                -14,
+                7
+              ],
+              [
+                7,
+                -14,
+                7,
+                0
+              ]
+            ],
+            "matching_table_sha256": "01b928bc32fc7a1be211c95954917baff88462294f03c8dbc84e4bb8e8b03eba",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                -2
+              ],
+              [
+                2,
+                0,
+                -2,
+                1
+              ],
+              [
+                2,
+                -2,
+                1,
+                0
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  3,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  2,
+                  4
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  5,
+                  3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -5,
+                  -3
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          8,
+          8,
+          8
+        ],
+        "seam_type": "D8"
+      },
+      {
+        "common_group_order": 8,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                -14,
+                0
+              ],
+              [
+                7,
+                -14,
+                0,
+                7
+              ],
+              [
+                7,
+                0,
+                7,
+                -14
+              ]
+            ],
+            "matching_table_sha256": "f9bde4d507a6b334075f8775688870e0f6c2f156a2e0d9e061cbd2aedeef3ce1",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                -2,
+                0
+              ],
+              [
+                2,
+                -2,
+                0,
+                1
+              ],
+              [
+                2,
+                0,
+                1,
+                -2
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  0
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  2
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              1,
+              0,
+              2,
+              3,
+              5,
+              4,
+              7,
+              6
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                -14,
+                0
+              ],
+              [
+                7,
+                -14,
+                0,
+                7
+              ],
+              [
+                7,
+                0,
+                7,
+                -14
+              ]
+            ],
+            "matching_table_sha256": "f9bde4d507a6b334075f8775688870e0f6c2f156a2e0d9e061cbd2aedeef3ce1",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                -2,
+                0
+              ],
+              [
+                2,
+                -2,
+                0,
+                1
+              ],
+              [
+                2,
+                0,
+                1,
+                -2
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  0
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  2
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              6,
+              7,
+              3,
+              2,
+              4,
+              5,
+              0,
+              1
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                -14,
+                0
+              ],
+              [
+                7,
+                -14,
+                0,
+                7
+              ],
+              [
+                7,
+                0,
+                7,
+                -14
+              ]
+            ],
+            "matching_table_sha256": "f9bde4d507a6b334075f8775688870e0f6c2f156a2e0d9e061cbd2aedeef3ce1",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                -2,
+                0
+              ],
+              [
+                2,
+                -2,
+                0,
+                1
+              ],
+              [
+                2,
+                0,
+                1,
+                -2
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  0
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  2
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              7,
+              1,
+              4,
+              5,
+              2,
+              3,
+              6,
+              0
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                7,
+                14,
+                14,
+                14
+              ],
+              [
+                7,
+                7,
+                -14,
+                0
+              ],
+              [
+                7,
+                -14,
+                0,
+                7
+              ],
+              [
+                7,
+                0,
+                7,
+                -14
+              ]
+            ],
+            "matching_table_sha256": "f9bde4d507a6b334075f8775688870e0f6c2f156a2e0d9e061cbd2aedeef3ce1",
+            "n_matrix": [
+              [
+                1,
+                1,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                -2,
+                0
+              ],
+              [
+                2,
+                -2,
+                0,
+                1
+              ],
+              [
+                2,
+                0,
+                1,
+                -2
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1,
+                  0
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  1,
+                  2
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              2,
+              4,
+              4,
+              4
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  0,
+                  1,
+                  4,
+                  2
+                ],
+                "depth_profile": [
+                  1,
+                  -1,
+                  1,
+                  -1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  -1,
+                  3,
+                  5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  1
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  -4,
+                  -2
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  -1,
+                  1
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  -3,
+                  -5
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  -1,
+                  -1
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          8,
+          8,
+          8
+        ],
+        "seam_type": "D8"
+      },
+      {
+        "common_group_order": 6,
+        "exchanges": [
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              0,
+              4,
+              6,
+              3,
+              1,
+              7,
+              2,
+              5
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "82901fb940d4a01c03dd8992a55c311b492e8b80a7afd6005b433ed7d6f6a929",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              3,
+              1,
+              5,
+              0,
+              4,
+              2,
+              7,
+              6
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "82901fb940d4a01c03dd8992a55c311b492e8b80a7afd6005b433ed7d6f6a929",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              5,
+              4,
+              3,
+              2,
+              1,
+              0,
+              6,
+              7
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "82901fb940d4a01c03dd8992a55c311b492e8b80a7afd6005b433ed7d6f6a929",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          },
+          {
+            "distinct_depth_profiles": 6,
+            "distinct_polar_profiles": 6,
+            "exchange_permutation": [
+              7,
+              4,
+              2,
+              6,
+              1,
+              5,
+              3,
+              0
+            ],
+            "joint_depth_polar_rank_mod_q": 4,
+            "m_odd": [
+              [
+                14,
+                7,
+                0,
+                14
+              ],
+              [
+                7,
+                0,
+                14,
+                -14
+              ],
+              [
+                0,
+                14,
+                -7,
+                -14
+              ],
+              [
+                7,
+                -7,
+                -7,
+                -7
+              ]
+            ],
+            "matching_table_sha256": "82901fb940d4a01c03dd8992a55c311b492e8b80a7afd6005b433ed7d6f6a929",
+            "n_matrix": [
+              [
+                2,
+                1,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                2,
+                -1
+              ],
+              [
+                0,
+                2,
+                -1,
+                -1
+              ],
+              [
+                2,
+                -2,
+                -2,
+                -1
+              ]
+            ],
+            "odd_pair_orbit_representatives": [
+              [
+                [
+                  0,
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  4
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  1,
+                  3
+                ]
+              ],
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  5
+                ]
+              ],
+              [
+                [
+                  0,
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  2,
+                  1
+                ]
+              ]
+            ],
+            "odd_pair_projective_sizes": [
+              3,
+              3,
+              3,
+              6
+            ],
+            "representative_rows": [
+              {
+                "deep_profile": [
+                  -1,
+                  -1,
+                  2,
+                  -4
+                ],
+                "depth_profile": [
+                  -1,
+                  1,
+                  2,
+                  2
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    4
+                  ],
+                  [
+                    3,
+                    6
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                "polar_profile": [
+                  1,
+                  1,
+                  -2,
+                  -10
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  0,
+                  -2
+                ],
+                "zero_locus_size": 26
+              },
+              {
+                "deep_profile": [
+                  0,
+                  -1,
+                  4,
+                  -6
+                ],
+                "depth_profile": [
+                  -1,
+                  2,
+                  1,
+                  0
+                ],
+                "matching": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    2,
+                    5
+                  ],
+                  [
+                    3,
+                    7
+                  ],
+                  [
+                    4,
+                    6
+                  ]
+                ],
+                "polar_profile": [
+                  0,
+                  1,
+                  3,
+                  -8
+                ],
+                "pole_profile": [
+                  0,
+                  0,
+                  1,
+                  -2
+                ],
+                "zero_locus_size": 26
+              }
+            ]
+          }
+        ],
+        "point_orbit_sizes": [
+          1,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "seam_type": "S3"
+      }
+    ],
+    "secant_count": 4
+  },
+  "H3": {
+    "deep_point_excess_multisets": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "depth_profile_plane_mod_q": [
+      [
+        2,
+        2,
+        1,
+        0
+      ],
+      [
+        9,
+        8,
+        0,
+        1
+      ]
+    ],
+    "distinct_depth_profiles": 6,
+    "distinct_polar_profiles": 6,
+    "field": 11,
+    "joint_depth_polar_rank_mod_q": 4,
+    "m_odd": [
+      [
+        -11,
+        0,
+        44,
+        -22
+      ],
+      [
+        0,
+        -11,
+        22,
+        44
+      ],
+      [
+        22,
+        11,
+        11,
+        0
+      ],
+      [
+        -11,
+        22,
+        0,
+        11
+      ]
+    ],
+    "m_odd_equals_q_times_n_transpose": true,
+    "matching_count": 22,
+    "matchings": [
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          24,
+          12,
+          12,
+          0
+        ],
+        "depth_profile": [
+          -6,
+          0,
+          12,
+          -12
+        ],
+        "matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "polar_profile": [
+          42,
+          -12,
+          -12,
+          0
+        ],
+        "pole_profile": [
+          6,
+          0,
+          0,
+          0
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          0,
+          0,
+          12,
+          3,
+          12,
+          0,
+          0,
+          0,
+          6,
+          12,
+          12,
+          0,
+          0,
+          0
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          4,
+          0,
+          6,
+          8
+        ],
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        "polar_profile": [
+          7,
+          0,
+          -6,
+          14
+        ],
+        "pole_profile": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          3,
+          -6,
+          -12
+        ],
+        "depth_profile": [
+          3,
+          -3,
+          0,
+          -3
+        ],
+        "matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        "polar_profile": [
+          0,
+          -3,
+          6,
+          -21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          -3
+        ],
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          0,
+          3,
+          3,
+          6,
+          3,
+          3,
+          6,
+          3,
+          3,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          -3,
+          6,
+          12
+        ],
+        "depth_profile": [
+          -3,
+          3,
+          0,
+          3
+        ],
+        "matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        "polar_profile": [
+          0,
+          3,
+          -6,
+          21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          0,
+          3,
+          12,
+          0,
+          3,
+          3,
+          6,
+          6,
+          6,
+          3,
+          3,
+          0,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -4,
+          0,
+          -6,
+          -8
+        ],
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "polar_profile": [
+          -7,
+          0,
+          6,
+          -14
+        ],
+        "pole_profile": [
+          -1,
+          0,
+          0,
+          -2
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          3,
+          -6,
+          -12
+        ],
+        "depth_profile": [
+          3,
+          -3,
+          0,
+          -3
+        ],
+        "matching": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        "polar_profile": [
+          0,
+          -3,
+          6,
+          -21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          -3
+        ],
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          0,
+          3,
+          3,
+          6,
+          3,
+          3,
+          6,
+          3,
+          3,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -4,
+          0,
+          -6,
+          -8
+        ],
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "polar_profile": [
+          -7,
+          0,
+          6,
+          -14
+        ],
+        "pole_profile": [
+          -1,
+          0,
+          0,
+          -2
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          4,
+          0,
+          6,
+          8
+        ],
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            10
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            11
+          ]
+        ],
+        "polar_profile": [
+          7,
+          0,
+          -6,
+          14
+        ],
+        "pole_profile": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          4,
+          0,
+          6,
+          8
+        ],
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "polar_profile": [
+          7,
+          0,
+          -6,
+          14
+        ],
+        "pole_profile": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          -3,
+          6,
+          12
+        ],
+        "depth_profile": [
+          -3,
+          3,
+          0,
+          3
+        ],
+        "matching": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "polar_profile": [
+          0,
+          3,
+          -6,
+          21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          0,
+          3,
+          12,
+          0,
+          3,
+          3,
+          6,
+          6,
+          6,
+          3,
+          3,
+          0,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          3,
+          -6,
+          -12
+        ],
+        "depth_profile": [
+          3,
+          -3,
+          0,
+          -3
+        ],
+        "matching": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        "polar_profile": [
+          0,
+          -3,
+          6,
+          -21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          -3
+        ],
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          0,
+          3,
+          3,
+          6,
+          3,
+          3,
+          6,
+          3,
+          3,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -4,
+          0,
+          -6,
+          -8
+        ],
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        "polar_profile": [
+          -7,
+          0,
+          6,
+          -14
+        ],
+        "pole_profile": [
+          -1,
+          0,
+          0,
+          -2
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          4,
+          0,
+          6,
+          8
+        ],
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        "polar_profile": [
+          7,
+          0,
+          -6,
+          14
+        ],
+        "pole_profile": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -4,
+          0,
+          -6,
+          -8
+        ],
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            10
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        "polar_profile": [
+          -7,
+          0,
+          6,
+          -14
+        ],
+        "pole_profile": [
+          -1,
+          0,
+          0,
+          -2
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          4,
+          0,
+          6,
+          8
+        ],
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            10
+          ]
+        ],
+        "polar_profile": [
+          7,
+          0,
+          -6,
+          14
+        ],
+        "pole_profile": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          -3,
+          6,
+          12
+        ],
+        "depth_profile": [
+          -3,
+          3,
+          0,
+          3
+        ],
+        "matching": [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "polar_profile": [
+          0,
+          3,
+          -6,
+          21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          0,
+          3,
+          12,
+          0,
+          3,
+          3,
+          6,
+          6,
+          6,
+          3,
+          3,
+          0,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          3,
+          -6,
+          -12
+        ],
+        "depth_profile": [
+          3,
+          -3,
+          0,
+          -3
+        ],
+        "matching": [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            11
+          ]
+        ],
+        "polar_profile": [
+          0,
+          -3,
+          6,
+          -21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          -3
+        ],
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          0,
+          3,
+          3,
+          6,
+          3,
+          3,
+          6,
+          3,
+          3,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          0,
+          -3,
+          6,
+          12
+        ],
+        "depth_profile": [
+          -3,
+          3,
+          0,
+          3
+        ],
+        "matching": [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            10
+          ]
+        ],
+        "polar_profile": [
+          0,
+          3,
+          -6,
+          21
+        ],
+        "pole_profile": [
+          0,
+          0,
+          0,
+          3
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          0,
+          3,
+          12,
+          0,
+          3,
+          3,
+          6,
+          6,
+          6,
+          3,
+          3,
+          0,
+          3,
+          6
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -4,
+          0,
+          -6,
+          -8
+        ],
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        "polar_profile": [
+          -7,
+          0,
+          6,
+          -14
+        ],
+        "pole_profile": [
+          -1,
+          0,
+          0,
+          -2
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -24,
+          -12,
+          -12,
+          0
+        ],
+        "depth_profile": [
+          6,
+          0,
+          -12,
+          12
+        ],
+        "matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        "polar_profile": [
+          -42,
+          12,
+          12,
+          0
+        ],
+        "pole_profile": [
+          -6,
+          0,
+          0,
+          0
+        ],
+        "relation_zero_counts": [
+          0,
+          6,
+          0,
+          0,
+          12,
+          3,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0,
+          12,
+          0,
+          12,
+          0
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          -4,
+          0,
+          -6,
+          -8
+        ],
+        "depth_profile": [
+          3,
+          -2,
+          -2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        "polar_profile": [
+          -7,
+          0,
+          6,
+          -14
+        ],
+        "pole_profile": [
+          -1,
+          0,
+          0,
+          -2
+        ],
+        "relation_zero_counts": [
+          0,
+          3,
+          2,
+          1,
+          12,
+          1,
+          2,
+          3,
+          6,
+          6,
+          0,
+          6,
+          6,
+          3,
+          4,
+          2
+        ],
+        "zero_locus_size": 57
+      },
+      {
+        "deep_point_excess": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "deep_profile": [
+          4,
+          0,
+          6,
+          8
+        ],
+        "depth_profile": [
+          -3,
+          2,
+          2,
+          0
+        ],
+        "matching": [
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "polar_profile": [
+          7,
+          0,
+          -6,
+          14
+        ],
+        "pole_profile": [
+          1,
+          0,
+          0,
+          2
+        ],
+        "relation_zero_counts": [
+          0,
+          0,
+          2,
+          3,
+          12,
+          1,
+          4,
+          3,
+          6,
+          6,
+          3,
+          6,
+          6,
+          1,
+          2,
+          2
+        ],
+        "zero_locus_size": 57
+      }
+    ],
+    "n_matrix": [
+      [
+        -1,
+        0,
+        2,
+        -1
+      ],
+      [
+        0,
+        -1,
+        1,
+        2
+      ],
+      [
+        4,
+        2,
+        1,
+        0
+      ],
+      [
+        -2,
+        4,
+        0,
+        1
+      ]
+    ],
+    "n_square_scalar": 11,
+    "odd_pair_orbit_representatives": [
+      [
+        [
+          0,
+          1,
+          4
+        ],
+        [
+          0,
+          1,
+          3
+        ]
+      ],
+      [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          5
+        ]
+      ],
+      [
+        [
+          1,
+          3,
+          2
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      [
+        [
+          1,
+          4,
+          2
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ]
+    ],
+    "odd_pair_projective_sizes": [
+      6,
+      6,
+      12,
+      12
+    ],
+    "odd_relation_pairs": [
+      [
+        1,
+        10
+      ],
+      [
+        3,
+        13
+      ],
+      [
+        6,
+        14
+      ],
+      [
+        9,
+        11
+      ]
+    ],
+    "polar_profile_plane_mod_q": [
+      [
+        4,
+        2,
+        1,
+        0
+      ],
+      [
+        9,
+        4,
+        0,
+        1
+      ]
+    ],
+    "secant_count": 6,
+    "zero_locus_sizes": [
+      57
+    ]
+  },
+  "boundary": "No twisted weight-4/6 section identity, seam selector, modular lattice comparison, or novelty claim is certified; the adjointness core is classical double counting.",
+  "schema": "c415-odd-fourier-polar-duality-v1",
+  "theorem": "For H3/q=11 and every B3/q=7 seam exchange, the ordinary qz-ell odd Fourier block satisfies M_odd = q N^T with N the signed perpendicular-incidence matrix between odd orbit pairs, N^2 = q I, N D(M) = S(M) for every matching M, and S_i = q Pole_i - Deep_i geometrically.",
+  "trusted_inputs": {
+    "2026-07-18-c341-a5-subgroup-decoder.py": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be",
+    "2026-07-19-c378-clebsch-common-duality.json": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc",
+    "2026-07-20-c406-matching-module.json": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2",
+    "2026-07-20-c406-matching-module.py": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    "2026-07-20-c406-matching-orbit-scout.json": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246",
+    "2026-07-20-c411-double-coset-hecke.json": "23f0a100356f0a369f00d81011e8d8d6b9d867b9de45a7b0625fc2889323b014"
+  },
+  "verdict": "THEOREM; THE ODD FOURIER IMAGE OF THE DEPTH PROFILE IS THE SIGNED POLAR ZERO-DEPTH PROFILE, WITH AN INTEGRAL INCIDENCE SQUARE ROOT OF q AND AN EXACT POLE/DEEP-POINT DUAL FACTORIZATION"
+}
