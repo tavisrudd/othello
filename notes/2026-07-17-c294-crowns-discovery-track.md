@@ -374,3 +374,43 @@ identifications and 36-class transitivity remain open.
 `notes/2026-07-20-c435-hermitian-determinantal-tower.md`. The exact tower and transitivity are
 positive; the task also proves equivariant parent-decoration recovery and the semilinear
 `7+7 -> 14` Frobenius fusion now exported to C438.
+
+### 2026-07-20 — lurking theorems thrown off by the C417 affine cocycle
+
+**Provenance:** while landing C417 (`notes/2026-07-20-c417-affine-cocycle-line-bundle.md`) the user
+asked what other theorems lurk in the C406->C417 / C415/C416 structure. Bounded instance checks are
+in `notes/2026-07-20-c417-lurking-theorems-checks.py`.
+**Was I looking for this?:** no — C417's deliverable was the base-change cocycle itself; these are
+side observations and cross-setting forecasts thrown off by it. (The depth = antipodal balance and
+mu_3 = outer-odd curvature facts are C417-report material, not logged here.)
+**Observed / musing:** several clean statements sit one step past the certified C417 facts:
+- *Unique bad primes = prime factors of the orbit size.* The whole compression is a
+  defining-characteristic resonance: on a sheet the constant vector lies in the augmentation
+  submodule iff `char | q`, so the `1|q-2|1` projective cover (and the cocycle nontriviality) is
+  supported exactly at `char = q`; the orbit size `2q` makes the bad set `{2, q}` (2 = the sheet
+  sign). CHECKED at instance level for A3/B3/H3.
+- *First surviving signed-moment degree = `2k+1` for `k` vanishing odd moments* (here `k=1` ->
+  cubic). A degree-count form of the C409 trade-filtration question.
+- *All branch compressions (`6->2`, `4->2`) are one balanced-average projection killing the cocycle
+  direction* (C414 already gives the `6->2` kernel = common-seam augmentation image).
+- *Integral `sqrt(q)` is forced by scheme self-duality* (`N^2 = qI` on the odd block of the
+  self-dual `P=Q` scheme); the middle weight `h=(q-1)/2` is genuinely self-dual under `r <-> -r`.
+- *`[c]` is a geometric generator of `H^1(PGL_2(q), Sym^{q-3})`* in defining characteristic.
+**Why it may matter / strongest question:** the good-reduction statement (bad set `{2,q}`) sharply
+characterizes the resonance and mirrors C346's unique-bad-prime methodology; if it and the
+compression-unification close, the C406->C417 branch reads as one good-reduction-away-from-`q`
+object whose only bad-prime shadow is the socle line `mu_3`.
+**Structural mechanism:** a finite reflection group acting on the quadric in `P^{r-1}`; matchings =
+one-factorizations; secant products give an `|orbit|`-torsion affine base-change cocycle whose
+special fibre is the defining-characteristic modular cover.
+**Predicted siblings:** rank-2 dihedral `I_2(m)` -> conic in `P^1` (predicted: degenerate / base
+case, one sheet); rank-4 `H_4` (600-cell, golden, `h=30`, `q=31`) -> quadric in `P^3` (predicted:
+the same cocycle + cubic-first with the surviving degree set by the rank); the crystallographic
+rank-4 `A_4/B_4/D_4/F_4` as the non-golden controls.
+**Discriminator / falsifier:** compute the `H_4`/`q=31` matching cocycle and its first surviving
+moment; the tower is retired if no `|orbit|`-torsion base-change class appears or if the
+first-surviving degree does not track the rank. For good reduction, retire if the compression
+survives at a prime not dividing the orbit size.
+**Evidence:** CHECKED (unique-bad-prime witness, A3/B3/H3) | REASONED (first-degree, compression
+unification, integral-sqrt-q) | LEAN (rank/`H_4` tower).
+**Status:** open leads; unallocated. Promote any via the normal C-ID/lane process.
