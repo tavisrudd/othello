@@ -182,6 +182,18 @@ each classical ingredient (biplane, self-dual polytope, perfect code, relative i
    sheet-swap should be a specific outer element in `2.M_12 = Aut([12,6,6])`; identifying it would
    give the Clebsch chirality an M_12 meaning.
 
+**Refinement of forecast 3 — the chirality is NOT the Golay/M_12 symmetry (REASONED, classical group
+theory).** The code's permutation-automorphism group is `M_11` (perm part of `2.M_11`), which
+contains `PSL_2(11)` as a **maximal** subgroup (index 12; the classical `M_11` maximal-subgroup list
+is `M_10, PSL_2(11), 3^2:Q8.2, S5, GL_2(3)`). The Clebsch chirality lives in the *other* overgroup of
+`PSL_2(11)`, namely `PGL_2(11)` (index 2). Since `PSL_2(11)` is maximal in `M_11` and
+`PGL_2(11) != M_11`, we have `PGL_2(11) not-subset M_11`, so the chirality/outer element is **not**
+a Golay code automorphism. Hence the design self-duality (chirality) and the `M_11/M_12` Golay
+symmetry are two *distinct* enlargements of the shared `PSL_2(11)`. The Clebsch sheets supply the
+code (via `PSL_2(11) < M_11`), but the chirality is a separate involution, not the sporadic
+extension. This sharpens G19: the sheets give the Golay geometry, but the "canonical sign/generator"
+they supply is the `PGL` self-duality, orthogonal to the `M_12` structure.
+
 ## Reproducibility (Spikes 1–4)
 
 ```bash
