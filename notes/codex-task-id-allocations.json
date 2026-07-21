@@ -341,8 +341,17 @@
       "last": 461,
       "purpose": "Four-companion saturated weight-line test for abstract integral cubic lift",
       "sequence": 38
+    },
+    {
+      "count": 1,
+      "first": 462,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 462,
+      "purpose": "Formalize C443 companion Z/4 Galois-torsor: sigma 4-cycle, prime equivariance, descent obstruction over Z[phi]; evidence bundle from torsor hunch memo",
+      "sequence": 39
     }
   ],
-  "next_id": 462,
+  "next_id": 463,
   "schema": "codex-task-id-allocations-v1"
 }
