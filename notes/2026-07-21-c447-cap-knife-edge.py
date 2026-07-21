@@ -97,6 +97,24 @@ def conjugate(g: tuple[int, int, int, int], h: tuple[int, int, int, int]) -> tup
     return compose(compose(g, h), inverse_mobius(g))
 
 
+def element_order(g: tuple[int, int, int, int]) -> int:
+    identity = (1, 0, 0, 1)
+    power = identity
+    for order in range(1, 121):
+        power = compose(power, g)
+        if power == identity:
+            return order
+    raise AssertionError("projective element order exceeded bound")
+
+
+def order_distribution(group) -> dict[str, int]:
+    result: dict[str, int] = {}
+    for g in group:
+        key = str(element_order(g))
+        result[key] = result.get(key, 0) + 1
+    return dict(sorted(result.items(), key=lambda item: int(item[0])))
+
+
 def det_is_square(g: tuple[int, int, int, int]) -> bool:
     a, b, c, d = g
     return pow((a * d - b * c) % Q, (Q - 1) // 2, Q) == 1
@@ -193,6 +211,8 @@ def build() -> dict:
     assert len(plus_stab) == len(minus_stab) == 60
     assert all(det_is_square(g) for g in plus_stab | minus_stab)
     assert len(pair_stab) == 24
+    assert order_distribution(plus_stab) == order_distribution(minus_stab) == {"1": 1, "2": 15, "3": 20, "5": 24}
+    assert order_distribution(pair_stab) == {"1": 1, "2": 9, "3": 8, "4": 6}
 
     knife_edges = []
     for cls, record in sorted(cap.items()):
@@ -214,6 +234,8 @@ def build() -> dict:
         assert frame.isdisjoint(candidates) and len(frame) == 5 and len(candidates) == 7
         frame_stab = {g for g in group if {act(g, x) for x in frame} == frame}
         assert len(frame_stab) == 10
+        frame_order_distribution = order_distribution(frame_stab)
+        assert frame_order_distribution == {"1": 1, "2": 5, "5": 4}
 
         remaining = set(candidates)
         orbits = []
@@ -274,6 +296,7 @@ def build() -> dict:
             "frame_stabilizer": {
                 "order": len(frame_stab),
                 "abstract_type": "D10",
+                "element_order_distribution": frame_order_distribution,
                 "determinant_square_count": sum(det_is_square(g) for g in frame_stab),
                 "determinant_nonsquare_count": sum(not det_is_square(g) for g in frame_stab),
             },
@@ -314,9 +337,13 @@ def build() -> dict:
             "base_singleton_matching": sorted([list(pair) for pair in plus], key=str),
             "j_mate_singleton_matching": sorted([list(pair) for pair in minus], key=str),
             "base_and_j_mate_stabilizer_orders": [len(plus_stab), len(minus_stab)],
+            "base_and_j_mate_stabilizer_element_order_distributions": [
+                order_distribution(plus_stab), order_distribution(minus_stab)
+            ],
             "base_and_j_mate_stabilizers_lie_in_PSL2": True,
             "unordered_singleton_pair_stabilizer_order": len(pair_stab),
             "unordered_singleton_pair_stabilizer_type": "S4",
+            "unordered_singleton_pair_stabilizer_element_order_distribution": order_distribution(pair_stab),
             "unordered_singleton_pair_stabilizer_det_square_nonsquare": [
                 sum(det_is_square(g) for g in pair_stab), sum(not det_is_square(g) for g in pair_stab)
             ],
@@ -351,7 +378,7 @@ def build() -> dict:
                 "force either P pair onto an arbitrary singleton edge (120 maps for each singleton), showing why "
                 "bare incidence is coordinate choice rather than a correspondence."
             ),
-            "x3_consequence": "Only the abstract orbit-valued-selector statement survives; row 35 supplies no cap/golden identification.",
+            "x3_consequence": "X3 retains its abstract obstruction and C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not causation.",
         },
     }
 

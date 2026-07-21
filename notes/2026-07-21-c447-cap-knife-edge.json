@@ -23,6 +23,20 @@
     "projectivity_count": 10
   },
   "frozen_c406": {
+    "base_and_j_mate_stabilizer_element_order_distributions": [
+      {
+        "1": 1,
+        "2": 15,
+        "3": 20,
+        "5": 24
+      },
+      {
+        "1": 1,
+        "2": 15,
+        "3": 20,
+        "5": 24
+      }
+    ],
     "base_and_j_mate_stabilizer_orders": [
       60,
       60
@@ -102,6 +116,12 @@
       12,
       12
     ],
+    "unordered_singleton_pair_stabilizer_element_order_distribution": {
+      "1": 1,
+      "2": 9,
+      "3": 8,
+      "4": 6
+    },
     "unordered_singleton_pair_stabilizer_order": 24,
     "unordered_singleton_pair_stabilizer_type": "S4"
   },
@@ -210,6 +230,11 @@
         "abstract_type": "D10",
         "determinant_nonsquare_count": 5,
         "determinant_square_count": 5,
+        "element_order_distribution": {
+          "1": 1,
+          "2": 5,
+          "5": 4
+        },
         "order": 10
       },
       "hyperbola": {
@@ -329,6 +354,11 @@
         "abstract_type": "D10",
         "determinant_nonsquare_count": 5,
         "determinant_square_count": 5,
+        "element_order_distribution": {
+          "1": 1,
+          "2": 5,
+          "5": 4
+        },
         "order": 10
       },
       "hyperbola": {
@@ -372,6 +402,6 @@
   "verdict": {
     "reason": "The cap P orbit is a two-point conic orbit, whereas the golden singleton pair consists of two perfect matchings. Under the frozen parameter projectivity neither P pair is an edge of either singleton. More invariantly, each cap D10 contains five determinant-nonsquare elements, while each singleton A5 lies in PSL2, and the unordered singleton-pair stabilizer is S4 of order 24. Hence no projectivity makes the proposed identification equivariant. An unframed PGL2 map can force either P pair onto an arbitrary singleton edge (120 maps for each singleton), showing why bare incidence is coordinate choice rather than a correspondence.",
     "register_row_35": "SHARP_NEGATIVE",
-    "x3_consequence": "Only the abstract orbit-valued-selector statement survives; row 35 supplies no cap/golden identification."
+    "x3_consequence": "X3 retains its abstract obstruction and C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not causation."
   }
 }

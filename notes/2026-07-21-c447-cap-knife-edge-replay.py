@@ -49,6 +49,25 @@ def image(g, M):
     return {edge(act(g, a), act(g, b)) for a, b in M}
 
 
+def mul(g, h):
+    a, b, c, d = g
+    e, f, k, ell = h
+    return norm((a * e + b * k, a * f + b * ell, c * e + d * k, c * f + d * ell))
+
+
+def order(g):
+    power = (1, 0, 0, 1)
+    for n in range(1, 121):
+        power = mul(power, g)
+        if power == (1, 0, 0, 1):
+            return n
+    raise AssertionError
+
+
+def distribution(H):
+    return {str(n): sum(order(g) == n for g in H) for n in sorted({order(g) for g in H})}
+
+
 def mat_vec(m, v):
     return tuple(sum(m[i][j] * v[j] for j in range(3)) % Q for i in range(3))
 
@@ -68,6 +87,8 @@ def main():
     pair_stab = {g for g in G if {frozenset(image(g, plus)), frozenset(image(g, minus))} == {frozenset(plus), frozenset(minus)}}
     assert (len(Aplus), len(Aminus), len(pair_stab)) == (60, 60, 24)
     assert all(pow((g[0] * g[3] - g[1] * g[2]) % Q, 5, Q) == 1 for g in Aplus | Aminus)
+    assert distribution(Aplus) == distribution(Aminus) == {"1": 1, "2": 15, "3": 20, "5": 24}
+    assert distribution(pair_stab) == {"1": 1, "2": 9, "3": 8, "4": 6}
 
     class_lines = {}
     child_lines = {4: [], 7: []}
@@ -90,6 +111,8 @@ def main():
         frame = {INF, 0, *((r - rho) % Q for r, _ in S3)}
         D = {g for g in G if {act(g, x) for x in frame} == frame}
         assert len(D) == 10
+        assert distribution(D) == {"1": 1, "2": 5, "5": 4}
+        assert record["frame_stabilizer"]["element_order_distribution"] == distribution(D)
         assert sum(pow((g[0] * g[3] - g[1] * g[2]) % Q, 5, Q) == 1 for g in D) == 5
         p_pair = {(r - rho) % Q for (r, _), value in child_lines[cls] if value == "P"}
         assert len(p_pair) == 2
@@ -113,6 +136,7 @@ def main():
     assert CERT["cap_knife_edge_class_equivalence"]["projectivity_count"] == 10
 
     assert CERT["acceptance"]["golden_singleton_identification"] == "REFUTED_AS_AN_EQUIVARIANT_IDENTIFICATION"
+    assert CERT["verdict"]["x3_consequence"] == "X3 retains its abstract obstruction and C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not causation."
     print("C447 independent replay: PASS")
 
 

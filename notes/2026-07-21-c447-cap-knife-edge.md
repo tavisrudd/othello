@@ -64,10 +64,11 @@ singleton matching.
 More decisively, the symmetry groups obstruct every attempted repair:
 
 - each cap frame stabilizer is `D10`, with five determinant-square and five
-  determinant-nonsquare elements;
+  determinant-nonsquare elements and projective element orders `1^1 2^5 5^4`;
 - each frozen singleton matching has stabilizer `A5` of order 60 entirely inside
-  `PSL_2(11)`;
-- the unordered pair of singleton matchings has setwise stabilizer `S4` of order 24.
+  `PSL_2(11)`, with element orders `1^1 2^15 3^20 5^24`;
+- the unordered pair of singleton matchings has setwise stabilizer `S4` of order 24, with element
+  orders `1^1 2^9 3^8 4^6`.
 
 Thus no conic projectivity can conjugate the cap `D10` into either singleton stabilizer: the
 determinant character already forbids it.  Nor can it conjugate `D10` into the unordered-pair
@@ -79,8 +80,9 @@ exactly 120 projectivities sending it to an edge of the base singleton and anoth
 to an edge of the J-mate.  Either answer can therefore be manufactured by coordinate choice.  The
 frame symmetry is what could have made the comparison canonical, and it is precisely what fails.
 
-Consequently dossier register row 35 closes negative.  X3 retains only its abstract
-orbit-valued-selector statement; C447 supplies no cap-to-golden causation or identification.
+Consequently dossier register row 35 closes negative.  X3 retains its abstract obstruction and
+C460's exact orbit-valued positive geometry; the cap-lane comparison is consistency only, not
+causation.
 
 ## Exact certificate
 
@@ -110,9 +112,9 @@ python3 notes/2026-07-21-c447-cap-knife-edge.py --write
 
 | load-bearing artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary generator/checker | 16,423 | `d1e91e49a0bdd2f6916c9805f05e2ad53e76f44a55946b6018dcfa021b31c3cf` |
-| independent replay | 4,595 | `6d4829cd96bebcc2741de70d83180d0456c7eae1030826fadc37eb6fe242e4e3` |
-| canonical JSON | 7,597 | `80c135b380cd75291b3341d4bb4409edb82fbee6deea2c19e1fd1fe835c9df21` |
+| primary generator/checker | 17,684 | `2b876f467676944f55d5290534906412615bd10d4933901ca2927d0df8419a7f` |
+| independent replay | 5,536 | `db9d1d957c6c922c958c6514a16277b04c7c7672297abe59928de9f19b83140a` |
+| canonical JSON | 8,214 | `0b7fcf790e083a16a270681820f88ae4c2c2bba6d37841d6d02ae05c67feb820` |
 
 The JSON also records SHA-256 hashes and byte counts for the four frozen inputs: the q=11 cap
 feature dump, C406 Gate 1 JSON, C406 module JSON, and C458 golden-frame freeze JSON.
