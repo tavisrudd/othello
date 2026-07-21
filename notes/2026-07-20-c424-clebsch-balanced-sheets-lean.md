@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** review repairs implemented; post-fix independent review required before closure
+**Status:** post-fix review `NO-GO`; C412 scope decision required
 
 **Date:** 2026-07-21
 
@@ -135,8 +135,8 @@ polynomial-output table is frozen.
 - same-stem `.sha256` — checksums for the script, JSON, three modules, and gate; and
 - this report.
 
-Current byte counts are `25,737 / 12,126 / 14,362 / 461` for the abstract/B3/H3/gate Lean files
-and `16,635 / 46,072 / 716` for the Python/JSON/checksum evidence files.  Regeneration after a
+Current byte counts are `29,738 / 14,431 / 19,236 / 461` for the abstract/B3/H3/gate Lean files
+and `18,176 / 51,544 / 716` for the Python/JSON/checksum evidence files.  Regeneration after a
 source change recomputes these figures and hashes; the checksum manifest is authoritative.
 
 ## Reproducibility and trusted boundary
@@ -319,12 +319,12 @@ C412 input is the representation-theoretic naming of each checked sheet-constant
 
 `/root/c424_review` returned `NO-GO` on 2026-07-21.  Its five findings and dispositions are:
 
-1. **Concrete cubic orientation/stabilizer missing:** fixed by `CubicTensor`,
+1. **Concrete cubic orientation/stabilizer missing:** partially addressed by `CubicTensor`,
    `CertifiedCubicAction`, the concrete B3/H3 signed tensors and nonzero witnesses, and the concrete
    relative-invariance/stabilizer terminals.
 2. **Balanced-half uniqueness not stated:** fixed by `balancedHalf_unique_of_annihilates` and the
    B3/H3 `balancedHalf_unique` terminals.
-3. **H3 socle/radical bridge omitted:** fixed by
+3. **H3 socle/radical bridge omitted:** the finite indicator-plane part is fixed by
    `h3_affinePairingRadical_eq_sheetSocleSum` and `h3_outerOddSocleLine_eq_sheetSign`, with only the
    C412 projective-cover naming retained as an explicit representation-theoretic boundary.
 4. **Statement/audit omissions:** fixed by adding the four product terminals and every new endpoint
@@ -332,4 +332,14 @@ C412 input is the representation-theoretic naming of each checked sheet-constant
 5. **Replay/provenance overstatement:** fixed by independently replaying restriction ranks and by
    hashing the direct C399/C378 transitive inputs.
 
-The same reviewer must return `GO` on the repair diff before closure.
+The same reviewer reviewed `98468dea..5179a330` and returned a second `NO-GO` on 2026-07-21.
+Balanced-half uniqueness, statement/audit coverage, replay, and provenance are accepted as fixed.
+The remaining blockers are:
+
+1. construct the B3/H3 cubic action from the displayed permutations/affine transformations rather
+   than accepting a `CertifiedCubicAction` instance;
+2. either formalize the C412 `P(1)` socle objects and their identification maps, or obtain an
+   explicit scope amendment retaining that representation-theoretic name as an external boundary;
+3. update stale byte counts (fixed above).
+
+C424 remains live until the first two items are resolved and the same reviewer returns `GO`.
