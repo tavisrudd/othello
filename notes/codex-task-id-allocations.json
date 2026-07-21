@@ -305,8 +305,17 @@
       "last": 439,
       "purpose": "apply C430 radical-Hadamard recovery and obstruction test across identified crowns problems",
       "sequence": 34
+    },
+    {
+      "count": 18,
+      "first": 440,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 457,
+      "purpose": "Weil-roof verification battery",
+      "sequence": 35
     }
   ],
-  "next_id": 440,
+  "next_id": 458,
   "schema": "codex-task-id-allocations-v1"
 }
