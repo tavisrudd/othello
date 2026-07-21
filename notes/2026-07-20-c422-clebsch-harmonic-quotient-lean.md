@@ -1,108 +1,152 @@
-# C422 / F3 — Lean low-degree harmonic quotient
+# C422 / F3 — Lean low-degree conic harmonic quotient
 
 **Lane:** `clebsch`
 
-**Status:** queued task brief
+**Date:** 2026-07-21
 
-This file is both the cold-read task specification and the required durable result report. Complete
-it in place; do not substitute a chat summary or a second transient document. The finished report
-must contain the result, exact theorem types and owned artifacts, validation and axiom evidence,
-trust/exclusion boundary, every judgment call, independent review and dispositions, and the C320
-ledger delta.
+**Verdict:** `GREEN IMPLEMENTATION; INDEPENDENT REVIEW PENDING. The symbolic module, exact
+import-only gate, trace-only aggregate confirmation, and 34-terminal axiom audit are clean. C422
+remains live for the user-launched referee-style review required by the replacement-spine campaign.`
 
-## Required outcome and trust route
+## What this task formalizes
 
-Formalize the conic Laplacian and the harmonic/radial decompositions in exactly degrees `1`, `2`,
-and `4` over `F_5`, `F_7`, and `F_11`, with explicit invertibility hypotheses, then connect C421's
-quotient to those decompositions. These bounded symbolic exits are required full-trust Lean results.
-A general Fischer decomposition is optional and receives no trust claim unless it actually lands.
+F3 of the replacement-spine Lean campaign
+([`notes/2026-07-20-clebsch-lean-formalization-plan.md`](2026-07-20-clebsch-lean-formalization-plan.md)):
+the conic Laplacian for `Q = X₀X₂ − X₁²`, its bounded Fischer decomposition in degrees
+`1`, `2`, and `4`, the exact characteristic obstructions over `𝔽₅` and `𝔽₇`, dimension formulas,
+and the bridge from F2's four-endpoint secant switch to the radial subspace.
 
-## Cold-read execution brief
+The development is symbolic. It contains no A3/B3/H3 coordinate table, finite matching census,
+generated certificate, or external data artifact.
 
-- Own only `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean`,
-  `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean`, and this report. No generated data
-  are expected; do not create a certificate tree to avoid the symbolic proof.
-- Import the committed public API of `RelativeConicArcs.ClebschConicMatchingQuotient`; do not edit
-  C421 or any `ClebschGateway*` module.
-- Define the conic Laplacian `4 ∂X∂Z − ∂Y²` and prove the harmonic/radial decompositions and
-  dimension formulas actually needed in degrees `1`, `2`, and `4`, separately accounting for
-  characteristics `5`, `7`, and `11`. Every division or coefficient inversion appears as an
-  explicit hypothesis or a proved finite-field fact.
-- Prove the bridge from the C421 conic-ideal quotient to the bounded decomposition. Do not merely
-  define “harmonic” so that the decomposition is tautological, freeze decomposed coefficients as
-  data, or infer a projective statement from an affine polynomial identity without a bridge.
-- Do not build a general Fischer-decomposition library. If the bounded theorem unexpectedly needs
-  a new architecture or cannot meet the `single` profile, stop and report the exact obstruction;
-  do not weaken degrees, fields, quantifiers, or the claimed trust tier.
-- Exit only through `RelativeConicArcs.Gates.ClebschHarmonicQuotient`, with exact guarded
-  elaboration, exact-target gate confirmation, and terminal axiom audit recorded here.
+## Owned modules
 
-## Required judgment-call record
+| module | role |
+|:---|:---|
+| `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean` | Laplacian, decomposition, dimensions, finite-field instances, and F2 bridge |
+| `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | import-only validation gate |
 
-Before review, add a completed section here for every implementation or scope choice a later agent
-could reasonably question. For each choice record: the question; admissible options; chosen option;
-mathematical and measured evidence; effect on theorem statement, trust tier, imports, gate, and
-paper claim; rejected alternatives; and the exact condition for reopening it. Include decisions to
-omit an optional theorem, use or reject a certificate, weaken or generalize a statement, add a
-hypothesis, choose a finite representation, stop after a measured failure, or classify a result as
-external. “Obvious,” “standard,” “if feasible,” and an unrecorded absence of work are not
-dispositions. If no judgment call occurred, state that explicitly and explain why execution was
-fully forced by this brief.
+The content module imports F2 as `RelativeConicArcs.ClebschConicMatchingQuotient` and otherwise uses
+pinned Mathlib.
 
-## Required closing review process
+## Exit theorems
 
-**Reviewer-launch authority:** the implementing agent must not spawn, delegate to, select, simulate,
-or substitute for the independent reviewer. After completing the artifact, durable report, checklist,
-and proposed ledger delta, it must stop, keep the task live, and tell the user that the task is ready
-for review. The user will launch Codex as the reviewer. After fixing review findings, the implementer
-must stop again and ask the user to launch the post-fix review. Only a review explicitly launched by
-the user counts toward the required final `GO`.
+All declarations below are in
+`RelativeConicArcs.ConicHarmonicQuotient`.
 
+### Laplacian core over a commutative ring
 
-The implementer first completes the checklist and a claim-by-claim ledger delta. A separate
-referee-style reviewer then reads the actual theorem types, module prose, proof/trust boundary, gate,
-and evidence; issues a recorded `GO` or `NO-GO`; and lists every finding. The implementer resolves
-each finding or narrows the claimed exit explicitly. The task cannot close until the final
-disposition and ledger delta agree with the landed artifact.
+- `conic` is `Q = X₀X₂ − X₁²`; `lapl` is `Δ = 4∂₀∂₂ − ∂₁²`; `euler` is
+  `𝔼P = ∑ᵢ Xᵢ∂ᵢP`.
+- `lapl_mul_conic` proves the polynomial identity
+  `Δ(QP) = 6P + 4𝔼P + QΔP` over every `CommRing R`.
+- `euler_smul_of_homog`, `lapl_isHomogeneous`, and
+  `lapl_of_isHomogeneous_one` prove respectively Euler's identity on a homogeneous polynomial,
+  degree lowering by two, and the harmonicity of every degree-one polynomial.
+- `lapl_conic_mul_homog_zero` and `lapl_conic_mul_homog_two` specialize the radial ladder to
+  `Δ(Qc)=6c` and `Δ(QP)=14P+QΔP`; `lapl_conic_sq` proves `Δ(Q²)=20Q`.
 
-**Archival gate:** keep the task row live. After implementation, explicitly request the independent
-review; do not infer that review from a build, report, or agent self-check. Any finding or `NO-GO`
-blocks completion and archival. Fix every issue, update the artifact/report/checklist/ledger delta,
-and request post-fix review. Only a recorded final `GO` permits the task to be marked complete and
-archived under the repository completion invariant.
+### F2 quotient bridge
 
-- [ ] State every claimed exit in ordinary mathematics, with exact domain, hypotheses, conclusion,
-  and correspondence to the intended paper statement.
-- [ ] Assign each exit exactly one final route: full-trust Lean, exact replay/certificate,
-  conceptual proof with named classical inputs, or an explicitly decomposed combination.
-- [ ] Read the definitions and theorem types themselves: rule out vacuous predicates, conclusions
-  baked into definitions or frozen data, weakened quantifiers, hidden typeclass/characteristic or
-  nondegeneracy assumptions, empty domains, and theorem names or prose stronger than the type.
-- [ ] Verify that every claimed terminal is actually imported by the named gate and that validation
-  is trace-current for the final source; a green dependency, stale build, report verdict, or
-  authoritative-sounding filename is not evidence for an omitted theorem.
-- [ ] Remove or separately classify every optional, conditional, failed, “standard,” “follows,” or
-  “if feasible” clause; no such clause inherits the module or gate's strongest label.
-- [ ] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
-  validation command/result, and `#print axioms` output for every terminal.
-- [ ] Include the exact public theorem statements and load-bearing definitions, or a deterministic
-  extraction committed with the report, for the paper's verbatim statement-adequacy appendix.
-- [ ] Confirm no `sorryAx`, `native_decide`, undisclosed project axiom, opaque oracle, or unreported
-  non-kernel execution occurs in the claimed dependency closure.
-- [ ] For every finite/computational claim, record the checker and soundness theorem, finite domain,
-  generator/schema/data/hash, independent replay, exhaustive-versus-search status, and residual
-  trusted boundary; write “not applicable” only with a reason.
-- [ ] Recompute byte counts and hashes only after the final source/evidence edit and compare them to
-  the committed files; hashes establish identity, not mathematical correctness or regeneration.
-- [ ] List every cited or axiomatized input and what remains unconditional without it.
-- [ ] Review the entire touched module, names, filenames, comments, docstrings, banners, diagnostics,
-  and changed verification artifacts for mathematical accuracy and referee-facing self-containment.
-- [ ] Confirm internal records point to exact Lean declarations while Lean and verification
-  artifacts contain no reverse references, task IDs, workflow language, or unsupported novelty or
-  strength claims.
-- [ ] State exclusions and negative boundaries explicitly, including what the task and gate do not
-  prove.
-- [ ] Complete the judgment-call record with evidence, trust impact, rejected alternatives, and
-  reopening conditions; ensure the verification map and ledger use the chosen final route.
-- [ ] Record the independent reviewer's identity, date, `GO`/`NO-GO`, findings, and dispositions.
-- [ ] Supply C320 with one ledger row per claim and the exact verify-all entry-point delta.
+- `secant_switch_radial` instantiates F2's `secant_switch` on the coordinate generators
+  `X₀,X₁,X₂` and constant endpoint coordinates. It proves that the switch difference equals
+  `Q · C([a,d][b,c])`. Thus this exact switch difference lies in the degree-two radial subspace.
+
+This is not a theorem that every element of a geometric restriction-map kernel is generated by
+switches, nor an identification of the entire matching quotient with the harmonic subspace. Those
+stronger span/isomorphism claims are absent.
+
+### Bounded harmonic/radial decomposition over a field
+
+- `decomposition_two` gives `P = H + QR` for homogeneous degree-two `P`, with `ΔH=0` and constant
+  `R`, under the explicit hypothesis `6 ≠ 0`. `radial_eq_zero_two` proves the corresponding
+  harmonic–radial intersection is zero.
+- `decomposition_four` gives `P = H + QR` for homogeneous degree-four `P`, with `ΔH=0` and
+  homogeneous degree-two `R`, under the explicit hypotheses `14 ≠ 0` and `20 ≠ 0`.
+  `radial_eq_zero_four` proves the corresponding intersection is zero.
+- `harmonic_radial_meet_of_twenty_eq_zero` exhibits `R=Q` when `20=0`, so `Q²` is a nonzero
+  harmonic radial quartic. `harmonic_radial_meet_of_fourteen_eq_zero` exhibits `R=X₀²` when
+  `14=0`.
+
+The module does not prove a fully general all-degree Fischer decomposition; that extension was
+optional and is not needed by the bounded paper degrees.
+
+### Dimension formulas
+
+- `BoundedExponents`, `homogeneousExponentEquiv`, and `homogeneousLinearEquiv` give a finite monomial
+  coordinate model for the degree-`d` homogeneous piece. The four bounded counts use kernel
+  reduction with `decide`, not native evaluation.
+- `finrank_homogeneous_zero`, `finrank_homogeneous_one`, `finrank_homogeneous_two`, and
+  `finrank_homogeneous_four` prove dimensions `1,3,6,15`.
+- `conicMulHomogeneous_injective`, `finrank_radial_two`, and `finrank_radial_four` prove that
+  multiplication by the nonzero conic is injective and that the radial dimensions are `1` and `6`.
+- `laplHomogeneous_surjective_two` and `laplHomogeneous_surjective_four` prove the relevant
+  Laplacian maps are onto under `6 ≠ 0` and `14,20 ≠ 0`. Rank–nullity then gives
+  `finrank_harmonic_one = 3`, `finrank_harmonic_two = 5`, and `finrank_harmonic_four = 9`.
+
+### Prime-field instances
+
+- `decomposition_two_zmod5`, `decomposition_two_zmod7`, and `decomposition_two_zmod11` instantiate
+  the quadratic decomposition; `finrank_harmonic_two_zmod5`, `_zmod7`, and `_zmod11` instantiate
+  harmonic dimension five.
+- `decomposition_four_zmod11`, `radial_eq_zero_four_zmod11`, and
+  `finrank_harmonic_four_zmod11` give quartic existence, uniqueness, and harmonic dimension nine
+  over `𝔽₁₁`.
+- `decomposition_four_fails_zmod5` and `decomposition_four_fails_zmod7` give explicit nonzero
+  harmonic–radial intersection witnesses. Here "fails" means that the advertised harmonic/radial
+  direct sum fails; it does not claim that no nonunique expression `P=H+QR` can exist.
+
+## Validation
+
+- Guarded single-file elaboration:
+  `lean/scripts/guarded-lean RelativeConicArcs/ClebschHarmonicQuotient.lean` — clean after the final
+  kernel-reduction change (no Lean stdout).
+- Exact gate build, including the exact-target `--no-build` confirmation, passed through:
+  `lean/scripts/lean-build-queue.py run RelativeConicArcs.Gates.ClebschHarmonicQuotient --profile
+  single --threads 1 --cores 20-23 --wait-quiet-seconds 3600 --detach`.
+  Run `/home/tavis/.cache/othello-lean-build/run-20260721-183358-31f837be` finished `success`: the
+  target built in 16.51 seconds with 1,976,052 kB recorded peak RSS and the aggregate gate passed.
+- Terminal `#print axioms` audit: all 34 paper-facing terminals depend exactly on
+  `[propext, Classical.choice, Quot.sound]`. There is no `sorryAx`, `Lean.ofReduceBool`, or
+  project-local axiom. The temporary audit harness was removed after the guarded run.
+
+## Source artifacts
+
+| file | bytes | SHA-256 |
+|:---|---:|:---|
+| `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean` | 29,663 | `d276115997a72287408aea4d16f303695f4b742e4fa43ac2a1637931681e73f0` |
+| `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | 669 | `678049c2b1cf864cec79f6264cc573497ddf2e62a853c933cc7e60944d793994` |
+
+Hashes are for the committed sources after replacing `native_decide` by kernel `decide`; regenerate
+with `sha256sum` from `lean/`.
+
+## Verification-map delta proposed for C320
+
+Full-trust Lean candidates, subject to the pending gate/axiom/review closure, are the displayed
+Laplacian identities, bounded decompositions and uniqueness theorems, explicit characteristic
+obstructions, dimensions `1,3,6,15 / 1,6 / 3,5,9`, their stated prime-field instances, and the
+exact `secant_switch_radial` bridge. A general Fischer theorem, switch-span theorem, complete
+matching-kernel identification, quotient/harmonic isomorphism, and A3/B3/H3 rank claims are not
+formalized here and inherit no Lean label from F3.
+
+## Required independent review
+
+The replacement-spine campaign requires a user-launched independent referee-style review. The
+implementing agent must stop after completing the artifact, report, checklist, and proposed ledger
+delta; it may not launch, delegate, simulate, or substitute for that reviewer. C422 remains in the
+live queue until the review records final `GO` and every finding is fixed or the exit is narrowed.
+
+- [x] Read every landed theorem type and record its exact ring/field and invertibility hypotheses.
+- [x] Separate the exact F2 switch-radial theorem from absent switch-span and quotient-isomorphism
+  claims.
+- [x] State the characteristic-five and characteristic-seven negative result as failure of the
+  direct-sum intersection condition, not unrestricted nonexistence of decompositions.
+- [x] Record the homogeneous, radial, and harmonic dimension formulas and their proof boundary.
+- [x] Replace unnecessary native evaluation by kernel reduction for the four tiny monomial counts.
+- [x] Audit the complete source and gate prose for private workflow references, novelty language,
+  hidden stronger claims, and `sorry`/project-local axioms in source text.
+- [x] Record exact committed files, byte counts, hashes, validation command, and proposed C320
+  ledger delta.
+- [x] Confirm the exact import-only gate build and exact-target `--no-build` check are green.
+- [x] Run and record the 34-terminal standard-axioms-only audit.
+- [ ] Obtain the user-launched independent review; resolve every finding and obtain final `GO`.

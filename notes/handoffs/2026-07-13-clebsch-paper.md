@@ -190,10 +190,16 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   are not Lean-formalized and are unused by F3. It imports the existing conic API and pinned Mathlib
   and is the F3 input. Report:
   [`2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`](../2026-07-20-c421-clebsch-conic-matching-quotient-lean.md).
-- **C422--C427 queued:** bounded harmonic decomposition, sharded A3/B3/H3 factorization leaves,
+- **C422 implementation green; independent review pending:** the symbolic conic Laplacian,
+  degree-`1/2/4` harmonic/radial existence and uniqueness, exact characteristic-5/7 obstructions,
+  dimensions `1,3,6,15 / 1,6 / 3,5,9`, prime-field instances, and F2 switch-radial bridge are
+  landed as `RelativeConicArcs.ClebschHarmonicQuotient`; its import-only gate and 34-terminal axiom
+  audit are green. The exact theorem boundary, hashes, validation, and required review checklist are
+  in [`2026-07-20-c422-clebsch-harmonic-quotient-lean.md`](../2026-07-20-c422-clebsch-harmonic-quotient-lean.md).
+  C422 remains live until the user-launched referee review records final `GO`.
+- **C423--C427 queued after C422 review closure:** sharded A3/B3/H3 factorization leaves,
   balanced-sheet/cubic orientation, C411's six-representative depth--Fourier--parent bridge, q=11
-  Fourier self-duality, and the committed C373 intrinsic chirality endpoint. F3 (C422) is unblocked
-  now that F2 is in. C427 owns the new import-only
+  Fourier self-duality, and the committed C373 intrinsic chirality endpoint. C427 owns the new import-only
   `RelativeConicArcs.Gates.ClebschReplacementSpine` gate and hands its verification-map delta to
   C320.
 - **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
