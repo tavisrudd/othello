@@ -462,3 +462,180 @@ survives verbatim, two objective exits have no completed trust route, and all re
 still absent. C222 must remain active. The implementer should complete the minimal fixes above,
 commit them atomically, stop, and ask the user to launch another Codex post-fix review. This review
 does not authorize archival or task completion.
+
+## Second post-fix review — 2026-07-20
+
+**Disposition:** **NO-GO — READY FOR FIXES**. The interrupted source/report remediation is now a
+coherent commit, and the decoder prose defect is repaired. The C222 archival gate is nevertheless
+far from complete: the task report itself records six open checklist items, no exit gate or build
+evidence exists, and two objective claims still lack a completed trust route.
+
+### Current artifact and review method
+
+This user-launched review started from the current tree rather than trusting the prior snapshot.
+Commit `f2ce20a2eafdac8266308279902d7e367f6174d6` atomically contains the two C222 Lean modules and
+the task report. All three paths are clean. Their current identities agree with the report:
+
+- `ReflectionArrangements.lean`: sha256
+  `6d1fa115246c0ddfcffc0a69e2b888a6755056a2eab5d0e8f18f316931d130f1`, 16165 bytes;
+- `ReflectionArrangementDecoding.lean`: sha256
+  `780d7bc937fac57a7a55cc6004c0571917cf0dc32a1cee7ac397c199d9659fdd`, 1572 bytes.
+
+The review reread both complete modules, all current report/checklist/adequacy/C320 material, the
+gate directory, `lean/TRUST.md`, and every prior finding. A fresh bounded scan of the 33-file
+project-owned import closure found no `sorry`, `native_decide`, local `axiom`, `opaque`, workflow
+identifier, or internal reverse reference; the only lexical hit was a Q11 module explicitly saying
+that its result uses no `native_decide`. This is source evidence only.
+
+No Lean elaboration or build was replayed. The task has no import-only gate, its report says the
+axiom probes have never been run, and a foreign untracked Fourier-gate file is present under the
+shared gate directory. Building across foreign work would violate the Lean ownership rules. The
+review therefore relies on no claimed validation output and treats the report's build evidence as
+absent, exactly as the report says.
+
+### Resolved since the interrupted review
+
+- **Atomicity and identities:** resolved. The two sources and report are committed together at
+  `f2ce20a2`; their hashes and byte counts match the report.
+- **Decoder source prose:** resolved at
+  `lean/RelativeConicArcs/ReflectionArrangementDecoding.lean:4-19`. The header and theorem docstring
+  now say “joint numerical census” and explicitly disclaim a map, membership relation, or
+  leader-count equivalence.
+- **Premature full-trust wording:** substantially improved. The report consistently calls each
+  implemented route candidate full-trust and withholds the Lean-formalized label.
+- **Conjugate-root and lattice-faithfulness overclaims:** removed or narrowed.
+
+These repairs are real, but they do not satisfy the task-completion gate below.
+
+### SF1 — blocking: no gate, current elaboration, axiom transcript, trust manifest, or validated pin
+
+**Locations:** `notes/2026-07-16-c222-lean-a3-h3-closure.md:240-274,307-316`;
+`lean/TRUST.md:44`; `lean/RelativeConicArcs/Gates/`.
+
+The C222 report explicitly records all of the following as pending:
+
+- focused elaboration of both task modules;
+- actual output from every terminal's `#print axioms` probe;
+- an import-only `RelativeConicArcs.Gates.*` module importing the C222 terminal surface;
+- exact-target gate validation;
+- a Clebsch trust-manifest row;
+- a pinned *validated* commit; and
+- the manuscript verification-map update.
+
+No gate file imports either C222 module, and `lean/TRUST.md` still states that Clebsch has no
+per-paper manifest. The per-terminal probes added to source are useful but unexecuted. The commit
+containing source is not a validated pin merely because it is clean.
+
+**Impact:** no C222 declaration can yet receive the full-trust paper label, and the mandatory
+archival checklist is open.
+
+**Required fix:** create and commit the exact import-only gate; validate both modules and the gate
+through the authorized build owner; record the real terminal-by-terminal axiom output and
+exact-target confirmation; add the Clebsch/C320 trust row; pin the validated commit and hashes; and
+update the verification map without upgrading omitted claims.
+
+### SF2 — blocking: objectives 3 and 4 still have no completed fallback trust route
+
+**Locations:** C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:53-57,147-176,191-221,230-238,259-263,333-336`;
+`lean/RelativeConicArcs/ReflectionArrangements.lean:282-290`.
+
+The report now honestly states that Lean proves only one-sided `A3` join coverage and a joint
+incidence/ambiguity census. It explicitly withholds full `A3` projective-set equality and the actual
+decoder-stratum correspondence. But the task's success criterion requires every objective claim
+not formalized in Lean to be retained as computer-assisted with a documented compactness
+obstruction. The report instead says no compactness stop occurred, supplies no attempted stronger
+theorem or measurement, and calls the missing theorems “deferred build-gated” or “optional.” It also
+provides no exact external replay/certificate row for either omitted objective.
+
+The Orlik–Terao citation cannot fill these gaps: general classical identification of `A3`/`H3` does
+not prove that these six exact join coordinates cover all six displayed braid directions, and it
+does not supply the Clebsch affine-ray/leader-count correspondence.
+
+**Impact:** the report has narrowed claims safely, but it has not completed the task it specifies.
+This is a valid partial formalization, not an archival-ready C222 exit.
+
+**Required fix:** either land and validate the compact two-sided `A3` equality and genuine decoder
+bridge, or record for each omitted objective the exact completed conceptual/replay route plus the
+required measured compactness stop. If the task is intentionally being re-scoped without an
+obstruction, record explicit user authorization and revise the objective/success criterion before
+requesting review.
+
+### SF3 — major: projective transport remains neither formalized nor fully neutralized
+
+**Locations:** `lean/RelativeConicArcs/ReflectionArrangements.lean:138-176`; C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:120-145,234-235,259-263`.
+
+The report accurately says that Lean exposes `det T = 3` and row identities only. There is still no
+terminal for nonzero determinant, inverse-transpose compatibility of `h3DualProjectivity`, or the
+induced bijection on normalized projective representatives. Source nevertheless calls the map
+`h3Projectivity` and describes the dual coordinate formula as “the displayed inverse of `T`.” The
+original objective asks for the displayed projectivity, and global transport was the intended
+bridge to decoder strata.
+
+**Required fix:** expose and audit the compact projective-bijection/inverse-dual API, or narrow the
+objective and source description to explicit coordinate maps and ensure no trust row uses global
+transport.
+
+### SF4 — major: referee-facing prose still has exactness and citation defects
+
+**Locations:** `lean/RelativeConicArcs/ReflectionArrangements.lean:11-24,42-44,91-92,146-147`.
+
+- `SameDirection` is described as projective equality without disclosing its zero-vector
+  degeneracy; by definition `SameDirection 0 0` holds although zero is not a projective point.
+- `h3Joins` is called a set of “normalized directions,” but its definition is the raw image of cross
+  products and applies no normalization.
+- the header's Orlik–Terao attribution has no stable identifier/version or pinpoint theorem, lemma,
+  or page. The internal report's broad `§6.4 and exponent tables` does not satisfy the Lean guide's
+  public citation standard.
+- `h3DualProjectivity` asserts that its matrix is the inverse action without a cited or formal
+  terminal, as noted in SF3.
+
+**Impact:** the touched module still fails the mandatory full-module prose review even though most
+new docstrings are materially better.
+
+**Required fix:** state the zero/nonzero convention and raw-vector normalization precisely; correct
+the `h3Joins` docstring; give standards-compliant pinpoint citations for every classical semantic
+input or remove the attribution-dependent source claim; and prove or neutralize the inverse-action
+description.
+
+### SF5 — major: adequacy extraction and checklist remain incomplete by their own terms
+
+**Locations:** C222 report
+`notes/2026-07-16-c222-lean-a3-h3-closure.md:292-344,388-453`.
+
+Six required checklist items remain unchecked: exact objective statements, final trust routes,
+gate/validation/axiom/pin evidence, closure trust confirmation, referee-facing prose review, and
+independent final review; archival is separately unchecked. The task therefore cannot receive
+`GO` on its own documented rules.
+
+The adequacy appendix copies theorem signatures, but its “load-bearing definitions” are still only
+a list of names. It contains neither the verbatim definitions nor a deterministic extraction
+command/artifact, so the checked adequacy-extraction box at lines 330-332 remains unsupported. The
+hash box says identities “must be recomputed after the source docstring edits land” although those
+edits are now committed and the identities already match; this stale qualifier should be removed.
+The independent-review section records only the first review and says the post-fix review is
+pending; it omits the intervening `NO-GO` and therefore is not a complete judgment history.
+
+**Required fix:** provide actual load-bearing definitions or a deterministic extraction; reconcile
+every checkbox with durable evidence; update stale remediation/review status; and complete the
+judgment record and C320 rows after the final trust routes are fixed.
+
+### Current safe claim boundary
+
+Subject to later elaboration and axiom audit, the source safely supports the narrowed inventory from
+the initial review: the three finite-field arithmetic facts, explicit six-point arc, two-sided
+fifteen-line coordinate correspondence, matrix determinant and row checks, pointwise incidence-index
+equality, finite incidence spectra and fivefold locus, integer identities, and the joint census.
+The decoder module's prose now matches that last theorem.
+
+It does **not** yet support a full-trust label, full `A3` projective-set equality, actual decoder
+stratum correspondence, projective-bijection transport, arrangement characteristic-polynomial or
+conic-code conclusions without the cited conceptual layer, or archival completion.
+
+### Final disposition
+
+**NO-GO — READY FOR FIXES.** Commit `f2ce20a2` successfully repairs the interrupted documentation
+bundle, but it intentionally leaves essential task and release obligations open. C222 must remain
+active. After the implementing/build owners complete SF1–SF5, the implementer must stop and ask the
+user to launch another Codex post-fix review. This review does not authorize archival.
