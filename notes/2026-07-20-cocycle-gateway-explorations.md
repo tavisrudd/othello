@@ -182,16 +182,19 @@ at its conic phase `q = h_cox + 1`, realizes an exceptional self-dual geometry (
 present exactly when the parent leaves `PSL_2(q)`.** The rank-4 continuation (`H_4`/q=31, 57-cell at
 q=19) is the genuine open frontier.
 
-**Uniform design = the Paley biplane (connects G19).** The cross-sheet designs have uniform
-parameters `disjoint 2-(q, (q-1)/2, (q-3)/4)`, `share-edge 2-(q, (q+1)/2, (q+1)/4)` — exactly the
-**Paley biplane** on `q` points (`q ≡ 3 mod 4`, unique, self-dual). So the "self-dual design" is the
-same Paley object across the family, and the C417 chirality is its polarity; this is precisely the
-G19 Paley thread. The Paley biplane exists for *every* `q ≡ 3 mod 4` (q=19, 23, ...), but the Clebsch
-factorization realizes it only at the **conic phase** `q = h_cox+1 = 7, 11`. The extra coincidences —
-self-dual *polytope* (Fano/11-cell) and *perfect code* (Hamming/ternary Golay) — are special to those
-two q, which is why both towers pin to q=7,11 while the bare Paley biplane continues. This sharpens
-the falsifier: a "convergence object" may reproduce Paley biplanes for all `q ≡ 3 mod 4`, but must
-*not* manufacture a perfect code or a regular polytope outside q=7,11 (resp. q=7,11,19).
+**Uniform design = the Paley (Hadamard) design family (connects G19).** The cross-sheet designs have
+uniform parameters `disjoint 2-(q, (q-1)/2, (q-3)/4)`, `share-edge 2-(q, (q+1)/2, (q+1)/4)` — the
+**Paley/Hadamard symmetric design** on `q` points (`q ≡ 3 mod 4`, self-dual). This is a *biplane*
+(`lambda = 2`) only when `(q-3)/4 = 2`, i.e. `q = 11`; at `q = 7` the disjoint design is `2-(7,3,1)`
+with `lambda = 1` — the Fano *plane*, not a biplane. (Earlier drafts of this spike called the whole
+family "the Paley biplane"; that is imprecise and is corrected here.) So the "self-dual design" is
+the same Paley object across the family, and the C417 chirality is its polarity; this is precisely
+the G19 Paley thread. The Paley design exists for *every* `q ≡ 3 mod 4` (q=19, 23, ...), but the
+Clebsch factorization realizes it only at the **conic phase** `q = h_cox+1 = 7, 11`. The extra
+coincidences — self-dual *polytope* (Fano/11-cell) and *perfect code* (Hamming/ternary Golay) — are
+special to those two q, which is why both towers pin to q=7,11 while the bare Paley design continues.
+This sharpens the falsifier: a "convergence object" may reproduce Paley designs for all `q ≡ 3 mod
+4`, but must *not* manufacture a perfect code or a regular polytope outside q=7,11 (resp. q=7,11,19).
 
 ## Synthesis — one narrative across C406–C417 and the gateway map
 
@@ -233,6 +236,51 @@ symmetry are two *distinct* enlargements of the shared `PSL_2(11)`. The Clebsch 
 code (via `PSL_2(11) < M_11`), but the chirality is a separate involution, not the sporadic
 extension. This sharpens G19: the sheets give the Golay geometry, but the "canonical sign/generator"
 they supply is the `PGL` self-duality, orthogonal to the `M_12` structure.
+
+## Novelty and prior-art boundary
+
+A nine-angle literature audit of these spikes (2026-07-21) is consolidated in
+[`2026-07-21-cocycle-gateway-novelty-consolidated.md`](2026-07-21-cocycle-gateway-novelty-consolidated.md),
+with the papers mirrored in
+[`2026-07-21-novelty-audit-cache-manifest.md`](2026-07-21-novelty-audit-cache-manifest.md). The
+uniform finding: every *object* and *concept* named above is classical with a home name in some
+literature; only the specific *compositions* survive as candidate-new, and several pieces are more
+pre-empted than the spikes above stated. Anything promoted from this notebook must carry these
+credits and bounded wording — this is not a novelty claim.
+
+- **Sheet-swap = polarity is the established notion "external self-duality"** (Cunningham–Pellicer,
+  arXiv:1610.02672); "self-dual but not self-polar = one bit" is classical (Brouwer–Cameron–Haemers).
+  The 11-cell/`PSL_2(11)`→`PGL_2(11)` case is a textbook instance. What survives (Spikes 2–3) is
+  realizing that polarity on the *external* matching-sheet labeling and tying the bit to the C417
+  cocycle.
+- **Chirality = sign of a cubic moment** is established in continuous geometry (Hattne–Lamzin; the
+  "chiral moments" line). What survives (Spike 5) is the discrete `mod p` realization over a finite
+  matching family (the `±6 mod 11` readout).
+- **The cross-orbit shared-edge design mechanism** (Spikes 1–4) was not located, but the ambient
+  frame must be cited: the association scheme of perfect matchings under shared-edge relations
+  (Rands; Godsil–Meagher), and especially **Bamberg–Klawuhn, arXiv:2507.00813** — the same
+  `PSL_2(q)`-on-one-factorizations actors, but a different (Delsarte λ-factorisation) design notion.
+  *Caution:* a fast-model fetch hallucinated a "Fano/biplane from `PSL(2,q)` shared-edge counts"
+  claim into that paper; it is **not** there — cite it for the scheme/λ-design frame only.
+- **Two parent trinities must lead any framing** (Spikes 3, 6, synthesis): the Arnold Coxeter trinity
+  `A3/B3/H3` (Arnold 1997; Dechant, Proc. R. Soc. A 474:20180034) and the Galois/Kostant
+  `L_2(5,7,11)` trinity (Kostant 1995; Baez TWF week79). The code-tower/polytope-tower divergence is
+  new only as a *juxtaposition/falsifier*, not a theorem; the underlying classifications
+  (perfect codes; Leemans–Schulte polytopes, arXiv:math/0606660) are classical.
+- **Terminology — "chirality" is overloaded.** In the chiral-polytope literature it means
+  orientation-preserving-vs-reflexible, a *different* construct from the `PGL\PSL` self-duality bit
+  used here. Any manuscript must rename or explicitly disambiguate it.
+- **The A3/q=5 = doily reading is non-standard.** The textbook Galois/Coxeter trio pairs q=5 with the
+  **icosahedron** (`A5`), not the doily `GQ(2,2)`; the doily slot (Spike 6) is this notebook's own
+  construction and must be argued, not asserted as classical.
+
+Clebsch-paper headline spine, checked against siblings (same audit): the **conic-containment
+rigidity** recovering `A5` is substantially pre-empted for all `q` (Dye 1991, DOI
+10.1112/jlms/s2-44.2.270; Storme–Van Maldeghem, DOI 10.1016/0097-3165(95)90051-9, name PG(2,11) and
+PG(2,19)) — inside the lane's existing Edge/Dye boundary; the **syndrome-conic decoding oracle** is a
+known arc-code instance (Jurrius–Pellikaan). The **unique-cubic rigidity**, the **10+10 support
+chirality**, and the **uniform `A3/B3/H3` complement-code law** have no sibling/general predecessor
+located. Details and provenance are in the consolidated report.
 
 ## Reproducibility (Spikes 1–4)
 
