@@ -51,6 +51,30 @@ exact computations, not yet a committed certificate.
    C414's "killed orbits: none" at 4/6).  `F_4` maps weight 4 to weight
    `-4 = 6 mod 10`, exactly pairing quotient-degree with product-degree sections.
 
+## Session-2 results (exact, scratch-verified; certificate pending)
+
+- **Action bug resolved:** the `Sym^2` lifts are only projective; at q=11 the unique
+  determinant-one representative (cube root via `y -> y^7`, since `x -> x^3` is a
+  bijection mod 11) gives an exact 12-element matrix group and a genuine action.
+  With det-1 lifts the symmetrized sections are exactly `K`-invariant and `J`-odd.
+- **Gate C (q=11):** the odd symmetrized power-sum family spans a **rank-2 plane**
+  in the four-dimensional odd block, and its pole-delta image is likewise a plane —
+  the exact twisted parallel of C415's rank-2 depth plane.  The odd symmetrized
+  **quotient family `chi o F_M` vanishes identically** (dim 0): the multiplicative
+  sections have zero `A4`-symmetrized `J`-odd content, which structurally explains
+  the failed naive functional equation.
+- **Gate D (q=11):** the linear system `T p_M = lambda_M d_M` over `Q(zeta_10)` has
+  nullity exactly 1 (rank 14 of 15): moving-matching equivariance isolates the
+  Fourier line on the power-sum plane.
+- **q=7 both seam types (Coxeter frame, dot polarity, order-6 character):** the
+  pole-delta lemma holds for **all 57 lines** at r=2,4 (`49 * delta` at the
+  self-pole `[a]` of `ell_a` — dot polarity makes the pole the functional itself);
+  the power-sum intertwiner holds for all 14 matchings; family dims are uniformly
+  `2/2/0` (power-sum/pole-delta/quotient) on all seven seams.  Nullity is 1 on most
+  seam/exchange choices but 2 and 3 on two S3 choices — expected cause: matchings
+  whose symmetrized odd sections vanish contribute one free `lambda` each, so
+  nullity should equal `1 + #vanishing`; verify in the certificate.
+
 ## Open gates (next session)
 
 - **Gate C (odd-block realization):** dimensions of the `A4`-invariant `J`-odd spans
