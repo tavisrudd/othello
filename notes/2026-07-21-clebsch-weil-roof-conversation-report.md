@@ -383,6 +383,8 @@ and the table is the paper.
 | 36 | Are the 22 H3 matchings concurrent (exterior-point pencil) matchings? Sheets as two `PSL` orbits of intruders; golden skeleton for cap intrusion calculus | SPECULATIVE | afternoon  |
 | 37 | D1's octahedral/tetrahedral all-q uncovered formulas would explain C187's {5,11}-not-7 filling asymmetry (cross-lane with `cap`) | REASONED    | with D1    |
 | 38 | q=5 copycat works / q=11 mirrors fail = nonsplitting/splitting divide; mirror failure at 11 as cocycle obstruction | SPECULATIVE | days       |
+| 39 | Cap-set lower-bound base layer: does the chirality/golden structure act on the Hill 56-cap / AG(6,3) 112-cap (Golay-derived, `PSL(2,11)`-symmetric, p=3 shadow)? Any new symmetric cap predicted? | SPECULATIVE | days       |
+| 40 | Cubic-first as exactly solved miniature of the cap-set pairwise-blind wall (Fourier stalls, slice-rank/3-tensor breakthrough) — positioning paragraph only, no bound claim | framing     | writing    |
 
 PROVED* = follows from committed certificates plus definitions/framing; still needs its bounded
 literature audit before any "no prior instance" wording.
