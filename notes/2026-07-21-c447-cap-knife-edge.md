@@ -41,6 +41,16 @@ class 7: [[1,1,1],[10,10,3],[3,8,1]].
 The checker verifies these matrices on all ten affine conic points and the two burned points, and
 then against all twelve ordered points in the frozen C406 JSON.
 
+The two knife-edge configurations do not themselves supply a binary label.  Exactly ten
+projectivities carry class 4's frame, P pair, and N orbit to those of class 7.  One is
+
+```text
+w |-> 1/(4w+10),        matrix [[0,1],[4,10]].
+```
+
+Thus the two cap configurations form one `PGL_2(11)` orbit at the conic-data level; assigning one
+to the base singleton and the other to the J-mate would already require an external choice.
+
 ## Identification verdict
 
 The proposed identification of the size-two P orbit with the golden singleton pair is false in
@@ -76,7 +86,7 @@ orbit-valued-selector statement; C447 supplies no cap-to-golden causation or ide
 
 The primary generator parses the committed cap dump independently of the cap scripts, reconstructs
 the conics and child values, enumerates `PGL_2(11)`, derives the orbit/stabilizer data, checks both
-projectivity layers, and performs the complete compatibility exhaustion.  Its canonical JSON
+projectivity layers and the class-4/class-7 equivalence, and performs the complete compatibility exhaustion.  Its canonical JSON
 contains every acceptance object required by X2.
 
 The replay does not import the primary generator or any cap script.  It reparses only classes 4
@@ -100,9 +110,9 @@ python3 notes/2026-07-21-c447-cap-knife-edge.py --write
 
 | load-bearing artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary generator/checker | 15,090 | `4a9c7381f98dde08159901a38f01702b4ada9335687a3ff86e37880c04d119fc` |
-| independent replay | 3,915 | `2b0e0917d7b1ffd54942eef0a3ac5b761bc2cf46067677c56588c954f4093b4c` |
-| canonical JSON | 7,144 | `d5ab60fba45849a7aa24707f8ddffc1099be654b9fff7bdbe7b455c54f91d64c` |
+| primary generator/checker | 16,423 | `d1e91e49a0bdd2f6916c9805f05e2ad53e76f44a55946b6018dcfa021b31c3cf` |
+| independent replay | 4,595 | `6d4829cd96bebcc2741de70d83180d0456c7eae1030826fadc37eb6fe242e4e3` |
+| canonical JSON | 7,597 | `80c135b380cd75291b3341d4bb4409edb82fbee6deea2c19e1fd1fe835c9df21` |
 
 The JSON also records SHA-256 hashes and byte counts for the four frozen inputs: the q=11 cap
 feature dump, C406 Gate 1 JSON, C406 module JSON, and C458 golden-frame freeze JSON.

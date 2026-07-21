@@ -289,6 +289,21 @@ def build() -> dict:
         })
 
     assert [record["class"] for record in knife_edges] == [4, 7]
+    by_class = {record["class"]: record for record in knife_edges}
+    frame4 = set(by_class[4]["frame_parameters"])
+    frame7 = set(by_class[7]["frame_parameters"])
+    p4 = set(by_class[4]["child_orbits"][0]["parameters"])
+    p7 = set(by_class[7]["child_orbits"][0]["parameters"])
+    n4 = set(by_class[4]["child_orbits"][1]["parameters"])
+    n7 = set(by_class[7]["child_orbits"][1]["parameters"])
+    class_equivalences = [
+        g for g in group
+        if {act(g, x) for x in frame4} == frame7
+        and {act(g, x) for x in p4} == p7
+        and {act(g, x) for x in n4} == n7
+    ]
+    assert len(class_equivalences) == 10
+    assert class_equivalences[0] == (0, 1, 4, 10)
     return {
         "schema": "c447-cap-knife-edge-v1",
         "task": "C447",
@@ -307,6 +322,17 @@ def build() -> dict:
             ],
         },
         "knife_edge_classes": knife_edges,
+        "cap_knife_edge_class_equivalence": {
+            "projectivity_count": len(class_equivalences),
+            "example_mobius_matrix": list(class_equivalences[0]),
+            "example_formula": "w -> 1/(4w+10)",
+            "maps_class_4_frame_p_n_to_class_7_frame_p_n": True,
+            "determinant_square_nonsquare_counts": [
+                sum(det_is_square(g) for g in class_equivalences),
+                sum(not det_is_square(g) for g in class_equivalences),
+            ],
+            "consequence": "The two cap knife-edge conic configurations form one PGL2 orbit and cannot canonically label the two golden sheets.",
+        },
         "acceptance": {
             "seven_on_conic_children_each": True,
             "d10_stabilizer_each": True,

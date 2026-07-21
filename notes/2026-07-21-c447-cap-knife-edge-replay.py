@@ -101,6 +101,17 @@ def main():
         assert record["symmetry_compatible_projectivities_to_singleton"] == {"base": 0, "j_mate": 0}
         assert record["symmetry_compatible_projectivities_to_unordered_singleton_pair"] == 0
 
+    r4, r7 = CERT["knife_edge_classes"]
+    frame4 = {INF if x == "inf" else x for x in r4["frame_parameters"]}
+    frame7 = {INF if x == "inf" else x for x in r7["frame_parameters"]}
+    p4 = set(r4["child_orbits"][0]["parameters"])
+    p7 = set(r7["child_orbits"][0]["parameters"])
+    n4 = set(r4["child_orbits"][1]["parameters"])
+    n7 = set(r7["child_orbits"][1]["parameters"])
+    equivalences = [g for g in G if {act(g, x) for x in frame4} == frame7 and {act(g, x) for x in p4} == p7 and {act(g, x) for x in n4} == n7]
+    assert len(equivalences) == 10 and equivalences[0] == (0, 1, 4, 10)
+    assert CERT["cap_knife_edge_class_equivalence"]["projectivity_count"] == 10
+
     assert CERT["acceptance"]["golden_singleton_identification"] == "REFUTED_AS_AN_EQUIVARIANT_IDENTIFICATION"
     print("C447 independent replay: PASS")
 

@@ -6,6 +6,22 @@
     "p2_n5_orbits_each": true,
     "seven_on_conic_children_each": true
   },
+  "cap_knife_edge_class_equivalence": {
+    "consequence": "The two cap knife-edge conic configurations form one PGL2 orbit and cannot canonically label the two golden sheets.",
+    "determinant_square_nonsquare_counts": [
+      5,
+      5
+    ],
+    "example_formula": "w -> 1/(4w+10)",
+    "example_mobius_matrix": [
+      0,
+      1,
+      4,
+      10
+    ],
+    "maps_class_4_frame_p_n_to_class_7_frame_p_n": true,
+    "projectivity_count": 10
+  },
   "frozen_c406": {
     "base_and_j_mate_stabilizer_orders": [
       60,
