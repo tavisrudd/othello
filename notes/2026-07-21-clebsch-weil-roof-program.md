@@ -23,6 +23,32 @@ Read, in order, nothing else: (1) this program; (2) the source dossier above; (3
 per-task inputs named in the task spec being executed. Do not preload the manuscript, archives, or
 other lanes' handoffs.
 
+## Executor guardrails (Opus-level execution)
+
+These rules bind every task below and exist so that execution does not require judgment calls.
+
+1. **Compute, never recall.** Any classical formula, coordinate system, character value, or group
+   fact used in a certificate must first be *verified by direct computation inside that
+   certificate* (e.g., check a claimed invariant form is actually invariant under the frozen
+   generators; derive character data from the group, not from memory). A formula from model
+   memory or from this program's prose is a hypothesis until computed. This applies to the
+   candidate objects this program itself names.
+2. **One convention set, frozen first.** No M- or T-task may introduce coordinates, labelings, or
+   projectivities of its own. All consume the M0 conventions artifact. If a task cannot proceed
+   under the frozen conventions, that is a blocker (rule 3), not a license to re-derive.
+3. **Stop-and-escalate triggers.** Halt the task, write a dated blocker note stating exactly what
+   was observed, and queue Fable review — do not improvise a fix — when any of these occur:
+   a denominator at 11 (resp. 7, 5) appears in an integral construction; a claimed bijection is
+   not a bijection; an orbit or fibre size differs from the spec's expected value; any output
+   contradicts a frozen C-certificate; a convention change looks necessary; a literature claim
+   fails verification. Partial certificates up to the blocker are committed, clearly marked.
+4. **Acceptance criteria are literal.** Each task's Deliverable lists objects/numbers that must
+   appear in the canonical JSON. A task without its acceptance objects is not done, regardless of
+   prose in the report.
+5. **No scope invention.** A promising lead mid-task goes to the lane's discovery log with one
+   line; the task's spec is the whole task. Escalation paths: formulation questions → the task's
+   Fable gate; everything else → the Phase 3 synthesis review.
+
 ## Phase 0 — governance (one session, first)
 
 1. Allocate a contiguous C-ID block for the Phase 1 battery from the repository root:
@@ -49,12 +75,27 @@ identification → M2; R3 denominators at 11 → M3; R4 char-0 lift boundary (th
 orbit does not lift) → M5 phrasing; R5 classical-boundary citations (Kostant, Serre, golden
 reduction folklore) → Phase 0 citation rules.
 
+**M0 — conventions freeze (run first; everything consumes its output).**
+Goal: fix, once, the dictionary all M-tasks share: (i) the projectivity `P^1 ↔ conic` matching
+the frozen C406 Gate-1 conic conventions; (ii) an integral model of the vertex set as a binary
+form. **Candidate to verify, not assume (guardrail 1):** Klein's icosahedral vertex form
+`f(x,y) = xy(x^10 + 11 x^5 y^5 − y^10)` — verify computationally that it is invariant (up to
+scalar) under an explicit integral/golden `A5`-action compatible with C377's integral golden
+map, and that its 12 roots are the vertex set; record the analogous binary forms for the cube's
+8 vertices (over `Z[sqrt 2]`) and the octahedron's 6. (iii) a frozen labeling JSON mapping
+char-0 roots to conic points at each prime. Deliverable: one conventions JSON + verification
+certificate. Falsifier: no integral form compatible with C377 exists ⇒ blocker note, Fable
+review of the model before M1 runs. Model: Opus.
+
 **M1 — vertex-reduction bijection (the load-bearing miracle).**
-Goal: certify that the icosahedron's 12 vertices in the frozen C377/C399 integral golden
-coordinates reduce **bijectively onto `P^1(F_11)`** (the full conic) at both primes π, π̄ of
-`Z[φ]`; same for the cube's 8 vertices over `Z[sqrt 2]` at both primes above 7, and the
-octahedron's 6 vertices at 5. Method: exact reduction of the frozen integral coordinates; no new
-conventions. Deliverable: certificate + the vertex-count identity remark (`h + 2 = q + 1`).
+Goal: certify that the M0 vertex set reduces **bijectively onto `P^1(F_11)`** (the full conic)
+at both primes π, π̄ of `Z[φ]`; same for the cube's 8 vertices over `Z[sqrt 2]` at both primes
+above 7, and the octahedron's 6 vertices at 5. **Expected result to check, not assume:** if the
+M0 candidate form is correct, then mod 11 `f ≡ xy(x^10 − y^10)`, whose root set is exactly
+`{0, ∞} ∪ F_11^* = P^1(F_11)` — the bijection should fall out of this factorization, and the
+certificate must exhibit it explicitly. Method: exact reduction of the M0 conventions; no new
+conventions. Deliverable: certificate containing the 12-row bijection table per prime (8-row and
+6-row analogues) + the vertex-count identity remark (`h + 2 = q + 1`).
 Falsifier: bijection fails ⇒ search the finite set of quadratic twists of the embedding for the
 repairing twist and record it; if no twist repairs, the integral model dies in its strong form
 and the master-stroke note is amended before any dependent task runs. Model: Opus. **Run before
@@ -71,15 +112,18 @@ theorem, not a Rosetta row. Falsifier: singletons are not the reductions ⇒ cla
 stroke dies; T1's weaker covariation may still hold — record both outcomes separately. Model:
 Opus.
 
-**M3 — commuting-with-reduction (the subtle-failure step).**
-Goal: build the conic-quotient and moment machinery over `Z[φ, 1/N]` with 11 **not** inverted:
-integral secant products, factorization differences, `mu_1, mu_2, mu_3`; verify each commutes
-with reduction at π and π̄; exhibit `mu_3` as an integral tensor on which the golden conjugation
-acts by −1, with ±6 as its mod-π shadow. Deliverable: certificate + the exact denominator set N.
-Falsifier: an uncontrollable denominator at 11 ⇒ record exactly which construction obstructs;
-the theorem retreats to the sheet/matching level (M1–M2 claims) without the tensor clause, and
-the paper-facing statement is cut accordingly. Model: Opus; **Fable gate** on the integral-model
-formulation before coding.
+**M3 — commuting-with-reduction (the subtle-failure step; split into formulation + execution).**
+**M3a (Fable):** write the exact computational specification before any coding: the `Z[φ, 1/N]`
+lattices and bases for the quotient spaces, which constructions may invert what (11 never
+inverted), how division-by-Q is performed integrally, and the precise commuting squares to be
+checked, each with its acceptance object. Deliverable: a formulation note that M3b implements
+verbatim. **M3b (Opus):** implement the M3a spec: integral secant products, factorization
+differences, `mu_1, mu_2, mu_3`; verify each commutes with reduction at π and π̄; exhibit
+`mu_3` as an integral tensor on which the golden conjugation acts by −1, with ±6 as its mod-π
+shadow. Deliverable: certificate + the exact denominator set N. Falsifier: an uncontrollable
+denominator at 11 ⇒ guardrail-3 blocker (do not widen N silently); the theorem retreats to the
+sheet/matching level (M1–M2 claims) without the tensor clause, and the paper-facing statement is
+cut accordingly.
 
 **M4 — silver and fused cases (uniformity).**
 Goal: B3 over `Z[sqrt 2]` at both primes above 7 (full M1–M3 analogue); A3 at 5: certify the
@@ -124,7 +168,9 @@ Goal: decompose the `PSL_2(11)`-module structure of the 11×11 cross-sheet incid
 relations), same at q=7, and test the identification with the `(q−1)/2` / `(q+1)/2` Weil
 components; verify the character-field statement (`Q(sqrt −11)` at q=11) and that the outer swap
 exchanges the components. Method: exact character/idempotent computation over suitable fields;
-compare against the standard Weil-representation character (verify the reference first).
+derive the full `PSL_2(11)`/`SL_2(11)` character data computationally from the group itself
+(guardrail 1 — no character table from memory), then compare against the Weil-representation
+literature only after resolving and caching the reference.
 Deliverable: certificate + verdict on roof sub-statement (a). Falsifier: decomposition does not
 match the Weil components ⇒ the roof's sharpest clause dies; the conjecture reverts to its weaker
 form. Model: Opus; **Fable gate** on the module-identification verdict.
