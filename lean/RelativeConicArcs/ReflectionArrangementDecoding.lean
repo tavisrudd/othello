@@ -2,20 +2,21 @@ import RelativeConicArcs.ReflectionArrangements
 import RelativeConicArcs.Q11DecodingSynthesis
 
 /-!
-# Decoder corollary of the reduced `H3` arrangement
+# Joint incidence/ambiguity census
 
-This light downstream module joins the compact arrangement spectrum to the existing complete
-nearest-codeword ambiguity theorem.  Keeping it separate prevents the semantic certificate closure
-from accumulating in the coordinate leaf.
+This downstream module records, in one theorem, the reduced-`H3` incidence-stratum cardinalities
+together with the Clebsch nearest-codeword ambiguity-census cardinalities.  It is kept separate from
+the coordinate module so the decoder closure does not enter that module's elaboration.
 -/
 
 namespace RelativeConicArcs.Examples.ReflectionArrangements
 
 open RelativeConicArcs.Examples.Q11Coding
 
-/-- The reduced `H3` multiplicity strata and the coefficient-bearing Clebsch decoder strata agree
-at the paper-facing level.  `h3_dual_projectivity_maps_mirrors` supplies the exact geometric
-identification between the arrangements. -/
+/-- Joint numerical census: the reduced-`H3` incidence-stratum sizes for incidence `0,1,2,3` together
+with the Clebsch nearest-codeword ambiguity-census sizes.  This is a conjunction of cardinality
+equalities only; it asserts no map, membership, or leader-count equivalence between the two
+stratifications. -/
 theorem h3_decoder_strata :
     (h3PointsOfMultiplicity 0).card = 12 ∧
     (h3PointsOfMultiplicity 1).card = 90 ∧
