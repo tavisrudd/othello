@@ -183,7 +183,7 @@ Every terminal reports exactly `[propext, Classical.choice, Quot.sound]`; none r
 `sorryAx`, `native_decide`, a project axiom, or non-kernel execution.  The commands were removed
 from the final import-only gate, which contains imports and mathematical scope prose only.
 
-Pinned implementation commit: `<IMPLEMENTATION_COMMIT>`.
+Pinned implementation commit: `21e9ce6a70858ad653fecdf2219a836fe845168f`.
 
 ## Trust and exclusion boundary
 
@@ -335,7 +335,7 @@ archived under the repository completion invariant.
   authoritative-sounding filename is not evidence for an omitted theorem.
 - [x] Remove or separately classify every optional, conditional, failed, “standard,” “follows,” or
   “if feasible” clause; no such clause inherits the module or gate's strongest label.
-- [ ] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
+- [x] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
   validation command/result, and `#print axioms` output for every terminal.
 - [x] Include the exact public theorem statements and load-bearing definitions, or a deterministic
   extraction committed with the report, for the paper's verbatim statement-adequacy appendix.
