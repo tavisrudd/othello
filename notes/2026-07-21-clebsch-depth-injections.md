@@ -125,21 +125,58 @@ canonicity alone, which is the cleanest possible cliff.
 **Risk/cost.** Gated on T4 landing true; if it lands, the proof looks like days-to-weeks, the
 best depth-per-effort ratio on this list.
 
-## D6 — split-torus mechanism as a general lemma (supporting)
+## D6 — the general information-lattice theorem (mixed-Hecke depth functor)
+
+**Theorem shape.** C412's closing section names the open abstraction: a functor assigning
+information lattices to subgroup data `K < G > H`. Prove it for the natural classified family:
+G with a 2-transitive action of prime degree p and point stabilizer H of order prime to p — so
+`k[G/H]` is the projective cover `P(1)` in characteristic p, exactly the C412 situation. Target
+statements, uniform over the family: Loewy structure of `P(1)`; the depth-map kernel on the mixed
+bi-Hecke space `e_K k[G] e_H` equals the even part plus the socle contribution; rank drops
+computed from K-fixed points of Loewy layers; a criterion for when depth coordinates separate the
+double cosets. The degree-p 2-transitive groups are classified (affine groups, `A_p`/`S_p`,
+`PSL_2(11)` at p = 11, `M_11` at p = 11, `M_23` at p = 23, projective families with
+`(q^d−1)/(q−1)` prime), so the theorem quantifies over a known infinite family and cannot be
+exhausted.
+
+**Why it is A-depth.** It is genuinely new modular-Hecke content — projective covers, Brauer
+trees for the cyclic-Sylow situation, K-fixed-point exactness — proved as a general theorem with
+the paper's lattice as one instance. C412 itself states that no general proof is claimed and that
+mixed-Hecke coordinates need not separate double cosets; settling when they do is real work.
+
+**Narrative fit.** The paper's most distinctive structure — the ledger `22 -> 6 -> 2 -> 1` —
+stops being an example and becomes an instance of the paper's own theorem. And the other prime-
+degree instances of the family include the Mathieu actions (`M_11` at 11, `M_23` at 23): the
+theorem's scope brushes the Golay world through the front door, with no M_12 overclaim, which is
+the most graceful possible echo of the audit's boundary.
+
+**Risk/cost.** Weeks to months. Moderate risk the clean uniform statement fragments across the
+classified family; a theorem for the cyclic-Sylow subfamily with stated boundary still carries
+the grade.
+
+## D7 — split-torus mechanism as a general lemma (supporting)
 
 For irreducible rank-3 W with q = h + 1 a prime power, prove the reflection representation admits
 an `F_q`-form in which the Coxeter element's rotation generates the split torus, via Springer's
 regular-element theory reduced mod q (not by three conjugacy checks). Small on its own; listed
 because it converts the opening law's mechanism (battery T2) from verified to derived and feeds
-D1's setup.
+D1's setup. Its stretch form — an all-rank "conic phase" theorem for every irreducible reflection
+group with h + 1 a prime power — belongs to paper 2's mechanism section.
 
 ## Selection and grade calculus
 
-The paper cannot absorb all six without becoming an anthology. Recommended package:
+Six full-strength injections (D1–D6) plus one supporting lemma (D7). A single paper cannot absorb
+all six without becoming an anthology or a memoir. Recommended packages:
 
-- **D1 + D2** (they share machinery and together re-found the spine): depth B+ → A−.
-- **plus any one of D3 / D4 / D5**: depth → A. D5 is the best ratio if T4 lands; D4 is the
-  safest unconditional choice; D3 is the gem with tail risk.
+- **Single-paper depth A:** D1 + D2 (shared machinery; together they re-found the spine,
+  B+ → A−) plus any one of D3 / D4 / D5 / D6 (→ A). D5 is the best ratio if battery T4 lands;
+  D4 is the safest unconditional; D6 is the best narrative multiplier (the lattice becomes the
+  paper's own theorem, with Mathieu instances); D3 is the gem with tail risk.
+- **All six:** no longer one paper. Two defensible shapes: (i) ship the current A-grade paper as
+  designed, then a foundations paper carrying D1 + D2 + D6 with D3/D4 as standalone follow-ups —
+  this keeps the cliffhanger architecture intact; or (ii) merge everything into a single
+  monograph-length memoir (Memoirs AMS shape, depth A/A+), which sacrifices the two-paper
+  protection structure and roughly a year of timeline. Shape (i) is the recommendation.
 
 Interaction with other grades: D1 also moves novelty (a classification is "the only ones," not
 "here is one") and significance (exported method: moment-classification over Dickson families).
