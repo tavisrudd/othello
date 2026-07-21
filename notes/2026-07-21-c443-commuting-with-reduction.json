@@ -1,0 +1,1649 @@
+{
+  "blocker": {
+    "bounded_formulation_review": {
+      "C448_help": "retain the canonical orbit-valued object; do not promote a chosen member to a canonical selector",
+      "canonical_object_here": "the unordered four-element set of one-factorizing companion orbits",
+      "paper_boundary": "M1-M2 and C458 remain valid; this blocks the specified global secant-product tensor lift, not every abstract integral tensor with the same special fibres",
+      "why_no_repair_within_M3a": "no member is kappa-fixed and no member realizes a frozen C406 sheet at more than one of zeta=3,4,5,9; uniform averaging on either kappa-pair descends but has nonzero reduced first signed moment instead of C406's zero first moment"
+    },
+    "candidate_target_hit_counts_across_four_cyclotomic_primes": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "expected_one_factorizing_size_ten_orbits": 1,
+    "guardrail_trigger": "orbit/fibre size differs from the frozen specification",
+    "halt_stage": "before secant products, conic division, denominator set N, or moments mu_1,mu_2,mu_3",
+    "kappa_candidate_cycle_lengths": [
+      2,
+      2
+    ],
+    "kappa_candidate_permutation": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "kappa_fixed_candidates": 0,
+    "m3a_clause": "the unique size-ten H-orbit O_10 for which {M_0} union O_10 is a one-factorization",
+    "observed_one_factorizing_size_ten_orbits": 4
+  },
+  "consumes": {
+    "2026-07-20-c406-matching-orbit-scout.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "2026-07-20-c406-matching-orbit-scout.py": {
+      "bytes": 11893,
+      "sha256": "be5e860b69a0875dfef29cde0907a6952470d43a497dd1dc40f7e6b60c202332"
+    },
+    "2026-07-20-c406-matching-orbit-scout.sha256": {
+      "bytes": 511,
+      "sha256": "932643bc0305006dc28ffc8b0d46654bcdf3b5a8a91852d6c1718b5930a208e2"
+    },
+    "2026-07-21-c440-conventions-freeze.json": {
+      "bytes": 6436,
+      "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+    },
+    "2026-07-21-c440-conventions-freeze.py": {
+      "bytes": 29193,
+      "sha256": "8dd5a690129f8437a447d40df4e6cdac8f47fcf481987b95bfe817c074af6bb7"
+    },
+    "2026-07-21-c440-conventions-freeze.sha256": {
+      "bytes": 239,
+      "sha256": "c465649bedcf3fc4efdcc623fabcace6fcac13d5235d4fcdd0b50c08a990a9b5"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.json": {
+      "bytes": 14664,
+      "sha256": "783a731b0dfebdd055b72f9b90dff4b54de4560d990481b97caa8c4a56551c87"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.py": {
+      "bytes": 32375,
+      "sha256": "908e3afe8ba755b112349e8fc57fc20768555bb3d0df25fa36612696270adb0f"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.sha256": {
+      "bytes": 256,
+      "sha256": "e90793a5a1a5edbf0bbb0f970b118f41317c30726ad3a764fa3467106bd62735"
+    },
+    "2026-07-21-c442-antipodal-singleton-reduction.json": {
+      "bytes": 14377,
+      "sha256": "72d312ac4e6a9b4237c36e1921e3d3015d783a356b40d12928f31539a49a3943"
+    },
+    "2026-07-21-c442-antipodal-singleton-reduction.py": {
+      "bytes": 34278,
+      "sha256": "851b768e07d9b439d8a684b827bb0a52775c349ba1f74561cda3f3a1f68e5c75"
+    },
+    "2026-07-21-c442-antipodal-singleton-reduction.sha256": {
+      "bytes": 262,
+      "sha256": "f462b735186209360661334c86a039df84dec2a85700beec4b9950e919bf0ff7"
+    },
+    "2026-07-21-c458-golden-sheet-frame-freeze.json": {
+      "bytes": 13379,
+      "sha256": "9e93de4567443726896bf613971d2b7e3c7054874b4bf4810ca74a08384ff620"
+    },
+    "2026-07-21-c458-golden-sheet-frame-freeze.py": {
+      "bytes": 26597,
+      "sha256": "eaf9a6ab6a1df254925057f163fa49547f532313358b1bd3216993baca2360f3"
+    },
+    "2026-07-21-c458-golden-sheet-frame-freeze.sha256": {
+      "bytes": 386,
+      "sha256": "9d11419bcb54f70fe915903209ae99fa6d01c8628b8f0470ac5604fb2d430125"
+    }
+  },
+  "executor": "5.6-sol-xhigh, standing in for the program's Fable formulation role",
+  "finite_reductions": {
+    "each_root_has_exactly_one_candidate_hit": true,
+    "field": "F_11",
+    "frozen_C406_orbit_size": 22,
+    "frozen_sheet_sizes": [
+      11,
+      11
+    ],
+    "kappa_pair_moment_review": [
+      {
+        "candidates": [
+          0,
+          3
+        ],
+        "degrees": {
+          "1": {
+            "descent_agrees_at_pi_roots_3_4": true,
+            "descent_agrees_at_pibar_roots_5_9": true,
+            "mu_at_pi_equals_C406_base_minus_outer": false,
+            "mu_at_pi_equals_negative_C406_base_minus_outer": false,
+            "mu_at_pi_sha256": "5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c",
+            "mu_at_pi_support": 3,
+            "target_sha256": "5322fecfc92a5e3248a297a3df3eddfb9bd9049504272e4f572b87fa36d4b3bd",
+            "target_support": 0
+          },
+          "2": {
+            "descent_agrees_at_pi_roots_3_4": true,
+            "descent_agrees_at_pibar_roots_5_9": true,
+            "mu_at_pi_equals_C406_base_minus_outer": false,
+            "mu_at_pi_equals_negative_C406_base_minus_outer": false,
+            "mu_at_pi_sha256": "6b0cfb4a4474248dd0969adf74fb782bb7f1cc0f7725727b0db05604380cd1b8",
+            "mu_at_pi_support": 91,
+            "target_sha256": "6edd9f6f9cc92cded36e6c4a580933f9c9f1b90562b46903b806f21902a1a54f",
+            "target_support": 0
+          },
+          "3": {
+            "descent_agrees_at_pi_roots_3_4": true,
+            "descent_agrees_at_pibar_roots_5_9": true,
+            "mu_at_pi_equals_C406_base_minus_outer": false,
+            "mu_at_pi_equals_negative_C406_base_minus_outer": false,
+            "mu_at_pi_sha256": "65c76b52510183885e71e8f1abcc1f5587d5eadb62fb0298bc044f224ff4edc0",
+            "mu_at_pi_support": 614,
+            "target_sha256": "5e28f57bddfacfaf1575a6d444fac0243ef561252cbef2901aca204df64949ed",
+            "target_support": 69
+          }
+        }
+      },
+      {
+        "candidates": [
+          1,
+          2
+        ],
+        "degrees": {
+          "1": {
+            "descent_agrees_at_pi_roots_3_4": true,
+            "descent_agrees_at_pibar_roots_5_9": true,
+            "mu_at_pi_equals_C406_base_minus_outer": false,
+            "mu_at_pi_equals_negative_C406_base_minus_outer": false,
+            "mu_at_pi_sha256": "5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c",
+            "mu_at_pi_support": 3,
+            "target_sha256": "5322fecfc92a5e3248a297a3df3eddfb9bd9049504272e4f572b87fa36d4b3bd",
+            "target_support": 0
+          },
+          "2": {
+            "descent_agrees_at_pi_roots_3_4": true,
+            "descent_agrees_at_pibar_roots_5_9": true,
+            "mu_at_pi_equals_C406_base_minus_outer": false,
+            "mu_at_pi_equals_negative_C406_base_minus_outer": false,
+            "mu_at_pi_sha256": "56eeb12f4a1ebac9b3872d6434845cdf09b3e7676edfd0b35b0645c424270126",
+            "mu_at_pi_support": 88,
+            "target_sha256": "6edd9f6f9cc92cded36e6c4a580933f9c9f1b90562b46903b806f21902a1a54f",
+            "target_support": 0
+          },
+          "3": {
+            "descent_agrees_at_pi_roots_3_4": true,
+            "descent_agrees_at_pibar_roots_5_9": true,
+            "mu_at_pi_equals_C406_base_minus_outer": false,
+            "mu_at_pi_equals_negative_C406_base_minus_outer": false,
+            "mu_at_pi_sha256": "bded6b24a98333da291e2515a6ae735af614a94a05c433e1f7f80c301523faca",
+            "mu_at_pi_support": 598,
+            "target_sha256": "5e28f57bddfacfaf1575a6d444fac0243ef561252cbef2901aca204df64949ed",
+            "target_support": 69
+          }
+        }
+      }
+    ],
+    "no_candidate_hits_more_than_one_root": true,
+    "records": [
+      {
+        "candidates": [
+          {
+            "candidate": 0,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "039933d74f2e4ef8cd69762a9a78b1960f560389808fb4ba1b00e444f788ef8d"
+          },
+          {
+            "candidate": 1,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "b3c84286c6a431319d92e5237140ca0de9f97977ad60a54aa68916e7f33f9e01"
+          },
+          {
+            "candidate": 2,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "5e9d765c42ddcb95ace02a7f4b1ff092bf03899bdbceca30a7eb37e70f144716"
+          },
+          {
+            "candidate": 3,
+            "frozen_sheet": "base",
+            "is_frozen_C406_sheet": true,
+            "reduced_factorization_sha256": "49c6ff264a9fa07539494aade6b190e22ad87604b873466353019486151f715e"
+          }
+        ],
+        "golden_prime": "pi",
+        "phi": 8,
+        "polar_matches_C458": true,
+        "polar_matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "target_hit_count": 1,
+        "zeta": 3
+      },
+      {
+        "candidates": [
+          {
+            "candidate": 0,
+            "frozen_sheet": "base",
+            "is_frozen_C406_sheet": true,
+            "reduced_factorization_sha256": "49c6ff264a9fa07539494aade6b190e22ad87604b873466353019486151f715e"
+          },
+          {
+            "candidate": 1,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "5e9d765c42ddcb95ace02a7f4b1ff092bf03899bdbceca30a7eb37e70f144716"
+          },
+          {
+            "candidate": 2,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "b3c84286c6a431319d92e5237140ca0de9f97977ad60a54aa68916e7f33f9e01"
+          },
+          {
+            "candidate": 3,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "039933d74f2e4ef8cd69762a9a78b1960f560389808fb4ba1b00e444f788ef8d"
+          }
+        ],
+        "golden_prime": "pi",
+        "phi": 8,
+        "polar_matches_C458": true,
+        "polar_matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "target_hit_count": 1,
+        "zeta": 4
+      },
+      {
+        "candidates": [
+          {
+            "candidate": 0,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "e2666b4004e4778e9cc95e70888762d9baacd42c636bebc091a08e5d6c6b07b5"
+          },
+          {
+            "candidate": 1,
+            "frozen_sheet": "outer",
+            "is_frozen_C406_sheet": true,
+            "reduced_factorization_sha256": "c1e8681a323e80c36d38dd3ca9d4f31d109d61d7785d191aaa8846b0bbf20d6c"
+          },
+          {
+            "candidate": 2,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "05518e62d5b9a7fe4abb600b71e5289d02619fa66f9bdc1e981c582b41b4c70d"
+          },
+          {
+            "candidate": 3,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "d910d514a3d094e9335e47c80234e2d6cc9f65ccc0148167646febe428e6afe6"
+          }
+        ],
+        "golden_prime": "pibar",
+        "phi": 4,
+        "polar_matches_C458": true,
+        "polar_matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        "target_hit_count": 1,
+        "zeta": 5
+      },
+      {
+        "candidates": [
+          {
+            "candidate": 0,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "d910d514a3d094e9335e47c80234e2d6cc9f65ccc0148167646febe428e6afe6"
+          },
+          {
+            "candidate": 1,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "05518e62d5b9a7fe4abb600b71e5289d02619fa66f9bdc1e981c582b41b4c70d"
+          },
+          {
+            "candidate": 2,
+            "frozen_sheet": "outer",
+            "is_frozen_C406_sheet": true,
+            "reduced_factorization_sha256": "c1e8681a323e80c36d38dd3ca9d4f31d109d61d7785d191aaa8846b0bbf20d6c"
+          },
+          {
+            "candidate": 3,
+            "frozen_sheet": null,
+            "is_frozen_C406_sheet": false,
+            "reduced_factorization_sha256": "e2666b4004e4778e9cc95e70888762d9baacd42c636bebc091a08e5d6c6b07b5"
+          }
+        ],
+        "golden_prime": "pibar",
+        "phi": 4,
+        "polar_matches_C458": true,
+        "polar_matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        "target_hit_count": 1,
+        "zeta": 9
+      }
+    ]
+  },
+  "geometry": {
+    "B": [
+      [
+        [
+          "0",
+          "0",
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "4",
+          "2",
+          "2"
+        ],
+        [
+          "0",
+          "0",
+          "-1",
+          "-1"
+        ]
+      ],
+      [
+        [
+          "1",
+          "2",
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "0",
+          "-2",
+          "-2"
+        ],
+        [
+          "-1",
+          "-2",
+          "-1",
+          "-1"
+        ]
+      ],
+      [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      ]
+    ],
+    "all_four_complete_K12_one_factorizations": true,
+    "candidate_orbits": [
+      [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            7,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            11
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            7,
+            11
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            6,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            7,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            8,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            7,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            7,
+            9
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            10
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            11
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            8,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            6,
+            10
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            7,
+            10
+          ],
+          [
+            8,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            10
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            11
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            10
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            7,
+            11
+          ]
+        ]
+      ]
+    ],
+    "candidate_orbits_sha256": "7c7ea970145477cb64e5f083002c2ba178f5975351e8cb374625648d2dccaceb",
+    "det_B": [
+      "4",
+      "0",
+      "0",
+      "0"
+    ],
+    "fixed_matching_orbit_count": 1,
+    "golden_group_order": 60,
+    "kappa_vertex_permutation": [
+      11,
+      10,
+      3,
+      2,
+      6,
+      7,
+      4,
+      5,
+      9,
+      8,
+      1,
+      0
+    ],
+    "matching_orbit_count": 267,
+    "matching_orbit_size_census": {
+      "1": 1,
+      "10": 14,
+      "15": 20,
+      "20": 4,
+      "30": 116,
+      "5": 2,
+      "6": 4,
+      "60": 106
+    },
+    "one_factorizing_size_ten_orbit_count": 4,
+    "perfect_matching_count": 10395,
+    "pgl_bridge": [
+      [
+        "-1",
+        "-2",
+        "-1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "2",
+        "1"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "0"
+      ]
+    ],
+    "pgl_bridge_determinant": [
+      "2",
+      "3",
+      "1",
+      "-1"
+    ],
+    "pgl_bridge_determinant_reductions": {
+      "3": 4,
+      "4": 10,
+      "5": 5,
+      "9": 8
+    },
+    "polar_matching": [
+      [
+        0,
+        11
+      ],
+      [
+        1,
+        10
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        7
+      ],
+      [
+        8,
+        9
+      ]
+    ],
+    "q_after_B_is_4_times_XZ_minus_Y2": true,
+    "size_ten_orbit_count": 14,
+    "vertex_count": 12
+  },
+  "schema": "c443-golden-sheet-lift-blocker-v1",
+  "task": "C443",
+  "unreached_acceptance_objects": {
+    "exact_denominator_set_N": null,
+    "moment_square": null,
+    "mu3_plus_minus_6_shadow": null,
+    "products_square": null,
+    "quotient_square": null
+  },
+  "verdict": "BLOCKED_AT_REQUIRED_UNIQUE_ONE_PLUS_TEN_GOLDEN_SHEET"
+}

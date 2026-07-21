@@ -154,6 +154,19 @@ denominator at 11 ⇒ guardrail-3 blocker (do not widen N silently); the theorem
 sheet/matching level (M1–M2 claims) without the tensor clause, and the paper-facing statement is
 cut accordingly.
 
+**M3 OUTCOME (C443, 2026-07-21) — SHARP BLOCKER BEFORE THE DENOMINATOR STAGE.**  The frozen golden
+12-point `A5` geometry has the required unique polar matching but **four**, not one, size-ten
+companion orbits completing it to a one-factorization.  `kappa` fixes none and pairs them in two
+transpositions.  Each companion realizes a frozen C406 sheet at exactly one of
+`zeta=3,4,5,9`.  The C448-motivated unordered-pair repair does descend at each `O`-prime, but both
+uniform pair averages have nonzero reduced first signed moment (support three) where C406 requires
+zero.  Guardrail 3 therefore halts the literal secant-product construction before products,
+quotient division, `N`, or `mu_3`.  M1--M2/C458 remain intact and the paper-1 integral tensor clause
+is cut.  This does not rule out an abstract tensor: the precise missing datum would be a primitive
+saturated golden-odd rank-one weight line on the four companions lying in the common kernel of the
+first two moment maps.  See `notes/2026-07-21-c443-commuting-with-reduction.{md,py,json,sha256}` and
+`-replay.py`.
+
 **M4 — silver and fused cases (uniformity).**
 Goal: B3 over `Z[sqrt 2]` at both primes above 7 (full M1–M3 analogue); A3 at 5: certify the
 fusion mechanism (5 inert ⇒ the two would-be fibers are Frobenius-conjugate over `F_25` and fuse
