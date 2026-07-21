@@ -6,6 +6,8 @@
 
 **Date:** 2026-07-21
 
+**Implementation commit:** `29f81b4219c635824f1fb28d4b55092998271fa3`
+
 ## Result
 
 The C430 radical--Hadamard route is formalized without balanced-half enumeration.
