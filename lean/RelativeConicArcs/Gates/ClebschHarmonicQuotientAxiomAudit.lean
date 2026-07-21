@@ -1,0 +1,43 @@
+import RelativeConicArcs.Gates.ClebschHarmonicQuotient
+
+/-!
+# Axiom audit for the low-degree conic harmonic quotient
+
+This reproducible audit prints the axiom dependencies of every paper-facing terminal re-exported by
+`RelativeConicArcs.Gates.ClebschHarmonicQuotient`.  It adds no definitions or theorems.
+-/
+
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.lapl_mul_conic
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.euler_smul_of_homog
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.lapl_isHomogeneous
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.lapl_of_isHomogeneous_one
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.lapl_conic_mul_homog_zero
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.lapl_conic_mul_homog_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.lapl_conic_sq
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.secant_switch_radial
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.radial_eq_zero_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_four
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.radial_eq_zero_four
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.harmonic_radial_meet_of_twenty_eq_zero
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.harmonic_radial_meet_of_fourteen_eq_zero
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_homogeneous_zero
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_homogeneous_one
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_homogeneous_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_homogeneous_four
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_radial_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_radial_four
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_one
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_four
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_two_zmod5
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_two_zmod7
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_two_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod5
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod7
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_two_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_four_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.radial_eq_zero_four_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.finrank_harmonic_four_zmod11
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_four_fails_zmod5
+#print axioms RelativeConicArcs.ConicHarmonicQuotient.decomposition_four_fails_zmod7

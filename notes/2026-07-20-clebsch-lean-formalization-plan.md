@@ -109,11 +109,13 @@ generated matching census and no general-`2n` connectivity claim.
 
 Define the conic Laplacian `4 d_X d_Z - d_Y^2` and prove the harmonic/radial decomposition needed
 in degrees `1`, `2`, and `4` over `F_5`, `F_7`, and `F_11`, with every invertibility hypothesis
-explicit. Connect F2's quotient to this decomposition. A fully general Fischer decomposition is
-explicitly optional and must not delay the bounded paper degrees.
+explicit. Connect F2's exact four-endpoint switch identity to this decomposition by proving that its
+coordinate-generator instance is a radial `Q`-multiple. This slice does not claim a switch-span,
+complete matching-kernel, or quotient--harmonic isomorphism theorem. A fully general Fischer
+decomposition is explicitly optional and must not delay the bounded paper degrees.
 
-**Exit:** symbolic low-degree decomposition and dimension formulas, independently of A3/B3/H3
-coordinate tables.
+**Exit:** symbolic low-degree decomposition and dimension formulas plus the exact four-endpoint
+switch-radial bridge, independently of A3/B3/H3 coordinate tables.
 
 ### C423 / F4 — C406 finite quotient leaves
 
@@ -264,7 +266,7 @@ All paths are relative to the repository root. The allocator reserved C420--C428
 |:---|:---|:---|:---|
 | C420 / F1 | `lean/RelativeConicArcs/ClebschMomentTrade.lean`; `lean/RelativeConicArcs/Gates/ClebschMomentTrade.lean` | `notes/2026-07-20-c420-clebsch-moment-trade-lean.md` | imports Mathlib finite sums/tensors only; exits through affine covariance, antipodal cancellation, barycentre cancellation, cubic witness |
 | C421 / F2 | `lean/RelativeConicArcs/ClebschConicMatchingQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschConicMatchingQuotient.lean` | `notes/2026-07-20-c421-clebsch-conic-matching-quotient-lean.md`; no generated data expected | imports the existing conic API; exits through exact secant/list pullbacks, four-point switch/divisibility, generic rank-one augmentation kernel, pointwise factor and boundary-form identities, arbitrary-size switch reversibility, and `Fin 4` connectivity; no geometric restriction-map bridge, matching count/switch span, word weight, full-product boundary bridge, or general-`2n` connectivity |
-| C422 / F3 | `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | `notes/2026-07-20-c422-clebsch-harmonic-quotient-lean.md`; no generated data expected | imports F2; exits through the degree `1/2/4` `F_5/F_7/F_11` Laplacian decompositions and quotient-span bridge |
+| C422 / F3 | `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean`; `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotientAxiomAudit.lean` | `notes/2026-07-20-c422-clebsch-harmonic-quotient-lean.md`; no generated data expected | imports F2; exits through degree-one harmonicity, the degree `2/4` `F_5/F_7/F_11` Laplacian decompositions and dimensions, and the exact four-endpoint switch-radial bridge; no switch-span or quotient-isomorphism claim |
 | C423 / F4 | `lean/RelativeConicArcs/ClebschFactorizationData.lean`; separate `lean/RelativeConicArcs/ClebschFactorizationA3.lean`, `ClebschFactorizationB3.lean`, and `ClebschFactorizationH3.lean` leaves; `lean/RelativeConicArcs/Gates/ClebschFactorization.lean` | `notes/2026-07-20-c423-clebsch-factorization-leaves-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F3 and newly generated data from the frozen C406 coordinates; exits through ranks `3/6/10`, lower-moment cancellation, and nonzero B3/H3 cubic |
 | C424 / F5 | `lean/RelativeConicArcs/ClebschBalancedSheets.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean`; `lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean`; `lean/RelativeConicArcs/Gates/ClebschBalancedSheets.lean` | `notes/2026-07-20-c424-clebsch-balanced-sheets-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F4; exits through C430 radical--Hadamard balanced-half rigidity with B3/H3 rank/radical leaves, abstract index-two sign theorem, concrete anti-invariance/stabilizer, and plane syzygies |
 | C425 / F6 | `lean/RelativeConicArcs/ClebschDoubleCosetDepthData.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthBase.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthPositive.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepthNegative.lean`; `lean/RelativeConicArcs/ClebschDoubleCosetDepth.lean`; `lean/RelativeConicArcs/Gates/ClebschDoubleCosetDepth.lean` | `notes/2026-07-20-c425-clebsch-double-coset-depth-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F1/F5 plus `RelativeConicArcs.ClebschGatewayQ11Fusion` and `RelativeConicArcs.ClebschGatewayQ11Matching`; exits through `1,4,6 / 1,4,6`, six profiles, rank-two plane, cubic pushforward, odd-Fourier sign, and decorated parent recovery |

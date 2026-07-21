@@ -168,8 +168,7 @@ theorem lapl_conic : lapl R (conic R) = (6 : R) • 1 := by
   rwa [mul_one] at h
 
 /-- `Δ(Q²) = 20 · Q`, over any commutative ring.  The scalar `20 = 4·5` is the `m = 2, k = 2` radial
-ladder value; its vanishing is exactly the obstruction to the degree-four decomposition in
-characteristic five. -/
+ladder value; its vanishing supplies the degree-four obstruction in characteristic five. -/
 theorem lapl_conic_sq : lapl R (conic R * conic R) = (20 : R) • conic R := by
   rw [lapl_conic_mul_homog_two conic_isHomogeneous, lapl_conic, mul_smul_comm, mul_one]
   module
@@ -192,9 +191,9 @@ end Core
 The pairing-forgetting quotient represents each secant of the standard conic by the linear form
 `secant`, and its four-endpoint switch difference is a multiple of the conic form `conicForm`.
 Evaluated on the coordinate generators `X₀, X₁, X₂` with the endpoint coordinates embedded as
-constants, that switch difference becomes `Q` times a constant: a radial degree-two polynomial with
-no harmonic component.  This identifies the pairing data forgotten by the conic restriction with the
-radial part quotiented out by the harmonic decomposition. -/
+constants, that switch difference becomes `Q` times a constant.  Thus this exact switch difference
+belongs to the principal conic ideal.  No switch-span, quotient-kernel, or harmonic-projection
+identification is asserted here. -/
 
 section Bridge
 
@@ -205,7 +204,7 @@ open ConicMatchingQuotient
 /-- **The switch difference is radial.**  With endpoint coordinates embedded as constants and the
 plane coordinates taken to be the generators `X₀, X₁, X₂`, the four-endpoint secant switch difference
 of the pairing-forgetting quotient equals `Q` times the constant `[a,d][b,c]`.  It therefore lies in
-the radial (conic-ideal) part of the degree-two space, so its harmonic part is zero. -/
+the radial (conic-ideal) part of the degree-two space. -/
 theorem secant_switch_radial (sa ta sb tb sc tc sd td : R) :
     secant (C sa) (C ta) (C sb) (C tb) (X 0) (X 1) (X 2)
         * secant (C sc) (C tc) (C sd) (C td) (X 0) (X 1) (X 2)
@@ -226,9 +225,10 @@ end Bridge
 
 Over a field, a homogeneous polynomial `P` of degree `d` splits as `P = H + Q · R` with `H` harmonic
 (`Δ H = 0`) of degree `d` and `R` of degree `d − 2` — the harmonic/radial (Fischer) decomposition —
-provided the radial ladder scalars are invertible.  Degree `1` is unconditional; degree `2` needs
-`6 ≠ 0`; degree `4` needs `14 ≠ 0` and `20 ≠ 0`.  Both the existence of the split and the triviality
-of the harmonic∩radial intersection are proved; together they exhibit the direct sum.
+provided the radial ladder scalars are invertible.  Every degree-one polynomial is harmonic and its
+radial subspace is zero; the degree-two split needs `6 ≠ 0`, and the degree-four split needs
+`14 ≠ 0` and `20 ≠ 0`.  In degrees two and four, both existence of the split and triviality of the
+harmonic∩radial intersection are proved; together they exhibit the direct sum.
 
 The harmonic representative is produced by an explicit projection built from `Δ`, so "harmonic" is
 the genuine differential condition `Δ H = 0` and the decomposition is not true by definition.  The
@@ -496,9 +496,9 @@ intersect nontrivially, so no direct-sum decomposition `Δ⁻¹0 ⊕ Q·(deg 2)`
 exists.  Two independent obstructions occur: `20 = 0` makes `Q²` harmonic, and `14 = 0` makes
 `Q · X₀²` harmonic. -/
 
-/-- **Obstruction at `20 = 0`.**  If `20 = 0` then `Q²` is a nonzero degree-two multiple of `Q` whose
-product with `Q` (namely `Q²`) is harmonic, so the harmonic and radial degree-four subspaces meet
-outside zero and the degree-four decomposition fails. -/
+/-- **Obstruction at `20 = 0`.**  If `20 = 0`, take the nonzero degree-two polynomial `R = Q`.
+Then `Q · R = Q²` is harmonic, so the harmonic and radial degree-four subspaces meet outside zero and
+the degree-four direct-sum decomposition fails. -/
 theorem harmonic_radial_meet_of_twenty_eq_zero (h20 : (20 : K) = 0) :
     ∃ R', R'.IsHomogeneous 2 ∧ IsHarmonic (conic K * R') ∧ R' ≠ 0 :=
   ⟨conic K, conic_isHomogeneous, by rw [IsHarmonic, lapl_conic_sq, h20, zero_smul], conic_ne_zero⟩
@@ -516,9 +516,10 @@ end Decomposition
 
 /-! ## The bounded degrees over the prime fields `𝔽₅, 𝔽₇, 𝔽₁₁`
 
-The degree-one and degree-two decompositions hold over each of `𝔽₅, 𝔽₇, 𝔽₁₁`.  The degree-four
-decomposition holds over `𝔽₁₁` (where `14, 20 ≠ 0`) but **fails** over `𝔽₅` (where `20 = 0`) and over
-`𝔽₇` (where `14 = 0`); the failures are witnessed by explicit harmonic radial polynomials. -/
+Degree-one harmonicity and the degree-two decomposition hold over each of `𝔽₅, 𝔽₇, 𝔽₁₁`.  The
+degree-four decomposition holds over `𝔽₁₁` (where `14, 20 ≠ 0`) but its direct-sum property
+**fails** over `𝔽₅` (where `20 = 0`) and over `𝔽₇` (where `14 = 0`); the failures are witnessed by
+explicit nonzero harmonic radial polynomials. -/
 
 section FiniteFields
 
