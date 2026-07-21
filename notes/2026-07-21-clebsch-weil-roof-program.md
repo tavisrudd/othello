@@ -167,10 +167,14 @@ saturated golden-odd rank-one weight line on the four companions lying in the co
 first two moment maps.  See `notes/2026-07-21-c443-commuting-with-reduction.{md,py,json,sha256}` and
 `-replay.py`.
 
-**Allocated bounded follow-up C461 (user-selected):** compute the exact moment maps on the
-rank-four companion weight lattice and its saturated `ker(m_1) intersection ker(m_2)`, including
-the full Galois character.  A primitive golden-odd rank-one kernel advances to the cubic reduction
-test; a zero or wrong-character kernel closes the whole four-companion secant-family route.
+**C461 OUTCOME (user-selected bounded M3 follow-up) — SHARP NEGATIVE.**  Over `O_0[1/2]` the full
+`kappa`-descended weight lattice on the four companions has basis
+`e0+e3, rho(e0-e3), e1+e2, rho(e1-e2)`.  Its golden-odd degree-1/2/3 moment maps have mod-11 ranks
+`1/4/4`; stacking degrees one and two gives rank four and zero kernel.  Therefore no primitive
+linear weighting of the four secant-sheet moment sums can have zero lower shadows and a nonzero
+cubic shadow.  This closes the entire companion-weight route before the `+/-6` comparison, but not
+a direct relative-invariant construction in the abstract tensor lattice.  See
+`notes/2026-07-21-c461-four-companion-weight-line.{md,py,json,sha256}` and `-replay.py`.
 
 **M4 — silver and fused cases (uniformity).**
 Goal: B3 over `Z[sqrt 2]` at both primes above 7 (full M1–M3 analogue); A3 at 5: certify the
