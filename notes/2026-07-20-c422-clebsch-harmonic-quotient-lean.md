@@ -4,9 +4,10 @@
 
 **Date:** 2026-07-21
 
-**Verdict:** `GREEN IMPLEMENTATION; INDEPENDENT REVIEW PENDING. The symbolic module, exact
-import-only gate, trace-only aggregate confirmation, and 34-terminal axiom audit are clean. C422
-remains live for the user-launched referee-style review required by the replacement-spine campaign.`
+**Verdict:** `INITIAL REVIEW NO-GO; ALL THREE FINDINGS FIXED; POST-FIX REVIEW PENDING. The bridge
+prose and campaign exit now state only the exact switch-radial theorem, and a committed 34-terminal
+axiom-audit module makes the trust check independently reproducible. C422 remains live for the
+same user-launched reviewer to record final disposition.`
 
 ## What this task formalizes
 
@@ -25,6 +26,7 @@ generated certificate, or external data artifact.
 |:---|:---|
 | `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean` | Laplacian, decomposition, dimensions, finite-field instances, and F2 bridge |
 | `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | import-only validation gate |
+| `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotientAxiomAudit.lean` | committed 34-terminal `#print axioms` harness |
 
 The content module imports F2 as `RelativeConicArcs.ClebschConicMatchingQuotient` and otherwise uses
 pinned Mathlib.
@@ -99,30 +101,35 @@ optional and is not needed by the bounded paper degrees.
 ## Validation
 
 - Guarded single-file elaboration:
-  `lean/scripts/guarded-lean RelativeConicArcs/ClebschHarmonicQuotient.lean` — clean after the final
-  kernel-reduction change (no Lean stdout).
-- Exact gate build, including the exact-target `--no-build` confirmation, passed through:
-  `lean/scripts/lean-build-queue.py run RelativeConicArcs.Gates.ClebschHarmonicQuotient --profile
-  single --threads 1 --cores 20-23 --wait-quiet-seconds 3600 --detach`.
-  Run `/home/tavis/.cache/othello-lean-build/run-20260721-183358-31f837be` finished `success`: the
-  target built in 16.51 seconds with 1,976,052 kB recorded peak RSS and the aggregate gate passed.
-- Terminal `#print axioms` audit: all 34 paper-facing terminals depend exactly on
-  `[propext, Classical.choice, Quot.sound]`. There is no `sorryAx`, `Lean.ofReduceBool`, or
-  project-local axiom. The temporary audit harness was removed after the guarded run.
+  `lean/scripts/guarded-lean RelativeConicArcs/ClebschHarmonicQuotient.lean` — clean after the
+  review repair (no Lean stdout; 7.72 seconds).
+- Post-fix gate and audit build, including the exact-target `--no-build` aggregate confirmation:
+  `lean/scripts/lean-build-queue.py run RelativeConicArcs.Gates.ClebschHarmonicQuotient
+  RelativeConicArcs.Gates.ClebschHarmonicQuotientAxiomAudit --profile single --threads 1
+  --aggregate RelativeConicArcs.Gates.ClebschHarmonicQuotientAxiomAudit --cores 20-23`.
+  Run `/home/tavis/.cache/othello-lean-build/run-20260721-184621-93dac3d5` finished `success`: the
+  gate built in 12.83 seconds with 1,981,916 kB recorded peak RSS, the audit built in 5.00 seconds
+  with 1,818,272 kB peak, and the aggregate gate passed.
+- Reproducible terminal audit:
+  `lean/scripts/guarded-lean RelativeConicArcs/Gates/ClebschHarmonicQuotientAxiomAudit.lean`.
+  The committed harness enumerates all 34 fully qualified terminals. Each printed dependency set is
+  contained in `[propext, Classical.choice, Quot.sound]`, and their union is that three-axiom set;
+  no output contains `sorryAx`, `Lean.ofReduceBool`, or a project-local axiom. The guarded replay
+  completed in 5.01 seconds and printed exactly 34 terminal blocks.
 
 ## Source artifacts
 
 | file | bytes | SHA-256 |
 |:---|---:|:---|
-| `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean` | 29,663 | `d276115997a72287408aea4d16f303695f4b742e4fa43ac2a1637931681e73f0` |
-| `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | 669 | `678049c2b1cf864cec79f6264cc573497ddf2e62a853c933cc7e60944d793994` |
+| `lean/RelativeConicArcs/ClebschHarmonicQuotient.lean` | 29,698 | `fdcbe324bebc48e6d6faacd804a1ae7d5f834ad7420d79ac9db6bf3987aaee23` |
+| `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotient.lean` | 668 | `cc4f8617ebe4e5fa46e66ca142a6c3adeec021679f6c96aab2f391c93f856e51` |
+| `lean/RelativeConicArcs/Gates/ClebschHarmonicQuotientAxiomAudit.lean` | 2,968 | `2c518e505349f4c73e2080a0969a7286e1dc138a2804dc13798a20a34942a250` |
 
-Hashes are for the committed sources after replacing `native_decide` by kernel `decide`; regenerate
-with `sha256sum` from `lean/`.
+Hashes are for the committed post-review-repair sources; regenerate with `sha256sum` from `lean/`.
 
 ## Verification-map delta proposed for C320
 
-Full-trust Lean candidates, subject to the pending gate/axiom/review closure, are the displayed
+Full-trust Lean candidates, subject to the pending post-fix review closure, are the displayed
 Laplacian identities, bounded decompositions and uniqueness theorems, explicit characteristic
 obstructions, dimensions `1,3,6,15 / 1,6 / 3,5,9`, their stated prime-field instances, and the
 exact `secant_switch_radial` bridge. A general Fischer theorem, switch-span theorem, complete
@@ -149,4 +156,24 @@ live queue until the review records final `GO` and every finding is fixed or the
   ledger delta.
 - [x] Confirm the exact import-only gate build and exact-target `--no-build` check are green.
 - [x] Run and record the 34-terminal standard-axioms-only audit.
-- [ ] Obtain the user-launched independent review; resolve every finding and obtain final `GO`.
+- [x] Obtain the user-launched initial review and record its `NO-GO` findings.
+- [x] Fix all three initial findings and prepare the same reviewer for the post-fix pass.
+- [ ] Obtain final `GO` from the same user-launched reviewer.
+
+## Initial independent review — 2026-07-21
+
+**Reviewer:** user-launched Codex subagent. **Disposition:** `NO-GO`, with three actionable findings;
+the reviewer edited no files.
+
+1. **Unsupported bridge prose:** the arbitrary-`CommRing` theorem proves only that one switch
+   difference is `Q` times a constant, not a zero harmonic projection or quotient identification.
+   **Fixed in `0373a6db`:** the module and gate now claim only exact principal-ideal/radial form.
+2. **Campaign exit mismatch:** the plan/table still said `quotient-span bridge` although C421's
+   narrowed boundary and this report exclude switch span and quotient isomorphism.
+   **Fixed in `0373a6db`:** the authoritative F3 plan and ownership table now specify the exact
+   four-endpoint switch-radial bridge and expressly exclude the stronger claims; queue and handoff
+   use the same boundary.
+3. **Non-durable axiom evidence:** the prior temporary harness was absent from the artifact and the
+   report's word `exactly` was stronger than a reproducible per-terminal record.
+   **Fixed in `0373a6db`:** a committed audit module enumerates all 34 fully qualified terminals;
+   this report states the per-terminal upper bound and union and gives the replay command.
