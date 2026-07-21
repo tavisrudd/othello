@@ -4,11 +4,25 @@
 
 **Date:** 2026-07-20
 
-**Status:** `STAGES T0/T1 THEOREMS; B3 SEAM SPLIT CERTIFIED; SECTION/DEPTH/MODULAR SYNTHESIS OPEN`
+**Status:** `STAGES T0/T1 AND C414 B3/H3 DEPTH PORTABILITY COMPLETE; C415--C417 SHADOW/SECTION/MODULAR GATES OPEN`
 
 **Literature depth:** zero sources were read at full text for this synthesis.  Three sources were
 read partially and five at abstract/metadata depth, as itemized below.  This is a background
 comparison, not a novelty or priority audit, and it licenses no absence claim.
+
+## C414 closure
+
+C414 has completed the geometric portability gate left open by this preflight.  Both q=7 seam
+classes now have actual degree-`2/4` factorization sections of moving odd rank four and intrinsic
+four-coordinate zero-depth profiles.  The `S3` and `D8` profiles each separate six double cosets,
+have rank two, and first survive cubically, with per-sheet weights `1,3,3` and `1,2,4`; this is the
+same structural law as H3's `1,4,6` profile.  A3 remains the nonsplitting control.  The exact theorem,
+claim-specific source audit, and certificate bundle are in
+`notes/2026-07-20-c414-b3-h3-oriented-depth-theorem.md`.
+
+This closes C414, not the full conjecture below.  The zero-depth plane is a nonlinear compression
+of the rank-four section space; C416 still owns the section-level twisted-Fourier identity, while
+C415 and C417 own the geometric transformed statistic and modular filtered-lattice comparison.
 
 ## Executive picture
 
@@ -458,19 +472,19 @@ then compare the special-fibre radical/socle and Tate boundary maps.  The succes
 exact defect-supported derivation of the `8/9` shift; nonexistence of a compatible filtered lattice
 is also a valid sharp obstruction.
 
-## Ownership by queued task
+## Ownership by task
 
-- **C414:** the certified two-seam q=7 control, then the B3/H3 section/depth statement and A3
+- **C414 — complete:** the certified two-seam q=7 control, B3/H3 section/depth statement, and A3
   nonsplitting boundary.
 - **C415:** T2/T3's geometric incidence shadow of all four transformed odd coordinates.
 - **C416:** T0/T1's multiplicative-character Fourier sectors, Gauss kernels, and the remaining
   section-level intertwiner/uniqueness question.
 - **C417:** T3's affine base-choice cocycle, integral lattice, and modular extension class.
 
-The scientific dependency exposed here is `T0 -> T1 -> T2 -> T3`.  It does not administratively
-close or re-peg any queued task.  C414 remains the active entry because the q=7 representation gate
-has passed but the two-seam geometric portability gate remains open.  The exact results narrow
-C416 to the section identity and keep a broad untwisted C415 search behind that gate.
+The scientific dependency exposed here is `T0 -> T1 -> T2 -> T3`; it does not re-peg any task.
+C414 has closed the two-seam geometric portability gate, so C415 is the next branch entry.  The
+exact results narrow C416 to the section identity and give C415 a four-coordinate geometric depth
+shadow rather than a broad untwisted search.
 
 ## Literature boundary
 
