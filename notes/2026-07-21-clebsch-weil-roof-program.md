@@ -167,6 +167,11 @@ saturated golden-odd rank-one weight line on the four companions lying in the co
 first two moment maps.  See `notes/2026-07-21-c443-commuting-with-reduction.{md,py,json,sha256}` and
 `-replay.py`.
 
+**Allocated bounded follow-up C461 (user-selected):** compute the exact moment maps on the
+rank-four companion weight lattice and its saturated `ker(m_1) intersection ker(m_2)`, including
+the full Galois character.  A primitive golden-odd rank-one kernel advances to the cubic reduction
+test; a zero or wrong-character kernel closes the whole four-companion secant-family route.
+
 **M4 — silver and fused cases (uniformity).**
 Goal: B3 over `Z[sqrt 2]` at both primes above 7 (full M1–M3 analogue); A3 at 5: certify the
 fusion mechanism (5 inert ⇒ the two would-be fibers are Frobenius-conjugate over `F_25` and fuse
