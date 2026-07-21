@@ -65,6 +65,57 @@
       330
     ]
   },
+  "q9_e7_to_e6_deletion_gate": {
+    "clebsch_A5_order": 60,
+    "heptad_projective_stabilizer_order": 21,
+    "projected_aronhold_heptad": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        2
+      ],
+      [
+        1,
+        8,
+        6
+      ],
+      [
+        1,
+        5,
+        3
+      ],
+      [
+        1,
+        6,
+        0
+      ],
+      [
+        1,
+        0,
+        4
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "six_point_deletion_stabilizer_orders": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "special_clebsch_identification": false
+  },
   "q9_klein_twist_gate": {
     "F9_isomorphic": false,
     "frozen_hermitian_F9_points": 28,
@@ -72,8 +123,14 @@
     "standard_klein_reduction_F9_points": 10
   },
   "schema": "c438-continuation-mathieu-gate-v1",
-  "trusted_input": {
-    "path": "notes/2026-07-19-c379-clebsch-deep-hole-extension.json",
-    "sha256": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
-  }
+  "trusted_inputs": [
+    {
+      "path": "notes/2026-07-19-c379-clebsch-deep-hole-extension.json",
+      "sha256": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
+    },
+    {
+      "path": "notes/2026-07-20-c405-twisted-cubic-deep-hole-pilot.json",
+      "sha256": "c1d9a0e11b7890c415a18c49a989301101784ae3b4d9931be59a15820c5df692"
+    }
+  ]
 }

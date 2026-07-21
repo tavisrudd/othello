@@ -63,17 +63,26 @@ q=9:  marked degree-2 del Pezzo / E7 exceptional system
 q=11: Clebsch cubic + twelve A1 extensions
 ```
 
-is a category-correct bridge.  It does not identify the special q=9 cubic reductions with the
-Clebsch cubic.
+is a category-correct bridge.  The first exact falsifier shows that it does **not** identify the
+special q=9 cubic reductions with the Clebsch cubic.  Projecting the frozen octad from one mark
+gives the heptad
+
+```text
+(0,1,2), (1,2,2), (1,8,6), (1,5,3), (1,6,0), (1,0,4), (1,0,0).
+```
+
+Its projective stabilizer has order `21`, as expected.  Each of its seven six-point deletions has
+projective stabilizer exactly `3`, not the Clebsch `A5` order `60`.  Thus the common `E6` layer is
+universal marked-cubic geometry, not a hidden equivalence of the two special cubic surfaces.
 
 ### Exact next gate
 
-Project each frozen q=9 octad from its marked point to recover the seven Aronhold blow-up points.
-For each of the seven deletions, compute the 27-line incidence, the distinguished double-six, and
-the six conic-row evaluation divisors on the branch quartic.  Compare those six divisors—not the
-whole cubic surface—with C379's six two-point divisors `Q_i cap Q(F_11)`.  Stop if no intrinsic
-curve on the q=9 cubic reduction selects the conic row or if the row divisor has no recoverable
-parent information.
+The projection, deletion, and special-symmetry part of the gate is complete and negative.  The
+remaining useful version is narrower: compute the distinguished double-six and the six conic-row
+evaluation divisors attached to the q=9 marking.  Compare those divisors—not the whole cubic
+surface—with C379's six two-point divisors `Q_i cap Q(F_11)`.  Stop if no intrinsic curve on the
+q=9 cubic reduction selects the conic row or if the row divisor has no recoverable parent
+information.
 
 This gate uses only C405's octad/net, C438's direct bitangent matrix, C379's five-point conics, and
 standard blow-up Picard arithmetic.  It is the cheapest genuinely geometric successor.
@@ -156,8 +165,9 @@ orientations.
 
 ## Revised attack order
 
-1. **Run the `E7 -> E6` deletion gate.**  It is intrinsic, coordinate-explicit, and uses the actual
-   q=11 matching curves `Q_i`.
+1. **Finish only the divisor part of the `E7 -> E6` gate.**  The special Clebsch-identification
+   gate has failed (`3` versus `60` stabilizers), but the six actual q=11 matching curves `Q_i`
+   still have a universal double-six counterpart.
 2. **Adjoin the two Witt designs to q=11.**  Test the relative-orientation bit against C390's
    Bring theta/trigonal data; the unmarked profiles are already known to collapse.
 3. **Only then attempt a Golay embedding.**  Require a canonical octad--dodecad incidence class;
@@ -179,7 +189,8 @@ sha256sum -c notes/2026-07-20-c438-continuation-mathieu-gate.sha256
 
 The standard-library checker pins C379's JSON by SHA-256, rebuilds `PSL_2(11)`, enumerates every
 six-subset orbit and both Witt designs, checks the outer exchange, evaluates all 22 matching
-profiles, and independently counts both q=9 plane quartics over `F_9`.
+profiles, independently counts both q=9 plane quartics over `F_9`, projects the exact Cayley octad
+to an Aronhold heptad, and exhausts the projective stabilizers of all seven cubic deletions.
 
 ## Classical sources and boundary
 

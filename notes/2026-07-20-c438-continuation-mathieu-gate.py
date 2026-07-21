@@ -16,6 +16,8 @@ STEM = "2026-07-20-c438-continuation-mathieu-gate"
 OUT = ROOT / "notes" / f"{STEM}.json"
 INPUT = ROOT / "notes" / "2026-07-19-c379-clebsch-deep-hole-extension.json"
 INPUT_SHA256 = "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d"
+C405_INPUT = ROOT / "notes" / "2026-07-20-c405-twisted-cubic-deep-hole-pilot.json"
+C405_INPUT_SHA256 = "c1d9a0e11b7890c415a18c49a989301101784ae3b4d9931be59a15820c5df692"
 Q = 11
 INF = 11
 OMEGA = tuple(range(12))
@@ -96,6 +98,14 @@ def f9_mul(x: int, y: int) -> int:
     return ((a * c + 2 * b * d) % 3) + 3 * ((a * d + b * c) % 3)
 
 
+def f9_neg(x: int) -> int:
+    return ((-x % 3) % 3) + 3 * ((-(x // 3)) % 3)
+
+
+def f9_sub(x: int, y: int) -> int:
+    return f9_add(x, f9_neg(y))
+
+
 def f9_pow(x: int, exponent: int) -> int:
     answer = 1
     while exponent:
@@ -110,6 +120,112 @@ def f9_normalize(vector):
     leading = next(x for x in vector if x)
     scale = f9_pow(leading, 7)
     return tuple(f9_mul(scale, x) for x in vector)
+
+
+def f9_dot(left, right):
+    total = 0
+    for x, y in zip(left, right):
+        total = f9_add(total, f9_mul(x, y))
+    return total
+
+
+def f9_transpose(matrix):
+    return tuple(tuple(matrix[i][j] for i in range(len(matrix))) for j in range(len(matrix[0])))
+
+
+def f9_mat_vec(matrix, vector):
+    return tuple(f9_dot(row, vector) for row in matrix)
+
+
+def f9_mat_mul(left, right):
+    return tuple(tuple(f9_dot(row, column) for column in f9_transpose(right)) for row in left)
+
+
+def f9_rref(matrix):
+    answer = [list(row) for row in matrix]
+    pivots = []
+    row = 0
+    for column in range(len(answer[0])):
+        pivot = next((i for i in range(row, len(answer)) if answer[i][column]), None)
+        if pivot is None:
+            continue
+        answer[row], answer[pivot] = answer[pivot], answer[row]
+        scale = f9_pow(answer[row][column], 7)
+        answer[row] = [f9_mul(scale, x) for x in answer[row]]
+        for other in range(len(answer)):
+            if other == row:
+                continue
+            multiple = answer[other][column]
+            answer[other] = [f9_sub(x, f9_mul(multiple, y)) for x, y in zip(answer[other], answer[row])]
+        pivots.append(column)
+        row += 1
+        if row == len(answer):
+            break
+    return answer, tuple(pivots)
+
+
+def f9_inverse_matrix(matrix):
+    size = len(matrix)
+    augmented = [list(matrix[i]) + [int(i == j) for j in range(size)] for i in range(size)]
+    reduced, pivots = f9_rref(augmented)
+    assert pivots[:size] == tuple(range(size))
+    return tuple(tuple(row[size:]) for row in reduced)
+
+
+def f9_frame_map(source, target):
+    dimension = len(source[0])
+    assert len(source) == len(target) == dimension + 1
+    source_columns = f9_transpose(source[:dimension])
+    target_columns = f9_transpose(target[:dimension])
+    if len(f9_rref(source_columns)[1]) != dimension or len(f9_rref(target_columns)[1]) != dimension:
+        return None
+    source_inverse = f9_inverse_matrix(source_columns)
+    target_inverse = f9_inverse_matrix(target_columns)
+    source_last = f9_mat_vec(source_inverse, source[-1])
+    target_last = f9_mat_vec(target_inverse, target[-1])
+    if not all(source_last) or not all(target_last):
+        return None
+    diagonal = tuple(f9_mul(target_last[i], f9_pow(source_last[i], 7)) for i in range(dimension))
+    scaled_target = tuple(
+        tuple(f9_mul(target_columns[row][column], diagonal[column]) for column in range(dimension))
+        for row in range(dimension)
+    )
+    matrix = f9_mat_mul(scaled_target, source_inverse)
+    leading = next(x for row in matrix for x in row if x)
+    scale = f9_pow(leading, 7)
+    return tuple(tuple(f9_mul(scale, x) for x in row) for row in matrix)
+
+
+def f9_apply(matrix, point):
+    return f9_normalize(f9_mat_vec(matrix, point))
+
+
+def projective_stabilizer_order(points):
+    points = tuple(points)
+    point_set = set(points)
+    source = next(frame for frame in itertools.permutations(points, 4) if f9_frame_map(frame, frame) is not None)
+    matrices = set()
+    for target in itertools.permutations(points, 4):
+        matrix = f9_frame_map(source, target)
+        if matrix is not None and {f9_apply(matrix, point) for point in points} == point_set:
+            matrices.add(matrix)
+    return len(matrices)
+
+
+def q9_deletion_gate(c405):
+    row = next(row for row in c405["rows"] if row["q"] == 9)
+    octad = [tuple(point) for point in row["near_misses"][0]["locus"]]
+    mark = octad[0]
+    assert mark[0] == 1 and all(point[0] == 1 for point in octad)
+    heptad = []
+    for point in octad[1:]:
+        image = tuple(f9_sub(point[i], f9_mul(mark[i], point[0])) for i in range(1, 4))
+        heptad.append(f9_normalize(image))
+    assert len(set(heptad)) == 7
+    heptad_order = projective_stabilizer_order(heptad)
+    deletion_orders = [projective_stabilizer_order(heptad[:i] + heptad[i + 1:]) for i in range(7)]
+    assert heptad_order == 21 and deletion_orders == [3] * 7
+    return heptad, heptad_order, deletion_orders
 
 
 def f9_projective_points():
@@ -144,7 +260,9 @@ def main() -> None:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     assert digest(INPUT) == INPUT_SHA256
+    assert digest(C405_INPUT) == C405_INPUT_SHA256
     frozen = json.loads(INPUT.read_text())
+    c405 = json.loads(C405_INPUT.read_text())
 
     psl = generated_group(((1, 1, 0, 1), (0, 10, 1, 0)))
     assert len(psl) == 660
@@ -206,14 +324,25 @@ def main() -> None:
 
     hermitian_points, klein_points = count_q9_curves()
     assert (hermitian_points, klein_points) == (28, 10)
+    heptad, heptad_order, deletion_orders = q9_deletion_gate(c405)
     result = {
         "schema": "c438-continuation-mathieu-gate-v1",
-        "trusted_input": {"path": str(INPUT.relative_to(ROOT)), "sha256": INPUT_SHA256},
+        "trusted_inputs": [
+            {"path": str(INPUT.relative_to(ROOT)), "sha256": INPUT_SHA256},
+            {"path": str(C405_INPUT.relative_to(ROOT)), "sha256": C405_INPUT_SHA256},
+        ],
         "q9_klein_twist_gate": {
             "frozen_hermitian_F9_points": hermitian_points,
             "standard_klein_reduction_F9_points": klein_points,
             "F9_isomorphic": False,
             "reason": "different rational point counts",
+        },
+        "q9_e7_to_e6_deletion_gate": {
+            "projected_aronhold_heptad": [list(point) for point in heptad],
+            "heptad_projective_stabilizer_order": heptad_order,
+            "six_point_deletion_stabilizer_orders": deletion_orders,
+            "clebsch_A5_order": 60,
+            "special_clebsch_identification": False,
         },
         "q11_witt_gate": {
             "psl2_11_order": len(psl),
