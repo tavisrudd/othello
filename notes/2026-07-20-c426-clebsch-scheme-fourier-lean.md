@@ -72,7 +72,8 @@ concrete repair below. The first post-fix review is
 [`2026-07-21-c426-clebsch-scheme-fourier-post-fix-review.md`](2026-07-21-c426-clebsch-scheme-fourier-post-fix-review.md),
 commit `3c4fe4c529c5baccd33de9478a856cf7a5d0bebd`, verdict `NO-GO` solely on enduring
 evidence provenance. Its bounded fixes are implemented below. The exact gate and axiom audit are
-green; the new pinned repair commit is filled immediately after commit; another review is required.
+green; the pinned evidence-repair commit is
+`517faaf625136e4b96a33d43aa2e54e33f3396e6`; another review is required.
 
 Owned implementation paths:
 
@@ -424,7 +425,7 @@ archived under the repository completion invariant.
   authoritative-sounding filename is not evidence for an omitted theorem.
 - [x] Remove or separately classify every optional, conditional, failed, “standard,” “follows,” or
   “if feasible” clause; no such clause inherits the module or gate's strongest label.
-- [ ] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
+- [x] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
   validation command/result, and `#print axioms` output for every terminal.
 - [x] Include the exact public theorem statements and load-bearing definitions, or a deterministic
   extraction committed with the report, for the paper's verbatim statement-adequacy appendix.
