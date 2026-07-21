@@ -110,10 +110,12 @@ H3 q=11 disjoint (2-(11,5,2) biplane): rank_F3 = 6 -> the [11,6,5] ternary Golay
                                                        extends to the [12,6,6] extended Golay, Aut ~ M_12)
 ```
 
-(The signed Seidel-type `+-1` version of the H3 biplane also has F_3-rank 6.) So the Clebsch matching
-sheets, through the same cross-sheet construction, realize **the two nontrivial exceptional perfect
-codes** — Hamming at q=7 and ternary Golay at q=11 — and the C417 chirality/outer coset is their
-self-duality / outer symmetry.
+(The signed Seidel-type `+-1` version of the H3 biplane also has F_3-rank 6.) **Minimum distances
+confirm the exact codes, not just dimensions:** the F_2 code of the Fano disjoint design is `[7,4,3]`
+and the F_3 code of the 2-(11,5,2) biplane is `[11,6,5]`, both meeting the sphere-packing bound with
+equality (perfect). So the Clebsch matching sheets, through the same cross-sheet construction, realize
+**the two nontrivial exceptional perfect codes** — Hamming at q=7 and ternary Golay at q=11 — and the
+C417 chirality/outer coset is their self-duality / outer symmetry.
 
 **New structural observation — the code tower and the polytope tower diverge at q=19.** By the
 classification of perfect codes, the exceptional perfect codes over small fields are exactly the
@@ -132,6 +134,53 @@ This is a genuine phenomenon forecast: whatever object explains the convergence 
 *perfect-code* structure exactly at q=7,11 and a *self-dual-polytope* structure at q=7,11,19, so it
 cannot be a single uniform code family. A cheap falsifier for any proposed "one object" is whether it
 predicts a spurious q=19 perfect code.
+
+## Spike 5 — the one bit is constructively measurable as the sign of the cubic moment
+
+**Result — CHECKED.** The signed cubic moment `M_3 = sum_M eps(M) D(M)^{tensor 3}` on the depth
+profiles has `M_3[0,0,0] = 6 mod 11` (matching C411's independently derived value), and under the
+sheet swap `eps -> -eps` every coordinate negates, so `M_3[0,0,0] -> 5 = -6`. Hence the chirality bit
+is not just abstractly "one bit" — it is **read off the sign of a measurable cubic statistic:**
+
+```text
+sheet A: first cubic-moment coordinate = 6 mod 11
+sheet B: first cubic-moment coordinate = 5 = -6 mod 11
+```
+
+This makes the one-bit reconstruction bound *constructive*: a decoder measures the cubic moment
+(= C406's `mu_3` outer-odd relative invariant, whose sign flips under the outer coset, Spike 3), and
+its value selects the sheet / vertex-facet labeling / self-duality orientation. So the gateway
+framework's wish for "a measurable cubic observable that restores a forgotten choice" is realized by
+`mu_3` on the Clebsch configuration, with the explicit `±6` readout at q=11.
+
+## Synthesis — one narrative across C406–C417 and the gateway map
+
+The spikes above collapse a large part of the branch into a single picture:
+
+```text
+Clebsch matching sheets (C406/C379)
+   --cross-sheet incidence-->  self-dual exceptional design       (Fano @7, 11-cell @11)  [Spikes 1,2]
+   --disjoint-relation code-->  exceptional perfect code          ([7,4] Hamming, [11,6] ternary Golay) [Spike 4]
+   --forgotten decoration-->    the self-duality / polarity        = one bit                [Spikes 2,3]
+   --that bit is-->             the C417 chirality cocycle         = C413 bare Aut C2 = C379 golden swap [Spike 3]
+   --measured by-->             sign of the cubic moment mu_3      = ±6 mod 11               [Spike 5]
+```
+
+Two operational endpoints the gateway map sought are realized (self-dual polytope; perfect code), the
+"small forgotten decoration" is pinned to one chirality bit, and that bit is both *cohomological*
+(the C417 cocycle) and *measurable* (the cubic moment). This is the composition the lane cares about;
+each classical ingredient (biplane, self-dual polytope, perfect code, relative invariant) is credited.
+
+**Phenomenon forecasts (leads, not claims).**
+1. The *code tower stops at q=11* (no third perfect code) while the *polytope tower continues to
+   q=19* (57-cell). Any single "convergence object" must reproduce both, so it is not a uniform code
+   family; a spurious q=19 perfect code falsifies it.
+2. The rank-3 cases (A3/B3/H3) are the ternary-conic floor; the rank-4 golden case **H4 / q=31**
+   (600-cell, quadric in P^3) is the predicted next gateway with its own cocycle + cubic bit — the
+   biggest open probe, requiring quaternary-quadric reconstruction the current C406 machinery lacks.
+3. `mu_3`'s sign being the chirality connects to the ternary-Golay / M_12 completion (G19): the
+   sheet-swap should be a specific outer element in `2.M_12 = Aut([12,6,6])`; identifying it would
+   give the Clebsch chirality an M_12 meaning.
 
 ## Reproducibility (Spikes 1–4)
 

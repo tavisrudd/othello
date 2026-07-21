@@ -84,8 +84,36 @@ def run(typ):
             dual += all(((Ai[a], Bi[b]) in inc) == ((Ai[sig[b]], Bi[sig[a]]) in inc) for a in A for b in B)
     print(f"   Aut: PSL {auto}/{len(psl)} automorphisms; outer {dual}/{nout} polarities  => dualities = chirality coset")
     disj = [[1 if shared[(a, b)] == 0 else 0 for b in B] for a in A]
-    print(f"   disjoint-design code ranks: F2={rank_mod(disj,2)} F3={rank_mod(disj,3)}"
-          + ("  -> [7,4] Hamming (perfect)" if p == 7 else "  -> [11,6] ternary Golay (perfect)" if p == 11 else ""))
+    pc = 2 if p == 7 else 3 if p == 11 else p
+    G = rref_basis(disj, pc); k = len(G); n = len(G[0]) if G else 0
+    d = min_weight(G, pc)
+    from math import comb
+    t = (d - 1) // 2; perfect = sum(comb(n, i)*(pc-1)**i for i in range(t+1)) * pc**k == pc**n
+    label = {7: "[7,4,3] Hamming", 11: "[11,6,5] ternary Golay"}.get(p, "")
+    print(f"   disjoint-design code over F_{pc}: [{n},{k},{d}] perfect-packing={perfect}  {('-> '+label) if label else ''}")
+
+
+def rref_basis(rows, p):
+    M = [[x % p for x in r] for r in rows]; r = 0; C = len(M[0]) if M else 0
+    for c in range(C):
+        piv = next((i for i in range(r, len(M)) if M[i][c] % p), None)
+        if piv is None: continue
+        M[r], M[piv] = M[piv], M[r]; inv = pow(M[r][c], -1, p); M[r] = [x*inv % p for x in M[r]]
+        for i in range(len(M)):
+            if i != r and M[i][c] % p:
+                f = M[i][c]; M[i] = [(M[i][k]-f*M[r][k]) % p for k in range(C)]
+        r += 1
+    return M[:r]
+
+
+def min_weight(basis, p):
+    if not basis: return 0
+    k = len(basis); n = len(basis[0]); best = n + 1
+    for coef in itertools.product(range(p), repeat=k):
+        if any(coef):
+            w = sum(1 for j in range(n) if sum(coef[i]*basis[i][j] for i in range(k)) % p)
+            best = min(best, w)
+    return best
 
 if __name__ == "__main__":
     for t in ("A3", "B3", "H3"):
