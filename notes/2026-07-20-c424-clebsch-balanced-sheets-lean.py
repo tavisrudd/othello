@@ -18,6 +18,9 @@ CHECKSUM = Path(__file__).with_suffix(".sha256")
 SOURCE = HERE / "2026-07-20-c406-matching-module.py"
 FACTOR_SCRIPT = HERE / "2026-07-20-c423-clebsch-factorization-leaves-lean.py"
 SCOUT = HERE / "2026-07-20-c406-matching-orbit-scout.json"
+C399_SOURCE = HERE / "2026-07-20-c399-coxeter-number-conic-phase.py"
+C378_SOURCE = HERE / "2026-07-19-c378-clebsch-common-duality.py"
+C378_CERTIFICATE = HERE / "2026-07-19-c378-clebsch-common-duality.json"
 B3_LEAN = HERE.parent / "lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean"
 H3_LEAN = HERE.parent / "lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean"
 ABSTRACT_LEAN = HERE.parent / "lean/RelativeConicArcs/ClebschBalancedSheets.lean"
@@ -91,8 +94,12 @@ def case_record(source, factor_record, scout_record):
     sheet_vectors = [[vectors[index] for index in sheet] for sheet in sheets]
 
     decoders = []
+    restriction_rank_replay = []
     for points in sheet_vectors:
         affine_points = [[1] + point for point in points]
+        replay_rank = independent_rank(affine_points, prime)
+        assert replay_rank == dimension
+        restriction_rank_replay.append(replay_rank)
         _reduced, basis_indices = source.rref(source.transpose(affine_points), prime)
         assert len(basis_indices) == dimension
         basis_rows = [affine_points[index] for index in basis_indices]
@@ -210,6 +217,7 @@ def case_record(source, factor_record, scout_record):
         "action_generators": generators,
         "checks": {
             "restriction_rank": [dimension, dimension],
+            "restriction_rank_independent_replay": restriction_rank_replay,
             "second_moment_rank_independent_replay": rank_replay,
             "radical_annihilates_second_moment": not any(matrix_vector(second_moment, radical_vector, prime)),
             "radical_levels_separate_sheets": True,
@@ -294,9 +302,12 @@ def statement_adequacy():
         ABSTRACT_LEAN: [
             "hadamardSquare_eq_equalSheetSum",
             "annihilates_equalSheetSum_iff_eq_sheetSignLine",
+            "balancedHalf_unique_of_annihilates",
             "matrix_kernel_eq_line_of_recovery",
             "signedOrbitSum_isRelativeInvariant",
             "stabilizer_eq_ker_of_relative_invariant",
+            "CertifiedCubicAction.signedCubic_isRelativeInvariant",
+            "CertifiedCubicAction.signedCubic_stabilizer_eq_characterKernel",
             "signed_sum_affine_expansion_one",
             "signed_sum_affine_expansion_two",
             "signed_sum_affine_expansion_three",
@@ -309,8 +320,14 @@ def statement_adequacy():
             "b3_specialGenerators_preserve_sheetSign",
             "b3_outerGenerator_negates_sheetSign",
             "b3_radical_separates_sheets",
+            "b3_productsHaveEqualSheetSums",
+            "b3_hasNonzeroSheetProduct",
             "b3_hadamardSquare_eq_equalSheetSum",
             "b3_trade_eq_sheetSignLine",
+            "b3_balancedHalf_unique",
+            "b3_signedCubicTensor_ne_zero",
+            "b3_signedCubic_isRelativeInvariant",
+            "b3_signedCubic_stabilizer_eq_characterKernel",
         ],
         H3_LEAN: [
             "h3_restrictsOntoZeroSum",
@@ -320,8 +337,16 @@ def statement_adequacy():
             "h3_specialGenerators_preserve_sheetSign",
             "h3_outerGenerator_negates_sheetSign",
             "h3_radical_separates_sheets",
+            "h3_productsHaveEqualSheetSums",
+            "h3_hasNonzeroSheetProduct",
             "h3_hadamardSquare_eq_equalSheetSum",
             "h3_trade_eq_sheetSignLine",
+            "h3_balancedHalf_unique",
+            "h3_signedCubicTensor_ne_zero",
+            "h3_signedCubic_isRelativeInvariant",
+            "h3_signedCubic_stabilizer_eq_characterKernel",
+            "h3_affinePairingRadical_eq_sheetSocleSum",
+            "h3_outerOddSocleLine_eq_sheetSign",
         ],
     }
     result = []
@@ -359,11 +384,20 @@ def build_certificate():
         ),
         "cases": cases,
         "inputs": {
-            path.name: file_record(path) for path in (SOURCE, FACTOR_SCRIPT, SCOUT)
+            path.name: file_record(path)
+            for path in (
+                SOURCE,
+                FACTOR_SCRIPT,
+                SCOUT,
+                C399_SOURCE,
+                C378_SOURCE,
+                C378_CERTIFICATE,
+            )
         },
         "independent_replay": {
             "method": "standalone modular row reduction plus direct pointwise action checks",
             "all_second_moment_ranks_agree": True,
+            "all_restriction_ranks_agree": True,
             "all_affine_actions_replayed_pointwise": True,
             "all_sheet_parities_replayed_pointwise": True,
         },

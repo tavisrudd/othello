@@ -320,6 +320,10 @@
           6,
           6
         ],
+        "restriction_rank_independent_replay": [
+          6,
+          6
+        ],
         "second_moment_rank_independent_replay": 5,
         "sheet_parity_checked_on_every_point": true
       },
@@ -1387,6 +1391,10 @@
           10,
           10
         ],
+        "restriction_rank_independent_replay": [
+          10,
+          10
+        ],
         "second_moment_rank_independent_replay": 9,
         "sheet_parity_checked_on_every_point": true
       },
@@ -2276,11 +2284,24 @@
   },
   "independent_replay": {
     "all_affine_actions_replayed_pointwise": true,
+    "all_restriction_ranks_agree": true,
     "all_second_moment_ranks_agree": true,
     "all_sheet_parities_replayed_pointwise": true,
     "method": "standalone modular row reduction plus direct pointwise action checks"
   },
   "inputs": {
+    "2026-07-19-c378-clebsch-common-duality.json": {
+      "bytes": 7431,
+      "sha256": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc"
+    },
+    "2026-07-19-c378-clebsch-common-duality.py": {
+      "bytes": 12219,
+      "sha256": "e45e71c5e87ccc334fab3b926e5189373e24485adf11ed1cbaacfc6771610bdc"
+    },
+    "2026-07-20-c399-coxeter-number-conic-phase.py": {
+      "bytes": 25983,
+      "sha256": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275"
+    },
     "2026-07-20-c406-matching-module.py": {
       "bytes": 48589,
       "sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51"
@@ -2307,8 +2328,8 @@
         "right_index": "b3RightIndex"
       },
       "file": {
-        "bytes": 12126,
-        "sha256": "ab3ce0417e29441488cddd56c5cf6eac10f0a3e7c8236426ca6b4ae8cebf14ca"
+        "bytes": 14431,
+        "sha256": "50ac822b3ebfe6cd4a67d2d8146266cbf6706e774d4826ae246ce0b3ae8fb52b"
       },
       "path": "lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean",
       "type": "B3"
@@ -2325,8 +2346,8 @@
         "right_index": "h3RightIndex"
       },
       "file": {
-        "bytes": 14362,
-        "sha256": "e167b9729cad68025eaf06a9e56027ae033ca4d1e53dd7363167f89edc6a8a32"
+        "bytes": 19236,
+        "sha256": "3d50a3fe0960514aeb10b182c22cecf34d9510699681a85ff544872dabb13bc8"
       },
       "path": "lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean",
       "type": "H3"
@@ -2337,12 +2358,15 @@
   "statement_adequacy": [
     {
       "file": {
-        "bytes": 25737,
-        "sha256": "b3e40bacb161da81d761c1d1534673cbd815288d360951e845f3cd33dd77694d"
+        "bytes": 29738,
+        "sha256": "fd80faa61002d09cc4fd8724696e5b1b747255950b937c6c2faecae86ca522cf"
       },
       "path": "lean/RelativeConicArcs/ClebschBalancedSheets.lean",
       "theorems": {
+        "CertifiedCubicAction.signedCubic_isRelativeInvariant": "theorem CertifiedCubicAction.signedCubic_isRelativeInvariant {n d : \u2115}\n    {epsilon : Fin n \u2192 K} {feature : Fin n \u2192 CubicTensor d K}\n    (data : CertifiedCubicAction G K n d epsilon feature) :\n    data.action g (\u2211 i, epsilon i \u2022 feature i) =\n      (data.chi g : K) \u2022 (\u2211 i, epsilon i \u2022 feature i)",
+        "CertifiedCubicAction.signedCubic_stabilizer_eq_characterKernel": "theorem CertifiedCubicAction.signedCubic_stabilizer_eq_characterKernel {n d : \u2115}\n    {epsilon : Fin n \u2192 K} {feature : Fin n \u2192 CubicTensor d K}\n    (data : CertifiedCubicAction G K n d epsilon feature)\n    (hmu : (\u2211 i, epsilon i \u2022 feature i) \u2260 0) (htwo : (2 : K) \u2260 0) :\n    {g | data.action g (\u2211 i, epsilon i \u2022 feature i) =\n      (\u2211 i, epsilon i \u2022 feature i)} = \u2191(MonoidHom.ker data.chi)",
         "annihilates_equalSheetSum_iff_eq_sheetSignLine": "theorem annihilates_equalSheetSum_iff_eq_sheetSignLine (i\u2080 : Fin q) (t : SheetPair q K) :\n    (\u2200 x \u2208 equalSheetSum, sheetPairing t x = 0) \u2194\n      \u2203 c : K, t = (\u27e8fun _ \u21a6 c, fun _ \u21a6 -c\u27e9 : SheetPair q K)",
+        "balancedHalf_unique_of_annihilates": "theorem balancedHalf_unique_of_annihilates (i\u2080 : Fin q) (t : SheetPair q K)\n    (hann : \u2200 x \u2208 equalSheetSum, sheetPairing t x = 0)\n    (hpmLeft : \u2200 i, t.1 i = 1 \u2228 t.1 i = -1)\n    (_hpmRight : \u2200 i, t.2 i = 1 \u2228 t.2 i = -1) :\n    t = sheetSign \u2228 t = -sheetSign",
         "hadamardSquare_eq_equalSheetSum": "theorem hadamardSquare_eq_equalSheetSum (L : Submodule K (SheetPair q K))\n    (hli : leftIndicator \u2208 L) (hri : rightIndicator \u2208 L)\n    (hres : RestrictsOntoZeroSum L) (hequal : ProductsHaveEqualSheetSums L)\n    (hnonzero : HasNonzeroSheetProduct L) :\n    hadamardSquare L = equalSheetSum",
         "matrix_kernel_eq_line_of_recovery": "theorem matrix_kernel_eq_line_of_recovery {d : \u2115}\n    (moment : Matrix (Fin r) (Fin r) K) (radical : Fin r \u2192 K)\n    (complement : Matrix (Fin r) (Fin d) K) (recover : Matrix (Fin d) (Fin r) K)\n    (project : (Fin r \u2192 K) \u2192 (Fin d \u2192 K)) (coefficient : (Fin r \u2192 K) \u2192 K)\n    (hcertificate : recover * moment * complement = 1)\n    (hradical : moment *\u1d65 radical = 0)\n    (hdecompose : \u2200 v, v = complement *\u1d65 project v + coefficient v \u2022 radical) :\n    \u2200 v, moment *\u1d65 v = 0 \u2194 \u2203 c : K, v = c \u2022 radical",
         "signedOrbitSum_isRelativeInvariant": "theorem signedOrbitSum_isRelativeInvariant {n : \u2115}\n    (action : W \u2192\u2097[K] W) (permutation : Equiv.Perm (Fin n))\n    (epsilon : Fin n \u2192 K) (feature : Fin n \u2192 W) (chi : K)\n    (hfeature : \u2200 i, action (feature i) = feature (permutation i))\n    (hsign : \u2200 i, epsilon (permutation.symm i) = chi * epsilon i) :\n    action (\u2211 i, epsilon i \u2022 feature i) = chi \u2022 (\u2211 i, epsilon i \u2022 feature i)",
@@ -2354,36 +2378,50 @@
     },
     {
       "file": {
-        "bytes": 12126,
-        "sha256": "ab3ce0417e29441488cddd56c5cf6eac10f0a3e7c8236426ca6b4ae8cebf14ca"
+        "bytes": 14431,
+        "sha256": "50ac822b3ebfe6cd4a67d2d8146266cbf6706e774d4826ae246ce0b3ae8fb52b"
       },
       "path": "lean/RelativeConicArcs/ClebschBalancedSheetsB3.lean",
       "theorems": {
         "b3_actionGenerators_areAffine": "theorem b3_actionGenerators_areAffine :\n    IsAffinePermutationAction b3Vectors b3ActionPermutation b3ActionLinear b3ActionTranslation",
         "b3_actionPermutation_bijective": "theorem b3_actionPermutation_bijective (g : Fin 4) :\n    Function.Bijective (b3ActionPermutation g)",
+        "b3_balancedHalf_unique": "theorem b3_balancedHalf_unique (t : SheetPair 7 (ZMod 7))\n    (hann : \u2200 x \u2208 hadamardSquare (affineEvaluationSpace b3LeftPoints b3RightPoints),\n      sheetPairing t x = 0)\n    (hpmLeft : \u2200 i, t.1 i = 1 \u2228 t.1 i = -1)\n    (hpmRight : \u2200 i, t.2 i = 1 \u2228 t.2 i = -1) :\n    t = sheetSign \u2228 t = -sheetSign",
         "b3_hadamardSquare_eq_equalSheetSum": "theorem b3_hadamardSquare_eq_equalSheetSum :\n    hadamardSquare (affineEvaluationSpace b3LeftPoints b3RightPoints) = equalSheetSum",
+        "b3_hasNonzeroSheetProduct": "theorem b3_hasNonzeroSheetProduct :\n    HasNonzeroSheetProduct (affineEvaluationSpace b3LeftPoints b3RightPoints)",
         "b3_outerGenerator_negates_sheetSign": "theorem b3_outerGenerator_negates_sheetSign (i : Fin 14) :\n    b3SheetSigns (b3ActionPermutation (Fin.last 3) i) = -b3SheetSigns i",
+        "b3_productsHaveEqualSheetSums": "theorem b3_productsHaveEqualSheetSums :\n    ProductsHaveEqualSheetSums (affineEvaluationSpace b3LeftPoints b3RightPoints)",
         "b3_radical_separates_sheets": "theorem b3_radical_separates_sheets :\n    (\u2200 i, affineValue \u27e80, b3RadicalCovector\u27e9 (b3LeftPoints i) = 0) \u2227\n      (\u2200 i, affineValue \u27e80, b3RadicalCovector\u27e9 (b3RightPoints i) = 1)",
         "b3_restrictsOntoZeroSum": "theorem b3_restrictsOntoZeroSum :\n    RestrictsOntoZeroSum (affineEvaluationSpace b3LeftPoints b3RightPoints)",
         "b3_secondMoment_kernel_eq_radicalLine": "theorem b3_secondMoment_kernel_eq_radicalLine (v : Fin 6 \u2192 ZMod 7) :\n    secondMomentMatrix b3Vectors *\u1d65 v = 0 \u2194\n      \u2203 c : ZMod 7, v = c \u2022 b3RadicalCovector",
+        "b3_signedCubicTensor_ne_zero": "theorem b3_signedCubicTensor_ne_zero : b3SignedCubicTensor \u2260 0",
+        "b3_signedCubic_isRelativeInvariant": "theorem b3_signedCubic_isRelativeInvariant {G : Type*} [Group G]\n    (data : CertifiedCubicAction G (ZMod 7) 14 6 b3SheetSigns\n      (fun i \u21a6 cubicFeature (b3Vectors i))) (g : G) :\n    data.action g b3SignedCubicTensor = (data.chi g : ZMod 7) \u2022 b3SignedCubicTensor",
+        "b3_signedCubic_stabilizer_eq_characterKernel": "theorem b3_signedCubic_stabilizer_eq_characterKernel {G : Type*} [Group G]\n    (data : CertifiedCubicAction G (ZMod 7) 14 6 b3SheetSigns\n      (fun i \u21a6 cubicFeature (b3Vectors i))) :\n    {g | data.action g b3SignedCubicTensor = b3SignedCubicTensor} =\n      \u2191(MonoidHom.ker data.chi)",
         "b3_specialGenerators_preserve_sheetSign": "theorem b3_specialGenerators_preserve_sheetSign (g : Fin 3) (i : Fin 14) :\n    b3SheetSigns (b3ActionPermutation g.castSucc i) = b3SheetSigns i",
         "b3_trade_eq_sheetSignLine": "theorem b3_trade_eq_sheetSignLine (t : SheetPair 7 (ZMod 7)) :\n    (\u2200 x \u2208 hadamardSquare (affineEvaluationSpace b3LeftPoints b3RightPoints),\n      sheetPairing t x = 0) \u2194\n      \u2203 c : ZMod 7, t = (\u27e8fun _ \u21a6 c, fun _ \u21a6 -c\u27e9 : SheetPair 7 (ZMod 7))"
       }
     },
     {
       "file": {
-        "bytes": 14362,
-        "sha256": "e167b9729cad68025eaf06a9e56027ae033ca4d1e53dd7363167f89edc6a8a32"
+        "bytes": 19236,
+        "sha256": "3d50a3fe0960514aeb10b182c22cecf34d9510699681a85ff544872dabb13bc8"
       },
       "path": "lean/RelativeConicArcs/ClebschBalancedSheetsH3.lean",
       "theorems": {
         "h3_actionGenerators_areAffine": "theorem h3_actionGenerators_areAffine :\n    IsAffinePermutationAction h3Vectors h3ActionPermutation h3ActionLinear h3ActionTranslation",
         "h3_actionPermutation_bijective": "theorem h3_actionPermutation_bijective (g : Fin 4) :\n    Function.Bijective (h3ActionPermutation g)",
+        "h3_affinePairingRadical_eq_sheetSocleSum": "theorem h3_affinePairingRadical_eq_sheetSocleSum (x : SheetPair 11 (ZMod 11)) :\n    x \u2208 h3AffinePairingRadicalImage \u2194\n      \u2203 left right : ZMod 11, x = left \u2022 leftIndicator + right \u2022 rightIndicator",
+        "h3_balancedHalf_unique": "theorem h3_balancedHalf_unique (t : SheetPair 11 (ZMod 11))\n    (hann : \u2200 x \u2208 hadamardSquare (affineEvaluationSpace h3LeftPoints h3RightPoints),\n      sheetPairing t x = 0)\n    (hpmLeft : \u2200 i, t.1 i = 1 \u2228 t.1 i = -1)\n    (hpmRight : \u2200 i, t.2 i = 1 \u2228 t.2 i = -1) :\n    t = sheetSign \u2228 t = -sheetSign",
         "h3_hadamardSquare_eq_equalSheetSum": "theorem h3_hadamardSquare_eq_equalSheetSum :\n    hadamardSquare (affineEvaluationSpace h3LeftPoints h3RightPoints) = equalSheetSum",
+        "h3_hasNonzeroSheetProduct": "theorem h3_hasNonzeroSheetProduct :\n    HasNonzeroSheetProduct (affineEvaluationSpace h3LeftPoints h3RightPoints)",
         "h3_outerGenerator_negates_sheetSign": "theorem h3_outerGenerator_negates_sheetSign (i : Fin 22) :\n    h3SheetSigns (h3ActionPermutation (Fin.last 3) i) = -h3SheetSigns i",
+        "h3_outerOddSocleLine_eq_sheetSign": "theorem h3_outerOddSocleLine_eq_sheetSign (c : ZMod 11) :\n    c \u2022 leftIndicator + (-c) \u2022 rightIndicator = c \u2022 (sheetSign : SheetPair 11 (ZMod 11))",
+        "h3_productsHaveEqualSheetSums": "theorem h3_productsHaveEqualSheetSums :\n    ProductsHaveEqualSheetSums (affineEvaluationSpace h3LeftPoints h3RightPoints)",
         "h3_radical_separates_sheets": "theorem h3_radical_separates_sheets :\n    (\u2200 i, affineValue \u27e80, h3RadicalCovector\u27e9 (h3LeftPoints i) = 0) \u2227\n      (\u2200 i, affineValue \u27e80, h3RadicalCovector\u27e9 (h3RightPoints i) = 1)",
         "h3_restrictsOntoZeroSum": "theorem h3_restrictsOntoZeroSum :\n    RestrictsOntoZeroSum (affineEvaluationSpace h3LeftPoints h3RightPoints)",
         "h3_secondMoment_kernel_eq_radicalLine": "theorem h3_secondMoment_kernel_eq_radicalLine (v : Fin 10 \u2192 ZMod 11) :\n    secondMomentMatrix h3Vectors *\u1d65 v = 0 \u2194\n      \u2203 c : ZMod 11, v = c \u2022 h3RadicalCovector",
+        "h3_signedCubicTensor_ne_zero": "theorem h3_signedCubicTensor_ne_zero : h3SignedCubicTensor \u2260 0",
+        "h3_signedCubic_isRelativeInvariant": "theorem h3_signedCubic_isRelativeInvariant {G : Type*} [Group G]\n    (data : CertifiedCubicAction G (ZMod 11) 22 10 h3SheetSigns\n      (fun i \u21a6 cubicFeature (h3Vectors i))) (g : G) :\n    data.action g h3SignedCubicTensor = (data.chi g : ZMod 11) \u2022 h3SignedCubicTensor",
+        "h3_signedCubic_stabilizer_eq_characterKernel": "theorem h3_signedCubic_stabilizer_eq_characterKernel {G : Type*} [Group G]\n    (data : CertifiedCubicAction G (ZMod 11) 22 10 h3SheetSigns\n      (fun i \u21a6 cubicFeature (h3Vectors i))) :\n    {g | data.action g h3SignedCubicTensor = h3SignedCubicTensor} =\n      \u2191(MonoidHom.ker data.chi)",
         "h3_specialGenerators_preserve_sheetSign": "theorem h3_specialGenerators_preserve_sheetSign (g : Fin 3) (i : Fin 22) :\n    h3SheetSigns (h3ActionPermutation g.castSucc i) = h3SheetSigns i",
         "h3_trade_eq_sheetSignLine": "theorem h3_trade_eq_sheetSignLine (t : SheetPair 11 (ZMod 11)) :\n    (\u2200 x \u2208 hadamardSquare (affineEvaluationSpace h3LeftPoints h3RightPoints),\n      sheetPairing t x = 0) \u2194\n      \u2203 c : ZMod 11, t = (\u27e8fun _ \u21a6 c, fun _ \u21a6 -c\u27e9 : SheetPair 11 (ZMod 11))"
       }

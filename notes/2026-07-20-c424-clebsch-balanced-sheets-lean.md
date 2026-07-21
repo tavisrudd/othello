@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation complete; independent review required before closure
+**Status:** review repairs implemented; post-fix independent review required before closure
 
 **Date:** 2026-07-21
 
@@ -43,9 +43,11 @@ The same abstract module proves:
 
 The concrete B3/H3 leaves kernel-check four action generators each: all are bijections, the first
 three preserve the sheet sign, the outer generator negates it, and every generator acts affinely
-on every frozen quotient vector with the displayed matrix and translation.  Together with C423's
-kernel-checked nonzero cubic coordinates, these are the concrete inputs to the abstract
-relative-invariant and stabilizer theorems.
+on every frozen quotient vector with the displayed matrix and translation.  They also define the
+actual ordered-coordinate signed cubic tensors, prove them nonzero from C423's named cubic
+coordinates, and instantiate relative invariance and exact character-kernel stabilizers for every
+supplied certified cubic action.  The supplied-action structure makes the classical
+`PGL_2/PSL_2` boundary explicit in the theorem type.
 
 ## Ordinary mathematical statements and exact Lean terminals
 
@@ -74,7 +76,9 @@ The B3 terminals are:
 - `b3_productsHaveEqualSheetSums`;
 - `b3_hasNonzeroSheetProduct`;
 - `b3_hadamardSquare_eq_equalSheetSum`; and
-- `b3_trade_eq_sheetSignLine`.
+- `b3_trade_eq_sheetSignLine`; and
+- `b3_balancedHalf_unique`, which converts a pointwise `±1` annihilating weight into the displayed
+  sheet partition or its complement.
 
 The H3 terminals have the same suffixes with prefix `h3_`.  They live in namespace
 `RelativeConicArcs.ClebschBalancedSheets`.  The exact public headers of all paper-facing terminals
@@ -93,8 +97,12 @@ fails if a declaration disappears or its body delimiter cannot be found.
 - C423 supplies the nonzero witnesses
   `RelativeConicArcs.ClebschFactorization.b3_signedCubicCoordinate_ne_zero` and
   `RelativeConicArcs.ClebschFactorization.h3_signedCubicCoordinate_ne_zero`.
+- `b3_signedCubicTensor_ne_zero`, `b3_signedCubic_isRelativeInvariant`, and
+  `b3_signedCubic_stabilizer_eq_characterKernel` are the concrete B3 composition terminals; the H3
+  declarations have the corresponding prefix.
 
-The formal stabilizer theorem is stated inside the supplied action.  The identification of the
+The formal stabilizer theorem is instantiated on each concrete signed cubic inside a
+`CertifiedCubicAction`.  The identification of the
 displayed generated permutation groups with the classical `PSL_2(q)` subgroup and its outer
 `PGL_2(q)` coset remains the named classical/group-construction input; Lean checks the finite
 generator actions, sign parity, and affine covariance, not an independent classification of those
@@ -143,7 +151,8 @@ sha256sum -c notes/2026-07-20-c424-clebsch-balanced-sheets-lean.sha256
 The generator reconstructs the B3/H3 matching orbits from the committed C406/C423 geometry,
 computes the affine sheet decoders, second-moment matrices and nullspaces, recovery inverses,
 three special generators plus one outer generator, affine matrices/translations, and pointwise
-sheet parity.  It independently replays every rank with a separate modular row reducer and checks
+sheet parity.  It independently replays every restriction and second-moment rank with a separate
+modular row reducer and checks
 every affine action and parity on every point.  It then parses the Lean source and requires exact
 agreement for sheet indices, radicals, recovery matrices, complements, permutations, affine
 matrices, and translations.  `half_subset_enumeration_used` is `false` in both cases.
@@ -170,14 +179,16 @@ lean/scripts/lean-build-queue.py run \
 ```
 
 Final trace-current run directory:
-`/home/tavis/.cache/othello-lean-build/run-20260721-210111-014901af`.
+`/home/tavis/.cache/othello-lean-build/run-20260721-214335-395461b7`.
 
-An ephemeral import of the gate issued `#print axioms` for 28 terminals: the eight abstract exits,
-the nine selected B3 exits, the nine H3 exits, and the two C423 nonzero cubic witnesses.  Every
+An ephemeral import of the gate issued `#print axioms` for 45 terminals: the eleven abstract exits,
+the fifteen selected B3 exits, the seventeen H3 exits, and the two C423 nonzero cubic witnesses.  Every
 terminal reported exactly `[propext, Classical.choice, Quot.sound]`; none reported `sorryAx`,
 `native_decide`, `Lean.ofReduceBool`, a project axiom, or non-kernel execution.  The audit source was
 ephemeral because this task's allowlist requires the permanent gate to remain import-only; the
 exact terminal list is the union of `statement_adequacy` and the two C423 names above.
+The successful audit output is
+`/home/tavis/.cache/othello-lean-build/guarded-lean/20260721-144442-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma/stdout.log`.
 
 ## Claim routes and exclusions
 
@@ -186,10 +197,11 @@ exact terminal list is the union of `statement_adequacy` and the two C423 names 
 | abstract Hadamard-square equality | full-trust Lean | stated hypotheses only |
 | B3/H3 restriction surjectivity | full-trust Lean checked bases | frozen quotient coordinates |
 | B3/H3 radical line and `5/1`, `9/1` split | full-trust Lean checked recovery | frozen second-moment matrices |
-| balanced-sheet/trade-line uniqueness | full-trust Lean composition | field-valued trades on the frozen configurations |
+| balanced-sheet/trade-line and complementary-half uniqueness | full-trust Lean composition | field-valued trades and pointwise `±1` halves on the frozen configurations |
 | generator bijectivity, sign parity, affine action | full-trust Lean finite checks | displayed generators |
 | cubic nonvanishing | imported full-trust C423 Lean terminals | named coordinate witnesses `2`, `3` |
-| relative-invariant and stabilizer mechanism | full-trust Lean abstract theorem | supplied representation and character |
+| concrete cubic relative-invariance and stabilizer | full-trust Lean concrete composition | supplied certified representation, permutation action, and character |
+| H3 affine-pairing radical/socle bridge | full-trust Lean exact radical image | C412 identification of each sheet-constant line with `soc(P(1))` |
 | identification with classical `PSL_2/PGL_2` | conceptual/classical plus exact reconstructed action | no Lean group-classification theorem |
 | plane syzygies | full-trust Lean symbolic expansion | ordinary commutative-ring products |
 
@@ -264,9 +276,10 @@ fallback or conditional H3 certificate tier.
 - **Trust effect:** theorem axioms are checked without widening scope or making the gate non-import-only.
 - **Reopen only if:** the owner expands the allowlist to a committed audit harness.
 
-No optional theorem was silently omitted.  The H3 projective-cover socle identification remains in
-C412/C430 and was not re-frozen as a new finite leaf because it is not needed for balanced-sheet
-uniqueness or cubic orientation.
+The H3 leaf now proves that the affine-pairing radical image is exactly the sum of the two
+sheet-constant socle lines and that their outer-odd line is the sheet-sign trade.  The remaining
+C412 input is the representation-theoretic naming of each checked sheet-constant line as
+`soc(P(1))`; no projective-cover classification is rebuilt here.
 
 ## C320 ledger delta
 
@@ -300,10 +313,23 @@ uniqueness or cubic orientation.
   task IDs, internal-note links, novelty claims, or status prose occur in Lean artifacts.
 - [x] Judgment calls and reopening conditions recorded.
 - [x] C320 claim-by-claim delta supplied.
-- [ ] Record the independent reviewer's identity, date, verdict, findings, and dispositions.
+- [x] Record the independent reviewer's identity, date, verdict, findings, and dispositions.
 
 ## Independent review
 
-Not yet launched.  Per the review gate, the implementing agent must stop after landing this bundle
-and ask the user to launch an independent Codex reviewer.  Keep the task live until that reviewer
-returns `GO`; any finding requires a fix and a separately user-launched post-fix review.
+`/root/c424_review` returned `NO-GO` on 2026-07-21.  Its five findings and dispositions are:
+
+1. **Concrete cubic orientation/stabilizer missing:** fixed by `CubicTensor`,
+   `CertifiedCubicAction`, the concrete B3/H3 signed tensors and nonzero witnesses, and the concrete
+   relative-invariance/stabilizer terminals.
+2. **Balanced-half uniqueness not stated:** fixed by `balancedHalf_unique_of_annihilates` and the
+   B3/H3 `balancedHalf_unique` terminals.
+3. **H3 socle/radical bridge omitted:** fixed by
+   `h3_affinePairingRadical_eq_sheetSocleSum` and `h3_outerOddSocleLine_eq_sheetSign`, with only the
+   C412 projective-cover naming retained as an explicit representation-theoretic boundary.
+4. **Statement/audit omissions:** fixed by adding the four product terminals and every new endpoint
+   to `statement_adequacy` and the ephemeral axiom list.
+5. **Replay/provenance overstatement:** fixed by independently replaying restriction ranks and by
+   hashing the direct C399/C378 transitive inputs.
+
+The same reviewer must return `GO` on the repair diff before closure.

@@ -211,6 +211,37 @@ theorem h3_outerGenerator_negates_sheetSign (i : Fin 22) :
     h3SheetSigns (h3ActionPermutation (Fin.last 3) i) = -h3SheetSigns i := by
   fin_cases i <;> decide
 
+/-- The concrete signed cubic tensor of the twenty-two `H3` quotient vectors. -/
+def h3SignedCubicTensor : CubicTensor 10 (ZMod 11) :=
+  signedCubicTensor h3Vectors h3SheetSigns
+
+/-- The concrete `H3` signed cubic is nonzero, witnessed by its imported `x₀³` coordinate. -/
+theorem h3_signedCubicTensor_ne_zero : h3SignedCubicTensor ≠ 0 := by
+  intro hzero
+  have hcoord := congrFun (congrFun (congrFun hzero 0) 0) 0
+  apply h3_signedCubicCoordinate_ne_zero
+  simpa [h3SignedCubicTensor, signedCubicCoordinate] using hcoord
+
+/-- For every supplied certified `H3` cubic action, the concrete signed cubic transforms by the
+sheet character.  The displayed generator tables above are the finite certificates used to build
+such an action at the classical group boundary. -/
+theorem h3_signedCubic_isRelativeInvariant {G : Type*} [Group G]
+    (data : CertifiedCubicAction G (ZMod 11) 22 10 h3SheetSigns
+      (fun i ↦ cubicFeature (h3Vectors i))) (g : G) :
+    data.action g h3SignedCubicTensor = (data.chi g : ZMod 11) • h3SignedCubicTensor := by
+  simpa [h3SignedCubicTensor, signedCubicTensor] using data.signedCubic_isRelativeInvariant (g := g)
+
+/-- Inside a supplied certified `H3` action, the stabilizer of the concrete nonzero signed cubic is
+exactly the kernel of the sheet character. -/
+theorem h3_signedCubic_stabilizer_eq_characterKernel {G : Type*} [Group G]
+    (data : CertifiedCubicAction G (ZMod 11) 22 10 h3SheetSigns
+      (fun i ↦ cubicFeature (h3Vectors i))) :
+    {g | data.action g h3SignedCubicTensor = h3SignedCubicTensor} =
+      ↑(MonoidHom.ker data.chi) := by
+  apply data.signedCubic_stabilizer_eq_characterKernel
+  · simpa [h3SignedCubicTensor, signedCubicTensor] using h3_signedCubicTensor_ne_zero
+  · decide
+
 /-- The radical covector evaluates to `0` and `1` on the two `H3` sheets. -/
 theorem h3_radical_separates_sheets :
     (∀ i, affineValue ⟨0, h3RadicalCovector⟩ (h3LeftPoints i) = 0) ∧
@@ -264,7 +295,56 @@ private theorem h3QuadraticWitness_leftSum :
     leftSum (hadamard
       (affineEvaluationMap h3LeftPoints h3RightPoints h3QuadraticWitness)
       (affineEvaluationMap h3LeftPoints h3RightPoints h3QuadraticWitness)) = 2 := by
-  decide
+    decide
+
+/-- Image, in the affine evaluation space, of the constant direction together with the checked
+linear second-moment radical.  This is the coefficient-matrix model of the affine-pairing radical. -/
+def h3AffinePairingRadicalImage : Set (SheetPair 11 (ZMod 11)) :=
+  {x | ∃ coefficient : ZMod 11 × (Fin 10 → ZMod 11),
+    secondMomentMatrix h3Vectors *ᵥ coefficient.2 = 0 ∧
+      affineEvaluationMap h3LeftPoints h3RightPoints coefficient = x}
+
+private theorem h3_affineValue_radical (constant c : ZMod 11) (point : Fin 10 → ZMod 11) :
+    affineValue ⟨constant, c • h3RadicalCovector⟩ point =
+      constant + c * affineValue ⟨0, h3RadicalCovector⟩ point := by
+  simp only [affineValue, Pi.smul_apply, zero_add]
+  congr 1
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  ring
+
+/-- The two-dimensional `H3` affine-pairing radical is exactly the sum of the two sheet-constant
+socle lines. -/
+theorem h3_affinePairingRadical_eq_sheetSocleSum (x : SheetPair 11 (ZMod 11)) :
+    x ∈ h3AffinePairingRadicalImage ↔
+      ∃ left right : ZMod 11, x = left • leftIndicator + right • rightIndicator := by
+  constructor
+  · rintro ⟨coefficient, hkernel, rfl⟩
+    obtain ⟨c, hc⟩ := (h3_secondMoment_kernel_eq_radicalLine coefficient.2).mp hkernel
+    refine ⟨coefficient.1, coefficient.1 + c, ?_⟩
+    have hcoefficient : coefficient = ⟨coefficient.1, c • h3RadicalCovector⟩ := by
+      exact Prod.ext rfl hc
+    ext i
+    · rw [hcoefficient]
+      simp [affineEvaluationMap, leftIndicator, rightIndicator, h3_affineValue_radical,
+        h3_radical_separates_sheets.1 i]
+    · rw [hcoefficient]
+      simp [affineEvaluationMap, leftIndicator, rightIndicator, h3_affineValue_radical,
+        h3_radical_separates_sheets.2 i]
+  · rintro ⟨left, right, rfl⟩
+    refine ⟨⟨left, (right - left) • h3RadicalCovector⟩, ?_, ?_⟩
+    · rw [Matrix.mulVec_smul, h3_radical_annihilates_secondMoment, smul_zero]
+    · ext i
+      · simp [affineEvaluationMap, leftIndicator, rightIndicator, h3_affineValue_radical,
+          h3_radical_separates_sheets.1 i]
+      · simp [affineEvaluationMap, leftIndicator, rightIndicator, h3_affineValue_radical,
+          h3_radical_separates_sheets.2 i]
+
+/-- The outer-odd line in the two sheet socles is exactly the C430 sheet-sign trade. -/
+theorem h3_outerOddSocleLine_eq_sheetSign (c : ZMod 11) :
+    c • leftIndicator + (-c) • rightIndicator = c • (sheetSign : SheetPair 11 (ZMod 11)) := by
+  ext i <;> simp [leftIndicator, rightIndicator, sheetSign]
 
 /-- The coordinate-square pairing `x₀²` has nonzero sum on the positive `H3` sheet. -/
 theorem h3_hasNonzeroSheetProduct :
@@ -290,6 +370,17 @@ theorem h3_trade_eq_sheetSignLine (t : SheetPair 11 (ZMod 11)) :
       ∃ c : ZMod 11, t = (⟨fun _ ↦ c, fun _ ↦ -c⟩ : SheetPair 11 (ZMod 11)) := by
   rw [h3_hadamardSquare_eq_equalSheetSum]
   exact annihilates_equalSheetSum_iff_eq_sheetSignLine 0 t
+
+/-- The displayed `H3` sheets are the unique complementary `±1` halves with equal moments,
+up to exchanging the two halves. -/
+theorem h3_balancedHalf_unique (t : SheetPair 11 (ZMod 11))
+    (hann : ∀ x ∈ hadamardSquare (affineEvaluationSpace h3LeftPoints h3RightPoints),
+      sheetPairing t x = 0)
+    (hpmLeft : ∀ i, t.1 i = 1 ∨ t.1 i = -1)
+    (hpmRight : ∀ i, t.2 i = 1 ∨ t.2 i = -1) :
+    t = sheetSign ∨ t = -sheetSign := by
+  rw [h3_hadamardSquare_eq_equalSheetSum] at hann
+  exact balancedHalf_unique_of_annihilates 0 t hann hpmLeft hpmRight
 
 end ClebschBalancedSheets
 end RelativeConicArcs

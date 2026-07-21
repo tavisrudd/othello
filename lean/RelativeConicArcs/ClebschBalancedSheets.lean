@@ -226,6 +226,21 @@ theorem annihilates_equalSheetSum_iff_eq_sheetSignLine (i₀ : Fin q) (t : Sheet
     rw [← Finset.mul_sum, ← Finset.mul_sum, hx]
     simp
 
+/-- A pointwise `±1` weight in the trade line is the displayed sheet sign, up to complement. -/
+theorem balancedHalf_unique_of_annihilates (i₀ : Fin q) (t : SheetPair q K)
+    (hann : ∀ x ∈ equalSheetSum, sheetPairing t x = 0)
+    (hpmLeft : ∀ i, t.1 i = 1 ∨ t.1 i = -1)
+    (_hpmRight : ∀ i, t.2 i = 1 ∨ t.2 i = -1) :
+    t = sheetSign ∨ t = -sheetSign := by
+  obtain ⟨c, hc⟩ := (annihilates_equalSheetSum_iff_eq_sheetSignLine i₀ t).mp hann
+  rcases hpmLeft i₀ with hplus | hminus
+  · left
+    have hc1 : c = 1 := by simpa [hc] using hplus
+    ext i <;> simp [hc, hc1, sheetSign]
+  · right
+    have hcm1 : c = -1 := by simpa [hc] using hminus
+    ext i <;> simp [hc, hcm1, sheetSign]
+
 section AffineEvaluation
 
 variable {r : ℕ}
@@ -535,6 +550,65 @@ theorem stabilizer_eq_ker_of_relative_invariant
     simp [hrelative g, hg]
 
 end RelativeInvariant
+
+section CubicOrientation
+
+variable {G K : Type*} [Group G] [Field K]
+
+/-- Ordered-coordinate model of a symmetric cubic tensor.  Symmetry is automatic for tensors
+constructed by `cubicFeature`; keeping ordered coordinates makes finite witnesses inexpensive. -/
+abbrev CubicTensor (d : ℕ) (K : Type*) := Fin d → Fin d → Fin d → K
+
+/-- The rank-one cubic tensor attached to a vector. -/
+def cubicFeature {d : ℕ} (v : Fin d → K) : CubicTensor d K :=
+  fun i j k ↦ v i * v j * v k
+
+/-- The signed cubic tensor of a finite vector configuration. -/
+def signedCubicTensor {n d : ℕ} (vectors : Fin n → Fin d → K)
+    (epsilon : Fin n → K) : CubicTensor d K :=
+  ∑ i, epsilon i • cubicFeature (vectors i)
+
+@[simp] theorem signedCubicTensor_apply {n d : ℕ} (vectors : Fin n → Fin d → K)
+    (epsilon : Fin n → K) (i j k : Fin d) :
+    signedCubicTensor vectors epsilon i j k =
+      ∑ column, epsilon column * vectors column i * vectors column j * vectors column k := by
+  simp [signedCubicTensor, cubicFeature, mul_assoc]
+
+/-- A supplied group action on cubic tensors, certified to permute the rank-one orbit features and
+to carry the sheet weights by a two-valued character.  This packages exactly the hypotheses at the
+classical `PGL₂/PSL₂` boundary; no classification of the supplied group is hidden here. -/
+structure CertifiedCubicAction (G K : Type*) [Group G] [Field K] (n d : ℕ)
+    (epsilon : Fin n → K) (feature : Fin n → CubicTensor d K) where
+  action : G → CubicTensor d K →ₗ[K] CubicTensor d K
+  action_mul : ∀ g h, action (g * h) = (action g).comp (action h)
+  action_one : action 1 = LinearEquiv.refl K (CubicTensor d K)
+  permutation : G → Equiv.Perm (Fin n)
+  chi : G →* Kˣ
+  feature_covariant : ∀ g i, action g (feature i) = feature (permutation g i)
+  sign_covariant : ∀ g i, epsilon ((permutation g).symm i) = (chi g : K) * epsilon i
+  two_valued : ∀ g, chi g = 1 ∨ chi g = -1
+
+/-- A certified cubic action carries its concrete signed cubic by its character. -/
+theorem CertifiedCubicAction.signedCubic_isRelativeInvariant {n d : ℕ}
+    {epsilon : Fin n → K} {feature : Fin n → CubicTensor d K}
+    (data : CertifiedCubicAction G K n d epsilon feature) :
+    data.action g (∑ i, epsilon i • feature i) =
+      (data.chi g : K) • (∑ i, epsilon i • feature i) := by
+  exact signedOrbitSum_isRelativeInvariant (data.action g) (data.permutation g) epsilon feature
+    (data.chi g : K) (data.feature_covariant g) (data.sign_covariant g)
+
+/-- Inside a supplied certified action, the stabilizer of a nonzero signed cubic is exactly the
+kernel of the sheet character. -/
+theorem CertifiedCubicAction.signedCubic_stabilizer_eq_characterKernel {n d : ℕ}
+    {epsilon : Fin n → K} {feature : Fin n → CubicTensor d K}
+    (data : CertifiedCubicAction G K n d epsilon feature)
+    (hmu : (∑ i, epsilon i • feature i) ≠ 0) (htwo : (2 : K) ≠ 0) :
+    {g | data.action g (∑ i, epsilon i • feature i) =
+      (∑ i, epsilon i • feature i)} = ↑(MonoidHom.ker data.chi) := by
+  exact stabilizer_eq_ker_of_relative_invariant data.action data.action_mul data.action_one data.chi
+    _ hmu htwo (fun g ↦ data.signedCubic_isRelativeInvariant (g := g)) data.two_valued
+
+end CubicOrientation
 
 section PlaneSyzygies
 

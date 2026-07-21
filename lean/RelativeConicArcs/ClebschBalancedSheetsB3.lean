@@ -182,6 +182,37 @@ theorem b3_outerGenerator_negates_sheetSign (i : Fin 14) :
     b3SheetSigns (b3ActionPermutation (Fin.last 3) i) = -b3SheetSigns i := by
   fin_cases i <;> decide
 
+/-- The concrete signed cubic tensor of the fourteen `B3` quotient vectors. -/
+def b3SignedCubicTensor : CubicTensor 6 (ZMod 7) :=
+  signedCubicTensor b3Vectors b3SheetSigns
+
+/-- The concrete `B3` signed cubic is nonzero, witnessed by its imported `x₀³` coordinate. -/
+theorem b3_signedCubicTensor_ne_zero : b3SignedCubicTensor ≠ 0 := by
+  intro hzero
+  have hcoord := congrFun (congrFun (congrFun hzero 0) 0) 0
+  apply b3_signedCubicCoordinate_ne_zero
+  simpa [b3SignedCubicTensor, signedCubicCoordinate] using hcoord
+
+/-- For every supplied certified `B3` cubic action, the concrete signed cubic transforms by the
+sheet character.  The displayed generator tables above are the finite certificates used to build
+such an action at the classical group boundary. -/
+theorem b3_signedCubic_isRelativeInvariant {G : Type*} [Group G]
+    (data : CertifiedCubicAction G (ZMod 7) 14 6 b3SheetSigns
+      (fun i ↦ cubicFeature (b3Vectors i))) (g : G) :
+    data.action g b3SignedCubicTensor = (data.chi g : ZMod 7) • b3SignedCubicTensor := by
+  simpa [b3SignedCubicTensor, signedCubicTensor] using data.signedCubic_isRelativeInvariant (g := g)
+
+/-- Inside a supplied certified `B3` action, the stabilizer of the concrete nonzero signed cubic is
+exactly the kernel of the sheet character. -/
+theorem b3_signedCubic_stabilizer_eq_characterKernel {G : Type*} [Group G]
+    (data : CertifiedCubicAction G (ZMod 7) 14 6 b3SheetSigns
+      (fun i ↦ cubicFeature (b3Vectors i))) :
+    {g | data.action g b3SignedCubicTensor = b3SignedCubicTensor} =
+      ↑(MonoidHom.ker data.chi) := by
+  apply data.signedCubic_stabilizer_eq_characterKernel
+  · simpa [b3SignedCubicTensor, signedCubicTensor] using b3_signedCubicTensor_ne_zero
+  · decide
+
 /-- The radical covector evaluates to `0` and `1` on the two `B3` sheets. -/
 theorem b3_radical_separates_sheets :
     (∀ i, affineValue ⟨0, b3RadicalCovector⟩ (b3LeftPoints i) = 0) ∧
@@ -261,6 +292,17 @@ theorem b3_trade_eq_sheetSignLine (t : SheetPair 7 (ZMod 7)) :
       ∃ c : ZMod 7, t = (⟨fun _ ↦ c, fun _ ↦ -c⟩ : SheetPair 7 (ZMod 7)) := by
   rw [b3_hadamardSquare_eq_equalSheetSum]
   exact annihilates_equalSheetSum_iff_eq_sheetSignLine 0 t
+
+/-- The displayed `B3` sheets are the unique complementary `±1` halves with equal moments,
+up to exchanging the two halves. -/
+theorem b3_balancedHalf_unique (t : SheetPair 7 (ZMod 7))
+    (hann : ∀ x ∈ hadamardSquare (affineEvaluationSpace b3LeftPoints b3RightPoints),
+      sheetPairing t x = 0)
+    (hpmLeft : ∀ i, t.1 i = 1 ∨ t.1 i = -1)
+    (hpmRight : ∀ i, t.2 i = 1 ∨ t.2 i = -1) :
+    t = sheetSign ∨ t = -sheetSign := by
+  rw [b3_hadamardSquare_eq_equalSheetSum] at hann
+  exact balancedHalf_unique_of_annihilates 0 t hann hpmLeft hpmRight
 
 end ClebschBalancedSheets
 end RelativeConicArcs
