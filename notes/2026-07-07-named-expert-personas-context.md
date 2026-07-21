@@ -1,8 +1,10 @@
 # Named-expert context package for Lean proof work
 
-Purpose: replace generic "personas" with named-expert lenses we can load before
-working on the sum-free, projective cap, and queens proof projects. Each dossier
-separates cited work from the tactics we want to emulate.
+Purpose: route a proof task to the smallest relevant named-expert dossier set. This file is an
+index, not a context package: consult only the applicable row below, then load only the dossier(s)
+that row names. Do not preload unrelated dossiers or the rest of the persona catalogue.
+
+Each dossier separates cited work from the tactics we want to emulate.
 
 This is not a hiring or attribution note. It is a reusable context guide for
 making better proof-design choices in Lean.

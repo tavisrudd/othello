@@ -4,21 +4,31 @@ The repository contains the root Python `othello` package, the Rust port/Queens 
 `rust/`, projective-cap/Nofil research, papers, and Lean developments. Queens/Othello performance
 work is dormant unless explicitly resumed.
 
+## Short commands
+
+| Command        | Means                                                     | Detail in         |
+|----------------|-----------------------------------------------------------|-------------------|
+| `mi`           | enable intent-based mode for the rest of the session      | Intent-based mode |
+| `yc`           | “your call” — you decide when the choice is mine to make  | Intent-based mode |
+| `vb`           | “vibe check” — candid progress read, **not** Visual Basic | Intent-based mode |
+| `go <alias>`   | select that lane (a bare alias also selects it)           | Lane routing      |
+| `go C<id>`     | select that task **and its lane**                         | Startup context   |
+| `go` / `next?` | next step in the selected lane; if none, ask which        | Lane routing      |
+| `hexagon`      | spoken synonym for `clebsch`                              | Lane routing      |
+
 ## Startup context: load only what the task needs
 
 This file is the always-loaded rules layer. Keep it short and stable.
 
 At the start of a session:
 
-1. Before any other repository operation, read and interpret this complete guide in a dedicated
-   command containing no search, status check, build, or other operation.
-2. Select a lane from the user's explicit alias, named handoff, or named task. Do not infer one from
-   git, the numeric value of a task ID, or the previous session.
-   At the start of a session, a bare `C<id>` and a literal `go C<id>` both explicitly select that
-   task **and its lane**. Look up the exact `C<id>` row in
-   `notes/2026-07-07-codex-task-queue.md`, take the row's bracketed lane peg as authoritative, and
-   then read only that lane's entry handoff from the routing table below. Do not search broadly for
-   the task ID or ask the user which lane it belongs to.
+1. Before any other repository operation, read this complete guide in a dedicated command with no
+   search, status check, build, or other operation.
+2. Select a lane from the user's explicit alias, named handoff, or named task — never infer it from
+   git, a task ID's number, or the previous session. A bare `C<id>` or `go C<id>` selects that task
+   **and its lane**: look up the exact `C<id>` row in `notes/2026-07-07-codex-task-queue.md`, treat
+   its bracketed lane peg as authoritative, and read only that lane's entry handoff below. Do not
+   search broadly for the ID or ask which lane it belongs to.
 3. Read only that lane's entry handoff. It is the current-state map.
 4. Otherwise, read `notes/2026-07-07-codex-task-queue.md` only for global task-ID allocation,
    explicit lane completion, or a user-requested cross-lane status. A selected lane's handoff owns
@@ -29,14 +39,13 @@ At the start of a session:
 Live docs must not contain timelines, transcripts, validation output, or superseded plans. Put those
 in companion archives or dated reports.
 
-Every proof/math lane maintains one append-only discovery-track companion for incidental
-observations and musings encountered while doing planned work. The discriminator is “was I looking
-for this?”: if yes, it is a deliverable and belongs in the task report/ledger/handoff, not the
-discovery track. Logging a lead does not allocate work, expand scope, or make it a handoff frontier;
-promotion uses the normal C-ID and lane-routing process. Do not preload the log on ordinary entry;
-open it when an incidental observation needs recording and review it during handoff. Follow
-[`notes/discovery-track-conventions.md`](notes/discovery-track-conventions.md) when creating,
-appending, promoting, or handing off a discovery log.
+Every proof/math lane keeps one append-only discovery-track companion for incidental observations
+and musings found during planned work. Discriminator — “was I looking for this?”: if yes, it is a deliverable
+for the task report/ledger/handoff, not the discovery track. Logging a lead does not allocate work,
+expand scope, or make it a handoff frontier; promotion uses the normal C-ID and lane-routing
+process. Do not preload the log; open it to record an incidental observation and review it at
+handoff. Follow [`notes/discovery-track-conventions.md`](notes/discovery-track-conventions.md) when
+creating, appending, promoting, or handing off a log.
 
 ### Novelty failures and adjacent-crown extraction
 
@@ -63,7 +72,6 @@ Saying an alias bare or as `go <alias>` selects that lane. `hexagon` is a spoken
 | `build-sys` | `notes/handoffs/2026-07-14-lean-build-system.md` |
 | `cap` | `notes/handoffs/2026-07-06-projective-cap-game-handoff.md` |
 | `clebsch` | `notes/handoffs/2026-07-13-clebsch-paper.md` |
-| `clebsch-next` | `notes/handoffs/2026-07-16-clebsch-next.md` |
 | `complete-ports` | `notes/handoffs/2026-07-17-complete-ports-paper.md` |
 | `continuation` | `notes/handoffs/2026-07-17-continuation-paper.md` |
 | `crowns` | `notes/handoffs/2026-07-17-crowns.md` |
@@ -94,9 +102,11 @@ Cross-lane hygiene:
 - Do not review, stage, rebuild, kill, clean, or opportunistically fix foreign work.
 - The queue records IDs and completion; it never overrides the selected lane's local order.
 
-Named-expert context is not a lane. Before developing or formalizing a nontrivial proof, read
-`notes/2026-07-07-named-expert-personas-context.md` and the relevant dossier. Do not load these for
-status, routing, literature comparison, or ordinary read-only review.
+Named-expert context is not a lane. Before developing or formalizing a nontrivial proof, consult
+only the applicable routing entry in
+`notes/2026-07-07-named-expert-personas-context.md`, then read only the dossier(s) named by that
+entry. Do not preload unrelated persona material, and do not load any of it for status, routing,
+literature comparison, or ordinary read-only review.
 
 ## Literature cache: load on demand
 
@@ -115,27 +125,26 @@ search and every consulted source must be recorded.
 
 ## Research records and computational reproducibility
 
-**Claude:** follow the evidence discipline already established in the recent C-task reports. Good
-models include [`C246`](notes/2026-07-17-c246-contextual-minimality.md) for a report/script/JSON
-certificate bundle, [`C254`](notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md) for
-an exact sweep plus an independent direct-enumeration replay, and
+**Claude:** follow the evidence discipline in recent C-task reports. Models:
+[`C246`](notes/2026-07-17-c246-contextual-minimality.md) for a report/script/JSON certificate
+bundle, [`C254`](notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md) for an exact sweep
+plus an independent direct-enumeration replay,
 [`C255`](notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md) for exact optima with a stated
 literature boundary. Copy their pattern: state the theorem or bounded negative cleanly, name the
-artifact that supports it, give the replay command, report exact checked counts and conventions,
-and delimit what the computation does not prove. Do not replace that evidence with a narrative of
-what was tried or a pasted terminal transcript.
+artifact supporting it, give the replay command, report exact checked counts and conventions, and
+delimit what the computation does not prove. Do not replace that evidence with a narrative of what
+was tried or a pasted terminal transcript.
 
-Treat every computational research claim as an atomic, git-visible evidence bundle. For new work,
-or whenever an older computation is materially changed, commit the dated report, the exact script
-or generator, and its compact machine-readable output/certificate together. Keep them adjacent
-under the owning lane's allowed paths and use a common stem when practical, for example
-`<date>-c<id>-<slug>.md`, `.py`, `.json`, and `.sha256`/`SHA256SUMS`. A prose report that cites an
-untracked script, an ephemeral terminal transcript, or an output that was not committed is not a
-reproducibility claim.
+Treat every computational research claim as an atomic, git-visible evidence bundle. For new work, or
+whenever an older computation materially changes, commit the dated report, the exact script or
+generator, and its compact machine-readable output/certificate together. Keep them adjacent under
+the owning lane's allowed paths, with a common stem when practical, e.g. `<date>-c<id>-<slug>.md`,
+`.py`, `.json`, and `.sha256`/`SHA256SUMS`. A prose report citing an untracked script, an ephemeral
+transcript, or an uncommitted output is not a reproducibility claim.
 
 Each report backed by computation must record:
 
-- the exact command and working directory needed to regenerate or check the artifact;
+- the exact command and working directory to regenerate or check the artifact;
 - all load-bearing inputs, parameters, field/radius/size conventions, dependency versions when
   relevant, and random seeds (prefer deterministic canonical enumeration over randomness);
 - what each output certifies, what it does not certify, and the trusted boundary of the checker;
@@ -208,11 +217,11 @@ checks, finite-certificate sharding rules, and exact command forms.
 ## Intent-based mode and short commands
 
 Default mode is collaborative. `mi` enables intent-based mode for the rest of the current session;
-a handoff may persist it with `Mode: intent-based` under its date. 
+a handoff may persist it with `Mode: intent-based` under its date.
 
-`yc` means “your call.” `vb` means “vibe check”: translate the technical evidence into an honest 
-progress assessment (good/bad, disappointing/great, etc.), including momentum, risks, and likely 
-route viability rather than merely reciting implementation status. 
+`yc` means “your call.” `vb` means “vibe check”: translate the technical evidence into a candid
+progress assessment (good/bad, disappointing/great, etc.) — momentum, risks, and likely route
+viability, not a recitation of implementation status.
 
 When stopping after a substantial full or partial C-item chunk, include a one-line vibe check in
 the user-facing work report even when `vb` was not requested. End the same report with a standalone,
