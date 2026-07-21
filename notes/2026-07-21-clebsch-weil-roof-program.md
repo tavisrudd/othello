@@ -241,6 +241,19 @@ relevant `PGL/A5/S4` orbitals; no broad matching census or novelty claim. Paper-
 most one proposition and one diagram after the two-frame theorem; Phase 3 decides whether it earns
 that slot. Model: Opus; Fable gate only on the M5/X3 interpretation.
 
+**X1+ OUTCOME (C460, 2026-07-21) — GREEN; REPAIRED GEOMETRIC INPUT CERTIFIED.** Concurrent
+matchings are exactly the fixed-point-free Frégier involutions, one
+`PGL_2(q)/D_{2(q+1)}` orbit; the `S4/A5` parent-order obstruction explains C446 conceptually.
+B3 gives `14` clouds of size `6` on `21` interior points and H3 gives `22` clouds of size `15` on
+`55`. In H3, cloud intersection size five gives a connected 6-regular bipartite graph whose
+unique `11+11` bipartition is exactly the unordered `PSL` sheet pair. The golden base/J-mate
+clouds meet in the coordinate triangle with rational `S4` stabilizer and common `A4`; its unique
+invariant perfect matching is the nonconcurrent q=11 cube matching. The M5 comparison is positive:
+the six char-0 perpendicular axis pairs reduce two-by-two onto exactly this triangle. The canonical
+`22×55` incidence matrix has rank `21` over `Q`, with the sheet-sign line its full left kernel;
+ranks over `F_2/F_3` are `11/20`, exported only as T3 controls. Independent direct-plane replay is
+green. See `notes/2026-07-21-c460-golden-fregier-cloud-bridge.{md,py,json,sha256}` and `-replay.py`.
+
 **X2 — knife-edge identification (register row 35).**
 Goal: reconstruct, from committed cap-lane artifacts only, the q=11 knife-edge on-conic
 situation (the 7 on-conic children, the D10 stabilizer, the size-2 P orbit vs size-5 N orbit);
