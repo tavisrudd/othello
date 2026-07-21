@@ -10,8 +10,22 @@
 
 ## Executive answer
 
-The best remaining attacks are no longer direct comparisons of the `8` and `6` local fibres.
-They are:
+The best remaining attack is no longer a direct comparison of the `8` and `6` local fibres.  It
+is a common **36-point even-theta representation**.  Exact calculation gives the parallel outer
+fusion table
+
+```text
+q=9:   PSL_2(7) on 36:  1+7+7+21    ->  1+14+21,
+q=11:  A5       on 36:  1+10+10+15  ->  1+20+15.
+```
+
+In both rows the outer involution exchanges the equal pair.  The q=11 `10+10` is exactly the
+six-label chirality already certified in C377, now realized inside the same abstract genus-three
+even-theta set that C435 realizes geometrically over `F_9`.  The q=11 realization currently needs
+one extra `E6 -> E7` mark, so it is a bridge of marked representations rather than a canonical
+transform of the unmarked carrier.
+
+Two supporting attacks remain:
 
 1. a **consecutive del Pezzo lattice bridge** through `E6 < E7`; and
 2. a **Golay/Mathieu host** in which q=9 supplies an octad-type action and q=11 supplies a
@@ -28,7 +42,41 @@ theta calculation: the full q=11 symmetry conjugates all 22 matching kernels.  A
 the unmarked quotient ppav is therefore constant on the parent orbit.  A useful isogeny route must
 retain a theta marking, descent datum, or kernel label.
 
-## 1. The q=11 matching is already a double-six row
+## 1. The common 36-point even-theta host
+
+Use the standard `E7 mod 2` model
+
+```text
+V = {even subsets of 8 symbols}/<all 8 symbols>,
+q([S]) = |S|/2 mod 2.
+```
+
+The `q=0` locus has 36 points.  It is the classical 36-element even-theta set.  C435 already
+realizes it as the Hermitian quartic's 36 determinantal classes.  Based at one class, its
+`PSL_2(7)` stabilizer has suborbits `1,7,7,21`, and the semilinear outer element fuses the two
+sevens.
+
+For q=11, let `A5=PSL_2(5)` act on its transitive six-set `P^1(F_5)` and fix the remaining two
+symbols.  Exact orbit enumeration on the same 36 quadratic refinements gives
+
+```text
+1, 10, 10, 15.
+```
+
+The `15` is the two-subset/four-subset layer of the six labels.  The other 20 points encode the
+three-subset layer with the two fixed symbols, and the familiar `A5` chirality splits it as
+`10+10`.  A determinant-nonsquare element extending `A5` to `S5` exchanges the two tens and fixes
+the `1` and `15` orbits.  Thus C377's golden outer involution and C435's Frobenius fusion are two
+instances of the same marked-theta operation.
+
+The current boundary is geometric, not group-theoretic.  Permuting the six Clebsch parent labels
+gives `A5`, but fixing the two extra symbols is an `E6 -> E7` extension choice.  The q=11 unmarked
+conic does not yet choose that extension.  The next theorem-sized question is whether C379's
+double-six row plus one matching edge canonically supplies the two fixed theta symbols.  If it
+does, the q=11 bridge lands directly in C435's 36-object category; if it does not, the construction
+has merely repackaged the missing mark.
+
+## 2. The q=11 matching is already a double-six row
 
 Let the six parent points be `p_1,...,p_6`, and blow them up.  On the resulting cubic surface the
 six conics
@@ -87,7 +135,7 @@ information.
 This gate uses only C405's octad/net, C438's direct bitangent matrix, C379's five-point conics, and
 standard blow-up Picard arithmetic.  It is the cheapest genuinely geometric successor.
 
-## 2. Exact Mathieu gate on the q=11 twelve-set
+## 3. Exact Mathieu gate on the q=11 twelve-set
 
 Identify the deep-hole conic with `P^1(F_11)` by the pencil of lines through `(1,1,3)`.  Exact
 enumeration of `PSL_2(11)` on six-subsets gives orbit sizes
@@ -132,7 +180,7 @@ The useful bounded question is therefore not “are they both Golay objects?” 
 If no, Mathieu is an elegant ambient envelope only.  If yes, shortening/puncturing the Golay code
 along that pair supplies a common binary module on which both outer involutions can be compared.
 
-## 3. Klein/Bring arithmetic route, with the twist retained
+## 4. Klein/Bring arithmetic route, with the twist retained
 
 Elkies records that the Klein and Fermat quartics become isomorphic in characteristic three.  The
 frozen q=9 curve is a nonsingular Hermitian quartic, hence belongs to this geometric exceptional
@@ -165,14 +213,16 @@ orientations.
 
 ## Revised attack order
 
-1. **Finish only the divisor part of the `E7 -> E6` gate.**  The special Clebsch-identification
+1. **Test the marked 36-theta lift.**  Determine whether a q=11 matching edge/double-six row
+   supplies the two fixed symbols in the `E7 mod 2` model without an arbitrary choice.
+2. **Finish only the divisor part of the `E7 -> E6` gate.**  The special Clebsch-identification
    gate has failed (`3` versus `60` stabilizers), but the six actual q=11 matching curves `Q_i`
    still have a universal double-six counterpart.
-2. **Adjoin the two Witt designs to q=11.**  Test the relative-orientation bit against C390's
+3. **Adjoin the two Witt designs to q=11.**  Test the relative-orientation bit against C390's
    Bring theta/trigonal data; the unmarked profiles are already known to collapse.
-3. **Only then attempt a Golay embedding.**  Require a canonical octad--dodecad incidence class;
+4. **Only then attempt a Golay embedding.**  Require a canonical octad--dodecad incidence class;
    do not choose one by hand.
-4. **Reserve integral Klein/Bring lifting** for a positive marked-orientation signal.
+5. **Reserve integral Klein/Bring lifting** for a positive marked-orientation signal.
 
 The direct unmarked Richelot quotient and a common rank-three Hecke graph should be deprioritized:
 the former is constant by conjugacy, while the latter forgets precisely the marking now known to
@@ -190,7 +240,8 @@ sha256sum -c notes/2026-07-20-c438-continuation-mathieu-gate.sha256
 The standard-library checker pins C379's JSON by SHA-256, rebuilds `PSL_2(11)`, enumerates every
 six-subset orbit and both Witt designs, checks the outer exchange, evaluates all 22 matching
 profiles, independently counts both q=9 plane quartics over `F_9`, projects the exact Cayley octad
-to an Aronhold heptad, and exhausts the projective stabilizers of all seven cubic deletions.
+to an Aronhold heptad, exhausts the projective stabilizers of all seven cubic deletions, and
+rebuilds the `1+10+10+15` theta action with its outer fusion.
 
 ## Classical sources and boundary
 

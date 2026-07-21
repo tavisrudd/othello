@@ -1,6 +1,35 @@
 {
+  "common_even_theta_36_gate": {
+    "model": "q=0 in even subsets of 8 modulo the all-one vector",
+    "outer_swaps_equal_orbits": true,
+    "q11_A5_suborbits": [
+      1,
+      10,
+      10,
+      15
+    ],
+    "q11_S5_outer_fusion": [
+      1,
+      15,
+      20
+    ],
+    "q11_geometric_boundary": "requires a marked E6-to-E7 extension; not intrinsic on the unmarked carrier",
+    "q9_frozen_suborbits": [
+      1,
+      7,
+      7,
+      21
+    ],
+    "q9_outer_fusion": [
+      1,
+      14,
+      21
+    ],
+    "theta_count": 36
+  },
   "disposition": {
     "canonical_parent_recovery": "negative: profiles are identical on all 22 matchings",
+    "even_theta_host": "positive: q9 7+7 and q11 10+10 are parallel outer fusions on 36 even theta markings",
     "mathieu_host": "positive",
     "new_orientation_torsor": "two PSL2(11)-invariant Witt designs exchanged by PGL2(11)"
   },

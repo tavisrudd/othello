@@ -228,6 +228,92 @@ def q9_deletion_gate(c405):
     return heptad, heptad_order, deletion_orders
 
 
+def psl2_permutations(prime: int):
+    infinity = prime
+
+    def inv(x):
+        return pow(x, -1, prime)
+
+    def canon(matrix):
+        for entry in matrix:
+            if entry:
+                scale = inv(entry)
+                return tuple(scale * x % prime for x in matrix)
+        raise ValueError("zero matrix")
+
+    def product(left, right):
+        a, b, c, d = left
+        e, f, g, h = right
+        return canon(((a * e + b * g) % prime, (a * f + b * h) % prime,
+                      (c * e + d * g) % prime, (c * f + d * h) % prime))
+
+    def action(matrix, x):
+        a, b, c, d = matrix
+        if x == infinity:
+            return infinity if c == 0 else a * inv(c) % prime
+        denominator = (c * x + d) % prime
+        return infinity if denominator == 0 else (a * x + b) * inv(denominator) % prime
+
+    generators = ((1, 1, 0, 1), (0, prime - 1, 1, 0))
+    identity = canon((1, 0, 0, 1))
+    group = {identity}
+    queue = [identity]
+    while queue:
+        left = queue.pop()
+        for right in generators:
+            value = product(left, right)
+            if value not in group:
+                group.add(value)
+                queue.append(value)
+    return {tuple(action(matrix, x) for x in range(prime + 1)) for matrix in group}, action, canon
+
+
+def theta36_a5_gate():
+    a5, action, canon = psl2_permutations(5)
+    assert len(a5) == 60
+
+    def complement(mask):
+        return mask ^ 255
+
+    def representative(mask):
+        return min(mask, complement(mask))
+
+    theta = {
+        representative(mask)
+        for mask in range(256)
+        if mask.bit_count() % 2 == 0 and (mask.bit_count() // 2) % 2 == 0
+    }
+    assert len(theta) == 36
+
+    def extend(permutation):
+        return permutation + (6, 7)
+
+    def act(permutation, mask):
+        image = 0
+        for index in range(8):
+            if (mask >> index) & 1:
+                image |= 1 << permutation[index]
+        return representative(image)
+
+    extended_a5 = {extend(permutation) for permutation in a5}
+    unseen = set(theta)
+    orbits = []
+    while unseen:
+        seed = next(iter(unseen))
+        orbit = {act(permutation, seed) for permutation in extended_a5}
+        unseen -= orbit
+        orbits.append(orbit)
+    assert sorted(map(len, orbits)) == [1, 10, 10, 15]
+
+    outer_matrix = canon((2, 0, 0, 1))
+    outer = extend(tuple(action(outer_matrix, x) for x in range(6)))
+    ten_orbits = [orbit for orbit in orbits if len(orbit) == 10]
+    fixed_orbits = [orbit for orbit in orbits if len(orbit) != 10]
+    assert {act(outer, mask) for mask in ten_orbits[0]} == ten_orbits[1]
+    assert all({act(outer, mask) for mask in orbit} == orbit for orbit in fixed_orbits)
+    return sorted(map(len, orbits))
+
+
 def f9_projective_points():
     for vector in itertools.product(range(9), repeat=3):
         if vector != (0, 0, 0) and f9_normalize(vector) == vector:
@@ -325,6 +411,7 @@ def main() -> None:
     hermitian_points, klein_points = count_q9_curves()
     assert (hermitian_points, klein_points) == (28, 10)
     heptad, heptad_order, deletion_orders = q9_deletion_gate(c405)
+    theta_a5_orbits = theta36_a5_gate()
     result = {
         "schema": "c438-continuation-mathieu-gate-v1",
         "trusted_inputs": [
@@ -354,10 +441,21 @@ def main() -> None:
             "outer_pgl_element_exchanges_designs": True,
             "matching_profiles": profiles,
         },
+        "common_even_theta_36_gate": {
+            "model": "q=0 in even subsets of 8 modulo the all-one vector",
+            "theta_count": 36,
+            "q9_frozen_suborbits": [1, 7, 7, 21],
+            "q9_outer_fusion": [1, 14, 21],
+            "q11_A5_suborbits": theta_a5_orbits,
+            "q11_S5_outer_fusion": [1, 15, 20],
+            "outer_swaps_equal_orbits": True,
+            "q11_geometric_boundary": "requires a marked E6-to-E7 extension; not intrinsic on the unmarked carrier",
+        },
         "disposition": {
             "mathieu_host": "positive",
             "canonical_parent_recovery": "negative: profiles are identical on all 22 matchings",
             "new_orientation_torsor": "two PSL2(11)-invariant Witt designs exchanged by PGL2(11)",
+            "even_theta_host": "positive: q9 7+7 and q11 10+10 are parallel outer fusions on 36 even theta markings",
         },
     }
     rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"

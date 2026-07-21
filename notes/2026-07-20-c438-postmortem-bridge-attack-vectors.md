@@ -11,8 +11,9 @@ below were read at the stated partial or abstract/metadata depth.  This is a rou
 not a novelty or priority audit.
 
 **Continuation:** `notes/2026-07-20-c438-continuation-e7-mathieu-klein.md` records the next gates:
-the q=11 matching as a cubic-surface double-six row, two exact Witt designs on the twelve-set, and
-the nontrivial `F_9` twist obstructing a naive Klein lift.
+the common `36`-point theta action with parallel `7+7` and `10+10` outer fusions, the q=11
+matching as a cubic-surface double-six row, two exact Witt designs on the twelve-set, and the
+nontrivial `F_9` twist obstructing a naive Klein lift.
 
 ## Executive answer
 
