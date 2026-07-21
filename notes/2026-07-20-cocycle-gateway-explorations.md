@@ -182,6 +182,17 @@ at its conic phase `q = h_cox + 1`, realizes an exceptional self-dual geometry (
 present exactly when the parent leaves `PSL_2(q)`.** The rank-4 continuation (`H_4`/q=31, 57-cell at
 q=19) is the genuine open frontier.
 
+**Uniform design = the Paley biplane (connects G19).** The cross-sheet designs have uniform
+parameters `disjoint 2-(q, (q-1)/2, (q-3)/4)`, `share-edge 2-(q, (q+1)/2, (q+1)/4)` — exactly the
+**Paley biplane** on `q` points (`q ≡ 3 mod 4`, unique, self-dual). So the "self-dual design" is the
+same Paley object across the family, and the C417 chirality is its polarity; this is precisely the
+G19 Paley thread. The Paley biplane exists for *every* `q ≡ 3 mod 4` (q=19, 23, ...), but the Clebsch
+factorization realizes it only at the **conic phase** `q = h_cox+1 = 7, 11`. The extra coincidences —
+self-dual *polytope* (Fano/11-cell) and *perfect code* (Hamming/ternary Golay) — are special to those
+two q, which is why both towers pin to q=7,11 while the bare Paley biplane continues. This sharpens
+the falsifier: a "convergence object" may reproduce Paley biplanes for all `q ≡ 3 mod 4`, but must
+*not* manufacture a perfect code or a regular polytope outside q=7,11 (resp. q=7,11,19).
+
 ## Synthesis — one narrative across C406–C417 and the gateway map
 
 The spikes above collapse a large part of the branch into a single picture:
