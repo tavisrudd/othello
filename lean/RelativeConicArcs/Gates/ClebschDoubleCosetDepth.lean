@@ -1,0 +1,38 @@
+import RelativeConicArcs.ClebschDoubleCosetDepth
+
+/-!
+# Import-only gate for the double-coset depth bridge
+
+This gate exports the projective-cell partition and scalar closure, the six `1,4,6 / 1,4,6`
+generator orbits, representative secant recounts, involution antipodality, the rank-two image and
+four-dimensional kernel, profile separation, the two depth-plane equations, weighted barycentre,
+cubic-first pushforward, odd-relation bridge, and singleton decorated-parent recovery.
+-/
+
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.relationCells_partition
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.vectorInRelation_smul
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbits_cover
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbits_pairwise_disjoint
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positiveSingleton_zeroCounts
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positiveOrbitFour_zeroCounts
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positiveOrbitSix_zeroCounts
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.negativeSingleton_zeroCounts
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.negativeOrbitFour_zeroCounts
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.negativeOrbitSix_zeroCounts
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positive_depth_constant_on_generated_orbits
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.negative_depth_constant_on_generated_orbits
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.sheetInvolution_secant_equivariant_positive
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.depthProfile_sheetInvolution_positive
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_values
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_range_finrank
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.profileLinearMap_ker_finrank
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfile_injective
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.representativeProfiles_planeEquations
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positiveProfiles_weightedBarycentre
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.cubicFirst_pushforward
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.positiveSingleton_profile_recovers_parent
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.negativeSingleton_profile_recovers_parent
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.singletonOrbits_recover_unordered_pair
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.chosenPositiveSingleton_recovers_decoratedParent
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.oddFourier_relation_bridge
