@@ -663,3 +663,20 @@ the import-only gate succeeded. Four findings still blocked `GO`:
 The implementing agent accepted every finding. The next review must inspect the strengthened
 projective-distinctness terminals, exact semantic one-leader equality, reconciled trust prose, and
 fresh build/axiom evidence before returning `GO`.
+
+## Fourth post-fix review — 2026-07-21
+
+**Disposition:** **NO-GO — READY FOR FIXES**. The same user-authorized reviewer inspected proof/trust
+commit `7ecb98b5` and documentation commit `1e8172b0`, together with exact green build run
+`run-20260721-193843-39bbc5d6`. The reviewer confirmed that the strengthened theorem types genuinely
+close projective distinctness and the exact one-leader equality, and that the 47-probe axiom and hash
+evidence is sound. Only two narrow prose/status defects remained:
+
+1. The report still said that the final gate/build/axiom/trust evidence and coherent bundle needed
+   to be committed, although the validated source bundle was already pinned at `7ecb98b5`.
+2. The `tau11` docstring still called the chosen coordinate parameter the
+   “projectivized-`H3` golden-ratio parameter”, contradicting the explicit mnemonic-label and
+   external-semantic boundary.
+
+The implementing agent accepted both findings. The next pass must confirm the neutralized docstring
+and reconciled report status before returning `GO`.

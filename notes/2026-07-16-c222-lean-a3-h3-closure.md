@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** ACTIVE; compact-proof gate. Four user-launched reviews returned **READY FOR FIXES** (see
+**Status:** ACTIVE; compact-proof gate. Five user-authorized reviews returned **READY FOR FIXES** (see
 the independent-review record). The current implementation closes the two theorem gaps identified by
 the latest review: the `A3`- and `H3`-labelled tables now have explicit pairwise projective
 injectivity in addition to two-sided coverage; the projective-point/nonzero-scalar map is bijective
@@ -11,8 +11,8 @@ onto all nonzero syndromes; and the disjoint `90+6` union is proved equal to
 gives counts `20,1,2,3,1` on incidence multiplicities `0,1,2,3,5`. The coordinate map also
 has an explicit inverse, contragredient pairing theorem, and induced bijection on the 133 normalized
 projective points. All proofs remain compact kernel proofs with no generated certificate tree. The
-Lean-formalized label remains withheld until the final gate/build/axiom/trust evidence is committed
-and a user-launched post-fix review returns `GO`. C222 stays live.
+Lean-formalized label remains withheld until a post-fix review of the final prose corrections
+returns `GO`. The gate/build/axiom/trust evidence is committed and pinned. C222 stays live.
 
 ## Objective
 
@@ -264,7 +264,7 @@ Successful evidence:
   `RelativeConicArcs.ReflectionArrangementDecoding`, and
   `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding`, followed by the trace-only
   aggregate confirmation, in run
-  `/home/tavis/.cache/othello-lean-build/run-20260721-193843-39bbc5d6`;
+  `/home/tavis/.cache/othello-lean-build/run-20260721-194522-4f2376cd`;
 - all 47 explicit `#print axioms` probes from the two task modules occurred in the aggregate log; a
   deterministic name-to-log comparison found no missing probe, and the union of their reported
   axioms is exactly `propext`, `Classical.choice`, and `Quot.sound`;
@@ -285,7 +285,7 @@ lean/scripts/lean-build-queue.py run \
 Source identity at report time (identity, not mathematical correctness):
 
 - `RelativeConicArcs/ReflectionArrangements.lean` — sha256
-  `e7d891f0b758a2652e3b577cc7f99c7a146c9306b19e78576321d2b0f8062716`, 28490 bytes;
+  `d898bb68ed5792462a626243a694646589a93c541c144659ac1de41946cc5832`, 28496 bytes;
 - `RelativeConicArcs/ReflectionArrangementDecoding.lean` — sha256
   `c1c98b3b25c868c02b7e302935b51813d73a6bfd5b20ab22c250bfe93747afd6`, 12966 bytes;
 - `RelativeConicArcs/Gates/ClebschReflectionArrangementDecoding.lean` — sha256
@@ -296,7 +296,7 @@ Source identity at report time (identity, not mathematical correctness):
   `ae778ed2dfb142dde7e23f41d827d47c2c6f4bf6bf0d3cc80fd4f4408901fd8e`, 2423 bytes.
 
 The validated source/gate/trust bundle is pinned at commit
-`7ecb98b5e0c743099ba8a7dc00aa53981da461e8`. The manuscript verification-table delta is deliberately
+`098fa74bfe4d39fc015ad63cced2a811c867a95c`. The manuscript verification-table delta is deliberately
 deferred until the required user-launched post-fix review returns `GO`; no paper claim is upgraded
 from an unreviewed candidate route.
 
@@ -330,7 +330,7 @@ recorded final `GO` permits C222 to be marked complete and archived.
   projective and decoder maps now occur explicitly in the relevant theorem types.
 - [x] Record exact owned files, permitted imports, fully qualified terminals, import-only gate,
   pinned commit, guarded/gate validation, and `#print axioms` for every claimed Lean terminal. — the
-  validated bundle is pinned at `7ecb98b5e0c743099ba8a7dc00aa53981da461e8`; the build run, gate,
+  validated bundle is pinned at `098fa74bfe4d39fc015ad63cced2a811c867a95c`; the build run, gate,
   hashes, 47 probes, and trust manifest are recorded above.
 - [x] Confirm no `sorryAx`, `native_decide`, undisclosed project axiom, opaque oracle, large generated
   case tree, or unreported non-kernel execution occurs in a full-trust closure. — all 47 terminal
@@ -403,8 +403,8 @@ explicit citation route; every terminal gets its own fully qualified name, gate 
 entry; strength words require a matching theorem or neutral replacement; a checked box must point to
 durable evidence.
 
-Remaining for `GO`: commit and pin this coherent bundle, then obtain the required user-launched
-post-fix review. The implementer does not launch that review.
+Remaining for `GO`: obtain post-fix reviewer confirmation after the final prose corrections. The
+user's review-sub instruction authorizes reusing the same independent reviewer for that pass.
 
 ## Adequacy-appendix extraction
 
