@@ -6,7 +6,7 @@
 
 **Status:** `STAGES T0/T1 THEOREMS; B3 SEAM SPLIT CERTIFIED; SECTION/DEPTH/MODULAR SYNTHESIS OPEN`
 
-**Literature depth:** zero sources were read at full text for this synthesis.  Two sources were
+**Literature depth:** zero sources were read at full text for this synthesis.  Three sources were
 read partially and five at abstract/metadata depth, as itemized below.  This is a background
 comparison, not a novelty or priority audit, and it licenses no absence claim.
 
@@ -318,10 +318,48 @@ The ingredients belong to three established frameworks.
 3. The depth statistic is a signed restricted projective Radon transform: pull back to an
    incidence correspondence and sum over fibres.  Finite projective X-ray theory supplies the
    right inversion/admissibility language for C413's multiple-view separation.
+4. Relative Fourier--Mukai transforms provide a useful proof architecture, although not the same
+   transform.  Lo's functors are exact quasi-inverses in the derived category, while recovery in
+   the ordinary sheaf heart is only up to a codimension-two correction.  After a `B`-field twist,
+   the cohomological transform becomes essentially a signed row swap plus explicit base terms;
+   torsion-pair filtrations isolate the lower-dimensional defect before stability is compared.
 
 These comparisons identify a category and standard machinery.  They do not establish that the
 specific `A5/A4` matching sections satisfy the proposed functional equation or that the modular
 extension is its reduction.
+
+### Fourier--Mukai-inspired free upgrade
+
+Lo's mechanism suggests replacing a literal equality of the depth and cubic/Tate planes by an
+exact transform **upstairs** and an isomorphism only after quotienting a controlled defect
+downstairs.  The finite candidate is
+
+```text
+factorization sections / defect  <--Fourier-->  depth sections / defect,
+```
+
+where the first defect candidates are the zero-divisor/depth-compression kernel and the modular
+socle.  This is an attack template, not an identification: neither defect quotient has yet been
+constructed on the certified odd four-space.
+
+The actionable T2 gate is to build canonical source and target filtrations from multiplication by
+`Q`, zero-divisor compression, the rank-two depth image, and the Tate/socle boundary.  Compute the
+dimension of the Hom space preserving those filtrations, the Fourier pairing, and the relevant
+Hecke action.  Continue to singleton normalization only if these conditions cut the local
+16-dimensional Hom space to a line.  Otherwise the residual filtered Hom space is the next exact
+obstruction.
+
+For T3, Lo's deformation-to-limit method suggests a DVR/Rees formulation: choose an integral
+cyclotomic lattice, use the prime above 11 as the filtration parameter, and seek corrected
+coordinates in which the generic transform is a signed complementary-block exchange while the
+special fibre records the square-zero transfer and radical--socle map.  The `8/9` shift should then
+appear either as a supported boundary correction or as proof that no common filtered lattice
+exists.
+
+This analogy also sharpens C438 rather than bypassing it.  A relative Fourier--Mukai transform
+requires a common base and a universal kernel on a fibre product.  The q=9 parent mark and its
+36-class determinantal fusion currently have no such common object.  A future theta/Richelot bridge
+must construct the base and kernel explicitly before Fourier--Mukai language becomes structural.
 
 ## Resolved gates and unanswered questions
 
@@ -333,8 +371,9 @@ The following list is the durable boundary for C414--C417.
    exceptional explanation.
 2. **Local intertwiner uniqueness — resolved negatively.**  Fixing scalar weight, common-subgroup
    invariance, and odd `J` parity leaves four copies of the same sign representation, so the local
-   Hom space has dimension 16.  The replacement question is whether the full moving-parent bundle,
-   a Hecke constraint, or multiplication by `Q` isolates the Fourier line globally.
+   Hom space has dimension 16.  The replacement question is whether the full moving-parent bundle
+   or the canonical `Q`/compression/socle filtrations plus Hecke compatibility isolate the Fourier
+   line globally.
 3. **Matching-section identity.**  Does the twisted Fourier transform of the `J`-odd quotient
    section equal the `J`-odd secant-product section up to the forced Gauss scalar?  A single
    singleton evaluation determines the scalar only after the relevant line is isolated.
@@ -346,11 +385,12 @@ The following list is the durable boundary for C414--C417.
    group, or does it require another orientation datum?
 6. **Odd Fourier geometry.**  Which exact dual incidence statistic is the shadow of the twisted
    section, and how does it yield all four coordinates of `M_odd D(M)` without numerical fitting?
-7. **Depth compression.**  Is zero-divisor projection followed by common-subgroup radialization exactly the
-   passage from the twisted section to the six depth profiles?  Where does its rank-two image enter
-   conceptually?
-8. **The `8/9` extension.**  Are `[2,8,1]` and `[2,9,1]` the two boundary maps of one integral
-   Fourier/Radon lattice, and is their difference the unique nonzero extension or affine cocycle?
+7. **Depth compression.**  Is zero-divisor projection followed by common-subgroup radialization
+   exactly the passage from the twisted section to the six depth profiles?  Is its kernel the
+   finite analogue of a lower-dimensional Fourier--Mukai defect category?
+8. **The `8/9` extension.**  Are `[2,8,1]` and `[2,9,1]` associated-graded boundary maps of one
+   filtered integral Fourier/Radon lattice, with their difference supported on the modular socle,
+   or does the filtered-lattice comparison give a sharp obstruction?
 9. **Geometric portability.**  The q=7 representation block now passes for both seams.  Does either
    seam reproduce the H3 cubic-first trade and signed depth law, and does q=5 explain nonsplitting
    rather than merely supply another table?
@@ -403,17 +443,20 @@ both, then determine whether the relevant section line is forced inside the four
 
 Represent the actual-degree `Phi_M` and `P_M` as sections and keep the full family as the parent
 pair moves.  Determine the global induced/Hecke module and the extra operator that reduces the
-local 16-dimensional Hom space.  Only after that uniqueness gate passes should one singleton and
-its mate determine the Gauss scalar.  Then prove the all-matching identity by equivariance, not by
-22 independent fits; at q=7, run the test on both seam classes until a geometric selector is
-proved.
+local 16-dimensional Hom space.  In parallel, build the `Q`/zero-divisor/depth/socle filtrations
+and measure the filtered, pairing-preserving Hecke Hom space.  Only if that space is one-dimensional
+should one singleton and its mate determine the Gauss scalar.  Then prove the all-matching identity
+by equivariance, not by 22 independent fits; at q=7, run the test on both seam classes until a
+geometric selector is proved.
 
 ### Stage T3 — shadows and modular reduction
 
 Factor the known depth map through zero-divisor incidence and radialization.  Choose an integral
-cyclotomic lattice for the twisted transform, reduce at the prime above 11, and compare the induced
-radical/socle and Tate boundary maps.  The success criterion is an exact extension-class derivation
-of the `8/9` shift; a proof that the extension classes differ is also a valid sharp obstruction.
+cyclotomic lattice for the twisted transform and package its prime-above-11 filtration as a Rees
+module.  Seek a corrected basis in which the generic transform is complementary-block exchange;
+then compare the special-fibre radical/socle and Tate boundary maps.  The success criterion is an
+exact defect-supported derivation of the `8/9` shift; nonexistence of a compatible filtered lattice
+is also a valid sharp obstruction.
 
 ## Ownership by queued task
 
@@ -467,6 +510,14 @@ forward-citation negative is drawn.
   finite Fourier/Zak formulas for multiplicative characters on cyclic rings.  It confirms that
   multiplicative-character Fourier transforms are standard background; it does not state the
   ternary projective exceptional blocks certified here.  No cache blob was created.
+- Jason Lo, *Fourier--Mukai Transforms of Slope Stable Torsion-Free Sheaves on Weierstrass
+  Elliptic Threefolds*, arXiv:1710.03771; *Journal of Algebra* 604 (2022), 40--86:
+  **partial**, latest arXiv source package.  Read the Introduction and main-results discussion,
+  the relative transform/WIT definitions, the twisted-Chern-character row-swap formula, the main
+  stability theorem and proof outline, and the torsion-quadruple/HN strategy.  It supplies the
+  exact-upstairs/modulo-defect and filtered-limit proof architecture above, not a finite-field
+  transform, exceptional subgroup restriction, or Hecke-compression predecessor.  No persistent
+  cache blob was created.
 
 A post-T1 bounded search also queried binary-quadratic finite-field Fourier transforms,
 `Sym^2` Weil restrictions, twisted Gelfand pairs, and `A4/S3/D8` association-scheme blocks.  It

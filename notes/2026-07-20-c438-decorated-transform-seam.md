@@ -161,3 +161,11 @@ advertised as a q=9 decorated-transform specialization.  The corrected scalar-we
 parity distinction and the exact B3/H3 exceptional blocks are recorded in
 `notes/2026-07-20-c414-tautological-fourier-preflight.md`; they do not weaken the different-fibre
 obstruction proved here.
+
+Jason Lo's relative Fourier--Mukai framework sharpens the missing-data test.  Such a transform
+starts with a common base and a universal kernel on the relative fibre product; exact invertibility
+upstairs may then descend only modulo a lower-dimensional defect in the chosen heart.  C438 has
+neither prerequisite: the q=9 parent mark and the 36-class determinantal fusion do not yet form
+fibres of one common moduli object.  Thus Fourier--Mukai language becomes structural here only if
+the proposed theta/Richelot continuation explicitly constructs both a common base and a
+Poincare-type kernel; it cannot repair the failed square by analogy alone.
