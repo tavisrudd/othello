@@ -8,17 +8,16 @@ and `ZMod 2`, and kernel-checks finite incidence, determinant, and projective-ma
 them by `decide`/`fin_cases`, together with a few integer polynomial identities by `ring`/`norm_num`.
 There is no generated certificate tree.
 
-Conventions.  A projective point or line is a vector in `Fin 3 → K`; `SameDirection u v` means
-`v = a • u` for some nonzero `a`, i.e. projective equality; `cross` and `dot` are the triple product
-and dot product.  Projective points of `PG(2,11)` and `PG(2,5)` are the fixed
+Conventions.  A projective point or line is represented by a nonzero vector in `Fin 3 → K`;
+`SameDirection u v` means `v = a • u` for some nonzero `a`.  The predicate is also defined on zero
+vectors (in particular, `SameDirection 0 0` holds), so its projective interpretation is used only
+when nonzeroness is known.  The operations `cross` and `dot` are the triple product and dot product.
+Projective points of `PG(2,11)` and `PG(2,5)` are the fixed
 first-nonzero-coordinate-normalized enumerations `projectiveVec` and `projectiveVec5`.
 
-Scope and trust boundary.  Lean here checks coordinate tables and arithmetic only.  The identification
-of the fifteen `ZMod 11` directions with the projectivized `H3` reflection arrangement, of the
-four-point `ZMod 5` frame with the essentialized `A3` reflection arrangement, and of the displayed
-polynomials with those arrangements' characteristic polynomials (roots `1 +` the exponents
-`{1,5,9}` for `H3`, `{1,2,3}` for `A3`) is classical arrangement theory (Orlik & Terao,
-*Arrangements of Hyperplanes*, 1992), not proved in this file.  The terminal results are the `tau`
+Scope and trust boundary.  Lean here checks coordinate tables and arithmetic only.  This file does
+not prove the external arrangement-theoretic identification of the displayed coordinate models or
+interpret the integer factorizations as characteristic polynomials.  The terminal results are the `tau`
 relations, the fivefold-arc and line-coincidence theorems, the projectivity row identities, the
 `H3` and `A3` incidence spectra, the pointwise incidence-index equality, and the integer identities;
 each carries a `#print axioms` probe at the end of the file.
@@ -39,7 +38,8 @@ private instance : Fact (Nat.Prime 5) := ⟨by decide⟩
 abbrev Point11 := Vec (ZMod 11)
 abbrev Point5 := Vec (ZMod 5)
 
-/-- Projective equality for concrete coordinate vectors. -/
+/-- Equality up to multiplication by a nonzero scalar for concrete coordinate vectors.  On nonzero
+vectors this is projective equality; the definition also makes `SameDirection 0 0` true. -/
 def SameDirection {K : Type*} [Field K] (u v : Fin 3 → K) : Prop :=
   ∃ a : K, a ≠ 0 ∧ a • u = v
 
@@ -88,7 +88,7 @@ def h3Pair (i : Fin 15) : Fin 6 × Fin 6 := chordEdge i
 def h3Join (i : Fin 15) : Point11 :=
   cross (h3FivefoldPoint (h3Pair i).1) (h3FivefoldPoint (h3Pair i).2)
 
-/-- The fifteen join-lines as a finite set of normalized directions. -/
+/-- The fifteen raw cross-product vectors of the join-lines, collected as a finite set. -/
 def h3Joins : Finset Point11 := Finset.univ.image h3Join
 
 /-- The specialized positive-root directions obtained from
@@ -143,7 +143,7 @@ def h3Projectivity (p : Point11) : Point11 :=
     2 * p 0 + 2 * p 1 + 5 * p 2
   ]
 
-/-- The row-vector dual action by the displayed inverse of `T`. -/
+/-- The coordinate map on line normals whose pairing with `h3Projectivity` is preserved. -/
 def h3DualProjectivity (l : Point11) : Point11 :=
   ![
     4 * l 0 + 4 * l 1 + 10 * l 2,
@@ -151,11 +151,146 @@ def h3DualProjectivity (l : Point11) : Point11 :=
     4 * l 0 + 6 * l 1 + 5 * l 2
   ]
 
+/-- The explicit inverse coordinate map to `h3Projectivity`. -/
+def h3ProjectivityInverse (p : Point11) : Point11 :=
+  ![
+    4 * p 0 + 4 * p 1 + 4 * p 2,
+    4 * p 0 + 9 * p 1 + 6 * p 2,
+    10 * p 0 + 8 * p 1 + 5 * p 2
+  ]
+
 /-- The displayed matrix of `T` has determinant `3` in `ZMod 11`. This is the only invertibility
 fact proved here; `T` is not packaged as a linear or projective bijection. -/
 theorem h3_projectivity_det :
     Matrix.det (![![2, 3, 8], ![10, 6, 9], ![2, 2, 5]] : Matrix (Fin 3) (Fin 3) (ZMod 11)) = 3 := by
   decide
+
+/-- The determinant `3` of the displayed matrix is nonzero in `ZMod 11`. -/
+theorem h3_projectivity_det_ne_zero :
+    Matrix.det (![![2, 3, 8], ![10, 6, 9], ![2, 2, 5]] :
+      Matrix (Fin 3) (Fin 3) (ZMod 11)) ≠ 0 := by
+  rw [h3_projectivity_det]
+  decide
+
+/-- The explicit inverse is a left inverse to `h3Projectivity`. -/
+theorem h3_projectivity_inverse_apply (p : Point11) :
+    h3ProjectivityInverse (h3Projectivity p) = p := by
+  have h44 : (44 : ZMod 11) = 0 := by decide
+  have h56 : (56 : ZMod 11) = 1 := by decide
+  have h78 : (78 : ZMod 11) = 1 := by decide
+  have h88 : (88 : ZMod 11) = 0 := by decide
+  have h110 : (110 : ZMod 11) = 0 := by decide
+  have h143 : (143 : ZMod 11) = 0 := by decide
+  have h177 : (177 : ZMod 11) = 1 := by decide
+  funext i
+  fin_cases i <;> simp [h3ProjectivityInverse, h3Projectivity] <;> ring_nf <;>
+    try simp only [h44, h56, h78, h88, h110, h143, h177, mul_zero, mul_one, add_zero,
+      zero_add]
+
+/-- The explicit inverse is a right inverse to `h3Projectivity`. -/
+theorem h3_projectivity_apply_inverse (p : Point11) :
+    h3Projectivity (h3ProjectivityInverse p) = p := by
+  have h45 : (45 : ZMod 11) = 1 := by decide
+  have h66 : (66 : ZMod 11) = 0 := by decide
+  have h99 : (99 : ZMod 11) = 0 := by decide
+  have h100 : (100 : ZMod 11) = 1 := by decide
+  have h121 : (121 : ZMod 11) = 0 := by decide
+  have h154 : (154 : ZMod 11) = 0 := by decide
+  have h166 : (166 : ZMod 11) = 1 := by decide
+  funext i
+  fin_cases i <;> simp [h3ProjectivityInverse, h3Projectivity] <;> ring_nf <;>
+    try simp only [h45, h66, h99, h100, h121, h154, h166, mul_zero, mul_one, add_zero,
+      zero_add]
+
+/-- The line-normal map is contragredient to `h3Projectivity`: their coordinate pairing is
+unchanged. -/
+theorem h3_dual_projectivity_dot (l p : Point11) :
+    dot (h3DualProjectivity l) (h3Projectivity p) = dot l p := by
+  have h44 : (44 : ZMod 11) = 0 := by decide
+  have h56 : (56 : ZMod 11) = 1 := by decide
+  have h78 : (78 : ZMod 11) = 1 := by decide
+  have h88 : (88 : ZMod 11) = 0 := by decide
+  have h110 : (110 : ZMod 11) = 0 := by decide
+  have h143 : (143 : ZMod 11) = 0 := by decide
+  have h177 : (177 : ZMod 11) = 1 := by decide
+  simp [dot, h3DualProjectivity, h3Projectivity]
+  ring_nf
+  simp only [h44, h56, h78, h88, h110, h143, h177, mul_zero, mul_one, add_zero]
+
+/-- The displayed coordinate map sends nonzero vectors to nonzero vectors. -/
+theorem h3_projectivity_ne_zero {p : Point11} (hp : p ≠ 0) :
+    h3Projectivity p ≠ 0 := by
+  intro hzero
+  apply hp
+  rw [← h3_projectivity_inverse_apply p, hzero]
+  simp [h3ProjectivityInverse]
+
+/-- The explicit inverse coordinate map sends nonzero vectors to nonzero vectors. -/
+theorem h3_projectivity_inverse_ne_zero {p : Point11} (hp : p ≠ 0) :
+    h3ProjectivityInverse p ≠ 0 := by
+  intro hzero
+  apply hp
+  rw [← h3_projectivity_apply_inverse p, hzero]
+  simp [h3Projectivity]
+
+/-- Index of the first-nonzero-coordinate normalization of a coordinate vector.  The zero vector is
+sent to the final index; the projective interpretation below is used only for nonzero inputs. -/
+def projectiveIndex11 (s : Point11) : Fin 133 :=
+  if h₀ : s 0 ≠ 0 then
+    ⟨(s 1 / s 0).val * 11 + (s 2 / s 0).val, by
+      have h₁ := (s 1 / s 0).val_lt
+      have h₂ := (s 2 / s 0).val_lt
+      omega⟩
+  else if h₁ : s 1 ≠ 0 then
+    ⟨121 + (s 2 / s 1).val, by
+      have h₂ := (s 2 / s 1).val_lt
+      omega⟩
+  else ⟨132, by omega⟩
+
+/-- A nonzero vector is a nonzero scalar multiple of the normalized representative selected by
+`projectiveIndex11`. -/
+theorem projective_index11_direction (s : Point11) (hs : s ≠ 0) :
+    SameDirection (projectiveVec (projectiveIndex11 s)) s := by
+  unfold projectiveIndex11
+  split_ifs with h₀ h₁
+  · have h₁lt := (s 1 / s 0).val_lt
+    have h₂lt := (s 2 / s 0).val_lt
+    have hidx : (s 1 / s 0).val * 11 + (s 2 / s 0).val < 121 := by omega
+    have hdiv : ((s 1 / s 0).val * 11 + (s 2 / s 0).val) / 11 =
+        (s 1 / s 0).val := by omega
+    have hmod : ((s 1 / s 0).val * 11 + (s 2 / s 0).val) % 11 =
+        (s 2 / s 0).val := by omega
+    refine ⟨s 0, h₀, ?_⟩
+    funext i
+    fin_cases i <;> simp [projectiveVec, hidx, hdiv, hmod] <;> try field_simp
+  · have h₂lt := (s 2 / s 1).val_lt
+    have hidx : 121 + (s 2 / s 1).val < 132 := by omega
+    have hs₀ : s 0 = 0 := not_ne_iff.mp h₀
+    refine ⟨s 1, h₁, ?_⟩
+    funext i
+    fin_cases i <;> simp [projectiveVec, hidx, hs₀] <;> try field_simp
+  · have h₂ : s 2 ≠ 0 := by
+      intro h₂
+      apply hs
+      funext i
+      fin_cases i <;> simp_all
+    have hs₀ : s 0 = 0 := not_ne_iff.mp h₀
+    have hs₁ : s 1 = 0 := not_ne_iff.mp h₁
+    refine ⟨s 2, h₂, ?_⟩
+    funext i
+    fin_cases i <;> simp [projectiveVec, hs₀, hs₁]
+
+/-- The normalized projective index of the image of the `p`-th normalized point under the displayed
+invertible coordinate map. -/
+def h3ProjectiveIndex (p : Fin 133) : Fin 133 :=
+  projectiveIndex11 (h3Projectivity (projectiveVec p))
+
+/-- The normalized representative selected by `h3ProjectiveIndex` lies in the same direction as the
+displayed image. -/
+theorem h3_projective_index_direction (p : Fin 133) :
+    SameDirection (projectiveVec (h3ProjectiveIndex p))
+      (h3Projectivity (projectiveVec p)) := by
+  exact projective_index11_direction _ (h3_projectivity_ne_zero (projectiveVec_ne_zero p))
 
 /-- `T` sends each of the six fivefold points to the corresponding Clebsch witness column, under
 projective equality. -/
@@ -179,6 +314,82 @@ theorem h3_multiplicity_eq_rawPointIndex :
         rawPointIndex (h3Projectivity (projectiveVec p)) := by
   decide
 
+/-- Multiplying a coordinate vector by a nonzero scalar does not change its Clebsch secant index. -/
+theorem rawPointIndex_smul (a : ZMod 11) (ha : a ≠ 0) (x : Point11) :
+    rawPointIndex (a • x) = rawPointIndex x := by
+  unfold rawPointIndex
+  congr 1
+  ext e
+  have hdet : Matrix.det ![a • x, witnessVec e.1, witnessVec e.2] =
+      a * Matrix.det ![x, witnessVec e.1, witnessVec e.2] := by
+    simp [Matrix.det_fin_three]
+    ring
+  simp [hdet, ha]
+
+/-- The incidence count at a normalized point is the Clebsch secant index at the normalized
+projective representative of its displayed image. -/
+theorem h3_multiplicity_eq_normalized_rawPointIndex (p : Fin 133) :
+    (Finset.univ.filter fun i : Fin 15 => dot (h3Join i) (projectiveVec p) = 0).card =
+      rawPointIndex (projectiveVec (h3ProjectiveIndex p)) := by
+  rw [h3_multiplicity_eq_rawPointIndex]
+  obtain ⟨a, ha, hdir⟩ := h3_projective_index_direction p
+  rw [← hdir, rawPointIndex_smul a ha]
+
+/-- The explicit inverse coordinate map commutes with scalar multiplication. -/
+theorem h3_projectivity_inverse_smul (a : ZMod 11) (p : Point11) :
+    h3ProjectivityInverse (a • p) = a • h3ProjectivityInverse p := by
+  funext i
+  fin_cases i <;> simp [h3ProjectivityInverse] <;> ring
+
+/-- Two normalized representatives in the same nonzero direction have the same projective index. -/
+theorem projectiveVec_sameDirection_injective {p q : Fin 133}
+    (h : SameDirection (projectiveVec p) (projectiveVec q)) : p = q := by
+  obtain ⟨a, ha, hdir⟩ := h
+  let a' : NonzeroScalar := ⟨a, ha⟩
+  let one' : NonzeroScalar := ⟨1, one_ne_zero⟩
+  have hray : affineRayVec (p, a') = affineRayVec (q, one') := by
+    simpa [affineRayVec, a', one'] using hdir
+  have hray' : (⟨affineRayVec (p, a'), affineRayVec_ne_zero (p, a')⟩ :
+      {s : Vec (ZMod 11) // s ≠ 0}) =
+      ⟨affineRayVec (q, one'), affineRayVec_ne_zero (q, one')⟩ := Subtype.ext hray
+  exact congrArg Prod.fst (affineRayVec_bijective.1 hray')
+
+/-- The normalized projective-index map induced by the displayed coordinate map is injective. -/
+theorem h3_projective_index_injective : Function.Injective h3ProjectiveIndex := by
+  intro p q hpq
+  obtain ⟨a, ha, hp⟩ := h3_projective_index_direction p
+  obtain ⟨b, hb, hq⟩ := h3_projective_index_direction q
+  have hn : projectiveVec (h3ProjectiveIndex p) = projectiveVec (h3ProjectiveIndex q) := by
+    rw [hpq]
+  have himage : SameDirection (h3Projectivity (projectiveVec p))
+      (h3Projectivity (projectiveVec q)) := by
+    refine ⟨b / a, div_ne_zero hb ha, ?_⟩
+    calc
+      (b / a) • h3Projectivity (projectiveVec p) =
+          (b / a) • (a • projectiveVec (h3ProjectiveIndex p)) := by rw [hp]
+      _ = b • projectiveVec (h3ProjectiveIndex p) := by
+        ext i
+        simp
+        field_simp
+      _ = b • projectiveVec (h3ProjectiveIndex q) := by rw [hn]
+      _ = h3Projectivity (projectiveVec q) := hq
+  apply projectiveVec_sameDirection_injective
+  obtain ⟨c, hc, hcmap⟩ := himage
+  refine ⟨c, hc, ?_⟩
+  calc
+    c • projectiveVec p = c • h3ProjectivityInverse (h3Projectivity (projectiveVec p)) := by
+      rw [h3_projectivity_inverse_apply]
+    _ = h3ProjectivityInverse (c • h3Projectivity (projectiveVec p)) := by
+      rw [h3_projectivity_inverse_smul]
+    _ = h3ProjectivityInverse (h3Projectivity (projectiveVec q)) := by rw [hcmap]
+    _ = projectiveVec q := h3_projectivity_inverse_apply _
+
+/-- The normalized projective-index map induced by the displayed invertible coordinate map is a
+bijection of the 133 normalized projective points. -/
+theorem h3_projective_index_bijective : Function.Bijective h3ProjectiveIndex := by
+  refine (Fintype.bijective_iff_injective_and_card h3ProjectiveIndex).mpr ?_
+  exact ⟨h3_projective_index_injective, rfl⟩
+
 /-- Incidence count of the normalized projective point `projectiveVec p` with the fifteen
 join-lines. -/
 def h3Multiplicity (p : Fin 133) : ℕ :=
@@ -187,6 +398,14 @@ def h3Multiplicity (p : Fin 133) : ℕ :=
 /-- The normalized `PG(2,11)` points whose incidence count with the fifteen join-lines equals `m`. -/
 def h3PointsOfMultiplicity (m : ℕ) : Finset (Fin 133) :=
   Finset.univ.filter fun p => h3Multiplicity p = m
+
+/-- Every normalized point has incidence multiplicity `0`, `1`, `2`, `3`, or `5` with the fifteen
+join-lines. -/
+theorem h3_multiplicity_cases (p : Fin 133) :
+    h3Multiplicity p = 0 ∨ h3Multiplicity p = 1 ∨ h3Multiplicity p = 2 ∨
+      h3Multiplicity p = 3 ∨ h3Multiplicity p = 5 := by
+  revert p
+  decide
 
 /-- Indices in the normalized `PG(2,11)` enumeration `projectiveVec` of the six displayed fivefold
 points. -/
@@ -279,15 +498,28 @@ def a3Join (i : Fin 6) : Point5 :=
 def a3RootDirection (i : Fin 6) : Point5 :=
   ![![1, 0, 0], ![0, 1, 0], ![0, 0, 1], ![1, -1, 0], ![1, 0, -1], ![0, 1, -1]] i
 
-/-- Each of the six frame joins is projectively equal to some displayed braid direction. This is the
-one-sided coverage only: the reverse inclusion and the cardinality of the two projective sets are not
-asserted. -/
+/-- The six raw cross-product vectors of the frame joins, collected as a finite set. -/
+def a3Joins : Finset Point5 := Finset.univ.image a3Join
+
+/-- The six displayed braid directions, collected as a finite set. -/
+def a3RootDirections : Finset Point5 := Finset.univ.image a3RootDirection
+
+/-- The six frame joins and the six displayed braid directions are equal as projective sets: both
+finite sets have cardinality six, and each indexed vector matches a vector from the other table up
+to a nonzero scalar. -/
 theorem a3_frame_joins_are_braid_mirrors :
-    ∀ i : Fin 6, ∃ j : Fin 6, SameDirection (a3Join i) (a3RootDirection j) := by
-  intro i
-  fin_cases i <;> first | exact ⟨0, by decide⟩ | exact ⟨1, by decide⟩ |
-    exact ⟨2, by decide⟩ | exact ⟨3, by decide⟩ | exact ⟨4, by decide⟩ |
-    exact ⟨5, by decide⟩
+    a3Joins.card = 6 ∧ a3RootDirections.card = 6 ∧
+      (∀ i : Fin 6, ∃ j : Fin 6, SameDirection (a3Join i) (a3RootDirection j)) ∧
+      (∀ j : Fin 6, ∃ i : Fin 6, SameDirection (a3Join i) (a3RootDirection j)) := by
+  refine ⟨by decide, by decide, ?_, ?_⟩
+  · intro i
+    fin_cases i <;> first | exact ⟨0, by decide⟩ | exact ⟨1, by decide⟩ |
+      exact ⟨2, by decide⟩ | exact ⟨3, by decide⟩ | exact ⟨4, by decide⟩ |
+      exact ⟨5, by decide⟩
+  · intro j
+    fin_cases j <;> first | exact ⟨0, by decide⟩ | exact ⟨1, by decide⟩ |
+      exact ⟨2, by decide⟩ | exact ⟨3, by decide⟩ | exact ⟨4, by decide⟩ |
+      exact ⟨5, by decide⟩
 
 /-- Incidence count of the normalized point `projectiveVec5 p` with the six frame join-lines. -/
 def a3Multiplicity (p : Fin 31) : ℕ :=
@@ -336,9 +568,22 @@ theorem a3_conic_size_factorization (q : ℤ) :
 #print axioms h3_fivefold_points_arc
 #print axioms h3_joins_are_root_directions
 #print axioms h3_projectivity_det
+#print axioms h3_projectivity_det_ne_zero
+#print axioms h3_projectivity_inverse_apply
+#print axioms h3_projectivity_apply_inverse
+#print axioms h3_dual_projectivity_dot
+#print axioms h3_projectivity_ne_zero
+#print axioms h3_projectivity_inverse_ne_zero
+#print axioms h3_projective_index_direction
 #print axioms h3_projectivity_maps_fivefold_points
 #print axioms h3_dual_projectivity_maps_mirrors
 #print axioms h3_multiplicity_eq_rawPointIndex
+#print axioms h3_multiplicity_eq_normalized_rawPointIndex
+#print axioms h3_projectivity_inverse_smul
+#print axioms projectiveVec_sameDirection_injective
+#print axioms h3_projective_index_injective
+#print axioms h3_projective_index_bijective
+#print axioms h3_multiplicity_cases
 #print axioms h3_fivefold_index_vec
 #print axioms h3_intersection_spectrum
 #print axioms h3_fivefold_points_exact

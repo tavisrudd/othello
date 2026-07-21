@@ -161,9 +161,13 @@ has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
   precisely the new C211 `A3/H3` coordinate bridge,
   intersection ledgers, complement counts, and decoder-stratum consequences. This is gated on a
   compact theorem-level development: do not generate large certificate trees, and re-scope or stop
-  if kernel closure would require them. The compact geometry leaf now passes guarded elaboration;
-  its sole uncommitted path, `lean/RelativeConicArcs/ReflectionArrangementDecoding.lean`, awaits a
-  focused build after the foreign Q25 owner releases the shared Lean lock. Task boundary and success criteria:
+  if kernel closure would require them. The compact coordinate and decoder leaves now include the
+  explicit invertible projective transport, two-sided `A3` equality, actual affine-ray nearest-leader
+  bridge, factor-ten count, and `90+6` one-leader decomposition. Both leaves and the import-only gate
+  `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` build cleanly; all 38 terminal probes
+  report only `propext`, `Classical.choice`, and `Quot.sound`, and the bounded Clebsch slice manifest
+  is present. The coherent remediation bundle awaits the required user-launched post-fix review;
+  C222 stays live until that review returns `GO`. Task boundary and success criteria:
   [`2026-07-16-c222-lean-a3-h3-closure.md`](../2026-07-16-c222-lean-a3-h3-closure.md).
   If the paper labels these bridge claims Lean-formalized, C222 becomes a gate for that label;
   otherwise the verification map must retain their conceptual/replay route.

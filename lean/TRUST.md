@@ -35,14 +35,16 @@ shape its data has.
 | Area | Manifest | Gate target |
 |---|---|---|
 | Arcs complete outside a conic | [`RelativeConicArcs/TRUST.md`](RelativeConicArcs/TRUST.md) | `RelativeConicArcs.Gates.Relconic` |
+| Clebsch reflection-arrangement decoding slice | [`RelativeConicArcs/CLEBSCH_TRUST.md`](RelativeConicArcs/CLEBSCH_TRUST.md) | `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` |
 | Equivariant robust completion (Q25) | [`RelativeConicArcs/TRUST.md`](RelativeConicArcs/TRUST.md) | `RelativeConicArcs.Gates.AlternateOrbitRepair*` |
 | Baer completion | [`FiniteGeom/BaerCompletion/TRUST.md`](FiniteGeom/BaerCompletion/TRUST.md) | `RelativeConicArcs.Gates.Baer` |
 | Repair codes / ports | [`RepairCodes/TRUST.md`](RepairCodes/TRUST.md) | see manifest |
 | Dihedral Schreier | [`DihedralSchreier/README.md`](DihedralSchreier/README.md) | see README |
 | NodeKayles / queens `getK` | [`TRUST.md`](TRUST.md) | see `README.md` |
 
-Areas without a manifest do not yet have a stated trust boundary. Clebsch, complete-ports, and
-crowns are in that state; their claims currently rest on reports and scripts outside this tree.
+Areas without a manifest do not yet have a stated trust boundary. Complete-ports and crowns are in
+that state. The Clebsch manifest currently covers only the reflection-arrangement decoding slice,
+not the complete manuscript.
 
 ## Named classical inputs
 

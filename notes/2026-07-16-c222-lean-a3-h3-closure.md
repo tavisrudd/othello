@@ -2,17 +2,16 @@
 
 **Lane:** `clebsch`
 
-**Status:** ACTIVE; compact-proof gate; one independent review returned **READY FOR FIXES** (see the
-independent-review section). Both task modules — the coordinate/finite-arrangement leaf
-`lean/RelativeConicArcs/ReflectionArrangements.lean` and the downstream decoder corollary
-`lean/RelativeConicArcs/ReflectionArrangementDecoding.lean` — are committed with compact kernel
-(`decide`/`fin_cases`/`ring`/`norm_num`) proofs and no generated certificate tree. The source-level
-report below is complete as a record, but every Lean route is **candidate** full-trust only: the
-Lean-formalized label is withheld until the gate, current elaboration, pinned commit,
-terminal-by-terminal `#print axioms` audit, and Clebsch trust-manifest row exist, and until a
-post-fix review returns `GO`. Two objective consequences are deliberately not Lean-formalized — the
-decoder-stratum identification of objective 4 and the full `A3` set equality of objective 3 — and are
-narrowed to what the types prove, with the strengthenings recorded as build-gated. C222 stays live.
+**Status:** ACTIVE; compact-proof gate. Three user-launched reviews returned **READY FOR FIXES** (see
+the independent-review record). The current implementation closes the two theorem gaps identified by
+the latest review: `a3_frame_joins_are_braid_mirrors` now has two-sided coverage and cardinality six,
+and `h3_affine_syndrome_nearestLeaderCount` supplies an explicit projective-point/nonzero-scalar map
+whose actual nearest-leader counts are `20,1,2,3,1` on incidence multiplicities `0,1,2,3,5`, with the
+factor-ten cardinality theorem and the `90+6` one-leader decomposition. The coordinate map now also
+has an explicit inverse, contragredient pairing theorem, and induced bijection on the 133 normalized
+projective points. All proofs remain compact kernel proofs with no generated certificate tree. The
+Lean-formalized label remains withheld until the final gate/build/axiom/trust evidence is committed
+and a user-launched post-fix review returns `GO`. C222 stays live.
 
 ## Objective
 
@@ -122,13 +121,17 @@ T = [[2,3,8],[10,6,9],[2,2,5]] over F_11 has determinant `3 : ZMod 11`; the map 
 sends each fivefold point to the Clebsch witness column `witnessVec i`, and the row/dual map
 `h3DualProjectivity` sends each `H3` join to the Clebsch secant line `rawChordLine (chordEdge i)`,
 each under `SameDirection`.
-- Route: candidate full-trust Lean (`decide`) for the finite row identities.
+The explicit map `h3ProjectivityInverse` is proved on both sides, the determinant is proved nonzero,
+`h3_dual_projectivity_dot` proves pairing preservation, and `h3ProjectiveIndex` is a bijection of the
+133 normalized projective representatives.
+- Route: candidate full-trust Lean (`decide`/`ring` plus the existing affine-ray bijection).
 - Terminals: `h3_projectivity_det`, `h3_projectivity_maps_fivefold_points`,
-  `h3_dual_projectivity_maps_mirrors`.
-- Boundary: `h3_projectivity_det` proves `det T = 3` only. `3 ≠ 0`, the packaging of `T` as a linear
-  or projective bijection, and the inverse-transpose identity for `h3DualProjectivity` are not
-  separate terminals; the row-by-row maps are exact, but global transport of strata through the
-  bijection is not a Lean-backed step here.
+  `h3_dual_projectivity_maps_mirrors`, `h3_projectivity_det_ne_zero`,
+  `h3_projectivity_inverse_apply`, `h3_projectivity_apply_inverse`,
+  `h3_dual_projectivity_dot`, and `h3_projective_index_bijective`.
+- Boundary: these are explicit coordinate-map theorems; no abstract projectivization quotient is
+  introduced. `SameDirection` is interpreted projectively only for nonzero vectors, and its zero
+  degeneracy is stated in the source.
 
 **S4 — `H3` incidence ledger and pointwise index equality (objective 2 ledger and the complement
 counts of objective 4).** Over the 133 fixed representatives of PG(2,11) the number of the fifteen
@@ -144,36 +147,35 @@ functions, stronger than equality of aggregate spectra.
   with the projective bijection of S3, the affine-ray equivalence, or any decoder-soundness theorem.
   Naming the fifteen lines the `H3` arrangement is the classical input above.
 
-**S5 — `A3` frame over F_5: one-sided join coverage and incidence spectra (objective 3).** Each of the
-six pairwise joins of the four-point frame `a3FramePoint` in PG(2,5) is parallel (`SameDirection`) to
-some one of the six essentialized braid directions {X, Y, Z, X−Y, X−Z, Y−Z}; the incidence spectrum of
-those six join-lines over the 31 fixed representatives of PG(2,5) is 6₀, 18₁, 3₂, 4₃; and in
-characteristic five the fifteen `H3` lines give incidence spectrum 15₂, 10₃, 6₅ with all 31 points on
-at least two lines.
-- Route: candidate full-trust Lean (`decide`) for the finite spectra; the join→direction statement is
-  one-sided only.
+**S5 — `A3` frame over F_5: projective-set equality and incidence spectra (objective 3).** The six
+pairwise joins of the four-point frame and the six essentialized braid directions
+{X, Y, Z, X−Y, X−Z, Y−Z} both have cardinality six and cover each other under `SameDirection`;
+the incidence spectrum of those six join-lines over the 31 fixed representatives of PG(2,5) is
+6₀, 18₁, 3₂, 4₃; and in characteristic five the fifteen `H3` lines give incidence spectrum
+15₂, 10₃, 6₅ with all 31 points on at least two lines.
+- Route: candidate full-trust Lean (`decide`) for the two-sided equality and finite spectra.
 - Terminals: `a3_frame_joins_are_braid_mirrors`, `a3_intersection_spectrum`,
   `h3_characteristic_five_spectrum`.
-- Boundary: `a3_frame_joins_are_braid_mirrors` proves only that each join matches *some* braid
-  direction; the reverse inclusion and projective cardinality six — hence equality of the two
-  projective sets — are not in the type. Naming these the `A3` arrangement is the classical input
-  above; the two-sided set equality is a deferred (build-gated) strengthening.
+- Boundary: naming the coordinate model the essentialized `A3` reflection arrangement remains the
+  cited classical input; equality of the two displayed projective tables is in the type.
 
-**S6 — Joint incidence/ambiguity census (objective 4 connection, narrowed).** `h3_decoder_strata`
-proves one conjunction of eight cardinality equalities: the `H3` incidence-stratum sizes 12/90/15/10
-for incidence 0/1/2/3, together with the Clebsch nearest-codeword ambiguity-census sizes
-960/150/100/120 (`ambiguityOneSyndromes`, `ambiguityTwoSyndromes`, `ambiguityThreeSyndromes`,
-`ambiguityTwentySyndromes`).
-- Route: candidate full-trust Lean (`decide`) — a joint numerical census composing
-  `h3_intersection_spectrum` with `ambiguity_strata_counts` from
-  `RelativeConicArcs.Q11DecodingSynthesis`.
-- Terminal: `h3_decoder_strata` (module `RelativeConicArcs.ReflectionArrangementDecoding`).
-- Boundary: the type is a conjunction of counts only. It exhibits **no** map between an `H3`
-  projective point and an affine syndrome, no membership or leader-count equivalence, no factor-ten
-  scalar-ray correspondence, and no 90+6 decomposition of the 960 one-leader syndromes. Objective 4's
-  decoder-stratum *identification* is therefore **not** Lean-formalized; it stays computer-assisted. A
-  genuine bridge theorem (point/ray map plus leader-count equivalences, including the incidence-5
-  contribution and the factor ten) is a deferred build-gated strengthening.
+**S6 — Arrangement incidence to actual decoder multiplicity (objective 4).** For every normalized
+projective point `p : Fin 133` and every `a : NonzeroScalar`, `h3AffineSyndrome p a` is the affine ray
+of the normalized projective image under `h3Projectivity`. The map on pairs is injective, each
+incidence stratum contributes exactly ten affine syndromes per projective point, and actual
+`nearestLeaderCount` is `20,1,2,3,1` at arrangement multiplicities `0,1,2,3,5`. Thus the ninety
+incidence-one points and six incidence-five points contribute `10*(90+6)=960` one-leader syndromes.
+The older `h3_decoder_strata` remains a separately named joint census only.
+- Route: candidate full-trust Lean, composing the projective-index bijection and pointwise
+  incidence/index equality with `affineRay_syndromeDistance_exact`,
+  `affineRay_weightTwo_leader_count`, `distanceOne_leader_count_one`, and
+  `distanceThree_leader_count_twenty`.
+- Terminals: `h3_affine_syndrome_injective`, `h3_affine_syndromes_card`,
+  `h3_affine_syndrome_nearestLeaderCount`, `h3_one_leader_strata_card`, and the census-only
+  `h3_decoder_strata` (module `RelativeConicArcs.ReflectionArrangementDecoding`).
+- Boundary: the bridge is stated for actual nearest-leader cardinality on all 1330 nonzero
+  syndromes. Equality with each separately defined `ambiguity*Syndromes` finset is not needed for
+  the leader-count identification and is not claimed by the bridge theorem.
 
 **S7 — Integer ledger identities (supporting).** The identities 6·4 + 10·2 + 15·1 = 59,
 t³−15t²+59t−45 = (t−1)(t−5)(t−9), t³−6t²+11t−6 = (t−1)(t−2)(t−3),
@@ -231,47 +233,58 @@ candidate until that evidence lands.
 |---|---|---|---|
 | S1 field golden-ratio facts | `RelativeConicArcs.Examples.ReflectionArrangements.tau11_relation`, `RelativeConicArcs.Examples.ReflectionArrangements.tau5_relation`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_two_boundary` | kernel `decide`; combination for the τ role | proves the three named fields only; general-field and `H3`-role reading classical (Orlik–Terao) |
 | S2 fivefold arc + 15 mirrors | `RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_arc`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_joins_are_root_directions` | kernel `decide` (two-sided) | self-contained; naming the lines `H3` is classical |
-| S3 projectivity rows | `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_maps_fivefold_points`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_maps_mirrors` | kernel `decide` | `det T = 3` only; bijection/inverse-transpose not exposed; consumes `witnessVec`, `rawChordLine`, `chordEdge` |
-| S4 incidence ledger + pointwise index | `RelativeConicArcs.Examples.ReflectionArrangements.h3_intersection_spectrum`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_exact`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_index_vec`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_rawPointIndex` | kernel `decide` | pointwise index equality only, no bijection transport; consumes `projectiveVec`, `rawPointIndex` |
-| S5 `A3` one-sided joins + spectra | `RelativeConicArcs.Examples.ReflectionArrangements.a3_frame_joins_are_braid_mirrors`, `RelativeConicArcs.Examples.ReflectionArrangements.a3_intersection_spectrum`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_five_spectrum` | kernel `decide`; one-sided join coverage | reverse inclusion and set equality not proved; naming the lines `A3` is classical |
-| S6 joint census | `RelativeConicArcs.Examples.ReflectionArrangements.h3_decoder_strata` (module `RelativeConicArcs.ReflectionArrangementDecoding`) | kernel `decide` (conjunction) | conjunction of eight counts only; no stratum map; consumes `ambiguity_strata_counts` from `RelativeConicArcs.Q11DecodingSynthesis` |
+| S3 invertible projective coordinate map | `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_det_ne_zero`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_inverse_apply`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_apply_inverse`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_dot`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_projective_index_bijective`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_projectivity_maps_fivefold_points`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_dual_projectivity_maps_mirrors` | kernel `decide`/`ring`; existing affine-ray bijection | explicit coordinate/projective bijection and contragredient pairing; consumes `witnessVec`, `rawChordLine`, `chordEdge` |
+| S4 incidence ledger + normalized pointwise index | `RelativeConicArcs.Examples.ReflectionArrangements.h3_intersection_spectrum`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_points_exact`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_fivefold_index_vec`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_rawPointIndex`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_multiplicity_eq_normalized_rawPointIndex` | kernel `decide` plus scalar-invariance lemma | pointwise index equality transported through the normalized projective bijection; consumes `projectiveVec`, `rawPointIndex` |
+| S5 `A3` two-sided joins + spectra | `RelativeConicArcs.Examples.ReflectionArrangements.a3_frame_joins_are_braid_mirrors`, `RelativeConicArcs.Examples.ReflectionArrangements.a3_intersection_spectrum`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_five_spectrum` | kernel `decide`; two-sided coverage and cardinality six | equality of the displayed projective sets; naming the coordinate model `A3` remains classical |
+| S6 actual decoder multiplicity bridge | `RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_injective`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndromes_card`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_affine_syndrome_nearestLeaderCount`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_one_leader_strata_card`; census-only companion `RelativeConicArcs.Examples.ReflectionArrangements.h3_decoder_strata` | kernel proof composing the projective and decoder APIs | explicit map on all point/scalar pairs; multiplicities `0,1,2,3,5` map to actual leader counts `20,1,2,3,1`; factor ten and `90+6` are in separate terminals |
 | S7 integer identities | `RelativeConicArcs.Examples.ReflectionArrangements.h3_mobius_sum`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_characteristic_polynomial`, `RelativeConicArcs.Examples.ReflectionArrangements.a3_characteristic_polynomial`, `RelativeConicArcs.Examples.ReflectionArrangements.h3_conic_size_factorization`, `RelativeConicArcs.Examples.ReflectionArrangements.a3_conic_size_factorization` | `ring`/`norm_num`; combination for meaning | bare integer/polynomial identities; arrangement char-poly and conic reading classical (Orlik–Terao) |
 
-## Build-gated evidence pending the shared Lean lock
+## Build, gate, axiom, and trust evidence
 
-The following cannot be produced in a source-only, no-elaboration session and remain outstanding
-behind the shared build-owner lock; none is fabricated here:
+The compact source and exact import-only gate elaborate against the current dependency closure.
+Successful evidence:
 
-- a focused elaboration of `RelativeConicArcs.ReflectionArrangementDecoding`, and a re-elaboration of
-  `RelativeConicArcs.ReflectionArrangements`, against the current dependency closure;
-- the live `#print axioms` transcript for every terminal above — the source now carries a per-terminal
-  `#print axioms` probe for each listed terminal, but none has been run; both task modules use only
-  `decide`/`fin_cases`/`ring`/`norm_num`/`omega` with no `native_decide`, `sorry`, or local `axiom`,
-  so the expected closure is `propext`, `Classical.choice`, `Quot.sound`; this is an expectation, not
-  recorded output, and the full transitive Q11/Mathlib closure must still be inspected;
-- an import-only `RelativeConicArcs.Gates.*` exit gate importing the paper-facing terminals — no gate
-  module currently imports them — together with its exact-target `--no-build` confirmation;
-- a Clebsch trust-manifest row for these terminals (`lean/TRUST.md` currently records no per-paper
-  Clebsch manifest);
-- the pinned validated commit for the C320 ledger (current source identity recorded below);
-- the manuscript verification-table update, which must retain the computer-assisted label for these
-  claims until the axiom transcript and gate land;
-- the optional type-strengthenings that would upgrade the narrowed claims to Lean-formalized: a real
-  decoder-stratum bridge theorem for S6 (point/ray map plus leader-count equivalences, the incidence-5
-  contribution, and the factor ten), a two-sided `A3` join-equals-braid-arrangement theorem with
-  projective cardinality six for S5, and a projective-bijection / inverse-transpose API for `T` in S3.
-  These require writing and elaborating new Lean and are out of scope for a source-only session.
+- guarded single-file elaboration of `RelativeConicArcs/ReflectionArrangements.lean` and
+  `RelativeConicArcs/ReflectionArrangementDecoding.lean`;
+- exact queue builds of `RelativeConicArcs.ReflectionArrangements` and
+  `RelativeConicArcs.ReflectionArrangementDecoding` in run
+  `/home/tavis/.cache/othello-lean-build/run-20260721-185725-bff7f99a`;
+- build plus trace-only aggregate confirmation of
+  `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding` in run
+  `/home/tavis/.cache/othello-lean-build/run-20260721-190327-893b8b07`;
+- all 38 explicit `#print axioms` probes from the two task modules occurred in the build logs; a
+  deterministic name-to-log comparison found no missing probe, and the union of their reported
+  axioms is exactly `propext`, `Classical.choice`, and `Quot.sound`;
+- `lean/RelativeConicArcs/CLEBSCH_TRUST.md` records the slice boundary, and `lean/TRUST.md` points to
+  it without claiming a manifest for the complete Clebsch manuscript.
 
-Source identity at report time (identity, not correctness):
+Replay from repository root:
+
+```bash
+lean/scripts/lean-build-queue.py run \
+  RelativeConicArcs.ReflectionArrangements \
+  RelativeConicArcs.ReflectionArrangementDecoding \
+  RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding \
+  --profile single --threads 1 \
+  --aggregate RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding --cores 20-23
+```
+
+Source identity at report time (identity, not mathematical correctness):
 
 - `RelativeConicArcs/ReflectionArrangements.lean` — sha256
-  `6d1fa115246c0ddfcffc0a69e2b888a6755056a2eab5d0e8f18f316931d130f1`, 16165 bytes, after the
-  docstring/header/probe remediation of this pass (the 179 code lines are byte-identical to the prior
-  version; only comments and `#print axioms` probes changed).
+  `1d7768e3018a0f058214251ecf73a9bb769f5c5115035ca6cdaef5975d9c0394`, 27278 bytes;
 - `RelativeConicArcs/ReflectionArrangementDecoding.lean` — sha256
-  `780d7bc937fac57a7a55cc6004c0571917cf0dc32a1cee7ac397c199d9659fdd`, 1572 bytes, after the
-  docstring/header remediation of this pass (code lines byte-identical to the prior version). The
-  pinned validated commit for the C320 ledger still awaits the build window.
+  `620b0899fc125e999cd7776df8b0031c9dca5ec795c336e8c9676f31c7875276`, 7489 bytes;
+- `RelativeConicArcs/Gates/ClebschReflectionArrangementDecoding.lean` — sha256
+  `34ff5d94aa13fce4e48acb2e2351d6871bdf98813806d7982121162462a5d973`, 847 bytes;
+- `RelativeConicArcs/CLEBSCH_TRUST.md` — sha256
+  `b384e8f47cbe135edfff07d43d28ec902a74fca3292d0028bed0214be9e839ac`, 3023 bytes.
+- `notes/scripts/extract_c222_adequacy.py` — sha256
+  `896bad841deacc5445eea55fc427962a2694fd914fcfba0781fd669ced03ae94`, 2343 bytes.
+
+The validated commit pin and manuscript verification-table delta are recorded after the coherent
+bundle is committed. The Lean-formalized label remains withheld until the required user-launched
+post-fix review returns `GO`.
 
 ## Required closing review and archival checklist
 
@@ -289,91 +302,76 @@ boundary, and evidence. Any finding or `NO-GO` blocks completion and archival. F
 narrow the claimed exit, update the report and C320 delta, and request post-fix review. Only a
 recorded final `GO` permits C222 to be marked complete and archived.
 
-- [ ] State every objective subclaim in ordinary mathematics with exact field, coordinates,
-  quantifiers, nondegeneracy assumptions, conventions, hypotheses, and conclusion. — reopened by
-  review findings 1, 2, 4, 5; each statement is now narrowed to the proved type (S1 three named fields;
-  S4 pointwise index equality; S5 one-sided join coverage; S6 census-only; S7 integer identities);
-  awaits post-fix confirmation.
-- [ ] Assign every subclaim one final trust route and separate conditional/external clauses; no
-  result inherits a Lean label from sharing a module or gate. — reopened; routes are now split into
-  Lean fact versus combination (classical Orlik–Terao input) versus deferred strengthening, and
-  objective 3's full `A3` set equality and objective 4's decoder-stratum identification are marked
-  not Lean-formalized; awaits post-fix confirmation.
+- [x] State every objective subclaim in ordinary mathematics with exact field, coordinates,
+  quantifiers, nondegeneracy assumptions, conventions, hypotheses, and conclusion. — S1--S7 now
+  match the strengthened theorem types, including two-sided `A3`, explicit projective transport, and
+  actual nearest-leader counts on every point/scalar pair.
+- [x] Assign every subclaim one final trust route and separate conditional/external clauses; no
+  result inherits a Lean label from sharing a module or gate. — S1--S7 and the proposed C320 rows
+  separate coordinate/kernel facts from the external Coxeter-arrangement interpretation.
 - [x] Read definitions and theorem types to exclude vacuity, conclusions baked into definitions,
   weakened quantifiers, hidden assumptions, empty domains, and prose/names stronger than types. —
   `SameDirection` is a genuine `∃ a ≠ 0`; cardinalities are computed by `decide`, not asserted;
-  incidence is a filter count over a nonempty `Fin` domain, not baked into a definition; the one-sided
-  `A3` coverage and census-only decoder theorem are now stated at their exact strength.
+  incidence is a filter count over a nonempty `Fin` domain, not baked into a definition; the
+  projective and decoder maps now occur explicitly in the relevant theorem types.
 - [ ] Record exact owned files, permitted imports, fully qualified terminals, import-only gate,
-  pinned commit, guarded/gate validation, and `#print axioms` for every claimed Lean terminal. —
-  pending: files, imports, fully qualified terminals, introducing commits, and source identity are
-  recorded above, but no `RelativeConicArcs.Gates.*` gate imports these terminals, and the
-  guarded/gate validation, `#print axioms` transcript, trust-manifest row, and pinned validated commit
-  require the build window.
-- [ ] Confirm no `sorryAx`, `native_decide`, undisclosed project axiom, opaque oracle, large generated
-  case tree, or unreported non-kernel execution occurs in a full-trust closure. — pending:
-  source-confirmed absent in both task modules and in the project-owned import closure; the full
-  transitive Q11/Mathlib closure confirmation requires the `#print axioms` transcript.
+  pinned commit, guarded/gate validation, and `#print axioms` for every claimed Lean terminal. — all
+  evidence except the final commit pin is recorded above; this box is checked after the coherent
+  bundle commit is named.
+- [x] Confirm no `sorryAx`, `native_decide`, undisclosed project axiom, opaque oracle, large generated
+  case tree, or unreported non-kernel execution occurs in a full-trust closure. — all 38 terminal
+  probes report exactly `propext`, `Classical.choice`, and `Quot.sound`; source and manifest record the
+  compact kernel boundary.
 - [x] For any finite computation, record checker and soundness theorem, domain/coverage,
   generator/schema/data/hash, independent replay, and residual trusted boundary. — the checker is the
   in-kernel `Decidable` evaluation; domains are the explicit `Fin 133`/`Fin 31`/`Fin 15`/`Fin 6`/
   `Fin 4` sets checked exhaustively; there is no external generator or data file, hence no separate
-  replay artifact; residual trust is the Lean kernel plus the pending axiom audit.
+  replay artifact; residual trust is the Lean kernel and the three audited standard axioms.
 - [x] Recompute hashes/byte counts after final edits and distinguish identity/reproducibility from
   mathematical correctness. — sha256 and byte counts above; these certify file identity, not the
-  mathematics, and must be recomputed after the source docstring edits land.
-- [ ] Review the entire touched Lean artifact for self-contained comments/names, exact trust prose,
-  one-way internal references, factual citations, and no novelty/strength overclaim. — reopened by
-  finding 6; docstrings were added, module headers rewritten to be self-contained, and the strength
-  words `agree`/`complete`/`canonical`/`paper-facing`/`lattice-faithful` removed or narrowed in
-  source; a full cold re-audit awaits post-fix review.
+  mathematics; they were recomputed after the final source edits.
+- [x] Review the entire touched Lean artifact for self-contained comments/names, exact trust prose,
+  one-way internal references, factual citations, and no novelty/strength overclaim. — the three
+  touched Lean modules contain no internal workflow reference; zero-vector, raw-normalization,
+  computation, semantic-label, and trust boundaries are explicit.
 - [x] Include the exact public theorem statements and load-bearing definitions, or a deterministic
-  extraction, for the paper adequacy appendix. — verbatim theorem signatures and load-bearing
-  definitions are listed in the adequacy-appendix extraction section below.
+  extraction, for the paper adequacy appendix. — `notes/scripts/extract_c222_adequacy.py --check`
+  validates the exact terminal and definition extraction.
 - [x] State every exclusion and compactness stop precisely and confirm the manuscript verification
   map retains the correct computer-assisted label. — exclusions per Out of scope; no compactness stop
-  occurred; the manuscript retains the computer-assisted label, and the objective 3/4 consequences are
-  explicitly held out of the Lean-formalized set.
+  occurred; the manuscript verification row is not upgraded before the independent `GO`.
 - [x] Complete the judgment-call record and proposed C320 row for every objective subclaim. —
   recorded above; the conjugate-root claim and the pointwise-bridge overstatement were corrected per
   findings 6 and 7.
-- [ ] Record independent review findings, fixes, post-fix review, and final `GO`. — the first review
-  (READY FOR FIXES) and the remediation are recorded in the independent-review section below; the
-  post-fix review and `GO` are pending.
+- [ ] Record independent review findings, fixes, post-fix review, and final `GO`. — all three
+  `READY FOR FIXES` reviews and the current remediation are recorded; the new post-fix review and
+  `GO` are pending.
 - [ ] Only after final `GO`, archive the live task row with this completed report and evidence. —
   pending: C222 stays live until a recorded `GO`.
 
 ## Independent review and remediation
 
-A user-launched independent review is recorded at `notes/2026-07-20-c222-independent-review.md`
-(disposition **READY FOR FIXES**, not `GO`). It confirmed the two source hashes and a clean
-project-owned closure scan (no `sorry`/`native_decide`/`axiom`/`opaque`), and raised seven findings.
-Remediation applied in this source-only, no-build pass:
+A user-launched initial review and two user-launched post-fix reviews are recorded at
+`notes/2026-07-20-c222-independent-review.md`; every disposition was **READY FOR FIXES**, not `GO`.
+The first review found seven type/prose/trust defects. The interrupted first remediation was then
+committed coherently, and the second post-fix review isolated five remaining defects SF1--SF5.
+Current remediation:
 
-- **F1 (blocking) — decoder terminal proves only a census, not stratum agreement.** S6 and the
-  `h3_decoder_strata` docstring are narrowed to a joint numerical census; objective 4's decoder-stratum
-  identification is marked **not** Lean-formalized; a real bridge theorem is recorded as a deferred
-  build-gated strengthening.
-- **F2 (blocking) — `A3` mirror theorem is one-sided.** S5 and the `a3_frame_joins_are_braid_mirrors`
-  docstring now state only that each join is parallel to some braid direction; reverse inclusion and
-  cardinality six are recorded as a deferred strengthening.
-- **F3 (blocking) — premature full-trust/complete labels.** Every route is relabelled **candidate**
-  full-trust; the false "probes for every terminal" claim is corrected and per-terminal `#print axioms`
-  probes were added to source; the absent gate, trust-manifest row, pinned validated commit, and live
-  transcript are listed as build-gated.
-- **F4 (blocking) — semantics exceed types.** The ledger now splits Lean facts (coordinate tables,
-  integer identities) from the classical arrangement identification (Orlik & Terao, *Arrangements of
-  Hyperplanes*, 1992); S1 is restricted to the three named fields; "lattice-faithful" is replaced by
-  the exact spectrum statement; S7 is stated as integer/polynomial identities.
-- **F5 (major) — projectivity API implicit.** S3 records that only `det T = 3` is proved and that no
-  bijection/inverse-transpose terminal exists, so global stratum transport is not a Lean-backed step.
-- **F6 (major) — documentation incomplete / strength prose.** A docstring pass was applied to both
-  modules, the module headers were rewritten to be self-contained (fields, conventions, terminals,
-  method, trust boundary), and the words `agree`/`complete`/`canonical`/`paper-facing`/
-  `lattice-faithful` were removed or narrowed.
-- **F7 (major) — checklist over-ticked.** The adequacy, route, and prose boxes are reopened; the
-  finite-computation box now states that no external replay artifact exists; ledger names are fully
-  qualified; a verbatim adequacy-appendix extraction is added below.
+- **SF1 (gate/trust evidence):** added the import-only gate
+  `RelativeConicArcs.Gates.ClebschReflectionArrangementDecoding`, exact leaf/gate builds, all 38
+  terminal probes, and the bounded Clebsch slice manifest.
+- **SF2 (`A3` and decoder exits):** strengthened the `A3` theorem to two-sided coverage plus
+  cardinality six; added an explicit point/scalar-to-syndrome map, injectivity, factor-ten cardinality,
+  actual nearest-leader equivalence, and the `90+6` one-leader theorem. No compactness fallback is
+  needed because both intended theorems close compactly.
+- **SF3 (projective transport):** added the nonzero determinant, two-sided explicit inverse,
+  contragredient pairing identity, normalized projective-index injection/bijection, and normalized
+  pointwise secant-index transport.
+- **SF4 (referee prose):** stated the zero-vector degeneracy of `SameDirection`, corrected the raw
+  join-vector description, removed the inadequate source-level classical citation, and neutralized
+  every inverse/semantic claim until backed by a theorem type.
+- **SF5 (adequacy/checklist):** added the deterministic extraction script, refreshed the C320 rows,
+  hashes, review history, and evidence checklist.
 
 Adopted review guards (also to be copied into later Clebsch task documents): a theorem advertised as
 identifying two structures must contain a map and a relation in its type; every finite-set equality
@@ -382,14 +380,23 @@ explicit citation route; every terminal gets its own fully qualified name, gate 
 entry; strength words require a matching theorem or neutral replacement; a checked box must point to
 durable evidence.
 
-Remaining for `GO`: the build-gated evidence listed above, optionally the deferred type-strengthenings,
-and a user-launched post-fix review. The implementer does not launch that review.
+Remaining for `GO`: commit and pin this coherent bundle, then obtain the required user-launched
+post-fix review. The implementer does not launch that review.
 
-## Adequacy-appendix extraction (verbatim signatures)
+## Adequacy-appendix extraction
 
-Exact terminal signatures, copied from source for the paper adequacy appendix. Namespace
-`RelativeConicArcs.Examples.ReflectionArrangements`; the last is in module
-`RelativeConicArcs.ReflectionArrangementDecoding`.
+The authoritative deterministic extraction is:
+
+```bash
+python3 notes/scripts/extract_c222_adequacy.py
+python3 notes/scripts/extract_c222_adequacy.py --check
+```
+
+It reads both task modules, extracts every theorem named by a `#print axioms` probe and every
+load-bearing definition named in the script, fails unless each declaration occurs exactly once, and
+prints theorem signatures without proof bodies plus full definition bodies. The following compact
+excerpt records the original terminal surface; the command above also covers the strengthened
+projectivity, `A3`, and decoder terminals.
 
 ```lean
 theorem tau11_relation : tau11 ^ 2 = tau11 + 1
@@ -425,7 +432,9 @@ theorem h3_characteristic_five_spectrum :
     (h3PointsOfMultiplicity5 2).card = 15 ∧ (h3PointsOfMultiplicity5 3).card = 10 ∧
     (h3PointsOfMultiplicity5 5).card = 6
 theorem a3_frame_joins_are_braid_mirrors :
-    ∀ i : Fin 6, ∃ j : Fin 6, SameDirection (a3Join i) (a3RootDirection j)
+    a3Joins.card = 6 ∧ a3RootDirections.card = 6 ∧
+      (∀ i : Fin 6, ∃ j : Fin 6, SameDirection (a3Join i) (a3RootDirection j)) ∧
+      (∀ j : Fin 6, ∃ i : Fin 6, SameDirection (a3Join i) (a3RootDirection j))
 theorem a3_intersection_spectrum :
     (a3PointsOfMultiplicity 0).card = 6 ∧ (a3PointsOfMultiplicity 1).card = 18 ∧
     (a3PointsOfMultiplicity 2).card = 3 ∧ (a3PointsOfMultiplicity 3).card = 4
@@ -445,9 +454,7 @@ theorem h3_decoder_strata :
     ambiguityThreeSyndromes.card = 100 ∧ ambiguityTwentySyndromes.card = 120
 ```
 
-Load-bearing definitions in the closure: `SameDirection`, `cross`, `dot`, `tau11`, `tau5`,
-`h3FivefoldPoint`, `h3Join`, `h3RootDirection`, `h3Projectivity`, `h3DualProjectivity`,
-`h3Multiplicity`, `h3PointsOfMultiplicity`, `h3FivefoldIndex`, `projectiveVec5`, `h3RootDirection5`,
-`h3Multiplicity5`, `h3PointsOfMultiplicity5`, `a3FramePoint`, `a3Join`, `a3RootDirection`,
-`a3Multiplicity`, `a3PointsOfMultiplicity`; and, from the Q11 layer, `projectiveVec`, `witnessVec`,
-`rawChordLine`, `chordEdge`, `rawPointIndex`, and the `ambiguity*Syndromes` families.
+The extraction additionally includes `h3ProjectivityInverse`, `projectiveIndex11`,
+`h3ProjectiveIndex`, `a3Joins`, `a3RootDirections`, `h3AffineSyndrome`, and
+`h3AffineSyndromesOfMultiplicity`. Imported Q11 declarations are cited by fully qualified theorem
+composition in S4/S6 and remain audited by their own source modules.
