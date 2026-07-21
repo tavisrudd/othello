@@ -2,11 +2,13 @@
 
 **Lane:** `clebsch`
 
-**Status:** explicit-action repair implemented; independent review required before closure
+**Status:** complete; independent review `GO`
 
 **Date:** 2026-07-21
 
 **Implementation commit:** `29f81b4219c635824f1fb28d4b55092998271fa3`
+
+**Review-repair commits:** `5179a330`, `62b846b4`
 
 ## Result
 
@@ -388,4 +390,11 @@ The remaining blockers are:
 The user then approved the cheap hostile-referee boundary: construct the explicit generated action
 now, remove `P(1)` from C424's formal claims, and retain the projective-cover identification as a
 future C412 target.  The action construction and scope amendment are implemented in the current
-repair.  C424 remains live until the same reviewer returns `GO`.
+repair.
+
+The same reviewer examined `e3e56e9e..62b846b4` and returned `GO` on 2026-07-21 with no blocking or
+material findings.  It accepted the explicit generated signed actions, the signed functional as the
+first nonzero cubic graded restriction, the exact character-kernel stabilizers, the narrowed
+`P(1)` boundary, the prose proof and citation plan, and the downstream-impact summary.  It also
+rechecked the `14/17/19 + 2 = 52` terminal surface, axiom audit, generator replay, hashes, byte
+counts, build status, balanced-half endpoint, provenance, and import-only gate.
