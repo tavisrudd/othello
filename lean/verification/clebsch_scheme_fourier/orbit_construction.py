@@ -433,7 +433,7 @@ def certificate() -> dict[str, object]:
     assert sorted(map(len, subset_orbits)) == [10, 10]
 
     return {
-        "schema": "c341-a5-subgroup-decoder-v1",
+        "schema": "clebsch-a5-orbit-construction-v1",
         "symbolic_orbit_mds": {
             "ring": "Z[tau]/(tau^2-tau-1)",
             "three_by_three_minor_norms": dict(sorted(Counter(value.norm() for value in minors).items())),

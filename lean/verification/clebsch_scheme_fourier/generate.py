@@ -2,10 +2,9 @@
 """Generator for the Lean data module encoding the q=11 rank-eight syndrome-scheme
 Fourier certificate.
 
-This script reconstructs the primitive, Fourier-self-dual rank-eight translation
-association scheme of the reduced projective ``H3`` group acting on ``F_11^3`` (the
-Clebsch syndrome scheme), reusing the pinned orbit construction and intersection
-tensor, and cross-checks every emitted number against the frozen scheme certificate.
+This script reconstructs the frozen rank-eight Fourier tables and additive-nonclosure
+witnesses from the reduced projective ``H3`` orbits on ``F_11^3`` and cross-checks every
+emitted spectral/count field against the independently generated scheme certificate.
 It then emits:
 
   * ``lean/RelativeConicArcs/ClebschSchemeFourierData.lean`` -- a definitions-only Lean
@@ -15,13 +14,17 @@ It then emits:
   * ``lean/verification/clebsch_scheme_fourier/data.json`` -- a canonical machine-readable
     copy of the same data with provenance hashes.
 
-The frozen mathematical facts (the eigenmatrix is its own dual, ``P Q = 1331 I``, the
-scheme is primitive) are established downstream in Lean from this data; this generator
-only produces and independently replays the data that those Lean theorems consume.
+Lean proves an abstract character identity and checks literal consequences of this frozen
+data: equality and products of the candidate matrices, their dimensions and scalar-line
+formula, and successful additive-nonclosure witness classification. Identifying the data
+with the geometric association scheme, hence interpreting it as Fourier self-duality or
+primitivity of that scheme, remains an external exact-computation boundary.
 
 Trusted boundary: Python 3 exact integer arithmetic, exhaustive finite enumeration over
-``F_11^3``, the pinned orbit construction and intersection tensor, and the
-frozen scheme certificate pinned below by SHA-256.
+``F_11^3``, the pinned orbit construction, and the selected spectral/count fields of the
+scheme certificate pinned below by SHA-256. The separate certificate checker reconstructs
+the complete intersection/Krein tensors and 877-partition fusion census; this generator
+does not consume those optional fields.
 
 Usage::
 
@@ -43,12 +46,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
 
-# The pinned orbit/intersection-tensor construction (reduced projective H3 on F_11^3).
+# The pinned orbit construction (reduced projective H3 on F_11^3).
 DECODER_PATH = ROOT / "orbit_construction.py"
-DECODER_SHA256 = "0973e9eb6e3ac804f5f18ee52c0e4793ebc76cc6c6a80efd547ac4728c4ff4b1"
+DECODER_SHA256 = "1ea02f4a27c59a24c780d6bc6ed3eb249de829fa9f55759ddb4cf73e32d51e32"
 
 # The frozen scheme certificate whose eigenmatrices, counts and fusion data we replay.
 CERT_PATH = ROOT / "scheme_certificate.json"
+CERT_CHECKER_PATH = ROOT / "check_scheme_certificate.py"
 
 JSON_OUTPUT = ROOT / "data.json"
 LEAN_OUTPUT = REPO / "lean" / "RelativeConicArcs" / "ClebschSchemeFourierData.lean"
@@ -255,7 +259,8 @@ Frozen integer tables reconstructed from the reduced projective icosahedral acti
 `lean/verification/clebsch_scheme_fourier/generate.py` reads the pinned exhaustive orbit
 construction `lean/verification/clebsch_scheme_fourier/orbit_construction.py`, checks its
 SHA-256 digest, cross-checks the result against
-`lean/verification/clebsch_scheme_fourier/scheme_certificate.json`, and emits canonical
+`lean/verification/clebsch_scheme_fourier/scheme_certificate.json`, reproduced by
+`lean/verification/clebsch_scheme_fourier/check_scheme_certificate.py`, and emits canonical
 schema `{SCHEMA}` data in `lean/verification/clebsch_scheme_fourier/data.json`.
 
 The geometric interpretation of the frozen relations, eigenmatrices, and incidence
@@ -351,7 +356,7 @@ def write_outputs(check: bool) -> int:
         )
     generator_digest = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     digest_lines.append(f"{generator_digest}  {Path(__file__).relative_to(REPO)}")
-    for input_path in (DECODER_PATH, CERT_PATH):
+    for input_path in (DECODER_PATH, CERT_PATH, CERT_CHECKER_PATH):
         digest_lines.append(
             f"{hashlib.sha256(input_path.read_bytes()).hexdigest()}  "
             f"{input_path.relative_to(REPO)}"

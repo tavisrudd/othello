@@ -1074,7 +1074,7 @@
     "single_secant_C2_2",
     "single_secant_C2_3"
   ],
-  "schema": "c372-clebsch-scheme-fourier-v1",
+  "schema": "clebsch-scheme-fourier-certificate-v1",
   "second_eigenmatrix_Q": [
     [
       1,
@@ -1160,7 +1160,7 @@
   "set_partitions_tested": 877,
   "trusted_input": {
     "orbit_construction": "orbit_construction.py",
-    "source_orbit_construction_sha256": "4419cf398eae700b54e79b8b3ffe237d9ae2ddcefe496fcdadecfc78dddfa5be"
+    "orbit_construction_sha256": "1ea02f4a27c59a24c780d6bc6ed3eb249de829fa9f55759ddb4cf73e32d51e32"
   },
   "valencies": [
     1,

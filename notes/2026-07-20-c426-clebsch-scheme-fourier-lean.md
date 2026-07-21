@@ -65,28 +65,37 @@ fully forced by this brief.
 
 ## Implementation result and validation status (implementer)
 
-**Status: post-initial-review repair implemented.** The initial independent review is
+**Status: second post-review repair implemented.** The initial independent review is
 [`2026-07-21-c426-clebsch-scheme-fourier-initial-review.md`](2026-07-21-c426-clebsch-scheme-fourier-initial-review.md),
 commit `b058a9a481e10c16c41acbd1f80118725eecfb48`, verdict `NO-GO`. Every finding has a
-concrete repair below. The exact gate and axiom audit are green; the pinned implementation commit
-is `4c7a848291906b3961f8af9eb86dd30da30e0f9b`; post-fix review remains required.
+concrete repair below. The first post-fix review is
+[`2026-07-21-c426-clebsch-scheme-fourier-post-fix-review.md`](2026-07-21-c426-clebsch-scheme-fourier-post-fix-review.md),
+commit `3c4fe4c529c5baccd33de9478a856cf7a5d0bebd`, verdict `NO-GO` solely on enduring
+evidence provenance. Its bounded fixes are implemented below. The exact gate and axiom audit are
+green; the new pinned repair commit is filled immediately after commit; another review is required.
 
 Owned implementation paths:
 
 - `lean/RelativeConicArcs/ClebschSchemeFourierData.lean` (generated definitions);
 - `lean/RelativeConicArcs/ClebschSchemeFourier.lean` (kernel theorems);
 - `lean/RelativeConicArcs/Gates/ClebschSchemeFourier.lean` (import-only gate); and
-- `lean/verification/clebsch_scheme_fourier/{generate.py,data.json,SHA256SUMS,orbit_construction.py,scheme_certificate.json}`
-  (stable generator, canonical schema output, full hash manifest, pinned exhaustive construction,
-  and comparison certificate).
+- `lean/verification/clebsch_scheme_fourier/{check_scheme_certificate.py,generate.py,data.json,SHA256SUMS,orbit_construction.py,scheme_certificate.json}`
+  (stable complete-certificate checker, Lean-data generator, canonical schema output, full hash
+  manifest, pinned exhaustive construction, and reproduced comparison certificate).
 
 The evidence command, from the repository root, is:
 
 ```sh
-python3 lean/verification/clebsch_scheme_fourier/generate.py --check
+PYTHONDONTWRITEBYTECODE=1 python3 \
+  lean/verification/clebsch_scheme_fourier/check_scheme_certificate.py --check
+PYTHONDONTWRITEBYTECODE=1 python3 \
+  lean/verification/clebsch_scheme_fourier/generate.py --check
 ```
 
-It reconstructs all 133 projective-line labels and all 126 additive-nonclosure witnesses by exact
+The first checker reconstructs the group orbits, Fourier and hyperplane tables, complete 512-entry
+intersection and Krein tensors, all additive-subgroup union tests, and all 877 relation partitions;
+it reproduces schema `clebsch-scheme-fourier-certificate-v1` byte-for-byte. The second reconstructs
+all 133 projective-line labels and all 126 additive-nonclosure witnesses by exact
 enumeration over `F_11^3`, derives the candidate `P` table from scalar-line incidence counts,
 computes `Q = 1331 P^{-1}` exactly over `Fraction`, checks `P=Q`, `P Q=1331 I`, candidate
 multiplicity/valency equality, and cross-checks the frozen comparison certificate. Lean separately
@@ -112,21 +121,22 @@ lean/scripts/lean-build-queue.py run \
   --aggregate RelativeConicArcs.Gates.ClebschSchemeFourier --cores 20-23
 ```
 
-Run `20260721-184026-f32b576d` finished `success`: data 4.41 s / 1,136,076 kB peak;
-theorem 7.68 s / 2,235,568 kB; gate 8.64 s / 1,783,284 kB; final aggregate exact-target
-`--no-build` gate passed. A final generator replay returned `CHECK OK` and reproduced the built
-Lean source byte-for-byte, so the content trace remains the final-source trace.
+Final repair run `20260721-191939-1831e7cb` finished `success`: data 5.52 s / 1,132,740 kB
+peak; theorem 9.87 s / 2,248,116 kB; gate 3.84 s / 1,797,220 kB; final aggregate exact-target
+`--no-build` gate passed. Both stable checkers reproduced byte-for-byte and the six-entry manifest
+passed before the build.
 
 Final artifact identities before commit:
 
 | Bytes | SHA-256 | Path |
 |---:|---|---|
-| 16,372 | `68f562947dcc474a6dd908eb1d98d093dd7a633bfefcedb9de8739809e27694e` | `lean/verification/clebsch_scheme_fourier/generate.py` |
-| 38,486 | `cb32a53c04d26ff4dc0e4f98b2e4bbe84ef0e03c9be04051cc5bd6b7d4dd1fdd` | `lean/verification/clebsch_scheme_fourier/data.json` |
-| 16,799 | `0973e9eb6e3ac804f5f18ee52c0e4793ebc76cc6c6a80efd547ac4728c4ff4b1` | `lean/verification/clebsch_scheme_fourier/orbit_construction.py` |
-| 12,997 | `e9a110c2ca0b01327d4f5c61023f4905e2f2acb9a6f5affcd365283aae188ac4` | `lean/verification/clebsch_scheme_fourier/scheme_certificate.json` |
-| 615 | `086779434a146f9e8480a2be24467a3a983c92c965c19c2485c64e80c8eab553` | `lean/verification/clebsch_scheme_fourier/SHA256SUMS` |
-| 13,149 | `f84a05435d0bcf86e76409b0ce6366dce7d0f14d0ab7ea9077a5140156ae3e57` | `lean/RelativeConicArcs/ClebschSchemeFourierData.lean` |
+| 10,091 | `19be14dc3de69dceb8ade394abeb2165730d16a49a56e923baf4988f7f19b608` | `lean/verification/clebsch_scheme_fourier/check_scheme_certificate.py` |
+| 16,799 | `e4ac0f52ddf09ab2126b17af4bbd8697b1a38a915470245da776fa71cd786068` | `lean/verification/clebsch_scheme_fourier/generate.py` |
+| 38,486 | `4137076e9d9aff825ae31e61eb7a66ee911ae01a3da5234d514d758dce65c927` | `lean/verification/clebsch_scheme_fourier/data.json` |
+| 16,804 | `1ea02f4a27c59a24c780d6bc6ed3eb249de829fa9f55759ddb4cf73e32d51e32` | `lean/verification/clebsch_scheme_fourier/orbit_construction.py` |
+| 12,997 | `5799c5382726031bce41cd4cbeecf5bcc9d44b712d10861362d06a0a9cab164f` | `lean/verification/clebsch_scheme_fourier/scheme_certificate.json` |
+| 750 | `66dc39656e95cba66b7ceda7d20893498820b22464da41a45809e1edb86af221` | `lean/verification/clebsch_scheme_fourier/SHA256SUMS` |
+| 13,235 | `b0eb5fc85681edf073f2607a183888ad82d07dcd8ab49949c758b79db4f900cf` | `lean/RelativeConicArcs/ClebschSchemeFourierData.lean` |
 | 12,142 | `3018501b6adb2f3218190490d197ae1c7021436b78a38bc2473a857337093764` | `lean/RelativeConicArcs/ClebschSchemeFourier.lean` |
 | 1,166 | `6a17f12f095aade20e5887d0c951da273febbcc9f23f8ea4ea025f8189cbebfa` | `lean/RelativeConicArcs/Gates/ClebschSchemeFourier.lean` |
 
@@ -137,12 +147,21 @@ Final artifact identities before commit:
 | R1 gate not green | Repaired all elaboration errors; guarded data/theorem checks are green and the exact gate queue has built all three targets. Final aggregate trace status is recorded below. |
 | R2 failure-as-identity lookup | Replaced `relationOf` by option-valued `relationOf?`; the terminal requires `some r` for both inputs and the sum. |
 | R3 disconnected character sum | Added `nonzeroScalarLineContribution` derived from `characterSum`, defined the aggregate `scalarLineEigenvalue`, and stated the frozen entry theorem through that definition. |
-| R4 scheme prose exceeds types | Narrowed headers, docstrings, theorem names, gate prose, and ledger routes to literal checks plus explicit external geometric semantics. |
+| R4 scheme prose exceeds types | Narrowed headers, docstrings, theorem names, gate prose, ledger routes, and both stable checker/generator descriptions to literal checks plus explicit external geometric semantics. |
 | R5 false subgroup claim | Removed it; the generator describes and performs exhaustive witness search without assuming a subgroup classification. |
-| R6 internal referee provenance | Moved/exposed the complete load-bearing bundle under `lean/verification/clebsch_scheme_fourier/`; generated prose names exact stable paths and trust roles. |
+| R6 internal referee provenance | The complete load-bearing bundle now includes a stable producer/checker for the comparison certificate, semantic schemas, matching relocated-source hashes, stable paths, and a six-file manifest. |
 | R7 dimensions/constants unbound | Added `frozen_table_shapes`; products use `schemeOrder` and `schemeRank`; indexed multiplication avoids `List.transpose`. |
 | R8 gate overclaim | Removed the gateway import/rank bridge and added an explicit external-geometric boundary and negative claims. |
-| R9 incomplete exit report | Added exact terminals/routes, validation, artifact semantics, exclusions, judgment calls, checklist, axiom section, and C320 ledger delta. |
+| R9 incomplete exit report | Added exact terminals/routes, both replay commands, final validation, artifact semantics, exclusions, judgment calls, checklist, axiom section, and C320 ledger delta. |
+
+### First post-fix-review finding dispositions
+
+| Finding | Disposition |
+|---|---|
+| P1 generator trust contradiction | Corrected: `generate.py` says Lean checks abstract/literal consequences only, leaves geometric interpretation external, and no longer claims to consume the intersection tensor. |
+| P2 workflow-ID schemas | Replaced by semantic schemas `clebsch-a5-orbit-construction-v1` and `clebsch-scheme-fourier-certificate-v1`; regenerated every dependent artifact. |
+| P3 comparison certificate not reproducible | Added `check_scheme_certificate.py --check`, which reconstructs the full tensor/fusion certificate from the bundled orbit source and verifies its exact matching hash. |
+| P4 stale report statements | Corrected JC-3, JC-10, R4/R6/R9, replay commands, artifact identities, validation, and C320 verify-all delta. |
 
 ## Recorded judgment calls
 
@@ -175,8 +194,10 @@ conditional Lean tensor theorem exported. Reopen only if a measured intersection
 plus gate plus clean axiom audit land.
 
 **JC-3 — 877-partition fusion census.** Not brought in-kernel; remains exact replay/certificate. No
-separability inferred. The gateway's `fusionRanks .q11 = [2,4,6,8]` is imported literal data under
-the same JC-1 boundary. Reopen only if a sound exhaustive-fusion checker leaf lands.
+separability inferred. The stable `check_scheme_certificate.py` exhausts all 877 partitions and
+reproduces the admissible fusion list in `scheme_certificate.json`; C426 imports no gateway fusion
+data and exports no Lean fusion theorem. Reopen only if a sound in-kernel exhaustive-fusion checker
+leaf lands.
 
 **JC-4 — Additive-nonclosure representation.** Chose a 133-entry projective-line classifier (leading-
 coefficient-one representatives → relation index) plus `normalizeVector` (frozen `inv11` table) plus
@@ -225,12 +246,14 @@ a cyclic-shift argument (`ζ·S=S ⟹ (ζ−1)S=0 ⟹ S=0`) using only `Finset.s
 `GeomSum` and the moved `BigOperators.Basic`; `RootsOfUnity.Basic` and `BigOperators.Fin` are built.
 
 **JC-10 — Enduring verification artifacts.** The initial reviewer rejected task-dated evidence under
-`notes/` as referee-facing provenance. The generator, canonical JSON, complete checksum manifest,
-pinned construction, and comparison certificate now live under
-`lean/verification/clebsch_scheme_fourier/` with workflow-neutral names and prose. The generated
-module names those exact paths and distinguishes external geometric semantics from kernel checks.
-The dated report remains internal coordination/evidence prose and points forward to the enduring
-bundle. Reopen only if the repository adopts a different declared packaging allowlist.
+`notes/` as referee-facing provenance. The exhaustive orbit source, complete tensor/fusion
+certificate checker, reproduced comparison certificate, Lean-data generator, canonical JSON, and
+six-entry checksum manifest now live under `lean/verification/clebsch_scheme_fourier/` with semantic
+schemas, workflow-neutral names/prose, and matching source hashes. The generated module names the
+exact generator, checker-produced certificate, schema, and trust roles while distinguishing external
+geometric semantics from kernel checks. The dated report remains internal coordination/evidence
+prose and points forward to the enduring bundle. Reopen only if the repository adopts a different
+declared packaging allowlist.
 
 **JC-11 — Matrix representation and shape.** Retained list matrices for compact generated data, but
 replaced `List.transpose` multiplication with indexed column extraction and added
@@ -346,8 +369,9 @@ separability, automorphism group, semantic scheme rank, or exhaustive action/orb
 | 877-partition fusion census | none in gate | frozen exhaustive external certificate | exact replay/certificate |
 
 Verify-all delta: add exact target `RelativeConicArcs.Gates.ClebschSchemeFourier` after the enduring
-bundle's `generate.py --check`; require trace-current `lake build --no-build` and the axiom audit
-listed below. Do not include the removed gateway rank bridge.
+bundle's `check_scheme_certificate.py --check`, `generate.py --check`, and `sha256sum -c
+SHA256SUMS`; require trace-current `lake build --no-build` and the axiom audit listed below. Do not
+include the removed gateway rank bridge.
 
 ## Axiom audit
 
@@ -400,7 +424,7 @@ archived under the repository completion invariant.
   authoritative-sounding filename is not evidence for an omitted theorem.
 - [x] Remove or separately classify every optional, conditional, failed, “standard,” “follows,” or
   “if feasible” clause; no such clause inherits the module or gate's strongest label.
-- [x] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
+- [ ] Record exact owned files, fully qualified terminal names, import-only gate, pinned commit,
   validation command/result, and `#print axioms` output for every terminal.
 - [x] Include the exact public theorem statements and load-bearing definitions, or a deterministic
   extraction committed with the report, for the paper's verbatim statement-adequacy appendix.

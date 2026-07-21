@@ -6,7 +6,8 @@ Frozen integer tables reconstructed from the reduced projective icosahedral acti
 `lean/verification/clebsch_scheme_fourier/generate.py` reads the pinned exhaustive orbit
 construction `lean/verification/clebsch_scheme_fourier/orbit_construction.py`, checks its
 SHA-256 digest, cross-checks the result against
-`lean/verification/clebsch_scheme_fourier/scheme_certificate.json`, and emits canonical
+`lean/verification/clebsch_scheme_fourier/scheme_certificate.json`, reproduced by
+`lean/verification/clebsch_scheme_fourier/check_scheme_certificate.py`, and emits canonical
 schema `clebsch-scheme-fourier-lean-v1` data in `lean/verification/clebsch_scheme_fourier/data.json`.
 
 The geometric interpretation of the frozen relations, eigenmatrices, and incidence
