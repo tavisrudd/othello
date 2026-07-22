@@ -14,6 +14,10 @@
       "deletion_trace_recovers_parent": false,
       "deletion_trace_signature_count": 1,
       "fixed_child_parent_count": 6,
+      "full_child_point_orbit_sizes": [
+        4
+      ],
+      "full_child_semilinear_stabilizer_order": 72,
       "labelled_atlas_distinct_count": 4,
       "labelled_atlas_fibre_size_histogram": {
         "1": 4
@@ -28,8 +32,15 @@
       ],
       "q": 8,
       "survivor_index": 0,
+      "unlabelled_atlas_exactly_recovers_full_child_point_orbits": true,
+      "unlabelled_atlas_function_is_full_child_invariant": true,
+      "unlabelled_atlas_function_stabilizer_order": 72,
       "unlabelled_atlas_parent_signature_count": 1,
-      "unlabelled_atlas_recovers_parent": false
+      "unlabelled_atlas_recovers_parent": false,
+      "unlabelled_atlas_value_count": 1,
+      "unlabelled_atlas_value_fibre_sizes": [
+        4
+      ]
     },
     {
       "atlas_exactly_recovers_syndrome_orbits": true,
@@ -40,6 +51,10 @@
       "deletion_trace_recovers_parent": true,
       "deletion_trace_signature_count": 8,
       "fixed_child_parent_count": 8,
+      "full_child_point_orbit_sizes": [
+        6
+      ],
+      "full_child_semilinear_stabilizer_order": 48,
       "labelled_atlas_distinct_count": 6,
       "labelled_atlas_fibre_size_histogram": {
         "1": 6
@@ -66,8 +81,15 @@
       ],
       "q": 9,
       "survivor_index": 0,
+      "unlabelled_atlas_exactly_recovers_full_child_point_orbits": true,
+      "unlabelled_atlas_function_is_full_child_invariant": true,
+      "unlabelled_atlas_function_stabilizer_order": 48,
       "unlabelled_atlas_parent_signature_count": 1,
-      "unlabelled_atlas_recovers_parent": false
+      "unlabelled_atlas_recovers_parent": false,
+      "unlabelled_atlas_value_count": 1,
+      "unlabelled_atlas_value_fibre_sizes": [
+        6
+      ]
     },
     {
       "atlas_exactly_recovers_syndrome_orbits": true,
@@ -79,6 +101,11 @@
       "deletion_trace_recovers_parent": false,
       "deletion_trace_signature_count": 1,
       "fixed_child_parent_count": 2,
+      "full_child_point_orbit_sizes": [
+        1,
+        6
+      ],
+      "full_child_semilinear_stabilizer_order": 12,
       "labelled_atlas_distinct_count": 7,
       "labelled_atlas_fibre_size_histogram": {
         "1": 7
@@ -94,8 +121,16 @@
       ],
       "q": 9,
       "survivor_index": 1,
+      "unlabelled_atlas_exactly_recovers_full_child_point_orbits": true,
+      "unlabelled_atlas_function_is_full_child_invariant": true,
+      "unlabelled_atlas_function_stabilizer_order": 12,
       "unlabelled_atlas_parent_signature_count": 1,
-      "unlabelled_atlas_recovers_parent": false
+      "unlabelled_atlas_recovers_parent": false,
+      "unlabelled_atlas_value_count": 2,
+      "unlabelled_atlas_value_fibre_sizes": [
+        1,
+        6
+      ]
     },
     {
       "atlas_exactly_recovers_syndrome_orbits": true,
@@ -106,6 +141,10 @@
       "deletion_trace_recovers_parent": true,
       "deletion_trace_signature_count": 22,
       "fixed_child_parent_count": 22,
+      "full_child_point_orbit_sizes": [
+        12
+      ],
+      "full_child_semilinear_stabilizer_order": 1320,
       "labelled_atlas_distinct_count": 12,
       "labelled_atlas_fibre_size_histogram": {
         "1": 12
@@ -132,8 +171,15 @@
       ],
       "q": 11,
       "survivor_index": 0,
+      "unlabelled_atlas_exactly_recovers_full_child_point_orbits": true,
+      "unlabelled_atlas_function_is_full_child_invariant": true,
+      "unlabelled_atlas_function_stabilizer_order": 1320,
       "unlabelled_atlas_parent_signature_count": 1,
-      "unlabelled_atlas_recovers_parent": false
+      "unlabelled_atlas_recovers_parent": false,
+      "unlabelled_atlas_value_count": 1,
+      "unlabelled_atlas_value_fibre_sizes": [
+        12
+      ]
     }
   ],
   "coxeter_conic_phase_controls": [

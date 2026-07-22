@@ -105,8 +105,10 @@ It recovers the exact syndrome orbit profiles `4 / 6 / 1+6 / 12`, but the intrin
 atlas family has one parent signature on every fixed-child fibre `6 / 8 / 2 / 22`.  The three full
 conics are complete arcs, so their own atlas domains are empty.  The q=9 cube fails at shared Gram
 rank `3` and a stably zero Sylow endpoint; the pointed q=7/q=11 carriers pass Gram rank zero and
-Sylow endotriviality.  This closes the lane's decision gate: modular machinery is conditional
-downstream structure, not a general atlas discriminator.
+Sylow endotriviality.  A second extra-juice pass proves that the unlabelled atlas values partition
+the child as `4 / 6 / 1+6 / 12`, exactly its full stabilizer orbits; the resulting full function
+stabilizer gives a structural explanation for parent blindness.  This closes the lane's decision
+gate: modular machinery is conditional downstream structure, not a general atlas discriminator.
 
 Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 

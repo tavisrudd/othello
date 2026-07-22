@@ -163,6 +163,7 @@ def analyze_c398(module, companion, c398_data, c474_data) -> list[dict[str, obje
                 if tuple(sorted(apply(transformation, point) for point in support)) == support
             )
             point_orbits = orbit_partition(locus, parent_group, apply)
+            full_child_orbits = orbit_partition(locus, full_locus_group, apply)
             atlas_orbits = atlas_partition(module, field, support, locus, parent_group, apply)
             labelled_atlases = [atlas(module, field, support, point) for point in locus]
 
@@ -179,6 +180,28 @@ def analyze_c398(module, companion, c398_data, c474_data) -> list[dict[str, obje
                 parent_signatures.append(signature)
             distinct_parent_signatures = set(parent_signatures)
             assert len(distinct_parent_signatures) == 1
+            common_parent_signature = parent_signatures[0]
+            unseen = set(range(len(locus)))
+            unlabelled_value_partition = []
+            while unseen:
+                seed = min(unseen)
+                part = sorted(
+                    index for index in unseen
+                    if common_parent_signature[index] == common_parent_signature[seed]
+                )
+                unseen -= set(part)
+                unlabelled_value_partition.append(part)
+            unlabelled_value_partition.sort(key=lambda part: (len(part), part))
+            atlas_function_stabilizer_order = sum(
+                all(
+                    common_parent_signature[locus.index(apply(transformation, point))]
+                    == common_parent_signature[index]
+                    for index, point in enumerate(locus)
+                )
+                for transformation in full_locus_group
+            )
+            assert unlabelled_value_partition == full_child_orbits
+            assert atlas_function_stabilizer_order == len(full_locus_group)
 
             companion_case = companion_cases[q, survivor_index]
             relation = companion_case["signature_overlap_relation"]
@@ -225,10 +248,21 @@ def analyze_c398(module, companion, c398_data, c474_data) -> list[dict[str, obje
                 },
                 "atlas_orbit_sizes": sorted(map(len, atlas_orbits)),
                 "atlas_exactly_recovers_syndrome_orbits": atlas_orbits == point_orbits,
+                "full_child_semilinear_stabilizer_order": len(full_locus_group),
+                "full_child_point_orbit_sizes": sorted(map(len, full_child_orbits)),
                 "fixed_child_parent_count": len(parents),
                 "unlabelled_atlas_parent_signature_count": len(distinct_parent_signatures),
                 "unlabelled_atlas_recovers_parent": len(distinct_parent_signatures) == len(parents),
-                "common_unlabelled_atlas_parent_signature_sha256": signature_digest(parent_signatures[0]),
+                "common_unlabelled_atlas_parent_signature_sha256": signature_digest(common_parent_signature),
+                "unlabelled_atlas_value_count": len(set(common_parent_signature)),
+                "unlabelled_atlas_value_fibre_sizes": sorted(map(len, unlabelled_value_partition)),
+                "unlabelled_atlas_exactly_recovers_full_child_point_orbits": (
+                    unlabelled_value_partition == full_child_orbits
+                ),
+                "unlabelled_atlas_function_stabilizer_order": atlas_function_stabilizer_order,
+                "unlabelled_atlas_function_is_full_child_invariant": (
+                    atlas_function_stabilizer_order == len(full_locus_group)
+                ),
                 "deletion_trace_signature_count": companion_case["distinct_deletion_trace_signatures"],
                 "deletion_trace_recovers_parent": companion_case["decoration_is_injective"],
                 "modular_carrier": modular,

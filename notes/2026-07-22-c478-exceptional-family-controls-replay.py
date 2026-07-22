@@ -301,6 +301,21 @@ def main() -> None:
             full_locus_parts = partition(locus, group, field)
             for part in full_locus_parts:
                 assert len({signature[index] for index in part}) == 1
+            unseen = set(range(len(locus)))
+            value_parts = []
+            while unseen:
+                seed = min(unseen)
+                part = sorted(index for index in unseen if signature[index] == signature[seed])
+                unseen -= set(part)
+                value_parts.append(part)
+            value_parts.sort(key=lambda part: (len(part), part))
+            function_stabilizer_order = sum(
+                all(
+                    signature[locus.index(apply(field, transformation, point))] == signature[index]
+                    for index, point in enumerate(locus)
+                )
+                for transformation in group
+            )
             case = cases[q, survivor_index]
             assert len(set(atlas(field, support, point) for point in locus)) == case["labelled_atlas_distinct_count"]
             assert sorted(map(len, point_parts)) == case["projective_deep_hole_orbit_sizes"]
@@ -309,6 +324,12 @@ def main() -> None:
             assert len(parents) == case["fixed_child_parent_count"]
             assert case["unlabelled_atlas_parent_signature_count"] == 1
             assert digest(signature) == case["common_unlabelled_atlas_parent_signature_sha256"]
+            assert value_parts == full_locus_parts
+            assert sorted(map(len, value_parts)) == case["unlabelled_atlas_value_fibre_sizes"]
+            assert len(value_parts) == case["unlabelled_atlas_value_count"]
+            assert sorted(map(len, full_locus_parts)) == case["full_child_point_orbit_sizes"]
+            assert function_stabilizer_order == case["unlabelled_atlas_function_stabilizer_order"]
+            assert function_stabilizer_order == case["full_child_semilinear_stabilizer_order"] == len(group)
             checked += 1
 
     for case in certificate["coxeter_conic_phase_controls"]:
@@ -333,7 +354,10 @@ def main() -> None:
     vectors = [(1, 0, 0, 2), (0, 1, 0, 2), (0, 0, 1, 2)]
     assert rank(vectors, 3) == 3
     assert certificate["c398_non_grs_controls"][1]["modular_carrier"]["stable_endpoint"] == "zero (projective)"
-    print(f"C478 independent replay: {checked} C398 atlas rows, 3 conic controls, and all Gram/Sylow gates agree")
+    print(
+        f"C478 independent replay: {checked} atlas/orbit rows, 3 conic controls, "
+        "and all Gram/Sylow gates agree"
+    )
 
 
 if __name__ == "__main__":

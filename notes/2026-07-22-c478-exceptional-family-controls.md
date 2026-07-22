@@ -5,10 +5,11 @@
 **Date:** 2026-07-22
 
 **Status:** complete.  The universal edge-torus layer of C475 recovers every projective
-deep-syndrome orbit in the four frozen C398 non-GRS classes, but its intrinsic unlabelled family
-has one fixed-child parent signature in every row and therefore recovers none of the parent
-fibres.  The `A3/B3/H3` full-conic children have no deep-syndrome atlas domain.  Modular machinery
-belongs only after a separately supplied matching decoration passes both the Gram and Sylow gates.
+deep-syndrome orbit in the four frozen C398 non-GRS classes, but after unlabelling it retains
+exactly the full child's intrinsic point-orbit colouring and has one fixed-child parent signature
+in every row.  The `A3/B3/H3` full-conic children have no deep-syndrome atlas domain.  Modular
+machinery belongs only after a separately supplied matching decoration passes both the Gram and
+Sylow gates.
 
 ## Result
 
@@ -103,6 +104,46 @@ deletion trace:      parent above a fixed child.
 Keeping support labels would make the parent visible tautologically; (2) uses the intrinsic
 unlabelled/Frobenius quotient and is the relevant recovery test.
 
+The requested extra-juice pass gives a structural explanation for the maximal blindness.  Let
+`Gamma=Stab_PGammaL(L)`, let `X` be the unlabelled/Frobenius atlas space, and write
+
+```text
+f_A : L -> X,                    u |-> canonical atlas of (A,u).
+```
+
+Covariance of determinants gives the exact transporter identity
+
+```text
+f_(gA)(u)=f_A(g^-1 u),           g in Gamma.             (3)
+```
+
+Consequently the atlas recovers the parent orbit `Gamma/Stab(A)` exactly if and only if
+`Stab_Gamma(f_A)=Stab_Gamma(A)`.  This is the parent-recovery criterion that the raw signature
+count alone concealed.
+
+In the four frozen rows, the numbers of values of `f_A` are
+
+```text
+1, 1, 2, 1,
+```
+
+and their fibre sizes are respectively
+
+```text
+4;  6;  1+6;  12.                                      (4)
+```
+
+These are exactly the point-orbit partitions of the full child stabilizers, not merely coarsenings
+of them.  Hence `f_A` is `Gamma`-invariant and
+
+```text
+Stab_Gamma(f_A)=Gamma                                  (5)
+```
+
+in every row.  Equation (5) forces the one-signature parent collapse in (2).  The q=9 seven-point
+case is the informative exception to “one colour”: its two atlas values recognize the child's
+intrinsic fixed point and six-orbit, but still retain no parent-specific decoration.
+
 ## 3. The full-conic controls
 
 For each fixed C399 conic phase, direct projective enumeration verifies that the invariant conic
@@ -110,7 +151,7 @@ has `q+1=6,8,12` points and every point outside it lies on a conic secant.  Henc
 a complete arc and has zero one-column MDS extensions:
 
 ```text
-U(C(F_q))=emptyset,             q=5,7,11.                (3)
+U(C(F_q))=emptyset,             q=5,7,11.                (6)
 ```
 
 Consequently the C475 deep-syndrome atlas of the full-conic child is empty in all three controls.
@@ -222,6 +263,10 @@ construct a new matching decoration, or extend the field census.
   resulting decomposable edge factorization, not merely a syndrome point on a conic.
 - **Settled — whether a complete atlas family can recover the parent.**  No on every frozen row:
   the fixed-child parent-signature count is `1` for fibres of sizes `6,8,2,22`.
+- **Settled in the requested second extra-juice pass — why parent blindness is maximal.**  The
+  unlabelled atlas colouring has fibres `4 / 6 / 1+6 / 12`, exactly the full child point orbits, so
+  its function stabilizer is the entire child group.  The transporter criterion
+  `Stab_Gamma(f_A)=Stab_Gamma(A)` now explains both failure and the precise missing symmetry.
 - **Settled — whether modular structure is hidden in the full-conic child's own deep holes.**  No.
   All three Coxeter conics are complete arcs, so their atlas domains are empty.
 - **Settled — the first q=9/q=11 divergence.**  It is already Gram-theoretic (`3` versus `0`), and
