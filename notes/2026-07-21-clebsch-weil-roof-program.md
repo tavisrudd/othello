@@ -32,7 +32,7 @@ selected card names it as a load-bearing input.
 | C440 | M0 | GREEN: binary forms, conic dictionary, and labels frozen | conventions for all tasks |
 | C441 | M1 | GREEN: H3/B3/A3 vertices biject onto `P^1(F_q)` | reduction tables available |
 | C442 + C458 | M2 + freeze addendum | GREEN: golden frame carries H3 sheet; rational Klein form is sheet-blind | unlocks M4/M5/T10 |
-| C443 + C461 | M3 + repair | SHARP BLOCKERS: literal secant-product lift and every linear four-companion weighting fail | no integral tensor clause; abstract tensor remains unallocated |
+| C443 + C461 | M3 + repair | SHARP BLOCKERS: literal secant-product lift and every linear four-companion weighting fail | no integral tensor clause; torsor reading spun off to C462 |
 | C446 | X1 | SHARP NEGATIVE: marker matchings are nonconcurrent | point-valued selector route closed |
 | C460 | X1+ | GREEN: Frégier clouds recover unordered H3 sheets and the perpendicularity germ | usable by M5 and as T3 control |
 | C447 | X2 | singleton comparison negative; shared-edge cross-sheet repair GREEN | exact local torsor for X3 |
@@ -49,10 +49,11 @@ selected card names it as a load-bearing input.
 | C456 | T9 | queued | AME chirality LU verdict |
 | C457 | T10 | M2 gate passed; schedule after C444 | quaternion-order structural upgrade |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
+| C462 | M3-torsor | QUEUED: certify the four-companion `Z/4` Galois torsor and its descent obstruction (exploratory memo confirmed sigma 4-cycle, prime equivariance, invariant discrepancy) | candidate base-changed replacement for the cut tensor clause; framing input to C445 and paper-2 gluing |
 
 Critical path: `C444 -> C445 -> C449`. C450--C456 are independent once their cards' frozen inputs
-are available. C457 consumes C444. C459 may run in parallel but must not displace a critical-path
-slot. Phase 3 waits for dispositions of every allocated battery row.
+are available. C457 consumes C444. C459 and C462 may run in parallel but must not displace a
+critical-path slot. Phase 3 waits for dispositions of every allocated battery row.
 
 ## Task routing
 
@@ -68,6 +69,7 @@ slot. Phase 3 waits for dispositions of every allocated battery row.
 - [`c456-t9-ame-chirality.md`](weil-roof-tasks/c456-t9-ame-chirality.md)
 - [`c457-t10-quaternion-reduction.md`](weil-roof-tasks/c457-t10-quaternion-reduction.md)
 - [`c459-q-forms.md`](weil-roof-tasks/c459-q-forms.md)
+- [`c462-torsor-descent.md`](weil-roof-tasks/c462-torsor-descent.md)
 
 Phase-2 framing and Phase-3 synthesis are not routine task context. Load
 [`weil-roof-tasks/phase2-phase3-synthesis.md`](weil-roof-tasks/phase2-phase3-synthesis.md) only when

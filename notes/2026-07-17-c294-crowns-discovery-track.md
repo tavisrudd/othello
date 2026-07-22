@@ -514,3 +514,21 @@ verified certificate. Coordinator following up per the C458 Fable review §4.
 `notes/2026-07-21-clebsch-weil-roof-program.md`. C460 owns verification of the unverified cloud half,
 the common-triangle/perpendicularity test, the sharper X3 geometry, and the secondary T3 incidence
 control; the original discovery entry remains the provenance record.
+
+### 2026-07-21 — the A5-fixed polar matching's linear moment prefers one golden prime
+
+Surfaced by the C443 torsor hunch check (`notes/2026-07-21-c443-torsor-hunch-check.md`, H4): in the
+frozen 15-coordinate `F_11` quotient basis, the polar matching's degree-1 moment is the zero vector
+at both roots over the golden prime `pi` (`zeta = 3, 4`) but has support 9 at both roots over
+`pi-bar` (`zeta = 5, 9`). The one `A5`-fixed object in the picture thus distinguishes the two primes
+of `Z[phi]` above 11 already in degree one, while the four-companion discrepancy vector (support 3,
+coords `{4,7,9}`) is prime-blind and Galois-invariant. Unclear whether this is a frame artifact of
+the frozen C406 quotient bases or a genuine chirality-adjacent invariant; the two vectors are
+unrelated (not proportional mod 11, near-disjoint supports).
+
+**Evidence.** Exact `F_11` computation reusing the frozen C443/C461 machinery; scratch scripts cited
+in the memo. Incidental to the memo's H4 question (which was refuted); not part of any card.
+
+**Status:** open lead; unallocated. Candidate one-bounded-task shape: recompute the polar moment in
+a second independent basis convention to separate frame artifact from invariant, and if it survives,
+compare against the C456/T9 chirality verdict.
