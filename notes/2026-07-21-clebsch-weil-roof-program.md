@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-21
 
-**Status:** active allocated battery. C444/M4 is GREEN; C445/M5 is the next critical-path task.
+**Status:** active allocated battery. C445/M5 is GREEN; C449/T2 is the next critical-path task.
 
 This is the shared controller, not the task specification catalogue. Historical motivation is in
 [`2026-07-21-clebsch-weil-roof-conversation-report.md`](2026-07-21-clebsch-weil-roof-conversation-report.md)
@@ -38,7 +38,7 @@ selected card names it as a load-bearing input.
 | C447 | X2 | singleton comparison negative; shared-edge cross-sheet repair GREEN | exact local torsor for X3 |
 | C448 | X3 | GREEN: orbit-valued selector theorem; point section costs one bit | framing input only |
 | C444 | M4 | GREEN: B3 split fibres exchanged by outer `x->-x`, cubic scalar `2 sqrt2`, common `S3` seam; A3 central lifts fuse over one projective `S4` | unlocks M5 and strengthens T10 input |
-| C445 | M5 | **NEXT** after C444 GREEN | closes master-stroke statement boundary |
+| C445 | M5 | GREEN: exact 11+11-to-22 matching/orbit gluing; rational `Rz` boundary; tensor cut | closes master-stroke statement boundary |
 | C449 | T2 | queued after M4 chain | split-Coxeter-torus mechanism |
 | C450 | T3 | queued; independent after frozen inputs | Weil-module roof test |
 | C451 | T4 | queued | theta/Roquette row, with clean negative allowed |
@@ -49,11 +49,12 @@ selected card names it as a load-bearing input.
 | C456 | T9 | queued | AME chirality LU verdict |
 | C457 | T10 | M2 gate passed; schedule after C444 | quaternion-order structural upgrade |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
-| C462 | M3-torsor | QUEUED: certify the four-companion `Z/4` Galois torsor and its descent obstruction (exploratory memo confirmed sigma 4-cycle, prime equivariance, invariant discrepancy) | candidate base-changed replacement for the cut tensor clause; framing input to C445 and paper-2 gluing |
+| C462 | M3-torsor | QUEUED: certify the four-companion `Z/4` Galois torsor and its descent obstruction (exploratory memo confirmed sigma 4-cycle, prime equivariance, invariant discrepancy) | candidate base-changed replacement for the cut tensor clause and framing input to paper-2 gluing; C445 finite theorem is independent of it |
 
-Critical path: `C444 -> C445 -> C449`. C450--C456 are independent once their cards' frozen inputs
-are available. C457 consumes C444. C459 and C462 may run in parallel but must not displace a
-critical-path slot. Phase 3 waits for dispositions of every allocated battery row.
+Critical path has advanced through `C444 -> C445`; **C449 is next**. C450--C456 are independent
+once their cards' frozen inputs are available. C457 consumes C444. C459 and C462 may run in
+parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
+allocated battery row.
 
 ## Task routing
 
