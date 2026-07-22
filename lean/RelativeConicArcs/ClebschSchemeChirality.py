@@ -38,6 +38,56 @@ def act(permutation: tuple[int, ...], subset: tuple[int, ...]) -> tuple[int, ...
     return tuple(sorted(permutation[i] for i in subset))
 
 
+def mat_vec(matrix: tuple[tuple[int, ...], ...], vector: tuple[int, ...]) -> tuple[int, ...]:
+    return tuple(sum(row[j] * vector[j] for j in range(3)) % Q for row in matrix)
+
+
+def mat_mul(
+    left: tuple[tuple[int, ...], ...], right: tuple[tuple[int, ...], ...]
+) -> tuple[tuple[int, ...], ...]:
+    return tuple(
+        tuple(sum(left[i][k] * right[k][j] for k in range(3)) % Q for j in range(3))
+        for i in range(3)
+    )
+
+
+def mat_inverse(matrix: tuple[tuple[int, ...], ...]) -> tuple[tuple[int, ...], ...]:
+    augmented = [list(row) + [int(i == j) for j in range(3)] for i, row in enumerate(matrix)]
+    for column in range(3):
+        pivot = next(row for row in range(column, 3) if augmented[row][column] % Q)
+        augmented[column], augmented[pivot] = augmented[pivot], augmented[column]
+        scale = pow(augmented[column][column], -1, Q)
+        augmented[column] = [scale * value % Q for value in augmented[column]]
+        for row in range(3):
+            if row != column:
+                scale = augmented[row][column]
+                augmented[row] = [
+                    (a - scale * b) % Q for a, b in zip(augmented[row], augmented[column])
+                ]
+    return tuple(tuple(row[3:]) for row in augmented)
+
+
+def normalize(vector: tuple[int, ...]) -> tuple[int, ...]:
+    pivot = next(value for value in vector if value % Q)
+    scale = pow(pivot, -1, Q)
+    return tuple(scale * value % Q for value in vector)
+
+
+def frame_transport(targets: tuple[tuple[int, ...], ...]) -> tuple[tuple[int, ...], ...]:
+    sources = DIRECTIONS[:4]
+    source_basis = tuple(tuple(sources[j][i] for j in range(3)) for i in range(3))
+    target_basis = tuple(tuple(targets[j][i] for j in range(3)) for i in range(3))
+    source_inverse = mat_inverse(source_basis)
+    source_coordinates = mat_vec(source_inverse, sources[3])
+    target_coordinates = mat_vec(mat_inverse(target_basis), targets[3])
+    diagonal = tuple(
+        tuple((target_coordinates[i] * pow(source_coordinates[i], -1, Q)) % Q if i == j else 0
+              for j in range(3))
+        for i in range(3)
+    )
+    return mat_mul(mat_mul(target_basis, diagonal), source_inverse)
+
+
 def certificate() -> dict[str, object]:
     neighbors = tuple(
         tuple(scale * coordinate % Q for coordinate in direction)
@@ -80,6 +130,21 @@ def certificate() -> dict[str, object]:
     assert conjugate == group and SHEET_EXCHANGE not in group
     assert {act(SHEET_EXCHANGE, triple) for triple in orbits[0]} == set(orbits[1])
 
+    frame_candidates = []
+    for target_indices in itertools.permutations(range(6), 4):
+        matrix = frame_transport(tuple(DIRECTIONS[i] for i in target_indices))
+        assert tuple(normalize(mat_vec(matrix, DIRECTIONS[i])) for i in range(4)) == tuple(
+            DIRECTIONS[i] for i in target_indices
+        )
+        frame_candidates.append(matrix)
+    assert len(frame_candidates) == 360 and len(set(frame_candidates)) == 360
+    projective_stabilizer = {
+        matrix
+        for matrix in frame_candidates
+        if {normalize(mat_vec(matrix, point)) for point in DIRECTIONS} == set(DIRECTIONS)
+    }
+    assert len(projective_stabilizer) == 60
+
     return {
         "schema": "clebsch-scheme-chirality-1",
         "field_order": Q,
@@ -91,6 +156,7 @@ def certificate() -> dict[str, object]:
         "normalizing_element_exchanges_orbits": True,
         "normalizing_element_outside_block_action": True,
         "projective_frame_candidate_bound": 360,
+        "projective_stabilizer_order": len(projective_stabilizer),
         "lean_boundary": (
             "The Lean module checks the displayed finite directions, adjacency components, "
             "triple enumeration, generator orbits, and one sheet exchange. Identification with "

@@ -14,6 +14,7 @@
   "normalizing_element_exchanges_orbits": true,
   "normalizing_element_outside_block_action": true,
   "projective_frame_candidate_bound": 360,
+  "projective_stabilizer_order": 60,
   "schema": "clebsch-scheme-chirality-1",
   "three_subset_domain_size": 20,
   "three_subset_orbit_sizes": [
