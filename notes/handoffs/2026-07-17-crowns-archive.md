@@ -177,3 +177,10 @@ fibre cannot recover global 5 because `<5>~=<1>` over `F_11` (`4^2=5`).  Accordi
 information-lattice rung should preserve sign/square class only; full discriminant recovery belongs
 to an arithmetic enhancement.  The remaining bounded question is whether the integral code family,
 as opposed to its obstruction bit, intrinsically recovers the character polynomial.
+
+The fourth-order extra-juice pass ran the cheapest full-code recovery test.  Every one of C377's
+twenty maximal minors is `2` times a unit of norm `+/-1`, so their content ideal is `(2)` and their
+product is `-2^20 tau^(-10)` with norm `2^40`.  The code is therefore MDS at every odd prime,
+including ramified 5.  This yields the coprime two-ideal law `(Pluecker content,different)=((2),(5))`:
+rank/realization fails only at 2, while orientation ramifies only at 5.  Any future intrinsic-code
+recovery test must use normalized Pluecker-unit syzygies or descent, not another determinant ideal.

@@ -10,6 +10,27 @@
     "odd_lattice": "R^{sigma=-1}=Z*delta",
     "ring": "Z[tau]/(tau^2-tau-1)"
   },
+  "code_determinantal_content": {
+    "checked_maximal_minors": 20,
+    "code_rank_bad_prime": [
+      2
+    ],
+    "conclusion": "maximal-minor content detects the realization prime 2 and is blind to the carrier prime 5",
+    "each_minor": "2 times a unit of norm +/-1",
+    "orientation_discriminant_bad_prime": [
+      5
+    ],
+    "pluecker_content_ideal": [
+      2
+    ],
+    "product_formula": "-2^20*tau^(-10)",
+    "product_norm": 1099511627776,
+    "product_norm_formula": "2^40",
+    "product_pair_a_plus_b_tau": [
+      -93323264,
+      57671680
+    ]
+  },
   "common_datum": {
     "arc_chirality_exchange": "the same odd pi swaps the certified 10+10 orbits",
     "categorical_caveat": "compatibility is a common C2-action/naturality square, not a literal isomorphism of all realization objects with the rank-one odd lattice",

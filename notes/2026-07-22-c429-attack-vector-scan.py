@@ -130,6 +130,23 @@ def certificate() -> dict:
     upstream_data = {key: json.loads(path.read_text()) for key, path in UPSTREAM.items()}
     validate_upstream(upstream_data)
 
+    ledger = upstream_data["c377"]["pluecker"]["ledger"]
+    product = (1, 0)
+    half_norms = []
+    for entry in ledger:
+        a, b = entry["source_minor"]
+        assert a % 2 == 0 and b % 2 == 0
+        half = (a // 2, b // 2)
+        half_norms.append(half[0] * half[0] + half[0] * half[1] - half[1] * half[1])
+        product = (
+            product[0] * a + product[1] * b,
+            product[0] * b + product[1] * a + product[1] * b,
+        )
+    assert set(half_norms) == {-1, 1}
+    assert product == (-93323264, 57671680) == (-89 * 2**20, 55 * 2**20)
+    product_norm = product[0] ** 2 + product[0] * product[1] - product[1] ** 2
+    assert product_norm == 2**40
+
     multiplication_delta = [[-1, 2], [2, 1]]
     trace_pairing = [[2, 1], [1, 3]]
     assert math.gcd(*(abs(x) for row in multiplication_delta for x in row)) == 1
@@ -240,6 +257,18 @@ def certificate() -> dict:
             "q11_isometry": "<5> is isometric to <1> via x |-> 4x because 4^2=5 mod 11",
             "global_recovery_gate": "retain the character algebra or resolvent, or retain the all-prime Frobenius law together with ramification support",
             "c434_boundary": "the finite q=11 rung can preserve sign/square class, not the global integral discriminant form",
+        },
+        "code_determinantal_content": {
+            "checked_maximal_minors": len(ledger),
+            "each_minor": "2 times a unit of norm +/-1",
+            "pluecker_content_ideal": [2],
+            "product_pair_a_plus_b_tau": list(product),
+            "product_formula": "-2^20*tau^(-10)",
+            "product_norm": product_norm,
+            "product_norm_formula": "2^40",
+            "code_rank_bad_prime": [2],
+            "orientation_discriminant_bad_prime": [5],
+            "conclusion": "maximal-minor content detects the realization prime 2 and is blind to the carrier prime 5",
         },
         "upstream": {
             key: {"file": path.name, "sha256": sha256(path)} for key, path in UPSTREAM.items()

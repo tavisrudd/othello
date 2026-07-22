@@ -285,6 +285,53 @@ or the all-prime Frobenius character together with its ramification support.
 - **No numerical mystery remains in C429.** The new gap is information-theoretic and precisely
   localized: full code family versus its one-bit shadow.
 
+## User-requested fourth-order extra juice — complementary determinantal ideals
+
+The cheapest intrinsic invariant of the full integral code is its maximal-minor content.  C377's
+twenty Pluecker coordinates give an unexpectedly clean answer: every nonzero `3x3` minor is
+
+```text
+2 times a unit of Z[tau] of norm +1 or -1.
+```
+
+Hence the Pluecker content ideal is exactly `(2)`.  The complete product is
+
+```text
+product_I Delta_I = -2^20 tau^(-10),
+Norm(product_I Delta_I) = 2^40.
+```
+
+There is no factor 5.  Thus the code's determinantal geometry and the orientation carrier detect
+complementary primes:
+
+```text
+maximal-minor/content ideal:       (2)   — rank/MDS realization collapse,
+different/discriminant ideal:      (5)   — sheet ramification.
+```
+
+This is stronger than merely observing pairwise column collapse at 2.  It proves that the integral
+code is uniformly MDS at every odd prime, including the ramified prime 5; characteristic 5 changes
+the orientation/resolvent structure without causing a code-rank failure.
+
+### Consequences and refreshed mystery ledger
+
+- **Settled — the cheapest full-code recovery test is negative for 5.** Maximal-minor content sees
+  only `(2)`.  So the full code contains more arithmetic than its one-bit obstruction, but its
+  first canonical determinantal ideal still does not recover the golden discriminant.
+- **Settled — why the exceptional primes never mix in the certificates.** They govern transverse
+  failure modes: 2 is loss of MDS realization/sign visibility; 5 is ramification of an otherwise
+  full-rank code family.
+- **Free paper upgrade — a two-ideal statement.** The phase theorem can be summarized by the
+  coprime pair `(Pluecker content, different)=((2),(5))`.  This is more precise than one undifferentiated
+  “bad-prime set.”
+- **Narrowed future code gate.** Any intrinsic monomial invariant recovering `X^2-X-1` must use
+  ratios/syzygies among normalized Pluecker units, automorphism descent, or another structure
+  beyond maximal-minor content.  Re-running rank or determinant ideals cannot succeed.
+- **Surprise retained, now explained.** Ramification at 5 with no loss of MDS rank is the notable
+  feature: the bit becomes infinitesimal while the code remains perfect.  The exact bridge from
+  normalized Pluecker-unit syzygies to the discriminant line remains open and requires a future
+  allocated falsifier; it is not promoted here.
+
 **Persona routing:** `notes/2026-07-07-named-expert-personas-context.md` has no row for
 integral/modular representation-theory phase-theorem work; every listed dossier targets games,
 arcs, cap-sets, or reliability. No persona dossier was loaded, per the index's own instruction to

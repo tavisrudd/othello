@@ -50,6 +50,20 @@ def main() -> None:
     assert recovery["q11_isometry"].startswith("<5> is isometric to <1>")
     assert 1 * 1 - 4 * (-1) == 5  # discriminant of X^2-X-1
 
+    c377 = json.loads((HERE / data["upstream"]["c377"]["file"]).read_text())
+    product = (1, 0)
+    norms = []
+    for entry in c377["pluecker"]["ledger"]:
+        a, b = entry["source_minor"]
+        assert a % 2 == b % 2 == 0
+        u, v = a // 2, b // 2
+        norms.append(u * u + u * v - v * v)
+        product = (product[0] * a + product[1] * b,
+                   product[0] * b + product[1] * a + product[1] * b)
+    assert set(norms) == {-1, 1}
+    assert product == tuple(data["code_determinantal_content"]["product_pair_a_plus_b_tau"])
+    assert product[0] ** 2 + product[0] * product[1] - product[1] ** 2 == 2**40
+
     # At 2 the algebra is etale (t^2+t+1 irreducible), but sign equals trivial character.
     assert roots(2) == [] and (1 % 2) == (-1 % 2)
 
