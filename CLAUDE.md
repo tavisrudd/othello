@@ -43,16 +43,9 @@ promoting, or handing off a log.
 
 ### Novelty failures and adjacent-crown extraction
 
-When prior work pre-empts a proof/math crown, run one bounded extraction pass: record the exact
-pre-emption and surviving result; inspect the source's future work and primary/forward citations for
-at most three adjacent gaps; formulate at most six distinct candidates; cheap-test the top two; and
-allocate at most two that pass, after rechecking the global C-ID maximum. Then close the failed task
-normally.
-
-The analysis and rejected candidates belong in the task report or an owned portfolio. Log only
-incidental “gem spotted while reading” observations outside the named audit questions, with exact
-source provenance and no extra investigation. This rule permits no broad sweep, recursive expansion,
-or cross-lane edits.
+When prior work pre-empts a proof/math crown you MUST run one bounded extraction pass per
+`notes/novelty-extraction-conventions.md`, then close the failed task. Log only incidental gems
+(with exact provenance) to the discovery track; no broad sweep, recursion, or cross-lane edits.
 
 ## Lane routing
 
@@ -116,53 +109,13 @@ search and every consulted source must be recorded.
 
 ## Research records and computational reproducibility
 
-**Claude:** follow the evidence discipline in recent C-task reports. Models:
-`notes/2026-07-17-c246-contextual-minimality.md` for a report/script/JSON certificate
-bundle, `notes/2026-07-17-c254-two-terminal-reliability-log-concavity.md` for an exact sweep
-plus an independent direct-enumeration replay,
-`notes/2026-07-17-c255-gauge-invariant-coefficient-cost.md` for exact optima with a stated
-literature boundary. Copy their pattern: state the theorem or bounded negative cleanly, name the
-artifact supporting it, give the replay command, report exact checked counts and conventions, and
-delimit what the computation does not prove. Do not replace that evidence with a narrative of what
-was tried or a pasted terminal transcript.
-
-Treat every computational research claim as an atomic, git-visible evidence bundle. For new work, or
-whenever an older computation materially changes, commit the dated report, the exact script or
-generator, and its compact machine-readable output/certificate together. Keep them adjacent under
-the owning lane's allowed paths, with a common stem when practical, e.g. `<date>-c<id>-<slug>.md`,
-`.py`, `.json`, and `.sha256`/`SHA256SUMS`. A prose report citing an untracked script, an ephemeral
-transcript, or an uncommitted output is not a reproducibility claim.
-
-Each report backed by computation must record:
-
-- the exact command and working directory to regenerate or check the artifact;
-- all load-bearing inputs, parameters, field/radius/size conventions, dependency versions when
-  relevant, and random seeds (prefer deterministic canonical enumeration over randomness);
-- what each output certifies, what it does not certify, and the trusted boundary of the checker;
-- SHA-256 hashes and byte counts for the script/generator and every load-bearing output, either in
-  the report or in a committed checksum manifest; and
-- an independent replay, reference implementation, invariant check, or explicit explanation of why
-  no independent cross-check is available.
-
-Outputs must be canonical and stable: sort unordered objects, fix serialization, avoid timestamps
-and host-specific paths, and make regeneration fail loudly on schema or convention drift. Prefer a
-`--check` mode that regenerates in a temporary location, verifies hashes/content against the tracked
-artifact, and leaves the worktree unchanged. Never hand-edit generated evidence. When a generator,
-schema, or input changes, regenerate the complete affected output set, update its hashes and report,
-validate it, and commit all parts atomically.
-
-Do not put multi-gigabyte evidence in Git merely to satisfy this rule. If a necessary artifact is
-too large, stop and define an approved certificate/sharding strategy first. Commit a compact
-manifest containing the generator/input hashes, exact command, schema version, shard/root hashes,
-byte counts, and durable storage location; commit any compact independently checkable certificate.
-An untracked `/tmp` file, local cache entry, or claimed successful run is never the sole evidence
-for a paper-facing result.
-
-Keep live handoffs and queues free of raw logs and validation transcripts. Put durable conclusions
-and bounded evidence summaries in the dated task report; keep noisy run logs on disk and cite only
-their stable path/hash when they remain necessary. State negative computational results with the
-exact searched domain and stop condition—never promote finite exhaustion into an unrestricted
-nonexistence claim.
+Before any paper-facing computational claim you MUST follow
+`notes/research-reproducibility-conventions.md`: commit the report, the exact script/generator, and
+a compact certificate as one atomic, git-visible bundle, with the exact replay command,
+load-bearing inputs, and SHA-256 hashes, plus an independent replay or a stated reason none exists.
+An untracked `/tmp` file, local cache entry, or a claimed run is never sole evidence for a
+paper-facing result; state negatives with the exact searched domain and stop condition. That file
+also lists the model reports (C246/C254/C255) to copy.
 
 ## Lean: load the detailed rules on demand
 
@@ -327,39 +280,13 @@ All durable state lives in git-visible docs:
 - Companion `-archive.md` files are append-only history. Dated findings get their own `notes/` file.
 - Write current conclusions cleanly; put correction trails and superseded reasoning in the archive.
 
-**Hard completion invariant:** the live task queue is an allocation/open-work index, not a
-completion ledger. It must contain **no `[REPORTED ...]` rows and no other completed-task rows**.
-When a task completes, perform all of the following in the same coherent commit:
-
-1. append its completed row to `notes/2026-07-07-codex-task-queue-archive.md`;
-2. verify that its `C<id>` occurs there exactly once;
-3. delete its row from `notes/2026-07-07-codex-task-queue.md`; and
-4. update the owning lane's handoff; and
-5. before sending the user-facing completion report, review the work just closed against the
-   discovery-track discriminator and append any genuinely incidental observations or musings to
-   the lane's companion log. Do not manufacture an entry when there was none; retain the handoff's
-   one-line companion link either way.
-
-Archive first: if the completed row is not yet present in the companion archive, that is a blocker
-to deleting it, not a reason to leave `[REPORTED]` history in the live queue. Never transition a
-live queue row to `[REPORTED]`, even temporarily.
-
-Every task uses the global monotonic `CNN` sequence. Allocate one ID or a contiguous block only by
-running `python3 notes/scripts/allocate_codex_task_ids.py reserve` from the repository root with
-`--count N`, `--lane <alias>`, and `--purpose '<bounded purpose>'`. Use only the returned IDs and
-immediately commit the updated allocation ledger before dispatching or using them in queue rows.
-Never derive IDs from repository text, treat `peek` as an allocation, reuse or renumber an ID, or
-use `notes/scripts/next_codex_task_id.py` for anything except auditing. Examples must use `C<id>`,
-never a concrete unallocated number.
-
-Every task row carries exactly one lane peg at allocation:
-
-```markdown
-- **C<id> `[clebsch]` [QUEUED]** — one-line description → report path
-```
-
-Section placement is presentation; the peg is authoritative. Re-pegging is a lane switch and needs
-explicit approval.
+The live queue is an allocation/open-work index: it MUST contain no `[REPORTED ...]` rows or other
+completed-task rows. On completion you MUST follow `notes/task-lifecycle-conventions.md` — archive
+the row, delete it from the queue, update the handoff, and log incidental gems, in one coherent
+commit; archive-first, and never leave a `[REPORTED]` row even temporarily. Allocate IDs only via
+`python3 notes/scripts/allocate_codex_task_ids.py reserve`; you MUST NOT derive, reuse, or renumber
+an ID, and re-pegging a task's lane needs explicit approval. Row format and full mechanics are in
+that file.
 
 At session end: update the live map, move any accumulated history to the companion archive, append
 the dated report, and commit docs with the code they describe. Move finished handoffs under
