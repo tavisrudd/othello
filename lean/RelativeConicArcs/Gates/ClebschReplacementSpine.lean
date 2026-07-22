@@ -19,6 +19,7 @@ the external geometric-identification boundaries stated in their source modules.
 
 #print axioms RelativeConicArcs.ClebschSchemeChirality.intrinsicComponents_eq_scalarLineBlocks
 #print axioms RelativeConicArcs.ClebschSchemeChirality.scalarLineBlock_card
+#print axioms RelativeConicArcs.ClebschSchemeChirality.triple_card
 #print axioms RelativeConicArcs.ClebschSchemeChirality.triple_range_complete
 #print axioms RelativeConicArcs.ClebschSchemeChirality.triple_list_nodup
 #print axioms RelativeConicArcs.ClebschSchemeChirality.generatorTripleAction_semantics
