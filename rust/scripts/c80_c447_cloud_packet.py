@@ -264,6 +264,34 @@ def analyze_seed(game, record, edge_endpoints, square_kernel, seed, packet):
     assert matching_orbit_types == [[
         "0[1]--inf[1]", "1[5]--9[5]", "8[5]--inf[5]"
     ]] * 2
+    orbit_labels = set(vertex_orbit_label.values())
+    minimum_orbit_covers = []
+    for cover_size in range(1, len(edge_orbits) + 1):
+        for chosen in combinations(range(len(edge_orbits)), cover_size):
+            covered = {
+                label
+                for index in chosen
+                for label in edge_orbits[index][0].split("--")
+            }
+            if covered == orbit_labels:
+                minimum_orbit_covers.append(chosen)
+        if minimum_orbit_covers:
+            break
+    minimum_orbit_cover_types = [
+        sorted(edge_orbits[index][0] for index in chosen)
+        for chosen in minimum_orbit_covers
+    ]
+    assert cover_size == 3
+    assert minimum_orbit_cover_types == [[
+        "0[1]--inf[1]", "1[5]--9[5]", "8[5]--inf[5]"
+    ]] * 2
+    representative_cover_edges = [
+        {
+            "orbit_type": edge_orbits[index][0],
+            "edge": [list(cell) for cell in min(edge_orbits[index][1])],
+        }
+        for index in minimum_orbit_covers[0]
+    ]
     quotient_edge_counts = Counter(
         "-".join(sorted((quotient_by_vertex[first], quotient_by_vertex[second])))
         for first, second in winning_edges
@@ -319,6 +347,14 @@ def analyze_seed(game, record, edge_endpoints, square_kernel, seed, packet):
                     "vertices": 10,
                     "is_single_cycle": True,
                     "each_edge_orbit_is_a_perfect_matching": True,
+                },
+                "minimum_opponent_orbit_cover": {
+                    "opponent_orbits": 6,
+                    "edge_orbits": cover_size,
+                    "unique_type_cover": minimum_orbit_cover_types[0],
+                    "lift_count": len(minimum_orbit_covers),
+                    "representative_edges": representative_cover_edges,
+                    "matching_or_injective_reply_not_required_for_p_existence": True,
                 },
             },
             "perfect_matchings": [

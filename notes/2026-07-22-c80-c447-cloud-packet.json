@@ -534,6 +534,58 @@
               ]
             ],
             "c5_orbital_decomposition": {
+              "minimum_opponent_orbit_cover": {
+                "edge_orbits": 3,
+                "lift_count": 2,
+                "matching_or_injective_reply_not_required_for_p_existence": true,
+                "opponent_orbits": 6,
+                "representative_edges": [
+                  {
+                    "edge": [
+                      [
+                        2,
+                        7
+                      ],
+                      [
+                        4,
+                        5
+                      ]
+                    ],
+                    "orbit_type": "0[1]--inf[1]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        2,
+                        9
+                      ],
+                      [
+                        6,
+                        2
+                      ]
+                    ],
+                    "orbit_type": "8[5]--inf[5]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        4,
+                        2
+                      ],
+                      [
+                        8,
+                        3
+                      ]
+                    ],
+                    "orbit_type": "1[5]--9[5]"
+                  }
+                ],
+                "unique_type_cover": [
+                  "0[1]--inf[1]",
+                  "1[5]--9[5]",
+                  "8[5]--inf[5]"
+                ]
+              },
               "perfect_matching_orbit_types": [
                 [
                   "0[1]--inf[1]",
@@ -1767,6 +1819,58 @@
               ]
             ],
             "c5_orbital_decomposition": {
+              "minimum_opponent_orbit_cover": {
+                "edge_orbits": 3,
+                "lift_count": 2,
+                "matching_or_injective_reply_not_required_for_p_existence": true,
+                "opponent_orbits": 6,
+                "representative_edges": [
+                  {
+                    "edge": [
+                      [
+                        4,
+                        2
+                      ],
+                      [
+                        7,
+                        5
+                      ]
+                    ],
+                    "orbit_type": "1[5]--9[5]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        4,
+                        5
+                      ],
+                      [
+                        10,
+                        8
+                      ]
+                    ],
+                    "orbit_type": "0[1]--inf[1]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        4,
+                        10
+                      ],
+                      [
+                        5,
+                        8
+                      ]
+                    ],
+                    "orbit_type": "8[5]--inf[5]"
+                  }
+                ],
+                "unique_type_cover": [
+                  "0[1]--inf[1]",
+                  "1[5]--9[5]",
+                  "8[5]--inf[5]"
+                ]
+              },
               "perfect_matching_orbit_types": [
                 [
                   "0[1]--inf[1]",
@@ -3037,6 +3141,58 @@
               ]
             ],
             "c5_orbital_decomposition": {
+              "minimum_opponent_orbit_cover": {
+                "edge_orbits": 3,
+                "lift_count": 2,
+                "matching_or_injective_reply_not_required_for_p_existence": true,
+                "opponent_orbits": 6,
+                "representative_edges": [
+                  {
+                    "edge": [
+                      [
+                        2,
+                        3
+                      ],
+                      [
+                        10,
+                        2
+                      ]
+                    ],
+                    "orbit_type": "1[5]--9[5]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        2,
+                        10
+                      ],
+                      [
+                        5,
+                        8
+                      ]
+                    ],
+                    "orbit_type": "8[5]--inf[5]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        8,
+                        5
+                      ],
+                      [
+                        9,
+                        3
+                      ]
+                    ],
+                    "orbit_type": "0[1]--inf[1]"
+                  }
+                ],
+                "unique_type_cover": [
+                  "0[1]--inf[1]",
+                  "1[5]--9[5]",
+                  "8[5]--inf[5]"
+                ]
+              },
               "perfect_matching_orbit_types": [
                 [
                   "0[1]--inf[1]",
@@ -4270,6 +4426,58 @@
               ]
             ],
             "c5_orbital_decomposition": {
+              "minimum_opponent_orbit_cover": {
+                "edge_orbits": 3,
+                "lift_count": 2,
+                "matching_or_injective_reply_not_required_for_p_existence": true,
+                "opponent_orbits": 6,
+                "representative_edges": [
+                  {
+                    "edge": [
+                      [
+                        2,
+                        3
+                      ],
+                      [
+                        4,
+                        10
+                      ]
+                    ],
+                    "orbit_type": "1[5]--9[5]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        2,
+                        7
+                      ],
+                      [
+                        6,
+                        3
+                      ]
+                    ],
+                    "orbit_type": "8[5]--inf[5]"
+                  },
+                  {
+                    "edge": [
+                      [
+                        7,
+                        4
+                      ],
+                      [
+                        9,
+                        3
+                      ]
+                    ],
+                    "orbit_type": "0[1]--inf[1]"
+                  }
+                ],
+                "unique_type_cover": [
+                  "0[1]--inf[1]",
+                  "1[5]--9[5]",
+                  "8[5]--inf[5]"
+                ]
+              },
               "perfect_matching_orbit_types": [
                 [
                   "0[1]--inf[1]",

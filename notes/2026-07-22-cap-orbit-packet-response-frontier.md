@@ -106,6 +106,19 @@ has a perfect matching.  If both actions are free and one edge orbital is isolat
 is an equivariant bijection.  The hard work moves from Hall or selection to two exact obligations:
 identify equal orbital fibres, then prove one response orbital P-pure and nonempty.
 
+There is a still weaker lemma sufficient for game value.  Let `H` stabilize the parent.  For one
+representative of each `H`-orbit of opponent moves, it suffices to prove existence of one legal
+descending P reply.  Transport gives a reply on every branch; its choice need not be equivariant,
+injective, or independent of the transporter.  Moreover one P edge makes its entire edge orbital
+P by value invariance.  Equal-size reply fibres and Hall are certificate upgrades, not hypotheses
+of the P proof.
+
+In the q=11 graph, six opponent orbits have a unique minimum three-type cover:
+`0[1]--infinity[1]`, `1[5]--9[5]`, and `8[5]--infinity[5]`.  The last type has exactly two
+edge-orbital lifts; these are precisely the two calibrated perfect matchings.  Hence the 22-branch
+first-response theorem reduces to three representative game checks, while the calibration torsor
+records the two stronger pairing certificates.
+
 ## Deeper transfer — cubic memory and interactive descent
 
 The strongest cross-program signal is not the presence of matchings but the degree at which lost
@@ -198,8 +211,9 @@ descend.
    response relation as split-torus double cosets before doing minimax enumeration.
 2. **Difference sets and regular-bipartite Hall (C452).**  A cyclic QR connection set gives exact
    intersection numbers.  Once a P-pure connection orbital joins equal transitive fibres,
-   regularity supplies a perfect matching automatically.  This is the strongest immediate tool:
-   it turns C80(a) into a character-sum nonemptiness/purity theorem, not a selector theorem.  At
+   regularity supplies a perfect matching automatically.  This is the strongest immediate pairing
+   tool; the weaker game-value target needs only one winning edge per opponent-orbit representative.
+   Either way C80(a) becomes a character-sum nonemptiness theorem, not a selector theorem.  At
    q=11 the two connection offsets acquire a residue class only after choosing a Coxeter generator;
    the Galois change `g -> g^2` swaps that class.  The intrinsic cap statement is orbital
    nonemptiness, not a QR-labelled choice.
@@ -250,13 +264,15 @@ Even full success would remain a finite base-case theorem, not the all-odd-q mec
 ## C80 consequence
 
 C80(a)'s planned statement that every member of a bounded packet wins is stronger than necessary.
-The proof should accept either of two exact outputs:
+The proof should accept any of three exact outputs, in increasing strength:
 
-1. **orbit purity:** a canonical stabilizer orbit consists entirely of P children; or
+1. **orbit-representative cover:** one descending P response for one representative of every
+   stabilizer orbit of opponent moves;
 2. **branch cover:** after each opponent move, a canonical packet contains at least one certified
-   descending reply.
+   descending reply; or
+3. **pairing certificate:** a perfect matching in the winning-response relation.
 
-The second is the more plausible uniform mechanism.  It matches the observed adaptive certificate
+The first is the weakest and therefore the preferred proof target.  It matches the observed adaptive certificate
 structure, the q17 score-9 packet, `Low4`'s multiple P centres, and C79's requirement that a bounded
 interface absorb many noncommuting active matchings.  C80(b) must still provide the value-bearing
 descent: exact drain alone proves termination but not who wins.
@@ -282,6 +298,9 @@ are stated without a hidden selector.
 - **Settled — q=11 first response:** the full winning-response graph has exactly two perfect
   matchings, so a fixed node-zero pairing exists even though the emitted certificate did not use
   one.  No claim is made that either pairing recursively controls deeper nodes.
+- **Settled — matching was overkill:** the six `C5` opponent orbits have a unique three-type
+  winning-response cover with two lifts.  Three representative checks prove the first-response
+  P statement; perfect matching, injectivity, and equal reply-orbit size are unnecessary.
 - **Settled — orientation of the response pair:** the square `C5` fixes both matchings separately,
   and the nonsquare `D10` coset swaps both the P-edge endpoints and the matchings.  There are
   exactly two global calibrations.  Picking one requires one orientation/advice bit; P-existence
@@ -298,6 +317,13 @@ are stated without a hidden selector.
   quotient theorem yet makes the general residual defect boundary a complete game-value carrier.
 - **Open — uniform packet:** no q-independent packet with a proven nonempty good fibre is known.
   C80(a) owns existence/abundance and C82 owns orbital counting after the packet is fixed.
+- **Open — generic symmetry supply:** the q=11 `C5` is an actual stabilizer of the pointed state;
+  generic C80 states may have trivial stabilizer.  A uniform proof needs a genuine bounded-interface
+  action or a covariant state--opponent groupoid with a fibrewise nonemptiness theorem.  Torus
+  coordinates alone do not transport game value within one parent.
+- **Settled — no aggregate-value shortcut:** parity, Fourier coefficients, or an intersection
+  number can prove a response fibre nonempty but cannot replace the one P-valued descending witness
+  required on each opponent orbit.  C82 counts; C80(b) supplies value.
 - **Open — value descent:** neither the unordered H3 pair nor any Weil-roof carrier currently
   determines P/N value.  C80(b), with C81's subfield branches, owns this gap.
 - **Settled — selector architecture:** a point-valued equivariant selector is unnecessary for

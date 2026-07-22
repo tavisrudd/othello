@@ -166,6 +166,35 @@ to select a reply: it is to prove that one equal-orbit response relation is none
 C449 supplies the torus orbits, C452 supplies difference-set/intersection-number technology for
 their edge counts, and C82 can own the eventual character-sum abundance bound.
 
+For the P-value theorem even that is stronger than necessary.  If `H` stabilizes a parent state,
+take one representative `x` from each `H`-orbit of opponent moves and exhibit one legal descending
+P reply `y` after `x`.  For `x'=h x`, the transported move `h y` is a reply with the same value;
+neither a well-defined transporter nor injectivity among replies is required.  Thus P-purity of an
+edge orbital follows from one representative by value invariance, and equal orbit sizes/Hall are
+needed only when one wants a fixed pairing certificate.
+
+At this q=11 gate the 22 opponent moves form six `C5` orbits.  Their quotient winning graph has a
+unique minimum three-relation cover
+
+```text
+0[1]--infinity[1],  1[5]--9[5],  8[5]--infinity[5].
+```
+
+The last relation has two edge-orbital lifts, producing the two perfect matchings.  Therefore the
+two-match calibration torsor is extra certificate structure: the P proof itself consists of only
+three orbit-representative response checks.
+
+The uniform caveat is decisive.  Here `C5` genuinely stabilizes the pointed parent.  A generic C80
+state may have trivial stabilizer, so its opponent branches do not collapse this way.  The
+generalization must either produce a genuine symmetry of the bounded interface or work covariantly
+over a family of normalized states and prove the response fibre nonempty for every parameter.
+Merely observing torus coordinates or an association scheme does not create a game symmetry.
+
+Nor can an aggregate parity or Fourier sum replace the representative P checks.  Such a count may
+prove that a candidate orbital fibre is nonempty; normal-play recursion still requires an actual
+P-valued reply after every opponent orbit.  Character sums address abundance, while C80(b)'s
+descent induction supplies value.
+
 There is no intrinsic QR label on the two q=11 connection orbitals.  Writing their offsets requires
 a generator of `C5`; inversion preserves the square class of their separation, but the roof Galois
 change `g -> g^2` swaps square and nonsquare.  Thus QR coordinates are useful after a frozen
