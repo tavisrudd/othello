@@ -458,8 +458,17 @@
       "last": 480,
       "purpose": "Gap-closing certificates for banked A+F close: design/Fourier torsor legs, M12 hinge, B uniform-rule falsifier",
       "sequence": 51
+    },
+    {
+      "count": 5,
+      "first": 481,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 485,
+      "purpose": "coherent projection reconstruction through all-field redundancy-three synthesis",
+      "sequence": 52
     }
   ],
-  "next_id": 481,
+  "next_id": 486,
   "schema": "codex-task-id-allocations-v1"
 }
