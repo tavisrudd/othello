@@ -591,7 +591,8 @@ the descent obstruction modularly, and run the `q=7` control in the same pass.
 **Status:** open lead; explanation route found 2026-07-21 — the C452 executor's post-closure probe
 identifies the char-3 span of the disjoint matrix as the perfect ternary `[11,6,5]` Golay code, so
 nullity 5 is the Golay corank; the Brauer/Weil reading is likely subsumed by the perfect-code lead
-below
+below; graduated 2026-07-21 -> C465 (`notes/weil-roof-tasks/c465-mod3-weil-golay-bridge.md`), the
+full modular decomposition and Weil-reduction comparison
 
 ### 2026-07-21 — the surviving Weil bridge may be a character-sum identity, not a module map
 
@@ -690,7 +691,8 @@ or is the coincidence only order-level?  Either answer would sharpen the charact
 cliffhanger, while the present evidence forbids conflating them.
 **Evidence:** OPEN — both endpoint `A5` facts are certified by C395/C453, but their comparison has
 not been attempted.
-**Status:** open lead
+**Status:** graduated 2026-07-21 -> C466 secondary acceptance item
+(`notes/weil-roof-tasks/c466-dickson-fusion-mechanism.md`); "order-level only" remains a valid close
 
 ### 2026-07-21 — Prime-family forecast for the three relative cubics
 
@@ -735,4 +737,72 @@ mechanism, and pre-answers the sharpest referee objection.
 other. Either check failing at any prime kills the mechanism reading without touching the
 certified law.
 **Evidence:** REASONED over CHECKED endpoints (C445 hinge, C453 mod-40 law, Dickson full text).
-**Status:** open lead
+**Status:** graduated 2026-07-21 -> C466
+(`notes/weil-roof-tasks/c466-dickson-fusion-mechanism.md`), together with the biquadratic framing
+entry below
+
+### 2026-07-21 — the mod-40 fusion law is the splitting law of the biquadratic field `Q(sqrt2, sqrt5)`
+
+**Provenance:** user-directed review pass over the weil-roof controller and this discovery track,
+joining the Dickson `S4` entry, the `(2/q)` mechanism entry, C444's `2 sqrt2` cubic scalar, and the
+projective-vs-spin trace-field entry.
+**Was I looking for this?:** no — the review asked for missed cross-entry connections; each face
+was already logged separately.
+**Observed / musing:** mod 40 is the conductor of `Q(sqrt2, sqrt5)`, so C453's certified mod-40
+fusion law reads as one class-field statement: the visibility of the golden sheets at `q` is the
+Frobenius class of `q` in `Gal(Q(sqrt2, sqrt5)/Q) = C2 x C2` — the `(5/q)` character (splitting in
+`Z[phi]`) governs sheet existence, the `(2/q)` character governs fusion. And `Q(sqrt2)` is not an
+arbitrary quadratic: it is the octahedral spin field (`2.S4` character field), the field of C444's
+cubic scalar `2 sqrt2`, and the reason the Dickson criterion for `S4 <= PSL_2(q)` is `(2/q)=+1`.
+C451's Arf parity (parity of `(q+1)/4`) is the same character. Candidate one-sentence theorem: the
+golden sheets fuse exactly when the octahedral hinge's spin field splits at `q`.
+**Why it may matter / strongest question:** unifies three separately logged leads into a single
+Phase-3 Rosetta row and names the fusion law's mechanism field-theoretically; the only new
+computation needed is the Dickson descent check.
+**Structural mechanism:** Frobenius in the compositum of the two rank-3 spin fields; hinge-`S4`
+descent as the group-theoretic shadow of splitting in `Q(sqrt2)`.
+**Discriminator / falsifier:** C466's descent checks at 11/19/31; a fused prime whose hinge `S4`
+does not descend, or a visible prime whose hinge does, kills the mechanism reading (the certified
+law itself is untouched either way).
+**Evidence:** REASONED over CHECKED endpoints (C453 law, C445 hinge, C444 scalar, C451 Arf, M0
+trace-field census); the conductor-40 identification is classical.
+**Status:** graduated 2026-07-21 -> C466 (mechanism checks and framing statement)
+
+### 2026-07-21 — the roof may survive one level down: a Brauer bridge through the Golay module
+
+**Provenance:** same review pass, joining C450's char-3 nullities `6/5` and central `-1` descent
+obstruction, C452/C464's ternary Golay identification, and the classical fact that the Golay
+code's automorphism group in `SL_6(3)` is the double cover `2.M12`.
+**Was I looking for this?:** no — each component was logged or certified separately; the composite
+claim was unassembled.
+**Observed / musing:** C450 killed the module-isomorphism roof in char 0, with the degree-6 half
+obstructed by a central scalar `-1`. But the char-3 kernels have exactly the Weil degrees, the
+disjoint span is the ternary Golay code, and the Golay module's natural symmetry group `2.M12` is
+a double cover — precisely a home where a central `-1` lives rather than obstructs. Candidate
+statement: the Gerardin Weil pair reduces mod 3 to the Golay span/kernel factors as
+`(2.)PSL_2(11)`-modules, i.e. the roof holds as a Brauer statement realized by the perfect code.
+**Why it may matter / strongest question:** changes what Phase 3 can claim in either direction —
+"roof dead" vs "roof true one level down, carried by the exceptional perfect code."
+**Discriminator / falsifier:** C465's explicit modular decomposition and Brauer-character
+comparison; a mismatch in composition factors retires the bridge and leaves C450's negative as
+the final word.
+**Evidence:** OPEN synthesis over CHECKED endpoints (C450 nullities/obstruction, C464 span); the
+`2.M12` identification is classical and unverified here (compute-never-recall applies).
+**Status:** graduated 2026-07-21 -> C465 (`notes/weil-roof-tasks/c465-mod3-weil-golay-bridge.md`)
+
+### 2026-07-21 — Barker length 13 is excluded by golden inertness
+
+**Provenance:** same review pass, reading C452's odd-Barker wall against C453's golden-splitting
+gate.
+**Was I looking for this?:** no — noticed while checking whether the QR/Barker tower's stop at 11
+is program-internal or accidental.
+**Observed / musing:** the odd Barker lengths are `3, 5, 7, 11, 13`. The program's QR/Barker tower
+realizes 7 and 11 and stops; 13 — the only remaining odd Barker length beyond the frozen primes —
+is exactly C453's certified golden-inert prime, excluded before any sheet or design exists. So the
+tower's stop at 11 may be a golden-splitting exclusion rather than a coincidence, though 3 and 5
+(the small/excluded cases) are not explained by the same gate.
+**Why it may matter / strongest question:** one framing sentence for C452/Phase-3 — does the
+golden gate "know" the end of the odd Barker family, or is this order-level numerology?
+**Evidence:** OPEN — both endpoints are certified (C452 Barker words, C453 inertness of 13), the
+connection is unexamined.
+**Status:** open lead; unallocated — framing sentence only, no task shape yet

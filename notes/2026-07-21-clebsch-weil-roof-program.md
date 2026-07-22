@@ -54,10 +54,12 @@ selected card names it as a load-bearing input.
 | C462 | M3-torsor | GREEN: canonical unoriented four-companion `C4` torsor; sigma is `(0 2 3 1)`, sigma-squared is frozen kappa, residue equivariance holds up to inverse orientation, and the common degree-1 diagnostic descends; the selector obstruction is the nonsplit `1 -> C2 -> C4 -> C2 -> 1` | over `Z[zeta_5,1/10]`, candidate base-changed family-plus-obstruction replacement for the cut tensor clause and framing input to paper-2 gluing; no M3a tensor/module claim |
 | C464 | code-spans | QUEUED: certify the Hamming `[7,4,3]`/ternary Golay `[11,6,5]` cyclic incidence spans of the cross-sheet QR designs, with full weight distributions, sphere equalities, and the C450 rank cross-check (promoted from the C452 post-closure probe) | durable perfect-code beam for Phase 3; named successor (symmetry/equivariance) stays pre-allocation gated |
 | C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |
+| C465 | mod3-bridge | QUEUED: decide whether the roof holds at the Brauer level — decompose the char-3 cross-matrix kernels/spans as modular `PSL_2(11)`-modules and compare against the mod-3 reduction of the Gerardin Weil pair, with the Golay span (C464) as carrier and the central `-1` absorbed in the double cover; `q=7` control in the same pass (promoted from the mod-3 nullities discovery lead) | can convert C450's sharp negative into a Brauer-positive; changes the Phase-3 roof verdict wording either way |
+| C466 | fusion-mech | QUEUED: test the Dickson mechanism for the mod-40 law — hinge-`S4` meets `PSL` only in `A4` at visible primes 11/19, full `S4` inside `PSL_2(31)` conjugates the sheets at the fused prime — and on success record the biquadratic `Gal(Q(sqrt2,sqrt5)/Q)` framing; secondary: Arf face at 19/31, comparison of the two characteristic-31 `A5` controls (promoted from the Dickson and `(2/q)` discovery leads) | upgrades the C453 law from phenomenon to mechanism; `H4`/`q=31` gateway probe stays its pre-allocation-gated successor |
 
 The critical path is GREEN through `C444 -> C445 -> C449`; C450--C454 are closed, and **C455 is next**.
-C455--C456 are independent once their cards' frozen inputs are available. C459, C463, and C464 may
-run in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
+C455--C456 are independent once their cards' frozen inputs are available. C459, C463, C464, C465,
+and C466 may run in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated row.
 
 **Discriminator caution (from C450):** the T2 split-torus restriction test admits the
@@ -82,6 +84,8 @@ discriminator.
 - weil-roof-tasks/c462-torsor-descent.md
 - weil-roof-tasks/c463-a3-companion-torsor.md
 - weil-roof-tasks/c464-perfect-code-spans.md
+- weil-roof-tasks/c465-mod3-weil-golay-bridge.md
+- weil-roof-tasks/c466-dickson-fusion-mechanism.md
 
 Phase-2 framing and Phase-3 synthesis are not routine task context. Load
 `weil-roof-tasks/phase2-phase3-synthesis.md` only when

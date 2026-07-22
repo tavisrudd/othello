@@ -359,8 +359,26 @@
       "last": 463,
       "purpose": "Certify the A3 companion Z/2 Galois torsor over Z[i] and the cross-Coxeter matching-companion bit-carrier duality (from M-chain juice memo candidate 1)",
       "sequence": 40
+    },
+    {
+      "count": 1,
+      "first": 464,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 464,
+      "purpose": "Certify Hamming/Golay perfect-code spans of the cross-sheet QR designs (spans, weight distributions, sphere equalities)",
+      "sequence": 41
+    },
+    {
+      "count": 2,
+      "first": 465,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 466,
+      "purpose": "Weil-roof parallel rows: mod-3 Weil/Golay Brauer bridge; Dickson fusion mechanism + q=31 convergence",
+      "sequence": 42
     }
   ],
-  "next_id": 464,
+  "next_id": 467,
   "schema": "codex-task-id-allocations-v1"
 }
