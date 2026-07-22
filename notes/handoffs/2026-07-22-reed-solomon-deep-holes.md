@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C483 complete; C484--C485 allocated.  C478's coherence upgrade identifies each
+**Status:** C475--C484 complete; C485 allocated.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -12,8 +12,10 @@ and one for two/three projections, but corrects the four-view target: pure recon
 separable quadratic cover, not a rational inverse, even after diagonal `S6`.  C483 identifies its
 deck swap with Gale association, proves that the reduced branch divisor is exactly the conic locus,
 and expresses fixed-child recovery as an exact incidence cut explaining the frozen `3/3/2/3`
-thresholds.  C484 now owns Frobenius-equivariant descent and the q=8 orientation.  Modular machinery
-remains separate behind the matching, Gram, and Sylow gates.
+thresholds.  C484 globalizes Frobenius-equivariant descent: the Gale sheet has an exact
+Kummer/Artin--Schreier class, connected gauges add no obstruction, finite diagonal stabilizers have
+an image criterion, and q=8's `C3` is a lossy colour coequalizer rather than Hilbert--90 failure.
+Modular machinery remains separate behind the matching, Gram, and Sylow gates.
 
 ## Goal
 
@@ -166,12 +168,9 @@ Locally `tau=L1/L0^2` is Gale-anti-invariant in odd characteristic, while charac
 the explicit Artin--Schreier coordinate `eta=L0/(L0+L0#)` with `eta#=eta+1`; q=8's `C3` colour
 orientation is a distinct descent class.  On frame overlaps, odd `tau` coordinates differ by
 invariant units and characteristic-two `eta` coordinates by invariant translations, so C484 owns
-the resulting explicit Cech/Frobenius cocycle rather than discovery of the local cover.
-
-C484's remaining work is globalization: coefficientwise Frobenius equivariance, the two-sheet
-`C2` cocycle with Kummer/Artin--Schreier effectivity, finite diagonal-stabilizer descent, and exact
-extraction of q=8's colour cycle `3+3` from the frozen replay.  The `C3` collapse is information
-loss, not a Hilbert--90 obstruction.  C485 has one genuine unresolved gate: current results prove
+the resulting explicit Cech/Frobenius cocycle rather than discovery of the local cover.  C484
+completes that globalization and proves the `C3` collapse is information loss, not a Hilbert--90
+obstruction.  C485 has one genuine unresolved gate: current results prove
 at-most-three child-relative recovery only on the four frozen C478 fibres.  An all-field statement
 needs a new uniform base-size theorem; otherwise its clause must remain conditional on injectivity
 of `Sigma_T`.
@@ -187,15 +186,33 @@ dimension pre-allocation gate.
 
 Task card: `notes/reed-solomon-tasks/c483-reconstruction-discriminant.md`.
 
-## Current frontier — C484--C485
+## Closed base — C484
+
+[`C484 semilinear descent`](../2026-07-22-c484-coherent-semilinear-descent.md) proves that every
+C482 gauge, compatibility row, residual cubic, Gale transform, discriminant divisor, and
+complete-child incidence cut commutes with coefficientwise Frobenius.  Off the conic branch, the
+Gale pair has one exact `C2` descent class: locally a chart-independent Kummer square class in odd
+characteristic and a chart-independent Artin--Schreier trace bit in characteristic two.  Connected
+finite-field gauges contribute no further obstruction.  For a diagonal target stabilizer `H`, an
+unlabelled sheet is effective exactly when the Frobenius sheet bit lies in the image of
+`H -> C2`; a surjective image identifies the sheets and sacrifices uniqueness.  The frozen q=8
+extractor computes colour Frobenius as `(0 4 1)(2 5 3)`, proving that the `3+3` collapse is a free
+order-three colour quotient, not the Gale class or a Hilbert--90 obstruction.  Its frozen
+two-centre residual pairing commutes with this `C3`, giving a regular `C6` action without asserting
+that the child-relative `C2` is Gale.  Over `F_(q^m)`, the genuine Gale descent bit multiplies by
+`m`, so odd extensions preserve it and even extensions split it.  The q=8 one-centre, two-centre,
+colour-orbit, and three-centre partitions are exactly the `C6/C3/C2/1` subgroup-quotient diamond.
+
+Task card: `notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md`.
+
+## Current frontier — C485
 
 C481 supplies the projection-sextic/coherent-atlas dictionary for an arbitrary six-arc in every
 characteristic, C482 supplies the exact quadratic four-view reconstruction plus the
-two/three-centre residual families, and C483 identifies Gale association, the conic branch divisor,
-and the complete-child incidence cut.  C484 now proves Frobenius-equivariant descent and resolves
-the q=8 `C3` orientation structurally; C485
-assembles the all-field redundancy-three degree-two/child-selected reconstruction theorem and C475
-GRS specialization.
+two/three-centre residual families, C483 identifies Gale association, the conic branch divisor,
+and the complete-child incidence cut, and C484 proves the exact semilinear descent criterion.
+C485 now assembles the all-field redundancy-three degree-two/child-selected reconstruction theorem
+and C475 GRS specialization.
 
 The exact [`C482 generic-degree preflight`](../2026-07-22-c482-generic-degree-preflight.md) gives
 Jacobian ranks `6,9,12`; C482 explains them structurally and shows why square dimension at four
@@ -218,12 +235,11 @@ Task cards: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md` thro
 | C481 | projection-sextic and coherent-atlas theorem | complete | labelled `M_0,6` with explicit inverses and exact diagonal/Frobenius actions | intrinsic coherent data model |
 | C482 | multi-centre gauge synchronization | complete | residual dimensions `2/1`; explicit four-view separable quadratic cover; rational inverse disproved | exact generic ambiguity |
 | C483 | reconstruction discriminant and exceptional fibres | complete | Gale association; conic branch divisor; cubic residual-family table; exact complete-child cut | global theorem domain |
-| C484 | coherent semilinear descent | C481--C483 | equivariant inverse/descent criterion; q=8 `C3` explained | all-field semilinear reconstruction |
+| C484 | coherent semilinear descent | complete | Kummer/Artin--Schreier sheet class; finite-stabilizer criterion; q=8 colour Frobenius is `3+3` | all-field semilinear reconstruction |
 | C485 | all-field redundancy-three synthesis | C481--C484 | separate pure four-projection degree-two and child-relative sheet-selected clauses, with algorithm, exceptions, descent, and GRS specialization | programme-level reconstruction theorem |
 
 Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
-`notes/reed-solomon-tasks/c483-reconstruction-discriminant.md`.  Open cards:
-`notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md` and
+`notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md`.  Open card:
 `notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
 
 ## Unallocated level-ups
@@ -259,4 +275,4 @@ history.
 
 ## Next command
 
-`go C484`
+`go C485`

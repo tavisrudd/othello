@@ -146,7 +146,6 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C484 `[reed-solomon]` [QUEUED; after C481--C483]** — prove coherent semilinear descent, keeping Frobenius equivariant on atlas colours and deciding whether q=8's exact `C3` orientation is a structural Hilbert--90 class → `notes/2026-07-22-c484-coherent-semilinear-descent.md`.
 - **C485 `[reed-solomon]` [QUEUED; after C481--C484]** — synthesize separate all-field pure four-projection degree-two recovery and child-relative sheet-selected/at-most-three-fibre reconstruction clauses, with explicit discriminant, classified exceptions, semilinear descent, canonical algorithm, and the C475 GRS specialization → `notes/2026-07-22-c485-all-field-reconstruction-synthesis.md`.
 
 ### `relconic`

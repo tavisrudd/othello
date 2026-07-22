@@ -2,6 +2,8 @@
 
 **Lane:** `reed-solomon`
 
+**Status:** complete.  Report: `notes/2026-07-22-c484-coherent-semilinear-descent.md`.
+
 ## Entry gate
 
 C481 fixes the Galois-equivariant colour action; C482--C483 provide the quadratic reconstruction
@@ -31,6 +33,10 @@ instance of a general Hilbert--90 cocycle or only a finite stabilizer effect.
 An all-finite-field semilinear theorem with an explicit cocycle/descent criterion and exact q=8
 specialization.  If no nontrivial Hilbert--90 obstruction survives, prove that negative cleanly.
 Report: `notes/2026-07-22-c484-coherent-semilinear-descent.md`.
+
+Acceptance passed: the Gale sheet has the exact global Kummer/Artin--Schreier class, connected
+gauges have no surviving finite-field obstruction, diagonal stabilizers obey an explicit image
+criterion, and frozen q=8 colour Frobenius acts as two free three-cycles.
 
 ## Boundaries
 
