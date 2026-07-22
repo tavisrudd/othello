@@ -8,6 +8,11 @@ intact and weakens only the roof conjecture.
 - C406 matching-module bundle and Gate-1 scout
 - C460 Frégier-cloud bundle as a secondary, non-gating control
 - C399 frozen conic/group conventions
+- X-chain juice memo `../2026-07-21-weil-roof-juice-x-chain.md`, hypotheses only, two candidates to
+  settle while testing the outer exchange: D1 (the cross-sheet incidence is the module of the one
+  66-edge shared-edge graph, identical to C460's overlap-5 graph) and B's deferred link (exhibit a
+  det-nonsquare `g` in `PGL_2(11)` realizing the sheet swap and matching the shared-edge endpoint
+  swap, using C445's certified `Rz` boundary as the comparison convention; recompute, do not cite)
 
 ## Task and acceptance
 

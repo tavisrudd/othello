@@ -50,10 +50,11 @@ selected card names it as a load-bearing input.
 | C457 | T10 | M2 gate passed; schedule after C444 | quaternion-order structural upgrade |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
 | C462 | M3-torsor | QUEUED: certify the four-companion `Z/4` Galois torsor and its descent obstruction (exploratory memo confirmed sigma 4-cycle, prime equivariance, invariant discrepancy) | candidate base-changed replacement for the cut tensor clause and framing input to paper-2 gluing; C445 finite theorem is independent of it |
+| C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |
 
 Critical path has advanced through `C444 -> C445`; **C449 is next**. C450--C456 are independent
-once their cards' frozen inputs are available. C457 consumes C444. C459 and C462 may run in
-parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
+once their cards' frozen inputs are available. C457 consumes C444. C459, C462, and C463 may run
+in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated battery row.
 
 ## Task routing
@@ -71,6 +72,7 @@ allocated battery row.
 - [`c457-t10-quaternion-reduction.md`](weil-roof-tasks/c457-t10-quaternion-reduction.md)
 - [`c459-q-forms.md`](weil-roof-tasks/c459-q-forms.md)
 - [`c462-torsor-descent.md`](weil-roof-tasks/c462-torsor-descent.md)
+- [`c463-a3-companion-torsor.md`](weil-roof-tasks/c463-a3-companion-torsor.md)
 
 Phase-2 framing and Phase-3 synthesis are not routine task context. Load
 [`weil-roof-tasks/phase2-phase3-synthesis.md`](weil-roof-tasks/phase2-phase3-synthesis.md) only when
