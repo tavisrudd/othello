@@ -241,3 +241,26 @@ sha256sum -c notes/2026-07-21-c468-klein-zeta-good-primes.sha256
 Trusted boundary: stable `rustc`, Python 3, exact integer and finite-field arithmetic, and the
 standard cohomological trace formula/weight-three functional equation.  The computation makes no
 novelty or priority claim and no conductor, Swan, Neron-model, H4, or continuation claim.
+
+## Mystery ledger
+
+1. **Global CM-times-`C5` correspondence — locally settled, globally open here.** The exact
+   quadratic-plus-octic norm decomposition proves the local carrier at 31, 41, and 61. It does not
+   construct a global algebraic projector or correspondence realizing `H^3(1)` as one CM
+   two-space with all five `C5` characters. Settling that requires a literature audit and an
+   explicit motivic/descent argument, neither of which is part of C468.
+2. **Why the same `Q(sqrt(-11))` governs live reduction at 31 and total collapse at 11 — open and
+   gated.** The good-prime Gauss calculation and the bad-prime singular calculation establish both
+   endpoints, but their monodromy bridge is precisely the unallocated conductor/Swan problem.
+3. **Supersingular structure at 41 and 61 — Newton level settled, finer structure open.** The
+   Newton polygon and p-rank zero are exact. Superspeciality and the `a`-number require crystalline
+   or Hasse--Witt data not present in this certificate.
+4. **A simultaneous fusion/CM detector — arithmetically settled, geometrically open.** Fusion is
+   `(2/p)` and CM split/inert type is `(p/11)`. On the 80 golden-split reduced classes modulo 440,
+   the four joint cells (fused/visible times split/inert) contain exactly 20 classes each. Thus the
+   combined arithmetic classifier is exact and the signals are independent. No single geometric
+   roof invariant realizing both characters is proved; the Dickson/fusion mechanism remains C466.
+
+The conspicuous integers at 31 are not open mysteries: `7775` is the fifth CM power sum for trace
+`-5`, `2217=3*739` is its conjugate-difference coefficient, and multiplication by `31^5` gives the
+middle Frobenius coefficient.

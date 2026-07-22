@@ -21,6 +21,19 @@
     "golden_and_gauss_fields_meet": true,
     "sharp_instance": "at p=31 the splitting field is Q(zeta_5,sqrt(-11)), and the exact order-11 Gauss-product calculation gives the nonzero fifth trace"
   },
+  "joint_mod_440_classifier": {
+    "cell_counts": {
+      "fused_cm_inert": 20,
+      "fused_cm_split": 20,
+      "visible_cm_inert": 20,
+      "visible_cm_split": 20
+    },
+    "cm_character": "(p/11): +1=split/ordinary candidate, -1=inert/supersingular candidate",
+    "conditional_density_each_cell": "1/4",
+    "domain": "the 80 reduced residue classes modulo 440 with (5/p)=+1",
+    "fusion_character": "(2/p): +1=fused, -1=visible",
+    "geometric_common_carrier_proved": false
+  },
   "primes": [
     {
       "all_extension_trace_recurrence": {

@@ -1,6 +1,6 @@
-# byte-counts: report=10431 json=12226 generator=8126 low_checks=6156 trace31k5=4442
-b7540b1317db7e3bef5faabd28d01efa54febb92227c38ee6258830ccb85fff4  notes/2026-07-21-c468-klein-zeta-good-primes.md
-01d8841491d80932b610ca64b516c0e4435e5d97d5ec013e002a4d717023ad4c  notes/2026-07-21-c468-klein-zeta-good-primes.json
-3c62bb80990655974bdf9a5a15230edd1c22536147212f2b985e1c1971831825  notes/2026-07-21-c468-klein-zeta-good-primes-scripts/generate.py
+# byte-counts: report=12163 json=12716 generator=9114 low_checks=6156 trace31k5=4442
+3a768f01b5be0451e810c441e1f369f152b73992fd5cb8b0ede43b207d1742db  notes/2026-07-21-c468-klein-zeta-good-primes.md
+0dac0fa2e300d82d8bfe4222e8460e67effba8a136298a9ac2823ed8bde53e21  notes/2026-07-21-c468-klein-zeta-good-primes.json
+a960abd40a98b1911002b9dcbbd442b49c4ce6a5949ca66a214defd68fa5e9ff  notes/2026-07-21-c468-klein-zeta-good-primes-scripts/generate.py
 1b2bfb76d9ef7312ff9e7665beb3efae859295bf0cf8eecf1a4e6d5588c54e29  notes/2026-07-21-c468-klein-zeta-good-primes-scripts/low_checks.rs
 c8e3269521de6556330fd71940d630969a2faa39463ba273fce348126220dd0b  notes/2026-07-21-c468-klein-zeta-good-primes-scripts/trace31k5.rs

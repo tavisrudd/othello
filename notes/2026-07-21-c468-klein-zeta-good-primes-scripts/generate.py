@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import math
 import subprocess
 import tempfile
 from pathlib import Path
@@ -150,6 +151,16 @@ def certificate():
                 "eigenvalues_description": "p times an elliptic Frobenius eigenvalue times zeta_5^j (j=0..4)",
             },
         })
+    joint = {"fused_cm_split": 0, "fused_cm_inert": 0, "visible_cm_split": 0, "visible_cm_inert": 0}
+    squares11 = {1, 3, 4, 5, 9}
+    for residue in range(1, 440):
+        if math.gcd(residue, 440) != 1 or residue % 5 not in {1, 4}:
+            continue
+        fusion = "fused" if residue % 8 in {1, 7} else "visible"
+        cm = "cm_split" if residue % 11 in squares11 else "cm_inert"
+        joint[f"{fusion}_{cm}"] += 1
+    assert joint == {"fused_cm_split": 20, "fused_cm_inert": 20, "visible_cm_split": 20, "visible_cm_inert": 20}
+
     return {
         "schema": "othello.c468.klein_zeta_good_primes.v1",
         "equation": "x0^2*x1+x1^2*x2+x2^2*x3+x3^2*x4+x4^2*x0",
@@ -166,6 +177,14 @@ def certificate():
             "golden_and_gauss_fields_meet": True,
             "sharp_instance": "at p=31 the splitting field is Q(zeta_5,sqrt(-11)), and the exact order-11 Gauss-product calculation gives the nonzero fifth trace",
             "fusion_verdict": "blind: p=41 (fused) and p=61 (visible) have the same inert shape, while the two fused primes p=31 and p=41 differ",
+        },
+        "joint_mod_440_classifier": {
+            "domain": "the 80 reduced residue classes modulo 440 with (5/p)=+1",
+            "fusion_character": "(2/p): +1=fused, -1=visible",
+            "cm_character": "(p/11): +1=split/ordinary candidate, -1=inert/supersingular candidate",
+            "cell_counts": joint,
+            "conditional_density_each_cell": "1/4",
+            "geometric_common_carrier_proved": False,
         },
     }
 
