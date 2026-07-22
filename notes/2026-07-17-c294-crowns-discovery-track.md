@@ -1047,7 +1047,13 @@ survives of roof (c): not a module isomorphism, but Galois descent implemented b
 operators. Question for Phase 3: can the C449/C462 `C4` (not just its golden `C2` quotient) be
 implemented by operators in the same certified family?
 **Evidence:** REASONED composition of two CHECKED certificates (C455, C467); no new computation.
-**Status:** open lead; unallocated — Phase-3 synthesis wording owns the composite sentence
+**Status:** open lead; unallocated — Phase-3 synthesis wording owns the composite sentence.
+Strengthened 2026-07-21 (commit e6eebbc5, C467 second-order upgrade): the complete fixed-party
+pencil classification gives exactly three LC classes `{2,6} / {3,4,7,8} / {10}` with lowest
+separating labeled degree six; the golden roots `4,8` share a block (the certified equivalence)
+while the off-golden Galois pair `2/10` splits across blocks — so Fourier-implemented Galois
+conjugation is strictly a golden-locus phenomenon, the converse face the composite reading
+predicted from `H_(1-t) D H_t^T = diag(0, 2(t^2-t-1), 0)`
 
 ### 2026-07-21 — caution: the code characteristic is a second, undeclared 7-vs-11 axis
 
