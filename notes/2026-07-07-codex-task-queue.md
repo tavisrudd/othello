@@ -144,7 +144,6 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C477 `[reed-solomon]` [QUEUED]** — freeze C476's first colliding standard-GRS support, determine its complete atlas fibre and stabilizer action, and prove an intrinsic minimal discriminator or a sharp obstruction; close immediately at an unmet collision gate → `notes/2026-07-22-c477-first-atlas-collision-fibre.md`.
 - **C478 `[reed-solomon]` [QUEUED; independent of C476 collision]** — evaluate the proved atlas on the four frozen C398 non-GRS classes and the fixed `A3/B3/H3` conic-phase controls at `q=5,7,11`, separating ordinary orbit recovery from Gram/Sylow modular-carrier gates without opening a new field census → `notes/2026-07-22-c478-exceptional-family-controls.md`.
 
 ### `relconic`

@@ -1,0 +1,657 @@
+{
+  "collision_fibre": [
+    {
+      "extension_and_continuation_profile": {
+        "conflict_edge_count": 40,
+        "continuation_components": [
+          {
+            "degree_multiset": [
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "size": 5
+          },
+          {
+            "degree_multiset": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "size": 5
+          },
+          {
+            "degree_multiset": [
+              0
+            ],
+            "size": 1
+          }
+        ],
+        "continuation_degree_multiset": [
+          0,
+          2,
+          2,
+          2,
+          2,
+          2,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "continuation_edge_count": 15,
+        "quadratic_evaluation_rank_on_continuations": 6,
+        "vertex_count": 11,
+        "vertices": [
+          [
+            1,
+            6,
+            3
+          ],
+          [
+            1,
+            7,
+            0
+          ],
+          [
+            1,
+            7,
+            5
+          ],
+          [
+            1,
+            8,
+            4
+          ],
+          [
+            1,
+            8,
+            6
+          ],
+          [
+            1,
+            8,
+            9
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            9,
+            10
+          ],
+          [
+            1,
+            10,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            10
+          ]
+        ]
+      },
+      "orbit_size": 2,
+      "quadratic_evaluation_rank_on_extended_arc": 5,
+      "radical_orbit": [
+        5,
+        10
+      ],
+      "radical_point_stabilizer_order": 2,
+      "raw_atlas": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "representative_radical": 5,
+      "syndrome_representative": [
+        1,
+        5,
+        3
+      ]
+    },
+    {
+      "extension_and_continuation_profile": {
+        "conflict_edge_count": 11,
+        "continuation_components": [
+          {
+            "degree_multiset": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "size": 5
+          },
+          {
+            "degree_multiset": [
+              0
+            ],
+            "size": 1
+          },
+          {
+            "degree_multiset": [
+              0
+            ],
+            "size": 1
+          }
+        ],
+        "continuation_degree_multiset": [
+          0,
+          0,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "continuation_edge_count": 10,
+        "quadratic_evaluation_rank_on_continuations": 6,
+        "vertex_count": 7,
+        "vertices": [
+          [
+            1,
+            5,
+            3
+          ],
+          [
+            1,
+            7,
+            5
+          ],
+          [
+            1,
+            8,
+            9
+          ],
+          [
+            1,
+            9,
+            1
+          ],
+          [
+            1,
+            9,
+            4
+          ],
+          [
+            1,
+            10,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      },
+      "orbit_size": 4,
+      "quadratic_evaluation_rank_on_extended_arc": 5,
+      "radical_orbit": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "radical_point_stabilizer_order": 1,
+      "raw_atlas": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "representative_radical": 6,
+      "syndrome_representative": [
+        1,
+        6,
+        3
+      ]
+    }
+  ],
+  "complete_raw_rank_one_atlas_fibre": {
+    "atlas_coordinate_count": 30,
+    "common_atlas": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "distinct_atlas_count": 1,
+    "pairwise_atlas_equality_count": 15,
+    "radicals": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "control_verdicts": {
+    "continuation_graph_profile_separates": true,
+    "evaluation_rank_separates": false,
+    "extension_conflict_profile_separates": true,
+    "ramification_bit_separates": true
+  },
+  "field": {
+    "infinity": 11,
+    "model": "prime field integers modulo 11",
+    "q": 11
+  },
+  "schema": "c477-first-atlas-collision-fibre-v1",
+  "stabilizer": {
+    "abstract_structure": "Klein four",
+    "complement_orbits": [
+      [
+        5,
+        10
+      ],
+      [
+        6,
+        7,
+        8,
+        9
+      ]
+    ],
+    "elements": [
+      {
+        "cycles": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ],
+          [
+            9
+          ],
+          [
+            10
+          ],
+          [
+            11
+          ]
+        ],
+        "fixed_polynomial_discriminant": 0,
+        "fixed_polynomial_discriminant_class": "zero",
+        "matrix": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "permutation": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "rational_fixed_points": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "cycles": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            11
+          ]
+        ],
+        "fixed_polynomial_discriminant": 4,
+        "fixed_polynomial_discriminant_class": "square",
+        "matrix": [
+          1,
+          7,
+          0,
+          10
+        ],
+        "permutation": [
+          4,
+          3,
+          2,
+          1,
+          0,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          11
+        ],
+        "rational_fixed_points": [
+          2,
+          11
+        ]
+      },
+      {
+        "cycles": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            5
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            10
+          ]
+        ],
+        "fixed_polynomial_discriminant": 9,
+        "fixed_polynomial_discriminant_class": "square",
+        "matrix": [
+          1,
+          8,
+          6,
+          10
+        ],
+        "permutation": [
+          3,
+          4,
+          11,
+          0,
+          1,
+          5,
+          7,
+          6,
+          9,
+          8,
+          10,
+          2
+        ],
+        "rational_fixed_points": [
+          5,
+          10
+        ]
+      },
+      {
+        "cycles": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            11
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        "fixed_polynomial_discriminant": 2,
+        "fixed_polynomial_discriminant_class": "nonsquare",
+        "matrix": [
+          1,
+          10,
+          6,
+          10
+        ],
+        "permutation": [
+          1,
+          0,
+          11,
+          4,
+          3,
+          10,
+          8,
+          9,
+          6,
+          7,
+          5,
+          2
+        ],
+        "rational_fixed_points": []
+      }
+    ],
+    "order": 4,
+    "quotient_coordinate": {
+      "formula": "t*(4-t)*(1-t)*(3-t)/(1+5*t)^2",
+      "rational_fibres": [
+        {
+          "points": [
+            0,
+            1,
+            3,
+            4
+          ],
+          "value": 0
+        },
+        {
+          "points": [
+            2,
+            11
+          ],
+          "value": 11
+        },
+        {
+          "points": [
+            5,
+            10
+          ],
+          "value": 3
+        },
+        {
+          "points": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "value": 10
+        }
+      ]
+    },
+    "support_orbits": [
+      [
+        0,
+        1,
+        3,
+        4
+      ],
+      [
+        2,
+        11
+      ]
+    ]
+  },
+  "support": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    11
+  ],
+  "task": "C477",
+  "upstream_frozen_input": {
+    "bytes": 65313,
+    "path": "notes/2026-07-22-c476-standard-grs-atlas-pilot.json",
+    "sha256": "21a938bae4175555b95cac48df16708ef3ff6d6b089b5ce7c18b94bcf04a420b"
+  }
+}

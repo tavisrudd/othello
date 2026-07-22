@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C476 complete; C477 and C478 queued.  C476 found the first raw-atlas collision at
-the first canonical q=11 support and proved that C475's radical marker resolves its two rank-one
-syndrome orbits.
+**Status:** C475--C477 complete; C478 queued.  C477 proved that the first raw-atlas collision is the
+branch-versus-ordinary split of an intrinsic Klein quotient, with a sharp stabilizer bit and exact
+continuation graphs `K5 union C5 union K1` versus `K5 union 2 K1`.
 
 ## Goal
 
@@ -28,7 +28,7 @@ C398 classification + certificate
   -> C474 decorated-fibre theorem + replay
        -> C475 coefficient atlas for standard GRS parents (complete)
             -> C476 bounded standard-GRS atlas pilot (complete)
-                 -> C477 first q=11 collision fibre
+                 -> C477 first q=11 collision fibre (complete)
             -> C478 frozen exceptional controls
                  -> only after a collision: modular/descent discriminators
 ```
@@ -84,19 +84,24 @@ set of the unique stabilizer involution whose fixed points both avoid `S`.  The
 quotient: the two-point collision orbit is a ramified fibre and the four-point orbit is ordinary,
 so nontrivial syndrome stabilizer is a canonical one-bit discriminator.
 
-## Current frontier — C477
+## Closed base — C477
 
-Freeze only C476's support and collision fibre.  Reconstruct the two orbits independently, record
-the complete stabilizer/fixed-point geometry, and test the card's discriminators in order:
-evaluation rank, extension-conflict, then continuation graph.  C475's radical orbit and C476's
-unique-external-fixed-pair description are already exact candidate answers.  The leading cheap
-candidate is now the stabilizer/ramification bit: order two on `{5,10}`, trivial on
-`{6,7,8,9}`.  C477 must derive that distinction intrinsically from the unlabelled support/fibre,
-then use the card's prescribed discriminators as controls or prove the smallest successful one
-sharp.  Do not open another support or field and do not invoke modular/Picard or higher-order-MDS
-language without passing the card's explicit gate.
+[`C477 first collision theorem`](../2026-07-22-c477-first-atlas-collision-fibre.md) independently
+reconstructs the full Klein action and proves that nontrivial radical stabilizer is the sharp
+cardinality-minimal intrinsic discriminator.  Quadratic evaluation rank is `5` on both extended
+arcs, but the first extension-conflict statistic separates: legal continuation counts are `11`
+and `7`.  The exact continuation graphs are `K5 union C5 union K1` on the external branch orbit and
+`K5 union 2 K1` on the ordinary orbit.  The atomic certificate and structurally independent replay
+cover all finite claims.  No balanced edge monomial can refine the collision.
 
-Task card: `notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`.
+## Current frontier — C478
+
+Evaluate the already proved atlas on the four frozen C398 non-GRS classes and the fixed `A3/B3/H3`
+conic-phase controls at `q=5,7,11`.  Separate ordinary orbit recovery from the Gram and Sylow
+modular-carrier gates, without reopening C477's support, enlarging the field census, or importing
+modular language before the task card's explicit gate.
+
+Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 
 ## Execution ladder
 
@@ -104,7 +109,7 @@ Task card: `notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`.
 |---|---|---|---|---|
 | C475 | Veronese factorization, torus quotient, and semilinear descent | complete | four-cycles generate; rank two reconstructs; rank one needs its radical | finite atlas is well-defined |
 | C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | complete | first collision is the q=11 rank-one `2+4` radical split | honest exceptional mechanism |
-| C477 | intrinsic theorem for C476's first collision | gate passed | full fibre/stabilizer theorem plus minimal discriminator or sharp obstruction | candidate discriminant geometry |
+| C477 | intrinsic theorem for C476's first collision | complete | Klein branch split, sharp stabilizer bit, and exact continuation graphs | candidate discriminant geometry |
 | C478 | C398 and `A3/B3/H3` exceptional controls | C475 | exact comparison of orbit recovery, Gram rank, and Sylow gate on the frozen cases | decision on whether modular machinery belongs in this lane |
 
 Cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`,
@@ -149,4 +154,4 @@ history.
 
 ## Next command
 
-`go C477`
+`go C478`
