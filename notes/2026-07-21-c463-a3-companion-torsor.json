@@ -1,0 +1,517 @@
+{
+  "A3": {
+    "companion_count": 2,
+    "companion_orbit_size": 4,
+    "companions": [
+      {
+        "completes_fixed_matching_to_one_factorization": true,
+        "id": 0,
+        "matchings": [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              "inf"
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              "inf"
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              "inf"
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              "inf"
+            ]
+          ]
+        ]
+      },
+      {
+        "completes_fixed_matching_to_one_factorization": true,
+        "id": 1,
+        "matchings": [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              "inf"
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              4,
+              "inf"
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              "inf"
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              "inf"
+            ]
+          ]
+        ]
+      }
+    ],
+    "field": "F_5",
+    "fixed_matching": [
+      [
+        0,
+        "inf"
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "fixed_matching_is_unique": true,
+    "fixed_matching_orbit_count": 1,
+    "galois_action": {
+      "companion_permutation": [
+        1,
+        0
+      ],
+      "fixed_companions": 0,
+      "generator": "i -> -i",
+      "vertex_permutation": [
+        {
+          "from": 0,
+          "to": 0
+        },
+        {
+          "from": 1,
+          "to": 1
+        },
+        {
+          "from": 2,
+          "to": 3
+        },
+        {
+          "from": 3,
+          "to": 2
+        },
+        {
+          "from": 4,
+          "to": 4
+        },
+        {
+          "from": "inf",
+          "to": "inf"
+        }
+      ]
+    },
+    "matching_orbit_count": 4,
+    "matching_orbit_size_census": {
+      "1": 1,
+      "4": 2,
+      "6": 1
+    },
+    "normalizer_upgrade": {
+      "equals_full_abstract_antipodal_matching_stabilizer": true,
+      "galois_swap_is_outside_projective_S4": true,
+      "generated_group_order": 48,
+      "interpretation": "the two companion one-factorizations are exchanged by the missing index-two symmetry",
+      "projective_S4_index": 2
+    },
+    "perfect_matching_count": 15,
+    "prime_reduction_table": [
+      {
+        "generic_companion": 0,
+        "i_mod_5": 2,
+        "preferred_for_canonical_companion_0": true,
+        "prime": "(2-i)",
+        "reduced_companion": 0
+      },
+      {
+        "generic_companion": 0,
+        "i_mod_5": 3,
+        "preferred_for_canonical_companion_0": false,
+        "prime": "(2+i)",
+        "reduced_companion": 1
+      },
+      {
+        "generic_companion": 1,
+        "i_mod_5": 2,
+        "preferred_for_canonical_companion_0": false,
+        "prime": "(2-i)",
+        "reduced_companion": 1
+      },
+      {
+        "generic_companion": 1,
+        "i_mod_5": 3,
+        "preferred_for_canonical_companion_0": true,
+        "prime": "(2+i)",
+        "reduced_companion": 0
+      }
+    ],
+    "projective_group_order": 24,
+    "torsor": {
+      "base_ring": "Z[i]",
+      "free_and_transitive": true,
+      "galois_fixed_member_exists": false,
+      "good_split_prime": 5,
+      "group": "Z/2",
+      "unordered_family_descends": true
+    }
+  },
+  "B3": {
+    "companion_count": 1,
+    "companion_orbit_size": 6,
+    "companions": [
+      {
+        "completes_fixed_matching_to_one_factorization": true,
+        "id": 0,
+        "matchings": [
+          [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              "inf"
+            ],
+            [
+              4,
+              6
+            ]
+          ],
+          [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              6,
+              "inf"
+            ]
+          ],
+          [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              "inf"
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              6
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              5,
+              "inf"
+            ]
+          ],
+          [
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              4,
+              "inf"
+            ]
+          ],
+          [
+            [
+              0,
+              6
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              "inf"
+            ],
+            [
+              3,
+              5
+            ]
+          ]
+        ]
+      }
+    ],
+    "field": "F_7",
+    "fixed_matching": [
+      [
+        0,
+        "inf"
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "fixed_matching_is_unique": true,
+    "fixed_matching_orbit_count": 1,
+    "galois_action": {
+      "companion_permutation": [
+        0
+      ],
+      "fixed_companions": 1,
+      "generator": "omega -> omega^2",
+      "vertex_permutation": [
+        {
+          "from": 0,
+          "to": 0
+        },
+        {
+          "from": 1,
+          "to": 2
+        },
+        {
+          "from": 2,
+          "to": 1
+        },
+        {
+          "from": 3,
+          "to": 6
+        },
+        {
+          "from": 4,
+          "to": 4
+        },
+        {
+          "from": 5,
+          "to": 5
+        },
+        {
+          "from": 6,
+          "to": 3
+        },
+        {
+          "from": "inf",
+          "to": "inf"
+        }
+      ]
+    },
+    "matching_orbit_count": 16,
+    "matching_orbit_size_census": {
+      "1": 1,
+      "12": 5,
+      "3": 4,
+      "4": 2,
+      "6": 4
+    },
+    "perfect_matching_count": 105,
+    "projective_group_order": 24,
+    "torsor": {
+      "descends": true,
+      "galois_fixed": true,
+      "group": "trivial"
+    }
+  },
+  "H3_hash_reference": {
+    "c443_certificate_sha256": "39c0bed812099469f9daf2fbec85b187e3bb3de8b89f2dd53d40ececaf3c7a4a",
+    "c462_certificate_sha256": "7e68d97b177530d0ad9dc9253fe97abe4068869bf40bf45b9739a752a81cbb9a",
+    "companion_count": 4,
+    "companion_orbit_size": 10,
+    "companion_permutation": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "copied_by_hash_reference_only": true,
+    "fixed_matching_count": 1,
+    "galois_group": "Z/4",
+    "point_valued_companion_section_descends": false,
+    "sigma_cycle": [
+      0,
+      2,
+      3,
+      1
+    ],
+    "sigma_square_is_kappa": true
+  },
+  "boundary": "Exact facts for the frozen H3/B3/A3 cases only; no general Coxeter-group or prime law, moment claim, secant-product claim, or manuscript consequence.",
+  "inputs": {
+    "2026-07-21-c442-antipodal-singleton-reduction.md": {
+      "bytes": 13052,
+      "sha256": "f72fe7139e18eac04d428d172784b97f47ae5855ae9f6847e52a2f5e370de496"
+    },
+    "2026-07-21-c443-commuting-with-reduction.json": {
+      "bytes": 30417,
+      "sha256": "39c0bed812099469f9daf2fbec85b187e3bb3de8b89f2dd53d40ececaf3c7a4a"
+    },
+    "2026-07-21-c443-commuting-with-reduction.md": {
+      "bytes": 6744,
+      "sha256": "d0a0bfcd9c2c5ee7148bb0327e97fefbd290fc914069132505a6c77f9a08d34c"
+    },
+    "2026-07-21-c444-silver-fusion.json": {
+      "bytes": 14331,
+      "sha256": "311dd3eba6ad7b2926cb4aa38dc240093f9611ffbcd0640d69becc7112dfa465"
+    },
+    "2026-07-21-c444-silver-fusion.md": {
+      "bytes": 9160,
+      "sha256": "5691a62626d021b6e597f1b919fcfe16055513c7c266900eed7fed2d74b132e9"
+    },
+    "2026-07-21-c444-silver-fusion.py": {
+      "bytes": 28982,
+      "sha256": "b38569788639b10af53e97324efb3a38f9bd3a80c474bb75fa63dd5f537e2f6d"
+    },
+    "2026-07-21-c462-torsor-descent.json": {
+      "bytes": 9453,
+      "sha256": "7e68d97b177530d0ad9dc9253fe97abe4068869bf40bf45b9739a752a81cbb9a"
+    },
+    "2026-07-21-weil-roof-juice-m-chain.md": {
+      "bytes": 11633,
+      "sha256": "266c2e246c0080dd82437cb25a65d0e61bc68dcb6b4a0c3f3fa9bbaa80e7764f"
+    }
+  },
+  "schema": "c463-a3-companion-torsor-v1",
+  "task": "C463",
+  "three_case_summary": [
+    {
+      "antipodal_matching_behavior": "golden-prime sheet reductions",
+      "case": "H3",
+      "certified_bit_carrier": "companion family at Z/4 strength",
+      "companion_behavior": "four companions, free Z/4 action",
+      "scope": "hash-referenced from C443/C462"
+    },
+    {
+      "antipodal_matching_behavior": "two silver reductions in opposite PSL_2(7) sheets",
+      "case": "B3",
+      "certified_bit_carrier": "antipodal-matching sheet split; companion torsor trivial",
+      "companion_behavior": "one companion fixed by omega -> omega^2",
+      "scope": "C444 conventions plus C463 enumeration"
+    },
+    {
+      "antipodal_matching_behavior": "prime-independent fused matching",
+      "case": "A3",
+      "certified_bit_carrier": "companion family at Z/2 strength",
+      "companion_behavior": "two companions freely swapped by i -> -i",
+      "scope": "C444 conventions plus C463 enumeration"
+    }
+  ],
+  "verdict": "GREEN_A3_Z2_COMPANION_TORSOR_AND_THREE_CASE_BIT_CARRIER_TABLE"
+}
