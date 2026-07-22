@@ -36,6 +36,20 @@ puncture/shorten recover the six- and five-dimensional carriers.  The signed gen
 remains C472's question.  The planning document retains only these narrative consequences; the
 expanded statements and editorial ranking live in the result ledger.
 
+**Shipping revision 2026-07-22:** the shipping intent is now unambiguous.  The paper being shipped
+is the fully upgraded replacement-spine manuscript.  The C399-led protected manuscript is an
+emergency fallback only, not a submission candidate; no drafting or polish effort goes to it.  The
+master-stroke integral golden model (`2026-07-21-clebsch-master-stroke-integral-golden-model.md`)
+is adopted as the intended closing form of Paper 1: its claims 1--4 are already certified
+(C442/C444/C445/C458) and C445 is the certified closing theorem as it stands, while C479 (allocated
+2026-07-22, in flight, `crowns` lane) owns claim 5 --- the integral Galois-odd cubic --- or an
+equivalent-strength replacement.  Conditional promotion rule, per the master-stroke note's
+"Strategic consequence": if C479 returns GREEN or EQUIVALENT, the integral golden model is promoted
+to Paper 1's closing theorem and the survival/forgetting ledger hangs from that proved spine; if
+C479 returns negative, the certified C445 arithmetic-gluing close stands unchanged and Paper 1 ships
+in its current planned form.  Either way the shipping target is the upgraded paper, never the
+C399-locked fallback.
+
 The proof/evidence and Lean-readiness audit predates C465 and C469--C471:
 `2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`.  It accepts the exact finite certificates,
 separates direct finite leaves from theorem-interface and cohomological dependencies, records the
@@ -52,13 +66,15 @@ external review or an attribution to the named reader who motivated the thought 
 
 ## Executive decision
 
-The current Clebsch project has two coherent forms.  The existing C399-led manuscript remains a
-protected fallback, but the new-paper plan now uses the factorization-memory spine.  This planning
-choice does not itself edit or supersede the protected manuscript source.
+The current Clebsch project has two coherent forms.  The existing C399-led manuscript is retained
+as an emergency fallback only; the shipping manuscript is the factorization-memory spine.  This
+planning choice does not itself edit or supersede the protected manuscript source.
 
-1. **Protected paper.**  Keep the reversible q=11 Clebsch hexagon as the centre and use C399 as
-   the one portable rank-three Coxeter theorem.  This is already a strong, focused paper.
-2. **Selected new-paper spine: factorization memory.**  Replace weaker descriptive passages with
+1. **Protected paper (emergency fallback only).**  Keep the reversible q=11 Clebsch hexagon as the
+   centre and use C399 as the one portable rank-three Coxeter theorem.  This is a strong, focused
+   paper, but it is an emergency fallback only, not a submission candidate; no drafting or polish
+   effort goes to it.
+2. **Selected shipping spine: factorization memory.**  Replace weaker descriptive passages with
    the single mechanism
 
    ```text
@@ -95,10 +111,11 @@ choice does not itself edit or supersede the protected manuscript source.
    depth plane.  That source-naturality result belongs in an appendix; the non-identification is a
    scope boundary, not a second headline.
 
-The second form is now the selected mathematical target for the new paper: C411 supplied the
+The second form is now the shipping manuscript: C411 supplied the
 missing conceptual pass and C412 supplied its cleanest modular explanation.  Actual manuscript
 integration still belongs to the paper owner and must carry the remaining source-access gaps.  If
-integration is deferred, the protected first form remains independently submittable.
+integration is deferred, the protected first form is available as an emergency fallback only, not as
+a submission candidate.
 
 ## Two-paper division and the paper-1 ending (revision 2026-07-21)
 
