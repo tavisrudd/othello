@@ -109,7 +109,7 @@ that phase is explicitly selected and allocated.
   canonical JSON, checksum manifest, and independent replay or an explicit reason none exists.
   Inputs are referenced by SHA; output is deterministic and timestamp-free.
 - A novelty, priority, or absence sentence triggers
-  [`literature-audit-conventions.md`](literature-audit-conventions.md). Dossier citations are
+  literature-audit-conventions.md. Dossier citations are
   unverified until the consuming card resolves them.
 - Outputs stay under `notes/`. Manuscript, `papers/`, Lean, source-lane handoffs, and foreign
   evidence are read-only. Cross-lane consequences are offered to the owning lane.
