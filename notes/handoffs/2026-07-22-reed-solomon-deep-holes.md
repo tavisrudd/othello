@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C485 complete; the lane's allocated reconstruction programme is closed.  C478's coherence upgrade identifies each
+**Status:** C475--C485 complete; C490--C491 allocated in that order.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -18,7 +18,9 @@ an image criterion, and q=8's `C3` is a lossy colour coequalizer rather than Hil
 Modular machinery remains separate behind the matching, Gram, and Sylow gates.  C485 packages the
 all-field theorem, proves that the complete child alone recovers the unlabelled parent for `q>=16`,
 and confines the unresolved at-most-three base-size question to an exact collision-hypergraph
-problem over `q<=13`.
+problem over `q<=13`.  C490 closes that bounded problem.  C491 then attacks projective
+Reed--Solomon redundancy five, with both tasks required to extract reusable tools for the eventual
+punctured-normal-rational-curve completion programme without expanding into it.
 
 ## Goal
 
@@ -233,12 +235,18 @@ classification.
 
 Task card: `notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
 
-## Lane completion
+## Current frontier — C490 then C491
 
-The allocated C475--C485 programme is complete.  The only exposed successor is the bounded
-`q<=13` secant-decomposition/collision-hypergraph classification; it is unallocated and requires a
-new task if the lane is resumed.  Archiving this handoff and choosing another lane await the user's
-direction.
+C490 owns the exact `q<=13` fixed-child closure left by C485: alternative fifteen-secant
+decompositions, balanced-quartic collision components, and the minimum coherent base size.  It must
+return either the unconditional at-most-three theorem or a complete counterexample table.
+
+C491 follows only after C490 and a claim-specific literature audit.  It targets `PRS(q-4)`, the
+redundancy-five projective Reed--Solomon case, through the quartic normal rational curve in `PG(4)`
+and binary-quartic/apolar invariant theory.  Both tasks carry an NRC bridge ledger: prove free
+dimension-independent lemmas encountered in scope, mark low-dimensional accidents, and identify
+the exact next lemma needed for the eventual Cheng--Murray completion theorem.  The ledger is a
+tool observatory, not an allocation of arbitrary-dimensional work.
 
 ## Execution ladder
 
@@ -253,10 +261,13 @@ direction.
 | C483 | reconstruction discriminant and exceptional fibres | complete | Gale association; conic branch divisor; cubic residual-family table; exact complete-child cut | global theorem domain |
 | C484 | coherent semilinear descent | complete | Kummer/Artin--Schreier sheet class; finite-stabilizer criterion; q=8 colour Frobenius is `3+3` | all-field semilinear reconstruction |
 | C485 | all-field redundancy-three synthesis | complete | exact pure/child-relative clauses, algorithm, exceptions, descent, GRS specialization, and `q>=16` child rigidity | programme-level reconstruction theorem |
+| C490 | `q<=13` complete-child closure | C485 complete | exact minimum base size or classified exceptions; collision components and NRC bridge ledger | unconditional all-field child-relative theorem |
+| C491 | PRS redundancy-five classification | after C490 + literature audit | covering-radius gate and complete semilinear deep-hole orbit classification; NRC bridge ledger | first higher-normal-rational-curve calibration |
 
 Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
-`notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md`.  Open card:
-`notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
+`notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.  Open cards:
+`notes/reed-solomon-tasks/c490-small-field-base-size-closure.md` and
+`notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.
 
 ## Unallocated level-ups
 
@@ -264,13 +275,14 @@ Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` throug
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Arbitrary-dimension Reed--Solomon:** allocate only after a claim-specific literature audit and
-  a proved higher-symmetric-power analogue of (1); small-field success supplies no such bridge.
+- **Arbitrary-dimension Reed--Solomon:** remains unallocated.  C490/C491 may populate their NRC
+  bridge ledgers, but allocation still requires a claim-specific literature audit and a proved
+  higher-symmetric-power analogue of (1); small-field or quartic success alone supplies no bridge.
 
-**Result ceiling:** the realistic large theorem is an all-field, redundancy-three orbit
-reconstruction with an explicit discriminant and classified exceptional fibres. It would be a
-substantial invariant-theoretic deep-hole result, but not the general Reed--Solomon deep-hole
-conjecture.
+**Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction with explicit
+discriminant and classified exceptional fibres.  C490 closes its bounded residual child clause;
+C491 is the first higher-normal-rational-curve application.  Neither is the general
+Reed--Solomon deep-hole conjecture.
 
 ## Boundaries
 
@@ -291,4 +303,4 @@ history.
 
 ## Next command
 
-Lane complete; await archive and lane-selection direction.
+`go C490`
