@@ -80,6 +80,21 @@ As a completeness check on the party-permutation trap, the certificate exhausts 
 party maps. Exactly 60 extend to projective/monomial equivalences between the two ordered six-arcs;
 the displayed `pi` is one of them, while the identity party map is not.
 
+### Post-close upgrade: the 60 maps form an `A5` bitorsor
+
+The number 60 is structural, not an accidental multiplicity. The checker independently computes
+the projective party-automorphism groups of the `t=8` and `t=4` configurations. Both have order 60
+and exact element-order profile
+
+```text
+1^1, 2^15, 3^20, 5^24,
+```
+
+hence are `A5`. Postcomposition by the target `A5` and precomposition by the source `A5` each act
+freely and transitively on the 60 cross-chirality equivalences. Thus the equivalence set is an
+exact `A5`--`A5` bitorsor: an equivalence exists, but none is canonical without an additional
+marking. This upgrades “labeled advice” from loose wording to a precise torsor obstruction.
+
 ## What survives with labels
 
 The chirality is not an invariant of the unlabeled quantum state. What survives is the ordered
@@ -118,8 +133,8 @@ sha256sum -c notes/2026-07-21-c456-ame-chirality.sha256
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | 13,125 | `d29ea505dc61d92e2de36c022100a9f8301ae29647d5c545bf437615aab494dd` |
-| certificate `.json` | 8,406 | `3b280a5569366b3b4e10a63f5506b7f56176c0bf4a81e06e352891a740cb7c8e` |
+| checker `.py` | 15,136 | `34b7ba678e576dea10f790a2fb7c62920a22c5ab16b05cc1040575592578f260` |
+| certificate `.json` | 8,881 | `74fdbce454d4090cf6e6af46a50d107c55d1bfe34dbc5647d6b06164d7f93de3` |
 
 The deterministic standard-library checker pins the SHA-256 hashes of the C374, C384, and C395
 JSON inputs. Its trusted boundary is Python 3 integer arithmetic modulo 11, exact row reduction,

@@ -533,6 +533,26 @@
     ],
     "transported_support_equals_target": true
   },
+  "equivalence_bitorsor": {
+    "canonical_equivalence": false,
+    "group_type": "A5",
+    "left_target_action_is_free_transitive": true,
+    "right_source_action_is_free_transitive": true,
+    "source_automorphism_count": 60,
+    "source_element_order_profile": {
+      "1": 1,
+      "2": 15,
+      "3": 20,
+      "5": 24
+    },
+    "target_automorphism_count": 60,
+    "target_element_order_profile": {
+      "1": 1,
+      "2": 15,
+      "3": 20,
+      "5": 24
+    }
+  },
   "field_order": 11,
   "input_sha256": {
     "notes/2026-07-19-c374-clebsch-ame-equivalence.json": "b3ecefac292797375ec7849480cd003039bf6e56219f61a117e39f575898405d",

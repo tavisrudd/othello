@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import itertools
 import json
@@ -132,6 +133,27 @@ def projectivity_for_party_map(source: Matrix, target: Matrix, party_map: tuple[
     ):
         return projectivity
     return None
+
+
+def projective_party_maps(source: Matrix, target: Matrix) -> tuple[tuple[int, ...], ...]:
+    return tuple(
+        permutation
+        for permutation in itertools.permutations(range(N))
+        if projectivity_for_party_map(source, target, permutation) is not None
+    )
+
+
+def compose(left: tuple[int, ...], right: tuple[int, ...]) -> tuple[int, ...]:
+    return tuple(left[right[index]] for index in range(N))
+
+
+def permutation_order(permutation: tuple[int, ...]) -> int:
+    power = tuple(range(N))
+    for order in range(1, 61):
+        power = compose(permutation, power)
+        if power == tuple(range(N)):
+            return order
+    raise AssertionError("unexpected permutation order")
 
 
 def pencil_points(t: int) -> Matrix:
@@ -269,13 +291,20 @@ def build_certificate() -> dict[str, object]:
     if direct_mismatches or transport_mismatches:
         raise AssertionError("degree-six moment should be blind both directly and after transport")
 
-    projective_party_maps = tuple(
-        permutation
-        for permutation in itertools.permutations(range(N))
-        if projectivity_for_party_map(pencil_points(8), pencil_points(4), permutation) is not None
-    )
-    if party_map not in projective_party_maps or tuple(range(N)) in projective_party_maps:
+    equivalences = projective_party_maps(pencil_points(8), pencil_points(4))
+    source_automorphisms = projective_party_maps(pencil_points(8), pencil_points(8))
+    target_automorphisms = projective_party_maps(pencil_points(4), pencil_points(4))
+    if party_map not in equivalences or tuple(range(N)) in equivalences:
         raise AssertionError("fixed-label projective boundary failed")
+    target_orbit = {compose(automorphism, party_map) for automorphism in target_automorphisms}
+    source_orbit = {compose(party_map, automorphism) for automorphism in source_automorphisms}
+    if target_orbit != set(equivalences) or source_orbit != set(equivalences):
+        raise AssertionError("equivalence set is not the expected bitorsor")
+    source_profile = collections.Counter(permutation_order(item) for item in source_automorphisms)
+    target_profile = collections.Counter(permutation_order(item) for item in target_automorphisms)
+    expected_profile = {1: 1, 2: 15, 3: 20, 5: 24}
+    if source_profile != expected_profile or target_profile != expected_profile:
+        raise AssertionError("automorphism group does not have the A5 order profile")
 
     return {
         "schema": "c456-ame-chirality-v1",
@@ -294,8 +323,18 @@ def build_certificate() -> dict[str, object]:
             "projective_row_intertwiner": projectivity,
             "checked_codewords": len(words8),
             "transported_support_equals_target": True,
-            "projective_party_map_count": len(projective_party_maps),
-            "projective_party_maps": projective_party_maps,
+            "projective_party_map_count": len(equivalences),
+            "projective_party_maps": equivalences,
+        },
+        "equivalence_bitorsor": {
+            "source_automorphism_count": len(source_automorphisms),
+            "target_automorphism_count": len(target_automorphisms),
+            "source_element_order_profile": dict(sorted(source_profile.items())),
+            "target_element_order_profile": dict(sorted(target_profile.items())),
+            "left_target_action_is_free_transitive": True,
+            "right_source_action_is_free_transitive": True,
+            "group_type": "A5",
+            "canonical_equivalence": False,
         },
         "degree_six_lu_invariant_check": {
             "definition": "mu(E1,E2,E3)=Tr(A_E1 A_E2 A_E3), E is the omitted party pair",
