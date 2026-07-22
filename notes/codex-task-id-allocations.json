@@ -413,8 +413,17 @@
       "last": 470,
       "purpose": "exact automorphism theorem for the C469 unpunctured ternary Golay Hadamard configuration and its M11/M12 boundary",
       "sequence": 46
+    },
+    {
+      "count": 4,
+      "first": 471,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 474,
+      "purpose": "Hadamard degeneration, signed Weil lift, arithmetic orientation, and uniform Ext bridge",
+      "sequence": 47
     }
   ],
-  "next_id": 471,
+  "next_id": 475,
   "schema": "codex-task-id-allocations-v1"
 }
