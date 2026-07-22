@@ -144,6 +144,11 @@ ordering and detail.
 
 ### `reed-solomon`
 
+- **C481 `[reed-solomon]` [QUEUED]** — prove that the universal determinant atlas is exactly the moduli of the parent sextic projected from one deepest syndrome, and formalize pointwise versus diagonally coherent and Galois-equivariant quotients in every characteristic → `notes/2026-07-22-c481-projection-sextic-coherent-atlas.md`.
+- **C482 `[reed-solomon]` [QUEUED; after C481]** — derive the two/three-centre `PGL_2` gauge-compatibility equations and an explicit rational inverse reconstructing a six-arc from three coherently matched projected sextics on a stated open locus → `notes/2026-07-22-c482-three-centre-synchronization.md`.
+- **C483 `[reed-solomon]` [QUEUED; after C482]** — factor the intrinsic reconstruction discriminant, classify every two/three-centre exceptional fibre, and explain the frozen `3 / 3 / 2 / 3` coherence thresholds without a new field census → `notes/2026-07-22-c483-reconstruction-discriminant.md`.
+- **C484 `[reed-solomon]` [QUEUED; after C481--C483]** — prove coherent semilinear descent, keeping Frobenius equivariant on atlas colours and deciding whether q=8's exact `C3` orientation is a structural Hilbert--90 class → `notes/2026-07-22-c484-coherent-semilinear-descent.md`.
+- **C485 `[reed-solomon]` [QUEUED; after C481--C484]** — synthesize the all-field redundancy-three reconstruction theorem with explicit discriminant, classified exceptional fibres, semilinear descent, canonical algorithm, and the C475 GRS rank-one/rank-two specialization → `notes/2026-07-22-c485-all-field-reconstruction-synthesis.md`.
 
 ### `relconic`
 

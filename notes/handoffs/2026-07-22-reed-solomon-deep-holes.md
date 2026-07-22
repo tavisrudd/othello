@@ -4,11 +4,11 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C478 complete; no successor is allocated.  C478's coherence upgrade identifies
-each syndrome atlas with a projected sextic and proves that one diagonal support correspondence
-across at most three syndrome fibres recovers every frozen C398 parent.  The full-conic controls
-have empty deep-syndrome atlas domains, and modular machinery remains licensed only after the
-separate matching, Gram, and Sylow gates.
+**Status:** C475--C478 complete; C481--C485 allocated.  C478's coherence upgrade identifies each
+syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
+at most three syndrome fibres recovers every frozen C398 parent.  C481 now owns the all-field
+projection theorem, followed by synchronization, discriminant, descent, and reconstruction
+synthesis.  Modular machinery remains separate behind the matching, Gram, and Sylow gates.
 
 ## Goal
 
@@ -115,6 +115,20 @@ structure.
 
 Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 
+## Current frontier — C481--C485
+
+C481 proves the projection-sextic/coherent-atlas dictionary for an arbitrary six-arc in every
+characteristic.  C482 then synchronizes the independent quotient-line `PGL_2` gauges and constructs
+the rational three-centre inverse.  C483 classifies its discriminant and exceptional fibres; C484
+proves Frobenius-equivariant descent and resolves the q=8 `C3` orientation structurally; C485
+assembles the all-field redundancy-three reconstruction theorem and C475 GRS specialization.
+
+The order is strict: no finite sweep may substitute for C482's inverse or C483's intrinsic
+discriminant, and C485 may not weaken an unresolved exceptional or descent hypothesis.
+
+Task cards: `notes/reed-solomon-tasks/c481-projection-sextic-coherent-atlas.md` through
+`notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -122,21 +136,20 @@ Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 | C475 | Veronese factorization, torus quotient, and semilinear descent | complete | four-cycles generate; rank two reconstructs; rank one needs its radical | finite atlas is well-defined |
 | C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | complete | first collision is the q=11 rank-one `2+4` radical split | honest exceptional mechanism |
 | C477 | intrinsic theorem for C476's first collision | complete | Klein branch split, sharp stabilizer bit, and exact continuation graphs | candidate discriminant geometry |
-| C478 | C398 and `A3/B3/H3` exceptional controls | complete | atlas recovers syndromes, not parents; full conics have empty atlas domains; Gram/Sylow gates separate q=9 from q=11 | modular machinery is conditional downstream structure |
+| C478 | C398 and `A3/B3/H3` exceptional controls | complete | coherent Galois-equivariant atlases recover all frozen parents with thresholds `3 / 3 / 2 / 3`; Gram/Sylow still separate q=9 from q=11 | simultaneous reconstruction is the next theorem gate |
+| C481 | projection-sextic and coherent-atlas theorem | C475+C478 | all-characteristic projected-sextic moduli and exact diagonal/Frobenius actions | intrinsic coherent data model |
+| C482 | three-centre gauge synchronization | C481 | rational inverse on an explicit nondegenerate open locus | generic parent reconstruction |
+| C483 | reconstruction discriminant and exceptional fibres | C482 | intrinsic factorization and complete two/three-centre fibre table | global theorem domain |
+| C484 | coherent semilinear descent | C481--C483 | equivariant inverse/descent criterion; q=8 `C3` explained | all-field semilinear reconstruction |
+| C485 | all-field redundancy-three synthesis | C481--C484 | canonical theorem/algorithm with discriminant, exceptions, descent, and GRS specialization | programme-level reconstruction theorem |
 
-Cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`,
-`notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`, and
-`notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
+Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
+`notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.  Open cards:
+`notes/reed-solomon-tasks/c481-projection-sextic-coherent-atlas.md` through
+`notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
 
 ## Unallocated level-ups
 
-- **Simultaneous projection reconstruction:** C478 now supplies the finite gate: each syndrome
-  atlas is a projected sextic, and a coherent pair/triple recovers every frozen parent with exact
-  thresholds `3 / 3 / 2 / 3`.  A newly allocated task should prove that three generic centres
-  reconstruct a six-arc up to one diagonal `S6`, with an explicit exceptional discriminant.
-- **Semilinear tower theorem:** q=8 exposes a precise `C3` colour orientation, but allocate a
-  separate descent task only if simultaneous reconstruction promotes it from a one-case Galois
-  orbit into a structural Frobenius/Hilbert--90 class.
 - **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
@@ -168,5 +181,4 @@ history.
 
 ## Next command
 
-No successor is allocated.  After the lane-finish decision, use `go reed-solomon` or select another
-lane explicitly.
+`go C481`
