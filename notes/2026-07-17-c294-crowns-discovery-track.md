@@ -972,10 +972,10 @@ singular point is the `zeta_5`-CM point `(1, zeta, ..., zeta^4)`, a wild corank-
 point with Tjurina length exactly `p = 11` absorbing all ten vanishing cycles, and singularity
 occurs iff `p | 33 = 2^5 + 1 = 3 * 11` — the golden `C4` and the Gauss prime meet in the
 *degeneration*, not in a spectrum, and the obstruction integer is the product of the program's two
-working characteristics. Successor question (open, unallocated): the same reduction machinery
-makes the zeta computable at good primes `p = 1 mod 5`, `p` not dividing 33 — notably 31 and 41,
-the primes C466 already constructs sheets at — where quintic Jacobi sums genuinely populate `H^3`
-and the C4/Gauss-field meeting question becomes non-vacuous. Also supplies a Phase-3 framing
+working characteristics. Successor question graduated 2026-07-21 -> C468
+(`notes/weil-roof-tasks/c468-klein-zeta-good-primes.md`): exact spectra at good primes 31/41 with
+61 as visible-class control, where quintic Jacobi sums genuinely populate `H^3` and the
+C4/Gauss-field meeting question becomes non-vacuous. Also supplies a Phase-3 framing
 sentence for C454: at 11 there is no weight-3 motive to map to, so the Adler-bridge negative has a
 geometric cause, not merely a representation-theoretic one.
 

@@ -58,9 +58,10 @@ selected card names it as a load-bearing input.
 | C465 | mod3-bridge | QUEUED: decide whether the roof holds at the Brauer level — decompose the char-3 cross-matrix kernels/spans as modular `PSL_2(11)`-modules and compare against the mod-3 reduction of the Gerardin Weil pair, with the Golay span (C464) as carrier and the central `-1` absorbed in the double cover; `q=7` control in the same pass (promoted from the mod-3 nullities discovery lead) | can convert C450's sharp negative into a Brauer-positive; changes the Phase-3 roof verdict wording either way |
 | C466 | fusion-mech | QUEUED: test the Dickson mechanism for the mod-40 law — hinge-`S4` meets `PSL` only in `A4` at visible primes 11/19, full `S4` inside `PSL_2(31)` conjugates the sheets at the fused prime — and on success record the biquadratic `Gal(Q(sqrt2,sqrt5)/Q)` framing; secondary: Arf face at 19/31, comparison of the two characteristic-31 `A5` controls; tertiary: T8 Weil-normalization Gauss-sum face at a `q = 1 mod 4` split prime (promoted from the Dickson and `(2/q)` discovery leads) | upgrades the C453 law from phenomenon to mechanism; `H4`/`q=31` gateway probe stays its pre-allocation-gated successor |
 | C467 | fixed-party AME | GREEN collapse: `(F_-1)^tensor4 tensor (F_+1)^tensor2 |Psi_8>=|Psi_4>` exactly; all 1,320 anchors give precisely the ten signed-Fourier solutions; polynomially, `H_(1-t)D H_t^T=diag(0,2(t^2-t-1),0)` | labeled quantum chirality dies uniformly across odd-field golden realizations; all-degree LU invariants agree, leaving only externally ordered geometric advice |
+| C468 | zeta-good-primes | QUEUED: exact `H^3` Frobenius polynomial of the Klein cubic at good primes 31/41 (+61 as visible-class control) via the probe's transferred curve-sum and verified Delsarte machinery; headline verdict on whether `zeta_5` and a Gauss quadratic field meet in one live spectrum, plus the fused-vs-visible blindness comparison (promoted from the resolved Klein-cubic zeta lead; the probe proved bad wild reduction at 11, `Z(X/F_11)=Z(P^3)`) | first live arithmetic venue for the golden-C4/Gauss-field meeting after its vacuity at 11; conductor/Swan at 11 stays a pre-allocation-gated successor |
 
-The full Phase-1 path through C456 is closed. C459, C463, C464, C465, and C466 remain allocated;
-C459 is the next battery slot, and the others may run in parallel. Phase 3 waits for dispositions
+The full Phase-1 path through C456 is closed. C459, C463, C464, C465, C466, and C468 remain
+allocated; C459 is the next battery slot, and the others may run in parallel. Phase 3 waits for dispositions
 of every allocated row.
 
 **Discriminator caution (from C450):** the T2 split-torus restriction test admits the
@@ -88,6 +89,7 @@ discriminator.
 - weil-roof-tasks/c465-mod3-weil-golay-bridge.md
 - weil-roof-tasks/c466-dickson-fusion-mechanism.md
 - weil-roof-tasks/c467-fixed-party-ame-equivalence.md
+- weil-roof-tasks/c468-klein-zeta-good-primes.md
 
 Phase-2 framing and Phase-3 synthesis are not routine task context. Load
 `weil-roof-tasks/phase2-phase3-synthesis.md` only when

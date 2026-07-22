@@ -386,8 +386,17 @@
       "last": 467,
       "purpose": "C456 successor: fixed-party LC/LU equivalence and first labeled invariant degree",
       "sequence": 43
+    },
+    {
+      "count": 1,
+      "first": 468,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 468,
+      "purpose": "Klein cubic zeta at good primes 31/41(/61): exact H^3 spectrum, quintic Jacobi sums, C4/Gauss-field meeting, fused-vs-visible control",
+      "sequence": 44
     }
   ],
-  "next_id": 468,
+  "next_id": 469,
   "schema": "codex-task-id-allocations-v1"
 }
