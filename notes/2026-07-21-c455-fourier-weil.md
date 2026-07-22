@@ -117,6 +117,32 @@ Reversing the named chirality negates the signed basis but changes none of these
 Consequently no C456 chirality separator can factor only through this Fourier spectrum; it must use
 finer tensor/party-labeled data.
 
+## Post-close field and central-character upgrade
+
+The raw involutions have eigenvalues `+/-11 sqrt(11)`.  Multiplication by the genuine Gauss phase
+`i` changes these to
+
+```text
++/-11 sqrt(-11).
+```
+
+Thus the genuine signed Fourier operator has exact eigenvalue field `Q(sqrt(-11))`, the same field
+as C450's exchanged degree-five Weil pair.  Its nontrivial Galois automorphism exchanges the two
+eigenspaces.  This is a real mechanism-level field coincidence, not merely matching dimensions.
+
+The central character prevents overreading it.  In the diagonal `SL_2(F_11)` oscillator action,
+the central element acts on these even functions by
+
+```text
+chi_11(-1)^3 R = -I.
+```
+
+Therefore any extension of the certified Weyl action to that full diagonal `SL_2` action would lie
+in the nontrivial-central-character sector and could not descend to `PSL_2(11)`.  C450's field match
+does not produce a degree-five `PSL_2(11)` constituent, a stable restricted module, or an Adler
+repair.  It instead explains why `Q(sqrt(-11))` is the correct field to test whenever a future
+central-character-compatible bridge is proposed.
+
 ## C454 compatibility discriminator
 
 C454's controller-level relative-cubic split is `3=1+0+1+1`.  The Fourier eigenspace splits are

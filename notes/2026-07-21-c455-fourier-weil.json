@@ -13,6 +13,17 @@
   },
   "central_action": "rho(-I_6)=-R; on the certified even spaces it is -I",
   "field": 11,
+  "field_and_central_filter": {
+    "boundary": "the field match with C450 is exact but proves no restricted-module stability",
+    "diagonal_SL2_central_action_on_certified_spaces": -1,
+    "galois_action": "sqrt(-11)->-sqrt(-11) exchanges the two genuine eigenspaces",
+    "genuine_eigenvalue_field": "Q(sqrt(-11))",
+    "genuine_unnormalized_eigenvalues": "+/-11*sqrt(-11)",
+    "legendre_minus_one": -1,
+    "psl2_descent_if_full_diagonal_SL2_action_stabilized_the_space": false,
+    "raw_eigenvalue_field": "Q(sqrt(11))",
+    "raw_unnormalized_eigenvalues": "+/-11*sqrt(11)"
+  },
   "gauss_factor_gamma": "i",
   "gauss_sum": "sum_t psi(t^2)=i*sqrt(11)",
   "genuine_linearization": "with rho(n_B)f(x)=psi(-x^T B x/2)f(x), rho(w)=gamma^(-3)F=iF",

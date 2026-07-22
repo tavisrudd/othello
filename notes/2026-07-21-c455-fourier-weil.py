@@ -167,6 +167,17 @@ def certificate() -> dict[str, object]:
             "J_minus_F_minus": odd_multiplicities[1],
             "consequence": "Fourier eigenvalue multiplicities are unchanged by chirality orientation",
         },
+        "field_and_central_filter": {
+            "raw_unnormalized_eigenvalues": "+/-11*sqrt(11)",
+            "raw_eigenvalue_field": "Q(sqrt(11))",
+            "genuine_unnormalized_eigenvalues": "+/-11*sqrt(-11)",
+            "genuine_eigenvalue_field": "Q(sqrt(-11))",
+            "galois_action": "sqrt(-11)->-sqrt(-11) exchanges the two genuine eigenspaces",
+            "legendre_minus_one": -1,
+            "diagonal_SL2_central_action_on_certified_spaces": -1,
+            "psl2_descent_if_full_diagonal_SL2_action_stabilized_the_space": False,
+            "boundary": "the field match with C450 is exact but proves no restricted-module stability",
+        },
         "c454_discriminator": {
             "fourier_eigenspace_splits": ["4+4 on rank 8", "2+2 on signed rank 4"],
             "relative_cubic_split_from_controller": "3=1+0+1+1",
