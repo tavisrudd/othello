@@ -58,6 +58,11 @@ C451--C456 are independent once their cards' frozen inputs are available. C459 a
 in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated battery row.
 
+**Discriminator caution (from C450):** the T2 split-torus restriction test admits the
+false-positive family `1 + Weil_- + Weil_+` at both frozen primes, so no card may cite a T2-style
+restriction pass as positive evidence of Weil content without the `SL_2` central-character
+discriminator.
+
 ## Task routing
 
 - [`c444-m4-silver-fusion.md`](weil-roof-tasks/c444-m4-silver-fusion.md)

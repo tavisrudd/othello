@@ -552,3 +552,52 @@ synthesis sentence itself is unproved until C450 lands the `Rz` comparison.
 
 **Status:** observation only; fully routed (C450 owns the linking test, Phase 3 owns the synthesis
 wording). No allocation needed; recorded so the four-faces framing survives until Phase 3.
+
+### 2026-07-21 — the two cross-sheet relations are the Fano plane and the Paley biplane
+
+**Provenance:** post-closure review of the C450/T3 report
+(`notes/2026-07-21-c450-weil-cross-sheet.md`); derived from its certified Gram profiles.
+**Was I looking for this?:** no — the review assessed the sharp-negative Weil-module verdict; the
+design reading is a byproduct of the Gram table.
+**Observed / musing:** a square 0/1 matrix with constant row sum `k` and `AA^T=(k-l)I+lJ` is a
+symmetric 2-design. C450's certified profiles therefore make the disjointness relation a
+`2-(7,3,1)` (Fano plane) at `q=7` and a `2-(11,5,2)` (Paley/Hadamard biplane) at `q=11`, with the
+shared-edge relations their complements. Both designs are unique up to isomorphism, so the
+identification is forced by the certified Grams; the two matching sheets are the points and blocks,
+and the `Rz` sheet swap reads as the classical point-block duality.
+**Why it may matter / strongest question:** positive replacement for the failed roof clause — it
+explains the sheet modules `1+6`/`1+10_b` as design incidence modules and is candidate paper-2
+framing. Question: does the duality reading survive the frozen-frame `Rz` qualification?
+**Evidence:** REASONED over the CHECKED C450 Grams; design uniqueness is classical and unverified
+here (compute-never-recall applies before any certificate use).
+**Status:** open lead
+
+### 2026-07-21 — mod-3 nullities of the cross matrices equal the two Weil degrees
+
+**Provenance:** same C450/T3 review; C450's modular-rank table.
+**Was I looking for this?:** no — the modular ranks were computed as a C460 control, not a Weil
+probe.
+**Observed / musing:** at `q=11` the char-3 nullities are `6` (shared edge) and `5` (disjoint) —
+exactly the Gerardin degrees `(q+1)/2` and `(q-1)/2`. The report explicitly declines to promote a
+modular explanation, and the ordinary descent obstruction (central scalar `-1` on the degree-6
+half) does not obviously vanish mod 3.
+**Why it may matter / strongest question:** if the char-3 kernels are modular shadows of the Weil
+constituents, the char-0 sharp negative becomes a sharp positive as a Brauer-level statement.
+Cheapest discriminator: decompose the two char-3 kernels as modular `PSL_2(11)`-modules, re-examine
+the descent obstruction modularly, and run the `q=7` control in the same pass.
+**Evidence:** OPEN numerology over CHECKED nullities (C450 bundle).
+**Status:** open lead
+
+### 2026-07-21 — the surviving Weil bridge may be a character-sum identity, not a module map
+
+**Provenance:** same C450/T3 review.
+**Was I looking for this?:** no — musing thrown off by the period-sum computation.
+**Observed / musing:** the degree-five period sums satisfy `x^2+x+3=0` (discriminant `-11`), the
+same quadratic that governs the `q=11` Gauss sums and the biplane intersection numbers. C450
+killed the module-isomorphism form of the roof; the field coincidence suggests the true bridge
+between Weil data and the sheet geometry lives at the Gauss/Jacobi/QR character-sum level —
+C452/T5's territory.
+**Why it may matter / strongest question:** tells C452 what to look for: whether its QR/Barker
+identities factor through the same quadratic period sums.
+**Evidence:** OPEN.
+**Status:** open lead
