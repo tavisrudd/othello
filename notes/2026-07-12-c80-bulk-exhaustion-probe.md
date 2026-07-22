@@ -225,6 +225,48 @@ or recognize its local class, and restrict it to each opponent-mark stabilizer. 
 functional and one-element Jordan-rank jump show two ways such a test can compress once a genuine
 module extension exists.  No uniform cap response module or cocycle has yet been constructed.
 
+### Available downstream bridges and tools
+
+The C77/C79/C447/C474 evidence now exposes a useful division of labour.  These are theory routes,
+not claims that their hypotheses or game consequences have already been proved.
+
+| bridge | concrete C80 use | evidence gate / limitation |
+| --- | --- | --- |
+| Terwilliger algebra and triple-distribution SDP | Replace the failed pair statistic `tr(B^2)` by pointed triple-intersection data; test whether C79's `tr(B^3)` and C77's contextual `Q3` are coordinates of one positive-semidefinite certificate forcing a descending response fibre to be nonempty. | Build the pointed orbital algebra on the existing q=11/q=17 transition corpus and exhibit the PSD inequality.  Association-scheme language alone does not imply game value.  Gijswijt, arXiv:1007.0906. |
+| algebraic response variety plus character/Weil bounds | Encode legal descending replies as an incidence fibre `R_s`; prove generic fibres nonempty by character sums, Weil/Lang--Weil estimates, or, when applicable, Chevalley--Warning/Ax--Katz divisibility. | The estimate must be uniform enough to beat the error term, and every point counted must be a legal P-valued reply, not merely a legal move.  Degenerate/discriminant fibres route to C81.  Heath-Brown, arXiv:1009.3764, is a useful finite-field divisibility entry point. |
+| orbit category, Mackey restriction, and fusion | For a parent stabilizer `H` and opponent orbit `H/K`, treat the response fibre as a `K`-set/torsor.  Existence of a `K`-fixed response is the exact equivariant-section test; restriction models adding a mark, and double-coset bookkeeping organizes transfers between stabilizers. | First construct the actual response torsor/module.  Local classes must also satisfy fusion-stability before they define a global obstruction.  Grodal, arXiv:1608.00499; Benson--Grodal--Henke, arXiv:1210.1564. |
+| stable modules and endotrivial recognition | If a natural response module appears, test on relevant p-subgroups whether its stable endomorphism algebra is one-dimensional: `End(M) = k + projective`.  This could formalize "projective bulk cancels and a bounded defect survives." | Requires a canonical module attached to game states and a theorem translating its stable defect into P/N recursion.  Carlson--Thevenaz, arXiv:0706.4081. |
+| equivariant discrete Morse theory | View legal continuations as a simplicial complex and pair bulk faces equivariantly, leaving a bounded set of critical defects on which exact recursion can run. | Ordinary homotopy equivalence does not preserve Grundy value or even P/N status.  C80 needs a new game-compatible acyclic-matching/strategy lemma.  Yerolemou--Nanda, arXiv:2203.00539. |
+| sheaf/contextuality language | Separate local branch replies from a coherent global selector and record the obstruction to gluing local response rules.  This precisely explains why a selector can fail although every opponent move has some winning reply. | Cohomological contextuality obstructions are not complete and do not themselves prove P-value.  Abramsky--Brandenburger, arXiv:1102.0264; Caru, arXiv:1701.00656. |
+| dimers, height/flux, and critical groups | Regard the two q=11 perfect matchings as dimers whose difference is the unique binary cycle; Pfaffian/Fourier methods and Smith normal form may give compact existence and calibration certificates for larger structured response graphs. | A perfect matching is stronger than the response existence C80(b) needs, and planarity/circulant structure will not persist automatically.  Kenyon, arXiv:0910.3129. |
+| deformation and obstruction theory | Read an `Ext^1` class as a first-order response deformation and `Ext^2` as its lifting obstruction; this is a plausible bridge to C466's Hensel-style exceptional-prime analysis. | This is downstream until an actual cap response module and deformation parameter are identified. |
+
+The resulting proof architecture should split rather than force one mechanism everywhere:
+
+```text
+generic low-stabilizer states
+    -> no equivariant-selector obstruction
+    -> algebraic/character/Weil fibre counts + finite choice
+
+symmetric exceptional states
+    -> few opponent orbits, possible response torsor
+    -> restriction/local detection + fusion; send degeneracies to C81
+
+recursive bulk
+    -> seek a game-compatible Morse cancellation
+    -> exact recursion on the surviving bounded defects
+```
+
+The immediate priority is the Terwilliger/triple-distribution route: tabulate the pointed orbitals
+for the existing q=11 and q=17 records, locate `tr(B^3)` and `Q3` in that algebra, and ask whether
+positivity forces at least one descending P-response in every opponent fibre.  In parallel, the
+large-q route should formulate the same fibre as an algebraic incidence problem and isolate its
+discriminant locus.  Orbit-category restriction and fusion then belong on that exceptional locus,
+where symmetry makes them informative rather than generic overhead.  Equivariant Morse theory is
+the most promising true bulk-cancellation bridge, but only after its matching is strengthened to a
+normal-play strategy lemma.  Endotrivial, sheaf, and dimer tools are presently recognition and
+certificate layers, not substitutes for the descent proof.
+
 There is no intrinsic QR label on the two q=11 connection orbitals.  Writing their offsets requires
 a generator of `C5`; inversion preserves the square class of their separation, but the roof Galois
 change `g -> g^2` swaps square and nonsquare.  Thus QR coordinates are useful after a frozen
