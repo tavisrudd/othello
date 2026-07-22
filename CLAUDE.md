@@ -68,6 +68,7 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
 | `nofil` | `notes/handoffs/2026-07-17-nofil-paper.md` |
+| `reed-solomon` | `notes/handoffs/2026-07-22-reed-solomon-deep-holes.md` |
 | `relconic` | `notes/handoffs/2026-07-17-c210.md` |
 
 Archived lanes (handoffs under `notes/handoffs/done/`): `queens`, `repaircodes`, `repairports`,
