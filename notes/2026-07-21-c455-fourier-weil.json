@@ -1,0 +1,118 @@
+{
+  "additive_character": "psi(t)=exp(2*pi*i*t/11)",
+  "ambient_function_space_dimension": 1331,
+  "ambient_square": "F^2=R, Rf(x)=f(-x)",
+  "c454_discriminator": {
+    "compatible_canonical_identification": false,
+    "conclusion": "the Fourier fixed spaces do not recover the three relative-cubic lines",
+    "fourier_eigenspace_splits": [
+      "4+4 on rank 8",
+      "2+2 on signed rank 4"
+    ],
+    "relative_cubic_split_from_controller": "3=1+0+1+1"
+  },
+  "central_action": "rho(-I_6)=-R; on the certified even spaces it is -I",
+  "field": 11,
+  "gauss_factor_gamma": "i",
+  "gauss_sum": "sum_t psi(t^2)=i*sqrt(11)",
+  "genuine_linearization": "with rho(n_B)f(x)=psi(-x^T B x/2)f(x), rho(w)=gamma^(-3)F=iF",
+  "joint_J_F_multiplicities": {
+    "J_minus_F_minus": 2,
+    "J_minus_F_plus": 2,
+    "J_plus_F_minus": 6,
+    "J_plus_F_plus": 6,
+    "consequence": "Fourier eigenvalue multiplicities are unchanged by chirality orientation"
+  },
+  "literal_conjugacy_to_genuine_operator": false,
+  "projective_weil_identification": "[rho(w)]=[F]",
+  "rank16": {
+    "basis_conjugacy": "B16=11^(-3/2) D16^(1/2) P16 D16^(-1/2)",
+    "orthonormal_basis": "1_Sj/sqrt(k_j)",
+    "raw_basis": "common-refinement relation indicators in C378 order",
+    "raw_matrix": "P16",
+    "raw_matrix_square": "1331 I_16",
+    "space": "C[F_11^3]^(F_11^* x A4)",
+    "unitary_involution_multiplicities_plus_minus": [
+      8,
+      8
+    ],
+    "weighted_self_adjoint": true
+  },
+  "rank8": {
+    "basis_conjugacy": "B8=11^(-3/2) D8^(1/2) P8 D8^(-1/2), D8=diag(k_j)",
+    "orthonormal_basis": "1_Rj/sqrt(k_j)",
+    "raw_basis": "relation indicators 1_Rj in C372 order",
+    "raw_matrix": "P8",
+    "raw_matrix_square": "1331 I_8",
+    "space": "C[F_11^3]^(F_11^* x A5_plus)",
+    "unitary_involution_multiplicities_plus_minus": [
+      4,
+      4
+    ],
+    "weighted_self_adjoint": true
+  },
+  "reason_not_literal": "F has eigenvalues +/-1, while rho(w)=iF has eigenvalues +/-i",
+  "roof_substatement_c": "PROVED with restriction/projective wording; standalone Weil-module and literal genuine-normalization conjugacy are excluded",
+  "schema": "c455-fourier-weil-v1",
+  "signed_odd_block": {
+    "basis_conjugacy": "Bodd=11^(-3/2) Dodd^(1/2) Modd Dodd^(-1/2)",
+    "raw_basis": [
+      "1_S1-1_S10",
+      "1_S3-1_S13",
+      "1_S6-1_S14",
+      "1_S9-1_S11"
+    ],
+    "raw_basis_squared_norms": [
+      120,
+      120,
+      240,
+      240
+    ],
+    "raw_matrix": [
+      [
+        -11,
+        0,
+        44,
+        -22
+      ],
+      [
+        0,
+        -11,
+        22,
+        44
+      ],
+      [
+        22,
+        11,
+        11,
+        0
+      ],
+      [
+        -11,
+        22,
+        0,
+        11
+      ]
+    ],
+    "raw_matrix_square": "1331 I_4",
+    "space": "J-odd subspace of C[F_11^3]^(F_11^* x A4)",
+    "unitary_involution_multiplicities_plus_minus": [
+      2,
+      2
+    ],
+    "weighted_self_adjoint": true
+  },
+  "trusted_inputs": {
+    "c372": {
+      "path": "2026-07-19-c372-clebsch-scheme-fourier.json",
+      "sha256": "362179b916c16092a0800a7572547a1391f99fe681177e978566a65f6884655e"
+    },
+    "c378": {
+      "path": "2026-07-19-c378-clebsch-common-duality.json",
+      "sha256": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc"
+    }
+  },
+  "unitary_transform": "F=11^(-3/2) hat",
+  "unnormalized_transform": "hat(f)(y)=sum_x psi(y dot x) f(x)",
+  "weyl_element": "w=[[0,I_3],[-I_3,0]] (plus-kernel Schroedinger convention)"
+}

@@ -6,7 +6,9 @@
 
 **Status:** active. The M-chain and C449/T2 critical path are GREEN; C450--C453 are closed with the
 dispositions below. C454/T7 is closed sharp-negative for the Adler identification and green for the
-character/split-module mechanism. C455/T8 is next.
+character/split-module mechanism. C455/T8 proves the Fourier/Weil statement projectively and as an
+ambient restriction, while excluding literal genuine-normalization conjugacy and any standalone
+restricted Weil module. C456/T9 is next.
 
 This is the shared controller, not the task specification catalogue. Historical motivation is in
 2026-07-21-clebsch-weil-roof-conversation-report.md
@@ -47,7 +49,7 @@ selected card names it as a load-bearing input.
 | C452 | T5 | GREEN: cross-sheet disjointness is the cyclic QR design `D_7=QR_7+2`, `D_11=2QR_11+8`, giving the exact Barker-7/Barker-11 words; the odd-Barker wall requires its modern repaired proof, while the perfect-code and rank-four regular-`L_2` walls retain only their literal scope | QR/Barker provenance wall certified; no general continuation law |
 | C453 | T6 | GREEN conditional bound: 13 is golden-inert and excludes an `A5` marker by order; 19 splits with PSL-distinct golden sheets; 31 splits in `Z[phi]` but fuses the sheets because `(2/31)=+1`; exact visible/fused split classes mod 40 are `11,19,21,29` / `1,9,31,39`; no H4 parent group embeds in `PSL_2(31)`, and its admissible local `A5` shadow has natural orbit split `12+20` | parent/field/marker/transporter inputs sharply separated; no construction or continuation claim |
 | C454 | T7 | SHARP NEGATIVE Adler bridge; GREEN mechanism: ordinary degree-10 irreducible, modular `1+L(8)`, relative multiplicity/split `3=1+0+1+1` | no 5-space map; supplies C455 three-line discriminator |
-| C455 | T8 | queued | C372/C378 Weil-operator verdict |
+| C455 | T8 | PROVED with exact restriction/projective wording: the rank-8, rank-16, and signed rank-4 matrices restrict one ambient `Sp_6(F_11)` Weil Weyl operator; genuine normalization is `rho(w)=iF`, so literal conjugacy and standalone restricted Weil modules are excluded; Fourier splits fail C454's three-line discriminator | roof (c) survives only in this scoped form; joint `(J,F)` multiplicities `6,6,2,2` rule out Fourier-spectrum-only chirality separation in C456 |
 | C456 | T9 | queued | AME chirality LU verdict |
 | C457 | T10 | GREEN: maximal orders reduce onto `M2`; spin images equal frozen sheets; H3 comparisons are reductions of one `C(phi)` | quaternion mechanism certified; C382 boundary sharpened |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
@@ -57,8 +59,8 @@ selected card names it as a load-bearing input.
 | C465 | mod3-bridge | QUEUED: decide whether the roof holds at the Brauer level — decompose the char-3 cross-matrix kernels/spans as modular `PSL_2(11)`-modules and compare against the mod-3 reduction of the Gerardin Weil pair, with the Golay span (C464) as carrier and the central `-1` absorbed in the double cover; `q=7` control in the same pass (promoted from the mod-3 nullities discovery lead) | can convert C450's sharp negative into a Brauer-positive; changes the Phase-3 roof verdict wording either way |
 | C466 | fusion-mech | QUEUED: test the Dickson mechanism for the mod-40 law — hinge-`S4` meets `PSL` only in `A4` at visible primes 11/19, full `S4` inside `PSL_2(31)` conjugates the sheets at the fused prime — and on success record the biquadratic `Gal(Q(sqrt2,sqrt5)/Q)` framing; secondary: Arf face at 19/31, comparison of the two characteristic-31 `A5` controls (promoted from the Dickson and `(2/q)` discovery leads) | upgrades the C453 law from phenomenon to mechanism; `H4`/`q=31` gateway probe stays its pre-allocation-gated successor |
 
-The critical path is GREEN through `C444 -> C445 -> C449`; C450--C454 are closed, and **C455 is next**.
-C455--C456 are independent once their cards' frozen inputs are available. C459, C463, C464, C465,
+The critical path is GREEN through `C444 -> C445 -> C449`; C450--C455 are closed, and **C456 is next**.
+C456 is independent once its card's frozen inputs are available. C459, C463, C464, C465,
 and C466 may run in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated row.
 
