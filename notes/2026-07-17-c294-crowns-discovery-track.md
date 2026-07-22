@@ -885,7 +885,13 @@ prime; any value other than the Weil index `gamma(q)` kills the reading.
 **Evidence:** REASONED over CHECKED endpoints (C455 normalization certificate, C450 periods); the
 Gauss-sum values are classical (compute-never-recall applies before certificate use).
 **Status:** open lead; routed 2026-07-21 as a bounded tertiary item on C466, which owns new-prime
-work
+work. Field face certified 2026-07-21 (commit 40175a66, C455 post-close upgrade): the genuine
+phase rotates the raw eigenvalues `+/-11 sqrt(11)` into `+/-11 sqrt(-11)`, so the genuine signed
+Fourier operator's exact eigenvalue field is C450's `Q(sqrt(-11))` with Galois exchanging the
+eigenspaces — for `q = 3 mod 4` the Gauss sum is `sqrt(-q)`, so this is the predicted object
+appearing literally. Still open: the `q = 1 mod 4` normalization prediction (C466 tertiary). The
+same upgrade's central-character sentence (`-I` blocks `PSL_2(11)` descent) is a third certified
+appearance of the central `-1` that C465 routes into the double cover.
 
 ### 2026-07-21 — conductor 40 is the whole rank-3 system: three fields, three bits, three certified faces
 
