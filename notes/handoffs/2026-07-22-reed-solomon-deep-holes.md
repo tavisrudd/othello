@@ -4,9 +4,10 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C477 complete; C478 queued.  C477 proved that the first raw-atlas collision is the
-branch-versus-ordinary split of an intrinsic Klein quotient, with a sharp stabilizer bit and exact
-continuation graphs `K5 union C5 union K1` versus `K5 union 2 K1`.
+**Status:** C475--C478 complete; no successor is allocated.  C478 proved that the universal
+edge-torus atlas recovers every frozen C398 syndrome orbit but no fixed-child parent, while the
+full-conic controls have empty deep-syndrome atlas domains.  Modular machinery is licensed only
+after an independent matching decoration passes both the Gram and Sylow gates.
 
 ## Goal
 
@@ -92,14 +93,20 @@ cardinality-minimal intrinsic discriminator.  Quadratic evaluation rank is `5` o
 arcs, but the first extension-conflict statistic separates: legal continuation counts are `11`
 and `7`.  The exact continuation graphs are `K5 union C5 union K1` on the external branch orbit and
 `K5 union 2 K1` on the ordinary orbit.  The atomic certificate and structurally independent replay
-cover all finite claims.  No balanced edge monomial can refine the collision.
+cover all finite claims.  A requested second extra-juice pass further proves that the branch
+involution acts with cycle type `1+2+2` on both five-vertex components and fixes the isolated
+off-conic vertex.  No balanced edge monomial can refine the collision.
 
-## Current frontier — C478
+## Closed base — C478
 
-Evaluate the already proved atlas on the four frozen C398 non-GRS classes and the fixed `A3/B3/H3`
-conic-phase controls at `q=5,7,11`.  Separate ordinary orbit recovery from the Gram and Sylow
-modular-carrier gates, without reopening C477's support, enlarging the field census, or importing
-modular language before the task card's explicit gate.
+[`C478 exceptional controls`](../2026-07-22-c478-exceptional-family-controls.md) evaluates the
+universal edge-torus atlas on the four C398 non-GRS classes and the fixed `A3/B3/H3` conic phases.
+It recovers the exact syndrome orbit profiles `4 / 6 / 1+6 / 12`, but the intrinsic unlabelled
+atlas family has one parent signature on every fixed-child fibre `6 / 8 / 2 / 22`.  The three full
+conics are complete arcs, so their own atlas domains are empty.  The q=9 cube fails at shared Gram
+rank `3` and a stably zero Sylow endpoint; the pointed q=7/q=11 carriers pass Gram rank zero and
+Sylow endotriviality.  This closes the lane's decision gate: modular machinery is conditional
+downstream structure, not a general atlas discriminator.
 
 Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 
@@ -110,7 +117,7 @@ Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 | C475 | Veronese factorization, torus quotient, and semilinear descent | complete | four-cycles generate; rank two reconstructs; rank one needs its radical | finite atlas is well-defined |
 | C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | complete | first collision is the q=11 rank-one `2+4` radical split | honest exceptional mechanism |
 | C477 | intrinsic theorem for C476's first collision | complete | Klein branch split, sharp stabilizer bit, and exact continuation graphs | candidate discriminant geometry |
-| C478 | C398 and `A3/B3/H3` exceptional controls | C475 | exact comparison of orbit recovery, Gram rank, and Sylow gate on the frozen cases | decision on whether modular machinery belongs in this lane |
+| C478 | C398 and `A3/B3/H3` exceptional controls | complete | atlas recovers syndromes, not parents; full conics have empty atlas domains; Gram/Sylow gates separate q=9 from q=11 | modular machinery is conditional downstream structure |
 
 Cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`,
 `notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`, and
@@ -154,4 +161,5 @@ history.
 
 ## Next command
 
-`go C478`
+No successor is allocated.  After the lane-finish decision, use `go reed-solomon` or select another
+lane explicitly.

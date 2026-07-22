@@ -1,0 +1,247 @@
+{
+  "atlas_definition": {
+    "coordinates_per_syndrome": 30,
+    "formula": "(d_ij*d_kl/(d_ik*d_jl), d_ij*d_kl/(d_il*d_jk)) for every i<j<k<l",
+    "parent_comparison": "canonicalize over all six support relabellings and Frobenius powers"
+  },
+  "c398_non_grs_controls": [
+    {
+      "atlas_exactly_recovers_syndrome_orbits": true,
+      "atlas_orbit_sizes": [
+        4
+      ],
+      "common_unlabelled_atlas_parent_signature_sha256": "f353c359dff1420ef2b06e05ab2c2fa991b7e85c560efb8ebd23df6df69c4b99",
+      "deletion_trace_recovers_parent": false,
+      "deletion_trace_signature_count": 1,
+      "fixed_child_parent_count": 6,
+      "labelled_atlas_distinct_count": 4,
+      "labelled_atlas_fibre_size_histogram": {
+        "1": 4
+      },
+      "locus_size": 4,
+      "modular_carrier": {
+        "carrier_gate_entered": false
+      },
+      "parent_automorphism_order": 12,
+      "projective_deep_hole_orbit_sizes": [
+        4
+      ],
+      "q": 8,
+      "survivor_index": 0,
+      "unlabelled_atlas_parent_signature_count": 1,
+      "unlabelled_atlas_recovers_parent": false
+    },
+    {
+      "atlas_exactly_recovers_syndrome_orbits": true,
+      "atlas_orbit_sizes": [
+        6
+      ],
+      "common_unlabelled_atlas_parent_signature_sha256": "e6b32c03331925e070645e95e0e62bc17b3cbd0f95f2ffdf5e5b8251b79b566a",
+      "deletion_trace_recovers_parent": true,
+      "deletion_trace_signature_count": 8,
+      "fixed_child_parent_count": 8,
+      "labelled_atlas_distinct_count": 6,
+      "labelled_atlas_fibre_size_histogram": {
+        "1": 6
+      },
+      "locus_size": 6,
+      "modular_carrier": {
+        "carrier_gate_entered": true,
+        "coefficient_prime": 3,
+        "gram_gate_passes": false,
+        "modular_gateway_passes": false,
+        "shared_gram_rank": 3,
+        "shared_rank": 3,
+        "sheet_size": 4,
+        "stable_endpoint": "zero (projective)",
+        "sylow_endomorphism_projectivity_gate_passes": false,
+        "sylow_endpoint_model": "regular F3[C3]",
+        "sylow_group": "C3",
+        "zero_share_gram_rank": 4,
+        "zero_share_rank": 4
+      },
+      "parent_automorphism_order": 6,
+      "projective_deep_hole_orbit_sizes": [
+        6
+      ],
+      "q": 9,
+      "survivor_index": 0,
+      "unlabelled_atlas_parent_signature_count": 1,
+      "unlabelled_atlas_recovers_parent": false
+    },
+    {
+      "atlas_exactly_recovers_syndrome_orbits": true,
+      "atlas_orbit_sizes": [
+        1,
+        6
+      ],
+      "common_unlabelled_atlas_parent_signature_sha256": "d1d4a3c45885d2bfde8b0dce22f33d5384df931d6dda87129052e9dda3ef2fa2",
+      "deletion_trace_recovers_parent": false,
+      "deletion_trace_signature_count": 1,
+      "fixed_child_parent_count": 2,
+      "labelled_atlas_distinct_count": 7,
+      "labelled_atlas_fibre_size_histogram": {
+        "1": 7
+      },
+      "locus_size": 7,
+      "modular_carrier": {
+        "carrier_gate_entered": false
+      },
+      "parent_automorphism_order": 6,
+      "projective_deep_hole_orbit_sizes": [
+        1,
+        6
+      ],
+      "q": 9,
+      "survivor_index": 1,
+      "unlabelled_atlas_parent_signature_count": 1,
+      "unlabelled_atlas_recovers_parent": false
+    },
+    {
+      "atlas_exactly_recovers_syndrome_orbits": true,
+      "atlas_orbit_sizes": [
+        12
+      ],
+      "common_unlabelled_atlas_parent_signature_sha256": "a163a6130ec3f4da7984dc984db5de6a89662c43398c97fa04c1c20741a34454",
+      "deletion_trace_recovers_parent": true,
+      "deletion_trace_signature_count": 22,
+      "fixed_child_parent_count": 22,
+      "labelled_atlas_distinct_count": 12,
+      "labelled_atlas_fibre_size_histogram": {
+        "1": 12
+      },
+      "locus_size": 12,
+      "modular_carrier": {
+        "carrier_gate_entered": true,
+        "coefficient_prime": 3,
+        "gram_gate_passes": true,
+        "modular_gateway_passes": true,
+        "shared_gram_rank": 0,
+        "shared_rank": 5,
+        "sheet_size": 11,
+        "stable_endpoint": "endotrivial Picard unit",
+        "sylow_endomorphism_projectivity_gate_passes": true,
+        "sylow_endpoint_model": "Omega(F3) plus free F3[C3]",
+        "sylow_group": "C3",
+        "zero_share_gram_rank": 1,
+        "zero_share_rank": 6
+      },
+      "parent_automorphism_order": 60,
+      "projective_deep_hole_orbit_sizes": [
+        12
+      ],
+      "q": 11,
+      "survivor_index": 0,
+      "unlabelled_atlas_parent_signature_count": 1,
+      "unlabelled_atlas_recovers_parent": false
+    }
+  ],
+  "coxeter_conic_phase_controls": [
+    {
+      "bare_child_recovers_decoration": false,
+      "c475_atlas_domain_is_empty": true,
+      "coxeter_decoration_count": 5,
+      "full_conic_deep_syndrome_count": 0,
+      "full_conic_size": 6,
+      "modular_carrier": {
+        "carrier_gate_entered": false,
+        "gram_gate_passes": null,
+        "modular_gateway_passes": false,
+        "reason_not_entered": "five decorations admit no equal two-sheet split",
+        "sylow_endomorphism_projectivity_gate_passes": null
+      },
+      "q": 5,
+      "type": "A3"
+    },
+    {
+      "bare_child_recovers_decoration": false,
+      "c475_atlas_domain_is_empty": true,
+      "coxeter_decoration_count": 14,
+      "full_conic_deep_syndrome_count": 0,
+      "full_conic_size": 8,
+      "modular_carrier": {
+        "carrier_gate_entered": true,
+        "coefficient_prime": 2,
+        "disjoint_gram_rank": 1,
+        "disjoint_rank": 4,
+        "gram_gate_passes": true,
+        "modular_gateway_passes": true,
+        "orthogonal_flag": "simple_core = perfect_code^perp",
+        "shared_gram_rank": 0,
+        "shared_rank": 3,
+        "sheet_size": 7,
+        "stable_endpoint": "Omega^1(J1)",
+        "sylow_endomorphism_projectivity_gate_passes": true,
+        "sylow_endpoint_model": "reduced linearization ker(F2[D8/H] -> F2)",
+        "sylow_group": "D8"
+      },
+      "q": 7,
+      "type": "B3"
+    },
+    {
+      "bare_child_recovers_decoration": false,
+      "c475_atlas_domain_is_empty": true,
+      "coxeter_decoration_count": 22,
+      "full_conic_deep_syndrome_count": 0,
+      "full_conic_size": 12,
+      "modular_carrier": {
+        "carrier_gate_entered": true,
+        "coefficient_prime": 3,
+        "disjoint_gram_rank": 1,
+        "disjoint_rank": 6,
+        "gram_gate_passes": true,
+        "modular_gateway_passes": true,
+        "orthogonal_flag": "simple_core = perfect_code^perp",
+        "shared_gram_rank": 0,
+        "shared_rank": 5,
+        "sheet_size": 11,
+        "stable_endpoint": "Omega^1(J1)",
+        "sylow_endomorphism_projectivity_gate_passes": true,
+        "sylow_endpoint_model": "reduced linearization ker(F3[C3] -> F3) plus one free F3[C3] summand",
+        "sylow_group": "C3"
+      },
+      "q": 11,
+      "type": "H3"
+    }
+  ],
+  "frozen_inputs": [
+    {
+      "bytes": 8713,
+      "path": "notes/2026-07-20-c398-conic-deep-hole-classification.json",
+      "sha256": "e68bd03d88afd2c6c05a76fe9ef9b4254cb614c3b2f9f4c252c60222289e6f68"
+    },
+    {
+      "bytes": 39920,
+      "path": "notes/2026-07-22-c474-reed-solomon-decorated-deep-holes.json",
+      "sha256": "02cb69e2d26deb9f9ab8c2953de4fa244f45d1f190336ac075f3a5c6fdffd8b1"
+    },
+    {
+      "bytes": 16824,
+      "path": "notes/2026-07-20-c399-coxeter-number-conic-phase.json",
+      "sha256": "993b9f7c9da5b79e474aa0f2a38919352de135844cdbe35a3c89a8430da4f65e"
+    },
+    {
+      "bytes": 51127,
+      "path": "notes/2026-07-21-c465-mod3-weil-golay.json",
+      "sha256": "62dc3855782f570699d534907a91028523d393863a8b45189782a13a44614958"
+    },
+    {
+      "bytes": 643578,
+      "path": "notes/2026-07-22-c474-uniform-ext-carrier.json",
+      "sha256": "0a02c53d21883417b03e520b83c09bf68990beb54c4327c07e7556d5352afe87"
+    },
+    {
+      "bytes": 17444,
+      "path": "notes/2026-07-20-c398-conic-deep-hole-classification.py",
+      "sha256": "e01fc095bb51dd561d5b71c91d0f775b24ec1d97c8909d7879f3bd7fa499dcfc"
+    },
+    {
+      "bytes": 19071,
+      "path": "notes/2026-07-22-c474-reed-solomon-decorated-deep-holes.py",
+      "sha256": "5cbeed149e7d5ea14f84ad169a102bd1f1c056ca0e1c4fa3f3cd5c710ef9228a"
+    }
+  ],
+  "schema": "c478-exceptional-family-controls-v1",
+  "sharp_negative": "The edge-torus atlas recovers every frozen syndrome orbit but no fixed-child parent; the full-conic A3/B3/H3 children have no deep-syndrome atlas domain at all. Modular invertibility begins only after an independently supplied recovering matching decoration passes both the isotropic Gram and Sylow endomorphism-projectivity gates.",
+  "task": "C478"
+}

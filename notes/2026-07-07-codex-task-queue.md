@@ -144,7 +144,6 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C478 `[reed-solomon]` [QUEUED; independent of C476 collision]** — evaluate the proved atlas on the four frozen C398 non-GRS classes and the fixed `A3/B3/H3` conic-phase controls at `q=5,7,11`, separating ordinary orbit recovery from Gram/Sylow modular-carrier gates without opening a new field census → `notes/2026-07-22-c478-exceptional-family-controls.md`.
 
 ### `relconic`
 
