@@ -1,0 +1,356 @@
+{
+  "algebra": {
+    "artin_schreier_orientation": "eta=L0/(L0+L0#) satisfies eta#=1-eta, hence eta#=eta+1 in characteristic two",
+    "branch_factor": "L1=det(v2(h1),...,v2(h6))",
+    "branch_polynomial": "abc+bcd+ad-abd-acd-bc",
+    "collision_factor": "L0=-det(h4,h5,h6)",
+    "collision_polynomial": "bc+a+d-ad-b-c",
+    "gale_numerator_factors": [
+      "(a-b)(a-c)(d-1)",
+      "(a-b)(b-d)(c-1)",
+      "(a-c)(b-1)(c-d)",
+      "(b-d)(c-d)(a-1)",
+      "(b-1)(c-1)(ad-bc)",
+      "(a-1)(d-1)(ad-bc)"
+    ],
+    "kernel_cubic": "Q(se+tz)=st(L0*s+L1*t)",
+    "overlap_law_characteristic_two": "a_ij=eta_i+eta_j is Gale-invariant and kappa_j-kappa_i=a_ij^2+a_ij",
+    "overlap_law_odd": "tau_i/tau_j is Gale-invariant and the ratios form a multiplicative Cech cocycle",
+    "quadratic_discriminant": "L1^2 in every characteristic",
+    "reduced_quadratic": "q=s(L0*s+L1*t)",
+    "sheet_orientation": "tau=L1/L0^2 satisfies tau(Gale(A))=-tau(A)"
+  },
+  "frozen_c478_input": {
+    "bytes": 30258,
+    "path": "2026-07-22-c478-exceptional-family-controls.json",
+    "sha256": "d0e23d39ade028370f85ccf884d28a158b786d3101fd86458b46b2505e96e9c6"
+  },
+  "frozen_child_relative_controls": [
+    {
+      "child_size": 4,
+      "fixed_child_parent_count": 6,
+      "minimum_recovering_centres": 3,
+      "profiles_through_minimum": [
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 4,
+              "equivariant_parent_signature_count": 1,
+              "equivariant_parent_signature_fibre_sizes": [
+                6
+              ],
+              "representative_indices": [
+                0
+              ]
+            }
+          ],
+          "syndrome_subset_size": 1
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 6,
+              "equivariant_parent_signature_count": 3,
+              "equivariant_parent_signature_fibre_sizes": [
+                2,
+                2,
+                2
+              ],
+              "representative_indices": [
+                0,
+                1
+              ]
+            }
+          ],
+          "syndrome_subset_size": 2
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 4,
+              "equivariant_parent_signature_count": 6,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "representative_indices": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "syndrome_subset_size": 3
+        }
+      ],
+      "q": 8
+    },
+    {
+      "child_size": 6,
+      "fixed_child_parent_count": 8,
+      "minimum_recovering_centres": 3,
+      "profiles_through_minimum": [
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 6,
+              "equivariant_parent_signature_count": 1,
+              "equivariant_parent_signature_fibre_sizes": [
+                8
+              ],
+              "representative_indices": [
+                0
+              ]
+            }
+          ],
+          "syndrome_subset_size": 1
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 12,
+              "equivariant_parent_signature_count": 6,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2
+              ],
+              "representative_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "child_subset_orbit_size": 3,
+              "equivariant_parent_signature_count": 2,
+              "equivariant_parent_signature_fibre_sizes": [
+                4,
+                4
+              ],
+              "representative_indices": [
+                0,
+                4
+              ]
+            }
+          ],
+          "syndrome_subset_size": 2
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 12,
+              "equivariant_parent_signature_count": 8,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "representative_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "child_subset_orbit_size": 8,
+              "equivariant_parent_signature_count": 7,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                2
+              ],
+              "representative_indices": [
+                0,
+                1,
+                3
+              ]
+            }
+          ],
+          "syndrome_subset_size": 3
+        }
+      ],
+      "q": 9
+    },
+    {
+      "child_size": 7,
+      "fixed_child_parent_count": 2,
+      "minimum_recovering_centres": 2,
+      "profiles_through_minimum": [
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 6,
+              "equivariant_parent_signature_count": 1,
+              "equivariant_parent_signature_fibre_sizes": [
+                2
+              ],
+              "representative_indices": [
+                0
+              ]
+            },
+            {
+              "child_subset_orbit_size": 1,
+              "equivariant_parent_signature_count": 1,
+              "equivariant_parent_signature_fibre_sizes": [
+                2
+              ],
+              "representative_indices": [
+                6
+              ]
+            }
+          ],
+          "syndrome_subset_size": 1
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 6,
+              "equivariant_parent_signature_count": 1,
+              "equivariant_parent_signature_fibre_sizes": [
+                2
+              ],
+              "representative_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "child_subset_orbit_size": 6,
+              "equivariant_parent_signature_count": 2,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1
+              ],
+              "representative_indices": [
+                0,
+                2
+              ]
+            },
+            {
+              "child_subset_orbit_size": 3,
+              "equivariant_parent_signature_count": 2,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1
+              ],
+              "representative_indices": [
+                0,
+                5
+              ]
+            },
+            {
+              "child_subset_orbit_size": 6,
+              "equivariant_parent_signature_count": 2,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1
+              ],
+              "representative_indices": [
+                0,
+                6
+              ]
+            }
+          ],
+          "syndrome_subset_size": 2
+        }
+      ],
+      "q": 9
+    },
+    {
+      "child_size": 12,
+      "fixed_child_parent_count": 22,
+      "minimum_recovering_centres": 3,
+      "profiles_through_minimum": [
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 12,
+              "equivariant_parent_signature_count": 1,
+              "equivariant_parent_signature_fibre_sizes": [
+                22
+              ],
+              "representative_indices": [
+                0
+              ]
+            }
+          ],
+          "syndrome_subset_size": 1
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 66,
+              "equivariant_parent_signature_count": 3,
+              "equivariant_parent_signature_fibre_sizes": [
+                2,
+                10,
+                10
+              ],
+              "representative_indices": [
+                0,
+                1
+              ]
+            }
+          ],
+          "syndrome_subset_size": 2
+        },
+        {
+          "child_subset_orbits": [
+            {
+              "child_subset_orbit_size": 220,
+              "equivariant_parent_signature_count": 22,
+              "equivariant_parent_signature_fibre_sizes": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "representative_indices": [
+                0,
+                1,
+                2
+              ]
+            }
+          ],
+          "syndrome_subset_size": 3
+        }
+      ],
+      "q": 11
+    }
+  ],
+  "schema": "c483-reconstruction-discriminant-v1"
+}

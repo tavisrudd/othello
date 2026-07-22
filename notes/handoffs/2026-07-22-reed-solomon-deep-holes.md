@@ -4,14 +4,16 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C482 complete; C483--C485 allocated.  C478's coherence upgrade identifies each
+**Status:** C475--C483 complete; C484--C485 allocated.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
 and one for two/three projections, but corrects the four-view target: pure reconstruction is a
-separable quadratic cover, not a rational inverse, even after diagonal `S6`.  C483 now owns the
-sheet involution, branch divisor, and child-relative sheet selection.  Modular machinery remains
-separate behind the matching, Gram, and Sylow gates.
+separable quadratic cover, not a rational inverse, even after diagonal `S6`.  C483 identifies its
+deck swap with Gale association, proves that the reduced branch divisor is exactly the conic locus,
+and expresses fixed-child recovery as an exact incidence cut explaining the frozen `3/3/2/3`
+thresholds.  C484 now owns Frobenius-equivariant descent and the q=8 orientation.  Modular machinery
+remains separate behind the matching, Gram, and Sylow gates.
 
 ## Goal
 
@@ -147,13 +149,51 @@ side information selects a sheet.
 
 Task card: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md`.
 
-## Current frontier — C483--C485
+## Closed base — C483
+
+[`C483 reconstruction discriminant`](../2026-07-22-c483-reconstruction-discriminant.md) identifies
+the quadratic deck swap with the Gale association involution of the `3 x 6` parent matrix.  On the
+normalized chart the kernel cubic is `st(L0 s+L1 t)`, with
+`L0=-det(h4,h5,h6)` and `L1=det(v2(h1),...,v2(h6))`; hence the intrinsic reduced branch divisor is
+exactly the conic locus in every characteristic, while the collision factor is only an arc-boundary
+collinearity.  All rank drops are explicit cubic sections `P(ker M_r) intersect V(x_X x_a x_d-
+x_Y x_b x_c)`.  Complete-child side information is the exact transporter/incidence cut
+`g(L)=U(A)`, and its restriction map explains the frozen sharp `3/3/2/3` thresholds without a new
+field census.  Primary symbolic certification and an independent Gale replay cover the new
+computational checks.  Every further abstract view preserves the same Gale pair, since each
+compatibility row annihilates both sheets; only common ambient-child placement can select one.
+Locally `tau=L1/L0^2` is Gale-anti-invariant in odd characteristic, while characteristic two needs
+the explicit Artin--Schreier coordinate `eta=L0/(L0+L0#)` with `eta#=eta+1`; q=8's `C3` colour
+orientation is a distinct descent class.  On frame overlaps, odd `tau` coordinates differ by
+invariant units and characteristic-two `eta` coordinates by invariant translations, so C484 owns
+the resulting explicit Cech/Frobenius cocycle rather than discovery of the local cover.
+
+C484's remaining work is globalization: coefficientwise Frobenius equivariance, the two-sheet
+`C2` cocycle with Kummer/Artin--Schreier effectivity, finite diagonal-stabilizer descent, and exact
+extraction of q=8's colour cycle `3+3` from the frozen replay.  The `C3` collapse is information
+loss, not a Hilbert--90 obstruction.  C485 has one genuine unresolved gate: current results prove
+at-most-three child-relative recovery only on the four frozen C478 fibres.  An all-field statement
+needs a new uniform base-size theorem; otherwise its clause must remain conditional on injectivity
+of `Sigma_T`.
+
+The larger-conjecture bridge is now explicit but unallocated.  For redundancy `r`, deepest
+syndromes are one-point arc extensions of the degree-`r-1` parity-check normal rational curve; at
+full affine length the standard RS conjecture becomes unique completion of the punctured curve.
+The conic (`r=3`) base case is immediately packageable, including the even-characteristic nucleus.
+Beyond it, the six-point Gale involution does not scale: Gale is self-dual only at `n=2r`.  A new
+higher-symmetric-power/Grassmannian atlas plus either a secant-covering theorem or a distinct-root
+rational-point existence theorem is required.  This remains behind the handoff's arbitrary-
+dimension pre-allocation gate.
+
+Task card: `notes/reed-solomon-tasks/c483-reconstruction-discriminant.md`.
+
+## Current frontier — C484--C485
 
 C481 supplies the projection-sextic/coherent-atlas dictionary for an arbitrary six-arc in every
-characteristic, and C482 supplies the exact quadratic four-view reconstruction plus the
-two/three-centre residual families.  C483 now identifies the sheet involution, classifies the
-branch/degeneracy divisor, and derives child-relative sheet cuts; C484
-proves Frobenius-equivariant descent and resolves the q=8 `C3` orientation structurally; C485
+characteristic, C482 supplies the exact quadratic four-view reconstruction plus the
+two/three-centre residual families, and C483 identifies Gale association, the conic branch divisor,
+and the complete-child incidence cut.  C484 now proves Frobenius-equivariant descent and resolves
+the q=8 `C3` orientation structurally; C485
 assembles the all-field redundancy-three degree-two/child-selected reconstruction theorem and C475
 GRS specialization.
 
@@ -177,13 +217,13 @@ Task cards: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md` thro
 | C478 | C398 and `A3/B3/H3` exceptional controls | complete | coherent Galois-equivariant atlases recover all frozen parents with thresholds `3 / 3 / 2 / 3`; Gram/Sylow still separate q=9 from q=11 | simultaneous reconstruction is the next theorem gate |
 | C481 | projection-sextic and coherent-atlas theorem | complete | labelled `M_0,6` with explicit inverses and exact diagonal/Frobenius actions | intrinsic coherent data model |
 | C482 | multi-centre gauge synchronization | complete | residual dimensions `2/1`; explicit four-view separable quadratic cover; rational inverse disproved | exact generic ambiguity |
-| C483 | reconstruction discriminant and exceptional fibres | C482 | intrinsic branch factorization, sheet involution, residual-family table, and child-relative sheet cuts | global theorem domain |
+| C483 | reconstruction discriminant and exceptional fibres | complete | Gale association; conic branch divisor; cubic residual-family table; exact complete-child cut | global theorem domain |
 | C484 | coherent semilinear descent | C481--C483 | equivariant inverse/descent criterion; q=8 `C3` explained | all-field semilinear reconstruction |
 | C485 | all-field redundancy-three synthesis | C481--C484 | separate pure four-projection degree-two and child-relative sheet-selected clauses, with algorithm, exceptions, descent, and GRS specialization | programme-level reconstruction theorem |
 
 Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
-`notes/reed-solomon-tasks/c481-projection-sextic-coherent-atlas.md`.  Open cards:
-`notes/reed-solomon-tasks/c482-three-centre-synchronization.md` through
+`notes/reed-solomon-tasks/c483-reconstruction-discriminant.md`.  Open cards:
+`notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md` and
 `notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
 
 ## Unallocated level-ups
@@ -219,4 +259,4 @@ history.
 
 ## Next command
 
-`go C483`
+`go C484`
