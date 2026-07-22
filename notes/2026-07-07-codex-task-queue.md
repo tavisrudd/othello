@@ -144,7 +144,7 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C475 `[reed-solomon]` [QUEUED]** — build the determinant/cross-ratio coefficient atlas for redundancy-three standard GRS deep holes, prove its projective-semilinear descent, and test exact orbit separation on the smallest standard-GRS cases with the four C398 non-GRS classes as controls; stop at the first collision and characterize its full fibre → `notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`.
+- **C475 `[reed-solomon]` [QUEUED]** — prove the Veronese determinant factorization and balanced-cycle torus quotient for redundancy-three standard GRS deep holes, then determine whether support-normalized four-cycle ratios separate projective-semilinear syndrome orbits in the smallest exact cases; use the four C398 non-GRS classes as controls and stop at the first collision to characterize its full fibre → `notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`.
 
 ### `relconic`
 

@@ -59,25 +59,54 @@ orbits unless a new invariant exposes a concrete inconsistency. They are regress
 
 ## Current frontier — C475
 
-For an ordered conic support `h_1,...,h_n` and deepest syndrome direction `u`, begin with the
-intrinsic minors
+Use the standard conic chart `h(t)=(1,t,t^2)`. For `u=(u_0,u_1,u_2)`, direct expansion gives the
+load-bearing factorization
 
 ```text
-d_ij(u) = det(u,h_i,h_j).
+d_st(u) = det(u,h(s),h(t))
+        = (t-s) B_u(s,t),
+B_u(s,t) = u_0*s*t-u_1*(s+t)+u_2.                         (1)
 ```
 
-Raw support incidence is trivial on a deepest syndrome because every `d_ij` is nonzero. C475 must
-therefore pass to scale-free bounded-degree combinations: determinant cross-ratios, cubic products,
-or an equivalent coefficient atlas. It must:
+Homogeneously, (1) is the Veronese bracket factorization
+`det(u,nu(v_i),nu(v_j))=[v_i,v_j] B_u(v_i,v_j)`, up to the fixed coordinate convention. It
+separates known support geometry from evaluations of one binary bilinear form representing the
+syndrome.
 
-1. derive the transformation law under column rescaling, syndrome scaling, projectivities,
-   Frobenius, and the conic-support automorphism group;
-2. state and prove which combinations descend to the unlabelled projective-semilinear orbit;
-3. compute a lossless exact atlas on the smallest feasible standard-GRS cases and compare its
+Under `u -> b*u`, `h_i -> a_i*h_i`, and `g in GL_3`,
+
+```text
+d_ij -> b*a_i*a_j*det(g)*d_ij.                            (2)
+```
+
+Thus raw coefficients cannot classify monomial-equivalence classes. Balanced ratios, beginning
+with
+
+```text
+R_ijkl = d_ij*d_kl/(d_ik*d_jl),                           (3)
+```
+
+cancel every factor in (2). Dividing (3) by the corresponding support cross-ratio leaves
+`B_ij*B_kl/(B_ik*B_jl)`, a syndrome-only coordinate. Frobenius acts by powering and support
+automorphisms permute indices, so the appropriate invariant is its permutation/Frobenius orbit.
+
+C475 must now:
+
+1. prove (1)--(2), including the point at infinity and characteristic two;
+2. determine the rational torus quotient of the nonzero edge labels `d_ij`, including whether
+   four-cycle ratios generate it in the required sense;
+3. prove the descent of the support-normalized ratios under projectivities, Frobenius, and the
+   conic-support automorphism group;
+4. compute a lossless exact atlas on the smallest feasible standard-GRS cases and compare its
    fibres with exact automorphism orbits;
-4. replay the same invariants on all four frozen C398 classes as positive/negative controls; and
-5. if separation fails, stop at the first collision and characterize the entire collision fibre
+5. replay the same invariants on all four frozen C398 classes as positive/negative controls; and
+6. if separation fails, stop at the first collision and characterize the entire collision fibre
    before proposing any stronger invariant.
+
+Import order is strict: use the `arcs` syndrome/evaluation theorems first, C312/C314 quotient-chart
+discipline second, and `thm-repair-coefficients` as the gauge warning. Use C295 reconstruction only
+after a scalar-atlas collision. C417, Weil-roof, higher-order-MDS, and C474 modular/Picard machinery
+remain gated until that collision has a nontrivial structured fibre.
 
 The deliverable is
 [`notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`](../2026-07-22-c475-reed-solomon-determinant-atlas.md),

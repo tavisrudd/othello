@@ -10,3 +10,11 @@ The lane was split from the completed C398/C474 Reed--Solomon bridge. C475 was r
 first standard-GRS task: prove the descent of a bounded determinant/coefficient atlas, test exact
 orbit separation in the smallest normalized cases, and stop at the first collision to determine
 its complete fibre. No C475 mathematical result is claimed at lane creation.
+
+## 2026-07-22 — Cross-paper extraction
+
+The papers index and adjacent theorem banks sharpened the first move. On a Veronese conic the edge
+determinant factors into the support bracket and one syndrome bilinear form. Monomial-rescaling
+invariance then forces balanced edge ratios, with support-normalized four-cycles as the first atlas.
+The live handoff records the exact formula, import order, and stop gate; heavier cocycle, modular,
+and higher-order-MDS machinery remains conditional on a genuine atlas collision.
