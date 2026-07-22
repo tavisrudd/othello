@@ -20,8 +20,9 @@ intrinsic `1:4:6` recovery, and projective-cover explanation of the depth rank d
 relative-cubic Tate plane is appendix-level naturality machinery and is not identified with the
 depth plane.  The opening exposition is now a proof-free graphic sweep of the
 forgetting--balanced-recovery--cubic-orientation--parent-reconstruction arc.  Paper 1 closes with an
-exact survival/forgetting ledger and the C445 arithmetic-gluing theorem; C464 closes the
-perfect-code row, while quaternion, descent, torsor, Dickson, and zeta mechanisms remain Paper-2
+exact survival/forgetting ledger and the C445 arithmetic-gluing theorem; C469 upgrades C464's
+perfect-code row to the full-support/secant-shadow/Hadamard capstone, while quaternion, descent,
+torsor, Dickson, modular-sandwich, and zeta mechanisms remain Paper-2
 pointers.  The user has selected the replacement spine for Lean formalization, queued as
 C420--C428, while manuscript integration remains a separate owner action before release**.
 
@@ -31,10 +32,13 @@ The copy-ready abstract and section plan are
 [`2026-07-21-clebsch-paper-abstract-outline.md`](../2026-07-21-clebsch-paper-abstract-outline.md),
 the proof-free opening and conclusion prose draft is
 [`2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`](../2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md),
-and the complete C440--C468 paper-disposition inventory is
+and the complete C440--C469 paper-disposition inventory, including the editorial ranking, is
 [`2026-07-21-clebsch-weil-roof-results-ledger.md`](../2026-07-21-clebsch-weil-roof-results-ledger.md).
-The battery-wide proof/evidence, formalization-readiness, and bounded novelty audit is
+The proof/evidence, formalization-readiness, and bounded novelty audit through the pre-C465/C469
+battery is
 [`2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`](../2026-07-21-clebsch-weil-roof-proof-evidence-audit.md).
+C465 and C469 landed afterward; use their exact reports and the updated result ledger unless a
+proof-audit addendum is requested.
 The ranked runner-up novelty spot-check is
 [`2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md`](../2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md).
 The red-team-approved formalization campaign is
