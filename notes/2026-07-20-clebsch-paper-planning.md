@@ -4,9 +4,11 @@
 
 **Date:** 2026-07-20
 
-**Verdict:** `PROTECTED C399 BASELINE RETAINED; PAPER 1 USES THE C406+C411 REPLACEMENT SPINE,
-SELECTIVE C412 MODULAR UPGRADE, C445 ARITHMETIC-GLUING CLOSE, AND AN EXACT SURVIVAL/FORGETTING
-LEDGER; NO NATURAL CUBIC-TO-DEPTH OR UNIVERSAL WEIL IDENTIFICATION IS CLAIMED`
+**Verdict:** `SHIPPING THE UPGRADED REPLACEMENT-SPINE MANUSCRIPT: C406+C411 SPINE, SELECTIVE C412
+MODULAR UPGRADE, C445 ARITHMETIC-GLUING FLAGSHIP, EXACT SURVIVAL/FORGETTING LEDGER, AND THE
+CERTIFIED TORSOR-ROSETTA CLOSING THEOREM (C480); C399 IS AN EMERGENCY FALLBACK ONLY; NO NATURAL
+CUBIC-TO-DEPTH OR UNIVERSAL WEIL IDENTIFICATION IS CLAIMED; THE INTEGRAL CUBIC LIFT (C479) IS
+PAUSED AS AN OPTIONAL UPGRADE, NOT A DEPENDENCY`
 
 **Revision 2026-07-21:** the two-paper division is adopted.  Paper 1 is the C406+C411
 factorization-memory spine, selectively sharpened by C412 and closed by C445 plus the certified
@@ -49,6 +51,36 @@ to Paper 1's closing theorem and the survival/forgetting ledger hangs from that 
 C479 returns negative, the certified C445 arithmetic-gluing close stands unchanged and Paper 1 ships
 in its current planned form.  Either way the shipping target is the upgraded paper, never the
 C399-locked fallback.
+
+**Close revision 2026-07-22 (supersedes the conditional rule above):** C479 was paused before any
+construction work, and the close was decided on a different, fully certified route.  The banked
+decision (`2026-07-22-alt-master-strokes.md`, Banked decision section) selects the **torsor
+Rosetta merged with the outer hinge** as Paper 1's closing theorem, and the C480 gap-closing
+battery (`2026-07-22-c480-close-gap-certificates.md`) certified every leg: the outer element
+exchanges the C452 design pair and C378's signed Fourier sectors equivariantly, and the sheet
+swap lands in the outer row/column-exchanging class of `M12` (with `PSL_2(11)` self-normalizing),
+so the extended Hadamard/Mathieu layer joins the close.  The closing theorem, assembled entirely
+from certified parts, is:
+
+> the decoder's missing bit is one free `C2`-torsor, canonically realized as the two matching
+> sheets, the two nontrivial unipotent classes, the two cyclotomic period factors, the two split
+> primes of `Q(sqrt(-q))`, the two primes of `Z[phi]` (resp. `Z[sqrt2]`) above `q`, the two
+> conjugate lower Weil constituents, the two cubic orientation signs, the two QR/Barker design
+> polarities, the two signed Fourier sectors, and the outer `M12` hinge — with the marked Coxeter
+> matching as the universal pointing, read simultaneously through the single trace rule, and with
+> provably no unpointed section (C417/C448/C473).  In one line: the missing bit is
+> `Gal(Q(sqrt5)/Q)`, made finite — certified at the sheet level by C442/C445 with no dependence
+> on an integral cubic lift.
+
+The B falsifier fired exactly at its flagged risk: residue conventions differ between `q=7` and
+`q=11`, so the cubic-sign readout is a per-case dictionary and appears as one marking sentence
+inside the closing theorem, not a separate stroke.  The C443/C461 obstructions (and any future
+C479 negative) are stated as part of the theorem's content: the bit is carried arithmetically by
+the prime fiber, not by an integral tensor.  C479 remains paused as an optional upgrade — a
+GREEN integral carrier would append as one more realization without changing the close.  The
+survival/forgetting ledger now reads as the list of natural passages that do or do not see this
+one torsor, and the cliffhanger asks for the mechanism of the characteristic-`q` gluing (Paper
+2), not for the object.
 
 The proof/evidence and Lean-readiness audit predates C465 and C469--C471:
 `2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`.  It accepts the exact finite certificates,
@@ -186,8 +218,11 @@ frame and the closing section:
   control, not a third full data point.
 - **Closing section (one section, not six):** the survival/forgetting table — one row per natural
   passage, recording whether orientation survives, what weaker structure remains, the exact
-  certificate, and the classical-credit boundary.  Positive and negative rows are coequal results;
-  the cliffhanger follows the completed ledger.
+  certificate, and the classical-credit boundary.  Positive and negative rows are coequal results.
+  Directly after the completed ledger comes the **torsor-Rosetta closing theorem** (Close revision
+  above): the one free `C2`-torsor with its certified realizations, the universal pointing, and
+  the no-section clause — the ledger's rows reread as the passages that do or do not see that one
+  torsor.  The cliffhanger follows the closing theorem.
 
 ### Paper-1 survival/forgetting ledger (status at 2026-07-21)
 
@@ -391,7 +426,9 @@ draft of the proof-free first section and conclusion is
 4. cubic-first orientation, six depth profiles, and parent reconstruction;
 5. the A3/B3/H3 matching theorem and H3 arithmetic-gluing close;
 6. one survival/forgetting ledger containing both positive shadows and proved erasures;
-7. verification architecture and one scoped sequel question, followed by nothing.
+7. the torsor-Rosetta closing theorem assembling the certified realizations into one free
+   `C2`-torsor with its universal pointing and no-section clause;
+8. verification architecture and one scoped sequel question, followed by nothing.
 
 C376's cubic-surface character and C374's AME separation are strong corollaries or companion
 endpoints.  They should not become coequal spines.  C407--C409 should be compressed to the exact
@@ -440,25 +477,32 @@ should delay this plan or be accumulated into the same manuscript.
 Read in this order:
 
 1. `notes/handoffs/2026-07-13-clebsch-paper.md` for the live manuscript decision;
-2. this report for the current theorem/novelty map;
-3. for manuscript drafting, `notes/2026-07-21-clebsch-paper-abstract-outline.md` for the selected
+2. this report for the current theorem/novelty map — the Verdict, Shipping revision, and Close
+   revision at the top are the authoritative statement of what ships: the upgraded
+   replacement-spine manuscript ending in the certified torsor-Rosetta closing theorem;
+3. `notes/2026-07-22-alt-master-strokes.md` (candidates, banked decision, and close phrasing) and
+   `notes/2026-07-22-c480-close-gap-certificates.md` (the four gap-closing certificates) for the
+   closing theorem's exact content; `notes/2026-07-21-clebsch-master-stroke-integral-golden-model.md`
+   for the golden-model frame whose claims 1--4 are certified and whose claim 5 (C479) is paused
+   as an optional upgrade;
+4. for manuscript drafting, `notes/2026-07-21-clebsch-paper-abstract-outline.md` for the selected
    narrative and section plan, then `notes/2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`
    for copy-ready opening and closing prose;
-4. for a high-level generalist cold read or theorem-compression pass,
+5. for a high-level generalist cold read or theorem-compression pass,
    `notes/2026-07-21-clebsch-high-level-reader-cold-read.md`;
-5. for result intake or disposition review, `notes/2026-07-21-clebsch-weil-roof-results-ledger.md`
+6. for result intake or disposition review, `notes/2026-07-21-clebsch-weil-roof-results-ledger.md`
    for every recent result without loading the individual battery reports;
-6. for theorem work, `notes/2026-07-20-c406-matching-module.md` for the exact theorem and negative
+7. for theorem work, `notes/2026-07-20-c406-matching-module.md` for the exact theorem and negative
    results;
-7. for claim wording, `notes/2026-07-20-c406-priority-audit.md` for classical ownership and access
+8. for claim wording, `notes/2026-07-20-c406-priority-audit.md` for classical ownership and access
    gaps;
-8. only when comparing against the fallback, `notes/2026-07-19-clebsch-hexagons-are-the-bestagons-spine.md` for the protected exposition
+9. only when comparing against the fallback, `notes/2026-07-19-clebsch-hexagons-are-the-bestagons-spine.md` for the protected exposition
    baseline and candidate replacement architecture;
-9. `notes/2026-07-20-c411-double-coset-hecke.md` for the conceptual profile/cubic proof;
-10. `notes/2026-07-20-c412-relative-cubic-depth-plane.md` for the selective modular upgrade and its
+10. `notes/2026-07-20-c411-double-coset-hecke.md` for the conceptual profile/cubic proof;
+11. `notes/2026-07-20-c412-relative-cubic-depth-plane.md` for the selective modular upgrade and its
    non-identification boundary;
-11. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412;
-12. `notes/handoffs/2026-07-17-crowns.md` only for live research ordering outside the manuscript
+12. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412;
+13. `notes/handoffs/2026-07-17-crowns.md` only for live research ordering outside the manuscript
     lane.  The historical conversation report and execution controller are no longer routine
     Paper-1 context.
 
