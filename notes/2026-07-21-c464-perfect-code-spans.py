@@ -290,6 +290,7 @@ def build() -> dict[str, object]:
         if not (dual_is_subcode and all_one_splits and quotient_exhausts):
             raise AssertionError(f"q={q}: failed C=C^perp direct-sum <1> check")
         support_structure = None
+        projective_support_spectrum = None
         if q == 11:
             minimum_supports = {
                 tuple(i for i, value in enumerate(word) if value)
@@ -336,6 +337,42 @@ def build() -> dict[str, object]:
                 "k11_edge_bijection_formula": "support(1 - row_i - row_j) = complement(support(row_i) symmetric_difference support(row_j)) over F_3",
                 "k11_edge_to_residual_support": edge_map,
             }
+            projective_support_spectrum = {}
+            supports_by_weight = {}
+            for weight in (5, 6, 8, 9, 11):
+                weight_words = [word for word in disjoint_words
+                                if sum(value != 0 for value in word) == weight]
+                support_fibres: dict[tuple[int, ...], list[tuple[int, ...]]] = {}
+                projective_words = set()
+                for word in weight_words:
+                    support = tuple(i for i, value in enumerate(word) if value)
+                    support_fibres.setdefault(support, []).append(word)
+                    first = next(value for value in word if value)
+                    inverse = pow(first, -1, p)
+                    projective_words.add(tuple(inverse * value % p for value in word))
+                supports_by_weight[weight] = set(support_fibres)
+                projective_support_spectrum[str(weight)] = {
+                    "word_count": len(weight_words),
+                    "projective_scalar_orbits": len(projective_words),
+                    "support_count": len(support_fibres),
+                    "words_per_support_histogram": {
+                        str(size): count
+                        for size, count in sorted(Counter(map(len, support_fibres.values())).items())
+                    },
+                }
+            assert supports_by_weight[6] == {
+                tuple(i for i in range(q) if i not in support)
+                for support in supports_by_weight[5]
+            }
+            assert supports_by_weight[8] == set(itertools.combinations(range(q), 8))
+            assert supports_by_weight[9] == set(itertools.combinations(range(q), 9))
+            assert supports_by_weight[11] == {tuple(range(q))}
+            projective_support_spectrum["forced_support_families"] = {
+                "weight_6_are_complements_of_weight_5": True,
+                "weight_8_are_all_8_subsets": True,
+                "weight_9_are_all_9_subsets": True,
+                "weight_11_has_full_support": True,
+            }
         cases.append({
             "design_complement_pair": {
                 "all_one_quotient_coset_distributions": quotient_cosets,
@@ -362,6 +399,7 @@ def build() -> dict[str, object]:
             "q": q,
             "rank_cross_check_against_c450": checks,
             "relations": relations,
+            "projective_weight_support_spectrum": projective_support_spectrum,
             "third_order_minimum_support_structure": support_structure,
             "type": frozen["type"],
         })

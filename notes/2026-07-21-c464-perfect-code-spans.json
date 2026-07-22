@@ -285,6 +285,7 @@
           ]
         ]
       },
+      "projective_weight_support_spectrum": null,
       "q": 7,
       "rank_cross_check_against_c450": {
         "disjoint": {
@@ -759,6 +760,54 @@
         10
       ],
       "hamming_7_4_3_generator_equivalence": null,
+      "projective_weight_support_spectrum": {
+        "11": {
+          "projective_scalar_orbits": 12,
+          "support_count": 1,
+          "word_count": 24,
+          "words_per_support_histogram": {
+            "24": 1
+          }
+        },
+        "5": {
+          "projective_scalar_orbits": 66,
+          "support_count": 66,
+          "word_count": 132,
+          "words_per_support_histogram": {
+            "2": 66
+          }
+        },
+        "6": {
+          "projective_scalar_orbits": 66,
+          "support_count": 66,
+          "word_count": 132,
+          "words_per_support_histogram": {
+            "2": 66
+          }
+        },
+        "8": {
+          "projective_scalar_orbits": 165,
+          "support_count": 165,
+          "word_count": 330,
+          "words_per_support_histogram": {
+            "2": 165
+          }
+        },
+        "9": {
+          "projective_scalar_orbits": 55,
+          "support_count": 55,
+          "word_count": 110,
+          "words_per_support_histogram": {
+            "2": 55
+          }
+        },
+        "forced_support_families": {
+          "weight_11_has_full_support": true,
+          "weight_6_are_complements_of_weight_5": true,
+          "weight_8_are_all_8_subsets": true,
+          "weight_9_are_all_9_subsets": true
+        }
+      },
       "q": 11,
       "rank_cross_check_against_c450": {
         "disjoint": {

@@ -127,6 +127,23 @@ supports are known, minimum distance allows any four-subset in at most one suppo
 `2-(11,5,2)` design, `1-r_i-r_j` directly forces the 55 residual blocks.  Enumeration remains in
 the certificate as independent finite evidence, but is not the only explanation.
 
+## Fourth-order projective support spectrum
+
+Quotienting every nonzero ternary word by scalar multiplication gives an exact support census:
+
+| weight | projective words | distinct supports | support family |
+|---:|---:|---:|:--|
+| 5 | 66 | 66 | the Witt blocks above |
+| 6 | 66 | 66 | their complements |
+| 8 | 165 | 165 | every 8-subset of the eleven coordinates |
+| 9 | 55 | 55 | every 9-subset of the eleven coordinates |
+| 11 | 12 | 1 | twelve projective words on full support |
+
+Thus the apparent `165=C(11,3)` and `55=C(11,2)` coincidences are literal complete support
+families, not numerology.  The twelve full-support projective words are a sharp symmetry mystery:
+`12=|PSL_2(11):(11:5)|` is the degree of the natural projective-line action, but C464 does not
+certify that orbit or its stabilizer.
+
 ## Explicit binary Hamming equivalence
 
 The row-reduced generator obtained from the `q=7` disjointness incidence matrix is
@@ -184,6 +201,8 @@ sphere terms and equalities, incidence-row coverage of the minimum words, both e
 transforms, the explicit Hamming equivalence matrices, the computed dual-span checks, and the four
 C450 rank/nullity comparisons. It also records the dual-coset decompositions, all minimum-support
 counts, and the 55-entry `K_11` edge model.
+The projective support spectrum additionally records all support fibres at weights 5, 6, 8, 9,
+and 11.
 
 Run from `/home/tavis/src/othello`:
 
@@ -207,8 +226,8 @@ recounts the minimum-word row coverage, and checks the recorded Hamming matrix e
 The trusted boundary is exact integer and prime-field arithmetic plus the hash-pinned C406, C450,
 and C452 certificates.  The output is deterministic and timestamp-free.
 
-The load-bearing byte counts are: primary generator 18,543; independent replay 11,386; canonical
-JSON 42,373; C452 input 22,113; C450 input 46,770; and C406 input 25,443.  The certificate records
+The load-bearing byte counts are: primary generator 20,710; independent replay 13,093; canonical
+JSON 43,735; C452 input 22,113; C450 input 46,770; and C406 input 25,443.  The certificate records
 the complete pinned input hashes, and the checksum manifest records complete hashes for the report,
 both executables, and the JSON output.
 
@@ -226,9 +245,10 @@ both executables, and the JSON output.
   C450's 55 cross-sheet relation-support elements.  The precise candidate is the orbit
   decomposition `G/A5 + G/A4`; it requires one anchored support map and the relevant stabilizer
   conjugacy check, precisely the pre-allocation-gated symmetry successor.
-- **Open — the 24 full-support words.** The dual-coset split explains them as 12 words in each
-  nonzero all-one coset, but does not explain the 12 scalar pairs geometrically.  The same gated
-  symmetry computation is the exact evidence gap.
+- **Partly settled — the 24 full-support words.** They are exactly twelve projective scalar pairs;
+  each pair has one representative in each nonzero all-one coset.  The candidate explanation is the
+  natural twelve-point orbit `G/(11:5) ~= P^1(F_11)`, but its action and stabilizer remain
+  uncertified.  This belongs inside the same gated symmetry successor, not a separate task.
 - **No other genuine C464 mystery remains.** Rank, distance, complete distributions, perfection,
   duality, binary equivalence, row coverage, dual-coset structure, Steiner closure, and the `K_11`
-  edge formula all pass exact replay.
+  edge formula, and the full projective support census all pass exact replay.

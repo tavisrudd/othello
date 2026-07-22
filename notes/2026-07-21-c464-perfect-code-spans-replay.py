@@ -203,6 +203,34 @@ def main() -> None:
             assert structure["all_minimum_supports_form_steiner_4_11_5_1"]
             assert structure["selected_rows_form_2_11_5_2"]
             assert structure["residual_supports_form_2_11_5_10"]
+            spectrum = case["projective_weight_support_spectrum"]
+            supports_by_weight = {}
+            for weight in (5, 6, 8, 9, 11):
+                weight_words = [word for word in replay_spans["disjoint"]
+                                if sum(value != 0 for value in word) == weight]
+                support_fibres = {}
+                projective_words = set()
+                for word in weight_words:
+                    support = tuple(i for i, value in enumerate(word) if value)
+                    support_fibres.setdefault(support, []).append(word)
+                    inverse = pow(next(value for value in word if value), -1, p)
+                    projective_words.add(tuple(inverse * value % p for value in word))
+                supports_by_weight[weight] = set(support_fibres)
+                recorded = spectrum[str(weight)]
+                assert recorded["word_count"] == len(weight_words)
+                assert recorded["projective_scalar_orbits"] == len(projective_words)
+                assert recorded["support_count"] == len(support_fibres)
+                assert recorded["words_per_support_histogram"] == {
+                    str(size): count
+                    for size, count in sorted(Counter(map(len, support_fibres.values())).items())
+                }
+            assert supports_by_weight[6] == {
+                tuple(i for i in range(q) if i not in support)
+                for support in supports_by_weight[5]
+            }
+            assert supports_by_weight[8] == set(itertools.combinations(range(q), 8))
+            assert supports_by_weight[9] == set(itertools.combinations(range(q), 9))
+            assert supports_by_weight[11] == {tuple(range(q))}
 
         if q == 7:
             eq = case["hamming_7_4_3_generator_equivalence"]
