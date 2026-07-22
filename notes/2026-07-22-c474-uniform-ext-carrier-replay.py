@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 from collections import deque
 from pathlib import Path
@@ -50,6 +51,77 @@ def canonical_basis(vectors, p: int, width: int):
                 rows[i] = [(x - scale * y) % p for x, y in zip(rows[i], rows[len(out)])]
         out.append(tuple(rows[len(out)]))
     return tuple(out)
+
+
+def kernel_basis(matrix, p: int, width: int):
+    rows = [[x % p for x in row] for row in matrix]
+    pivots = []
+    for column in range(width):
+        pivot = next((i for i in range(len(pivots), len(rows)) if rows[i][column]), None)
+        if pivot is None:
+            continue
+        current = len(pivots)
+        rows[current], rows[pivot] = rows[pivot], rows[current]
+        scale = pow(rows[current][column], p - 2, p)
+        rows[current] = [scale * x % p for x in rows[current]]
+        for i in range(len(rows)):
+            if i != current and rows[i][column]:
+                scale = rows[i][column]
+                rows[i] = [(x - scale * y) % p for x, y in zip(rows[i], rows[current])]
+        pivots.append(column)
+    reduced = rows[:len(pivots)]
+    free = [i for i in range(width) if i not in pivots]
+    out = []
+    for column in free:
+        vector = [0] * width
+        vector[column] = 1
+        for row, pivot in zip(reduced, pivots):
+            vector[pivot] = (-row[column]) % p
+        out.append(tuple(vector))
+    return tuple(out)
+
+
+def linear_solution(matrix, rhs, p: int):
+    width = len(matrix[0])
+    rows = [[x % p for x in row] + [value % p] for row, value in zip(matrix, rhs)]
+    pivot_row = 0
+    pivots = []
+    for column in range(width):
+        pivot = next((i for i in range(pivot_row, len(rows)) if rows[i][column]), None)
+        if pivot is None:
+            continue
+        rows[pivot_row], rows[pivot] = rows[pivot], rows[pivot_row]
+        scale = pow(rows[pivot_row][column], p - 2, p)
+        rows[pivot_row] = [scale * x % p for x in rows[pivot_row]]
+        for i in range(len(rows)):
+            if i != pivot_row and rows[i][column]:
+                scale = rows[i][column]
+                rows[i] = [(x - scale * y) % p for x, y in zip(rows[i], rows[pivot_row])]
+        pivots.append(column)
+        pivot_row += 1
+    assert all(any(row[:-1]) or not row[-1] for row in rows)
+    solution = [0] * width
+    for row, column in zip(rows, pivots):
+        solution[column] = row[-1]
+    assert mv(matrix, solution, p) == tuple(x % p for x in rhs)
+    return tuple(solution)
+
+
+def nilpotent_data(operator, p: int, exponent: int):
+    n = len(operator)
+    ranks = [n]
+    power = eye(n)
+    for _ in range(exponent):
+        power = mm(power, operator, p)
+        ranks.append(rank(power, p, n))
+    assert ranks[-1] == 0
+    extended = ranks + [0]
+    blocks = {}
+    for size in range(1, exponent + 1):
+        count = extended[size - 1] - 2 * extended[size] + extended[size + 1]
+        if count:
+            blocks[f"J{size}"] = count
+    return {"nilpotent_power_ranks_including_identity": ranks, "jordan_blocks": blocks}
 
 
 def coordinates(vector, basis, p: int):
@@ -274,6 +346,123 @@ def derive_case(record, upstream, oriented):
     assert list(example[3]) == local["shortest_detecting_cocycle_value"]
     assert local["detecting_element_count_at_minimal_order"] == local_rows[target_key]
     assert local["detecting_cyclic_subgroup_count"] == local_rows[target_key] // 2
+    target_g, target_z = example[2], example[3]
+    target_action = actions[target_g]
+    difference = tuple(tuple((target_action[i][j] - int(i == j)) % p for j in range(n)) for i in range(n))
+    mechanism = local["local_module_mechanism"]
+    assert nilpotent_data(difference, p, target_order) == mechanism["coefficient_module_jordan_decomposition"]
+    difference_squared = mm(difference, difference, p)
+    gauge = linear_solution(difference_squared, mv(difference, target_z, p), p)
+    coboundary = tuple((gauge[i] - mv(target_action, gauge, p)[i]) % p for i in range(n))
+    fixed_cocycle = tuple((target_z[i] + coboundary[i]) % p for i in range(n))
+    assert list(gauge) == mechanism["canonical_gauge_vector"]
+    assert list(fixed_cocycle) == mechanism["canonical_fixed_cocycle_value"]
+    assert not any(mv(difference, fixed_cocycle, p))
+    image_basis = canonical_basis([tuple(difference[i][j] for i in range(n)) for j in range(n)], p, n)
+    fixed_basis = kernel_basis(difference, p, n)
+    assert all(not any(mv(difference, vector, p)) for vector in fixed_basis)
+    intersection_dimension = rank(difference, p, n) - rank(difference_squared, p, n)
+    assert len(fixed_basis) == mechanism["fixed_space_dimension"]
+    assert intersection_dimension == mechanism["image_intersection_fixed_dimension"]
+    assert len(fixed_basis) - intersection_dimension == mechanism["fixed_quotient_dimension"] == 1
+    assert rank([*image_basis, fixed_cocycle], p, n) == len(image_basis) + 1
+    fixed_map_rank = rank([fixed_cocycle[i * d:(i + 1) * d] for i in range(d)], p, d)
+    assert fixed_map_rank == mechanism["canonical_fixed_map_rank"]
+    endpoint_jordan = {}
+    for name, endpoint_generators in (("socle", vs), ("head", ws)):
+        endpoint_action = eye(d)
+        for generator_index in example[1]:
+            endpoint_action = mm(endpoint_action, endpoint_generators[generator_index], p)
+        endpoint_difference = tuple(tuple((endpoint_action[i][j] - int(i == j)) % p for j in range(d))
+                                    for i in range(d))
+        endpoint_jordan[name] = nilpotent_data(endpoint_difference, p, target_order)
+    assert endpoint_jordan == mechanism["endpoint_jordan_decomposition"]
+    assert endpoint_jordan["socle"] == endpoint_jordan["head"]
+    assert mechanism["endpoints_are_isomorphic_on_detecting_cyclic_subgroup"] is True
+    assert mechanism["endpoint_is_endotrivial"] is True
+    assert mechanism["stable_endpoint_class"] == "Omega^1(J1)"
+    assert mechanism["stable_hom_class"] == "J1; every other Hom summand is free/projective"
+    if p == 2:
+        square = product(target_g, target_g)
+        square_action = actions[square]
+        square_difference = tuple(tuple((square_action[i][j] - int(i == j)) % p for j in range(n)) for i in range(n))
+        assert nilpotent_data(square_difference, p, 2) == mechanism["square_subgroup_jordan_decomposition"]
+        square_value = tuple((fixed_cocycle[i] + mv(target_action, fixed_cocycle, p)[i]) % p for i in range(n))
+        assert list(square_value) == mechanism["fixed_cocycle_value_on_square"]
+        rank_distribution = {}
+        nonzero_count = 0
+        for coefficients in itertools.product(range(p), repeat=len(fixed_basis)):
+            vector = tuple(sum(coefficients[k] * fixed_basis[k][i] for k in range(len(fixed_basis))) % p
+                           for i in range(n))
+            if rank([*image_basis, vector], p, n) == len(image_basis) + 1:
+                nonzero_count += 1
+                map_rank = rank([vector[i * d:(i + 1) * d] for i in range(d)], p, d)
+                rank_distribution[str(map_rank)] = rank_distribution.get(str(map_rank), 0) + 1
+        assert nonzero_count == mechanism["nonzero_fixed_class_representatives"]
+        assert rank_distribution == mechanism["nonzero_fixed_class_map_rank_distribution"], (rank_distribution, mechanism["nonzero_fixed_class_map_rank_distribution"])
+        assert mechanism["inflates_from_quotient_C4_over_C2"] is True
+        inverse_target = next(h for h in words if product(target_g, h) == identity_perm)
+        reflections = [h for h in words if product(product(h, target_g), h) == inverse_target
+                       and product(h, h) == identity_perm]
+        reflection = min(reflections, key=lambda h: (len(words[h]), words[h], h))
+        sylow_generators = [target_g, reflection]
+        sylow_hom_generators = [actions[target_g], actions[reflection]]
+        sylow_words = group_words(sylow_generators)
+        sylow_expressions = {}
+        sylow_actions = {}
+        for g, word in sylow_words.items():
+            action_now = eye(n)
+            expression = [[0] * (2 * n) for _ in range(n)]
+            for s in word:
+                for i in range(n):
+                    for j in range(n):
+                        expression[i][s * n + j] = (expression[i][s * n + j] + action_now[i][j]) % p
+                action_now = mm(action_now, sylow_hom_generators[s], p)
+            sylow_actions[g] = action_now
+            sylow_expressions[g] = tuple(tuple(row) for row in expression)
+        sylow_constraints = []
+        for g in sylow_words:
+            for s, generator in enumerate(sylow_generators):
+                h = product(g, generator)
+                for i in range(n):
+                    candidate = list(sylow_expressions[g][i])
+                    for j in range(n):
+                        candidate[s * n + j] = (candidate[s * n + j] + sylow_actions[g][i][j]) % p
+                    sylow_constraints.append(tuple((candidate[j] - sylow_expressions[h][i][j]) % p
+                                                    for j in range(2 * n)))
+        sylow_relation_rank = rank(sylow_constraints, p, 2 * n)
+        sylow_z_basis = kernel_basis(sylow_constraints, p, 2 * n)
+        sylow_coboundaries = []
+        for j in range(n):
+            vector = []
+            for action in sylow_hom_generators:
+                vector.extend((int(i == j) - action[i][j]) % p for i in range(n))
+            sylow_coboundaries.append(tuple(vector))
+        sylow_b_basis = canonical_basis(sylow_coboundaries, p, 2 * n)
+        sylow_h_basis = []
+        sylow_span = list(sylow_b_basis)
+        for cocycle in sylow_z_basis:
+            if rank([*sylow_span, cocycle], p, 2 * n) > len(sylow_span):
+                sylow_h_basis.append(cocycle)
+                sylow_span.append(cocycle)
+        local_coboundaries = [tuple((int(i == j) - target_action[i][j]) % p for i in range(n))
+                                for j in range(n)]
+        local_b_rank = rank(local_coboundaries, p, n)
+        restriction_rank = rank([*local_coboundaries, *(cocycle[:n] for cocycle in sylow_h_basis)], p, n) - local_b_rank
+        frozen_sylow = tuple([*stored[target_g], *stored[reflection]])
+        ladder = mechanism["binary_sylow_ladder"]
+        assert list(words[reflection]) == ladder["reflection_word_generator_indices"]
+        assert len(sylow_words) == ladder["sylow_order"] == 8
+        assert len(words) // len(sylow_words) == ladder["sylow_index"] == 21
+        assert sylow_relation_rank == ladder["relation_constraint_rank"]
+        assert len(sylow_z_basis) == ladder["sylow_z1_dimension"]
+        assert len(sylow_b_basis) == ladder["sylow_b1_dimension"]
+        assert len(sylow_h_basis) == ladder["sylow_h1_dimension"]
+        assert restriction_rank == ladder["restriction_to_C4_rank"]
+        assert len(sylow_h_basis) - restriction_rank == ladder["restriction_to_C4_kernel_dimension"]
+        assert rank([*sylow_b_basis, frozen_sylow], p, 2 * n) == len(sylow_b_basis) + 1
+        assert ladder["frozen_sylow_class_nonzero"] is True
+        assert ladder["global_restriction_is_injective_by_odd_index_transfer"] is True
 
     def centralizer_dimension(matrices):
         equations = []

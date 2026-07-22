@@ -178,6 +178,64 @@ q=11: visible already on the Sylow C3.
 The agreement `dim Ext^1=1` is therefore not evidence that the two classes arise at the same
 cohomological depth.
 
+### Mystery resolved: the local endotrivial mechanism
+
+Let `J_r` denote the length-`r` indecomposable module for the relevant cyclic p-group.  For a
+full-order cyclic group, the full-length block is free/projective.  The exact nilpotent ranks of
+`N=g-1` now give
+
+| case | endpoint restrictions `S_q`, `S_q^*` | `Hom(S_q^*,S_q)` restriction |
+|:--|:--|:--|
+| `F_2[C4]` | `J3 = Omega^1(J1)` | `J4^2 direct-sum J1` |
+| `F_3[C3]` | `J3 direct-sum J2`, stably `J2=Omega^1(J1)` | `J3^8 direct-sum J1` |
+
+The load-bearing rank profiles are
+
+```text
+q=7 Hom:   rank(N^0,N^1,N^2,N^3,N^4) = (9,6,4,2,0),
+q=11 Hom:  rank(N^0,N^1,N^2,N^3)     = (25,16,8,0).
+```
+
+Thus the two endpoint restrictions are isomorphic and endotrivial on the detecting cyclic
+subgroup: their Hom module is one trivial line plus projective summands.  Projective summands have
+no cyclic cohomology, so the unique `J1` is exactly the source of the one-dimensional local `H^1`.
+This is the structural common mechanism hidden behind the two Ext calculations.  The common
+feature is local endotriviality, not merely the equality `m=(q+1)/4`.
+
+The binary depth-two behavior is even more explicit.  After one certified coboundary gauge, for
+`c=T^3S` the cocycle has
+
+```text
+z(c) = phi = [1 0 1]
+             [0 0 1]
+             [0 1 1],       c.phi=phi,       det(phi)=1.
+```
+
+All four fixed representatives of the nonzero local class are invertible intertwiners
+`S_7^*|C4 -> S_7|C4`.  On the unique stable trivial line the cocycle is simply the quotient
+character
+
+```text
+C4 -> C4/C2 ~= F_2,       c |-> 1.
+```
+
+Consequently `z(c^2)=phi+c.phi=2phi=0`.  The class is ordinary inflation from `C4/C2`; its
+vanishing on involutions requires neither a Bockstein nor a quadratic refinement.  Those remain
+possible structures elsewhere in the Hadamard/Golay story, but they do not explain this Ext
+phenomenon.
+
+The full binary p-local ladder is also exact:
+
+```text
+H^1(PSL_2(7),M)  --injective restriction-->  H^1(D8,M)  -->  H^1(C4,M)
+dimension 1                                  dimension 2      dimension 1
+```
+
+The first map is injective by odd-index transfer (`[PSL_2(7):D8]=21`); the second has rank one and
+one-dimensional kernel.  The frozen class survives both maps.  Thus local endotriviality explains
+the cyclic class, while global fusion selects one of the two Sylow-cohomology directions.  For
+`q=11`, the detecting `C3` is already Sylow and restriction is an isomorphism directly.
+
 ## Strongest honest common theorem
 
 Let
@@ -283,18 +341,23 @@ no literature novelty or priority claim.
   isomorphically to every `C4` at q=7 and every Sylow `C3` at q=11.  The binary class vanishes on
   every involution subgroup, proving that its first cyclic detection occurs at order four; the
   ternary class is already detected at order three.
+- **Settled by mystery-directed `ej` — the shared cohomological mechanism.** On the detecting
+  cyclic subgroup both endpoints are endotrivial: their Hom module is a single `J1` plus free
+  blocks (`J4^2+J1` and `J3^8+J1`).  The lone stable trivial summand, and no Gram scalar by itself,
+  supplies the one-dimensional local class.
+- **Settled — why the binary class vanishes on involutions.** After coboundary gauge it is the
+  quotient character `C4 -> C4/C2` multiplied by an invertible fixed endpoint intertwiner.  It is
+  ordinary inflation, so the square maps to zero.  No Bockstein or quadratic refinement is needed.
+- **Settled — the binary Sylow gap.** `H^1(D8,M)` has dimension two, restriction to `C4` has rank
+  one, and odd-index transfer injects the one-dimensional global group into it.  Global fusion,
+  rather than cyclic cohomology, removes the extra Sylow direction.
 - **Settled — effects of C472/C473.** The signed split cover introduces no second extension class;
   the pointed trace-prime rule canonically names the socle in each case.
-- **Open, with exact Phase-3 boundary — why the same rank defect occurs twice.** Both relation
-  systems have rank `d^2-1`, leaving `dim Z^1=d^2+1`, but no mechanism derives this one-dimensional
-  defect from `m` alone.  The evidence gap is a uniformly defined carrier and a structural
-  cohomology theorem outside `{7,11}`.  The bounded Phase-3 synthesis must classify the Rosetta row
-  as checked rather than family-proved.
-- **Newly exposed, with the same owner — unequal local depth.** The binary class requires order
-  four while the ternary class is detected on order three.  The exact open question is whether the
-  binary depth-two behavior follows conceptually from the symplectic characteristic-two carrier
-  (for example through a Bockstein or quadratic refinement), rather than from the enumerated
-  matrices.  This is a mechanism question for Phase 3, not evidence for a larger family.
+- **Open, with exact Phase-3 boundary — geometry-to-endotriviality.** The Ext and unequal-depth
+  mysteries are resolved internally.  What remains is whether a future uniform carrier theorem
+  can derive the local endotrivial endpoint restrictions from the period/Gram geometry.  Outside
+  `{7,11}` no carrier is defined, so this is the precise evidence gap; Phase 3 must record the
+  current Rosetta row as a proved two-case mechanism, not a family theorem.
 - **No other genuine C474 mystery remains.** Ext dimensions, cocycle representatives, frozen-class
   coordinates, endpoint automorphisms, scalar orbits, and the exact larger-family obstruction are
   closed.

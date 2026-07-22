@@ -4471,6 +4471,126 @@
       "local_detection": {
         "detecting_cyclic_subgroup_count": 21,
         "detecting_element_count_at_minimal_order": 42,
+        "local_module_mechanism": {
+          "binary_sylow_ladder": {
+            "frozen_sylow_class_nonzero": true,
+            "global_restriction_image_dimension": 1,
+            "global_restriction_is_injective_by_odd_index_transfer": true,
+            "reflection_word_generator_indices": [
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            "relation_constraint_rank": 9,
+            "restriction_to_C4_kernel_dimension": 1,
+            "restriction_to_C4_rank": 1,
+            "sylow_b1_dimension": 7,
+            "sylow_group": "D8",
+            "sylow_h1_dimension": 2,
+            "sylow_index": 21,
+            "sylow_order": 8,
+            "sylow_z1_dimension": 9
+          },
+          "canonical_fixed_cocycle_value": [
+            1,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "canonical_fixed_map_rank": 3,
+          "canonical_gauge_vector": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient_module_jordan_decomposition": {
+            "jordan_blocks": {
+              "J1": 1,
+              "J4": 2
+            },
+            "nilpotent_power_ranks_including_identity": [
+              9,
+              6,
+              4,
+              2,
+              0
+            ]
+          },
+          "cohomology_source": "the unique trivial J1 block; full-length Jordan blocks are free/projective",
+          "endpoint_is_endotrivial": true,
+          "endpoint_jordan_decomposition": {
+            "head": {
+              "jordan_blocks": {
+                "J3": 1
+              },
+              "nilpotent_power_ranks_including_identity": [
+                3,
+                2,
+                1,
+                0,
+                0
+              ]
+            },
+            "socle": {
+              "jordan_blocks": {
+                "J3": 1
+              },
+              "nilpotent_power_ranks_including_identity": [
+                3,
+                2,
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          "endpoints_are_isomorphic_on_detecting_cyclic_subgroup": true,
+          "fixed_cocycle_value_on_square": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "fixed_quotient_dimension": 1,
+          "fixed_space_dimension": 3,
+          "image_intersection_fixed_dimension": 2,
+          "inflates_from_quotient_C4_over_C2": true,
+          "nonzero_fixed_class_map_rank_distribution": {
+            "3": 4
+          },
+          "nonzero_fixed_class_representatives": 4,
+          "square_subgroup_jordan_decomposition": {
+            "jordan_blocks": {
+              "J1": 1,
+              "J2": 4
+            },
+            "nilpotent_power_ranks_including_identity": [
+              9,
+              4,
+              0
+            ]
+          },
+          "stable_endpoint_class": "Omega^1(J1)",
+          "stable_hom_class": "J1; every other Hom summand is free/projective"
+        },
         "minimal_detecting_cyclic_order": 4,
         "p_divisible_order_census": [
           {
@@ -36661,6 +36781,109 @@
       "local_detection": {
         "detecting_cyclic_subgroup_count": 55,
         "detecting_element_count_at_minimal_order": 110,
+        "local_module_mechanism": {
+          "canonical_fixed_cocycle_value": [
+            0,
+            0,
+            2,
+            2,
+            1,
+            0,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "canonical_fixed_map_rank": 2,
+          "canonical_gauge_vector": [
+            2,
+            0,
+            0,
+            2,
+            0,
+            0,
+            2,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "coefficient_module_jordan_decomposition": {
+            "jordan_blocks": {
+              "J1": 1,
+              "J3": 8
+            },
+            "nilpotent_power_ranks_including_identity": [
+              25,
+              16,
+              8,
+              0
+            ]
+          },
+          "cohomology_source": "the unique trivial J1 block; full-length Jordan blocks are free/projective",
+          "endpoint_is_endotrivial": true,
+          "endpoint_jordan_decomposition": {
+            "head": {
+              "jordan_blocks": {
+                "J2": 1,
+                "J3": 1
+              },
+              "nilpotent_power_ranks_including_identity": [
+                5,
+                3,
+                1,
+                0
+              ]
+            },
+            "socle": {
+              "jordan_blocks": {
+                "J2": 1,
+                "J3": 1
+              },
+              "nilpotent_power_ranks_including_identity": [
+                5,
+                3,
+                1,
+                0
+              ]
+            }
+          },
+          "endpoints_are_isomorphic_on_detecting_cyclic_subgroup": true,
+          "fixed_quotient_dimension": 1,
+          "fixed_space_dimension": 9,
+          "image_intersection_fixed_dimension": 8,
+          "stable_endpoint_class": "Omega^1(J1)",
+          "stable_hom_class": "J1; every other Hom summand is free/projective"
+        },
         "minimal_detecting_cyclic_order": 3,
         "p_divisible_order_census": [
           {

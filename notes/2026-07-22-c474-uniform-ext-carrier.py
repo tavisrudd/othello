@@ -206,7 +206,7 @@ def coboundaries(hom_generators, p: int):
         for action in hom_generators:
             column.extend((int(i == j) - action[i][j]) % p for i in range(n))
         columns.append(tuple(column))
-    return rref(columns, p, 2 * n)[0], tuple(columns)
+    return rref(columns, p, len(hom_generators) * n)[0], tuple(columns)
 
 
 def solve_in_basis(v, basis, p: int):
@@ -265,7 +265,36 @@ def permutation_order(g):
     raise AssertionError("permutation order bound failed")
 
 
-def cyclic_restriction_data(words, actions, values, p: int):
+def nilpotent_jordan_data(operator, p: int, exponent: int):
+    n = len(operator)
+    ranks = [n]
+    power = identity(n)
+    for _ in range(exponent):
+        power = matmul(power, operator, p)
+        ranks.append(len(rref(power, p, n)[0]))
+    assert ranks[-1] == 0
+    blocks = {}
+    extended = ranks + [0]
+    for size in range(1, exponent + 1):
+        count = extended[size - 1] - 2 * extended[size] + extended[size + 1]
+        if count:
+            blocks[f"J{size}"] = count
+    assert sum(int(name[1:]) * count for name, count in blocks.items()) == n
+    return {"nilpotent_power_ranks_including_identity": ranks, "jordan_blocks": blocks}
+
+
+def matrix_rank_from_flat(vector, d: int, p: int):
+    return len(rref([vector[i * d:(i + 1) * d] for i in range(d)], p, d)[0])
+
+
+def word_matrix(generators, word, p: int):
+    out = identity(len(generators[0]))
+    for generator_index in word:
+        out = matmul(out, generators[generator_index], p)
+    return out
+
+
+def cyclic_restriction_data(words, actions, values, p: int, d: int):
     n = len(next(iter(actions.values())))
     identity_matrix = identity(n)
     census = {}
@@ -296,6 +325,83 @@ def cyclic_restriction_data(words, actions, values, p: int):
     target = next(row for row in rows if row["element_order"] == target_order and row["frozen_restriction_nonzero"])
     example = examples[(target_order, target["cyclic_h1_dimension"], True)]
     assert target["cyclic_h1_dimension"] == 1
+    target_g, target_z = example[2], example[3]
+    target_action = actions[target_g]
+    difference = tuple(tuple((target_action[i][j] - int(i == j)) % p for j in range(n)) for i in range(n))
+    target_jordan = nilpotent_jordan_data(difference, p, target_order)
+    image_basis = rref([tuple(difference[i][j] for i in range(n)) for j in range(n)], p, n)[0]
+    fixed_basis = nullspace(difference, p, n)
+    fixed_image_intersection_dimension = len(image_basis) + len(fixed_basis) - len(rref([*image_basis, *fixed_basis], p, n)[0])
+    assert len(fixed_basis) - fixed_image_intersection_dimension == 1
+    difference_squared = matmul(difference, difference, p)
+    gauge = solve_affine(difference_squared, matvec(difference, target_z, p), p, n)
+    coboundary = tuple((gauge[i] - matvec(target_action, gauge, p)[i]) % p for i in range(n))
+    fixed_cocycle = tuple((target_z[i] + coboundary[i]) % p for i in range(n))
+    assert not any(matvec(difference, fixed_cocycle, p))
+    assert len(rref([*image_basis, fixed_cocycle], p, n)[0]) == len(image_basis) + 1
+    mechanism = {
+        "coefficient_module_jordan_decomposition": target_jordan,
+        "fixed_space_dimension": len(fixed_basis),
+        "image_intersection_fixed_dimension": fixed_image_intersection_dimension,
+        "fixed_quotient_dimension": 1,
+        "canonical_gauge_vector": list(gauge),
+        "canonical_fixed_cocycle_value": list(fixed_cocycle),
+        "canonical_fixed_map_rank": matrix_rank_from_flat(fixed_cocycle, d, p),
+        "cohomology_source": "the unique trivial J1 block; full-length Jordan blocks are free/projective",
+    }
+    if p == 2:
+        square = compose_perm(target_g, target_g)
+        square_action = actions[square]
+        square_difference = tuple(tuple((square_action[i][j] - int(i == j)) % p for j in range(n)) for i in range(n))
+        mechanism["square_subgroup_jordan_decomposition"] = nilpotent_jordan_data(square_difference, p, 2)
+        mechanism["fixed_cocycle_value_on_square"] = list(tuple(
+            (fixed_cocycle[i] + matvec(target_action, fixed_cocycle, p)[i]) % p for i in range(n)))
+        assert not any(mechanism["fixed_cocycle_value_on_square"])
+        fixed_vectors = [tuple(sum(coeff[k] * fixed_basis[k][i] for k in range(len(fixed_basis))) % p
+                               for i in range(n))
+                         for coeff in itertools.product(range(p), repeat=len(fixed_basis))]
+        nonzero_class_fixed = [v for v in fixed_vectors
+                               if len(rref([*image_basis, v], p, n)[0]) == len(image_basis) + 1]
+        rank_distribution = {}
+        for vector in nonzero_class_fixed:
+            map_rank = matrix_rank_from_flat(vector, d, p)
+            rank_distribution[str(map_rank)] = rank_distribution.get(str(map_rank), 0) + 1
+        mechanism["nonzero_fixed_class_representatives"] = len(nonzero_class_fixed)
+        mechanism["nonzero_fixed_class_map_rank_distribution"] = rank_distribution
+        mechanism["inflates_from_quotient_C4_over_C2"] = True
+        identity_perm = tuple(range(len(target_g)))
+        inverse_target = next(h for h in words if compose_perm(target_g, h) == identity_perm)
+        reflections = [h for h in words if permutation_order(h) == 2
+                       and compose_perm(compose_perm(h, target_g), h) == inverse_target]
+        reflection = min(reflections, key=lambda h: (len(words[h]), words[h], h))
+        sylow_words, _, _, sylow_constraints, sylow_z_basis = cocycle_constraints(
+            [target_g, reflection], [actions[target_g], actions[reflection]], p)
+        sylow_b_basis, _ = coboundaries([actions[target_g], actions[reflection]], p)
+        sylow_h_basis = []
+        sylow_span = list(sylow_b_basis)
+        for cocycle in sylow_z_basis:
+            if len(rref([*sylow_span, cocycle], p, len(cocycle))[0]) > len(sylow_span):
+                sylow_h_basis.append(cocycle)
+                sylow_span.append(cocycle)
+        local_b_basis, _ = coboundaries([actions[target_g]], p)
+        restricted_h = [cocycle[:n] for cocycle in sylow_h_basis]
+        restriction_rank = len(rref([*local_b_basis, *restricted_h], p, n)[0]) - len(local_b_basis)
+        frozen_sylow = tuple([*values[target_g], *values[reflection]])
+        mechanism["binary_sylow_ladder"] = {
+            "sylow_group": "D8",
+            "sylow_order": len(sylow_words),
+            "sylow_index": len(words) // len(sylow_words),
+            "reflection_word_generator_indices": list(words[reflection]),
+            "sylow_z1_dimension": len(sylow_z_basis),
+            "sylow_b1_dimension": len(sylow_b_basis),
+            "sylow_h1_dimension": len(sylow_h_basis),
+            "restriction_to_C4_rank": restriction_rank,
+            "restriction_to_C4_kernel_dimension": len(sylow_h_basis) - restriction_rank,
+            "global_restriction_image_dimension": 1,
+            "global_restriction_is_injective_by_odd_index_transfer": True,
+            "frozen_sylow_class_nonzero": len(rref([*sylow_b_basis, frozen_sylow], p, len(frozen_sylow))[0]) == len(sylow_b_basis) + 1,
+            "relation_constraint_rank": len(sylow_constraints),
+        }
     return {
         "p_divisible_order_census": rows,
         "minimal_detecting_cyclic_order": target_order,
@@ -305,6 +411,7 @@ def cyclic_restriction_data(words, actions, values, p: int):
         "shortest_detecting_word_generator_indices": list(example[1]),
         "shortest_detecting_permutation": list(example[2]),
         "shortest_detecting_cocycle_value": list(example[3]),
+        "local_module_mechanism": mechanism,
     }
 
 
@@ -383,7 +490,25 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
     assert sum(a * b for a, b in zip(detector, frozen_vector)) % p == quotient_coordinate
     values = all_group_cocycle(words, expressions, frozen_vector, p)
     pair_checks = verify_all_pairs(words, group_actions, values, p)
-    local_detection = cyclic_restriction_data(words, group_actions, values, p)
+    local_detection = cyclic_restriction_data(words, group_actions, values, p, d)
+    detecting_word = local_detection["shortest_detecting_word_generator_indices"]
+    endpoint_jordan = {}
+    for name, endpoint_generators in (("socle", v_generators), ("head", w_generators)):
+        endpoint_action = word_matrix(endpoint_generators, detecting_word, p)
+        endpoint_difference = tuple(tuple((endpoint_action[i][j] - int(i == j)) % p for j in range(d))
+                                    for i in range(d))
+        endpoint_jordan[name] = nilpotent_jordan_data(
+            endpoint_difference, p, local_detection["minimal_detecting_cyclic_order"])
+    assert endpoint_jordan["socle"] == endpoint_jordan["head"]
+    mechanism = local_detection["local_module_mechanism"]
+    mechanism["endpoint_jordan_decomposition"] = endpoint_jordan
+    mechanism["endpoints_are_isomorphic_on_detecting_cyclic_subgroup"] = True
+    full_block = f"J{local_detection['minimal_detecting_cyclic_order']}"
+    hom_blocks = mechanism["coefficient_module_jordan_decomposition"]["jordan_blocks"]
+    assert hom_blocks.get("J1") == 1 and set(hom_blocks) <= {"J1", full_block}
+    mechanism["endpoint_is_endotrivial"] = True
+    mechanism["stable_endpoint_class"] = "Omega^1(J1)"
+    mechanism["stable_hom_class"] = "J1; every other Hom summand is free/projective"
     ordered = sorted(words)
     return {
         "q": q,
