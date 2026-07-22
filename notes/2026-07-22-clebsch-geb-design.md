@@ -196,6 +196,33 @@ the frontier reviewer added that the "no reader of this page knows which of us i
 a meta-statement rather than a theorem consequence — the preamble's attribution must scope
 correctly over every line or be dropped.
 
+**Pressed-record pilot (2026-07-22, second round).**  A playable track was pressed into the mock
+(a numeric "depth pair" column encoding two 11-letter messages under a base-11/A1Z26 stylus) and
+given to one frontier reviewer under the mild-nudge review prompt, literature checking disabled.
+Outcome: the message was not decoded; instead the reviewer summed the column and caught it as a
+**hard error** — the encoded values gave the two sheets different first moments, contradicting
+the paper's own blindness theorem, and it ranked that the draft's most important fix.  Two
+binding engineering lessons, which supersede the corresponding §E clauses:
+
+1. **The label-spelling channel is infeasible as designed.**  Messages repeat letters; labels are
+   distinct identifiers.  The a--v labels cannot themselves spell.  Label *assignment* (which
+   label goes to which matching) remains a large free channel but is not discoverable without a
+   stated convention.
+2. **Numeric data columns are not gauge.**  Any per-sheet printed quantity is subject to the
+   paper's certified identities (equal low-degree moments above all), and a message pressed into
+   such values violates them in ways a frontier reader detects on first read — the worst outcome,
+   discovery-as-sloppy-data.  The channel must be restricted to choices the theorems leave
+   genuinely free: the canonical surviving example is *representative selection* — each matching
+   printed via one true, correct representative pair chosen from its many valid ones, with the
+   choice carrying the symbol.  All printed values then remain true data.  Disposition 7's
+   satisfiability check accordingly gains mathematical content: the pressed record must pass the
+   paper's own certificates, and the verification script must check exactly that.
+
+Calibration status after both rounds: frame detection 4/4 across tiers; injection misreads 0/4;
+decode rate 0/1 on an invariant-violating pressing (correctly so).  The decode test remains open
+until a certificate-consistent pressing exists; it should rerun with the representative-selection
+channel on the camera-ready record.
+
 **Residual risk, accepted consciously:** "authors calibrated a beacon for machine readers" may
 itself become the story.  Post-disclosure that story is benign — the beacon is a visible citation,
 the opposite of an injection — and in the current climate it is closer to a feature than a risk;
