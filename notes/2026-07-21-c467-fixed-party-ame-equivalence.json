@@ -1,0 +1,745 @@
+{
+  "degree_eight_lu_contractions": {
+    "amplitude_bidegree": [
+      4,
+      4
+    ],
+    "comparison": "all equal",
+    "copy_count": 4,
+    "gauge_fixed_contraction_count": 7962624,
+    "raw_indexed_contraction_count": 191102976,
+    "reason": "The exhibited fixed-party local Clifford is a fixed-party local unitary, so every indexed LU contraction is invariant term-by-term.",
+    "stronger_statement": "Every fixed-party LU invariant at every degree agrees.",
+    "total_degree": 8
+  },
+  "exact_state_map": {
+    "all_ten_maps": [
+      {
+        "a": 1,
+        "first_four_fourier_kernel_sign": 10,
+        "last_two_fourier_kernel_sign": 1
+      },
+      {
+        "a": 2,
+        "first_four_fourier_kernel_sign": 5,
+        "last_two_fourier_kernel_sign": 6
+      },
+      {
+        "a": 3,
+        "first_four_fourier_kernel_sign": 7,
+        "last_two_fourier_kernel_sign": 4
+      },
+      {
+        "a": 4,
+        "first_four_fourier_kernel_sign": 8,
+        "last_two_fourier_kernel_sign": 3
+      },
+      {
+        "a": 5,
+        "first_four_fourier_kernel_sign": 2,
+        "last_two_fourier_kernel_sign": 9
+      },
+      {
+        "a": 6,
+        "first_four_fourier_kernel_sign": 9,
+        "last_two_fourier_kernel_sign": 2
+      },
+      {
+        "a": 7,
+        "first_four_fourier_kernel_sign": 3,
+        "last_two_fourier_kernel_sign": 8
+      },
+      {
+        "a": 8,
+        "first_four_fourier_kernel_sign": 4,
+        "last_two_fourier_kernel_sign": 7
+      },
+      {
+        "a": 9,
+        "first_four_fourier_kernel_sign": 6,
+        "last_two_fourier_kernel_sign": 5
+      },
+      {
+        "a": 10,
+        "first_four_fourier_kernel_sign": 1,
+        "last_two_fourier_kernel_sign": 10
+      }
+    ],
+    "all_ten_support_sets_equal": true,
+    "fourier_convention": "F_s|x> = 11^(-1/2) sum_y omega^(s*x*y)|y>",
+    "global_phase": 1,
+    "nonzero_amplitude": "11^-3/2",
+    "representative_exact_map": "(F_-1)^tensor4 tensor (F_+1)^tensor2 maps |Psi_8> to |Psi_4>",
+    "representative_kernel_signs": [
+      10,
+      10,
+      10,
+      10,
+      1,
+      1
+    ],
+    "source_dual_words_checked": 1331,
+    "support_identity": "diag(-1,-1,-1,-1,+1,+1) C_8^perp = C_4",
+    "support_sets_equal": true,
+    "target_words_checked": 1331
+  },
+  "field_order": 11,
+  "fixed_party_local_clifford": {
+    "complete_reason": "For each anchor in SL(2,11), the minimal-support projections force the other five local blocks; every support relation and then the full stabilizer rowspace are checked.",
+    "determinant_failure_anchors": 0,
+    "fixed_party_lc_equivalent": true,
+    "local_symplectic_solutions": [
+      [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            10,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            10,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            10,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            10,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            2
+          ],
+          [
+            5,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            5,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            5,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            5,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            6,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            3
+          ],
+          [
+            7,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            7,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            7,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            7,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            4
+          ],
+          [
+            8,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            8,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            8,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            8,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            9,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            7
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            8,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            8,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            7,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            7,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            9
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            5,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            5,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            10,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            10,
+            0
+          ]
+        ]
+      ]
+    ],
+    "party_permutation": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "relation_consistent_candidates": 10,
+    "relation_failure_anchors": 1310,
+    "sl2_anchor_blocks_checked": 1320
+  },
+  "input_sha256": {
+    "notes/2026-07-19-c374-clebsch-ame-equivalence.json": "b3ecefac292797375ec7849480cd003039bf6e56219f61a117e39f575898405d",
+    "notes/2026-07-19-c374-clebsch-ame-equivalence.py": "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694",
+    "notes/2026-07-19-c384-clebsch-ame-family-classification.json": "6f9eae589da917d51bab6129648c96c5e4d57995ac7b44bf1c68685e002ba2b0",
+    "notes/2026-07-19-c384-clebsch-ame-family-classification.py": "14fcefef44a8a4dd1979a4c4a544de5eb7ca543dd58abfc046b38635d9aa2046",
+    "notes/2026-07-21-c456-ame-chirality.json": "74fdbce454d4090cf6e6af46a50d107c55d1bfe34dbc5647d6b06164d7f93de3",
+    "notes/2026-07-21-c456-ame-chirality.py": "34b7ba678e576dea10f790a2fb7c62920a22c5ab16b05cc1040575592578f260"
+  },
+  "schema": "c467-fixed-party-ame-equivalence-v1",
+  "state_parameters": [
+    8,
+    4
+  ],
+  "verdict": {
+    "automorphism_rigidity_route_needed": false,
+    "fixed_party_lc_equivalent": true,
+    "fixed_party_lu_equivalent": true,
+    "labeled_quantum_chirality_survives": false,
+    "ordered_geometric_chirality_requires_external_advice": true
+  }
+}
