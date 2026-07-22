@@ -359,6 +359,35 @@ realizations rather than forcing rewrites.  C479 is paused, not closed; its resu
 follows the gap-closing certificates.  The gap-closing battery (A's two legs, F's hinge
 comparison, B's falsifier) is allocated as C480.
 
+## Addendum — legs certified and upgraded (2026-07-22)
+
+C480 certified A's two open legs (design-polarity swap and signed-Fourier-sector swap are outer
+torsor maps) and F's hinge comparison (the sheet swap lands in the outer `M12` class), and fired
+B's uniform-rule falsifier (the `+/-6` residue readout is convention-bound, so B folds into A as
+the marking). The C486 close-upgrade battery and the C487 characteristic-zero realization row then
+completed the closeout upgrades:
+
+- **C486 L1 — TORSOR-ISOMORPHIC.** The C474 q=11 one-bit decorated-recovery loss IS `T_11` on the
+  nose: an explicit outer-equivariant torsor isomorphism carries the two C474 sheets onto the two
+  C445 golden sheets, so the Reed-Solomon extremal fibre and Paper 1's torsor are one object.
+- **C486 L2 — ONE TORSOR CLASS, THREE CERTIFICATES.** C417/C448/C473 are three functors of the
+  single class `[T_q] = sgn : PGL_2(q) -> C2`, the determinant sign character with kernel exactly
+  `PSL_2(q)`.
+- **C486 L3 — RANK-THREE COMPLETION (+ forced-outer M12).** Split working prime => free `C2`-torsor
+  (q=7,11); inert => fused connected étale point (q=5, A3), the two spin lifts being one Frobenius
+  orbit over `F_25`. The M12 swap is forced outer (`PSL_2(11)` self-normalizing, `PGL_2(11)` not a
+  subgroup of `M12`).
+- **C487 — POSITIVE, characteristic-zero row.** C459's `S3`-resolvent `Spec Q(sqrt5)` is a
+  characteristic-zero realization of `T_q`, its Galois swap `sigma : phi -> 1-phi` exchanged with
+  the outer coset under reduction at 11; the arithmetic realization sits above its two finite
+  reductions, so the master-stroke sentence "the missing bit is `Gal(Q(sqrt5)/Q)`, made finite" is
+  now literal.
+
+Candidate A's statement now holds in its upgraded form: one free `C2`-torsor with twelve certified
+realizations spanning characteristic zero through finite, a complete rank-three trichotomy, and the
+single-character `sgn` no-section class. Candidates C, D, and E remain unchanged as
+Paper-2/continuation material.
+
 ## Next-step discipline
 
 No allocation is made here. If C479 returns negative, the cheap ordering is: run A's two leg

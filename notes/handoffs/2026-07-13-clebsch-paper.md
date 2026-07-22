@@ -28,7 +28,12 @@ pointers.  The user has selected the replacement spine for Lean formalization, q
 C420--C428, while manuscript integration remains a separate owner action before release**.
 
 The current decision and novelty map is
-[`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md).
+[`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md); its Verdict,
+Shipping revision, and Close revision are authoritative for what ships — the upgraded
+replacement-spine manuscript ending in the certified torsor-Rosetta closing theorem (C480, upgraded
+to a complete rank-three trichotomy with a characteristic-zero realization row by C486/C487). A
+cold session takes the manuscript shipping decision and close from those blocks, not from the
+protected-baseline framing above.
 The copy-ready abstract and section plan are
 [`2026-07-21-clebsch-paper-abstract-outline.md`](../2026-07-21-clebsch-paper-abstract-outline.md),
 the proof-free opening and conclusion prose draft is

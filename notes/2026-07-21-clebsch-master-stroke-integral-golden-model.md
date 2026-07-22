@@ -8,6 +8,11 @@
 Companions: the conversation dossier, the execution program (battery T1 is this theorem's first
 test), and the depth-injection note.
 
+**Status update 2026-07-22:** claims 1--4 are certified; claim 5's role is superseded by the
+certified torsor close (`2026-07-20-clebsch-paper-planning.md`, Close revision) — the bit is
+carried arithmetically by the prime fiber, and the characteristic-zero Galois realization is C487's
+`Spec Q(sqrt5)` row, not an integral Galois-odd cubic. C479 remains paused as an optional upgrade.
+
 ## The statement
 
 **Conjectured theorem (integral golden model).** The H3 spine is defined over `Z[φ]`, and the

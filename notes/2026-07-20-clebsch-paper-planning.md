@@ -6,7 +6,8 @@
 
 **Verdict:** `SHIPPING THE UPGRADED REPLACEMENT-SPINE MANUSCRIPT: C406+C411 SPINE, SELECTIVE C412
 MODULAR UPGRADE, C445 ARITHMETIC-GLUING FLAGSHIP, EXACT SURVIVAL/FORGETTING LEDGER, AND THE
-CERTIFIED TORSOR-ROSETTA CLOSING THEOREM (C480); C399 IS AN EMERGENCY FALLBACK ONLY; NO NATURAL
+CERTIFIED TORSOR-ROSETTA CLOSING THEOREM (C480, UPGRADED TO A COMPLETE RANK-THREE TRICHOTOMY WITH A
+CHARACTERISTIC-ZERO REALIZATION ROW BY C486/C487); C399 IS AN EMERGENCY FALLBACK ONLY; NO NATURAL
 CUBIC-TO-DEPTH OR UNIVERSAL WEIL IDENTIFICATION IS CLAIMED; THE INTEGRAL CUBIC LIFT (C479) IS
 PAUSED AS AN OPTIONAL UPGRADE, NOT A DEPENDENCY`
 
@@ -59,24 +60,41 @@ Rosetta merged with the outer hinge** as Paper 1's closing theorem, and the C480
 battery (`2026-07-22-c480-close-gap-certificates.md`) certified every leg: the outer element
 exchanges the C452 design pair and C378's signed Fourier sectors equivariantly, and the sheet
 swap lands in the outer row/column-exchanging class of `M12` (with `PSL_2(11)` self-normalizing),
-so the extended Hadamard/Mathieu layer joins the close.  The closing theorem, assembled entirely
-from certified parts, is:
+so the extended Hadamard/Mathieu layer joins the close.  The C486 close-upgrade battery
+(`2026-07-22-c486-close-upgrade-battery.md`) and the C487 characteristic-zero realization row
+(`2026-07-22-c487-char-zero-realization-row.md`) then upgraded the close on three axes: the
+no-section obstruction is one torsor class carried by a single named character; the realization
+list gains a characteristic-zero row and a Reed-Solomon extremal-fibre row, spanning characteristic
+zero through finite; and the whole statement is a complete rank-three trichotomy.  The closing
+theorem, assembled entirely from certified parts, is:
 
-> the decoder's missing bit is one free `C2`-torsor, canonically realized as the two matching
-> sheets, the two nontrivial unipotent classes, the two cyclotomic period factors, the two split
-> primes of `Q(sqrt(-q))`, the two primes of `Z[phi]` (resp. `Z[sqrt2]`) above `q`, the two
-> conjugate lower Weil constituents, the two cubic orientation signs, the two QR/Barker design
-> polarities, the two signed Fourier sectors, and the outer `M12` hinge — with the marked Coxeter
-> matching as the universal pointing, read simultaneously through the single trace rule, and with
-> provably no unpointed section (C417/C448/C473).  In one line: the missing bit is
-> `Gal(Q(sqrt5)/Q)`, made finite — certified at the sheet level by C442/C445 with no dependence
-> on an integral cubic lift.
+> the decoder's missing bit is one free `C2`-torsor, in a complete rank-three trichotomy: at a
+> split working prime it is the free `C2`-torsor (H3 at `q = 11` in `Z[phi]`, B3 at `q = 7` in
+> `Z[sqrt2]`), and at an inert prime it degenerates to a single fused connected étale point with no
+> bit (A3 at `q = 5`, where `x^2-2` is irreducible mod 5 and the two spin lifts are one Frobenius
+> orbit).  The torsor is canonically realized by twelve certified rows spanning characteristic zero
+> through finite: the two matching sheets, the two nontrivial unipotent classes, the two cyclotomic
+> period factors, the two split primes of `Q(sqrt(-q))`, the two primes of `Z[phi]` (resp.
+> `Z[sqrt2]`) above `q`, the two conjugate lower Weil constituents, the two cubic orientation signs,
+> the two QR/Barker design polarities, the two signed Fourier sectors, the outer `M12` hinge, the
+> characteristic-zero `Spec Q(sqrt5)` Galois row (C487), and the Reed-Solomon extremal fibre — the
+> C474 q=11 one-bit decorated-recovery loss, which IS `T_11` on the nose (C486).  The marked
+> Coxeter matching is the universal pointing, read simultaneously through the single trace rule; and
+> after forgetting the marking there is no section — one torsor class, three certificates (C417 Čech
+> cocycle, C448 one-bit selector, C473 free `C2` torsor), the class being the determinant sign
+> character `sgn : PGL_2(q) -> C2` with kernel exactly `PSL_2(q)` (C486).  In one line: the missing
+> bit is `Gal(Q(sqrt5)/Q)`, made finite — now literal, since C487 places the characteristic-zero
+> `Q(sqrt5)` realization above its two finite reductions; certified at the sheet level by C442/C445
+> with no dependence on an integral cubic lift.
 
 The B falsifier fired exactly at its flagged risk: residue conventions differ between `q=7` and
 `q=11`, so the cubic-sign readout is a per-case dictionary and appears as one marking sentence
 inside the closing theorem, not a separate stroke.  The C443/C461 obstructions (and any future
 C479 negative) are stated as part of the theorem's content: the bit is carried arithmetically by
-the prime fiber, not by an integral tensor.  C479 remains paused as an optional upgrade — a
+the prime fiber, not by an integral tensor.  C486 further certifies the `M12` layer is forced
+outer: no inner symmetry induces the swap, because `N_{M12}(PSL_2(11)) = PSL_2(11)` is
+self-normalizing, `PGL_2(11)` is not a subgroup of `M12`, and the two `M11` parents are
+non-conjugate.  C479 remains paused as an optional upgrade — a
 GREEN integral carrier would append as one more realization without changing the close.  The
 survival/forgetting ledger now reads as the list of natural passages that do or do not see this
 one torsor, and the cliffhanger asks for the mechanism of the characteristic-`q` gluing (Paper
@@ -480,9 +498,12 @@ Read in this order:
 2. this report for the current theorem/novelty map — the Verdict, Shipping revision, and Close
    revision at the top are the authoritative statement of what ships: the upgraded
    replacement-spine manuscript ending in the certified torsor-Rosetta closing theorem;
-3. `notes/2026-07-22-alt-master-strokes.md` (candidates, banked decision, and close phrasing) and
-   `notes/2026-07-22-c480-close-gap-certificates.md` (the four gap-closing certificates) for the
-   closing theorem's exact content; `notes/2026-07-21-clebsch-master-stroke-integral-golden-model.md`
+3. `notes/2026-07-22-alt-master-strokes.md` (candidates, banked decision, and close phrasing),
+   `notes/2026-07-22-c480-close-gap-certificates.md` (the four gap-closing certificates), and
+   `notes/2026-07-22-c486-close-upgrade-battery.md` plus
+   `notes/2026-07-22-c487-char-zero-realization-row.md` (the three close upgrades and the
+   characteristic-zero realization row) for the closing theorem's exact content;
+   `notes/2026-07-21-clebsch-master-stroke-integral-golden-model.md`
    for the golden-model frame whose claims 1--4 are certified and whose claim 5 (C479) is paused
    as an optional upgrade;
 4. for manuscript drafting, `notes/2026-07-21-clebsch-paper-abstract-outline.md` for the selected
