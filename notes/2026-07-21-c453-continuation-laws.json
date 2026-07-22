@@ -1,0 +1,288 @@
+{
+  "A5_natural_action_character_arithmetic": {
+    "19": {
+      "A5_classes": [
+        "1A",
+        "2A",
+        "3A",
+        "5A",
+        "5B"
+      ],
+      "P1_restricted_permutation_character": [
+        20,
+        0,
+        2,
+        0,
+        0
+      ],
+      "class_sizes": [
+        1,
+        15,
+        20,
+        12,
+        12
+      ],
+      "complex_irrep_multiplicities": {
+        "1": 1,
+        "3": 1,
+        "3prime": 1,
+        "4": 2,
+        "5": 1
+      },
+      "forced_orbit_sizes": [
+        20
+      ],
+      "number_of_A5_orbits_by_Burnside": 1,
+      "point_stabilizer_order": 3
+    },
+    "31": {
+      "A5_classes": [
+        "1A",
+        "2A",
+        "3A",
+        "5A",
+        "5B"
+      ],
+      "P1_restricted_permutation_character": [
+        32,
+        0,
+        2,
+        2,
+        2
+      ],
+      "class_sizes": [
+        1,
+        15,
+        20,
+        12,
+        12
+      ],
+      "complex_irrep_multiplicities": {
+        "1": 2,
+        "3": 2,
+        "3prime": 2,
+        "4": 2,
+        "5": 2
+      },
+      "forced_orbit_sizes": [
+        12,
+        20
+      ],
+      "number_of_A5_orbits_by_Burnside": 2,
+      "point_stabilizer_orders": [
+        5,
+        3
+      ]
+    }
+  },
+  "H4_marker_bound_in_PSL2_31": {
+    "gcds_with_PSL2_31": {
+      "full_reflection_group_W_H4": 480,
+      "orientation_preserving_group_Wplus_H4": 480,
+      "oriented_vertex_marker_stabilizer_H3plus_is_A5": 60,
+      "oriented_vertex_orbit_size": 120,
+      "projective_orientation_group_Wplus_mod_central_inversion": 240,
+      "projective_vertex_axis_orbit_size": 60
+    },
+    "literal_bound": "PSL2(31) cannot contain the full, oriented, or projective-oriented H4 group.  It can contain the canonical local H4 vertex-marker stabilizer A5.  In the natural 32-point action that A5 has forced orbits 12+20, not an H4 60-axis orbit.",
+    "order_divisibility_into_PSL2_31": {
+      "full_reflection_group_W_H4": false,
+      "orientation_preserving_group_Wplus_H4": false,
+      "oriented_vertex_marker_stabilizer_H3plus_is_A5": true,
+      "projective_orientation_group_Wplus_mod_central_inversion": false
+    },
+    "orders": {
+      "PSL2_31": 14880,
+      "full_reflection_group_W_H4": 14400,
+      "orientation_preserving_group_Wplus_H4": 7200,
+      "oriented_vertex_marker_stabilizer_H3plus_is_A5": 60,
+      "oriented_vertex_orbit_size": 120,
+      "projective_orientation_group_Wplus_mod_central_inversion": 3600,
+      "projective_vertex_axis_orbit_size": 60
+    },
+    "sheet_consequence": "because (2/31)=+1, the two golden-conjugate A5 marker sheets are PSL-fused; no H3 sheet bit remains available to label an H4 marker"
+  },
+  "boundary": [
+    "No H4, E8, E7, E6, or F4 object is constructed.",
+    "No subgroup of PSL2(p) beyond the frozen golden A5 reductions is constructed.",
+    "No law is inferred from q=h+1 alone.",
+    "The table predicts only splitting and sheet visibility after its stated parent, field, marker, and transporter hypotheses."
+  ],
+  "independent_cross_checks": [
+    "phi roots are enumerated directly and agree with Euler's-criterion splitting symbols",
+    "A5 orbit counts are recovered independently from Burnside averages and stabilizer orders",
+    "all H4 exclusions are checked by exact order divisibility and gcd arithmetic"
+  ],
+  "inputs": {
+    "notes/2026-07-20-c395-clebsch-ame-pencil-arithmetic.json": {
+      "bytes": 11632,
+      "sha256": "fb3caffc82601e85b9594424154cfaf9b44d4f95bce856a50ba0ec9a739cb6d8"
+    },
+    "notes/2026-07-20-c395-clebsch-ame-pencil-arithmetic.md": {
+      "bytes": 12641,
+      "sha256": "2d27b72c14bcd0d44868f126828273ce025ba64ae0ef59ddfa5391f940f894a7"
+    },
+    "notes/2026-07-20-c395-clebsch-ame-pencil-arithmetic.sha256": {
+      "bytes": 244,
+      "sha256": "5503aa76d9cf8e9a43cbba7d2caffd83f519ced516fafe865a640b6dadbc5c36"
+    },
+    "notes/2026-07-21-c440-conventions-freeze.json": {
+      "bytes": 6436,
+      "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+    },
+    "notes/2026-07-21-c440-conventions-freeze.md": {
+      "bytes": 8384,
+      "sha256": "43eca694b5f48dc88204493ea24dbadfa8905824b07c739af3fe82ee6abf12ec"
+    },
+    "notes/2026-07-21-c440-conventions-freeze.sha256": {
+      "bytes": 239,
+      "sha256": "c465649bedcf3fc4efdcc623fabcace6fcac13d5235d4fcdd0b50c08a990a9b5"
+    },
+    "notes/2026-07-21-c442-antipodal-singleton-reduction.json": {
+      "bytes": 14377,
+      "sha256": "72d312ac4e6a9b4237c36e1921e3d3015d783a356b40d12928f31539a49a3943"
+    },
+    "notes/2026-07-21-c442-antipodal-singleton-reduction.md": {
+      "bytes": 13052,
+      "sha256": "f72fe7139e18eac04d428d172784b97f47ae5855ae9f6847e52a2f5e370de496"
+    },
+    "notes/2026-07-21-c442-antipodal-singleton-reduction.sha256": {
+      "bytes": 262,
+      "sha256": "f462b735186209360661334c86a039df84dec2a85700beec4b9950e919bf0ff7"
+    },
+    "notes/2026-07-21-c442-m2-fable-review.md": {
+      "bytes": 18719,
+      "sha256": "0b9dd220d8d1bc8ace6f4c63e5c42b8874491617bbe6db77302a6a8b58c1c7a3"
+    }
+  },
+  "law": {
+    "golden_split_condition": "(5/p)=+1, equivalently p congruent to +/-1 mod 5",
+    "important_scope": "the (2/p) clause is evaluated only after a quadratic sheet field, two reductions, and a transporter squareclass have been supplied",
+    "sheet_visibility_given_split": "for the frozen rational transporter Rz of spinor norm 2, the two golden A5 reductions are PSL2(p)-distinct iff (2/p)=-1"
+  },
+  "parent_and_spin_field_requirements": {
+    "13": {
+      "exceptional_parents_with_h_12": [
+        "F4",
+        "E6"
+      ],
+      "golden_H3_specialization": "blocked: Q(sqrt(5)) is inert and 60 does not divide |PSL2(13)|",
+      "h_equals_p_minus_1": 12,
+      "required_before_any_sheet_prediction": [
+        "choose and exhibit the parent and marker action",
+        "supply a nontrivial quadratic spin/label field K_13 if two sheets are intended",
+        "supply the transporter spinor squareclass delta_13",
+        "prove K_13 splits at 13 and the marker subgroup embeds in PSL2(13)"
+      ],
+      "standard_root_datum_field": "Q for F4 and E6",
+      "warning": "h=12 does not determine a parent; classical and dihedral types also occur"
+    },
+    "19": {
+      "conditional_golden_H3_marker": "K=Q(sqrt(5)) and delta=2 give two PSL-distinct A5 sheets; each A5 is transitive on P1(F_19) with point stabilizer C3",
+      "exceptional_parent_with_h_18": "E7",
+      "h_equals_p_minus_1": 18,
+      "required_before_a_non_golden_sheet_prediction": [
+        "exhibit the parent and marker action",
+        "supply the quadratic spin/label field K_19",
+        "supply the transporter spinor squareclass delta_19"
+      ],
+      "standard_root_datum_field": "Q for E7",
+      "warning": "h=18 does not determine a parent; classical and dihedral types also occur"
+    },
+    "31": {
+      "E8_boundary": "the rational E8 root datum does not itself supply the H4 golden sheet law",
+      "H4_field_and_transporter": "K=Q(sqrt(5)), delta=2",
+      "conditional_H4_marker": "the canonical oriented vertex-marker stabilizer is H3+=A5",
+      "exceptional_parents_with_h_30": [
+        "H4",
+        "E8"
+      ],
+      "h_equals_p_minus_1": 30,
+      "warning": "h=30 does not determine a parent; classical and dihedral types also occur"
+    }
+  },
+  "prime_predictions": {
+    "13": {
+      "A5_order_divides_PSL2_order": false,
+      "PSL2_order": 1092,
+      "PSL2_order_factorization": {
+        "13": 1,
+        "2": 2,
+        "3": 1,
+        "7": 1
+      },
+      "Z_phi_prime_factors": [
+        "(13) remains prime in Z[phi]"
+      ],
+      "conditional_H3_sheet_prediction": "no two F_p golden reductions (golden field inert)",
+      "golden_field_behavior": "inert",
+      "legendre_2_over_p": -1,
+      "legendre_5_over_p": -1,
+      "p": 13,
+      "p_mod_5": 3,
+      "p_mod_8": 5,
+      "phi_roots_mod_p": []
+    },
+    "19": {
+      "A5_order_divides_PSL2_order": true,
+      "PSL2_order": 3420,
+      "PSL2_order_factorization": {
+        "19": 1,
+        "2": 2,
+        "3": 2,
+        "5": 1
+      },
+      "Z_phi_prime_factors": [
+        "(19, phi-5)",
+        "(19, phi-15)"
+      ],
+      "conditional_H3_sheet_prediction": "two golden reductions are PSL2(p)-distinct",
+      "golden_field_behavior": "split",
+      "legendre_2_over_p": -1,
+      "legendre_5_over_p": 1,
+      "p": 19,
+      "p_mod_5": 4,
+      "p_mod_8": 3,
+      "phi_roots_mod_p": [
+        5,
+        15
+      ]
+    },
+    "31": {
+      "A5_order_divides_PSL2_order": true,
+      "PSL2_order": 14880,
+      "PSL2_order_factorization": {
+        "2": 5,
+        "3": 1,
+        "31": 1,
+        "5": 1
+      },
+      "Z_phi_prime_factors": [
+        "(31, phi-13)",
+        "(31, phi-19)"
+      ],
+      "conditional_H3_sheet_prediction": "two golden reductions are fused by an element of PSL2(p)",
+      "golden_field_behavior": "split",
+      "legendre_2_over_p": 1,
+      "legendre_5_over_p": 1,
+      "p": 31,
+      "p_mod_5": 1,
+      "p_mod_8": 7,
+      "phi_roots_mod_p": [
+        13,
+        19
+      ]
+    }
+  },
+  "schema": "c453-continuation-laws-v1",
+  "status": "conditional predictions only; no construction, existence, or continuation claim",
+  "task": "C453 / T6",
+  "trusted_boundary": [
+    "Python integer and Fraction arithmetic",
+    "quadratic reciprocity via Euler's criterion",
+    "the exact A5 character table encoded in this checker",
+    "standard semisimple split/nonsplit torus fixed-point criterion for PSL2(p) on P1(F_p)",
+    "frozen C440/C442 spin-field and transporter conventions",
+    "C395's certified characteristic-31 A5 enhancement as an overlapping control only"
+  ]
+}

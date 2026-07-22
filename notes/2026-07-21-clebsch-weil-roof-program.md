@@ -7,7 +7,8 @@
 **Status:** active allocated battery. The M-chain and C449/T2 critical path are GREEN; C450/T3 is
 closed with a sharp module-identification negative and green outer/character results. C451/T4 is
 closed with green Lagrangian/arithmetic results and a clean theta-discriminator negative. C452/T5
-is GREEN with exact QR/Barker identifications and sharply scoped provenance walls; C453/T6 is next.
+is GREEN with exact QR/Barker identifications and sharply scoped provenance walls. C453/T6 is GREEN
+as a conditional prediction bound; C454/T7 is next.
 
 This is the shared controller, not the task specification catalogue. Historical motivation is in
 [`2026-07-21-clebsch-weil-roof-conversation-report.md`](2026-07-21-clebsch-weil-roof-conversation-report.md)
@@ -46,7 +47,7 @@ selected card names it as a load-bearing input.
 | C450 | T3 | SHARP NEGATIVE for `5+6`/`3+4` incidence-module identification: both cross matrices are full rank with sheet modules `1+10_b`/`1+6`; GREEN `Q(sqrt(-11))` Weil pair and outer exchange; C449 torus baseline passes but is non-discriminating | roof conjecture weakened; relation-support Weil occurrence and certified sheet theory retained |
 | C451 | T4 | GREEN Lagrangian/Cartier--Manin battery: matching sheets are exact Lagrangian packings and all three Jacobians are superspecial; CLEAN NEGATIVE theta discriminator: Arf is 0 at q=7 and 1 at q=11 but the two sheet signatures coincide; q=5 is canonically excluded | theta/Roquette row closed; no sheet separation |
 | C452 | T5 | GREEN: cross-sheet disjointness is the cyclic QR design `D_7=QR_7+2`, `D_11=2QR_11+8`, giving the exact Barker-7/Barker-11 words; the odd-Barker wall requires its modern repaired proof, while the perfect-code and rank-four regular-`L_2` walls retain only their literal scope | QR/Barker provenance wall certified; no general continuation law |
-| C453 | T6 | queued | conditional 13/19/31 predictions; no construction |
+| C453 | T6 | GREEN conditional bound: 13 is golden-inert and excludes an `A5` marker by order; 19 splits with PSL-distinct golden sheets; 31 splits in `Z[phi]` but fuses the sheets because `(2/31)=+1`; no H4 parent group embeds in `PSL_2(31)`, and its admissible local `A5` shadow has natural orbit split `12+20` | parent/field/marker/transporter inputs sharply separated; no construction or continuation claim |
 | C454 | T7 | queued | Klein-relative-cubic comparison |
 | C455 | T8 | queued | C372/C378 Weil-operator verdict |
 | C456 | T9 | queued | AME chirality LU verdict |
@@ -56,8 +57,8 @@ selected card names it as a load-bearing input.
 | C464 | code-spans | QUEUED: certify the Hamming `[7,4,3]`/ternary Golay `[11,6,5]` cyclic incidence spans of the cross-sheet QR designs, with full weight distributions, sphere equalities, and the C450 rank cross-check (promoted from the C452 post-closure probe) | durable perfect-code beam for Phase 3; named successor (symmetry/equivariance) stays pre-allocation gated |
 | C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |
 
-The critical path is GREEN through `C444 -> C445 -> C449`; C450--C452 are closed, and **C453 is next by battery order**.
-C453--C456 are independent once their cards' frozen inputs are available. C459, C463, and C464 may
+The critical path is GREEN through `C444 -> C445 -> C449`; C450--C453 are closed, and **C454 is next by battery order**.
+C454--C456 are independent once their cards' frozen inputs are available. C459, C463, and C464 may
 run in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated battery row.
 
