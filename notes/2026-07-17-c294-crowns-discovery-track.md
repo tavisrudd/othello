@@ -860,7 +860,11 @@ not forced, a split prime with a non-superspecial sheet Jacobian would be a new 
 axis. Cheapest test rides along with C466's secondary Arf item: compute the Cartier--Manin rank at
 `q=19` or `31` if the machinery transfers.
 **Evidence:** CHECKED endpoints (C451 bundle); the uniformity is unexplained.
-**Status:** open lead; unallocated
+**Status:** open lead; unallocated. Sharpened 2026-07-21: the Klein-cubic zeta probe (entry below)
+proves the other `sqrt(-11)`-flavored object at 11 is *not* all-supersingular, so C451's uniform
+superspecialness is distinctive rather than ambient; the best candidate forcing mechanism is now
+C457's quaternion/maximal-order reduction (supersingular = quaternionic endomorphisms is exactly
+its territory)
 
 ### 2026-07-21 — C455's normalization scalar `i` is the quadratic Gauss sum; prediction at `q = 1 mod 4`
 
@@ -927,3 +931,54 @@ where the count `12+20 = q+1` closes. Framing sentence for the characteristic-31
 **Evidence:** CHECKED endpoint (C453 orbit split); the reading is decorative until some map is
 exhibited.
 **Status:** open lead; unallocated — framing only
+
+### 2026-07-21 — Klein-cubic point counts at 11: double trace-vanishing refutes the naive Frobenius bridge and points at `Q(zeta_5, sqrt(-11))`
+
+**Provenance:** second-order review pass on the certified `+/-11 sqrt(-11)` Fourier spectrum
+(C455 post-close upgrade, commit 40175a66); scratch counts in the session scratchpad
+(quadratic-in-`x4` reduction over `F_121`, direct enumeration over `F_11`).
+**Was I looking for this?:** no — testing the musing that the genuine Fourier operator might *be*
+Frobenius on `H^3` of the Klein cubic threefold over `F_11`, since its eigenvalues are weight-3
+Weil numbers of absolute value `11^(3/2)`.
+**Observed / musing:** exact counts for the cyclic Klein form
+`x0^2 x1 + x1^2 x2 + x2^2 x3 + x3^2 x4 + x4^2 x0`:
+`#X(F_11) = 1464 = 1+11+11^2+11^3` and `#X(F_121) = 1786324 = 1+121+121^2+121^3`; both affine
+cones are exactly `q^4`. So `tr(F) = tr(F^2) = 0` on `H^3`. The supersingular model (all ten
+eigenvalues `+/-11 sqrt(-11)`) predicted `#X(F_121) = 1799634` and is REFUTED — the naive
+"Fourier operator = Frobenius" bridge dies, consistent with C454's sharp negative surviving at
+the zeta level. But double trace-vanishing is not generic: it is the signature of an eigenvalue
+multiset closed under a root-of-unity rotation, e.g. `11^(3/2)`-scaled eigenvalues spread over
+fifth roots of unity, which would place the eigenvalue field inside `Q(zeta_5, sqrt(-11))` — the
+compositum of the program's two certified Galois structures (the C449/C462 golden `C4` on
+`zeta_5`; the C455/C450 Gauss field `sqrt(-11)`).
+**Why it may matter / strongest question:** if the two certified Galois structures literally meet
+in the Klein cubic's zeta function, that is the strongest surviving arithmetic form of the T7
+bridge. What is the exact `H^3` Frobenius spectrum?
+**Discriminator / falsifier:** the Klein cubic is a Delsarte (monomial) hypersurface with
+circulant exponent matrix `(2,1,0,0,0)`, so the exact zeta over `F_11` is computable by Weil's
+Gauss-sum method with no large enumeration; alternatively a `F_11^3` trace count. An eigenvalue
+field not containing `zeta_5` (or a spectrum explained by weight-degeneration alone) retires the
+refined reading.
+**Evidence:** CHECKED (two exact point counts; refutation is definitive) / REASONED (the
+`zeta_5` rotation model is one consistent explanation, not the only one). Scratch scripts are
+session-local; a durable bundle per reproducibility conventions is required before any
+paper-facing use or promotion.
+**Status:** open lead; unallocated — candidate one-bounded-task shape: exact Delsarte/Gauss-sum
+zeta of the Klein cubic at 11, compared against the certified Fourier spectrum and the C462/C449
+`C4`
+
+### 2026-07-21 — the period quadratic's constant term singles out characteristic 3 for C465
+
+**Provenance:** second-order review pass; C450's certified period-sum quadratic `x^2+x+3=0`.
+**Was I looking for this?:** no — noticed while asking whether C465's characteristic 3 is
+canonical or convenient.
+**Observed / musing:** the degree-five period sums are roots of `x^2+x+3`, so they are algebraic
+integers of norm exactly 3, and 3 splits in `Q(sqrt(-11))`. The auxiliary characteristic of the
+Brauer bridge (ternary Golay, char-3 kernels) is therefore the prime at which the Weil pair's
+period arithmetic already degenerates rationally — motivation that `ell = 3` is arithmetically
+singled out, not chosen for convenience.
+**Why it may matter / strongest question:** one motivation sentence for the C465 report; if C465
+lands positive, this is the one-line answer to "why 3?".
+**Evidence:** REASONED over the CHECKED C450 period certificate; the norm and splitting facts are
+immediate arithmetic.
+**Status:** open lead; routed as framing for C465's report (no card change needed)
