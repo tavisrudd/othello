@@ -15,6 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 INPUT = ROOT / "notes/2026-07-20-c406-matching-orbit-scout.json"
 OUTPUT = ROOT / "notes/2026-07-21-c451-roquette-theta.json"
+MUMFORD_PDF = Path("/tmp/persistent/tavis/lit-search/pdf/10.1007_978-0-8176-4578-6.pdf")
+MUMFORD_SHA256 = "95f212aa1d3ca09f963c7bf4bdd9710aaa9add2df41050ed396a343501e9b864"
 
 
 def sha256(path: Path) -> str:
@@ -124,6 +126,28 @@ def union_cycle_count(left: tuple[tuple[int, int], ...], right: tuple[tuple[int,
     return components
 
 
+def union_component_masks(left: tuple[tuple[int, int], ...], right: tuple[tuple[int, int], ...]) -> list[int]:
+    vertices = {v for edge in left for v in edge}
+    adjacency = {v: set() for v in vertices}
+    for a, b in left + right:
+        adjacency[a].add(b)
+        adjacency[b].add(a)
+    masks = []
+    unseen = set(vertices)
+    while unseen:
+        start = unseen.pop()
+        component = {start}
+        stack = [start]
+        while stack:
+            for neighbor in adjacency[stack.pop()]:
+                if neighbor in unseen:
+                    unseen.remove(neighbor)
+                    component.add(neighbor)
+                    stack.append(neighbor)
+        masks.append(sum(1 << vertex for vertex in component))
+    return sorted(masks)
+
+
 def intersection_dimension(left: tuple[tuple[int, int], ...], right: tuple[tuple[int, int], ...]) -> int:
     g = len(left) - 1
     size = 2 * len(left)
@@ -157,7 +181,124 @@ def cartier_manin(p: int) -> dict[str, object]:
     }
 
 
+def q_cardinality(mask: int) -> int:
+    assert mask.bit_count() % 2 == 0
+    return (mask.bit_count() // 2) & 1
+
+
+def even_subset_classes(size: int) -> list[int]:
+    whole = (1 << size) - 1
+    return sorted({min(mask, mask ^ whole) for mask in range(1 << size) if mask.bit_count() % 2 == 0})
+
+
+def theta_model(q: int, sheets: list[list[tuple[tuple[int, int], ...]]]) -> dict[str, object]:
+    size, g = q + 1, (q - 1) // 2
+    whole = (1 << size) - 1
+    classes = even_subset_classes(size)
+    complement_agreements = sum(q_cardinality(mask) == q_cardinality(mask ^ whole) for mask in classes)
+    well_defined = complement_agreements == len(classes)
+    if g % 2 == 0:
+        assert not well_defined and complement_agreements == 0
+        return {
+            "status": "excluded_forced",
+            "well_defined_under_complement": False,
+            "reason": "g is even, so q+1 is odd and Q(B-S)=Q(S)+(g+1) differs from Q(S)",
+            "quadratic_refinement_candidate": "|S|/2 mod 2",
+            "even_subset_classes_checked": len(classes),
+            "complement_agreements": complement_agreements,
+            "complement_disagreements": len(classes) - complement_agreements,
+            "full_pgl_invariant_origin_exists": False,
+        }
+
+    assert well_defined
+    origin_h0 = (g + 1) // 2
+    h0_formula_checks = 0
+    for mask in classes:
+        weight = min(mask.bit_count(), size - mask.bit_count())
+        h0 = (g + 1 - weight) // 2
+        assert ((h0 + origin_h0) & 1) == q_cardinality(mask)
+        h0_formula_checks += 1
+
+    rm_checks = 0
+    for left in classes:
+        for right in classes:
+            assert q_cardinality(left ^ right) == (
+                q_cardinality(left) ^ q_cardinality(right) ^ pairing(left, right)
+            )
+            rm_checks += 1
+
+    zero_count = sum(q_cardinality(mask) == 0 for mask in classes)
+    one_count = len(classes) - zero_count
+    arf = 0 if zero_count == 2 ** (g - 1) * (2**g + 1) else 1
+    assert zero_count == 2 ** (g - 1) * (2**g + (-1) ** arf)
+    assert arf == (origin_h0 & 1)
+
+    signatures = []
+    for sheet in sheets:
+        restriction_histograms = []
+        for matching in sheet:
+            basis = matching_vectors(matching)
+            values = []
+            for coefficients in range(1 << g):
+                vector = 0
+                for index, row in enumerate(basis):
+                    if coefficients >> index & 1:
+                        vector ^= row
+                values.append(q_cardinality(vector))
+            restriction_histograms.append({
+                "0": values.count(0),
+                "1": values.count(1),
+            })
+        assert len({tuple(sorted(hist.items())) for hist in restriction_histograms}) == 1
+
+        intersection_parities = []
+        intersection_weights = []
+        for i, left in enumerate(sheet):
+            for right in sheet[i + 1 :]:
+                components = union_component_masks(left, right)
+                if len(components) == 1:
+                    continue
+                assert len(components) == 2 and components[0] ^ components[1] == whole
+                representative = min(components[0], components[1])
+                intersection_parities.append(q_cardinality(representative))
+                intersection_weights.append(min(representative.bit_count(), size - representative.bit_count()))
+        signatures.append({
+            "lagrangian_restriction_histogram": restriction_histograms[0],
+            "lagrangians_checked": len(sheet),
+            "nonzero_pairwise_intersection_parity_histogram": {
+                "0": intersection_parities.count(0),
+                "1": intersection_parities.count(1),
+            },
+            "nonzero_pairwise_intersection_weight_histogram": {
+                str(weight): intersection_weights.count(weight) for weight in sorted(set(intersection_weights))
+            },
+        })
+    separates = len(signatures) > 1 and any(signature != signatures[0] for signature in signatures[1:])
+    assert not separates
+    return {
+        "status": "accepted_and_checked",
+        "well_defined_under_complement": well_defined,
+        "well_defined_reason": "g is odd, so g+1 is even and Q(B-S)=Q(S)+(g+1)=Q(S) mod 2",
+        "even_subset_classes_checked": len(classes),
+        "complement_agreements": complement_agreements,
+        "origin": "kappa_empty",
+        "origin_h0": origin_h0,
+        "origin_parity": origin_h0 & 1,
+        "quadratic_refinement": "Q([S]) = |S|/2 mod 2",
+        "h0_subset_formula_checks": h0_formula_checks,
+        "riemann_mumford_identity": "Q(S symmetric_difference T) = Q(S)+Q(T)+|S intersection T| mod 2",
+        "riemann_mumford_ordered_pairs_checked": rm_checks,
+        "quadratic_value_counts": {"0": zero_count, "1": one_count},
+        "arf_invariant": arf,
+        "arf_equals_origin_parity": True,
+        "sheet_signatures": signatures,
+        "separates_sheets": separates,
+    }
+
+
 def build() -> dict[str, object]:
+    if not MUMFORD_PDF.exists() or sha256(MUMFORD_PDF) != MUMFORD_SHA256:
+        raise SystemExit("missing or mismatched cached Mumford PDF")
     source = json.loads(INPUT.read_text())
     records = []
     for frozen in source["types"]:
@@ -233,19 +374,36 @@ def build() -> dict[str, object]:
             },
             "packings": sheet_records,
             "cartier_manin": cartier_manin(q),
+            "theta_model": theta_model(q, sheets),
         })
     return {
-        "schema": "c451-roquette-theta-pre-gate-v1",
-        "status": "pre_theta_judgment_gate",
+        "schema": "c451-roquette-theta-v2",
+        "status": "complete",
         "input": {
             "path": "notes/2026-07-20-c406-matching-orbit-scout.json",
             "sha256": sha256(INPUT),
         },
         "types": records,
+        "theta_source": {
+            "doi": "10.1007/978-0-8176-4578-6",
+            "title": "Tata Lectures on Theta II: Jacobian Theta Functions and Differential Equations",
+            "author": "David Mumford",
+            "edition_read": "1984 Progress in Mathematics 43 edition, author-hosted scan archived 2016-05-09",
+            "cache_key": "10.1007/978-0-8176-4578-6",
+            "pdf_sha256": MUMFORD_SHA256,
+            "pdf_bytes": MUMFORD_PDF.stat().st_size,
+            "read_depth": "partial",
+            "pages_verified": {
+                "pdf_pages": [107, 108, 109],
+                "printed_page_labels": ["3.95", "3.96", "3.97"],
+                "content": "Proposition 6.1 statement and divisor-theoretic proof, including subset classification, complementation, and h0 formula",
+            },
+        },
         "theta_gate": {
-            "crossed": False,
-            "parity_values": None,
-            "row_verdict": None,
+            "crossed": True,
+            "approval": "Mumford Proposition 6.1 subset model; kappa_empty origin and Q([S])=|S|/2 mod 2 at q=7,11; forced q=5 exclusion",
+            "row_verdict": "row_dies",
+            "reason": "the theta/Arf data do not separate the two B3 or H3 sheets",
         },
     }
 

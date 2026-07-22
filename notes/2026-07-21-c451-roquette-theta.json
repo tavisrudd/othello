@@ -3,12 +3,36 @@
     "path": "notes/2026-07-20-c406-matching-orbit-scout.json",
     "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
   },
-  "schema": "c451-roquette-theta-pre-gate-v1",
-  "status": "pre_theta_judgment_gate",
+  "schema": "c451-roquette-theta-v2",
+  "status": "complete",
   "theta_gate": {
-    "crossed": false,
-    "parity_values": null,
-    "row_verdict": null
+    "approval": "Mumford Proposition 6.1 subset model; kappa_empty origin and Q([S])=|S|/2 mod 2 at q=7,11; forced q=5 exclusion",
+    "crossed": true,
+    "reason": "the theta/Arf data do not separate the two B3 or H3 sheets",
+    "row_verdict": "row_dies"
+  },
+  "theta_source": {
+    "author": "David Mumford",
+    "cache_key": "10.1007/978-0-8176-4578-6",
+    "doi": "10.1007/978-0-8176-4578-6",
+    "edition_read": "1984 Progress in Mathematics 43 edition, author-hosted scan archived 2016-05-09",
+    "pages_verified": {
+      "content": "Proposition 6.1 statement and divisor-theoretic proof, including subset classification, complementation, and h0 formula",
+      "pdf_pages": [
+        107,
+        108,
+        109
+      ],
+      "printed_page_labels": [
+        "3.95",
+        "3.96",
+        "3.97"
+      ]
+    },
+    "pdf_bytes": 3920575,
+    "pdf_sha256": "95f212aa1d3ca09f963c7bf4bdd9710aaa9add2df41050ed396a343501e9b864",
+    "read_depth": "partial",
+    "title": "Tata Lectures on Theta II: Jacobian Theta Functions and Differential Equations"
   },
   "types": [
     {
@@ -291,6 +315,16 @@
         }
       ],
       "q": 5,
+      "theta_model": {
+        "complement_agreements": 0,
+        "complement_disagreements": 16,
+        "even_subset_classes_checked": 16,
+        "full_pgl_invariant_origin_exists": false,
+        "quadratic_refinement_candidate": "|S|/2 mod 2",
+        "reason": "g is even, so q+1 is odd and Q(B-S)=Q(S)+(g+1) differs from Q(S)",
+        "status": "excluded_forced",
+        "well_defined_under_complement": false
+      },
       "type": "A3"
     },
     {
@@ -1072,6 +1106,57 @@
         }
       ],
       "q": 7,
+      "theta_model": {
+        "arf_equals_origin_parity": true,
+        "arf_invariant": 0,
+        "complement_agreements": 64,
+        "even_subset_classes_checked": 64,
+        "h0_subset_formula_checks": 64,
+        "origin": "kappa_empty",
+        "origin_h0": 2,
+        "origin_parity": 0,
+        "quadratic_refinement": "Q([S]) = |S|/2 mod 2",
+        "quadratic_value_counts": {
+          "0": 36,
+          "1": 28
+        },
+        "riemann_mumford_identity": "Q(S symmetric_difference T) = Q(S)+Q(T)+|S intersection T| mod 2",
+        "riemann_mumford_ordered_pairs_checked": 4096,
+        "separates_sheets": false,
+        "sheet_signatures": [
+          {
+            "lagrangian_restriction_histogram": {
+              "0": 4,
+              "1": 4
+            },
+            "lagrangians_checked": 7,
+            "nonzero_pairwise_intersection_parity_histogram": {
+              "0": 21,
+              "1": 0
+            },
+            "nonzero_pairwise_intersection_weight_histogram": {
+              "4": 21
+            }
+          },
+          {
+            "lagrangian_restriction_histogram": {
+              "0": 4,
+              "1": 4
+            },
+            "lagrangians_checked": 7,
+            "nonzero_pairwise_intersection_parity_histogram": {
+              "0": 21,
+              "1": 0
+            },
+            "nonzero_pairwise_intersection_weight_histogram": {
+              "4": 21
+            }
+          }
+        ],
+        "status": "accepted_and_checked",
+        "well_defined_reason": "g is odd, so g+1 is even and Q(B-S)=Q(S)+(g+1)=Q(S) mod 2",
+        "well_defined_under_complement": true
+      },
       "type": "B3"
     },
     {
@@ -2737,6 +2822,57 @@
         }
       ],
       "q": 11,
+      "theta_model": {
+        "arf_equals_origin_parity": true,
+        "arf_invariant": 1,
+        "complement_agreements": 1024,
+        "even_subset_classes_checked": 1024,
+        "h0_subset_formula_checks": 1024,
+        "origin": "kappa_empty",
+        "origin_h0": 3,
+        "origin_parity": 1,
+        "quadratic_refinement": "Q([S]) = |S|/2 mod 2",
+        "quadratic_value_counts": {
+          "0": 496,
+          "1": 528
+        },
+        "riemann_mumford_identity": "Q(S symmetric_difference T) = Q(S)+Q(T)+|S intersection T| mod 2",
+        "riemann_mumford_ordered_pairs_checked": 1048576,
+        "separates_sheets": false,
+        "sheet_signatures": [
+          {
+            "lagrangian_restriction_histogram": {
+              "0": 16,
+              "1": 16
+            },
+            "lagrangians_checked": 11,
+            "nonzero_pairwise_intersection_parity_histogram": {
+              "0": 0,
+              "1": 55
+            },
+            "nonzero_pairwise_intersection_weight_histogram": {
+              "6": 55
+            }
+          },
+          {
+            "lagrangian_restriction_histogram": {
+              "0": 16,
+              "1": 16
+            },
+            "lagrangians_checked": 11,
+            "nonzero_pairwise_intersection_parity_histogram": {
+              "0": 0,
+              "1": 55
+            },
+            "nonzero_pairwise_intersection_weight_histogram": {
+              "6": 55
+            }
+          }
+        ],
+        "status": "accepted_and_checked",
+        "well_defined_reason": "g is odd, so g+1 is even and Q(B-S)=Q(S)+(g+1)=Q(S) mod 2",
+        "well_defined_under_complement": true
+      },
       "type": "H3"
     }
   ]
