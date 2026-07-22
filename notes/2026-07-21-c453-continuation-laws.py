@@ -149,6 +149,15 @@ def build() -> dict[str, object]:
     assert rows["31"]["phi_roots_mod_p"] == [13, 19]
     assert [rows[str(p)]["legendre_2_over_p"] for p in (13, 19, 31)] == [-1, -1, 1]
 
+    reduced_mod_40 = [r for r in range(40) if math.gcd(r, 40) == 1]
+    golden_split_classes = [r for r in reduced_mod_40 if r % 5 in (1, 4)]
+    visible_classes = [r for r in golden_split_classes if r % 8 in (3, 5)]
+    fused_classes = [r for r in golden_split_classes if r % 8 in (1, 7)]
+    assert reduced_mod_40 == [1, 3, 7, 9, 11, 13, 17, 19, 21, 23, 27, 29, 31, 33, 37, 39]
+    assert golden_split_classes == [1, 9, 11, 19, 21, 29, 31, 39]
+    assert visible_classes == [11, 19, 21, 29]
+    assert fused_classes == [1, 9, 31, 39]
+
     chars: dict[str, object] = {}
     for p in (19, 31):
         values = [p + 1] + [natural_fixed_points(p, n) for n in (2, 3, 5, 5)]
@@ -227,6 +236,14 @@ def build() -> dict[str, object]:
                 "the (2/p) clause is evaluated only after a quadratic sheet field, two reductions, "
                 "and a transporter squareclass have been supplied"
             ),
+            "exact_mod_40_classification_for_odd_primes_not_5": {
+                "golden_split_classes": golden_split_classes,
+                "PSL_visible_classes": visible_classes,
+                "PSL_fused_classes": fused_classes,
+                "share_of_all_reduced_classes_visible": "4/16 = 1/4",
+                "share_of_all_reduced_classes_fused": "4/16 = 1/4",
+                "conditional_share_among_golden_split_classes": "visible 1/2, fused 1/2",
+            },
         },
         "prime_predictions": rows,
         "parent_and_spin_field_requirements": {

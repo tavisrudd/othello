@@ -156,6 +156,33 @@
     }
   },
   "law": {
+    "exact_mod_40_classification_for_odd_primes_not_5": {
+      "PSL_fused_classes": [
+        1,
+        9,
+        31,
+        39
+      ],
+      "PSL_visible_classes": [
+        11,
+        19,
+        21,
+        29
+      ],
+      "conditional_share_among_golden_split_classes": "visible 1/2, fused 1/2",
+      "golden_split_classes": [
+        1,
+        9,
+        11,
+        19,
+        21,
+        29,
+        31,
+        39
+      ],
+      "share_of_all_reduced_classes_fused": "4/16 = 1/4",
+      "share_of_all_reduced_classes_visible": "4/16 = 1/4"
+    },
     "golden_split_condition": "(5/p)=+1, equivalently p congruent to +/-1 mod 5",
     "important_scope": "the (2/p) clause is evaluated only after a quadratic sheet field, two reductions, and a transporter squareclass have been supplied",
     "sheet_visibility_given_split": "for the frozen rational transporter Rz of spinor norm 2, the two golden A5 reductions are PSL2(p)-distinct iff (2/p)=-1"

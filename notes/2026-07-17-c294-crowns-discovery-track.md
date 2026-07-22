@@ -669,3 +669,22 @@ cross-sheet incidences enough to justify their certificate bulk?
 **Evidence:** REASONED from the C464-certified parity checks and sphere equalities; tables not
 generated.
 **Status:** open lead
+
+### 2026-07-21 — Are the two characteristic-31 `A5` controls geometrically related?
+
+**Provenance:** C453's forced `12+20` orbit split for a golden marker `A5` on
+`P^1(F_31)`, noticed beside C395's independently certified `A5` stabilizer of the `t=-1` six-arc in
+characteristic 31.
+**Was I looking for this?:** no — C453 was required only to bound the conditional H4-marker phrase
+and explicitly excluded identifying or constructing a characteristic-31 parent.
+**Observed / musing:** there are now two exact `A5` phenomena at 31 in different ambient actions:
+the golden H3 marker shadow in `PSL_2(31)` and C395's six-arc stabilizer in `PGL_3(31)`.  The former
+has a forced icosahedral `12+20` decomposition on the conic line; no map to the latter has been
+exhibited, and shared group type and characteristic do not supply one.
+**Why it may matter / strongest question:** before Phase 3 either juxtaposes or separates these
+controls, does the C395 six-arc's induced conic/dual geometry realize the same `A5` conjugacy data,
+or is the coincidence only order-level?  Either answer would sharpen the characteristic-31
+cliffhanger, while the present evidence forbids conflating them.
+**Evidence:** OPEN — both endpoint `A5` facts are certified by C395/C453, but their comparison has
+not been attempted.
+**Status:** open lead

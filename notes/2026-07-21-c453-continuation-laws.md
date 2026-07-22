@@ -33,6 +33,24 @@ golden reductions; it is not sufficient for a PSL-visible bit.
 At 13, the bare value `(2/13)=-1` must not be reported as a two-sheet prediction.  There are no two
 golden primes to compare, and even the order-60 marker is excluded inside `PSL_2(13)`.
 
+### Post-close free upgrade: the law is exactly mod 40
+
+For every odd prime `p != 5`, the composite splitting/visibility law is already a complete
+congruence table:
+
+| outcome | reduced residue classes mod 40 |
+|:---|:---|
+| golden split and PSL-visible | `11,19,21,29` |
+| golden split and PSL-fused | `1,9,31,39` |
+| golden inert (so visibility test is not reached) | `3,7,13,17,23,27,33,37` |
+
+Thus the visible and fused cases each occupy four of the sixteen reduced classes mod 40.  By
+Dirichlet equidistribution they each have prime density `1/4`; conditional on golden splitting,
+visibility and fusion each have density `1/2`.  In particular, 31 is not an isolated fusion
+accident: it represents one entire half of the split-prime law.  The three test primes are clean
+representatives of the three logical outcomes: 13 is inert despite `(2/13)=-1`, 19 is
+split/visible, and 31 is split/fused.
+
 ## What parent and spin-field data are actually required
 
 The numerology `q=h+1` does not determine a Coxeter parent.  Among exceptional types, `h=12`
@@ -124,6 +142,8 @@ independently exclude every H4 parent group order.  No second implementation is 
 elementary exact calculations.  The trusted mathematical boundary is the frozen C440/C442
 spin-field/transporter theorem, the exact A5 character table encoded in the checker, and the
 standard split/nonsplit semisimple fixed-point criterion for `PSL_2(p)` on `P^1(F_p)`.
+The mod-40 class partition is finite arithmetic; only its prime-density corollary invokes
+Dirichlet equidistribution in reduced residue classes.
 
 This bundle certifies no H4/E8/E7/E6/F4 construction, no new `PSL_2(p)` subgroup construction, no
 existence theorem from `q=h+1`, and no continuation beyond the conditional table.  No novelty or
