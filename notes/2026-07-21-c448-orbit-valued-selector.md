@@ -91,6 +91,60 @@ and unframed coordinates can force either answer.
   response map, not an invariant choice from an unmarked pair.  This is the nonsplit one-sheet
   control, with no chirality bit to orient.
 
+## 2026-07-22 `ej` addendum — exact substitutes for a forbidden selector
+
+The selector obstruction forbids only an unmarked deterministic point section.  It leaves four
+precise ways to meet the operational objective without reviving the false claim.
+
+1. **Descend a symmetric consumer.**  If a downstream map has the same value on `y_+` and `y_-`,
+   it factors uniquely through the unordered fibre.  No member need be chosen.  For C447 this is
+   the correct route to any future game-value explanation, but no such value factorization is
+   currently proved.
+2. **Lift to the oriented cover.**  Supplying which member is positive makes the chosen-member map
+   tautological.  A nontrivial two-fibre needs one bit and one bit suffices.  Over C447's cap-frame
+   `D10` family, the endpoint and matching fibres have the same swap character, so one calibration
+   bit selects one of their two equivariant identifications across the family.
+3. **Use an equivariant random selector.**  Assign probability `1/2` to each fibre member.  This is
+   an equivariant Markov kernel.  It is also the unique stabilizer-invariant probability measure on
+   a transitively swapped two-fibre, since invariance forces the two weights equal.  It gives a
+   point in distribution with zero advice, not a deterministic section.
+4. **Use marked response rather than unmarked choice.**  Once an input marks one endpoint, an
+   equivariant partner map may exist.  The certified q=5 antipode is exactly this pattern: the
+   opponent marks `v`, and `antipode(v)` is the unique legal terminal reply.
+
+For the two certified q=11 knife-edge classes there is an additional operational shortcut: both
+members of the selected P edge are P.  Any deterministic coordinate tie-break therefore returns a
+winning move.  This meets the bounded play objective while intentionally giving up coordinate-free
+naturality.
+
+The one-bit cap calibration must not be overstated.  It works on the cap-frame `D10` orbit because
+the endpoint and matching swap characters agree there.  They differ on the full shared-edge
+`D20`: a nonsquare pointwise-torus element fixes the edge endpoints but exchanges the two
+`PSL_2(11)` sheets and hence the matchings.  Therefore there is no global
+`PGL_2(11)`-equivariant ordered-edge/ordered-matching-pair identification across all 66 edges.  A
+sheet mark is the type-correct extra datum.
+
+C449 supplies the adjacent split-torus control but not the missing sheet mark: its q=11 Coxeter
+square generates the square `C5`, while the full `C10` centralizer still contains the nonsquare
+sheet exchange.  C436 cannot repair the obstruction in either outcome of its queued group-order
+test; a larger ambient symmetry cannot create a section forbidden for its `PGL_2(11)` subgroup.
+
+## Mystery ledger
+
+- **Settled by this `ej` pass:** symmetric consumers, an oriented lift, uniform randomized choice,
+  and marked response are the four exact substitutes; only the oriented lift produces a
+  deterministic named member, and it exposes the required extra bit rather than hiding it.
+- **Settled scope correction:** one calibration bit coherently aligns the two `D10` cap torsors,
+  but no such alignment exists over the full 66-edge `D20` family without a sheet mark.
+- **Open — game-value descent:** no theorem currently shows that the unordered C447 H3 pair alone
+  determines cap P/N value.  This is the C296 reconstruction-to-value gate, not a missing selector
+  calculation.
+- **Open — C75 feature twins:** orbit-valued retention does not separate the recorded P/N twins.
+  The evidence gap remains a stronger value-relevant invariant or a proof that no such invariant
+  exists on the chosen object class.
+- **No genuine q=5 mystery remains:** the exhaustive `K6`-minus-matching certificate gives the
+  unique marked response and terminality directly.
+
 ## Scope and boundary
 
 The selector lemma is elementary and no novelty claim is made.  The two positive H3 geometries are

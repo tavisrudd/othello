@@ -121,6 +121,69 @@ the determinant obstruction.  It does **not** restore the rejected claim that th
 base/J-mate singleton pair.  The underlying shared-edge relation is classical C379/C406 geometry;
 the upgrade claims only this exact cap-facing composition, with no novelty wording.
 
+## 2026-07-22 `ej + aa` addendum — recover the objective, not the false identification
+
+The negative result separates several objectives that the original singleton calculation had
+conflated.  The certificate settles the viable replacements as follows.
+
+| objective | verified replacement | exact boundary |
+|:---|:---|:---|
+| play one winning child in either certified knife-edge class | return either member of the P edge; both recorded members are P | a coordinate tie-break wins but is not an intrinsic equivariant selector |
+| give the cap a canonical H3 output | return the unique cross-sheet matching pair sharing the P edge | the output is an unordered pair, not either golden singleton |
+| return one matching from that pair | mark a `PSL_2(11)` sheet and take the unique member on it | the sheet mark is extra input |
+| correlate a chosen P endpoint with a chosen matching over the cap-frame orbit | choose one of the two `D10`-equivariant bijections between the two determinant torsors | one calibration bit chooses the bijection; the unmarked cap does not |
+| explain why the edge is P | prove that cap value factors through the unordered H3 object | not supplied by C447/C448; this is a reconstruction-to-value theorem, not a selector calculation |
+| recover the base/J-mate singleton claim | none | zero symmetry-compatible maps and the stabilizer mismatch make the original intrinsic claim impossible |
+
+The calibration statement is deliberately local to the cap-frame `D10` orbit.  The exact C447
+records verify that its square `C5` fixes both endpoints and both matchings, while its nonsquare
+coset swaps both.  Hence the two two-sets carry the same nontrivial `D10` character, and there are
+exactly two equivariant bijections between them.  Choosing one is one global calibration bit for
+that transitive cap-frame family, rather than one fresh bit at every position.
+
+It does **not** extend over the full 66-edge `D20` family.  Matching exchange is the determinant
+character because it exchanges the two `PSL_2(11)` sheets.  Endpoint exchange is the distinct
+dihedral reflection character: the pointwise split torus fixes both endpoints, and its nonsquare
+half exchanges the sheets.  Thus an element can fix both endpoints while swapping the matchings.
+There is no `PGL_2(11)`-equivariant bijection between ordered edges and ordered cross-sheet pairs;
+a sheet mark or equivalent extra datum is genuinely required.
+
+### Alternative attacks and adjacent tasks
+
+1. **Symmetric-consumer attack.**  Keep the certified unordered pair and prove the downstream
+   value or construction is unchanged when its members are exchanged.  This is the strongest
+   choice-free route and the only one that could explain game value.
+2. **Marked-cover attack.**  Add a sheet mark, or add a calibration after restricting to the cap
+   `D10` torsor.  This produces a member without pretending the extra orientation was intrinsic.
+3. **Operational attack.**  If the only goal is legal winning play, choose either certified P
+   endpoint by any deterministic implementation convention.  Naturality is unnecessary for that
+   bounded objective.
+4. **Randomized attack.**  Uniform choice from either two-set is equivariant in distribution.  It
+   removes deterministic bias but does not provide a deterministic section or a value proof.
+
+C449 is genuinely adjacent: its q=11 Coxeter square generates the split `C5` in `PSL_2(11)`, the
+same kind of pointwise kernel appearing here after an edge is aligned.  It does not by itself name
+an endpoint or matching under full `PGL_2(11)`, because the nonsquare half of its `C10` centralizer
+fixes the endpoints while exchanging the sheets.  A sheet mark makes it usable; the bare Coxeter
+square does not repair C447.  C436 is only an obstruction stress test.  Whether its generated group
+is `PGL_2(11)` or `M_12`, enlarging symmetry cannot create a section already forbidden for the
+`PGL_2(11)` subgroup, so C436 cannot recover the singleton identification or prove a game value.
+
+## Mystery ledger
+
+- **Settled by this `ej + aa` pass:** the exact winning-move objective needs no orientation because
+  both P-edge members are P; the canonical geometry objective is met by the unordered shared-edge
+  pair; a local cap-torsor correlation costs one calibration bit; and that calibration does not
+  globalize to all 66 edges.
+- **Open — value descent:** it is unknown whether the unordered cross-sheet pair determines the cap
+  P/N value by an intrinsic rule.  The evidence gap is a reconstruction-to-value theorem; C296 is
+  the gated owning frontier.
+- **Open — intrinsic sheet mark:** no cap-owned invariant in the certified input chooses a
+  `PSL_2(11)` sheet.  C449 supplies the split kernel but not the missing mark.  Any proposed richer
+  input must pass the exact stabilizer test before this can be promoted.
+- **No mystery remains about the original singleton target:** it is a proved symmetry-incompatible
+  comparison, not an unexplained failed search.
+
 ## Exact certificate
 
 The primary generator parses the committed cap dump independently of the cap scripts, reconstructs
