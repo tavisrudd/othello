@@ -108,6 +108,25 @@ pentads through `M0` as one component of the exceptional `S_6` action.  The proj
 those two incident pentads individually.  Thus the A3 torsor is canonically the two-point residue
 of the outer-`S_6` pentad geometry at the frozen syntheme.
 
+## Second-order extra juice: two `S5` parents and the `S4` hinge
+
+Each of the two pentads through `M0` has a full vertex stabilizer of order 120.  These are two
+`S5` parents in `S6`: one is literally the frozen Möbius group `PGL_2(5)`, and the other is its
+conjugate by `i -> -i`.  Galois exchanges the parents.  Their intersection has order 24 and is
+exactly C444's frozen projective `S4`; together the two parents generate the full vertex `S6`.
+
+Thus the A3 companion torsor has an exact gluing formulation:
+
+```text
+S5 = PGL_2(5)  -- S4 --  (i -> -i) PGL_2(5) (i -> -i) = S5,
+                         generated closure = S6.
+```
+
+The two companion pentads are not only two points of an outer-`S6` residue.  They are two
+Galois-conjugate `S5` parents glued along the projective `S4` that fixes the antipodal matching.
+This is a direct, exact A3 analogue of the programme's recurring parent/hinge gluing language,
+without asserting that the neighboring H3/B3 hinges arise from the same construction.
+
 ## Reproducibility
 
 Run from `/home/tavis/src/othello`:
@@ -128,9 +147,9 @@ hash-pinned in the canonical JSON.
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary checker | 16,532 | `1ee32ac861d50546f00b88cafc92f386665914e3f0f7be821e83a16825177bd6` |
-| independent replay | 5,880 | `fe2f7da09d77c102af56071abab34cbe510b3b3b495e689c501a66f9575521ff` |
-| canonical JSON | 16,323 | `61d683417cb388d07cb1b30a64598e0e7231cb4b421c44a244aaf3a630ff5d5c` |
+| primary checker | 18,532 | `20638ad0c51d3f29a5ec0b3527ea74cca00d4661cf5d6c153a57bfad99c09589` |
+| independent replay | 7,009 | `64ef3dfc841499b41a7826d128a40ac2b9c0f230da7b2870c97e7e4fda05195a` |
+| canonical JSON | 16,871 | `6c219ab1b8705bc8c25c53fb3327fd9fd2709121c46f781e46f5605478a62f85` |
 
 The trusted boundary is exact finite arithmetic and exhaustive enumeration in the frozen C444
 labels, plus hash-referenced H3 facts from C443/C462.  There is no floating point, randomness,
@@ -144,6 +163,9 @@ literature claim, moment computation, secant product, or manuscript edit.
   vertex transposition swaps them.  They are the two pentads through one syntheme in the
   duad--syntheme--pentad model, and the swap is one transposition inside the induced `2^3` outer-`S_6`
   action.
+- **Settled in the second-order pass:** the group-theoretic parents of those two pentads.  They are
+  `PGL_2(5) ~= S5` and its Galois conjugate; their exact intersection is the frozen projective
+  `S4`, and their generated closure is `S6`.
 - **Open:** why the bit carrier migrates from the antipodal sheet in B3 to companion torsors of
   strengths `Z/2` and `Z/4` in A3 and H3.  The exact evidence is only this three-case table; no
   mechanism theorem spans the cases.  Phase-3 synthesis owns any comparative explanation, and

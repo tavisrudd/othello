@@ -110,6 +110,18 @@ def permutation_compose(left, right, points):
     return tuple(table[x] for x in right)
 
 
+def permutation_closure(generators, points):
+    group, frontier = {points}, [points]
+    while frontier:
+        left = frontier.pop()
+        for right in generators:
+            value = permutation_compose(left, right, points)
+            if value not in group:
+                group.add(value)
+                frontier.append(value)
+    return group
+
+
 def matching_orbits(group, p):
     unseen = set(all_matchings(tuple(range(p)) + ("inf",), p))
     orbits = []
@@ -257,10 +269,12 @@ def build_certificate():
     assert all(galois_pentad_action[galois_pentad_action[i]] == i for i in range(6))
     assert sum(galois_pentad_action[i] == i for i in range(6)) == 0
     assert {galois_pentad_action[i] for i in through_fixed} == set(through_fixed)
-    vertex_actions = {
-        tuple(pentad_action(dict(zip(a3_points, permutation))))
-        for permutation in permutations(a3_points)
+    vertex_permutations = tuple(permutations(a3_points))
+    pentad_actions = {
+        permutation: tuple(pentad_action(dict(zip(a3_points, permutation))))
+        for permutation in vertex_permutations
     }
+    vertex_actions = set(pentad_actions.values())
     assert len(vertex_actions) == 720
     projective_pentad_actions = {
         tuple(pentad_action(dict(zip(a3_points, permutation))))
@@ -268,6 +282,24 @@ def build_certificate():
     }
     assert len(projective_pentad_actions) == 24
     assert all(action[i] == i for action in projective_pentad_actions for i in through_fixed)
+    pentad_parents = [
+        {permutation for permutation, action in pentad_actions.items() if action[i] == i}
+        for i in through_fixed
+    ]
+    assert [len(parent) for parent in pentad_parents] == [120, 120]
+    pgl_matrices = {
+        pnorm(entries, 5) for entries in product(range(5), repeat=4)
+        if (entries[0] * entries[3] - entries[1] * entries[2]) % 5
+    }
+    pgl_permutations = {tuple(pact(matrix, x, 5) for x in a3_points) for matrix in pgl_matrices}
+    assert len(pgl_permutations) == 120
+    galois_conjugate_pgl = {
+        permutation_compose(permutation_compose(galois_tuple, permutation, a3_points), galois_tuple, a3_points)
+        for permutation in pgl_permutations
+    }
+    assert {frozenset(parent) for parent in pentad_parents} == {frozenset(pgl_permutations), frozenset(galois_conjugate_pgl)}
+    assert pentad_parents[0] & pentad_parents[1] == a3_permutations
+    assert len(permutation_closure(tuple(pentad_parents[0] | pentad_parents[1]), a3_points)) == 720
     a3["outer_S6_upgrade"] = {
         "dictionary": {"duad": "edge of K_6", "syntheme": "perfect matching of K_6", "pentad": "one-factorization: five synthemes partitioning all 15 duads"},
         "syntheme_count": len(synthemes),
@@ -285,6 +317,16 @@ def build_certificate():
         "galois_swaps_the_two_incident_pentads": True,
         "vertex_S6_action_on_six_pentads_is_faithful": len(vertex_actions) == 720,
         "outer_automorphism_witness": "the vertex transposition (2 3) acts on the six pentads as three transpositions, so the faithful S6 action does not preserve transposition cycle type",
+        "two_parent_gluing": {
+            "parent_orders": [120, 120],
+            "parent_types": ["S5 = PGL_2(5)", "S5 = (i -> -i) PGL_2(5) (i -> -i)"],
+            "galois_exchanges_parents": True,
+            "intersection_order": 24,
+            "intersection_equals_frozen_projective_S4": True,
+            "generated_group_order": 720,
+            "generated_group": "full vertex S6",
+            "interpretation": "the two companion pentads are two S5 parents glued along the frozen projective S4 hinge",
+        },
     }
 
     b3_fixed = canon_matching(tuple(tuple(e) for e in c444["B3"]["reductions"]["sqrt2_3"]["matching"]), 7)

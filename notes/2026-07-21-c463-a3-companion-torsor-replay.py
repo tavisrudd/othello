@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent permutation replay for C463; does not import the primary checker."""
 from collections import Counter
-from itertools import combinations, permutations
+from itertools import combinations, permutations, product
 from pathlib import Path
 import hashlib
 import json
@@ -150,6 +150,31 @@ assert outer["pentads_as_syntheme_ids"] == [list(ids) for ids in pentads]
 assert outer["galois_action_on_six_pentads"] == list(galois_outer_action)
 assert sorted(Counter(galois_outer_action).values()) == [1] * 6
 assert sum(galois_outer_action[i] == i for i in range(6)) == 0
+
+incident = outer["pentads_through_frozen_syntheme"]
+vertex_permutations = tuple(permutations(a3_points))
+parents = [{p for p in vertex_permutations if pentad_action(p)[i] == i} for i in incident]
+assert [len(parent) for parent in parents] == [120, 120]
+
+def mobius(entries, x):
+    a, b, c, d = entries
+    if x == "inf":
+        numerator, denominator = a, c
+    else:
+        numerator, denominator = (a * x + b) % 5, (c * x + d) % 5
+    return "inf" if denominator == 0 else numerator * pow(denominator, -1, 5) % 5
+
+pgl = {
+    tuple(mobius(entries, x) for x in a3_points)
+    for entries in product(range(5), repeat=4)
+    if (entries[0] * entries[3] - entries[1] * entries[2]) % 5
+}
+galois_conjugate_pgl = {compose(compose(a3_galois, p, a3_points), a3_galois, a3_points) for p in pgl}
+assert len(pgl) == len(galois_conjugate_pgl) == 120
+assert {frozenset(parent) for parent in parents} == {frozenset(pgl), frozenset(galois_conjugate_pgl)}
+assert parents[0] & parents[1] == a3_group
+assert len(closure(tuple(parents[0] | parents[1]), a3_points)) == 720
+assert outer["two_parent_gluing"]["intersection_order"] == 24
 
 assert CERT["A3"]["prime_reduction_table"][0]["reduced_companion"] == 0
 assert CERT["A3"]["prime_reduction_table"][1]["reduced_companion"] == 1
