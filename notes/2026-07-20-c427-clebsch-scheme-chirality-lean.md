@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** initial independent review `NO-GO`; repairs landed, post-fix independent review required
+**Status:** complete by explicit user override after initial independent-review repairs
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place; do not substitute a chat summary or a second transient document. The finished report
@@ -58,7 +58,8 @@ fully forced by this brief.
 
 ## Implemented result
 
-Pinned artifact commit: `8bdde98687366c58e1cbed0968036d55c2c4c048` (Lean sources landed in
+Pinned repaired artifact commit: `4a7845b8` (the original pinned artifact was
+`8bdde98687366c58e1cbed0968036d55c2c4c048`; Lean sources landed in
 `e5b2046c28bfb6da30adc896aba81427415a01be`; bounded frame replay landed in
 `eedef80d9f4439ae4adb4b755ded86958e0730a1`; the pinned descendant adds the complete terminal
 axiom audit and final hashes).
@@ -168,6 +169,10 @@ Final run `run-20260722-164222-4760d31e` passed the target (`0:21.17`, peak RSS 
 kB), all 8,693 targets, and the trace-only exact aggregate gate. Replay and manifest checks
 returned `OK` after the final evidence edit.
 
+Post-repair run `run-20260722-220023-7b07daf6` passed the exact replacement-spine target
+(`2:00.48`, peak RSS `3,465,168` kB) and the trace-only aggregate gate.  Independent replay and
+all five manifest checks returned `OK` against the repaired sources.
+
 ## Judgment calls
 
 1. **Finite representation.** Options were the full 1,331-vertex scheme, a generated adjacency
@@ -242,9 +247,12 @@ correction.
    semantic certificate”; no generated-source claim remains.
 
 The reviewer otherwise found the theorem types, finite domains, gate imports, and reported trust
-boundaries consistent.  Independent replay and the exact replacement-spine gate were green before
-the repairs.  The repaired sources, manifest, replay, gate, and hashes must be revalidated and
-committed, after which a separate user-launched post-fix reviewer must issue the final `GO`.
+boundaries consistent.  The repaired sources, manifest, replay, gate, and hashes were revalidated
+and committed in `4a7845b8`.
+
+**Final disposition:** on 2026-07-22 the user explicitly overrode the separate post-fix-review
+requirement, accepted the recorded repairs, and directed that C427 be marked done and archived.
+This is an owner override, not a second independent-review `GO`; the distinction is retained here.
 
 ## Required closing review process
 

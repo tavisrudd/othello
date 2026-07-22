@@ -55,7 +55,6 @@ ordering and detail.
 - **C182 `[clebsch]` [QUEUED]** — immutable artifact/DOI archive → `notes/2026-07-15-c182-clebsch-artifact-archive.md`.
 - **C320 `[clebsch]` [QUEUED; RELEASE-BLOCKING CAPSTONE AFTER ALL PAPER-ADOPTED FORMALIZATION SLICES]** — create the independently reviewed Clebsch claim-by-claim trust ledger, adequacy extraction, pinned gates/commit, and one verify-all entry point; no completion/archive before the local checklist, issue fixes, post-fix review, and final `GO` → `notes/2026-07-20-c320-clebsch-trust-ledger.md`.
 - **C321 `[clebsch]` [QUEUED; after C320 inventory]** — replace load-bearing Singular evidence with independently specified exact certificates/checkers and canonical replay bundles; no completion/archive before the local checklist, issue fixes, post-fix review, and final `GO` → `notes/2026-07-20-c321-clebsch-singular-certificates.md`.
-- **C427 `[clebsch]` [QUEUED; after C425 and C426]** — Lean committed C373 intrinsic six-block and unordered `10+10` chirality theorem, with sound automorphism/no-outer-lift evidence and the import-only replacement-spine gate → `notes/2026-07-20-c427-clebsch-scheme-chirality-lean.md`.
 - **C428 `[clebsch]` [QUEUED; after C222, C421, and C427]** — Lean C403 weighted 2-adjoint depth/enumerator/distance theorem with separate B3 leaf and its own import-only gate; hand trust-map results to C320 → `notes/2026-07-20-c428-clebsch-weighted-adjoint-lean.md`.
 
 ### `complete-ports`
