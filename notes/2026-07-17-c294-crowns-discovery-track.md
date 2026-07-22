@@ -532,3 +532,23 @@ in the memo. Incidental to the memo's H4 question (which was refuted); not part 
 **Status:** open lead; unallocated. Candidate one-bounded-task shape: recompute the polar moment in
 a second independent basis convention to separate frame artifact from invariant, and if it survives,
 compare against the C456/T9 chirality verdict.
+
+### 2026-07-21 — C449 and C462 exhibit the same Galois `C4` on two different objects
+
+Cross-report observation at the C449/C457/C462 closures. C462 certifies the four H3 companions as
+a free transitive `Gal(Q(zeta_5)/Q) = C4`-set with `sigma^2 = kappa` and the residue 4-cycle
+`3 -> 9 -> 4 -> 5 -> 3`; C449 independently certifies that the same `sigma` runs the H3 Coxeter
+torus generators through the identical squaring cycle (`9 -> 4 -> 5 -> 3 -> 9`), acting faithfully
+as `Aut(C5)` with `sigma^2` = torus inversion, and that a nonsquare-determinant element swaps the
+two Legendre-coset torus orbits. Together with C447's det character and the prime/sheet swap, the
+quotient bit of the one `C4` now has four certified faces (prime, sheet, det, torus-orbit), its
+kernel `kappa` is the C462 selector obstruction, and C457's Galois-covariant comparison formula
+`C(phi)` is the positive-descent counterpart at the order level. Everything hinges on one deferred
+identification: whether C445's rational `Rz` realizes C449's generic det-swap — explicitly assigned
+to C450's card by both C449 and the X-chain juice memo (candidate B).
+
+**Evidence.** All faces are separately certified in the C443/C447/C449/C457/C462 bundles; the
+synthesis sentence itself is unproved until C450 lands the `Rz` comparison.
+
+**Status:** observation only; fully routed (C450 owns the linking test, Phase 3 owns the synthesis
+wording). No allocation needed; recorded so the four-faces framing survives until Phase 3.
