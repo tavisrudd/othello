@@ -200,6 +200,49 @@ into an odd/unextended layer that owns the carrier theory (C465/C473/C474) and a
 layer that owns the global phase (C470/C471/C472).  Paper 2's architecture can use that
 separation literally.
 
+## Second addendum (second-order ej): what the QR-ladder reading itself implies
+
+- **Flag identities upgraded from memory to checked.**  An ad-hoc scratchpad computation
+  (`qr_flag_check.py`, plain `F_2` linear algebra) confirms both rungs: at q=23 the shift span of
+  the QR indicator is a `[23,12,7]` code with even-weight subcode `S` of dimension 11,
+  `D = S + <1>`, and `D . S = 0`, hence `S = D^perp` by dimensions — the binary Golay flag exactly
+  as claimed; at q=31 the same construction gives `[31,16,7]` over its 15-dimensional expurgated
+  subcode with the identical flag.  The group-side facts (Sylow structures, simplicity of `S` as a
+  `PSL_2(q)`-module) remain unverified memory; the scan allocation should promote this check to a
+  proper certificate.
+- **The fusion character governs carrier existence.**  Binary rungs exist exactly at
+  `(2/q) = +1` — which is precisely C466's fusion character.  So the primes where the golden bit
+  *fuses* (is erased) in the continuation law are exactly the primes supporting a
+  characteristic-two gateway carrier, and at 31 both happen at once.  Erasure in the golden tower
+  and carrier existence in the binary tower are controlled by one quadratic character; whether
+  that is deep or just reciprocity wearing two hats is itself a sharp question for Phase 3.
+- **The q=23 rung is a designed experiment on the `m=(q+1)/4` mystery.**  At q=23,
+  `m = 6` is not prime, so the double degeneration coincidence (period polynomial and Gram both
+  degenerate at `m`) cannot hold in the proved form.  If the q=23 rung passes the Sylow/fusion
+  gates anyway, the `m`-coincidence is decorative and the mechanism is the orbit-fibre one; if it
+  fails, `m = p` becomes the leading candidate hidden hypothesis.  Either outcome converts a
+  standing mystery-ledger row into a theorem-shaped statement.
+- **The q=31 rung is candidate machinery for the H4 prophecy.**  The cliffhanger currently says
+  the mod-40 law predicts a chirality at the 600-cell phase "that no current machinery can
+  construct."  A passing `[31,16]` rung would supply exactly the missing kind of object — a
+  characteristic-two carrier at 31 — and the open question becomes whether an H4 matching
+  geometry supplies its pointed input.  The prophecy beat may be closer to constructive than the
+  planning documents assume.
+- **The even/phase layer has its own classical ladder (memory, unverified).**  C471's stated
+  generalization — `AB = BA = puI` with `u` a unit mod `p` — applies to Paley Hadamard matrices
+  of order `q+1` whenever the 3-adic valuation of `q+1` is exactly one: orders 12 (q=11), 24
+  (q=23), 48 (q=47), but *not* 36 (q=17, valuation two).  The remembered Pless symmetry-code
+  family sits at exactly these lengths, with `P(12)` the extended ternary Golay.  This yields a
+  falsifiable prediction discriminating C471's mechanism: the `[24,12,9]` and `[48,24,15]`
+  symmetry codes should arise as rank-half kernels of their Paley matrices mod 3, while the
+  `[36,18,12]` code should not arise this way.  A one-afternoon check either extends the operator
+  mechanism to a family or finds its first sharp boundary.
+- **Sharpened "why 11":** if both ladders are classical families, q=11 stops being "where the
+  phenomena exist" and becomes the unique meeting point of three independent towers — the odd QR
+  carrier ladder, the even Paley/Pless phase ladder, and the rank-3 Coxeter conic phase.  That is
+  a cleaner exceptionalism statement than any single tower provides, and it is the natural
+  opening frame for Paper 2.
+
 ## Successor gates already visible
 
 - Phase-3 weil-roof synthesis is **not yet allocated**; the crowns handoff requires allocation
