@@ -144,3 +144,14 @@ same six-space is irreducible, so the phase reappears in global two-parent gluin
 the central loop with Maslov holonomy remains open. C473 is green in the pointed/functorial framing and identifies the
 selected arithmetic prime by `alpha -> tr(T|C)`; the unpointed form is a canonical isomorphism of
 orientation torsors. C474 remains the next live battery route.
+
+## 2026-07-22 — C429 intrinsic outer-phase theorem
+
+C429 executed the V1 Smith/Fitting and naturality kill switch.  The odd generator
+`delta=2tau-1=f'(tau)` generates the different; multiplication by it and the trace pairing both
+have Smith invariants `(1,5)`.  The common Clebsch six-arc realization lives over `Z[1/2]`: at 2
+the carrier is still `F_4`, but the six columns collapse pairwise.  At 5, `delta` becomes the
+nonzero nilradical of the length-two fibre.  Exact pilots at split 19 and inert 13, plus the
+unchanged C377 `J/pi/lambda` identity, prove the corrected common-action form of S1.  Literal
+represented-functor isomorphisms remain outside scope.  Report and atomic evidence bundle:
+`notes/2026-07-22-c429-attack-vector-scan.{md,py,json,sha256}` and independent `-replay.py`.

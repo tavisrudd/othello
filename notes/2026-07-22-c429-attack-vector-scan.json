@@ -1,0 +1,120 @@
+{
+  "carrier": {
+    "delta_square": 5,
+    "different_generator": "f'(tau)=2tau-1=delta",
+    "different_ideal": [
+      "delta"
+    ],
+    "involution": "sigma(tau)=1-tau",
+    "odd_generator": "delta=2tau-1",
+    "odd_lattice": "R^{sigma=-1}=Z*delta",
+    "ring": "Z[tau]/(tau^2-tau-1)"
+  },
+  "common_datum": {
+    "arc_chirality_exchange": "the same odd pi swaps the certified 10+10 orbits",
+    "categorical_caveat": "compatibility is a common C2-action/naturality square, not a literal isomorphism of all realization objects with the rank-one odd lattice",
+    "code_exchange": "the same J, pi and unit column scalars give monomial equivalence",
+    "normalization_verdict": "compatible: the first three legs use the identical J/pi/lambda datum; the fourth is sigma",
+    "representation_exchange": "C377 exact J/sigma column square",
+    "scheme_exchange": "sigma is the structural swap of C459/C487 Spec Q(sqrt5)"
+  },
+  "phase_pilots": {
+    "inert_p13": {
+      "J_after_frobenius_is_involutive": true,
+      "column_identity": true,
+      "frobenius_equals_sigma": true,
+      "frobenius_tau": [
+        1,
+        12
+      ],
+      "phase": "one connected F_169 point with Frobenius-semilinear swap",
+      "roots": []
+    },
+    "ramified_p5": {
+      "column_identity": true,
+      "delta_is_nonzero_nilpotent": true,
+      "delta_mod_5": [
+        4,
+        2
+      ],
+      "image_equals_kernel_equals_nilradical": true,
+      "multiplication_rank": 1,
+      "phase": "nonreduced length-two fibre; swap internalizes",
+      "root_support": 3
+    },
+    "split_p19": {
+      "column_identity": true,
+      "phase": "two F_19 sheets",
+      "roots": [
+        5,
+        15
+      ],
+      "sigma_swaps_roots": true
+    }
+  },
+  "schema": "c429-outer-phase-v1",
+  "smith_fitting": {
+    "base_for_six_arc_family": "Spec Z[1/2]",
+    "carrier_at_2": "F_4 (unramified/inert); delta=1",
+    "carrier_bad_prime": [
+      5
+    ],
+    "fitting_ideal_cokernel_m_delta": [
+      5
+    ],
+    "multiplication_by_delta_basis_1_tau": [
+      [
+        -1,
+        2
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "realization_excluded_prime": [
+      2
+    ],
+    "smith_invariants": [
+      1,
+      5
+    ],
+    "trace_pairing_basis_1_tau": [
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "trace_pairing_smith_invariants": [
+      1,
+      5
+    ]
+  },
+  "upstream": {
+    "c377": {
+      "file": "2026-07-19-c377-clebsch-golden-descent.json",
+      "sha256": "f8eceefe8259f684a7264be15ee969aa38cf4f744e582d48ac77a5da9dc85b58"
+    },
+    "c430": {
+      "file": "2026-07-20-c430-conceptual-balanced-half-rigidity.json",
+      "sha256": "eebfd0525c94ac0bcb7965ab33b6d11a698242e608d9d1a40cebaa0a2b451098"
+    },
+    "c459": {
+      "file": "2026-07-21-c459-golden-six-arc-q-forms.json",
+      "sha256": "8ca5d238b2024fcb2430aba0076891342b397e8c24c6964f45aa09e96048b255"
+    },
+    "c486": {
+      "file": "2026-07-22-c486-close-upgrade-battery.json",
+      "sha256": "3e009659a78b9a282357f833dc1b9af98a557d9034a76f7d0e9116fdf4eb480f"
+    },
+    "c487": {
+      "file": "2026-07-22-c487-char-zero-realization-row.json",
+      "sha256": "65e8067ba69a993a1d54044de4f76719192f7ad10ae154331cb6267d3049fee3"
+    }
+  },
+  "verdict": "S1 survives in corrected common-action form; exact bad sets are carrier {5}, six-arc realization {2}"
+}

@@ -4,11 +4,135 @@
 
 **Date:** 2026-07-22
 
-**Status:** proof-strategy dossier only; no computation run, no task executed. C429 is pegged
-"after C427". C427 is still in the live queue (itself gated on C425/C426); its report file
-`notes/2026-07-20-c427-clebsch-scheme-chirality-lean.md` says implementation is complete and
-independent review is pending. So the dependency is near-closed but not closed: C429 execution
-waits; this scan does not.
+**Status:** `THEOREM BUNDLE COMPLETE — S1 SURVIVES IN CORRECTED COMMON-ACTION FORM; CARRIER BAD
+PRIME {5}, SIX-ARC REALIZATION EXCLUDED PRIME {2}`. The remainder of this document retains the
+pre-execution attack dossier; this inserted section records the executed result and corrections.
+
+## Executed result
+
+Put
+
+```text
+R = Z[tau]/(tau^2-tau-1),   sigma(tau)=1-tau,   delta=2tau-1.
+```
+
+Then the anti-invariant lattice is exactly `R^{sigma=-1}=Z delta`, and `delta^2=5`.  In the basis
+`(1,tau)`, multiplication by `delta` and the trace pairing are respectively
+
+```text
+[-1  2]       [2 1]
+[ 2  1]       [1 3].
+```
+
+Both have Smith invariants `(1,5)`.  Equivalently,
+`Fitt_0(coker(m_delta))=(5)`: the odd carrier has exactly one arithmetic bad prime, namely 5.
+This is the intrinsic Smith/Fitting statement requested by C429; no primes 7 or 11 enter its
+integral presentation.  Moreover `delta=f'(tau)` for `f(T)=T^2-T-1`, so `(delta)` is canonically
+the different ideal and the Smith determinant is the discriminant, not a coordinate artifact.
+
+The frozen six-arc realization has one additional, logically separate excluded prime.  In
+characteristic 2 its columns collapse in the pairs `(0,1)`, `(2,3)`, `(4,5)`, so the common
+six-arc/code/chirality family lives over `Spec Z[1/2]`.  This is purely a realization failure:
+the carrier at 2 is the unramified field `F_4`, with `delta=1`.  Prime 5 is **not** inverted: it
+is the essential ramified fibre.
+
+### Phase theorem
+
+For every odd prime `p`, base change gives exactly one of the following.
+
+- **Split, `(5/p)=1`.** `R tensor F_p = F_p x F_p`; `sigma` swaps the two factors and `delta`
+  becomes a unit multiple of `(1,-1)`.  The two golden fibres, their representation/code models,
+  and their chirality labels are two rational sheets exchanged by the same outer datum.
+- **Inert, `(5/p)=-1`.** `R tensor F_p = F_(p^2)` and `sigma=Frob_p`.  The odd line is the
+  trace-zero line.  The integer matrix `J`, composed with coefficient Frobenius, is a semilinear
+  involution: it preserves the fused `F_p` object and induces C377's outer label permutation
+  `pi=(0 1)(2 4)(3 5)`.  This is the required Frobenius-semilinear clause, stated as an explicit
+  descent action rather than as a new quadratic-descent mechanism.
+- **Ramified, `p=5`.** Writing `tau=3+epsilon` gives
+  `R tensor F_5 = F_5[epsilon]/(epsilon^2)` and `delta=2epsilon`.  Thus `delta` is **nonzero** and
+  nilpotent, not zero as the preliminary scan said.  Multiplication by `delta` has rank one and
+  `im(m_delta)=ker(m_delta)=(delta)`, the nilradical.  The reduced two-sheet support coalesces;
+  C377's same `J` becomes an internal linear stabilizer, while C459's flat fibre is three
+  ramified length-two points.  These are the module, symmetry, and scheme faces of the same
+  ramification.
+
+The exact pilots are `p=19` (roots `5,15`, swapped by `sigma`) and `p=13` (no roots and
+`tau^13=1-tau`).  The certificate also checks the defining polynomial column identity at
+`p=5,13,19`.
+
+### One carrier, four readouts
+
+C377's single integral identity
+
+```text
+J P_i(tau) = lambda_i P_pi(i)(sigma(tau)),
+lambda=(tau-1,1-tau,1,1,1,1)
+```
+
+uses units of `R` and simultaneously supplies the representation exchange and the monomial code
+equivalence.  The same odd permutation `pi` exchanges the certified `10+10` chirality orbits.
+C459/C487 identify `sigma` as the structural swap of the intrinsic `S3`-resolvent
+`Spec Q(sqrt5)`.  Hence the four readouts commute with one common `C2` action integrally and after
+base change; the proposed unit-normalization obstruction does not occur.
+
+This conclusion needs one categorical correction to preliminary S1.  The four objects live in
+different categories, so they are not literally all isomorphic to the rank-one lattice
+`Z delta`.  What is proved is a common-action/naturality-square theorem: their swap characters
+factor through the same involutive carrier.  Likewise, C430's projective-cover statement is a
+**q=11 refinement only** for this golden family:
+
+```text
+(Z delta) tensor F_11  <->  e_+ - e_-
+                         = outer-odd combination of the two P(1) socles.
+```
+
+No fibrewise projective-cover socle is asserted at arbitrary arithmetic primes.  The classical
+splitting law, semilinear descent, and Benson intertwiner remain prior art; the task-owned content
+is the intrinsic Smith/Fitting localization and the simultaneous compatibility of the four
+frozen Clebsch readouts.
+
+## Reproducibility
+
+From `/home/tavis/src/othello`:
+
+```bash
+python3 notes/2026-07-22-c429-attack-vector-scan.py --check
+python3 notes/2026-07-22-c429-attack-vector-scan-replay.py
+(cd notes && sha256sum -c 2026-07-22-c429-attack-vector-scan.sha256)
+```
+
+Intentional regeneration is the primary command with `--write`.  The primary checker uses exact
+integer arithmetic and exact arithmetic in `F_p[tau]/(tau^2-tau-1)`, and hash-pins the C377,
+C430, C459, C486, and C487 certificates.  The independent replay imports no primary code; it
+recomputes the Smith determinant, split/inert tests, Frobenius action, and the mod-5 equality
+`image=kernel=nilradical`, then rechecks all upstream hashes.  Outputs are deterministic,
+timestamp-free, and canonically sorted.
+
+The computation certifies the integral carrier arithmetic, the three pilot fibres, the unchanged
+polynomial `J/pi/lambda` square at those fibres, and the stated upstream interfaces.  It does not
+prove a general moduli representability theorem, a new Benson-style descent theorem, or intrinsic
+recovery from an unmarked code.
+
+## Extra-juice closeout and mystery ledger
+
+- **Settled — the Smith line is canonical.** The odd generator is the derivative `f'(tau)`, hence
+  generates the different.  The unique carrier bad prime and the discriminant prime are therefore
+  the same theorem, not two coincident calculations.
+- **Settled — why 2 appears.** It is not an arithmetic carrier prime: `R tensor F_2=F_4` and
+  `delta=1`.  It enters only because signs disappear and the six frozen columns collapse
+  pairwise.  Thus the exact denominator is `N=2` for the six-arc realization, while the carrier's
+  Fitting support remains `{5}`.
+- **Settled — what survives at 5.** The odd line does not vanish.  It becomes exactly the
+  nilradical, and `sigma(epsilon)=-epsilon`; the swap becomes infinitesimal while acting trivially
+  on the reduced support.  C377's enlarged linear stabilizer is the geometric internalization of
+  this scheme-theoretic residue.
+- **Open boundary, not a defect — represented functor S2.** The certificate proves one common
+  involutive action on four frozen readouts.  Upgrading this to isomorphisms of represented
+  functors requires choosing and proving the target categories and belongs to the unallocated
+  integral-moduli programme; C429 neither needs nor claims it.
+- **No unexplained numerical mystery remains.** The only two exceptional primes are fully
+  separated by mechanism: 5 is the different/ramification prime, and 2 is a six-point
+  realization collapse.
 
 **Persona routing:** `notes/2026-07-07-named-expert-personas-context.md` has no row for
 integral/modular representation-theory phase-theorem work; every listed dossier targets games,
