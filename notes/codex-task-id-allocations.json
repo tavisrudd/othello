@@ -377,8 +377,17 @@
       "last": 466,
       "purpose": "Weil-roof parallel rows: mod-3 Weil/Golay Brauer bridge; Dickson fusion mechanism + q=31 convergence",
       "sequence": 42
+    },
+    {
+      "count": 1,
+      "first": 467,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 467,
+      "purpose": "C456 successor: fixed-party LC/LU equivalence and first labeled invariant degree",
+      "sequence": 43
     }
   ],
-  "next_id": 467,
+  "next_id": 468,
   "schema": "codex-task-id-allocations-v1"
 }
