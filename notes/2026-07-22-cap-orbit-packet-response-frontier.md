@@ -225,6 +225,9 @@ descend.
    yet become trivial over `(state, opponent move)`.  Test stabilizers on that incidence cover;
    if it still does not split, keep the whole fibre and invoke the orbital response lemma.  This
    cleanly separates a strategy obstruction from a presentation/calibration obstruction.
+   C474 makes this operational: encode the choice as a cocycle and restrict its class to the
+   marked-branch stabilizer.  Vanishing means a marked section exists; nonvanishing says to retain
+   the fibre.  Its q=7 result warns that `C2` tests alone can miss a class first detected on `C4`.
 5. **Cycle-space/Bockstein language (C465, C471).**  Differences of response matchings are even
    cycles.  At q=11 the entire unforced choice is the single `C10` homology class.  The scalable
    test is whether active matching bulk maps through a boundary operator with bounded homology,
@@ -254,7 +257,8 @@ The roof's complete rank-three sequence gives a clean falsification ladder for t
   cap-lane integration and lifecycle ownership.
 - **B3 / q=7:** two silver sheets with opposite cubic orientations.  C198 can ask whether its
   exterior-four-arc residual admits a two-sheet response packet before doing broader template
-  mining.
+  mining.  C474 adds a sharp test order: inspect `C4` restriction before accepting an
+  involution-level split, since its binary carrier class vanishes on every `C2` but not on `C4`.
 - **H3 / q=11:** C447's shared-edge cross-sheet pair supplies the exact two-match cover gate above.
 
 Success at q=7 and q=11 would justify abstracting opponent-marked packet resolution.  Failure at
@@ -309,6 +313,13 @@ are stated without a hidden selector.
   cyclic offsets, but the square class of their separation changes under `g -> g^2`.  Difference-
   set coordinates require the frozen roof calibration; the generator-free game datum is the
   nonempty two-orbital `C10`.
+- **Settled — C474 separation:** the cap calibration is the reflection-detected class
+  `D10 -> D10/C5=C2` over `F_2` and vanishes after the endpoint mark restricts to `C5`.  C474's
+  q=11 Ext class is instead a characteristic-three class detected on `C3` and necessarily zero on
+  `D10`; the carriers are not the same.
+- **Open — uniform marked-restriction detector:** C474 gives scalar and one-element tests once a
+  module extension is defined.  C80 has no q-independent response-choice module/cocycle whose
+  restriction to every opponent stabilizer can yet be tested.
 - **Open — cubic response theorem:** the exact `tr(B^3)` and `Q3` successes have not yet been
   converted into a q-independent nonempty-fibre bound.  C80 owns the response relation and C82 the
   eventual orbital count; C81 owns structured failures of the generic estimate.

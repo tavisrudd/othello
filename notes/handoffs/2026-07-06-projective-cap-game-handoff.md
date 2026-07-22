@@ -586,7 +586,10 @@ task list.  Current high-value items:
   union is `C10`; each orbital is a perfect matching, reducing the generic target to a nonempty
   P-pure equal-orbit response relation (regular-bipartite Hall).  For game value, even matching is
   overkill: the six opponent orbits have a unique three-type response cover, so one winning reply
-  per opponent-orbit representative suffices by transport.  A uniform quotient/response theorem,
+  per opponent-orbit representative suffices by transport.  C474 sharpens the torsor diagnostic:
+  the cap calibration is the reflection class `D10/C5`, which vanishes after marking an endpoint;
+  its characteristic-three q=11 Ext carrier is distinct and restricts trivially to `D10`.
+  A uniform quotient/response theorem,
   (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang
   counting, gated on C80's packet. **C83** — the coarsest-bisimulation measurement is done (29 at

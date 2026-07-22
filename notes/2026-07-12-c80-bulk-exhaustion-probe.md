@@ -195,6 +195,36 @@ prove that a candidate orbital fibre is nonempty; normal-play recursion still re
 P-valued reply after every opponent orbit.  Character sums address abundance, while C80(b)'s
 descent induction supplies value.
 
+### C474 restriction test for marked response torsors
+
+C474 supplies a precise version of the principle that play can trivialize a choice obstruction:
+represent the choice fibre by a cocycle and restrict its class from the unmarked stabilizer to the
+stabilizer after a mark.  A zero restriction permits a marked equivariant section; a nonzero class
+means the proof must retain the whole response fibre.  C474 also shows why checking only
+involutions can be unsafe: its binary class vanishes on every `C2` and first appears on `C4`.
+
+For the present q=11 response pair this calculation is elementary and exact.  The two calibrations
+form the nonzero affine `F_2` class of
+
+```text
+D10 -> D10/C5 = C2,
+```
+
+detected by any nonsquare reflection.  Marking one P-edge endpoint reduces the stabilizer to `C5`,
+where the class restricts to zero; this is why each response matching is separately `C5`-fixed.
+Thus the cap torsor is detected at involution depth one and is trivial after the endpoint mark.
+
+This is not C474's q=11 Ext class.  That class has coefficients in characteristic three, is
+detected on a Sylow `C3`, and restricts trivially to `D10` because `3` does not divide `|D10|=10`.
+Likewise C474's q=7 binary class is a depth-two `C4/C2` character, whereas the cap calibration is
+already visible on `C2`.  The useful transfer is the restriction/local-detection method, not an
+identification of carriers.
+
+For a generic C80 packet, the resulting diagnostic is: define the response-choice torsor, compute
+or recognize its local class, and restrict it to each opponent-mark stabilizer.  C474's one-scalar
+functional and one-element Jordan-rank jump show two ways such a test can compress once a genuine
+module extension exists.  No uniform cap response module or cocycle has yet been constructed.
+
 There is no intrinsic QR label on the two q=11 connection orbitals.  Writing their offsets requires
 a generator of `C5`; inversion preserves the square class of their separation, but the roof Galois
 change `g -> g^2` swaps square and nonsquare.  Thus QR coordinates are useful after a frozen
