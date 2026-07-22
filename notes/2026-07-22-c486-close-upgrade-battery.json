@@ -1,0 +1,149 @@
+{
+  "L1": {
+    "Rz": {
+      "det": 2,
+      "matrix_mod_11": [
+        1,
+        10,
+        1,
+        1
+      ],
+      "nonsquare": true,
+      "swaps_sheets": true
+    },
+    "c473_dictionary": {
+      "alpha_residues": [
+        0,
+        2
+      ],
+      "outer_coset_realises_alpha_to_minus1_minus_alpha": true,
+      "two_split_primes_Q_sqrt_minus_11": [
+        "(3,alpha)",
+        "(3,alpha+1)"
+      ]
+    },
+    "explicit_torsor_iso": {
+      "aligning_pgl_element": [
+        1,
+        10,
+        6,
+        1
+      ],
+      "child_is_conic": true,
+      "parts_map_to_sheets": true,
+      "transported_matchings_equal_c445_orbit": true
+    },
+    "fibre_size": 22,
+    "pgl_order": 1320,
+    "psl_order": 660,
+    "sheet_sizes": [
+      11,
+      11
+    ],
+    "statement": "the C474 q=11 22-parent fixed-child fibre has a two-element quotient (its two sheets of 11); it is torsor-isomorphic to T_11 (two PSL_2(11) orbits of one 22-element PGL_2(11) orbit) and the reduction of Rz (outer coset, det 2 nonsquare mod 11) exchanges its two points, compatibly with the C473 dictionary.",
+    "verdict": "TORSOR-ISOMORPHIC"
+  },
+  "L2": {
+    "conclusion": "C417 (Cech cocycle), C448 (one-bit selector), and C473 (free C2 torsor) are three functors of the single class [T_q] = sgn: PGL_2(q) -> PGL_2(q)/PSL_2(q).",
+    "per_prime": {
+      "11": {
+        "pgl_order": 1320,
+        "psl_order": 660,
+        "sgn_kernel_is_PSL": true,
+        "sgn_surjective": true
+      },
+      "7": {
+        "pgl_order": 336,
+        "psl_order": 168,
+        "sgn_kernel_is_PSL": true,
+        "sgn_surjective": true
+      }
+    },
+    "square_a_C417": {
+      "C2_shadow_equals_sgn": true,
+      "claim": "C417 cocycle class = image of [T_q] under the sheet dictionary",
+      "holds": true,
+      "no_equivariant_point_section": true,
+      "sgn_torsor_is_T_q": true
+    },
+    "square_b_C448": {
+      "claim": "C448 one-bit selector cost attained exactly by [T_q] nontriviality",
+      "cost_bits": 1,
+      "cost_zero_iff_T_q_trivial": true,
+      "holds": true,
+      "stabiliser_character_equals_sgn": true
+    },
+    "verdict": "ONE TORSOR CLASS, THREE CERTIFICATES"
+  },
+  "L3": {
+    "A3_q5": {
+      "R_minus_equals_neg_R_plus": true,
+      "connected": true,
+      "etale_C2_algebra": "connected (F_25)",
+      "field": "F_25 = F_5[u]/(u^2-2)",
+      "frobenius_orbit_is_one_closed_point": true,
+      "frobenius_swaps_lifts": true,
+      "marker_fibre": "one projective F_5 point (Frobenius orbit of the two spin lifts)",
+      "u_squared": 2
+    },
+    "M12_clause": "At the extended Hadamard / M12 layer the orientation bit is invisible to every inner symmetry: N_{M12}(PSL_2(11)) = PSL_2(11) is self-normalising (C480-F), PGL_2(11) is not a subgroup of M12, and the two M11 parents are non-conjugate in M12, so the sheet swap is realised only by the outer, row/column-exchanging class of M12 - the same free C2 torsor forced outer one layer up.",
+    "M12_source": "C480-F (cited, no new computation)",
+    "c480_sha16": "08a89e884b1b1a6b",
+    "trichotomy": {
+      "A3_q5": {
+        "disposition": "inert -> connected F_25 -> fused point (no bit)",
+        "frame_field": "Q(sqrt2)",
+        "prime": 5,
+        "symbol": -1
+      },
+      "B3_q7": {
+        "disposition": "split -> F_7 x F_7 -> free C2 torsor",
+        "frame_field": "Q(sqrt2)",
+        "prime": 7,
+        "symbol": 1
+      },
+      "H3_q11": {
+        "disposition": "split -> F_11 x F_11 -> free C2 torsor",
+        "frame_field": "Q(sqrt5)",
+        "prime": 11,
+        "symbol": 1
+      }
+    },
+    "trichotomy_statement": "split => free C2 torsor (B3 q=7, H3 q=11); inert => fused connected point (A3 q=5).",
+    "verdict": "RANK-THREE COMPLETION HOLDS"
+  },
+  "lane": "crowns",
+  "schema": "c486-close-upgrade-battery/1",
+  "task": "C486",
+  "upstream": {
+    "c417": {
+      "artifact": "2026-07-20-c417-affine-cocycle-line-bundle.json",
+      "sha256_16": "ca8b009710da9893"
+    },
+    "c444": {
+      "artifact": "2026-07-21-c444-silver-fusion.json",
+      "sha256_16": "311dd3eba6ad7b29"
+    },
+    "c445": {
+      "artifact": "2026-07-21-c445-characteristic-11-gluing.json",
+      "sha256_16": "0ce94294e6e3e190"
+    },
+    "c448": {
+      "artifact": "2026-07-21-c448-orbit-valued-selector.json",
+      "sha256_16": "02f8d75f49727321"
+    },
+    "c473": {
+      "artifact": "2026-07-22-c473-arithmetic-orientation.json",
+      "sha256_16": "0f7c8e94d68640d8"
+    },
+    "c474": {
+      "artifact": "2026-07-22-c474-reed-solomon-decorated-deep-holes.json",
+      "sha256_16": "02cb69e2d26deb9f"
+    },
+    "c480": {
+      "artifact": "2026-07-22-c480-close-gap-certificates.json",
+      "sha256_16": "08a89e884b1b1a6b"
+    }
+  },
+  "verdict": "L1 TORSOR-ISOMORPHIC | L2 ONE TORSOR CLASS (THREE CERTIFICATES) | L3 RANK-THREE COMPLETION HOLDS (+ forced-outer M12 clause)"
+}

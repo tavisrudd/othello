@@ -1,0 +1,62 @@
+{
+  "char_zero_object": {
+    "S3_resolvent_quotient": "Spec Q(sqrt5)  = (K x K x K)^S3, K=Q(sqrt5)",
+    "no_rational_section": true,
+    "structural_swap": "Galois sigma of Q(sqrt5), phi -> 1-phi",
+    "two_character_machine": "Z[1/5,T]/(T^2-T-1)"
+  },
+  "conclusion": "The characteristic-zero golden descent (C459) is a genuine realization row of the orientation torsor T_q: its structural swap sigma (Galois of Q(sqrt5)) is exchanged with the outer PGL_2(11)/PSL_2(11) coset under reduction at 11, via the certified C445 (Rz) and C473 (alpha -> -1-alpha) dictionaries. First non-finite entry on the torsor list.",
+  "descended_decoration_is_rational": {
+    "note": "the bit is carried by the S3-resolvent / Hilbert-90 transport, not by the reduced Q-form decoration (matches C459/C417)",
+    "single_matching_at_both_primes": true
+  },
+  "hilbert90_transport": {
+    "hT_h_equals_G_mod_11": true,
+    "sqrt5_reduction": {
+      "are_galois_conjugate_mod_11": true,
+      "phi4": 7,
+      "phi8": 4
+    },
+    "two_distinct_sheets": true
+  },
+  "lane": "crowns",
+  "outer_swap": {
+    "explicit_transporter": [
+      1,
+      4,
+      10,
+      4
+    ],
+    "sheets_different_PSL_orbits": true,
+    "sheets_same_PGL_orbit": true,
+    "sigma_corresponds_to_outer_coset": true,
+    "transporter_determinant": 8,
+    "transporter_is_nonsquare_outer": true
+  },
+  "reduction_at_11": {
+    "phi8_is_pi_phi4_is_pibar": true,
+    "roots_of_T2_minus_T_minus_1": [
+      4,
+      8
+    ],
+    "sheets_are_two_points_of_T_11": true,
+    "sigma_swaps_roots": true
+  },
+  "schema": "c487-char-zero-realization-row/1",
+  "task": "C487",
+  "upstream": {
+    "c445": {
+      "artifact": "2026-07-21-c445-characteristic-11-gluing.json",
+      "sha256_16": "0ce94294e6e3e190"
+    },
+    "c459": {
+      "artifact": "2026-07-21-c459-golden-six-arc-q-forms.json",
+      "sha256_16": "8ca5d238b2024fcb"
+    },
+    "c473": {
+      "artifact": "2026-07-22-c473-arithmetic-orientation.json",
+      "sha256_16": "0f7c8e94d68640d8"
+    }
+  },
+  "verdict": "POSITIVE - the outer swap exchanges C459's descent cocycle pair; the torsor list gains a characteristic-zero realization row (the S3-resolvent Spec Q(sqrt5))"
+}
