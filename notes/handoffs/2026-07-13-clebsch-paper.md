@@ -11,7 +11,7 @@
 
 ## Goal and current verdict
 
-Finish the Clebsch-hexagon paper as a self-contained, honestly attributed,
+Finish the Clebsch-hexagon paper as a self-contained, exactly attributed,
 computer-assisted rigidity/classification paper with archived reproducibility artifacts.
 Current assessment: **the existing 19-page manuscript and local reproducibility package remain the
 protected baseline.  C399 is the selected portable upgrade for that version.  The new-paper plan
@@ -262,7 +262,7 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
   reproducible incidence/conic certificates are the entry boundary. Every new finite leaf requires
   a checker theorem, provenance, hash, independent replay, and explicit axiom audit; otherwise its
-  claim remains honestly external.
+  claim remains explicitly external.
 
 ## Verification map
 
