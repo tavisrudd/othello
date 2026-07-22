@@ -1,5 +1,8 @@
 # C471 — Hadamard degeneration complex and puncture/shorten bridge
 
+**Status:** completed GREEN on 2026-07-22; exact report and replay bundle:
+`notes/2026-07-22-c471-hadamard-degeneration-complex.md`.
+
 **Context:** queued downstream synthesis from C465 and C469. C469 constructs an integral order-12
 Hadamard matrix whose mod-3 rows span the self-dual `[12,6,6]_3` code; C465 identifies the
 punctured Golay span, its simple five-dimensional core, and the nonsplit augmentation carrier.
