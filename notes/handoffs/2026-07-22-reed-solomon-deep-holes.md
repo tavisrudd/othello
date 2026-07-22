@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475 QUEUED; the C398 four-class theorem and C474 decorated-fibre computation are the
-frozen base. The first lane task moves from exceptional non-GRS parents to the standard
-redundancy-three GRS deep-hole problem.
+**Status:** C475--C478 QUEUED/GATED as the first theorem ladder; the C398 four-class theorem and
+C474 decorated-fibre computation are the frozen base. C475 moves from exceptional non-GRS parents
+to the standard redundancy-three GRS deep-hole problem.
 
 ## Goal
 
@@ -97,11 +97,8 @@ C475 must now:
    four-cycle ratios generate it in the required sense;
 3. prove the descent of the support-normalized ratios under projectivities, Frobenius, and the
    conic-support automorphism group;
-4. compute a lossless exact atlas on the smallest feasible standard-GRS cases and compare its
-   fibres with exact automorphism orbits;
-5. replay the same invariants on all four frozen C398 classes as positive/negative controls; and
-6. if separation fails, stop at the first collision and characterize the entire collision fibre
-   before proposing any stronger invariant.
+4. give exact labelled reconstruction and orbit-equality criteria; and
+5. export a canonical comparison procedure and data schema to C476 and C478.
 
 Import order is strict: use the `arcs` syndrome/evaluation theorems first, C312/C314 quotient-chart
 discipline second, and `thm-repair-coefficients` as the gauge warning. Use C295 reconstruction only
@@ -110,8 +107,42 @@ remain gated until that collision has a nontrivial structured fibre.
 
 The deliverable is
 [`notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`](../2026-07-22-c475-reed-solomon-determinant-atlas.md),
-with exact scripts/data beside it if finite computation is used. A successful small-field atlas is
-not yet a general classification theorem; any extrapolation must be separately labelled.
+with a symbolic checker beside it if computation supports the algebra. Finite orbit censuses belong
+to C476 and C478, not this task.
+
+Task card: `notes/reed-solomon-tasks/c475-veronese-cycle-quotient.md`.
+
+## Execution ladder
+
+| Step | Target | Entry gate | Exit gate | Level unlocked |
+|---|---|---|---|---|
+| C475 | Veronese factorization, torus quotient, and semilinear descent | none | exact invariant-generation/reconstruction theorem, including infinity and characteristic two | finite atlas is well-defined |
+| C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | C475 | first complete collision fibre, or certified separation on the entire bounded domain | honest evidence for generic separation or an exceptional mechanism |
+| C477 | intrinsic theorem for C476's first collision | an actual C476 collision | full fibre/stabilizer theorem plus minimal discriminator or sharp obstruction | candidate discriminant geometry |
+| C478 | C398 and `A3/B3/H3` exceptional controls | C475 | exact comparison of orbit recovery, Gram rank, and Sylow gate on the frozen cases | decision on whether modular machinery belongs in this lane |
+
+Cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`,
+`notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`, and
+`notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
+
+## Unallocated level-ups
+
+- **Generic all-field reconstruction:** allocate only if C475 proves a small generating atlas and
+  C476 shows separation outside a describable degeneracy locus. Target: classify all syndrome
+  orbits for six-point GRS supports away from an explicit discriminant.
+- **Semilinear tower theorem:** allocate only if extension-field cases expose a Frobenius/Hilbert-90
+  obstruction not already removed by taking Frobenius orbits.
+- **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
+  simultaneous-extension complex from C295; one-column extension data alone does not pass.
+- **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
+  incidence carrier passing both the Gram and Sylow endotrivial gates.
+- **Arbitrary-dimension Reed--Solomon:** allocate only after a claim-specific literature audit and
+  a proved higher-symmetric-power analogue of (1); small-field success supplies no such bridge.
+
+**Result ceiling:** the realistic large theorem is an all-field, redundancy-three orbit
+reconstruction with an explicit discriminant and classified exceptional fibres. It would be a
+substantial invariant-theoretic deep-hole result, but not the general Reed--Solomon deep-hole
+conjecture.
 
 ## Boundaries
 
@@ -123,6 +154,8 @@ not yet a general classification theorem; any extrapolation must be separately l
   literature audit. The present task is an internal theorem-and-discriminator programme.
 - Avoid an unstructured field census. Normalize first, prove the group action, and enumerate only
   the resulting bounded quotient.
+- No successor may enlarge C476's field/support domain. A larger range requires a theorem-derived
+  bound and a newly allocated task.
 
 Companions: [discovery log](../2026-07-22-reed-solomon-discovery-track.md) for incidental leads;
 [session archive](done/2026-07-22-reed-solomon-deep-holes-archive.md) for dated or superseded lane

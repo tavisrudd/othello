@@ -18,3 +18,10 @@ determinant factors into the support bracket and one syndrome bilinear form. Mon
 invariance then forces balanced edge ratios, with support-normalized four-cycles as the first atlas.
 The live handoff records the exact formula, import order, and stop gate; heavier cocycle, modular,
 and higher-order-MDS machinery remains conditional on a genuine atlas collision.
+
+## 2026-07-22 — Gated theorem ladder
+
+C476--C478 were reserved as three bounded successors: a five-field six-support pilot, a
+collision-only fibre theorem, and fixed exceptional-family controls. Generic all-field,
+semilinear-tower, higher-order-MDS, and modular/category extensions remain unallocated behind
+explicit gates.
