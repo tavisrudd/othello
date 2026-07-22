@@ -73,6 +73,12 @@ halves of the quotient configuration, the two sheets are the unique pair with eq
 second moments.  Thus quadratic data recover the unordered partition, although they cannot choose
 one half.
 
+The primary meaning of the “bit” in this paper is this unchosen two-element set: a `C2`-torsor on
+which the outer coset acts freely.  An orientation is a choice of one sheet, and one bit of advice
+is the data of such a choice.  The cubic below detects the corresponding quotient character.  No
+entropy interpretation is intended without an additional probability distribution, and the term
+does not assert that every functorial image of the parent retains the torsor.
+
 The first orientation appears one degree later.  Give the two sheets opposite signs and form their
 signed tensor moments.  The moments in degrees one and two vanish, while the degree-three moment
 is nonzero.  After compression to the six H3 profiles, antipodality kills every even signed moment
@@ -82,6 +88,16 @@ negated by the outer coset;
 inside the conic group, its stabilizer is exactly `PSL_2(q)`, while its projective line is fixed by
 `PGL_2(q)`.  In this precise moment sense, degree two recovers the two alternatives and degree
 three orients them.
+
+> **Orbit-fission principle.** Suppose an index-two orbit split has the sheet-sign line as the
+> entire kernel of its degree-two feature map.  Then quadratic data intrinsically recover the
+> unordered sheets.  If the quotient character first occurs in symmetric degree three, the
+> resulting cubic anti-invariant orients them.
+
+In the present paper this is an organizing sentence, not an additional theorem schema: the
+radical--Hadamard theorem supplies the exact degree-two hypothesis, and the signed-moment and
+parity theorems supply the cubic conclusion.  **TODO(xref):** replace this sentence by the final
+theorem labels and exact feature-map notation.
 
 For H3, a second compression makes the reconstruction visible without listing all twenty-two
 matchings.  Let `G=PGL_2(11)`, let `H=A5` be a matching stabilizer, and let `K=A4` be the common
@@ -133,7 +149,9 @@ singleton matching selects one parent.  The sequence
 
 is therefore an information ledger: twenty-two decorated alternatives, six depth labels, two
 oriented sheets, and one chosen parent.  It is not a chain of faithful linear quotients.  Each
-arrow records a different kind of information loss or recovery.
+arrow records a different kind of information loss or recovery: an orbit map, a linear image, a
+torsor quotient, a forgetting map, or a choice of section.  In particular, the two-dimensional
+profile plane is not the same object as the two-element sheet set.
 
 The two golden sheets also have an arithmetic origin.  A characteristic-zero golden matching
 reduces at the two primes above eleven to the two singleton matchings.  Their `A5` stabilizers

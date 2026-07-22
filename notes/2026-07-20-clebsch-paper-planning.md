@@ -23,6 +23,11 @@ failed rows.  C457, C459, C462, C463, C466, and C468 make paper 2 concrete but d
 `2026-07-21-clebsch-weil-roof-results-ledger.md`; this document keeps only the narrative and
 manuscript decisions needed in a cold session.
 
+The high-level generalist compression test, possible unseen connections, adopted exposition
+changes, and remaining theorem-xref TODOs are recorded in
+`2026-07-21-clebsch-high-level-reader-cold-read.md`.  This is an internal checklist, not an
+external review or an attribution to the named reader who motivated the thought experiment.
+
 ## Executive decision
 
 The current Clebsch project has two coherent forms.  The existing C399-led manuscript remains a
@@ -392,19 +397,21 @@ Read in this order:
 3. for manuscript drafting, `notes/2026-07-21-clebsch-paper-abstract-outline.md` for the selected
    narrative and section plan, then `notes/2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`
    for copy-ready opening and closing prose;
-4. for result intake or disposition review, `notes/2026-07-21-clebsch-weil-roof-results-ledger.md`
+4. for a high-level generalist cold read or theorem-compression pass,
+   `notes/2026-07-21-clebsch-high-level-reader-cold-read.md`;
+5. for result intake or disposition review, `notes/2026-07-21-clebsch-weil-roof-results-ledger.md`
    for every recent result without loading the individual battery reports;
-5. for theorem work, `notes/2026-07-20-c406-matching-module.md` for the exact theorem and negative
+6. for theorem work, `notes/2026-07-20-c406-matching-module.md` for the exact theorem and negative
    results;
-6. for claim wording, `notes/2026-07-20-c406-priority-audit.md` for classical ownership and access
+7. for claim wording, `notes/2026-07-20-c406-priority-audit.md` for classical ownership and access
    gaps;
-7. only when comparing against the fallback, `notes/2026-07-19-clebsch-hexagons-are-the-bestagons-spine.md` for the protected exposition
+8. only when comparing against the fallback, `notes/2026-07-19-clebsch-hexagons-are-the-bestagons-spine.md` for the protected exposition
    baseline and candidate replacement architecture;
-8. `notes/2026-07-20-c411-double-coset-hecke.md` for the conceptual profile/cubic proof;
-9. `notes/2026-07-20-c412-relative-cubic-depth-plane.md` for the selective modular upgrade and its
+9. `notes/2026-07-20-c411-double-coset-hecke.md` for the conceptual profile/cubic proof;
+10. `notes/2026-07-20-c412-relative-cubic-depth-plane.md` for the selective modular upgrade and its
    non-identification boundary;
-10. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412;
-11. `notes/handoffs/2026-07-17-crowns.md` only for live research ordering outside the manuscript
+11. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412;
+12. `notes/handoffs/2026-07-17-crowns.md` only for live research ordering outside the manuscript
     lane.  The historical conversation report and execution controller are no longer routine
     Paper-1 context.
 

@@ -258,13 +258,17 @@ Sources: C379, C444, C445, C460.
 
 1. The abstract and opening figures lead with the reconstruction mechanism, not the catalogue of
    exceptional objects.
-2. `5/14/22`, raw one-factorizations, matching-design status, coarse Hadamard orbitals, and the
+2. State the radical--Hadamard recovery theorem before the consequence ledger, and define the
+   primary “bit” as a `C2`-torsor before using bit, chirality, orientation, or advice language.
+3. Label every `22 -> 6 -> 2 -> 1` arrow by its type; do not conflate the rank-two profile plane
+   with the two-element sheet set.
+4. `5/14/22`, raw one-factorizations, matching-design status, coarse Hadamard orbitals, and the
    individual conic configurations receive explicit classical credit.
-3. “Cubic is minimal” is qualified to signed tensor moments and their linear functionals.
-4. “Chirality” is disambiguated at first use and never identified with quantum LU inequivalence or
+5. “Cubic is minimal” is qualified to signed tensor moments and their linear functionals.
+6. “Chirality” is disambiguated at first use and never identified with quantum LU inequivalence or
    chiral-polytope terminology.
-5. The conic child, the relative-cubic Tate plane, and the depth plane are not conflated.
-6. Every negative gate is stated where it prevents the corresponding overreading, not collected as
+7. The conic child, the relative-cubic Tate plane, and the depth plane are not conflated.
+8. Every negative gate is stated where it prevents the corresponding overreading, not collected as
    a history of failed attempts.
-7. The main paper targets one proof spine.  The sequel mechanisms remain pointers even when their
+9. The main paper targets one proof spine.  The sequel mechanisms remain pointers even when their
    certificates are complete.
