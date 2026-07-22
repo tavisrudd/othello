@@ -1,0 +1,386 @@
+{
+  "acceptance": {
+    "canonical_companion_action": {
+      "all_60_corrections_give_same_permutation": true,
+      "kappa_companion_permutation": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "sigma_companion_permutation": [
+        2,
+        0,
+        3,
+        1
+      ],
+      "sigma_cycle": [
+        0,
+        2,
+        3,
+        1
+      ],
+      "sigma_is_four_cycle": true,
+      "sigma_square": [
+        3,
+        2,
+        1,
+        0
+      ]
+    },
+    "companion_to_residue": {
+      "kappa_pairs": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "records": [
+        {
+          "companion": 0,
+          "golden_prime": "pi",
+          "phi_mod_11": 8,
+          "sheet": "base",
+          "zeta_mod_11": 4
+        },
+        {
+          "companion": 1,
+          "golden_prime": "pibar",
+          "phi_mod_11": 4,
+          "sheet": "outer",
+          "zeta_mod_11": 5
+        },
+        {
+          "companion": 2,
+          "golden_prime": "pibar",
+          "phi_mod_11": 4,
+          "sheet": "outer",
+          "zeta_mod_11": 9
+        },
+        {
+          "companion": 3,
+          "golden_prime": "pi",
+          "phi_mod_11": 8,
+          "sheet": "base",
+          "zeta_mod_11": 3
+        }
+      ],
+      "residue_action_induced_by_z_to_z_squared": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "residue_kappa_pairs": [
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "sigma_orientation_relation": "residue action is inverse to the chosen corrected-sigma action; both square to kappa"
+    },
+    "degree_one_discrepancy": {
+      "galois_invariant": true,
+      "pair_records": [
+        {
+          "c443_mu_at_pi_sha256": "5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c",
+          "candidates": [
+            0,
+            3
+          ],
+          "degree": 1,
+          "sha256": "5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c",
+          "support": [
+            4,
+            7,
+            9
+          ],
+          "vector_mod_11": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            7,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "c443_mu_at_pi_sha256": "5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c",
+          "candidates": [
+            1,
+            2
+          ],
+          "degree": 1,
+          "sha256": "5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c",
+          "support": [
+            4,
+            7,
+            9
+          ],
+          "vector_mod_11": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            7,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "pairs_have_identical_vectors": true
+    },
+    "sigma_image": {
+      "automorphism_group_equals_frozen_golden_A5": true,
+      "automorphism_group_order": 60,
+      "conic_bridge": [
+        [
+          [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          [
+            "2",
+            "4",
+            "2",
+            "2"
+          ],
+          [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ]
+        ],
+        [
+          [
+            "1",
+            "2",
+            "1",
+            "1"
+          ],
+          [
+            "0",
+            "0",
+            "-2",
+            "-2"
+          ],
+          [
+            "-1",
+            "-2",
+            "-1",
+            "-1"
+          ]
+        ],
+        [
+          [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "0",
+            "0"
+          ]
+        ]
+      ],
+      "correcting_map_count": 60,
+      "correcting_maps_form_torsor_under_A5_normalizer": true,
+      "literal_common_vertices": 0,
+      "witness": {
+        "companion_permutation": [
+          2,
+          0,
+          3,
+          1
+        ],
+        "determinant": [
+          "6",
+          "10",
+          "6",
+          "0"
+        ],
+        "determinant_norm": "16",
+        "matrix": [
+          [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          [
+            "0",
+            "2",
+            "3",
+            "2"
+          ],
+          [
+            "2",
+            "4",
+            "3",
+            "1"
+          ],
+          [
+            "2",
+            "2",
+            "-1",
+            "-2"
+          ]
+        ],
+        "sigma_image_vertex_correspondence": [
+          1,
+          9,
+          2,
+          3,
+          0,
+          7,
+          11,
+          5,
+          6,
+          4,
+          8,
+          10
+        ]
+      }
+    }
+  },
+  "consumes": {
+    "2026-07-21-c440-conventions-freeze.json": {
+      "bytes": 6436,
+      "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+    },
+    "2026-07-21-c440-conventions-freeze.md": {
+      "bytes": 8384,
+      "sha256": "43eca694b5f48dc88204493ea24dbadfa8905824b07c739af3fe82ee6abf12ec"
+    },
+    "2026-07-21-c443-commuting-with-reduction.json": {
+      "bytes": 30417,
+      "sha256": "39c0bed812099469f9daf2fbec85b187e3bb3de8b89f2dd53d40ececaf3c7a4a"
+    },
+    "2026-07-21-c443-commuting-with-reduction.md": {
+      "bytes": 6744,
+      "sha256": "d0a0bfcd9c2c5ee7148bb0327e97fefbd290fc914069132505a6c77f9a08d34c"
+    },
+    "2026-07-21-c443-commuting-with-reduction.py": {
+      "bytes": 24965,
+      "sha256": "0ea78dfb62696f95b90981d3721571c410808915b435c5d361b2a52ab83c81d0"
+    },
+    "2026-07-21-c443-commuting-with-reduction.sha256": {
+      "bytes": 593,
+      "sha256": "4aa05cef76aef09b3938e15efad486bec6ae52f8de11b6e2bc03957d8686ff01"
+    },
+    "2026-07-21-c443-torsor-hunch-check.md": {
+      "bytes": 8763,
+      "sha256": "b7f4e574de1395fc79b9df2ba78bcd39402d70121c57c2e999bb692f71dd34bf"
+    },
+    "2026-07-21-c448-orbit-valued-selector.md": {
+      "bytes": 6627,
+      "sha256": "8a24f530080fec11e33ac007b67cb08ccb6aa660c20c6f80a9c1bb576adc6cc0"
+    },
+    "2026-07-21-c458-golden-sheet-frame-freeze.json": {
+      "bytes": 13379,
+      "sha256": "9e93de4567443726896bf613971d2b7e3c7054874b4bf4810ca74a08384ff620"
+    },
+    "2026-07-21-c458-golden-sheet-frame-freeze.md": {
+      "bytes": 12252,
+      "sha256": "218e607b019a9b372588b00fcd9fd2be1d2a1810ad5e24d86ac9fac0029c0ad3"
+    },
+    "2026-07-21-c461-four-companion-weight-line.json": {
+      "bytes": 112014,
+      "sha256": "4ed0246e63ca8de56800b5cac89963f91d481c51568f1bea39681f5bee3bfbf8"
+    },
+    "2026-07-21-c461-four-companion-weight-line.md": {
+      "bytes": 4175,
+      "sha256": "cff2446fb229ec0079c517bbbcc7fac0b698a5907b869d37583e6a7d46595529"
+    },
+    "2026-07-21-weil-roof-juice-m-chain.md": {
+      "bytes": 11633,
+      "sha256": "266c2e246c0080dd82437cb25a65d0e61bc68dcb6b4a0c3f3fa9bbaa80e7764f"
+    },
+    "2026-07-21-weil-roof-juice-x-chain.md": {
+      "bytes": 13109,
+      "sha256": "ca51eace3be74187ddedc7a39b72a63a0dd21a33b9a1f150427107a658311bef"
+    }
+  },
+  "descent_statement": {
+    "base_changed_object": "the four companion one-factorizations with their equivariant map to the two golden primes above 11 and frozen base/outer sheet labels",
+    "base_ring": "Z[phi,1/10]",
+    "cyclotomic_ring": "Z[zeta5,1/10]",
+    "denominator_set_N_prime": 10,
+    "eleven_is_not_inverted": true,
+    "inverted_rational_primes": [
+      2,
+      5
+    ],
+    "localization_reasons": {
+      "2": "the displayed correcting projectivity has determinant norm 16 and pair averages use 1/2",
+      "5": "Z[zeta5]/Z[phi] is ramified only above 5; inverting 5 makes the kappa extension finite etale"
+    },
+    "obstruction": {
+      "character": "chi_pi:<kappa>->C2 is surjective",
+      "fibres": {
+        "pi": [
+          0,
+          3
+        ],
+        "pibar": [
+          1,
+          2
+        ]
+      },
+      "free_kappa_action": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "orbit_valued_family_descends": true,
+      "point_valued_companion_section_descends": false,
+      "precise_scope": "the obstruction is to a chosen companion in each prime fibre, exactly the M3a selector; it is not an obstruction to descending the unordered family"
+    },
+    "recommendation": "replace the cut paper-1 tensor clause only by the base-changed equivariant companion-sheet family together with the proved kappa selector obstruction; do not claim an M3a tensor or rank-4 module acceptance item"
+  },
+  "schema": "c462-torsor-descent-v1",
+  "task": "C462",
+  "verdict": "GREEN_Z4_COMPANION_TORSOR_WITH_KAPPA_SELECTOR_OBSTRUCTION"
+}
