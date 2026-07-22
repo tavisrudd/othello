@@ -95,6 +95,29 @@ def weight_distribution(words: list[list[int]], n: int) -> dict[str, int]:
     return counts
 
 
+def macwilliams_transform(distribution: dict[str, int], n: int, p: int) -> list[int]:
+    code_size = sum(distribution.values())
+    transformed = []
+    for target_weight in range(n + 1):
+        numerator = 0
+        for source_weight in range(n + 1):
+            krawtchouk = 0
+            for intersection in range(target_weight + 1):
+                outside = target_weight - intersection
+                if intersection <= source_weight and outside <= n - source_weight:
+                    krawtchouk += (
+                        (-1) ** intersection
+                        * (p - 1) ** outside
+                        * math.comb(source_weight, intersection)
+                        * math.comb(n - source_weight, outside)
+                    )
+            numerator += distribution[str(source_weight)] * krawtchouk
+        if numerator % code_size:
+            raise AssertionError("nonintegral MacWilliams coefficient")
+        transformed.append(numerator // code_size)
+    return transformed
+
+
 def sphere_data(n: int, p: int, dimension: int, minimum_distance: int) -> dict[str, object]:
     radius = (minimum_distance - 1) // 2
     terms = [math.comb(n, i) * (p - 1) ** i for i in range(radius + 1)]
@@ -154,12 +177,30 @@ def relation_record(matrix: list[list[int]], p: int) -> dict[str, object]:
     distribution = weight_distribution(words, len(matrix))
     nonzero_weights = [int(w) for w, count in distribution.items() if int(w) and count]
     minimum_distance = min(nonzero_weights)
+    minimum_words = {tuple(word) for word in words if sum(x != 0 for x in word) == minimum_distance}
+    row_multiples = {
+        tuple((scalar * x) % p for x in row)
+        for row in matrix
+        for scalar in range(1, p)
+    }
+    rows_are_minimum = row_multiples <= minimum_words
+    common = math.gcd(len(row_multiples), len(minimum_words))
     return {
         "code_size": len(words),
         "enumeration": f"all {p}^{len(generator)} coefficient tuples in lexicographic order",
         "field_order": p,
         "generator_matrix_rref": generator,
         "incidence_matrix": matrix,
+        "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": rows_are_minimum,
+            "distinct_nonzero_scalar_multiples": len(row_multiples),
+            "exhausts_all_minimum_words": rows_are_minimum and row_multiples == minimum_words,
+            "fraction_of_minimum_words": [
+                len(row_multiples) // common,
+                len(minimum_words) // common,
+            ],
+            "total_minimum_words": len(minimum_words),
+        },
         "length": len(matrix),
         "minimum_distance": minimum_distance,
         "parity_check_matrix_rref": nullspace(generator, p),
@@ -218,9 +259,21 @@ def build() -> dict[str, object]:
         shared_generator = relations["shared_edge"]["generator_matrix_rref"]
         orthogonal = all(dot(x, y, p) == 0 for x in disjoint_generator for y in shared_generator)
         dimensions_sum = len(disjoint_generator) + len(shared_generator) == q
+        disjoint_distribution = relations["disjoint"]["weight_distribution_all_weights"]
+        shared_distribution = relations["shared_edge"]["weight_distribution_all_weights"]
+        disjoint_transform = macwilliams_transform(disjoint_distribution, q, p)
+        shared_transform = macwilliams_transform(shared_distribution, q, p)
+        disjoint_coefficients = [disjoint_distribution[str(i)] for i in range(q + 1)]
+        shared_coefficients = [shared_distribution[str(i)] for i in range(q + 1)]
         cases.append({
             "design_complement_pair": {
                 "dimensions_sum_to_length": dimensions_sum,
+                "macwilliams_disjoint_to_shared_coefficients": disjoint_transform,
+                "macwilliams_shared_to_disjoint_coefficients": shared_transform,
+                "macwilliams_transforms_agree": (
+                    disjoint_transform == shared_coefficients
+                    and shared_transform == disjoint_coefficients
+                ),
                 "shared_edge_span_equals_disjoint_dual": orthogonal and dimensions_sum,
                 "spans_are_mutually_orthogonal": orthogonal,
             },

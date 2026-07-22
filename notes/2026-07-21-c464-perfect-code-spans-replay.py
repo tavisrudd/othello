@@ -56,6 +56,24 @@ def distribution(words: set[tuple[int, ...]], n: int) -> dict[str, int]:
     return answer
 
 
+def macwilliams(counts: dict[str, int], n: int, p: int) -> list[int]:
+    size = sum(counts.values())
+    answer = []
+    for j in range(n + 1):
+        total = 0
+        for w in range(n + 1):
+            polynomial = sum(
+                (-1) ** s * (p - 1) ** (j - s)
+                * math.comb(w, s) * math.comb(n - w, j - s)
+                for s in range(j + 1)
+                if s <= w and j - s <= n - w
+            )
+            total += counts[str(w)] * polynomial
+        assert total % size == 0
+        answer.append(total // size)
+    return answer
+
+
 def multiply(left: list[list[int]], right: list[list[int]], p: int) -> list[list[int]]:
     return [[sum(left[i][k] * right[k][j] for k in range(len(right))) % p
              for j in range(len(right[0]))] for i in range(len(left))]
@@ -95,6 +113,20 @@ def main() -> None:
             assert weights == recorded["weight_distribution_all_weights"]
             minimum = min(int(w) for w, count in weights.items() if int(w) and count)
             assert minimum == recorded["minimum_distance"]
+            minimum_words = {word for word in words if sum(x != 0 for x in word) == minimum}
+            row_multiples = {
+                tuple((scalar * x) % p for x in row)
+                for row in matrix for scalar in range(1, p)
+            }
+            coverage = recorded["incidence_minimum_word_coverage"]
+            assert row_multiples <= minimum_words
+            assert coverage["distinct_nonzero_scalar_multiples"] == len(row_multiples)
+            assert coverage["total_minimum_words"] == len(minimum_words)
+            divisor = math.gcd(len(row_multiples), len(minimum_words))
+            assert coverage["fraction_of_minimum_words"] == [
+                len(row_multiples) // divisor, len(minimum_words) // divisor
+            ]
+            assert coverage["exhausts_all_minimum_words"] == (row_multiples == minimum_words)
             radius = (minimum - 1) // 2
             terms = [math.comb(q, i) * (p - 1) ** i for i in range(radius + 1)]
             sphere = recorded["sphere_packing"]
@@ -112,6 +144,14 @@ def main() -> None:
         assert dot_zero
         assert len(replay_spans["disjoint"]) * len(replay_spans["shared_edge"]) == p ** q
         assert case["design_complement_pair"]["shared_edge_span_equals_disjoint_dual"]
+        disjoint_counts = case["relations"]["disjoint"]["weight_distribution_all_weights"]
+        shared_counts = case["relations"]["shared_edge"]["weight_distribution_all_weights"]
+        pair = case["design_complement_pair"]
+        assert macwilliams(disjoint_counts, q, p) == [shared_counts[str(i)] for i in range(q + 1)]
+        assert macwilliams(shared_counts, q, p) == [disjoint_counts[str(i)] for i in range(q + 1)]
+        assert pair["macwilliams_disjoint_to_shared_coefficients"] == macwilliams(disjoint_counts, q, p)
+        assert pair["macwilliams_shared_to_disjoint_coefficients"] == macwilliams(shared_counts, q, p)
+        assert pair["macwilliams_transforms_agree"]
 
         if q == 7:
             eq = case["hamming_7_4_3_generator_equivalence"]

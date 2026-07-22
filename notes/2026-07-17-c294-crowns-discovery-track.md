@@ -651,3 +651,21 @@ cross-confirmation; no durable certificate or replay yet.
 **Status:** graduated -> C464 (`notes/weil-roof-tasks/c464-perfect-code-spans.md`), the durable
 span/weight/sphere certificate; the symmetry/equivariance door remains its pre-allocation-gated
 successor
+
+
+### 2026-07-21 — canonical syndrome decoders from the perfect-code incidence matrices
+
+**Provenance:** C464 post-certificate extra-juice review, after exact perfection and parity-check
+matrices had been certified.
+**Was I looking for this?:** no — C464 asked for spans, distributions, sphere equalities, and the
+binary generator equivalence, not operational decoding tables.
+**Observed / musing:** the certified parity-check matrices and exact radius-1/radius-2 sphere
+equalities make canonical syndrome-to-error tables available by exhaustive enumeration: 8 entries
+for the binary `[7,4,3]` span and 243 entries for the ternary `[11,6,5]` span.  They would turn the
+parameter certificate into a literal deterministic decoder without using a classification theorem.
+**Why it may matter / strongest question:** if Phase 3 needs an operational coding-theoretic beam,
+do these finite decoder tables clarify the geometric meaning of correcting one or two altered
+cross-sheet incidences enough to justify their certificate bulk?
+**Evidence:** REASONED from the C464-certified parity checks and sphere equalities; tables not
+generated.
+**Status:** open lead

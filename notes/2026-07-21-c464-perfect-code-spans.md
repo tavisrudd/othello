@@ -37,6 +37,24 @@ corresponding packing equalities: their left sides are `64` and `59049`.  Direct
 checks plus the complementary dimensions show, at each prime, that the shared-edge span is exactly
 the dual of the disjointness span.
 
+The exact MacWilliams transform provides a second, coefficient-by-coefficient check of each dual
+pair.  In both directions and at both primes, transforming the complete recorded distribution
+reproduces every coefficient of its complementary distribution.
+
+## Minimum-word coverage by the incidence rows
+
+| `q` | relation | distinct nonzero scalar multiples of rows | all minimum words | fraction | exhausts? |
+|---:|:---|---:|---:|:---:|:---:|
+| 7 | disjoint | 7 | 7 | `1` | yes |
+| 7 | shared edge | 7 | 7 | `1` | yes |
+| 11 | disjoint | 22 | 132 | `1/6` | no |
+| 11 | shared edge | 22 | 132 | `1/6` | no |
+
+These counts are computed from literal row vectors and every nonzero field scalar, then compared
+against the exhaustively enumerated minimum-weight words.  Thus at `q=7` the geometry supplies the
+entire minimum-word system on each side.  At `q=11` it supplies a distinguished 22-word subset on
+each side; no orbit or equivariance assertion about those subsets is made here.
+
 ## Explicit binary Hamming equivalence
 
 The row-reduced generator obtained from the `q=7` disjointness incidence matrix is
@@ -90,8 +108,9 @@ The canonical certificate is
 [`2026-07-21-c464-perfect-code-spans.json`](2026-07-21-c464-perfect-code-spans.json).  It contains
 both frozen circulant incidence matrices and their complements, row-reduced generator and
 parity-check matrices, every exhaustive weight count including zeros, minimum distances, exact
-sphere terms and equalities, the explicit Hamming equivalence matrices, the computed dual-span
-checks, and the four C450 rank/nullity comparisons.
+sphere terms and equalities, incidence-row coverage of the minimum words, both exact MacWilliams
+transforms, the explicit Hamming equivalence matrices, the computed dual-span checks, and the four
+C450 rank/nullity comparisons.
 
 Run from `/home/tavis/src/othello`:
 
@@ -109,8 +128,8 @@ codewords and all binary coordinate permutations required by the equivalence.
 The independent replay imports neither the primary generator nor any of its helpers.  It rebuilds
 the matrices from the C452 difference sets, computes ranks by incremental prime-field basis
 insertion, constructs each span directly from all incidence rows, recounts every weight, rechecks
-the sphere equations and C450 ranks, verifies the dual-span statement, and checks the recorded
-Hamming matrix equations.
+the sphere equations and C450 ranks, verifies the dual-span statement and MacWilliams transforms,
+recounts the minimum-word row coverage, and checks the recorded Hamming matrix equations.
 
 The trusted boundary is exact integer and prime-field arithmetic plus the hash-pinned C406, C450,
 and C452 certificates.  The output is deterministic and timestamp-free.

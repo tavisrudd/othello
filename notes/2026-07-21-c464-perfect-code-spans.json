@@ -3,6 +3,27 @@
     {
       "design_complement_pair": {
         "dimensions_sum_to_length": true,
+        "macwilliams_disjoint_to_shared_coefficients": [
+          1,
+          0,
+          0,
+          0,
+          7,
+          0,
+          0,
+          0
+        ],
+        "macwilliams_shared_to_disjoint_coefficients": [
+          1,
+          0,
+          0,
+          7,
+          7,
+          0,
+          0,
+          1
+        ],
+        "macwilliams_transforms_agree": true,
         "shared_edge_span_equals_disjoint_dual": true,
         "spans_are_mutually_orthogonal": true
       },
@@ -356,6 +377,16 @@
               0
             ]
           ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_nonzero_scalar_multiples": 7,
+            "exhausts_all_minimum_words": true,
+            "fraction_of_minimum_words": [
+              1,
+              1
+            ],
+            "total_minimum_words": 7
+          },
           "length": 7,
           "minimum_distance": 3,
           "parity_check_matrix_rref": [
@@ -509,6 +540,16 @@
               1
             ]
           ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_nonzero_scalar_multiples": 7,
+            "exhausts_all_minimum_words": true,
+            "fraction_of_minimum_words": [
+              1,
+              1
+            ],
+            "total_minimum_words": 7
+          },
           "length": 7,
           "minimum_distance": 4,
           "parity_check_matrix_rref": [
@@ -579,6 +620,35 @@
     {
       "design_complement_pair": {
         "dimensions_sum_to_length": true,
+        "macwilliams_disjoint_to_shared_coefficients": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          132,
+          0,
+          0,
+          110,
+          0,
+          0
+        ],
+        "macwilliams_shared_to_disjoint_coefficients": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          132,
+          132,
+          0,
+          330,
+          110,
+          0,
+          24
+        ],
+        "macwilliams_transforms_agree": true,
         "shared_edge_span_equals_disjoint_dual": true,
         "spans_are_mutually_orthogonal": true
       },
@@ -838,6 +908,16 @@
               0
             ]
           ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_nonzero_scalar_multiples": 22,
+            "exhausts_all_minimum_words": false,
+            "fraction_of_minimum_words": [
+              1,
+              6
+            ],
+            "total_minimum_words": 132
+          },
           "length": 11,
           "minimum_distance": 5,
           "parity_check_matrix_rref": [
@@ -1152,6 +1232,16 @@
               1
             ]
           ],
+          "incidence_minimum_word_coverage": {
+            "all_nonzero_scalar_multiples_are_minimum_words": true,
+            "distinct_nonzero_scalar_multiples": 22,
+            "exhausts_all_minimum_words": false,
+            "fraction_of_minimum_words": [
+              1,
+              6
+            ],
+            "total_minimum_words": 132
+          },
           "length": 11,
           "minimum_distance": 6,
           "parity_check_matrix_rref": [
