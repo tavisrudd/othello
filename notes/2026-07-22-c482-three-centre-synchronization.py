@@ -319,6 +319,42 @@ def reconstruct(field, views):
     }
 
 
+def sheet_partner(field, coordinates):
+    """Apply the rational sheet involution on the normalized source chart."""
+    a, b, c, d = coordinates
+    X = field.mul(b, c)
+    Y = field.mul(a, d)
+    linear_at_collision = total(
+        field,
+        (X, a, d, field.neg(Y), field.neg(b), field.neg(c)),
+    )
+    linear_at_parent = total(
+        field,
+        (
+            field.mul(X, a),
+            field.mul(X, d),
+            Y,
+            field.neg(field.mul(Y, b)),
+            field.neg(field.mul(Y, c)),
+            field.neg(X),
+        ),
+    )
+    source_vector = (a, b, c, d, X, Y)
+    direction = [
+        field.sub(linear_at_parent, field.mul(linear_at_collision, value))
+        for value in source_vector
+    ]
+    if direction[1] == 0 or direction[2] == 0 or direction[4] == 0:
+        return None
+    scale = div(field, direction[4], field.mul(direction[1], direction[2]))
+    lifted = tuple(field.mul(scale, value) for value in direction)
+    if lifted[4] != field.mul(lifted[1], lifted[2]):
+        return None
+    if lifted[5] != field.mul(lifted[0], lifted[3]):
+        return None
+    return lifted[:4]
+
+
 def homography(field, source, target):
     equations = []
     for (x, y), (X, Y) in zip(source[:3], target[:3]):
@@ -401,6 +437,14 @@ def build_certificate():
         stabilizer_size = common_diagonal_stabilizer_size(field, views)
         if stabilizer_size != 1:
             raise AssertionError(f"nontrivial diagonal stabilizer over {field.name}")
+        swaps = []
+        for parent in found:
+            partner = sheet_partner(field, parent)
+            if partner is None or partner not in found or partner == parent:
+                raise AssertionError(f"sheet involution failed over {field.name}")
+            if sheet_partner(field, partner) != parent:
+                raise AssertionError(f"sheet involution is not involutive over {field.name}")
+            swaps.append({"parent": list(parent), "partner": list(partner)})
         records.append(
             {
                 "field": field.name,
@@ -420,6 +464,7 @@ def build_certificate():
                     "universal_collision_roots"
                 ],
                 "valid_deep_arc_reconstructions": [list(parent) for parent in found],
+                "rational_sheet_involution": swaps,
                 "common_diagonal_S6_stabilizer_size": stabilizer_size,
             }
         )

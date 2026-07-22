@@ -140,8 +140,10 @@ linearized compatibility matrix has a kernel line containing the universal forbi
 `h_5=h_6=h_4`; removing it from the product cubic leaves an explicit separable quadratic.  Exact
 `F_101` and `F_256` witnesses have two deep parents and trivial common diagonal stabilizer, so the
 proposed rational inverse is false in odd and characteristic two and remains false after diagonal
-unlabelling.  C483 must factor the quadratic branch divisor and determine how fixed-child side
-information selects a sheet.
+unlabelling.  A requested second closeout gives the rational source-side deck swap
+`z -> rho(L_1 e-L_0 z)`, so both sheets of an `F_q` parent are `F_q`-rational.  C483 must express
+that involution intrinsically, factor the quadratic branch divisor, and determine how fixed-child
+side information selects a sheet.
 
 Task card: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md`.
 

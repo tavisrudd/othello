@@ -46,6 +46,36 @@
         3
       ],
       "product_roots_on_kernel_line": 3,
+      "rational_sheet_involution": [
+        {
+          "parent": [
+            37,
+            98,
+            73,
+            26
+          ],
+          "partner": [
+            66,
+            40,
+            49,
+            74
+          ]
+        },
+        {
+          "parent": [
+            66,
+            40,
+            49,
+            74
+          ],
+          "partner": [
+            37,
+            98,
+            73,
+            26
+          ]
+        }
+      ],
       "universal_collision_roots": 1,
       "valid_deep_arc_reconstructions": [
         [
@@ -100,6 +130,36 @@
         3
       ],
       "product_roots_on_kernel_line": 3,
+      "rational_sheet_involution": [
+        {
+          "parent": [
+            134,
+            235,
+            130,
+            227
+          ],
+          "partner": [
+            153,
+            213,
+            62,
+            128
+          ]
+        },
+        {
+          "parent": [
+            153,
+            213,
+            62,
+            128
+          ],
+          "partner": [
+            134,
+            235,
+            130,
+            227
+          ]
+        }
+      ],
       "universal_collision_roots": 1,
       "valid_deep_arc_reconstructions": [
         [

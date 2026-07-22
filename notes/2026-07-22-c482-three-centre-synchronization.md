@@ -181,6 +181,33 @@ the usual quadratic discriminant.  In characteristic two it is the nonvanishing 
 coefficient, equivalently `gcd(q_k,partial q_k)=1`.  This formulation is uniform and never divides
 by two.
 
+There is a stronger source-side formula once either parent sheet is known.  Put
+
+```text
+z=(a,b,c,d,bc,ad),
+L_0=bc+a+d-ad-b-c,
+L_1=abc+bcd+ad-abd-acd-bc.                             (17)
+```
+
+Using the known parent itself as the second kernel vector gives the exact factorization
+
+```text
+Q(s e+t z)=s t(L_0 s+L_1 t).                           (18)
+```
+
+The collision is `t=0`, the known parent is `s=0`, and the partner has kernel direction
+
+```text
+z^#=L_1 e-L_0 z.                                       (19)
+```
+
+Rescaling (19) by `rho=z^#_X/(z^#_b z^#_c)` gives the partner coordinates.  This is a rational
+involution on the source open locus, in every characteristic, and applying it twice returns the
+original parent.  It does not contradict the absence of a rational target inverse: the target
+determines the unordered pair, while (19) needs one chosen sheet.  A useful finite-field corollary
+is immediate: whenever one generic parent is `F_q`-rational, its second parent is automatically
+`F_q`-rational as well; no quadratic extension is needed.
+
 The degree is exactly two, rather than merely at most two.  The exact certificate supplies points
 of this open locus over `F_101` and `F_256`, each with two distinct deep six-arc reconstructions.
 The characteristic-two pair proves that (15) is not generically inseparable in characteristic two;
@@ -193,14 +220,14 @@ For the `F_101` input
 
 ```text
 (A_s,B_s,C_s) =
-  (54,99,4), (73,24,8), (87,26,13), (76,87,37),        (17)
+  (54,99,4), (73,24,8), (87,26,13), (76,87,37),        (20)
 ```
 
 the two normalized parents are
 
 ```text
 (a,b,c,d)=(37,98,73,26),
-(a,b,c,d)=(66,40,49,74).                               (18)
+(a,b,c,d)=(66,40,49,74).                               (21)
 ```
 
 Both are six-arcs, all four reconstructed centres are deep, and direct camera evaluation gives
@@ -215,7 +242,7 @@ The same phenomenon occurs over `F_256`, represented in the polynomial basis mod
   (88,47,216), (222,99,168), (24,209,150), (247,95,235),
 
 (a,b,c,d)=(134,235,130,227),
-(a,b,c,d)=(153,213,62,128).                            (19)
+(a,b,c,d)=(153,213,62,128).                            (22)
 ```
 
 Again both parents and all eight centre-parent incidences pass the arc/deep tests, and the common
@@ -269,10 +296,10 @@ notes/2026-07-22-c482-three-centre-synchronization.json
 notes/2026-07-22-c482-three-centre-synchronization.sha256
 ```
 
-The script is `14,941` bytes with SHA-256
-`228d1a12a44fbde167f32e7a017fea8d8a099690e5410bf175265796d98d7f5b`; the canonical JSON is
-`2,470` bytes with SHA-256
-`c2bd6fc8fd6ad42ed0cde239635f76bffb9021ec053c9879f61f8b740e63d0dd`.
+The script is `16,613` bytes with SHA-256
+`6c7914be7949ee88f250e2c2250a68c23f1f6e1fa66c410e1235a2adfa73ca2b`; the canonical JSON is
+`3,442` bytes with SHA-256
+`07b370d80f673d295506f95aa3668da2d71d02747f3aa1c1e3ce6942db031a08`.
 
 Replay from the repository root:
 
@@ -283,7 +310,8 @@ python3 notes/2026-07-22-c482-three-centre-synchronization.py --check
 The checker independently performs two operations: it exhausts the kernel `P^1` using (10),
 (14), and (16), and then validates every surviving candidate directly from the camera matrices by
 all parent-triple determinants, all centre-secant determinants, and the twelve projected
-coordinates.  It also enumerates all `720` diagonal permutations to check that the common
+coordinates.  It also checks that (17)--(19) swap the two parents in both characteristics and square
+to the identity, then enumerates all `720` diagonal permutations to check that the common
 stabilizer is trivial.  No random search is part of replay.
 
 The certificate proves the two exact finite witnesses and validates the formula implementation.
@@ -309,10 +337,23 @@ quadratic-cover discriminant.
 | Feature | Closeout status | Exact remaining gap / owner |
 |---|---|---|
 | Why a cubic appeared in raw elimination | settled | Its universal linear factor is the collision (12); (15) is quadratic. |
-| Geometric meaning of the second reconstruction | open | Identify the intrinsic sheet involution in C483. |
+| Formula for the second reconstruction | settled | Equations (17)--(19) give the rational source-side deck involution and prove finite-field closure. |
+| Intrinsic geometric meaning of the deck involution | open | Re-express (19) without the frame chart in C483. |
 | Branch and rank-drop divisor | open | Factor the Section 6 coordinate product intrinsically in C483. |
 | Why fixed-child data selected one sheet in C478 | open | Derive the child-relative sheet-selection equations in C483. |
 | Characteristic-two separability | settled on the generic open | The `F_256` witness proves the middle coefficient is not identically zero; C483 still owns its branch specialization. |
+
+## Requested second extra-juice pass
+
+The quadratic ambiguity has one more free layer: after choosing either parent, the other does not
+require solving a quadratic.  Expanding the already-known kernel cubic around that sheet gives the
+factorization (18) and the rational deck transformation (19).  The replay verifies that it swaps
+both certified pairs and is involutive in odd and characteristic two.
+
+This settles the algebraic sheet-swap mystery and yields the finite-field closure corollary.  What
+remains genuinely new for C483 is geometric rather than computational: identify this involution
+intrinsically, factor its fixed/branch divisor, and determine which fixed-child incidence selects a
+sheet.
 
 ## Vibe check
 
