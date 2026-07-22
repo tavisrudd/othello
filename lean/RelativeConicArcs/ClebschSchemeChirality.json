@@ -1,0 +1,23 @@
+{
+  "block_action_order": 60,
+  "field_order": 11,
+  "lean_boundary": "The Lean module checks the displayed finite directions, adjacency components, triple enumeration, generator orbits, and one sheet exchange. Identification with the 1331-vertex scheme and automorphism-group completeness remain external.",
+  "neighbor_component_sizes": [
+    10,
+    10,
+    10,
+    10,
+    10,
+    10
+  ],
+  "neighbor_domain_size": 60,
+  "normalizing_element_exchanges_orbits": true,
+  "normalizing_element_outside_block_action": true,
+  "projective_frame_candidate_bound": 360,
+  "schema": "clebsch-scheme-chirality-1",
+  "three_subset_domain_size": 20,
+  "three_subset_orbit_sizes": [
+    10,
+    10
+  ]
+}
