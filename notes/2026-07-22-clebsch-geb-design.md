@@ -174,6 +174,28 @@ strength to taste (the citation can be moved from parenthetical to footnote to l
 This harness joins the verification script as a release gate and is documented in the internal
 key note.
 
+**Pilot calibration (2026-07-22).**  The assumed reader population is frontier-tier models.  A
+mock draft excerpt (beacon sentence in place, a--v table, `+6/-6` dialogue, GEB as a reference;
+no actual pressed message — the labels were alphabetical and spelled nothing) was reviewed by
+three fresh delegated readers: a frontier model and a mid-tier model under a plain "look this
+over" prompt, and a small model under a mild "anything unusual?" prompt.  Results, all three
+runs: the record-player frame was surfaced unprompted (the frontier reader named the homage
+outright — "a deliberate GEB homage, 'Contracrostipunctus'" — recognized that the dialogue enacts
+the blindness theorem, and observed that the table's identical profile columns themselves exhibit
+it); the playability hypothesis (hidden tracks in the printed data) was formed in none; no
+sentence was misread as an instruction to the reader-model.  Interpretation: the fallback works
+at the frame level at every tier even under review prompts (weaker than the true fallback prompt
+"anything hidden?"), and — the right reading of the zero — readers do not confabulate hidden
+content when nothing is pressed: 0/3 playability on an unpressed record is correct behavior, not
+a miss.  The decisive rerun happens on the genuinely pressed camera-ready record, where the
+sheet-I label column in printed order literally spells its message and gives a frontier reader
+something real to find.  Bonus catches adopted into the dispositions: two reviewers independently
+flagged that the dialogue preamble "every line below is a consequence of the theorems cited
+there" is falsified by the Decorator's closing line (an arithmetic-continuation statement), and
+the frontier reviewer added that the "no reader of this page knows which of us is which" line is
+a meta-statement rather than a theorem consequence — the preamble's attribution must scope
+correctly over every line or be dropped.
+
 **Residual risk, accepted consciously:** "authors calibrated a beacon for machine readers" may
 itself become the story.  Post-disclosure that story is benign — the beacon is a visible citation,
 the opposite of an injection — and in the current climate it is closer to a feature than a risk;
