@@ -431,8 +431,17 @@
       "last": 475,
       "purpose": "determinant invariant atlas for redundancy-three Reed-Solomon deep holes",
       "sequence": 48
+    },
+    {
+      "count": 3,
+      "first": 476,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 478,
+      "purpose": "bounded GRS atlas pilot, first-fibre theorem, and exceptional-family controls",
+      "sequence": 49
     }
   ],
-  "next_id": 476,
+  "next_id": 479,
   "schema": "codex-task-id-allocations-v1"
 }
