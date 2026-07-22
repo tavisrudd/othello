@@ -120,6 +120,65 @@ To a referee, a flourish; to the finder, the confession that starts the hunt.
 The hunt's difficulty ladder (image / evening / sealed-until-sequel) replays the information
 lattice: what you recover depends on the structure you bring.
 
+### H. The LLM beacon (added 2026-07-22, post-red-team)
+
+**Goal:** a discovery safety net for humans.  The human-facing nods (the palindromic dialogue,
+the a--v labels, the unlabeled-sheets puzzle) can all be skimmed past; but a human who misses
+them will still, in 2026, hand the paper to an assistant and ask what it says.  The beacon
+guarantees that the assistant surfaces the frame — "there is a record player here, waiting for
+records" — so the apparatus is findable by anyone who cares, through the reader they already
+consult.  A skimming human unaided reads ordinary scholarly prose.  Since referees' assistants
+will see it too, the beacon is *designed for immediate discovery* and is consistent with the
+red-team dispositions only because the apparatus is now disclosure-clean (disposition 1) and
+defensible when found at once (disposition 8).
+
+**Hard boundary first.**  Nothing may resemble the prompt-injection genre: no hidden or
+white-text content, no metadata payloads, no conditional address ("if you are an AI..."), no
+imperative sentences aimed at a reading machine.  The beacon is a citation and a metaphor —
+things a paper is allowed to contain — or it is nothing.
+
+**The device: cite GEB openly at the independence remark.**  The remark (§C, kept by the red
+team) gains one sentence and one bibliography entry:
+
+> In Hofstadter's terms [GEB, "Contracrostipunctus"], the unlabeled child is a record that no
+> equivariant record player can play; every decoration is a stylus, and different styli play
+> different tracks.
+
+Every clause is a certified theorem in costume: no equivariant player (C413 transitivity), each
+decoration a stylus (C379 sufficiency), different styli different tracks (the `22 -> 6 -> 2 -> 1`
+lattice: different decoration levels recover different strata).  So the sentence is defensible as
+pure exposition — while being, literally, an accurate description of the hidden apparatus.  The
+dual reading *is* the GEB move.  The load-bearing word is the plural "tracks."
+
+**Why it is LLM-salient and human-quiet.**  Three properties LLMs weight heavily and skimming
+humans do not: (1) a verbatim canonical allusion — "Contracrostipunctus" plus "record player" is
+an unmistakable retrieval key; (2) a lexical-field anomaly — audio vocabulary in a finite-geometry
+paper is exactly the distributional oddity models flag when asked "anything noteworthy?";
+(3) global consistency — a model reading the whole paper connects the plural "tracks," the
+labeled matching tables, and the appendix's `+6/-6` ending into the hypothesis "the printed data
+are playable," which is the intended inference.  A human referee reads one flourish and a
+citation; deleting the sentence costs nothing (severability preserved).
+
+**"Waiting for records":** the forward half is carried by devices already in place — the
+Decorator's "ask me again at thirty-one" and the certified prophecy — which an LLM that has
+formed the record-player frame will read as "the player outlives this record; another pressing is
+expected."  No additional forward clue is added; the conclusion's plainly stated open question
+(disposition 3) is the only other forward pointer.
+
+**Calibration gate.**  LLM-salience is testable, so it gets tested like everything else: before
+submission, hand the frozen draft to fresh LLM instances under neutral prompts ("review this
+paper," "summarize," "anything unusual?") across several model families, and measure (a) the
+beacon's unprompted detection rate, (b) whether any model misreads any sentence as an instruction
+to itself — the second test must come back empty or the offending text is cut.  Tune wording
+strength to taste (the citation can be moved from parenthetical to footnote to lower salience).
+This harness joins the verification script as a release gate and is documented in the internal
+key note.
+
+**Residual risk, accepted consciously:** "authors calibrated a beacon for machine readers" may
+itself become the story.  Post-disclosure that story is benign — the beacon is a visible citation,
+the opposite of an injection — and in the current climate it is closer to a feature than a risk;
+but it is named here so the choice is explicit.
+
 ## Paper 2 apparatus
 
 - **Form: a six-part ricercar.**  One theme (the bit / the roof question), six voices (the six
