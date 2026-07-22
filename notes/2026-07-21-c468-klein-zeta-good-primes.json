@@ -1,0 +1,479 @@
+{
+  "delsarte": {
+    "character_order": 11,
+    "p31_direct_strata_affine": {
+      "N5": 783870,
+      "each_N1": 30,
+      "each_N4": 26100,
+      "each_adjacent_N2": 0,
+      "each_consecutive_N3": 900,
+      "each_nonadjacent_N2": 900,
+      "each_split_N3": 0
+    },
+    "p31_k5_exact_gauss_product_sum": 31863049656378638875,
+    "p31_k5_trace_from_gauss_products": -1112958245125,
+    "quintic_character_claim": false,
+    "reason": "the exponent-lattice determinant is 33; projectivity kills its 3-torsion, leaving order-11 tuples"
+  },
+  "equation": "x0^2*x1+x1^2*x2+x2^2*x3+x3^2*x4+x4^2*x0",
+  "headline": {
+    "fusion_verdict": "blind: p=41 (fused) and p=61 (visible) have the same inert shape, while the two fused primes p=31 and p=41 differ",
+    "golden_and_gauss_fields_meet": true,
+    "sharp_instance": "at p=31 the splitting field is Q(zeta_5,sqrt(-11)), and the exact order-11 Gauss-product calculation gives the nonzero fifth trace"
+  },
+  "primes": [
+    {
+      "all_extension_trace_recurrence": {
+        "initial_values": {
+          "u_0": 2,
+          "u_1": -222591649025
+        },
+        "recurrence": "u_m=-222591649025*u_(m-1)-23465261991844685929951*u_(m-2)",
+        "rule": "trace(F^k)=0 if 5 does not divide k; trace(F^(5m))=5*u_m"
+      },
+      "c453_label": "fused",
+      "c5_isotypic_factorization": {
+        "full_product": "product over j=0..4 of X^2-p*a_p*zeta_5^j*X+p^3*zeta_5^(2j)",
+        "octic_nontrivial_characters": "Norm_Q(zeta_5)/Q(X^2-(-155)*zeta_5*X+29791*zeta_5^2)",
+        "quadratic_trivial_character": "X^2-(-155)*X+29791"
+      },
+      "characteristic_polynomial_det_X_minus_F_coefficients_desc": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        222591649025,
+        0,
+        0,
+        0,
+        0,
+        23465261991844685929951
+      ],
+      "class_mod_40": 31,
+      "closed_under_multiplication_by_zeta_5": true,
+      "contains": {
+        "sqrt_minus_11": true,
+        "sqrt_minus_p": false,
+        "sqrt_p_star": false,
+        "zeta_5": true
+      },
+      "counts": [
+        {
+          "k": 1,
+          "points": 30784,
+          "q": 31,
+          "trace_h3": 0
+        },
+        {
+          "k": 2,
+          "points": 888428164,
+          "q": 961,
+          "trace_h3": 0
+        },
+        {
+          "k": 3,
+          "points": 26440509694144,
+          "q": 29791,
+          "trace_h3": 0
+        },
+        {
+          "k": 4,
+          "points": 787663636680510724,
+          "q": 923521,
+          "trace_h3": 0
+        },
+        {
+          "k": 5,
+          "points": 23465262812585959785029,
+          "q": 28629151,
+          "trace_h3": -1112958245125
+        }
+      ],
+      "elliptic_cm_cross_check": {
+        "curve": "y^2+y=x^3-x^2-7x+10",
+        "eigenvalues_description": "p times an elliptic Frobenius eigenvalue times zeta_5^j (j=0..4)",
+        "trace_at_p": -5
+      },
+      "factorization_over_Q_coefficients_desc": [
+        [
+          1,
+          155,
+          29791
+        ],
+        [
+          1,
+          -155,
+          -5766,
+          5511335,
+          -682482019,
+          164188180985,
+          -5117346224646,
+          -4098141434904005,
+          787662783788549761
+        ]
+      ],
+      "frobenius_power_relation": "F^10+222591649025*F^5+23465261991844685929951*I=0",
+      "inert_extremal_tower": null,
+      "newton_polygon": {
+        "a_number_determined": false,
+        "h3_slopes": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "type": "ordinary",
+        "weight_one_p_rank": 5,
+        "weight_one_tate_untwist_slopes": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "p": 31,
+      "quasi_scalarity": "F^5 has two Q(sqrt(-11))-conjugate eigenvalues, each with multiplicity 5",
+      "smooth": true,
+      "smoothness_certificate": "coordinate-zero chain plus det(circulant(2,1,0,0,0))=33 nonzero mod p",
+      "splitting_field": "Q(zeta_5, sqrt(-11))",
+      "splitting_field_structure": {
+        "galois_group": "C4 x C2",
+        "golden_gauss_intersection": "Q",
+        "octic_orbit_is_regular": true,
+        "octic_root_orbit_size": 8,
+        "quadratic_root_orbit_size": 2
+      },
+      "zeta_numerator_det_1_minus_FT_coefficients_asc": [
+        23465261991844685929951,
+        0,
+        0,
+        0,
+        0,
+        222591649025,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "all_extension_trace_recurrence": {
+        "initial_values": {
+          "u_0": 2,
+          "u_1": 0
+        },
+        "recurrence": "u_m=0*u_(m-1)-1555098314991537910888601*u_(m-2)",
+        "rule": "trace(F^k)=0 if 5 does not divide k; trace(F^(5m))=5*u_m"
+      },
+      "c453_label": "fused",
+      "c5_isotypic_factorization": {
+        "full_product": "product over j=0..4 of X^2-p*a_p*zeta_5^j*X+p^3*zeta_5^(2j)",
+        "octic_nontrivial_characters": "Norm_Q(zeta_5)/Q(X^2-(0)*zeta_5*X+68921*zeta_5^2)",
+        "quadratic_trivial_character": "X^2-(0)*X+68921"
+      },
+      "characteristic_polynomial_det_X_minus_F_coefficients_desc": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1555098314991537910888601
+      ],
+      "class_mod_40": 1,
+      "closed_under_multiplication_by_zeta_5": true,
+      "contains": {
+        "sqrt_minus_11": false,
+        "sqrt_minus_p": true,
+        "sqrt_p_star": false,
+        "zeta_5": true
+      },
+      "counts": [
+        {
+          "k": 1,
+          "points": 70644,
+          "q": 41,
+          "trace_h3": 0
+        },
+        {
+          "k": 2,
+          "points": 4752931684,
+          "q": 1681,
+          "trace_h3": 0
+        },
+        {
+          "k": 3,
+          "points": 327386684567124,
+          "q": 68921,
+          "trace_h3": 0
+        },
+        {
+          "k": 4,
+          "points": 22563498285294240964,
+          "q": 2825761,
+          "trace_h3": 0
+        },
+        {
+          "k": 5,
+          "points": 1555098328414197336897204,
+          "q": 115856201,
+          "trace_h3": 0
+        }
+      ],
+      "elliptic_cm_cross_check": {
+        "curve": "y^2+y=x^3-x^2-7x+10",
+        "eigenvalues_description": "p times an elliptic Frobenius eigenvalue times zeta_5^j (j=0..4)",
+        "trace_at_p": 0
+      },
+      "factorization_over_Q_coefficients_desc": [
+        [
+          1,
+          0,
+          68921
+        ],
+        [
+          1,
+          0,
+          -68921,
+          0,
+          4750104241,
+          0,
+          -327381934393961,
+          0,
+          22563490300366186081
+        ]
+      ],
+      "frobenius_power_relation": "F^10+0*F^5+1555098314991537910888601*I=0",
+      "inert_extremal_tower": {
+        "point_count_side": "above P3 for odd r; below P3 for even r",
+        "trace_rule": "trace(F^(10r))=10*(-1555098314991537910888601)^r",
+        "weil_bound_saturated": true
+      },
+      "newton_polygon": {
+        "a_number_determined": false,
+        "h3_slopes": [
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2"
+        ],
+        "type": "supersingular",
+        "weight_one_p_rank": 0,
+        "weight_one_tate_untwist_slopes": [
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2"
+        ]
+      },
+      "p": 41,
+      "quasi_scalarity": "F^10=-1555098314991537910888601*I",
+      "smooth": true,
+      "smoothness_certificate": "coordinate-zero chain plus det(circulant(2,1,0,0,0))=33 nonzero mod p",
+      "splitting_field": "Q(zeta_5, sqrt(-41))",
+      "splitting_field_structure": {
+        "galois_group": "C4 x C2",
+        "golden_gauss_intersection": "Q",
+        "octic_orbit_is_regular": true,
+        "octic_root_orbit_size": 8,
+        "quadratic_root_orbit_size": 2
+      },
+      "zeta_numerator_det_1_minus_FT_coefficients_asc": [
+        1555098314991537910888601,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "all_extension_trace_recurrence": {
+        "initial_values": {
+          "u_0": 2,
+          "u_1": 0
+        },
+        "recurrence": "u_m=0*u_(m-1)-602486784535040403801858901*u_(m-2)",
+        "rule": "trace(F^k)=0 if 5 does not divide k; trace(F^(5m))=5*u_m"
+      },
+      "c453_label": "visible",
+      "c5_isotypic_factorization": {
+        "full_product": "product over j=0..4 of X^2-p*a_p*zeta_5^j*X+p^3*zeta_5^(2j)",
+        "octic_nontrivial_characters": "Norm_Q(zeta_5)/Q(X^2-(0)*zeta_5*X+226981*zeta_5^2)",
+        "quadratic_trivial_character": "X^2-(0)*X+226981"
+      },
+      "characteristic_polynomial_det_X_minus_F_coefficients_desc": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        602486784535040403801858901
+      ],
+      "class_mod_40": 21,
+      "closed_under_multiplication_by_zeta_5": true,
+      "contains": {
+        "sqrt_minus_11": false,
+        "sqrt_minus_p": true,
+        "sqrt_p_star": false,
+        "zeta_5": true
+      },
+      "counts": [
+        {
+          "k": 1,
+          "points": 230764,
+          "q": 61,
+          "trace_h3": 0
+        },
+        {
+          "k": 2,
+          "points": 51534223924,
+          "q": 3721,
+          "trace_h3": 0
+        },
+        {
+          "k": 3,
+          "points": 11694197613435484,
+          "q": 226981,
+          "trace_h3": 0
+        },
+        {
+          "k": 4,
+          "points": 2654349166004913001444,
+          "q": 13845841,
+          "trace_h3": 0
+        },
+        {
+          "k": 5,
+          "points": 602486785248383316309337804,
+          "q": 844596301,
+          "trace_h3": 0
+        }
+      ],
+      "elliptic_cm_cross_check": {
+        "curve": "y^2+y=x^3-x^2-7x+10",
+        "eigenvalues_description": "p times an elliptic Frobenius eigenvalue times zeta_5^j (j=0..4)",
+        "trace_at_p": 0
+      },
+      "factorization_over_Q_coefficients_desc": [
+        [
+          1,
+          0,
+          226981
+        ],
+        [
+          1,
+          0,
+          -226981,
+          0,
+          51520374361,
+          0,
+          -11694146092834141,
+          0,
+          2654348974297586158321
+        ]
+      ],
+      "frobenius_power_relation": "F^10+0*F^5+602486784535040403801858901*I=0",
+      "inert_extremal_tower": {
+        "point_count_side": "above P3 for odd r; below P3 for even r",
+        "trace_rule": "trace(F^(10r))=10*(-602486784535040403801858901)^r",
+        "weil_bound_saturated": true
+      },
+      "newton_polygon": {
+        "a_number_determined": false,
+        "h3_slopes": [
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2",
+          "3/2"
+        ],
+        "type": "supersingular",
+        "weight_one_p_rank": 0,
+        "weight_one_tate_untwist_slopes": [
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2",
+          "1/2"
+        ]
+      },
+      "p": 61,
+      "quasi_scalarity": "F^10=-602486784535040403801858901*I",
+      "smooth": true,
+      "smoothness_certificate": "coordinate-zero chain plus det(circulant(2,1,0,0,0))=33 nonzero mod p",
+      "splitting_field": "Q(zeta_5, sqrt(-61))",
+      "splitting_field_structure": {
+        "galois_group": "C4 x C2",
+        "golden_gauss_intersection": "Q",
+        "octic_orbit_is_regular": true,
+        "octic_root_orbit_size": 8,
+        "quadratic_root_orbit_size": 2
+      },
+      "zeta_numerator_det_1_minus_FT_coefficients_asc": [
+        602486784535040403801858901,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "schema": "othello.c468.klein_zeta_good_primes.v1"
+}
