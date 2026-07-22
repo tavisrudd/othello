@@ -50,6 +50,49 @@ This is the requested `2+(q-1)` decomposition, refined to the literal orbit part
 upper/lower cube triangles for B3, and alpha/beta pentagons for H3 (the block names exchange under
 the frozen prime changes exactly as C441 records).
 
+## Integrated consequences
+
+### C462 and the H3 torus have the same Galois `C4`
+
+Write `g` for the frozen H3 `C5` torus generator.  At `zeta_5=3`, `g=9`; applying
+`sigma:zeta_5->zeta_5^2` gives `g^2=4`, exactly the generator at the conjugate prime.  Iterated
+squaring runs through
+
+```text
+9 -> 4 -> 5 -> 3 -> 9.
+```
+
+Thus `Gal(Q(zeta_5)/Q)=C4` acts faithfully as `Aut(C5)=C4`, and `sigma^2` sends
+`g` to `g^4=g^(-1)`, exactly C462's `sigma^2=kappa` law.  This is a semilinear statement across
+the prime embeddings; it is not a claim that one fixed element of `PGL_2(11)` realizes the whole
+Galois `C4`.
+
+### The outer bit swaps the two torus orbits
+
+The two moving blocks are literally the nonzero square and nonsquare cosets in every case.  A
+diagonal nonsquare-determinant element of `PGL_2(q)` fixes the two poles and swaps those cosets.
+Consequently the `PGL_2/PSL_2` bit is the orientation bit for the unordered pair of moving Coxeter
+orbits.  The certificate exhibits such a matrix in each field.  Matching this generic quotient
+representative to C445's specific rational `Rz` transporter remains C450's explicit comparison;
+it is not silently identified here.
+
+### Inputs for C450 and C452
+
+Let `e=(q-1)/2`.  Restricting the `P^1(F_q)` permutation module to the Coxeter torus gives
+
+```text
+2 * trivial  +  2 * regular(C_e).
+```
+
+In semisimple characteristic, the invariant dimension is four, the trivial character has
+multiplicity four, and every nontrivial torus character has multiplicity two.  This is a strict
+baseline for C450's Weil decomposition: any proposed constituent description must reproduce it.
+
+For C452, the identity `e=(q-1)/2` now has literal arithmetic content: the middle Coxeter exponent
+is the size of a Legendre coset, and the two moving vertex blocks are exactly the quadratic-residue
+and nonresidue cosets.  This supplies a certified Coxeter-to-QR input but makes no Barker or
+provenance claim.
+
 ## Characteristic-zero provenance
 
 No Coxeter conjugacy class is recalled from a table.  The primary checker rebuilds each frozen
@@ -93,6 +136,6 @@ frozen C441 certificate.  The primary `--check` also verifies all SHA-256 hashes
 the adjacent manifest.
 
 The trusted boundary is exact arithmetic in C440's frozen cyclotomic fields, exact prime-field
-arithmetic, explicit permutation of the frozen vertex sets, the hash-pinned C399/C440/C441 inputs
+arithmetic, explicit permutation of the frozen vertex sets, the hash-pinned C399/C440/C441/C462 inputs
 listed in the JSON, and exhaustive finite enumeration.  There is no randomness, floating point,
 scratch evidence, literature claim, or manuscript edit.

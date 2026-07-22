@@ -70,6 +70,17 @@ def replay():
             for value in range(1, prime)
         }
         assert set(powers) == diagonal_psl
+        squares = {value * value % prime for value in range(1, prime)}
+        nonsquares = set(range(1, prime)) - squares
+        assert {frozenset(orbit) for orbit in orbits if len(orbit) > 1} == {
+            frozenset(squares), frozenset(nonsquares)
+        }
+        outer = tuple(record["outer_PGL_over_PSL_coset"]["matrix"])
+        assert {action(outer, value, prime) for value in squares} == nonsquares
+        module = record["action_decomposition"]["permutation_module_restriction"]
+        assert module["invariant_dimension"] == 4
+        assert module["trivial_character_multiplicity"] == 4
+        assert module["nontrivial_character_multiplicity"] == 2
 
     # Separate block check directly against the frozen M1 table.
     tables = m1["cases"]
@@ -85,6 +96,10 @@ def replay():
         row["point_pi"] for row in tables["H3_icosahedron"]["bijection_table"]
         if row["block"] == "beta"
     } == {1, 3, 4, 5, 9}
+    bridge = certificate["h3_galois_torus_bridge"]
+    assert bridge["sigma_orbit_on_C5_generators"] == [9, 4, 5, 3]
+    assert pow(bridge["frozen_generator_at_pi"], 2, 11) == bridge["frozen_generator_at_pibar"]
+    assert pow(bridge["frozen_generator_at_pi"], 4, 11) == pow(bridge["frozen_generator_at_pi"], -1, 11)
     print("C449 independent replay: OK (five prime images, split PSL tori, exact orbit partitions)")
 
 

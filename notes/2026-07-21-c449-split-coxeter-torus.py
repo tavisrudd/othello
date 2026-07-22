@@ -32,6 +32,8 @@ INPUT_FILES = (
     "2026-07-21-c441-vertex-reduction-bijection.md",
     "2026-07-21-c441-vertex-reduction-bijection.py",
     "2026-07-21-c441-vertex-reduction-bijection.sha256",
+    "2026-07-21-c462-torsor-descent.json",
+    "2026-07-21-c462-torsor-descent.md",
 )
 
 
@@ -181,6 +183,11 @@ def finite_record(case, prime, sheet, matrix, h, expected_blocks):
     assert {frozenset(cycle) for cycle in moving_orbits} == {
         frozenset(block) for block in expected_blocks
     }
+    squares = {value * value % prime for value in range(1, prime)}
+    nonsquares = set(range(1, prime)) - squares
+    assert {frozenset(cycle) for cycle in moving_orbits} == {
+        frozenset(squares), frozenset(nonsquares)
+    }
 
     diagonal_psl_torus = {
         normalize_pgl((square, 0, 0, 1), prime)
@@ -193,11 +200,25 @@ def finite_record(case, prime, sheet, matrix, h, expected_blocks):
         current = pgl_product(matrix, current, prime)
     assert generated == diagonal_psl_torus
 
+    outer_multiplier = min(nonsquares)
+    outer_matrix = normalize_pgl((outer_multiplier, 0, 0, 1), prime)
+    assert pow(outer_multiplier, (prime - 1) // 2, prime) == prime - 1
+    assert {p1_action(outer_matrix, value, prime) for value in squares} == nonsquares
+    assert {p1_action(outer_matrix, value, prime) for value in nonsquares} == squares
+
     return {
         "action_decomposition": {
             "fixed_points": fixed,
             "moving_orbits": moving_orbits,
+            "moving_orbits_are_quadratic_residue_cosets": True,
             "moving_point_count": prime - 1,
+            "permutation_module_restriction": {
+                "formula": "2*trivial + 2*regular(C_e)",
+                "invariant_dimension": 4,
+                "nontrivial_character_multiplicity": 2,
+                "semisimple_when_characteristic_does_not_divide_e": True,
+                "trivial_character_multiplicity": 4,
+            },
             "summary": f"2 fixed + {prime - 1} moving, refined as 1+1+{e}+{e}",
         },
         "case": case,
@@ -207,6 +228,12 @@ def finite_record(case, prime, sheet, matrix, h, expected_blocks):
         "determinant_square": determinant_is_square,
         "generator_matrix_in_frozen_P1_frame": list(matrix),
         "is_generator_of_split_maximal_torus_in_PSL2": generated == diagonal_psl_torus,
+        "outer_PGL_over_PSL_coset": {
+            "determinant_is_nonsquare": True,
+            "matrix": list(outer_matrix),
+            "swaps_the_two_moving_orbits": True,
+            "warning": "this realizes the quotient bit on P1; identifying it with C445's specific Rz transporter remains C450's comparison",
+        },
         "prime_q": prime,
         "sheet": sheet,
         "split_torus_order": len(diagonal_psl_torus),
@@ -283,6 +310,21 @@ def build_certificate():
         finite_record("H3", 11, "pibar:zeta5=9", (4, 0, 0, 1), 10, expected["H3_pibar"]),
     ]
 
+    h3_pi = next(record for record in finite if record["sheet"] == "pi:zeta5=3")
+    h3_pibar = next(record for record in finite if record["sheet"] == "pibar:zeta5=9")
+    pi_generator = p1_action(tuple(h3_pi["generator_matrix_in_frozen_P1_frame"]), 1, 11)
+    pibar_generator = p1_action(tuple(h3_pibar["generator_matrix_in_frozen_P1_frame"]), 1, 11)
+    squaring_orbit = [pi_generator]
+    for _ in range(3):
+        squaring_orbit.append(pow(squaring_orbit[-1], 2, 11))
+    assert pi_generator == 9 and pibar_generator == 4 == pow(pi_generator, 2, 11)
+    assert squaring_orbit == [9, 4, 5, 3]
+    assert pow(pi_generator, 4, 11) == pow(pi_generator, -1, 11)
+    c462 = json.loads((HERE / "2026-07-21-c462-torsor-descent.json").read_text())
+    c462_action = c462["acceptance"]["canonical_companion_action"]
+    assert c462_action["sigma_is_four_cycle"]
+    assert c462_action["sigma_square"] == c462_action["kappa_companion_permutation"]
+
     for case, h, q in (("A3", 4, 5), ("B3", 6, 7), ("H3", 10, 11)):
         assert phase[case]["coxeter_number_h"] == h
         assert phase[case]["coxeter_conic_field"] == q == h + 1
@@ -292,12 +334,25 @@ def build_certificate():
         "char0_coxeter_square": char0,
         "consumes": input_records(),
         "finite_generator_images": finite,
+        "h3_galois_torus_bridge": {
+            "automorphism_group": "Aut(C5) = C4",
+            "complex_conjugation_action": "g -> g^4 = g^(-1)",
+            "frozen_generator_at_pi": pi_generator,
+            "frozen_generator_at_pibar": pibar_generator,
+            "semilinear_boundary": "the C4 action moves prime embeddings; it is not asserted to be one fixed PGL2(11) element",
+            "sigma_action": "g -> g^2",
+            "sigma_has_order_four_on_nonidentity_generators": True,
+            "sigma_orbit_on_C5_generators": squaring_orbit,
+            "sigma_square_is_kappa_in_C462": True,
+        },
         "mechanism": {
             "all_images_are_split_torus_generators_in_PSL2": True,
             "conic_action": "2 fixed points plus q-1 moving points; the latter are the two square-coset orbits of size (q-1)/2",
             "derived_identity": "order(c^2)=h/2=(q-1)/2 when q=h+1",
             "interpretation": "the Coxeter square, not the orientation-reversing Coxeter element, is the rotation element tested",
             "normalization": "choose the frozen-group conjugate whose two eigenlines are 0 and infinity; inversion reverses the generator but preserves the torus and orbit partition",
+            "quadratic_residue_bridge": "the middle exponent e=(q-1)/2 is the size of each Legendre coset, and the two moving blocks are exactly the square/nonsquare cosets",
+            "weil_module_input": "on the P1 permutation module, restriction to the Coxeter torus is 2*trivial + 2*regular(C_e)",
             "verdict": "PASS",
         },
         "schema": SCHEMA,
