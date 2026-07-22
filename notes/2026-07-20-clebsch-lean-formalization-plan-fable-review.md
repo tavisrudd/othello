@@ -312,6 +312,16 @@ promotion of any lead goes through the normal C-ID process.
    and ramified endpoints already certified (C373/C377).  C430 now supplies a canonical fibrewise
    outer-odd line: the difference of the two projective-cover socles.  C429 should track this
    radical line integrally and under Frobenius before introducing any larger descent object.
+   **First attack: V1, the one-carrier Smith/Fitting + naturality kill switch.**  Before drafting
+   the theorem, push the abstract odd line through all four certified dictionaries at one split
+   prime (`p=19`) and one inert prime (`p=13`) and test whether one global unit normalization makes
+   the induced swaps agree.  In the same bounded certificate, compute the Smith forms of the frozen
+   integral Gram/second-moment presentations to determine the exact bad-prime set and hence the
+   denominator `N` in `Z[1/N]`.  Incompatible units kill the one-carrier theorem and force the S0
+   per-prime statement; compatible units promote S1.  Keep the all-prime abstract odd line separate
+   from its projective-cover-socle refinement at defining characteristics (`q=7,11`).  The full
+   attack-vector assessment, kill switches, scope fences, and EV ranking are in
+   [`2026-07-22-c429-attack-vector-scan.md`](2026-07-22-c429-attack-vector-scan.md).
 2. **A conceptual balanced-half rigidity theorem — COMPLETE (C430).**  The radical--Hadamard
    theorem proves that the degree-at-most-two evaluation space is the equal-sheet-sum hyperplane
    and its entire trade kernel is the sheet-sign line.  The B3/H3 ranks/radicals are `5/1` and
