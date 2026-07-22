@@ -994,3 +994,70 @@ lands positive, this is the one-line answer to "why 3?".
 **Evidence:** REASONED over the CHECKED C450 period certificate; the norm and splitting facts are
 immediate arithmetic.
 **Status:** open lead; routed as framing for C465's report (no card change needed)
+
+### 2026-07-21 — mod 11 has a canonical primitive fifth root, and it points at the polar-moment prime
+
+**Provenance:** the Klein-cubic zeta probe (`notes/2026-07-21-klein-cubic-zeta-probe.md`,
+Section 3.6) read against the C443 polar-moment entry above.
+**Was I looking for this?:** no — the probe's deliverable was the spectrum question; the selector
+reading is a review synthesis.
+**Observed / musing:** the singularity criterion `2 zeta^3 + 1 = 0` picks `zeta = 3` *alone*
+among the four primitive fifth roots in `F_11` (only `3^3 = 5` solves it) — an intrinsic,
+frame-free selection. Two readings. (a) `zeta = 3` lies in the conjugate pair `{3,4}`, which is
+exactly the side where the C443 polar-moment vector vanishes (`zeta = 3,4` zero; `zeta = 5,9`
+support 9): the Klein degeneration and the polar moment distinguish the same prime of `Z[phi]`
+above 11, and the degeneration is intrinsic, so the polar-moment lead's frame-artifact worry now
+has an independent frame-free companion. (b) Finer: the selection breaks the full `C4` orbit, not
+just the `C2` quotient — canonically choosing one prime of `Z[zeta_5]` above 11 — while C462
+proved the selector obstruction is nonsplit within the frozen scope. No contradiction (different
+objects), but "the degeneration supplies external advice the internal torsor machinery provably
+cannot" is a precise framing sentence. Related norm fact: `Prod_(zeta^5=1)(1+2 zeta) = 2^5+1 =
+33`, so `11 = N_(Q(zeta_5)/Q)(1+2 zeta)` — the defining prime is a golden-cyclotomic norm and the
+bad-reduction integer is 3 times it.
+**Why it may matter / strongest question:** if the C443 second-basis check confirms the polar
+asymmetry is real, two independent phenomena select the same prime above 11; the strongest form
+would derive one from the other.
+**Discriminator / falsifier:** run the C443 entry's planned second-basis check; if the polar
+asymmetry survives, test whether its distinguished prime matches the Klein-selected side under
+the frozen conventions. A frame-artifact verdict for C443 leaves only the (still intrinsic)
+Klein selection with no partner.
+**Evidence:** CHECKED endpoints (probe certificate; C443 scratch computation); the cross-link is
+REASONED; the norm identity is immediate arithmetic.
+**Status:** open lead; unallocated — the C443 second-basis check remains the gating step
+
+### 2026-07-21 — composing C455 and C467: golden Galois conjugation lives inside the Weil operator family
+
+**Provenance:** review of the codex C467 closure
+(`notes/2026-07-21-c467-fixed-party-ame-equivalence.md`) against the C455 bundle.
+**Was I looking for this?:** no — C467 is codex's task; the composite reading spans two closed
+certificates.
+**Observed / musing:** C467 proves golden conjugation `t -> 1-t` of the pencil is implemented by
+local signed Fourier transforms `(F_-s)^tensor4 tensor (F_s)^tensor2`, uniformly over odd fields
+containing a golden root; C455 proves the signed Fourier operators restrict one ambient
+`Sp_6(F_11)` Weil Weyl operator. Composed: *Galois conjugation of the golden pencil is realized
+inside the (restricted) Weil representation* — the golden structure and the oscillator structure
+meet in the operator algebra, precisely where the Klein-cubic probe showed they cannot meet in a
+zeta function at 11. Supporting faces: at the ramified prime 5 the golden roots coalesce and
+C467's map degenerates to Fourier *self*-duality (ramification = self-duality, consistent with
+C451's canonical exclusion of `q=5`); and C456/C467 together relocate the chirality bit entirely
+to external geometric advice, matching C448's "point section costs one bit" — the gateway
+one-bit story ends as an advice bit, not a state invariant.
+**Why it may matter / strongest question:** this is candidate Phase-3 headline wording for what
+survives of roof (c): not a module isomorphism, but Galois descent implemented by metaplectic
+operators. Question for Phase 3: can the C449/C462 `C4` (not just its golden `C2` quotient) be
+implemented by operators in the same certified family?
+**Evidence:** REASONED composition of two CHECKED certificates (C455, C467); no new computation.
+**Status:** open lead; unallocated — Phase-3 synthesis wording owns the composite sentence
+
+### 2026-07-21 — caution: the code characteristic is a second, undeclared 7-vs-11 axis
+
+**Provenance:** review-pass observation while ranking the `(2/q)` alignments.
+**Was I looking for this?:** no.
+**Observed / musing:** the certified 7-vs-11 asymmetries mostly track `(2/q)`, but one structural
+difference does not: the perfect-code characteristics (`F_2` Hamming at 7 from `7 = 2^3-1`;
+`F_3` Golay at 11) arise from a different mechanism than the Legendre bit and have been riding
+along undeclared. C465's `q=7`/`F_2` control is the first computation able to separate the two
+axes; its verdict should be read with this in mind before attributing any 7-vs-11 difference to
+`(2/q)` alone.
+**Evidence:** OPEN — bookkeeping observation over certified endpoints.
+**Status:** open lead; unallocated — reading guidance for C465, no task shape
