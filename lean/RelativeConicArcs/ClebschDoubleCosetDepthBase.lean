@@ -119,7 +119,7 @@ theorem sheetInvolutionParent_matches_endpoints :
       sheetInvolutionEndpoint (matchingMate p x) := by
   decide
 
-/-- The sheet involution carries each normalized projective relation cell to its displayed mate. -/
+/-- The sheet involution carries the displayed relation label of each frozen index to its mate. -/
 theorem sheetInvolution_moves_relation :
     ∀ x, relationCell (sheetInvolutionPoint x) = sheetInvolutionRelation (relationCell x) := by
   decide

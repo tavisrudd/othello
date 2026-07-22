@@ -10,6 +10,8 @@
 
 **Review-repair commit:** `3ecf6ae074fa7567c41f1a1a0e4d199eae4d9ab4`
 
+**Final review-cleanup commit:** pending scoped commit
+
 ## Result
 
 The finite q=11 depth bridge is landed in six modules and exits through
@@ -40,8 +42,10 @@ The finite q=11 depth bridge is landed in six modules and exits through
    chosen singleton matching table recovers its exact row through the gateway's proved injectivity.
 
 The all-degree parity theorem and primitive-module/projective-cover identification were not added.
-The `PGL_2(11)`, `PSL_2(11)`, `A5`, and `A4` group orders and their identification with the generated
-permutation data are reconstructed by the replay, not promoted to Lean group-isomorphism theorems.
+The `PGL_2(11)`, `PSL_2(11)`, `A5`, and `A4` group orders, their identification with the generated
+permutation data, and the frozen certificate's C378/C379/C406 provenance are trusted external inputs
+for the stable bundle; its current checker does not reconstruct them.  They are not promoted to Lean
+group-isomorphism theorems.
 Accordingly the formal claim is an exact concrete action-and-incidence theorem, not general modular
 Hecke theory or a kernel-checked abstract group identification.
 
@@ -125,9 +129,9 @@ layer proves priority, identifies the generated permutation subgroup with an abs
 or turns the integer odd-Fourier display into a general Fourier-transform theorem.
 
 The final build queue
-`/home/tavis/.cache/othello-lean-build/run-20260722-143543-5450b0db` built the aggregator and gate,
-then passed the exact trace-only aggregate gate.  Peak RSS was `6,545,844` KiB for the aggregator and
-`1,743,524` KiB for the gate.  The gate's 34 selected
+`/home/tavis/.cache/othello-lean-build/run-20260722-151332-a1f261a0` built the aggregator and gate,
+then passed the exact trace-only aggregate gate.  Peak RSS was `6,787,232` KiB for the aggregator and
+`1,784,672` KiB for the gate.  The gate's 34 selected
 terminal audits report only `propext`, `Classical.choice`, and `Quot.sound`; no `sorryAx`,
 `native_decide`, project axiom, or opaque external oracle occurs in the claimed terminal surface.
 
@@ -192,7 +196,7 @@ independently formalized geometric parent object.
 | claim | exact Lean route | external boundary |
 |---|---|---|
 | Six `1,4,6 / 1,4,6` cells | bijectivity/orders, `mem_generatedOrbit_iff_reachable`, cardinality, cover, disjointness | abstract `A4<PGL_2(11)>A5` identification replayed |
-| Six secant-depth profiles | six `*_zeroCounts`, two representative-profile terminals | frozen projective/cell/action data generated from C378/C379/C406 |
+| Six secant-depth profiles | six `*_zeroCounts`, two representative-profile terminals | frozen certificate; C378/C379/C406 origin external |
 | Involution antipodality | `sheetInvolution_secant_equivariant_positive`, `depthProfile_sheetInvolution_positive` | golden involution's historical/geometric name |
 | Rank two, kernel four, label separation | three aggregator terminals | mixed-bi-Hecke interpretation, not needed for linear algebra |
 | Plane and `1:4:6` relation | plane-equation and weighted-barycentre terminals | primitive module interpretation omitted |
@@ -214,5 +218,11 @@ bundle has a stable mathematical path, schema, self-identifying header, and self
 checker with a complete direct-input inventory; projective-space coverage is narrowed to the 133 frozen indices;
 “primitive” was removed from the barycentre docstring; and manifest coverage is stated exactly.
 
+The same user-launched reviewer returned a second `NO-GO` after confirming that every mathematical,
+checker, hash, gate, and axiom-audit repair above was closed.  Its remaining referee-boundary cleanup
+is now applied: all four source comments use only proved concrete orbit/label terminology; the report
+states that named-group and C378/C379/C406 certificate provenance is external to the stable checker;
+and the closed JSON schema requires every retained property after removal of three unused legacy fields.
+
 A fresh user-launched independent review is required.  The live queue row remains open until that
-review records final `GO` and confirms every repair above.
+review records final `GO` and confirms this last cleanup.

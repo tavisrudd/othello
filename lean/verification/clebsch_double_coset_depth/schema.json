@@ -21,6 +21,7 @@
     "j_relation",
     "oriented_relation_pairs",
     "representatives",
+    "generator_orbits",
     "derived_checks",
     "input_hashes"
   ],
@@ -44,10 +45,7 @@
     "representatives": {"type": "array", "minItems": 6, "maxItems": 6},
     "derived_checks": {"type": "object"},
     "input_hashes": {"type": "object"},
-    "endpoint_bridge": {"type": "array"},
-    "factorization_sheet_swap": {"type": "integer"},
-    "generator_orbits": {"type": "array"},
-    "sheet_signs": {"type": "array"}
+    "generator_orbits": {"type": "array", "minItems": 6, "maxItems": 6}
   },
   "type": "object"
 }

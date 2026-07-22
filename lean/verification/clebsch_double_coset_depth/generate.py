@@ -110,8 +110,6 @@ def verify_certificate(data: dict) -> None:
     point_index = {tuple(point): i for i, point in enumerate(points)}
     assert len(point_index) == 133
 
-    endpoint_bridge = data["endpoint_bridge"]
-    assert sorted(endpoint_bridge) == list(range(12))
     rows = matching_rows(MATCHING_LEAN.read_text())
     generators = data["k_parent_generators"]
     endpoint_generators = data["k_endpoint_generators"]

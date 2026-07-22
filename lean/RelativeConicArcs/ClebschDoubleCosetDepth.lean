@@ -4,7 +4,7 @@ import RelativeConicArcs.ClebschMomentTrade
 import RelativeConicArcs.ClebschBalancedSheetsH3
 
 /-!
-# Six mixed double cosets, their depth plane, and singleton recovery
+# Six matching-row permutation orbits, their depth plane, and singleton recovery
 
 The six orbits of the two displayed matching-row permutations have sizes `1,4,6` on each
 displayed eleven-row sheet.  Their secant-incidence profiles form three opposite pairs in a two-dimensional
@@ -197,7 +197,7 @@ theorem positiveProfiles_weightedBarycentre :
   rw [h0, h1, h2]
   decide
 
-/-- The signed weights on the three positive and three negative double cosets. -/
+/-- The signed weights on the three positive and three negative orbit labels. -/
 def pushforwardWeight : Fin 6 → ZMod 11 := ![1, 4, 6, 10, 7, 5]
 
 /-- The first scalar coordinate of the signed depth pushforward has cubic-first survival. -/
@@ -208,7 +208,7 @@ theorem cubicFirst_pushforward :
   rw [representativeProfile_values]
   decide
 
-/-- The singleton representatives form the unordered golden matching-row pair. -/
+/-- The singleton representatives form the displayed unordered matching-row pair. -/
 def singletonMatchingPair : Finset Parent :=
   {orbitRepresentative 0, orbitRepresentative 3}
 
