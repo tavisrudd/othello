@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+from fractions import Fraction
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -202,6 +203,40 @@ def golden_symbolic_duality() -> dict[str, object]:
     }
 
 
+def universal_inversion_equivalence() -> dict[str, object]:
+    def rational_h(t: Fraction) -> tuple[tuple[Fraction, ...], ...]:
+        return (
+            (Fraction(0), Fraction(0), Fraction(1), Fraction(1), Fraction(1), Fraction(1)),
+            (Fraction(1), Fraction(1), 1 - t, t - 1, Fraction(0), Fraction(0)),
+            (1 - t, t - 1, Fraction(0), Fraction(0), -t, t),
+        )
+
+    for integer_t in tuple(range(-5, 0)) + tuple(range(1, 6)):
+        t = Fraction(integer_t)
+        left_h = rational_h(1 / t)
+        right_h = rational_h(t)
+        column_scalars = (1, 1, -t, -t, -t, -t)
+        row_scalars = (-t, 1, -1 / t)
+        left = tuple(
+            tuple(left_h[i][j] * column_scalars[j] for j in range(6))
+            for i in range(3)
+        )
+        right = tuple(
+            tuple(row_scalars[i] * right_h[i][j] for j in range(6))
+            for i in range(3)
+        )
+        if left != right:
+            raise AssertionError("universal inversion identity failed")
+    return {
+        "identity": "H_(1/t) diag(1,1,-t,-t,-t,-t) = diag(-t,1,-t^-1) H_t",
+        "domain": "every field with t nonzero",
+        "code_consequence": "diag(1,1,-t,-t,-t,-t) C_t = C_(1/t)",
+        "quantum_consequence": "Computational-basis scaling on parties 2,3,4,5 gives an exact fixed-party local-Clifford map |Psi_t> -> |Psi_(1/t)>.",
+        "q11_inverse_pairs": [[2, 6], [3, 4], [7, 8], [10, 10]],
+        "q11_generation": "Universal inversion gives the pairs; golden Fourier duality 4<->8 joins [3,4] and [7,8], producing the four-element class.",
+    }
+
+
 def full_q11_pencil_classification(c374, c456) -> dict[str, object]:
     parameters = (2, 3, 4, 6, 7, 8, 10)
     codes = {t: c456.kernel_generator(t) for t in parameters}
@@ -280,6 +315,7 @@ def build_certificate() -> dict[str, object]:
         "fixed_party_local_clifford": lc_result,
         "exact_state_map": fourier_result,
         "golden_family_mechanism": golden_symbolic_duality(),
+        "universal_parameter_inversion": universal_inversion_equivalence(),
         "full_q11_pencil_fixed_party_classification": full_q11_pencil_classification(c374, c456),
         "degree_eight_lu_contractions": {
             "copy_count": 4,

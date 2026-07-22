@@ -2377,6 +2377,31 @@
     8,
     4
   ],
+  "universal_parameter_inversion": {
+    "code_consequence": "diag(1,1,-t,-t,-t,-t) C_t = C_(1/t)",
+    "domain": "every field with t nonzero",
+    "identity": "H_(1/t) diag(1,1,-t,-t,-t,-t) = diag(-t,1,-t^-1) H_t",
+    "q11_generation": "Universal inversion gives the pairs; golden Fourier duality 4<->8 joins [3,4] and [7,8], producing the four-element class.",
+    "q11_inverse_pairs": [
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        10,
+        10
+      ]
+    ],
+    "quantum_consequence": "Computational-basis scaling on parties 2,3,4,5 gives an exact fixed-party local-Clifford map |Psi_t> -> |Psi_(1/t)>."
+  },
   "verdict": {
     "automorphism_rigidity_route_needed": false,
     "fixed_party_lc_equivalent": true,
