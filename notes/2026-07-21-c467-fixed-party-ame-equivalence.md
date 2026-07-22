@@ -147,6 +147,36 @@ coalesce, and the statement becomes signed Fourier self-duality. Thus golden Gal
 this pencil is implemented quantum-mechanically by local Fourier duality uniformly across odd
 finite-field realizations.
 
+## Second-order upgrade: complete fixed-party q=11 pencil quotient
+
+The same transition-forcing and indexed-moment machinery classifies all seven admitted C384
+parameters with party labels fixed. Exhausting all 49 ordered parameter pairs gives exactly three
+LC classes:
+
+```text
+{2,6},   {3,4,7,8},   {10}.
+```
+
+Every ordered pair within a block has exactly ten fixed-party Clifford maps; every pair across
+blocks has none. Independently, the complete 455-entry indexed degree-six marginal-moment vectors
+have exactly the same three collision blocks. Representative separating entries are:
+
+| parameters | omitted party pairs | moments |
+|:---|:---|:---|
+| `2 / 3` | `{0,2}, {1,4}, {3,5}` | `11^-6 / 11^-4` |
+| `2 / 10` | `{0,2}, {1,5}, {3,4}` | `11^-4 / 11^-6` |
+| `3 / 10` | `{0,2}, {1,4}, {3,5}` | `11^-4 / 11^-6` |
+
+Thus the displayed finite pencil has exactly three fixed-party LU classes: Clifford witnesses prove
+equivalence within each block, and a labeled LU invariant separates different blocks. The ambient
+twelve-coordinate replay independently reproduces every moment vector.
+
+Degree six is the lowest possible separating total degree. Degree two is only normalization, and
+every degree-four pure-state contraction is a marginal purity; for an `AME(6,11)` state these are
+fixed by maximal mixing for subsets of size at most three and by pure-state complementarity beyond
+three. C384's two classes after allowing party permutations are recovered by fusing the first two
+fixed-label blocks, while `{10}` remains separate.
+
 ## Reproduction and trusted boundary
 
 Run from the repository root:
@@ -159,8 +189,8 @@ sha256sum -c notes/2026-07-21-c467-fixed-party-ame-equivalence.sha256
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | 11,316 | `d3ea37ac8f5bec125a7658ea418f2d341a5e4f1bca218c3b86b07e97ebe85f2f` |
-| certificate `.json` | 13,319 | `a155339413e293138d04e0f6b7276300a5d38b019a8f20b936c084ac20df8b48` |
+| checker `.py` | 14,362 | `66505de7271ea7d13a9537b1b325542f4b3c1787186d8371e6104681444fe411` |
+| certificate `.json` | 31,571 | `ae5d47b3b28456c7499d52cdb7e8fbecfed44218bd55a8caef4d3774eef0679a` |
 
 The deterministic checker hash-pins the C374, C384, and C456 scripts/certificates. Its trusted
 boundary is Python 3 arithmetic modulo 11, exact row reduction, prime-field character

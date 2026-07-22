@@ -202,6 +202,66 @@ def golden_symbolic_duality() -> dict[str, object]:
     }
 
 
+def full_q11_pencil_classification(c374, c456) -> dict[str, object]:
+    parameters = (2, 3, 4, 6, 7, 8, 10)
+    codes = {t: c456.kernel_generator(t) for t in parameters}
+    lc_counts = [
+        [fixed_party_lc(c374, codes[left], codes[right])["relation_consistent_candidates"]
+         for right in parameters]
+        for left in parameters
+    ]
+    lc_classes = []
+    unseen = set(parameters)
+    while unseen:
+        representative = min(unseen)
+        index = parameters.index(representative)
+        block = tuple(t for t, count in zip(parameters, lc_counts[index]) if count)
+        lc_classes.append(block)
+        unseen.difference_update(block)
+
+    ranks = {t: c456.indexed_moment_ranks(c456.shortenings(codes[t])) for t in parameters}
+    ambient = {t: c456.indexed_moment_ranks(c456.ambient_shortenings(codes[t])) for t in parameters}
+    if ranks != ambient:
+        raise AssertionError("full-pencil ambient moment replay disagrees")
+    moment_classes = []
+    unseen = set(parameters)
+    while unseen:
+        representative = min(unseen)
+        block = tuple(t for t in parameters if ranks[t] == ranks[representative])
+        moment_classes.append(block)
+        unseen.difference_update(block)
+    expected = [(2, 6), (3, 4, 7, 8), (10,)]
+    if lc_classes != expected or moment_classes != expected:
+        raise AssertionError("unexpected fixed-party pencil partition")
+
+    witnesses = []
+    for left, right in ((2, 3), (2, 10), (3, 10)):
+        triple = next(key for key in ranks[left] if ranks[left][key] != ranks[right][key])
+        witnesses.append({
+            "parameters": [left, right],
+            "omitted_party_pairs": triple,
+            "ranks": [ranks[left][triple], ranks[right][triple]],
+            "moments": [f"11^-{ranks[left][triple]}", f"11^-{ranks[right][triple]}"],
+        })
+    representatives = (2, 3, 10)
+    return {
+        "admitted_parameters": parameters,
+        "fixed_party_lc_solution_count_matrix": lc_counts,
+        "fixed_party_lc_classes": lc_classes,
+        "indexed_degree_six_moment_classes": moment_classes,
+        "class_representative_rank_vectors": {
+            str(t): list(ranks[t].values()) for t in representatives
+        },
+        "pairwise_separating_witnesses": witnesses,
+        "independent_ambient_replay": True,
+        "fixed_party_lu_class_count": 3,
+        "classification_reason": "Within each block an exact fixed-party Clifford exists; across blocks an indexed degree-six marginal moment differs.",
+        "lowest_possible_separating_total_degree": 6,
+        "lower_degree_reason": "Degree 2 is normalization; every degree-4 pure-state contraction is a marginal purity, fixed for AME(6,11) by maximal mixing and complementarity.",
+        "comparison_with_party_permutations": "C384's two LU classes become three when party labels are fixed: its six-parameter class splits into the first two blocks, while {10} stays separate.",
+    }
+
+
 def build_certificate() -> dict[str, object]:
     for relative, expected in INPUTS.items():
         if digest(ROOT / relative) != expected:
@@ -220,6 +280,7 @@ def build_certificate() -> dict[str, object]:
         "fixed_party_local_clifford": lc_result,
         "exact_state_map": fourier_result,
         "golden_family_mechanism": golden_symbolic_duality(),
+        "full_q11_pencil_fixed_party_classification": full_q11_pencil_classification(c374, c456),
         "degree_eight_lu_contractions": {
             "copy_count": 4,
             "amplitude_bidegree": [4, 4],
