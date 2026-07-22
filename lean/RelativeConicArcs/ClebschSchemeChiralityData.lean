@@ -1,11 +1,11 @@
 /-
 # Frozen data for the six-block Clebsch chirality calculation
 
-This generated module records six projective directions over `F_11`, two permutations generating
+This module records six projective directions over `F_11`, two permutations generating
 their degree-six icosahedral action, the twenty three-subsets of the six directions, and one
-normalizing permutation that exchanges the two ten-element orbits.  The tracked generator and
-semantic certificate are `ClebschSchemeChirality.py` and `ClebschSchemeChirality.json` in this
-directory.  The mathematical checks of these tables are in `ClebschSchemeChirality.lean`.
+normalizing permutation that exchanges the two ten-element orbits.  The tracked independent replay
+and semantic certificate are `ClebschSchemeChirality.py` and `ClebschSchemeChirality.json` in this
+directory.  The mathematical checks of the displayed tables are in `ClebschSchemeChirality.lean`.
 -/
 import Mathlib.Data.ZMod.Basic
 import Mathlib.Data.Fin.Tuple.Basic
@@ -39,7 +39,7 @@ def generatorTripleAction : Fin 2 → Fin 20 → Fin 20 := ![
   ![1, 0, 3, 2, 4, 6, 5, 7, 9, 8, 11, 10, 12, 14, 13, 15, 17, 16, 19, 18],
   ![0, 5, 1, 7, 6, 2, 9, 8, 3, 4, 15, 16, 11, 10, 17, 13, 12, 18, 14, 19]]
 
-/-- A degree-six normalizing involution outside the displayed generated action. -/
+/-- A degree-six normalizer element of order four outside the displayed generated action. -/
 def sheetExchangeBlock : Fin 6 → Fin 6 := ![0, 1, 4, 5, 3, 2]
 
 /-- Action of `sheetExchangeBlock` on the ordered twenty triples. -/

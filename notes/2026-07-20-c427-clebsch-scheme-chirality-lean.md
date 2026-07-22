@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation complete; independent review required before closure
+**Status:** initial independent review `NO-GO`; repairs landed, post-fix independent review required
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place; do not substitute a chat summary or a second transient document. The finished report
@@ -138,8 +138,8 @@ terminals use only `[propext]`. Python replay is outside the Lean trust base.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `ClebschSchemeChiralityData.lean` | 2,223 | `370167d54ae2a449f5bafa8bdcb238575c7180ce075f1169ebf37bfa74d9507c` |
-| `ClebschSchemeChirality.lean` | 6,490 | `30acb44ffb03cf8474da6614e78030eea739181f077234bae90b7a7ef559d5a8` |
+| `ClebschSchemeChiralityData.lean` | 2,240 | `42092cd7c83598f300b1302ffd7be1b2a2b3fbb2b07458cab94aeaa493200a1b` |
+| `ClebschSchemeChirality.lean` | 6,488 | `dd08e796feae5b06bf5666adeb59d3e100e262cff12c3e37fe9930ea66be5fc5` |
 | `Gates/ClebschReplacementSpine.lean` | 1,959 | `17edb28f4b4c77929973eada93eacb92ea03bb17b8c2b7604fcfa567d0134e3a` |
 | `ClebschSchemeChirality.py` | 6,964 | `dbfcdb66debce12b166b7b0c77c014c47053de302f84ff34941c4c786ab46d8e` |
 | `ClebschSchemeChirality.json` | 732 | `f7f1bdf691ddf45ac036c4a37308e5dc19e8074f3d2d7caff58d9e9f778f5748` |
@@ -228,8 +228,23 @@ correction.
 
 ## Independent review
 
-Reviewer/date/verdict/findings/dispositions: **pending user-launched independent review**. Keep the
-task live until final `GO`.
+**Initial reviewer:** Codex, explicitly launched by the user on 2026-07-22.
+
+**Initial verdict:** `NO-GO`.
+
+1. `ClebschSchemeChiralityData.lean` and `ClebschSchemeChirality.lean` called the displayed
+   sheet-exchanging permutation an involution in three referee-facing comments, while the table and
+   `sheetExchange_fourth_power` exhibit an order-four element.  **Disposition:** repaired all three
+   comments to say “order-four normalizer”; no theorem or data changed.
+2. The frozen-data module banner called `ClebschSchemeChirality.py` its tracked generator, but that
+   script independently replays the finite claims and checks the JSON certificate; it does not emit
+   the Lean source.  **Disposition:** narrowed the banner to “tracked independent replay and
+   semantic certificate”; no generated-source claim remains.
+
+The reviewer otherwise found the theorem types, finite domains, gate imports, and reported trust
+boundaries consistent.  Independent replay and the exact replacement-spine gate were green before
+the repairs.  The repaired sources, manifest, replay, gate, and hashes must be revalidated and
+committed, after which a separate user-launched post-fix reviewer must issue the final `GO`.
 
 ## Required closing review process
 
@@ -286,5 +301,5 @@ archived under the repository completion invariant.
   prove.
 - [x] Complete the judgment-call record with evidence, trust impact, rejected alternatives, and
   reopening conditions; ensure the verification map and ledger use the chosen final route.
-- [ ] Record the independent reviewer's identity, date, `GO`/`NO-GO`, findings, and dispositions.
+- [x] Record the independent reviewer's identity, date, `GO`/`NO-GO`, findings, and dispositions.
 - [x] Supply C320 with one ledger row per claim and the exact verify-all entry-point delta.
