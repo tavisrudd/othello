@@ -843,6 +843,148 @@ stable unit nor an ordinary `Omega^(+/-2)` module, and the carrier is not Auslan
 Consequently the useful binary theory is genuinely relative/fusion-theoretic; ordinary periodic
 syzygy or AR explanations are closed.
 
+### Magic-gateway synthesis: the new exact path
+
+The gateway brainstorm asked for reversible presentations, a small forgotten decoration, an
+intrinsic carrier, an exceptional parameter, an operational endpoint, and a cheap falsifier.
+C465 and C474 now supply a category-correct modular path through that checklist.  It is not a new
+name for the original chirality torsor; it is a second layer downstream of the cross-sheet
+designs.
+
+For each frozen row, let `M_q=F_p[Omega_q]` be one matching-sheet permutation module, let `A_q` be
+its augmentation, and retain C465's shared-edge and disjointness row spaces `S_q` and `D_q`.
+The already-certified equalities assemble into the following diagram:
+
+```text
+pointed matching sheet
+        |
+        v
+cross-sheet incidence pair ---- disjoint row span ----> D_q = <1> direct-sum S_q
+        |                                                   |
+        | shared-edge row span                              | intersect augmentation
+        v                                                   v
+ simple lower-Weil core S_q ------------------------------> S_q
+        |                                                   |
+        | Sylow reduced-orbit fibre                         | stable Picard class x=[S_q]
+        v                                                   v
+ endotrivial source ----------------------------------> Ext^1(S_q^*,S_q)=F_p
+                                                            |
+                                                            | unique nonzero orbit
+                                                            v
+                                      A_q = S_q . S_q^* (nonsplit, self-dual, metabolic)
+```
+
+Every displayed horizontal or vertical identification before the words “Sylow reduced-orbit
+fibre” is literal linear algebra from the frozen incidence matrices.  In particular, the binary
+Hamming `[7,4,3]` span and ternary Golay `[11,6,5]` span are not merely adjacent famous codes:
+they are exactly
+
+```text
+D_7  = <1> direct-sum S_7,    dim(S_7,D_7)=(3,4),
+D_11 = <1> direct-sum S_11,   dim(S_11,D_11)=(5,6).
+```
+
+Because `<1>` is not in the augmentation in these characteristics, `D_q intersect A_q=S_q`.
+Thus the perfect code, together with its ambient matching sheet, recovers the simple Lagrangian
+core without a character table.  C474 then proves that this recovered core is endotrivial and
+that the ambient augmentation is its unique nonzero dual extension.  This is the missing modular
+engine behind the older design-to-code branch: a perfect code contains the invertible stable
+fibre whose unique cone is the sheet augmentation.
+
+This upgrades three proposed gateway chains at once.
+
+1. **G7 (oriented finite-field designs): proved modular continuation.**  Balanced matching sheets
+   produce the cross-designs, the cross-designs produce `D_q` and `S_q`, and the core produces the
+   unique carrier.  The conclusion is stronger than a code parameter coincidence: it identifies
+   the simple module, its Sylow source, its stable inverse, and its unique extension.
+2. **G1 (finite-field orbit recovery): a nonsemisimple correction term.**  The p-local source is
+   `ker(F_p[P/H] -> F_p)` up to projectives.  Hence orbit-fibre linearization, rather than generic
+   independence of orbit vectors, explains the radical/socle layer that modular moment recovery
+   must retain.  At q=7 the fibre is reflection-relative; at q=11 it is the reduced regular
+   `C3`-orbit.
+3. **G5 (equivariant information lattice): an exact new lower half.**  The information levels are
+   no longer only set, design, and code quotients.  They continue through a simple stable object,
+   a Picard grading, a one-dimensional extension space, and a self-dual middle module.  Each
+   forgetting map has a now-computed fibre or failure of descent.
+
+The most important compatibility boundary is equally exact.  There are at least three distinct
+“small decorations” in the surrounding gateway reports:
+
+```text
+(i)   the two-sheet/polarity C2 torsor;
+(ii)  the pointed arithmetic choice naming S_q rather than S_q^*;
+(iii) the module-valued class alpha in Ext^1(S_q^*,S_q).
+```
+
+They do not live in the same cohomology group and must not be identified.  The first is a torsor
+of combinatorial presentations, the second is descent/orientation data, and the third is group
+cohomology with coefficient `Hom(S_q^*,S_q)`.  What is proved is that a pointed sheet constructs
+all three in sequence.  No comparison morphism identifying their cohomology classes has been
+constructed.
+
+Moreover the sequence is provably not reversible after the last quotient.  The projectivized
+nonzero Ext space is `P^0`; its unique middle module remembers only “split versus nonsplit.”  At
+q=11 the two nonzero cocycle scalars are one module-isomorphism orbit, and determinant varies
+inside a single gauge component.  Therefore the unpointed carrier cannot recover the arithmetic
+prime, cubic sign, or sheet orientation.  This locates the precise information-loss edge:
+
+```text
+pointed sheet / cubic sign
+        -> oriented endpoints plus a scalar Ext coordinate
+        -> unpointed nonsplit carrier
+              forgets the sign, retains only the nonzero extension orbit.
+```
+
+This is a positive gateway theorem and a stop rule simultaneously.  It validates the original
+instruction to retain markings until a later theorem consumes them: the code/core/carrier path is
+canonical relative to a pointed sheet, but passage to the carrier's module-isomorphism class
+irreversibly consumes the orientation.
+
+### Most surprising and fruitful magic-gateway bridges
+
+Against the older brainstorm, the bridge ranking becomes more specific.
+
+1. **Perfect code to invertible stable core — strongest proved surprise.**  Hamming and ternary
+   Golay are usually operational endpoints.  Here their codimension-one nontrivial summands are
+   instead inputs to modular tensor geometry: simple endotrivial objects whose unique dual
+   extension reconstructs the ambient sheet augmentation.  This is both proved and reusable.
+2. **External design self-duality to internal metabolic self-duality — strongest geometry seam.**
+   The Fano-complement/biplane polarity lives outside the code as a point-block exchange, whereas
+   `A_q` contains a Lagrangian `S_q` and is Witt-zero but nonsplit.  A theorem transporting the
+   external polarity to a choice of Lagrangian, formation, or Maslov-type refinement would connect
+   G16 directly to C474.  The self-dual endpoints are proved; that transport is open.
+3. **Local orbit residue to Picard class — best family mechanism.**  The reduced `P/H` fibres
+   explain endotriviality without Weil tables.  The next cheap search is not “find another famous
+   code,” but “find a self-dual design whose modular core restricts to a reduced transitive Sylow
+   orbit plus free summands.”  Passing this test would manufacture a candidate Picard object.
+4. **Bi-essential fusion as a coherence certificate — best second-order bridge.**  The q=7 class
+   is invisible on every rank-one subgroup yet essential on both reflection `V4`s, and this
+   bi-essential profile uniquely selects the global line.  This is a finite, exact model of local
+   data gluing only after rank-two coherence; it is the most concrete bridge from the gateway's
+   “forgotten decoration” language to orbit-category descent.
+5. **Orientation destruction at the residual gerbe — most useful negative surprise.**  The coarse
+   carrier point hides automorphisms but not a secret sign.  This prevents false closed walks in
+   the magic hexagon and says exactly where a path-independence theorem needs pointed rather than
+   unpointed objects.
+
+Three bounded applications now have honest inputs.
+
+- **Recognition and verification:** recover `S_q=D_q intersect A_q`, test its Sylow orbit-fibre
+  type, and recognize the carrier from the one-element Jordan-rank jump.  This is a cheap
+  certificate for candidate design/code gateways.
+- **Modular orbit recovery:** replace a semisimple orbit-span assumption by the explicit
+  `socle/radical = S_q` carrier and ask which moments descend through that Loewy layer.  This is a
+  concrete continuation of G7 -> G1, not yet a decoder theorem.
+- **Self-dual code refinements:** search for a secondary Witt/formation invariant retaining the
+  pointed polarity after the ordinary carrier forgets it.  A successful invariant would repair
+  the broken reverse arrow without contradicting the determinant obstruction.
+
+Two seductive connections remain only conjectural.  The q=11 local `C3` orbit has size three,
+suggestive of the three-facets-through-an-edge residue of the 11-cell, and the q=7 reflection
+orbit has size four, suggestive of a Fano-complement block.  No equivariant residue map from the
+frozen matching sheets to those particular flag fibres is proved here.  These are excellent
+finite tests for G16, but common cardinalities are not gateway arrows.
+
 ### Upstream mystery: what the geometry does and does not force
 
 The geometry-to-endotriviality bridge is now proved for the two frozen carriers.  Starting only
@@ -1050,6 +1192,20 @@ no literature novelty or priority claim.
   a basis-free p-local recognition criterion for the global carrier class.
 - **Settled — effects of C472/C473.** The signed split cover introduces no second extension class;
   the pointed trace-prime rule canonically names the socle in each case.
+- **Settled — the modular magic-gateway path.** C465's perfect-code identity
+  `D_q=<1> direct-sum S_q` and `D_q intersect A_q=S_q`, followed by C474's Sylow-source,
+  endotriviality, and unique-Ext theorems, gives a literal cross-design -> perfect code -> stable
+  Picard core -> nonsplit carrier chain.  This extends G7, G1, and G5 without identifying their
+  combinatorial `C2` torsor with the coefficient-valued Ext class.
+- **Settled — the gateway information-loss edge.** Projectivizing the nonzero Ext line produces
+  one carrier point, while the q=11 determinant varies within a single gauge component.  The
+  unpointed carrier therefore cannot recover the pointed arithmetic/cubic orientation; any closed
+  magic-hexagon walk must retain that marking or add a genuine secondary invariant.
+- **Open — external polarity versus internal Lagrangian data.** The self-dual cross-design and the
+  metabolic self-dual carrier are both exact, but no map yet transports point-block polarity to a
+  Lagrangian orientation, Witt formation, or Maslov-type invariant.  This is the sharp surviving
+  G16 seam.  Likewise, the size-three and size-four local orbit fibres have no proved equivariant
+  identification with the tempting 11-cell edge residue and Fano-complement block.
 - **Partly settled, with exact Phase-3 boundary — geometry-to-endotriviality.** For both frozen
   sheets the matching geometry, core construction, and induced Sylow action now derive
   endotriviality internally: reflection-relative on `D8`, and `Omega+free` on `C3`.  Pure
