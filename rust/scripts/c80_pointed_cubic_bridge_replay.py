@@ -24,6 +24,13 @@ def check_candidate(record):
     assert record["q3"] == (max(counts, default=0) >= 3)
     assert record["q3"] == (factorial_third > 0)
     assert record["moments"][2] == record["word_trace_three"]
+    triple_excess = record["moments"][2] - 10 * record["moments"][0]
+    assert triple_excess == record["triple_word_excess"]
+    assert triple_excess == 6 * sum(record["unordered_triple_fixed_counts"])
+    assert record["unordered_triple_fixed_counts"] == [
+        1 if discriminant == 0 else (2 if pow(discriminant, 8, 17) == 1 else 0)
+        for discriminant in record["unordered_triple_discriminants"]
+    ]
 
 
 def main() -> int:
@@ -43,6 +50,41 @@ def main() -> int:
     assert sum(profile["count"] for profile in q17["profiles"]) == 112
     assert q17["moment_pair_is_value_pure_on_this_corpus"]
     assert q17["clean_moment_pairs"] == [[74, 60], [80, 50]]
+    assert q17["zero_triple_fixed_packet"] == {
+        "definition": "all four unordered triple products have no fixed conic parameter",
+        "empty_transitions": 4,
+        "impure_transitions": 0,
+        "prior_triple_gate": [
+            {
+                "packet_size": 1,
+                "prior_triple_fixed_points": 0,
+                "transitions": 24,
+            },
+            {
+                "packet_size": 0,
+                "prior_triple_fixed_points": 2,
+                "transitions": 4,
+            },
+        ],
+        "reply_dependent_conditions": 3,
+        "unique_clean_reply_transitions": 24,
+        "without_primitive_restriction": [
+            {
+                "all_clean": True,
+                "all_p": True,
+                "primitive_members": 0,
+                "size": 0,
+                "transitions": 4,
+            },
+            {
+                "all_clean": False,
+                "all_p": False,
+                "primitive_members": 1,
+                "size": 5,
+                "transitions": 24,
+            },
+        ],
+    }
     assert q17["q3_clean_contingency"] == [
         {"clean": False, "count": 57, "q3": False},
         {"clean": True, "count": 18, "q3": False},

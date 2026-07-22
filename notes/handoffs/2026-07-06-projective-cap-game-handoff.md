@@ -594,7 +594,13 @@ task list.  Current high-value items:
   count on the reply-pencil sort.  Neither determines the other on all 112 q17 score-9 primitive
   candidates.  `(tr(B^2),tr(B^3))` is value-pure there, with clean pairs `(74,60)` and `(80,50)`,
   but remains a finite base classifier; a uniform proof needs a two-sorted incidence/flag lift plus
-  descent, not one ordinary Terwilliger table.
+  descent, not one ordinary Terwilliger table.  Expanding the third trace now extracts a genuine
+  bounded generic fibre: intersect the primitive opponent/reply orbital with the three nonsquare
+  discriminants of the reply-containing triple involution products.  This fibre is the unique
+  clean/P reply on 24/28 q17 score-9 transitions, empty on the four exceptional fibres, and never
+  impure.  The `24+4` split is exactly prior-triple nonsplit versus split (zero versus two conic
+  fixed points).  Dropping primitivity gives five replies and loses P-purity.  C82 can count this exact
+  primitive-plus-three-quadratics packet; C80 still owes purity/descent before the score-9 base.
   A uniform quotient/response theorem,
   (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang

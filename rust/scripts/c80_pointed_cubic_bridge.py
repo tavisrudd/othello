@@ -10,7 +10,7 @@ import json
 import math
 import sys
 from collections import Counter
-from itertools import product
+from itertools import combinations, product
 from pathlib import Path
 
 
@@ -78,6 +78,32 @@ def word_trace_three(game, intruders):
     )
 
 
+def unordered_triple_fixed_counts(game, intruders):
+    permutations = [game.sigma_perm(intruder) for intruder in intruders]
+    return tuple(
+        sum(
+            permutations[i][permutations[j][permutations[k][point]]] == point
+            for point in game.params
+        )
+        for i, j, k in combinations(range(len(permutations)), 3)
+    )
+
+
+def triple_word_discriminant(q, first, second, third):
+    r, c = first
+    u, v = second
+    a, b = third
+    trace = (c * u - r * v + (r - u) * b - (c - v) * a) % q
+    determinant = (r * c - 1) * (u * v - 1) * (a * b - 1) % q
+    return (trace * trace - 4 * determinant) % q
+
+
+def fixed_count_from_discriminant(q, discriminant):
+    if discriminant == 0:
+        return 1
+    return 2 if pow(discriminant, (q - 1) // 2, q) == 1 else 0
+
+
 def quotient_collision(c77, q, s5, reply):
     directions = [c77.direction(reply, point, q) for point in s5]
     finite_nonzero = [value for value in directions if value not in (0, q)]
@@ -102,6 +128,9 @@ def q17_summary(rows_path: Path):
     steering = c31.Steering(game)
 
     profiles = Counter()
+    zero_triple_packets = Counter()
+    unrestricted_zero_triple_packets = Counter()
+    prior_triple_gate = Counter()
     candidates = []
     transitions = 0
     for mask, row in states:
@@ -115,16 +144,42 @@ def q17_summary(rows_path: Path):
                 geometry.cell(game, move),
             )
             packet = []
+            unrestricted_zero_triple = []
             for reply in geometry.bits(game.legal_mask(child) & ~game.conic_mask):
                 order = geometry.prod_order(game, move, reply)
+                intruders = (*geometry.intruders(game, child), reply)
+                triple_fixed_counts = unordered_triple_fixed_counts(game, intruders)
+                triple_discriminants = tuple(
+                    triple_word_discriminant(
+                        17, *(geometry.cell(game, intruders[index]) for index in triple)
+                    )
+                    for triple in combinations(range(len(intruders)), 3)
+                )
+                assert triple_fixed_counts == tuple(
+                    fixed_count_from_discriminant(17, discriminant)
+                    for discriminant in triple_discriminants
+                )
+                if not any(triple_fixed_counts):
+                    zero_grand = child | (1 << reply)
+                    zero_features = game.state_features(
+                        zero_grand, geometry.intruders(game, zero_grand)
+                    )
+                    unrestricted_zero_triple.append(
+                        (
+                            geometry.clean_empty(zero_features),
+                            not game.value(zero_grand),
+                            order in (16, 18),
+                        )
+                    )
                 if order not in (16, 18):
                     continue
                 grand = child | (1 << reply)
                 features = game.state_features(grand, geometry.intruders(game, grand))
-                intruders = (*geometry.intruders(game, child), reply)
                 moments = c79.permutation_moments(game, intruders)
                 direct_trace_three = word_trace_three(game, intruders)
                 assert moments[2] == direct_trace_three
+                triple_excess = moments[2] - (3 * len(intruders) - 2) * moments[0]
+                assert triple_excess == 6 * sum(triple_fixed_counts)
                 quotient_counts, factorial_third = quotient_collision(
                     c77, 17, s5, geometry.cell(game, reply)
                 )
@@ -140,6 +195,9 @@ def q17_summary(rows_path: Path):
                     "reply": list(geometry.cell(game, reply)),
                     "moments": list(moments),
                     "word_trace_three": direct_trace_three,
+                    "unordered_triple_fixed_counts": list(triple_fixed_counts),
+                    "unordered_triple_discriminants": list(triple_discriminants),
+                    "triple_word_excess": triple_excess,
                     "quotient_counts": [list(item) for item in quotient_counts],
                     "quotient_factorial_third": factorial_third,
                     "q3": q3,
@@ -151,9 +209,28 @@ def q17_summary(rows_path: Path):
                 candidates.append(record)
                 profiles[(moments[1], moments[2], q3, factorial_third, clean, p_value)] += 1
             assert len(packet) == 4
+            zero_triple = [
+                record for record in packet
+                if not any(record["unordered_triple_fixed_counts"])
+            ]
+            prior_fixed_counts = {
+                record["unordered_triple_fixed_counts"][0] for record in packet
+            }
+            assert len(prior_fixed_counts) == 1
+            prior_triple_gate[(next(iter(prior_fixed_counts)), len(zero_triple))] += 1
+            zero_triple_packets[(len(zero_triple), all(r["clean"] and r["p"] for r in zero_triple))] += 1
+            unrestricted_zero_triple_packets[
+                (
+                    len(unrestricted_zero_triple),
+                    all(clean for clean, _p, _primitive in unrestricted_zero_triple),
+                    all(p for _clean, p, _primitive in unrestricted_zero_triple),
+                    sum(primitive for _clean, _p, primitive in unrestricted_zero_triple),
+                )
+            ] += 1
 
     assert transitions == 28
     assert len(candidates) == 112
+    assert zero_triple_packets == Counter({(1, True): 24, (0, True): 4})
 
     same_trace_different_q3 = None
     same_q3_different_trace = None
@@ -192,7 +269,36 @@ def q17_summary(rows_path: Path):
         "primitive_candidates": len(candidates),
         "identity_checks": {
             "tr_B3_equals_ordered_triple_word_fixed_points": len(candidates),
+            "tr_B3_excess_equals_six_times_unordered_triple_fixed_points": len(candidates),
+            "triple_fixed_counts_equal_quadratic_discriminant_types": len(candidates),
             "Q3_iff_positive_third_factorial_quotient_collision": len(candidates),
+        },
+        "zero_triple_fixed_packet": {
+            "definition": "all four unordered triple products have no fixed conic parameter",
+            "reply_dependent_conditions": 3,
+            "unique_clean_reply_transitions": zero_triple_packets[(1, True)],
+            "empty_transitions": zero_triple_packets[(0, True)],
+            "impure_transitions": sum(
+                count for (size, pure), count in zero_triple_packets.items() if size and not pure
+            ),
+            "without_primitive_restriction": [
+                {
+                    "size": key[0],
+                    "all_clean": key[1],
+                    "all_p": key[2],
+                    "primitive_members": key[3],
+                    "transitions": count,
+                }
+                for key, count in sorted(unrestricted_zero_triple_packets.items())
+            ],
+            "prior_triple_gate": [
+                {
+                    "prior_triple_fixed_points": key[0],
+                    "packet_size": key[1],
+                    "transitions": count,
+                }
+                for key, count in sorted(prior_triple_gate.items())
+            ],
         },
         "moment_pair_is_value_pure_on_this_corpus": True,
         "clean_moment_pairs": clean_moment_pairs,

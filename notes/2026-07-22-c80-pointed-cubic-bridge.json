@@ -45,7 +45,9 @@
     ],
     "identity_checks": {
       "Q3_iff_positive_third_factorial_quotient_collision": 112,
-      "tr_B3_equals_ordered_triple_word_fixed_points": 112
+      "tr_B3_equals_ordered_triple_word_fixed_points": 112,
+      "tr_B3_excess_equals_six_times_unordered_triple_fixed_points": 112,
+      "triple_fixed_counts_equal_quadratic_discriminant_types": 112
     },
     "independence_witnesses": {
       "same_Q3_different_tr_B3": [
@@ -107,6 +109,19 @@
             8
           ],
           "root": "(0, 1, 2, 3, 6, 14)",
+          "triple_word_excess": 0,
+          "unordered_triple_discriminants": [
+            10,
+            14,
+            6,
+            11
+          ],
+          "unordered_triple_fixed_counts": [
+            0,
+            0,
+            0,
+            0
+          ],
           "word_trace_three": 60,
           "zone_edges": 23
         },
@@ -184,6 +199,19 @@
             12
           ],
           "root": "(0, 1, 2, 3, 6, 14)",
+          "triple_word_excess": 36,
+          "unordered_triple_discriminants": [
+            10,
+            16,
+            15,
+            13
+          ],
+          "unordered_triple_fixed_counts": [
+            0,
+            2,
+            2,
+            2
+          ],
           "word_trace_three": 96,
           "zone_edges": 13
         }
@@ -247,6 +275,19 @@
             8
           ],
           "root": "(0, 1, 2, 3, 6, 14)",
+          "triple_word_excess": 0,
+          "unordered_triple_discriminants": [
+            10,
+            14,
+            6,
+            11
+          ],
+          "unordered_triple_fixed_counts": [
+            0,
+            0,
+            0,
+            0
+          ],
           "word_trace_three": 60,
           "zone_edges": 23
         },
@@ -308,6 +349,19 @@
             14
           ],
           "root": "(0, 1, 2, 3, 6, 14)",
+          "triple_word_excess": 0,
+          "unordered_triple_discriminants": [
+            10,
+            12,
+            5,
+            6
+          ],
+          "unordered_triple_fixed_counts": [
+            0,
+            0,
+            0,
+            0
+          ],
           "word_trace_three": 60,
           "zone_edges": 23
         }
@@ -555,7 +609,42 @@
         "q3": true
       }
     ],
-    "score9_transitions": 28
+    "score9_transitions": 28,
+    "zero_triple_fixed_packet": {
+      "definition": "all four unordered triple products have no fixed conic parameter",
+      "empty_transitions": 4,
+      "impure_transitions": 0,
+      "prior_triple_gate": [
+        {
+          "packet_size": 1,
+          "prior_triple_fixed_points": 0,
+          "transitions": 24
+        },
+        {
+          "packet_size": 0,
+          "prior_triple_fixed_points": 2,
+          "transitions": 4
+        }
+      ],
+      "reply_dependent_conditions": 3,
+      "unique_clean_reply_transitions": 24,
+      "without_primitive_restriction": [
+        {
+          "all_clean": true,
+          "all_p": true,
+          "primitive_members": 0,
+          "size": 0,
+          "transitions": 4
+        },
+        {
+          "all_clean": false,
+          "all_p": false,
+          "primitive_members": 1,
+          "size": 5,
+          "transitions": 24
+        }
+      ]
+    }
   },
   "sources": {
     "notes/2026-07-22-c80-c447-cloud-packet.json": "1ef092406a5794987ed797aa1013597836d98eb0b39725eceac5b22a0463d548",

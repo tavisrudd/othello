@@ -328,6 +328,68 @@ nonclean response fibres or forces a survivor in a separately proved P-preservin
 placing both cubic quantities in a larger moment matrix would reproduce the classifier without
 providing C80(b).
 
+### A bounded generic response fibre inside the third word trace
+
+Expanding the third trace separates repeated and distinct involution indices.  For `k` intruders,
+write `f_i=#Fix(sigma_i)`.  Cyclic rotation and inversion preserve the fixed-point count of a
+triple product, so
+
+```text
+tr(B^3)
+  = (3k-2) sum_i f_i
+    + 6 sum_(i<j<l) #Fix(sigma_i sigma_j sigma_l).             (6)
+```
+
+The score-9 states have three old intruders and a candidate reply, hence `k=4`.  Formula (6) is
+verified by direct permutation composition on all 112 primitive candidates.  More importantly, it
+extracts a bounded reply condition: require all four unordered triple products to be fixed-point
+free.  One of these conditions concerns only the three old intruders; the other three constrain
+the reply.
+
+This condition is algebraic of bounded degree.  For intruders `x=(r,c)`, `y=(u,v)`, and candidate
+`z=(a,b)`, the fixed-point discriminant of `M_x M_y M_z` is
+
+```text
+T_xy(z)
+ = (cu-rv+(r-u)b-(c-v)a)^2
+   - 4(rc-1)(uv-1)(ab-1).                                    (7)
+```
+
+Over an odd field the triple product has `0,1,2` conic fixed points according as `T` is nonsquare,
+zero, or nonzero square.  Direct comparison of (7) with the permutation fixed sets succeeds for
+every unordered triple in all 112 candidates.
+
+Intersecting the three reply-dependent nonsquare conditions with C79's primitive opponent/reply
+orbital gives the first bounded response fibre with a structural game effect:
+
+```text
+Y_0(S,x) = { z legal off-conic :
+             ord(sigma_x sigma_z) in {q-1,q+1},
+             chi(T_ab(z))=chi(T_ac(z))=chi(T_bc(z))=-1 }.
+```
+
+Here `a,b,c` are the three old intruders and the context gate is
+`chi(T_ab(c))=-1`.  On the exact q=17 score-9 corpus, `Y_0` is a singleton clean/P reply in 24 of
+28 transitions, empty in the four known exceptional transitions, and never impure.  This is the
+generic `24+4` split in an explicit three-quadratic form suitable for a character/primitive-element
+sieve.  The split is exactly the context gate: the prior triple product has zero conic fixed points
+on all 24 generic transitions and two on all four exceptional transitions.  It is stronger than the
+moment lookup because it gives both the actual relational fibre to count and the intrinsic split
+of its exceptional base.
+
+Both ingredients are load-bearing.  Dropping the primitive orbital condition leaves five
+zero-triple replies in each of the 24 generic transitions, only one of them primitive, and the
+five-point fibre is neither clean-pure nor P-pure.  The triple nonsquare conditions alone therefore
+do not define a strategy.  Conversely the four primitive candidates without the triple conditions
+contain three decoys.  C82's count must address their intersection, not either marginal packet.
+
+This advances C80(a) only on the terminal score-9 stratum.  Clean means the reply empties the conic,
+has defect xor zero, and leaves the certified Grundy-zero zone, so descent is immediate there.  No
+claim is made that `Y_0` stays P-pure at earlier scores or for arbitrary q.  The next uniform gate
+is now precise: count `Y_0` when the prior-triple context is nonsplit, classify the square-product
+degeneracies of the three quadratics, and isolate the four exceptional relation fibres for C81 or a
+separate bounded base lemma.
+
 There is no intrinsic QR label on the two q=11 connection orbitals.  Writing their offsets requires
 a generator of `C5`; inversion preserves the square class of their separation, but the roof Galois
 change `g -> g^2` swaps square and nonsquare.  Thus QR coordinates are useful after a frozen
@@ -364,16 +426,21 @@ intersection, all four pointed states, every opponent branch, and the `C5` orbit
 - **Settled by the pointed cubic audit:** the shared word “cubic” does not mean that `tr(B^3)` and
   `Q3` are the same Terwilliger coordinate.  They live on different sorts and neither determines
   the other on the exact q=17 score-9 corpus.
-- **Still open — moment-pair purity:** `(tr(B^2),tr(B^3))` exactly recognizes the clean reply on the
-  tested score-9 stratum, but no structural reason or q-independent feasible region is known.  The
-  evidence gate is a symbolic trace/intersection calculation beyond q=17; absent that, it remains
-  a finite base certificate.
+- **Settled by the `ej` trace expansion:** the q17 moment-pair purity is not an opaque numerical
+  coincidence.  Equation (6) reduces its cubic part to four triple-product fixed-point counts, and
+  equation (7) makes the three reply-dependent conditions explicit quadratic discriminants.  Their
+  intersection with the primitive orbital is the P-pure singleton fibre `Y_0` on 24/28 transitions;
+  the other four are exactly the split prior-triple context, not an unlabelled exception set.
+- **Still open — generic purity:** no q-independent theorem says that every survivor of `Y_0` is
+  clean/P before the terminal score-9 layer.  The evidence gate is an exact structural implication
+  from the three nonsquare triple products plus primitive order to a decreasing game class.
 - **Still open — two-sorted coupling:** no canonical incidence bimodule has yet been shown to carry
   both conic-word traces and reply-pencil energy while preserving P/N recursion.  This is owned by
   C80's response-packet/descent theorem, not by an abstract SDP construction.
-- **Still open — abundance:** neither cubic statistic proves that a P-preserving response fibre is
-  nonempty for arbitrary odd q.  C82 remains gated on specifying such a bounded-condition fibre;
-  characteristic-5/7 degeneracies remain C81's branch.
+- **Still open — abundance, now precisely posed:** C82 can count the explicitly specified
+  primitive-plus-three-nonsquare fibre `Y_0`; it must classify square-product degeneracies and beat
+  the legal-point exclusions.  The four empty q17 relation fibres and characteristic-5/7
+  degeneracies remain the exceptional branch rather than evidence for generic nonemptiness.
 
 ## Reproduction
 
