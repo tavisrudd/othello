@@ -142,6 +142,14 @@ viability, not a recitation of implementation status.
 cheap upgrades, implications of incidental findings, and doors the result opens — not a restatement
 of the plan.
 
+Before the final report for every substantial math-research or proof C-item, run at least one
+explicit `ej` closeout pass after the main acceptance gate has passed. Do the free or cheap
+task-owned upgrades it exposes, then add or refresh a **Mystery ledger** in the dated task report:
+list each surprising or unexplained feature, mark what the `ej` pass settled, and state the exact
+evidence gap, gate, or owning successor for everything still open. Say explicitly when no genuine
+mystery remains; do not manufacture one. Apply the discovery-track discriminator as usual, and
+revalidate and commit any closeout changes before sending the final task report.
+
 `aa` means “alt-attacks”: when a proof is stuck, lay out distinct alternative attack routes instead
 of pushing harder on the current one.
 
