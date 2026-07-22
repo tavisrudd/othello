@@ -55,6 +55,28 @@ against the exhaustively enumerated minimum-weight words.  Thus at `q=7` the geo
 entire minimum-word system on each side.  At `q=11` it supplies a distinguished 22-word subset on
 each side; no orbit or equivariance assertion about those subsets is made here.
 
+Passing from scalar-paired words to supports sharpens the `q=11` row to an exact `11+55=66`
+census: there are 66 minimum-word supports, the eleven frozen incidence rows supply eleven of
+them, and 55 remain.  The equality `55=C(11,2)` and its match with C450's disjoint
+relation-support size are exact numerical coincidences recorded as a mystery below, not a proved
+equivariant identification.
+
+## Extra-juice dual-coset structure
+
+At both primes the dual code is not merely orthogonal to the perfect code: it is contained in it
+with codimension one, and the all-one word splits the quotient:
+
+```text
+C_7  = C_7^perp direct-sum <1> over F_2,
+C_11 = C_11^perp direct-sum <1> over F_3.
+```
+
+For `q=7` the nonzero coset has enumerator `7z^3+z^7`.  For `q=11`, each nonzero all-one coset has
+enumerator `66z^5+165z^8+12z^11`.  Hence the two cosets account separately for the 132 minimum
+words and split the 24 full-support words as `12+12`.  The primary generator and independent
+replay verify the literal subcode inclusion, the all-one representative, every coset word, and
+the union equality.
+
 ## Explicit binary Hamming equivalence
 
 The row-reduced generator obtained from the `q=7` disjointness incidence matrix is
@@ -133,3 +155,25 @@ recounts the minimum-word row coverage, and checks the recorded Hamming matrix e
 
 The trusted boundary is exact integer and prime-field arithmetic plus the hash-pinned C406, C450,
 and C452 certificates.  The output is deterministic and timestamp-free.
+
+The load-bearing byte counts are: primary generator 15,378; independent replay 9,238; canonical
+JSON 28,930; C452 input 22,113; C450 input 46,770; and C406 input 25,443.  The certificate records
+the complete pinned input hashes, and the checksum manifest records complete hashes for the report,
+both executables, and the JSON output.
+
+## Mystery ledger
+
+- **Settled by extra juice — the complementary rank drops.** The shared-edge spans are the exact
+  duals and satisfy `C=C^perp direct-sum <1>`; their dimensions, enumerators, and all-one cosets now
+  explain the full modular rank/nullity pattern rather than merely matching it.
+- **Open — the `11+55=66` minimum-support split.** Exact enumeration shows 66 ternary weight-five
+  supports, of which the frozen geometry selects eleven and leaves 55.  The residual 55 equals
+  both `C(11,2)` and C450's disjoint relation-support count.  What is missing is an explicit
+  support bijection and proof of compatibility with the frozen `L_2(11)` action; no `M_11`, Witt
+  design, or equivariance claim is made.  This belongs to the task card's pre-allocation-gated
+  symmetry successor, not C464.
+- **Open — the 24 full-support words.** The dual-coset split explains them as 12 words in each
+  nonzero all-one coset, but does not explain the 12 scalar pairs geometrically.  The same gated
+  symmetry computation is the exact evidence gap.
+- **No other genuine C464 mystery remains.** Rank, distance, complete distributions, perfection,
+  duality, binary equivalence, row coverage, and dual-coset structure all pass exact replay.

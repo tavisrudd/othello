@@ -178,12 +178,15 @@ def relation_record(matrix: list[list[int]], p: int) -> dict[str, object]:
     nonzero_weights = [int(w) for w, count in distribution.items() if int(w) and count]
     minimum_distance = min(nonzero_weights)
     minimum_words = {tuple(word) for word in words if sum(x != 0 for x in word) == minimum_distance}
+    minimum_supports = {tuple(i for i, value in enumerate(word) if value)
+                        for word in minimum_words}
     row_multiples = {
         tuple((scalar * x) % p for x in row)
         for row in matrix
         for scalar in range(1, p)
     }
     rows_are_minimum = row_multiples <= minimum_words
+    row_supports = {tuple(i for i, value in enumerate(word) if value) for word in row_multiples}
     common = math.gcd(len(row_multiples), len(minimum_words))
     return {
         "code_size": len(words),
@@ -199,6 +202,9 @@ def relation_record(matrix: list[list[int]], p: int) -> dict[str, object]:
                 len(row_multiples) // common,
                 len(minimum_words) // common,
             ],
+            "distinct_minimum_word_supports": len(minimum_supports),
+            "incidence_row_supports": len(row_supports),
+            "remaining_minimum_word_supports": len(minimum_supports - row_supports),
             "total_minimum_words": len(minimum_words),
         },
         "length": len(matrix),
@@ -265,9 +271,30 @@ def build() -> dict[str, object]:
         shared_transform = macwilliams_transform(shared_distribution, q, p)
         disjoint_coefficients = [disjoint_distribution[str(i)] for i in range(q + 1)]
         shared_coefficients = [shared_distribution[str(i)] for i in range(q + 1)]
+        disjoint_words = {tuple(word) for word in enumerate_code(disjoint_generator, p)}
+        shared_words = {tuple(word) for word in enumerate_code(shared_generator, p)}
+        all_one = tuple([1] * q)
+        quotient_cosets = []
+        quotient_union = set()
+        for scalar in range(p):
+            coset = {tuple((value + scalar) % p for value in word) for word in shared_words}
+            quotient_union |= coset
+            quotient_cosets.append({
+                "all_one_scalar": scalar,
+                "weight_distribution_all_weights": weight_distribution([list(word) for word in coset], q),
+            })
+        dual_is_subcode = shared_words <= disjoint_words
+        all_one_splits = all_one in disjoint_words and all_one not in shared_words
+        quotient_exhausts = quotient_union == disjoint_words
+        if not (dual_is_subcode and all_one_splits and quotient_exhausts):
+            raise AssertionError(f"q={q}: failed C=C^perp direct-sum <1> check")
         cases.append({
             "design_complement_pair": {
+                "all_one_quotient_coset_distributions": quotient_cosets,
+                "all_one_word_generates_quotient": all_one_splits,
+                "direct_sum_with_all_one_line": True,
                 "dimensions_sum_to_length": dimensions_sum,
+                "dual_is_subcode_of_disjoint_span": dual_is_subcode,
                 "macwilliams_disjoint_to_shared_coefficients": disjoint_transform,
                 "macwilliams_shared_to_disjoint_coefficients": shared_transform,
                 "macwilliams_transforms_agree": (
@@ -276,6 +303,8 @@ def build() -> dict[str, object]:
                 ),
                 "shared_edge_span_equals_disjoint_dual": orthogonal and dimensions_sum,
                 "spans_are_mutually_orthogonal": orthogonal,
+                "quotient_dimension": 1,
+                "quotient_cosets_exhaust_disjoint_span": quotient_exhausts,
             },
             "field_order": p,
             "frozen_cross_disjointness_difference_set": difference_set,

@@ -114,11 +114,15 @@ def main() -> None:
             minimum = min(int(w) for w, count in weights.items() if int(w) and count)
             assert minimum == recorded["minimum_distance"]
             minimum_words = {word for word in words if sum(x != 0 for x in word) == minimum}
+            minimum_supports = {tuple(i for i, value in enumerate(word) if value)
+                                for word in minimum_words}
             row_multiples = {
                 tuple((scalar * x) % p for x in row)
                 for row in matrix for scalar in range(1, p)
             }
             coverage = recorded["incidence_minimum_word_coverage"]
+            row_supports = {tuple(i for i, value in enumerate(word) if value)
+                            for word in row_multiples}
             assert row_multiples <= minimum_words
             assert coverage["distinct_nonzero_scalar_multiples"] == len(row_multiples)
             assert coverage["total_minimum_words"] == len(minimum_words)
@@ -127,6 +131,9 @@ def main() -> None:
                 len(row_multiples) // divisor, len(minimum_words) // divisor
             ]
             assert coverage["exhausts_all_minimum_words"] == (row_multiples == minimum_words)
+            assert coverage["distinct_minimum_word_supports"] == len(minimum_supports)
+            assert coverage["incidence_row_supports"] == len(row_supports)
+            assert coverage["remaining_minimum_word_supports"] == len(minimum_supports - row_supports)
             radius = (minimum - 1) // 2
             terms = [math.comb(q, i) * (p - 1) ** i for i in range(radius + 1)]
             sphere = recorded["sphere_packing"]
@@ -147,6 +154,18 @@ def main() -> None:
         disjoint_counts = case["relations"]["disjoint"]["weight_distribution_all_weights"]
         shared_counts = case["relations"]["shared_edge"]["weight_distribution_all_weights"]
         pair = case["design_complement_pair"]
+        all_one = tuple([1] * q)
+        assert replay_spans["shared_edge"] <= replay_spans["disjoint"]
+        assert all_one in replay_spans["disjoint"] and all_one not in replay_spans["shared_edge"]
+        quotient_union = set()
+        for entry in pair["all_one_quotient_coset_distributions"]:
+            scalar = entry["all_one_scalar"]
+            coset = {tuple((value + scalar) % p for value in word)
+                     for word in replay_spans["shared_edge"]}
+            quotient_union |= coset
+            assert distribution(coset, q) == entry["weight_distribution_all_weights"]
+        assert quotient_union == replay_spans["disjoint"]
+        assert pair["direct_sum_with_all_one_line"] and pair["quotient_dimension"] == 1
         assert macwilliams(disjoint_counts, q, p) == [shared_counts[str(i)] for i in range(q + 1)]
         assert macwilliams(shared_counts, q, p) == [disjoint_counts[str(i)] for i in range(q + 1)]
         assert pair["macwilliams_disjoint_to_shared_coefficients"] == macwilliams(disjoint_counts, q, p)
