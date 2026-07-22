@@ -4,18 +4,20 @@
 
 ## Entry gate
 
-C482 supplies a rational three-centre inverse and the complete list of its excluded factors.
+C482 supplies a rational four-centre inverse, the two/three-centre residual families, and the
+complete list of excluded factors.
 
 ## Exact domain
 
-The degeneracy divisor of the C482 reconstruction map and the two-centre compatibility map for
-six-arcs.  Enumerate theorem-derived strata only; do not enlarge the finite-field census.
+The degeneracy divisor of the C482 four-centre reconstruction map, the two/three-centre residual
+families, and the extra equations supplied when a complete ambient child `L=U(A)` is retained.
+Enumerate theorem-derived strata only; do not enlarge the finite-field census.
 
 ## Target
 
 Factor the reconstruction discriminant intrinsically, classify its geometric fibre types, and
-determine exactly when two centres suffice, three are necessary, or coherent reconstruction has a
-genuine residual fibre.
+determine exactly when child-relative side information makes two or three centres sufficient, and
+when abstract coherent projections retain a genuine residual fibre.
 
 ## Work package
 
@@ -25,7 +27,8 @@ genuine residual fibre.
    fibres component by component.
 3. Re-evaluate the frozen C478 child-subset orbits as regression controls and explain the sharp
    `3 / 3 / 2 / 3` thresholds structurally.
-4. State the weakest exact hypotheses for unique three-centre reconstruction.
+4. Separate pure four-projection reconstruction from child-relative two/three-fibre recovery, and
+   state the weakest exact hypotheses for each.
 
 ## Acceptance
 

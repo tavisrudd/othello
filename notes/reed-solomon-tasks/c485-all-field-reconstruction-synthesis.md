@@ -4,8 +4,8 @@
 
 ## Entry gate
 
-C481 proves the projection-atlas dictionary, C482 the generic inverse, C483 the exceptional
-classification, and C484 semilinear descent.
+C481 proves the projection-atlas dictionary, C482 the four-centre generic inverse, C483 the
+exceptional classification, and C484 semilinear descent.
 
 ## Exact domain
 
@@ -15,10 +15,11 @@ required specialization through C475; arbitrary higher dimension is excluded.
 
 ## Target
 
-State and prove the all-field reconstruction theorem: coherent atlases at at most three suitably
-positioned deepest centres reconstruct the parent outside an explicit discriminant, with every
-exceptional fibre and semilinear ambiguity classified.  Integrate the C475 rank-two/rank-one
-syndrome reconstruction into the same theorem package.
+State and prove the all-field reconstruction theorem with separate clauses for reconstruction
+from four abstract coherent projections and for child-relative reconstruction from at most three
+suitably positioned deepest centres plus the ambient child.  Classify every exceptional fibre and
+semilinear ambiguity, and integrate the C475 rank-two/rank-one syndrome reconstruction into the
+same theorem package.
 
 ## Work package
 
