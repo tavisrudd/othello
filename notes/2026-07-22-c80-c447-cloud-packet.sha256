@@ -1,0 +1,4 @@
+04c0e69d07e8d909d8493f465f6969cd3bfd185ec1e1523cec62614e8ee9d23c  notes/2026-07-12-c80-bulk-exhaustion-probe.md
+07bfc11beafdb3ca0b625e1ff96aaa561e7944fd1eee737bf2c63350aaa95af1  rust/scripts/c80_c447_cloud_packet.py
+137c49941d8cd27d8d3f22c865d3d9b01327b5a54216bad355224814683d52aa  rust/scripts/c80_c447_cloud_packet_replay.py
+05ceac6cc7d10f5c1b0b2919717e2f421b8cd1954dd0580a1d4c55972f000709  notes/2026-07-22-c80-c447-cloud-packet.json

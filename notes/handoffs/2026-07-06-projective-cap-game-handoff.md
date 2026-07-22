@@ -577,7 +577,13 @@ task list.  Current high-value items:
 
 - **C80/C81/C82 (game-side follow-ups to C79's bulk-gap spec):** **C80** — game-side probe; part
   (c), the drain resource, is proven+verified (`|live conic|` drops by `1+deg` per conic move,
-  [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); (a) abundance / (b) descent open. **C81** —
+  [report](../2026-07-12-c80-bulk-exhaustion-probe.md)); the C447/C460 q=11 five-point cloud packet
+  has exact branch law `12 killed + 5 live/bad + 5 live/good`, with good/bad whole `C5` orbits;
+  the intrinsic edge quotient `u=XZ/Y²` separates them by Legendre class, and the full 22-move
+  winning-response graph has exactly two perfect matchings.  Its square `C5` fixes both while the
+  nonsquare `D10` coset swaps endpoint and matching, realizing the C448 calibration torsor at the
+  strategy-certificate level.  A uniform quotient/response theorem,
+  (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang
   counting, gated on C80's packet. **C83** — the coarsest-bisimulation measurement is done (29 at
   q=11 → 65 at q=13, growing; q=17 deferred, canon-bound): a bounded raw-state automaton is

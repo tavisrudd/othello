@@ -1,0 +1,4853 @@
+{
+  "classes": [
+    {
+      "class": 4,
+      "cloud_intersection_size": 5,
+      "cloud_sizes": [
+        15,
+        15
+      ],
+      "endpoints": [
+        {
+          "branches": [
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                2,
+                7
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                2,
+                9
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                4,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 0,
+              "opponent": [
+                4,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                4,
+                6
+              ],
+              "packet_replies": [
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                4,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                5,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                5,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                6,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                6,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                6,
+                9
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                6,
+                10
+              ],
+              "packet_replies": [
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                7,
+                3
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                7,
+                5
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                7,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                7,
+                9
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                8,
+                3
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                8,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                8,
+                9
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                9,
+                3
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  6
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                9,
+                7
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  6
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  5,
+                  6
+                ],
+                [
+                  7,
+                  9
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                9,
+                10
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": []
+            }
+          ],
+          "candidate_winning_histogram": {
+            "0/0": 12,
+            "2/0": 5,
+            "2/2": 5
+          },
+          "edge_quotient_rule": {
+            "0/0": [
+              0,
+              1,
+              "inf"
+            ],
+            "2/0": [
+              9
+            ],
+            "2/2": [
+              8
+            ]
+          },
+          "endpoint_parameter": 1,
+          "legal_opponent_moves": 22,
+          "square_c5_opponent_orbits": [
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  2,
+                  7
+                ]
+              ],
+              "size": 1
+            },
+            {
+              "candidate_winning_signature": "2/2",
+              "opponents": [
+                [
+                  2,
+                  9
+                ],
+                [
+                  6,
+                  9
+                ],
+                [
+                  6,
+                  10
+                ],
+                [
+                  7,
+                  3
+                ],
+                [
+                  9,
+                  7
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  5
+                ],
+                [
+                  7,
+                  6
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  4,
+                  5
+                ]
+              ],
+              "size": 1
+            },
+            {
+              "candidate_winning_signature": "2/0",
+              "opponents": [
+                [
+                  4,
+                  6
+                ],
+                [
+                  7,
+                  5
+                ],
+                [
+                  8,
+                  3
+                ],
+                [
+                  9,
+                  3
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "size": 5
+            }
+          ],
+          "winning_response_graph": {
+            "alternating_cycle_vertices": [
+              [
+                2,
+                9
+              ],
+              [
+                4,
+                10
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                6,
+                9
+              ],
+              [
+                6,
+                10
+              ],
+              [
+                7,
+                3
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                9,
+                7
+              ]
+            ],
+            "common_edge_count": 6,
+            "component_sizes": [
+              22
+            ],
+            "degree_histogram": {
+              "1": 1,
+              "2": 10,
+              "4": 5,
+              "6": 1,
+              "7": 5
+            },
+            "edges": 41,
+            "perfect_matching_count": 2,
+            "perfect_matchings": [
+              [
+                [
+                  [
+                    2,
+                    7
+                  ],
+                  [
+                    4,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    9
+                  ],
+                  [
+                    6,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    8,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    6
+                  ],
+                  [
+                    6,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    10
+                  ],
+                  [
+                    7,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    6
+                  ],
+                  [
+                    6,
+                    9
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    10
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    10
+                  ],
+                  [
+                    8,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    5
+                  ],
+                  [
+                    8,
+                    9
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    6
+                  ],
+                  [
+                    9,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    9
+                  ],
+                  [
+                    9,
+                    7
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    2,
+                    7
+                  ],
+                  [
+                    4,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    9
+                  ],
+                  [
+                    8,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    8,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    6
+                  ],
+                  [
+                    6,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    10
+                  ],
+                  [
+                    6,
+                    9
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    6
+                  ],
+                  [
+                    9,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    10
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    2
+                  ],
+                  [
+                    7,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    10
+                  ],
+                  [
+                    7,
+                    9
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    5
+                  ],
+                  [
+                    8,
+                    9
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    6
+                  ],
+                  [
+                    9,
+                    10
+                  ]
+                ]
+              ]
+            ],
+            "quotient_edge_counts": {
+              "0-inf": 1,
+              "1-1": 10,
+              "1-8": 5,
+              "1-9": 5,
+              "1-inf": 5,
+              "8-9": 5,
+              "8-inf": 10
+            },
+            "vertices": 22,
+            "winning_edges": [
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  4,
+                  2
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  4,
+                  5
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  5,
+                  10
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  2,
+                  9
+                ],
+                [
+                  4,
+                  2
+                ]
+              ],
+              [
+                [
+                  2,
+                  9
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  2,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              [
+                [
+                  2,
+                  9
+                ],
+                [
+                  9,
+                  3
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  10
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  8,
+                  3
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  7,
+                  3
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  9
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  7,
+                  3
+                ]
+              ],
+              [
+                [
+                  5,
+                  6
+                ],
+                [
+                  6,
+                  9
+                ]
+              ],
+              [
+                [
+                  5,
+                  6
+                ],
+                [
+                  9,
+                  7
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  9
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  9,
+                  3
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  7,
+                  3
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  9,
+                  7
+                ]
+              ],
+              [
+                [
+                  6,
+                  9
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  6,
+                  10
+                ],
+                [
+                  7,
+                  5
+                ]
+              ],
+              [
+                [
+                  6,
+                  10
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  10
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              [
+                [
+                  6,
+                  10
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              [
+                [
+                  7,
+                  3
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  7,
+                  5
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  7,
+                  6
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  7,
+                  6
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  7,
+                  9
+                ],
+                [
+                  9,
+                  7
+                ]
+              ],
+              [
+                [
+                  8,
+                  3
+                ],
+                [
+                  9,
+                  7
+                ]
+              ]
+            ]
+          },
+          "witness_cell": [
+            10,
+            8
+          ]
+        },
+        {
+          "branches": [
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                4,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 0,
+              "opponent": [
+                4,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                4,
+                6
+              ],
+              "packet_replies": [
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                4,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                5,
+                2
+              ],
+              "packet_replies": [
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                5,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                5,
+                8
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                5,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                6,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                6,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                7,
+                5
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                7,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                7,
+                9
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                8,
+                2
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                8,
+                3
+              ],
+              "packet_replies": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                8,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                8,
+                9
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                9,
+                3
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  6
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                9,
+                6
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                9,
+                10
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                10,
+                3
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  6
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  5,
+                  6
+                ],
+                [
+                  7,
+                  9
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                10,
+                8
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            }
+          ],
+          "candidate_winning_histogram": {
+            "0/0": 12,
+            "2/0": 5,
+            "2/2": 5
+          },
+          "edge_quotient_rule": {
+            "0/0": [
+              0,
+              1,
+              "inf"
+            ],
+            "2/0": [
+              9
+            ],
+            "2/2": [
+              8
+            ]
+          },
+          "endpoint_parameter": 4,
+          "legal_opponent_moves": 22,
+          "square_c5_opponent_orbits": [
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  5
+                ],
+                [
+                  7,
+                  6
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  4,
+                  5
+                ]
+              ],
+              "size": 1
+            },
+            {
+              "candidate_winning_signature": "2/0",
+              "opponents": [
+                [
+                  4,
+                  6
+                ],
+                [
+                  7,
+                  5
+                ],
+                [
+                  8,
+                  3
+                ],
+                [
+                  9,
+                  3
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  7,
+                  9
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "2/2",
+              "opponents": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  8
+                ],
+                [
+                  8,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ],
+                [
+                  10,
+                  3
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  10,
+                  8
+                ]
+              ],
+              "size": 1
+            }
+          ],
+          "winning_response_graph": {
+            "alternating_cycle_vertices": [
+              [
+                4,
+                10
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                6
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                8,
+                2
+              ],
+              [
+                8,
+                5
+              ],
+              [
+                9,
+                6
+              ],
+              [
+                10,
+                3
+              ]
+            ],
+            "common_edge_count": 6,
+            "component_sizes": [
+              22
+            ],
+            "degree_histogram": {
+              "1": 1,
+              "2": 10,
+              "4": 5,
+              "6": 1,
+              "7": 5
+            },
+            "edges": 41,
+            "perfect_matching_count": 2,
+            "perfect_matchings": [
+              [
+                [
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    7,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    5
+                  ],
+                  [
+                    10,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    6
+                  ],
+                  [
+                    5,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    10
+                  ],
+                  [
+                    5,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    2
+                  ],
+                  [
+                    8,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    6
+                  ],
+                  [
+                    8,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    2
+                  ],
+                  [
+                    9,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    5
+                  ],
+                  [
+                    9,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    6
+                  ],
+                  [
+                    8,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    9
+                  ],
+                  [
+                    10,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    8,
+                    9
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    4,
+                    2
+                  ],
+                  [
+                    7,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    5
+                  ],
+                  [
+                    10,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    6
+                  ],
+                  [
+                    5,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    10
+                  ],
+                  [
+                    8,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    2
+                  ],
+                  [
+                    7,
+                    9
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    6
+                  ],
+                  [
+                    10,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    8
+                  ],
+                  [
+                    6,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    5
+                  ],
+                  [
+                    9,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    6
+                  ],
+                  [
+                    8,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    8,
+                    5
+                  ],
+                  [
+                    9,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    8,
+                    9
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "quotient_edge_counts": {
+              "0-inf": 1,
+              "1-1": 10,
+              "1-8": 5,
+              "1-9": 5,
+              "1-inf": 5,
+              "8-9": 5,
+              "8-inf": 10
+            },
+            "vertices": 22,
+            "winning_edges": [
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  5,
+                  10
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  7,
+                  5
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  10,
+                  3
+                ]
+              ],
+              [
+                [
+                  4,
+                  2
+                ],
+                [
+                  10,
+                  8
+                ]
+              ],
+              [
+                [
+                  4,
+                  5
+                ],
+                [
+                  10,
+                  8
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  10
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  8,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  5,
+                  8
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  8,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  7,
+                  9
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  8,
+                  3
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  5,
+                  6
+                ],
+                [
+                  8,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  6
+                ],
+                [
+                  10,
+                  3
+                ]
+              ],
+              [
+                [
+                  5,
+                  8
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  8
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  5,
+                  8
+                ],
+                [
+                  9,
+                  3
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  5
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  10,
+                  8
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  7,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  6,
+                  5
+                ],
+                [
+                  10,
+                  8
+                ]
+              ],
+              [
+                [
+                  7,
+                  5
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  7,
+                  6
+                ],
+                [
+                  8,
+                  2
+                ]
+              ],
+              [
+                [
+                  7,
+                  6
+                ],
+                [
+                  8,
+                  3
+                ]
+              ],
+              [
+                [
+                  7,
+                  6
+                ],
+                [
+                  8,
+                  9
+                ]
+              ],
+              [
+                [
+                  7,
+                  6
+                ],
+                [
+                  10,
+                  8
+                ]
+              ],
+              [
+                [
+                  7,
+                  9
+                ],
+                [
+                  10,
+                  3
+                ]
+              ],
+              [
+                [
+                  8,
+                  5
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  8,
+                  9
+                ],
+                [
+                  9,
+                  3
+                ]
+              ],
+              [
+                [
+                  8,
+                  9
+                ],
+                [
+                  10,
+                  8
+                ]
+              ],
+              [
+                [
+                  9,
+                  10
+                ],
+                [
+                  10,
+                  3
+                ]
+              ]
+            ]
+          },
+          "witness_cell": [
+            2,
+            7
+          ]
+        }
+      ],
+      "packet_cells": [
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          5
+        ]
+      ],
+      "response_matching_action": {
+        "global_calibration_count": 2,
+        "nonsquare_d10_coset_swaps_endpoint_and_matching": true,
+        "square_c5_fixes_each_matching": true
+      }
+    },
+    {
+      "class": 7,
+      "cloud_intersection_size": 5,
+      "cloud_sizes": [
+        15,
+        15
+      ],
+      "endpoints": [
+        {
+          "branches": [
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                2,
+                3
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                2,
+                8
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                2,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                4,
+                3
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                4,
+                6
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  10,
+                  7
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                4,
+                10
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                5,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                5,
+                7
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                5,
+                8
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  10,
+                  7
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                5,
+                10
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                6,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                6,
+                3
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                8,
+                5
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                8,
+                6
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 0,
+              "opponent": [
+                9,
+                3
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                9,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                9,
+                8
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                9,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                10,
+                2
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                10,
+                5
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                10,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                10,
+                7
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            }
+          ],
+          "candidate_winning_histogram": {
+            "0/0": 12,
+            "2/0": 5,
+            "2/2": 5
+          },
+          "edge_quotient_rule": {
+            "0/0": [
+              0,
+              1,
+              "inf"
+            ],
+            "2/0": [
+              9
+            ],
+            "2/2": [
+              8
+            ]
+          },
+          "endpoint_parameter": 3,
+          "legal_opponent_moves": 22,
+          "square_c5_opponent_orbits": [
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  2,
+                  3
+                ],
+                [
+                  5,
+                  7
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  9,
+                  10
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "2/0",
+              "opponents": [
+                [
+                  2,
+                  8
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  10
+                ],
+                [
+                  9,
+                  8
+                ],
+                [
+                  10,
+                  2
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "2/2",
+              "opponents": [
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  8
+                ],
+                [
+                  5,
+                  10
+                ],
+                [
+                  8,
+                  6
+                ],
+                [
+                  10,
+                  5
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  8,
+                  5
+                ]
+              ],
+              "size": 1
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  9,
+                  3
+                ]
+              ],
+              "size": 1
+            }
+          ],
+          "winning_response_graph": {
+            "alternating_cycle_vertices": [
+              [
+                2,
+                10
+              ],
+              [
+                4,
+                6
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                5,
+                8
+              ],
+              [
+                5,
+                10
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                8,
+                6
+              ],
+              [
+                9,
+                6
+              ],
+              [
+                10,
+                5
+              ],
+              [
+                10,
+                7
+              ]
+            ],
+            "common_edge_count": 6,
+            "component_sizes": [
+              22
+            ],
+            "degree_histogram": {
+              "1": 1,
+              "2": 10,
+              "4": 5,
+              "6": 1,
+              "7": 5
+            },
+            "edges": 41,
+            "perfect_matching_count": 2,
+            "perfect_matchings": [
+              [
+                [
+                  [
+                    2,
+                    3
+                  ],
+                  [
+                    10,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    8
+                  ],
+                  [
+                    9,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    10
+                  ],
+                  [
+                    5,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    3
+                  ],
+                  [
+                    10,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    6
+                  ],
+                  [
+                    10,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    10
+                  ],
+                  [
+                    6,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    2
+                  ],
+                  [
+                    8,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    7
+                  ],
+                  [
+                    9,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    10
+                  ],
+                  [
+                    6,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    8,
+                    5
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    6
+                  ],
+                  [
+                    10,
+                    5
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    2,
+                    3
+                  ],
+                  [
+                    10,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    8
+                  ],
+                  [
+                    9,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    10
+                  ],
+                  [
+                    8,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    3
+                  ],
+                  [
+                    10,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    6
+                  ],
+                  [
+                    6,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    10
+                  ],
+                  [
+                    6,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    2
+                  ],
+                  [
+                    10,
+                    5
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    7
+                  ],
+                  [
+                    9,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    8
+                  ],
+                  [
+                    10,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    10
+                  ],
+                  [
+                    9,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    8,
+                    5
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "quotient_edge_counts": {
+              "0-inf": 1,
+              "1-1": 10,
+              "1-8": 5,
+              "1-9": 5,
+              "1-inf": 5,
+              "8-9": 5,
+              "8-inf": 10
+            },
+            "vertices": 22,
+            "winning_edges": [
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  5,
+                  7
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  10,
+                  2
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  10,
+                  5
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  8
+                ],
+                [
+                  4,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  8
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  8
+                ]
+              ],
+              [
+                [
+                  2,
+                  10
+                ],
+                [
+                  8,
+                  6
+                ]
+              ],
+              [
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  10
+                ]
+              ],
+              [
+                [
+                  4,
+                  3
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  5,
+                  7
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  6,
+                  3
+                ]
+              ],
+              [
+                [
+                  4,
+                  6
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  8,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  8,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  10,
+                  5
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  9,
+                  8
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  8
+                ],
+                [
+                  10,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  8
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  5,
+                  8
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  6,
+                  3
+                ]
+              ],
+              [
+                [
+                  5,
+                  10
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  8,
+                  5
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  8,
+                  5
+                ],
+                [
+                  9,
+                  3
+                ]
+              ],
+              [
+                [
+                  8,
+                  5
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  8,
+                  5
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  8,
+                  6
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  9,
+                  6
+                ],
+                [
+                  10,
+                  5
+                ]
+              ],
+              [
+                [
+                  9,
+                  8
+                ],
+                [
+                  10,
+                  5
+                ]
+              ],
+              [
+                [
+                  9,
+                  10
+                ],
+                [
+                  10,
+                  6
+                ]
+              ]
+            ]
+          },
+          "witness_cell": [
+            7,
+            4
+          ]
+        },
+        {
+          "branches": [
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                2,
+                3
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                2,
+                7
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                2,
+                8
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                2,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                4,
+                3
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                4,
+                7
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                4,
+                10
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                5,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                5,
+                7
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                6,
+                2
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                6,
+                3
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                6,
+                4
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  10,
+                  7
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                6,
+                8
+              ],
+              "packet_replies": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  9,
+                  6
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": 8,
+              "opponent": [
+                7,
+                2
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  10,
+                  7
+                ]
+              ]
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                7,
+                4
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 0,
+              "opponent": [
+                9,
+                3
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                9,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                9,
+                8
+              ],
+              "packet_replies": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                9,
+                10
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 9,
+              "opponent": [
+                10,
+                2
+              ],
+              "packet_replies": [
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": 1,
+              "opponent": [
+                10,
+                6
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            },
+            {
+              "edge_quotient_u": "inf",
+              "opponent": [
+                10,
+                7
+              ],
+              "packet_replies": [],
+              "winning_packet_replies": []
+            }
+          ],
+          "candidate_winning_histogram": {
+            "0/0": 12,
+            "2/0": 5,
+            "2/2": 5
+          },
+          "edge_quotient_rule": {
+            "0/0": [
+              0,
+              1,
+              "inf"
+            ],
+            "2/0": [
+              9
+            ],
+            "2/2": [
+              8
+            ]
+          },
+          "endpoint_parameter": 4,
+          "legal_opponent_moves": 22,
+          "square_c5_opponent_orbits": [
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  2,
+                  3
+                ],
+                [
+                  5,
+                  7
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  9,
+                  10
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "2/2",
+              "opponents": [
+                [
+                  2,
+                  7
+                ],
+                [
+                  4,
+                  7
+                ],
+                [
+                  6,
+                  4
+                ],
+                [
+                  6,
+                  8
+                ],
+                [
+                  7,
+                  2
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "2/0",
+              "opponents": [
+                [
+                  2,
+                  8
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  10
+                ],
+                [
+                  9,
+                  8
+                ],
+                [
+                  10,
+                  2
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  2,
+                  10
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  6,
+                  3
+                ],
+                [
+                  9,
+                  6
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              "size": 5
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  7,
+                  4
+                ]
+              ],
+              "size": 1
+            },
+            {
+              "candidate_winning_signature": "0/0",
+              "opponents": [
+                [
+                  9,
+                  3
+                ]
+              ],
+              "size": 1
+            }
+          ],
+          "winning_response_graph": {
+            "alternating_cycle_vertices": [
+              [
+                2,
+                7
+              ],
+              [
+                2,
+                10
+              ],
+              [
+                4,
+                7
+              ],
+              [
+                5,
+                2
+              ],
+              [
+                6,
+                3
+              ],
+              [
+                6,
+                4
+              ],
+              [
+                6,
+                8
+              ],
+              [
+                7,
+                2
+              ],
+              [
+                9,
+                6
+              ],
+              [
+                10,
+                7
+              ]
+            ],
+            "common_edge_count": 6,
+            "component_sizes": [
+              22
+            ],
+            "degree_histogram": {
+              "1": 1,
+              "2": 10,
+              "4": 5,
+              "6": 1,
+              "7": 5
+            },
+            "edges": 41,
+            "perfect_matching_count": 2,
+            "perfect_matchings": [
+              [
+                [
+                  [
+                    2,
+                    3
+                  ],
+                  [
+                    4,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    7
+                  ],
+                  [
+                    6,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    8
+                  ],
+                  [
+                    10,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    10
+                  ],
+                  [
+                    6,
+                    4
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    3
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    7
+                  ],
+                  [
+                    5,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    2
+                  ],
+                  [
+                    9,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    8
+                  ],
+                  [
+                    9,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    2
+                  ],
+                  [
+                    10,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    4
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    10
+                  ],
+                  [
+                    10,
+                    2
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    2,
+                    3
+                  ],
+                  [
+                    4,
+                    10
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    7
+                  ],
+                  [
+                    9,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    8
+                  ],
+                  [
+                    10,
+                    6
+                  ]
+                ],
+                [
+                  [
+                    2,
+                    10
+                  ],
+                  [
+                    4,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    3
+                  ],
+                  [
+                    5,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    2
+                  ],
+                  [
+                    6,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    2
+                  ],
+                  [
+                    9,
+                    8
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    3
+                  ],
+                  [
+                    7,
+                    2
+                  ]
+                ],
+                [
+                  [
+                    6,
+                    4
+                  ],
+                  [
+                    10,
+                    7
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    4
+                  ],
+                  [
+                    9,
+                    3
+                  ]
+                ],
+                [
+                  [
+                    9,
+                    10
+                  ],
+                  [
+                    10,
+                    2
+                  ]
+                ]
+              ]
+            ],
+            "quotient_edge_counts": {
+              "0-inf": 1,
+              "1-1": 10,
+              "1-8": 5,
+              "1-9": 5,
+              "1-inf": 5,
+              "8-9": 5,
+              "8-inf": 10
+            },
+            "vertices": 22,
+            "winning_edges": [
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  4,
+                  10
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  5,
+                  7
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  6,
+                  4
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  7,
+                  4
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  2,
+                  3
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  6,
+                  3
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  9,
+                  8
+                ]
+              ],
+              [
+                [
+                  2,
+                  7
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  8
+                ],
+                [
+                  6,
+                  4
+                ]
+              ],
+              [
+                [
+                  2,
+                  8
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  2,
+                  10
+                ],
+                [
+                  4,
+                  7
+                ]
+              ],
+              [
+                [
+                  2,
+                  10
+                ],
+                [
+                  6,
+                  4
+                ]
+              ],
+              [
+                [
+                  4,
+                  3
+                ],
+                [
+                  5,
+                  7
+                ]
+              ],
+              [
+                [
+                  4,
+                  3
+                ],
+                [
+                  7,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  7
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  7
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  7
+                ],
+                [
+                  10,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  10
+                ],
+                [
+                  6,
+                  8
+                ]
+              ],
+              [
+                [
+                  5,
+                  2
+                ],
+                [
+                  6,
+                  8
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  6,
+                  8
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  7,
+                  4
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  7,
+                  4
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  9,
+                  8
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  6,
+                  2
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  6,
+                  3
+                ],
+                [
+                  7,
+                  2
+                ]
+              ],
+              [
+                [
+                  6,
+                  4
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              [
+                [
+                  6,
+                  8
+                ],
+                [
+                  9,
+                  6
+                ]
+              ],
+              [
+                [
+                  7,
+                  2
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  7,
+                  2
+                ],
+                [
+                  10,
+                  7
+                ]
+              ],
+              [
+                [
+                  7,
+                  4
+                ],
+                [
+                  9,
+                  3
+                ]
+              ],
+              [
+                [
+                  7,
+                  4
+                ],
+                [
+                  9,
+                  10
+                ]
+              ],
+              [
+                [
+                  7,
+                  4
+                ],
+                [
+                  10,
+                  6
+                ]
+              ],
+              [
+                [
+                  9,
+                  10
+                ],
+                [
+                  10,
+                  2
+                ]
+              ],
+              [
+                [
+                  9,
+                  10
+                ],
+                [
+                  10,
+                  6
+                ]
+              ]
+            ]
+          },
+          "witness_cell": [
+            8,
+            5
+          ]
+        }
+      ],
+      "packet_cells": [
+        [
+          2,
+          10
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          10,
+          7
+        ]
+      ],
+      "response_matching_action": {
+        "global_calibration_count": 2,
+        "nonsquare_d10_coset_swaps_endpoint_and_matching": true,
+        "square_c5_fixes_each_matching": true
+      }
+    }
+  ],
+  "field_order": 11,
+  "inputs": {
+    "notes/2026-07-08-intrusion-census.py": "6f1f7e1e36ff3a3ed5d5f0c410b8d6bacb5be23a73503e669489e4cf06f14c83",
+    "notes/2026-07-21-c447-cap-knife-edge.json": "8c1e22da244ef2879273d3c0aeefc590e645386f70270e329d030fe48a5906c7"
+  },
+  "schema": "c80-c447-cloud-packet-v1",
+  "verdict": "PARTIAL_PACKET_12_KILLED_5_TWO_N_5_TWO_P_FOR_EACH_OF_FOUR_ENDPOINT_CHOICES"
+}

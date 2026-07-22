@@ -64,9 +64,109 @@ zone complexity); and whether some winning reply re-enters the balanced/normal-f
 exact drain makes `|live conic|` a validated component of any such measure; the missing step
 is upgrading a greedy drain move to a minimax potential.
 
+## 2026-07-22 — C447/C460 cloud packet: exact partial `12+5+5` law
+
+C447's two matchings are nonconcurrent, so they are not themselves cap moves or global reply maps.
+C460 supplies the type-correct point object: each matching has a 15-point Frégier cloud of interior
+points, and the clouds of C447's shared-edge cross-sheet pair meet in exactly five points.
+Transporting that intersection through C447's certified projectivity gives a canonical five-cell
+off-conic packet at each q=11 knife edge:
+
+```text
+class 4: {(4,10),(5,6),(6,2),(7,9),(8,5)},
+class 7: {(2,10),(5,2),(6,3),(9,6),(10,7)}.
+```
+
+The exact game test covers both endpoints of both P edges, hence all four pointed representatives.
+Every representative has 22 legal opponent moves and the identical packet-reply distribution:
+
+| opponent branches | legal packet replies | P-valued packet replies |
+|---:|---:|---:|
+| 12 | 0 | 0 |
+| 5 | 2 | 0 |
+| 5 | 2 | 2 |
+
+The square `C5` kernel of the cap-frame `D10` partitions the 22 opponent moves into orbit sizes
+`1,1,5,5,5,5`.  The five good branches and five live-but-bad branches are whole `C5` orbits; the
+twelve packet-killing branches are two further five-orbits plus the two fixed moves.  Thus the
+cloud packet is not a winning strategy and does not complete C80(a), but its failure is highly
+structured: whenever the packet is live, its two surviving replies have the same value, and the
+good/bad distinction is exactly orbit-valued rather than a hidden orientation choice.
+
+There is an exact quotient explanation.  Send the unordered P-edge endpoints `a,b` to
+`0,infinity` by `t=(w-a)/(w-b)`, and write an opponent point in the induced conic coordinates as
+`[X:Y:Z]`.  The quantity
+
+```text
+u = XZ/Y^2
+```
+
+is independent of rescaling `t` and of exchanging `a,b`, hence is intrinsic to the unordered edge.
+On all four pointed states the branch law is
+
+```text
+u = 8 (nonsquare): two packet replies, both P,
+u = 9 (square):    two packet replies, both N,
+u in {0,1,∞}:      no packet reply remains legal.
+```
+
+Thus C449's split-torus Legendre blocks become literal game information: the two live `C5` orbits
+are separated by square class on the one-dimensional edge quotient.  This is stronger and simpler
+than the provisional cubic separator suggested by the raw `5+5` split.
+
+The `ej` closeout then evaluates the complete first-response relation, not just the five-point
+packet.  On the 22 legal opponent moves, join `x,y` when the pair is legal over the chosen P child
+and the resulting size-six grandchild is P.  In every one of the four pointed states this graph is
+connected with 22 vertices, 41 edges, degree histogram
+
+```text
+1^1 2^10 4^5 6^1 7^5,
+```
+
+and exactly **two** perfect matchings.  The quotient edge counts are
+
+```text
+0--infinity: 1,   1--1: 10,   1--8: 5,   1--9: 5,
+1--infinity: 5,   8--9: 5,    8--infinity: 10.
+```
+
+The two perfect matchings share six forced edges: the unique `0--infinity` edge and the five
+`1--9` edges.  Their symmetric difference is the 10-cycle between the cloud packet at infinity
+and the good `u=8` orbit; its two alternating matchings are the only remaining choice.  Equivalently,
+the formerly killed conic boundary `u=1` is exceptionally generous: after any of its five moves,
+all four other `u=1` moves are legal P replies.
+
+The symmetry action identifies exactly what the residual binary choice means.  The square `C5`
+kernel fixes each perfect matching separately, while every nonsquare element of the cap-frame
+`D10` swaps the two P-edge endpoints and swaps the two matchings.  Hence the response rules form a
+two-point calibration torsor: choosing one costs the same orientation bit obstructed in C448, but
+the unordered response correspondence—and therefore P-existence—needs no such choice.
+
+Thus either perfect matching is a fixed first-ply response rule landing in certified P
+grandchildren.  This corrects the interpretation of the earlier certificate audit: the emitted
+reply book was not a node-zero matching, but that was never a proof that no such matching exists.
+The new pairing is only a first-response compression; it does not claim that the same involution or
+matching controls deeper nodes.
+
+This is the first causal game information extracted from the C447/C460 bridge.  It refutes the
+strong cloud-packet cover but replaces it with a complete q=11 first-response correspondence.
+The sharper gate is now to generalize the edge-quotient/Legendre response graph beyond this H3
+knife edge.  Cubic information may still be required once several noncommuting matching packets interact: C79's `tr(B^3)` separates
+the generic score-9 tie after `tr(B^2)` fails, and C77's contextual `Q3` separates the last q17
+feature twin.  But the single-packet q=11 gate is already quadratic.  A q-independent nonempty-
+fibre count would feed C82; structured failures remain C81's characteristic-5/7 branch.
+
+The primary checker uses the committed `PrimeGridGame` legality/value recursion.  The independent
+replay rebuilds the residual grid rule directly from row, column, and affine-collinearity tests and
+uses a separate normal-play recursion.  Both reconstruct the two 15-point clouds, their five-point
+intersection, all four pointed states, every opponent branch, and the `C5` orbit partition.
+
 ## Reproduction
 
 ```bash
 python3 -m py_compile scripts/c80_drain_rate.py
 python3 scripts/c80_drain_rate.py 11 13 --maxsize 6
+python3 rust/scripts/c80_c447_cloud_packet.py --check
+python3 rust/scripts/c80_c447_cloud_packet_replay.py
+sha256sum -c notes/2026-07-22-c80-c447-cloud-packet.sha256
 ```

@@ -5,9 +5,9 @@
 **Date:** 2026-07-22
 
 **Verdict:** `C447/C448 DO NOT SUPPLY THE ODD-q VALUE THEOREM; THEY REFRAME C80 FROM STATIC
-POINT SELECTION TO EQUIVARIANT RESPONSE PACKETS.  THE BEST BOUNDED CAUSALITY TEST IS THE q=11
-TWO-MATCH COVER AGAINST THE EXISTING CERTIFICATE REPLIES; THE A3/B3/H3 ROOF RESULTS SUPPLY A
-FINITE TEST LADDER, NOT A UNIFORM ODD-q MECHANISM.`
+POINT SELECTION TO EQUIVARIANT RESPONSE PACKETS.  THE q=11 CLOUD-INTERSECTION PACKET HAS AN EXACT
+PARTIAL 12+5+5 ORBIT LAW, NOT A FULL STRATEGY; THE A3/B3/H3 ROOF RESULTS SUPPLY A FINITE TEST
+LADDER, NOT A UNIFORM ODD-q MECHANISM.`
 
 ## Frontier being addressed
 
@@ -49,22 +49,104 @@ No equivariant section of `R` is required.  The opponent move may shrink the sta
 packet into marked fibres, or make only one candidate legal.  This is the general form of q=5's
 antipodal response: an unmarked choice is unnecessary because play supplies the mark.
 
-## Highest-value bounded causality test
+## Bounded q=11 causality test — exact partial result
 
-At each q=11 knife edge, interpret C447's two cross-sheet matchings as two candidate conic
-involution reply maps and compare their union with the existing exact strategy certificate.
+At each q=11 knife edge, C447's two matchings are nonconcurrent and therefore have no common
+off-conic centres that could serve directly as moves.  The type-correct point object is instead the
+five-point intersection of their two 15-point Frégier clouds.
 
-Acceptance is deliberately game-semantic:
+The exact game-semantic test is:
 
-1. for every legal opponent move after the P child, at least one matching supplies a legal reply;
+1. for every legal opponent move after the P child, determine which cloud-intersection points remain
+   legal replies;
 2. every accepted reply lands in a certified P follower, or in a proved zero-value / descending
    residual class; and
 3. the covering statement transports over the full cap-frame orbit.
 
-A pass would upgrade the H3 pair from a canonical encoding to a causal adaptive strategy object.
-A failure would sharply retain C447 as geometry only.  Testing one matching alone is not the right
-gate: the existing certificate audit already excludes a pure fixed matching strategy, while the
-new question is whether the unordered pair covers the opponent branches collectively.
+Primary and independent replay over both endpoints of both knife-edge P pairs gives the same branch
+law in all four pointed states:
+
+```text
+12 opponent moves: no packet reply remains legal,
+ 5 opponent moves: two packet replies remain, both N,
+ 5 opponent moves: two packet replies remain, both P.
+```
+
+The square `C5` kernel partitions the opponent moves as `1+1+5+5+5+5`; the good and bad live
+fibres are entire five-orbits.  Hence the strong cover fails, but the bridge is not merely
+decorative: it produces a canonical partial repair packet whose live fibres are value-coherent.
+Normalize the unordered P edge to `{0,infinity}` and write the induced plane coordinates as
+`[X:Y:Z]`.  The orientation-independent quotient `u=XZ/Y^2` separates the branches exactly:
+`u=8` (nonsquare) is the good five-orbit, `u=9` (square) is the bad five-orbit, and
+`u in {0,1,infinity}` is the killed boundary.  This is the C449 split-torus/Legendre mechanism as
+game data.  The next gate is a uniform edge-quotient response theorem; the complete q=11 response
+graph below already absorbs the three boundary fibres.
+
+The full winning-response graph removes the need for a separate boundary packet at q=11.  It has
+22 vertices, 41 edges, degree histogram `1^1 2^10 4^5 6^1 7^5`, and exactly two perfect matchings
+in every pointed representative.  They share the forced `0--infinity` edge and five `1--9` edges;
+their only difference is the two alternations of the 10-cycle between the cloud packet and the
+`u=8` good orbit.  Either matching is a fixed first-ply reply rule into P grandchildren.  The
+square `C5` fixes each matching, whereas every nonsquare element of the cap-frame `D10` swaps the
+two P-edge endpoints and the two matchings simultaneously.  Thus the pair is exactly a two-point
+calibration torsor: choosing one costs C448's orientation/advice bit, while the unordered pair is
+canonical and sufficient for the existence theorem.
+
+## Deeper transfer — cubic memory and interactive descent
+
+The strongest cross-program signal is not the presence of matchings but the degree at which lost
+information returns.
+
+- In C406/C412, signed moments of degrees one and two vanish; orientation first survives cubically.
+- In the cap frontier, pairwise orbital/Redei counts are the second spectral moment of
+  `B=sum P_sigma` and are redundant.  At the q17 score-9 gate, `tr(B^3)` breaks the generic tie that
+  `tr(B^2)` leaves, while the four exceptional rows require a different branch.
+- In the contextual C77 reopening, reply-pencil load residues and old-secant incidence leave one
+  q17 twin; the Boolean triple-quotient collision `Q3(y)` separates it.  The resulting contextual
+  predicate is P-pure on the recorded q11/q17 forced types, though not yet a uniform theorem.
+
+This suggests that C80 should search for a low-dimensional **response relation**
+
+```text
+T(S, opponent, reply) = good,
+```
+
+not a point selector.  For a single stabilized packet, quotient by its torus first: the q=11 gate
+collapses to the quadratic character of `u=XZ/Y^2`.  Cubic data becomes the next candidate only
+when several noncommuting packets survive and the one-dimensional quotient no longer controls the
+state.  The target is nonemptiness of each good reply fibre plus descent.  A generic
+character/intersection-number estimate may prove abundance; failure of the estimate should force a
+structured equality case routed to C81.  This is a
+structure-versus-randomness split:
+
+```text
+generic orbital fibre: many cubic-good replies by counting
+structured low-rank/subfield fibre: exact C81 case split
+small residual: certificate or C388 mirror-zero base law.
+```
+
+The formal game lemma needed is correspondingly modest.  Let `mu` be well founded.  If every
+opponent child of a proposed P state has a nonempty equivariant set of legal replies, and every such
+accepted reply reaches a P state of smaller `mu`, then the parent is P.  Finite choice selects a
+reply after nonemptiness is proved; no natural or equivariant point section is part of the theorem.
+This separates the geometric/counting obligation from game induction and prevents C448's section
+obstruction from being mistaken for a strategy obstruction.
+
+There is also a descent interpretation.  The unmarked repair pair is a torsor over the state
+space.  Pulling it back to the incidence space of `(state, opponent move)` may trivialize it because
+the move reduces the stabilizer or makes only one repair legal.  C459/C462's no-section results are
+therefore not merely negative analogies: they indicate that the correct question is whether the
+torsor becomes trivial after the game supplies a mark.  If it does not, retain the whole fibre and
+descend by the packet lemma instead.
+
+Finally, C465/C471 suggest a second, more speculative but testable abstraction.  A union of conic
+involution matchings has a large cycle-space bulk and a small defect boundary; even-cycle bulk is
+game-zero in the certified regimes, while value concentrates on defect skeletons.  The useful
+analogue of the Hadamard kernel/image complex would be an incidence-boundary quotient for the live
+matching graph, with C80's exact drain as the local differential and the small defect class as its
+homology.  This is not yet a theorem, but it gives a precise test: determine whether the C80 descent
+measure factors through cycle-space cancellation plus a bounded boundary vector.  Mere equality of
+module dimensions or a Lagrangian label would not count.
 
 ## Weil-roof results: exact cap relevance
 
@@ -133,8 +215,24 @@ are stated without a hidden selector.
 
 ## Mystery ledger
 
-- **Open — q=11 causality:** do C447's two matchings collectively cover the exact certificate
-  replies?  The bounded two-match audit above is the acceptance gate.
+- **Settled — q=11 first causality gate:** the canonical five-point cloud-intersection packet is
+  partial, with the exact `12 killed + 5 live/bad + 5 live/good` law on all four pointed states.
+  It neither gives a strategy nor collapses to geometry-only noise.
+- **Settled — q=11 live-fibre separator:** the intrinsic edge quotient `u=XZ/Y^2` separates the
+  good and bad `C5` orbits by nonsquare/square class.
+- **Settled — q=11 first response:** the full winning-response graph has exactly two perfect
+  matchings, so a fixed node-zero pairing exists even though the emitted certificate did not use
+  one.  No claim is made that either pairing recursively controls deeper nodes.
+- **Settled — orientation of the response pair:** the square `C5` fixes both matchings separately,
+  and the nonsquare `D10` coset swaps both the P-edge endpoints and the matchings.  There are
+  exactly two global calibrations.  Picking one requires one orientation/advice bit; P-existence
+  uses the canonical unordered pair and requires none.
+- **Open — cubic response theorem:** the exact `tr(B^3)` and `Q3` successes have not yet been
+  converted into a q-independent nonempty-fibre bound.  C80 owns the response relation and C82 the
+  eventual orbital count; C81 owns structured failures of the generic estimate.
+- **Open — defect homology:** cycle cancellation and defect concentration are certified in several
+  residual regimes, but no quotient theorem yet makes the defect boundary a complete game-value
+  carrier.
 - **Open — uniform packet:** no q-independent packet with a proven nonempty good fibre is known.
   C80(a) owns existence/abundance and C82 owns orbital counting after the packet is fixed.
 - **Open — value descent:** neither the unordered H3 pair nor any Weil-roof carrier currently
@@ -144,4 +242,3 @@ are stated without a hidden selector.
 - **Settled — roof scope:** theta, quantum, descent, modular-carrier, and larger-symmetry passages
   do not secretly orient a cap reply.  Their useful contribution is the exact packet/forgetting
   boundary and finite incidence language.
-
