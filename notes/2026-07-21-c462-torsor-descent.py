@@ -377,11 +377,17 @@ def build_certificate():
             },
             "obstruction": {
                 "character": "chi_pi:<kappa>->C2 is surjective",
+                "exact_sequence": "1 -> <kappa> = C2 -> <sigma> = C4 -> Gal(Q(phi)/Q) = C2 -> 1",
                 "fibres": {"pi": [0, 3], "pibar": [1, 2]},
                 "free_kappa_action": [[0, 3], [1, 2]],
+                "group_extension_splits": False,
                 "orbit_valued_family_descends": True,
                 "point_valued_companion_section_descends": False,
                 "precise_scope": "the obstruction is to a chosen companion in each prime fibre, exactly the M3a selector; it is not an obstruction to descending the unordered family",
+            },
+            "orientation": {
+                "canonical_data": "the cyclic C4 subgroup, its free transitive action, and its square kappa",
+                "noncanonical_data": "a choice between the inverse generators sigma and sigma^(-1)",
             },
             "recommendation": "replace the cut paper-1 tensor clause only by the base-changed equivariant companion-sheet family together with the proved kappa selector obstruction; do not claim an M3a tensor or rank-4 module acceptance item",
         },

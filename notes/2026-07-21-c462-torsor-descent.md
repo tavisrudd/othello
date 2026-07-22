@@ -21,7 +21,9 @@ sigma = (0 2 3 1),             sigma^2 = (0 3)(1 2) = kappa.
 
 Thus the four companions are a free transitive `Gal(Q(zeta_5)/Q) = Z/4`-set under the frozen
 labeling.  This is canonical at the orbit level: changing the correction by a golden `A5` element
-does not change a companion orbit.
+does not change a companion orbit.  Intrinsically canonical are the cyclic `C4` subgroup, its free
+transitive action, and its square `kappa`; choosing `sigma` rather than `sigma^(-1)` merely orients
+that torsor.
 
 The companion-to-special-fibre bijection is
 
@@ -47,7 +49,8 @@ sha256 = 5369f349c2c6a15004769fa5b6466bbd2ecbdcdb18ef45ca40358649709d115c.
 
 The checker recomputes both vectors and verifies that each hash is exactly the C443 certificate's
 degree-one `mu_at_pi` hash.  The lower-moment obstruction is therefore Galois-invariant, not a
-labeling artifact.
+labeling artifact.  In particular, the diagnostic descends even though a companion selector does
+not: the failure can be observed canonically without making the forbidden sheet choice.
 
 ## Exact descent statement
 
@@ -71,6 +74,16 @@ The unordered four-object family does descend as an orbit-valued object; what do
 a chosen companion in each prime fibre.  This distinction prevents the torsor theorem from being
 misread as a revival of C443's tensor construction.
 
+Equivalently, the entire obstruction is compressed by the nonsplit exact sequence
+
+```text
+1 -> <kappa> = C2 -> <sigma> = C4 -> Gal(Q(phi)/Q) = C2 -> 1.
+```
+
+A point-valued companion selector would split the quotient on the golden-prime fibres.  The cyclic
+extension has no such splitting: the only element of order two upstairs is `kappa`, which lies in
+the kernel.  This is the algebraic form of the one-bit selector obstruction.
+
 ## Paper-facing recommendation and boundary
 
 Phase 3/C445 may replace paper 1's cut tensor clause by the base-changed equivariant companion-sheet
@@ -78,6 +91,12 @@ family together with the proved `kappa` selector obstruction.  It must not claim
 supplies an M3a tensor, that a rank-four companion module satisfies any M3a acceptance item, or that
 CRT interpolation repairs the failure.  C461's zero lower-moment kernel still rules out every
 linear weighting of the four companion moment sums.
+
+A compact paper-facing formulation is:
+
+> The four golden companion sheets form a canonical cyclic Galois torsor over
+> `Z[zeta_5,1/10]`; its unordered family descends to `Z[phi,1/10]`, while the free action of complex
+> conjugation on each prime fibre obstructs any descended companion selector.
 
 This result is H3-only.  It makes no cross-Coxeter law, novelty, or priority claim and does not edit
 either manuscript.

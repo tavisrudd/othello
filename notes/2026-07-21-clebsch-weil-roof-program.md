@@ -49,7 +49,7 @@ selected card names it as a load-bearing input.
 | C456 | T9 | queued | AME chirality LU verdict |
 | C457 | T10 | GREEN: maximal icosian/binary-octahedral orders reduce onto `M2`; spin images equal frozen H3/B3 sheets | quaternion-order structural upgrade complete; C382 boundary sharpened |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
-| C462 | M3-torsor | GREEN: canonical four-companion `Z/4` torsor; sigma is `(0 2 3 1)`, sigma-squared is frozen kappa, residue equivariance holds up to inverse orientation, and the common degree-1 discrepancy is invariant; over `Z[zeta_5,1/10]` the unordered family descends but a companion section has the free-kappa obstruction | candidate base-changed family-plus-obstruction replacement for the cut tensor clause and framing input to paper-2 gluing; no M3a tensor/module claim |
+| C462 | M3-torsor | GREEN: canonical unoriented four-companion `C4` torsor; sigma is `(0 2 3 1)`, sigma-squared is frozen kappa, residue equivariance holds up to inverse orientation, and the common degree-1 diagnostic descends; the selector obstruction is the nonsplit `1 -> C2 -> C4 -> C2 -> 1` | over `Z[zeta_5,1/10]`, candidate base-changed family-plus-obstruction replacement for the cut tensor clause and framing input to paper-2 gluing; no M3a tensor/module claim |
 | C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |
 
 Critical path has advanced through `C444 -> C445`; **C449 is next**. C450--C456 are independent
