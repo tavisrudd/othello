@@ -114,3 +114,14 @@ shared-edge graph, but it conjugates rather than normalizes C449's frozen split 
 characteristic-2/3 cloud-incidence drops have neither the cross-relation rank profile nor an
 ordinary semisimple constituent explanation. See
 [`2026-07-21-c450-weil-cross-sheet.md`](../2026-07-21-c450-weil-cross-sheet.md).
+
+## 2026-07-21 — C454/T7 Klein-relative-cubic disposition
+
+C454 closed the proposed Adler bridge sharply.  The H3 roof module is the irreducible degree-10
+augmentation character in characteristic zero and `1+L(8)` over `F_11`, so it contains no
+degree-five `PSL_2(11)` constituent.  Its restriction-local `A5` five-space has zero symmetric-cube
+intersection with the relative cubic three-space.  Exact ordinary-character/Molien calculation
+gives multiplicity three for both B3 and H3; the modular split refines this to `1+0+1+1` across
+`t^3,t^2L,t Sym^2L,Sym^3L`.  In H3 the pure `t^3` and `Sym^3L(8)` lines are C412's unique rank-one
+and Tate-kernel lines, and the signed moment is `[0:2:10]` in the split basis.  See
+[`2026-07-21-c454-klein-cubic.md`](../2026-07-21-c454-klein-cubic.md).

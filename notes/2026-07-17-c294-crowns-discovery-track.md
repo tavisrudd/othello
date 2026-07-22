@@ -692,6 +692,29 @@ cliffhanger, while the present evidence forbids conflating them.
 not been attempted.
 **Status:** open lead
 
+### 2026-07-21 — Prime-family forecast for the three relative cubics
+
+**Provenance:** C454's exact B3/H3 split of the outer-odd relative-cubic space.
+**Was I looking for this?:** no — C454 was required to explain only the frozen B3 and H3
+dimensions and test their proposed Adler relationship.
+**Observed / musing:** at both `p=7` and `p=11`, the modular roof module splits as
+`W=1 direct-sum L(p-3)`, and the three relative cubics distribute identically across
+`t^3`, `t^2L`, `t Sym^2L`, and `Sym^3L` with dimensions `1,0,1,1`.  In H3 the three component
+lines also recover C412's unique rank-one line, mixed line, and pure-heart Tate-kernel line.
+**Why it may matter / strongest question:** is `1,0,1,1` the defining-characteristic pattern for
+the corresponding degree-`p-1` `PGL_2(p)` roof extension throughout an arithmetic prime family,
+and does contraction always identify the two-dimensional Tate quotient in the same way?
+**Structural mechanism:** a split invariant line plus the simple heart `L(p-3)`, with outer sign
+distributed across the four symmetric-cube degrees.
+**Predicted siblings:** further admissible primes — the same three-line split; modular Tate
+quotients — kernel equal to the pure-heart cubic line; signed moments — no pure `t^3` component.
+**Discriminator / falsifier:** construct the exact outer extension at the next admissible prime and
+compute the four fixed dimensions separately; any value other than `1,0,1,1`, or a nonzero
+`t^3` coordinate in the signed moment, falsifies the forecast.  The two frozen primes alone do not
+establish a theorem.
+**Evidence:** CHECKED at `p=7,11`; OPEN as a prime-family statement.
+**Status:** open lead
+
 ### 2026-07-21 — Dickson's `S4` criterion as candidate proof mechanism for the `(2/q)` fusion law
 
 **Provenance:** novelty de-risk scan (`notes/2026-07-21-weil-roof-novelty-derisk-scan.md`), H3
