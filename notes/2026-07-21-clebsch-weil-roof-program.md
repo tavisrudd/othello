@@ -38,7 +38,7 @@ selected card names it as a load-bearing input.
 | C447 | X2 | singleton comparison negative; shared-edge cross-sheet repair GREEN | exact local torsor for X3 |
 | C448 | X3 | GREEN: orbit-valued selector theorem; point section costs one bit | framing input only |
 | C444 | M4 | GREEN: B3 split fibres exchanged by outer `x->-x`, cubic scalar `2 sqrt2`, common `S3` seam; A3 central lifts fuse over one projective `S4` | unlocks M5 and strengthens T10 input |
-| C445 | M5 | GREEN: exact 11+11-to-22 matching/orbit gluing; `S4/A4` triangle hinge; rational `Rz` boundary; tensor cut | closes master-stroke statement boundary |
+| C445 | M5 | GREEN: exact 11+11-to-22 matching/orbit gluing; `S4/A4` hinge; C457 certifies quaternion splitting; tensor cut | closes master-stroke statement boundary |
 | C449 | T2 | queued after M4 chain | split-Coxeter-torus mechanism |
 | C450 | T3 | queued; independent after frozen inputs | Weil-module roof test |
 | C451 | T4 | queued | theta/Roquette row, with clean negative allowed |
@@ -47,7 +47,7 @@ selected card names it as a load-bearing input.
 | C454 | T7 | queued | Klein-relative-cubic comparison |
 | C455 | T8 | queued | C372/C378 Weil-operator verdict |
 | C456 | T9 | queued | AME chirality LU verdict |
-| C457 | T10 | GREEN: maximal icosian/binary-octahedral orders reduce onto `M2`; spin images equal frozen H3/B3 sheets | quaternion-order structural upgrade complete; C382 boundary sharpened |
+| C457 | T10 | GREEN: maximal orders reduce onto `M2`; spin images equal frozen sheets; H3 comparisons are reductions of one `C(phi)` | quaternion mechanism certified; C382 boundary sharpened |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
 | C462 | M3-torsor | GREEN: canonical unoriented four-companion `C4` torsor; sigma is `(0 2 3 1)`, sigma-squared is frozen kappa, residue equivariance holds up to inverse orientation, and the common degree-1 diagnostic descends; the selector obstruction is the nonsplit `1 -> C2 -> C4 -> C2 -> 1` | over `Z[zeta_5,1/10]`, candidate base-changed family-plus-obstruction replacement for the cut tensor clause and framing input to paper-2 gluing; no M3a tensor/module claim |
 | C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |

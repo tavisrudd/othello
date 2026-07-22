@@ -106,10 +106,13 @@ The two-frame sheet/matching theorem, the common `P^1(F_11)` collision, the `11+
 the `PSL_2(11)` closure, the rational transporter and its outer reduction, and the C460 triangle
 comparison are all certified now.
 
-The stronger explanation — that reduction at 11 splits the Schur-index-2 icosahedral quaternion
-obstruction and thereby produces the finite gluing — remains a **paper-2 mechanism**, not a clause
-of this machine-certified theorem.  C458 records it as structural/classical and explicitly outside
-its machine-verified boundary.  The finite theorem neither needs nor upgrades that interpretation.
+**Post-C457 upgrade.** The stronger explanation is now certified.  C457 exhibits the maximal
+icosian order over `Z[phi]`, proves unit reduced-trace discriminant, and shows that reduction at
+`(11,phi-8)` and `(11,phi-4)` gives `M_2(F_11)` with projective spin images exactly `a5(8)` and
+`a5(4)`.  Since `(-1,-1)` is Hamiltonian at both real embeddings of `Q(sqrt5)`, this verifies the
+Schur-index-2 obstruction upstairs and its splitting at both primes above 11.  The mechanism still
+belongs in paper 2 and is unnecessary for the paper-1 matching theorem, but it is no longer merely
+interpretive.
 
 ## Reproducibility and trusted boundary
 
@@ -121,8 +124,8 @@ python3 notes/2026-07-21-c445-characteristic-11-gluing-replay.py
 (cd notes && sha256sum -c 2026-07-21-c445-characteristic-11-gluing.sha256)
 ```
 
-The primary checker hash-pins the reports and certificates for C442, C458, C443, C461, C460, and
-C444.  It independently enumerates `PGL_2(11)` and `PSL_2(11)`, reconstructs both matching
+The primary checker hash-pins the reports and certificates for C442, C458, C443, C461, C460, C444,
+and C457.  It independently enumerates `PGL_2(11)` and `PSL_2(11)`, reconstructs both matching
 stabilizers, their intersection and closure, the `11+11` orbit split, the outer transporter, and an
 exact reflection factorization of `Rz`.  The replay imports no primary code and independently
 repeats the finite-group calculation from normalized Möbius matrices.

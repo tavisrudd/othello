@@ -165,6 +165,16 @@
         "sha256": "5691a62626d021b6e597f1b919fcfe16055513c7c266900eed7fed2d74b132e9"
       }
     },
+    "2026-07-21-c457-quaternion-order-reduction": {
+      "certificate": {
+        "bytes": 19482,
+        "sha256": "61a32057863870ffb2ed95d50d92656cadb404d3c02d9a59ffd151a8a1332545"
+      },
+      "report": {
+        "bytes": 5472,
+        "sha256": "adf276f61c6040ab8f4f7fa9b204cd79c970614b4b60aeedd4eb240819e929ab"
+      }
+    },
     "2026-07-21-c458-golden-sheet-frame-freeze": {
       "certificate": {
         "bytes": 13379,
@@ -203,7 +213,9 @@
   },
   "paper_2_boundary": {
     "failed_route": "C443 found four companion sheets, not one; C461 proved the full descended lower-moment weight map has zero kernel mod 11. The secant-sheet tensor route is closed.",
-    "mechanism_only": "Interpreting the collision and closure as splitting of the Schur-index-2 icosahedral quaternion obstruction is a paper-2 mechanism, not part of the present machine-certified theorem.",
+    "mechanism_status": "CERTIFIED_POST_C457",
+    "mechanism_theorem": "C457 exhibits the maximal icosian order with unit reduced-trace discriminant and proves that its reductions at (11,phi-8) and (11,phi-4) are M2(F_11), with projective spin images exactly a5(8) and a5(4). Since (-1,-1) over the two real embeddings of Q(sqrt5) is Hamiltonian, this certifies the Schur-index-2 obstruction and its splitting at both primes above 11.",
+    "placement": "The mechanism belongs in paper 2 and is not needed for the paper-1 matching theorem, but it is no longer merely interpretive.",
     "provable_now": [
       "two-frame sheet/matching theorem",
       "characteristic-11 collision on one P1(F_11)",
@@ -239,6 +251,6 @@
   },
   "schema": "c445-characteristic-11-gluing-v1",
   "task": "C445",
-  "trusted_boundary": "Exact enumeration of PGL2(11), PSL2(11), matching stabilizers/orbits/closure, and an exact reflection factorization of Rz; hash-pinned C442/C458/C443/C461/C460/C444 reports and certificates supply the frozen char-0, perpendicularity, failed-tensor, and M4 facts.",
-  "verdict": "GREEN \u2014 exact matching/orbit gluing theorem proved; quaternion interpretation reserved for paper 2"
+  "trusted_boundary": "Exact enumeration of PGL2(11), PSL2(11), matching stabilizers/orbits/closure, and an exact reflection factorization of Rz; hash-pinned C442/C458/C443/C461/C460/C444/C457 reports and certificates supply the frozen char-0, perpendicularity, failed-tensor, M4, and maximal-order splitting facts.",
+  "verdict": "GREEN \u2014 exact matching/orbit gluing theorem proved; C457 certifies the quaternion-splitting mechanism for paper 2"
 }

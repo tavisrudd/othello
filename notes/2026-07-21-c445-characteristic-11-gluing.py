@@ -24,6 +24,7 @@ INPUT_STEMS = (
     "2026-07-21-c461-four-companion-weight-line",
     "2026-07-21-c460-golden-fregier-cloud-bridge",
     "2026-07-21-c444-silver-fusion",
+    "2026-07-21-c457-quaternion-order-reduction",
 )
 
 BASE = ((0, 1), (2, 5), (3, 7), (4, 9), (6, 8), (10, INF))
@@ -143,6 +144,7 @@ def build_certificate() -> dict[str, object]:
     c461 = loaded[INPUT_STEMS[3]]
     c460 = loaded[INPUT_STEMS[4]]
     c444 = loaded[INPUT_STEMS[5]]
+    c457 = loaded[INPUT_STEMS[6]]
 
     frozen_base = canonical_matching(
         c458["golden_sheet_frame"]["polar_pair_matching"]["reduction_at_pi_phi_to_8"]["matching"]  # type: ignore[index]
@@ -162,6 +164,9 @@ def build_certificate() -> dict[str, object]:
     assert c443["blocker"]["observed_one_factorizing_size_ten_orbits"] == 4  # type: ignore[index]
     assert c461["necessary_lower_moment_test"]["kernel_dimension"] == 0  # type: ignore[index]
     assert c444["verdict"].startswith("GREEN")  # type: ignore[union-attr]
+    assert c457["icosian_order"]["reduced_trace_discriminant"] == [1, 0]  # type: ignore[index]
+    assert all(item["order_reduction_equals"] == "M2(F_11)" for item in c457["icosian_order"]["reductions"])  # type: ignore[index]
+    assert all(item["comparison_gives_exact_full_stabilizer_equality"] for item in c457["icosian_order"]["reductions"])  # type: ignore[index]
     assert c442["clause_ii_singleton_identification"]["golden_six_arc_frame_reduced"]["a5_8_a5_4_intersection_order"] == 12  # type: ignore[index]
 
     matrices = pgl_matrices()
@@ -196,7 +201,7 @@ def build_certificate() -> dict[str, object]:
     return {
         "schema": "c445-characteristic-11-gluing-v1",
         "task": "C445",
-        "verdict": "GREEN — exact matching/orbit gluing theorem proved; quaternion interpretation reserved for paper 2",
+        "verdict": "GREEN — exact matching/orbit gluing theorem proved; C457 certifies the quaternion-splitting mechanism for paper 2",
         "inputs": inputs,
         "exact_gluing_theorem": {
             "upstairs": {
@@ -266,10 +271,12 @@ def build_certificate() -> dict[str, object]:
                 "rational Rz and its outer mod-11 transporter",
                 "C460 perpendicularity/common-triangle shadow",
             ],
-            "mechanism_only": "Interpreting the collision and closure as splitting of the Schur-index-2 icosahedral quaternion obstruction is a paper-2 mechanism, not part of the present machine-certified theorem.",
+            "mechanism_status": "CERTIFIED_POST_C457",
+            "mechanism_theorem": "C457 exhibits the maximal icosian order with unit reduced-trace discriminant and proves that its reductions at (11,phi-8) and (11,phi-4) are M2(F_11), with projective spin images exactly a5(8) and a5(4). Since (-1,-1) over the two real embeddings of Q(sqrt5) is Hamiltonian, this certifies the Schur-index-2 obstruction and its splitting at both primes above 11.",
+            "placement": "The mechanism belongs in paper 2 and is not needed for the paper-1 matching theorem, but it is no longer merely interpretive.",
             "failed_route": "C443 found four companion sheets, not one; C461 proved the full descended lower-moment weight map has zero kernel mod 11. The secant-sheet tensor route is closed.",
         },
-        "trusted_boundary": "Exact enumeration of PGL2(11), PSL2(11), matching stabilizers/orbits/closure, and an exact reflection factorization of Rz; hash-pinned C442/C458/C443/C461/C460/C444 reports and certificates supply the frozen char-0, perpendicularity, failed-tensor, and M4 facts.",
+        "trusted_boundary": "Exact enumeration of PGL2(11), PSL2(11), matching stabilizers/orbits/closure, and an exact reflection factorization of Rz; hash-pinned C442/C458/C443/C461/C460/C444/C457 reports and certificates supply the frozen char-0, perpendicularity, failed-tensor, M4, and maximal-order splitting facts.",
     }
 
 

@@ -357,8 +357,9 @@ def build_certificate():
     I11, J11 = (0, 1, 10, 0), (1, 3, 3, 10)
     base = ((0, 1), (2, 5), (3, 7), (4, 9), (6, 8), (10, 11))
     jmate = ((0, 10), (1, 11), (2, 7), (3, 5), (4, 8), (6, 9))
-    h3_pi = finite_case("H3/pi", icosian_basis, (H5, G5), 8, 11, I11, J11, (0, 1, 2, 1), base, 120)
-    h3_pibar = finite_case("H3/pibar", icosian_basis, (H5, G5), 4, 11, I11, J11, (0, 1, 2, 5), jmate, 120)
+    h3_comparison = lambda root: (0, 1, 2, (9 - root) % 11)
+    h3_pi = finite_case("H3/pi", icosian_basis, (H5, G5), 8, 11, I11, J11, h3_comparison(8), base, 120)
+    h3_pibar = finite_case("H3/pibar", icosian_basis, (H5, G5), 4, 11, I11, J11, h3_comparison(4), jmate, 120)
 
     b3_cases = []
     b3_targets = {
@@ -388,6 +389,14 @@ def build_certificate():
             "prime_ideals": ["(11,phi-8)", "(11,phi-4)"],
             "localizations": ["I_(11,phi-8)", "I_(11,phi-4)"],
             "split_matrix_basis": {"i": list(I11), "j": list(J11)},
+            "comparison_map_family": {
+                "formula": "C(phi)=[[0,1],[2,9-phi]]",
+                "determinant": -2,
+                "at_phi_8": list(h3_comparison(8)),
+                "at_phi_4": list(h3_comparison(4)),
+                "galois_covariant": True,
+                "boundary": "one O_5-valued formula for the two residue comparisons; it does not define a characteristic-zero split representation of the quaternion algebra",
+            },
             "reductions": [h3_pi, h3_pibar],
             "structural_statement": "The same integral icosian order and binary-icosahedral unit group reduce through the two residue maps; after the displayed comparison maps their projective images equal a5(8) and a5(4), not merely conjugate subgroups of the same size.",
         },

@@ -42,7 +42,17 @@ pair-orbits have sizes `6/30/30`.  The explicit comparison maps
 C_8 = [[0,1],[2,1]],        C_4 = [[0,1],[2,5]]
 ```
 
-identify the projective images **as equal subgroups**, not only groups of the right size:
+are the two reductions of the single `O_5`-valued comparison formula
+
+```text
+C(phi) = [[0,1],[2,9-phi]],             det C(phi) = -2.
+```
+
+Thus the comparison itself is Galois-covariant rather than two unrelated post-hoc choices.  The
+formula coordinates the two residue splittings only; it does not define a characteristic-zero
+matrix representation of the nonsplit quaternion algebra.
+
+They identify the projective images **as equal subgroups**, not only groups of the right size:
 
 ```text
 C_8  red_p8(<H,G>) C_8^-1 = a5(8) = Stab(M_base),

@@ -531,6 +531,24 @@
     ],
     "characteristic_zero_spin_group_order": 120,
     "closed_over_integer_ring": true,
+    "comparison_map_family": {
+      "at_phi_4": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "at_phi_8": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "boundary": "one O_5-valued formula for the two residue comparisons; it does not define a characteristic-zero split representation of the quaternion algebra",
+      "determinant": -2,
+      "formula": "C(phi)=[[0,1],[2,9-phi]]",
+      "galois_covariant": true
+    },
     "integer_ring": "Z[phi]",
     "localizations": [
       "I_(11,phi-8)",
