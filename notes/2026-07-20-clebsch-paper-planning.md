@@ -23,6 +23,12 @@ failed rows.  C457, C459, C462, C463, C466, and C468 make paper 2 concrete but d
 `2026-07-21-clebsch-weil-roof-results-ledger.md`; this document keeps only the narrative and
 manuscript decisions needed in a cold session.
 
+The proof/evidence and Lean-readiness audit of the complete battery is
+`2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`.  It accepts the exact finite certificates,
+separates direct finite leaves from theorem-interface and cohomological dependencies, records the
+required C443 ledger correction, and gives safe bounded novelty wording for the most attractive
+recent claims.
+
 The high-level generalist compression test, possible unseen connections, adopted exposition
 changes, and remaining theorem-xref TODOs are recorded in
 `2026-07-21-clebsch-high-level-reader-cold-read.md`.  This is an internal checklist, not an

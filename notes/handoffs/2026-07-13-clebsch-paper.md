@@ -33,6 +33,8 @@ the proof-free opening and conclusion prose draft is
 [`2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`](../2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md),
 and the complete C440--C468 paper-disposition inventory is
 [`2026-07-21-clebsch-weil-roof-results-ledger.md`](../2026-07-21-clebsch-weil-roof-results-ledger.md).
+The battery-wide proof/evidence, formalization-readiness, and bounded novelty audit is
+[`2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`](../2026-07-21-clebsch-weil-roof-proof-evidence-audit.md).
 The red-team-approved formalization campaign is
 [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md).
 
