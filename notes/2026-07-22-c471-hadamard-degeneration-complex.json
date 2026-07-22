@@ -406,6 +406,118 @@
         ],
         "M_H_Rt_equals_H": true,
         "R_Ht_equals_Ht_M": true,
+        "beta_H_equivariance": {
+          "checked_integrally_on_kernel_basis": true,
+          "codomain": "F_3^12/im(H) with M^T action",
+          "domain": "ker(H) with R^T action",
+          "identity": "beta_H(R^T x)=M^T beta_H(x)",
+          "six_dimensional_action_matrix_in_kernel_and_beta_basis": [
+            [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        },
+        "beta_Ht_equivariance": {
+          "checked_integrally_on_kernel_basis": true,
+          "codomain": "F_3^12/im(H^T) with R action",
+          "domain": "ker(H^T) with M action",
+          "identity": "beta_Ht(M x)=R beta_Ht(x)",
+          "six_dimensional_action_matrix_in_kernel_and_beta_basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
         "coordinate_signed_monomial_matrix_R": [
           [
             0,
@@ -766,6 +878,118 @@
         ],
         "M_H_Rt_equals_H": true,
         "R_Ht_equals_Ht_M": true,
+        "beta_H_equivariance": {
+          "checked_integrally_on_kernel_basis": true,
+          "codomain": "F_3^12/im(H) with M^T action",
+          "domain": "ker(H) with R^T action",
+          "identity": "beta_H(R^T x)=M^T beta_H(x)",
+          "six_dimensional_action_matrix_in_kernel_and_beta_basis": [
+            [
+              0,
+              2,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        "beta_Ht_equivariance": {
+          "checked_integrally_on_kernel_basis": true,
+          "codomain": "F_3^12/im(H^T) with R action",
+          "domain": "ker(H^T) with M action",
+          "identity": "beta_Ht(M x)=R beta_Ht(x)",
+          "six_dimensional_action_matrix_in_kernel_and_beta_basis": [
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              2,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              0,
+              2,
+              0,
+              0
+            ]
+          ]
+        },
         "coordinate_signed_monomial_matrix_R": [
           [
             0,
@@ -938,7 +1162,8 @@
         ],
         "identities_remain_true_mod_3": true
       }
-    ]
+    ],
+    "signed_six_dimensional_transport": "the divided Bocksteins are equivariant: beta_H intertwines ker(H),R^T with coker(H),M^T, and beta_Ht intertwines ker(H^T),M with coker(H^T),R"
   },
   "flag_from_operator": {
     "consequence_with_c465_simplicity": {

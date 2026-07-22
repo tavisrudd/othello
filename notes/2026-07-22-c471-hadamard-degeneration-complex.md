@@ -220,6 +220,29 @@ transport.  This is an operator-level consequence of the already-certified C470 
 a new automorphism census, does not classify the frozen signed preimage, and makes no genuine-Weil
 claim; those discriminators remain C472's boundary.
 
+The divided maps retain this equivariance.  For the two recorded standard generators, the first
+adjoint identity gives, integrally on a lift of `x in ker(H mod 3)`,
+
+```text
+beta_H(R^T x) = [H R^T x/3]
+              = [M^T Hx/3]
+              = M^T beta_H(x)
+              in F_3^12/im(H).
+```
+
+Similarly `R H^T=H^T M` gives
+
+```text
+beta_Ht(Mx)=R beta_Ht(x)       in F_3^12/im(H^T).
+```
+
+The JSON records the resulting `6x6` action matrices in each kernel basis and the corresponding
+Bockstein-cokernel basis; the matrices agree literally.  The independent replay reconstructs both
+orientations from C470's signed arrays and verifies the divided identities over the integers.
+Consequently C472 receives a canonical signed six-dimensional transport, not merely two
+six-spaces of matching dimension.  What remains for C472 is to determine the frozen preimage,
+central scalar, and genuine-Weil character—not to invent an intertwiner between the carriers.
+
 ## Comparison with C455
 
 The common exact pattern is normalization of a raw transform by the square root of its
@@ -297,6 +320,10 @@ signed-preimage, q=7, or full Weil-module conclusion is made.
 - **Settled by the signed-equivariance pass.** C470's recorded lifts preserve the integral pairing
   through the three literal adjoint identities above, so the exact complex is compatible with the
   known signed carrier geometry.
+- **Settled after cross-check — the signed six-space transport is canonical.** The divided
+  Bocksteins intertwine `R^T` with `M^T` and `M` with `R`, with explicit equal `6x6` kernel/cokernel
+  action matrices.  C472 inherits this transport and only needs to classify its frozen signed and
+  Weil structure.
 - **Open, with exact owner — frozen signed/Weil interpretation.** C471 does not decide the central
   preimage of frozen `PSL_2(11)` or compare its six-space with the genuine Weil Brauer constituent.
   C472 owns that discriminator.

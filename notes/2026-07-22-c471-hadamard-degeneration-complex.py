@@ -57,6 +57,11 @@ def matmul(a, b, modulus=None):
     return answer
 
 
+def matvec(matrix, vector, modulus=None):
+    answer = [sum(row[j] * vector[j] for j in range(len(vector))) for row in matrix]
+    return [value % modulus for value in answer] if modulus is not None else answer
+
+
 def identity(n: int):
     return [[int(i == j) for j in range(n)] for i in range(n)]
 
@@ -326,6 +331,27 @@ def build():
         assert matmul(hadamard, transpose(coordinate_action)) == \
             matmul(transpose(row_action), hadamard)
         assert matmul(row_action, matmul(hadamard, transpose(coordinate_action))) == hadamard
+        coordinate_dual = transpose(coordinate_action)
+        row_dual = transpose(row_action)
+        beta_h_action = []
+        for vector in kernel:
+            transformed = matvec(coordinate_dual, vector)
+            transformed_h = matvec(hadamard, transformed)
+            original_divided = [value // 3 for value in matvec(hadamard, vector)]
+            assert all(value % 3 == 0 for value in transformed_h)
+            transformed_divided = [value // 3 for value in transformed_h]
+            assert transformed_divided == matvec(row_dual, original_divided)
+            beta_h_action.append(coordinates([value % 3 for value in transformed], kernel))
+        beta_ht_action = []
+        for vector in transpose_kernel:
+            transformed = matvec(row_action, vector)
+            transformed_ht = matvec(hadamard_t, transformed)
+            original_divided = [value // 3 for value in matvec(hadamard_t, vector)]
+            assert all(value % 3 == 0 for value in transformed_ht)
+            transformed_divided = [value // 3 for value in transformed_ht]
+            assert transformed_divided == matvec(coordinate_action, original_divided)
+            beta_ht_action.append(coordinates([value % 3 for value in transformed],
+                                               transpose_kernel))
         signed_adjoint_intertwiners.append({
             "coordinate_signed_monomial_matrix_R": coordinate_action,
             "Hadamard_row_signed_monomial_matrix_M": row_action,
@@ -334,6 +360,20 @@ def build():
             "H_Rt_equals_Mt_H": True,
             "M_H_Rt_equals_H": True,
             "identities_remain_true_mod_3": True,
+            "beta_H_equivariance": {
+                "domain": "ker(H) with R^T action",
+                "codomain": "F_3^12/im(H) with M^T action",
+                "six_dimensional_action_matrix_in_kernel_and_beta_basis": beta_h_action,
+                "identity": "beta_H(R^T x)=M^T beta_H(x)",
+                "checked_integrally_on_kernel_basis": True,
+            },
+            "beta_Ht_equivariance": {
+                "domain": "ker(H^T) with M action",
+                "codomain": "F_3^12/im(H^T) with R action",
+                "six_dimensional_action_matrix_in_kernel_and_beta_basis": beta_ht_action,
+                "identity": "beta_Ht(M x)=R beta_Ht(x)",
+                "checked_integrally_on_kernel_basis": True,
+            },
         })
 
     perfect_c465 = case["spaces"]["disjoint_row_span"]["basis"]
@@ -547,6 +587,7 @@ def build():
             "C470_base_cell_stabilizer_order": c470["second_order_signed_bipartite_geometry"]["base_cell_stabilizer_order"],
             "signed_adjoint_intertwiners_for_C470_standard_generators": signed_adjoint_intertwiners,
             "equivariance_statement": "C470's signed coordinate and Hadamard-row lifts preserve the integral pairing H; equivalently R H^T=H^T M and H R^T=M^T H for each recorded standard generator",
+            "signed_six_dimensional_transport": "the divided Bocksteins are equivariant: beta_H intertwines ker(H),R^T with coker(H),M^T, and beta_Ht intertwines ker(H^T),M with coker(H^T),R",
             "new_automorphism_or_signed_cover_claim": False,
         },
         "scope": {

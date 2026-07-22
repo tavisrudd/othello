@@ -45,6 +45,18 @@ def multiply_vector(matrix, vector):
     return tuple(sum(x * y for x, y in zip(row, vector)) % P for row in matrix)
 
 
+def integer_matrix_vector(matrix, vector):
+    return tuple(sum(row[j] * vector[j] for j in range(len(vector))) for row in matrix)
+
+
+def basis_coordinates(vector, basis):
+    pivots = [next(i for i, x in enumerate(row) if x) for row in basis]
+    answer = tuple(vector[i] % P for i in pivots)
+    assert tuple(sum(answer[k] * basis[k][j] for k in range(len(basis))) % P
+                 for j in range(len(vector))) == tuple(x % P for x in vector)
+    return answer
+
+
 def act(vector, permutation):
     result = [0] * len(vector)
     for old, value in enumerate(vector):
@@ -142,6 +154,7 @@ def main():
     for support in supports:
         support = set(support)
         hadamard.append([(-1 if i in support else 1) for i in range(11)] + [-1])
+    hadamard_t = [list(row) for row in zip(*hadamard)]
     assert hadamard == certificate["integral_matrix_factorization"]["hadamard_matrix_H"]
     for i in range(12):
         for j in range(12):
@@ -157,8 +170,10 @@ def main():
 
     h3 = [[x % P for x in row] for row in hadamard]
     h3t = [list(row) for row in zip(*h3)]
-    row_space = span(rr(h3))
-    column_space = span(rr(h3t))
+    kernel_basis = rr(h3)
+    transpose_kernel_basis = rr(h3t)
+    row_space = span(kernel_basis)
+    column_space = span(transpose_kernel_basis)
     kernel = set()
     transpose_kernel = set()
     for vector in itertools.product(range(P), repeat=12):
@@ -202,6 +217,34 @@ def main():
                 left = sum(coordinate[i][k] * hadamard[j][k] for k in range(12))
                 right = sum(hadamard[k][i] * row[k][j] for k in range(12))
                 assert left == right
+        coordinate_dual = tuple(zip(*coordinate))
+        row_dual = tuple(zip(*row))
+        beta_h_action = []
+        for vector in kernel_basis:
+            transformed = integer_matrix_vector(coordinate_dual, vector)
+            left = integer_matrix_vector(hadamard, transformed)
+            assert all(value % 3 == 0 for value in left)
+            left = tuple(value // 3 for value in left)
+            divided = tuple(value // 3 for value in integer_matrix_vector(hadamard, vector))
+            right = integer_matrix_vector(row_dual, divided)
+            assert left == right
+            beta_h_action.append(list(basis_coordinates(transformed, kernel_basis)))
+        beta_ht_action = []
+        for vector in transpose_kernel_basis:
+            transformed = integer_matrix_vector(row, vector)
+            left = integer_matrix_vector(hadamard_t, transformed)
+            assert all(value % 3 == 0 for value in left)
+            left = tuple(value // 3 for value in left)
+            divided = tuple(value // 3 for value in
+                            integer_matrix_vector(hadamard_t, vector))
+            right = integer_matrix_vector(coordinate, divided)
+            assert left == right
+            beta_ht_action.append(list(basis_coordinates(transformed,
+                                                          transpose_kernel_basis)))
+        assert beta_h_action == recorded["beta_H_equivariance"][
+            "six_dimensional_action_matrix_in_kernel_and_beta_basis"]
+        assert beta_ht_action == recorded["beta_Ht_equivariance"][
+            "six_dimensional_action_matrix_in_kernel_and_beta_basis"]
 
     punctured = {word[:11] for word in kernel}
     shortened = {word[:11] for word in kernel if word[11] == 0}
