@@ -4,10 +4,11 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C478 complete; no successor is allocated.  C478 proved that the universal
-edge-torus atlas recovers every frozen C398 syndrome orbit but no fixed-child parent, while the
-full-conic controls have empty deep-syndrome atlas domains.  Modular machinery is licensed only
-after an independent matching decoration passes both the Gram and Sylow gates.
+**Status:** C475--C478 complete; no successor is allocated.  C478's coherence upgrade identifies
+each syndrome atlas with a projected sextic and proves that one diagonal support correspondence
+across at most three syndrome fibres recovers every frozen C398 parent.  The full-conic controls
+have empty deep-syndrome atlas domains, and modular machinery remains licensed only after the
+separate matching, Gram, and Sylow gates.
 
 ## Goal
 
@@ -101,14 +102,16 @@ off-conic vertex.  No balanced edge monomial can refine the collision.
 
 [`C478 exceptional controls`](../2026-07-22-c478-exceptional-family-controls.md) evaluates the
 universal edge-torus atlas on the four C398 non-GRS classes and the fixed `A3/B3/H3` conic phases.
-It recovers the exact syndrome orbit profiles `4 / 6 / 1+6 / 12`, but the intrinsic unlabelled
-atlas family has one parent signature on every fixed-child fibre `6 / 8 / 2 / 22`.  The three full
-conics are complete arcs, so their own atlas domains are empty.  The q=9 cube fails at shared Gram
-rank `3` and a stably zero Sylow endpoint; the pointed q=7/q=11 carriers pass Gram rank zero and
-Sylow endotriviality.  A second extra-juice pass proves that the unlabelled atlas values partition
-the child as `4 / 6 / 1+6 / 12`, exactly its full stabilizer orbits; the resulting full function
-stabilizer gives a structural explanation for parent blindness.  This closes the lane's decision
-gate: modular machinery is conditional downstream structure, not a general atlas discriminator.
+It recovers the exact syndrome orbit profiles `4 / 6 / 1+6 / 12`.  Independent fibrewise
+unlabelling retains only those child-orbit colours and no parent information, but the coherent
+Galois-equivariant family—one diagonal `S6` across fibres—has exactly `6 / 8 / 2 / 22` parent
+signatures and recovers all four fibres with minimum syndrome counts `3 / 3 / 2 / 3`.  The q=8
+`3+3` collapse under a colourwise Frobenius quotient is exactly erased `Gal(F_8/F_2)` orientation.
+The three full conics are complete arcs, so their own atlas domains are empty.  The q=9 cube still
+fails at shared Gram rank `3` and a stably zero Sylow endpoint; the pointed q=7/q=11 carriers pass
+Gram rank zero and Sylow endotriviality.  The next theorem gate is simultaneous projection
+reconstruction with an explicit discriminant; modular machinery remains conditional downstream
+structure.
 
 Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 
@@ -127,11 +130,13 @@ Cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`,
 
 ## Unallocated level-ups
 
-- **Generic all-field reconstruction:** allocate only if C475 proves a small generating atlas and
-  C476 shows separation outside a describable degeneracy locus. Target: classify all syndrome
-  orbits for six-point GRS supports away from an explicit discriminant.
-- **Semilinear tower theorem:** allocate only if extension-field cases expose a Frobenius/Hilbert-90
-  obstruction not already removed by taking Frobenius orbits.
+- **Simultaneous projection reconstruction:** C478 now supplies the finite gate: each syndrome
+  atlas is a projected sextic, and a coherent pair/triple recovers every frozen parent with exact
+  thresholds `3 / 3 / 2 / 3`.  A newly allocated task should prove that three generic centres
+  reconstruct a six-arc up to one diagonal `S6`, with an explicit exceptional discriminant.
+- **Semilinear tower theorem:** q=8 exposes a precise `C3` colour orientation, but allocate a
+  separate descent task only if simultaneous reconstruction promotes it from a one-case Galois
+  orbit into a structural Frobenius/Hilbert--90 class.
 - **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary

@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+from collections import Counter
 from pathlib import Path
 
 
@@ -25,6 +26,13 @@ class Field:
             self.p, self.degree, self.modulus = 3, 2, (1, 0, 1)
         else:
             raise ValueError(q)
+        self.multiplication = [
+            [self.raw_mul(x, y) for y in range(q)] for x in range(q)
+        ]
+        self.inverses = [0] + [
+            next(y for y in range(1, q) if self.multiplication[x][y] == 1)
+            for x in range(1, q)
+        ]
 
     def digits(self, value: int) -> list[int]:
         answer = []
@@ -50,7 +58,7 @@ class Field:
     def sub(self, x: int, y: int) -> int:
         return self.add(x, self.neg(y))
 
-    def mul(self, x: int, y: int) -> int:
+    def raw_mul(self, x: int, y: int) -> int:
         if self.degree == 1:
             return x * y % self.p
         left, right = self.digits(x), self.digits(y)
@@ -69,6 +77,9 @@ class Field:
                 ) % self.p
         return self.encode(product[: self.degree])
 
+    def mul(self, x: int, y: int) -> int:
+        return self.multiplication[x][y]
+
     def power(self, x: int, exponent: int) -> int:
         answer = 1
         while exponent:
@@ -80,7 +91,7 @@ class Field:
 
     def inverse(self, x: int) -> int:
         assert x
-        return self.power(x, self.q - 2)
+        return self.inverses[x]
 
     def frobenius(self, x: int, power: int) -> int:
         return self.power(x, self.p ** power)
@@ -208,10 +219,48 @@ def atlas(field: Field, support, syndrome, permutation=range(6)) -> tuple[int, .
 
 
 def canonical_atlas(field: Field, support, syndrome) -> tuple[int, ...]:
-    return min(
-        tuple(field.frobenius(x, power) for x in atlas(field, support, syndrome, permutation))
-        for permutation in PERMUTATIONS for power in range(field.degree)
-    )
+    return canonical_coherent_family(field, support, (syndrome,))[0]
+
+
+def canonical_family(field: Field, support, syndromes, frobenius_powers) -> tuple[tuple[int, ...], ...]:
+    ordered_edges = []
+    for syndrome in syndromes:
+        ordered_edges.append({
+            (i, j): det3(field, syndrome, support[i], support[j])
+            for i in range(6) for j in range(6) if i != j
+        })
+    best = None
+    for permutation in PERMUTATIONS:
+        family = []
+        for edges in ordered_edges:
+            value = []
+            for i, j, k, ell in itertools.combinations(range(6), 4):
+                numerator = field.mul(edges[permutation[i], permutation[j]],
+                                      edges[permutation[k], permutation[ell]])
+                value += [
+                    field.mul(numerator, field.inverse(field.mul(
+                        edges[permutation[i], permutation[k]], edges[permutation[j], permutation[ell]]
+                    ))),
+                    field.mul(numerator, field.inverse(field.mul(
+                        edges[permutation[i], permutation[ell]], edges[permutation[j], permutation[k]]
+                    ))),
+                ]
+            family.append(tuple(value))
+        family = tuple(family)
+        for power in frobenius_powers:
+            candidate = tuple(tuple(field.frobenius(x, power) for x in value) for value in family)
+            if best is None or candidate < best:
+                best = candidate
+    assert best is not None
+    return best
+
+
+def canonical_coherent_family(field: Field, support, syndromes) -> tuple[tuple[int, ...], ...]:
+    return canonical_family(field, support, syndromes, range(field.degree))
+
+
+def canonical_galois_equivariant_family(field: Field, support, syndromes) -> tuple[tuple[int, ...], ...]:
+    return canonical_family(field, support, syndromes, (0,))
 
 
 def partition(points, transformations, field: Field) -> list[list[int]]:
@@ -330,6 +379,99 @@ def main() -> None:
             assert sorted(map(len, full_locus_parts)) == case["full_child_point_orbit_sizes"]
             assert function_stabilizer_order == case["unlabelled_atlas_function_stabilizer_order"]
             assert function_stabilizer_order == case["full_child_semilinear_stabilizer_order"] == len(group)
+
+            coherent = [canonical_coherent_family(field, parent, locus) for parent in parents]
+            coherent_fibres = Counter(coherent)
+            assert len(coherent_fibres) == case["coherently_unlabelled_atlas_parent_signature_count"]
+            assert sorted(coherent_fibres.values()) == case["coherently_unlabelled_atlas_parent_signature_fibre_sizes"]
+            assert (len(coherent_fibres) == len(parents)) == case["coherently_unlabelled_atlas_recovers_parent"]
+
+            child_actions = tuple({
+                tuple({point: i for i, point in enumerate(locus)}[apply(field, transformation, point)]
+                      for point in locus)
+                for transformation in group
+            })
+            replay_profile = []
+            minimum = None
+            for level in case["coherent_syndrome_subset_recovery_profile"]:
+                subset_size = level["syndrome_subset_size"]
+                unseen_subsets = set(itertools.combinations(range(len(locus)), subset_size))
+                rows = []
+                while unseen_subsets:
+                    representative = min(unseen_subsets)
+                    subset_orbit = {
+                        tuple(sorted(action[index] for index in representative))
+                        for action in child_actions
+                    }
+                    unseen_subsets -= subset_orbit
+                    selected = tuple(locus[index] for index in representative)
+                    signatures = [
+                        canonical_coherent_family(field, parent, selected) for parent in parents
+                    ]
+                    fibres = Counter(signatures)
+                    rows.append({
+                        "representative_indices": list(representative),
+                        "child_subset_orbit_size": len(subset_orbit),
+                        "coherent_parent_signature_count": len(fibres),
+                        "coherent_parent_signature_fibre_sizes": sorted(fibres.values()),
+                    })
+                rows.sort(key=lambda row: row["representative_indices"])
+                replay_profile.append({
+                    "syndrome_subset_size": subset_size,
+                    "child_subset_orbits": rows,
+                })
+                if any(row["coherent_parent_signature_count"] == len(parents) for row in rows):
+                    minimum = subset_size
+                    break
+            assert replay_profile == case["coherent_syndrome_subset_recovery_profile"]
+            assert minimum == case["minimum_recovering_coherent_syndrome_count"]
+
+            equivariant = [
+                canonical_galois_equivariant_family(field, parent, locus) for parent in parents
+            ]
+            equivariant_fibres = Counter(equivariant)
+            assert len(equivariant_fibres) == case["galois_equivariant_coherent_parent_signature_count"]
+            assert sorted(equivariant_fibres.values()) == case[
+                "galois_equivariant_coherent_parent_signature_fibre_sizes"
+            ]
+            assert (len(equivariant_fibres) == len(parents)) == case[
+                "galois_equivariant_coherent_atlas_recovers_parent"
+            ]
+            equivariant_profile = []
+            equivariant_minimum = None
+            for level in case["galois_equivariant_syndrome_subset_recovery_profile"]:
+                subset_size = level["syndrome_subset_size"]
+                unseen_subsets = set(itertools.combinations(range(len(locus)), subset_size))
+                rows = []
+                while unseen_subsets:
+                    representative = min(unseen_subsets)
+                    subset_orbit = {
+                        tuple(sorted(action[index] for index in representative))
+                        for action in child_actions
+                    }
+                    unseen_subsets -= subset_orbit
+                    selected = tuple(locus[index] for index in representative)
+                    signatures = [
+                        canonical_galois_equivariant_family(field, parent, selected)
+                        for parent in parents
+                    ]
+                    fibres = Counter(signatures)
+                    rows.append({
+                        "representative_indices": list(representative),
+                        "child_subset_orbit_size": len(subset_orbit),
+                        "equivariant_parent_signature_count": len(fibres),
+                        "equivariant_parent_signature_fibre_sizes": sorted(fibres.values()),
+                    })
+                rows.sort(key=lambda row: row["representative_indices"])
+                equivariant_profile.append({
+                    "syndrome_subset_size": subset_size,
+                    "child_subset_orbits": rows,
+                })
+                if any(row["equivariant_parent_signature_count"] == len(parents) for row in rows):
+                    equivariant_minimum = subset_size
+                    break
+            assert equivariant_profile == case["galois_equivariant_syndrome_subset_recovery_profile"]
+            assert equivariant_minimum == case["minimum_recovering_galois_equivariant_syndrome_count"]
             checked += 1
 
     for case in certificate["coxeter_conic_phase_controls"]:
@@ -355,7 +497,7 @@ def main() -> None:
     assert rank(vectors, 3) == 3
     assert certificate["c398_non_grs_controls"][1]["modular_carrier"]["stable_endpoint"] == "zero (projective)"
     print(
-        f"C478 independent replay: {checked} atlas/orbit rows, 3 conic controls, "
+        f"C478 independent replay: {checked} atlas/coherence rows, 3 conic controls, "
         "and all Gram/Sylow gates agree"
     )
 

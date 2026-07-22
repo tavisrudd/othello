@@ -84,6 +84,26 @@ def canonical_unlabelled_atlas(module, field, support, syndrome) -> tuple[int, .
     return min(candidates)
 
 
+def canonical_coherent_family(module, field, support, syndromes) -> tuple[tuple[int, ...], ...]:
+    """Canonicalize one common support relabelling across every syndrome fibre."""
+    candidates = []
+    for permutation in SUPPORT_PERMUTATIONS:
+        family = tuple(atlas(module, field, support, syndrome, permutation) for syndrome in syndromes)
+        for power in range(field.degree):
+            candidates.append(tuple(
+                tuple(field.frobenius(x, power) for x in value) for value in family
+            ))
+    return min(candidates)
+
+
+def canonical_galois_equivariant_family(module, field, support, syndromes) -> tuple[tuple[int, ...], ...]:
+    """Forget one global support labelling but retain finite-field colours equivariantly."""
+    return min(
+        tuple(atlas(module, field, support, syndrome, permutation) for syndrome in syndromes)
+        for permutation in SUPPORT_PERMUTATIONS
+    )
+
+
 def orbit_partition(points, transformations, apply) -> list[list[int]]:
     point_index = {point: index for index, point in enumerate(points)}
     unseen = set(range(len(points)))
@@ -203,6 +223,83 @@ def analyze_c398(module, companion, c398_data, c474_data) -> list[dict[str, obje
             assert unlabelled_value_partition == full_child_orbits
             assert atlas_function_stabilizer_order == len(full_locus_group)
 
+            coherent_parent_signatures = [
+                canonical_coherent_family(module, field, parent, locus) for parent in parents
+            ]
+            coherent_fibres = Counter(coherent_parent_signatures)
+            locus_index = {point: index for index, point in enumerate(locus)}
+            child_actions = tuple({
+                tuple(locus_index[apply(transformation, point)] for point in locus)
+                for transformation in full_locus_group
+            })
+            subset_recovery_profile = []
+            minimum_recovering_count = None
+            for subset_size in range(1, len(locus) + 1):
+                unseen_subsets = set(itertools.combinations(range(len(locus)), subset_size))
+                level = []
+                while unseen_subsets:
+                    representative = min(unseen_subsets)
+                    subset_orbit = {
+                        tuple(sorted(action[index] for index in representative))
+                        for action in child_actions
+                    }
+                    unseen_subsets -= subset_orbit
+                    selected = tuple(locus[index] for index in representative)
+                    signatures = [
+                        canonical_coherent_family(module, field, parent, selected)
+                        for parent in parents
+                    ]
+                    level.append({
+                        "representative_indices": list(representative),
+                        "child_subset_orbit_size": len(subset_orbit),
+                        "coherent_parent_signature_count": len(set(signatures)),
+                        "coherent_parent_signature_fibre_sizes": sorted(Counter(signatures).values()),
+                    })
+                level.sort(key=lambda row: row["representative_indices"])
+                subset_recovery_profile.append({
+                    "syndrome_subset_size": subset_size,
+                    "child_subset_orbits": level,
+                })
+                if any(row["coherent_parent_signature_count"] == len(parents) for row in level):
+                    minimum_recovering_count = subset_size
+                    break
+
+            equivariant_parent_signatures = [
+                canonical_galois_equivariant_family(module, field, parent, locus) for parent in parents
+            ]
+            equivariant_fibres = Counter(equivariant_parent_signatures)
+            equivariant_subset_profile = []
+            minimum_equivariant_count = None
+            for subset_size in range(1, len(locus) + 1):
+                unseen_subsets = set(itertools.combinations(range(len(locus)), subset_size))
+                level = []
+                while unseen_subsets:
+                    representative = min(unseen_subsets)
+                    subset_orbit = {
+                        tuple(sorted(action[index] for index in representative))
+                        for action in child_actions
+                    }
+                    unseen_subsets -= subset_orbit
+                    selected = tuple(locus[index] for index in representative)
+                    signatures = [
+                        canonical_galois_equivariant_family(module, field, parent, selected)
+                        for parent in parents
+                    ]
+                    level.append({
+                        "representative_indices": list(representative),
+                        "child_subset_orbit_size": len(subset_orbit),
+                        "equivariant_parent_signature_count": len(set(signatures)),
+                        "equivariant_parent_signature_fibre_sizes": sorted(Counter(signatures).values()),
+                    })
+                level.sort(key=lambda row: row["representative_indices"])
+                equivariant_subset_profile.append({
+                    "syndrome_subset_size": subset_size,
+                    "child_subset_orbits": level,
+                })
+                if any(row["equivariant_parent_signature_count"] == len(parents) for row in level):
+                    minimum_equivariant_count = subset_size
+                    break
+
             companion_case = companion_cases[q, survivor_index]
             relation = companion_case["signature_overlap_relation"]
             modular = {"carrier_gate_entered": relation is not None}
@@ -263,6 +360,18 @@ def analyze_c398(module, companion, c398_data, c474_data) -> list[dict[str, obje
                 "unlabelled_atlas_function_is_full_child_invariant": (
                     atlas_function_stabilizer_order == len(full_locus_group)
                 ),
+                "coherently_unlabelled_atlas_parent_signature_count": len(coherent_fibres),
+                "coherently_unlabelled_atlas_parent_signature_fibre_sizes": sorted(coherent_fibres.values()),
+                "coherently_unlabelled_atlas_recovers_parent": len(coherent_fibres) == len(parents),
+                "minimum_recovering_coherent_syndrome_count": minimum_recovering_count,
+                "coherent_syndrome_subset_recovery_profile": subset_recovery_profile,
+                "galois_equivariant_coherent_parent_signature_count": len(equivariant_fibres),
+                "galois_equivariant_coherent_parent_signature_fibre_sizes": sorted(equivariant_fibres.values()),
+                "galois_equivariant_coherent_atlas_recovers_parent": (
+                    len(equivariant_fibres) == len(parents)
+                ),
+                "minimum_recovering_galois_equivariant_syndrome_count": minimum_equivariant_count,
+                "galois_equivariant_syndrome_subset_recovery_profile": equivariant_subset_profile,
                 "deletion_trace_signature_count": companion_case["distinct_deletion_trace_signatures"],
                 "deletion_trace_recovers_parent": companion_case["decoration_is_injective"],
                 "modular_carrier": modular,
@@ -348,6 +457,9 @@ def generate() -> dict[str, object]:
     coxeter_cases = analyze_coxeter(c398_module, c399_data, c465_data, ext_data)
     assert all(case["atlas_exactly_recovers_syndrome_orbits"] for case in c398_cases)
     assert all(not case["unlabelled_atlas_recovers_parent"] for case in c398_cases)
+    assert [case["coherently_unlabelled_atlas_parent_signature_count"] for case in c398_cases] == [2, 8, 2, 22]
+    assert [case["galois_equivariant_coherent_parent_signature_count"] for case in c398_cases] == [6, 8, 2, 22]
+    assert [case["minimum_recovering_galois_equivariant_syndrome_count"] for case in c398_cases] == [3, 3, 2, 3]
     assert all(case["c475_atlas_domain_is_empty"] for case in coxeter_cases)
     return {
         "schema": SCHEMA,
@@ -356,13 +468,23 @@ def generate() -> dict[str, object]:
         "atlas_definition": {
             "coordinates_per_syndrome": 30,
             "formula": "(d_ij*d_kl/(d_ik*d_jl), d_ij*d_kl/(d_il*d_jk)) for every i<j<k<l",
-            "parent_comparison": "canonicalize over all six support relabellings and Frobenius powers",
+            "pointwise_parent_comparison": (
+                "canonicalize each syndrome fibre independently over S6 and Frobenius; deliberately loses coherence"
+            ),
+            "coherent_colour_orbit_comparison": (
+                "one diagonal S6 and one common Frobenius power across the selected syndrome fibres"
+            ),
+            "galois_equivariant_coherent_comparison": (
+                "one diagonal S6 across syndrome fibres; retain field colours with Frobenius acting equivariantly"
+            ),
         },
         "c398_non_grs_controls": c398_cases,
         "coxeter_conic_phase_controls": coxeter_cases,
         "sharp_negative": (
-            "The edge-torus atlas recovers every frozen syndrome orbit but no fixed-child parent; "
-            "the full-conic A3/B3/H3 children have no deep-syndrome atlas domain at all. "
+            "The pointwise-unlabelled edge-torus atlas recovers every frozen syndrome orbit but no parent. "
+            "One coherent support relabelling with Galois-equivariant colours recovers every parent fibre "
+            "using at most three syndrome centres; quotienting colours by Frobenius splits q=8 into two triples. "
+            "The full-conic A3/B3/H3 children have no deep-syndrome atlas domain at all. "
             "Modular invertibility begins only after an independently supplied recovering matching decoration "
             "passes both the isotropic Gram and Sylow endomorphism-projectivity gates."
         ),
