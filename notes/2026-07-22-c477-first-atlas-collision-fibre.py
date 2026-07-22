@@ -99,6 +99,25 @@ def conic_point(t: int) -> tuple[int, int, int]:
     return (0, 0, 1) if t == INF else (1, t, t * t % Q)
 
 
+def normalize_point(point: tuple[int, int, int]) -> tuple[int, int, int]:
+    scale = inv(next(x for x in point if x))
+    return tuple(scale * x % Q for x in point)
+
+
+def projective_conic_action(
+    matrix: tuple[int, int, int, int], point: tuple[int, int, int]
+) -> tuple[int, int, int]:
+    """The Sym^2 action inducing the recorded Mobius map on the conic."""
+    a, b, c, d = matrix
+    x, y, z = point
+    image = (
+        d * d * x + 2 * d * c * y + c * c * z,
+        d * b * x + (d * a + c * b) * y + c * a * z,
+        b * b * x + 2 * b * a * y + a * a * z,
+    )
+    return normalize_point(tuple(value % Q for value in image))
+
+
 def det3(rows: tuple[tuple[int, int, int], ...]) -> int:
     (a, b, c), (d, e, f), (g, h, i) = rows
     return (a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g)) % Q
@@ -175,7 +194,11 @@ def compatible(arc: list[tuple[int, int, int]], x: tuple[int, int, int], y: tupl
     return all(det3((a, x, y)) for a in arc)
 
 
-def graph_profile(arc: list[tuple[int, int, int]], vertices: list[tuple[int, int, int]]) -> dict[str, object]:
+def graph_profile(
+    arc: list[tuple[int, int, int]],
+    vertices: list[tuple[int, int, int]],
+    symmetry: tuple[int, int, int, int] | None,
+) -> dict[str, object]:
     continuation_edges = [
         (i, j) for i, j in combinations(range(len(vertices)), 2)
         if compatible(arc, vertices[i], vertices[j])
@@ -200,11 +223,31 @@ def graph_profile(arc: list[tuple[int, int, int]], vertices: list[tuple[int, int
             component.add(i)
             stack.extend(neighbours[i] - component)
         unseen -= component
-        components.append({
+        component_vertices = sorted(vertices[i] for i in component)
+        component_record = {
             "size": len(component),
             "degree_multiset": sorted(len(neighbours[i] & component) for i in component),
-        })
-    components.sort(key=lambda x: (-x["size"], x["degree_multiset"]))
+            "vertices": [list(vertex) for vertex in component_vertices],
+            "lies_on_original_conic": all((x * z - y * y) % Q == 0 for x, y, z in component_vertices),
+        }
+        if symmetry is not None:
+            index = {vertex: i for i, vertex in enumerate(component_vertices)}
+            induced = tuple(index[projective_conic_action(symmetry, vertex)] for vertex in component_vertices)
+            seen = set()
+            cycle_lengths = []
+            for start in range(len(induced)):
+                if start in seen:
+                    continue
+                value = start
+                length = 0
+                while value not in seen:
+                    seen.add(value)
+                    length += 1
+                    value = induced[value]
+                cycle_lengths.append(length)
+            component_record["branch_involution_cycle_lengths"] = sorted(cycle_lengths)
+        components.append(component_record)
+    components.sort(key=lambda x: (-x["size"], x["degree_multiset"], x["vertices"]))
     total_pairs = len(vertices) * (len(vertices) - 1) // 2
     return {
         "vertex_count": len(vertices),
@@ -252,6 +295,11 @@ def generate() -> dict[str, object]:
         r = orbit[0]
         extended_arc = [conic_point(s) for s in SUPPORT + (r,)]
         continuations = legal_continuations(extended_arc)
+        fixing_radical = [
+            matrix for matrix in stabilizer_matrices if mobius(matrix, r) == r
+        ]
+        nonidentity = [matrix for matrix in fixing_radical if permutation(matrix) != tuple(range(Q + 1))]
+        assert len(nonidentity) in (0, 1)
         fibre.append({
             "representative_radical": r,
             "syndrome_representative": list(conic_point(r)),
@@ -262,7 +310,9 @@ def generate() -> dict[str, object]:
             "quadratic_evaluation_rank_on_extended_arc": rank_mod_q(
                 [quadratic_evaluation(v) for v in extended_arc]
             ),
-            "extension_and_continuation_profile": graph_profile(extended_arc, continuations),
+            "extension_and_continuation_profile": graph_profile(
+                extended_arc, continuations, nonidentity[0] if nonidentity else None
+            ),
         })
 
     # Freeze the upstream bytes but do not import its computation.

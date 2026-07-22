@@ -87,6 +87,14 @@ The ramification bit remains the smaller final answer: it has the least possible
 codomain and explains why the fibre splits, while the extension counts certify that the same split
 has genuine downstream MDS-extension content.
 
+An additional extra-juice check identifies how the branch involution acts on that content.  The
+`K5` component is exactly the five omitted points of the original conic, the `C5` is entirely
+off-conic, and the isolated vertex is off-conic.  The unique nonidentity element fixing the branch
+radical acts with cycle type `1+2+2` on both five-vertex components and fixes the isolated vertex.
+Thus the off-conic pentagon carries the same reflection profile as the conic `K5`; it is not an
+unstructured five-cycle accidentally left by the exhaustion.  This still falls short of deriving
+the pentagon adjacency from the Klein quotient alone.
+
 ## Proof of the intrinsic geometry
 
 Choose any projective identification of `C` with `P1`.  Directly exhausting the `1320` normalized
@@ -174,16 +182,21 @@ about the three later q=11 supports, other fields, rank-two collisions, or arbit
 - **Settled cheaply in the closeout pass — the exact graph behind `11` versus `7`.**  The common
   conic component is `K5`; the off-conic pieces are `C5 union K1` and `2 K1`.  This is stronger and
   cleaner than the raw edge and degree counts.
+- **Settled in the requested second extra-juice pass — how ramification acts on the pentagon.**
+  The branch involution has cycle type `1+2+2` on both the conic `K5` and the off-conic `C5`, and
+  fixes the off-conic isolated vertex.  The primary certificate now records component vertices,
+  conic membership, and these cycle profiles; the independent replay reconstructs them directly.
 - **Settled — the smallest first successful prescribed statistic.**  The full conflict graph is
   unnecessary: its vertex count already separates `11` from `7`.
 - **Settled — sharp intrinsic minimality.**  Nontrivial radical stabilizer is a canonical one-bit
   invariant, and no separator of two nonempty orbits can use fewer than two values.
 - **Settled — whether any higher balanced edge monomial can repair the collision.**  C475's full
   torus-quotient theorem rules this out; all six points have the same all-one atlas.
-- **Open, but outside C477 — a direct quotient explanation for the off-conic `C5`.**  The exhaustive
-  incidence proof and graph decomposition are exact, but no coordinate-free derivation of that
-  cycle directly from Klein ramification is proved here.  Any promotion belongs to a newly
-  allocated Reed--Solomon task; it is not needed for this fibre theorem.
+- **Open, but outside C477 — a direct quotient explanation for the off-conic `C5`.**  The second
+  pass proves that the branch involution acts on it as a reflection, exactly matching its action on
+  the conic `K5`, but no coordinate-free derivation of the five adjacency edges from Klein
+  ramification is proved here.  Any promotion belongs to a newly allocated Reed--Solomon task; it
+  is not needed for this fibre theorem.
 - **No other C477 mystery remains.**  Stabilizer action, branch geometry, atlas equality,
   discriminator order, and independent finite replay are complete.
 

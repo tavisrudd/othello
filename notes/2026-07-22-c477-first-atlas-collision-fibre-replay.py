@@ -51,6 +51,19 @@ def conic(t: int) -> tuple[int, int, int]:
     return (0, 0, 1) if t == OO else (1, t, t * t % P)
 
 
+def projective_action(matrix, point):
+    a, b, c, d = matrix
+    x, y, z = point
+    raw = (
+        d * d * x + 2 * d * c * y + c * c * z,
+        d * b * x + (d * a + c * b) * y + c * a * z,
+        b * b * x + 2 * b * a * y + a * a * z,
+    )
+    first = next(value % P for value in raw if value % P)
+    scale = reciprocal(first)
+    return tuple(value * scale % P for value in raw)
+
+
 def determinant(a: tuple[int, int, int], b: tuple[int, int, int], c: tuple[int, int, int]) -> int:
     total = 0
     for perm, sign in [((0, 1, 2), 1), ((1, 2, 0), 1), ((2, 0, 1), 1),
@@ -93,7 +106,7 @@ def veronese2(v: tuple[int, int, int]) -> list[int]:
     return [x * x, x * y, x * z, y * y, y * z, z * z]
 
 
-def profile(radical: int) -> dict[str, object]:
+def profile(radical: int, symmetry=None) -> dict[str, object]:
     arc = [conic(t) for t in sorted(S) + [radical]]
     candidates = [
         x for x in projective_plane()
@@ -123,8 +136,30 @@ def profile(radical: int) -> dict[str, object]:
             component.add(x)
             stack.extend(neighbours[x] - component)
         unseen -= component
-        components.append((len(component), sorted(len(neighbours[x] & component) for x in component)))
-    components.sort(key=lambda x: (-x[0], x[1]))
+        vertices = sorted(component)
+        record = {
+            "size": len(component),
+            "degrees": sorted(len(neighbours[x] & component) for x in component),
+            "vertices": vertices,
+            "on_conic": all((x * z - y * y) % P == 0 for x, y, z in vertices),
+        }
+        if symmetry is not None:
+            induced = {vertex: projective_action(symmetry, vertex) for vertex in vertices}
+            seen = set()
+            cycle_lengths = []
+            for start in vertices:
+                if start in seen:
+                    continue
+                value = start
+                length = 0
+                while value not in seen:
+                    seen.add(value)
+                    length += 1
+                    value = induced[value]
+                cycle_lengths.append(length)
+            record["cycles"] = sorted(cycle_lengths)
+        components.append(record)
+    components.sort(key=lambda x: (-x["size"], x["degrees"], x["vertices"]))
     return {
         "evaluation_rank": row_rank([veronese2(x) for x in arc]),
         "continuation_count": len(candidates),
@@ -158,15 +193,24 @@ def main() -> None:
     )
     assert fixed_sets == [[], [2, 11], [5, 10]]
 
-    profiles = {r: profile(r) for r in (5, 6)}
+    branch_involution = next(g for g in group if g != identity and act(g, 5) == 5)
+    profiles = {5: profile(5, branch_involution), 6: profile(6)}
     assert profiles == {
         5: {"evaluation_rank": 5, "continuation_count": 11, "continuation_edges": 15,
             "conflict_edges": 40, "degree_multiset": [0, 2, 2, 2, 2, 2, 4, 4, 4, 4, 4],
-            "components": [(5, [2, 2, 2, 2, 2]), (5, [4, 4, 4, 4, 4]), (1, [0])],
+            "components": [
+                {"size": 5, "degrees": [2, 2, 2, 2, 2], "vertices": [(0, 1, 0), (0, 1, 10), (1, 7, 0), (1, 8, 6), (1, 9, 10)], "on_conic": False, "cycles": [1, 2, 2]},
+                {"size": 5, "degrees": [4, 4, 4, 4, 4], "vertices": [(1, 6, 3), (1, 7, 5), (1, 8, 9), (1, 9, 4), (1, 10, 1)], "on_conic": True, "cycles": [1, 2, 2]},
+                {"size": 1, "degrees": [0], "vertices": [(1, 8, 4)], "on_conic": False, "cycles": [1]},
+            ],
             "continuation_evaluation_rank": 6},
         6: {"evaluation_rank": 5, "continuation_count": 7, "continuation_edges": 10,
             "conflict_edges": 11, "degree_multiset": [0, 0, 4, 4, 4, 4, 4],
-            "components": [(5, [4, 4, 4, 4, 4]), (1, [0]), (1, [0])],
+            "components": [
+                {"size": 5, "degrees": [4, 4, 4, 4, 4], "vertices": [(1, 5, 3), (1, 7, 5), (1, 8, 9), (1, 9, 4), (1, 10, 1)], "on_conic": True},
+                {"size": 1, "degrees": [0], "vertices": [(0, 1, 0)], "on_conic": False},
+                {"size": 1, "degrees": [0], "vertices": [(1, 9, 1)], "on_conic": False},
+            ],
             "continuation_evaluation_rank": 6},
     }
 
@@ -182,7 +226,15 @@ def main() -> None:
         assert graph["conflict_edge_count"] == replay["conflict_edges"]
         assert graph["continuation_degree_multiset"] == replay["degree_multiset"]
         assert [
-            (x["size"], x["degree_multiset"]) for x in graph["continuation_components"]
+            {
+                "size": x["size"],
+                "degrees": x["degree_multiset"],
+                "vertices": [tuple(vertex) for vertex in x["vertices"]],
+                "on_conic": x["lies_on_original_conic"],
+                **({"cycles": x["branch_involution_cycle_lengths"]}
+                   if "branch_involution_cycle_lengths" in x else {}),
+            }
+            for x in graph["continuation_components"]
         ] == replay["components"]
         assert graph["quadratic_evaluation_rank_on_continuations"] == replay["continuation_evaluation_rank"]
     assert certificate["upstream_frozen_input"]["sha256"] == hashlib.sha256(UPSTREAM.read_bytes()).hexdigest()

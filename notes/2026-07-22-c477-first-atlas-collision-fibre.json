@@ -5,6 +5,11 @@
         "conflict_edge_count": 40,
         "continuation_components": [
           {
+            "branch_involution_cycle_lengths": [
+              1,
+              2,
+              2
+            ],
             "degree_multiset": [
               2,
               2,
@@ -12,9 +17,42 @@
               2,
               2
             ],
-            "size": 5
+            "lies_on_original_conic": false,
+            "size": 5,
+            "vertices": [
+              [
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                10
+              ],
+              [
+                1,
+                7,
+                0
+              ],
+              [
+                1,
+                8,
+                6
+              ],
+              [
+                1,
+                9,
+                10
+              ]
+            ]
           },
           {
+            "branch_involution_cycle_lengths": [
+              1,
+              2,
+              2
+            ],
             "degree_multiset": [
               4,
               4,
@@ -22,13 +60,52 @@
               4,
               4
             ],
-            "size": 5
+            "lies_on_original_conic": true,
+            "size": 5,
+            "vertices": [
+              [
+                1,
+                6,
+                3
+              ],
+              [
+                1,
+                7,
+                5
+              ],
+              [
+                1,
+                8,
+                9
+              ],
+              [
+                1,
+                9,
+                4
+              ],
+              [
+                1,
+                10,
+                1
+              ]
+            ]
           },
           {
+            "branch_involution_cycle_lengths": [
+              1
+            ],
             "degree_multiset": [
               0
             ],
-            "size": 1
+            "lies_on_original_conic": false,
+            "size": 1,
+            "vertices": [
+              [
+                1,
+                8,
+                4
+              ]
+            ]
           }
         ],
         "continuation_degree_multiset": [
@@ -163,19 +240,63 @@
               4,
               4
             ],
-            "size": 5
+            "lies_on_original_conic": true,
+            "size": 5,
+            "vertices": [
+              [
+                1,
+                5,
+                3
+              ],
+              [
+                1,
+                7,
+                5
+              ],
+              [
+                1,
+                8,
+                9
+              ],
+              [
+                1,
+                9,
+                4
+              ],
+              [
+                1,
+                10,
+                1
+              ]
+            ]
           },
           {
             "degree_multiset": [
               0
             ],
-            "size": 1
+            "lies_on_original_conic": false,
+            "size": 1,
+            "vertices": [
+              [
+                0,
+                1,
+                0
+              ]
+            ]
           },
           {
             "degree_multiset": [
               0
             ],
-            "size": 1
+            "lies_on_original_conic": false,
+            "size": 1,
+            "vertices": [
+              [
+                1,
+                9,
+                1
+              ]
+            ]
           }
         ],
         "continuation_degree_multiset": [
