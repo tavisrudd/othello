@@ -18,6 +18,18 @@
     "representation_exchange": "C377 exact J/sigma column square",
     "scheme_exchange": "sigma is the structural swap of C459/C487 Spec Q(sqrt5)"
   },
+  "orientation_line": {
+    "after_inverting_2": "isomorphism of sign lines",
+    "canonical_map": "R^{sigma=-1} -> det_Z(R), x |-> 1 wedge x",
+    "cokernel": "Z/2",
+    "delta_image": "2*(1 wedge tau)",
+    "determinant_line": "det_Z(R)=Z*(1 wedge tau)",
+    "prime_2_mechanism": "sign eigensplitting fails although R tensor F_2=F_4 is etale",
+    "prime_5_mechanism": "odd line specializes to the cotangent/conormal line of the ramified point",
+    "smith_invariants": [
+      2
+    ]
+  },
   "phase_pilots": {
     "inert_p13": {
       "J_after_frobenius_is_involutive": true,
@@ -39,6 +51,7 @@
       ],
       "image_equals_kernel_equals_nilradical": true,
       "multiplication_rank": 1,
+      "nilradical_equals_cotangent_line": true,
       "phase": "nonreduced length-two fibre; swap internalizes",
       "root_support": 3
     },

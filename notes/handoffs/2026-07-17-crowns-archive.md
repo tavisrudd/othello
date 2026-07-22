@@ -155,3 +155,9 @@ nonzero nilradical of the length-two fibre.  Exact pilots at split 19 and inert 
 unchanged C377 `J/pi/lambda` identity, prove the corrected common-action form of S1.  Literal
 represented-functor isomorphisms remain outside scope.  Report and atomic evidence bundle:
 `notes/2026-07-22-c429-attack-vector-scan.{md,py,json,sha256}` and independent `-replay.py`.
+
+User-requested second extra juice sharpened the carrier intrinsically.  The canonical map
+`R^{sigma=-1} -> det_Z(R)`, `x |-> 1 wedge x`, sends `delta` to twice the determinant generator,
+so its cokernel is `Z/2` and it is an isomorphism over `Z[1/2]`.  At 5 the specialized odd line is
+the cotangent/conormal line of the ramified point.  This separates the sign-eigensplitting prime 2
+from the discriminant prime 5 and gives C434 a canonical determinant-line bottom rung.

@@ -41,6 +41,11 @@ def main() -> None:
     assert power((0, 1), 13, 13) == (1, 12)  # 1-tau
     delta = (4, 2)
     assert delta != (0, 0) and mul(delta, delta, 5) == (0, 0)
+    assert data["orientation_line"]["smith_invariants"] == [2]
+    assert data["orientation_line"]["delta_image"] == "2*(1 wedge tau)"
+
+    # At 2 the algebra is etale (t^2+t+1 irreducible), but sign equals trivial character.
+    assert roots(2) == [] and (1 % 2) == (-1 % 2)
 
     # The mod-5 multiplication matrix has one-dimensional image and kernel, both span(delta).
     image = {((m[0][0] * a + m[0][1] * b) % 5,
@@ -50,6 +55,7 @@ def main() -> None:
                   (m[1][0] * a + m[1][1] * b) % 5) == (0, 0)}
     delta_line = {((c * delta[0]) % 5, (c * delta[1]) % 5) for c in range(5)}
     assert image == kernel == delta_line
+    assert data["phase_pilots"]["ramified_p5"]["nilradical_equals_cotangent_line"] is True
 
     for upstream in data["upstream"].values():
         path = HERE / upstream["file"]
