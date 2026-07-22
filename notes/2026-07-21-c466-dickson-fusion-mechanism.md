@@ -110,8 +110,63 @@ reductions are PSL-conjugate to one another, while the C395 control is only oute
 them.  Canonical certificate conjugators are `[[0,1],[1,6]]` from the `phi=13` golden subgroup and
 `[[1,1],[3,15]]` from the `phi=19` subgroup.
 
-This comparison is exact for the induced invariant-conic actions and their projective point
-orbits.  It does not identify C395's non-GRS six-arc with a golden or H4 geometric object.
+### Second-order ej — the six-arcs themselves coincide projectively
+
+Exhausting all `6!=720` ordered frame maps finds exactly 60 projectivities from C395's non-GRS
+`t=-1` six-arc to each golden six-arc.  Canonical maps are
+
+```text
+phi=13: (x,y,z) |-> (z,7y,13x),
+phi=19: (x,y,z) |-> (z,13x,7y).
+```
+
+Each map conjugates the full projective `A5` stabilizers.  On the invariant conics the induced
+Möbius determinants have Legendre symbol `-1`, explaining why this literal geometric
+identification is PGL-visible but belongs to the other PSL class.
+
+The two canonical identifications close through the original seam:
+
+```text
+H_19 H_13^(-1) = [[1,0,0],[0,0,1],[0,1,0]],
+```
+
+the coordinate swap `(y z)` in the rational octahedral hinge.  Thus both C395-to-golden maps are
+outer, while their quotient is exactly the inner hinge element that fuses the two golden sheets at
+31.  The independent A5 control, the golden collision, and the Dickson fusion mechanism form one
+commuting triangle rather than three coincident order calculations.
+
+The enhancement prime 31 is forced by the coordinate ratios, not accidental.  A monomial map from
+the C395 ratios to a golden arc requires
+
+```text
+phi = 8/3,                 (8/3)^2-(8/3)-1 = 31/9.
+```
+
+Thus exactly in characteristic 31, `phi=13` (and its conjugate `1-phi=19`) becomes golden and the
+C395 `t=-1` arc collides projectively with the frozen H3 six-arc.  This explains both the order-60
+stabilizer jump and the earlier obstruction factor 31.  It is a direct H3-marker identification;
+it still does not construct an H4 parent.
+
+### Third-order ej — 31 is the norm of the collision divisor
+
+The `phi=13` monomial map is the reduction of one integral golden template
+
+```text
+H(phi):(x,y,z) |-> (z,2(1-phi)y,phi x)
+```
+
+over `Z[phi]`.  Its six-point residual vanishes precisely on `3phi-8`.  For
+`phi^2-phi-1=0`,
+
+```text
+N(a+b phi)=a^2+ab-b^2,
+N(3phi-8)=(-8)^2+(-8)(3)-3^2=31.
+```
+
+The conjugate divisor selects the other residue prime, and the hinge swap supplies its
+common-coordinate map to the other golden sheet.  Therefore characteristic 31 is not
+just the numerator obtained by substituting `8/3`: it is the unique prime divisor of the integral
+collision divisor.  This upgrades C395's gcd-31 obstruction into an exact golden norm mechanism.
 
 ## q=29/q=41 replication and the Weil-normalization face
 
@@ -159,8 +214,8 @@ python3 notes/2026-07-21-c466-dickson-fusion-mechanism-replay.py
 ```
 
 The generator uses deterministic prime-field enumeration only.  It reconstructs the two golden
-H3 reflection groups, the signed-monomial hinge, all of `PGL_2(q)` for the four tested primes, the
-C395 group and its unique invariant conic, and the cyclotomic Gauss identity.  The independent
+H3 reflection groups, the signed-monomial hinge, all of `PGL_2(q)` for the five tested primes, the
+C395 group and its unique invariant conic, all 720 six-arc frame maps, and the cyclotomic Gauss identity.  The independent
 replay consumes only the canonical Möbius groups and re-enumerates every PGL transporter and the
 Gauss product without importing the generator.
 
@@ -179,8 +234,17 @@ the computation makes no construction, continuation, or H4-parent claim at any o
 - **Settled — whether the q=1 mod 4 Weil sign predicts fusion.**  No: both 29 and 41 have
   `gamma=+1`, while 29 is visible and 41 is fused.  The Gauss sign and the octahedral fusion bit
   are distinct faces.
-- **Open — geometric meaning of the second characteristic-31 A5 class.**  The C395 control is
-  exactly outer-PGL-conjugate, never PSL-conjugate, to the fused golden class, but no natural map
-  between the non-GRS six-arc and the golden/H4 marker was part of the tested data.  A geometric
-  identification would require new conventions and remains with the pre-allocation-gated
-  characteristic-31/H4 gateway, not C466.
+- **Settled in the second-order ej — geometric meaning of the second characteristic-31 A5 class.**
+  The C395 non-GRS six-arc is literally projectively equivalent to each golden H3 six-arc through
+  60 exact maps; the simple monomial maps above conjugate the full `A5` groups and induce the outer
+  conic class.  The identity `(8/3)^2-(8/3)-1=31/9` explains why this collision occurs exactly at
+  the C395 enhancement prime 31.  The two canonical identifications differ by the hinge swap
+  `(y z)`, closing the C395/golden/fusion triangle exactly.
+- **Still open, with an exact gate — H4 parentage.**  The six-arc/H3 marker is now identified, but
+  no 600-cell object, H4 action, or continuation datum was constructed.  That remains the named
+  pre-allocation-gated characteristic-31/H4 gateway.
+- **Open conceptual refinement — why this norm divisor belongs to the wider roof.**  The endpoint
+  coordinate calculation proves that the collision divisor is `(3phi-8)` with norm 31, but no
+  integral icosian or family-level morphism has been exhibited whose degeneration divisor is that
+  ideal.  Such a lift would explain the norm structurally rather than coordinately and belongs with
+  the same gated H4/icosian successor.  No other genuine C466 mystery remains.

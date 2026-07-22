@@ -26,28 +26,216 @@
   "characteristic_31_a5_control": {
     "comparisons": [
       {
+        "c395_six_arc": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            29
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            30
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            1,
+            29,
+            0
+          ]
+        ],
         "canonical_conjugator": [
           0,
           1,
           1,
           6
         ],
+        "canonical_six_arc_projectivity": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            7,
+            0
+          ],
+          [
+            13,
+            0,
+            0
+          ]
+        ],
+        "conjugates_full_projective_a5": true,
+        "direct_six_arc_projectivity_count": 60,
+        "golden_six_arc": [
+          [
+            0,
+            1,
+            12
+          ],
+          [
+            0,
+            1,
+            19
+          ],
+          [
+            1,
+            0,
+            13
+          ],
+          [
+            1,
+            0,
+            18
+          ],
+          [
+            1,
+            12,
+            0
+          ],
+          [
+            1,
+            19,
+            0
+          ]
+        ],
         "golden_tau": 13,
+        "induced_conic_determinant": 23,
+        "induced_conic_determinant_legendre": -1,
+        "induced_conic_mobius": [
+          1,
+          27,
+          27,
+          8
+        ],
         "pgl2_conjugator_count": 60,
         "psl2_conjugator_count": 0
       },
       {
+        "c395_six_arc": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            1,
+            29
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            30
+          ],
+          [
+            1,
+            2,
+            0
+          ],
+          [
+            1,
+            29,
+            0
+          ]
+        ],
         "canonical_conjugator": [
           1,
           1,
           3,
           15
         ],
+        "canonical_six_arc_projectivity": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            13,
+            0,
+            0
+          ],
+          [
+            0,
+            7,
+            0
+          ]
+        ],
+        "conjugates_full_projective_a5": true,
+        "direct_six_arc_projectivity_count": 60,
+        "golden_six_arc": [
+          [
+            0,
+            1,
+            13
+          ],
+          [
+            0,
+            1,
+            18
+          ],
+          [
+            1,
+            0,
+            12
+          ],
+          [
+            1,
+            0,
+            19
+          ],
+          [
+            1,
+            13,
+            0
+          ],
+          [
+            1,
+            18,
+            0
+          ]
+        ],
         "golden_tau": 19,
+        "induced_conic_determinant": 27,
+        "induced_conic_determinant_legendre": -1,
+        "induced_conic_mobius": [
+          1,
+          17,
+          1,
+          13
+        ],
         "pgl2_conjugator_count": 60,
         "psl2_conjugator_count": 0
       }
     ],
+    "direct_identification": "The C395 t=-1 six-arc is projectively equivalent to each golden six-arc, with 60 projectivities in each sheet; every such map conjugates the full A5 stabilizers and induces the outer PGL2 class on the invariant conic.",
+    "enhancement_prime_derivation": {
+      "conclusion": "31 is exactly the characteristic in which the C395 t=-1 coordinate ratios collide with the golden H3 six-arc ratios",
+      "golden_parameter_condition": "phi = 8/3 (or its conjugate 1-phi)",
+      "minimal_polynomial_evaluation": "(8/3)^2-(8/3)-1 = 31/9"
+    },
     "group_order": 60,
     "induced_pgl2_group": [
       [
@@ -411,6 +599,30 @@
         30
       ]
     ],
+    "integral_golden_template": {
+      "exact_scope": "the template maps all six C395 points to the phi=13 golden six-arc precisely on the divisor 3phi-8; the conjugate divisor selects the other residue prime, and the certified hinge swap gives the common-coordinate phi=19 map",
+      "norm": 31,
+      "norm_formula": "N(a+b phi)=a^2+ab-b^2",
+      "over_Z_phi": "H(phi):(x,y,z) -> (z,2(1-phi)y,phi x)",
+      "reduction_phi_to_13": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          7,
+          0
+        ],
+        [
+          13,
+          0,
+          0
+        ]
+      ],
+      "residual_golden_integer": "3phi-8"
+    },
     "invariant_conic_coefficients": [
       1,
       19,
@@ -458,7 +670,27 @@
       60,
       60,
       60
-    ]
+    ],
+    "two_identifications_close_through_hinge": {
+      "description": "H_19 H_13^{-1} is the coordinate swap (y z), an element of the same rational octahedral hinge; the two outer identifications differ by the inner sheet-fusion map.",
+      "sheet_change_matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    }
   },
   "inputs": {
     "2026-07-20-c395-clebsch-ame-pencil-arithmetic": {

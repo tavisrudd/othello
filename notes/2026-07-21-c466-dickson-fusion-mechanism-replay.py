@@ -87,6 +87,15 @@ def det(g,q):
     return (g[0]*g[3]-g[1]*g[2]) % q
 
 
+def norm3(v,q):
+    s = inv(next(x for x in v if x%q),q)
+    return tuple(s*x%q for x in v)
+
+
+def mv3(h,v,q):
+    return tuple(sum(h[i][j]*v[j] for j in range(3))%q for i in range(3))
+
+
 def gauss_replay(item):
     q = item["q"]
     coeff = [0]*q
@@ -134,6 +143,22 @@ def main():
         cs = conjugators(source,c395,universe,q)
         assert len(cs) == comparison["pgl2_conjugator_count"] == 60
         assert sum(legendre(det(g,q),q)==1 for g in cs) == comparison["psl2_conjugator_count"] == 0
+        h = tuple(tuple(row) for row in comparison["canonical_six_arc_projectivity"])
+        source = {tuple(p) for p in comparison["c395_six_arc"]}
+        target = {tuple(p) for p in comparison["golden_six_arc"]}
+        assert {norm3(mv3(h,p,q),q) for p in source} == target
+        induced = tuple(comparison["induced_conic_mobius"])
+        assert legendre(det(induced,q),q) == comparison["induced_conic_determinant_legendre"] == -1
+    bridge = tuple(tuple(row) for row in control["two_identifications_close_through_hinge"]["sheet_change_matrix"])
+    assert bridge == ((1,0,0),(0,0,1),(0,1,0))
+    targets = {item["golden_tau"]: {tuple(p) for p in item["golden_six_arc"]} for item in control["comparisons"]}
+    assert {norm3(mv3(bridge,p,q),q) for p in targets[13]} == targets[19]
+    template = control["integral_golden_template"]
+    hphi = tuple(tuple(row) for row in template["reduction_phi_to_13"])
+    source = {tuple(p) for p in control["comparisons"][0]["c395_six_arc"]}
+    assert {norm3(mv3(hphi,p,q),q) for p in source} == targets[13]
+    assert template["norm"] == (-8)**2 + (-8)*3 - 3**2 == 31
+    assert 8*inv(3,q)%q == 13 and (13*13-13-1)%q == 0
     for item in cert["arf_face"]:
         q = item["q"]
         assert item["genus"] == (q-1)//2

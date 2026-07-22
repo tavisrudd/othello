@@ -75,6 +75,23 @@ def det3(a: tuple[tuple[int, ...], ...], q: int) -> int:
     ) % q
 
 
+def inverse3(a, q: int):
+    d = det3(a, q)
+    assert d
+    cof = tuple(
+        tuple(
+            ((-1) ** (i+j) * (
+                a[(i+1)%3][(j+1)%3] * a[(i+2)%3][(j+2)%3]
+                - a[(i+1)%3][(j+2)%3] * a[(i+2)%3][(j+1)%3]
+            )) % q
+            for j in range(3)
+        )
+        for i in range(3)
+    )
+    adj = transpose(cof)
+    return tuple(tuple(inv(d,q)*x % q for x in row) for row in adj)
+
+
 def closure3(gens, q: int):
     ident = I3
     out = {ident}
@@ -352,8 +369,34 @@ def conic_row(p, q: int):
     return (x*x % q, y*y % q, z*z % q, x*y % q, x*z % q, y*z % q)
 
 
+def frame_projectivity(source, target, q: int):
+    rows = []
+    for p, image in zip(source, target):
+        x,y,z = image
+        r0 = (p[0],p[1],p[2],0,0,0,0,0,0)
+        r1 = (0,0,0,p[0],p[1],p[2],0,0,0)
+        r2 = (0,0,0,0,0,0,p[0],p[1],p[2])
+        rows.extend((
+            tuple((y*r2[k]-z*r1[k]) % q for k in range(9)),
+            tuple((z*r0[k]-x*r2[k]) % q for k in range(9)),
+            tuple((x*r1[k]-y*r0[k]) % q for k in range(9)),
+        ))
+    ns = nullspace(rows, 9, q)
+    assert len(ns) == 1
+    v = norm_vec(ns[0], q)
+    h = tuple(tuple(v[3*i+j] for j in range(3)) for i in range(3))
+    assert det3(h,q)
+    return h
+
+
+def map_point_set(h, points, q: int):
+    return frozenset(norm_vec(mv(h,p,q),q) for p in points)
+
+
 def c395_control(q: int, pgl_mats, lookup, golden_mobius):
     assert q == 31
+    assert 8 * inv(3,q) % q == 13
+    assert (13*13-13-1) % q == 0 and 1-13 == -12
     a = ((1,0,0),(0,1,0),(0,0,-1))
     b = ((0,1,0),(0,0,1),(2,0,0))
     c = ((1,15,8),(22,11,22),(19,24,12))
@@ -381,15 +424,55 @@ def c395_control(q: int, pgl_mats, lookup, golden_mobius):
     coeff, conic = next(iter(unique.items()))
     labels, inverse_labels = conic_labels(coeff, conic, q)
     c395_mobius = subgroup_mobius(group, labels, inverse_labels, lookup, q)
+    c395_six = frozenset(norm_vec(p,q) for p in (
+        (0,1,2),(0,1,-2),(1,2,0),(1,-2,0),(1,0,1),(1,0,-1)
+    ))
+    standard_conic = conic_points((1,1,1,0,0,0),q)
+    standard_labels, standard_inverse_labels = conic_labels((1,1,1,0,0,0),standard_conic,q)
     comparisons = []
     for tau, gm in golden_mobius.items():
         cs = conjugators(gm, c395_mobius, pgl_mats, q)
+        golden_six = six_axes(tau,q)
+        source_order = tuple(sorted(c395_six))
+        projectivities = set()
+        for target_order in itertools.permutations(sorted(golden_six)):
+            h = frame_projectivity(source_order[:4],target_order[:4],q)
+            if tuple(norm_vec(mv(h,p,q),q) for p in source_order) == target_order:
+                projectivities.add(norm_mat(h,q))
+        assert len(projectivities) == 60
+        h = min(projectivities)
+        hi = inverse3(h,q)
+        conjugated = {norm_mat(mm(mm(h,g,q),hi,q),q) for g in group}
+        assert conjugated == golden_a5(tau,q)
+        cross_perm = tuple(
+            standard_inverse_labels[norm_vec(mv(h,labels[x],q),q)]
+            for x in list(range(q)) + [INF]
+        )
+        induced = mobius_for_perm(cross_perm,lookup,q)
+        induced_det = (induced[0]*induced[3]-induced[1]*induced[2]) % q
+        assert legendre(induced_det,q) == -1
         comparisons.append({
             "golden_tau": tau,
             "pgl2_conjugator_count": len(cs),
             "psl2_conjugator_count": sum(legendre((g[0]*g[3]-g[1]*g[2]) % q, q) == 1 for g in cs),
             "canonical_conjugator": list(min(cs)) if cs else None,
+            "direct_six_arc_projectivity_count": len(projectivities),
+            "canonical_six_arc_projectivity": [list(row) for row in h],
+            "c395_six_arc": [list(p) for p in sorted(c395_six)],
+            "golden_six_arc": [list(p) for p in sorted(golden_six)],
+            "conjugates_full_projective_a5": True,
+            "induced_conic_mobius": list(induced),
+            "induced_conic_determinant": induced_det,
+            "induced_conic_determinant_legendre": -1,
         })
+    maps = {item["golden_tau"]: tuple(tuple(row) for row in item["canonical_six_arc_projectivity"]) for item in comparisons}
+    sheet_change = norm_mat(mm(maps[19],inverse3(maps[13],q),q),q)
+    coordinate_swap = ((1,0,0),(0,0,1),(0,1,0))
+    assert sheet_change == coordinate_swap
+    assert coordinate_swap in signed_monomial_hinge(q)
+    integral_template = ((0,0,1),(0,2*(1-13)%q,0),(13,0,0))
+    assert integral_template == maps[13]
+    assert (-8)*(-8) + (-8)*3 - 3*3 == 31
     conic_orbits = sorted(len(orbit(group, p, q)) for p in conic)
     return {
         "group_order": len(group),
@@ -399,6 +482,24 @@ def c395_control(q: int, pgl_mats, lookup, golden_mobius):
         "invariant_conic_orbit_sizes": sorted(Counter(conic_orbits).items()),
         "induced_pgl2_group": [list(g) for g in c395_mobius],
         "comparisons": comparisons,
+        "direct_identification": "The C395 t=-1 six-arc is projectively equivalent to each golden six-arc, with 60 projectivities in each sheet; every such map conjugates the full A5 stabilizers and induces the outer PGL2 class on the invariant conic.",
+        "enhancement_prime_derivation": {
+            "golden_parameter_condition": "phi = 8/3 (or its conjugate 1-phi)",
+            "minimal_polynomial_evaluation": "(8/3)^2-(8/3)-1 = 31/9",
+            "conclusion": "31 is exactly the characteristic in which the C395 t=-1 coordinate ratios collide with the golden H3 six-arc ratios",
+        },
+        "two_identifications_close_through_hinge": {
+            "sheet_change_matrix": [list(row) for row in sheet_change],
+            "description": "H_19 H_13^{-1} is the coordinate swap (y z), an element of the same rational octahedral hinge; the two outer identifications differ by the inner sheet-fusion map.",
+        },
+        "integral_golden_template": {
+            "over_Z_phi": "H(phi):(x,y,z) -> (z,2(1-phi)y,phi x)",
+            "reduction_phi_to_13": [list(row) for row in integral_template],
+            "residual_golden_integer": "3phi-8",
+            "norm_formula": "N(a+b phi)=a^2+ab-b^2",
+            "norm": 31,
+            "exact_scope": "the template maps all six C395 points to the phi=13 golden six-arc precisely on the divisor 3phi-8; the conjugate divisor selects the other residue prime, and the certified hinge swap gives the common-coordinate phi=19 map",
+        },
     }
 
 
