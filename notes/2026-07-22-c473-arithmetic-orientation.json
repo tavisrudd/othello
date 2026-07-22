@@ -1,0 +1,1002 @@
+{
+  "cases": [
+    {
+      "characteristic": 2,
+      "cyclotomic_period_factors": [
+        {
+          "polynomial_constant_first": [
+            1,
+            0,
+            1,
+            1
+          ],
+          "residue_root": 1
+        },
+        {
+          "polynomial_constant_first": [
+            1,
+            1,
+            0,
+            1
+          ],
+          "residue_root": 0
+        }
+      ],
+      "field_discriminant": -7,
+      "frozen_core_basis_rref": [
+        [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      ],
+      "frozen_generators": {
+        "S_permutation_old_to_new": [
+          1,
+          0,
+          5,
+          3,
+          4,
+          2,
+          6
+        ],
+        "T_permutation_old_to_new": [
+          4,
+          6,
+          5,
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      "intertwiner": {
+        "S_source_matrix": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ]
+        ],
+        "S_target_permutation": [
+          1,
+          0,
+          5,
+          3,
+          4,
+          2,
+          6
+        ],
+        "T_source_matrix": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        "T_target_permutation": [
+          4,
+          6,
+          5,
+          1,
+          3,
+          0,
+          2
+        ],
+        "change_of_basis_rows_into_C465_RREF_basis": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "commutes_for_T_and_S": true,
+        "matrix_rows_into_frozen_coordinates": [
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "source": "the selected period-factor module in canonical cyclic basis 1,T,...,T^(d-1)",
+        "source_generator_image_order": 168,
+        "target": "C465 frozen simple core in its literal sheet-coordinate basis"
+      },
+      "normalization_exponent_table": [
+        {
+          "exponent": 1,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            1,
+            0,
+            1,
+            1
+          ],
+          "residue_root": 1
+        },
+        {
+          "exponent": 2,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            1,
+            0,
+            1,
+            1
+          ],
+          "residue_root": 1
+        },
+        {
+          "exponent": 3,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            1,
+            1,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 4,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            1,
+            0,
+            1,
+            1
+          ],
+          "residue_root": 1
+        },
+        {
+          "exponent": 5,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            1,
+            1,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 6,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            1,
+            1,
+            0,
+            1
+          ],
+          "residue_root": 0
+        }
+      ],
+      "opposite_sheet": {
+        "core_basis_rref": [
+          [
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1
+          ]
+        ],
+        "is_conjugate_prime": true,
+        "literal_check": "the transpose shared-edge core on the opposite frozen sheet has the other T minimal polynomial",
+        "selected_alpha_residue": 0,
+        "selected_factor_constant_first": [
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "orientation_rule": "T -> T^a preserves the selected prime exactly for square a and swaps it for nonsquare a",
+      "other_alpha_residue": 0,
+      "period_generator": "alpha=(-1+sqrt(-7))/2",
+      "period_polynomial_constant_first": [
+        2,
+        1,
+        1
+      ],
+      "q": 7,
+      "quadratic_field": "Q(sqrt(-7))",
+      "ring_of_integers": "Z[alpha], alpha^2+alpha+2=0",
+      "selected_alpha_residue": 1,
+      "selected_factor_constant_first": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "selected_prime": "p_-1",
+      "split_primes": [
+        {
+          "alpha_residue": 0,
+          "ideal": "(2,alpha)",
+          "name": "p_0",
+          "residue_map": "a+b*alpha -> a mod 2"
+        },
+        {
+          "alpha_residue": 1,
+          "ideal": "(2,alpha+1)",
+          "name": "p_-1",
+          "residue_map": "a+b*alpha -> a-b mod 2"
+        }
+      ],
+      "type": "B3"
+    },
+    {
+      "characteristic": 3,
+      "cyclotomic_period_factors": [
+        {
+          "polynomial_constant_first": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "residue_root": 2
+        },
+        {
+          "polynomial_constant_first": [
+            2,
+            2,
+            1,
+            2,
+            0,
+            1
+          ],
+          "residue_root": 0
+        }
+      ],
+      "field_discriminant": -11,
+      "frozen_core_basis_rref": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          1,
+          2,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          2,
+          0,
+          2,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          2,
+          1,
+          2,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          2,
+          2,
+          1,
+          2
+        ]
+      ],
+      "frozen_generators": {
+        "S_permutation_old_to_new": [
+          4,
+          5,
+          8,
+          3,
+          0,
+          1,
+          7,
+          6,
+          2,
+          9,
+          10
+        ],
+        "T_permutation_old_to_new": [
+          7,
+          4,
+          8,
+          1,
+          10,
+          2,
+          5,
+          6,
+          3,
+          0,
+          9
+        ]
+      },
+      "intertwiner": {
+        "S_source_matrix": [
+          [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            2,
+            2
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            2,
+            2,
+            0,
+            0
+          ]
+        ],
+        "S_target_permutation": [
+          4,
+          5,
+          8,
+          3,
+          0,
+          1,
+          7,
+          6,
+          2,
+          9,
+          10
+        ],
+        "T_source_matrix": [
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            1,
+            2,
+            1,
+            0
+          ]
+        ],
+        "T_target_permutation": [
+          7,
+          4,
+          8,
+          1,
+          10,
+          2,
+          5,
+          6,
+          3,
+          0,
+          9
+        ],
+        "change_of_basis_rows_into_C465_RREF_basis": [
+          [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            2,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            2,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "commutes_for_T_and_S": true,
+        "matrix_rows_into_frozen_coordinates": [
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            2,
+            2,
+            1,
+            2
+          ],
+          [
+            1,
+            0,
+            0,
+            2,
+            0,
+            1,
+            2,
+            0,
+            0,
+            2,
+            1
+          ],
+          [
+            2,
+            2,
+            1,
+            0,
+            0,
+            2,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            2,
+            0,
+            2,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            2,
+            1,
+            2,
+            0,
+            2
+          ]
+        ],
+        "source": "the selected period-factor module in canonical cyclic basis 1,T,...,T^(d-1)",
+        "source_generator_image_order": 660,
+        "target": "C465 frozen simple core in its literal sheet-coordinate basis"
+      },
+      "normalization_exponent_table": [
+        {
+          "exponent": 1,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            2,
+            2,
+            1,
+            2,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 2,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "residue_root": 2
+        },
+        {
+          "exponent": 3,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            2,
+            2,
+            1,
+            2,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 4,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            2,
+            2,
+            1,
+            2,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 5,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            2,
+            2,
+            1,
+            2,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 6,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "residue_root": 2
+        },
+        {
+          "exponent": 7,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "residue_root": 2
+        },
+        {
+          "exponent": 8,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "residue_root": 2
+        },
+        {
+          "exponent": 9,
+          "legendre_symbol": 1,
+          "minimal_polynomial_constant_first": [
+            2,
+            2,
+            1,
+            2,
+            0,
+            1
+          ],
+          "residue_root": 0
+        },
+        {
+          "exponent": 10,
+          "legendre_symbol": -1,
+          "minimal_polynomial_constant_first": [
+            2,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "residue_root": 2
+        }
+      ],
+      "opposite_sheet": {
+        "core_basis_rref": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            2,
+            2,
+            0,
+            2,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0,
+            2,
+            1,
+            2,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            2,
+            1,
+            1,
+            2,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            2,
+            1,
+            2,
+            0,
+            1,
+            2
+          ]
+        ],
+        "is_conjugate_prime": true,
+        "literal_check": "the transpose shared-edge core on the opposite frozen sheet has the other T minimal polynomial",
+        "selected_alpha_residue": 2,
+        "selected_factor_constant_first": [
+          2,
+          0,
+          1,
+          2,
+          1,
+          1
+        ]
+      },
+      "orientation_rule": "T -> T^a preserves the selected prime exactly for square a and swaps it for nonsquare a",
+      "other_alpha_residue": 2,
+      "period_generator": "alpha=(-1+sqrt(-11))/2",
+      "period_polynomial_constant_first": [
+        3,
+        1,
+        1
+      ],
+      "q": 11,
+      "quadratic_field": "Q(sqrt(-11))",
+      "ring_of_integers": "Z[alpha], alpha^2+alpha+3=0",
+      "selected_alpha_residue": 0,
+      "selected_factor_constant_first": [
+        2,
+        2,
+        1,
+        2,
+        0,
+        1
+      ],
+      "selected_prime": "p_0",
+      "split_primes": [
+        {
+          "alpha_residue": 0,
+          "ideal": "(3,alpha)",
+          "name": "p_0",
+          "residue_map": "a+b*alpha -> a mod 3"
+        },
+        {
+          "alpha_residue": 2,
+          "ideal": "(3,alpha+1)",
+          "name": "p_-1",
+          "residue_map": "a+b*alpha -> a-b mod 3"
+        }
+      ],
+      "type": "H3"
+    }
+  ],
+  "inputs": {
+    "notes/2026-07-20-c406-matching-orbit-scout.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "notes/2026-07-21-c450-weil-cross-sheet.json": {
+      "bytes": 46770,
+      "sha256": "a6fc2d854732011c82b6b5c1440b407b64041bd31f4bac59adec15c1f127353f"
+    },
+    "notes/2026-07-21-c465-mod3-weil-golay.json": {
+      "bytes": 51127,
+      "sha256": "62dc3855782f570699d534907a91028523d393863a8b45189782a13a44614958"
+    },
+    "notes/2026-07-22-c471-hadamard-degeneration-complex.json": {
+      "bytes": 69824,
+      "sha256": "3676e3b8b1c7c92f9c74b80c90b572d3322c73a2509cd96b5718e769fb0e5a15"
+    },
+    "notes/2026-07-22-c472-signed-weil-lift.json": {
+      "bytes": 19249,
+      "sha256": "9865949a2a8b93c0f6c674b2d16a826bd9ff706b4798b67033575d7cbc8b9cf2"
+    }
+  },
+  "normalization_change_table": [
+    {
+      "certificate": "all square exponents in both exact tables",
+      "change": "T -> T^a with a square mod q",
+      "prime_changed": false,
+      "sheet_preserved": true
+    },
+    {
+      "certificate": "all nonsquare exponents in both exact tables",
+      "change": "T -> T^a with a nonsquare mod q",
+      "prime_changed": true,
+      "sheet_preserved": false
+    },
+    {
+      "change": "T -> T^-1",
+      "prime_changed": true,
+      "reason": "-1 is nonsquare for q=7,11",
+      "sheet_preserved": false
+    },
+    {
+      "change": "global code scalar or Hadamard row sign",
+      "prime_changed": false,
+      "reason": "the core subspace and T minimal polynomial are unchanged",
+      "sheet_preserved": true
+    },
+    {
+      "change": "minority-symbol 1/2 relabeling",
+      "prime_changed": false,
+      "reason": "projective scaling changes representatives, not supports, core, or T action",
+      "sheet_preserved": true
+    },
+    {
+      "change": "C472 central signed lift",
+      "prime_changed": false,
+      "reason": "the central scalar is uniform and the unique complement is pure",
+      "sheet_preserved": true
+    },
+    {
+      "change": "Galois alpha -> -1-alpha",
+      "prime_changed": true,
+      "reason": "p_0 and p_-1 are exchanged by definition",
+      "sheet_preserved": false
+    },
+    {
+      "change": "C470 Hadamard row/column outer duality",
+      "prime_changed": true,
+      "reason": "the outer action exchanges the two frozen unipotent/character classes",
+      "sheet_preserved": false
+    }
+  ],
+  "schema": "c473-arithmetic-orientation-v1",
+  "scope": {
+    "Ext_group_claimed": false,
+    "integral_Weil_lattice_claimed": false,
+    "literature_priority_claimed": false,
+    "q7_signed_Hadamard_model_inferred": false
+  },
+  "sharp_boundary": {
+    "Hadamard_signs_alone_orient": false,
+    "claim": "the frozen data select a prime only as an oriented-sheet object; no gauge-free preferred prime exists after quotienting by the allowed outer/Galois swap",
+    "marked_sheet_plus_T_square_class_orients": true,
+    "minority_symbol_alone_orients": false,
+    "signed_lift_alone_orients": false
+  },
+  "task": "C473",
+  "uniform_statement": {
+    "absolute_canonical_orientation": false,
+    "orientation_mechanism": "the minimal polynomial of frozen T on the simple core is the cyclotomic factor whose root orbit has period sum alpha mod p",
+    "outer_exchange": "a nonsquare power, PGL sheet swap, inversion T->T^-1, Galois alpha->-1-alpha, or Hadamard row/column outer duality exchanges both factors and both primes",
+    "period_polynomial": "x^2+x+m with m=(q+1)/4 equal to the reduction characteristic",
+    "prime_pair": "p_0=(m,alpha) and p_-1=(m,alpha+1)",
+    "relative_to_marked_sheet_and_period_generator": true,
+    "sheet_preserving_invariance": "PSL conjugacy and square powers of T preserve the factor and selected prime",
+    "unmarked_orientation_space": "a free C2 torsor identified simultaneously with the two sheets, two order-q unipotent classes, two period factors, and two split primes"
+  },
+  "verdict": "qualified green: the marked frozen sheet and unipotent square-class orient a unique residue prime and lower constituent; forgetting the sheet or allowing an outer nonsquare gauge restores the two-point Galois torsor"
+}
