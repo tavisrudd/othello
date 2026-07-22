@@ -1,5 +1,8 @@
 # C472 — signed Hadamard lift and the central Weil discriminator
 
+**Status:** completed SHARP NEGATIVE on 2026-07-22; exact report and replay bundle:
+`notes/2026-07-22-c472-signed-weil-lift.md`.
+
 **Context:** queued after C470 and C471. C465 rejects the genuine degree-six Weil constituent for
 the frozen permutation action because central `-1` survives in characteristic three. C469 supplies
 the natural signed Hadamard carrier; C470 determines its exact automorphism boundary.
