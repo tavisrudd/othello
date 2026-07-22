@@ -158,8 +158,8 @@ frame and the closing section:
 | First and second quotient moments | **unoriented recovery** | unique complementary balanced sheets | C406/C430/C424 |
 | Signed cubic moment | **oriented** | determinant-square character and sharp degree-three threshold | C406/C412/C420/C423--C424 |
 | Decorated depth profiles | **parent recovered** | `1,4,6 / 1,4,6`, singleton matching, then golden parent | C411/C412/C425 with C379 |
-| Design and perfect-code passage | **structural shadow retained** | QR difference designs, Barker words, perfect Hamming/Golay-parameter spans | C452/C464; classical design/code credit; no `M_12` claim and no unproved ternary uniqueness claim |
-| Golden reduction across primes | **visible or fused** | exact mod-40 law controlled by `(5/q)` and `(2/q)` | C453; C459/C466 mechanism stays in paper 2 |
+| Design and perfect-code passage | **structural shadow retained** | QR difference designs, Barker words, perfect Hamming/Golay-parameter spans, and the Steiner `4-(11,5,1)` minimum-support closure with residual `K_11` edge indexing | C452/C464; classical design/code credit; no `M_12`, ternary uniqueness/equivalence, `M_11`/Witt-action, or C450 55-set equivariance claim |
+| Golden reduction across primes | **visible or fused** | exact mod-40 law; at 31 the C395 and golden arcs meet in a norm-31, first-order collision | C453; C459/C466 mechanisms stay in paper 2; no common carrier for the `(5/q)`, `(2/q)`, and `(-1/q)` characters and no H4 claim |
 | Theta / Arf passage | **forgotten** | Lagrangian packings and superspecial Jacobians remain | C451; parity is not a sheet detector |
 | Quantum LU passage | **forgotten** | exact equivalence bitorsor and signed-Fourier duality remain | C456/C467; advice concerns geometric parent choice, not a quantum LU invariant |
 | Ambient Fourier restriction | **projective shadow only** | one scoped Weil-Weyl operator restriction | C455; C450/C454 forbid module-identity and Klein-five-space wording |
@@ -172,9 +172,12 @@ frame and the closing section:
    module-identification phrasing.
 2. *Prophecy* — no longer a blind guess: the certified mod-40 law says the bit survives at 19 and
    fuses at 31 (`(2/31) = +1`).  C466 proves the rational-`S4`/Dickson mechanism on the tested
-   golden-split primes, while C468 supplies an independent good-prime arithmetic carrier that is
-   explicitly blind to fusion.  Paper 1 states the law and points to these sequel results without
-   importing their proofs or claiming an H4 construction.
+   golden-split primes and identifies 31 as the norm-31, first-order collision of the C395 and
+   golden six-arcs.  It also separates existence, fusion, and Weil phase into the three quadratic
+   characters of `Q(sqrt5,sqrt2,i)` without yet producing one object that carries all three.
+   C468 supplies an independent good-prime arithmetic carrier that is explicitly blind to fusion.
+   Paper 1 states the law and points to these sequel results without importing their proofs or
+   claiming an H4 construction.
 3. *Stakes* — the walls: perfect codes end at 11, odd Barker at 13 (and 13 is golden-inert —
    one-sentence remark only), polytopes at 19 in the ambient classification only (the red-team
    category fix). A q=13 phase must collect the last odd Barker word or the tower ends at 11.
@@ -376,12 +379,15 @@ certificates are complete.
 5. **External read and release.**  Obtain a cold mathematical/priority read, then perform the
    mixed-verification, exact-commit pinning, provenance, rendering, and immutable-artifact steps in
    the paper handoff.
-6. **Survival-ledger audits.**  C464 has landed and closes the perfect-code evidence row.  Before
+6. **Survival-ledger audits.**  C464 has landed and closes the perfect-code and ternary
+   minimum-support Steiner-design rows.  Its residual `K_11` edge indexing is certified, but the
+   expected equivariant bridge to C450's 55 relation supports is not.  Before
    drafting the closing section, each paper-facing row still needs its bounded literature audit per
    `literature-audit-conventions.md`; QR/design/code terminology remains heavily classical, and the
    Paley-deflation credit list is the starting point.  Apply chirality disambiguation, duality vs
    polarity, vertex-facet-level 11-cell wording, and the exact ternary Golay-parameter boundary at
-   first drafting.  C466 and C468 strengthen the sequel pointers but do not enlarge Paper 1.
+   first drafting.  C466's characteristic-31 collision theorem and C468 strengthen the sequel
+   pointers but do not enlarge Paper 1.
 
 C410 now closes every spanning q=7 six-point external-line closure, not the broader pointed-memory
 problem.  C418 and C419 own the active seven/eight-point balanced-trade and fixed-incidence-moduli
