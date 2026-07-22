@@ -263,13 +263,35 @@ The real open mechanisms are narrower:
    tensor, or is it the generic, non-discriminating `C3` eigenfield every rational `S3` supplies?
 3. **C466 Dickson mechanism.** The two characters explain the residue classes but not yet the
    subgroup-level `S4/A4` conjugation mechanism at visible versus fused primes.
-4. **Characteristic 5.** The quotient's nonreduced collision is exact, but the chosen Hilbert-90
-   matrix has determinant 5; an integral geometric model through the ramified fibre is outside
-   C459's `Z[1/5]` boundary.
+Items 1--2 are Phase-3 comparison tests and item 3 is already allocated as C466. None requires
+reopening the completed `Q`-form classification.
 
-Items 1--2 are Phase-3 comparison tests, item 3 is already allocated as C466, and item 4 should
-remain gated unless the ramified fibre becomes manuscript-relevant. None requires reopening the
-completed `Q`-form classification.
+### Characteristic 5 is now settled
+
+The apparent denominator obstruction belongs to the chosen Hilbert-90 matrix, not the descended
+projective object. Although `det(h)=5`, the normalized sextuple and Gram matrix above are integral.
+At `phi=3 mod 5`, the six geometric points specialize pairwise to
+
+```text
+[1:0:2],       [1:2:2],       [1:3:2],
+```
+
+and the étale algebra `K^3` becomes
+
+```text
+(F_5[epsilon]/epsilon^2)^3.
+```
+
+Meanwhile
+
+```text
+y^T G y = 2(z-2x)^2 mod 5.
+```
+
+Thus the exact special fibre is three ramified length-two points supported on the double line
+`z-2x=0`. The degree-six configuration has a flat integral degeneration; what fails at 5 is the
+smooth-conic/perfect-matching category, not existence of an integral model. This closes the fourth
+open item rather than creating a new task.
 
 ## Scope and boundary
 
@@ -302,9 +324,9 @@ input against C442's committed manifest; C442 in turn hash-pins the frozen C379/
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary generator/checker `.py` | 18,849 | `345003b0bd85d43c9cb6f223d4c98ab6bb2cfb03c64b11f9d1a156205a803c2e` |
-| independent replay `.py` | 7,970 | `fecf816dcf303e9d3d299a5024e536244d2f06371252d973ed6cc78205a9f394` |
-| canonical certificate `.json` | 17,563 | `32e53d266b06fe632268f07205c98091a308b0681e5f427e6807c6d35b1e93bf` |
+| primary generator/checker `.py` | 20,509 | `432cd6760d87a27b21c1d3f75e6644688c12280f655a9d3d316b692eda7c0bce` |
+| independent replay `.py` | 8,460 | `0a8252d23d6e6fb7378f0979950fe48865212a2f36eff57ef05eee42d8f97b31` |
+| canonical certificate `.json` | 18,215 | `8ca5d238b2024fcb2430aba0076891342b397e8c24c6964f45aa09e96048b255` |
 
 Trusted computational boundary: exact rational arithmetic in the pair model
 `Q(phi)=Q[phi]/(phi^2-phi-1)`, exact projective normalization, and exhaustive finite closure of the

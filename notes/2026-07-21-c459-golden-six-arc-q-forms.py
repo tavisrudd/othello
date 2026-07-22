@@ -333,6 +333,31 @@ def build_certificate():
     assert split_visible == [11, 19, 21, 29]
     assert split_fused == [1, 9, 31, 39]
 
+    # The normalized Q-model extends integrally through 5 and has an exact ramified degeneration.
+    def red5(x):
+        a, b = x
+        assert a.denominator % 5 and b.denominator % 5
+        return (a.numerator * pow(a.denominator, -1, 5)
+                + 3 * b.numerator * pow(b.denominator, -1, 5)) % 5
+
+    def pnorm5(v):
+        pivot = next(x for x in v if x % 5)
+        invp = pow(pivot, -1, 5)
+        return tuple(x * invp % 5 for x in v)
+
+    arc_mod5 = sorted({pnorm5(tuple(red5(x) for x in v)) for v in descended_arc})
+    assert arc_mod5 == [(1, 0, 2), (1, 2, 2), (1, 3, 2)]
+    assert all(z == 2*x % 5 for x, y, z in arc_mod5)
+    gram_mod5 = tuple(tuple(red5(x) for x in row) for row in gram)
+    assert gram_mod5 == ((3, 0, 1), (0, 0, 0), (1, 0, 2))
+    # y^T G y = 2*(z-2*x)^2 in F_5.
+    for x in range(5):
+        for y in range(5):
+            for z in range(5):
+                lhs = sum((x, y, z)[i] * gram_mod5[i][j] * (x, y, z)[j]
+                          for i in range(3) for j in range(3)) % 5
+                assert lhs == 2 * (z - 2*x)**2 % 5
+
     cocycles = []
     for u in sorted(descent_data, key=mat_key):
         cocycles.append({"matrix": mat_json(u), "raw_cocycle_scalar": q_json(cocycle_scalar(m, u))})
@@ -432,6 +457,15 @@ def build_certificate():
                 "golden_split_PSL_visible": split_visible,
                 "golden_split_PSL_fused": split_fused,
                 "ramified_characteristic_5": "the two roots coalesce at T=3 and the quotient is nonreduced",
+            },
+            "characteristic_5_degeneration": {
+                "integral_descended_model_exists": True,
+                "quotient_algebra": "(F_5[epsilon]/epsilon^2)^3",
+                "support_points": [list(v) for v in arc_mod5],
+                "support_line": "z-2*x=0",
+                "conic_equation": "2*(z-2*x)^2=0",
+                "scheme_description": "three ramified length-2 points supported on the double line",
+                "hilbert90_matrix_warning": "h has determinant 5, but the normalized descended coordinates and Gram matrix are integral",
             },
         },
     }

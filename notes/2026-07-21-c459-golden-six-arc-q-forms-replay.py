@@ -218,6 +218,15 @@ def main():
     split = [r for r in units if r % 5 in (1, 4)]
     assert [r for r in split if r % 8 in (3, 5)] == [11, 19, 21, 29]
     assert [r for r in split if r % 8 in (1, 7)] == [1, 9, 31, 39]
+    def red5(x):
+        return (x[0].numerator * pow(x[0].denominator, -1, 5)
+                + 3*x[1].numerator * pow(x[1].denominator, -1, 5)) % 5
+    def pn5(v):
+        a = next(x for x in v if x); ai = pow(a, -1, 5)
+        return tuple(x*ai % 5 for x in v)
+    support = sorted({pn5(tuple(red5(x) for x in v)) for v in Y})
+    assert support == [(1, 0, 2), (1, 2, 2), (1, 3, 2)]
+    assert cert["classification"]["characteristic_5_degeneration"]["conic_equation"] == "2*(z-2*x)^2=0"
     print("PASS C459 replay: independent Q(phi) arithmetic reproduces the unique S3 descent")
 
 

@@ -2,6 +2,31 @@
   "classification": {
     "D5_test": "negative: no second quadratic descent class; a global D5-rational form is also impossible because an automorphism of A5 fixing D5 pointwise is trivial, which would force all A5 symmetry rational",
     "centralizer_of_natural_D5_in_Aut_A5_equals_S5_order": 1,
+    "characteristic_5_degeneration": {
+      "conic_equation": "2*(z-2*x)^2=0",
+      "hilbert90_matrix_warning": "h has determinant 5, but the normalized descended coordinates and Gram matrix are integral",
+      "integral_descended_model_exists": true,
+      "quotient_algebra": "(F_5[epsilon]/epsilon^2)^3",
+      "scheme_description": "three ramified length-2 points supported on the double line",
+      "support_line": "z-2*x=0",
+      "support_points": [
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          2,
+          2
+        ],
+        [
+          1,
+          3,
+          2
+        ]
+      ]
+    },
     "conceptual_H1": {
       "A5_conjugacy_orbits": 1,
       "cocycles_as_odd_involutions": 10,
