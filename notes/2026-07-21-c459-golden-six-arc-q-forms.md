@@ -208,6 +208,69 @@ finite resolvent model of C417's section obstruction, without invoking a moduli 
 three-line concurrent pencil is also a natural candidate geometric avatar of C444's rational
 `S3` seam, but that coordinate comparison remains for Phase 3 and is not asserted here.
 
+## Fourth-order upgrade: the two-character sheet machine
+
+The intrinsic quotient has the integral model, away from the ramified prime 5,
+
+```text
+Z[1/5,T]/(T^2-T-1).
+```
+
+Its reduction supplies the first of two independent arithmetic switches:
+
+1. `(5/p)` controls **existence of two residue-field sheet labels**. At a golden-split prime the
+   quotient is `F_p x F_p`; at an inert prime it remains `F_(p^2)` and has no `F_p` section. At
+   `p=5` the roots coalesce at `T=3` and the quotient is nonreduced.
+2. Conditional on golden splitting, C442/C453's spinor character `(2/p)` controls **visibility**:
+   `(2/p)=-1` keeps the sheets distinct inside `PSL_2(p)`, while `(2/p)=+1` fuses them.
+
+At 11 the first switch is completely explicit:
+
+```text
+T^2-T-1 = (T-4)(T-8) mod 11,
+```
+
+recovering C458's two choices `phi=4,8`. Combining the two characters gives the exact mod-40
+taxonomy already seen computationally downstream:
+
+| golden quotient | residue classes mod 40 |
+|:--|:--|
+| inert; no `F_p` sheet | `3,7,13,17,23,27,33,37` |
+| split; sheets `PSL`-visible | `11,19,21,29` |
+| split; sheets fused in `PSL` | `1,9,31,39` |
+
+Thus the biquadratic field `Q(sqrt2,sqrt5)` is not merely a convenient reciprocity package:
+`sqrt5` is the field of the intrinsic resolvent, while `sqrt2` is the spinor/transporter visibility
+field. One character creates the two labels; the other decides whether the finite simple group can
+see their difference.
+
+### What is now explained, and what remains unexplained
+
+Three formerly surprising features are forced rather than accidental:
+
+- `Q(sqrt(-3))` is the universal eigenfield of the normal `C3` in a rational `S3` representation;
+  by itself it is not evidence of a special cubic-tensor mechanism.
+- the three conjugate-pair secants concur because the rational representation is `1+2`: their
+  common pole is the invariant line, and `S3` permutes the three secant directions.
+- the mod-40 split/fusion table is exactly the product of the independent golden and spinor
+  quadratic characters.
+
+The real open mechanisms are narrower:
+
+1. **C444 seam comparison.** Is this concurrent rational `S3` pencil literally C444's common
+   silver/golden `S3` seam after the frozen bridge, or only an abstractly isomorphic subgroup?
+2. **C417 cubic comparison.** Does the canonical Eisenstein eigenpair enter the actual `mu_3`
+   tensor, or is it the generic, non-discriminating `C3` eigenfield every rational `S3` supplies?
+3. **C466 Dickson mechanism.** The two characters explain the residue classes but not yet the
+   subgroup-level `S4/A4` conjugation mechanism at visible versus fused primes.
+4. **Characteristic 5.** The quotient's nonreduced collision is exact, but the chosen Hilbert-90
+   matrix has determinant 5; an integral geometric model through the ramified fibre is outside
+   C459's `Z[1/5]` boundary.
+
+Items 1--2 are Phase-3 comparison tests, item 3 is already allocated as C466, and item 4 should
+remain gated unless the ramified fibre becomes manuscript-relevant. None requires reopening the
+completed `Q`-form classification.
+
 ## Scope and boundary
 
 The completeness statement is for forms of the frozen decorated six-arc split by the specified
@@ -239,9 +302,9 @@ input against C442's committed manifest; C442 in turn hash-pins the frozen C379/
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary generator/checker `.py` | 17,523 | `7a06bce791c6f94cd6eff0f105c8f6a55842ece680b48fef780a16e5a6c409da` |
-| independent replay `.py` | 7,667 | `75fba5f9211326bb8872e93df026028f7a9115e7e61c8a08b28e42f361738ba0` |
-| canonical certificate `.json` | 16,791 | `9d8f7fbbd7642acf274700e3891a8006f0277a91cfdc9b26cae64c9c94f1225d` |
+| primary generator/checker `.py` | 18,849 | `345003b0bd85d43c9cb6f223d4c98ab6bb2cfb03c64b11f9d1a156205a803c2e` |
+| independent replay `.py` | 7,970 | `fecf816dcf303e9d3d299a5024e536244d2f06371252d973ed6cc78205a9f394` |
+| canonical certificate `.json` | 17,563 | `32e53d266b06fe632268f07205c98091a308b0681e5f427e6807c6d35b1e93bf` |
 
 Trusted computational boundary: exact rational arithmetic in the pair model
 `Q(phi)=Q[phi]/(phi^2-phi-1)`, exact projective normalization, and exhaustive finite closure of the

@@ -213,6 +213,11 @@ def main():
     assert cert["representative"]["descended_conic_gram"] == [["3", "0", "1"], ["0", "5", "0"], ["1", "0", "2"]]
     assert cert["classification"]["quadratic_A5_descent_taxonomy"]["quadratic_split_rational_symmetry_types"] == ["A5", "V4", "S3"]
     assert cert["classification"]["intrinsic_golden_quotient"]["degree_6_etale_algebra"] == "Q(phi)^3"
+    assert [t for t in range(11) if (t*t-t-1) % 11 == 0] == [4, 8]
+    units = [r for r in range(1, 40, 2) if r % 5]
+    split = [r for r in units if r % 5 in (1, 4)]
+    assert [r for r in split if r % 8 in (3, 5)] == [11, 19, 21, 29]
+    assert [r for r in split if r % 8 in (1, 7)] == [1, 9, 31, 39]
     print("PASS C459 replay: independent Q(phi) arithmetic reproduces the unique S3 descent")
 
 

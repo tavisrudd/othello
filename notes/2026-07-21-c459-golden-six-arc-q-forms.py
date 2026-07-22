@@ -322,6 +322,17 @@ def build_certificate():
     assert len(inner_orbit) == 15
     assert sum(compose(a, d) == compose(d, a) for a in A5_perm) == 4
 
+    # The intrinsic quotient has equation T^2-T-1; combine its split character with spinor (2/p).
+    assert sorted(t for t in range(11) if (t*t - t - 1) % 11 == 0) == [4, 8]
+    unit_classes = [r for r in range(1, 40, 2) if r % 5]
+    golden_split = [r for r in unit_classes if r % 5 in (1, 4)]
+    golden_inert = [r for r in unit_classes if r % 5 in (2, 3)]
+    split_visible = [r for r in golden_split if r % 8 in (3, 5)]
+    split_fused = [r for r in golden_split if r % 8 in (1, 7)]
+    assert golden_inert == [3, 7, 13, 17, 23, 27, 33, 37]
+    assert split_visible == [11, 19, 21, 29]
+    assert split_fused == [1, 9, 31, 39]
+
     cocycles = []
     for u in sorted(descent_data, key=mat_key):
         cocycles.append({"matrix": mat_json(u), "raw_cocycle_scalar": q_json(cocycle_scalar(m, u))})
@@ -411,6 +422,16 @@ def build_certificate():
                 "galois_exchanges_orbits": True,
                 "quotient_by_rational_S3": "Spec(Q(phi))",
                 "rational_section": False,
+                "integral_model_away_from_5": "Z[1/5,T]/(T^2-T-1)",
+                "mod_11_factorization": "(T-4)*(T-8)",
+            },
+            "two_character_prime_machine_mod_40": {
+                "golden_character": "(5/p): controls whether the quotient splits into two F_p sheets",
+                "spinor_character": "(2/p): at golden-split primes, controls PSL distinction (-1) versus fusion (+1)",
+                "golden_inert_no_Fp_sheet": golden_inert,
+                "golden_split_PSL_visible": split_visible,
+                "golden_split_PSL_fused": split_fused,
+                "ramified_characteristic_5": "the two roots coalesce at T=3 and the quotient is nonreduced",
             },
         },
     }

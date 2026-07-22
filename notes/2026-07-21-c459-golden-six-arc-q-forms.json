@@ -16,6 +16,8 @@
         3,
         3
       ],
+      "integral_model_away_from_5": "Z[1/5,T]/(T^2-T-1)",
+      "mod_11_factorization": "(T-4)*(T-8)",
       "quotient_by_rational_S3": "Spec(Q(phi))",
       "rational_section": false,
       "three_closed_degree_2_points": true
@@ -55,6 +57,33 @@
       ]
     },
     "quadratic_descent_classes": 1,
+    "two_character_prime_machine_mod_40": {
+      "golden_character": "(5/p): controls whether the quotient splits into two F_p sheets",
+      "golden_inert_no_Fp_sheet": [
+        3,
+        7,
+        13,
+        17,
+        23,
+        27,
+        33,
+        37
+      ],
+      "golden_split_PSL_fused": [
+        1,
+        9,
+        31,
+        39
+      ],
+      "golden_split_PSL_visible": [
+        11,
+        19,
+        21,
+        29
+      ],
+      "ramified_characteristic_5": "the two roots coalesce at T=3 and the quotient is nonreduced",
+      "spinor_character": "(2/p): at golden-split primes, controls PSL distinction (-1) versus fusion (+1)"
+    },
     "verdict": "the exhibited S3 form is the unique Q-form split by Q(sqrt5) in the frozen decorated category",
     "what_descends": [
       "six-point configuration as a degree-6 Q-subscheme",
