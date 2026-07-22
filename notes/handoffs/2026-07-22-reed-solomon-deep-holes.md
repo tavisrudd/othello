@@ -43,18 +43,16 @@ The older [`C121 q=11 checks`](../2026-07-13-c121-icosahedral-mds-checks.md) and
 [`C122 deep-hole audit`](../2026-07-13-c122-deep-hole-novelty-audit.md) are archaeology only; C398
 and C474 supersede them for lane entry.
 
-Adjacent theorem banks are opt-in, by obstruction shape:
+Use the [`papers index`](../../papers/papers-index.md) as the cross-paper theorem registry. Adjacent
+banks are opt-in, by obstruction shape:
 
-- [`arcs formalization handoff`](done/2026-07-12-arcs-complete-outside-conic-formalization.md) and
-  the [paper proof audit](../../papers/arcs_complete_outside_conic/arcs_complete_outside_conic_proof_audit.md)
-  supply the reusable secant/uncovered-locus identities, conic normalization, defect bounds, and
-  characteristic-two nucleus cases;
-- the [`relconic` handoff](2026-07-17-c210.md), especially the
-  [`C314 invariant atlas`](../2026-07-18-c314-c297-invariant-moduli-stratification.md), supplies a
-  proved model for separating projective scaling, equation gauge, Frobenius, stabilizers, and
-  degeneracy divisors when a C475 fibre becomes an algebraic moduli problem; and
-- [`C295`](../2026-07-17-c295-intrinsic-continuation-reconstruction.md) is the simultaneous-extension
-  complex input for the higher-order-MDS branch. It is not needed for the one-column C475 gate.
+| Bank | Exact handles | Use in this lane |
+|---|---|---|
+| `arcs_complete_outside_conic` | `thm-arc-mds-syndrome`, `thm-relative-syndrome-confinement`, `thm-extension-conflict-hypergraph`, `thm-defect-leader-collision`, `thm-evaluation-dichotomy` | Foundational syndrome/extension semantics, moment constraints, and evaluation-rank obstructions. See the [`arcs` handoff](done/2026-07-12-arcs-complete-outside-conic-formalization.md) and [proof audit](../../papers/arcs_complete_outside_conic/arcs_complete_outside_conic_proof_audit.md). |
+| `clebsch-hexagon-code` | `thm-clebsch-rigidity`, `thm-conic-filling-kle7`, `thm-clebsch-reflection-arrangements`, `thm-rank3-reflection-complement-code` | Rigidity and reflection-family controls beyond the four-class certificate; do not import paper claims by folklore. |
+| `relconic` | [`C312 determinant/trace criterion`](../2026-07-18-c312-c297-seed-repair-legality.md), [`C314 invariant atlas`](../2026-07-18-c314-c297-invariant-moduli-stratification.md) | Model for separating scaling, gauge, Frobenius, stabilizers, and degeneracy divisors when a C475 fibre becomes an algebraic moduli problem. |
+| `complete-repair-ports` | `thm-repair-coefficients` | Warning/control: raw recovery coefficients vary under monomial rescaling, so only gauge-invariant combinations can classify. |
+| Higher-order-MDS branch | [`C295`](../2026-07-17-c295-intrinsic-continuation-reconstruction.md), plus `comp-q11-extension-complex` | Simultaneous-extension input only; not needed for the one-column C475 gate. |
 
 Do not recompute the four C398 fibres, their deletion traces, the q=9 cube, or their automorphism
 orbits unless a new invariant exposes a concrete inconsistency. They are regression controls.
