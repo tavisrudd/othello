@@ -42,4 +42,6 @@ recorded for C483.  Report:
 ## Boundaries
 
 Do not classify the excluded divisor, claim an all-field global theorem, or import modular
-language.
+language.  Do not use the Fable finite-quotient template as a substitute for the source/target
+dimension counts or positive-dimensional residual-family proof; its RS instantiation belongs only
+to C483's child-relative finite-fibre clause.
