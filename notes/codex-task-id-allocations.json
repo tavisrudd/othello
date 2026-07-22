@@ -395,8 +395,17 @@
       "last": 468,
       "purpose": "Klein cubic zeta at good primes 31/41(/61): exact H^3 spectrum, quintic Jacobi sums, C4/Gauss-field meeting, fused-vs-visible control",
       "sequence": 44
+    },
+    {
+      "count": 1,
+      "first": 469,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 469,
+      "purpose": "Witt-Golay equivariance bridge for the 11, 55, and 12 projective-code orbits",
+      "sequence": 45
     }
   ],
-  "next_id": 469,
+  "next_id": 470,
   "schema": "codex-task-id-allocations-v1"
 }
