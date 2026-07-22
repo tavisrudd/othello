@@ -1080,3 +1080,18 @@ Provenance: `2026-07-22-master-stroke-ej.md` (sections 1.2, 1.3); computed exact
 - **q=31 double frame degeneration.** `m=(31+1)/4=8` composite forces coefficient characteristic 2,
   and 31 splits in both `Q(sqrt5)` and `Q(sqrt2)` — the H4 door is a new regime, not a parameter
   bump of the rank-3 frame.
+
+## 2026-07-22 — flag: C430's `P(1) = 1|9|1` socle claim has a dim-11-vs-22 tension
+
+**Provenance:** C429 literature audit (`2026-07-22-c429-literature-audit.md`, Part C); Benson-fence
+search cluster. Standard defining-characteristic sources: Andersen–Jørgensen–Landrock, *Proc. LMS*
+(3) 1983 (abstract/metadata only); Alperin, *Local Representation Theory* (secondary only).
+**Was I looking for this?:** no — surfaced while confirming the Benson intertwiner fence.
+**Observed:** the `P(1) = 1|9|1` (radical layers 1, 9, 1) socle/Loewy description C429's q=11
+refinement cites from C430 has total dimension 11, but the standard SL(2,11) trivial-block PIM
+`P(L(0))` has dimension `2p = 22`. A dim-11 `1|9|1` object (heart `L(8)`, the 9-dim simple) is a
+uniserial module, not the full group-algebra projective cover. The Loewy-length-3 / self-dual-heart
+*mechanism* is standard; the exact `1|9|1` numerics are a C430-owned computation and need C430 to
+state which object "P(1)" denotes (principal-block uniserial submodule, or a Borel/restricted cover).
+**Evidence:** OPEN — reasoned from standard PIM dimension `2p`; not a computation of C430's object.
+**Status:** open lead; unallocated — recommendation for C430/C433 to define/resolve; no task shape.
