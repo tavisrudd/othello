@@ -3,6 +3,7 @@
 **Context:** queued after C470 and C471. C465 rejects the genuine degree-six Weil constituent for
 the frozen permutation action because central `-1` survives in characteristic three. C469 supplies
 the natural signed Hadamard carrier; C470 determines its exact automorphism boundary.
+The shared conditional consequence map is `notes/2026-07-22-c471-c474-downstream-implications.md`.
 
 ## Dependencies
 

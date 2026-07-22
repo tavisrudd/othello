@@ -4,6 +4,7 @@
 `3_epsilon.3_epsilon^*` and `5_epsilon.5_epsilon^*` augmentation modules in the two frozen cases,
 while the common parameter `m=(q+1)/4` simultaneously splits the lower period polynomial and
 degenerates the cross-design Grams.
+The shared conditional consequence map is `notes/2026-07-22-c471-c474-downstream-implications.md`.
 
 ## Dependencies
 

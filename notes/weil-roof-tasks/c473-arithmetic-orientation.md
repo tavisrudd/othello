@@ -3,6 +3,7 @@
 **Context:** queued after C471 and C472. C465 determines the simple core only up to the Galois swap
 of the lower Weil pair. The common parameter `m=(q+1)/4` splits `x^2+x+m` modulo `m`; C469's
 Hadamard sign normalization may select one of the two residue primes canonically.
+The shared conditional consequence map is `notes/2026-07-22-c471-c474-downstream-implications.md`.
 
 ## Dependencies
 
