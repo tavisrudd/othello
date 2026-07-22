@@ -174,6 +174,40 @@ pair on the rational form. This is a concrete candidate bridge to the programme'
 layer, but no identification with C417's cubic moment is certified here; Phase 3 may test that
 comparison without reopening C459.
 
+## Third-order upgrade: the rational `S3` resolvent recovers the golden bit
+
+The six geometric points of the descended arc form three Galois-conjugate pairs. Their three
+secants are rational and, in the frozen descended coordinates, are exactly
+
+```text
+y-z=0,       y=0,       y+z=0.
+```
+
+All three concur at the canonical `S3`-fixed pole `[1:0:0]`. The rational `S3` acts as the full
+permutation group on these three degree-two closed points (and on their three concurrent secants).
+On geometric points it has two orbits of size three, exchanged by `sigma`; equivalently, the
+degree-six étale algebra is
+
+```text
+K x K x K,       K=Q(sqrt5),
+```
+
+with `S3` permuting the three factors. Taking invariants therefore gives
+
+```text
+(K x K x K)^S3 = K,
+```
+
+so the quotient of the rational six-arc by its rational `S3` is canonically `Spec K`. It has no
+`Q`-point and hence no rational section.
+
+This sharpens the descent boundary again: the golden two-sheet object is not discarded by Hilbert
+90. It is intrinsically recoverable from the descended configuration-with-action as its `S3`
+quotient; what fails is exactly a rational **choice of one sheet**. The result gives a concrete
+finite resolvent model of C417's section obstruction, without invoking a moduli stack. The
+three-line concurrent pencil is also a natural candidate geometric avatar of C444's rational
+`S3` seam, but that coordinate comparison remains for Phase 3 and is not asserted here.
+
 ## Scope and boundary
 
 The completeness statement is for forms of the frozen decorated six-arc split by the specified
@@ -205,9 +239,9 @@ input against C442's committed manifest; C442 in turn hash-pins the frozen C379/
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary generator/checker `.py` | 15,090 | `94c080eabafc106ea746d208fdf0b881d9254afa0317d6fb56e68bf4b58a3bc4` |
-| independent replay `.py` | 6,342 | `0bfdb3af09fe6ad9d7b99de2adfb613a2d4afbd57563fb021e9b6ab780a4c592` |
-| canonical certificate `.json` | 16,131 | `f3670a0830907c55b96b73741941e3d723799f2899e618426eceda67399ad550` |
+| primary generator/checker `.py` | 17,523 | `7a06bce791c6f94cd6eff0f105c8f6a55842ece680b48fef780a16e5a6c409da` |
+| independent replay `.py` | 7,667 | `75fba5f9211326bb8872e93df026028f7a9115e7e61c8a08b28e42f361738ba0` |
+| canonical certificate `.json` | 16,791 | `9d8f7fbbd7642acf274700e3891a8006f0277a91cfdc9b26cae64c9c94f1225d` |
 
 Trusted computational boundary: exact rational arithmetic in the pair model
 `Q(phi)=Q[phi]/(phi^2-phi-1)`, exact projective normalization, and exhaustive finite closure of the

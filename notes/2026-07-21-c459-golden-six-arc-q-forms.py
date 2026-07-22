@@ -206,6 +206,31 @@ def build_certificate():
     descended_arc = frozenset(m.qnormvec(m.qmatvec(hinv, v)) for v in S)
     assert len(descended_arc) == 6
     assert frozenset(m.qnormvec(tuple(m.qsigma(x) for x in v)) for v in descended_arc) == descended_arc
+    arc_list = sorted(descended_arc)
+    arc_index = {v: i for i, v in enumerate(arc_list)}
+    sigma_perm = tuple(
+        arc_index[m.qnormvec(tuple(m.qsigma(x) for x in v))] for v in arc_list
+    )
+    galois_pairs = sorted({tuple(sorted((i, sigma_perm[i]))) for i in range(6)})
+    assert len(galois_pairs) == 3 and all(i != j for i, j in galois_pairs)
+
+    def qcross(v, w):
+        return (
+            m.qsub(m.qmul(v[1], w[2]), m.qmul(v[2], w[1])),
+            m.qsub(m.qmul(v[2], w[0]), m.qmul(v[0], w[2])),
+            m.qsub(m.qmul(v[0], w[1]), m.qmul(v[1], w[0])),
+        )
+
+    pair_secants = [m.qnormvec(qcross(arc_list[i], arc_list[j])) for i, j in galois_pairs]
+    assert all(x[1] == 0 for ell in pair_secants for x in ell)
+    assert sorted(rational_matrix_json((ell,))[0] for ell in pair_secants) == [
+        ["0", "1", "-1"], ["0", "1", "0"], ["0", "1", "1"]
+    ]
+    concurrence_points = {
+        m.qnormvec(qcross(pair_secants[i], pair_secants[j]))
+        for i in range(3) for j in range(i + 1, 3)
+    }
+    assert concurrence_points == {(m.QONE, m.QZERO, m.QZERO)}
 
     # The descended conic is y^T G y=0, G=h^T h, and is rational.
     ht = tuple(tuple(x for x in row) for row in zip(*h))
@@ -239,6 +264,24 @@ def build_certificate():
     gen2 = min((A for A in rational_stabilizer if qmatrix_order(m, A) == 2), key=mat_key)
     generated = m.q_closure([gen2, gen3])
     assert generated == rational_stabilizer
+    arc_perms = {
+        tuple(arc_index[m.qnormvec(m.qmatvec(A, v))] for v in arc_list)
+        for A in rational_stabilizer
+    }
+    point_orbits = []
+    unseen_points = set(range(6))
+    while unseen_points:
+        i = min(unseen_points)
+        orbit = {p[i] for p in arc_perms}
+        point_orbits.append(sorted(orbit)); unseen_points -= orbit
+    assert sorted(len(o) for o in point_orbits) == [3, 3]
+    assert {sigma_perm[i] for i in point_orbits[0]} == set(point_orbits[1])
+    pair_index = {pair: i for i, pair in enumerate(galois_pairs)}
+    pair_perms = {
+        tuple(pair_index[tuple(sorted((p[i], p[j])))] for i, j in galois_pairs)
+        for p in arc_perms
+    }
+    assert pair_perms == set(permutations(range(3)))
 
     # Structural D5 obstruction: its natural action on five letters is self-centralizing in S5.
     def compose(p, q):
@@ -313,6 +356,8 @@ def build_certificate():
             "descended_arc_projective_points": [vec_json(v) for v in sorted(descended_arc)],
             "descended_conic_gram": rational_matrix_json(gram),
             "matching_polar_lines": [vec_json(v) for v in sorted(polar_lines)],
+            "galois_pair_secants": [rational_matrix_json((ell,))[0] for ell in pair_secants],
+            "galois_pair_secants_concurrent_at": ["1", "0", "0"],
         },
         "rational_stabilizer": {
             "isomorphism_type": "S3",
@@ -358,6 +403,15 @@ def build_certificate():
             },
             "what_descends": ["six-point configuration as a degree-6 Q-subscheme", "anisotropic conic", "unique polar-pair matching"],
             "what_does_not_descend": "the golden sheet labeling: S versus sigma(S), equivalently a canonical prime above 11 / one of the two reduced singleton sheets",
+            "intrinsic_golden_quotient": {
+                "degree_6_etale_algebra": "Q(phi)^3",
+                "three_closed_degree_2_points": True,
+                "S3_action_on_closed_points": "full permutation action",
+                "geometric_point_orbits": [3, 3],
+                "galois_exchanges_orbits": True,
+                "quotient_by_rational_S3": "Spec(Q(phi))",
+                "rational_section": False,
+            },
         },
     }
 

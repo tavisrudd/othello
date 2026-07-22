@@ -64,6 +64,14 @@ def sigma_matrix(A): return tuple(tuple(sig(x) for x in row) for row in A)
 def transpose(A): return tuple(tuple(x for x in row) for row in zip(*A))
 
 
+def cross(v, w):
+    return (
+        sub(mul(v[1], w[2]), mul(v[2], w[1])),
+        sub(mul(v[2], w[0]), mul(v[0], w[2])),
+        sub(mul(v[0], w[1]), mul(v[1], w[0])),
+    )
+
+
 def inv3(A):
     a, b, c = A[0]; d, e, f = A[1]; g, h, i = A[2]
     C = (
@@ -148,6 +156,13 @@ def main():
     assert h == mm(u, sigma_matrix(h))
     Y = frozenset(normv(mv(hi, v)) for v in S)
     assert frozenset(normv(tuple(sig(x) for x in v)) for v in Y) == Y
+    Ys = sorted(Y); yi = {v: i for i, v in enumerate(Ys)}
+    sp = tuple(yi[normv(tuple(sig(x) for x in v))] for v in Ys)
+    pairs = sorted({tuple(sorted((i, sp[i]))) for i in range(6)})
+    assert len(pairs) == 3
+    secants = [normv(cross(Ys[i], Ys[j])) for i, j in pairs]
+    assert set(secants) == {(Z, O, neg(O)), (Z, O, Z), (Z, O, O)}
+    assert {normv(cross(secants[i], secants[j])) for i in range(3) for j in range(i + 1, 3)} == {(O, Z, Z)}
     gram = mm(transpose(h), h)
     assert gram == (((F(3), F(0)), Z, O), (Z, (F(5), F(0)), Z), (O, Z, (F(2), F(0))))
     lines = frozenset(normv(mv(gram, y)) for y in Y)
@@ -159,6 +174,19 @@ def main():
     assert len(rational) == 6
     assert all(x[1] == 0 for A in rational for row in A for x in row)
     assert sorted(order(A) for A in rational) == [1, 2, 2, 2, 3, 3]
+    point_perms = {tuple(yi[normv(mv(A, v))] for v in Ys) for A in rational}
+    point_orbits = []
+    unseen = set(range(6))
+    while unseen:
+        i = min(unseen); orbit = {p[i] for p in point_perms}
+        point_orbits.append(orbit); unseen -= orbit
+    assert sorted(len(o) for o in point_orbits) == [3, 3]
+    assert {sp[i] for i in point_orbits[0]} == point_orbits[1]
+    pi = {pair: i for i, pair in enumerate(pairs)}
+    pair_perms = {
+        tuple(pi[tuple(sorted((p[i], p[j])))] for i, j in pairs) for p in point_perms
+    }
+    assert pair_perms == set(permutations(range(3)))
     pole = (O, Z, Z)
     assert all(normv(mv(A, pole)) == pole for A in rational)
     line_x = (O, Z, (F(-3), F(0)))
@@ -184,6 +212,7 @@ def main():
     assert cert["rational_stabilizer"]["element_order_distribution"] == [1, 2, 2, 2, 3, 3]
     assert cert["representative"]["descended_conic_gram"] == [["3", "0", "1"], ["0", "5", "0"], ["1", "0", "2"]]
     assert cert["classification"]["quadratic_A5_descent_taxonomy"]["quadratic_split_rational_symmetry_types"] == ["A5", "V4", "S3"]
+    assert cert["classification"]["intrinsic_golden_quotient"]["degree_6_etale_algebra"] == "Q(phi)^3"
     print("PASS C459 replay: independent Q(phi) arithmetic reproduces the unique S3 descent")
 
 

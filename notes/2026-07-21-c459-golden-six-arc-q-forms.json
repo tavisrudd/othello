@@ -8,6 +8,18 @@
       "fixed_centralizer_order": 6,
       "outer_involution_model": "conjugation by a transposition in Aut(A5)=S5"
     },
+    "intrinsic_golden_quotient": {
+      "S3_action_on_closed_points": "full permutation action",
+      "degree_6_etale_algebra": "Q(phi)^3",
+      "galois_exchanges_orbits": true,
+      "geometric_point_orbits": [
+        3,
+        3
+      ],
+      "quotient_by_rational_S3": "Spec(Q(phi))",
+      "rational_section": false,
+      "three_closed_degree_2_points": true
+    },
     "quadratic_A5_descent_taxonomy": {
       "inner_or_trivial_action": {
         "H1_class_count": 2,
@@ -881,6 +893,28 @@
           "0"
         ]
       ]
+    ],
+    "galois_pair_secants": [
+      [
+        "0",
+        "1",
+        "-1"
+      ],
+      [
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1"
+      ]
+    ],
+    "galois_pair_secants_concurrent_at": [
+      "1",
+      "0",
+      "0"
     ],
     "hilbert90_h": [
       [
