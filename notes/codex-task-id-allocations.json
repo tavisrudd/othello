@@ -467,8 +467,35 @@
       "last": 485,
       "purpose": "coherent projection reconstruction through all-field redundancy-three synthesis",
       "sequence": 52
+    },
+    {
+      "count": 2,
+      "first": 486,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 487,
+      "purpose": "C480 successor battery: close upgrades + C474-bit/T11 bridge; and C459 char-zero realization row",
+      "sequence": 53
+    },
+    {
+      "count": 2,
+      "first": 488,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 489,
+      "purpose": "Tier-changers: QR-ladder family scan (q=23 rung) and staged Maslov roof attack",
+      "sequence": 54
+    },
+    {
+      "count": 2,
+      "first": 490,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 491,
+      "purpose": "close the q<=13 child-relative base-size theorem, then classify projective Reed-Solomon redundancy-five deep holes while extracting higher-normal-rational-curve tools",
+      "sequence": 55
     }
   ],
-  "next_id": 486,
+  "next_id": 492,
   "schema": "codex-task-id-allocations-v1"
 }
