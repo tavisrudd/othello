@@ -49,20 +49,23 @@ center and a live conic point; 7,024,950 checks): all three hold with zero excep
 Active-center degree per live point `{0:4204720, 1:2160160, 2:597060, 3:62030, 4:980}` (max 4);
 per-move drain is this distribution shifted by 1.
 
-## (a) Abundance profile — PLANNED
+## (a) Abundance profile — RAW `Y_0` EXTENSION CLOSED NEGATIVE
 
 Per (root R, opponent move x) at nondepleted q (13/19): winning-reply fraction, and whether
 the winning set contains an entire bounded-condition packet (all D-generic on-conic replies
 minus an explicit bad-fiber list). Target theorem shape: at nondepleted q **every** packet
-member wins — existence by counting, no selector.
+member wins — existence by counting, no selector.  The terminal q17 fibre `Y_0` defined below
+does not extend unchanged to earlier q13/q17 transitions; see the full bounded census below.
+Thus C82 remains gated on a refined packet rather than counting raw `Y_0`.
 
-## (b) Descent / class preservation — PLANNED
+## (b) Descent / class preservation — OPEN; RAW `Y_0` IS INSUFFICIENT
 
 Which lexicographic residual measure some winning reply always strictly decreases
 (candidates: conic defect type, `|live conic|`, edge-density budget `Σ_x max(0,(q+1−f_x)/2−d)`,
 zone complexity); and whether some winning reply re-enters the balanced/normal-form class. The
 exact drain makes `|live conic|` a validated component of any such measure; the missing step
-is upgrading a greedy drain move to a minimax potential.
+is upgrading a greedy drain move to a minimax potential.  The full `Y_0` census also shows that
+strict live-conic descent is not automatic even when that fibre contains a P reply.
 
 ## 2026-07-22 — C447/C460 cloud packet: exact partial `12+5+5` law
 
@@ -173,6 +176,21 @@ neither a well-defined transporter nor injectivity among replies is required.  T
 edge orbital follows from one representative by value invariance, and equal orbit sizes/Hall are
 needed only when one wants a fixed pairing certificate.
 
+**Orbit-representative response lemma.**  Let a finite group `H` act by automorphisms of a finite
+normal-play game and fix a position `S`.  Choose one representative `x_i` of every `H`-orbit of
+legal moves from `S`.  If for every `i` there is a legal reply `y_i` from `S+x_i` such that
+`S+x_i+y_i` is P, then `S` is P.  Indeed, write an arbitrary legal move as `x=h x_i`.  Game
+automorphism gives the legal reply `h y_i`, and transports the P grandchild
+`S+x_i+y_i` to `S+x+h y_i`.  Hence every child of `S` has a P child and is N, so `S` is P.  No
+choice of transporter has to be independent of `h`, because the assertion is existential.
+
+The induction/descent form replaces the premise “the grandchild is P” by membership in an
+`H`-stable response class of strictly smaller well-founded measure, whose P-value is supplied by
+the induction hypothesis.  This isolates C80(b)'s remaining obligation exactly: the drain lemma
+proves strict decrease when the accepted move is conic, while an accepted off-conic response such
+as `Y_0` still needs a separate proof that it enters the smaller class.  Fibre nonemptiness alone
+does not discharge that step.
+
 At this q=11 gate the 22 opponent moves form six `C5` orbits.  Their quotient winning graph has a
 unique minimum three-relation cover
 
@@ -182,7 +200,9 @@ unique minimum three-relation cover
 
 The last relation has two edge-orbital lifts, producing the two perfect matchings.  Therefore the
 two-match calibration torsor is extra certificate structure: the P proof itself consists of only
-three orbit-representative response checks.
+three undirected orbit-relation checks (equivalently six directed opponent-orbit checks, paired by
+the symmetry of the two-move response relation).  This is an exact instance of the lemma above,
+not yet a uniform source of the required stabilizer or response class.
 
 The uniform caveat is decisive.  Here `C5` genuinely stabilizes the pointed parent.  A generic C80
 state may have trivial stabilizer, so its opponent branches do not collapse this way.  The
@@ -421,6 +441,61 @@ replay rebuilds the residual grid rule directly from row, column, and affine-col
 uses a separate normal-play recursion.  Both reconstruct the two 15-point clouds, their five-point
 intersection, all four pointed states, every opponent branch, and the `C5` orbit partition.
 
+### Full q13/q17 `Y_0` response-fibre census
+
+The score-9 result above suggested the strongest cheap generalization: keep exactly the same
+primitive opponent/reply orbital and require all four intruder triple products to be fixed-point
+free, but apply it to every three-intruder opponent transition from the recorded C20 P reply
+states.  `scripts/c80_response_fibre_census.py` performs that exact census.  It deduplicates the
+recorded states through the existing C31 loader, then checks every legal off-conic opponent move
+whose child has exactly three intruders.  For each legal off-conic reply it tests product order
+`q-1` or `q+1`, evaluates the four quadratic discriminants (7), and independently checks every
+surviving discriminant tuple by direct composition of the four conic permutations.
+
+The bounded result is negative for the unchanged generic packet:
+
+| q | unique P reply states | three-intruder transitions | prior triple nonsplit | `Y_0` nonempty | `Y_0` has P | value-impure |
+|---:|---:|---:|---:|---:|---:|---:|
+| 13 | 485 | 2,225 | 1,543 | 533 | 533 | 0 |
+| 17 | 2,662 | 59,153 | 31,890 | 13,451 | 5,475 | 1,515 |
+
+At q13 all 620 surviving packet members are P and satisfy `clean_empty`, but the fibre is empty on
+1,010 of the 1,543 nonsplit-prior transitions.  At q17 the failure is stronger.  Among the 13,451
+nonempty fibres, 7,976 are all N, 1,515 are value-impure, 1,973 are all P but not all
+`clean_empty`, and 1,987 are all `clean_empty` P.  In member counts, only 6,408 of 17,954 q17
+survivors are P.  Hence the score-9 `24+4` theorem is a terminal-context purity statement, not the
+restriction of a global primitive-plus-three-quadratics response theorem.
+
+Nor does raw live-conic descent repair the relation.  A P member strictly decreases live-conic
+size from the opponent child on only 74 of the 533 q13 P-covered transitions and 3,173 of the
+5,475 q17 P-covered transitions (from the pre-opponent parent: 161 and 5,010 respectively).
+These counts do not say that descent is impossible under a refined measure; they say precisely
+that `Y_0` plus `|L|` cannot be the missing uniform induction rule.
+
+The `ej` closeout stratified the same exact profiles by parent live-conic size.  This does not
+recover a hidden threshold.  At q17, nonempty all-N or impure fibres occur throughout the observed
+range `|L|=0,...,7`; even `|L|=0` has 486 nonempty fibres, only 306 with a P member, including 76
+impure fibres.  At q13 the fibre remains pure where present for `|L|=0,1,2` and is absent on all 48
+transitions with `|L|=3`.  Thus the first drain coordinate cannot itself be the missing
+state-class guard: q17 impurity persists after the conic reservoir is already empty.
+
+Trust boundary: the P/N labels use the committed `PrimeGridGame` recursion and the same recorded
+C20 state source as the preceding repair work.  There is no second full P/N engine for this new
+census.  The algebraic membership test does have an independent internal replay on every survivor:
+18,574 direct triple-permutation checks agree with the closed discriminant formula.  The earlier
+score-9 `24+4` slice is also independently covered by the committed pointed-cubic replay.  The
+claim here is only the stated finite census, with the exact three-intruder and field restrictions;
+it is not a theorem for q19, extension fields, or arbitrary game states.
+
+Evidence sizes are 8,091 bytes for the census script, 156,571 bytes for the canonical JSON, and
+654,965 bytes for the load-bearing C20 gzip input.  The adjacent checksum manifest records the
+bundle hashes; the JSON also embeds the input hash and byte count.
+
+The proof-search consequence is sharp.  Do not ask C82 to count raw `Y_0`.  A viable successor
+packet must add a state-class/descent guard that excludes the q17 all-N and impure fibres, while
+also adding coverage for the q13 nonsplit-prior empty fibres.  Alternatively, retain `Y_0` only as
+the terminal base relation and prove a different bulk descent into its score-9 domain.
+
 ## Mystery ledger
 
 - **Settled by the pointed cubic audit:** the shared word “cubic” does not mean that `tr(B^3)` and
@@ -431,16 +506,21 @@ intersection, all four pointed states, every opponent branch, and the `C5` orbit
   equation (7) makes the three reply-dependent conditions explicit quadratic discriminants.  Their
   intersection with the primitive orbital is the P-pure singleton fibre `Y_0` on 24/28 transitions;
   the other four are exactly the split prior-triple context, not an unlabelled exception set.
-- **Still open — generic purity:** no q-independent theorem says that every survivor of `Y_0` is
-  clean/P before the terminal score-9 layer.  The evidence gate is an exact structural implication
-  from the three nonsquare triple products plus primitive order to a decreasing game class.
+- **Settled negative — raw generic purity:** the unchanged `Y_0` relation is all-N on 7,976 and
+  value-impure on 1,515 of the exact q17 three-intruder transitions.  At q13 its survivors are
+  clean/P, but the fibre is absent on 1,010 nonsplit-prior transitions.  The score-9 purity cannot
+  be promoted without an additional state-class/descent guard.
+- **Settled by `ej` — no live-size guard:** q17 all-N/impure fibres occur at every observed parent
+  live-conic size from 0 through 7, including 76 impure fibres already at `|L|=0`.  The drain
+  coordinate orders conic play but does not classify the off-conic response fibre.
 - **Still open — two-sorted coupling:** no canonical incidence bimodule has yet been shown to carry
   both conic-word traces and reply-pencil energy while preserving P/N recursion.  This is owned by
   C80's response-packet/descent theorem, not by an abstract SDP construction.
-- **Still open — abundance, now precisely posed:** C82 can count the explicitly specified
-  primitive-plus-three-nonsquare fibre `Y_0`; it must classify square-product degeneracies and beat
-  the legal-point exclusions.  The four empty q17 relation fibres and characteristic-5/7
-  degeneracies remain the exceptional branch rather than evidence for generic nonemptiness.
+- **Still open — abundance, re-gated:** C82 must not count raw `Y_0`: even over nonsplit prior
+  triples it is frequently empty, and at q17 nonemptiness does not imply P-purity.  C80 must first
+  supply either a refined P-preserving packet or a bulk descent theorem whose terminal target is
+  the already certified score-9 `Y_0` relation.  Characteristic-5/7 degeneracies remain C81's
+  branch only after that game-semantic guard exists.
 
 ## Reproduction
 
@@ -453,4 +533,6 @@ sha256sum -c notes/2026-07-22-c80-c447-cloud-packet.sha256
 python3 rust/scripts/c80_pointed_cubic_bridge.py --check
 python3 rust/scripts/c80_pointed_cubic_bridge_replay.py
 sha256sum -c notes/2026-07-22-c80-pointed-cubic-bridge.sha256
+python3 rust/scripts/c80_response_fibre_census.py --check
+sha256sum -c notes/2026-07-22-c80-response-fibre-census.sha256
 ```

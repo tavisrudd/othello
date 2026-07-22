@@ -42,7 +42,7 @@ ordering and detail.
 - **C30 `[cap]` [OPEN ENGINEERING TAIL; USER GATE]** — reduce or explicitly launch the q17/q19 generated-certificate assembly.
 - **C74 `[cap]` [ACTIVE]** — prove maximum-pencil balanced-packet P existence / `Ncenters <= q-8`; characteristic-5/7 exceptions remain.
 - **C77 `[cap]` [OPEN GAME-SEMANTIC TAIL]** — algebraic forced-reply closure for the C74 packet → `notes/2026-07-11-c77-game-semantic-reply-graphs.md`.
-- **C80 `[cap]` [ACTIVE; q=11 three-orbit-response cover]** — generalize the torus quotient, prove one descending P reply per opponent-orbit representative, then establish descent after the drain lemma → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
+- **C80 `[cap]` [ACTIVE; raw Y₀ global extension refuted]** — refine the orbit packet with a P-preserving state/descent guard, or prove bulk descent into the certified score-9 Y₀ base; only then release the count to C82 → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
 - **C81 `[cap]` [OPEN; independent]** — characteristic-5/7 subfield descent gate → `notes/2026-07-12-c81-subfield-descent-gate.md`.
 - **C82 `[cap]` [GATED on C80]** — orbital counting for the exact packet C80 produces → `notes/2026-07-12-c82-orbital-counting.md`.
 - **C189 `[cap]` [QUEUED]** — q=5 octahedral-frame game bridge → `notes/2026-07-15-c189-q5-octahedral-frame.md`.
@@ -141,6 +141,10 @@ ordering and detail.
 - **C268 `[nofil]` [QUEUED]** — create the `lean/TRUST.md`-standard trust ledger for `lean/ProjectiveCap/` + `lean/CapGame/` (axiom audit, no-`sorry`/no-`native_decide` statement, adequacy notes) → `notes/2026-07-17-c268-nofil-projectivecap-trust-ledger.md`.
 - **C269 `[nofil]` [QUEUED]** — full-manuscript pass to the arcs/clebsch release bar: complete LaTeX+PDF, adversarial review, repeated cold-prose review → `notes/2026-07-17-c269-nofil-latex-adversarial-review.md`.
 - **C270 `[nofil]` [QUEUED]** — public mirror / first extraction ("do this first", `papers/papers-planning.md`): tagged public `FiniteGeom` base repo pinned by commit + the Lean-complete mirror outcomes, unblocking this paper's public-artifact citation (per the *Arcs vs Nofil* ruling), OEIS `%H` links, and arXiv posting → `notes/2026-07-17-c270-finitegeom-public-extraction.md`.
+
+### `reed-solomon`
+
+- **C475 `[reed-solomon]` [QUEUED]** — build the determinant/cross-ratio coefficient atlas for redundancy-three standard GRS deep holes, prove its projective-semilinear descent, and test exact orbit separation on the smallest standard-GRS cases with the four C398 non-GRS classes as controls; stop at the first collision and characterize its full fibre → `notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`.
 
 ### `relconic`
 

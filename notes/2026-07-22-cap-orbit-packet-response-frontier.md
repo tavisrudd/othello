@@ -281,6 +281,15 @@ structure, the q17 score-9 packet, `Low4`'s multiple P centres, and C79's requir
 interface absorb many noncommuting active matchings.  C80(b) must still provide the value-bearing
 descent: exact drain alone proves termination but not who wins.
 
+The unchanged score-9 packet `Y_0` has now been exhaustively tested on every three-intruder
+opponent transition from the recorded q13/q17 C20 P reply states.  It is only a terminal base
+relation, not the uniform packet above: at q13 its 620 survivors are all clean/P but it is nonempty
+on only 533/2,225 transitions; at q17 it is empty on 45,702/59,153 transitions, all-N on 7,976,
+and value-impure on 1,515.  C82 therefore remains gated.  C80 must either add a state/descent guard
+that restores both coverage and purity, or prove a different bulk descent into the certified
+score-9 `Y_0` domain.  Exact scope and certificate:
+`2026-07-12-c80-bulk-exhaustion-probe.md#full-q13q17-y_0-response-fibre-census`.
+
 The natural lexicographic target remains
 
 ```text
@@ -320,9 +329,10 @@ are stated without a hidden selector.
 - **Open — uniform marked-restriction detector:** C474 gives scalar and one-element tests once a
   module extension is defined.  C80 has no q-independent response-choice module/cocycle whose
   restriction to every opponent stabilizer can yet be tested.
-- **Open — cubic response theorem:** the exact `tr(B^3)` and `Q3` successes have not yet been
-  converted into a q-independent nonempty-fibre bound.  C80 owns the response relation and C82 the
-  eventual orbital count; C81 owns structured failures of the generic estimate.
+- **Settled negative — raw cubic response theorem:** the primitive-plus-three-nonsquare `Y_0`
+  fibre is not globally P-pure or covering on the exact q13/q17 three-intruder corpus.  The open
+  replacement is a guarded response relation or a bulk descent into its terminal score-9 domain;
+  only after that replacement is fixed does C82 own the orbital count.
 - **Partly settled — defect homology:** at the q=11 first-response gate, removing forced orbitals
   leaves one `C10`, and the two calibrations differ by its unique `F_2` homology generator.  No
   quotient theorem yet makes the general residual defect boundary a complete game-value carrier.

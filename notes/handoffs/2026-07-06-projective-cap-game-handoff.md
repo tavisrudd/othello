@@ -599,8 +599,11 @@ task list.  Current high-value items:
   discriminants of the reply-containing triple involution products.  This fibre is the unique
   clean/P reply on 24/28 q17 score-9 transitions, empty on the four exceptional fibres, and never
   impure.  The `24+4` split is exactly prior-triple nonsplit versus split (zero versus two conic
-  fixed points).  Dropping primitivity gives five replies and loses P-purity.  C82 can count this exact
-  primitive-plus-three-quadratics packet; C80 still owes purity/descent before the score-9 base.
+  fixed points).  Dropping primitivity gives five replies and loses P-purity.  The full q13/q17
+  three-intruder census now closes the unchanged packet as a uniform route: q13 survivors are all
+  clean/P but cover only 533/2,225 transitions, while q17 has 7,976 all-N and 1,515 impure
+  nonempty fibres.  Raw `Y_0` is therefore a terminal score-9 base relation, not a packet for C82
+  to count globally.  C80 must add a state/descent guard or prove bulk descent into that base.
   A uniform quotient/response theorem,
   (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang
