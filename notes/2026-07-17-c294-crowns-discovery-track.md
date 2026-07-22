@@ -861,3 +861,63 @@ axis. Cheapest test rides along with C466's secondary Arf item: compute the Cart
 `q=19` or `31` if the machinery transfers.
 **Evidence:** CHECKED endpoints (C451 bundle); the uniformity is unexplained.
 **Status:** open lead; unallocated
+
+### 2026-07-21 — C455's normalization scalar `i` is the quadratic Gauss sum; prediction at `q = 1 mod 4`
+
+**Provenance:** review pass immediately after the C455/T8 closure, read against C450's period
+sums and the `(2/q)` mechanism thread.
+**Was I looking for this?:** no — C455's card asked for the Fourier/Weil operator verdict; the
+arithmetic source of its normalization obstruction was outside every card.
+**Observed / musing:** C455 certifies the genuine normalization `rho(w) = iF` at `q=11` and
+excludes literal conjugacy on that account. For an odd prime `q`, the normalized quadratic Gauss
+sum (Weil index) is `+1` when `q = 1 mod 4` and `i` when `q = 3 mod 4`; at `q = 11 = 3 mod 4` the
+certified scalar is exactly the Weil-index value. Reading the obstruction as the Gauss sum makes
+C455's exclusion clause the `(-1/q)` character's face, and ties three certified fragments to one
+object: the scalar `i` (C455), the period field `Q(sqrt(-11))` (C450), and the `(2/q)` axis (the
+Gauss sum's eighth-root-of-unity normalization).
+**Why it may matter / strongest question:** the exclusion clause stops being a blemish on roof (c)
+and becomes arithmetic structure; the character-sum bridge lead gains a third certified fragment.
+**Predicted siblings:** any split prime `q = 1 mod 4` (29 visible, 41 fused) — normalization
+`rho(w) = F` literally, exclusion clause vanishes; any split prime `q = 3 mod 4` (19, 31) — the
+factor `i` persists.
+**Discriminator / falsifier:** compute the T8 normalization scalar at one `q = 1 mod 4` split
+prime; any value other than the Weil index `gamma(q)` kills the reading.
+**Evidence:** REASONED over CHECKED endpoints (C455 normalization certificate, C450 periods); the
+Gauss-sum values are classical (compute-never-recall applies before certificate use).
+**Status:** open lead; routed 2026-07-21 as a bounded tertiary item on C466, which owns new-prime
+work
+
+### 2026-07-21 — conductor 40 is the whole rank-3 system: three fields, three bits, three certified faces
+
+**Provenance:** same review pass, joining the biquadratic entry above with C463's `Z[i]` torsor
+and the C455 normalization entry.
+**Was I looking for this?:** no — the biquadratic entry stopped at `Q(sqrt2, sqrt5)`; the A3 face
+was sitting in the C463 card unconnected.
+**Observed / musing:** the three rank-3 cases wear three quadratic fields — H3 `Q(sqrt5)`, B3
+`Q(sqrt2)`, A3 `Q(i)` (C463's companion torsor over `Z[i]`) — and their compositum
+`Q(i, sqrt2, sqrt5)` has conductor exactly `lcm(4,8,5) = 40`. So the mod-40 class of a prime
+determines a triple of independent bits, each now with a certified or predicted face: `(5/q)` =
+golden sheet existence (C453), `(2/q)` = sheet fusion (C453; mechanism C466), `(-1/q)` = literal
+Weil-operator conjugacy (C455 at `q=11`, per the Gauss-sum entry above). The "mod-40 fusion law"
+is then the shadow of the full Frobenius in the tri-quadratic field of the entire rank-3 system.
+**Why it may matter / strongest question:** upgrades the Phase-3 biquadratic sentence to a
+system-level statement in which A3 is a load-bearing case rather than a degenerate control. Does
+the A3 companion swap `i -> -i` track `q mod 4` as the reading requires?
+**Discriminator / falsifier:** the A3 face rides free on C463 (check the prime-preference swap
+against `q mod 4`); the `(-1/q)` face rides on C466's tertiary item. Either character failing to
+track its predicted phenomenon retires the system-level reading (the H3 biquadratic statement
+survives on its own).
+**Evidence:** REASONED over CHECKED endpoints (C453 law, C463 card facts, C455 normalization);
+conductor arithmetic is classical.
+**Status:** open lead; unallocated — no new task, both tests ride on allocated rows
+
+### 2026-07-21 — `P^1(F_31)` is the icosahedron's vertices plus faces
+
+**Provenance:** same review pass; C453's forced `12+20` marker-shadow orbit split.
+**Was I looking for this?:** no — one-line framing observation.
+**Observed / musing:** the forced `A5` orbit split `12+20` on the 32 points of `P^1(F_31)` reads
+as the icosahedron's 12 vertices plus 20 faces with the 30 edges absent, and 31 is the only prime
+where the count `12+20 = q+1` closes. Framing sentence for the characteristic-31 cliffhanger only.
+**Evidence:** CHECKED endpoint (C453 orbit split); the reading is decorative until some map is
+exhibited.
+**Status:** open lead; unallocated — framing only

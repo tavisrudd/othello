@@ -47,6 +47,12 @@ visibility of the golden sheets at `q` is the Frobenius class of `q` in
    C453's golden marker shadow in `PSL_2(31)` with the `A5` induced by C395's six-arc in
    `PGL_3(31)` (via its conic/dual action). "Order-level coincidence only, no natural map found
    within the tested comparisons" is a valid close; state the exact comparisons run.
+6. **Tertiary — Weil-normalization Gauss-sum face:** at any new split prime this card constructs
+   (preferring one `q = 1 mod 4` case: 29 visible or 41 fused), compute the T8 Weil--Weyl
+   normalization scalar in C455's frozen sense and test the prediction `rho(w) = gamma(q) F` with
+   `gamma(q) = +1` for `q = 1 mod 4` and `i` for `q = 3 mod 4` (Gauss-sum/Weil-index reading; see
+   the discovery-track entry). Bounded: reuse the C455 machinery as-is; if it does not transfer
+   without new conventions, record the blocker and stop.
 
 Deliver an atomic bundle: dated report, exact generator/checker, canonical JSON with all subgroup
 certificates, conjugators, and verdicts, checksum manifest, and an independent replay.
