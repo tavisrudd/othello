@@ -570,7 +570,9 @@ explains the sheet modules `1+6`/`1+10_b` as design incidence modules and is can
 framing. Question: does the duality reading survive the frozen-frame `Rz` qualification?
 **Evidence:** REASONED over the CHECKED C450 Grams; design uniqueness is classical and unverified
 here (compute-never-recall applies before any certificate use).
-**Status:** open lead
+**Status:** open lead; design identification subsumed 2026-07-21 -> C452 report
+(`notes/2026-07-21-c452-qr-barker.md`) certifies both disjointness relations as QR difference sets
+`(7,3,1)`/`(11,5,2)`; the duality/paper-2 framing reading remains open for Phase 3
 
 ### 2026-07-21 — mod-3 nullities of the cross matrices equal the two Weil degrees
 
