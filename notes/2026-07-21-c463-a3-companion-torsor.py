@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from itertools import permutations, product
+from itertools import combinations, permutations, product
 from pathlib import Path
 import hashlib
 import json
@@ -227,6 +227,64 @@ def build_certificate():
         "equals_full_abstract_antipodal_matching_stabilizer": True,
         "projective_S4_index": 2,
         "interpretation": "the two companion one-factorizations are exchanged by the missing index-two symmetry",
+    }
+    synthemes = tuple(sorted(all_matchings(a3_points, 5), key=lambda m: tuple(point_key(x, 5) for e in m for x in e)))
+    syntheme_id = {matching: i for i, matching in enumerate(synthemes)}
+    complete_edges = {canon_edge(a, b, 5) for a, b in combinations(a3_points, 2)}
+    pentads = tuple(
+        ids for ids in combinations(range(len(synthemes)), 5)
+        if len({edge for i in ids for edge in synthemes[i]}) == len(complete_edges)
+    )
+    assert len(pentads) == 6
+    pentad_index = {frozenset(ids): i for i, ids in enumerate(pentads)}
+    fixed_id = syntheme_id[a3_fixed]
+    through_fixed = [i for i, ids in enumerate(pentads) if fixed_id in ids]
+    assert len(through_fixed) == 2
+    companion_pentads = {
+        frozenset([fixed_id] + [syntheme_id[matching] for matching in orbit])
+        for orbit in a3_companions
+    }
+    assert companion_pentads == {frozenset(pentads[i]) for i in through_fixed}
+
+    def pentad_action(permutation):
+        return [
+            pentad_index[frozenset(syntheme_id[permutation_image(permutation, synthemes[i], 5)] for i in ids)]
+            for ids in pentads
+        ]
+
+    galois_pentad_action = pentad_action(a3_perm)
+    assert sorted(galois_pentad_action) == list(range(6))
+    assert all(galois_pentad_action[galois_pentad_action[i]] == i for i in range(6))
+    assert sum(galois_pentad_action[i] == i for i in range(6)) == 0
+    assert {galois_pentad_action[i] for i in through_fixed} == set(through_fixed)
+    vertex_actions = {
+        tuple(pentad_action(dict(zip(a3_points, permutation))))
+        for permutation in permutations(a3_points)
+    }
+    assert len(vertex_actions) == 720
+    projective_pentad_actions = {
+        tuple(pentad_action(dict(zip(a3_points, permutation))))
+        for permutation in a3_permutations
+    }
+    assert len(projective_pentad_actions) == 24
+    assert all(action[i] == i for action in projective_pentad_actions for i in through_fixed)
+    a3["outer_S6_upgrade"] = {
+        "dictionary": {"duad": "edge of K_6", "syntheme": "perfect matching of K_6", "pentad": "one-factorization: five synthemes partitioning all 15 duads"},
+        "syntheme_count": len(synthemes),
+        "pentad_count": len(pentads),
+        "synthemes": [{"id": i, "matching": serialize_matching(matching)} for i, matching in enumerate(synthemes)],
+        "pentads_as_syntheme_ids": [list(ids) for ids in pentads],
+        "each_syntheme_lies_in_pentads": sorted({sum(i in ids for ids in pentads) for i in range(len(synthemes))}),
+        "distinct_pentad_intersection_sizes": sorted({len(set(a) & set(b)) for a, b in combinations(pentads, 2)}),
+        "frozen_syntheme_id": fixed_id,
+        "pentads_through_frozen_syntheme": through_fixed,
+        "these_are_the_two_C463_companions": True,
+        "projective_S4_fixes_both_incident_pentads": True,
+        "galois_action_on_six_pentads": galois_pentad_action,
+        "galois_action_cycle_type": "2^3",
+        "galois_swaps_the_two_incident_pentads": True,
+        "vertex_S6_action_on_six_pentads_is_faithful": len(vertex_actions) == 720,
+        "outer_automorphism_witness": "the vertex transposition (2 3) acts on the six pentads as three transpositions, so the faithful S6 action does not preserve transposition cycle type",
     }
 
     b3_fixed = canon_matching(tuple(tuple(e) for e in c444["B3"]["reductions"]["sqrt2_3"]["matching"]), 7)

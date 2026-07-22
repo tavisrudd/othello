@@ -85,6 +85,29 @@ order 48, exactly the full abstract stabilizer of `M0` in `S_6`; the projective 
 Thus the companion swap is not an accidental relabeling: it is precisely the missing index-two
 symmetry of the antipodal matching.
 
+## Extra-juice upgrade: the outer `S_6` pentad geometry
+
+The A3 certificate is exactly the classical duad--syntheme--pentad model behind the exceptional
+outer automorphism of `S_6`:
+
+```text
+duad     = edge of K_6,
+syntheme = perfect matching of K_6,
+pentad   = five synthemes partitioning all 15 duads.
+```
+
+Exact enumeration gives 15 synthemes and six pentads.  Every syntheme lies in exactly two pentads,
+and every two distinct pentads meet in exactly one syntheme.  The frozen antipodal syntheme `M0`
+therefore lies in exactly two pentads; deleting `M0` from them gives precisely C463's two
+size-four companions `C0,C1`.
+
+The natural vertex `S_6` acts faithfully on the six pentads.  The vertex transposition `(2 3)`
+induced by `i -> -i` acts on the pentads with cycle type `2^3`, rather than as a single
+transposition.  This is an exact outer-automorphism witness: the Galois swap exchanges the two
+pentads through `M0` as one component of the exceptional `S_6` action.  The projective `S4` fixes
+those two incident pentads individually.  Thus the A3 torsor is canonically the two-point residue
+of the outer-`S_6` pentad geometry at the frozen syntheme.
+
 ## Reproducibility
 
 Run from `/home/tavis/src/othello`:
@@ -105,9 +128,9 @@ hash-pinned in the canonical JSON.
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary checker | 13,247 | `04920162cdd861ecd2db81b3c03e86c88cfbf142d6152ea8c1c60a653a724e87` |
-| independent replay | 4,772 | `d314535ac2f2bb00167672257555de7298f057bf6cea96c6202dde826d875de3` |
-| canonical JSON | 10,686 | `238ca16b5795a6044421e5614a18bb122a272b42e129d581ea58137dd0a3b0fd` |
+| primary checker | 16,532 | `1ee32ac861d50546f00b88cafc92f386665914e3f0f7be821e83a16825177bd6` |
+| independent replay | 5,880 | `fe2f7da09d77c102af56071abab34cbe510b3b3b495e689c501a66f9575521ff` |
+| canonical JSON | 16,323 | `61d683417cb388d07cb1b30a64598e0e7231cb4b421c44a244aaf3a630ff5d5c` |
 
 The trusted boundary is exact finite arithmetic and exhaustive enumeration in the frozen C444
 labels, plus hash-referenced H3 facts from C443/C462.  There is no floating point, randomness,
@@ -117,6 +140,10 @@ literature claim, moment computation, secant product, or manuscript edit.
 
 - **Settled in the closeout pass:** why the A3 swap is structurally distinguished.  It completes
   the projective `S4` to the full order-48 stabilizer of the antipodal matching.
+- **Settled in the explicit extra-juice pass:** why there are exactly two A3 companions and why a
+  vertex transposition swaps them.  They are the two pentads through one syntheme in the
+  duad--syntheme--pentad model, and the swap is one transposition inside the induced `2^3` outer-`S_6`
+  action.
 - **Open:** why the bit carrier migrates from the antipodal sheet in B3 to companion torsors of
   strengths `Z/2` and `Z/4` in A3 and H3.  The exact evidence is only this three-case table; no
   mechanism theorem spans the cases.  Phase-3 synthesis owns any comparative explanation, and

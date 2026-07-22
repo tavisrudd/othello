@@ -192,6 +192,341 @@
       "interpretation": "the two companion one-factorizations are exchanged by the missing index-two symmetry",
       "projective_S4_index": 2
     },
+    "outer_S6_upgrade": {
+      "dictionary": {
+        "duad": "edge of K_6",
+        "pentad": "one-factorization: five synthemes partitioning all 15 duads",
+        "syntheme": "perfect matching of K_6"
+      },
+      "distinct_pentad_intersection_sizes": [
+        1
+      ],
+      "each_syntheme_lies_in_pentads": [
+        2
+      ],
+      "frozen_syntheme_id": 14,
+      "galois_action_cycle_type": "2^3",
+      "galois_action_on_six_pentads": [
+        1,
+        0,
+        5,
+        4,
+        3,
+        2
+      ],
+      "galois_swaps_the_two_incident_pentads": true,
+      "outer_automorphism_witness": "the vertex transposition (2 3) acts on the six pentads as three transpositions, so the faithful S6 action does not preserve transposition cycle type",
+      "pentad_count": 6,
+      "pentads_as_syntheme_ids": [
+        [
+          0,
+          4,
+          8,
+          10,
+          12
+        ],
+        [
+          0,
+          5,
+          7,
+          9,
+          13
+        ],
+        [
+          1,
+          3,
+          7,
+          11,
+          12
+        ],
+        [
+          1,
+          5,
+          6,
+          10,
+          14
+        ],
+        [
+          2,
+          3,
+          8,
+          9,
+          14
+        ],
+        [
+          2,
+          4,
+          6,
+          11,
+          13
+        ]
+      ],
+      "pentads_through_frozen_syntheme": [
+        3,
+        4
+      ],
+      "projective_S4_fixes_both_incident_pentads": true,
+      "syntheme_count": 15,
+      "synthemes": [
+        {
+          "id": 0,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              4,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 1,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 2,
+          "matching": [
+            [
+              0,
+              1
+            ],
+            [
+              2,
+              "inf"
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": 3,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              4,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 4,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              3,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 5,
+          "matching": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              "inf"
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": 6,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              4,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 7,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 8,
+          "matching": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              "inf"
+            ],
+            [
+              2,
+              4
+            ]
+          ]
+        },
+        {
+          "id": 9,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 10,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              "inf"
+            ]
+          ]
+        },
+        {
+          "id": 11,
+          "matching": [
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              "inf"
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        },
+        {
+          "id": 12,
+          "matching": [
+            [
+              0,
+              "inf"
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "id": 13,
+          "matching": [
+            [
+              0,
+              "inf"
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ]
+        },
+        {
+          "id": 14,
+          "matching": [
+            [
+              0,
+              "inf"
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "these_are_the_two_C463_companions": true,
+      "vertex_S6_action_on_six_pentads_is_faithful": true
+    },
     "perfect_matching_count": 15,
     "prime_reduction_table": [
       {

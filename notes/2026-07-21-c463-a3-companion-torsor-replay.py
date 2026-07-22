@@ -126,6 +126,31 @@ assert a3_galois not in a3_group
 assert a3_extended == a3_full_stabilizer and len(a3_extended) == 48
 assert CERT["A3"]["normalizer_upgrade"]["generated_group_order"] == 48
 
+synthemes = tuple(sorted(matchings(a3_points, 5), key=lambda m: matching_key(m, 5)))
+syntheme_id = {value: i for i, value in enumerate(synthemes)}
+all_duads = {edge(a, b, 5) for a, b in combinations(a3_points, 2)}
+pentads = tuple(
+    ids for ids in combinations(range(15), 5)
+    if {duad for i in ids for duad in synthemes[i]} == all_duads
+)
+assert len(pentads) == 6
+pentad_index = {frozenset(ids): i for i, ids in enumerate(pentads)}
+
+def pentad_action(permutation):
+    return tuple(
+        pentad_index[frozenset(syntheme_id[image(permutation, synthemes[i], 5)] for i in ids)]
+        for ids in pentads
+    )
+
+all_outer_actions = {pentad_action(permutation) for permutation in permutations(a3_points)}
+galois_outer_action = pentad_action(a3_galois)
+outer = CERT["A3"]["outer_S6_upgrade"]
+assert len(all_outer_actions) == 720
+assert outer["pentads_as_syntheme_ids"] == [list(ids) for ids in pentads]
+assert outer["galois_action_on_six_pentads"] == list(galois_outer_action)
+assert sorted(Counter(galois_outer_action).values()) == [1] * 6
+assert sum(galois_outer_action[i] == i for i in range(6)) == 0
+
 assert CERT["A3"]["prime_reduction_table"][0]["reduced_companion"] == 0
 assert CERT["A3"]["prime_reduction_table"][1]["reduced_companion"] == 1
 assert [row["case"] for row in CERT["three_case_summary"]] == ["H3", "B3", "A3"]
