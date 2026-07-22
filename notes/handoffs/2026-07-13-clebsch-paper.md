@@ -18,11 +18,19 @@ protected baseline.  C399 is the selected portable upgrade for that version.  Th
 uses the C406+C411 replacement spine, selectively sharpened by C412's all-degree parity theorem,
 intrinsic `1:4:6` recovery, and projective-cover explanation of the depth rank drop.  C412's
 relative-cubic Tate plane is appendix-level naturality machinery and is not identified with the
-depth plane.  The user has selected the replacement spine for Lean formalization, queued as
+depth plane.  The opening exposition is now a proof-free graphic sweep of the
+forgetting--balanced-recovery--cubic-orientation--parent-reconstruction arc.  Paper 1 closes with an
+exact survival/forgetting ledger and the C445 arithmetic-gluing theorem; C464 closes the
+perfect-code row, while quaternion, descent, torsor, Dickson, and zeta mechanisms remain Paper-2
+pointers.  The user has selected the replacement spine for Lean formalization, queued as
 C420--C428, while manuscript integration remains a separate owner action before release**.
 
 The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md).
+The copy-ready abstract and section plan are
+[`2026-07-21-clebsch-paper-abstract-outline.md`](../2026-07-21-clebsch-paper-abstract-outline.md),
+and the complete C440--C468 paper-disposition inventory is
+[`2026-07-21-clebsch-weil-roof-results-ledger.md`](../2026-07-21-clebsch-weil-roof-results-ledger.md).
 The red-team-approved formalization campaign is
 [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md).
 
@@ -51,7 +59,7 @@ Paper registry: [`papers-index.md`](../../papers/papers-index.md), alias `clebsc
   it becomes the full-conic extended GRS code.  Edge/Dye own the individual configurations,
   `5,14,22` marker fibres, and substantial relation geometry.
 
-## Candidate C406+C411 replacement spine
+## Selected C406+C411 replacement spine
 
 C403--C406 now support one tighter mechanism:
 
@@ -130,7 +138,8 @@ Detailed result/proof history is preserved in the archive and in reports C180–
   [`2026-07-16-c211-clebsch-cold-read.md`](../2026-07-16-c211-clebsch-cold-read.md).
 
 This is not a submission gate unless the manuscript adopts the claims. Broader follow-up research
-has moved to the separate [`clebsch-next`](2026-07-16-clebsch-next.md) lane.
+from the former `clebsch-next` lane is now crowns-owned; the historical handoff remains
+[`2026-07-16-clebsch-next.md`](2026-07-16-clebsch-next.md).
 
 ## Selected crowns import
 
