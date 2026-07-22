@@ -232,7 +232,7 @@ not claims that their hypotheses or game consequences have already been proved.
 
 | bridge | concrete C80 use | evidence gate / limitation |
 | --- | --- | --- |
-| Terwilliger algebra and triple-distribution SDP | Replace the failed pair statistic `tr(B^2)` by pointed triple-intersection data; test whether C79's `tr(B^3)` and C77's contextual `Q3` are coordinates of one positive-semidefinite certificate forcing a descending response fibre to be nonempty. | Build the pointed orbital algebra on the existing q=11/q=17 transition corpus and exhibit the PSD inequality.  Association-scheme language alone does not imply game value.  Gijswijt, arXiv:1007.0906. |
+| Terwilliger algebra and triple-distribution SDP | Replace the failed pair statistic `tr(B^2)` by pointed triple-word data controlling C79's `tr(B^3)`; treat C77's contextual `Q3` in a separate quotient-energy flag lift. | The audit below rules out one ordinary pointed algebra containing both as linear coordinates.  A useful PSD inequality must force a nonempty P-preserving response fibre, not merely reproduce their classifier values.  Gijswijt, arXiv:1007.0906. |
 | algebraic response variety plus character/Weil bounds | Encode legal descending replies as an incidence fibre `R_s`; prove generic fibres nonempty by character sums, Weil/Lang--Weil estimates, or, when applicable, Chevalley--Warning/Ax--Katz divisibility. | The estimate must be uniform enough to beat the error term, and every point counted must be a legal P-valued reply, not merely a legal move.  Degenerate/discriminant fibres route to C81.  Heath-Brown, arXiv:1009.3764, is a useful finite-field divisibility entry point. |
 | orbit category, Mackey restriction, and fusion | For a parent stabilizer `H` and opponent orbit `H/K`, treat the response fibre as a `K`-set/torsor.  Existence of a `K`-fixed response is the exact equivariant-section test; restriction models adding a mark, and double-coset bookkeeping organizes transfers between stabilizers. | First construct the actual response torsor/module.  Local classes must also satisfy fusion-stability before they define a global obstruction.  Grodal, arXiv:1608.00499; Benson--Grodal--Henke, arXiv:1210.1564. |
 | stable modules and endotrivial recognition | If a natural response module appears, test on relevant p-subgroups whether its stable endomorphism algebra is one-dimensional: `End(M) = k + projective`.  This could formalize "projective bulk cancels and a bounded defect survives." | Requires a canonical module attached to game states and a theorem translating its stable defect into P/N recursion.  Carlson--Thevenaz, arXiv:0706.4081. |
@@ -257,15 +257,76 @@ recursive bulk
     -> exact recursion on the surviving bounded defects
 ```
 
-The immediate priority is the Terwilliger/triple-distribution route: tabulate the pointed orbitals
-for the existing q=11 and q=17 records, locate `tr(B^3)` and `Q3` in that algebra, and ask whether
-positivity forces at least one descending P-response in every opponent fibre.  In parallel, the
+The immediate priority was to audit the Terwilliger/triple-distribution route: tabulate the pointed
+orbitals for the existing q=11 and q=17 records, determine whether `tr(B^3)` and `Q3` live in one
+pointed algebra, and ask whether positivity can force a descending P-response in every opponent
+fibre.  The audit below shows that a one-sorted identification is false.  In parallel, the
 large-q route should formulate the same fibre as an algebraic incidence problem and isolate its
 discriminant locus.  Orbit-category restriction and fusion then belong on that exceptional locus,
 where symmetry makes them informative rather than generic overhead.  Equivariant Morse theory is
 the most promising true bulk-cancellation bridge, but only after its matching is strengthened to a
 normal-play strategy lemma.  Endotrivial, sheaf, and dimer tools are presently recognition and
 certificate layers, not substitutes for the descent proof.
+
+### Pointed cubic audit: two different algebras
+
+The q=11 response graph is an honest small orbital object.  On each of the four pointed states the
+square `C5` has vertex-orbit sizes `1,1,5,5,5,5`; the 41 winning edges are one fixed orbital and
+eight five-edge orbitals.  Its six-cell quotient and the three-orbital response cover are therefore
+the right finite model for a coherent-configuration or Terwilliger treatment.
+
+The two q=17 cubic signals do **not** unify in that one-sorted algebra.  If
+`B=sum_i P_{sigma_i}` acts on conic parameters, then exactly
+
+```text
+tr(B^3) = sum_(i,j,k) #Fix(sigma_i sigma_j sigma_k).
+```
+
+It is a third word trace in the conic permutation algebra.  By contrast, let `c_g(y)` count ordered
+pairs of the five nonzero finite reply-ray directions whose quotient is `g`.  Then C77's Boolean
+triple-quotient statistic has the exact lifted form
+
+```text
+Q3(y) = [ E3(y) > 0 ],       E3(y) = sum_g binom(c_g(y),3).
+```
+
+Thus `Q3` is the support of a third factorial multiplicative-energy moment on the reply-pencil
+direction sort.  It is cubic in pair multiplicities but is not a triple word trace on the conic
+sort.  Putting both into one algebra requires at least a two-sorted incidence/coherent
+configuration, or a flag/tensor lift carrying triples of quotient pairs; an ordinary pointed
+Terwilliger table on conic parameters cannot contain both as linear coordinates.
+
+The distinction is computationally strict on all 112 primitive candidates in the 28 q=17 score-9
+transitions.  Direct permutation composition verifies the word-trace identity 112/112, and direct
+quotient enumeration verifies `Q3 iff E3>0` 112/112.  There are candidates with equal `tr(B^3)` and
+different `Q3`, and candidates with equal `Q3` and different `tr(B^3)`.  The `Q3/clean`
+contingency is
+
+```text
+                 Q3 false   Q3 true
+clean                 18         10
+not clean             57         27
+```
+
+so `Q3` is not a score-9 clean-reply selector.  Conversely the pair `(tr(B^2),tr(B^3))` is
+value-pure on this finite corpus: the clean/P candidates have exactly `(74,60)` or `(80,50)`, and
+all other observed pairs are nonclean/N.  This is a useful base-certificate compression, not a
+uniform moment rule: it is a two-value lookup on one q=17 stratum and supplies neither abundance
+nor descent.
+
+The corrected tool split is therefore:
+
+1. use the conic permutation/Terwilliger algebra to control word traces and, if possible, certify
+   the structural clean packet;
+2. use quotient energy, polynomial incidence, or a lifted flag algebra when `Q3`-type collisions
+   are the needed exceptional separator;
+3. couple the two sorts only through an explicit reply-incidence bimodule, then prove separately
+   that its nonempty fibre descends in game value.
+
+This also gives a sharper SDP gate.  Positivity in either algebra is useful only if it excludes all
+nonclean response fibres or forces a survivor in a separately proved P-preserving class.  Merely
+placing both cubic quantities in a larger moment matrix would reproduce the classifier without
+providing C80(b).
 
 There is no intrinsic QR label on the two q=11 connection orbitals.  Writing their offsets requires
 a generator of `C5`; inversion preserves the square class of their separation, but the roof Galois
@@ -298,6 +359,22 @@ replay rebuilds the residual grid rule directly from row, column, and affine-col
 uses a separate normal-play recursion.  Both reconstruct the two 15-point clouds, their five-point
 intersection, all four pointed states, every opponent branch, and the `C5` orbit partition.
 
+## Mystery ledger
+
+- **Settled by the pointed cubic audit:** the shared word “cubic” does not mean that `tr(B^3)` and
+  `Q3` are the same Terwilliger coordinate.  They live on different sorts and neither determines
+  the other on the exact q=17 score-9 corpus.
+- **Still open — moment-pair purity:** `(tr(B^2),tr(B^3))` exactly recognizes the clean reply on the
+  tested score-9 stratum, but no structural reason or q-independent feasible region is known.  The
+  evidence gate is a symbolic trace/intersection calculation beyond q=17; absent that, it remains
+  a finite base certificate.
+- **Still open — two-sorted coupling:** no canonical incidence bimodule has yet been shown to carry
+  both conic-word traces and reply-pencil energy while preserving P/N recursion.  This is owned by
+  C80's response-packet/descent theorem, not by an abstract SDP construction.
+- **Still open — abundance:** neither cubic statistic proves that a P-preserving response fibre is
+  nonempty for arbitrary odd q.  C82 remains gated on specifying such a bounded-condition fibre;
+  characteristic-5/7 degeneracies remain C81's branch.
+
 ## Reproduction
 
 ```bash
@@ -306,4 +383,7 @@ python3 scripts/c80_drain_rate.py 11 13 --maxsize 6
 python3 rust/scripts/c80_c447_cloud_packet.py --check
 python3 rust/scripts/c80_c447_cloud_packet_replay.py
 sha256sum -c notes/2026-07-22-c80-c447-cloud-packet.sha256
+python3 rust/scripts/c80_pointed_cubic_bridge.py --check
+python3 rust/scripts/c80_pointed_cubic_bridge_replay.py
+sha256sum -c notes/2026-07-22-c80-pointed-cubic-bridge.sha256
 ```

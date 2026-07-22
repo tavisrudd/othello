@@ -1,0 +1,564 @@
+{
+  "claim": "tr(B^3) is a third word trace in the conic permutation algebra, while Q3 is the support of a third factorial moment of quotient multiplicities; neither determines the other on the q=17 score-9 primitive-candidate corpus.",
+  "q11": {
+    "perfect_matchings_per_state": 2,
+    "pointed_states": 4,
+    "quotient_edge_counts": {
+      "0-inf": 1,
+      "1-1": 10,
+      "1-8": 5,
+      "1-9": 5,
+      "1-inf": 5,
+      "8-9": 5,
+      "8-inf": 10
+    },
+    "vertex_orbit_sizes": [
+      1,
+      1,
+      5,
+      5,
+      5,
+      5
+    ],
+    "winning_edge_orbital_sizes": [
+      1,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ]
+  },
+  "q17": {
+    "clean_moment_pairs": [
+      [
+        74,
+        60
+      ],
+      [
+        80,
+        50
+      ]
+    ],
+    "identity_checks": {
+      "Q3_iff_positive_third_factorial_quotient_collision": 112,
+      "tr_B3_equals_ordered_triple_word_fixed_points": 112
+    },
+    "independence_witnesses": {
+      "same_Q3_different_tr_B3": [
+        {
+          "clean": true,
+          "moments": [
+            6,
+            74,
+            60,
+            610
+          ],
+          "move": [
+            2,
+            5
+          ],
+          "p": true,
+          "q3": false,
+          "quotient_counts": [
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              11,
+              1
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              13,
+              2
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              16,
+              2
+            ]
+          ],
+          "quotient_factorial_third": 0,
+          "reply": [
+            1,
+            8
+          ],
+          "root": "(0, 1, 2, 3, 6, 14)",
+          "word_trace_three": 60,
+          "zone_edges": 23
+        },
+        {
+          "clean": false,
+          "moments": [
+            6,
+            78,
+            96,
+            674
+          ],
+          "move": [
+            2,
+            5
+          ],
+          "p": false,
+          "q3": false,
+          "quotient_counts": [
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              11,
+              1
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              13,
+              2
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              15,
+              1
+            ],
+            [
+              16,
+              2
+            ]
+          ],
+          "quotient_factorial_third": 0,
+          "reply": [
+            6,
+            12
+          ],
+          "root": "(0, 1, 2, 3, 6, 14)",
+          "word_trace_three": 96,
+          "zone_edges": 13
+        }
+      ],
+      "same_tr_B3_different_Q3": [
+        {
+          "clean": true,
+          "moments": [
+            6,
+            74,
+            60,
+            610
+          ],
+          "move": [
+            2,
+            5
+          ],
+          "p": true,
+          "q3": false,
+          "quotient_counts": [
+            [
+              4,
+              2
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              11,
+              1
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              13,
+              2
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              16,
+              2
+            ]
+          ],
+          "quotient_factorial_third": 0,
+          "reply": [
+            1,
+            8
+          ],
+          "root": "(0, 1, 2, 3, 6, 14)",
+          "word_trace_three": 60,
+          "zone_edges": 23
+        },
+        {
+          "clean": true,
+          "moments": [
+            6,
+            74,
+            60,
+            610
+          ],
+          "move": [
+            12,
+            5
+          ],
+          "p": true,
+          "q3": true,
+          "quotient_counts": [
+            [
+              3,
+              1
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              6,
+              1
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              10,
+              2
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              13,
+              3
+            ],
+            [
+              16,
+              4
+            ]
+          ],
+          "quotient_factorial_third": 6,
+          "reply": [
+            10,
+            14
+          ],
+          "root": "(0, 1, 2, 3, 6, 14)",
+          "word_trace_three": 60,
+          "zone_edges": 23
+        }
+      ]
+    },
+    "moment_pair_is_value_pure_on_this_corpus": true,
+    "primitive_candidates": 112,
+    "profiles": [
+      {
+        "clean": true,
+        "count": 18,
+        "p": true,
+        "q3": false,
+        "quotient_factorial_third": 0,
+        "tr_B2": 74,
+        "tr_B3": 60
+      },
+      {
+        "clean": true,
+        "count": 2,
+        "p": true,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 74,
+        "tr_B3": 60
+      },
+      {
+        "clean": true,
+        "count": 4,
+        "p": true,
+        "q3": true,
+        "quotient_factorial_third": 6,
+        "tr_B2": 74,
+        "tr_B3": 60
+      },
+      {
+        "clean": false,
+        "count": 14,
+        "p": false,
+        "q3": false,
+        "quotient_factorial_third": 0,
+        "tr_B2": 74,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 5,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 74,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 6,
+        "tr_B2": 74,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 3,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 8,
+        "tr_B2": 74,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 10,
+        "tr_B2": 74,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 6,
+        "p": false,
+        "q3": false,
+        "quotient_factorial_third": 0,
+        "tr_B2": 76,
+        "tr_B3": 44
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 76,
+        "tr_B3": 44
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 4,
+        "tr_B2": 76,
+        "tr_B3": 44
+      },
+      {
+        "clean": false,
+        "count": 16,
+        "p": false,
+        "q3": false,
+        "quotient_factorial_third": 0,
+        "tr_B2": 78,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 4,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 78,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 4,
+        "tr_B2": 78,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 8,
+        "tr_B2": 78,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 2,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 22,
+        "tr_B2": 78,
+        "tr_B3": 84
+      },
+      {
+        "clean": false,
+        "count": 18,
+        "p": false,
+        "q3": false,
+        "quotient_factorial_third": 0,
+        "tr_B2": 78,
+        "tr_B3": 96
+      },
+      {
+        "clean": false,
+        "count": 2,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 78,
+        "tr_B3": 96
+      },
+      {
+        "clean": false,
+        "count": 4,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 6,
+        "tr_B2": 78,
+        "tr_B3": 96
+      },
+      {
+        "clean": true,
+        "count": 2,
+        "p": true,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 80,
+        "tr_B3": 50
+      },
+      {
+        "clean": true,
+        "count": 1,
+        "p": true,
+        "q3": true,
+        "quotient_factorial_third": 4,
+        "tr_B2": 80,
+        "tr_B3": 50
+      },
+      {
+        "clean": true,
+        "count": 1,
+        "p": true,
+        "q3": true,
+        "quotient_factorial_third": 8,
+        "tr_B2": 80,
+        "tr_B3": 50
+      },
+      {
+        "clean": false,
+        "count": 3,
+        "p": false,
+        "q3": false,
+        "quotient_factorial_third": 0,
+        "tr_B2": 84,
+        "tr_B3": 50
+      },
+      {
+        "clean": false,
+        "count": 1,
+        "p": false,
+        "q3": true,
+        "quotient_factorial_third": 2,
+        "tr_B2": 84,
+        "tr_B3": 50
+      }
+    ],
+    "q3_clean_contingency": [
+      {
+        "clean": false,
+        "count": 57,
+        "q3": false
+      },
+      {
+        "clean": true,
+        "count": 18,
+        "q3": false
+      },
+      {
+        "clean": false,
+        "count": 27,
+        "q3": true
+      },
+      {
+        "clean": true,
+        "count": 10,
+        "q3": true
+      }
+    ],
+    "score9_transitions": 28
+  },
+  "sources": {
+    "notes/2026-07-22-c80-c447-cloud-packet.json": "1ef092406a5794987ed797aa1013597836d98eb0b39725eceac5b22a0463d548",
+    "notes/data/c20-q13-q17-states.jsonl.gz": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+  }
+}

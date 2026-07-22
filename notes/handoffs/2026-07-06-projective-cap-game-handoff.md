@@ -589,6 +589,12 @@ task list.  Current high-value items:
   per opponent-orbit representative suffices by transport.  C474 sharpens the torsor diagnostic:
   the cap calibration is the reflection class `D10/C5`, which vanishes after marking an endpoint;
   its characteristic-three q=11 Ext carrier is distinct and restricts trivially to `D10`.
+  The pointed-cubic audit separates the apparent Terwilliger signals: `tr(B^3)` is a three-word
+  trace on the conic permutation sort, while `Q3` is positivity of a third factorial quotient-energy
+  count on the reply-pencil sort.  Neither determines the other on all 112 q17 score-9 primitive
+  candidates.  `(tr(B^2),tr(B^3))` is value-pure there, with clean pairs `(74,60)` and `(80,50)`,
+  but remains a finite base classifier; a uniform proof needs a two-sorted incidence/flag lift plus
+  descent, not one ordinary Terwilliger table.
   A uniform quotient/response theorem,
   (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang

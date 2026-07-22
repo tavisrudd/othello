@@ -1,0 +1,4 @@
+639b6caa15d157bd0d05901734f5271fc270019f7826cc069f2d5c390939968f  notes/2026-07-12-c80-bulk-exhaustion-probe.md
+283ca606d36f7b826c561554fdf43706ca64768132ead02ab2a394ca1e26ae92  rust/scripts/c80_pointed_cubic_bridge.py
+2cefafceef6422b5849653aa383f25c8a8d66c8599d847748f34e8c313aab92d  rust/scripts/c80_pointed_cubic_bridge_replay.py
+e0c2e1aa8c6b31b57e7fe73362c29d3ab40f9d5899cb562b3b3ead1dd6747955  notes/2026-07-22-c80-pointed-cubic-bridge.json
