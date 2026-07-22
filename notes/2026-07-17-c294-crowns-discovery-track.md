@@ -963,9 +963,21 @@ refined reading.
 `zeta_5` rotation model is one consistent explanation, not the only one). Scratch scripts are
 session-local; a durable bundle per reproducibility conventions is required before any
 paper-facing use or promotion.
-**Status:** open lead; unallocated — candidate one-bounded-task shape: exact Delsarte/Gauss-sum
-zeta of the Klein cubic at 11, compared against the certified Fourier spectrum and the C462/C449
-`C4`
+**Status:** resolved 2026-07-21 by a delegated deep-dive
+(`notes/2026-07-21-klein-cubic-zeta-probe.md`, scripts committed alongside): the premise fails —
+the Klein cubic is SINGULAR mod 11, with `Z(X/F_11) = Z(P^3)` proved for all `k` by a verified
+Delsarte character-sum stratification, so there is no weight-3 spectrum at 11 at all and the
+`Q(zeta_5, sqrt(-11))` reading is vacuous there. The refutation is itself structured: the unique
+singular point is the `zeta_5`-CM point `(1, zeta, ..., zeta^4)`, a wild corank-1 `A_10`-type
+point with Tjurina length exactly `p = 11` absorbing all ten vanishing cycles, and singularity
+occurs iff `p | 33 = 2^5 + 1 = 3 * 11` — the golden `C4` and the Gauss prime meet in the
+*degeneration*, not in a spectrum, and the obstruction integer is the product of the program's two
+working characteristics. Successor question (open, unallocated): the same reduction machinery
+makes the zeta computable at good primes `p = 1 mod 5`, `p` not dividing 33 — notably 31 and 41,
+the primes C466 already constructs sheets at — where quintic Jacobi sums genuinely populate `H^3`
+and the C4/Gauss-field meeting question becomes non-vacuous. Also supplies a Phase-3 framing
+sentence for C454: at 11 there is no weight-3 motive to map to, so the Adler-bridge negative has a
+geometric cause, not merely a representation-theoretic one.
 
 ### 2026-07-21 — the period quadratic's constant term singles out characteristic 3 for C465
 
