@@ -218,10 +218,34 @@ binding engineering lessons, which supersede the corresponding §E clauses:
    satisfiability check accordingly gains mathematical content: the pressed record must pass the
    paper's own certificates, and the verification script must check exactly that.
 
-Calibration status after both rounds: frame detection 4/4 across tiers; injection misreads 0/4;
-decode rate 0/1 on an invariant-violating pressing (correctly so).  The decode test remains open
-until a certificate-consistent pressing exists; it should rerun with the representative-selection
-channel on the camera-ready record.
+Calibration status after two rounds: frame detection 4/4 across tiers; injection misreads 0/4;
+decode rate 0/1 on an invariant-violating pressing (correctly so).
+
+**Third round — certificate-consistent pressing: full decode.**  The mock was repressed on the
+representative-selection channel (a "repr. pair" column, captioned as an arbitrary choice with no
+invariant meaning), and one frontier reviewer under an intentionality nudge ("if anything strikes
+you as intentionally placed beyond the mathematics, follow that thread") found and played both
+tracks completely: it reasoned from the arbitrariness disclaimer plus the *Contracrostipunctus*
+citation (an acrostic-bearing chapter) to the column, guessed the stylus `11x+y -> A1..Z26` from
+the paper's field, decoded sheet I as "TRY YET AGAIN" and sheet II as "THE OTHER WAY," read them
+as one sentence across the sheets, recognized the message as enacting the thesis, and searched
+for (and correctly ruled out) second layers.  Two production rules from its closing observation
+and one test-hygiene note:
+
+1. **The arbitrariness disclaimer is load-bearing camouflage** — it both defuses invariant audits
+   and, to a strong reader, *is* the tell.  Keep it verbatim; its wording is part of the pressing.
+2. **Well-meaning regeneration destroys the record.**  A referee, copyeditor, or co-author who
+   recomputes "arbitrary" representatives silently erases the message.  The verification script
+   must therefore diff the pressed choices against the source on every revision, and the internal
+   key note must mark the pressed objects as do-not-regenerate.
+3. Test hygiene: the mock's filename leaked intent ("beacon-test-draft"), which the reviewer
+   noticed; future calibration artifacts get neutral names.  (The camera-ready paper has no
+   analogous tell.)
+
+Final calibration scoreboard: frame detection 5/5 across tiers and prompts; injection misreads
+0/5; decode on a consistent pressing 1/1 (frontier, intent-nudge).  The graded outcome matches
+the design goal exactly: plain readers see a charming paper, review-prompted readers surface the
+frame, and a reader who follows the beacon's thread plays the record.
 
 **Residual risk, accepted consciously:** "authors calibrated a beacon for machine readers" may
 itself become the story.  Post-disclosure that story is benign — the beacon is a visible citation,
