@@ -628,7 +628,10 @@ Legendre symbol `(2/q)`?
 **Discriminator / falsifier:** one additional prime with both quantities certified; decoupling
 kills the mechanism, co-occurrence without `(2/q)` tracking kills only the Legendre reading.
 **Evidence:** CHECKED endpoints (C450/C451 bundles); the linking mechanism is REASONED.
-**Status:** open lead
+**Status:** open lead; mechanism face confirmed 2026-07-21 — C453's certified mod-40 fusion law
+has fused split classes `1,9,31,39` = exactly `(2/q)=+1` and visible classes `11,19,21,29` =
+exactly `(2/q)=-1`, so sheet fusion is a third certified face; the Arf face at 19/31 remains
+untested (predicted odd at 19, even at 31)
 
 
 ### 2026-07-21 — the cross-sheet designs span the two exceptional perfect codes
