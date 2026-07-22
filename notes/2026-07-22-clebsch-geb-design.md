@@ -159,3 +159,54 @@ lattice: what you recover depends on the structure you bring.
   files.  The puzzle must be solvable from the paper alone.
 - Content discipline: benign, meme-homage register throughout; nothing targeting persons or
   venues; disclose the apparatus to the editor on request without hesitation.
+
+## Red-team dispositions (2026-07-22) — these override the clauses they name
+
+The adversarial review (`2026-07-22-clebsch-geb-design-red-team.md`) is adopted in full.  The
+governing changes:
+
+1. **Disclosure posture (overrides the last custody bullet).**  Every covert channel that ships —
+   encoded label/example messages, any commitment, the Paper-2 acrostic — gets a one-paragraph
+   *proactive* disclosure in the submission cover letter, stating that certain non-canonical
+   choices encode a benign homage, all removable on request, none affecting any theorem or
+   certificate.  Reactive disclosure remains acceptable only for visible elements (dialogue,
+   frontispiece).  A channel the authors would not disclose proactively is cut by that fact.
+2. **Ignition line (§F): cut.**  It advertises concealment to exactly the reader most likely to
+   punish it.  If a closing flourish is wanted, it must be object-level ("the child forgets what
+   the parent remembers"), never a meta-claim about the document.
+3. **Printed commitment hash (§E arithmetic track / §G Stage 3): cut from Paper 1.**  The priority
+   stake becomes a plainly stated open question in the conclusion — the arXiv timestamp is the
+   record.  A cryptographic commitment survives only as an optional full-width hash of a
+   drift-proof question statement, in arXiv ancillary metadata only, editor-disclosed; never a
+   truncated string in the typeset body.  The arithmetic key's track reduces to the certified
+   prophecy, which is retained.
+4. **Frontispiece signs (§D).**  The `+6/-6` tokens are either removed or rendered visibly as
+   decorator-emitted, with a caption stating they are frame-relative and defined only after
+   decoration.  The figure must not be readable as asserting a canonical sign.
+5. **Dialogue posture (§A).**  The crab canon is quarantined decoration: strictly severable, no
+   cross-references from the main text, and its lines are *not* footnoted as formal claims.  One
+   preamble sentence states that every line is a consequence of the cited sections.  No element
+   may combine the deniability of decoration with the authority of footnoted claims.
+6. **Record scope and honesty (§E, §B).**  "Solvable from Paper 1 alone" is stated to cover
+   Stages 1–2 only.  The claim that the `-6` track is an independent reading is dropped ("THE
+   BESTAGON" is a fragment, and the `+6` sheet already telegraphs the joke); the swap-gated-phrase
+   framing is retained only as construction, not as a difficulty claim.  Any ordering used by a
+   track is described as a chosen gauge fixed by printed convention, never as canonical or
+   child-determined.
+7. **Feasibility and timing (§E custody).**  The multi-track pressing requires an actual
+   satisfiability demonstration on the frozen dataset — all constraints met with every object still
+   natural — before the track count is committed; tracks are cut until it passes.  Pressing happens
+   only after *acceptance* (camera-ready), not after the authors' internal freeze, and every track
+   must be independently removable.
+8. **Virality (§G).**  Demoted from goal to bounded upside.  The paper must be fully defensible
+   with everything discovered at once during review; no element's defense may depend on late
+   discovery.  Reception strategy remains the expert-audit one; the priority wording is already
+   hardened and stays that way in every meme-facing phrase.
+9. **Attribution.**  If the bestagons payload is kept, CGP Grey gets a courtesy acknowledgment in
+   a non-covert location, and the staleness risk is accepted consciously or the payload is
+   rechosen at pressing time.
+
+What survives untouched: the independence remark (§C), the certified mod-40 prophecy as the
+Stage-2 payoff, the puzzle-you-must-fail (§B) with the scope statement above, the hexa-let
+frontispiece as summary figure, the Paper-2 ricercar form with *disclosed* acrostic, the
+strange-loop sentence, and the 11+11+1 letter arithmetic, which the review verified.
