@@ -257,6 +257,11 @@ def build_certificate():
         for orbit in a3_companions
     }
     assert companion_pentads == {frozenset(pentads[i]) for i in through_fixed}
+    companion_pentad_ids = [
+        pentad_index[frozenset([fixed_id] + [syntheme_id[matching] for matching in orbit])]
+        for orbit in a3_companions
+    ]
+    assert sorted(companion_pentad_ids) == through_fixed
 
     def pentad_action(permutation):
         return [
@@ -300,6 +305,30 @@ def build_certificate():
     assert {frozenset(parent) for parent in pentad_parents} == {frozenset(pgl_permutations), frozenset(galois_conjugate_pgl)}
     assert pentad_parents[0] & pentad_parents[1] == a3_permutations
     assert len(permutation_closure(tuple(pentad_parents[0] | pentad_parents[1]), a3_points)) == 720
+    syntheme_to_outer_edge = [tuple(i for i, ids in enumerate(pentads) if syntheme in ids) for syntheme in range(15)]
+    assert all(len(pair) == 2 for pair in syntheme_to_outer_edge)
+    assert set(syntheme_to_outer_edge) == set(combinations(range(6), 2))
+    for permutation, action in pentad_actions.items():
+        permutation_map = dict(zip(a3_points, permutation))
+        for syntheme, pair in enumerate(syntheme_to_outer_edge):
+            image_syntheme = syntheme_id[permutation_image(permutation_map, synthemes[syntheme], 5)]
+            assert syntheme_to_outer_edge[image_syntheme] == tuple(sorted(action[i] for i in pair))
+    frozen_outer_edge = syntheme_to_outer_edge[fixed_id]
+    assert list(frozen_outer_edge) == through_fixed
+    edge_setwise_stabilizer = {
+        permutation for permutation, action in pentad_actions.items()
+        if {action[i] for i in frozen_outer_edge} == set(frozen_outer_edge)
+    }
+    edge_pointwise_stabilizer = {
+        permutation for permutation, action in pentad_actions.items()
+        if all(action[i] == i for i in frozen_outer_edge)
+    }
+    assert edge_setwise_stabilizer == abstract_stabilizer
+    assert edge_pointwise_stabilizer == a3_permutations
+    assert {galois_pentad_action[i] for i in frozen_outer_edge} == set(frozen_outer_edge)
+    assert all(galois_pentad_action[i] != i for i in frozen_outer_edge)
+    assert (2 * 2 + 1) % 5 == (3 * 3 + 1) % 5 == 0
+    assert galois_pentad_action[companion_pentad_ids[0]] == companion_pentad_ids[1]
     a3["outer_S6_upgrade"] = {
         "dictionary": {"duad": "edge of K_6", "syntheme": "perfect matching of K_6", "pentad": "one-factorization: five synthemes partitioning all 15 duads"},
         "syntheme_count": len(synthemes),
@@ -317,6 +346,34 @@ def build_certificate():
         "galois_swaps_the_two_incident_pentads": True,
         "vertex_S6_action_on_six_pentads_is_faithful": len(vertex_actions) == 720,
         "outer_automorphism_witness": "the vertex transposition (2 3) acts on the six pentads as three transpositions, so the faithful S6 action does not preserve transposition cycle type",
+        "syntheme_outer_edge_duality": {
+            "syntheme_to_pentad_pair": [{"syntheme_id": i, "pentad_pair": list(pair)} for i, pair in enumerate(syntheme_to_outer_edge)],
+            "is_bijection_onto_edges_of_six_pentads": True,
+            "is_vertex_S6_equivariant": True,
+            "frozen_syntheme_outer_edge": list(frozen_outer_edge),
+            "setwise_edge_stabilizer_order": len(edge_setwise_stabilizer),
+            "setwise_edge_stabilizer_equals_full_antipodal_matching_stabilizer": True,
+            "pointwise_edge_stabilizer_order": len(edge_pointwise_stabilizer),
+            "pointwise_edge_stabilizer_equals_frozen_projective_S4": True,
+            "galois_flips_frozen_outer_edge": True,
+            "companion_torsor_interpretation": "choosing an A3 companion is orienting the outer edge dual to the frozen antipodal syntheme; the two primes above 5 choose its two endpoints",
+            "companion_to_outer_endpoint": [{"companion": i, "pentad_endpoint": endpoint} for i, endpoint in enumerate(companion_pentad_ids)],
+            "outer_edge_arithmetic": {
+                "orientation_polynomial": "T^2+1",
+                "discriminant": -4,
+                "generic_quadratic_algebra": "Q(i)",
+                "integral_model": "Z[i]",
+                "finite_etale_base": "Z[1/2]",
+                "finite_etale_cover": "Spec Z[i,1/2] -> Spec Z[1/2]",
+                "ramified_rational_prime": 2,
+                "prime_5_splits": True,
+                "prime_5_endpoint_table": [
+                    {"i_mod_5": 2, "prime": "(2-i)", "pentad_endpoint": companion_pentad_ids[0]},
+                    {"i_mod_5": 3, "prime": "(2+i)", "pentad_endpoint": companion_pentad_ids[1]},
+                ],
+                "terminology_scope": "the companion pair is a Galois Z/2-torsor with integral model Z[i]; scheme-theoretically the quadratic cover is finite etale only after inverting 2",
+            },
+        },
         "two_parent_gluing": {
             "parent_orders": [120, 120],
             "parent_types": ["S5 = PGL_2(5)", "S5 = (i -> -i) PGL_2(5) (i -> -i)"],
@@ -335,7 +392,17 @@ def build_certificate():
     assert b3["matching_orbit_size_census"] == {"1": 1, "3": 4, "4": 2, "6": 4, "12": 5}
     assert b3["companion_count"] == 1 and b3["galois_action"]["companion_permutation"] == [0]
 
-    a3["torsor"] = {"group": "Z/2", "free_and_transitive": True, "galois_fixed_member_exists": False, "unordered_family_descends": True, "base_ring": "Z[i]", "good_split_prime": 5}
+    a3["torsor"] = {
+        "group": "Z/2",
+        "free_and_transitive": True,
+        "galois_fixed_member_exists": False,
+        "unordered_family_descends": True,
+        "coefficient_ring": "Z[i]",
+        "finite_etale_descent_base": "Z[1/2]",
+        "ramified_rational_prime": 2,
+        "good_split_prime": 5,
+        "terminology_scope": "Galois two-torsor carried by Z[i]; the associated quadratic cover is a scheme-theoretic finite-etale Z/2-torsor only after inverting 2",
+    }
     a3["prime_reduction_table"] = [
         {"generic_companion": 0, "prime": "(2-i)", "i_mod_5": 2, "reduced_companion": 0, "preferred_for_canonical_companion_0": True},
         {"generic_companion": 0, "prime": "(2+i)", "i_mod_5": 3, "reduced_companion": 1, "preferred_for_canonical_companion_0": False},

@@ -176,6 +176,34 @@ assert parents[0] & parents[1] == a3_group
 assert len(closure(tuple(parents[0] | parents[1]), a3_points)) == 720
 assert outer["two_parent_gluing"]["intersection_order"] == 24
 
+syntheme_outer_edges = [tuple(i for i, ids in enumerate(pentads) if syntheme in ids) for syntheme in range(15)]
+assert set(syntheme_outer_edges) == set(combinations(range(6), 2))
+for permutation in vertex_permutations:
+    action = pentad_action(permutation)
+    for syntheme, pair in enumerate(syntheme_outer_edges):
+        image_syntheme = syntheme_id[image(permutation, synthemes[syntheme], 5)]
+        assert syntheme_outer_edges[image_syntheme] == tuple(sorted(action[i] for i in pair))
+frozen_syntheme = syntheme_id[a3_fixed]
+frozen_outer_edge = syntheme_outer_edges[frozen_syntheme]
+setwise = {p for p in vertex_permutations if {pentad_action(p)[i] for i in frozen_outer_edge} == set(frozen_outer_edge)}
+pointwise = {p for p in vertex_permutations if all(pentad_action(p)[i] == i for i in frozen_outer_edge)}
+assert setwise == a3_full_stabilizer and pointwise == a3_group
+duality = outer["syntheme_outer_edge_duality"]
+assert duality["syntheme_to_pentad_pair"] == [{"syntheme_id": i, "pentad_pair": list(pair)} for i, pair in enumerate(syntheme_outer_edges)]
+assert duality["frozen_syntheme_outer_edge"] == list(frozen_outer_edge)
+assert all(galois_outer_action[i] in frozen_outer_edge and galois_outer_action[i] != i for i in frozen_outer_edge)
+companion_endpoints = []
+for companion in CERT["A3"]["companions"]:
+    ids = [frozen_syntheme] + [syntheme_id[matching(value, 5)] for value in companion["matchings"]]
+    companion_endpoints.append(pentad_index[frozenset(ids)])
+assert duality["companion_to_outer_endpoint"] == [
+    {"companion": i, "pentad_endpoint": endpoint} for i, endpoint in enumerate(companion_endpoints)
+]
+arithmetic = duality["outer_edge_arithmetic"]
+assert arithmetic["discriminant"] == -4 and arithmetic["ramified_rational_prime"] == 2
+assert [(root * root + 1) % 5 for root in (2, 3)] == [0, 0]
+assert [row["pentad_endpoint"] for row in arithmetic["prime_5_endpoint_table"]] == companion_endpoints
+
 assert CERT["A3"]["prime_reduction_table"][0]["reduced_companion"] == 0
 assert CERT["A3"]["prime_reduction_table"][1]["reduced_companion"] == 1
 assert [row["case"] for row in CERT["three_case_summary"]] == ["H3", "B3", "A3"]

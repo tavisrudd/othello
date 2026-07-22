@@ -267,6 +267,160 @@
       ],
       "projective_S4_fixes_both_incident_pentads": true,
       "syntheme_count": 15,
+      "syntheme_outer_edge_duality": {
+        "companion_to_outer_endpoint": [
+          {
+            "companion": 0,
+            "pentad_endpoint": 3
+          },
+          {
+            "companion": 1,
+            "pentad_endpoint": 4
+          }
+        ],
+        "companion_torsor_interpretation": "choosing an A3 companion is orienting the outer edge dual to the frozen antipodal syntheme; the two primes above 5 choose its two endpoints",
+        "frozen_syntheme_outer_edge": [
+          3,
+          4
+        ],
+        "galois_flips_frozen_outer_edge": true,
+        "is_bijection_onto_edges_of_six_pentads": true,
+        "is_vertex_S6_equivariant": true,
+        "outer_edge_arithmetic": {
+          "discriminant": -4,
+          "finite_etale_base": "Z[1/2]",
+          "finite_etale_cover": "Spec Z[i,1/2] -> Spec Z[1/2]",
+          "generic_quadratic_algebra": "Q(i)",
+          "integral_model": "Z[i]",
+          "orientation_polynomial": "T^2+1",
+          "prime_5_endpoint_table": [
+            {
+              "i_mod_5": 2,
+              "pentad_endpoint": 3,
+              "prime": "(2-i)"
+            },
+            {
+              "i_mod_5": 3,
+              "pentad_endpoint": 4,
+              "prime": "(2+i)"
+            }
+          ],
+          "prime_5_splits": true,
+          "ramified_rational_prime": 2,
+          "terminology_scope": "the companion pair is a Galois Z/2-torsor with integral model Z[i]; scheme-theoretically the quadratic cover is finite etale only after inverting 2"
+        },
+        "pointwise_edge_stabilizer_equals_frozen_projective_S4": true,
+        "pointwise_edge_stabilizer_order": 24,
+        "setwise_edge_stabilizer_equals_full_antipodal_matching_stabilizer": true,
+        "setwise_edge_stabilizer_order": 48,
+        "syntheme_to_pentad_pair": [
+          {
+            "pentad_pair": [
+              0,
+              1
+            ],
+            "syntheme_id": 0
+          },
+          {
+            "pentad_pair": [
+              2,
+              3
+            ],
+            "syntheme_id": 1
+          },
+          {
+            "pentad_pair": [
+              4,
+              5
+            ],
+            "syntheme_id": 2
+          },
+          {
+            "pentad_pair": [
+              2,
+              4
+            ],
+            "syntheme_id": 3
+          },
+          {
+            "pentad_pair": [
+              0,
+              5
+            ],
+            "syntheme_id": 4
+          },
+          {
+            "pentad_pair": [
+              1,
+              3
+            ],
+            "syntheme_id": 5
+          },
+          {
+            "pentad_pair": [
+              3,
+              5
+            ],
+            "syntheme_id": 6
+          },
+          {
+            "pentad_pair": [
+              1,
+              2
+            ],
+            "syntheme_id": 7
+          },
+          {
+            "pentad_pair": [
+              0,
+              4
+            ],
+            "syntheme_id": 8
+          },
+          {
+            "pentad_pair": [
+              1,
+              4
+            ],
+            "syntheme_id": 9
+          },
+          {
+            "pentad_pair": [
+              0,
+              3
+            ],
+            "syntheme_id": 10
+          },
+          {
+            "pentad_pair": [
+              2,
+              5
+            ],
+            "syntheme_id": 11
+          },
+          {
+            "pentad_pair": [
+              0,
+              2
+            ],
+            "syntheme_id": 12
+          },
+          {
+            "pentad_pair": [
+              1,
+              5
+            ],
+            "syntheme_id": 13
+          },
+          {
+            "pentad_pair": [
+              3,
+              4
+            ],
+            "syntheme_id": 14
+          }
+        ]
+      },
       "synthemes": [
         {
           "id": 0,
@@ -576,11 +730,14 @@
     ],
     "projective_group_order": 24,
     "torsor": {
-      "base_ring": "Z[i]",
+      "coefficient_ring": "Z[i]",
+      "finite_etale_descent_base": "Z[1/2]",
       "free_and_transitive": true,
       "galois_fixed_member_exists": false,
       "good_split_prime": 5,
       "group": "Z/2",
+      "ramified_rational_prime": 2,
+      "terminology_scope": "Galois two-torsor carried by Z[i]; the associated quadratic cover is a scheme-theoretic finite-etale Z/2-torsor only after inverting 2",
       "unordered_family_descends": true
     }
   },

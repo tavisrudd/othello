@@ -37,7 +37,8 @@ C1:
 
 The frozen Galois action `i -> -i` induces `(2 3)` on `P^1(F_5)`.  It fixes `M0` and exchanges
 `C0 <-> C1`, with no fixed companion.  Hence the unordered companion family descends, while a
-chosen companion does not: it is the asserted nontrivial `Z/2` companion torsor over `Z[i]`.
+chosen companion does not: it is the asserted nontrivial Galois `Z/2` companion torsor carried by
+`Z[i]`.
 
 The two primes above 5 give the exact reduction table
 
@@ -127,6 +128,31 @@ Galois-conjugate `S5` parents glued along the projective `S4` that fixes the ant
 This is a direct, exact A3 analogue of the programme's recurring parent/hinge gluing language,
 without asserting that the neighboring H3/B3 hinges arise from the same construction.
 
+## Third-order extra juice: the bit is an oriented outer edge
+
+There is a canonical `S6`-equivariant bijection
+
+```text
+{15 synthemes on the original six vertices}
+        <->
+{15 edges among the six pentads},
+
+M |-> {the two pentads containing M}.
+```
+
+Under this duality, the frozen antipodal syntheme `M0` becomes the edge joining the two companion
+pentads.  Its full order-48 stabilizer is exactly the **setwise** stabilizer of that outer edge;
+the frozen projective `S4` is exactly its **pointwise** stabilizer; and `i -> -i` is the edge flip.
+Consequently, choosing a companion is literally orienting the outer edge dual to `M0`.  This makes
+C442's phrase “the bit-carrier dualizes” exact in A3 rather than metaphorical.
+
+The arithmetic and combinatorial torsors also coincide.  The endpoint-orientation algebra is
+`Q(i)` with integral model `Z[i]`; `T^2+1` has discriminant `-4`, and its roots `i=2,3 mod 5`
+select the two outer-edge endpoints.  Scheme-theoretically the quadratic cover is finite étale only
+over `Z[1/2]`; 2 is ramified.  Thus “torsor over `Z[i]`” in this report means the Galois two-set
+carried by that integral model, while the literal finite-étale `Z/2` torsor is
+`Spec Z[i,1/2] -> Spec Z[1/2]`.
+
 ## Reproducibility
 
 Run from `/home/tavis/src/othello`:
@@ -147,9 +173,9 @@ hash-pinned in the canonical JSON.
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary checker | 18,532 | `20638ad0c51d3f29a5ec0b3527ea74cca00d4661cf5d6c153a57bfad99c09589` |
-| independent replay | 7,009 | `64ef3dfc841499b41a7826d128a40ac2b9c0f230da7b2870c97e7e4fda05195a` |
-| canonical JSON | 16,871 | `6c219ab1b8705bc8c25c53fb3327fd9fd2709121c46f781e46f5605478a62f85` |
+| primary checker | 22,524 | `b6a45bac79ba7644114dcffbf056c2cfc7cd07dd7cdf76adac59ba06dffccb30` |
+| independent replay | 8,942 | `09a69c96894bbbd92b5c8a225ddc5ea85c8054ffab636d2f7b255d7b69418cba` |
+| canonical JSON | 20,927 | `3913be117d3174242ab5ebf3c5a4752d74241eabb50cb78120690097f491ec5d` |
 
 The trusted boundary is exact finite arithmetic and exhaustive enumeration in the frozen C444
 labels, plus hash-referenced H3 facts from C443/C462.  There is no floating point, randomness,
@@ -166,6 +192,10 @@ literature claim, moment computation, secant product, or manuscript edit.
 - **Settled in the second-order pass:** the group-theoretic parents of those two pentads.  They are
   `PGL_2(5) ~= S5` and its Galois conjugate; their exact intersection is the frozen projective
   `S4`, and their generated closure is `S6`.
+- **Settled in the third-order pass:** the literal A3 bit-carrier duality.  The antipodal syntheme
+  is equivariantly the outer edge joining its two companion pentads, and companion choice is its
+  orientation.  The arithmetic orientation algebra is exactly `Q(i)`, with the finite-étale
+  qualification requiring inversion of 2.
 - **Open:** why the bit carrier migrates from the antipodal sheet in B3 to companion torsors of
   strengths `Z/2` and `Z/4` in A3 and H3.  The exact evidence is only this three-case table; no
   mechanism theorem spans the cases.  Phase-3 synthesis owns any comparative explanation, and
