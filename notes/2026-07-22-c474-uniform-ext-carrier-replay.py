@@ -210,6 +210,11 @@ def derive_case(record, upstream, oriented):
     frozen = tuple(x for block in frozen_blocks for row in block for x in row)
     assert all(sum(a * b for a, b in zip(row, frozen)) % p == 0 for row in constraints)
     assert rank([*coboundaries, frozen], p, width) == b_dimension + 1
+    detector = tuple(record["cohomology"]["h1_coordinate_functional"])
+    assert all(sum(a * b for a, b in zip(detector, coboundary)) % p == 0
+               for coboundary in coboundaries)
+    assert sum(a * b for a, b in zip(detector, record["cohomology"]["h1_basis"][0])) % p == 1
+    assert sum(a * b for a, b in zip(detector, frozen)) % p == record["frozen_extension"]["h1_detector_value"]
     assert z_dimension - b_dimension == record["cohomology"]["h1_dimension"] == 1
     assert relation_rank == record["cohomology"]["relation_constraint_rank"]
     assert z_dimension == record["cohomology"]["z1_dimension"]
@@ -240,6 +245,10 @@ def derive_case(record, upstream, oriented):
         return d * d - rank(equations, p, d * d)
 
     assert centralizer_dimension(vs) == centralizer_dimension(ws) == 1
+    assert centralizer_dimension(carrier_actions) == record["carrier_rigidity"]["endomorphism_dimension"] == 1
+    assert record["carrier_rigidity"]["automorphism_group_order"] == p - 1
+    assert record["carrier_rigidity"]["projectivized_ext_points"] == 1
+    assert record["carrier_rigidity"]["extension_middle_module_classes_split_vs_nonsplit"] == 2
     assert len(words) == record["group_order"]
     return {"q": q, "relation_rank": relation_rank, "z1": z_dimension, "b1": b_dimension,
             "h1": z_dimension - b_dimension, "pair_checks": checks}

@@ -1,6 +1,12 @@
 {
   "cases": [
     {
+      "carrier_rigidity": {
+        "automorphism_group_order": 1,
+        "endomorphism_dimension": 1,
+        "extension_middle_module_classes_split_vs_nonsplit": 2,
+        "projectivized_ext_points": 1
+      },
       "cohomology": {
         "b1_dimension": 9,
         "b1_rref_basis": [
@@ -207,6 +213,26 @@
             0,
             0
           ]
+        ],
+        "h1_coordinate_functional": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
         ],
         "h1_dimension": 1,
         "relation_constraint_rank": 8,
@@ -4176,6 +4202,7 @@
           1
         ],
         "h1_coordinate_against_recorded_basis": 1,
+        "h1_detector_value": 1,
         "is_nonzero": true,
         "ordered_pair_cocycle_checks": 28224
       },
@@ -4486,6 +4513,12 @@
       ]
     },
     {
+      "carrier_rigidity": {
+        "automorphism_group_order": 2,
+        "endomorphism_dimension": 1,
+        "extension_middle_module_classes_split_vs_nonsplit": 2,
+        "projectivized_ext_points": 1
+      },
       "cohomology": {
         "b1_dimension": 25,
         "b1_rref_basis": [
@@ -5844,6 +5877,58 @@
             0,
             0
           ]
+        ],
+        "h1_coordinate_functional": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
         ],
         "h1_dimension": 1,
         "relation_constraint_rank": 24,
@@ -35061,6 +35146,7 @@
           0
         ],
         "h1_coordinate_against_recorded_basis": 2,
+        "h1_detector_value": 2,
         "is_nonzero": true,
         "ordered_pair_cocycle_checks": 435600
       },

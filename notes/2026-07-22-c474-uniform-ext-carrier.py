@@ -213,6 +213,19 @@ def solve_in_basis(v, basis, p: int):
     return coordinates(v, basis, p)
 
 
+def solve_affine(rows, rhs, p: int, width: int):
+    augmented = [list(row) + [value % p] for row, value in zip(rows, rhs)]
+    rr, pivots = rref(augmented, p, width + 1)
+    assert width not in pivots
+    solution = [0] * width
+    for row, pivot in zip(rr, pivots):
+        if pivot < width:
+            solution[pivot] = row[-1]
+    assert all(sum(a * b for a, b in zip(row, solution)) % p == value % p
+               for row, value in zip(rows, rhs))
+    return tuple(solution)
+
+
 def commutant_dimension(generators, p: int):
     d = len(generators[0])
     rows = []
@@ -311,6 +324,10 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
     assert len(h_basis) == 1
     assert len(rref([*b_basis, frozen_vector], p, len(frozen_vector))[0]) == len(b_basis) + 1
     quotient_coordinate = solve_in_basis(frozen_vector, [*b_basis, *h_basis], p)[-1]
+    detector = solve_affine([*b_basis, *h_basis], [0] * len(b_basis) + [1], p, len(frozen_vector))
+    assert all(sum(a * b for a, b in zip(detector, coboundary)) % p == 0 for coboundary in b_basis)
+    assert sum(a * b for a, b in zip(detector, h_basis[0])) % p == 1
+    assert sum(a * b for a, b in zip(detector, frozen_vector)) % p == quotient_coordinate
     values = all_group_cocycle(words, expressions, frozen_vector, p)
     pair_checks = verify_all_pairs(words, group_actions, values, p)
     ordered = sorted(words)
@@ -333,11 +350,13 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
             "z1_basis": [list(x) for x in z_basis],
             "b1_rref_basis": [list(x) for x in b_basis],
             "h1_basis": [list(x) for x in h_basis],
+            "h1_coordinate_functional": list(detector),
         },
         "frozen_extension": {
             "generator_cocycle_matrices": [[[x for x in row] for row in block[2]] for block in blocks],
             "generator_cocycle_vector": list(frozen_vector),
             "h1_coordinate_against_recorded_basis": quotient_coordinate,
+            "h1_detector_value": quotient_coordinate,
             "is_nonzero": True,
             "all_group_values": [{"permutation": list(g), "value": list(values[g])} for g in ordered],
             "ordered_pair_cocycle_checks": pair_checks,
@@ -345,6 +364,12 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
         "endpoint_endomorphism_dimensions": {
             "socle": commutant_dimension(v_generators, p),
             "head": commutant_dimension(w_generators, p),
+        },
+        "carrier_rigidity": {
+            "endomorphism_dimension": commutant_dimension(actions, p),
+            "automorphism_group_order": p - 1,
+            "projectivized_ext_points": 1,
+            "extension_middle_module_classes_split_vs_nonsplit": 2,
         },
         "nonzero_ext_orbit": {
             "number_of_nonzero_classes": p - 1,

@@ -96,6 +96,53 @@ one from `Hom_G(S_q^*,S_q)=0`; the exact endpoint commutant calculations give di
 both simples.  Against the certificate's canonical complement to `B^1`, the frozen class has
 coordinate `1` at `q=7` and `2=-1` at `q=11`, so neither extension is a coboundary.
 
+### Extra-juice upgrade: a one-scalar splitting detector
+
+The clean ranks permit a literal operational strengthening.  For any generator cocycle `z`, put
+
+```text
+delta(z) = <Lambda_T,z(T)> + <Lambda_S,z(S)>,
+```
+
+where the pairing is entrywise matrix dot product.  In the canonical bases above, take
+
+```text
+q=7:
+Lambda_T = [0 0 0]    Lambda_S = [0 1 0]
+           [1 1 0]               [0 0 0]
+           [0 1 1]               [0 0 0]
+
+q=11:
+Lambda_T = [1 0 1 1 1]    Lambda_S = [0 0 1 0 0]
+           [1 1 2 1 1]               [0 0 0 0 0]
+           [0 0 1 0 0]               [0 0 0 0 0]
+           [2 0 0 0 2]               [0 0 0 0 0]
+           [0 0 0 1 1]               [0 0 0 0 0].
+```
+
+Exact linear algebra proves that `delta` annihilates every coboundary and takes value one on the
+recorded `H^1` basis.  Since `H^1` is one-dimensional, this gives the sharp test
+
+```text
+the extension represented by z splits  <=>  delta(z)=0.
+```
+
+The frozen cocycles have `delta=1` at `q=7` and `delta=2=-1` at `q=11`.  Thus the full
+retraction-consistency calculation compresses, after the cocycle relations are known, to one
+certified field element.
+
+There is a second rigidity consequence.  In both cases the relation rank is exactly `d^2-1`, the
+coboundary rank is `d^2`, and the carrier endomorphism ring is `F_p`.  Hence the projectivized Ext
+space is a single point, there are exactly two extension middle-module classes (split and
+nonsplit), and
+
+```text
+Aut_G(A_7)=1,       Aut_G(A_11)=F_3^* of order 2.
+```
+
+So arithmetic orientation is needed to name the socle constituent, but no scalar, cocycle-basis,
+or endpoint gauge can create a second nonsplit carrier.
+
 ## Strongest honest common theorem
 
 Let
@@ -152,8 +199,8 @@ The atomic evidence bundle is:
 - `notes/2026-07-22-c474-uniform-ext-carrier.json`;
 - `notes/2026-07-22-c474-uniform-ext-carrier.sha256`.
 
-The primary script is 15,200 bytes, the independent replay is 10,331 bytes, and the canonical
-JSON certificate is 615,645 bytes.  The checksum manifest pins these plus this report.
+The checksum manifest pins the report, primary script, independent replay, and canonical JSON
+certificate; their exact byte counts are recorded there by the adjacent bundle audit.
 
 Run from `/home/tavis/src/othello`:
 
@@ -190,13 +237,20 @@ no literature novelty or priority claim.
 - **Settled by explicit `ej` — literal representatives.** The two generator matrices above and
   every group-element value are frozen in the JSON, with all ordered-pair identities checked by
   two implementations.
+- **Settled by the follow-up `ej` — one-scalar obstruction.** The explicit functional `delta`
+  kills every coboundary, normalizes the recorded `H^1` generator to one, and evaluates nontrivially
+  on both frozen cocycles.  Splitting can therefore be decided by one field operation after the
+  cocycle relations are checked.
+- **Settled by the follow-up `ej` — carrier moduli collapse.** The projectivized Ext space is one
+  point and `End_G(A_q)=F_p`, leaving exactly the split and unique nonsplit middle modules.  Their
+  nonsplit automorphism groups have orders one and two respectively.
 - **Settled — effects of C472/C473.** The signed split cover introduces no second extension class;
   the pointed trace-prime rule canonically names the socle in each case.
-- **Open, with exact Phase-3 boundary — why the same Ext dimension occurs twice.** The equality
-  `dim Ext^1=1` is now exact in both cases, but no mechanism deriving it from `m` alone is known.
-  The evidence gap is a uniformly defined carrier and a structural cohomology theorem outside
-  `{7,11}`.  The bounded Phase-3 synthesis must classify the Rosetta row as checked rather than
-  family-proved.
+- **Open, with exact Phase-3 boundary — why the same rank defect occurs twice.** Both relation
+  systems have rank `d^2-1`, leaving `dim Z^1=d^2+1`, but no mechanism derives this one-dimensional
+  defect from `m` alone.  The evidence gap is a uniformly defined carrier and a structural
+  cohomology theorem outside `{7,11}`.  The bounded Phase-3 synthesis must classify the Rosetta row
+  as checked rather than family-proved.
 - **No other genuine C474 mystery remains.** Ext dimensions, cocycle representatives, frozen-class
   coordinates, endpoint automorphisms, scalar orbits, and the exact larger-family obstruction are
   closed.
