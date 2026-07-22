@@ -151,6 +151,57 @@ def exact_fourier_maps(c374, c456, source, target, lc_result) -> dict[str, objec
     }
 
 
+def golden_symbolic_duality() -> dict[str, object]:
+    def integer_h(t: int) -> tuple[tuple[int, ...], ...]:
+        return (
+            (0, 0, 1, 1, 1, 1),
+            (1, 1, 1 - t, t - 1, 0, 0),
+            (1 - t, t - 1, 0, 0, -t, t),
+        )
+
+    def product(t: int) -> tuple[tuple[int, ...], ...]:
+        left = integer_h(1 - t)
+        right = integer_h(t)
+        signs = (-1, -1, -1, -1, 1, 1)
+        return tuple(
+            tuple(sum(left[i][k] * signs[k] * right[j][k] for k in range(6)) for j in range(3))
+            for i in range(3)
+        )
+
+    coefficient_matrix = []
+    values = [product(t) for t in (0, 1, 2)]
+    for i in range(3):
+        row = []
+        for j in range(3):
+            value0, value1, value2 = (values[t][i][j] for t in range(3))
+            coefficients = (
+                value0,
+                (-3 * value0 + 4 * value1 - value2) // 2,
+                (value2 - 2 * value1 + value0) // 2,
+            )
+            row.append(coefficients)
+        coefficient_matrix.append(row)
+    expected = [[(0, 0, 0) for _ in range(3)] for _ in range(3)]
+    expected[1][1] = (-2, -2, 2)
+    if coefficient_matrix != expected:
+        raise AssertionError("symbolic golden-duality matrix changed")
+    for t in range(-5, 6):
+        target = [[0] * 3 for _ in range(3)]
+        target[1][1] = 2 * (t * t - t - 1)
+        if product(t) != tuple(tuple(row) for row in target):
+            raise AssertionError("symbolic identity replay failed")
+    return {
+        "integer_identity": "H_(1-t) diag(-1,-1,-1,-1,+1,+1) H_t^T = diag(0,2(t^2-t-1),0)",
+        "polynomial_coefficient_order": ["1", "t", "t^2"],
+        "coefficient_matrix": coefficient_matrix,
+        "consequence": "For t^2-t-1=0 and rank(H_t)=rank(H_(1-t))=3, signed(C_t^perp)=C_(1-t).",
+        "golden_arc_factor_reductions": ["t", "t-1", "2", "2(1-t)"],
+        "odd_field_rank_and_arc_boundary": "All four factors are nonzero for a golden root in odd characteristic, so both parity checks have rank 3 and define six-arcs.",
+        "odd_finite_field_quantum_consequence": "The signed local Fourier transform exchanges the two golden-conjugate equal-phase CSS states over every odd finite-field realization.",
+        "characteristic_5_boundary": "The roots coalesce, so the same formula becomes signed Fourier self-duality.",
+    }
+
+
 def build_certificate() -> dict[str, object]:
     for relative, expected in INPUTS.items():
         if digest(ROOT / relative) != expected:
@@ -168,6 +219,7 @@ def build_certificate() -> dict[str, object]:
         "state_parameters": [8, 4],
         "fixed_party_local_clifford": lc_result,
         "exact_state_map": fourier_result,
+        "golden_family_mechanism": golden_symbolic_duality(),
         "degree_eight_lu_contractions": {
             "copy_count": 4,
             "amplitude_bidegree": [4, 4],

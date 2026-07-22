@@ -722,6 +722,77 @@
     "relation_failure_anchors": 1310,
     "sl2_anchor_blocks_checked": 1320
   },
+  "golden_family_mechanism": {
+    "characteristic_5_boundary": "The roots coalesce, so the same formula becomes signed Fourier self-duality.",
+    "coefficient_matrix": [
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          -2,
+          -2,
+          2
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    ],
+    "consequence": "For t^2-t-1=0 and rank(H_t)=rank(H_(1-t))=3, signed(C_t^perp)=C_(1-t).",
+    "golden_arc_factor_reductions": [
+      "t",
+      "t-1",
+      "2",
+      "2(1-t)"
+    ],
+    "integer_identity": "H_(1-t) diag(-1,-1,-1,-1,+1,+1) H_t^T = diag(0,2(t^2-t-1),0)",
+    "odd_field_rank_and_arc_boundary": "All four factors are nonzero for a golden root in odd characteristic, so both parity checks have rank 3 and define six-arcs.",
+    "odd_finite_field_quantum_consequence": "The signed local Fourier transform exchanges the two golden-conjugate equal-phase CSS states over every odd finite-field realization.",
+    "polynomial_coefficient_order": [
+      "1",
+      "t",
+      "t^2"
+    ]
+  },
   "input_sha256": {
     "notes/2026-07-19-c374-clebsch-ame-equivalence.json": "b3ecefac292797375ec7849480cd003039bf6e56219f61a117e39f575898405d",
     "notes/2026-07-19-c374-clebsch-ame-equivalence.py": "15a99411b06f46f07e9b77a8593541031d98b4353fa0d9076d8452e2484ca694",

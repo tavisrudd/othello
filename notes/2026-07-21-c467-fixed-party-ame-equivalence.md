@@ -122,6 +122,31 @@ canonical-looking fixed-party representative. No automorphism-rigidity obstructi
 proposed order-four obstruction fails because the relevant state automorphism group is strictly
 larger than its projective/monomial shadow.
 
+## Post-close upgrade: uniform golden Fourier duality
+
+The q=11 map is the reduction of a polynomial identity, not a finite-field coincidence. Over the
+integer polynomial ring, direct expansion gives
+
+```text
+H_(1-t) diag(-1,-1,-1,-1,+1,+1) H_t^T
+    = diag(0, 2(t^2-t-1), 0).
+```
+
+Therefore, over any odd field containing a root of `t^2-t-1`, the two golden-conjugate pencil
+members satisfy
+
+```text
+diag(-1,-1,-1,-1,+1,+1) C_t^perp = C_(1-t),
+```
+
+The four C395 arc factors reduce to `t`, `t-1`, `2`, and `2(1-t)`, all nonzero for a golden root in
+odd characteristic, so both sides are rank-three six-arcs. The same signed fixed-party Fourier
+transform therefore exchanges their equal-phase CSS states. At q=11
+the roots are `8` and `4`, recovering the certified C467 map. In characteristic 5 the roots
+coalesce, and the statement becomes signed Fourier self-duality. Thus golden Galois conjugation in
+this pencil is implemented quantum-mechanically by local Fourier duality uniformly across odd
+finite-field realizations.
+
 ## Reproduction and trusted boundary
 
 Run from the repository root:
@@ -134,8 +159,8 @@ sha256sum -c notes/2026-07-21-c467-fixed-party-ame-equivalence.sha256
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | 8,907 | `824826c41591b19b5850fb5a4f78e4fd9a66c3ccfdb7597780353f140616f698` |
-| certificate `.json` | 11,853 | `f529ae3ea18a0a0d263e9ea10142659ed70170f3a831d066508435eff60b2f14` |
+| checker `.py` | 11,316 | `d3ea37ac8f5bec125a7658ea418f2d341a5e4f1bca218c3b86b07e97ebe85f2f` |
+| certificate `.json` | 13,319 | `a155339413e293138d04e0f6b7276300a5d38b019a8f20b936c084ac20df8b48` |
 
 The deterministic checker hash-pins the C374, C384, and C456 scripts/certificates. Its trusted
 boundary is Python 3 arithmetic modulo 11, exact row reduction, prime-field character
