@@ -601,3 +601,27 @@ C452/T5's territory.
 identities factor through the same quadratic period sums.
 **Evidence:** OPEN.
 **Status:** open lead
+
+### 2026-07-21 — opposite theta-origin parity at 7 and 11; candidate mechanism `(2/q)`
+
+**Provenance:** C451/T4 post-gate certificate (Arf `0` at `q=7`, Arf `1` at `q=11`; sheet
+signatures coincide at both primes) read against C450/T3's controls.
+**Was I looking for this?:** no — C451's card asked whether theta signatures discriminate the
+sheets (they do not); the cross-prime pattern is a review synthesis across two certificates.
+**Observed / musing:** the invariant origin `kappa_empty` has `h^0=(g+1)/2=(q+1)/4`, even at `q=7`
+and odd at `q=11`, so the canonical quadratic forms carry Arf `0` vs `1`. Independently, C450 found
+the degree-five Weil pair present in the `q=11` shared-edge support but absent from both `q=7`
+relation supports. Two unrelated certificates separate the primes the same way. For `q = 3 mod 4`,
+`(q+1)/4` is even exactly when `q = 7 mod 8`, i.e. exactly when `2` is a quadratic residue mod `q`
+— and C450's sheet-swapping `Rz` acts as an outer element precisely because `det Rz = 2` is a
+nonsquare mod 11.
+**Why it may matter / strongest question:** is the 7-vs-11 asymmetry family governed by the single
+Legendre symbol `(2/q)`?
+**Structural mechanism:** parity of `(q+1)/4` = value of `(2/q)` for `q = 3 mod 4`.
+**Predicted siblings:** any future frozen prime `q = 3 mod 4` — predicted Arf parity odd and
+`Rz`-type det-2 sheet swap outer iff `q = 3 mod 8`; the two behaviors should never decouple.
+**Discriminator / falsifier:** one additional prime with both quantities certified; decoupling
+kills the mechanism, co-occurrence without `(2/q)` tracking kills only the Legendre reading.
+**Evidence:** CHECKED endpoints (C450/C451 bundles); the linking mechanism is REASONED.
+**Status:** open lead
+
