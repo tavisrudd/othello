@@ -19,16 +19,18 @@
     "scheme_exchange": "sigma is the structural swap of C459/C487 Spec Q(sqrt5)"
   },
   "orientation_line": {
-    "after_inverting_2": "isomorphism of sign lines",
-    "canonical_map": "R^{sigma=-1} -> det_Z(R), x |-> 1 wedge x",
-    "cokernel": "Z/2",
-    "delta_image": "2*(1 wedge tau)",
     "determinant_line": "det_Z(R)=Z*(1 wedge tau)",
-    "prime_2_mechanism": "sign eigensplitting fails although R tensor F_2=F_4 is etale",
-    "prime_5_mechanism": "odd line specializes to the cotangent/conormal line of the ramified point",
-    "smith_invariants": [
+    "determinant_to_odd": "1 wedge tau |-> delta (integral isomorphism)",
+    "difference_to_odd": "[x] |-> x-sigma(x); [tau] |-> delta (integral isomorphism)",
+    "discriminant_quadratic_form": "q(1 wedge tau)=delta^2=5",
+    "noninverse_wedge_map": "delta |-> 1 wedge delta = 2*(1 wedge tau)",
+    "noninverse_wedge_map_smith_invariants": [
       2
-    ]
+    ],
+    "orientation_quotient": "R/Z = Z*[tau]",
+    "prime_2_mechanism": "the determinant line stays flat, but its sign action becomes trivial and cannot distinguish orientations",
+    "prime_5_mechanism": "odd line specializes to the cotangent/conormal line of the ramified point",
+    "quotient_to_determinant": "[x] |-> 1 wedge x (integral isomorphism)"
   },
   "phase_pilots": {
     "inert_p13": {

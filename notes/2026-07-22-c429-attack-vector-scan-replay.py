@@ -41,8 +41,10 @@ def main() -> None:
     assert power((0, 1), 13, 13) == (1, 12)  # 1-tau
     delta = (4, 2)
     assert delta != (0, 0) and mul(delta, delta, 5) == (0, 0)
-    assert data["orientation_line"]["smith_invariants"] == [2]
-    assert data["orientation_line"]["delta_image"] == "2*(1 wedge tau)"
+    orientation = data["orientation_line"]
+    assert orientation["noninverse_wedge_map_smith_invariants"] == [2]
+    assert orientation["determinant_to_odd"] == "1 wedge tau |-> delta (integral isomorphism)"
+    assert orientation["discriminant_quadratic_form"] == "q(1 wedge tau)=delta^2=5"
 
     # At 2 the algebra is etale (t^2+t+1 irreducible), but sign equals trivial character.
     assert roots(2) == [] and (1 % 2) == (-1 % 2)

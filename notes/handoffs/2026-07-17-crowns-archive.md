@@ -161,3 +161,11 @@ User-requested second extra juice sharpened the carrier intrinsically.  The cano
 so its cokernel is `Z/2` and it is an isomorphism over `Z[1/2]`.  At 5 the specialized odd line is
 the cotangent/conormal line of the ramified point.  This separates the sign-eigensplitting prime 2
 from the discriminant prime 5 and gives C434 a canonical determinant-line bottom rung.
+
+The subsequent Tao stress test found that the preceding paragraph used the wrong comparison map.
+The canonical maps are `R/Z -> det(R)`, `[x] |-> 1 wedge x`, and
+`R/Z -> R^{sigma=-1}`, `[x] |-> x-sigma(x)`; both are integral isomorphisms here.  Thus
+`det(R) -> R^{sigma=-1}`, `1 wedge tau |-> delta`, is integral.  The displayed odd-to-wedge map
+really does have cokernel `Z/2`, but it is a noninverse map and does not explain a denominator.
+The corrected carrier is the discriminant quadratic line `(det R,<5>)`; prime 2 kills sign
+visibility while leaving the line flat, and prime 5 turns it into the branch cotangent line.
