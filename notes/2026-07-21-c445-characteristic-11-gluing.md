@@ -64,6 +64,26 @@ the common triangle of the base and J-mate Frégier clouds.  This is a canonical
 the characteristic-zero pairing.  It is supporting geometry for the gluing statement; by itself
 it proves neither the `PSL_2(11)` closure nor the quaternion mechanism.
 
+### Post-close upgrade — the exact `S4/A4` gluing hinge
+
+The common triangle does more than accompany the gluing.  Its setwise stabilizer is C460's rational
+octahedral `S4` of order 24, while the common stabilizer of the two golden matchings is their `A4`
+intersection of order 12.  The reduction of `Rz` swaps the matchings, so Frégier-cloud equivariance
+forces it to swap their clouds and preserve the common triangle.  Hence it lies in `S4` but, having
+nonsquare determinant, not in `PSL_2(11)`.  Therefore the determinant character gives the exact
+diagram
+
+```text
+A4 = a5(8) intersection a5(4) = S4 intersection PSL_2(11),
+S4 / A4 = C2,
+Rz mod 11 lies in S4 \ A4.
+```
+
+Thus the common `S4` is the local gluing hinge: its `A4` kernel fixes both sheets, and its outer
+coset exchanges them.  This promotes the perpendicularity triangle from supporting geometry to the
+precise seam through which the rational transporter acts; it still does not supply the quaternion
+interpretation.
+
 ## Paper-1 closing theorem
 
 The strongest closing theorem currently justified at the frozen boundary is:

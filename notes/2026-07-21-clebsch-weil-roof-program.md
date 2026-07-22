@@ -38,7 +38,7 @@ selected card names it as a load-bearing input.
 | C447 | X2 | singleton comparison negative; shared-edge cross-sheet repair GREEN | exact local torsor for X3 |
 | C448 | X3 | GREEN: orbit-valued selector theorem; point section costs one bit | framing input only |
 | C444 | M4 | GREEN: B3 split fibres exchanged by outer `x->-x`, cubic scalar `2 sqrt2`, common `S3` seam; A3 central lifts fuse over one projective `S4` | unlocks M5 and strengthens T10 input |
-| C445 | M5 | GREEN: exact 11+11-to-22 matching/orbit gluing; rational `Rz` boundary; tensor cut | closes master-stroke statement boundary |
+| C445 | M5 | GREEN: exact 11+11-to-22 matching/orbit gluing; `S4/A4` triangle hinge; rational `Rz` boundary; tensor cut | closes master-stroke statement boundary |
 | C449 | T2 | queued after M4 chain | split-Coxeter-torus mechanism |
 | C450 | T3 | queued; independent after frozen inputs | Weil-module roof test |
 | C451 | T4 | queued | theta/Roquette row, with clean negative allowed |

@@ -156,6 +156,9 @@ def build_certificate() -> dict[str, object]:
     assert c458["bridge"]["rational_transporter_Rz"]["spinor_norm"] == 2  # type: ignore[index]
     assert c460["golden_pair"]["perpendicularity_comparison"]["equals_common_triangle"] is True  # type: ignore[index]
     assert tuple(tuple(x) for x in c460["golden_pair"]["common_triangle"]) == TRIANGLE  # type: ignore[index]
+    assert c460["golden_pair"]["triangle_setwise_stabilizer"]["order"] == 24  # type: ignore[index]
+    assert c460["golden_pair"]["triangle_setwise_stabilizer"]["orbit_on_golden_matchings"] == 2  # type: ignore[index]
+    assert c460["golden_pair"]["common_matching_stabilizer"]["order"] == 12  # type: ignore[index]
     assert c443["blocker"]["observed_one_factorizing_size_ten_orbits"] == 4  # type: ignore[index]
     assert c461["necessary_lower_moment_test"]["kernel_dimension"] == 0  # type: ignore[index]
     assert c444["verdict"].startswith("GREEN")  # type: ignore[union-attr]
@@ -237,6 +240,17 @@ def build_certificate() -> dict[str, object]:
             "pairing_sigma_stable": True,
             "exact_strength": "the six perpendicular golden/conjugate axis pairs reduce two-by-two to exactly the common Frégier-cloud triangle",
             "does_not_prove": "the group gluing or quaternion mechanism by itself",
+        },
+        "exact_S4_A4_gluing_hinge": {
+            "triangle_setwise_stabilizer": "S4",
+            "triangle_setwise_stabilizer_order": 24,
+            "common_matching_stabilizer": "A4",
+            "common_matching_stabilizer_order": 12,
+            "outer_transporter_lies_in_triangle_stabilizer": True,
+            "deduction": "The transporter swaps the base and J-mate matchings, hence by Frégier-cloud equivariance swaps their clouds and preserves their common triangle. C460 identifies that triangle stabilizer as S4.",
+            "determinant_kernel": "S4 intersection PSL2(11) = A4",
+            "quotient": "S4/A4 = C2",
+            "exact_diagram": "A4 = a5(8) intersection a5(4) = S4 intersection PSL2(11); the nontrivial S4/A4 coset exchanges the two golden matchings and contains Rz mod 11.",
         },
         "paper_1_closing_theorem": {
             "status": "provable now",
