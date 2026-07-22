@@ -87,6 +87,9 @@ s^2=r^3=(sr)^2=1.
 ```
 
 The full rational stabilizer has element-order multiset `1,2,2,2,3,3`, hence is `S3`.
+It fixes the rational point `[1:0:0]`; its polar under `G` is the rational line `3x+z=0`.
+Thus the descended `S3` representation is visibly `1+2`, and the form carries a canonical rational
+pole--polar flag even though none of its six arc points is individually rational.
 
 ## Completeness certificate
 
@@ -113,6 +116,27 @@ The independent replay uses a separate `Q(phi)` implementation, rebuilds the 15 
 the order-60 projective group, the six-arc, all transporters and gauge orbits, and independently
 recovers the Hilbert-90 representative, rational Gram matrix, polar matching, and `S3` order
 distribution.
+
+## Free conceptual upgrade: why `10 -> 1 -> S3`
+
+The exhaustive counts have a uniform nonabelian-cohomology proof. Identify
+`Aut(A5)=S5`; the Galois action on the geometric `A5` is the outer involution
+`tau(a)=t a t^(-1)` for a transposition `t`. A cocycle `a in A5` obeys
+
+```text
+a tau(a)=1  iff  (a t)^2=1.
+```
+
+But `a t` is odd, and the only odd involutions in `S5` are its ten transpositions. Gauge
+equivalence becomes conjugacy by `A5`, which is transitive on those ten transpositions. Hence
+`H^1(<sigma>,A5_tau)` has one point, while the fixed group is
+`C_A5(t) ~= S3`, of order 6. This explains, without coordinate enumeration, all three certificate
+numbers: ten cocycles, one form, and rational stabilizer `S3`.
+
+It also explains why the tempting pentagonal `D5` guess points in the wrong direction. Quadratic
+descent selects an **edge of the five-letter model** (a transposition), not a five-cycle or its
+normalizer. The ten raw cocycles are canonically the ten edges of `K5`; the descent class forgets
+which edge was used.
 
 ## Scope and boundary
 
@@ -145,9 +169,9 @@ input against C442's committed manifest; C442 in turn hash-pins the frozen C379/
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary generator/checker `.py` | 12,299 | `4b74948048352becaffa714f03837b1cce9321f70378c475de11860077601e2a` |
+| primary generator/checker `.py` | 13,696 | `a7c06b843894cc51d3de17a761f233940eec68db4608fb8cf01812475f97460b` |
 | independent replay `.py` | 5,214 | `0d510bb9138627a6358362474d4769ea4a8ea716407951b65af9e5352b419ab2` |
-| canonical certificate `.json` | 14,914 | `c5ba4c6d64b4788be65587f3f364e99958ae08e3c5fd64c87f9704238dda86a2` |
+| canonical certificate `.json` | 15,315 | `1468f275fa7277f7c404b8aaa68ca0a5e6179e9de810ea0c8c285d2beb5279ee` |
 
 Trusted computational boundary: exact rational arithmetic in the pair model
 `Q(phi)=Q[phi]/(phi^2-phi-1)`, exact projective normalization, and exhaustive finite closure of the

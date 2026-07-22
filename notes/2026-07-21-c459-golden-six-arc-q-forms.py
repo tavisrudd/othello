@@ -231,6 +231,10 @@ def build_certificate():
     assert all(x[1] == 0 for A in rational_stabilizer for row in A for x in row)
     order_distribution = sorted(qmatrix_order(m, A) for A in rational_stabilizer)
     assert order_distribution == [1, 2, 2, 2, 3, 3]
+    fixed_point = (m.QONE, m.QZERO, m.QZERO)
+    assert all(m.qnormvec(m.qmatvec(A, fixed_point)) == fixed_point for A in rational_stabilizer)
+    polar_line = m.qnormvec(m.qmatvec(gram, fixed_point))
+    assert rational_matrix_json((polar_line,)) == [["1", "0", "1/3"]]
     gen3 = min((A for A in rational_stabilizer if qmatrix_order(m, A) == 3), key=mat_key)
     gen2 = min((A for A in rational_stabilizer if qmatrix_order(m, A) == 2), key=mat_key)
     generated = m.q_closure([gen2, gen3])
@@ -248,6 +252,21 @@ def build_certificate():
         and compose(p, reflection) == compose(reflection, p)
     ]
     assert centralizer == [tuple(range(5))]
+
+    # Conceptual H^1 model: cocycles are the ten odd involutions (transpositions) in S5.
+    def parity(p):
+        return sum(p[i] > p[j] for i in range(5) for j in range(i + 1, 5)) % 2
+
+    S5 = list(permutations(range(5)))
+    A5_perm = [p for p in S5 if parity(p) == 0]
+    transpositions = [p for p in S5 if parity(p) == 1 and compose(p, p) == tuple(range(5))]
+    assert len(A5_perm) == 60 and len(transpositions) == 10
+    t = transpositions[0]
+    conjugacy_orbit = {
+        compose(compose(a, t), tuple(a.index(i) for i in range(5))) for a in A5_perm
+    }
+    assert len(conjugacy_orbit) == 10
+    assert sum(compose(a, t) == compose(t, a) for a in A5_perm) == 6
 
     cocycles = []
     for u in sorted(descent_data, key=mat_key):
@@ -291,12 +310,21 @@ def build_certificate():
             "generator_order_2": rational_matrix_json(gen2),
             "generator_order_3": rational_matrix_json(gen3),
             "all_projective_matrices": [rational_matrix_json(A) for A in sorted(rational_stabilizer, key=mat_key)],
+            "canonical_fixed_point": ["1", "0", "0"],
+            "canonical_polar_line": ["1", "0", "1/3"],
+            "representation_shape": "1+2 over Q",
         },
         "classification": {
             "quadratic_descent_classes": 1,
             "verdict": "the exhibited S3 form is the unique Q-form split by Q(sqrt5) in the frozen decorated category",
             "D5_test": "negative: no second quadratic descent class; a global D5-rational form is also impossible because an automorphism of A5 fixing D5 pointwise is trivial, which would force all A5 symmetry rational",
             "centralizer_of_natural_D5_in_Aut_A5_equals_S5_order": len(centralizer),
+            "conceptual_H1": {
+                "outer_involution_model": "conjugation by a transposition in Aut(A5)=S5",
+                "cocycles_as_odd_involutions": len(transpositions),
+                "A5_conjugacy_orbits": 1,
+                "fixed_centralizer_order": 6,
+            },
             "what_descends": ["six-point configuration as a degree-6 Q-subscheme", "anisotropic conic", "unique polar-pair matching"],
             "what_does_not_descend": "the golden sheet labeling: S versus sigma(S), equivalently a canonical prime above 11 / one of the two reduced singleton sheets",
         },

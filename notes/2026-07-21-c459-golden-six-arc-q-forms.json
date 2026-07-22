@@ -2,6 +2,12 @@
   "classification": {
     "D5_test": "negative: no second quadratic descent class; a global D5-rational form is also impossible because an automorphism of A5 fixing D5 pointwise is trivial, which would force all A5 symmetry rational",
     "centralizer_of_natural_D5_in_Aut_A5_equals_S5_order": 1,
+    "conceptual_H1": {
+      "A5_conjugacy_orbits": 1,
+      "cocycles_as_odd_involutions": 10,
+      "fixed_centralizer_order": 6,
+      "outer_involution_model": "conjugation by a transposition in Aut(A5)=S5"
+    },
     "quadratic_descent_classes": 1,
     "verdict": "the exhibited S3 form is the unique Q-form split by Q(sqrt5) in the frozen decorated category",
     "what_descends": [
@@ -633,6 +639,16 @@
         ]
       ]
     ],
+    "canonical_fixed_point": [
+      "1",
+      "0",
+      "0"
+    ],
+    "canonical_polar_line": [
+      "1",
+      "0",
+      "1/3"
+    ],
     "element_order_distribution": [
       1,
       2,
@@ -676,7 +692,8 @@
       ]
     ],
     "isomorphism_type": "S3",
-    "order": 6
+    "order": 6,
+    "representation_shape": "1+2 over Q"
   },
   "representative": {
     "descended_arc_projective_points": [
