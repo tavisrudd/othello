@@ -15,6 +15,7 @@ import hashlib
 import itertools
 import json
 from collections import Counter, deque
+from math import gcd
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -369,18 +370,22 @@ def conic_row(p, q: int):
     return (x*x % q, y*y % q, z*z % q, x*y % q, x*z % q, y*z % q)
 
 
+def cross_equation_rows(p, image, q: int):
+    x,y,z = image
+    r0 = (p[0],p[1],p[2],0,0,0,0,0,0)
+    r1 = (0,0,0,p[0],p[1],p[2],0,0,0)
+    r2 = (0,0,0,0,0,0,p[0],p[1],p[2])
+    return (
+        tuple((y*r2[k]-z*r1[k]) % q for k in range(9)),
+        tuple((z*r0[k]-x*r2[k]) % q for k in range(9)),
+        tuple((x*r1[k]-y*r0[k]) % q for k in range(9)),
+    )
+
+
 def frame_projectivity(source, target, q: int):
     rows = []
     for p, image in zip(source, target):
-        x,y,z = image
-        r0 = (p[0],p[1],p[2],0,0,0,0,0,0)
-        r1 = (0,0,0,p[0],p[1],p[2],0,0,0)
-        r2 = (0,0,0,0,0,0,p[0],p[1],p[2])
-        rows.extend((
-            tuple((y*r2[k]-z*r1[k]) % q for k in range(9)),
-            tuple((z*r0[k]-x*r2[k]) % q for k in range(9)),
-            tuple((x*r1[k]-y*r0[k]) % q for k in range(9)),
-        ))
+        rows.extend(cross_equation_rows(p,image,q))
     ns = nullspace(rows, 9, q)
     assert len(ns) == 1
     v = norm_vec(ns[0], q)
@@ -391,6 +396,90 @@ def frame_projectivity(source, target, q: int):
 
 def map_point_set(h, points, q: int):
     return frozenset(norm_vec(mv(h,p,q),q) for p in points)
+
+
+def affine_rank_profile(rows, rhs, width: int, q: int):
+    a = [list(row) + [b % q] for row,b in zip(rows,rhs)]
+    rank = 0
+    for col in range(width):
+        pivot = next((i for i in range(rank,len(a)) if a[i][col] % q),None)
+        if pivot is None:
+            continue
+        a[rank],a[pivot] = a[pivot],a[rank]
+        scale = inv(a[rank][col],q)
+        a[rank] = [scale*x % q for x in a[rank]]
+        for i in range(len(a)):
+            if i != rank and a[i][col] % q:
+                scale = a[i][col]
+                a[i] = [(a[i][j]-scale*a[rank][j]) % q for j in range(width+1)]
+        rank += 1
+    inconsistent = any(not any(row[:width]) and row[width] for row in a)
+    return rank, rank + int(inconsistent), not inconsistent
+
+
+def raw_six_axes(tau: int, modulus: int):
+    return tuple(sorted({
+        tuple(x % modulus for x in v)
+        for v in (
+            (0,1,1-tau),(0,1,tau-1),
+            (1,1-tau,0),(1,tau-1,0),
+            (1,0,-tau),(1,0,tau),
+        )
+    }))
+
+
+def cross3(a,b,modulus: int):
+    return (
+        (a[1]*b[2]-a[2]*b[1]) % modulus,
+        (a[2]*b[0]-a[0]*b[2]) % modulus,
+        (a[0]*b[1]-a[1]*b[0]) % modulus,
+    )
+
+
+def hensel_root_phi(tau: int, p: int):
+    value = tau*tau-tau-1
+    assert value % p == 0 and (2*tau-1) % p
+    correction = -(value//p) * inv(2*tau-1,p) % p
+    root = tau + p*correction
+    assert (root*root-root-1) % (p*p) == 0
+    return root
+
+
+def projectivity_lift_profile(successes, source_order, tau: int, p: int):
+    modulus = p*p
+    lifted_tau = hensel_root_phi(tau,p)
+    lifted_points = raw_six_axes(lifted_tau,modulus)
+    lift_by_reduction = {
+        tuple(x % p for x in point): point
+        for point in lifted_points
+    }
+    profiles = Counter()
+    liftable = 0
+    for h,target_order in successes:
+        rows = []
+        rhs = []
+        for source,target0 in zip(source_order,target_order):
+            target = lift_by_reduction[target0]
+            image = mv(h,source,modulus)
+            residual = cross3(target,image,modulus)
+            assert all(x % p == 0 for x in residual)
+            rows.extend(cross_equation_rows(source,target0,p))
+            rhs.extend((-x//p) % p for x in residual)
+        rank,aug_rank,consistent = affine_rank_profile(rows,rhs,9,p)
+        profiles[(rank,aug_rank)] += 1
+        liftable += int(consistent)
+    divisor_name = "3phi-8" if tau == 13 else "3(1-phi)-8"
+    divisor_value = (3*lifted_tau-8) % modulus if tau == 13 else (3*(1-lifted_tau)-8) % modulus
+    return {
+        "modulus": modulus,
+        "hensel_lift_phi": lifted_tau,
+        "tested_reduced_projectivities": len(successes),
+        "liftable_projectivities": liftable,
+        "rank_augmented_rank_profile": [[list(key),count] for key,count in sorted(profiles.items())],
+        "collision_divisor": divisor_name,
+        "collision_residual": divisor_value,
+        "collision_residual_divided_by_31_mod_31": divisor_value//p,
+    }
 
 
 def c395_control(q: int, pgl_mats, lookup, golden_mobius):
@@ -435,11 +524,17 @@ def c395_control(q: int, pgl_mats, lookup, golden_mobius):
         golden_six = six_axes(tau,q)
         source_order = tuple(sorted(c395_six))
         projectivities = set()
+        successes = []
         for target_order in itertools.permutations(sorted(golden_six)):
             h = frame_projectivity(source_order[:4],target_order[:4],q)
             if tuple(norm_vec(mv(h,p,q),q) for p in source_order) == target_order:
-                projectivities.add(norm_mat(h,q))
+                normalized_h = norm_mat(h,q)
+                projectivities.add(normalized_h)
+                successes.append((normalized_h,target_order))
         assert len(projectivities) == 60
+        assert len(successes) == 60
+        lift_profile = projectivity_lift_profile(successes,source_order,tau,q)
+        assert lift_profile["liftable_projectivities"] == 0
         h = min(projectivities)
         hi = inverse3(h,q)
         conjugated = {norm_mat(mm(mm(h,g,q),hi,q),q) for g in group}
@@ -457,6 +552,7 @@ def c395_control(q: int, pgl_mats, lookup, golden_mobius):
             "psl2_conjugator_count": sum(legendre((g[0]*g[3]-g[1]*g[2]) % q, q) == 1 for g in cs),
             "canonical_conjugator": list(min(cs)) if cs else None,
             "direct_six_arc_projectivity_count": len(projectivities),
+            "all_six_arc_projectivities": [[list(row) for row in matrix] for matrix in sorted(projectivities)],
             "canonical_six_arc_projectivity": [list(row) for row in h],
             "c395_six_arc": [list(p) for p in sorted(c395_six)],
             "golden_six_arc": [list(p) for p in sorted(golden_six)],
@@ -464,6 +560,7 @@ def c395_control(q: int, pgl_mats, lookup, golden_mobius):
             "induced_conic_mobius": list(induced),
             "induced_conic_determinant": induced_det,
             "induced_conic_determinant_legendre": -1,
+            "first_order_lift": lift_profile,
         })
     maps = {item["golden_tau"]: tuple(tuple(row) for row in item["canonical_six_arc_projectivity"]) for item in comparisons}
     sheet_change = norm_mat(mm(maps[19],inverse3(maps[13],q),q),q)
@@ -491,6 +588,14 @@ def c395_control(q: int, pgl_mats, lookup, golden_mobius):
         "two_identifications_close_through_hinge": {
             "sheet_change_matrix": [list(row) for row in sheet_change],
             "description": "H_19 H_13^{-1} is the coordinate swap (y z), an element of the same rational octahedral hinge; the two outer identifications differ by the inner sheet-fusion map.",
+        },
+        "two_sheet_bitorsor": {
+            "projectivities_per_sheet": 60,
+            "total_projectivities_to_the_two_sheet_family": 120,
+            "automorphism_torsor": "A5",
+            "sheet_groupoid": "C2 generated by the octahedral hinge swap",
+            "squareclass_law": "outer times outer = inner",
+            "canonical_choice": False,
         },
         "integral_golden_template": {
             "over_Z_phi": "H(phi):(x,y,z) -> (z,2(1-phi)y,phi x)",
@@ -528,6 +633,38 @@ def gauss_certificate(q: int):
         "ambient_dimension": 3,
         "rho_w_scalar_gamma_to_minus_3": "+1",
         "verdict": "rho(w)=F exactly in the frozen C455 linearization",
+    }
+
+
+def three_character_frobenius_table():
+    rows = []
+    for residue in range(1,40):
+        if gcd(residue,40) != 1:
+            continue
+        chi5 = 1 if residue % 5 in (1,4) else -1
+        chi2 = 1 if residue % 8 in (1,7) else -1
+        chi_minus1 = 1 if residue % 4 == 1 else -1
+        outcome = "golden inert"
+        if chi5 == 1:
+            outcome = "split fused" if chi2 == 1 else "split visible"
+        rows.append({
+            "residue_mod_40": residue,
+            "chi_5": chi5,
+            "chi_2": chi2,
+            "chi_minus_1": chi_minus1,
+            "golden_fusion_outcome": outcome,
+            "canonical_weil_index": "+1" if chi_minus1 == 1 else "i",
+        })
+    assert len(rows) == 16
+    fibres = Counter((r["chi_5"],r["chi_2"],r["chi_minus_1"]) for r in rows)
+    assert len(fibres) == 8 and set(fibres.values()) == {2}
+    return {
+        "field": "Q(sqrt(5),sqrt(2),i)",
+        "conductor": 40,
+        "degree": 8,
+        "quadratic_frobenius_fibres": 8,
+        "residue_classes_per_fibre": 2,
+        "rows": rows,
     }
 
 
@@ -651,6 +788,7 @@ def build_certificate():
         "arf_face": arfs,
         "characteristic_31_a5_control": c395,
         "weil_gauss_faces": {"29": gauss_certificate(29), "41": gauss_certificate(41)},
+        "three_character_frobenius_table": three_character_frobenius_table(),
         "boundaries": {
             "no_H4_parent_claim": True,
             "no_continuation_claim": True,

@@ -11,7 +11,7 @@ from __future__ import annotations
 import cmath
 import itertools
 import json
-from collections import deque
+from collections import Counter, deque
 from pathlib import Path
 
 CERT = Path(__file__).with_name("2026-07-21-c466-dickson-fusion-mechanism.json")
@@ -96,6 +96,92 @@ def mv3(h,v,q):
     return tuple(sum(h[i][j]*v[j] for j in range(3))%q for i in range(3))
 
 
+def cross3(a,b,modulus):
+    return (
+        (a[1]*b[2]-a[2]*b[1])%modulus,
+        (a[2]*b[0]-a[0]*b[2])%modulus,
+        (a[0]*b[1]-a[1]*b[0])%modulus,
+    )
+
+
+def cross_rows(source,target,p):
+    x,y,z = target
+    r0 = (source[0],source[1],source[2],0,0,0,0,0,0)
+    r1 = (0,0,0,source[0],source[1],source[2],0,0,0)
+    r2 = (0,0,0,0,0,0,source[0],source[1],source[2])
+    return (
+        tuple((y*r2[k]-z*r1[k])%p for k in range(9)),
+        tuple((z*r0[k]-x*r2[k])%p for k in range(9)),
+        tuple((x*r1[k]-y*r0[k])%p for k in range(9)),
+    )
+
+
+def affine_profile(rows,rhs,width,p):
+    a = [list(row)+[b%p] for row,b in zip(rows,rhs)]
+    rank = 0
+    for col in range(width):
+        pivot = next((i for i in range(rank,len(a)) if a[i][col]%p),None)
+        if pivot is None:
+            continue
+        a[rank],a[pivot] = a[pivot],a[rank]
+        scale = inv(a[rank][col],p)
+        a[rank] = [scale*x%p for x in a[rank]]
+        for i in range(len(a)):
+            if i != rank and a[i][col]%p:
+                scale = a[i][col]
+                a[i] = [(a[i][j]-scale*a[rank][j])%p for j in range(width+1)]
+        rank += 1
+    inconsistent = any(not any(row[:width]) and row[width] for row in a)
+    return rank,rank+int(inconsistent),not inconsistent
+
+
+def hensel_phi(tau,p):
+    value = tau*tau-tau-1
+    correction = -(value//p)*inv(2*tau-1,p)%p
+    root = tau+p*correction
+    assert (root*root-root-1)%(p*p)==0
+    return root
+
+
+def raw_golden(tau,modulus):
+    return {
+        tuple(x%modulus for x in v)
+        for v in (
+            (0,1,1-tau),(0,1,tau-1),
+            (1,1-tau,0),(1,tau-1,0),
+            (1,0,-tau),(1,0,tau),
+        )
+    }
+
+
+def lift_profile_replay(comparison,p):
+    tau = comparison["golden_tau"]
+    modulus = p*p
+    lifted_tau = hensel_phi(tau,p)
+    lifted = raw_golden(lifted_tau,modulus)
+    by_reduction = {tuple(x%p for x in point):point for point in lifted}
+    source = tuple(tuple(point) for point in comparison["c395_six_arc"])
+    profiles = Counter()
+    liftable = 0
+    matrices = [tuple(tuple(row) for row in matrix) for matrix in comparison["all_six_arc_projectivities"]]
+    assert len(set(matrices)) == comparison["direct_six_arc_projectivity_count"] == 60
+    for h in matrices:
+        targets0 = tuple(norm3(mv3(h,point,p),p) for point in source)
+        rows,rhs = [],[]
+        for point,target0 in zip(source,targets0):
+            target = by_reduction[target0]
+            residual = cross3(target,mv3(h,point,modulus),modulus)
+            assert all(x%p==0 for x in residual)
+            rows.extend(cross_rows(point,target0,p))
+            rhs.extend((-x//p)%p for x in residual)
+        rank,aug,consistent = affine_profile(rows,rhs,9,p)
+        profiles[(rank,aug)] += 1
+        liftable += int(consistent)
+    expected = comparison["first_order_lift"]
+    assert liftable == expected["liftable_projectivities"] == 0
+    assert [[list(key),count] for key,count in sorted(profiles.items())] == expected["rank_augmented_rank_profile"]
+
+
 def gauss_replay(item):
     q = item["q"]
     coeff = [0]*q
@@ -149,6 +235,7 @@ def main():
         assert {norm3(mv3(h,p,q),q) for p in source} == target
         induced = tuple(comparison["induced_conic_mobius"])
         assert legendre(det(induced,q),q) == comparison["induced_conic_determinant_legendre"] == -1
+        lift_profile_replay(comparison,q)
     bridge = tuple(tuple(row) for row in control["two_identifications_close_through_hinge"]["sheet_change_matrix"])
     assert bridge == ((1,0,0),(0,0,1),(0,1,0))
     targets = {item["golden_tau"]: {tuple(p) for p in item["golden_six_arc"]} for item in control["comparisons"]}
@@ -158,6 +245,9 @@ def main():
     source = {tuple(p) for p in control["comparisons"][0]["c395_six_arc"]}
     assert {norm3(mv3(hphi,p,q),q) for p in source} == targets[13]
     assert template["norm"] == (-8)**2 + (-8)*3 - 3**2 == 31
+    bitorsor = control["two_sheet_bitorsor"]
+    assert bitorsor["projectivities_per_sheet"] == 60
+    assert bitorsor["total_projectivities_to_the_two_sheet_family"] == 120
     assert 8*inv(3,q)%q == 13 and (13*13-13-1)%q == 0
     for item in cert["arf_face"]:
         q = item["q"]
@@ -166,6 +256,10 @@ def main():
         assert (-1 if item["arf"] else 1) == legendre(2,q)
     for item in cert["weil_gauss_faces"].values():
         gauss_replay(item)
+    table = cert["three_character_frobenius_table"]
+    assert table["degree"] == 8 and len(table["rows"]) == 16
+    fibres = Counter((row["chi_5"],row["chi_2"],row["chi_minus_1"]) for row in table["rows"])
+    assert len(fibres) == 8 and set(fibres.values()) == {2}
     print("C466 independent PGL2/Gauss replay: OK")
 
 

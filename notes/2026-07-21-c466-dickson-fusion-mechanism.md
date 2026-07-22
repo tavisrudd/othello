@@ -168,6 +168,45 @@ common-coordinate map to the other golden sheet.  Therefore characteristic 31 is
 just the numerator obtained by substituting `8/3`: it is the unique prime divisor of the integral
 collision divisor.  This upgrades C395's gcd-31 obstruction into an exact golden norm mechanism.
 
+### Fourth-order ej — first-order obstruction, bitorsor, and the full conductor-40 package
+
+The two roots lift uniquely from `F_31` to `Z/31^2` as
+
+```text
+13 -> 199,                 19 -> 763                 (mod 961).
+```
+
+For each sheet, the checker takes all 60 reduced projectivities and solves for all nine
+first-order matrix corrections.  Every one of the 120 affine systems has coefficient rank 8 and
+augmented rank 9.  Hence none lifts modulo `31^2`.  On both residue sheets the appropriate
+collision divisor has value
+
+```text
+589 = 31*19  (mod 31^2),
+```
+
+so it vanishes to order exactly one.  The C395/golden meeting is therefore a simple,
+first-order-obstructed arithmetic collision in this integral slice, not the reduction of a hidden
+characteristic-zero projective equivalence.  This is the bounded transversality verdict; it does
+not claim a tangent-space calculation for a larger, as-yet-undefined moduli stack.
+
+The 120 special-fibre maps have the exact groupoid structure suggested by their count: 60 maps to
+each sheet form an `A5` torsor, and the octahedral `C2` hinge exchanges the two torsors.  There is no
+canonical map; the squareclass law is precisely `outer*outer=inner`.
+
+Finally the full conductor-40 arithmetic has three quadratic projections:
+
+```text
+(5/q)   golden existence,
+(2/q)   PSL visibility/fusion,
+(-1/q)  canonical Weil index (+1 or i).
+```
+
+They are the eight Frobenius classes of the degree-eight field `Q(sqrt5,sqrt2,i)`.  The sixteen
+units modulo 40 form eight two-element fibres in the certificate's complete table.  Thus the three
+roof faces are independent projections of one triquadratic Frobenius package, while no common
+geometric or metaplectic object producing all three has yet been constructed.
+
 ## q=29/q=41 replication and the Weil-normalization face
 
 The optional fused replication at `q=41` was cheap and passed: the whole hinge lies in PSL, all 60
@@ -216,7 +255,8 @@ python3 notes/2026-07-21-c466-dickson-fusion-mechanism-replay.py
 The generator uses deterministic prime-field enumeration only.  It reconstructs the two golden
 H3 reflection groups, the signed-monomial hinge, all of `PGL_2(q)` for the five tested primes, the
 C395 group and its unique invariant conic, all 720 six-arc frame maps, and the cyclotomic Gauss identity.  The independent
-replay consumes only the canonical Möbius groups and re-enumerates every PGL transporter and the
+replay consumes only the canonical Möbius groups and stored projectivities, re-enumerates every
+PGL transporter, independently resolves all 120 mod-`31^2` lifting systems, and recomputes the
 Gauss product without importing the generator.
 
 The checked domain is exactly `q in {11,19,29,31,41}`.  The uniform statement outside that set follows
@@ -240,11 +280,20 @@ the computation makes no construction, continuation, or H4-parent claim at any o
   conic class.  The identity `(8/3)^2-(8/3)-1=31/9` explains why this collision occurs exactly at
   the C395 enhancement prime 31.  The two canonical identifications differ by the hinge swap
   `(y z)`, closing the C395/golden/fusion triangle exactly.
+- **Settled in the fourth-order ej — whether the collision lifts.**  No.  The unique Hensel roots
+  are 199 and 763 modulo 961, and all 60 projectivities on each sheet have rank/augmented-rank
+  profile `8/9`.  The sheet-specific divisor is `589=31*19`, proving a simple first-order
+  obstruction in the tested integral slice.
+- **Settled in the fourth-order ej — meaning of the counts and arithmetic bits.**  The 120 maps are
+  two `A5` torsors exchanged by the hinge `C2`; no canonical map is missing.  The existence,
+  fusion, and Weil-sign characters form the complete degree-eight Frobenius package of
+  `Q(sqrt5,sqrt2,i)` over conductor 40.
 - **Still open, with an exact gate — H4 parentage.**  The six-arc/H3 marker is now identified, but
   no 600-cell object, H4 action, or continuation datum was constructed.  That remains the named
   pre-allocation-gated characteristic-31/H4 gateway.
 - **Open conceptual refinement — why this norm divisor belongs to the wider roof.**  The endpoint
-  coordinate calculation proves that the collision divisor is `(3phi-8)` with norm 31, but no
-  integral icosian or family-level morphism has been exhibited whose degeneration divisor is that
-  ideal.  Such a lift would explain the norm structurally rather than coordinately and belongs with
+  calculation proves that the collision divisor is `(3phi-8)` with norm 31 and that the
+  projective equivalence cannot lift even to `31^2`.  No integral icosian/Hecke correspondence has
+  been exhibited whose special fibre explains that simple divisor, nor one metaplectic/Galois
+  object whose projections give all three conductor-40 characters.  Such a structural explanation belongs with
   the same gated H4/icosian successor.  No other genuine C466 mystery remains.
