@@ -1,0 +1,1146 @@
+{
+  "A3_control": "C444's inert prime (5) in Z[sqrt2] remains the fused control: over F25 the two spin orientations are Frobenius-conjugate and projectivize to one F5 S4. C457 makes no two-prime claim there.",
+  "C382_boundary": "C382's red gate concerns a global comparison between a six-fibre Picard family and an E8/icosian lattice action. C457 is local order reduction of the genuine spin groups; it introduces no A5 action on a single C381 fibre and no E8 isometry, so it sharpens rather than repairs C382.",
+  "binary_octahedral_order": {
+    "base_field": "Q(sqrt2)",
+    "basis": [
+      "1",
+      "R=(1+i)/sqrt2",
+      "H=(1+i+j+k)/2",
+      "R*H"
+    ],
+    "characteristic_zero_spin_group_order": 48,
+    "closed_over_integer_ring": true,
+    "integer_ring": "Z[sqrt2]",
+    "localizations": [
+      "B_(7,sqrt2-3)",
+      "B_(7,sqrt2-4)"
+    ],
+    "maximality_reason": "unit reduced-trace discriminant; hence every localization is maximal/Azumaya and there is no finite residue-characteristic denominator",
+    "multiplication_structure_constants": [
+      [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            -1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      ]
+    ],
+    "prime_ideals": [
+      "(7,sqrt2-3)",
+      "(7,sqrt2-4)"
+    ],
+    "quaternion_algebra": "(-1,-1) over Q(sqrt2)",
+    "reduced_trace_discriminant": [
+      1,
+      0
+    ],
+    "reduced_trace_gram": [
+      [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ]
+    ],
+    "reductions": [
+      {
+        "comparison_gives_exact_full_stabilizer_equality": true,
+        "comparison_matrix": [
+          1,
+          3,
+          0,
+          1
+        ],
+        "frozen_matching": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "name": "B3/sqrt2=3",
+        "order_reduction_equals": "M2(F_7)",
+        "order_reduction_matrix_rank": 4,
+        "pair_orbit_sizes": [
+          4,
+          12,
+          12
+        ],
+        "projective_group_order": 24,
+        "raw_invariant_matching": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ]
+        ],
+        "residue_field": "F_7",
+        "residue_root": 3,
+        "spin_group_order": 48
+      },
+      {
+        "comparison_gives_exact_full_stabilizer_equality": true,
+        "comparison_matrix": [
+          1,
+          4,
+          0,
+          1
+        ],
+        "frozen_matching": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            6
+          ]
+        ],
+        "name": "B3/sqrt2=4",
+        "order_reduction_equals": "M2(F_7)",
+        "order_reduction_matrix_rank": 4,
+        "pair_orbit_sizes": [
+          4,
+          12,
+          12
+        ],
+        "projective_group_order": 24,
+        "raw_invariant_matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "residue_field": "F_7",
+        "residue_root": 4,
+        "spin_group_order": 48
+      }
+    ],
+    "spin_generators": [
+      "R",
+      "H"
+    ],
+    "spin_group_integrally_spans_displayed_order": true,
+    "structural_statement": "The same maximal order and binary-octahedral unit group reduce at the two primes above 7; C_s=[[1,s],[0,1]] identifies the projective images exactly with the two frozen S4 matching stabilizers."
+  },
+  "icosian_order": {
+    "base_field": "Q(phi), phi^2=phi+1",
+    "basis": [
+      "1",
+      "i",
+      "(1+i+j+k)/2",
+      "((1-phi)+phi*i+k)/2"
+    ],
+    "characteristic_zero_spin_group_order": 120,
+    "closed_over_integer_ring": true,
+    "integer_ring": "Z[phi]",
+    "localizations": [
+      "I_(11,phi-8)",
+      "I_(11,phi-4)"
+    ],
+    "maximality_reason": "unit reduced-trace discriminant; hence every localization is maximal/Azumaya and there is no finite residue-characteristic denominator",
+    "multiplication_structure_constants": [
+      [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            -2,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            -1
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            -1
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            -1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            -1
+          ]
+        ]
+      ]
+    ],
+    "prime_ideals": [
+      "(11,phi-8)",
+      "(11,phi-4)"
+    ],
+    "quaternion_algebra": "(-1,-1) over Q(phi)",
+    "reduced_trace_discriminant": [
+      1,
+      0
+    ],
+    "reduced_trace_gram": [
+      [
+        [
+          2,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          -1
+        ]
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          -1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ]
+    ],
+    "reductions": [
+      {
+        "comparison_gives_exact_full_stabilizer_equality": true,
+        "comparison_matrix": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "frozen_matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "name": "H3/pi",
+        "order_reduction_equals": "M2(F_11)",
+        "order_reduction_matrix_rank": 4,
+        "pair_orbit_sizes": [
+          6,
+          30,
+          30
+        ],
+        "projective_group_order": 60,
+        "raw_invariant_matching": [
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            10
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        "residue_field": "F_11",
+        "residue_root": 8,
+        "spin_group_order": 120
+      },
+      {
+        "comparison_gives_exact_full_stabilizer_equality": true,
+        "comparison_matrix": [
+          0,
+          1,
+          2,
+          5
+        ],
+        "frozen_matching": [
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        "name": "H3/pibar",
+        "order_reduction_equals": "M2(F_11)",
+        "order_reduction_matrix_rank": 4,
+        "pair_orbit_sizes": [
+          6,
+          30,
+          30
+        ],
+        "projective_group_order": 60,
+        "raw_invariant_matching": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            10
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            11
+          ]
+        ],
+        "residue_field": "F_11",
+        "residue_root": 4,
+        "spin_group_order": 120
+      }
+    ],
+    "spin_generators": [
+      "(1+i+j+k)/2",
+      "((1-phi)+phi*i+k)/2"
+    ],
+    "spin_group_integrally_spans_displayed_order": true,
+    "split_matrix_basis": {
+      "i": [
+        0,
+        1,
+        10,
+        0
+      ],
+      "j": [
+        1,
+        3,
+        3,
+        10
+      ]
+    },
+    "structural_statement": "The same integral icosian order and binary-icosahedral unit group reduce through the two residue maps; after the displayed comparison maps their projective images equal a5(8) and a5(4), not merely conjugate subgroups of the same size."
+  },
+  "inputs": {
+    "2026-07-19-c382-clebsch-icosian-e8-path-independence": {
+      "certificate": {
+        "bytes": 2296,
+        "sha256": "5b4bfe93c94666e29c87c6114927d91245848f6ce1b0240193ffec59af4a5976"
+      },
+      "report": {
+        "bytes": 8731,
+        "sha256": "86b1daf88bab525fb9d4d557789ae5f633a1040d74693b412caed252c7eff942"
+      }
+    },
+    "2026-07-21-c440-conventions-freeze": {
+      "certificate": {
+        "bytes": 6436,
+        "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+      },
+      "report": {
+        "bytes": 8384,
+        "sha256": "43eca694b5f48dc88204493ea24dbadfa8905824b07c739af3fe82ee6abf12ec"
+      }
+    },
+    "2026-07-21-c442-antipodal-singleton-reduction": {
+      "certificate": {
+        "bytes": 14377,
+        "sha256": "72d312ac4e6a9b4237c36e1921e3d3015d783a356b40d12928f31539a49a3943"
+      },
+      "report": {
+        "bytes": 13052,
+        "sha256": "f72fe7139e18eac04d428d172784b97f47ae5855ae9f6847e52a2f5e370de496"
+      }
+    },
+    "2026-07-21-c444-silver-fusion": {
+      "certificate": {
+        "bytes": 14331,
+        "sha256": "311dd3eba6ad7b2926cb4aa38dc240093f9611ffbcd0640d69becc7112dfa465"
+      },
+      "report": {
+        "bytes": 9160,
+        "sha256": "5691a62626d021b6e597f1b919fcfe16055513c7c266900eed7fed2d74b132e9"
+      }
+    },
+    "2026-07-21-c458-golden-sheet-frame-freeze": {
+      "certificate": {
+        "bytes": 13379,
+        "sha256": "9e93de4567443726896bf613971d2b7e3c7054874b4bf4810ca74a08384ff620"
+      },
+      "report": {
+        "bytes": 12252,
+        "sha256": "218e607b019a9b372588b00fcd9fd2be1d2a1810ad5e24d86ac9fac0029c0ad3"
+      }
+    }
+  },
+  "schema": "c457-quaternion-order-reduction-v1",
+  "task": "C457/T10",
+  "trusted_boundary": "Exact quadratic-field and Hamilton-quaternion arithmetic; exhaustive multiplication tables and unit reduced-trace discriminants; exact finite matrix closure, order-basis rank, PGL enumeration, invariant matching extraction, and equality with full frozen matching stabilizers.",
+  "verdict": "GREEN \u2014 maximal orders reduce to full matrix orders and their spin units give the frozen H3/B3 sheet embeddings exactly"
+}

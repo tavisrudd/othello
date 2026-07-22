@@ -1,0 +1,124 @@
+# C457 / T10 — quaternion maximal-order reduction
+
+**Lane:** `crowns` (read-only `clebsch` inputs)
+
+**Date:** 2026-07-21
+
+**Verdict:** `GREEN — THE ICOSIAN AND BINARY-OCTAHEDRAL MAXIMAL ORDERS REDUCE TO FULL MATRIX
+ORDERS; THEIR SPIN UNITS GIVE THE TWO FROZEN H3 AND B3 SHEET EMBEDDINGS EXACTLY`
+
+## Structural theorem
+
+Let `K_5=Q(phi)`, `O_5=Z[phi]`, `phi^2=phi+1`, and let `B_5=(-1,-1)_{K_5}` with Hamilton basis
+`1,i,j,k`.  The `O_5`-order
+
+```text
+I = O_5 < 1, i, H=(1+i+j+k)/2, G=((1-phi)+phi*i+k)/2 >
+```
+
+is the icosian maximal order.  The checker gives its complete multiplication table in this basis;
+all structure constants lie in `O_5`, and the determinant of its reduced-trace Gram matrix is the
+unit `1`.  Thus every finite localization is maximal and no residue-characteristic denominator is
+hidden in the presentation.  Exact characteristic-zero closure shows that the norm-one units `H,G`
+generate the binary icosahedral group `2.A5` of order 120 and contain `i`; consequently their
+integral span is the displayed maximal order, rather than merely a finite subgroup inside it.
+
+At
+
+```text
+p_8=(11,phi-8),             p_4=(11,phi-4),
+```
+
+the displayed basis maps with rank four onto `M_2(F_11)`.  Using
+
+```text
+i |-> [[0,1],[-1,0]],       j |-> [[1,3],[3,-1]],
+```
+
+the two reductions of `<H,G>` have order 120 and projective order 60.  Their unique invariant
+pair-orbits have sizes `6/30/30`.  The explicit comparison maps
+
+```text
+C_8 = [[0,1],[2,1]],        C_4 = [[0,1],[2,5]]
+```
+
+identify the projective images **as equal subgroups**, not only groups of the right size:
+
+```text
+C_8  red_p8(<H,G>) C_8^-1 = a5(8) = Stab(M_base),
+C_4  red_p4(<H,G>) C_4^-1 = a5(4) = Stab(M_J-mate).
+```
+
+Hence the two H3 sheets are the two residue embeddings of one integral maximal order and one
+binary-icosahedral spin group.  The comparison maps live in the separate split residue models;
+they do not assert a split `P^1` realization over `K_5`, preserving C458/C445's two-frame boundary.
+
+## Binary-octahedral order
+
+Let `K_2=Q(sqrt2)`, `O_2=Z[sqrt2]`, and `B_2=(-1,-1)_{K_2}`.  Put
+
+```text
+R=(1+i)/sqrt2,              H=(1+i+j+k)/2,
+O = O_2 < 1, R, H, R H >.
+```
+
+Again the complete multiplication table is integral and the reduced-trace discriminant is `1`, so
+`O` is maximal at every finite prime.  `R,H` generate the binary octahedral group `2.S4` of order
+48 already in characteristic zero, and `1,R,H,RH` are group elements spanning the order.  At the
+two primes
+
+```text
+r_3=(7,sqrt2-3),            r_4=(7,sqrt2-4),
+```
+
+use C444's exact split bases
+
+```text
+i |-> [[0,1],[-1,0]],       j |-> [[2,s],[s,-2]],       s=3,4.
+```
+
+The order basis again has matrix rank four, hence reduces onto `M_2(F_7)`.  Each spin image has
+order 48 and projective order 24.  Conjugation by the single silver comparison formula
+
+```text
+C_s=[[1,s],[0,1]]
+```
+
+gives exact equality with the full frozen `S4` stabilizer of the corresponding C444 matching:
+`sqrt2=3` gives the negative sheet and `sqrt2=4` the positive sheet.  This upgrades C444's fibre
+test to a maximal-order reduction theorem.
+
+## Boundaries
+
+The A3 prime `(5)` is inert in `Z[sqrt2]`; C444's `F_25/F_5` calculation remains the fused control,
+where the two spin orientations are Frobenius-conjugate but projectivize to one `F_5` `S4`.  No
+two-prime statement is made there.
+
+C382 remains red in its own category.  It asked for a global comparison between a six-fibre Picard
+family and an `E8`/icosian lattice action; a single fibre has only `D10` symmetry, while the natural
+linear icosian action is by `2.A5`.  C457 concerns local reduction of the genuine spin group and
+introduces neither an `A5` action on a C381 fibre nor an `E8` isometry.  The present positive result
+therefore reframes but does not repair C382.
+
+## Reproducibility
+
+From `/home/tavis/src/othello`:
+
+```bash
+python3 notes/2026-07-21-c457-quaternion-order-reduction.py --check
+python3 notes/2026-07-21-c457-quaternion-order-reduction-replay.py
+(cd notes && sha256sum -c 2026-07-21-c457-quaternion-order-reduction.sha256)
+```
+
+The primary checker hash-pins C440, C442, C458, C444, and C382.  It performs exact arithmetic in
+both quadratic integer rings and Hamilton quaternion algebras, exports every order multiplication
+constant and trace-Gram entry, proves unit discriminant, reduces every basis element, enumerates the
+spin and projective groups, extracts their invariant matching, enumerates full `PGL_2(q)`, and
+checks subgroup equality after the displayed comparison maps.
+
+The independent replay imports no primary code.  Starting directly from the reduced quaternion
+generators, it reconstructs all four spin images and independently checks equality with the full
+frozen matching stabilizers.  The maximality calculation is not duplicated: its trusted boundary
+is the exported four-by-four trace Gram determinant and exhaustive 16-product integral structure
+table, both regenerated by the primary with exact rational arithmetic.  No randomness, floating
+point, literature claim, manuscript edit, or `E8` comparison is involved.
