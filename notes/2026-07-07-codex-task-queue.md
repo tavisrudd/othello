@@ -146,7 +146,6 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C490 `[reed-solomon]` [QUEUED]** — close the `q<=13` complete-child base-size theorem by classifying alternative secant decompositions and coherent collision hypergraphs, with exact exceptions and an NRC bridge ledger for tools reusable in punctured-normal-rational-curve completion → `notes/2026-07-22-c490-small-field-base-size-closure.md`.
 - **C491 `[reed-solomon]` [QUEUED; after C490]** — after a current literature audit, determine and classify projective Reed--Solomon redundancy-five (`PRS(q-4)`) deep holes via binary-quartic/apolar invariants, while extracting dimension-free higher-NRC tools and exact missing lemmas for the eventual Cheng--Murray programme → `notes/2026-07-22-c491-prs-redundancy-five.md`.
 
 ### `relconic`
