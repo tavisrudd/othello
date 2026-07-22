@@ -5,7 +5,7 @@
 **Date:** 2026-07-21
 
 **Status:** active allocated battery. The M-chain and C449/T2 critical path are GREEN; C450/T3 is
-next by battery order.
+closed with a sharp module-identification negative and green outer/character results. C451/T4 is next.
 
 This is the shared controller, not the task specification catalogue. Historical motivation is in
 [`2026-07-21-clebsch-weil-roof-conversation-report.md`](2026-07-21-clebsch-weil-roof-conversation-report.md)
@@ -41,7 +41,7 @@ selected card names it as a load-bearing input.
 | C444 | M4 | GREEN: B3 split fibres exchanged by outer `x->-x`, cubic scalar `2 sqrt2`, common `S3` seam; A3 central lifts fuse over one projective `S4` | unlocks M5 and strengthens T10 input |
 | C445 | M5 | GREEN: exact 11+11-to-22 matching/orbit gluing; `S4/A4` hinge; C457 certifies quaternion splitting; tensor cut | closes master-stroke statement boundary |
 | C449 | T2 | GREEN: the Coxeter square has order `h/2=(q-1)/2`, generates the complete diagonal split torus in `PSL_2(q)`, and its moving blocks are the Legendre cosets; in H3, Galois acts on `C5` by `g->g^2`, with `sigma^2` inversion | supplies C450's exact `2*trivial+2*regular(C_e)` restriction baseline and C452's Coxeter-to-QR input; generic outer swap certified, comparison with C445 `Rz` deferred to C450 |
-| C450 | T3 | queued; independent after frozen inputs | Weil-module roof test |
+| C450 | T3 | SHARP NEGATIVE for `5+6`/`3+4` incidence-module identification: both cross matrices are full rank with sheet modules `1+10_b`/`1+6`; GREEN `Q(sqrt(-11))` Weil pair and outer exchange; C449 torus baseline passes but is non-discriminating | roof conjecture weakened; relation-support Weil occurrence and certified sheet theory retained |
 | C451 | T4 | queued | theta/Roquette row, with clean negative allowed |
 | C452 | T5 | queued | QR/Barker provenance wall |
 | C453 | T6 | queued | conditional 13/19/31 predictions; no construction |
@@ -53,7 +53,7 @@ selected card names it as a load-bearing input.
 | C462 | M3-torsor | GREEN: canonical unoriented four-companion `C4` torsor; sigma is `(0 2 3 1)`, sigma-squared is frozen kappa, residue equivariance holds up to inverse orientation, and the common degree-1 diagnostic descends; the selector obstruction is the nonsplit `1 -> C2 -> C4 -> C2 -> 1` | over `Z[zeta_5,1/10]`, candidate base-changed family-plus-obstruction replacement for the cut tensor clause and framing input to paper-2 gluing; no M3a tensor/module claim |
 | C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |
 
-The critical path is GREEN through `C444 -> C445 -> C449`; **C450 is next by battery order**.
+The critical path is GREEN through `C444 -> C445 -> C449`; C450 is closed and **C451 is next by battery order**.
 C451--C456 are independent once their cards' frozen inputs are available. C459 and C463 may run
 in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated battery row.

@@ -99,3 +99,18 @@ active C-ID. The controller retains the complete result/dependency map and unive
 task goals, methods, inputs, acceptance objects, and falsifiers now load only with the selected
 card. Completed M0--M3/X1--X3 outcome prose remains recoverable from the reports linked above and
 from git history. Phase-2/3 framing moved to a separate card that is not routine battery context.
+
+## 2026-07-21 — C450/T3 cross-sheet Weil-module verdict
+
+C450 reproduced C449's mandatory split-torus restriction exactly and found that it does not
+distinguish the proposed Weil split: adjoining a trivial line to the `(q-1)/2` and `(q+1)/2`
+Weil restrictions also gives multiplicities `4,2,...,2`. Full `PSL_2/SL_2` character computation
+and the exact cross-sheet matrices give the sharp obstruction instead. Both complementary maps are
+invertible, with sheet modules `1+6` at q=7 and `1+10_b` at q=11, not `3+4` or `5+6`. The q=11
+shared-edge 66-set does contain both degree-five Weil characters once; their field is
+`Q(sqrt(-11))` and the outer automorphism exchanges them. C445's `Rz` realizes the same outer
+quotient bit, swaps sheets and relation endpoints, and confirms that C460's overlap-5 graph is the
+shared-edge graph, but it conjugates rather than normalizes C449's frozen split torus. C460's
+characteristic-2/3 cloud-incidence drops have neither the cross-relation rank profile nor an
+ordinary semisimple constituent explanation. See
+[`2026-07-21-c450-weil-cross-sheet.md`](../2026-07-21-c450-weil-cross-sheet.md).
