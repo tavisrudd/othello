@@ -9,6 +9,9 @@ contains exposition architecture, not a manuscript edit.  The exact result alloc
 by `2026-07-20-clebsch-paper-planning.md` and
 `2026-07-21-clebsch-weil-roof-results-ledger.md`.
 
+The copy-ready prose pass for the proof-free opening and conclusion is
+`2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`.
+
 ## Working title
 
 **Factorization memory in the Clebsch hexagon code**

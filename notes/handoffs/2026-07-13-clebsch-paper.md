@@ -29,6 +29,8 @@ The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md).
 The copy-ready abstract and section plan are
 [`2026-07-21-clebsch-paper-abstract-outline.md`](../2026-07-21-clebsch-paper-abstract-outline.md),
+the proof-free opening and conclusion prose draft is
+[`2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`](../2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md),
 and the complete C440--C468 paper-disposition inventory is
 [`2026-07-21-clebsch-weil-roof-results-ledger.md`](../2026-07-21-clebsch-weil-roof-results-ledger.md).
 The red-team-approved formalization campaign is

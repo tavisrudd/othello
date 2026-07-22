@@ -332,8 +332,9 @@ The paper must not claim:
 ## Best paper architecture from the present evidence
 
 The copy-ready abstract, three-figure opening sweep, Theorems A--D, section order, appendix split,
-and drafting constraints are in `2026-07-21-clebsch-paper-abstract-outline.md`.  The governing order
-is:
+and drafting constraints are in `2026-07-21-clebsch-paper-abstract-outline.md`.  The actual prose
+draft of the proof-free first section and conclusion is
+`2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`.  The governing order is:
 
 1. introduction and proof-free graphic sweep of the full reconstruction arc;
 2. Clebsch rigidity and the complete A3/B3/H3 Coxeter conic phase;
@@ -389,7 +390,8 @@ Read in this order:
 1. `notes/handoffs/2026-07-13-clebsch-paper.md` for the live manuscript decision;
 2. this report for the current theorem/novelty map;
 3. for manuscript drafting, `notes/2026-07-21-clebsch-paper-abstract-outline.md` for the selected
-   narrative and section plan;
+   narrative and section plan, then `notes/2026-07-21-clebsch-paper-guided-tour-conclusion-draft.md`
+   for copy-ready opening and closing prose;
 4. for result intake or disposition review, `notes/2026-07-21-clebsch-weil-roof-results-ledger.md`
    for every recent result without loading the individual battery reports;
 5. for theorem work, `notes/2026-07-20-c406-matching-module.md` for the exact theorem and negative
