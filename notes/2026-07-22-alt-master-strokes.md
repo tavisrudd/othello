@@ -346,6 +346,19 @@ characteristic-zero object realizes it (explicitly open, with C443/C461/C479 as 
 boundary). If B's uniform-rule falsifier degrades it to per-case dictionaries, B collapses into
 one extra sentence inside A's close and A ships alone.
 
+## Banked decision (2026-07-22)
+
+The owner banks **A merged with F** as the selected close ("one torsor, one swap"), with **B**
+folded in if its uniform-rule falsifier passes.  Deciding rationale: the original master-stroke
+sentence — the decoder's missing bit is `Gal(Q(sqrt5)/Q)`, made finite — is already certified at
+the sheet level by C442/C445 and does not depend on claim 5; A+F closes the paper on that
+sentence with the torsor as formal body, the involution as acting face, the triple-certified
+no-section clause as its teeth, and the C443/C461 (and any C479) obstructions recast as the
+theorem's point.  The structure is monotone: B's rule and any future integral object append as
+realizations rather than forcing rewrites.  C479 is paused, not closed; its resumption decision
+follows the gap-closing certificates.  The gap-closing battery (A's two legs, F's hinge
+comparison, B's falsifier) is allocated as C480.
+
 ## Next-step discipline
 
 No allocation is made here. If C479 returns negative, the cheap ordering is: run A's two leg
