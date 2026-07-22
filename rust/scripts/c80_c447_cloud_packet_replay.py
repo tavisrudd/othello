@@ -197,6 +197,55 @@ def main():
                 vertex: str(edge_quotient_u(record, repair["shared_p_edge"], vertex))
                 for vertex in adjacency
             }
+            vertex_orbit_label = {}
+            for orbit, _signature in orbits:
+                quotient_values = {quotient[cell] for cell in orbit}
+                assert len(quotient_values) == 1
+                label = f"{next(iter(quotient_values))}[{len(orbit)}]"
+                vertex_orbit_label.update({cell: label for cell in orbit})
+            winning_edges = {
+                (first, second)
+                for first in adjacency
+                for second in adjacency[first]
+                if first < second
+            }
+            remaining_edges = set(winning_edges)
+            edge_orbits = []
+            edge_orbit_type_counts = Counter()
+            while remaining_edges:
+                representative = min(remaining_edges)
+                orbit = {
+                    tuple(sorted((
+                        act_on_cell(record, transformation, representative[0]),
+                        act_on_cell(record, transformation, representative[1]),
+                    )))
+                    for transformation in kernel
+                }
+                assert orbit <= winning_edges
+                orbit_type = "--".join(sorted((
+                    vertex_orbit_label[representative[0]],
+                    vertex_orbit_label[representative[1]],
+                )))
+                edge_orbits.append((orbit_type, orbit))
+                edge_orbit_type_counts[orbit_type] += 1
+                remaining_edges -= orbit
+            assert edge_orbit_type_counts == Counter({
+                "0[1]--inf[1]": 1,
+                "1[5]--inf[1]": 1,
+                "1[5]--1[5]": 2,
+                "1[5]--8[5]": 1,
+                "1[5]--9[5]": 1,
+                "8[5]--9[5]": 1,
+                "8[5]--inf[5]": 2,
+            })
+            matching_orbit_types = []
+            for matching in map(set, matchings):
+                used = [(kind, orbit) for kind, orbit in edge_orbits if orbit & matching]
+                assert all(orbit <= matching for _kind, orbit in used)
+                matching_orbit_types.append(sorted(kind for kind, _orbit in used))
+            assert matching_orbit_types == [[
+                "0[1]--inf[1]", "1[5]--9[5]", "8[5]--inf[5]"
+            ]] * 2
             quotient_counts = Counter(
                 "-".join(sorted((quotient[first], quotient[second])))
                 for first in adjacency
@@ -204,7 +253,11 @@ def main():
                 if first < second
             )
             endpoints.append(
-                (endpoint, witness, histogram, sorted(orbits), adjacency, matchings, quotient_counts)
+                (
+                    endpoint, witness, histogram, sorted(orbits), adjacency, matchings,
+                    quotient_counts, vertex_orbit_label, edge_orbit_type_counts,
+                    matching_orbit_types,
+                )
             )
         matching_sets = [[set(matching) for matching in endpoint[5]] for endpoint in endpoints]
         for endpoint_index in range(2):
@@ -280,6 +333,18 @@ def main():
             assert graph["quotient_edge_counts"] == dict(sorted(replay_endpoint[6].items()))
             assert graph["perfect_matching_count"] == 2
             assert graph["common_edge_count"] == 6
+            assert graph["c5_orbital_decomposition"] == {
+                "vertex_orbit_counts": dict(sorted(Counter(replay_endpoint[7].values()).items())),
+                "winning_edge_orbit_type_counts": dict(sorted(replay_endpoint[8].items())),
+                "perfect_matching_orbit_types": replay_endpoint[9],
+                "unforced_bicayley_component": {
+                    "parts": ["8[5]", "inf[5]"],
+                    "edge_orbits": 2,
+                    "vertices": 10,
+                    "is_single_cycle": True,
+                    "each_edge_orbit_is_a_perfect_matching": True,
+                },
+            }
             assert graph["perfect_matchings"] == [
                 [[list(first), list(second)] for first, second in matching]
                 for matching in matchings

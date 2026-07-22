@@ -42,7 +42,7 @@ ordering and detail.
 - **C30 `[cap]` [OPEN ENGINEERING TAIL; USER GATE]** — reduce or explicitly launch the q17/q19 generated-certificate assembly.
 - **C74 `[cap]` [ACTIVE]** — prove maximum-pencil balanced-packet P existence / `Ncenters <= q-8`; characteristic-5/7 exceptions remain.
 - **C77 `[cap]` [OPEN GAME-SEMANTIC TAIL]** — algebraic forced-reply closure for the C74 packet → `notes/2026-07-11-c77-game-semantic-reply-graphs.md`.
-- **C80 `[cap]` [ACTIVE; q=11 Legendre quotient and two-response calibration torsor]** — generalize the edge-quotient response graph, then prove abundance/descent after the drain lemma → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
+- **C80 `[cap]` [ACTIVE; q=11 Legendre quotient and equal-orbit response lemma]** — generalize the torus-orbital response graph, prove one P-pure orbital is nonempty, then establish descent after the drain lemma → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
 - **C81 `[cap]` [OPEN; independent]** — characteristic-5/7 subfield descent gate → `notes/2026-07-12-c81-subfield-descent-gate.md`.
 - **C82 `[cap]` [GATED on C80]** — orbital counting for the exact packet C80 produces → `notes/2026-07-12-c82-orbital-counting.md`.
 - **C189 `[cap]` [QUEUED]** — q=5 octahedral-frame game bridge → `notes/2026-07-15-c189-q5-octahedral-frame.md`.

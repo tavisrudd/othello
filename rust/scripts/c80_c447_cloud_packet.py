@@ -152,14 +152,22 @@ def analyze_seed(game, record, edge_endpoints, square_kernel, seed, packet):
         )
         for branch in records
     }
+    quotient_by_vertex = {
+        tuple(branch["opponent"]): str(branch["edge_quotient_u"]) for branch in records
+    }
     remaining = set(branch_by_opponent)
     orbits = []
+    vertex_orbit_label = {}
     while remaining:
         representative = min(remaining)
         orbit = {cap_cell_action(record, g, representative) for g in square_kernel}
         assert orbit <= set(branch_by_opponent)
         signatures = {branch_by_opponent[cell] for cell in orbit}
         assert len(signatures) == 1
+        quotient_values = {quotient_by_vertex[cell] for cell in orbit}
+        assert len(quotient_values) == 1
+        orbit_label = f"{next(iter(quotient_values))}[{len(orbit)}]"
+        vertex_orbit_label.update({cell: orbit_label for cell in orbit})
         remaining -= orbit
         candidate_count, winning_count = next(iter(signatures))
         orbits.append(
@@ -206,9 +214,6 @@ def analyze_seed(game, record, edge_endpoints, square_kernel, seed, packet):
     assert len(common_edges) == 6
     assert len(alternating_vertices) == 10
     assert all(len(neighbors) == 2 for neighbors in alternating_adjacency.values())
-    quotient_by_vertex = {
-        tuple(branch["opponent"]): str(branch["edge_quotient_u"]) for branch in records
-    }
     for matching in matchings:
         quotient_pairs = Counter(
             tuple(sorted((quotient_by_vertex[first], quotient_by_vertex[second])))
@@ -218,6 +223,47 @@ def analyze_seed(game, record, edge_endpoints, square_kernel, seed, packet):
     winning_edges = sorted(
         (first, second) for first in vertices for second in adjacency[first] if first < second
     )
+    remaining_edges = set(winning_edges)
+    edge_orbits = []
+    edge_orbit_type_counts = Counter()
+    while remaining_edges:
+        representative = min(remaining_edges)
+        orbit = {
+            tuple(sorted((
+                cap_cell_action(record, transformation, representative[0]),
+                cap_cell_action(record, transformation, representative[1]),
+            )))
+            for transformation in square_kernel
+        }
+        assert orbit <= set(winning_edges)
+        orbit_type = "--".join(sorted((
+            vertex_orbit_label[representative[0]],
+            vertex_orbit_label[representative[1]],
+        )))
+        assert {
+            "--".join(sorted((vertex_orbit_label[first], vertex_orbit_label[second])))
+            for first, second in orbit
+        } == {orbit_type}
+        edge_orbits.append((orbit_type, orbit))
+        edge_orbit_type_counts[orbit_type] += 1
+        remaining_edges -= orbit
+    assert edge_orbit_type_counts == Counter({
+        "0[1]--inf[1]": 1,
+        "1[5]--inf[1]": 1,
+        "1[5]--1[5]": 2,
+        "1[5]--8[5]": 1,
+        "1[5]--9[5]": 1,
+        "8[5]--9[5]": 1,
+        "8[5]--inf[5]": 2,
+    })
+    matching_orbit_types = []
+    for matching in edge_sets:
+        used_orbits = [(orbit_type, orbit) for orbit_type, orbit in edge_orbits if orbit & matching]
+        assert all(orbit <= matching for _orbit_type, orbit in used_orbits)
+        matching_orbit_types.append(sorted(orbit_type for orbit_type, _orbit in used_orbits))
+    assert matching_orbit_types == [[
+        "0[1]--inf[1]", "1[5]--9[5]", "8[5]--inf[5]"
+    ]] * 2
     quotient_edge_counts = Counter(
         "-".join(sorted((quotient_by_vertex[first], quotient_by_vertex[second])))
         for first, second in winning_edges
@@ -263,6 +309,18 @@ def analyze_seed(game, record, edge_endpoints, square_kernel, seed, packet):
             "perfect_matching_count": len(matchings),
             "common_edge_count": len(common_edges),
             "alternating_cycle_vertices": [list(cell) for cell in sorted(alternating_vertices)],
+            "c5_orbital_decomposition": {
+                "vertex_orbit_counts": dict(sorted(Counter(vertex_orbit_label.values()).items())),
+                "winning_edge_orbit_type_counts": dict(sorted(edge_orbit_type_counts.items())),
+                "perfect_matching_orbit_types": matching_orbit_types,
+                "unforced_bicayley_component": {
+                    "parts": ["8[5]", "inf[5]"],
+                    "edge_orbits": 2,
+                    "vertices": 10,
+                    "is_single_cycle": True,
+                    "each_edge_orbit_is_a_perfect_matching": True,
+                },
+            },
             "perfect_matchings": [
                 [[list(first), list(second)] for first, second in matching]
                 for matching in matchings

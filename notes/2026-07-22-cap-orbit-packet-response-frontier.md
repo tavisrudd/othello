@@ -92,6 +92,20 @@ two P-edge endpoints and the two matchings simultaneously.  Thus the pair is exa
 calibration torsor: choosing one costs C448's orientation/advice bit, while the unordered pair is
 canonical and sufficient for the existence theorem.
 
+The `C5`-orbital decomposition makes the mechanism portable.  The 22 response vertices are
+`0[1], infinity[1], 1[5], 8[5], 9[5], infinity[5]`; the 41 winning edges are one fixed edge plus
+eight five-edge orbitals.  Both perfect matchings use the fixed `0[1]--infinity[1]` edge and the
+unique `1[5]--9[5]` orbital.  Their only choice is one of the two
+`8[5]--infinity[5]` orbitals, each of which is already a perfect matching between free `C5`
+torsors.  Their union is the 10-cycle.  Thus the calibration bit is literally the generator of
+`H_1(C10,F_2)` after forced responses are removed.
+
+This proves the finite-group lemma C80 actually wants: a nonempty invariant response relation
+between equal-size transitive opponent and reply orbits is a regular bipartite graph and therefore
+has a perfect matching.  If both actions are free and one edge orbital is isolated, that orbital
+is an equivariant bijection.  The hard work moves from Hall or selection to two exact obligations:
+identify equal orbital fibres, then prove one response orbital P-pure and nonempty.
+
 ## Deeper transfer — cubic memory and interactive descent
 
 The strongest cross-program signal is not the presence of matchings but the degree at which lost
@@ -172,6 +186,51 @@ already forbidden for its `PGL_2(11)` subgroup.  C449's Coxeter square similarly
 kernel but not the missing sheet mark.  Its full pointwise torus contains a nonsquare element that
 fixes edge endpoints while exchanging sheets.
 
+## Additional roof tools, ranked for C80
+
+The remaining roof results give seven distinct tools.  They should not be conflated: some prove
+abundance, some compress certificates, and some only diagnose why a proposed selector cannot
+descend.
+
+1. **Double-coset/orbital compression (C445, C449, C460).**  Stabilizer orbits replace raw
+   opponent--reply pairs by a small coherent-configuration table.  The q=11 `u` quotient and the
+   nine winning-edge orbitals are the first exact instance.  For general q, C80 should derive the
+   response relation as split-torus double cosets before doing minimax enumeration.
+2. **Difference sets and regular-bipartite Hall (C452).**  A cyclic QR connection set gives exact
+   intersection numbers.  Once a P-pure connection orbital joins equal transitive fibres,
+   regularity supplies a perfect matching automatically.  This is the strongest immediate tool:
+   it turns C80(a) into a character-sum nonemptiness/purity theorem, not a selector theorem.  At
+   q=11 the two connection offsets acquire a residue class only after choosing a Coxeter generator;
+   the Galois change `g -> g^2` swaps that class.  The intrinsic cap statement is orbital
+   nonemptiness, not a QR-labelled choice.
+3. **Fourier bounds on bad fibres (C455, C467).**  Circulant orbital matrices diagonalize by
+   multiplicative/additive characters.  Their nontrivial Fourier coefficients can bound how many
+   replies a bounded guard set removes.  The roof warning remains load-bearing: use the ambient
+   operator or orbital algebra, not a fictitious standalone small Weil module.
+4. **Torsor pullback and marked descent (C456, C459, C462, C463).**  A section may fail over states
+   yet become trivial over `(state, opponent move)`.  Test stabilizers on that incidence cover;
+   if it still does not split, keep the whole fibre and invoke the orbital response lemma.  This
+   cleanly separates a strategy obstruction from a presentation/calibration obstruction.
+5. **Cycle-space/Bockstein language (C465, C471).**  Differences of response matchings are even
+   cycles.  At q=11 the entire unforced choice is the single `C10` homology class.  The scalable
+   test is whether active matching bulk maps through a boundary operator with bounded homology,
+   leaving only C80's defect skeleton.  No general exact complex has yet been proved.
+6. **Code/design/secant certificates (C464, C469, C470).**  At q=11, legality and response supports
+   can be recorded as syndromes or design blocks, and the enlarged `M12` symmetry can compress
+   finite checking.  This is valuable for base certificates and independent verification, but it
+   has no uniform P/N implication and cannot replace descent.
+7. **Exceptional-fibre arithmetic (C466, C468).**  First-order collision/Hensel analysis suggests
+   how to isolate primes where a generic orbital count degenerates.  If the response predicate
+   becomes a bounded-degree curve or character-sum condition, Weil bounds can prove nonemptiness
+   for large q, with the finite bad-characteristic/equality list routed to C81.  C468's particular
+   Klein-cubic zeta polynomial is not itself a cap theorem; the transferable tool is the
+   generic-bound plus exact-exception workflow.
+
+C451 and the negative halves of C450/C454 remain useful eliminators: theta parity and the proposed
+small Weil-module identifications cannot certify the response sheet.  C453's mod-40 law is also a
+warning rather than a strategy: existence, fusion, and phase characters can vary independently,
+so a Legendre test must be attached to the exact game relation it controls.
+
 ## Finite mechanism ladder
 
 The roof's complete rank-three sequence gives a clean falsification ladder for the packet idea:
@@ -227,12 +286,16 @@ are stated without a hidden selector.
   and the nonsquare `D10` coset swaps both the P-edge endpoints and the matchings.  There are
   exactly two global calibrations.  Picking one requires one orientation/advice bit; P-existence
   uses the canonical unordered pair and requires none.
+- **Settled — QR calibration boundary:** the two unforced edge orbitals can be written as two
+  cyclic offsets, but the square class of their separation changes under `g -> g^2`.  Difference-
+  set coordinates require the frozen roof calibration; the generator-free game datum is the
+  nonempty two-orbital `C10`.
 - **Open — cubic response theorem:** the exact `tr(B^3)` and `Q3` successes have not yet been
   converted into a q-independent nonempty-fibre bound.  C80 owns the response relation and C82 the
   eventual orbital count; C81 owns structured failures of the generic estimate.
-- **Open — defect homology:** cycle cancellation and defect concentration are certified in several
-  residual regimes, but no quotient theorem yet makes the defect boundary a complete game-value
-  carrier.
+- **Partly settled — defect homology:** at the q=11 first-response gate, removing forced orbitals
+  leaves one `C10`, and the two calibrations differ by its unique `F_2` homology generator.  No
+  quotient theorem yet makes the general residual defect boundary a complete game-value carrier.
 - **Open — uniform packet:** no q-independent packet with a proven nonempty good fibre is known.
   C80(a) owns existence/abundance and C82 owns orbital counting after the packet is fixed.
 - **Open — value descent:** neither the unordered H3 pair nor any Weil-roof carrier currently

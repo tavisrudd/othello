@@ -142,6 +142,42 @@ kernel fixes each perfect matching separately, while every nonsquare element of 
 two-point calibration torsor: choosing one costs the same orientation bit obstructed in C448, but
 the unordered response correspondence—and therefore P-existence—needs no such choice.
 
+### Orbital proof compression
+
+The `C5` action gives a shorter proof of the matching statement.  The 22 vertices are two fixed
+points and four free five-orbits, labelled by the edge quotient as
+
+```text
+0[1], infinity[1], 1[5], 8[5], 9[5], infinity[5].
+```
+
+The 41 winning edges split into one fixed edge and eight five-edge `C5` orbitals.  Every perfect
+matching contains the fixed `0[1]--infinity[1]` edge and the unique `1[5]--9[5]` orbital.  The
+remaining ten vertices support exactly two `8[5]--infinity[5]` orbitals.  Their union is the
+10-cycle, and each orbital separately is a perfect matching.  Thus matching existence follows
+from the group action without enumerating all matchings; enumeration is retained as an independent
+check.
+
+This exposes a reusable C80 lemma.  If a finite group acts transitively on equal-size opponent and
+reply orbits and the value-correct response relation is invariant and nonempty, its bipartite
+orbital graph is regular on both sides and has a perfect matching by Hall.  For free equal torsors,
+a single edge orbital is already an equivariant bijection.  Consequently the generic task is not
+to select a reply: it is to prove that one equal-orbit response relation is nonempty and P-pure.
+C449 supplies the torus orbits, C452 supplies difference-set/intersection-number technology for
+their edge counts, and C82 can own the eventual character-sum abundance bound.
+
+There is no intrinsic QR label on the two q=11 connection orbitals.  Writing their offsets requires
+a generator of `C5`; inversion preserves the square class of their separation, but the roof Galois
+change `g -> g^2` swaps square and nonsquare.  Thus QR coordinates are useful after a frozen
+Coxeter calibration, while the cap theorem should retain only the generator-free facts: two
+distinct nonempty orbitals and one connected 10-cycle.
+
+The two calibrations also have an exact homological reading.  Once the forced edges are removed,
+their symmetric difference is the generator of `H_1(C10,F_2)`.  The C448 advice bit is therefore
+the orientation of a one-dimensional cycle-space class at this q=11 gate.  This realizes the
+C465/C471 kernel/image analogy locally, but does not yet prove that the much larger C80 residual
+has bounded homology or that its cycle quotient carries game value.
+
 Thus either perfect matching is a fixed first-ply response rule landing in certified P
 grandchildren.  This corrects the interpretation of the earlier certificate audit: the emitted
 reply book was not a node-zero matching, but that was never a proof that no such matching exists.

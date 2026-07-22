@@ -582,7 +582,9 @@ task list.  Current high-value items:
   the intrinsic edge quotient `u=XZ/Y²` separates them by Legendre class, and the full 22-move
   winning-response graph has exactly two perfect matchings.  Its square `C5` fixes both while the
   nonsquare `D10` coset swaps endpoint and matching, realizing the C448 calibration torsor at the
-  strategy-certificate level.  A uniform quotient/response theorem,
+  strategy-certificate level.  More sharply, the unforced graph is two `C5` edge orbitals whose
+  union is `C10`; each orbital is a perfect matching, reducing the generic target to a nonempty
+  P-pure equal-orbit response relation (regular-bipartite Hall).  A uniform quotient/response theorem,
   (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang
   counting, gated on C80's packet. **C83** — the coarsest-bisimulation measurement is done (29 at
