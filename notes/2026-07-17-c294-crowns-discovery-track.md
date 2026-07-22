@@ -691,3 +691,25 @@ cliffhanger, while the present evidence forbids conflating them.
 **Evidence:** OPEN — both endpoint `A5` facts are certified by C395/C453, but their comparison has
 not been attempted.
 **Status:** open lead
+
+### 2026-07-21 — Dickson's `S4` criterion as candidate proof mechanism for the `(2/q)` fusion law
+
+**Provenance:** novelty de-risk scan (`notes/2026-07-21-weil-roof-novelty-derisk-scan.md`), H3
+near-miss list, read against C445's certified gluing hinge.
+**Was I looking for this?:** no — the scan sought pre-emption of the fusion law, not a proof of it.
+**Observed / musing:** Dickson (read at full text in the scan via `arXiv:math/0703685`):
+`S4 <= PSL_2(q)` iff `q = ±1 mod 8` iff `(2/q)=+1`. C445 certifies the sheet-gluing hinge is
+exactly an `S4` with determinant kernel the common `A4`. Candidate mechanism: the sheets fuse in
+`PSL_2(q)` exactly when the hinge `S4` descends into `PSL_2(q)`, i.e. exactly under Dickson's
+condition — which would derive C453's mod-40 fusion law from classical subgroup theory and turn
+the object-collision hazard ("`A5` classes fuse in `PGL` unconditionally") into the proof's
+anchor: subgroup-class fusion is unconditional, sheet fusion is gated by where the fusing `S4`
+lives.
+**Why it may matter / strongest question:** upgrades the fusion law from certified phenomenon to
+mechanism, and pre-answers the sharpest referee objection.
+**Discriminator / falsifier:** at visible primes (`11,19,21,29 mod 40`) verify the hinge meets
+`PSL` only in `A4`; at fused primes verify a full `S4` inside `PSL` conjugates one sheet to the
+other. Either check failing at any prime kills the mechanism reading without touching the
+certified law.
+**Evidence:** REASONED over CHECKED endpoints (C445 hinge, C453 mod-40 law, Dickson full text).
+**Status:** open lead
