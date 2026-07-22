@@ -57,3 +57,16 @@ after forgetting, rather than as a qualified failure. C482's pure/child-relative
 moduli-level analogue (continuous fibre loss vs free finite torsor); C485 can adopt the close's
 typed phrasing for the child-relative clause verbatim. The crowns C486 battery (T_11 bridge) may
 give the RS extremal fibre the certified torsor object directly.
+
+## 2026-07-22 — item-3 novelty flag discharged
+
+Provenance: user-requested literature-priority audit over the day's landed and ej results;
+`2026-07-22-reed-solomon-landed-results-literature-audit.md`. The item-3 flag (2026-07-22 ej entry:
+"before any external wording, a claim-specific audit must check finite-field joint-invariant
+literature") is now discharged. Finding: the closest predecessor is Dür 1991, "The decoding of
+extended Reed--Solomon codes," which decodes Cauchy/RS codes "using an analogue of the classical
+theory of apolarity of binary forms" — so apolarity-of-binary-forms for RS is pre-empted at the
+tool level. The specific (binary sextic, binary quadratic) joint-covariant / harmonic-invariant
+framing tied to deep-hole orbit reconstruction has no predecessor located over the covered indices
+(MathSciNet/Google Scholar NOT COVERED; Dür 1991 body not reached, verdict rests on its abstract).
+Internal use as vocabulary remains free; external wording must cite and distinguish Dür 1991.
