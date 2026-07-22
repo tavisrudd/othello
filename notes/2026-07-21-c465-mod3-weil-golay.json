@@ -1,0 +1,2605 @@
+{
+  "cases": [
+    {
+      "ambient_permutation_cross_check": {
+        "ambient_composition_factors": "trivial plus both Galois-conjugate small simples",
+        "flag_assignment": "perfect code contains trivial plus one small simple; ambient quotient is the conjugate small simple",
+        "nontrivial_constituent_brauer_multiplicities": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "nontrivial_ordinary_row_index": 4,
+        "ordinary_sheet_character": "1 + the degree-6 constituent selected by C450",
+        "self_dual_sandwich": "simple_core < trivial+simple_core < ambient, with ambient/perfect_code isomorphic to dual(simple_core)",
+        "small_simple_duality": "Brauer indices 2 and 3 are exchanged by duality"
+      },
+      "brauer": {
+        "brauer_duality_permutation_1_based": [
+          1,
+          3,
+          2,
+          4
+        ],
+        "brauer_irreducibles": [
+          {
+            "index": 1,
+            "values": [
+              "1",
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 2,
+            "values": [
+              "3",
+              "0",
+              "E(7)+E(7)^2+E(7)^4",
+              "E(7)^3+E(7)^5+E(7)^6"
+            ]
+          },
+          {
+            "index": 3,
+            "values": [
+              "3",
+              "0",
+              "E(7)^3+E(7)^5+E(7)^6",
+              "E(7)+E(7)^2+E(7)^4"
+            ]
+          },
+          {
+            "index": 4,
+            "values": [
+              "8",
+              "-1",
+              "1",
+              "1"
+            ]
+          }
+        ],
+        "class_bijections_preserving_order_size": [
+          [
+            0,
+            1,
+            2,
+            3
+          ],
+          [
+            0,
+            1,
+            3,
+            2
+          ]
+        ],
+        "concrete_p_regular_classes": {
+          "orders": [
+            1,
+            3,
+            7,
+            7
+          ],
+          "sizes": [
+            1,
+            56,
+            24,
+            24
+          ]
+        },
+        "lower_period_minimal_polynomial_coefficients_constant_first": [
+          2,
+          1,
+          1
+        ],
+        "modules": {
+          "perfect_code": {
+            "brauer_values": [
+              "4",
+              "1",
+              "-E(7)-E(7)^2-E(7)^4",
+              "-E(7)^3-E(7)^5-E(7)^6"
+            ],
+            "composition_factors_up_to_table_galois": [
+              1,
+              "the same one of indices 2,3"
+            ],
+            "dimension": 4,
+            "matching_irreducible_indices": []
+          },
+          "simple_core": {
+            "brauer_values": [
+              "3",
+              "0",
+              "E(7)^3+E(7)^5+E(7)^6",
+              "E(7)+E(7)^2+E(7)^4"
+            ],
+            "composition_factors_up_to_table_galois": [
+              "one of indices 2,3"
+            ],
+            "dimension": 3,
+            "matching_irreducible_indices": [
+              2,
+              3
+            ]
+          }
+        },
+        "psl_decomposition_matrix": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "psl_ordinary_degrees": [
+          1,
+          3,
+          3,
+          6,
+          7,
+          8
+        ],
+        "sl_brauer_irreducibles": [
+          {
+            "index": 1,
+            "values": [
+              "1",
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 2,
+            "values": [
+              "3",
+              "0",
+              "E(7)+E(7)^2+E(7)^4",
+              "E(7)^3+E(7)^5+E(7)^6"
+            ]
+          },
+          {
+            "index": 3,
+            "values": [
+              "3",
+              "0",
+              "E(7)^3+E(7)^5+E(7)^6",
+              "E(7)+E(7)^2+E(7)^4"
+            ]
+          },
+          {
+            "index": 4,
+            "values": [
+              "8",
+              "-1",
+              "1",
+              "1"
+            ]
+          }
+        ],
+        "sl_decomposition_matrix": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "sl_table": {
+          "identifier": "2.L3(2)mod2",
+          "irreducible_degrees": [
+            1,
+            3,
+            3,
+            8
+          ],
+          "p_regular_class_orders": [
+            1,
+            3,
+            7,
+            7
+          ],
+          "p_regular_class_sizes": [
+            1,
+            56,
+            24,
+            24
+          ]
+        },
+        "table": {
+          "identifier": "L3(2)mod2",
+          "irreducible_degrees": [
+            1,
+            3,
+            3,
+            8
+          ],
+          "p_regular_class_orders": [
+            1,
+            3,
+            7,
+            7
+          ],
+          "p_regular_class_sizes": [
+            1,
+            56,
+            24,
+            24
+          ]
+        },
+        "weil_reductions": [
+          {
+            "brauer_multiplicities_on_2cover": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "central_minus_identity_value": "3",
+            "degree": 3,
+            "ordinary_index": 2
+          },
+          {
+            "brauer_multiplicities_on_2cover": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "central_minus_identity_value": "3",
+            "degree": 3,
+            "ordinary_index": 3
+          },
+          {
+            "brauer_multiplicities_on_2cover": [
+              1,
+              0,
+              1,
+              0
+            ],
+            "central_minus_identity_value": "-4",
+            "degree": 4,
+            "ordinary_index": 7
+          },
+          {
+            "brauer_multiplicities_on_2cover": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "central_minus_identity_value": "-4",
+            "degree": 4,
+            "ordinary_index": 8
+          }
+        ]
+      },
+      "characteristic": 2,
+      "common_arithmetic_parameter": {
+        "disjoint_gram_formula": "m*I + (m-1)*J",
+        "lower_period_minimal_polynomial": "x^2+x+2",
+        "m_equals_(q+1)/4_equals_characteristic": 2,
+        "mod_characteristic_factorization": "x*(x+1)",
+        "mod_m_consequence": "disjoint Gram = -J (rank 1), shared-edge Gram = 0",
+        "shared_edge_gram_formula": "m*(I+J)"
+      },
+      "generator_point_matrices": [
+        [
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          6,
+          1,
+          0
+        ]
+      ],
+      "group": {
+        "name": "PSL_2(7)",
+        "order": 168,
+        "sheet_sizes": [
+          7,
+          7
+        ]
+      },
+      "module_structure": {
+        "ambient_sheet": {
+          "augmentation_dimension": 6,
+          "augmentation_flag": "simple_core < augmentation with quotient dual(simple_core)",
+          "augmentation_radical": "simple_core",
+          "augmentation_socle": "simple_core",
+          "commutant": {
+            "dimension": 1,
+            "equation_rank": 35,
+            "unknowns": 36
+          },
+          "decomposition": "all_one_trivial direct-sum augmentation",
+          "equivariant_retraction_test": {
+            "augmented_rank": 19,
+            "coefficient_rank": 18,
+            "equations": 45,
+            "retraction_exists": false,
+            "unknowns": 18
+          },
+          "extension_splits": false,
+          "full_sheet_radical": "simple_core",
+          "full_sheet_socle": "all_one_trivial direct-sum simple_core (= perfect_code)",
+          "invariant_form": {
+            "core_gram_is_zero": true,
+            "core_is_lagrangian": true,
+            "dimension": 6,
+            "rank": 6,
+            "source": "coordinate dot product restricted to augmentation",
+            "type": "alternating symplectic",
+            "unique_up_to_scalar": true
+          }
+        },
+        "orthogonal_flag": "simple_core = perfect_code^perp",
+        "perfect_code": {
+          "dimension": 4,
+          "is_simple": false,
+          "submodule_bases": [
+            [],
+            [
+              [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                1,
+                0,
+                1
+              ]
+            ]
+          ],
+          "submodule_dimensions": [
+            0,
+            1,
+            3,
+            4
+          ]
+        },
+        "perfect_code_decomposition": "simple_core direct-sum all_one_trivial",
+        "radical": "zero",
+        "simple_core": {
+          "dimension": 3,
+          "is_simple": true,
+          "submodule_bases": [
+            [],
+            [
+              [
+                1,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                1,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                1,
+                0,
+                1,
+                1
+              ]
+            ]
+          ],
+          "submodule_dimensions": [
+            0,
+            3
+          ]
+        },
+        "socle": "whole perfect_code (semisimple)"
+      },
+      "q": 7,
+      "relations": {
+        "disjoint": {
+          "matrix": [
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0
+            ]
+          ],
+          "nullity": 3,
+          "rank": 4
+        },
+        "shared_edge": {
+          "matrix": [
+            [
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1
+            ]
+          ],
+          "nullity": 4,
+          "rank": 3
+        }
+      },
+      "spaces": {
+        "disjoint_right_kernel": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "dimension": 3
+        },
+        "disjoint_row_span": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "dimension": 4
+        },
+        "shared_edge_right_kernel": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ]
+          ],
+          "dimension": 4
+        },
+        "shared_edge_row_span": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "dimension": 3
+        }
+      },
+      "type": "B3"
+    },
+    {
+      "ambient_permutation_cross_check": {
+        "ambient_composition_factors": "trivial plus both Galois-conjugate small simples",
+        "flag_assignment": "perfect code contains trivial plus one small simple; ambient quotient is the conjugate small simple",
+        "nontrivial_constituent_brauer_multiplicities": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "nontrivial_ordinary_row_index": 5,
+        "ordinary_sheet_character": "1 + the degree-10 constituent selected by C450",
+        "self_dual_sandwich": "simple_core < trivial+simple_core < ambient, with ambient/perfect_code isomorphic to dual(simple_core)",
+        "small_simple_duality": "Brauer indices 2 and 3 are exchanged by duality"
+      },
+      "brauer": {
+        "brauer_duality_permutation_1_based": [
+          1,
+          3,
+          2,
+          4,
+          5,
+          6
+        ],
+        "brauer_irreducibles": [
+          {
+            "index": 1,
+            "values": [
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 2,
+            "values": [
+              "5",
+              "1",
+              "0",
+              "0",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10"
+            ]
+          },
+          {
+            "index": 3,
+            "values": [
+              "5",
+              "1",
+              "0",
+              "0",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9"
+            ]
+          },
+          {
+            "index": 4,
+            "values": [
+              "10",
+              "-2",
+              "0",
+              "0",
+              "-1",
+              "-1"
+            ]
+          },
+          {
+            "index": 5,
+            "values": [
+              "12",
+              "0",
+              "E(5)+E(5)^4",
+              "E(5)^2+E(5)^3",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 6,
+            "values": [
+              "12",
+              "0",
+              "E(5)^2+E(5)^3",
+              "E(5)+E(5)^4",
+              "1",
+              "1"
+            ]
+          }
+        ],
+        "class_bijections_preserving_order_size": [
+          [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            2,
+            3,
+            5,
+            4
+          ],
+          [
+            0,
+            1,
+            3,
+            2,
+            4,
+            5
+          ],
+          [
+            0,
+            1,
+            3,
+            2,
+            5,
+            4
+          ]
+        ],
+        "concrete_p_regular_classes": {
+          "orders": [
+            1,
+            2,
+            5,
+            5,
+            11,
+            11
+          ],
+          "sizes": [
+            1,
+            55,
+            132,
+            132,
+            60,
+            60
+          ]
+        },
+        "lower_period_minimal_polynomial_coefficients_constant_first": [
+          3,
+          1,
+          1
+        ],
+        "modules": {
+          "perfect_code": {
+            "brauer_values": [
+              "6",
+              "2",
+              "1",
+              "1",
+              "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+              "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10"
+            ],
+            "composition_factors_up_to_table_galois": [
+              1,
+              "the same one of indices 2,3"
+            ],
+            "dimension": 6,
+            "matching_irreducible_indices": []
+          },
+          "simple_core": {
+            "brauer_values": [
+              "5",
+              "1",
+              "0",
+              "0",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9"
+            ],
+            "composition_factors_up_to_table_galois": [
+              "one of indices 2,3"
+            ],
+            "dimension": 5,
+            "matching_irreducible_indices": [
+              2,
+              3
+            ]
+          }
+        },
+        "psl_decomposition_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "psl_ordinary_degrees": [
+          1,
+          5,
+          5,
+          10,
+          10,
+          11,
+          12,
+          12
+        ],
+        "sl_brauer_irreducibles": [
+          {
+            "index": 1,
+            "values": [
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 2,
+            "values": [
+              "5",
+              "5",
+              "1",
+              "0",
+              "0",
+              "0",
+              "0",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10"
+            ]
+          },
+          {
+            "index": 3,
+            "values": [
+              "5",
+              "5",
+              "1",
+              "0",
+              "0",
+              "0",
+              "0",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9"
+            ]
+          },
+          {
+            "index": 4,
+            "values": [
+              "10",
+              "10",
+              "-2",
+              "0",
+              "0",
+              "0",
+              "0",
+              "-1",
+              "-1",
+              "-1",
+              "-1"
+            ]
+          },
+          {
+            "index": 5,
+            "values": [
+              "12",
+              "12",
+              "0",
+              "E(5)+E(5)^4",
+              "E(5)+E(5)^4",
+              "E(5)^2+E(5)^3",
+              "E(5)^2+E(5)^3",
+              "1",
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 6,
+            "values": [
+              "12",
+              "12",
+              "0",
+              "E(5)^2+E(5)^3",
+              "E(5)^2+E(5)^3",
+              "E(5)+E(5)^4",
+              "E(5)+E(5)^4",
+              "1",
+              "1",
+              "1",
+              "1"
+            ]
+          },
+          {
+            "index": 7,
+            "values": [
+              "6",
+              "-6",
+              "0",
+              "1",
+              "-1",
+              "1",
+              "-1",
+              "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9",
+              "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10"
+            ]
+          },
+          {
+            "index": 8,
+            "values": [
+              "6",
+              "-6",
+              "0",
+              "1",
+              "-1",
+              "1",
+              "-1",
+              "-E(11)^2-E(11)^6-E(11)^7-E(11)^8-E(11)^10",
+              "E(11)^2+E(11)^6+E(11)^7+E(11)^8+E(11)^10",
+              "-E(11)-E(11)^3-E(11)^4-E(11)^5-E(11)^9",
+              "E(11)+E(11)^3+E(11)^4+E(11)^5+E(11)^9"
+            ]
+          },
+          {
+            "index": 9,
+            "values": [
+              "10",
+              "-10",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "-1",
+              "1",
+              "-1",
+              "1"
+            ]
+          },
+          {
+            "index": 10,
+            "values": [
+              "12",
+              "-12",
+              "0",
+              "E(5)+E(5)^4",
+              "-E(5)-E(5)^4",
+              "E(5)^2+E(5)^3",
+              "-E(5)^2-E(5)^3",
+              "1",
+              "-1",
+              "1",
+              "-1"
+            ]
+          },
+          {
+            "index": 11,
+            "values": [
+              "12",
+              "-12",
+              "0",
+              "E(5)^2+E(5)^3",
+              "-E(5)^2-E(5)^3",
+              "E(5)+E(5)^4",
+              "-E(5)-E(5)^4",
+              "1",
+              "-1",
+              "1",
+              "-1"
+            ]
+          }
+        ],
+        "sl_decomposition_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "sl_table": {
+          "identifier": "2.L2(11)mod3",
+          "irreducible_degrees": [
+            1,
+            5,
+            5,
+            10,
+            12,
+            12,
+            6,
+            6,
+            10,
+            12,
+            12
+          ],
+          "p_regular_class_orders": [
+            1,
+            2,
+            4,
+            5,
+            10,
+            5,
+            10,
+            11,
+            22,
+            11,
+            22
+          ],
+          "p_regular_class_sizes": [
+            1,
+            1,
+            110,
+            132,
+            132,
+            132,
+            132,
+            60,
+            60,
+            60,
+            60
+          ]
+        },
+        "table": {
+          "identifier": "L2(11)mod3",
+          "irreducible_degrees": [
+            1,
+            5,
+            5,
+            10,
+            12,
+            12
+          ],
+          "p_regular_class_orders": [
+            1,
+            2,
+            5,
+            5,
+            11,
+            11
+          ],
+          "p_regular_class_sizes": [
+            1,
+            55,
+            132,
+            132,
+            60,
+            60
+          ]
+        },
+        "weil_reductions": [
+          {
+            "brauer_multiplicities_on_2cover": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "central_minus_identity_value": "5",
+            "degree": 5,
+            "ordinary_index": 2
+          },
+          {
+            "brauer_multiplicities_on_2cover": [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "central_minus_identity_value": "5",
+            "degree": 5,
+            "ordinary_index": 3
+          },
+          {
+            "brauer_multiplicities_on_2cover": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "central_minus_identity_value": "-6",
+            "degree": 6,
+            "ordinary_index": 9
+          },
+          {
+            "brauer_multiplicities_on_2cover": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            "central_minus_identity_value": "-6",
+            "degree": 6,
+            "ordinary_index": 10
+          }
+        ]
+      },
+      "characteristic": 3,
+      "common_arithmetic_parameter": {
+        "disjoint_gram_formula": "m*I + (m-1)*J",
+        "lower_period_minimal_polynomial": "x^2+x+3",
+        "m_equals_(q+1)/4_equals_characteristic": 3,
+        "mod_characteristic_factorization": "x*(x+1)",
+        "mod_m_consequence": "disjoint Gram = -J (rank 1), shared-edge Gram = 0",
+        "shared_edge_gram_formula": "m*(I+J)"
+      },
+      "generator_point_matrices": [
+        [
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          10,
+          1,
+          0
+        ]
+      ],
+      "group": {
+        "name": "PSL_2(11)",
+        "order": 660,
+        "sheet_sizes": [
+          11,
+          11
+        ]
+      },
+      "module_structure": {
+        "ambient_sheet": {
+          "augmentation_dimension": 10,
+          "augmentation_flag": "simple_core < augmentation with quotient dual(simple_core)",
+          "augmentation_radical": "simple_core",
+          "augmentation_socle": "simple_core",
+          "commutant": {
+            "dimension": 1,
+            "equation_rank": 99,
+            "unknowns": 100
+          },
+          "decomposition": "all_one_trivial direct-sum augmentation",
+          "equivariant_retraction_test": {
+            "augmented_rank": 51,
+            "coefficient_rank": 50,
+            "equations": 125,
+            "retraction_exists": false,
+            "unknowns": 50
+          },
+          "extension_splits": false,
+          "full_sheet_radical": "simple_core",
+          "full_sheet_socle": "all_one_trivial direct-sum simple_core (= perfect_code)",
+          "invariant_form": {
+            "core_gram_is_zero": true,
+            "core_is_lagrangian": true,
+            "dimension": 10,
+            "rank": 10,
+            "source": "coordinate dot product restricted to augmentation",
+            "type": "symmetric hyperbolic",
+            "unique_up_to_scalar": true
+          }
+        },
+        "orthogonal_flag": "simple_core = perfect_code^perp",
+        "perfect_code": {
+          "dimension": 6,
+          "is_simple": false,
+          "submodule_bases": [
+            [],
+            [
+              [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                0,
+                0,
+                0,
+                2,
+                1,
+                1,
+                2,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0,
+                2,
+                2,
+                0,
+                2,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                2,
+                1,
+                2,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                2,
+                2,
+                1,
+                2
+              ]
+            ],
+            [
+              [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1,
+                1
+              ],
+              [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                2,
+                1,
+                2,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                2,
+                2,
+                1,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                2,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                2,
+                2,
+                2,
+                1
+              ]
+            ]
+          ],
+          "submodule_dimensions": [
+            0,
+            1,
+            5,
+            6
+          ]
+        },
+        "perfect_code_decomposition": "simple_core direct-sum all_one_trivial",
+        "radical": "zero",
+        "simple_core": {
+          "dimension": 5,
+          "is_simple": true,
+          "submodule_bases": [
+            [],
+            [
+              [
+                1,
+                0,
+                0,
+                0,
+                0,
+                2,
+                1,
+                1,
+                2,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0,
+                2,
+                2,
+                0,
+                2,
+                1,
+                1
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                2,
+                1,
+                2,
+                0,
+                2
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                2,
+                2,
+                1,
+                2
+              ]
+            ]
+          ],
+          "submodule_dimensions": [
+            0,
+            5
+          ]
+        },
+        "socle": "whole perfect_code (semisimple)"
+      },
+      "q": 11,
+      "relations": {
+        "disjoint": {
+          "matrix": [
+            [
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          ],
+          "nullity": 5,
+          "rank": 6
+        },
+        "shared_edge": {
+          "matrix": [
+            [
+              1,
+              0,
+              0,
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ]
+          ],
+          "nullity": 6,
+          "rank": 5
+        }
+      },
+      "spaces": {
+        "disjoint_right_kernel": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              1,
+              2,
+              2,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              2,
+              0,
+              2,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              2,
+              1,
+              2,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              2,
+              2,
+              1,
+              2
+            ]
+          ],
+          "dimension": 5
+        },
+        "disjoint_row_span": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              2,
+              2,
+              1,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              2,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              2,
+              2,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              2,
+              2,
+              1
+            ]
+          ],
+          "dimension": 6
+        },
+        "shared_edge_right_kernel": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              2,
+              2,
+              1,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              2,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              2,
+              2,
+              1,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              2,
+              2,
+              2,
+              1
+            ]
+          ],
+          "dimension": 6
+        },
+        "shared_edge_row_span": {
+          "basis": [
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              1,
+              2,
+              2,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              2,
+              0,
+              2,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              2,
+              1,
+              2,
+              0,
+              2
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              2,
+              2,
+              1,
+              2
+            ]
+          ],
+          "dimension": 5
+        }
+      },
+      "type": "H3"
+    }
+  ],
+  "inputs": {
+    "c406_scout": {
+      "bytes": 25443,
+      "path": "/home/tavis/src/othello/notes/2026-07-20-c406-matching-orbit-scout.json",
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "c450": {
+      "bytes": 46770,
+      "path": "/home/tavis/src/othello/notes/2026-07-21-c450-weil-cross-sheet.json",
+      "sha256": "a6fc2d854732011c82b6b5c1440b407b64041bd31f4bac59adec15c1f127353f"
+    },
+    "c464": {
+      "bytes": 43735,
+      "path": "/home/tavis/src/othello/notes/2026-07-21-c464-perfect-code-spans.json",
+      "sha256": "5d2aa612ebab289845af1e244d26c9dd55ff9b57393b61276a51d18cb737115b"
+    }
+  },
+  "schema": "c465-mod3-weil-golay-v1",
+  "trusted_boundary": [
+    "exact prime-field linear algebra",
+    "exhaustive invariant-subspace generation inside dimensions at most 6",
+    "GAP 4.15 character/Brauer tables and exact BrauerCharacterValue"
+  ],
+  "verdict": {
+    "q11_F3_PSL2_modules": "sharp negative: the Golay span is 1 plus a 5-dimensional simple PSL2 module, while each genuine 6-dimensional SL2 Weil reduction remains irreducible with central -1",
+    "q11_central_obstruction": "survives: -1 equals 2 in F3, so the genuine degree-6 reductions do not descend from SL2(11) to PSL2(11)",
+    "q11_lower_degree5": "positive for exactly one frozen 5-dimensional simple core, at the Brauer-character level",
+    "q7_F2_control": "mixed positive: the 3-dimensional core matches one lower Weil reduction, and the 4-dimensional Hamming span has the same Brauer character 1+3 as one genuine upper reduction",
+    "q7_central_obstruction": "dies for these lattice reductions because the scalar -I reduces to +I in F2; equivalently the central involution is invisible on every simple Brauer factor",
+    "qualification": "Brauer-character equality records semisimplification; it does not identify a chosen integral Weil lattice reduction as an extension module"
+  }
+}
