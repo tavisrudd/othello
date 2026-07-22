@@ -255,6 +255,59 @@ def verify_all_pairs(perms, actions, values, p: int):
     return checked
 
 
+def permutation_order(g):
+    identity_perm = tuple(range(len(g)))
+    power = identity_perm
+    for order in range(1, len(g) * 4 + 1):
+        power = compose_perm(power, g)
+        if power == identity_perm:
+            return order
+    raise AssertionError("permutation order bound failed")
+
+
+def cyclic_restriction_data(words, actions, values, p: int):
+    n = len(next(iter(actions.values())))
+    identity_matrix = identity(n)
+    census = {}
+    examples = {}
+    for g in words:
+        order = permutation_order(g)
+        if order % p:
+            continue
+        action = actions[g]
+        columns = [tuple((int(i == j) - action[i][j]) % p for i in range(n)) for j in range(n)]
+        b1_rank = len(rref(columns, p, n)[0])
+        detected = len(rref([*columns, values[g]], p, n)[0]) == b1_rank + 1
+        norm = [[0] * n for _ in range(n)]
+        power = identity_matrix
+        for _ in range(order):
+            norm = [[(norm[i][j] + power[i][j]) % p for j in range(n)] for i in range(n)]
+            power = matmul(power, action, p)
+        h1_dimension = n - len(rref(norm, p, n)[0]) - b1_rank
+        key = (order, h1_dimension, detected)
+        census[key] = census.get(key, 0) + 1
+        candidate = (len(words[g]), words[g], g, values[g])
+        if detected and (key not in examples or candidate < examples[key]):
+            examples[key] = candidate
+    rows = [{"element_order": order, "cyclic_h1_dimension": h1_dimension,
+             "frozen_restriction_nonzero": detected, "element_count": count}
+            for (order, h1_dimension, detected), count in sorted(census.items())]
+    target_order = 4 if p == 2 else 3
+    target = next(row for row in rows if row["element_order"] == target_order and row["frozen_restriction_nonzero"])
+    example = examples[(target_order, target["cyclic_h1_dimension"], True)]
+    assert target["cyclic_h1_dimension"] == 1
+    return {
+        "p_divisible_order_census": rows,
+        "minimal_detecting_cyclic_order": target_order,
+        "detecting_element_count_at_minimal_order": target["element_count"],
+        "detecting_cyclic_subgroup_count": target["element_count"] // 2,
+        "restriction_isomorphism": "global H1 and target cyclic H1 are one-dimensional and restriction is nonzero",
+        "shortest_detecting_word_generator_indices": list(example[1]),
+        "shortest_detecting_permutation": list(example[2]),
+        "shortest_detecting_cocycle_value": list(example[3]),
+    }
+
+
 def matching_case(q: int, p: int, type_name: str, frozen, upstream):
     # Reuse only C406's frozen matching; all sheets, relations, and actions are rebuilt here.
     def norm(a, b, c, d):
@@ -330,6 +383,7 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
     assert sum(a * b for a, b in zip(detector, frozen_vector)) % p == quotient_coordinate
     values = all_group_cocycle(words, expressions, frozen_vector, p)
     pair_checks = verify_all_pairs(words, group_actions, values, p)
+    local_detection = cyclic_restriction_data(words, group_actions, values, p)
     ordered = sorted(words)
     return {
         "q": q,
@@ -371,6 +425,7 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
             "projectivized_ext_points": 1,
             "extension_middle_module_classes_split_vs_nonsplit": 2,
         },
+        "local_detection": local_detection,
         "nonzero_ext_orbit": {
             "number_of_nonzero_classes": p - 1,
             "endpoint_scalar_group_order": (p - 1) ** 2,

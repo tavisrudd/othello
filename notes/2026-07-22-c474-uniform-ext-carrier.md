@@ -143,6 +143,41 @@ Aut_G(A_7)=1,       Aut_G(A_11)=F_3^* of order 2.
 So arithmetic orientation is needed to name the socle constituent, but no scalar, cocycle-basis,
 or endpoint gauge can create a second nonsplit carrier.
 
+### Second-order extra juice: p-local detection depth
+
+The scalar detector is basis-dependent as written, but the extension class has a sharper
+basis-free local meaning.  Restrict it to cyclic subgroups in the coefficient characteristic.
+Exact enumeration gives:
+
+| case | cyclic subgroup | number of subgroups | local `dim H^1` | frozen restriction |
+|:--|:--|--:|--:|:--|
+| `q=7`, `F_2` | `C2` | 21 | 1 | zero on every one |
+| `q=7`, `F_2` | `C4` | 21 | 1 | nonzero on every one |
+| `q=11`, `F_3` | `C3` | 55 | 1 | nonzero on every one |
+
+Thus the restriction from the global one-dimensional `H^1` to any displayed detecting cyclic
+`H^1` is an isomorphism.  At `q=11` this is exactly Sylow detection: a Sylow 3-subgroup is cyclic
+of order three, and restriction is injective abstractly because its index is prime to three.  At
+`q=7`, restriction to a Sylow 2-subgroup is likewise injective, but the new fact is subtler: the
+class dies on all 21 involution subgroups and first appears at cyclic order four.  It is a genuine
+depth-two 2-local obstruction, not an involution-level sign.
+
+Tiny witnesses suffice in the frozen generators.  With generator indices `(0,1)=(T,S)`, `T^3 S`
+has order four and detects the binary class, while `T S` has order three and detects the ternary
+class.  The certificate records their literal permutations and cocycle values.  It also checks all
+42 order-four elements at `q=7`, all 110 order-three elements at `q=11`, and the full p-divisible
+element census; the independent replay reconstructs the cyclic norm and coboundary ranks.
+
+This isolates the shared Ext result from the differing local mechanisms:
+
+```text
+q=7:  invisible on C2, visible on C4;
+q=11: visible already on the Sylow C3.
+```
+
+The agreement `dim Ext^1=1` is therefore not evidence that the two classes arise at the same
+cohomological depth.
+
 ## Strongest honest common theorem
 
 Let
@@ -244,6 +279,10 @@ no literature novelty or priority claim.
 - **Settled by the follow-up `ej` — carrier moduli collapse.** The projectivized Ext space is one
   point and `End_G(A_q)=F_p`, leaving exactly the split and unique nonsplit middle modules.  Their
   nonsplit automorphism groups have orders one and two respectively.
+- **Settled by second-order `ej` — local meaning of the class.** The global class restricts
+  isomorphically to every `C4` at q=7 and every Sylow `C3` at q=11.  The binary class vanishes on
+  every involution subgroup, proving that its first cyclic detection occurs at order four; the
+  ternary class is already detected at order three.
 - **Settled — effects of C472/C473.** The signed split cover introduces no second extension class;
   the pointed trace-prime rule canonically names the socle in each case.
 - **Open, with exact Phase-3 boundary — why the same rank defect occurs twice.** Both relation
@@ -251,6 +290,11 @@ no literature novelty or priority claim.
   defect from `m` alone.  The evidence gap is a uniformly defined carrier and a structural
   cohomology theorem outside `{7,11}`.  The bounded Phase-3 synthesis must classify the Rosetta row
   as checked rather than family-proved.
+- **Newly exposed, with the same owner — unequal local depth.** The binary class requires order
+  four while the ternary class is detected on order three.  The exact open question is whether the
+  binary depth-two behavior follows conceptually from the symplectic characteristic-two carrier
+  (for example through a Bockstein or quadratic refinement), rather than from the enumerated
+  matrices.  This is a mechanism question for Phase 3, not evidence for a larger family.
 - **No other genuine C474 mystery remains.** Ext dimensions, cocycle representatives, frozen-class
   coordinates, endpoint automorphisms, scalar orbits, and the exact larger-family obstruction are
   closed.

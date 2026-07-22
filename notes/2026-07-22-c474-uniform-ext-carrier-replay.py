@@ -232,6 +232,49 @@ def derive_case(record, upstream, oriented):
             checks += 1
     assert checks == record["frozen_extension"]["ordered_pair_cocycle_checks"]
 
+    local_rows = {}
+    local_examples = {}
+    for g in words:
+        if g == identity_perm:
+            continue
+        power = identity_perm
+        order = 0
+        while True:
+            power = product(power, g)
+            order += 1
+            if power == identity_perm:
+                break
+        if order % p:
+            continue
+        action_g = actions[g]
+        columns = [tuple((int(i == j) - action_g[i][j]) % p for i in range(n)) for j in range(n)]
+        b1_local = rank(columns, p, n)
+        detected = rank([*columns, stored[g]], p, n) == b1_local + 1
+        norm = [[0] * n for _ in range(n)]
+        action_power = eye(n)
+        for _ in range(order):
+            norm = [[(norm[i][j] + action_power[i][j]) % p for j in range(n)] for i in range(n)]
+            action_power = mm(action_power, action_g, p)
+        h1_local = n - rank(norm, p, n) - b1_local
+        key = (order, h1_local, detected)
+        local_rows[key] = local_rows.get(key, 0) + 1
+        candidate = (len(words[g]), words[g], g, stored[g])
+        if detected and (key not in local_examples or candidate < local_examples[key]):
+            local_examples[key] = candidate
+    replay_census = [{"element_order": order, "cyclic_h1_dimension": h1_local,
+                      "frozen_restriction_nonzero": detected, "element_count": count}
+                     for (order, h1_local, detected), count in sorted(local_rows.items())]
+    local = record["local_detection"]
+    assert replay_census == local["p_divisible_order_census"]
+    target_order = local["minimal_detecting_cyclic_order"]
+    target_key = next(key for key in local_examples if key[0] == target_order)
+    example = local_examples[target_key]
+    assert list(example[1]) == local["shortest_detecting_word_generator_indices"]
+    assert list(example[2]) == local["shortest_detecting_permutation"]
+    assert list(example[3]) == local["shortest_detecting_cocycle_value"]
+    assert local["detecting_element_count_at_minimal_order"] == local_rows[target_key]
+    assert local["detecting_cyclic_subgroup_count"] == local_rows[target_key] // 2
+
     def centralizer_dimension(matrices):
         equations = []
         for a in matrices:

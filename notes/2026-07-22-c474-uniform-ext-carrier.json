@@ -4468,6 +4468,52 @@
           ]
         ]
       ],
+      "local_detection": {
+        "detecting_cyclic_subgroup_count": 21,
+        "detecting_element_count_at_minimal_order": 42,
+        "minimal_detecting_cyclic_order": 4,
+        "p_divisible_order_census": [
+          {
+            "cyclic_h1_dimension": 1,
+            "element_count": 21,
+            "element_order": 2,
+            "frozen_restriction_nonzero": false
+          },
+          {
+            "cyclic_h1_dimension": 1,
+            "element_count": 42,
+            "element_order": 4,
+            "frozen_restriction_nonzero": true
+          }
+        ],
+        "restriction_isomorphism": "global H1 and target cyclic H1 are one-dimensional and restriction is nonzero",
+        "shortest_detecting_cocycle_value": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "shortest_detecting_permutation": [
+          0,
+          2,
+          4,
+          5,
+          6,
+          3,
+          1
+        ],
+        "shortest_detecting_word_generator_indices": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
       "nonzero_ext_orbit": {
         "endpoint_scalar_group_order": 1,
         "module_isomorphism_classes_of_nonsplit_extensions": 1,
@@ -36612,6 +36658,70 @@
           ]
         ]
       ],
+      "local_detection": {
+        "detecting_cyclic_subgroup_count": 55,
+        "detecting_element_count_at_minimal_order": 110,
+        "minimal_detecting_cyclic_order": 3,
+        "p_divisible_order_census": [
+          {
+            "cyclic_h1_dimension": 1,
+            "element_count": 110,
+            "element_order": 3,
+            "frozen_restriction_nonzero": true
+          },
+          {
+            "cyclic_h1_dimension": 1,
+            "element_count": 110,
+            "element_order": 6,
+            "frozen_restriction_nonzero": true
+          }
+        ],
+        "restriction_isomorphism": "global H1 and target cyclic H1 are one-dimensional and restriction is nonzero",
+        "shortest_detecting_cocycle_value": [
+          1,
+          1,
+          0,
+          0,
+          2,
+          0,
+          2,
+          2,
+          0,
+          2,
+          0,
+          2,
+          2,
+          0,
+          2,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          2,
+          2,
+          0,
+          2
+        ],
+        "shortest_detecting_permutation": [
+          6,
+          0,
+          2,
+          5,
+          10,
+          8,
+          1,
+          7,
+          3,
+          4,
+          9
+        ],
+        "shortest_detecting_word_generator_indices": [
+          0,
+          1
+        ]
+      },
       "nonzero_ext_orbit": {
         "endpoint_scalar_group_order": 4,
         "module_isomorphism_classes_of_nonsplit_extensions": 1,
