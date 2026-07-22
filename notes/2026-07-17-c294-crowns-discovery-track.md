@@ -1067,3 +1067,16 @@ axes; its verdict should be read with this in mind before attributing any 7-vs-1
 `(2/q)` alone.
 **Evidence:** OPEN — bookkeeping observation over certified endpoints.
 **Status:** open lead; unallocated — reading guidance for C465, no task shape
+
+## 2026-07-22 — continuation-program leads from the master-stroke ej pass
+
+Provenance: `2026-07-22-master-stroke-ej.md` (sections 1.2, 1.3); computed exact facts, no allocation.
+
+- **q=19 residue-rule fork.** The B-falsifier residue asymmetry is underdetermined at n=2: both the
+  `(2/q)`/silver-golden family and the `(-3/q)` family fit q=7,11 exactly, and they predict opposite
+  marked residues (0 vs 4 in `F_5`) at q=19, where the trace-rule frame extends verbatim (`p=5`
+  prime) and the full C466 character triple equals 11's. One trace computation on any future frozen
+  q=19 configuration kills at least one family.
+- **q=31 double frame degeneration.** `m=(31+1)/4=8` composite forces coefficient characteristic 2,
+  and 31 splits in both `Q(sqrt5)` and `Q(sqrt2)` — the H4 door is a new regime, not a parameter
+  bump of the rank-3 frame.

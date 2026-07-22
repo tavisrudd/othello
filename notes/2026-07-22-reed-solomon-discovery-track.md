@@ -46,3 +46,14 @@ is a framing lead carrying a novelty-risk flag.  Logging allocates nothing.
    points, so for any six-point conic support all `q-5` conic points off the support are deep and
    rank one.  C476's radical-orbit computation is therefore the stabilizer action on a set of
    known size `q-5` per support.
+
+## 2026-07-22 — typed-output framing import from the certified torsor close
+
+Provenance: `2026-07-22-master-stroke-ej.md` (section 4.2); framing lead, no allocation.
+
+C484 (q=8 `C3` orientation descent) should import C473's pointed/unpointed output-type discipline
+wholesale: state recovery as unqualified on the pointed category and as a torsor identification
+after forgetting, rather than as a qualified failure. C482's pure/child-relative separation is the
+moduli-level analogue (continuous fibre loss vs free finite torsor); C485 can adopt the close's
+typed phrasing for the child-relative clause verbatim. The crowns C486 battery (T_11 bridge) may
+give the RS extremal fibre the certified torsor object directly.
