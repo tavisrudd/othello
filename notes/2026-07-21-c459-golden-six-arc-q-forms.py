@@ -268,6 +268,17 @@ def build_certificate():
     assert len(conjugacy_orbit) == 10
     assert sum(compose(a, t) == compose(t, a) for a in A5_perm) == 6
 
+    # The companion inner/trivial-action taxonomy has two classes: 1 and a double transposition.
+    even_involutions = [p for p in A5_perm if compose(p, p) == tuple(range(5))]
+    assert len(even_involutions) == 16
+    nontrivial_involutions = [p for p in even_involutions if p != tuple(range(5))]
+    d = nontrivial_involutions[0]
+    inner_orbit = {
+        compose(compose(a, d), tuple(a.index(i) for i in range(5))) for a in A5_perm
+    }
+    assert len(inner_orbit) == 15
+    assert sum(compose(a, d) == compose(d, a) for a in A5_perm) == 4
+
     cocycles = []
     for u in sorted(descent_data, key=mat_key):
         cocycles.append({"matrix": mat_json(u), "raw_cocycle_scalar": q_json(cocycle_scalar(m, u))})
@@ -313,6 +324,11 @@ def build_certificate():
             "canonical_fixed_point": ["1", "0", "0"],
             "canonical_polar_line": ["1", "0", "1/3"],
             "representation_shape": "1+2 over Q",
+            "normal_C3_eigenpair": {
+                "polar_line": "3*x+z=0",
+                "intersection_with_conic": "5*(y^2+3*x^2)=0",
+                "field": "Q(sqrt(-3))",
+            },
         },
         "classification": {
             "quadratic_descent_classes": 1,
@@ -324,6 +340,21 @@ def build_certificate():
                 "cocycles_as_odd_involutions": len(transpositions),
                 "A5_conjugacy_orbits": 1,
                 "fixed_centralizer_order": 6,
+            },
+            "quadratic_A5_descent_taxonomy": {
+                "inner_or_trivial_action": {
+                    "H1_class_count": 2,
+                    "cocycle_orbit_sizes": [1, 15],
+                    "rational_fixed_groups": ["A5", "V4"],
+                    "fixed_group_orders": [60, 4],
+                },
+                "outer_action": {
+                    "H1_class_count": 1,
+                    "cocycle_orbit_sizes": [10],
+                    "rational_fixed_groups": ["S3"],
+                    "fixed_group_orders": [6],
+                },
+                "quadratic_split_rational_symmetry_types": ["A5", "V4", "S3"],
             },
             "what_descends": ["six-point configuration as a degree-6 Q-subscheme", "anisotropic conic", "unique polar-pair matching"],
             "what_does_not_descend": "the golden sheet labeling: S versus sigma(S), equivalently a canonical prime above 11 / one of the two reduced singleton sheets",

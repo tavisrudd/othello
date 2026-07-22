@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from fractions import Fraction as F
+from itertools import permutations
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -158,12 +159,31 @@ def main():
     assert len(rational) == 6
     assert all(x[1] == 0 for A in rational for row in A for x in row)
     assert sorted(order(A) for A in rational) == [1, 2, 2, 2, 3, 3]
+    pole = (O, Z, Z)
+    assert all(normv(mv(A, pole)) == pole for A in rational)
+    line_x = (O, Z, (F(-3), F(0)))
+    line_y = (Z, O, Z)
+    assert dot(line_x, mv(gram, line_x)) == (F(15), F(0))
+    assert dot(line_y, mv(gram, line_y)) == (F(5), F(0))
+    assert dot(line_x, mv(gram, line_y)) == Z
+
+    def compose(p, q): return tuple(p[q[i]] for i in range(5))
+    def parity(p): return sum(p[i] > p[j] for i in range(5) for j in range(i + 1, 5)) % 2
+    S5 = list(permutations(range(5)))
+    A5p = [p for p in S5 if parity(p) == 0]
+    odd_inv = [p for p in S5 if parity(p) == 1 and compose(p, p) == tuple(range(5))]
+    even_inv = [p for p in A5p if compose(p, p) == tuple(range(5))]
+    assert (len(A5p), len(odd_inv), len(even_inv)) == (60, 10, 16)
+    t = odd_inv[0]; d = next(p for p in even_inv if p != tuple(range(5)))
+    assert sum(compose(a, t) == compose(t, a) for a in A5p) == 6
+    assert sum(compose(a, d) == compose(d, a) for a in A5p) == 4
 
     assert cert["enumeration"]["transporter_count"] == len(T)
     assert cert["enumeration"]["projective_cocycle_count"] == len(D)
     assert cert["enumeration"]["gauge_orbit_sizes"] == orbit_sizes
     assert cert["rational_stabilizer"]["element_order_distribution"] == [1, 2, 2, 2, 3, 3]
     assert cert["representative"]["descended_conic_gram"] == [["3", "0", "1"], ["0", "5", "0"], ["1", "0", "2"]]
+    assert cert["classification"]["quadratic_A5_descent_taxonomy"]["quadratic_split_rational_symmetry_types"] == ["A5", "V4", "S3"]
     print("PASS C459 replay: independent Q(phi) arithmetic reproduces the unique S3 descent")
 
 

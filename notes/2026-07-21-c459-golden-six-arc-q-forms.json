@@ -8,6 +8,40 @@
       "fixed_centralizer_order": 6,
       "outer_involution_model": "conjugation by a transposition in Aut(A5)=S5"
     },
+    "quadratic_A5_descent_taxonomy": {
+      "inner_or_trivial_action": {
+        "H1_class_count": 2,
+        "cocycle_orbit_sizes": [
+          1,
+          15
+        ],
+        "fixed_group_orders": [
+          60,
+          4
+        ],
+        "rational_fixed_groups": [
+          "A5",
+          "V4"
+        ]
+      },
+      "outer_action": {
+        "H1_class_count": 1,
+        "cocycle_orbit_sizes": [
+          10
+        ],
+        "fixed_group_orders": [
+          6
+        ],
+        "rational_fixed_groups": [
+          "S3"
+        ]
+      },
+      "quadratic_split_rational_symmetry_types": [
+        "A5",
+        "V4",
+        "S3"
+      ]
+    },
     "quadratic_descent_classes": 1,
     "verdict": "the exhibited S3 form is the unique Q-form split by Q(sqrt5) in the frozen decorated category",
     "what_descends": [
@@ -692,6 +726,11 @@
       ]
     ],
     "isomorphism_type": "S3",
+    "normal_C3_eigenpair": {
+      "field": "Q(sqrt(-3))",
+      "intersection_with_conic": "5*(y^2+3*x^2)=0",
+      "polar_line": "3*x+z=0"
+    },
     "order": 6,
     "representation_shape": "1+2 over Q"
   },

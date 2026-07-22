@@ -138,6 +138,42 @@ descent selects an **edge of the five-letter model** (a transposition), not a fi
 normalizer. The ten raw cocycles are canonically the ten edges of `K5`; the descent class forgets
 which edge was used.
 
+## Second-order upgrade: the quadratic `A5` taxonomy and an Eisenstein shadow
+
+The same two-line calculation classifies every quadratic Galois-action type on an `A5`-object:
+
+| action on geometric `A5` | cocycle orbits | rational fixed groups |
+|:--|:--|:--|
+| inner (equivalently, after twisting, trivial) | `1 + 15` | `A5`, `V4` |
+| outer | `10` | `S3` |
+
+For the trivial action, cocycles are the identity and the single conjugacy class of 15 double
+transpositions; their centralizers have orders 60 and 4. For the outer action, the preceding
+transposition argument gives the unique class with centralizer order 6. Thus the complete list of
+rational automorphism groups for a quadratic-split `A5` form is
+
+```text
+A5, V4, S3.
+```
+
+In particular `D5` is not merely absent from this coordinate search: it is absent from the entire
+quadratic `A5` taxonomy. The geometric automorphism group of the C459 object does descend over
+`Q`, but as the outer-twisted finite `A5` group, not the constant group; its `Q`-rational points are
+exactly `S3`. This is the clean group-action version of “the full golden `A5` does not descend.”
+
+There is also an unexpected arithmetic residue. The canonical `S3`-fixed pole is `[1:0:0]`, and
+its polar line is `3x+z=0`. Restricting the descended conic to that line gives
+
+```text
+5(y^2+3x^2)=0.
+```
+
+Hence its two conic points live over `Q(sqrt(-3))`; they are the eigenpoint pair of the unique
+normal `C3` in `S3`. The golden quadratic descent therefore leaves a canonical **Eisenstein**
+pair on the rational form. This is a concrete candidate bridge to the programme's cubic/`mu_3`
+layer, but no identification with C417's cubic moment is certified here; Phase 3 may test that
+comparison without reopening C459.
+
 ## Scope and boundary
 
 The completeness statement is for forms of the frozen decorated six-arc split by the specified
@@ -169,9 +205,9 @@ input against C442's committed manifest; C442 in turn hash-pins the frozen C379/
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary generator/checker `.py` | 13,696 | `a7c06b843894cc51d3de17a761f233940eec68db4608fb8cf01812475f97460b` |
-| independent replay `.py` | 5,214 | `0d510bb9138627a6358362474d4769ea4a8ea716407951b65af9e5352b419ab2` |
-| canonical certificate `.json` | 15,315 | `1468f275fa7277f7c404b8aaa68ca0a5e6179e9de810ea0c8c285d2beb5279ee` |
+| primary generator/checker `.py` | 15,090 | `94c080eabafc106ea746d208fdf0b881d9254afa0317d6fb56e68bf4b58a3bc4` |
+| independent replay `.py` | 6,342 | `0bfdb3af09fe6ad9d7b99de2adfb613a2d4afbd57563fb021e9b6ab780a4c592` |
+| canonical certificate `.json` | 16,131 | `f3670a0830907c55b96b73741941e3d723799f2899e618426eceda67399ad550` |
 
 Trusted computational boundary: exact rational arithmetic in the pair model
 `Q(phi)=Q[phi]/(phi^2-phi-1)`, exact projective normalization, and exhaustive finite closure of the
