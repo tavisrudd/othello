@@ -806,3 +806,58 @@ golden gate "know" the end of the odd Barker family, or is this order-level nume
 **Evidence:** OPEN — both endpoints are certified (C452 Barker words, C453 inertness of 13), the
 connection is unexamined.
 **Status:** open lead; unallocated — framing sentence only, no task shape yet
+
+### 2026-07-21 — C449's Legendre-coset torus is a candidate mechanism under C399's Coxeter conic phase
+
+**Provenance:** same review pass, extended over C440--C451 against
+`notes/2026-07-20-clebsch-paper-planning.md`.
+**Was I looking for this?:** no — the review asked what the weil-roof results add to the earlier
+clebsch spine.
+**Observed / musing:** the paper's portable prelude (`thm-rank3-reflection-complement-code`, C399)
+states the Coxeter conic phase as a synthesis result. C449 now certifies that the Coxeter square
+has order `h/2=(q-1)/2`, generates the complete diagonal split torus of `PSL_2(q)`, and has moving
+blocks exactly the Legendre cosets. That places a torus/quadratic-residue mechanism directly
+beneath the conic-phase statement: the phase dichotomy would read as the square/nonsquare
+dichotomy of the split torus the Coxeter element half-generates.
+**Why it may matter / strongest question:** a mechanism sentence for the paper's prelude, and a
+possible uniform proof route replacing case-by-case phase verification. Does the C449 torus
+picture reprove C399's phase table at A3/B3/H3 in one statement?
+**Evidence:** REASONED over CHECKED endpoints (C449 bundle, C399 note); no derivation attempted.
+**Status:** open lead; unallocated — cross-lane transfer offer to the `clebsch` paper lane, which
+owns any manuscript consequence
+
+### 2026-07-21 — C454's three-line split names the paper's "cubic not unique" caveat
+
+**Provenance:** same review pass; C454's `1,0,1,1` split read against the planning doc's
+must-not-claim list.
+**Was I looking for this?:** no — the prime-family forecast entry above records the split itself;
+this is its paper-facing consequence.
+**Observed / musing:** the planning doc forbids claiming "the cubic relative invariant is unique —
+the outer-odd cubic space has dimension three." C454 now certifies that this three-dimensional
+space splits canonically across `t^2L`, `t Sym^2L`, `Sym^3L` (with no `t^3` component) and that
+the three component lines recover C412's rank-one, mixed, and pure-heart Tate-kernel lines. The
+defensive caveat can become a structured statement: the cubic space is not a featureless
+three-space but a named three-line configuration, with the signed-moment cubic located in it.
+**Why it may matter / strongest question:** upgrades a scope boundary into a small positive
+proposition for the C406+C411 spine, without touching C412's non-identification negative.
+**Evidence:** CHECKED endpoints (C454 bundle, C412 note); the paper-facing packaging is untested
+against the frozen manuscript conventions.
+**Status:** open lead; unallocated — cross-lane transfer offer to the `clebsch` paper lane
+
+### 2026-07-21 — all three C451 Jacobians superspecial at both primes: unexplained
+
+**Provenance:** same review pass; C451's Cartier--Manin battery.
+**Was I looking for this?:** no — C451's card asked whether theta data discriminates the sheets;
+superspecialness was certified as context and its uniformity was not questioned.
+**Observed / musing:** C451 certifies that all three Jacobians are superspecial, at `q=7` and
+`q=11` alike. Superspecialness is a strong, rare condition; its holding uniformly across both
+frozen primes and all three curves is a coincidence-shaped fact with no recorded mechanism. It is
+visibly independent of the `(2/q)` axis (which separates 7 from 11) — so it is either forced by
+the construction (large automorphisms / quotient structure) or a genuinely separate arithmetic
+face of the frozen configuration.
+**Why it may matter / strongest question:** if forced, the forcing argument is a clean lemma; if
+not forced, a split prime with a non-superspecial sheet Jacobian would be a new discriminating
+axis. Cheapest test rides along with C466's secondary Arf item: compute the Cartier--Manin rank at
+`q=19` or `31` if the machinery transfers.
+**Evidence:** CHECKED endpoints (C451 bundle); the uniformity is unexplained.
+**Status:** open lead; unallocated
