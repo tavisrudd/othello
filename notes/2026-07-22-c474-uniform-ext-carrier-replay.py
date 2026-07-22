@@ -235,6 +235,99 @@ def hom_matrix(w, v, p: int):
     return tuple(tuple(images[col][row] for col in range(d * d)) for row in range(d * d))
 
 
+def intertwiner_summary(source_generators, target_generators, p: int):
+    n = len(source_generators[0])
+    equations = []
+    for source, target in zip(source_generators, target_generators):
+        for i in range(n):
+            for j in range(n):
+                equation = [0] * (n * n)
+                for k in range(n):
+                    equation[k * n + j] = (equation[k * n + j] + source[i][k]) % p
+                    equation[i * n + k] = (equation[i * n + k] - target[k][j]) % p
+                equations.append(tuple(equation))
+    basis = kernel_basis(equations, p, n * n)
+    invertible = []
+    for coefficients in itertools.product(range(p), repeat=len(basis)):
+        vector = tuple(sum(coefficients[k] * basis[k][i] for k in range(len(basis))) % p
+                       for i in range(n * n))
+        if rank([vector[i * n:(i + 1) * n] for i in range(n)], p, n) == n:
+            invertible.append(vector)
+    if not invertible:
+        return None
+    return {
+        "hom_space_dimension": len(basis),
+        "invertible_intertwiner_count": len(invertible),
+        "canonical_intertwiner": list(min(invertible)),
+        "intertwining_relations_verified": True,
+    }
+
+
+def idempotent_summary(generators, p: int):
+    n = len(generators[0])
+    equations = []
+    for action in generators:
+        for i in range(n):
+            for j in range(n):
+                equation = [0] * (n * n)
+                for k in range(n):
+                    equation[k * n + j] = (equation[k * n + j] + action[i][k]) % p
+                    equation[i * n + k] = (equation[i * n + k] - action[k][j]) % p
+                equations.append(tuple(equation))
+    basis = kernel_basis(equations, p, n * n)
+    counts = {}
+    for coefficients in itertools.product(range(p), repeat=len(basis)):
+        vector = tuple(sum(coefficients[k] * basis[k][i] for k in range(len(basis))) % p
+                       for i in range(n * n))
+        matrix = tuple(tuple(vector[i * n + j] for j in range(n)) for i in range(n))
+        if mm(matrix, matrix, p) == matrix:
+            matrix_rank = rank(matrix, p, n)
+            counts[str(matrix_rank)] = counts.get(str(matrix_rank), 0) + 1
+    return {"endomorphism_ring_dimension": len(basis), "idempotent_rank_counts": counts}
+
+
+def word_action(generators, word, p: int):
+    result = eye(len(generators[0]))
+    for generator_index in word:
+        result = mm(result, generators[generator_index], p)
+    return result
+
+
+def local_cocycle_spaces(generators, actions, p: int):
+    words = group_words(generators)
+    n = len(actions[0])
+    width = len(generators) * n
+    identity = tuple(range(len(generators[0])))
+    expressions = {identity: tuple(tuple(0 for _ in range(width)) for _ in range(n))}
+    group_actions = {identity: eye(n)}
+    queue = deque([identity])
+    constraints = []
+    while queue:
+        g = queue.popleft()
+        for generator_index, generator in enumerate(generators):
+            h = product(g, generator)
+            injection = tuple(tuple(int(j == generator_index * n + i) for j in range(width))
+                              for i in range(n))
+            candidate = tuple(tuple((x + y) % p for x, y in zip(a, b)) for a, b in zip(
+                expressions[g], mm(group_actions[g], injection, p)))
+            action_h = mm(group_actions[g], actions[generator_index], p)
+            if h not in expressions:
+                expressions[h] = candidate
+                group_actions[h] = action_h
+                queue.append(h)
+            else:
+                constraints.extend(tuple((x - y) % p for x, y in zip(a, b))
+                                   for a, b in zip(candidate, expressions[h]))
+    z_basis = kernel_basis(constraints, p, width)
+    coboundaries = []
+    for j in range(n):
+        vector = []
+        for action in actions:
+            vector.extend((int(i == j) - action[i][j]) % p for i in range(n))
+        coboundaries.append(tuple(vector))
+    return words, z_basis, canonical_basis(coboundaries, p, width)
+
+
 def derive_case(record, upstream, oriented):
     q, p, d = record["q"], record["field"], record["endpoint_dimension"]
     core = tuple(tuple(x) for x in upstream["spaces"]["shared_edge_row_span"]["basis"])
@@ -401,6 +494,23 @@ def derive_case(record, upstream, oriented):
     assert mechanism["endpoint_is_endotrivial"] is True
     assert mechanism["stable_endpoint_class"] == "Omega^1(J1)"
     assert mechanism["stable_hom_class"] == "J1; every other Hom summand is free/projective"
+    orbit_model = mechanism["orbit_category_endpoint_model"]
+    if p == 2:
+        assert orbit_model == {
+            "sylow_group": "D8",
+            "stabilizer": "reflection subgroup H=<s> of order 2",
+            "transitive_orbit": "D8/H of size 4",
+            "endpoint": "reduced linearization ker(F2[D8/H] -> F2)",
+            "projective_summand_dimension": 0,
+        }
+    else:
+        assert orbit_model == {
+            "sylow_group": "C3",
+            "stabilizer": "trivial subgroup H=1",
+            "transitive_orbit": "C3/H of size 3",
+            "endpoint": "reduced linearization ker(F3[C3] -> F3) plus one free F3[C3] summand",
+            "projective_summand_dimension": 3,
+        }
     factorization_candidates = []
     fixed_image_basis = []
     for coefficients in itertools.product(range(p), repeat=len(fixed_basis)):
@@ -579,6 +689,156 @@ def derive_case(record, upstream, oriented):
         assert ladder["reflection_restriction_kernel_dimension"] == 1
         assert ladder["fusion_stable_upper_bound_dimension"] == 1
 
+        v4_replay = []
+        for label, v4_reflection in (("<r^2,s>", reflection),
+                                     ("<r^2,rs>", product(target_g, reflection))):
+            v4_generators = [central_involution, v4_reflection]
+            v4_words, v4_z_basis, v4_b_basis = local_cocycle_spaces(
+                v4_generators, [actions[g] for g in v4_generators], 2)
+            frozen_v4 = tuple([*stored[central_involution], *stored[v4_reflection]])
+            frozen_nonzero = rank([*v4_b_basis, frozen_v4], 2, 2 * n) == len(v4_b_basis) + 1
+            c2_restrictions = []
+            for involution in sorted(g for g in v4_words if g != identity_perm):
+                c2_coboundaries = [tuple((int(i == j) - actions[involution][i][j]) % 2
+                                          for i in range(n)) for j in range(n)]
+                c2_rank = rank(c2_coboundaries, 2, n)
+                c2_restrictions.append(
+                    rank([*c2_coboundaries, stored[involution]], 2, n) == c2_rank + 1)
+            d8_profiles = []
+            for coefficients in itertools.product(range(2), repeat=len(sylow_h_basis)):
+                if not any(coefficients):
+                    continue
+                sylow_cocycle = tuple(sum(coefficients[k] * sylow_h_basis[k][i]
+                                           for k in range(len(sylow_h_basis))) % 2
+                                       for i in range(2 * n))
+                v4_value = tuple([
+                    *mv(sylow_expressions[central_involution], sylow_cocycle, 2),
+                    *mv(sylow_expressions[v4_reflection], sylow_cocycle, 2),
+                ])
+                v4_nonzero = rank([*v4_b_basis, v4_value], 2, 2 * n) == len(v4_b_basis) + 1
+                profile_c2 = []
+                for involution in sorted(g for g in v4_words if g != identity_perm):
+                    c2_coboundaries = [tuple((int(i == j) - actions[involution][i][j]) % 2
+                                              for i in range(n)) for j in range(n)]
+                    c2_rank = rank(c2_coboundaries, 2, n)
+                    involution_value = mv(sylow_expressions[involution], sylow_cocycle, 2)
+                    profile_c2.append(
+                        rank([*c2_coboundaries, involution_value], 2, n) == c2_rank + 1)
+                d8_profiles.append({
+                    "d8_h1_coordinates": list(coefficients),
+                    "v4_restriction_nonzero": v4_nonzero,
+                    "three_C2_restrictions_nonzero": profile_c2,
+                    "v4_restriction_is_essential": v4_nonzero and not any(profile_c2),
+                })
+            v4_replay.append({
+                "subgroup": label,
+                "h1_dimension": len(v4_z_basis) - len(v4_b_basis),
+                "frozen_restriction_nonzero": frozen_nonzero,
+                "frozen_restrictions_to_three_C2_subgroups_nonzero": c2_restrictions,
+                "frozen_class_is_essential_on_V4": frozen_nonzero and not any(c2_restrictions),
+                "all_nonzero_D8_h1_restriction_profiles": d8_profiles,
+            })
+        assert v4_replay == mechanism["binary_elementary_abelian_detection"]["subgroups_inside_recorded_D8"]
+
+        full = mechanism["full_D8_realization"]
+        elements = sorted(sylow_words)
+        identity = identity_perm
+        other_reflection = product(target_g, reflection)
+        relative_modules = {}
+        for label, subgroup_generator in (("H0=<s>", reflection), ("H1=<rs>", other_reflection)):
+            subgroup = (identity, subgroup_generator)
+            cosets = sorted({tuple(sorted(product(h, x) for h in subgroup)) for x in elements})
+            coset_index = {coset: i for i, coset in enumerate(cosets)}
+            coset_permutations = []
+            for generator in (target_g, reflection):
+                coset_permutations.append(tuple(coset_index[tuple(sorted(
+                    product(h, product(coset[0], generator)) for h in subgroup))]
+                    for coset in cosets))
+            augmentation_basis = tuple(tuple(int(j == i) ^ int(j == 3) for j in range(4))
+                                       for i in range(3))
+            kernel_generators = [action_matrix(augmentation_basis, permutation, 2)
+                                 for permutation in coset_permutations]
+            dual_generators = [tuple(zip(*inverse(action, 2))) for action in kernel_generators]
+            relative_modules[f"Omega(D8/{label})"] = kernel_generators
+            relative_modules[f"Omega(D8/{label})^*"] = dual_generators
+
+        endpoint_standard = {}
+        for name, generators in (("socle", vs), ("head", ws)):
+            endpoint_generators = [word_action(generators, words[target_g], 2),
+                                   word_action(generators, words[reflection], 2)]
+            matches = []
+            for label, standard in relative_modules.items():
+                summary = intertwiner_summary(endpoint_generators, standard, 2)
+                if summary is not None:
+                    matches.append((label, standard, summary))
+            endpoint_record = full["endpoint_realizations"][name]
+            assert [label for label, _, _ in matches] == endpoint_record["equivalent_relative_syzygy_descriptions"]
+            label, standard, summary = matches[0]
+            assert label == endpoint_record["relative_syzygy_identification"]
+            assert summary == endpoint_record["relative_syzygy_explicit_isomorphism"]
+            endpoint_standard[name] = standard
+
+            end_generators = [hom_matrix(action, action, 2) for action in endpoint_generators]
+            trace_zero_basis = canonical_basis([
+                *(tuple(int(i == position) for i in range(9)) for position in (1, 2, 3, 5, 6, 7)),
+                tuple(int(i in (0, 8)) for i in range(9)),
+                tuple(int(i in (4, 8)) for i in range(9)),
+            ], 2, 9)
+            trace_actions = []
+            for action in end_generators:
+                trace_actions.append(tuple(coordinates(
+                    tuple(sum(vector[k] * action[k][j] for k in range(9)) % 2 for j in range(9)),
+                    trace_zero_basis, 2) for vector in trace_zero_basis))
+            trace_group_actions = [word_action(trace_actions, word, 2) for word in sylow_words.values()]
+            cyclic_vectors = []
+            for coefficients in itertools.product(range(2), repeat=8):
+                if not any(coefficients):
+                    continue
+                orbit = [tuple(sum(coefficients[k] * action[k][j] for k in range(8)) % 2
+                               for j in range(8)) for action in trace_group_actions]
+                if rank(orbit, 2, 8) == 8:
+                    cyclic_vectors.append(coefficients)
+            assert len(cyclic_vectors) == endpoint_record["regular_cyclic_vector_count"]
+            assert list(min(cyclic_vectors)) == endpoint_record["canonical_regular_cyclic_vector_in_trace_zero_basis"]
+            assert endpoint_record["projective_summand_dimension"] == 8
+            assert endpoint_record["all_eight_orbit_vectors_are_a_basis"] is True
+
+        standard_coefficient = [hom_matrix(w, v, 2) for v, w in zip(
+            endpoint_standard["socle"], endpoint_standard["head"])]
+        coefficient_summary = intertwiner_summary(
+            [actions[target_g], actions[reflection]], standard_coefficient, 2)
+        assert coefficient_summary == full["coefficient_module"]["relative_syzygy_square_explicit_isomorphism"]
+        assert full["coefficient_module"]["dimension"] == 9
+        element_index = {g: i for i, g in enumerate(elements)}
+        regular_permutations = [tuple(element_index[product(h, generator)] for h in elements)
+                                for generator in (target_g, reflection)]
+        regular_generators = [action_matrix(eye(8), permutation, 2)
+                              for permutation in regular_permutations]
+        trivial_plus_regular = [tuple(
+            [tuple([1, *([0] * 8)])]
+            + [tuple([0, *row]) for row in regular]) for regular in regular_generators]
+        assert intertwiner_summary([actions[target_g], actions[reflection]], trivial_plus_regular, 2) is None
+        assert full["coefficient_module"]["not_isomorphic_to_trivial_plus_regular"] is True
+        cover_rows = []
+        for generator in (target_g, reflection):
+            for h in elements:
+                row = [0] * 8
+                row[element_index[h]] = 1
+                row[element_index[product(generator, h)]] ^= 1
+                cover_rows.append(tuple(row))
+        omega2_basis = kernel_basis(tuple(zip(*cover_rows)), 2, 16)
+        domain_permutations = [tuple([*permutation, *(8 + i for i in permutation)])
+                               for permutation in regular_permutations]
+        omega2_generators = [action_matrix(omega2_basis, permutation, 2)
+                             for permutation in domain_permutations]
+        omega_minus2_generators = [tuple(zip(*inverse(action, 2))) for action in omega2_generators]
+        assert intertwiner_summary([actions[target_g], actions[reflection]], omega2_generators, 2) is None
+        assert intertwiner_summary([actions[target_g], actions[reflection]], omega_minus2_generators, 2) is None
+        assert full["coefficient_module"]["not_isomorphic_to_ordinary_Omega_plus_or_minus_2"] is True
+        assert idempotent_summary([actions[target_g], actions[reflection]], 2) == \
+            full["coefficient_module"]["indecomposability_certificate"]
+        assert full["full_sylow_endotriviality_proved_internally"] is True
+
     def centralizer_dimension(matrices):
         equations = []
         for a in matrices:
@@ -596,6 +856,17 @@ def derive_case(record, upstream, oriented):
     assert record["carrier_rigidity"]["automorphism_group_order"] == p - 1
     assert record["carrier_rigidity"]["projectivized_ext_points"] == 1
     assert record["carrier_rigidity"]["extension_middle_module_classes_split_vs_nonsplit"] == 2
+    moduli = record["extension_moduli_groupoid"]
+    assert moduli["cocycle_object_count"] == p ** z_dimension
+    assert moduli["endpoint_fixed_gauge_group_order"] == p ** (d * d)
+    assert moduli["gauge_action_is_free"] is True
+    assert moduli["contractible_components_after_endpoint_fixed_gauge"] == p
+    assert moduli["nonzero_components_before_endpoint_scalar_quotient"] == p - 1
+    assert moduli["unpointed_nonsplit_components"] == 1
+    assert moduli["unpointed_nonsplit_loop_group_order"] == p - 1
+    assert moduli["unpointed_nonsplit_homotopy_type"] == ("point" if p == 2 else "B(C2)")
+    assert moduli["coarse_nonzero_moduli_space"] == "P^0"
+    assert moduli["geometric_nonzero_quotient_stack"] == "B(G_m); its F_p-rational loop group is F_p^*"
     assert len(words) == record["group_order"]
     return {"q": q, "relation_rank": relation_rank, "z1": z_dimension, "b1": b_dimension,
             "h1": z_dimension - b_dimension, "pair_checks": checks}

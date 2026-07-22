@@ -445,6 +445,18 @@
         "head": 1,
         "socle": 1
       },
+      "extension_moduli_groupoid": {
+        "coarse_nonzero_moduli_space": "P^0",
+        "cocycle_object_count": 1024,
+        "contractible_components_after_endpoint_fixed_gauge": 2,
+        "endpoint_fixed_gauge_group_order": 512,
+        "gauge_action_is_free": true,
+        "geometric_nonzero_quotient_stack": "B(G_m); its F_p-rational loop group is F_p^*",
+        "nonzero_components_before_endpoint_scalar_quotient": 1,
+        "unpointed_nonsplit_components": 1,
+        "unpointed_nonsplit_homotopy_type": "point",
+        "unpointed_nonsplit_loop_group_order": 1
+      },
       "field": 2,
       "frozen_extension": {
         "all_group_values": [
@@ -4472,6 +4484,115 @@
         "detecting_cyclic_subgroup_count": 21,
         "detecting_element_count_at_minimal_order": 42,
         "local_module_mechanism": {
+          "binary_elementary_abelian_detection": {
+            "definition_of_essential_here": "nonzero on V4 and zero on every proper nontrivial subgroup C2",
+            "subgroups_inside_recorded_D8": [
+              {
+                "all_nonzero_D8_h1_restriction_profiles": [
+                  {
+                    "d8_h1_coordinates": [
+                      0,
+                      1
+                    ],
+                    "three_C2_restrictions_nonzero": [
+                      true,
+                      true,
+                      false
+                    ],
+                    "v4_restriction_is_essential": false,
+                    "v4_restriction_nonzero": true
+                  },
+                  {
+                    "d8_h1_coordinates": [
+                      1,
+                      0
+                    ],
+                    "three_C2_restrictions_nonzero": [
+                      false,
+                      false,
+                      false
+                    ],
+                    "v4_restriction_is_essential": true,
+                    "v4_restriction_nonzero": true
+                  },
+                  {
+                    "d8_h1_coordinates": [
+                      1,
+                      1
+                    ],
+                    "three_C2_restrictions_nonzero": [
+                      true,
+                      true,
+                      false
+                    ],
+                    "v4_restriction_is_essential": false,
+                    "v4_restriction_nonzero": true
+                  }
+                ],
+                "frozen_class_is_essential_on_V4": true,
+                "frozen_restriction_nonzero": true,
+                "frozen_restrictions_to_three_C2_subgroups_nonzero": [
+                  false,
+                  false,
+                  false
+                ],
+                "h1_dimension": 4,
+                "subgroup": "<r^2,s>"
+              },
+              {
+                "all_nonzero_D8_h1_restriction_profiles": [
+                  {
+                    "d8_h1_coordinates": [
+                      0,
+                      1
+                    ],
+                    "three_C2_restrictions_nonzero": [
+                      false,
+                      false,
+                      false
+                    ],
+                    "v4_restriction_is_essential": true,
+                    "v4_restriction_nonzero": true
+                  },
+                  {
+                    "d8_h1_coordinates": [
+                      1,
+                      0
+                    ],
+                    "three_C2_restrictions_nonzero": [
+                      false,
+                      false,
+                      false
+                    ],
+                    "v4_restriction_is_essential": true,
+                    "v4_restriction_nonzero": true
+                  },
+                  {
+                    "d8_h1_coordinates": [
+                      1,
+                      1
+                    ],
+                    "three_C2_restrictions_nonzero": [
+                      false,
+                      false,
+                      false
+                    ],
+                    "v4_restriction_is_essential": false,
+                    "v4_restriction_nonzero": false
+                  }
+                ],
+                "frozen_class_is_essential_on_V4": true,
+                "frozen_restriction_nonzero": true,
+                "frozen_restrictions_to_three_C2_subgroups_nonzero": [
+                  false,
+                  false,
+                  false
+                ],
+                "h1_dimension": 1,
+                "subgroup": "<r^2,rs>"
+              }
+            ]
+          },
           "binary_sylow_ladder": {
             "central_to_reflection_conjugator_count": 8,
             "central_to_reflection_conjugator_word_generator_indices": [
@@ -4660,6 +4781,228 @@
           ],
           "fixed_quotient_dimension": 1,
           "fixed_space_dimension": 3,
+          "full_D8_realization": {
+            "coefficient_module": {
+              "dimension": 9,
+              "indecomposability_certificate": {
+                "endomorphism_ring_dimension": 11,
+                "idempotent_rank_counts": {
+                  "0": 1,
+                  "9": 1
+                }
+              },
+              "not_isomorphic_to_ordinary_Omega_plus_or_minus_2": true,
+              "not_isomorphic_to_trivial_plus_regular": true,
+              "r_restriction": "J4^2 direct-sum J1",
+              "realization": "Hom(U*,U)=U tensor U is the tensor square of the recorded reflection-relative syzygy",
+              "relative_syzygy_square_explicit_isomorphism": {
+                "canonical_intertwiner": [
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  1,
+                  1
+                ],
+                "hom_space_dimension": 11,
+                "intertwining_relations_verified": true,
+                "invertible_intertwiner_count": 1024
+              }
+            },
+            "cohomological_identification": "H^1(D8,Hom(U*,U)) is H^1 with coefficients in the square of a reflection-relative endotrivial generator",
+            "endpoint_realizations": {
+              "head": {
+                "all_eight_orbit_vectors_are_a_basis": true,
+                "canonical_regular_cyclic_vector_in_trace_zero_basis": [
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "endomorphism_decomposition": "End(U)|D8 = k direct-sum kD8",
+                "equivalent_relative_syzygy_descriptions": [
+                  "Omega(D8/H0=<s>)^*",
+                  "Omega(D8/H1=<rs>)"
+                ],
+                "projective_summand": "trace-zero endomorphisms",
+                "projective_summand_dimension": 8,
+                "regular_cyclic_vector_count": 128,
+                "relative_syzygy_explicit_isomorphism": {
+                  "canonical_intertwiner": [
+                    0,
+                    1,
+                    0,
+                    0,
+                    1,
+                    1,
+                    1,
+                    0,
+                    1
+                  ],
+                  "hom_space_dimension": 2,
+                  "intertwining_relations_verified": true,
+                  "invertible_intertwiner_count": 2
+                },
+                "relative_syzygy_identification": "Omega(D8/H0=<s>)^*",
+                "trivial_summand_generator_identity_matrix_flat": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "socle": {
+                "all_eight_orbit_vectors_are_a_basis": true,
+                "canonical_regular_cyclic_vector_in_trace_zero_basis": [
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "endomorphism_decomposition": "End(U)|D8 = k direct-sum kD8",
+                "equivalent_relative_syzygy_descriptions": [
+                  "Omega(D8/H0=<s>)",
+                  "Omega(D8/H1=<rs>)^*"
+                ],
+                "projective_summand": "trace-zero endomorphisms",
+                "projective_summand_dimension": 8,
+                "regular_cyclic_vector_count": 128,
+                "relative_syzygy_explicit_isomorphism": {
+                  "canonical_intertwiner": [
+                    0,
+                    0,
+                    1,
+                    1,
+                    0,
+                    1,
+                    0,
+                    1,
+                    0
+                  ],
+                  "hom_space_dimension": 2,
+                  "intertwining_relations_verified": true,
+                  "invertible_intertwiner_count": 2
+                },
+                "relative_syzygy_identification": "Omega(D8/H0=<s>)",
+                "trivial_summand_generator_identity_matrix_flat": [
+                  1,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            },
+            "full_sylow_endotriviality_proved_internally": true,
+            "generator_words_in_global_generator_indices": [
+              [
+                0,
+                0,
+                0,
+                1
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                1
+              ]
+            ],
+            "presentation": "D8=<r,s | r^4=s^2=1, srs=r^-1>"
+          },
           "image_intersection_fixed_dimension": 2,
           "inflates_from_quotient_C4_over_C2": true,
           "local_character_intertwiner_factorization": {
@@ -4694,6 +5037,13 @@
             "3": 4
           },
           "nonzero_fixed_class_representatives": 4,
+          "orbit_category_endpoint_model": {
+            "endpoint": "reduced linearization ker(F2[D8/H] -> F2)",
+            "projective_summand_dimension": 0,
+            "stabilizer": "reflection subgroup H=<s> of order 2",
+            "sylow_group": "D8",
+            "transitive_orbit": "D8/H of size 4"
+          },
           "square_subgroup_jordan_decomposition": {
             "jordan_blocks": {
               "J1": 1,
@@ -7575,6 +7925,18 @@
       "endpoint_endomorphism_dimensions": {
         "head": 1,
         "socle": 1
+      },
+      "extension_moduli_groupoid": {
+        "coarse_nonzero_moduli_space": "P^0",
+        "cocycle_object_count": 2541865828329,
+        "contractible_components_after_endpoint_fixed_gauge": 3,
+        "endpoint_fixed_gauge_group_order": 847288609443,
+        "gauge_action_is_free": true,
+        "geometric_nonzero_quotient_stack": "B(G_m); its F_p-rational loop group is F_p^*",
+        "nonzero_components_before_endpoint_scalar_quotient": 2,
+        "unpointed_nonsplit_components": 1,
+        "unpointed_nonsplit_homotopy_type": "B(C2)",
+        "unpointed_nonsplit_loop_group_order": 2
       },
       "field": 3,
       "frozen_extension": {
@@ -37107,6 +37469,13 @@
             "invertible_fixed_intertwiner_count_in_frozen_class": 4374,
             "normal_form": "z(g^a)=a*phi for the additive character a in the coefficient field"
           },
+          "orbit_category_endpoint_model": {
+            "endpoint": "reduced linearization ker(F3[C3] -> F3) plus one free F3[C3] summand",
+            "projective_summand_dimension": 3,
+            "stabilizer": "trivial subgroup H=1",
+            "sylow_group": "C3",
+            "transitive_orbit": "C3/H of size 3"
+          },
           "stable_endpoint_class": "Omega^1(J1)",
           "stable_hom_class": "J1; every other Hom summand is free/projective"
         },
@@ -37283,7 +37652,7 @@
       "sha256": "0f7c8e94d68640d85e8a91c1b973b5e12e728a568742fa4334a20af7b8834765"
     }
   },
-  "schema": "c474-uniform-ext-carrier-v1",
+  "schema": "c474-uniform-ext-carrier-v2",
   "theorem_scope": {
     "common_conclusion": "Ext^1_{F_p PSL_2(q)}(S_q^*,S_q) is one-dimensional and the frozen augmentation is its nonzero class; all nonzero classes give one module-isomorphism orbit",
     "quantified_domain": [
@@ -37295,6 +37664,7 @@
   "trusted_boundary": [
     "exact prime-field linear algebra",
     "complete finite group enumeration from two frozen generators",
-    "all ordered-pair cocycle verification"
+    "all ordered-pair cocycle verification",
+    "explicit Sylow-module intertwiners and exhaustive D8 endomorphism-ring idempotent check"
   ]
 }
