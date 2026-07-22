@@ -7,6 +7,14 @@
 **Verdict:** `PROTECTED C399 BASELINE RETAINED; THE NEW-PAPER PLAN USES THE C406+C411 REPLACEMENT
 SPINE WITH A SELECTIVE C412 MODULAR UPGRADE; NO NATURAL CUBIC-TO-DEPTH IDENTIFICATION IS CLAIMED`
 
+**Revision 2026-07-21:** the two-paper division of the conversation dossier
+(`2026-07-21-clebsch-weil-roof-conversation-report.md` §11) is adopted, and the Phase-1 weil-roof
+battery has landed, so paper 1 gains the certified Rosetta ending described in the new section
+below. Paper 1 = the C406+C411 spine plus the certified faces of the bit and the conjecture as a
+cliffhanger; paper 2 = ownership, mechanism, and continuation, and stays in the `crowns` lane
+until its own planning report exists. The architecture, gates, and routing sections carry dated
+2026-07-21 updates in place.
+
 ## Executive decision
 
 The current Clebsch project has two coherent forms.  The existing C399-led manuscript remains a
@@ -56,6 +64,81 @@ The second form is now the selected mathematical target for the new paper: C411 
 missing conceptual pass and C412 supplied its cleanest modular explanation.  Actual manuscript
 integration still belongs to the paper owner and must carry the remaining source-access gaps.  If
 integration is deferred, the protected first form remains independently submittable.
+
+## Two-paper division and the paper-1 ending (revision 2026-07-21)
+
+The dossier's division is adopted verbatim as the split rule:
+
+- **Paper 1** — *the bit exists, is minimal, is measurable, and wears its faces*, every row
+  certified, plus the roof conjecture staged as a cliffhanger. Paper 1 is this planning report's
+  manuscript: the factorization-memory spine above, closed by one Rosetta section.
+- **Paper 2** — *who owns the faces* (metaplectic canonicity), *the mechanism* (split torus,
+  Dickson/spin-field splitting, quaternion reduction), and *the continuation* (13/19/31, the zeta
+  program, the walls). Paper 2 is owned by the `crowns` lane and its results are indexed in
+  `2026-07-21-clebsch-weil-roof-program.md`; it gets its own planning report after C465/C466
+  land and must not be accumulated into paper 1.
+- **Mutual protection:** paper 1's referee cannot demand the roof — every row in its table is a
+  certificate; paper 2 inherits a certified foundation and pre-registered predictions; if the
+  remaining roof clauses collapse, paper 1 stands unchanged and the sequel becomes a mechanism
+  paper (it already has certified mechanism content independent of the roof).
+
+### Paper-1 narrative arc
+
+The spine order of the architecture section stands (steps 1–6). The revision adds the staging
+frame and the closing section:
+
+- **Frame (kills "singular exception"):** A3/B3/H3 is the complete irreducible rank-3 Coxeter
+  list; each conic phase `q = h+1 = 5, 7, 11` lands on a named exceptional object, and the
+  isolation theorems the paper proves (`thm-clebsch-why11`, `thm-clebsch-family-uncovered`) are
+  the shadow of classifications the literature already owns. A3 is stated as the degenerate
+  control, not a third full data point.
+- **Closing section (one section, not six):** the Rosetta table — one row per certified
+  incarnation of the bit: object, involution, certificate, credit, epistemic status. Five rows
+  are funded; the sixth died by its own gating rule (below). The cliffhanger follows the table.
+
+### Rosetta-row ledger (status at 2026-07-21)
+
+| Row | Face                                  | Status | Certificates / notes |
+|:----|:--------------------------------------|:-------|:----------------------|
+| 1   | Design polarity (Fano / biplane)      | CERTIFIED | C450 Gram profiles; C452 QR difference sets; uniqueness classical |
+| 2   | QR perfect-code outer symmetry        | CERTIFIED (bundle pending) | C452; exact span probe checked; durable bundle = C464 (queued); no `M_12` claim |
+| 3   | `mu_3` sign / low-degree threshold    | PROVED | C406/C412/C430; the paper's own spine |
+| 4   | Advice complexity exactly one         | PROVED, STRENGTHENED | C413/C379/C417 as planned; C456/C467 resolved the dossier's AME trap the labeled way: all-degree LU collapse, so the advice framing is the theorem, not a hedge |
+| 5   | Frobenius / spin-prime covariation    | CERTIFIED AS A LAW | C453 mod-40 fusion law with the exact `(2/q)` cut; the load-bearing row landed; mechanism (Dickson/biquadratic) stays in paper 2 (C466) |
+| 6   | Theta / Arf parity                    | DEAD — omit | C451: Arf differs across primes but does not separate the sheets; the dossier's gating rule ("five rows is fine") applies |
+
+### Cliffhanger (three beats, updated to certified form)
+
+1. *Mystery* — the 5/6 dimensional coincidence plus C455's exact scoped statement (the three
+   frozen matrices restrict one ambient `Sp_6(F_11)` Weil Weyl operator; genuine normalization
+   `rho(w) = iF`). State only the certified scoped wording; C450's sharp negative forbids any
+   module-identification phrasing.
+2. *Prophecy* — no longer a blind guess: the certified mod-40 law says the bit survives at 19 and
+   fuses at 31 (`(2/31) = +1`), with the H4/600-cell phase as the gated tease. This is stronger
+   than the dossier's version because it is a proved law applied forward, not a prediction.
+3. *Stakes* — the walls: perfect codes end at 11, odd Barker at 13 (and 13 is golden-inert —
+   one-sentence remark only), polytopes at 19 in the ambient classification only (the red-team
+   category fix). A q=13 phase must collect the last odd Barker word or the tower ends at 11.
+
+### Red-team discipline carried into drafting
+
+11-cell claims at vertex-facet design level only; dualities vs polarities stated correctly;
+"chirality" disambiguated from chiral-polytope usage at first use; the `+/-6` readout staged as
+measurable-given-decoration, never determinable-from-child; no `M_12` overclaim
+(`PSL_2(11)` maximal in `M_11`); Paley-deflation credit (Pan–Wu–Yin and classical QR territory)
+carried from the C406 audit into the table's credit column; every row's literature audit per
+`literature-audit-conventions.md` before any absence wording.
+
+### Paper-1-facing intake from the 2026-07-21 weil-roof battery
+
+Only these enter paper 1, and only through the ledger above: C450 (row 1), C452 (rows 1–2 and
+the Barker wall), C464 when landed (row 2 bundle), C453 (row 5 and the prophecy beat), C451
+(row 6 death, one boundary sentence), C455 (mystery beat, scoped sentence only), C456/C467
+(row 4 strengthening; the golden-Fourier-duality mechanism itself is paper-2 material with a
+one-line pointer from paper 1). Everything else from the battery — torsors (C462/C463), split
+torus (C449), quaternion reduction (C457), Dickson/biquadratic (C466), Brauer bridge (C465),
+zeta program (C468), Klein degeneration — is paper 2 and appears in paper 1 only inside the
+cliffhanger's pointers, if at all.
 
 ## Complete results -> paper -> proofs ledger
 
@@ -187,18 +270,24 @@ The paper must not claim:
 If the C406 branch is selected, the paper should become shorter in theorem count and stronger in
 mechanism.  A recommended order is:
 
-1. the integral H3 hexagon and the C399 Coxeter conic phases;
+1. the integral H3 hexagon and the C399 Coxeter conic phases, staged with the complete-rank-3
+   frame (revision 2026-07-21: the "singular exception" rebuttal is the opening posture, with A3
+   as the stated degenerate control);
 2. the q=11 non-GRS parent and its full-conic GRS deep-hole child;
 3. C403's precise forgetting theorem and the conic-ideal factorization quotient;
 4. C406's harmonic image, balanced-sheet reconstruction, and cubic orientation;
 5. C411's mixed bi-Hecke derivation of the H3 depth profiles, C412's parity/primitive-dependence
    theorem and compact projective-cover quotient, followed by C378's odd Fourier map and C379
    decorated parent recovery;
-6. C372/C373 intrinsic syndrome algebra and return to the unmarked hexagon.
+6. C372/C373 intrinsic syndrome algebra and return to the unmarked hexagon;
+7. (revision 2026-07-21) the closing Rosetta section — the five certified rows of the ledger
+   above, the credit column carried from the audits, and the three-beat cliffhanger — followed by
+   nothing: the table is the ending, and one soft row would poison it.
 
 C376's cubic-surface character and C374's AME separation are strong corollaries or companion
 endpoints.  They should not become coequal spines.  C407--C409 should be compressed to the exact
-lemmas or scope controls they supply.
+lemmas or scope controls they supply.  C456/C467 enter only as the row-4 strengthening sentence
+and a pointer; their mechanism content is paper 2's.
 
 ## Remaining decision gates
 
@@ -221,6 +310,13 @@ lemmas or scope controls they supply.
 5. **External read and release.**  Obtain a cold mathematical/priority read, then perform the
    mixed-verification, exact-commit pinning, provenance, rendering, and immutable-artifact steps in
    the paper handoff.
+6. **(Added 2026-07-21) Rosetta-row promotion and audits.**  Before drafting the closing section:
+   C464 must land (row 2's durable bundle); each row needs its bounded literature audit per
+   `literature-audit-conventions.md` (rows 1–2 sit in heavily classical QR/design/code territory;
+   the dossier's Paley-deflation credit list is the starting point); and the terminology fixes
+   (chirality disambiguation, dualities vs polarities, vertex-facet-level 11-cell wording) are
+   applied at first drafting, not in revision.  Row content is frozen to certificates only — any
+   upgrade landed later by paper-2 work (C465/C466/C468) changes the *sequel*, not this table.
 
 C410 now closes every spanning q=7 six-point external-line closure, not the broader pointed-memory
 problem.  C418 and C419 own the active seven/eight-point balanced-trade and fixed-incidence-moduli
@@ -240,8 +336,12 @@ Read in this order:
 6. `notes/2026-07-20-c411-double-coset-hecke.md` for the conceptual profile/cubic proof;
 7. `notes/2026-07-20-c412-relative-cubic-depth-plane.md` for the selective modular upgrade and its
    non-identification boundary;
-8. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412; and
-9. `notes/handoffs/2026-07-17-crowns.md` for live research ordering outside the manuscript lane.
+8. `notes/2026-07-20-c411-c417-c406-successors.md` only for companion research after C412;
+9. `notes/handoffs/2026-07-17-crowns.md` for live research ordering outside the manuscript lane;
+10. (revision 2026-07-21) `notes/2026-07-21-clebsch-weil-roof-conversation-report.md` §§2–4, 11
+    for the staging frame, red-team fixes, and two-paper division, and
+    `notes/2026-07-21-clebsch-weil-roof-program.md` (read-only) for the certification status of
+    every Rosetta-row input.
 
 No cold session should infer a manuscript edit from a completed crowns theorem.  That transfer is
 owned by the `clebsch` paper lane and remains an explicit architecture decision.
