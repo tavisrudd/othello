@@ -4473,9 +4473,54 @@
         "detecting_element_count_at_minimal_order": 42,
         "local_module_mechanism": {
           "binary_sylow_ladder": {
+            "central_to_reflection_conjugator_count": 8,
+            "central_to_reflection_conjugator_word_generator_indices": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
             "frozen_sylow_class_nonzero": true,
+            "frozen_sylow_h1_coordinates": [
+              1,
+              0
+            ],
+            "fusion_stable_upper_bound_dimension": 1,
             "global_restriction_image_dimension": 1,
             "global_restriction_is_injective_by_odd_index_transfer": true,
+            "nonzero_h1_restriction_profiles": [
+              {
+                "C4_nonzero": true,
+                "central_C2_nonzero": false,
+                "h1_coordinates": [
+                  0,
+                  1
+                ],
+                "reflection_C2_nonzero": true
+              },
+              {
+                "C4_nonzero": true,
+                "central_C2_nonzero": false,
+                "h1_coordinates": [
+                  1,
+                  0
+                ],
+                "reflection_C2_nonzero": false
+              },
+              {
+                "C4_nonzero": false,
+                "central_C2_nonzero": false,
+                "h1_coordinates": [
+                  1,
+                  1
+                ],
+                "reflection_C2_nonzero": true
+              }
+            ],
+            "reflection_restriction_kernel_dimension": 1,
             "reflection_word_generator_indices": [
               0,
               0,
@@ -4486,6 +4531,7 @@
             "relation_constraint_rank": 9,
             "restriction_to_C4_kernel_dimension": 1,
             "restriction_to_C4_rank": 1,
+            "structural_global_dimension_proof": "odd-index transfer injects global H1 into D8 H1; involution fusion forces the reflection-kernel line; the frozen class is nonzero on that line",
             "sylow_b1_dimension": 7,
             "sylow_group": "D8",
             "sylow_h1_dimension": 2,
@@ -4516,6 +4562,36 @@
             0,
             0
           ],
+          "carrier_jordan_surgery": {
+            "diagnostic": "the local carrier is nonsplit exactly when the recorded top nilpotent-power rank jumps by one",
+            "nonsplit_carrier": {
+              "jordan_blocks": {
+                "J2": 1,
+                "J4": 1
+              },
+              "nilpotent_power_ranks_including_identity": [
+                6,
+                4,
+                2,
+                1,
+                0
+              ]
+            },
+            "split_endpoint_sum": {
+              "jordan_blocks": {
+                "J3": 2
+              },
+              "nilpotent_power_ranks_including_identity": [
+                6,
+                4,
+                2,
+                0,
+                0
+              ]
+            },
+            "top_nonzero_nilpotent_power": 3,
+            "top_power_rank_gap_nonsplit_minus_split": 1
+          },
           "coefficient_module_jordan_decomposition": {
             "jordan_blocks": {
               "J1": 1,
@@ -4530,6 +4606,19 @@
             ]
           },
           "cohomology_source": "the unique trivial J1 block; full-length Jordan blocks are free/projective",
+          "determinant_on_frozen_fixed_gauge_coset": {
+            "affine_constant": 1,
+            "affine_linear_coefficients": [
+              0,
+              0
+            ],
+            "coset_dimension": 2,
+            "value_counts": {
+              "0": 0,
+              "1": 4
+            },
+            "verified_on_every_coset_point": true
+          },
           "endpoint_is_endotrivial": true,
           "endpoint_jordan_decomposition": {
             "head": {
@@ -4573,6 +4662,34 @@
           "fixed_space_dimension": 3,
           "image_intersection_fixed_dimension": 2,
           "inflates_from_quotient_C4_over_C2": true,
+          "local_character_intertwiner_factorization": {
+            "canonical_intertwiner": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              1,
+              1
+            ],
+            "canonical_intertwiner_rank": 3,
+            "character_kernel_order": 2,
+            "gauge_from_frozen_cocycle": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "invertible_fixed_intertwiner_count_in_frozen_class": 4,
+            "normal_form": "z(g^a)=a*phi for the additive character a in the coefficient field"
+          },
           "nonzero_fixed_class_map_rank_distribution": {
             "3": 4
           },
@@ -36837,6 +36954,35 @@
             0,
             0
           ],
+          "carrier_jordan_surgery": {
+            "diagnostic": "the local carrier is nonsplit exactly when the recorded top nilpotent-power rank jumps by one",
+            "nonsplit_carrier": {
+              "jordan_blocks": {
+                "J1": 1,
+                "J3": 3
+              },
+              "nilpotent_power_ranks_including_identity": [
+                10,
+                6,
+                3,
+                0
+              ]
+            },
+            "split_endpoint_sum": {
+              "jordan_blocks": {
+                "J2": 2,
+                "J3": 2
+              },
+              "nilpotent_power_ranks_including_identity": [
+                10,
+                6,
+                2,
+                0
+              ]
+            },
+            "top_nonzero_nilpotent_power": 2,
+            "top_power_rank_gap_nonsplit_minus_split": 1
+          },
           "coefficient_module_jordan_decomposition": {
             "jordan_blocks": {
               "J1": 1,
@@ -36850,6 +36996,26 @@
             ]
           },
           "cohomology_source": "the unique trivial J1 block; full-length Jordan blocks are free/projective",
+          "determinant_on_frozen_fixed_gauge_coset": {
+            "affine_constant": 0,
+            "affine_linear_coefficients": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0
+            ],
+            "coset_dimension": 8,
+            "value_counts": {
+              "0": 2187,
+              "1": 2187,
+              "2": 2187
+            },
+            "verified_on_every_coset_point": true
+          },
           "endpoint_is_endotrivial": true,
           "endpoint_jordan_decomposition": {
             "head": {
@@ -36881,6 +37047,66 @@
           "fixed_quotient_dimension": 1,
           "fixed_space_dimension": 9,
           "image_intersection_fixed_dimension": 8,
+          "local_character_intertwiner_factorization": {
+            "canonical_intertwiner": [
+              0,
+              0,
+              2,
+              0,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              1,
+              0,
+              2,
+              1,
+              0,
+              0,
+              1,
+              0,
+              2,
+              0
+            ],
+            "canonical_intertwiner_rank": 5,
+            "character_kernel_order": 1,
+            "gauge_from_frozen_cocycle": [
+              0,
+              1,
+              1,
+              1,
+              2,
+              2,
+              0,
+              0,
+              2,
+              2,
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "invertible_fixed_intertwiner_count_in_frozen_class": 4374,
+            "normal_form": "z(g^a)=a*phi for the additive character a in the coefficient field"
+          },
           "stable_endpoint_class": "Omega^1(J1)",
           "stable_hom_class": "J1; every other Hom summand is free/projective"
         },

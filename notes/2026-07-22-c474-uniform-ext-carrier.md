@@ -236,6 +236,87 @@ one-dimensional kernel.  The frozen class survives both maps.  Thus local endotr
 the cyclic class, while global fusion selects one of the two Sylow-cohomology directions.  For
 `q=11`, the detecting `C3` is already Sylow and restriction is an isomorphism directly.
 
+### Further extra juice: normal form and one-element recognition
+
+The endotrivial description gives a common literal normal form.  On the detecting cyclic subgroup
+`C=<g>`, there is an invariant isomorphism `phi:S_q^*|C -> S_q|C` and a coboundary gauge in which
+
+```text
+z(g^a) = (a mod p) phi.
+```
+
+For `q=7` the additive character has kernel `<g^2>` of order two; for `q=11` it is faithful on
+`C3`.  The certificate chooses the lexicographically first invertible fixed representative in the
+literal frozen class.  There are four such representatives in the binary case and 4,374 in the
+ternary case.  Thus both cocycles are exactly “additive local character times endpoint
+intertwiner,” with the unequal detection depth residing only in the character kernel.
+
+The middle module itself now has a cocycle-free recognition test.  Restricting the split and
+nonsplit carriers to one detecting element gives
+
+| case | split endpoint sum | frozen nonsplit carrier | distinguishing rank |
+|:--|:--|:--|:--|
+| `q=7`, `C4` | `J3^2` | `J4 direct-sum J2` | `rank(g-1)^3: 0 -> 1` |
+| `q=11`, `C3` | `J3^2 direct-sum J2^2` | `J3^3 direct-sum J1` | `rank(g-1)^2: 2 -> 3` |
+
+Because C474 already proves that split and nonsplit are the only middle-module classes, this
+single top-power rank jump is equivalent to nonsplitting in each frozen case.  It replaces the
+full retraction or cocycle calculation by the Jordan type of one small p-local element once the
+endpoints are known.
+
+There is also a sharp determinant-gauge result.  On the affine space of fixed cocycle
+representatives in the frozen local class:
+
+```text
+q=7:  dimension 2 over F_2; determinant is constantly 1 on all 4 points;
+q=11: dimension 8 over F_3; determinant restricts to a nonzero linear functional,
+      with exactly 2,187 representatives at each value 0, 1, and -1.
+```
+
+Hence every binary fixed representative is automatically an endpoint isomorphism.  In the
+ternary case the invertible representatives are exactly the complement of one affine hyperplane,
+split evenly between determinant `+1` and `-1`.  Determinant sign therefore cannot refine C473's
+ternary arithmetic orientation without an additional gauge choice; the exact gauge orbit erases
+it.
+
+### Proof compression: cyclic Nakayama algebra plus one fusion relation
+
+The Jordan surgery is forced symbolically.  Write the cyclic group algebras as
+
+```text
+F_2[C4] = F_2[t]/(t^4),       F_3[C3] = F_3[t]/(t^3),       t=g-1.
+```
+
+For q=7 the endpoints are both `J3`.  Their unique nonzero local extension has middle module
+`J4+J2`; the alternative `J3+J3` is split.  For q=11, projective `J3` summands disappear from Ext,
+reducing the problem to the unique nonzero extension of `J2` by `J2`, whose middle module is
+`J3+J1`; restoring the projectives gives `J3^3+J1`.  Thus the one-element rank tests above follow
+from the elementary module theory of the two truncated polynomial rings, independently of the
+global cocycle solver.
+
+This also yields short structural proofs of both global Ext dimensions.
+
+- At q=11, restriction to the Sylow `C3` is injective by transfer, the local `H^1` has dimension
+  one, and the frozen class restricts nontrivially.  Hence the global dimension is exactly one.
+- At q=7, restriction to the Sylow `D8` is injective because its index is 21.  Exact `D8`
+  cohomology has dimension two.  Its three nonzero classes have restriction profiles
+
+  ```text
+                     C4   central C2   reflection C2
+  class (0,1):       nonzero    zero         nonzero
+  class (1,0):       nonzero    zero         zero       <- frozen/global
+  class (1,1):       zero       zero         nonzero.
+  ```
+
+  The central and reflection involutions are conjugate in `PSL_2(7)`; a literal conjugator is
+  recorded.  Any globally stable class must therefore have compatible restrictions on them.
+  Since every Sylow class vanishes centrally, fusion forces reflection restriction to vanish and
+  leaves only the one-dimensional `(1,0)` line.  The frozen class occupies that line.
+
+Consequently the full-group ranks `(10,9)` and `(26,25)` are no longer black-box explanations of
+`dim Ext^1=1`: they independently verify a p-local proof using endotriviality, transfer, and—in the
+binary case—one involution-fusion condition.
+
 ## Strongest honest common theorem
 
 Let
@@ -351,6 +432,25 @@ no literature novelty or priority claim.
 - **Settled — the binary Sylow gap.** `H^1(D8,M)` has dimension two, restriction to `C4` has rank
   one, and odd-index transfer injects the one-dimensional global group into it.  Global fusion,
   rather than cyclic cohomology, removes the extra Sylow direction.
+- **Settled by further `ej` — character/intertwiner normal form.** In both cases the frozen local
+  cocycle is gauge-equivalent to `z(g^a)=(a mod p)phi` for an invariant endpoint isomorphism.  The
+  binary order-two kernel and faithful ternary character now account for the entire depth
+  difference.
+- **Settled by further `ej` — one-element module recognition.** Nonsplitting is exactly a unit
+  jump in the top nonzero nilpotent-power rank: `rank(g-1)^3` at q=7 and `rank(g-1)^2` at q=11.
+  This is a basis-free local diagnostic requiring no cocycle coordinates.
+- **Settled — determinant cannot secretly orient the ternary class.** Determinant is constant one
+  on the four binary fixed gauges, but on the ternary eight-dimensional gauge coset it is linear
+  and equidistributed among `0,+1,-1`.  The 4,374 invertible gauges split evenly by sign, so no
+  preferred arithmetic prime is recovered.
+- **Settled by repeated `ej` — the local computations are symbolic Nakayama extensions.** The
+  surgeries `J3+J3 -> J4+J2` and `J2+J2 -> J3+J1` are the unique nonzero extensions over
+  `k[t]/(t^4)` and `k[t]/(t^3)` after projectives are removed.  The rank-jump diagnostic is
+  therefore a theorem of the local module types, not a pattern inferred from matrices.
+- **Settled by repeated `ej` — structural global dimension proofs.** Sylow transfer and local
+  endotriviality prove the ternary dimension directly.  In the binary case, the two-dimensional
+  `D8` cohomology is cut to the frozen one-dimensional line because `PSL_2(7)` fuses the central
+  and reflection involutions; the other two nonzero Sylow classes violate that compatibility.
 - **Settled — effects of C472/C473.** The signed split cover introduces no second extension class;
   the pointed trace-prime rule canonically names the socle in each case.
 - **Open, with exact Phase-3 boundary — geometry-to-endotriviality.** The Ext and unequal-depth

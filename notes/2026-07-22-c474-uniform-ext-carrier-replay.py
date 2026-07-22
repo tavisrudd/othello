@@ -124,6 +124,25 @@ def nilpotent_data(operator, p: int, exponent: int):
     return {"nilpotent_power_ranks_including_identity": ranks, "jordan_blocks": blocks}
 
 
+def determinant_from_flat(vector, d: int, p: int):
+    matrix = [list(vector[i * d:(i + 1) * d]) for i in range(d)]
+    determinant = 1
+    for column in range(d):
+        pivot = next((i for i in range(column, d) if matrix[i][column] % p), None)
+        if pivot is None:
+            return 0
+        if pivot != column:
+            matrix[column], matrix[pivot] = matrix[pivot], matrix[column]
+            determinant = (-determinant) % p
+        determinant = determinant * matrix[column][column] % p
+        scale = pow(matrix[column][column] % p, p - 2, p)
+        matrix[column] = [scale * x % p for x in matrix[column]]
+        for i in range(column + 1, d):
+            scale = matrix[i][column] % p
+            matrix[i] = [(x - scale * y) % p for x, y in zip(matrix[i], matrix[column])]
+    return determinant
+
+
 def coordinates(vector, basis, p: int):
     d = len(basis)
     equations = [[basis[j][i] for j in range(d)] + [vector[i] % p] for i in range(len(vector))]
@@ -382,6 +401,67 @@ def derive_case(record, upstream, oriented):
     assert mechanism["endpoint_is_endotrivial"] is True
     assert mechanism["stable_endpoint_class"] == "Omega^1(J1)"
     assert mechanism["stable_hom_class"] == "J1; every other Hom summand is free/projective"
+    factorization_candidates = []
+    fixed_image_basis = []
+    for coefficients in itertools.product(range(p), repeat=len(fixed_basis)):
+        vector = tuple(sum(coefficients[k] * fixed_basis[k][i] for k in range(len(fixed_basis))) % p
+                       for i in range(n))
+        if rank([*image_basis, vector], p, n) == len(image_basis):
+            if rank([*fixed_image_basis, vector], p, n) > len(fixed_image_basis):
+                fixed_image_basis = list(canonical_basis([*fixed_image_basis, vector], p, n))
+        if rank([vector[i * d:(i + 1) * d] for i in range(d)], p, d) != d:
+            continue
+        difference_from_frozen = tuple((vector[i] - target_z[i]) % p for i in range(n))
+        if rank([*image_basis, difference_from_frozen], p, n) == len(image_basis):
+            factorization_candidates.append(vector)
+    factorization = mechanism["local_character_intertwiner_factorization"]
+    factorization_intertwiner = min(factorization_candidates)
+    factorization_rhs = tuple((factorization_intertwiner[i] - target_z[i]) % p for i in range(n))
+    identity_minus_action = tuple(tuple((int(i == j) - target_action[i][j]) % p for j in range(n))
+                                  for i in range(n))
+    factorization_gauge = linear_solution(identity_minus_action, factorization_rhs, p)
+    assert len(factorization_candidates) == factorization["invertible_fixed_intertwiner_count_in_frozen_class"]
+    assert list(factorization_intertwiner) == factorization["canonical_intertwiner"]
+    assert list(factorization_gauge) == factorization["gauge_from_frozen_cocycle"]
+    assert factorization["canonical_intertwiner_rank"] == d
+    assert factorization["character_kernel_order"] == target_order // p
+    determinant_record = mechanism["determinant_on_frozen_fixed_gauge_coset"]
+    determinant_constant = determinant_from_flat(fixed_cocycle, d, p)
+    determinant_coefficients = [
+        (determinant_from_flat(tuple((fixed_cocycle[i] + basis_vector[i]) % p for i in range(n)), d, p)
+         - determinant_constant) % p
+        for basis_vector in fixed_image_basis]
+    determinant_counts = {str(value): 0 for value in range(p)}
+    for coefficients in itertools.product(range(p), repeat=len(fixed_image_basis)):
+        vector = tuple((fixed_cocycle[i] + sum(coefficients[k] * fixed_image_basis[k][i]
+                                               for k in range(len(fixed_image_basis)))) % p
+                       for i in range(n))
+        determinant = determinant_from_flat(vector, d, p)
+        assert determinant == (determinant_constant
+                               + sum(a * b for a, b in zip(coefficients, determinant_coefficients))) % p
+        determinant_counts[str(determinant)] += 1
+    assert determinant_record["coset_dimension"] == len(fixed_image_basis)
+    assert determinant_record["affine_constant"] == determinant_constant
+    assert determinant_record["value_counts"] == determinant_counts
+    assert determinant_record["verified_on_every_coset_point"] is True
+    carrier_action = eye(2 * d)
+    split_action = eye(2 * d)
+    for generator_index in example[1]:
+        carrier_action = mm(carrier_action, carrier_actions[generator_index], p)
+        v, w = vs[generator_index], ws[generator_index]
+        split_generator = tuple(
+            [tuple([*v[i], *([0] * d)]) for i in range(d)]
+            + [tuple([*([0] * d), *w[i]]) for i in range(d)])
+        split_action = mm(split_action, split_generator, p)
+    carrier_difference = tuple(tuple((carrier_action[i][j] - int(i == j)) % p for j in range(2 * d))
+                               for i in range(2 * d))
+    split_difference = tuple(tuple((split_action[i][j] - int(i == j)) % p for j in range(2 * d))
+                             for i in range(2 * d))
+    surgery = mechanism["carrier_jordan_surgery"]
+    assert nilpotent_data(carrier_difference, p, target_order) == surgery["nonsplit_carrier"]
+    assert nilpotent_data(split_difference, p, target_order) == surgery["split_endpoint_sum"]
+    assert surgery["top_nonzero_nilpotent_power"] == target_order - 1
+    assert surgery["top_power_rank_gap_nonsplit_minus_split"] == 1
     if p == 2:
         square = product(target_g, target_g)
         square_action = actions[square]
@@ -463,6 +543,41 @@ def derive_case(record, upstream, oriented):
         assert rank([*sylow_b_basis, frozen_sylow], p, 2 * n) == len(sylow_b_basis) + 1
         assert ladder["frozen_sylow_class_nonzero"] is True
         assert ladder["global_restriction_is_injective_by_odd_index_transfer"] is True
+        central_involution = product(target_g, target_g)
+        central_coboundaries = [tuple((int(i == j) - actions[central_involution][i][j]) % p
+                                      for i in range(n)) for j in range(n)]
+        reflection_coboundaries = [tuple((int(i == j) - actions[reflection][i][j]) % p
+                                         for i in range(n)) for j in range(n)]
+        central_b_rank = rank(central_coboundaries, p, n)
+        reflection_b_rank = rank(reflection_coboundaries, p, n)
+        profiles = []
+        for coefficients in itertools.product(range(p), repeat=len(sylow_h_basis)):
+            if not any(coefficients):
+                continue
+            cocycle = tuple(sum(coefficients[k] * sylow_h_basis[k][i]
+                                 for k in range(len(sylow_h_basis))) % p
+                             for i in range(2 * n))
+            central_value = mv(sylow_expressions[central_involution], cocycle, p)
+            reflection_value = mv(sylow_expressions[reflection], cocycle, p)
+            profiles.append({
+                "h1_coordinates": list(coefficients),
+                "C4_nonzero": rank([*local_coboundaries, cocycle[:n]], p, n) == local_b_rank + 1,
+                "central_C2_nonzero": rank([*central_coboundaries, central_value], p, n) == central_b_rank + 1,
+                "reflection_C2_nonzero": rank([*reflection_coboundaries, reflection_value], p, n) == reflection_b_rank + 1,
+            })
+        assert profiles == ladder["nonzero_h1_restriction_profiles"]
+        conjugators = []
+        for x in words:
+            x_inverse = next(h for h in words if product(x, h) == identity_perm)
+            if product(product(x, central_involution), x_inverse) == reflection:
+                conjugators.append(x)
+        conjugator = min(conjugators, key=lambda h: (len(words[h]), words[h], h))
+        assert list(words[conjugator]) == ladder["central_to_reflection_conjugator_word_generator_indices"]
+        assert len(conjugators) == ladder["central_to_reflection_conjugator_count"]
+        frozen_coordinates = coordinates(frozen_sylow, [*sylow_b_basis, *sylow_h_basis], p)[-len(sylow_h_basis):]
+        assert list(frozen_coordinates) == ladder["frozen_sylow_h1_coordinates"]
+        assert ladder["reflection_restriction_kernel_dimension"] == 1
+        assert ladder["fusion_stable_upper_bound_dimension"] == 1
 
     def centralizer_dimension(matrices):
         equations = []

@@ -287,6 +287,25 @@ def matrix_rank_from_flat(vector, d: int, p: int):
     return len(rref([vector[i * d:(i + 1) * d] for i in range(d)], p, d)[0])
 
 
+def matrix_determinant_from_flat(vector, d: int, p: int):
+    matrix = [list(vector[i * d:(i + 1) * d]) for i in range(d)]
+    determinant = 1
+    for column in range(d):
+        pivot = next((i for i in range(column, d) if matrix[i][column] % p), None)
+        if pivot is None:
+            return 0
+        if pivot != column:
+            matrix[column], matrix[pivot] = matrix[pivot], matrix[column]
+            determinant = (-determinant) % p
+        determinant = determinant * matrix[column][column] % p
+        scale = inv(matrix[column][column], p)
+        matrix[column] = [x * scale % p for x in matrix[column]]
+        for i in range(column + 1, d):
+            scale = matrix[i][column] % p
+            matrix[i] = [(x - scale * y) % p for x, y in zip(matrix[i], matrix[column])]
+    return determinant
+
+
 def word_matrix(generators, word, p: int):
     out = identity(len(generators[0]))
     for generator_index in word:
@@ -349,6 +368,54 @@ def cyclic_restriction_data(words, actions, values, p: int, d: int):
         "canonical_fixed_map_rank": matrix_rank_from_flat(fixed_cocycle, d, p),
         "cohomology_source": "the unique trivial J1 block; full-length Jordan blocks are free/projective",
     }
+    factorization_candidates = []
+    fixed_image_basis = []
+    for coefficients in itertools.product(range(p), repeat=len(fixed_basis)):
+        vector = tuple(sum(coefficients[k] * fixed_basis[k][i] for k in range(len(fixed_basis))) % p
+                       for i in range(n))
+        if len(rref([*image_basis, vector], p, n)[0]) == len(image_basis):
+            if len(rref([*fixed_image_basis, vector], p, n)[0]) > len(fixed_image_basis):
+                fixed_image_basis = list(rref([*fixed_image_basis, vector], p, n)[0])
+        difference_from_frozen = tuple((vector[i] - target_z[i]) % p for i in range(n))
+        if (matrix_rank_from_flat(vector, d, p) == d
+                and len(rref([*image_basis, difference_from_frozen], p, n)[0]) == len(image_basis)):
+            factorization_candidates.append(vector)
+    assert len(fixed_image_basis) == fixed_image_intersection_dimension
+    factorization_intertwiner = min(factorization_candidates)
+    factorization_rhs = tuple((factorization_intertwiner[i] - target_z[i]) % p for i in range(n))
+    factorization_gauge = solve_affine(
+        tuple(tuple((int(i == j) - target_action[i][j]) % p for j in range(n)) for i in range(n)),
+        factorization_rhs, p, n)
+    mechanism["local_character_intertwiner_factorization"] = {
+        "invertible_fixed_intertwiner_count_in_frozen_class": len(factorization_candidates),
+        "canonical_intertwiner": list(factorization_intertwiner),
+        "canonical_intertwiner_rank": d,
+        "gauge_from_frozen_cocycle": list(factorization_gauge),
+        "normal_form": "z(g^a)=a*phi for the additive character a in the coefficient field",
+        "character_kernel_order": target_order // p,
+    }
+    determinant_constant = matrix_determinant_from_flat(fixed_cocycle, d, p)
+    determinant_coefficients = [
+        (matrix_determinant_from_flat(tuple((fixed_cocycle[i] + basis_vector[i]) % p for i in range(n)), d, p)
+         - determinant_constant) % p
+        for basis_vector in fixed_image_basis]
+    determinant_counts = {str(value): 0 for value in range(p)}
+    for coefficients in itertools.product(range(p), repeat=len(fixed_image_basis)):
+        vector = tuple((fixed_cocycle[i] + sum(coefficients[k] * fixed_image_basis[k][i]
+                                               for k in range(len(fixed_image_basis)))) % p
+                       for i in range(n))
+        determinant = matrix_determinant_from_flat(vector, d, p)
+        affine_value = (determinant_constant
+                        + sum(a * b for a, b in zip(coefficients, determinant_coefficients))) % p
+        assert determinant == affine_value
+        determinant_counts[str(determinant)] += 1
+    mechanism["determinant_on_frozen_fixed_gauge_coset"] = {
+        "coset_dimension": len(fixed_image_basis),
+        "affine_constant": determinant_constant,
+        "affine_linear_coefficients": determinant_coefficients,
+        "value_counts": determinant_counts,
+        "verified_on_every_coset_point": True,
+    }
     if p == 2:
         square = compose_perm(target_g, target_g)
         square_action = actions[square]
@@ -374,7 +441,7 @@ def cyclic_restriction_data(words, actions, values, p: int, d: int):
         reflections = [h for h in words if permutation_order(h) == 2
                        and compose_perm(compose_perm(h, target_g), h) == inverse_target]
         reflection = min(reflections, key=lambda h: (len(words[h]), words[h], h))
-        sylow_words, _, _, sylow_constraints, sylow_z_basis = cocycle_constraints(
+        sylow_words, sylow_expressions, _, sylow_constraints, sylow_z_basis = cocycle_constraints(
             [target_g, reflection], [actions[target_g], actions[reflection]], p)
         sylow_b_basis, _ = coboundaries([actions[target_g], actions[reflection]], p)
         sylow_h_basis = []
@@ -387,6 +454,33 @@ def cyclic_restriction_data(words, actions, values, p: int, d: int):
         restricted_h = [cocycle[:n] for cocycle in sylow_h_basis]
         restriction_rank = len(rref([*local_b_basis, *restricted_h], p, n)[0]) - len(local_b_basis)
         frozen_sylow = tuple([*values[target_g], *values[reflection]])
+        central_involution = compose_perm(target_g, target_g)
+        central_b_basis, _ = coboundaries([actions[central_involution]], p)
+        reflection_b_basis, _ = coboundaries([actions[reflection]], p)
+        restriction_profiles = []
+        for coefficients in itertools.product(range(p), repeat=len(sylow_h_basis)):
+            if not any(coefficients):
+                continue
+            cocycle = tuple(sum(coefficients[k] * sylow_h_basis[k][i]
+                                 for k in range(len(sylow_h_basis))) % p
+                             for i in range(2 * n))
+            sylow_values = {g: matvec(sylow_expressions[g], cocycle, p) for g in sylow_words}
+            restriction_profiles.append({
+                "h1_coordinates": list(coefficients),
+                "C4_nonzero": len(rref([*local_b_basis, cocycle[:n]], p, n)[0]) == len(local_b_basis) + 1,
+                "central_C2_nonzero": len(rref([*central_b_basis, sylow_values[central_involution]], p, n)[0]) == len(central_b_basis) + 1,
+                "reflection_C2_nonzero": len(rref([*reflection_b_basis, sylow_values[reflection]], p, n)[0]) == len(reflection_b_basis) + 1,
+            })
+        assert sum(not profile["reflection_C2_nonzero"] for profile in restriction_profiles) == 1
+        assert not any(profile["central_C2_nonzero"] for profile in restriction_profiles)
+        conjugators = []
+        identity_perm = tuple(range(len(target_g)))
+        for x in words:
+            x_inverse = next(h for h in words if compose_perm(x, h) == identity_perm)
+            if compose_perm(compose_perm(x, central_involution), x_inverse) == reflection:
+                conjugators.append(x)
+        conjugator = min(conjugators, key=lambda h: (len(words[h]), words[h], h))
+        frozen_sylow_coordinates = solve_in_basis(frozen_sylow, [*sylow_b_basis, *sylow_h_basis], p)[-len(sylow_h_basis):]
         mechanism["binary_sylow_ladder"] = {
             "sylow_group": "D8",
             "sylow_order": len(sylow_words),
@@ -401,6 +495,13 @@ def cyclic_restriction_data(words, actions, values, p: int, d: int):
             "global_restriction_is_injective_by_odd_index_transfer": True,
             "frozen_sylow_class_nonzero": len(rref([*sylow_b_basis, frozen_sylow], p, len(frozen_sylow))[0]) == len(sylow_b_basis) + 1,
             "relation_constraint_rank": len(sylow_constraints),
+            "nonzero_h1_restriction_profiles": restriction_profiles,
+            "central_to_reflection_conjugator_word_generator_indices": list(words[conjugator]),
+            "central_to_reflection_conjugator_count": len(conjugators),
+            "reflection_restriction_kernel_dimension": 1,
+            "fusion_stable_upper_bound_dimension": 1,
+            "frozen_sylow_h1_coordinates": list(frozen_sylow_coordinates),
+            "structural_global_dimension_proof": "odd-index transfer injects global H1 into D8 H1; involution fusion forces the reflection-kernel line; the frozen class is nonzero on that line",
         }
     return {
         "p_divisible_order_census": rows,
@@ -509,6 +610,30 @@ def matching_case(q: int, p: int, type_name: str, frozen, upstream):
     mechanism["endpoint_is_endotrivial"] = True
     mechanism["stable_endpoint_class"] = "Omega^1(J1)"
     mechanism["stable_hom_class"] = "J1; every other Hom summand is free/projective"
+    carrier_action = word_matrix(actions, detecting_word, p)
+    carrier_difference = tuple(tuple((carrier_action[i][j] - int(i == j)) % p for j in range(2 * d))
+                               for i in range(2 * d))
+    split_generators = []
+    for v, w in zip(v_generators, w_generators):
+        split_generators.append(tuple(
+            [tuple([*v[i], *([0] * d)]) for i in range(d)]
+            + [tuple([*([0] * d), *w[i]]) for i in range(d)]))
+    split_action = word_matrix(split_generators, detecting_word, p)
+    split_difference = tuple(tuple((split_action[i][j] - int(i == j)) % p for j in range(2 * d))
+                             for i in range(2 * d))
+    carrier_jordan = nilpotent_jordan_data(
+        carrier_difference, p, local_detection["minimal_detecting_cyclic_order"])
+    split_jordan = nilpotent_jordan_data(
+        split_difference, p, local_detection["minimal_detecting_cyclic_order"])
+    assert (carrier_jordan["nilpotent_power_ranks_including_identity"][-2]
+            == split_jordan["nilpotent_power_ranks_including_identity"][-2] + 1)
+    mechanism["carrier_jordan_surgery"] = {
+        "nonsplit_carrier": carrier_jordan,
+        "split_endpoint_sum": split_jordan,
+        "top_nonzero_nilpotent_power": local_detection["minimal_detecting_cyclic_order"] - 1,
+        "top_power_rank_gap_nonsplit_minus_split": 1,
+        "diagnostic": "the local carrier is nonsplit exactly when the recorded top nilpotent-power rank jumps by one",
+    }
     ordered = sorted(words)
     return {
         "q": q,
