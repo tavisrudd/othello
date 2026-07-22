@@ -4,8 +4,8 @@
 
 ## Entry gate
 
-C481 fixes the Galois-equivariant colour action; C482--C483 provide the reconstruction map and its
-exceptional divisor.
+C481 fixes the Galois-equivariant colour action; C482--C483 provide the quadratic reconstruction
+cover, its sheet involution, and its exceptional divisor.
 
 ## Exact domain
 
@@ -21,8 +21,8 @@ instance of a general Hilbert--90 cocycle or only a finite stabilizer effect.
 ## Work package
 
 1. Write the Frobenius action on every C482 gauge and compatibility variable.
-2. Prove equivariance of the rational inverse and discriminant.
-3. Compute the descent cocycle and give an exact vanishing/effectivity criterion.
+2. Prove equivariance of the quadratic cover, sheet involution, and discriminant.
+3. Compute the parent/sheet descent cocycle and give an exact vanishing/effectivity criterion.
 4. Recover the q=8 six-singleton versus `3+3` quotient split from the theorem, without a new
    census.
 

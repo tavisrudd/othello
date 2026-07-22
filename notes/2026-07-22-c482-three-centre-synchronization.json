@@ -1,0 +1,142 @@
+{
+  "checked_claim": "Each witness has a rank-four compatibility matrix, exactly two valid deep six-arc reconstructions on the kernel chart, and trivial common diagonal S6 stabilizer.  The F_256 witness proves the quadratic ambiguity is separable in characteristic two.",
+  "normalization": {
+    "kernel_coordinates": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "bc",
+      "ad"
+    ],
+    "parent_frame": [
+      "(1,0,0)",
+      "(0,1,0)",
+      "(0,0,1)",
+      "(1,1,1)"
+    ],
+    "remaining_parent_points": [
+      "(1,a,b)",
+      "(1,c,d)"
+    ],
+    "view_points": [
+      "infinity",
+      "0",
+      "1",
+      "A_s",
+      "B_s",
+      "C_s"
+    ]
+  },
+  "schema": "c482-three-centre-synchronization-v1",
+  "witnesses": [
+    {
+      "common_diagonal_S6_stabilizer_size": 1,
+      "field": "F_101",
+      "field_convention": "integers modulo 101",
+      "free_columns": [
+        4,
+        5
+      ],
+      "matrix_rank": 4,
+      "pivot_columns": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "product_roots_on_kernel_line": 3,
+      "universal_collision_roots": 1,
+      "valid_deep_arc_reconstructions": [
+        [
+          37,
+          98,
+          73,
+          26
+        ],
+        [
+          66,
+          40,
+          49,
+          74
+        ]
+      ],
+      "views_ABC": [
+        [
+          54,
+          99,
+          4
+        ],
+        [
+          73,
+          24,
+          8
+        ],
+        [
+          87,
+          26,
+          13
+        ],
+        [
+          76,
+          87,
+          37
+        ]
+      ]
+    },
+    {
+      "common_diagonal_S6_stabilizer_size": 1,
+      "field": "F_256",
+      "field_convention": "polynomial basis modulo x^8+x^4+x^3+x+1",
+      "free_columns": [
+        4,
+        5
+      ],
+      "matrix_rank": 4,
+      "pivot_columns": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "product_roots_on_kernel_line": 3,
+      "universal_collision_roots": 1,
+      "valid_deep_arc_reconstructions": [
+        [
+          134,
+          235,
+          130,
+          227
+        ],
+        [
+          153,
+          213,
+          62,
+          128
+        ]
+      ],
+      "views_ABC": [
+        [
+          88,
+          47,
+          216
+        ],
+        [
+          222,
+          99,
+          168
+        ],
+        [
+          24,
+          209,
+          150
+        ],
+        [
+          247,
+          95,
+          235
+        ]
+      ]
+    }
+  ]
+}

@@ -4,13 +4,14 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C481 complete; C482--C485 allocated.  C478's coherence upgrade identifies each
+**Status:** C475--C482 complete; C483--C485 allocated.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
-atlas is exactly the projected labelled `M_0,6` point, with explicit inverse and exact finite
-quotient/Galois functors.  The C482 preflight proves that three abstract projections retain a
-one-dimensional generic fibre; four are the first possible pure reconstruction input.  Modular
-machinery remains separate behind the matching, Gram, and Sylow gates.
+atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
+and one for two/three projections, but corrects the four-view target: pure reconstruction is a
+separable quadratic cover, not a rational inverse, even after diagonal `S6`.  C483 now owns the
+sheet involution, branch divisor, and child-relative sheet selection.  Modular machinery remains
+separate behind the matching, Gram, and Sylow gates.
 
 ## Goal
 
@@ -130,21 +131,36 @@ Fable/RS template applies only after ambient-child data cuts the fibre to a fini
 
 Task card: `notes/reed-solomon-tasks/c481-projection-sextic-coherent-atlas.md`.
 
-## Current frontier — C482--C485
+## Closed base — C482
+
+[`C482 synchronization theorem`](../2026-07-22-c482-three-centre-synchronization.md) normalizes
+each quotient gauge and derives one exact compatibility equation per view.  Two and three views
+leave complete-intersection residual families of dimensions two and one.  With four views, the
+linearized compatibility matrix has a kernel line containing the universal forbidden collision
+`h_5=h_6=h_4`; removing it from the product cubic leaves an explicit separable quadratic.  Exact
+`F_101` and `F_256` witnesses have two deep parents and trivial common diagonal stabilizer, so the
+proposed rational inverse is false in odd and characteristic two and remains false after diagonal
+unlabelling.  C483 must factor the quadratic branch divisor and determine how fixed-child side
+information selects a sheet.
+
+Task card: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md`.
+
+## Current frontier — C483--C485
 
 C481 supplies the projection-sextic/coherent-atlas dictionary for an arbitrary six-arc in every
-characteristic.  C482 now synchronizes the independent quotient-line `PGL_2` gauges, proves the
-two/three-centre residual dimensions, and constructs the rational four-centre inverse.  C483
-classifies its discriminant, residual families, and child-relative cuts; C484
+characteristic, and C482 supplies the exact quadratic four-view reconstruction plus the
+two/three-centre residual families.  C483 now identifies the sheet involution, classifies the
+branch/degeneracy divisor, and derives child-relative sheet cuts; C484
 proves Frobenius-equivariant descent and resolves the q=8 `C3` orientation structurally; C485
-assembles the all-field redundancy-three reconstruction theorem and C475 GRS specialization.
+assembles the all-field redundancy-three degree-two/child-selected reconstruction theorem and C475
+GRS specialization.
 
 The exact [`C482 generic-degree preflight`](../2026-07-22-c482-generic-degree-preflight.md) gives
-Jacobian ranks `6,9,12` for two, three, and four centres at exact characteristic-zero/101 and
-characteristic-two witnesses.  Hence three abstract projections have no finite generic degree;
-C478's three-fibre successes use the fixed ambient child as side information.  The order is
-strict: no finite sweep may substitute for C482's inverse or C483's intrinsic discriminant, and
-C485 may not weaken an unresolved exceptional or descent hypothesis.
+Jacobian ranks `6,9,12`; C482 explains them structurally and shows why square dimension at four
+views did not imply birationality.  Three abstract projections have no finite generic degree, and
+four have generic degree two.  C478's smaller thresholds use the fixed ambient child as side
+information.  The order is strict: no finite sweep may substitute for C483's intrinsic branch and
+sheet-selection theorem, and C485 may not weaken an unresolved exceptional or descent hypothesis.
 
 Task cards: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md` through
 `notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
@@ -158,10 +174,10 @@ Task cards: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md` thro
 | C477 | intrinsic theorem for C476's first collision | complete | Klein branch split, sharp stabilizer bit, and exact continuation graphs | candidate discriminant geometry |
 | C478 | C398 and `A3/B3/H3` exceptional controls | complete | coherent Galois-equivariant atlases recover all frozen parents with thresholds `3 / 3 / 2 / 3`; Gram/Sylow still separate q=9 from q=11 | simultaneous reconstruction is the next theorem gate |
 | C481 | projection-sextic and coherent-atlas theorem | complete | labelled `M_0,6` with explicit inverses and exact diagonal/Frobenius actions | intrinsic coherent data model |
-| C482 | multi-centre gauge synchronization | C481 | exact residual dimensions and four-centre rational inverse on an explicit open locus | generic parent reconstruction |
-| C483 | reconstruction discriminant and exceptional fibres | C482 | intrinsic factorization, residual-family table, and child-relative cuts | global theorem domain |
+| C482 | multi-centre gauge synchronization | complete | residual dimensions `2/1`; explicit four-view separable quadratic cover; rational inverse disproved | exact generic ambiguity |
+| C483 | reconstruction discriminant and exceptional fibres | C482 | intrinsic branch factorization, sheet involution, residual-family table, and child-relative sheet cuts | global theorem domain |
 | C484 | coherent semilinear descent | C481--C483 | equivariant inverse/descent criterion; q=8 `C3` explained | all-field semilinear reconstruction |
-| C485 | all-field redundancy-three synthesis | C481--C484 | separate pure four-projection and child-relative clauses, with algorithm, exceptions, descent, and GRS specialization | programme-level reconstruction theorem |
+| C485 | all-field redundancy-three synthesis | C481--C484 | separate pure four-projection degree-two and child-relative sheet-selected clauses, with algorithm, exceptions, descent, and GRS specialization | programme-level reconstruction theorem |
 
 Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c481-projection-sextic-coherent-atlas.md`.  Open cards:
@@ -201,4 +217,4 @@ history.
 
 ## Next command
 
-`go C482`
+`go C483`
