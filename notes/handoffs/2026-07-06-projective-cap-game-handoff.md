@@ -585,6 +585,9 @@ task list.  Current high-value items:
   superseded) behind C84's structural route,
   [report](../2026-07-12-c83-bisimulation-quotient.md). Full specs in the
   [codex task queue](../2026-07-07-codex-task-queue.md).
+  The C447/C448 and Weil-roof intake reframes the open target as orbit purity or an equivariant
+  opponent-marked response packet, with a bounded q=11 two-match causality gate:
+  [`2026-07-22 cap orbit-packet memo`](../2026-07-22-cap-orbit-packet-response-frontier.md).
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
   step-group leaves, and `Class0`). The full v5 tree has 326 node leaves + 326 step leaves;
