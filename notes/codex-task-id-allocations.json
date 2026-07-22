@@ -440,8 +440,26 @@
       "last": 478,
       "purpose": "bounded GRS atlas pilot, first-fibre theorem, and exceptional-family controls",
       "sequence": 49
+    },
+    {
+      "count": 1,
+      "first": 479,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 479,
+      "purpose": "Integral golden cubic: land master-stroke claim 5 or equivalent-strength replacement",
+      "sequence": 50
+    },
+    {
+      "count": 1,
+      "first": 480,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 480,
+      "purpose": "Gap-closing certificates for banked A+F close: design/Fourier torsor legs, M12 hinge, B uniform-rule falsifier",
+      "sequence": 51
     }
   ],
-  "next_id": 479,
+  "next_id": 481,
   "schema": "codex-task-id-allocations-v1"
 }
