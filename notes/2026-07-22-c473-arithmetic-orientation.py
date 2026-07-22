@@ -24,7 +24,7 @@ INPUT_HASHES = {
     "notes/2026-07-22-c471-hadamard-degeneration-complex.json":
         "3676e3b8b1c7c92f9c74b80c90b572d3322c73a2509cd96b5718e769fb0e5a15",
     "notes/2026-07-22-c472-signed-weil-lift.json":
-        "9865949a2a8b93c0f6c674b2d16a826bd9ff706b4798b67033575d7cbc8b9cf2",
+        "9c9311c48a33d4e3fe0101ecb82cb29154e926e3bf920771716ae5bb69ffefe5",
 }
 
 
@@ -237,6 +237,11 @@ def build_case(q, p, type_name, frozen, c465_case):
     squares = {x * x % q for x in range(1, q)}
     psl_permutations = [point_permutation(matrix, q) for matrix in matrices
                         if determinant(matrix, q) in squares]
+    pgl_base_stabilizer = {permutation for permutation in pgl_permutations
+                           if act_matching(permutation, base) == base}
+    psl_base_stabilizer = {permutation for permutation in psl_permutations
+                           if act_matching(permutation, base) == base}
+    assert pgl_base_stabilizer == psl_base_stabilizer
     all_matchings = orbit(base, pgl_permutations)
     sheet0 = orbit(base, psl_permutations)
     sheet0_set = set(sheet0)
@@ -265,6 +270,9 @@ def build_case(q, p, type_name, frozen, c465_case):
                             for record in factors}
     selected = factor_by_polynomial[tuple(t_data["minimal_polynomial_constant_first"])]
     selected_root = selected["residue_root"]
+    selected_trace = sum(t_data["action_matrix"][i][i]
+                         for i in range(len(t_data["action_matrix"]))) % p
+    assert selected_trace == selected_root
     other_root = (-1 - selected_root) % p
     shared_incidence = [[int(len(set(left) & set(right)) == 1) for right in sheet1]
                         for left in sheet0]
@@ -276,6 +284,10 @@ def build_case(q, p, type_name, frozen, c465_case):
     opposite_factor = factor_by_polynomial[
         tuple(opposite_data["minimal_polynomial_constant_first"])]
     assert opposite_factor["residue_root"] == other_root
+    opposite_trace = sum(opposite_data["action_matrix"][i][i]
+                         for i in range(len(opposite_data["action_matrix"]))) % p
+    assert opposite_trace == other_root
+    assert (selected_trace + opposite_trace) % p == p - 1
     exponent_table = []
     for exponent in range(1, q):
         powered = permutation_power(t_permutation, exponent)
@@ -284,9 +296,13 @@ def build_case(q, p, type_name, frozen, c465_case):
         legendre = 1 if exponent in squares else -1
         expected = selected_root if legendre == 1 else other_root
         assert factor["residue_root"] == expected
+        trace = sum(data["action_matrix"][i][i]
+                    for i in range(len(data["action_matrix"]))) % p
+        assert trace == factor["residue_root"]
         exponent_table.append({
             "exponent": exponent,
             "legendre_symbol": legendre,
+            "core_trace": trace,
             "residue_root": factor["residue_root"],
             "minimal_polynomial_constant_first": data["minimal_polynomial_constant_first"],
         })
@@ -297,6 +313,14 @@ def build_case(q, p, type_name, frozen, c465_case):
         "q": q,
         "characteristic": p,
         "type": type_name,
+        "pointed_input_audit": {
+            "marked_matching": [list(edge) for edge in base],
+            "PGL_stabilizer_order": len(pgl_base_stabilizer),
+            "PSL_stabilizer_order": len(psl_base_stabilizer),
+            "stabilizers_literally_equal": True,
+            "outer_sheet_swap_is_input_automorphism": False,
+            "conclusion": "the marked Coxeter matching kills the outer involution; its containing sheet and the opposite core sheet are intrinsic",
+        },
         "quadratic_field": f"Q(sqrt(-{q}))",
         "field_discriminant": -q,
         "period_generator": f"alpha=(-1+sqrt(-{q}))/2",
@@ -315,11 +339,15 @@ def build_case(q, p, type_name, frozen, c465_case):
         },
         "selected_prime": "p_0" if selected_root == 0 else "p_-1",
         "selected_alpha_residue": selected_root,
+        "selected_unipotent_trace": selected_trace,
+        "trace_prime_kernel":
+            f"kernel of Z[alpha] -> F_{p}, alpha -> tr(T|core)={selected_trace}",
         "selected_factor_constant_first": selected["polynomial_constant_first"],
         "other_alpha_residue": other_root,
         "opposite_sheet": {
             "core_basis_rref": opposite_core,
             "selected_alpha_residue": opposite_factor["residue_root"],
+            "selected_unipotent_trace": opposite_trace,
             "selected_factor_constant_first": opposite_factor[
                 "polynomial_constant_first"],
             "is_conjugate_prime": True,
@@ -363,19 +391,42 @@ def build():
     return {
         "schema": "c473-arithmetic-orientation-v1",
         "task": "C473",
-        "verdict": "qualified green: the marked frozen sheet and unipotent square-class orient a unique residue prime and lower constituent; forgetting the sheet or allowing an outer nonsquare gauge restores the two-point Galois torsor",
+        "verdict": "green in the pointed/functorial framing: the actual marked Coxeter matching has no outer automorphism and selects a unique residue prime and lower constituent; the coarse unpointed quotient canonically retains the corresponding free two-point torsor",
         "inputs": inputs,
         "cases": cases,
         "uniform_statement": {
             "period_polynomial": "x^2+x+m with m=(q+1)/4 equal to the reduction characteristic",
             "prime_pair": "p_0=(m,alpha) and p_-1=(m,alpha+1)",
             "orientation_mechanism": "the minimal polynomial of frozen T on the simple core is the cyclotomic factor whose root orbit has period sum alpha mod p",
+            "intrinsic_trace_rule": "the selected residue map is alpha -> tr(T|simple core), so the selected prime is its kernel; this holds for every nonzero power T^a and exchanges under the nonsquare class",
             "sheet_preserving_invariance": "PSL conjugacy and square powers of T preserve the factor and selected prime",
             "outer_exchange": "a nonsquare power, PGL sheet swap, inversion T->T^-1, Galois alpha->-1-alpha, or Hadamard row/column outer duality exchanges both factors and both primes",
             "absolute_canonical_orientation": False,
             "relative_to_marked_sheet_and_period_generator": True,
             "unmarked_orientation_space": "a free C2 torsor identified simultaneously with the two sheets, two order-q unipotent classes, two period factors, and two split primes",
         },
+        "unqualified_green_reframing": {
+            "pointed_input_theorem": "for a Coxeter-invariant matching M, its PGL stabilizer equals its PSL stabilizer; hence M canonically marks one sheet, the cross-sheet core marks the other, and alpha -> tr(T|core) canonically selects the prime",
+            "coarse_input_theorem": "after forgetting M, there is still a canonical isomorphism—not a section—between the sheet, unipotent-class, period-factor, split-prime, and lower-constituent C2 torsors",
+            "minimal_point_input": "a point of any one of those five torsors; equivalently a marked matching sheet or a square-class of nontrivial unipotent",
+            "why_unqualified": "canonicity is natural transport on pointed objects and equivariant torsor identification on coarse objects; neither statement asks for a point fixed by the outer involution",
+        },
+        "adversarial_audit": [
+            {"candidate": "marked Coxeter-invariant matching from C406", "sufficient": True,
+             "reason": "its PGL and PSL stabilizers are literally equal in both cases"},
+            {"candidate": "marked sheet or nontrivial-unipotent square-class", "sufficient": True,
+             "reason": "this is exactly one point of the orientation torsor"},
+            {"candidate": "full coordinate normalization with T:x->x+1", "sufficient": True,
+             "reason": "it contains the minimal unipotent square-class datum but is over-rigid"},
+            {"candidate": "complex embedding or a sign of sqrt(-q) alone", "sufficient": False,
+             "reason": "it labels the arithmetic primes but does not choose a geometric sheet"},
+            {"candidate": "Hadamard signs, minority symbols, or C472 central lift", "sufficient": False,
+             "reason": "each is invariant under the already-certified orientation swap"},
+            {"candidate": "unpointed PGL orbit with a requested preferred prime", "sufficient": False,
+             "reason": "the outer involution acts freely, so no natural section exists"},
+            {"candidate": "unpointed PGL orbit with the output changed to a torsor isomorphism", "sufficient": True,
+             "reason": "the construction is outer-equivariant and requires no preferred point"}
+        ],
         "normalization_change_table": [
             {"change": "T -> T^a with a square mod q", "sheet_preserved": True,
              "prime_changed": False, "certificate": "all square exponents in both exact tables"},

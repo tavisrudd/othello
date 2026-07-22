@@ -76,11 +76,12 @@ characteristic-zero roof fails
 ### 2. Resolution of the apparent six-dimensional paradox
 
 C465 proves that the frozen permutation action on the six-space is `1+5`, so it is not the genuine
-degree-six Weil module. C472 may nevertheless find a second, signed action on the same underlying
-Hadamard/Golay vector space whose central involution acts as `-1` and whose Brauer character is a
-genuine degree-six reduction.
+degree-six Weil module. C472 tested the natural second signed action on the same underlying
+Hadamard/Golay vector space. Its central involution acts as `-1`, but the frozen preimage splits as
+`C2 x PSL_2(11)` and the action remains reducible `1_-+5_epsilon,-`, not a genuine degree-six
+reduction.
 
-If positive, the correct conclusion is deliberately two-action:
+The rejected positive branch would have required:
 
 ```text
 same six-dimensional vector space,
@@ -89,9 +90,22 @@ permutation action = 1+5,
 signed double-cover action = genuine Weil six-space.
 ```
 
-That would reconcile C450/C465 with the classical `2.M12` framing without weakening either
-negative. If C472 is negative, it closes the most natural remaining route by which the upper Weil
-half could enter this carrier.
+That branch is now closed inside the signed monomial carrier. The exact replacement is a canonical
+split signed Bockstein transport and a local-to-global extension theorem: the frozen hinge and both
+`M11` parents split compatibly, but their complements generate the globally nonsplit signed group.
+
+The missing ingredient for the rough genuine-Weil objective is the nonzero Schur cocycle plus a
+canonical carrier refinement that realizes it. Plausible alternate attacks are a direct modular
+Weil lattice, a quadratic/Maslov refinement of the Bockstein-Tor pairing, a nonmonomial projective
+`PGL_6(3)` search, or a Clifford-phase-space realization. Replacing the input by abstract
+`SL_2(11)` supplies genuine six-modules but does not by itself connect them canonically to the
+Hadamard/Golay geometry.
+
+A Tao-style reframing sharpens this further. The full signed Mathieu action on C471's same
+six-space is irreducible by exhaustive cyclic-submodule generation; only its frozen hinge
+restriction is `1+5`. The two split parent actions recover the center when glued. The remaining
+metaplectic question is therefore whether the recorded central word is the Maslov holonomy of the
+coordinate/Hadamard-row change of polarization, not whether the hinge preimage is nonsplit.
 
 ### 3. Canonical arithmetic orientation
 
@@ -139,8 +153,9 @@ between the operator, code, projective, design, and module layers.
 ### 6. Quantum and metaplectic interface
 
 The self-dual `[12,6,6]_3` code defines a distinguished twelve-qutrit stabilizer state through the
-standard self-dual-code construction. C472 determines whether its frozen symmetry is merely a
-permutation symmetry or admits a genuinely metaplectic/Weil signed lift. Any quantum statement
+standard self-dual-code construction. C472 shows that its certified signed monomial symmetry is
+not a genuinely metaplectic/Weil six-space: the restricted group is split and the carrier is
+reducible. A Clifford-phase-space lift remains a distinct possible construction. Any quantum statement
 must be derived with explicit stabilizer conventions and distance checks; this memo makes no AME,
 local-Clifford, or physical-realization claim.
 
@@ -151,7 +166,7 @@ The chain remains useful under partial failure.
 | Passing gates | Durable consequence |
 |:--|:--|
 | C471 only | Exact Hadamard degeneration complex and canonical puncture/shorten explanation of C465 |
-| C471 + negative C472 | Operator mechanism survives; the signed genuine-Weil door closes sharply |
+| C471 + negative C472 | Operator mechanism and canonical signed transport survive; the upper-Weil monomial door closes, while compatible local splittings expose a global gluing obstruction |
 | C471 + positive C472 | Same-space/two-action theorem and a genuine double-cover Weil realization |
 | plus C473 | The lower constituent is canonically oriented, or its exact arithmetic torsor is proved |
 | plus C474 two-case result | Exact cohomological classification of both frozen carriers |

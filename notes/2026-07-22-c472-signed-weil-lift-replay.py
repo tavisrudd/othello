@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import hashlib
+import itertools
 import json
 from collections import Counter, deque
 from pathlib import Path
@@ -110,6 +111,21 @@ def coordinates(vector, basis):
 
 def restricted(element, basis):
     return [coordinates(act_word(element, tuple(row)), basis) for row in basis]
+
+
+def row_action(vector, matrix):
+    return tuple(sum(vector[i] * matrix[i][j] for i in range(len(vector))) % P
+                 for j in range(len(vector)))
+
+
+def cyclic_span(vector, matrices):
+    basis = rref([vector])
+    while True:
+        enlarged = rref([*basis, *(row_action(row, matrix)
+                                    for row in basis for matrix in matrices)])
+        if enlarged == basis:
+            return basis
+        basis = enlarged
 
 
 def normal_closure(seed, generators):
@@ -275,6 +291,17 @@ def main():
                for generator in (t, s))
     assert all(act_word(generator, tuple([1] * 12)) == tuple([1] * 12)
                for generator in (t, s))
+    ambient_matrices = [restricted(generator, carrier) for generator in ambient_generators]
+    assert ambient_matrices == certificate["six_dimensional_action"][
+        "full_signed_Mathieu_generator_matrices"]
+    cyclic_dimensions = sorted({
+        len(cyclic_span(vector, ambient_matrices))
+        for vector in itertools.product(range(P), repeat=6) if any(vector)
+    })
+    assert cyclic_dimensions == certificate["six_dimensional_action"][
+        "full_signed_Mathieu_cyclic_submodule_dimensions"] == [6]
+    assert certificate["six_dimensional_action"][
+        "full_signed_Mathieu_action_irreducible"] is True
 
     case = next(item for item in c465["cases"] if item["q"] == 11)
     genuine = [row for row in case["brauer"]["sl_brauer_irreducibles"]
@@ -284,6 +311,30 @@ def main():
     assert case["brauer"]["modules"]["perfect_code"]["brauer_values"][1] == "2"
     assert certificate["genuine_Weil_comparison"]["comparison_verdict"] == \
         "neither genuine Gerardin reduction matches"
+    twists = certificate["all_scalar_twists_audit"]
+    assert twists["abelianization_order"] == 2
+    assert twists["linear_character_count_over_F3"] == 2
+    assert twists["all_same_preimage_linearizations_exhausted"] is True
+    alternatives = {item["candidate"]: item["rescues_genuine_six_space"]
+                    for item in certificate["alternative_inputs_audit"]}
+    assert alternatives["different central lifts of frozen T and S"] is False
+    assert alternatives["different linear character twist of the same split preimage"] is False
+    assert alternatives["abstract nonsplit Schur cover SL_2(11) with a genuine degree-six module"] is True
+    assert certificate["downstream_impact"]["logical_damage"].startswith(
+        "localized to the optional upper-Weil branch")
+    assert certificate["unqualified_green_reframing"]["negative_retained"].startswith(
+        "the proposed same-carrier genuine signed-Weil realization does not exist")
+    assert certificate["missing_ingredient"]["group_level"].startswith(
+        "the nonzero Schur-multiplier class")
+    assert certificate["projective_obstruction"]["projective_conjugacy_possible"] is False
+    assert certificate["projective_obstruction"][
+        "genuine_action_has_proper_invariant_projective_subspace"] is False
+    assert certificate["tao_global_gluing_reframing"]["computed_answer"].startswith(
+        "the full signed Mathieu action on the same six-space is irreducible")
+    routes = {item["route"]: item["status"]
+              for item in certificate["rough_objective_alt_attacks"]}
+    assert routes["Bockstein quadratic refinement"] == "strongest intrinsic candidate"
+    assert routes["lower-Weil replacement objective"] == "already achieved"
 
     print("C472 independent replay: PASS")
     print("preimage/direct factor/derived = 1320/(2x660)/660; signed Weil door closed")

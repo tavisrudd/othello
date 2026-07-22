@@ -1,6 +1,7 @@
 # C473 — arithmetic orientation of the frozen lower-Weil core
 
-**Status:** completed QUALIFIED GREEN on 2026-07-22; exact report and replay bundle:
+**Status:** completed GREEN in the pointed/functorial framing on 2026-07-22; the coarse unpointed
+object has a canonical torsor identification but no preferred point. Exact report and replay bundle:
 `notes/2026-07-22-c473-arithmetic-orientation.md`.
 
 **Context:** queued after C471 and C472. C465 determines the simple core only up to the Galois swap

@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Verdict:** `QUALIFIED GREEN — THE MARKED FROZEN SHEET ORIENTS ONE SPLIT PRIME AND LOWER CONSTITUENT; FORGETTING THE SHEET OR ALLOWING THE OUTER/GALOIS GAUGE RESTORES A FREE TWO-POINT TORSOR`
+**Verdict:** `GREEN IN THE POINTED/FUNCTORIAL FRAMING — THE ACTUAL COXETER-MATCHING INPUT ORIENTS ONE SPLIT PRIME AND LOWER CONSTITUENT; THE COARSE UNPOINTED OUTPUT IS CANONICALLY A TORSOR, NOT A PREFERRED POINT`
 
 ## Result
 
@@ -38,6 +38,56 @@ The frozen simple core is oriented by the minimal polynomial of C465's literal t
 
 This is canonical relative to the marked sheet and the fixed period generator `alpha`.  It is not
 an absolute orientation after quotienting by the outer/Galois sheet swap.
+
+There is also a basis-free recovery rule which removes even the need to label the two period
+factors. If `C` is the frozen simple core and `T` is the marked unipotent, then
+
+```text
+rho_C : Z[alpha] -> F_p,       alpha |-> tr(T | C),
+selected prime = ker(rho_C).
+```
+
+Indeed the core is cyclic for `T`, so the trace is the negative next-to-leading coefficient of
+its minimal polynomial, exactly the recorded residue root of `alpha`. Numerically the traces are
+`1` for q=7 and `0` for q=11. The independent replay checks this directly from the frozen action
+matrices, not from the factor labels.
+
+## Adversarial audit and unqualified-green framing
+
+The earlier qualification conflated two categories. The actual C406 input is pointed by its
+Coxeter-invariant matching `M`. Exact stabilizer computation gives
+
+```text
+q=7:   Stab_PGL(M) = Stab_PSL(M), order 24,
+q=11:  Stab_PGL(M) = Stab_PSL(M), order 60.
+```
+
+Thus no outer sheet swap is an automorphism of the pointed input. The sheet containing `M`, its
+opposite cross-sheet core, and the trace-kernel prime are all intrinsic and natural under
+isomorphism. In that pointed category, C473 is unqualified green.
+
+After forgetting `M`, a preferred point is impossible, but the right theorem remains unqualified:
+there is a canonical equivariant isomorphism among the five free `C2` torsors
+
+```text
+sheets = nontrivial-unipotent classes = period factors
+       = split primes = lower constituents.
+```
+
+This is an output-type correction, not an arbitrary choice. Canonicity on the coarse object means
+an isomorphism of torsors; it cannot mean an outer-fixed section of a free torsor.
+
+The alternative-input audit is sharp:
+
+| proposed extra input | enough? | disposition |
+|:--|:--:|:--|
+| marked Coxeter matching | yes, minimal geometric input | its full stabilizer lies in `PSL` |
+| marked sheet or unipotent square-class | yes | exactly one point of the orientation torsor |
+| coordinates with `T:x->x+1` | yes, but over-rigid | contains the square-class datum |
+| complex embedding / sign of `sqrt(-q)` alone | no | labels arithmetic primes, not the geometric sheet |
+| Hadamard signs, minority symbols, central lift | no | certified invariant under the swap |
+| unpointed orbit, output a preferred prime | no | free outer action forbids a natural section |
+| unpointed orbit, output the torsor identification | yes | outer-equivariant and choice-free |
 
 ## Exact period factors
 
@@ -110,6 +160,12 @@ q=11 opposite sheet: alpha -> -1 = 2.
 ```
 
 Thus sheet exchange and prime exchange are the same exact two-point action in both controls.
+
+The trace rule also makes the torsor additive: the two sheet traces are the two roots `r` and
+`-1-r`, hence sum to `-1` in both characteristics. For every `1<=a<q`, replay computes
+`tr(T^a|C)` independently and finds that it equals the residue root in the exponent table.
+Thus the quadratic-character switch can be read from one modular character value, without a
+cyclic-basis choice, polynomial factorization, or intertwiner.
 
 ## Normalization-change table
 
@@ -190,6 +246,11 @@ lattice, q=7 signed-Hadamard, or Ext claim is made.
 - **Settled by extra juice — the opposite sheet.** The transpose shared-edge core has the conjugate
   minimal polynomial and selects the other prime literally, proving the sheet/prime torsor without
   relying on table labels.
+- **Settled by further extra juice — intrinsic trace recovery.** The selected prime is exactly the
+  kernel of `alpha -> tr(T|C)`. This equality was checked directly for every nonzero power of `T`
+  on both cores; the two sheet traces sum to `-1`. Thus orientation is already visible in the
+  modular character of the marked unipotent and does not require choosing a cyclic vector or
+  naming a period factor.
 - **Open only after forgetting the marking.** There is no gauge-free preferred prime under the
   outer/Galois swap.  This is a proved free `C2` torsor, not missing computational evidence.
 - **No other genuine C473 mystery remains.** Prime ideals, residue maps, frozen matrices,

@@ -161,6 +161,16 @@ def main():
         squares = {x * x % q for x in range(1, q)}
         psl = [point_action(matrix, q) for matrix in matrices
                if determinant(matrix, q) in squares]
+        pgl_stabilizer = {permutation for permutation in pgl
+                          if image_matching(base, permutation) == base}
+        psl_stabilizer = {permutation for permutation in psl
+                          if image_matching(base, permutation) == base}
+        assert pgl_stabilizer == psl_stabilizer
+        pointed = record["pointed_input_audit"]
+        assert len(pgl_stabilizer) == pointed["PGL_stabilizer_order"]
+        assert len(psl_stabilizer) == pointed["PSL_stabilizer_order"]
+        assert pointed["stabilizers_literally_equal"] is True
+        assert pointed["outer_sheet_swap_is_input_automorphism"] is False
         all_objects = matching_orbit(base, pgl)
         first = set(matching_orbit(base, psl))
         first_ordered = matching_orbit(base, psl)
@@ -192,6 +202,10 @@ def main():
         assert all(not any(polynomial_apply(row, t, selected, p)) for row in core)
         assert selected in factors
         assert record["selected_alpha_residue"] == (-selected[-2]) % p
+        source_t = intertwiner["T_source_matrix"]
+        selected_trace = sum(source_t[i][i] for i in range(len(source_t))) % p
+        assert selected_trace == record["selected_unipotent_trace"]
+        assert selected_trace == record["selected_alpha_residue"]
         assert (record["selected_alpha_residue"], record["selected_prime"]) in (
             (0, "p_0"), (p - 1, "p_-1"))
         assert (record["selected_alpha_residue"] ** 2 +
@@ -205,6 +219,18 @@ def main():
                    for row in opposite)
         assert record["opposite_sheet"]["selected_alpha_residue"] == \
             record["other_alpha_residue"]
+        opposite_cyclic = []
+        seed = next(row for row in opposite if any(row))
+        current = tuple(seed)
+        while len(row_reduce([*opposite_cyclic, current], p)) > len(opposite_cyclic):
+            opposite_cyclic.append(current)
+            current = act(current, t0)
+        opposite_matrix = [coords(act(row, t0), opposite_cyclic, p)
+                           for row in opposite_cyclic]
+        opposite_trace = sum(opposite_matrix[i][i]
+                             for i in range(len(opposite_matrix))) % p
+        assert opposite_trace == record["opposite_sheet"]["selected_unipotent_trace"]
+        assert (selected_trace + opposite_trace) % p == p - 1
 
         exponent_table = {item["exponent"]: item for item in
                           record["normalization_exponent_table"]}
@@ -218,11 +244,30 @@ def main():
             expected_root = (record["selected_alpha_residue"] if expected_legendre == 1
                              else record["other_alpha_residue"])
             assert item["residue_root"] == expected_root
+            cyclic_power = []
+            seed = next(row for row in core if any(row))
+            current = tuple(seed)
+            while len(row_reduce([*cyclic_power, current], p)) > len(cyclic_power):
+                cyclic_power.append(current)
+                current = act(current, powered)
+            power_matrix = [coords(act(row, powered), cyclic_power, p)
+                            for row in cyclic_power]
+            assert sum(power_matrix[i][i] for i in range(len(power_matrix))) % p == \
+                item["core_trace"] == item["residue_root"]
 
     selected = {case["q"]: case["selected_prime"] for case in certificate["cases"]}
     assert selected == {7: "p_-1", 11: "p_0"}
     assert certificate["uniform_statement"]["absolute_canonical_orientation"] is False
     assert certificate["uniform_statement"]["relative_to_marked_sheet_and_period_generator"] is True
+    assert [case["pointed_input_audit"]["PGL_stabilizer_order"]
+            for case in certificate["cases"]] == [24, 60]
+    assert certificate["unqualified_green_reframing"]["minimal_point_input"]
+    audit = {item["candidate"]: item["sufficient"]
+             for item in certificate["adversarial_audit"]}
+    assert audit["marked Coxeter-invariant matching from C406"] is True
+    assert audit["complex embedding or a sign of sqrt(-q) alone"] is False
+    assert audit["unpointed PGL orbit with a requested preferred prime"] is False
+    assert audit["unpointed PGL orbit with the output changed to a torsor isomorphism"] is True
     print("C473 independent replay: PASS")
     print("selected primes q=7/q=11 = p_-1/p_0; outer gauges exchange both")
 

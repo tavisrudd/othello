@@ -184,6 +184,21 @@ def restricted_matrix(element, basis):
     return [coordinates(signed_act(element, row), basis) for row in basis]
 
 
+def row_matrix_action(vector, matrix):
+    return tuple(sum(vector[i] * matrix[i][j] for i in range(len(vector))) % P
+                 for j in range(len(vector)))
+
+
+def generated_submodule(vector, matrices):
+    basis = rref([vector])
+    while True:
+        enlarged = rref([*basis, *(row_matrix_action(row, matrix)
+                                    for row in basis for matrix in matrices)])
+        if enlarged == basis:
+            return basis
+        basis = enlarged
+
+
 def normal_closure(seed, generators):
     normal_generators = [seed]
     while True:
@@ -416,6 +431,13 @@ def build():
     assert all(rref([signed_act(generator, row) for row in extended_shortened]) ==
                extended_shortened for generator in (t, s))
     assert signed_act(t, ones) == tuple(ones) and signed_act(s, ones) == tuple(ones)
+    ambient_actions = [restricted_matrix(generator, carrier)
+                       for generator in signed_generators]
+    ambient_cyclic_dimensions = sorted({
+        len(generated_submodule(vector, ambient_actions))
+        for vector in itertools.product(range(P), repeat=6) if any(vector)
+    })
+    assert ambient_cyclic_dimensions == [6]
 
     case = next(item for item in c465["cases"] if item["q"] == 11)
     brauer = case["brauer"]
@@ -536,6 +558,9 @@ def build():
             "relation_to_C471": "the signed Bockstein transports this same split action canonically between the kernel and cokernel carriers",
             "brauer_character_formula": "chi(z^e,g)=(-1)^e*(1+chi_5_epsilon(g))",
             "p_regular_class_records": split_class_records,
+            "full_signed_Mathieu_generator_matrices": ambient_actions,
+            "full_signed_Mathieu_cyclic_submodule_dimensions": ambient_cyclic_dimensions,
+            "full_signed_Mathieu_action_irreducible": True,
         },
         "genuine_Weil_comparison": {
             "C465_genuine_degree_six_rows": genuine_rows,
@@ -561,6 +586,80 @@ def build():
                 "Brauer/order: genuine modules live on order-four involution lifts and have value 0, while the split lifts have order 2 and values +/-2",
             ],
             "all_attacks_agree": True,
+        },
+        "all_scalar_twists_audit": {
+            "abelianization_order": len(preimage) // len(derived),
+            "linear_character_count_over_F3": 2,
+            "characters": ["trivial", "central sign"],
+            "reason": "the derived subgroup is the perfect PSL_2(11) complement, so every linear character is trivial on it and only toggles the central C2",
+            "effect_on_carrier": "both twists restrict to the same reducible 1+5 module on the complement; twisting cannot create an irreducible genuine six-space",
+            "all_same_preimage_linearizations_exhausted": True,
+        },
+        "unqualified_green_reframing": {
+            "replacement_theorem": "the C471 Bockstein six-space has a canonical signed C2 x PSL_2(11) transport with central scalar -1, unique pure complement, and decomposition 1_- direct-sum 5_epsilon,-",
+            "local_to_global_theorem": "the central extension splits on the frozen hinge and on both M11 parents with compatible hinge complements, but the two parent complements generate the globally nonsplit signed Mathieu group",
+            "why_unqualified": "these are exact positive structure theorems; they do not identify the reducible carrier with a genuine irreducible Weil module",
+            "negative_retained": "the proposed same-carrier genuine signed-Weil realization does not exist inside C470's exact preimage",
+        },
+        "missing_ingredient": {
+            "group_level": "the nonzero Schur-multiplier class in H^2(PSL_2(11),C2), forcing projective involutions to lift with order four",
+            "module_level": "an irreducible six-dimensional F3 action of that nonsplit cover, rather than the split complement action 1+5",
+            "geometry_level": "a canonical refinement of the C471 carrier structure that produces the nonzero cocycle and identifies the genuine module with the Hadamard/Bockstein six-space",
+            "not_supplied_by": "signed monomial coordinates, oriented signed pairs, either M11 parent, central scalar alone, or the bilinear Bockstein transport",
+            "best_candidate_supplier": "a quadratic refinement or Maslov/metaplectic phase of the Bockstein-Tor pairing; unlike the bilinear transport, such phase data can carry the Schur cocycle",
+            "flag_boundary": "any genuine irreducible action must fail to preserve the canonical all-one line and lower five-space individually; it can retain only coarser H/Bockstein data or act on a larger phase space"
+        },
+        "projective_obstruction": {
+            "split_action_invariant_projective_point": "the all-one line",
+            "split_action_invariant_projective_hyperplane": "the five-dimensional extended-shortened core",
+            "genuine_action_has_proper_invariant_projective_subspace": False,
+            "projective_conjugacy_possible": False,
+            "consequence": "allowing scalar or projective equivalence does not rescue the comparison; a genuine action cannot be an automorphism of the full pointed Golay flag"
+        },
+        "tao_global_gluing_reframing": {
+            "question": "is the split restriction analogous to splitting a metaplectic cover on polarization stabilizers, with the genuine phase appearing only in Fourier gluing between polarizations?",
+            "computed_answer": "the full signed Mathieu action on the same six-space is irreducible, although its frozen hinge restriction is split 1+5; both parent extensions split but their complements generate the nonsplit group and a closed length-eight word yields the center",
+            "interpretation": "irreducibility and the central cocycle are restored globally by row/coordinate gluing, not locally on the hinge",
+            "missing_exact_comparison": "rewrite the central witness as holonomy in the signed coordinate-row cell groupoid and compare its scalar with a standard Maslov/metaplectic cocycle",
+            "claim_boundary": "this is a certified global signed irreducible carrier and a precise metaplectic analogy, not yet an identification with the SL_2(11) Weil representation"
+        },
+        "rough_objective_alt_attacks": [
+            {"route": "direct modular Weil model", "status": "viable new construction",
+             "attack": "construct literal generators for a genuine six-dimensional F3 representation of SL_2(11), place them on the C471 six-space, and search for an H-derived tensor or refinement that makes the identification canonical"},
+            {"route": "Bockstein quadratic refinement", "status": "strongest intrinsic candidate",
+             "attack": "upgrade C471's kernel-cokernel pairing from bilinear transport to a quadratic refinement; compute its automorphism extension and test whether the frozen PSL action acquires the nonzero metaplectic cocycle"},
+            {"route": "projective rather than monomial carrier", "status": "bounded finite search",
+             "attack": "search PGL_6(3) for a projective PSL_2(11) action preserving a coarser H/Bockstein structure whose inverse image in GL_6(3) is SL_2(11); it cannot be confined to C470's signed monomial stabilizer"},
+            {"route": "Clifford/stabilizer phase space", "status": "viable quantum reframing",
+             "attack": "seek the nonsplit action on the qutrit Pauli symplectic phase space and its metaplectic lift, rather than on the six-dimensional codeword carrier"},
+            {"route": "different PSL_2(11) subgroup class in the ambient projective group", "status": "open bounded subgroup census",
+             "attack": "enumerate nonconjugate PSL_2(11) subgroups and test restriction of the signed extension; any nonsplit class would necessarily abandon the frozen base-cell stabilizer unless it preserves equivalent geometry"},
+            {"route": "lower-Weil replacement objective", "status": "already achieved",
+             "attack": "take the canonical shortened five-space, C473 trace orientation, and C474 Ext carrier as the exact bad-prime Weil survivor instead of demanding the absent upper six-space"}
+        ],
+        "alternative_inputs_audit": [
+            {"candidate": "different central lifts of frozen T and S", "rescues_genuine_six_space": False,
+             "reason": "all four choices are exhausted; only the pure pair is a complement"},
+            {"candidate": "different linear character twist of the same split preimage", "rescues_genuine_six_space": False,
+             "reason": "there are only the trivial and central-sign twists, and both restrict as 1+5"},
+            {"candidate": "other signed-pair orbit or either M11 parent", "rescues_genuine_six_space": False,
+             "reason": "both 288-orbits have the same hinge complement and both parent preimages split"},
+            {"candidate": "conjugate frozen base-cell stabilizer", "rescues_genuine_six_space": False,
+             "reason": "conjugation preserves the restricted extension class and module decomposition"},
+            {"candidate": "abstract nonsplit Schur cover SL_2(11) with a genuine degree-six module", "rescues_genuine_six_space": True,
+             "reason": "this changes the extension class and representation input; it cannot embed as the certified frozen preimage because projective involutions must lift with order four"},
+            {"candidate": "canonical five-dimensional shortened quotient/core", "rescues_genuine_six_space": False,
+             "reason": "it gives the positive lower-Weil constituent, now arithmetically oriented by C473, but is not an upper/genuine degree-six module"},
+            {"candidate": "characteristic two control", "rescues_genuine_six_space": False,
+             "reason": "the central sign collapses and the q=7 Hamming comparison is positive, but this is a different characteristic and group case"}
+        ],
+        "downstream_impact": {
+            "C471_operator_complex": "unchanged and strengthened by canonical signed kernel/cokernel transport",
+            "C473_arithmetic_orientation": "unchanged; the central lift supplies no orientation bit, while the lower five-space survives",
+            "C474_Ext_carrier": "unchanged; it concerns the lower-Weil augmentation extension, not the absent genuine upper six-space",
+            "paper_2": "remove any same-space genuine/metaplectic six-action claim; retain the bad-prime lower-Weil carrier and the split-on-pieces/nonsplit-on-gluing theorem as the sharper boundary narrative",
+            "quantum_or_metaplectic": "the certified signed monomial symmetry remains, but no genuine metaplectic/Weil symmetry of the twelve-qutrit carrier follows from C472",
+            "logical_damage": "localized to the optional upper-Weil branch; no code, Hadamard, lower-Weil, arithmetic-orientation, or Ext conclusion is invalidated"
         },
         "sharp_alternative": {
             "signed_genuine_Weil_realization_exists": False,

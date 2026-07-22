@@ -1,4 +1,41 @@
 {
+  "adversarial_audit": [
+    {
+      "candidate": "marked Coxeter-invariant matching from C406",
+      "reason": "its PGL and PSL stabilizers are literally equal in both cases",
+      "sufficient": true
+    },
+    {
+      "candidate": "marked sheet or nontrivial-unipotent square-class",
+      "reason": "this is exactly one point of the orientation torsor",
+      "sufficient": true
+    },
+    {
+      "candidate": "full coordinate normalization with T:x->x+1",
+      "reason": "it contains the minimal unipotent square-class datum but is over-rigid",
+      "sufficient": true
+    },
+    {
+      "candidate": "complex embedding or a sign of sqrt(-q) alone",
+      "reason": "it labels the arithmetic primes but does not choose a geometric sheet",
+      "sufficient": false
+    },
+    {
+      "candidate": "Hadamard signs, minority symbols, or C472 central lift",
+      "reason": "each is invariant under the already-certified orientation swap",
+      "sufficient": false
+    },
+    {
+      "candidate": "unpointed PGL orbit with a requested preferred prime",
+      "reason": "the outer involution acts freely, so no natural section exists",
+      "sufficient": false
+    },
+    {
+      "candidate": "unpointed PGL orbit with the output changed to a torsor isomorphism",
+      "reason": "the construction is outer-equivariant and requires no preferred point",
+      "sufficient": true
+    }
+  ],
   "cases": [
     {
       "characteristic": 2,
@@ -178,6 +215,7 @@
       },
       "normalization_exponent_table": [
         {
+          "core_trace": 1,
           "exponent": 1,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -189,6 +227,7 @@
           "residue_root": 1
         },
         {
+          "core_trace": 1,
           "exponent": 2,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -200,6 +239,7 @@
           "residue_root": 1
         },
         {
+          "core_trace": 0,
           "exponent": 3,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -211,6 +251,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 1,
           "exponent": 4,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -222,6 +263,7 @@
           "residue_root": 1
         },
         {
+          "core_trace": 0,
           "exponent": 5,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -233,6 +275,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 0,
           "exponent": 6,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -282,7 +325,8 @@
           1,
           0,
           1
-        ]
+        ],
+        "selected_unipotent_trace": 0
       },
       "orientation_rule": "T -> T^a preserves the selected prime exactly for square a and swaps it for nonsquare a",
       "other_alpha_residue": 0,
@@ -292,6 +336,31 @@
         1,
         1
       ],
+      "pointed_input_audit": {
+        "PGL_stabilizer_order": 24,
+        "PSL_stabilizer_order": 24,
+        "conclusion": "the marked Coxeter matching kills the outer involution; its containing sheet and the opposite core sheet are intrinsic",
+        "marked_matching": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "outer_sheet_swap_is_input_automorphism": false,
+        "stabilizers_literally_equal": true
+      },
       "q": 7,
       "quadratic_field": "Q(sqrt(-7))",
       "ring_of_integers": "Z[alpha], alpha^2+alpha+2=0",
@@ -303,6 +372,7 @@
         1
       ],
       "selected_prime": "p_-1",
+      "selected_unipotent_trace": 1,
       "split_primes": [
         {
           "alpha_residue": 0,
@@ -317,6 +387,7 @@
           "residue_map": "a+b*alpha -> a-b mod 2"
         }
       ],
+      "trace_prime_kernel": "kernel of Z[alpha] -> F_2, alpha -> tr(T|core)=1",
       "type": "B3"
     },
     {
@@ -653,6 +724,7 @@
       },
       "normalization_exponent_table": [
         {
+          "core_trace": 0,
           "exponent": 1,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -666,6 +738,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 2,
           "exponent": 2,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -679,6 +752,7 @@
           "residue_root": 2
         },
         {
+          "core_trace": 0,
           "exponent": 3,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -692,6 +766,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 0,
           "exponent": 4,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -705,6 +780,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 0,
           "exponent": 5,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -718,6 +794,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 2,
           "exponent": 6,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -731,6 +808,7 @@
           "residue_root": 2
         },
         {
+          "core_trace": 2,
           "exponent": 7,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -744,6 +822,7 @@
           "residue_root": 2
         },
         {
+          "core_trace": 2,
           "exponent": 8,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -757,6 +836,7 @@
           "residue_root": 2
         },
         {
+          "core_trace": 0,
           "exponent": 9,
           "legendre_symbol": 1,
           "minimal_polynomial_constant_first": [
@@ -770,6 +850,7 @@
           "residue_root": 0
         },
         {
+          "core_trace": 2,
           "exponent": 10,
           "legendre_symbol": -1,
           "minimal_polynomial_constant_first": [
@@ -861,7 +942,8 @@
           2,
           1,
           1
-        ]
+        ],
+        "selected_unipotent_trace": 2
       },
       "orientation_rule": "T -> T^a preserves the selected prime exactly for square a and swaps it for nonsquare a",
       "other_alpha_residue": 2,
@@ -871,6 +953,39 @@
         1,
         1
       ],
+      "pointed_input_audit": {
+        "PGL_stabilizer_order": 60,
+        "PSL_stabilizer_order": 60,
+        "conclusion": "the marked Coxeter matching kills the outer involution; its containing sheet and the opposite core sheet are intrinsic",
+        "marked_matching": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "outer_sheet_swap_is_input_automorphism": false,
+        "stabilizers_literally_equal": true
+      },
       "q": 11,
       "quadratic_field": "Q(sqrt(-11))",
       "ring_of_integers": "Z[alpha], alpha^2+alpha+3=0",
@@ -884,6 +999,7 @@
         1
       ],
       "selected_prime": "p_0",
+      "selected_unipotent_trace": 0,
       "split_primes": [
         {
           "alpha_residue": 0,
@@ -898,6 +1014,7 @@
           "residue_map": "a+b*alpha -> a-b mod 3"
         }
       ],
+      "trace_prime_kernel": "kernel of Z[alpha] -> F_3, alpha -> tr(T|core)=0",
       "type": "H3"
     }
   ],
@@ -919,8 +1036,8 @@
       "sha256": "3676e3b8b1c7c92f9c74b80c90b572d3322c73a2509cd96b5718e769fb0e5a15"
     },
     "notes/2026-07-22-c472-signed-weil-lift.json": {
-      "bytes": 19249,
-      "sha256": "9865949a2a8b93c0f6c674b2d16a826bd9ff706b4798b67033575d7cbc8b9cf2"
+      "bytes": 29087,
+      "sha256": "9c9311c48a33d4e3fe0101ecb82cb29154e926e3bf920771716ae5bb69ffefe5"
     }
   },
   "normalization_change_table": [
@@ -990,6 +1107,7 @@
   "task": "C473",
   "uniform_statement": {
     "absolute_canonical_orientation": false,
+    "intrinsic_trace_rule": "the selected residue map is alpha -> tr(T|simple core), so the selected prime is its kernel; this holds for every nonzero power T^a and exchanges under the nonsquare class",
     "orientation_mechanism": "the minimal polynomial of frozen T on the simple core is the cyclotomic factor whose root orbit has period sum alpha mod p",
     "outer_exchange": "a nonsquare power, PGL sheet swap, inversion T->T^-1, Galois alpha->-1-alpha, or Hadamard row/column outer duality exchanges both factors and both primes",
     "period_polynomial": "x^2+x+m with m=(q+1)/4 equal to the reduction characteristic",
@@ -998,5 +1116,11 @@
     "sheet_preserving_invariance": "PSL conjugacy and square powers of T preserve the factor and selected prime",
     "unmarked_orientation_space": "a free C2 torsor identified simultaneously with the two sheets, two order-q unipotent classes, two period factors, and two split primes"
   },
-  "verdict": "qualified green: the marked frozen sheet and unipotent square-class orient a unique residue prime and lower constituent; forgetting the sheet or allowing an outer nonsquare gauge restores the two-point Galois torsor"
+  "unqualified_green_reframing": {
+    "coarse_input_theorem": "after forgetting M, there is still a canonical isomorphism\u2014not a section\u2014between the sheet, unipotent-class, period-factor, split-prime, and lower-constituent C2 torsors",
+    "minimal_point_input": "a point of any one of those five torsors; equivalently a marked matching sheet or a square-class of nontrivial unipotent",
+    "pointed_input_theorem": "for a Coxeter-invariant matching M, its PGL stabilizer equals its PSL stabilizer; hence M canonically marks one sheet, the cross-sheet core marks the other, and alpha -> tr(T|core) canonically selects the prime",
+    "why_unqualified": "canonicity is natural transport on pointed objects and equivariant torsor identification on coarse objects; neither statement asks for a point fixed by the outer involution"
+  },
+  "verdict": "green in the pointed/functorial framing: the actual marked Coxeter matching has no outer automorphism and selects a unique residue prime and lower constituent; the coarse unpointed quotient canonically retains the corresponding free two-point torsor"
 }

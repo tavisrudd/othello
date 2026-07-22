@@ -121,6 +121,30 @@ hinge, but their join is the globally nonsplit signed group.  The obstruction is
 global two-parent gluing rather than in either parent or the common subgroup.  This is the signed
 counterpart of C470's outer `M11` gluing theorem.
 
+### Tao-style reframing: the phase is global, not on the hinge
+
+The natural missed question is whether splitting on the frozen subgroup is actually expected.
+Metaplectic covers often split on polarization stabilizers; the nontrivial phase appears when
+Fourier intertwiners glue different polarizations. Here the coordinate and Hadamard-row parents
+play exactly those two roles.
+
+This analogy has a new exact foothold. Restricting C470's signed generators to the C471 six-space
+and generating the cyclic submodule of every one of its 728 nonzero vectors gives dimension six
+every time. Thus
+
+```text
+full signed Mathieu action on C_12: irreducible,
+either frozen hinge restriction:   1 + 5,
+two parent splittings joined:       globally nonsplit, center recovered by a length-eight loop.
+```
+
+So the irreducibility and central phase we were seeking already reappear globally; only the demand
+that they occur on the frozen `PSL_2(11)` hinge was wrong. The exact missing comparison is now
+smaller: express the recorded central witness as holonomy around a loop in the signed
+coordinate-row cell groupoid and compare that scalar with the standard Maslov/metaplectic cocycle.
+Until that comparison is made, this is a certified global signed irreducible carrier and a precise
+metaplectic analogy, not an `SL_2(11)` Weil identification.
+
 ## The six-dimensional action
 
 Restrict the literal signed coordinate matrices to C471's certified basis
@@ -209,6 +233,109 @@ by `z`.  All four pairs give:
 Only the pure pair obeys both `T^11=1` and `(ST)^3=1` and avoids generating the center.  Therefore
 the negative cannot be evaded by a different central choice for the standard generators.
 
+## Alt-attacks, alternative framing, and alternative inputs
+
+The negative is not the best top-level framing. The exact positive replacement is:
+
+```text
+canonical signed Bockstein transport on the C471 six-space,
+group = C2 x PSL_2(11),
+center = -I,
+unique complement action = 1 + 5_epsilon,
+full signed action = 1_- + 5_epsilon,-,
+local splittings agree but fail to glue globally.
+```
+
+This is an unqualified green structure theorem. What remains sharply negative is only the proposed
+identification with an irreducible genuine upper-Weil six-space.
+
+The alt-attacks exhaust every same-input escape:
+
+| attack / alternative input | genuine six-space? | reason |
+|:--|:--:|:--|
+| choose other central lifts of `T,S` | no | all four choices were exhausted |
+| twist by a linear character | no | abelianization is `C2`, so only trivial and central-sign twists exist; both restrict as `1+5` |
+| use the other signed-pair orbit | no | both 288-orbits have the same pure hinge complement |
+| use either `M11` parent | no | both parent preimages split and agree on the hinge |
+| conjugate the frozen base cell | no | conjugation preserves extension class and module decomposition |
+| use the canonical five-space | lower-Weil only | positive and C473-oriented, but degree five rather than genuine degree six |
+| replace the preimage by abstract `SL_2(11)` | yes, as new input | genuine six-modules exist there, but order-four involution lifts prevent embedding it as C470's frozen preimage |
+| switch to the characteristic-two control | different problem | the central sign collapses, but this is the q=7 case |
+
+The only positive rescue therefore changes the central-extension class. An arbitrary vector-space
+identification could place an `SL_2(11)` genuine module on the same six-dimensional set, but it
+would not be the signed monomial action, would not intertwine C471's operator geometry, and would
+not be canonical from the Golay/Hadamard input. That is replacement, not repair.
+
+That same-input exhaustion is only the first alt-attack layer. For the rough objective—put a
+genuine Weil/metaplectic structure in meaningful contact with the Hadamard/Golay carrier—the
+missing ingredient has three simultaneous faces:
+
+```text
+group:    the nonzero class in H^2(PSL_2(11),C2),
+module:   an irreducible six-dimensional F_3 action of its nonsplit cover,
+geometry: a canonical refinement of the C471 carrier that realizes that cocycle.
+```
+
+The central scalar `-I` supplies only a necessary shadow. The signed-pair orientation actually
+trivializes the restricted cocycle, and C471's Bockstein currently supplies bilinear transport but
+no phase refinement. The strongest intrinsic candidate is therefore a quadratic refinement—or
+Maslov/metaplectic phase—of the Bockstein–Tor pairing. Such data can carry a Schur cocycle where a
+plain equivariant linear isomorphism cannot.
+
+There is a further projective obstruction. The split action preserves both the all-one projective
+point and the projective hyperplane of the five-space. Either genuine six-space is irreducible, so
+it preserves no proper projective linear subspace. Projective conjugacy preserves that property.
+Thus allowing scalars or moving from `GL_6(3)` to `PGL_6(3)` does not repair the comparison.
+
+Consequently a successful alternate construction cannot remain an automorphism of the full
+pointed Golay `1<1+5` flag. It must either preserve only coarser H/Bockstein data while mixing the
+line and five-space, or move to a larger Clifford/phase-space carrier. This is the exact price of
+recovering irreducibility.
+
+The genuine alternate attacks on the rough objective are:
+
+1. **Direct modular Weil model.** Construct literal `6x6` generators over `F_3` for a genuine
+   `SL_2(11)` Weil reduction, put them on C471's abstract six-space, and search for an H-derived
+   tensor or quadratic refinement that makes the identification canonical.
+2. **Bockstein quadratic refinement.** Compute the perfect kernel/cokernel pairing implicit in the
+   Smith/Tor model, enumerate its quadratic refinements, and test whether one has automorphism
+   extension `SL_2(11)` rather than `C2 x PSL_2(11)`.
+3. **Projective nonmonomial search.** Search `PGL_6(3)` for a projective frozen action preserving a
+   coarser H/Bockstein structure whose inverse image in `GL_6(3)` is nonsplit. It must leave the
+   signed monomial subgroup tested by C472.
+4. **Clifford-space reframing.** Seek the nonsplit action on the qutrit Pauli symplectic phase space
+   and its metaplectic lift, rather than on the six-dimensional codeword carrier. This could recover
+   the quantum rough objective without contradicting the linear-module negative.
+5. **Different subgroup class.** Enumerate nonconjugate `PSL_2(11)` subgroups in the ambient
+   projective group and test the restricted extension class. A nonsplit class would necessarily
+   abandon the frozen base-cell stabilizer unless it preserves an equivalent coarser geometry.
+6. **Lower-Weil replacement.** Treat the canonical five-space, C473 trace-prime orientation, and
+   C474 Ext carrier as the actual bad-prime Weil object. This route is already achieved except for
+   C474's assigned uniformity gate.
+
+Routes 1–5 are new constructions or bounded new searches, not reinterpretations of C472's failed
+lift. Route 2 is the most likely to preserve the exact operator geometry; Route 6 is the strongest
+result requiring no new carrier.
+
+## Verified downstream impact of the negative
+
+The damage is localized to the optional upper-Weil/metaplectic branch.
+
+- C471's exact Hadamard complex survives intact and gains canonical signed kernel/cokernel
+  transport.
+- C473's arithmetic orientation survives intact because it concerns the lower five-space; C472's
+  central sign contributes no independent orientation bit.
+- C474's Ext question survives intact because it classifies the lower-Weil augmentation carrier,
+  not an upper six-space.
+- Paper 2 must drop the proposed same-space/two-action genuine-Weil headline. Its stronger surviving
+  spine is bad-prime degeneration to a lower-Weil Lagrangian, together with the theorem that the
+  signed extension splits on the hinge and both parents but is nonsplit in their global gluing.
+- The twelve-qutrit carrier retains its certified signed monomial symmetry, but C472 supplies no
+  genuine metaplectic/Weil symmetry claim.
+
+No code, Hadamard, Golay, lower-Weil, arithmetic-prime, or Ext conclusion is invalidated.
+
 ## Sharp disposition
 
 The signed genuine-Weil door closes:
@@ -275,6 +402,21 @@ orientation, Ext computation, or literature claim is made.
   `Hom(PSL_2(11),C2)=0`, so the split preimage has a unique complement.  There is no second signed
   restriction to test.  Exhausting all four central choices for the two frozen generators reaches
   the same conclusion and records the first failed order relation in every nonpure case.
+- **Settled by alt-attacks — whether a twist or alternate frozen input rescues it.** The derived
+  subgroup has index two, so the only linear characters are trivial and central sign; both retain
+  the reducible `1+5` complement action. Both signed-pair orbits, both `M11` parents, all conjugate
+  base cells, and all generator lifts leave the restriction split. Only replacing it by abstract
+  nonsplit `SL_2(11)` produces genuine six-modules, at the cost of leaving the certified carrier.
+- **Settled by impact verification.** The negative cuts only the optional upper-Weil/metaplectic
+  branch. C471 transport, C473 lower-prime orientation, and C474 lower-carrier Ext remain valid.
+- **Settled by further extra juice — projectivizing does not help.** The split action fixes the
+  all-one point and five-space hyperplane in projective space; either genuine six-space is
+  irreducible and has neither. Any successful alternate attack must therefore forget the full
+  pointed Golay flag, retaining only coarser operator/pairing data or moving to phase space.
+- **Settled by the Tao-style global question.** Exhaustive cyclic-submodule generation proves the
+  full signed Mathieu action on the six-space is irreducible even though the frozen hinge is
+  `1+5`. The nontrivial central phase is a global row/coordinate gluing phenomenon. What remains is
+  the exact holonomy/Maslov comparison for the recorded length-eight central loop.
 - **Open with exact owner — arithmetic orientation.** The five-space remains named only up to the
   conjugate label `epsilon`; C473 decides whether the integral signs orient it or prove a torsor
   obstruction.
