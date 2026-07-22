@@ -422,8 +422,17 @@
       "last": 474,
       "purpose": "Hadamard degeneration, signed Weil lift, arithmetic orientation, and uniform Ext bridge",
       "sequence": 47
+    },
+    {
+      "count": 1,
+      "first": 475,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 475,
+      "purpose": "determinant invariant atlas for redundancy-three Reed-Solomon deep holes",
+      "sequence": 48
     }
   ],
-  "next_id": 475,
+  "next_id": 476,
   "schema": "codex-task-id-allocations-v1"
 }
