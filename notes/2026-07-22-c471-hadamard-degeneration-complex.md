@@ -71,6 +71,57 @@ isotropic and `rank(H)<=6`.  But `v_3(det H)=v_3(12^6)=6`, so the mod-3 nullity 
 Both inequalities force rank six.  In Smith-language, the 3-primary elementary divisors consist
 of exactly six copies of `3` and no higher 3-power; the divided map explains why.
 
+### Full integral shadow
+
+The same argument determines the complete Smith normal form, not only its 3-primary part:
+
+```text
+SNF(H) = diag(1,2,2,2,2,2,6,6,6,6,6,12),
+coker(H) ~= (Z/2)^5 direct-sum (Z/6)^5 direct-sum Z/12.
+```
+
+Indeed `H^T=12H^{-1}` and transposition preserves Smith factors, so ordered invariant factors
+satisfy `d_i d_(13-i)=12`.  Modulo two every sign is one, hence `rank(H mod 2)=1`; modulo three the
+rank is six.  These ranks, the divisibility chain, and the pairing relation force the displayed
+list.  In particular
+
+```text
+coker(H)_(3) ~= (Z/3)^6,
+coker(H)_(2) ~= (Z/2)^10 direct-sum Z/4.
+```
+
+This answers the natural integral question behind the code.  Standard tensor/Tor reduction gives
+
+```text
+ker(H mod 3) = Tor_1(coker(H),F_3),
+coker(H) tensor F_3 = coker(H mod 3),
+```
+
+and the divided operator canonically identifies these two six-dimensional shadows.  Thus the
+extended Golay carrier is the 3-primary degeneration of one integral cokernel, not merely a code
+whose dimension happens to equal half the Hadamard order.
+
+### General simple-bad-prime lemma
+
+The mechanism is uniform at exactly the right level.  If integral square matrices `A,B` satisfy
+
+```text
+AB=BA=p u I,                 p prime, u nonzero mod p,
+```
+
+then their reductions form an exact two-periodic complex.  For `Ax=0 mod p`, the integral vector
+`y=Ax/p` satisfies `By=u x mod p`; multiplication by `u^{-1}` supplies the preimage.  Exchange
+`A,B` for the other half.  C471 is the instance `(A,B,p,u)=(H,H^T,3,4)`.
+
+The hypothesis `v_p(pu)=1` is load-bearing.  It sharply blocks two tempting transfers:
+
+- an order-eight binary Hadamard model has `v_2(8)=3`, as well as losing its sign encoding because
+  `+1=-1`; C471 therefore gives no q=7 exact complex;
+- C455's raw Fourier scalar is `1331=11^3`, so dividing once by 11 leaves zero modulo 11 and the
+  same Bockstein inverse does not survive.
+
+This valuation test is a stronger boundary than saying only that the normalizations look different.
+
 ## Literal incidence formula
 
 Let `A` be C469's frozen `11x11` disjointness incidence matrix.  In the exact row and coordinate
@@ -189,6 +240,9 @@ factorization supplies no `SL_2(11)` action or central scalar.  Rank six, outer 
 Fourier-style normalization therefore do not turn the C469/C465 permutation carrier `1+5` into a
 genuine degree-six Weil module.
 
+There is also a separate valuation obstruction to transferring the exact-complex mechanism:
+`v_3(12)=1`, while `v_11(1331)=3`.  The simple-bad-prime lemma applies only in the first case.
+
 ## Certificate and reproducibility
 
 The atomic bundle is:
@@ -228,6 +282,12 @@ signed-preimage, q=7, or full Weil-module conclusion is made.
 - **Settled — why rank is exactly half.** The divided identity `H^T(Hx/3)=4x` proves exactness
   structurally; determinant valuation gives an independent one-line rank proof.  Rank six is not
   an unexplained computational coincidence.
+- **Settled by the second extra-juice pass — the integral object behind the code.** The full Smith
+  form is `1,2^5,6^5,12`; its 3-primary cokernel is `(Z/3)^6`, and the Golay kernel is its Tor
+  shadow, canonically matched to the tensor shadow by the divided operator.
+- **Settled — how far the mechanism generalizes.** The exactness proof works for every integral
+  matrix factorization of `p u I` with `u` a unit modulo `p`.  It does not transfer to the q=7
+  order-eight sign model or C455's `11^3` Fourier scalar, because both primes occur to higher order.
 - **Settled — where the Golay generators come from.** The block formula
   `H=[[1^T,1],[J-2A,-1]]` makes every extended incidence row a lower-row difference modulo three.
 - **Settled from C470 — why the transpose carrier differs.** Rows and columns are outer-related

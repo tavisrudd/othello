@@ -249,6 +249,8 @@ def build():
     assert matmul(hadamard_t, hadamard) == gram
     determinant = bareiss_determinant(hadamard)
     assert abs(determinant) == 12 ** 6
+    rank_mod_2 = len(rref([[x % 2 for x in row] for row in hadamard], 2))
+    assert rank_mod_2 == 1
 
     h3 = [[x % P for x in row] for row in hadamard]
     h3_t = transpose(h3)
@@ -275,6 +277,16 @@ def build():
     row_differences = [[(h3[i + 1][j] - h3[0][j]) % P for j in range(12)]
                        for i in range(11)]
     assert row_differences == extended_incidence_rows
+
+    smith_diagonal = [1] + [2] * 5 + [6] * 5 + [12]
+    assert all(smith_diagonal[i + 1] % smith_diagonal[i] == 0 for i in range(11))
+    assert all(smith_diagonal[i] * smith_diagonal[11 - i] == 12 for i in range(12))
+    assert len([value for value in smith_diagonal if value % 2]) == rank_mod_2
+    assert len([value for value in smith_diagonal if value % 3]) == len(row_space)
+    product = 1
+    for value in smith_diagonal:
+        product *= value
+    assert product == abs(determinant)
 
     def divided_preimages(operator, vectors):
         answer = []
@@ -423,6 +435,17 @@ def build():
             "block_formula": "H=[[1^T,1],[J-2A,-1]] in the frozen C469 row/coordinate orders",
             "mod_3_lower_row_minus_top_row": extended_incidence_rows,
             "bridge_formula": "modulo 3, each lower Hadamard row minus the top row is the parity extension of the corresponding C469 incidence row",
+            "smith_normal_form": {
+                "diagonal": smith_diagonal,
+                "proof": "H^T=12H^{-1} has the same Smith factors as H, hence d_i*d_(13-i)=12; rank mod 2 is 1, rank mod 3 is 6, and divisibility determines the displayed list",
+                "rank_mod_2": rank_mod_2,
+                "rank_mod_3": len(row_space),
+                "cokernel": "(Z/2)^5 direct-sum (Z/6)^5 direct-sum Z/12",
+                "primary_parts": {
+                    "2_primary": "(Z/2)^10 direct-sum Z/4",
+                    "3_primary": "(Z/3)^6",
+                },
+            },
         },
         "mod_3_exact_complex": {
             "H_mod_3": h3,
@@ -444,6 +467,13 @@ def build():
                 "kernel_Ht_basis_preimages_under_H": transpose_kernel_preimages_under_h,
                 "formula": "beta_H(x)=[Hx/3] in F_3^12/im(H); H^T beta_H(x)=4x=x, and similarly with H,H^T exchanged",
                 "meaning": "the divided integral operator is a canonical inverse to the induced differential, not merely a rank witness",
+                "integral_cokernel_interpretation": "ker(H mod 3)=Tor_1(coker(H),F_3), while coker(H) tensor F_3=coker(H mod 3); the divided Bockstein canonically identifies these two six-dimensional shadows",
+            },
+            "general_simple_bad_prime_lemma": {
+                "statement": "if integral square matrices A,B satisfy AB=BA=p*u*I with p prime and u nonzero mod p, then reduction mod p gives an exact two-periodic A/B complex",
+                "proof": "for Ax=0 mod p, set y=Ax/p; then By=u*x mod p, and multiply by u^{-1}; exchange A and B for the other differential",
+                "C471_parameters": {"A": "H", "B": "H^T", "p": 3, "u": 4},
+                "requires_simple_prime_divisor": True,
             },
         },
         "c469_carrier_identification": {
@@ -509,6 +539,7 @@ def build():
             "projective_only_in_C455": c455["projective_weil_identification"],
             "literal_Weil_module_identification": False,
             "discriminator": "H supplies no SL_2(11) action or central scalar; rank six and Fourier-style normalization cannot override C455/C465's central-character obstruction",
+            "valuation_discriminator": "C471 has v_3(12)=1, so the divided inverse survives; C455 has v_11(1331)=3, so the simple-bad-prime exactness lemma does not transfer",
         },
         "c470_carrier_geometry": {
             "imported_fact": "C470 identifies the coordinate and Hadamard-row carriers as the two outer-related degree-12 M12 actions, with frozen PSL_2(11) as the base-cell stabilizer",
@@ -522,6 +553,8 @@ def build():
             "automorphism_group_census": False,
             "signed_double_cover_conclusion": False,
             "q7_model_claimed": False,
+            "q7_simple_bad_prime_lemma_applies": False,
+            "q7_reason": "the natural order-8 Hadamard scalar has v_2(8)=3, not 1, in addition to the collapse +1=-1",
             "larger_Weil_module_claimed": False,
         },
     }

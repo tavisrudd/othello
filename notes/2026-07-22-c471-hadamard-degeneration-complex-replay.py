@@ -147,6 +147,13 @@ def main():
         for j in range(12):
             assert sum(hadamard[i][k] * hadamard[j][k] for k in range(12)) == 12 * (i == j)
             assert sum(hadamard[k][i] * hadamard[k][j] for k in range(12)) == 12 * (i == j)
+    assert {tuple(x % 2 for x in row) for row in hadamard} == {tuple([1] * 12)}
+    smith = certificate["integral_matrix_factorization"]["smith_normal_form"]["diagonal"]
+    assert smith == [1] + [2] * 5 + [6] * 5 + [12]
+    assert all(smith[i + 1] % smith[i] == 0 for i in range(11))
+    assert all(smith[i] * smith[11 - i] == 12 for i in range(12))
+    assert sum(value % 2 != 0 for value in smith) == 1
+    assert sum(value % 3 != 0 for value in smith) == 6
 
     h3 = [[x % P for x in row] for row in hadamard]
     h3t = [list(row) for row in zip(*h3)]

@@ -7,7 +7,8 @@
     "common_exact_pattern": "an unnormalized integral/cyclotomic transform becomes an isometry only after division by the square root of its orthogonality scalar",
     "discriminator": "H supplies no SL_2(11) action or central scalar; rank six and Fourier-style normalization cannot override C455/C465's central-character obstruction",
     "literal_Weil_module_identification": false,
-    "projective_only_in_C455": "[rho(w)]=[F]"
+    "projective_only_in_C455": "[rho(w)]=[F]",
+    "valuation_discriminator": "C471 has v_3(12)=1, so the divided inverse survives; C455 has v_11(1331)=3, so the simple-bad-prime exactness lemma does not transfer"
   },
   "c469_carrier_identification": {
     "displayed_coordinate_identification_diagnostic": {
@@ -1807,6 +1808,30 @@
       ]
     ],
     "normalization": "12^(-1/2) H is an isometry between the two labelled 12-spaces",
+    "smith_normal_form": {
+      "cokernel": "(Z/2)^5 direct-sum (Z/6)^5 direct-sum Z/12",
+      "diagonal": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        6,
+        6,
+        6,
+        6,
+        6,
+        12
+      ],
+      "primary_parts": {
+        "2_primary": "(Z/2)^10 direct-sum Z/4",
+        "3_primary": "(Z/3)^6"
+      },
+      "proof": "H^T=12H^{-1} has the same Smith factors as H, hence d_i*d_(13-i)=12; rank mod 2 is 1, rank mod 3 is 6, and divisibility determines the displayed list",
+      "rank_mod_2": 1,
+      "rank_mod_3": 6
+    },
     "transpose_Ht": [
       [
         1,
@@ -2324,6 +2349,7 @@
     "determinant_cross_check": "im(H^T) is isotropic so rank(H)<=6, while v_3(det H)=v_3(12^6)=6 forces nullity(H)<=6",
     "divided_Bockstein": {
       "formula": "beta_H(x)=[Hx/3] in F_3^12/im(H); H^T beta_H(x)=4x=x, and similarly with H,H^T exchanged",
+      "integral_cokernel_interpretation": "ker(H mod 3)=Tor_1(coker(H),F_3), while coker(H) tensor F_3=coker(H mod 3); the divided Bockstein canonically identifies these two six-dimensional shadows",
       "kernel_H_basis_preimages_under_Ht": [
         [
           0,
@@ -2497,6 +2523,17 @@
         ]
       ],
       "meaning": "the divided integral operator is a canonical inverse to the induced differential, not merely a rank witness"
+    },
+    "general_simple_bad_prime_lemma": {
+      "C471_parameters": {
+        "A": "H",
+        "B": "H^T",
+        "p": 3,
+        "u": 4
+      },
+      "proof": "for Ax=0 mod p, set y=Ax/p; then By=u*x mod p, and multiply by u^{-1}; exchange A and B for the other differential",
+      "requires_simple_prime_divisor": true,
+      "statement": "if integral square matrices A,B satisfy AB=BA=p*u*I with p prime and u nonzero mod p, then reduction mod p gives an exact two-periodic A/B complex"
     },
     "image_H_basis_rref": [
       [
@@ -4747,6 +4784,8 @@
     "automorphism_group_census": false,
     "larger_Weil_module_claimed": false,
     "q7_model_claimed": false,
+    "q7_reason": "the natural order-8 Hadamard scalar has v_2(8)=3, not 1, in addition to the collapse +1=-1",
+    "q7_simple_bad_prime_lemma_applies": false,
     "signed_double_cover_conclusion": false
   },
   "task": "C471",
