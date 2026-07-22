@@ -7,6 +7,7 @@ import hashlib
 import itertools
 import json
 import math
+from collections import Counter
 from pathlib import Path
 
 
@@ -171,6 +172,37 @@ def main() -> None:
         assert pair["macwilliams_disjoint_to_shared_coefficients"] == macwilliams(disjoint_counts, q, p)
         assert pair["macwilliams_shared_to_disjoint_coefficients"] == macwilliams(shared_counts, q, p)
         assert pair["macwilliams_transforms_agree"]
+
+        if q == 11:
+            structure = case["third_order_minimum_support_structure"]
+            minimum_supports = {
+                tuple(i for i, value in enumerate(word) if value)
+                for word in replay_spans["disjoint"] if sum(value != 0 for value in word) == 5
+            }
+            row_supports = [tuple(i for i, value in enumerate(row) if value)
+                            for row in disjoint]
+            residual_supports = minimum_supports - set(row_supports)
+            replay_map = []
+            for left, right in itertools.combinations(range(q), 2):
+                codeword = tuple((1 - disjoint[left][i] - disjoint[right][i]) % p
+                                 for i in range(q))
+                assert codeword in replay_spans["disjoint"]
+                support = tuple(i for i, value in enumerate(codeword) if value)
+                replay_map.append({"row_pair": [left, right], "residual_support": list(support)})
+            assert replay_map == structure["k11_edge_to_residual_support"]
+            assert {tuple(entry["residual_support"]) for entry in replay_map} == residual_supports
+            four_counts = Counter(subset for block in minimum_supports
+                                  for subset in itertools.combinations(block, 4))
+            selected_pair_counts = Counter(subset for block in row_supports
+                                           for subset in itertools.combinations(block, 2))
+            residual_pair_counts = Counter(subset for block in residual_supports
+                                           for subset in itertools.combinations(block, 2))
+            assert set(four_counts.values()) == {1} and len(four_counts) == math.comb(11, 4)
+            assert set(selected_pair_counts.values()) == {2} and len(selected_pair_counts) == 55
+            assert set(residual_pair_counts.values()) == {10} and len(residual_pair_counts) == 55
+            assert structure["all_minimum_supports_form_steiner_4_11_5_1"]
+            assert structure["selected_rows_form_2_11_5_2"]
+            assert structure["residual_supports_form_2_11_5_10"]
 
         if q == 7:
             eq = case["hamming_7_4_3_generator_equivalence"]

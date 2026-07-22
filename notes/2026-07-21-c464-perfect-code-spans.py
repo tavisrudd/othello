@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import hashlib
 import itertools
 import json
@@ -288,6 +289,53 @@ def build() -> dict[str, object]:
         quotient_exhausts = quotient_union == disjoint_words
         if not (dual_is_subcode and all_one_splits and quotient_exhausts):
             raise AssertionError(f"q={q}: failed C=C^perp direct-sum <1> check")
+        support_structure = None
+        if q == 11:
+            minimum_supports = {
+                tuple(i for i, value in enumerate(word) if value)
+                for word in disjoint_words if sum(value != 0 for value in word) == 5
+            }
+            row_supports = [tuple(i for i, value in enumerate(row) if value)
+                            for row in disjoint]
+            residual_supports = minimum_supports - set(row_supports)
+            edge_map = []
+            formula_supports = set()
+            for left, right in itertools.combinations(range(q), 2):
+                codeword = tuple((1 - disjoint[left][i] - disjoint[right][i]) % p
+                                 for i in range(q))
+                support = tuple(i for i, value in enumerate(codeword) if value)
+                if codeword not in disjoint_words or len(support) != 5:
+                    raise AssertionError("K11 edge formula did not produce a minimum word")
+                formula_supports.add(support)
+                edge_map.append({"row_pair": [left, right], "residual_support": list(support)})
+            if formula_supports != residual_supports or len(formula_supports) != math.comb(q, 2):
+                raise AssertionError("K11 edge formula does not biject onto residual supports")
+            four_counts = Counter(subset for block in minimum_supports
+                                  for subset in itertools.combinations(block, 4))
+            selected_pair_counts = Counter(subset for block in row_supports
+                                           for subset in itertools.combinations(block, 2))
+            residual_pair_counts = Counter(subset for block in residual_supports
+                                           for subset in itertools.combinations(block, 2))
+            intersection_patterns = Counter(
+                tuple(sorted(Counter(len(set(block) & set(row))
+                                     for row in row_supports).items()))
+                for block in residual_supports
+            )
+            assert Counter(four_counts.values()) == {1: math.comb(q, 4)}
+            assert Counter(selected_pair_counts.values()) == {2: math.comb(q, 2)}
+            assert Counter(residual_pair_counts.values()) == {10: math.comb(q, 2)}
+            assert intersection_patterns == {((1, 3), (2, 2), (3, 6)): 55}
+            support_structure = {
+                "all_minimum_supports_form_steiner_4_11_5_1": True,
+                "all_minimum_support_count": len(minimum_supports),
+                "all_four_subsets_covered_once": len(four_counts),
+                "selected_rows_form_2_11_5_2": True,
+                "residual_supports_form_2_11_5_10": True,
+                "residual_support_count": len(residual_supports),
+                "residual_intersections_with_selected_rows": {"1": 3, "2": 2, "3": 6},
+                "k11_edge_bijection_formula": "support(1 - row_i - row_j) = complement(support(row_i) symmetric_difference support(row_j)) over F_3",
+                "k11_edge_to_residual_support": edge_map,
+            }
         cases.append({
             "design_complement_pair": {
                 "all_one_quotient_coset_distributions": quotient_cosets,
@@ -314,6 +362,7 @@ def build() -> dict[str, object]:
             "q": q,
             "rank_cross_check_against_c450": checks,
             "relations": relations,
+            "third_order_minimum_support_structure": support_structure,
             "type": frozen["type"],
         })
 

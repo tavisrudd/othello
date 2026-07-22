@@ -77,6 +77,56 @@ words and split the 24 full-support words as `12+12`.  The primary generator and
 replay verify the literal subcode inclusion, the all-one representative, every coset word, and
 the union equality.
 
+## Third-order edge model and Witt closure
+
+The `11+55=66` support split has an exact internal mechanism.  Write the eleven frozen ternary
+incidence rows as `r_0,...,r_10`.  For every unordered pair `{i,j}`, the codeword
+
+```text
+1 - r_i - r_j  in F_3^11
+```
+
+has weight five, with support
+
+```text
+complement(support(r_i) symmetric_difference support(r_j)).
+```
+
+These 55 supports are distinct and exhaust the residual minimum supports.  Thus the residual
+family is canonically indexed by the edges of `K_11` relative to the frozen row ordering.  Exact
+subset counting additionally proves:
+
+- all 66 minimum supports form a Steiner `4-(11,5,1)` design (each of the 330 four-subsets occurs
+  once);
+- the eleven selected row supports form the C452 `2-(11,5,2)` design;
+- the 55 residual supports form a `2-(11,5,10)` design; and
+- every residual support meets the selected rows with intersection histogram
+  `3*[size 1] + 2*[size 2] + 6*[size 3]`.
+
+The certificate records the literal 55-entry edge-to-support bijection.  This is a combinatorial
+identification, not yet a proof that the frozen `L_2(11)` action agrees with the classical Witt or
+`M_11` action, nor an identification with C450's cross-sheet relation-support set.
+
+The sharp gated theorem is now visible.  For `G=PSL_2(11)`, the counts and already-certified
+stabilizer types read
+
+```text
+11 = |G:A5|,       55 = |G:A4|.
+```
+
+Thus the expected equivariant statement is that the 66 Witt blocks restrict as the disjoint union
+`G/A5 + G/A4`: the selected rows are the first orbit, while the residual `K_11` edges are the
+second and should identify with C450's 55-element disjoint relation-support set.  C464 proves the
+underlying sets and formulas only.  The cheapest missing discriminator is one anchored support map
+plus the relevant `A4` conjugacy/stabilizer check; this remains gated rather than being inferred
+from matching cardinalities.
+
+There is also a conceptual replacement for two exhaustive observations.  Once the 66 weight-five
+supports are known, minimum distance allows any four-subset in at most one support, while
+`66*C(5,4)=C(11,4)=330` forces every four-subset exactly once.  And once the eleven rows form the
+`2-(11,5,2)` design, `1-r_i-r_j` directly forces the 55 residual blocks.  Enumeration remains in
+the certificate as independent finite evidence, but is not the only explanation.
+
 ## Explicit binary Hamming equivalence
 
 The row-reduced generator obtained from the `q=7` disjointness incidence matrix is
@@ -132,7 +182,8 @@ both frozen circulant incidence matrices and their complements, row-reduced gene
 parity-check matrices, every exhaustive weight count including zeros, minimum distances, exact
 sphere terms and equalities, incidence-row coverage of the minimum words, both exact MacWilliams
 transforms, the explicit Hamming equivalence matrices, the computed dual-span checks, and the four
-C450 rank/nullity comparisons.
+C450 rank/nullity comparisons. It also records the dual-coset decompositions, all minimum-support
+counts, and the 55-entry `K_11` edge model.
 
 Run from `/home/tavis/src/othello`:
 
@@ -156,8 +207,8 @@ recounts the minimum-word row coverage, and checks the recorded Hamming matrix e
 The trusted boundary is exact integer and prime-field arithmetic plus the hash-pinned C406, C450,
 and C452 certificates.  The output is deterministic and timestamp-free.
 
-The load-bearing byte counts are: primary generator 15,378; independent replay 9,238; canonical
-JSON 28,930; C452 input 22,113; C450 input 46,770; and C406 input 25,443.  The certificate records
+The load-bearing byte counts are: primary generator 18,543; independent replay 11,386; canonical
+JSON 42,373; C452 input 22,113; C450 input 46,770; and C406 input 25,443.  The certificate records
 the complete pinned input hashes, and the checksum manifest records complete hashes for the report,
 both executables, and the JSON output.
 
@@ -166,14 +217,18 @@ both executables, and the JSON output.
 - **Settled by extra juice — the complementary rank drops.** The shared-edge spans are the exact
   duals and satisfy `C=C^perp direct-sum <1>`; their dimensions, enumerators, and all-one cosets now
   explain the full modular rank/nullity pattern rather than merely matching it.
-- **Open — the `11+55=66` minimum-support split.** Exact enumeration shows 66 ternary weight-five
-  supports, of which the frozen geometry selects eleven and leaves 55.  The residual 55 equals
-  both `C(11,2)` and C450's disjoint relation-support count.  What is missing is an explicit
-  support bijection and proof of compatibility with the frozen `L_2(11)` action; no `M_11`, Witt
-  design, or equivariance claim is made.  This belongs to the task card's pre-allocation-gated
-  symmetry successor, not C464.
+- **Settled by third-order extra juice — the `11+55=66` minimum-support split.** The residual
+  supports are exactly `support(1-r_i-r_j)` for the 55 row pairs, giving a canonical `K_11` edge
+  bijection.  All 66 supports form the Steiner `4-(11,5,1)` design, while the selected and residual
+  families are respectively `2-(11,5,2)` and `2-(11,5,10)`.
+- **Open — equivariance and the other 55-set.** The edge formula does not yet prove that the frozen
+  `L_2(11)` action is the classical Witt/`M_11` action or identify these 55 residual supports with
+  C450's 55 cross-sheet relation-support elements.  The precise candidate is the orbit
+  decomposition `G/A5 + G/A4`; it requires one anchored support map and the relevant stabilizer
+  conjugacy check, precisely the pre-allocation-gated symmetry successor.
 - **Open — the 24 full-support words.** The dual-coset split explains them as 12 words in each
   nonzero all-one coset, but does not explain the 12 scalar pairs geometrically.  The same gated
   symmetry computation is the exact evidence gap.
 - **No other genuine C464 mystery remains.** Rank, distance, complete distributions, perfection,
-  duality, binary equivalence, row coverage, and dual-coset structure all pass exact replay.
+  duality, binary equivalence, row coverage, dual-coset structure, Steiner closure, and the `K_11`
+  edge formula all pass exact replay.
