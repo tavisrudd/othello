@@ -404,8 +404,17 @@
       "last": 469,
       "purpose": "Witt-Golay equivariance bridge for the 11, 55, and 12 projective-code orbits",
       "sequence": 45
+    },
+    {
+      "count": 1,
+      "first": 470,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 470,
+      "purpose": "exact automorphism theorem for the C469 unpunctured ternary Golay Hadamard configuration and its M11/M12 boundary",
+      "sequence": 46
     }
   ],
-  "next_id": 470,
+  "next_id": 471,
   "schema": "codex-task-id-allocations-v1"
 }
