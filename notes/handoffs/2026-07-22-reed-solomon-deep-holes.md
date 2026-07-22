@@ -79,17 +79,22 @@ class through q=9 and the first canonical q=11 support, where the stop rule fire
 are `{5,10}` and `{6,7,8,9}`.  The associated rank-one syndromes `(1,5,3)` and `(1,6,3)` share the
 all-one raw atlas but are separated by their radical orbits.  All five rank-two syndrome orbits on
 that support have distinct atlases.  The unique external two-point orbit is also the rational fixed
-set of the unique stabilizer involution whose fixed points both avoid `S`.
+set of the unique stabilizer involution whose fixed points both avoid `S`.  The
+[`C476 extra-juice review`](../2026-07-22-reed-solomon-c476-ej-review.md) identifies the exact Klein
+quotient: the two-point collision orbit is a ramified fibre and the four-point orbit is ordinary,
+so nontrivial syndrome stabilizer is a canonical one-bit discriminator.
 
 ## Current frontier — C477
 
 Freeze only C476's support and collision fibre.  Reconstruct the two orbits independently, record
 the complete stabilizer/fixed-point geometry, and test the card's discriminators in order:
 evaluation rank, extension-conflict, then continuation graph.  C475's radical orbit and C476's
-unique-external-fixed-pair description are already exact candidate answers; C477 must prove the
-smallest natural successful discriminator intrinsic to the unlabelled support/fibre, or state the
-sharp common quotient.  Do not open another support or field and do not invoke modular/Picard or
-higher-order-MDS language without passing the card's explicit gate.
+unique-external-fixed-pair description are already exact candidate answers.  The leading cheap
+candidate is now the stabilizer/ramification bit: order two on `{5,10}`, trivial on
+`{6,7,8,9}`.  C477 must derive that distinction intrinsically from the unlabelled support/fibre,
+then use the card's prescribed discriminators as controls or prove the smallest successful one
+sharp.  Do not open another support or field and do not invoke modular/Picard or higher-order-MDS
+language without passing the card's explicit gate.
 
 Task card: `notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`.
 
