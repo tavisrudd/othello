@@ -144,7 +144,7 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C476 `[reed-solomon]` [QUEUED]** — exhaust all semilinear classes of six-point GRS supports and deepest-syndrome orbits for `q in {5,7,8,9,11}`, compare them with the C475 four-cycle-plus-radical atlas in a fixed lexicographic order, and stop after completing the first colliding support fibre; if none collides, certify exact separation on the whole stated domain → `notes/2026-07-22-c476-standard-grs-atlas-pilot.md`.
+- **C476 `[reed-solomon]` [QUEUED]** — exhaust all semilinear classes of six-point GRS supports and deepest-syndrome orbits for `q in {5,7,8,9,11}`, compare them with the C475 four-cycle atlas in a fixed lexicographic order, and stop after completing the first colliding support fibre; if none collides, certify exact separation on the whole stated domain → `notes/2026-07-22-c476-standard-grs-atlas-pilot.md`.
 - **C477 `[reed-solomon]` [GATED on a C476 collision]** — freeze C476's first colliding standard-GRS support, determine its complete atlas fibre and stabilizer action, and prove an intrinsic minimal discriminator or a sharp obstruction; close immediately at an unmet collision gate → `notes/2026-07-22-c477-first-atlas-collision-fibre.md`.
 - **C478 `[reed-solomon]` [GATED on C475; independent of C476 collision]** — evaluate the proved atlas on the four frozen C398 non-GRS classes and the fixed `A3/B3/H3` conic-phase controls at `q=5,7,11`, separating ordinary orbit recovery from Gram/Sylow modular-carrier gates without opening a new field census → `notes/2026-07-22-c478-exceptional-family-controls.md`.
 

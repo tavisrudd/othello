@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C478 QUEUED/GATED as the first theorem ladder; the C398 four-class theorem and
-C474 decorated-fibre computation are the frozen base. C475 moves from exceptional non-GRS parents
-to the standard redundancy-three GRS deep-hole problem.
+**Status:** C475 complete; C476 and C478 queued, with C477 gated on an actual C476 collision.  The
+C475 four-cycle-plus-radical schema is the exact comparison interface for the standard
+redundancy-three GRS pilot.
 
 ## Goal
 
@@ -26,8 +26,10 @@ standard redundancy-three GRS code, `A` lies on a nonsingular conic.
 ```text
 C398 classification + certificate
   -> C474 decorated-fibre theorem + replay
-       -> C475 coefficient atlas for standard GRS parents
-            -> only after a collision: modular/descent discriminators
+       -> C475 coefficient atlas for standard GRS parents (complete)
+            -> C476 bounded standard-GRS atlas pilot
+            -> C478 frozen exceptional controls
+                 -> only after a collision: modular/descent discriminators
 ```
 
 | Role | Read | What C475 imports |
@@ -57,67 +59,36 @@ banks are opt-in, by obstruction shape:
 Do not recompute the four C398 fibres, their deletion traces, the q=9 cube, or their automorphism
 orbits unless a new invariant exposes a concrete inconsistency. They are regression controls.
 
-## Current frontier — C475
+## Closed base — C475
 
-Use the standard conic chart `h(t)=(1,t,t^2)`. For `u=(u_0,u_1,u_2)`, direct expansion gives the
-load-bearing factorization
+[`C475 determinant atlas`](../2026-07-22-c475-reed-solomon-determinant-atlas.md) proves the
+homogeneous Veronese factorization in all characteristics, including infinity; the full integral
+edge-torus quotient; exact finite-field orbit separation; and projective-semilinear descent.
+Four-cycles reconstruct every rank-two syndrome for supports of size at least five.  They contract
+exactly the rank-one/conic locus, where the unique missing datum is the radical point in
+`P1(F)-S`.  C476/C478 must retain the raw four-cycle fibres for collision detection, then use the
+support-stabilizer orbit of the radical point as C475's proved rank-one discriminator.  No higher
+edge monomial is permitted as a purported repair of that structural contraction.
 
-```text
-d_st(u) = det(u,h(s),h(t))
-        = (t-s) B_u(s,t),
-B_u(s,t) = u_0*s*t-u_1*(s+t)+u_2.                         (1)
-```
+## Current frontier — C476
 
-Homogeneously, (1) is the Veronese bracket factorization
-`det(u,nu(v_i),nu(v_j))=[v_i,v_j] B_u(v_i,v_j)`, up to the fixed coordinate convention. It
-separates known support geometry from evaluations of one binary bilinear form representing the
-syndrome.
+Enumerate every `PGammaL_2(q)` orbit of six-subsets of `P1(F_q)` for
+`q in {5,7,8,9,11}`, in the card's fixed lexicographic order.  For each support, enumerate deepest
+syndrome orbits under its full semilinear stabilizer and compare them first with C475's raw
+four-cycle atlas.  On rank one, record whether the radical-point orbit resolves the fibre exactly.
+Stop only after completing the first raw-atlas colliding support fibre, or after certifying
+separation on the whole bounded domain if no collision occurs.  The `q=5` full-conic support is a
+zero/terminal control.  Exact frame-rigid exhaustion, an independent replay, and a hash-pinned
+compact certificate are required.
 
-Under `u -> b*u`, `h_i -> a_i*h_i`, and `g in GL_3`,
-
-```text
-d_ij -> b*a_i*a_j*det(g)*d_ij.                            (2)
-```
-
-Thus raw coefficients cannot classify monomial-equivalence classes. Balanced ratios, beginning
-with
-
-```text
-R_ijkl = d_ij*d_kl/(d_ik*d_jl),                           (3)
-```
-
-cancel every factor in (2). Dividing (3) by the corresponding support cross-ratio leaves
-`B_ij*B_kl/(B_ik*B_jl)`, a syndrome-only coordinate. Frobenius acts by powering and support
-automorphisms permute indices, so the appropriate invariant is its permutation/Frobenius orbit.
-
-C475 must now:
-
-1. prove (1)--(2), including the point at infinity and characteristic two;
-2. determine the rational torus quotient of the nonzero edge labels `d_ij`, including whether
-   four-cycle ratios generate it in the required sense;
-3. prove the descent of the support-normalized ratios under projectivities, Frobenius, and the
-   conic-support automorphism group;
-4. give exact labelled reconstruction and orbit-equality criteria; and
-5. export a canonical comparison procedure and data schema to C476 and C478.
-
-Import order is strict: use the `arcs` syndrome/evaluation theorems first, C312/C314 quotient-chart
-discipline second, and `thm-repair-coefficients` as the gauge warning. Use C295 reconstruction only
-after a scalar-atlas collision. C417, Weil-roof, higher-order-MDS, and C474 modular/Picard machinery
-remain gated until that collision has a nontrivial structured fibre.
-
-The deliverable is
-[`notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`](../2026-07-22-c475-reed-solomon-determinant-atlas.md),
-with a symbolic checker beside it if computation supports the algebra. Finite orbit censuses belong
-to C476 and C478, not this task.
-
-Task card: `notes/reed-solomon-tasks/c475-veronese-cycle-quotient.md`.
+Task card: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`.
 
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
 |---|---|---|---|---|
-| C475 | Veronese factorization, torus quotient, and semilinear descent | none | exact invariant-generation/reconstruction theorem, including infinity and characteristic two | finite atlas is well-defined |
-| C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | C475 | first complete collision fibre, or certified separation on the entire bounded domain | honest evidence for generic separation or an exceptional mechanism |
+| C475 | Veronese factorization, torus quotient, and semilinear descent | complete | four-cycles generate; rank two reconstructs; rank one needs its radical | finite atlas is well-defined |
+| C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | gate passed | first complete collision fibre, or certified separation on the entire bounded domain | honest evidence for generic separation or an exceptional mechanism |
 | C477 | intrinsic theorem for C476's first collision | an actual C476 collision | full fibre/stabilizer theorem plus minimal discriminator or sharp obstruction | candidate discriminant geometry |
 | C478 | C398 and `A3/B3/H3` exceptional controls | C475 | exact comparison of orbit recovery, Gram rank, and Sylow gate on the frozen cases | decision on whether modular machinery belongs in this lane |
 
@@ -163,4 +134,4 @@ history.
 
 ## Next command
 
-`go C475`
+`go C476`
