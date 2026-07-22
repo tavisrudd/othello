@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475 complete; C476 and C478 queued, with C477 gated on an actual C476 collision.  The
-C475 four-cycle-plus-radical schema is the exact comparison interface for the standard
-redundancy-three GRS pilot.
+**Status:** C475--C476 complete; C477 and C478 queued.  C476 found the first raw-atlas collision at
+the first canonical q=11 support and proved that C475's radical marker resolves its two rank-one
+syndrome orbits.
 
 ## Goal
 
@@ -27,7 +27,8 @@ standard redundancy-three GRS code, `A` lies on a nonsingular conic.
 C398 classification + certificate
   -> C474 decorated-fibre theorem + replay
        -> C475 coefficient atlas for standard GRS parents (complete)
-            -> C476 bounded standard-GRS atlas pilot
+            -> C476 bounded standard-GRS atlas pilot (complete)
+                 -> C477 first q=11 collision fibre
             -> C478 frozen exceptional controls
                  -> only after a collision: modular/descent discriminators
 ```
@@ -70,26 +71,35 @@ exactly the rank-one/conic locus, where the unique missing datum is the radical 
 support-stabilizer orbit of the radical point as C475's proved rank-one discriminator.  No higher
 edge monomial is permitted as a purported repair of that structural contraction.
 
-## Current frontier — C476
+## Closed base — C476
 
-Enumerate every `PGammaL_2(q)` orbit of six-subsets of `P1(F_q)` for
-`q in {5,7,8,9,11}`, in the card's fixed lexicographic order.  For each support, enumerate deepest
-syndrome orbits under its full semilinear stabilizer and compare them first with C475's raw
-four-cycle atlas.  On rank one, record whether the radical-point orbit resolves the fibre exactly.
-Stop only after completing the first raw-atlas colliding support fibre, or after certifying
-separation on the whole bounded domain if no collision occurs.  The `q=5` full-conic support is a
-zero/terminal control.  Exact frame-rigid exhaustion, an independent replay, and a hash-pinned
-compact certificate are required.
+[`C476 bounded pilot`](../2026-07-22-c476-standard-grs-atlas-pilot.md) exhausts every six-support
+class through q=9 and the first canonical q=11 support, where the stop rule fires.  For
+`S={0,1,2,3,4,infinity}`, the full semilinear stabilizer is Klein four and its complement orbits
+are `{5,10}` and `{6,7,8,9}`.  The associated rank-one syndromes `(1,5,3)` and `(1,6,3)` share the
+all-one raw atlas but are separated by their radical orbits.  All five rank-two syndrome orbits on
+that support have distinct atlases.  The unique external two-point orbit is also the rational fixed
+set of the unique stabilizer involution whose fixed points both avoid `S`.
 
-Task card: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`.
+## Current frontier — C477
+
+Freeze only C476's support and collision fibre.  Reconstruct the two orbits independently, record
+the complete stabilizer/fixed-point geometry, and test the card's discriminators in order:
+evaluation rank, extension-conflict, then continuation graph.  C475's radical orbit and C476's
+unique-external-fixed-pair description are already exact candidate answers; C477 must prove the
+smallest natural successful discriminator intrinsic to the unlabelled support/fibre, or state the
+sharp common quotient.  Do not open another support or field and do not invoke modular/Picard or
+higher-order-MDS language without passing the card's explicit gate.
+
+Task card: `notes/reed-solomon-tasks/c477-first-atlas-collision-fibre.md`.
 
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
 |---|---|---|---|---|
 | C475 | Veronese factorization, torus quotient, and semilinear descent | complete | four-cycles generate; rank two reconstructs; rank one needs its radical | finite atlas is well-defined |
-| C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | gate passed | first complete collision fibre, or certified separation on the entire bounded domain | honest evidence for generic separation or an exceptional mechanism |
-| C477 | intrinsic theorem for C476's first collision | an actual C476 collision | full fibre/stabilizer theorem plus minimal discriminator or sharp obstruction | candidate discriminant geometry |
+| C476 | all six-point GRS supports for `q in {5,7,8,9,11}` | complete | first collision is the q=11 rank-one `2+4` radical split | honest exceptional mechanism |
+| C477 | intrinsic theorem for C476's first collision | gate passed | full fibre/stabilizer theorem plus minimal discriminator or sharp obstruction | candidate discriminant geometry |
 | C478 | C398 and `A3/B3/H3` exceptional controls | C475 | exact comparison of orbit recovery, Gram rank, and Sylow gate on the frozen cases | decision on whether modular machinery belongs in this lane |
 
 Cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`,
@@ -134,4 +144,4 @@ history.
 
 ## Next command
 
-`go C476`
+`go C477`
