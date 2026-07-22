@@ -200,8 +200,11 @@ extractor computes colour Frobenius as `(0 4 1)(2 5 3)`, proving that the `3+3` 
 order-three colour quotient, not the Gale class or a Hilbert--90 obstruction.  Its frozen
 two-centre residual pairing commutes with this `C3`, giving a regular `C6` action without asserting
 that the child-relative `C2` is Gale.  Over `F_(q^m)`, the genuine Gale descent bit multiplies by
-`m`, so odd extensions preserve it and even extensions split it.  The q=8 one-centre, two-centre,
-colour-orbit, and three-centre partitions are exactly the `C6/C3/C2/1` subgroup-quotient diamond.
+`m`, so odd extensions preserve it and even extensions split it.  After choosing a representative
+two-centre restriction, the q=8 one-centre, two-centre, colour-orbit, and three-centre partitions
+are exactly the `C6/C3/C2/1` subgroup-quotient diamond; the child has no preferred pairing before
+that choice.  Hilbert 90 first rationalizes any Frobenius orbit of frame charts, then the intrinsic
+square-class/trace test detects the separate constant `C2` sheet.
 
 Task card: `notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md`.
 

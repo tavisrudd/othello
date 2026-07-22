@@ -229,6 +229,18 @@ The fixed-point criterion proves the asserted effectivity statement.  If the val
 Frobenius swaps two points and its square fixes both, so the exact first field of sheet definition
 is quadratic.
 
+There is one necessary local-to-global step before using the chart formulas arithmetically.  The
+odd coordinates `tau_i` are local bases of an anti-invariant line over the target, and the even
+coordinates `eta_i` are local origins of an affine additive torsor.  A Frobenius-stable target need
+not lie in one individually Frobenius-fixed frame chart.  Instead, take the finite Frobenius orbit
+of any available chart and use its transition cocycle.  Multiplicative Hilbert 90 descends the line
+fibre to a one-dimensional `F_q` space; additive Hilbert 90 descends the affine coordinate torsor.
+Only after this rationalization are `delta` and `kappa` literal `F_q` values.  Changing the
+rationalized basis changes `delta` by an `F_q` square, and changing the rationalized origin changes
+`kappa` by `a^2+a`.  Hence the square class and trace below are intrinsic even when no chosen frame
+chart is itself Frobenius-fixed.  This connected-gauge descent trivializes the coordinate carrier,
+not the residual constant `C2` sheet torsor.
+
 In odd characteristic, C483 supplies local anti-invariant coordinates
 
 ```text
@@ -463,10 +475,28 @@ the `(C3 orbit,C2 orbit)` coordinates of parents `0,...,5` are
 (0,0), (0,1), (1,1), (1,2), (0,2), (1,0).             (29)
 ```
 
-This turns the frozen recovery threshold into a typed quotient theorem.  One centre forgets the
+After choosing the displayed representative of the unique child orbit of two-centre subsets, this
+turns the frozen recovery threshold into a typed quotient theorem.  One centre forgets the
 whole regular coordinate, two centres retain the `C3` coordinate, colour orbiting retains the
 `C2` coordinate, and three equivariant centres retain both.  Again, the `C2` coordinate here is
-the selected fixed-child restriction ambiguity, not an asserted Gale coordinate.
+the selected fixed-child restriction ambiguity, not an asserted Gale coordinate.  Another
+two-centre subset transports this structure by the child stabilizer; the undecorated child has no
+preferred global pairing or preferred `C6` generator.
+
+## Terence Tao stress test
+
+Two apparent shortcuts are invalid, and the theorem now avoids both.
+
+First, overlap invariance under Gale association alone does not put a local parameter in `F_q`.
+The Frobenius orbit of frame charts must be descended.  The rationalization paragraph in Section 3
+supplies this step and explains exactly where Hilbert 90 is used: it trivializes the carrier line or
+affine coordinate, while the constant Gale `C2` class remains available to obstruct a sheet.
+
+Second, the regular q=8 `C6` is not canonical before choosing a two-centre restriction.  What is
+canonical on the undecorated frozen fibre is the colour `C3` action and the child orbit of residual
+pairings.  Choosing a representative pairing produces the transverse product grid (29); changing
+the selected pair conjugates that grid by a child transporter.  Therefore no hidden identification
+of the residual `C2` with Gale association, and no preferred generator, has entered the theorem.
 
 ## Mystery ledger
 
@@ -476,11 +506,12 @@ the selected fixed-child restriction ambiguity, not an asserted Gale coordinate.
 | Equivariance of Gale, ramification, rank drops, and child cut | settled | Equations (12)--(16) cover the full C483 table. |
 | Global sheet obstruction in odd characteristic | settled | The overlap-invariant square class of `tau_i^2` is exact. |
 | Global sheet obstruction in characteristic two | settled | The overlap-invariant trace of `kappa_i` is exact. |
+| Frobenius descent of a non-fixed frame chart | settled by the Tao stress test | Hilbert 90 rationalizes the line/additive carrier before the square-class or trace test; it does not kill the constant `C2` cover. |
 | Connected gauge descent | settled | Hilbert 90/Lang, plus C475's explicit transporter, leave no extra class. |
 | Finite diagonal-stabilizer descent | settled | Criterion (3) is necessary and sufficient; a sheet-swapping stabilizer means non-uniqueness. |
 | q=8 `3+3` mechanism | settled by the frozen extraction | Colour Frobenius acts as `(0 4 1)(2 5 3)`; the quotient erases a free `C3` orientation. |
 | q=8 two-centre residual symmetry | settled by the requested extra-juice pass | Pairing `(0 5)(1 2)(3 4)` commutes with colour Frobenius and gives a regular `C6`; it is not asserted to be Gale. |
-| q=8 information-loss lattice | settled by the third extra-juice pass | The `6 / 3x2 / 2x3 / 1x6` partitions are exactly the `C6 / C3 / C2 / 1` subgroup quotients, with transverse product coordinates (29). |
+| q=8 information-loss lattice | settled by the third extra-juice pass and qualified by the Tao stress test | For a chosen two-centre representative the `6 / 3x2 / 2x3 / 1x6` partitions are the `C6 / C3 / C2 / 1` quotients; another pair transports, rather than canonically fixes, the residual `C2`. |
 | Whether q=8 is a Hilbert--90 class | settled negatively | It is a colour-only finite coequalizer, distinct from both connected gauges and the Gale `C2` cover. |
 | Behaviour over `F_(q^m)` | settled by the second extra-juice pass | The obstruction restricts to `m b`; odd degrees preserve it and even degrees split it. |
 | All-field reconstruction synthesis | open | C485 owns assembly and must keep child-relative recovery conditional on injectivity of `Sigma_T` outside the four frozen controls. |
