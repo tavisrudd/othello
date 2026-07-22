@@ -125,3 +125,22 @@ gives multiplicity three for both B3 and H3; the modular split refines this to `
 `t^3,t^2L,t Sym^2L,Sym^3L`.  In H3 the pure `t^3` and `Sym^3L(8)` lines are C412's unique rank-one
 and Tate-kernel lines, and the signed moment is `[0:2:10]` in the split basis.  See
 [`2026-07-21-c454-klein-cubic.md`](../2026-07-21-c454-klein-cubic.md).
+
+## 2026-07-22 — Weil-roof battery through C473
+
+The completed C455--C473 battery history was removed from the live routing handoff. Exact
+dispositions and replay evidence remain in the dated task reports and the global task archive.
+The terminal battery reports before C474 are:
+
+- [`2026-07-22-c471-hadamard-degeneration-complex.md`](../2026-07-22-c471-hadamard-degeneration-complex.md);
+- [`2026-07-22-c472-signed-weil-lift.md`](../2026-07-22-c472-signed-weil-lift.md);
+- [`2026-07-22-c473-arithmetic-orientation.md`](../2026-07-22-c473-arithmetic-orientation.md).
+
+C472 closes the frozen genuine signed-Weil restriction negatively while retaining canonical split
+Bockstein transport and the global two-parent gluing obstruction. Its alt-attacks identify the
+missing rough-objective ingredient as a nonzero Schur cocycle plus a canonical metaplectic
+refinement of the carrier. Further extra juice proves that the full signed Mathieu action on the
+same six-space is irreducible, so the phase reappears in global two-parent gluing; comparison of
+the central loop with Maslov holonomy remains open. C473 is green in the pointed/functorial framing and identifies the
+selected arithmetic prime by `alpha -> tr(T|C)`; the unpointed form is a canonical isomorphism of
+orientation torsors. C474 remains the next live battery route.
