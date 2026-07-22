@@ -588,7 +588,10 @@ constituents, the char-0 sharp negative becomes a sharp positive as a Brauer-lev
 Cheapest discriminator: decompose the two char-3 kernels as modular `PSL_2(11)`-modules, re-examine
 the descent obstruction modularly, and run the `q=7` control in the same pass.
 **Evidence:** OPEN numerology over CHECKED nullities (C450 bundle).
-**Status:** open lead
+**Status:** open lead; explanation route found 2026-07-21 — the C452 executor's post-closure probe
+identifies the char-3 span of the disjoint matrix as the perfect ternary `[11,6,5]` Golay code, so
+nullity 5 is the Golay corank; the Brauer/Weil reading is likely subsumed by the perfect-code lead
+below
 
 ### 2026-07-21 — the surviving Weil bridge may be a character-sum identity, not a module map
 
@@ -627,3 +630,23 @@ kills the mechanism, co-occurrence without `(2/q)` tracking kills only the Legen
 **Evidence:** CHECKED endpoints (C450/C451 bundles); the linking mechanism is REASONED.
 **Status:** open lead
 
+
+### 2026-07-21 — the cross-sheet designs span the two exceptional perfect codes
+
+**Provenance:** post-closure exact probe by the C452/T5 executor (scratch computation, no durable
+bundle yet), relayed after the C452 QR/Barker closure.
+**Was I looking for this?:** no — C452's card scoped the van Lint--Tietavainen perfect-code wall to
+its literal hypotheses; the span probe went beyond the card.
+**Observed / musing:** over `F_2` the `q=7` cyclic incidence span is the perfect binary `[7,4,3]`
+Hamming code (weight enumerator `1+7z^3+7z^4+z^7`); over `F_3` the `q=11` span has rank 6 and
+minimum distance 5 — the perfect ternary `[11,6,5]` Golay parameters, with the sphere-packing count
+`3^6(1+22+220)=3^11` closing exactly. Independent cross-check: C450's certified char-3 nullity 5
+for the disjoint `11x11` matrix is precisely the Golay corank. The perfect-code wall is thus not
+adjacent but load-bearing: both matching designs land on the two exceptional perfect-code families.
+**Why it may matter / strongest question:** candidate cleanest coding-theoretic mechanism in the
+roof. Natural deeper door: `PSL_2(7) = GL_3(2) = Aut(Hamming)` and the frozen `PSL_2(11)` action
+embedding into `M_11` on the ternary Golay code (`L_2(11)` is maximal in `M_11`).
+**Evidence:** CHECKED (exact scratch probe by executor) plus the C450-certified rank
+cross-confirmation; no durable certificate or replay yet.
+**Status:** open lead; promotion candidate — a small durable certificate for the spans, weight
+distributions, and sphere equalities is the proposed bounded task shape
