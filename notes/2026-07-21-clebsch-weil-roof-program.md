@@ -53,11 +53,12 @@ selected card names it as a load-bearing input.
 | C457 | T10 | GREEN: maximal orders reduce onto `M2`; spin images equal frozen sheets; H3 comparisons are reductions of one `C(phi)` | quaternion mechanism certified; C382 boundary sharpened |
 | C459 | Q-forms | parallel and non-blocking | separates rational object from golden labeling |
 | C462 | M3-torsor | GREEN: canonical unoriented four-companion `C4` torsor; sigma is `(0 2 3 1)`, sigma-squared is frozen kappa, residue equivariance holds up to inverse orientation, and the common degree-1 diagnostic descends; the selector obstruction is the nonsplit `1 -> C2 -> C4 -> C2 -> 1` | over `Z[zeta_5,1/10]`, candidate base-changed family-plus-obstruction replacement for the cut tensor clause and framing input to paper-2 gluing; no M3a tensor/module claim |
+| C464 | code-spans | QUEUED: certify the Hamming `[7,4,3]`/ternary Golay `[11,6,5]` cyclic incidence spans of the cross-sheet QR designs, with full weight distributions, sphere equalities, and the C450 rank cross-check (promoted from the C452 post-closure probe) | durable perfect-code beam for Phase 3; named successor (symmetry/equivariance) stays pre-allocation gated |
 | C463 | A3-torsor | QUEUED: certify the A3 companion `Z/2` torsor over `Z[i]` and the three-case bit-carrier duality (M-chain juice memo found the unrecorded A3 obstruction; B3 companion descends) | completes the cross-Coxeter companion-torsor table with C462; framing input to Phase 3 and paper-2 gluing |
 
 The critical path is GREEN through `C444 -> C445 -> C449`; C450--C452 are closed, and **C453 is next by battery order**.
-C453--C456 are independent once their cards' frozen inputs are available. C459 and C463 may run
-in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
+C453--C456 are independent once their cards' frozen inputs are available. C459, C463, and C464 may
+run in parallel but must not displace a critical-path slot. Phase 3 waits for dispositions of every
 allocated battery row.
 
 **Discriminator caution (from C450):** the T2 split-torus restriction test admits the
@@ -81,6 +82,7 @@ discriminator.
 - [`c459-q-forms.md`](weil-roof-tasks/c459-q-forms.md)
 - [`c462-torsor-descent.md`](weil-roof-tasks/c462-torsor-descent.md)
 - [`c463-a3-companion-torsor.md`](weil-roof-tasks/c463-a3-companion-torsor.md)
+- [`c464-perfect-code-spans.md`](weil-roof-tasks/c464-perfect-code-spans.md)
 
 Phase-2 framing and Phase-3 synthesis are not routine task context. Load
 [`weil-roof-tasks/phase2-phase3-synthesis.md`](weil-roof-tasks/phase2-phase3-synthesis.md) only when

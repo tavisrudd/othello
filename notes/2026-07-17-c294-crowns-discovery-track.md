@@ -648,5 +648,6 @@ roof. Natural deeper door: `PSL_2(7) = GL_3(2) = Aut(Hamming)` and the frozen `P
 embedding into `M_11` on the ternary Golay code (`L_2(11)` is maximal in `M_11`).
 **Evidence:** CHECKED (exact scratch probe by executor) plus the C450-certified rank
 cross-confirmation; no durable certificate or replay yet.
-**Status:** open lead; promotion candidate — a small durable certificate for the spans, weight
-distributions, and sphere equalities is the proposed bounded task shape
+**Status:** graduated -> C464 (`notes/weil-roof-tasks/c464-perfect-code-spans.md`), the durable
+span/weight/sphere certificate; the symmetry/equivariance door remains its pre-allocation-gated
+successor
