@@ -24,21 +24,24 @@ failed rows.  C457, C459, C462, C463, C466, and C468 make paper 2 concrete but d
 `2026-07-21-clebsch-weil-roof-results-ledger.md`; this document keeps only the narrative and
 manuscript decisions needed in a cold session.
 
-**Revision 2026-07-22:** the complete C440--C469 ledger now incorporates every last-24-hour
+**Revision 2026-07-22:** the complete C440--C471 ledger now incorporates every last-24-hour
 closeout upgrade and ranks the battery by manuscript role.  C469 promotes the code/design row to
 a projective capstone: twelve full-support points have the complete Witt design as their secant
-shadow, and parity extension exposes an order-12 Hadamard model.  It is the second-ranked Paper-1
-closing result beneath C445, not a second spine.  C465 is closed: the literal degree-six
-Weil/Golay roof fails, while the exact nonsplit `5|1|5*` (and q=7 `3|1|3*`) self-dual sandwich is
-a major Paper-2 theorem.  The planning document retains only these narrative consequences; the
+shadow, and parity extension exposes an order-12 Hadamard model.  C470 closes its exact symmetry
+boundary through `M12`, the two `M11` classes, their frozen `PSL_2(11)` intersection, and Hadamard
+outer duality.  Together they are the second-ranked Paper-1 closing package beneath C445, not a
+second spine.  C465's exact nonsplit `5|1|5*` sandwich and C471's structural Hadamard-degeneration
+complex now form the top-ranked Paper-2 mechanism: the extended Golay code is kernel/image, and
+puncture/shorten recover the six- and five-dimensional carriers.  The signed genuine-Weil lift
+remains C472's question.  The planning document retains only these narrative consequences; the
 expanded statements and editorial ranking live in the result ledger.
 
-The proof/evidence and Lean-readiness audit of the battery through its pre-C465/C469 state is
+The proof/evidence and Lean-readiness audit predates C465 and C469--C471:
 `2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`.  It accepts the exact finite certificates,
 separates direct finite leaves from theorem-interface and cohomological dependencies, records the
 required C443 ledger correction, and gives safe bounded novelty wording for the most attractive
-recent claims.  C465 and C469 landed afterward; their exact reports and the updated result ledger
-are authoritative until a proof-audit addendum is commissioned.
+recent claims.  The later exact reports and the updated result ledger are authoritative for C465
+and C469--C471 until a proof-audit addendum is commissioned.
 The second-tier novelty spot-check and ranked safe wording for C445/C457/C459/C460/C467/C468 are in
 `2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md`.
 
@@ -177,7 +180,8 @@ frame and the closing section:
 | First and second quotient moments | **unoriented recovery** | unique complementary balanced sheets | C406/C430/C424 |
 | Signed cubic moment | **oriented** | determinant-square character and sharp degree-three threshold | C406/C412/C420/C423--C424 |
 | Decorated depth profiles | **parent recovered** | `1,4,6 / 1,4,6`, singleton matching, then golden parent | C411/C412/C425 with C379 |
-| Design, perfect-code, and secant passage | **complete projective shadow retained** | QR difference designs and perfect spans; `G/A5+G/D12` Witt blocks; the twelve full-support points have all 66 Witt blocks as their secant shadow and unpuncture to an order-12 Hadamard system | C452/C464/C469; classical design/code/Hadamard credit; the proposed `G/A4` and transitive `G/(11:5)` identifications are false; no `M_11`, `M_12`, or full automorphism claim |
+| Design, perfect-code, and secant passage | **complete projective and symmetry shadow retained** | QR difference designs and perfect spans; `G/A5+G/D12` Witt blocks; the twelve full-support points have all 66 Witt blocks as their secant shadow; unpuncturing gives the order-12 Hadamard system, `S(5,6,12)`, two `M11` parents meeting in the frozen `PSL_2(11)`, and `M12` closure | C452/C464/C469/C470; classical design/code/Hadamard/Mathieu credit; the proposed `G/A4` and transitive `G/(11:5)` identifications are false |
+| Integral Hadamard degeneration | **module carrier retained** | the rank-six exact complex has the extended Golay code as kernel/image; puncture and shorten recover C465's `1+5` carrier and simple five-dimensional Lagrangian | C471; Paper-2 proof, one Paper-1 shadow sentence at most; C472 still owns the signed genuine-Weil comparison |
 | Golden reduction across primes | **visible or fused** | exact mod-40 law; at 31 the C395 and golden arcs meet in a norm-31, first-order collision | C453; C459/C466 mechanisms stay in paper 2; no common carrier for the `(5/q)`, `(2/q)`, and `(-1/q)` characters and no H4 claim |
 | Theta / Arf passage | **forgotten** | Lagrangian packings and superspecial Jacobians remain | C451; parity is not a sheet detector |
 | Quantum LU passage | **forgotten** | exact equivalence bitorsor and signed-Fourier duality remain | C456/C467; advice concerns geometric parent choice, not a quantum LU invariant |
@@ -213,13 +217,14 @@ carried from the C406 audit into the table's credit column; every row's literatu
 ### Paper-1-facing intake from the 2026-07-21 weil-roof battery
 
 Paper 1 directly imports C444/C445's rank-three matching and arithmetic-gluing close, C449's
-compact split-torus mechanism, C460's supporting hinge geometry, C452/C464/C469's
-design/perfect-code/secant-shadow row, C453's mod-40 law, C451's theta-erasure boundary, C455's scoped Weil-Weyl sentence, and
+compact split-torus mechanism, C460's supporting hinge geometry, C452/C464/C469/C470's
+design/perfect-code/secant-shadow/symmetry row, C453's mod-40 law, C451's theta-erasure boundary,
+C455's scoped Weil-Weyl sentence, and
 C456/C467's quantum-erasure boundary.  C450 and C454 supply mandatory non-identification wording.
 
 Quaternion reduction (C457), rational descent (C459), companion torsors (C462/C463), the Dickson
-proof (C466), the modular Weil/Golay replacement sandwich (C465), and Klein-cubic zeta functions
-(C468) are paper-2 results and appear in paper 1 only as concise pointers after the certified
+proof (C466), the modular Weil/Golay replacement sandwich and Hadamard degeneration complex
+(C465/C471), and Klein-cubic zeta functions (C468) are paper-2 results and appear in paper 1 only as concise pointers after the certified
 ledger.  C446--C448 remain unallocated selector results.  The complete
 result-by-result record, including all infrastructure and unallocated rows, is
 `2026-07-21-clebsch-weil-roof-results-ledger.md`.
@@ -227,7 +232,7 @@ result-by-result record, including all infrastructure and unallocated rows, is
 ## Complete results -> paper -> proofs ledger
 
 This document retains the original-paper and pre-roof crowns ledgers below.  The complete
-C440--C469 battery ledger is split to `2026-07-21-clebsch-weil-roof-results-ledger.md` so cold
+C440--C471 battery ledger is split to `2026-07-21-clebsch-weil-roof-results-ledger.md` so cold
 sessions need not load every result report or carry a second full-width table in this planning
 document.  Every landed positive and negative result is listed there even when assigned to neither
 paper; the last-24-hour closeout upgrades and manuscript-role ranking are included there.
