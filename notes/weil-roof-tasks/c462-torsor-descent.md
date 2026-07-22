@@ -14,6 +14,11 @@ bundle and states the descent obstruction as a theorem.
 - the torsor hunch memo and its scratch scripts (recompute; do not cite scratch as evidence)
 - C458 golden-sheet freeze; C440 conventions
 - C448 report only for the selector/one-bit framing sentence
+- juice memos `../2026-07-21-weil-roof-juice-x-chain.md` (candidate A: the blocker is C448's
+  selector lemma at `G = Gal(Q(zeta_5)/Q)`, so the obstruction statement is the surjective
+  character on the decomposition group `<kappa>`; recompute, do not cite) and
+  `../2026-07-21-weil-roof-juice-m-chain.md` (candidate 1: the H3 torsor is one case of a
+  cross-Coxeter companion-torsor law; keep the certified claim H3-only)
 - C459, if closed by then, read-only for the `Q`-form/Hilbert-90 language; C462 must not block on it
 
 ## Task
