@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C484 complete; C485 allocated.  C478's coherence upgrade identifies each
+**Status:** C475--C485 complete; the lane's allocated reconstruction programme is closed.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -15,7 +15,10 @@ and expresses fixed-child recovery as an exact incidence cut explaining the froz
 thresholds.  C484 globalizes Frobenius-equivariant descent: the Gale sheet has an exact
 Kummer/Artin--Schreier class, connected gauges add no obstruction, finite diagonal stabilizers have
 an image criterion, and q=8's `C3` is a lossy colour coequalizer rather than Hilbert--90 failure.
-Modular machinery remains separate behind the matching, Gram, and Sylow gates.
+Modular machinery remains separate behind the matching, Gram, and Sylow gates.  C485 packages the
+all-field theorem, proves that the complete child alone recovers the unlabelled parent for `q>=16`,
+and confines the unresolved at-most-three base-size question to an exact collision-hypergraph
+problem over `q<=13`.
 
 ## Goal
 
@@ -208,24 +211,34 @@ square-class/trace test detects the separate constant `C2` sheet.
 
 Task card: `notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md`.
 
-## Current frontier — C485
+## Closed base — C485
 
-C481 supplies the projection-sextic/coherent-atlas dictionary for an arbitrary six-arc in every
-characteristic, C482 supplies the exact quadratic four-view reconstruction plus the
-two/three-centre residual families, C483 identifies Gale association, the conic branch divisor,
-and the complete-child incidence cut, and C484 proves the exact semilinear descent criterion.
-C485 now assembles the all-field redundancy-three degree-two/child-selected reconstruction theorem
-and C475 GRS specialization.
+[`C485 reconstruction synthesis`](../2026-07-22-c485-all-field-reconstruction-synthesis.md)
+assembles the all-field redundancy-three theorem without weakening its hypotheses.  Four abstract
+coherent projections recover exactly a Gale pair off the conic branch and one ramified sheet on it;
+two/three-view recovery with a complete ambient child is exactly injectivity of `Sigma_T` after the
+explicit incidence cut.  The report gives the canonical quadratic algorithm, every rank,
+denominator, boundary, stabilizer, and semilinear exception, the Kummer/Artin--Schreier fibre
+trichotomy, and the C475 GRS rank-two/rank-one specialization.  A new secant-union rigidity lemma
+proves base size zero for the unlabelled fixed-child fibre when `q>=16`.  For `q<=13`, alternative
+parents are alternative fifteen-line decompositions of the child complement, and at-most-three
+recovery is exactly a transversal-number-three question for the explicit coherent collision
+hypergraph; its hyperedges are common zero loci of balanced quartics.  Exact arrangement counting
+adds `|U(A)|=q^2-14q+55-tau(A)`, where `tau` counts concurrent perfect matchings, and identifies the
+four frozen profiles as `3/4/3/10`.  At q=13, common-secants of any distinct equal-child pair form
+exactly `3K2`, `P4 union K2`, `K1,5`, or `K1,5` plus one leaf edge; these skeletons hit at most
+`7/9/15/15` concurrent perfect matchings, so child size at most 32 forces one of the two star types.
+No uniform small-field conclusion is claimed without the remaining collision-component
+classification.
 
-The exact [`C482 generic-degree preflight`](../2026-07-22-c482-generic-degree-preflight.md) gives
-Jacobian ranks `6,9,12`; C482 explains them structurally and shows why square dimension at four
-views did not imply birationality.  Three abstract projections have no finite generic degree, and
-four have generic degree two.  C478's smaller thresholds use the fixed ambient child as side
-information.  The order is strict: no finite sweep may substitute for C483's intrinsic branch and
-sheet-selection theorem, and C485 may not weaken an unresolved exceptional or descent hypothesis.
+Task card: `notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
 
-Task cards: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md` through
-`notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
+## Lane completion
+
+The allocated C475--C485 programme is complete.  The only exposed successor is the bounded
+`q<=13` secant-decomposition/collision-hypergraph classification; it is unallocated and requires a
+new task if the lane is resumed.  Archiving this handoff and choosing another lane await the user's
+direction.
 
 ## Execution ladder
 
@@ -239,7 +252,7 @@ Task cards: `notes/reed-solomon-tasks/c482-three-centre-synchronization.md` thro
 | C482 | multi-centre gauge synchronization | complete | residual dimensions `2/1`; explicit four-view separable quadratic cover; rational inverse disproved | exact generic ambiguity |
 | C483 | reconstruction discriminant and exceptional fibres | complete | Gale association; conic branch divisor; cubic residual-family table; exact complete-child cut | global theorem domain |
 | C484 | coherent semilinear descent | complete | Kummer/Artin--Schreier sheet class; finite-stabilizer criterion; q=8 colour Frobenius is `3+3` | all-field semilinear reconstruction |
-| C485 | all-field redundancy-three synthesis | C481--C484 | separate pure four-projection degree-two and child-relative sheet-selected clauses, with algorithm, exceptions, descent, and GRS specialization | programme-level reconstruction theorem |
+| C485 | all-field redundancy-three synthesis | complete | exact pure/child-relative clauses, algorithm, exceptions, descent, GRS specialization, and `q>=16` child rigidity | programme-level reconstruction theorem |
 
 Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c484-coherent-semilinear-descent.md`.  Open card:
@@ -278,4 +291,4 @@ history.
 
 ## Next command
 
-`go C485`
+Lane complete; await archive and lane-selection direction.
