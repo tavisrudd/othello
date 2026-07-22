@@ -227,6 +227,20 @@ def certificate() -> dict:
             "normalization_verdict": "compatible: the first three legs use the identical J/pi/lambda datum; the fourth is sigma",
             "categorical_caveat": "compatibility is a common C2-action/naturality square, not a literal isomorphism of all realization objects with the rank-one odd lattice",
         },
+        "recovery_hierarchy": {
+            "faithful_readouts": {
+                "A5_character_pair": "the unordered 5-cycle values have polynomial X^2-X-1 and discriminant 5",
+                "S3_resolvent": "Spec Z[tau]/(tau^2-tau-1) retains the quadratic algebra itself",
+            },
+            "sign_shadow_readouts": {
+                "arc_chirality": "a bare two-sheet C2 torsor",
+                "code_obstruction": "a bare monomial-equivalence C2 obstruction",
+            },
+            "fixed_good_fibre_limit": "a one-dimensional quadratic form over F_p remembers only the Legendre square class",
+            "q11_isometry": "<5> is isometric to <1> via x |-> 4x because 4^2=5 mod 11",
+            "global_recovery_gate": "retain the character algebra or resolvent, or retain the all-prime Frobenius law together with ramification support",
+            "c434_boundary": "the finite q=11 rung can preserve sign/square class, not the global integral discriminant form",
+        },
         "upstream": {
             key: {"file": path.name, "sha256": sha256(path)} for key, path in UPSTREAM.items()
         },

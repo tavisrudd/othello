@@ -169,3 +169,11 @@ The canonical maps are `R/Z -> det(R)`, `[x] |-> 1 wedge x`, and
 really does have cokernel `Z/2`, but it is a noninverse map and does not explain a denominator.
 The corrected carrier is the discriminant quadratic line `(det R,<5>)`; prime 2 kills sign
 visibility while leaving the line flat, and prime 5 turns it into the branch cotangent line.
+
+The user-requested third-order extra-juice pass classified the four readouts by recovery strength.
+The paired `A5` character values and the `S3` resolvent recover `X^2-X-1` and its discriminant 5;
+the bare chirality torsor and monomial-obstruction bit remember only the `C2` shadow.  A fixed q=11
+fibre cannot recover global 5 because `<5>~=<1>` over `F_11` (`4^2=5`).  Accordingly C434's finite
+information-lattice rung should preserve sign/square class only; full discriminant recovery belongs
+to an arithmetic enhancement.  The remaining bounded question is whether the integral code family,
+as opposed to its obstruction bit, intrinsically recovers the character polynomial.

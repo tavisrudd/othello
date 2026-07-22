@@ -231,6 +231,60 @@ No further numerical computation is needed for these conclusions.  The certifica
 the corrected integral isomorphism and retains the index-two wedge map only as an explicit
 noninverse warning.
 
+## User-requested third-order extra juice — faithful versus shadow readouts
+
+The four-readout slogan hides a useful asymmetry.  Two readouts recover the quadratic algebra;
+two retain only its `C2` shadow.
+
+```text
+faithful:   paired A5 characters  <---->  S3 resolvent R
+                       |                         |
+forgetful:       chirality torsor       code-obstruction torsor
+```
+
+The representation side is faithful because the unordered values of the two three-dimensional
+characters on the two 5-cycle classes have minimal polynomial
+
+```text
+X^2-X-1,
+```
+
+whose discriminant is 5.  The scheme side is faithful tautologically: its resolvent is
+`Spec R`.  In contrast, a bare two-sheet chirality torsor and a bare monomial-equivalence
+obstruction are abstract `C2` objects; without their arithmetic variation they cannot recover the
+integral discriminant.
+
+This gives a sharp finite-fibre no-go.  Over any odd `F_p`, a nondegenerate one-dimensional
+quadratic form remembers only its square class.  In particular at q=11,
+
+```text
+<5> ~= <1>,       because 4^2=5 mod 11.
+```
+
+So no construction confined to the q=11 torsor/sign rung can recover the global integer 5.  It
+can recover only “split.”  Global recovery requires either the character algebra, the resolvent,
+or the all-prime Frobenius character together with its ramification support.
+
+### Consequences and refreshed mystery ledger
+
+- **Settled — which readouts are faithful.** The paired `A5` characters and the `S3` resolvent
+  recover the discriminant algebra; bare chirality and code-obstruction torsors are forgetful
+  sign-shadow functors.
+- **Settled — the minimality question at one good fibre.** It has a negative answer: q=11 cannot
+  recover the global discriminant form, since `<5>~=<1>` there.
+- **Corrected — C434's requirement.** The finite `22 -> 6 -> 2 -> 1` functor should preserve the
+  determinant **sign/square-class** rung.  Requiring the global integral discriminant form from
+  that one fibre is impossible.  A later arithmetic enhancement may preserve the full form.
+- **Door opened — a Rosetta square rather than four parallel arrows.** Paper organization can put
+  the two faithful readouts on top and the two forgetful readouts below.  This makes exactly what
+  each dictionary loses visible and prevents a torsor isomorphism from being oversold as recovery.
+- **Remaining genuine gate.** Determine whether the *integral code family* (not its bare
+  obstruction bit) recovers `X^2-X-1` by an intrinsic monomial invariant.  The current certificate
+  proves only that its obstruction shadow receives the common action.  This is a bounded
+  falsifier-first question for a future allocated successor, not a C429 claim.
+- **No numerical mystery remains in C429.** The new gap is information-theoretic and precisely
+  localized: full code family versus its one-bit shadow.
+
 **Persona routing:** `notes/2026-07-07-named-expert-personas-context.md` has no row for
 integral/modular representation-theory phase-theorem work; every listed dossier targets games,
 arcs, cap-sets, or reliability. No persona dossier was loaded, per the index's own instruction to

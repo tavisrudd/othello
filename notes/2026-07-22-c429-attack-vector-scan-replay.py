@@ -45,6 +45,10 @@ def main() -> None:
     assert orientation["noninverse_wedge_map_smith_invariants"] == [2]
     assert orientation["determinant_to_odd"] == "1 wedge tau |-> delta (integral isomorphism)"
     assert orientation["discriminant_quadratic_form"] == "q(1 wedge tau)=delta^2=5"
+    recovery = data["recovery_hierarchy"]
+    assert 4 * 4 % 11 == 5
+    assert recovery["q11_isometry"].startswith("<5> is isometric to <1>")
+    assert 1 * 1 - 4 * (-1) == 5  # discriminant of X^2-X-1
 
     # At 2 the algebra is etale (t^2+t+1 irreducible), but sign equals trivial character.
     assert roots(2) == [] and (1 % 2) == (-1 % 2)
