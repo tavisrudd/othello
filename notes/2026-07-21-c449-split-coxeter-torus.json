@@ -1,0 +1,443 @@
+{
+  "char0_coxeter_square": {
+    "A3": {
+      "case": "A3",
+      "centralizer_order_in_frozen_rotation_group": 8,
+      "conjugacy_class_size_in_frozen_rotation_group": 3,
+      "element_is_in_frozen_rotation_group": true,
+      "frozen_rotation_group_order": 24,
+      "matrix": [
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "order_on_vertices": 2,
+      "permutation_in_frozen_root_order": [
+        0,
+        5,
+        4,
+        3,
+        2,
+        1
+      ],
+      "source": "square of the frozen order-4 multiplication-by-i Coxeter rotation: x -> i^2 x = -x",
+      "vertex_cycles_in_frozen_root_order": [
+        [
+          0
+        ],
+        [
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ]
+      ]
+    },
+    "B3": {
+      "case": "B3",
+      "centralizer_order_in_frozen_rotation_group": 3,
+      "conjugacy_class_size_in_frozen_rotation_group": 8,
+      "element_is_in_frozen_rotation_group": true,
+      "frozen_rotation_group_order": 24,
+      "matrix": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "order_on_vertices": 3,
+      "permutation_in_frozen_root_order": [
+        0,
+        3,
+        7,
+        6,
+        4,
+        2,
+        1,
+        5
+      ],
+      "source": "frozen body-diagonal Coxeter-square rotation x -> omega*x, omega^3=1",
+      "vertex_cycles_in_frozen_root_order": [
+        [
+          0
+        ],
+        [
+          4
+        ],
+        [
+          1,
+          3,
+          6
+        ],
+        [
+          2,
+          7,
+          5
+        ]
+      ]
+    },
+    "H3": {
+      "case": "H3",
+      "centralizer_order_in_frozen_rotation_group": 5,
+      "conjugacy_class_size_in_frozen_rotation_group": 12,
+      "element_is_in_frozen_rotation_group": true,
+      "frozen_rotation_group_order": 60,
+      "matrix": [
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "-1",
+          "-1",
+          "-1",
+          "-1"
+        ]
+      ],
+      "order_on_vertices": 5,
+      "permutation_in_frozen_root_order": [
+        0,
+        11,
+        3,
+        7,
+        8,
+        5,
+        4,
+        9,
+        1,
+        10,
+        2,
+        6
+      ],
+      "source": "frozen C440 generator S=diag(zeta5,zeta5^(-1)); on x/y it is x -> zeta5^2*x",
+      "vertex_cycles_in_frozen_root_order": [
+        [
+          0
+        ],
+        [
+          5
+        ],
+        [
+          1,
+          11,
+          6,
+          4,
+          8
+        ],
+        [
+          2,
+          3,
+          7,
+          9,
+          10
+        ]
+      ]
+    }
+  },
+  "consumes": {
+    "2026-07-20-c399-coxeter-number-conic-phase.json": {
+      "bytes": 16824,
+      "sha256": "993b9f7c9da5b79e474aa0f2a38919352de135844cdbe35a3c89a8430da4f65e"
+    },
+    "2026-07-20-c399-coxeter-number-conic-phase.md": {
+      "bytes": 17151,
+      "sha256": "092448e849ff23a5e44f5a0ed6b17d82df1107bf10e5b7fd86d0ef2caed9154c"
+    },
+    "2026-07-20-c399-coxeter-number-conic-phase.py": {
+      "bytes": 25983,
+      "sha256": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275"
+    },
+    "2026-07-20-c399-coxeter-number-conic-phase.sha256": {
+      "bytes": 238,
+      "sha256": "ac1e8a3b784285dbe63da87f2a0f3c51e8067d1171210c3e3746c9b9e7c798ec"
+    },
+    "2026-07-21-c440-conventions-freeze.json": {
+      "bytes": 6436,
+      "sha256": "ffc4f09559e17a1a9de6aba5694c105d51f13d99e13586146ea75332f9b6dde8"
+    },
+    "2026-07-21-c440-conventions-freeze.md": {
+      "bytes": 8384,
+      "sha256": "43eca694b5f48dc88204493ea24dbadfa8905824b07c739af3fe82ee6abf12ec"
+    },
+    "2026-07-21-c440-conventions-freeze.py": {
+      "bytes": 29193,
+      "sha256": "8dd5a690129f8437a447d40df4e6cdac8f47fcf481987b95bfe817c074af6bb7"
+    },
+    "2026-07-21-c440-conventions-freeze.sha256": {
+      "bytes": 239,
+      "sha256": "c465649bedcf3fc4efdcc623fabcace6fcac13d5235d4fcdd0b50c08a990a9b5"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.json": {
+      "bytes": 14664,
+      "sha256": "783a731b0dfebdd055b72f9b90dff4b54de4560d990481b97caa8c4a56551c87"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.md": {
+      "bytes": 7430,
+      "sha256": "ea974ede298fc58dbae7e0a9433ed73beb3f9ce92a846db78d3ca203f1e5aa4e"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.py": {
+      "bytes": 32375,
+      "sha256": "908e3afe8ba755b112349e8fc57fc20768555bb3d0df25fa36612696270adb0f"
+    },
+    "2026-07-21-c441-vertex-reduction-bijection.sha256": {
+      "bytes": 256,
+      "sha256": "e90793a5a1a5edbf0bbb0f970b118f41317c30726ad3a764fa3467106bd62735"
+    }
+  },
+  "finite_generator_images": [
+    {
+      "action_decomposition": {
+        "fixed_points": [
+          0,
+          "inf"
+        ],
+        "moving_orbits": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "moving_point_count": 4,
+        "summary": "2 fixed + 4 moving, refined as 1+1+2+2"
+      },
+      "case": "A3",
+      "coxeter_number_h": 4,
+      "coxeter_square_order": 2,
+      "determinant_mod_q": 4,
+      "determinant_square": true,
+      "generator_matrix_in_frozen_P1_frame": [
+        1,
+        0,
+        0,
+        4
+      ],
+      "is_generator_of_split_maximal_torus_in_PSL2": true,
+      "prime_q": 5,
+      "sheet": "fused",
+      "split_torus_order": 2
+    },
+    {
+      "action_decomposition": {
+        "fixed_points": [
+          0,
+          "inf"
+        ],
+        "moving_orbits": [
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            3,
+            6,
+            5
+          ]
+        ],
+        "moving_point_count": 6,
+        "summary": "2 fixed + 6 moving, refined as 1+1+3+3"
+      },
+      "case": "B3",
+      "coxeter_number_h": 6,
+      "coxeter_square_order": 3,
+      "determinant_mod_q": 4,
+      "determinant_square": true,
+      "generator_matrix_in_frozen_P1_frame": [
+        1,
+        0,
+        0,
+        4
+      ],
+      "is_generator_of_split_maximal_torus_in_PSL2": true,
+      "prime_q": 7,
+      "sheet": "pi:sqrt2=3",
+      "split_torus_order": 3
+    },
+    {
+      "action_decomposition": {
+        "fixed_points": [
+          0,
+          "inf"
+        ],
+        "moving_orbits": [
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            3,
+            6,
+            5
+          ]
+        ],
+        "moving_point_count": 6,
+        "summary": "2 fixed + 6 moving, refined as 1+1+3+3"
+      },
+      "case": "B3",
+      "coxeter_number_h": 6,
+      "coxeter_square_order": 3,
+      "determinant_mod_q": 4,
+      "determinant_square": true,
+      "generator_matrix_in_frozen_P1_frame": [
+        1,
+        0,
+        0,
+        4
+      ],
+      "is_generator_of_split_maximal_torus_in_PSL2": true,
+      "prime_q": 7,
+      "sheet": "pibar:sqrt2=4",
+      "split_torus_order": 3
+    },
+    {
+      "action_decomposition": {
+        "fixed_points": [
+          0,
+          "inf"
+        ],
+        "moving_orbits": [
+          [
+            1,
+            9,
+            4,
+            3,
+            5
+          ],
+          [
+            2,
+            7,
+            8,
+            6,
+            10
+          ]
+        ],
+        "moving_point_count": 10,
+        "summary": "2 fixed + 10 moving, refined as 1+1+5+5"
+      },
+      "case": "H3",
+      "coxeter_number_h": 10,
+      "coxeter_square_order": 5,
+      "determinant_mod_q": 5,
+      "determinant_square": true,
+      "generator_matrix_in_frozen_P1_frame": [
+        1,
+        0,
+        0,
+        5
+      ],
+      "is_generator_of_split_maximal_torus_in_PSL2": true,
+      "prime_q": 11,
+      "sheet": "pi:zeta5=3",
+      "split_torus_order": 5
+    },
+    {
+      "action_decomposition": {
+        "fixed_points": [
+          0,
+          "inf"
+        ],
+        "moving_orbits": [
+          [
+            1,
+            4,
+            5,
+            9,
+            3
+          ],
+          [
+            2,
+            8,
+            10,
+            7,
+            6
+          ]
+        ],
+        "moving_point_count": 10,
+        "summary": "2 fixed + 10 moving, refined as 1+1+5+5"
+      },
+      "case": "H3",
+      "coxeter_number_h": 10,
+      "coxeter_square_order": 5,
+      "determinant_mod_q": 3,
+      "determinant_square": true,
+      "generator_matrix_in_frozen_P1_frame": [
+        1,
+        0,
+        0,
+        3
+      ],
+      "is_generator_of_split_maximal_torus_in_PSL2": true,
+      "prime_q": 11,
+      "sheet": "pibar:zeta5=9",
+      "split_torus_order": 5
+    }
+  ],
+  "mechanism": {
+    "all_images_are_split_torus_generators_in_PSL2": true,
+    "conic_action": "2 fixed points plus q-1 moving points; the latter are the two square-coset orbits of size (q-1)/2",
+    "derived_identity": "order(c^2)=h/2=(q-1)/2 when q=h+1",
+    "interpretation": "the Coxeter square, not the orientation-reversing Coxeter element, is the rotation element tested",
+    "normalization": "choose the frozen-group conjugate whose two eigenlines are 0 and infinity; inversion reverses the generator but preserves the torus and orbit partition",
+    "verdict": "PASS"
+  },
+  "schema": "c449-split-coxeter-torus-v1",
+  "task": "C449",
+  "verdict": "GREEN_SPLIT_COXETER_SQUARE_TORUS_MECHANISM"
+}
