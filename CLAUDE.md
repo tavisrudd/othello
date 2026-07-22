@@ -6,7 +6,8 @@ work is dormant unless explicitly resumed.
 
 ## Short commands
 
-- **Intent-based mode:** `mi` enter it · `yc` your call · `vb` vibe check, not Visual Basic
+- **Intent-based mode:** `mi` enter it · `yc` your call · `vb` vibe check, not Visual Basic ·
+  `ej` extra juice: what more to squeeze · `aa` alt-attacks: unstick a stuck proof
 - **Lane routing:** `go <alias>` / bare alias select lane · `go` / `next?` next step, else ask
 - **Startup context:** `go C<id>` select task + lane
 
@@ -183,6 +184,13 @@ a handoff may persist it with `Mode: intent-based` under its date.
 `yc` means “your call.” `vb` means “vibe check”: translate the technical evidence into a candid
 progress assessment (good/bad, disappointing/great, etc.) — momentum, risks, and likely route
 viability, not a recitation of implementation status.
+
+`ej` means “extra juice”: from where we've landed, surface the extra value now in reach — free or
+cheap upgrades, implications of incidental findings, and doors the result opens — not a restatement
+of the plan.
+
+`aa` means “alt-attacks”: when a proof is stuck, lay out distinct alternative attack routes instead
+of pushing harder on the current one.
 
 When stopping after a substantial full or partial C-item chunk, include a one-line vibe check in
 the user-facing work report even when `vb` was not requested. End the same report with a standalone,
