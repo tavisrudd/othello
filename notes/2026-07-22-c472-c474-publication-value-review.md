@@ -169,6 +169,37 @@ existing evidence each would compress.  None is allocated work; promotion goes t
   reception, with upside concentrated in the coefficient-atlas program (C475--C478) rather than
   the classification itself.
 
+## Addendum (ej pass): the gateway's own gates select the QR-code ladder
+
+Reasoned from model memory during the closeout pass; every classical fact below needs
+verification before allocation acts on it.  Not a claim of a third realization.
+
+The Modular Gateway Theorem's numerical gates — odd degree `n = 2d+1`, `dim D = (n+1)/2`,
+`D = <1> + S`, `S = D^perp` — are exactly the classical self-orthogonality flag of
+quadratic-residue codes: augmented QR code over expurgated QR code.  The two proved rows are the
+QR codes at `q=7` (binary) and `q=11` (ternary), with `S` the `(q-1)/2`-dimensional lower-Weil
+constituent.  If the classical flag is as remembered, the QR ladder supplies an infinite stream of
+candidates passing gates 1--2 for free, and the genuinely selective gates become 4--7 (Sylow
+projectivity of trace-zero endomorphisms, simplicity, fusion).  The first two candidates are
+striking:
+
+- **`q=23` binary:** the binary Golay `[23,12,7]` over `PSL_2(23)`, with `dim S = 11` and Sylow
+  2-subgroup dihedral of order 8 — the same `D8` mechanism class as the q=7 row.  The endotrivial
+  dimension congruence `dim(S)^2 = 121 = 1 mod 8` passes.
+- **`q=31` binary:** the `[31,16]` QR code, `dim S = 15`, Sylow 2-subgroup dihedral of order 32,
+  `225 = 1 mod 32` passes — and 31 is the H4 prophecy prime, which would tie the gateway scan to
+  the continuation program through a completely independent route.
+
+This reframes gate (D) from "search for another self-dual design" to "walk the QR ladder and find
+where the Sylow gate cuts."  A bounded scan (binary q=23 first) is the natural next allocation.
+
+One structural observation falls out of the odd-degree constraint itself: the twelve-point
+extended objects (order-12 Hadamard, `S(5,6,12)`, the signed `2.M12` geometry) are *outside* the
+gateway, which lives entirely on the odd, punctured side.  The battery therefore splits cleanly
+into an odd/unextended layer that owns the carrier theory (C465/C473/C474) and an even/extended
+layer that owns the global phase (C470/C471/C472).  Paper 2's architecture can use that
+separation literally.
+
 ## Successor gates already visible
 
 - Phase-3 weil-roof synthesis is **not yet allocated**; the crowns handoff requires allocation
