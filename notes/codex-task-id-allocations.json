@@ -350,8 +350,17 @@
       "last": 462,
       "purpose": "Formalize C443 companion Z/4 Galois-torsor: sigma 4-cycle, prime equivariance, descent obstruction over Z[phi]; evidence bundle from torsor hunch memo",
       "sequence": 39
+    },
+    {
+      "count": 1,
+      "first": 463,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 463,
+      "purpose": "Certify the A3 companion Z/2 Galois torsor over Z[i] and the cross-Coxeter matching-companion bit-carrier duality (from M-chain juice memo candidate 1)",
+      "sequence": 40
     }
   ],
-  "next_id": 463,
+  "next_id": 464,
   "schema": "codex-task-id-allocations-v1"
 }
