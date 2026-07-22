@@ -4,26 +4,33 @@
 
 **Status:** implementation complete; independent review required before closure
 
-**Date:** 2026-07-21
+**Date:** 2026-07-22
 
-**Implementation commit:** `d60be942b828950173d6d970fe65762c07628fc6`
+**Implementation base commit:** `d60be94246db3220c8222354a7e417b9fe827b1d`
+
+**Review-repair commit:** `3ecf6ae074fa7567c41f1a1a0e4d199eae4d9ab4`
 
 ## Result
 
 The finite q=11 depth bridge is landed in six modules and exits through
 `RelativeConicArcs.Gates.ClebschDoubleCosetDepth`.  The formalized theorem surface establishes:
 
-1. the 133 normalized projective points are partitioned by sixteen common relation labels, and the
-   homogeneous lift of each relation is closed under nonzero scalar multiplication;
-2. two displayed common-subgroup generators produce exactly six disjoint matching-row orbits with
-   sizes `1,4,6 / 1,4,6`;
+1. the 133 frozen normalized coordinate representatives are partitioned by sixteen displayed
+   relation labels, and the homogeneous lift of each relation is closed under nonzero scalar
+   multiplication; exhaustive identification with `PG(2,11)` remains replay-level;
+2. two displayed matching-row permutations produce exactly six disjoint generated orbits with
+   sizes `1,4,6 / 1,4,6`; Lean proves both maps bijective, their orders divide two and three,
+   closure of the computed sets, and equivalence between membership and reachability by arbitrary
+   generator words;
 3. the positive and negative leaves derive all sixteen zero counts for one representative of each
    orbit from the matching table, conic parameters, projective points, relation labels, and secant
    equations—no depth vector is frozen in the data module;
 4. the resulting profiles are
    `v1=(-6,0,12,-12)`, `v2=(-3,3,0,3)`, `v3=(3,-2,-2,0)` and their negatives;
-5. the sheet involution transports every positive six-secants union, exchanges the four oriented
-   relation pairs, and negates the depth profile;
+5. the displayed sheet involution transports every positive six-secants union, exchanges the four
+   oriented relation pairs, and negates the depth profile; Lean also proves that its point
+   permutation, and both generator point permutations, are induced projectively by their displayed
+   matrices;
 6. over `ZMod 11`, the six-label linear map has image dimension two and kernel dimension four, while
    its six individual profile values are pairwise distinct;
 7. all profiles satisfy `2a+2b+c=0` and `9a+8b+d=0`; the positive integer profiles satisfy
@@ -41,16 +48,19 @@ Hecke theory or a kernel-checked abstract group identification.
 ## Exact terminals and owned artifacts
 
 The definitions-only input is
-`RelativeConicArcs.ClebschDoubleCosetDepthData`.  It freezes 133 normalized projective representatives,
+`RelativeConicArcs.ClebschDoubleCosetDepthData`.  It freezes 133 normalized coordinate representatives,
 sixteen relation labels, the standard-coordinate projectivity, twelve conic parameters, two common
 subgroup generators on points/endpoints/parents, the sheet involution, four oriented relation pairs,
 and six representative row indices.  It contains no profile, zero-count, equivariance, rank, kernel,
 plane, moment, or recovery assertion.
 
-The gate audits these 27 terminals:
+The gate audits these 34 terminals:
 
-- `relationCells_partition`, `vectorInRelation_smul`, `generatedOrbit_card`,
-  `generatedOrbits_cover`, `generatedOrbits_pairwise_disjoint`;
+- `relationCells_partition`, `vectorInRelation_smul`,
+  `subgroupGeneratorPoint_represents_matrix`, `sheetInvolutionPoint_represents_matrix`,
+  `subgroupGeneratorParent_bijective`, `subgroupGeneratorParent_orders`,
+  `generatedOrbit_seed`, `generatedOrbit_closed`, `mem_generatedOrbit_iff_reachable`,
+  `generatedOrbit_card`, `generatedOrbits_cover`, `generatedOrbits_pairwise_disjoint`;
 - `positiveSingleton_zeroCounts`, `positiveOrbitFour_zeroCounts`,
   `positiveOrbitSix_zeroCounts`, `negativeSingleton_zeroCounts`,
   `negativeOrbitFour_zeroCounts`, `negativeOrbitSix_zeroCounts`;
@@ -73,19 +83,19 @@ Owned files:
 - `lean/RelativeConicArcs/ClebschDoubleCosetDepthNegative.lean`
 - `lean/RelativeConicArcs/ClebschDoubleCosetDepth.lean`
 - `lean/RelativeConicArcs/Gates/ClebschDoubleCosetDepth.lean`
-- `notes/2026-07-20-c425-clebsch-double-coset-depth-lean.{md,py,json,sha256}`
+- `lean/verification/clebsch_double_coset_depth/{generate.py,schema.json,certificate.json,SHA256SUMS}`
+- `notes/2026-07-20-c425-clebsch-double-coset-depth-lean.md`
 
-The script/data/source byte counts are respectively `20,083`, `15,898`, `7,461`, `6,913`, `2,492`,
-`3,012`, `10,454`, and `2,879`; the checksum manifest is `986` bytes.  The manifest is authoritative
-for the final hashes and detects any post-report drift.
+The checksum manifest covers exactly the stable generator, schema, certificate, five C425 library
+modules, and import-only gate.  It deliberately does not cover this report or the manifest itself.
 
 ## Reproducibility and trusted boundary
 
 Run from `/home/tavis/src/othello`:
 
 ```bash
-python3 notes/2026-07-20-c425-clebsch-double-coset-depth-lean.py --check
-sha256sum -c notes/2026-07-20-c425-clebsch-double-coset-depth-lean.sha256
+python3 lean/verification/clebsch_double_coset_depth/generate.py --check
+sha256sum -c lean/verification/clebsch_double_coset_depth/SHA256SUMS
 lean/scripts/lean-build-queue.py run \
   RelativeConicArcs.ClebschDoubleCosetDepth \
   RelativeConicArcs.Gates.ClebschDoubleCosetDepth \
@@ -96,36 +106,35 @@ lean/scripts/lean-build-queue.py run \
 Intentional regeneration is:
 
 ```bash
-python3 notes/2026-07-20-c425-clebsch-double-coset-depth-lean.py --write
+python3 lean/verification/clebsch_double_coset_depth/generate.py --write
 ```
 
-The canonical generator independently reconstructs the two one-factorizations and derives their
-endpoint relabeling `(0,1,3,11,9,10,8,2,5,4,6,7)` rather than assuming that C411 and the gateway use
-the same labels.  It then rebuilds the 133 projective points, sixteen cells, generator actions,
-six generated orbits, all 22 depth profiles, involution negation, representative recounts, rank,
-weighted relation, and degrees `1/2/3` scalar moments.  These results are compared with the C411 and
-gateway inputs before JSON or Lean data are emitted.
+The stable generator checks the closed certificate schema and the hash of its only direct external
+input, the committed gateway matching table.  From the certificate arrays it then exhaustively
+checks normalized-coordinate distinctness; matrix/point, endpoint/parent, and sheet compatibility;
+generator permutation orders and full orbits; all 22 depth profiles; involution negation;
+representative recounts; rank; the weighted relation; and degrees `1/2/3` scalar moments.  It
+renders the Lean data module only after those checks pass.  Its closed top-level schema is
+`lean/verification/clebsch_double_coset_depth/schema.json`.
 
 The trusted computational boundary is deterministic Python integer/prime-field arithmetic; the
-frozen C378/C379/C406 inputs and their projective/matching conventions; and the generator's parsing
-of the committed gateway matching table.  Lean checks the emitted finite data by kernel reduction.
-The replay does not prove priority, identify generated permutation subgroups with abstract named
-groups in Lean, or turn the integer odd-Fourier display into a general Fourier-transform theorem.
+origin and projective/conic meaning of the frozen certificate; and the generator's parsing of the
+committed gateway matching table.  The stable checker verifies the complete finite semantics used
+by the Lean terminals, while Lean checks the emitted finite data by kernel reduction.  Neither
+layer proves priority, identifies the generated permutation subgroup with an abstract named group,
+or turns the integer odd-Fourier display into a general Fourier-transform theorem.
 
 The final build queue
-`/home/tavis/.cache/othello-lean-build/run-20260721-230014-9c27ca7e` built the aggregator and gate,
-then passed the exact trace-only aggregate gate.  Peak RSS was `2,402,140` KiB for the aggregator and
-`1,813,556` KiB for the gate.  The earlier sheet build used separate module boundaries as required;
-its measured peaks were `4,405,300` KiB positive and `6,630,756` KiB negative.  The gate's 27 selected
+`/home/tavis/.cache/othello-lean-build/run-20260722-143543-5450b0db` built the aggregator and gate,
+then passed the exact trace-only aggregate gate.  Peak RSS was `6,545,844` KiB for the aggregator and
+`1,743,524` KiB for the gate.  The gate's 34 selected
 terminal audits report only `propext`, `Classical.choice`, and `Quot.sound`; no `sorryAx`,
 `native_decide`, project axiom, or opaque external oracle occurs in the claimed terminal surface.
-After final regeneration, exact-target confirmation
-`/home/tavis/.cache/othello-lean-build/run-20260721-230329-24fa5775` found the gate trace-current,
-skipped rebuilding it, and passed the trace-only aggregate gate.
 
 ## Exclusions
 
-The gate does not prove a general double-coset or Mackey theorem, abstract isomorphisms
+The gate does not prove exhaustive coverage of projective points by the 133 frozen coordinate
+indices, endpoint/conic-action compatibility, a general double-coset or Mackey theorem, abstract isomorphisms
 `G=PGL_2(11)`, `H=A5`, `K=A4`, all-degree parity, primitive integral dependence, the C412
 `P(1)^A4/soc(P(1))` interpretation, a zonal spherical-function statement, or faithfulness of the
 rank-two linear map.  The imported odd-Fourier theorem proves only the displayed integer square
@@ -182,7 +191,7 @@ independently formalized geometric parent object.
 
 | claim | exact Lean route | external boundary |
 |---|---|---|
-| Six `1,4,6 / 1,4,6` cells | `generatedOrbit_card`, cover, disjointness | abstract `A4<PGL_2(11)>A5` identification replayed |
+| Six `1,4,6 / 1,4,6` cells | bijectivity/orders, `mem_generatedOrbit_iff_reachable`, cardinality, cover, disjointness | abstract `A4<PGL_2(11)>A5` identification replayed |
 | Six secant-depth profiles | six `*_zeroCounts`, two representative-profile terminals | frozen projective/cell/action data generated from C378/C379/C406 |
 | Involution antipodality | `sheetInvolution_secant_equivariant_positive`, `depthProfile_sheetInvolution_positive` | golden involution's historical/geometric name |
 | Rank two, kernel four, label separation | three aggregator terminals | mixed-bi-Hecke interpretation, not needed for linear algebra |
@@ -197,6 +206,13 @@ full-trust Lean claims.
 
 ## Independent review
 
-Not yet performed.  Under the campaign review rule, the implementing agent stops after committing
-this artifact and asks the user to launch the independent reviewer.  The live queue row must remain
-open until a user-launched reviewer records final `GO` and every finding is disposed.
+The user-launched initial review on 2026-07-22 returned `NO-GO`.  Its eight findings are disposed in
+the repair as follows: the malformed implementation pin is corrected; arbitrary-word reachability,
+generator bijectivity/orders, and closure are now gated; point permutations are connected to their
+matrices while endpoint/conic and abstract-group semantics are explicitly external; the generated
+bundle has a stable mathematical path, schema, self-identifying header, and self-contained semantic
+checker with a complete direct-input inventory; projective-space coverage is narrowed to the 133 frozen indices;
+“primitive” was removed from the barycentre docstring; and manifest coverage is stated exactly.
+
+A fresh user-launched independent review is required.  The live queue row remains open until that
+review records final `GO` and confirms every repair above.

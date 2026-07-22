@@ -229,7 +229,7 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   tensor/fusion certificate, Lean data, and six-entry manifest. Two review repair rounds closed the
   trust/provenance findings; exact terminals, hashes, build/axiom evidence, exclusions, and C320 rows
   are in [`2026-07-20-c426-clebsch-scheme-fourier-lean.md`](../2026-07-20-c426-clebsch-scheme-fourier-lean.md).
-- **C423 and C424 complete; C425 is implemented and awaits user-launched independent review, while
+- **C423 and C424 complete; C425 review fixes are implemented and await user-launched post-fix review, while
   C427 remains queued behind its final `GO`:** C423's
   sharded A3/B3/H3 leaves prove ranks `3/6/10`, signed first/second-moment cancellation, and named
   nonzero cubic witnesses. C424 formalizes the abstract radical--Hadamard balanced-sheet theorem,
