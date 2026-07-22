@@ -47,6 +47,42 @@ def fixed_count(q: int, value: int) -> int:
     return 2 if pow(value, (q - 1) // 2, q) == 1 else 0
 
 
+def projective_lines(game) -> tuple[tuple[int, int], ...]:
+    """Return (affine-point mask, load from the two fixed points) for every line."""
+    lines: dict[int, int] = {}
+    for first in range(len(game.points)):
+        for second in range(first + 1, len(game.points)):
+            affine_mask = game.line_masks[first][second]
+            fixed_load = sum(
+                game.collinear(fixed, game.points[first], game.points[second])
+                for fixed in (game.a, game.b)
+            )
+            previous = lines.setdefault(affine_mask, fixed_load)
+            assert previous == fixed_load
+    assert len(lines) == game.q * game.q + game.q + 1
+    return tuple(sorted(lines.items()))
+
+
+def maximum_capacity_two_line(
+    game, lines: tuple[tuple[int, int], ...], mask: int
+) -> int:
+    """Maximum legal-point count on a line containing no selected point."""
+    legal = game.legal_mask(mask)
+    return max(
+        (
+            (legal & line_mask).bit_count()
+            for line_mask, fixed_load in lines
+            if fixed_load + (mask & line_mask).bit_count() == 0
+        ),
+        default=0,
+    )
+
+
+def node_kayles_exact(game, lines: tuple[tuple[int, int], ...], mask: int) -> bool:
+    """Whether every capacity-2 line has at most two currently legal points."""
+    return maximum_capacity_two_line(game, lines, mask) <= 2
+
+
 def summarize(counter: Counter) -> list[dict]:
     return [
         {
@@ -58,6 +94,8 @@ def summarize(counter: Counter) -> list[dict]:
             "clean_members": key[5],
             "p_members_strict_live_descent_from_parent": key[6],
             "p_members_strict_live_descent_from_child": key[7],
+            "node_kayles_exact_members": key[8],
+            "node_kayles_zero_members": key[9],
             "transitions": count,
         }
         for key, count in sorted(counter.items())
@@ -71,6 +109,7 @@ def run_q(q: int, rows_path: Path) -> dict:
     c31 = geometry.load_c31_module()
     c20 = c31.load_c20_module()
     game = c20.PrimeGridGame(q)
+    lines = projective_lines(game)
     states, _row_counts = c31.load_p_reply_states(rows_path, q)
 
     profiles = Counter()
@@ -84,6 +123,13 @@ def run_q(q: int, rows_path: Path) -> dict:
     impure = 0
     strict_parent_descent_nonempty = 0
     strict_child_descent_nonempty = 0
+    node_kayles_exact_members = 0
+    node_kayles_exact_empty_members = 0
+    node_kayles_zero_members = 0
+    node_kayles_zero_nonempty = 0
+    clean_without_node_kayles_exact_p_members = 0
+    clean_without_node_kayles_exact_n_members = 0
+    clean_nonexact_capacity_two_profiles = Counter()
     transitions_outside_three_intruder_domain = 0
 
     for mask, _row in states:
@@ -101,7 +147,7 @@ def run_q(q: int, rows_path: Path) -> dict:
             prior_fixed = fixed_count(q, prior_discriminant)
 
             if prior_fixed:
-                profiles[(parent_live, child_live, prior_fixed, 0, 0, 0, 0, 0)] += 1
+                profiles[(parent_live, child_live, prior_fixed, 0, 0, 0, 0, 0, 0, 0)] += 1
                 continue
 
             packet = []
@@ -132,13 +178,34 @@ def run_q(q: int, rows_path: Path) -> dict:
                 p_value = not game.value(grand)
                 clean = geometry.clean_empty(features)
                 grand_live = len(geometry.live_conic(game, grand))
-                packet.append((p_value, clean, grand_live < parent_live, grand_live < child_live))
+                nk_exact = node_kayles_exact(game, lines, grand)
+                nk_zero = nk_exact and not grand_live and features["zone_grundy"] == 0
+                if nk_exact and not grand_live:
+                    assert p_value == (features["zone_grundy"] == 0)
+                assert not nk_zero or p_value
+                if clean and not nk_exact:
+                    clean_nonexact_capacity_two_profiles[
+                        (maximum_capacity_two_line(game, lines, grand), p_value)
+                    ] += 1
+                packet.append(
+                    (
+                        p_value,
+                        clean,
+                        grand_live < parent_live,
+                        grand_live < child_live,
+                        nk_exact,
+                        nk_zero,
+                        not grand_live,
+                    )
+                )
 
             packet_size = len(packet)
             packet_p = sum(item[0] for item in packet)
             packet_clean = sum(item[1] for item in packet)
             parent_descending_p = sum(item[0] and item[2] for item in packet)
             child_descending_p = sum(item[0] and item[3] for item in packet)
+            packet_nk_exact = sum(item[4] for item in packet)
+            packet_nk_zero = sum(item[5] for item in packet)
             profiles[
                 (
                     parent_live,
@@ -149,6 +216,8 @@ def run_q(q: int, rows_path: Path) -> dict:
                     packet_clean,
                     parent_descending_p,
                     child_descending_p,
+                    packet_nk_exact,
+                    packet_nk_zero,
                 )
             ] += 1
             packet_members += packet_size
@@ -159,6 +228,16 @@ def run_q(q: int, rows_path: Path) -> dict:
             impure += bool(packet_p and packet_p != packet_size)
             strict_parent_descent_nonempty += bool(parent_descending_p)
             strict_child_descent_nonempty += bool(child_descending_p)
+            node_kayles_exact_members += packet_nk_exact
+            node_kayles_exact_empty_members += sum(item[4] and item[6] for item in packet)
+            node_kayles_zero_members += packet_nk_zero
+            node_kayles_zero_nonempty += bool(packet_nk_zero)
+            clean_without_node_kayles_exact_p_members += sum(
+                item[0] and item[1] and not item[4] for item in packet
+            )
+            clean_without_node_kayles_exact_n_members += sum(
+                not item[0] and item[1] and not item[4] for item in packet
+            )
 
     return {
         "q": q,
@@ -175,6 +254,16 @@ def run_q(q: int, rows_path: Path) -> dict:
         "impure_transitions": impure,
         "strict_parent_live_descent_p_nonempty_transitions": strict_parent_descent_nonempty,
         "strict_child_live_descent_p_nonempty_transitions": strict_child_descent_nonempty,
+        "node_kayles_exact_members": node_kayles_exact_members,
+        "node_kayles_exact_empty_members": node_kayles_exact_empty_members,
+        "node_kayles_zero_members": node_kayles_zero_members,
+        "node_kayles_zero_nonempty_transitions": node_kayles_zero_nonempty,
+        "clean_without_node_kayles_exact_p_members": clean_without_node_kayles_exact_p_members,
+        "clean_without_node_kayles_exact_n_members": clean_without_node_kayles_exact_n_members,
+        "clean_nonexact_capacity_two_profiles": [
+            {"maximum_legal_points": key[0], "p_value": key[1], "members": count}
+            for key, count in sorted(clean_nonexact_capacity_two_profiles.items())
+        ],
         "profiles": summarize(profiles),
     }
 
@@ -195,6 +284,11 @@ def main() -> int:
         "definition": (
             "Y_0 consists of legal off-conic replies primitive relative to the opponent move "
             "and having no conic fixed point for any of the four intruder triple products."
+        ),
+        "node_kayles_guard": (
+            "A Y_0 grandchild passes the exact Node-Kayles guard when its conic is empty, "
+            "every projective line of residual capacity two contains at most two legal points, "
+            "and the resulting residual conflict graph has Grundy value zero."
         ),
         "source": {
             "path": str(args.rows.relative_to(ROOT)),

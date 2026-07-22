@@ -290,6 +290,15 @@ that restores both coverage and purity, or prove a different bulk descent into t
 score-9 `Y_0` domain.  Exact scope and certificate:
 `2026-07-12-c80-bulk-exhaustion-probe.md#full-q13q17-y_0-response-fibre-census`.
 
+C80 now has an exact partial repair of the purity failure.  Intersect `Y_0` with the state guard:
+empty conic, at most two legal points on every residual capacity-two line, and Grundy zero for the
+load-one conflict graph.  The load condition makes the whole continuation exactly Node--Kayles,
+so this `Y_NK0` packet is structurally P-pure.  It contains all 620 q13 survivors and 3,048 q17
+members, covering 533 and 2,822 transitions respectively.  It is still too sparse to release C82:
+at q17 it covers only 2,822/59,153 three-intruder transitions.  Its main conceptual gain is to
+separate genuine graph certificates from the old `clean_empty` heuristic; the latter admits 108
+q17 members with a surviving capacity-two line, including four N states.
+
 The natural lexicographic target remains
 
 ```text
@@ -333,6 +342,13 @@ are stated without a hidden selector.
   fibre is not globally P-pure or covering on the exact q13/q17 three-intruder corpus.  The open
   replacement is a guarded response relation or a bulk descent into its terminal score-9 domain;
   only after that replacement is fixed does C82 own the orbital count.
+- **Settled — first exact guarded packet:** `Y_NK0` is P-pure by residual-capacity collapse to
+  Node--Kayles and explains all q13 `Y_0` survivors.  At q17 it certifies 3,048 members on 2,822
+  transitions but is far from a response cover, so it is a terminal target rather than C82's
+  countable global packet.
+- **Settled — `clean_empty` semantic gap:** the 108 q17 clean members outside `Y_NK0` all retain a
+  capacity-two line with three or four legal points; 104 are P and four are N.  The missing datum is
+  surviving triple avoidance, not another scalar graph statistic.
 - **Partly settled — defect homology:** at the q=11 first-response gate, removing forced orbitals
   leaves one `C10`, and the two calibrations differ by its unique `F_2` homology generator.  No
   quotient theorem yet makes the general residual defect boundary a complete game-value carrier.

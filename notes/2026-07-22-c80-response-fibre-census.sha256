@@ -1,3 +1,4 @@
-02fef447a54eb99d4a648fef5546809dbeb92fa8156a8c45b21b878f9fa2e659  notes/2026-07-12-c80-bulk-exhaustion-probe.md
-7925365061799a83711f784dca5efe5807ecfc117bc05b6e6cc7cad348b81196  rust/scripts/c80_response_fibre_census.py
-05e6671ae4ac8021b6bb3008e47dc025aa29b73d9f81daba9ac79a3fda421c28  notes/2026-07-22-c80-response-fibre-census.json
+686ceb34b5b6e76e713ec5a4823b4028e93dc7d6eda2d4681de7e6dd88af1cd2  notes/2026-07-12-c80-bulk-exhaustion-probe.md
+d70136673d947f89259a6dab214fee7450505c10580a842c6bd9d51ab69633ce  rust/scripts/c80_response_fibre_census.py
+5a34a5ab13bdf4549561803fdcaf21bdd128994bd95a31cb5d54a2d9fc7e1ff5  rust/scripts/c80_node_kayles_guard_replay.py
+cb2db4f540bfdf8d2219b4d16905c1d15941e5be448051f1dfa372239d4e6269  notes/2026-07-22-c80-response-fibre-census.json

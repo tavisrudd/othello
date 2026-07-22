@@ -42,7 +42,7 @@ ordering and detail.
 - **C30 `[cap]` [OPEN ENGINEERING TAIL; USER GATE]** — reduce or explicitly launch the q17/q19 generated-certificate assembly.
 - **C74 `[cap]` [ACTIVE]** — prove maximum-pencil balanced-packet P existence / `Ncenters <= q-8`; characteristic-5/7 exceptions remain.
 - **C77 `[cap]` [OPEN GAME-SEMANTIC TAIL]** — algebraic forced-reply closure for the C74 packet → `notes/2026-07-11-c77-game-semantic-reply-graphs.md`.
-- **C80 `[cap]` [ACTIVE; raw Y₀ global extension refuted]** — refine the orbit packet with a P-preserving state/descent guard, or prove bulk descent into the certified score-9 Y₀ base; only then release the count to C82 → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
+- **C80 `[cap]` [ACTIVE; exact Y_NK0 guard P-pure but sparse]** — prove bulk descent into the graph-exact Node--Kayles-zero packet (q17: 3,048 members / 2,822 transitions) or add a companion guarded packet covering the missing branches; only then release the count to C82 → `notes/2026-07-12-c80-bulk-exhaustion-probe.md`.
 - **C81 `[cap]` [OPEN; independent]** — characteristic-5/7 subfield descent gate → `notes/2026-07-12-c81-subfield-descent-gate.md`.
 - **C82 `[cap]` [GATED on C80]** — orbital counting for the exact packet C80 produces → `notes/2026-07-12-c82-orbital-counting.md`.
 - **C189 `[cap]` [QUEUED]** — q=5 octahedral-frame game bridge → `notes/2026-07-15-c189-q5-octahedral-frame.md`.
@@ -144,8 +144,7 @@ ordering and detail.
 
 ### `reed-solomon`
 
-- **C475 `[reed-solomon]` [QUEUED]** — prove the Veronese determinant factorization, balanced-cycle torus quotient, reconstruction criterion, and projective-semilinear descent for redundancy-three GRS deep holes; determine exactly whether four-cycle ratios generate the required invariant field, without opening a field census → `notes/2026-07-22-c475-reed-solomon-determinant-atlas.md`.
-- **C476 `[reed-solomon]` [GATED on C475]** — exhaust all semilinear classes of six-point GRS supports and deepest-syndrome orbits for `q in {5,7,8,9,11}`, compare them with the C475 four-cycle atlas in a fixed lexicographic order, and stop after completing the first colliding support fibre; if none collides, certify exact separation on the whole stated domain → `notes/2026-07-22-c476-standard-grs-atlas-pilot.md`.
+- **C476 `[reed-solomon]` [QUEUED]** — exhaust all semilinear classes of six-point GRS supports and deepest-syndrome orbits for `q in {5,7,8,9,11}`, compare them with the C475 four-cycle-plus-radical atlas in a fixed lexicographic order, and stop after completing the first colliding support fibre; if none collides, certify exact separation on the whole stated domain → `notes/2026-07-22-c476-standard-grs-atlas-pilot.md`.
 - **C477 `[reed-solomon]` [GATED on a C476 collision]** — freeze C476's first colliding standard-GRS support, determine its complete atlas fibre and stabilizer action, and prove an intrinsic minimal discriminator or a sharp obstruction; close immediately at an unmet collision gate → `notes/2026-07-22-c477-first-atlas-collision-fibre.md`.
 - **C478 `[reed-solomon]` [GATED on C475; independent of C476 collision]** — evaluate the proved atlas on the four frozen C398 non-GRS classes and the fixed `A3/B3/H3` conic-phase controls at `q=5,7,11`, separating ordinary orbit recovery from Gram/Sylow modular-carrier gates without opening a new field census → `notes/2026-07-22-c478-exceptional-family-controls.md`.
 

@@ -483,18 +483,63 @@ Trust boundary: the P/N labels use the committed `PrimeGridGame` recursion and t
 C20 state source as the preceding repair work.  There is no second full P/N engine for this new
 census.  The algebraic membership test does have an independent internal replay on every survivor:
 18,574 direct triple-permutation checks agree with the closed discriminant formula.  The earlier
-score-9 `24+4` slice is also independently covered by the committed pointed-cubic replay.  The
-claim here is only the stated finite census, with the exact three-intruder and field restrictions;
-it is not a theorem for q19, extension fields, or arbitrary game states.
+score-9 `24+4` slice is also independently covered by the committed pointed-cubic replay.  For the
+new graph-exact guard, the separate line-coordinate replay reconstructs the geometry and conflict
+Grundy values independently and checks their agreement with the full recursion on every guarded
+member.  The claim here is only the stated finite census, with the exact three-intruder and field
+restrictions; it is not a theorem for q19, extension fields, or arbitrary game states.
 
-Evidence sizes are 8,091 bytes for the census script, 156,571 bytes for the canonical JSON, and
-654,965 bytes for the load-bearing C20 gzip input.  The adjacent checksum manifest records the
-bundle hashes; the JSON also embeds the input hash and byte count.
+Evidence sizes are 12,433 bytes for the census script, 6,754 bytes for the independent guard
+replay, 227,240 bytes for the canonical JSON, and 654,965 bytes for the load-bearing C20 gzip input.
+The adjacent checksum manifest records the bundle hashes; the JSON also embeds the input hash and
+byte count.
 
 The proof-search consequence is sharp.  Do not ask C82 to count raw `Y_0`.  A viable successor
 packet must add a state-class/descent guard that excludes the q17 all-N and impure fibres, while
 also adding coverage for the q13 nonsplit-prior empty fibres.  Alternatively, retain `Y_0` only as
 the terminal base relation and prove a different bulk descent into its score-9 domain.
+
+### Exact residual-capacity guard: a P-pure but sparse refinement
+
+The residual-capacity decomposition supplies a proof-bearing state guard that the earlier
+`clean_empty` feature lacked.  For a position `S`, call the residual **graph-exact** when every
+projective line containing no selected point has at most two currently legal points.  Lines of
+load at least two contribute no legal point, load-one lines give the pair-conflict graph, and a
+load-zero line can never create a future triple because it has at most two legal points and the
+legal locus only shrinks.  Therefore, when the conic is empty, every continuation of `S` is exactly
+Node--Kayles on the load-one conflict graph.  In particular, conflict-graph Grundy value zero is a
+genuine P certificate, not a value-correlated feature.
+
+Define `Y_NK0` to be the members of `Y_0` whose grandchildren have empty conic, are graph-exact,
+and have conflict-graph Grundy value zero.  The extended exact census gives:
+
+| q | `Y_0` members | graph-exact empty members | `Y_NK0` members | transitions covered by `Y_NK0` |
+|---:|---:|---:|---:|---:|
+| 13 | 620 | 620 | 620 | 533 |
+| 17 | 17,954 | 8,770 | 3,048 | 2,822 |
+
+All 8,770 q17 graph-exact empty members agree with the graph theorem and the full game recursion:
+3,048 have Grundy zero and are P, while 5,722 have nonzero Grundy and are N.  Thus `Y_NK0` removes
+every observed all-N and impure member by a structural certificate.  It explains all q13 survivor
+purity and certifies 2,822 of the 5,475 q17 transitions on which raw `Y_0` has some P member.
+
+This does **not** close C80(a): `Y_NK0` still covers only 2,822 of 59,153 q17 three-intruder
+transitions, and raw `Y_0` is absent on most branches.  It is a valid P-preserving terminal packet,
+not yet a bulk response cover; C82 remains gated until a descent theorem reaches it or a companion
+packet covers the missing branches.
+
+The guard also diagnoses the former `clean_empty` false positives exactly.  At q17, 108 clean
+members fail graph-exactness because a residual capacity-two line still contains at least three
+legal points: 104 are P and four are N.  Their maximum such line sizes are `3` for all four N and
+72 P members, and `4` for the remaining 32 P members.  Hence the line-size threshold itself does
+not classify the unresolved slack-two residue; it marks precisely where genuine triple-avoidance
+semantics resumes.
+
+`scripts/c80_node_kayles_guard_replay.py` independently reconstructs all projective lines from
+normalized line coordinates, recomputes residual loads, the conflict graph, and its Grundy value,
+and checks the exact counts above.  It also compares the graph result with the full recursive game
+value on every graph-exact empty member.  This is an independent geometry/graph replay, not a
+second implementation of the raw `Y_0` orbital membership or the full earlier census.
 
 ## Mystery ledger
 
@@ -513,6 +558,16 @@ the terminal base relation and prove a different bulk descent into its score-9 d
 - **Settled by `ej` — no live-size guard:** q17 all-N/impure fibres occur at every observed parent
   live-conic size from 0 through 7, including 76 impure fibres already at `|L|=0`.  The drain
   coordinate orders conic play but does not classify the off-conic response fibre.
+- **Settled — exact P-preserving guard:** empty conic plus graph-exact residual capacity and
+  conflict-graph Grundy zero gives the refined packet `Y_NK0`.  It certifies all 620 q13 survivors
+  and 3,048 q17 members with no P/N impurity, covering 533 and 2,822 transitions respectively.
+- **Settled by `ej` — why `clean_empty` was unsafe:** all 108 q17 clean members rejected by the
+  exact guard retain a load-zero line with three or four legal points.  The four N cases have
+  maximum three, but so do 72 P cases; capacity-two survival is the semantic gap, not a scalar
+  classifier.
+- **Still open — sparse guarded coverage:** `Y_NK0` is proof-bearing but covers only 2,822 of
+  59,153 q17 transitions.  A bulk descent into this class or a companion guarded packet is still
+  required before C82 can count a uniform response relation.
 - **Still open — two-sorted coupling:** no canonical incidence bimodule has yet been shown to carry
   both conic-word traces and reply-pencil energy while preserving P/N recursion.  This is owned by
   C80's response-packet/descent theorem, not by an abstract SDP construction.
@@ -534,5 +589,6 @@ python3 rust/scripts/c80_pointed_cubic_bridge.py --check
 python3 rust/scripts/c80_pointed_cubic_bridge_replay.py
 sha256sum -c notes/2026-07-22-c80-pointed-cubic-bridge.sha256
 python3 rust/scripts/c80_response_fibre_census.py --check
+python3 rust/scripts/c80_node_kayles_guard_replay.py
 sha256sum -c notes/2026-07-22-c80-response-fibre-census.sha256
 ```

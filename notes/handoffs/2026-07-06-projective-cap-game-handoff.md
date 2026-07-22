@@ -603,7 +603,13 @@ task list.  Current high-value items:
   three-intruder census now closes the unchanged packet as a uniform route: q13 survivors are all
   clean/P but cover only 533/2,225 transitions, while q17 has 7,976 all-N and 1,515 impure
   nonempty fibres.  Raw `Y_0` is therefore a terminal score-9 base relation, not a packet for C82
-  to count globally.  C80 must add a state/descent guard or prove bulk descent into that base.
+  to count globally.  C80 now has one exact P-preserving guard: if the conic is empty, every
+  residual capacity-two line has at most two legal points, and the load-one conflict graph has
+  Grundy zero, the continuation is exactly Node--Kayles and hence P.  This `Y_NK0` refinement
+  certifies all 620 q13 survivors and 3,048 q17 members (533 and 2,822 transitions), but is sparse:
+  it covers only 2,822/59,153 q17 three-intruder transitions.  The 108 q17 `clean_empty` members it
+  rejects expose the missing triple semantics (104 P, four N).  C80 must still prove bulk descent
+  into `Y_NK0` or add a companion guarded packet before C82 counts globally.
   A uniform quotient/response theorem,
   (a) abundance, and (b) descent remain open. **C81** —
   characteristic-5/7 Frobenius/subfield gate (run early). **C82** — odd-q orbital/Hollmann–Xiang

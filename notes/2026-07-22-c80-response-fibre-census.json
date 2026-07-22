@@ -4,8 +4,15 @@
   "fields": [
     {
       "clean_members": 620,
+      "clean_nonexact_capacity_two_profiles": [],
+      "clean_without_node_kayles_exact_n_members": 0,
+      "clean_without_node_kayles_exact_p_members": 0,
       "impure_transitions": 0,
       "intruder_opponent_transitions": 2303,
+      "node_kayles_exact_empty_members": 620,
+      "node_kayles_exact_members": 620,
+      "node_kayles_zero_members": 620,
+      "node_kayles_zero_nonempty_transitions": 533,
       "nonempty_transitions": 533,
       "p_members": 620,
       "p_nonempty_transitions": 533,
@@ -16,6 +23,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -27,6 +36,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -38,6 +49,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -49,6 +62,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 3,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 3,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -60,6 +75,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -71,6 +88,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -82,6 +101,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -93,6 +114,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -104,6 +127,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -115,6 +140,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -126,6 +153,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -137,6 +166,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -148,6 +179,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -159,6 +192,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -170,6 +205,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -181,6 +218,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -192,6 +231,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -203,6 +244,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -214,6 +257,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -225,6 +270,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -236,6 +283,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -247,6 +296,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -258,6 +309,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -269,6 +322,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -280,6 +335,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -291,6 +348,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -302,6 +361,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -313,6 +374,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -324,6 +387,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -335,6 +400,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -346,6 +413,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -363,8 +432,31 @@
     },
     {
       "clean_members": 3156,
+      "clean_nonexact_capacity_two_profiles": [
+        {
+          "maximum_legal_points": 3,
+          "members": 4,
+          "p_value": false
+        },
+        {
+          "maximum_legal_points": 3,
+          "members": 72,
+          "p_value": true
+        },
+        {
+          "maximum_legal_points": 4,
+          "members": 32,
+          "p_value": true
+        }
+      ],
+      "clean_without_node_kayles_exact_n_members": 4,
+      "clean_without_node_kayles_exact_p_members": 104,
       "impure_transitions": 1515,
       "intruder_opponent_transitions": 69189,
+      "node_kayles_exact_empty_members": 8770,
+      "node_kayles_exact_members": 17028,
+      "node_kayles_zero_members": 3048,
+      "node_kayles_zero_nonempty_transitions": 2822,
       "nonempty_transitions": 13451,
       "p_members": 6408,
       "p_nonempty_transitions": 5475,
@@ -375,6 +467,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -386,17 +480,34 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 0,
           "prior_triple_fixed_points": 0,
-          "transitions": 144
+          "transitions": 4
         },
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 0,
+          "prior_triple_fixed_points": 0,
+          "transitions": 140
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -408,28 +519,60 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 0,
           "prior_triple_fixed_points": 0,
-          "transitions": 176
+          "transitions": 36
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 0,
+          "prior_triple_fixed_points": 0,
+          "transitions": 140
         },
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 0,
           "prior_triple_fixed_points": 0,
-          "transitions": 32
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 0,
+          "prior_triple_fixed_points": 0,
+          "transitions": 30
         },
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -441,6 +584,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -452,6 +597,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -463,6 +610,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -474,6 +623,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -485,6 +636,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -496,17 +649,34 @@
         {
           "child_live_conic": 0,
           "clean_members": 3,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 3,
           "parent_live_conic": 0,
           "prior_triple_fixed_points": 0,
-          "transitions": 24
+          "transitions": 12
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 3,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 3,
+          "p_members": 3,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 3,
+          "parent_live_conic": 0,
+          "prior_triple_fixed_points": 0,
+          "transitions": 12
         },
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -518,6 +688,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -529,6 +701,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -540,6 +714,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -551,6 +727,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -562,6 +740,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -573,6 +753,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -584,6 +766,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -595,6 +779,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -606,6 +792,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -617,6 +805,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -628,6 +818,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -639,6 +831,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -650,6 +844,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -661,17 +857,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 1,
           "prior_triple_fixed_points": 0,
-          "transitions": 172
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 1,
+          "prior_triple_fixed_points": 0,
+          "transitions": 170
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -683,6 +896,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -694,6 +909,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -705,6 +922,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -716,6 +935,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -727,6 +948,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -738,6 +961,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -749,6 +974,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -760,6 +987,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -771,6 +1000,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -782,6 +1013,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -793,6 +1026,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -804,6 +1039,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -815,39 +1052,86 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 531
+          "transitions": 20
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 511
         },
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 253
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 251
         },
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 71
+          "transitions": 4
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 67
         },
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -859,6 +1143,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -870,6 +1156,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -881,6 +1169,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -892,6 +1182,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -903,6 +1195,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -914,6 +1208,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -925,6 +1221,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 3,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 3,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 3,
@@ -936,6 +1234,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -947,6 +1247,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -958,6 +1260,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -969,6 +1273,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 4,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 4,
           "p_members": 4,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 4,
@@ -980,6 +1286,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 5,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -991,6 +1299,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1002,6 +1312,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1013,6 +1325,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1024,17 +1338,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 971
+          "transitions": 13
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 958
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1046,6 +1377,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1057,6 +1390,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1068,6 +1403,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1079,6 +1416,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1090,6 +1429,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1101,6 +1442,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1112,6 +1455,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1123,6 +1468,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1134,28 +1481,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 42
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 40
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 3,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 7
+          "transitions": 1
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 3,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 6
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1167,6 +1546,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1178,6 +1559,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1189,6 +1572,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1200,6 +1585,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1211,6 +1598,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 3,
@@ -1222,6 +1611,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1233,6 +1624,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1244,6 +1637,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1255,6 +1650,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1266,28 +1663,60 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 279
+          "transitions": 14
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 265
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 58
+          "transitions": 15
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 43
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1299,6 +1728,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1310,50 +1741,112 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 102
+          "transitions": 10
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 92
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 41
+          "transitions": 12
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 29
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 39
+          "transitions": 4
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 35
         },
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 32
+          "transitions": 7
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 25
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1365,6 +1858,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1376,6 +1871,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1387,6 +1884,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1398,6 +1897,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1409,6 +1910,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1420,17 +1923,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 3,
           "parent_live_conic": 2,
           "prior_triple_fixed_points": 0,
-          "transitions": 22
+          "transitions": 4
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 3,
+          "parent_live_conic": 2,
+          "prior_triple_fixed_points": 0,
+          "transitions": 18
         },
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1442,6 +1962,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1453,6 +1975,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1464,6 +1988,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 3,
           "p_members_strict_live_descent_from_parent": 3,
@@ -1475,6 +2001,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 3,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 3,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 3,
           "p_members_strict_live_descent_from_parent": 3,
@@ -1486,6 +2014,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 2,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 3,
           "p_members_strict_live_descent_from_parent": 3,
@@ -1497,6 +2027,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 5,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1508,6 +2040,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 5,
+          "node_kayles_zero_members": 1,
           "p_members": 5,
           "p_members_strict_live_descent_from_child": 3,
           "p_members_strict_live_descent_from_parent": 3,
@@ -1519,6 +2053,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1530,6 +2066,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1541,6 +2079,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1552,17 +2092,34 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 320
+          "transitions": 10
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 310
         },
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1574,6 +2131,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1585,6 +2144,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1596,6 +2157,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1607,6 +2170,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1618,6 +2183,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1629,6 +2196,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1640,6 +2209,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1651,6 +2222,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1662,28 +2235,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 720
+          "transitions": 39
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 681
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 148
+          "transitions": 9
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 139
         },
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1695,17 +2300,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 139
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 137
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1717,17 +2339,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 42
+          "transitions": 4
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 38
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1739,28 +2378,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 17
+          "transitions": 12
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 5
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 3,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 6
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 3,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 4
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1772,17 +2443,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 3,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 26
+          "transitions": 12
         },
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 3,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 14
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1794,6 +2482,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1805,17 +2495,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 3,
           "packet_size": 3,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 26
+          "transitions": 24
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
+          "p_members": 3,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 3,
+          "packet_size": 3,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1827,6 +2534,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1838,6 +2547,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1849,6 +2560,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -1860,28 +2573,60 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 641
+          "transitions": 11
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 630
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 114
+          "transitions": 22
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 92
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1893,6 +2638,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1904,28 +2651,60 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 61
+          "transitions": 1
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 60
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 17
+          "transitions": 8
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 9
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1937,6 +2716,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -1948,6 +2729,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1959,6 +2742,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1970,6 +2755,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1981,6 +2768,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -1992,6 +2781,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2003,6 +2794,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2014,17 +2807,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 3,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 13
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 3,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 11
         },
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2036,6 +2846,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2047,6 +2859,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2058,6 +2872,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 3,
@@ -2069,6 +2885,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2080,6 +2898,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2091,6 +2911,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2102,9 +2924,50 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 1
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 105
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 27
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
@@ -2112,18 +2975,9 @@
         },
         {
           "child_live_conic": 3,
-          "clean_members": 0,
-          "p_members": 1,
-          "p_members_strict_live_descent_from_child": 1,
-          "p_members_strict_live_descent_from_parent": 1,
-          "packet_size": 1,
-          "parent_live_conic": 3,
-          "prior_triple_fixed_points": 0,
-          "transitions": 133
-        },
-        {
-          "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2135,6 +2989,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2146,17 +3002,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 57
+          "transitions": 14
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 43
         },
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2168,17 +3041,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 5
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 3
         },
         {
           "child_live_conic": 3,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2190,6 +3080,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2201,17 +3093,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 3,
           "parent_live_conic": 3,
           "prior_triple_fixed_points": 0,
-          "transitions": 24
+          "transitions": 12
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 3,
+          "parent_live_conic": 3,
+          "prior_triple_fixed_points": 0,
+          "transitions": 12
         },
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 3,
           "p_members_strict_live_descent_from_parent": 3,
@@ -2223,6 +3132,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2234,6 +3145,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2245,6 +3158,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 4,
           "p_members_strict_live_descent_from_child": 4,
           "p_members_strict_live_descent_from_parent": 4,
@@ -2256,6 +3171,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2267,6 +3184,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2278,6 +3197,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2289,6 +3210,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2300,17 +3223,34 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 35
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 0,
+          "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 33
         },
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2322,6 +3262,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2333,6 +3275,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2344,6 +3288,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2355,6 +3301,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2366,6 +3314,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2377,6 +3327,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2388,6 +3340,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2399,6 +3353,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2410,6 +3366,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2421,28 +3379,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 653
+          "transitions": 68
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 585
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 100
+          "transitions": 1
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 99
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2454,6 +3444,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2465,28 +3457,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 92
+          "transitions": 20
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 72
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 110
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 108
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2498,17 +3522,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 30
+          "transitions": 12
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 18
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2520,28 +3561,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 8
+          "transitions": 6
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 3
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 1
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2553,6 +3626,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2564,6 +3639,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2575,6 +3652,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2586,6 +3665,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 3,
@@ -2597,6 +3678,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2608,6 +3691,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2619,6 +3704,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2630,6 +3717,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2641,6 +3730,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2652,6 +3743,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2663,39 +3756,86 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 659
+          "transitions": 20
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 639
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 34
+          "transitions": 2
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 32
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 171
+          "transitions": 18
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 153
         },
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2707,17 +3847,47 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 246
+          "transitions": 2
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 16
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 228
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2729,17 +3899,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 85
+          "transitions": 4
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 81
         },
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2751,6 +3938,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2762,17 +3951,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 28
+          "transitions": 2
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 26
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2784,17 +3990,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 5
+          "transitions": 2
         },
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 3
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2806,6 +4029,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2817,17 +4042,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 3,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 9
+          "transitions": 2
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 3,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 7
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2839,6 +4081,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2850,6 +4094,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2861,6 +4107,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2872,6 +4120,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2883,6 +4133,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2894,17 +4146,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 3,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 9
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 3,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 7
         },
         {
           "child_live_conic": 2,
           "clean_members": 2,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2916,6 +4185,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -2927,6 +4198,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -2938,6 +4211,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 3,
@@ -2949,6 +4224,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2960,6 +4237,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2971,6 +4250,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2982,6 +4263,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -2993,17 +4276,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 114
+          "transitions": 3
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 111
         },
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3015,6 +4315,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3026,6 +4328,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3037,6 +4341,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3048,17 +4354,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 26
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 2,
+          "p_members_strict_live_descent_from_child": 2,
+          "p_members_strict_live_descent_from_parent": 2,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 24
         },
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3070,6 +4393,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3081,17 +4406,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 3,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 8
+          "transitions": 2
         },
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 3,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 6
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3103,6 +4445,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3114,6 +4458,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3125,6 +4471,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3136,6 +4484,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3147,6 +4497,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3158,6 +4510,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3169,6 +4523,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3180,17 +4536,34 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 4,
           "prior_triple_fixed_points": 0,
-          "transitions": 28
+          "transitions": 24
+        },
+        {
+          "child_live_conic": 4,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 4,
+          "prior_triple_fixed_points": 0,
+          "transitions": 4
         },
         {
           "child_live_conic": 4,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3202,6 +4575,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3213,6 +4588,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3224,6 +4601,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3235,6 +4614,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3246,6 +4627,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3257,6 +4640,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3268,6 +4653,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3279,6 +4666,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3290,6 +4679,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3301,6 +4692,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3312,6 +4705,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3323,6 +4718,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 2,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 2,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3334,6 +4731,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3345,6 +4744,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3356,6 +4757,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3367,6 +4770,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3378,6 +4783,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3389,28 +4796,60 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 85
+          "transitions": 2
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 83
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 21
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 19
         },
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3422,6 +4861,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3433,6 +4874,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3444,6 +4887,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3455,6 +4900,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3466,6 +4913,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3477,6 +4926,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3488,6 +4939,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3499,6 +4952,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3510,6 +4965,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3521,19 +4978,75 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 131
+          "transitions": 3
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 128
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 18
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 39
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 14
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 5,
@@ -3542,18 +5055,9 @@
         },
         {
           "child_live_conic": 2,
-          "clean_members": 0,
-          "p_members": 1,
-          "p_members_strict_live_descent_from_child": 1,
-          "p_members_strict_live_descent_from_parent": 1,
-          "packet_size": 1,
-          "parent_live_conic": 5,
-          "prior_triple_fixed_points": 0,
-          "transitions": 71
-        },
-        {
-          "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3565,17 +5069,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 21
+          "transitions": 1
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 20
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3587,6 +5108,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3598,17 +5121,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 2,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 7
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 5
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3620,6 +5160,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3631,6 +5173,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3642,6 +5186,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3653,6 +5199,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3664,6 +5212,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3675,6 +5225,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3686,6 +5238,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3697,6 +5251,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3708,6 +5264,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3719,17 +5277,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 144
+          "transitions": 4
         },
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 140
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3741,17 +5316,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 75
+          "transitions": 19
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 56
         },
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3763,17 +5355,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 15
+          "transitions": 3
         },
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 12
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3785,17 +5394,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
-          "p_members": 1,
-          "p_members_strict_live_descent_from_child": 1,
-          "p_members_strict_live_descent_from_parent": 1,
-          "packet_size": 2,
-          "parent_live_conic": 5,
-          "prior_triple_fixed_points": 0,
-          "transitions": 17
-        },
-        {
-          "child_live_conic": 3,
-          "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3807,6 +5407,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 15
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 2,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 2
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3818,6 +5446,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3829,6 +5459,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3840,6 +5472,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3851,6 +5485,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3862,6 +5498,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 3,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 3,
           "p_members": 3,
           "p_members_strict_live_descent_from_child": 3,
           "p_members_strict_live_descent_from_parent": 3,
@@ -3873,6 +5511,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3884,6 +5524,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3895,6 +5537,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3906,6 +5550,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3917,17 +5563,34 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
           "packet_size": 1,
           "parent_live_conic": 5,
           "prior_triple_fixed_points": 0,
-          "transitions": 14
+          "transitions": 8
         },
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 1,
+          "p_members_strict_live_descent_from_child": 1,
+          "p_members_strict_live_descent_from_parent": 1,
+          "packet_size": 1,
+          "parent_live_conic": 5,
+          "prior_triple_fixed_points": 0,
+          "transitions": 6
+        },
+        {
+          "child_live_conic": 4,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3939,6 +5602,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -3950,6 +5615,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3961,6 +5628,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3972,6 +5641,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -3983,6 +5654,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 5,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -3994,6 +5667,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4005,6 +5680,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4016,6 +5693,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4027,6 +5706,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4038,6 +5719,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -4049,6 +5732,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4060,6 +5745,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4071,6 +5758,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4082,6 +5771,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4093,6 +5784,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4104,6 +5797,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4115,6 +5810,8 @@
         {
           "child_live_conic": 0,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4126,6 +5823,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4137,17 +5836,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 6,
           "prior_triple_fixed_points": 0,
-          "transitions": 58
+          "transitions": 12
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 6,
+          "prior_triple_fixed_points": 0,
+          "transitions": 46
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4159,6 +5875,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4170,17 +5888,34 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 6,
           "prior_triple_fixed_points": 0,
-          "transitions": 36
+          "transitions": 12
         },
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 6,
+          "prior_triple_fixed_points": 0,
+          "transitions": 24
+        },
+        {
+          "child_live_conic": 1,
+          "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4192,6 +5927,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4203,6 +5940,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4214,6 +5953,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4225,6 +5966,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4236,6 +5979,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4247,17 +5992,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 6,
           "prior_triple_fixed_points": 0,
-          "transitions": 58
+          "transitions": 16
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 6,
+          "prior_triple_fixed_points": 0,
+          "transitions": 42
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -4269,6 +6031,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4280,6 +6044,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4291,6 +6057,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4302,6 +6070,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4313,6 +6083,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4324,6 +6096,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4335,6 +6109,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4346,6 +6122,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4357,6 +6135,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 2,
@@ -4368,6 +6148,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4379,6 +6161,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 1,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4390,6 +6174,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4401,6 +6187,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4412,6 +6200,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4423,6 +6213,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4434,6 +6226,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4445,6 +6239,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 1,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4456,6 +6252,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4467,6 +6265,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4478,6 +6278,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 1,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 1,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4489,6 +6291,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 4,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4500,6 +6304,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4511,6 +6317,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4522,6 +6330,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4533,6 +6343,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4544,6 +6356,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4555,6 +6369,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4566,6 +6382,8 @@
         {
           "child_live_conic": 6,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4577,6 +6395,8 @@
         {
           "child_live_conic": 6,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -4588,6 +6408,8 @@
         {
           "child_live_conic": 6,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4599,6 +6421,8 @@
         {
           "child_live_conic": 6,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4610,6 +6434,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4621,6 +6447,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4632,6 +6460,8 @@
         {
           "child_live_conic": 1,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4643,6 +6473,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4654,6 +6486,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4665,6 +6499,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4676,17 +6512,34 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 2,
           "parent_live_conic": 7,
           "prior_triple_fixed_points": 0,
-          "transitions": 2
+          "transitions": 1
         },
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 2,
+          "parent_live_conic": 7,
+          "prior_triple_fixed_points": 0,
+          "transitions": 1
+        },
+        {
+          "child_live_conic": 2,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4698,6 +6551,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4709,6 +6564,8 @@
         {
           "child_live_conic": 2,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4720,6 +6577,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4731,17 +6590,34 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
           "packet_size": 1,
           "parent_live_conic": 7,
           "prior_triple_fixed_points": 0,
-          "transitions": 4
+          "transitions": 1
         },
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
+          "p_members": 0,
+          "p_members_strict_live_descent_from_child": 0,
+          "p_members_strict_live_descent_from_parent": 0,
+          "packet_size": 1,
+          "parent_live_conic": 7,
+          "prior_triple_fixed_points": 0,
+          "transitions": 3
+        },
+        {
+          "child_live_conic": 3,
+          "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4753,6 +6629,8 @@
         {
           "child_live_conic": 3,
           "clean_members": 0,
+          "node_kayles_exact_members": 2,
+          "node_kayles_zero_members": 0,
           "p_members": 2,
           "p_members_strict_live_descent_from_child": 2,
           "p_members_strict_live_descent_from_parent": 2,
@@ -4764,6 +6642,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 1,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4775,6 +6655,8 @@
         {
           "child_live_conic": 4,
           "clean_members": 0,
+          "node_kayles_exact_members": 0,
+          "node_kayles_zero_members": 0,
           "p_members": 0,
           "p_members_strict_live_descent_from_child": 0,
           "p_members_strict_live_descent_from_parent": 0,
@@ -4786,6 +6668,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 3,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4797,6 +6681,8 @@
         {
           "child_live_conic": 5,
           "clean_members": 0,
+          "node_kayles_exact_members": 5,
+          "node_kayles_zero_members": 0,
           "p_members": 1,
           "p_members_strict_live_descent_from_child": 1,
           "p_members_strict_live_descent_from_parent": 1,
@@ -4813,6 +6699,7 @@
       "transitions_outside_three_intruder_domain": 10036
     }
   ],
+  "node_kayles_guard": "A Y_0 grandchild passes the exact Node-Kayles guard when its conic is empty, every projective line of residual capacity two contains at most two legal points, and the resulting residual conflict graph has Grundy value zero.",
   "source": {
     "bytes": 654965,
     "path": "notes/data/c20-q13-q17-states.jsonl.gz",
