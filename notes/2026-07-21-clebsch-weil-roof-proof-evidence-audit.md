@@ -373,3 +373,6 @@ Witt S(4,5,11) 11 biplane blocks remaining 55
 
 The search interface exposed returned top results rather than stable total-result counts.  This is
 why the section remains a spot-check and cannot license an unqualified absence claim.
+
+The second-tier audit of C445, C457, C459, C460, C467, and C468 is recorded separately in
+`2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md`.

@@ -35,6 +35,8 @@ and the complete C440--C468 paper-disposition inventory is
 [`2026-07-21-clebsch-weil-roof-results-ledger.md`](../2026-07-21-clebsch-weil-roof-results-ledger.md).
 The battery-wide proof/evidence, formalization-readiness, and bounded novelty audit is
 [`2026-07-21-clebsch-weil-roof-proof-evidence-audit.md`](../2026-07-21-clebsch-weil-roof-proof-evidence-audit.md).
+The ranked runner-up novelty spot-check is
+[`2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md`](../2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md).
 The red-team-approved formalization campaign is
 [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md).
 

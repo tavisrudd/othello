@@ -28,6 +28,8 @@ The proof/evidence and Lean-readiness audit of the complete battery is
 separates direct finite leaves from theorem-interface and cohomological dependencies, records the
 required C443 ledger correction, and gives safe bounded novelty wording for the most attractive
 recent claims.
+The second-tier novelty spot-check and ranked safe wording for C445/C457/C459/C460/C467/C468 are in
+`2026-07-22-clebsch-weil-roof-runner-up-novelty-audit.md`.
 
 The high-level generalist compression test, possible unseen connections, adopted exposition
 changes, and remaining theorem-xref TODOs are recorded in
