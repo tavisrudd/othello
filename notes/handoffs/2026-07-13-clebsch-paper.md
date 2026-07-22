@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch` — see `AGENTS.md` § Lane routing.
 
-**Date**: 2026-07-21
+**Date**: 2026-07-22
 
 > **LIVE MAP ONLY. DO NOT APPEND SESSION LOGS, EXPLORATION, REVIEW TRANSCRIPTS, OR
 > SUPERSEDED PLANS HERE.** Put history in
@@ -229,8 +229,7 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   tensor/fusion certificate, Lean data, and six-entry manifest. Two review repair rounds closed the
   trust/provenance findings; exact terminals, hashes, build/axiom evidence, exclusions, and C320 rows
   are in [`2026-07-20-c426-clebsch-scheme-fourier-lean.md`](../2026-07-20-c426-clebsch-scheme-fourier-lean.md).
-- **C423 and C424 complete; C425 review fixes are implemented and await user-launched post-fix review, while
-  C427 remains queued behind its final `GO`:** C423's
+- **C423--C425 are complete with final independent review `GO`; C427 is unblocked and next:** C423's
   sharded A3/B3/H3 leaves prove ranks `3/6/10`, signed first/second-moment cancellation, and named
   nonzero cubic witnesses. C424 formalizes the abstract radical--Hadamard balanced-sheet theorem,
   concrete B3/H3 signed actions, cubic orientation and exact stabilizers, and plane syzygies without
@@ -238,7 +237,7 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   review `GO`. C425's six-module gate derives the `1,4,6 / 1,4,6` orbits, all six secant-incidence
   profiles, involution sign, rank-two/four-kernel facts, cubic-first pushforward, and singleton
   matching-row recovery; its report explicitly retains the named abstract-group identification and
-  scheme-theoretic Fourier semantics at replay/external level. C427 owns the
+  scheme-theoretic Fourier semantics at replay/external level. C427 now owns the
   committed C373 intrinsic chirality endpoint and replacement-spine gate and hands its verification-map
   delta to C320. Exact evidence and exclusions: [`2026-07-20-c423-clebsch-factorization-leaves-lean.md`](../2026-07-20-c423-clebsch-factorization-leaves-lean.md)
   [`2026-07-20-c424-clebsch-balanced-sheets-lean.md`](../2026-07-20-c424-clebsch-balanced-sheets-lean.md),

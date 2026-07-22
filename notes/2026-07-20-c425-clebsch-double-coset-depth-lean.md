@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation complete; independent review required before closure
+**Status:** complete; final independent review `GO`
 
 **Date:** 2026-07-22
 
@@ -208,6 +208,22 @@ Verify-all addition: `RelativeConicArcs.Gates.ClebschDoubleCosetDepth`.  C320 mu
 boundary above and must not promote the replayed group identifications or Fourier semantics to
 full-trust Lean claims.
 
+## Mystery ledger and extra-juice closeout
+
+- **Bounded expansion versus genuine orbit:** settled.  The cheap closeout upgrade is the exact
+  `mem_generatedOrbit_iff_reachable` theorem, with generator bijectivity and order-two/order-three
+  identities showing that positive words also cover inverses in the generated permutation group.
+- **Stable checker versus historical reconstruction:** settled as a trust-boundary correction.  The
+  stable bundle checks every finite semantic claim it exports and hashes its sole direct external
+  input; abstract named-group, endpoint/conic, and C378/C379/C406 certificate-origin semantics remain
+  external and must stay explicit in C320 and manuscript wording.
+- **Rank two with six separated labels:** no unexplained C425 gap remains.  The exact rank, kernel,
+  and injectivity statements are gated; their mixed-bi-Hecke interpretation remains the already
+  declared external conceptual layer rather than an unproved formal claim.
+
+No genuine task-owned mystery remains after the extra-juice pass.  The remaining external
+identifications are deliberate publication-ledger boundaries owned by C320, not hidden C425 work.
+
 ## Independent review
 
 The user-launched initial review on 2026-07-22 returned `NO-GO`.  Its eight findings are disposed in
@@ -224,5 +240,8 @@ is now applied: all four source comments use only proved concrete orbit/label te
 states that named-group and C378/C379/C406 certificate provenance is external to the stable checker;
 and the closed JSON schema requires every retained property after removal of three unused legacy fields.
 
-A fresh user-launched independent review is required.  The live queue row remains open until that
-review records final `GO` and confirms this last cleanup.
+The final user-launched review returned `GO`: all three last cleanup findings are closed, the stable
+generator and all nine checksum entries pass, the schema/property/certificate key sets agree exactly,
+the guarded aggregator and 34-terminal gate are green, the trace-only aggregate gate passes, and the
+selected terminal surface uses only `propext`, `Classical.choice`, and `Quot.sound` with no `sorryAx`
+or `native_decide`.  No material finding remains.
