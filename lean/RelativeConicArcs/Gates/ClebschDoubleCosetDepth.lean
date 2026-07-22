@@ -1,16 +1,24 @@
 import RelativeConicArcs.ClebschDoubleCosetDepth
 
 /-!
-# Import-only gate for the double-coset depth bridge
+# Import-only gate for the finite matching-depth bridge
 
-This gate exports the projective-cell partition and scalar closure, the six `1,4,6 / 1,4,6`
-generator orbits, representative secant recounts, involution antipodality, the rank-two image and
-four-dimensional kernel, profile separation, the two depth-plane equations, weighted barycentre,
-cubic-first pushforward, odd-relation bridge, and singleton decorated-parent recovery.
+This gate exports the displayed relation-cell assignment and scalar closure, matrix/point
+compatibility, the six `1,4,6 / 1,4,6` permutation-generator orbits, representative secant recounts,
+involution antipodality, the rank-two image and four-dimensional kernel, profile separation, the two
+depth-plane equations, weighted barycentre, cubic-first pushforward, odd-relation bridge, and
+singleton decorated-parent recovery.
 -/
 
 #print axioms RelativeConicArcs.ClebschDoubleCosetDepth.relationCells_partition
 #print axioms RelativeConicArcs.ClebschDoubleCosetDepth.vectorInRelation_smul
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.subgroupGeneratorPoint_represents_matrix
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.sheetInvolutionPoint_represents_matrix
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.subgroupGeneratorParent_bijective
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.subgroupGeneratorParent_orders
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_seed
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_closed
+#print axioms RelativeConicArcs.ClebschDoubleCosetDepth.mem_generatedOrbit_iff_reachable
 #print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbit_card
 #print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbits_cover
 #print axioms RelativeConicArcs.ClebschDoubleCosetDepth.generatedOrbits_pairwise_disjoint

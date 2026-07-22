@@ -4,7 +4,7 @@ import RelativeConicArcs.ClebschDoubleCosetDepthBase
 # Positive-sheet secant-depth checks
 
 Kernel reduction recounts the sixteen relation cells for one representative of each positive-sheet
-tetrahedral orbit.  It also checks constancy of the four signed counts on all eleven matching rows
+permutation-generator orbit.  It also checks constancy of the four signed counts on all eleven matching rows
 generated from those representatives.  The displayed count vectors are theorem conclusions, not
 input to the depth function.
 -/

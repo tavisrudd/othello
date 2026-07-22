@@ -222,7 +222,7 @@
       0
     ]
   },
-  "endpoint_bridge_from_canonical_checker": [
+  "endpoint_bridge": [
     0,
     1,
     3,
@@ -236,7 +236,7 @@
     6,
     7
   ],
-  "expected_orbits_replay_only": [
+  "generator_orbits": [
     [
       0
     ],
@@ -274,12 +274,6 @@
   ],
   "factorization_sheet_swap": 0,
   "field": 11,
-  "group_orders": {
-    "A4": 12,
-    "A5": 60,
-    "PGL2": 1320,
-    "PSL2": 660
-  },
   "h3_to_standard": [
     [
       8,
@@ -298,10 +292,7 @@
     ]
   ],
   "input_hashes": {
-    "2026-07-19-c380-clebsch-gateway-lean-foundations.py": "a3d7e5af8350de09a095f1f369e3f3eb12e62db55c8f45917a122651b26c5291",
-    "2026-07-20-c411-double-coset-hecke.json": "23f0a100356f0a369f00d81011e8d8d6b9d867b9de45a7b0625fc2889323b014",
-    "2026-07-20-c411-double-coset-hecke.py": "0029b1153bf5b6618ba38d57edb300c89dc2e46762a1be1ed8a3769b23762584",
-    "ClebschGatewayQ11Matching.lean": "010c59e1310cb13df0594ffc3db5a346c048a1c66c2b91d6f6d2639a0ea19ec7"
+    "lean/RelativeConicArcs/ClebschGatewayQ11Matching.lean": "010c59e1310cb13df0594ffc3db5a346c048a1c66c2b91d6f6d2639a0ea19ec7"
   },
   "j_endpoint": [
     2,

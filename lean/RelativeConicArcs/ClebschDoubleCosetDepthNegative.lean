@@ -58,7 +58,7 @@ theorem sheetInvolution_secant_equivariant_positive :
         liesOnSecantUnion p x := by
   decide
 
-/-- The geometric sheet involution negates every positive-sheet depth profile. -/
+/-- The displayed sheet involution negates every positive-sheet depth profile. -/
 theorem depthProfile_sheetInvolution_positive :
     ∀ p ∈ sheetParents 0,
       depthProfile (sheetInvolutionParent p) = -depthProfile p := by

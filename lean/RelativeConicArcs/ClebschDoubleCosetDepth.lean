@@ -6,8 +6,8 @@ import RelativeConicArcs.ClebschBalancedSheetsH3
 /-!
 # Six mixed double cosets, their depth plane, and singleton recovery
 
-The six tetrahedral generator orbits on the twenty-two matching rows have sizes `1,4,6` on each
-special-linear sheet.  Their secant-incidence profiles form three opposite pairs in a two-dimensional
+The six orbits of the two displayed matching-row permutations have sizes `1,4,6` on each
+displayed eleven-row sheet.  Their secant-incidence profiles form three opposite pairs in a two-dimensional
 subspace of four-space over `ZMod 11`.  The induced linear map from the six orbit labels has rank two
 and kernel dimension four, while the six individual profiles remain distinct.  The weighted signed
 pushforward has zero first and second scalar moments and a nonzero cubic moment.
@@ -188,7 +188,7 @@ theorem representativeProfiles_planeEquations : ∀ i : Fin 6,
   rw [representativeProfile_values]
   decide
 
-/-- The positive profiles satisfy the primitive integer-weighted barycentre relation. -/
+/-- The positive profiles satisfy the displayed integer-weighted barycentre relation. -/
 theorem positiveProfiles_weightedBarycentre :
     depthProfile (orbitRepresentative 0) +
       4 • depthProfile (orbitRepresentative 1) +
