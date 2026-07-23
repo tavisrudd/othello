@@ -25,8 +25,9 @@ based two-sheet data.
 4. The two opposite-sheet stabilizers are transverse:
    `H = Sa Sb`, equivalently `#Sa\H/Sb = #Sb\H/Sa = 1`.
 
-Choose an outer involution `j` with `y = jx ∈ Ω-` and call `(x,y)` a golden
-pair. Then
+Call `(x,y)` a golden pair when `y ∈ Ω-` and the pair is swappable: there
+exists an outer element `j` with `jx=y` and `jy=x` (the C434 realization
+supplies an outer involution). Then
 
 ```text
 K = Stab_G(x) ∩ Stab_G(y) = H_y
@@ -52,14 +53,11 @@ The first term is two because the action on `H/K` is 2-transitive: a point
 stabilizer has its fixed point and one orbit on the remaining points. The
 second is one because `H = K Sj`. Thus `#K\Ω- = 3`.
 
-Moreover `jKj⁻¹ = K`, since
+Moreover `jKj⁻¹ = K`, because conjugation by a swap exchanges
+`Stab_G(x)` and `Stab_G(y)` and therefore preserves their intersection.
 
-```text
-j(H ∩ jHj⁻¹)j⁻¹ = jHj⁻¹ ∩ H.
-```
-
-Consequently `j` pairs the three `K`-orbits on one sheet with the three on
-the other, including their sizes. In particular,
+Consequently any swap `j` pairs the three `K`-orbits on one sheet with the
+three on the other, including their sizes. In particular,
 
 ```text
 #K\Ω+ = #K\Ω- = 3
@@ -70,6 +68,39 @@ and, because `x` is the singleton own-sheet orbit,
 `#K\Ω = 3 + 3 = 6`. This proves that the earlier
 "largest-suborbit avoidance" is only sheet bookkeeping: `jx` lies on
 `Ω-`, while the size-`q-1` orbit `H/S0` lies on `Ω+`.
+
+The proof uses only the opposite-sheet double-coset incidence matrix
+
+```text
+                 target Sa   target Sb
+golden K = Sa         2           1
+golden K = Sb         1           2
+```
+
+plus swappability. The projective-line 2-transitivity and exact
+factorizations are the realization-level explanation of this matrix, not
+extra structure needed by the abstract counting lemma.
+
+### Character-theoretic corollary
+
+Let `πi = Ind_Si^H(1)` be the two opposite-component permutation
+characters. Mackey's formula identifies their Gram matrix with the
+double-coset matrix:
+
+```text
+(<πi,πj>) = [[2,1],[1,2]].
+```
+
+Transitivity gives `<πi,1>=1`, so `πi=1+χi`; norm `2` forces each `χi` to
+be irreducible, and the off-diagonal inner product `1` forces
+`<χa,χb>=0`. Thus, in characteristic zero, the two augmentation modules
+are distinct irreducibles and the only intertwiner between the two
+permutation modules factors through constants. This is the
+representation-theoretic content of Borel transversality.
+
+This corollary is deliberately characteristic-zero. Modular reduction can
+merge or extend constituents, so C439 must test rather than assume its
+survival in the radical/Hadamard setting.
 
 ## The four exact small-group tables
 
@@ -146,20 +177,26 @@ They are `G`-equivariant. The middle six-level is different: `K` is not
 normal in `G`, so `Ω → K\Ω` is not a quotient of `G`-sets and must not be
 presented as one.
 
-Define a based golden-pair object to be `(G,Γ,Ω,x,j)` satisfying the
-two-sheet axioms above, with `j` an outer involution and `y=jx`. A morphism
-is a group isomorphism together with an equivariant bijection carrying
-`(x,j)` to `(x',j')`. It carries
+Define a based golden-pair object to be `(G,Γ,Ω,x,y)` satisfying the
+two-sheet axioms above, with `(x,y)` swappable. No swap is included in the
+data. A morphism is a group isomorphism together with an equivariant
+bijection carrying `(x,y)` to `(x',y')`. It carries
 
 ```text
-K = Stab(x) ∩ Stab(jx)
+K = Stab(x) ∩ Stab(y)
 ```
 
 to `K'` and hence induces a canonical bijection `K\Ω ≅ K'\Ω'`, compatible
-with the sheet map and the involution pairing. Therefore
+with the sheet map.
+
+The involution pairing is also pair-canonical. If `s` and `t` both swap
+`x` and `y`, then `t⁻¹s` fixes both points and lies in `K`; every swap
+normalizes `K`, and its square lies in `K`. Hence all swaps induce the same
+involution on `K\Ω`. Equivalently, the set of swaps is a `K`-bitorsor but
+its action on the orbit quotient is unambiguous. Therefore
 
 ```text
-(G,Γ,Ω,x,j) ↦ (K\Ω → Γ\Ω, j)
+(G,Γ,Ω,x,y) ↦ (K\Ω → Γ\Ω, swap)
 ```
 
 is a functor on the golden-pair groupoid. Changing the golden pair
@@ -182,9 +219,19 @@ For the C434 reflection-parent geometry, `|G/H|=2q` forces
 |H| = (q²-1)/2.
 ```
 
-For `q≥5`, Dickson's subgroup classification excludes the Borel,
-cyclic/dihedral, and proper subfield families by their orders. The
-exceptional orders `12,24,60` leave only
+For `q≥5`, Dickson's subgroup classification reduces the order check to
+four families. A Borel has order `q(q-1)/2 < (q²-1)/2`; cyclic and
+dihedral candidates have order at most `q+1 < (q²-1)/2`. If
+`q=q0^r`, `r≥2`, a proper subfield candidate has order at most
+`|PGL2(q0)|=q0(q0²-1)`, and
+
+```text
+2q0(q0²-1) < q0^(2r)-1;
+```
+
+for `r=2` the difference is `(q0-1)³(q0+1)>0`, and larger `r` only
+increases it. Thus none has the required order. The exceptional orders
+`12,24,60` leave only
 
 ```text
 (q,H) = (5,A4), (7,S4), (11,A5).
@@ -246,6 +293,9 @@ Settled:
   `jKj⁻¹=K`; it is not an extra numerical coincidence.
 - The middle six-set is canonical only over the golden-pair groupoid. The
   unbased `G`-object canonically retains only the `2q → 2 → 1` levels.
+- The groupoid needs only the swappable pair `(x,y)`, not a chosen outer
+  involution. The swap set is a `K`-bitorsor and induces one canonical
+  involution on `K\Ω`.
 - The sheet bit itself is the two-class stabilizer torsor and is intrinsic
   exactly under the no-outer-normalizer condition.
 - Both cross-type factorizations meet in `C2`; the two exceptional
@@ -254,3 +304,36 @@ Settled:
 No genuine C492 mystery remains. The `q=5` loss of the stabilizer-class
 readout and the possible existence of a decorated geometric avatar are the
 explicitly allocated C493 question, not residue of this proof.
+
+## Tao stress test (2026-07-23)
+
+The stress test found one genuine over-marking and one presentation
+compression, both now repaired:
+
+- A chosen `j` was unnecessary structure. The correct base is a swappable
+  golden pair; its entire swap bitorsor induces the same quotient
+  involution.
+- The abstract theorem is the `[[2,1],[1,2]]` opposite-sheet incidence
+  matrix plus swappability. Bruhat theory explains the diagonal `2`s and
+  Borel transversality explains the off-diagonal `1`s in B3/H3.
+
+Opportunities now exposed:
+
+- The matrix formulation is the right interface for C439 and any future
+  realization: it asks only for four double-coset ranks and a swapping
+  transporter, without importing conics or exceptional isomorphisms.
+- As a permutation-character Gram matrix, `[[2,1],[1,2]]` proves that the
+  two characteristic-zero augmentation modules are distinct irreducibles
+  and share only constants. C439 gets a sharp modular-survival pretest:
+  any extra cross-intertwiner must be created by reduction.
+- The swap `K`-bitorsor cleanly separates two objects that Paper 1 should
+  not conflate: the pair-canonical middle partition and the external
+  sheet torsor. This gives a sharper "one torsor, one swap" formulation.
+- The cross cells are homogeneous spaces `K/C2`; any reconstruction
+  theorem can seek its missing decoration as a point of this local
+  homogeneous space rather than as an arbitrary `K`-coset label.
+
+No new task is needed for the first two: they are theorem-interface and
+exposition upgrades landed here. Exploiting `K/C2` to shrink the
+reconstruction decoration is a real successor only if C439's application
+sweep finds a consumer; it should not be allocated speculatively.
