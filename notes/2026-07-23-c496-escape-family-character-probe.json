@@ -1,0 +1,421 @@
+{
+  "per_q": {
+    "11": {
+      "buckets": 4,
+      "features": {
+        "chi_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 1
+            },
+            "1": {
+              "N": 1,
+              "P": 2
+            }
+          }
+        },
+        "chi_disc6_finite": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 1,
+              "P": 2
+            },
+            "1": {
+              "P": 1
+            }
+          }
+        },
+        "chi_prod_params": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 1,
+              "P": 1
+            },
+            "1": {
+              "P": 2
+            }
+          }
+        },
+        "chi_prod_times_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 1,
+              "P": 2
+            },
+            "1": {
+              "P": 1
+            }
+          }
+        },
+        "cr_chi_multiset": {
+          "separates": false,
+          "table": {
+            "(-1, -1, -1)": {
+              "P": 1
+            },
+            "(-1, 1, 1)": {
+              "N": 1,
+              "P": 2
+            }
+          }
+        },
+        "k_squares_folded": {
+          "separates": false,
+          "table": {
+            "1": {
+              "N": 1,
+              "P": 1
+            },
+            "2": {
+              "P": 2
+            }
+          }
+        }
+      },
+      "labels": {
+        "N": 1,
+        "P": 3
+      }
+    },
+    "13": {
+      "buckets": 5,
+      "features": {
+        "chi_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 2
+            },
+            "1": {
+              "P": 3
+            }
+          }
+        },
+        "chi_disc6_finite": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 3
+            },
+            "1": {
+              "P": 2
+            }
+          }
+        },
+        "chi_prod_params": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 1
+            },
+            "1": {
+              "P": 4
+            }
+          }
+        },
+        "chi_prod_times_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 3
+            },
+            "1": {
+              "P": 2
+            }
+          }
+        },
+        "cr_chi_multiset": {
+          "separates": false,
+          "table": {
+            "(-1, -1, 1)": {
+              "P": 4
+            },
+            "(1, 1, 1)": {
+              "P": 1
+            }
+          }
+        },
+        "k_squares_folded": {
+          "separates": false,
+          "table": {
+            "1": {
+              "P": 1
+            },
+            "2": {
+              "P": 4
+            }
+          }
+        }
+      },
+      "labels": {
+        "P": 5
+      }
+    },
+    "17": {
+      "buckets": 10,
+      "features": {
+        "chi_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 2,
+              "P": 4
+            },
+            "1": {
+              "N": 3,
+              "P": 1
+            }
+          }
+        },
+        "chi_disc6_finite": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 2,
+              "P": 2
+            },
+            "1": {
+              "N": 3,
+              "P": 3
+            }
+          }
+        },
+        "chi_prod_params": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 2,
+              "P": 2
+            },
+            "1": {
+              "N": 3,
+              "P": 3
+            }
+          }
+        },
+        "chi_prod_times_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "N": 2,
+              "P": 2
+            },
+            "1": {
+              "N": 3,
+              "P": 3
+            }
+          }
+        },
+        "cr_chi_multiset": {
+          "separates": false,
+          "table": {
+            "(-1, -1, 1)": {
+              "N": 3,
+              "P": 5
+            },
+            "(1, 1, 1)": {
+              "N": 2
+            }
+          }
+        },
+        "k_squares_folded": {
+          "separates": false,
+          "table": {
+            "1": {
+              "N": 2,
+              "P": 2
+            },
+            "2": {
+              "N": 3,
+              "P": 3
+            }
+          }
+        }
+      },
+      "labels": {
+        "N": 5,
+        "P": 5
+      }
+    },
+    "19": {
+      "buckets": 13,
+      "features": {
+        "chi_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 7
+            },
+            "1": {
+              "P": 6
+            }
+          }
+        },
+        "chi_disc6_finite": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 5
+            },
+            "1": {
+              "P": 8
+            }
+          }
+        },
+        "chi_prod_params": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 4
+            },
+            "1": {
+              "P": 9
+            }
+          }
+        },
+        "chi_prod_times_disc4": {
+          "separates": false,
+          "table": {
+            "-1": {
+              "P": 5
+            },
+            "1": {
+              "P": 8
+            }
+          }
+        },
+        "cr_chi_multiset": {
+          "separates": false,
+          "table": {
+            "(-1, -1, -1)": {
+              "P": 3
+            },
+            "(-1, 1, 1)": {
+              "P": 10
+            }
+          }
+        },
+        "k_squares_folded": {
+          "separates": false,
+          "table": {
+            "1": {
+              "P": 4
+            },
+            "2": {
+              "P": 9
+            }
+          }
+        }
+      },
+      "labels": {
+        "P": 13
+      }
+    }
+  },
+  "per_q_separators": {
+    "11": [],
+    "13": [],
+    "17": [],
+    "19": []
+  },
+  "pooled": {
+    "chi_disc4": {
+      "separates": false,
+      "table": {
+        "-1": {
+          "N": 2,
+          "P": 14
+        },
+        "1": {
+          "N": 4,
+          "P": 12
+        }
+      }
+    },
+    "chi_disc6_finite": {
+      "separates": false,
+      "table": {
+        "-1": {
+          "N": 3,
+          "P": 12
+        },
+        "1": {
+          "N": 3,
+          "P": 14
+        }
+      }
+    },
+    "chi_prod_params": {
+      "separates": false,
+      "table": {
+        "-1": {
+          "N": 3,
+          "P": 8
+        },
+        "1": {
+          "N": 3,
+          "P": 18
+        }
+      }
+    },
+    "chi_prod_times_disc4": {
+      "separates": false,
+      "table": {
+        "-1": {
+          "N": 3,
+          "P": 12
+        },
+        "1": {
+          "N": 3,
+          "P": 14
+        }
+      }
+    },
+    "cr_chi_multiset": {
+      "separates": false,
+      "table": {
+        "(-1, -1, -1)": {
+          "P": 4
+        },
+        "(-1, -1, 1)": {
+          "N": 3,
+          "P": 9
+        },
+        "(-1, 1, 1)": {
+          "N": 1,
+          "P": 12
+        },
+        "(1, 1, 1)": {
+          "N": 2,
+          "P": 1
+        }
+      }
+    },
+    "k_squares_folded": {
+      "separates": false,
+      "table": {
+        "1": {
+          "N": 3,
+          "P": 8
+        },
+        "2": {
+          "N": 3,
+          "P": 18
+        }
+      }
+    }
+  },
+  "qs": [
+    11,
+    13,
+    17,
+    19
+  ],
+  "schema": "c496-escape-family-character-probe-v1",
+  "uniform_separators": [],
+  "verdict": "NO_CHARACTER_LAW"
+}

@@ -565,12 +565,25 @@ off-conic intruders (4/5 packet cells) while the drain measure is on-conic; and 
 recursion at all. C80(b) is untouched; C80(c) drain stays proven and unused for value.
 Report+cert+`--check`: [`../2026-07-23-c496-recursion-stability-probe.md`](../2026-07-23-c496-recursion-stability-probe.md).
 
-**Reshaped C80(b) frontier (next-step decision, not yet allocated).** Making the factorization a
-descent law needs a **level-indexed `(edge, packet, χ-straddle)` re-derivation at each P-node** — an
-object C496 did not build — and a **deeper test bed than the q=11 seed**, e.g. the q17 `Y_NK0` 8-cap
-bulk members with plies remaining, where multi-ply descent actually occurs. Choosing between building
-the recursive object vs. running the q17 deeper-instance probe vs. pivoting to C520's Weil/resolvent
-route is a scope call for the next session. Depth-1 factorization rationale:
+**The C496 χ does NOT generalize to the escape family (2026-07-23).** Since the χ-scaffold exists
+only at the size-4 escape layer, the only place it could recur is across the escape family (recursion
+in `q`). Tested on the complete on-conic S4ARENA bucket census `q∈{11,13,17,19}`: no fixed quadratic
+character of the natural 6-arc invariants — square-class pattern, `∏t_i`, the `t4`/6-arc
+discriminants, or the **full-PGL cross-ratio multiset (C520's tt#1 resolvent-discriminant object)** —
+separates P from N buckets at either discriminating order (q=11 and q=17 are both mixed; q=13/19 are
+all-P/vacuous). Verdict `NO_CHARACTER_LAW`. This corroborates the A5 anchor (P = smallest
+`Stab(frame)`-orbit, group-theoretic) and constrains C520: the resolvent-discriminant square class
+alone does not predict escape-bucket value. Report+cert+`--check`:
+[`../2026-07-23-c496-escape-family-character-probe.md`](../2026-07-23-c496-escape-family-character-probe.md).
+
+**Reshaped C80(b) frontier (next-step decision, not yet allocated).** Two character routes are now
+closed (depth recursion; escape-family generalization). The value law at the escape layer is
+group-theoretic — the A5 **smallest-`Stab(frame)`-orbit selector** is the standing measured law, its
+mechanism unproved (A5 refuted the mirror-involution explanation). The live routes are: (i) feed the
+smallest-orbit child to the C61-successor amortized-potential / existential-selector lane; (ii) the
+q17 `Y_NK0` 8-cap deeper-instance descent probe; (iii) C520's Weil/resolvent route, now constrained
+to carry more than one cross-ratio character. Choosing among these is a scope call for the next
+session. Depth-1 factorization rationale:
 [`../2026-07-23-c496-bihecke-two-sort-coupling.md`](../2026-07-23-c496-bihecke-two-sort-coupling.md).
 
 Priority order and why:
