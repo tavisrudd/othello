@@ -764,8 +764,17 @@
       "last": 534,
       "purpose": "Rank non-deep-hole PRS frontier directions by audited novelty, structural value, cheap falsification, and publishability; queue only survivors",
       "sequence": 85
+    },
+    {
+      "count": 2,
+      "first": 535,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 536,
+      "purpose": "C534 survivor follow-ups: modular Hessian-Arf functoriality and coherent polar-flag Fano boundary",
+      "sequence": 86
     }
   ],
-  "next_id": 535,
+  "next_id": 537,
   "schema": "codex-task-id-allocations-v1"
 }
