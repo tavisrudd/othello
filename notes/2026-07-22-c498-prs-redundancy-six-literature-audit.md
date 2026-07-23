@@ -14,9 +14,11 @@ the evidence:
 
 ## Opening summary
 
-- **Sources read at full text by this audit: 4** — `arXiv:2312.05534` (Wu–Ding–Chen), `10.1051/wujns/2023281015`
+- **Sources read at full text by this audit: 5** — `arXiv:2312.05534` (Wu–Ding–Chen), `10.1051/wujns/2023281015`
   (Xu, even char), `arXiv:1006.0873` (Oyono–Ritzenthaler), `arXiv:2605.04935` (Ishitsuka). **Reused at
-  full text from C491: 2** — `arXiv:1901.05445` (ZWK), `arXiv:1612.05447` (Kaipa 2017). `arXiv:2312.07118`
+  full text from C491: 2** — `arXiv:1901.05445` (ZWK), `arXiv:1612.05447` (Kaipa 2017).  The fifth new
+  full-text source is `arXiv:1511.02598` (Fukasawa), added during the corrected projection-cover
+  analysis. `arXiv:2312.07118`
   (KPP quartic orbits) read at **partial** here (full text in C491). All other named sources are
   `abstract/metadata only`, `partial`, `review only`, or `secondary only` as marked in the axis reports.
 - **Decisive question.** Does any work classify deep holes / determine the covering-radius orbit
@@ -68,6 +70,13 @@ classified separately" — is proved nowhere located. Two items a C498 write-up 
   totally-split pattern `λ=1⁴` has strictly positive main term `𝒯(1⁴)·q^{n−m}`, so a totally-split
   member exists past an explicit bound — the counting core of the lemma for a *linear* (net-shaped)
   family, char > 2.
+- **Fukasawa**, "Rational curves of degree four with two inner Galois points"
+  (`arXiv:1511.02598v1`, full text, all sections; cache key `arXiv:1511.02598`, SHA-256
+  `d02e65bc33bee2ffb05572760a88322e698ce211b05f2f04f916cb21bae438c8`) classifies the
+  multi-Galois-point rational quartics in characteristic different from \(2,3\), and Remark 4
+  identifies the characteristic-two model with infinitely many inner Galois points.  C498 uses it
+  only as geometric context for the independently proved Frobenius-trinomial family, not as a
+  split-member theorem or a pre-emption.
 
 Surface-argument tool chain, all published with explicit constants: **Aubry–Perret** (singular-curve
 Weil bound, the r=5 tool; Manuscr. Math. 88(4) 1995), **Cafure–Matera** (explicit Lang–Weil / effective
@@ -105,10 +114,14 @@ binary quartics (the Hankel kernel). Citable inputs:
 - **Net/web classification method:** Wall, "Singularities of nets of quadrics" (Compositio 42, 1980)
   for nets of quadrics; Lavrauw–Popiel–Sheekey and companions for nets/webs of *conics* over `F_q`
   (`arXiv:2010.00177`, `2003.06275`, `2405.10710`, `2509.03840`) — analogues, not the quartic-net object.
-- **NRC nucleus:** Gmainer–Havlicek, "Nuclei of Normal Rational Curves" (`arXiv:1304.0088`, partial):
-  the number of distinct nuclei of the degree-`n` NRC equals the number of nonzero base-`p` digits of
-  `n+1`. *Axis C computation (ours):* for `n=5`, `n+1=6=(20)₃`, giving **one** nucleus in char 3 —
-  matching the expected char-3 "wild" quintic/net stratum, pinning it to a concrete citable computation.
+- **NRC nucleus:** Gmainer–Havlicek, "Nuclei of Normal Rational Curves"
+  (`arXiv:1304.0088`, partial: abstract and Theorem 1 in §4; cache key `arXiv:1304.0088`, SHA-256
+  `da688c01e3953319ef93f17e1676fedf0470c590a0a348a853dabb11209526d0`): the number of
+  distinct nuclei of the degree-`n` NRC equals the number of nonzero base-`p` digits of `n+1`, and
+  Theorem 1 gives their coordinate spans by vanishing binomial coefficients. *Axis C computations
+  (ours):* for `n=5`, `n+1=6=(20)₃`, giving **one** nucleus in char 3; in characteristic two,
+  Theorem 1 identifies the `3`-nucleus as the line spanned by coordinate points \(P_2,P_3\).
+  The latter is exactly C498's recurring Frobenius-trinomial orbit.
 
 So the exceptional-net classification ("higher analogues of O±/nucleus/wild") and the binary-quintic
 `F_q`-orbit census are **both new work C498 must produce**, built by analogy to the quartic program and

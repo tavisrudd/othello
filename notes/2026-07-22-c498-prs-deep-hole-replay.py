@@ -9,8 +9,11 @@ This stdlib-only replay rebuilds the finite fields independently and checks:
   * every recorded representative by an independently implemented
     Hankel-net split-quartic test;
   * every recorded PGL(2,q) orbit size and canonical representative;
-  * stabilizer orders, Frobenius orbit links, net gcd degrees, and rho=5 by
-    finding a five-secant span through every representative.
+  * stabilizer orders, Frobenius orbit links, net gcd degrees, the rank-three
+    symmetric-cube cone, and rho=5 by finding a five-secant span through every
+    representative; and
+  * the odd-field split/non-split law of the trinomial net on the calibrated
+    fields, including its isolated q=11 failure.
 
 It intentionally does not reproduce the generator's quartic factorization or
 member histograms.  Those are descriptive orbit labels, not the exhaustive
@@ -151,6 +154,49 @@ def encode(F, vec):
     for x in canon(F, vec):
         out = out * F.q + x
     return out
+
+
+def trinomial_has_split_member(F):
+    """Whether <1,t,t^4> has four distinct affine roots."""
+    for roots in combinations(range(F.q), 4):
+        e1 = 0
+        e2 = 0
+        for i, x in enumerate(roots):
+            e1 = F.add(e1, x)
+            for y in roots[i + 1:]:
+                e2 = F.add(e2, F.mul(x, y))
+        if e1 == 0 and e2 == 0:
+            return roots
+    return None
+
+
+def q11_involution_factor_candidates(F):
+    """Split quadratic pairs for W=<u,tu,u^2+5>, u=t^2-2."""
+    assert F.q == 11
+    a, c = 2, 5
+    candidates = []
+    for p in range(F.q):
+        for q in range(F.q):
+            for r in range(F.q):
+                R = F.add(r, a)
+                for s in range(F.q):
+                    S = F.add(s, a)
+                    first = F.add(F.mul(p, S), F.mul(q, R))
+                    second = F.add(F.mul(R, S), F.mul(a, F.mul(p, q)))
+                    if first != 0 or second != c:
+                        continue
+                    roots_1 = {
+                        x for x in range(F.q)
+                        if F.add(F.add(F.mul(x, x), F.mul(p, x)), r) == 0
+                    }
+                    roots_2 = {
+                        x for x in range(F.q)
+                        if F.add(F.add(F.mul(x, x), F.mul(q, x)), s) == 0
+                    }
+                    if len(roots_1) == len(roots_2) == 2:
+                        candidates.append((p, q, r, s, roots_1, roots_2))
+    assert len(candidates) == 15
+    assert all(roots_1 & roots_2 for *_, roots_1, roots_2 in candidates)
 
 
 def pg_points(q, dim):
@@ -384,6 +430,15 @@ def in_five_span(F, v):
 
 def replay_field(q, rec, direct_scan):
     F = GF(q)
+    if F.p != 2:
+        split_roots = trinomial_has_split_member(F)
+        assert (split_roots is not None) == (q != 11), (
+            q, split_roots, "unexpected odd-field trinomial splitting law"
+        )
+        if q == 9:
+            assert split_roots == (1, 2, 3, 6)
+    if q == 11:
+        q11_involution_factor_candidates(F)
     if direct_scan:
         direct = direct_deep_count(F)
         assert direct == rec["deep_hole_count"], (q, direct, rec["deep_hole_count"])
@@ -403,7 +458,13 @@ def replay_field(q, rec, direct_scan):
         union |= component
         order = q ** 3 - q
         assert order // len(component) == row["stab_order"]
-        assert net_gcd_degree(F, hankel_net(F, v)) == row["net_gcd_deg"]
+        gcd_degree = net_gcd_degree(F, hankel_net(F, v))
+        assert gcd_degree == row["net_gcd_deg"]
+        if gcd_degree == 0:
+            quotient_forms = [[v[i + j] for i in range(4)] for j in range(3)]
+            assert matrix_rank(F, quotient_forms) == 3, (
+                q, row["rep_index"], "symmetric-cube quotient is not a rank-three cone"
+            )
         assert in_five_span(F, v), (q, row["rep_index"], "not in a five-span")
         fv = tuple(F.pow(x, F.p) for x in v)
         target = min(orbit(F, fv))

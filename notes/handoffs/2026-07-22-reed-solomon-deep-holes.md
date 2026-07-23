@@ -5,7 +5,8 @@
 **Date:** 2026-07-22
 
 **Status:** C475--C491 and C499 complete; C498 active (literature gate and q<=27 computational
-calibration complete; corrected trisecant-surface theorem gate open); C500 (redundancy-five paper,
+calibration complete; first infinite characteristic-two exceptional family classified; corrected
+trisecant/splitting-cover theorem gate open); C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
@@ -299,6 +300,27 @@ det(phi_W(t1),phi_W(t2),phi_W(t3))=0 (or its ordered-pair discriminant double co
 fiber-square.  After division by the three diagonal brackets the residual is a symmetric (2,2,2)
 surface, generically K3, with quadric Sym^3(P1) quotient.  Classify its reducible/singular and
 degree-2-to-conic cases, then apply the K3 22q bound off the bad curves on the generic stratum.
+The quotient has now been made exact: for a binary cubic `g`, it is the rank-three Hankel cone
+`L0(g)L2(g)-L1(g)^2=0`.  This exposes the first genuine infinite exception.  In characteristic two,
+the net `<1,t,t^4>` generates the full invariant 3-nucleus line, one `PGL2` and `PGammaL2` orbit of
+`q+1` deep directions exactly for `q=2^m` with `m` odd; it recurs at q=32, so the census gap
+through 27 is not asymptotic vanishing.
+The same trinomial normal form has one isolated odd-characteristic echo: it is deep exactly at
+q=11 because six collision lines exhaust the twelve rational points of a conic.  This classifies
+one of the two q=11 exceptional orbits.
+The other q=11 orbit is the nonsquare split-involution class
+`W=<u,tu,u^2+5>`, `u=t^2-2`: all fifteen ordered rational split-quadratic factor candidates share
+a root.  The same interior normal form accounts for two q=7 orbits.  C502's hexad detector is not a
+C498 input: neither q=11 stabilizer is `A5`, both PGL orbits are PSL-transitive, and the full
+projective equivalence already quotients the outer bit.
+A Tao re-foundation identifies C498 with a line problem inside C491: choosing the fourth factor
+`t-r` gives the cubic-pencil syndrome
+`b(r)=(a1-r a0,...,a5-r a4)`, and these points trace the Hankel-row line in `P4`.  The K3 is the
+family of C491 fiber-square curves over that line.  Any `S3` fibre gives a split quartic for
+`q>=29` after the pointed-root deletion.  The next gate is therefore the Fano-scheme
+classification of coherently parameterized first-polar lines contained in the C491
+exceptional/pointed-collision locus, followed by the remaining `16/10/4/0/1` small-field orbit
+normal forms.
 
 ## Execution ladder
 
@@ -358,5 +380,6 @@ history.
 
 `go C498`
 
-(C498 is active.  Its audit and census calibration are complete; the corrected trisecant-surface
-irreducibility/classification gate is next.  C500 remains release-gated.)
+(C498 is active.  Its audit, census calibration, exact symmetric-cube cone, nucleus line, both
+q=11 mechanisms, and C491 quotient-line re-foundation are complete; the exceptional-line
+Fano scheme and remaining small-field normal forms are next.  C500 remains release-gated.)
