@@ -132,9 +132,12 @@ def harmonic(F, m):           # cross-ratio in {-1, 2, 1/2}
     return m in cands
 
 def _k(F, n):
-    """integer constant n as a field-element index (prime fields: n mod q).
-    Only invoked for char != 2,3, where every sporadic field is prime."""
-    return n % F.q
+    """integer constant n as the field element n*1 = 1+...+1 (n times), correct in
+    every field including extensions (n mod p ones added; index 1 is the identity)."""
+    acc, one = 0, 1
+    for _ in range(n % F.p):
+        acc = F.add(acc, one)
+    return acc
 
 def cubic_disc(F, cub):
     """discriminant of binary cubic cub=(c3,c2,c1,c0) [high->low]. char != 2,3."""
@@ -531,45 +534,50 @@ def main():
         "verdict": "CONFIRMED",
         "scan_family": "f=(0,1,0,0,c), c in F_q",
         "data": persistence,
-        "statement": "the equianharmonic degree-3-cover configuration exists as a "
-                     "PGL2-orbit for every q=1 mod 3, but for q>=25 every such point "
-                     "carries totally-split members (n_111>0) and is NOT a deep hole; "
-                     "it is deep only at q in {7,13,19}. Sporadic deepness is therefore "
-                     "a bounded-q accident, not a new all-q family."}
+        "statement": "the equianharmonic degree-3-cover configuration exists (as slice "
+                     "points f=(0,1,0,0,c); single-PGL2-orbit not checked at q>=25) for "
+                     "every q=1 mod 3 in the scanned range 25<=q<=49, and there every such "
+                     "point carries totally-split members (n_111>0) and is NOT a deep hole; "
+                     "it is deep only at q in {7,13,19}. Sporadic deepness is a bounded-q "
+                     "accident (C491 Lemma 7), not a new all-q family."}
     checks.append(("equianharmonic_persistence", tuple(CONTINUATION_Q), None))
 
-    # ---- Claim MECHANISM: deepness of the equianharmonic pencil is decided by the
-    # fiber-type of two special A4-orbits (dual tetrahedron, octahedron). Only the
-    # special A4-orbits (size 4 or 6) ever carry the split type 111; deep <=> none does.
+    # ---- Claim LOW-Q SPLIT LOCATION (bounded; NOT a general mechanism):
+    # for the equianharmonic pencil at 7 <= q <= 49 the branch tetrahedron is always
+    # type 1^2.1 and every split (111) member sits on one of the two special A4-orbits
+    # (dual tetrahedron size 4, octahedron size 6).  This is a LOW-Q phenomenon, not a
+    # deepness mechanism: at q >= 67 free 12-orbits also split and n_111 grows toward the
+    # S3 equidistribution value (q+1)/6 (see caveat; verified by extending the field table).
     mech = []
     for q in [7, 13, 19, 25, 31, 37, 43, 49]:
         F = C.GF(q)
         decomp, deep = equianharmonic_a4_decomposition(F, all_pgl2(F))
         assert decomp is not None, "q=%d no equianharmonic rep" % q
         assert [4, "1^2.1"] in decomp, "q=%d branch tetrad not (4,1^2.1)" % q
-        # only special orbits (size in {4,6}) may be split
-        for size, typ in decomp:
+        for size, typ in decomp:           # in this bounded range, splits are special-only
             if typ == "111":
                 assert size in (4, 6), "q=%d a free orbit is split" % q
         n111 = sum(size for size, typ in decomp if typ == "111")
         assert deep == (n111 == 0)
-        # census deepness agreement: q in {7,13,19} deep, else not
         assert deep == (q in (7, 13, 19)), "q=%d deepness disagrees with census" % q
         mech.append({"q": q, "deep": deep, "n_split_111": n111,
                      "a4_orbit_decomposition": decomp})
-    cert["claims"]["equianharmonic_deepness_mechanism"] = {
-        "verdict": "CONFIRMED",
+    cert["claims"]["equianharmonic_low_q_split_location"] = {
+        "verdict": "CONFIRMED (bounded 7<=q<=49)",
         "data": mech,
-        "statement": "for the equianharmonic pencil the branch tetrahedron is always "
-                     "the fiber-type 1^2.1; the split type 111 can occur only on the two "
-                     "special A4-orbits (the dual tetrahedron, size 4, and the octahedron, "
-                     "size 6) -- never on a free 12-orbit. Deepness holds iff neither "
-                     "special orbit is totally split (n_111=0): the dual tetrahedron is "
-                     "inert at q=7,13,19 and splits at q=25,31,43; the octahedron splits "
-                     "at q=37,49. So type-I deepness is a finite Frobenius condition on "
-                     "two orbits, not a generic Weil count -- which is why n_111 in {0,4,6} "
-                     "never grows with q."}
-    checks.append(("equianharmonic_deepness_mechanism", (7, 13, 19, 25, 31, 37, 43, 49), None))
+        "statement": "for the equianharmonic pencil the branch tetrahedron always has "
+                     "fiber-type 1^2.1, and for 7<=q<=49 every split (111) member lies on a "
+                     "special A4-orbit (size 4 or 6). deep <=> n_111=0 holds trivially; the "
+                     "deep fields are exactly q in {7,13,19}. This split location is a low-q "
+                     "coincidence, NOT a deepness mechanism.",
+        "caveat_not_certified_here": "At q=67 (verified by temporarily extending the census "
+                     "field table, not part of this frozen bundle) n_111=12 sits on a free "
+                     "12-orbit with neither special orbit split, so 'splits only on special "
+                     "orbits' and 'n_111 in {0,4,6}' FAIL for q>=67. The correct statement is "
+                     "that n_111 is the S3 identity-class count, ~ (q+1)/6, which rounds to 0 "
+                     "only for small q; type-I deepness is that bounded-q equidistribution "
+                     "accident (C491 Lemma 7), not a two-orbit condition."}
+    checks.append(("equianharmonic_low_q_split_location", (7, 13, 19, 25, 31, 37, 43, 49), None))
 
     with open(OUT_JSON, "w") as fh:
         json.dump(cert, fh, indent=1, sort_keys=True)

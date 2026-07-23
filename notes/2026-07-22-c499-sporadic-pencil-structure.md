@@ -43,11 +43,12 @@ task gives the intrinsic structure of every sporadic orbit at q ∈ {7,8,9,11,13
    obstruction.
 
 5. **Verdict (§6): uniform structure, but sporadicity is a bounded-q arithmetic accident.** These
-   configurations are not new all-q deep-hole families. The equianharmonic orbit persists as a
-   PGL₂-orbit for **every** q ≡ 1 mod 3 (constructed at q = 25, 31, 37, 43, 49), but there it carries
-   totally-split members and is **not deep**; it is deep only at q ∈ {7, 13, 19}. Every sporadic is the
-   small-q tail of the generic S₃ stratum where Aubry–Perret's point count is too weak to force a
-   split member (C491 Lemma 7). The structure is uniform; the deepness is the accident.
+   configurations are not new all-q deep-hole families. The equianharmonic configuration is still
+   constructible for q ≡ 1 mod 3 above the sporadic range (exhibited as slice points at
+   q = 25, 31, 37, 43, 49), but there it carries totally-split members and is **not deep**; it is deep
+   only at q ∈ {7, 13, 19}. Every sporadic is the small-q tail of the generic S₃ stratum where the
+   split-member count (≈ (q + 1)/6) is too small to be nonzero (C491 Lemma 7). The structure is
+   uniform; the deepness is the accident.
 
 ## 1. The cover and its branch divisor
 
@@ -107,12 +108,17 @@ A₄ (equianharmonic) and V₄ (generic/harmonic) cases. Types III–IV–V are 
 tetrad is only partially rational — the stabilizer drops to the residual branch symmetry (C₂ for a
 pair, C₃ for a Frobenius-triple). Type IV is the degenerate limit of III where one branch pair
 collides into a total-ramification cusp (`1^3`). The member profile is forced by the type together
-with deepness (`111` = 0): dbl = #rational branch, irr fixed by the type, `1.2` = the remainder.
+with deepness (`111` = 0): counting the q + 1 rational points of X ≅ P¹ over the pencil parameter gives
+3·n₁₁₁ + n₁.₂ + 2·n_dbl + n_cusp = q + 1, so with n₁₁₁ = 0 the type fixes n_dbl and n_cusp (from the
+branch divisor) and hence n_irr and n₁.₂ (e.g. type III: n₁.₂ = q − 3, n_irr = 2).
 
 ## 4. The member profile is the stabilizer-orbit decomposition of the pencil line
 
 The syndrome stabilizer acts on the pencil line P¹_λ preserving member factorization type, and this
-action is the whole story of the "4+4" profile.
+action is the whole story of the "4+4" profile. (Type-constancy on each stabilizer-orbit is a priori:
+the stabilizer acts on L(f) by invertible rational substitution — PΓL₂-equivariance, C491 Lemma 2 —
+which preserves F_q-factorization type; the script also certifies it directly on every type-I/II
+orbit.)
 
 **Theorem C499.2 (certified for every type-I/II orbit).** Member factorization type is **constant on
 each stabilizer-orbit of P¹_λ**, and the q+1 members decompose accordingly:
@@ -124,8 +130,9 @@ each stabilizer-orbit of P¹_λ**, and the q+1 members decompose accordingly:
 For A₄ (types at q ≡ 1 mod 3) the two size-4 orbits are the **two dual equianharmonic tetrahedra**
 of A₄ ⊂ PGL₂ (each has point-stabilizer C₃, so each is automatically equianharmonic — certified j = 0
 for both the branch and the inert tetrad); the cover φ_f ramifies over one and is inert over the
-other. The rest of P¹ is then dictated by pure q mod 12 arithmetic — which exceptional A₄-orbits are
-F_q-rational:
+other. The rest of P¹ is then governed by which exceptional A₄-orbits are F_q-rational — the
+octahedral 6-orbit (fixed points of the three involutions) is rational precisely as a square-class
+condition on q, observed to be q ≡ 1 mod 12 across the certified fields (not separately proved here):
 
 | q | q+1 | stabilizer-orbit decomposition of P¹_λ (size, type) |
 |---|---|---|
@@ -174,9 +181,11 @@ There is a uniform description (branch-divisor Frobenius type + j-invariant + de
 
 (The non-deep equianharmonic count in the `(0,1,0,0,c)` scan is exactly (q−1)/3.)
 
-The equianharmonic configuration persists as a PGL₂-orbit for every q ≡ 1 mod 3, but at q ≥ 25 every
-such point already has totally-split members and is not a deep hole; it is deep only at q ∈ {7,13,19}.
-(For q ≡ 2 mod 3 no rational equianharmonic tetrad exists at all: μ² − μ + 1 = 0 has no F_q root.)
+The equianharmonic configuration is still constructible for q ≡ 1 mod 3 above the sporadic range
+(exhibited as slice points f = (0,1,0,0,c); whether they form a single PGL₂-orbit is not checked for
+q ≥ 25), but for 25 ≤ q ≤ 49 every such point already has totally-split members and is not a deep
+hole; it is deep only at q ∈ {7,13,19}. (For q ≡ 2 mod 3 no rational equianharmonic tetrad exists at
+all: μ² − μ + 1 = 0 has no F_q root.)
 The continuation above constructs the persistence explicitly only for the type-I (equianharmonic)
 family. Types II–V are ordinary partially-rational-branch S₃ covers that exist at all q and lose
 deepness once Y_f gains a rational split-member witness; their bounded-q deepness is not
@@ -185,38 +194,38 @@ q ≥ 23). So each sporadic is the small-q tail of the generic S₃ stratum. The
 the deepness is a bounded-q arithmetic accident, not a perpetual family like O±/W. Both C491
 discovery-track leads are hereby settled.
 
-### 6.1 The type-I deepness mechanism (certified)
+### 6.1 What controls type-I deepness (and what does not)
 
-The bounded-q accident has an exact orbit-theoretic mechanism, sharper than the generic Weil bound.
-Decomposing the equianharmonic pencil into its A₄-orbits and reading off the fiber-type of each
-(certified for q ≡ 1 mod 3, 7 ≤ q ≤ 49):
+Type-I deepness is the S₃-equidistribution accident of C491 Lemma 7, nothing sharper. The number of
+totally-split members n₁₁₁ is the count of pencil parameters λ whose degree-3 fiber splits
+completely — the S₃ identity-conjugacy-class count — so by Chebotarev/Weil it tends to the density
+value (q + 1)/6. Type-I is deep (n₁₁₁ = 0) exactly when this count rounds to zero, which happens only
+for small q; that is the whole of the "bounded-q accident."
+
+There is a genuine but **low-q-only** refinement, certified for 7 ≤ q ≤ 49: the branch tetrahedron
+always has fiber-type `1^2.1`, and in that range every split member sits on one of the two special
+A₄-orbits (dual tetrahedron, size 4; octahedron, size 6), so n₁₁₁ ∈ {0, 4, 6}:
 
 | q | deep | dual tetrad (4) | octahedron (6) | n₁₁₁ |
 |---|---|---|---|---|
 | 7  | yes | `3` (inert)  | — (irrational) | 0 |
 | 13 | yes | `3` (inert)  | `1.2` | 0 |
 | 19 | yes | `3` (inert)  | — (free 12 instead) | 0 |
-| 25 | no  | **`111`**    | `1.2` | 4 |
-| 31 | no  | **`111`**    | `1.2` | 4 |
-| 37 | no  | `3` (inert)  | **`111`** | 6 |
-| 43 | no  | **`111`**    | `1.2` | 4 |
-| 49 | no  | `3` (inert)  | **`111`** | 6 |
+| 25 | no  | `111`        | `1.2` | 4 |
+| 31 | no  | `111`        | `1.2` | 4 |
+| 37 | no  | `3` (inert)  | `111` | 6 |
+| 43 | no  | `111`        | `1.2` | 4 |
+| 49 | no  | `3` (inert)  | `111` | 6 |
 
-Two facts hold for every q (certified): the branch tetrahedron always has fiber-type `1^2.1`, and the
-totally-split type `111` occurs **only** on the two special A₄-orbits — the dual tetrahedron (size 4)
-and the octahedron (size 6) — **never on a free 12-orbit**. Hence
-
-**deep ⟺ neither special orbit is totally split** (n₁₁₁ = 0),
-
-and n₁₁₁ ∈ {0, 4, 6} is exactly "which special orbit split" — which is why it never grows with q. The
-split/inert type of each special orbit is a finite Frobenius (cube-splitting) condition on a fixed
-number field, so type-I deepness is a joint congruence condition on two orbits, and q ∈ {7, 13, 19}
-is precisely where both conditions avoid the split type. (This specializes C491 Lemma 7 to the
-equianharmonic configuration: the reason no type-I deep hole survives for q ≥ 25 is that at least one
-of the two special orbits is forced to split there — an exact statement, not the coarse q − 2√q > 12
-count.) The Galois-closure of the degree-3 cover has arithmetic genus 1 by Riemann–Hurwitz
-(2·3−2 branch points, transposition monodromy), consistent with a genus-1/CM control of these two
-conditions; identifying that curve is the natural C500 follow-up.
+This is **not** a deepness mechanism and does **not** persist: at q = 67 (verified by extending the
+field table beyond the frozen census; not part of the certified bundle) n₁₁₁ = 12 sits on a free
+12-orbit with neither special orbit split, and n₁₁₁ continues to grow toward (q + 1)/6. So the tidy
+n₁₁₁ ∈ {0, 4, 6} pattern is a coincidence of small q, not a two-orbit condition governing deepness;
+deepness remains exactly n₁₁₁ = 0, controlled by the equidistribution count. The Galois closure of the
+degree-3 cover is a genus-1 curve — the degree-3, genus-0 cover has 2·3 − 2 = 4 simple branch points,
+and the degree-6 S₃-closure then has 2g − 2 = 6(−2) + 4·3 = 0 (each transposition lifts to 3 simple
+ramification points), so g = 1 in the tame case (char ≥ 5, q ≡ 1 mod 3). Whether that genus-1 curve
+has CM by ℤ[ω] and gives an exact threshold is the natural C500 follow-up; nothing here proves it.
 
 ### 6.2 Why redundancy five has both perpetual families and sporadic accidents
 
@@ -227,18 +236,19 @@ symmetry-order-3**:
 
 - **O± (cyclic stratum).** The order-3 structure is the *deck group* C₃ of the cover (two totally
   ramified points, multiplier a cube root of unity). Deepness ⟺ the deck is irrational ⟺ a fixed
-  q mod 3 congruence — a *rigid* condition, so O± is **perpetual**. Concretely (C491, and re-observed
-  here) O⁻ has no split member for every q ≡ 1 mod 3 tested, 7 ≤ q ≤ 43.
+  q mod 3 congruence — a *rigid* condition, so O± is **perpetual**. C491 Lemma 6(1) proves O⁻ deep for
+  every q ≡ 1 mod 3, unconditionally. (O⁻ ramifies over a conjugate pair, so it has no rational
+  totally-ramified point; its deepness is the congruence, not a point count.)
 - **Type-I (S₃ stratum).** The order-3 structure is only a *symmetry* — the A₄ ⊃ C₃ of an
-  equianharmonic branch tetrad — while the deck group is S₃. Deepness ⟺ a Frobenius/point-count
-  condition on the two special orbits of the genus-1 S₃-closure (§6.1) — a *soft* condition that
-  Weil/Aubry–Perret forces to fail once q grows, so type-I is **sporadic**.
+  equianharmonic branch tetrad — while the deck group is S₃. Deepness ⟺ the S₃ identity-class count
+  n₁₁₁ (§6.1) vanishes — a *soft* equidistribution condition (n₁₁₁ → (q + 1)/6) that Weil/Aubry–Perret
+  forces to fail once q grows, so type-I is **sporadic**.
 
-Same "3" and the same residue class q ≡ 1 mod 3, but a congruence (perpetual) versus a point-count
-(sporadic). That is exactly why redundancy five is the first redundancy to exhibit *both* arithmetic
-families (T, S, O±, W) and irreducible sporadic accidents: the families live where an order-3 deck
-group makes deepness a congruence, and the sporadics live where an order-3 symmetry over an S₃ deck
-makes deepness a bounded-q count.
+Same "3" and the same residue class q ≡ 1 mod 3, but a congruence (perpetual) versus an
+equidistribution count (sporadic). That is exactly why redundancy five is the first redundancy to
+exhibit *both* arithmetic families (T, S, O±, W) and irreducible sporadic accidents: the families live
+where an order-3 deck group makes deepness a congruence, and the sporadics live where an order-3
+symmetry over an S₃ deck makes deepness a bounded-q count.
 
 Framing (for the C500 write-up, not task-owned here): the branch/ramification j-invariant of the
 Hankel pencil is a rational modulus on syndrome space that organizes the entire classification — T/S
@@ -252,23 +262,25 @@ paper-structure lead.
   representative; re-derives and asserts equality with the frozen member statistics; computes branch
   type, cross-ratio, and (odd char ≠ 3) the binary-quartic invariants I, J as an independent
   equianharmonic/harmonic cross-check; computes the PGL₂ stabilizer as an abstract group via
-  projective Möbius orders; verifies the 4+4 single-orbit structure via the substitution action;
-  derives the q = 8 torsor; and runs the equianharmonic persistence continuation. All 20+ assertions
-  pass (`ALL C499 STRUCTURE CHECKS PASS`).
+  projective Möbius orders; verifies the pencil-orbit decomposition via the substitution action;
+  derives the q = 8 torsor; runs the equianharmonic persistence continuation; and records the bounded
+  low-q split-location observation. All assertions pass (`ALL C499 STRUCTURE CHECKS PASS`).
   Run: `python3 notes/2026-07-22-c499-sporadic-pencil-structure.py` (repo root; reads the JSON;
   writes the certificate; exit 0 iff all pass).
 - `2026-07-22-c499-sporadic-pencil-structure.json` — certificate: per sporadic orbit the stabilizer
-  group and order-multiset, branch type, member statistics, cross-ratio, invariants, and the three
-  claim blocks (A₄, q = 8 torsor, persistence).
+  group and order-multiset, branch type, member statistics, cross-ratio, invariants, and the claim
+  blocks (A₄, q = 8 torsor, persistence, low-q split location with its q ≥ 67 caveat).
 - Load-bearing frozen inputs (unchanged, hash-pinned by the C491 bundle):
   `2026-07-22-c491-prs-deep-hole-census.json` and `…-census.py`.
 - Hashes: `2026-07-22-c499-sporadic-pencil-structure.sha256`.
+- Review: `2026-07-22-c499-fable-review.md` (adversarial pass; findings addressed in this revision).
 
 Independence: the classification's structural invariants (branch type, cross-ratio, quartic I/J,
 Möbius stabilizer, substitution action) are computed by methods disjoint from the census generator's
 plane-marking/orbit-BFS, and every re-derived member statistic is checked against the frozen C491
-certificate; the equianharmonic verdict is obtained two independent ways (cross-ratio and I(Δ)) which
-agree on every rational-branch orbit. No new field census is performed.
+certificate; in char ≥ 5 the equianharmonic verdict is obtained two independent ways (cross-ratio and
+I(Δ)) which agree on every rational-branch orbit (at q = 9, char 3, only the cross-ratio runs, and the
+equianharmonic/harmonic distinction degenerates there anyway). No new field census is performed.
 
 ## 8. Mystery ledger
 
@@ -283,18 +295,25 @@ Settled here:
   (for A₄, the two dual equianharmonic tetrahedra — both certified j = 0). The counts are forced, not
   a field coincidence.
 - *q = 8 three-orbit fusion* — a free Gal(F₈/F₂) torsor on the a₄ cubic-twist parameter (§5).
-- *Why sporadic and not a family* — bounded-q accident (§6), with an exact mechanism (§6.1): only the
-  two special A₄-orbits (dual tetrahedron, octahedron) can carry the split type, so type-I deepness is
-  a finite Frobenius condition on two orbits and n₁₁₁ ∈ {0,4,6} never grows with q.
+- *Why sporadic and not a family* — bounded-q accident (§6): deepness is n₁₁₁ = 0, and n₁₁₁ is the S₃
+  identity-class count ≈ (q + 1)/6, which is nonzero once q grows (C491 Lemma 7).
 - *Why redundancy five has both families and sporadics* (§6.2) — deck-order-3 (rigid congruence →
-  perpetual family, O±) versus symmetry-order-3 over an S₃ deck (soft point-count → sporadic, type-I);
-  same q ≡ 1 mod 3 residue, opposite fate. No open mystery remains.
+  perpetual family, O±) versus symmetry-order-3 over an S₃ deck (soft equidistribution count →
+  sporadic, type-I); same q ≡ 1 mod 3 residue, opposite fate.
 - *q = 11 type-II orbit is harmonic (j = 1728, μ = −1), not generic* — the harmonic tetrad's full
   symmetry is D₄, but only its V₄ preserves the cover, so the stabilizer stays V₄ (no C₄/D₄
   enhancement); noted, no open gap.
 
-No open mystery remains: every census number for the sporadic orbits is now either derived from the
-branch-type normal form or is the equianharmonic/torsor structure certified above.
+Open (small, non-blocking):
+- *Why the low-q splits land on the special A₄-orbits for 7 ≤ q ≤ 61* (n₁₁₁ ∈ {0,4,6}) before free
+  orbits begin to split at q = 67 (§6.1) — a genuine low-q pattern, but not a deepness mechanism and
+  not load-bearing for the classification; unexplained, logged for possible C500 interest.
+- *Exact q mod 12 rationality of the octahedral A₄-orbit* (§4) — observed, not proved (a square-class
+  argument); the certified per-field decompositions do not depend on it.
+
+Every census number for the sporadic orbits is either derived from the branch-type normal form or is
+the equianharmonic/torsor structure certified above; the two items above are refinements, not gaps in
+the classification.
 
 ## Lifecycle
 

@@ -1,6 +1,7 @@
 {
  "claims": {
-  "equianharmonic_deepness_mechanism": {
+  "equianharmonic_low_q_split_location": {
+   "caveat_not_certified_here": "At q=67 (verified by temporarily extending the census field table, not part of this frozen bundle) n_111=12 sits on a free 12-orbit with neither special orbit split, so 'splits only on special orbits' and 'n_111 in {0,4,6}' FAIL for q>=67. The correct statement is that n_111 is the S3 identity-class count, ~ (q+1)/6, which rounds to 0 only for small q; type-I deepness is that bounded-q equidistribution accident (C491 Lemma 7), not a two-orbit condition.",
    "data": [
     {
      "a4_orbit_decomposition": [
@@ -187,8 +188,8 @@
      "q": 49
     }
    ],
-   "statement": "for the equianharmonic pencil the branch tetrahedron is always the fiber-type 1^2.1; the split type 111 can occur only on the two special A4-orbits (the dual tetrahedron, size 4, and the octahedron, size 6) -- never on a free 12-orbit. Deepness holds iff neither special orbit is totally split (n_111=0): the dual tetrahedron is inert at q=7,13,19 and splits at q=25,31,43; the octahedron splits at q=37,49. So type-I deepness is a finite Frobenius condition on two orbits, not a generic Weil count -- which is why n_111 in {0,4,6} never grows with q.",
-   "verdict": "CONFIRMED"
+   "statement": "for the equianharmonic pencil the branch tetrahedron always has fiber-type 1^2.1, and for 7<=q<=49 every split (111) member lies on a special A4-orbit (size 4 or 6). deep <=> n_111=0 holds trivially; the deep fields are exactly q in {7,13,19}. This split location is a low-q coincidence, NOT a deepness mechanism.",
+   "verdict": "CONFIRMED (bounded 7<=q<=49)"
   },
   "equianharmonic_persistence": {
    "data": [
@@ -243,7 +244,7 @@
     }
    ],
    "scan_family": "f=(0,1,0,0,c), c in F_q",
-   "statement": "the equianharmonic degree-3-cover configuration exists as a PGL2-orbit for every q=1 mod 3, but for q>=25 every such point carries totally-split members (n_111>0) and is NOT a deep hole; it is deep only at q in {7,13,19}. Sporadic deepness is therefore a bounded-q accident, not a new all-q family.",
+   "statement": "the equianharmonic degree-3-cover configuration exists (as slice points f=(0,1,0,0,c); single-PGL2-orbit not checked at q>=25) for every q=1 mod 3 in the scanned range 25<=q<=49, and there every such point carries totally-split members (n_111>0) and is NOT a deep hole; it is deep only at q in {7,13,19}. Sporadic deepness is a bounded-q accident (C491 Lemma 7), not a new all-q family.",
    "verdict": "CONFIRMED"
   },
   "q8_frobenius_torsor": {

@@ -102,10 +102,12 @@ remains open discovery-track material (C491 Lemma 7 already proved q≥23; no al
   its degenerate boundary, O± are j=0 in the cyclic (C₃) stratum, type-I sporadics are j=0 in the S₃
   stratum (same modulus, different deck group). Could restructure the C491/C499 material as strata of
   one j-map; also the type-I cover φ_f is plausibly the classical tetrahedral trigonal map (explicit
-  normal form, unverified). C499 §6.1 further shows type-I deepness is a finite Frobenius condition on
-  two special A₄-orbits (dual tetrahedron + octahedron), with the degree-3 cover's Galois closure of
-  arithmetic genus 1 — candidate CM (j=0) control of the exact {7,13,19} threshold. Identifying that
-  genus-1/CM curve and its point-count is the concrete C500 follow-up. Paper-structure lead; no allocation.
+  normal form, unverified). Type-I deepness is n₁₁₁ = 0 where n₁₁₁ is the S₃ identity-class count
+  ≈ (q+1)/6 (bounded-q accident, C491 Lemma 7); the degree-3 cover's S₃-Galois closure has arithmetic
+  genus 1, so a candidate CM (j=0) point-count could give the exact {7,13,19} threshold. (NB: an
+  earlier "splits only on two special A₄-orbits / n₁₁₁ ∈ {0,4,6}" reading was a low-q artifact — it
+  fails at q=67 where a free orbit splits; corrected in the report.) Identifying that genus-1/CM curve
+  is the concrete C500 follow-up. Paper-structure lead; no allocation.
 - **Numeric collision.** At q=13 the tangent family T and the type-I sporadic share (size 182,
   stab-order 12) but not the group — T's stabilizer is the cyclic q−1 torus, the sporadic's is A₄.
   Reminder that (size, stab-order) is not a complete orbit invariant; group structure + branch type
