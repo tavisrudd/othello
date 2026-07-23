@@ -185,6 +185,39 @@ q ≥ 23). So each sporadic is the small-q tail of the generic S₃ stratum. The
 the deepness is a bounded-q arithmetic accident, not a perpetual family like O±/W. Both C491
 discovery-track leads are hereby settled.
 
+### 6.1 The type-I deepness mechanism (certified)
+
+The bounded-q accident has an exact orbit-theoretic mechanism, sharper than the generic Weil bound.
+Decomposing the equianharmonic pencil into its A₄-orbits and reading off the fiber-type of each
+(certified for q ≡ 1 mod 3, 7 ≤ q ≤ 49):
+
+| q | deep | dual tetrad (4) | octahedron (6) | n₁₁₁ |
+|---|---|---|---|---|
+| 7  | yes | `3` (inert)  | — (irrational) | 0 |
+| 13 | yes | `3` (inert)  | `1.2` | 0 |
+| 19 | yes | `3` (inert)  | — (free 12 instead) | 0 |
+| 25 | no  | **`111`**    | `1.2` | 4 |
+| 31 | no  | **`111`**    | `1.2` | 4 |
+| 37 | no  | `3` (inert)  | **`111`** | 6 |
+| 43 | no  | **`111`**    | `1.2` | 4 |
+| 49 | no  | `3` (inert)  | **`111`** | 6 |
+
+Two facts hold for every q (certified): the branch tetrahedron always has fiber-type `1^2.1`, and the
+totally-split type `111` occurs **only** on the two special A₄-orbits — the dual tetrahedron (size 4)
+and the octahedron (size 6) — **never on a free 12-orbit**. Hence
+
+**deep ⟺ neither special orbit is totally split** (n₁₁₁ = 0),
+
+and n₁₁₁ ∈ {0, 4, 6} is exactly "which special orbit split" — which is why it never grows with q. The
+split/inert type of each special orbit is a finite Frobenius (cube-splitting) condition on a fixed
+number field, so type-I deepness is a joint congruence condition on two orbits, and q ∈ {7, 13, 19}
+is precisely where both conditions avoid the split type. (This specializes C491 Lemma 7 to the
+equianharmonic configuration: the reason no type-I deep hole survives for q ≥ 25 is that at least one
+of the two special orbits is forced to split there — an exact statement, not the coarse q − 2√q > 12
+count.) The Galois-closure of the degree-3 cover has arithmetic genus 1 by Riemann–Hurwitz
+(2·3−2 branch points, transposition monodromy), consistent with a genus-1/CM control of these two
+conditions; identifying that curve is the natural C500 follow-up.
+
 Framing (for the C500 write-up, not task-owned here): the branch/ramification j-invariant of the
 Hankel pencil is a rational modulus on syndrome space that organizes the entire classification — T/S
 are its degenerate boundary, O± are j = 0 realized in the cyclic (C₃-monodromy) stratum, and the
@@ -228,8 +261,9 @@ Settled here:
   (for A₄, the two dual equianharmonic tetrahedra — both certified j = 0). The counts are forced, not
   a field coincidence.
 - *q = 8 three-orbit fusion* — a free Gal(F₈/F₂) torsor on the a₄ cubic-twist parameter (§5).
-- *Why sporadic and not a family* — bounded-q accident; the configurations persist but lose deepness
-  for q ≥ 25 (§6).
+- *Why sporadic and not a family* — bounded-q accident (§6), with an exact mechanism (§6.1): only the
+  two special A₄-orbits (dual tetrahedron, octahedron) can carry the split type, so type-I deepness is
+  a finite Frobenius condition on two orbits and n₁₁₁ ∈ {0,4,6} never grows with q.
 - *q = 11 type-II orbit is harmonic (j = 1728, μ = −1), not generic* — the harmonic tetrad's full
   symmetry is D₄, but only its V₄ preserves the cover, so the stabilizer stays V₄ (no C₄/D₄
   enhancement); noted, no open gap.

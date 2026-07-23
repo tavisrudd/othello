@@ -311,6 +311,35 @@ def stabilizer(F, rep, pgl2, return_elts=False):
     return len(elts), om, gn
 
 
+def equianharmonic_a4_decomposition(F, pgl2):
+    """Find the equianharmonic pencil f=(0,1,0,0,c), decompose its pencil line
+    into stabilizer(=A4)-orbits, and label each orbit (size, fiber-type). Returns
+    (decomp, deep) or (None, None) if no rational equianharmonic tetrad exists."""
+    q = F.q
+    rep = None
+    for c in range(q):
+        f = [0, 1, 0, 0, c]
+        if len(C.hankel_kernel(F, f)) != 2:
+            continue
+        if analyze(F, f).get("equianharmonic"):
+            rep = f; break
+    if rep is None:
+        return None, None
+    basis = C.hankel_kernel(F, rep)
+    _, _, _, selts = stabilizer(F, rep, pgl2, return_elts=True)
+    seen, decomp = set(), []
+    for lam in list(range(q)) + ["inf"]:
+        if lam in seen:
+            continue
+        orb = stab_orbit_on_pencil(F, basis, selts, lam)
+        seen |= orb
+        s, u = (0, 1) if lam == "inf" else (1, lam)
+        pat = C.cubic_pattern(C.binary_factor(F, member_at(F, basis, s, u)))
+        decomp.append([len(orb), pat])
+    deep = not any(p[1] == "111" for p in decomp)
+    return sorted(decomp), deep
+
+
 def branch_type(a):
     """label the branch-divisor Frobenius orbit type from analyze() output."""
     nr, ntr = a["n_rational_branch"], a["n_total_ramified"]
@@ -508,6 +537,39 @@ def main():
                      "it is deep only at q in {7,13,19}. Sporadic deepness is therefore "
                      "a bounded-q accident, not a new all-q family."}
     checks.append(("equianharmonic_persistence", tuple(CONTINUATION_Q), None))
+
+    # ---- Claim MECHANISM: deepness of the equianharmonic pencil is decided by the
+    # fiber-type of two special A4-orbits (dual tetrahedron, octahedron). Only the
+    # special A4-orbits (size 4 or 6) ever carry the split type 111; deep <=> none does.
+    mech = []
+    for q in [7, 13, 19, 25, 31, 37, 43, 49]:
+        F = C.GF(q)
+        decomp, deep = equianharmonic_a4_decomposition(F, all_pgl2(F))
+        assert decomp is not None, "q=%d no equianharmonic rep" % q
+        assert [4, "1^2.1"] in decomp, "q=%d branch tetrad not (4,1^2.1)" % q
+        # only special orbits (size in {4,6}) may be split
+        for size, typ in decomp:
+            if typ == "111":
+                assert size in (4, 6), "q=%d a free orbit is split" % q
+        n111 = sum(size for size, typ in decomp if typ == "111")
+        assert deep == (n111 == 0)
+        # census deepness agreement: q in {7,13,19} deep, else not
+        assert deep == (q in (7, 13, 19)), "q=%d deepness disagrees with census" % q
+        mech.append({"q": q, "deep": deep, "n_split_111": n111,
+                     "a4_orbit_decomposition": decomp})
+    cert["claims"]["equianharmonic_deepness_mechanism"] = {
+        "verdict": "CONFIRMED",
+        "data": mech,
+        "statement": "for the equianharmonic pencil the branch tetrahedron is always "
+                     "the fiber-type 1^2.1; the split type 111 can occur only on the two "
+                     "special A4-orbits (the dual tetrahedron, size 4, and the octahedron, "
+                     "size 6) -- never on a free 12-orbit. Deepness holds iff neither "
+                     "special orbit is totally split (n_111=0): the dual tetrahedron is "
+                     "inert at q=7,13,19 and splits at q=25,31,43; the octahedron splits "
+                     "at q=37,49. So type-I deepness is a finite Frobenius condition on "
+                     "two orbits, not a generic Weil count -- which is why n_111 in {0,4,6} "
+                     "never grows with q."}
+    checks.append(("equianharmonic_deepness_mechanism", (7, 13, 19, 25, 31, 37, 43, 49), None))
 
     with open(OUT_JSON, "w") as fh:
         json.dump(cert, fh, indent=1, sort_keys=True)

@@ -1,5 +1,195 @@
 {
  "claims": {
+  "equianharmonic_deepness_mechanism": {
+   "data": [
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       4,
+       "3"
+      ]
+     ],
+     "deep": true,
+     "n_split_111": 0,
+     "q": 7
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       4,
+       "3"
+      ],
+      [
+       6,
+       "1.2"
+      ]
+     ],
+     "deep": true,
+     "n_split_111": 0,
+     "q": 13
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       4,
+       "3"
+      ],
+      [
+       12,
+       "1.2"
+      ]
+     ],
+     "deep": true,
+     "n_split_111": 0,
+     "q": 19
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "111"
+      ],
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       6,
+       "1.2"
+      ],
+      [
+       12,
+       "3"
+      ]
+     ],
+     "deep": false,
+     "n_split_111": 4,
+     "q": 25
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "111"
+      ],
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       12,
+       "1.2"
+      ],
+      [
+       12,
+       "3"
+      ]
+     ],
+     "deep": false,
+     "n_split_111": 4,
+     "q": 31
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       4,
+       "3"
+      ],
+      [
+       6,
+       "111"
+      ],
+      [
+       12,
+       "1.2"
+      ],
+      [
+       12,
+       "3"
+      ]
+     ],
+     "deep": false,
+     "n_split_111": 6,
+     "q": 37
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "111"
+      ],
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       12,
+       "1.2"
+      ],
+      [
+       12,
+       "1.2"
+      ],
+      [
+       12,
+       "3"
+      ]
+     ],
+     "deep": false,
+     "n_split_111": 4,
+     "q": 43
+    },
+    {
+     "a4_orbit_decomposition": [
+      [
+       4,
+       "1^2.1"
+      ],
+      [
+       4,
+       "3"
+      ],
+      [
+       6,
+       "111"
+      ],
+      [
+       12,
+       "1.2"
+      ],
+      [
+       12,
+       "1.2"
+      ],
+      [
+       12,
+       "3"
+      ]
+     ],
+     "deep": false,
+     "n_split_111": 6,
+     "q": 49
+    }
+   ],
+   "statement": "for the equianharmonic pencil the branch tetrahedron is always the fiber-type 1^2.1; the split type 111 can occur only on the two special A4-orbits (the dual tetrahedron, size 4, and the octahedron, size 6) -- never on a free 12-orbit. Deepness holds iff neither special orbit is totally split (n_111=0): the dual tetrahedron is inert at q=7,13,19 and splits at q=25,31,43; the octahedron splits at q=37,49. So type-I deepness is a finite Frobenius condition on two orbits, not a generic Weil count -- which is why n_111 in {0,4,6} never grows with q.",
+   "verdict": "CONFIRMED"
+  },
   "equianharmonic_persistence": {
    "data": [
     {
