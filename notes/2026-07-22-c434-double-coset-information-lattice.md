@@ -120,6 +120,25 @@ Still open, with exact gaps:
   `S3` vs `D8`). Measured at both `q`; unexplained. The evidence gap is a character identity —
   whether `⟨Ind_K^G 1, Ind_H^G 1⟩` is forced to be equal for the two classes of `K = H ∩ H^J` —
   and it has no owner; promotion goes through the normal C-ID process.
+
+Third-order (ej2) sharpenings, from the certificate's exhaustive outer-involution sweep
+(`K_size_c_distribution_over_outer_involutions`: q=7 has 28 outer involutions, 16 with `|K|=6`
+and 12 with `|K|=8`; q=11 has 66, 36 with `|K|=10` and 30 with `|K|=12`; every one gives `c=6`):
+
+- **The `|K|` values are explained.** By orbit–stabilizer, `|K| = |Stab_H(JM0)| = |H|/n` with `n`
+  the size of the `H`-suborbit containing `JM0`. The two J-classes select the suborbits of sizes
+  `5` and `6` at q=11 (`60/5=12`, `60/6=10`) — the edge stabilizers of C379's valency-5 and
+  valency-6 orbitals from its `1,5,6,10` marked quotient — and sizes `3` and `4` at q=7
+  (`24/3=8`, `24/4=6`). `K` is an orbital edge stabilizer, not a generic-position intersection.
+- **New measured constraint, unexplained:** no outer involution places `JM0` in the remaining
+  suborbit mass (size 10 at q=11, which would give `|K|=6`; size 6 at q=7, which would give
+  `|K|=4`); those `|K|` values never occur in the exhaustive sweep. A self-pairedness /
+  outer-swap-admissibility mechanism is REASONED but unproved.
+- **The `c=6` invariance refines to a rank-3 statement:** in all four `(q, J-class)` cases `K`
+  has exactly three orbits per sheet, sizes `{1, a, q−1−a}` (`A4: 1,4,6`; `D10: 1,5,5`;
+  `D8: 1,2,4`; `S3: 1,3,3`, the last forced arithmetically given `c=6` and the fixed point).
+  The theorem constant is `6 = 2 × 3`; the open question is why every golden-pair edge
+  stabilizer acts with exactly three orbits on each `q`-point sheet.
 - **The middle count is `6` at both verified `q` — and the two cases are the whole domain
   (second ej pass, REASONED, not machine-checked).** The hypotheses force
   `|H| = |G|/2q = (q²−1)/2`. By Dickson's subgroup classification for `PSL_2(q)`, cyclic and
