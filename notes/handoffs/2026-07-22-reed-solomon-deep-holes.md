@@ -472,6 +472,11 @@ coordinate without losing zero incidence; on linearized endpoints it factors thr
 linearized polynomial and recovers the full trace obstruction.  Any successor needs a global
 factor/component or absolute-irreducibility theorem for this norm hypersurface, not another local
 difference operator or a census.
+A requested extra-juice refinement stratifies by the additive syndrome stabilizer `H_y`.
+The full orbit resultant is the forced `|H_y|`-th power of a reduced coset norm; hence it is
+inseparable on every nontrivial stabilizer stratum.  On the full fixed flag its reduced equation
+is exactly the elementary-symmetric test and the unreduced multiplicity is `q`.  Any global
+geometry must use these reduced stabilizer-stratified norms, not the raw resultant.
 
 ## Execution ladder
 
@@ -494,7 +499,7 @@ difference operator or a census.
 | C513 | PRS redundancy-eight application | complete | exact three-marker normalization and containment package; `q>=43` persistent-only theorem with complete PGL/PGamma orbit law | first post-C512 fixed-level theorem |
 | C510 | bounded one-twist audit and geometry pilot | complete | tangent-projected NRC; exact affine stabilizer and fixed line; `p∤k` pre-emption; modular `p|k` target; q=9 calibration | translation-quotient theorem gate |
 | C514 | modular one-twist translation quotient | complete | canonical completion-root slice; exact Lucas fixed flag; consecutive-row and marker-collision obstruction to C512 | a different splitting mechanism is required |
-| C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global norm/incidence-hypersurface geometry is required |
+| C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, reduced stabilizer-stratified orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global reduced-norm/incidence geometry is required |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -509,8 +514,9 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   translation-invariant determinant normal form and a precise obstruction to C512.  C515 closes
   the additive/Hasse alternative: its filtration and trace endpoints are exact, but differences
   do not preserve zero incidence.  Any further work needs a newly allocated global
-  component/absolute-irreducibility target for the trace-one incidence hypersurface and must
-  retain the completion/support collision divisor.  No all-TRS claim is allocated.
+  component/absolute-irreducibility target for the reduced stabilizer-stratified coset norms on
+  the trace-one incidence space and must retain the completion/support collision divisor.  No
+  all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C512 supplies the effective fixed-redundancy induction

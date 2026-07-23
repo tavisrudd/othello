@@ -3,8 +3,9 @@
 **Lane:** `reed-solomon` · **Date queued:** 2026-07-23 · **Status:** complete
 
 **Result:** `notes/2026-07-23-c515-modular-trs-hasse-recursion.md` gives the exact Hasse and
-finite-difference normal forms, the exact multiplicative orbit norm and adjoint-kernel trace
-factor, the polar ruled locus, and the proof that additive differences do not lift support zeros.
+finite-difference normal forms, the exact multiplicative orbit norm and its reduced
+stabilizer-stratified coset factor, the adjoint-kernel trace factor, the polar ruled locus, and the
+proof that additive differences do not lift support zeros.
 
 ## Objective
 

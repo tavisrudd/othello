@@ -75,3 +75,9 @@ depth and adds the multiplicative transfer
 the translation coordinate.  At a linearized endpoint it is, up to sign, the kernel-size power
 of the image linearized polynomial evaluated at `-c`, making the adjoint-trace obstruction its
 exact factor.
+
+A further extra-juice pass stratifies by the additive syndrome stabilizer `H_y`: the full orbit
+resultant is the forced `|H_y|`-th power of the reduced product over `F_q/H_y`.  Thus every
+nontrivial stabilizer makes the raw norm inseparable, and the correct future component gate is
+absolute irreducibility of the reduced coset norm.  On the full fixed flag the reduced norm is
+the elementary-symmetric endpoint equation and the raw multiplicity is exactly `q`.

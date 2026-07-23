@@ -322,12 +322,51 @@ The Tao audit eliminates the translation coordinate exactly by the orbit norm (1
 the same successor geometry may be posed as the factor/component problem for
 \(\mathcal N_y(U)=0\); equation (14) gives its complete factor on every linearized endpoint.
 
+A requested post-closeout extra-juice pass finds a necessary refinement before that geometry is
+attempted.  Let
+\[
+ H_y=\{b\in\mathbb F_q:[A_by]=[y]\}.
+\]
+Every \(A_b\) is unipotent, so a projective eigenvalue is necessarily one; hence \(H_y\) is the
+actual vector stabilizer, an additive \(\mathbb F_p\)-subspace.  If \(b\in H_y\), then
+\[
+ F_y(r-b,U)=F_{A_by}(r,U)=F_y(r,U).
+\]
+Thus \(F_y\) is constant on cosets of \(H_y\), and the orbit norm has the forced factorization
+\[
+ \mathcal N_y(U)=
+ \left(
+   \prod_{r\in\mathbb F_q/H_y}F_y(r,U)
+ \right)^{|H_y|}
+ =\bigl(\mathcal N_y^{\mathrm{red}}(U)\bigr)^{|H_y|}.            \tag{15}
+\]
+The product over cosets is independent of representative.  Equivalently, as a polynomial in
+\(r\), \(F_y\) factors through the linearized quotient coordinate
+\[
+ P_{H_y}(r)=\prod_{h\in H_y}(r-h).
+\]
+
+Because \(|H_y|\) is a power of \(p\), the full resultant is forced to be inseparable on every
+nontrivial stabilizer stratum.  In particular, absolute irreducibility of
+\(\mathcal N_y\) is the wrong gate there: one must study the reduced coset norm
+\(\mathcal N_y^{\mathrm{red}}\).  On the full fixed flag,
+\(H_y=\mathbb F_q\), so
+\[
+ \mathcal N_y(U)=F_y(U)^q,\qquad
+ \mathcal N_y^{\mathrm{red}}(U)=F_y(U).
+\]
+The elementary-symmetric equations (13) are therefore exactly the reduced fixed-flag components,
+while their multiplicity \(q\) records the translation stabilizer.
+
 - **Settled — is there a canonical Hasse normal form?** Yes, equations (2)--(6), with
   translation-invariant first level \(\tau(y)\).
 - **Settled — do additive endpoints have an exact arithmetic test?** Yes, the adjoint-kernel
   trace criterion (9), specializing to Artin--Schreier trace zero.
 - **Settled — can the translation coordinate be eliminated without losing zero incidence?** Yes.
   The orbit norm/resultant (10) vanishes exactly when some translated determinant vanishes.
+- **Settled — is the full orbit norm the correct reduced geometric equation?** Only on the
+  trivial-stabilizer stratum.  Equation (15) removes the forced \(p\)-power multiplicity on every
+  other stratum.
 - **Settled — does finite-difference vanishing lift a support zero?** No.  Equation (7) and the
   standard fixed syndrome give a sharp counterexample.
 - **Settled — are Hasse index and augmentation depth the same filtration?** No.  Hasse index is
@@ -336,9 +375,9 @@ the same successor geometry may be posed as the factor/component problem for
 - **Settled — what is the polar-compatible locus?** The ruled image (11), of dimension at most
   two; it misses every pure nonstandard Lucas-maximal direction.
 - **Settled — what remains on the fixed flag?** The elementary-symmetric tests (13).
-- **Open — are the hypersurfaces \(\mathcal Z_y\) absolutely irreducible off a classified
-  persistent locus, equivalently what are the components of the orbit norm?** Evidence gap: no
-  component or monodromy theorem has been proved.
+- **Open — are the reduced coset-norm hypersurfaces absolutely irreducible off a classified
+  persistent locus?** Evidence gap: no component or monodromy theorem has been proved; the
+  unreduced norm is automatically a \(p\)-power when \(H_y\ne0\).
 - **Open — do all extra Lucas-fixed directions admit a trace-one configuration zero in (13)?**
   Evidence gap: no uniform distinct-root construction is known.
 - **Open — can the collision boundary seed an inclusive logarithmic polar theory?** Equation
