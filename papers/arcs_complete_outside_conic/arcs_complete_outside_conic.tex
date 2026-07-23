@@ -1211,7 +1211,23 @@ implementations and the formal checks.
 
 \paragraph{Large-field reconstruction from the uncovered locus.}
 At every fixed length, the complete set of one-column MDS extensions
-eventually remembers the projective parity-check system itself.
+eventually remembers the projective parity-check system itself.  The inverse
+map has two elementary stages.  Put $N=\binom{k}{2}$ and
+$S=\PG(2,q)\setminus U(A)$.  First recover the secant arrangement from the
+gap between $q+1$, the number of points on a genuine secant, and $N$, the
+largest number of points in which a nonsecant line can meet the union.
+Then recover the vertices from the gap between their secant multiplicity
+$k-1$ and the largest possible nonvertex multiplicity $\lfloor k/2\rfloor$:
+\[
+ U(A)
+ \ \longmapsto\
+ S
+ \ \longmapsto\
+ \{\ell:|\ell\cap S|>N\}
+ \ \longmapsto\
+ \{x:\deg(x)=k-1\}=A.
+\]
+The strict first gap is the only large-field hypothesis.
 
 \begin{proposition}[Uncovered-locus reconstruction]
 \label{prop:arc-reconstruction}
@@ -1241,7 +1257,7 @@ points incident with $k-1$ recovered secants, and the same description
 recovers $B$.
 \end{proof}
 
-\begin{corollary}[Canonical reconstruction and automorphisms]
+\begin{corollary}[Canonical inverse and automorphisms]
 \label{cor:arc-reconstruction-algorithm}
 Under the hypotheses of Proposition~\ref{prop:arc-reconstruction}, put
 $S=\PG(2,q)\setminus U(A)$ and $N=\binom{k}{2}$.  The secants of $A$ are
@@ -1288,7 +1304,9 @@ while the conic case supplies a curved exceptional locus.  The coding
 interpretation is another reading of the same remainder,
 rather than a separate source of estimates.
 
-The uncovered locus is therefore more than an output statistic:
+The forward defect identity records how a secant arrangement covers the
+plane; the reconstruction theorem supplies a partial inverse.  The
+uncovered locus is therefore more than an output statistic:
 Proposition~\ref{prop:arc-reconstruction} recovers the unlabelled
 parity-check arc from its complete set of distance-three syndrome directions
 whenever $q+1>\binom{k}{2}$.  Thus the one-column extension locus itself

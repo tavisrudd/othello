@@ -82,3 +82,30 @@ the line-union proof cannot be repaired at equality without additional data.
 - **Open outside this import — what replaces the threshold below it?** C490 shows that coherent
   projected-sextic signatures can separate recoverable small-field fibres, but importing that
   certificate-backed theory remains a distinct manuscript decision.
+
+## Tao exposition pass
+
+The theorem is clearest as an explicit inverse map, not as a uniqueness statement followed by its
+proof:
+
+```text
+U(A)
+  -> covered set S
+  -> lines with more than choose(k,2) points in S
+  -> points on k-1 recovered lines
+  -> A.
+```
+
+This exposes the two independent numerical gaps:
+
+1. `q+1 > choose(k,2)` separates genuine secant components from every transverse line;
+2. `k-1 > floor(k/2)` separates vertices from all external concurrence points.
+
+The arcs exposition now displays this inverse before the formal proposition and describes the
+result as a partial inverse to the forward defect identity.
+
+The Clebsch conclusion now separates two inverse problems rather than merging them rhetorically.
+The large-field theorem starts with the exact embedded locus and returns the literal unlabelled
+parent. The Clebsch theorem starts only with containment in an unspecified conic and returns a
+projective class. The fact that the conic has a larger ambient stabilizer than the hexagon explains
+why the `A5` conclusion is not a formal stabilizer corollary of the locus.
