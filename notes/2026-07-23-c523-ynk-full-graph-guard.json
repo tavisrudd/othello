@@ -1,0 +1,59 @@
+{
+  "claim_scope": "The Y_NK full-legal-graph Node-Kayles guard over the frozen q=13 and q=17 three-intruder domain (children reachable by one intruder opponent move from a recorded C20 P reply state). Certifies the capOK iff and measures Y_NK descent coverage relative to Y_NK0.",
+  "fields": [
+    {
+      "capok_tested_by_live_conic": {
+        "1": 8,
+        "2": 4
+      },
+      "gap_children_newly_covered_by_ynk": 4,
+      "gap_children_uncovered_by_ynk0": 4,
+      "q": 13,
+      "residual_children_capover_only": 0,
+      "residual_min_live_conic": {},
+      "residual_min_overload_on_capacity2_line": {},
+      "total_children_covered_by_ynk": 1287,
+      "unique_three_intruder_children": 1287,
+      "ynk0_covered_children": 1283,
+      "ynk_iff_agree": 12,
+      "ynk_iff_capok_grandchildren_tested": 12,
+      "ynk_iff_disagree": 0
+    },
+    {
+      "capok_tested_by_live_conic": {
+        "0": 21967,
+        "1": 25037,
+        "2": 6759,
+        "3": 1083,
+        "4": 72
+      },
+      "gap_children_newly_covered_by_ynk": 4348,
+      "gap_children_uncovered_by_ynk0": 4697,
+      "q": 17,
+      "residual_children_capover_only": 349,
+      "residual_min_live_conic": {
+        "0": 273,
+        "1": 71,
+        "2": 2,
+        "3": 3
+      },
+      "residual_min_overload_on_capacity2_line": {
+        "3": 323,
+        "4": 26
+      },
+      "total_children_covered_by_ynk": 50168,
+      "unique_three_intruder_children": 50517,
+      "ynk0_covered_children": 45820,
+      "ynk_iff_agree": 54918,
+      "ynk_iff_capok_grandchildren_tested": 54918,
+      "ynk_iff_disagree": 0
+    }
+  ],
+  "source": {
+    "bytes": 654965,
+    "path": "notes/data/c20-q13-q17-states.jsonl.gz",
+    "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+  },
+  "verdict": "Y_NK iff exact value on every capOK grandchild tested (0 disagreements). Y_NK lifts q=17 descent coverage from 90.7% (Y_NK0) to 99.3%; the residual is a small family of capOVER children whose every winning reply leaves a capacity-2 line with >=3 legal points.",
+  "ynk_guard": "When every capacity-2 line carries at most two legal points (capOK), the cap residual game is exactly static Node-Kayles on the conflict graph of all legal affine cells (live conic cells included), so the state is P iff that graph's Grundy value is 0. Y_NK0 is the empty-conic special case."
+}

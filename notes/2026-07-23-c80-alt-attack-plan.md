@@ -65,10 +65,15 @@ computational claim follows `notes/research-reproducibility-conventions.md` (rep
 **RUN — C522, 2026-07-23. Verdict: `Y_NK0` is NOT a complete bulk-descent certificate.** Asked at
 the child level over ALL legal replies, 9.3% of q17 three-intruder children (4,697 / 50,517) have
 no `Y_NK0` reply (q13: 4 / 1,287); all are responder wins. 89% of the gap cannot reach an empty
-conic in one move, so the companion guard must be a **single-live-parameter** law, not a second
-empty-conic packet. See [`2026-07-23-c522-ynk0-descent-completeness.md`](2026-07-23-c522-ynk0-descent-completeness.md).
-The successor is to build that single-live-parameter P-guard (reserve a new `[cap]` C-ID). The
-original objective below is retained for provenance.
+conic in one move, so the companion guard must handle live conic content. See
+[`2026-07-23-c522-ynk0-descent-completeness.md`](2026-07-23-c522-ynk0-descent-completeness.md).
+
+**Companion guard BUILT — C523, 2026-07-23.** The `Y_NK` guard (`capOK` ⟹ static Node-Kayles on the
+full legal-point graph, P ⟺ full-graph Grundy 0) lifts descent coverage to **q17 99.3% / q13 100%**;
+residual is a **349-child capOVER core** (323 at minimal overload 3). The new successor is to certify
+that core (bounded-overload P-law or finite base case; reserve a new `[cap]` C-ID). See
+[`2026-07-23-c523-ynk-full-graph-guard.md`](2026-07-23-c523-ynk-full-graph-guard.md). The original
+Route 3 objective below is retained for provenance.
 
 **Objective.** Prove bulk descent: from an arbitrary member of the marked packet, a responder move
 reaches a `Y_NK0` state (proven P). Characterize the finite obstruction where it fails.

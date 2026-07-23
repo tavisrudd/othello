@@ -599,9 +599,22 @@ exists — just outside `Y_NK0`. Decisively, **89% of the q17 gap (4,193 / 4,697
 empty conic in one winning reply**; the easiest winning reply is a **single-live-parameter**
 (`live1_capOK`) state for 3,593 of them. This is the same "one live conic parameter before the
 reply" object the score-9 mining isolated, now shown **generic** across the whole q17 domain. So
-C80(b) needs a **single-live-parameter P-guard** companion — that is the queued successor (reserve a
-new `[cap]` C-ID to build it). Report+cert+`--check`:
+C80(b) needs a **single-live-parameter P-guard** companion. Report+cert+`--check`:
 [`../2026-07-23-c522-ynk0-descent-completeness.md`](../2026-07-23-c522-ynk0-descent-completeness.md).
+
+**Companion guard BUILT (C523, 2026-07-23) — `Y_NK` lifts descent coverage 90.7% → 99.3%; the
+C80(b) obstruction is now a 349-child capOVER core.** The right guard is not a single-live-parameter
+patch but a full generalization: when every capacity-2 line carries ≤2 legal points (**`capOK`**),
+the cap residual is exactly **static Node-Kayles on the graph of all legal affine cells** (live conic
+cells included as vertices), so P ⟺ full-graph Grundy 0. `Y_NK0` is the empty-conic special case.
+Certified: **54,930 `capOK` grandchildren (q13+q17), 0 disagreements**, live sizes 0–4. Coverage:
+**q13 100% (1,287/1,287), q17 99.3% (50,168/50,517)**. Residual = **349 q17 children** whose every
+winning reply is `capOVER` (a capacity-2 line with ≥3 legal points — the genuine triple semantics);
+**323/349 sit at minimal overload 3**. This is the irreducible bulk-descent core and the next
+successor target (bounded-overload P-law or finite base case; reserve a new `[cap]` C-ID). The
+`capOK ⇒ P iff full-graph Grundy 0` theorem has a proof sketch (a new triple needs 3 legal points on
+a capacity-2 line, forbidden by `capOK`) but no Lean statement yet. Report+cert+`--check`:
+[`../2026-07-23-c523-ynk-full-graph-guard.md`](../2026-07-23-c523-ynk-full-graph-guard.md).
 
 Priority order and why:
 
