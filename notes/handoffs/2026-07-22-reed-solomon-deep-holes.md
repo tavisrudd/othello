@@ -532,6 +532,33 @@ field where it occurs.  The first possible persistent fixed endpoint is now `k>=
 TRS synthesis or field census is justified.  These carriers are an unallocated future successor;
 C519 remains the separately owned arbitrary-redundancy residual-discriminant task.
 
+## C519 entry handoff
+
+C519 is next.  Its owned goal is the arbitrary-degree **PRS** theorem in
+[`the task card`](../reed-solomon-tasks/c519-universal-residual-discriminant.md): construct the
+four-contraction map `L_f`, identify the integral residual branch
+`K=N_s^2-4DN_u` with the pulled-back divided-power binary-cubic discriminant, classify the complete
+zero/square/inseparable pullback locus, and prove a root-compatible geometrically integral
+genus-at-most-one slice outside it.  The first session should:
+
+1. import C512 and C516, freeze the divided-power and residual notation, and derive the integral
+   discriminant identity;
+2. classify the image types of `L_f` and compare their saturated loci with the frozen
+   C491/C498/C509/C513/C516 carriers at `n=5,6,7,8`;
+3. record the determinant, branch, diagonal, repeated-root, fixed/residual-collision, ordering,
+   and rational-lift conditions before any Hasse--Weil estimate.
+
+C518 contributes proof discipline only: quotient points need not lift to rational split roots;
+forced inseparable powers must be removed; component-union norms are not irreducibility targets;
+and every collision divisor keeps its own semantics.  Its TRS quadratic
+`D Z^2-A D Z-C` and discriminant `A^2D^2+4CD` are not C519's PRS residual system.
+
+The remaining low Lucas levels, bounded high endpoints, characteristic-two top Schur carrier
+from possible `k>=6`, and general modular-TRS Hasse/incidence synthesis remain unallocated and
+must not be absorbed into C519.  The closed source boundary is
+[`C518`](../2026-07-23-c518-modular-trs-global-incidence.md); the eventual C519 report is
+`notes/2026-07-23-c519-universal-residual-discriminant.md`.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |

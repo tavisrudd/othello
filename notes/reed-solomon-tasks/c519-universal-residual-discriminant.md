@@ -1,6 +1,6 @@
 # C519 — universal residual-discriminant base-locus theorem
 
-**Lane:** `reed-solomon` · **Status:** queued after C518
+**Lane:** `reed-solomon` · **Status:** queued next; C518 closed
 
 ## Objective
 
@@ -20,6 +20,43 @@ proved additional component. A field census, an unchecked genericity assertion, 
 conditional on an unnamed exceptional locus does not pass.
 
 Eventual report: `notes/2026-07-23-c519-universal-residual-discriminant.md`.
+
+## Entry handoff from C518
+
+Read the closed
+[`C518 global-incidence report`](../2026-07-23-c518-modular-trs-global-incidence.md) for proof
+discipline, not as an additional C519 theorem input.  The reusable lessons are exact:
+
+- A rational point of the coefficient quotient is not yet a split-root witness.  The proof must
+  retain the ordering torsor, its Frobenius type, and the final rational lifting condition.
+- Determinant, branch, diagonal, fixed-root collision, and valid completion-collision divisors
+  have different semantics.  Name and retain each divisor through the arithmetic count.
+- Remove forced inseparable powers before asking geometric questions.  A stabilizer-reduced norm
+  can still be a component union and is not thereby an absolute-irreducibility target.
+- Characteristic-dependent semilinear reparametrization and Schur/Pieri identities are useful
+  models for exposing a top component and its exceptional divisors; they are not assumptions
+  about the C519 pullback.
+
+There is a strict notation and scope firewall.  In C518,
+
+\[
+ F=C+BD,\qquad D Z^2-A D Z-C,\qquad K=A^2D^2+4CD
+\]
+
+describe the last-two-support-root lift in the modular TRS incidence problem.  In C519,
+
+\[
+ D t^2-N_s t+N_u,\qquad K=N_s^2-4DN_u
+\]
+
+describe the PRS kernel-factor residual cover obtained from the four contractions of `P`.
+Their Kummer/Artin--Schreier lift semantics are analogous, but the coefficients, parameter
+spaces, collision divisors, and geometric objects are different.  Never substitute one residual
+system for the other.
+
+C519 does **not** own C518's unresolved low Lucas levels `p^ell<=k`, bounded high-level fields
+below the proved shallow gates, the characteristic-two top Schur carrier beginning possibly at
+`k>=6`, or a general modular-TRS Hasse/incidence synthesis.  Those remain unallocated.
 
 ## Third-order structural reduction
 
@@ -111,6 +148,27 @@ q>B_n,\qquad q+1-2\sqrt q>3n-2
 
 is an immediate arbitrary-degree sufficient range. Sharpening `B_n` by a finite covariant slice
 family is an extra-juice gate after, not before, the base locus is classified.
+
+## First-session entry checklist
+
+1. Read the closed
+   [`C512 polar-induction report`](../2026-07-23-c512-general-polar-flag-theorem.md) and
+   [`C516 residual-quadratic report`](../2026-07-23-c516-prs-redundancy-nine.md) as the actual
+   theorem inputs.  Use the frozen C491/C498/C509/C513/C516 representatives; do not regenerate
+   their classifications or finite-field censuses.
+2. Before any symbolic generator or paper-facing computation, follow
+   [`research-reproducibility-conventions.md`](../research-reproducibility-conventions.md).
+   Before a novelty claim, follow
+   [`literature-audit-conventions.md`](../literature-audit-conventions.md).
+3. Freeze the divided-power convention and the meanings of `D,N_s,N_u,K` in the theorem
+   statement.  Derive the integral cubic-discriminant identity by hand before using a computer
+   algebra check.
+4. Make the first falsifiable gate the image-subspace classification of `L_f`, calibrated at
+   `n=5,6,7,8` by saturated zero/square/inseparable loci against the already proved carrier ideals.
+   A disagreement triggers the additional-component stop rule.
+5. Define the rational lifting table and every deletion divisor before invoking Hasse--Weil.
+   Do not begin with a field census or with arbitrary projective lines: the required slices must
+   be root-compatible split-root pencils.
 
 ## Execution order
 
