@@ -584,8 +584,17 @@
       "last": 511,
       "purpose": "bounded Weil-roof Phase-3 synthesis: classify each Rosetta row as proved, checked, or dead and decide Paper-2 go/no-go",
       "sequence": 65
+    },
+    {
+      "count": 1,
+      "first": 512,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 512,
+      "purpose": "general persistent-or-arithmetically-bounded polar-flag theorem for split-free Hankel systems",
+      "sequence": 66
     }
   ],
-  "next_id": 512,
+  "next_id": 513,
   "schema": "codex-task-id-allocations-v1"
 }
