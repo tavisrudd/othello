@@ -630,10 +630,20 @@ so **depth ≤ 2 closes 100% at q=13,17,19** (computational, not proven). The re
 Weil "generic + finite exceptions" one (Weil belongs to the (ON) abundance / {11,17} P-child-depletion
 layer, a different quantity). **Proof status (do not overclaim):** the `Y_NK` guard `capOK ⟹ (P ⟺
 full-graph Grundy 0)` now has a written proof — persistence + edge-preservation ⟹ static Node-Kayles —
-in [`../2026-07-23-c523-ynk-guard-proof.md`](../2026-07-23-c523-ynk-guard-proof.md) (pending Lean). The
-**depth-2 routing is a CONJECTURE** verified only at q=13/17/19; there is no proof of coverage,
+in [`../2026-07-23-c523-ynk-guard-proof.md`](../2026-07-23-c523-ynk-guard-proof.md), **Fable-reviewed
+CORRECT** (lemmas + engine conventions verified in code; holds for even `q` too; Lean pending) —
+[`../2026-07-23-c80-descent-fable-review.md`](../2026-07-23-c80-descent-fable-review.md). The
+**depth-2 routing is a CONJECTURE** verified only at q=13/17/19; no proof of coverage,
 depth-boundedness, or uniformity, and three primes cannot exclude a depth-3 tail at larger `q`.
-**Remaining crown = prove the uniform-in-`q` routing** (next successor; reserve a new `[cap]` C-ID).
+
+**NEXT SESSION — start here (C528, reserved `[cap]`):** the review killed the Φ-potential plan (Φ is
+monotone non-increasing under all moves ⟹ "drive Φ→0" is vacuous) and replaced the target with a
+**gadget-Node-Kayles value law** (an overloaded capacity-two line = an independent `k`-set that
+collapses to a clique on first touch; prove by induction on the overload measure, `Y_NK` as the base
+case, depth-2 as a corollary). Cold-start execution guide with the exact first computation (q19
+overload-profile tabulation on frozen data), the (ON) on-conic/off-conic alignment check, the octal
+periodicity Piece 3, and symmetry reduction:
+[`../2026-07-23-c80-gadget-nk-plan.md`](../2026-07-23-c80-gadget-nk-plan.md).
 Also open: Lean statements of both lemmas; C82 countability. Report+cert+`--check` (q13/q17 and a
 separate q19 cert):
 [`../2026-07-23-c524-capover-core-depth2.md`](../2026-07-23-c524-capover-core-depth2.md).

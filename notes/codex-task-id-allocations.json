@@ -719,8 +719,17 @@
       "last": 527,
       "purpose": "package C433 modular contraction for Paper 2 and a compact Lean terminal",
       "sequence": 80
+    },
+    {
+      "count": 1,
+      "first": 528,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 528,
+      "purpose": "Prove the gadget-Node-Kayles value law (overloaded capacity-two line = independent k-set collapsing to a clique on first touch) by induction on the overload measure; depth-2 routing as corollary; uniform-in-q C80(b) descent",
+      "sequence": 81
     }
   ],
-  "next_id": 528,
+  "next_id": 529,
   "schema": "codex-task-id-allocations-v1"
 }
