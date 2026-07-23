@@ -44,8 +44,9 @@ C429's report is unusually explicit about what it declines to claim. The audit c
 ### A1. Quadratic-arithmetic fence (main theorem + EJ2 orientation line)
 
 Source cluster read at full text: **Keith Conrad, "The Different Ideal"** (expository note, UConn;
-fetched PDF, `pdftotext`, read verbatim — `full text`), which settles the two load-bearing items
-outright:
+cache key `kconrad:different-ideal`, PDF SHA-256
+`afc82d34f4e1cfc51a6701f4e724b0726ef0fb922cb227be5217fa22950be17c`, `pdftotext` extraction read
+verbatim — `full text`), which settles the two load-bearing items outright:
 
 - **δ = f'(τ) generates the different; different = (f'(θ)) for a monogenic ring.** Conrad Thm 4.3
   (`O_K = Z[α] ⟹ D_K = (f'(α))`), Thm 4.8 (`N(D_K) = |disc K|`), Thm 4.13 (Dedekind: different
@@ -78,7 +79,11 @@ determinant-line normalization choice. All are presentational; none affects corr
 
 ### A2. Golden A5 character fence (main theorem; EJ3 faithful side)
 
-Read at full text: **Groupprops, "Linear representation theory of alternating group:A5."** Confirms
+Read at full text (live MediaWiki HTML page,
+`groupprops.subwiki.org/wiki/Linear_representation_theory_of_alternating_group:A5`, retrieved via
+WebFetch this session — no cache key/SHA recorded because the shared cache accepts only `%PDF` blobs
+and rejects HTML; access is stated in lieu of a hash per the conventions' § Access): **Groupprops,
+"Linear representation theory of alternating group:A5."** Confirms
 the two 3-dim irreps take golden values `(1±√5)/2` on the two 5-cycle classes; the unordered pair are
 the roots of `X²−X−1` (disc 5); character field `Q(√5)`, value ring `Z[(1+√5)/2]`; both the Galois
 map `√5 ↦ −√5` and the outer automorphism (odd permutation) swap 3 and 3′, and `3 ⊕ 3′` is the
