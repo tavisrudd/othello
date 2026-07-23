@@ -701,8 +701,17 @@
       "last": 525,
       "purpose": "classify characteristic-two root-compatible ordered-Hessian (2,2) degeneracy and carrier pullback",
       "sequence": 78
+    },
+    {
+      "count": 1,
+      "first": 526,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 526,
+      "purpose": "canonical Tate-pairing comparison with the rigid C433 depth/Fourier target",
+      "sequence": 79
     }
   ],
-  "next_id": 526,
+  "next_id": 527,
   "schema": "codex-task-id-allocations-v1"
 }
