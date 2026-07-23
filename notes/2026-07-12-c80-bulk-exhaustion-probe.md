@@ -584,6 +584,11 @@ second implementation of the raw `Y_0` orbital membership or the full earlier ce
   for the descent/abundance theorem below: it must carry the multiplicative character coordinate
   explicitly — a permutation/incidence (one-sort SDP) argument is provably insufficient at the value
   layer.  Still owned by C80's response-packet/descent theorem, now with the coupling shape fixed.
+  **Next step (highest EV for the lane): test recursion-stability of `value = 1_live ⊗ χ` on the
+  frozen q=11/q=13 grandchild structure (already built in `analyze_seed`'s winning-response graph)
+  before any further diagnostic.** If it survives depth 2, C80(b) reduces to a pure additive-drain
+  descent onto the proven C80(c) resource with `χ` a static side-condition; if not, the division of
+  labor is a depth-1 artifact. Cheap and decisive either way.
 - **Still open — abundance, re-gated:** C82 must not count raw `Y_0`: even over nonsplit prior
   triples it is frequently empty, and at q17 nonemptiness does not imply P-purity.  C80 must first
   supply either a refined P-preserving packet or a bulk descent theorem whose terminal target is

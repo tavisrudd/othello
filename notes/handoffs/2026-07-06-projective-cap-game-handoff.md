@@ -551,7 +551,30 @@ crosses the full-`PGL2` boundary with an explicit P-family but does not provide 
 ## Near-Term Queue
 
 Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as the operational
-task list.  Current high-value items:
+task list.  This handoff is the ordering authority; the queue's `cap` rows mirror this expected-value
+ranking toward the odd-q all-P crown.
+
+**Highest-EV next step (2026-07-23): the C496 factorization recursion-stability probe, under C80.**
+C496 gave the first clean structural handle on C80's long-open descent gap: the on-conic child value
+factors as `value = 1_live ⊗ χ(u)` — an additive live-locus-drain indicator times a static quadratic
+character.  If that factorization is stable under the game recursion, C80(b) collapses onto the
+already-proven C80(c) drain resource (`|live conic|` drops per move) with `χ` a static side-condition
+— the closest the lane has been to the descent theorem.  The probe is cheap (the frozen q=11/q=13
+grandchild structure is already built in `analyze_seed`'s winning-response graph) and decisive either
+way.  Run it as C80 continuation before any diagnostic.  Rationale and the depth-1 caveat:
+[`../2026-07-23-c496-bihecke-two-sort-coupling.md`](../2026-07-23-c496-bihecke-two-sort-coupling.md).
+
+Priority order and why:
+
+1. **C80 (spine).** Everything gates on it; the recursion-stability probe above is the move.
+2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
+   resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
+   A5-anchor data, ahead of the C80 gate.
+3. **C74 / C77 (balanced-packet attack), C81 (independent char-5/7 gate), C13 (q=9).**
+4. **C508 — DEPRIORITIZED.** After the C495/C497 negatives it is a diagnostic, not a descent step;
+   even a positive is symmetry/case-reduction only unless it improves C80's guard or a measure.
+   Revisit only then.
+5. **Base cases C189/C198/C199/C200 and the C30 engineering tail** — do not advance the uniform proof.
 
 - **C189 [QUEUED] — q=5 octahedral frame bridge.** Import C187's exact six-point conic extension
   locus, certify the expected `K6`-minus-a-perfect-matching conflict graph and antipodal-copycat
