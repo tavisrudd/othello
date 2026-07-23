@@ -445,6 +445,52 @@ def replay_field(q, rec, direct_scan):
     else:
         direct = "skipped"
 
+    gcd_two_rows = [
+        row for row in rec["pgl2_orbits"] if row["net_gcd_deg"] == 2
+    ]
+    tangent_orbits = (
+        [(q + 1, q * (q - 1)), (q * q - 1, q)]
+        if F.p == 5
+        else [(q * (q + 1), q - 1)]
+    )
+    sigma_orbits = (
+        [
+            (q * (q * q - 1) // 10, 10),
+            (q * (q * q - 1) // 5, 5),
+            (q * (q * q - 1) // 5, 5),
+        ]
+        if (q + 1) % 5 == 0
+        else [(q * (q * q - 1) // 2, 2)]
+    )
+    observed_gcd_two = sorted(
+        (row["size"], row["stab_order"]) for row in gcd_two_rows
+    )
+    assert observed_gcd_two == sorted(tangent_orbits + sigma_orbits), (
+        q, observed_gcd_two, tangent_orbits, sigma_orbits,
+    )
+
+    gcd_two_targets = {
+        row["rep_index"]: row["frobenius_maps_to_rep_index"]
+        for row in gcd_two_rows
+    }
+    gcd_two_cycles = 0
+    unseen = set(gcd_two_targets)
+    while unseen:
+        gcd_two_cycles += 1
+        current = unseen.pop()
+        while gcd_two_targets[current] in unseen:
+            current = gcd_two_targets[current]
+            unseen.remove(current)
+    expected_sigma_cycles = (
+        3 if (q + 1) % 5 == 0 and F.p % 5 in (1, 4)
+        else 2 if (q + 1) % 5 == 0
+        else 1
+    )
+    expected_tangent_cycles = 2 if F.p == 5 else 1
+    assert gcd_two_cycles == expected_tangent_cycles + expected_sigma_cycles, (
+        q, gcd_two_cycles, expected_tangent_cycles, expected_sigma_cycles,
+    )
+
     union = set()
     reps = {row["rep_index"] for row in rec["pgl2_orbits"]}
     for row in rec["pgl2_orbits"]:
@@ -460,10 +506,14 @@ def replay_field(q, rec, direct_scan):
         assert order // len(component) == row["stab_order"]
         gcd_degree = net_gcd_degree(F, hankel_net(F, v))
         assert gcd_degree == row["net_gcd_deg"]
+        quotient_forms = [[v[i + j] for i in range(4)] for j in range(3)]
         if gcd_degree == 0:
-            quotient_forms = [[v[i + j] for i in range(4)] for j in range(3)]
             assert matrix_rank(F, quotient_forms) == 3, (
                 q, row["rep_index"], "symmetric-cube quotient is not a rank-three cone"
+            )
+        elif gcd_degree == 2:
+            assert matrix_rank(F, quotient_forms) == 2, (
+                q, row["rep_index"], "quadratic-gcd catalecticant has wrong rank"
             )
         assert in_five_span(F, v), (q, row["rep_index"], "not in a five-span")
         fv = tuple(F.pow(x, F.p) for x in v)

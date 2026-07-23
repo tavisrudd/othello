@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491 and C499 complete; C498 active (literature gate and q<=27 computational
-calibration complete; first infinite characteristic-two exceptional family classified; corrected
-trisecant/splitting-cover theorem gate open); C500 (redundancy-five paper,
+**Status:** C475--C491 and C499 complete; C498 active (all-field split-member theorem and
+persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
+C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
@@ -321,6 +321,27 @@ family of C491 fiber-square curves over that line.  Any `S3` fibre gives a split
 classification of coherently parameterized first-polar lines contained in the C491
 exceptional/pointed-collision locus, followed by the remaining `16/10/4/0/1` small-field orbit
 normal forms.
+The third-order close completes the characteristic-at-least-five existence theorem.  The pullback
+of C491's secant cubic is the cubic of maximal minors of the quintic `3x4` catalecticant, so it
+costs at most 3 points off the quadratic-gcd stratum; the tame cyclic projected Veronese costs at
+most 4; pointed `g^2_4` ramification costs at most 6.  Hence no trivial-gcd exception exists for
+`p>=5, q>=29`; the census closes the lower band and shows the exact deep set is the quadratic-gcd
+stratum for every such field with `q>=17`.
+The fourth-order close completes the all-field existence/orbit-count theorem.  In characteristic
+three the C491 wild locus is the degree-four cone joining the fixed nucleus to the quartic NRC, but
+no ruling satisfies the consecutive-row polar-line equations.  In characteristic two the cyclic
+locus is the plane `<e1,e2,e3>`, and its unique polar-line component is exactly the C498
+3-nucleus line `<e2,e3>`.  Thus the only large-field trivial-gcd exceptions are its `q+1` points
+for `q=2^m`, odd `m>=5`; q=7/8/9/11/13 have the certified `18/11/4/2/1` tables, and no others
+occur.
+The persistent-stratum splitting is uniform too.  Tangent fibres form one PGL2 orbit unless
+`p=5`, when the modular fixed point and nonzero part give two.  Sigma fibres are the norm-one
+torus modulo fifth powers and inversion: one orbit if `5` does not divide `q+1`, otherwise three
+with stabilizers `10,5,5`; Frobenius acts by multiplication by `p` on `C5`.  The replay asserts all
+resulting orbit sizes and semilinear cycle counts.
+The same first-polar recursion makes redundancy seven the cheapest new case: its sextic polar line
+lies in C498 syndrome space.  Its exact entry gate is a pointed C498 lifting lemma and the
+classification of polar lines contained in the quadratic-gcd/nucleus loci.
 
 ## Execution ladder
 
@@ -347,17 +368,16 @@ Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` throug
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Arbitrary-dimension Reed--Solomon:** remains unallocated beyond the fixed next case.  C498
-  owns redundancy six behind its claim-specific literature audit; anything past r=6 still
-  requires its own audit and a proved higher-symmetric-power analogue; small-field or quartic
-  success alone supplies no bridge.
+- **Arbitrary-dimension Reed--Solomon:** the proved first-polar recursion now makes redundancy
+  seven a bounded next case, but it still needs its own claim-specific audit and pointed-lifting
+  theorem.  Anything past r=7 should wait for the redundancy-seven exceptional locus.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
 classification (the 2019-announced case), the first result past redundancy four and the first with
-arithmetic (q mod 3 / square-class) deep-hole families.  None of these is the general Reed--Solomon
-deep-hole conjecture, and arbitrary redundancy remains behind the pre-allocation gate: the
-identified entry lemma is split-member existence for nets of binary quartics (redundancy six).
+arithmetic (q mod 3 / square-class) deep-hole families.  C498 closes the redundancy-six all-field
+existence/orbit-count theorem and identifies the pointed C498 polar-line lemma as the
+redundancy-seven gate.  None of these is the general Reed--Solomon deep-hole conjecture.
 
 ## Boundaries
 
@@ -381,5 +401,6 @@ history.
 `go C498`
 
 (C498 is active.  Its audit, census calibration, exact symmetric-cube cone, nucleus line, both
-q=11 mechanisms, and C491 quotient-line re-foundation are complete; the exceptional-line
-Fano scheme and remaining small-field normal forms are next.  C500 remains release-gated.)
+q=11 mechanisms, C491 quotient-line re-foundation, and all-field existence/orbit counts are
+complete; intrinsic q=7/8/9/13 normal forms and final semilinear packaging are next.  C500 remains
+release-gated.)
