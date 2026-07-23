@@ -24,7 +24,9 @@ behind exact proved interfaces or cited inputs; they may not be inferred from or
 - Own only `lean/RelativeConicArcs/ClebschArithmeticGluingData.lean`,
   `lean/RelativeConicArcs/ClebschArithmeticGluing.lean`,
   `lean/RelativeConicArcs/Gates/ClebschArithmeticGluing.lean`, this report, and a same-stem
-  `.py/.json/.sha256` bundle only if a new normalized certificate is necessary.
+  `.py/.json/.sha256` bundle only if a new normalized certificate is necessary.  The same-stem
+  Python entry point may delegate to one enduring, workflow-free generator named by generated
+  scholarly source.
 - Consume the committed F5/F8 APIs and frozen upstream certificates read-only.
 - Exit through `RelativeConicArcs.Gates.ClebschArithmeticGluing`.
 
@@ -121,7 +123,8 @@ with Fermat inversion; no imported group-order assertion or order-to-name infere
 ## Frozen provenance and independent replay
 
 A normalized certificate was necessary for the `H3` leaves after direct kernel enumeration exceeded
-the measured memory envelope.  The same-stem Python generator emits schema
+the measured memory envelope.  The same-stem compatibility entry point delegates to the enduring
+tracked generator `notes/clebsch-arithmetic-gluing-lean-v1.py`, which emits schema
 `clebsch-arithmetic-gluing-lean-v1`, the canonical JSON, the generated certificate block in
 `ClebschArithmeticGluingData.lean`, and a three-entry SHA-256 manifest.  Its `--check` and
 `sha256sum -c` commands are green.  It schema-extracts and compares all load-bearing vertex,
@@ -213,11 +216,16 @@ The first user-authorized independent review blocked on five issues.  The post-r
    stabilizer/coset/word completeness solely at the exact generator/replay boundary;
 3. adds the second `H3` multiplier, all poles, exact orders, and square-determinant membership;
 4. schema-extracts and compares every load-bearing C441/C442/C444/C445/C449/C458 literal and
-   removes C460 from the formal input manifest; and
+   removes C460 from the formal input manifest, including direct extraction of C445's golden
+   transporter matrix; and
 5. re-exports the F5 stabilizer interface, retains the F8 equality interface, and explicitly
    excludes their concrete identification with the bounded finite actions.
 
-Post-fix review is pending on the exact replacement commit.
+The second review found that the golden transporter was still hard-coded rather than extracted and
+that the generated banner named only a schema.  The subsequent repair extracts C445's
+`outer_transporter.matrix_mod_11` and moves the generator implementation to the enduring path
+named above; the workflow-scoped same-stem script remains only a compatibility entry point.
+Final post-fix review is pending on the exact replacement commit.
 
 ## Proposed C320 ledger delta
 
