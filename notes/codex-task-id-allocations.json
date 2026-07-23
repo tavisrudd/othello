@@ -611,8 +611,17 @@
       "last": 514,
       "purpose": "modular full-length one-twist translation-quotient determinant theorem",
       "sequence": 68
+    },
+    {
+      "count": 1,
+      "first": 515,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 515,
+      "purpose": "modular TRS additive Hasse-difference recursion gate",
+      "sequence": 69
     }
   ],
-  "next_id": 515,
+  "next_id": 516,
   "schema": "codex-task-id-allocations-v1"
 }
