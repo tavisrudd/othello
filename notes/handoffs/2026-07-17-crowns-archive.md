@@ -318,3 +318,14 @@ upgrades that pointwise failure to aggregate cospectrality. The result is separa
 rank-three higher-degree Veronese failure. The alternative `|mu_A(X)|` spectra distinguish this
 pair, so that variant remains open. Full report and replay:
 `notes/2026-07-23-c431-rank-four-weighted-adjoint-falsifier.md`.
+
+## C433 — modular depth/Fourier exact sequence (2026-07-23)
+
+C378's integral odd Fourier block is `11A`; modulo 11, `A` is rank two and square-zero with equal
+image and kernel. C411's weighted profile map on the `1,4,6` orbit-sum slice has kernel
+`[1,1,1]`, exactly C412/C430's outer-odd projective-cover socle. Its image is transverse to the
+Fourier radical, so it canonically splits the four-dimensional odd block and identifies its
+two-dimensional quotient with the radical. The resulting contracting homotopy satisfies
+`h²=0`, `Fh+hF=I`. The `A5` degree-5/6 Mackey interface is semisimple in characteristic 11, so
+the extension is ambient to `PSL_2(11)`, not an incidence-augmentation degeneration. Full report:
+`notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`.

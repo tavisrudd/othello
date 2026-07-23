@@ -1,0 +1,253 @@
+{
+  "a5_restriction_boundary": {
+    "characteristic_divides_component_degree": [
+      false,
+      false
+    ],
+    "characteristic_divides_group_order": false,
+    "component_degrees": [
+      5,
+      6
+    ],
+    "conclusion": "semisimple Mackey interface; the socle extension is ambient PSL2(11), not A5 incidence degeneration",
+    "group_order": 60
+  },
+  "canonical_placement": {
+    "Fbar_h_plus_h_Fbar_is_identity": true,
+    "Fbar_restricts_to_isomorphism_P_depth_to_L_F": true,
+    "O_odd_equals_P_depth_direct_sum_L_F": true,
+    "contracting_homotopy_mod_11": [
+      [
+        3,
+        5,
+        5,
+        9
+      ],
+      [
+        8,
+        10,
+        2,
+        9
+      ],
+      [
+        0,
+        3,
+        8,
+        8
+      ],
+      [
+        8,
+        7,
+        5,
+        1
+      ]
+    ],
+    "contracting_homotopy_square_is_zero": true,
+    "literal_sequence_D_then_Fbar_is_not_exact_at_O_odd": true
+  },
+  "depth_image_basis": [
+    [
+      5,
+      0,
+      1,
+      10
+    ],
+    [
+      10,
+      1,
+      0,
+      1
+    ]
+  ],
+  "depth_image_intersection_fourier_kernel_dimension": 0,
+  "depth_image_plus_fourier_kernel_rank": 4,
+  "depth_kernel_basis": [
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "depth_rank": 2,
+  "divided_fourier_mod_11": [
+    [
+      10,
+      0,
+      4,
+      9
+    ],
+    [
+      0,
+      10,
+      2,
+      4
+    ],
+    [
+      2,
+      1,
+      1,
+      0
+    ],
+    [
+      10,
+      2,
+      0,
+      1
+    ]
+  ],
+  "divided_fourier_rank": 2,
+  "divided_fourier_square_is_zero": true,
+  "exact_sequences": [
+    "0 -> <(1,1,1)> -> U_odd ->^D P_depth -> 0",
+    "0 -> <(1,1,1)> -> U_odd ->^(Fbar D) L_F -> 0",
+    "0 -> L_F -> O_odd ->^Fbar L_F -> 0"
+  ],
+  "field": 11,
+  "fourier_after_depth_kernel_basis": [
+    [
+      1,
+      1,
+      1
+    ]
+  ],
+  "fourier_after_depth_matrix": [
+    [
+      1,
+      10,
+      0
+    ],
+    [
+      9,
+      3,
+      10
+    ],
+    [
+      0,
+      10,
+      1
+    ],
+    [
+      5,
+      4,
+      2
+    ]
+  ],
+  "fourier_after_depth_rank": 2,
+  "fourier_image_basis": [
+    [
+      10,
+      0,
+      2,
+      10
+    ],
+    [
+      0,
+      10,
+      1,
+      2
+    ]
+  ],
+  "fourier_image_equals_kernel": true,
+  "fourier_kernel_basis": [
+    [
+      4,
+      2,
+      1,
+      0
+    ],
+    [
+      9,
+      4,
+      0,
+      1
+    ]
+  ],
+  "inputs": {
+    "c378": {
+      "bytes": 7431,
+      "file": "2026-07-19-c378-clebsch-common-duality.json",
+      "sha256": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc"
+    },
+    "c411": {
+      "bytes": 10552,
+      "file": "2026-07-20-c411-double-coset-hecke.json",
+      "sha256": "23f0a100356f0a369f00d81011e8d8d6b9d867b9de45a7b0625fc2889323b014"
+    },
+    "c412": {
+      "bytes": 81411,
+      "file": "2026-07-20-c412-relative-cubic-depth-plane.json",
+      "sha256": "01aaf1169e7747724c51969a78234e9fe0a3c62061f557d19e9f7b5d7ce11c84"
+    },
+    "c430": {
+      "bytes": 4646,
+      "file": "2026-07-20-c430-conceptual-balanced-half-rigidity.json",
+      "sha256": "eebfd0525c94ac0bcb7965ab33b6d11a698242e608d9d1a40cebaa0a2b451098"
+    }
+  },
+  "oriented_relation_pairs": [
+    [
+      1,
+      10
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      6,
+      14
+    ],
+    [
+      9,
+      11
+    ]
+  ],
+  "positive_orbit_sizes": [
+    1,
+    4,
+    6
+  ],
+  "positive_profiles_integral": [
+    [
+      -6,
+      0,
+      12,
+      -12
+    ],
+    [
+      -3,
+      3,
+      0,
+      3
+    ],
+    [
+      3,
+      -2,
+      -2,
+      0
+    ]
+  ],
+  "schema": "c433-modular-depth-fourier-exact-sequence-v1",
+  "weighted_depth_matrix_mod_11": [
+    [
+      5,
+      10,
+      7
+    ],
+    [
+      0,
+      1,
+      10
+    ],
+    [
+      1,
+      0,
+      10
+    ],
+    [
+      10,
+      1,
+      0
+    ]
+  ]
+}

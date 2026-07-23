@@ -343,15 +343,18 @@ promotion of any lead goes through the normal C-ID process.
    orthogonal rank-four fusion, two rank-six fusions exchanged by Fourier duality.  q=29+
    remains open because the first cover layer is still exponentially large.  See
    `notes/2026-07-23-c432-fusion-closure-classification.md`.
-5. **Modular (mod 11) identification of the depth map.** Second-order observation from C411:
+5. **Modular (mod 11) identification of the depth map — COMPLETE (C433).** Second-order observation from C411:
    `PGL_2(11)` has cyclic Sylow-11, so its mod-11 category is Brauer-tree-controlled, and the
    22-dimensional permutation module `F_11[G/A5]`, the four-dimensional odd Fourier block, and
    the rank-two profile plane with dimension-four kernel all live where decomposition data are
    completely known.  C412 identifies each sheet as `P(1)` with Loewy series `1|9|1` and the depth
    kernel as its `[1,1,1]` socle; C430 now proves that the outer-odd combination of the two sheet
-   socles is exactly the unique degree-two trade line.  C433's remaining positive target is the
-   canonical placement of the odd Fourier block and profile map relative to this fixed socle seam,
-   not another decomposition or rank-drop computation.  PARTLY SOLVED; bounded canonical-map gate.
+   socles is exactly the unique degree-two trade line.  C433 divides C378's integral odd Fourier
+   block by 11 and reduces mod 11, producing a rank-two square-zero operator with image equal to
+   kernel.  C411's weighted profile map has kernel exactly the fixed `[1,1,1]` socle and image
+   transverse to the Fourier radical, so the profile plane canonically splits and contracts the
+   odd Fourier self-extension: `h²=0`, `Fh+hF=I`.  See
+   `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`.
    **C492 hand-back (2026-07-23).**  Keep the ambient and subgroup mechanisms separate.  For
    C492's H3 restriction `H=A5`, the opposite-component permutation degrees are `5,6`; over
    `F_11`, Maschke applies because `11∤|A5|=60`, so both permutation modules split and the unique

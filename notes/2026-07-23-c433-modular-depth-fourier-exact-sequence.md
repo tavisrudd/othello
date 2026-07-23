@@ -1,0 +1,181 @@
+# C433 — modular depth/Fourier exact sequence
+
+**Lane:** `crowns`
+
+**Date:** 2026-07-23
+
+**Verdict:** `POSITIVE CANONICAL PLACEMENT; DEPTH PLANE SPLITS THE DIVIDED-FOURIER SELF-EXTENSION`
+
+## Result
+
+Let `O_Z` be the integral four-dimensional odd relation lattice in C378, in the oriented-pair
+basis
+
+```text
+(1,10), (3,13), (6,14), (9,11).
+```
+
+C378's odd Fourier matrix is divisible by `11`.  Write `M_odd=11A` and reduce `A` modulo `11`.
+Then
+
+```text
+        [10  0  4  9]
+Fbar =  [ 0 10  2  4]
+        [ 2  1  1  0]
+        [10  2  0  1].
+```
+
+The integral identity `M_odd^2=11^3 I` becomes
+
+```text
+Fbar^2=0,   rank(Fbar)=2,   im(Fbar)=ker(Fbar)=:L_F.
+```
+
+Thus the modular odd Fourier block is the square-zero self-extension
+
+```text
+0 -> L_F -> O_odd --Fbar-> L_F -> 0.                 (1)
+```
+
+Now let `U_odd` be the outer-odd part of the `K=A4` fixed slice of the two 11-point sheets.  In
+the positive-orbit-sum basis of sizes `1,4,6`, C411's depth map has columns `n_i v_i`, hence matrix
+
+```text
+    [ 5 10  7]
+D = [ 0  1 10]
+    [ 1  0 10]
+    [10  1  0]                                      over F_11.
+```
+
+It has rank two and kernel
+
+```text
+s=<[1,1,1]>,
+```
+
+exactly C412's depth socle and C430's outer-odd projective-cover socle.  Put
+`P_depth=im(D)`.  The decisive comparison is
+
+```text
+P_depth intersect L_F = 0,       O_odd=P_depth direct_sum L_F.       (2)
+```
+
+Therefore `Fbar|P_depth:P_depth -> L_F` is an isomorphism.  C411's geometric profile map does not
+land in the Fourier radical; it canonically selects a complement to it.  Equivalently, the two
+exact quotient rows through the fixed socle are
+
+```text
+0 -> s -> U_odd --D--------> P_depth -> 0,
+0 -> s -> U_odd --Fbar D---> L_F     -> 0,             (3)
+```
+
+and `Fbar` is the isomorphism between their two-dimensional quotients.
+
+This is the requested canonical placement.  It also states the sharp correction: the literal
+chain `U_odd --D-> O_odd --Fbar-> O_odd` is **not** a complex, since
+`im(D)=P_depth` is transverse to, rather than equal to, `ker(Fbar)=L_F`.
+
+## Proof
+
+The divisibility of `M_odd` and the identity `M_odd^2=1331I` are integral C378 data.  Dividing by
+11 gives `A^2=11I`; reduction gives `Fbar^2=0`.  Row reduction gives rank two, so
+`im(Fbar) subseteq ker(Fbar)` is an equality of two-dimensional spaces, proving (1).
+
+C411's three positive profiles in orbit-size order are
+
+```text
+v1=(-6,0,12,-12),  v4=(-3,3,0,3),  v6=(3,-2,-2,0).
+```
+
+The map from orbit sums uses the weighted columns `v1,4v4,6v6`.  Their exact integral relation
+`v1+4v4+6v6=0` gives the socle vector `[1,1,1]`; rank two makes it the complete kernel.  C412
+identifies this line with `soc(P(1))` on the `A4`-fixed slice, and C430 identifies its outer-odd
+lift with the sheet-sign radical line.
+
+Finally, concatenating bases of `P_depth` and `L_F` has rank four.  This proves (2), after which
+the restriction of `Fbar` to `P_depth` is injective between two-dimensional spaces and has image
+`L_F`.  Both rows in (3) follow.
+
+## `ej` closeout: canonical contraction
+
+The direct-sum placement gives more than two short exact sequences.  There is a unique map `h`
+that kills `P_depth` and inverts `Fbar:P_depth -> L_F` on `L_F`.  In the frozen oriented-pair
+basis it is
+
+```text
+    [3  5  5  9]
+h = [8 10  2  9]
+    [0  3  8  8]
+    [8  7  5  1].
+```
+
+Exact arithmetic verifies
+
+```text
+h^2=0,             Fbar h + h Fbar = I_4.
+```
+
+So the C411 depth plane is precisely a geometrically selected contracting complement for the
+modular odd Fourier complex.  This is the strongest free upgrade exposed by the closeout pass:
+the profile map does not merely share a two-dimensional quotient with Fourier; it canonically
+contracts Fourier's square-zero self-extension.
+
+## Ambient-group and `A5` boundary
+
+The socle extension is an ambient defining-characteristic `PSL_2(11)` phenomenon.  On restriction
+to C492's `A5` Mackey interface, `11` divides neither `|A5|=60` nor the component degrees `5,6`.
+Maschke applies, both permutation modules split, and the field-independent cross-Hom remains the
+rank-one map `eta_j epsilon_i`, which kills augmentation.  Thus the ambient extension restricts
+semisimply and cannot be reinterpreted as a nonsplit degree-5/6 `A5` augmentation degeneration.
+This compatibility statement concerns the ambient carrier; the displayed three-dimensional
+`U_odd` is its exact `A4`-fixed slice.
+
+## Stop and claim boundary
+
+C433 closes positively at the canonical-map gate.  The odd Fourier block, profile map, and fixed
+socle are placed by (1)--(3), with the stronger contraction identity above.  No new decomposition
+table, fitted correlation, or rank-drop search is needed.
+
+The theorem is for the frozen H3/characteristic-11 carrier and its integral odd relation lattice.
+It does not assert an all-prime Fourier normalization or a general theorem that every Mackey depth
+plane splits a modular Fourier complex.  No novelty or priority claim is made, so no literature
+absence audit is invoked.
+
+## Mystery ledger
+
+- **Settled by `ej`:** why the two rank-two objects interact nontrivially.  They are transverse,
+  and the depth plane supplies the canonical contracting complement `h`.
+- **Still conceptually unexplained:** the exact frozen matrices prove transversality, but the
+  C492 Mackey row-sum theorem alone does not force it.  A general representation-theoretic
+  criterion for when a depth plane contracts a divided-Fourier complex is absent.  This is not
+  allocated: without a new canonical input it falls under C433's stop rule against further
+  decomposition/rank-drop work.
+
+## Reproducibility
+
+Run from `/home/tavis/src/othello` with Python 3.13:
+
+```bash
+python3 notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.py --check
+python3 notes/2026-07-23-c433-modular-depth-fourier-exact-sequence-replay.py
+sha256sum -c notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.sha256
+```
+
+The primary checker consumes the committed C378, C411, C412, and C430 JSON certificates; their
+filenames, byte counts, and SHA-256 hashes are embedded in the output.  It verifies the divided
+Fourier identity, ranks, images, kernels, transversality, both socle-kernel statements, and the
+contracting homotopy.
+
+The independent replay does not reuse the primary row-reduction implementation.  It directly
+enumerates all `11^3` domain vectors and `11^4` odd-coordinate vectors, compares the resulting
+images and kernels as sets, and checks the homotopy identities pointwise.
+
+| artifact | bytes | SHA-256 |
+|:---|---:|:---|
+| primary checker | 8,200 | `a1bf5273c431db839a5d366052fd20c6d6b5a48f5b021240a4e8fd5e3530e6eb` |
+| independent replay | 2,288 | `d117bd56879c30db127d60ce5271097db6bc83826bae55a9d80b1489d9ec8d8c` |
+| canonical JSON | 3,791 | `827ed56ecddb9c17cda34942f208f28ff2a636d92aa187d827ba376bbaceb3c4` |
+
+The trusted boundary is exact integer/`F_11` arithmetic plus the four committed input
+certificates.  The proof above explains why the checked matrix identities imply the exact
+sequences; it does not independently reconstruct the conic geometry or the rank-16 scheme.
