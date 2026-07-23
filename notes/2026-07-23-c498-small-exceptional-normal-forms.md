@@ -70,6 +70,25 @@ E_f=\#\left\{\{h_1,h_2\}\subset X_{1+3}(W_f):
 This is a polar-free definition internal to the quartic net.  The
 parameterized first-polar line explains the invariant, but is not needed to
 compute it.
+
+### All-field zero-energy nucleus criterion
+
+Among all trivial-gcd C498 deep syndromes over prime powers \(q\ge7\),
+\[
+E_f=0
+\quad\Longleftrightarrow\quad
+q=2^m\text{ with }m\text{ odd and }f\in\mathcal N_3(\mathbf F_q).
+\]
+For the nucleus normal form \(W=\langle1,t,t^4\rangle\), translate a marked
+root \(r\) to zero.  In characteristic two the residual cubic is
+\(Cu^3+B\).  When \(m\) is odd the cube map on \(\mathbf F_q^\times\) is
+bijective, so this cubic is never irreducible; hence every \(I_f(r)\), and
+therefore \(E_f\), vanishes.  Conversely, the all-field C498 inventory says
+that every non-nucleus trivial-gcd exception occurs in the five frozen
+small fields, and the direct net computation finds zero energy only for the
+q=8 nucleus representative 64.  The q=11 trinomial echo has energy 60, so
+the criterion separates the geometric modular family from its isolated
+odd-characteristic coordinate echo.
 This realizes the C498 re-foundation intrinsically: the small exceptions
 are classified by the coherently parameterized first-polar line inside the
 C491 syndrome space, rather than by coordinate labels alone.
@@ -161,6 +180,12 @@ answer.  Direct enumeration inside \(W_f\) proves that \(E_f\) is exactly the
 pair-gcd incidence count on \(X_{1+3}(W_f)\).  Thus the classifier is a
 factor-coloured association statistic of the net itself; polar recursion is
 its proof mechanism, not part of its input format.
+
+The fifth-order pass makes the energy structural rather than merely
+classifying: zero energy is exactly the recurring characteristic-two
+\(3\)-nucleus orbit throughout the all-field deep set.  In particular it
+distinguishes the genuine modular family from the q=11 trinomial echo of the
+same coordinate normal form.
 
 No genuine C498 classification mystery remains.  The all-field split-member theorem,
 persistent fifth-power orbit law, modular nucleus recurrence, and bounded

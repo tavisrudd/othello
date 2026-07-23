@@ -2424,5 +2424,11 @@
     "census_sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3",
     "replay": "2026-07-22-c498-prs-deep-hole-replay.py",
     "replay_sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
-  }
+  },
+  "zero_energy_small_exceptional_orbits": [
+    {
+      "pgl2_rep_index": 64,
+      "q": 8
+    }
+  ]
 }

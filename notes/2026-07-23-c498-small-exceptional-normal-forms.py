@@ -523,6 +523,14 @@ def build_certificate():
             "unordered_pairs_of_1_plus_3_members_with_the_same_rational_root",
         "energy_plus_odd_root_type_classifies_pgammal2": True,
     }
+    zero_energy_orbits = [
+        {"q": F.q, "pgl2_rep_index": record["rep_index"]}
+        for F, records, _ in classification_instances
+        for record in records
+        if collision_energy(record["polar_profile"]) == 0
+    ]
+    assert zero_energy_orbits == [{"q": 8, "pgl2_rep_index": 64}]
+    certificate["zero_energy_small_exceptional_orbits"] = zero_energy_orbits
     return certificate
 
 
