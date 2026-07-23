@@ -1,0 +1,675 @@
+{
+ "claims": {
+  "equianharmonic_persistence": {
+   "data": [
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": false,
+     "nondeep_split": 0,
+     "q": 23,
+     "q_mod_3": 2
+    },
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": true,
+     "nondeep_split": 8,
+     "q": 25,
+     "q_mod_3": 1
+    },
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": false,
+     "nondeep_split": 0,
+     "q": 29,
+     "q_mod_3": 2
+    },
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": true,
+     "nondeep_split": 10,
+     "q": 31,
+     "q_mod_3": 1
+    },
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": true,
+     "nondeep_split": 12,
+     "q": 37,
+     "q_mod_3": 1
+    },
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": true,
+     "nondeep_split": 14,
+     "q": 43,
+     "q_mod_3": 1
+    },
+    {
+     "deep": 0,
+     "equianharmonic_reps_found": true,
+     "nondeep_split": 16,
+     "q": 49,
+     "q_mod_3": 1
+    }
+   ],
+   "scan_family": "f=(0,1,0,0,c), c in F_q",
+   "statement": "the equianharmonic degree-3-cover configuration exists as a PGL2-orbit for every q=1 mod 3, but for q>=25 every such point carries totally-split members (n_111>0) and is NOT a deep hole; it is deep only at q in {7,13,19}. Sporadic deepness is therefore a bounded-q accident, not a new all-q family.",
+   "verdict": "CONFIRMED"
+  },
+  "q8_frobenius_torsor": {
+   "a4_frobenius_orbit": [
+    2,
+    4,
+    6
+   ],
+   "a4_labels": [
+    2,
+    4,
+    6
+   ],
+   "orbit_rep_indices_cycle": [
+    578,
+    580,
+    582
+   ],
+   "statement": "the three q=8 size-252 sporadic orbits form one free Gal(F_8/F_2)=C3 Frobenius torsor: coordinatewise Frobenius 3-cycles them (they fuse to one PGammaL2 orbit) and their a4 labels are a single Galois orbit {t,t^2,t^4}.",
+   "verdict": "CONFIRMED"
+  },
+  "stab12_equianharmonic_A4": {
+   "orbits": [
+    {
+     "cross_ratio": 5,
+     "q": 7,
+     "quartic_I": 0,
+     "size": 28,
+     "stab_group": "A4"
+    },
+    {
+     "cross_ratio": 10,
+     "q": 13,
+     "quartic_I": 0,
+     "size": 182,
+     "stab_group": "A4"
+    },
+    {
+     "cross_ratio": 12,
+     "q": 19,
+     "quartic_I": 0,
+     "size": 570,
+     "stab_group": "A4"
+    }
+   ],
+   "statement": "the stab-12 sporadic orbits at q in {7,13,19} are exactly the equianharmonic (j=0, I(Delta)=0) degree-3-cover pencils; stabilizer A4; member profile constant 4 double-root + 4 irreducible.",
+   "verdict": "CONFIRMED"
+  }
+ },
+ "fields": {
+  "11": [
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 10,
+    "equianharmonic": false,
+    "equianharmonic_via_I": false,
+    "frobenius_maps_to_rep_index": 14662,
+    "harmonic": true,
+    "harmonic_via_J": true,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 4,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "quartic_I": 5,
+    "quartic_J": 0,
+    "rep": [
+     1,
+     0,
+     0,
+     1,
+     10
+    ],
+    "rep_index": 14662,
+    "size": 330,
+    "stab_group": "V4",
+    "stab_order": 4,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 14653,
+    "member_stats": {
+     "1.2": 8,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "quartic_I": 8,
+    "quartic_J": 4,
+    "rep": [
+     1,
+     0,
+     0,
+     1,
+     1
+    ],
+    "rep_index": 14653,
+    "size": 660,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   }
+  ],
+  "13": [
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 10,
+    "equianharmonic": true,
+    "equianharmonic_via_I": true,
+    "frobenius_maps_to_rep_index": 2201,
+    "harmonic": false,
+    "harmonic_via_J": false,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 6,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "quartic_I": 0,
+    "quartic_J": 1,
+    "rep": [
+     0,
+     1,
+     0,
+     0,
+     4
+    ],
+    "rep_index": 2201,
+    "size": 182,
+    "stab_group": "A4",
+    "stab_order": 12,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3,
+     "3": 8
+    }
+   },
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 6,
+    "equianharmonic": false,
+    "equianharmonic_via_I": false,
+    "frobenius_maps_to_rep_index": 28620,
+    "harmonic": false,
+    "harmonic_via_J": false,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 6,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "quartic_I": 5,
+    "quartic_J": 4,
+    "rep": [
+     1,
+     0,
+     0,
+     4,
+     7
+    ],
+    "rep_index": 28620,
+    "size": 546,
+    "stab_group": "V4",
+    "stab_order": 4,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3
+    }
+   }
+  ],
+  "17": [
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 15,
+    "equianharmonic": false,
+    "equianharmonic_via_I": false,
+    "frobenius_maps_to_rep_index": 83543,
+    "harmonic": false,
+    "harmonic_via_J": false,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 10,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "quartic_I": 5,
+    "quartic_J": 1,
+    "rep": [
+     1,
+     0,
+     0,
+     1,
+     5
+    ],
+    "rep_index": 83543,
+    "size": 1224,
+    "stab_group": "V4",
+    "stab_order": 4,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3
+    }
+   }
+  ],
+  "19": [
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 12,
+    "equianharmonic": true,
+    "equianharmonic_via_I": true,
+    "frobenius_maps_to_rep_index": 6863,
+    "harmonic": false,
+    "harmonic_via_J": false,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 12,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "quartic_I": 0,
+    "quartic_J": 1,
+    "rep": [
+     0,
+     1,
+     0,
+     0,
+     4
+    ],
+    "rep_index": 6863,
+    "size": 570,
+    "stab_group": "A4",
+    "stab_order": 12,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3,
+     "3": 8
+    }
+   }
+  ],
+  "7": [
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 5,
+    "equianharmonic": true,
+    "equianharmonic_via_I": true,
+    "frobenius_maps_to_rep_index": 346,
+    "harmonic": false,
+    "harmonic_via_J": false,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 0,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "quartic_I": 0,
+    "quartic_J": 1,
+    "rep": [
+     0,
+     1,
+     0,
+     0,
+     3
+    ],
+    "rep_index": 346,
+    "size": 28,
+    "stab_group": "A4",
+    "stab_order": 12,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3,
+     "3": 8
+    }
+   },
+   {
+    "branch_type": "1+3(conjugate triple)",
+    "frobenius_maps_to_rep_index": 345,
+    "member_stats": {
+     "1.2": 6,
+     "111": 0,
+     "1^2.1": 1,
+     "1^3": 0,
+     "3": 1
+    },
+    "n_double_root": 1,
+    "n_irreducible": 1,
+    "quartic_I": 0,
+    "quartic_J": 4,
+    "rep": [
+     0,
+     1,
+     0,
+     0,
+     2
+    ],
+    "rep_index": 345,
+    "size": 112,
+    "stab_group": "C3",
+    "stab_order": 3,
+    "stab_order_multiset": {
+     "1": 1,
+     "3": 2
+    }
+   },
+   {
+    "branch_type": "2+1+1(one total-ram)",
+    "frobenius_maps_to_rep_index": 52,
+    "member_stats": {
+     "1.2": 3,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 1,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "quartic_I": 1,
+    "quartic_J": 5,
+    "rep": [
+     0,
+     0,
+     1,
+     0,
+     3
+    ],
+    "rep_index": 52,
+    "size": 168,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 366,
+    "member_stats": {
+     "1.2": 4,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "quartic_I": 1,
+    "quartic_J": 3,
+    "rep": [
+     0,
+     1,
+     0,
+     3,
+     2
+    ],
+    "rep_index": 366,
+    "size": 168,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 2416,
+    "member_stats": {
+     "1.2": 4,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "quartic_I": 3,
+    "quartic_J": 3,
+    "rep": [
+     1,
+     0,
+     0,
+     2,
+     1
+    ],
+    "rep_index": 2416,
+    "size": 168,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   }
+  ],
+  "8": [
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 580,
+    "member_stats": {
+     "1.2": 5,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "rep": [
+     0,
+     1,
+     1,
+     0,
+     2
+    ],
+    "rep_index": 578,
+    "size": 252,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 582,
+    "member_stats": {
+     "1.2": 5,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "rep": [
+     0,
+     1,
+     1,
+     0,
+     4
+    ],
+    "rep_index": 580,
+    "size": 252,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 578,
+    "member_stats": {
+     "1.2": 5,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "rep": [
+     0,
+     1,
+     1,
+     0,
+     6
+    ],
+    "rep_index": 582,
+    "size": 252,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   }
+  ],
+  "9": [
+   {
+    "branch_one_orbit": true,
+    "branch_type": "1+1+1+1",
+    "cross_ratio": 3,
+    "equianharmonic": false,
+    "frobenius_maps_to_rep_index": 6572,
+    "harmonic": false,
+    "irreducible_one_orbit": true,
+    "member_stats": {
+     "1.2": 2,
+     "111": 0,
+     "1^2.1": 4,
+     "1^3": 0,
+     "3": 4
+    },
+    "n_double_root": 4,
+    "n_irreducible": 4,
+    "rep": [
+     1,
+     0,
+     0,
+     1,
+     2
+    ],
+    "rep_index": 6572,
+    "size": 180,
+    "stab_group": "V4",
+    "stab_order": 4,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 3
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 769,
+    "member_stats": {
+     "1.2": 6,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "rep": [
+     0,
+     1,
+     0,
+     4,
+     1
+    ],
+    "rep_index": 766,
+    "size": 360,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   },
+   {
+    "branch_type": "1+1+2(conjugate pair)",
+    "frobenius_maps_to_rep_index": 766,
+    "member_stats": {
+     "1.2": 6,
+     "111": 0,
+     "1^2.1": 2,
+     "1^3": 0,
+     "3": 2
+    },
+    "n_double_root": 2,
+    "n_irreducible": 2,
+    "rep": [
+     0,
+     1,
+     0,
+     4,
+     4
+    ],
+    "rep_index": 769,
+    "size": 360,
+    "stab_group": "C2",
+    "stab_order": 2,
+    "stab_order_multiset": {
+     "1": 1,
+     "2": 1
+    }
+   }
+  ]
+ },
+ "reads": {
+  "census_json": "2026-07-22-c491-prs-deep-hole-census.json",
+  "census_py": "2026-07-22-c491-prs-deep-hole-census.py"
+ },
+ "schema": "c499-sporadic-pencil-structure-v1"
+}

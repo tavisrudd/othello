@@ -25,3 +25,19 @@ C476--C478 were reserved as three bounded successors: a five-field six-support p
 collision-only fibre theorem, and fixed exceptional-family controls. Generic all-field,
 semilinear-tower, higher-order-MDS, and modular/category extensions remain unallocated behind
 explicit gates.
+
+## 2026-07-22 — C499 sporadic pencil structure (closed)
+
+C499 gave the intrinsic structure of every C491 sporadic deep-hole orbit at q in {7,8,9,11,13,17,19}
+from the frozen census representatives (no regeneration). One invariant — the Frobenius orbit type of
+the degree-3-cover branch divisor Delta(lambda), refined by j-invariant — sorts all sporadics into
+five normal forms. The stab-12 orbits (q=7,13,19) are exactly the equianharmonic (j=0, I(Delta)=0)
+pencils with stabilizer A4 (order fingerprint {1:1,2:3,3:8}); the "4 double + 4 irreducible" profile
+is each a single stabilizer-orbit on the pencil line. The three q=8 size-252 orbits are one free
+Gal(F_8/F_2)=C3 torsor on the a4 cubic-twist label (Frobenius orbit {t,t^2,t^4}), a structural
+parallel to C484's colour C3=(0 4 1)(2 5 3) (same Galois group, free/lossy, not Gale/Hilbert-90).
+Verdict: uniform structure but sporadicity is a bounded-q accident — the equianharmonic orbit
+persists for every q=1 mod 3 (constructed at q=25,31,37,43,49) yet is deep only at q in {7,13,19};
+elsewhere it carries totally-split members. Report and evidence bundle:
+`../../2026-07-22-c499-sporadic-pencil-structure.md` (+ `.py`, `.json`, `.sha256`). Both C491
+discovery-track leads settled.

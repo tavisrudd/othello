@@ -87,3 +87,12 @@ Internal use as vocabulary remains free; external wording must cite and distingu
   the census shows none already for q = 16 and all 23 ≤ q ≤ 37; the true threshold is a bounded
   curve-theoretic question (sharpen the 4+24 discard constants and Aubry–Perret on the (2,2)
   fiber-square curve). Cheap if ever needed for a clean paper statement.
+
+## 2026-07-22 — C499 resolution of C491 sporadic leads
+
+The "stab-12 sporadic pattern" and "q=8 sporadic torsor" leads above were promoted to C499 and are
+settled in `2026-07-22-c499-sporadic-pencil-structure.md`: the stab-12 orbits are equianharmonic
+(j=0) A₄ pencils (redundancy-five analogue of O⁺/O⁻), the q=8 trio is one free Gal(F₈/F₂) torsor
+paralleling C484's colour C₃, and sporadicity is a bounded-q accident (the equianharmonic locus
+persists for all q≡1 mod3 but is deep only at q∈{7,13,19}). The "sporadic vanishing gap" lead
+remains open discovery-track material (C491 Lemma 7 already proved q≥23; no allocation).

@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491 complete; C498 (redundancy six, audit-gated), C499 (sporadic structure), and C500 (redundancy-five paper, release-gated) queued as follow-ups.  C478's coherence upgrade identifies each
+**Status:** C475--C491 and C499 complete; C498 (redundancy six, audit-gated) and C500 (redundancy-five paper, release-gated) queued as follow-ups.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -269,6 +269,21 @@ bundle: census generator/JSON, independent replay, and SHA-256 manifest, committ
 
 Task card: `notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.
 
+## Closed base — C499
+
+[`C499 sporadic pencil structure`](../2026-07-22-c499-sporadic-pencil-structure.md) gives the
+intrinsic structure of every C491 sporadic deep-hole orbit at q in {7,8,9,11,13,17,19}, reconstructed
+from the frozen census representatives (no regeneration).  One invariant classifies them all: the
+Frobenius orbit type of the degree-3-cover branch divisor Delta(lambda), refined by j-invariant, into
+five normal forms.  The stab-12 orbits (q=7,13,19) are exactly the equianharmonic (j=0, I(Delta)=0)
+pencils with stabilizer A4 -- the redundancy-five analogue of the O+/O- q-mod-3 dichotomy; their
+constant "4 double-root + 4 irreducible" profile is each a single stabilizer-orbit on the pencil
+line.  The three q=8 size-252 orbits are one free Gal(F_8/F_2)=C3 torsor on the a4 cubic-twist label,
+a structural parallel to C484's colour C3 (same Galois group, free and information-lossy, not
+Gale/Hilbert-90).  Verdict: uniform structure, but sporadic deepness is a bounded-q accident -- the
+equianharmonic orbit persists as a PGL2-orbit for every q=1 mod 3 (constructed at q=25,31,37,43,49)
+yet is deep only at q in {7,13,19}.  Both C491 discovery-track leads settled.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -325,8 +340,9 @@ history.
 
 ## Next command
 
-`go C499`
+`go reed-solomon`
 
-(C499 is gate-free and runs from the frozen census JSON.  C498 opens with its claim-specific
-literature audit; C500 waits on the usual release decisions.  The C491 report's NRC bridge
-ledger (§9) holds C498's exact entry lemma and census harness plan.)
+(C499 is complete.  Both remaining follow-ups are gated: C498 (redundancy six) opens with its
+claim-specific literature audit; C500 (redundancy-five paper) waits on the usual release decisions.
+Neither has a gate-free concrete ID, so route by lane.  The C491 report's NRC bridge ledger (§9)
+holds C498's exact entry lemma and census harness plan.)
