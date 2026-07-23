@@ -557,8 +557,17 @@
       "last": 508,
       "purpose": "q17 external C2 pairing and local-detector falsifier on the full marked Y0 census",
       "sequence": 62
+    },
+    {
+      "count": 1,
+      "first": 509,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 509,
+      "purpose": "redundancy-seven PRS deep holes via pointed C498 polar-line recursion",
+      "sequence": 63
     }
   ],
-  "next_id": 509,
+  "next_id": 510,
   "schema": "codex-task-id-allocations-v1"
 }
