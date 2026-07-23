@@ -260,10 +260,11 @@ degree-3 map: tangent and sigma-secant strata (the ZWK families) from pencil gcd
 intersection points deep exactly per q mod 3 (rational pair at q=2 mod 3, conjugate pair at
 q=1 mod 3); in characteristic 3 all osculating planes concur at a PGL₂-fixed nucleus deep hole and
 a wild Artin--Schreier family of size (q²−1)/2 with stabilizer 2q is deep on the nonsquare class;
-geometric-S₃ pencils have a split member for q>=41 via Aubry--Perret on the (2,2) fiber-square
-curve.  A two-implementation exhaustive census over all nineteen prime powers 7<=q<=49 certifies
-the theorem below the bound and the complete sporadic tables at q in {7,8,9,11,13,17,19} (empty
-otherwise).  Totals: q²(q+3)/2, q(q+1)(q+2)/2, and (q³+3q²+q+1)/2 in characteristic 3.  Evidence
+geometric-S₃ pencils have a split member for every prime power q>=23 via Aubry--Perret on the
+(2,2) fiber-square curve — a threshold that exactly matches the observed sporadic boundary.  A
+two-implementation exhaustive census over all nineteen prime powers 7<=q<=49 certifies every
+field below the bound (and double-certifies 23..49), giving the complete sporadic tables at
+q in {7,8,9,11,13,17,19} (empty otherwise, including q=16).  Totals: q²(q+3)/2, q(q+1)(q+2)/2, and (q³+3q²+q+1)/2 in characteristic 3.  Evidence
 bundle: census generator/JSON, independent replay, and SHA-256 manifest, committed together.
 
 Task card: `notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.

@@ -23,7 +23,9 @@ quartic normal rational curve C ⊂ PG(4,q).
    **no totally split squarefree member**. The classification becomes the arithmetic of a
    degree-3 rational map φ_f: P¹ → P¹.
 3. **Classification (Theorem 8).** For every prime power q ≥ 23 — proved by the fiber-square
-   Weil argument for q ≥ 41 and by exhaustive census for 23 ≤ q ≤ 49 — and also for q = 16, the
+   Weil argument (Lemma 7, threshold exactly q ≥ 23), with 23 ≤ q ≤ 49 independently
+   double-certified by exhaustive census — and also for q = 16 (census; below the provable
+   threshold), the
    deep holes of PRS(q−4) are exactly:
    - **T (tangent):** the q²+q points on tangent lines of C off C (= Zhang–Wan–Kaipa I.4+I.5);
    - **S (σ-secant):** the q(q+1)(q−1)/2 rational points of secant lines joining conjugate pairs
@@ -37,8 +39,9 @@ quartic normal rational curve C ⊂ PG(4,q).
      orbit of size (q²−1)/2 with stabilizer of order 2q, represented by n − a·ν(∞) with −a a
      nonsquare — an Artin–Schreier family with no tame analogue.
    For q ∈ {7, 8, 9, 11, 13, 17, 19} there are in addition finitely many **sporadic orbits**
-   (exhaustively listed below); for no other q ≤ 49 do sporadics exist, and for q ≥ 41 they are
-   impossible. Total deep-hole class counts (adding sporadics at the seven listed fields):
+   (exhaustively listed below); they are impossible for q ≥ 23 (Lemma 7) and absent at q = 16
+   (census), so the sporadic list is complete for every prime power — the classification is
+   closed for all q ≥ 7 with no census dependence above 19. Total deep-hole class counts (adding sporadics at the seven listed fields):
 
    | q | closed form | e.g. |
    |---|---|---|
@@ -57,8 +60,9 @@ quartic normal rational curve C ⊂ PG(4,q).
    give T/S; geometrically cyclic φ_f are deep exactly when the order-3 deck transformations are
    Frobenius-twisted (tame: Kummer/Rédei-torus twist = the q mod 3 conditions; wild char 3:
    irrational Artin–Schreier kernel = the square-class condition); geometric-monodromy-S₃ maps
-   always have a split member for q ≥ 41 because the fiber-square curve Y_f (bidegree (2,2),
-   arithmetic genus 1, absolutely irreducible) has too many rational points not to produce one.
+   always have a split member for q ≥ 23 because the fiber-square curve Y_f (bidegree (2,2),
+   arithmetic genus 1, absolutely irreducible) has too many rational points not to produce one;
+   the proved threshold coincides exactly with the observed sporadic boundary.
 
 ## 1. Conventions
 
@@ -200,29 +204,32 @@ witness for q ≥ 8 [q = 7: census].
       nonsquare parameter class). [Census: 40 at q=9, 364 at q=27, single orbits.]
 (3) If φ is separable and not geometrically cyclic its geometric monodromy is S₃. ∎
 
-**Lemma 7 (S₃ stratum, empty for q ≥ 41).** If φ_f is separable with geometric monodromy S₃,
-then L(f) has a split squarefree member.
+**Lemma 7 (S₃ stratum, empty for q ≥ 23).** If φ_f is separable with geometric monodromy S₃
+and q ≥ 23, then L(f) has a split squarefree member.
 
 *Proof.* Y_f is absolutely irreducible: components over F̄_q correspond to orbits of the
 geometric monodromy on ordered pairs of distinct roots, and S₃ is transitive on them. Its
 arithmetic genus is 1, so geometric genus g ≤ 1 and Aubry–Perret give
-#Y(F_q) ≥ q+1 − 2g√q − (p_a − g) ≥ q − 2√q. Discard ≤ 4 diagonal points (Y·Δ = 4; Δ ⊄ Y by
-separability) and ≤ 24 points over branch values (the different of φ has degree 4 between
-genus-0 curves in every characteristic, so ≤ 4 branch values, each under ≤ 6 ordered pairs).
-Since q − 2√q > 28 for q ≥ 41, a witnessing pair survives. ∎
+#Y(F_q) ≥ q+1 − 2g√q − (p_a − g) ≥ q − 2√q. Discard the bad rational points: diagonal ones
+(Y·Δ = 4 as a divisor and Δ ⊄ Y by separability: ≤ 4), and off-diagonal ones over branch values
+of φ (the different of φ has degree 4 between genus-0 curves in every characteristic, so ≤ 4
+branch values; a non-squarefree cubic has at most two distinct roots, hence at most 2 ordered
+pairs of distinct roots: ≤ 8 in all). Every surviving rational point exhibits two distinct
+rational roots of a squarefree member, whose third root is then rational: a split member. And
+q − 2√q > 12 holds for every prime power q ≥ 23 (at q = 23: 23 − 2√23 = 13.41…). The threshold
+is sharp against the data: sporadic S₃-stratum deep holes exist at q = 19, none at any q ≥ 23. ∎
 
 **Theorem 8 (classification).** For every prime power q with q = 16 or q ≥ 23, the deep holes of
 PRS(q−4) are exactly T ∪ S ∪ [O⁺ if q ≡ 2 mod 3] ∪ [O⁻ if q ≡ 1 mod 3] ∪ [{n} ∪ W if char 3],
 pairwise disjoint, with totals q²(q+3)/2, q(q+1)(q+2)/2, (q³+3q²+q+1)/2 as tabulated in the
 Summary. For q ∈ {7,8,9,11,13,17,19} the deep holes are these families together with the
-sporadic orbits of §5 (exhaustively certified); no other deep holes exist at any q ≤ 49, and
-none beyond the families for q ≥ 41.
+sporadic orbits of §5 (exhaustively certified); no other deep holes exist at any q.
 
 *Proof.* Lemmas 3–7 partition the points off C by gcd degree and, at gcd 0, by the
-inseparable/cyclic/S₃ trichotomy; each stratum's verdict is proved above for q ≥ 41 (Lemma 7)
+inseparable/cyclic/S₃ trichotomy; each stratum's verdict is proved above for q ≥ 23 (Lemma 7)
 and q ≥ 8 (Lemmas 5, 6(1)), and the census (§8) decides every point of PG(4,q) exhaustively for
-all 19 prime powers 7 ≤ q ≤ 49, in particular all q ≤ 37 not covered by Lemma 7 — with two
-independent implementations agreeing on every field. Disjointness: the families have distinct
+all 19 prime powers 7 ≤ q ≤ 49 — covering every q ≤ 19 below Lemma 7's threshold and
+double-certifying 23 ≤ q ≤ 49 — with two independent implementations agreeing on every field. Disjointness: the families have distinct
 pencil signatures (gcd type; cube-member configuration). Counts: T, S from [ZWK]; O± are single
 orbits (PGL₂ is transitive on rational and on conjugate point-pairs, and the intersection point
 is unique); nucleus and W from Lemma 6(2b,c). ∎
@@ -272,8 +279,8 @@ Given f ∈ P⁴(F_q):
    - gcd 1: locate cube members over F_{q²}:
      two cube points ⟹ **O⁺/O⁻** by pair rationality, deep by q mod 3 (char ≠ 3);
      char 3: pencil ⟨T³,U³⟩ ⟹ nucleus (deep); one cube point with translation normal form
-     α = 0 ⟹ **W**, deep ⟺ −a nonsquare; otherwise S₃ ⟹ not deep for q ≥ 41 / q = 16 /
-     23 ≤ q ≤ 49; for q ∈ {7,…,19} compare against the certified sporadic orbit list (orbit
+     α = 0 ⟹ **W**, deep ⟺ −a nonsquare; otherwise S₃ ⟹ not deep for q ≥ 23 (Lemma 7) or
+     q = 16 (census); for q ∈ {7,…,19} compare against the certified sporadic orbit list (orbit
      membership via canonical minimal-index representative under the group generators).
 3. Char ≥ 5 labels: J(f) = 0 cuts the secant variety (S ∪ secants ∪ C), I = J = 0 the tangent
    developable (T ∪ C), Δ = I³ − J² = 0 ⊇ O± [KPP §3, Lem. 5.3]; deep holes with Δ ≠ 0 exist
@@ -367,11 +374,11 @@ Settled during the ej closeout:
 - *"Factor type" anomalies in the orbit labels (e.g. O⁻ showing split types):* the coordinate
   quartic is not Sym⁴-covariant in char 2/3, and in odd char differs from the intrinsic quartic
   by binomial rescaling; labels via the pencil are used instead.
+- *Sporadic vanishing threshold:* settled in the second ej pass — the branch-value discard is
+  ≤ 8, not ≤ 24 (a non-squarefree cubic carries at most 2 ordered pairs of distinct roots), so
+  Lemma 7 holds for all prime powers q ≥ 23, exactly the observed boundary; q = 16's emptiness
+  (below the threshold) remains a census fact.
 Open, with owners/gates:
-- **Sporadic vanishing threshold:** Lemma 7 proves emptiness for q ≥ 41, but sporadics already
-  vanish at q = 16 and all 23 ≤ q ≤ 37. The gap is the slack in the (4 + 24)-point bookkeeping
-  and in Aubry–Perret; sharpening to the true threshold (23? 21?) is a bounded, purely
-  curve-theoretic question — unallocated, no current consumer.
 - **Structure of sporadics:** the stab-12 sporadic orbits at q = 7, 13, 19 (exactly the sporadic
   prime fields ≡ 1 mod 3) have pencils with no linear×irreducible members; a uniform
   description (plausibly equianharmonic/j = 0 pencils with arithmetically degenerate S₃ image)
