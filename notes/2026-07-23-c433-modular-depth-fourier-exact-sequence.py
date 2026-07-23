@@ -105,6 +105,20 @@ def canonical_lines(vectors: list[list[int]]) -> list[list[int]]:
     return sorted(normalized)
 
 
+def commutant_equations(operators: list[list[list[int]]]) -> list[list[int]]:
+    equations = []
+    n = len(operators[0])
+    for operator in operators:
+        for i in range(n):
+            for j in range(n):
+                row = [0] * (n * n)
+                for k in range(n):
+                    row[i * n + k] = (row[i * n + k] + operator[k][j]) % P
+                    row[k * n + j] = (row[k * n + j] - operator[i][k]) % P
+                equations.append(row)
+    return equations
+
+
 def generate() -> dict:
     data = {name: json.loads(path.read_text()) for name, path in INPUTS.items()}
     assert data["c378"]["field"] == P
@@ -159,6 +173,35 @@ def generate() -> dict:
         [(x + y) % P for x, y in zip(left, right)]
         for left, right in zip(matmul(divided, homotopy), matmul(homotopy, divided))
     ] == identity
+    depth_projector = matmul(homotopy, divided)
+    radical_projector = matmul(divided, homotopy)
+    grading = [
+        [(x - y) % P for x, y in zip(left, right)]
+        for left, right in zip(depth_projector, radical_projector)
+    ]
+    zero = [[0] * 4 for _ in range(4)]
+    assert matmul(depth_projector, depth_projector) == depth_projector
+    assert matmul(radical_projector, radical_projector) == radical_projector
+    assert matmul(depth_projector, radical_projector) == zero
+    assert matmul(radical_projector, depth_projector) == zero
+    assert rank(depth_projector) == rank(radical_projector) == 2
+    assert rank([[x for row in matrix for x in row] for matrix in
+                 [depth_projector, homotopy, divided, radical_projector]]) == 4
+    assert matmul(grading, grading) == identity
+    assert [
+        [(x + y) % P for x, y in zip(left, right)]
+        for left, right in zip(matmul(grading, divided), matmul(divided, grading))
+    ] == zero
+    assert [
+        [(x + y) % P for x, y in zip(left, right)]
+        for left, right in zip(matmul(grading, homotopy), matmul(homotopy, grading))
+    ] == zero
+    commutant_kernel = nullspace(commutant_equations([divided, homotopy]))
+    assert len(commutant_kernel) == 4
+    commutant_basis = [
+        [vector[4 * i:4 * i + 4] for i in range(4)]
+        for vector in commutant_kernel
+    ]
 
     return {
         "schema": "c433-modular-depth-fourier-exact-sequence-v1",
@@ -197,6 +240,15 @@ def generate() -> dict:
             "contracting_homotopy_mod_11": homotopy,
             "contracting_homotopy_square_is_zero": True,
             "Fbar_h_plus_h_Fbar_is_identity": True,
+            "depth_projector_h_Fbar": depth_projector,
+            "fourier_radical_projector_Fbar_h": radical_projector,
+            "internal_grading_involution": grading,
+            "grading_square_is_identity": True,
+            "grading_anticommutes_with_Fbar_and_h": True,
+            "generated_algebra": "matrix units {hF,h,F,Fh} give Mat_2(F_11), acting with multiplicity 2",
+            "joint_commutant_dimension": len(commutant_basis),
+            "joint_commutant_basis": commutant_basis,
+            "residual_ambiguity": "GL_2 on the multiplicity space; Fbar and h alone do not select a binary basis or the C412 cubic flag",
         },
         "a5_restriction_boundary": {
             "group_order": 60,

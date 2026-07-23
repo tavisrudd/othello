@@ -34,10 +34,11 @@ outer-odd radical line = C412 depth socle = C430 trade line.
    seven/eight-point generator family before generating trades. A passing family closes at the
    rigidity theorem. A failing family exports only its exact restriction-rank defect, radical
    level partition, and quotient trade kernel to C418/C419; search nowhere else.
-2. **C433 modular seam.** Treat the `P(1)` socle placement and the `6 -> 2` depth-kernel
-   identification as solved inputs. Determine whether the odd Fourier block and profile map fit a
-   canonical exact sequence through the C430 odd socle. Stop if only decomposition multiplicities
-   or another rank computation survive.
+2. **C433 modular seam — closed input.** Consume C433's two exact quotient rows, transverse
+   profile/Fourier planes, and canonical contraction `h²=0`, `Fh+hF=I`; equivalently use its
+   matrix units `{hF,h,F,Fh}`. Its four-dimensional joint commutant is the sharp falsifier:
+   recovering C412's binary flag requires an additional intrinsic tensor, not more decomposition
+   data. Do not rerun the odd-block placement or a decomposition census.
 3. **C429 arithmetic seam.** Lift the radical separator to the integral `Z[tau]` model, compute its
    Smith/Fitting data, and test Frobenius on the resulting line in split, inert, and ramified
    fibres. Continue only if one datum controls the already-certified arc/code/scheme chiralities;
@@ -68,5 +69,6 @@ Primary inputs:
 
 - `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`
 - `notes/2026-07-20-c412-relative-cubic-depth-plane.md`
+- `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`
 - `notes/2026-07-20-c418-c419-c410-successors.md`
 - `notes/2026-07-20-clebsch-lean-formalization-plan-fable-review.md`

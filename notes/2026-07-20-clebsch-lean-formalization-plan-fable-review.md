@@ -355,6 +355,8 @@ promotion of any lead goes through the normal C-ID process.
    transverse to the Fourier radical, so the profile plane canonically splits and contracts the
    odd Fourier self-extension: `h²=0`, `Fh+hF=I`.  See
    `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`.
+   The `ej2` commutant computation is sharp: a residual `GL_2` multiplicity-space ambiguity means
+   this contraction alone cannot choose C412's doubled/residual binary-cubic flag.
    **C492 hand-back (2026-07-23).**  Keep the ambient and subgroup mechanisms separate.  For
    C492's H3 restriction `H=A5`, the opposite-component permutation degrees are `5,6`; over
    `F_11`, Maschke applies because `11∤|A5|=60`, so both permutation modules split and the unique

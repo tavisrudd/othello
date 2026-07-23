@@ -28,9 +28,38 @@ def action(matrix: list[list[int]], vector: tuple[int, ...]) -> tuple[int, ...]:
     return tuple(sum(row[j] * vector[j] for j in range(len(vector))) % P for row in matrix)
 
 
+def matrix_product(a: list[list[int]], b: list[list[int]]) -> list[list[int]]:
+    return [
+        [sum(a[i][k] * b[k][j] for k in range(len(b))) % P for j in range(len(b[0]))]
+        for i in range(len(a))
+    ]
+
+
+def rank_mod(a: list[list[int]]) -> int:
+    out = [[x % P for x in row] for row in a]
+    rank = 0
+    for col in range(len(out[0])):
+        pivot = next((i for i in range(rank, len(out)) if out[i][col]), None)
+        if pivot is None:
+            continue
+        out[rank], out[pivot] = out[pivot], out[rank]
+        inv = pow(out[rank][col], -1, P)
+        out[rank] = [(inv * x) % P for x in out[rank]]
+        for i in range(rank + 1, len(out)):
+            if out[i][col]:
+                scale = out[i][col]
+                out[i] = [(x - scale * y) % P for x, y in zip(out[i], out[rank])]
+        rank += 1
+    return rank
+
+
 fourier = CERT["divided_fourier_mod_11"]
 depth = CERT["weighted_depth_matrix_mod_11"]
 homotopy = CERT["canonical_placement"]["contracting_homotopy_mod_11"]
+depth_projector = CERT["canonical_placement"]["depth_projector_h_Fbar"]
+radical_projector = CERT["canonical_placement"]["fourier_radical_projector_Fbar_h"]
+grading = CERT["canonical_placement"]["internal_grading_involution"]
+commutant = CERT["canonical_placement"]["joint_commutant_basis"]
 domain = [
     (a, b, c)
     for a in range(P)
@@ -70,4 +99,21 @@ for vector in ambient:
     left = action(fourier, action(homotopy, vector))
     right = action(homotopy, action(fourier, vector))
     assert tuple((x + y) % P for x, y in zip(left, right)) == vector
+    assert action(depth_projector, action(depth_projector, vector)) == action(depth_projector, vector)
+    assert action(radical_projector, action(radical_projector, vector)) == action(radical_projector, vector)
+    assert action(depth_projector, action(radical_projector, vector)) == (0, 0, 0, 0)
+    assert action(radical_projector, action(depth_projector, vector)) == (0, 0, 0, 0)
+    assert action(grading, action(grading, vector)) == vector
+    assert tuple(
+        (x + y) % P
+        for x, y in zip(
+            action(grading, action(fourier, vector)),
+            action(fourier, action(grading, vector)),
+        )
+    ) == (0, 0, 0, 0)
+assert len(commutant) == 4
+assert rank_mod([[x for row in matrix for x in row] for matrix in commutant]) == 4
+for matrix in commutant:
+    assert matrix_product(matrix, fourier) == matrix_product(fourier, matrix)
+    assert matrix_product(matrix, homotopy) == matrix_product(homotopy, matrix)
 print("C433 independent replay OK")
