@@ -138,6 +138,7 @@ def build() -> dict[str, object]:
             "smith_invariants": [1, 5],
             "q11_square_class": "<5>=<1>",
             "canonical_landing": "ker(D)=outer-odd sheet socle line",
+            "determinant_bridge": "ker(D)=det(U_odd)*det(L_F)^(-1)",
             "normalization_obstruction": {
                 "arithmetic_carrier_dimension": 1,
                 "fourier_radical_dimension": 2,
@@ -183,7 +184,13 @@ def build() -> dict[str, object]:
         },
         "naturality_theorem": {
             "required_transport": ["F", "depth_plane", "valency_pairing", "ordered_flag"],
-            "forced_transport": ["fourier_radical", "h", "matrix_units", "grading"],
+            "forced_transport": [
+                "fourier_radical",
+                "h",
+                "matrix_units",
+                "grading",
+                "relative_determinant_line",
+            ],
             "reason": "h is uniquely zero on the depth plane and inverse to F on im(F)",
             "base_category": "based-golden-pair groupoid",
         },

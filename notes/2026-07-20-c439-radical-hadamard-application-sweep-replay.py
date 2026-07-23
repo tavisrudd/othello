@@ -57,6 +57,7 @@ def main() -> None:
     assert [cross, dual_cross] == [2, 5]
     assert data["modular_target"]["target_flag_cross_pairings"] == {"vector": 2, "dual": 5}
     assert data["arithmetic_seam"]["smith_invariants"] == [1, 5]
+    assert data["arithmetic_seam"]["determinant_bridge"] == "ker(D)=det(U_odd)*det(L_F)^(-1)"
     assert data["b3_fourier_gate"]["integral_defining_characteristic_block"] is False
     print("C439 independent replay OK")
 

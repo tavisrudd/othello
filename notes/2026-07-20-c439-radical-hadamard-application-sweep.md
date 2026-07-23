@@ -44,6 +44,26 @@ arithmetic sign line = ker(D) -> U_odd/ker(D) = P_depth --F-> L_F,
 
 not an equality of the first and last terms.
 
+There is nevertheless a canonical determinant-level bridge.  C433's second exact row is
+
+```text
+0 -> s -> U_odd --FD-> L_F -> 0,
+```
+
+where `s` is C429's specialized arithmetic sign line.  Taking determinants gives, functorially,
+
+```text
+det(U_odd) = s tensor det(L_F),
+s = det(U_odd) tensor det(L_F)^(-1).                 (*)
+```
+
+Thus the arithmetic orientation line is exactly the **relative determinant line** of the depth
+source and the Fourier Lagrangian.  This is the correct line-to-plane comparison: the direct
+metric normalization is impossible, but the determinant defect is canonical.  Formula `(*)`
+transports automatically with the exact row.  It carries the line and its outer character, not
+C429's integral discriminant quadratic form; the isotropic restriction of the valency pairing to
+`L_F` cannot supply that form.
+
 Third, the gated B3 analogue stops before computation.  C414 freezes a canonical cyclotomic
 four-dimensional odd Fourier core at both `S3` and `D8` seams, but explicitly leaves the integral
 defining-characteristic lattice/modular comparison open.  There is no frozen B3 integral odd
@@ -77,6 +97,12 @@ Indeed `ThT^-1` vanishes on `P'` and inverts `F'|P'` on `L'`, so uniqueness give
 `ThT^-1=h'`; every other identity follows by composition.  Conversely, the metric and ordered
 flag are genuinely additional: C433's joint commutant of `(F,h)` is `GL_2`, the metric reduces it
 projectively to `C2`, and the ordered flag kills that last involution.
+
+If the object also comes from an exact depth row
+`0 -> s -> U -> P -> 0`, composition with `F|P` gives
+`0 -> s -> U -> L -> 0`.  Determinant functoriality then forces
+`s=det(U) tensor det(L)^(-1)`.  Hence transport of the exact row also transports the arithmetic
+relative-determinant line; it is not a fifth independent decoration.
 
 C492 already proves that a based-golden-pair morphism canonically transports `K`, `K\\Omega`, the
 sheet map, and the swap involution.  Thus a geometric realization of `D` whose image is `P` needs
@@ -160,6 +186,10 @@ models.
 
 - **Settled — where the arithmetic line lands.** It is the depth-map kernel/socle, not the Fourier
   Lagrangian.  The quotient-and-contraction chain explains why the two had appeared adjacent.
+- **Settled by the `ej` determinant pass — the strongest valid line-to-plane bridge.** The exact
+  row canonically gives
+  `s=det(U_odd) tensor det(L_F)^(-1)`.  This retains the orientation line and outer character while
+  correctly refusing an unsupported quadratic-form identification.
 - **Settled — which transport data are independent.** Once `F` and the depth plane move, `h` and
   the matrix units move uniquely.  The valency pairing and ordered flag remain the two genuine
   decorations.

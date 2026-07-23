@@ -1,6 +1,7 @@
 {
   "arithmetic_seam": {
     "canonical_landing": "ker(D)=outer-odd sheet socle line",
+    "determinant_bridge": "ker(D)=det(U_odd)*det(L_F)^(-1)",
     "integral_odd_line": "Z*(2tau-1)",
     "normalization_obstruction": {
       "arithmetic_carrier_dimension": 1,
@@ -169,7 +170,8 @@
       "fourier_radical",
       "h",
       "matrix_units",
-      "grading"
+      "grading",
+      "relative_determinant_line"
     ],
     "reason": "h is uniquely zero on the depth plane and inverse to F on im(F)",
     "required_transport": [
