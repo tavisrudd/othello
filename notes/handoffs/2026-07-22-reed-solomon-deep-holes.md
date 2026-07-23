@@ -20,11 +20,13 @@ polynomial, so the full `e_7` orbit is shallow over every admissible field.  C53
 the remaining intrinsic degree-nine carrier strata; C532 packages the resulting redundancy-ten
 theorem.  C533 independently owns C525 threshold/deletion sharpening.
 C534 closes the claim-specific literature/cheap-test triage of the six non-deep-hole frontiers.
-Only characteristic-two Hessian--Arf functoriality and coherent modular polar flags survive as
-independent follow-ups, queued as C535/C536 without displacing C531.  Gale reconstruction remains
-valuable structure but overlaps the 2026 Flatland theorem and the pending `arcs`/`continuation`
-portfolio; Lucas root spaces merge into polar flags; simultaneous extension complexes are already
-owned by `arcs`; and the fixed-size equivalence algorithm has no proved complexity advantage.
+Characteristic-two Hessian--Arf functoriality and coherent modular polar flags survive as
+independent follow-ups, queued as C535/C536 without displacing C531.  A late theorem-text check of
+Flatland Theorem 6 exposed an explicit three-or-more-view joint-consistency gap that C481--C485
+may resolve; C537 owns only the exact functor comparison before any paper claim.  The pending
+`arcs`/`continuation` portfolio still owns deletion and continuation reconstruction.  Lucas root
+spaces merge into polar flags; simultaneous extension complexes are already owned by `arcs`; and
+the fixed-size equivalence algorithm has no proved complexity advantage.
 C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
@@ -631,9 +633,10 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C531 | full degree-nine Lucas-carrier strata | queued next | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | queued after C531 | degree-nine carrier theorem boundary | effective high-field deep set, threshold, and orbit law | fixed-level theorem |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
-| C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; other four directions killed, merged, or portfolio-blocked | C535/C536 bounded survivor gates |
+| C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | queued independently | C519/C525 plus C534 audit | universal naturality, cubic-local characterization, or exact kill | modular replacement theorem boundary |
 | C536 | coherent polar-flag Fano boundary | queued after C535 | C512/C529 plus C534 audit | classical-vs-Lucas component theorem or first extra component | abstract modular flag theorem boundary |
+| C537 | Flatland--Gale multi-view comparison | queued after C536 | Flatland Theorem 6 plus C481--C485 | exact equivalence, strict refinement, or incompatible-input kill | reconstruction novelty boundary |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and

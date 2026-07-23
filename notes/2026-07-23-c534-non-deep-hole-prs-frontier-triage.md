@@ -15,12 +15,15 @@ The six proposed directions do not support six new projects.
    classification of *consecutive-contraction-compatible* contained flags, including the Lucas
    components and the retained forbidden factor.  C512 already recovers four fixed levels from
    this mechanism.
-3. **Finite-field Gale reconstruction** has strong mathematics but no clean new-paper slot in the
-   present portfolio.  Agarwal--Connelly--Crannell--Duff--Thomas now occupy the closest flatland
-   inverse-projection territory, while `arcs_complete_outside_conic` and
-   `continuation-graph-rigidity` already own the deletion/extension reconstruction stories in
-   `papers/papers-index.md`.  The exact finite-field Gale double cover and descent remain useful
-   structure, but a separate paper would fragment the pending portfolio.
+3. **Finite-field Gale reconstruction** has strong mathematics and one high-upside comparison
+   gate, but no clean new-paper slot yet.  Agarwal--Connelly--Crannell--Duff--Thomas occupy the
+   closest flatland inverse-projection territory; their Theorem 6 gives pairwise fundamental-matrix
+   compatibility and explicitly warns that pairwise reconstructions need not be jointly consistent
+   for three or more cameras.  C481--C485 may resolve exactly that multi-view consistency gap, or
+   may encode a different inverse problem.  C537 owns the functor-level comparison.  Meanwhile
+   `arcs_complete_outside_conic` and `continuation-graph-rigidity` already own the
+   deletion/extension reconstruction stories in `papers/papers-index.md`, so comparison alone
+   does not authorize another paper.
 4. **Lucas root-space monodromy** is absorbed into coherent polar flags.  The Gaussian-binomial
    witness count and generic linearized-polynomial monodromy are standard; the new content is the
    canonical selection of those covers by a Lucas/consecutive-row carrier.  C531 already owns the
@@ -32,9 +35,9 @@ The six proposed directions do not support six new projects.
    incidence-based equivalence algorithms already cover the growing-input problem; the C481--C485
    inverse is explicit but fixed-size and supplies no proved complexity improvement.
 
-Two bounded successors are allocated in this evidence order: C535 for Hessian--Arf functoriality
-and C536 for the modular coherent-polar Fano boundary.  Neither is a manuscript task, and neither
-displaces C531/C532.
+Three bounded successors are allocated in this evidence order: C535 for Hessian--Arf
+functoriality, C536 for the modular coherent-polar Fano boundary, and C537 for the exact
+Flatland--Gale multi-view comparison.  None is a manuscript task, and none displaces C531/C532.
 
 ## Audit coverage and read depth
 
@@ -48,7 +51,8 @@ New or load-bearing sources:
 
 - Agarwal, Connelly, Crannell, Duff, and Thomas, *A Computer Vision Problem in Flatland*,
   DOI `10.1137/25M1727552`, arXiv `2501.05429v2` — **read depth: partial**, arXiv v2
-  introduction, Theorems 1, 2, and 4, Section 6 and Theorems 34--36.  Cache key
+  introduction, Theorems 1, 2, 4, and 6, the discussion surrounding Theorem 6, Section 6, and
+  Theorems 34--36.  Cache key
   `arXiv:2501.05429`, SHA-256
   `c1e2b8908474795f3eb6a11cca24228960ddd1dd81326cd6c9c28d2f595d9654`.
 - Hartley--Schaffalitzky, *Reconstruction from Projections Using Grassmann Tensors*, DOI
@@ -154,10 +158,12 @@ refreshed.  Any future novelty sentence remains qualified “to our knowledge.�
 coding/self-association geometry.  Hartley--Schaffalitzky prove generic projective reconstruction
 from sufficiently many projections but explicitly exclude line images.  Flatland gives a complete
 inverse-projection theorem for pairs of labelled planar configurations sharing a line image and,
-for six points, explicit cubic camera-center loci with birational correspondence.  It works in the
-generic real/complex setting and does not state finite-field sheet descent or reconstruction of an
-unknown common planar parent from four abstract line images.  Separately, the pending `arcs` paper
-already owns complete-child parent recovery, and the pending `continuation` paper owns
+for six points, explicit cubic camera-center loci with birational correspondence.  Its Theorem 6
+packages several views through pairwise fundamental-matrix conditions, then explicitly notes that
+pairwise reconstructions need not be jointly consistent for three or more cameras.  It works in
+the generic real/complex setting and does not state finite-field sheet descent or reconstruction
+of an unknown common planar parent from four abstract line images.  Separately, the pending `arcs`
+paper already owns complete-child parent recovery, and the pending `continuation` paper owns
 continuation-object reconstruction.
 
 **Candidate crown.**  For a labelled six-arc over a finite field, four compatible abstract
@@ -174,19 +180,25 @@ quadratic rather than unique four-view fibre, kill any generic uniqueness slogan
 
 **Characterize test.**  Forgetting syndrome language leaves the complete functor: each atlas is
 literally a labelled `M_0,6` point, and the compatibility equations and Gale involution remain.
-But forgetting the single diagonal labelling across views destroys the theorem's input.  Thus this
-is not an unlabelled deletion-deck theorem.  Complete-child rigidity is already assigned to
-`arcs`.
+Flatland also identifies its six-point invariant quotient with the labelled `P1` GIT quotient.
+This creates a precise possible match: C481's diagonal compatibility and C482's `2,1,0` residual
+dimensions plus four-view quadratic Gale pair may be an exact joint-consistency theorem for
+Flatland's views.  It may instead be a different inverse problem because the scene, camera, line
+image, ambient embedding, and equivalence-group data have not yet been identified functorially.
+Forgetting the single diagonal labelling across views destroys C481's input, so this is not an
+unlabelled deletion-deck theorem.  Complete-child rigidity is already assigned to `arcs`.
 
 **Evidence boundary.**  C481--C485 prove the crown and explicit inverse; C490 supplies finite
 complete-child exceptions but belongs to the already allocated `arcs` reconstruction story.
-No new computation is needed.
+An exact equivalence, refinement, or separation from Flatland's Theorem 6 is not proved.  C537
+owns that bounded comparison before any novelty or manuscript claim.
 
-**Verdict:** `STRUCTURE-ONLY` for this portfolio.  Mathematically theorem-ready, but a separate
-paper would compete with both Flatland and two pending internal papers.
+**Verdict:** `HIGH-UPSIDE OPEN`, restricted to C537's comparison gate.  Mathematically
+theorem-ready internally, but a separate paper would still compete with Flatland and two pending
+internal papers unless the functor comparison isolates a genuinely different theorem.
 
-**Scores:** novelty confidence `4`, notability `4`, audience breadth `4`, theorem readiness `5`,
-tractability `5`, publication coherence `2`; weighted score **100/125**.
+**Scores:** novelty confidence `4`, notability `5`, audience breadth `5`, theorem readiness `3`,
+tractability `4`, publication coherence `3`; weighted score **100/125**.
 
 ## Direction 2 — coherent polar flags and structured splitting loci
 
@@ -367,7 +379,8 @@ tractability `4`, publication coherence `2`; weighted score **68/125**.
 
 1. **Gale reconstruction ↔ extension complexes:** no direct bridge.  Literal parent recovery
    reconstructs the conflict hypergraph afterwards; abstract projected sextics alone do not
-   recover its triple faces.
+   recover its triple faces.  Separately, C537 tests whether C481's diagonal compatibility is the
+   missing joint-consistency layer above Flatland's pairwise fundamental matrices.
 2. **Polar flags ↔ Hessian--Arf:** yes.  C525 is the characteristic-two local residual model that
    supplies the nonclassical contained/transverse test needed by C512.  The link transfers a
    theorem, but the `(2,2)` statement remains clean enough for its own bounded audit.
@@ -385,7 +398,7 @@ tractability `4`, publication coherence `2`; weighted score **68/125**.
 |---:|---|---:|---:|---|
 | 1 | Hessian--Arf replacement geometry | 109 | 101--115 | promote to C535 |
 | 2 | coherent polar flags, absorbing Lucas carriers | 105 | 92--112 | promote to C536 |
-| 3 | finite-field Gale reconstruction | 100 | 88--106 | retain as structure; no competing paper task |
+| 3 | finite-field Gale reconstruction | 100 | 88--106 | promote only the Flatland functor comparison to C537 |
 | 4 | Lucas root-space monodromy separately | 84 | 70--94 | merge into rank 2; C531 remains the arithmetic gate |
 | 5 | equivalence algorithms | 68 | 55--78 | kill |
 | 6 | simultaneous extension complexes | 65 | 55--76 | pre-empted/owned by pending `arcs` |
@@ -393,15 +406,18 @@ tractability `4`, publication coherence `2`; weighted score **68/125**.
 The highest-EV next falsifiable gate is C535: determine whether C525's constrained
 divided-Hessian construction is a natural modular replacement beyond its cubic residual, or
 whether full-text prior art/cubic specificity collapses the paper-shaped crown.  C536 follows with
-the exact classical-Fano-versus-modular-overlap boundary.  C531 remains the lane's execution next
-step and is not displaced.
+the exact classical-Fano-versus-modular-overlap boundary.  C537 then performs the bounded
+Flatland--Gale functor comparison; it is not a manuscript authorization.  C531 remains the lane's
+execution next step and is not displaced.
 
 ## Mystery ledger
 
 - **Settled — why the Gale direction felt unusually broad:** Flatland is a direct 2026 neighbor
   in line-image inverse geometry, and the pending paper portfolio already owns both deletion-child
-  and continuation reconstruction.  The surviving finite-field Gale sheet is real but not a clean
-  new slot.
+  and continuation reconstruction.  This blocks a broad paper allocation.
+- **Open — whether C481--C485 solve Flatland's explicit multi-view consistency gap:** exact owner
+  C537; evidence gap is a functor-level identification of scenes, cameras, labelled line images,
+  invariant quotients, equivalence groups, and the four-view Gale fibre.
 - **Settled — whether C530's exact root-space count is new:** it is precisely standard affine
   three-space enumeration.
 - **Settled — whether extension complexes give a fresh object:** the pending `arcs` paper already

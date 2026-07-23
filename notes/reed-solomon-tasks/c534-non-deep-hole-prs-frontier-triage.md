@@ -1,6 +1,6 @@
 # C534 — non-deep-hole PRS frontier triage
 
-**Lane:** `reed-solomon` · **Status:** complete; C535/C536 queued without displacing C531
+**Lane:** `reed-solomon` · **Status:** complete; C535--C537 queued without displacing C531
 
 Terminal report: `notes/2026-07-23-c534-non-deep-hole-prs-frontier-triage.md`.
 
