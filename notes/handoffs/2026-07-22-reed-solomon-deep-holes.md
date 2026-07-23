@@ -15,7 +15,9 @@ C498/C509 parity law is the `F4`/order-two level; the first fresh degree-nine ca
 constant field `F8` and an order-three component cycle on its `e_7` orbit, which is shallow when
 `3|m`, including infinitely many odd extension degrees.  This fires the authorized first-obstruction
 stop.  C530 is next: it owns the four-dimensional `e_7` quotient cover and exact deepness law for
-`3∤m`.  C500 remains release-gated.
+`3∤m`; C531 then owns the remaining intrinsic degree-nine carrier strata, and C532 packages the
+resulting redundancy-ten theorem.  C533 independently owns C525 threshold/deletion sharpening.
+C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -603,7 +605,11 @@ four-dimensional quotient cover; C530 now owns exactly that calculation at `e_7`
 | C518 | modular TRS trace-one global incidence | complete | complement Frobenius alternants; binary and subfield shallow theorems; exact residual lifting torsor | first proved global obstruction |
 | C519 | universal residual-discriminant base locus | complete (obstruction exit) | integral pullback; doubled-quadric characteristic-two component; exact Artin--Schreier replacement gate | first additional component |
 | C525 | characteristic-two ordered-Hessian pullback | complete | universal Veronese/ruling classification; constrained carrier equality; linear base-selection route; genus-one containment theorem | arbitrary-degree characteristic-two obstruction classified |
-| C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; quotient-cover arithmetic remains unallocated |
+| C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; C530 owns quotient-cover arithmetic |
+| C530 | degree-nine `e_7` quotient cover | queued next | C529 order-three subcover | normalize the four-dimensional quotient and decide `3∤m` deepness | distinguished orbit arithmetic |
+| C531 | full degree-nine Lucas-carrier strata | queued after C530 | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
+| C532 | PRS redundancy-ten synthesis | queued after C531 | degree-nine carrier theorem boundary | effective high-field deep set, threshold, and orbit law | fixed-level theorem |
+| C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -633,8 +639,9 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   C529 selects the coherent power-of-two Lucas family and stops at its first intrinsic
   level-dependent obstruction: the degree-nine carrier has an order-three constant-field cycle.
   C530 is allocated to normalize its four-dimensional quotient cover at the distinguished `e_7`
-  orbit.  Extension to other intrinsic `PGL2` normal forms remains behind that gate; no ambient
-  census substitutes for either calculation.
+  orbit.  C531 owns extension to other intrinsic `PGL2` normal forms, and C532 owns the resulting
+  redundancy-ten synthesis.  C533 separately sharpens C525's bound.  No ambient census substitutes
+  for any of these calculations.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
