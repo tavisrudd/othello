@@ -4,10 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512 complete; C513 active on the fixed-redundancy-eight
-polar-induction application; C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C513 complete; C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
-C514 queued (modular one-twist translation quotient);
+C514 is next (modular one-twist translation quotient);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -401,6 +400,17 @@ irreducibility of each new lower splitting cover, stated exactly rather than rep
 The claim-specific audit `notes/2026-07-23-c512-general-polar-flag-literature-audit.md` finds no
 pre-emption and positions Wang's June 2026 splitting-family framework as arithmetic infrastructure.
 
+## Closed base — C513
+
+`notes/2026-07-23-c513-prs-redundancy-eight.md` proves the first new fixed-level application of
+C512.  The three-marker geometric-`S3` normalization has deletion degree 30; the exact Hasse--Weil
+inequality lowers the first prime-power threshold to 43.  The top polar line has
+transverse/collision budget 14.  Every contained modular-nucleus lift is shallow in this range, so
+the deep syndromes are exactly the persistent tangent and conjugate-sigma rank-two families,
+totaling `q(q+1)^2/2`, with orbit law `T/T^7` modulo inversion/Frobenius and tangent cocycle
+`z→z+7u`.  The theorem uses no ambient `PG(7,q)` census.  A redundancy-nine Lucas probe is logged
+only as an incidental successor lead.
+
 ## Closed base — C510
 
 `notes/2026-07-23-c510-trs-deep-hole-pilot.md` reconciles the 2024 full-length and 2025 punctured
@@ -433,6 +443,7 @@ census is authorized.
 | C498 | PRS redundancy-six classification | complete | first-polar line reduction; all-field persistent/modular theorem; exact exceptional fields and intrinsic semilinear normal forms | polar induction mechanism |
 | C509 | PRS redundancy-seven classification | complete | all-field persistent/central theorem; exact q=7/8/9/11 exception tables; q=19 transient pointed orbit | coherent polar flags, not isolated bad fibres |
 | C512 | general coherent polar induction | complete | intrinsic pointed functor; classified persistent/modular contained flags; explicit genus/deletion/intersection threshold; C498/C509 recovered | fixed-redundancy applications reduce to finite monodromy and containment checks |
+| C513 | PRS redundancy-eight application | complete | exact three-marker normalization and containment package; `q>=43` persistent-only theorem with complete PGL/PGamma orbit law | first post-C512 fixed-level theorem |
 | C510 | bounded one-twist audit and geometry pilot | complete | tangent-projected NRC; exact affine stabilizer and fixed line; `p∤k` pre-emption; modular `p|k` target; q=9 calibration | translation-quotient theorem gate |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
@@ -481,7 +492,6 @@ history.
 
 ## Next command
 
-`go C513`
+`go C514`
 
-(C513 is the active fixed-redundancy-eight theory extension.  C510 is complete; C514 is the queued
-modular TRS theorem gate; C500 remains release-gated.)
+(C513 is complete.  C514 is the next modular TRS theorem gate; C500 remains release-gated.)

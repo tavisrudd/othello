@@ -112,3 +112,20 @@ remains open discovery-track material (C491 Lemma 7 already proved q≥23; no al
   stab-order 12) but not the group — T's stabilizer is the cyclic q−1 torus, the sporadic's is A₄.
   Reminder that (size, stab-order) is not a complete orbit invariant; group structure + branch type
   is. Incidental.
+
+### 2026-07-23 — redundancy-nine modular lift grows in characteristic seven
+
+**Provenance:** C513 extra-juice Lucas/nucleus calculation after the redundancy-eight acceptance
+gate passed.
+**Was I looking for this?:** no — C513 classified degree-seven syndromes; this probes the next
+degree only to identify the cheapest successor gate.
+**Observed / musing:** degree-seven NRC nuclei have consecutive-row lifts in degree eight equal to
+`P<e4>` in characteristic five and `P<e2,e3,e4,e5,e6>` in characteristic seven. The latter is much
+larger than C513's two candidate lines, even though the generic four-marker forecast remains
+deletion degree 36, integer threshold 51, and first prime-power threshold 53.
+**Why it may matter / strongest question:** redundancy nine may acquire a genuinely higher-
+dimensional modular arithmetic problem; determine whether the characteristic-seven four-space is
+shallow, persistent, or split by extension-degree deck data before allocating that application.
+**Evidence:** CHECKED linear support calculation from the binomial nucleus criterion; no
+split-member or deepness theorem.
+**Status:** open lead.

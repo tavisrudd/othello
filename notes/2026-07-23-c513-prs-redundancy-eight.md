@@ -5,7 +5,7 @@ deep-syndrome and projective-semilinear orbit classification
 
 ## Result
 
-For every prime power `q >= 47`, the deep syndromes of `PRS(q-7)` are exactly the persistent
+For every prime power `q >= 43`, the deep syndromes of `PRS(q-7)` are exactly the persistent
 catalecticant rank-two tangent and conjugate-sigma families. There is no additional modular-nucleus
 family. Their total number is
 
@@ -28,7 +28,7 @@ where `T` is the norm-one torus. On the tangent family the normalized unipotent 
 so the tangent orbit splits into its fixed and nonzero pieces exactly in characteristic seven.
 
 This proves the first new fixed-level application of C512. It does not classify the bounded band
-`q < 47`, and it uses no ambient `PG(7,q)` census.
+`q < 43`, and it uses no ambient `PG(7,q)` census.
 
 ## 1. Pointed septic contraction
 
@@ -86,25 +86,27 @@ markers, so
  \delta=12+3\cdot6=30.
 \]
 
-Hasse--Weil on the normalization gives
+Hasse--Weil on the geometrically integral normalization, whose genus is at most one, gives
 
 \[
- \#Y(\mathbf F_q)\ge q-2\sqrt q.
+ \#\widetilde Y(\mathbf F_q)\ge q+1-2\sqrt q.
 \]
 
 The inequality
 
 \[
- q-2\sqrt q>30
+ q+1-2\sqrt q>30
 \]
 
-holds for every prime power `q >= 47`. Equivalently, C512's integer threshold is
+holds for every integer `q >= 42`, and the first prime power in that range is 43. C512's convenient
+closed bound is the slightly more conservative
 
 \[
  \left\lfloor(1+\sqrt{31})^2\right\rfloor+1=44,
 \]
 
-whose first prime-power value is 47. Therefore every geometric-`S3` bottom fibre has a split
+whose first prime-power value is 47. Using the exact normalization inequality therefore improves
+the forecast by one prime-power step. Every geometric-`S3` bottom fibre has a split
 squarefree cubic avoiding all three markers.
 
 The cyclic, wild, inseparable, gcd, and branch strata remain in the algebraic lower bad carrier
@@ -112,7 +114,7 @@ classified in C491--C512. The additional marker changes only the deletion diviso
 new contained component: the new consecutive-row and modular calculations are given below.
 Consequently:
 
-> **Three-marker pointed lemma.** For `q >= 47`, every nonpersistent C509 sextic outside its
+> **Three-marker pointed lemma.** For `q >= 43`, every nonpersistent C509 sextic outside its
 > characteristic-two central component has a split squarefree quintic in its Hankel kernel
 > avoiding any prescribed point, unless that point lies in the finite marked-collision divisor.
 
@@ -143,7 +145,7 @@ The total transverse/collision budget is therefore
  3+1+10=14.
 \]
 
-For `q >= 47`, choose a contraction parameter outside these at most fourteen points. The
+For `q >= 43`, choose a contraction parameter outside these at most fourteen points. The
 three-marker pointed lemma supplies a split squarefree quintic avoiding the chosen root, and the
 pointed contraction identity lifts it to a split squarefree sextic in `W_f`.
 
@@ -179,7 +181,11 @@ and a paired class has
 
 Since seven is prime, there is one sigma orbit when `7` does not divide `q+1`; when it does, there
 is one fixed class and three paired classes. Frobenius acts by multiplication by the
-characteristic on `C_7`, followed by inversion.
+characteristic on `C_7`, followed by inversion. More explicitly, on the three nonzero inversion
+classes Frobenius is trivial when `p` is congruent to `plus-or-minus 1` modulo seven and is a
+three-cycle when `p` is congruent to `plus-or-minus 2` or `plus-or-minus 3`. Thus, when
+`7` divides `q+1`, `PGammaL2` has four sigma orbits in the first case and two in the second
+(the zero class and the fused nonzero class).
 
 The tangent family is one orbit of size `q(q+1)` with stabilizer `q-1` when the characteristic is
 not seven. In characteristic seven it splits into
@@ -239,12 +245,12 @@ seven affects only the tangent cocycle already included in the persistent family
 Combining the three-marker lower package, the degree-fourteen transverse/collision budget, and the
 contained classifications gives:
 
-> **Redundancy-eight theorem.** For every prime power `q >= 47`, the deep syndromes of
+> **Redundancy-eight theorem.** For every prime power `q >= 43`, the deep syndromes of
 > `PRS(q-7)` are exactly the persistent tangent and conjugate-sigma catalecticant rank-two
 > syndromes. Their number is `q(q+1)^2/2`; their complete `PGL2/PGammaL2` orbit law is
 > `T/T^7` modulo inversion and Frobenius, together with tangent cocycle `u*z=z+7u`.
 
-The theorem says nothing about which additional orbits occur for `q < 47`. A bounded exceptional
+The theorem says nothing about which additional orbits occur for `q < 43`. A bounded exceptional
 classification would require a separately allocated, orbit-reduced task; it is not evidence for
 the high-field proof.
 
@@ -279,30 +285,60 @@ split witness. The replay reconstructs the relevant modular linear systems by ro
 checks the characteristic-three conic bound. Neither program enumerates deep syndromes or proves
 geometric `S3` monodromy; that theorem input is the C491 ordered-pair argument, unchanged by deleting
 marker divisors. The generator, JSON certificate, and independent replay have exact byte counts
-`5392`, `2427`, and `3027`, respectively; their SHA-256 hashes are in the adjacent manifest.
+`6876`, `3084`, and `3672`, respectively; their SHA-256 hashes are in the adjacent manifest.
+
+## Extra-juice closeout
+
+The semilinear quotient admits the exact fusion rule above; no field-by-field orbit computation is
+needed. The Tao pass also replaces the conservative C512 closed threshold 47 by the exact
+normalization threshold 43. A bounded look one level ahead sharpens the successor gate.
+Redundancy nine would add
+a fourth marker, giving deletion degree `12+4*6=36`, C512 integer threshold `51`, first
+prime-power threshold `53`, and collision degree `12`.
+
+The cheap nucleus calculation also warns that redundancy nine is not a purely formal repeat.
+Degree-seven nuclei lift to a characteristic-five point `P<e4>` and a characteristic-seven
+projective four-space `P<e2,e3,e4,e5,e6>`. Their arithmetic deepness is not decided by C513.
+This is logged as an incidental successor lead rather than promoted into the present theorem.
+
+The Tao pass suggests a broader re-foundation of the remaining gap. For standard PRS Hankel
+systems, contracting all the way to degree four always reaches the same cubic `S3` ordered-pair
+cover; at syndrome degree `n`, only `n-4` marker divisors accumulate, giving the generic bound
+`delta <= 12+6(n-4)=6n-12`. Thus the generic monodromy may already be uniform in `n`. What remains
+level-specific is the scheme-theoretic catalogue of polar flags contained in cyclic, wild, and
+nucleus carriers, plus their arithmetic deepness. This is a reasoned opportunity, not an
+all-redundancy theorem: one must still prove that the recursive bad-carrier pullbacks have no
+unlisted contained components and bound every transverse degree.
 
 ## Mystery ledger
 
 Settled:
 
-- **Does the predicted threshold survive exact arithmetic?** Yes. The deletion degree is exactly
-  bounded by 30, C512's integer threshold is 44, and the first admissible prime power is 47.
+- **Does the predicted threshold survive exact arithmetic?** It improves. The deletion degree is
+  bounded by 30, C512's closed integer threshold is 44 with first prime power 47, but the exact
+  normalized Hasse inequality starts at integer 42 and first prime power 43.
 - **Does the characteristic-two central family lift again?** No. Its consecutive-row preimage is
   zero.
 - **Do other NRC nuclei create new modular families?** They create two candidate projective lines,
   but the characteristic-five line has a universal split witness and the characteristic-three line
   is shallow from `q=27` onward.
 - **Does the persistent exponent advance as forecast?** Yes: it is `T/T^7`, with tangent splitting
-  exactly in characteristic seven.
+  exactly in characteristic seven. The extra-juice pass also settles the exact `PGammaL2` fusion:
+  the three nonzero sigma classes remain separate for `p=plus-or-minus 1 mod 7` and otherwise fuse.
 
 Open:
 
-- **What happens below 47?** No bounded census or exceptional normal-form theorem was attempted.
+- **What happens below 43?** No bounded census or exceptional normal-form theorem was attempted.
   Evidence gap: exact orbit-reduced classification over prime powers below the theorem threshold;
   owner: a separately allocated bounded companion, if desired.
-- **Is 47 sharp?** The proof gives a sufficient threshold. Evidence gap: the actual normalized
+- **Is 43 sharp?** The proof gives a sufficient threshold. Evidence gap: the actual normalized
   three-marker curve and overlap-corrected deletion count on every stratum; owner: a threshold-
   sharpening successor, not the present classification.
 - **Does the lower identity twist admit a uniform all-marker genus formula beyond this level?**
-  Marker deletion leaves genus unchanged here, but a uniform theorem for every residual carrier
-  still needs the arbitrary-degree monodromy theorem identified by C512.
+  The Tao pass narrows the question: the generic standard-PRS spine always bottoms out in the same
+  genus-at-most-one cubic `S3` cover with deletion bound `6n-12`. The remaining evidence gap is
+  uniform control of recursive cyclic/wild/nucleus carrier pullbacks, not generic `S3` monodromy.
+- **What happens to the new redundancy-nine nucleus lifts?** The next Lucas calculation produces
+  a characteristic-five point and a characteristic-seven projective four-space. Evidence gap:
+  their split-member arithmetic and containment in the four-marker lower bad carrier; owner: a
+  future fixed-redundancy-nine application.

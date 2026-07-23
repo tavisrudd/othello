@@ -54,8 +54,12 @@ def main():
     lower = data["lower_cover"]
     assert lower["total_deletion_degree"] == 12 + 3 * 6 == 30
     exact_bound = math.floor((1 + math.sqrt(31)) ** 2) + 1
-    assert lower["integer_hasse_bound"] == exact_bound == 44
-    assert lower["first_prime_power_at_least_bound"] == 47
+    assert lower["c512_closed_integer_bound"] == exact_bound == 44
+    assert lower["first_prime_power_at_least_c512_bound"] == 47
+    assert lower["exact_normalization_inequality_first_integer"] == 42
+    assert 42 + 1 - 2 * math.sqrt(42) > 30
+    assert 41 + 1 - 2 * math.sqrt(41) <= 30
+    assert lower["first_prime_power_at_least_exact_inequality"] == 43
 
     top = data["top_level"]
     assert top["collision_degree"] == 5 * (6 - 4) == 10
@@ -84,6 +88,18 @@ def main():
     assert 27 + 1 > modular["characteristic3_conic_bad_point_bound"]
 
     assert data["persistent"]["tangent_cocycle_coefficient"] == 7
+    fusion = data["persistent"]["sigma_pgamma_fusion_when_7_divides_q_plus_1"]
+    assert set(fusion) == {
+        "p_congruent_to_plus_or_minus_1_mod_7",
+        "p_otherwise",
+    }
+    expected_cycles = {
+        str(p): [1, 1, 1] if p in (1, 6) else [3] for p in range(1, 7)
+    }
+    assert (
+        data["persistent"]["sigma_nonzero_class_cycle_lengths_by_p_mod_7"]
+        == expected_cycles
+    )
     print("C513 independent replay: PASS")
 
 

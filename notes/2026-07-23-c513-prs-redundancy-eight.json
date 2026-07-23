@@ -6,10 +6,12 @@
       2,
       2
     ],
+    "c512_closed_integer_bound": 44,
     "deletion_per_marker": 6,
-    "first_prime_power_at_least_bound": 47,
+    "exact_normalization_inequality_first_integer": 42,
+    "first_prime_power_at_least_c512_bound": 47,
+    "first_prime_power_at_least_exact_inequality": 43,
     "geometric_monodromy": "S3 on ordered distinct root pairs",
-    "integer_hasse_bound": 44,
     "marker_count": 3,
     "total_deletion_degree": 30
   },
@@ -107,6 +109,34 @@
     ]
   },
   "persistent": {
+    "sigma_nonzero_class_cycle_lengths_by_p_mod_7": {
+      "1": [
+        1,
+        1,
+        1
+      ],
+      "2": [
+        3
+      ],
+      "3": [
+        3
+      ],
+      "4": [
+        3
+      ],
+      "5": [
+        3
+      ],
+      "6": [
+        1,
+        1,
+        1
+      ]
+    },
+    "sigma_pgamma_fusion_when_7_divides_q_plus_1": {
+      "p_congruent_to_plus_or_minus_1_mod_7": "three nonzero inversion classes remain separate",
+      "p_otherwise": "three nonzero inversion classes form one Frobenius 3-cycle"
+    },
     "sigma_quotient": "T/T^7 modulo inversion and Frobenius",
     "tangent_cocycle_coefficient": 7,
     "tangent_split_characteristic": 7
