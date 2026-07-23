@@ -1,0 +1,467 @@
+{
+  "bad_base_discriminant_degree_bound": {
+    "base_vandermonde_degree": 6,
+    "degree_per_base_root": 24,
+    "field_size_strictly_greater_than": 102,
+    "first_characteristic_seven_field": 343,
+    "total_degree": 96
+  },
+  "divisor_degrees_on_modular_curve": {
+    "branch": 4,
+    "determinant": 2,
+    "fixed_root_diagonal": 4,
+    "four_fixed_root_collisions": 8,
+    "moving_root_collision": 4,
+    "total_deletion_bound": 22
+  },
+  "field_characteristic": 7,
+  "modular_lifts": [
+    {
+      "characteristic": 5,
+      "degree_eight_consecutive_lift": [
+        4
+      ],
+      "degree_seven_top_nucleus_support": [
+        3,
+        4
+      ],
+      "status": "shallow for every q>5"
+    },
+    {
+      "characteristic": 7,
+      "degree_eight_consecutive_lift": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "degree_seven_top_nucleus_support": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "status": "binary-quartic carrier; shallow for q>=343"
+    }
+  ],
+  "multiple_root_normal_forms": {
+    "partition_211": {
+      "branch_coefficients_x_low_first": [
+        3,
+        5,
+        6,
+        6,
+        6
+      ],
+      "determinant_coefficients_x_low_first": [
+        2,
+        5,
+        5
+      ],
+      "fixed_roots": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "reduced_branch_coefficients_x_low_first": [
+        3,
+        5,
+        6,
+        6,
+        6
+      ],
+      "reduced_branch_discriminant": 5
+    },
+    "partition_22": {
+      "branch_coefficients_x_low_first": [
+        5,
+        5,
+        2,
+        1
+      ],
+      "determinant_coefficients_x_low_first": [
+        6,
+        3,
+        3
+      ],
+      "fixed_roots": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "reduced_branch_coefficients_x_low_first": [
+        5,
+        5,
+        2,
+        1
+      ],
+      "reduced_branch_discriminant": 1
+    },
+    "partition_31": {
+      "branch_coefficients_x_low_first": [
+        0,
+        0,
+        4,
+        4,
+        3
+      ],
+      "determinant_coefficients_x_low_first": [
+        6,
+        2,
+        5
+      ],
+      "fixed_roots": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "reduced_branch_coefficients_x_low_first": [
+        4,
+        4,
+        3
+      ],
+      "reduced_branch_discriminant": 3
+    },
+    "partition_4": {
+      "branch_coefficients_x_low_first": [
+        0,
+        0,
+        2,
+        2,
+        1
+      ],
+      "determinant_coefficients_x_low_first": [
+        5,
+        4,
+        6
+      ],
+      "fixed_roots": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "reduced_branch_coefficients_x_low_first": [
+        2,
+        2,
+        1
+      ],
+      "reduced_branch_discriminant": 3
+    }
+  },
+  "normal_squarefree_family": {
+    "base_fibres": [
+      {
+        "branch_degree_x": 4,
+        "determinant_degree_x": 2,
+        "discriminant_coefficients_low_first": [
+          6,
+          0,
+          6,
+          0,
+          3,
+          4,
+          5,
+          5,
+          0,
+          0,
+          2,
+          6,
+          1,
+          3,
+          3,
+          0,
+          0,
+          4,
+          5,
+          2,
+          6,
+          0,
+          0,
+          1,
+          1
+        ],
+        "fixed_roots": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "norm_numerator_degree_x": 2,
+        "trace_numerator_degree_x": 2
+      },
+      {
+        "branch_degree_x": 4,
+        "determinant_degree_x": 2,
+        "discriminant_coefficients_low_first": [
+          0,
+          0,
+          4,
+          5,
+          1,
+          5,
+          2,
+          3,
+          1,
+          6,
+          1,
+          5,
+          4,
+          6,
+          0,
+          3,
+          0,
+          0,
+          4,
+          1,
+          2,
+          0,
+          6,
+          0,
+          4
+        ],
+        "fixed_roots": [
+          0,
+          1,
+          2,
+          4
+        ],
+        "norm_numerator_degree_x": 2,
+        "trace_numerator_degree_x": 2
+      },
+      {
+        "branch_degree_x": 4,
+        "determinant_degree_x": 2,
+        "discriminant_coefficients_low_first": [
+          2,
+          6,
+          2,
+          1,
+          1,
+          3,
+          0,
+          1,
+          6,
+          5,
+          0,
+          2,
+          3,
+          4,
+          4,
+          4,
+          5,
+          4,
+          0,
+          4,
+          6,
+          3,
+          1,
+          5,
+          5
+        ],
+        "fixed_roots": [
+          0,
+          1,
+          2,
+          5
+        ],
+        "norm_numerator_degree_x": 2,
+        "trace_numerator_degree_x": 1
+      },
+      {
+        "branch_degree_x": 4,
+        "determinant_degree_x": 2,
+        "discriminant_coefficients_low_first": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          6,
+          5,
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          4,
+          0,
+          0,
+          3,
+          0,
+          0,
+          6,
+          5
+        ],
+        "fixed_roots": [
+          0,
+          1,
+          2,
+          6
+        ],
+        "norm_numerator_degree_x": 2,
+        "trace_numerator_degree_x": 1
+      },
+      {
+        "branch_degree_x": 4,
+        "determinant_degree_x": 2,
+        "discriminant_coefficients_low_first": [
+          6,
+          1,
+          3,
+          4,
+          6,
+          5,
+          4,
+          6,
+          6,
+          4,
+          0,
+          0,
+          2,
+          6,
+          1,
+          0,
+          1,
+          2,
+          5,
+          4,
+          1,
+          5,
+          4,
+          3,
+          5
+        ],
+        "fixed_roots": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "norm_numerator_degree_x": 2,
+        "trace_numerator_degree_x": 1
+      },
+      {
+        "branch_degree_x": 4,
+        "determinant_degree_x": 2,
+        "discriminant_coefficients_low_first": [
+          6,
+          5,
+          5,
+          6,
+          0,
+          4,
+          0,
+          5,
+          6,
+          3,
+          6,
+          6,
+          0,
+          3,
+          4,
+          1,
+          4,
+          2,
+          3
+        ],
+        "fixed_roots": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "norm_numerator_degree_x": 2,
+        "trace_numerator_degree_x": 2
+      }
+    ],
+    "catalecticant_determinant": "L*(1-L^2)",
+    "discriminant_gcd_coefficients_low_first": [
+      1
+    ],
+    "expected_gcd_coefficients_low_first": [
+      1
+    ],
+    "quartic": "[1,0,L,0,1]"
+  },
+  "persistent_orbits": {
+    "characteristic_two_total_pgl_pgamma_orbits": [
+      3,
+      3
+    ],
+    "d8_total_pgamma_orbits": {
+      "p_mod_8_pm1": 6,
+      "p_mod_8_pm3": 5
+    },
+    "rows": [
+      {
+        "d": 1,
+        "sigma_pgamma_orbits": {
+          "all": 1
+        },
+        "sigma_pgl_orbits": 1,
+        "total_pgl_orbits_odd_characteristic": 2
+      },
+      {
+        "d": 2,
+        "sigma_pgamma_orbits": {
+          "all": 2
+        },
+        "sigma_pgl_orbits": 2,
+        "total_pgl_orbits_odd_characteristic": 3
+      },
+      {
+        "d": 4,
+        "sigma_pgamma_orbits": {
+          "all": 3
+        },
+        "sigma_pgl_orbits": 3,
+        "total_pgl_orbits_odd_characteristic": 4
+      },
+      {
+        "d": 8,
+        "sigma_pgamma_orbits": {
+          "p_mod_8_pm1": 5,
+          "p_mod_8_pm3": 4
+        },
+        "sigma_pgl_orbits": 5,
+        "total_pgl_orbits_odd_characteristic": 6
+      }
+    ],
+    "sigma_parameter": "T/T^8 modulo inversion and Frobenius",
+    "tangent_cocycle": "z -> z+8u",
+    "total_deep_points": "q(q+1)^2/2"
+  },
+  "q7_projective_quartics": 2801,
+  "q7_rootless_deep_quartics": 819,
+  "residual_formula": {
+    "branch": "K=N_s^2-4*N_u*D",
+    "collision_resultant": "Res(P,D*T^2-N_s*T+N_u)",
+    "determinant": "D=H_0*H_2-H_1^2",
+    "hankel_contractions": [
+      "H_j=sum_(i=0)^4 a_i p_(i+j), with p_k=0 outside 0..5"
+    ],
+    "norm_numerator": "N_u=H_-1*H_1-H_0^2",
+    "residual_quadratic": "D*T^2-N_s*T+N_u",
+    "trace_numerator": "N_s=H_-1*H_2-H_0*H_1"
+  },
+  "schema": "c516-prs-redundancy-nine-v1",
+  "thresholds": {
+    "exact_integer_threshold": 50,
+    "first_prime_power": 53,
+    "four_marker_deletion": 36,
+    "modular_curve_deletion": 22,
+    "modular_curve_integer_threshold": 33
+  }
+}

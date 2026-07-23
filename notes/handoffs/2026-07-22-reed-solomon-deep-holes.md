@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C515 complete; C516 is next
-(PRS redundancy nine), followed by C517 (Lean formalization) and C518 (C515 global-incidence
-successor); C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C516 complete; C517 is next
+(Lean formalization of C516), followed by C518 (C515 global-incidence successor); C498 now closes
+the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -423,6 +423,18 @@ sufficiency over larger fields remains open.  The next bounded gate is the resid
 discriminant together with its determinant, diagonal, and collision divisors across quartic
 `PGL2` orbits.
 
+## Closed base — C516
+
+`notes/2026-07-23-c516-prs-redundancy-nine.md` derives the exact residual determinant,
+trace/norm numerators, branch, diagonal, and collision resultant. Six squarefree binary-quartic
+normal slices have unit discriminant gcd, and every multiple-root normal form has an integral
+reduced genus-at-most-one slice, so there is no exceptional quartic orbit. The characteristic-seven
+carrier is deep exactly on the 819 rootless quartics at q=7, entirely shallow at q=49, and uniformly
+shallow for q>=343. Hence for every prime power q>=53 the deep syndromes of `PRS(q-8)` are exactly
+the persistent tangent and conjugate-sigma families, totaling `q(q+1)^2/2`, with orbit law `T/T^8`
+modulo inversion/Frobenius, tangent cocycle `z→z+8u`, and exact PGL/PGamma counts
+`2/2`, `3/3`, `4/4`, `6/6`, or `6/5`. The theorem/certificate boundary is frozen for C517.
+
 ## Closed base — C510
 
 `notes/2026-07-23-c510-trs-deep-hole-pilot.md` reconciles the 2024 full-length and 2025 punctured
@@ -506,8 +518,8 @@ raw or reduced resultant.
 | C510 | bounded one-twist audit and geometry pilot | complete | tangent-projected NRC; exact affine stabilizer and fixed line; `p∤k` pre-emption; modular `p|k` target; q=9 calibration | translation-quotient theorem gate |
 | C514 | modular one-twist translation quotient | complete | canonical completion-root slice; exact Lucas fixed flag; consecutive-row and marker-collision obstruction to C512 | a different splitting mechanism is required |
 | C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, reduced stabilizer-stratified orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global reduced-norm/incidence geometry is required |
-| C516 | PRS redundancy-nine residual-quadratic theorem | queued | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
-| C517 | Lean formalization of C516 | queued after C516 | theorem boundary frozen; zero-axiom algebraic and finite-field proof | kernel-checked PRS theorem |
+| C516 | PRS redundancy-nine residual-quadratic theorem | complete | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
+| C517 | Lean formalization of C516 | queued | theorem boundary frozen; zero-axiom algebraic and finite-field proof | kernel-checked PRS theorem |
 | C518 | modular TRS trace-one global incidence | queued after C517 | fixed endpoints, residual discriminant, splitting monodromy, ordered-root fallback; exact quotient lifting and collision semantics | global theorem or first proved obstruction |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
@@ -530,10 +542,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   remain.  No all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Further polar-flag applications:** C516 owns the next fixed-level application: the
-  redundancy-nine residual-quadratic cover and characteristic-seven binary-quartic carrier.
-  C517 owns its Lean formalization after the theorem boundary freezes.  No ambient census
-  substitutes for the component and contained-carrier gates.
+- **Further polar-flag applications:** C516 closes the redundancy-nine residual-quadratic cover
+  and characteristic-seven binary-quartic carrier. C517 owns its Lean formalization against the
+  frozen theorem boundary. No ambient census substitutes for future component and
+  contained-carrier gates.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -561,6 +573,6 @@ history.
 
 ## Next command
 
-`go C516`
+`go C517`
 
-(C516 is next; C517 follows it.  C500 remains release-gated.)
+(C517 is next; C518 follows it. C500 remains release-gated.)
