@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation complete; exact Lean validation and independent review in progress
+**Status:** complete; exact Lean validation and repeated independent review returned `GO`
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, artifacts, validation, axiom evidence, trust boundaries, judgment
@@ -191,6 +191,27 @@ generated `H3` data leaf is hash-pinned and has the exact mixed-verification bou
    and uses a compact normalized `H3` certificate, with Lean checking its cheap semantic invariants
    and independent replay checking coset and generation completeness.
 
+## Mystery ledger / extra-juice closeout
+
+- **Settled — why the two characteristic-eleven Coxeter-square rows have the same unordered
+  moving orbits.**  The two multipliers `9` and `4` both have order five in `F_11^*`; the gate checks
+  every pole and both five-point orbit partitions explicitly.  They are two generators of the same
+  index-two multiplicative subgroup, so the equality of partitions is structural rather than a
+  certificate coincidence.
+- **Settled — where the golden completeness claim belongs.**  Attempting to force the complete
+  stabilizer/coset/word replay into one kernel reduction exposed a resource-boundary issue, not a
+  mathematical ambiguity.  Lean now states only the literal table invariants it checks, while the
+  workflow-free exhaustive generator owns semantic completeness and its manifest closes the
+  reproducibility path.
+- **Settled — whether generated verification can cite the dated work bundle.**  Repeated review
+  exposed that trackedness alone is insufficient.  Moving the canonical source, generator,
+  certificate, and manifest under `lean/verification/clebsch_arithmetic_gluing/` closes the
+  scholarly artifact under stable, workflow-free paths.
+- **No genuine bounded mathematical mystery remains.**  Classical group names, spinor
+  interpretations, all-prime reciprocity, and a concrete identification of the imported F5/F8
+  abstract interfaces are explicit exclusions, not unexplained consequences of this theorem.
+  Their trust-ledger placement belongs to C320.
+
 ## Validation and axiom evidence
 
 Exact current-source validation:
@@ -229,7 +250,8 @@ that the generated banner named only a schema.  The next repair extracted C445's
 `notes/` still cannot enter the scholarly verification closure.  The canonical source, generator,
 certificate, and manifest now live under the stable `lean/verification/clebsch_arithmetic_gluing/`
 path; the workflow-scoped same-stem script is only a compatibility entry point.  Final post-fix
-review is pending on the exact replacement commit.
+review returned `GO` on exact commit `983ba783`; the subsequent closeout commit changes only the
+report, queue/archive, and lane handoff.
 
 ## Proposed C320 ledger delta
 

@@ -254,7 +254,9 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. It consumes C222's committed
   terminal without touching `ReflectionArrangementDecoding.lean`.
 - **The Paper-1 close now has an explicit Lean expansion:** C494 checks C434's B3/H3 middle
-  information lattice; C503 formalizes the rank-three arithmetic-gluing/split--inert theorem; C504
+  information lattice; C503 has closed the bounded rank-three arithmetic-gluing theorem with a
+  workflow-free certificate bundle, 23-terminal gate, and final independent-review `GO`
+  ([report](../2026-07-22-c503-clebsch-arithmetic-gluing-lean.md)); C504
   owns the C452/C464/C469/C470 Witt--Hadamard--Mathieu finite capstone; C505 assembles the
   C417/C448/C473/C474/C480/C486/C487 torsor-Rosetta close; C506 owns the bounded finite
   survival/erasure negatives and mod-40 law; and C507 owns direct finite witnesses for the
