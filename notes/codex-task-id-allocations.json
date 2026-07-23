@@ -629,8 +629,17 @@
       "last": 517,
       "purpose": "PRS redundancy-nine residual-quadratic theorem and Lean formalization",
       "sequence": 70
+    },
+    {
+      "count": 1,
+      "first": 518,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 518,
+      "purpose": "C515 successor: modular TRS trace-one incidence via fixed endpoints, residual discriminants, and splitting monodromy",
+      "sequence": 71
     }
   ],
-  "next_id": 518,
+  "next_id": 519,
   "schema": "codex-task-id-allocations-v1"
 }
