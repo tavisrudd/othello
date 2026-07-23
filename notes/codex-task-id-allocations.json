@@ -620,8 +620,17 @@
       "last": 515,
       "purpose": "modular TRS additive Hasse-difference recursion gate",
       "sequence": 69
+    },
+    {
+      "count": 2,
+      "first": 516,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 517,
+      "purpose": "PRS redundancy-nine residual-quadratic theorem and Lean formalization",
+      "sequence": 70
     }
   ],
-  "next_id": 516,
+  "next_id": 518,
   "schema": "codex-task-id-allocations-v1"
 }
