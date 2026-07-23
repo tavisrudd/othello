@@ -1112,3 +1112,23 @@ bundle); the C471 report records the one-line meet as a diagnostic; the Kashiwar
 REASONED, not computed.
 **Status:** open lead; unallocated — promotion would be a fresh reserved C-ID for "Kashiwara index
 of the `(ker H, ker H^T)` pair" as a reframed stage-2 target; no task shape until then.
+
+### 2026-07-22 — follow-up: the shared line is a single minimum-weight Golay hexad, and it moves
+
+**Observed:** refining the previous entry, `ker(H) ∩ ker(H^T)` is spanned by
+`s = [0,0,1,0,0,0,1,1,1,0,1,1]` — a weight-6 (minimum-weight) ternary-Golay codeword with support
+`{2,6,7,8,10,11}`, a hexad of `S(5,6,12)`. Span-11/meet-in-a-line is forced by dimension counting
+for two distinct self-dual `[12,6]` codes; that the meet is a *minimum-weight* word rather than a
+generic weight-9/12 codeword is not forced and wants an explanation. The line is not
+frozen-invariant: both frozen generators keep `s` in `ker(H)` but carry it off `ker(H^T)` and do
+not fix `±s` (the all-ones fixed line lies in `ker(H)` only). So the group moves one Lagrangian
+relative to the other — the delocalized two-parent gluing phase of C472 — and the degenerate-pair
+Maslov/Kashiwara obstruction concentrates on one hexad, tying the metaplectic frontier directly to
+the `S(5,6,12)` combinatorics.
+**Evidence:** intersection line, `s`, its weight/support, the all-ones asymmetry, and the
+non-invariance under both frozen generators were independently recomputed by the integrator from
+the committed C471/C472 JSON certificates (both permutation-action conventions tested). The
+Kashiwara-index reading remains REASONED, not computed.
+**Status:** open lead; unallocated — sharpens the previous entry's promotion target to: compute the
+Kashiwara/Maslov index of the ordered pair `(ker H, ker H^T)` pinned to the hexad `s` and compare
+with C472's length-eight central scalar; fresh reserved C-ID required before any work.
