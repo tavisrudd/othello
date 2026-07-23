@@ -161,3 +161,25 @@ in binary-cubic space, and pulling back the ordered divided-Hessian root inciden
 `(2,2)` curve of arithmetic genus one.  Thus the genus-one strategy survives characteristic two;
 the missing theorem is the reducible/nonreduced classification for these constrained Hankel
 root-lines.
+
+## 2026-07-23 — C525 ordered-Hessian pullback closure
+
+C525 classifies the universal characteristic-two ordered-Hessian incidence after removable
+twisted-cubic vertical factors.  Its separable reducible locus is the Veronese surface of
+common-quadratic lines `P(qE)`; its inseparable locus is the two rulings of `AD+BC=0`.  One ruling
+is the tangent boundary of that surface, while the complementary ruling admits no nontrivial
+rank-two contained root-compatible pullback.  C512 therefore identifies the entire contained
+syndrome pullback with the persistent catalecticant/Lucas-nucleus carrier union.
+
+Outside the carrier, a nonzero pullback equation has degree at most four in each fixed root.
+Besides the quadratic Schwartz--Vandermonde estimate, disjoint five-element interpolation blocks
+give the linear sufficient threshold `q>=5(n-4)` while enforcing distinct roots automatically.
+Taking the better integer threshold and the exact deletion budget `3n-4`, the genus-one
+Hasse--Weil argument proves containment of every split-free syndrome in the persistent/Lucas
+union.  This is not a classification of which carrier points remain deep.
+
+The final Tao stress test closes six possible loopholes: after vertical/horizontal removal,
+bidegree forces `(1,1)+(1,1)`; the projectivity normal forms include the identity; inseparability
+is not conflated with nonreduced total space; split root forms are dense for the complementary
+ruling identity; disjoint interpolation blocks enforce squarefreeness; and the `F4` enumeration is
+only a regression, not the algebraic-closure proof.  No theorem statement changes.

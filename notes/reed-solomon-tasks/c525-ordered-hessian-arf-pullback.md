@@ -1,6 +1,6 @@
 # C525 — characteristic-two ordered-Hessian root-line classification
 
-**Lane:** `reed-solomon` · **Status:** queued next; C519 closed
+**Lane:** `reed-solomon` · **Status:** complete 2026-07-23
 
 ## Objective
 
@@ -85,3 +85,22 @@ type, and distinction from those classical families, then stop.
 - `notes/2026-07-23-c525-ordered-hessian-arf-pullback*`
 - `notes/reed-solomon-tasks/c525-ordered-hessian-arf-pullback.md`
 - the `reed-solomon` live handoff, archive, discovery track, and task lifecycle rows
+
+## Outcome
+
+The universal classification closes positively.  After removal of twisted-cubic vertical factors,
+the separable reducible locus is exactly the persistent Veronese surface
+`Sigma={P(qE)}`, while the inseparable locus is the two rulings of `AD+BC=0`.  The tangent ruling
+is the boundary of `Sigma`; the complementary ruling has no nontrivial rank-two contained
+root-compatible pullback.  C512 then identifies the only contained syndrome pullback with the
+persistent catalecticant/Lucas-nucleus carrier union.
+
+Outside that carrier, a geometrically integral reduced `(2,2)` slice exists for
+`q >= min((n-4)(n+3)/2+1, 5(n-4))`.  The second term comes from disjoint five-element
+interpolation blocks.  The exact deletion budget is `3n-4`; the additional Hasse condition
+`q+1-2 sqrt(q)>3n-4` supplies a split squarefree kernel member.  The report's atomic
+generator/JSON/replay/checksum bundle records the bounded algebra regression; no ambient syndrome
+census or fixed-redundancy extrapolation is used.  The final Tao stress test separately checks
+bidegree exhaustiveness, inseparable-versus-nonreduced semantics, density in the complementary
+pullback argument, collision-free interpolation, and the hand-proof/finite-regression boundary;
+it changes no theorem statement.

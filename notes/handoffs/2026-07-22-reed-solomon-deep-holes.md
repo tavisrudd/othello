@@ -4,11 +4,12 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C519 complete; C525 is next. C519 closed at its authorized
-characteristic-two obstruction exit: the universal branch quartic is a doubled quadric, so every
-characteristic-two pullback is square and the required successor is Artin--Schreier, not
-hyperelliptic. C525 owns the ordered-Hessian `(2,2)` degeneracy and constrained carrier pullback;
-C500 remains release-gated.
+**Status:** C475--C499, C509--C510, C512--C519, and C525 complete. C519 found the
+characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
+model and proves that its complete constrained degeneracy pullback is exactly the persistent
+catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
+`q >= min((n-4)(n+3)/2+1, 5(n-4))`, with deletion budget `3n-4`.  No technical successor is
+allocated; C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -583,6 +584,7 @@ neither may be replaced by a fixed-level census.
 | C517 | Lean formalization of C516 | complete | residual algebra and exact synthesis implication; explicit geometric/coding hypotheses; green gate and axiom audit | kernel-checked PRS theorem boundary |
 | C518 | modular TRS trace-one global incidence | complete | complement Frobenius alternants; binary and subfield shallow theorems; exact residual lifting torsor | first proved global obstruction |
 | C519 | universal residual-discriminant base locus | complete (obstruction exit) | integral pullback; doubled-quadric characteristic-two component; exact Artin--Schreier replacement gate | first additional component |
+| C525 | characteristic-two ordered-Hessian pullback | complete | universal Veronese/ruling classification; constrained carrier equality; linear base-selection route; genus-one containment theorem | arbitrary-degree characteristic-two obstruction classified |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -606,10 +608,11 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C516 closes the redundancy-nine residual-quadratic cover
   and characteristic-seven binary-quartic carrier. C517 owns its Lean formalization against the
-  frozen theorem boundary. C519 owns the arbitrary-redundancy alternative: identify the universal
-  residual branch with the binary-cubic discriminant, classify its complete pullback base locus,
-  and prove a root-compatible genus-at-most-one slice. No ambient census substitutes for its
-  component and contained-carrier gates.
+  frozen theorem boundary. C519 identifies the arbitrary-redundancy characteristic-two
+  discriminant obstruction, and C525 closes its ordered-Hessian replacement: the only nontrivial
+  contained pullback is the persistent/Lucas union, with an effective genus-one slice outside it.
+  A successor should be allocated only for a selected carrier-arithmetic family or fixed level;
+  no ambient census substitutes for that choice.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -637,6 +640,6 @@ history.
 
 ## Next command
 
-`go C525`
+`go reed-solomon`
 
-(C525 is next. C500 remains release-gated.)
+(No technical successor is allocated. C500 remains release-gated.)
