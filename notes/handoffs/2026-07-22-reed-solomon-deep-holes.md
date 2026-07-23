@@ -4,10 +4,11 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C519 complete; C519 closed at its authorized
+**Status:** C475--C499, C509--C510, and C512--C519 complete; C525 is next. C519 closed at its authorized
 characteristic-two obstruction exit: the universal branch quartic is a doubled quadric, so every
 characteristic-two pullback is square and the required successor is Artin--Schreier, not
-hyperelliptic. No technical successor is allocated; C500 remains release-gated.
+hyperelliptic. C525 owns the ordered-Hessian `(2,2)` degeneracy and constrained carrier pullback;
+C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -636,6 +637,6 @@ history.
 
 ## Next command
 
-`go reed-solomon`
+`go C525`
 
-(No technical successor is allocated. C500 remains release-gated.)
+(C525 is next. C500 remains release-gated.)
