@@ -7,6 +7,7 @@
 **Status:** C475--C491 and C499 complete; C498 active (all-field split-member theorem and
 persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
 C509 active (redundancy-seven claim-specific literature and pointed-polar entry gate);
+C510 queued (bounded one-twist TRS audit/geometry pilot after the C509 entry theorem);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -367,6 +368,9 @@ Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` throug
 
 - **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
+- **Twisted Reed--Solomon:** C510 is the bounded successor pilot.  It must first position
+  `arXiv:2403.11436` and `arXiv:2509.08526`, then identify one residual one-twist regime whose
+  parity-check geometry retains a usable deformation of the NRC; no all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Arbitrary-dimension Reed--Solomon:** the proved first-polar recursion now makes redundancy
