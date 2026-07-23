@@ -1095,3 +1095,20 @@ uniserial module, not the full group-algebra projective cover. The Loewy-length-
 state which object "P(1)" denotes (principal-block uniserial submodule, or a Borel/restricted cover).
 **Evidence:** OPEN — reasoned from standard PIM dimension `2p`; not a computation of C430's object.
 **Status:** open lead; unallocated — recommendation for C430/C433 to define/resolve; no task shape.
+
+### 2026-07-22 — C489's kill relocates the Maslov candidate to the non-transverse Lagrangian pair
+
+**Observed:** while running the C489 stage-1 kill switch (not sought by it), the two Golay carriers
+are not transverse: `dim(ker H ∩ ker H^T) = 1`, so the pair spans only an 11-space — C471 had
+already recorded the meet-in-one-line diagnostic without promoting it. Two Lagrangians meeting in a
+line is exactly the degenerate configuration where a Maslov/Kashiwara index is nontrivial and the
+phase concentrates on the shared line. So the C489 negative (no outer-odd invariant refinement on
+the hinge; outer unrealizable there) does not merely close the hinge route — it relocates the
+surviving Maslov candidate to the Kashiwara index of the pair `(ker H, ker H^T)`, which is the same
+global row/column gluing datum carrying C472's length-eight central word. The negative and C472's
+recorded global-phase frontier look like the same object from two sides.
+**Evidence:** intersection dimension certified in the C489 run (`2026-07-22-c489-maslov-roof-staged`
+bundle); the C471 report records the one-line meet as a diagnostic; the Kashiwara-index reading is
+REASONED, not computed.
+**Status:** open lead; unallocated — promotion would be a fresh reserved C-ID for "Kashiwara index
+of the `(ker H, ker H^T)` pair" as a reframed stage-2 target; no task shape until then.
