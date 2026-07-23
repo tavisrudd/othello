@@ -1,6 +1,7 @@
 # C530 — degree-nine Lucas \(e_7\) quotient ordered-root cover
 
-**Lane:** `reed-solomon` · **Status:** queued next; C529 obstruction isolated
+**Lane:** `reed-solomon` · **Status:** complete at the prescribed nonconstant
+Artin--Schreier/extra-monodromy stop
 
 ## Objective
 

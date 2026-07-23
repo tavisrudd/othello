@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, and C529 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529, and C530 complete. C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
@@ -12,11 +12,13 @@ catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base thres
 power-of-two top-nucleus carrier family and normalizes the linearized root cover on its
 distinguished Borel-endpoint orbit.  The
 C498/C509 parity law is the `F4`/order-two level; the first fresh degree-nine carrier has minimal
-constant field `F8` and an order-three component cycle on its `e_7` orbit, which is shallow when
-`3|m`, including infinitely many odd extension degrees.  This fires the authorized first-obstruction
-stop.  C530 is next: it owns the four-dimensional `e_7` quotient cover and exact deepness law for
-`3∤m`; C531 then owns the remaining intrinsic degree-nine carrier strata, and C532 packages the
-resulting redundancy-ten theorem.  C533 independently owns C525 threshold/deletion sharpening.
+constant field `F8` and an order-three component cycle on its `e_7` orbit.  C530 proves that this
+is only the `AGL_1(F8)` linear section: quotient directions `t^2,t^4` enlarge it to an
+`AGL_3(F2)` additive cover, while the generic framed incidence is a nonconstant Artin--Schreier
+double cover.  Every field of dimension at least three over `F2` contains a three-space subspace
+polynomial, so the full `e_7` orbit is shallow over every admissible field.  C531 is next and owns
+the remaining intrinsic degree-nine carrier strata; C532 packages the resulting redundancy-ten
+theorem.  C533 independently owns C525 threshold/deletion sharpening.
 C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
@@ -576,7 +578,19 @@ consecutive-row Lucas overlap through the first fresh level and proves the infin
 member exactly when `s|m`.  This recovers C498/C509 at
 `s=2`.  At `s=3`, Frobenius has order three on the components, disproving a stable parity law and
 closing C529 at its mandatory obstruction exit.  Deepness for `3∤m` needs normalization of the
-four-dimensional quotient cover; C530 now owns exactly that calculation at `e_7`.
+four-dimensional quotient cover; C530 closes exactly that calculation at `e_7`.
+
+## Closed base — C530
+
+`notes/2026-07-23-c530-degree-nine-lucas-e7-quotient-cover.md` computes the exact Borel stabilizer
+and Lucas orbit of `e_7`.  After framing two roots as `0,1`, the four-dimensional quotient
+incidence normalizes to the geometrically integral nonconstant Artin--Schreier cover
+`y^2+y=p/h^2`, with exact trace lifting law and every repeated-root/collision boundary explicit.
+The `F8`-linear C529 cover is not a component: the quotient directions `t^2,t^4` enlarge it to
+the additive-affine subcover with geometric monodromy `AGL_3(F2)`.  Three-dimensional `F2`
+subspace polynomials give split squarefree members over every `F_(2^m)` with `m>=3`, so the entire
+`PGL2` orbit of `e_7` is shallow over every admissible field, including all `3∤m`.  This fires
+C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other carrier strata.
 
 ## Execution ladder
 
@@ -606,8 +620,8 @@ four-dimensional quotient cover; C530 now owns exactly that calculation at `e_7`
 | C519 | universal residual-discriminant base locus | complete (obstruction exit) | integral pullback; doubled-quadric characteristic-two component; exact Artin--Schreier replacement gate | first additional component |
 | C525 | characteristic-two ordered-Hessian pullback | complete | universal Veronese/ruling classification; constrained carrier equality; linear base-selection route; genus-one containment theorem | arbitrary-degree characteristic-two obstruction classified |
 | C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; C530 owns quotient-cover arithmetic |
-| C530 | degree-nine `e_7` quotient cover | queued next | C529 order-three subcover | normalize the four-dimensional quotient and decide `3∤m` deepness | distinguished orbit arithmetic |
-| C531 | full degree-nine Lucas-carrier strata | queued after C530 | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
+| C530 | degree-nine `e_7` quotient cover | complete (obstruction exit) | nonconstant Artin--Schreier normalization; `AGL_3(F2)` additive subcover; orbit shallow over every admissible field | exact distinguished-orbit arithmetic | closed `e_7` theorem boundary |
+| C531 | full degree-nine Lucas-carrier strata | queued next | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | queued after C531 | degree-nine carrier theorem boundary | effective high-field deep set, threshold, and orbit law | fixed-level theorem |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
 
@@ -638,8 +652,9 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   contained pullback is the persistent/Lucas union, with an effective genus-one slice outside it.
   C529 selects the coherent power-of-two Lucas family and stops at its first intrinsic
   level-dependent obstruction: the degree-nine carrier has an order-three constant-field cycle.
-  C530 is allocated to normalize its four-dimensional quotient cover at the distinguished `e_7`
-  orbit.  C531 owns extension to other intrinsic `PGL2` normal forms, and C532 owns the resulting
+  C530 closes the distinguished `e_7` quotient: a nonconstant Artin--Schreier generic layer and
+  larger `AGL_3(F2)` additive cover make that full orbit shallow over every admissible field.
+  C531 owns extension to other intrinsic `PGL2` normal forms, and C532 owns the resulting
   redundancy-ten synthesis.  C533 separately sharpens C525's bound.  No ambient census substitutes
   for any of these calculations.
 
@@ -669,6 +684,6 @@ history.
 
 ## Next command
 
-`go C530`
+`go C531`
 
-(C530 is next. C500 remains release-gated.)
+(C531 is next. C500 remains release-gated.)
