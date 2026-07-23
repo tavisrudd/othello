@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C490 complete; C491 allocated next.  C478's coherence upgrade identifies each
+**Status:** C475--C491 complete; no open allocation — the lane's execution ladder is finished.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -19,9 +19,13 @@ Modular machinery remains separate behind the matching, Gram, and Sylow gates.  
 all-field theorem, proves that the complete child alone recovers the unlabelled parent for `q>=16`,
 and confines the unresolved at-most-three base-size question to an exact collision-hypergraph
 problem over `q<=13`.  C490 closes it with exact empty-child and q=7 two-point exceptions; every
-recoverable fibre has base at most three, and q=13 is already child-rigid.  C491 then attacks projective
-Reed--Solomon redundancy five, with both tasks required to extract reusable tools for the eventual
-punctured-normal-rational-curve completion programme without expanding into it.
+recoverable fibre has base at most three, and q=13 is already child-rigid.  C491 closes the
+2019-announced redundancy-five case: covering radius unconditional, a characteristic-free
+Hankel-pencil criterion, the complete PΓL₂ deep-hole classification of `PRS(q-4)` (tangent and
+sigma-secant plus new arithmetic families: osculating-pair intersections gated by q mod 3, and in
+characteristic 3 a fixed nucleus deep hole plus a wild Artin--Schreier family), sporadic orbits
+exactly at q in {7,8,9,11,13,17,19}, and an NRC bridge ledger whose next falsifiable gate is the
+redundancy-six net-of-quartics split-member lemma.
 
 ## Goal
 
@@ -236,7 +240,7 @@ classification.
 
 Task card: `notes/reed-solomon-tasks/c485-all-field-reconstruction-synthesis.md`.
 
-## Current frontier — C491
+## Closed base — C490
 
 C490's [`small-field closure`](../2026-07-22-c490-small-field-base-size-closure.md) exhausts the
 child-derived fifteen-line decompositions and coherent collision hypergraphs.  Its exact bases are
@@ -244,12 +248,25 @@ child-derived fifteen-line decompositions and coherent collision hypergraphs.  I
 the q=11 conic child; all q=13 and other nonempty residual fibres are child-rigid.  Empty children
 and q=7's two-point conic-complement fibre are the complete impossible table.
 
-C491 begins after a claim-specific literature audit.  It targets `PRS(q-4)`, the
-redundancy-five projective Reed--Solomon case, through the quartic normal rational curve in `PG(4)`
-and binary-quartic/apolar invariant theory.  Both tasks carry an NRC bridge ledger: prove free
-dimension-independent lemmas encountered in scope, mark low-dimensional accidents, and identify
-the exact next lemma needed for the eventual Cheng--Murray completion theorem.  The ledger is a
-tool observatory, not an allocation of arbitrary-dimensional work.
+## Closed base — C491
+
+[`C491 redundancy-five classification`](../2026-07-22-c491-prs-redundancy-five.md) closes the
+2019-announced `k=q-4` case after a NOT-PRE-EMPTED
+[literature audit](../2026-07-22-c491-prs-redundancy-five-literature-audit.md).  The covering
+radius is 4 unconditionally for all prime powers q>=7 (Seroussi--Roth range, both parities).
+A characteristic-free Hankel criterion turns deep holes into pencils of binary cubics without a
+split squarefree member, and the classification is exceptional-cover arithmetic of the induced
+degree-3 map: tangent and sigma-secant strata (the ZWK families) from pencil gcds; osculating-pair
+intersection points deep exactly per q mod 3 (rational pair at q=2 mod 3, conjugate pair at
+q=1 mod 3); in characteristic 3 all osculating planes concur at a PGL₂-fixed nucleus deep hole and
+a wild Artin--Schreier family of size (q²−1)/2 with stabilizer 2q is deep on the nonsquare class;
+geometric-S₃ pencils have a split member for q>=41 via Aubry--Perret on the (2,2) fiber-square
+curve.  A two-implementation exhaustive census over all nineteen prime powers 7<=q<=49 certifies
+the theorem below the bound and the complete sporadic tables at q in {7,8,9,11,13,17,19} (empty
+otherwise).  Totals: q²(q+3)/2, q(q+1)(q+2)/2, and (q³+3q²+q+1)/2 in characteristic 3.  Evidence
+bundle: census generator/JSON, independent replay, and SHA-256 manifest, committed together.
+
+Task card: `notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.
 
 ## Execution ladder
 
@@ -265,11 +282,10 @@ tool observatory, not an allocation of arbitrary-dimensional work.
 | C484 | coherent semilinear descent | complete | Kummer/Artin--Schreier sheet class; finite-stabilizer criterion; q=8 colour Frobenius is `3+3` | all-field semilinear reconstruction |
 | C485 | all-field redundancy-three synthesis | complete | exact pure/child-relative clauses, algorithm, exceptions, descent, GRS specialization, and `q>=16` child rigidity | programme-level reconstruction theorem |
 | C490 | `q<=13` complete-child closure | complete | exact bases for every recoverable fibre; empty-child and q=7 two-point exceptions; collision hypergraphs and NRC bridge ledger | classified all-field child-relative theorem |
-| C491 | PRS redundancy-five classification | after C490 + literature audit | covering-radius gate and complete semilinear deep-hole orbit classification; NRC bridge ledger | first higher-normal-rational-curve calibration |
+| C491 | PRS redundancy-five classification | complete | unconditional covering radius; complete PΓL₂ classification with new O±/nucleus/wild families and certified sporadic tables; NRC bridge ledger with the redundancy-six net lemma as next gate | first higher-normal-rational-curve calibration |
 
 Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
-`notes/reed-solomon-tasks/c490-small-field-base-size-closure.md`.  Open card:
-`notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.
+`notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.  No open card.
 
 ## Unallocated level-ups
 
@@ -281,11 +297,12 @@ Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` throug
   bridge ledgers, but allocation still requires a claim-specific literature audit and a proved
   higher-symmetric-power analogue of (1); small-field or quartic success alone supplies no bridge.
 
-**Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction with explicit
-discriminant and classified exceptional fibres.  C490 closes its bounded residual child clause
-with exact bases or information-theoretic exceptions in every field; C491 is the first
-higher-normal-rational-curve application.  Neither is the general
-Reed--Solomon deep-hole conjecture.
+**Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
+its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
+classification (the 2019-announced case), the first result past redundancy four and the first with
+arithmetic (q mod 3 / square-class) deep-hole families.  None of these is the general Reed--Solomon
+deep-hole conjecture, and arbitrary redundancy remains behind the pre-allocation gate: the
+identified entry lemma is split-member existence for nets of binary quartics (redundancy six).
 
 ## Boundaries
 
@@ -306,4 +323,6 @@ history.
 
 ## Next command
 
-`go C491`
+Lane complete.  Stop and ask: archive this handoff, update the routing table, and which lane next.
+A redundancy-six successor requires a fresh allocation and its own literature audit; the C491
+report's NRC bridge ledger (§9) holds the exact entry lemma and a cheap census harness plan.

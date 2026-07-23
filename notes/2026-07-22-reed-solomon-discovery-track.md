@@ -70,3 +70,20 @@ tool level. The specific (binary sextic, binary quadratic) joint-covariant / har
 framing tied to deep-hole orbit reconstruction has no predecessor located over the covered indices
 (MathSciNet/Google Scholar NOT COVERED; Dür 1991 body not reached, verdict rests on its abstract).
 Internal use as vocabulary remains free; external wording must cite and distinguish Dür 1991.
+
+## 2026-07-22 — C491 incidental observations
+
+- **Stab-12 sporadic pattern.** The sporadic deep-hole orbits with stabilizer order 12 occur at
+  exactly the sporadic prime fields q ≡ 1 mod 3 (q = 7, 13, 19: sizes 28, 182, 570), and their
+  pencils contain no linear×irreducible-quadratic member at all (members are only
+  double-root or irreducible cubics). Smells like equianharmonic/j=0 pencils whose arithmetic
+  S₃ image degenerates; a uniform description would explain most of the sporadic mass.
+  Certified data in `2026-07-22-c491-prs-deep-hole-census.json`; no allocation.
+- **q=8 sporadic torsor.** The three sporadic 252-orbits at q=8 are a single Frobenius orbit
+  (PΓL fuses 3→1), i.e. a Gal(F₈/F₂)-torsor on a cubic-twist parameter — same flavor as the
+  C484 q=8 colour-orbit C₃. Possible common mechanism with the frozen redundancy-three q=8
+  story; not developed.
+- **Sporadic vanishing gap.** Weil bookkeeping proves no S₃-stratum deep holes for q ≥ 41 but
+  the census shows none already for q = 16 and all 23 ≤ q ≤ 37; the true threshold is a bounded
+  curve-theoretic question (sharpen the 4+24 discard constants and Aubry–Perret on the (2,2)
+  fiber-square curve). Cheap if ever needed for a clean paper statement.
