@@ -166,13 +166,20 @@ involution `J` (a conic polarity / det-nonsquare correlation candidate) and veri
 17,954 `Y_0` objects, swapping reply type while preserving `Y_NK0`. Marginal equality is necessary,
 not sufficient; the per-stratum matching test is the decisive next check.
 
-### Doors (unallocated successors)
+### Promoted successor
 
 - **Residual-refined double coset.** The mechanism pins the failure on residual conic content the
   centre-configuration label omits. The natural next label is the joint stabiliser of the intruder
   configuration **and** the selected conic points, `Stab_G({σ_i}) ∩ Stab_G(residual conic)` — does
   *that* refine `Y_NK0`-membership, and does the pure sub-domain of finding 2 extend to a full guard?
-  Bounded; route through normal allocation if pursued.
+  This remains an unallocated refinement of the failed stratum mechanism.
+- **C508 — external-C2 pairing/local-detector falsifier.** The exact 1:1 reply-type balance is now
+  allocated as a distinct bounded probe. Test the frozen projective-plane correlation/polarity
+  candidates on the full marked `Y_0` state, require an explicit involution swapping reply type
+  while preserving `Y_NK0`, and seek a minimal full-state stabilizer-class detector. The
+  centre-only label is excluded by C497; a positive pairing is not a descent theorem unless its
+  quotient strengthens C80's guard or measure. Report target:
+  `notes/2026-07-22-c508-q17-external-c2-local-detector.md`.
 
 ### Mystery ledger
 

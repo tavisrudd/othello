@@ -636,12 +636,20 @@ task list.  Current high-value items:
   same-stratum `Y_NK0`/non-`Y_NK0` splits over the exactly-reproduced frozen census (59,153 / 17,954
   / 3,048).  Stratification is refuted as the bulk-descent mechanism (an additive/incidence label
   orthogonal to residual-carried value), so the full P/N sweep is skipped; report
-  `../2026-07-22-c497-double-coset-stratum-constancy.md`.  **C496** last
+  `../2026-07-22-c497-double-coset-stratum-constancy.md`.  C502's corrected hexad lesson applies
+  only at the governing-`C2` level: a small stabilizer-class comparison can detect an external
+  orientation swap, but cannot be assumed to detect value.  At q17 any analogue must use the full
+  marked residual state, including selected conic content; the centre configuration alone is
+  provably insufficient.  **C496** remains the two-sorted-coupling probe
   (bi-Hecke bimodule `e_K F[G] e_H` as the two-sorted coupling; C495 layer-3 supports the
-  set-faithful/rank-dropping picture).  q∈{7,11}-only structure caveat: C497 borrows C434's method,
-  not its group structure, at q17.  Provenance: C80 report probe section
+  set-faithful/rank-dropping picture).  **C508 [QUEUED]** separately tests whether C497's exact
+  q17 1:1 reply-type balance comes from an explicit value-preserving external involution and a
+  local full-state detector; a positive gives symmetry/case reduction only unless it improves
+  C80's guard or descent measure.  q∈{7,11}-only structure caveat: C497 borrows C434's method, not
+  its group structure, at q17.  Provenance: C80 report probe section
   (`../2026-07-12-c80-bulk-exhaustion-probe.md`), transfer note
-  `../2026-07-22-c434-c80-cross-lane-transfers.md`.
+  `../2026-07-22-c434-c80-cross-lane-transfers.md`, and corrected local-detector theorem
+  `../2026-07-22-c502-hexad-outer-bit-exploit.md`.
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
   step-group leaves, and `Class0`). The full v5 tree has 326 node leaves + 326 step leaves;

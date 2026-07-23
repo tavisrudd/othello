@@ -52,3 +52,18 @@ C82 counts anything.
   at q=17.
 - C434's decorated inversion is a reconstruction statement; it contributes nothing to C80(b)'s
   descent-measure / minimax-potential gap (the `|L|` drain).
+
+## C502/C497 correction and surviving follow-up
+
+C495 and C497 close Transfers 1 and 3 negatively at the value/object level.  The faithful residue
+is the external determinant-square `C2`: at q11 it swaps C80's two pointed packet states while
+C502's shared hexad detects the corresponding outer carrier class.  The correct transferable
+principle is therefore “a small stabilizer-class comparison can detect an external orientation,”
+not “the local detector determines game value.”
+
+At q17, C497's centre-configuration strata omit the selected residual conic content and are
+provably value-mixed.  C508 is the bounded surviving test: search the frozen projective-plane
+correlation/polarity candidates for an explicit involution of the full marked `Y_0` census that
+swaps the 0/2-fixed reply types, preserves `Y_NK0`, and admits a local full-state stabilizer-class
+detector.  A positive result is case reduction only unless its quotient strengthens C80's sparse
+guard or supplies a decreasing measure.
