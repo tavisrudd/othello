@@ -1,0 +1,426 @@
+{
+  "inputs": {
+    "2026-07-22-c471-hadamard-degeneration-complex.json": "3676e3b8b1c7c92f9c74b80c90b572d3322c73a2509cd96b5718e769fb0e5a15",
+    "2026-07-22-c472-signed-weil-lift.json": "9c9311c48a33d4e3fe0101ecb82cb29154e926e3bf920771716ae5bb69ffefe5"
+  },
+  "module_structure": {
+    "End_V_dim": 2,
+    "Hom_V_Vdual_dim_and_maxrank": [
+      1,
+      1
+    ],
+    "V_equals_kerH": {
+      "basis_rref": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          1,
+          2,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          2,
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          2,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          2,
+          1,
+          2,
+          2,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          2,
+          1,
+          2,
+          2,
+          1
+        ]
+      ]
+    },
+    "V_isomorphic_to_outer_twist": false,
+    "V_selfdual": false,
+    "conclusion": "V = 1 (+) 5a; the 5-space is neither self-dual (Hom(V,V*) has rank 1) nor outer-self-dual (Hom(V,V^theta) has rank 1 for every class swap). The only PSL_2(11)-invariant symmetric self-pairing is rank one, supported on the fixed line. No invariant NONDEGENERATE self-pairing exists.",
+    "fixed_space_basis": [
+      [
+        2,
+        0,
+        1,
+        2,
+        1,
+        1
+      ]
+    ],
+    "fixed_space_dim": 1,
+    "invariant_functional_dim": 1,
+    "invariant_functional_ell0": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "invariant_symmetric_form_b0": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "invariant_symmetric_form_dim": 1,
+    "invariant_symmetric_form_radical_dim": 5,
+    "invariant_symmetric_form_rank": 1,
+    "outer_twist_maxrank_by_k": {
+      "2": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "10": 1
+    },
+    "psl2_generators_T_S": {
+      "S": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          1,
+          0
+        ]
+      ],
+      "T": [
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "orders": [
+        11,
+        2
+      ]
+    }
+  },
+  "outer_map_tau": {
+    "construction": "tau = the canonical Bockstein--Tor duality between the row/column carriers, the nondegenerate equivariant pairing P : ker(H^T) x ker(H) -> F_3. The outer automorphism of PSL_2(11) acts on the 5-dimensional constituents by 5a <-> 5b = dualization, so H <-> H^T duality is exactly the carrier-level outer relationship.",
+    "cross_check_C472_C480": "Consistent with C472 (both 288-point signed-pair orbits share the same frozen hinge complement; no outer exchange on the hinge) and C480 (N_{M12}(PSL_2(11)) = PSL_2(11), no ambient outer element).",
+    "duality_nondegenerate": true,
+    "induced_relation": "dualization (the outer relation 5a<->5b) between ker(H) and ker(H^T)^*.",
+    "nontriviality_certification": "tau is not trivial-by-construction: P is a genuine nondegenerate pairing (rank 6). Yet the outer relation CANNOT be realised as an invertible self-map of the six-space -- the would-be map is the self-duality V -> V*, of rank 1 (Hom(V,V*) rank 1) -- because ker(H) is neither self-dual nor outer-self-dual. So the even parity verdict is forced by module theory, not by a degenerate tau.",
+    "outer_automorphism_realizable_as_invertible_self_map_on_carrier": false,
+    "would_be_outer_self_map_is_self_duality_maxrank": 1
+  },
+  "pairing": {
+    "bockstein_tor_cross_pairing_kerHt_x_kerH": [
+      [
+        1,
+        2,
+        2,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        2,
+        0,
+        2
+      ],
+      [
+        2,
+        1,
+        0,
+        1,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        2,
+        1,
+        0,
+        2,
+        1
+      ],
+      [
+        2,
+        1,
+        0,
+        2,
+        2,
+        2
+      ]
+    ],
+    "checkpoint_A_reconciliation": {
+      "conclusion": "The Bockstein--Tor pairing is the nondegenerate cross-carrier duality ker(H^T) x ker(H) -> F_3, NOT a nondegenerate symmetric self-pairing on ker(H).",
+      "discriminant_route": "L = H.Z^12, Gram H^T H = 12 I; disc group (Z/12)^12, 3-part (Z/3)^12 nondegenerate; ker(H mod 3) is a Lagrangian (self-dual ternary Golay), so the induced self-form vanishes and the induced nondegenerate pairing is the cross pairing ker(H) x (disc/ker) = P.",
+      "divided_operator_selfform_x_T_Hy_over_3": "ILL-DEFINED as a self-pairing on ker(H): a valid lift change of the second argument alters the value.",
+      "dot_product_selfform_on_kerH_identically_zero": true,
+      "lift_dependence_example": {
+        "changed": true,
+        "shift_coordinate": 2,
+        "value_after_lift_shift": 0,
+        "value_base": 1
+      },
+      "reason": "H is not symmetric; the ambiguity is (H^T x).v and x in ker(H) is not in ker(H^T).",
+      "routes_agree": true,
+      "well_defined_form_is_cross_pairing": "x'.(H y /3) is well defined for x' in ker(H^T), giving exactly the nondegenerate cross pairing P."
+    },
+    "cross_pairing_nondegenerate": true,
+    "cross_pairing_rank": 6,
+    "equivariance": "P . R = (M^{-1})^T . P  (coordinate generator R adjoint to row generator M^{-1}); realises ker(H) ~= ker(H^T)^* under the full signed group.",
+    "transpose_cross_pairing_kerH_x_kerHt_rank": 6
+  },
+  "parity_verdict": {
+    "all_invariant_refinements_outer_even": true,
+    "kill_switch_fires": true,
+    "outer_even_table": [
+      {
+        "outer_even": true,
+        "refinement": "q0"
+      },
+      {
+        "outer_even": true,
+        "refinement": "q0+ell0"
+      },
+      {
+        "outer_even": true,
+        "refinement": "q0+2*ell0"
+      }
+    ],
+    "outer_odd_invariant_refinement_exists": false,
+    "reason": "The outer automorphism is not realized on the carrier, so it induces no map on the set of invariant refinements; every invariant refinement is outer-even. The concrete transpose-duality map is inner and fixes each invariant refinement."
+  },
+  "refinement_census": {
+    "group": "(Z/3)^6",
+    "homogeneous_refinement": "q0(x) = 2 b0(x,x) = 2 ell0(x)^2",
+    "invariant_functional_space_dim": 1,
+    "invariant_refinements": [
+      "q0",
+      "q0+ell0",
+      "q0+2*ell0"
+    ],
+    "invariant_refinements_brute_counted": 3,
+    "invariant_refinements_predicted": 3,
+    "refined_form": "invariant symmetric form b0 (the unique PSL_2(11)-invariant self-pairing)",
+    "refinement_torsor_size": 729
+  },
+  "schema": "c489-maslov-roof-staged/1",
+  "scope": {
+    "not_claimed": "No genuine metaplectic/Weil identification; no stage-2 holonomy result.",
+    "paper": "Paper 2 owned; never a Paper 1 dependency."
+  },
+  "stage2_disposition": {
+    "statement": "Stage 1 kills the candidate; stage 2 (Maslov/metaplectic holonomy comparison of C472's length-eight central word) is NOT started. See the report for the closed-negative statement.",
+    "survived": false
+  },
+  "task": "C489 stage 1 -- staged Maslov roof kill-switch: PSL_2(11)-invariant quadratic refinements of the Bockstein--Tor pairing on C471's rank-six F_3 complex, outer parity.",
+  "transpose_carrier_cross_check": {
+    "carrier": "V* (Bockstein-dual companion of ker(H^T))",
+    "end_dim": 2,
+    "fixed_dim": 1,
+    "invariant_functional_dim": 1,
+    "invariant_symmetric_form_dim": 1,
+    "invariant_symmetric_form_rank": 1,
+    "note": "Identical structural signature to V (End dim 2, one fixed line, one invariant functional, unique invariant symmetric form of rank 1), as forced by the certified V ~= ker(H^T) duality.",
+    "transpose_cross_pairing_P2_rank": 6
+  },
+  "trusted_boundary": "Exact F_3 and integer arithmetic; exhaustive enumeration of the finite 729-element refinement torsor and the stated 6x6 homomorphism/form spaces; deterministic bounded search for a PSL_2(11) involution on the transpose carrier; hash-pinned C471 and C472 certificates. No literature, no full Mathieu recomputation, no stage-2 claim.",
+  "verdict": "KILL -- SHARP NEGATIVE. Every PSL_2(11)-invariant quadratic refinement is outer-even; the outer automorphism is not realized on the hinge carrier (ker(H) is not outer-self-dual). C489 closes negative at stage 1."
+}
