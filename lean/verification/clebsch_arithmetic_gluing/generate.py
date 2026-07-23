@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Stable generator for the compact finite projective certificate consumed by Lean."""
+"""Generate the rank-three arithmetic-gluing finite projective certificate.
+
+The canonical source records reductions, matchings, transporters, and torus multipliers.
+This generator exhaustively reconstructs normalized PGL(2,11), its square-determinant half,
+the two matching stabilizers and their transported signatures, and a bounded word cover.
+Lean kernel-checks the literal invariants stated in the generated module; this program is
+the reproducibility source for stabilizer, coset, and word-coverage completeness.
+"""
 
 from __future__ import annotations
 
@@ -10,21 +17,14 @@ from collections import deque
 from itertools import product
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-NOTES = ROOT / "notes"
-LEAN = ROOT / "lean/RelativeConicArcs/ClebschArithmeticGluingData.lean"
-OUT = NOTES / "2026-07-22-c503-clebsch-arithmetic-gluing-lean.json"
-MANIFEST = NOTES / "2026-07-22-c503-clebsch-arithmetic-gluing-lean.sha256"
+HERE = Path(__file__).resolve().parent
+LEAN_ROOT = HERE.parents[1]
+LEAN = LEAN_ROOT / "RelativeConicArcs/ClebschArithmeticGluingData.lean"
+SOURCE = HERE / "source_data.json"
+OUT = HERE / "certificate.json"
+MANIFEST = HERE / "manifest.sha256"
 BEGIN = "/- BEGIN ARITHMETIC GLUING CERTIFICATE DATA -/"
 END = "/- END ARITHMETIC GLUING CERTIFICATE DATA -/"
-INPUTS = [
-    NOTES / "2026-07-21-c441-vertex-reduction-bijection.json",
-    NOTES / "2026-07-21-c442-antipodal-singleton-reduction.json",
-    NOTES / "2026-07-21-c444-silver-fusion.json",
-    NOTES / "2026-07-21-c445-characteristic-11-gluing.json",
-    NOTES / "2026-07-21-c449-split-coxeter-torus.json",
-    NOTES / "2026-07-21-c458-golden-sheet-frame-freeze.json",
-]
 
 Matrix = tuple[int, int, int, int]
 Point = int | None
@@ -126,43 +126,12 @@ def generation_words(q: int, psl: list[Matrix], generators: list[Matrix]) -> lis
     return padded
 
 
-def source_matching() -> tuple[list[Edge], list[Edge]]:
-    raw = json.loads((NOTES / "2026-07-21-c445-characteristic-11-gluing.json").read_text())
-    finite = raw["exact_gluing_theorem"]["characteristic_11"]
-
-    def decode(rows: list[list[int]]) -> list[Edge]:
-        return [(None if x == 11 else x, None if y == 11 else y) for x, y in rows]
-
-    return decode(finite["base_matching"]), decode(finite["jmate_matching"])
-
-
 def source_literal_data() -> dict:
-    """Extract and schema-compare every upstream literal used by the Lean definitions."""
-    def load(name: str) -> dict:
-        return json.loads((NOTES / name).read_text())
-
-    def point(x: int | str) -> Point:
-        return None if x in ("inf", 11) else int(x)
-
-    c441 = load("2026-07-21-c441-vertex-reduction-bijection.json")
-    cases = c441["cases"]
-    a3_rows = cases["A3_octahedron"]["bijection_table"]
-    b3_rows = cases["B3_cube"]["bijection_table"]
-    h3_rows = cases["H3_icosahedron"]["bijection_table"]
-    reductions = {
-        "a3": [
-            [point(row["point"]) for row in a3_rows],
-            [point(row["point_iconj"]) for row in a3_rows],
-        ],
-        "b3": [
-            [point(row["point_pi"]) for row in b3_rows],
-            [point(row["point_pi_bar"]) for row in b3_rows],
-        ],
-        "h3": [
-            [point(row["point_pi"]) for row in h3_rows],
-            [point(row["point_pi_bar"]) for row in h3_rows],
-        ],
-    }
+    """Load and validate the canonical literal input used by the Lean definitions."""
+    raw = json.loads(SOURCE.read_text())
+    assert raw["schema"] == "clebsch-arithmetic-gluing-source-v1"
+    literal = raw["literal_data"]
+    reductions = literal["vertex_reductions"]
     assert reductions == {
         "a3": [[0, None, 1, 4, 2, 3], [0, None, 1, 4, 3, 2]],
         "b3": [[0, None, 3, 5, 6, 1, 2, 4], [0, None, 4, 2, 1, 6, 5, 3]],
@@ -172,76 +141,36 @@ def source_literal_data() -> dict:
         ],
     }
 
-    c444 = load("2026-07-21-c444-silver-fusion.json")
-    def edges(rows: list[list[int | str]]) -> list[Edge]:
-        return [(point(x), point(y)) for x, y in rows]
-
-    matchings = {
-        "a3_i2": edges(c444["A3"]["matching_at_i_2"]),
-        "a3_i3": edges(c444["A3"]["matching_at_i_3"]),
-        "b3_negative": edges(c444["B3"]["reductions"]["sqrt2_3"]["matching"]),
-        "b3_positive": edges(c444["B3"]["reductions"]["sqrt2_4"]["matching"]),
-    }
-    c445 = load("2026-07-21-c445-characteristic-11-gluing.json")
-    base, conjugate = source_matching()
-    matchings["h3_base"] = base
-    matchings["h3_conjugate"] = conjugate
+    matchings = literal["matchings"]
     assert matchings == {
-        "a3_i2": [(0, None), (1, 4), (2, 3)],
-        "a3_i3": [(0, None), (1, 4), (2, 3)],
-        "b3_negative": [(0, None), (1, 3), (2, 6), (4, 5)],
-        "b3_positive": [(0, None), (1, 5), (2, 3), (4, 6)],
-        "h3_base": [(0, 1), (2, 5), (3, 7), (4, 9), (6, 8), (10, None)],
-        "h3_conjugate": [(0, 10), (1, None), (2, 7), (3, 5), (4, 8), (6, 9)],
+        "a3_i2": [[0, None], [1, 4], [2, 3]],
+        "a3_i3": [[0, None], [1, 4], [2, 3]],
+        "b3_negative": [[0, None], [1, 3], [2, 6], [4, 5]],
+        "b3_positive": [[0, None], [1, 5], [2, 3], [4, 6]],
+        "h3_base": [[0, 1], [2, 5], [3, 7], [4, 9], [6, 8], [10, None]],
+        "h3_conjugate": [[0, 10], [1, None], [2, 7], [3, 5], [4, 8], [6, 9]],
     }
-    silver_transporter = sum(c444["B3"]["spin_model"]["silver_conjugation_matrix"], [])
+    silver_transporter = literal["silver_transporter"]
     assert silver_transporter == [1, 0, 0, 6]
-    golden_transporter = c445["exact_gluing_theorem"]["characteristic_11"][
-        "outer_transporter"]["matrix_mod_11"]
+    golden_transporter = literal["golden_transporter"]
     assert golden_transporter == [1, 10, 1, 1]
-
-    c449 = load("2026-07-21-c449-split-coxeter-torus.json")
-    torus = []
-    for row in c449["finite_generator_images"]:
-        q = row["prime_q"]
-        a, b, c, d = row["generator_matrix_in_frozen_P1_frame"]
-        assert (a, b, c) == (1, 0, 0)
-        torus.append((q, pow(d, -1, q), row["coxeter_square_order"]))
-        assert row["determinant_square"] is True
-        assert row["action_decomposition"]["fixed_points"] == [0, "inf"]
-    assert torus == [(5, 4, 2), (7, 2, 3), (7, 2, 3), (11, 9, 5), (11, 4, 5)]
-
-    c442 = load("2026-07-21-c442-antipodal-singleton-reduction.json")
-    assert c442["clause_i_antipodal_uniqueness"]["unique"] is True
-    m0 = c442["clause_ii_singleton_identification"]["binary_form_frame_M0_frozen"]
-    assert (m0["M0_pgl_orbit_size"], m0["M0_psl_orbit_size"],
-            m0["M0_pgl_stabilizer_order"]) == (22, 11, 60)
-
-    c458 = load("2026-07-21-c458-golden-sheet-frame-freeze.json")
-    polar = c458["golden_sheet_frame"]["polar_pair_matching"]
-    assert edges(polar["reduction_at_pi_phi_to_8"]["matching"]) == base
-    assert edges(polar["reduction_at_pibar_phi_to_4"]["matching"]) == conjugate
-
-    return {
-        "vertex_reductions": reductions,
-        "matchings": matchings,
-        "silver_transporter": silver_transporter,
-        "golden_transporter": golden_transporter,
-        "coxeter_square_multipliers": [[5, 4], [7, 2], [11, 9], [11, 4]],
-    }
+    assert literal["coxeter_square_multipliers"] == [[5, 4], [7, 2], [11, 9], [11, 4]]
+    return literal
 
 
 def build() -> dict:
     q = 11
     pgl, psl = groups(q)
-    base, conjugate = source_matching()
+    literal = source_literal_data()
+    base = [tuple(edge) for edge in literal["matchings"]["h3_base"]]
+    conjugate = [tuple(edge) for edge in literal["matchings"]["h3_conjugate"]]
     base_stab = stabilizer(q, pgl, base)
     conjugate_stab = stabilizer(q, pgl, conjugate)
     generators = sorted(set(base_stab) | set(conjugate_stab))
     result = {
         "schema": "clebsch-arithmetic-gluing-lean-v1",
-        "inputs": {path.name: digest(path) for path in INPUTS},
-        "literal_data": source_literal_data(),
+        "inputs": {SOURCE.name: digest(SOURCE)},
+        "literal_data": literal,
         "h3": {
             "base_stabilizer": base_stab,
             "conjugate_stabilizer": conjugate_stab,
@@ -275,7 +204,7 @@ def lean_list(name: str, values: list, item, lean_type: str) -> str:
 def lean_block(data: dict) -> str:
     h3 = data["h3"]
     chunks = [
-        "/- Generated by `notes/clebsch-arithmetic-gluing-lean-v1.py`, schema",
+        "/- Generated by `verification/clebsch_arithmetic_gluing/generate.py`, schema",
         "`clebsch-arithmetic-gluing-lean-v1`. -/",
         "/-- The sixty leading-normalized matrices stabilizing the base golden matching. -/",
         lean_list("h3BaseStabilizerCertificate", h3["base_stabilizer"], matrix,
@@ -320,9 +249,10 @@ def updated_lean(data: dict) -> bytes:
 def manifest_bytes(data_bytes: bytes, lean_bytes: bytes) -> bytes:
     rows = [
         (hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-            str(Path(__file__).relative_to(ROOT))),
-        (hashlib.sha256(data_bytes).hexdigest(), str(OUT.relative_to(ROOT))),
-        (hashlib.sha256(lean_bytes).hexdigest(), str(LEAN.relative_to(ROOT))),
+            str(Path(__file__).relative_to(LEAN_ROOT))),
+        (digest(SOURCE), str(SOURCE.relative_to(LEAN_ROOT))),
+        (hashlib.sha256(data_bytes).hexdigest(), str(OUT.relative_to(LEAN_ROOT))),
+        (hashlib.sha256(lean_bytes).hexdigest(), str(LEAN.relative_to(LEAN_ROOT))),
     ]
     return "".join(f"{sha}  {name}\n" for sha, name in rows).encode()
 

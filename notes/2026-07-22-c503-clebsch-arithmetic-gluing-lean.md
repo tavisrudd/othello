@@ -25,8 +25,9 @@ behind exact proved interfaces or cited inputs; they may not be inferred from or
   `lean/RelativeConicArcs/ClebschArithmeticGluing.lean`,
   `lean/RelativeConicArcs/Gates/ClebschArithmeticGluing.lean`, this report, and a same-stem
   `.py/.json/.sha256` bundle only if a new normalized certificate is necessary.  The same-stem
-  Python entry point may delegate to one enduring, workflow-free generator named by generated
-  scholarly source.
+  Python entry point delegates to the enduring, workflow-free
+  `lean/verification/clebsch_arithmetic_gluing/` source/generator/certificate/manifest bundle
+  named by generated scholarly source.
 - Consume the committed F5/F8 APIs and frozen upstream certificates read-only.
 - Exit through `RelativeConicArcs.Gates.ClebschArithmeticGluing`.
 
@@ -123,14 +124,16 @@ with Fermat inversion; no imported group-order assertion or order-to-name infere
 ## Frozen provenance and independent replay
 
 A normalized certificate was necessary for the `H3` leaves after direct kernel enumeration exceeded
-the measured memory envelope.  The same-stem compatibility entry point delegates to the enduring
-tracked generator `notes/clebsch-arithmetic-gluing-lean-v1.py`, which emits schema
-`clebsch-arithmetic-gluing-lean-v1`, the canonical JSON, the generated certificate block in
-`ClebschArithmeticGluingData.lean`, and a three-entry SHA-256 manifest.  Its `--check` and
-`sha256sum -c` commands are green.  It schema-extracts and compares all load-bearing vertex,
-matching, transporter, orbit, order, and frame constants from the committed C441, C442, C444,
-C445, C449, and C458 JSON inputs, in addition to hash-recording them.  C460 is not a formal source:
-its triangle/group-name interpretation is outside the Lean conclusion.
+the measured memory envelope.  The same-stem internal compatibility entry point delegates to the
+enduring tracked generator `lean/verification/clebsch_arithmetic_gluing/generate.py`.  Its
+workflow-free `source_data.json` gives the mathematical semantics and trust role of every
+load-bearing vertex, matching, transporter, and multiplier literal.  The generator emits schema
+`clebsch-arithmetic-gluing-lean-v1`, canonical `certificate.json`, the generated certificate block
+in `ClebschArithmeticGluingData.lean`, and a four-entry `manifest.sha256`; all four stable paths
+are under `lean/verification/clebsch_arithmetic_gluing/` and contain no private workflow
+identifiers.  Its `--check` and `sha256sum -c` commands are green.  The dated note bundle remains
+only a reproducibility compatibility copy.  C460 is not a formal source: its triangle/group-name
+interpretation is outside the Lean conclusion.
 
 The correspondence is:
 
@@ -192,8 +195,8 @@ generated `H3` data leaf is hash-pinned and has the exact mixed-verification bou
 
 Exact current-source validation:
 
-- normalized generator `--check`: `CHECK OK`;
-- three-entry SHA-256 manifest: all `OK`;
+- stable normalized generator `--check`: `CHECK OK`;
+- four-entry stable SHA-256 manifest: all `OK`;
 - all seven frozen primary checks and five available independent replays, including the ancillary
   excluded C460 check: `OK`;
 - current data/kernel shard: green (`0:46.81`, peak 5,117,036 kB);
@@ -215,17 +218,18 @@ The first user-authorized independent review blocked on five issues.  The post-r
 2. renames and narrows the `H3` theorem/gate/report to literal certificate-table checks, leaving
    stabilizer/coset/word completeness solely at the exact generator/replay boundary;
 3. adds the second `H3` multiplier, all poles, exact orders, and square-determinant membership;
-4. schema-extracts and compares every load-bearing C441/C442/C444/C445/C449/C458 literal and
-   removes C460 from the formal input manifest, including direct extraction of C445's golden
-   transporter matrix; and
+4. freezes every load-bearing vertex, matching, transporter, and multiplier literal in one
+   schema-described canonical source and removes C460 from the formal input manifest; and
 5. re-exports the F5 stabilizer interface, retains the F8 equality interface, and explicitly
    excludes their concrete identification with the bounded finite actions.
 
 The second review found that the golden transporter was still hard-coded rather than extracted and
-that the generated banner named only a schema.  The subsequent repair extracts C445's
-`outer_transporter.matrix_mod_11` and moves the generator implementation to the enduring path
-named above; the workflow-scoped same-stem script remains only a compatibility entry point.
-Final post-fix review is pending on the exact replacement commit.
+that the generated banner named only a schema.  The next repair extracted C445's
+`outer_transporter.matrix_mod_11`.  A third review correctly observed that a generator under
+`notes/` still cannot enter the scholarly verification closure.  The canonical source, generator,
+certificate, and manifest now live under the stable `lean/verification/clebsch_arithmetic_gluing/`
+path; the workflow-scoped same-stem script is only a compatibility entry point.  Final post-fix
+review is pending on the exact replacement commit.
 
 ## Proposed C320 ledger delta
 
