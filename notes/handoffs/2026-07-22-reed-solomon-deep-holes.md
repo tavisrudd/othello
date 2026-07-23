@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491 complete; no open allocation — the lane's execution ladder is finished.  C478's coherence upgrade identifies each
+**Status:** C475--C491 complete; C498 (redundancy six, audit-gated), C499 (sporadic structure), and C500 (redundancy-five paper, release-gated) queued as follow-ups.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -294,9 +294,10 @@ Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` throug
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Arbitrary-dimension Reed--Solomon:** remains unallocated.  C490/C491 may populate their NRC
-  bridge ledgers, but allocation still requires a claim-specific literature audit and a proved
-  higher-symmetric-power analogue of (1); small-field or quartic success alone supplies no bridge.
+- **Arbitrary-dimension Reed--Solomon:** remains unallocated beyond the fixed next case.  C498
+  owns redundancy six behind its claim-specific literature audit; anything past r=6 still
+  requires its own audit and a proved higher-symmetric-power analogue; small-field or quartic
+  success alone supplies no bridge.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -324,6 +325,8 @@ history.
 
 ## Next command
 
-Lane complete.  Stop and ask: archive this handoff, update the routing table, and which lane next.
-A redundancy-six successor requires a fresh allocation and its own literature audit; the C491
-report's NRC bridge ledger (§9) holds the exact entry lemma and a cheap census harness plan.
+`go C499`
+
+(C499 is gate-free and runs from the frozen census JSON.  C498 opens with its claim-specific
+literature audit; C500 waits on the usual release decisions.  The C491 report's NRC bridge
+ledger (§9) holds C498's exact entry lemma and census harness plan.)

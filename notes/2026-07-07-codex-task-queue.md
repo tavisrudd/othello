@@ -149,6 +149,9 @@ ordering and detail.
 
 ### `reed-solomon`
 
+- **C498 `[reed-solomon]` [QUEUED; after C491; claim-specific literature audit gate]** — redundancy-six `PRS(q-5)` deep holes via the quintic normal rational curve in `PG(5,q)`: settle the C491 NRC-ledger entry lemma (split-member existence for nets of binary quartics with trivial gcd, Lang--Weil on the fiber-square surface, exceptional nets classified as higher analogues of the O±/nucleus/wild loci), adapt the C491 census+replay harness to `q<=16`, and either prove the covering-radius gate `rho=5` from the Seroussi--Roth range (`q-5 >= floor((q-1)/2)` iff `q>=9`) or state the exact gap; maintain the NRC bridge ledger → `notes/2026-07-22-c498-prs-redundancy-six.md`
+- **C499 `[reed-solomon]` [QUEUED]** — uniform structure of the C491 sporadic deep-hole orbits from the frozen census JSON (no regeneration): test the equianharmonic/A₄-pencil hypothesis for the stab-12 orbits at q=7,13,19 (constant 4 double-root + 4 irreducible members), derive the q=8 three-orbit Frobenius torsor and its relation to C484's q=8 colour `C3`, classify the remaining sporadics' pencil normal forms, and either prove a uniform description or certify sporadicity as irreducible arithmetic accidents → `notes/2026-07-22-c499-sporadic-pencil-structure.md`
+- **C500 `[reed-solomon]` [QUEUED; after C491; release decisions gate]** — redundancy-five manuscript: package C491 (unconditional covering radius, Hankel-pencil criterion, exceptional-cover mechanism, O±/nucleus/wild families, sharp q>=23 threshold, certified sporadic tables) as a standalone paper to the arcs/clebsch release bar, citing Kaipa--Patanker--Pradhan for the quartic orbit toolkit and positioning against ZWK 2019 and the twisted-RS adjacent work; includes the KPP char-2/3 contribution remark and the audit-mandated "to our knowledge" qualifiers → `notes/2026-07-22-c500-prs-redundancy-five-paper.md`
 
 ### `relconic`
 
