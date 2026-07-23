@@ -1216,3 +1216,14 @@ stratum?
 **Evidence:** CHECKED lead — exact `F_7` arithmetic in the C418 generator found the same-leg
 collision; the C419 determinant/saturation gate has not been run.
 **Status:** open lead.
+
+### 2026-07-23 — C418 shared-leg lead disposition
+
+**Provenance:** C419's exact determinant/saturation gate.
+**Was I looking for this?:** yes — this follow-up records the normal promotion and disposition of
+the earlier incidental lead.
+**Observed / musing:** the pair has equal `U` and different `P` but its two exact circuit ledgers
+differ, so it is not motion in one fixed-incidence stratum.
+**Evidence:** CHECKED by the C419 primary certificate and independent replay.
+**Status:** graduated -> C419 / `notes/2026-07-20-c418-c419-c410-successors.md`; first gate failed,
+and the selected generic fixed-incidence stratum closed bounded-negatively.

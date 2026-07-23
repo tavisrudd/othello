@@ -1,0 +1,1436 @@
+{
+  "C430_pattern": {
+    "calibration_pair_across_two_incidence_types": {
+      "centered_feature_rank": 5,
+      "eligible_defect_quotient_dimension": 5,
+      "part_sizes": [
+        4,
+        4
+      ],
+      "radical_one_dimensional": false,
+      "radical_separates_parts": false,
+      "restriction_full": true,
+      "restriction_ranks": [
+        3,
+        3
+      ],
+      "rigidity_pretest_passes": false,
+      "second_moment_radical_dimension": 0,
+      "second_moment_rank": 5,
+      "zero_sum_hyperplane_dimensions": [
+        3,
+        3
+      ]
+    },
+    "conclusion": "the generic stratum has constant restriction ranks [1,1] and radical dimension zero; there is no rank/radical jump eligible for a pointed split",
+    "generic_fixed_incidence_stratum": {
+      "centered_feature_rank": 1,
+      "eligible_defect_quotient_dimension": 1,
+      "part_sizes": [
+        2,
+        2
+      ],
+      "radical_one_dimensional": false,
+      "radical_separates_parts": false,
+      "restriction_full": true,
+      "restriction_ranks": [
+        1,
+        1
+      ],
+      "rigidity_pretest_passes": false,
+      "second_moment_radical_dimension": 0,
+      "second_moment_rank": 1,
+      "zero_sum_hyperplane_dimensions": [
+        1,
+        1
+      ]
+    }
+  },
+  "bounded_extension_safeguard": {
+    "P_constant_on_every_fixed_incidence_U_fibre": true,
+    "claim_boundary": "this is not a census of seven-point configurations, other base realizations, or larger fields",
+    "domain": "all 51 seventh points outside the frozen six-point C408 shared base in PG(2,7)",
+    "fixed_incidence_U_fibre_count": 44,
+    "fixed_incidence_cell_count": 30,
+    "record_count": 51
+  },
+  "determinant_stratum": {
+    "description": "V(x_i^7 x_j-x_i x_j^7) in P^2, saturated by the product of the distinct base-secant determinants",
+    "field_rationality_equations": [
+      "x^7*y-x*y^7=0",
+      "x^7*z-x*z^7=0",
+      "y^7*z-y*z^7=0"
+    ],
+    "fixed_original_circuits": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        3,
+        4
+      ]
+    ],
+    "rational_point_count": 5,
+    "rational_points": [
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        1,
+        2,
+        1
+      ],
+      [
+        1,
+        3,
+        1
+      ],
+      [
+        1,
+        5,
+        5
+      ],
+      [
+        1,
+        6,
+        1
+      ]
+    ],
+    "saturation_factor_meaning": "line dot [x:y:z] != 0",
+    "saturation_factors": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      [
+        1,
+        0,
+        3
+      ],
+      [
+        1,
+        1,
+        6
+      ],
+      [
+        1,
+        3,
+        3
+      ],
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        6
+      ],
+      [
+        1,
+        6,
+        0
+      ],
+      [
+        1,
+        6,
+        3
+      ],
+      [
+        1,
+        6,
+        6
+      ]
+    ]
+  },
+  "ej_closeout": {
+    "fixed_U_fibre_consequence": "the stored marked weight histograms are singleton-valued on both fixed-U fibres, so they reconstruct the complete syndrome histogram",
+    "open_mystery": "the frozen six-point base has trivial projective stabilizer, so no base symmetry currently explains why all four affine realizations share the complete U and marked-weight ledgers",
+    "proof": "writing n_s for the number of lines through Q meeting B in s points, sum n_s=8 and sum s*n_s=7 give n_0-1=n_2+2*n_3, while mu=n_2+3*n_3 and epsilon=n_3",
+    "settled": "why the pointed constancy check can be read directly at the external-arrangement/marked-triple-line interface",
+    "syndrome_identity": "for Q outside B, mu(Q)=w_A(Q)+epsilon(Q), where w_A(Q)=#external lines through Q-1 and epsilon marks the two fixed three-point lines"
+  },
+  "field": "F_7",
+  "fixed_U_strata": {
+    "conclusion": "the complete universal weighted-adjoint package splits the five-point fixed-matroid stratum into the infinity singleton and the four affine points; P is constant on both fixed-U strata",
+    "fibres": [
+      {
+        "P_constant": true,
+        "P_digests": [
+          "9ce3074c8ecd766513b444c64beefe4b0150d9b6e590de018240f242f21c7afe"
+        ],
+        "U_digest": "2b30f162b97a0030e22ba74fb8848c576adc6c4f180be5a11572390dcd3c2205",
+        "ledger_digests": [
+          "3907676e1a0bf01492658fbdea697b67f6c96e832ed69335a487c9201271e777"
+        ],
+        "marked_weight_syndrome_histograms": [
+          "[[[1,0,1],8],[[2,0,2],24],[[2,1,3],2],[[3,0,3],8],[[3,1,4],6],[[4,1,5],2]]"
+        ],
+        "points": [
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            1,
+            3,
+            1
+          ],
+          [
+            1,
+            5,
+            5
+          ],
+          [
+            1,
+            6,
+            1
+          ]
+        ],
+        "representative_P": {
+          "coordinate_repair_availability": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "excluded_syndrome_histogram": [
+            [
+              1,
+              8
+            ],
+            [
+              2,
+              24
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              6
+            ],
+            [
+              5,
+              2
+            ]
+          ],
+          "excluded_syndrome_multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5,
+            5
+          ],
+          "line_section_histogram": [
+            [
+              0,
+              20
+            ],
+            [
+              1,
+              20
+            ],
+            [
+              2,
+              15
+            ],
+            [
+              3,
+              2
+            ]
+          ],
+          "punctured_dual_weight_two_counts": [
+            0,
+            0,
+            6,
+            6,
+            6,
+            6,
+            12
+          ]
+        },
+        "representative_U": {
+          "characteristic_polynomial_ascending": [
+            -91,
+            110,
+            -20,
+            1
+          ],
+          "weighted_adjoint": {
+            "adjoint_line_count": 50,
+            "cross_incidence_correction_by_depth": {
+              "13": 20,
+              "14": 15,
+              "15": 2,
+              "19": 20
+            },
+            "indexed_copy_count": 110,
+            "projective_depth_count_polynomials_q2_q_1": {
+              "0": [
+                1,
+                -49,
+                294
+              ],
+              "1": [
+                0,
+                8,
+                -56
+              ],
+              "13": [
+                0,
+                0,
+                20
+              ],
+              "14": [
+                0,
+                0,
+                15
+              ],
+              "15": [
+                0,
+                0,
+                2
+              ],
+              "19": [
+                0,
+                0,
+                20
+              ],
+              "2": [
+                0,
+                26,
+                -182
+              ],
+              "3": [
+                0,
+                14,
+                -98
+              ],
+              "4": [
+                0,
+                2,
+                -14
+              ]
+            }
+          }
+        },
+        "representative_universal_incidence_ledger": {
+          "adjoint_intersection_depth_histogram": [
+            [
+              13,
+              20
+            ],
+            [
+              14,
+              15
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              19,
+              20
+            ]
+          ],
+          "adjoint_line_weight_degree_histogram": [
+            [
+              [
+                1,
+                8
+              ],
+              8
+            ],
+            [
+              [
+                2,
+                8
+              ],
+              26
+            ],
+            [
+              [
+                3,
+                8
+              ],
+              14
+            ],
+            [
+              [
+                4,
+                8
+              ],
+              2
+            ]
+          ],
+          "arrangement_intersection_weight_histogram": [
+            [
+              1,
+              8
+            ],
+            [
+              2,
+              26
+            ],
+            [
+              3,
+              14
+            ],
+            [
+              4,
+              2
+            ]
+          ]
+        }
+      },
+      {
+        "P_constant": true,
+        "P_digests": [
+          "927182c96ed62187d718f5ae96b4361076bc475487054706fdb8e15a97bf25bd"
+        ],
+        "U_digest": "ec2fa4c991b6eb802beeb7e203e51d96057084f7f315ffb4e1c0edba399e9fa7",
+        "ledger_digests": [
+          "c63ef1e47cc99cba766e9d94e6fd43715814cf4008166c00065637b0700b642a"
+        ],
+        "marked_weight_syndrome_histograms": [
+          "[[[1,0,1],10],[[2,0,2],20],[[3,0,3],10],[[3,1,4],10]]"
+        ],
+        "points": [
+          [
+            0,
+            1,
+            4
+          ]
+        ],
+        "representative_P": {
+          "coordinate_repair_availability": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "excluded_syndrome_histogram": [
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              10
+            ]
+          ],
+          "excluded_syndrome_multiplicities": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "line_section_histogram": [
+            [
+              0,
+              20
+            ],
+            [
+              1,
+              20
+            ],
+            [
+              2,
+              15
+            ],
+            [
+              3,
+              2
+            ]
+          ],
+          "punctured_dual_weight_two_counts": [
+            0,
+            0,
+            6,
+            6,
+            6,
+            6,
+            12
+          ]
+        },
+        "representative_U": {
+          "characteristic_polynomial_ascending": [
+            -91,
+            110,
+            -20,
+            1
+          ],
+          "weighted_adjoint": {
+            "adjoint_line_count": 50,
+            "cross_incidence_correction_by_depth": {
+              "13": 20,
+              "14": 15,
+              "15": 2,
+              "19": 20
+            },
+            "indexed_copy_count": 110,
+            "projective_depth_count_polynomials_q2_q_1": {
+              "0": [
+                1,
+                -49,
+                294
+              ],
+              "1": [
+                0,
+                10,
+                -70
+              ],
+              "13": [
+                0,
+                0,
+                20
+              ],
+              "14": [
+                0,
+                0,
+                15
+              ],
+              "15": [
+                0,
+                0,
+                2
+              ],
+              "19": [
+                0,
+                0,
+                20
+              ],
+              "2": [
+                0,
+                20,
+                -140
+              ],
+              "3": [
+                0,
+                20,
+                -140
+              ]
+            }
+          }
+        },
+        "representative_universal_incidence_ledger": {
+          "adjoint_intersection_depth_histogram": [
+            [
+              13,
+              20
+            ],
+            [
+              14,
+              15
+            ],
+            [
+              15,
+              2
+            ],
+            [
+              19,
+              20
+            ]
+          ],
+          "adjoint_line_weight_degree_histogram": [
+            [
+              [
+                1,
+                8
+              ],
+              10
+            ],
+            [
+              [
+                2,
+                8
+              ],
+              20
+            ],
+            [
+              [
+                3,
+                8
+              ],
+              20
+            ]
+          ],
+          "arrangement_intersection_weight_histogram": [
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              20
+            ],
+            [
+              3,
+              20
+            ]
+          ]
+        }
+      }
+    ],
+    "split_equation": "x=0 versus x!=0 in the normalized coordinates"
+  },
+  "logged_calibration_pair": {
+    "first_gate": "FAIL",
+    "points": [
+      [
+        1,
+        3,
+        5
+      ],
+      [
+        1,
+        3,
+        6
+      ]
+    ],
+    "reason": "the two circuit ledgers differ",
+    "records": [
+      {
+        "P": {
+          "coordinate_repair_availability": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "excluded_syndrome_histogram": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              14
+            ],
+            [
+              2,
+              13
+            ],
+            [
+              3,
+              12
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              6,
+              1
+            ]
+          ],
+          "excluded_syndrome_multiplicities": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            6
+          ],
+          "line_section_histogram": [
+            [
+              0,
+              18
+            ],
+            [
+              1,
+              26
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "punctured_dual_weight_two_counts": [
+            6,
+            6,
+            12,
+            12,
+            12,
+            12,
+            12
+          ]
+        },
+        "P_digest": "13966e73c9ee09e355d48904ce1eed3d570b73622cd24bbd18de5fee9de85add",
+        "U": {
+          "characteristic_polynomial_ascending": [
+            -77,
+            94,
+            -18,
+            1
+          ],
+          "weighted_adjoint": {
+            "adjoint_line_count": 48,
+            "cross_incidence_correction_by_depth": {
+              "11": 26,
+              "12": 9,
+              "13": 4,
+              "17": 18
+            },
+            "indexed_copy_count": 94,
+            "projective_depth_count_polynomials_q2_q_1": {
+              "0": [
+                1,
+                -47,
+                280
+              ],
+              "1": [
+                0,
+                14,
+                -98
+              ],
+              "11": [
+                0,
+                0,
+                26
+              ],
+              "12": [
+                0,
+                0,
+                9
+              ],
+              "13": [
+                0,
+                0,
+                4
+              ],
+              "17": [
+                0,
+                0,
+                18
+              ],
+              "2": [
+                0,
+                23,
+                -161
+              ],
+              "3": [
+                0,
+                10,
+                -70
+              ],
+              "4": [
+                0,
+                1,
+                -7
+              ]
+            }
+          }
+        },
+        "U_digest": "083c20dcf422f8f5fcabf405b76c7c3e69dcce0b3d7a8ba8989d7d08a468d562",
+        "added_point": [
+          1,
+          3,
+          5
+        ],
+        "checks": {
+          "arrangement_line_count": 18,
+          "essential_arrangement": true,
+          "external_closure_recovers_complement": true,
+          "simple_size_seven": true,
+          "spanning": true
+        },
+        "circuits": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            3,
+            4
+          ],
+          [
+            1,
+            3,
+            6
+          ],
+          [
+            2,
+            5,
+            6
+          ]
+        ],
+        "ledger_digest": "faf6651878531344425f4de50d646aa4c503a4ba23da1a28b0aa9dd1b93c7436",
+        "marked_weight_syndrome_histogram": [],
+        "universal_incidence_ledger": {
+          "adjoint_intersection_depth_histogram": [
+            [
+              11,
+              26
+            ],
+            [
+              12,
+              9
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              17,
+              18
+            ]
+          ],
+          "adjoint_line_weight_degree_histogram": [
+            [
+              [
+                1,
+                8
+              ],
+              14
+            ],
+            [
+              [
+                2,
+                8
+              ],
+              23
+            ],
+            [
+              [
+                3,
+                8
+              ],
+              10
+            ],
+            [
+              [
+                4,
+                8
+              ],
+              1
+            ]
+          ],
+          "arrangement_intersection_weight_histogram": [
+            [
+              1,
+              14
+            ],
+            [
+              2,
+              23
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              1
+            ]
+          ]
+        }
+      },
+      {
+        "P": {
+          "coordinate_repair_availability": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              3
+            ]
+          ],
+          "excluded_syndrome_histogram": [
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              14
+            ],
+            [
+              2,
+              14
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              4,
+              10
+            ],
+            [
+              5,
+              1
+            ]
+          ],
+          "excluded_syndrome_multiplicities": [
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            4,
+            5
+          ],
+          "line_section_histogram": [
+            [
+              0,
+              18
+            ],
+            [
+              1,
+              26
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "punctured_dual_weight_two_counts": [
+            6,
+            6,
+            6,
+            12,
+            12,
+            12,
+            18
+          ]
+        },
+        "P_digest": "80ebf0b1781f57c543290b4a279d17ced78c49c98c5c97ce7d4996876a48ec79",
+        "U": {
+          "characteristic_polynomial_ascending": [
+            -77,
+            94,
+            -18,
+            1
+          ],
+          "weighted_adjoint": {
+            "adjoint_line_count": 48,
+            "cross_incidence_correction_by_depth": {
+              "11": 26,
+              "12": 9,
+              "13": 4,
+              "17": 18
+            },
+            "indexed_copy_count": 94,
+            "projective_depth_count_polynomials_q2_q_1": {
+              "0": [
+                1,
+                -47,
+                280
+              ],
+              "1": [
+                0,
+                14,
+                -98
+              ],
+              "11": [
+                0,
+                0,
+                26
+              ],
+              "12": [
+                0,
+                0,
+                9
+              ],
+              "13": [
+                0,
+                0,
+                4
+              ],
+              "17": [
+                0,
+                0,
+                18
+              ],
+              "2": [
+                0,
+                23,
+                -161
+              ],
+              "3": [
+                0,
+                10,
+                -70
+              ],
+              "4": [
+                0,
+                1,
+                -7
+              ]
+            }
+          }
+        },
+        "U_digest": "083c20dcf422f8f5fcabf405b76c7c3e69dcce0b3d7a8ba8989d7d08a468d562",
+        "added_point": [
+          1,
+          3,
+          6
+        ],
+        "checks": {
+          "arrangement_line_count": 18,
+          "essential_arrangement": true,
+          "external_closure_recovers_complement": true,
+          "simple_size_seven": true,
+          "spanning": true
+        },
+        "circuits": [
+          [
+            0,
+            1,
+            2
+          ],
+          [
+            0,
+            3,
+            4
+          ],
+          [
+            0,
+            5,
+            6
+          ],
+          [
+            2,
+            4,
+            6
+          ]
+        ],
+        "ledger_digest": "faf6651878531344425f4de50d646aa4c503a4ba23da1a28b0aa9dd1b93c7436",
+        "marked_weight_syndrome_histogram": [],
+        "universal_incidence_ledger": {
+          "adjoint_intersection_depth_histogram": [
+            [
+              11,
+              26
+            ],
+            [
+              12,
+              9
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              17,
+              18
+            ]
+          ],
+          "adjoint_line_weight_degree_histogram": [
+            [
+              [
+                1,
+                8
+              ],
+              14
+            ],
+            [
+              [
+                2,
+                8
+              ],
+              23
+            ],
+            [
+              [
+                3,
+                8
+              ],
+              10
+            ],
+            [
+              [
+                4,
+                8
+              ],
+              1
+            ]
+          ],
+          "arrangement_intersection_weight_histogram": [
+            [
+              1,
+              14
+            ],
+            [
+              2,
+              23
+            ],
+            [
+              3,
+              10
+            ],
+            [
+              4,
+              1
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "normalization": {
+    "base_circuits": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        3,
+        4
+      ]
+    ],
+    "base_points": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        2,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ],
+    "projective_representative": "first nonzero coordinate equals 1",
+    "variable_point": "[x:y:z] in PG(2,7)"
+  },
+  "result": {
+    "answer": "no cross-ratio-like pointed change occurs on the normalized generic extension stratum over F_7",
+    "status": "BOUNDED_NEGATIVE",
+    "stop_condition": "forced pointed constancy on every fixed-U cell of the selected stratum"
+  },
+  "schema": "c419-fixed-incidence-moduli-v1"
+}
