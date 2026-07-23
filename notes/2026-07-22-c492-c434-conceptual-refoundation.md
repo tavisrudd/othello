@@ -598,6 +598,15 @@ Concrete hand-backs:
 - **C439:** use the field-independent Hom ranks, affected-component prime,
   nonsplit augmentation class, and arrow orientation as successive
   falsifiers before any module census.
+- **C433:** characteristic `11` is native and semisimple for the
+  `A5` incidence modules of degrees `5,6`. Its `1|9|1` socle must therefore
+  be constructed in the ambient `PSL2(11)` block; restriction to `A5`
+  should match the semisimple Mackey interface, not a nonsplit
+  augmentation model.
+- **C386:** evaluate the orthogonal intersection code on the existing six
+  H3 `K`-strata first. Equality with `(sheet,D')` triggers its
+  already-stated renaming stop; a strict split identifies exactly the new
+  orthogonal information. Cross-cell reconstruction uses `K/C2`.
 - **C494:** the Lean core can be three generic finite-action lemmas
   (row-sum orbit count, swap-induced orbit equivalence, augmentation
   splitting iff degree is invertible), leaving the four small-group

@@ -349,6 +349,17 @@ promotion of any lead goes through the normal C-ID process.
    socles is exactly the unique degree-two trade line.  C433's remaining positive target is the
    canonical placement of the odd Fourier block and profile map relative to this fixed socle seam,
    not another decomposition or rank-drop computation.  PARTLY SOLVED; bounded canonical-map gate.
+   **C492 hand-back (2026-07-23).**  Keep the ambient and subgroup mechanisms separate.  For
+   C492's H3 restriction `H=A5`, the opposite-component permutation degrees are `5,6`; over
+   `F_11`, Maschke applies because `11∤|A5|=60`, so both permutation modules split and the unique
+   cross-Hom is the field-independent rank-one map `eta_j epsilon_i`, which kills augmentation.
+   Therefore C433's `1|9|1` socle cannot be an `A5` incidence-augmentation degeneration or a new
+   `A5` cross-intertwiner: it is necessarily an ambient defining-characteristic
+   `PSL_2(11)` extension.  The positive gate is correspondingly sharper—construct the odd
+   Fourier/profile map in the ambient block, then verify that its restriction to `A5` is compatible
+   with the semisimple `[[2,1],[1,2]]` Mackey interface.  Any proposal that needs a nonsplit
+   degree-5/6 `A5` augmentation sequence in characteristic 11 is killed immediately.  See
+   `notes/2026-07-22-c492-c434-conceptual-refoundation.md`.
 6. **A `K\G/H` information-lattice functor.** C403's matching quotient, C406's balanced
    recovery, C411's six profiles, and C379's decorated inversion compose into the exact lattice
    `22 -> 6 -> 2 -> 1`. The portable statement — for a subgroup `H <= PGL_2(q)` transitive on a

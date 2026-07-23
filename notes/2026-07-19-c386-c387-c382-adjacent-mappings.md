@@ -128,6 +128,28 @@ Construct the 22 spaces directly from C379's frozen matchings and certify:
 4. whether `U_M`, together with the intrinsic weight-two orbit of `V`, recovers `M`; and
 5. the resulting constant-dimension-code parameters and distance distribution.
 
+### C492 six-stratum hand-back (2026-07-23)
+
+C386 uses the same H3 `22`-matching `PGL_2(11)`-set as C434/C492.  Before computing or naming a new
+association scheme, base at the frozen golden pair and evaluate every proposed orthogonal
+intersection invariant on C492's six `K`-orbits.  The reference partition has three strata per
+sheet, with orbit sizes `1,4,6`, Mackey matrix `[[2,1],[1,2]]`, and cross cells `K/C2`.
+
+This gives an exact novelty and stop discriminator:
+
+1. if the complete `U_M` intersection code is constant precisely on the existing
+   `(sheet,D')` fibres, then it only renames C434's shared-edge information and C386 stops;
+2. if it strictly splits a C492 stratum, record the least split stratum and the orthogonal
+   invariant responsible before any full association-scheme claim;
+3. if it merges C492 strata, identify the lost sheet/profile coordinate and do not claim intrinsic
+   matching recovery; and
+4. for reconstruction on a cross cell, use the exact homogeneous decoration `K/C2`; an arbitrary
+   `K` label overstates the required information.
+
+The Mackey--swap row-sum lemma certifies the six-count without a new orbit census, but it does not
+certify that orthogonal data realizes those fibres.  That fibre comparison is C386's cheap gate.
+See `notes/2026-07-22-c492-c434-conceptual-refoundation.md`.
+
 Stop if spaces collide, the construction forgets the matching, the stabilizer is not the claimed
 full group, or the subspace data merely rename the already certified share-edge/disjoint biplane
 incidence.
