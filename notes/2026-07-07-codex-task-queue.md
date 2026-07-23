@@ -146,7 +146,6 @@ ordering and detail.
 ### `reed-solomon`
 
 - **C500 `[reed-solomon]` [QUEUED; after C491; release decisions gate]** — redundancy-five manuscript: package C491 (unconditional covering radius, Hankel-pencil criterion, exceptional-cover mechanism, O±/nucleus/wild families, sharp q>=23 threshold, certified sporadic tables) as a standalone paper to the arcs/clebsch release bar, citing Kaipa--Patanker--Pradhan for the quartic orbit toolkit and positioning against ZWK 2019 and the twisted-RS adjacent work; includes the KPP char-2/3 contribution remark and the audit-mandated "to our knowledge" qualifiers → `notes/2026-07-22-c500-prs-redundancy-five-paper.md`
-- **C515 `[reed-solomon]` [QUEUED; after C514; modular additive-recursion theorem gate]** — for the C514 completion-root slice, form the exact incidence polynomial `F_y(r,U)=<A_-r y,XQ_U>` with `sum(U)=1`, identify its first nonzero Hasse translation difference from the Lucas filtration, and prove either an additive/Artin--Schreier recursion that retains the completion-collision divisor or a precise geometric obstruction; classify the natural polar-compatible sublocus before any field census → `notes/2026-07-23-c515-modular-trs-hasse-recursion.md`
 
 ### `relconic`
 

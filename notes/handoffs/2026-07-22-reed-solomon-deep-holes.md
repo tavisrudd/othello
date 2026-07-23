@@ -4,8 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C514 complete; C515 is next
-(modular additive/Hasse recursion); C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C515 complete; C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -456,6 +455,24 @@ augmentation identity `Delta_b F_y=F_{(A_-b-1)y}`.  The completion-collision bou
 trace-one configuration `U={0} union V` in `G_m`, with determinant member `X^2 Q_V`, so a
 successor must treat it as recursive boundary data rather than delete it.
 
+## Closed base — C515
+
+`notes/2026-07-23-c515-modular-trs-hasse-recursion.md` derives the complete modular Hasse normal
+form and exact finite-difference identity for C514's incidence polynomial.  The first operator
+level is the Lucas filtration, and additive-degree-one endpoints have the full adjoint-kernel
+trace criterion, specializing to the Artin--Schreier trace condition.  This does not recurse
+deep-hole avoidance: a difference zero says that two determinant values agree, not that either
+vanishes, and the standard fixed syndrome gives the sharp terminal counterexample.  The natural
+polar-compatible syndromes form a ruled locus of dimension at most two; it contains the standard
+line but misses every pure additional Lucas-maximal direction.  Those fixed endpoints are exact
+elementary-symmetric nonvanishing problems on trace-one configurations.  The collision boundary
+remains `X^2Q_V`.  A requested Tao audit separates Lucas Hasse index from augmentation depth and
+adds the exact multiplicative orbit norm `Res(R^q-R,F_y)`, which eliminates the translation
+coordinate without losing zero incidence; on linearized endpoints it factors through the image
+linearized polynomial and recovers the full trace obstruction.  Any successor needs a global
+factor/component or absolute-irreducibility theorem for this norm hypersurface, not another local
+difference operator or a census.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -477,6 +494,7 @@ successor must treat it as recursive boundary data rather than delete it.
 | C513 | PRS redundancy-eight application | complete | exact three-marker normalization and containment package; `q>=43` persistent-only theorem with complete PGL/PGamma orbit law | first post-C512 fixed-level theorem |
 | C510 | bounded one-twist audit and geometry pilot | complete | tangent-projected NRC; exact affine stabilizer and fixed line; `p∤k` pre-emption; modular `p|k` target; q=9 calibration | translation-quotient theorem gate |
 | C514 | modular one-twist translation quotient | complete | canonical completion-root slice; exact Lucas fixed flag; consecutive-row and marker-collision obstruction to C512 | a different splitting mechanism is required |
+| C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global norm/incidence-hypersurface geometry is required |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -488,9 +506,11 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
 - **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Twisted Reed--Solomon:** C514 closes C510's only allocated successor with an exact
-  translation-invariant determinant normal form and a precise obstruction to C512.  Any further
-  work must use C515's additive/Hasse-difference gate and retain the completion/support collision
-  divisor.  No all-TRS claim is allocated.
+  translation-invariant determinant normal form and a precise obstruction to C512.  C515 closes
+  the additive/Hasse alternative: its filtration and trace endpoints are exact, but differences
+  do not preserve zero incidence.  Any further work needs a newly allocated global
+  component/absolute-irreducibility target for the trace-one incidence hypersurface and must
+  retain the completion/support collision divisor.  No all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C512 supplies the effective fixed-redundancy induction
@@ -524,6 +544,6 @@ history.
 
 ## Next command
 
-`go C515`
+`go reed-solomon`
 
-(C514 is complete.  C515 is the next modular theorem gate; C500 remains release-gated.)
+(C515 is complete.  C500 remains release-gated; no modular theorem successor is allocated.)

@@ -57,3 +57,21 @@ Two subsequent extra-juice rounds add the exact difference identity
 identify the valid completion-collision boundary as `X^2 Q_V` over the trace-one configuration
 space in `G_m`.  These are C515's operator and boundary inputs; root existence and additive trace
 classes remain its theorem gate.
+
+## 2026-07-23 — C515 modular TRS Hasse recursion (closed)
+
+C515 derives the complete Hasse/augmentation filtration of the C514 incidence polynomial and the
+exact adjoint-kernel trace test at linearized endpoints.  It proves the decisive obstruction:
+finite-difference zeros express equality of determinant values and do not lift support zeros,
+with the standard fixed syndrome as the terminal counterexample.  The polar-compatible locus is
+a ruled surface of dimension at most two, containing the standard direction but excluding every
+pure extra Lucas-maximal direction; fixed endpoints become elementary-symmetric tests on
+trace-one configurations.  The next possible theorem shape is global geometry of the full
+incidence hypersurface, not another local recursion.
+
+A requested Tao audit corrects a potential conflation of Lucas Hasse index with augmentation
+depth and adds the multiplicative transfer
+`N_y(U)=Res(R^q-R,F_y(R,U))`.  This orbit norm exactly preserves zero incidence while eliminating
+the translation coordinate.  At a linearized endpoint it is, up to sign, the kernel-size power
+of the image linearized polynomial evaluated at `-c`, making the adjoint-trace obstruction its
+exact factor.
