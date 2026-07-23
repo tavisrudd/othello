@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509, and C512 complete; C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509, and C512 complete; C513 active on the fixed-redundancy-eight
+polar-induction application; C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C510 queued next (bounded one-twist TRS audit/geometry pilot);
 C500 (redundancy-five paper,
@@ -464,7 +465,7 @@ history.
 
 ## Next command
 
-`go C510`
+`go C513`
 
-(C498/C509 and C512 are complete.  C510 is the queued bounded TRS pilot; C500 remains
-release-gated.)
+(C513 is the active fixed-redundancy-eight theory extension.  C510 remains the queued bounded TRS
+pilot; C500 remains release-gated.)
