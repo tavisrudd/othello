@@ -329,6 +329,11 @@ two-dimensional quotient with the radical. The resulting contracting homotopy sa
 `h²=0`, `Fh+hF=I`; its four matrix units `{hF,h,F,Fh}` generate `Mat_2(F_11)` on the odd block.
 Their joint commutant is another four-dimensional matrix algebra, leaving a sharp `GL_2`
 multiplicity-space ambiguity: the binary-cubic flag cannot come from the contraction alone. The
-`A5` degree-5/6 Mackey interface is semisimple in characteristic 11, so the extension is ambient
-to `PSL_2(11)`, not an incidence-augmentation degeneration. Full report:
+Tao pass adds the canonical valency metric: Fourier is self-adjoint with Lagrangian radical,
+depth is nondegenerate, and exactly four commutant elements are isometries. Projectively only one
+involution remains, and C412's ordered doubled/residual flag kills it. The target package is
+therefore projectively rigid; the only meaningful old-bridge residue is a compatible natural
+pairing on the source Tate plane. The `A5` degree-5/6 Mackey interface is semisimple in
+characteristic 11, so the extension is ambient to `PSL_2(11)`, not an incidence-augmentation
+degeneration. Full report:
 `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`.

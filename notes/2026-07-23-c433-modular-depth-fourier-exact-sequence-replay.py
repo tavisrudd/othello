@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import itertools
 from pathlib import Path
 
 P = 11
@@ -60,6 +61,7 @@ depth_projector = CERT["canonical_placement"]["depth_projector_h_Fbar"]
 radical_projector = CERT["canonical_placement"]["fourier_radical_projector_Fbar_h"]
 grading = CERT["canonical_placement"]["internal_grading_involution"]
 commutant = CERT["canonical_placement"]["joint_commutant_basis"]
+metric = CERT["canonical_placement"]["canonical_valency_metric_diagonal"]
 domain = [
     (a, b, c)
     for a in range(P)
@@ -116,4 +118,27 @@ assert rank_mod([[x for row in matrix for x in row] for matrix in commutant]) ==
 for matrix in commutant:
     assert matrix_product(matrix, fourier) == matrix_product(fourier, matrix)
     assert matrix_product(matrix, homotopy) == matrix_product(homotopy, matrix)
+assert all(
+    sum(fourier[k][i] * metric[k] * int(k == j) for k in range(4)) % P
+    == sum(int(i == k) * metric[k] * fourier[k][j] for k in range(4)) % P
+    for i in range(4)
+    for j in range(4)
+)
+isometry_count = 0
+for coefficients in itertools.product(range(P), repeat=4):
+    matrix = [
+        [
+            sum(coefficients[t] * commutant[t][i][j] for t in range(4)) % P
+            for j in range(4)
+        ]
+        for i in range(4)
+    ]
+    if all(
+        sum(matrix[k][i] * metric[k] * matrix[k][j] for k in range(4)) % P
+        == (metric[i] if i == j else 0)
+        for i in range(4)
+        for j in range(4)
+    ):
+        isometry_count += 1
+assert isometry_count == 4
 print("C433 independent replay OK")

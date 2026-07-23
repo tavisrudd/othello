@@ -156,6 +156,58 @@ recover C412's doubled/residual cubic flag.  Any such refinement must supply one
 intrinsic tensor or flag; a further module decomposition cannot do it.  This is the sharp
 second-order stop and a cheap falsifier for C439.
 
+## Tao stress test: the missing metric
+
+The scheme already carries a canonical pairing that the bare module calculation had ignored.
+The four odd relation differences have valencies `60,60,120,120`, so after removing the common
+factor their Gram diagonal is
+
+```text
+G=diag(1,1,2,2).
+```
+
+The divided Fourier operator is `G`-self-adjoint:
+
+```text
+Fbar^T G = G Fbar.
+```
+
+Because `Fbar²=0`, its image/radical plane `L_F` is totally isotropic; in dimension four it is
+Lagrangian.  The depth complement has, in C412's basis `e1=v2,e2=v3`, Gram matrix
+
+```text
+[3  7]
+[7 10],
+```
+
+which is nonsingular.  Thus the canonical geometry is sharper than “two transverse planes”:
+Fourier supplies a Lagrangian plane, while depth supplies a nondegenerate complement.
+
+This metric nearly removes the `ej2` commutant ambiguity.  Among all `11^4` elements of the
+four-dimensional joint commutant, exactly four preserve `G`; they form a Klein four group
+`{±I,±S}`, hence only one nontrivial projective involution remains.  On the depth plane,
+
+```text
+S = [8 2]
+    [7 3].
+```
+
+Its dual action fixes C412's doubled covector line `[1:10]` but sends the residual line
+`[1:9]` to `[1:8]`.  Therefore the ordered doubled/residual cubic flag kills the last projective
+involution: the full target package
+
+```text
+(Fbar, h, valency pairing, ordered cubic flag)
+```
+
+has only scalar automorphisms and is projectively rigid.
+
+This reframes the remaining bridge problem.  The target no longer lacks canonical structure.
+The one meaningful question is whether C412's source Tate plane carries a natural pairing for
+which its rank-one/rank-nine ordered flag is isometric to this rigid target package.  Without such
+a source pairing, the earlier ten projective flag matches remain fitted choices; more
+decomposition data cannot resolve them.
+
 ## Ambient-group and `A5` boundary
 
 The socle extension is an ambient defining-characteristic `PSL_2(11)` phenomenon.  On restriction
@@ -183,12 +235,16 @@ absence audit is invoked.
   transverse, the depth plane supplies the canonical contracting complement `h`, and
   `{hF,h,F,Fh}` is the resulting internal `Mat_2(F_11)` matrix-unit algebra.  The exact
   four-dimensional joint commutant also settles how much ambiguity remains: `GL_2` on the
-  multiplicity space.
+  multiplicity space.  The Tao pass then cuts this to one projective involution using the
+  canonical valency pairing, and C412's ordered cubic flag kills that involution.
 - **Still conceptually unexplained:** the exact frozen matrices prove transversality, but the
   C492 Mackey row-sum theorem alone does not force it.  A general representation-theoretic
   criterion for when a depth plane contracts a divided-Fourier complex is absent.  This is not
   allocated: without a new canonical input it falls under C433's stop rule against further
   decomposition/rank-drop work.
+- **Sharp remaining bridge datum:** no natural pairing on C412's source Tate plane has been
+  constructed and compared with the rigid target metric/flag package.  This is the exact missing
+  input, not an invitation to enumerate the ten fitted flag maps; no successor is allocated.
 
 ## Reproducibility
 
@@ -210,13 +266,14 @@ image/kernel calculation.  It directly
 enumerates all `11^3` domain vectors and `11^4` odd-coordinate vectors, compares the resulting
 images and kernels as sets, checks the homotopy identities pointwise, and independently verifies
 that the four certified commutant generators are linearly independent and commute with both
-operators.
+operators.  It also re-enumerates all `11^4` commutant coefficients, obtaining exactly four
+valency isometries.
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| primary checker | 10,701 | `b61c01350d38e5913b34c81897c395dda0886e0b53791111d39b412259880f12` |
-| independent replay | 4,373 | `aaf9eb0d94c80b3582b202926710896bea86817e2774e57e4c0bc7c48bc63b91` |
-| canonical JSON | 6,256 | `621f312f084c30922dbc0b06ea22a5aa3ae2e8ddac102c94db6e8c1a2e2d446a` |
+| primary checker | 15,053 | `d85c76f5b1225f9dba5c09dabac3cc49fa2b6a8180afd93bec72000847d6d6ad` |
+| independent replay | 5,159 | `c6fbbab0e354aaa82bfd81c4b0cdbb34f5f0678ed1f512bc89643753d31f875a` |
+| canonical JSON | 9,063 | `1eec9d75ef24cb7878c41c85949442833b7d8c8e60f317220b80e83ac869a704` |
 
 The trusted boundary is exact integer/`F_11` arithmetic plus the four committed input
 certificates.  The proof above explains why the checked matrix identities imply the exact

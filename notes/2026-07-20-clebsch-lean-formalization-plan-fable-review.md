@@ -357,6 +357,10 @@ promotion of any lead goes through the normal C-ID process.
    `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`.
    The `ej2` commutant computation is sharp: a residual `GL_2` multiplicity-space ambiguity means
    this contraction alone cannot choose C412's doubled/residual binary-cubic flag.
+   The Tao pass supplies the missing target-side metric: divided Fourier is self-adjoint for the
+   valency form, its radical is Lagrangian, the depth complement is nondegenerate, and the ordered
+   cubic flag kills the last projective valency isometry.  Only a source-side pairing comparison
+   could now close the old Tate-plane bridge.
    **C492 hand-back (2026-07-23).**  Keep the ambient and subgroup mechanisms separate.  For
    C492's H3 restriction `H=A5`, the opposite-component permutation degrees are `5,6`; over
    `F_11`, Maschke applies because `11∤|A5|=60`, so both permutation modules split and the unique

@@ -38,7 +38,9 @@ outer-odd radical line = C412 depth socle = C430 trade line.
    profile/Fourier planes, and canonical contraction `h²=0`, `Fh+hF=I`; equivalently use its
    matrix units `{hF,h,F,Fh}`. Its four-dimensional joint commutant is the sharp falsifier:
    recovering C412's binary flag requires an additional intrinsic tensor, not more decomposition
-   data. Do not rerun the odd-block placement or a decomposition census.
+   data. The Tao metric refinement is also solved input: Fourier radical is Lagrangian, depth is
+   nondegenerate, and the valency-isometric commutant is projectively `C2`, killed by the ordered
+   cubic flag. Do not rerun the odd-block placement or a decomposition census.
 3. **C429 arithmetic seam.** Lift the radical separator to the integral `Z[tau]` model, compute its
    Smith/Fitting data, and test Frobenius on the resulting line in split, inert, and ramified
    fibres. Continue only if one datum controls the already-certified arc/code/scheme chiralities;

@@ -14,8 +14,154 @@
   },
   "canonical_placement": {
     "Fbar_h_plus_h_Fbar_is_identity": true,
+    "Fbar_is_self_adjoint_for_valency_metric": true,
     "Fbar_restricts_to_isomorphism_P_depth_to_L_F": true,
     "O_odd_equals_P_depth_direct_sum_L_F": true,
+    "canonical_valency_metric_diagonal": [
+      1,
+      1,
+      2,
+      2
+    ],
+    "commutant_valency_isometries": [
+      {
+        "coefficients": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "matrix": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "coefficients": [
+          0,
+          0,
+          0,
+          10
+        ],
+        "matrix": [
+          [
+            10,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            10,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            10
+          ]
+        ]
+      },
+      {
+        "coefficients": [
+          3,
+          0,
+          7,
+          0
+        ],
+        "matrix": [
+          [
+            0,
+            4,
+            0,
+            6
+          ],
+          [
+            4,
+            0,
+            6,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            7
+          ],
+          [
+            3,
+            0,
+            7,
+            0
+          ]
+        ]
+      },
+      {
+        "coefficients": [
+          8,
+          0,
+          4,
+          0
+        ],
+        "matrix": [
+          [
+            0,
+            7,
+            0,
+            5
+          ],
+          [
+            7,
+            0,
+            5,
+            0
+          ],
+          [
+            0,
+            8,
+            0,
+            4
+          ],
+          [
+            8,
+            0,
+            4,
+            0
+          ]
+        ]
+      }
+    ],
+    "commutant_valency_isometry_group_order": 4,
     "contracting_homotopy_mod_11": [
       [
         3,
@@ -43,6 +189,17 @@
       ]
     ],
     "contracting_homotopy_square_is_zero": true,
+    "depth_plane_gram_in_C412_basis_v2_v3": [
+      [
+        3,
+        7
+      ],
+      [
+        7,
+        10
+      ]
+    ],
+    "depth_plane_is_nondegenerate": true,
     "depth_projector_h_Fbar": [
       [
         9,
@@ -69,6 +226,11 @@
         2
       ]
     ],
+    "doubled_line_image_under_nontrivial_projective_isometry": [
+      1,
+      10
+    ],
+    "fourier_radical_is_lagrangian": true,
     "fourier_radical_projector_Fbar_h": [
       [
         3,
@@ -232,7 +394,23 @@
     ],
     "joint_commutant_dimension": 4,
     "literal_sequence_D_then_Fbar_is_not_exact_at_O_odd": true,
-    "residual_ambiguity": "GL_2 on the multiplicity space; Fbar and h alone do not select a binary basis or the C412 cubic flag"
+    "nontrivial_projective_isometry_on_C412_target": [
+      [
+        8,
+        2
+      ],
+      [
+        7,
+        3
+      ]
+    ],
+    "ordered_C412_cubic_flag_stabilizer_in_isometry_group": "scalar {+I,-I}; projectively trivial",
+    "projective_commutant_valency_isometry_group_order": 2,
+    "residual_ambiguity": "GL_2 on the multiplicity space; Fbar and h alone do not select a binary basis or the C412 cubic flag",
+    "residual_line_image_under_nontrivial_projective_isometry": [
+      1,
+      8
+    ]
   },
   "depth_image_basis": [
     [

@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import itertools
 import json
+import math
 from pathlib import Path
 
 P = 11
@@ -119,6 +121,24 @@ def commutant_equations(operators: list[list[list[int]]]) -> list[list[int]]:
     return equations
 
 
+def weighted_gram(
+    left: list[list[int]], right: list[list[int]], weights: list[int]
+) -> list[list[int]]:
+    return [
+        [
+            sum(left[k][i] * weights[k] * right[k][j] for k in range(len(weights))) % P
+            for j in range(len(right[0]))
+        ]
+        for i in range(len(left[0]))
+    ]
+
+
+def normalize_ray(vector: list[int]) -> list[int]:
+    first = next(x for x in vector if x % P)
+    inv = pow(first % P, -1, P)
+    return [(inv * x) % P for x in vector]
+
+
 def generate() -> dict:
     data = {name: json.loads(path.read_text()) for name, path in INPUTS.items()}
     assert data["c378"]["field"] == P
@@ -202,6 +222,83 @@ def generate() -> dict:
         [vector[4 * i:4 * i + 4] for i in range(4)]
         for vector in commutant_kernel
     ]
+    valencies = data["c378"]["common_refinement_valencies"]
+    odd_pairs = data["c378"]["J_odd_relation_pairs"]
+    odd_valencies = [valencies[a] for a, b in odd_pairs]
+    assert all(valencies[a] == valencies[b] for a, b in odd_pairs)
+    common = math.gcd(*odd_valencies)
+    metric = [value // common for value in odd_valencies]
+    metric_adjoint = [
+        [pow(metric[i], -1, P) * divided[j][i] * metric[j] % P for j in range(4)]
+        for i in range(4)
+    ]
+    assert metric_adjoint == divided
+    target_basis = transpose(
+        [[x % P for x in profiles[1]], [x % P for x in profiles[2]]]
+    )
+    target_gram = weighted_gram(target_basis, target_basis, metric)
+    radical_basis_matrix = transpose(fourier_image)
+    radical_gram = weighted_gram(radical_basis_matrix, radical_basis_matrix, metric)
+    assert rank(target_gram) == 2
+    assert radical_gram == [[0, 0], [0, 0]]
+
+    isometries = []
+    for coefficients in itertools.product(range(P), repeat=4):
+        matrix = [
+            [
+                sum(coefficients[t] * commutant_basis[t][i][j] for t in range(4)) % P
+                for j in range(4)
+            ]
+            for i in range(4)
+        ]
+        gram_image = [
+            [
+                sum(matrix[k][i] * metric[k] * matrix[k][j] for k in range(4)) % P
+                for j in range(4)
+            ]
+            for i in range(4)
+        ]
+        if gram_image == [[metric[i] if i == j else 0 for j in range(4)] for i in range(4)]:
+            isometries.append({"coefficients": list(coefficients), "matrix": matrix})
+    assert len(isometries) == 4
+    nonscalar = next(
+        item["matrix"]
+        for item in isometries
+        if item["matrix"] not in [identity, [[(-x) % P for x in row] for row in identity]]
+    )
+
+    def target_coordinates(vector: list[int]) -> list[int]:
+        return next(
+            [x, y]
+            for x in range(P)
+            for y in range(P)
+            if all(
+                (target_basis[i][0] * x + target_basis[i][1] * y - vector[i]) % P == 0
+                for i in range(4)
+            )
+        )
+
+    target_action_columns = []
+    for j in range(2):
+        image = [
+            sum(nonscalar[i][k] * target_basis[k][j] for k in range(4)) % P
+            for i in range(4)
+        ]
+        target_action_columns.append(target_coordinates(image))
+    target_action = transpose(target_action_columns)
+    target_dual_action = transpose(inverse(target_action))
+    doubled_line = data["c412"]["target"]["hessian_doubled_line"]
+    residual_line = data["c412"]["target"]["residual_simple_line"]
+
+    def dual_image(line: list[int]) -> list[int]:
+        return normalize_ray(
+            [sum(target_dual_action[i][j] * line[j] for j in range(2)) % P for i in range(2)]
+        )
+
+    doubled_image = dual_image(doubled_line)
+    residual_image = dual_image(residual_line)
+    assert doubled_image == normalize_ray(doubled_line)
+    assert residual_image != normalize_ray(residual_line)
 
     return {
         "schema": "c433-modular-depth-fourier-exact-sequence-v1",
@@ -249,6 +346,18 @@ def generate() -> dict:
             "joint_commutant_dimension": len(commutant_basis),
             "joint_commutant_basis": commutant_basis,
             "residual_ambiguity": "GL_2 on the multiplicity space; Fbar and h alone do not select a binary basis or the C412 cubic flag",
+            "canonical_valency_metric_diagonal": metric,
+            "Fbar_is_self_adjoint_for_valency_metric": True,
+            "fourier_radical_is_lagrangian": True,
+            "depth_plane_gram_in_C412_basis_v2_v3": target_gram,
+            "depth_plane_is_nondegenerate": True,
+            "commutant_valency_isometry_group_order": len(isometries),
+            "commutant_valency_isometries": isometries,
+            "projective_commutant_valency_isometry_group_order": 2,
+            "nontrivial_projective_isometry_on_C412_target": target_action,
+            "doubled_line_image_under_nontrivial_projective_isometry": doubled_image,
+            "residual_line_image_under_nontrivial_projective_isometry": residual_image,
+            "ordered_C412_cubic_flag_stabilizer_in_isometry_group": "scalar {+I,-I}; projectively trivial",
         },
         "a5_restriction_boundary": {
             "group_order": 60,
