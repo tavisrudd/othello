@@ -33,9 +33,12 @@ only as a conclusion-level contrast in Clebsch.  C521 closes the bounded theory:
 fixed-child fibre is the classical homogeneous space `PGL_2(11)/A5` of size 22, its intrinsic
 determinant-orientation quotient is two `PSL_2(11)` orbits of size 11 with no preferred sign, and
 C490's 79 certified disagreement masks are exactly all complements of at most two conic points,
-so every triple and no pair recovers by a proof-only incidence deduction.  The result is a
-companion excluded from Paper 1; the C486 bridge reaches the matching torsor but not the decoder's
-support chirality**.
+so every triple and no pair recovers by a proof-only incidence deduction.  The collision
+multiplicities now have an exact orbit explanation: the 1320 single-agreement instances form one
+regular `PGL_2(11)` orbit, while the 95 witnesses over an edge split under its `D20` stabilizer as
+`10^8+5^2+2^2+1`, with the fixed point equal to C447's canonical shared-edge pair.  The result is
+a companion excluded from Paper 1; the C486 bridge reaches the matching torsor but not the
+decoder's support chirality**.
 
 The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md); its Verdict,
@@ -196,7 +199,9 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   `PGL_2(11)/A5` specialization, intrinsic but unlabelled `11+11` determinant-orientation torsor,
   and the exact proof-versus-certificate split for C490's sharp base three are recorded in
   `notes/2026-07-23-c521-clebsch-fixed-conic-reconstruction.md`.
-  No support-chirality identification or manuscript edit is asserted.
+  The follow-up collision-orbit certificate proves the regular 1320-orbit and the
+  `95=8*10+2*5+2*2+1` edge-fibre decomposition.  No support-chirality identification or manuscript
+  edit is asserted.
 
 ## Optional formal upgrade
 

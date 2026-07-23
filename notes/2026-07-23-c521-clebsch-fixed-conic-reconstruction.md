@@ -157,6 +157,65 @@ that the exhaustive fixed-child parent list is complete and that no
 disagreement masks outside the three sizes in (7) occur.  The incidence
 argument from (7) to base size three is proof-only.
 
+## Collision-orbit theorem
+
+The multiplicity mystery in (9)--(10) has an exact orbit-theoretic solution.
+Let `I_r` be the set of comparison instances whose two atlases agree at
+exactly `r` child points.  The exhaustive `PGL_2(11)` action gives:
+
+```text
+I_1:  one orbit of size 1320, stabilizer order 1;
+
+I_2:  eight orbits of size 660, stabilizer order 2,
+      two orbits of size 330, stabilizer order 4,
+      two orbits of size 132, stabilizer order 10,
+      one orbit  of size  66, stabilizer order 20.       (11)
+```
+
+Thus `|I_1|=1320=|PGL_2(11)|` is not a numerical coincidence: `I_1` is a
+free transitive `PGL_2(11)`-set.
+
+For `I_2`, send an instance to its unordered pair of agreement centres.
+This is an equivariant map to the 66 conic edges.  Fix one edge `e`.  Its
+setwise stabilizer
+
+```text
+E = Stab_PGL2(11)(e)
+```
+
+has order `1320/66=20` and is the classical dihedral edge stabilizer `D20`.
+Every orbit in (11) maps onto all 66 edges, and an orbit with instance
+stabilizer of order `s` contributes `|E|/s=20/s` points over `e`.  Therefore
+the fixed-edge fibre decomposes into `E`-orbits of sizes
+
+```text
+10,10,10,10,10,10,10,10, 5,5, 2,2, 1,
+```
+
+and hence
+
+```text
+95 = 8*(20/2) + 2*(20/4) + 2*(20/10) + 20/20
+   = 8*10 + 2*5 + 2*2 + 1.                              (12)
+```
+
+This proves the previously unexplained multiplicity 95 by
+orbit--stabilizer.
+
+The final singleton in (12) also has an intrinsic identity.  The unique
+size-66 orbit has full edge stabilizer `D20`; for every one of its instances,
+the two parents' deletion-trace perfect matchings share exactly one edge, and
+that edge is precisely the two-centre agreement set.  Under the C486
+parent-to-matching bridge, this is C447's canonical equivariant bijection
+
+```text
+{conic edges} <-> {cross-sheet matching pairs sharing one edge}.   (13)
+```
+
+Thus the `+1` in 95 is the canonical shared-edge comparison.  The other
+twelve orbits are the noncanonical edge-relative comparisons, stratified
+exactly by stabilizer orders `2,4,10`.
+
 ## Trust boundary
 
 The proof-only layer consists of:
@@ -178,7 +237,34 @@ The imported exact inputs are:
 - C490: complete fixed-child parent enumeration, all diagonal transporters,
   the 79 disagreement masks, and the sharp coherent base-size table.
 
-No new finite computation is introduced.  The C490 atomic bundle is
+The orbit refinement is supported by the additional atomic bundle
+
+```text
+notes/2026-07-23-c521-clebsch-collision-orbits.py
+notes/2026-07-23-c521-clebsch-collision-orbits.json
+notes/2026-07-23-c521-clebsch-collision-orbits-replay.py
+notes/2026-07-23-c521-clebsch-collision-orbits.sha256
+```
+
+The generator reconstructs all 166320 q=11 comparison instances, verifies
+their masks exactly against C490, exhausts the 1320-element conic stabilizer,
+checks mask equivariance for every image in `I_1 union I_2`, and computes the
+orbit and stabilizer data in (11).  It also checks (13) directly on all 66
+instances of the full-edge-stabilizer orbit.  The compact independent replay
+checks input hashes, every orbit--stabilizer identity, the fibre decomposition
+(12), the canonical size-66 orbit, and the C490 aggregate multiplicities.  It
+is an independent invariant checker, not a second parent enumeration or a
+second atlas implementation.
+
+Replay from `/home/tavis/src/othello` with
+
+```bash
+python3 notes/2026-07-23-c521-clebsch-collision-orbits.py --check
+python3 notes/2026-07-23-c521-clebsch-collision-orbits-replay.py
+sha256sum -c notes/2026-07-23-c521-clebsch-collision-orbits.sha256
+```
+
+The inherited C490 atomic bundle is
 
 ```text
 notes/2026-07-22-c490-small-field-base-size-closure.py
@@ -262,12 +348,11 @@ are not two independently named geometric species; they are the fibres of a
 free two-element quotient with outer `PGL_2(11)` exchange.  This explains why
 a one-bit orientation can be real while no canonical `+/-` naming exists.
 
-A final zero-cost extraction is the exact collision law (10).  In particular,
-the size-11 mask stratum contains `12 * 110 = 1320` comparison instances,
-numerically `|PGL_2(11)|`, whereas the 66 pair-complement masks each have the
-less transparent multiplicity 95.  The aggregate certificate does not say
-whether the former stratum is one regular group orbit or explain the latter
-number, so no orbit interpretation is asserted.
+A final zero-cost extraction was the exact collision law (10).  The
+follow-up orbit pass now settles both numerical features: the 1320
+single-agreement instances form one regular orbit, and the pair fibre is the
+thirteen-orbit `D20`-set (12), anchored by the canonical C447 shared-edge
+fixed point.
 
 ## Mystery ledger
 
@@ -283,13 +368,16 @@ number, so no orbit interpretation is asserted.
   equivariant map to the decoder's intrinsic `10+10` leader-support
   bipartition is proved.  This evidence gap must close before those
   chiralities are identified.
-- **Exposed, non-acceptance mystery — collision multiplicities.**  The exact
-  uniform law is `95` witnesses per selected pair and `1155` per selected
-  singleton; the size-11 stratum totals `1320=|PGL_2(11)|`.  C490 stores mask
-  aggregates, not the stabilizers or orbit decomposition of comparison
-  instances.  An orbit-level explanation would require a new decomposition
-  of the `(parent pair, diagonal transporter)` action and has no allocated
-  owner.
+- **Settled — collision multiplicities.**  The size-11 stratum is one regular
+  `PGL_2(11)` orbit.  Over a fixed conic edge, the size-10 stratum has
+  `D20`-orbit sizes `10^8,5^2,2^2,1`, giving
+  `95=8*10+2*5+2*2+1`; the fixed point is exactly C447's canonical
+  shared-edge cross-sheet pair.
+- **Residual naming question, not an evidence gap.**  The other twelve
+  edge-relative comparison orbits are completely separated by their
+  stabilizer orders and certified representatives, but no classical names
+  are assigned to them.  Naming them would add exposition, not strengthen
+  (11)--(13), and has no allocated owner.
 - **No remaining C521 acceptance mystery.**  The theorem, trust split,
   literature boundary, and disposition are explicit.
 

@@ -1,0 +1,384 @@
+{
+  "agreement_one_orbits": [
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 1,
+      "orbit_size": 1320,
+      "parents_are_cross_sheet": false,
+      "representative": {
+        "agreement_indices": [
+          8
+        ],
+        "left_parent": 0,
+        "right_parent": 3,
+        "transporter_index": 43
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1
+      },
+      "stabilizer_order": 1
+    }
+  ],
+  "agreement_two_orbits": [
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          8,
+          11
+        ],
+        "left_parent": 0,
+        "right_parent": 1,
+        "transporter_index": 178
+      },
+      "shared_deletion_edges": [
+        [
+          6,
+          7
+        ]
+      ],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          0,
+          10
+        ],
+        "left_parent": 0,
+        "right_parent": 1,
+        "transporter_index": 181
+      },
+      "shared_deletion_edges": [
+        [
+          6,
+          7
+        ]
+      ],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": false,
+      "representative": {
+        "agreement_indices": [
+          0,
+          9
+        ],
+        "left_parent": 0,
+        "right_parent": 3,
+        "transporter_index": 57
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": false,
+      "representative": {
+        "agreement_indices": [
+          3,
+          4
+        ],
+        "left_parent": 0,
+        "right_parent": 3,
+        "transporter_index": 162
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": false,
+      "representative": {
+        "agreement_indices": [
+          3,
+          9
+        ],
+        "left_parent": 0,
+        "right_parent": 3,
+        "transporter_index": 262
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": false,
+      "representative": {
+        "agreement_indices": [
+          4,
+          5
+        ],
+        "left_parent": 0,
+        "right_parent": 3,
+        "transporter_index": 341
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          1,
+          5
+        ],
+        "left_parent": 0,
+        "right_parent": 5,
+        "transporter_index": 53
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 660,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          4,
+          5
+        ],
+        "left_parent": 0,
+        "right_parent": 5,
+        "transporter_index": 289
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 2
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 330,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          0,
+          1
+        ],
+        "left_parent": 0,
+        "right_parent": 1,
+        "transporter_index": 23
+      },
+      "shared_deletion_edges": [
+        [
+          6,
+          7
+        ]
+      ],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 2,
+        "(2, 2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 4
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": false,
+      "agreement_size": 2,
+      "orbit_size": 330,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          2,
+          10
+        ],
+        "left_parent": 0,
+        "right_parent": 5,
+        "transporter_index": 10
+      },
+      "shared_deletion_edges": [],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 2,
+        "(2, 2, 2, 2, 2, 2)": 1
+      },
+      "stabilizer_order": 4
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": true,
+      "agreement_size": 2,
+      "orbit_size": 132,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          6,
+          7
+        ],
+        "left_parent": 0,
+        "right_parent": 1,
+        "transporter_index": 41
+      },
+      "shared_deletion_edges": [
+        [
+          6,
+          7
+        ]
+      ],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 5,
+        "(5, 5)": 4
+      },
+      "stabilizer_order": 10
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": true,
+      "agreement_size": 2,
+      "orbit_size": 132,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          6,
+          7
+        ],
+        "left_parent": 0,
+        "right_parent": 1,
+        "transporter_index": 68
+      },
+      "shared_deletion_edges": [
+        [
+          6,
+          7
+        ]
+      ],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(2, 2, 2, 2, 2)": 5,
+        "(5, 5)": 4
+      },
+      "stabilizer_order": 10
+    },
+    {
+      "agreement_is_unique_shared_deletion_edge": true,
+      "agreement_size": 2,
+      "orbit_size": 66,
+      "parents_are_cross_sheet": true,
+      "representative": {
+        "agreement_indices": [
+          6,
+          7
+        ],
+        "left_parent": 0,
+        "right_parent": 1,
+        "transporter_index": 0
+      },
+      "shared_deletion_edges": [
+        [
+          6,
+          7
+        ]
+      ],
+      "stabilizer_child_cycle_profiles": {
+        "()": 1,
+        "(10,)": 4,
+        "(2, 2, 2, 2, 2)": 6,
+        "(2, 2, 2, 2, 2, 2)": 5,
+        "(5, 5)": 4
+      },
+      "stabilizer_order": 20
+    }
+  ],
+  "comparison_instances": {
+    "agreement_one_total": 1320,
+    "agreement_two_total": 6270,
+    "total": 166320
+  },
+  "group": {
+    "child_degree": 12,
+    "name": "PGL_2(11)",
+    "order": 1320,
+    "parent_degree": 22,
+    "point_stabilizer_order": 110,
+    "unordered_pair_stabilizer_order": 20
+  },
+  "inputs": {
+    "2026-07-20-c398-conic-deep-hole-classification.py": {
+      "bytes": 17444,
+      "sha256": "e01fc095bb51dd561d5b71c91d0f775b24ec1d97c8909d7879f3bd7fa499dcfc"
+    },
+    "2026-07-22-c474-reed-solomon-decorated-deep-holes.py": {
+      "bytes": 19071,
+      "sha256": "5cbeed149e7d5ea14f84ad169a102bd1f1c056ca0e1c4fa3f3cd5c710ef9228a"
+    },
+    "2026-07-22-c478-exceptional-family-controls.py": {
+      "bytes": 24488,
+      "sha256": "eb76157ea43fdda769b6cd0350af88ef280e1dab3725da00b8de9bb4e44b74fb"
+    },
+    "2026-07-22-c490-small-field-base-size-closure.json": {
+      "bytes": 379825,
+      "sha256": "058053cba74576520fdbca2445e285670da421c26feda50d54c07eca0bb628eb"
+    }
+  },
+  "pair_fibre_contributions": [
+    1,
+    2,
+    2,
+    5,
+    5,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10,
+    10
+  ],
+  "pair_fibre_total": 95,
+  "schema": "c521-clebsch-collision-orbits-v1",
+  "task": "C521"
+}
