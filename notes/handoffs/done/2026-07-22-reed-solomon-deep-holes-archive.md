@@ -114,3 +114,11 @@ The requested second-order pass identifies the ordered carrier with
 Reordering is a free `S3` torsor with quotient coordinate
 `(lambda^2+lambda+1)^3/(lambda^2(lambda+1)^2)`; quotient Frobenius has cycle type
 `1^6`, `2^3`, or `3^2`, and only the identity type lifts to a rational ordered support.
+
+A requested Tao audit treats the high endpoint exponent as the semilinear quadratic
+`x*x^(p^l)` rather than as a degree-`p^l+1` monomial.  After normalizing two ordered complement
+roots to `0,1`, the alternant is linear in the translation coordinate:
+`z Delta h_r + Delta h_(r+1)`.  Sum normalization then gives an explicit rational inverse, with
+denominator `e1 h_r-h_(r+1)=s_(r,1)` by Pieri.  Thus every generic high-level carrier `p^l>k` is
+rational.  The exact remaining geometry is the low-level carrier and the vertical consecutive-
+Schur intersection `V(h_r,h_(r+1))`; arithmetic ordering and residual lifts remain separate.

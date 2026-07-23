@@ -517,11 +517,13 @@ ordering torsor has identity/transposition/three-cycle Frobenius types, and only
 type lifts a quotient point to a rational support.  A fixed-subfield criterion closes a further
 range for `k>=3`.  The residual-quadratic slice has exact determinant, branch, diagonal,
 fixed-root resultant, valid completion-collision semantics, and Kummer/Artin--Schreier lifting
-classes.  Outside the proved shallow ranges, factorization monodromy and ordered-root integrality
-meet the same reduced Frobenius-alternant carrier; a quotient point still needs the exact residual
-lift.  No universal TRS synthesis or field census is justified.  This carrier is an unallocated
-future successor; C519 remains the separately owned arbitrary-redundancy residual-discriminant
-task.
+classes.  A Tao audit semilinearizes every high Lucas level `p^l>k`: its generic ordered carrier
+is rational with an explicit inverse, and its exceptional equations are the consecutive Schur
+divisors `h_r=0` and `s_(r,1)=0`.  The remaining gates are low-level component geometry, the
+high-level vertical intersection `V(h_r,h_(r+1))`, and rational avoidance of the ordering and
+residual torsors.  No universal TRS synthesis or field census is justified.  These carriers are
+an unallocated future successor; C519 remains the separately owned arbitrary-redundancy
+residual-discriminant task.
 
 ## Execution ladder
 

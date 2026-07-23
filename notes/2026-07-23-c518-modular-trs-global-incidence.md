@@ -151,13 +151,17 @@ class in characteristic two are the exact quotient-lifting torsors.
 The first unresolved global object is therefore not the raw orbit norm and not its reduced
 product.  It is the geometrically reduced ordered carrier \(\mathcal A_{k,\ell}\), together with
 the Kummer/Artin--Schreier lift (10)--(12).  A rational point on the coefficient quotient is
-insufficient unless this lift is trivial and the resultant deletion is avoided.
+insufficient unless this lift is trivial and the resultant deletion is avoided.  The Tao audit
+below resolves the generic component whenever \(p^\ell>k\): it is rational, with exact
+Vandermonde and consecutive-Schur exceptional divisors.  The remaining carrier gate is confined
+to low Lucas levels, the high-level vertical Schur intersection, and rational avoidance/lifting.
 
 This is exit gate 2.  The binary family and the stated subfield range are proved shallow, but
-outside them no theorem-derived field bound follows from the seven attacks: factorization
-monodromy and ordered-root integrality both reduce to (6), while a contained/transverse synthesis
-would have to assume the very component theorem it is meant to prove.  The value-distribution
-fallback likewise has to estimate zeros of (6), rather than differences or moments of a simpler
+outside them no theorem-derived field bound follows from the seven attacks.  At high Lucas levels
+ordered-root integrality is now explicit, but rational points must still avoid its Schur and
+residual torsors; at low levels the component problem itself remains.  A contained/transverse
+synthesis would have to assume these missing inputs.  The value-distribution fallback likewise
+has to estimate their rational complement, rather than differences or moments of a simpler
 function.  No field census and no all-TRS classification are asserted.
 
 ## 1. Lucas endpoints and complement duality
@@ -283,21 +287,97 @@ coefficients merely quotients by \(S_{k+1}\).  An \(\mathbb F_q\)-point of that 
 not lift to \(k+1\) rational roots, just as a rational \(B\) in (9) need not lift through the
 quadratic torsor.
 
-Therefore a monodromy computation alone would not close C518.  What is missing is a component
-theorem for (6), an explicit identity-Frobenius splitting class on that component, and deletion
-degrees for its Vandermonde and residual resultant.  The ordered-root fallback removes the
-quotient but leaves exactly the same Frobenius-alternant component.  This is the first
-equation-level obstruction, not a failure of local coordinates.
+Therefore a monodromy computation alone would not close C518.  The ordered-root fallback removes
+the quotient but initially leaves the same Frobenius-alternant component.  The Tao audit below
+resolves its generic geometry at every high Lucas level \(p^\ell>k\); what remains is the
+low-level component problem, the high-level vertical Schur intersection, and rational avoidance
+of the ordering and residual-lifting divisors.
 
-## 4. Exit obstruction
+## 4. Tao audit — semilinearize the high Lucas levels
+
+The high exponent in (6) should not be treated as an ordinary high-degree monomial.  Suppose
+\[
+ p^\ell>k,\qquad r=p^\ell-k>0.
+\]
+Then \(a_\ell=0\) in (5), so \(N_\ell=p^\ell+1\) and
+\[
+ x^{N_\ell}=x\,x^{p^\ell}
+\]
+is a semilinear quadratic.
+
+For an ordered complement, normalize two roots by
+\[
+ w_i=\rho(z+t_i),\qquad t_0=0,\quad t_1=1,
+\]
+and put \(S=\sum_i t_i\).  Since \(p\mid k\),
+\[
+ \sum_iw_i=\rho((k+1)z+S)=\rho(z+S).                          \tag{T1}
+\]
+Translation acts triangularly on the lower columns \(1,x,\ldots,x^{k-1}\), while
+\[
+ (z+t)^{p^\ell+1}
+ =z^{p^\ell+1}+z^{p^\ell}t+z t^{p^\ell}+t^{p^\ell+1}.         \tag{T2}
+\]
+The first two terms lie in the lower-column span.  Hence the endpoint alternant is exactly
+\[
+ zA(t)+B(t),                                                   \tag{T3}
+\]
+where
+\[
+\begin{aligned}
+ A(t)&=\det(t_i^0,\ldots,t_i^{k-1},t_i^{p^\ell}),\\
+ B(t)&=\det(t_i^0,\ldots,t_i^{k-1},t_i^{p^\ell+1}).
+\end{aligned}                                                  \tag{T4}
+\]
+Writing \(\Delta(t)\) for the Vandermonde, the Schur alternant identity gives
+\[
+ A=\Delta h_r,\qquad B=\Delta h_{r+1}.                         \tag{T5}
+\]
+Off \(h_r=0\), equations (T1)--(T3) have the unique solution
+\[
+ z=-\frac{h_{r+1}}{h_r},\qquad
+ \rho=-\frac{h_r}{S h_r-h_{r+1}},                              \tag{T6}
+\]
+and therefore
+\[
+ w_i=
+ \frac{h_{r+1}-h_r t_i}{S h_r-h_{r+1}}.                       \tag{T7}
+\]
+Pieri's rule identifies the normalization denominator:
+\[
+ S h_r-h_{r+1}=s_{(r,1)}.                                    \tag{T8}
+\]
+
+Thus the generic ordered high-level carrier is birational, with explicit inverse, to
+\[
+ \operatorname{Conf}^{\mathrm{ord}}_{k-1}(\mathbb A^1\setminus\{0,1\})
+ \setminus V\!\left(h_r\,s_{(r,1)}\right).                    \tag{T9}
+\]
+In particular it is geometrically integral and rational.  The exceptional strata are exact:
+
+- \(h_r=0,\ h_{r+1}\ne0\): no normalized incidence point;
+- \(h_r=h_{r+1}=0\): a vertical \(z\)-family, subject to \(z+S\ne0\);
+- \(s_{(r,1)}=0\): the sum-normalization point at infinity;
+- \(\Delta=0\): a repeated complement root.
+
+This replaces the generic high-level component problem by the consecutive-Schur intersection
+\[
+ V(h_r,h_{r+1})                                               \tag{T10}
+\]
+and the arithmetic problem of finding an \(\mathbb F_q\)-point of (T9) that also clears the
+residual Kummer/Artin--Schreier and resultant deletions.  Low levels \(p^\ell\le k\) retain
+\((a_\ell+1)p^\ell+1\) in (5); their translated last column has higher \(z\)-degree and is not
+covered by this semilinear-quadratic parametrization.
+
+## 5. Exit obstruction
 
 The seven attacks stop at the following exact gate:
 
-> For each nonstandard Lucas pair \((k,\ell)\) not covered by the binary or fixed-subfield
-> constructions, determine whether the reduced ordered carrier \(\mathcal A_{k,\ell}\) has a
-> geometrically integral component with an \(\mathbb F_q\)-point off the Vandermonde and
-> residual-resultant divisors, and prove that its Kummer or Artin--Schreier residual class is
-> trivial at such a point.
+> For each low Lucas pair \(p^\ell\le k\), determine a geometrically integral ordered component.
+> For each high pair \(p^\ell>k\), classify the vertical consecutive-Schur intersection
+> \(V(h_r,h_{r+1})\), find an \(\mathbb F_q\)-point on the rational generic component (T9) off
+> the Vandermonde, normalization, and residual-resultant divisors, and prove that its Kummer or
+> Artin--Schreier residual class is trivial.
 
 This gate is intrinsic, finite, and falsifiable.  It is also genuinely prior to a C512-shaped
 synthesis: declaring the orbit norm irreducible would ignore its translated-factor
@@ -305,7 +385,7 @@ decomposition, while declaring the quotient incidence sufficient would ignore th
 torsor.  C518 consequently closes by obstruction rather than promoting a conditional universal
 theorem.
 
-## 5. Extra-juice closeout and mystery ledger
+## 6. Extra-juice closeout and mystery ledger
 
 The first closeout adds two cheap upgrades after the obstruction gate was fixed.
 
@@ -396,20 +476,23 @@ Settled:
   rational open curve (17), its reduced deletion degree is (18), and its free ordering cover is
   the \(S_3\)-torsor (22).  Quotient Frobenius has exactly the cycle types (24), with only the
   identity twist lifting to a rational support.
+- **What is the generic high-level component for arbitrary \(k\)?** When \(p^\ell>k\), equations
+  (T6)--(T9) give a rational parametrization with exact inverse.  Its two intrinsic exceptional
+  equations are the consecutive Schur functions \(h_r\) and \(s_{(r,1)}\).
 - **Does the residual-quadratic route retain infinity, diagonals, and completion collisions?**
   Yes.  Equations (8)--(12) separate the infinity/determinant, residual diagonal, fixed-root
   collision, and valid \(0\in U\) loci.
 - **What is the exact rational lifting condition?** A Kummer square class in odd characteristic
   and the displayed Artin--Schreier trace class in characteristic two.
-- **Can factorization monodromy or the ordered-root fallback bypass the endpoint?** No.  Both
-  reduce exactly to the carrier (6), with quotient lifting retained.
+- **Can factorization monodromy or the ordered-root fallback bypass quotient lifting?** No.  Even
+  on the rational high-level component, the ordering and residual torsors must be trivialized.
 
 Open:
 
-- **Are all remaining Lucas-fixed endpoints shallow?** Evidence gap: geometric component and
-  rational-point theory for \(\mathcal A_{k,\ell}\) outside the two proved constructions.
-  A future successor must own this exact carrier; C519 does not, because it owns the universal
-  residual-discriminant base locus instead.
+- **Are all remaining Lucas-fixed endpoints shallow?** Evidence gap: component geometry at low
+  levels \(p^\ell\le k\); the vertical high-level intersection \(V(h_r,h_{r+1})\); and rational
+  avoidance/lifting on the generic component (T9).  A future successor must own these exact
+  carriers; C519 does not, because it owns the universal residual-discriminant base locus instead.
 - **Which general Hasse strata admit a nondegenerate residual slice?** Evidence gap: a
   classification of syndromes for which every choice of \(V\) has \(D=0\), \(K=0\), or
   nontrivial lifting class.
@@ -417,6 +500,6 @@ Open:
   an estimate for zeros of the ordered alternant after the Vandermonde and resultant deletions.
   Finite differences do not supply it.
 
-Vibe check: the task found a clean dimension-reducing duality and completely clears the binary
-fixed flag, but the general endpoint is a genuine Frobenius-alternant splitting problem with an
-independent arithmetic lift—not a technical residue that one more Hasse manipulation will remove.
+Vibe check: the semilinear viewpoint removes the generic high-level geometry entirely—it is
+rational—but exposes the real residue cleanly: consecutive-Schur vertical strata and arithmetic
+ordering/residual lifts, not another Hasse manipulation.

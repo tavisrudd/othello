@@ -96,5 +96,8 @@ open curve with an explicit reduced deletion divisor; reordering is a free `S3` 
 identity, transposition, and three-cycle Frobenius classes give the complete quotient-lifting
 law.  The residual-quadratic slice has exact determinant, branch, diagonal, collision, and
 Kummer/Artin--Schreier lifting classes.  Outside the proved shallow ranges, factorization
-monodromy and ordered-root incidence meet the same unresolved reduced carrier, so no universal
-contained/transverse synthesis or field census was substituted.
+monodromy and ordered-root incidence meet the same reduced carrier.  A Tao audit resolves its
+generic geometry at every high Lucas level `p^l>k`: it is rational, with exceptional divisors
+given by consecutive Schur functions.  The remaining gate is low-level geometry, the high-level
+vertical Schur intersection, and rational avoidance of the ordering/residual torsors; no
+universal contained/transverse synthesis or field census was substituted.
