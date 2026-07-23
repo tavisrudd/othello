@@ -710,8 +710,17 @@
       "last": 526,
       "purpose": "canonical Tate-pairing comparison with the rigid C433 depth/Fourier target",
       "sequence": 79
+    },
+    {
+      "count": 1,
+      "first": 527,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 527,
+      "purpose": "package C433 modular contraction for Paper 2 and a compact Lean terminal",
+      "sequence": 80
     }
   ],
-  "next_id": 527,
+  "next_id": 528,
   "schema": "codex-task-id-allocations-v1"
 }
