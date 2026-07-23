@@ -647,8 +647,17 @@
       "last": 519,
       "purpose": "universal residual-quadratic discriminant base-locus theorem for arbitrary PRS redundancy",
       "sequence": 72
+    },
+    {
+      "count": 1,
+      "first": 520,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 520,
+      "purpose": "C496 successor: general-q live-locus as bounded-degree algebraic family; resolvent-quadratic discriminant square-class as depletion predictor + Weil-bound uniform odd-q abundance for C82",
+      "sequence": 73
     }
   ],
-  "next_id": 520,
+  "next_id": 521,
   "schema": "codex-task-id-allocations-v1"
 }
