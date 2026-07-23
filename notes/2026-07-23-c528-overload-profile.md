@@ -64,6 +64,47 @@ are single-gadget, and 0/48,084 at q19.
   reinforces (does not resolve) the C524 caution that depth-2 is likely a small-`q`
   phenomenon, and reframes the real question (see Mystery ledger).
 
+## Step 2 — (ON) alignment check (settled)
+
+(ON) as written (cap handoff § Conic Localization) wants a P-valued **on-conic** size-4
+child. But the C80(b)/C524 descent proves root-P via a responder strategy whose winning
+replies are largely **off-conic**: C522 measured the q17 gap as 63% intruder-only (off-conic)
+winning replies, only 37% with a conic winning reply. So:
+
+- The descent certifies the **escape condition** (∃ P-valued size-4 child ⟹ root P), **not**
+  the strict on-conic (ON). (ON) must **not** be reported as established by the descent route.
+- C82 counts "the exact packet C80 produces" — the descent's winning-reply packet, which is
+  off-conic-inclusive. So C82 tolerates off-conic replies; there is **no alignment gap** for
+  the descent → C82 pipeline.
+- (ON) remains a separate, stronger, and possibly-false-as-literally-written sharpening that
+  is **off the descent route's critical path**. Do not gate the descent or C82 on it.
+
+## Pairing-response probe (q17) — the reframe is half-confirmed
+
+Following the reframe (why does bounded-depth response beat unbounded gadgets?), a first-order
+pairing test on the 349 q17 residual depth-2 witnesses `G = child ∪ {r}` (opponent to move):
+a **fixed-point-free involution `τ`** on `G`'s legal moves that answers *every* opponent move
+`o` into a `Y_NK`(=P) state is exactly a **perfect matching** in `H = (legal(G), {o,p} :
+G∪{o,p} ∈ Y_NK)` — a complete one-level copycat strategy.
+
+Result (`c528_pairing_probe.py`, `--check` PASS): a perfect matching exists in **exactly the
+132 even-`|O|` witnesses (132/132)** and fails in **exactly the 217 odd-`|O|` witnesses**. The
+failure is *purely move-count parity* — an odd vertex set admits no perfect matching by
+definition. So:
+
+- For 38% of the q17 residual core (even `|O|`), the depth-2 responder win **is literally a
+  copycat/involution strategy** — the gadget count is irrelevant, exactly as the reframe
+  predicted.
+- The other 62% (odd `|O|`) are not a pairing *failure*; they need a **pairing-plus-one-free-move**
+  argument (a distinguished move played first/last, the rest paired). This is a standard
+  combinatorial-game shape and a concrete next target.
+
+This does **not** yet prove uniformity (single-level only; persistence/copycat-closure and the
+odd-`|O|` free-move lemma are unproven; q19 not run). But it converts the vague "pairing may
+help" into a specific two-part conjecture: **even-`|O|` copycat + odd-`|O|` pairing-plus-one**.
+Note the lane's whole-board pairing is dead for odd planes (handoff § What Is Dead), but this
+is a *local* pairing at the post-intrusion residual layer — a different regime.
+
 ## Mystery ledger (ej+tt closeout)
 
 - **[OPEN — sharpest] Why does depth-2 suffice despite unbounded gadgets?** The static
@@ -71,12 +112,13 @@ are single-gadget, and 0/48,084 at q19.
   plies at all three orders. The game value is far simpler than the static complexity. This
   is the load-bearing gap; it is owned by the C528 successor and is *not* closed here.
   Evidence gap: no proof of depth-2 coverage, boundedness, or uniformity beyond three primes.
-- **[tt alt-attack, unallocated] Pairing/response, not Grundy calculus.** The 68% disjoint /
-  32% single-shared gadget-pair structure is a near-matching. The lane already owns
-  copycat/mirror pairing lemmas (q5 octahedral antipodal copycat, q11 icosahedral matchings).
-  A pairing/involution responder strategy would make the gadget *count* irrelevant and could
-  explain depth-2 directly — a cleaner attack than a multi-gadget Grundy induction. Reserve a
-  C-ID before pursuing.
+- **[tt alt-attack, HALF-CONFIRMED] Pairing/response, not Grundy calculus.** The pairing probe
+  (above) confirms a literal copycat involution wins the even-`|O|` half of the q17 residual
+  core (132/132), with the odd-`|O|` half blocked only by move-count parity. This is now a
+  concrete two-part conjecture (even-`|O|` copycat + odd-`|O|` pairing-plus-one) rather than a
+  hunch — a cleaner attack than a multi-gadget Grundy induction, and it makes the gadget *count*
+  irrelevant. Reserve a `[cap]` C-ID before turning it into a proof task; q19 pairing scale-test
+  and copycat-persistence (closure) are the immediate open pieces.
 - **[SETTLED] Pairwise gadget overlap is 0 or 1, always.** Forced: distinct projective lines
   meet in one point. Not a mystery.
 - **[SETTLED] `k` and `g` both grow with `q`.** Consistent with more lines / more overload
@@ -105,6 +147,15 @@ Helper modules imported at runtime (unchanged): `rust/scripts/c80_response_fibre
 
 Certificate: `notes/2026-07-23-c528-overload-profile.json`.
 
+Pairing probe (q17, needs `networkx`):
+
+```text
+uv run --with networkx python3 rust/scripts/c528_pairing_probe.py --q 17          # emit
+uv run --with networkx python3 rust/scripts/c528_pairing_probe.py --q 17 --check  # verify
+```
+
+Certificate: `notes/2026-07-23-c528-pairing-probe.json`.
+
 Independent replay: the residual-child identification reuses the exact C524 pass
 (`c524_capover_core_depth2.py`), whose residual counts (q17: 349, q19: 48,084) this run
 reproduces independently before profiling; that script's own `--check` is the cross-witness.
@@ -115,3 +166,7 @@ SHA-256 (filled at commit):
   `006e22af4d71ce69b20897be019c799299c9e5c3fb511f3c657635f3df537287`
 - `rust/scripts/c528_overload_profile.py`:
   `73a66e23638d34819f04fecccaf58b395fea3465db27fd092366a92f562e9358`
+- `notes/2026-07-23-c528-pairing-probe.json`:
+  `f0f33702a21396f68ad8e7b11d9d4714b100e661501c083ffba502992bbd7517`
+- `rust/scripts/c528_pairing_probe.py`:
+  `6c98e5b198a29ca28bf95922eeaf8d4800825309cc68262471021b767f61332f`

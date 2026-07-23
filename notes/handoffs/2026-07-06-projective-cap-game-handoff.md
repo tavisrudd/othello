@@ -645,9 +645,14 @@ reply) shows: q17 has `g∈1..7` gadgets/state (`max k=4`); **q19 has 100% `g≥
 The plan's "`g=1` covers ~93%" premise conflated the overload magnitude `k` (small, C523's "minimal
 overload 3") with the gadget count `g` (not 1). Depth-2 (C524) still closes 100% at q13/17/19 despite
 ~19 interacting gadgets/state — so depth-2 is **not** a small-gadget-count effect, which reframes the
-crown question as *why a bounded-depth responder beats unbounded static gadget complexity* (a
-pairing/copycat response may be a cleaner attack than a Grundy calculus — see report Mystery ledger).
-Report+cert+`--check`: [`../2026-07-23-c528-overload-profile.md`](../2026-07-23-c528-overload-profile.md).
+crown question as *why a bounded-depth responder beats unbounded static gadget complexity*. A pairing
+probe answers half of it: the depth-2 win **is a literal copycat involution** on the even-`|O|` half
+of the q17 residual core (132/132 perfect matchings), the odd-`|O|` half blocked only by move-count
+parity — reshaping the target to a **local two-part pairing law (even-`|O|` copycat + odd-`|O|`
+pairing-plus-one)**, cleaner than the gadget Grundy calculus and making the gadget count irrelevant
+(reserve a new `[cap]` C-ID for the proof; whole-board pairing stays dead, this is the post-intrusion
+residual layer). Report+cert+`--check`:
+[`../2026-07-23-c528-overload-profile.md`](../2026-07-23-c528-overload-profile.md).
 Remaining C528 steps (ON-alignment check, gadget law, octal Piece 3, symmetry reduction, q23
 out-of-sample) and the reshaped attack are in
 [`../2026-07-23-c80-gadget-nk-plan.md`](../2026-07-23-c80-gadget-nk-plan.md).

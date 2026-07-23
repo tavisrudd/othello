@@ -25,6 +25,17 @@ Fable review's §3–§4 into steps.
   non-increasing under *every* move by either player (free from the persistence lemma), so "responder
   drives Φ→0" is vacuous. Do not revive a Lyapunov framing.
 
+## Reshaped route (2026-07-23, after Step 1 + pairing probe)
+
+Step 1 killed the bounded-gadget induction (g,k both unbounded in q). The pairing probe
+(`c528_pairing_probe.py`, report § Pairing) then showed the depth-2 responder win **is a literal
+copycat involution** on the even-`|O|` half of the q17 residual core (132/132), with the odd-`|O|`
+half blocked only by move-count parity. **Recommended attack (reserve a `[cap]` C-ID):** prove the
+two-part local-pairing law — **even-`|O|` copycat + odd-`|O|` pairing-plus-one-free-move** — plus
+copycat-persistence (closure through the paired continuation), and scale-test at q19. This makes the
+gadget count irrelevant and is cleaner than the gadget Grundy calculus below, which is retained as
+the fallback framing.
+
 ## Target (Piece 2): the gadget-Node-Kayles value law
 
 Model `capOVER` states as `NK⁺(G, gadgets)` = Node-Kayles on `G_S` plus one **gadget** per overloaded
@@ -59,7 +70,13 @@ because Φ never increases and `|L|` strictly decreases each move.
    **Correction to the premise:** the "`g=1` covers ~93%" claim conflated two measures. C523's
    "323/349 at minimal overload 3" is about the overload **magnitude** `k` (small), not the **number**
    of gadgets `g` (not 1). Only 26% of q17 (0% of q19) residual children are single-gadget.
-2. **[2-min] (ON) alignment check.** (ON) as written (alt-attack plan, cap handoff § Conic
+2. **[DONE 2026-07-23] (ON) alignment check.** Settled (C528 report § Step 2): the C80(b)/C524
+   descent proves root-P via off-conic replies (C522: 63% intruder-only), so it certifies the escape
+   condition, **not** the strict on-conic (ON). C82 counts "the exact packet C80 produces" =
+   off-conic-inclusive, so it tolerates off-conic and there is **no alignment gap**. (ON) is a
+   separate, stronger, possibly-false-as-written sharpening **off the descent's critical path** — do
+   not claim it as proven or gate C82 on it. Original text follows for context:
+   (ON) as written (alt-attack plan, cap handoff § Conic
    Localization) wants a P-valued **on-conic** size-4 child, but C522 found 63% of gap children win
    only via **off-conic** replies. The two-tier certificate proves the responder wins (C80(b) descent),
    but confirm the equivalence C82 will consume tolerates off-conic replies before C82 counts. If (ON)

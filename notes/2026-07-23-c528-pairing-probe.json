@@ -1,0 +1,36 @@
+{
+  "claim_scope": "First-order pairing test on the q17 residual capOVER-core depth-2 witnesses G = child u {r} (opponent to move). A perfect matching in H = (legal(G), {o,p}: G u {o,p} in Y_NK) is a fixed-point-free involution tau answering EVERY opponent move into a Y_NK(=P) state -- a complete one-level copycat strategy.",
+  "orders": [
+    {
+      "matching_covers_even_parity": true,
+      "no_perfect_matching": 217,
+      "no_witness": 0,
+      "opponent_move_count_distribution": {
+        "10": 13,
+        "11": 12,
+        "3": 93,
+        "4": 22,
+        "5": 63,
+        "6": 50,
+        "7": 24,
+        "8": 47,
+        "9": 25
+      },
+      "opponent_move_parity": {
+        "even": 132,
+        "odd": 217
+      },
+      "perfect_matching_exists": 132,
+      "q": 17,
+      "residual_children": 349
+    }
+  ],
+  "sources": {
+    "notes/data/c20-q13-q17-states.jsonl.gz": {
+      "bytes": 654965,
+      "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+    }
+  },
+  "task": "C528",
+  "verdict": "Pairing explains exactly the even-|O| witnesses: a perfect matching exists iff |legal(G)| is even. The obstruction in the rest is purely move-count parity (odd |O| admits no perfect matching), not a failure of the pairing structure; those need a pairing-plus-one-free-move argument."
+}
