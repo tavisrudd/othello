@@ -184,3 +184,35 @@ product is `-2^20 tau^(-10)` with norm `2^40`.  The code is therefore MDS at eve
 including ramified 5.  This yields the coprime two-ideal law `(Pluecker content,different)=((2),(5))`:
 rank/realization fails only at 2, while orientation ramifies only at 5.  Any future intrinsic-code
 recovery test must use normalized Pluecker-unit syzygies or descent, not another determinant ideal.
+
+## 2026-07-22 — C502 hexad outer-bit integration
+
+C502 integrated C501's corrected positive carrier theorem into the banked A+F Paper-1 close.  The
+two `PSL_2(11)` conjugacy classes of `A5` subgroups form a free two-point outer torsor, and the
+column/row degree-11 actions evaluate their common Steiner hexad in opposite classes.  This is the
+local stabilizer readout of the same forced-outer `M12`/Hadamard hinge already certified by C480
+and identified with `T_11` by C486.  The complement-paired 11-orbits inside a single carrier have
+the same stabilizer class and were explicitly excluded from the theorem.
+
+Paper 1 receives the positive hexad-readout theorem inside “one torsor, one swap,” followed by the
+boundary that the signed-normalizer quotient maps trivially to `Out(PSL_2(11))`.  The latter
+separates C472's scalar frame holonomy from the outer carrier torsor.  The failed Witt construction
+is optional sequel/appendix material, not a Paper-1 mechanism.  The extra-juice pass identified the
+common hexad as a minimal local detector and explained the 660 relabelings as one inner torsor of
+representatives of the unique nontrivial outer transition.  It also extracted the portable
+outerity criterion: for two degree-11 actions sharing a labeled hexad with `A5` stabilizers, same
+stabilizer class means inner transition and opposite classes mean outer transition.  No
+task-owned mystery remained.
+
+The second-order mathematical pass extracted the normalizer–class torsor lemma.  If `Gamma` is
+normal of index two in `G` and `H <= Gamma`, the two `Gamma`-orbit stabilizer classes in `G/H`
+are distinct exactly when `N_G(H)` contains no outer element.  This makes the B3/H3 sibling
+readouts uniform (`S4` at q=7, `A5` at q=11) and supplies C492's abstract sheet coordinate.  It
+also identifies the first q=5/A4 break before C493's geometric probe: the two abstract sheets
+remain, but the outer elements in `N_{PGL_2(5)}(A4)=S4` fuse their `A4`-class readout, so any
+successful 10-point avatar must carry additional decoration.
+
+The closeout also fixed the historical slogan exposed by the original hexad observation.  The
+proved statement is “the outer twist has a hexad-local detector,” not “the phase concentrates on
+one hexad.”  C501's constant-loop and signed-normalizer calculations separate the central
+linear-frame phase from the hexad-detected outer carrier class.
