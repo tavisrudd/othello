@@ -16,7 +16,9 @@ z^2+z=DN_u/N_s^2.
 \]
 A specialization gives class \(1/A\), proving that this replacement is generically integral;
 the class is the Arf invariant of the contracted cubic's divided Hessian, so the unresolved gate
-is specifically its Hessian--Arf Hankel/root-compatible pullback.
+is specifically its Hessian--Arf Hankel/root-compatible pullback.  For each root-compatible line
+this pullback is an explicit bidegree-`(2,2)` ordered-Hessian incidence curve of arithmetic genus
+one, so the genus-one method survives in the corrected model.
 C519 therefore closes under its modular stop rule.  See
 [`the report`](../2026-07-23-c519-universal-residual-discriminant.md) and
 [`literature delta`](../2026-07-23-c519-universal-residual-discriminant-literature-audit.md).

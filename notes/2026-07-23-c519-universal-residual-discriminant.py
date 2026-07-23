@@ -266,6 +266,13 @@ def generate() -> dict[str, object]:
                 "class": "1/A",
                 "certificate": "simple pole at A=0, hence not h^2+h",
             },
+            "ordered_secant_model": {
+                "cover": "ordered roots of the divided Hessian",
+                "rational_total_space": "P(O(-3,0)+O(0,-3)) over P1xP1",
+                "root_line_incidence": "Hess(L_f(R*(v*X+w*Y)))(r,s)=0",
+                "bidegree": [2, 2],
+                "arithmetic_genus": 1,
+            },
             "generic_outside_frozen_carriers": witnesses,
         },
         "characteristic_three": {

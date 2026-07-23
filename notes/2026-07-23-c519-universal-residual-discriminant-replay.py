@@ -68,6 +68,9 @@ def main() -> None:
     witnesses = data["characteristic_two"]["generic_outside_frozen_carriers"]
     specialization = data["characteristic_two"]["artin_schreier_nontrivial_specialization"]
     assert specialization["class"] == "1/A"
+    ordered_secant = data["characteristic_two"]["ordered_secant_model"]
+    assert ordered_secant["bidegree"] == [2, 2]
+    assert ordered_secant["arithmetic_genus"] == 1
     assert [item["rank"] for item in witnesses] == [3, 4, 4, 4]
     for item in witnesses:
         assert rank_mod2(item["contraction_matrix_rows"]) == item["rank"]

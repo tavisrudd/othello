@@ -90,6 +90,23 @@ is the divided Hessian of the contracted binary cubic \(L_f(P)\): the ordinary H
 \(k/\{h^2+h\}\).  Thus the successor is a **Hessian--Arf pullback classification**, not an
 unstructured Artin--Schreier elimination problem.
 
+The second-order close recovers the genus-one architecture in the correct model.  If
+\(P=R\lambda\) with \(\deg R=n-4\) fixed and \([\lambda]=[v:w]\) moving, then
+\(L_f(R\lambda)\) is a projective line \(\ell_{f,R}\) in binary-cubic space.  The ordered residual
+root incidence
+\[
+\mathcal C_{f,R}=
+\{([\lambda],[r:s]):
+\operatorname{Hess}^{\mathrm{div}}(L_f(R\lambda))(r,s)=0\}
+\subset\mathbf P^1_\lambda\times\mathbf P^1_{r:s}             \tag{3a}
+\]
+has bidegree \((2,2)\): the cubic depends linearly on \(\lambda\), its Hessian quadratically,
+and the Hessian is quadratic in \((r,s)\).  Hence \(\mathcal C_{f,R}\) has arithmetic genus one
+in every characteristic.  In characteristic two this incidence curve, not \(y^2=K_f\), is the
+correct separable Artin--Schreier model.  Its geometrically reducible/nonreduced locus is now an
+explicit \((2,2)\)-curve classification for the constrained lines
+\(\ell_{f,R}=L_f(\mathbf P(R E^\vee))\).
+
 ## 1. Intrinsic construction and transport
 
 The pairing
@@ -169,6 +186,21 @@ of Frobenius.  Because the differential of Frobenius is zero, its tangent lines 
 ruling of \(Q\); the other ruling meets the graph in one geometric point.  Thus the two ruling
 types in the zero-pullback classification have an intrinsic modular meaning rather than being
 an undifferentiated family of contained lines.
+
+The same geometry identifies the universal ordered-root cover.  For distinct
+\([\ell_1],[\ell_2]\in\mathbf P(E)\) and \([\alpha:\beta]\in\mathbf P^1\),
+\[
+([\ell_1],[\ell_2],[\alpha:\beta])
+\longmapsto
+[\alpha\,\ell_1^{[3]}+\beta\,\ell_2^{[3]}]
+\]
+is the ordered-secant resolution of binary-cubic space.  Its total space is the rational
+projective bundle
+\(\mathbf P(\mathcal O(-3,0)\oplus\mathcal O(0,-3))\) over
+\(\mathbf P^1\times\mathbf P^1\); swapping the two factors is the generic deck involution.
+The roots of the divided Hessian are precisely \(\ell_1,\ell_2\), as follows by reducing
+equivariantly to the cubic \(AX^3+D_3Y^3\).  Thus (3a) is the pullback of this universal ordered
+secant cover along the root-compatible line.
 
 For the residual quadratic itself, inseparability at a particular \(P\) is \(N_s(P)=0\), not
 the statement that \(K_f\) is a square polynomial.  On \(\Delta N_s\ne0\), multiplying by
@@ -256,7 +288,8 @@ The next theorem gate is two-part:
 1. classify when \(\Delta N_u/N_s^2\) is Artin--Schreier-trivial or inseparable on every
    root-compatible pencil in characteristic two, and compare that locus with the persistent/Lucas
    carriers; intrinsically this is the Hessian--Arf pullback problem, and the ambient class is
-   already known to be nontrivial by the \(1/A\) specialization; and
+   already known to be nontrivial by the \(1/A\) specialization.  Equivalently, classify the
+   reducible and nonreduced members of the constrained \((2,2)\) family (3a); and
 2. continue the odd-characteristic zero/square pullback and root-compatible-line classification,
    retaining the characteristic-three thickened singular scheme.
 
@@ -285,8 +318,8 @@ coefficient arithmetic, checks the integral and modular identities, and exhausts
 binary syndrome vectors only until it finds the first carrier-separating witness at each of
 \(n=5,6,7,8\).  The JSON records the exact matrices and ranks.  The independent replay uses
 dense evaluation over all \(2^4+3^4+5^4+7^4=3123\) four-tuples and a separate bit-row reduction.
-The load-bearing byte counts are `10787` for the generator, `7499` for the JSON certificate, and
-`3297` for the replay.
+The load-bearing byte counts are `11125` for the generator, `7794` for the JSON certificate, and
+`3468` for the replay.
 It does not prove the geometric quadric or characteristic-three irreducibility arguments; those
 are the displayed hand proofs.
 
@@ -305,7 +338,9 @@ The free closeout upgrade is stronger than merely noticing a bad reduction:
 - the specialization \(1/A\) proves that the generic Artin--Schreier replacement is geometrically
   integral; and
 - the residual factor is identified as the divided Hessian, making the Artin--Schreier class its
-  intrinsic Arf invariant.
+  intrinsic Arf invariant; and
+- root-compatible pullback is recast as an explicit \((2,2)\) divided-Hessian incidence curve,
+  restoring the exact genus-at-most-one slice architecture in characteristic two.
 
 This makes the obstruction constructive: the next task does not need to rediscover the residual
 coordinate or the deletion semantics.
@@ -326,6 +361,9 @@ Settled:
   \(B=0,C=1,D_3=1\) has Artin--Schreier class \(1/A\), whose simple pole proves nontriviality.
 - **What classical covariant owns the replacement?** The residual quadratic is the divided
   Hessian, and its characteristic-two splitting class is the Arf invariant.
+- **Does the genus-one method survive the doubled-discriminant collapse?** Yes, but only after
+  replacing \(y^2=K_f\) by the ordered divided-Hessian incidence (3a), a \((2,2)\) curve of
+  arithmetic genus one.
 
 Open, with exact gate:
 
@@ -333,7 +371,8 @@ Open, with exact gate:
   Artin--Schreier class \(\Delta N_u/N_s^2\) on the ordered split-root parameter space.  Gate:
   classify the divided-Hessian Arf invariant on the image of the root-compatible Hankel map,
   including poles, collisions, and carrier containment.  The generic target class itself is
-  already nontrivial.
+  already nontrivial.  Equivalently, classify reducible and nonreduced members of (3a); arbitrary
+  lines remain insufficient unless they are proved to equal \(L_f(\mathbf P(R E^\vee))\).
 - **Odd-characteristic pullback base locus.** Evidence gap: the square/zero classification for
   Hankel image subspaces and the proof that some root-compatible pencil has integral reduced
   branch.  Gate: a scheme-theoretic image-subspace classification followed by the ordered-root

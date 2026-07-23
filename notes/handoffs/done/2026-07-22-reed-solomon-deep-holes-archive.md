@@ -155,3 +155,9 @@ The Tao audit then identifies the residual quadratic as the divided Hessian of t
 binary cubic.  Its Artin--Schreier class is exactly the characteristic-two Arf invariant, and the
 two Hankel-row Pluecker syzygies recover the residual equations.  The successor is therefore a
 Hessian--Arf pullback classification rather than generic elimination.
+The second-order extra-juice pass identifies the ambient ordered-root cover with the rational
+ordered-secant projective bundle over `P1 x P1`.  A root-compatible factor pencil maps to a line
+in binary-cubic space, and pulling back the ordered divided-Hessian root incidence gives an exact
+`(2,2)` curve of arithmetic genus one.  Thus the genus-one strategy survives characteristic two;
+the missing theorem is the reducible/nonreduced classification for these constrained Hankel
+root-lines.

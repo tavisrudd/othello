@@ -355,6 +355,16 @@
         "rank": 4
       }
     ],
+    "ordered_secant_model": {
+      "arithmetic_genus": 1,
+      "bidegree": [
+        2,
+        2
+      ],
+      "cover": "ordered roots of the divided Hessian",
+      "rational_total_space": "P(O(-3,0)+O(0,-3)) over P1xP1",
+      "root_line_incidence": "Hess(L_f(R*(v*X+w*Y)))(r,s)=0"
+    },
     "reduced_tangent_surface": "A*D+B*C",
     "residual_separability_coefficient": "N_s=A*D+B*C"
   },

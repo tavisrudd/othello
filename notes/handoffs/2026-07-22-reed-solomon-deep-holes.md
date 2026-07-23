@@ -549,7 +549,9 @@ Frobenius-thickened twisted-cubic singular scheme.  A `B=0,C=1,D=1` specializati
 `1/A`, proving that the generic Artin--Schreier replacement is geometrically integral; only its
 Hankel/root-compatible pullback remains.  Intrinsically, the residual quadratic is the divided
 Hessian and this Artin--Schreier class is its Arf invariant, so the successor gate is a
-Hessian--Arf pullback classification.  This fires the task card's authorized modular
+Hessian--Arf pullback classification.  A second-order close proves that every root-compatible
+pencil gives a bidegree-`(2,2)` ordered-Hessian incidence curve in `P1 x P1`, restoring arithmetic
+genus at most one in the correct characteristic-two model.  This fires the task card's authorized modular
 stop rule before Hasse--Weil.  The exact unallocated successors are the characteristic-two
 root-compatible Artin--Schreier carrier and the odd-characteristic pullback/line classification;
 neither may be replaced by a fixed-level census.
