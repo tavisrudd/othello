@@ -1,10 +1,13 @@
 {
-  "claim_scope": "First-order pairing test on the q17 residual capOVER-core depth-2 witnesses G = child u {r} (opponent to move). A perfect matching in H = (legal(G), {o,p}: G u {o,p} in Y_NK) is a fixed-point-free involution tau answering EVERY opponent move into a Y_NK(=P) state -- a complete one-level copycat strategy.",
+  "claim_scope": "First-order pairing test on the residual capOVER-core depth-2 witnesses G = child u {r} (first witness r, opponent to move). A perfect matching in H = (legal(G), {o,p}: G u {o,p} in Y_NK) is a fixed-point-free involution tau answering EVERY opponent move into a Y_NK(=P) state -- a one-level copycat strategy on that witness. Witness-choice-dependent: a non-matchable first witness does not preclude a matchable alternative witness.",
   "orders": [
     {
+      "even_parity_without_matching": 0,
+      "even_parity_witnesses": 132,
       "matching_covers_even_parity": true,
       "no_perfect_matching": 217,
       "no_witness": 0,
+      "odd_parity_witnesses": 217,
       "opponent_move_count_distribution": {
         "10": 13,
         "11": 12,
@@ -22,15 +25,55 @@
       },
       "perfect_matching_exists": 132,
       "q": 17,
-      "residual_children": 349
+      "residual_children": 349,
+      "rows": "notes/data/c20-q13-q17-states.jsonl.gz"
+    },
+    {
+      "even_parity_without_matching": 1104,
+      "even_parity_witnesses": 24036,
+      "matching_covers_even_parity": false,
+      "no_perfect_matching": 25152,
+      "no_witness": 0,
+      "odd_parity_witnesses": 24048,
+      "opponent_move_count_distribution": {
+        "10": 8851,
+        "11": 7826,
+        "12": 5620,
+        "13": 3559,
+        "14": 1782,
+        "15": 657,
+        "16": 247,
+        "17": 42,
+        "18": 13,
+        "19": 3,
+        "21": 1,
+        "4": 99,
+        "5": 370,
+        "6": 1437,
+        "7": 3255,
+        "8": 5987,
+        "9": 8335
+      },
+      "opponent_move_parity": {
+        "even": 24036,
+        "odd": 24048
+      },
+      "perfect_matching_exists": 22932,
+      "q": 19,
+      "residual_children": 48084,
+      "rows": "notes/data/c20-q19-states.jsonl.gz"
     }
   ],
   "sources": {
     "notes/data/c20-q13-q17-states.jsonl.gz": {
       "bytes": 654965,
       "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+    },
+    "notes/data/c20-q19-states.jsonl.gz": {
+      "bytes": 2423200,
+      "sha256": "5ddea78f59898c194b2fdedda9871d7787dac577bef0aa44e5483e5109589e8a"
     }
   },
   "task": "C528",
-  "verdict": "Pairing explains exactly the even-|O| witnesses: a perfect matching exists iff |legal(G)| is even. The obstruction in the rest is purely move-count parity (odd |O| admits no perfect matching), not a failure of the pairing structure; those need a pairing-plus-one-free-move argument."
+  "verdict": "Per order, matching_covers_even_parity flags whether a single-level copycat covers exactly the even-|O| witnesses (parity-clean). This holds at q=17 (all even matched, all odd unmatched) but BREAKS at q=19 (even_parity_without_matching > 0): the parity-clean pairing law is a small-q phenomenon, like depth-2. Odd-|O| witnesses can never have a single-level perfect matching and need a pairing-plus-one-free-move argument."
 }

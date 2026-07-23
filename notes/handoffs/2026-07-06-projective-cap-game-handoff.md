@@ -646,11 +646,14 @@ The plan's "`g=1` covers ~93%" premise conflated the overload magnitude `k` (sma
 overload 3") with the gadget count `g` (not 1). Depth-2 (C524) still closes 100% at q13/17/19 despite
 ~19 interacting gadgets/state — so depth-2 is **not** a small-gadget-count effect, which reframes the
 crown question as *why a bounded-depth responder beats unbounded static gadget complexity*. A pairing
-probe answers half of it: the depth-2 win **is a literal copycat involution** on the even-`|O|` half
-of the q17 residual core (132/132 perfect matchings), the odd-`|O|` half blocked only by move-count
-parity — reshaping the target to a **local two-part pairing law (even-`|O|` copycat + odd-`|O|`
-pairing-plus-one)**, cleaner than the gadget Grundy calculus and making the gadget count irrelevant
-(reserve a new `[cap]` C-ID for the proof; whole-board pairing stays dead, this is the post-intrusion
+probe partially answers it: the depth-2 win **is a literal copycat involution** on the even-`|O|` q17
+residual core (132/132 perfect matchings), but the **q19 scale-test breaks the clean law** (1,104
+even-`|O|` witnesses with no single-level first-witness matching) — so the pairing law is itself a
+small-`q` phenomenon, like depth-2. The route survives only with a **witness-selection or multi-level
+(persistent) copycat** argument plus odd-`|O|` pairing-plus-one; it still makes the gadget count
+irrelevant and is cleaner than the gadget Grundy calculus, but is no longer a cheap win. Next cheap
+de-risking probe before reserving a proof C-ID: does an *alternative* depth-2 witness restore a
+matching for the 1,104 q19 failures? (whole-board pairing stays dead; this is the post-intrusion
 residual layer). Report+cert+`--check`:
 [`../2026-07-23-c528-overload-profile.md`](../2026-07-23-c528-overload-profile.md).
 Remaining C528 steps (ON-alignment check, gadget law, octal Piece 3, symmetry reduction, q23

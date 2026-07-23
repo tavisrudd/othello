@@ -79,31 +79,36 @@ winning replies, only 37% with a conic winning reply. So:
 - (ON) remains a separate, stronger, and possibly-false-as-literally-written sharpening that
   is **off the descent route's critical path**. Do not gate the descent or C82 on it.
 
-## Pairing-response probe (q17) — the reframe is half-confirmed
+## Pairing-response probe — clean at q17, breaks at q19
 
 Following the reframe (why does bounded-depth response beat unbounded gadgets?), a first-order
-pairing test on the 349 q17 residual depth-2 witnesses `G = child ∪ {r}` (opponent to move):
-a **fixed-point-free involution `τ`** on `G`'s legal moves that answers *every* opponent move
-`o` into a `Y_NK`(=P) state is exactly a **perfect matching** in `H = (legal(G), {o,p} :
-G∪{o,p} ∈ Y_NK)` — a complete one-level copycat strategy.
+pairing test on the residual depth-2 witnesses `G = child ∪ {r}` (first witness `r`, opponent
+to move): a **fixed-point-free involution `τ`** on `G`'s legal moves that answers *every*
+opponent move `o` into a `Y_NK`(=P) state is exactly a **perfect matching** in
+`H = (legal(G), {o,p} : G∪{o,p} ∈ Y_NK)` — a one-level copycat strategy on that witness.
 
-Result (`c528_pairing_probe.py`, `--check` PASS): a perfect matching exists in **exactly the
-132 even-`|O|` witnesses (132/132)** and fails in **exactly the 217 odd-`|O|` witnesses**. The
-failure is *purely move-count parity* — an odd vertex set admits no perfect matching by
-definition. So:
+Result (`c528_pairing_probe.py`, `--check` PASS):
 
-- For 38% of the q17 residual core (even `|O|`), the depth-2 responder win **is literally a
-  copycat/involution strategy** — the gadget count is irrelevant, exactly as the reframe
-  predicted.
-- The other 62% (odd `|O|`) are not a pairing *failure*; they need a **pairing-plus-one-free-move**
-  argument (a distinguished move played first/last, the rest paired). This is a standard
-  combinatorial-game shape and a concrete next target.
+| q  | residual | even `\|O\|` | perfect matchings | even without matching | parity-clean? |
+|----|----------|-------------|-------------------|-----------------------|---------------|
+| 17 | 349      | 132         | 132               | 0                     | **yes**       |
+| 19 | 48,084   | 24,036      | 22,932            | **1,104**             | **no**        |
 
-This does **not** yet prove uniformity (single-level only; persistence/copycat-closure and the
-odd-`|O|` free-move lemma are unproven; q19 not run). But it converts the vague "pairing may
-help" into a specific two-part conjecture: **even-`|O|` copycat + odd-`|O|` pairing-plus-one**.
-Note the lane's whole-board pairing is dead for odd planes (handoff § What Is Dead), but this
-is a *local* pairing at the post-intrusion residual layer — a different regime.
+At **q17 the pairing is parity-clean**: a perfect matching exists in *exactly* the even-`|O|`
+witnesses (132/132), failing only on odd-`|O|` by pure move-count parity — so the depth-2 win
+there literally *is* a copycat involution, gadget count irrelevant. **At q19 this breaks:**
+1,104 even-`|O|` witnesses (4.6% of even) have **no** single-level perfect matching for the
+first witness. So the clean "even-`|O|` copycat" law is itself a **small-`q` phenomenon**, the
+same pattern as depth-2.
+
+**Caveat (witness choice).** The probe uses the *first* depth-2 witness `r`. A non-matchable
+first witness does **not** preclude a matchable alternative witness, nor a multi-level
+(persistent) copycat. So this shows "single-level copycat on the first witness is not uniform",
+not "pairing fails". The route survives but is no longer a clean two-line conjecture; it needs
+either a witness-selection lemma or a multi-level pairing argument, plus the odd-`|O|`
+free-move handling. Note the lane's *whole-board* pairing is dead for odd planes (handoff §
+What Is Dead); this is a *local* pairing at the post-intrusion residual layer — a different
+regime, but no longer a cheap win.
 
 ## Mystery ledger (ej+tt closeout)
 
@@ -112,13 +117,14 @@ is a *local* pairing at the post-intrusion residual layer — a different regime
   plies at all three orders. The game value is far simpler than the static complexity. This
   is the load-bearing gap; it is owned by the C528 successor and is *not* closed here.
   Evidence gap: no proof of depth-2 coverage, boundedness, or uniformity beyond three primes.
-- **[tt alt-attack, HALF-CONFIRMED] Pairing/response, not Grundy calculus.** The pairing probe
-  (above) confirms a literal copycat involution wins the even-`|O|` half of the q17 residual
-  core (132/132), with the odd-`|O|` half blocked only by move-count parity. This is now a
-  concrete two-part conjecture (even-`|O|` copycat + odd-`|O|` pairing-plus-one) rather than a
-  hunch — a cleaner attack than a multi-gadget Grundy induction, and it makes the gadget *count*
-  irrelevant. Reserve a `[cap]` C-ID before turning it into a proof task; q19 pairing scale-test
-  and copycat-persistence (closure) are the immediate open pieces.
+- **[tt alt-attack, PARTIALLY SURVIVES] Pairing/response, not Grundy calculus.** A literal
+  copycat involution wins the even-`|O|` q17 core (132/132), but the q19 scale-test breaks the
+  clean law (1,104 even-`|O|` witnesses without a single-level first-witness matching). So the
+  pairing route is not a clean two-line conjecture: it needs a witness-selection or multi-level
+  (persistent) copycat argument plus the odd-`|O|` free-move handling. It still makes the gadget
+  *count* irrelevant and remains cleaner than a multi-gadget Grundy induction, but the cheap-win
+  hope is gone. Owner: reserve a `[cap]` C-ID; the open pieces are witness selection,
+  copycat-persistence, and the odd-`|O|` free move.
 - **[SETTLED] Pairwise gadget overlap is 0 or 1, always.** Forced: distinct projective lines
   meet in one point. Not a mystery.
 - **[SETTLED] `k` and `g` both grow with `q`.** Consistent with more lines / more overload
@@ -147,11 +153,12 @@ Helper modules imported at runtime (unchanged): `rust/scripts/c80_response_fibre
 
 Certificate: `notes/2026-07-23-c528-overload-profile.json`.
 
-Pairing probe (q17, needs `networkx`):
+Pairing probe (q17+q19 by default, needs `networkx`; the q19 pass is ~30–60 min, so `--check`
+recomputes it — the cost of the replay):
 
 ```text
-uv run --with networkx python3 rust/scripts/c528_pairing_probe.py --q 17          # emit
-uv run --with networkx python3 rust/scripts/c528_pairing_probe.py --q 17 --check  # verify
+uv run --with networkx python3 rust/scripts/c528_pairing_probe.py          # emit
+uv run --with networkx python3 rust/scripts/c528_pairing_probe.py --check  # verify
 ```
 
 Certificate: `notes/2026-07-23-c528-pairing-probe.json`.
@@ -167,6 +174,6 @@ SHA-256 (filled at commit):
 - `rust/scripts/c528_overload_profile.py`:
   `73a66e23638d34819f04fecccaf58b395fea3465db27fd092366a92f562e9358`
 - `notes/2026-07-23-c528-pairing-probe.json`:
-  `f0f33702a21396f68ad8e7b11d9d4714b100e661501c083ffba502992bbd7517`
+  `270f7df3ff4c52d831803dcddaeeafa2363da361f3c395f40d37d878752324a9`
 - `rust/scripts/c528_pairing_probe.py`:
-  `6c98e5b198a29ca28bf95922eeaf8d4800825309cc68262471021b767f61332f`
+  `f152b121a42d0e7c3e5b03e6d655e82150b90b8b5c9bc3e31d7fd60fab3fd0db`

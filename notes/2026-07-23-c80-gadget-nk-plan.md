@@ -28,13 +28,16 @@ Fable review's §3–§4 into steps.
 ## Reshaped route (2026-07-23, after Step 1 + pairing probe)
 
 Step 1 killed the bounded-gadget induction (g,k both unbounded in q). The pairing probe
-(`c528_pairing_probe.py`, report § Pairing) then showed the depth-2 responder win **is a literal
-copycat involution** on the even-`|O|` half of the q17 residual core (132/132), with the odd-`|O|`
-half blocked only by move-count parity. **Recommended attack (reserve a `[cap]` C-ID):** prove the
-two-part local-pairing law — **even-`|O|` copycat + odd-`|O|` pairing-plus-one-free-move** — plus
-copycat-persistence (closure through the paired continuation), and scale-test at q19. This makes the
-gadget count irrelevant and is cleaner than the gadget Grundy calculus below, which is retained as
-the fallback framing.
+(`c528_pairing_probe.py`, report § Pairing) showed the depth-2 responder win **is a literal copycat
+involution** on the even-`|O|` q17 core (132/132) — but the **q19 scale-test broke the clean law**
+(1,104 even-`|O|` witnesses with no single-level first-witness perfect matching). So the pairing
+route is *not* the cheap two-line win it looked like at q17; it survives only with a
+**witness-selection or multi-level (persistent) copycat** argument, plus odd-`|O|`
+pairing-plus-one-free-move. It still makes the gadget count irrelevant and is cleaner than the
+gadget Grundy calculus (retained as fallback), but both routes now need real work. **Before
+committing a proof lane (reserve a `[cap]` C-ID), the cheap de-risking probe is: does an
+*alternative* depth-2 witness `r` restore a perfect matching for the 1,104 q19 failures?** If yes,
+the route is a witness-selection lemma; if no, it needs multi-level pairing or is dead.
 
 ## Target (Piece 2): the gadget-Node-Kayles value law
 

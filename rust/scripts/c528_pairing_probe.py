@@ -145,10 +145,14 @@ def run_q(args_q: int) -> dict:
 
     return {
         "q": args_q,
+        "rows": str(rows.relative_to(ROOT)),
         "residual_children": len(residual),
         "no_witness": no_witness,
         "perfect_matching_exists": matched,
         "no_perfect_matching": unmatched,
+        "even_parity_witnesses": o_parity["even"],
+        "odd_parity_witnesses": o_parity["odd"],
+        "even_parity_without_matching": o_parity["even"] - matched,
         "matching_covers_even_parity": matched == o_parity["even"]
         and unmatched == o_parity["odd"],
         "opponent_move_parity": dict(sorted(o_parity.items())),
@@ -158,32 +162,39 @@ def run_q(args_q: int) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--q", type=int, nargs="+", default=[17])
+    parser.add_argument("--q", type=int, nargs="+", default=[17, 19])
     parser.add_argument("--output", type=Path, default=OUT)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
+    orders = [run_q(q) for q in args.q]
+    sources = {}
+    for q in args.q:
+        rows = Q19_ROWS if q == 19 else Q13_Q17_ROWS
+        rel = str(rows.relative_to(ROOT))
+        if rel not in sources:
+            sources[rel] = {"sha256": sha256(rows), "bytes": rows.stat().st_size}
+
     payload = {
         "task": "C528",
         "claim_scope": (
-            "First-order pairing test on the q17 residual capOVER-core depth-2 witnesses "
-            "G = child u {r} (opponent to move). A perfect matching in H = (legal(G), "
-            "{o,p}: G u {o,p} in Y_NK) is a fixed-point-free involution tau answering EVERY "
-            "opponent move into a Y_NK(=P) state -- a complete one-level copycat strategy."
+            "First-order pairing test on the residual capOVER-core depth-2 witnesses "
+            "G = child u {r} (first witness r, opponent to move). A perfect matching in "
+            "H = (legal(G), {o,p}: G u {o,p} in Y_NK) is a fixed-point-free involution tau "
+            "answering EVERY opponent move into a Y_NK(=P) state -- a one-level copycat "
+            "strategy on that witness. Witness-choice-dependent: a non-matchable first "
+            "witness does not preclude a matchable alternative witness."
         ),
         "verdict": (
-            "Pairing explains exactly the even-|O| witnesses: a perfect matching exists iff "
-            "|legal(G)| is even. The obstruction in the rest is purely move-count parity "
-            "(odd |O| admits no perfect matching), not a failure of the pairing structure; "
-            "those need a pairing-plus-one-free-move argument."
+            "Per order, matching_covers_even_parity flags whether a single-level copycat "
+            "covers exactly the even-|O| witnesses (parity-clean). This holds at q=17 (all "
+            "even matched, all odd unmatched) but BREAKS at q=19 (even_parity_without_matching "
+            "> 0): the parity-clean pairing law is a small-q phenomenon, like depth-2. Odd-|O| "
+            "witnesses can never have a single-level perfect matching and need a "
+            "pairing-plus-one-free-move argument."
         ),
-        "sources": {
-            str(Q13_Q17_ROWS.relative_to(ROOT)): {
-                "sha256": sha256(Q13_Q17_ROWS),
-                "bytes": Q13_Q17_ROWS.stat().st_size,
-            }
-        },
-        "orders": [run_q(q) for q in args.q],
+        "sources": dict(sorted(sources.items())),
+        "orders": orders,
     }
     rendered = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     if args.check:
