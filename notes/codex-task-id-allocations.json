@@ -575,8 +575,17 @@
       "last": 510,
       "purpose": "twisted Reed-Solomon deep-hole one-twist audit and orbit-geometry pilot",
       "sequence": 64
+    },
+    {
+      "count": 1,
+      "first": 511,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 511,
+      "purpose": "bounded Weil-roof Phase-3 synthesis: classify each Rosetta row as proved, checked, or dead and decide Paper-2 go/no-go",
+      "sequence": 65
     }
   ],
-  "next_id": 511,
+  "next_id": 512,
   "schema": "codex-task-id-allocations-v1"
 }
