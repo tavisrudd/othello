@@ -566,8 +566,17 @@
       "last": 509,
       "purpose": "redundancy-seven PRS deep holes via pointed C498 polar-line recursion",
       "sequence": 63
+    },
+    {
+      "count": 1,
+      "first": 510,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 510,
+      "purpose": "twisted Reed-Solomon deep-hole one-twist audit and orbit-geometry pilot",
+      "sequence": 64
     }
   ],
-  "next_id": 510,
+  "next_id": 511,
   "schema": "codex-task-id-allocations-v1"
 }
