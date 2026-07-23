@@ -48,10 +48,12 @@ asymptotic statement must first remove explicitly classified exceptional familie
 The final small exceptional normal-form theorem
 (`notes/2026-07-23-c498-small-exceptional-normal-forms.md`)
 compresses the residual \(18/11/4/2/1\) projective tables into
-\(18/5/2/2/1\) semilinear classes.  The complete intrinsic fingerprint is only the pointed
-first-polar quotient-pencil profile plus, in odd characteristic, the quintic root-divisor type.
-Equal fingerprints are exactly Frobenius cycles; the apolar Waring type, net histogram, and
-stabilizer remain explanatory labels rather than classifier inputs.
+\(18/5/2/2/1\) semilinear classes.  Put \(I_f(r)\) for the number of irreducible cubic members in
+the marked quotient pencil.  The complete intrinsic fingerprint is only the shared-root collision
+energy \(\sum_r\binom{I_f(r)}2\) plus, in odd characteristic, the quintic root-divisor type.  Equal
+fingerprints are exactly Frobenius cycles.  The identity
+\(\sum_r I_f(r)=N_{1+3}(W_f)\) shows that the first moment was already the net histogram; the energy
+is the genuinely new coherent statistic.
 
 ## Exact census
 

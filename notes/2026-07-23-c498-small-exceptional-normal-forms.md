@@ -9,9 +9,12 @@ trivial-gcd exceptional C498 syndrome, and let \(W_f\) be its Hankel-kernel
 net of binary quartics.  The following projective-semilinear data form a
 complete fingerprint on the frozen exceptional set:
 
-1. the **pointed polar profile**: as \(r\) ranges over
-   \(\mathbf P^1(\mathbf F_q)\), the multiset of factorization histograms of
-   the quotient-cubic pencil at
+1. the shared-root collision energy
+   \[
+   E_f=\sum_{r\in\mathbf P^1(\mathbf F_q)}\binom{I_f(r)}2,
+   \]
+   where \(I_f(r)\) is the number of irreducible cubic members in the
+   quotient pencil at
    \(b(r)=(a_1-ra_0,\ldots,a_5-ra_4)\), including the infinity chart;
 2. in odd characteristic only, the binary-quintic root-divisor type.
 
@@ -43,13 +46,21 @@ semilinear normal forms by Waring type are:
 | 11 | 1 | 0 | 1 | 0 |
 | 13 | 0 | 1 | 0 | 0 |
 
-The pointed polar profile alone already classifies all semilinear classes at
-q=8,9,11,13 and separates 17 of the 18 q=7 classes.  Its unique q=7
-collision is the pair of frozen projective representatives 17187 and 17194;
-their quintic root types are respectively \(1+4\) and \(5\).  Thus the
-two-component fingerprint above is minimal within these two ingredients.
-The apolar-cubic Waring type, full net-member histogram, and stabilizer order
-remain useful structural labels but are not needed for orbit separation.
+The energy \(E_f\) alone classifies all semilinear classes at q=8,9,11,13
+and separates 13 of the 18 q=7 classes.  Its q=7 collisions are all
+separated by the quintic root-divisor type, giving all 18 classes.  The
+first moment has the exact double-counting identity
+\[
+\sum_r I_f(r)=N_{1+3}(W_f),
+\]
+because every \(1+3\) quartic member has a unique rational root and hence
+appears in exactly one marked quotient pencil.  Therefore
+\[
+\sum_r I_f(r)^2=N_{1+3}(W_f)+2E_f.
+\]
+The first moment is merely the old net-member histogram; \(E_f\) is the new
+coherent incidence statistic.  It counts unordered pairs of \(1+3\) members
+whose unique rational linear factors agree.
 This realizes the C498 re-foundation intrinsically: the small exceptions
 are classified by the coherently parameterized first-polar line inside the
 C491 syndrome space, rather than by coordinate labels alone.
@@ -67,7 +78,7 @@ The normal form is the lexicographically first frozen representative in its
 Frobenius cycle.  This coordinate choice is only a reproducible section; the
 fingerprint above is the intrinsic classifier.  In characteristic two the
 old descriptive `quintic_factor_type` field is not Frobenius-stable in the
-divided-power syndrome coordinates, but the pointed polar profile already
+divided-power syndrome coordinates, but \(E_f\) already
 separates all five semilinear classes, so no substitute coordinate label is
 needed.
 
@@ -95,7 +106,9 @@ frozen C498 census JSON and replay implementation.  It:
   minors and checks proportionality and annihilation;
 - enumerates every marked quotient-cubic pencil and its complete
   projective member set;
-- proves computationally that fingerprint classes equal Frobenius cycles;
+- computes the irreducible-cubic polar moments and shared-root collision
+  energy, proves that the energy fingerprint classes equal Frobenius cycles,
+  and verifies the first/second-moment identity above;
   and
 - checks every semilinear orbit/stabilizer identity against
   \(|P\Gamma L_2(q)|=m|PGL_2(q)|\).
@@ -122,16 +135,21 @@ remain supported by the original atomic C498 evidence bundle.
 
 ## Extra-juice closeout and mystery ledger
 
-The free closeout upgrade was a minimality ablation.  The entire pointed
-quotient-pencil distribution by itself separates every semilinear class
-except one q=7 pair; the intrinsic root-divisor split \(1+4\) versus \(5\)
-removes precisely that last collision.  The apolar type, net histogram, and
-stabilizer are therefore explanatory rather than load-bearing.  Exact
-semilinear stabilizer orders follow for free from the Frobenius cycle
-lengths.
+The first free closeout upgrade reduced the full pointed quotient-pencil
+distribution to its irreducible-cubic coordinate.  The second-order ablation
+then reduced that spectrum to its second moment.  The third-order pass
+subtracts the first-moment double count and isolates the actual new datum:
+\(E_f\), the shared-root collision energy of \(1+3\) net members.  This is a
+two-copy fibre-product incidence count, not an opaque hash.  In odd
+characteristic the quintic root-divisor type supplies the remaining global
+parent datum lost by the aggregated polar contractions.
 
-No genuine C498 mystery remains.  The all-field split-member theorem,
+No genuine C498 classification mystery remains.  The all-field split-member theorem,
 persistent fifth-power orbit law, modular nucleus recurrence, and bounded
 exceptional semilinear normal forms are now all classified.  Further
 compression into a single low-degree classical quintic invariant would be
 a change of presentation, not an evidence gap or an unclassified orbit.
+The new research opportunity is external to C498: \(E_f\) is a two-copy
+fibre-product count, suggesting that the arbitrary-redundancy monodromy gate
+may admit a hierarchy of low-order polar moments before one attempts a full
+splitting-cover monodromy theorem.

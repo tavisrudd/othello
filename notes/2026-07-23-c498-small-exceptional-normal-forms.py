@@ -4,9 +4,9 @@
 This is a read-only analysis of the canonical C498 census certificate.  It
 reconstructs the unique apolar cubic of every trivial-gcd quintic syndrome,
 checks it by two independent kernel calculations, constructs the complete
-pointed first-polar quotient-pencil profile, and verifies that this profile
-plus the odd-characteristic quintic root type separates exactly the
-PGammaL2 orbits.
+pointed first-polar quotient-pencil profile, and verifies that its shared-root
+collision energy, plus the odd-characteristic quintic root type, separates
+exactly the PGammaL2 orbits.
 
 Run from the repository root:
 
@@ -18,6 +18,7 @@ import hashlib
 import importlib.util
 import json
 from collections import Counter
+from itertools import combinations
 from pathlib import Path
 
 
@@ -202,7 +203,7 @@ def polar_profile(replay, F, quintic):
 
 
 def invariant_signature(F, record):
-    signature = (record["polar_profile"],)
+    signature = (collision_energy(record["polar_profile"]),)
     # In odd characteristic the ordinary binary-quintic root divisor is an
     # intrinsic covariant of the divided-power syndrome.  In characteristic
     # two the frozen descriptive label is not Frobenius-stable, so it is not
@@ -210,6 +211,66 @@ def invariant_signature(F, record):
     if F.p != 2:
         signature += (record["quintic_factor_type"],)
     return signature
+
+
+def projected_polar_profile(profile, factor_types):
+    projected = Counter()
+    for histogram, marker_count in profile:
+        counts = dict(histogram)
+        key = tuple(counts.get(factor_type, 0) for factor_type in factor_types)
+        projected[key] += marker_count
+    return tuple(sorted(projected.items()))
+
+
+def projected_signature(F, record, factor_types):
+    signature = (
+        projected_polar_profile(record["polar_profile"], factor_types),
+    )
+    if F.p != 2:
+        signature += (record["quintic_factor_type"],)
+    return signature
+
+
+def polar_moments(profile, degrees):
+    spectrum = projected_polar_profile(profile, ("3",))
+    return tuple(
+        sum(marker_count * counts[0] ** degree
+            for counts, marker_count in spectrum)
+        for degree in degrees
+    )
+
+
+def collision_energy(profile):
+    first, second = polar_moments(profile, (1, 2))
+    assert (second - first) % 2 == 0
+    return (second - first) // 2
+
+
+def moment_signature(F, record, degrees):
+    signature = (polar_moments(record["polar_profile"], degrees),)
+    if F.p != 2:
+        signature += (record["quintic_factor_type"],)
+    return signature
+
+
+def signature_classes(F, records, factor_types=None):
+    groups = {}
+    for record in records:
+        signature = (
+            invariant_signature(F, record)
+            if factor_types is None
+            else projected_signature(F, record, factor_types)
+        )
+        groups.setdefault(signature, []).append(record["rep_index"])
+    return sorted(tuple(sorted(indices)) for indices in groups.values())
+
+
+def moment_signature_classes(F, records, degrees):
+    groups = {}
+    for record in records:
+        signature = moment_signature(F, record, degrees)
+        groups.setdefault(signature, []).append(record["rep_index"])
+    return sorted(tuple(sorted(indices)) for indices in groups.values())
 
 
 def frobenius_cycles(records):
@@ -261,15 +322,16 @@ def build_certificate():
         },
         "classifier": {
             "odd_characteristic": [
-                "pointed_polar_profile",
+                "shared_root_collision_energy_of_1_plus_3_net_members",
                 "binary_quintic_factor_type",
             ],
             "characteristic_two": [
-                "pointed_polar_profile",
+                "shared_root_collision_energy_of_1_plus_3_net_members",
             ],
         },
         "fields": {},
     }
+    classification_instances = []
     for q in FIELDS:
         F = replay.GF(q)
         records = []
@@ -277,6 +339,10 @@ def build_certificate():
             if orbit["net_gcd_deg"] != 0:
                 continue
             cubic = apolar_cubic(replay, F, tuple(orbit["rep"]))
+            profile = polar_profile(replay, F, tuple(orbit["rep"]))
+            assert polar_moments(profile, (1,))[0] == (
+                orbit["member_hist"].get("1+3", 0)
+            )
             record = {
                 "rep_index": orbit["rep_index"],
                 "rep": tuple(orbit["rep"]),
@@ -288,23 +354,15 @@ def build_certificate():
                 "stab_order": orbit["stab_order"],
                 "frobenius_maps_to_rep_index":
                     orbit["frobenius_maps_to_rep_index"],
-                "polar_profile": polar_profile(
-                    replay, F, tuple(orbit["rep"])
-                ),
+                "polar_profile": profile,
             }
             records.append(record)
         total += len(records)
 
-        groups = {}
-        for record in records:
-            signature = invariant_signature(F, record)
-            groups.setdefault(signature, []).append(record["rep_index"])
         cycles = frobenius_cycles(records)
-        signature_classes = sorted(
-            tuple(sorted(indices)) for indices in groups.values()
-        )
         cycle_classes = sorted(tuple(sorted(cycle)) for cycle in cycles)
-        assert signature_classes == cycle_classes
+        assert signature_classes(F, records) == cycle_classes
+        classification_instances.append((F, records, cycle_classes))
 
         by_index = {record["rep_index"]: record for record in records}
         normal_forms = []
@@ -332,6 +390,15 @@ def build_certificate():
                     dict(record["member_hist"]),
                 "pointed_polar_profile":
                     polar_profile_json(record["polar_profile"]),
+                "irreducible_cubic_polar_moments": {
+                    str(degree): value
+                    for degree, value in zip(
+                        (1, 2, 3),
+                        polar_moments(record["polar_profile"], (1, 2, 3)),
+                    )
+                },
+                "shared_root_collision_energy":
+                    collision_energy(record["polar_profile"]),
             }
             if F.p != 2:
                 form["binary_quintic_factor_type"] = (
@@ -347,6 +414,67 @@ def build_certificate():
             "normal_forms": normal_forms,
         }
     assert total == 36
+
+    factor_types = sorted({
+        factor_type
+        for _, records, _ in classification_instances
+        for record in records
+        for histogram, _ in record["polar_profile"]
+        for factor_type, _ in histogram
+    })
+    minimal_coordinate_sets = []
+    for size in range(len(factor_types) + 1):
+        for subset in combinations(factor_types, size):
+            if all(
+                signature_classes(F, records, subset) == cycle_classes
+                for F, records, cycle_classes in classification_instances
+            ):
+                minimal_coordinate_sets.append(list(subset))
+        if minimal_coordinate_sets:
+            break
+    certificate["polar_profile_ablation"] = {
+        "available_factor_coordinates": factor_types,
+        "minimum_coordinate_count": len(minimal_coordinate_sets[0]),
+        "all_minimum_coordinate_sets": minimal_coordinate_sets,
+        "odd_characteristic_root_type_retained": True,
+    }
+
+    candidate_degrees = tuple(range(1, 11))
+    first_moment_cutoff = next(
+        cutoff
+        for cutoff in range(len(candidate_degrees) + 1)
+        if all(
+            moment_signature_classes(
+                F, records, candidate_degrees[:cutoff]
+            ) == cycle_classes
+            for F, records, cycle_classes in classification_instances
+        )
+    )
+    minimum_moment_sets = []
+    for size in range(len(candidate_degrees) + 1):
+        for degrees in combinations(candidate_degrees, size):
+            if all(
+                moment_signature_classes(F, records, degrees)
+                == cycle_classes
+                for F, records, cycle_classes in classification_instances
+            ):
+                minimum_moment_sets.append(list(degrees))
+        if minimum_moment_sets:
+            break
+    certificate["irreducible_cubic_spectrum_ablation"] = {
+        "candidate_moment_degrees": list(candidate_degrees),
+        "least_initial_moment_count": first_moment_cutoff,
+        "minimum_moment_count": len(minimum_moment_sets[0]),
+        "all_minimum_moment_degree_sets": minimum_moment_sets,
+        "odd_characteristic_root_type_retained": True,
+    }
+    certificate["collision_energy_identity"] = {
+        "first_moment": "number_of_1_plus_3_quartic_net_members",
+        "energy_formula": "(second_moment-first_moment)/2",
+        "interpretation":
+            "unordered_pairs_of_1_plus_3_members_with_the_same_rational_root",
+        "energy_plus_odd_root_type_classifies_pgammal2": True,
+    }
     return certificate
 
 

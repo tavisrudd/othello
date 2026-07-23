@@ -367,9 +367,10 @@ polar flags should be persistent/modular when contained in the lower bad locus a
 
 The final small exceptional normal-form theorem
 (`notes/2026-07-23-c498-small-exceptional-normal-forms.md`)
-classifies the bounded residue intrinsically.  The pointed first-polar quotient-pencil profile,
-supplemented only in odd characteristic by the quintic root type, separates the frozen classes up
-to exactly Frobenius fusion.
+classifies the bounded residue intrinsically.  The pointed first-polar quotient-pencil profile
+collapses to the shared-root collision energy of `1+3` net members.  Supplemented only in odd
+characteristic by the quintic root type, it separates the frozen classes up to exactly Frobenius
+fusion.
 Thus the q=7/8/9/11/13 tables compress from `18/11/4/2/1` PGL2 orbits to
 `18/5/2/2/1` PGammaL2 normal forms.  The atomic generator/JSON/checksum bundle passes, and C498 has
 no remaining theorem or classification gap.

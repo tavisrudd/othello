@@ -40,8 +40,9 @@ Pinned seeds (reuse from C491 search log, do NOT re-resolve by title):
 ## Status
 
 **COMPLETE (2026-07-23).**  The all-field existence theorem, persistent/modular orbit law, and
-bounded exceptional classification are closed.  The final intrinsic fingerprint is the pointed
-first-polar quotient-pencil profile plus the odd-characteristic quintic root type.  It gives exactly
+bounded exceptional classification are closed.  The final intrinsic fingerprint is the
+shared-root collision energy of the `1+3` net members, plus the
+odd-characteristic quintic root type.  It gives exactly
 \(18/5/2/2/1\) \(P\Gamma L_2\)-normal forms at q=7/8/9/11/13; see
 `notes/2026-07-23-c498-small-exceptional-normal-forms.md` and its atomic evidence bundle.
 
