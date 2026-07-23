@@ -124,6 +124,30 @@ The base-size conclusion is now a one-line incidence proof:
 Thus the exact coherent-projection base size is three, every pair fails, and
 every triple works.
 
+The stored multiplicities give a free quantitative sharpening.  Under C490's
+convention of an unordered pair of distinct parents and one of the 720
+diagonal transporters, every size-10 mask occurs 95 times, every size-11 mask
+occurs 110 times, and the full mask occurs 158730 times.  The totals are
+
+```text
+66 * 95 = 6270,       12 * 110 = 1320,       158730,
+6270 + 1320 + 158730 = 166320 = binom(22,2) * 720.       (9)
+```
+
+If `N(T)` counts comparison instances not separated by `T`, then (8)--(9)
+give the complete restriction-level collision law
+
+```text
+|T| = 0:  N(T) = 166320,
+|T| = 1:  N(T) = 110 + 11 * 95 = 1155,
+|T| = 2:  N(T) = 95,
+|T| >= 3: N(T) = 0.                                    (10)
+```
+
+Thus the threshold is not only uniform on subsets: every pair has exactly 95
+transporter-coherent collision witnesses, while adjoining any third centre
+removes all of them.
+
 The group action explains the striking uniformity but does not replace the
 finite evidence.  `PGL_2(11)` is sharply three-transitive on
 `C ~= P1(F_11)`, and the disagreement hypergraph is equivariant.  Hence one
@@ -238,6 +262,13 @@ are not two independently named geometric species; they are the fibres of a
 free two-element quotient with outer `PGL_2(11)` exchange.  This explains why
 a one-bit orientation can be real while no canonical `+/-` naming exists.
 
+A final zero-cost extraction is the exact collision law (10).  In particular,
+the size-11 mask stratum contains `12 * 110 = 1320` comparison instances,
+numerically `|PGL_2(11)|`, whereas the 66 pair-complement masks each have the
+less transparent multiplicity 95.  The aggregate certificate does not say
+whether the former stratum is one regular group orbit or explain the latter
+number, so no orbit interpretation is asserted.
+
 ## Mystery ledger
 
 - **Settled — why the fixed-child fibre has size 22.**  Once classical
@@ -252,6 +283,13 @@ a one-bit orientation can be real while no canonical `+/-` naming exists.
   equivariant map to the decoder's intrinsic `10+10` leader-support
   bipartition is proved.  This evidence gap must close before those
   chiralities are identified.
+- **Exposed, non-acceptance mystery — collision multiplicities.**  The exact
+  uniform law is `95` witnesses per selected pair and `1155` per selected
+  singleton; the size-11 stratum totals `1320=|PGL_2(11)|`.  C490 stores mask
+  aggregates, not the stabilizers or orbit decomposition of comparison
+  instances.  An orbit-level explanation would require a new decomposition
+  of the `(parent pair, diagonal transporter)` action and has no allocated
+  owner.
 - **No remaining C521 acceptance mystery.**  The theorem, trust split,
   literature boundary, and disposition are explicit.
 
