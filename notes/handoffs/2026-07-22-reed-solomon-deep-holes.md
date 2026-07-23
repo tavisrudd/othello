@@ -450,6 +450,11 @@ consecutive-Hankel-row rank condition that generic syndromes fail, and valid sup
 completion root to collide with a support point, whereas C512 must delete that pointed-marker
 divisor.  The refreshed three-graph citation audit finds no predecessor for this bounded quotient
 claim.  No standard-only deep-hole classification or alternative recursion is asserted.
+Two requested extra-juice rounds sharpen the entry to C515.  Every `(s-1)`-support has trivial
+translation stabilizer because its sum changes by `-b`; finite differences satisfy the exact
+augmentation identity `Delta_b F_y=F_{(A_-b-1)y}`.  The completion-collision boundary is the
+trace-one configuration `U={0} union V` in `G_m`, with determinant member `X^2 Q_V`, so a
+successor must treat it as recursive boundary data rather than delete it.
 
 ## Execution ladder
 

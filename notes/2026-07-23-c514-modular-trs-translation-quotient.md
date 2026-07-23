@@ -129,6 +129,11 @@ Conversely, if \(U\subset\mathbb F_q\) has \(s-1\) distinct elements and sum one
 Hence \(U\) parametrizes one complete translation orbit, and every orbit occurs once.  This is
 an equivalence of the pointed support action groupoid with the slice \(r=0\), not merely a map
 of orbit sets.  The completion point makes the translation action on pointed supports free.
+In fact the support action itself is already free: if \(T+b=T\), then comparison of sums gives
+\[
+ \sum T=\sum(T+b)=\sum T+(s-1)b=\sum T-b,
+\]
+so \(b=0\).  Thus no support stabilizer is hidden even before adjoining the completion root.
 Frobenius sends
 \[
  (U,r,y_r)\longmapsto(U^p,r^p,y_r^{(p)})
@@ -264,6 +269,44 @@ completion root translation-equivariant in the modular locus.  It also exposes w
 analogy almost works: factoring the completion marker gives a lower split polynomial, but the
 marker incidence divisor has the opposite semantics.
 
+### First extra-juice round — the additive recursion operator is exact
+
+Keep \(U\) fixed and write
+\[
+ F_y(r,U)=\langle A_{-r}y,XQ_U\rangle.
+\]
+For every \(b\in\mathbb F_q\), its finite translation difference is
+\[
+ F_y(r+b,U)-F_y(r,U)
+ =F_{(A_{-b}-1)y}(r,U).                                        \tag{10}
+\]
+Iterated differences therefore replace \(y\) by the corresponding product of augmentation
+operators \(A_{-b_i}-1\); there is no correction term from the quotient coordinates.  The
+common fixed flag in (4) is exactly the degree-zero endpoint of this recursion.  What remains
+for C515 is not construction of the operator but the arithmetic question whether the first
+nonzero additive polynomial produced by (10) hits zero on the split trace-one configuration
+space.
+
+This also strengthens the stabilizer statement: since every \((s-1)\)-support has trivial
+translation stabilizer, all isotropy in the incidence problem comes from the syndrome direction,
+not from a hidden periodic support.
+
+### Second extra-juice round — the collision divisor is a recursive boundary
+
+The valid completion/support collision \(0\in U\) has an exact normal form.  Write
+\[
+ U=\{0\}\sqcup V,\qquad |V|=s-2,\qquad
+ V\subset\mathbb F_q^\times,\qquad\sum_{v\in V}v=1.
+\]
+Then
+\[
+ Q_U(X)=XQ_V(X),\qquad XQ_U(X)=X^2Q_V(X).                       \tag{11}
+\]
+Thus the collision divisor is itself the distinct split trace-one configuration space of
+\((s-2)\)-subsets of \(\mathbb G_m\), paired with a double marked factor.  It is neither
+unstructured debris nor C512's forbidden diagonal.  Equation (11) identifies the exact boundary
+object that an additive or logarithmic successor must retain.
+
 - **Settled — can nonexact invariants create a new fixed syndrome?** No.  Equation (7) forces
   every quotient-fixed class to lift to the Lucas-maximal fixed flag; the connecting class is
   zero.
@@ -271,17 +314,21 @@ marker incidence divisor has the opposite semantics.
   The completion-root slice \(r=0\) is canonical, and its unordered coordinates are the
   coefficients of \(Q_U\) with \(\sum U=1\).
 - **Settled — are stabilizers or Frobenius lost?** No.  The pointed support action groupoid is
-  equivalent to the slice, syndrome stabilizers remain transporter equalities, and Frobenius
-  preserves the slice.
+  equivalent to the slice, the support action is already free, syndrome stabilizers remain
+  transporter equalities, and Frobenius preserves the slice.
 - **Settled — does C512 apply universally?** No.  The shift matrix (9) is the exact
   polar-line gate, and valid completion/support collisions lie on the divisor that C512 must
   delete.
+- **Settled — is the hoped-for additive operator itself available?** Yes.  Equation (10) is an
+  exact augmentation-ideal recursion, and its degree-zero endpoint is the Lucas fixed flag.
+- **Settled — is the collision divisor geometrically opaque?** No.  Equation (11) identifies it
+  with the trace-one configuration space in \(\mathbb G_m\) carrying a double marker.
 - **Open — which deep syndromes, if any, lie on the polar-compatible locus (8)?** C514 did not
   classify deep syndromes and no census was authorized.  A successor would need a newly allocated
-  bounded theorem target that first proves this locus is relevant.
+  bounded theorem target that first proves this locus is relevant.  C515 owns that gate.
 - **Open — does the quotient avoidance problem have a different recursion retaining the
-  collision divisor?** The present obstruction is specifically to the C512 pointed functor.
-  No alternative recursive category has been proved or allocated.
+  collision divisor?** Equation (10) supplies the operator and (11) supplies its boundary, but
+  root existence and additive trace obstructions remain unproved.  C515 owns this gate.
 
 Vibe check: the symmetry paid off cleanly—the quotient and fixed flag are exact—but it exposes a
 structural near miss rather than the hoped-for PRS recursion, so the next advance needs a genuinely

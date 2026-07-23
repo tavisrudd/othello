@@ -51,3 +51,9 @@ C512 recursion fails for two proved reasons: generic annihilator lines are not c
 polar lines, and valid completion/support collisions lie on C512's forbidden marker divisor.
 The report refreshes all three pinned citation graphs and makes no field census or deep-hole
 classification claim.
+
+Two subsequent extra-juice rounds add the exact difference identity
+`Delta_b F_y=F_{(A_-b-1)y}`, prove that every support translation stabilizer is trivial, and
+identify the valid completion-collision boundary as `X^2 Q_V` over the trace-one configuration
+space in `G_m`.  These are C515's operator and boundary inputs; root existence and additive trace
+classes remain its theorem gate.
