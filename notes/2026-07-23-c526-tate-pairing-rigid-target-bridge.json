@@ -1,0 +1,804 @@
+{
+  "comparison": {
+    "exact_obstruction": "orthogonality of the ordered flag is preserved by isometry and independent rescaling of its two lines, but the source cross-pairing is 0 while the target cross-pairing is 2 (or 5 in the dual convention)",
+    "projective_isometry_exists": false,
+    "source_metric_plus_ordered_flag_projective_stabilizer_contains_C2": true,
+    "source_ordered_flag_is_orthogonal_for_every_induced_pairing": true,
+    "target_metric_plus_ordered_flag_projective_stabilizer": "trivial: nonzero norms force each line eigenvalue to have the same square, and nonzero cross-pairing forces their ratio to be 1",
+    "target_ordered_flag_is_nonorthogonal_in_dual_convention": true,
+    "target_ordered_flag_is_nonorthogonal_in_vector_convention": true
+  },
+  "field": 11,
+  "inputs": {
+    "2026-07-20-c406-matching-module.py": {
+      "bytes": 48589,
+      "sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51"
+    },
+    "2026-07-20-c406-matching-orbit-scout.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "2026-07-20-c412-relative-cubic-depth-plane.json": {
+      "bytes": 81411,
+      "sha256": "01aaf1169e7747724c51969a78234e9fe0a3c62061f557d19e9f7b5d7ce11c84"
+    },
+    "2026-07-23-c433-modular-depth-fourier-exact-sequence.json": {
+      "bytes": 9063,
+      "sha256": "1eec9d75ef24cb7878c41c85949442833b7d8c8e60f317220b80e83ac869a704"
+    }
+  },
+  "naturality_boundary": {
+    "a5_restriction": "11 does not divide |A5|=60, so restriction is semisimple and supplies no normalization or extra pairing choice",
+    "outer_covariance": "the twisted outer character occurs twice in a bilinear pairing, so every polarized form is PGL_2(11)-invariant"
+  },
+  "schema": "c526-tate-pairing-rigid-target-bridge-v1",
+  "source_pairing_inventory": {
+    "canonical_W_form_parameters_in_C412_basis": {
+      "Q1": [
+        1,
+        7
+      ],
+      "Q9": [
+        1,
+        6
+      ]
+    },
+    "canonical_nondegeneracy_obstruction": "the four scale-free monomial lines are individually zero or rank one; combining the two surviving rank-one forms requires a relative normalization of Q1 and Q9",
+    "canonical_nondegenerate_pairing_exists": false,
+    "closed_formula_in_ordered_flag_basis": {
+      "general_polarized_pairing": "alpha*Q1^3 + beta*Q1*Q9^2 gives diag(9*alpha,4*beta); the other two canonical monomials vanish",
+      "perfect_pure_pairings_are_all": "anisotropic with square determinant",
+      "perfect_pure_projective_members": 10,
+      "pure_pairing_for_Q_equals_cQ1_plus_dQ9": "diag(9*c^3,c*d^2)",
+      "pure_pairing_is_perfect_exactly_when": "c*d != 0"
+    },
+    "construction": "four polarized Sym^3 monomials in the canonical rank-one and rank-nine members Q1,Q9 of the invariant bilinear-form pencil on W",
+    "mixed_pairing_span_characterization": "the full two-dimensional space of symmetric Tate-plane forms making the ordered rank-one/rank-nine lines orthogonal",
+    "mixed_pairing_span_dimension_on_tate_plane": 2,
+    "mixed_polarization_records": [
+      {
+        "determinant": 0,
+        "determinant_square_class": "zero",
+        "label": "Q1^3",
+        "ordered_flag_pair_invariant": null,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            9,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "rank": 1,
+        "relative_radical": [
+          [
+            8,
+            1,
+            0
+          ],
+          [
+            6,
+            0,
+            1
+          ]
+        ],
+        "relative_rank": 1,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            5,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "type": "degenerate"
+      },
+      {
+        "determinant": 0,
+        "determinant_square_class": "zero",
+        "label": "Q1^2*Q9",
+        "ordered_flag_pair_invariant": null,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "rank": 0,
+        "relative_radical": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "relative_rank": 0,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "type": "degenerate"
+      },
+      {
+        "determinant": 0,
+        "determinant_square_class": "zero",
+        "label": "Q1*Q9^2",
+        "ordered_flag_pair_invariant": null,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "rank": 1,
+        "relative_radical": [
+          [
+            9,
+            1,
+            0
+          ],
+          [
+            2,
+            0,
+            1
+          ]
+        ],
+        "relative_rank": 1,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            5
+          ]
+        ],
+        "type": "degenerate"
+      },
+      {
+        "determinant": 0,
+        "determinant_square_class": "zero",
+        "label": "Q9^3",
+        "ordered_flag_pair_invariant": null,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "rank": 0,
+        "relative_radical": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "relative_rank": 0,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "type": "degenerate"
+      }
+    ],
+    "pairing_independent_flag_reflection": {
+      "fixes_both_ordered_flag_lines_projectively": true,
+      "matrix_in_contraction_coordinates": [
+        [
+          9,
+          4
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "perfect_source_metric_plus_flag_projective_stabilizer_contains": "C2",
+      "preserves_every_induced_pairing": true,
+      "square_is_identity": true
+    },
+    "pure_pencil_records": [
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 3,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          0
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            3,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            2,
+            10
+          ],
+          [
+            10,
+            2
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 4,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          1
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            8,
+            0
+          ],
+          [
+            0,
+            7
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 5,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          2
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            7,
+            0
+          ],
+          [
+            0,
+            10
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            5,
+            7
+          ],
+          [
+            7,
+            2
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 5,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          3
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            10,
+            0
+          ],
+          [
+            0,
+            7
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            10,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 3,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          4
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            5,
+            0
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            2,
+            5
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 1,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          5
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            2,
+            0
+          ],
+          [
+            0,
+            7
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            8,
+            10
+          ],
+          [
+            10,
+            3
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 9,
+        "determinant": 0,
+        "determinant_square_class": "zero",
+        "label": [
+          1,
+          6
+        ],
+        "ordered_flag_pair_invariant": null,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "rank": 0,
+        "relative_radical": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "relative_rank": 0,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "type": "degenerate"
+      },
+      {
+        "ambient_W_form_rank": 1,
+        "determinant": 0,
+        "determinant_square_class": "zero",
+        "label": [
+          1,
+          7
+        ],
+        "ordered_flag_pair_invariant": null,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            9,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "rank": 1,
+        "relative_radical": [
+          [
+            8,
+            1,
+            0
+          ],
+          [
+            6,
+            0,
+            1
+          ]
+        ],
+        "relative_rank": 1,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            5,
+            2
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "type": "degenerate"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 4,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          8
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            6,
+            0
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            6,
+            10
+          ],
+          [
+            10,
+            10
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 4,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          9
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            8,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 4,
+        "determinant_square_class": "square",
+        "label": [
+          1,
+          10
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            4,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            5,
+            9
+          ],
+          [
+            9,
+            6
+          ]
+        ],
+        "type": "anisotropic"
+      },
+      {
+        "ambient_W_form_rank": 10,
+        "determinant": 3,
+        "determinant_square_class": "square",
+        "label": [
+          0,
+          1
+        ],
+        "ordered_flag_pair_invariant": 0,
+        "ordered_rank_one_rank_nine_flag_gram": [
+          [
+            9,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "rank": 2,
+        "relative_radical": [
+          [
+            5,
+            4,
+            1
+          ]
+        ],
+        "relative_rank": 2,
+        "tate_plane_gram_in_contraction_coordinates": [
+          [
+            10,
+            10
+          ],
+          [
+            10,
+            7
+          ]
+        ],
+        "type": "anisotropic"
+      }
+    ]
+  },
+  "target": {
+    "depth_plane_gram": [
+      [
+        3,
+        7
+      ],
+      [
+        7,
+        10
+      ]
+    ],
+    "determinant": 3,
+    "determinant_square_class": "square",
+    "dual_convention_flag_gram": [
+      [
+        9,
+        5
+      ],
+      [
+        5,
+        2
+      ]
+    ],
+    "dual_convention_pair_invariant": 2,
+    "ordered_doubled_residual_flag": [
+      [
+        1,
+        10
+      ],
+      [
+        1,
+        9
+      ]
+    ],
+    "rank": 2,
+    "type": "anisotropic",
+    "vector_convention_flag_gram": [
+      [
+        10,
+        2
+      ],
+      [
+        2,
+        4
+      ]
+    ],
+    "vector_convention_pair_invariant": 10
+  },
+  "tate_duality_and_adjointness": {
+    "invariant_coinvariant_evaluation": "B(r,[m])=B(r,m) is well-defined for invariant r",
+    "norm_adjoint_behavior": "B(Nx,y)=B(x,Ny); hence the norm-induced coinvariant form is symmetric",
+    "projection_adjoint_behavior": "B(r,pi(s))=B(pi(r),s)=B(r,s)",
+    "pulled_same_plane_pairing": "under pi:R/im(N)->ker(N), Tate evaluation is exactly the displayed symmetric quotient Gram form",
+    "tate_descent": "im(N)=ker(pi) is radical for B(r,pi(s)), so evaluation descends to R/im(N) times ker(N)"
+  },
+  "verdict": "NEGATIVE: no natural nondegenerate source pairing, and even every noncanonical perfect pairing induced by the full polarized ambient pencil has the wrong ordered-flag orbit"
+}
