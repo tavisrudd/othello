@@ -4,7 +4,8 @@ import RelativeConicArcs.ClebschWittHadamard
 # Quadratic-residue incidence and Barker correlation checks
 
 This leaf checks the cyclic `2-(11,5,2)` incidence design and the exact periodic and aperiodic
-correlations in one native-evaluation pass.  Its terminals depend on `Lean.ofReduceBool`.
+correlations in one native-evaluation pass.  In the pinned toolchain its terminals expose
+declaration-local `_native.native_decide.ax_1_1` dependencies.
 -/
 
 namespace RelativeConicArcs

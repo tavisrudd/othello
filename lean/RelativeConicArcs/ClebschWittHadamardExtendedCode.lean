@@ -4,7 +4,8 @@ import RelativeConicArcs.ClebschWittHadamard
 # Extended ternary code enumeration
 
 This leaf exhaustively checks the 729-word cardinality and complete length-twelve weight
-distribution in one native-evaluation pass.  Its terminals depend on `Lean.ofReduceBool`.
+distribution in one native-evaluation pass.  In the pinned toolchain its terminals expose
+declaration-local `_native.native_decide.ax_1_1` dependencies.
 -/
 
 namespace RelativeConicArcs

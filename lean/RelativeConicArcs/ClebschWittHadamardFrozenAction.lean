@@ -5,8 +5,9 @@ import RelativeConicArcs.ClebschWittHadamard
 
 This leaf checks the displayed permutation data, the frozen coordinate action through an explicit
 coefficient-vector evaluator, and the induced `1+11` action on full-support projective words.  The
-finite evaluator depends on `Lean.ofReduceBool`; code preservation is transported symbolically
-from coefficient vectors to the image-defined code.
+finite evaluator exposes declaration-local `_native.native_decide.ax_1_1` dependencies in the
+pinned toolchain; code preservation is transported symbolically from coefficient vectors to the
+image-defined code.
 -/
 
 namespace RelativeConicArcs

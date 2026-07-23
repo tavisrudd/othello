@@ -6,8 +6,9 @@ import RelativeConicArcs.ClebschWittHadamard
 This leaf uses bounded native work-list evaluation on packed degree-twelve permutations.  It checks
 the parent orders and intersection/join relations, equality of the coordinate and transported-row
 closures, the simultaneous-word graph of the row/column automorphism, its inner square, and the
-absence of an inner element realizing the generator assignment.  Every terminal depends on
-`Lean.ofReduceBool`; no classical group name is asserted.
+absence of an inner element realizing the generator assignment.  In the pinned toolchain every
+terminal exposes a declaration-local `_native.native_decide.ax_1_1` dependency; no classical
+group name is asserted.
 -/
 
 namespace RelativeConicArcs

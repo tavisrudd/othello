@@ -4,8 +4,8 @@ import RelativeConicArcs.ClebschWittHadamard
 # Punctured ternary code enumeration
 
 This leaf exhaustively checks the complete length-eleven weight distribution and radius-two
-sphere-packing equality in one native-evaluation pass.  Its terminals depend on
-`Lean.ofReduceBool`.
+sphere-packing equality in one native-evaluation pass.  In the pinned toolchain its terminals
+expose declaration-local `_native.native_decide.ax_1_1` dependencies.
 -/
 
 namespace RelativeConicArcs

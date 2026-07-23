@@ -5,7 +5,8 @@ import RelativeConicArcs.ClebschWittHadamard
 
 This leaf checks that both displayed parent generator pairs preserve all 132 minimum supports and
 checks their transitive/fixed-point discriminator.  The support check uses native evaluation and
-depends on `Lean.ofReduceBool`; the two twelve-point orbit equalities use kernel reduction.
+exposes a declaration-local `_native.native_decide.ax_1_1` dependency in the pinned toolchain; the
+two twelve-point orbit equalities use kernel reduction.
 -/
 
 namespace RelativeConicArcs

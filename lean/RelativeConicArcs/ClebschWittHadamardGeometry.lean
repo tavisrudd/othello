@@ -5,7 +5,8 @@ import RelativeConicArcs.ClebschWittHadamard
 
 This leaf checks the `S(5,6,12)` minimum-support design, the twelve projective full-support words,
 the integer Hadamard Gram identity, and exhaustion of all projective minimum words by the 66
-sign-row secants.  The shared native-evaluation certificate depends on `Lean.ofReduceBool`.
+sign-row secants.  In the pinned toolchain the shared native-evaluation certificate exposes a
+declaration-local `_native.native_decide.ax_1_1` dependency.
 -/
 
 namespace RelativeConicArcs

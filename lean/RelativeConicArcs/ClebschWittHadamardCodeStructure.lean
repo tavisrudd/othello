@@ -5,7 +5,8 @@ import RelativeConicArcs.ClebschWittHadamard
 
 This leaf checks the parity-coordinate rule on all 729 coefficient vectors and transports it
 symbolically through the image definition of the code.  It also checks the six-by-six generator
-Gram matrix.  The finite coefficient and Gram terminal depends on `Lean.ofReduceBool`.
+Gram matrix.  In the pinned toolchain the finite coefficient and Gram terminal exposes a
+declaration-local `_native.native_decide.ax_1_1` dependency.
 -/
 
 namespace RelativeConicArcs

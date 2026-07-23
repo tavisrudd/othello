@@ -4,8 +4,9 @@ import RelativeConicArcs.ClebschWittHadamardFrozenAction
 # Signed row/column generator action
 
 This leaf checks the displayed coordinate, row, carrier, and square-conjugator permutations and
-the signed action of both design generators on all twelve Hadamard rows.  Its native-evaluation
-terminals depend on `Lean.ofReduceBool`.
+the signed action of both design generators on all twelve Hadamard rows.  In the pinned toolchain
+its native-evaluation terminals expose declaration-local `_native.native_decide.ax_1_1`
+dependencies.
 -/
 
 namespace RelativeConicArcs
