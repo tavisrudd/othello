@@ -1,0 +1,39 @@
+{
+  "checks": {
+    "all_five_column_supports_independent": true,
+    "all_translation_matrices_preserve_columns": true,
+    "all_translation_matrices_preserve_deep_set": true,
+    "common_translation_fixed_space_is_standard_line": true
+  },
+  "common_translation_fixed_vector_space_dimension": 1,
+  "deep_point_count": 1,
+  "deep_points_sha256": "b83556e3da8b4f9a44c080bcbb16afdf391309bd67ffbfd041c3c91b661fcb9c",
+  "field": {
+    "model": "GF(3)[u]/(u^2+1)",
+    "order": 9
+  },
+  "parameters": {
+    "k": 3,
+    "q": 9,
+    "redundancy": 6,
+    "theta": 1
+  },
+  "projective_syndrome_points": 66430,
+  "schema": "c510-trs-deep-hole-pilot-v1",
+  "standard_orbit": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "standard_orbit_size": 1,
+  "support_hyperplanes": 126,
+  "translation_orbit_count": 1,
+  "translation_orbit_size_histogram": {
+    "1": 1
+  }
+}
