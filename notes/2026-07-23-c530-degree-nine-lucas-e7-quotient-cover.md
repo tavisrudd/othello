@@ -186,6 +186,31 @@ For \(k=\mathbf F_{2^m}\), a three-dimensional \(\mathbf F_2\)-subspace exists e
 identity on this affine frame.  This proves (8) without a point count, a curve bound, or an
 ambient syndrome census.
 
+The witnesses are abundant, not a single exceptional construction.  Distinct three-spaces give
+distinct monic subspace polynomials, and the number of such spaces is
+\[
+ {m\brack3}_2
+ =\frac{(q-1)(q-2)(q-4)}{(8-1)(8-2)(8-4)}
+ =\frac{(q-1)(q-2)(q-4)}{168}.                              \tag{14}
+\]
+Each has \(q/8\) affine cosets, with one constant term per coset.  Hence the exact number of monic
+split squarefree members in the additive-affine family (2) is
+\[
+ N_{\rm add}(q)
+ =\frac{q(q-1)(q-2)(q-4)}{1344}.                            \tag{15}
+\]
+When \(3\mid m\), the \(\mathbf F_8\)-linear C529 section contributes only
+\[
+ N_{\mathbf F_8}(q)
+ =\frac{q(q-1)}{56};                                        \tag{16}
+\]
+when \(3\nmid m\), it contributes none.  Thus C529's section is not merely proper: among the
+additive witnesses its proportion is
+\[
+ \frac{24}{(q-2)(q-4)}
+\]
+when it exists, and tends to zero quadratically.
+
 ## 4. Boundary and coding semantics
 
 The framed Artin--Schreier chart retains the full squarefree deletion data:
@@ -235,8 +260,7 @@ bounded controls certify the displayed algebra and implementation conventions; t
 subspace-polynomial theorem, geometric Artin--Schreier argument, and monodromy statements are the
 hand proofs in §§1--3.
 
-The load-bearing byte counts are `6332` for the generator, `7461` for the JSON certificate, and
-`3169` for the independent replay.  The checksum manifest also records the report itself.
+The load-bearing byte counts and hashes are recorded in the checksum manifest.
 
 ## Extra-juice and Tao closeout
 
@@ -250,6 +274,9 @@ obstruction:
 - the quotient directions contain both a genuinely nonconstant \(C_2\) Artin--Schreier layer and
   a larger \(\operatorname {AGL}_3(\mathbf F_2)\) additive subcover.  The latter supplies rational
   witnesses over every admissible field, so no Hasse--Weil threshold is needed.
+- the exact witness count (15) shows that uniform shallowness is robust: C529's
+  \(\mathbf F_8\)-linear witnesses form only the vanishing proportion
+  \(24/((q-2)(q-4))\) of the additive family when they exist.
 
 The highest-EV successor remains C531: classify the other intrinsic \(PGL_2\)-strata of the
 six-dimensional carrier.  C530 gives no evidence that their kernels contain comparable
@@ -269,6 +296,8 @@ Settled:
   \(\operatorname {AGL}_1(\mathbf F_8)\).
 - **Is the \(e_7\) orbit deep when \(3\nmid m\)?**  No.  It is shallow for every admissible \(m\),
   by the subspace polynomial (7).
+- **Was the new witness an isolated construction?**  No.  Equation (15) counts the complete
+  additive-affine family, while (16) quantifies the much smaller C529 section.
 - **Are repeated roots, infinity, or support collisions hiding in the witness?**  No.  The
   derivative \(A_1\) is nonzero, all eight roots are finite and distinct, and projective transport
   preserves the split squarefree divisor.

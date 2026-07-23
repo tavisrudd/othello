@@ -8,6 +8,8 @@
   ],
   "bounded_subspace_controls": [
     {
+      "F8_affine_witness_count": 1,
+      "additive_affine_witness_count": 1,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -40,9 +42,12 @@
       "support": [
         1,
         8
-      ]
+      ],
+      "three_space_count": 1
     },
     {
+      "F8_affine_witness_count": 0,
+      "additive_affine_witness_count": 30,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -77,9 +82,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 15
     },
     {
+      "F8_affine_witness_count": 0,
+      "additive_affine_witness_count": 620,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -114,9 +122,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 155
     },
     {
+      "F8_affine_witness_count": 72,
+      "additive_affine_witness_count": 11160,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -151,9 +162,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 1395
     },
     {
+      "F8_affine_witness_count": 0,
+      "additive_affine_witness_count": 188976,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -188,9 +202,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 11811
     },
     {
+      "F8_affine_witness_count": 0,
+      "additive_affine_witness_count": 3108960,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -225,9 +242,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 97155
     },
     {
+      "F8_affine_witness_count": 4672,
+      "additive_affine_witness_count": 50434240,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -262,9 +282,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 788035
     },
     {
+      "F8_affine_witness_count": 0,
+      "additive_affine_witness_count": 812507520,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -299,9 +322,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 6347715
     },
     {
+      "F8_affine_witness_count": 0,
+      "additive_affine_witness_count": 13044728576,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -336,9 +362,12 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 50955971
     },
     {
+      "F8_affine_witness_count": 299520,
+      "additive_affine_witness_count": 209073047040,
       "basis_hex": [
         "0x1",
         "0x2",
@@ -373,7 +402,8 @@
         2,
         4,
         8
-      ]
+      ],
+      "three_space_count": 408345795
     }
   ],
   "e7_action": {
@@ -482,5 +512,6 @@
     "AGL3_F2": 1344,
     "GL3_F2": 168
   },
-  "schema": "c530-degree-nine-e7-quotient-cover-v1"
+  "schema": "c530-degree-nine-e7-quotient-cover-v1",
+  "witness_count_formula": "q*(q-1)*(q-2)*(q-4)/1344; F8-linear subcount q*(q-1)/56 iff 3|m"
 }

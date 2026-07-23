@@ -83,6 +83,10 @@ def roots_to_polynomial(roots: list[int], modulus: int) -> list[int]:
 
 def subspace_witness(m: int) -> dict[str, object]:
     modulus = first_irreducible(m)
+    q = 1 << m
+    grassmannian_count = ((q - 1) * (q - 2) * (q - 4)) // 168
+    affine_witness_count = (q // 8) * grassmannian_count
+    f8_affine_witness_count = q * (q - 1) // 56 if m % 3 == 0 else 0
     basis = [1, 2, 4]
     roots = sorted(
         {
@@ -107,7 +111,10 @@ def subspace_witness(m: int) -> dict[str, object]:
         assert value == 0
     return {
         "m": m,
-        "q": 1 << m,
+        "q": q,
+        "three_space_count": grassmannian_count,
+        "additive_affine_witness_count": affine_witness_count,
+        "F8_affine_witness_count": f8_affine_witness_count,
         "modulus_hex": hex(modulus),
         "basis_hex": [hex(x) for x in basis],
         "roots_hex": [hex(x) for x in roots],
@@ -192,6 +199,10 @@ def certificate() -> dict[str, object]:
         },
         "e7_action": action_support(),
         "ordering_groups": gl3_count(),
+        "witness_count_formula": (
+            "q*(q-1)*(q-2)*(q-4)/1344; "
+            "F8-linear subcount q*(q-1)/56 iff 3|m"
+        ),
         "bounded_subspace_controls": [subspace_witness(m) for m in range(3, 13)],
     }
 

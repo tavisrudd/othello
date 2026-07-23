@@ -33,7 +33,15 @@ def polynomial_times_linear(coeffs: list[int], root: int, mul) -> list[int]:
 
 def replay_witness(row: dict[str, object]) -> None:
     m = int(row["m"])
+    q = 1 << m
     modulus = int(str(row["modulus_hex"]), 16)
+    numerator = (q - 1) * (q - 2) * (q - 4)
+    assert numerator % 168 == 0
+    three_spaces = numerator // 168
+    assert row["three_space_count"] == three_spaces
+    assert row["additive_affine_witness_count"] == (q // 8) * three_spaces
+    expected_f8 = q * (q - 1) // 56 if m % 3 == 0 else 0
+    assert row["F8_affine_witness_count"] == expected_f8
 
     def reduce_poly(f: int) -> int:
         while f.bit_length() - 1 >= m:

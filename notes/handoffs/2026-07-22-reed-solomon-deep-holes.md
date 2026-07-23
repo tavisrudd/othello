@@ -589,7 +589,8 @@ incidence normalizes to the geometrically integral nonconstant Artin--Schreier c
 The `F8`-linear C529 cover is not a component: the quotient directions `t^2,t^4` enlarge it to
 the additive-affine subcover with geometric monodromy `AGL_3(F2)`.  Three-dimensional `F2`
 subspace polynomials give split squarefree members over every `F_(2^m)` with `m>=3`, so the entire
-`PGL2` orbit of `e_7` is shallow over every admissible field, including all `3∤m`.  This fires
+`PGL2` orbit of `e_7` is shallow over every admissible field, including all `3∤m`; the exact monic
+additive witness count is `q(q-1)(q-2)(q-4)/1344`.  This fires
 C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other carrier strata.
 
 ## Execution ladder
