@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-09-work-summary.md`](2026-07-09-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-07-18** — five working weeks, with a quiet stretch Jun 28–30.
+Activity spans **2026-06-14 → 2026-07-23** — six working weeks, with a quiet stretch Jun 28–30.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -510,6 +510,87 @@ policy. The odd-plane kernel keeps running underneath as one lane among several.
   self-critical rather than opportunistic: that a schema field had been read as established fact
   without any proof consuming it, and that a per-leaf workaround for an opaque inversion appeared in no
   report or docstring, so the next hand-written module walked into the same wall.
+
+## Week 7 — Jul 19–23 · Clebsch factorization memory and the Reed–Solomon programme
+
+The apparent `crowns` expansion of this week is mostly a Clebsch publication expansion. The lane
+boundary is real — `clebsch` owns Paper 1 and `crowns` owns the sequel — but mathematically the work
+is one arc: identify the bit forgotten by conic restriction, prove exactly where it survives, and
+then explain the modular carrier that owns it. In parallel, the projective Reed–Solomon work grew
+from a collection of deep-hole companions into a theorem programme spanning redundancies three,
+five, six, and seven.
+
+- **Jul 19 — the Clebsch paper outgrows the rigidity manuscript, and Q25 closes semantically.**
+  C368–C385 built the first Clebsch-facing intake: the all-odd arithmetic phase, intrinsic `10+10`
+  chirality torsor, Fourier-self-dual fission, AME separation, cubic double-six compatibility,
+  golden fusion, matching-decorated parent recovery, and a bounded Lean gateway. Negative controls
+  were kept alongside it: the marked-icosian comparison fails in the required equivariant category,
+  neither Clebsch one-factorization is perfect, and several attractive application readings were
+  assigned to companion results rather than the paper. The same day, `alt-orbit-repair` closed the
+  boundary left open on Jul 18: the normalized-row minimum `32` lifts to semantic arcs, and the five
+  certified normalized orbits are the complete semantic extremal set. The Q25 paper is no longer
+  frozen on that mathematical gate; bookkeeping and its exchange graph remain.
+
+- **Jul 20 — factorization memory is selected as the shipping Clebsch spine.**
+  C395–C412 turned the intake into one mechanism. C399 supplied the portable `A3/B3/H3` Coxeter
+  conic phase; C403 proved the all-degree pairing-forgetting quotient; and C406 identified the
+  missing information: conic restriction forgets a secant pairing, balanced second moments recover
+  two sheets, the first signed tensor memory is cubic, and one depth profile plus its matching
+  recovers the Clebsch parent. C411 replaced a six-profile census by the
+  `A4 \ PGL₂(11) / A5` double-coset/bi-Hecke derivation. C412 forced cubic-first survival by
+  all-degree antipodal parity, recovered the intrinsic `1:4:6` orbit weights, and explained the
+  `6 → 2` rank drop as `P(1)^A4 / soc(P(1))`; it also proved that the canonical Tate two-plane is
+  **not** naturally the depth plane. The existing 19-page rigidity manuscript became a protected
+  emergency fallback. The selected paper is the factorization-memory manuscript.
+
+- **Jul 21–22 — one Clebsch paper becomes two, and red teams delimit both.**
+  The paper plan split cleanly. **Paper 1** proves that the bit exists, is minimal and recoverable,
+  and has an exact survival/forgetting profile. Its close is the characteristic-11 arithmetic
+  gluing theorem: the two golden `A5` sheets are the two halves of one `PGL₂(11)` matching orbit,
+  meet through the `S4/A4` hinge, and are exchanged by the outer coset. The
+  full-support/secant-shadow construction upgrades the perfect-code row to the ternary
+  Golay/Hadamard–Mathieu capstone. **Paper 2**, owned by `crowns`, asks what owns the faces and the
+  modular carrier.
+
+  The C440–C471 battery earned its value as much through kills as through positives. It proved the
+  split-torus law, QR/Barker and perfect-code substrate, mod-40 existence/fusion law, quaternion
+  reduction, rational descent, the `5|1|5*` modular sandwich, the Hadamard-degeneration complex, and
+  exact local zeta packages. It also killed the proposed small Weil-module identification, theta
+  parity as a sheet detector, the literal degree-five Adler/Klein bridge, a permitted linear route
+  to the cubic, and several canonical quantum identifications. The surviving scoped statement is
+  that restricted Fourier blocks sit inside an ambient Weil operator; they are not standalone Weil
+  modules. This prevented the sequel from inheriting a false metaplectic roof.
+
+- **Jul 22–23 — projective Reed–Solomon deep holes become a major lane.**
+  Reconstruction from deepest-syndrome data and the twisted-cubic pilot coalesced into a unified
+  projective Reed–Solomon programme. The landed hierarchy is already substantial: all-field
+  redundancy-three determinant-atlas reconstruction, with a unique rank-one contraction and a
+  persistent two-sheeted Gale ambiguity for abstract projections; literal complete-child rigidity
+  for `q ≥ 16` (and every q=13 fibre), with exact small-field exceptions; a complete
+  `PΓL₂` deep-hole classification at redundancy five; and all-field existence and orbit counts at
+  redundancy six. Redundancy seven first acquired an exact persistent orbit law, the odd-degree
+  characteristic-two central exception, and a theorem for `q ≥ 37`; C509 then closed the remaining
+  band by an orbit-reduced marked-polar census. For every `q ≥ 13` only the persistent stratum and
+  the applicable central point remain, while exceptional deep orbits occur exactly at
+  `q=7,8,9,11`, with fully replayed orbit profiles. The external summary was written to separate
+  exact algebraic and arithmetic-geometric proofs from bounded certified classifications and to
+  state explicitly that this is **not** a proof of the general Reed–Solomon deep-hole conjecture.
+  The calibration also exposed a useful non-deep anomaly: q=19 has one excess size-19 affine
+  pointed-bad orbit, `e₂` with net `⟨1,t³,t⁴⟩`, whose six split members all use infinity. It cannot
+  synchronize into a sextic polar line, settling the count discrepancy while leaving its
+  equianharmonic-looking arithmetic/monodromy cause as an explicit mystery.
+
+- **Jul 23 — the Clebsch sequel gets a theorem-level GO, but under a new roof.**
+  C511 classified the frozen Rosetta candidates: cubic minimality, the one-bit torsor, and
+  Frobenius/split-prime orientation are proved; design polarity and QR perfect-code outer symmetry
+  are checked on the frozen cases; theta parity is dead as a bit detector. The sequel now runs on
+  the **Modular Gateway Theorem**: pointed matching geometry → cross-incidence code pair →
+  perfect-code core → simple endotrivial Lagrangian → unique nonsplit self-dual carrier. The q=7
+  and q=11 geometric rows pass all seven gates; q=23 carries the mechanism but provably lacks the
+  exceptional degree-q permutation-sheet bridge. Thus Paper 2 is a GO around an abstract theorem,
+  two geometric realizations, one carrier-only boundary, and a separate even
+  Hadamard/signed-gluing block. The original universal metaplectic/theta roof is a recorded no-go,
+  not a hidden casualty.
 
 ---
 

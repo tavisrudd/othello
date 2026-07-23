@@ -20,7 +20,9 @@ projective-plane kernel**, with the Lean layer certifying results as they land. 
 has spun off enough standalone finite-geometry and coding-theory mathematics — extension, rigidity,
 and completion-distance theory about geometric *legality* rather than game value — that the repo now
 carries a **publication track alongside the research track**: `papers/` stages seven papers in ship
-order plus two OEIS entries, governed by a Lean release gate (see §3, §7, §8).
+order plus two OEIS entries in its original backbone, with the Clebsch sequel and Reed–Solomon
+programme now expanding that historical count; all are governed by a Lean release gate
+(see §3, §7, §8).
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
@@ -55,14 +57,16 @@ mirror/slack analysis is new.
 | Thread                 | What it is                                        | State                                        |
 |------------------------|---------------------------------------------------|----------------------------------------------|
 | **Projective cap**     | `PG(n,q)` cap/Nofil outcome theorem               | **Open research frontier.** Odd-plane kernel |
-| **Geometry / coding**  | The spin-off portfolio (§3) — legality, not value | **Where the deliverables are.** Seven papers |
+| **Geometry / coding**  | The spin-off portfolio (§3) — legality, not value | **Where the deliverables are.** Multiple papers |
+| **Reed–Solomon**       | Deep holes, determinant invariants, reconstruction | **Major new theorem programme.** `r=3,5,6,7` |
 | **Queens**             | Non-attacking queens game + A344227 nimbers       | n=18 outcome solved; G(18) nimber open       |
 | **Sum-free / cap-set** | Achievement game on abelian groups / `F₃ⁿ`        | Core theorems proved + Lean; one slice open  |
 | **Node-Kayles**        | Graph/Cayley substrate for all of the above       | Outcome laws proved; classic opens remain    |
 | **Othello**            | Rust port of the Python engine + endgame solver   | Stable, gate-green, effectively archived     |
 
-The first two are the split that matters: the cap thread is the *unsolved problem*, the geometry /
-coding thread is the *shippable output*, and the second is now the larger body of work.
+The structural split is what matters: the cap thread is the *unsolved game problem*, while the
+geometry/coding and Reed–Solomon threads are the *shippable mathematical output*. The latter now
+form the larger body of work.
 
 ---
 
@@ -550,6 +554,277 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   **dead**, and the reduction says why: the mechanism needs `|H| = 2×3` so that a concurrent triple
   is a perfect matching. Singular and note-sized — not a Mathieu tower.
 
+### Clebsch factorization memory and its modular sequel
+
+The Clebsch project is no longer best described as only the rigidity of one exceptional
+`[6,3,4]₁₁` code. Its selected shipping theorem now follows a single information-loss mechanism:
+
+```
+Coxeter conic phase
+  → conic restriction forgets a secant pairing
+  → the conic-ideal quotient remembers the symmetry-selected factorizations
+  → balanced second moments recover two sheets
+  → the first signed tensor memory is cubic
+  → one depth profile plus its matching recovers the Clebsch parent.
+```
+
+This chain is exact. The conic-ideal ranks are `3,6,10`; all even signed moments vanish; the
+weighted `1:4:6` barycentre kills degree one; and cubic survival is forced and sharp. The six depth
+profiles have a conceptual `A₄ \ PGL₂(11) / A₅` double-coset derivation, and their `6 → 2` rank drop
+is explained by the projective-cover quotient `P(1)^A₄ / soc(P(1))`, with Loewy layers `1|9|1`.
+A separate canonical Tate two-plane exists, but the natural transfer, orbital, correlation, and
+rank-flag maps do **not** identify it with the depth plane; this is a proved scope boundary.
+
+The first paper closes by recovering the arithmetic gluing of the two golden sheets. They are the
+two size-11 `PSL₂(11)` halves of one size-22 `PGL₂(11)` matching orbit; their `A₅` stabilizers meet
+in `A₄`, generate `PSL₂(11)`, and the outer coset exchanges them. The perfect-code row extends to
+the full-support/secant-shadow picture: parity unpuncturing gives the self-dual ternary
+`[12,6,6]` code, twelve full-support points form an order-12 Hadamard matrix, and their secants
+exhaust the projective minimum words. This is the paper's Hadamard–Mathieu capstone.
+
+The sequel has a different, theorem-level spine. Its **Modular Gateway Theorem** runs
+
+```
+pointed matching geometry
+  → cross-incidence code pair
+  → perfect-code core
+  → simple endotrivial Lagrangian
+  → unique nonsplit self-dual carrier.
+```
+
+The binary Hamming row at `q=7` and ternary Golay row at `q=11` satisfy every gate. The binary
+Golay row at `q=23` proves that the carrier mechanism extends while the exceptional degree-`q`
+permutation-sheet bridge does not. The stronger universal Weil/theta interpretation is false:
+the signed six-space is not a genuine Weil module, invariant theta parity does not detect the bit,
+the proposed Maslov refinement dies at its first structural gate, and the literal Witt/Maslov
+index of the central word is zero. The sequel therefore keeps the modular gateway, the
+quaternion/descent/fusion mechanisms, and a separate even Hadamard/signed-gluing block, without
+claiming a metaplectic roof.
+
+Concretely, at q=11 the shared incidence kernel is a simple five-dimensional
+`F₃ PSL₂(11)`-module `S`, the perfect-code layer is `1 ⊕ S`, and the ambient permutation carrier
+has the canonical self-dual nonsplit flag
+
+```
+S ⊂ S+1 ⊂ M,               factors 5 | 1 | 5*.
+```
+
+The q=7 control has the parallel `3|1|3*` flag. Exact no-retraction ranks show that these
+augmentations do not split; the core is Lagrangian, the invariant form is unique, and the relevant
+extension class is unique. At q=23 the extended binary Golay code supplies the analogous
+11-dimensional endotrivial core, but `PSL₂(23)` has no subgroup of index 23, so no degree-23
+permutation action can realize the geometric sheet. This is the sharp distinction between the
+carrier theorem and its exceptional rank-three geometric packaging.
+
+There is also an exact cohomological explanation for why products remember more than fixed-base
+quotients. In the equivariant hypersurface sequence, choosing a base produces a connecting cocycle
+`δ(s)`; its class is nonzero and spans the relevant `H¹` for both the inner and full projective
+groups in the `B₃/H₃` cases. It is already detected on a Sylow subgroup, where it is the unique
+normalizer-invariant line. Homogeneous sheet lifts retain this nonsplit affine extension, whereas
+fixed-base quotients have no equivariant origin; pairwise odd quotients recover linear covariance.
+Thus the loss of covariance is an identified extension class, not a coordinate artifact.
+
+The remaining headline Clebsch-facing results and censuses are:
+
+- **Arithmetic phase and intrinsic bit.** The H₃/A₅ configuration has an all-odd-field arithmetic
+  phase: at q=11 a non-GRS parent has a full-conic GRS child. The associated translation scheme is
+  a primitive rank-eight Fourier-self-dual `A₅` fission with `P=Q`; its full affine automorphism
+  group preserves an intrinsic unordered `10+10` chirality torsor. The two golden sheets fuse under
+  `PGL₂(11)` into a rank-16 refinement with a signed Fourier sector. Integral golden descent
+  separates split, inert, and ramified primes and identifies the outer phase with the discriminant
+  line of norm 5: at the ramified prime the line becomes a branch-cotangent line, while at 2 only
+  its sign readout collapses.
+
+- **Code, quantum, and cubic readouts.** The Clebsch `AME(6,11)` state is separated under both LC
+  and LU from every six-point GRS class, while the two golden Clebsch states become LC/LU-equivalent
+  after a party permutation; the 60 transports form a noncanonical `A₅`–`A₅` bitorsor. The
+  Clebsch-cubic double-six exchange agrees with the code-chirality character. Marked `E₈` root
+  types recover the matching, parent, and MDS status, but no marked icosian comparison exists in
+  the required equivariant category. Neither Clebsch one-factorization is perfect. These positive
+  and negative readouts delimit which classical avatars retain the bit and which merely recognize
+  the same object.
+
+- **Full-conic and pencil censuses.** There are exactly four semilinear classes of non-GRS six-arcs
+  with nonempty deepest-syndrome locus contained in a conic, at `q=8,9,9,11`, with child sizes
+  `4,6,7,12` and projective deep-hole profiles `4`, `6`, `1+6`, `12`. A deletion-trace invariant
+  recovers the parent in the six-point q=9 and twelve-point q=11 cases, but not in the other two;
+  the coherent determinant atlas recovers all four with minimum centre counts `3,3,2,3`. In the
+  q=9 six-point fibre, eight parents form two sheets of four perfect matchings and the shared-trace
+  graph is `K₄,₄ \ 4K₂ ≅ Q₃`, with full cube automorphism group of order 48. Over q=11 the full
+  equal-phase pencil contains exactly two non-GRS LC/LU classes. Across all odd fields the pencil
+  exists uniformly, with explicitly classified symmetry-enhancement primes.
+
+- **Rank-three Coxeter and arrangement package.** For `A₃/B₃/H₃`, the nonmirror maximum,
+  arrangement-complement distance, and Coxeter conic phase obey one uniform theorem. The Coxeter
+  square generates the full split torus in `PSL₂(q)` and its two moving blocks are the Legendre
+  cosets. A weighted two-adjoint enumerator gives the Coxeter-word orbits and the all-degree
+  pairing-forgetting quotient; generalized weights, circuits/Tutte data, radius-two statements,
+  and minimal-word consequences follow formally. The global enumerator/Tutte package nevertheless
+  forgets pointed repair data and can forget syndrome multiplicity. The exact-strength-two
+  signed-moment filtration makes cubic memory sharp, with the Pasch configuration as the control.
+
+- **Reconstruction companions and bounded negatives.** The uncoloured frame graph recovers its
+  maximal-service target triple and has an exact three-level service spectrum, but the uncoloured
+  q=11 graph forgets which sheet defines the projection targets. The apolar plane separates the
+  tested projective Reed–Solomon deep-syndrome orbits. A full q=7 spanning-six-set search found no
+  same-tower pointed collision. The twisted-cubic deep-hole pilot found no non-GRS
+  twisted-cubic-locus survivor; its exact q=9 near miss is the Cayley-octad/Hermitian-quartic
+  configuration. These are companion theorems and sharp controls, not extra clauses in the
+  factorization-memory spine.
+
+- **One torsor, one swap.** The design-polarity, signed-Fourier, arithmetic-gluing, affine-cocycle,
+  and hexad-stabilizer readouts are functorial realizations of the same outer `C₂` torsor. Equality
+  versus opposition of the two hexad-stabilizer `A₅` classes is a complete local
+  inner-versus-outer criterion; complement-paired 11-orbits inside one Golay carrier are not the
+  bit. The characteristic-zero `S₃` resolvent `Spec Q(√5)` supplies a non-finite realization whose
+  Galois swap reduces to the outer swap at 11. Across rank three, q=5 is fused, while q=7 and q=11
+  give free torsors.
+
+- **Double-coset information lattice.** For the canonical based `B₃/H₃` pairs, the exact chain is
+  `2q → 6 → 2 → 1`; its six middle strata are the `K`-orbits of the shared-edge profile, and the
+  profile plus `K/C₂` decoration reconstructs the matching and parent. The conceptual input is the
+  opposite-sheet Mackey matrix `[[2,1],[1,2]]`, whose constant row sum forces the six-stratum law.
+  `B₃/H₃` exhaust the finite-geometry hypothesis class. At q=5 an oriented matching avatar still
+  exists, but the matrix becomes `[[1,1],[1,2]]`: the canonical lattice is only
+  `10 → 4 → 2 → 1`, while a pair-dependent transverse choice can recover six levels. Thus the
+  avatar survives and the uniform six-rung theorem fails sharply.
+
+- **Integral and modular degeneration law.** The cross-incidence component degrees are
+  `(q−1)/2,(q+1)/2`, hence coprime, with product `|H|/2`. This forces the common `C₂` seam and makes
+  every bad-prime degeneration one-sided. The bad primes are `{2,3}` for `B₃` and `{2,3,5}` for
+  `H₃`; the native characteristics 7 and 11 are semisimple. At a bad prime exactly one permutation
+  augmentation sequence is canonically nonsplit, with its constant line inside augmentation and
+  an oriented radical arrow whose return composition is square-zero. The general proof is a
+  Mackey row-sum lemma, not a case census.
+
+- **Sharp roof negatives.** Exactly three invariant quadratic refinements exist on the q=11 hinge
+  six-space and all are outer-even; the outer automorphism acts by cross-carrier dualization and
+  has no invertible realization on either carrier. The literal symmetric triple index is zero, the
+  signed central word is a constant Lagrangian loop of class zero, and the signed ambient
+  normalizer maps trivially to the relevant outer automorphism group. These facts jointly kill the
+  quadratic-refinement, Maslov-holonomy, and Witt-bridge versions of the original roof while
+  preserving the carrier-level outer bit.
+
+### Projective Reed–Solomon deep holes and reconstruction
+
+A new major programme studies projective Reed–Solomon codes through their rational normal curves,
+deepest syndromes, determinant invariants, and reconstruction data. Four theorem packages are now
+in place.
+
+- **Redundancy three — all fields.** Balanced four-cycle determinant monomials generate the full
+  edge-torus invariant quotient and reconstruct every rank-two syndrome from support size at least
+  five. The unique structural contraction is the rank-one/conic locus: all raw balanced atlases
+  coincide there and the missing datum is exactly the radical point outside the support. The atlas
+  is also the Plücker presentation of a projected labelled sextic, hence a point of `M₀,₆`.
+  Four abstract coherent projections leave exactly a two-sheeted parent cover whose deck
+  involution is Gale association; extra abstract projections cannot choose a sheet. Keeping the
+  literal complete child restores much more information: it determines the unlabelled six-arc for
+  every `q ≥ 16` and every q=13 fibre, with exact small-field base sizes and only the empty-child and
+  q=7 two-point conic-complement failures. On a normalized chart the residual kernel cubic factors
+  as `st(L₀s+L₁t)`: `L₁=0` is exactly the conic branch divisor in every characteristic, whereas
+  `L₀=0` is the arc-boundary collinearity. This factorization is what identifies the involution as
+  Gale association rather than merely observing a numerical double cover.
+
+  The nontrivial small-field recovery census is exact: `(q,|L|,#parents,min centres)` is
+  `(8,4,10,3)`, `(9,6,8,3)`, `(9,7,2,2)`, `(9,8,4,2)`, `(9,8,2,2)`, and
+  `(11,12,22,3)`; every other nonempty residual fibre through q=13 is a singleton. The q=7
+  two-point child is maximally nonrigid: all 294 literal parents have the same coherent signature
+  even after both centres are used.
+
+- **Semilinear descent — exact obstruction.** All gauges, compatibility equations, residual cubics,
+  Gale transforms, branch divisors, and complete-child cuts commute with Frobenius. Off the conic
+  divisor the only geometric descent obstruction is the Gale `C₂` class: a Kummer square class in
+  odd characteristic and an Artin–Schreier trace bit in characteristic two. If `H` is the common
+  diagonal stabilizer, an unlabelled sheet descends exactly when the Frobenius bit lies in the image
+  `H → C₂`; surjectivity identifies the sheets and destroys uniqueness. Extension degree `m`
+  multiplies the bit, so odd extensions preserve it and even extensions split it. The exceptional
+  q=8 colour collapse is a separate lossy `C₃` quotient, not a Gale obstruction.
+
+- **Redundancy five — complete all-field classification.** For every prime power `q ≥ 7`,
+  `ρ(PRS(q−4)) = 4`. A syndrome is deep exactly when its Hankel-kernel pencil contains no totally
+  split squarefree cubic. The full projective-semilinear classification consists of tangent,
+  conjugate-secant, tame osculating-pair, and characteristic-three nucleus/wild
+  Artin–Schreier families. Their point counts are respectively `q(q+1)`,
+  `q(q+1)(q−1)/2`, `q(q+1)/2` when `q ≡ 2 (mod 3)`, and `q(q−1)/2` when
+  `q ≡ 1 (mod 3)`; in characteristic three there is also the common nucleus and one wild orbit of
+  size `(q²−1)/2` with stabilizer `2q`. The tame criterion is Frobenius twisting of the cyclic
+  cubic deck transformation; the wild criterion is irrational kernel for `z ↦ z³+az`. For the
+  geometrically `S₃` case, the off-diagonal fibre square is an absolutely irreducible `(2,2)` curve
+  of arithmetic genus one. Aubry–Perret gives at least `q−2√q` rational points, and after removing
+  the diagonal and branch budget no sporadic orbit survives above `q=19`.
+
+  The complete sporadic census, grouped by branch divisor, is:
+
+  - fully split equianharmonic tetrads (`j=0`, stabilizer `A₄`):
+    q=7/13/19 orbit sizes `28,182,570`;
+  - fully split non-equianharmonic tetrads (stabilizer `V₄`):
+    q=9/11/13/17 orbit sizes `180,330,546,1224`;
+  - branch type `1+1+2` (stabilizer `C₂`):
+    q=7 has two size-168 orbits, q=8 three size-252 orbits, q=9 two size-360 orbits, and q=11 one
+    size-660 orbit;
+  - cuspidal type `2+1+1` (stabilizer `C₂`): one size-168 orbit at q=7;
+  - type `1+3` (stabilizer `C₃`): one size-112 orbit at q=7.
+
+  The three q=8 size-252 orbits form a free `Gal(F₈/F₂)` torsor and fuse semilinearly. The
+  `A₄` cases are exactly the binary-quartic `I=0` locus. These configurations persist
+  geometrically over larger fields but cease to be deep when split fibres appear.
+
+- **Redundancy six — all-field existence and orbit counts.** For every `q ≥ 7`,
+  `ρ(PRS(q−5)) = 5`. Deepness is equivalent to a Hankel-kernel net of quartics containing no
+  totally split squarefree quartic. The persistent tangent/conjugate-secant stratum has exactly
+  `q(q+1)²/2` points and an explicit norm-one-torus orbit law. The remaining trivial-gcd exceptions
+  occur only at `q=7,8,9,11,13`, together with one characteristic-two nucleus orbit over
+  `F_{2^m}` for odd `m ≥ 5`; all are exhaustively certified, though some small exceptional orbits
+  still lack final conceptual normal forms. On an irreducible-quadratic fibre the stabilizer acts
+  on the norm-one torus by `z ↦ z⁵` and inversion: there is one orbit if `5 ∤ q+1`, and three,
+  with stabilizers `10,5,5`, if `5 | q+1`. The large-field proof contracts along the first-polar
+  line to the redundancy-five cubic-pencil theorem and bounds the secant, tame-cyclic, and
+  ramification losses separately by `3`, `4`, and `6`.
+
+  The exact trivial-gcd orbit counts at `q=7,8,9,11,13` are respectively `18,11,4,2,1`, and there
+  are no others. At q=11 one exceptional net is the collision-line configuration whose six lines
+  exhaust the twelve rational points of the relevant conic; the other has normal form
+  `⟨u,tu,u²+5⟩`, `u=t²−2`, with all fifteen split-quadratic factor candidates sharing a root.
+
+- **Redundancy seven — complete all-field classification.** The first-polar contraction reduces the problem to
+  redundancy six. The persistent stratum again has `q(q+1)²/2` points, with an exact
+  `T/T⁶`-mod-inversion-and-Frobenius orbit law. For every prime power `q ≥ 13`, these are all deep
+  syndrome directions except for the single central characteristic-two point when `q=2^m` with
+  odd `m`; the resulting count is `q(q+1)²/2`, plus one in that case. More
+  explicitly, with `d=gcd(6,q+1)`, inversion-fixed torus classes have
+  `(|O|,|Stab|)=(q(q²−1)/(2d),2d)` and paired classes have
+  `(q(q²−1)/d,d)`; Frobenius acts by multiplication by the defining prime on `C_d`. The high-field
+  stop is quantitative: pointed genus-one splitting plus a bidegree union bound and an
+  at-most-eight ramification locus leave an exceptional budget `3+8+1=12<q+1`.
+
+  The exact marked-polar calibration closes every field below 37 without scanning all of
+  `P⁶(F_q)`. Exceptional deep orbits occur **exactly** at `q=7,8,9,11`; their `PGL₂` orbit-size
+  profiles are:
+
+  - q=7: `56¹, 84⁵, 112², 168⁴⁵, 336¹⁴¹`;
+  - q=8: `63¹, 72¹, 84³, 168⁴, 252²⁴, 504⁸⁶`;
+  - q=9: `180³, 240⁶, 360¹⁸, 720²⁷`;
+  - q=11: `264², 440¹, 660²`.
+
+  A structurally independent replay tests every representative directly against all five-point
+  spans of the sextic normal rational curve, rebuilds its full orbit and stabilizer, and reconstructs
+  the semilinear cycles. What remains open is conceptual compression of those four small-field
+  profiles, not classification.
+
+  One transient locus is important to the induction mechanism even though it contributes no deep
+  sextic. At q=19 the pointed-bad contraction locus has one excess affine orbit of size 19,
+  represented by `e₂=(0,0,1,0,0,0)` with quartic net
+  `W=⟨1,t³,t⁴⟩`. It has exactly six split squarefree members, all cubics completed by infinity, and
+  no member with four finite roots. Hence it is pointed-bad but not redundancy-six deep, and no
+  coherently parameterized sextic polar line can remain inside it. This is the sharp falsifier for
+  any induction that classifies bad fibres separately rather than bad polar flags. The numerical
+  discrepancy is settled; the arithmetic/monodromy reason it occurs specifically at q=19, and its
+  possible relation to the equianharmonic q=19 cubic-pencil orbit, remain open.
+
+These results combine exact invariant theory, Plücker inversion, Gale duality, catalecticants and
+apolarity, finite-group descent, low-genus point bounds, and independently replayed bounded
+classifications. They do **not** prove the general Reed–Solomon deep-hole conjecture.
+
 ---
 
 ## 4. Explored and pruned as dead
@@ -839,6 +1114,17 @@ The shape of the difficulty is now sharp, and it is **not the one expected**:
   anywhere**, and the uniform characteristic-two three-layer construction that would solve the problem
   on an infinite square-order sequence remains proved only at `s = 8`.
 
+**Reed–Solomon:** compress the exceptional redundancy-six webs and the four small-field
+redundancy-seven profiles into intrinsic normal forms, and continue the redundancy-eight/nine pilot
+only through theorem-producing orbit mechanisms. The `r=3,5,6,7` hierarchy is now classified at
+its stated scopes; the next boundary is conceptual explanation and higher redundancy, not an
+unfinished low-field census and not the general Reed–Solomon deep-hole conjecture.
+
+**Clebsch publication:** integrate the selected factorization-memory spine and its
+survival/forgetting ledger into the manuscript, then formalize that replacement spine. Keep the
+second paper separate: its proved centre is the Modular Gateway Theorem and its `q=7,11,23`
+realizations/boundary, not the refuted universal metaplectic/theta roof.
+
 **Queens:** exact **G(18)** (the nimber; outcome already settled). ~300–500B nodes, ~1.5–2 days per
 ascending-`k` round, **no checkpoint/resume**; policy is `k=1` first (~55% one-shot). Further out:
 n=20 outcome (conjectured first, witness (9,9)); nimbers past n=17.
@@ -1053,6 +1339,12 @@ mechanically unverified and all gates report missing facts. The driver deliberat
 while the tree carries foreign changes, and terminal names are left absent rather than guessed,
 because a guessed name would produce a green check for a declaration that does not exist.
 
+**The Clebsch replacement spine has a bounded formalization map, not yet a full release gate.**
+Finite foundations for the q=11 transform, matching recovery, two sheets, and Fourier block have
+been kernel-checked, and the arithmetic-gluing calculation now has a bounded formal proof. The
+selected factorization-memory manuscript spine still awaits its planned end-to-end Lean
+integration; the protected baseline remains the currently complete fallback.
+
 **One standing adequacy caveat:** mathlib `v4.32` dropped `SetTheory/Game/`, so the game-outcome
 semantics (`win`/`grundy`) are self-contained and not yet anchored to a cited `Impartial`/
 `grundyValue`. Adequacy for the game papers rests on the standard-recurrence argument, literature
@@ -1063,38 +1355,45 @@ so it stays inspectable — a better answer than waiting.
 
 ## 8. The publication track
 
-The deliverable is no longer "the odd-plane prize, de-risked into stepping stones." A packaging review
-resolved the whole body of work into **seven papers in ship order + two OEIS entries**, staged under
-`papers/` with per-paper status maps. Ship order is set by *formalization-to-full-trust distance*,
-adjusted for two dependencies — not by which manuscript is most finished.
+The deliverable is no longer "the odd-plane prize, de-risked into stepping stones." An initial
+packaging review resolved the then-existing body of work into **seven papers in ship order + two
+OEIS entries**, staged under `papers/` with per-paper status maps. That fixed count is now
+historical: the Clebsch work has split coherently into a factorization-memory paper and a modular
+gateway sequel, while the projective Reed–Solomon theorem programme has become a major paper-scale
+track of its own. The table below remains the original release-order backbone, not a current count
+of every candidate manuscript.
 
 | # | Paper                                                | Lead                                                            | State                                                |
 |---|------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------|
 | 1 | Games flagship — cap/Nofil outcome classes           | the classification **with its exact method boundary**           | core P-theorems Lean; projective section unwritten   |
 | 2 | Dihedral Schreier Node-Kayles                        | exact nimbers for an explicit infinite family                   | rebuilt as LaTeX on a spine; owes a value fix        |
 | 3 | Arcs complete outside a conic                        | the defect identity + additive-3/2 refinement + verified values | **no mathematical gate left**; archive identity only |
-| 4 | The Clebsch hexagon code                             | the rigidity TFAE                                               | manuscript + PDF + Lean; artifact release only       |
+| 4 | Clebsch factorization memory                         | the recoverable bit and exact survival/forgetting ledger        | selected replacement spine; integration + Lean open  |
 | 5 | Complete repair hypergraphs (twisted-cubic–axis LRC) | the certified `[19,4,8]₉` seed + exact row transfer             | manuscript + Lean complete; specialist audit left    |
-| 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | source + PDF + Lean; release **frozen**              |
-| 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | theorem-package plan; hardest formalization          |
+| 6 | Frobenius-equivariant pair extension of eight-arcs   | every invariant eight-arc in `PG(2,25)` pair-extends            | extremal gate cleared; bookkeeping + graph remain    |
+| 7 | Continuation-graph rigidity (N1 only)                | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13`         | manuscript complete; Lean planned; audit gated       |
 
-Papers 3 and 4 now carry their final titles — *Arcs complete outside a prescribed conic: an exact
-defect identity and `ρ_𝒞(16) = 9`* and *The Clebsch hexagon code: rigidity from a conic deep-hole
-locus* — each leading with the theorem rather than the topic. Paper 5's venue is stated as DCC / FFA,
+Paper 3 carries its final title — *Arcs complete outside a prescribed conic: an exact defect
+identity and `ρ_𝒞(16) = 9`*. The former Clebsch rigidity title remains the protected fallback, not
+the selected shipping manuscript; the selected Paper 1 is the factorization-memory theorem, and
+the modular-gateway mechanism is reserved for a separate Paper 2. Paper 5's venue is stated as DCC / FFA,
 explicitly **not** IEEE-TIT. A `lean-proof-engineering-at-scale`
 methods paper is registered as an idea and deliberately kept **outside** the mathematical ship order;
 its evidence base is the measured build failures and the tooling above, and any novelty claim there
 needs its own literature audit.
 
-**Papers 3, 4, and 5 are past their mathematical gates. Nothing has shipped.** What remains for each is
-artifact-release plumbing — a citable archive identifier, an immutable release, an external
-citation-chain review — which means the shared blocker below is now the binding constraint on the whole
-front half of the portfolio, not a packaging chore.
+**Papers 3 and 5, and the protected fallback version of Paper 4, are past their mathematical gates.
+Nothing has shipped.** Papers 3 and 5 now chiefly need artifact-release plumbing — a citable archive
+identifier, an immutable release, and external citation-chain review. The selected
+factorization-memory replacement for Paper 4 still needs manuscript integration and its planned
+end-to-end Lean formalization; its theorem package and sharp negative boundaries are already fixed.
+The shared release blocker therefore still binds the mature front-half papers, but no longer
+describes every Clebsch task.
 
-**Two papers moved backwards on their own evidence, which is the gate working.** Paper 6's release
-preparation is **frozen**, not finished: it waits on the exact `PG(2,25)` minimum/equality boundary,
-because its extremal statement is currently proved over normalized rows rather than semantic arcs
-(§3). Paper 2 was rebuilt as LaTeX on a fixed eight-section
+**Several papers moved backwards or changed shape on their own evidence, which is the gate
+working.** Paper 6's former mathematical freeze has cleared: the exact `PG(2,25)` minimum is
+semantically `32`, and the five normalized extremal orbits lift to the complete semantic extremal
+set; bookkeeping and the exchange graph remain. The dihedral paper was rebuilt as LaTeX on a fixed eight-section
 spine, and carries a **known value-affecting correction** as its first release-blocking hazard: an
 exhaustive census refuted its own boxed formula, so the affected statements need a case split applied
 to the body before any polishing, and the density theorem must stay explicitly conditional on its one
