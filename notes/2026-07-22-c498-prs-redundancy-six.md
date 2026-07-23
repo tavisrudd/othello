@@ -1,8 +1,8 @@
 # C498 — PRS(q−5) redundancy-six census and corrected entry geometry
 
-**Lane:** `reed-solomon` · **Date:** 2026-07-22 · **Status:** all-field split-member theorem and
-persistent-stratum \(PGL_2/P\Gamma L_2\) orbit law complete; intrinsic compression of the small
-\(q=7,8,9,13\) exceptional tables remains open.
+**Lane:** `reed-solomon` · **Date:** 2026-07-22 · **Status:** complete — all-field split-member
+theorem, persistent-stratum \(PGL_2/P\Gamma L_2\) orbit law, and intrinsic semilinear normal forms
+for every small exceptional table.
 
 ## Result
 
@@ -44,6 +44,14 @@ below gives \(q+1\) deep
 directions over every \(\mathbf F_{2^m}\) with \(m\) odd, beginning again at \(q=32\).  Thus there
 can be no absolute field-size threshold eliminating all trivial-gcd exceptions.  The correct
 asymptotic statement must first remove explicitly classified exceptional families.
+
+The final small exceptional normal-form theorem
+(`notes/2026-07-23-c498-small-exceptional-normal-forms.md`)
+compresses the residual \(18/11/4/2/1\) projective tables into
+\(18/5/2/2/1\) semilinear classes.  The complete intrinsic fingerprint is only the pointed
+first-polar quotient-pencil profile plus, in odd characteristic, the quintic root-divisor type.
+Equal fingerprints are exactly Frobenius cycles; the apolar Waring type, net histogram, and
+stabilizer remain explanatory labels rather than classifier inputs.
 
 ## Exact census
 
@@ -442,9 +450,8 @@ trivial-gcd orbit.  In particular:
 - characteristic two has no exception for even \(m\), and exactly the nucleus orbit for odd
   \(m\ge5\).
 
-The all-field **existence and orbit-count theorem is closed**.  What remains of C498 is the
-intrinsic normal-form compression of the small certified tables at q=7,8,9,13 and the final
-\(P\Gamma L_2\) packaging, not an asymptotic split-member gap.
+The all-field **existence and orbit-count theorem is closed**.  The dated normal-form companion now
+also closes the small certified tables at q=7,8,9,13 and their final \(P\Gamma L_2\) packaging.
 
 ## Exact symmetric-cube equation
 
@@ -828,18 +835,17 @@ Settled in this chunk:
   syndrome space.  The new gate is the pointed C498 lemma ensuring that a downstairs split
   quartic can be chosen not to contain the selected lifting root.
 
-Open:
+Final close:
 
-- **Intrinsic classification of the remaining exceptional orbit sets.** The characteristic-two
-  3-nucleus orbit and its isolated q=11 trinomial echo are now classified by one all-field
-  criterion; the other q=11 orbit and two q=7 orbits lie in the split-involution interior above.
-  The JSON records complete representatives and net-member histograms for the other
-  \(16/10/4/0/1\) \(PGL_2\)-orbits at \(q=7/8/9/11/13\), but no normal-form theorem yet.  Owner:
-  C498, via the splitting cover over the rank-three cone.
-- **Generic existence threshold after exceptional removal.** There is no uniform vanishing
-  threshold across characteristic two because the \(3\)-nucleus line recurs.  Apart from that
-  classified line, the all-field existence question is settled.  Owner of the remaining work:
-  C498's intrinsic compression of the small q=7,8,9,13 certificate tables and semilinear packaging.
+- **Intrinsic classification of the remaining exceptional orbit sets.** Settled by the pointed
+  polar-profile fingerprint in the dated normal-form companion.  It separates all prime-field
+  projective classes and its only extension-field collisions are exactly Frobenius cycles, giving
+  \(18/5/2/2/1\) semilinear normal forms at q=7/8/9/11/13.
+- **Generic existence threshold after exceptional removal.** Settled with the stated modular
+  exception: there is no uniform vanishing threshold because the characteristic-two \(3\)-nucleus
+  line recurs, and off that classified line the all-field existence theorem is complete.
+- **Remaining mystery.** None.  A smaller classical-invariant presentation would be optional
+  repackaging, not an unclassified geometric or arithmetic stratum.
 
 ## Artifacts
 
@@ -848,3 +854,7 @@ Open:
 - `2026-07-22-c498-prs-deep-hole-census.json` — canonical orbit certificate (27,077 bytes).
 - `2026-07-22-c498-prs-deep-hole-replay.py` — independent Python replay (16,760 bytes).
 - `2026-07-22-c498-prs-redundancy-six.sha256` — SHA-256 manifest.
+- `2026-07-23-c498-small-exceptional-normal-forms.md` — intrinsic semilinear classification.
+- `2026-07-23-c498-small-exceptional-normal-forms.py` — deterministic generator/checker.
+- `2026-07-23-c498-small-exceptional-normal-forms.json` — canonical normal-form certificate.
+- `2026-07-23-c498-small-exceptional-normal-forms.sha256` — SHA-256 manifest.

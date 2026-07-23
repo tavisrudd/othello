@@ -4,9 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491, C499, C509, and C512 complete; C498 active (all-field split-member theorem and
-persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
-C510 queued (bounded one-twist TRS audit/geometry pilot);
+**Status:** C475--C499, C509, and C512 complete; C498 now closes the all-field redundancy-six
+classification, including intrinsic small exceptional semilinear normal forms;
+C510 queued next (bounded one-twist TRS audit/geometry pilot);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -288,7 +288,7 @@ Gale/Hilbert-90).  Verdict: uniform structure, but sporadic deepness is a bounde
 equianharmonic orbit persists as a PGL2-orbit for every q=1 mod 3 (constructed at q=25,31,37,43,49)
 yet is deep only at q in {7,13,19}.  Both C491 discovery-track leads settled.
 
-## Active — C498
+## Closed base — C498
 
 [`C498 redundancy-six calibration`](../2026-07-22-c498-prs-redundancy-six.md) gives an exhaustive
 definition/Hankel census for every tested prime power q<=27.  The persistent quadratic-gcd
@@ -365,6 +365,15 @@ the Borel translation coefficient is 6, so exactly characteristics two and three
 polar flags should be persistent/modular when contained in the lower bad locus and
   arithmetically bounded otherwise.  C512 now proves this general theorem.
 
+The final small exceptional normal-form theorem
+(`notes/2026-07-23-c498-small-exceptional-normal-forms.md`)
+classifies the bounded residue intrinsically.  The pointed first-polar quotient-pencil profile,
+supplemented only in odd characteristic by the quintic root type, separates the frozen classes up
+to exactly Frobenius fusion.
+Thus the q=7/8/9/11/13 tables compress from `18/11/4/2/1` PGL2 orbits to
+`18/5/2/2/1` PGammaL2 normal forms.  The atomic generator/JSON/checksum bundle passes, and C498 has
+no remaining theorem or classification gap.
+
 ## Closed base — C512
 
 `notes/2026-07-23-c512-general-polar-flag-theorem.md` constructs the
@@ -397,14 +406,14 @@ pre-emption and positions Wang's June 2026 splitting-family framework as arithme
 | C485 | all-field redundancy-three synthesis | complete | exact pure/child-relative clauses, algorithm, exceptions, descent, GRS specialization, and `q>=16` child rigidity | programme-level reconstruction theorem |
 | C490 | `q<=13` complete-child closure | complete | exact bases for every recoverable fibre; empty-child and q=7 two-point exceptions; collision hypergraphs and NRC bridge ledger | classified all-field child-relative theorem |
 | C491 | PRS redundancy-five classification | complete | unconditional covering radius; complete PΓL₂ classification with new O±/nucleus/wild families and certified sporadic tables; NRC bridge ledger with the redundancy-six net lemma as next gate | first higher-normal-rational-curve calibration |
-| C498 | PRS redundancy-six classification | existence/orbit theorem complete; bounded normal forms remain | first-polar line reduction; all-field persistent/modular theorem; exact exceptional fields | polar induction mechanism |
+| C498 | PRS redundancy-six classification | complete | first-polar line reduction; all-field persistent/modular theorem; exact exceptional fields and intrinsic semilinear normal forms | polar induction mechanism |
 | C509 | PRS redundancy-seven classification | complete | all-field persistent/central theorem; exact q=7/8/9/11 exception tables; q=19 transient pointed orbit | coherent polar flags, not isolated bad fibres |
 | C512 | general coherent polar induction | complete | intrinsic pointed functor; classified persistent/modular contained flags; explicit genus/deletion/intersection threshold; C498/C509 recovered | fixed-redundancy applications reduce to finite monodromy and containment checks |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
-`notes/reed-solomon-tasks/c509-prs-redundancy-seven.md`.  C498 remains active only for intrinsic
-bounded exceptional normal forms.
+`notes/reed-solomon-tasks/c498-prs-redundancy-six.md` and
+`notes/reed-solomon-tasks/c509-prs-redundancy-seven.md`.
 
 ## Unallocated level-ups
 
@@ -446,8 +455,7 @@ history.
 
 ## Next command
 
-`go C498`
+`go C510`
 
-(C509's all-field redundancy-seven classification is complete.  C498 remains active only for
-intrinsic q=7/8/9/13 normal forms; C512's general polar-flag finiteness theorem is complete; C510
-remains the queued bounded TRS pilot; C500 remains release-gated.)
+(C498/C509 and C512 are complete.  C510 is the queued bounded TRS pilot; C500 remains
+release-gated.)

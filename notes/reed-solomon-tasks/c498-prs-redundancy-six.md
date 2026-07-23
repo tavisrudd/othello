@@ -39,6 +39,12 @@ Pinned seeds (reuse from C491 search log, do NOT re-resolve by title):
 
 ## Status
 
+**COMPLETE (2026-07-23).**  The all-field existence theorem, persistent/modular orbit law, and
+bounded exceptional classification are closed.  The final intrinsic fingerprint is the pointed
+first-polar quotient-pencil profile plus the odd-characteristic quintic root type.  It gives exactly
+\(18/5/2/2/1\) \(P\Gamma L_2\)-normal forms at q=7/8/9/11/13; see
+`notes/2026-07-23-c498-small-exceptional-normal-forms.md` and its atomic evidence bundle.
+
 **Entry-gate literature audit PASSED (2026-07-22): NOT PRE-EMPTED.** Verdict + wording constraints in
 `notes/2026-07-22-c498-prs-redundancy-six-literature-audit.md` (synthesis, verdict-owning), backed by
 the three axis reports above. Mathematics clear to proceed. Key downstream constraints:
