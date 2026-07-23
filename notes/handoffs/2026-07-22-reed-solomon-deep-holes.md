@@ -471,13 +471,17 @@ remains `X^2Q_V`.  A requested Tao audit separates Lucas Hasse index from augmen
 adds the exact multiplicative orbit norm `Res(R^q-R,F_y)`, which eliminates the translation
 coordinate without losing zero incidence; on linearized endpoints it factors through the image
 linearized polynomial and recovers the full trace obstruction.  Any successor needs a global
-factor/component or absolute-irreducibility theorem for this norm hypersurface, not another local
-difference operator or a census.
+component theorem for the trace-one incidence variety, or for its quotient together with the exact
+rational lifting condition, not another local difference operator or a census.  The norm is an
+exact finite-field zero detector but is visibly a product of its translated incidence factors, so
+its whole hypersurface is not an absolute-irreducibility target.
 A requested extra-juice refinement stratifies by the additive syndrome stabilizer `H_y`.
 The full orbit resultant is the forced `|H_y|`-th power of a reduced coset norm; hence it is
 inseparable on every nontrivial stabilizer stratum.  On the full fixed flag its reduced equation
-is exactly the elementary-symmetric test and the unreduced multiplicity is `q`.  Any global
-geometry must use these reduced stabilizer-stratified norms, not the raw resultant.
+is exactly the elementary-symmetric test and the unreduced multiplicity is `q`.  Removing that
+forced power still leaves a product over distinct cosets; global geometry must therefore study
+its component union or the corresponding quotient incidence, not assert irreducibility of the
+raw or reduced resultant.
 
 ## Execution ladder
 
@@ -517,9 +521,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   translation-invariant determinant normal form and a precise obstruction to C512.  C515 closes
   the additive/Hasse alternative: its filtration and trace endpoints are exact, but differences
   do not preserve zero incidence.  Any further work needs a newly allocated global
-  component/absolute-irreducibility target for the reduced stabilizer-stratified coset norms on
-  the trace-one incidence space and must retain the completion/support collision divisor.  No
-  all-TRS claim is allocated.
+  component/integrality target for the trace-one incidence variety (or its quotient with exact
+  rational lifting); the reduced stabilizer-stratified coset norm records the component union but
+  is not itself an irreducibility target.  The completion/support collision divisor must remain.
+  No all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C516 owns the next fixed-level application: the

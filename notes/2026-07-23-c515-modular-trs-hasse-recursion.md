@@ -109,10 +109,10 @@ but does not repair the missing zero-lifting implication.
 
 C515 therefore closes by obstruction: the additive/Hasse machinery canonically filters syndrome
 orbits and gives exact trace tests at additive endpoints, but it cannot by itself recurse the
-support-avoidance predicate.  A future theorem would need a global zero-existence argument on the
-trace-one configuration hypersurface—such as absolute irreducibility plus a rational-point
-bound—not another local difference operator.  No field census or standard-only classification is
-claimed.
+support-avoidance predicate.  A future theorem would need a global zero-existence argument for a
+geometrically integral component of the trace-one incidence variety (or an exact quotient incidence
+with its rational lifting condition), followed by a rational-point bound—not another local
+difference operator.  No field census or standard-only classification is claimed.
 
 ## 1. Hasse operators and orbit invariance
 
@@ -288,10 +288,16 @@ multiple of
 \]
 so (14) recovers the Artin--Schreier trace test with multiplicity \(p\).
 
-The norm is the right exact quotient of the zero predicate, but it exposes rather than solves the
-remaining geometry: one must factor or prove absolute irreducibility of
-\(\mathcal N_y(U)=0\) on the distinct trace-one configuration space.  Local Hasse data controls
-its degeneration strata, not its global components.
+The norm is the right exact elimination of the translation coordinate at the level of
+\(\mathbb F_q\)-point incidence, but it exposes rather than solves the remaining geometry.  Indeed
+\[
+ \mathcal N_y(U)=\prod_{r\in\mathbb F_q}F_y(r,U)
+\]
+is already a product of \(\mathbb F_q\)-defined factors, so its whole hypersurface is reducible
+whenever more than one distinct factor remains.  The valid gates are a component classification of
+this product or geometric integrality of a suitable component of the incidence variety
+\(\mathcal Z_y\) below, not absolute irreducibility of the norm.  Local Hasse data controls its
+degeneration strata, not its global components.
 
 The audit also separates two filtrations that should not be conflated.  The index \(\tau(y)\) in
 (5) is the first nonzero **Hasse index**, governed by Lucas digits.  Iterated finite differences
@@ -313,14 +319,16 @@ Second, the correct global successor object is now explicit:
  \{(r,U):\sum U=1,\ \operatorname{disc}(Q_U)\ne0,\
  F_y(r,U)=0\}.
 \]
-The collision locus \(0\in U\) remains inside its domain.  Absolute irreducibility or a component
-classification for \(\mathcal Z_y\), stratified by the Hasse support of \(y\), would turn the
-local normal form into a high-field existence theorem.  No such geometric statement follows
-for free from the difference identities.
+The collision locus \(0\in U\) remains inside its domain.  Geometric integrality of a suitable
+component of \(\mathcal Z_y\), or a component classification together with an exact quotient and
+rational lifting criterion, stratified by the Hasse support of \(y\), would turn the local normal
+form into a high-field existence theorem.  No such geometric statement follows for free from the
+difference identities.
 
 The Tao audit eliminates the translation coordinate exactly by the orbit norm (10).  Accordingly,
-the same successor geometry may be posed as the factor/component problem for
-\(\mathcal N_y(U)=0\); equation (14) gives its complete factor on every linearized endpoint.
+the same successor geometry has a set-theoretic eliminated image given by the factor/component
+problem for \(\mathcal N_y(U)=0\); it is not replaced by one irreducible norm hypersurface.
+Equation (14) gives its complete factor on every linearized endpoint.
 
 A requested post-closeout extra-juice pass finds a necessary refinement before that geometry is
 attempted.  Let
@@ -347,9 +355,11 @@ The product over cosets is independent of representative.  Equivalently, as a po
 \]
 
 Because \(|H_y|\) is a power of \(p\), the full resultant is forced to be inseparable on every
-nontrivial stabilizer stratum.  In particular, absolute irreducibility of
-\(\mathcal N_y\) is the wrong gate there: one must study the reduced coset norm
-\(\mathcal N_y^{\mathrm{red}}\).  On the full fixed flag,
+nontrivial stabilizer stratum.  The reduced coset norm
+\(\mathcal N_y^{\mathrm{red}}\) removes exactly this forced repetition, but it is still a product
+of the distinct \(\mathbb F_q/H_y\)-coset factors and is therefore not an irreducibility candidate
+unless only one coset remains.  Its correct role is to record the reduced component union.  On the
+full fixed flag,
 \(H_y=\mathbb F_q\), so
 \[
  \mathcal N_y(U)=F_y(U)^q,\qquad
@@ -375,9 +385,11 @@ while their multiplicity \(q\) records the translation stabilizer.
 - **Settled — what is the polar-compatible locus?** The ruled image (11), of dimension at most
   two; it misses every pure nonstandard Lucas-maximal direction.
 - **Settled — what remains on the fixed flag?** The elementary-symmetric tests (13).
-- **Open — are the reduced coset-norm hypersurfaces absolutely irreducible off a classified
-  persistent locus?** Evidence gap: no component or monodromy theorem has been proved; the
-  unreduced norm is automatically a \(p\)-power when \(H_y\ne0\).
+- **Open — which reduced coset factors or quotient-incidence components are geometrically
+  integral off a classified persistent locus?** Evidence gap: no component or monodromy theorem
+  has been proved, and a rational point of a quotient must retain the exact lift to the original
+  \(r\)-incidence.  The unreduced norm is automatically a \(p\)-power when \(H_y\ne0\), while the
+  reduced norm remains a product over distinct cosets.
 - **Open — do all extra Lucas-fixed directions admit a trace-one configuration zero in (13)?**
   Evidence gap: no uniform distinct-root construction is known.
 - **Open — can the collision boundary seed an inclusive logarithmic polar theory?** Equation
