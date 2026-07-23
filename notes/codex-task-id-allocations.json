@@ -494,8 +494,26 @@
       "last": 491,
       "purpose": "close the q<=13 child-relative base-size theorem, then classify projective Reed-Solomon redundancy-five deep holes while extracting higher-normal-rational-curve tools",
       "sequence": 55
+    },
+    {
+      "count": 2,
+      "first": 492,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 493,
+      "purpose": "C434 successors: certify conceptual c=6 proof + abstract re-foundation; q=5/A4 near-miss probe",
+      "sequence": 56
+    },
+    {
+      "count": 1,
+      "first": 494,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 494,
+      "purpose": "Lean slice: C434 (sheet,D-prime) fibre identity and invariant tower as kernel leaves",
+      "sequence": 57
     }
   ],
-  "next_id": 492,
+  "next_id": 495,
   "schema": "codex-task-id-allocations-v1"
 }

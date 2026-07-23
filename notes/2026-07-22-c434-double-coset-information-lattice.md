@@ -139,6 +139,27 @@ and 12 with `|K|=8`; q=11 has 66, 36 with `|K|=10` and 30 with `|K|=12`; every o
   `D8: 1,2,4`; `S3: 1,3,3`, the last forced arithmetically given `c=6` and the fixed point).
   The theorem constant is `6 = 2 × 3`; the open question is why every golden-pair edge
   stabilizer acts with exactly three orbits on each `q`-point sheet.
+
+Fourth-order (ej3/tt) pass — both remaining residues dissolve (REASONED, hand-checked against
+every frozen orbit size; certification owned by C492):
+
+- **Largest-suborbit avoidance is sheet bookkeeping, not a mechanism.** `H` acts on `M0`'s own
+  sheet as `{M0} + transitive(q−1)` and on the opposite sheet with two orbits (`10 | 5,6` at
+  q=11 splits as own `1,10`, opposite `5,6`; q=7 as own `1,6`, opposite `3,4`). `J` is outer, so
+  `JM0` is on the opposite sheet; the size-`(q−1)` suborbit is on the own sheet and can never be
+  selected.
+- **`c = 6` derives from double-coset counts inside `H` alone.** The two `K` types are exactly
+  the opposite-sheet point stabilizers (`A4`, `D10` in `A5`; `D8`, `S3` in `S4`). Per sheet:
+  own count `= 1 + #K\H/S_own`, opposite count `= #K\H/S_a + #K\H/S_b`. Three-per-sheet follows
+  from `H` 2-transitive on each opposite-sheet orbit, the exact factorizations `A5 = A4·D10` and
+  `S4 = D8·S3` (giving the `#K\H/S_other = 1` legs), and `#K\H/S_own = 2`; the predicted orbit
+  sizes (`{1,4,6}`, `{1,5,5}`, `{1,2,4}`, `{1,3,3}`) all match the certificate. The invariance
+  is thus a statement about the tables of marks of `A5` and `S4` — classical and tiny.
+- **tt framing defect to fix in the abstract version:** `22 → 2 → 1` are canonical
+  `G`-equivariant collapses, but `22 → 6` is based at the choice of golden pair `(M0, JM0)`;
+  the invariant object is the groupoid over that choice. "Portable" should mean the Ω-level
+  axiom class (two sheets, 2-transitive opposite orbits, exact factorization), of which B3/H3
+  are the complete finite-geometry realizations. Owned by C492.
 - **The middle count is `6` at both verified `q` — and the two cases are the whole domain
   (second ej pass, REASONED, not machine-checked).** The hypotheses force
   `|H| = |G|/2q = (q²−1)/2`. By Dickson's subgroup classification for `PSL_2(q)`, cyclic and
