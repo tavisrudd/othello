@@ -773,8 +773,17 @@
       "last": 536,
       "purpose": "C534 survivor follow-ups: modular Hessian-Arf functoriality and coherent polar-flag Fano boundary",
       "sequence": 86
+    },
+    {
+      "count": 1,
+      "first": 537,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 537,
+      "purpose": "C534 closeout survivor: compare C481-C485 Gale reconstruction with 2026 Flatland multi-view consistency gap",
+      "sequence": 87
     }
   ],
-  "next_id": 537,
+  "next_id": 538,
   "schema": "codex-task-id-allocations-v1"
 }
