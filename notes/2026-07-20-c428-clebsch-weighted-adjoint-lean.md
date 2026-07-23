@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** review repairs implemented and validated; post-fix review pending
+**Status:** complete; final independent review `GO` 2026-07-23
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place; do not substitute a chat summary or a second transient document. The finished report
@@ -286,6 +286,18 @@ For the fixed projective tables, the gate now includes the new
 explicit coordinate convention `dot(normal, point)=0`; identifying the displayed normals with
 abstract Coxeter arrangements remains the named classical input.
 
+### Final post-fix review
+
+The user-launched independent Codex sub-agent `c428_final_review` returned `GO` on 2026-07-23 with
+no findings. It independently checked source commit
+`a00f9062f3d807e2da563fc431b5ab5cd70f69c8`, evidence commit
+`8413d6df9ecd1b67db8598ed203a70af7d656f76`, and the 22-probe correction at `2111fefb`.
+The review confirmed the actual theorem types and non-vacuity, exhaustive finite domains,
+projective-table completeness boundary, gate imports, saved successful build and axiom output,
+source hashes, prose and names, exclusions and classical-input boundary, judgment calls, and C320
+ledger delta. Required disposition: record the `GO` and complete the normal archival lifecycle;
+there are no findings to repair or waive.
+
 ## Exact statement-adequacy appendix
 
 The load-bearing actual-code definitions have these types:
@@ -409,5 +421,5 @@ archived under the repository completion invariant.
   prove.
 - [x] Complete the judgment-call record with evidence, trust impact, rejected alternatives, and
   reopening conditions; ensure the verification map and ledger use the chosen final route.
-- [ ] Record the independent reviewer's identity, date, `GO`/`NO-GO`, findings, and dispositions.
+- [x] Record the independent reviewer's identity, date, `GO`/`NO-GO`, findings, and dispositions.
 - [x] Supply C320 with one ledger row per claim and the exact verify-all entry-point delta.

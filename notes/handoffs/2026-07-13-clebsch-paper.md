@@ -250,9 +250,13 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   [`2026-07-20-c423-clebsch-factorization-leaves-lean.md`](../2026-07-20-c423-clebsch-factorization-leaves-lean.md)
   [`2026-07-20-c424-clebsch-balanced-sheets-lean.md`](../2026-07-20-c424-clebsch-balanced-sheets-lean.md),
   and [`2026-07-20-c425-clebsch-double-coset-depth-lean.md`](../2026-07-20-c425-clebsch-double-coset-depth-lean.md).
-- **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
-  separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. It consumes C222's committed
-  terminal without touching `ReflectionArrangementDecoding.lean`.
+- **C428 complete with final independent review `GO` (2026-07-23):** the separate
+  `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate proves the conditional weighted-depth
+  identities, actual finite-field evaluation and injectivity bridge, and exhaustive displayed
+  `A3/F_5`, `B3/F_11`, and `H3/F_11` enumerator/minimum-distance rows. All 22 terminal probes report
+  only standard axioms; the classical coordinate-to-Coxeter identifications remain explicit
+  inputs. Exact source hashes, theorem types, validation, exclusions, and C320 delta:
+  [`2026-07-20-c428-clebsch-weighted-adjoint-lean.md`](../2026-07-20-c428-clebsch-weighted-adjoint-lean.md).
 - **The Paper-1 close now has an explicit Lean expansion:** C494 checks C434's B3/H3 middle
   information lattice; C503 has closed the bounded rank-three arithmetic-gluing theorem with a
   workflow-free certificate bundle, 23-terminal gate, and final independent-review `GO`
