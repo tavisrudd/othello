@@ -99,8 +99,10 @@ permutation modules factors through constants. This is the
 representation-theoretic content of Borel transversality.
 
 This corollary is deliberately characteristic-zero. Modular reduction can
-merge or extend constituents, so C439 must test rather than assume its
-survival in the radical/Hadamard setting.
+merge or extend augmentation subquotients, so C439 must test rather than
+assume semisimple survival in the radical/Hadamard setting. The full
+permutation-module cross-Hom space itself cannot jump; the ej2 pass below
+records the exact distinction.
 
 ## The four exact small-group tables
 
@@ -324,8 +326,7 @@ Opportunities now exposed:
   transporter, without importing conics or exceptional isomorphisms.
 - As a permutation-character Gram matrix, `[[2,1],[1,2]]` proves that the
   two characteristic-zero augmentation modules are distinct irreducibles
-  and share only constants. C439 gets a sharp modular-survival pretest:
-  any extra cross-intertwiner must be created by reduction.
+  and share only constants. C439 gets a sharp modular-survival pretest.
 - The swap `K`-bitorsor cleanly separates two objects that Paper 1 should
   not conflate: the pair-canonical middle partition and the external
   sheet torsor. This gives a sharper "one torsor, one swap" formulation.
@@ -337,3 +338,275 @@ No new task is needed for the first two: they are theorem-interface and
 exposition upgrades landed here. Exploiting `K/C2` to shrink the
 reconstruction decoration is a real successor only if C439's application
 sweep finds a consumer; it should not be allocated speculatively.
+
+## Second-order extra juice (2026-07-23)
+
+The modular boundary is sharper than the Tao paragraph initially stated.
+For any field `k`,
+
+```text
+dim_k Hom_{kH}(k[H/Si], k[H/Sj]) = #Si\H/Sj.
+```
+
+This is orbit-basis linear algebra, not semisimplicity. Hence the
+off-diagonal Hom space remains one-dimensional in every characteristic;
+it cannot acquire an extra cross-intertwiner after reduction.
+
+Write `Pi=k[H/Si]`, let `εi:Pi→k` be coordinate sum, and
+`ηi:k→Pi` send `1` to the all-ones vector. The unique cross map, up to
+scalar, is
+
+```text
+Tji = ηj εi.
+```
+
+It annihilates the augmentation kernel `Ai=ker εi` in every
+characteristic. Therefore any modular map between augmentation
+subquotients must be non-liftable to `Pi→Pj`; this is the exact place where
+extension data, rather than a new double coset, can enter.
+
+Set `Ei=ηi εi` and write `ni=|H/Si|`. The unique maps form an integral
+rank-one Morita context with relations
+
+```text
+Ei² = ni Ei,
+Tij Tji = nj Ei,
+Tji Tij = ni Ej.
+```
+
+The elementary degeneration is therefore completely explicit:
+
+```text
+εi ηi = |H/Si|,
+```
+
+so the constant line lies inside `Ai` exactly when the characteristic
+divides the component degree. The bad-prime ledger is consequently
+
+| realization | opposite degrees | possible nonsemisimple incidence primes |
+|:--|:--|:--|
+| B3 / `S4` | `3,4` | `2,3` |
+| H3 / `A5` | `5,6` | `2,3,5` |
+
+The two degrees in each row are consecutive and hence coprime. At every
+bad prime exactly one `Ei` becomes square-zero and exactly one of the two
+cross compositions vanishes; the other remains a nonzero multiple of the
+nilpotent `Ei`. Thus every incidence degeneration is one-sided. This is
+an oriented extension diagnostic, not merely a bad-prime list.
+
+The native characteristics `7` and `11` divide neither `|H|` nor the
+component degrees. Maschke therefore applies, and the
+characteristic-zero decomposition `Pi=1⊕χi` survives unchanged in the
+actual B3/H3 fields. C439 need investigate this interface only when it
+reduces the small-group permutation modules at `2,3,5`, or when its
+carrier is not one of these permutation modules.
+
+The `K/C2` observation also closes more sharply: it is not merely a
+candidate compression. It is the optimal homogeneous decoration on each
+cross cell, because `C2` is exactly its point stabilizer. Further
+compression would identify distinct points unless an application supplies
+an additional quotient invariant.
+
+No new mystery or successor remains in C492. The only live opportunity is
+the already allocated C439 test of whether its modular carriers realize a
+non-liftable augmentation-subquotient map with the predicted one-sided
+orientation at one of the small bad primes.
+
+## Third-order extra juice (2026-07-23)
+
+The one-sided special fibre has a canonical extension-theoretic meaning.
+For any transitive finite `H`-set `X`, put `P=k[X]`, `A=ker ε`, and
+`n=|X|`. The augmentation sequence
+
+```text
+0 → A → P --ε→ k → 0
+```
+
+splits as a `kH`-module exactly when `n` is invertible in `k`. Indeed, an
+`H`-fixed preimage of `1` must be `c·1_X`, whose augmentation is `cn`.
+Thus when `char(k)` divides `n`, the constant line
+`L=k·1_X` lies inside `A` and the displayed sequence is canonically
+nonsplit.
+
+Apply this to the two opposite components. Their degrees are coprime, so
+at every bad prime exactly one augmentation sequence is nonsplit and the
+other splits. If `p|ni` and `p∤nj`, then
+
+```text
+Li = im(ηi) ⊂ Ai,
+Tij : Pj ↠ Li,
+Tji Tij = 0,
+Tij Tji = nj Ei ≠ 0,      (nj Ei)² = 0.
+```
+
+Hence the incidence special fibre carries a canonical oriented radical
+arrow into `Li` and a nonzero square-zero return composition. This is the
+precise one-sided extension carrier suggested by the ej2 Morita-context
+relations.
+
+The claim is intentionally bounded: it proves that the permutation
+augmentation extension class is nonzero, not that its ambient
+`Ext¹_{kH}(k,Ai)` is one-dimensional. That dimension, and any
+identification with C439's radical/Hadamard carrier, remain application
+gates. A match would require:
+
+1. the same bad prime and affected component;
+2. an identification of C439's radical line with `Li`;
+3. agreement of the oriented cross map with `Tij`; and
+4. non-liftability through the full permutation module.
+
+This is a cheap four-part falsifier for C439. Failure at any line kills the
+bridge without a module census. No separate successor should be
+allocated; C439 already owns the only possible consumption.
+
+### Prime arithmetic of the special fibre
+
+In both C434 realizations the two opposite-component degrees are
+
+```text
+n- = (q-1)/2,       n+ = (q+1)/2.
+```
+
+Consequently
+
+```text
+gcd(n-,n+) = 1,
+n- n+ = (q²-1)/4 = |H|/2.
+```
+
+These identities explain three features that previously looked
+case-specific.
+
+First, the common cross stabilizer is forced:
+
+```text
+|Sa ∩ Sb| = |H|/(n- n+) = 2.
+```
+
+Thus the `C2` seam is exactly the factor missing between the product of
+the two orbit degrees and `|H|`; it is not an exceptional-group
+coincidence.
+
+Second, the bad primes are precisely
+
+```text
+Bad(q) = {ℓ : ℓ | (q²-1)/4}
+       = {prime divisors of |H|}.
+```
+
+Every bad prime divides exactly one component degree. For odd `ℓ`, its
+orientation is cyclotomic:
+
+```text
+ℓ | n-  iff q ≡  1 (mod 2ℓ),
+ℓ | n+  iff q ≡ -1 (mod 2ℓ).
+```
+
+For `ℓ=2`, the lower component is affected when `q≡1 (mod 4)` and the
+upper when `q≡3 (mod 4)`. The defining characteristic `p|q` is never bad,
+since `gcd(q,q²-1)=1`; native semisimplicity is therefore automatic for
+any realization with `|H|=(q²-1)/2`, not an accident special to `7` and
+`11`.
+
+Third, the integral thickness is measured exactly by
+
+```text
+vℓ(n-) = vℓ(q-1) - [ℓ=2],
+vℓ(n+) = vℓ(q+1) - [ℓ=2].
+```
+
+| `q` | `n-` | `n+` | oriented prime powers |
+|--:|--:|--:|:--|
+| `7` | `3` | `4` | `3¹` lower; `2²` upper |
+| `11` | `5` | `6` | `5¹` lower; `2¹·3¹` upper |
+
+The q=7 upper component is therefore the only certified case with
+higher-than-first-order bad-prime thickness (`v2=2`). A mod-2 comparison
+cannot see that distinction; an integral or mod-4 carrier comparison can.
+This is a concrete caution for C439, not a reason to start an independent
+2-adic task.
+
+Numerically, `n-` and `n+` are also the split and nonsplit maximal-torus
+orders in `PSL2(q)`. C492 proves the arithmetic equality only. It does not
+claim a canonical geometric map from the two `H`-components to ambient
+torus classes; such a claim would need an equivariant construction and an
+actual downstream consumer.
+
+### Reusable proof mechanism: the Mackey–swap row-sum lemma
+
+The C492 argument does not fundamentally require two opposite components.
+Let
+
+```text
+Ω- = ⨆_{j=1}^t H/Sj
+```
+
+and define the Mackey matrix
+
+```text
+Mij = #Si\H/Sj.
+```
+
+If a golden point lies in component `i`, its point stabilizer is conjugate
+to `Si`. Therefore the number of its stabilizer's orbits on `Ω-` is the
+`i`th row sum:
+
+```text
+#Si\Ω- = Σj Mij.
+```
+
+If the golden pair is swappable, the same number occurs on `Ω+`, so
+
+```text
+#Si\Ω = 2 Σj Mij.
+```
+
+This is the **Mackey–swap row-sum lemma**. Type-independent stratum count
+is equivalent to constant row sums of `M`; no exceptional-group
+interpretation is needed for that conclusion.
+
+C492 is the smallest nontrivial instance:
+
+```text
+M = [[2,1],[1,2]],       row sum = 3,       c = 2·3 = 6.
+```
+
+More generally, `t` pairwise transverse 2-transitive actions give
+`M=I_t+J_t`, row sum `t+1`, and `c=2(t+1)`. In characteristic zero their
+permutation characters are `1+χi` with the `χi` pairwise orthogonal
+irreducibles. Over arbitrary fields, the matrix still gives the exact
+full permutation-module Hom ranks; the component-degree vector controls
+which augmentation extensions become nonsplit.
+
+This yields a portable proof workflow:
+
+1. identify the opposite-sheet `H`-orbits and stabilizers;
+2. compute one bounded Mackey matrix, or only its relevant row sums;
+3. prove existence of a pair swap and double the row count;
+4. only then seek an intrinsic statistic realizing the orbit fibres; and
+5. treat homogeneous-space decoration and reconstruction separately.
+
+The separation in steps 4–5 is load-bearing. The row-sum lemma proves the
+number of strata, but it does not manufacture C434's shared-edge profile
+or its inversion theorem.
+
+Concrete hand-backs:
+
+- **C493:** normalizer-class fusion can destroy the intrinsic sheet
+  readout without changing the abstract Mackey row sum. If a q=5 avatar
+  exists, test swappability and `M` separately from geometric decoration.
+- **C439:** use the field-independent Hom ranks, affected-component prime,
+  nonsplit augmentation class, and arrow orientation as successive
+  falsifiers before any module census.
+- **C494:** the Lean core can be three generic finite-action lemmas
+  (row-sum orbit count, swap-induced orbit equivalence, augmentation
+  splitting iff degree is invertible), leaving the four small-group
+  entries as finite certificates.
+
+Future crown searches can use constant Mackey row sum as a cheap
+mechanism-level pretest. A large orbit census without a swap or without an
+intrinsic fibre statistic still does not qualify.
+
+No genuine C492 mystery remains after ej3. What remains unknown is not a
+feature of the six-stratum theorem, but whether an already allocated
+external carrier realizes its canonical nonsplit special fibre.
