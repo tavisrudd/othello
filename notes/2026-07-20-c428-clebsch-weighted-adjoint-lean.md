@@ -351,7 +351,7 @@ coefficient distributions are formally distributions of distinct evaluation code
 | `H3/F_11` row | `RelativeConicArcs.ArrangementWeightedAdjoint.CoxeterModels.h3_weightedAdjoint_specialization` | exhaustive kernel Lean + classical identification |
 | `B3/F_11` row | `RelativeConicArcs.ArrangementWeightedAdjoint.CoxeterModels.b3_weightedAdjoint_certificate` | exhaustive kernel Lean + classical identification |
 
-Verify-all delta: add `RelativeConicArcs.Gates.ClebschWeightedAdjoint` and the ten terminal axiom
+Verify-all delta: add `RelativeConicArcs.Gates.ClebschWeightedAdjoint` and the 22 terminal axiom
 probes above. Do not add the gate to `RelativeConicArcs.Gates.ClebschReplacementSpine`.
 
 ## Required closing review process
