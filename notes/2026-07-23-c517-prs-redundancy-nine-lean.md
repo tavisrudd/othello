@@ -1,6 +1,6 @@
 # C517 — Lean boundary for the PRS redundancy-nine theorem
 
-**Lane:** `reed-solomon` · **Date:** 2026-07-23
+**Lane:** `reed-solomon` · **Date:** 2026-07-23 · **Status:** complete
 
 ## Result
 
@@ -33,7 +33,8 @@ them as explicit fields of `ResidualSliceInput`:
 3. conversion of that point into a split squarefree septic witness.
 
 `redundancyNineSynthesis` then proves witness existence for every syndrome outside the persistent
-set. `PersistentFamilyData.deep_card` checks the exact total
+set and uses the explicit witness-to-shallow implication to prove that a syndrome is deep exactly
+when it belongs to the persistent tangent/sigma union. `PersistentFamilyData.deep_card` checks the exact total
 `q(q+1)^2/2` from the disjoint tangent/sigma cardinalities, and `orbit_count_pair` checks the exact
 projective/projective-semilinear table
 `(2,2)`, `(3,3)`, `(4,4)`, `(6,6)`, or `(6,5)` for the six arithmetic cases.
@@ -67,10 +68,15 @@ The synthesis terminals are:
 
 ## Validation
 
-Both source modules pass independent guarded single-file elaboration. The import-only gate build,
-exact-target staleness confirmation, and axiom audit are the completion gate.
+Both source modules pass independent guarded single-file elaboration. The exact import gate
+`RelativeConicArcs.Gates.PRSRedundancyNine` passes its managed build and trace-only aggregate check.
+The tracked fourteen-terminal audit
+`RelativeConicArcs.Gates.PRSRedundancyNineAxiomAudit` passes its managed build and exact-target
+staleness check. Its output contains only the standard `propext`, `Classical.choice`, and
+`Quot.sound` dependencies already supplied by Lean/mathlib; the two purely logical/table terminals
+are axiom-free. There are no project-specific axioms.
 
-## Cheap algebraic upgrades
+## Extra-juice closeout
 
 The cheap algebraic upgrade was to prove more than the two root substitutions: the branch-cover
 roots also have the exact prescribed sum and product. This closes a possible semantic gap between
@@ -78,6 +84,11 @@ roots also have the exact prescribed sum and product. This closes a possible sem
 
 The two-marker contraction formula was also exposed as a public theorem. It makes the symmetry of
 successive marked contractions explicit rather than leaving it as a bare commutation equality.
+
+The post-gate pass found and closed one semantic gap: a split squarefree witness had been produced
+outside the persistent set without an explicit bridge from that witness to shallowness. The
+synthesis input now names both the coding-theoretic deep predicate and the witness-to-shallow
+implication, and the terminal theorem derives `isDeep s ↔ s ∈ deep`.
 
 ## Mystery ledger
 
@@ -89,6 +100,9 @@ Settled:
   `(X-r)(X-s)` coordinate formula are checked over every commutative ring.
 - **Could the formal theorem conceal geometric existence as an axiom?** No. Every component,
   rational-point, deletion, and exhaustion input is a visible structure field.
+- **Does witness existence formally imply the advertised exact classification?** Yes. The
+  witness-to-shallow bridge and persistent-deep hypothesis now yield the checked equivalence
+  `isDeep s ↔ s ∈ deep`.
 
 Open:
 

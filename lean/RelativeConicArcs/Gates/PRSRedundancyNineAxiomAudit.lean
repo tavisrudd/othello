@@ -1,0 +1,23 @@
+import RelativeConicArcs.Gates.PRSRedundancyNine
+
+/-!
+# Axiom audit for the redundancy-nine residual-quadratic theorem
+
+This reproducible audit prints the axiom dependencies of the algebraic and synthesis terminals
+exported by `RelativeConicArcs.Gates.PRSRedundancyNine`. It adds no definitions or theorems.
+-/
+
+#print axioms RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_comm
+#print axioms RelativeConicArcs.PRSResidualQuadratic.dividedPowerContraction_twice_apply
+#print axioms RelativeConicArcs.PRSResidualQuadratic.first_hankel_identity
+#print axioms RelativeConicArcs.PRSResidualQuadratic.second_hankel_identity
+#print axioms RelativeConicArcs.PRSResidualQuadratic.residual_discriminant
+#print axioms RelativeConicArcs.PRSResidualQuadratic.residual_sum_product_solve_hankel
+#print axioms RelativeConicArcs.PRSResidualQuadratic.residual_root_add
+#print axioms RelativeConicArcs.PRSResidualQuadratic.residual_root_sub
+#print axioms RelativeConicArcs.PRSResidualQuadratic.residual_roots_sum
+#print axioms RelativeConicArcs.PRSResidualQuadratic.residual_roots_product
+#print axioms RelativeConicArcs.PRSRedundancyNine.ResidualSliceInput.exceptional_has_splitSquarefreeWitness
+#print axioms RelativeConicArcs.PRSRedundancyNine.orbit_count_pair
+#print axioms RelativeConicArcs.PRSRedundancyNine.PersistentFamilyData.deep_card
+#print axioms RelativeConicArcs.PRSRedundancyNine.redundancyNineSynthesis

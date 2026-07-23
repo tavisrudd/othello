@@ -4,8 +4,8 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C516 complete; C517 is next
-(Lean formalization of C516), followed by C518 (C515 global-incidence successor) and C519
+**Status:** C475--C499, C509--C510, and C512--C517 complete; C518 is next
+(C515 global-incidence successor), followed by C519
 (arbitrary-redundancy residual-discriminant theorem); C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -435,6 +435,16 @@ the persistent tangent and conjugate-sigma families, totaling `q(q+1)^2/2`, with
 modulo inversion/Frobenius, tangent cocycle `z→z+8u`, and exact PGL/PGamma counts
 `2/2`, `3/3`, `4/4`, `6/6`, or `6/5`. The theorem/certificate boundary is frozen for C517.
 
+## Closed base — C517
+
+`notes/2026-07-23-c517-prs-redundancy-nine-lean.md` formalizes divided-power marker contraction,
+the complete residual-quadratic Hankel/discriminant/root algebra, and an explicit synthesis
+interface with no hidden geometric axioms. The terminal theorem derives split squarefree witnesses
+off the persistent locus, the exact equivalence between deepness and the tangent/sigma union,
+cardinality `q(q+1)^2/2`, and the six-case PGL/PGamma orbit table from named component,
+rational-point, deletion, coding, and exhaustion hypotheses. The import gate and its fourteen-
+terminal axiom audit pass; only standard Lean/mathlib axioms appear.
+
 ## Closed base — C510
 
 `notes/2026-07-23-c510-trs-deep-hole-pilot.md` reconciles the 2024 full-length and 2025 punctured
@@ -519,8 +529,8 @@ raw or reduced resultant.
 | C514 | modular one-twist translation quotient | complete | canonical completion-root slice; exact Lucas fixed flag; consecutive-row and marker-collision obstruction to C512 | a different splitting mechanism is required |
 | C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, reduced stabilizer-stratified orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global reduced-norm/incidence geometry is required |
 | C516 | PRS redundancy-nine residual-quadratic theorem | complete | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
-| C517 | Lean formalization of C516 | queued | theorem boundary frozen; zero-axiom algebraic and finite-field proof | kernel-checked PRS theorem |
-| C518 | modular TRS trace-one global incidence | queued after C517 | fixed endpoints, residual discriminant, splitting monodromy, ordered-root fallback; exact quotient lifting and collision semantics | global theorem or first proved obstruction |
+| C517 | Lean formalization of C516 | complete | residual algebra and exact synthesis implication; explicit geometric/coding hypotheses; green gate and axiom audit | kernel-checked PRS theorem boundary |
+| C518 | modular TRS trace-one global incidence | queued | fixed endpoints, residual discriminant, splitting monodromy, ordered-root fallback; exact quotient lifting and collision semantics | global theorem or first proved obstruction |
 | C519 | universal residual-discriminant base locus | queued after C518 | binary-cubic discriminant pullback; complete zero/square/inseparable carrier; root-compatible genus-one slice | arbitrary-redundancy high-field theorem or first additional component |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
@@ -576,6 +586,6 @@ history.
 
 ## Next command
 
-`go C517`
+`go C518`
 
-(C517 is next; C518 and C519 follow it. C500 remains release-gated.)
+(C518 is next; C519 follows it. C500 remains release-gated.)

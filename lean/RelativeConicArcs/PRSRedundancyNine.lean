@@ -19,6 +19,8 @@ namespace RelativeConicArcs.PRSRedundancyNine
 /-- The geometric and arithmetic inputs required to turn the residual-quadratic construction into
 a split squarefree septic witness outside the persistent locus. -/
 structure ResidualSliceInput (S : Type*) (q : ℕ) where
+  /-- The coding-theoretic deep-syndrome predicate. -/
+  isDeep : S → Prop
   /-- Syndromes outside the persistent tangent and conjugate-sigma families. -/
   exceptional : S → Prop
   /-- Existence of a geometrically integral reduced binary-quartic slice of genus at most one. -/
@@ -29,6 +31,8 @@ structure ResidualSliceInput (S : Type*) (q : ℕ) where
     q ≥ 53 → S → Prop
   /-- Such a rational point supplies a split squarefree septic in the Hankel kernel. -/
   splitSquarefreeWitness : S → Prop
+  /-- A split squarefree septic in the Hankel kernel makes the syndrome shallow. -/
+  witnessMakesShallow : ∀ {s}, splitSquarefreeWitness s → ¬ isDeep s
   pointGivesWitness :
     ∀ (hq : q ≥ 53) {s}, exceptional s →
       integralGenusAtMostOneSlice s →
@@ -141,23 +145,33 @@ theorem deep_card {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S]
 end PersistentFamilyData
 
 /-- Complete high-field synthesis.  The conclusion packages witness existence off the persistent
-locus, exact persistent cardinality, and the projective/projective-semilinear orbit counts. -/
+locus, the exact deep-syndrome classification, persistent cardinality, and the
+projective/projective-semilinear orbit counts. -/
 theorem redundancyNineSynthesis {S : Type*} {q : ℕ} [Fintype S] [DecidableEq S]
     (hq : q ≥ 53)
     (slice : ResidualSliceInput S q)
     (families : PersistentFamilyData S q)
     (exceptional_iff : ∀ s, slice.exceptional s ↔ s ∉ families.deep)
+    (persistentDeep : ∀ s, s ∈ families.deep → slice.isDeep s)
     (hslice : ∀ s, slice.exceptional s → slice.integralGenusAtMostOneSlice s)
     (hpoint : ∀ s (_hs : slice.exceptional s),
       slice.rationalPointOutsideDeletedDivisors hq s) :
-    (∀ s, s ∉ families.deep → slice.splitSquarefreeWitness s) ∧
+    (∀ s, slice.isDeep s ↔ s ∈ families.deep) ∧
+      (∀ s, s ∉ families.deep → slice.splitSquarefreeWitness s) ∧
       families.deep.card = q * (q + 1) ^ 2 / 2 ∧
       (projectiveOrbitCount families.orbitCase,
         semilinearOrbitCount families.orbitCase) =
       orbitCountPair families.orbitCase := by
-  refine ⟨?_, families.deep_card, orbit_count_pair families.orbitCase⟩
-  intro s hs
-  exact slice.exceptional_has_splitSquarefreeWitness hq hslice hpoint s
-    ((exceptional_iff s).2 hs)
+  have witnessOutside : ∀ s, s ∉ families.deep → slice.splitSquarefreeWitness s := by
+    intro s hs
+    exact slice.exceptional_has_splitSquarefreeWitness hq hslice hpoint s
+      ((exceptional_iff s).2 hs)
+  refine ⟨?_, witnessOutside, families.deep_card, orbit_count_pair families.orbitCase⟩
+  intro s
+  constructor
+  · intro hsDeep
+    by_contra hsMem
+    exact slice.witnessMakesShallow (witnessOutside s hsMem) hsDeep
+  · exact persistentDeep s
 
 end RelativeConicArcs.PRSRedundancyNine
