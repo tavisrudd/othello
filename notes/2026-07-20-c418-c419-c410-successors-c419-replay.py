@@ -154,6 +154,22 @@ def weighted_adjoint(lines: tuple[Vector, ...]) -> dict[str, object]:
     }
 
 
+def strict_partition_signature(lines: tuple[Vector, ...]) -> list[object]:
+    singular = scan_multiplicities(lines)
+    adjoint = tuple(singular)
+    weights = tuple(len(singular[point]) - 1 for point in adjoint)
+    partitions = Counter()
+    for point in POINTS:
+        indices = tuple(
+            i for i, line in enumerate(adjoint) if dot(line, point) == 0
+        )
+        if len(indices) >= 2:
+            partitions[tuple(sorted(weights[i] for i in indices))] += 1
+    return [
+        [list(partition), count] for partition, count in sorted(partitions.items())
+    ]
+
+
 def profiles(configuration: tuple[Vector, ...]) -> dict[str, object]:
     selected = set(configuration)
     sizes = {line: sum(dot(line, point) == 0 for point in configuration) for line in LINES}
@@ -197,6 +213,7 @@ def digest(value: object) -> str:
 
 def record(configuration: tuple[Vector, ...]) -> dict[str, object]:
     arrangement = external_lines(configuration)
+    strict_signature = strict_partition_signature(arrangement)
     u = {
         "characteristic_polynomial_ascending": characteristic(arrangement),
         "weighted_adjoint": weighted_adjoint(arrangement),
@@ -205,6 +222,8 @@ def record(configuration: tuple[Vector, ...]) -> dict[str, object]:
     return {
         "U": u,
         "U_digest": digest(u),
+        "strict_partition_digest": digest(strict_signature),
+        "strict_partition_signature": strict_signature,
         "P": p,
         "P_digest": digest(
             {
@@ -287,17 +306,57 @@ def main() -> None:
     )
     if generic != expected:
         raise AssertionError("independent determinant filter changed")
-    groups: dict[str, list[tuple[Vector, str]]] = defaultdict(list)
+    groups: dict[str, list[tuple[Vector, str, str, list[object]]]] = defaultdict(list)
     for point in generic:
         configuration = base + (point,)
         if circuits(configuration) != ((0, 1, 2), (0, 3, 4)):
             raise AssertionError("generic circuit type changed")
         result = record(configuration)
-        groups[result["U_digest"]].append((point, result["P_digest"]))
+        groups[result["U_digest"]].append(
+            (
+                point,
+                result["P_digest"],
+                result["strict_partition_digest"],
+                result["strict_partition_signature"],
+            )
+        )
     if sorted(len(fibre) for fibre in groups.values()) != [1, 4]:
         raise AssertionError("independent U fibres changed")
-    if not all(len({p_digest for _, p_digest in fibre}) == 1 for fibre in groups.values()):
+    if not all(
+        len({p_digest for _, p_digest, _, _ in fibre}) == 1
+        for fibre in groups.values()
+    ):
         raise AssertionError("independent replay finds a P split")
+    affine = next(fibre for fibre in groups.values() if len(fibre) == 4)
+    if len({strict_digest for _, _, strict_digest, _ in affine}) != 4:
+        raise AssertionError("strict partition refinement does not split the affine fibre")
+    if len(
+        {
+            strict_digest
+            for fibre in groups.values()
+            for _, _, strict_digest, _ in fibre
+        }
+    ) != 5:
+        raise AssertionError("strict partition refinement does not split the stratum")
+    partition_counters = [
+        Counter(
+            {
+                tuple(partition): count
+                for partition, count in signature
+            }
+        )
+        for _, _, _, signature in affine
+    ]
+    partition_types = sorted(set().union(*partition_counters))
+    difference_rows = [
+        [
+            counter[partition] - partition_counters[0][partition]
+            for partition in partition_types
+        ]
+        for counter in partition_counters[1:]
+    ]
+    if len(partition_types) != 20 or rank(difference_rows) != 3:
+        raise AssertionError("strict partition defect rank changed")
     if c430_pattern(((0, 1, 2), (0, 3, 4))) != ([1, 1], 0):
         raise AssertionError("independent C430 pattern changed")
     cert_fibres = certificate["fixed_U_strata"]["fibres"]
@@ -305,7 +364,7 @@ def main() -> None:
         sorted(tuple(point) for point in fibre["points"]) for fibre in cert_fibres
     )
     replay_partition = sorted(
-        sorted(point for point, _ in fibre) for fibre in groups.values()
+        sorted(point for point, _, _, _ in fibre) for fibre in groups.values()
     )
     if cert_partition != replay_partition:
         raise AssertionError("certificate and independent partitions differ")

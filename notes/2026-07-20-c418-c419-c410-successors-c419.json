@@ -162,10 +162,18 @@
   },
   "ej_closeout": {
     "fixed_U_fibre_consequence": "the stored marked weight histograms are singleton-valued on both fixed-U fibres, so they reconstruct the complete syndrome histogram",
-    "open_mystery": "the frozen six-point base has trivial projective stabilizer, so no base symmetry currently explains why all four affine realizations share the complete U and marked-weight ledgers",
-    "proof": "writing n_s for the number of lines through Q meeting B in s points, sum n_s=8 and sum s*n_s=7 give n_0-1=n_2+2*n_3, while mu=n_2+3*n_3 and epsilon=n_3",
+    "general_syndrome_identity": "for |B|=n in PG(2,q) and Q outside B, mu_B(Q)=w_A(Q)+n-q+sum_{s>=3} binom(s-1,2)n_s(Q), where w_A(Q)=n_0(Q)-1",
+    "open_mystery": "the exact compensation that makes four different weight-partition histograms collapse to one depth-sum histogram is not yet conceptual",
+    "proof": "sum n_s=q+1 and sum s*n_s=n give w_A=q-n+sum_{s>=2}(s-1)n_s; subtract this from mu=sum_{s>=2}binom(s,2)n_s",
     "settled": "why the pointed constancy check can be read directly at the external-arrangement/marked-triple-line interface",
-    "syndrome_identity": "for Q outside B, mu(Q)=w_A(Q)+epsilon(Q), where w_A(Q)=#external lines through Q-1 and epsilon marks the two fixed three-point lines"
+    "specialization": "here n=q=7 and only the two fixed triple lines have s>=3, so mu(Q)=w_A(Q)+epsilon(Q)",
+    "strict_partition_defect": {
+      "affine_difference_rank_over_Q": 3,
+      "common_pushforward": "partition -> sum(partition)",
+      "interpretation": "the four affine realizations span a three-dimensional realized defect space killed by the depth-sum compression and silent for P",
+      "partition_type_count": 20
+    },
+    "strict_refinement": "U remembers only the sum of weights at each adjoint intersection; retaining the full weight partition separates all four affine realizations"
   },
   "field": "F_7",
   "fixed_U_strata": {
@@ -178,7 +186,10 @@
         ],
         "U_digest": "2b30f162b97a0030e22ba74fb8848c576adc6c4f180be5a11572390dcd3c2205",
         "ledger_digests": [
-          "3907676e1a0bf01492658fbdea697b67f6c96e832ed69335a487c9201271e777"
+          "2cebf546afba597dde834531599e1141beb3ac6ee41c4ede34aa2c469ffa3dec",
+          "5cfb019ef2d25e9ab185cfa23cbdcd4e4bc05e1f70c0cfb3f2eef5b1fc9151bf",
+          "d22bfc90d5fca15e1079810014b698fc5b2d3294d942c48654f8fb8f8b5c13ba",
+          "dece0afa550bf652b65fc994461bb6e5e77313251e51dbaabf026f4bfe2c0b30"
         ],
         "marked_weight_syndrome_histograms": [
           "[[[1,0,1],8],[[2,0,2],24],[[2,1,3],2],[[3,0,3],8],[[3,1,4],6],[[4,1,5],2]]"
@@ -422,6 +433,163 @@
               20
             ]
           ],
+          "adjoint_intersection_weight_partition_histogram": [
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                2,
+                3,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                3
+              ],
+              12
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                3,
+                4,
+                4
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                3,
+                3,
+                4
+              ],
+              2
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                4
+              ],
+              8
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              6
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                2,
+                4
+              ],
+              2
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                3,
+                3
+              ],
+              7
+            ],
+            [
+              [
+                2,
+                3,
+                3,
+                3,
+                4
+              ],
+              2
+            ]
+          ],
           "adjoint_line_weight_degree_histogram": [
             [
               [
@@ -479,7 +647,7 @@
         ],
         "U_digest": "ec2fa4c991b6eb802beeb7e203e51d96057084f7f315ffb4e1c0edba399e9fa7",
         "ledger_digests": [
-          "c63ef1e47cc99cba766e9d94e6fd43715814cf4008166c00065637b0700b642a"
+          "c91a49c6c672a2deebb059a533042556bd4eb3a06928b444489295f54d7d9e70"
         ],
         "marked_weight_syndrome_histograms": [
           "[[[1,0,1],10],[[2,0,2],20],[[3,0,3],10],[[3,1,4],10]]"
@@ -699,6 +867,114 @@
               20
             ]
           ],
+          "adjoint_intersection_weight_partition_histogram": [
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                2,
+                3,
+                3
+              ],
+              10
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                3
+              ],
+              10
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                3,
+                3,
+                3,
+                3,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                1,
+                3,
+                3,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3
+              ],
+              12
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              8
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                3,
+                3
+              ],
+              6
+            ],
+            [
+              [
+                3,
+                3,
+                3,
+                3,
+                3
+              ],
+              2
+            ]
+          ],
           "adjoint_line_weight_degree_histogram": [
             [
               [
@@ -739,7 +1015,8 @@
         }
       }
     ],
-    "split_equation": "x=0 versus x!=0 in the normalized coordinates"
+    "split_equation": "x=0 versus x!=0 in the normalized coordinates",
+    "strict_incidence_refinement": "the adjoint-intersection weight-partition histogram has four distinct values on the affine U fibre and five on the whole generic stratum; each strict incidence-preserving rational subcell is a singleton"
   },
   "logged_calibration_pair": {
     "first_gate": "FAIL",
@@ -996,7 +1273,7 @@
             6
           ]
         ],
-        "ledger_digest": "faf6651878531344425f4de50d646aa4c503a4ba23da1a28b0aa9dd1b93c7436",
+        "ledger_digest": "7eb3e7ad77b5f6057fc3bc02b708d0cc834f80605f42d267e13a39152c953e1a",
         "marked_weight_syndrome_histogram": [],
         "universal_incidence_ledger": {
           "adjoint_intersection_depth_histogram": [
@@ -1015,6 +1292,230 @@
             [
               17,
               18
+            ]
+          ],
+          "adjoint_intersection_weight_partition_histogram": [
+            [
+              [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                3
+              ],
+              6
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2
+              ],
+              7
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                2,
+                3,
+                3,
+                4
+              ],
+              3
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                2,
+                4
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                3,
+                3,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                3
+              ],
+              8
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              3
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                3,
+                3
+              ],
+              5
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                2
+              ],
+              2
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                4
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3
+              ],
+              7
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                4
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                3,
+                3,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                3,
+                4
+              ],
+              2
+            ],
+            [
+              [
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              2
             ]
           ],
           "adjoint_line_weight_degree_histogram": [
@@ -1306,7 +1807,7 @@
             6
           ]
         ],
-        "ledger_digest": "faf6651878531344425f4de50d646aa4c503a4ba23da1a28b0aa9dd1b93c7436",
+        "ledger_digest": "1ca3d27364ff1e80f181364d8855d2c0b5602fe94610f29d7277a7c0287e2af6",
         "marked_weight_syndrome_histogram": [],
         "universal_incidence_ledger": {
           "adjoint_intersection_depth_histogram": [
@@ -1325,6 +1826,194 @@
             [
               17,
               18
+            ]
+          ],
+          "adjoint_intersection_weight_partition_histogram": [
+            [
+              [
+                1,
+                1,
+                1,
+                1,
+                2,
+                2,
+                3
+              ],
+              7
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                1,
+                3,
+                3,
+                3,
+                4
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                1,
+                1,
+                2,
+                2,
+                2,
+                2
+              ],
+              6
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                2,
+                3,
+                4
+              ],
+              2
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                3
+              ],
+              10
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              7
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                2,
+                4
+              ],
+              2
+            ],
+            [
+              [
+                1,
+                1,
+                2,
+                2,
+                3,
+                3
+              ],
+              3
+            ],
+            [
+              [
+                1,
+                1,
+                3,
+                3,
+                3
+              ],
+              1
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                2
+              ],
+              2
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                2,
+                3
+              ],
+              4
+            ],
+            [
+              [
+                1,
+                2,
+                2,
+                2,
+                3,
+                3,
+                4
+              ],
+              2
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3
+              ],
+              2
+            ],
+            [
+              [
+                2,
+                2,
+                2,
+                3,
+                4
+              ],
+              1
+            ],
+            [
+              [
+                2,
+                2,
+                3,
+                3,
+                3
+              ],
+              3
             ]
           ],
           "adjoint_line_weight_degree_histogram": [
@@ -1432,5 +2121,15 @@
     "status": "BOUNDED_NEGATIVE",
     "stop_condition": "forced pointed constancy on every fixed-U cell of the selected stratum"
   },
-  "schema": "c419-fixed-incidence-moduli-v1"
+  "schema": "c419-fixed-incidence-moduli-v2",
+  "tt_audit": {
+    "claim_survives": "the bounded negative strengthens: strict incidence-preserving cells are singletons, while even the coarser four-point U cell is P-constant",
+    "incidence_boundary": "fixed U means fixed incidence aggregates consumed by weighted depth, not fixed full adjoint incidence; the strict partition refinement separates every rational realization",
+    "opportunities": [
+      "use the general syndrome identity as a rank-three pretest: for q-point arcs mu=w_A exactly, and higher sections are the only correction",
+      "offer the adjoint weight-partition histogram as the cheapest strict refinement of U before any new moduli or field census",
+      "hand the correction term sum binom(s-1,2)n_s to C431 as the exact higher-section obstruction that a rank-four analogue must retain"
+    ],
+    "scheme_boundary": "the proved stratum is the F_7-rational Frobenius locus after determinant saturation, not a positive-dimensional algebraic-closure moduli theorem"
+  }
 }

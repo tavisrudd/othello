@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import json
 from collections import Counter, defaultdict
+from fractions import Fraction
 from itertools import combinations
 from pathlib import Path
 
@@ -36,6 +37,28 @@ def canonical(value: object) -> str:
 
 def digest(value: object) -> str:
     return hashlib.sha256(canonical(value).encode()).hexdigest()
+
+
+def rational_rank(rows: list[list[int]]) -> int:
+    matrix = [[Fraction(value) for value in row] for row in rows]
+    answer = 0
+    for column in range(len(matrix[0]) if matrix else 0):
+        pivot = next(
+            (i for i in range(answer, len(matrix)) if matrix[i][column]), None
+        )
+        if pivot is None:
+            continue
+        matrix[answer], matrix[pivot] = matrix[pivot], matrix[answer]
+        scale = matrix[answer][column]
+        matrix[answer] = [value / scale for value in matrix[answer]]
+        for i in range(len(matrix)):
+            if i != answer and matrix[i][column]:
+                scale = matrix[i][column]
+                matrix[i] = [
+                    x - scale * y for x, y in zip(matrix[i], matrix[answer])
+                ]
+        answer += 1
+    return answer
 
 
 def circuits(points: tuple[Vector, ...]) -> tuple[tuple[int, int, int], ...]:
@@ -76,6 +99,15 @@ def universal_incidence_ledger(lines: tuple[Vector, ...]) -> dict[str, object]:
         ],
         "adjoint_intersection_depth_histogram": [
             list(item) for item in sorted(depths.items())
+        ],
+        "adjoint_intersection_weight_partition_histogram": [
+            [list(partition), count]
+            for partition, count in sorted(
+                Counter(
+                    tuple(sorted(weights[i] for i in indices))
+                    for indices in adjoint_blocks.values()
+                ).items()
+            )
         ],
     }
 
@@ -240,6 +272,54 @@ def build_certificate() -> dict[str, object]:
         raise AssertionError("four-point U fibre is not the affine chart")
     if infinity["points"] != [[0, 1, 4]]:
         raise AssertionError("singleton U fibre is not the infinity chart")
+    if len(affine["ledger_digests"]) != 4:
+        raise AssertionError("strict adjoint incidence does not separate the affine U fibre")
+    if len({str(record["ledger_digest"]) for record in generic}) != 5:
+        raise AssertionError("strict adjoint incidence does not separate the generic stratum")
+    affine_records = [
+        record for record in generic if record["added_point"][0] == 1
+    ]
+    partition_counters = [
+        Counter(
+            {
+                tuple(partition): count
+                for partition, count in record["universal_incidence_ledger"][
+                    "adjoint_intersection_weight_partition_histogram"
+                ]
+            }
+        )
+        for record in affine_records
+    ]
+    partition_types = sorted(set().union(*partition_counters))
+    partition_differences = [
+        [
+            counter[partition] - partition_counters[0][partition]
+            for partition in partition_types
+        ]
+        for counter in partition_counters[1:]
+    ]
+    partition_defect_rank = rational_rank(partition_differences)
+    if len(partition_types) != 20 or partition_defect_rank != 3:
+        raise AssertionError("unexpected strict-partition defect space")
+    depth_pushforwards = {
+        tuple(
+            sorted(
+                Counter(
+                    {
+                        sum(partition): sum(
+                            count
+                            for other, count in counter.items()
+                            if sum(other) == sum(partition)
+                        )
+                        for partition in counter
+                    }
+                ).items()
+            )
+        )
+        for counter in partition_counters
+    }
+    if len(depth_pushforwards) != 1:
+        raise AssertionError("strict partitions do not push forward to one depth histogram")
 
     calibration_points = ((1, 3, 5), (1, 3, 6))
     calibration = [
@@ -278,7 +358,7 @@ def build_certificate() -> dict[str, object]:
         raise AssertionError("unexpected calibration C430 pattern")
 
     return {
-        "schema": "c419-fixed-incidence-moduli-v1",
+        "schema": "c419-fixed-incidence-moduli-v2",
         "field": "F_7",
         "normalization": {
             "base_points": [list(point) for point in base],
@@ -312,6 +392,11 @@ def build_certificate() -> dict[str, object]:
                 "fixed-matroid stratum into the infinity singleton and the four affine points; "
                 "P is constant on both fixed-U strata"
             ),
+            "strict_incidence_refinement": (
+                "the adjoint-intersection weight-partition histogram has four distinct "
+                "values on the affine U fibre and five on the whole generic stratum; "
+                "each strict incidence-preserving rational subcell is a singleton"
+            ),
         },
         "C430_pattern": {
             "generic_fixed_incidence_stratum": c430,
@@ -343,15 +428,19 @@ def build_certificate() -> dict[str, object]:
             ),
         },
         "ej_closeout": {
-            "syndrome_identity": (
-                "for Q outside B, mu(Q)=w_A(Q)+epsilon(Q), where "
-                "w_A(Q)=#external lines through Q-1 and epsilon marks the two "
-                "fixed three-point lines"
+            "general_syndrome_identity": (
+                "for |B|=n in PG(2,q) and Q outside B, "
+                "mu_B(Q)=w_A(Q)+n-q+sum_{s>=3} binom(s-1,2)n_s(Q), "
+                "where w_A(Q)=n_0(Q)-1"
             ),
             "proof": (
-                "writing n_s for the number of lines through Q meeting B in s points, "
-                "sum n_s=8 and sum s*n_s=7 give n_0-1=n_2+2*n_3, while "
-                "mu=n_2+3*n_3 and epsilon=n_3"
+                "sum n_s=q+1 and sum s*n_s=n give "
+                "w_A=q-n+sum_{s>=2}(s-1)n_s; subtract this from "
+                "mu=sum_{s>=2}binom(s,2)n_s"
+            ),
+            "specialization": (
+                "here n=q=7 and only the two fixed triple lines have s>=3, "
+                "so mu(Q)=w_A(Q)+epsilon(Q)"
             ),
             "fixed_U_fibre_consequence": (
                 "the stored marked weight histograms are singleton-valued on both "
@@ -361,11 +450,52 @@ def build_certificate() -> dict[str, object]:
                 "why the pointed constancy check can be read directly at the "
                 "external-arrangement/marked-triple-line interface"
             ),
-            "open_mystery": (
-                "the frozen six-point base has trivial projective stabilizer, so no "
-                "base symmetry currently explains why all four affine realizations "
-                "share the complete U and marked-weight ledgers"
+            "strict_refinement": (
+                "U remembers only the sum of weights at each adjoint intersection; "
+                "retaining the full weight partition separates all four affine realizations"
             ),
+            "strict_partition_defect": {
+                "partition_type_count": len(partition_types),
+                "affine_difference_rank_over_Q": partition_defect_rank,
+                "common_pushforward": "partition -> sum(partition)",
+                "interpretation": (
+                    "the four affine realizations span a three-dimensional realized "
+                    "defect space killed by the depth-sum compression and silent for P"
+                ),
+            },
+            "open_mystery": (
+                "the exact compensation that makes four different weight-partition "
+                "histograms collapse to one depth-sum histogram is not yet conceptual"
+            ),
+        },
+        "tt_audit": {
+            "scheme_boundary": (
+                "the proved stratum is the F_7-rational Frobenius locus after determinant "
+                "saturation, not a positive-dimensional algebraic-closure moduli theorem"
+            ),
+            "incidence_boundary": (
+                "fixed U means fixed incidence aggregates consumed by weighted depth, "
+                "not fixed full adjoint incidence; the strict partition refinement "
+                "separates every rational realization"
+            ),
+            "claim_survives": (
+                "the bounded negative strengthens: strict incidence-preserving cells are "
+                "singletons, while even the coarser four-point U cell is P-constant"
+            ),
+            "opportunities": [
+                (
+                    "use the general syndrome identity as a rank-three pretest: "
+                    "for q-point arcs mu=w_A exactly, and higher sections are the only correction"
+                ),
+                (
+                    "offer the adjoint weight-partition histogram as the cheapest strict "
+                    "refinement of U before any new moduli or field census"
+                ),
+                (
+                    "hand the correction term sum binom(s-1,2)n_s to C431 as the exact "
+                    "higher-section obstruction that a rank-four analogue must retain"
+                ),
+            ],
         },
         "result": {
             "status": "BOUNDED_NEGATIVE",
