@@ -253,7 +253,17 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 - **C428 queued after C222 and the spine:** weighted 2-adjoint arrangement-code closure with a
   separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. It consumes C222's committed
   terminal without touching `ReflectionArrangementDecoding.lean`.
-- **C320 is the release-blocking trust-ledger capstone:** after every paper-adopted C420--C428 slice,
+- **The Paper-1 close now has an explicit Lean expansion:** C494 checks C434's B3/H3 middle
+  information lattice; C503 formalizes the rank-three arithmetic-gluing/split--inert theorem; C504
+  owns the C452/C464/C469/C470 Witt--Hadamard--Mathieu finite capstone; C505 assembles the
+  C417/C448/C473/C474/C480/C486/C487 torsor-Rosetta close; C506 owns the bounded finite
+  survival/erasure negatives and mod-40 law; and C507 owns direct finite witnesses for the
+  interface-heavy theta/Arf, scoped Weil-Weyl, quantum-erasure, and conditionally adopted C471
+  rows.  Their exact trust and exclusion boundaries are frozen in
+  [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)
+  and their queued task briefs.  C503--C507 were reserved as one block in commit `5fa7dc97`.
+- **C320 is the release-blocking trust-ledger capstone:** after every paper-adopted C420--C428,
+  C494, and C503--C507 slice,
   it must publish one claim-by-claim ledger with exact theorem/gate/axiom evidence, external
   certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
   replacement-spine claim is called Lean-formalized before this reconciliation and independent

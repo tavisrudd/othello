@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-20
 
-**Status:** red-team approved and queued as C420--C428
+**Status:** C420--C427 complete; C428, C494, and C503--C507 queued; C320 remains the
+release-blocking reconciliation capstone
 
 ## Decision and scope
 
@@ -257,7 +258,51 @@ downstream corollary surfaces, not prerequisites.
 separate `RelativeConicArcs.Gates.ClebschWeightedAdjoint` gate. Hand its verification delta to
 C320; do not duplicate the trust manifest.
 
-## Exact task ownership before ID allocation
+## Paper-1 close expansion (revision 2026-07-22)
+
+The shipping manuscript now includes substantially more than the C406+C411 replacement spine.
+C420--C428 do not cover the adopted arithmetic-gluing, Witt--Hadamard--Mathieu,
+survival/forgetting, and torsor-Rosetta closing claims.  The following slices are therefore
+release requirements, not optional sequel formalization:
+
+- **C494 / information-lattice add-on:** kernel-check C434's B3/H3 middle-stratum fibre identity
+  and `1 ⊂ 2 ⊂ 6 ⊂ 2q` invariant-subalgebra tower.  This sharpens the existing depth-profile
+  interface without changing the replacement spine.
+- **C503 / F10 — rank-three arithmetic gluing:** formalize the exact finite reductions and
+  sheet actions underlying C441, C442/C458, C444, C445, C449, and C460.  The exit is the
+  split/inert A3/B3/H3 theorem at the explicitly frozen primes, with classical group names and
+  orthogonal/spinor terminology isolated behind named interfaces rather than inferred from
+  cardinalities.
+- **C504 / F11 — Witt--Hadamard--Mathieu capstone:** translate the C452/C464/C469/C470 certificate
+  chain into sound checker leaves for the QR/design incidence, full-support points, complete
+  secant shadow, parity extension, Hadamard identity, `S(5,6,12)`, two `M11` parents, frozen
+  `PSL_2(11)` intersection, and outer row/column hinge.  Named Mathieu and nonsplit-cover
+  statements require either explicit finite-group terminals or a separately declared classical
+  naming boundary; GAP output is never imported as an axiom.
+- **C505 / F12 — torsor-Rosetta close:** define one reusable free-`C2` torsor interface and
+  formalize the finite dictionaries from C417/C448/C473/C474/C480/C486/C487.  The gate must expose
+  the `T_11` bridge, one sign-character class with three readouts, the split/inert rank-three
+  trichotomy, forced-outer `M12` clause at its proved boundary, and the characteristic-zero
+  `Spec Q(sqrt5)` reduction row.  It consumes F10 and F11 and must not claim an absolute-Galois
+  classification or an integral cubic lift.
+- **C506 / F13 — finite survival/erasure boundaries:** formalize the bounded arithmetic and
+  linear-algebra cores of C443/C461, C450, C453, and C454: the failed permitted integral-weight
+  routes, absence of the proposed small-module/five-space maps, and the exact mod-40 visibility
+  law.  Literature names and ordinary character interpretations remain explicit inputs.
+- **C507 / F14 — mixed passage interfaces:** formalize only the direct finite witnesses used by
+  the C451 theta/Arf, C455 scoped Weil-Weyl, C456/C467 quantum-erasure, and optional C471
+  Hadamard-degeneration Paper-1 rows.  Superspeciality, Weil normalization, arbitrary-LU
+  classification, and Golay/Lagrangian naming stay external unless their exact library interfaces
+  land.  The gate states the finite kernels, matrices, actions, and equivalence witnesses without
+  allowing the surrounding semantics to inherit a Lean label.
+
+The exact source-to-claim boundary for these slices is frozen in their task briefs.  C469/C470 and
+C480/C486/C487 postdate the earlier proof/evidence audit; their reports, replay scripts, canonical
+certificates, manifests, and explicit trusted-boundary sections are the controlling evidence until
+the new Lean leaves and C320 reconcile them.  A green replay is evidence for a finite claim, not a
+substitute for a checker-soundness theorem.
+
+## Exact task ownership
 
 All paths are relative to the repository root. The allocator reserved C420--C428 as one contiguous
 `[clebsch]` block before any ID was placed in this document or the live queue.
@@ -273,6 +318,12 @@ All paths are relative to the repository root. The allocator reserved C420--C428
 | C426 / F7 | `lean/RelativeConicArcs/ClebschSchemeFourierData.lean`; `lean/RelativeConicArcs/ClebschSchemeFourier.lean`; optional `lean/RelativeConicArcs/ClebschSchemeIntersectionTensor.lean`; `lean/RelativeConicArcs/Gates/ClebschSchemeFourier.lean` | `notes/2026-07-20-c426-clebsch-scheme-fourier-lean.md`, `.py`, `.json`, and `.sha256` with that same stem; generated mathematical data use stable semantic provenance without task IDs in Lean | imports existing `RelativeConicArcs.ClebschGatewayA5FourierPhase`; mandatory full-trust exits are the scalar-line sum, `P=Q`, `P²=1331I`, multiplicity--valency equality, Fourier self-duality, and primitivity; intersection/Krein equality and the separate 877-fusion census remain exact external certificates unless their own checker leaves actually land |
 | C427 / F8 | `lean/RelativeConicArcs/ClebschSchemeChiralityData.lean`; `lean/RelativeConicArcs/ClebschSchemeChirality.lean`; `lean/RelativeConicArcs/Gates/ClebschReplacementSpine.lean` | `notes/2026-07-20-c427-clebsch-scheme-chirality-lean.md`, `.py`, `.json`, and `.sha256` with that same stem | imports F6/F7 and existing `RelativeConicArcs.Gates.ClebschGateway`; exits through six intrinsic blocks, unordered `10+10`, full/no-outer-lift evidence at its declared trust boundary, and the replacement-spine aggregate |
 | C428 / F9 | `lean/RelativeConicArcs/ArrangementWeightedAdjoint.lean`; `lean/RelativeConicArcs/ClebschWeightedAdjointB3.lean`; `lean/RelativeConicArcs/Gates/ClebschWeightedAdjoint.lean` | `notes/2026-07-20-c428-clebsch-weighted-adjoint-lean.md`; add same-stem `.py/.json/.sha256` only for the B3 leaf | imports F2, existing `RelativeConicArcs.ClebschGatewayCoxeterPhase`, and C222's committed `RelativeConicArcs.ReflectionArrangementDecoding` terminal; exits through weighted depth, punctured enumerator, Hamming/distance theorem, and all three C399 specializations |
+| C494 / add-on | `lean/RelativeConicArcs/ClebschInformationLatticeB3.lean`; `lean/RelativeConicArcs/ClebschInformationLatticeH3.lean`; `lean/RelativeConicArcs/Gates/ClebschInformationLattice.lean` | `notes/2026-07-22-c494-c434-information-lattice-lean.md`; generated data consume the frozen C434 bundle without modifying it | imports F6 and the frozen C434 certificate; exits through the clause-2 fibre identity and `1 ⊂ 2 ⊂ 6 ⊂ 2q` tower at B3/H3 only |
+| C503 / F10 | `lean/RelativeConicArcs/ClebschArithmeticGluingData.lean`; `lean/RelativeConicArcs/ClebschArithmeticGluing.lean`; `lean/RelativeConicArcs/Gates/ClebschArithmeticGluing.lean` | `notes/2026-07-22-c503-clebsch-arithmetic-gluing-lean.md`; same-stem replay bundle only if a new normalized certificate is required | imports F5/F8 and frozen C441/C442/C444/C445/C449/C458/C460 data; exits through exact sheet swaps and the bounded split/inert A3/B3/H3 theorem |
+| C504 / F11 | `lean/RelativeConicArcs/ClebschWittHadamardData.lean`; `lean/RelativeConicArcs/ClebschWittHadamard.lean`; `lean/RelativeConicArcs/Gates/ClebschWittHadamard.lean` | `notes/2026-07-22-c504-clebsch-witt-hadamard-lean.md`; consumes hash-pinned C452/C464/C469/C470 bundles | imports the existing q=11 code and matching APIs; exits through the exact code/design/secant/Hadamard statements and the explicitly bounded group-action/outer-hinge interface |
+| C505 / F12 | `lean/RelativeConicArcs/ClebschTorsorRosettaData.lean`; `lean/RelativeConicArcs/ClebschTorsorRosetta.lean`; `lean/RelativeConicArcs/Gates/ClebschTorsorRosetta.lean` | `notes/2026-07-22-c505-clebsch-torsor-rosetta-lean.md`; consumes C417/C448/C473/C474/C480/C486/C487 bundles | imports F8/F10/F11; exits through one free-`C2` torsor, its certified finite dictionaries, no-section/sign-character theorem, rank-three trichotomy, outer hinge, and characteristic-zero reduction row |
+| C506 / F13 | `lean/RelativeConicArcs/ClebschSurvivalBoundaryData.lean`; `lean/RelativeConicArcs/ClebschSurvivalBoundary.lean`; `lean/RelativeConicArcs/Gates/ClebschSurvivalBoundary.lean` | `notes/2026-07-22-c506-clebsch-survival-boundaries-lean.md`; consumes C443/C450/C453/C454/C461 bundles | exits through exact finite negative searches and the mod-40 law; no ordinary-character, integral-cubic, or universal-Weil upgrade |
+| C507 / F14 | `lean/RelativeConicArcs/ClebschPassageInterfacesData.lean`; `lean/RelativeConicArcs/ClebschPassageInterfaces.lean`; `lean/RelativeConicArcs/Gates/ClebschPassageInterfaces.lean` | `notes/2026-07-22-c507-clebsch-passage-interfaces-lean.md`; consumes only the adopted C451/C455/C456/C467 and optional C471 finite witnesses | exits through direct finite kernels, matrices, actions, and equivalence witnesses; semantic names remain explicit cited inputs unless separately formalized |
 
 Every shorthand gate above is under `lean/RelativeConicArcs/Gates/`. Generated data modules are
 definitions-only; transport and paper theorems live downstream. If implementation discovers that a
@@ -281,7 +332,8 @@ plan before generation.
 
 ## Campaign trust-ledger capstone — C320
 
-C320 is a required successor to all paper-adopted C420--C428 slices, not optional housekeeping. It
+C320 is a required successor to all paper-adopted C420--C428 slices and the C494/C503--C507
+expansion, not optional housekeeping. It
 creates the Clebsch per-paper trust manifest and one verify-all entry point. The campaign and
 manuscript release gate remain open until that ledger is complete and independently reviewed.
 
@@ -298,11 +350,11 @@ The ledger has one row per published claim, including separately stated subclaim
   label; and
 - the exact verify-all command or durable entry point that checks the claimed route.
 
-Each C420--C428 task document must end with its own copied closing-review checklist and a proposed
+Each campaign task document must end with its own copied closing-review checklist and a proposed
 ledger delta. C320 reconciles those deltas against the actual gates; it does not infer trust from a
-task verdict, module name, or aggregate import.
+task verdict, module name, certificate verdict, or aggregate import.
 
-For every C420--C428 task, completion and archival occur only after this exact sequence: finish the
+For every campaign task, completion and archival occur only after this exact sequence: finish the
 artifact and durable report; complete the local checklist and proposed ledger delta; explicitly
 request an independent referee-style review; record its findings and `GO`/`NO-GO`; fix every issue
 or narrow the claimed exit; request post-fix review; and obtain a recorded final `GO`. Keep the live
@@ -334,6 +386,14 @@ F1 -------------------------------> F6 -/
 existing C378/C379/C380 -----------------------> F6/F8
 existing C398/C399/C400 --------------> F7 -> F8; and -> F9
 C222 + F2 -------------------------------------> F9 [separate gate]
+F6 + C434 certificate -------------------------> C494 [separate add-on gate]
+F5/F8 + C441--C460 finite inputs --------------> F10
+C452/C464/C469/C470 finite inputs -------------> F11
+F8 + F10 + F11 + C417/C448/C473/C474
+                   + C480/C486/C487 -----------> F12 [Paper-1 close gate]
+C443/C450/C453/C454/C461 ----------------------> F13
+C451/C455/C456/C467 (+ adopted C471 shadow) ---> F14
+F9 + C494 + F10--F14 --------------------------> C320
 ```
 
 Dispatch is serial at the dependency level but permits bounded parallel work after foundations:

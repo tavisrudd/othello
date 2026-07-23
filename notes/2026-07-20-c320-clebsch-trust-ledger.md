@@ -31,7 +31,12 @@ one row per published claim and separately stated subclaim. Each row records:
 The ledger must reconcile the actual final gates rather than trust task verdicts or module names.
 It must explicitly preserve known mixed boundaries, including C222 compactness stops, C421's bounded
 `Fin 4` connectivity, C424's possible H3 fallback, C426's external-by-default intersection/Krein and
-fusion clauses, C427's external rank-16/automorphism clauses, and any later review disposition.
+fusion clauses, C427's external rank-16/automorphism clauses, C494's bounded B3/H3-only scope,
+C503's named-group/spinor interfaces, C504's classical Mathieu/cover naming boundary, C505's
+reduction-only characteristic-zero identification and excluded absolute-`H^1`/integral-cubic
+claims, C506's exact searched domains, C507's external superspecial/Weil/LU/Golay semantics, and
+any later review disposition. C320 starts only after C428, C494, and C503--C507 have supplied final
+reviewed ledger deltas, or after the manuscript has explicitly removed the corresponding claims.
 
 ## Referee-facing standards and guarded failure modes
 
