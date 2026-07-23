@@ -195,7 +195,8 @@ single-file elaboration of the new terminal passes.  Build queue
 then passed the exact trace-only aggregate gate.  Peak RSS was `1,913,600` KiB for the terminal and
 `1,809,852` KiB for the gate.  All 17 selected C527 terminals report exactly `propext`,
 `Classical.choice`, and `Quot.sound`; no `sorryAx`, native-decision axiom, project-local axiom, or
-opaque external oracle occurs.
+opaque external oracle occurs.  The validated artifact and editorial bundle is pinned at
+`050120356688242b0872b928e0973b53e7ce4296`.
 
 The new Lean source is itself the compact kernel-checked certificate, so no generated data file is
 introduced.  C433 and C526 supply independent implementations and canonical JSON evidence for the
@@ -231,5 +232,5 @@ The `ej`+`tt` pass exposed one cheap strengthening and one firm stop.
 - [x] C433/C526 primary and independent replays pass.
 - [x] Import-only gate build and exact terminal axiom audit pass.
 - [x] Source hashes are recorded.
-- [ ] Final validated commit is recorded.
+- [x] Final validated commit is recorded.
 - [ ] Independent referee review returns `GO`; any repairs receive post-fix review.
