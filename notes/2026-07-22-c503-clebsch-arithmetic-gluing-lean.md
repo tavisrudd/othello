@@ -11,7 +11,7 @@ calls, review dispositions, and the proposed C320 ledger delta.
 ## Required outcome and trust route
 
 Formalize the bounded arithmetic-gluing theorem used by Paper 1 from C441, C442/C458, C444, C445,
-C449, and C460: the frozen A3/B3/H3 reductions, their sheet or fused-fibre actions, the q=11 golden
+and C449: the frozen A3/B3/H3 reductions, their sheet or fused-fibre actions, the q=11 golden
 matching orbit and q=7 silver pair, the stated stabilizer/intersection facts, and the split/inert
 trichotomy at `q=5,7,11`.
 
@@ -60,23 +60,27 @@ The owned Lean slice now reconstructs `PGL₂(F_q)` from normalized nonsingular 
 - the reduced affine vertex polynomials `X^q-X` vanish at every field element for `q=5,7,11`;
 - the executable matching-edge lists encode exactly the frozen unordered matchings and define
   fixed-point-free involutions on the complete projective lines;
-- the `A3` marker is fused; `x↦-x` exchanges the two `B3` matchings; and
+- both `A3` reduction tables induce the same marker matching; the two `B3` reduction tables induce
+  distinct matchings exchanged by `x↦-x`; and
   `(x-1)/(x+1)` exchanges the two `H3` matchings;
-- the Coxeter-square multipliers have the literal `1+1+(q-1)/2+(q-1)/2` orbit partitions;
+- all four Coxeter-square multipliers have the literal `1+1+(q-1)/2+(q-1)/2` orbit partitions,
+  the required order, fixed poles, and square-determinant diagonal representative;
 - the normalized projective group orders are `120/60`, `336/168`, and `1320/660`;
 - the `A3` stabilizer has order 24, square-determinant intersection 12, and one five-element orbit
   under both projective groups;
 - the two `B3` stabilizers have orders `24,24`, intersection 6, lie in the square-determinant
   subgroup, and give disjoint `7+7` halves of one 14-element orbit;
-- the normalized `H3` certificate has two 60-entry stabilizer lists with intersection 12 inside
+- the normalized `H3` certificate has two 60-entry matrix lists with intersection 12 inside
   the square-determinant subgroup and 22 distinct transported signatures split into disjoint
-  `11+11` halves; the adjacent generator/replay verifies stabilizer semantics, coset completeness,
-  and 660-element generation;
+  `11+11` halves; only the adjacent generator/replay—not the Lean theorem—calls these complete
+  stabilizers/coset representatives and verifies 660-element generation;
 - the silver and golden transporters have nonsquare determinant.
 
-The bounded exit is therefore the exact `A3` fused / `B3` split pair / `H3` split pair row.  The
-module also reuses F8's equal-kernel uniqueness theorem for abstract two-sheet characters, while
-requiring any concrete group-action identification to be supplied separately.
+The bounded exit assembles the exact root checks, reduction-derived matchings, their distinctness,
+sheet exchanges, and outer transporters for the `A3` fused / `B3` split pair / `H3` split pair row.
+The module re-exports F5's relative-invariant stabilizer interface and reuses F8's equal-kernel
+uniqueness theorem.  It does not identify either abstract interface with these finite actions;
+that concrete group-action bridge is explicitly outside this bounded result.
 
 ## Exact public surface
 
@@ -93,16 +97,19 @@ reduced_vertex_polynomials_split
 matchingEdgeLists_encode_frozen_matchings
 frozen_matching_mates_are_fixedPointFree_involutions
 a3_matching_is_fused
+b3_reductions_induce_split_matchings
 silverTransporter_swaps_matchings
 goldenTransporter_swaps_matchings
 coxeterSquare_orbits
+coxeterSquare_orders_and_square_determinants
 projective_group_orders
 a3_fused_stabilizer_and_orbit
 b3_split_stabilizers_and_orbits
-h3_split_stabilizers_and_orbits
+h3_certificate_literal_checks
 h3_stabilizer_generation_word_data
 transporters_are_outer
 rankThree_split_fused_trichotomy
+stabilizer_eq_character_kernel
 sheetCharacter_eq_of_kernel_eq
 ```
 
@@ -117,9 +124,10 @@ A normalized certificate was necessary for the `H3` leaves after direct kernel e
 the measured memory envelope.  The same-stem Python generator emits schema
 `clebsch-arithmetic-gluing-lean-v1`, the canonical JSON, the generated certificate block in
 `ClebschArithmeticGluingData.lean`, and a three-entry SHA-256 manifest.  Its `--check` and
-`sha256sum -c` commands are green.  It hash-records the committed C441, C442, C444, C445, C449,
-C458, and C460 JSON inputs.  Those seven primary `--check` commands all returned `OK`; the
-independent C444, C445, C449, C458, and C460 replay programs also returned `OK`.
+`sha256sum -c` commands are green.  It schema-extracts and compares all load-bearing vertex,
+matching, transporter, orbit, order, and frame constants from the committed C441, C442, C444,
+C445, C449, and C458 JSON inputs, in addition to hash-recording them.  C460 is not a formal source:
+its triangle/group-name interpretation is outside the Lean conclusion.
 
 The correspondence is:
 
@@ -128,10 +136,10 @@ The correspondence is:
 | vertex tables and full projective-line images | C441 |
 | golden base/conjugate matchings and sheet frame | C442/C458 |
 | `A3/B3` matching rows, silver transporter, split/fused outcome | C444 |
-| `H3` stabilizers, intersection, orbit split, closure, outer transporter | C445 |
-| Coxeter-square multipliers and moving orbits | C449 |
+| `H3` certificate tables and matching-level outer transporter | C445 plus normalized generator/replay |
+| Coxeter-square multipliers, poles, orders, square determinants, and moving orbits | C449 |
 | common finite golden point set and matching-level gluing | C458 |
-| triangle/group-name interpretation only | C460, retained outside the Lean conclusion |
+| triangle/group-name interpretation | excluded; C460 is not consumed |
 
 `matchingEdgeLists_encode_frozen_matchings` is the checker-soundness seam between the executable
 edge-list representation and the unordered mathematical matchings.  For `H3`, Lean checks the
@@ -147,7 +155,7 @@ Evaluation of the coset and generation certificates is an explicit generator/rep
 | matchings are complete fixed-point-free involutions | kernel `decide` after edge-list/unordered-set equivalence |
 | projective group orders and square-determinant halves | exhaustive normalized-matrix reconstruction |
 | `A3/B3` stabilizers, intersections, and orbit splits | exhaustive Lean action on `P¹(F_q)`; no group name inferred |
-| `H3` stabilizer and orbit rows | Lean checks certificate cardinality/intersection/determinant and distinct `22=11+11` signatures; stabilizer semantics and coset completeness are generator/replay |
+| `H3` certificate table rows | Lean checks cardinality/intersection/determinant and distinct `22=11+11` signatures; stabilizer semantics and coset completeness are generator/replay |
 | `H3` generation | Lean checks the 108-generator union and 660 bounded word rows; word evaluation and coverage of the 660-element subgroup are generator/replay |
 | abstract two-sheet character uniqueness | reused F8 theorem from equal kernels |
 | `S4/A5/A4/S3` names | cited-input boundary; absent from Lean conclusions |
@@ -183,22 +191,33 @@ Exact current-source validation:
 
 - normalized generator `--check`: `CHECK OK`;
 - three-entry SHA-256 manifest: all `OK`;
-- all seven frozen primary checks and five available independent replays: `OK`;
-- data/kernel shard: green (`1:16.68`, peak 4,709,276 kB in
-  `run-20260723-072106-fbec7e83`; the current generated data were subsequently confirmed by the
-  exact gate trace);
-- `RelativeConicArcs.ClebschArithmeticGluing`: green (`3:58.23`, peak 6,602,308 kB,
-  `run-20260723-081451-db0b801b`);
-- final current-source `RelativeConicArcs.Gates.ClebschArithmeticGluing`: green (`1:20.72`,
-  peak 4,476,296 kB, `run-20260723-082529-04f3c85e`) with the trace-only aggregate gate.
+- all seven frozen primary checks and five available independent replays, including the ancillary
+  excluded C460 check: `OK`;
+- current data/kernel shard: green (`0:46.81`, peak 5,117,036 kB);
+- current `RelativeConicArcs.ClebschArithmeticGluing`: green;
+- final current-source `RelativeConicArcs.Gates.ClebschArithmeticGluing`: green (`0:48.05`,
+  peak 3,308,032 kB) with the trace-only aggregate gate.
 
-The gate audits 19 terminals.  One uses `[propext]`; the other 18 use exactly
+The gate audits 23 terminals.  One uses `[propext]`; the other 22 use exactly
 `[propext, Classical.choice, Quot.sound]`.  No terminal uses a project axiom, `sorryAx`, or a
 native-evaluation axiom.
 
 ## Independent review
 
-Pending user-authorized independent review after the exact gate passes.
+The first user-authorized independent review blocked on five issues.  The post-review repair:
+
+1. derives the `A3/B3` matchings from antipodal index pairs in the frozen reduction tables and
+   makes the closing theorem assemble roots, induced matchings, distinctness, swaps, and outer
+   transporters;
+2. renames and narrows the `H3` theorem/gate/report to literal certificate-table checks, leaving
+   stabilizer/coset/word completeness solely at the exact generator/replay boundary;
+3. adds the second `H3` multiplier, all poles, exact orders, and square-determinant membership;
+4. schema-extracts and compares every load-bearing C441/C442/C444/C445/C449/C458 literal and
+   removes C460 from the formal input manifest; and
+5. re-exports the F5 stabilizer interface, retains the F8 equality interface, and explicitly
+   excludes their concrete identification with the bounded finite actions.
+
+Post-fix review is pending on the exact replacement commit.
 
 ## Proposed C320 ledger delta
 

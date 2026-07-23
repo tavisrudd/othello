@@ -201,6 +201,18 @@ def matchingFromEdges (edges : List (ProjectivePoint q × ProjectivePoint q)) :
     ProjectiveMatching q :=
   edges.foldl (fun matching e ↦ insert (edge e.1 e.2) matching) ∅
 
+/-- Read a matching from fixed pairs of positions in a reduced vertex list. -/
+def matchingFromReduction (vertices : List (ProjectivePoint q))
+    (pairs : List (Nat × Nat)) : ProjectiveMatching q :=
+  matchingFromEdges <| pairs.map fun ij ↦
+    (vertices.getD ij.1 none, vertices.getD ij.2 none)
+
+/-- Antipodal position pairs in the frozen `A3` vertex ordering. -/
+def a3AntipodalIndexPairs : List (Nat × Nat) := [(0, 1), (2, 3), (4, 5)]
+
+/-- Antipodal position pairs in the frozen `B3` vertex ordering. -/
+def b3AntipodalIndexPairs : List (Nat × Nat) := [(0, 1), (2, 5), (3, 7), (4, 6)]
+
 /-- The fixed enumeration `∞,0,1,...,q-1` of the projective line. -/
 def projectivePointList : List (ProjectivePoint q) :=
   none :: List.ofFn fun x : Fin q ↦ some x
@@ -314,10 +326,19 @@ theorem frozen_matching_mates_are_fixedPointFree_involutions :
         (matchingMate h3ConjugateMatchingEdges x) = x) := by
   decide
 
-/-- The two `A3` prime choices give the same unordered antipodal matching. -/
+/-- Both reduced `A3` vertex tables induce the frozen antipodal matching. -/
 theorem a3_matching_is_fused :
-    a3Matching =
-      {edge (some 0) none, edge (some 1) (some 4), edge (some 3) (some 2)} := by
+    matchingFromReduction (a3VertexReductions 0) a3AntipodalIndexPairs = a3Matching ∧
+    matchingFromReduction (a3VertexReductions 1) a3AntipodalIndexPairs = a3Matching := by
+  decide
+
+/-- The two reduced `B3` vertex tables induce the two distinct silver matchings. -/
+theorem b3_reductions_induce_split_matchings :
+    matchingFromReduction (b3VertexReductions 0) b3AntipodalIndexPairs =
+      b3NegativeMatching ∧
+    matchingFromReduction (b3VertexReductions 1) b3AntipodalIndexPairs =
+      b3PositiveMatching ∧
+    b3NegativeMatching ≠ b3PositiveMatching := by
   decide
 
 /-- The silver outer transporter exchanges the two `B3` matchings. -/
@@ -336,14 +357,38 @@ theorem goldenTransporter_swaps_matchings :
       matchingMate h3BaseMatchingEdges (projectiveAction goldenTransporter x)) := by
   decide
 
-/-- The split Coxeter-square action has two poles and the two displayed moving orbits. -/
+/-- The split Coxeter-square actions have the two fixed poles and all displayed moving
+orbits, including both characteristic-eleven multipliers. -/
 theorem coxeterSquare_orbits :
+    scalingOrbit (4 : Fin 5) none = {none} ∧
+    scalingOrbit (4 : Fin 5) (some 0) = {some 0} ∧
     scalingOrbit (4 : Fin 5) (some 1) = {some 1, some 4} ∧
     scalingOrbit (4 : Fin 5) (some 2) = {some 2, some 3} ∧
+    scalingOrbit (2 : Fin 7) none = {none} ∧
+    scalingOrbit (2 : Fin 7) (some 0) = {some 0} ∧
     scalingOrbit (2 : Fin 7) (some 1) = {some 1, some 2, some 4} ∧
     scalingOrbit (2 : Fin 7) (some 3) = {some 3, some 5, some 6} ∧
+    scalingOrbit (9 : Fin 11) none = {none} ∧
+    scalingOrbit (9 : Fin 11) (some 0) = {some 0} ∧
     scalingOrbit (9 : Fin 11) (some 1) = {some 1, some 3, some 4, some 5, some 9} ∧
-    scalingOrbit (9 : Fin 11) (some 2) = {some 2, some 6, some 7, some 8, some 10} := by
+    scalingOrbit (9 : Fin 11) (some 2) = {some 2, some 6, some 7, some 8, some 10} ∧
+    scalingOrbit (4 : Fin 11) none = {none} ∧
+    scalingOrbit (4 : Fin 11) (some 0) = {some 0} ∧
+    scalingOrbit (4 : Fin 11) (some 1) = {some 1, some 3, some 4, some 5, some 9} ∧
+    scalingOrbit (4 : Fin 11) (some 2) = {some 2, some 6, some 7, some 8, some 10} := by
+  decide
+
+/-- Each displayed multiplier has the required order and its diagonal projective matrix
+lies in the square-determinant subgroup. -/
+theorem coxeterSquare_orders_and_square_determinants :
+    (4 : Fin 5) ^ 2 = 1 ∧ (4 : Fin 5) ≠ 1 ∧
+    projectiveMatrix (1 : Fin 5) 0 0 4 ∈ psl ∧
+    (2 : Fin 7) ^ 3 = 1 ∧ (2 : Fin 7) ≠ 1 ∧
+    projectiveMatrix (1 : Fin 7) 0 0 4 ∈ psl ∧
+    (9 : Fin 11) ^ 5 = 1 ∧ (9 : Fin 11) ≠ 1 ∧
+    projectiveMatrix (1 : Fin 11) 0 0 5 ∈ psl ∧
+    (4 : Fin 11) ^ 5 = 1 ∧ (4 : Fin 11) ≠ 1 ∧
+    projectiveMatrix (1 : Fin 11) 0 0 3 ∈ psl := by
   decide
 
 /-- The normalized matrix enumerations have the expected projective group orders. -/

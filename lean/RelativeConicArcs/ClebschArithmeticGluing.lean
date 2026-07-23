@@ -12,9 +12,11 @@ of the relevant quadratic parameters, the matching sheet actions, the split Coxe
 orbits, and the finite projective stabilizer and gluing facts.
 
 Projective linear groups are reconstructed as normalized nonsingular `2 × 2` matrices.
-Consequently the group orders, matching orbits, stabilizers, intersections, and generated
-closures below are literal finite computations, rather than consequences inferred from an
-abstract group order.  The computations use kernel reduction through `decide`.
+Consequently the small-field group orders, matching orbits, and stabilizers below are literal
+finite computations, rather than consequences inferred from an abstract group order.  For the
+larger characteristic-eleven data, this module kernel-checks the literal table invariants stated
+below; semantic stabilizer, coset, and word-replay completeness remains the responsibility of the
+tracked certificate generator and its independent replay.
 
 The formal boundary is deliberately finite.  Names such as `S4`, `A5`, `A4`, and `S3`, as well
 as spinor-norm and number-field splitting terminology, are not conclusions of this module.
@@ -62,10 +64,11 @@ private theorem h3_signature_certificate :
         h3ConjugateMatchingEdges) := by
   decide
 
-/-- The two golden matching stabilizer certificates have order 60, intersect in order
-twelve, lie inside the square-determinant subgroup, and give 22 distinct transported
-signatures split into disjoint eleven-signature halves. -/
-theorem h3_split_stabilizers_and_orbits :
+/-- Literal checks on the two golden certificate tables: their sizes and intersection,
+square-determinant membership, and the distinct transported signatures supplied by the
+representative tables.  This theorem deliberately does not call the tables complete stabilizers
+or coset transversals. -/
+theorem h3_certificate_literal_checks :
     h3BaseStabilizerCertificate.length = 60 ∧
     h3ConjugateStabilizerCertificate.length = 60 ∧
     (h3BaseStabilizerCertificate.toFinset ∩
@@ -116,33 +119,46 @@ theorem transporters_are_outer :
     goldenTransporter ∈ pgl ∧ goldenTransporter ∉ psl := by
   decide
 
-/-! ## Bounded trichotomy and sheet-character interface -/
-
-/-- The three proved finite outcomes, without importing number-field terminology. -/
-inductive RankThreeReductionOutcome
-  | fused
-  | splitPair
-  deriving DecidableEq, Repr
-
-/-- The bounded `A3/B3/H3` reduction trichotomy at `q = 5,7,11`. -/
-def rankThreeReductionOutcome : Fin 3 → RankThreeReductionOutcome
-  | 0 => .fused
-  | 1 => .splitPair
-  | 2 => .splitPair
+/-! ## Bounded trichotomy and sheet-character interfaces -/
 
 /-- The exact bounded split/fused row: `A3` fuses, while `B3` and `H3` retain two
 projective matching fibres exchanged by an outer transporter. -/
 theorem rankThree_split_fused_trichotomy :
-    rankThreeReductionOutcome 0 = .fused ∧
-    rankThreeReductionOutcome 1 = .splitPair ∧
-    rankThreeReductionOutcome 2 = .splitPair ∧
-    a3Matching = a3Matching ∧
+    (¬ ∃ x : ZMod 5, x * x = 2) ∧
+    matchingFromReduction (a3VertexReductions 0) a3AntipodalIndexPairs = a3Matching ∧
+    matchingFromReduction (a3VertexReductions 1) a3AntipodalIndexPairs = a3Matching ∧
+    (Finset.univ.filter fun x : ZMod 7 ↦ x * x = 2) = {3, 4} ∧
+    matchingFromReduction (b3VertexReductions 0) b3AntipodalIndexPairs =
+      b3NegativeMatching ∧
+    matchingFromReduction (b3VertexReductions 1) b3AntipodalIndexPairs =
+      b3PositiveMatching ∧
+    b3NegativeMatching ≠ b3PositiveMatching ∧
     (∀ x, projectiveAction silverTransporter (matchingMate b3NegativeMatchingEdges x) =
       matchingMate b3PositiveMatchingEdges (projectiveAction silverTransporter x)) ∧
+    (Finset.univ.filter fun x : ZMod 11 ↦ x * x - x - 1 = 0) = {8, 4} ∧
+    h3BaseMatching ≠ h3ConjugateMatching ∧
     (∀ x, projectiveAction goldenTransporter (matchingMate h3BaseMatchingEdges x) =
-      matchingMate h3ConjugateMatchingEdges (projectiveAction goldenTransporter x)) := by
-  exact ⟨rfl, rfl, rfl, rfl,
-    silverTransporter_swaps_matchings.1, goldenTransporter_swaps_matchings.1⟩
+      matchingMate h3ConjugateMatchingEdges (projectiveAction goldenTransporter x)) ∧
+    silverTransporter ∉ psl ∧ goldenTransporter ∉ psl := by
+  exact ⟨a3_two_has_no_root, a3_matching_is_fused.1, a3_matching_is_fused.2,
+    b3_two_roots, b3_reductions_induce_split_matchings.1,
+    b3_reductions_induce_split_matchings.2.1,
+    b3_reductions_induce_split_matchings.2.2,
+    silverTransporter_swaps_matchings.1, h3_golden_roots, by decide,
+    goldenTransporter_swaps_matchings.1, transporters_are_outer.2.1,
+    transporters_are_outer.2.2.2⟩
+
+/-- Re-export the balanced-sheet relative-invariant stabilizer theorem used by subsequent
+concrete identifications.  This bounded arithmetic module supplies no such identification. -/
+theorem stabilizer_eq_character_kernel {G W K : Type*} [Group G] [Field K]
+    [AddCommGroup W] [Module K W]
+    (action : G → W →ₗ[K] W) (haction : ∀ g h, action (g * h) = (action g).comp (action h))
+    (hone : action 1 = LinearEquiv.refl K W) (chi : G →* Kˣ) (mu : W) (hmu : mu ≠ 0)
+    (htwo : (2 : K) ≠ 0) (hrelative : ∀ g, action g mu = chi g • mu)
+    (hpm : ∀ g, chi g = 1 ∨ chi g = -1) :
+    {g | action g mu = mu} = ↑(MonoidHom.ker chi) :=
+  ClebschBalancedSheets.stabilizer_eq_ker_of_relative_invariant
+    action haction hone chi mu hmu htwo hrelative hpm
 
 /-- Two abstract actions on a two-sheet set define the same sheet character when they
 have the same kernel.  Applying this reusable replacement-spine interface to the concrete
