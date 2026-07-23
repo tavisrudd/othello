@@ -218,11 +218,33 @@ count.) The Galois-closure of the degree-3 cover has arithmetic genus 1 by Riema
 (2·3−2 branch points, transposition monodromy), consistent with a genus-1/CM control of these two
 conditions; identifying that curve is the natural C500 follow-up.
 
+### 6.2 Why redundancy five has both perpetual families and sporadic accidents
+
+The §6.1 mechanism answers the structural question behind the whole C491/C499 arc: O± and the type-I
+sporadics both sit at an "order-3 / q mod 3" locus, yet O± is a deep-hole family for every q of the
+right residue while type-I is deep only at q ∈ {7,13,19}. The distinction is **deck-order-3 vs
+symmetry-order-3**:
+
+- **O± (cyclic stratum).** The order-3 structure is the *deck group* C₃ of the cover (two totally
+  ramified points, multiplier a cube root of unity). Deepness ⟺ the deck is irrational ⟺ a fixed
+  q mod 3 congruence — a *rigid* condition, so O± is **perpetual**. Concretely (C491, and re-observed
+  here) O⁻ has no split member for every q ≡ 1 mod 3 tested, 7 ≤ q ≤ 43.
+- **Type-I (S₃ stratum).** The order-3 structure is only a *symmetry* — the A₄ ⊃ C₃ of an
+  equianharmonic branch tetrad — while the deck group is S₃. Deepness ⟺ a Frobenius/point-count
+  condition on the two special orbits of the genus-1 S₃-closure (§6.1) — a *soft* condition that
+  Weil/Aubry–Perret forces to fail once q grows, so type-I is **sporadic**.
+
+Same "3" and the same residue class q ≡ 1 mod 3, but a congruence (perpetual) versus a point-count
+(sporadic). That is exactly why redundancy five is the first redundancy to exhibit *both* arithmetic
+families (T, S, O±, W) and irreducible sporadic accidents: the families live where an order-3 deck
+group makes deepness a congruence, and the sporadics live where an order-3 symmetry over an S₃ deck
+makes deepness a bounded-q count.
+
 Framing (for the C500 write-up, not task-owned here): the branch/ramification j-invariant of the
 Hankel pencil is a rational modulus on syndrome space that organizes the entire classification — T/S
-are its degenerate boundary, O± are j = 0 realized in the cyclic (C₃-monodromy) stratum, and the
-type-I sporadics are j = 0 realized in the S₃-monodromy stratum (same modulus, different deck group,
-different stabilizer). Logged to the discovery track as a paper-structure lead.
+are its degenerate boundary, O± are the order-3 *deck* locus (perpetual), and the type-I sporadics are
+the order-3 *symmetry* locus over an S₃ deck (sporadic). Logged to the discovery track as a
+paper-structure lead.
 
 ## 7. Evidence
 
@@ -264,6 +286,9 @@ Settled here:
 - *Why sporadic and not a family* — bounded-q accident (§6), with an exact mechanism (§6.1): only the
   two special A₄-orbits (dual tetrahedron, octahedron) can carry the split type, so type-I deepness is
   a finite Frobenius condition on two orbits and n₁₁₁ ∈ {0,4,6} never grows with q.
+- *Why redundancy five has both families and sporadics* (§6.2) — deck-order-3 (rigid congruence →
+  perpetual family, O±) versus symmetry-order-3 over an S₃ deck (soft point-count → sporadic, type-I);
+  same q ≡ 1 mod 3 residue, opposite fate. No open mystery remains.
 - *q = 11 type-II orbit is harmonic (j = 1728, μ = −1), not generic* — the harmonic tetrad's full
   symmetry is D₄, but only its V₄ preserves the cover, so the stabilizer stays V₄ (no C₄/D₄
   enhancement); noted, no open gap.
