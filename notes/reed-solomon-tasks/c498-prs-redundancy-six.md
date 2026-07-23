@@ -39,4 +39,24 @@ Pinned seeds (reuse from C491 search log, do NOT re-resolve by title):
 
 ## Status
 
-Entry-gate literature audit launched 2026-07-22. Mathematics blocked until NOT-PRE-EMPTED verdict.
+**Entry-gate literature audit PASSED (2026-07-22): NOT PRE-EMPTED.** Verdict + wording constraints in
+`notes/2026-07-22-c498-prs-redundancy-six-literature-audit.md` (synthesis, verdict-owning), backed by
+the three axis reports above. Mathematics clear to proceed. Key downstream constraints:
+
+- Split-member lemma is novel as stated but must engage Oyono–Ritzenthaler (`arXiv:1006.0873`, split
+  lines on smooth plane quartics, q≥127) and Cesaratto–Matera–Pérez (`arXiv:1408.7014`, totally-split
+  counts on linear families); cite Lang–Weil-surface machinery (Cafure–Matera, Ghorpade–Lachaud,
+  Charles–Poonen, Poonen, Aubry–Perret), don't re-derive.
+- Binary-quintic `F_q`-orbit classification and net-of-quartics classification do NOT exist — C498
+  must build both. Toolkit: KPP `arXiv:2312.07118` (+char-3 `arXiv:2508.11229`), Ishitsuka
+  `arXiv:2605.04935` (catalecticant-rank/Waring stratification; quintic space NOT coregular),
+  NRC nucleus `arXiv:1304.0088` (degree-5 nucleus is char 3).
+- Scope novelty to the deep-hole/orbit classification: the scalar covering radius ρ=5 is
+  Seroussi–Roth-known. Pin the floor/ceil threshold (q≥9 vs q≥11) against the SR 1986 original.
+- The q≤16 census does NOT verify the asymptotic split-member lemma (best explicit bound q≥127);
+  state the provable-threshold band once the surface bound is computed.
+- Keep "to our knowledge" qualified (MathSciNet NOT COVERED).
+
+Next math step: settle the entry lemma (split-member existence for trivial-gcd nets of binary
+quartics via Lang–Weil on the fiber-square surface), then the exceptional-net classification and the
+q≤16 census+replay harness.
