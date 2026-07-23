@@ -8,8 +8,9 @@
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
-`q >= min((n-4)(n+3)/2+1, 5(n-4))`, with deletion budget `3n-4`.  No technical successor is
-allocated; C500 remains release-gated.
+`q >= min((n-4)(n+3)/2+1, 5(n-4))`, with deletion budget `3n-4`.  C529 is next: it owns the
+level-specific Frobenius/deepness law on coherent characteristic-two Lucas carriers, with a stop
+at the first failure of representation stability.  C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -612,7 +613,9 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   discriminant obstruction, and C525 closes its ordered-Hessian replacement: the only nontrivial
   contained pullback is the persistent/Lucas union, with an effective genus-one slice outside it.
   A successor should be allocated only for a selected carrier-arithmetic family or fixed level;
-  no ambient census substitutes for that choice.
+  no ambient census substitutes for that choice.  C529 now owns the coherent characteristic-two
+  Lucas family and must either prove a binary-digit/Frobenius law or stop at its first intrinsic
+  level-dependent obstruction.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -640,6 +643,6 @@ history.
 
 ## Next command
 
-`go reed-solomon`
+`go C529`
 
-(No technical successor is allocated. C500 remains release-gated.)
+(C529 is next. C500 remains release-gated.)
