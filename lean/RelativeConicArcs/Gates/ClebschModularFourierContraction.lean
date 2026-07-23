@@ -1,0 +1,36 @@
+import RelativeConicArcs.ClebschModularFourierContraction
+import RelativeConicArcs.Gates.ClebschDoubleCosetDepth
+import RelativeConicArcs.Gates.ClebschSchemeFourier
+
+/-!
+# Import-only gate for the characteristic-eleven modular Fourier contraction
+
+This gate exports the exact four-dimensional divided-Fourier contraction, its weighted depth-plane
+factorization, complementary projectors, valency self-adjointness, and coordinate Lagrangian
+certificate.  It also exports the projective rigidity of the target metric-plus-ordered-flag
+package and the obstruction separating that flag from every diagonal source pairing in the
+displayed polarization space.
+
+The imported depth and Fourier gates retain their own external geometric and association-scheme
+boundaries.  This gate does not identify the finite matrices with a general Fourier transform,
+prove a general modular representation or Tate-duality theorem, or construct a source-to-target
+isometry.
+-/
+
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.eleven_smul_dividedFourierInt
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.depthMatrix_values
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.depthMatrix_socle
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.depthMatrix_kernel
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.dividedFourier_sq
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.contraction_sq
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.contraction_identity
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.depthBasis_split
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.depthMatrix_factorization
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.complementary_projectors
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.mem_range_dividedFourier_iff
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.dividedFourier_selfAdjoint
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.radicalBasis_lagrangian_certificate
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.targetFlag_projectivelyRigid
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.targetFlag_crossPairing
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.sourceFlag_crossPairing_zero
+#print axioms RelativeConicArcs.ClebschModularFourierContraction.source_target_flag_orbits_disjoint

@@ -217,10 +217,12 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
 
 ## Replacement-spine Lean campaign
 
-- **C527 queued after C526 — Paper-2 modular contraction package:** consume C433's divided-Fourier
-  contraction, valency-metric rigidity, and C526's final source-Tate pairing disposition as one
-  local Modular Gateway theorem/boundary block plus a compact import-only Lean gate.  It does not
-  widen Paper 1, draft all of Paper 2, or formalize general Brauer/Tate theory.  Task brief:
+- **C527 implemented and validated; independent review pending — Paper-2 modular contraction
+  package:** C433's divided-Fourier contraction and valency/flag rigidity are packaged with C526's
+  negative source-Tate flag-orbit obstruction as one local Modular Gateway theorem/boundary block.
+  The compact import-only Lean gate checks 17 terminals on standard axioms and preserves the
+  C425/C426 external-semantics boundary.  It does not widen Paper 1, draft all of Paper 2, or
+  formalize general Brauer/Tate theory.  Report and proposed C320 delta:
   [`2026-07-23-c527-modular-contraction-paper-lean-packaging.md`](../2026-07-23-c527-modular-contraction-paper-lean-packaging.md).
 - **C420 complete (F1 foundation, reported 2026-07-20):** the signed moment/trade foundation is
   landed and green as `RelativeConicArcs.ClebschMomentTrade` with the import-only gate

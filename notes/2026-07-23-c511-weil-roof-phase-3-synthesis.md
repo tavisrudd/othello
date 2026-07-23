@@ -28,6 +28,12 @@ module; the invariant quadratic/Maslov-refinement route dies at its first kill-s
 literal Witt/Maslov index of the signed central word is zero.  Paper 2 must not claim that the six
 Rosetta incarnations are images of one proved metaplectic or theta object.
 
+The adopted local characteristic-eleven model sharpens the first layer without repairing that dead
+roof.  The divided odd Fourier operator is contracted by the depth plane and becomes projectively
+rigid after adding its valency metric and ordered target flag.  C526 proves that C412's natural
+source Tate pairings occupy the orthogonal flag orbit, not this rigid nonorthogonal target orbit.
+Paper 2 therefore states the contraction and the exact non-isometry boundary together.
+
 This is an internal manuscript-allocation decision, not a novelty or priority verdict.  External
 claims about the modular-gateway construction, Picard-core codes, or the carrier mechanism require
 a claim-specific literature audit before drafting.
@@ -83,6 +89,8 @@ not a sixth Paper-1 Rosetta avatar of the same bit.
 
 1. **Odd carrier layer.**  State the abstract Modular Gateway Theorem and prove its incidence,
    local-Picard, fusion-descent, and rigidity gates.
+   Immediately afterward, give C433+C526 as the local `q=11` model: square-zero divided Fourier,
+   depth-selected contraction, valency/flag rigidity, and the source-Tate flag-orbit obstruction.
 2. **Two geometric realizations.**  Present the binary Hamming `q=7` and ternary Golay `q=11`
    matching sheets, their distinct Sylow normal forms, and their common unique-Ext conclusion.
 3. **Sharp extension boundary.**  Use `q=23` to show that the carrier-side theorem extends to the
@@ -128,6 +136,10 @@ hash-pinned, independently replayed bundles:
 - C486/C487 for the one-torsor assembly and characteristic-zero realization;
 - C488 for the `q=23` carrier/bridge split;
 - C489/C501 for the quadratic/Maslov and Witt-bridge negatives.
+- C433 for the local divided-Fourier contraction, valency metric, and ordered-target rigidity;
+- C526 for the complete natural source-pairing inventory and orthogonal/nonorthogonal flag-orbit
+  obstruction;
+- C527 for the placement-ready theorem block and the exact mixed Lean/evidence boundary.
 
 The source reports retain their exact replay commands, hashes, trusted boundaries, and
 independent checks.  C511 makes no claim beyond their frozen domains.
@@ -162,5 +174,8 @@ No further computation is needed to make the go/no-go decision.
 - **Open but not blocking — a comparison between orientation torsor and carrier class.** No
   comparison morphism is proved.  Any successor must construct genuine secondary data rather than
   infer an equality from the common outer swap.
+- **Settled — the local source/target Tate comparison.** The natural source pairing space has an
+  orthogonal ordered flag, whereas the rigid target flag is nonorthogonal.  This is a negative
+  boundary, not a comparison morphism between the orientation torsor and carrier class.
 - **No other C511 mystery remains.** The row dispositions, table size, sequel architecture, and
   go/no-go are fixed by the frozen evidence.

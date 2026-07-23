@@ -332,8 +332,8 @@ plan before generation.
 
 ## Campaign trust-ledger capstone — C320
 
-C320 is a required successor to all paper-adopted C420--C428 slices and the C494/C503--C507
-expansion, not optional housekeeping. It
+C320 is a required successor to all paper-adopted C420--C428 slices, the C494/C503--C507
+expansion, and C527's Paper-2 local modular-contraction package, not optional housekeeping. It
 creates the Clebsch per-paper trust manifest and one verify-all entry point. The campaign and
 manuscript release gate remain open until that ledger is complete and independently reviewed.
 

@@ -2,12 +2,13 @@
 
 **Lanes:** `clebsch` paper planning with read-only results from `crowns`
 
-**Date:** 2026-07-22
+**Date:** 2026-07-23
 
-**Purpose:** keep the complete C440--C471 result inventory out of the main Clebsch planning
-document while preserving every landed result, sharp negative, evidence boundary, and current
-paper disposition.  This is an allocation ledger, not a manuscript outline and not a novelty
-audit.  A row marked `paper 2` remains crowns-owned until the paper-2 planning report adopts it.
+**Purpose:** keep the complete C440--C471 result inventory and adopted later Paper-2 local models
+out of the main Clebsch planning document while preserving every landed result, sharp negative,
+evidence boundary, and current paper disposition.  This is an allocation ledger, not a manuscript
+outline and not a novelty audit.  A row marked `paper 2` remains crowns-owned until the paper-2
+planning report adopts it.
 
 ## Disposition key
 
@@ -35,13 +36,21 @@ mod-40 law; (6) C444+C460 rank-three hinge geometry; (7) C455 scoped Weil-Weyl s
 negative rows C443/C461, C450, C451, C454, C456, and C467 are mandatory boundary statements and
 are not forced into a false linear ranking against positive theorems.
 
-**Paper 2:** (1) C465+C471 modular sandwich and exact Hadamard-degeneration complex; (2) C466
-Dickson fusion and the norm-31 first-order collision; (3) C459 rational descent, resolvent, and
-degeneration; (4) C457 maximal-order reduction; (5) C467 uniform golden Fourier duality and pencil
-quotient; (6) C468 exact local zeta/field-carrier package; (7) C463 outer-`S6` edge torsor; (8)
+**Paper 2:** (1) C465+C471 modular sandwich and exact Hadamard-degeneration complex; (2) C433+C526
+local divided-Fourier contraction and sharp Tate/source flag-orbit boundary; (3) C466 Dickson
+fusion and the norm-31 first-order collision; (4) C459 rational descent, resolvent, and
+degeneration; (5) C457 maximal-order reduction; (6) C467 uniform golden Fourier duality and pencil
+quotient; (7) C468 exact local zeta/field-carrier package; (8) C463 outer-`S6` edge torsor; (9)
 C462 golden `C4` torsor.  C470 supplies the signed outer-carrier geometry consumed by the first
-rank but does not itself prove the signed Weil restriction.  This order controls exposition and
-proof-space allocation; it does not override the novelty cautions in the dedicated audits.
+rank but does not itself prove the signed Weil restriction.  C527 packages rank two as a local
+model immediately after the abstract odd-carrier theorem; it does not assert a general Tate or
+Brauer theorem.  This order controls exposition and proof-space allocation; it does not override
+the novelty cautions in the dedicated audits.
+
+- C433+C526 are GREEN as an adopted local Paper-2 theorem/boundary pair.  The target contraction,
+  valency metric, and ordered flag are rigid; the complete natural source pairing space lies in the
+  orthogonal ordered-flag orbit and therefore admits no target-flag isometry.  C527 owns the compact
+  mixed-verification terminal and exact C320 delta.
 
 ## Complete recent-result ledger
 
