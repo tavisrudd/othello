@@ -4,8 +4,7 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C517 complete; C518 is next
-(C515 global-incidence successor), followed by C519
+**Status:** C475--C499, C509--C510, and C512--C518 complete; C519 is next
 (arbitrary-redundancy residual-discriminant theorem); C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -506,6 +505,19 @@ forced power still leaves a product over distinct cosets; global geometry must t
 its component union or the corresponding quotient incidence, not assert irreducibility of the
 raw or reduced resultant.
 
+## Closed base — C518
+
+`notes/2026-07-23-c518-modular-trs-global-incidence.md` closes at the task's allowed obstruction
+exit.  Complement duality turns every extra Lucas-fixed endpoint into a `k+1`-point ordered
+Frobenius alternant with exponent `(floor(k/p^l)+1)p^l+1`.  Every binary `k=2` endpoint is
+uniformly shallow, and a fixed-subfield criterion closes a further range for `k>=3`.  The
+residual-quadratic slice has exact determinant, branch, diagonal, fixed-root resultant, valid
+completion-collision semantics, and Kummer/Artin--Schreier lifting classes.  Outside the proved
+shallow ranges, factorization monodromy and ordered-root integrality meet the same reduced
+Frobenius-alternant carrier; a quotient point still needs the exact residual lift.  No universal
+TRS synthesis or field census is justified.  This carrier is an unallocated future successor;
+C519 remains the separately owned arbitrary-redundancy residual-discriminant task.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -530,8 +542,8 @@ raw or reduced resultant.
 | C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, reduced stabilizer-stratified orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global reduced-norm/incidence geometry is required |
 | C516 | PRS redundancy-nine residual-quadratic theorem | complete | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
 | C517 | Lean formalization of C516 | complete | residual algebra and exact synthesis implication; explicit geometric/coding hypotheses; green gate and axiom audit | kernel-checked PRS theorem boundary |
-| C518 | modular TRS trace-one global incidence | queued | fixed endpoints, residual discriminant, splitting monodromy, ordered-root fallback; exact quotient lifting and collision semantics | global theorem or first proved obstruction |
-| C519 | universal residual-discriminant base locus | queued after C518 | binary-cubic discriminant pullback; complete zero/square/inseparable carrier; root-compatible genus-one slice | arbitrary-redundancy high-field theorem or first additional component |
+| C518 | modular TRS trace-one global incidence | complete | complement Frobenius alternants; binary and subfield shallow theorems; exact residual lifting torsor | first proved global obstruction |
+| C519 | universal residual-discriminant base locus | queued | binary-cubic discriminant pullback; complete zero/square/inseparable carrier; root-compatible genus-one slice | arbitrary-redundancy high-field theorem or first additional component |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -542,15 +554,15 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
 
 - **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
-- **Twisted Reed--Solomon:** C514 closes C510's only allocated successor with an exact
+- **Twisted Reed--Solomon:** C514 closes C510's translation quotient with an exact
   translation-invariant determinant normal form and a precise obstruction to C512.  C515 closes
   the additive/Hasse alternative: its filtration and trace endpoints are exact, but differences
-  do not preserve zero incidence.  C518 owns the bounded global successor in the prescribed order:
-  fixed endpoints, residual discriminant, splitting monodromy, and ordered-root incidence before
-  any universal synthesis.  Its target is the trace-one incidence variety (or its quotient with
-  exact rational lifting); the reduced stabilizer-stratified coset norm records the component union
-  but is not itself an irreducibility target.  The completion/support collision divisor must
-  remain.  No all-TRS claim is allocated.
+  do not preserve zero incidence.  C518 closes the bounded global successor by dualizing the fixed
+  endpoints to explicit Frobenius-alternant carriers, proving the binary and fixed-subfield shallow
+  ranges, and isolating the exact residual Kummer/Artin--Schreier lift.  The remaining general
+  alternant component is unallocated; the reduced stabilizer-stratified coset norm remains only a
+  component union, the completion/support collision divisor remains valid, and no all-TRS claim is
+  allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C516 closes the redundancy-nine residual-quadratic cover
@@ -586,6 +598,6 @@ history.
 
 ## Next command
 
-`go C518`
+`go C519`
 
-(C518 is next; C519 follows it. C500 remains release-gated.)
+(C519 is next. C500 remains release-gated.)

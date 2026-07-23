@@ -1,6 +1,7 @@
 # C518 — modular TRS trace-one global incidence
 
-**Lane:** `reed-solomon` · **Date queued:** 2026-07-23 · **Status:** queued after C517
+**Lane:** `reed-solomon` · **Date queued:** 2026-07-23 · **Status:** complete by exit-gate
+obstruction
 
 ## Objective
 
@@ -84,3 +85,12 @@ and whether the residual-quadratic route reaches the generic Hasse stratum.
 ## Deliverable
 
 Task report: `notes/2026-07-23-c518-modular-trs-global-incidence.md`.
+
+## Outcome
+
+The task reached exit gate 2.  Every fixed endpoint is the explicit complement
+Frobenius-alternant carrier `A_(k,l)`; all binary endpoints and a uniform fixed-subfield range are
+shallow.  The residual-quadratic slice has exact determinant, branch, diagonal, collision, and
+Kummer/Artin--Schreier lifting classes.  Outside the proved shallow ranges, factorization
+monodromy and ordered-root incidence meet the same unresolved reduced carrier, so no universal
+contained/transverse synthesis or field census was substituted.

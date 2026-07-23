@@ -81,3 +81,20 @@ resultant is the forced `|H_y|`-th power of the reduced product over `F_q/H_y`. 
 nontrivial stabilizer makes the raw norm inseparable, and the correct future component gate is
 absolute irreducibility of the reduced coset norm.  On the full fixed flag the reduced norm is
 the elementary-symmetric endpoint equation and the raw multiplicity is exactly `q`.
+
+## 2026-07-23 — C518 modular TRS global-incidence obstruction
+
+C518 executes the prescribed fixed-endpoint and residual-quadratic attacks without an ambient
+field census.  The full-field complement identity replaces each endpoint `e_d(U)=0` by
+`h_d(W)=0` on a `k+1`-point complement of sum `-1`; the Schur alternant makes this the dependence
+of the columns `1,w,...,w^(k-1),w^N`, with
+`N=(floor(k/p^l)+1)p^l+1`.  A primitive-element construction clears every binary `k=2` endpoint,
+and fixed Frobenius subfields clear the range `p^g>k+1` for `k>=3`.
+
+Fixing all but two support roots gives `F=C+BD`.  The residual quadratic
+`DZ^2-ADZ-C` exposes the exact determinant/infinity divisor, odd branch square class,
+characteristic-two Artin--Schreier trace class, residual diagonal, and fixed-root resultant while
+retaining the valid completion collision.  Factorization monodromy and the ordered-root fallback
+both return to the same reduced Frobenius-alternant component, and quotient rational points still
+need the displayed residual lift.  The task therefore closes at its explicit obstruction exit;
+the general carrier remains unallocated and is not silently assigned to C519.
