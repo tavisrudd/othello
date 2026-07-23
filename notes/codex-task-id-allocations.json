@@ -638,8 +638,17 @@
       "last": 518,
       "purpose": "C515 successor: modular TRS trace-one incidence via fixed endpoints, residual discriminants, and splitting monodromy",
       "sequence": 71
+    },
+    {
+      "count": 1,
+      "first": 519,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 519,
+      "purpose": "universal residual-quadratic discriminant base-locus theorem for arbitrary PRS redundancy",
+      "sequence": 72
     }
   ],
-  "next_id": 519,
+  "next_id": 520,
   "schema": "codex-task-id-allocations-v1"
 }
