@@ -656,8 +656,17 @@
       "last": 520,
       "purpose": "C496 successor: general-q live-locus as bounded-degree algebraic family; resolvent-quadratic discriminant square-class as depletion predictor + Weil-bound uniform odd-q abundance for C82",
       "sequence": 73
+    },
+    {
+      "count": 1,
+      "first": 521,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 521,
+      "purpose": "Clebsch fixed-conic homogeneous fibre, decorated reconstruction base size, and manuscript integration theorem",
+      "sequence": 74
     }
   ],
-  "next_id": 521,
+  "next_id": 522,
   "schema": "codex-task-id-allocations-v1"
 }
