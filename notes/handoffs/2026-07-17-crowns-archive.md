@@ -347,5 +347,7 @@ both sheets, equal to C379's matrix `PSL_2(11)`. Their generated group is theref
 the common stabilizer; it is a transporter whose adjunction gives `PGL_2(11)` of order 1320.
 Every sheet transporter lies in the 660-element coset `J PSL_2(11)`, and the unordered-pair
 stabilizer is exactly `PGL_2(11)`. This closes the task-card's stabilizer/transporter conflation
-and leaves no Mathieu successor. Full report:
+and leaves no Mathieu successor. A second `ej` pass packages the complete two-object transporter
+groupoid as the split exact sequence `1 → PSL_2(11) → PGL_2(11) → C2 → 1`: the sheet swap is a
+faithful realization of the outer character, with no extra `Sym(12)` morphisms. Full report:
 `notes/2026-07-23-c436-mathieu-adjacency.md`.

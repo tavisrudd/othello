@@ -97,6 +97,30 @@ extra nonprojective automorphisms.  The exhaustive 660/660 stabilizer calculatio
 that missing premise.  Once it is known, the transporter-coset and unordered-pair conclusions are
 formal.
 
+### Second `ej` pass: the complete outer-character groupoid
+
+The negative Mathieu verdict has a positive intrinsic replacement.  Regard `F_+` and `F_-` as two
+objects and the vertex permutations carrying one to another as morphisms.  The certificate gives
+the entire groupoid:
+
+```text
+Hom(F_+,F_+) = Hom(F_-,F_-) = PSL_2(11),
+Hom(F_+,F_-) = J PSL_2(11),
+Hom(F_-,F_+) = PSL_2(11) J.
+```
+
+There are no further morphisms in `Sym(12)`.  Equivalently, the unordered factorization pair
+realizes the split exact sequence
+
+```text
+1 -> PSL_2(11) -> PGL_2(11) -> C2 -> 1,
+```
+
+where the quotient action is exactly the swap of the two sheets and the recorded involution `J`
+is a splitting.  Thus the C379 pair is not merely compatible with the determinant/outer bit: its
+full vertex-symmetry group makes it a complete faithful realization of that bit.  This sharpens
+the paper-facing formulation without adding a new computation, a new task, or any Mathieu claim.
+
 ## Mystery ledger
 
 - **Why did the advertised `PGL_2(11)`/`M_12` dichotomy omit `PSL_2(11)`?** Settled: it treated
@@ -106,6 +130,9 @@ formal.
 - **Could a nonprojective `Sym(12)` transporter still enlarge the unordered-pair group?** Settled:
   the exhaustive sheet stabilizer has order 660, so every transporter is the certified coset
   `J PSL_2(11)` and the unordered-pair stabilizer has order 1320.
+- **What positive structure survives after the Mathieu branch dies?** Settled by the second
+  `ej` pass: the two-object transporter groupoid is exactly the split outer-character extension,
+  with no extra `Sym(12)` morphisms.
 
 No genuine C436 mystery remains.
 
