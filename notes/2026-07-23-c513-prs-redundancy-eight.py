@@ -52,6 +52,15 @@ def inversion_class_cycle(p_mod_7):
     return sorted(cycles)
 
 
+def total_orbit_counts(d, p_mod_7, tangent_orbits):
+    sigma_pgl = 1 if d == 1 else 4
+    sigma_pgamma = 1 if d == 1 else 1 + len(inversion_class_cycle(p_mod_7))
+    return {
+        "PGL2": sigma_pgl + tangent_orbits,
+        "PGammaL2": sigma_pgamma + tangent_orbits,
+    }
+
+
 def nucleus_support(degree, order, characteristic):
     """Coordinate support of the order-osculating nucleus.
 
@@ -116,6 +125,35 @@ def build_certificate():
                     }
                 )
 
+    next_nuclei = []
+    for p in PRIMES:
+        for order in range(7):
+            support = nucleus_support(7, order, p)
+            if support:
+                next_nuclei.append(
+                    {
+                        "characteristic": p,
+                        "order": order,
+                        "lower_support": support,
+                        "degree8_lift_support": consecutive_lift_support(7, support),
+                    }
+                )
+
+    prime_diagonal = []
+    for p in (3, 5, 7):
+        lower_support = nucleus_support(p, p - 1, p)
+        lift_support = consecutive_lift_support(p, lower_support)
+        prime_diagonal.append(
+            {
+                "characteristic": p,
+                "lower_nrc_degree": p,
+                "lower_top_nucleus_support": lower_support,
+                "syndrome_degree": p + 1,
+                "lift_support": lift_support,
+                "projective_module": f"det^2 tensor Sym^{p - 3}(E)",
+            }
+        )
+
     char5_split_sextic = [0, -1, 0, 0, 0, 1, 0]
     # For f in <e3,e4>, the two Hankel equations use only d2,d3,d4.
     assert all(char5_split_sextic[i] == 0 for i in (2, 3, 4))
@@ -157,6 +195,16 @@ def build_certificate():
             "sigma_nonzero_class_cycle_lengths_by_p_mod_7": {
                 str(p): inversion_class_cycle(p) for p in range(1, 7)
             },
+            "total_deep_orbit_counts": {
+                "gcd_7_q_plus_1_is_1_and_p_not_7": total_orbit_counts(1, 1, 1),
+                "p_is_7": total_orbit_counts(1, 0, 2),
+                "7_divides_q_plus_1_and_p_is_plus_or_minus_1_mod_7": total_orbit_counts(
+                    7, 1, 1
+                ),
+                "7_divides_q_plus_1_and_p_is_plus_or_minus_2_or_3_mod_7": total_orbit_counts(
+                    7, 2, 1
+                ),
+            },
             "tangent_cocycle_coefficient": 7,
             "tangent_split_characteristic": 7,
         },
@@ -171,6 +219,31 @@ def build_certificate():
             "characteristic5_projective_module": "det^3 tensor E",
             "characteristic5_universal_split_sextic_coefficients": char5_split_sextic,
             "characteristic5_universal_roots": "P1(F5)",
+        },
+        "generic_all_degree_spine": {
+            "bottom_marker_count": "n-4",
+            "deletion_degree_bound": "6*n-12",
+            "exact_normalized_hasse_integer_bound": "floor((1+sqrt(6*n-12))^2)+1",
+            "scope": "generic S3 bottom stratum only; contained carrier pullbacks remain level-specific",
+        },
+        "prime_diagonal_nucleus_series": {
+            "general_lift_support": "e2,...,e_(p-1)",
+            "general_projective_module": "det^2 tensor Sym^(p-3)(E)",
+            "checked_primes": prime_diagonal,
+        },
+        "redundancy9_preview": {
+            "syndrome_degree": 8,
+            "marker_count": 4,
+            "deletion_degree_bound": 36,
+            "exact_normalization_inequality_first_integer": 50,
+            "first_prime_power_at_least_exact_inequality": 53,
+            "collision_degree": 12,
+            "lower_degree7_nuclei_and_lifts": next_nuclei,
+            "characteristic5_lift_support": [4],
+            "characteristic5_disposition": "shallow for q>5 via (t^5-t), infinity, and one extra affine root",
+            "characteristic7_lift_support": [2, 3, 4, 5, 6],
+            "characteristic7_projective_module": "det^2 tensor Sym^4(E)",
+            "characteristic7_universal_witness": "none: common annihilator forces d1=...=d6=0, hence a seventh power",
         },
     }
 

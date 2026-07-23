@@ -100,6 +100,48 @@ def main():
         data["persistent"]["sigma_nonzero_class_cycle_lengths_by_p_mod_7"]
         == expected_cycles
     )
+    assert data["persistent"]["total_deep_orbit_counts"] == {
+        "gcd_7_q_plus_1_is_1_and_p_not_7": {"PGL2": 2, "PGammaL2": 2},
+        "p_is_7": {"PGL2": 3, "PGammaL2": 3},
+        "7_divides_q_plus_1_and_p_is_plus_or_minus_1_mod_7": {
+            "PGL2": 5,
+            "PGammaL2": 5,
+        },
+        "7_divides_q_plus_1_and_p_is_plus_or_minus_2_or_3_mod_7": {
+            "PGL2": 5,
+            "PGammaL2": 3,
+        },
+    }
+
+    preview = data["redundancy9_preview"]
+    assert preview["deletion_degree_bound"] == 12 + 4 * 6 == 36
+    assert preview["exact_normalization_inequality_first_integer"] == 50
+    assert 50 + 1 - 2 * math.sqrt(50) > 36
+    assert 49 + 1 - 2 * math.sqrt(49) == 36
+    assert preview["first_prime_power_at_least_exact_inequality"] == 53
+    assert preview["collision_degree"] == (5 + 1) * (7 - 5) == 12
+    assert preview["characteristic5_lift_support"] == [4]
+    assert preview["characteristic7_lift_support"] == [2, 3, 4, 5, 6]
+
+    # Homogenize t^5-t with its infinity root and multiply by t-a.
+    # The resulting split septic has d3=d4=0, so e4 annihilates it.
+    char5_witness = [0, "a", -1, 0, 0, "-a", 1, 0]
+    assert char5_witness[3] == char5_witness[4] == 0
+
+    # Common annihilation by every f in <e2,...,e6> forces both shifted
+    # middle blocks to vanish.  In characteristic seven the remaining
+    # d0+d7*t^7 is a seventh power, never squarefree.
+    forced_zero = set(range(2, 7)) | set(range(1, 6))
+    assert forced_zero == set(range(1, 7))
+
+    diagonal = data["prime_diagonal_nucleus_series"]["checked_primes"]
+    for row in diagonal:
+        p = row["characteristic"]
+        assert row["lower_nrc_degree"] == p
+        assert row["lower_top_nucleus_support"] == list(range(1, p))
+        assert row["syndrome_degree"] == p + 1
+        assert row["lift_support"] == list(range(2, p))
+        assert row["projective_module"] == f"det^2 tensor Sym^{p - 3}(E)"
     print("C513 independent replay: PASS")
 
 

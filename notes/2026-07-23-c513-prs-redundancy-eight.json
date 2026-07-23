@@ -1,4 +1,10 @@
 {
+  "generic_all_degree_spine": {
+    "bottom_marker_count": "n-4",
+    "deletion_degree_bound": "6*n-12",
+    "exact_normalized_hasse_integer_bound": "floor((1+sqrt(6*n-12))^2)+1",
+    "scope": "generic S3 bottom stratum only; contained carrier pullbacks remain level-specific"
+  },
   "lower_cover": {
     "arithmetic_genus": 1,
     "base_deletion_degree": 12,
@@ -139,9 +145,177 @@
     },
     "sigma_quotient": "T/T^7 modulo inversion and Frobenius",
     "tangent_cocycle_coefficient": 7,
-    "tangent_split_characteristic": 7
+    "tangent_split_characteristic": 7,
+    "total_deep_orbit_counts": {
+      "7_divides_q_plus_1_and_p_is_plus_or_minus_1_mod_7": {
+        "PGL2": 5,
+        "PGammaL2": 5
+      },
+      "7_divides_q_plus_1_and_p_is_plus_or_minus_2_or_3_mod_7": {
+        "PGL2": 5,
+        "PGammaL2": 3
+      },
+      "gcd_7_q_plus_1_is_1_and_p_not_7": {
+        "PGL2": 2,
+        "PGammaL2": 2
+      },
+      "p_is_7": {
+        "PGL2": 3,
+        "PGammaL2": 3
+      }
+    }
+  },
+  "prime_diagonal_nucleus_series": {
+    "checked_primes": [
+      {
+        "characteristic": 3,
+        "lift_support": [
+          2
+        ],
+        "lower_nrc_degree": 3,
+        "lower_top_nucleus_support": [
+          1,
+          2
+        ],
+        "projective_module": "det^2 tensor Sym^0(E)",
+        "syndrome_degree": 4
+      },
+      {
+        "characteristic": 5,
+        "lift_support": [
+          2,
+          3,
+          4
+        ],
+        "lower_nrc_degree": 5,
+        "lower_top_nucleus_support": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "projective_module": "det^2 tensor Sym^2(E)",
+        "syndrome_degree": 6
+      },
+      {
+        "characteristic": 7,
+        "lift_support": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "lower_nrc_degree": 7,
+        "lower_top_nucleus_support": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "projective_module": "det^2 tensor Sym^4(E)",
+        "syndrome_degree": 8
+      }
+    ],
+    "general_lift_support": "e2,...,e_(p-1)",
+    "general_projective_module": "det^2 tensor Sym^(p-3)(E)"
   },
   "redundancy": 8,
+  "redundancy9_preview": {
+    "characteristic5_disposition": "shallow for q>5 via (t^5-t), infinity, and one extra affine root",
+    "characteristic5_lift_support": [
+      4
+    ],
+    "characteristic7_lift_support": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "characteristic7_projective_module": "det^2 tensor Sym^4(E)",
+    "characteristic7_universal_witness": "none: common annihilator forces d1=...=d6=0, hence a seventh power",
+    "collision_degree": 12,
+    "deletion_degree_bound": 36,
+    "exact_normalization_inequality_first_integer": 50,
+    "first_prime_power_at_least_exact_inequality": 53,
+    "lower_degree7_nuclei_and_lifts": [
+      {
+        "characteristic": 3,
+        "degree8_lift_support": [],
+        "lower_support": [
+          2,
+          5
+        ],
+        "order": 5
+      },
+      {
+        "characteristic": 3,
+        "degree8_lift_support": [],
+        "lower_support": [
+          2,
+          5
+        ],
+        "order": 6
+      },
+      {
+        "characteristic": 5,
+        "degree8_lift_support": [
+          4
+        ],
+        "lower_support": [
+          3,
+          4
+        ],
+        "order": 4
+      },
+      {
+        "characteristic": 5,
+        "degree8_lift_support": [
+          4
+        ],
+        "lower_support": [
+          3,
+          4
+        ],
+        "order": 5
+      },
+      {
+        "characteristic": 5,
+        "degree8_lift_support": [
+          4
+        ],
+        "lower_support": [
+          3,
+          4
+        ],
+        "order": 6
+      },
+      {
+        "characteristic": 7,
+        "degree8_lift_support": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "lower_support": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "order": 6
+      }
+    ],
+    "marker_count": 4,
+    "syndrome_degree": 8
+  },
   "schema": "c513-prs-redundancy-eight-v1",
   "syndrome_degree": 7,
   "top_level": {

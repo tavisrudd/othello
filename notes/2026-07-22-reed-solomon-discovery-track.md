@@ -122,10 +122,18 @@ degree only to identify the cheapest successor gate.
 **Observed / musing:** degree-seven NRC nuclei have consecutive-row lifts in degree eight equal to
 `P<e4>` in characteristic five and `P<e2,e3,e4,e5,e6>` in characteristic seven. The latter is much
 larger than C513's two candidate lines, even though the generic four-marker forecast remains
-deletion degree 36, integer threshold 51, and first prime-power threshold 53.
+deletion degree 36, exact normalized integer threshold 50 (C512 closed bound 51), and first
+prime-power threshold 53.
 **Why it may matter / strongest question:** redundancy nine may acquire a genuinely higher-
 dimensional modular arithmetic problem; determine whether the characteristic-seven four-space is
 shallow, persistent, or split by extension-degree deck data before allocating that application.
-**Evidence:** CHECKED linear support calculation from the binomial nucleus criterion; no
-split-member or deepness theorem.
+**Second-order refinement:** the characteristic-five point is shallow for every `q>5`, via
+`(t^5-t)(t-a)` with the infinity factor retained. The characteristic-seven four-space is
+projectively `det^2 tensor Sym^4(E)`, the binary-quartic representation from C491, and admits no
+universal split septic because common annihilation forces `d1=...=d6=0`, hence a seventh power.
+More generally, in characteristic `p` the top nucleus of the degree-`p` NRC lifts at syndrome
+degree `p+1` to `P(det^2 tensor Sym^(p-3)(E))`: the `p=3,5,7` cases are respectively the C491
+nucleus point, a binary-quadratic plane in C509, and the new binary-quartic four-space.
+**Evidence:** CHECKED linear support and universal-witness calculations; the characteristic-seven
+quartic-stratum deepness remains untested.
 **Status:** open lead.

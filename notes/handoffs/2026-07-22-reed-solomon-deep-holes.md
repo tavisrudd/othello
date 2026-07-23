@@ -408,8 +408,12 @@ inequality lowers the first prime-power threshold to 43.  The top polar line has
 transverse/collision budget 14.  Every contained modular-nucleus lift is shallow in this range, so
 the deep syndromes are exactly the persistent tangent and conjugate-sigma rank-two families,
 totaling `q(q+1)^2/2`, with orbit law `T/T^7` modulo inversion/Frobenius and tangent cocycle
-`z→z+7u`.  The theorem uses no ambient `PG(7,q)` census.  A redundancy-nine Lucas probe is logged
-only as an incidental successor lead.
+`z→z+7u`; the four arithmetic cases have exact `PGL2/PGammaL2` orbit counts
+`2/2`, `3/3`, `5/5`, and `5/3`.  The theorem uses no ambient `PG(7,q)` census.  A redundancy-nine Lucas probe is logged
+only as an incidental successor lead; its second-order refinement makes the characteristic-five
+lift shallow and identifies the unresolved characteristic-seven four-space with the binary-quartic
+representation, the `p=7` member of the exact prime-diagonal series
+`P(det^2 tensor Sym^(p-3)(E))`.
 
 ## Closed base — C510
 

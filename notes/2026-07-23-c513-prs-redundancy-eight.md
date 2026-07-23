@@ -194,6 +194,18 @@ not seven. In characteristic seven it splits into
  (q+1,q(q-1))\quad\text{and}\quad(q^2-1,q).
 \]
 
+Consequently the total numbers of deep-syndrome orbits are exact:
+
+\[
+\begin{array}{c|c|c}
+\text{arithmetic case}&PGL_2&P\Gamma L_2\\ \hline
+\gcd(7,q+1)=1,\ p\ne7&2&2\\
+p=7&3&3\\
+7\mid q+1,\ p\equiv\pm1\pmod7&5&5\\
+7\mid q+1,\ p\equiv\pm2,\pm3\pmod7&5&3.
+\end{array}
+\]
+
 The sigma family has `q(q^2-1)/2` points and the tangent family has `q(q+1)` points, giving the
 stated total.
 
@@ -285,13 +297,14 @@ split witness. The replay reconstructs the relevant modular linear systems by ro
 checks the characteristic-three conic bound. Neither program enumerates deep syndromes or proves
 geometric `S3` monodromy; that theorem input is the C491 ordered-pair argument, unchanged by deleting
 marker divisors. The generator, JSON certificate, and independent replay have exact byte counts
-`6876`, `3084`, and `3672`, respectively; their SHA-256 hashes are in the adjacent manifest.
+`9958`, `6872`, and `5598`, respectively; their SHA-256 hashes are in the adjacent manifest.
 
 ## Extra-juice closeout
 
 The semilinear quotient admits the exact fusion rule above; no field-by-field orbit computation is
-needed. The Tao pass also replaces the conservative C512 closed threshold 47 by the exact
-normalization threshold 43. A bounded look one level ahead sharpens the successor gate.
+needed. It gives total `PGL2/PGammaL2` orbit counts `2/2`, `3/3`, `5/5`, or `5/3` in the four
+arithmetic cases displayed above. The Tao pass also replaces the conservative C512 closed
+threshold 47 by the exact normalization threshold 43. A bounded look one level ahead sharpens the successor gate.
 Redundancy nine would add
 a fourth marker, giving deletion degree `12+4*6=36`, C512 integer threshold `51`, first
 prime-power threshold `53`, and collision degree `12`.
@@ -310,6 +323,67 @@ nucleus carriers, plus their arithmetic deepness. This is a reasoned opportunity
 all-redundancy theorem: one must still prove that the recursive bad-carrier pullbacks have no
 unlisted contained components and bound every transverse degree.
 
+### Second-order extra juice
+
+The generic part has a closed all-degree threshold. On the geometric-`S3` bottom stratum,
+
+\[
+ \delta_n\le 12+6(n-4)=6n-12,
+\]
+
+so normalization supplies a witness once
+
+\[
+ q+1-2\sqrt q>6n-12.
+\]
+
+The first sufficient integer is
+
+\[
+ Q_n^{\rm gen}
+ =\left\lfloor\left(1+\sqrt{6n-12}\right)^2\right\rfloor+1.
+\]
+
+This is a genuine generic-stratum corollary, but not an all-redundancy deep-hole theorem: the
+contained cyclic/wild/nucleus pullbacks and their transverse degrees remain level-specific.
+
+The redundancy-nine modular preview can also be sharpened. The characteristic-five lift is the
+single point `P<e4>` and is shallow over every characteristic-five field larger than `F5`:
+homogenize `t^5-t` with its infinity root and multiply by `t-a` for any `a` outside `F5`; the
+resulting split septic has `d3=d4=0`, exactly the two `e4` Hankel equations.
+
+The characteristic-seven lift
+
+\[
+ \mathbf P\langle e_2,e_3,e_4,e_5,e_6\rangle
+\]
+
+is qualitatively different. As a `PGL2`-module it is
+`det^2 tensor Sym^4(E)`, so projectively it is the binary-quartic representation underlying C491.
+There is no universal split witness for the whole four-space: simultaneous annihilation forces
+`d1=...=d6=0`, leaving `d0+d7*t^7`, a seventh power in characteristic seven. Thus the next modular
+problem has inherited quartic invariant geometry—discriminant, `j`, and cyclic/wild/`S3` strata—
+rather than being a featureless large nucleus. This is the strongest cheap successor exposed by
+C513.
+
+This is the `p=7` member of an exact prime-diagonal series. In characteristic `p`, the top
+osculating nucleus of the degree-`p` NRC has support
+`<e1,...,e_(p-1)>`, because every interior binomial coefficient `binom(p,j)` vanishes modulo `p`.
+The consecutive-row lift to syndrome degree `p+1` has support
+
+\[
+ \mathbf P\langle e_2,\ldots,e_{p-1}\rangle
+ \cong \mathbf P(\det^2\otimes\operatorname{Sym}^{p-3}E).
+\]
+
+For `p=3` this is C491's fixed nucleus point; for `p=5` it is a binary-quadratic projective plane
+inside the redundancy-seven geometry, whose nonpersistent part is shallow in C509's high-field
+range; for `p=7` it is the binary-quartic four-space above. The increasing invariant degree
+explains why modular containment becomes structurally richer with redundancy. It also predicts
+that any characteristic-seven wild enlargement should be sought as a carrier built over quartic
+discriminant/monodromy strata, paralleling—but not assuming—the characteristic-three nucleus/wild
+cone.
+
 ## Mystery ledger
 
 Settled:
@@ -324,7 +398,8 @@ Settled:
   is shallow from `q=27` onward.
 - **Does the persistent exponent advance as forecast?** Yes: it is `T/T^7`, with tangent splitting
   exactly in characteristic seven. The extra-juice pass also settles the exact `PGammaL2` fusion:
-  the three nonzero sigma classes remain separate for `p=plus-or-minus 1 mod 7` and otherwise fuse.
+  the three nonzero sigma classes remain separate for `p=plus-or-minus 1 mod 7` and otherwise fuse;
+  the resulting total projective/semilinear orbit counts are `2/2`, `3/3`, `5/5`, or `5/3`.
 
 Open:
 
@@ -339,6 +414,8 @@ Open:
   genus-at-most-one cubic `S3` cover with deletion bound `6n-12`. The remaining evidence gap is
   uniform control of recursive cyclic/wild/nucleus carrier pullbacks, not generic `S3` monodromy.
 - **What happens to the new redundancy-nine nucleus lifts?** The next Lucas calculation produces
-  a characteristic-five point and a characteristic-seven projective four-space. Evidence gap:
-  their split-member arithmetic and containment in the four-marker lower bad carrier; owner: a
-  future fixed-redundancy-nine application.
+  a characteristic-five point and a characteristic-seven projective four-space. The second-order
+  pass settles the characteristic-five point as shallow and identifies the characteristic-seven
+  space with the binary-quartic representation, while proving that it has no universal split
+  witness. Evidence gap: the quartic-stratum split-member arithmetic and containment in the
+  four-marker lower bad carrier; owner: a future fixed-redundancy-nine application.
