@@ -572,9 +572,18 @@ second implementation of the raw `Y_0` orbital membership or the full earlier ce
   `Y_NK0`-membership (249 explicit `PGL_2(17)`-verified same-stratum splits), so it cannot supply the
   bulk descent — the missing guard must carry residual conic content, not just centre-configuration
   incidence data.
-- **Still open — two-sorted coupling:** no canonical incidence bimodule has yet been shown to carry
-  both conic-word traces and reply-pencil energy while preserving P/N recursion.  This is owned by
-  C80's response-packet/descent theorem, not by an abstract SDP construction.
+- **Reshaped by C496 — two-sorted coupling is NOT a single bimodule.** C496 (2026-07-23,
+  `notes/2026-07-23-c496-bihecke-two-sort-coupling.md`) settled the bi-Hecke candidate on the frozen
+  q=11 packet: `e_K F[G] e_H ≅ F[K\G/H]` is value-blind exactly where value is decided — the two
+  incidence-live `C5`-orbits (`u=8→P`, `u=9→N`) have IDENTICAL additive-incidence realizations (same
+  5-cycle candidate "pentagon"), so the incidence bimodule sorts the six orbits into 2 classes while
+  value needs 3.  The separating datum is the quadratic character `χ(u)=Legendre(u)`, orthogonal to
+  the incidence sort (nonsquare `C2` fixes `u` pointwise while swapping the packet off itself).  The
+  correct coupling is a bilinear `M_inc ⊗ M_χ` Gauss/Jacobi pairing, not a single bimodule; the
+  balanced live Gauss sum `5·χ(8)+5·χ(9)=0` is the knife-edge `C2`-torsor calibration.  Consequence
+  for the descent/abundance theorem below: it must carry the multiplicative character coordinate
+  explicitly — a permutation/incidence (one-sort SDP) argument is provably insufficient at the value
+  layer.  Still owned by C80's response-packet/descent theorem, now with the coupling shape fixed.
 - **Still open — abundance, re-gated:** C82 must not count raw `Y_0`: even over nonsplit prior
   triples it is frequently empty, and at q17 nonemptiness does not imply P-purity.  C80 must first
   supply either a refined P-preserving packet or a bulk descent theorem whose terminal target is
@@ -591,9 +600,12 @@ into this report's still-open ledger items; assessment and provenance in
 - **C495** (→ still-open coverage, q=11 side): falsifier-first identification of the C447/C460
   cloud packet's `C5`-orbit structure `1,1,5,5,5,5` with C434's `D10`-class `K`-orbit strata on
   its 22-point two-sheet space, `u = XZ/Y²` square class matching the sheet sign.
-- **C496** (→ still-open two-sorted coupling): the bi-Hecke bimodule `e_K F[G] e_H ≅ F[K\G/H]`
-  as the canonical incidence-bimodule candidate, expected set-faithful with a rank-dropping
-  linear shadow rather than linearly faithful.
+- **C496 [REPORTED 2026-07-23 — OBSTRUCTION + CORRECTED DESIGN]** (→ two-sorted coupling): the
+  bi-Hecke bimodule `e_K F[G] e_H ≅ F[K\G/H]` is value-blind — identical incidence realization on the
+  two value-splitting live orbits (`u=8→P`, `u=9→N`), 2 incidence classes vs 3 value classes.  It
+  cannot be the coupling as a single bimodule; the coupling is a bilinear additive×multiplicative
+  (Gauss/Jacobi) pairing separated by `χ(u)=Legendre(u)`.  See the reshaped ledger item above and
+  `notes/2026-07-23-c496-bihecke-two-sort-coupling.md`.
 - **C497** (→ still-open sparse guarded coverage): stratum-constancy test of
   `Y_NK0`-membership/P-purity over double-coset labels of (prior-triple stabilizer, reply) on
   the frozen q17 census; constancy yields per-representative bulk descent.

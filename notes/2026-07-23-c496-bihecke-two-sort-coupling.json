@@ -1,0 +1,822 @@
+{
+  "field_order": 11,
+  "inputs": {
+    "notes/2026-07-08-intrusion-census.py": "6f1f7e1e36ff3a3ed5d5f0c410b8d6bacb5be23a73503e669489e4cf06f14c83",
+    "notes/2026-07-21-c447-cap-knife-edge.json": "8c1e22da244ef2879273d3c0aeefc590e645386f70270e329d030fe48a5906c7",
+    "rust/scripts/c80_c447_cloud_packet.py": "308a3b6c3ff6476e0ac6ec7a7902c19edffd97a59c9f0eda94593a7518ae6721"
+  },
+  "pointed_states": [
+    {
+      "class": 4,
+      "coupling": {
+        "balanced_live_gauss_sum": 0,
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "nonsquare_c2_preserves_u_pointwise": true,
+        "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
+        "value_equals_legendre_u_on_live_fibre": true
+      },
+      "endpoint_parameter": 1,
+      "obstruction": {
+        "additive_incidence_profiles_identical_on_live": true,
+        "additive_incidence_set_classes": 2,
+        "conclusion": "e_K F[G] e_H is constant on the value-splitting live fibre; it carries the additive sort only and cannot be the two-sorted coupling",
+        "live_orbit_values": {
+          "8": "P",
+          "9": "N"
+        },
+        "shared_candidate_pair_multiset": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "value_set_classes": 3,
+        "value_splitting_live_orbits_u": [
+          8,
+          9
+        ]
+      },
+      "orbits": [
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": 0,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": 0,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 1,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "legendre_u": -1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 2,
+          "size": 5,
+          "u": 8,
+          "value": "P"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 9,
+          "value": "N"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": "inf",
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": "inf",
+          "value": "killed"
+        }
+      ],
+      "packet_cells": [
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          5
+        ]
+      ]
+    },
+    {
+      "class": 4,
+      "coupling": {
+        "balanced_live_gauss_sum": 0,
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "nonsquare_c2_preserves_u_pointwise": true,
+        "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
+        "value_equals_legendre_u_on_live_fibre": true
+      },
+      "endpoint_parameter": 4,
+      "obstruction": {
+        "additive_incidence_profiles_identical_on_live": true,
+        "additive_incidence_set_classes": 2,
+        "conclusion": "e_K F[G] e_H is constant on the value-splitting live fibre; it carries the additive sort only and cannot be the two-sorted coupling",
+        "live_orbit_values": {
+          "8": "P",
+          "9": "N"
+        },
+        "shared_candidate_pair_multiset": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "value_set_classes": 3,
+        "value_splitting_live_orbits_u": [
+          8,
+          9
+        ]
+      },
+      "orbits": [
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": 0,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": 0,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 1,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "legendre_u": -1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 2,
+          "size": 5,
+          "u": 8,
+          "value": "P"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 9,
+          "value": "N"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": "inf",
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": "inf",
+          "value": "killed"
+        }
+      ],
+      "packet_cells": [
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          8,
+          5
+        ]
+      ]
+    },
+    {
+      "class": 7,
+      "coupling": {
+        "balanced_live_gauss_sum": 0,
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "nonsquare_c2_preserves_u_pointwise": true,
+        "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
+        "value_equals_legendre_u_on_live_fibre": true
+      },
+      "endpoint_parameter": 3,
+      "obstruction": {
+        "additive_incidence_profiles_identical_on_live": true,
+        "additive_incidence_set_classes": 2,
+        "conclusion": "e_K F[G] e_H is constant on the value-splitting live fibre; it carries the additive sort only and cannot be the two-sorted coupling",
+        "live_orbit_values": {
+          "8": "P",
+          "9": "N"
+        },
+        "shared_candidate_pair_multiset": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "value_set_classes": 3,
+        "value_splitting_live_orbits_u": [
+          8,
+          9
+        ]
+      },
+      "orbits": [
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": 0,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": 0,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 1,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "legendre_u": -1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 2,
+          "size": 5,
+          "u": 8,
+          "value": "P"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 9,
+          "value": "N"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": "inf",
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": "inf",
+          "value": "killed"
+        }
+      ],
+      "packet_cells": [
+        [
+          2,
+          10
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          10,
+          7
+        ]
+      ]
+    },
+    {
+      "class": 7,
+      "coupling": {
+        "balanced_live_gauss_sum": 0,
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "nonsquare_c2_preserves_u_pointwise": true,
+        "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
+        "value_equals_legendre_u_on_live_fibre": true
+      },
+      "endpoint_parameter": 4,
+      "obstruction": {
+        "additive_incidence_profiles_identical_on_live": true,
+        "additive_incidence_set_classes": 2,
+        "conclusion": "e_K F[G] e_H is constant on the value-splitting live fibre; it carries the additive sort only and cannot be the two-sorted coupling",
+        "live_orbit_values": {
+          "8": "P",
+          "9": "N"
+        },
+        "shared_candidate_pair_multiset": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "value_set_classes": 3,
+        "value_splitting_live_orbits_u": [
+          8,
+          9
+        ]
+      },
+      "orbits": [
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": 0,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": 0,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 1,
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "legendre_u": -1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 2,
+          "size": 5,
+          "u": 8,
+          "value": "P"
+        },
+        {
+          "candidate_cell_support": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "candidate_pair_multiset": [
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ]
+          ],
+          "legendre_u": 1,
+          "per_vertex_candidate_count": 2,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": 9,
+          "value": "N"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 1,
+          "u": "inf",
+          "value": "killed"
+        },
+        {
+          "candidate_cell_support": [],
+          "candidate_pair_multiset": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "legendre_u": "inf",
+          "per_vertex_candidate_count": 0,
+          "per_vertex_winning_count": 0,
+          "size": 5,
+          "u": "inf",
+          "value": "killed"
+        }
+      ],
+      "packet_cells": [
+        [
+          2,
+          10
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          10,
+          7
+        ]
+      ]
+    }
+  ],
+  "schema": "c496-bihecke-two-sort-coupling-v1",
+  "summary": {
+    "all_states_agree": true,
+    "coupling": "value = [Legendre(u) = -1] on the live fibre; the coupling is a bilinear additive x multiplicative Gauss/Jacobi pairing, not a single bimodule",
+    "obstruction": "bi-Hecke / additive-incidence bimodule is value-blind: identical incidence realization on the two live orbits (u=8 -> P, u=9 -> N); 2 incidence classes vs 3 value classes",
+    "pointed_states_checked": 4
+  },
+  "verdict": "BI_HECKE_BIMODULE_IS_VALUE_BLIND_OBSTRUCTION; COUPLING_IS_ADDITIVE_TIMES_MULTIPLICATIVE_GAUSS_PAIRING_NOT_A_SINGLE_BIMODULE"
+}

@@ -640,9 +640,17 @@ task list.  Current high-value items:
   only at the governing-`C2` level: a small stabilizer-class comparison can detect an external
   orientation swap, but cannot be assumed to detect value.  At q17 any analogue must use the full
   marked residual state, including selected conic content; the centre configuration alone is
-  provably insufficient.  **C496** remains the two-sorted-coupling probe
-  (bi-Hecke bimodule `e_K F[G] e_H` as the two-sorted coupling; C495 layer-3 supports the
-  set-faithful/rank-dropping picture).  **C508 [QUEUED]** separately tests whether C497's exact
+  provably insufficient.  **C496 [REPORTED 2026-07-23 — OBSTRUCTION + CORRECTED DESIGN]:** the
+  bi-Hecke bimodule `e_K F[G] e_H ≅ F[K\G/H]` is value-blind on the frozen q=11 packet — the two
+  incidence-live `C5`-orbits (`u=8→P`, `u=9→N`) have IDENTICAL additive-incidence realizations (same
+  5-cycle candidate pentagon), so it sorts the six orbits into 2 incidence classes vs 3 value classes
+  and cannot be C80's two-sorted coupling as a single bimodule.  The coupling is a bilinear
+  additive×multiplicative (Gauss/Jacobi) pairing separated by the quadratic character
+  `χ(u)=Legendre(u)`, orthogonal to the incidence sort; the balanced live Gauss sum
+  `5·χ(8)+5·χ(9)=0` is the knife-edge `C2`-torsor calibration.  Reshapes (not closes) C80's
+  two-sorted-coupling ledger item — the descent/abundance argument must carry the multiplicative
+  character explicitly.  Report `../2026-07-23-c496-bihecke-two-sort-coupling.md`.  **C508 [QUEUED]**
+  separately tests whether C497's exact
   q17 1:1 reply-type balance comes from an explicit value-preserving external involution and a
   local full-state detector; a positive gives symmetry/case reduction only unless it improves
   C80's guard or descent measure.  q∈{7,11}-only structure caveat: C497 borrows C434's method, not
