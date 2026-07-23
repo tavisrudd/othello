@@ -98,3 +98,11 @@ retaining the valid completion collision.  Factorization monodromy and the order
 both return to the same reduced Frobenius-alternant component, and quotient rational points still
 need the displayed residual lift.  The task therefore closes at its explicit obstruction exit;
 the general carrier remains unallocated and is not silently assigned to C519.
+
+A requested second extra-juice pass completely parametrizes the binary carrier by its ordered
+cross-ratio `lambda`.  At level `l`, admissibility is exactly
+`lambda^(2^l-1) != 1` and `lambda^(2^l-2) != 1`, giving
+`(q-2^gcd(l,m)-2^gcd(l-1,m)+2)/6` unordered complements.  Every such complement avoids zero, so
+every binary fixed-endpoint zero—and not only one constructed witness—lies on the valid
+completion/support collision boundary `0 in U`.  This makes C514's boundary retention essential
+already at `k=2`.

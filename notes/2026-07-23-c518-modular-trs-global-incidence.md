@@ -83,7 +83,16 @@ This gives two uniform shallow theorems.
    \]
    All denominators are nonzero, the three entries are distinct, their sum is \(1=-1\), and
    the points \((w,w^{2^\ell+1})\) are collinear.  Equations (2)--(3) give the required
-   endpoint zero.
+   endpoint zero.  This parametrization is exact.  If
+   \[
+   g_\ell=\gcd(\ell,m),\qquad h_\ell=\gcd(\ell-1,m),
+   \]
+   then the number of unordered endpoint-zero complements is
+   \[
+   \frac{q-2^{g_\ell}-2^{h_\ell}+2}{6}.                        \tag{7.1}
+   \]
+   Every such complement lies in \(\mathbb F_q^\times\).  Equivalently, every binary fixed-
+   endpoint zero lies on C514's valid completion/support collision boundary \(0\in U\).
 
 Second, the residual-quadratic attack has a characteristic-free exact normal form.  Fix
 \[
@@ -203,6 +212,42 @@ The definition of \(z\) makes the two slopes equal.  Scaling by \(a\) preserves 
 and the sum of the three scaled abscissae is one.  The \(3\times3\) numerator in (3) therefore
 vanishes.
 
+There is no missing binary branch.  Given any ordered endpoint-zero complement
+\((w_0,w_1,w_2)\), put
+\[
+ \rho=w_1-w_0,\qquad
+ z=w_0/\rho,\qquad
+ \lambda=(w_2-w_0)/\rho.
+\]
+The entries are distinct, so \(\rho\ne0\) and \(\lambda\notin\{0,1\}\).  Equality of the two
+slopes on the Frobenius graph forces
+\[
+ (1+\lambda^{2^\ell-1})z=1+\lambda^{2^\ell}.                  \tag{7.2}
+\]
+If \(\lambda^{2^\ell-1}=1\), this equation would give \(\lambda=1\), so its denominator is
+nonzero and \(z\) is exactly the value in (7).  The sum-one condition is soluble precisely when
+\[
+ z+1+\lambda\ne0
+ \quad\Longleftrightarrow\quad
+ \lambda^{2^\ell-2}\ne1.
+\]
+It then uniquely forces \(\rho=(z+1+\lambda)^{-1}\).  Thus ordered solutions are in bijection
+with
+\[
+ \lambda\in\mathbb F_q^\times,\qquad
+ \lambda^{2^\ell-1}\ne1,\qquad
+ \lambda^{2^\ell-2}\ne1.                                     \tag{7.3}
+\]
+The two excluded subgroups have respective orders
+\[
+ 2^{g_\ell}-1,\qquad 2^{h_\ell}-1
+\]
+and intersect only in \(1\).  Hence (7.3) has
+\(q-2^{g_\ell}-2^{h_\ell}+2\) elements.  Every unordered three-set has six orderings, proving
+(7.1).  Finally, \(z=0\), \(z=1\), or \(z=\lambda\) would force
+\(\lambda=1\) or \(\lambda^{2^\ell}=1\), neither possible in (7.3).  Every complement is
+therefore nonzero, so its support complement \(U\) contains zero.
+
 ## 2. Residual quadratic and all deletion divisors
 
 The factorization
@@ -262,7 +307,7 @@ theorem.
 
 ## 5. Extra-juice closeout and mystery ledger
 
-The closeout adds two cheap upgrades after the obstruction gate was fixed.
+The first closeout adds two cheap upgrades after the obstruction gate was fixed.
 
 First, complement duality lowers every fixed endpoint from \(s-1=q-k-1\) ordered support roots
 to \(k+1\) complement roots.  This is a substantial dimension reduction when the code dimension
@@ -273,12 +318,22 @@ Second, the \(k=2\) carrier is not merely generically soluble: formula (7) suppl
 over every field and at every extra Lucas level.  Thus the first possible persistent fixed
 endpoint has \(k\ge3\), and any future component theorem can begin there.
 
+A user-requested second extra-juice pass makes the binary result exact.  The primitive parameter
+in (7) was stronger than necessary: all admissible cross-ratios are classified by (7.3), giving
+the exact count (7.1).  More surprisingly, none of those complements contains zero.  Thus the
+entire binary endpoint-zero carrier—not merely the displayed witnesses—is supported on the valid
+`X^2 Q_V` completion-collision boundary.  C514's insistence on retaining that boundary is already
+essential in the smallest modular dimension.
+
 Settled:
 
 - **What are all fixed endpoint equations?** Equations (2)--(6) give the complete list and its
   complement alternant.
 - **Can any extra fixed endpoint be proved uniformly shallow?** Yes: all \(k=2\) endpoints, and
   every \(k\ge3\) endpoint with \(p^{\gcd(\ell,m)}>k+1\).
+- **Is the binary construction exhaustive, and where does it lie?** Yes.  Equation (7.3)
+  parametrizes every ordered solution, (7.1) counts the unordered carrier, and every solution has
+  \(0\in U\), exactly on the valid completion/support collision boundary.
 - **Does the residual-quadratic route retain infinity, diagonals, and completion collisions?**
   Yes.  Equations (8)--(12) separate the infinity/determinant, residual diagonal, fixed-root
   collision, and valid \(0\in U\) loci.

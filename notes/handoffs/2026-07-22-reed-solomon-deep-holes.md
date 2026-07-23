@@ -510,13 +510,15 @@ raw or reduced resultant.
 `notes/2026-07-23-c518-modular-trs-global-incidence.md` closes at the task's allowed obstruction
 exit.  Complement duality turns every extra Lucas-fixed endpoint into a `k+1`-point ordered
 Frobenius alternant with exponent `(floor(k/p^l)+1)p^l+1`.  Every binary `k=2` endpoint is
-uniformly shallow, and a fixed-subfield criterion closes a further range for `k>=3`.  The
-residual-quadratic slice has exact determinant, branch, diagonal, fixed-root resultant, valid
-completion-collision semantics, and Kummer/Artin--Schreier lifting classes.  Outside the proved
-shallow ranges, factorization monodromy and ordered-root integrality meet the same reduced
-Frobenius-alternant carrier; a quotient point still needs the exact residual lift.  No universal
-TRS synthesis or field census is justified.  This carrier is an unallocated future successor;
-C519 remains the separately owned arbitrary-redundancy residual-discriminant task.
+uniformly shallow: the report parametrizes and counts the complete binary carrier, and proves
+that every one of its zeros lies on the valid completion/support collision boundary.  A
+fixed-subfield criterion closes a further range for `k>=3`.  The residual-quadratic slice has
+exact determinant, branch, diagonal, fixed-root resultant, valid completion-collision semantics,
+and Kummer/Artin--Schreier lifting classes.  Outside the proved shallow ranges, factorization
+monodromy and ordered-root integrality meet the same reduced Frobenius-alternant carrier; a
+quotient point still needs the exact residual lift.  No universal TRS synthesis or field census
+is justified.  This carrier is an unallocated future successor; C519 remains the separately
+owned arbitrary-redundancy residual-discriminant task.
 
 ## Execution ladder
 
