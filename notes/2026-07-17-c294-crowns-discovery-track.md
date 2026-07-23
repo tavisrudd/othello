@@ -1132,3 +1132,29 @@ Kashiwara-index reading remains REASONED, not computed.
 **Status:** open lead; unallocated — sharpens the previous entry's promotion target to: compute the
 Kashiwara/Maslov index of the ordered pair `(ker H, ker H^T)` pinned to the hexad `s` and compare
 with C472's length-eight central scalar; fresh reserved C-ID required before any work.
+
+### 2026-07-22 — ej: the shared hexad is exceptional (A5-stabilized), and its class is an outer-bit candidate
+
+**Observed:** under the frozen `PSL_2(11)` the 132 Golay hexads of `ker(H)` decompose as orbits
+`11 + 11 + 55 + 55`, and the shared-line hexad `{2,6,7,8,10,11}` lies in an **11-orbit with
+stabilizer of order 60** (`A5`) — i.e. it is one of only 22 exceptional hexads realizing
+`PSL_2(11)`'s exceptional 2-transitive degree-11 action, not a generic one (the generic stabilizer
+is order 12/5 on the 55-orbits). The two 11-orbits should correspond to the two conjugacy classes
+of `A5` in `PSL_2(11)`, which are fused by the outer `PGL_2(11)` coset; so *which* 11-orbit the
+canonical intersection hexad falls in is a canonically constructed binary datum of exactly the
+outer-torsor shape the lane is hunting — a candidate carrier for the decoder's bit that survives
+C489's negative because it lives on the hexad geometry, not on a hinge refinement. The matching
+test (does the row-side/`ker(H^T)` structure under the `M`-action select the other 11-orbit,
+outer-swapped?) was not run.
+**Evidence:** hexad census (132), orbit decomposition `[11,11,55,55]`, membership of the shared
+hexad in an 11-orbit, and stabilizer order 60 computed by the integrator from the committed
+C471/C472 JSON certificates. The A5-class/outer-fusion reading and the outer-bit candidacy are
+REASONED, not computed.
+**Successor-shape note (derisk for promotion):** the Maslov/Kashiwara datum of a *pair* of
+Lagrangians is only their intersection dimension; the phase lives in the *triple* index
+`tau(L1,L2,L3)`. A promoted card must fix a canonical third Lagrangian (candidates: a graph
+Lagrangian of the divided operator, or C465's `S_11`-derived structure) or it is malformed. Fold
+the 11-orbit outer-swap test into the same successor.
+**Status:** open lead; unallocated — one successor C-ID would now cover: triple-index computation
+pinned to the hexad, the 11-orbit outer-swap test, and comparison with C472's length-eight central
+scalar.
