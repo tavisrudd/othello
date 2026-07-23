@@ -602,8 +602,17 @@
       "last": 513,
       "purpose": "prove the fixed-redundancy-eight polar-induction application via the three-marker splitting cover and contained-flag classification",
       "sequence": 67
+    },
+    {
+      "count": 1,
+      "first": 514,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 514,
+      "purpose": "modular full-length one-twist translation-quotient determinant theorem",
+      "sequence": 68
     }
   ],
-  "next_id": 514,
+  "next_id": 515,
   "schema": "codex-task-id-allocations-v1"
 }
