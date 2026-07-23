@@ -105,6 +105,10 @@ theorem matchingMate_fixedPointFree_involutive :
     ∀ p v, matchingMate p v ≠ v ∧ matchingMate p (matchingMate p v) = v := by
   native_decide
 
+/-- The fourteen displayed mate maps are pairwise distinct. -/
+theorem matchingMate_injective : Function.Injective matchingMate := by
+  native_decide
+
 /-- The two seven-element sheets. -/
 def sheet : MatchingIndex → Fin 2 := ![0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0]
 
@@ -128,6 +132,10 @@ theorem kAction_group_laws :
     (∃ e, ∀ p, kAction e p = p) ∧
     (∀ a b, ∃ c, ∀ p, kAction a (kAction b p) = kAction c p) ∧
     (∀ a, ∃ b, ∀ p, kAction a (kAction b p) = p) := by
+  native_decide
+
+/-- The eight displayed indices act by pairwise distinct permutations. -/
+theorem kAction_injective : Function.Injective kAction := by
   native_decide
 
 /-- Orbit membership under the displayed `K`-action. -/
