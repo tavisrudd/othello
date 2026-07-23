@@ -34,6 +34,34 @@ Combined with C523, this is a **complete Node-Kayles descent certificate for the
 domain**: the responder never leaves the guard family — where `Y_NK` does not apply directly, one
 `capOVER` step reaches a position all of whose opponent continuations are answered into `Y_NK`.
 
+## `ej` — q19 confirms uniform depth-2, and corrects the Weil intuition
+
+Extending the same certificate to the frozen q19 census (`c20-q19-states.jsonl.gz`, separate committed
+cert `2026-07-23-c524-capover-core-depth2-q19.json`):
+
+| q  | children  | `Y_NK` depth-0 | depth-0 coverage | `capOVER` residual | depth-2 certified | uncertified |
+|----|-----------|----------------|------------------|--------------------|-------------------|-------------|
+| 13 | 1,287     | 1,287          | 100%             | 0                  | 0                 | 0           |
+| 17 | 50,517    | 50,168         | 99.3%            | 349                | 349               | 0           |
+| 19 | 1,136,630 | 1,088,546      | 95.8%            | 48,084             | 48,084            | **0**       |
+
+**Depth ≤ 2 closes 100% at all three orders** — including q19, a non-depleted all-P order with over a
+million children. This is the first real evidence the depth bound is **uniform (2)**, not growing —
+the load-bearing support for gap-1 (the `capOK`-absorbing induction) of the uniform-`q` program.
+
+**Correction to the earlier Weil read.** The residual `capOVER` fraction **grows** with `q`
+(0% → 0.69% → 4.23%), not shrinks — so descent closure is **not** a "generic + finitely many base
+cases" phenomenon. The depth-2 bridge is load-bearing and increasingly so, yet closes every child. So
+Weil / finite-exceptions belongs to the **(ON) abundance / P-child depletion** layer (the sporadic
+{11,17}), a different quantity; the **descent** piece looks like a clean, uniform combinatorial
+depth-2 theorem (guard + bounded-depth bridge), needing no character/counting input. Caveat: three
+orders, and the q19 domain is a denser census than q17 — the fraction trend is directional, not an
+established asymptotic.
+
+Replay: `python3 rust/scripts/c524_capover_core_depth2.py --rows notes/data/c20-q19-states.jsonl.gz
+--q 19 --output notes/2026-07-23-c524-capover-core-depth2-q19.json` (add `--check` to verify).
+Input `c20-q19-states.jsonl.gz` sha256 `5ddea78f59898c194b2fdedda9871d7787dac577bef0aa44e5483e5109589e8a`.
+
 ## Reading
 
 C80(b) asks for bulk descent into a proven-P packet. At q17 that is now delivered as a two-tier
@@ -63,16 +91,19 @@ guard the `Y_NK ⟹ P` dependency (every residual child verified N, every witnes
   exactly the `Y_NK0`/`Y_NK`-uncovered children); depth-2 suffices for all 349. Whether some deeper
   order is ever needed at larger `q` is the uniform-`q` question below.
 - **Open — owner: C80 uniform-`q` crown.** Does the two-tier certificate (`Y_NK` + bounded-depth
-  `capOVER` bridge) generalize to all odd `q`? The residual `capOVER` core must be shown bounded-depth
-  routable uniformly — the successor to this q17 closure. (q13/q17 give depth ≤ 2.)
+  `capOVER` bridge) generalize to all odd `q`? q13/q17/q19 all close at depth ≤ 2 (the `ej` addendum),
+  so the target is a **uniform depth-2 routing theorem** — the residual `capOVER` core is
+  bounded-depth routable for all odd `q`. This is a combinatorial statement (no Weil), unlike the
+  (ON)-abundance layer.
 - **Open — owner: formalization lane.** Lean statements of `capOK ⇒ P iff full-graph Grundy 0` (C523)
   and the depth-2 routing lemma (C524).
 - **Open — owner: C82.** Countability of the two-tier strategy for abundance.
 
 ## Vibe
 
-This is the q17 finish line for C80(b): the descent gap went 9.3% → 0.7% (C523) → **0** (C524) across
-this session, and the responder now has a fully certified, minimax-free winning strategy from every
-three-intruder child at q17, entirely inside the Node-Kayles guard family. The odd-`q` crown is still
-open — this is one prime, over the frozen domain — but C80(b) has gone from "prove bulk descent" to
-"generalize a clean, closed q17 certificate," which is a categorically better place to stand.
+This is the finish line for C80(b) at every tested order: the descent gap went 9.3% → 0.7% (C523) →
+**0** (C524), and the same minimax-free depth-2 certificate closes q13, q17, **and q19** (1.1M
+children) — 0 uncertified everywhere, depth ≤ 2 throughout. The odd-`q` crown is still open — three
+primes over the frozen domain — but C80(b) has gone from "prove bulk descent" to "prove a uniform
+depth-2 routing theorem," a clean combinatorial target with no arithmetic input, which is a
+categorically better place to stand.

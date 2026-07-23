@@ -159,9 +159,10 @@ def main() -> int:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
+    qs = ", ".join(f"q={q}" for q in args.q)
     payload = {
         "claim_scope": (
-            "Bounded-depth Node-Kayles descent certificate over the frozen q=13 and q=17 "
+            f"Bounded-depth Node-Kayles descent certificate over the frozen {qs} "
             "three-intruder domain (children reachable by one intruder opponent move from a "
             "recorded C20 P reply state). Every child is Y_NK at depth 0 or depth-2 certified."
         ),
@@ -173,9 +174,9 @@ def main() -> int:
             "the recorded minimax assertions merely guard the Y_NK => P dependency."
         ),
         "verdict": (
-            "0 uncertified. Combined with C523's Y_NK coverage, the entire frozen q17 "
+            f"0 uncertified for every tested order ({qs}). Every child in each frozen "
             "three-intruder domain admits a certified responder winning strategy within the "
-            "Node-Kayles guard family; q13 was already closed at depth 0."
+            "Node-Kayles guard family (Y_NK at depth 0, else a depth-2 bridge into Y_NK)."
         ),
         "source": {
             "path": str(args.rows.relative_to(ROOT)),

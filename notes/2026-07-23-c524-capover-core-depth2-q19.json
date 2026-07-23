@@ -1,0 +1,22 @@
+{
+  "certificate": "A residual child C is depth-2 certified when the responder has a reply r into G = C u {r} such that every opponent move o from G admits a responder reply p with G u {o,p} in Y_NK. Because Y_NK => P is proven (C523), every opponent move from G loses, so G is P and C is N via r. The certificate uses only structural Y_NK checks; the recorded minimax assertions merely guard the Y_NK => P dependency.",
+  "claim_scope": "Bounded-depth Node-Kayles descent certificate over the frozen q=19 three-intruder domain (children reachable by one intruder opponent move from a recorded C20 P reply state). Every child is Y_NK at depth 0 or depth-2 certified.",
+  "fields": [
+    {
+      "capover_core_residual": 48084,
+      "depth2_certified": 48084,
+      "depth2_witness_digest_sha256": "aa5e60caf0e8f14d5ee15489e1ce324ccbeb2b643d84816ae3be0e9a6250a41c",
+      "fully_certified": true,
+      "q": 19,
+      "uncertified": 0,
+      "unique_three_intruder_children": 1136630,
+      "ynk_depth0_covered": 1088546
+    }
+  ],
+  "source": {
+    "bytes": 2423200,
+    "path": "notes/data/c20-q19-states.jsonl.gz",
+    "sha256": "5ddea78f59898c194b2fdedda9871d7787dac577bef0aa44e5483e5109589e8a"
+  },
+  "verdict": "0 uncertified for every tested order (q=19). Every child in each frozen three-intruder domain admits a certified responder winning strategy within the Node-Kayles guard family (Y_NK at depth 0, else a depth-2 bridge into Y_NK)."
+}

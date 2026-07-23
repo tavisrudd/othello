@@ -623,10 +623,19 @@ two-ply, **minimax-free** certificate given `Y_NK ⟹ P`. All **349/349** certif
 So the entire frozen **q17 three-intruder domain (50,517 children) has a certified responder winning
 strategy inside the Node-Kayles guard family** — `Y_NK` at depth 0 (99.3%) or the depth-2 bridge
 (0.7%), nothing left to minimax. C80(b) is thus **solved at q17 (and q13)** over the frozen domain,
-reduced to a structural object: the `Y_NK` guard + a bounded-depth routing lemma. **Remaining crown =
-uniform-in-`q`**: show the two-tier certificate (`Y_NK` + bounded-depth `capOVER` bridge) generalizes
-to all odd `q` (next successor; reserve a new `[cap]` C-ID). Also open: Lean statements of both lemmas;
-C82 countability. Report+cert+`--check`:
+reduced to a structural object: the `Y_NK` guard + a bounded-depth routing lemma. **q19 confirms it
+(1,136,630 children, 95.8% `Y_NK` depth-0, 48,084 residual all depth-2 certified, 0 uncertified)** —
+so **depth ≤ 2 closes 100% at q=13,17,19** (computational, not proven). The residual `capOVER` fraction
+*grows* (0% → 0.7% → 4.2%), which suggests descent closure is a **combinatorial** phenomenon, NOT a
+Weil "generic + finite exceptions" one (Weil belongs to the (ON) abundance / {11,17} P-child-depletion
+layer, a different quantity). **Proof status (do not overclaim):** the `Y_NK` guard `capOK ⟹ (P ⟺
+full-graph Grundy 0)` now has a written proof — persistence + edge-preservation ⟹ static Node-Kayles —
+in [`../2026-07-23-c523-ynk-guard-proof.md`](../2026-07-23-c523-ynk-guard-proof.md) (pending Lean). The
+**depth-2 routing is a CONJECTURE** verified only at q=13/17/19; there is no proof of coverage,
+depth-boundedness, or uniformity, and three primes cannot exclude a depth-3 tail at larger `q`.
+**Remaining crown = prove the uniform-in-`q` routing** (next successor; reserve a new `[cap]` C-ID).
+Also open: Lean statements of both lemmas; C82 countability. Report+cert+`--check` (q13/q17 and a
+separate q19 cert):
 [`../2026-07-23-c524-capover-core-depth2.md`](../2026-07-23-c524-capover-core-depth2.md).
 
 Priority order and why:

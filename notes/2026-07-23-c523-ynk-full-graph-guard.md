@@ -79,10 +79,10 @@ absorb; it is the successor target (a bounded-overload P-law or a finite base-ca
   static-Node-Kayles reduction on the full legal-point graph; live conic points are just ordinary
   vertices. The empty/live distinction `Y_NK0` drew was never the real boundary — `capOK` vs
   `capOVER` is.
-- **Settled (ej):** *Is the theorem `capOK ⇒ P iff full-graph Grundy 0` proved or only measured?* The
-  structural argument (a new triple would need 3 legal points on a capacity-2 line, forbidden by
-  `capOK`) is a proof sketch; the 54,930-case zero-disagreement run is its computational certificate.
-  A Lean statement is not yet written — flagged for the formalization lane.
+- **Settled (ej):** *Is the theorem `capOK ⇒ P iff full-graph Grundy 0` proved or only measured?* Now
+  written as a proof (persistence + edge-preservation ⟹ static Node-Kayles ⟹ Sprague–Grundy):
+  [`2026-07-23-c523-ynk-guard-proof.md`](2026-07-23-c523-ynk-guard-proof.md). The 54,930-case
+  zero-disagreement run is its computational cross-check. Lean statement still pending.
 - **Open — owner: successor (reserve a new `[cap]` C-ID).** The 349-child `capOVER` core: is the
   minimal-overload-3 family (323 children) a bounded `PGL(2,17)` object with its own P-law, or a
   finite base-case set? This is the remaining C80(b) obstruction.

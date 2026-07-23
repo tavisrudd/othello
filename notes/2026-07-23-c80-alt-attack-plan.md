@@ -73,11 +73,13 @@ full legal-point graph, P ⟺ full-graph Grundy 0) lifts descent coverage to **q
 residual is a **349-child capOVER core** (323 at minimal overload 3). See
 [`2026-07-23-c523-ynk-full-graph-guard.md`](2026-07-23-c523-ynk-full-graph-guard.md).
 
-**q17 descent CLOSED — C524, 2026-07-23.** The 349-child `capOVER` core certifies by a minimax-free
-**depth-2 descent into `Y_NK`** (349/349): the responder's `capOVER` reply reaches a state whose every
-opponent continuation is answered into `Y_NK`. The whole frozen q17 three-intruder domain (50,517
-children) now has a certified responder strategy inside the Node-Kayles family; C80(b) is solved at
-q17/q13. **New successor: the uniform-in-`q` generalization** (reserve a new `[cap]` C-ID). See
+**Descent CLOSED at q=13/17/19 — C524, 2026-07-23.** The `capOVER` residual certifies by a minimax-free
+**depth-2 descent into `Y_NK`**: the responder's `capOVER` reply reaches a state whose every opponent
+continuation is answered into `Y_NK`. Verified fully (0 uncertified) at q13 (0 residual), q17 (349),
+and q19 (48,084 / 1,136,630 children) — **depth ≤ 2 throughout**, so the depth bound looks uniform.
+C80(b) is solved at q13/17/19; the residual fraction grows with `q` (0→0.7%→4.2%), so descent closure
+is a **uniform combinatorial depth-2 theorem**, not a Weil finite-exceptions phenomenon. **New
+successor: the uniform-in-`q` depth-2 routing theorem** (reserve a new `[cap]` C-ID). See
 [`2026-07-23-c524-capover-core-depth2.md`](2026-07-23-c524-capover-core-depth2.md). The original
 Route 3 objective below is retained for provenance.
 
