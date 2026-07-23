@@ -6,7 +6,7 @@
 
 **Status:** C475--C491 and C499 complete; C498 active (all-field split-member theorem and
 persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
-C509 active (redundancy-seven claim-specific literature and pointed-polar entry gate);
+C509 active (redundancy-seven q>=37 existence/PGL/PGamma theorem complete; bounded calibration);
 C510 queued (bounded one-twist TRS audit/geometry pilot after the C509 entry theorem);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -344,6 +344,19 @@ resulting orbit sizes and semilinear cycle counts.
 The same first-polar recursion makes redundancy seven the cheapest new case: its sextic polar line
 lies in C498 syndrome space.  Its exact entry gate is a pointed C498 lifting lemma and the
 classification of polar lines contained in the quadratic-gcd/nucleus loci.
+C509 has now passed its claim-specific audit and proves the exact pointed contraction identity.
+Containment in C498's catalecticant secant closure is equivalent to sextic catalecticant rank at
+most two; removing rank one and rational-split secants leaves the persistent tangent/sigma deep
+stratum.  Its orbit law is `T/T^6` modulo inversion and Frobenius, replayed at q=4/5/7/8/9, and the
+C498 characteristic-two nucleus line contracts to the central sextic point.  The active gate is
+the prescribed-root collision divisor, not a full `P6` census.  The central point is now deep
+exactly for odd characteristic-two extension degree (`t^4+t` is the even-degree witness), and
+adding a second six-point deletion to C498's S3 fibre proof gives a pointed trivial-gcd theorem for
+`q>=37`.  A bidegree union bound handles gcd-one common roots away from the marked point, while
+marked equality is ramification of a separable `g^3_5` and costs at most eight parameters.
+Therefore the q>=37 deep set is exactly the persistent tangent/sigma stratum plus the central
+fixed point in odd characteristic-two extension degree; C509 now needs only orbit-reduced q<37
+calibration.
 
 ## Execution ladder
 
@@ -405,7 +418,7 @@ history.
 
 `go C509`
 
-(C509 is the allocated redundancy-seven successor.  Start with its claim-specific audit, then
-prove the pointed C498 lifting lemma and classify sextic first-polar lines contained in the
-quadratic-gcd/nucleus loci.  C498 remains active only for intrinsic q=7/8/9/13 normal forms; C500
-remains release-gated.)
+(C509's audit, pointed polar reduction, persistent orbit law, central nucleus criterion, and
+q>=37 theorem are complete.  Continue with orbit-reduced q<37 calibration.  C498 remains active
+only for intrinsic q=7/8/9/13 normal forms; C510 is the queued TRS pilot; C500 remains
+release-gated.)

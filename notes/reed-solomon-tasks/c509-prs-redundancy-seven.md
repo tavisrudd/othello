@@ -55,6 +55,13 @@ where MathSciNet is unavailable.
 
 ## Status
 
-Allocated and started.  C498 supplies the all-field downstairs exceptional inventory and exact
-fifth-power orbit law.  The first active step is the claim-specific literature audit, followed by
-the pointed lifting lemma; no \(\mathbf P^6\) exhaustive census is authorized before orbit reduction.
+**Entry audit passed (2026-07-23): NOT PRE-EMPTED**, with wording and coverage constraints in
+`notes/2026-07-23-c509-prs-redundancy-seven-literature-audit.md`.  The exact pointed contraction
+identity is proved, containment in the C498 secant closure is exactly sextic catalecticant rank at
+most two, its shallow rational secants are separated from the persistent tangent/sigma strata, and
+the C498 nucleus line contracts to the central sextic point.  The \(T/T^6\) PGL/PGamma orbit law is replayed at
+\(q=4,5,7,8,9\); the central point is deep exactly in odd characteristic-two extension degree.
+Adding one forbidden-root deletion to C498 proves the pointed trivial-gcd lemma for \(q\ge37\).
+The gcd-one bidegree argument reduces the only obstruction to at most eight ramification points,
+closing the full \(q\ge37\) existence and orbit theorem.  Next: orbit-reduced \(q<37\) calibration.
+No full \(\mathbf P^6\) exhaustive census is authorized.
