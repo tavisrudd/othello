@@ -6,6 +6,7 @@
 
 **Status:** C475--C491 and C499 complete; C498 active (all-field split-member theorem and
 persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
+C509 active (redundancy-seven claim-specific literature and pointed-polar entry gate);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -398,9 +399,9 @@ history.
 
 ## Next command
 
-`go C498`
+`go C509`
 
-(C498 is active.  Its audit, census calibration, exact symmetric-cube cone, nucleus line, both
-q=11 mechanisms, C491 quotient-line re-foundation, and all-field existence/orbit counts are
-complete; intrinsic q=7/8/9/13 normal forms and final semilinear packaging are next.  C500 remains
-release-gated.)
+(C509 is the allocated redundancy-seven successor.  Start with its claim-specific audit, then
+prove the pointed C498 lifting lemma and classify sextic first-polar lines contained in the
+quadratic-gcd/nucleus loci.  C498 remains active only for intrinsic q=7/8/9/13 normal forms; C500
+remains release-gated.)
