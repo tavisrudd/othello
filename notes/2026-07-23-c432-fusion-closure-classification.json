@@ -1,0 +1,722 @@
+{
+  "classification": [
+    {
+      "bell_partitions_in_c400": 5,
+      "cover_closure_record_sha256": "1d008a2989ebce4a2190a2ba688c7dcf3601fa54a3fd8791ee2df0432dbfc3c3",
+      "cover_probes": 3,
+      "fusions": [
+        {
+          "cover_hits": 0,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3
+            ]
+          ],
+          "rank": 2,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3
+            ]
+          ]
+        },
+        {
+          "cover_hits": 3,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ],
+          "rank": 4,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ]
+          ]
+        }
+      ],
+      "group_order": 125,
+      "matches_frozen_c400_exhaustion": true,
+      "ordinary_product_closure_verified": true,
+      "q": 5,
+      "rank": 4,
+      "strict_closure_rounds_histogram": {
+        "1": 3
+      }
+    },
+    {
+      "bell_partitions_in_c400": 52,
+      "cover_closure_record_sha256": "0ab25675227244c70c193c4ad7c05d5f48a8e381788c8f48bb575d47d57620ac",
+      "cover_probes": 17,
+      "fusions": [
+        {
+          "cover_hits": 0,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          ],
+          "rank": 2,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          ]
+        },
+        {
+          "cover_hits": 3,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ],
+          "rank": 4,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2
+            ],
+            [
+              3,
+              4
+            ]
+          ]
+        },
+        {
+          "cover_hits": 14,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ],
+          "rank": 6,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ]
+          ]
+        }
+      ],
+      "group_order": 729,
+      "matches_frozen_c400_exhaustion": true,
+      "ordinary_product_closure_verified": true,
+      "q": 9,
+      "rank": 6,
+      "strict_closure_rounds_histogram": {
+        "1": 16,
+        "2": 1
+      }
+    },
+    {
+      "bell_partitions_in_c400": 877,
+      "cover_closure_record_sha256": "82286b8d369e8f608fa9dcb983e77d2bbd17ff7a4a15701490dd87382312f455",
+      "cover_probes": 71,
+      "fusions": [
+        {
+          "cover_hits": 0,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ],
+          "rank": 2,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          ]
+        },
+        {
+          "cover_hits": 3,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              2,
+              3,
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "rank": 4,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              4,
+              5
+            ],
+            [
+              2,
+              3,
+              6
+            ],
+            [
+              7
+            ]
+          ]
+        },
+        {
+          "cover_hits": 15,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ]
+          ],
+          "rank": 6,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ]
+          ]
+        },
+        {
+          "cover_hits": 53,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ],
+          "rank": 8,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ]
+        }
+      ],
+      "group_order": 1331,
+      "matches_frozen_c400_exhaustion": true,
+      "ordinary_product_closure_verified": true,
+      "q": 11,
+      "rank": 8,
+      "strict_closure_rounds_histogram": {
+        "1": 59,
+        "2": 12
+      }
+    },
+    {
+      "bell_partitions_in_c400": null,
+      "cover_closure_record_sha256": "270158aaa060d9d0df4cd1b654d16d307a69f5f7fce01189c62be92f66549d6d",
+      "cover_probes": 4183,
+      "fusions": [
+        {
+          "cover_hits": 0,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ]
+          ],
+          "rank": 2,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13
+            ]
+          ]
+        },
+        {
+          "cover_hits": 3,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              3,
+              5,
+              6,
+              10,
+              12
+            ],
+            [
+              2,
+              4,
+              7,
+              8,
+              9,
+              13
+            ],
+            [
+              11
+            ]
+          ],
+          "rank": 4,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              3,
+              5,
+              6,
+              10,
+              12
+            ],
+            [
+              2,
+              4,
+              7,
+              8,
+              9,
+              13
+            ],
+            [
+              11
+            ]
+          ]
+        },
+        {
+          "cover_hits": 15,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              6,
+              11
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              5,
+              7,
+              12,
+              13
+            ]
+          ],
+          "rank": 6,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              10,
+              11
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              4,
+              9,
+              12,
+              13
+            ],
+            [
+              5,
+              6
+            ]
+          ]
+        },
+        {
+          "cover_hits": 15,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              2,
+              10,
+              11
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              4,
+              9,
+              12,
+              13
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "rank": 6,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1,
+              10
+            ],
+            [
+              2,
+              6,
+              11
+            ],
+            [
+              3,
+              9
+            ],
+            [
+              4,
+              8
+            ],
+            [
+              5,
+              7,
+              12,
+              13
+            ]
+          ]
+        },
+        {
+          "cover_hits": 4150,
+          "dual_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ],
+            [
+              8
+            ],
+            [
+              9
+            ],
+            [
+              10
+            ],
+            [
+              11
+            ],
+            [
+              12
+            ],
+            [
+              13
+            ]
+          ],
+          "rank": 14,
+          "relation_blocks": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ],
+            [
+              8
+            ],
+            [
+              9
+            ],
+            [
+              10
+            ],
+            [
+              11
+            ],
+            [
+              12
+            ],
+            [
+              13
+            ]
+          ]
+        }
+      ],
+      "group_order": 6859,
+      "matches_frozen_c400_exhaustion": null,
+      "ordinary_product_closure_verified": true,
+      "q": 19,
+      "rank": 14,
+      "strict_closure_rounds_histogram": {
+        "1": 3606,
+        "2": 576,
+        "3": 1
+      }
+    }
+  ],
+  "criterion": "fixed points of pi -> R_Q(R_P(pi))",
+  "schema": "c432-fusion-closure-v1",
+  "source": {
+    "path": "2026-07-20-c400-a5-fourier-phases.json",
+    "sha256": "96052bf03609b8136dbba3461ae8a4c5232b97935ca4b5d6920854eeae561811"
+  }
+}

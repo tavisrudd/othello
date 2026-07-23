@@ -210,7 +210,7 @@ case taxonomy.
 **Evidence:** OPEN — C400 supplies exact eigenmatrices, orbit types, and bounded fusion lattices,
 but no structural all-fusion theorem.  This is a substantial research programme, not a free
 corollary.
-**Status:** open lead; unallocated
+**Status:** graduated -> C432 / `notes/2026-07-23-c432-fusion-closure-classification.md`
 
 ### 2026-07-20 — Separability/CI beyond the failed standard criteria
 

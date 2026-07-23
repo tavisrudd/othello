@@ -335,11 +335,14 @@ promotion of any lead goes through the normal C-ID process.
    incidence proof style looks portable. Caution: C403 itself shows depth alone stops sufficing
    for higher *degree*; the higher-*rank* analogue needs its own counterexample search first.
    REASONED conjecture; falsifier-first (one rank-four counterexample hunt) is the cheap gate.
-4. **Structural classification of all C400 coherent fusions** (discovery entry, 2026-07-20):
-   replace Bell-number partition enumeration by a centralizer/representation-algebra criterion
-   reproducing the exact q=5/9/11 lattices. The entry itself flags this as a research
-   programme, not a corollary; it is the right successor shape for spine future direction 4.
-   OPEN.
+4. **Structural classification of C400 coherent fusions — COMPLETE THROUGH q=19 (C432).**
+   The portable two-Fourier closure theorem identifies coherent fusions of any commutative
+   association scheme with the fixed points of `pi ↦ R_Q(R_P(pi))`; a complete cover-closure
+   search replaces Bell-number enumeration and reproduces the q=5/9/11 lattices with
+   `3/17/71` probes.  The ej pass also closes q=19 with 4,183 probes and finds, besides the
+   orthogonal rank-four fusion, two rank-six fusions exchanged by Fourier duality.  q=29+
+   remains open because the first cover layer is still exponentially large.  See
+   `notes/2026-07-23-c432-fusion-closure-classification.md`.
 5. **Modular (mod 11) identification of the depth map.** Second-order observation from C411:
    `PGL_2(11)` has cyclic Sylow-11, so its mod-11 category is Brauer-tree-controlled, and the
    22-dimensional permutation module `F_11[G/A5]`, the four-dimensional odd Fourier block, and
