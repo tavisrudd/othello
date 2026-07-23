@@ -1,0 +1,187 @@
+{
+  "assertions": {
+    "all_cross_types_transverse": true,
+    "all_own_legs_rank_two": true,
+    "all_same_type_rank_one_bruhat": true,
+    "all_three_orbits_per_sheet": true,
+    "all_total_strata_six": true
+  },
+  "cases": [
+    {
+      "H": "S4",
+      "H_order": 24,
+      "golden_pair_types": [
+        {
+          "K_order": 8,
+          "K_type": "D8",
+          "borel_model": "pullback of B(PGL2(2))",
+          "cross_intersection_order": 2,
+          "cross_type": "S3",
+          "cross_type_double_cosets": 1,
+          "cross_type_orbit_sizes": [
+            4
+          ],
+          "exact_factorization": true,
+          "opposite_sheet_K_orbits": [
+            1,
+            2,
+            4
+          ],
+          "orbits_per_sheet": [
+            3,
+            3
+          ],
+          "own_leg_double_cosets": 2,
+          "own_leg_orbit_sizes": [
+            2,
+            4
+          ],
+          "own_sheet_K_orbits": [
+            1,
+            2,
+            4
+          ],
+          "own_stabilizer_order": 4,
+          "same_type_bruhat_double_cosets": 2,
+          "same_type_orbit_sizes": [
+            1,
+            2
+          ],
+          "total_strata": 6
+        },
+        {
+          "K_order": 6,
+          "K_type": "S3",
+          "borel_model": "B(PGL2(3))",
+          "cross_intersection_order": 2,
+          "cross_type": "D8",
+          "cross_type_double_cosets": 1,
+          "cross_type_orbit_sizes": [
+            3
+          ],
+          "exact_factorization": true,
+          "opposite_sheet_K_orbits": [
+            1,
+            3,
+            3
+          ],
+          "orbits_per_sheet": [
+            3,
+            3
+          ],
+          "own_leg_double_cosets": 2,
+          "own_leg_orbit_sizes": [
+            3,
+            3
+          ],
+          "own_sheet_K_orbits": [
+            1,
+            3,
+            3
+          ],
+          "own_stabilizer_order": 4,
+          "same_type_bruhat_double_cosets": 2,
+          "same_type_orbit_sizes": [
+            1,
+            3
+          ],
+          "total_strata": 6
+        }
+      ],
+      "opposite_component_sizes": [
+        3,
+        4
+      ],
+      "own_transitive_orbit_size": 6
+    },
+    {
+      "H": "A5",
+      "H_order": 60,
+      "golden_pair_types": [
+        {
+          "K_order": 12,
+          "K_type": "A4",
+          "borel_model": "B(PSL2(4))",
+          "cross_intersection_order": 2,
+          "cross_type": "D10",
+          "cross_type_double_cosets": 1,
+          "cross_type_orbit_sizes": [
+            6
+          ],
+          "exact_factorization": true,
+          "opposite_sheet_K_orbits": [
+            1,
+            4,
+            6
+          ],
+          "orbits_per_sheet": [
+            3,
+            3
+          ],
+          "own_leg_double_cosets": 2,
+          "own_leg_orbit_sizes": [
+            4,
+            6
+          ],
+          "own_sheet_K_orbits": [
+            1,
+            4,
+            6
+          ],
+          "own_stabilizer_order": 6,
+          "same_type_bruhat_double_cosets": 2,
+          "same_type_orbit_sizes": [
+            1,
+            4
+          ],
+          "total_strata": 6
+        },
+        {
+          "K_order": 10,
+          "K_type": "D10",
+          "borel_model": "B(PSL2(5))",
+          "cross_intersection_order": 2,
+          "cross_type": "A4",
+          "cross_type_double_cosets": 1,
+          "cross_type_orbit_sizes": [
+            5
+          ],
+          "exact_factorization": true,
+          "opposite_sheet_K_orbits": [
+            1,
+            5,
+            5
+          ],
+          "orbits_per_sheet": [
+            3,
+            3
+          ],
+          "own_leg_double_cosets": 2,
+          "own_leg_orbit_sizes": [
+            5,
+            5
+          ],
+          "own_sheet_K_orbits": [
+            1,
+            5,
+            5
+          ],
+          "own_stabilizer_order": 6,
+          "same_type_bruhat_double_cosets": 2,
+          "same_type_orbit_sizes": [
+            1,
+            5
+          ],
+          "total_strata": 6
+        }
+      ],
+      "opposite_component_sizes": [
+        5,
+        6
+      ],
+      "own_transitive_orbit_size": 10
+    }
+  ],
+  "schema": "c492-c434-conceptual-refoundation-v1",
+  "scope": "Exact A5/S4 double-coset tables underlying the abstract two-sheet theorem; the ambient finite-geometric realization and Dickson exhaustion are not recomputed."
+}
