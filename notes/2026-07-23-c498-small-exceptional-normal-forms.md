@@ -90,9 +90,62 @@ for the q=8 nucleus representative 64.  Thus zero energy is equivalent here
 but is not the minimal detector.  The q=11 trinomial echo has mass 40 and
 energy 60, so the criterion separates the geometric modular family from its
 isolated odd-characteristic coordinate echo.
+
+### Root-collision graph and exact factorial hierarchy
+
+Put a graph on \(X_{1+3}(W_f)\) by joining two quartic members when their
+unique rational roots agree.  If
+\[
+m_j=\#\{r\in\mathbf P^1(\mathbf F_q):I_f(r)=j\},
+\]
+then this graph is the disjoint union
+\[
+\bigsqcup_j m_j K_j.
+\]
+Its \(k\)-clique count is the factorial energy
+\[
+E_k(f)=\sum_r\binom{I_f(r)}k=\sum_j m_j\binom jk.
+\]
+The whole root-load spectrum is recovered exactly by binomial inversion:
+\[
+m_j=\sum_{k\ge j}(-1)^{k-j}\binom kj E_k.
+\]
+Thus the factorial-energy hierarchy is not merely a sequence of heuristic
+statistics; taken through the maximum load, it is equivalent to the full
+irreducible-cubic pointed spectrum.  In C498 the exceptional locus is much
+more rigid: \(E_1=N_{1+3}\) detects the modular nucleus, while \(E_2\) plus
+the odd-characteristic quintic root type already classifies every remaining
+semilinear exception.
 This realizes the C498 re-foundation intrinsically: the small exceptions
 are classified by the coherently parameterized first-polar line inside the
 C491 syndrome space, rather than by coordinate labels alone.
+
+### Tao audit: the \(S_3\) class-function bridge
+
+For a separable residual cubic, irreducibility is the condition that
+coefficientwise Frobenius acts as a \(3\)-cycle on its roots.  On the three
+conjugacy classes of \(S_3\), the indicator of that class has the exact
+character expansion
+\[
+\mathbf1_{(123)}
+=\frac{\chi_{\rm triv}+\chi_{\rm sign}-\chi_{\rm std}}3.
+\]
+Consequently \(I_f(r)\) is a sum of Frobenius trace functions for the
+trivial, sign, and standard local systems of the cubic-root cover, with the
+ramified locus extended by zero.  The factorial energies are correlations
+of this class function over a common marker.  Algebraically they should be
+handled as linear combinations of trace sums on tensor/fibre-product
+sheaves—not described without qualification as raw rational-point counts of
+one fibre product.
+
+This gives a precise monodromy interface.  The bounded certificate proves
+that order two is rigid on the C498 exceptional locus; the small
+three-dimensional \(S_3\) class algebra explains why that is plausible, but
+does not by itself prove uniform order-two rigidity.  At higher redundancy,
+the corresponding Frobenius-class indicator must be expanded in
+irreducible characters of the lower splitting-cover monodromy group.  The
+new general question is which tensor order detects the exceptional locus
+before full Chebotarev classification becomes necessary.
 
 ## Normal forms and semilinear laws
 
@@ -172,9 +225,10 @@ distribution to its irreducible-cubic coordinate.  The second-order ablation
 then reduced that spectrum to its second moment.  The third-order pass
 subtracts the first-moment double count and isolates the actual new datum:
 \(E_f\), the shared-root collision energy of \(1+3\) net members.  This is a
-two-copy fibre-product incidence count, not an opaque hash.  In odd
-characteristic the quintic root-divisor type supplies the remaining global
-parent datum lost by the aggregated polar contractions.
+two-copy combinatorial collision count, not an opaque hash.  Its
+algebro-geometric realization is the \(S_3\) character-sheaf correlation
+above.  In odd characteristic the quintic root-divisor type supplies the
+remaining global parent datum lost by the aggregated polar contractions.
 
 The fourth-order pass removes the polar parameterization from the final
 answer.  Direct enumeration inside \(W_f\) proves that \(E_f\) is exactly the
@@ -196,12 +250,21 @@ exceptions.  This separates two mechanisms cleanly: modular contained flags
 erase an entire factorization stratum, while arithmetic accidents retain the
 stratum but alter its shared-root collision geometry.
 
+The seventh-order pass packages the entire hierarchy as the clique vector of
+a canonical root-collision graph.  Binomial inversion proves that all
+factorial energies recover the complete root-load spectrum, while the C498
+exceptional locus collapses at order two.  The precise general-redundancy
+question is therefore no longer “do moments help?” but “is there a
+redundancy-dependent bounded moment order that is rigid on the exceptional
+locus?”  Full monodromy is needed only if this low-order rigidity fails.
+
 No genuine C498 classification mystery remains.  The all-field split-member theorem,
 persistent fifth-power orbit law, modular nucleus recurrence, and bounded
 exceptional semilinear normal forms are now all classified.  Further
 compression into a single low-degree classical quintic invariant would be
 a change of presentation, not an evidence gap or an unclassified orbit.
 The new research opportunity is external to C498: \(E_f\) is a two-copy
-fibre-product count, suggesting that the arbitrary-redundancy monodromy gate
-may admit a hierarchy of low-order polar moments before one attempts a full
-splitting-cover monodromy theorem.
+Chebotarev correlation after the \(S_3\) character expansion, suggesting
+that the arbitrary-redundancy monodromy gate may admit a hierarchy of
+low-order tensor moments before one attempts a full splitting-cover
+monodromy theorem.

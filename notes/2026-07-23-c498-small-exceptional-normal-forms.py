@@ -19,6 +19,7 @@ import importlib.util
 import json
 from collections import Counter
 from itertools import combinations
+from math import comb
 from pathlib import Path
 
 
@@ -289,6 +290,34 @@ def collision_energy(profile):
     return (second - first) // 2
 
 
+def irreducible_root_load_distribution(profile):
+    spectrum = projected_polar_profile(profile, ("3",))
+    return {
+        counts[0]: marker_count
+        for counts, marker_count in spectrum
+    }
+
+
+def verify_factorial_energy_inversion(profile):
+    loads = irreducible_root_load_distribution(profile)
+    maximum = max(loads, default=0)
+    energies = [
+        sum(marker_count * comb(load, degree)
+            for load, marker_count in loads.items())
+        for degree in range(maximum + 1)
+    ]
+    recovered = {
+        load: sum(
+            (-1) ** (degree - load) * comb(degree, load) * energies[degree]
+            for degree in range(load, maximum + 1)
+        )
+        for load in range(maximum + 1)
+    }
+    assert recovered == {
+        load: loads.get(load, 0) for load in range(maximum + 1)
+    }
+
+
 def moment_signature(F, record, degrees):
     signature = (polar_moments(record["polar_profile"], degrees),)
     if F.p != 2:
@@ -383,6 +412,7 @@ def build_certificate():
                 continue
             cubic = apolar_cubic(replay, F, tuple(orbit["rep"]))
             profile = polar_profile(replay, F, tuple(orbit["rep"]))
+            verify_factorial_energy_inversion(profile)
             assert polar_moments(profile, (1,))[0] == (
                 orbit["member_hist"].get("1+3", 0)
             )
@@ -541,6 +571,26 @@ def build_certificate():
     certificate["zero_1_plus_3_mass_small_exceptional_orbits"] = (
         zero_mass_orbits
     )
+    certificate["factorial_energy_inversion"] = {
+        "formula":
+            "E_k=sum_j binom(j,k)m_j; "
+            "m_j=sum_(k>=j)(-1)^(k-j)binom(k,j)E_k",
+        "verified_for_all_36_exceptional_pgl2_orbits": True,
+    }
+    s3_characters = {
+        "identity": (1, 1, 2),
+        "transposition": (1, -1, 0),
+        "three_cycle": (1, 1, -1),
+    }
+    assert {
+        conjugacy_class: (trivial + sign - standard) // 3
+        for conjugacy_class, (trivial, sign, standard)
+        in s3_characters.items()
+    } == {"identity": 0, "transposition": 0, "three_cycle": 1}
+    certificate["s3_irreducible_cubic_character_identity"] = {
+        "formula": "1_(three_cycle)=(chi_triv+chi_sign-chi_std)/3",
+        "verified_on_all_conjugacy_classes": True,
+    }
     return certificate
 
 

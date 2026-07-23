@@ -58,6 +58,14 @@ whose gcd has a rational linear factor, giving a polar-free definition internal 
 Across the all-field trivial-gcd deep set, the stronger zero-mass condition
 \(N_{1+3}(W_f)=0\) is equivalent to the recurring characteristic-two \(3\)-nucleus orbit; the q=11
 trinomial echo instead has mass 40 and energy 60.
+More generally, the type-`1+3` members form a root-collision graph
+\(\bigsqcup_jm_jK_j\); its factorial clique counts
+\(E_k=\sum_jm_j\binom jk\) recover the full root-load spectrum by binomial inversion.  C498 is rigid
+already at \(k=2\).
+The arithmetic bridge is
+\(\mathbf1_{(123)}=(\chi_{\rm triv}+\chi_{\rm sign}-\chi_{\rm std})/3\):
+irreducible-cubic energies are Chebotarev trace correlations, giving the precise interface to
+higher monodromy.
 
 ## Exact census
 

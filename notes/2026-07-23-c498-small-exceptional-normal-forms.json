@@ -14,6 +14,10 @@
     "first_moment": "number_of_1_plus_3_quartic_net_members",
     "interpretation": "unordered_pairs_of_1_plus_3_members_with_the_same_rational_root"
   },
+  "factorial_energy_inversion": {
+    "formula": "E_k=sum_j binom(j,k)m_j; m_j=sum_(k>=j)(-1)^(k-j)binom(k,j)E_k",
+    "verified_for_all_36_exceptional_pgl2_orbits": true
+  },
   "fields": {
     "11": {
       "characteristic": 11,
@@ -2417,6 +2421,10 @@
     ],
     "minimum_coordinate_count": 1,
     "odd_characteristic_root_type_retained": true
+  },
+  "s3_irreducible_cubic_character_identity": {
+    "formula": "1_(three_cycle)=(chi_triv+chi_sign-chi_std)/3",
+    "verified_on_all_conjugacy_classes": true
   },
   "schema": "c498-small-exceptional-normal-forms-v1",
   "source": {

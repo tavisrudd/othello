@@ -373,6 +373,12 @@ characteristic by the quintic root type, it separates the frozen classes up to e
 fusion.  The energy is also the polar-free pair-gcd count inside the quartic net.
 More sharply, zero `1+3` mass on the all-field trivial-gcd deep set is exactly the recurring
 characteristic-two `3`-nucleus orbit; the q=11 trinomial echo has mass 40 and energy 60.
+The root-collision graph is a disjoint union of cliques by marked root, and its factorial clique
+counts recover the complete root-load spectrum by binomial inversion; C498 needs only orders one
+and two.
+Irreducible cubics are Frobenius `3`-cycles, with indicator
+`(chi_triv+chi_sign-chi_std)/3`; the energy hierarchy is therefore a hierarchy of Chebotarev
+character correlations, not an unqualified raw fibre-product point count.
 Thus the q=7/8/9/11/13 tables compress from `18/11/4/2/1` PGL2 orbits to
 `18/5/2/2/1` PGammaL2 normal forms.  The atomic generator/JSON/checksum bundle passes, and C498 has
 no remaining theorem or classification gap.
