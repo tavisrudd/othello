@@ -172,8 +172,9 @@ certification folded into C492):
 - **The double-coset legs are Bruhat cells and Borel transversality.** Same-type counts
   `#K\H/S = 2` are rank-1 Bruhat decompositions `#B\G/B = 2`; cross-type counts `= 1` are the
   exact factorizations (`A5 = A4·D10`, `S4 = D8·S3`) read as transversality of the two Borel
-  structures. Three-per-sheet = `1 fixed + 2 Bruhat` (own) and `2 Bruhat + 1 transversal`
-  (opposite); `c = 6` is Bruhat combinatorics.
+  structures. Opposite sheet = `2 Bruhat + 1 transversal`. Caveat: the own-sheet leg
+  `#K\H/S_own = 2` is derived but not yet Bruhat-named — `S_own` (order 6 at q=11, order 4 at
+  q=7) is not a Borel of either small structure; naming that leg is part of C492's seam.
 - **Structural twin of the Dickson exhaustion:** the construction requires `H` to carry two
   small-projective-line structures at once, which only the exceptional isomorphisms supply; the
   next consecutive pair `(7,8)` fails on order (`|PGL_2(7)| = 336 ≠ 504 = |PSL_2(8)|`). The
