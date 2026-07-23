@@ -70,9 +70,15 @@ conic in one move, so the companion guard must handle live conic content. See
 
 **Companion guard BUILT — C523, 2026-07-23.** The `Y_NK` guard (`capOK` ⟹ static Node-Kayles on the
 full legal-point graph, P ⟺ full-graph Grundy 0) lifts descent coverage to **q17 99.3% / q13 100%**;
-residual is a **349-child capOVER core** (323 at minimal overload 3). The new successor is to certify
-that core (bounded-overload P-law or finite base case; reserve a new `[cap]` C-ID). See
-[`2026-07-23-c523-ynk-full-graph-guard.md`](2026-07-23-c523-ynk-full-graph-guard.md). The original
+residual is a **349-child capOVER core** (323 at minimal overload 3). See
+[`2026-07-23-c523-ynk-full-graph-guard.md`](2026-07-23-c523-ynk-full-graph-guard.md).
+
+**q17 descent CLOSED — C524, 2026-07-23.** The 349-child `capOVER` core certifies by a minimax-free
+**depth-2 descent into `Y_NK`** (349/349): the responder's `capOVER` reply reaches a state whose every
+opponent continuation is answered into `Y_NK`. The whole frozen q17 three-intruder domain (50,517
+children) now has a certified responder strategy inside the Node-Kayles family; C80(b) is solved at
+q17/q13. **New successor: the uniform-in-`q` generalization** (reserve a new `[cap]` C-ID). See
+[`2026-07-23-c524-capover-core-depth2.md`](2026-07-23-c524-capover-core-depth2.md). The original
 Route 3 objective below is retained for provenance.
 
 **Objective.** Prove bulk descent: from an arbitrary member of the marked packet, a responder move

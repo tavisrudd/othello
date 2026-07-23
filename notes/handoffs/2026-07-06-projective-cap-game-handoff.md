@@ -616,6 +616,19 @@ successor target (bounded-overload P-law or finite base case; reserve a new `[ca
 a capacity-2 line, forbidden by `capOK`) but no Lean statement yet. Report+cert+`--check`:
 [`../2026-07-23-c523-ynk-full-graph-guard.md`](../2026-07-23-c523-ynk-full-graph-guard.md).
 
+**q17 descent CLOSED (C524, 2026-07-23) — the 349-child capOVER core certifies by depth-2 descent
+into `Y_NK`; 0 states left.** A residual child (responder to move) plays its `capOVER` winning reply
+into `G`, and **every** opponent move from `G` is answered into a `Y_NK` (=P) state — a self-contained
+two-ply, **minimax-free** certificate given `Y_NK ⟹ P`. All **349/349** certify (q13: 0 residual).
+So the entire frozen **q17 three-intruder domain (50,517 children) has a certified responder winning
+strategy inside the Node-Kayles guard family** — `Y_NK` at depth 0 (99.3%) or the depth-2 bridge
+(0.7%), nothing left to minimax. C80(b) is thus **solved at q17 (and q13)** over the frozen domain,
+reduced to a structural object: the `Y_NK` guard + a bounded-depth routing lemma. **Remaining crown =
+uniform-in-`q`**: show the two-tier certificate (`Y_NK` + bounded-depth `capOVER` bridge) generalizes
+to all odd `q` (next successor; reserve a new `[cap]` C-ID). Also open: Lean statements of both lemmas;
+C82 countability. Report+cert+`--check`:
+[`../2026-07-23-c524-capover-core-depth2.md`](../2026-07-23-c524-capover-core-depth2.md).
+
 Priority order and why:
 
 1. **C80 (spine).** Everything gates on it; the recursion-stability probe is done (negative above);
