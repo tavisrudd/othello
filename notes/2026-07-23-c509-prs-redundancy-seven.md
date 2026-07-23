@@ -1,7 +1,7 @@
 # C509 — PRS(q−6) redundancy-seven entry geometry
 
-**Lane:** `reed-solomon` · **Date:** 2026-07-23 · **Status:** literature gate and \(q\ge37\)
-existence/orbit theorem complete; bounded-field orbit-reduced calibration open
+**Lane:** `reed-solomon` · **Date:** 2026-07-23 · **Status:** complete all-field
+existence and \(PGL_2/P\Gamma L_2\) orbit classification
 
 ## Entry verdict
 
@@ -112,6 +112,18 @@ sextic catalecticant rank-two locus, removes the rational-split secants, closes 
 q=4,5,7,8,9.
 \]
 These fields realize \(d=1,2,3,6\) and both modular characteristics.
+
+The modular split has an intrinsic cocycle explanation.  If the unipotent radical
+\(U=(\mathbf F_q,+)\) acts on an affine tangent coordinate by
+\[
+u\star z=z+du,
+\]
+then \(c_d(u)=du\) is the scalar additive cocycle selected by torus normalization.  For \(d\ne0\)
+its image is all of \(\mathbf F_q\), while for \(d=0\) the origin is fixed and the torus is
+transitive on the nonzero coordinates.  Here \(d=6\), so the split occurs exactly in
+characteristics two and three.  At redundancy \(r\) the polar recursion predicts \(d=r-1\);
+once the tangent-coordinate formula is known, the modular orbit law is formal rather than a new
+enumeration.
 
 ## Pointed C498 upgrade on the trivial-gcd stratum
 
@@ -242,6 +254,105 @@ Their number is
 The complete high-field \(PGL_2/P\Gamma L_2\) orbit law is the \(T/T^6\) formula above, with the
 central point as one additional fixed orbit when present.
 
+## Exact bounded-field calibration
+
+The remaining prime powers below \(37\) are
+\[
+7,8,9,11,13,16,17,19,23,25,27,29,31,32.
+\]
+The calibration is orbit-reduced in the marked polar frame.  A deep sextic must have its infinity
+contraction in the pointed-bad C498 locus: the quintic-syndrome nets containing no split
+squarefree quartic avoiding infinity.  For \(q<16\), the generator constructs this locus as the
+exact complement of all spans of four finite quintic-NRC points.  For \(q\ge16\), it fixes
+infinity and enumerates \(\mathbf P^5(\mathbf F_q)\) modulo its affine \(PGL_2\) stabilizer,
+tests one representative per orbit, and expands only pointed-bad orbits.  At \(q=16,17\) the
+orbit-reduced result is independently equal to the full pointed complement.
+
+For each pointed-bad contraction \(x=(a_0,\ldots,a_5)\), only the \(q\) extensions
+\((a_0,\ldots,a_5,a_6)\) are tested.  Every candidate is checked at all \(q+1\) contractions,
+then the surviving set is decomposed under \(PGL_2\) and Frobenius.  Thus the largest search,
+\(q=32\), examines the exact pointed candidate locus rather than the
+\(1+q+\cdots+q^6\) ambient points.
+
+The complete bounded table is:
+\[
+\begin{array}{c|r|r|r|r|r}
+q&\text{pointed-bad}&\text{polar candidates}&\text{deep}&PGL_2\text{ orbits}
+ &\text{exceptional deep}\\ \hline
+7&11040&77281&55860&197&55636\\
+8&14166&113329&50776&124&50451\\
+9&14479&130312&28350&58&27900\\
+11&8130&89431&3080&10&2288\\
+13&3147&40912&1274&3&0\\
+16&2553&40849&2312&3&0\\
+17&3027&51460&2754&5&0\\
+19&4162&79079&3800&3&0\\
+23&7131&164014&6624&5&0\\
+25&9051&226276&8450&3&0\\
+27&11287&304750&10584&4&0\\
+29&13863&402028&13050&5&0\\
+31&16803&520894&15872&3&0\\
+32&18450&590401&17425&5&0
+\end{array}
+\]
+At \(q=32\), the extra point beyond the persistent count \(17424\) is the central nucleus.
+The exceptional \(PGL_2\)-orbit-size profiles are compressed exactly as
+\[
+\begin{array}{c|l}
+q&\text{exceptional orbit size}^{\times\text{multiplicity}}\\ \hline
+7&56^1,\ 84^5,\ 112^2,\ 168^{45},\ 336^{141}\\
+8&63^1,\ 72^1,\ 84^3,\ 168^4,\ 252^{24},\ 504^{86}\\
+9&180^3,\ 240^6,\ 360^{18},\ 720^{27}\\
+11&264^2,\ 440^1,\ 660^2 .
+\end{array}
+\]
+The JSON retains canonical representatives, stabilizers, persistent/central flags, and every
+Frobenius link.  The independent replay does not reuse the pointed-contraction criterion: it
+checks each representative against every five-point span of the sextic NRC, rebuilds its full
+\(PGL_2\) orbit, checks disjoint coverage and stabilizer orders, and reconstructs the
+\(P\Gamma L_2\) cycles.
+
+The q=19 pointed excess has a clean normal form.  It is one affine-stabilizer orbit of size \(19\)
+represented by the quintic syndrome \(e_2=(0,0,1,0,0,0)\), whose quartic net is
+\[
+W_{e_2}=\langle1,t^3,t^4\rangle.
+\]
+It has exactly six split squarefree members, all of degree three with infinity as the fourth root;
+there is no four-finite-root member.  Thus it is pointed-bad but not C498-deep.  No consecutive-row
+sextic polar line can remain in this orbit, so it contributes no C509 deep syndrome.  This
+transient equianharmonic-looking orbit is the cheapest concrete falsifier of any induction that
+classifies bad fibres separately instead of coherently parameterized polar flags.
+
+Combining this exact band with the high-field theorem gives the all-field result:
+
+> **Redundancy-seven classification.**  For every prime power \(q\ge13\), the deep syndromes of
+> \(PRS(q-6)\) are exactly the persistent tangent/sigma stratum, together with the central
+> nucleus point when \(q=2^m\) with \(m\) odd.  The fields \(q=7,8,9,11\) have precisely the
+> exceptional orbit profiles above.  The \(T/T^6\), inversion, Frobenius, and tangent-cocycle
+> laws give the complete \(PGL_2/P\Gamma L_2\) packaging.
+
+This is a finite-field theorem, not a claim that the four small-field tables already have intrinsic
+normal forms.  Their conceptual compression remains the exceptional-cover/ramification problem
+identified below.
+
+## Polar induction as the structural mechanism
+
+C509 is the second case of the polar-line re-foundation that closed C498, not an isolated
+redundancy-seven trick.  For a syndrome of redundancy \(r\), all first contractions form a
+coherently parameterized first-polar line in the redundancy-\((r-1)\) syndrome space; iterating
+forms the catalecticant polar flag.  The present proof realizes the resulting trichotomy:
+
+1. contained catalecticant lines give the persistent tangent/sigma families;
+2. modular degeneration of the tangent cocycle or a contained nucleus component gives
+   characteristic-dependent families;
+3. a non-contained polar line meets the bad strata in bounded degree, so sporadic deepness can
+   survive only when those finitely many divisors cover every rational parameter.
+
+This is the exact architecture for a future persistent-or-arithmetically-bounded theorem for
+split-free Hankel systems.  The highest-leverage successor is to prove that induction uniformly in
+fixed redundancy, with an effective field bound from degrees, monodromy, and rational-point
+estimates.  Merely extending the bounded orbit tables to another redundancy is secondary.
+
 ## Successor forecast: redundancies eight and nine
 
 The proof now iterates at high \(q\).  Redundancy eight has a first-polar line in C509 syndrome
@@ -268,18 +379,17 @@ T/T^7\quad(r=8),\qquad T/T^8\quad(r=9),
 modulo inversion and Frobenius, with modular tangent splitting when the characteristic divides
 \(7\) or \(8\).
 
-Thus high-field redundancy eight is the next plausible theorem after C509, and redundancy nine
+Thus high-field redundancy eight is the next plausible case after C509, and redundancy nine
 should require one additional inductive layer.  Their all-field classifications are not yet cheap:
 the bounded exceptional census grows in \(\mathbf P^7\) and \(\mathbf P^8\), so it must be
 orbit-reduced rather than exhaustive.
 
 ## Next gate
 
-C509's remaining work is bounded-field calibration below 37 and intrinsic compression of any
-exceptional webs found there.  Orbit-reduced enumeration should now use the proven high-field
-strata rather than scan all of \(\mathbf P^6\).
-
-No full \(\mathbf P^6\) census is needed for these steps.
+C509 is complete.  Its strongest successor is the general polar-induction theorem just stated:
+prove that, at fixed redundancy, nonpersistent split-free Hankel systems are arithmetically bounded
+unless their polar flag is contained in an explicit persistent or modular degeneracy locus.
+Intrinsic normal forms for the \(q=7,8,9,11\) exceptional webs are the bounded companion problem.
 
 ## Mystery ledger
 
@@ -300,12 +410,28 @@ Settled:
   \(g^3_5\) ramification, of total degree at most eight.
 - **Does this close all high fields?** Yes.  For \(q\ge37\), only the persistent tangent/sigma
   stratum and the odd-degree characteristic-two central point remain deep.
+- **Does the pointed-bad contraction locus itself stabilize once C498 has no exceptional deep
+  nets?** No: at \(q=19\) it has \(4162\) points rather than the \(4143\) persistent-plus-marked-
+  secant prediction.  The extra size-19 orbit is \(e_2\) with
+  \(W=\langle1,t^3,t^4\rangle\); its six split members all contain infinity.  It produces no
+  coherent sextic polar line, so the C509 deep set is nevertheless exactly persistent.  This
+  settles the numerical discrepancy and is the sharp warning that the induction theorem must
+  classify bad polar flags, not merely bad individual contractions.
 
 Open:
 
-- **Small-field exceptions.** No search is authorized until the contained-line and pointed
-  divisors reduce the orbit space.  Those reductions are now complete; owner: C509's
-  orbit-reduced \(q<37\) calibration.
+- **Why exactly the fields \(7,8,9,11\)?**  The tables are exact, but their exceptional covers,
+  special ramification, additive-polynomial, or finite-linear-space normal forms are not yet
+  identified.  Evidence gap: the certificate classifies orbits, not their moduli-theoretic cause;
+  owner: a separately allocated intrinsic exceptional-web task.
+- **Can polar recursion be made uniform in redundancy?**  C498/C509 prove two consecutive cases
+  and expose the contained-line/intersection-budget mechanism.  Evidence gap: uniform degree and
+  monodromy control for the lower splitting varieties; owner: a separately allocated
+  persistent-or-arithmetically-bounded theorem.
+- **Why is \(\langle1,t^3,t^4\rangle\) pointed-bad specifically at q=19, and what is its intrinsic
+  cover type?**  Its orbit and six infinity-containing split members are exact; the arithmetic
+  explanation and relation, if any, to C499's equianharmonic \(q=19\) pencil remain open.
+  Evidence gap: branch-divisor/monodromy calculation for this pointed net.
 
 ## Artifacts
 
@@ -313,4 +439,22 @@ Open:
 - `2026-07-23-c509-prs-redundancy-seven-literature-audit.md` — claim-specific entry audit.
 - `2026-07-23-c509-prs-redundancy-seven-replay.py` — independent persistent-orbit and central-point
   replay.
+- `2026-07-23-c509-prs-deep-hole-calibration.py` — exact pointed-polar orbit-reduced generator.
+- `2026-07-23-c509-prs-deep-hole-calibration.json` — canonical bounded-field orbit certificate.
+- `2026-07-23-c509-prs-deep-hole-calibration-replay.py` — independent five-secant/orbit replay.
 - `2026-07-23-c509-prs-redundancy-seven.sha256` — evidence manifest.
+
+Regenerate and compare the bounded certificate from the repository root:
+
+```text
+python3 notes/2026-07-23-c509-prs-deep-hole-calibration.py \
+  --jobs 3 --output notes/2026-07-23-c509-prs-deep-hole-calibration.json --check
+python3 notes/2026-07-23-c509-prs-deep-hole-calibration-replay.py
+```
+
+The computation is deterministic and stdlib-only.  Its load-bearing inputs are the fourteen prime
+powers displayed above, the standard polynomial-basis field models inherited from the C498 replay
+(plus \(x^5=x^2+1\) for \(\mathbf F_{32}\)), the degree-five/six NRC conventions in this report,
+and the exact affine/PGL actions encoded in the scripts.  It certifies the stated finite field
+band and no unsearched field; the theorem supplies \(q\ge37\).  SHA-256 hashes and exact byte
+counts for every load-bearing artifact are recorded in the adjacent manifest.

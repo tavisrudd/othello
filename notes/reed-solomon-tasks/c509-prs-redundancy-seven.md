@@ -55,7 +55,7 @@ where MathSciNet is unavailable.
 
 ## Status
 
-**Entry audit passed (2026-07-23): NOT PRE-EMPTED**, with wording and coverage constraints in
+**Complete (2026-07-23).**  The entry audit passed **NOT PRE-EMPTED**, with wording and coverage constraints in
 `notes/2026-07-23-c509-prs-redundancy-seven-literature-audit.md`.  The exact pointed contraction
 identity is proved, containment in the C498 secant closure is exactly sextic catalecticant rank at
 most two, its shallow rational secants are separated from the persistent tangent/sigma strata, and
@@ -63,5 +63,8 @@ the C498 nucleus line contracts to the central sextic point.  The \(T/T^6\) PGL/
 \(q=4,5,7,8,9\); the central point is deep exactly in odd characteristic-two extension degree.
 Adding one forbidden-root deletion to C498 proves the pointed trivial-gcd lemma for \(q\ge37\).
 The gcd-one bidegree argument reduces the only obstruction to at most eight ramification points,
-closing the full \(q\ge37\) existence and orbit theorem.  Next: orbit-reduced \(q<37\) calibration.
-No full \(\mathbf P^6\) exhaustive census is authorized.
+closing the full \(q\ge37\) existence and orbit theorem.  The exact marked-polar affine-orbit
+calibration closes every prime power below \(37\) without a full \(\mathbf P^6\) scan: exceptional
+deep orbits occur exactly at \(q=7,8,9,11\), while every \(q\ge13\) has only the persistent stratum
+and the odd-degree characteristic-two central point.  A structurally independent replay checks
+every recorded representative by five-secant spans and rebuilds all PGL/PGamma orbits.

@@ -4,10 +4,11 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491 and C499 complete; C498 active (all-field split-member theorem and
+**Status:** C475--C491, C499, and C509 complete; C498 active (all-field split-member theorem and
 persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
-C509 active (redundancy-seven q>=37 existence/PGL/PGamma theorem complete; bounded calibration);
-C510 queued (bounded one-twist TRS audit/geometry pilot after the C509 entry theorem);
+C510 queued (bounded one-twist TRS audit/geometry pilot);
+C512 queued as the fresh-session priority (general persistent-or-arithmetically-bounded polar
+flags);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -355,8 +356,17 @@ adding a second six-point deletion to C498's S3 fibre proof gives a pointed triv
 `q>=37`.  A bidegree union bound handles gcd-one common roots away from the marked point, while
 marked equality is ramification of a separable `g^3_5` and costs at most eight parameters.
 Therefore the q>=37 deep set is exactly the persistent tangent/sigma stratum plus the central
-fixed point in odd characteristic-two extension degree; C509 now needs only orbit-reduced q<37
-calibration.
+fixed point in odd characteristic-two extension degree.  The exact marked-polar affine-orbit
+calibration closes every q<37 without scanning `P6`: exceptional deep orbits occur exactly at
+q=7/8/9/11, while every q>=13 has only the persistent stratum and the odd-degree
+characteristic-two central point.  The q=19 pointed locus has one transient size-19 orbit
+`W=<1,t^3,t^4>` whose six split members all contain the marked point, but it cannot synchronize
+into a sextic polar line.  C417's additive-cocycle lemma explains the tangent split intrinsically:
+the Borel translation coefficient is 6, so exactly characteristics two and three split as
+`1+(q-1)`.  C498/C509 now expose the higher-value successor theorem: coherently parameterized
+polar flags should be persistent/modular when contained in the lower bad locus and
+  arithmetically bounded otherwise.  C512 owns this general theorem and is the fresh-session
+  priority.
 
 ## Execution ladder
 
@@ -373,9 +383,13 @@ calibration.
 | C485 | all-field redundancy-three synthesis | complete | exact pure/child-relative clauses, algorithm, exceptions, descent, GRS specialization, and `q>=16` child rigidity | programme-level reconstruction theorem |
 | C490 | `q<=13` complete-child closure | complete | exact bases for every recoverable fibre; empty-child and q=7 two-point exceptions; collision hypergraphs and NRC bridge ledger | classified all-field child-relative theorem |
 | C491 | PRS redundancy-five classification | complete | unconditional covering radius; complete PΓL₂ classification with new O±/nucleus/wild families and certified sporadic tables; NRC bridge ledger with the redundancy-six net lemma as next gate | first higher-normal-rational-curve calibration |
+| C498 | PRS redundancy-six classification | existence/orbit theorem complete; bounded normal forms remain | first-polar line reduction; all-field persistent/modular theorem; exact exceptional fields | polar induction mechanism |
+| C509 | PRS redundancy-seven classification | complete | all-field persistent/central theorem; exact q=7/8/9/11 exception tables; q=19 transient pointed orbit | coherent polar flags, not isolated bad fibres |
 
-Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
-`notes/reed-solomon-tasks/c491-prs-redundancy-five.md`.  No open card.
+Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
+`notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
+`notes/reed-solomon-tasks/c509-prs-redundancy-seven.md`.  C498 remains active only for intrinsic
+bounded exceptional normal forms.
 
 ## Unallocated level-ups
 
@@ -386,9 +400,11 @@ Closed cards: `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` throug
   parity-check geometry retains a usable deformation of the NRC; no all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Arbitrary-dimension Reed--Solomon:** the proved first-polar recursion now makes redundancy
-  seven a bounded next case, but it still needs its own claim-specific audit and pointed-lifting
-  theorem.  Anything past r=7 should wait for the redundancy-seven exceptional locus.
+- **Persistent-or-arithmetically-bounded polar flags:** C498/C509 prove consecutive cases of the
+  same first-polar induction.  The next high-leverage theorem should give uniform fixed-redundancy
+  degree/monodromy bounds, classify contained persistent/modular polar flags, and make sporadic
+  exceptions effectively finite.  Redundancy eight is a base case/falsifier, not the headline.
+  Allocated as C512.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -416,9 +432,8 @@ history.
 
 ## Next command
 
-`go C509`
+`go C512`
 
-(C509's audit, pointed polar reduction, persistent orbit law, central nucleus criterion, and
-q>=37 theorem are complete.  Continue with orbit-reduced q<37 calibration.  C498 remains active
-only for intrinsic q=7/8/9/13 normal forms; C510 is the queued TRS pilot; C500 remains
-release-gated.)
+(C509's all-field redundancy-seven classification is complete.  C498 remains active only for
+intrinsic q=7/8/9/13 normal forms; C512 owns the general polar-flag finiteness theorem for the next
+fresh session; C510 remains the queued bounded TRS pilot; C500 remains release-gated.)
