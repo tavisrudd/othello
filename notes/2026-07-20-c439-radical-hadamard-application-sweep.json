@@ -1,0 +1,183 @@
+{
+  "arithmetic_seam": {
+    "canonical_landing": "ker(D)=outer-odd sheet socle line",
+    "integral_odd_line": "Z*(2tau-1)",
+    "normalization_obstruction": {
+      "arithmetic_carrier_dimension": 1,
+      "arithmetic_form_rank": 1,
+      "fourier_radical_dimension": 2,
+      "fourier_radical_form_rank": 0,
+      "verdict": "no isometry or scalar normalization to L_F"
+    },
+    "q11_square_class": "<5>=<1>",
+    "smith_invariants": [
+      1,
+      5
+    ]
+  },
+  "b3_fourier_gate": {
+    "canonical_contraction": false,
+    "canonical_cyclotomic_odd_core": true,
+    "integral_defining_characteristic_block": false,
+    "odd_dimension": 4,
+    "verdict": "negative stop; no B3 modular analogue run"
+  },
+  "c418_c419_pretest": [
+    {
+      "radical_dimension": 0,
+      "restriction_ranks": [
+        3,
+        3
+      ],
+      "target": "C418 Pasch/common-core",
+      "verdict": "fails separating-radical gate"
+    },
+    {
+      "radical_dimension": 0,
+      "restriction_ranks": [
+        1,
+        1
+      ],
+      "target": "C418 four-endpoint/incidence-2",
+      "verdict": "fails separating-radical gate"
+    },
+    {
+      "radical_dimension": 0,
+      "restriction_ranks": [
+        1,
+        1
+      ],
+      "target": "C419 frozen generic stratum",
+      "verdict": "uniform failure; no jump"
+    }
+  ],
+  "inputs": {
+    "2026-07-20-c414-tautological-fourier-preflight.json": {
+      "bytes": 4635,
+      "sha256": "cbd90ee4ee861122fa9d1af580b581ac8d58eb566f02916d7328c45ab8d8ba04"
+    },
+    "2026-07-20-c414-tautological-fourier-preflight.md": {
+      "bytes": 34810,
+      "sha256": "c411644d5b752ce9443ead100a3c075b04c128f34a41808bf3806925640c6c08"
+    },
+    "2026-07-20-c418-c419-c410-successors-c419.json": {
+      "bytes": 41525,
+      "sha256": "07f156340742f05fe27dc73c64d487f5f0df1b1cd9d7c7a59c3c1996cce5ee0a"
+    },
+    "2026-07-20-c418-c419-c410-successors.md": {
+      "bytes": 27447,
+      "sha256": "30e50fbd8765923b9670ff8454bc9d038284361e47a45e324f2a94e1242a0747"
+    },
+    "2026-07-20-c430-conceptual-balanced-half-rigidity.json": {
+      "bytes": 4646,
+      "sha256": "eebfd0525c94ac0bcb7965ab33b6d11a698242e608d9d1a40cebaa0a2b451098"
+    },
+    "2026-07-20-c430-conceptual-balanced-half-rigidity.md": {
+      "bytes": 9504,
+      "sha256": "9ce09fca9cfd08f38811fcd4149a930b01d9d7b95da0a0a8f1981b822001b232"
+    },
+    "2026-07-22-c429-attack-vector-scan.json": {
+      "bytes": 5674,
+      "sha256": "96ff2f0ef3e607ae412559fc6c88b48dd050f1ad9ab7d4183c6187bbd94350b2"
+    },
+    "2026-07-22-c429-attack-vector-scan.md": {
+      "bytes": 41881,
+      "sha256": "ddf2e1ce8d121139b8847345d4fcc6791028ce10d566cc35743271bce8ec8d8d"
+    },
+    "2026-07-22-c434-double-coset-information-lattice.json": {
+      "bytes": 12477,
+      "sha256": "6d0e0106aa04dfcfe694f74494eaf86743a3254c62c6c1e878000301ec2f0899"
+    },
+    "2026-07-22-c434-double-coset-information-lattice.md": {
+      "bytes": 16673,
+      "sha256": "ec3a0997c883404710ba2d86e29f2cd0848312e2c20bdbbbad84c923a74b6243"
+    },
+    "2026-07-22-c492-c434-conceptual-refoundation.json": {
+      "bytes": 4430,
+      "sha256": "ca0304a2b4e95d51c47da510831565e6e80eaaf66ba00708089eb7304c8017d9"
+    },
+    "2026-07-22-c492-c434-conceptual-refoundation.md": {
+      "bytes": 23353,
+      "sha256": "31be2d97f8f9b5957940b38967d0799ae7b3aa5493d2c75cd0e8323ba9461d36"
+    },
+    "2026-07-23-c433-modular-depth-fourier-exact-sequence.json": {
+      "bytes": 9063,
+      "sha256": "1eec9d75ef24cb7878c41c85949442833b7d8c8e60f317220b80e83ac869a704"
+    },
+    "2026-07-23-c433-modular-depth-fourier-exact-sequence.md": {
+      "bytes": 11337,
+      "sha256": "3e39d37e7828f74cd95c51c34abd919c671bc313e46dbbb57ada6b4ea9513352"
+    },
+    "2026-07-23-c526-tate-pairing-rigid-target-bridge.json": {
+      "bytes": 17346,
+      "sha256": "b94a62adfa440dbb7234bd31b7d87f5d9d7c87aac6f6ee54df5a458f89e02b14"
+    },
+    "2026-07-23-c526-tate-pairing-rigid-target-bridge.md": {
+      "bytes": 10518,
+      "sha256": "a1eb543e98d86484bff3e5ce569ee2a5094eebb1c791025ba6c763a00333ca76"
+    }
+  },
+  "mackey_interface": [
+    {
+      "bad_primes": [
+        2,
+        3
+      ],
+      "degrees": [
+        3,
+        4
+      ],
+      "native_prime": 7,
+      "native_semisimple": true,
+      "type": "B3"
+    },
+    {
+      "bad_primes": [
+        2,
+        3,
+        5
+      ],
+      "degrees": [
+        5,
+        6
+      ],
+      "native_prime": 11,
+      "native_semisimple": true,
+      "type": "H3"
+    }
+  ],
+  "modular_target": {
+    "F_self_adjoint": true,
+    "F_squared_zero": true,
+    "Fh_plus_hF_identity": true,
+    "bridge_verdict": "obstructed: 0 versus 2 (dually 5)",
+    "depth_fourier_transverse": true,
+    "field": 11,
+    "h_squared_zero": true,
+    "rank_D": 2,
+    "rank_F": 2,
+    "rank_h": 2,
+    "source_flag_cross_pairing": 0,
+    "target_flag_cross_pairings": {
+      "dual": 5,
+      "vector": 2
+    }
+  },
+  "naturality_theorem": {
+    "base_category": "based-golden-pair groupoid",
+    "forced_transport": [
+      "fourier_radical",
+      "h",
+      "matrix_units",
+      "grading"
+    ],
+    "reason": "h is uniquely zero on the depth plane and inverse to F on im(F)",
+    "required_transport": [
+      "F",
+      "depth_plane",
+      "valency_pairing",
+      "ordered_flag"
+    ]
+  },
+  "schema": "c439-radical-hadamard-application-sweep-v1"
+}
