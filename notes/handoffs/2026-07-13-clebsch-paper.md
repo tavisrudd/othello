@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch` — see `AGENTS.md` § Lane routing.
 
-**Date**: 2026-07-22
+**Date**: 2026-07-23
 
 > **LIVE MAP ONLY. DO NOT APPEND SESSION LOGS, EXPLORATION, REVIEW TRANSCRIPTS, OR
 > SUPERSEDED PLANS HERE.** Put history in
@@ -29,10 +29,13 @@ C420--C428, while manuscript integration remains a separate owner action before 
 C485's proof-only six-arc uncovered-locus reconstruction lemma is now imported into the arcs paper,
 strengthened there to `q+1 > binom(k,2)` for arbitrary fixed `k`, upgraded to a canonical
 reconstruction/stabilizer theorem with a sharp `q=5` equality-boundary counterexample, and used
-only as a conclusion-level contrast in Clebsch; C490's certificate-heavy
-q=11 three-view reconstruction census remains outside this manuscript.  C521 now owns the bounded
-theory and editorial follow-up: the exact 22-parent homogeneous fibre, its possible two-orbit
-orientation, sharp decorated base size, and Paper-1/Paper-2/companion disposition**.
+only as a conclusion-level contrast in Clebsch.  C521 closes the bounded theory: the Clebsch
+fixed-child fibre is the classical homogeneous space `PGL_2(11)/A5` of size 22, its intrinsic
+determinant-orientation quotient is two `PSL_2(11)` orbits of size 11 with no preferred sign, and
+C490's 79 certified disagreement masks are exactly all complements of at most two conic points,
+so every triple and no pair recovers by a proof-only incidence deduction.  The result is a
+companion excluded from Paper 1; the C486 bridge reaches the matching torsor but not the decoder's
+support chirality**.
 
 The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md); its Verdict,
@@ -187,16 +190,13 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   six-point external-line closure; C418/C419 own its active larger-trade and fixed-incidence-moduli
   successors.  C405 is independent, and none of these directions delays the paper decision.
 
-## Selected reconstruction follow-up
+## Closed reconstruction follow-up
 
-- **C521 queued, not release-blocking unless adopted:** prove the general equivariant
-  stabilizer-quotient description of a rigid fixed-child fibre and specialize it to the Clebsch
-  conic fibre `PGL_2(11)/A5` of size 22.  Determine whether the induced pair of
-  `PSL_2(11)` eleven-orbits has an intrinsic orientation interpretation, but do not identify it
-  with existing support chirality without an exact comparison.  Separate the proof-only fibre
-  theorem from C490's certificate-backed assertion that every coherent three-centre signature
-  recovers the parent while no pair does.  The task must end with an explicit disposition:
-  Paper 1 theorem/corollary, Paper 2 mechanism, companion result, or exclusion.
+- **C521 reported 2026-07-23 — companion, excluded from Paper 1:** the fixed-child orbit lemma,
+  `PGL_2(11)/A5` specialization, intrinsic but unlabelled `11+11` determinant-orientation torsor,
+  and the exact proof-versus-certificate split for C490's sharp base three are recorded in
+  `notes/2026-07-23-c521-clebsch-fixed-conic-reconstruction.md`.
+  No support-chirality identification or manuscript edit is asserted.
 
 ## Optional formal upgrade
 
