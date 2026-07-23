@@ -1,0 +1,92 @@
+{
+  "claim_scope": "Child-level completeness test of the Y_NK0 guard as a bulk-descent certificate over every three-intruder child (one intruder opponent move) reachable from the recorded q=13 and q=17 C20 P reply states, considering ALL legal responder replies.",
+  "fields": [
+    {
+      "children_with_ynk0_reply": 1283,
+      "children_without_ynk0_reply": 4,
+      "gap_child_value_distribution": {
+        "N": 4
+      },
+      "gap_children_can_reach_empty_conic": 0,
+      "gap_children_forced_conic_live": 4,
+      "gap_easiest_target_class": {
+        "live1_capOK": 4
+      },
+      "gap_min_live_conic_distribution": {
+        "1": 4
+      },
+      "gap_target_signatures": {
+        "live1_capOK:conic": 8,
+        "live2_capOK:intruder": 4
+      },
+      "gap_winning_reply_kinds": {
+        "conic+intruder": 4
+      },
+      "p_reply_states": 485,
+      "q": 13,
+      "responder_win_with_no_p_reply": 0,
+      "unique_three_intruder_children": 1287
+    },
+    {
+      "children_with_ynk0_reply": 45820,
+      "children_without_ynk0_reply": 4697,
+      "gap_child_value_distribution": {
+        "N": 4697
+      },
+      "gap_children_can_reach_empty_conic": 504,
+      "gap_children_forced_conic_live": 4193,
+      "gap_easiest_target_class": {
+        "empty_capOVER": 504,
+        "live1_capOK": 3593,
+        "live1_capOVER": 224,
+        "live2_capOK": 313,
+        "live2_capOVER": 16,
+        "live3_capOK": 42,
+        "live3_capOVER": 3,
+        "live4_capOK": 2
+      },
+      "gap_min_live_conic_distribution": {
+        "0": 504,
+        "1": 3817,
+        "2": 329,
+        "3": 45,
+        "4": 2
+      },
+      "gap_target_signatures": {
+        "empty_capOVER:conic": 123,
+        "empty_capOVER:intruder": 648,
+        "live1_capOK:conic": 1703,
+        "live1_capOK:intruder": 5408,
+        "live1_capOVER:conic": 77,
+        "live1_capOVER:intruder": 440,
+        "live2_capOK:conic": 356,
+        "live2_capOK:intruder": 1912,
+        "live2_capOVER:conic": 44,
+        "live2_capOVER:intruder": 407,
+        "live3_capOK:conic": 133,
+        "live3_capOK:intruder": 218,
+        "live3_capOVER:conic": 39,
+        "live3_capOVER:intruder": 30,
+        "live4_capOK:intruder": 41,
+        "live4_capOVER:conic": 2,
+        "live4_capOVER:intruder": 9
+      },
+      "gap_winning_reply_kinds": {
+        "conic": 202,
+        "conic+intruder": 1528,
+        "intruder": 2967
+      },
+      "p_reply_states": 2662,
+      "q": 17,
+      "responder_win_with_no_p_reply": 0,
+      "unique_three_intruder_children": 50517
+    }
+  ],
+  "source": {
+    "bytes": 654965,
+    "path": "notes/data/c20-q13-q17-states.jsonl.gz",
+    "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+  },
+  "verdict": "Y_NK0 is NOT a complete bulk-descent certificate: 9.29% of q=17 children (0.31% at q=13) admit no Y_NK0 reply among all legal replies, yet every such child is a responder win. 89% of the q=17 gap is forced to keep the conic live (no one-step descent to an empty-conic base); the dominant companion object is the single-live-parameter state.",
+  "ynk0_guard": "A grandchild is Y_NK0 when its live conic is empty, every projective line of residual capacity two carries at most two legal points, and the residual conflict graph has Grundy value zero (=> Node-Kayles => P)."
+}

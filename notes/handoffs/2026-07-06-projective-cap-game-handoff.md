@@ -582,13 +582,26 @@ law is group-theoretic (the A5 **smallest-`Stab(frame)`-orbit selector**, mechan
 next attacks abandon static classifiers and treat value dynamically. Full cold-start execution guide —
 objectives, exact inputs/scripts, cheap-probe-first steps, decision gates, confidence:
 [`../2026-07-23-c80-alt-attack-plan.md`](../2026-07-23-c80-alt-attack-plan.md). In brief, run
-cheap-first: **R3** descent into the proven `Y_NK0` guard (classify its 4 q17 N exceptions; find the
-exchange move); **R2** solve the reduced 1-D `P¹` involution game by Sprague-Grundy and check
-faithfulness vs the grid census; then **R1** amortized potential `Φ` = C80(c) drain + Grundy/deficiency
-term (the C61-successor lane); **R4** (gated) q=29 census to test whether depletion is finite and
-reshape the theorem to generic + finite exceptions. Routes are **not yet allocated** — reserve a C-ID
-when starting one. Depth-1 factorization rationale:
+cheap-first: **R3** descent into the proven `Y_NK0` guard; **R2** solve the reduced 1-D `P¹`
+involution game by Sprague-Grundy and check faithfulness vs the grid census; then **R1** amortized
+potential `Φ` = C80(c) drain + Grundy/deficiency term (the C61-successor lane); **R4** (gated) q=29
+census to test whether depletion is finite and reshape the theorem to generic + finite exceptions.
+Remaining routes are **not yet allocated** — reserve a C-ID when starting one. Depth-1 factorization
+rationale:
 [`../2026-07-23-c496-bihecke-two-sort-coupling.md`](../2026-07-23-c496-bihecke-two-sort-coupling.md).
+
+**Route 3 is RUN (C522, 2026-07-23) — `Y_NK0` is NOT a complete bulk-descent certificate, and the
+companion guard must be a single-live-parameter law, not a second empty-conic packet.** Asked at
+the **child** level over **all** legal replies (not just the primitive `Y_0` packet the census
+measured): over the frozen three-intruder domain, **q17 has 4,697 / 50,517 (9.3%) children with no
+`Y_NK0` reply** (q13: 4 / 1,287). Every gap child is a responder win, so a winning reply always
+exists — just outside `Y_NK0`. Decisively, **89% of the q17 gap (4,193 / 4,697) cannot reach an
+empty conic in one winning reply**; the easiest winning reply is a **single-live-parameter**
+(`live1_capOK`) state for 3,593 of them. This is the same "one live conic parameter before the
+reply" object the score-9 mining isolated, now shown **generic** across the whole q17 domain. So
+C80(b) needs a **single-live-parameter P-guard** companion — that is the queued successor (reserve a
+new `[cap]` C-ID to build it). Report+cert+`--check`:
+[`../2026-07-23-c522-ynk0-descent-completeness.md`](../2026-07-23-c522-ynk0-descent-completeness.md).
 
 Priority order and why:
 
