@@ -217,6 +217,20 @@ def replay_state(cp, game, group, record, endpoint, cert_state):
     assert cpl["balanced_live_gauss_sum"] == gauss
     assert cpl["nonsquare_c2_preserves_u_pointwise"] is True
 
+    # independently re-verify the move-level product formula and the knife-edge straddle
+    move_holds = 0
+    for opp, (u, cand, win) in vinfo.items():
+        is_live = len(cand) > 0
+        chi = legendre(u)
+        predicted = "P" if (is_live and chi == -1) else ("N" if (is_live and chi == 1) else "killed")
+        observed = "P" if win else ("N" if cand else "killed")
+        assert predicted == observed
+        move_holds += 1
+    assert move_holds == 22
+    assert cpl["move_level_product_formula_holds_on_all_22"] is True
+    assert {legendre(8), legendre(9)} == {-1, 1}
+    assert cpl["knife_edge_straddle_live_u_is_square_nonsquare_pair"] is True
+
 
 def main():
     cert = json.loads(CERT.read_text())

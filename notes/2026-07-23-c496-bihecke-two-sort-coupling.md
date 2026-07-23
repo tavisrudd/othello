@@ -89,6 +89,21 @@ multiplicative quadratic-character module — **not a single bimodule**. The bal
 is the knife-edge calibration: the two live orbits are equal-and-opposite, which is exactly the
 `C2`-torsor endpoint-swap of C474/C495 (the calibration class restricts to zero on `C5`).
 
+The pairing is realized **per move**, not just per orbit: on all 22 opponent moves
+
+```text
+value(x) = [x incidence-live] ∧ [χ(u(x)) = −1],
+```
+
+i.e. value is exactly the product of an additive-sort indicator (`1_live`, whether the move has any
+packet reply) and a multiplicative-sort character (`χ(u)`). This is the literal `1_live ⊗ χ` bilinear
+pairing; the incidence bimodule supplies the first factor and is blind to the second.
+
+**Knife-edge characterization.** The two incidence-live u-values `{8, 9}` are a square/nonsquare pair
+(`Legendre(8)=−1`, `Legendre(9)=+1`); that straddle of the quadratic character is exactly why q=11 is
+a knife-edge order — both P and N live orbits are present and the live Gauss sum is balanced. An order
+whose live u-values do not straddle `χ` (or whose class counts are unequal) is the depletion regime.
+
 This aligns with C79's character/Jacobi-pencil observations and with C495 ej2's prediction that the
 missing coupling "must bridge additive and multiplicative structure — a Gauss/Jacobi-sum-shaped
 pairing, not a permutation-module map."
@@ -122,6 +137,16 @@ pairing, not a permutation-module map."
   knife-edge order (equal P and N live orbits) and why the calibration is a `C2`-torsor. A depleted
   order would show an unbalanced sum; the coupling's Gauss-sum value is a candidate depletion
   diagnostic (unallocated).
+- **The coupling shape is the Weil-representation intertwiner.** An additive/incidence module tensored
+  with a quadratic-character module, paired by a Gauss/Jacobi sum, is precisely the Weil (metaplectic)
+  representation of `SL_2(F_q)`. Tao would note this is the *same* object the crowns lane is
+  formalizing — C472 (central frame sign / metaplectic), C489 (Maslov roof), C501/C502 (Witt / outer
+  `C2`). The cap-lane value coupling and the crowns-lane metaplectic carrier may be two shadows of one
+  Weil representation. Cross-lane lead, logged below; not acted on (foreign lane).
+- **The result is depth-1.** The move-level product formula is a statement about immediate children;
+  it does not show the factorization is *preserved under the game recursion* (the "preserving P/N
+  recursion" clause). That preservation is exactly C80(b) and remains open. C496 is a coupling-*shape*
+  theorem, not a descent theorem — that is its exact scope.
 
 ## Mystery ledger (ej closeout)
 
@@ -132,10 +157,31 @@ pairing, not a permutation-module map."
   incidence sort. The corrected object is a bilinear Gauss/Jacobi pairing, not a single bimodule.
 - **Settled by ej — the balanced live Gauss sum `= 0` is the `C2`-torsor calibration**, unifying with
   C448/C474/C495's governing determinant-square `C2`.
-- **Open, with exact gap (unowned):** whether the Gauss-sum value generalizes as a depletion
-  diagnostic — unbalanced (`≠ 0`) at a genuinely depleted order past q=17. This needs the gated q=29
-  census or a depleted-order object; it is a bounded successor probe, not allocated. No residual
-  mystery on the q=11 object.
+- **Settled by ej — the coupling is a per-move product.** `value(x) = [x live] ∧ [χ(u(x)) = −1]`
+  on all 22 moves at every pointed state; the incidence bimodule supplies `1_live` and is blind to
+  `χ`. This is the exact `1_live ⊗ χ` bilinear pairing, the move-level form of the coupling design.
+- **Settled by ej — knife-edge ⟺ straddle.** The two live u-values `{8,9}` are a square/nonsquare
+  pair; that straddle of `χ` is why both P and N are present. Depletion = failure of the straddle or
+  unequal live class counts.
+
+Second-order (ej2) leads, exact gaps, all unowned successor probes (not acted on here):
+
+- **C82 counting becomes a character sum.** If `value = 1_live ⊗ χ`, then `#P children =
+  #{live orbits : χ(u) = −1} = Σ_live (1 − χ(u))/2` — a quadratic character sum over the live locus,
+  amenable to a Weil bound rather than a combinatorial orbit count. This is a concrete method handoff
+  to the (still-gated) C82 abundance problem: estimate the character sum, do not enumerate orbits.
+- **Descent/value division of labor.** The factorization suggests the *descent measure* lives entirely
+  on the additive sort (the live-locus drain — already the proven C80(c) resource `|live conic|` drops
+  per move) while *value* is the static multiplicative overlay `χ`. If the factorization is
+  recursion-stable, C80(b) reduces to: show the additive drain reaches a live locus where `χ` forces a
+  P child. Recursion-stability is unproven (the depth-1 caveat above).
+- **Gauss sum as depletion diagnostic.** Whether `Σ_live χ(u)` is unbalanced (`≠ 0`) at a genuinely
+  depleted order past q=17. Needs the gated q=29 census or a depleted-order object.
+- **Cross-lane (crowns): Weil-representation identity.** Whether the cap-lane coupling `M_inc ⊗ M_χ`
+  and the crowns-lane metaplectic carrier (C472/C489/C501/C502) are two shadows of one
+  `SL_2(F_q)` Weil representation. Foreign lane; route through the normal reserve/allocation process.
+
+No residual mystery on the q=11 object itself.
 
 ## Reproduction
 
@@ -174,9 +220,9 @@ novelty/priority claim.
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| primary checker `.py` | 13,886 | `90cb5207cbd5de6204dd308c77c28d7cba460b487d68636075634798c30a8427` |
-| independent replay `.py` | 9,641 | `0ce6dc6ae69b25c77a497b2115b4c409af65826bd8eb380e115037d032d8343e` |
-| canonical JSON | 18,162 | `e50ca1ee0bccab1edced6af45e8f52933db1d0397bc73061cef70d864a6555d6` |
+| primary checker `.py` | 15,185 | `cfef7ed5f7fa8b4ca2bc7601aee2947c7b64388426b25e0590b0db4d72f1bf6e` |
+| independent replay `.py` | 10,304 | `8c8c19b8b82c81773af9e0ec5d6064fd215b96fd6f444b85c3df55913d4bfe7b` |
+| canonical JSON | 18,930 | `ebadb2604c9049fbd0639d98fd3bb78ac5ab091fc3949fb53d97cc528a7bbf19` |
 
 ### Load-bearing inputs (hashed into the certificate `inputs`)
 

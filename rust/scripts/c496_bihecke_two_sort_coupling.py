@@ -183,6 +183,25 @@ def analyze_pointed_state(cp, game, group, record, endpoint):
         live[8]["legendre_u"] == -1 and live[9]["legendre_u"] == 1
     )
     assert value_equals_legendre_on_live
+
+    # Move-level product formula: value(x) = [x live] AND [chi(u(x)) = -1], checked on all 22 moves
+    # (the bilinear pairing 1_live (x) chi realized per move, not just per orbit).
+    move_level_holds = 0
+    for opponent, (u, cand, win) in vinfo.items():
+        is_live = len(cand) > 0
+        chi = legendre(u)
+        predicted = (
+            "P" if (is_live and chi == -1) else ("N" if (is_live and chi == 1) else "killed")
+        )
+        observed = "P" if len(win) > 0 else ("N" if len(cand) > 0 else "killed")
+        assert predicted == observed
+        move_level_holds += 1
+    assert move_level_holds == 22
+
+    # Knife-edge straddle: the live u-values are a square/nonsquare pair (both P and N present).
+    live_legendre_classes = {live[u]["legendre_u"] for u in live}
+    knife_edge_straddle = live_legendre_classes == {-1, 1}
+    assert knife_edge_straddle
     # Balanced live Gauss sum sum_{live vertices} chi(u): 5*chi(8) + 5*chi(9).
     live_gauss_sum = sum(
         r["size"] * r["legendre_u"] for r in orbit_rows if r["u"] in (8, 9)
@@ -219,11 +238,14 @@ def analyze_pointed_state(cp, game, group, record, endpoint):
         "coupling": {
             "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
             "value_equals_legendre_u_on_live_fibre": value_equals_legendre_on_live,
+            "move_level_product_formula_holds_on_all_22": move_level_holds == 22,
+            "knife_edge_straddle_live_u_is_square_nonsquare_pair": knife_edge_straddle,
             "balanced_live_gauss_sum": live_gauss_sum,
             "nonsquare_c2_preserves_u_pointwise": c2_preserves_u,
             "design": (
                 "bilinear additive-incidence (x) multiplicative-character pairing of "
-                "Gauss/Jacobi-sum shape, not a single bimodule"
+                "Gauss/Jacobi-sum shape, not a single bimodule; realized per move as "
+                "value(x) = [x live] AND [chi(u(x)) = -1]"
             ),
         },
     }
@@ -253,13 +275,15 @@ def build():
     coupling_fingerprint = {
         (
             s["coupling"]["value_equals_legendre_u_on_live_fibre"],
+            s["coupling"]["move_level_product_formula_holds_on_all_22"],
+            s["coupling"]["knife_edge_straddle_live_u_is_square_nonsquare_pair"],
             s["coupling"]["balanced_live_gauss_sum"],
             s["coupling"]["nonsquare_c2_preserves_u_pointwise"],
         )
         for s in states
     }
     assert obstruction_fingerprint == {(True, 2, 3)}
-    assert coupling_fingerprint == {(True, 0, True)}
+    assert coupling_fingerprint == {(True, True, True, 0, True)}
 
     return {
         "schema": "c496-bihecke-two-sort-coupling-v1",

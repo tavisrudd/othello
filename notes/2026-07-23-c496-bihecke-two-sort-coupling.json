@@ -10,7 +10,9 @@
       "class": 4,
       "coupling": {
         "balanced_live_gauss_sum": 0,
-        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule; realized per move as value(x) = [x live] AND [chi(u(x)) = -1]",
+        "knife_edge_straddle_live_u_is_square_nonsquare_pair": true,
+        "move_level_product_formula_holds_on_all_22": true,
         "nonsquare_c2_preserves_u_pointwise": true,
         "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
         "value_equals_legendre_u_on_live_fibre": true
@@ -211,7 +213,9 @@
       "class": 4,
       "coupling": {
         "balanced_live_gauss_sum": 0,
-        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule; realized per move as value(x) = [x live] AND [chi(u(x)) = -1]",
+        "knife_edge_straddle_live_u_is_square_nonsquare_pair": true,
+        "move_level_product_formula_holds_on_all_22": true,
         "nonsquare_c2_preserves_u_pointwise": true,
         "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
         "value_equals_legendre_u_on_live_fibre": true
@@ -412,7 +416,9 @@
       "class": 7,
       "coupling": {
         "balanced_live_gauss_sum": 0,
-        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule; realized per move as value(x) = [x live] AND [chi(u(x)) = -1]",
+        "knife_edge_straddle_live_u_is_square_nonsquare_pair": true,
+        "move_level_product_formula_holds_on_all_22": true,
         "nonsquare_c2_preserves_u_pointwise": true,
         "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
         "value_equals_legendre_u_on_live_fibre": true
@@ -613,7 +619,9 @@
       "class": 7,
       "coupling": {
         "balanced_live_gauss_sum": 0,
-        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule",
+        "design": "bilinear additive-incidence (x) multiplicative-character pairing of Gauss/Jacobi-sum shape, not a single bimodule; realized per move as value(x) = [x live] AND [chi(u(x)) = -1]",
+        "knife_edge_straddle_live_u_is_square_nonsquare_pair": true,
+        "move_level_product_formula_holds_on_all_22": true,
         "nonsquare_c2_preserves_u_pointwise": true,
         "separating_datum": "chi(u) = Legendre(u) (quadratic residue character)",
         "value_equals_legendre_u_on_live_fibre": true
