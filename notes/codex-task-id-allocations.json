@@ -521,8 +521,17 @@
       "last": 497,
       "purpose": "C434-to-C80 transfers: q11 identification falsifier; bi-Hecke coupling candidate; q17 stratum-constancy bulk-descent probe",
       "sequence": 58
+    },
+    {
+      "count": 3,
+      "first": 498,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 500,
+      "purpose": "C491 follow-ups: redundancy-six PRS(q-5) net-lemma classification; sporadic-orbit structure; redundancy-five paper",
+      "sequence": 59
     }
   ],
-  "next_id": 498,
+  "next_id": 501,
   "schema": "codex-task-id-allocations-v1"
 }
