@@ -615,6 +615,30 @@ the mechanism and hands C497 an independent (lower-prior) stratification test; t
 sparse-coverage and two-sorted-coupling items are unchanged, with C496 now supported (value-carrying
 packet vs value-blind `D′`) in seeking a set-faithful/rank-dropping coupling.
 
+**C495 ej2 — the two sorts are now explicitly additive × multiplicative (computed on the frozen
+q=11 packet).** The governing `C2` (det-square sheet sign = the nonsquare cap-frame reflection =
+endpoint swap) is an *additive/incidence* datum — it is exactly C434's whole apparatus (`D′`, double
+cosets) and it *moves* the packet between the two endpoint states. The game value P/N is the
+*multiplicative* datum `Legendre(u)` (u=8 nonsquare → P, u=9 square → N): the nonsquare reflection
+**preserves `u` on all 22 moves (22/22) while mapping the packet off itself**, so the value coordinate
+is `C2`-invariant and orthogonal to the additive sort. This makes the two-sortedness precise: sort 1 =
+additive/incidence (`D′`, the det-square `C2`), sort 2 = multiplicative character (`Legendre(u)` =
+value). Consequences:
+- **C496:** the missing coupling must bridge additive and multiplicative structure — a
+  Gauss/Jacobi-sum-shaped pairing, not a permutation-module (incidence) map. This is the concrete
+  shape for the "canonical incidence bimodule carrying both conic-word traces and reply-pencil
+  energy" open item, and it aligns with C79's character/Jacobi-pencil observations.
+- **C497:** the double-coset label is additive-sort data; P/N-purity is multiplicative-sort data;
+  they are orthogonal on q=11. Predicted outcome: stratum-constancy of `Y_NK0`-P-purity by
+  double-coset label FAILS generically at q17 unless P/N is coincidentally coarser than the
+  double-coset partition. Cheap pre-diagnostic to run first: check whether the double-coset partition
+  even refines `Y_NK0`-membership on the frozen census; if not, non-constant immediately, and the
+  full P/N sweep can be skipped.
+- **Door (unallocated successor):** C495 tested the *pointed* packet (stabilizer dropped to `C5` by
+  the endpoint mark). The *unpointed* `D10`-symmetric q=11 edge object was not tested and its
+  identification with C434's `Ω` is still open — the sharper falsifier. Bounded; route through the
+  normal reserve/allocation process if pursued.
+
 ## Reproduction
 
 ```bash
