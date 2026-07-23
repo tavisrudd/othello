@@ -665,8 +665,44 @@
       "last": 521,
       "purpose": "Clebsch fixed-conic homogeneous fibre, decorated reconstruction base size, and manuscript integration theorem",
       "sequence": 74
+    },
+    {
+      "count": 1,
+      "first": 522,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 522,
+      "purpose": "Route 3: descent into Y_NK0 guard \u2014 classify 4 q17 clean_empty N exceptions under PGL(2,17), test uniform Y_NK0-landing responder move for 104 P members",
+      "sequence": 75
+    },
+    {
+      "count": 1,
+      "first": 523,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 523,
+      "purpose": "Single-live-parameter / full-capOK P-guard (Y_NK): test that capOK => static Node-Kayles on full legal-point graph (conic vertices included), P iff full-graph Grundy 0; re-measure C80(b) descent completeness with Y_NK vs Y_NK0",
+      "sequence": 76
+    },
+    {
+      "count": 1,
+      "first": 524,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 524,
+      "purpose": "Certify the 349-child q17 capOVER core (C80(b) residual after C523 Y_NK): characterize under PGL(2,17), test whether minimal-overload-3 family is bounded with a P-law or finite base case",
+      "sequence": 77
+    },
+    {
+      "count": 1,
+      "first": 525,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 525,
+      "purpose": "classify characteristic-two root-compatible ordered-Hessian (2,2) degeneracy and carrier pullback",
+      "sequence": 78
     }
   ],
-  "next_id": 522,
+  "next_id": 526,
   "schema": "codex-task-id-allocations-v1"
 }
