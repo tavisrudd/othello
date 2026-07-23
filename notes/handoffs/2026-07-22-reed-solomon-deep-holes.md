@@ -19,6 +19,8 @@ double cover.  Every field of dimension at least three over `F2` contains a thre
 polynomial, so the full `e_7` orbit is shallow over every admissible field.  C531 is next and owns
 the remaining intrinsic degree-nine carrier strata; C532 packages the resulting redundancy-ten
 theorem.  C533 independently owns C525 threshold/deletion sharpening.
+C534 independently owns claim-specific literature/cheap-test triage of the six non-deep-hole
+frontiers exposed by this programme; it does not displace C531.
 C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
@@ -625,6 +627,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C531 | full degree-nine Lucas-carrier strata | queued next | closed `e_7` theorem boundary | intrinsic `PGL2` strata and tractable cover arithmetic | carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | queued after C531 | degree-nine carrier theorem boundary | effective high-field deep set, threshold, and orbit law | fixed-level theorem |
 | C533 | C525 threshold/deletion sharpening | queued independently | frozen C525 equations | smaller hitting/deletion constants or a sharp method obstruction | improved arbitrary-degree bound |
+| C534 | non-deep-hole PRS frontier triage | queued independently | frozen C481--C530 theorem boundaries | audited novelty, cheap kills/characterizations, re-ranked EV portfolio, and bounded survivor tasks | research portfolio beyond deep holes |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
