@@ -109,14 +109,34 @@ pair, C₃ for a Frobenius-triple). Type IV is the degenerate limit of III where
 collides into a total-ramification cusp (`1^3`). The member profile is forced by the type together
 with deepness (`111` = 0): dbl = #rational branch, irr fixed by the type, `1.2` = the remainder.
 
-## 4. Why "4 double + 4 irreducible"
+## 4. The member profile is the stabilizer-orbit decomposition of the pencil line
 
-For every type-I and type-II orbit the syndrome stabilizer acts on the pencil line P¹_λ preserving
-member factorization type, and (certified) **the four double-root members are one stabilizer-orbit and
-the four irreducible members are another**. For V₄ (order 4) each is a free orbit of size 4; for A₄
-(order 12) each is a size-4 tetrahedral orbit with point-stabilizer C₃ — the two opposite A₄-orbits on
-P¹. So the constancy of the counts (4 and 4, independent of q) is exactly the orbit-size arithmetic of
-the stabilizer acting on its distinguished tetrads, not a coincidence of the field.
+The syndrome stabilizer acts on the pencil line P¹_λ preserving member factorization type, and this
+action is the whole story of the "4+4" profile.
+
+**Theorem C499.2 (certified for every type-I/II orbit).** Member factorization type is **constant on
+each stabilizer-orbit of P¹_λ**, and the q+1 members decompose accordingly:
+
+- the four double-root (branch) members are exactly **one** distinguished size-4 stabilizer-orbit;
+- the four irreducible members are exactly **another** size-4 stabilizer-orbit;
+- every remaining member has type `1.2`, filling out the other stabilizer-orbits.
+
+For A₄ (types at q ≡ 1 mod 3) the two size-4 orbits are the **two dual equianharmonic tetrahedra**
+of A₄ ⊂ PGL₂ (each has point-stabilizer C₃, so each is automatically equianharmonic — certified j = 0
+for both the branch and the inert tetrad); the cover φ_f ramifies over one and is inert over the
+other. The rest of P¹ is then dictated by pure q mod 12 arithmetic — which exceptional A₄-orbits are
+F_q-rational:
+
+| q | q+1 | stabilizer-orbit decomposition of P¹_λ (size, type) |
+|---|---|---|
+| 7  | 8  | (4,`1^2.1`) + (4,`3`) — P¹ is exactly the two tetrahedra |
+| 13 | 14 | (4,`1^2.1`) + (4,`3`) + (6,`1.2`) — the octahedral 6-orbit becomes rational |
+| 19 | 20 | (4,`1^2.1`) + (4,`3`) + (12,`1.2`) — one free A₄-orbit |
+
+For V₄ the branch and inert tetrads are two of its orbits and the `1.2` members are its remaining
+size-4 (free) and size-2 (involution fixed-point) orbits. Hence the constancy of the counts (4 and 4,
+independent of q) is forced — they are the two special small stabilizer-orbits — and n_{1.2} = q − 7
+is just the remainder of P¹; nothing here is a field coincidence.
 
 ## 5. The q = 8 Frobenius torsor and C484
 
@@ -157,11 +177,19 @@ There is a uniform description (branch-divisor Frobenius type + j-invariant + de
 The equianharmonic configuration persists as a PGL₂-orbit for every q ≡ 1 mod 3, but at q ≥ 25 every
 such point already has totally-split members and is not a deep hole; it is deep only at q ∈ {7,13,19}.
 (For q ≡ 2 mod 3 no rational equianharmonic tetrad exists at all: μ² − μ + 1 = 0 has no F_q root.)
-Symmetrically, the type III/IV/V pencils are ordinary partially-rational-branch S₃ covers that exist
-at all q and lose deepness once Y_f gains a rational split-member witness. So each sporadic is the
-small-q tail of the generic S₃ stratum, exactly the regime C491 Lemma 7 rules out for q ≥ 23. The
-structure is uniform; the deepness is a bounded-q arithmetic accident, not a perpetual family like
-O±/W. Both C491 discovery-track leads are hereby settled.
+The continuation above constructs the persistence explicitly only for the type-I (equianharmonic)
+family. Types II–V are ordinary partially-rational-branch S₃ covers that exist at all q and lose
+deepness once Y_f gains a rational split-member witness; their bounded-q deepness is not
+independently re-constructed here but is exactly what C491 Lemma 7 proves (no S₃-stratum deep hole for
+q ≥ 23). So each sporadic is the small-q tail of the generic S₃ stratum. The structure is uniform;
+the deepness is a bounded-q arithmetic accident, not a perpetual family like O±/W. Both C491
+discovery-track leads are hereby settled.
+
+Framing (for the C500 write-up, not task-owned here): the branch/ramification j-invariant of the
+Hankel pencil is a rational modulus on syndrome space that organizes the entire classification — T/S
+are its degenerate boundary, O± are j = 0 realized in the cyclic (C₃-monodromy) stratum, and the
+type-I sporadics are j = 0 realized in the S₃-monodromy stratum (same modulus, different deck group,
+different stabilizer). Logged to the discovery track as a paper-structure lead.
 
 ## 7. Evidence
 
@@ -191,9 +219,14 @@ agree on every rational-branch orbit. No new field census is performed.
 
 Settled here:
 - *Stab-12 pattern / "no linear×irreducible member" at q = 7,13,19* — Theorem C499.1: equianharmonic
-  branch tetrad, stabilizer A₄, and the profile is forced (§4). At q = 7 the pencil length q + 1 = 8
-  leaves no room for `1.2` members, which is why the pattern was first seen there in its purest form.
-- *Constant "4 double + 4 irreducible"* — each is a single stabilizer-orbit on the pencil line (§4).
+  branch tetrad, stabilizer A₄. The "no `1.2` member" at q = 7 is now fully explained by Theorem
+  C499.2: at q = 7, P¹ = the two tetrahedra exactly (q + 1 = 8), so there is no room for any `1.2`
+  orbit; the `1.2` members appear at q = 13, 19 precisely as the octahedral 6-orbit and a free
+  12-orbit become rational (q mod 12).
+- *Constant "4 double + 4 irreducible"* — Theorem C499.2: member type is constant on each
+  stabilizer-orbit of P¹, and the branch and inert members are the two distinguished size-4 orbits
+  (for A₄, the two dual equianharmonic tetrahedra — both certified j = 0). The counts are forced, not
+  a field coincidence.
 - *q = 8 three-orbit fusion* — a free Gal(F₈/F₂) torsor on the a₄ cubic-twist parameter (§5).
 - *Why sporadic and not a family* — bounded-q accident; the configurations persist but lose deepness
   for q ≥ 25 (§6).

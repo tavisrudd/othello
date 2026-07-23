@@ -124,6 +124,20 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      4,
+      "1.2"
+     ],
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ]
+    ],
     "quartic_I": 5,
     "quartic_J": 0,
     "rep": [
@@ -175,6 +189,7 @@
   ],
   "13": [
    {
+    "branch_equianharmonic": true,
     "branch_one_orbit": true,
     "branch_type": "1+1+1+1",
     "cross_ratio": 10,
@@ -183,6 +198,7 @@
     "frobenius_maps_to_rep_index": 2201,
     "harmonic": false,
     "harmonic_via_J": false,
+    "inert_equianharmonic": true,
     "irreducible_one_orbit": true,
     "member_stats": {
      "1.2": 6,
@@ -193,6 +209,20 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ],
+     [
+      6,
+      "1.2"
+     ]
+    ],
     "quartic_I": 0,
     "quartic_J": 1,
     "rep": [
@@ -231,6 +261,24 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      2,
+      "1.2"
+     ],
+     [
+      4,
+      "1.2"
+     ],
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ]
+    ],
     "quartic_I": 5,
     "quartic_J": 4,
     "rep": [
@@ -270,6 +318,28 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      2,
+      "1.2"
+     ],
+     [
+      4,
+      "1.2"
+     ],
+     [
+      4,
+      "1.2"
+     ],
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ]
+    ],
     "quartic_I": 5,
     "quartic_J": 1,
     "rep": [
@@ -291,6 +361,7 @@
   ],
   "19": [
    {
+    "branch_equianharmonic": true,
     "branch_one_orbit": true,
     "branch_type": "1+1+1+1",
     "cross_ratio": 12,
@@ -299,6 +370,7 @@
     "frobenius_maps_to_rep_index": 6863,
     "harmonic": false,
     "harmonic_via_J": false,
+    "inert_equianharmonic": true,
     "irreducible_one_orbit": true,
     "member_stats": {
      "1.2": 12,
@@ -309,6 +381,20 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ],
+     [
+      12,
+      "1.2"
+     ]
+    ],
     "quartic_I": 0,
     "quartic_J": 1,
     "rep": [
@@ -331,6 +417,7 @@
   ],
   "7": [
    {
+    "branch_equianharmonic": true,
     "branch_one_orbit": true,
     "branch_type": "1+1+1+1",
     "cross_ratio": 5,
@@ -339,6 +426,7 @@
     "frobenius_maps_to_rep_index": 346,
     "harmonic": false,
     "harmonic_via_J": false,
+    "inert_equianharmonic": true,
     "irreducible_one_orbit": true,
     "member_stats": {
      "1.2": 0,
@@ -349,6 +437,16 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ]
+    ],
     "quartic_I": 0,
     "quartic_J": 1,
     "rep": [
@@ -593,6 +691,20 @@
     },
     "n_double_root": 4,
     "n_irreducible": 4,
+    "pencil_orbit_decomposition": [
+     [
+      2,
+      "1.2"
+     ],
+     [
+      4,
+      "1^2.1"
+     ],
+     [
+      4,
+      "3"
+     ]
+    ],
     "rep": [
      1,
      0,

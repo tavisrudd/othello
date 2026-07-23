@@ -96,3 +96,14 @@ settled in `2026-07-22-c499-sporadic-pencil-structure.md`: the stab-12 orbits ar
 paralleling C484's colour C₃, and sporadicity is a bounded-q accident (the equianharmonic locus
 persists for all q≡1 mod3 but is deep only at q∈{7,13,19}). The "sporadic vanishing gap" lead
 remains open discovery-track material (C491 Lemma 7 already proved q≥23; no allocation).
+
+- **j-map paper framing (for C500).** The branch/ramification j-invariant of the Hankel pencil is a
+  rational modulus on syndrome space that organizes the whole redundancy-five classification: T/S are
+  its degenerate boundary, O± are j=0 in the cyclic (C₃) stratum, type-I sporadics are j=0 in the S₃
+  stratum (same modulus, different deck group). Could restructure the C491/C499 material as strata of
+  one j-map; also the type-I cover φ_f is plausibly the classical tetrahedral trigonal map (explicit
+  normal form, unverified). Paper-structure lead only; no allocation.
+- **Numeric collision.** At q=13 the tangent family T and the type-I sporadic share (size 182,
+  stab-order 12) but not the group — T's stabilizer is the cyclic q−1 torus, the sporadic's is A₄.
+  Reminder that (size, stab-order) is not a complete orbit invariant; group structure + branch type
+  is. Incidental.

@@ -395,6 +395,31 @@ def main():
                 assert entry["branch_one_orbit"], "q=%d branch not single orbit" % q
                 assert entry["irreducible_one_orbit"], "q=%d irred not single orbit" % q
                 checks.append(("4+4_single_stab_orbits", q, o["size"]))
+                # full stabilizer-orbit decomposition of P^1: type constant per orbit
+                seen, decomp = set(), []
+                for lam in list(range(q)) + ["inf"]:
+                    if lam in seen: continue
+                    orb = stab_orbit_on_pencil(F, basis, selts, lam)
+                    seen |= orb
+                    types = set()
+                    for l2 in orb:
+                        s2, u2 = (0, 1) if l2 == "inf" else (1, l2)
+                        types.add(C.cubic_pattern(C.binary_factor(F, member_at(F, basis, s2, u2))))
+                    assert len(types) == 1, "q=%d type not constant on a stab-orbit" % q
+                    decomp.append([len(orb), types.pop()])
+                entry["pencil_orbit_decomposition"] = sorted(decomp)
+                assert [4, "1^2.1"] in decomp and [4, "3"] in decomp, \
+                    "q=%d branch/inert not size-4 orbits" % q
+                checks.append(("type_constant_on_pencil_orbits", q, o["size"]))
+                # both size-4 tetrahedra (branch and inert) are equianharmonic
+                if gn == "A4":
+                    mb = cross_ratio(F, sorted(bo, key=lambda x: (x == "inf", x)))
+                    mi = cross_ratio(F, sorted(io, key=lambda x: (x == "inf", x)))
+                    entry["branch_equianharmonic"] = equianharmonic(F, mb)
+                    entry["inert_equianharmonic"] = equianharmonic(F, mi)
+                    assert entry["branch_equianharmonic"] and entry["inert_equianharmonic"], \
+                        "q=%d an A4 tetrad is not equianharmonic" % q
+                    checks.append(("both_A4_tetrads_equianharmonic", q, o["size"]))
             recs.append(entry)
         cert["fields"][str(q)] = recs
 
