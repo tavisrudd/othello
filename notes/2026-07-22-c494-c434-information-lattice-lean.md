@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** final prose repair landed; exact-target rebuild pending shared-tree availability
+**Status:** complete by explicit user waiver after final prose-only review repair
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, owned artifacts, validation, axiom evidence, trust boundaries,
@@ -147,9 +147,9 @@ Scoped Lean validation passed through the required guarded workflow:
   `[propext, Quot.sound]`, and 22 report `[propext, Classical.choice, Quot.sound]`;
 - no probe reports `sorryAx`, a native-evaluation axiom, or any project-local axiom.
 
-The successful gate build is recorded under
-`~/.cache/othello-lean-build/run-20260723-211709-368fcbbd`; the trace-current confirmation is
-`~/.cache/othello-lean-build/run-20260723-211732-1ad549ca`.  These machine-local logs are
+The final post-repair gate build is recorded under
+`~/.cache/othello-lean-build/run-20260723-232107-596a1524`; the trace-current confirmation is
+`~/.cache/othello-lean-build/run-20260723-232119-df9245c6`.  These machine-local logs are
 diagnostic records only; the committed source and gate are the scholarly evidence.
 
 ### Judgment calls and local checklist
@@ -193,8 +193,9 @@ item but returned `NO-GO` for one required prose repair: the B3/H3 module header
 “exhaustive native evaluation” after the implementation had moved entirely to kernel `decide`.
 Commit `9e7eeec7` changes only those two phrases to “exhaustive kernel evaluation”; guarded
 single-file elaboration then passed for both leaves.  The user explicitly approved waiving another
-independent post-fix review for this two-line trust-prose correction.  That waiver does not waive
-the ordinary exact-target rebuild and trace-current confirmation.
+independent post-fix review for this two-line trust-prose correction.  The ordinary exact-target
+rebuild and trace-current confirmation subsequently passed.  C494 therefore closes by explicit
+user review waiver, with no unresolved reviewer issue.
 
 ### Mystery ledger (ej closeout)
 

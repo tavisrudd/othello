@@ -288,8 +288,12 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   only standard axioms; the classical coordinate-to-Coxeter identifications remain explicit
   inputs. Exact source hashes, theorem types, validation, exclusions, and C320 delta:
   [`2026-07-20-c428-clebsch-weighted-adjoint-lean.md`](../2026-07-20-c428-clebsch-weighted-adjoint-lean.md).
-- **The Paper-1 close now has an explicit Lean expansion:** C494 checks C434's B3/H3 middle
-  information lattice; C503 has closed the bounded rank-three arithmetic-gluing theorem with a
+- **The Paper-1 close now has an explicit Lean expansion:** C494 has closed C434's B3/H3 middle
+  information lattice with exact `(sheet,D')`-fibre/`K`-orbit equivalences, strict
+  `1 < 2 < 6 < 14/22` rational function-subalgebra towers, and a 31-terminal standard-axiom gate;
+  its final prose-only review repair closed by explicit user waiver
+  ([report](../2026-07-22-c494-c434-information-lattice-lean.md)). C503 has closed the bounded
+  rank-three arithmetic-gluing theorem with a
   workflow-free certificate bundle, 23-terminal gate, and final independent-review `GO`
   ([report](../2026-07-22-c503-clebsch-arithmetic-gluing-lean.md)); C504
   owns the C452/C464/C469/C470 Witt--Hadamard--Mathieu finite capstone; C505 assembles the
