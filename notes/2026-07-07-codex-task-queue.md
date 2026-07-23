@@ -147,7 +147,6 @@ current highest-EV step is C528 — the gadget-Node-Kayles value law (cold-start
 
 ### `reed-solomon`
 
-- **C529 `[reed-solomon]` [QUEUED; next; C525 closed]** — classify arithmetic deepness on the characteristic-two coherent Lucas-nucleus carriers by constructing their restricted ordered-root covers and computing geometric components and Frobenius action; seek a representation-stable binary-digit/extension-parity law, but stop at the first proved level-dependent Artin--Schreier or monodromy obstruction; recover C498/C509 conceptually and use no ambient syndrome census → `notes/reed-solomon-tasks/c529-characteristic-two-lucas-carrier-arithmetic.md`.
 - **C500 `[reed-solomon]` [QUEUED; after C491; release decisions gate]** — redundancy-five manuscript: package C491 (unconditional covering radius, Hankel-pencil criterion, exceptional-cover mechanism, O±/nucleus/wild families, sharp q>=23 threshold, certified sporadic tables) as a standalone paper to the arcs/clebsch release bar, citing Kaipa--Patanker--Pradhan for the quartic orbit toolkit and positioning against ZWK 2019 and the twisted-RS adjacent work; includes the KPP char-2/3 contribution remark and the audit-mandated "to our knowledge" qualifiers → `notes/2026-07-22-c500-prs-redundancy-five-paper.md`
 
 ### `relconic`

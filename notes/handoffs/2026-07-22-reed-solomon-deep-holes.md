@@ -4,13 +4,17 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, C512--C519, and C525 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, and C529 complete. C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
-`q >= min((n-4)(n+3)/2+1, 5(n-4))`, with deletion budget `3n-4`.  C529 is next: it owns the
-level-specific Frobenius/deepness law on coherent characteristic-two Lucas carriers, with a stop
-at the first failure of representation stability.  C500 remains release-gated.
+`q >= min((n-4)(n+3)/2+1, 5(n-4))`, with deletion budget `3n-4`.  C529 proves the infinite
+power-of-two top-nucleus carrier family and normalizes the linearized root cover on its
+distinguished Borel-endpoint orbit.  The
+C498/C509 parity law is the `F4`/order-two level; the first fresh degree-nine carrier has minimal
+constant field `F8` and an order-three component cycle on its `e_7` orbit, which is shallow when
+`3|m`, including infinitely many odd extension degrees.  This fires the authorized first-obstruction
+stop.  Its four-dimensional quotient cover is unallocated.  C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -559,6 +563,18 @@ stop rule before Hasse--Weil.  The exact unallocated successors are the characte
 root-compatible Artin--Schreier carrier and the odd-characteristic pullback/line classification;
 neither may be replaced by a fixed-level census.
 
+## Closed base — C529
+
+`notes/2026-07-23-c529-characteristic-two-lucas-carrier-arithmetic.md` computes every nonzero
+consecutive-row Lucas overlap through the first fresh level and proves the infinite family
+`P<e_2,...,e_(2^s-1)>`.  The distinguished `e_(2^s-1)` kernel contains
+`<1,t,t^(2^s)>`; its normalized ordered-root cover has geometric monodromy
+`AGL_1(F_(2^s))`, minimal constant field `F_(2^s)`, based deck group `C_(2^s-1)`, and a split
+member exactly when `s|m`.  This recovers C498/C509 at
+`s=2`.  At `s=3`, Frobenius has order three on the components, disproving a stable parity law and
+closing C529 at its mandatory obstruction exit.  Deepness for `3∤m` needs normalization of the
+four-dimensional quotient cover and is not allocated.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -586,6 +602,7 @@ neither may be replaced by a fixed-level census.
 | C518 | modular TRS trace-one global incidence | complete | complement Frobenius alternants; binary and subfield shallow theorems; exact residual lifting torsor | first proved global obstruction |
 | C519 | universal residual-discriminant base locus | complete (obstruction exit) | integral pullback; doubled-quadric characteristic-two component; exact Artin--Schreier replacement gate | first additional component |
 | C525 | characteristic-two ordered-Hessian pullback | complete | universal Veronese/ruling classification; constrained carrier equality; linear base-selection route; genus-one containment theorem | arbitrary-degree characteristic-two obstruction classified |
+| C529 | characteristic-two Lucas-carrier arithmetic | complete (obstruction exit) | power-of-two carrier family; exact linearized ordered-root cover; C498/C509 recovered; first fresh level has order-three Frobenius | parity law fails intrinsically; quotient-cover arithmetic remains unallocated |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -612,10 +629,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   frozen theorem boundary. C519 identifies the arbitrary-redundancy characteristic-two
   discriminant obstruction, and C525 closes its ordered-Hessian replacement: the only nontrivial
   contained pullback is the persistent/Lucas union, with an effective genus-one slice outside it.
-  A successor should be allocated only for a selected carrier-arithmetic family or fixed level;
-  no ambient census substitutes for that choice.  C529 now owns the coherent characteristic-two
-  Lucas family and must either prove a binary-digit/Frobenius law or stop at its first intrinsic
-  level-dependent obstruction.
+  C529 selects the coherent power-of-two Lucas family and stops at its first intrinsic
+  level-dependent obstruction: the degree-nine carrier has an order-three constant-field cycle.
+  A successor should be allocated only to normalize its four-dimensional quotient cover on
+  intrinsic `PGL2` normal forms; no ambient census substitutes for that calculation.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -643,6 +660,6 @@ history.
 
 ## Next command
 
-`go C529`
+`go reed-solomon`
 
-(C529 is next. C500 remains release-gated.)
+(C529 is complete.  Its quotient-cover successor is unallocated; C500 remains release-gated.)

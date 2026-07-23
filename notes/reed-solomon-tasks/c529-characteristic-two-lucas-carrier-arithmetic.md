@@ -1,6 +1,6 @@
 # C529 — characteristic-two Lucas-carrier Frobenius arithmetic
 
-**Lane:** `reed-solomon` · **Status:** queued next; C525 closed
+**Lane:** `reed-solomon` · **Status:** complete at the first level-dependent monodromy obstruction
 
 ## Objective
 
