@@ -49,3 +49,36 @@ The imported proposition:
 - applies to fixed-size `k`-arcs under the explicit inequality `q+1>choose(k,2)` (hence to
   six-arcs for `q>=16`); and
 - makes no claim about higher redundancy or the general Reed--Solomon deep-hole conjecture.
+
+## Extra-juice closeout
+
+The generalized proof gives two free upgrades.
+
+First, it is algorithmic. If `S=PG(2,q)\U(A)` and `N=choose(k,2)`, then the parent secants are
+exactly the lines containing more than `N` points of `S`; the vertices are exactly the points
+incident with `k-1` recovered secants. Equivariance then gives
+
+```text
+Stab_PGammaL(U(A)) = Stab_PGammaL(A).
+```
+
+Thus above the threshold the deepest-syndrome locus recovers both the unlabelled parent and its
+full projective-semilinear code automorphism group.
+
+Second, the strict inequality is best possible in general. At `(q,k)=(5,4)`,
+`q+1=choose(k,2)=6`, and the projective frame has a conic as its literal uncovered locus. The
+conic stabilizer has order `|PGL(2,5)|=120`, while a projective-frame stabilizer has order 24.
+Consequently at least five distinct literal frames have that same conic child. This explains why
+the line-union proof cannot be repaired at equality without additional data.
+
+## Mystery ledger
+
+- **Settled — is reconstruction merely existential?** No. The high-incidence lines give a
+  canonical recovery algorithm, followed by a canonical vertex multiplicity test.
+- **Settled — does the locus remember symmetry?** Yes above the threshold: its full semilinear
+  stabilizer is exactly the parent's.
+- **Settled — is the strict threshold an artefact of the proof?** No in general. The `q=5`
+  frame/conic fibre is an equality-boundary collision with multiple literal parents.
+- **Open outside this import — what replaces the threshold below it?** C490 shows that coherent
+  projected-sextic signatures can separate recoverable small-field fibres, but importing that
+  certificate-backed theory remains a distinct manuscript decision.

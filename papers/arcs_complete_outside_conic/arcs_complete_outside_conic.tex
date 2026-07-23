@@ -1241,6 +1241,42 @@ points incident with $k-1$ recovered secants, and the same description
 recovers $B$.
 \end{proof}
 
+\begin{corollary}[Canonical reconstruction and automorphisms]
+\label{cor:arc-reconstruction-algorithm}
+Under the hypotheses of Proposition~\ref{prop:arc-reconstruction}, put
+$S=\PG(2,q)\setminus U(A)$ and $N=\binom{k}{2}$.  The secants of $A$ are
+exactly the lines $\ell$ with $|\ell\cap S|>N$, and $A$ is exactly the set
+of points incident with $k-1$ such lines.  Moreover,
+\[
+ \operatorname{Stab}_{\operatorname{P\Gamma L}_3(q)}(U(A))
+ =
+ \operatorname{Stab}_{\operatorname{P\Gamma L}_3(q)}(A).
+\]
+\end{corollary}
+
+\begin{proof}
+Every secant lies in $S$ and has $q+1>N$ points.  A nonsecant line meets
+each of the $N$ secants in at most one point, so it contains at most $N$
+points of their union $S$.  The vertex-recovery rule is the one proved
+above.  Finally, every semilinear projectivity stabilizing $A$ stabilizes
+$U(A)$.  Conversely, if $gU(A)=U(A)$, then
+$U(gA)=gU(A)=U(A)$, so Proposition~\ref{prop:arc-reconstruction} gives
+$gA=A$.
+\end{proof}
+
+\begin{remark}[Sharpness of the strict threshold]
+\label{rem:arc-reconstruction-sharp}
+The strict inequality cannot in general be weakened to
+$q+1\ge\binom{k}{2}$.  For the projective four-frame $A$ over $\F_5$,
+Proposition~\ref{prop:small-values} gives $U(A)=\cC(\F_5)$, while
+$q+1=\binom{4}{2}=6$.  The stabilizer of $\cC$ in
+$\operatorname{PGL}_3(5)$ has order
+$|\operatorname{PGL}_2(5)|=120$, whereas the setwise stabilizer of a
+projective frame has order $4!=24$.  The conic stabilizer therefore moves
+$A$ through at least five distinct four-frames, all with the same literal
+uncovered locus $\cC(\F_5)$.
+\end{remark}
+
 \section{Conclusion and further questions}
 
 The exact defect identity is the organizing result of the paper.  It
@@ -1258,6 +1294,10 @@ parity-check arc from its complete set of distance-three syndrome directions
 whenever $q+1>\binom{k}{2}$.  Thus the one-column extension locus itself
 becomes a parent fingerprint once every secant contains more points than
 there are competing secants; for six columns this applies when $q\ge16$.
+Corollary~\ref{cor:arc-reconstruction-algorithm} makes the recovery canonical
+and shows that the same locus determines the full projective-semilinear
+automorphism group.  Remark~\ref{rem:arc-reconstruction-sharp} shows that
+the strict incidence threshold is best possible in general.
 
 Two further mechanisms complement that identity.  Projective averaging
 transfers ordinary complete arcs to prescribed-hole upper bounds, while the

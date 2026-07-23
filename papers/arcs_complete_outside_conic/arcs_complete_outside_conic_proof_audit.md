@@ -48,6 +48,12 @@
     `k-1` recovered secants, since secants through a nonvertex form a matching on `k` endpoints and
     therefore number at most `floor(k/2)<k-1`. This is a proof-only reconstruction statement; it
     does not recover labels and introduces no finite census. For six-arcs it applies at `q>=16`.
+13. The reconstruction is canonical: writing `S=PG(2,q)\U(A)` and `N=choose(k,2)`, the parent
+    secants are exactly the lines containing more than `N` points of `S`; vertices are then the
+    `(k-1)`-fold points. Equivariance gives equality of the `PGammaL(3,q)` stabilizers of `U(A)`
+    and `A`. The strict threshold is sharp in general: at `(q,k)=(5,4)`, the frame has conic
+    uncovered locus and `q+1=N=6`; the order-120 conic stabilizer has an orbit of at least five
+    frames because a frame stabilizer has order 24.
 
 ## Computer-assisted claims
 

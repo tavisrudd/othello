@@ -27,8 +27,9 @@ torsor, Dickson, signed-Weil, and zeta mechanisms remain Paper-2
 pointers.  The user has selected the replacement spine for Lean formalization, queued as
 C420--C428, while manuscript integration remains a separate owner action before release.
 C485's proof-only six-arc uncovered-locus reconstruction lemma is now imported into the arcs paper,
-strengthened there to `q+1 > binom(k,2)` for arbitrary fixed `k`, and used only as a
-conclusion-level contrast in Clebsch; C490's certificate-heavy
+strengthened there to `q+1 > binom(k,2)` for arbitrary fixed `k`, upgraded to a canonical
+reconstruction/stabilizer theorem with a sharp `q=5` equality-boundary counterexample, and used
+only as a conclusion-level contrast in Clebsch; C490's certificate-heavy
 q=11 three-view reconstruction census remains outside this manuscript**.
 
 The current decision and novelty map is
