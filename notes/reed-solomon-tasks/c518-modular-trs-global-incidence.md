@@ -98,6 +98,10 @@ law.  The residual-quadratic slice has exact determinant, branch, diagonal, coll
 Kummer/Artin--Schreier lifting classes.  Outside the proved shallow ranges, factorization
 monodromy and ordered-root incidence meet the same reduced carrier.  A Tao audit resolves its
 generic geometry at every high Lucas level `p^l>k`: it is rational, with exceptional divisors
-given by consecutive Schur functions.  The remaining gate is low-level geometry, the high-level
-vertical Schur intersection, and rational avoidance of the ordering/residual torsors; no
-universal contained/transverse synthesis or field census was substituted.
+given by consecutive Schur functions.  Those functions are coprime, so the vertical locus has
+lower dimension and the rational component is uniquely top-dimensional.  Schwartz--Zippel gives
+the explicit high-level shallow gate
+`q > binom(k+1,2)+2(p^l-k)`, clearing every `k=3` endpoint uniformly.  The remaining gate is
+low-level geometry, the bounded high-level fields below that threshold, and rational avoidance
+of the ordering/residual torsors; no universal contained/transverse synthesis or field census
+was substituted.

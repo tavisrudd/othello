@@ -154,15 +154,14 @@ the Kummer/Artin--Schreier lift (10)--(12).  A rational point on the coefficient
 insufficient unless this lift is trivial and the resultant deletion is avoided.  The Tao audit
 below resolves the generic component whenever \(p^\ell>k\): it is rational, with exact
 Vandermonde and consecutive-Schur exceptional divisors.  The remaining carrier gate is confined
-to low Lucas levels, the high-level vertical Schur intersection, and rational avoidance/lifting.
+to low Lucas levels and rational avoidance/lifting.  A later extra-juice pass proves the
+consecutive Schur functions coprime and gives an effective high-level shallow-field gate.
 
-This is exit gate 2.  The binary family and the stated subfield range are proved shallow, but
-outside them no theorem-derived field bound follows from the seven attacks.  At high Lucas levels
-ordered-root integrality is now explicit, but rational points must still avoid its Schur and
-residual torsors; at low levels the component problem itself remains.  A contained/transverse
-synthesis would have to assume these missing inputs.  The value-distribution fallback likewise
-has to estimate their rational complement, rather than differences or moments of a simpler
-function.  No field census and no all-TRS classification are asserted.
+This is exit gate 2.  The binary family and the stated subfield range are proved shallow.  At high
+Lucas levels ordered-root integrality is explicit and the endpoint itself has the effective gate
+(T14) below, but general syndromes still carry their residual torsors; at low levels the component
+problem itself remains.  A contained/transverse synthesis would have to assume these missing
+inputs.  No field census and no all-TRS classification are asserted.
 
 ## 1. Lucas endpoints and complement duality
 
@@ -369,15 +368,57 @@ residual Kummer/Artin--Schreier and resultant deletions.  Low levels \(p^\ell\le
 \((a_\ell+1)p^\ell+1\) in (5); their translated last column has higher \(z\)-degree and is not
 covered by this semilinear-quadratic parametrization.
 
+The consecutive-Schur intersection cannot contain another top-dimensional component.  For any
+alphabet \(X\) and last variable \(x\),
+\[
+ h_{n+1}(X,x)-x h_n(X,x)=h_{n+1}(X).                          \tag{T11}
+\]
+If a polynomial divided both \(h_n(X,x)\) and \(h_{n+1}(X,x)\), it would divide the right side
+of (T11), so it would be independent of \(x\); but the coefficient of \(x^n\) in
+\(h_n(X,x)\) is \(1\).  Hence
+\[
+ \gcd(h_n,h_{n+1})=1,\qquad
+ \gcd(h_n,s_{(n,1)})=1                                       \tag{T12}
+\]
+in every characteristic.  After the normalization \(t_0=0,t_1=1\), the same argument uses the
+alphabet \((1,t_2,\ldots,t_k)\).  Thus (T10) has codimension at least two; its vertical
+\(z\)-family has dimension at most \(k-2\), while the rational component has dimension \(k-1\).
+The latter is the unique top-dimensional component.
+
+This also supplies an effective rational-point gate for every high Lucas endpoint.  On the
+\((k-1)\)-dimensional \(t\)-space, the nonzero product of the specialized Vandermonde,
+\(h_r\), and \(s_{(r,1)}\) has total degree
+\[
+ D_{k,\ell}
+ =\left(\binom{k+1}{2}-1\right)+r+(r+1)
+ =\binom{k+1}{2}+2(p^\ell-k).                                 \tag{T13}
+\]
+Schwartz--Zippel therefore leaves a rational point of (T9), and hence a distinct trace-one
+endpoint zero, whenever
+\[
+ q>D_{k,\ell}.                                                \tag{T14}
+\]
+For odd characteristic this holds simultaneously at every high level once
+\[
+ q>\frac{p\,k(k-3)}{2(p-2)},                                  \tag{T15}
+\]
+because \(p^\ell\le q/p\).  In particular every additional fixed endpoint for \(k=3\),
+\(p=3\), is shallow over every field where it occurs.  In characteristic two, every non-top
+high level \(\ell\le m-2\) is shallow when
+\[
+ q>k(k-3);                                                    \tag{T16}
+\]
+the top level \(\ell=m-1\) is already covered for \(k=2\), while (T14) alone is inconclusive
+there for even \(k\ge4\).
+
 ## 5. Exit obstruction
 
 The seven attacks stop at the following exact gate:
 
 > For each low Lucas pair \(p^\ell\le k\), determine a geometrically integral ordered component.
-> For each high pair \(p^\ell>k\), classify the vertical consecutive-Schur intersection
-> \(V(h_r,h_{r+1})\), find an \(\mathbb F_q\)-point on the rational generic component (T9) off
-> the Vandermonde, normalization, and residual-resultant divisors, and prove that its Kummer or
-> Artin--Schreier residual class is trivial.
+> For high pairs below the effective gate (T14), decide the remaining rational cases.  For
+> general nonfixed syndromes, find a point on the rational ordered component off the residual-
+> resultant divisors and prove that its Kummer or Artin--Schreier residual class is trivial.
 
 This gate is intrinsic, finite, and falsifiable.  It is also genuinely prior to a C512-shaped
 synthesis: declaring the orbit norm irreducible would ignore its translated-factor
@@ -463,6 +504,13 @@ simultaneously models C518's two warnings: the unreduced equation has a forced c
 power, and a rational quotient point is not a rational split support without its ordering-torsor
 lift.
 
+A further requested extra-juice pass uses the elementary recursion (T11) to prove that the
+vertical consecutive-Schur locus has codimension two and cannot compete with the rational
+component.  More importantly, the explicit degree (T13) turns rationality into the effective
+zero-existence gate (T14).  This clears every \(k=3\) endpoint uniformly and all high odd-
+characteristic endpoints above the quadratic-in-\(k\) threshold (T15), without monodromy or a
+field census.
+
 Settled:
 
 - **What are all fixed endpoint equations?** Equations (2)--(6) give the complete list and its
@@ -479,6 +527,11 @@ Settled:
 - **What is the generic high-level component for arbitrary \(k\)?** When \(p^\ell>k\), equations
   (T6)--(T9) give a rational parametrization with exact inverse.  Its two intrinsic exceptional
   equations are the consecutive Schur functions \(h_r\) and \(s_{(r,1)}\).
+- **Can the vertical Schur locus be another component?** No.  Equation (T11) proves consecutive
+  complete symmetric functions coprime in every characteristic, so the vertical family has
+  smaller dimension and cannot be another top-dimensional component.
+- **Is there an effective high-level endpoint theorem?** Yes.  Equation (T14) is the exact
+  Schwartz--Zippel gate; (T15)--(T16) give uniform odd-characteristic and non-top binary bounds.
 - **Does the residual-quadratic route retain infinity, diagonals, and completion collisions?**
   Yes.  Equations (8)--(12) separate the infinity/determinant, residual diagonal, fixed-root
   collision, and valid \(0\in U\) loci.
@@ -490,8 +543,8 @@ Settled:
 Open:
 
 - **Are all remaining Lucas-fixed endpoints shallow?** Evidence gap: component geometry at low
-  levels \(p^\ell\le k\); the vertical high-level intersection \(V(h_r,h_{r+1})\); and rational
-  avoidance/lifting on the generic component (T9).  A future successor must own these exact
+  levels \(p^\ell\le k\), plus the finitely bounded high-level fields failing (T14)—notably the
+  characteristic-two top level for even \(k\ge4\).  A future successor must own these exact
   carriers; C519 does not, because it owns the universal residual-discriminant base locus instead.
 - **Which general Hasse strata admit a nondegenerate residual slice?** Evidence gap: a
   classification of syndromes for which every choice of \(V\) has \(D=0\), \(K=0\), or

@@ -122,3 +122,11 @@ roots to `0,1`, the alternant is linear in the translation coordinate:
 denominator `e1 h_r-h_(r+1)=s_(r,1)` by Pieri.  Thus every generic high-level carrier `p^l>k` is
 rational.  The exact remaining geometry is the low-level carrier and the vertical consecutive-
 Schur intersection `V(h_r,h_(r+1))`; arithmetic ordering and residual lifts remain separate.
+
+A further extra-juice pass uses
+`h_(n+1)(X,x)-x h_n(X,x)=h_(n+1)(X)` to prove consecutive complete symmetric functions coprime
+in every characteristic.  The vertical Schur family is therefore lower-dimensional and the
+rational high-level carrier is uniquely top-dimensional.  The product of its Vandermonde,
+`h_r`, and `s_(r,1)` has degree `binom(k+1,2)+2(p^l-k)`, so Schwartz--Zippel gives that exact
+high-level shallow gate.  It clears every `k=3` endpoint uniformly and leaves only low Lucas
+geometry, bounded fields below the gate, and the separate residual/order torsors.
