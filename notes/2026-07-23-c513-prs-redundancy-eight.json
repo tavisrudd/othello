@@ -1,0 +1,123 @@
+{
+  "lower_cover": {
+    "arithmetic_genus": 1,
+    "base_deletion_degree": 12,
+    "bidegree": [
+      2,
+      2
+    ],
+    "deletion_per_marker": 6,
+    "first_prime_power_at_least_bound": 47,
+    "geometric_monodromy": "S3 on ordered distinct root pairs",
+    "integer_hasse_bound": 44,
+    "marker_count": 3,
+    "total_deletion_degree": 30
+  },
+  "lower_degree6_nuclei_and_lifts": [
+    {
+      "characteristic": 2,
+      "degree7_lift_support": [],
+      "lower_support": [
+        3
+      ],
+      "order": 3
+    },
+    {
+      "characteristic": 2,
+      "degree7_lift_support": [],
+      "lower_support": [
+        3
+      ],
+      "order": 4
+    },
+    {
+      "characteristic": 2,
+      "degree7_lift_support": [],
+      "lower_support": [
+        1,
+        3,
+        5
+      ],
+      "order": 5
+    },
+    {
+      "characteristic": 3,
+      "degree7_lift_support": [
+        2,
+        5
+      ],
+      "lower_support": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "order": 5
+    },
+    {
+      "characteristic": 5,
+      "degree7_lift_support": [
+        3,
+        4
+      ],
+      "lower_support": [
+        2,
+        3,
+        4
+      ],
+      "order": 4
+    },
+    {
+      "characteristic": 5,
+      "degree7_lift_support": [
+        3,
+        4
+      ],
+      "lower_support": [
+        2,
+        3,
+        4
+      ],
+      "order": 5
+    }
+  ],
+  "modular_disposition": {
+    "characteristic2_central_e3_lift_dimension": 0,
+    "characteristic3_conic_bad_point_bound": 18,
+    "characteristic3_lift_support": [
+      2,
+      5
+    ],
+    "characteristic3_projective_module": "det^2 tensor Frobenius^1(E)",
+    "characteristic3_shallow_for_q_at_least": 27,
+    "characteristic5_lift_support": [
+      3,
+      4
+    ],
+    "characteristic5_projective_module": "det^3 tensor E",
+    "characteristic5_universal_roots": "P1(F5)",
+    "characteristic5_universal_split_sextic_coefficients": [
+      0,
+      -1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ]
+  },
+  "persistent": {
+    "sigma_quotient": "T/T^7 modulo inversion and Frobenius",
+    "tangent_cocycle_coefficient": 7,
+    "tangent_split_characteristic": 7
+  },
+  "redundancy": 8,
+  "schema": "c513-prs-redundancy-eight-v1",
+  "syndrome_degree": 7,
+  "top_level": {
+    "collision_degree": 10,
+    "lower_central_intersection_degree": 1,
+    "secant_intersection_degree": 3,
+    "total_transverse_collision_budget": 14
+  }
+}
