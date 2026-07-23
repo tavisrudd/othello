@@ -413,7 +413,14 @@ totaling `q(q+1)^2/2`, with orbit law `T/T^7` modulo inversion/Frobenius and tan
 only as an incidental successor lead; its second-order refinement makes the characteristic-five
 lift shallow and identifies the unresolved characteristic-seven four-space with the binary-quartic
 representation, the `p=7` member of the exact prime-diagonal series
-`P(det^2 tensor Sym^(p-3)(E))`.
+`P(det^2 tensor Sym^(p-3)(E))`.  The third-order close separates a uniform generic spine with
+integer threshold `6n-10+floor(2sqrt(6n-12))` from this prime-diagonal modular spine, whose common
+kernel is a nonsquarefree `p`-th-power pencil.  At `q=p=7`, the modular carrier is deep exactly on
+the 819 rootless projective binary quartics.  The attempted `q=49` residual-quadratic witness fails
+the squarefreeness gate because its roots collide with the fixed `F_7` quintic; rootless
+sufficiency over larger fields remains open.  The next bounded gate is the residual-quadratic
+discriminant together with its determinant, diagonal, and collision divisors across quartic
+`PGL2` orbits.
 
 ## Closed base — C510
 

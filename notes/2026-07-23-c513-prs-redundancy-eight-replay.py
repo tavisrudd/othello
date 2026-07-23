@@ -142,6 +142,62 @@ def main():
         assert row["syndrome_degree"] == p + 1
         assert row["lift_support"] == list(range(2, p))
         assert row["projective_module"] == f"det^2 tensor Sym^{p - 3}(E)"
+        forced = set(row["lift_support"]) | {j - 1 for j in row["lift_support"]}
+        assert [j for j in range(p + 1) if j not in forced] == [0, p]
+        assert row["common_kernel_support"] == [0, p]
+        assert row["common_kernel_is_pth_power_pencil"]
+        assert not row["universal_squarefree_witness"]
+
+    for n in range(4, 25):
+        deletion = 6 * n - 12
+        closed = math.floor((1 + math.sqrt(deletion)) ** 2) + 1
+        expanded = 6 * n - 10 + math.floor(2 * math.sqrt(deletion))
+        assert closed == expanded
+
+    q7 = data["q7_prime_diagonal_calibration"]
+    assert q7["projective_binary_quartics"] == (7**5 - 1) // 6 == 2801
+    rootless_vectors = sum(
+        (-1) ** k * math.comb(8, k) * (7 ** (5 - k) - 1)
+        for k in range(5)
+    )
+    assert rootless_vectors == 4914
+    assert q7["deep_rootless_quartics"] == rootless_vectors // 6 == 819
+    assert q7["shallow_quartics"] == 2801 - 819 == 1982
+    assert q7["split_squarefree_septics"] == 8
+
+    q49 = data["q49_rootless_shallow_witness"]
+    assert q49["nu_as_a_plus_b_tau"] == [3, 1]
+    assert q49["norm_nu"] == (3 * 3 - 3) % 7 == 6
+    assert pow(q49["norm_nu"], 3, 7) == 6
+    assert q49["quartic_has_rational_root"] is False
+    assert q49["hankel_first_row"] == q49["hankel_second_row"] == [0, 0]
+    assert q49["quintic_root_encodings"] == [0, 1, 6, 21, 28]
+    assert q49["quadratic_root_encodings"] == [3, 4]
+    assert not set(q49["quintic_root_encodings"]) & set(
+        q49["quadratic_root_encodings"]
+    )
+    assert q49["root_sets_disjoint"]
+
+    family = data["even_degree_characteristic7_square_quartic_family"]
+    assert family["counting_curve"] == "E: y^2=x^3-x"
+    for row in family["checked_rows"]:
+        m = row["m"]
+        q = 7 ** (2 * m)
+        trace = 2 * ((-7) ** m)
+        assert row["q"] == q
+        assert row["elliptic_trace"] == trace
+        assert row["elliptic_points"] == q + 1 - trace
+        assert row["rootless_shallow_parameters"] == (q + 1 - trace) // 4
+
+    detector = data["five_root_residual_quadratic_detector"]
+    assert detector["denominator"] == "D=A^2+B*C"
+    assert detector["solution_s"] == "(A*C+B*E)/D"
+    assert detector["solution_u"] == "(C^2-A*E)/D"
+    assert (
+        detector["discriminant_numerator"]
+        == "(A*C+B*E)^2-4*(C^2-A*E)*(A^2+B*C)"
+    )
+    assert "collision" in detector["full_family_gate"]
     print("C513 independent replay: PASS")
 
 

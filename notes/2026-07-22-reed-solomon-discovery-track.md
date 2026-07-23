@@ -133,7 +133,21 @@ projectively `det^2 tensor Sym^4(E)`, the binary-quartic representation from C49
 universal split septic because common annihilation forces `d1=...=d6=0`, hence a seventh power.
 More generally, in characteristic `p` the top nucleus of the degree-`p` NRC lifts at syndrome
 degree `p+1` to `P(det^2 tensor Sym^(p-3)(E))`: the `p=3,5,7` cases are respectively the C491
-nucleus point, a binary-quadratic plane in C509, and the new binary-quartic four-space.
-**Evidence:** CHECKED linear support and universal-witness calculations; the characteristic-seven
-quartic-stratum deepness remains untested.
+nucleus point, a binary-quadratic plane in C509, and the new binary-quartic four-space. Across the
+whole prime-diagonal carrier, common annihilation leaves only `<x^p,y^p>`, a `p`-th-power pencil;
+therefore no universal squarefree witness exists and the modular problem is intrinsically
+orbitwise.
+**Third-order refinement:** at `q=p=7`, every split squarefree septic is the complement of one
+point `r` in `P1(F_7)`, and its Hankel-kernel condition is exactly `h(r)=0` for the corresponding
+binary quartic. Thus the modular carrier is deep exactly on the `819` rootless projective quartics
+and shallow on the other `1982`. Over larger characteristic-seven fields a rational root remains a
+sufficient shallowness witness, but rootlessness is not yet known to imply deepness.
+**Collision warning:** the tempting `q=49` candidate
+`(t^5-t)(t^2+5)` is not squarefree: the residual roots `plus-or-minus3` already occur in
+`t^5-t`. It supplies no rootless-but-shallow witness, and the derived elliptic parameter count
+cannot be promoted without removing the full collision divisor. The residual-quadratic
+discriminant remains a useful detector only together with determinant, diagonal, and collision
+gates.
+**Evidence:** CHECKED linear support, universal-witness, and `q=7` inclusion--exclusion
+calculations; larger-field rootless sufficiency remains untested.
 **Status:** open lead.

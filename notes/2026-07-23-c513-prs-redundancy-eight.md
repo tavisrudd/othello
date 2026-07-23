@@ -296,8 +296,10 @@ degree-seven consecutive lifts, the collision/intersection budgets, and the char
 split witness. The replay reconstructs the relevant modular linear systems by row reduction and
 checks the characteristic-three conic bound. Neither program enumerates deep syndromes or proves
 geometric `S3` monodromy; that theorem input is the C491 ordered-pair argument, unchanged by deleting
-marker divisors. The generator, JSON certificate, and independent replay have exact byte counts
-`9958`, `6872`, and `5598`, respectively; their SHA-256 hashes are in the adjacent manifest.
+marker divisors. The closeout certificate also checks the q=7 rootless-quartic count, the exact
+disjoint root sets and Hankel equations for the q=49 witness, the even-extension CM count, and the
+fixed-five-root residual-discriminant formula. The generator, JSON certificate, and independent replay have exact byte counts
+`15003`, `9843`, and `7978`, respectively; their SHA-256 hashes are in the adjacent manifest.
 
 ## Extra-juice closeout
 
@@ -344,6 +346,15 @@ The first sufficient integer is
  =\left\lfloor\left(1+\sqrt{6n-12}\right)^2\right\rfloor+1.
 \]
 
+Equivalently,
+
+\[
+ Q_n^{\rm gen}=6n-10+\left\lfloor2\sqrt{6n-12}\right\rfloor,
+\]
+
+so the generic arithmetic threshold grows linearly with redundancy, with only a square-root
+correction.
+
 This is a genuine generic-stratum corollary, but not an all-redundancy deep-hole theorem: the
 contained cyclic/wild/nucleus pullbacks and their transverse degrees remain level-specific.
 
@@ -376,6 +387,11 @@ The consecutive-row lift to syndrome degree `p+1` has support
  \cong \mathbf P(\det^2\otimes\operatorname{Sym}^{p-3}E).
 \]
 
+Simultaneous annihilation by this entire module forces the split-member coefficients
+`d1=...=d_(p-1)=0`; its common Hankel kernel is only
+`<X^p,Y^p>`, a `p`-th-power pencil. Hence no prime-diagonal module admits a universal squarefree
+witness: its modular arithmetic must be resolved orbitwise.
+
 For `p=3` this is C491's fixed nucleus point; for `p=5` it is a binary-quadratic projective plane
 inside the redundancy-seven geometry, whose nonpersistent part is shallow in C509's high-field
 range; for `p=7` it is the binary-quartic four-space above. The increasing invariant degree
@@ -383,6 +399,157 @@ explains why modular containment becomes structurally richer with redundancy. It
 that any characteristic-seven wild enlargement should be sought as a carrier built over quartic
 discriminant/monodromy strata, paralleling—but not assuming—the characteristic-three nucleus/wild
 cone.
+
+### Third-order extra juice
+
+The two preceding patterns combine into a useful two-spine decomposition of the higher-redundancy
+problem.
+
+The generic spine is already uniform. For syndrome degree `n`, its sufficient integer threshold is
+
+\[
+ Q_n^{\rm gen}
+ =6n-10+\left\lfloor2\sqrt{6n-12}\right\rfloor,
+\]
+
+so the generic field requirement grows linearly, not exponentially, with redundancy. The bottom
+geometric monodromy is always the same cubic `S3` ordered-pair cover; only marker deletion grows.
+
+The modular spine occurs on the prime diagonal: in characteristic `p`, at redundancy `p+2`, the
+polar lift is
+
+\[
+ \mathbf P(\det^2\otimes\operatorname{Sym}^{p-3}E).
+\]
+
+This family has a uniform obstruction to any one-size-fits-all split witness. Simultaneous
+annihilation by every syndrome in the lift forces
+
+\[
+ d_1=\cdots=d_{p-1}=0,
+\]
+
+so the common kernel is the pencil
+
+\[
+ \langle x^p,y^p\rangle.
+\]
+
+Over a finite field every member is a `p`-th power and hence is not squarefree. Thus modular
+containment must be analyzed orbitwise; a universal witness cannot dispose of the whole carrier.
+This explains structurally why the `p=3` nucleus, `p=5` quadratic plane, and `p=7` quartic
+four-space behave differently even though they belong to one representation-theoretic series.
+
+At the diagonal field `q=p=7`, the quartic mystery closes completely. There are only eight split
+squarefree binary septics, one for each complement of a point `r` in `P1(F_7)`. Dividing the
+degree-eight Moore form `X^7Y-XY^7` by the linear factor at `r` and applying the Hankel pairing
+gives
+
+\[
+ g_r\in W_f\quad\Longleftrightarrow\quad h(r)=0.
+\]
+
+Hence the modular carrier is deep exactly when its binary quartic `h` has no rational root.
+There are `2801` projective binary quartics, of which exactly `819` are rootless and deep; the
+remaining `1982` are shallow. The count follows independently by inclusion--exclusion on the eight
+evaluation hyperplanes:
+
+\[
+ \frac1{6}\sum_{k=0}^4(-1)^k\binom8k(7^{5-k}-1)=819.
+\]
+
+For `q=7^m` with `m>1`, a rational root still supplies an `F_7`-subline witness, so rootlessness is
+necessary for modular deepness. It is not yet proved sufficient: larger fields have many split
+septics not arising as complements inside an `F_7`-subline.
+
+### Fourth- and fifth-order extra juice
+
+Rootlessness already ceases to be sufficient at `q=49`. Write
+
+\[
+ \mathbf F_{49}=\mathbf F_7(\tau),\qquad \tau^2=3,\qquad \nu=\tau+3.
+\]
+
+The norm of `nu` is the nonsquare `6`, so `h=(t^2-\nu)^2` is rootless. Nevertheless
+
+\[
+ g=(t^5-t)(t^2+5)
+\]
+
+is a split squarefree septic in its Hankel kernel. Exact field arithmetic gives disjoint root sets
+`{0,1,6,21,28}` and `{3,4}` in the certificate encoding; in particular, the residual roots
+`plus-or-minus3` are not roots of `t^5-t`. The first Hankel row vanishes termwise and the second is
+`2nu^2+2nu+5=0`.
+
+This witness extends to an infinite family. Let `q=7^(2m)`, let `chi` be the quadratic character,
+and take `h_nu=(t^2-\nu)^2` with `nu` nonsquare. The residual quadratic forced by the fixed split
+quintic `t^5-t` is
+
+\[
+ t^2+\frac{2\nu}{\nu^2-1}.
+\]
+
+It splits without collision exactly when `chi(nu^2-1)=-1`. The successful-parameter count is
+
+\[
+ N_q=\frac{\#E(\mathbf F_q)}4
+ =\frac{7^{2m}+1-2(-7)^m}{4},
+ \qquad E:y^2=x^3-x.
+\]
+
+Thus q=49 already has sixteen rootless shallow quartics on this slice. Quartic root type is not the
+persistent invariant.
+
+### Tao audit
+
+The correct object is the residual-quadratic discriminant cover, not a root-type census. For the
+fixed quintic `P=t^5-t`, put
+
+\[
+ A=a_2-a_6,\qquad B=a_5,\qquad C=a_3,\qquad E=a_4.
+\]
+
+Writing the residual quadratic as `t^2-s t+u`, the Hankel equations are
+
+\[
+ \begin{pmatrix}A&B\\ C&-A\end{pmatrix}
+ \binom{s}{u}=\binom{C}{E}.
+\]
+
+Off `D=A^2+BC=0`,
+
+\[
+ s=\frac{AC+BE}{D},\qquad
+ u=\frac{C^2-AE}{D},
+\]
+
+and splitting is controlled by
+
+\[
+ K=(AC+BE)^2-4(C^2-AE)(A^2+BC).
+\]
+
+The fixed quintic is only one point of `M_0,5`. Letting the five roots vary gives, for every quartic
+`h`, a quadratic cover
+
+\[
+ Z_h\longrightarrow\operatorname{Conf}_5(\mathbf P^1).
+\]
+
+A rational point off the determinant, collision, and diagonal divisors is exactly a split
+squarefree septic witness. The non-census route is therefore:
+
+1. prove geometric integrality of `Z_h` on the generic quartic stratum and apply a point-count
+   bound;
+2. classify the quartic orbits where the discriminant becomes square, zero, or reducible; and
+3. treat only those exceptional orbit families arithmetically.
+
+The unexplained possibility is a quartic orbit on which every residual-discriminant cover
+degenerates. No present evidence shows that such an orbit exists.
+
+This does not prove an all-redundancy classification. It isolates the two reusable components:
+uniform generic splitting and prime-diagonal modular invariant theory. Other cyclic/wild contained
+pullbacks still require their own scheme-theoretic exclusion.
 
 ## Mystery ledger
 
@@ -400,6 +567,13 @@ Settled:
   exactly in characteristic seven. The extra-juice pass also settles the exact `PGammaL2` fusion:
   the three nonzero sigma classes remain separate for `p=plus-or-minus 1 mod 7` and otherwise fuse;
   the resulting total projective/semilinear orbit counts are `2/2`, `3/3`, `5/5`, or `5/3`.
+- **Why does modular complexity recur at selected redundancies?** The prime-diagonal series
+  identifies the carrier at redundancy `p+2` as
+  `P(det^2 tensor Sym^(p-3) E)`. Its common kernel is the `p`-th-power pencil
+  `<x^p,y^p>`, proving that no universal squarefree witness can collapse the carrier. At `p=q=7`,
+  the carrier is deep exactly on the `819` rootless projective binary quartics. At q=49 the exact
+  disjoint-root witness disproves larger-field rootless sufficiency, and the CM count extends it to
+  an infinite even-extension shallow family.
 
 Open:
 
@@ -417,5 +591,7 @@ Open:
   a characteristic-five point and a characteristic-seven projective four-space. The second-order
   pass settles the characteristic-five point as shallow and identifies the characteristic-seven
   space with the binary-quartic representation, while proving that it has no universal split
-  witness. Evidence gap: the quartic-stratum split-member arithmetic and containment in the
-  four-marker lower bad carrier; owner: a future fixed-redundancy-nine application.
+  witness. The higher-order passes close q=7 and a CM-controlled infinite shallow slice.
+  Evidence gap: geometric integrality and exceptional-orbit classification for the
+  residual-quadratic cover over `Conf_5(P1)`, together with containment in the four-marker lower
+  bad carrier; owner: a future fixed-redundancy-nine application.

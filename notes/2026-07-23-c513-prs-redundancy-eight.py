@@ -7,6 +7,7 @@ the explicit modular shallow witnesses used by the proof.
 """
 
 import argparse
+import itertools
 import json
 import math
 import tempfile
@@ -59,6 +60,53 @@ def total_orbit_counts(d, p_mod_7, tangent_orbits):
         "PGL2": sigma_pgl + tangent_orbits,
         "PGammaL2": sigma_pgamma + tangent_orbits,
     }
+
+
+def canonical_projective_vectors(q, dimension):
+    for vector in itertools.product(range(q), repeat=dimension):
+        first = next((x for x in vector if x), None)
+        if first == 1:
+            yield vector
+
+
+def binary_form_has_projective_root(coefficients, q):
+    if coefficients[-1] == 0:
+        return True
+    return any(
+        sum(coefficient * pow(t, i, q) for i, coefficient in enumerate(coefficients))
+        % q
+        == 0
+        for t in range(q)
+    )
+
+
+def gf49_add(x, y):
+    return ((x[0] + y[0]) % 7, (x[1] + y[1]) % 7)
+
+
+def gf49_mul(x, y):
+    return (
+        (x[0] * y[0] + 3 * x[1] * y[1]) % 7,
+        (x[0] * y[1] + x[1] * y[0]) % 7,
+    )
+
+
+def gf49_scale(c, x):
+    return ((c * x[0]) % 7, (c * x[1]) % 7)
+
+
+def gf49_pow(x, exponent):
+    result = (1, 0)
+    while exponent:
+        if exponent & 1:
+            result = gf49_mul(result, x)
+        x = gf49_mul(x, x)
+        exponent //= 2
+    return result
+
+
+def gf49_encode(x):
+    return x[0] + 7 * x[1]
 
 
 def nucleus_support(degree, order, characteristic):
@@ -143,6 +191,12 @@ def build_certificate():
     for p in (3, 5, 7):
         lower_support = nucleus_support(p, p - 1, p)
         lift_support = consecutive_lift_support(p, lower_support)
+        forced_kernel_coefficients = sorted(
+            set(lift_support) | {j - 1 for j in lift_support}
+        )
+        common_kernel_support = [
+            j for j in range(p + 1) if j not in forced_kernel_coefficients
+        ]
         prime_diagonal.append(
             {
                 "characteristic": p,
@@ -151,6 +205,9 @@ def build_certificate():
                 "syndrome_degree": p + 1,
                 "lift_support": lift_support,
                 "projective_module": f"det^2 tensor Sym^{p - 3}(E)",
+                "common_kernel_support": common_kernel_support,
+                "common_kernel_is_pth_power_pencil": common_kernel_support == [0, p],
+                "universal_squarefree_witness": False,
             }
         )
 
@@ -160,6 +217,49 @@ def build_certificate():
 
     collision = (4 + 1) * (6 - 4)
     assert collision == 10
+    q7_quartics = list(canonical_projective_vectors(7, 5))
+    q7_rootless_quartics = sum(
+        not binary_form_has_projective_root(coefficients, 7)
+        for coefficients in q7_quartics
+    )
+    nu = (3, 1)
+    nu_squared = gf49_mul(nu, nu)
+    q49_hankel_second_row = gf49_add(
+        gf49_add(gf49_scale(2, nu_squared), gf49_scale(2, nu)),
+        (5, 0),
+    )
+    gf49_elements = [(a, b) for b in range(7) for a in range(7)]
+    quintic_roots = [
+        x
+        for x in gf49_elements
+        if gf49_add(gf49_pow(x, 5), gf49_scale(-1, x)) == (0, 0)
+    ]
+    quadratic_roots = [
+        x
+        for x in gf49_elements
+        if gf49_add(gf49_mul(x, x), (5, 0)) == (0, 0)
+    ]
+    assert nu_squared == (5, 6)
+    assert q49_hankel_second_row == (0, 0)
+    assert len(quintic_roots) == 5
+    assert len(quadratic_roots) == 2
+    assert not set(quintic_roots) & set(quadratic_roots)
+
+    even_char7_family = []
+    for m in range(1, 5):
+        q = 7 ** (2 * m)
+        elliptic_trace = 2 * ((-7) ** m)
+        elliptic_points = q + 1 - elliptic_trace
+        assert elliptic_points % 4 == 0
+        even_char7_family.append(
+            {
+                "m": m,
+                "q": q,
+                "elliptic_trace": elliptic_trace,
+                "elliptic_points": elliptic_points,
+                "rootless_shallow_parameters": elliptic_points // 4,
+            }
+        )
 
     return {
         "schema": SCHEMA,
@@ -224,12 +324,54 @@ def build_certificate():
             "bottom_marker_count": "n-4",
             "deletion_degree_bound": "6*n-12",
             "exact_normalized_hasse_integer_bound": "floor((1+sqrt(6*n-12))^2)+1",
+            "expanded_integer_bound": "6*n-10+floor(2*sqrt(6*n-12))",
             "scope": "generic S3 bottom stratum only; contained carrier pullbacks remain level-specific",
         },
         "prime_diagonal_nucleus_series": {
             "general_lift_support": "e2,...,e_(p-1)",
             "general_projective_module": "det^2 tensor Sym^(p-3)(E)",
+            "general_common_kernel": "<x^p,y^p>, a p-th-power pencil",
+            "consequence": "no universal squarefree witness; modular analysis must be orbitwise",
             "checked_primes": prime_diagonal,
+        },
+        "q7_prime_diagonal_calibration": {
+            "projective_binary_quartics": len(q7_quartics),
+            "split_squarefree_septics": 8,
+            "kernel_criterion": "complement septic at r lies in W_f iff h(r)=0",
+            "deep_rootless_quartics": q7_rootless_quartics,
+            "shallow_quartics": len(q7_quartics) - q7_rootless_quartics,
+        },
+        "q49_rootless_shallow_witness": {
+            "field": "F7[tau]/(tau^2-3)",
+            "nu_as_a_plus_b_tau": list(nu),
+            "norm_nu": 6,
+            "quartic": "(t^2-nu)^2",
+            "quartic_has_rational_root": False,
+            "split_septic": "(t^5-t)(t^2+5)",
+            "quintic_root_encodings": [gf49_encode(x) for x in quintic_roots],
+            "quadratic_root_encodings": [gf49_encode(x) for x in quadratic_roots],
+            "root_sets_disjoint": True,
+            "hankel_first_row": [0, 0],
+            "hankel_second_row": list(q49_hankel_second_row),
+        },
+        "even_degree_characteristic7_square_quartic_family": {
+            "fields": "q=7^(2m)",
+            "quartics": "h_nu=(t^2-nu)^2 with nu nonsquare",
+            "witness_template": "(t^5-t)(t^2+u), u=2nu/(nu^2-1)",
+            "splitting_condition": "nu^2-1 is nonsquare",
+            "counting_curve": "E: y^2=x^3-x",
+            "parameter_count": "#E(F_q)/4",
+            "checked_rows": even_char7_family,
+        },
+        "five_root_residual_quadratic_detector": {
+            "fixed_quintic": "P=t^5-t",
+            "quartic_coordinates": "A=a2-a6, B=a5, C=a3, E=a4",
+            "linear_system": "[[A,B],[C,-A]]*[s,u]=[C,E]",
+            "denominator": "D=A^2+B*C",
+            "solution_s": "(A*C+B*E)/D",
+            "solution_u": "(C^2-A*E)/D",
+            "discriminant_numerator": "(A*C+B*E)^2-4*(C^2-A*E)*(A^2+B*C)",
+            "full_family_gate": "quadratic double cover over Conf_5(P1), off determinant, collision, and diagonal divisors",
         },
         "redundancy9_preview": {
             "syndrome_degree": 8,
