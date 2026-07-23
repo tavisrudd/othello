@@ -548,8 +548,17 @@
       "last": 507,
       "purpose": "Paper-1 post-C428 Lean expansion: arithmetic gluing, Witt-Hadamard-Mathieu capstone, torsor-Rosetta close, finite survival boundaries, and mixed semantic interfaces",
       "sequence": 61
+    },
+    {
+      "count": 1,
+      "first": 508,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 508,
+      "purpose": "q17 external C2 pairing and local-detector falsifier on the full marked Y0 census",
+      "sequence": 62
     }
   ],
-  "next_id": 508,
+  "next_id": 509,
   "schema": "codex-task-id-allocations-v1"
 }
