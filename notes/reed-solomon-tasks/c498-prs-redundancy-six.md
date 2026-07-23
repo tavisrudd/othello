@@ -45,8 +45,8 @@ shared-root collision energy of the `1+3` net members, plus the
 odd-characteristic quintic root type.  It gives exactly
 \(18/5/2/2/1\) \(P\Gamma L_2\)-normal forms at q=7/8/9/11/13; see
 `notes/2026-07-23-c498-small-exceptional-normal-forms.md` and its atomic evidence bundle.
-Energy zero is the all-field intrinsic detector of the recurring characteristic-two `3`-nucleus
-orbit.
+Zero `1+3` net-member mass is the minimal all-field intrinsic detector of the recurring
+characteristic-two `3`-nucleus orbit; zero collision energy is its immediate consequence.
 
 **Entry-gate literature audit PASSED (2026-07-22): NOT PRE-EMPTED.** Verdict + wording constraints in
 `notes/2026-07-22-c498-prs-redundancy-six-literature-audit.md` (synthesis, verdict-owning), backed by

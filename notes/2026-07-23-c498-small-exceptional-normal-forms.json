@@ -2425,6 +2425,12 @@
     "replay": "2026-07-22-c498-prs-deep-hole-replay.py",
     "replay_sha256": "1d513e2b7d5cd19466604aa8d5d4b7c1ab071929f82a988ce61721ad1840a991"
   },
+  "zero_1_plus_3_mass_small_exceptional_orbits": [
+    {
+      "pgl2_rep_index": 64,
+      "q": 8
+    }
+  ],
   "zero_energy_small_exceptional_orbits": [
     {
       "pgl2_rep_index": 64,

@@ -55,8 +55,9 @@ fingerprints are exactly Frobenius cycles.  The identity
 \(\sum_r I_f(r)=N_{1+3}(W_f)\) shows that the first moment was already the net histogram; the energy
 is the genuinely new coherent statistic.  Equivalently it counts pairs of type-`1+3` net members
 whose gcd has a rational linear factor, giving a polar-free definition internal to the net.
-Across the all-field trivial-gcd deep set, zero energy is equivalent to the recurring
-characteristic-two \(3\)-nucleus orbit; the q=11 trinomial echo instead has energy 60.
+Across the all-field trivial-gcd deep set, the stronger zero-mass condition
+\(N_{1+3}(W_f)=0\) is equivalent to the recurring characteristic-two \(3\)-nucleus orbit; the q=11
+trinomial echo instead has mass 40 and energy 60.
 
 ## Exact census
 

@@ -531,6 +531,16 @@ def build_certificate():
     ]
     assert zero_energy_orbits == [{"q": 8, "pgl2_rep_index": 64}]
     certificate["zero_energy_small_exceptional_orbits"] = zero_energy_orbits
+    zero_mass_orbits = [
+        {"q": F.q, "pgl2_rep_index": record["rep_index"]}
+        for F, records, _ in classification_instances
+        for record in records
+        if polar_moments(record["polar_profile"], (1,))[0] == 0
+    ]
+    assert zero_mass_orbits == zero_energy_orbits
+    certificate["zero_1_plus_3_mass_small_exceptional_orbits"] = (
+        zero_mass_orbits
+    )
     return certificate
 
 
