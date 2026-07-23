@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** implementation and exact gate green; awaiting user-launched initial independent review
+**Status:** initial-review finding repaired and exact gate green; awaiting user-launched post-fix
+independent review
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, artifacts, validation, axiom evidence, trust boundaries, judgment
@@ -154,6 +155,10 @@ code/action aggregators built in `0:03.59` and `0:03.50`.  The final import gate
 exact source below in run `20260723-231350-8219e40b` (`0:10.46`, `1,792,380 kB`) and its aggregate
 `--no-build` confirmation passed.
 
+After the initial-review prose repair, all nine affected leaves, both aggregators, and the import
+gate rebuilt from the exact source below in run `20260723-232726-3fc64082`; its trace-only
+aggregate gate also passed.
+
 All 23 gate probes completed.  Twenty-two terminals list only `propext`, `Classical.choice`,
 `Quot.sound`, and the appropriate declaration-local native-decision axiom or axioms.  The
 kernel-decided `parent_action_discriminator` lists exactly `propext`, `Classical.choice`, and
@@ -181,9 +186,14 @@ efd8b64f9b9db1dab1a8d80db58957117477ceae9517027d65aa9553c9b0d1e3  Gates/ClebschW
 
 ### Independent review
 
-The implementation, exact gate, source audit, replay, and axiom audit are ready.  The implementer
-stops here for the user-launched initial review.  Any review-driven changes require a user-launched
-post-fix review.
+The user-launched initial independent review returned NO-GO on one narrow trust-boundary prose
+defect: nine leaf headers named `Lean.ofReduceBool`, while the pinned toolchain's fresh 23-terminal
+gate audit reported declaration-local `_native.native_decide.ax_1_1` dependencies.  The reviewer
+found no mathematical, architectural, literal-table, replay, hash, hygiene, or axiom blocker.
+
+All nine headers now use the actual declaration-local native-decision-axiom wording, and the exact
+post-fix source passed the guarded build and aggregate gate recorded above.  Per the lane protocol,
+the implementer stops here for the user-launched post-fix review.
 
 ### Proposed C320 ledger delta
 
