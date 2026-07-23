@@ -25,7 +25,11 @@ perfect-code row to the full-support/secant-shadow/Hadamard--Mathieu capstone, w
 the top-ranked Paper-2 modular-sandwich/Hadamard-degeneration mechanism and quaternion, descent,
 torsor, Dickson, signed-Weil, and zeta mechanisms remain Paper-2
 pointers.  The user has selected the replacement spine for Lean formalization, queued as
-C420--C428, while manuscript integration remains a separate owner action before release**.
+C420--C428, while manuscript integration remains a separate owner action before release.
+C485's proof-only six-arc uncovered-locus reconstruction lemma is now imported into the arcs paper,
+strengthened there to `q+1 > binom(k,2)` for arbitrary fixed `k`, and used only as a
+conclusion-level contrast in Clebsch; C490's certificate-heavy
+q=11 three-view reconstruction census remains outside this manuscript**.
 
 The current decision and novelty map is
 [`2026-07-20-clebsch-paper-planning.md`](../2026-07-20-clebsch-paper-planning.md); its Verdict,

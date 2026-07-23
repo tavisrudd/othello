@@ -195,8 +195,9 @@ interpretation all follow.  Its main consequences and applications are:
 Sections~\ref{sec:classical}--\ref{sec:examples} form the geometric route:
 exact accounting, lower and upper bounds, the characteristic-two refinement,
 and the finite obstruction.  Section~\ref{sec:coding} then gives a secondary
-coding reading and the $q=11$ application; it may be skipped without affecting
-the geometric argument.
+coding reading, the $q=11$ application, and a fixed-length reconstruction
+theorem showing when the complete uncovered locus determines its parent arc;
+it may be skipped without affecting the geometric argument.
 
 The secant-index equations, the Lunelli--Sce $\sqrt{2q}$ scale, the arc--MDS
 correspondence, and the Clebsch geometry at $q=11$ are classical inputs.  We
@@ -1208,6 +1209,38 @@ graph.  Appendix~\ref{app:verification} records the two independent
 implementations and the formal checks.
 \end{proof}
 
+\paragraph{Large-field reconstruction from the uncovered locus.}
+At every fixed length, the complete set of one-column MDS extensions
+eventually remembers the projective parity-check system itself.
+
+\begin{proposition}[Uncovered-locus reconstruction]
+\label{prop:arc-reconstruction}
+Let $A$ and $B$ be $k$-arcs in $\PG(2,q)$, where $k\ge3$ and
+\[
+ q+1>\binom{k}{2}.
+\]
+If $U(A)=U(B)$ as literal subsets of the plane, then $A=B$ as unlabelled
+point sets.
+\end{proposition}
+
+\begin{proof}
+The complement of $U(A)$ is the union of the $\binom{k}{2}$ distinct
+secants of $A$, and likewise for $B$.  Let $\ell$ be a secant of $A$.  If
+no secant of $B$ were equal to $\ell$, then the secants of $B$ would cover
+at most $\binom{k}{2}$ points of $\ell$, one per line.  This is impossible
+because $|\ell|=q+1>\binom{k}{2}$ and the two secant unions are equal.
+Thus every secant of $A$ is a secant of $B$; since the two sets have the
+same finite size, their secant-line sets coincide.
+
+It remains to recover the vertices from this line arrangement.  Each point
+of $A$ lies on its $k-1$ incident secants.  A point outside $A$ lies on at
+most $\lfloor k/2\rfloor$ secants: distinct secants through it use disjoint
+pairs of the $k$ vertices and hence form a matching.  Since
+$k-1>\lfloor k/2\rfloor$ for $k\ge3$, the set $A$ is exactly the set of
+points incident with $k-1$ recovered secants, and the same description
+recovers $B$.
+\end{proof}
+
 \section{Conclusion and further questions}
 
 The exact defect identity is the organizing result of the paper.  It
@@ -1218,6 +1251,13 @@ counting bound.  Its line-hole specialization recovers complete affine arcs,
 while the conic case supplies a curved exceptional locus.  The coding
 interpretation is another reading of the same remainder,
 rather than a separate source of estimates.
+
+The uncovered locus is therefore more than an output statistic:
+Proposition~\ref{prop:arc-reconstruction} recovers the unlabelled
+parity-check arc from its complete set of distance-three syndrome directions
+whenever $q+1>\binom{k}{2}$.  Thus the one-column extension locus itself
+becomes a parent fingerprint once every secant contains more points than
+there are competing secants; for six columns this applies when $q\ge16$.
 
 Two further mechanisms complement that identity.  Projective averaging
 transfers ordinary complete arcs to prescribed-hole upper bounds, while the

@@ -41,6 +41,13 @@
     `q=7` exterior four-arc, the elementary four-arc identity
     `|U(A)|=(q-2)(q-3)` gives `20>8`, so the first inclusion is strict and the arc is not complete
     outside the conic. This is a framing distinction, not a new classification claim.
+12. For `k`-arcs over `GF(q)` with `q+1>choose(k,2)`, the literal uncovered locus determines the
+    unlabelled parent arc. Equality of uncovered loci gives equality of the two secant-line unions:
+    a secant with no matching line on the other side would have its `q+1` points covered by at most
+    `choose(k,2)` distinct intersections. The vertices are then exactly the points incident with
+    `k-1` recovered secants, since secants through a nonvertex form a matching on `k` endpoints and
+    therefore number at most `floor(k/2)<k-1`. This is a proof-only reconstruction statement; it
+    does not recover labels and introduces no finite census. For six-arcs it applies at `q>=16`.
 
 ## Computer-assisted claims
 
