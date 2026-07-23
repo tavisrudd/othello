@@ -89,23 +89,28 @@ If `capOK(S)` then `capOK(S ∪ {x})` for every legal `x`.
 If `capOK(S)`, the residual game from `S` is isomorphic, as an impartial normal-play game, to
 Node-Kayles on `G_S`. Consequently `value(S) = P ⟺ Grundy(G_S) = 0`.
 
-*Proof.* By Lemma 3, `capOK` holds at every state reachable from `S`. Fix any reachable `T`. By
-Lemma 1 the legal moves from `T` are the vertices of `G_T`, and playing `x` leads to `T ∪ {x}` whose
-legal set is `L(T) \ ({x} ∪ N_{G_T}(x))`; by Lemma 2 the conflict graph there is `G_T` restricted to
-those survivors. This is exactly one Node-Kayles move on `G_T` followed by play on the induced
-subgraph. Inductively (on the finite number of remaining vertices) the game tree from `S` coincides
-with Node-Kayles on `G_S`, the empty state `L = ∅` being a loss for the mover in both. Node-Kayles is
-impartial under normal play, so by the Sprague–Grundy theorem `value(S) = P` (a P-position) iff its
-Grundy value `Grundy(G_S) = 0`. ∎
+*Proof.* Induction invariant: every state `T` reachable from `S` satisfies (i) `capOK(T)` and
+(ii) `G_T = G_S[L(T)]`. (i) holds by Lemma 3 along the path; (ii) holds because each step restricts to
+an induced subgraph (Lemma 2), and a composition of induced-subgraph restrictions is an induced
+subgraph, so `G_T` depends only on `L(T)`, not on the path taken. Given the invariant, from any
+reachable `T` the legal moves are the vertices of `G_T` (Lemma 1) and playing `x` deletes `x ∪ N(x)`
+and continues on the induced subgraph — one Node-Kayles move. Hence the game tree from `S` coincides
+with Node-Kayles on `G_S`, the empty state `L = ∅` being a loss for the mover in both. For a single
+impartial normal-play game, a position is a P-position iff its Grundy value (defined by the mex
+recursion) is `0`; therefore `value(S) = P ⟺ Grundy(G_S) = 0`. (This is the mex/P-position fact, not
+the Sprague–Grundy sum theorem — the object here is one game, not a disjunctive sum; a Lean
+formalization should target the mex fact.) ∎
 
 **Corollary (`Y_NK0`).** When `L(S)` contains no live conic point (the "empty conic" case), `G_S` is
 the zone graph, and the theorem specializes to the original empty-conic guard.
 
 ## What this proof does and does not give
 
-- **Does:** a self-contained reduction of any `capOK` state to a *static* Node-Kayles position, valid
-  for every odd `q`. It is `q`-uniform — no arithmetic input. The three lemmas are elementary finite
-  projective geometry plus Sprague–Grundy.
+- **Does:** a self-contained reduction of any `capOK` state to a *static* Node-Kayles position. It is
+  `q`-uniform — no arithmetic input. In fact **`q`-oddness is never used**: the proof needs only that
+  `{a,b} ∪ S` is a cap and `capOK(S)`, so the guard holds for even `q` as well (oddness enters the
+  broader program only through the conic structure). The three lemmas are elementary finite projective
+  geometry plus the mex/P-position fact for a single impartial game.
 - **Does not:** decide `Grundy(G_S)` in closed form. `Y_NK` (= `capOK` + `Grundy 0`) is checked by
   computing the Node-Kayles Grundy value of `G_S`; this proof says that value **is** the game value,
   not that it is cheap or has a uniform formula. A uniform `q`-independent Grundy criterion for the
