@@ -622,16 +622,21 @@ task list.  Current high-value items:
   The C447/C448 and Weil-roof intake reframes the open target as orbit purity or an equivariant
   opponent-marked response packet, with a bounded q=11 two-match causality gate:
   [`2026-07-22 cap orbit-packet memo`](../2026-07-22-cap-orbit-packet-response-frontier.md).
-- **C495–C497 [ALLOCATED, cap] — C434 crowns cross-lane transfer probes into C80's open ledger.**
-  Fixed run order **C495 → C497 → C496**.  C495 (q=11 identification falsifier: is C80's 22-move
-  `C5`-orbit packet `1,1,5,5,5,5` the C434 `D10` J-class two-sheet coset space, with `u=XZ/Y²`
-  square class = sheet sign?) is the **gate**: cheapest (both objects frozen, 22 points), and it
-  decides whether C434's double-coset language matches C80's frozen objects before investing in the
-  larger stratification.  C497 (q17 stratum-constancy of `Y_NK0`-membership/P-purity by
-  double-coset label — the bulk-descent crown) runs only after C495's verdict.  C496 (bi-Hecke
-  bimodule `e_K F[G] e_H` as the two-sorted coupling) is last.  Allocation, provenance, and the
-  q∈{7,11}-only structure caveat (C497 borrows C434's method, not its group structure, at q17):
-  C80 report probe section (`../2026-07-12-c80-bulk-exhaustion-probe.md`) and the transfer note
+- **C495–C497 [cap] — C434 crowns cross-lane transfer probes into C80's open ledger.**
+  Fixed run order **C495 → C497 → C496**.  **C495 [REPORTED 2026-07-22 — FALSIFIER NO]:** the q=11
+  cloud packet is *not* the C434 `D10` two-sheet space.  C80's single-state 22-move packet has full
+  setwise stabilizer exactly `C5` in `PGL_2(11)` (no internal `D10`); the cap-frame `D10` nonsquare
+  coset is the inter-state endpoint swap, not an internal sheet; `u`'s square class splits the four
+  5-orbits 2–1–1, not the sheet's 2–2, and is not even the `D′` analogue.  The two are isomorphic
+  only as `C5`-sets — a fingerprint collision, not a structural identity; C434's fibre identity does
+  not transport.  Report `../2026-07-22-c495-cloud-packet-d10-identification.md`.  **C497 is next**
+  (q17 stratum-constancy of `Y_NK0`-membership/P-purity by double-coset label — the bulk-descent
+  crown); per C495 it must run as an *independent* stratification test, not a transport of C434's
+  identity, and the prior that the double-coset label is the bulk mechanism is lower.  **C496** last
+  (bi-Hecke bimodule `e_K F[G] e_H` as the two-sorted coupling; C495 layer-3 supports the
+  set-faithful/rank-dropping picture).  q∈{7,11}-only structure caveat: C497 borrows C434's method,
+  not its group structure, at q17.  Provenance: C80 report probe section
+  (`../2026-07-12-c80-bulk-exhaustion-probe.md`), transfer note
   `../2026-07-22-c434-c80-cross-lane-transfers.md`.
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15

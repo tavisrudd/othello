@@ -602,6 +602,19 @@ q ∈ {7,11} (no subgroup of order `(q²−1)/2` at q=13/17/19), and C434 contri
 points) — it decides whether C434's double-coset language matches C80's frozen packet before the
 larger q17 stratification. C497 (bulk-descent crown) runs only after C495's verdict; C496 is last.
 
+**C495 [REPORTED 2026-07-22 — FALSIFIER NO]** (`notes/2026-07-22-c495-cloud-packet-d10-identification.md`).
+The q=11 cloud packet is *not* `G`-equivariantly the C434 `D10` two-sheet coset space. Three layers:
+(1) the single-state 22-move packet has full setwise stabilizer exactly `C5` in `PGL_2(11)` — no
+internal `D10` anywhere in the conic group — while C434's `Ω` is a genuine internal-`D10` orbit;
+(2) C80's nonsquare cap-frame coset is the inter-state endpoint swap (state0≠state1, overlap 16), so
+C80 carries two 22-objects paired externally, vs C434's one 22-object internally 11+11-sheeted;
+(3) `u`'s square class splits the four 5-orbits 2–1–1, not the sheet's 2–2, and is not the `D′`
+analogue (four distinct values vs three). Partial match: isomorphic as `C5`-sets only. **Bearing on
+the ledger:** this does *not* close the q=11 coverage side — it removes the double-coset transport as
+the mechanism and hands C497 an independent (lower-prior) stratification test; the still-open
+sparse-coverage and two-sorted-coupling items are unchanged, with C496 now supported (value-carrying
+packet vs value-blind `D′`) in seeking a set-faithful/rank-dropping coupling.
+
 ## Reproduction
 
 ```bash

@@ -96,6 +96,7 @@
         5,
         5
       ],
+      "cap_frame_det_square_kernel_order": 5,
       "class": 4,
       "endpoint_parameter": 1,
       "five_orbit_u_sqclass": [
@@ -129,6 +130,7 @@
       "has_internal_d10": false,
       "legal_opponent_moves": 22,
       "nonsquare_coset_preserves_single_state": false,
+      "packet_symmetry_is_det_square_kernel": true,
       "setwise_stabilizer_nonsquare_elements": 0,
       "setwise_stabilizer_order_in_PGL2": 5,
       "u_square_class_5orbit_split": {
@@ -147,6 +149,7 @@
         5,
         5
       ],
+      "cap_frame_det_square_kernel_order": 5,
       "class": 4,
       "endpoint_parameter": 4,
       "five_orbit_u_sqclass": [
@@ -180,6 +183,7 @@
       "has_internal_d10": false,
       "legal_opponent_moves": 22,
       "nonsquare_coset_preserves_single_state": false,
+      "packet_symmetry_is_det_square_kernel": true,
       "setwise_stabilizer_nonsquare_elements": 0,
       "setwise_stabilizer_order_in_PGL2": 5,
       "u_square_class_5orbit_split": {
@@ -198,6 +202,7 @@
         5,
         5
       ],
+      "cap_frame_det_square_kernel_order": 5,
       "class": 7,
       "endpoint_parameter": 3,
       "five_orbit_u_sqclass": [
@@ -231,6 +236,7 @@
       "has_internal_d10": false,
       "legal_opponent_moves": 22,
       "nonsquare_coset_preserves_single_state": false,
+      "packet_symmetry_is_det_square_kernel": true,
       "setwise_stabilizer_nonsquare_elements": 0,
       "setwise_stabilizer_order_in_PGL2": 5,
       "u_square_class_5orbit_split": {
@@ -249,6 +255,7 @@
         5,
         5
       ],
+      "cap_frame_det_square_kernel_order": 5,
       "class": 7,
       "endpoint_parameter": 4,
       "five_orbit_u_sqclass": [
@@ -282,6 +289,7 @@
       "has_internal_d10": false,
       "legal_opponent_moves": 22,
       "nonsquare_coset_preserves_single_state": false,
+      "packet_symmetry_is_det_square_kernel": true,
       "setwise_stabilizer_nonsquare_elements": 0,
       "setwise_stabilizer_order_in_PGL2": 5,
       "u_square_class_5orbit_split": {
@@ -301,6 +309,8 @@
     "c80_setwise_stabilizer_is_exactly_c5": true,
     "d10_or_g_equivariant_identification_holds": false,
     "endpoint_states_distinct_overlap": 16,
+    "faithful_transfer_survives_as_c2_torsor_correspondence": true,
+    "governing_c2_is_determinant_square_class_on_c80_side": true,
     "u_square_class_equals_sheet_sign": false
   },
   "inputs": {

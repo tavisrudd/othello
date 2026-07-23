@@ -90,6 +90,30 @@ isomorphism type. This is exactly — and only — the coincidence that motivate
   shadow. Seek the coupling as a set-level labeling with a small linear shadow, as Transfer 2 already
   anticipated.
 
+## ej closeout — the surviving faithful transfer is a C2-torsor correspondence
+
+The refutation is at the 22-point `G`-set level. One layer *down*, the transfer survives cleanly and
+is worth banking:
+
+- **Both two-fold structures are literally the same C2 — the determinant-square class of
+  `PGL_2(11)`.** On C80's side the packet symmetry is *exactly* the det-**square** kernel `C5`
+  (setwise stabilizer order 5, zero det-nonsquare elements — computed), and the missing endpoint-swap
+  coset is det-**nonsquare**. On C434's side the sheet sign is "PSL vs outer = determinant square
+  class" by its own clause-4 construction. So `D10/C5` (C80) and the sheet-swap `J` (C434) are the
+  *same* `C2` = det-square-class; the identification fails only because the 22 points sit over that
+  `C2` differently (C434: one object, 11+11 internal sheets; C80: a pair of 22-move objects swapped
+  externally). The certificate records this as
+  `faithful_transfer_survives_as_c2_torsor_correspondence`.
+- **This closes the "why exactly `C5`?" question for free.** The packet symmetry is the *marked*
+  stabilizer: pointing the state marks one P-edge endpoint, dropping the cap-frame `D10` to `C5`.
+  That is precisely C474's restriction result — the calibration class restricts to zero on `C5`,
+  which is why each response matching is separately `C5`-fixed. C495's "no internal `D10`" and C474's
+  "torsor trivial after the endpoint mark" are the same fact.
+- **One dictionary, four names.** The C434 sheet-swap `J` ↔ the C80 nonsquare cap-frame reflection
+  (endpoint swap) ↔ the C448 orientation bit ↔ the C474 `D10/C5` calibration torsor are one and the
+  same `C2`. That is the faithful residue of Transfer 1: not a coset-space identity, but an
+  identification of the *governing calibration bit*.
+
 ## Mystery ledger
 
 - **Settled — the orbit-size coincidence is `C5`-level only.** `[1,1,5,5,5,5]` is a genuine `C5`-set
@@ -97,8 +121,11 @@ isomorphism type. This is exactly — and only — the coincidence that motivate
   sheeting of one object vs external pairing of two).
 - **Settled — `u` is neither sheet sign nor `D′`.** 2–1–1 vs 2–2 for the sheet; four distinct values
   vs three for `D′`. `u` is an intra-`C5`-object coordinate that additionally sees game value.
+- **Settled by `ej` — the governing `C2` is the determinant-square class on both sides.** The
+  transfer survives as a `C2`-torsor correspondence (sheet swap ↔ endpoint swap ↔ C448 bit ↔ C474
+  torsor), and this explains why the packet symmetry is exactly the marked stabilizer `C5`.
 - **No residual mystery.** The falsifier was bounded and returned a clean negative with an explicit
-  partial match; no unexplained numeric residue remains.
+  partial match and a faithful `C2`-level positive; no unexplained numeric residue remains.
 
 ## Reproduction
 

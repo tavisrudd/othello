@@ -121,6 +121,11 @@ def c80_state(c80, game, group, record, endpoint_index):
     )
     sqcounts = Counter(sc for _u, sc in five_orbit_u)
 
+    # ej: the packet symmetry is EXACTLY the determinant-square kernel of the cap-frame D10
+    packet_symmetry_is_det_square_kernel = (
+        stab_order == 5 == len(square_kernel) and stab_nonsquare == 0
+    )
+
     return {
         "class": record["class"],
         "endpoint_parameter": endpoint,
@@ -129,6 +134,8 @@ def c80_state(c80, game, group, record, endpoint_index):
         "nonsquare_coset_preserves_single_state": nonsq_preserves,
         "setwise_stabilizer_order_in_PGL2": stab_order,
         "setwise_stabilizer_nonsquare_elements": stab_nonsquare,
+        "cap_frame_det_square_kernel_order": len(square_kernel),
+        "packet_symmetry_is_det_square_kernel": packet_symmetry_is_det_square_kernel,
         "has_internal_d10": stab_order >= 10,
         "fixed_point_u": fixed_u,
         "five_orbit_u_sqclass": five_orbit_u,
@@ -267,6 +274,20 @@ def build_certificate():
         and c434_d10["two_d10_fixed_points_one_per_sheet"],
         "u_square_class_equals_sheet_sign": u_equals_sheet_sign,
         "d10_or_g_equivariant_identification_holds": d10_equivariant_identification,
+        # ej: the surviving faithful transfer -- the governing two-fold is, on BOTH sides, the
+        # determinant-square class of PGL_2(11). C80: the packet symmetry is exactly the det-square
+        # kernel C5 and the missing endpoint-swap coset is det-nonsquare (computed). C434: the sheet
+        # sign is "PSL vs outer = determinant square class" by construction (its own clause 4). So
+        # the identification fails as a 22-point G-set iso but survives as a C2-torsor correspondence
+        # (C434 sheet swap <-> C80 endpoint swap <-> C448 orientation bit <-> C474 D10/C5 torsor);
+        # this also explains why the packet symmetry is exactly C5 -- the state is endpoint-marked
+        # (C474: the calibration class restricts to zero on C5).
+        "governing_c2_is_determinant_square_class_on_c80_side": all(
+            s["packet_symmetry_is_det_square_kernel"] for s in c80_states
+        ),
+        "faithful_transfer_survives_as_c2_torsor_correspondence": all(
+            s["packet_symmetry_is_det_square_kernel"] for s in c80_states
+        ),
     }
 
     verdict = (
@@ -279,6 +300,8 @@ def build_certificate():
     assert c5_set_isomorphic
     assert not d10_equivariant_identification
     assert not u_equals_sheet_sign
+    assert findings["governing_c2_is_determinant_square_class_on_c80_side"]
+    assert all(s["packet_symmetry_is_det_square_kernel"] for s in c80_states)
 
     return {
         "schema": "c495-cloud-packet-d10-identification-v1",

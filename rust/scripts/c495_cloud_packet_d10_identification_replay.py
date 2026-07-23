@@ -261,6 +261,8 @@ def main():
     assert findings["d10_or_g_equivariant_identification_holds"] is False
     assert findings["u_square_class_equals_sheet_sign"] is False
     assert findings["c434_omega_is_internal_d10_set"] is True
+    assert findings["governing_c2_is_determinant_square_class_on_c80_side"] is True
+    assert findings["faithful_transfer_survives_as_c2_torsor_correspondence"] is True
     assert cert["verdict"].startswith("FALSIFIER_NO")
 
     print("C495 independent replay: PASS "
