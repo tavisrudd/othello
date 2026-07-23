@@ -49,6 +49,19 @@ outer-odd radical line = C412 depth socle = C430 trade line.
    on the relevant `K\G/H` permutation modules. Require the radical-to-sheet-to-sign chain to imply
    decorated inversion or another recovery statement. Abstract subgroup bookkeeping is a negative
    stop.
+5. **Native-prime portability battery.** Group the remaining small uses rather than spawning
+   separate tasks:
+
+   - verify that C429's q=11 integral/Frobenius radical line specializes to C433's
+     valency-self-adjoint Lagrangian line, or record the exact normalization obstruction;
+   - test the B3/q=7 analogue only if the frozen B3 scheme data already provide a canonical
+     integral odd Fourier block; absence of that input is a negative stop, not permission for a
+     new scheme census;
+   - state the minimal functorial criterion under which a based-golden-pair morphism transports
+     `D`, `F`, `h`, the valency pairing, and the ordered flag.
+
+   Continue only if this yields one reconstruction or naturality theorem. A list of matching ranks
+   is not an exit.
 
 ## Boundaries
 
@@ -59,6 +72,8 @@ outer-odd radical line = C412 depth socle = C430 trade line.
   theorem for every index-two orbit.
 - Do not broaden fields, enumerate arbitrary arrangements, or launch a general modular character
   census after a failed named gate.
+- C526 separately owns the source-Tate pairing yes/no bridge. Consume its disposition; do not fit
+  the ten C412 flag maps here.
 
 ## Deliverable
 
@@ -72,5 +87,6 @@ Primary inputs:
 - `notes/2026-07-20-c430-conceptual-balanced-half-rigidity.md`
 - `notes/2026-07-20-c412-relative-cubic-depth-plane.md`
 - `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`
+- `notes/2026-07-23-c526-tate-pairing-rigid-target-bridge.md`
 - `notes/2026-07-20-c418-c419-c410-successors.md`
 - `notes/2026-07-20-clebsch-lean-formalization-plan-fable-review.md`
