@@ -2,8 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** initial-review finding repaired and exact gate green; awaiting user-launched post-fix
-independent review
+**Status:** complete; final independent review `GO`
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, artifacts, validation, axiom evidence, trust boundaries, judgment
@@ -162,8 +161,9 @@ aggregate gate also passed.
 All 23 gate probes completed.  Twenty-two terminals list only `propext`, `Classical.choice`,
 `Quot.sound`, and the appropriate declaration-local native-decision axiom or axioms.  The
 kernel-decided `parent_action_discriminator` lists exactly `propext`, `Classical.choice`, and
-`Quot.sound`.  No terminal depends on `sorryAx`, a project axiom, GAP, ATLAS, a JSON boolean, or an
-opaque oracle.
+`Quot.sound`.  `displayed_maps_are_permutations` and `frozen_action_literal_checks` each expose two
+declaration-local native-decision axioms; the other native terminals expose one.  No terminal
+depends on `sorryAx`, a project axiom, GAP, ATLAS, a JSON boolean, or an opaque oracle.
 
 Exact source SHA-256 hashes:
 
@@ -193,7 +193,26 @@ found no mathematical, architectural, literal-table, replay, hash, hygiene, or a
 
 All nine headers now use the actual declaration-local native-decision-axiom wording, and the exact
 post-fix source passed the guarded build and aggregate gate recorded above.  Per the lane protocol,
-the implementer stops here for the user-launched post-fix review.
+the user launched a fresh post-fix reviewer.  That reviewer independently verified the nine
+repairs, all fourteen source hashes, the terminal-by-terminal axiom shape, and the guarded run's
+terminal success, and returned final `GO`.  No mathematical, architectural, trust-route,
+provenance, hash, build, axiom, or hygiene blocker remains.
+
+### Mystery ledger
+
+- **Settled — monolithic evaluator stall.**  Cross-module certificate sharding and symbolic
+  coefficient-vector transport replaced the greater-than-ten-minute monolith; the slowest exact
+  leaf is now independently bounded and cacheable.
+- **Settled — frozen-generator mismatch.**  The first literal pair generated the right
+  660-element subgroup but did not equal C470's frozen coordinate generators.  The displayed data
+  now match C470 exactly, with the subgroup and action properties rechecked.
+- **Settled — native trust-route name.**  Lean 4.32 exposes declaration-local native-decision
+  axioms rather than the older prose label; the gate, all leaf headers, and this report now state
+  the observed route consistently.
+- **Deliberate boundary, not an open mystery.**  The classical names `M11`, `M12`, `2.M12`, and
+  `PSL_2(11)` remain cited/external identifications rather than Lean terminals.  The proposed C320
+  ledger row below owns that release-facing distinction.  The `ej`+`tt` closeout found no further
+  genuine task-owned mystery.
 
 ### Proposed C320 ledger delta
 

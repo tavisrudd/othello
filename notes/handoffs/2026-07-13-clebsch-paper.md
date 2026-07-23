@@ -295,8 +295,10 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   ([report](../2026-07-22-c494-c434-information-lattice-lean.md)). C503 has closed the bounded
   rank-three arithmetic-gluing theorem with a
   workflow-free certificate bundle, 23-terminal gate, and final independent-review `GO`
-  ([report](../2026-07-22-c503-clebsch-arithmetic-gluing-lean.md)); C504
-  owns the C452/C464/C469/C470 Witt--Hadamard--Mathieu finite capstone; C505 assembles the
+  ([report](../2026-07-22-c503-clebsch-arithmetic-gluing-lean.md)); C504 has closed the
+  C452/C464/C469/C470 Witt--Hadamard--Mathieu finite capstone with a sharded 23-terminal gate,
+  exact upstream replay, and final independent-review `GO`
+  ([report](../2026-07-22-c504-clebsch-witt-hadamard-lean.md)); C505 assembles the
   C417/C448/C473/C474/C480/C486/C487 torsor-Rosetta close; C506 owns the bounded finite
   survival/erasure negatives and mod-40 law; and C507 owns direct finite witnesses for the
   interface-heavy theta/Arf, scoped Weil-Weyl, quantum-erasure, and conditionally adopted C471
