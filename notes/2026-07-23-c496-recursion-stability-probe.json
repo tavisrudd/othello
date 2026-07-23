@@ -1,0 +1,49 @@
+{
+  "chi_neg_class_present_past_depth0": false,
+  "depth0_histogram": {
+    "u=0/avail=False/winpkt=False": 1,
+    "u=1/avail=False/winpkt=False": 5,
+    "u=8/avail=True/winpkt=True": 5,
+    "u=9/avail=True/winpkt=False": 5,
+    "u=inf/avail=False/winpkt=False": 6
+  },
+  "field_order": 11,
+  "max_depth": 2,
+  "opponent_u_chi_by_depth": {
+    "0": {
+      "u=0(chi=0)": 1,
+      "u=1(chi=1)": 5,
+      "u=8(chi=-1)": 5,
+      "u=9(chi=1)": 5,
+      "u=inf(chi=None)": 6
+    },
+    "1": {
+      "u=1(chi=1)": 50,
+      "u=inf(chi=None)": 10
+    },
+    "2": {
+      "u=1(chi=1)": 25,
+      "u=inf(chi=None)": 5
+    }
+  },
+  "p_nodes_by_depth": {
+    "0": 1,
+    "1": 41,
+    "2": 15,
+    "3": 1
+  },
+  "packet_law_live_rows_by_depth": {
+    "0": 10,
+    "1": 0,
+    "2": 0
+  },
+  "packet_law_violations_by_depth": {
+    "0": 0,
+    "1": 0,
+    "2": 0
+  },
+  "packet_live_present_past_depth0": false,
+  "schema": "c496-recursion-stability-probe-v1",
+  "seed_cap_size": 4,
+  "verdict": "NOT_STABLE_DEGENERATE"
+}

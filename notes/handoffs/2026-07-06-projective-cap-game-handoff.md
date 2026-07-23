@@ -554,19 +554,29 @@ Use [`../2026-07-07-codex-task-queue.md`](../2026-07-07-codex-task-queue.md) as 
 task list.  This handoff is the ordering authority; the queue's `cap` rows mirror this expected-value
 ranking toward the odd-q all-P crown.
 
-**Highest-EV next step (2026-07-23): the C496 factorization recursion-stability probe, under C80.**
-C496 gave the first clean structural handle on C80's long-open descent gap: the on-conic child value
-factors as `value = 1_live ⊗ χ(u)` — an additive live-locus-drain indicator times a static quadratic
-character.  If that factorization is stable under the game recursion, C80(b) collapses onto the
-already-proven C80(c) drain resource (`|live conic|` drops per move) with `χ` a static side-condition
-— the closest the lane has been to the descent theorem.  The probe is cheap (the frozen q=11/q=13
-grandchild structure is already built in `analyze_seed`'s winning-response graph) and decisive either
-way.  Run it as C80 continuation before any diagnostic.  Rationale and the depth-1 caveat:
+**The C496 recursion-stability probe is RUN — NOT recursion-stable (2026-07-23).** The C496
+factorization `value = 1_live ⊗ χ(u)` is a **depth-0 base fact**, not a descent law: exhaustive walk
+of the complete P-subtree from the frozen q=11 seed shows the live packet and the `{8,9}`
+square/nonsquare `χ`-straddle exist only at depth 0 — at every deeper P-node every opponent move
+collapses to `u ∈ {1,∞}` (`χ=+1`/none), so the law has no live rows to govern and the phenomenon does
+not recur. Two further blockers to "collapse onto C80(c)": the value-carrying winning replies are
+off-conic intruders (4/5 packet cells) while the drain measure is on-conic; and the frozen packet is a
+4-cap endgame (≤ 3 exchanges, 26/41 depth-1 nodes terminal) — structurally too shallow to host a
+recursion at all. C80(b) is untouched; C80(c) drain stays proven and unused for value.
+Report+cert+`--check`: [`../2026-07-23-c496-recursion-stability-probe.md`](../2026-07-23-c496-recursion-stability-probe.md).
+
+**Reshaped C80(b) frontier (next-step decision, not yet allocated).** Making the factorization a
+descent law needs a **level-indexed `(edge, packet, χ-straddle)` re-derivation at each P-node** — an
+object C496 did not build — and a **deeper test bed than the q=11 seed**, e.g. the q17 `Y_NK0` 8-cap
+bulk members with plies remaining, where multi-ply descent actually occurs. Choosing between building
+the recursive object vs. running the q17 deeper-instance probe vs. pivoting to C520's Weil/resolvent
+route is a scope call for the next session. Depth-1 factorization rationale:
 [`../2026-07-23-c496-bihecke-two-sort-coupling.md`](../2026-07-23-c496-bihecke-two-sort-coupling.md).
 
 Priority order and why:
 
-1. **C80 (spine).** Everything gates on it; the recursion-stability probe above is the move.
+1. **C80 (spine).** Everything gates on it; the recursion-stability probe is done (negative above);
+   the reshaped frontier is the level-indexed object + a deeper (q17 `Y_NK0`) test bed.
 2. **C82 / C520 (gated on C80).** Abundance for C80's packet; C520 offers a Weil-bound route and a
    resolvent-quadratic depletion predictor whose tt#1 half is testable now on frozen q=13/17/19
    A5-anchor data, ahead of the C80 gate.
