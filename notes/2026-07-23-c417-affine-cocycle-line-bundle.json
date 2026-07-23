@@ -1,0 +1,264 @@
+{
+  "cases": [
+    {
+      "affine_cocycle": {
+        "base_change_is_coboundary_verified": true,
+        "cocycle_law_verified": true,
+        "identity_verified_on_every_matching": true,
+        "pgl_b1_dimension": 6,
+        "pgl_class_is_nonzero": true,
+        "pgl_fixed_point_augmented_rank": 7,
+        "pgl_fixed_point_system_rank": 6,
+        "pgl_h1_dimension": 1,
+        "pgl_z1_dimension": 7,
+        "psl_b1_dimension": 5,
+        "psl_class_is_nonzero": true,
+        "psl_fixed_point_augmented_rank": 6,
+        "psl_fixed_point_system_rank": 5,
+        "psl_h1_dimension": 1,
+        "psl_z1_dimension": 6,
+        "restricted_class_is_normalizer_fixed": true,
+        "sylow_p_fixed_point_augmented_rank": 5,
+        "sylow_p_fixed_point_system_rank": 4,
+        "sylow_p_h1_dimension": 2,
+        "sylow_p_norm_rank": 0,
+        "sylow_p_normalizer_invariant_dimension": 1,
+        "sylow_p_normalizer_order_in_psl": 21,
+        "sylow_p_restriction_is_nonzero": true
+      },
+      "field": 7,
+      "fixed_base_quotient_zero_divisor_obstruction": {
+        "nonzero_section_count": 13,
+        "transitive_linear_covariance_is_impossible": true,
+        "zero_section_count": 1
+      },
+      "matching_orbit_size": 14,
+      "pgl_generator_count": 4,
+      "pgl_order": 336,
+      "product_degree": 4,
+      "psl_generator_count": 3,
+      "psl_order": 168,
+      "quotient_degree": 2,
+      "quotient_image_rank": 6,
+      "sheet_homogeneous_lifts": [
+        {
+          "affine_rank": 5,
+          "homogeneous_lift_is_projective_cover_mod_socle": true,
+          "homogeneous_lift_kernel": [
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "homogeneous_lift_rank": 6,
+          "kernel_is_constant_socle": true,
+          "point_stabilizer_is_prime_to_characteristic": true,
+          "point_stabilizer_orbit_sizes": [
+            1,
+            6
+          ],
+          "point_stabilizer_order": 24,
+          "sheet_action_is_2_transitive": true,
+          "size": 7
+        },
+        {
+          "affine_rank": 5,
+          "homogeneous_lift_is_projective_cover_mod_socle": true,
+          "homogeneous_lift_kernel": [
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "homogeneous_lift_rank": 6,
+          "kernel_is_constant_socle": true,
+          "point_stabilizer_is_prime_to_characteristic": true,
+          "point_stabilizer_orbit_sizes": [
+            1,
+            6
+          ],
+          "point_stabilizer_order": 24,
+          "sheet_action_is_2_transitive": true,
+          "size": 7
+        }
+      ],
+      "signed_moments": {
+        "base_independence_by_degree_0_through_3": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "degree_3_is_nonzero": true,
+        "degrees_0_1_2_vanish": true
+      },
+      "type": "B3"
+    },
+    {
+      "affine_cocycle": {
+        "base_change_is_coboundary_verified": true,
+        "cocycle_law_verified": true,
+        "identity_verified_on_every_matching": true,
+        "pgl_b1_dimension": 10,
+        "pgl_class_is_nonzero": true,
+        "pgl_fixed_point_augmented_rank": 11,
+        "pgl_fixed_point_system_rank": 10,
+        "pgl_h1_dimension": 1,
+        "pgl_z1_dimension": 11,
+        "psl_b1_dimension": 9,
+        "psl_class_is_nonzero": true,
+        "psl_fixed_point_augmented_rank": 10,
+        "psl_fixed_point_system_rank": 9,
+        "psl_h1_dimension": 1,
+        "psl_z1_dimension": 10,
+        "restricted_class_is_normalizer_fixed": true,
+        "sylow_p_fixed_point_augmented_rank": 9,
+        "sylow_p_fixed_point_system_rank": 8,
+        "sylow_p_h1_dimension": 2,
+        "sylow_p_norm_rank": 0,
+        "sylow_p_normalizer_invariant_dimension": 1,
+        "sylow_p_normalizer_order_in_psl": 55,
+        "sylow_p_restriction_is_nonzero": true
+      },
+      "field": 11,
+      "fixed_base_quotient_zero_divisor_obstruction": {
+        "nonzero_section_count": 21,
+        "transitive_linear_covariance_is_impossible": true,
+        "zero_section_count": 1
+      },
+      "matching_orbit_size": 22,
+      "pgl_generator_count": 4,
+      "pgl_order": 1320,
+      "product_degree": 6,
+      "psl_generator_count": 3,
+      "psl_order": 660,
+      "quotient_degree": 4,
+      "quotient_image_rank": 10,
+      "sheet_homogeneous_lifts": [
+        {
+          "affine_rank": 9,
+          "homogeneous_lift_is_projective_cover_mod_socle": true,
+          "homogeneous_lift_kernel": [
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "homogeneous_lift_rank": 10,
+          "kernel_is_constant_socle": true,
+          "point_stabilizer_is_prime_to_characteristic": true,
+          "point_stabilizer_orbit_sizes": [
+            1,
+            10
+          ],
+          "point_stabilizer_order": 60,
+          "sheet_action_is_2_transitive": true,
+          "size": 11
+        },
+        {
+          "affine_rank": 9,
+          "homogeneous_lift_is_projective_cover_mod_socle": true,
+          "homogeneous_lift_kernel": [
+            [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          ],
+          "homogeneous_lift_rank": 10,
+          "kernel_is_constant_socle": true,
+          "point_stabilizer_is_prime_to_characteristic": true,
+          "point_stabilizer_orbit_sizes": [
+            1,
+            10
+          ],
+          "point_stabilizer_order": 60,
+          "sheet_action_is_2_transitive": true,
+          "size": 11
+        }
+      ],
+      "signed_moments": {
+        "base_independence_by_degree_0_through_3": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "degree_3_is_nonzero": true,
+        "degrees_0_1_2_vanish": true
+      },
+      "type": "H3"
+    }
+  ],
+  "h3_modular_boundary": {
+    "affine_rees_correction_closes_8_9_gap": false,
+    "base_coboundary_cannot_change_either_relation": true,
+    "cubic_tate_relation": [
+      2,
+      9,
+      1
+    ],
+    "depth_relation": [
+      2,
+      8,
+      1
+    ],
+    "homogeneous_sheet_lift_dimension": 10,
+    "homogeneous_sheet_lift_has_socle_kernel": true,
+    "odd_difference_is_base_independent": true,
+    "permutation_cover_loewy_dimensions": [
+      1,
+      9,
+      1
+    ],
+    "relations_are_distinct": true,
+    "sheet_affine_rank": 9
+  },
+  "inputs": {
+    "2026-07-20-c406-matching-module.json": {
+      "bytes": 21996,
+      "sha256": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2"
+    },
+    "2026-07-20-c406-matching-module.py": {
+      "bytes": 48589,
+      "sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51"
+    },
+    "2026-07-20-c406-matching-orbit-scout.json": {
+      "bytes": 25443,
+      "sha256": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246"
+    },
+    "2026-07-20-c412-relative-cubic-depth-plane.json": {
+      "bytes": 81411,
+      "sha256": "01aaf1169e7747724c51969a78234e9fe0a3c62061f557d19e9f7b5d7ce11c84"
+    }
+  },
+  "schema": "c417-affine-cocycle-line-bundle-v1",
+  "verdict": "NONTRIVIAL_AFFINE_CONNECTING_CLASS; PRODUCT_SECTIONS_RETAIN_THE_HOMOGENEOUS_EXTENSION; BASE_CHANGE_CANNOT_CORRECT_8_TO_9"
+}
