@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C515 complete; C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C515 complete; C516 is next
+(PRS redundancy nine), followed by C517 (Lean formalization); C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -500,6 +501,8 @@ geometry must use these reduced stabilizer-stratified norms, not the raw resulta
 | C510 | bounded one-twist audit and geometry pilot | complete | tangent-projected NRC; exact affine stabilizer and fixed line; `p∤k` pre-emption; modular `p|k` target; q=9 calibration | translation-quotient theorem gate |
 | C514 | modular one-twist translation quotient | complete | canonical completion-root slice; exact Lucas fixed flag; consecutive-row and marker-collision obstruction to C512 | a different splitting mechanism is required |
 | C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, reduced stabilizer-stratified orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global reduced-norm/incidence geometry is required |
+| C516 | PRS redundancy-nine residual-quadratic theorem | queued | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
+| C517 | Lean formalization of C516 | queued after C516 | theorem boundary frozen; zero-axiom algebraic and finite-field proof | kernel-checked PRS theorem |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -519,10 +522,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Further polar-flag applications:** C512 supplies the effective fixed-redundancy induction
-  theorem.  A new redundancy is allocated only after its lower splitting cover has an explicit
-  monodromy/absolute-irreducibility target and contained-nucleus calculation; no ambient census
-  substitutes for that gate.
+- **Further polar-flag applications:** C516 owns the next fixed-level application: the
+  redundancy-nine residual-quadratic cover and characteristic-seven binary-quartic carrier.
+  C517 owns its Lean formalization after the theorem boundary freezes.  No ambient census
+  substitutes for the component and contained-carrier gates.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -550,6 +553,6 @@ history.
 
 ## Next command
 
-`go reed-solomon`
+`go C516`
 
-(C515 is complete.  C500 remains release-gated; no modular theorem successor is allocated.)
+(C516 is next; C517 follows it.  C500 remains release-gated.)

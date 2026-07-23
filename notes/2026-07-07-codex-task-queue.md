@@ -146,6 +146,8 @@ ordering and detail.
 ### `reed-solomon`
 
 - **C500 `[reed-solomon]` [QUEUED; after C491; release decisions gate]** — redundancy-five manuscript: package C491 (unconditional covering radius, Hankel-pencil criterion, exceptional-cover mechanism, O±/nucleus/wild families, sharp q>=23 threshold, certified sporadic tables) as a standalone paper to the arcs/clebsch release bar, citing Kaipa--Patanker--Pradhan for the quartic orbit toolkit and positioning against ZWK 2019 and the twisted-RS adjacent work; includes the KPP char-2/3 contribution remark and the audit-mandated "to our knowledge" qualifiers → `notes/2026-07-22-c500-prs-redundancy-five-paper.md`
+- **C516 `[reed-solomon]` [QUEUED; after C513; PRS redundancy-nine theorem gate]** — classify the residual-quadratic cover over the binary-quartic `PGL2` quotient for `PRS(q-8)`, including its determinant, discriminant, diagonal, and fixed-root collision divisors; prove generic absolute irreducibility or the precise exceptional strata, resolve the characteristic-seven prime-diagonal modular carrier, and derive the strongest justified high-field deep-syndrome/orbit theorem without an ambient census → `notes/2026-07-23-c516-prs-redundancy-nine.md`
+- **C517 `[reed-solomon]` [QUEUED; after C516; Lean formalization gate]** — formalize C516's final PRS redundancy-nine theorem and its load-bearing algebraic proof in Lean: divided-power contraction and marker semantics, binary-quartic invariant/cover identities, exceptional-stratum hypotheses, finite-field rational-point implication, and exact orbit conclusion; mirror the proved theorem boundary without strengthening it, with zero new axioms and scoped build/audit evidence → `notes/2026-07-23-c517-prs-redundancy-nine-lean.md`
 
 ### `relconic`
 
