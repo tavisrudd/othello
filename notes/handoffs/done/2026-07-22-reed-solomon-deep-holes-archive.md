@@ -41,3 +41,13 @@ persists for every q=1 mod 3 (constructed at q=25,31,37,43,49) yet is deep only 
 elsewhere it carries totally-split members. Report and evidence bundle:
 `../../2026-07-22-c499-sporadic-pencil-structure.md` (+ `.py`, `.json`, `.sha256`). Both C491
 discovery-track leads settled.
+
+## 2026-07-23 — C514 modular TRS translation quotient (closed)
+
+C514 turns the modular full-length last-hook translation symmetry into an exact determinant
+quotient.  Each support's canonical completion root gives the slice `U=T-r`, `sum(U)=1`;
+the Lucas-maximal fixed flag survives projection with no connecting correction.  The hoped-for
+C512 recursion fails for two proved reasons: generic annihilator lines are not consecutive-row
+polar lines, and valid completion/support collisions lie on C512's forbidden marker divisor.
+The report refreshes all three pinned citation graphs and makes no field census or deep-hole
+classification claim.

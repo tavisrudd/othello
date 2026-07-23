@@ -4,9 +4,8 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C513 complete; C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C514 complete; C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
-C514 is next (modular one-twist translation quotient);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -436,6 +435,21 @@ and prove it is the entire common translation-fixed space.  C514 owns the transl
 determinant normal form and pointed-polar-recursion gate; no broader TRS classification or field
 census is authorized.
 
+## Closed base — C514
+
+`notes/2026-07-23-c514-modular-trs-translation-quotient.md` closes the modular one-twist theorem
+gate without a field census.  Every support has a canonical completion root
+`r=1-sum(T)`; translating it to zero gives the exact quotient slice `U=T-r` with
+`sum(U)=1`, and the coefficients of `Q_U` are an explicit invariant normal form for every
+support determinant.  The quotient action groupoid retains Frobenius and syndrome transporters.
+The fixed syndrome space is exactly the Lucas-maximal flag in the degree-`s` NRC module modulo
+the tangent projection centre: the possible characteristic-`p` connecting class vanishes.
+There is no universal C512 recursion.  The annihilator line must satisfy an explicit
+consecutive-Hankel-row rank condition that generic syndromes fail, and valid supports allow the
+completion root to collide with a support point, whereas C512 must delete that pointed-marker
+divisor.  The refreshed three-graph citation audit finds no predecessor for this bounded quotient
+claim.  No standard-only deep-hole classification or alternative recursion is asserted.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -456,6 +470,7 @@ census is authorized.
 | C512 | general coherent polar induction | complete | intrinsic pointed functor; classified persistent/modular contained flags; explicit genus/deletion/intersection threshold; C498/C509 recovered | fixed-redundancy applications reduce to finite monodromy and containment checks |
 | C513 | PRS redundancy-eight application | complete | exact three-marker normalization and containment package; `q>=43` persistent-only theorem with complete PGL/PGamma orbit law | first post-C512 fixed-level theorem |
 | C510 | bounded one-twist audit and geometry pilot | complete | tangent-projected NRC; exact affine stabilizer and fixed line; `p∤k` pre-emption; modular `p|k` target; q=9 calibration | translation-quotient theorem gate |
+| C514 | modular one-twist translation quotient | complete | canonical completion-root slice; exact Lucas fixed flag; consecutive-row and marker-collision obstruction to C512 | a different splitting mechanism is required |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -466,10 +481,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
 
 - **Higher-order MDS/list decoding:** allocate only if atlas fibres or their adjacency recover the
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
-- **Twisted Reed--Solomon:** C510 passed the bounded pilot and allocated only C514.  The target is
-  the full-length modular last-hook locus `p|k`; it must derive a translation-invariant determinant
-  normal form and either a pointed polar recursion or a precise obstruction.  No all-TRS claim is
-  allocated.
+- **Twisted Reed--Solomon:** C514 closes C510's only allocated successor with an exact
+  translation-invariant determinant normal form and a precise obstruction to C512.  Any further
+  work needs a newly allocated bounded target and a different splitting mechanism that retains
+  the completion/support collision divisor.  No all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C512 supplies the effective fixed-redundancy induction
@@ -503,6 +518,6 @@ history.
 
 ## Next command
 
-`go C514`
+`go reed-solomon`
 
-(C513 is complete.  C514 is the next modular TRS theorem gate; C500 remains release-gated.)
+(C514 is complete.  C500 remains release-gated; no theorem successor is allocated.)
