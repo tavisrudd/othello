@@ -181,6 +181,13 @@ lean/scripts/lean-restart-guard.py verify /home/<checkpoint>
   light aggregator; land leaves before probing the aggregator.
 - If `decide`/`norm_num` is blocked by an opaque finite operation, introduce one reducible table
   evaluator and prove a symbolic bridge instead of unfolding the operation in every case.
+- When a finite object is the image of a much smaller parameter space, run exhaustive predicates
+  on the parameters and transport the result symbolically to image membership. Avoid repeatedly
+  filtering, deduplicating, or taking products of the materialized image inside native terminals;
+  this can turn a bounded coefficient-space check into a much larger object-space computation.
+- Describe a native terminal's trust route from the pinned toolchain's actual `#print axioms`
+  output. Do not infer or preserve an implementation axiom name from an older Lean version; native
+  decision may expose declaration-local axioms rather than a historically familiar global name.
 - Freeze narrow generated checker/schema cores for a certificate generation. Put transport,
   convenience, and paper-facing theorems downstream so prose/API growth does not invalidate leaves.
 - In a focused target, a dependency finishes before its consumer; wide builds can still co-schedule
