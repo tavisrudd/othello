@@ -576,14 +576,18 @@ all-P/vacuous). Verdict `NO_CHARACTER_LAW`. This corroborates the A5 anchor (P =
 alone does not predict escape-bucket value. Report+cert+`--check`:
 [`../2026-07-23-c496-escape-family-character-probe.md`](../2026-07-23-c496-escape-family-character-probe.md).
 
-**Reshaped C80(b) frontier (next-step decision, not yet allocated).** Two character routes are now
-closed (depth recursion; escape-family generalization). The value law at the escape layer is
-group-theoretic — the A5 **smallest-`Stab(frame)`-orbit selector** is the standing measured law, its
-mechanism unproved (A5 refuted the mirror-involution explanation). The live routes are: (i) feed the
-smallest-orbit child to the C61-successor amortized-potential / existential-selector lane; (ii) the
-q17 `Y_NK0` 8-cap deeper-instance descent probe; (iii) C520's Weil/resolvent route, now constrained
-to carry more than one cross-ratio character. Choosing among these is a scope call for the next
-session. Depth-1 factorization rationale:
+**Reshaped C80(b) frontier — four dynamic/game-structural attacks planned for a cold session.** Both
+character routes are closed (depth recursion; escape-family generalization); the escape-layer value
+law is group-theoretic (the A5 **smallest-`Stab(frame)`-orbit selector**, mechanism unproved). The
+next attacks abandon static classifiers and treat value dynamically. Full cold-start execution guide —
+objectives, exact inputs/scripts, cheap-probe-first steps, decision gates, confidence:
+[`../2026-07-23-c80-alt-attack-plan.md`](../2026-07-23-c80-alt-attack-plan.md). In brief, run
+cheap-first: **R3** descent into the proven `Y_NK0` guard (classify its 4 q17 N exceptions; find the
+exchange move); **R2** solve the reduced 1-D `P¹` involution game by Sprague-Grundy and check
+faithfulness vs the grid census; then **R1** amortized potential `Φ` = C80(c) drain + Grundy/deficiency
+term (the C61-successor lane); **R4** (gated) q=29 census to test whether depletion is finite and
+reshape the theorem to generic + finite exceptions. Routes are **not yet allocated** — reserve a C-ID
+when starting one. Depth-1 factorization rationale:
 [`../2026-07-23-c496-bihecke-two-sort-coupling.md`](../2026-07-23-c496-bihecke-two-sort-coupling.md).
 
 Priority order and why:
