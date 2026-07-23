@@ -512,8 +512,17 @@
       "last": 494,
       "purpose": "Lean slice: C434 (sheet,D-prime) fibre identity and invariant tower as kernel leaves",
       "sequence": 57
+    },
+    {
+      "count": 3,
+      "first": 495,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 497,
+      "purpose": "C434-to-C80 transfers: q11 identification falsifier; bi-Hecke coupling candidate; q17 stratum-constancy bulk-descent probe",
+      "sequence": 58
     }
   ],
-  "next_id": 495,
+  "next_id": 498,
   "schema": "codex-task-id-allocations-v1"
 }

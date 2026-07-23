@@ -577,6 +577,27 @@ second implementation of the raw `Y_0` orbital membership or the full earlier ce
   the already certified score-9 `Y_0` relation.  Characteristic-5/7 degeneracies remain C81's
   branch only after that game-semantic guard exists.
 
+## 2026-07-22 — C434 cross-lane transfer probes allocated (C495–C497)
+
+The crowns C434 double-coset information-lattice theorem
+(`notes/2026-07-22-c434-double-coset-information-lattice.md`) supplies three candidate routes
+into this report's still-open ledger items; assessment and provenance in
+`notes/2026-07-22-c434-c80-cross-lane-transfers.md`.
+
+- **C495** (→ still-open coverage, q=11 side): falsifier-first identification of the C447/C460
+  cloud packet's `C5`-orbit structure `1,1,5,5,5,5` with C434's `D10`-class `K`-orbit strata on
+  its 22-point two-sheet space, `u = XZ/Y²` square class matching the sheet sign.
+- **C496** (→ still-open two-sorted coupling): the bi-Hecke bimodule `e_K F[G] e_H ≅ F[K\G/H]`
+  as the canonical incidence-bimodule candidate, expected set-faithful with a rank-dropping
+  linear shadow rather than linearly faithful.
+- **C497** (→ still-open sparse guarded coverage): stratum-constancy test of
+  `Y_NK0`-membership/P-purity over double-coset labels of (prior-triple stabilizer, reply) on
+  the frozen q17 census; constancy yields per-representative bulk descent.
+
+Caveats recorded in the transfer note: the C434 Borel/Bruhat structure exists only at
+q ∈ {7,11} (no subgroup of order `(q²−1)/2` at q=13/17/19), and C434 contributes nothing to the
+(b) descent-measure gap.
+
 ## Reproduction
 
 ```bash
