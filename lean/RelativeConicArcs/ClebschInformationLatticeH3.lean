@@ -5,7 +5,7 @@ import RelativeConicArcs.ClebschDoubleCosetDepth
 # The six-fibre information lattice on the twenty-two-point matching set
 
 This module checks a displayed finite permutation action on twenty-two perfect matchings of twelve
-vertices.  The twelve displayed permutations form the subgroup called `K` here.  Exhaustive native
+vertices.  The twelve displayed permutations form the subgroup called `K` here.  Exhaustive kernel
 evaluation proves that two matchings lie in the same `K`-orbit exactly when their sheet labels and
 their numbers of edges shared with two distinguished matchings agree.
 

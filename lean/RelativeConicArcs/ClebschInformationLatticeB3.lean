@@ -7,7 +7,7 @@ import Mathlib.Tactic
 
 This module checks a displayed finite permutation action on fourteen perfect matchings of eight
 vertices.  The eight displayed permutations form the subgroup called `K` here.  For every pair of
-matchings, exhaustive native evaluation proves that they lie in the same `K`-orbit exactly when
+matchings, exhaustive kernel evaluation proves that they lie in the same `K`-orbit exactly when
 their sheet labels and their numbers of edges shared with two distinguished matchings agree.
 
 For a finite label map, `fibreSubalgebra` is the algebra of rational-valued functions constant on
