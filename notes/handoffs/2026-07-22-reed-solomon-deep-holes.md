@@ -14,7 +14,8 @@ distinguished Borel-endpoint orbit.  The
 C498/C509 parity law is the `F4`/order-two level; the first fresh degree-nine carrier has minimal
 constant field `F8` and an order-three component cycle on its `e_7` orbit, which is shallow when
 `3|m`, including infinitely many odd extension degrees.  This fires the authorized first-obstruction
-stop.  Its four-dimensional quotient cover is unallocated.  C500 remains release-gated.
+stop.  C530 is next: it owns the four-dimensional `e_7` quotient cover and exact deepness law for
+`3∤m`.  C500 remains release-gated.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
@@ -573,7 +574,7 @@ consecutive-row Lucas overlap through the first fresh level and proves the infin
 member exactly when `s|m`.  This recovers C498/C509 at
 `s=2`.  At `s=3`, Frobenius has order three on the components, disproving a stable parity law and
 closing C529 at its mandatory obstruction exit.  Deepness for `3∤m` needs normalization of the
-four-dimensional quotient cover and is not allocated.
+four-dimensional quotient cover; C530 now owns exactly that calculation at `e_7`.
 
 ## Execution ladder
 
@@ -631,8 +632,9 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   contained pullback is the persistent/Lucas union, with an effective genus-one slice outside it.
   C529 selects the coherent power-of-two Lucas family and stops at its first intrinsic
   level-dependent obstruction: the degree-nine carrier has an order-three constant-field cycle.
-  A successor should be allocated only to normalize its four-dimensional quotient cover on
-  intrinsic `PGL2` normal forms; no ambient census substitutes for that calculation.
+  C530 is allocated to normalize its four-dimensional quotient cover at the distinguished `e_7`
+  orbit.  Extension to other intrinsic `PGL2` normal forms remains behind that gate; no ambient
+  census substitutes for either calculation.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -660,6 +662,6 @@ history.
 
 ## Next command
 
-`go reed-solomon`
+`go C530`
 
-(C529 is complete.  Its quotient-cover successor is unallocated; C500 remains release-gated.)
+(C530 is next. C500 remains release-gated.)

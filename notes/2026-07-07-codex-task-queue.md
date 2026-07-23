@@ -148,6 +148,7 @@ current highest-EV step is C528 — the gadget-Node-Kayles value law (cold-start
 ### `reed-solomon`
 
 - **C500 `[reed-solomon]` [QUEUED; after C491; release decisions gate]** — redundancy-five manuscript: package C491 (unconditional covering radius, Hankel-pencil criterion, exceptional-cover mechanism, O±/nucleus/wild families, sharp q>=23 threshold, certified sporadic tables) as a standalone paper to the arcs/clebsch release bar, citing Kaipa--Patanker--Pradhan for the quartic orbit toolkit and positioning against ZWK 2019 and the twisted-RS adjacent work; includes the KPP char-2/3 contribution remark and the audit-mandated "to our knowledge" qualifiers → `notes/2026-07-22-c500-prs-redundancy-five-paper.md`
+- **C530 `[reed-solomon]` [QUEUED; next; C529 obstruction isolated]** — normalize the four-dimensional quotient `W_(e_7)/<1,t,t^8>=<t^2,t^3,t^4,t^5>` on the first degree-nine characteristic-two Lucas carrier; compute its ordered-root cover, geometric components/monodromy, coefficientwise Frobenius, and exact deepness of the `PGL2` orbit of `e_7` when `3∤m`, stopping at the first proved nonconstant Artin--Schreier or extra-monodromy obstruction and using no ambient syndrome census → `notes/reed-solomon-tasks/c530-degree-nine-lucas-e7-quotient-cover.md`.
 
 ### `relconic`
 
