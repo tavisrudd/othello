@@ -737,8 +737,17 @@
       "last": 529,
       "purpose": "characteristic-two Lucas-carrier arithmetic and Frobenius deepness law",
       "sequence": 82
+    },
+    {
+      "count": 1,
+      "first": 530,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 530,
+      "purpose": "normalize the degree-nine characteristic-two Lucas e7 quotient ordered-root cover and compute its monodromy, Frobenius, and deepness law",
+      "sequence": 83
     }
   ],
-  "next_id": 530,
+  "next_id": 531,
   "schema": "codex-task-id-allocations-v1"
 }
