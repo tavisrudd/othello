@@ -5,7 +5,8 @@
 **Date:** 2026-07-22
 
 **Status:** C475--C499, C509--C510, and C512--C515 complete; C516 is next
-(PRS redundancy nine), followed by C517 (Lean formalization); C498 now closes the all-field redundancy-six
+(PRS redundancy nine), followed by C517 (Lean formalization) and C518 (C515 global-incidence
+successor); C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -507,6 +508,7 @@ raw or reduced resultant.
 | C515 | modular additive/Hasse recursion | complete | exact Lucas/Hasse filtration, reduced stabilizer-stratified orbit norm, and trace endpoints; differences do not lift support zeros; polar ruled locus classified | global reduced-norm/incidence geometry is required |
 | C516 | PRS redundancy-nine residual-quadratic theorem | queued | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
 | C517 | Lean formalization of C516 | queued after C516 | theorem boundary frozen; zero-axiom algebraic and finite-field proof | kernel-checked PRS theorem |
+| C518 | modular TRS trace-one global incidence | queued after C517 | fixed endpoints, residual discriminant, splitting monodromy, ordered-root fallback; exact quotient lifting and collision semantics | global theorem or first proved obstruction |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -520,11 +522,12 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
 - **Twisted Reed--Solomon:** C514 closes C510's only allocated successor with an exact
   translation-invariant determinant normal form and a precise obstruction to C512.  C515 closes
   the additive/Hasse alternative: its filtration and trace endpoints are exact, but differences
-  do not preserve zero incidence.  Any further work needs a newly allocated global
-  component/integrality target for the trace-one incidence variety (or its quotient with exact
-  rational lifting); the reduced stabilizer-stratified coset norm records the component union but
-  is not itself an irreducibility target.  The completion/support collision divisor must remain.
-  No all-TRS claim is allocated.
+  do not preserve zero incidence.  C518 owns the bounded global successor in the prescribed order:
+  fixed endpoints, residual discriminant, splitting monodromy, and ordered-root incidence before
+  any universal synthesis.  Its target is the trace-one incidence variety (or its quotient with
+  exact rational lifting); the reduced stabilizer-stratified coset norm records the component union
+  but is not itself an irreducibility target.  The completion/support collision divisor must
+  remain.  No all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C516 owns the next fixed-level application: the
