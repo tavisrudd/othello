@@ -156,6 +156,8 @@ below resolves the generic component whenever \(p^\ell>k\): it is rational, with
 Vandermonde and consecutive-Schur exceptional divisors.  The remaining carrier gate is confined
 to low Lucas levels and rational avoidance/lifting.  A later extra-juice pass proves the
 consecutive Schur functions coprime and gives an effective high-level shallow-field gate.
+The second-order top-characteristic-two audit further reduces the exceptional exponent to a
+fixed Schur equation and clears the complete \(k=4\) family.
 
 This is exit gate 2.  The binary family and the stated subfield range are proved shallow.  At high
 Lucas levels ordered-root integrality is explicit and the endpoint itself has the effective gate
@@ -511,6 +513,73 @@ zero-existence gate (T14).  This clears every \(k=3\) endpoint uniformly and all
 characteristic endpoints above the quadratic-in-\(k\) threshold (T15), without monodromy or a
 field census.
 
+A requested second-order pass addresses the one high family for which (T14) scales at the same
+rate as \(q\).  Let \(p=2\), \(\ell=m-1\), and \(k\ge4\) be even.  The square map is a bijection,
+so write \(w_i=v_i^2\).  Then
+\[
+ \sum_iw_i=1\quad\Longleftrightarrow\quad\sum_iv_i=1,
+\]
+and on \(\mathbb F_q\)
+\[
+ w_i^{q/2+1}=v_i^{q+2}=v_i^3.                                \tag{E1}
+\]
+Thus the top endpoint alternant is
+\[
+ \det(1,v_i^2,v_i^4,\ldots,v_i^{2k-2},v_i^3).                 \tag{E2}
+\]
+After sorting its exponents and dividing by the Vandermonde, (E2) is the fixed-degree Schur
+equation
+\[
+ s_{\Lambda_k}(v_0,\ldots,v_k)=0,\qquad
+ \Lambda_k=(k-2,k-3,\ldots,2,1,1,1),                          \tag{E3}
+\]
+of degree
+\[
+ |\Lambda_k|=\frac{k(k-3)}2+3.                               \tag{E4}
+\]
+This is an exact \(\mathbb F_q\)-point equivalence; it is not asserted as an identity over
+arbitrary extension fields.  It replaces the exponent \(q/2+1\) by a degree depending only on
+\(k\).
+
+For \(k=4\),
+\[
+ \Lambda_4=(2,1,1,1),\qquad
+ s_{\Lambda_4}=e_1e_4-e_5.
+\]
+On \(e_1=1\), the endpoint equation is \(e_4=e_5\).  Every solution is nonzero, and division by
+\(e_5\) gives the exact form
+\[
+ \sum_{v\in V}v=1,\qquad \sum_{v\in V}v^{-1}=1,\qquad |V|=5. \tag{E5}
+\]
+
+Equation (E5) has a uniform construction.  Choose
+\[
+ V=\{a,a+1\}\sqcup b\{1,t,1+t\}.                              \tag{E6}
+\]
+Its sum is automatically one.  Put
+\[
+ A=a(a+1),\qquad C=a^2+a+1,
+\]
+and, when the denominators are nonzero, set
+\[
+ b=\frac{A(t^2+t+1)}{C\,t(t+1)}.                              \tag{E7}
+\]
+The inverse sum of the pair is \(1/A\), while that of the zero-sum triple is
+\((t^2+t+1)/(b\,t(t+1))=C/A\); their sum is one.
+
+If \(m\) is even, take \(a,t\in\mathbb F_4\setminus\mathbb F_2\) and choose
+\(b\in\mathbb F_q^\times\setminus\mathbb F_4^\times\).  Then the pair is
+\(\mathbb F_4^\times\setminus\{1\}\), the triple is the disjoint coset
+\(b\mathbb F_4^\times\), and (E5) holds.  If \(m\) is odd, then \(m\ge5\) whenever this endpoint
+occurs.  Fix any \(a\notin\{0,1\}\); automatically \(C\ne0\).  The forbidden values of \(t\)
+are the roots of a nonzero polynomial of degree at most \(20\): degree \(4\) for the
+denominators in (E7), plus the six pair/triple collision equations of degrees
+\(2,3,3,2,3,3\).  Since \(q\ge32>20\), a valid \(t\) exists.
+
+Therefore every top characteristic-two \(k=4\) endpoint is shallow over every field where it
+occurs.  Together with the earlier \(k=2\) and \(k=3\) theorems, the first possible persistent
+fixed endpoint now has \(k\ge6\).
+
 Settled:
 
 - **What are all fixed endpoint equations?** Equations (2)--(6) give the complete list and its
@@ -532,6 +601,9 @@ Settled:
   smaller dimension and cannot be another top-dimensional component.
 - **Is there an effective high-level endpoint theorem?** Yes.  Equation (T14) is the exact
   Schwartz--Zippel gate; (T15)--(T16) give uniform odd-characteristic and non-top binary bounds.
+- **What happens at the characteristic-two top level?** Equations (E1)--(E4) replace its growing
+  exponent by a fixed Schur equation.  At \(k=4\), (E5)--(E7) give a uniform split construction
+  in every field where the endpoint occurs.
 - **Does the residual-quadratic route retain infinity, diagonals, and completion collisions?**
   Yes.  Equations (8)--(12) separate the infinity/determinant, residual diagonal, fixed-root
   collision, and valid \(0\in U\) loci.
@@ -544,7 +616,7 @@ Open:
 
 - **Are all remaining Lucas-fixed endpoints shallow?** Evidence gap: component geometry at low
   levels \(p^\ell\le k\), plus the finitely bounded high-level fields failing (T14)—notably the
-  characteristic-two top level for even \(k\ge4\).  A future successor must own these exact
+  characteristic-two top level for even \(k\ge6\).  A future successor must own these exact
   carriers; C519 does not, because it owns the universal residual-discriminant base locus instead.
 - **Which general Hasse strata admit a nondegenerate residual slice?** Evidence gap: a
   classification of syndromes for which every choice of \(V\) has \(D=0\), \(K=0\), or

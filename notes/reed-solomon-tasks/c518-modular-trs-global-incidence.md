@@ -103,5 +103,7 @@ lower dimension and the rational component is uniquely top-dimensional.  Schwart
 the explicit high-level shallow gate
 `q > binom(k+1,2)+2(p^l-k)`, clearing every `k=3` endpoint uniformly.  The remaining gate is
 low-level geometry, the bounded high-level fields below that threshold, and rational avoidance
-of the ordering/residual torsors; no universal contained/transverse synthesis or field census
-was substituted.
+of the ordering/residual torsors.  A second-order pass transforms the top characteristic-two
+endpoint into a fixed-degree Schur equation and gives a uniform five-root construction clearing
+every `k=4` field; the first possible persistent fixed endpoint is now `k>=6`.  No universal
+contained/transverse synthesis or field census was substituted.

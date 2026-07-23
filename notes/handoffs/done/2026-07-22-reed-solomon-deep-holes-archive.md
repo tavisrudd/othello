@@ -130,3 +130,11 @@ rational high-level carrier is uniquely top-dimensional.  The product of its Van
 `h_r`, and `s_(r,1)` has degree `binom(k+1,2)+2(p^l-k)`, so Schwartz--Zippel gives that exact
 high-level shallow gate.  It clears every `k=3` endpoint uniformly and leaves only low Lucas
 geometry, bounded fields below the gate, and the separate residual/order torsors.
+
+The requested second-order pass takes square roots at the characteristic-two top level:
+`w^(q/2+1)=v^3` for `w=v^2`.  The endpoint becomes a fixed Schur equation
+`s_(k-2,k-3,...,2,1,1,1)=0` of degree `k(k-3)/2+3`, independent of `q`.  For `k=4` this is
+`e1 e4=e5`, hence five nonzero roots with both sum and inverse-sum one.  Splitting them as
+`{a,a+1} union b{1,t,1+t}` gives an exact rational construction; `F4` cosets cover even extension
+degree, and a degree-20 deletion bound covers every odd degree where the endpoint occurs.  Thus
+all `k=4` top endpoints are shallow and the first possible persistent fixed endpoint is `k>=6`.

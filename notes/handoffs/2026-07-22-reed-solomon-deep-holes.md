@@ -524,9 +524,13 @@ coprime, so the vertical family is lower-dimensional and the rational component 
 top-dimensional.  It also gives the effective shallow gate
 `q > binom(k+1,2)+2(p^l-k)`, including every `k=3` endpoint uniformly.  The remaining gates are
 low-level component geometry, bounded high-level fields below that gate, and rational avoidance
-of the ordering and residual torsors for general syndromes.  No universal TRS synthesis or field
-census is justified.  These carriers are an unallocated future successor; C519 remains the
-separately owned arbitrary-redundancy residual-discriminant task.
+of the ordering and residual torsors for general syndromes.  A second-order pass handles the
+asymptotically awkward characteristic-two top level by square-root reparametrization: its
+endpoint is a fixed Schur equation of degree `k(k-3)/2+3`.  At `k=4` it is exactly the five-point
+system `sum(V)=sum(1/V)=1`, and an `F4`-coset/rational two-parameter construction clears every
+field where it occurs.  The first possible persistent fixed endpoint is now `k>=6`.  No universal
+TRS synthesis or field census is justified.  These carriers are an unallocated future successor;
+C519 remains the separately owned arbitrary-redundancy residual-discriminant task.
 
 ## Execution ladder
 
