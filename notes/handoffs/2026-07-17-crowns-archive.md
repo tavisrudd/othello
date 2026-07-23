@@ -337,3 +337,15 @@ pairing on the source Tate plane. The `A5` degree-5/6 Mackey interface is semisi
 characteristic 11, so the extension is ambient to `PSL_2(11)`, not an incidence-augmentation
 degeneration. Full report:
 `notes/2026-07-23-c433-modular-depth-fourier-exact-sequence.md`.
+
+## C436 — bounded Mathieu-adjacency check (2026-07-23)
+
+The two frozen C379 one-factorizations do not supply two distinct `PSL_2(11)` subgroups of
+`Sym(12)`. Exhaustive vertex-permutation enumeration finds the same order-660 full stabilizer on
+both sheets, equal to C379's matrix `PSL_2(11)`. Their generated group is therefore
+`PSL_2(11)`, not `PGL_2(11)` or `M_12`. The recorded `J` exchanges the structures but normalizes
+the common stabilizer; it is a transporter whose adjunction gives `PGL_2(11)` of order 1320.
+Every sheet transporter lies in the 660-element coset `J PSL_2(11)`, and the unordered-pair
+stabilizer is exactly `PGL_2(11)`. This closes the task-card's stabilizer/transporter conflation
+and leaves no Mathieu successor. Full report:
+`notes/2026-07-23-c436-mathieu-adjacency.md`.
