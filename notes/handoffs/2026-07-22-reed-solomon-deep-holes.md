@@ -4,7 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491 and C499 complete; C498 (redundancy six, audit-gated) and C500 (redundancy-five paper, release-gated) queued as follow-ups.  C478's coherence upgrade identifies each
+**Status:** C475--C491 and C499 complete; C498 active (literature gate and q<=27 computational
+calibration complete; corrected trisecant-surface theorem gate open); C500 (redundancy-five paper,
+release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
 at most three syndrome fibres recovers every frozen C398 parent.  C481 proves that the determinant
 atlas is exactly the projected labelled `M_0,6` point.  C482 proves exact residual dimensions two
@@ -284,6 +286,20 @@ Gale/Hilbert-90).  Verdict: uniform structure, but sporadic deepness is a bounde
 equianharmonic orbit persists as a PGL2-orbit for every q=1 mod 3 (constructed at q=25,31,37,43,49)
 yet is deep only at q in {7,13,19}.  Both C491 discovery-track leads settled.
 
+## Active — C498
+
+[`C498 redundancy-six calibration`](../2026-07-22-c498-prs-redundancy-six.md) gives an exhaustive
+definition/Hankel census for every tested prime power q<=27.  The persistent quadratic-gcd
+tangent/sigma stratum has q(q+1)^2/2 points.  Trivial-gcd exceptional orbit counts are
+18/11/4/2/1 at q=7/8/9/11/13 and zero at q=16/17/19/23/25/27; covering radius is 5 throughout,
+including q=7,8.  The atomic Rust/JSON/Python evidence bundle is complete.  A Tao closeout corrects
+the proposed theoretical object: two rational roots of a quartic do not force the residual
+quadratic to split, so the next gate is the off-diagonal ordered-triple collinearity surface
+det(phi_W(t1),phi_W(t2),phi_W(t3))=0 (or its ordered-pair discriminant double cover), not the plain
+fiber-square.  After division by the three diagonal brackets the residual is a symmetric (2,2,2)
+surface, generically K3, with quadric Sym^3(P1) quotient.  Classify its reducible/singular and
+degree-2-to-conic cases, then apply the K3 22q bound off the bad curves on the generic stratum.
+
 ## Execution ladder
 
 | Step | Target | Entry gate | Exit gate | Level unlocked |
@@ -340,9 +356,7 @@ history.
 
 ## Next command
 
-`go reed-solomon`
+`go C498`
 
-(C499 is complete.  Both remaining follow-ups are gated: C498 (redundancy six) opens with its
-claim-specific literature audit; C500 (redundancy-five paper) waits on the usual release decisions.
-Neither has a gate-free concrete ID, so route by lane.  The C491 report's NRC bridge ledger (§9)
-holds C498's exact entry lemma and census harness plan.)
+(C498 is active.  Its audit and census calibration are complete; the corrected trisecant-surface
+irreducibility/classification gate is next.  C500 remains release-gated.)

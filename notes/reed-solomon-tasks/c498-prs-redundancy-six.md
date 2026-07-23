@@ -57,6 +57,17 @@ the three axis reports above. Mathematics clear to proceed. Key downstream const
   state the provable-threshold band once the surface bound is computed.
 - Keep "to our knowledge" qualified (MathSciNet NOT COVERED).
 
-Next math step: settle the entry lemma (split-member existence for trivial-gcd nets of binary
-quartics via Lang–Weil on the fiber-square surface), then the exceptional-net classification and the
-q≤16 census+replay harness.
+**Computational calibration complete (2026-07-22).** The atomic Rust/JSON/Python bundle and interim
+report are `notes/2026-07-22-c498-prs-redundancy-six.*`.  Exhaustive definition/Hankel agreement
+holds through all prime powers q≤27 in the tested range; exceptional trivial-gcd orbit counts are
+18/11/4/2/1 at q=7/8/9/11/13 and zero at q=16/17/19/23/25/27.  The independent Python replay is
+exhaustive through q≤16 and structural for the extra-juice fields 17..27.  Covering radius 5 holds
+throughout, including q=7,8.
+
+The theoretical entry geometry is corrected: a plain fiber-square surface does not force the
+residual quadratic to split.  For a basepoint-free net W, use the off-diagonal ordered-triple
+collinearity surface det(phi_W(t1),phi_W(t2),phi_W(t3))=0 (or the discriminant double cover of the
+ordered-pair surface).  Dividing by the three pairwise brackets gives a symmetric (2,2,2) surface,
+generically K3, whose Sym^3(P1)=P3 quotient is a quadric.  Next math step: classify reducible,
+singular, and degree-2-to-conic cases; prove smooth geometric irreducibility on the generic
+stratum; and apply the K3 22q error bound after removing diagonals/ramification.

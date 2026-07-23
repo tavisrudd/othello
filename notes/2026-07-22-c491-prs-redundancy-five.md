@@ -344,8 +344,11 @@ searches of PG(4,q) with the stop condition "all points classified".
   of the 2×(r−1) Hankel of f; the kernel is an (r−3)-dimensional linear system for f off the
   curve; Hasse confluence handles osculating flags; the substitution action is equivariant.
 - Deep-hole criterion at any redundancy: no split squarefree member in that linear system.
-- gcd-stratification recursion: a degree-d common factor reduces to the system one redundancy
-  down; the top stratum (degree r−3 gcd) reproduces ZWK's T/S families uniformly at every r.
+- gcd-stratification recursion: a degree-d common factor reduces to a lower-degree cofactor
+  system.  The persistent ZWK T/S stratum always has **quadratic** gcd: a kernel of vector
+  dimension r−3 contained in g·Sym^(r−2−d) requires r−3 ≤ r−1−d, hence d≤2, with equality
+  giving the full binary-quadratic cofactor system.  The former “degree r−3 gcd” wording was
+  accidentally correct only at r=5.
 - Char-p nucleus: for the NRC of degree p+1 in PG(p+1, p^m), ν^[2] is constant, all osculating
   planes concur, and the nucleus is a PGL₂-fixed deep hole (the argument only uses
   C(p,2) ≡ C(p+1,2) ≡ 0 mod p).

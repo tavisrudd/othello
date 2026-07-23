@@ -1158,3 +1158,23 @@ the 11-orbit outer-swap test into the same successor.
 **Status:** open lead; unallocated — one successor C-ID would now cover: triple-index computation
 pinned to the hexad, the 11-orbit outer-swap test, and comparison with C472's length-eight central
 scalar.
+
+### 2026-07-22 — C501 disposition: carrier swap survives; orbit and Maslov readings retire
+
+**Provenance:** C501 exact certification bundle,
+`2026-07-22-c501-hexad-outer-bit-explore.{md,py,json}` and independent replay.
+**Was I looking for this?:** yes in C501; this append only closes and corrects the two promoted
+discovery entries above.
+**Observed / correction:** the two 11-orbits within `ker(H)` do not represent the two `A5`
+classes. They are complement-paired, and each class-one `A5` fixes one hexad in each orbit. The
+opposite class fixes no column hexad. The genuine outer residue is instead the relative outer class
+of the column/row degree-11 actions: the stabilizers of the common numeric support in `ker(H)` and
+`ker(H^T)` lie in the two nonconjugate classes, and the row transport exchanges them. The hexad is
+the canonical local witness, not the sole carrier of the bit. The proposed
+Maslov bridge retires: the symmetric triple form is zero, while all ten signed parent generators
+fix `ker(H)`, making C472's central witness a constant Lagrangian loop of Witt class zero despite
+its linear product `-I`.
+**Evidence:** CHECKED — primary exhaustive exact computation plus independent brute-force/kernel,
+`P^1(F_11)`, and signed-pair-orbit replay.
+**Status:** the two preceding Maslov/hexad entries graduated -> C501; literal two-11-orbit and
+central-phase readings retired -> C501 correction. The carrier-level outer bit proceeds to C502.
