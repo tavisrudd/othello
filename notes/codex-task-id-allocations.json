@@ -755,8 +755,17 @@
       "last": 533,
       "purpose": "queue the remaining tractable PRS work: full degree-nine Lucas-carrier PGL2 strata, redundancy-ten synthesis, and C525 threshold sharpening",
       "sequence": 84
+    },
+    {
+      "count": 1,
+      "first": 534,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 534,
+      "purpose": "Rank non-deep-hole PRS frontier directions by audited novelty, structural value, cheap falsification, and publishability; queue only survivors",
+      "sequence": 85
     }
   ],
-  "next_id": 534,
+  "next_id": 535,
   "schema": "codex-task-id-allocations-v1"
 }
