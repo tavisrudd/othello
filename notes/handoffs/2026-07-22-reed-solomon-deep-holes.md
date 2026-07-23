@@ -4,8 +4,11 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C518 complete; C519 is next
-(arbitrary-redundancy residual-discriminant theorem); C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C519 complete; C519 closed at its authorized
+characteristic-two obstruction exit: the universal branch quartic is a doubled quadric, so every
+characteristic-two pullback is square and the required successor is Artin--Schreier, not
+hyperelliptic. No technical successor is allocated; C500 remains release-gated.
+C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -532,32 +535,24 @@ field where it occurs.  The first possible persistent fixed endpoint is now `k>=
 TRS synthesis or field census is justified.  These carriers are an unallocated future successor;
 C519 remains the separately owned arbitrary-redundancy residual-discriminant task.
 
-## C519 entry handoff
+## Closed base — C519
 
-C519 is next.  Its owned goal is the arbitrary-degree **PRS** theorem in
-[`the task card`](../reed-solomon-tasks/c519-universal-residual-discriminant.md): construct the
-four-contraction map `L_f`, identify the integral residual branch
-`K=N_s^2-4DN_u` with the pulled-back divided-power binary-cubic discriminant, classify the complete
-zero/square/inseparable pullback locus, and prove a root-compatible geometrically integral
-genus-at-most-one slice outside it.  The first session should:
-
-1. import C512 and C516, freeze the divided-power and residual notation, and derive the integral
-   discriminant identity;
-2. classify the image types of `L_f` and compare their saturated loci with the frozen
-   C491/C498/C509/C513/C516 carriers at `n=5,6,7,8`;
-3. record the determinant, branch, diagonal, repeated-root, fixed/residual-collision, ordering,
-   and rational-lift conditions before any Hasse--Weil estimate.
-
-C518 contributes proof discipline only: quotient points need not lift to rational split roots;
-forced inseparable powers must be removed; component-union norms are not irreducibility targets;
-and every collision divisor keeps its own semantics.  Its TRS quadratic
-`D Z^2-A D Z-C` and discriminant `A^2D^2+4CD` are not C519's PRS residual system.
-
-The remaining low Lucas levels, bounded high endpoints, characteristic-two top Schur carrier
-from possible `k>=6`, and general modular-TRS Hasse/incidence synthesis remain unallocated and
-must not be absorbed into C519.  The closed source boundary is
-[`C518`](../2026-07-23-c518-modular-trs-global-incidence.md); the eventual C519 report is
-`notes/2026-07-23-c519-universal-residual-discriminant.md`.
+`notes/2026-07-23-c519-universal-residual-discriminant.md` constructs the four-contraction map,
+derives the integral divided-power binary-cubic discriminant, and proves the first additional
+modular component.  In characteristic two the discriminant scheme is the doubled smooth quadric
+`(AD+BC)^2`; its reduced quadric is the twisted-cubic tangent developable.  Hence every syndrome
+pullback is square, including rank-three/four examples outside the frozen persistent and
+Lucas-nucleus carriers at `n=5,6,7,8`.  The zero pullbacks are exactly images that are a quadric
+point or a line in one of its rulings.  Residual splitting off `DN_s=0` is instead the
+Artin--Schreier class `D N_u/N_s^2`.  Characteristic three retains an irreducible quartic but has a
+Frobenius-thickened twisted-cubic singular scheme.  A `B=0,C=1,D=1` specialization gives class
+`1/A`, proving that the generic Artin--Schreier replacement is geometrically integral; only its
+Hankel/root-compatible pullback remains.  Intrinsically, the residual quadratic is the divided
+Hessian and this Artin--Schreier class is its Arf invariant, so the successor gate is a
+Hessian--Arf pullback classification.  This fires the task card's authorized modular
+stop rule before Hasse--Weil.  The exact unallocated successors are the characteristic-two
+root-compatible Artin--Schreier carrier and the odd-characteristic pullback/line classification;
+neither may be replaced by a fixed-level census.
 
 ## Execution ladder
 
@@ -584,7 +579,7 @@ must not be absorbed into C519.  The closed source boundary is
 | C516 | PRS redundancy-nine residual-quadratic theorem | complete | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
 | C517 | Lean formalization of C516 | complete | residual algebra and exact synthesis implication; explicit geometric/coding hypotheses; green gate and axiom audit | kernel-checked PRS theorem boundary |
 | C518 | modular TRS trace-one global incidence | complete | complement Frobenius alternants; binary and subfield shallow theorems; exact residual lifting torsor | first proved global obstruction |
-| C519 | universal residual-discriminant base locus | queued | binary-cubic discriminant pullback; complete zero/square/inseparable carrier; root-compatible genus-one slice | arbitrary-redundancy high-field theorem or first additional component |
+| C519 | universal residual-discriminant base locus | complete (obstruction exit) | integral pullback; doubled-quadric characteristic-two component; exact Artin--Schreier replacement gate | first additional component |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -639,6 +634,6 @@ history.
 
 ## Next command
 
-`go C519`
+`go reed-solomon`
 
-(C519 is next. C500 remains release-gated.)
+(No technical successor is allocated. C500 remains release-gated.)

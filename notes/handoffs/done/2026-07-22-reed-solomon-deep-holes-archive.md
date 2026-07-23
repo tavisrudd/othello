@@ -138,3 +138,20 @@ The requested second-order pass takes square roots at the characteristic-two top
 `{a,a+1} union b{1,t,1+t}` gives an exact rational construction; `F4` cosets cover even extension
 degree, and a degree-20 deletion bound covers every odd degree where the endpoint occurs.  Thus
 all `k=4` top endpoints are shallow and the first possible persistent fixed endpoint is `k>=6`.
+
+## 2026-07-23 — C519 modular obstruction exit
+
+C519 derived the universal integral residual discriminant and found the task card's first additional
+component.  In characteristic two it is the doubled quadric `(AD+BC)^2`, so every pullback is a
+square even outside the frozen persistent and nucleus carriers.  The hyperelliptic slice strategy
+therefore stops; the correct replacement is the Artin--Schreier class `D N_u/N_s^2`.  The report
+also records the exact zero-image ruling classification, the characteristic-three thickened
+singular scheme, all deletion/lifting semantics, and the unallocated successor gates.
+The explicit extra-juice pass identifies the twisted cubic as a Frobenius graph on the reduced
+Segre quadric, separating its tangent ruling from the complementary ruling.  The specialization
+`B=0,C=1,D=1` gives Artin--Schreier class `1/A`; its simple pole proves that the generic
+replacement cover is integral, so only the Hankel/root-compatible pullback is obstructed.
+The Tao audit then identifies the residual quadratic as the divided Hessian of the contracted
+binary cubic.  Its Artin--Schreier class is exactly the characteristic-two Arf invariant, and the
+two Hankel-row Pluecker syzygies recover the residual equations.  The successor is therefore a
+Hessian--Arf pullback classification rather than generic elimination.

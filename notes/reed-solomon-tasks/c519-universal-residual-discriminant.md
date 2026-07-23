@@ -1,6 +1,27 @@
 # C519 — universal residual-discriminant base-locus theorem
 
-**Lane:** `reed-solomon` · **Status:** queued next; C518 closed
+**Lane:** `reed-solomon` · **Status:** complete at the authorized characteristic-two obstruction exit
+
+## Outcome
+
+The integral residual identity passes, but in characteristic two its branch quartic is universally
+\[
+K=(AD_3+BC)^2.
+\]
+Thus every syndrome pullback is a square, including explicit rank-three/four contractions outside
+the frozen persistent and Lucas-nucleus carriers.  The proposed hyperelliptic slice is a nonreduced
+double graph; the correct replacement is the Artin--Schreier cover
+\[
+z^2+z=DN_u/N_s^2.
+\]
+A specialization gives class \(1/A\), proving that this replacement is generically integral;
+the class is the Arf invariant of the contracted cubic's divided Hessian, so the unresolved gate
+is specifically its Hessian--Arf Hankel/root-compatible pullback.
+C519 therefore closes under its modular stop rule.  See
+[`the report`](../2026-07-23-c519-universal-residual-discriminant.md) and
+[`literature delta`](../2026-07-23-c519-universal-residual-discriminant-literature-audit.md).
+The characteristic-two Artin--Schreier carrier and the remaining odd-characteristic pullback
+classification are exact unallocated successor gates.
 
 ## Objective
 

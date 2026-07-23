@@ -1,0 +1,408 @@
+{
+  "characteristic_three": {
+    "K": "A^2*D^2+A*C^3+B^3*D",
+    "discriminant_as_quadratic_in_A": "(C^2-B*D)^3",
+    "nonsquare_prime_factor": "C^2-B*D with odd valuation 3",
+    "singular_equations": [
+      "C^3-A*D^2",
+      "B^3-A^2*D"
+    ],
+    "singular_reduced_support": "twisted cubic [s^3:s^2*t:s*t^2:t^3]"
+  },
+  "characteristic_two": {
+    "K": "(A*D+B*C)^2",
+    "arf_invariant": "D*N_u/N_s^2 modulo {h^2+h}",
+    "artin_schreier_equation": "z^2+z=D*N_u/N_s^2, z=D*t/N_s",
+    "artin_schreier_nontrivial_specialization": {
+      "D_minor": "1",
+      "N_s": "A",
+      "N_u": "A",
+      "certificate": "simple pole at A=0, hence not h^2+h",
+      "class": "1/A",
+      "specialization": "B=0,C=1,D=1"
+    },
+    "generic_outside_frozen_carriers": [
+      {
+        "coefficients_low_first": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "contraction_matrix_rows": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            1
+          ]
+        ],
+        "degree": 5,
+        "middle_catalecticant_rank": 3,
+        "middle_catalecticant_rows": [
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "ns_upper_triangular_coefficients": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "outside_frozen_char2_nucleus": true,
+        "rank": 3
+      },
+      {
+        "coefficients_low_first": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "contraction_matrix_rows": [
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "degree": 6,
+        "middle_catalecticant_rank": 3,
+        "middle_catalecticant_rows": [
+          [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "ns_upper_triangular_coefficients": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "outside_frozen_char2_nucleus": true,
+        "rank": 4
+      },
+      {
+        "coefficients_low_first": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "contraction_matrix_rows": [
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "degree": 7,
+        "middle_catalecticant_rank": 3,
+        "middle_catalecticant_rows": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "ns_upper_triangular_coefficients": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "outside_frozen_char2_nucleus": true,
+        "rank": 4
+      },
+      {
+        "coefficients_low_first": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "contraction_matrix_rows": [
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "degree": 8,
+        "middle_catalecticant_rank": 3,
+        "middle_catalecticant_rows": [
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "ns_upper_triangular_coefficients": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "outside_frozen_char2_nucleus": true,
+        "rank": 4
+      }
+    ],
+    "reduced_tangent_surface": "A*D+B*C",
+    "residual_separability_coefficient": "N_s=A*D+B*C"
+  },
+  "conventions": {
+    "contractions": "H_j=sum_i a_i p_(i+j), j=-1,0,1,2",
+    "factor": "P=sum p_i t^i of degree n-3",
+    "residual_quadratic": "D*t^2-N_s*t+N_u",
+    "syndrome": "f=(a_0,...,a_n) in Gamma^n(E)"
+  },
+  "dependencies": "Python standard library only",
+  "integral": {
+    "D": "B*D-C^2",
+    "K": "A^2*D^2-6*A*B*C*D-3*B^2*C^2+4*A*C^3+4*B^3*D",
+    "N_s": "A*D-B*C",
+    "N_u": "A*C-B^2",
+    "checks": {
+      "characteristic_three_A_discriminant": true,
+      "characteristic_two_double_quadric": true,
+      "first_hankel_syzygy": true,
+      "ordinary_discriminant": true,
+      "residual_expansion": true,
+      "second_hankel_syzygy": true
+    },
+    "divided_hessian": "N_u*X^2+N_s*X*Y+D*Y^2",
+    "hankel_syzygies": [
+      "A*D-B*N_s+C*N_u=0",
+      "B*D-C*N_s+D_3*N_u=0"
+    ],
+    "modular_remainders": {
+      "2": {
+        "ordinary_discriminant_identity_zero": true,
+        "residual_identity_zero": true
+      },
+      "3": {
+        "ordinary_discriminant_identity_zero": true,
+        "residual_identity_zero": true
+      },
+      "5": {
+        "ordinary_discriminant_identity_zero": true,
+        "residual_identity_zero": true
+      },
+      "7": {
+        "ordinary_discriminant_identity_zero": true,
+        "residual_identity_zero": true
+      }
+    },
+    "ordinary_binary_cubic_discriminant": "-27*K",
+    "ordinary_hessian": "36*(N_u*X^2+N_s*X*Y+D*Y^2)"
+  },
+  "schema": "c519-universal-residual-discriminant-v1"
+}
