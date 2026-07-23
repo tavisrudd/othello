@@ -302,3 +302,19 @@ genuine signed six-dimensional Weil action, invariant outer-odd quadratic refine
 Witt/Maslov reading of the central word.  External novelty language remains gated by a
 claim-specific literature audit.  Full synthesis:
 `notes/2026-07-23-c511-weil-roof-phase-3-synthesis.md`.
+
+## 2026-07-23 — C431 rank-four weighted-adjoint falsifier
+
+C431 refuted the literal higher-rank continuation of C403's positive weight
+`w(X)=m(X)-1`. Two essential eight-mirror arrangements in `PG(3,5)` have identical punctured
+weighted 3-adjoint depth spectra and spanning complement length 25, yet their Hamming weight
+enumerators differ. Both retain minimum distance 14.
+
+The mechanism is exact. After restricting to a nonmirror hyperplane, duplicated projective lines
+carry an additional correction counting their points not hit by any other distinct restriction
+line. Weighted rank-three-flat depth sees the hit points but not this complement. A five-mirror
+arrangement already has equal-depth tests with section sizes 16 and 12; the eight-mirror pair
+upgrades that pointwise failure to aggregate cospectrality. The result is separate from C403's
+rank-three higher-degree Veronese failure. The alternative `|mu_A(X)|` spectra distinguish this
+pair, so that variant remains open. Full report and replay:
+`notes/2026-07-23-c431-rank-four-weighted-adjoint-falsifier.md`.
