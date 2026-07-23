@@ -5,8 +5,8 @@
 **Date:** 2026-07-22
 
 **Status:** C475--C499, C509--C510, and C512--C516 complete; C517 is next
-(Lean formalization of C516), followed by C518 (C515 global-incidence successor); C498 now closes
-the all-field redundancy-six
+(Lean formalization of C516), followed by C518 (C515 global-incidence successor) and C519
+(arbitrary-redundancy residual-discriminant theorem); C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -521,6 +521,7 @@ raw or reduced resultant.
 | C516 | PRS redundancy-nine residual-quadratic theorem | complete | binary-quartic quotient; divisor/component theorem; characteristic-seven carrier | fixed-level theorem |
 | C517 | Lean formalization of C516 | queued | theorem boundary frozen; zero-axiom algebraic and finite-field proof | kernel-checked PRS theorem |
 | C518 | modular TRS trace-one global incidence | queued after C517 | fixed endpoints, residual discriminant, splitting monodromy, ordered-root fallback; exact quotient lifting and collision semantics | global theorem or first proved obstruction |
+| C519 | universal residual-discriminant base locus | queued after C518 | binary-cubic discriminant pullback; complete zero/square/inseparable carrier; root-compatible genus-one slice | arbitrary-redundancy high-field theorem or first additional component |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -544,8 +545,10 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C516 closes the redundancy-nine residual-quadratic cover
   and characteristic-seven binary-quartic carrier. C517 owns its Lean formalization against the
-  frozen theorem boundary. No ambient census substitutes for future component and
-  contained-carrier gates.
+  frozen theorem boundary. C519 owns the arbitrary-redundancy alternative: identify the universal
+  residual branch with the binary-cubic discriminant, classify its complete pullback base locus,
+  and prove a root-compatible genus-at-most-one slice. No ambient census substitutes for its
+  component and contained-carrier gates.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -575,4 +578,4 @@ history.
 
 `go C517`
 
-(C517 is next; C518 follows it. C500 remains release-gated.)
+(C517 is next; C518 and C519 follow it. C500 remains release-gated.)
