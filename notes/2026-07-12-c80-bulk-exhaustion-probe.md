@@ -290,7 +290,7 @@ certificate layers, not substitutes for the descent proof.
 
 ### Pointed cubic audit: two different algebras
 
-The q=11 response graph is an honest small orbital object.  On each of the four pointed states the
+The q=11 response graph is a genuine small orbital object.  On each of the four pointed states the
 square `C5` has vertex-orbit sizes `1,1,5,5,5,5`; the 41 winning edges are one fixed orbital and
 eight five-edge orbitals.  Its six-cell quotient and the three-orbital response cover are therefore
 the right finite model for a coherent-configuration or Terwilliger treatment.
