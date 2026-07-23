@@ -106,3 +106,11 @@ cross-ratio `lambda`.  At level `l`, admissibility is exactly
 every binary fixed-endpoint zero—and not only one constructed witness—lies on the valid
 completion/support collision boundary `0 in U`.  This makes C514's boundary retention essential
 already at `k=2`.
+
+The requested second-order pass identifies the ordered carrier with
+`P1 - ({0,infinity} union mu_(2^l-1) union mu_(2^(l-1)-1))`, of reduced deletion degree
+`2^l+2^(l-1)-1`.  The second apparent deletion polynomial is the forced square
+`(lambda^(2^(l-1)-1)-1)^2`, an exact binary model of C515's inseparable-multiplicity warning.
+Reordering is a free `S3` torsor with quotient coordinate
+`(lambda^2+lambda+1)^3/(lambda^2(lambda+1)^2)`; quotient Frobenius has cycle type
+`1^6`, `2^3`, or `3^2`, and only the identity type lifts to a rational ordered support.

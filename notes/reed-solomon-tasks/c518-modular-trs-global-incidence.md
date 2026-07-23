@@ -91,7 +91,10 @@ Task report: `notes/2026-07-23-c518-modular-trs-global-incidence.md`.
 The task reached exit gate 2.  Every fixed endpoint is the explicit complement
 Frobenius-alternant carrier `A_(k,l)`; all binary endpoints and a uniform fixed-subfield range are
 shallow.  The binary carrier is completely parametrized and counted, and every one of its zeros
-lies on the valid completion/support collision boundary.  The residual-quadratic slice has exact
-determinant, branch, diagonal, collision, and Kummer/Artin--Schreier lifting classes.  Outside the
-proved shallow ranges, factorization monodromy and ordered-root incidence meet the same unresolved
-reduced carrier, so no universal contained/transverse synthesis or field census was substituted.
+lies on the valid completion/support collision boundary.  Its ordered component is a rational
+open curve with an explicit reduced deletion divisor; reordering is a free `S3` torsor whose
+identity, transposition, and three-cycle Frobenius classes give the complete quotient-lifting
+law.  The residual-quadratic slice has exact determinant, branch, diagonal, collision, and
+Kummer/Artin--Schreier lifting classes.  Outside the proved shallow ranges, factorization
+monodromy and ordered-root incidence meet the same unresolved reduced carrier, so no universal
+contained/transverse synthesis or field census was substituted.

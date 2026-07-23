@@ -511,14 +511,17 @@ raw or reduced resultant.
 exit.  Complement duality turns every extra Lucas-fixed endpoint into a `k+1`-point ordered
 Frobenius alternant with exponent `(floor(k/p^l)+1)p^l+1`.  Every binary `k=2` endpoint is
 uniformly shallow: the report parametrizes and counts the complete binary carrier, and proves
-that every one of its zeros lies on the valid completion/support collision boundary.  A
-fixed-subfield criterion closes a further range for `k>=3`.  The residual-quadratic slice has
-exact determinant, branch, diagonal, fixed-root resultant, valid completion-collision semantics,
-and Kummer/Artin--Schreier lifting classes.  Outside the proved shallow ranges, factorization
-monodromy and ordered-root integrality meet the same reduced Frobenius-alternant carrier; a
-quotient point still needs the exact residual lift.  No universal TRS synthesis or field census
-is justified.  This carrier is an unallocated future successor; C519 remains the separately
-owned arbitrary-redundancy residual-discriminant task.
+that every one of its zeros lies on the valid completion/support collision boundary.  The ordered
+binary carrier is a rational open curve with exact reduced deletion degree; its free `S3`
+ordering torsor has identity/transposition/three-cycle Frobenius types, and only the identity
+type lifts a quotient point to a rational support.  A fixed-subfield criterion closes a further
+range for `k>=3`.  The residual-quadratic slice has exact determinant, branch, diagonal,
+fixed-root resultant, valid completion-collision semantics, and Kummer/Artin--Schreier lifting
+classes.  Outside the proved shallow ranges, factorization monodromy and ordered-root integrality
+meet the same reduced Frobenius-alternant carrier; a quotient point still needs the exact residual
+lift.  No universal TRS synthesis or field census is justified.  This carrier is an unallocated
+future successor; C519 remains the separately owned arbitrary-redundancy residual-discriminant
+task.
 
 ## Execution ladder
 
