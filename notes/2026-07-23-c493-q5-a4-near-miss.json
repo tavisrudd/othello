@@ -1,0 +1,167 @@
+{
+  "conclusions": {
+    "canonical_max_K_lattice": [
+      10,
+      4,
+      2,
+      1
+    ],
+    "six_stratum_level_is_pair_type_dependent": true,
+    "stabilizer_class_sheet_readout_is_fused": true,
+    "ten_point_decorated_avatar_exists": true,
+    "transverse_pair_lattice": [
+      10,
+      6,
+      2,
+      1
+    ]
+  },
+  "decorated_avatar": {
+    "PSL_sheet_sizes": [
+      5,
+      5
+    ],
+    "description": "special matching plus an orientation of its four complementary triangle pairs",
+    "diagonal_product_G_set": "G/N x G/PSL",
+    "each_sheet_maps_bijectively_to_undecorated_base": true,
+    "forgetful_base_size": 5,
+    "forgetful_fibre_sizes": [
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "oriented_cover_is_gauge_equivalent_to_PGL_over_PSL_sign": true,
+    "size": 10
+  },
+  "groups": {
+    "H_is_PSL_intersection_of_N": true,
+    "N_action_on_four_transversal_pairs_order": 24,
+    "N_orbit_sizes_on_oriented_avatar": [
+      2,
+      8
+    ],
+    "PGL2_order": 120,
+    "PSL2_order": 60,
+    "normalizer_N_order": 24,
+    "normalizer_quotient_order": 2,
+    "orientation_kernel_is_H": true,
+    "oriented_point_stabilizer_H_order": 12
+  },
+  "input": {
+    "c406_script_sha256": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    "points": 6,
+    "q": 5
+  },
+  "mackey_matrix": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "mackey_row_sums": [
+    2,
+    3
+  ],
+  "normalizer_pair": {
+    "K_orbit_sizes": [
+      1,
+      1,
+      4,
+      4
+    ],
+    "K_order": 12,
+    "mate": [
+      [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      1
+    ],
+    "middle_strata": 4,
+    "profile_fibre_sizes": [
+      1,
+      1,
+      4,
+      4
+    ],
+    "profile_fibres_equal_K_orbits": true,
+    "same_underlying_matching": true
+  },
+  "opposite_sheet_H_component_sizes": [
+    1,
+    4
+  ],
+  "outer_involution_swaps": {
+    "distinct_fibre_count": 4,
+    "distinct_mate_count": 4,
+    "same_fibre_count": 6
+  },
+  "schema": "c493-q5-a4-near-miss-v1",
+  "transverse_pair": {
+    "K_orbit_sizes": [
+      1,
+      1,
+      1,
+      1,
+      3,
+      3
+    ],
+    "K_order": 3,
+    "mate": [
+      [
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      0
+    ],
+    "middle_strata": 6,
+    "profile_fibre_sizes": [
+      1,
+      1,
+      1,
+      1,
+      3,
+      3
+    ],
+    "profile_fibres_equal_K_orbits": true,
+    "same_underlying_matching": false
+  },
+  "undecorated_matchings": [
+    {
+      "G_stabilizer_order": 24,
+      "PSL_stabilizer_order": 12,
+      "orbit_size": 5
+    },
+    {
+      "G_stabilizer_order": 12,
+      "PSL_stabilizer_order": 6,
+      "orbit_size": 10
+    }
+  ]
+}

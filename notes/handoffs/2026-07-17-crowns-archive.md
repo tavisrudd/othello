@@ -216,3 +216,71 @@ The closeout also fixed the historical slogan exposed by the original hexad obse
 proved statement is “the outer twist has a hexad-local detector,” not “the phase concentrates on
 one hexad.”  C501's constant-loop and signed-normalizer calculations separate the central
 linear-frame phase from the hexad-detected outer carrier class.
+
+## 2026-07-23 — C493 q=5/A4 near-miss
+
+C493 found the missing geometric avatar and the exact lattice failure. The five special perfect
+matchings of the six conic points have full stabilizer `N=S4`. Each matching determines four
+complementary pairs of transversal triangles; orienting that four-set cuts the stabilizer to
+`H=A4` and gives the intrinsic homogeneous double cover `G/H→G/N`, of size `10→5`.
+
+The decoration does not undo the normalizer defect: both `PSL_2(5)` sheets project bijectively to
+the same five matchings. The opposite-sheet `H`-components have sizes `1+4`, with Mackey matrix
+`[[1,1],[1,2]]`. Its unequal row sums separate two swappable pair types. The canonical max-order
+normalizer mate has `K=H` and four strata `[1,1,4,4]`, hence `10→4→2→1`; a transverse mate has
+`K=C3` and six strata `[1,1,1,1,3,3]`, hence a based but type-dependent `10→6→2→1`. The ordinary
+undecorated size-10 matching orbit is not the candidate because its stabilizer meets
+`PSL_2(5)` in order 6. The ej pass identifies the oriented avatar with the diagonal product
+`G/N×G/PSL_2(5)`; `A4` and `C3` are respectively the one-point and two-point stabilizers of the
+five-set, which proves the four- and six-orbit lists by hand. Full evidence is in
+`notes/2026-07-23-c493-q5-a4-near-miss.md`.
+
+The Tao stress test records the sharp interpretation boundary: this is a local geometric
+realization of the external sign bit, not recovery of that bit from the undecorated matching.
+The canonical four-level is simply `{same,other matching}×{±}`. Character-theoretically the
+Mackey matrix is the Gram matrix of `π0=1` and `π1=1+χ3` for the three-dimensional irreducible
+of `A4`; the missing second augmentation sector explains the loss of the symmetric B3/H3 matrix.
+
+The ej2 pass extracts the general fusion lemma: if `Γ◁G` has index two and
+`N=N_G(H)` meets the outer coset with `N∩Γ=H`, then `G/H≅G/N×G/Γ`. The q=5 certificate also
+checks that `N` acts as the full `S4` on the four complementary triangle pairs and that orientation
+has kernel exactly `H=A4`. The only apparent ambiguity is the unavoidable global choice of a
+torsor label `±`; no genuine mystery or successor remains.
+
+The reusable proof form is the normalizer-fusion product reduction. After locally realizing
+`N/H`, every `K≤Γ` orbit count doubles from the base:
+`#K\(G/H)=2·#K\(G/N)`. This cleanly separates avatar existence from uniform middle-rank and turns
+the latter into a small-action falsifier. C494 may consume the product bijection and doubled-orbit
+formula as generic finite-action lemmas; crowns makes no cross-lane edit.
+
+The ej3 pass records the modular shadow of every such two-cover. In characteristic two, transfer
+and pushforward give a nonsplit exact sequence
+`0→k[G/N]→k[G/H]→k[G/N]→0`; a splitting is killed by the transitive `N`-action on the two lifts
+of the base point. At q=5 it restricts to the direct sum of the two five-point sheets over
+`PSL_2(5)`, so the extension is literally split over the inner group and glued by the outer
+element. Primary and replay both verify the supporting `N`-orbit sizes `[2,8]`. No ambient
+`Ext¹`-dimension claim is made.
+
+Against `2026-07-20-clebsch-paper-planning.md`, C493 realizes exactly the A3 panel's “companion
+`C2` torsor” sequel pointer. The local tetrahedral orientation carries the same determinant-sign
+character as the B3/H3 sheet bit and has no `PGL_2(5)`-equivariant section. This does not alter
+C486's inert-fibre theorem: the unmarked spin lifts remain one Frobenius orbit over `F_5`, whereas
+the marked local orientation cover retains the external bit and forgets back to the fused
+five-matching carrier. The characteristic-two module extension is a separate coefficient
+degeneration, not the characteristic-five arithmetic fusion. Recommended paper use is one A3
+boundary/sequel sentence, not a new split-prime Rosetta row; clebsch owns that edit.
+
+C502 and C493 now form a sharp normalizer dichotomy for local outer-bit detectors. At q=11 the
+self-normalizing `A5` classes remain a two-point torsor evaluated on the common hexad. At q=5 the
+outer `S4` normalizer fuses the `A4` classes, so the class detector is impossible; orientation of
+the matching's internal four-set realizes the quotient character instead. The matching is
+analogous to the common support, and its orientation is analogous to C502's class readout—not to
+the Steiner hexad as a design. Both detect the same external quotient and introduce no new bit.
+
+The prediction ledger is mechanism-gated. Most strongly, the four-set is tetrahedral, so its
+orientation should equal the determinant line `∧³V_A3` of the A3 reflection representation under
+the paper's frozen dictionary. More generally the bit can appear on a local support only through
+a canonical stabilizer character equal to `PGL/PSL` sign, or as a `V` versus `V⊗sgn` pair; in
+characteristic two the latter can merge into C493's nonsplit transfer extension. Explicit negative
+filters retain C501/C502's corrections: complement pairing is insufficient, and a normalizer
+quotient acting trivially on `Out(Γ)` cannot carry the bit.
