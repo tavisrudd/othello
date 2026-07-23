@@ -1197,3 +1197,22 @@ this statement; any cross-group inflation/central-character comparison is a sepa
 homogeneous rank, and constant kernel; projectivity and locality follow by the standard induction
 and rank-two permutation-algebra argument.
 **Status:** resolved -> C417; use group-qualified `P_G(1)` notation in downstream C430/C433 prose.
+
+### 2026-07-23 — C418's shared-leg scan exposes a possible C419 calibration pair
+
+**Provenance:** C418's structurally bounded seven-point extension scan, while enforcing the
+cross-leg C408 stop rule.
+**Was I looking for this?:** no — C418 sought a realizable cross-leg signed generator in
+`ker(U)\setminus ker(P)`, not a collision within one fixed shared-three-secant leg.
+**Observed / musing:** the shared-base family already contains two extensions, with seventh points
+`(1,3,5)` and `(1,3,6)`, having equal exact `U` and different `P`.  This is the shape C419 asks for,
+provided a direct incidence-type and locally closed realization-stratum check confirms that the
+two extensions lie in one fixed-incidence moduli problem rather than merely in the same coarse
+generator family.
+**Why it may matter / strongest question:** C419 may be able to start from this pair and replace
+its symbolic candidate search by a direct determinant-stratum certification.  Is their complete
+original-and-adjoint incidence ledger fixed scheme-theoretically along one normalized parameter
+stratum?
+**Evidence:** CHECKED lead — exact `F_7` arithmetic in the C418 generator found the same-leg
+collision; the C419 determinant/saturation gate has not been run.
+**Status:** open lead.

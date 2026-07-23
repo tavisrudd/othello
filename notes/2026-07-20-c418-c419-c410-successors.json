@@ -1,0 +1,765 @@
+{
+  "ej2_closeout": {
+    "all_point_histogram_difference_left_minus_right": {
+      "coefficients_ascending": {
+        "2": -1,
+        "3": 3,
+        "4": -2,
+        "5": -1,
+        "6": 1,
+        "7": -1,
+        "8": 2,
+        "9": -1
+      },
+      "raw_moments_0_through_3": [
+        0,
+        0,
+        0,
+        -12
+      ]
+    },
+    "all_point_polynomial_factorization": "-x^2(x-1)^3(x^4+x^3+x^2-1)",
+    "all_point_secant_load_definition": "lambda_B(X)=sum_{L through X} binom(|B intersect L|,2)",
+    "inside_outside_identity": {
+      "inside": "lambda_B(P)=6+R(P) for P in B",
+      "outside": "lambda_B(Q)=mu(Q) for Q outside B",
+      "verified_on_both_witnesses": true
+    },
+    "interpretation": "the inside and outside quadratic defects cancel; forgetting the boundary restores exact strength two with first global survival cubic",
+    "opportunity": "lambda_B is a natural unpointed cubic separator outside U, while its inside/outside split is the minimal pointed quadratic completion"
+  },
+  "ej3_reusable_mechanism": {
+    "consequence": "equal line-section histograms force lambda moments through degree two; the raw cubic difference is 6 times the C3 difference",
+    "factorial_moment_identities": {
+      "C3_definition": "C3(B)=sum_X sum_{distinct L1<L2<L3 through X}m_L1 m_L2 m_L3",
+      "order_1": "sum_X binom(lambda_X,1)=(q+1)sum_L m_L",
+      "order_2": "sum_X binom(lambda_X,2)=(q+1)sum_L binom(m_L,2)+sum_{L<M}m_L m_M",
+      "order_3": "sum_X binom(lambda_X,3)=(q+1)sum_L binom(m_L,3)+sum_{L!=M}binom(m_L,2)m_M+C3(B)"
+    },
+    "notation": [
+      "s_L=|B intersect L|",
+      "m_L=binom(s_L,2)",
+      "lambda_B(X)=sum_{L through X}m_L"
+    ],
+    "reusable_proof_mechanism": "classify selected pair-items by whether their supporting secants use one, two, or three distinct lines; only the three-line class asks for concurrency geometry",
+    "witness_C3": {
+      "left": 166,
+      "right": 168
+    },
+    "witness_raw_cubic_check": -12
+  },
+  "ej_tt_closeout": {
+    "base_field_adjoint_depth_formula": "D(L)=N-1 for external L; D(L)=N-q-1+|B intersect L| otherwise",
+    "base_field_depth_formula_verified": {
+      "left": true,
+      "right": true
+    },
+    "open_mystery": "a conceptual local bijection explaining equality of every universal Q-coefficient beyond the certified cross-incidence ledger is not yet known",
+    "repair_histogram_difference_left_minus_right": {
+      "coefficients_ascending": {
+        "1": -1,
+        "2": 2,
+        "3": -1
+      },
+      "raw_moments_0_through_3": [
+        0,
+        0,
+        -2,
+        -12
+      ]
+    },
+    "repair_polynomial_factorization": "-x(x-1)^2",
+    "settled": [
+      "base-field adjoint depth equality follows from the common line-section histogram",
+      "repair, puncture, and syndrome separation first survives quadratically",
+      "the quadratic separator is invariant under translating the pointed scalar gauge"
+    ],
+    "syndrome_histogram_difference_left_minus_right": {
+      "coefficients_ascending": {
+        "2": -1,
+        "3": 3,
+        "4": -2,
+        "5": -1,
+        "6": 1
+      },
+      "raw_moments_0_through_3": [
+        0,
+        0,
+        2,
+        36
+      ]
+    },
+    "syndrome_polynomial_factorization": "x^2(x-1)^2(x^2+x-1)",
+    "triple_secant_degree_sequences": {
+      "left": [
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "right": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3
+      ]
+    },
+    "tt_opportunities": [
+      {
+        "content": "the first missing repair and syndrome moments are quadratic, so adjoining that pointed tensor is the cheapest invariant that separates the witness",
+        "opportunity": "minimal pointed quadratic completion",
+        "status": "free consequence recorded; no new task required"
+      },
+      {
+        "content": "the base-field depth and cross-incidence terms follow from the section histogram; only the universal Q-coefficient matching still lacks a hand bijection",
+        "opportunity": "localize the unexplained universal equality",
+        "status": "open mystery"
+      },
+      {
+        "content": "the shared-base extension scan also contains a same-leg U collision with different P, suggesting an immediate fixed-incidence-moduli calibration",
+        "opportunity": "C419 calibration candidate",
+        "status": "incidental lead logged; outside C418 stop rule"
+      }
+    ]
+  },
+  "family_scans_before_stop": {
+    "c408_common_named_seventh_point": {
+      "U_fibre_count": 27,
+      "candidate_count": 102,
+      "largest_U_fibre": 14,
+      "pointed_separating_U_fibres": 4
+    },
+    "four_endpoint_disjoint_secants_plus_one_point": {
+      "U_fibre_count": 11,
+      "candidate_count": 51,
+      "largest_U_fibre": 8,
+      "pointed_separating_U_fibres": 0
+    },
+    "pasch_plus_one_point": {
+      "U_fibre_count": 6,
+      "candidate_count": 51,
+      "largest_U_fibre": 12,
+      "pointed_separating_U_fibres": 0
+    }
+  },
+  "field": 7,
+  "kernel_witness": {
+    "different_P": true,
+    "integer_coefficients": [
+      1,
+      -1
+    ],
+    "left": {
+      "P": {
+        "coordinate_repair_availability": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ]
+        ],
+        "excluded_syndrome_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            14
+          ],
+          [
+            2,
+            13
+          ],
+          [
+            3,
+            12
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            6,
+            1
+          ]
+        ],
+        "excluded_syndrome_multiplicities": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          6
+        ],
+        "line_section_histogram": [
+          [
+            0,
+            18
+          ],
+          [
+            1,
+            26
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "punctured_dual_weight_two_counts": [
+          6,
+          6,
+          12,
+          12,
+          12,
+          12,
+          12
+        ]
+      },
+      "P_digest": "13966e73c9ee09e355d48904ce1eed3d570b73622cd24bbd18de5fee9de85add",
+      "U": {
+        "characteristic_polynomial_ascending": [
+          -77,
+          94,
+          -18,
+          1
+        ],
+        "weighted_adjoint": {
+          "adjoint_line_count": 48,
+          "cross_incidence_correction_by_depth": {
+            "11": 26,
+            "12": 9,
+            "13": 4,
+            "17": 18
+          },
+          "indexed_copy_count": 94,
+          "projective_depth_count_polynomials_q2_q_1": {
+            "0": [
+              1,
+              -47,
+              280
+            ],
+            "1": [
+              0,
+              14,
+              -98
+            ],
+            "11": [
+              0,
+              0,
+              26
+            ],
+            "12": [
+              0,
+              0,
+              9
+            ],
+            "13": [
+              0,
+              0,
+              4
+            ],
+            "17": [
+              0,
+              0,
+              18
+            ],
+            "2": [
+              0,
+              23,
+              -161
+            ],
+            "3": [
+              0,
+              10,
+              -70
+            ],
+            "4": [
+              0,
+              1,
+              -7
+            ]
+          }
+        }
+      },
+      "U_digest": "083c20dcf422f8f5fcabf405b76c7c3e69dcce0b3d7a8ba8989d7d08a468d562",
+      "checks": {
+        "arrangement_line_count": 18,
+        "essential_arrangement": true,
+        "external_closure_recovers_complement": true,
+        "simple_size_seven": true,
+        "spanning": true
+      },
+      "mask": 17730702967048,
+      "points": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          3,
+          1
+        ],
+        [
+          1,
+          4,
+          1
+        ],
+        [
+          1,
+          5,
+          1
+        ]
+      ]
+    },
+    "primitive": true,
+    "right": {
+      "P": {
+        "coordinate_repair_availability": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        "excluded_syndrome_histogram": [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            14
+          ],
+          [
+            2,
+            14
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            4,
+            10
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "excluded_syndrome_multiplicities": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          5
+        ],
+        "line_section_histogram": [
+          [
+            0,
+            18
+          ],
+          [
+            1,
+            26
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "punctured_dual_weight_two_counts": [
+          6,
+          6,
+          6,
+          12,
+          12,
+          12,
+          18
+        ]
+      },
+      "P_digest": "80ebf0b1781f57c543290b4a279d17ced78c49c98c5c97ce7d4996876a48ec79",
+      "U": {
+        "characteristic_polynomial_ascending": [
+          -77,
+          94,
+          -18,
+          1
+        ],
+        "weighted_adjoint": {
+          "adjoint_line_count": 48,
+          "cross_incidence_correction_by_depth": {
+            "11": 26,
+            "12": 9,
+            "13": 4,
+            "17": 18
+          },
+          "indexed_copy_count": 94,
+          "projective_depth_count_polynomials_q2_q_1": {
+            "0": [
+              1,
+              -47,
+              280
+            ],
+            "1": [
+              0,
+              14,
+              -98
+            ],
+            "11": [
+              0,
+              0,
+              26
+            ],
+            "12": [
+              0,
+              0,
+              9
+            ],
+            "13": [
+              0,
+              0,
+              4
+            ],
+            "17": [
+              0,
+              0,
+              18
+            ],
+            "2": [
+              0,
+              23,
+              -161
+            ],
+            "3": [
+              0,
+              10,
+              -70
+            ],
+            "4": [
+              0,
+              1,
+              -7
+            ]
+          }
+        }
+      },
+      "U_digest": "083c20dcf422f8f5fcabf405b76c7c3e69dcce0b3d7a8ba8989d7d08a468d562",
+      "checks": {
+        "arrangement_line_count": 18,
+        "essential_arrangement": true,
+        "external_closure_recovers_complement": true,
+        "simple_size_seven": true,
+        "spanning": true
+      },
+      "mask": 34364098304,
+      "points": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          3,
+          6
+        ]
+      ]
+    },
+    "same_U": true
+  },
+  "pretests": {
+    "common_core_pasch": {
+      "centered_feature_rank": 3,
+      "eligible_defect_quotient_dimension": 3,
+      "part_sizes": [
+        4,
+        4
+      ],
+      "radical_one_dimensional": false,
+      "radical_separates_parts": false,
+      "restriction_full": true,
+      "restriction_ranks": [
+        3,
+        3
+      ],
+      "rigidity_pretest_passes": false,
+      "second_moment_radical_dimension": 0,
+      "second_moment_rank": 3,
+      "zero_sum_hyperplane_dimensions": [
+        3,
+        3
+      ]
+    },
+    "four_endpoint": {
+      "centered_feature_rank": 2,
+      "eligible_defect_quotient_dimension": 2,
+      "part_sizes": [
+        2,
+        2
+      ],
+      "radical_one_dimensional": false,
+      "radical_separates_parts": false,
+      "restriction_full": true,
+      "restriction_ranks": [
+        1,
+        1
+      ],
+      "rigidity_pretest_passes": false,
+      "second_moment_radical_dimension": 0,
+      "second_moment_rank": 2,
+      "zero_sum_hyperplane_dimensions": [
+        1,
+        1
+      ]
+    },
+    "incidence_2_switch": {
+      "centered_feature_rank": 2,
+      "eligible_defect_quotient_dimension": 2,
+      "part_sizes": [
+        2,
+        2
+      ],
+      "radical_one_dimensional": false,
+      "radical_separates_parts": false,
+      "restriction_full": true,
+      "restriction_ranks": [
+        1,
+        1
+      ],
+      "rigidity_pretest_passes": false,
+      "second_moment_radical_dimension": 0,
+      "second_moment_rank": 2,
+      "zero_sum_hyperplane_dimensions": [
+        1,
+        1
+      ]
+    },
+    "pasch": {
+      "centered_feature_rank": 3,
+      "eligible_defect_quotient_dimension": 3,
+      "part_sizes": [
+        4,
+        4
+      ],
+      "radical_one_dimensional": false,
+      "radical_separates_parts": false,
+      "restriction_full": true,
+      "restriction_ranks": [
+        3,
+        3
+      ],
+      "rigidity_pretest_passes": false,
+      "second_moment_radical_dimension": 0,
+      "second_moment_rank": 3,
+      "zero_sum_hyperplane_dimensions": [
+        3,
+        3
+      ]
+    }
+  },
+  "schema": "c418-named-balanced-trades-v1",
+  "stop": {
+    "eight_point_gate_opened": false,
+    "incidence_2_switch_generated": false,
+    "reason": "first exact seven-point pointed separator found"
+  },
+  "structural_filters": {
+    "common_core_pasch": {
+      "reason": "two distinct common-core block-lines would contain both the core and their Pasch intersection point",
+      "status": "projectively_unrealizable"
+    }
+  }
+}
