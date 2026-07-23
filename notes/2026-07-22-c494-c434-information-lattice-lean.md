@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** local gate complete; user-launched post-fix review required
+**Status:** final prose repair landed; exact-target rebuild pending shared-tree availability
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, owned artifacts, validation, axiom evidence, trust boundaries,
@@ -107,12 +107,12 @@ SHA-256 `b1ba013747d9fa1d9c9b4f6055a26a7dc53a953babca366057c7094f46549d27`; the 
 has SHA-256 `1285cf4d23878b3798834dae2eb4d16777651ab5395b0477c93e0e644dc7ccaf`.
 The tracked checksum manifest verifies all three files.
 
-Final Lean source hashes at code commit `48dfa0a6`:
+Final Lean source hashes at code commit `9e7eeec7`:
 
 | artifact | bytes | SHA-256 |
 |:--|--:|:--|
-| `ClebschInformationLatticeB3.lean` | 10,991 | `cbfe737bcd3eeef6b0ac2c6c3a5f92b6ba4653927c8db3f6cb79f5e7a5f4af7f` |
-| `ClebschInformationLatticeH3.lean` | 11,147 | `928d5e23bf2595e9a50979ea35d311331266de3611c4ccf9905f0763c37b1698` |
+| `ClebschInformationLatticeB3.lean` | 10,991 | `341b817845898c3ae19d2002c3c8a4700c2fa3082df1bcabbcb5cb13703e6c26` |
+| `ClebschInformationLatticeH3.lean` | 11,147 | `6da74b5a6da49429bca94fd45a19b2020819ce1117eb88b3abbccd195ce1b0c7` |
 | `Gates/ClebschInformationLattice.lean` | 3,358 | `f6423e1200dd70608e52c0c6c8d955784c32231cf4deafd8bffcf882c01e5d7d` |
 
 Lean checks the displayed data exhaustively at B3 and H3 only.  Kernel `decide` proves the finite
@@ -187,6 +187,14 @@ finrank/strictness arguments, trust exclusions, and gate scope.
 Because these are post-review source changes, completion requires a user-launched post-fix review
 after the complete local gate passes.  Every post-fix issue and its disposition belongs here, and
 completion requires recorded final `GO`.
+
+The user-launched post-fix reviewer accepted every mathematical, provenance, trust, gate, and C320
+item but returned `NO-GO` for one required prose repair: the B3/H3 module headers still said
+“exhaustive native evaluation” after the implementation had moved entirely to kernel `decide`.
+Commit `9e7eeec7` changes only those two phrases to “exhaustive kernel evaluation”; guarded
+single-file elaboration then passed for both leaves.  The user explicitly approved waiving another
+independent post-fix review for this two-line trust-prose correction.  That waiver does not waive
+the ordinary exact-target rebuild and trace-current confirmation.
 
 ### Mystery ledger (ej closeout)
 
