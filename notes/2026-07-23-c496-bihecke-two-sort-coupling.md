@@ -175,11 +175,37 @@ Second-order (ej2) leads, exact gaps, all unowned successor probes (not acted on
   per move) while *value* is the static multiplicative overlay `χ`. If the factorization is
   recursion-stable, C80(b) reduces to: show the additive drain reaches a live locus where `χ` forces a
   P child. Recursion-stability is unproven (the depth-1 caveat above).
-- **Gauss sum as depletion diagnostic.** Whether `Σ_live χ(u)` is unbalanced (`≠ 0`) at a genuinely
-  depleted order past q=17. Needs the gated q=29 census or a depleted-order object.
 - **Cross-lane (crowns): Weil-representation identity.** Whether the cap-lane coupling `M_inc ⊗ M_χ`
   and the crowns-lane metaplectic carrier (C472/C489/C501/C502) are two shadows of one
   `SL_2(F_q)` Weil representation. Foreign lane; route through the normal reserve/allocation process.
+
+`tt` pass (2026-07-23) added three more, banked here with provenance:
+
+- **[C520] The live pair is a resolvent quadratic; P/N is a discriminant square class (tt #1).**
+  The two live u-values `{8,9}` have coincident symmetric functions `8+9 ≡ 8·9 ≡ 6 (mod 11)`, so they
+  are the roots of `t² − 6t + 6`; equivalently `(8−1)(9−1) ≡ 1`, and they are swapped by the Möbius
+  involution `u ↦ u/(u−1)` (fixed points `{0,2}`). Value `= χ(u)` is anti-invariant under it while
+  `χ(u−1)` is invariant. So the knife-edge is the arithmetic of one quadratic — its two roots landing
+  in opposite square classes — converting the depletion sequence `{11,17}` from a census fact into a
+  question about a resolvent discriminant's Legendre symbol across `q` (possibly closed-form). Caveat:
+  two live points admit many swaps; verify `u ↦ u/(u−1)` is the frame-induced conic involution before
+  trusting it. Owned by **C520** (gated on C80; needs the general-q live locus).
+- **[C520] Weil bound, not census, for C82 abundance (tt #3).** The character sum
+  `#P = Σ_live (1 − χ(u))/2` is a curve-point count; if the live locus is bounded-degree algebraic
+  uniformly in `q`, RH-for-curves (Weil) gives abundance for all large odd `q` at once, bypassing the
+  order-by-order census and the gated q=29 run. Deliverable: exhibit the live locus as a
+  bounded-degree algebraic family. Owned by **C520**.
+- **Correction (tt #4) — the first-moment Gauss sum is symmetry, not signal.** `Σ_live χ = 0` is
+  *forced* by the C495 `C2` endpoint swap (it pairs the two live orbits equal-and-opposite), so it
+  measures a symmetry, not depletion. A usable depletion diagnostic must be a `C2`-invariant higher
+  moment (or a sum the swap does not annihilate). Supersedes the earlier "Gauss sum as depletion
+  diagnostic" lead. Folded into C520's obligations.
+- **Framing sharpening (tt #2) — the coupling is the sign-isotypic Hecke bimodule.** The permutation
+  module `F[Ω]` splits into isotypic pieces; the bi-Hecke `e_K F[G] e_H` is exactly its
+  trivial-isotypic (bi-invariant) corner, and value lives in the sign(`χ`)-isotypic component. So the
+  coupling is a single bimodule after all — the sign-isotypic one — and the obstruction is that the
+  double-coset (trivial-corner) bimodule is blind to it. A cleaner statement than the two-module
+  tensor; the substance (obstruction + design) is unchanged.
 
 No residual mystery on the q=11 object itself.
 
