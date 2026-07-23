@@ -1,0 +1,437 @@
+{
+  "cases": [
+    {
+      "G_order": 336,
+      "G_plus_order": 168,
+      "H_name": "S4",
+      "H_order": 24,
+      "all_clauses_pass": true,
+      "canonical_K_order": 8,
+      "clause_1_strata": {
+        "J_normalizes_K": true,
+        "J_pairs_orbits_across_sheets": true,
+        "K_orbit_sizes": [
+          1,
+          1,
+          2,
+          2,
+          4,
+          4
+        ],
+        "K_size_c_distribution_over_outer_involutions": [
+          {
+            "K_order": 6,
+            "count": 16,
+            "num_K_orbits": 6
+          },
+          {
+            "K_order": 8,
+            "count": 12,
+            "num_K_orbits": 6
+          }
+        ],
+        "canonical_K_order": 8,
+        "minus_sheet_orbit_sizes": [
+          1,
+          2,
+          4
+        ],
+        "num_K_orbits_c": 6,
+        "num_outer_involutions": 28,
+        "omega_size": 14,
+        "omega_size_is_2q": true,
+        "pass": true,
+        "plus_sheet_orbit_sizes": [
+          1,
+          2,
+          4
+        ],
+        "sheet_sizes": [
+          7,
+          7
+        ],
+        "sizes_are_J_paired_equal_lists": true,
+        "stab_M0_equals_reflection_parent": true,
+        "stab_M0_order": 24,
+        "two_sheets_of_size_q": true
+      },
+      "clause_2_intrinsic_middle": {
+        "D_prime_alone_separates_all_orbits": false,
+        "D_prime_constant_on_K_orbits": true,
+        "D_prime_definition": "(|M cap M0|, |M cap J M0|) shared unordered edges",
+        "joint_fibres_equal_K_orbits": true,
+        "joint_map_fibre_count": 6,
+        "orbit_D_prime_labels": [
+          {
+            "D_prime": [
+              4,
+              0
+            ],
+            "sheet": 0,
+            "size": 1,
+            "stabilizer_order": 8
+          },
+          {
+            "D_prime": [
+              0,
+              0
+            ],
+            "sheet": 0,
+            "size": 2,
+            "stabilizer_order": 4
+          },
+          {
+            "D_prime": [
+              0,
+              1
+            ],
+            "sheet": 0,
+            "size": 4,
+            "stabilizer_order": 2
+          },
+          {
+            "D_prime": [
+              0,
+              4
+            ],
+            "sheet": 1,
+            "size": 1,
+            "stabilizer_order": 8
+          },
+          {
+            "D_prime": [
+              0,
+              0
+            ],
+            "sheet": 1,
+            "size": 2,
+            "stabilizer_order": 4
+          },
+          {
+            "D_prime": [
+              1,
+              0
+            ],
+            "sheet": 1,
+            "size": 4,
+            "stabilizer_order": 2
+          }
+        ],
+        "pass": true,
+        "sheet_coordinate_is_load_bearing": true
+      },
+      "clause_3_bihecke_dimension": {
+        "direct_double_coset_count_in_G": 6,
+        "mackey_bihecke_dimension": 6,
+        "orbit_count_equals_double_coset_count": true,
+        "pass": true
+      },
+      "clause_4_algebra_chain": {
+        "J_fixes_constants_pointwise": true,
+        "J_permutes_orbit_indicators_in_pairs": true,
+        "J_swaps_sheet_indicators": true,
+        "c430_chain": "affine radical -> sheet indicators -> equal-sum product algebra -> sign line",
+        "c430_recovery_algorithm_splits_sheet_indicators": true,
+        "chain_dimensions_G_Gplus_K_Omega": [
+          1,
+          2,
+          6,
+          14
+        ],
+        "expected_chain": [
+          1,
+          2,
+          6,
+          14
+        ],
+        "orbit_refinement_inclusion": true,
+        "pass": true,
+        "sheet_indicators_lie_in_F_Gplus_level": true,
+        "sign_line_J_negated": true,
+        "sign_line_K_invariant": true,
+        "sign_line_in_K_orbit_constant_odd_part": true,
+        "strict_dimension_chain_1_2_c_2q": true
+      },
+      "clause_5_sign_law_moments": {
+        "consumed_min_nonzero_signed_moment_degree": 3,
+        "consumed_mu1_zero": true,
+        "consumed_mu2_zero": true,
+        "consumed_mu3_nonzero": true,
+        "consumed_vanishing_halves_are_psl_sheets": true,
+        "pass": true,
+        "source": "C406 certificate (portable signed moments)"
+      },
+      "clause_6_reconstruction": {
+        "K_orbit_stabilizer_orders": [
+          2,
+          4,
+          8
+        ],
+        "fibres_are_single_K_orbits": true,
+        "num_singleton_fibres": 2,
+        "pass": true,
+        "profile_plus_coset_decoration_determines_M": true,
+        "singleton_fibres_are_base_and_J_mate": true
+      },
+      "field_order": 7,
+      "information_lattice_2q_c_2_1": {
+        "levels": [
+          14,
+          6,
+          2,
+          1
+        ],
+        "meaning": [
+          "decorated matchings (Omega = G/H)",
+          "K\\G/H double-coset strata",
+          "PSL sheets",
+          "undecorated conic child"
+        ]
+      },
+      "type": "B3"
+    },
+    {
+      "G_order": 1320,
+      "G_plus_order": 660,
+      "H_name": "A5",
+      "H_order": 60,
+      "all_clauses_pass": true,
+      "canonical_K_order": 12,
+      "clause_1_strata": {
+        "J_normalizes_K": true,
+        "J_pairs_orbits_across_sheets": true,
+        "K_orbit_sizes": [
+          1,
+          1,
+          4,
+          4,
+          6,
+          6
+        ],
+        "K_size_c_distribution_over_outer_involutions": [
+          {
+            "K_order": 10,
+            "count": 36,
+            "num_K_orbits": 6
+          },
+          {
+            "K_order": 12,
+            "count": 30,
+            "num_K_orbits": 6
+          }
+        ],
+        "canonical_K_order": 12,
+        "minus_sheet_orbit_sizes": [
+          1,
+          4,
+          6
+        ],
+        "num_K_orbits_c": 6,
+        "num_outer_involutions": 66,
+        "omega_size": 22,
+        "omega_size_is_2q": true,
+        "pass": true,
+        "plus_sheet_orbit_sizes": [
+          1,
+          4,
+          6
+        ],
+        "sheet_sizes": [
+          11,
+          11
+        ],
+        "sizes_are_J_paired_equal_lists": true,
+        "stab_M0_equals_reflection_parent": true,
+        "stab_M0_order": 60,
+        "two_sheets_of_size_q": true
+      },
+      "clause_2_intrinsic_middle": {
+        "D_prime_alone_separates_all_orbits": false,
+        "D_prime_constant_on_K_orbits": true,
+        "D_prime_definition": "(|M cap M0|, |M cap J M0|) shared unordered edges",
+        "joint_fibres_equal_K_orbits": true,
+        "joint_map_fibre_count": 6,
+        "orbit_D_prime_labels": [
+          {
+            "D_prime": [
+              6,
+              0
+            ],
+            "sheet": 0,
+            "size": 1,
+            "stabilizer_order": 12
+          },
+          {
+            "D_prime": [
+              0,
+              0
+            ],
+            "sheet": 0,
+            "size": 4,
+            "stabilizer_order": 3
+          },
+          {
+            "D_prime": [
+              0,
+              1
+            ],
+            "sheet": 0,
+            "size": 6,
+            "stabilizer_order": 2
+          },
+          {
+            "D_prime": [
+              0,
+              6
+            ],
+            "sheet": 1,
+            "size": 1,
+            "stabilizer_order": 12
+          },
+          {
+            "D_prime": [
+              0,
+              0
+            ],
+            "sheet": 1,
+            "size": 4,
+            "stabilizer_order": 3
+          },
+          {
+            "D_prime": [
+              1,
+              0
+            ],
+            "sheet": 1,
+            "size": 6,
+            "stabilizer_order": 2
+          }
+        ],
+        "pass": true,
+        "sheet_coordinate_is_load_bearing": true
+      },
+      "clause_3_bihecke_dimension": {
+        "direct_double_coset_count_in_G": 6,
+        "mackey_bihecke_dimension": 6,
+        "orbit_count_equals_double_coset_count": true,
+        "pass": true
+      },
+      "clause_4_algebra_chain": {
+        "J_fixes_constants_pointwise": true,
+        "J_permutes_orbit_indicators_in_pairs": true,
+        "J_swaps_sheet_indicators": true,
+        "c430_chain": "affine radical -> sheet indicators -> equal-sum product algebra -> sign line",
+        "c430_recovery_algorithm_splits_sheet_indicators": true,
+        "chain_dimensions_G_Gplus_K_Omega": [
+          1,
+          2,
+          6,
+          22
+        ],
+        "expected_chain": [
+          1,
+          2,
+          6,
+          22
+        ],
+        "orbit_refinement_inclusion": true,
+        "pass": true,
+        "sheet_indicators_lie_in_F_Gplus_level": true,
+        "sign_line_J_negated": true,
+        "sign_line_K_invariant": true,
+        "sign_line_in_K_orbit_constant_odd_part": true,
+        "strict_dimension_chain_1_2_c_2q": true
+      },
+      "clause_5_sign_law_moments": {
+        "canonical_K_order_matches_C411_A4": true,
+        "consumed_J_negates_profiles": true,
+        "consumed_cubic_first_coordinate_witness_mod_11": 6,
+        "consumed_profile_plane_equations_mod_11": [
+          [
+            2,
+            2,
+            1,
+            0
+          ],
+          [
+            9,
+            8,
+            0,
+            1
+          ]
+        ],
+        "consumed_separates_six_double_cosets": true,
+        "consumed_signed_moment_nonzero_deg_1_2_3": [
+          false,
+          false,
+          true
+        ],
+        "consumed_weighted_relation": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "consumed_weights": [
+          1,
+          4,
+          6
+        ],
+        "orbit_sizes_match_C411_weights_1_4_6": true,
+        "pass": true,
+        "source": "C411 certificate (C378 depth machinery)"
+      },
+      "clause_6_reconstruction": {
+        "K_orbit_stabilizer_orders": [
+          2,
+          3,
+          12
+        ],
+        "c379_decorated_injection_on_a5_parent_locus": true,
+        "c379_matching_stabilizer_order": 60,
+        "fibres_are_single_K_orbits": true,
+        "num_singleton_fibres": 2,
+        "parent_recovery_via_c379": true,
+        "pass": true,
+        "profile_plus_coset_decoration_determines_M": true,
+        "singleton_fibres_are_base_and_J_mate": true
+      },
+      "field_order": 11,
+      "information_lattice_2q_c_2_1": {
+        "levels": [
+          22,
+          6,
+          2,
+          1
+        ],
+        "meaning": [
+          "decorated matchings (Omega = G/H)",
+          "K\\G/H double-coset strata",
+          "PSL sheets",
+          "undecorated conic child"
+        ]
+      },
+      "type": "H3"
+    }
+  ],
+  "inputs": {
+    "2026-07-19-c378-clebsch-common-duality.json": "3b311e5ee8ba5d09510fe18e4c5f3e30223c804d49b7c5b206e125ce1ad879dc",
+    "2026-07-19-c378-clebsch-common-duality.py": "e45e71c5e87ccc334fab3b926e5189373e24485adf11ed1cbaacfc6771610bdc",
+    "2026-07-19-c379-clebsch-deep-hole-extension.json": "3cc3a7008d91a06f95504cbced7adc2eef9b304355a3a56bb64bdd0bea19ad8d",
+    "2026-07-20-c399-coxeter-number-conic-phase.py": "f90f8bf9ef85667ffeb937c4b3f07c54407edcfc965fb4cf9b45f7f854097275",
+    "2026-07-20-c406-matching-module.json": "e39bf131f3d818dfbcbeb1f2d4dfa9a6ba7645c41cdd6fe9600957c0fe1dc4b2",
+    "2026-07-20-c406-matching-module.py": "a1fef3680a7d12d64a1c483e7032cbaa3a1f575883b2bd8b964d58aa8ac38d51",
+    "2026-07-20-c406-matching-orbit-scout.json": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246",
+    "2026-07-20-c411-double-coset-hecke.json": "23f0a100356f0a369f00d81011e8d8d6b9d867b9de45a7b0625fc2889323b014",
+    "2026-07-20-c430-conceptual-balanced-half-rigidity.json": "eebfd0525c94ac0bcb7965ab33b6d11a698242e608d9d1a40cebaa0a2b451098"
+  },
+  "schema": "c434-double-coset-information-lattice-v1",
+  "theorem": {
+    "algebra_chain": "F(G\\G/H) subset F(G+\\G/H) subset F(K\\G/H) subset F(Omega); C430 radical->sheets->equal-sum->sign-line sits inside functorially",
+    "information_lattice": "2q -> c -> 2 -> 1 (decorated matchings -> K\\G/H strata -> sheets -> child)",
+    "middle_realization": "fibres of M -> (sheet(M), D'(M)) with D'(M)=(|M cap M0|,|M cap J M0|) equal the K-orbits",
+    "name": "portable_KGH_recovery_information_lattice",
+    "setup": "G=PGL_2(q) conic stabilizer, G+=PSL_2(q), H=Stab_G(M0)=reflection parent, Omega=G-orbit of M0 with |Omega|=2q split by G+ into two q-sheets exchanged by any outer J; K=Stab_G(M0) cap Stab_G(J M0) for the canonical outer involution J."
+  },
+  "verdict": "PORTABLE K\\G/H RECOVERY THEOREM VERIFIED AT q=7 (B3) AND q=11 (H3); MIDDLE STRATUM REALIZED BY INTRINSIC EDGE DATA; C430 CHAIN FUNCTORIALLY EMBEDDED"
+}
