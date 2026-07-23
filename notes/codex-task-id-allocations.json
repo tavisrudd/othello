@@ -539,8 +539,17 @@
       "last": 502,
       "purpose": "C489-successor hexad program: explore (outer-swap + triple Maslov index on the A5 hexad vs C472 central scalar) then gated exploit",
       "sequence": 60
+    },
+    {
+      "count": 5,
+      "first": 503,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 507,
+      "purpose": "Paper-1 post-C428 Lean expansion: arithmetic gluing, Witt-Hadamard-Mathieu capstone, torsor-Rosetta close, finite survival boundaries, and mixed semantic interfaces",
+      "sequence": 61
     }
   ],
-  "next_id": 503,
+  "next_id": 508,
   "schema": "codex-task-id-allocations-v1"
 }
