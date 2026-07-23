@@ -284,3 +284,21 @@ a canonical stabilizer character equal to `PGL/PSL` sign, or as a `V` versus `V�
 characteristic two the latter can merge into C493's nonsplit transfer extension. Explicit negative
 filters retain C501/C502's corrections: complement pairing is insufficient, and a normalizer
 quotient acting trivially on `Out(Γ)` cannot carry the bit.
+
+## 2026-07-23 — C511 Phase-3 Weil-roof synthesis
+
+C511 closed the Phase-3 gate with a revised Paper-2 `GO`.  Of the six frozen Rosetta candidates,
+three are theorem-level (`mu_3` minimality, the one-bit torsor, and Frobenius/split-prime
+orientation), two are exact frozen-case checks (design polarity and QR perfect-code outer
+symmetry), and theta parity is dead as a bit detector.  The paper-facing positive table therefore
+has five honest rows; theta moves to the failure/erasure boundary.
+
+The sequel's roof is the abstract Modular Gateway Theorem and its carrier mechanism, not one
+metaplectic theta object.  The q=7/11 matching sheets give the two geometric realizations, while
+q=23 proves that the endotrivial unique-Ext carrier extends after the exceptional degree-q
+permutation bridge disappears.  The even Hadamard degeneration and global signed gluing remain a
+separate positive mechanism block.  C472, C489, and C501 supply mandatory no-go clauses for the
+genuine signed six-dimensional Weil action, invariant outer-odd quadratic refinement, and literal
+Witt/Maslov reading of the central word.  External novelty language remains gated by a
+claim-specific literature audit.  Full synthesis:
+`notes/2026-07-23-c511-weil-roof-phase-3-synthesis.md`.
