@@ -593,8 +593,17 @@
       "last": 512,
       "purpose": "general persistent-or-arithmetically-bounded polar-flag theorem for split-free Hankel systems",
       "sequence": 66
+    },
+    {
+      "count": 1,
+      "first": 513,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 513,
+      "purpose": "prove the fixed-redundancy-eight polar-induction application via the three-marker splitting cover and contained-flag classification",
+      "sequence": 67
     }
   ],
-  "next_id": 513,
+  "next_id": 514,
   "schema": "codex-task-id-allocations-v1"
 }
