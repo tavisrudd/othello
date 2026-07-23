@@ -622,6 +622,17 @@ task list.  Current high-value items:
   The C447/C448 and Weil-roof intake reframes the open target as orbit purity or an equivariant
   opponent-marked response packet, with a bounded q=11 two-match causality gate:
   [`2026-07-22 cap orbit-packet memo`](../2026-07-22-cap-orbit-packet-response-frontier.md).
+- **C495–C497 [ALLOCATED, cap] — C434 crowns cross-lane transfer probes into C80's open ledger.**
+  Fixed run order **C495 → C497 → C496**.  C495 (q=11 identification falsifier: is C80's 22-move
+  `C5`-orbit packet `1,1,5,5,5,5` the C434 `D10` J-class two-sheet coset space, with `u=XZ/Y²`
+  square class = sheet sign?) is the **gate**: cheapest (both objects frozen, 22 points), and it
+  decides whether C434's double-coset language matches C80's frozen objects before investing in the
+  larger stratification.  C497 (q17 stratum-constancy of `Y_NK0`-membership/P-purity by
+  double-coset label — the bulk-descent crown) runs only after C495's verdict.  C496 (bi-Hecke
+  bimodule `e_K F[G] e_H` as the two-sorted coupling) is last.  Allocation, provenance, and the
+  q∈{7,11}-only structure caveat (C497 borrows C434's method, not its group structure, at q17):
+  C80 report probe section (`../2026-07-12-c80-bulk-exhaustion-probe.md`) and the transfer note
+  `../2026-07-22-c434-c80-cross-lane-transfers.md`.
 - **C30 follow-up:** anchored route-C books for q=17/q=19 are emitted and `certcheck` PASS.  The
   generated-checker refactor now compiles the q17/Class0 split sample (`Base`, `Class0Base`, 15
   step-group leaves, and `Class0`). The full v5 tree has 326 node leaves + 326 step leaves;

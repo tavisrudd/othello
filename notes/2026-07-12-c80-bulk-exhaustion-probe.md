@@ -598,6 +598,10 @@ Caveats recorded in the transfer note: the C434 Borel/Bruhat structure exists on
 q ∈ {7,11} (no subgroup of order `(q²−1)/2` at q=13/17/19), and C434 contributes nothing to the
 (b) descent-measure gap.
 
+**Fixed run order: C495 → C497 → C496.** C495 is the gate (cheapest; both objects frozen at 22
+points) — it decides whether C434's double-coset language matches C80's frozen packet before the
+larger q17 stratification. C497 (bulk-descent crown) runs only after C495's verdict; C496 is last.
+
 ## Reproduction
 
 ```bash
