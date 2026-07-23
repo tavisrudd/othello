@@ -354,12 +354,13 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   Separately the *bound* lifts semantically: `≥ 32` holds for every invariant eight-arc in `PG(2,25)`
   with exactly two fixed points, through both projective normalizations.
 
-  **The boundary is explicit and load-bearing: exhaustion is proved for normalized rows, not for
-  semantic arcs.** The lower bound is lifted; exhaustion is not, and that asymmetry *is* the gap. So
-  32 must not be presented as the exact semantic minimum, nor the five classes as a complete extremal
-  classification, until the exhaustion statement is carried through both normalizations — a stating
-  step over existing machinery rather than new mathematics, and the open frontier here. Mask
-  cardinality is a lower bound rather than the exact legal count except at the five rows.
+  **The normalization boundary has now been crossed semantically.** Every invariant eight-arc in
+  `PG(2,25)` with exactly two fixed points has at least 32 alternatives, and equality holds exactly
+  when some base-field collineation carries it into the certified 1,600-row union. Thus **32 is the
+  exact semantic minimum and the five normalized orbits are the complete semantic extremal set, up
+  to normalization**. The statement does not assert a unique normalizing collineation, enumerate or
+  count the semantic arcs, or extend to other fixed-point counts, arc sizes, or fields. Mask
+  cardinality remains only a lower bound away from the five equality rows.
 
 - **Completion-core rigidity** — robustness theory for maximal feasible configurations. **Now
   library-only, not a paper:** the generic completion/transversal synthesis has no family-specific
@@ -1247,13 +1248,20 @@ revision it fails exactly the three regression tests.
 
 ## 7. Lean formalization ledger
 
-**Trust posture:** every terminal theorem's `#print axioms` is exactly `[propext,
-Classical.choice, Quot.sound]` — **no `sorry`, no `native_decide`; kernel-complete** — with the sole
-exceptions being a small, named, deliberately quarantined set of **imported literature statements**:
+**Legacy per-gate trust posture:** the recorded terminal `#print axioms` reports are exactly
+`[propext, Classical.choice, Quot.sound]` — **no `sorry`, no `native_decide`; kernel-complete** —
+with the sole exceptions being a small, named, deliberately quarantined set of **imported literature
+statements**:
 two consequences of Dye's theorem, Stichtenoth's self-dual TVZ theorem, and prime equidistribution in
 arithmetic progressions. Each is isolated in its own module, each stays visible in the axiom report of
 every result depending on it, and no result silently inherits one. Certificate cap-legality is checked
 by the **Lean kernel** (`decide` / `checkCap_sound`), not `native_decide` and not trusted.
+
+Those clean reports and the newer repository-wide extraction audit are different evidence layers.
+The former are stored outputs from individual build gates; the latter is meant to rederive the
+dependency and terminal-axiom facts from the tracked project as a whole. No project module has yet
+passed that extraction path, so the legacy clean reports have **not** been independently reproduced
+by the new auditor and must not be described as a completed repository-wide trust audit.
 
 Namespaces: **CapGame** (finite build-game kernel + affine cap theorem + reusable mirror
 lemmas), **ProjectiveCap** (the flagship — Binary / Elliptic / Hyperbolic / PolarSegre mirrors, the
@@ -1390,6 +1398,15 @@ end-to-end Lean formalization; its theorem package and sharp negative boundaries
 The shared release blocker therefore still binds the mature front-half papers, but no longer
 describes every Clebsch task.
 
+**Maturity boundary:** no paper has been published or externally refereed. A successful managed
+Lean compile of a real project target has likewise not yet been observed, and the new
+repository-wide extraction audit has not reproduced the legacy per-gate axiom reports. The
+mathematics has also changed materially under checking: the dihedral paper still carries a known
+value-affecting case split, the repair-hypergraph transfer theorem required an all-zero branch and
+an additional hypothesis, and several proposed Clebsch identifications were replaced by sharp
+negative theorems. These are reasons to take the current statements and their boundaries seriously,
+not reasons to assign them the status of externally validated results.
+
 **Several papers moved backwards or changed shape on their own evidence, which is the gate
 working.** Paper 6's former mathematical freeze has cleared: the exact `PG(2,25)` minimum is
 semantically `32`, and the five normalized extremal orbits lift to the complete semantic extremal
@@ -1398,9 +1415,9 @@ spine, and carries a **known value-affecting correction** as its first release-b
 exhaustive census refuted its own boxed formula, so the affected statements need a case split applied
 to the body before any polishing, and the density theorem must stay explicitly conditional on its one
 named axiom rather than reading as an axiom-free formal proof. Paper 5's transfer theorem was likewise
-found **not exact as stated** and repaired (§3). Paper 7 still has no manuscript and its library is
-planned rather than built — the hardest formalization in the portfolio, with an external collaborator
-recorded as the fallback if it stalls rather than as a first move.
+found **not exact as stated** and repaired (§3). Paper 7 now has an N1-only manuscript, but its
+library is planned rather than built — the hardest formalization in the portfolio, with an external
+collaborator recorded as the fallback if it stalls rather than as a first move.
 
 **The one dependency, downgraded.** `3 → 4` was recorded as a *hard* dependency; it is now a
 **publication-allocation ruling, not a mathematical one** — `clebsch` reproves the identification, cites
@@ -1519,16 +1536,20 @@ is why the extraction spine is the first move rather than a packaging chore.
 
 ## 9. Validation gates & reproducibility
 
-Every result carries an independent check; nothing is trusted on a single computation.
+The validation policy requires independent checks for promoted computational results. The bullets
+below distinguish checks already recorded from the newer repository-wide trust checks that remain
+unrun.
 
 - **Queens:** `solver_lineage_agrees` (naive / iso-flat / iso-window / iso-dense return identical
   values) + exact distinct counts (n=12 = **1,060,823**, n=14 ≈ 29.2M) + Jenrich n≤16 reproduction.
 - **Othello:** cross-engine value-equivalence (minimax / alphabeta / ordered / strong compute
   identical black-centred values) + the independent grid move/flip reference + exact endgame solves
   **6 / −40 / 4**.
-- **Lean:** every terminal theorem's `#print axioms` is exactly `[propext, Classical.choice,
-  Quot.sound]`; certificate cap-legality is kernel-checked (`decide` / `checkCap_sound`), never
-  `native_decide`.
+- **Lean:** legacy gate reports record terminal `#print axioms` as `[propext, Classical.choice,
+  Quot.sound]`, subject to the named quarantined literature axioms; certificate cap-legality is
+  kernel-checked (`decide` / `checkCap_sound`), never `native_decide`. The new extractor has not yet
+  reproduced those reports on a project module, and no real project target has completed a green
+  managed build.
 - **Solver / census cross-checks:** exact solves are confirmed by independent move-order and
   canonicalization variants; the S4 raw memo dumps are rules-checked by an independent early-break
   proof-DAG validator (e.g. q=23: all `241,627,613` records, zero game-equation failures).
