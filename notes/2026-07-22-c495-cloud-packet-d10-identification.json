@@ -1,0 +1,316 @@
+{
+  "c434_d10_two_sheet_space": {
+    "K_is_d10": true,
+    "K_order": 10,
+    "five_orbit_sheet_split": {
+      "0": 2,
+      "1": 2
+    },
+    "k_orbit_sizes": [
+      1,
+      1,
+      5,
+      5,
+      5,
+      5
+    ],
+    "omega_size": 22,
+    "orbit_rows": [
+      {
+        "d_prime": [
+          6,
+          1
+        ],
+        "sheet": 0,
+        "size": 1,
+        "stabilizer_order": 10
+      },
+      {
+        "d_prime": [
+          0,
+          0
+        ],
+        "sheet": 0,
+        "size": 5,
+        "stabilizer_order": 2
+      },
+      {
+        "d_prime": [
+          0,
+          1
+        ],
+        "sheet": 0,
+        "size": 5,
+        "stabilizer_order": 2
+      },
+      {
+        "d_prime": [
+          1,
+          6
+        ],
+        "sheet": 1,
+        "size": 1,
+        "stabilizer_order": 10
+      },
+      {
+        "d_prime": [
+          0,
+          0
+        ],
+        "sheet": 1,
+        "size": 5,
+        "stabilizer_order": 2
+      },
+      {
+        "d_prime": [
+          1,
+          0
+        ],
+        "sheet": 1,
+        "size": 5,
+        "stabilizer_order": 2
+      }
+    ],
+    "per_sheet_orbit_sizes": {
+      "0": [
+        1,
+        5,
+        5
+      ],
+      "1": [
+        1,
+        5,
+        5
+      ]
+    },
+    "sheet_gives_2_2_split_of_5orbits": true,
+    "two_d10_fixed_points_one_per_sheet": true
+  },
+  "c80_cloud_packet_states": [
+    {
+      "c5_orbit_sizes": [
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "class": 4,
+      "endpoint_parameter": 1,
+      "five_orbit_u_sqclass": [
+        [
+          "1",
+          "sq"
+        ],
+        [
+          "8",
+          "nonsq"
+        ],
+        [
+          "9",
+          "sq"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "fixed_point_u": [
+        [
+          "0",
+          "zero"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "has_internal_d10": false,
+      "legal_opponent_moves": 22,
+      "nonsquare_coset_preserves_single_state": false,
+      "setwise_stabilizer_nonsquare_elements": 0,
+      "setwise_stabilizer_order_in_PGL2": 5,
+      "u_square_class_5orbit_split": {
+        "inf": 1,
+        "nonsq": 1,
+        "sq": 2
+      },
+      "u_square_class_gives_2_2_split": false
+    },
+    {
+      "c5_orbit_sizes": [
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "class": 4,
+      "endpoint_parameter": 4,
+      "five_orbit_u_sqclass": [
+        [
+          "1",
+          "sq"
+        ],
+        [
+          "8",
+          "nonsq"
+        ],
+        [
+          "9",
+          "sq"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "fixed_point_u": [
+        [
+          "0",
+          "zero"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "has_internal_d10": false,
+      "legal_opponent_moves": 22,
+      "nonsquare_coset_preserves_single_state": false,
+      "setwise_stabilizer_nonsquare_elements": 0,
+      "setwise_stabilizer_order_in_PGL2": 5,
+      "u_square_class_5orbit_split": {
+        "inf": 1,
+        "nonsq": 1,
+        "sq": 2
+      },
+      "u_square_class_gives_2_2_split": false
+    },
+    {
+      "c5_orbit_sizes": [
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "class": 7,
+      "endpoint_parameter": 3,
+      "five_orbit_u_sqclass": [
+        [
+          "1",
+          "sq"
+        ],
+        [
+          "8",
+          "nonsq"
+        ],
+        [
+          "9",
+          "sq"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "fixed_point_u": [
+        [
+          "0",
+          "zero"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "has_internal_d10": false,
+      "legal_opponent_moves": 22,
+      "nonsquare_coset_preserves_single_state": false,
+      "setwise_stabilizer_nonsquare_elements": 0,
+      "setwise_stabilizer_order_in_PGL2": 5,
+      "u_square_class_5orbit_split": {
+        "inf": 1,
+        "nonsq": 1,
+        "sq": 2
+      },
+      "u_square_class_gives_2_2_split": false
+    },
+    {
+      "c5_orbit_sizes": [
+        1,
+        1,
+        5,
+        5,
+        5,
+        5
+      ],
+      "class": 7,
+      "endpoint_parameter": 4,
+      "five_orbit_u_sqclass": [
+        [
+          "1",
+          "sq"
+        ],
+        [
+          "8",
+          "nonsq"
+        ],
+        [
+          "9",
+          "sq"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "fixed_point_u": [
+        [
+          "0",
+          "zero"
+        ],
+        [
+          "inf",
+          "inf"
+        ]
+      ],
+      "has_internal_d10": false,
+      "legal_opponent_moves": 22,
+      "nonsquare_coset_preserves_single_state": false,
+      "setwise_stabilizer_nonsquare_elements": 0,
+      "setwise_stabilizer_order_in_PGL2": 5,
+      "u_square_class_5orbit_split": {
+        "inf": 1,
+        "nonsq": 1,
+        "sq": 2
+      },
+      "u_square_class_gives_2_2_split": false
+    }
+  ],
+  "field_order": 11,
+  "findings": {
+    "c434_omega_is_internal_d10_set": true,
+    "c5_set_isomorphic": true,
+    "c80_cap_frame_nonsquare_coset_is_interstate_endpoint_swap": true,
+    "c80_packet_has_internal_d10": false,
+    "c80_setwise_stabilizer_is_exactly_c5": true,
+    "d10_or_g_equivariant_identification_holds": false,
+    "endpoint_states_distinct_overlap": 16,
+    "u_square_class_equals_sheet_sign": false
+  },
+  "inputs": {
+    "notes/2026-07-08-intrusion-census.py": "6f1f7e1e36ff3a3ed5d5f0c410b8d6bacb5be23a73503e669489e4cf06f14c83",
+    "notes/2026-07-20-c406-matching-orbit-scout.json": "fec533bb91f864100ebf5875952244d9d9e03ed69a0abda767360907a55bb246",
+    "notes/2026-07-21-c447-cap-knife-edge.json": "8c1e22da244ef2879273d3c0aeefc590e645386f70270e329d030fe48a5906c7",
+    "notes/2026-07-22-c434-double-coset-information-lattice.py": "b1ba013747d9fa1d9c9b4f6055a26a7dc53a953babca366057c7094f46549d27",
+    "rust/scripts/c80_c447_cloud_packet.py": "308a3b6c3ff6476e0ac6ec7a7902c19edffd97a59c9f0eda94593a7518ae6721"
+  },
+  "question": "Is C80's 22-move cloud packet G-equivariantly the C434 D10 J-class two-sheet coset space, with C5 orbits refining the double-coset strata and u = XZ/Y^2 square class equal to the sheet sign?",
+  "schema": "c495-cloud-packet-d10-identification-v1",
+  "verdict": "FALSIFIER_NO: C80 cloud packet is NOT G-equivariantly the C434 D10 two-sheet coset space. Isomorphic as C5-sets ([1,1,5,5,5,5]); but C80's single-state 22-move packet has setwise stabilizer exactly C5 in PGL_2(11) (no internal D10), the cap-frame D10 nonsquare coset is an inter-state endpoint swap, and u's square class splits the four 5-orbits 2-1-1 rather than realizing the C434 sheet sign's 2-2 split."
+}
