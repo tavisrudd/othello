@@ -1,0 +1,623 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\newcommand{\F}{\mathbf F}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PGammaL}{\operatorname{P\Gamma L}}
+\newcommand{\PRS}{\operatorname{PRS}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Deep}{\operatorname{Deep}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\Osc}{\operatorname{Osc}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\NRC}{\operatorname{NRC}}
+
+\title{Reed--Solomon Deep Holes and Reconstruction:\\
+Results Established through 23 July 2026}
+\author{Tavis Rudd}
+\date{23 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note summarizes the established results of a programme on projective
+Reed--Solomon deep holes, determinant invariants, and reconstruction from deepest-syndrome
+data.  There are three principal theorem packages: a complete all-field
+redundancy-three reconstruction theory; a complete projective-semilinear
+classification of the deep holes of $\PRS(q-4)$, of redundancy five; and
+all-field/high-field classifications in redundancies six and seven.  The
+redundancy-seven theorem is complete for $q\geq37$, while an orbit-reduced
+calibration below $37$ remains open.  We state the mathematical results,
+indicate the proof methods, and distinguish theorem proofs from bounded
+computer-assisted classifications.
+\end{abstract}
+
+\section{Coding-theoretic framework}
+
+For a projective Reed--Solomon code of length $q+1$ and redundancy $r$, the
+parity-check columns form the rational normal curve
+\[
+ \nu_{r-1}\bigl(\mathbf P^1(\F_q)\bigr)
+ \subset \mathbf P^{r-1}(\F_q).
+\]
+A projective syndrome is deep precisely when it lies in no span of $r-2$
+distinct rational points of this curve.  Equivalently, the corresponding
+Hankel-kernel linear system of binary forms has no totally split squarefree
+member of degree $r-1$.
+
+For redundancy three, let $A$ be a six-arc in $\mathbf P^2(\F_q)$.  Its
+complete projective deepest-syndrome locus is
+\[
+ U(A)=\mathbf P^2(\F_q)\setminus
+ \bigcup_{\{a,b\}\subset A}\overline{ab}.
+\]
+Thus $u\in U(A)$ exactly when adjoining $u$ to a parity-check matrix for
+$A$ gives a one-column MDS extension.
+
+\section{Redundancy three: determinant atlases}
+
+Let
+\[
+ A=(\mathbf P(h_1),\ldots,\mathbf P(h_6))\subset\mathbf P(V),
+ \qquad \dim V=3,
+\]
+and choose a volume form $\omega\in\det(V)^*$.  For $u\in U(A)$ define
+\[
+ d_{ij}(u)=\omega(u,h_i,h_j).
+\]
+The following hold in every characteristic, including supports containing
+the point at infinity.
+
+\begin{enumerate}
+\item Modulo the exact edge-torus action
+\[
+ d_{ij}\longmapsto \lambda a_i a_jd_{ij},
+\]
+balanced four-cycle monomials generate the full invariant quotient.  They
+separate finite-field torus orbits without any square-root choice.
+
+\item For rank-two syndromes, and support size at least five, the four-cycle
+atlas reconstructs the syndrome.
+
+\item The only structural contraction is the rank-one, or conic, locus.  On
+that locus all raw balanced atlases coincide; the unique missing datum is
+the radical point of the induced alternating form in
+$\mathbf P^1(\F_q)\setminus S$.  No higher balanced edge monomial repairs
+this contraction.
+
+\item Projection from $u$ induces
+\[
+ \beta_u(\bar x,\bar y)=\omega(u,x,y)
+\]
+on $V/Fu$.  The determinant atlas is exactly the Pl\"ucker presentation of
+the labelled projected sextic and hence a point of $M_{0,6}$.  There are
+explicit inverses both from the full Pl\"ucker array and from three
+normalized cross-ratios.
+\end{enumerate}
+
+The proof is algebraic invariant theory together with explicit lattice
+generation for the edge torus and direct Pl\"ucker inversion.
+
+\subsection{The first sharp rank-one collision}
+
+For
+\[
+ S=\{0,1,2,3,4,\infty\}\subset\mathbf P^1(\F_{11}),
+\]
+the full semilinear support stabilizer is $V_4$, with complement orbits
+\[
+ \{5,10\},\qquad \{6,7,8,9\}.
+\]
+Rank-one syndromes whose radicals lie in these two orbits have the same
+raw all-one atlas but are sharply separated by the radical stabilizer
+orbit.  Their legal-continuation counts are respectively $11$ and $7$,
+and their continuation graphs are
+\[
+ K_5\sqcup C_5\sqcup K_1,\qquad K_5\sqcup2K_1.
+\]
+Nontrivial radical stabilizer is the cardinality-minimal intrinsic
+discriminator.  The finite assertions are covered by an atomic certificate
+and a structurally independent replay.
+
+\section{Multi-projection reconstruction and Gale association}
+
+Normalize a labelled parent by
+\[
+\begin{split}
+ h_1&=(1,0,0),\quad h_2=(0,1,0),\quad h_3=(0,0,1),\\
+ h_4&=(1,1,1),\quad h_5=(1,a,b),\quad h_6=(1,c,d).
+\end{split}
+\]
+Each projected sextic supplies one exact linear compatibility row in
+\[
+ z=(a,b,c,d,bc,ad).
+\]
+Two coherent projections leave a cubic surface of generic dimension two;
+three leave a plane cubic of generic dimension one.  Four independent
+projections give a line whose product-compatibility cubic contains the
+universal collision $h_4=h_5=h_6$.  Removing that factor leaves a separable
+quadratic.
+
+Consequently, four abstract coherent projections recover exactly a
+two-sheeted parent cover, not a rationally unique parent.  Explicit
+examples over $\F_{101}$ and $\F_{256}$, with trivial common diagonal
+stabilizer, show that the ambiguity persists in odd and even characteristic
+and after diagonal $S_6$-unlabelling.
+
+The deck involution is Gale association.  On the normalized chart put
+\[
+ L_0=-\det(h_4,h_5,h_6),\qquad
+ L_1=\det\bigl(\nu_2(h_1),\ldots,\nu_2(h_6)\bigr).
+\]
+The kernel cubic factors as
+\[
+ st(L_0s+L_1t).
+\]
+Thus $L_1=0$ is exactly the conic locus and is the reduced branch divisor
+in every characteristic.  The equation $L_0=0$ is instead an arc-boundary
+collinearity.  Every additional abstract coherent projection preserves the
+same Gale pair and cannot choose a sheet.  The proof uses exact elimination,
+determinant identities, Gale duality, symbolic certification, and an
+independent Gale replay.
+
+\subsection{Semilinear descent}
+
+All gauges, compatibility equations, residual cubics, Gale transforms,
+branch divisors, and complete-child incidence cuts commute with
+coefficientwise Frobenius.  Off the conic divisor, the only geometric
+descent obstruction is the $C_2$ Gale-sheet class:
+\begin{itemize}
+\item a Kummer square class in odd characteristic;
+\item an Artin--Schreier trace bit in characteristic two.
+\end{itemize}
+Connected gauge groups contribute no additional obstruction.  If $H$ is
+the common diagonal stabilizer, an unlabelled sheet descends exactly when
+the Frobenius sheet bit lies in the image of
+\[
+ H\longrightarrow C_2.
+\]
+A surjective image identifies the sheets and sacrifices uniqueness.  Over
+$\F_{q^m}$ the Gale bit is multiplied by $m$: odd extensions preserve it,
+and even extensions split it.
+
+The exceptional order-three colour collapse over $\F_8$ is separate:
+Frobenius acts freely as two $3$-cycles on the six colours.  This is a
+lossy $C_3$ quotient, not a Gale obstruction or a failure of Hilbert 90.
+The proof combines explicit frame-overlap formulae, finite-field Kummer
+and Artin--Schreier theory, Hilbert 90 for the connected frame gauges, and
+a finite-stabilizer image criterion.
+
+\section{Complete-child reconstruction}
+
+Retaining the literal complete child $L=U(A)$ adds information absent from
+abstract projections.  Parent recovery from selected centres $T\subset L$
+is exactly injectivity of the coherent signature map $\Sigma_T$,
+equivalently the intersection of the residual cubic family with the
+ambient incidence condition
+\[
+ U(A')=L.
+\]
+
+The all-field result is as follows.
+\begin{itemize}
+\item For $q\geq16$, the complete child alone determines the unlabelled
+six-arc.
+\item The same child-rigidity holds for every $q=13$ fibre.
+\item In every remaining nonempty recoverable fibre, at most three centres
+suffice.
+\item The only failures are empty children and the $q=7$ two-point
+conic-complement child.  In the latter case all $294$ literal parents have
+the same coherent signature even after both available centres are used.
+\end{itemize}
+
+The complete nontrivial base-size table is
+\[
+\begin{array}{c@{\quad}c@{\quad}c@{\quad}c}
+\toprule
+q&|L|&\text{literal parents}&\text{minimum centres}\\
+\midrule
+8&4&10&3\\
+9&6&8&3\\
+9&7&2&2\\
+9&8&4&2\\
+9&8&2&2\\
+11&12&22&3\\
+\bottomrule
+\end{array}
+\]
+and every other nonempty residual fibre through $q=13$ is a singleton.
+
+For $q\geq16$ the proof is a secant-union rigidity argument.  For small
+fields it is an exhaustive classification of child-derived fifteen-line
+decompositions followed by an exact collision hypergraph.  For every pair
+of parents and every one of the $720$ diagonal label transporters, the
+calculation records the set of centres that distinguish them and computes
+the exact transversal number.  An independent implementation recomputes
+every emitted parent, atlas, transporter comparison, and hitting set.
+
+\subsection{Exceptional non-GRS controls}
+
+There are exactly four semilinear classes of non-GRS six-arcs with
+nonempty deepest-syndrome locus contained in a conic, at
+\[
+ q=8,9,9,11,
+\]
+with child sizes $4,6,7,12$ and projective deep-hole orbit profiles
+\[
+ 4,\qquad6,\qquad1+6,\qquad12.
+\]
+A deletion-trace invariant, obtained by intersecting the unique conic
+through each five-point deletion with the complete child, recovers the
+parent in the six-point $q=9$ and twelve-point $q=11$ cases, but not in
+the $q=8$ or seven-point $q=9$ cases.
+
+For the recovering six-point $q=9$ fibre, the eight parents form two
+sheets of four perfect matchings of $K_6$ minus a perfect matching.  Their
+shared-trace graph is
+\[
+ K_{4,4}\setminus4K_2\cong Q_3.
+\]
+The order-$48$ fixed-child group is the full cube automorphism group.  This
+example passes decorated recovery but fails the proposed modular
+refinement: the relevant Gram rank is $3$, and the Sylow-$C_3$
+augmentation module is projective and hence zero in the stable category.
+The stronger coherent determinant atlas recovers all four exceptional
+families with exact minimum centre counts
+\[
+ 3,\quad3,\quad2,\quad3.
+\]
+
+\section{Redundancy five: complete classification of \texorpdfstring{$\PRS(q-4)$}{PRS(q-4)}}
+
+For every prime power $q\geq7$,
+\[
+ \rho\bigl(\PRS(q-4)\bigr)=4.
+\]
+This is unconditional, by the Seroussi--Roth completeness range for the
+quartic normal rational curve.
+
+For a syndrome $f=(a_0:\cdots:a_4)$, let
+\[
+ H_f=
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3\\
+ a_1&a_2&a_3&a_4
+ \end{pmatrix}.
+\]
+Off the curve, $\ker H_f$ is a pencil of binary cubics.  A
+characteristic-free recurrence and confluent-Vandermonde argument proves
+\[
+ f\text{ is deep}
+ \quad\Longleftrightarrow\quad
+ \ker H_f\text{ has no totally split squarefree cubic}.
+\]
+
+The complete $\PGammaL_2$ classification consists of:
+\begin{itemize}
+\item the tangent family, with $q(q+1)$ points;
+\item the conjugate $\sigma$-secant family, with
+\[
+ \frac{q(q+1)(q-1)}2
+\]
+points;
+\item if $q\equiv2\pmod3$, rational osculating-pair intersections, with
+$q(q+1)/2$ points;
+\item if $q\equiv1\pmod3$, conjugate osculating-pair intersections, with
+$q(q-1)/2$ points;
+\item in characteristic $3$, the common nucleus
+\[
+ (0:0:1:0:0)
+\]
+of all osculating planes, together with one wild Artin--Schreier orbit of
+size $(q^2-1)/2$ and stabilizer $2q$, selected by a nonsquare condition.
+\end{itemize}
+
+The arithmetic mechanism is exact.  Tame cyclic degree-three covers are
+deep precisely when their order-three deck transformation is
+Frobenius-twisted.  In characteristic three, the corresponding condition
+is that the additive map $z\mapsto z^3+az$ have irrational kernel.
+
+For geometrically $S_3$ covers, the off-diagonal fibre-square curve has
+bidegree $(2,2)$, arithmetic genus one, and is absolutely irreducible.
+Aubry--Perret gives
+\[
+ \#Y(\F_q)\geq q-2\sqrt q.
+\]
+After deleting at most twelve diagonal and branch points, a split cubic
+exists for every $q\geq23$.  Hence no sporadic orbit survives above $19$.
+
+\subsection{Complete sporadic table}
+
+The sporadic classification is organized by the Frobenius type of the
+degree-four branch divisor and, in the fully split case, by its
+$j$-invariant:
+\[
+\begin{array}{>{\raggedright\arraybackslash}p{0.27\textwidth}
+              >{\centering\arraybackslash}p{0.13\textwidth}
+              >{\raggedright\arraybackslash}p{0.43\textwidth}}
+\toprule
+\text{branch type}&\text{stabilizer}&\text{fields and orbit sizes}\\
+\midrule
+$1+1+1+1$, $j=0$&
+$A_4$&
+$7:28,\ 13:182,\ 19:570$\\
+$1+1+1+1$, $j\ne0$&
+$V_4$&
+$9:180,\ 11:330,\ 13:546,\ 17:1224$\\
+$1+1+2$&
+$C_2$&
+$7:2\mathbin{\times}168,\ 8:3\mathbin{\times}252,\
+9:2\mathbin{\times}360,\ 11:660$\\
+$2+1+1$ with a cusp&
+$C_2$&
+$7:168$\\
+$1+3$&
+$C_3$&
+$7:112$\\
+\bottomrule
+\end{array}
+\]
+The $A_4$ cases are exactly equianharmonic branch tetrads, characterized
+by $j=0$, equivalently by vanishing of the binary-quartic invariant $I$.
+The three size-$252$ orbits over $\F_8$ form a free
+$\Gal(\F_8/\F_2)$-torsor and fuse semilinearly.
+
+These sporadic configurations persist geometrically over larger fields
+but cease to be deep because split fibres appear.  Their geometry is
+uniform; their deepness is a bounded-field arithmetic phenomenon.
+
+The proof combines characteristic-free Hankel apolarity, confluent
+Vandermonde arguments, stratification by pencil gcd and degree-three
+monodromy, finite-field covering-curve estimates, and a two-implementation
+exhaustive census for every prime power $7\leq q\leq49$.  A
+claim-specific literature audit found no pre-emption of the new families
+or completeness theorem, subject to its stated database-coverage caveat.
+
+\section{Redundancy six: all-field existence and orbit counts}
+
+For $\PRS(q-5)$, the covering radius is $5$ for every $q\geq7$.  A
+syndrome is deep exactly when its Hankel-kernel net of binary quartics has
+no totally split squarefree quartic.
+
+The persistent stratum has a quadratic, rather than growing-degree,
+common factor and contains exactly
+\[
+ \frac{q(q+1)^2}{2}
+\]
+points.  It consists of tangent fibres, whose common quadratic is a
+rational square, and $\sigma$-fibres, whose common quadratic is
+irreducible.
+
+For tangent fibres, if $p\ne5$ there is one orbit with
+\[
+ (|O|,|\Stab|)=\bigl(q(q+1),q-1\bigr).
+\]
+In characteristic five it splits into
+\[
+ (q+1,q(q-1)),\qquad(q^2-1,q).
+\]
+For an irreducible quadratic, identify the fibre with the norm-one torus
+$T$.  Its stabilizer acts by $z\mapsto z^5$ and inversion.  If
+$5\nmid q+1$ there is one orbit.  If $5\mid q+1$, then
+$T/T^5\cong C_5$ modulo inversion gives three orbits with stabilizers
+$10,5,5$.  Frobenius acts on $C_5$ by multiplication by $p$.
+
+The complete trivial-gcd exceptional inventory is
+\[
+\begin{array}{c@{\quad}ccccc}
+\toprule
+q&7&8&9&11&13\\
+\midrule
+\#\PGL_2\text{-orbits}&18&11&4&2&1\\
+\bottomrule
+\end{array}
+\]
+together with one $q+1$ point characteristic-two nucleus orbit for every
+\[
+ q=2^m,\qquad m\text{ odd},\quad m\geq5,
+\]
+and no other trivial-gcd orbits.
+
+The nucleus family is represented by
+\[
+ \langle1,t,t^4\rangle
+\]
+and is deep exactly when $m$ is odd.  One odd-characteristic echo occurs
+at $q=11$, where six collision lines exhaust the twelve rational points
+of the relevant conic.  The second $q=11$ orbit has normal form
+\[
+ W=\langle u,tu,u^2+5\rangle,\qquad u=t^2-2,
+\]
+with all fifteen rational split-quadratic factor candidates sharing a
+root.  The remaining small-field orbit tables are completely certified,
+although intrinsic normal forms for every orbit at $q=7,8,9,13$ have not
+yet been compressed into a final conceptual list.
+
+The large-field proof uses the first-polar line
+\[
+ r\longmapsto(a_1-ra_0,\ldots,a_5-ra_4)\subset\mathbf P^4
+\]
+to reduce quartic-net splitting to the redundancy-five cubic-pencil
+classification.  Maximal minors of the quintic catalecticant bound
+intersections with the secant cubic by $3$; the tame cyclic locus costs
+at most $4$; pointed $g^2_4$ ramification costs at most $6$.  In
+characteristics three and two, possible contained polar lines are
+classified separately.
+
+The computational component is an elementwise exhaustive census in
+eleven fields, with independent definition-based and Hankel-based scans,
+complete orbit closure, stabilizer and Frobenius checks, and a separately
+implemented replay.
+
+\section{Redundancy seven: interim theorem}
+
+Let $f=(a_0:\ldots:a_6)$ be a binary sextic syndrome and
+\[
+ H_f=
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3&a_4&a_5\\
+ a_1&a_2&a_3&a_4&a_5&a_6
+ \end{pmatrix}.
+\]
+For $r\in\mathbf P^1(\F_q)$, contraction gives
+\[
+ b(r)=(a_1-ra_0,\ldots,a_6-ra_5),
+\]
+with the evident value at infinity, and
+\[
+ H_f((t-r)g)=H_{b(r)}g.
+\]
+The contractions trace a first-polar line in redundancy-six syndrome
+space.  Thus $f$ is non-deep exactly when some contraction has a totally
+split squarefree quartic avoiding the marked root $r$.  The avoidance
+condition is essential.
+
+Let
+\[
+ C_f=
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3&a_4\\
+ a_1&a_2&a_3&a_4&a_5\\
+ a_2&a_3&a_4&a_5&a_6
+ \end{pmatrix}.
+\]
+The polar line lies entirely in the redundancy-six catalecticant secant
+closure if and only if $\rank C_f\leq2$.  After removing rank-one points
+and rational split secants, this leaves exactly the persistent tangent
+and conjugate-$\sigma$ stratum, again with
+\[
+ \frac{q(q+1)^2}{2}
+\]
+points.
+
+\subsection{Persistent orbit law}
+
+The complete orbit law is obtained from $T/T^6$ modulo inversion and
+Frobenius.  Put $d=\gcd(6,q+1)$.  An inversion-fixed class gives
+\[
+ (|O|,|\Stab|)
+ =
+ \left(\frac{q(q^2-1)}{2d},2d\right),
+\]
+whereas a paired class gives
+\[
+ (|O|,|\Stab|)
+ =
+ \left(\frac{q(q^2-1)}d,d\right).
+\]
+Frobenius acts by multiplication by $p$ on $C_d$.  On tangent fibres,
+if $p\nmid6$ there is one orbit
+\[
+ (q(q+1),q-1).
+\]
+In characteristics two and three there are two:
+\[
+ (q+1,q(q-1)),\qquad(q^2-1,q).
+\]
+These formulae have been independently replayed at
+$q=4,5,7,8,9$, realizing $d=1,2,3,6$ and both modular cases.
+
+\subsection{The central characteristic-two point}
+
+The redundancy-six nucleus line contracts to the single central syndrome
+$e_3$.  Its web is
+\[
+ \langle1,t,t^4,t^5\rangle.
+\]
+It is deep exactly over $\F_{2^m}$ with $m$ odd.  For even $m$, the
+polynomial $t^4+t$, together with the point at infinity, gives a split
+quintic on $\mathbf P^1(\F_4)$.
+
+\subsection{High-field theorem}
+
+For every prime power $q\geq37$,
+\[
+\Deep\bigl(\PRS(q-6)\bigr)
+=
+\{\text{persistent tangent/$\sigma$ stratum}\}
+\ \cup\
+\begin{cases}
+\{e_3\},&q=2^m,\ m\text{ odd},\\
+\varnothing,&\text{otherwise}.
+\end{cases}
+\]
+Consequently the number of deep syndrome directions is
+\[
+ \frac{q(q+1)^2}{2}
+ +
+ \begin{cases}
+ 1,&q=2^m,\ m\text{ odd},\\
+ 0,&\text{otherwise}.
+ \end{cases}
+\]
+
+The proof has three quantitative ingredients:
+\begin{enumerate}
+\item a pointed trivial-gcd upgrade of the redundancy-six splitting
+theorem, using the genus-one fibre estimate with one additional forbidden
+root, valid for $q\geq37$;
+\item a bidegree union bound for gcd-one contractions, proving the
+existence of a split lift for $q\geq16$ unless the common root equals the
+marked contraction point;
+\item identification of that equality locus with ramification of a
+separable $g^3_5$, of degree at most $8$.
+\end{enumerate}
+Together with at most three secant-closure parameters and at most one
+characteristic-two nucleus parameter, the total exceptional budget is
+\[
+ 3+8+1=12<q+1.
+\]
+
+What remains open is exactly the orbit-reduced calibration for $q<37$ and
+conceptual normal forms for any additional exceptional webs.  No complete
+all-field redundancy-seven classification is asserted.
+
+\section{Proof architecture and present boundary}
+
+The results use four complementary types of proof.
+\begin{enumerate}
+\item \textbf{Exact algebraic proofs:} determinant factorization, torus
+invariant lattices, Pl\"ucker inversion, catalecticant rank criteria,
+Hankel apolarity, confluent Vandermonde arguments, Gale duality, and
+first-polar contraction identities.
+
+\item \textbf{Arithmetic-geometric proofs:} classification of degree-three
+cover monodromy, Kummer and Artin--Schreier descent, norm-one torus orbit
+arithmetic, Aubry--Perret bounds on genus-at-most-one fibre-square curves,
+ramification-degree bounds, and bidegree union bounds.
+
+\item \textbf{Finite group and incidence proofs:} stabilizer-image descent
+criteria, secant-union rigidity, exact-cover reconstruction, and collision
+hypergraph transversal calculations.
+
+\item \textbf{Certified bounded classifications:} deterministic finite-field
+censuses, exact orbit closure and stabilizer computations, frozen compact
+certificates, and independently implemented replays.  Where a replay does
+not independently establish exhaustiveness, that trusted boundary is
+stated explicitly.
+\end{enumerate}
+
+These results do not prove the general Reed--Solomon deep-hole conjecture.
+What is complete is:
+\begin{itemize}
+\item the all-field redundancy-three reconstruction theory, including its
+Gale ambiguity, semilinear descent, and exact small-field exceptions;
+\item the all-field projective-semilinear deep-hole classification at
+redundancy five;
+\item the all-field existence and orbit-count classification at redundancy
+six, with some small exceptional orbits still awaiting conceptual normal
+forms;
+\item the redundancy-seven classification for $q\geq37$, together with
+the exact persistent orbit law and central characteristic-two exception.
+\end{itemize}
+
+\end{document}
