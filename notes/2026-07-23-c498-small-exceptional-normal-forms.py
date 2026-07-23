@@ -152,6 +152,49 @@ def binary_cubic_factor_type(F, cubic):
     )
 
 
+def one_plus_three_rational_root(F, quartic):
+    """Return the unique rational root of a binary quartic of type 1+3."""
+    coefficients = list(quartic)
+    while len(coefficients) > 1 and coefficients[-1] == 0:
+        coefficients.pop()
+    infinity_multiplicity = 4 - (len(coefficients) - 1)
+    rational_factors = []
+    if infinity_multiplicity:
+        rational_factors.append((None, infinity_multiplicity))
+
+    for root in range(F.q):
+        multiplicity = 0
+        while len(coefficients) > 1 and evaluate(F, coefficients, root) == 0:
+            coefficients = divide_linear(F, coefficients, root)
+            multiplicity += 1
+        if multiplicity:
+            rational_factors.append((root, multiplicity))
+
+    if len(rational_factors) != 1 or rational_factors[0][1] != 1:
+        return False, None
+    # After the unique simple rational factor is removed, the residual
+    # homogeneous cubic has no rational projective root and is irreducible.
+    return True, rational_factors[0][0]
+
+
+def direct_net_collision_energy(replay, F, quintic):
+    basis = replay.nullspace(F, [quintic[:5], quintic[1:]], 5)
+    assert len(basis) == 3
+    root_counts = Counter()
+    for coefficients in replay.pg_points(F.q, 3):
+        quartic = tuple(
+            sum_field(F, (F.mul(c, b[i])
+                          for c, b in zip(coefficients, basis)))
+            for i in range(5)
+        )
+        is_one_plus_three, root = one_plus_three_rational_root(F, quartic)
+        if is_one_plus_three:
+            root_counts[root] += 1
+    member_count = sum(root_counts.values())
+    energy = sum(count * (count - 1) // 2 for count in root_counts.values())
+    return member_count, energy
+
+
 def histogram_key(histogram):
     return tuple(sorted(histogram.items()))
 
@@ -343,6 +386,11 @@ def build_certificate():
             assert polar_moments(profile, (1,))[0] == (
                 orbit["member_hist"].get("1+3", 0)
             )
+            direct_count, direct_energy = direct_net_collision_energy(
+                replay, F, tuple(orbit["rep"])
+            )
+            assert direct_count == orbit["member_hist"].get("1+3", 0)
+            assert direct_energy == collision_energy(profile)
             record = {
                 "rep_index": orbit["rep_index"],
                 "rep": tuple(orbit["rep"]),

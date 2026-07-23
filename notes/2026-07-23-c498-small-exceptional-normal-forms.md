@@ -61,6 +61,15 @@ appears in exactly one marked quotient pencil.  Therefore
 The first moment is merely the old net-member histogram; \(E_f\) is the new
 coherent incidence statistic.  It counts unordered pairs of \(1+3\) members
 whose unique rational linear factors agree.
+
+Equivalently, if \(X_{1+3}(W_f)\) is the set of type-\(1+3\) members, then
+\[
+E_f=\#\left\{\{h_1,h_2\}\subset X_{1+3}(W_f):
+\gcd(h_1,h_2)\text{ has a rational linear factor}\right\}.
+\]
+This is a polar-free definition internal to the quartic net.  The
+parameterized first-polar line explains the invariant, but is not needed to
+compute it.
 This realizes the C498 re-foundation intrinsically: the small exceptions
 are classified by the coherently parameterized first-polar line inside the
 C491 syndrome space, rather than by coordinate labels alone.
@@ -109,6 +118,9 @@ frozen C498 census JSON and replay implementation.  It:
 - computes the irreducible-cubic polar moments and shared-root collision
   energy, proves that the energy fingerprint classes equal Frobenius cycles,
   and verifies the first/second-moment identity above;
+- independently enumerates the quartic net itself, extracts every
+  type-\(1+3\) member and its unique rational root, and obtains the same
+  energy from the pair-gcd incidence count without quotient pencils;
   and
 - checks every semilinear orbit/stabilizer identity against
   \(|P\Gamma L_2(q)|=m|PGL_2(q)|\).
@@ -143,6 +155,12 @@ subtracts the first-moment double count and isolates the actual new datum:
 two-copy fibre-product incidence count, not an opaque hash.  In odd
 characteristic the quintic root-divisor type supplies the remaining global
 parent datum lost by the aggregated polar contractions.
+
+The fourth-order pass removes the polar parameterization from the final
+answer.  Direct enumeration inside \(W_f\) proves that \(E_f\) is exactly the
+pair-gcd incidence count on \(X_{1+3}(W_f)\).  Thus the classifier is a
+factor-coloured association statistic of the net itself; polar recursion is
+its proof mechanism, not part of its input format.
 
 No genuine C498 classification mystery remains.  The all-field split-member theorem,
 persistent fifth-power orbit law, modular nucleus recurrence, and bounded

@@ -370,7 +370,7 @@ The final small exceptional normal-form theorem
 classifies the bounded residue intrinsically.  The pointed first-polar quotient-pencil profile
 collapses to the shared-root collision energy of `1+3` net members.  Supplemented only in odd
 characteristic by the quintic root type, it separates the frozen classes up to exactly Frobenius
-fusion.
+fusion.  The energy is also the polar-free pair-gcd count inside the quartic net.
 Thus the q=7/8/9/11/13 tables compress from `18/11/4/2/1` PGL2 orbits to
 `18/5/2/2/1` PGammaL2 normal forms.  The atomic generator/JSON/checksum bundle passes, and C498 has
 no remaining theorem or classification gap.

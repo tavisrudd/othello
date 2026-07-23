@@ -53,7 +53,8 @@ the marked quotient pencil.  The complete intrinsic fingerprint is only the shar
 energy \(\sum_r\binom{I_f(r)}2\) plus, in odd characteristic, the quintic root-divisor type.  Equal
 fingerprints are exactly Frobenius cycles.  The identity
 \(\sum_r I_f(r)=N_{1+3}(W_f)\) shows that the first moment was already the net histogram; the energy
-is the genuinely new coherent statistic.
+is the genuinely new coherent statistic.  Equivalently it counts pairs of type-`1+3` net members
+whose gcd has a rational linear factor, giving a polar-free definition internal to the net.
 
 ## Exact census
 
