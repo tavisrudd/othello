@@ -160,6 +160,27 @@ every frozen orbit size; certification owned by C492):
   the invariant object is the groupoid over that choice. "Portable" should mean the Ω-level
   axiom class (two sheets, 2-transitive opposite orbits, exact factorization), of which B3/H3
   are the complete finite-geometry realizations. Owned by C492.
+
+Fifth-order (ej4) pass — the ej3 ingredients assemble into Bruhat theory (REASONED, hand-checked;
+certification folded into C492):
+
+- **`K` is a Borel subgroup of `H` under the exceptional isomorphisms.** The opposite-sheet
+  point stabilizers are the Borels of the small projective actions: `A4 = B(PSL_2(4))` on
+  `P¹(F_4)`, `D10 = B(PSL_2(5))` on `P¹(F_5)`, `S3 = B(PGL_2(3))` on `P¹(F_3)`, `D8` = pullback
+  Borel of `PGL_2(2)` on `P¹(F_2)`. As an `H`-set the golden pair's opposite sheet is
+  `P¹(F_4) ⊔ P¹(F_5)` at q=11 and `P¹(F_2) ⊔ P¹(F_3)` at q=7, with `q = (q_1+1) + (q_2+1)`.
+- **The double-coset legs are Bruhat cells and Borel transversality.** Same-type counts
+  `#K\H/S = 2` are rank-1 Bruhat decompositions `#B\G/B = 2`; cross-type counts `= 1` are the
+  exact factorizations (`A5 = A4·D10`, `S4 = D8·S3`) read as transversality of the two Borel
+  structures. Three-per-sheet = `1 fixed + 2 Bruhat` (own) and `2 Bruhat + 1 transversal`
+  (opposite); `c = 6` is Bruhat combinatorics.
+- **Structural twin of the Dickson exhaustion:** the construction requires `H` to carry two
+  small-projective-line structures at once, which only the exceptional isomorphisms supply; the
+  next consecutive pair `(7,8)` fails on order (`|PGL_2(7)| = 336 ≠ 504 = |PSL_2(8)|`). The
+  ladder has no third rung.
+- **Paper-facing door (one line, owned by the clebsch manuscript owners):** the q=11 conic
+  configuration contains `P¹(F_4)` and `P¹(F_5)` as the golden pair's cross-sheet strata — a
+  "one object, many languages" sentence with exact provenance here.
 - **The middle count is `6` at both verified `q` — and the two cases are the whole domain
   (second ej pass, REASONED, not machine-checked).** The hypotheses force
   `|H| = |G|/2q = (q²−1)/2`. By Dickson's subgroup classification for `PSL_2(q)`, cyclic and
