@@ -77,5 +77,7 @@ is complete.  Redundancy eight is evidence and a falsifier, not the deliverable.
 
 ## Status
 
-Queued for a fresh session.
-
+Complete.  The field-independent theorem, base-case verification, exact remaining monodromy gaps,
+and mystery ledger are in
+`notes/2026-07-23-c512-general-polar-flag-theorem.md`; the claim-specific audit is
+`notes/2026-07-23-c512-general-polar-flag-literature-audit.md`.

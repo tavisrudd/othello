@@ -4,11 +4,9 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C491, C499, and C509 complete; C498 active (all-field split-member theorem and
+**Status:** C475--C491, C499, C509, and C512 complete; C498 active (all-field split-member theorem and
 persistent-stratum PGL2/PGammaL2 orbit law complete; small exceptional normal forms remain);
 C510 queued (bounded one-twist TRS audit/geometry pilot);
-C512 queued as the fresh-session priority (general persistent-or-arithmetically-bounded polar
-flags);
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
 syndrome atlas with a projected sextic and proves that one diagonal support correspondence across
@@ -365,8 +363,24 @@ into a sextic polar line.  C417's additive-cocycle lemma explains the tangent sp
 the Borel translation coefficient is 6, so exactly characteristics two and three split as
 `1+(q-1)`.  C498/C509 now expose the higher-value successor theorem: coherently parameterized
 polar flags should be persistent/modular when contained in the lower bad locus and
-  arithmetically bounded otherwise.  C512 owns this general theorem and is the fresh-session
-  priority.
+  arithmetically bounded otherwise.  C512 now proves this general theorem.
+
+## Closed base — C512
+
+`notes/2026-07-23-c512-general-polar-flag-theorem.md` constructs the
+pointed contraction functor over arbitrary base schemes in divided-power coordinates, including
+infinity, base change, iterated markers, and the forbidden diagonal.  Its contained-or-transverse
+theorem is effective: if the lower identity-Frobenius twist has genus `g` and deletion degree
+`delta`, and the polar line has transverse/collision budget `b+c`, then
+`max(floor((g+sqrt(g^2+delta))^2)+1,b+c)` bounds every nonpersistent split-free field.  Persistent
+flags are exactly catalecticant rank-two tangent/sigma components with `T/T^(r-1)` modulo
+inversion/Frobenius and tangent cocycle `u*z=z+(r-1)u`; modular-nucleus flags are the explicit
+contraction kernels into Lucas-computed NRC nuclei.  C498/C509 are verified with thresholds 29/37,
+and q=19's `<1,t^3,t^4>` orbit proves that individual bad contractions cannot replace coherent
+flags.  The only remaining general gap is level-specific geometric monodromy/absolute
+irreducibility of each new lower splitting cover, stated exactly rather than replaced by a census.
+The claim-specific audit `notes/2026-07-23-c512-general-polar-flag-literature-audit.md` finds no
+pre-emption and positions Wang's June 2026 splitting-family framework as arithmetic infrastructure.
 
 ## Execution ladder
 
@@ -385,6 +399,7 @@ polar flags should be persistent/modular when contained in the lower bad locus a
 | C491 | PRS redundancy-five classification | complete | unconditional covering radius; complete PΓL₂ classification with new O±/nucleus/wild families and certified sporadic tables; NRC bridge ledger with the redundancy-six net lemma as next gate | first higher-normal-rational-curve calibration |
 | C498 | PRS redundancy-six classification | existence/orbit theorem complete; bounded normal forms remain | first-polar line reduction; all-field persistent/modular theorem; exact exceptional fields | polar induction mechanism |
 | C509 | PRS redundancy-seven classification | complete | all-field persistent/central theorem; exact q=7/8/9/11 exception tables; q=19 transient pointed orbit | coherent polar flags, not isolated bad fibres |
+| C512 | general coherent polar induction | complete | intrinsic pointed functor; classified persistent/modular contained flags; explicit genus/deletion/intersection threshold; C498/C509 recovered | fixed-redundancy applications reduce to finite monodromy and containment checks |
 
 Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md` through
 `notes/reed-solomon-tasks/c491-prs-redundancy-five.md` and
@@ -400,11 +415,10 @@ bounded exceptional normal forms.
   parity-check geometry retains a usable deformation of the NRC; no all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
-- **Persistent-or-arithmetically-bounded polar flags:** C498/C509 prove consecutive cases of the
-  same first-polar induction.  The next high-leverage theorem should give uniform fixed-redundancy
-  degree/monodromy bounds, classify contained persistent/modular polar flags, and make sporadic
-  exceptions effectively finite.  Redundancy eight is a base case/falsifier, not the headline.
-  Allocated as C512.
+- **Further polar-flag applications:** C512 supplies the effective fixed-redundancy induction
+  theorem.  A new redundancy is allocated only after its lower splitting cover has an explicit
+  monodromy/absolute-irreducibility target and contained-nucleus calculation; no ambient census
+  substitutes for that gate.
 
 **Achieved ceiling:** C485 gives the all-field redundancy-three orbit reconstruction; C490 closes
 its bounded residual child clause; C491 closes the redundancy-five projective deep-hole
@@ -432,8 +446,8 @@ history.
 
 ## Next command
 
-`go C512`
+`go C498`
 
 (C509's all-field redundancy-seven classification is complete.  C498 remains active only for
-intrinsic q=7/8/9/13 normal forms; C512 owns the general polar-flag finiteness theorem for the next
-fresh session; C510 remains the queued bounded TRS pilot; C500 remains release-gated.)
+intrinsic q=7/8/9/13 normal forms; C512's general polar-flag finiteness theorem is complete; C510
+remains the queued bounded TRS pilot; C500 remains release-gated.)
