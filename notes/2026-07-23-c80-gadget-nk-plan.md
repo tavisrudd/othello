@@ -35,23 +35,30 @@ triple). Prove a value law for `NK⁺` by induction on the lexicographic measure
 because Φ never increases and `|L|` strictly decreases each move.
 
 - **Base case Φ=0:** `NK⁺ = NK` = the proven `Y_NK` theorem.
-- **First real case:** `g=1, k∈{3,4}` (covers ~93% + rest of the observed q17 residual). Compute
-  `Grundy⁺` of a one-gadget position in terms of the Grundy values of its `k+1` resolutions (play one
-  of the `k` gadget points → capOK-ish resolved state; play off-gadget → gadget survives on the
-  remaining points, dissolving to a non-edge pair once `≤2` remain — note a 2-survivor gadget is NOT an
-  edge). **Depth-2 then falls out as a corollary** (resolving a single size-3 gadget takes ≤2 plies),
-  rather than being the theorem — strictly cleaner and `q`-robust.
+- **~~First real case: `g=1, k∈{3,4}`~~ — REFUTED by Step 1 (2026-07-23).** `g=1` never occurs at
+  q19 (100% `g≥2`, mean 19.2, max 47), and `k` reaches 7. There is **no finite bounded-gadget base
+  family** to induct into — both `g` and `k` grow with `q`. The `(Φ,|L|)` measure is still
+  well-founded, but any induction step must handle **arbitrary `g` with interacting gadgets** (32% of
+  gadget pairs share a vertex), not a single small gadget. Depth-2 is therefore **not** explained by a
+  small gadget count (it closes 100% at q13/17/19 despite ~19 gadgets/state) — reframing the real
+  question as: *why does a bounded-depth responder strategy beat unbounded static gadget complexity?*
+  A pairing/response (copycat/mirror) attack that makes the gadget count irrelevant may be a cleaner
+  route than a multi-gadget Grundy calculus — see the C528 report Mystery ledger.
 
 ## Steps, cheap-first
 
-1. **[DECISIVE, DO FIRST] q19 overload-profile tabulation.** One pass over the **already-frozen** q19
-   census (`notes/data/c20-q19-states.jsonl.gz`) over the 48,084 residual children and their depth-2
-   witness states: number of overloaded capacity-two lines (`g`), multiset of overloads (`k`), and
-   pairwise line intersections. Reuse `CENSUS.maximum_capacity_two_line` / `projective_lines` from
-   `rust/scripts/c80_response_fibre_census.py`, generalized to return the full profile per state; find
-   residual children exactly as `c524_capover_core_depth2.py` does. **Branch:** (a) all `g=1, k≤4` →
-   prove exactly the `g=1` gadget law; (b) any `g≥2` or `k≥5` → depth-2 was small-`q` luck, the general
-   gadget induction is mandatory. Reserve/report under C528.
+1. **[DECISIVE — RUN 2026-07-23, BRANCH (b)] q13/q17/q19 overload-profile tabulation.** Done:
+   `rust/scripts/c528_overload_profile.py` + `notes/2026-07-23-c528-overload-profile.json` (`--check`
+   PASS); report `notes/2026-07-23-c528-overload-profile.md`. **Result: branch (b), sharpened —
+   gadget complexity is unbounded in `q` on both axes.** q17: 349 residual, `g∈1..7` (258/349 have
+   `g≥2`), `max k=4`. q19: 48,084 residual, **100% `g≥2`** (mean 19.2, **max g=47**), **max k=7**
+   (8,189 states with `k≥5`). Both `g` and `k` grow with `q`. The `g=1, k≤4` special-case premise
+   below is **dead** — see the correction. Gadget pairs at q19: 68% disjoint, 32% share exactly one
+   legal vertex (forced — two projective lines meet in one point). Overloaded-line conic type: mostly
+   external, some secant, few tangent — no single-type law (§4.5 handle fails).
+   **Correction to the premise:** the "`g=1` covers ~93%" claim conflated two measures. C523's
+   "323/349 at minimal overload 3" is about the overload **magnitude** `k` (small), not the **number**
+   of gadgets `g` (not 1). Only 26% of q17 (0% of q19) residual children are single-gadget.
 2. **[2-min] (ON) alignment check.** (ON) as written (alt-attack plan, cap handoff § Conic
    Localization) wants a P-valued **on-conic** size-4 child, but C522 found 63% of gap children win
    only via **off-conic** replies. The two-tier certificate proves the responder wins (C80(b) descent),

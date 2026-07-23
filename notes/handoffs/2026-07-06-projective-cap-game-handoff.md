@@ -636,16 +636,27 @@ CORRECT** (lemmas + engine conventions verified in code; holds for even `q` too;
 **depth-2 routing is a CONJECTURE** verified only at q=13/17/19; no proof of coverage,
 depth-boundedness, or uniformity, and three primes cannot exclude a depth-3 tail at larger `q`.
 
-**NEXT SESSION — start here (C528, reserved `[cap]`):** the review killed the Φ-potential plan (Φ is
-monotone non-increasing under all moves ⟹ "drive Φ→0" is vacuous) and replaced the target with a
-**gadget-Node-Kayles value law** (an overloaded capacity-two line = an independent `k`-set that
-collapses to a clique on first touch; prove by induction on the overload measure, `Y_NK` as the base
-case, depth-2 as a corollary). Cold-start execution guide with the exact first computation (q19
-overload-profile tabulation on frozen data), the (ON) on-conic/off-conic alignment check, the octal
-periodicity Piece 3, and symmetry reduction:
+**C528 decisive step RUN (2026-07-23) — the gadget census is BRANCH (b), sharpened: gadget
+complexity is unbounded in `q` on both axes.** The overload-profile tabulation over the frozen
+q13/q17/q19 residual children (each is itself `capOVER` — a `capOK` responder-win would have a `Y_NK`
+reply) shows: q17 has `g∈1..7` gadgets/state (`max k=4`); **q19 has 100% `g≥2`, mean 19.2, max
+`g=47`, `max k=7`.** Both the gadget count `g` and the per-gadget overload `k` grow with `q`, so
+**the "`g=1` law + depth-2 corollary" plan is dead and no finite bounded-gadget base family exists.**
+The plan's "`g=1` covers ~93%" premise conflated the overload magnitude `k` (small, C523's "minimal
+overload 3") with the gadget count `g` (not 1). Depth-2 (C524) still closes 100% at q13/17/19 despite
+~19 interacting gadgets/state — so depth-2 is **not** a small-gadget-count effect, which reframes the
+crown question as *why a bounded-depth responder beats unbounded static gadget complexity* (a
+pairing/copycat response may be a cleaner attack than a Grundy calculus — see report Mystery ledger).
+Report+cert+`--check`: [`../2026-07-23-c528-overload-profile.md`](../2026-07-23-c528-overload-profile.md).
+Remaining C528 steps (ON-alignment check, gadget law, octal Piece 3, symmetry reduction, q23
+out-of-sample) and the reshaped attack are in
 [`../2026-07-23-c80-gadget-nk-plan.md`](../2026-07-23-c80-gadget-nk-plan.md).
-Also open: Lean statements of both lemmas; C82 countability. Report+cert+`--check` (q13/q17 and a
-separate q19 cert):
+
+**Prior target (context):** the Fable review killed the Φ-potential plan (Φ monotone non-increasing
+under all moves ⟹ "drive Φ→0" vacuous) and replaced it with the gadget-Node-Kayles value law
+(overloaded capacity-two line = independent `k`-set collapsing to a clique on first touch; induct on
+the overload measure, `Y_NK` base case). Also open: Lean statements of both lemmas; C82 countability.
+C523/C524 report+cert+`--check` (q13/q17 and a separate q19 cert):
 [`../2026-07-23-c524-capover-core-depth2.md`](../2026-07-23-c524-capover-core-depth2.md).
 
 Priority order and why:
