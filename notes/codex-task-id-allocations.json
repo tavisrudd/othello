@@ -530,8 +530,17 @@
       "last": 500,
       "purpose": "C491 follow-ups: redundancy-six PRS(q-5) net-lemma classification; sporadic-orbit structure; redundancy-five paper",
       "sequence": 59
+    },
+    {
+      "count": 2,
+      "first": 501,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 502,
+      "purpose": "C489-successor hexad program: explore (outer-swap + triple Maslov index on the A5 hexad vs C472 central scalar) then gated exploit",
+      "sequence": 60
     }
   ],
-  "next_id": 501,
+  "next_id": 503,
   "schema": "codex-task-id-allocations-v1"
 }
