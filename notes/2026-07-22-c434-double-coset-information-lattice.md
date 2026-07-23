@@ -120,10 +120,18 @@ Still open, with exact gaps:
   `S3` vs `D8`). Measured at both `q`; unexplained. The evidence gap is a character identity —
   whether `⟨Ind_K^G 1, Ind_H^G 1⟩` is forced to be equal for the two classes of `K = H ∩ H^J` —
   and it has no owner; promotion goes through the normal C-ID process.
-- **The middle count is `6` at both verified `q`.** Whether `c = 6` is forced by the hypotheses
-  (`H ≤ G⁺`, `N_G(H) = H`, `|G/H| = 2q`) or a coincidence of the two Coxeter cases is untested:
-  no third configuration satisfying the hypotheses has been checked (A3 at `q=5` is excluded
-  since its `S4` is not inside `PSL_2(5)`). Stated domain: exactly the two configurations B3, H3.
+- **The middle count is `6` at both verified `q` — and the two cases are the whole domain
+  (second ej pass, REASONED, not machine-checked).** The hypotheses force
+  `|H| = |G|/2q = (q²−1)/2`. By Dickson's subgroup classification for `PSL_2(q)`, cyclic and
+  dihedral subgroups have order at most `q+1 < (q²−1)/2` for `q ≥ 5`, and subfield types
+  `PSL_2(q')`/`PGL_2(q')` with `q = q'^k` cannot satisfy the order equation (no integer
+  solutions), so `H` is exceptional with `|H| ∈ {12, 24, 60}`, forcing `q² ∈ {25, 49, 121}`.
+  The three candidates are `(q=5, A4)`, `(q=7, S4)`, `(q=11, A5)`; the first satisfies
+  `H ≤ G⁺` and `|G/H| = 10 = 2q` but fails exactly the normalizer hypothesis
+  (`N_{PGL_2(5)}(A4) = S4 ≠ A4`). Hence the hypothesis class is exhaustively `{B3, H3}` and the
+  computational verification covers the theorem's entire domain; the "forced vs coincidence"
+  question dissolves. The `q=5`/`A4` near-miss (which rung breaks without `N_G(H) = H`, and
+  whether any 10-point decorated avatar exists) is a bounded successor probe, unallocated.
 
 ## Reproducibility
 
