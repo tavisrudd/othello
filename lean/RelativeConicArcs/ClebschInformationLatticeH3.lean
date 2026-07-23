@@ -59,11 +59,11 @@ def matchingMate : MatchingIndex → Vertex → Vertex := ![
 /-- Every displayed row is a fixed-point-free involution, hence a perfect matching. -/
 theorem matchingMate_fixedPointFree_involutive :
     ∀ p v, matchingMate p v ≠ v ∧ matchingMate p (matchingMate p v) = v := by
-  native_decide
+  decide
 
 /-- The twenty-two displayed mate maps are pairwise distinct. -/
 theorem matchingMate_injective : Function.Injective matchingMate := by
-  native_decide
+  decide
 
 /-- The two eleven-element sheets. -/
 def sheet : MatchingIndex → Fin 2 :=
@@ -94,17 +94,17 @@ theorem kAction_group_laws :
     (∃ e, ∀ p, kAction e p = p) ∧
     (∀ a b, ∃ c, ∀ p, kAction a (kAction b p) = kAction c p) ∧
     (∀ a, ∃ b, ∀ p, kAction a (kAction b p) = p) := by
-  native_decide
+  decide
 
 /-- Every displayed permutation has a two-sided inverse in the displayed action table. -/
 theorem kAction_twoSidedInverse :
     ∀ a, ∃ b, (∀ p, kAction a (kAction b p) = p) ∧
       (∀ p, kAction b (kAction a p) = p) := by
-  native_decide
+  decide
 
 /-- The twelve displayed indices act by pairwise distinct permutations. -/
 theorem kAction_injective : Function.Injective kAction := by
-  native_decide
+  decide
 
 /-- Orbit membership under the displayed `K`-action. -/
 def SameKOrbit (p r : MatchingIndex) : Prop := ∃ k, kAction k p = r
@@ -132,7 +132,7 @@ theorem sameKOrbit_equivalence : Equivalence SameKOrbit := by
 theorem sameKOrbit_iff_kOrbitLabel_eq (p r : MatchingIndex) :
     SameKOrbit p r ↔ kOrbitLabel p = kOrbitLabel r := by
   unfold SameKOrbit
-  native_decide +revert
+  decide +revert
 
 /-- The number of unordered edges common to two displayed matchings. -/
 def sharedEdgeCount (p r : MatchingIndex) : Nat :=
@@ -156,14 +156,14 @@ theorem intrinsicProfile_values : intrinsicProfile = ![
     (1, 1, 0), (0, 0, 0), (1, 1, 0), (0, 0, 1), (1, 0, 0), (0, 0, 0),
     (0, 0, 1), (1, 0, 0), (0, 0, 1), (1, 1, 0)
   ] := by
-  native_decide
+  decide
 
 /-- The fibres of `(sheet, shared-edge counts)` are exactly the `K`-orbits. -/
 theorem intrinsicProfile_eq_iff_sameKOrbit (p r : MatchingIndex) :
     intrinsicProfile p = intrinsicProfile r ↔ SameKOrbit p r := by
   rw [intrinsicProfile_values]
   unfold SameKOrbit
-  native_decide +revert
+  decide +revert
 
 /-- The edge-count pair alone merges two distinct `K`-orbits; the sheet coordinate is essential. -/
 theorem sharedEdgePair_not_complete :
@@ -171,9 +171,9 @@ theorem sharedEdgePair_not_complete :
         (sharedEdgeCount r baseMatching, sharedEdgeCount r pairedMatching) ∧
       ¬SameKOrbit p r := by
   refine ⟨5, 6, ?_, ?_⟩
-  · native_decide
+  · decide
   · unfold SameKOrbit
-    native_decide
+    decide
 
 /-- The constant label at the bottom of the information lattice. -/
 def constantLabel (_ : MatchingIndex) : Fin 1 := 0
@@ -181,15 +181,15 @@ def constantLabel (_ : MatchingIndex) : Fin 1 := 0
 /-- The singleton label at the top of the information lattice. -/
 def singletonLabel (p : MatchingIndex) : MatchingIndex := p
 
-theorem constantLabel_surjective : Function.Surjective constantLabel := by native_decide
-theorem sheet_surjective : Function.Surjective sheet := by native_decide
-theorem kOrbitLabel_surjective : Function.Surjective kOrbitLabel := by native_decide
-theorem singletonLabel_surjective : Function.Surjective singletonLabel := by native_decide
+theorem constantLabel_surjective : Function.Surjective constantLabel := by decide
+theorem sheet_surjective : Function.Surjective sheet := by decide
+theorem kOrbitLabel_surjective : Function.Surjective kOrbitLabel := by decide
+theorem singletonLabel_surjective : Function.Surjective singletonLabel := by decide
 
 /-- Every `K`-orbit lies in a single sheet. -/
 theorem kOrbitLabel_refines_sheet :
     ∀ p r, kOrbitLabel p = kOrbitLabel r → sheet p = sheet r := by
-  native_decide
+  decide
 
 /-- The rational invariant-function algebras form the expected inclusion tower. -/
 theorem invariantSubalgebra_inclusions :
