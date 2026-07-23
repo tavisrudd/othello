@@ -567,7 +567,11 @@ second implementation of the raw `Y_0` orbital membership or the full earlier ce
   classifier.
 - **Still open — sparse guarded coverage:** `Y_NK0` is proof-bearing but covers only 2,822 of
   59,153 q17 transitions.  A bulk descent into this class or a companion guarded packet is still
-  required before C82 can count a uniform response relation.
+  required before C82 can count a uniform response relation.  C497 (2026-07-22) closes one candidate
+  route: the `(prior-triple stabilizer, reply)` double-coset partition does **not** refine
+  `Y_NK0`-membership (249 explicit `PGL_2(17)`-verified same-stratum splits), so it cannot supply the
+  bulk descent — the missing guard must carry residual conic content, not just centre-configuration
+  incidence data.
 - **Still open — two-sorted coupling:** no canonical incidence bimodule has yet been shown to carry
   both conic-word traces and reply-pencil energy while preserving P/N recursion.  This is owned by
   C80's response-packet/descent theorem, not by an abstract SDP construction.
@@ -593,6 +597,18 @@ into this report's still-open ledger items; assessment and provenance in
 - **C497** (→ still-open sparse guarded coverage): stratum-constancy test of
   `Y_NK0`-membership/P-purity over double-coset labels of (prior-triple stabilizer, reply) on
   the frozen q17 census; constancy yields per-representative bulk descent.
+
+**C497 [REPORTED 2026-07-22 — NON-CONSTANT]** (`notes/2026-07-22-c497-double-coset-stratum-constancy.md`).
+The pre-diagnostic decides the crown negatively: the double-coset partition does **not** refine
+`Y_NK0`-membership. Reproducing the frozen q17 census exactly (59,153 transitions, 17,954 `Y_0`,
+3,048 `Y_NK0`), the `(prior-triple, reply)` double-coset label = the `PGL_2(17)`-orbit of the
+marked involution configuration; of 1,266 strata, 368 are mixed by `Y_NK0`-membership and 249 carry
+an explicit `PGL_2(17)`-verified same-orbit `Y_NK0`/non-`Y_NK0` split. Non-constant ⇒ the full P/N
+sweep is skipped. Mechanism (confirms C495 ej2 at q17): `Y_NK0`-membership depends on the residual
+conic content the centre-configuration label cannot see — additive/incidence sort orthogonal to the
+value sort. **Bearing on the ledger:** stratification is refuted as the bulk-descent mechanism into
+`Y_NK0`; the sparse-coverage item below is unchanged and still needs a residual-carrying descent
+guard, not a centre-configuration double coset. C496 is the last transfer probe.
 
 Caveats recorded in the transfer note: the C434 Borel/Bruhat structure exists only at
 q ∈ {7,11} (no subgroup of order `(q²−1)/2` at q=13/17/19), and C434 contributes nothing to the

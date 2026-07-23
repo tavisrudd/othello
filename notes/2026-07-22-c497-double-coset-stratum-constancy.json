@@ -1,0 +1,125 @@
+{
+  "canonical_witness": {
+    "conjugator_param_permutation": [
+      13,
+      10,
+      2,
+      6,
+      9,
+      17,
+      3,
+      7,
+      16,
+      4,
+      1,
+      12,
+      11,
+      0,
+      15,
+      14,
+      8,
+      5
+    ],
+    "label_fixed_points_triple": [
+      0,
+      0,
+      0
+    ],
+    "label_reply_fixed_points": 2,
+    "label_reply_product_orders": [
+      2,
+      16,
+      18
+    ],
+    "label_triple_product_orders": [
+      2,
+      3,
+      9
+    ],
+    "non_ynk0_object": {
+      "in_ynk0": false,
+      "intruder_cells": [
+        70,
+        100,
+        203
+      ],
+      "intruder_coords": [
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          11,
+          16
+        ]
+      ],
+      "reply_cell": 129,
+      "reply_coords": [
+        7,
+        10
+      ]
+    },
+    "ynk0_object": {
+      "in_ynk0": true,
+      "intruder_cells": [
+        123,
+        212,
+        266
+      ],
+      "intruder_coords": [
+        [
+          7,
+          4
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          15,
+          11
+        ]
+      ],
+      "reply_cell": 10,
+      "reply_coords": [
+        0,
+        10
+      ]
+    }
+  },
+  "claim_scope": "Pre-diagnostic C497: whether the (prior-triple stabilizer, reply) double-coset partition refines Y_NK0-membership on the frozen q=17 three-intruder census. Independent stratification test, not a transport of C434's q=11 fibre identity (C495 FALSIFIER NO).",
+  "double_coset_buckets": 1266,
+  "double_coset_label": "G = PGL_2(q) acting on the q+1 conic parameters; each off-conic intruder centre induces a conic involution. The double-coset label of a (prior triple, reply) pair is the G-orbit of the marked configuration ({sigma_1,sigma_2,sigma_3}, sigma_reply) under simultaneous conjugation; sameness is witnessed by an explicit conjugating g in G.",
+  "group_order": 4896,
+  "inputs": {
+    "2026-07-08-zone-repair-geometry.py": {
+      "bytes": 11002,
+      "sha256": "5eb096b8eecc872fb961c5f9c385073b32133194f35ed1580b91c537ec8347f8"
+    },
+    "2026-07-22-c80-response-fibre-census.json": {
+      "bytes": 227240,
+      "sha256": "cb2db4f540bfdf8d2219b4d16905c1d15941e5be448051f1dfa372239d4e6269"
+    },
+    "c20-q13-q17-states.jsonl.gz": {
+      "bytes": 654965,
+      "sha256": "952f189cc37bac36026238d75bccffb7feb560644582bf8c6373789a98f43f4d"
+    },
+    "c80_response_fibre_census.py": {
+      "bytes": 12433,
+      "sha256": "d70136673d947f89259a6dab214fee7450505c10580a842c6bd9d51ab69633ce"
+    }
+  },
+  "mixed_ynk0_buckets": 368,
+  "q": 17,
+  "refines_ynk0_membership": false,
+  "three_intruder_transitions": 59153,
+  "verdict": "NON-CONSTANT: the double-coset partition does not refine Y_NK0-membership. Y_NK0 and non-Y_NK0 objects share a double-coset label (explicit PGL_2(17) conjugator), so stratum-constancy fails and the full P/N sweep is skipped. The double-coset label (additive/incidence sort) is orthogonal to Y_NK0-membership (value sort), confirming C495 ej2 at q=17. Stratification is refuted as the bulk-descent mechanism.",
+  "verified_true_orbit_split_buckets": 249,
+  "y0_members": 17954,
+  "y0_objects_in_mixed_buckets": 9943,
+  "ynk0_members": 3048
+}

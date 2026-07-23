@@ -629,10 +629,14 @@ task list.  Current high-value items:
   coset is the inter-state endpoint swap, not an internal sheet; `u`'s square class splits the four
   5-orbits 2–1–1, not the sheet's 2–2, and is not even the `D′` analogue.  The two are isomorphic
   only as `C5`-sets — a fingerprint collision, not a structural identity; C434's fibre identity does
-  not transport.  Report `../2026-07-22-c495-cloud-packet-d10-identification.md`.  **C497 is next**
-  (q17 stratum-constancy of `Y_NK0`-membership/P-purity by double-coset label — the bulk-descent
-  crown); per C495 it must run as an *independent* stratification test, not a transport of C434's
-  identity, and the prior that the double-coset label is the bulk mechanism is lower.  **C496** last
+  not transport.  Report `../2026-07-22-c495-cloud-packet-d10-identification.md`.  **C497 [REPORTED
+  2026-07-22 — NON-CONSTANT]:** run as an independent q17 stratification test, the
+  `(prior-triple stabilizer, reply)` double-coset partition (= `PGL_2(17)`-orbit of the marked
+  involution configuration) does *not* refine `Y_NK0`-membership — 249 explicit `PGL_2(17)`-verified
+  same-stratum `Y_NK0`/non-`Y_NK0` splits over the exactly-reproduced frozen census (59,153 / 17,954
+  / 3,048).  Stratification is refuted as the bulk-descent mechanism (an additive/incidence label
+  orthogonal to residual-carried value), so the full P/N sweep is skipped; report
+  `../2026-07-22-c497-double-coset-stratum-constancy.md`.  **C496** last
   (bi-Hecke bimodule `e_K F[G] e_H` as the two-sorted coupling; C495 layer-3 supports the
   set-faithful/rank-dropping picture).  q∈{7,11}-only structure caveat: C497 borrows C434's method,
   not its group structure, at q17.  Provenance: C80 report probe section
