@@ -201,6 +201,55 @@ def main() -> int:
     assert membership[(tuple(ya["intruder_cells"]), ya["reply_cell"])] is True
     assert membership[(tuple(na["intruder_cells"]), na["reply_cell"])] is False
 
+    # --- independently re-verify the ej closeout figures ---
+    ej = cert["ej_closeout"]
+    pt = pf = pm = 0
+    ynk0_pure_true_strata = 0
+    for members in buckets.values():
+        flags = {m[2] for m in members}
+        if flags == {True}:
+            pt += 1
+            ynk0_pure_true_strata += len(members)
+        elif flags == {False}:
+            pf += 1
+        else:
+            pm += 1
+    assert (pt, pf, pm) == (
+        ej["coarse_pure_true_strata"], ej["coarse_pure_false_strata"], ej["coarse_mixed_strata"])
+    assert ynk0_pure_true_strata == ej["ynk0_members_in_pure_true_strata"]
+
+    mto = mto_members = mto_ynk0 = 0
+    for k in mixed:
+        reps = []
+        for obj in sorted(buckets[k]):
+            for rep, mem in reps:
+                if has_conjugator(obj[0], obj[1], rep[0], rep[1]):
+                    mem.append(obj)
+                    break
+            else:
+                reps.append((obj, [obj]))
+        for _rep, mem in reps:
+            if len({m[2] for m in mem}) > 1:
+                mto += 1
+                mto_members += len(mem)
+                mto_ynk0 += sum(1 for m in mem if m[2])
+    assert mto == ej["mixed_true_double_coset_orbits"]
+    assert mto_members == ej["y0_members_in_mixed_true_orbits"]
+    assert mto_ynk0 == ej["ynk0_members_in_mixed_true_orbits"]
+    assert len(objects) and (cert["ynk0_members"] - mto_ynk0) == ej["ynk0_members_in_pure_true_orbits"]
+
+    crosstab = {"reply_fixed_0": {"ynk0": 0, "non_ynk0": 0},
+                "reply_fixed_2": {"ynk0": 0, "non_ynk0": 0}}
+    for three, reply, nk in objects:
+        crosstab[f"reply_fixed_{fixed(iv(reply))}"]["ynk0" if nk else "non_ynk0"] += 1
+    assert crosstab == ej["reply_fixed_point_crosstab"]
+
+    pool = {"fixed_0": 0, "fixed_2": 0}
+    for c in range(Q * Q):
+        if not game.is_conic_cell(c):
+            pool[f"fixed_{fixed(iv(c))}"] += 1
+    assert pool == ej["off_conic_centre_pool_by_type"]
+
     assert cert["refines_ynk0_membership"] is False
     print(
         "C497 replay: PASS — PGL_2(17) rebuilt from involutions, "

@@ -246,10 +246,65 @@ def run() -> dict:
             if witness is None:
                 witness = (k, found)
 
+    # --- ej closeout: exact non-constancy measure, pure sub-domain, reply-type balance ---
+    coarse_pure_true = coarse_pure_false = coarse_mixed = 0
+    ynk0_in_pure_true_strata = 0
+    for members in buckets.values():
+        flags = {m[2] for m in members}
+        if flags == {True}:
+            coarse_pure_true += 1
+            ynk0_in_pure_true_strata += len(members)
+        elif flags == {False}:
+            coarse_pure_false += 1
+        else:
+            coarse_mixed += 1
+
+    # refine each mixed coarse stratum into true double-coset orbits (explicit conjugacy)
+    mixed_true_orbits = 0
+    members_in_mixed_true_orbits = 0
+    ynk0_in_mixed_true_orbits = 0
+    for k in mixed:
+        reps: list[tuple] = []  # (representative object, member list)
+        for obj in sorted(buckets[k]):
+            for rep, mem in reps:
+                if min_conjugator(obj[0], obj[1], rep[0], rep[1]) is not None:
+                    mem.append(obj)
+                    break
+            else:
+                reps.append((obj, [obj]))
+        for _rep, mem in reps:
+            if len({m[2] for m in mem}) > 1:
+                mixed_true_orbits += 1
+                members_in_mixed_true_orbits += len(mem)
+                ynk0_in_mixed_true_orbits += sum(1 for m in mem if m[2])
+    ynk0_in_pure_true_orbits = ynk0_members - ynk0_in_mixed_true_orbits
+
+    reply_fixed_crosstab = {"reply_fixed_0": {"ynk0": 0, "non_ynk0": 0},
+                            "reply_fixed_2": {"ynk0": 0, "non_ynk0": 0}}
+    for three, reply, nk in objects:
+        slot = reply_fixed_crosstab[f"reply_fixed_{fixed(involution(reply))}"]
+        slot["ynk0" if nk else "non_ynk0"] += 1
+
+    # the underlying off-conic-centre pool is unequal by involution type (ej2 provenance)
+    off_conic_fixed_pool = {"fixed_0": 0, "fixed_2": 0}
+    for c in range(Q * Q):
+        if game.is_conic_cell(c):
+            continue
+        off_conic_fixed_pool[f"fixed_{fixed(involution(c))}"] += 1
+
     assert three_intruder_transitions == 59153
     assert y0_members == 17954
     assert ynk0_members == 3048
     assert witness is not None, "expected a verified double-coset split"
+    assert (coarse_pure_true, coarse_pure_false, coarse_mixed) == (166, 732, 368)
+    assert ynk0_in_pure_true_strata == 559
+    assert (mixed_true_orbits, members_in_mixed_true_orbits, ynk0_in_mixed_true_orbits) == (304, 5649, 1772)
+    assert ynk0_in_pure_true_orbits == 1276
+    assert reply_fixed_crosstab == {
+        "reply_fixed_0": {"ynk0": 1524, "non_ynk0": 7453},
+        "reply_fixed_2": {"ynk0": 1524, "non_ynk0": 7453},
+    }
+    assert off_conic_fixed_pool == {"fixed_0": 128, "fixed_2": 145}
 
     (wkey, (wyes, wno, wg)) = witness
     gi = inverses[wg]
@@ -320,6 +375,37 @@ def run() -> dict:
                 "in_ynk0": False,
             },
             "conjugator_param_permutation": list(wg),
+        },
+        "ej_closeout": {
+            "note": (
+                "Exact non-constancy measure at the true double-coset orbit level, the pure "
+                "sub-domain the global negative conceals, and the reply-involution-type balance."
+            ),
+            "coarse_pure_true_strata": coarse_pure_true,
+            "coarse_pure_false_strata": coarse_pure_false,
+            "coarse_mixed_strata": coarse_mixed,
+            "ynk0_members_in_pure_true_strata": ynk0_in_pure_true_strata,
+            "mixed_true_double_coset_orbits": mixed_true_orbits,
+            "y0_members_in_mixed_true_orbits": members_in_mixed_true_orbits,
+            "ynk0_members_in_mixed_true_orbits": ynk0_in_mixed_true_orbits,
+            "ynk0_members_in_pure_true_orbits": ynk0_in_pure_true_orbits,
+            "reply_fixed_point_crosstab": reply_fixed_crosstab,
+            "off_conic_centre_pool_by_type": off_conic_fixed_pool,
+            "reply_type_independent_of_ynk0": (
+                "reply involutions with 0 vs 2 conic fixed points carry identical "
+                "(non_ynk0, ynk0) = (7453, 1524) counts: the incidence datum is exactly "
+                "independent of Y_NK0-membership, the q17 realization of C495's governing C2."
+            ),
+            "ej2_reply_type_equalization": (
+                "The off-conic-centre pool is UNEQUAL by involution type (145 with 2 fixed "
+                "points, 128 with 0), yet Y_0 selects exactly 8977 of each type, and each "
+                "type splits into exactly 1524 Y_NK0 / 7453 non-Y_NK0. Y_0 equalizes an "
+                "unequal pool and preserves the value split, evidence of an EXTERNAL "
+                "value-preserving involution on the census that swaps the two reply-involution "
+                "types (fixed-point count is conjugation-invariant, so the swap is not internal "
+                "to PGL_2(17)). This is C495's endpoint-swap C2 (det-square class) manifest at "
+                "q17: value-preserving and acting externally, exactly as at q11."
+            ),
         },
         "inputs": {
             path.name: {"sha256": sha256(path), "bytes": path.stat().st_size}

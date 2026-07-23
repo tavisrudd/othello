@@ -94,6 +94,33 @@
   "claim_scope": "Pre-diagnostic C497: whether the (prior-triple stabilizer, reply) double-coset partition refines Y_NK0-membership on the frozen q=17 three-intruder census. Independent stratification test, not a transport of C434's q=11 fibre identity (C495 FALSIFIER NO).",
   "double_coset_buckets": 1266,
   "double_coset_label": "G = PGL_2(q) acting on the q+1 conic parameters; each off-conic intruder centre induces a conic involution. The double-coset label of a (prior triple, reply) pair is the G-orbit of the marked configuration ({sigma_1,sigma_2,sigma_3}, sigma_reply) under simultaneous conjugation; sameness is witnessed by an explicit conjugating g in G.",
+  "ej_closeout": {
+    "coarse_mixed_strata": 368,
+    "coarse_pure_false_strata": 732,
+    "coarse_pure_true_strata": 166,
+    "ej2_reply_type_equalization": "The off-conic-centre pool is UNEQUAL by involution type (145 with 2 fixed points, 128 with 0), yet Y_0 selects exactly 8977 of each type, and each type splits into exactly 1524 Y_NK0 / 7453 non-Y_NK0. Y_0 equalizes an unequal pool and preserves the value split, evidence of an EXTERNAL value-preserving involution on the census that swaps the two reply-involution types (fixed-point count is conjugation-invariant, so the swap is not internal to PGL_2(17)). This is C495's endpoint-swap C2 (det-square class) manifest at q17: value-preserving and acting externally, exactly as at q11.",
+    "mixed_true_double_coset_orbits": 304,
+    "note": "Exact non-constancy measure at the true double-coset orbit level, the pure sub-domain the global negative conceals, and the reply-involution-type balance.",
+    "off_conic_centre_pool_by_type": {
+      "fixed_0": 128,
+      "fixed_2": 145
+    },
+    "reply_fixed_point_crosstab": {
+      "reply_fixed_0": {
+        "non_ynk0": 7453,
+        "ynk0": 1524
+      },
+      "reply_fixed_2": {
+        "non_ynk0": 7453,
+        "ynk0": 1524
+      }
+    },
+    "reply_type_independent_of_ynk0": "reply involutions with 0 vs 2 conic fixed points carry identical (non_ynk0, ynk0) = (7453, 1524) counts: the incidence datum is exactly independent of Y_NK0-membership, the q17 realization of C495's governing C2.",
+    "y0_members_in_mixed_true_orbits": 5649,
+    "ynk0_members_in_mixed_true_orbits": 1772,
+    "ynk0_members_in_pure_true_orbits": 1276,
+    "ynk0_members_in_pure_true_strata": 559
+  },
   "group_order": 4896,
   "inputs": {
     "2026-07-08-zone-repair-geometry.py": {
