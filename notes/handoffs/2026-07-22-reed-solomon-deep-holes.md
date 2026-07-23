@@ -4,7 +4,8 @@
 
 **Date:** 2026-07-22
 
-**Status:** C475--C499, C509--C510, and C512--C514 complete; C498 now closes the all-field redundancy-six
+**Status:** C475--C499, C509--C510, and C512--C514 complete; C515 is next
+(modular additive/Hasse recursion); C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
 C500 (redundancy-five paper,
 release-gated) queued.  C478's coherence upgrade identifies each
@@ -483,8 +484,8 @@ Closed cards include `notes/reed-solomon-tasks/c476-standard-grs-atlas-pilot.md`
   simultaneous-extension complex from C295; one-column extension data alone does not pass.
 - **Twisted Reed--Solomon:** C514 closes C510's only allocated successor with an exact
   translation-invariant determinant normal form and a precise obstruction to C512.  Any further
-  work needs a newly allocated bounded target and a different splitting mechanism that retains
-  the completion/support collision divisor.  No all-TRS claim is allocated.
+  work must use C515's additive/Hasse-difference gate and retain the completion/support collision
+  divisor.  No all-TRS claim is allocated.
 - **Modular/category/type bridge:** allocate only if C478 produces a nondegenerate complementary
   incidence carrier passing both the Gram and Sylow endotrivial gates.
 - **Further polar-flag applications:** C512 supplies the effective fixed-redundancy induction
@@ -518,6 +519,6 @@ history.
 
 ## Next command
 
-`go reed-solomon`
+`go C515`
 
-(C514 is complete.  C500 remains release-gated; no theorem successor is allocated.)
+(C514 is complete.  C515 is the next modular theorem gate; C500 remains release-gated.)
