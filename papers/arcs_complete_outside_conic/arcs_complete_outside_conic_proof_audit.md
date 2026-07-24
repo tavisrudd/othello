@@ -25,11 +25,15 @@
    \(|C|=q+1\). For a line at infinity, every secant contributes exactly one hole incidence,
    so `I_L(A)=choose(k,2)` and the general theorem gives the displayed complete-affine-arc bound
    and its equality pattern.
-   The scalar-extension corollary combines conic equality with the matching-design counts:
-   for \(k=Q+2\), \(m=Q/2+1\), and \(q=Q^d\), the number \(s\) of maximum-index conic
-   centres would satisfy
-   \(2s=-2q^2+(Q^2+3Q+2)q-Q^3-Q^2+2\). This quadratic is decreasing from
-   \(q=Q^2\), where it is already negative for \(Q\ge4\).
+   The even-size equality-spectrum corollary combines conic equality with the matching-design
+   counts. For \(Q=k-2\), the number \(s\) of maximum-index conic centres satisfies
+   \[
+   s=q+1-\frac{(q-Q)(2q-Q(Q+1))}{2}.
+   \]
+   The arc bound gives \(q\ge Q\), while \(0\le s\le q+1\) reduces the possibilities to
+   \(q=Q\) or \(q=Q(Q+1)/2+t\); positivity then forces \(t\in\{0,1\}\).
+   Prime-power order excludes the resulting \(k=8,12\) candidates in Desarguesian planes and
+   leaves only \(q=8,37\) at \(k=10\). The scalar-extension obstruction is also immediate.
 5. The additive lower bound is obtained from the parity-free necessary inequality
    \[
    q^2-k\le \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr),

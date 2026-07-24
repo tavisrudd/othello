@@ -23,8 +23,9 @@ global incidence theorem:
    nonmaximum concurrence cliques;
 5. a projective normalization classifies the six-point realization, while the seven-point
    abstract obstruction is credited to prior matching-design theory;
-6. if \(Q\ge4\), \(q=Q^d\), and \(d\ge2\), no \((Q+2)\)-arc can attain zero relative defect,
-   so scalar-extended hyperovals never supply equality over the larger field.
+6. for every even \(k\ge6\), zero relative defect forces
+   \(q\in\{k-2,\binom{k-1}{2},\binom{k-1}{2}+1\}\); scalar-extended hyperovals are excluded as
+   an immediate consequence.
 
 The abstract, introduction, theorem spine, bibliography, and proof audit have been revised around
 this identity--rigidity--stability progression. The finite value \(\rho_{\mathcal C}(16)=9\)
@@ -107,7 +108,7 @@ The repository paper target passes:
 make -C papers arcs
 ```
 
-The final build produced the 23-page tracked PDF. The scoped log audit found no undefined
+The final build produced the 24-page tracked PDF. The scoped log audit found no undefined
 references, undefined citations, or overfull boxes. Its two messages are the pre-existing XeLaTeX
 `inputenc` notice and one underfull bibliography paragraph.
 
@@ -127,7 +128,7 @@ rank-three star--matching pairwise-balanced design explicitly. It rejected a raw
 excursion, because C555 proves that such moments are subordinate to the existing defect and would
 weaken the paper's hierarchy.
 
-## Post-completion `ej` upgrade
+## Post-completion `ej`+`tt` upgrade
 
 The explicit user-requested `ej` pass combined the hyperoval matching-design family with the conic
 equality count. For \(k=Q+2\), zero defect would force
@@ -142,10 +143,30 @@ For every scalar extension \(q=Q^d\), \(Q\ge4\), \(d\ge2\), this is already nega
 \(\mathcal C\)-complete \((Q+2)\)-arc attains zero defect in this range; the statement does not
 assume the arc itself is a scalar-extended hyperoval.
 
-An independent exact-integer substitution into the original centre-count formula agrees with the
-closed polynomial and gives \(s=-55,-1503,-28543\) for
-\((Q,q)=(4,16),(8,64),(16,256)\), respectively. The manuscript rebuild still passes with the same
-two non-blocking log messages, and rendered pages 8--9 show the new corollary and proof cleanly.
+The subsequent `tt` pass solved the equality arithmetic rather than stopping at scalar extensions.
+For every even \(k\ge6\), putting \(Q=k-2\) factors the same count as
+\[
+ |Z\cap\mathcal C|
+ =q+1-\frac{(q-Q)(2q-Q(Q+1))}{2}.
+\]
+The arc bound \(q\ge Q\) and the interval \(0\le|Z\cap\mathcal C|\le q+1\) leave exactly
+\[
+ q=Q,\qquad q=\frac{Q(Q+1)}2,\qquad
+ q=\frac{Q(Q+1)}2+1.
+\]
+The manuscript now states this full even-size equality spectrum; the scalar-extension obstruction
+is its immediate corollary.
+
+At \(k=8,10,12\), the candidate order sets are
+\(\{6,21,22\}\), \(\{8,36,37\}\), and \(\{10,55,56\}\). Prime-power order therefore excludes
+zero defect at \(k=8,12\) in every Desarguesian plane and reduces \(k=10\) to \(q=8,37\).
+C574 is consequently the next structural task; C573 can strengthen the first conclusion only for
+arbitrary projective planes and provide the primary-source record.
+
+An independent exact-integer substitution into the original centre-count formula agrees with both
+forms and gives \(s=-55,-1503,-28543\) for
+\((Q,q)=(4,16),(8,64),(16,256)\), respectively. The manuscript rebuild passes with the same two
+non-blocking log messages, and the rendered corollary and proof are clean.
 
 ## Mystery ledger
 
@@ -155,10 +176,10 @@ two non-blocking log messages, and rendered pages 8--9 show the new corollary an
 - **Theorem hierarchy:** settled by the `ej`+`tt` pass. The capstone is the defect-to-design
   implication and its dual rank-three realization; \(\rho_{\mathcal C}(16)=9\) remains a finite
   application.
-- **Higher even sizes:** known abstract nonexistence at \(k=8,12\) may yield later corollaries,
-  but primary-source verification is outside this bounded integration.
-- **Scalar extension:** settled by the post-completion `ej` pass at the equality level. The
-  matching design survives field extension, but the required number of maximum-index conic
-  centres becomes negative for every \(Q\ge4\), \(d\ge2\).
+- **Higher even sizes:** C558 now excludes \(k=8,12\) in Desarguesian planes arithmetically.
+  Arbitrary-plane/source strengthening is allocated to C573; the two \(k=10\) designs at the only
+  surviving orders \(q=8,37\) are allocated to C574, now the next task.
+- **Even-size equality arithmetic:** settled completely by the post-completion `tt` pass. Only
+  three plane orders survive for each even \(k\ge6\); scalar extension is one excluded subfamily.
 - **Mixed rank-three invariant:** still open and remains the unmet C556 gate; C558 makes no claim
   beyond the exact equality and stability consequences already proved.

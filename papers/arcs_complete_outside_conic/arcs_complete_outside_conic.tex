@@ -635,31 +635,59 @@ The first correction in~\eqref{eq:conic-complete} accounts for unavoidable
 concurrence among secants; the last accounts for secant incidence spent on
 the exempt conic.
 
-\begin{corollary}[No scalar-extension equality]
-\label{cor:no-scalar-extension-equality}
-Let $Q\ge4$ be an even prime power, let $q=Q^d$ with $d\ge2$, and put
-$k=Q+2$.  No $\cC$-complete $k$-arc in $\PG(2,q)\setminus\cC$ has zero
-defect.  In particular, although a hyperoval in $\PG(2,Q)$ retains its
-secant-concurrence matching design after scalar extension, it cannot attain
-equality in~\eqref{eq:conic-complete} over $\F_q$.
+\begin{corollary}[Even-size equality spectrum]
+\label{cor:even-equality-spectrum}
+Let $k\ge6$ be even.  If a $\cC$-complete $k$-arc has zero defect, then
+\[
+ q\in
+ \left\{
+   k-2,\ \binom{k-1}{2},\ \binom{k-1}{2}+1
+ \right\}.
+\]
+In the first two cases every point of $\cC$ has index $k/2$; in the third,
+exactly $k-1$ conic points have that index.
+
+In particular, no zero-defect $\cC$-complete eight- or twelve-arc exists
+in a Desarguesian plane, while a zero-defect ten-arc can occur only for
+$q=8$ or $q=37$.
+
+Consequently, if $Q\ge4$ is an even prime power and $d\ge2$, no
+$\cC$-complete $(Q+2)$-arc in $\PG(2,Q^d)\setminus\cC$ has zero defect.
+Thus a hyperoval over $\F_Q$ retains its secant-concurrence matching design
+after scalar extension but cannot attain equality
+in~\eqref{eq:conic-complete} over the larger field.
 \end{corollary}
 
 \begin{proof}
-Suppose equality holds and let $Z=\{x\notin A:r(x)=m\}$.  By
-Theorem~\ref{thm:matching-design},
-\[
- m=\frac Q2+1,\qquad |Z|=Q^2-1.
-\]
+Put $Q=k-2$ and let $Z=\{x\notin A:r(x)=m\}$.  Then
+$m=Q/2+1$ and, by Theorem~\ref{thm:matching-design}, $|Z|=Q^2-1$.
 Put $s=|Z\cap\cC|$.  Every positive conic index equals $m$, so
-$\IC(A)=ms$.  Substitution in the zero-defect identity gives
+$\IC(A)=ms$.  Substitution in the zero-defect identity and factorization
+give
 \[
- 2s=-2q^2+(Q^2+3Q+2)q-Q^3-Q^2+2.
+ s=q+1-\frac{(q-Q)(2q-Q(Q+1))}{2}.
 \]
-The right side is decreasing for $q\ge Q^2$, and at $q=Q^2$ it equals
+The elementary arc bound $k\le q+2$ gives $q\ge Q$.  Since
+$0\le s\le q+1$, either $q=Q$ or
+$q\ge B:=Q(Q+1)/2$.  Write $q=B+t$ in the latter case.  Then
 \[
- -Q^4+2Q^3+Q^2+2<0
+ s=q+1-t(q-Q).
 \]
-for $Q\ge4$.  Hence $s<0$, a contradiction.
+For $t\ge2$, already at $t=2$ the subtracted term exceeds $q+1$ by
+\[
+ B-2Q+1=\frac{(Q-1)(Q-2)}2>0,
+\]
+and the excess increases with $t$.  Hence $t\in\{0,1\}$.  The displayed
+values of $s$ at $q=Q,B,B+1$ are respectively $q+1,q+1,Q+1$.
+
+For $k=8,10,12$, the three candidate orders are respectively
+\[
+ \{6,21,22\},\qquad \{8,36,37\},\qquad \{10,55,56\}.
+\]
+Since a Desarguesian plane has prime-power order, this proves the stated
+small-size consequences.
+
+For the final assertion, $Q^d\ge Q^2>B+1$ when $Q\ge4$ and $d\ge2$.
 \end{proof}
 
 Define
