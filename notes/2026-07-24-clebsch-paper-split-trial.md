@@ -31,6 +31,13 @@ provenance.
 Identify the exact older and current source snapshots and produce a section-, theorem-, proof-,
 figure-, checker-, and citation-level disposition map.
 
+**Result:** complete with `GO` for C576.  The exact focused base is commit
+`7d258dcd6cda9f54c330d4b705d553a975749014` (17 pages), and the frozen broad fallback is
+`5a82e80d72e5c7400afb07ea4f33d929fbc11259` (37 pages).  The complete disposition, source
+population recipe, page budgets, and mystery ledger are in
+`notes/2026-07-24-c575-clebsch-split-disposition.md`; the exact 58-row trust partition is
+`notes/2026-07-24-c575-clebsch-trust-disposition.csv`.
+
 Acceptance:
 
 - pin both source revisions and render both without changing their content;
@@ -133,12 +140,11 @@ inventory.  Do not lengthen Paper II to absorb it automatically.
 
 Paper I has priority.  The execution order is:
 
-1. C575 pins and dispositions the sources.
-2. C576 builds and referee-tests Paper I.
-3. C320 remaps and closes the Paper I trust/review surface, with C321 interposed only if triggered.
-4. C182 archives and releases Paper I.
-5. C577 begins Paper II only after Paper I is submission-ready.
-6. C579 tests Paper III only after Paper II.
+1. C576 builds and referee-tests Paper I from C575's pinned source and disposition.
+2. C320 remaps and closes the Paper I trust/review surface, with C321 interposed only if triggered.
+3. C182 archives and releases Paper I.
+4. C577 begins Paper II only after Paper I is submission-ready.
+5. C579 tests Paper III only after Paper II.
 
 If C182 is waiting only on a user-controlled DOI, licence, or repository-release input after every
 local gate has passed, that external wait does not force the lane to remain idle.  Otherwise no

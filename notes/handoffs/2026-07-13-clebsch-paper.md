@@ -14,12 +14,17 @@
 Produce and release focused Paper I before drafting the lower-priority split papers, while
 preserving the current broad manuscript as a fallback.
 Current assessment: **repeated reviewers find the post-section-12 material too broad and dense,
-while the older 17-page rigidity/decoder version is already a coherent paper.  C575 is now the
-next task: pin both snapshots and produce the exact split map.  Then C576 builds focused Paper I,
-C320 closes its trust/review surface, and C182 archives/releases it.  C577 and C579 remain behind
-Paper I submission readiness.**
+while the older 17-page rigidity/decoder version is already a coherent paper.  C575 has pinned that
+base at `7d258dcd`, pinned the 37-page fallback at `5a82e80d`, and assigned all 58 current trust
+rows exactly once.  C576 is next: build focused Paper I from the older base and the approved
+backports.  C320 then closes its trust/review surface, and C182 archives/releases it.  C577 and
+C579 remain behind Paper I submission readiness.**
 The split charter and acceptance gates are
 [`2026-07-24-clebsch-paper-split-trial.md`](../2026-07-24-clebsch-paper-split-trial.md).
+The exact C575 disposition and machine-checked trust-row partition are
+[`2026-07-24-c575-clebsch-split-disposition.md`](../2026-07-24-c575-clebsch-split-disposition.md)
+and
+[`2026-07-24-c575-clebsch-trust-disposition.csv`](../2026-07-24-c575-clebsch-trust-disposition.csv).
 The additive source roots and compilable spines are `papers/clebsch-rigidity/`,
 `papers/clebsch-factorization/`, and the exploratory `papers/clebsch-passages/`;
 `papers/clebsch-hexagon-code/` remains the unchanged fallback.
@@ -157,20 +162,17 @@ Detailed result/proof history is preserved in the archive and in reports C180–
 
 ## Submission-critical work, in order
 
-1. **C575: specify the split exactly.**  Pin the older focused and current fallback snapshots;
-   classify every theorem, proof, figure, checker, and citation; map the C320 evidence surface; and
-   freeze the Paper I source plan before any lower-priority drafting.
-2. **C576: build focused Paper I from the older base.**  Backport the explicit matrix, complete
+1. **C576: build focused Paper I from the pinned `7d258dcd` base.**  Backport the explicit matrix, complete
    census, proof-mode and trust-boundary improvements, and support-bipartition terminology.  Keep
    the rigidity/decoder/classification spine and at most a compact `H_3` explanation.
-3. **C320: close the Paper I verification and review surface.**  Remap only the claims adopted by
+2. **C320: close the Paper I verification and review surface.**  Remap only the claims adopted by
    Paper I, preserve the broad fallback ledger, interpose C321 only if its Singular boundary is
    triggered, and obtain the required post-fix independent `GO`.
-4. **C182: archive and release Paper I.**  Pin the source, PDF, verification surface, Lean commit,
+3. **C182: archive and release Paper I.**  Pin the source, PDF, verification surface, Lean commit,
    toolchain, certificates, DOI, licence, and repository release.  Paper I is submission-ready
    before lower-priority drafting begins; a wait solely for user-controlled release metadata need
    not idle the lane.
-5. **C577: build standalone Paper II.**  Use C399 as the phase prelude and C403/C406/C411 plus
+4. **C577: build standalone Paper II.**  Use C399 as the phase prelude and C403/C406/C411 plus
    selective C412 upgrades as the forgetting-and-memory spine.  Credit Edge and Dye for the
    exceptional conic geometry and avoid novelty claims for `5/14/22`, parent ambiguity, the B3
    `3+6` split, or conic--GRS.  Inventory passage/holonomy/torsor material as a possible Paper III
@@ -178,18 +180,23 @@ Detailed result/proof history is preserved in the archive and in reports C180–
    [`2026-07-20-c399-literature-audit.md`](../2026-07-20-c399-literature-audit.md),
    [`2026-07-20-c406-matching-module.md`](../2026-07-20-c406-matching-module.md), and the C406
    priority audit above.
-6. **C579: test Paper III after Paper II.**  Require one principal theorem before expanding the
+5. **C579: test Paper III after Paper II.**  Require one principal theorem before expanding the
    passage/holonomy comparison spine.
-7. Apply the repository mixed-verification policy separately to each candidate: keep the existing conceptual/replay/Lean
+6. Apply the repository mixed-verification policy separately to each candidate: keep the existing conceptual/replay/Lean
    boundary explicit, print the adequacy appendix for the headline Lean statements, and add the
    final AI/provenance disclosure.
-8. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
+7. Pin the exact validated commit and target list in the shared Lean repository; copy no Lean
    sources into the paper repository.
-9. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
+8. Preserve the publication-allocation edge: `arcs` supplies the public provenance target before
    this paper's release pass.
 
 ## Completed bounded paper upgrade
 
+- **C575 reported 2026-07-24:** pinned the exact 17-page focused base and 37-page fallback, rendered
+  both from committed source, assigned all sections, statements, proofs, figures, tables, checkers,
+  citations, and 58 trust rows, and returned `GO` for C576 with a 19--21 page Paper I population
+  recipe.  Paper I has no Paper II/III dependency; the compound fallback headline is retired and
+  split by clause.
 - **C211 reported 2026-07-16:** the Clebsch secants are connected to the projectivized `H3`
   mirrors by an exact `F_11` projectivity; the q=5 frame joins are `A3`; their intersection lattices
   now synthesize the complement formulas, decoder strata, and two conic-filling cases in the
