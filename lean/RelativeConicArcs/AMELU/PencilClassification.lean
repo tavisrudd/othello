@@ -237,7 +237,7 @@ theorem samePencilYOrbit_iff_pencilZFromY_eq [Field 𝔽] {y v : 𝔽}
         _ = 1 * y⁻¹ := by rw [hvy]
         _ = y⁻¹ := one_mul _
 
-/-- The manuscript's exact algebraic quotient: on the admitted odd locus,
+/-- The exact algebraic quotient: on the admitted odd locus,
 `z(t)=z(u)` precisely when `y(u)` is one of
 `y(t), -y(t), y(t)⁻¹, -y(t)⁻¹`. -/
 theorem pencilZ_eq_iff_samePencilYOrbit [Field 𝔽] {t u : 𝔽}

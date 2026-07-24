@@ -134,6 +134,17 @@ passed.  The complete manuscript dictionary is now formalized; C570 owns
 aggregate adoption and reconciliation.  See
 `2026-07-24-c591-ame-lu-lean-stabilizer-closure.md`.
 
+**C566 closed (2026-07-24): admitted-pencil classification interface
+complete.**  `RelativeConicArcs.AMELU.PencilClassification` defines the
+ordered pencil, its five-factor admitted non-GRS locus, `A`, `B`, `y`, and
+`z`; proves the exact four-branch algebraic quotient
+`z(t)=z(u) iff y(u) in {±y(t),±y(t)⁻¹}`; and derives the
+projective/monomial/LC classification from a structure that names the
+six-arc, explicit-projectivity, bracket-invariance, and LC-holonomy inputs
+separately.  Its import gate, trace-only aggregate check, no-build probes,
+and standard-axiom audit passed.  See
+`2026-07-24-c566-ame-lu-lean-lc-classification.md`.
+
 **C580 closed (2026-07-24): bounded scalar blindness versus marginal
 covariant rigidity.**  For every fixed copy bound `M`, outside finitely many
 `M`-dependent characteristics and for all sufficiently large `q`, at least
@@ -165,15 +176,16 @@ as C559--C572.  Dependency order is authoritative:
 3. C562--C563: claim-specific literature audit and paper-local evidence import.
 4. C564: first complete manuscript draft and warning-free PDF.
 5. C565, C590, and C591: shared Lean foundation and complete dictionary;
-   C566--C569: four theorem packages.
+   C566: pencil classification interface (complete); C567--C569: three
+   remaining theorem packages.
 6. C570: aggregate import, axiom audit, and manuscript reconciliation.
 7. C571: adversarial audit, second draft, PDF inspection, and cold read.
 8. C572: clean replay, immutable manifest, public export, and release gates.
 
-C566 is next: formalize the admitted non-GRS pencil, scalar `z`, and
-local-Clifford classification interface.  C581 is a separately queued
-optional upgrade gate for basis-free phase-space reconstruction and
-quantitative approximate rigidity.
+C567 is next: formalize the marginal trace/rank and concurrency-count
+reduction used by the uniform H3-versus-GRS LU separator.  C581 is a
+separately queued optional upgrade gate for basis-free phase-space
+reconstruction and quantitative approximate rigidity.
 
 ## Completion gates
 
