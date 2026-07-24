@@ -59,8 +59,11 @@ the complete release surface excluding the output's own hash.
 After an intentional scholarly-source change, regenerate the statement
 identity and trust manifest, commit the resulting clean release surface, and
 then refresh the final certificate by adding `--update-output` to the command
-above. Commit that certificate and rerun the command without
-`--update-output`; the final run is the clean-source release gate. The update
-mode tolerates a pre-existing modification only at
+above. After that check passes, rerun `build_trust_manifest.py` to record the
+new certificate hash, commit the manifest and certificate together, and rerun
+the command without `--update-output`; the final run is the clean-source
+release gate. The certificate's own hash is excluded from the canonical
+release-surface hash, so this last manifest refresh does not invalidate the
+certificate. The update mode tolerates a pre-existing modification only at
 `verification/verify-release-output.json`, so an interrupted or superseded
 refresh can be replaced without admitting any other dirty scholarly path.

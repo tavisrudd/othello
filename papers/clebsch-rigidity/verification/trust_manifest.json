@@ -1294,7 +1294,7 @@
     {
       "path": "verification/README.md",
       "repository": "paper",
-      "sha256": "626854f7ccd3f2a0a8e9c2edf5060d4efcc9ecbf9db1970c7c617b1d7fd397d7"
+      "sha256": "43ac2b870384855d3c7cd4a8e74f10aa1f0a25463d10d9927643aa5b530a8d59"
     }
   ],
   "reproducibility_environment": {
@@ -1534,7 +1534,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "9b56ea56338df1c48f083fc3b3c573eea42a2e454fe207962c2209e1eec0df37"
+      "sha256": "2416a3a2a57289f375ceb84a1ceea86391618d6e7667bc17192fca73e185e170"
     },
     "verification_tools": [
       {
