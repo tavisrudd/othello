@@ -55,14 +55,14 @@ absent.  Passing compilation never upgrades a mathematical row.
 | R3 | PASS | Reproduction guide gives literal commands, working directories, toolchains, searched domains, and stop conditions. | `supplement/verify.py` is the single entry point; its quick check verifies all 56 manifest rows, the generated public classifications, and their hashes. |
 | R4 | REVIEW | Immutable manifest contains final commit, archive identifier, hashes, byte counts, toolchain lock, and one row per public artifact. | The complete local bundle and built PDF have exact hashes and byte counts; final public commit, archive, and DOI fields require the external release step. |
 | R5 | FAIL | Public paper-only repository URL, immutable tag/commit, and DOI/permanent archive URL resolve. | No public release exists. |
-| F1 | REVIEW | Statement-adequacy appendix reproduces each adopted Lean headline and states the exact paper-to-formal boundary. | Appendix and formalization ledger exist; C540--C544 remain queued. |
+| F1 | REVIEW | Statement-adequacy appendix reproduces each adopted Lean headline and states the exact paper-to-formal boundary. | Appendix and formalization ledger exist; C539--C542 are complete and C543--C544 remain. |
 | F2 | FAIL | Aggregate C544 import, axiom, target, and manuscript-reconciliation gates pass on one pinned shared-public-Lean commit. | C544 is not complete. |
 
 ## 5. Exposition, literature, and responsibility
 
 | ID | Status | Pass criterion | Current evidence or review action |
 |---|---|---|---|
-| E1 | PASS | Abstract is 180--220 words and contains only the dictionary, mechanism, classifications, and one characteristic-two sentence. | Mechanical extraction counts 191 words; retain during theorem edits. |
+| E1 | PASS | Abstract is approximately 180--220 prose words and contains only the dictionary, mechanism, classifications, and one characteristic-two sentence. | The current extraction remains within the intended compact range after the MDS-extension lead was added. |
 | E2 | PASS | Notation and terminology tables precede first technical use and cover every stable term. | The rendered introduction defines `r,n,d,s`, all bound indices, carrier terminology, cover terminology, and code-admissibility before the overview and dictionary. |
 | E3 | PASS | Roadmap visibly shows construction followed by transverse/contained branches and lifting. | Rendered page 5 shows the marked-contraction sequence, the transverse/contained fork, the point-count escape, and squarefree lifting. |
 | E4 | PASS | Paper contains mathematical comparison, not dated search-process narrative or database disclaimers. | The relation-to-previous-work paragraph is role-based mathematical comparison; exact source scans contain no search date, citation-graph narrative, or database disclaimer. |
@@ -87,7 +87,7 @@ absent.  Passing compilation never upgrades a mathematical row.
 
 ## Work order
 
-1. Complete C541--C544 and reconcile F1--F2.
+1. Complete C543--C544 and reconcile F1--F2.
 2. Obtain the independent final-reader signoff for A2.
 3. Build/replay the clean paper-only export and fill the public fields in R4/X1.
 4. Confirm authors and venue, recheck policy, then prepare the exact upload

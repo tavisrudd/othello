@@ -1,10 +1,10 @@
 # Theorem adoption map
 
-This map freezes the claims adopted by the C538 theorem spine; it does not certify that the
-fifteen-page announcement contains submission-length proofs. “Complete” describes the mathematical
-classification claimed in its declared range. The claim remains release-gated wherever the proof
-ledger says `OPEN-MATH` or `REVIEW-GATE`. “High-field” means the paper makes no claim below the
-displayed threshold.
+This map freezes the claims adopted by the integrated manuscript.
+“Complete” describes the mathematical classification claimed in its
+declared range, while publication readiness remains separately gated
+by the proof, evidence, and release ledgers.  “High-field” means the
+paper makes no claim below the displayed threshold.
 
 | Source | Manuscript result | Adopted strength | Exact boundary | Proof/evidence type |
 |---|---|---|---|---|
@@ -13,6 +13,7 @@ displayed threshold.
 | C509 | Redundancy-seven split-free syndrome classification | complete all-field classification; deep-hole promotion only with the radius gate | finite certificate through `q=32`; geometric continuation from `q>=37`; genuine deep holes only for `q >= 11`; the `q=7,8,9` radius gate is not supplied | pointed transverse proof, characteristic-free contained rank-two proposition, and orbit-reduced finite certificate |
 | C512 | Polar-flag construction and effective transverse induction | unconditional construction, uniform ordinary rank-two containment, plus conditional transverse theorem | applies at each fixed degree after the lower splitting package, degree bounds, and any residual marker/modular contained assertions are proved | characteristic-free construction, rank--nullity proposition, and transverse theorem; no census |
 | C513 | Redundancy-eight theorem | unconditional high-field classification | `q >= 43`; `CC(7,1)` and `LP(6,1)` are proved; no statement about extra orbits below `43` | explicit recursive lower-carrier equations, geometric-`S3` three-marker cover, direct gcd-one treatment, uniform contained/collision propositions, and modular-lift calculation |
+| C542 | Redundancy-eight Lean boundary | conditional synthesis and arithmetic, not a full formalization | integer Hasse--Weil cutoff `42`, first prime-power field order `43`, budgets `30` and `14`, persistent count/orbit/cocycle terminals, and only the proved characteristic-seven `q=7,49` boundary | projective three-marker contraction, exact threshold and synthesis implications, import-only gate, and standard-axiom audit; concrete geometry, coding identification, group actions, and covering radius remain explicit inputs |
 | C516 | Redundancy-nine theorem | unconditional high-field classification | `q >= 53`; no full bounded-field classification | four-marker proof, residual identities, explicit six-slice Bezout identity, rational-base polynomial and degree bound, `CC(8,1)`, and exact `q=49` carrier closure |
 | C517 | Redundancy-nine Lean boundary | formal implication and algebra, not a full formalization | geometric integrality, Hasse–Weil existence, coding identification, and exhaustion remain explicit hypotheses | Lean algebra/synthesis terminals and axiom audit |
 | C525 | Characteristic-two ordered-Hessian theorem | geometric degeneracy, exact reduced contained pullback, and unconditional effective corollary | all degrees `n >= 5`; revised base threshold `min((n-4)(n+11)/2+1, 9(n-4))` and deletion budget `3n-4` | geometric strata, rank-nullity/Lucas pullback, degree-eight global-union polynomial, and deterministic regression |
@@ -24,8 +25,9 @@ displayed threshold.
 - `thm:r5`: complete redundancy-five classification.
 - `thm:spine`: classification spine, with all-field and high-field clauses separated.
 - `thm:polar-construction`: intrinsic polar-flag construction and squarefree lifting.
-- `thm:induction`: conditional effective transverse induction, after a separately proved
-  level-specific contained-component assertion.
+- `thm:induction`: witness-producing effective transverse polar induction
+  from a lower splitting package and a separately proved level-specific
+  contained-component assertion.
 - `thm:r6`: complete redundancy-six classification.
 - `thm:r7`: complete redundancy-seven split-free classification and the `q>=11` deep-hole corollary.
 - `thm:r8`: redundancy-eight high-field classification.

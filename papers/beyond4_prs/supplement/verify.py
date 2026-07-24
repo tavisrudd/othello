@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import re
 import subprocess
 import sys
 import tempfile
@@ -13,6 +14,11 @@ from pathlib import Path
 
 SUPPLEMENT = Path(__file__).resolve().parent
 PAPER = SUPPLEMENT.parent
+
+
+def digest(path: Path) -> tuple[str, int]:
+    data = path.read_bytes()
+    return hashlib.sha256(data).hexdigest(), len(data)
 
 
 def run(command: list[str], cwd: Path = PAPER) -> None:
@@ -31,10 +37,51 @@ def check_classification_hashes() -> None:
     print("verified classification-record hashes")
 
 
+def check_release_manifest() -> None:
+    manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
+
+    def field(label: str) -> str:
+        match = re.search(
+            rf"^\| {re.escape(label)} \| `([^`]+)` \|$",
+            manifest,
+            flags=re.MULTILINE,
+        )
+        if match is None:
+            raise SystemExit(f"missing release-manifest field: {label}")
+        return match.group(1)
+
+    pdf_name = field("PDF artifact")
+    pdf = PAPER / pdf_name
+    pdf_hash, pdf_bytes = digest(pdf)
+    if field("Local built PDF SHA-256") != pdf_hash:
+        raise SystemExit("release manifest has stale local PDF SHA-256")
+    if int(field("Local built PDF bytes")) != pdf_bytes:
+        raise SystemExit("release manifest has stale local PDF byte count")
+
+    for relative in (
+        "EVIDENCE-MANIFEST.json",
+        "EVIDENCE-ROWS.md",
+        "package_evidence_bundle.py",
+        "verify.py",
+    ):
+        match = re.search(
+            rf"^\| `{re.escape(relative)}` \| `([0-9a-f]{{64}})` \| ([0-9]+) \|$",
+            manifest,
+            flags=re.MULTILINE,
+        )
+        if match is None:
+            raise SystemExit(f"missing release-manifest artifact row: {relative}")
+        actual_hash, actual_bytes = digest(SUPPLEMENT / relative)
+        if match.group(1) != actual_hash or int(match.group(2)) != actual_bytes:
+            raise SystemExit(f"stale release-manifest artifact row: {relative}")
+    print("verified release-manifest local artifact rows")
+
+
 def check_bundle() -> None:
     run([sys.executable, "supplement/package_evidence_bundle.py", "--check"])
     run([sys.executable, "supplement/build_classification_records.py", "--check"])
     check_classification_hashes()
+    check_release_manifest()
 
 
 def replay() -> None:

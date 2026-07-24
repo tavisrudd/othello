@@ -10,6 +10,11 @@ paper directory:
 python3 supplement/verify.py
 ```
 
+The quick check also verifies that the local PDF and the four
+supplement-artifact rows printed in `RELEASE-MANIFEST.md` match the
+current files.  It deliberately does not fill or validate the external
+repository, archive, DOI, or immutable-release fields.
+
 Run every paper-local independent replay, including the compiled R9-49
 comparison, with:
 

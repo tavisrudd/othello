@@ -3,11 +3,11 @@
 **Working title:** *Projective Reed--Solomon syndromes beyond redundancy four: deep holes,
 coherent polar flags, and modular carriers.*
 
-**Status:** 41-page proof-complete local manuscript candidate.  The manuscript
+**Status:** 42-page proof-complete local manuscript candidate.  The manuscript
 proofs, claim-level trust map, statement-adequacy boundary, public
 classification records, certificate schema, literature audit, and rendered
 referee-polish gates are closed.  DOI publication remains gated on the
-C541--C544 aggregate formalization/reconciliation, an independent final
+C543--C544 aggregate formalization/reconciliation, an independent final
 reader, a clean public export/replay, immutable identifiers, and author/account
 confirmation.  This merged paper supersedes the former plan for a
 redundancy-five-only manuscript.
@@ -63,10 +63,10 @@ theorem closes before manuscript freeze.
 ## Verification plan
 
 - C517 already supplies the redundancy-nine residual-quadratic algebra and synthesis gate.
-- C539 builds the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
-- C540 closes the redundancy-five Lean package.
-- C541 closes the coherent-polar engine and redundancy-six/seven applications.
-- C542 closes the redundancy-eight application.
+- C539 built the shared paper-facing PRS/Hankel formal interface and exact coverage ledger.
+- C540 closed the redundancy-five Lean package.
+- C541 closed the coherent-polar engine and redundancy-six/seven applications.
+- C542 closed the redundancy-eight application.
 - C543 closes the characteristic-two ordered-Hessian and Lucas-carrier layer.
 - C544 supplies the aggregate import gate, axiom audit, referee-facing trust map, and final
   manuscript-to-formalization reconciliation.

@@ -232,7 +232,7 @@ The older eight-point revision plan now has the following status.
 6. **Coding corollaries — closed.**  The article now leads with
    one-column MDS extensions and states exact projective counts and
    the fixed-redundancy recognition procedure.
-7. **Reusable Theorem 5.5 — closed.**  The theorem now lists its three
+7. **Reusable polar-induction theorem — closed.**  The theorem now lists its three
    reusable inputs, produces a rational marked flag and squarefree
    witness, states the split-free inclusion as a corollary, and
    isolates the two genuinely level-specific inputs.
@@ -244,3 +244,83 @@ After the theorem recast, `make check` and the supplement verifier
 still pass.  The rendered theorem was inspected on page 14.  The
 canonical PDF has 42 pages, 302474 bytes, and SHA-256
 `5a5ecc732ec223ffca78afaed77f63ab42d589196cc13d920ac20ff56491e37d`.
+
+## Extra-juice consistency audit
+
+The hostile metadata pass found one real reproducibility defect:
+`supplement/RELEASE-MANIFEST.md` still named an older local PDF hash and
+byte count even though the evidence verifier passed.  This happened
+because the release manifest is deliberately outside the evidence
+manifest's hash closure, avoiding a circular self-reference.
+
+The defect is now closed in two ways:
+
+- the release manifest records the current PDF, evidence-manifest,
+  evidence-row, bundle-builder, and verifier hashes and byte counts;
+- `supplement/verify.py` now compares those local release-manifest rows
+  against the actual files, so a future manuscript rebuild produces a
+  hard failure until the local release row is refreshed.
+
+The same audit removed operative-document drift: the README now says
+42 pages and recognizes C539--C542 as complete; the theorem map no
+longer describes a fifteen-page announcement and records the
+witness-producing induction output; the release checklist names only
+C543--C544 as remaining formal gates; and the claim/proof ledger points
+to the completed polar, R6/R7, and R8 terminals instead of calling them
+planned.  Historical second-draft and adversarial-review reports remain
+historical and were not rewritten.
+
+The abstract was tightened to the checklist's compact range without
+weakening the MDS-extension lead.  `make check` passes, the supplement
+verifier now additionally prints
+`verified release-manifest local artifact rows`, and the canonical PDF
+has 42 pages.
+
+### C542 integration
+
+The completed redundancy-eight formal package is now integrated into
+every paper-facing trust surface:
+
+- Section 10 records the three-marker affine/infinity contractions,
+  adjacent swaps, geometric-`S_3` slice interface, exact budgets
+  `30` and `14`, integer-42/prime-power-43 threshold passage,
+  conditional synthesis, persistent cardinality, orbit pairs, tangent
+  cocycle, and bounded characteristic-seven statement.
+- `theorem-map.md` separates C513's printed geometric theorem from
+  C542's conditional formal boundary.
+- `supplement/LEAN-STATEMENTS.md` lists the import and axiom-audit
+  gates and reproduces the exact numerical and synthesis signatures.
+- The claim/proof ledger records the R8 synthesis as L3 at its explicit
+  hypothesis boundary, without claiming formalized integrality, group
+  actions, coding identification, or covering radius.
+
+The C542 audit reports only `propext`, `Classical.choice`, and
+`Quot.sound`; its finite orbit-arithmetic terminals are axiom-free.
+The exact integer cutoff is `42`, while `43` is the first prime-power
+field order, and the characteristic-seven interface deliberately does
+not promote rootlessness beyond the proved `q=7,49` boundary.
+
+The full supplement replay was then run, not only the quick manifest
+check.  R5, R6, R6 normal forms, R7, R8, R9, Hessian, Lucas, `e_7`,
+and the compiled R9-49 comparison all passed.  After the final PDF
+build and C542 reconciliation, the canonical PDF has 42 pages, 302857
+bytes, and SHA-256
+`cecd0b248c3a3a1b2264472f5f8818fb4c51fa4717b2d19cbcc0ccf78ddacc41`.
+
+### Extra-juice mystery ledger
+
+- **Could the quick verifier pass with a stale release claim?**  Yes;
+  this was reproduced and is now mechanically prevented for every
+  local artifact row printed in the release manifest.
+- **Did the induction recast accidentally strengthen the geometric
+  input?**  No.  The proof constructs exactly the marked witness
+  already used contrapositively; the new statement exposes that output
+  while retaining the lower package, $b,c$ bounds, and level-specific
+  `CC(n,j)` as inputs.
+- **Is the persistent-only high-field conjecture viable?**  No; the
+  infinite binary nucleus families are counterexamples.  The printed
+  stable-polar conjecture correctly retains nonshallow Lucas-kernel
+  components.
+- **What still cannot be closed locally?**  Immutable public
+  repository/archive identifiers, the clean public replay, author
+  confirmation, and the two independent specialist audits.

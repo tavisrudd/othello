@@ -1,11 +1,81 @@
 # Lean statement-adequacy source
 
-The manuscript places Lean-level trust on the following definitions and
-terminal theorem.  They are reproduced verbatim from
+The manuscript places Lean-level trust on the following public
+declarations.  The redundancy-eight inventory is imported by
+`RelativeConicArcs.Gates.PRSRedundancyEight` and audited by the adjacent
+`PRSRedundancyEightAxiomAudit` gate.  The redundancy-nine definitions
+and terminal theorem are reproduced from
 `RelativeConicArcs/PRSResidualQuadratic.lean` and
-`RelativeConicArcs/PRSRedundancyNine.lean`.  The manuscript appendix explains
-the paper-to-formal correspondence and trust boundary without interrupting the
-mathematical conclusion with source code.
+`RelativeConicArcs/PRSRedundancyNine.lean`.  The paper-to-formal
+correspondence keeps geometric and coding inputs visible rather than
+turning them into project axioms.
+
+## Redundancy-eight public terminals
+
+The exact public declaration inventory is:
+
+```text
+threeMarkerContraction_map
+projectiveSequenceContraction_comm
+threeMarkerContraction_swap_first
+threeMarkerContraction_swap_last
+exact_deletion_and_polar_budgets
+threeMarker_genusOne_hasseWeil_bound
+threeMarker_genusOne_hasseWeil_exact_threshold
+primePowerOrder_at_least_fortyThree
+redundancyEightHighFieldSynthesis
+redundancyEightPrimePowerSynthesis
+PersistentFamilyData.classified_card
+OrbitArithmetic.seventhPower_sigmaInversionOrbitCount
+OrbitArithmetic.orbit_count_pairs
+tangentTranslateSeven_of_cast_eq_zero
+tangentTranslateSeven_surjective
+CharacteristicSevenCarrierBoundary.proved_boundary
+```
+
+The numerical and synthesis statements are:
+
+```lean
+theorem exact_deletion_and_polar_budgets :
+    threeMarkerDeletionDegree = 30 ∧
+      transverseCarrierBudget + markedCollisionBudget = 14
+
+theorem threeMarker_genusOne_hasseWeil_exact_threshold :
+    42 + 1 > 2 * Nat.sqrt 42 + threeMarkerDeletionDegree ∧
+      ¬(41 + 1 > 2 * Nat.sqrt 41 + threeMarkerDeletionDegree)
+
+theorem primePowerOrder_at_least_fortyThree
+    {q : ℕ} (hprimePower : IsPrimePow q) (hq : 42 ≤ q) :
+    43 ≤ q
+
+theorem redundancyEightHighFieldSynthesis
+    {Syndrome Marker Witness : Type*}
+    [Fintype Marker] [DecidableEq Marker]
+    {q : ℕ} (hq : 43 ≤ q)
+    (input : RedundancyEightInput Syndrome Marker Witness q)
+    (syndrome : Syndrome) :
+    input.fixedLevel.radius.isDeep syndrome ↔
+      input.fixedLevel.polar.persistent syndrome
+
+theorem redundancyEightPrimePowerSynthesis
+    {Syndrome Marker Witness : Type*}
+    [Fintype Marker] [DecidableEq Marker]
+    {q : ℕ} (hprimePower : IsPrimePow q) (hq : 42 ≤ q)
+    (input : RedundancyEightInput Syndrome Marker Witness q)
+    (syndrome : Syndrome) :
+    input.fixedLevel.radius.isDeep syndrome ↔
+      input.fixedLevel.polar.persistent syndrome
+```
+
+`RedundancyEightInput` retains the concrete geometric-$S_3$ slice,
+lower-cover membership, contained/modular exclusion, and coding data
+as structure fields.  Thus the terminals check contraction,
+arithmetic, and logical synthesis without claiming a Lean proof of
+geometric integrality, the actual group actions, or the covering-radius
+theorem.  The characteristic-seven terminal records only the proved
+`q=7` rootless count and the `q=49` shallow witness.
+
+## Redundancy-nine public terminal
 
 ```lean
 def dividedPowerContraction {n : ℕ} (r : R)
