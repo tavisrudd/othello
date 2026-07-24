@@ -50,14 +50,16 @@ hole and its complement gives an exact defect identity whose remainder is
 a sum of nonnegative local terms.  For a conic this yields an exact integer
 lower bound \(L_2(q)\), and in particular
 \[
- \rhoC(q)\ge \sqrt{2q}+\frac32-4\sqrt{\frac2q}.
+ \rhoC(q)\ge
+ \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
 Vanishing defect turns the concurrence points of disjoint secants into a
 matching design, giving equality rigidity and quantitative stability; for
 ten points equality occurs only in \(\PG(2,8)\), and the concurrence
-design is the regular-hyperoval design.  Projective averaging transfers ordinary complete arcs to
-upper bounds in the relative problem.  Explicit witnesses attain \(L_2(q)\)
-for \(q=5,8,9,11\).  Finally, a kernel-checked exhaustive covering
+design is the regular-hyperoval design.  Projective averaging transfers
+ordinary complete arcs to upper bounds in the relative problem.  Explicit
+witnesses attain \(L_2(q)\) for \(q=5,8,9,11\).  Finally, a kernel-checked
+exhaustive covering
 certificate excludes every eight-arc over \(\F_{16}\): its ordinary
 uncovered locus cannot lie on a quadratic avoiding the arc.  A
 certificate-checked nine-point witness therefore gives
@@ -97,10 +99,11 @@ and retain $\cU_{\cC}(A)$ for the conic-relative locus.
 Thus $A$ is $\cC$-complete exactly when $\cU_{\cC}(A)=\varnothing$.
 \end{definition}
 
-The minimum is attained because a maximum-cardinality arc disjoint from
-$\cC$ is maximal under insertion.  Equivalently, $A$ is maximal among arcs
-in the point set
-$\PG(2,q)\setminus\cC$.  All nonsingular conics in $\PG(2,q)$ are
+The minimum is attained because the finite point set
+$\PG(2,q)\setminus\cC$ contains an inclusion-maximal arc \(A\).  For every
+point \(x\notin A\cup\cC\), maximality forces \(A\cup\{x\}\) to contain
+three collinear points, so \(x\) lies on a secant of \(A\).  Thus \(A\) is
+\(\cC\)-complete.  All nonsingular conics in $\PG(2,q)$ are
 projectively equivalent, so the numerical value of $\rhoC(q)$ does not
 depend on the chosen conic.
 
@@ -624,9 +627,10 @@ For existence over \(\F_8=\F_2(\alpha)\), where
 \[
  \mathcal D:\ XZ=Y^2
 \]
-from the prescribed conic.  Let
+from the prescribed conic, and denote its nucleus by
+\(N_{\mathcal D}=(0,1,0)\).  Let
 \[
- A=\mathcal D\cup\{(0,1,0)\},\qquad
+ A=\mathcal D\cup\{N_{\mathcal D}\},\qquad
  \cC:\ X^2+Y^2+Z^2+(1+\alpha)YZ=0.
 \]
 The gradient of the latter quadratic is
@@ -709,10 +713,10 @@ If $P_s(a)\ge0$, then $a\ge3/2-8/s$.
 
 \begin{proof}
 On $0\le a\le2$, the coefficients of $s^2$, $s$, and $1$ in $P_s(a)$
-are at most $5/2$, $1$, and $3$, respectively.  Since $s\ge2$, their total
+are at most $5/2$, $1/6$, and $3$, respectively.  Since $s\ge2$, their total
 contribution is at most
 \[
- \frac52s^2+s+3\le4s^2.
+ \frac52s^2+\frac16s+3\le4s^2.
 \]
 Thus $P_s(a)\ge0$ implies
 $0\le(2a-3)s^3/4+4s^2$, and division by $s^2$ gives the claim.
@@ -759,7 +763,20 @@ gives the necessary inequality
  \frac{k-1}{2}\bigl(k(q-1)-(k-2)(k-3)\bigr).
 \]
 After substituting $q=s^2/2$ and $k=s+a$, the right side minus the left
-side is $P_s(a)$.  It is nonnegative, so
+side is
+\begin{align*}
+&\frac{s+a-1}{2}
+ \left((s+a)\left(\frac{s^2}{2}-1\right)
+ -(s+a-2)(s+a-3)\right)
+ +(s+a)-\frac{s^4}{4}\\
+&\qquad=
+ \frac{2a-3}{4}s^3
+ +\frac{a^2-7a+10}{4}s^2
+ +\frac{-3a^2+10a-8}{2}s
+ +\frac{-a^3+5a^2-8a+6}{2}
+ =P_s(a).
+\end{align*}
+It is nonnegative, so
 Lemma~\ref{lem:polynomial-estimate} gives
 $a\ge3/2-8/s$, which is~\eqref{eq:asymptotic-lower}.  Letting $q$ tend to
 infinity through prime powers gives~\eqref{eq:liminf}.
@@ -954,6 +971,10 @@ disjoint from the prescribed conic.
 Take $H=\cC$, so $|H|=q+1$.  For integral $b\le q$ one has
 $b(q+1)<q^2+q+1$, and Theorem~\ref{thm:transfer} applies.
 \end{proof}
+
+The hypothesis \(t_2(2,q)\le q\) is part of the corollary, not a
+uniform assertion about every order.  The application below uses only the
+range of sufficiently large \(q\), where the Kim--Vu bound supplies it.
 
 Kim and Vu proved that, for all sufficiently large $q$, every projective
 plane of order $q$ has a complete arc of size at most
@@ -1422,9 +1443,12 @@ displayed in the proof of Theorem~\ref{thm:match-ten-realization}, and the check
 rational module lifts have no denominator prime other than \(2\); hence
 their unit relations survive in every odd characteristic.
 
-Lean also proves the operational asymptotic statement that every constant
-below \(3/2\) is eventually a lower bound; its literal \texttt{liminf}
-wrapper assumes coboundedness.
+Lean also proves, without an extra hypothesis, the operational asymptotic
+statement along unbounded orders: every constant below \(3/2\) is eventually
+a lower bound for \(\rhoC(q)-\sqrt{2q}\).  The separate real-valued
+\texttt{liminf} wrapper assumes coboundedness only because its codomain
+\(\mathbb R\) has no value \(+\infty\); this assumption is not used in the
+paper's elementary passage to~\eqref{eq:liminf}.
 
 For the \(q=16\) exclusion, the supplement contains the source generator
 \path{papers/arcs_complete_outside_conic/search_rhoc16.cpp}, its frozen
