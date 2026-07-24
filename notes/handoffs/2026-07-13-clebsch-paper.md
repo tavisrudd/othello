@@ -17,10 +17,12 @@
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
 warning-free 19-page candidate with a complete nineteen-row release surface.
-It lives in `papers/clebsch-rigidity/`. The user-launched independent C320
-review returned `NO-GO`; commit `3ed43a0d` repairs every finding. C320 is
-still live and now waits for the separately user-launched post-fix review.
-Only that review may return final `GO`.
+It lives in `papers/clebsch-rigidity/`. The first user-launched C320 review
+returned `NO-GO` and commit `3ed43a0d` repaired its findings. The separately
+user-launched PDF-only post-fix review found one remaining enumeration-boundary
+overstatement; commit `70fb1e7f` repairs it and its clean replay is green.
+C320 is still live and requires another separately user-launched post-fix
+review. Only that review may return final `GO`.
 
 The active order is strict:
 
@@ -120,11 +122,13 @@ C320's implemented surface:
 4. pins hashes, toolchains, the exact formal source commit, and manuscript
    correspondence while preserving the fallback surface byte-for-byte.
 
-The user-launched independent cold review returned `NO-GO`, commit
-`3ed43a0d` repairs its findings, and the repaired fifteen-check clean replay
-is green. The implementing agent must not launch or simulate the post-fix
-reviewer. The user now launches that separate review; only its final `GO`
-advances to C182.
+The first user-launched cold review returned `NO-GO`, commit `3ed43a0d`
+repaired its findings, and its fifteen-check clean replay passed. A
+separately user-launched PDF-only review then returned `NO-GO` on one
+localized enumeration-boundary sentence; commit `70fb1e7f` repairs it and
+its clean replay is green. The implementing agent must not launch or simulate
+the next post-fix reviewer. The user launches that separate review; only its
+final `GO` advances to C182.
 
 The previous C320 `NO-GO`, 58-row manifest, 29-statement extraction, and
 18-check replay belong to the mega-paper fallback. They are provenance and
@@ -173,6 +177,13 @@ matching geometry*. It may proceed only if one principal theorem organizes:
 If no single theorem makes the comparisons consequences or applications,
 stop drafting and return the material to a disposition inventory. Do not
 lengthen Paper II to absorb it.
+
+The preferred pre-allocation test, queued behind Paper II rather than active
+now, is the degree-23 `M_{23}`/Golay coherence test proposed in
+`notes/2026-07-24-c589-gateway-to-clebsch-memo.md`. Test whether the
+degree-11 recovery-depth lattice extends functorially to the degree-23
+instance. Coherence supplies a candidate principal organizer; failure keeps
+Paper III inventoried. Allocate no successor ID until C579 reaches this gate.
 
 ## Shared verification and release policy
 

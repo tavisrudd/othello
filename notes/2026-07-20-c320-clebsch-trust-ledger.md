@@ -52,20 +52,20 @@ review and post-fix `GO` specified in the closing protocol below.
 The focused Paper I surface was built from the manuscript rather than by
 filtering the fallback manifest. It is committed in
 `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`,
-`3d1eac40`, `573e0ef8`, and post-review repair `3ed43a0d`. The first commit
-is the exact pinned formal source commit; the later commits repin, harden,
-and repair the Paper I release surface.
+`3d1eac40`, `573e0ef8`, post-review repair `3ed43a0d`, and PDF-review repair
+`70fb1e7f`. The first commit is the exact pinned formal source commit; the
+later commits repin, harden, and repair the Paper I release surface.
 
 ### Frozen artifacts
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `papers/clebsch-rigidity/clebsch_rigidity.tex` | 67,973 | `17c6deff3ef29f03d9aeb98fd700cb4a1ef343f0f3f3fd5c19741decd5925c9a` |
-| `papers/clebsch-rigidity/clebsch_rigidity.pdf` | 175,664 | `3a58346d083d5fe40df883cc8fc8045ba3a444eb74b076b4f902da2dbcee6209` |
-| `papers/clebsch-rigidity/verification/statement_identity.json` | 15,451 | `aa586b5864b3b0a107d87b4307398e35e2cf4b09ceba98392964ebe4dfff61b2` |
-| `papers/clebsch-rigidity/verification/trust_manifest.json` | 60,055 | `a885307fc0295e0226259c3990a3e0a79bfeb1d5020814fe81c7a48cca1ffb87` |
+| `papers/clebsch-rigidity/clebsch_rigidity.tex` | 68,083 | `d2f8b362237eb627166d7bb032cfbaa14375350dd5f9bd07ce1a3f5a0ec797d9` |
+| `papers/clebsch-rigidity/clebsch_rigidity.pdf` | 175,828 | `362e947a842958c6208aed479708e2926077c6b7e2a3ba01a3080787760e1247` |
+| `papers/clebsch-rigidity/verification/statement_identity.json` | 15,451 | `4fcf539118f616963ec441e7f1fdce54b9c4539a365beaf3d988bc3896e997c7` |
+| `papers/clebsch-rigidity/verification/trust_manifest.json` | 60,055 | `7ce270c4624b59914c47fd73898ca5deb6a9ade91dfae5eb77f1162061d73a53` |
 | `papers/clebsch-rigidity/verification/checker_outputs.json` | 1,716 | `d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56` |
-| `papers/clebsch-rigidity/verification/verify-release-output.json` | 1,768 | `6b59e85768f5cc0b65126dbd0a0f3899d948a5d04dfdfef819283c331024609a` |
+| `papers/clebsch-rigidity/verification/verify-release-output.json` | 1,768 | `607a8b75ffbbbdc8405e1a96374e690173bb39ab790b86112c0284a5d2106ca3` |
 | `papers/clebsch-rigidity/verification/verify_release.py` | 11,136 | `94e514d3cc7de42a99280ff779e6a22cd1b93a9bd457b16515f5cf1b2ea65cca` |
 | `lean/RelativeConicArcs/Gates/ClebschRigidityTrust.lean` | 3,436 | `dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69` |
 | `lean/verification/clebsch_rigidity_trust/axiom-audit.txt` | 3,365 | `ef031beeb322b7bd217651aec0b1822b231a01991c1652e21e048bc9f5305767` |
@@ -248,6 +248,31 @@ tracked release-output hash
 `6b59e85768f5cc0b65126dbd0a0f3899d948a5d04dfdfef819283c331024609a`.
 C320 now stops for a separately user-launched post-fix cold review. This
 repairing session cannot supply the final `GO`.
+
+### PDF-only post-fix review and repair
+
+The user separately launched a context-free reviewer with only the prompt
+“referee this” and the Paper I PDF path. It received no source, notes,
+manifest, prior findings, criteria, or conversation context.
+
+**Verdict:** `NO-GO` on one localized release-facing overstatement. The
+abstract said enumeration entered only the sharp numerical gap, and the
+conclusion repeated that boundary. In fact, exhaustive enumeration also
+proves the low-degree strengthening and the terminal `k=7`, `q=11,13`
+exclusions. The reviewer found no mathematical defect in the core
+line-bound/chord-defect/Dye implication, orbit and counting results, the
+`q=9` Sylvester exclusion, or the small-arc moment reduction.
+
+Commit `70fb1e7f` repairs both sentences. They now say exactly that the core
+conic-rigidity implication is conceptual, while enumeration proves the
+low-degree strengthening, sharp numerical gaps, and terminal `k=7`
+exclusions. The source, PDF, statement identity, manifest, and deterministic
+release-output attestation were regenerated together. A further separately
+user-launched post-fix review is still required. The repaired fifteen-check
+clean replay passed in 3 minutes 7 seconds at commit `70fb1e7f`; stdout
+exactly matched tracked hash
+`607a8b75ffbbbdc8405e1a96374e690173bb39ab790b86112c0284a5d2106ca3`.
+This repairing session cannot convert its own fix into final `GO`.
 
 ### Post-review `ej` + `tt` closeout
 
