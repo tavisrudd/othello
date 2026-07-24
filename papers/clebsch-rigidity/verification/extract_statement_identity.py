@@ -37,7 +37,7 @@ ROW_LABELS = {
     21: "prop:brianchon-support",
     22: "cor:decoder-brianchon",
     23: "prop:invariant-support-bipartition",
-    24: "lem:chord-defect",
+    24: ("lem:chord-defect", "lem:q9-polarity"),
     25: "thm:why11",
     26: "prop:clebsch-family-uncovered",
     29: "thm:small-k-conic-filling",
@@ -128,7 +128,11 @@ def unique_snippet(text: str, snippet: str, name: str) -> int:
 def build_payload(source: Path) -> dict[str, object]:
     text = source.read_text(encoding="utf-8")
     by_label = {statement.label: statement for statement in extract_environments(source)}
-    expected_labels = list(ROW_LABELS.values())
+    expected_labels = [
+        label
+        for labels in ROW_LABELS.values()
+        for label in (labels if isinstance(labels, tuple) else (labels,))
+    ]
     if list(by_label) != expected_labels:
         raise ValueError(
             "the theorem-like statement order does not match the published claim map"
@@ -144,18 +148,27 @@ def build_payload(source: Path) -> dict[str, object]:
             "tex": HEADLINE,
         }
     ]
-    for row, label in ROW_LABELS.items():
-        statement = by_label[label]
+    for row, labels in ROW_LABELS.items():
+        group = labels if isinstance(labels, tuple) else (labels,)
+        statements = [by_label[label] for label in group]
+        statement = statements[0]
+        statement_tex = "\n\n".join(item.tex for item in statements)
         claims.append(
             {
                 "row": row,
-                "id": label,
+                "id": "+".join(group),
                 "kind": "theorem-environment",
-                "environment": statement.environment,
-                "title": statement.title,
+                "environment": (
+                    statement.environment if len(group) == 1 else "statement-group"
+                ),
+                "title": (
+                    statement.title
+                    if len(group) == 1
+                    else "; ".join(item.title or item.label for item in statements)
+                ),
                 "source_line": statement.source_line,
-                "sha256": digest(statement.tex),
-                "tex": statement.tex,
+                "sha256": digest(statement_tex),
+                "tex": statement_tex,
             }
         )
     claims.append(

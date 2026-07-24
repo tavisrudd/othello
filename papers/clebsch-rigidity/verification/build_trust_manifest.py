@@ -347,8 +347,8 @@ def components_by_row(
             [conceptual("monomial characterization", CLASSICAL_CODE, "The manuscript reduces monomial code equivalence to projective equivalence and invokes row 18.")],
         ),
         20: (
-            "Every numerical clause is exact-replay-backed; the qualitative rigidity implication remains separately routed in row 17.",
-            [replay("global, neighbour, and automorphism gaps", ["check_global_conic_gap.py", "check_perturbation_gap.py", "check_code_automorphisms.py"], frame_coverage, "The scripts exhaust all conics, one-point perturbations, and displayed automorphism orbits.", complementary_replays)],
+            "The numerical gap is exact-replay-backed; the qualitative rigidity implication remains separately routed in row 17.",
+            [replay("global numerical gap", ["check_global_conic_gap.py"], frame_coverage, "The script exhausts the normalized six-arcs and regenerates the displayed uncovered-locus values.", complementary_replays)],
         ),
         21: (
             "The incidence dictionary is a human consequence of the cited Edge--Dye geometry.",
@@ -369,10 +369,10 @@ def components_by_row(
             ],
         ),
         24: (
-            "Lean checks the exact chord-defect algebra and an explicit Sylvester distance-two clique certificate; the manuscript supplies the secant-moment and polarity interpretations.",
+            "The manuscript proves the universal chord-defect identity and bound; Lean checks its six-arc specialization and an explicit Sylvester distance-two clique certificate.",
             [
-                conceptual("secant-moment double count", ["No external input; complete double count in the manuscript"], "The geometric identification of the variables is proved in the manuscript."),
-                lean("chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
+                conceptual("universal secant-moment double count and finiteness bound", ["No external input; complete double count in the manuscript"], "The identity, defect bound, and q < binom(k,2) consequence are proved for every k in the manuscript."),
+                lean("six-arc chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
                 conceptual("Sylvester graph and distance-two interpretation", CLASSICAL_SYLVESTER, "The explicit distance-two clique certificate is kernel checked."),
                 lean("Sylvester distance-two clique obstruction", ["field_order"], axioms),
             ],
@@ -394,11 +394,11 @@ def components_by_row(
             ],
         ),
         29: (
-            "Lean proves the universal moment reductions; the k=6 case inherits rows 25 and 17, and the terminal k=7 leaves are discharged by exhaustive exact replay.",
+            "Lean proves the small-arc moment reductions; the k=6 case inherits rows 25 and 17, the terminal k=7 leaves are exact-replayed, and the k=8 four-field sieve is human algebra.",
             [
-                conceptual("universal chord-moment reduction and k=6 dependency", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations and identifies their geometric fibers; only the k=6 branch invokes rows 25 and 17."),
+                conceptual("small-arc reductions, k=6 dependency, and k=8 sieve", CLASSICAL_SYLVESTER + CLASSICAL_DYE, "The manuscript derives the moment equations, identifies their geometric fibers, and proves the k=8 sieve; only the k=6 branch invokes rows 25 and 17."),
                 lean("four-, five-, and seven-arc moment consequences", ["small"], axioms),
-                replay("terminal small-arc exclusions", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes after the moment reduction.", direct_coordinates),
+                replay("terminal exclusions through seven points", ["check_small_k_conic_filling.py"], small_k_coverage, "The checker exhausts the displayed fields and arc sizes through k=7 after the moment reduction; it is not evidence for an eight-arc classification.", direct_coordinates),
             ],
         ),
         58: (

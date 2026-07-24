@@ -56,8 +56,10 @@ of Proposition~\ref{prop:decoding-oracle}. Its ambiguity data recover the
 classical Brianchon points, self-polar triangles, and an invariant support
 bipartition. The chord identity
 and the Sylvester graph show that $q=11$ is the only conic-filling field for
-six-arcs. For arc sizes four through seven, the only cases are a four-frame
-in $\PG(2,5)$ and the Clebsch hexagon.
+six-arcs. A universal chord-defect identity shows that conic filling by a
+$k$-arc forces $q<\binom{k}{2}$. Through seven points the only cases are a
+four-frame in $\PG(2,5)$ and the Clebsch hexagon; for eight points only
+$q\in\{13,16,17,19\}$ remain.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -108,7 +110,9 @@ $[6,3,4]_{11}$ MDS code whose projective deep-hole locus is exactly the
 $\F_{11}$-point set of a nonsingular conic. Its parity-check columns form
 the \emph{Clebsch hexagon}, a six-arc in $\PG(2,11)$. Thus a natural
 property of the covering-radius structure, with no assumed symmetry or
-conic construction, singles out a classical configuration.
+conic construction, singles out a classical configuration. This is an
+instance of a broader question: when does the projective deep-hole locus
+determine an MDS code, and when can that locus be algebraically degenerate?
 
 The main theorem starts from no symmetry or conic construction. Among all
 six-arcs of $\PG(2,11)$, conic containment of the projective deep-hole
@@ -118,7 +122,10 @@ conceptual implication; the census is needed only for the numerical clause.
 We then prove quantitative gaps, reconstruct the Brianchon geometry from
 decoder ambiguity, and isolate $q=11$. For a Clebsch hexagon $K$, the same
 chord identity gives $|\cU(K)|=q^2-14q+45$, with off-conic excess
-$(q-4)(q-11)$ when $q\equiv3\pmod4$.
+$(q-4)(q-11)$ when $q\equiv3\pmod4$. In general the same moment calculation
+shows that a conic-filling $k$-arc must satisfy
+$q<\binom{k}{2}$; we classify the cases through seven points and reduce the
+eight-point case to four fields.
 
 The configuration goes back to Clebsch~\cite[p.~336]{Clebsch1871}. Edge
 constructed its finite-plane form and determined its order-$60$ stabilizer
@@ -415,6 +422,9 @@ The coset-leader-weight distribution of $C$ is $(1,60,1150,120)$
 (cosets of weight $0,1,2,3$, summing to $11^3=1331$); the last entry counts
 deep-hole cosets, not received words. Its codeword weight enumerator is
 $(1,0,0,0,150,420,760)$, forced by the MDS parameters.
+This is the radius-three instance of the coset-weight framework of Davydov,
+Marcugini, and Pambianco~\cite[\S6]{DMP2021}; the secant indices below
+refine its weight-two stratum by nearest-word multiplicity.
 
 The special geometry also makes distance diagnosis and nearest-word structure
 unusually explicit.  Write a syndrome as $s=(s_0,s_1,s_2)$ and put
@@ -708,71 +718,13 @@ equality point by point.  No smoothness, irreducibility, or genus assertion
 is used here.
 \end{remark}
 
-The rigidity theorem has quantitative consequences at three scales: the
-number of deep-hole directions, the distance of their locus from the
-nearest conic, and the effect of replacing one vertex of the hexagon.
-
-For the second, let $\mathfrak C$ be the set of nonsingular conics in
-$\PG(2,11)$ and define the \emph{nearest-conic discrepancy}
-\[
- \delta(A)=\min_{\mathcal Q\in\mathfrak C}
-   |\cU(A)\mathbin{\triangle}\mathcal Q(\F_{11})|.
-\]
-This is a PGL-invariant function, not a metric on arcs: equivariance gives
-$\cU(gA)=g\cU(A)$, while PGL permutes $\mathfrak C$.
-
-For the local statement, call two embedded six-arcs \emph{neighbors} when
-one is obtained from the other by replacing one point. Fix the displayed
-Clebsch arc $A$ and its standard conic $\cC$, and put
-\[
- d_{\cC}(B)=|\cU(B)\mathbin{\triangle}\cC|
-\]
-for every embedded six-arc $B$.
-
-\begin{theorem}[Quantitative gaps]
+\begin{theorem}[Numerical gap]
 \label{thm:gap}
-\begin{enumerate}[label=(\alph*),leftmargin=2em]
-\item The Clebsch class has $|\cU(A)|=12$, while every non-Clebsch
+The Clebsch class has $|\cU(A)|=12$, while every non-Clebsch
 six-arc has $|\cU(A)|\ge16$. Equivalently, $|\cU(A)|\le15$
 characterizes the Clebsch class, and equality $|\cU(A)|=12$ is its
 exact value. If $|\cU(A)|\ge16$, then $\cU(A)$ lies on no conic.
-\item Every non-Clebsch class satisfies $\delta(A)\ge12$, and the bound is
-sharp.
-\item The arc $A$ has $252$ distinct neighbors. Every neighbor $B$ satisfies
-$d_{\cC}(B)\ge18$ and $|\cU(B)\cap\cC|\le7$; none has its uncovered locus
-contained in a conic, degenerate or otherwise.
-\end{enumerate}
 \end{theorem}
-
-The first distribution below counts projective classes. The next two count
-embedded one-point replacements of the fixed arc $A$; the final list then
-groups those replacements into $A_5$-orbits:
-\begin{equation}
-\label{eq:gap-histograms}
-\begin{aligned}
-\#\{[B]:\delta(B)=d\}
- &=\{0{:}1,12{:}2,13{:}1,14{:}3,15{:}1,16{:}4,17{:}2,18{:}1\},\\
-\#\{B\sim A:d_{\cC}(B)=d\}
- &=\{18{:}30,19{:}60,20{:}90,22{:}42,24{:}30\},\\
-\#\{B\sim A:|\cU(B)\cap\cC|=m\}
- &=\{4{:}60,6{:}132,7{:}60\}.
-\end{aligned}
-\end{equation}
-Under $A_5$, the neighbors split into eight orbits with
-(orbit size, discrepancy)
-\[
- (30,18),(60,19),(30,20),(30,20),(30,20),(12,22),(30,22),(30,24).
-\]
-
-\begin{remark}[Global versus fixed-conic discrepancy]
-The local bound is tied to the fixed pair $(A,\cC)$. Indeed, the
-conic-preserving projectivity
-$g:(X,Y,Z)\mapsto(4X,2Y,Z)$ sends $A$ to a distinct embedded six-arc, while
-equivariance gives $\cU(gA)=g\cU(A)=\cC$. Hence
-$d_{\cC}(gA)=0$ although $gA\ne A$. The global statement therefore minimizes
-over conics and passes to projective classes; the bound eighteen applies
-only to one-point replacements of the fixed arc.
-\end{remark}
 
 \begin{proof}[Computer-assisted proof]
 Any ordered four points of a six-arc form a projective frame, uniquely
@@ -796,18 +748,7 @@ with multiplicities
 across the $1548$ normalized representatives. The six presentations
 attaining $12$ form the single Clebsch class; every other class has at
 least $16$ extension points. Theorem~\ref{thm:rigidity} supplies the final
-conic-containment assertion in clause~(a).
-
-For clause~(b), the same enumeration uses the fifteen projective classes,
-enumerates the $160930$ nonsingular conics, and computes the first
-distribution in~\eqref{eq:gap-histograms}.
-
-For the third, it deletes each vertex in turn, tests every replacement, and
-obtains $42$ choices per vertex and $252$ distinct neighbors. Exact
-quadratic-monomial evaluation matrices have full rank six, so no nonzero
-quadratic vanishes on a neighbor's uncovered locus. The remaining two
-distributions and the eight $A_5$-orbits follow from the sixty stabilizing
-projectivities.
+conic-containment assertion.
 \end{proof}
 
 \begin{remark}[Why this rigidity is not in the extension-locus literature]
@@ -1005,10 +946,30 @@ without a symmetry hypothesis on the arc. A universal chord-multiplicity
 identity makes this a four-field question, and the only nontrivial residue
 is a classical exact-distance problem in the Sylvester graph.
 
-\begin{lemma}[Chord-defect identity and the $q=9$ obstruction]
+\begin{theorem}[Universal chord defect]
 \label{lem:chord-defect}
-Let $A$ be a six-arc in $\PG(2,q)$, and let $c(A)$ be the number of points
-off $A$ incident with three of its fifteen chords. Then
+Let $A$ be a $k$-arc in $\PG(2,q)$ with $k\ge4$. Let $n_i$ count the
+off-arc points incident with exactly $i$ chords, put
+\[
+ r=\lfloor k/2\rfloor,\qquad
+ t(A)=\sum_{i=3}^{r}\binom{i-1}{2}n_i,
+\]
+and write $m=\binom{k}{2}$. Then
+\[
+ |\cU(A)|=q^2-(m-1)q+
+ \left(m+3\binom{k}{4}-k+1\right)-t(A),
+\]
+and
+\[
+ 0\le t(A)\le
+ 3\binom{k}{4}\frac{r-2}{r}.
+\]
+If $\cU(A)$ is the rational point set of a nonsingular conic, then
+\[
+ q<\binom{k}{2}.
+\]
+For $k=6$, $t(A)$ is the number $c(A)$ of triple-chord concurrence points,
+so
 \[
  |\cU(A)|=q^2-14q+55-c(A),\qquad 0\le c(A)\le15.
 \]
@@ -1016,7 +977,35 @@ Consequently, if $|\cU(A)|=q+1$, then
 \[
  c(A)=(q-6)(q-9).
 \]
+\end{theorem}
 
+\begin{proof}
+At a point off $A$, concurrent chords have pairwise disjoint endpoint
+pairs, so at most $r$ chords occur. Counting chord--point incidences and
+pairs of disjoint chords gives
+\[
+ \sum_i i n_i=m(q-1),\qquad
+ \sum_i\binom{i}{2}n_i=3\binom{k}{4}.
+\]
+Since
+$\binom{i}{2}=(i-1)+\binom{i-1}{2}$, the number of covered off-arc
+points is $m(q-1)-3\binom{k}{4}+t(A)$. Subtracting it from the
+$q^2+q+1-k$ off-arc points proves the identity. Moreover,
+\[
+ \binom{i-1}{2}\le\frac{r-2}{r}\binom{i}{2}
+ \qquad(3\le i\le r),
+\]
+which proves the bound on $t(A)$.
+
+If $|\cU(A)|=q+1$, there are $q^2-k$ covered off-arc points. Hence
+$q^2-k\le m(q-1)$. Were $q\ge m$, this would give
+$0\le q(q-m)\le k-m<0$, a contradiction. For $k=6$, one has $r=3$,
+$t(A)=n_3=c(A)$, and the displayed specialization follows; setting its
+left side equal to $q+1$ gives $c(A)=(q-6)(q-9)$.
+\end{proof}
+
+\begin{lemma}[$q=9$ polarity graph]
+\label{lem:q9-polarity}
 For a nonsingular conic $\cC\subset\PG(2,9)$, let $\Sigma$ be the graph on
 the $36$ internal points in which
 \[
@@ -1036,21 +1025,6 @@ joining pairs at distance two has clique number
 \end{lemma}
 
 \begin{proof}
-At a point off $A$, concurrent chords have pairwise disjoint endpoint
-pairs, so at most three chords occur. Let $n_i$ count the off-arc points on
-exactly $i$ chords. Counting chord--point incidences and pairs of chords
-with disjoint endpoints gives
-\[
- n_1+2n_2+3n_3=15(q-1),\qquad
- n_2+3n_3=\binom{15}{2}-6\binom{5}{2}=45.
-\]
-Writing $c(A)=n_3$, the number of covered points off $A$ is
-$n_1+n_2+n_3=15q-60+c(A)$. Subtracting this from the
-$q^2+q-5$ points off $A$ proves the identity. Each triple concurrence
-uses one of the fifteen perfect matchings of the six endpoints, and a fixed
-matching can be concurrent at only one point; hence $c(A)\le15$. The last
-display follows on setting $|\cU(A)|=q+1$.
-
 Counting internal points on polar lines and their intersections gives
 $b_0=5$, $b_1=4$, $b_2=2$, $c_1=c_2=1$, and $c_3=4$, hence the displayed
 intersection array. This is the Sylvester graph
@@ -1093,7 +1067,7 @@ It remains to exclude $q=9$. Since every point of $\cC$ is uncovered, no
 chord of $A$ meets $\cC$; every chord is therefore passant. A point off
 $\cC$ lies on five passants if it is internal and four if it is external,
 so the five chords through each vertex force all six vertices of $A$ to be
-internal. Lemma~\ref{lem:chord-defect} would then make $A$ a
+internal. Lemma~\ref{lem:q9-polarity} would then make $A$ a
 six-clique in the distance-two graph of the Sylvester graph, whose clique
 number is five. This is impossible.
 
@@ -1158,28 +1132,23 @@ is what the factorization isolates at $q=11$.
 The chord moments also put the six-point theorem into a short classification
 for all smaller neighboring arc sizes.
 
-\begin{theorem}[Conic-filling loci for $4\le k\le7$]
+\begin{theorem}[Conic-filling loci through eight points]
 \label{thm:small-k-conic-filling}
 Let $A$ be a $k$-arc in $\PG(2,q)$, where $q$ is a prime power and
-$4\le k\le7$. If $\cU(A)$ is the full set of $\F_q$-rational points of a
-nonsingular conic, then
+$4\le k\le8$, and suppose that $\cU(A)$ is the full set of
+$\F_q$-rational points of a nonsingular conic. If $k\le7$, then
 \[
  (k,q)=(4,5)\qquad\text{or}\qquad(k,q)=(6,11).
 \]
 In the first case $A$ is a projective four-frame; in the second it is a
-Clebsch hexagon. Conversely, both cases occur.
+Clebsch hexagon. Conversely, both cases occur. If $k=8$, then
+\[
+ q\in\{13,16,17,19\}.
+\]
 \end{theorem}
 
 \begin{proof}[Proof with exhaustive finite verification]
-Let $n_i$ count off-arc points incident with exactly $i$ chords. For
-$k\le7$, at most three pairwise disjoint chords concur. Counting
-chord--point incidences and pairs of disjoint chords gives the two universal
-moments
-\[
- \sum_i i n_i=\binom{k}{2}(q-1),\qquad
- \sum_i\binom{i}{2}n_i=3\binom{k}{4}.
-\]
-For $k=4$, the second moment forces $n_2=3$, and hence
+For $k=4$, Lemma~\ref{lem:chord-defect} gives
 $|\cU(A)|=(q-2)(q-3)$. Equating this with $q+1$ gives $q=5$. Every
 four-arc is a projective frame, and for the standard frame a direct
 substitution gives
@@ -1187,12 +1156,12 @@ substitution gives
  \cU(A)=V(X^2+Y^2+Z^2+XY+XZ+YZ),
 \]
 where $V(f)$ denotes the projective zero set of $f$; this is a nonsingular
-six-point conic. For $k=5$, the same moments force
-$n_2=15$ and $|\cU(A)|=q^2-9q+21$; equality with $q+1$ would require
+six-point conic. For $k=5$, the lemma gives
+$|\cU(A)|=q^2-9q+21$; equality with $q+1$ would require
 $q^2-10q+20=0$, which has no integral root. The case $k=6$ is
 Theorem~\ref{thm:why11} together with Theorem~\ref{thm:rigidity}.
 
-For $k=7$, the moments give
+For $k=7$, Lemma~\ref{lem:chord-defect} gives
 \[
  |\cU(A)|=q^2-20q+120-n_3.
 \]
@@ -1215,17 +1184,33 @@ normalized six-arc by its uncovered points produces every resulting
 seven-arc exactly three times, according to which non-frame point is
 deleted. For all $1820$ candidates of the required size, the quadratic
 evaluation matrix has full rank six, so none lies on a conic.
+
+Finally let $k=8$. Here
+$t(A)=n_3+3n_4$, and Lemma~\ref{lem:chord-defect} gives
+\[
+ t(A)=q^2-28q+230,\qquad t(A)\le105.
+\]
+The second moment gives
+$n_2=210-3t(A)+3n_4$. Since the number of covered off-arc points is
+$q^2-8$, the condition $n_1\ge0$ then gives
+\[
+ n_4\le 28q-448+3t(A).
+\]
+The arc-size bound gives $q\ge7$. The last inequality excludes
+$q\in\{7,8,9,11\}$, while $t(A)\le105$ excludes every $q\ge23$.
+The remaining prime powers are exactly $13,16,17,19$.
 \end{proof}
 
-For $k\ge8$ the second moment leaves additional concurrency parameters, so
-the analogous classification remains open.
+Thus conic filling is finite at every fixed arc size; the classification is
+complete through seven points, and the eight-point problem is reduced to
+four fields.
 
 \section{Verification architecture}
 \label{sec:verification}
 
 \begingroup
 \setlength{\emergencystretch}{1em}
-Tables~\ref{tab:paper-one-claims}--\ref{tab:replays} separate the adopted
+Tables~\ref{tab:verification} and~\ref{tab:replays} separate the adopted
 claims, mathematical input, kernel-checked formal proof, and exhaustive
 finite enumeration. Here
 ``kernel-checked'' means that Lean's trusted kernel checks the stated
@@ -1239,8 +1224,7 @@ executable checker paths are relative to this paper root; Lean paths are
 relative to the formal source root.
 These tables are the paper's consolidated proof-mode ledger; the theorem
 statements and proofs do not carry separate ``Proof mode'' tags.
-Table~\ref{tab:paper-one-claims} is the Paper~I claim/evidence map. Its
-claim-by-claim manifest is \path{verification/trust_manifest.json}; the
+The claim-by-claim manifest is \path{verification/trust_manifest.json}; the
 aggregate formal gate is
 \path{RelativeConicArcs/Gates/ClebschRigidityTrust.lean}. The clean replay
 entry point is \path{verification/verify_release.py}.
@@ -1261,61 +1245,6 @@ The digest of the aggregate Lean gate is
 \end{center}
 \par
 \endgroup
-
-\begin{longtable}{@{}r
-  >{\raggedright\arraybackslash}p{0.34\textwidth}
-  >{\raggedright\arraybackslash}p{0.53\textwidth}@{}}
-\caption{The nineteen claims assigned to Paper~I by the split audit. The
-row numbers are stable identifiers inherited from that audit, not theorem
-numbers.}\label{tab:paper-one-claims}\\
-\toprule
-row & manuscript claim & proof or evidence mode\\
-\midrule
-\endfirsthead
-\toprule
-row & manuscript claim & proof or evidence mode\\
-\midrule
-\endhead
-2 & rigidity headline
-& human reduction, Dye's equality theorem, Lean-checked bridge\\
-11 & $A_5$ point orbits
-& cited Dye input, coordinate proof, Lean check\\
-12 & uncovered locus equals the conic
-& coordinate proof, Lean check, independent replay\\
-13 & directions, cosets, leaders, and words
-& code--arc dictionary and exact counting\\
-14 & one orbit on received-word deep holes
-& group action and automorphism replay\\
-15 & syndrome oracle and ambiguity census
-& human reduction and exact replay of the counts\\
-16 & line bound and conic-inscribed subcensus
-& human combinatorial proof and exact conic-inscribed replay\\
-17 & rigidity theorem
-& human reduction and Dye's equality theorem\\
-18 & low-degree algebraic rigidity
-& complete fifteen-class exact replay\\
-19 & monomial characterization
-& code--arc dictionary and Proposition~\ref{prop:low-degree-rigidity}\\
-20 & quantitative gaps
-& exhaustive class, conic, neighbor, and orbit replays\\
-21 & Brianchon--support dictionary
-& Edge--Dye incidence geometry\\
-22 & decoder reconstruction
-& Corollary of the preceding dictionary\\
-23 & invariant support bipartition
-& human incidence proof and independent support replay\\
-24 & chord-defect identity and $q=9$ obstruction
-& human double count, Lean-checked algebra, and cited Sylvester facts\\
-25 & uniqueness of $q=11$
-& chord moments, cited Sylvester bound, Lean check\\
-26 & Clebsch-family uncovered formula
-& Dye's incidence criterion and independent $q=19$ replay\\
-29 & classification for $4\le k\le7$
-& chord moments, Lean check, terminal exact exclusion\\
-58 & fifteen-class census table
-& frame-normalized exhaustive replay with canonical keys\\
-\bottomrule
-\end{longtable}
 
 \begin{table}[H]
 \centering
@@ -1348,8 +1277,8 @@ Uniqueness of $q=11$
 Clebsch-family formula
 & Dye's ten Brianchon points and edge criterion
 & --- \\
-The range $4\le k\le7$
-& two universal chord moments
+Classification through seven; eight-point sieve
+& universal chord moments and defect bound
 & \path{RelativeConicArcs/SmallKChordMoments.lean};
 \path{RelativeConicArcs/SmallKGeometricBridge.lean}
 \\
@@ -1385,8 +1314,8 @@ Uniqueness of $q=11$
 & \path{check_small_q_uniqueness.py}; independent $q=9$ construction \\
 Clebsch-family formula
 & \path{check_q19_nonexample.py} \\
-The range $4\le k\le7$
-& \path{check_small_k_conic_filling.py} \\
+Classification through seven
+& \path{check_small_k_conic_filling.py}; the eight-point sieve is human algebra \\
 \bottomrule
 \end{tabular}
 \caption{Executable checks, separate from the formal dependencies in
@@ -1399,41 +1328,6 @@ Theorem~1: the ten-point Brianchon bound and the classification of equality.
 The line bound and chord-defect identity are proved independently. At
 $q=11$, the finite census also checks the imported numerical conclusion:
 $|\cU(A)|=12=22-10$ is equivalent to the maximal value $c(A)=10$.
-
-\subsection{Independent small-field census}
-
-Normalizing an ordered four-frame and enumerating the remaining unordered
-pair gives the following exact check.
-
-\begin{table}[H]
-\centering
-\small
-\begin{tabular}{@{}r r l r@{}}
-\toprule
-$q$ & representatives & histogram of $|\cU(A)|$ & conic matches\\
-\midrule
-2  & 0    & --- & 0\\
-3  & 0    & --- & 0\\
-4  & 1    & $0^1$ & 0\\
-5  & 3    & $0^3$ & 0\\
-7  & 70   & $0^{40},2^{30}$ & 0\\
-8  & 195  & $0^{45},4^{150}$ & 0\\
-9  & 441  & $0^6,4^{15},6^{120},7^{120},8^{180}$ & 0\\
-11 & 1548 & $12^6,16^{30},18^{150},19^{300},20^{630},21^{360},22^{72}$ & 6\\
-13 & 4015 & $36^{85},38^{210},39^{480},40^{1080},41^{1800},42^{360}$ & 0\\
-\bottomrule
-\end{tabular}
-\caption{Small-field census. ``Representatives'' means frame-normalized
-point sets, not projective classes; $m^r$ means that $r$ representatives
-have $|\cU(A)|=m$. The six conic matches at $q=11$ form one projective
-class.}
-\label{tab:small-field-census}
-\end{table}
-
-The enumeration uses exact arithmetic in every field and tests both nonsingular
-and singular conic forms in characteristic two. A separate $q=9$
-certificate constructs the polarity graph, verifies the passant/distance-two
-dictionary, and computes clique number five.
 
 \section{Conclusion}
 
