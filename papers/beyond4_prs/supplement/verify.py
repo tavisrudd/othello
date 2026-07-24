@@ -156,6 +156,14 @@ def replay() -> None:
             ["2026-07-23-c498-small-exceptional-normal-forms.py", "--summary"],
         ),
         ("r7", ["2026-07-23-c509-prs-deep-hole-calibration-replay.py"]),
+        (
+            "stable-components",
+            ["2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "--check"],
+        ),
+        (
+            "stable-components",
+            ["2026-07-24-c595-stable-component-fano-elimination.py", "--check"],
+        ),
         ("r8", ["2026-07-23-c513-prs-redundancy-eight-replay.py"]),
         ("r9", ["2026-07-23-c516-prs-redundancy-nine-replay.py"]),
         ("hessian", ["2026-07-23-c525-ordered-hessian-arf-pullback-replay.py"]),

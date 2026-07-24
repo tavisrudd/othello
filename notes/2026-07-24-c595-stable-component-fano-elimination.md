@@ -110,6 +110,18 @@ These generate the lower persistent rank-at-most-two Hankel ideal
 6H_4={}&-6F_{1,0}+F_{2,1}-2F_{3,2}+3F_{4,3}.               \tag{7}
 \end{aligned}
 \]
+The signs in (7) are not obtained by unsigned reversal.  Under
+\(d_i\mapsto d_{5-i}\) and \(x\leftrightarrow y\), one has
+\[
+H_1\leftrightarrow H_4,\qquad H_2\leftrightarrow H_3,\qquad
+q_1\leftrightarrow q_7,\quad q_2\leftrightarrow q_6,\quad
+q_3\leftrightarrow q_5,\quad q_4\mapsto-q_4.
+\]
+Thus the magnitudes in the \(H_1/H_4\) and \(H_2/H_3\) pairs are
+reversal-symmetric, while exactly the \(F_4\) position changes sign in
+each pair.  Direct integral expansion in the checker verifies all four
+displayed identities coefficient by coefficient.
+
 Thus \(6\mathfrak H\subset\mathfrak F\).  On
 \(\operatorname{Spec}\mathbf Z[1/6]\),
 \[

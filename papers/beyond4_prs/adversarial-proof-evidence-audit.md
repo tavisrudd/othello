@@ -50,7 +50,8 @@ Formal readiness uses `L1` (interfaces), `L2` (formalizable decomposition), and
 | ID | Proof/evidence verdict | Readiness | Exact boundary |
 |---|---|---|---|
 | PF | Green mathematical infrastructure | L2 | Construction and lifting only. |
-| TI | Green conditional theorem | L2 | Requires a lower package and the geometric assertions `SC(j)`; collision and modular pullback degrees are uniform. |
+| SC | Green manuscript theorem | L2 | The catalecticant-rowspace closure eliminates retained markers; irreducibility and the explicit bottom-component ledger prove `SC(j)` for all `j>=6`.  Certificate SC checks the polynomial, saturation, and vertical-fibre algebra. |
+| TI | Green unconditional theorem | L2 | Requires a lower package; the now-proved `SC(j)` theorem, collision bounds, and modular pullback degrees make the displayed all-level threshold unconditional. |
 | R5 | Green mixed theorem | L1 | Gcd strata, cyclic/wild normal forms, stabilizers, degenerations, off-diagonal integrality/genus/deletion, and the finite bridge are printed; the certificate is used only for the declared low-field residue. |
 | R6 | Green mixed theorem | L1 | Persistent orbit law, secant intersection degree, cyclic and ramification degrees, modular contained components, nucleus arithmetic, and the finite bridge are named and proved. |
 | R7 | Green mixed theorem | L1 | The contained proof, independently confirmed two-step transverse package, and finite bridge give the all-field split-free classification; deep-hole promotion is only for `q>=11`. |

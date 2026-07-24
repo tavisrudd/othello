@@ -1,7 +1,7 @@
 # Verification map
 
 Paper-facing names are the stable labels `Certificate R5`, `Certificate R6`,
-`Certificate R6-NF`, `Certificate R7`, `Certificate R8`, `Certificate R9`,
+`Certificate R6-NF`, `Certificate R7`, `Certificate SC`, `Certificate R8`, `Certificate R9`,
 `Certificate R9-49`, `Certificate Hessian`, `Certificate Lucas`, and
 `Certificate e7`.  Their schemas are defined in
 `supplement/CERTIFICATE-SCHEMA.md`.  The C-numbers below are immutable internal
@@ -21,6 +21,7 @@ as written. C538 does not silently refresh predecessor evidence bundles.
 | C498 redundancy-six census | `2026-07-22-c498-prs-deep-hole-census.rs` | `2026-07-22-c498-prs-deep-hole-census.json` | `2026-07-22-c498-prs-deep-hole-replay.py` | `2026-07-22-c498-prs-redundancy-six.sha256` |
 | C498 small semilinear normal forms | `2026-07-23-c498-small-exceptional-normal-forms.py` | `2026-07-23-c498-small-exceptional-normal-forms.json` | the generator is also the deterministic checker; no second implementation is claimed | `2026-07-23-c498-small-exceptional-normal-forms.sha256` |
 | C509 redundancy-seven calibration | `2026-07-23-c509-prs-deep-hole-calibration.py` | `2026-07-23-c509-prs-deep-hole-calibration.json` | `2026-07-23-c509-prs-deep-hole-calibration-replay.py` | `2026-07-23-c509-prs-redundancy-seven.sha256` |
+| C595/C597 stable components | `2026-07-24-c595-stable-component-fano-elimination.py`; `2026-07-24-c597-r10-integral-bad-scheme-sc11.py` | corresponding JSON records | both generators are dependency-free identity/factorization checkers; the corresponding Singular scripts check saturation and vertical primary decompositions | corresponding SHA-256 manifests |
 | C513 redundancy-eight specialization | `2026-07-23-c513-prs-redundancy-eight.py` | `2026-07-23-c513-prs-redundancy-eight.json` | `2026-07-23-c513-prs-redundancy-eight-replay.py` | `2026-07-23-c513-prs-redundancy-eight.sha256` |
 | C516 redundancy-nine component theorem | `2026-07-23-c516-prs-redundancy-nine.py` | `2026-07-23-c516-prs-redundancy-nine.json` | `2026-07-23-c516-prs-redundancy-nine-replay.py` | `2026-07-23-c516-prs-redundancy-nine.sha256` |
 | C516 `q=49` carrier closure | `2026-07-23-c516-prs-redundancy-nine-q49.rs` | `2026-07-23-c516-prs-redundancy-nine-q49.txt` | no second exhaustive implementation; the residual formula is independently replayed by the preceding C516 replay | `2026-07-23-c516-prs-redundancy-nine.sha256` |

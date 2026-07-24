@@ -273,6 +273,280 @@ contained bad scheme at redundancy \(j\) has no component outside
 statement and contains no field-size threshold.
 \end{definition}
 
+The indices follow two conventions.  The assertion
+\(\mathrm{CC}(n,1;\mathcal C_n)\) is indexed by the divided-power
+degree \(n\), so \(f\in S_n\) has redundancy \(n+1\);
+\(\mathrm{SC}(j)\) is indexed directly by redundancy.  Accordingly,
+after the two base cases below, \(\mathrm{SC}(j)\) is the recursive
+content of
+\(\mathrm{CC}(j-1,1;\mathcal P_j\cup\mathcal M_j)\).
+
+\begin{proof}[Proof of Theorem~\ref{thm:stable-component-headline}]
+We first eliminate the retained markers.  Put \(m=j-5\) and write
+\[
+\operatorname{Cat}_{m,4}(f)=
+\begin{pmatrix}
+a_0&a_1&a_2&a_3&a_4\\
+a_1&a_2&a_3&a_4&a_5\\
+\vdots&\vdots&\vdots&\vdots&\vdots\\
+a_m&a_{m+1}&a_{m+2}&a_{m+3}&a_{m+4}
+\end{pmatrix}.
+\]
+If \(h=(h_0,\ldots,h_m)\) is the coefficient vector of the marker
+product, its bottom syndrome is
+\begin{equation}\label{eq:stable-rowspace-map}
+                       c(h)=h\operatorname{Cat}_{m,4}(f).
+\end{equation}
+Over an algebraic closure, products of \(m\) distinct linear forms are
+dense in \(\PP(\Sym^mE^\vee)\).  The map in
+\eqref{eq:stable-rowspace-map} is linear and homogeneous.  After deleting
+its projective kernel, the scheme-theoretic closure of the attainable
+bottom syndromes is therefore
+\begin{equation}\label{eq:stable-rowspace}
+\overline{\{c(h):h\text{ is a product of distinct markers}\}}
+=\PP\!\left(\operatorname{rowspace}
+              \operatorname{Cat}_{m,4}(f)\right).
+\end{equation}
+This includes the homogeneous boundary at infinity.  Marker diagonals
+are removed only from the dense source open and reappear in its closure.
+Since the right-hand side is irreducible, containment in the finite
+bottom bad union implies containment in one of its irreducible
+components.  We now construct and check that component ledger.
+
+Let \(\mathbf G=\operatorname{Gr}(2,\Gamma^3E)\) over
+\(\operatorname{Spec}\mathbf Z\), and write
+\[
+(z_0,\ldots,z_5)=(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23}),
+\qquad z_0z_5-z_1z_4+z_2z_3=0.
+\]
+After dividing the alternating evaluation determinant of a cubic pencil
+by the diagonal bracket, its ordered-root incidence is
+\begin{equation}\label{eq:stable-root-incidence}
+\begin{aligned}
+G_z(t,s)={}&z_0+z_1(t+s)+z_2(t^2+ts+s^2)+z_3ts\\
+            &+z_4ts(t+s)+z_5t^2s^2 .
+\end{aligned}
+\end{equation}
+Its homogenization is intrinsic on
+\(\PP(E^\vee)\times\PP(E^\vee)\).  We retain the closed collision
+incidence before taking a residual.
+
+Over an algebraically closed field, a reducible moving part either has a
+vertical or horizontal factor, hence a fixed-root or collision component,
+or splits into two \((1,1)\) factors.  Symmetry under
+\(\tau(t,s)=(s,t)\) gives three cases.  If both factors are symmetric,
+\[
+L=a+b(t+s)+cts,\qquad M=A+B(t+s)+Cts,
+\]
+then
+\begin{equation}\label{eq:stable-symmetric-factors}
+z_0z_5-z_1z_4+z_2z_3=(ac-b^2)(AC-B^2),
+\end{equation}
+so one factor has rank one and gives collision.  If the factors are
+exchanged,
+\[
+L=a+bt+cs+dts,\qquad G_z=L(t,s)L(s,t),
+\]
+then
+\begin{equation}\label{eq:stable-exchanged-factors}
+z_0z_5-z_1z_4+z_2z_3
+=(ad-bc)(ad-b^2+bc-c^2).
+\end{equation}
+The first factor is again collision; the second is the cyclic branch.
+Finally, if \(\tau L=-L\), then \(L\) is proportional to the homogeneous
+diagonal bracket.  The product of the two anti-invariant factors has
+\[
+(z_0,\ldots,z_5)=(0,0,-\mu,3\mu,0,0)
+\]
+and Plücker value \(-3\mu^2\).  It survives only in characteristic
+three, where it belongs to the retained diagonal collision incidence.
+These three cases are exhaustive by unique factorization.
+
+For a bottom syndrome \(c=(c_0,\ldots,c_4)\), the kernel line of
+\[
+H_c=\begin{pmatrix}c_0&c_1&c_2&c_3\\
+                    c_1&c_2&c_3&c_4\end{pmatrix}
+\]
+has Plücker coordinates
+\begin{equation}\label{eq:stable-plucker-map}
+\begin{aligned}
+z_0&=c_2c_4-c_3^2,&z_1&=-(c_1c_4-c_2c_3),&
+z_2&=c_1c_3-c_2^2,\\
+z_3&=c_0c_4-c_1c_3,&z_4&=-(c_0c_3-c_1c_2),&
+z_5&=c_0c_2-c_1^2 .
+\end{aligned}
+\end{equation}
+Eliminating \(a,b,c,d\) from the noncollision factor of
+\eqref{eq:stable-exchanged-factors} gives
+\begin{equation}\label{eq:stable-J-generators}
+\begin{aligned}
+K_1&=3z_4^2-9z_2z_5-z_3z_5,&K_2&=z_3z_4-3z_1z_5,\\
+K_3&=z_3^2-9z_0z_5,&K_4&=z_2z_3-z_1z_4+z_0z_5,\\
+K_5&=z_1z_3-3z_0z_4,&K_6&=3z_1^2-9z_0z_2-z_0z_3 .
+\end{aligned}
+\end{equation}
+Thus \(J=(K_1(z(c)),\ldots,K_6(z(c)))\).  The primitive cyclic ideal
+\(V=(V_1,\ldots,V_7)\) is
+\begin{equation}\label{eq:stable-V-generators}
+\begin{aligned}
+V_1={}&2c_3^3-3c_2c_3c_4+c_1c_4^2,\\
+V_2={}&6c_2c_3^2-9c_2^2c_4+2c_1c_3c_4+c_0c_4^2,\\
+V_3={}&2c_1c_3^2-3c_1c_2c_4+c_0c_3c_4,\\
+V_4={}&c_0c_3^2-c_1^2c_4,\\
+V_5={}&2c_1^2c_3-3c_0c_2c_3+c_0c_1c_4,\\
+V_6={}&6c_1^2c_2-9c_0c_2^2+2c_0c_1c_3+c_0^2c_4,\\
+V_7={}&2c_1^3-3c_0c_1c_2+c_0^2c_3 .
+\end{aligned}
+\end{equation}
+Put
+\[
+D=\det\begin{pmatrix}
+c_0&c_1&c_2\\c_1&c_2&c_3\\c_2&c_3&c_4
+\end{pmatrix}.
+\]
+Direct integral expansion gives
+\begin{equation}\label{eq:stable-integral-bridge}
+                         J\subset V,\qquad 3DV\subset J .
+\end{equation}
+The supplement prints the \(6\times7\) coefficient matrix for the second
+containment.  Integer reduction also gives \(DV\not\subset J\), and the
+\(\mathbf F_3\)-point \((1,0,0,1,0)\) lies on \(J\), has \(D=2\), and
+does not lie on \(V\).  Hence \(3\) is minimal for this elimination
+presentation, not asserted to be an intrinsic invariant.
+
+Over \(\mathbf Z[1/6]\), diagonal rescaling identifies
+\eqref{eq:stable-V-generators} with the prime homogeneous kernel of
+\[
+[u:v:w]\longmapsto[u^2:2uv:v^2+2uw:2vw:w^2].
+\]
+The image point \((1,0,2,0,1)\) has \(D=-6\), so \(D\notin V\) and
+\(V:D^\infty=V\).  Therefore
+\begin{equation}\label{eq:stable-saturation}
+(J:D^\infty)=(V:D^\infty)\ \text{over }\mathbf Z[1/3],
+\qquad
+(J:D^\infty)=V\ \text{over }\mathbf Z[1/6].
+\end{equation}
+The inversion of \(2\) in the second statement is necessary: in
+characteristic two, \(V\) retains a \(D\)-supported component, so
+\((V:D^\infty)\ne V\).
+
+For a homogeneous carrier ideal \(I\), define its
+\emph{coherent-Fano ideal} by substituting the universal consecutive
+polar line into every generator of \(I\), expanding in the two line
+parameters, and setting all coefficients to zero.  It represents upper
+syndromes whose entire polar line lies in the carrier, with the required
+consecutive-Hankel integrability constraint.
+
+For \(d=(d_0,\ldots,d_5)\), substitute
+\(c_i=xd_i+yd_{i+1}\) in \eqref{eq:stable-V-generators}, and let
+\(F_{i,k}\) be the coefficient of \(x^{3-k}y^k\) in \(V_i(c(x,y))\).
+If \(H_1,\ldots,H_4\) are the maximal minors, in column order, of the
+consecutive \(3\times4\) Hankel matrix of \(d\), then
+\begin{equation}\label{eq:stable-fano-certificate}
+\begin{aligned}
+6H_1&=-3F_{4,0}-2F_{5,1}+F_{6,2}-6F_{7,3},\\
+6H_2&=-6F_{3,0}+9F_{4,1}+6F_{5,2}-3F_{6,3},\\
+6H_3&=-3F_{2,0}+6F_{3,1}-9F_{4,2}-6F_{5,3},\\
+6H_4&=-6F_{1,0}+F_{2,1}-2F_{3,2}+3F_{4,3}.
+\end{aligned}
+\end{equation}
+The sign pattern is checked by reversal:
+\(H_1\leftrightarrow H_4\), \(H_2\leftrightarrow H_3\),
+\(V_1\leftrightarrow V_7\), \(V_2\leftrightarrow V_6\),
+\(V_3\leftrightarrow V_5\), while \(V_4\mapsto-V_4\).
+Thus magnitudes reverse and exactly the \(F_4\) position changes sign in
+each pair.  Equation \eqref{eq:stable-fano-certificate} puts the tame
+cyclic coherent-Fano locus inside the persistent locus over
+\(\mathbf Z[1/6]\).
+
+We next treat the vertical fibres.  In characteristic three the true wild
+carrier is the cone \(\operatorname{Join}(e_2,C_4)\).  Any line not
+through its vertex would project to a line in the quartic normal rational
+curve, so every contained line is a ruling.  Move a ruling to
+\(\langle e_2,e_4\rangle\).  The conditions
+\[
+(a_0,\ldots,a_4),(a_1,\ldots,a_5)\in\langle e_2,e_4\rangle
+\]
+give \(a_0=a_1=a_3=0\) and \(a_1=a_2=a_4=0\), leaving only \(a_5\).
+Undoing the frame gives \(f=\mu\nu_5(t)\), including infinity, hence
+the rank-one/fixed-factor boundary.
+
+In characteristic two the true cyclic component is
+\(\Pi_{\rm cyc}=(c_0,c_4)\); the other component is supported on \(D=0\).
+The remaining inseparable degeneration is seen on the
+\emph{ordered-Hessian chart}: for an ordered pencil basis \(p_0,p_1\),
+it is the bidegree-\((2,2)\) equation
+\[
+u^2\operatorname{Hess}^{\rm div}(p_0)
++uv\,\operatorname{PolHess}^{\rm div}(p_0,p_1)
++v^2\operatorname{Hess}^{\rm div}(p_1)=0.
+\]
+The tangent quadric has two conic families of generator lines, called
+the tangent-quadric rulings:
+\[
+\begin{aligned}
+z_1=z_4=0,\quad z_2=z_3,\quad z_0z_5=z_2^2,\\
+z_0=z_5=0,\quad z_2=z_3,\quad z_1z_4=z_2^2.
+\end{aligned}
+\]
+The first is the square-quadratic boundary of the persistent Veronese.
+For the complementary ruling, the two consecutive identities
+\[
+h_{-1}^2=h_{-2}h_0,\qquad h_1^2=h_0h_2
+\]
+propagate across their common term and make all five contraction forms
+proportional, hence rank one.  Vertical and horizontal factors are,
+respectively, collision and fixed-factor components.
+
+It remains to apply the rowspace reduction
+\eqref{eq:stable-rowspace}.  If the row space lies in the rank-two
+Hankel component, induct on \(m\): every first contraction has its
+\((m-1)\)-marker row space in the same component, and
+Proposition~\ref{prop:contained-rank-two} then puts \(f\) in the upper
+persistent scheme.  For a linear modular component
+\(L_S=\langle e_i:i\in S\rangle\subset\Gamma^dE\), the two contractions
+of an upper basis vector \(e_q\) are, up to divided-power normalization,
+\(e_q\) and \(e_{q-1}\).  Consequently its coherent lift is the
+scheme-theoretic kernel
+\[
+\ker\!\left(
+ \Gamma^{d+1}E\longrightarrow
+ \operatorname{Hom}(E^\vee,\Gamma^dE/L_S)
+\right)
+=\langle e_q:q,q-1\in S\rangle .
+\]
+After \(\ell\) lifts its support is therefore exactly the set of \(q\)
+for which \(q,q-1,\ldots,q-\ell\in S\).  For an NRC nucleus, Lucas'
+theorem computes \(S\) from the vanishing binomial digits.  Thus the
+coherent lifts are precisely the Lucas consecutive-support components:
+the kernel description is scheme-theoretic, commutes with base change,
+and leaves neither an extra nonlinear component nor an embedded one.
+The tame projected Veronese contains no line, so its
+rowspace pullback has rank one.  A row space in the characteristic-three
+cone is a ruling or a point; applying the displayed two-row overlap to
+each adjacent pair again gives rank one.
+
+Finally, in characteristic two, rowspace containment in
+\(\Pi_{\rm cyc}\) forces the first and last columns of the catalecticant
+to vanish:
+\[
+a_0=\cdots=a_m=0,\qquad a_4=\cdots=a_{m+4}=0.
+\]
+For \(m=1,2\) these are the known \(N_3\) and \([e_3]\) pullbacks.
+For \(m\geq3\) the blocks cover every coefficient, so no projective
+point remains.  Hence the characteristic-two modular component descended
+from the R5 cyclic plane terminates after redundancy seven.  This does
+not erase the fresh higher Lucas carriers of
+the separate Lucas-carrier analysis; for example
+\(\PP\langle e_2,\ldots,e_7\rangle\subset\Gamma^9E\) is nonempty.
+
+The collision and fixed-factor alternatives are already covered by
+Lemma~\ref{lem:uniform-collision} and the gcd/rank boundary.
+This exhausts the finite bottom component ledger and proves
+\(\mathrm{SC}(j)\) for every \(j\geq6\), together with the asserted
+termination of the cyclic-plane descendant.
+\end{proof}
+
 The rank-one boundary, ordinary rank-two component, collision
 alternative, and modular pullback are uniform by
 Proposition~\ref{prop:contained-rank-two} and
@@ -281,9 +555,8 @@ Lemmas~\ref{lem:uniform-collision} and
 possibilities are exactly the characteristic-three R5 case and the
 characteristic-two R6 case treated in
 Propositions~\ref{prop:r5-bridge} and \ref{prop:r6-degrees}.
-Thus, after those two base cases, \(\mathrm{SC}(j)\) is the remaining
-content of \(\mathrm{CC}(j-1,1;\mathcal P_j\cup\mathcal M_j)\).
-Section~\ref{sec:r67} proves it at redundancies six and seven.
+Section~\ref{sec:r67} independently recovers the redundancies-six and
+seven base cases.
 
 \begin{theorem}[One-step polar escape]\label{thm:induction}
 Let \(f\in S_n(\F_q)\) have a one-step lower package as in
@@ -325,7 +598,7 @@ every intermediate level, not only at the top.
 
 Recursively, the current contraction is chosen outside
 \(\mathcal P_j\cup\mathcal M_j\); the uniform alternatives and the next
-\(\mathrm{SC}\) assertion make its polar line transverse, so a new
+\(\mathrm{SC}\) theorem make its polar line transverse, so a new
 marker exists off the finite pullback.  No inverse-image stability of
 the declared loci is assumed.
 
@@ -338,8 +611,7 @@ point is included instead in the deletion degree.
 
 \begin{theorem}[Uniform transverse threshold]
 \label{thm:uniform-transverse}
-Fix a redundancy \(r\geq6\).  At every intermediate redundancy
-\(6\leq j\leq r\), assume \(\mathrm{SC}(j)\).  If
+Fix a redundancy \(r\geq6\).  If
 \[
  q\geq Q_r:=
  6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor ,
@@ -375,8 +647,15 @@ Lemmas~\ref{lem:uniform-collision} and
 \]
 Thus the maximum is attained at the bottom stage, and \(Q_r>3r-5\)
 makes the parameter-line inequality \(q+1>d_j\) automatic.  The
-exact-linear-gcd graph has only eight base deletions and at most two
-per marker, so it is weaker as well.
+exact-linear-gcd graph has eight base deletions and at most two per
+retained marker, hence
+\[
+ \delta_r^{\mathrm{lin}}=8+2(r-5)=2r-2,
+\qquad
+ Q_r+1-\delta_r^{\mathrm{lin}}
+ =4r-12+\left\lfloor2\sqrt{6r-17}\right\rfloor>0.
+\]
+Thus this comparison is weaker for every \(r\geq6\).
 
 Apply Theorem~\ref{thm:induction} successively.  If a recursively
 pointed bad scheme contains the whole polar line, the uniform
@@ -396,8 +675,8 @@ the first prime powers meeting them are \(23,29,37\).  Thus the former
 threshold table consisted of three evaluations of one formula with
 \(Q_r=6r+O(\sqrt r)\).  The same calculation recovers the verified
 R6 and R7 parameter bounds \(13\) and \(16\).  In general the
-parameter line is nonbinding; the arbitrary-redundancy obstruction is
-the stable-component assertion.
+parameter line is nonbinding; the stable-component assertion is supplied
+uniformly by Theorem~\ref{thm:stable-component-headline}.
 Propositions~\ref{prop:r6-contained} and
 Corollary~\ref{cor:r7-contained} discharge the required assertions at
 redundancies six and seven.

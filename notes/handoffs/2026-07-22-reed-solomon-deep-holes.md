@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-24
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595 complete; C597 is partial after specialist review. C532 gives
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529--C544, C578, C595, C597 complete. C532 gives
 the strongest honest redundancy-ten theorem: for every odd `q>=59` the deep set is exactly the
 persistent tangent/sigma union, of cardinality `q(q+1)^2/2`, with the complete
 `T/T^9` inversion/Frobenius orbit law.  For `q=2^m>=64`, every deep direction lies in the
@@ -76,9 +76,9 @@ pointed-collision exclusions.  The exact repair and mystery ledger are in
 `notes/2026-07-24-c545-r7-two-step-review-repair.md`.  External
 certificate/replay packaging remains separately owned.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545's
-next referee pass promotes the already uniform transverse argument:
-conditional on the stable-component assertions `SC(j)` for
-`6<=j<=r`,
+next referee pass promotes the already uniform transverse argument.
+C597's repaired catalecticant-rowspace theorem proves the
+stable-component assertions `SC(j)` for `6<=j<=r`; consequently
 every split-free redundancy-`r` syndrome above
 `6r-15+floor(2 sqrt(6r-17))` lies in the declared persistent/modular
 list.  The second specialist graded the paper A (93) overall.  Its final
@@ -121,7 +121,7 @@ q=16,32 has a certified witness.  At q=8 the exact graph/off-graph/rank-two comp
 multiplicities are `1/2/3/0/1`, so the `(2)(3)`-twisted orbit is the unique zero incidence fibre.
 The carrier complement has a two-dimensional quotient.  C532's
 entry gate is green with both residues explicit, but neither task is a manuscript or preprint gate.
-C533 sharpens C525 uniformly: the bad union has a minimal cubic Pluecker covariant, giving
+C533 sharpens C525 uniformly: the bad union has a minimal cubic Plücker covariant, giving
 `q >= min((n-4)(n+7)/2+1,7(n-4))`, and exact divisor overlap lowers deletion to `3n-6`.
 C578 closes the rank-two nonconstant Artin--Schreier residue from C531/C532.
 Every rational rank-two twist is shallow in every admissible binary field:
@@ -166,29 +166,29 @@ minimal cleared-denominator integer \(N_j=6\); after persistent, modular,
 and rank/fixed-factor saturation the cyclic residual is empty at every
 level, including the first unresolved application R11.  The R6/R7
 regressions are scheme-exact over \(\mathbf Q\), \(\mathbf F_2\), and
-\(\mathbf F_3\), with both infinity endpoints retained.  C597 gives a
-valid bottom-component result but does not close the remaining transport
-gate.  Its integral ordered-root incidence on \(\operatorname{Gr}(2,4)\)
+\(\mathbf F_3\), with both infinity endpoints retained.  C597 closes the
+remaining transport gate after specialist-review repair.  Its integral
+ordered-root incidence on \(\operatorname{Gr}(2,4)\)
 has a corrected symmetric/exchanged/anti-invariant factorization
 trichotomy; the anti-invariant diagonal survives only in characteristic
 three and lies in collision.  A six-generator
-Pluecker-to-syndrome bridge satisfies \(J\subset V\) and
+Plücker-to-syndrome bridge satisfies \(J\subset V\) and
 \(3DV\subset J\), with \(3\) minimal for this elimination presentation;
 the factor \(2\) enters only in C525/C595, so the combined formal
 coefficient identity still uses \(6\).
 
-C597's failed step substitutes marker symmetric functions into bottom
-identities but never eliminates the marker variables to obtain a condition
-on the upper syndrome.  It cannot reproduce the known \(N_3\) and
-\([e_3]\) components at redundancies six and seven.  Thus
-\(\mathrm{SC}(j)\) remains proved only for \(j=6,7\), and the printed
-uniform transverse theorem correctly remains conditional.  The repair gate
-is the projectivized catalecticant-rowspace closure of attainable bottom
-syndromes, followed by componentwise line containment.  In characteristic
-two the cyclic-plane coefficient blocks recover \(N_3,[e_3]\) and cover
-all coefficients from \(j=8\) onward, predicting
-\(\mathcal M_r=\varnothing\) for \(r\geq8\); promotion awaits the transport
-proof.  C545 remains unchanged.
+The repaired argument replaces the failed substitution step by an actual
+elimination: products of distinct retained markers are dense in the full
+binary-form parameter space, so attainable bottom syndromes close to the
+projectivized row space of the \((j-4)\times5\) consecutive
+catalecticant.  Irreducibility places that row space in one bottom
+component; persistent/Lucas pullback, the no-line Veronese, the explicit
+wild-ruling overlap, binary coefficient blocks, and ordered-Hessian
+rulings exhaust the list.  Therefore \(\mathrm{SC}(j)\) holds for every
+\(j\geq6\), and the printed uniform transverse threshold is unconditional.
+The binary cyclic-plane descendant recovers \(N_3,[e_3]\) and terminates
+from \(j=8\); fresh higher Lucas carriers remain and are not conflated with
+that descendant.
 C500's redundancy-five-only paper plan is superseded by C538's broader merger.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;
@@ -324,7 +324,7 @@ Task card: `notes/reed-solomon-tasks/c478-exceptional-family-controls.md`.
 
 [`C481 projection-sextic theorem`](../2026-07-22-c481-projection-sextic-coherent-atlas.md)
 constructs the quotient-line alternating form and identifies its determinant brackets, modulo the
-exact edge torus, with labelled `M_0,6` in every characteristic.  Both the Pluecker-array inverse
+exact edge torus, with labelled `M_0,6` in every characteristic.  Both the Plücker-array inverse
 and the normalized three-cross-ratio inverse are explicit.  Pointwise, diagonally coherent,
 Frobenius-colour-orbit, and Galois-equivariant functors have exact semilinear transporter laws and
 the common stabilizer recovery criterion.  The finite quotient lattice explains all C478
@@ -811,7 +811,7 @@ are the Gale pair; repeated Flatland colours still impose only one condition.
 | C531 | full degree-nine Lucas-carrier strata | complete (obstruction exit) | tensor filtration; three finite geometric strata; uniform rank-one shallowness; rank-two \(A_5\) twists plus nonconstant Artin--Schreier cover; two-dimensional complement quotient | exact carrier theorem boundary |
 | C532 | PRS redundancy-ten synthesis | complete | odd `q>=59` persistent-only; binary `q>=64` persistent/Lucas containment; exact orbit law and explicit rank-two/positive-moduli residues | strongest honest fixed-level theorem without a carrier census | fixed-level theorem |
 | C578 | degree-nine rank-two Artin--Schreier avoidance | complete | direct all-twist descent; genus at most one; bad-base degree `102`; exact `23/48` deletion; `q>=128` theorem plus complete `q=64` certificate and frozen `q=16,32` controls | every admissible rank-two twist shallow; C532 residue bound reduced to `q^4(q+1)` | rank-two binary redundancy-ten residue closed |
-| C533 | C525 threshold/deletion sharpening | complete | cubic union covariant and fixed-root divisor overlap | threshold `min((n-4)(n+7)/2+1,7(n-4))`; deletion `3n-6`; quadratic Pluecker obstruction | improved arbitrary-degree bound |
+| C533 | C525 threshold/deletion sharpening | complete | cubic union covariant and fixed-root divisor overlap | threshold `min((n-4)(n+7)/2+1,7(n-4))`; deletion `3n-6`; quadratic Plücker obstruction | improved arbitrary-degree bound |
 | C534 | non-deep-hole PRS frontier triage | complete | frozen C481--C530 theorem boundaries | Hessian--Arf and coherent polar flags survive; Flatland comparison remains high-upside; other directions killed, merged, or portfolio-blocked | C535--C537 bounded survivor gates |
 | C535 | modular Hessian--Arf functoriality | complete (characterized stop) | maximal base-scheme naturality; Arf torsor; quartic `i_3` prior-art boundary; cubic-local all-degree contraction theorem | modular replacement theorem boundary |
 | C536 | coherent polar-flag Fano boundary | complete | integral secant pullback from degree five; sharp degree-four failure; Lucas adjacent-run theorem; C498/C509/C513/C516 corollaries | no third component in the componentwise secant/nucleus functor | abstract modular flag theorem boundary |

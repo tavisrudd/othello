@@ -2,8 +2,7 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** partial after specialist review; bottom elimination closed,
-marker transport open
+**Status:** complete after specialist-review repair; marker transport proved
 
 ## Objective
 
@@ -62,19 +61,24 @@ The C545 submission manuscript, Lean tree, and all other lanes remain frozen.
 integral ordered-root incidence over the cubic-pencil Grassmannian, proves
 the corrected symmetric/exchanged/anti-invariant factorization trichotomy,
 and gives a
-minimal-denominator-\(3\) bridge from the noncollision Pluecker ideal to
+minimal-denominator-\(3\) bridge from the noncollision Plücker ideal to
 C595's cyclic syndrome ideal.  Minimality is specific to this elimination
 presentation, not an intrinsic invariant.  The factor \(2\) enters only in the
 C525/C595 vertical-fibre step, so the combined integer remains \(6\).
 The vertical fibres are exactly the C525/C595
 modular and rank/fixed-factor cases.
 
-The original conclusion \(\mathrm{SC}(j)\) for all \(j\geq6\) is withdrawn.
-Substitution preserves bottom identities on syndrome--marker space but does
-not eliminate retained markers to obtain a condition on the upper syndrome.
-The repair gate is to prove that the closure of attainable bottom syndromes is
-the projectivized rowspace of the \((j-4)\times5\) catalecticant of \(f\),
-then classify its containment in each irreducible level-five bad component.
-The characteristic-two cyclic-plane equations recover \(N_3\) at \(j=6\),
-\([e_3]\) at \(j=7\), and become empty from \(j=8\) onward; this is the
-required regression target, not yet a promoted manuscript theorem.
+The specialist review correctly rejected formal marker substitution.
+The repair proves that the closure of attainable bottom syndromes is the
+projectivized row space of the \((j-4)\times5\) consecutive catalecticant
+of \(f\).  Its irreducibility reduces containment in the finite bottom bad
+union to one component.  The persistent/Lucas identities, no-line
+Veronese, explicit characteristic-three ruling overlap, binary coefficient
+blocks, and ordered-Hessian rulings exhaust those components.  Hence
+\(\mathrm{SC}(j)\) holds for every \(j\geq6\), including
+\(\mathrm{SC}(11)\).
+
+The characteristic-two cyclic-plane descendant is \(N_3\) at \(j=6\),
+\([e_3]\) at \(j=7\), and empty from \(j=8\).  This does not remove fresh
+higher Lucas carriers such as
+\(\mathbf P\langle e_2,\ldots,e_7\rangle\subset\Gamma^9E\).

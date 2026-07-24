@@ -8,7 +8,7 @@
 ## Result
 
 The integral ordered-root incidence and its bottom-syndrome elimination are
-correct.  On the rank-two open, the noncollision Pluecker ideal \(J\) and
+correct.  On the rank-two open, the noncollision Plücker ideal \(J\) and
 C595's cyclic syndrome ideal \(V\) satisfy
 \[
  J\subset V,\qquad 3DV\subset J,\qquad DV\not\subset J.
@@ -46,7 +46,7 @@ over \(\operatorname{Spec}\mathbf Z\).  Write
 (z_0,z_1,z_2,z_3,z_4,z_5)
 =(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23})
 \]
-for Pluecker coordinates, with relation
+for Plücker coordinates, with relation
 \[
                   z_0z_5-z_1z_4+z_2z_3=0.                  \tag{3}
 \]
@@ -97,7 +97,7 @@ bracket \(s-t\).  The product of the two anti-invariant factors has
 \[
  (z_0,\ldots,z_5)=(0,0,-\mu,3\mu,0,0),
 \]
-whose Pluecker value is \(-3\mu^2\).  It therefore survives only in
+whose Plücker value is \(-3\mu^2\).  It therefore survives only in
 characteristic three, where it is part of the diagonal collision scheme
 retained in (5).  It contributes no new noncollision branch.
 
@@ -160,7 +160,7 @@ c_0&c_1&c_2&c_3\\
 c_1&c_2&c_3&c_4
 \end{pmatrix}.
 \]
-On its rank-two open, the kernel line has Pluecker coordinates
+On its rank-two open, the kernel line has Plücker coordinates
 \[
 \begin{aligned}
 z_0&=c_2c_4-c_3^2,&
@@ -173,7 +173,7 @@ z_5&=c_0c_2-c_1^2.                                         \tag{8}
 \]
 
 Eliminating \(a,b,c,d\) from the noncollision factor of (7) gives the
-six integral Pluecker equations
+six integral Plücker equations
 \[
 \begin{aligned}
 K_1&=3z_4^2-9z_2z_5-z_3z_5,&
@@ -306,23 +306,55 @@ The determinant \(D\) vanishes on \(Q_2\), so it is persistent.  The plane
 Fano pullback is the declared nucleus plus a persistent vertical
 component.
 
-The Pluecker specialization alone does not represent every inseparable
-binary degeneration.  C525's ordered-Hessian model is the required second
-chart.  Its complete degeneracy package is the persistent Veronese
-surface, the two tangent-quadric rulings, and the collision Chow
-resultant.  Under the consecutive-Hankel constraint, the Veronese pulls
-back exactly to the persistent/Lucas union; the complementary ruling
-forces rank at most one; and the Chow factor is (5).  Thus no binary
-component remains.
+The Plücker specialization alone does not represent every inseparable
+binary degeneration.  The **ordered-Hessian chart** attaches to an ordered
+basis \(p_0,p_1\) of the cubic pencil the bidegree-\((2,2)\) equation
+\[
+ u^2\operatorname{Hess}^{\rm div}(p_0)
+ +uv\,\operatorname{PolHess}^{\rm div}(p_0,p_1)
+ +v^2\operatorname{Hess}^{\rm div}(p_1)=0
+\]
+on pencil-parameter space times Hessian-root space.  It retains the
+parameter order before quotienting by a basis change and therefore sees
+inseparable degenerations lost by the primitive Plücker specialization.
+Its tangent quadric has two conic families of generator lines.  In
+Plücker coordinates these **tangent-quadric rulings** are
+\[
+\begin{aligned}
+z_1=z_4=0,\quad z_2=z_3,\quad z_0z_5=z_2^2,\\
+z_0=z_5=0,\quad z_2=z_3,\quad z_1z_4=z_2^2.
+\end{aligned}
+\]
+C525 proves that the first ruling is the square-quadratic boundary of the
+persistent Veronese, while the second is complementary.  Under the
+consecutive-Hankel constraint the Veronese pulls back exactly to the
+persistent/Lucas union; the complementary ruling identities force all
+five contraction forms to be proportional and hence rank at most one;
+the remaining vertical factors are the collision Chow resultant (5).
+Thus no binary component remains.
 
 ### Characteristic three
 
 Primitive specialization of (9) is nonflat and is not used as the wild
-model.  The actual wild closure is the join of the cubic nucleus with the
-quartic normal rational curve.  Its lines are rulings, and the
-consecutive-Hankel equations force the rank/fixed-factor boundary.  This
-is the characteristic-three fibre checked in C595.  No ternary component
-remains.
+model.  The actual wild closure is the cone
+\(\operatorname{Join}(e_2,C_4)\).  A line not through its vertex would
+project to a line in \(C_4\), impossible because the quartic normal
+rational curve contains no line; hence every contained line is a ruling
+\(\langle e_2,\nu_4(t)\rangle\).
+
+The ruling calculation is explicit.  By \(\operatorname{PGL}_2\)
+equivariance move it to \(\langle e_2,e_4\rangle\).  If the two
+consecutive Hankel rows lie on this ruling, then
+\[
+(a_0,\ldots,a_4),(a_1,\ldots,a_5)\in\langle e_2,e_4\rangle.
+\]
+The first membership gives \(a_0=a_1=a_3=0\), and the second gives
+\(a_1=a_2=a_4=0\); the overlap leaves only \(a_5\).  Thus
+\(f=\mu e_5\).  Undoing the frame gives
+\(f=\mu\nu_5(t)\), including the endpoint at infinity, which is the
+rank-one/fixed-factor boundary.  Applying the same two-row computation
+to every adjacent pair gives the identical conclusion at every upper
+level.  No ternary component remains.
 
 Every characteristic other than three lies on the bridge's
 \(\mathbf Z[1/3]\) locus.  Characteristic two is nevertheless retained as
@@ -369,47 +401,103 @@ This proves that the ledger is complete: every failure of the lower
 geometrically integral moving cover is rank/persistent, modular,
 fixed-factor/collision, or cyclic/wild.
 
-## 6. Missing transport step and repair gate
+## 6. Catalecticant-rowspace transport
 
-Let \(m=j-5\) markers be retained.  The bottom coordinates are
-affine-linear in the elementary symmetric functions of those markers.
-The required transport statement is the scheme-theoretic identification
+Let \(m=j-5\) markers be retained and write
 \[
- \overline{\{\text{attainable bottom syndromes}\}}
-   =\mathbf P\!\left(\operatorname{rowspace}\operatorname{Cat}_{j-4,5}(f)\right).
+ \operatorname{Cat}_{m,4}(f)=
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3&a_4\\
+ a_1&a_2&a_3&a_4&a_5\\
+ \vdots&\vdots&\vdots&\vdots&\vdots\\
+ a_m&a_{m+1}&a_{m+2}&a_{m+3}&a_{m+4}
+ \end{pmatrix}.                                             \tag{15}
 \]
-Only after proving this equality, including the projective boundary and
-marker diagonals, can recursively pointed containment be replaced by
+If the marker product has coefficient vector
+\(h=(h_0,\ldots,h_m)\), its bottom syndrome is
 \[
-\mathbf P(\operatorname{rowspace}\operatorname{Cat}_{j-4,5}(f))
-   \subset C
+                         c(h)=h\,\operatorname{Cat}_{m,4}(f). \tag{16}
 \]
-for one irreducible component \(C\) of the level-five bad scheme.
-The original substitution argument proves neither the closure equality nor
-this elimination of marker variables.
+Over an algebraic closure, squarefree products of \(m\) linear forms are
+a dense open subset of \(\mathbf P(\operatorname{Sym}^mE^\vee)\).
+The contraction map in (16) is linear and homogeneous; after deleting
+its projective kernel, the scheme-theoretic closure of its image is
+therefore
+\[
+ \overline{\{c(h):h\text{ is a product of distinct markers}\}}
+ =\mathbf P\!\left(
+    \operatorname{rowspace}\operatorname{Cat}_{m,4}(f)\right). \tag{17}
+\]
+This argument is homogeneous, so markers at infinity are included.
+Marker diagonals were removed only to select the dense open and reappear
+in its closure; no affine boundary is lost.
 
-This reformulation makes the intended uniform cases plausible and
-falsifiable.  The persistent component should give catalecticant rank at
-most two by Proposition 5.14.  The tame Veronese contains no line, hence
-should force rank at most one.  The characteristic-three wild cone has
-only its ruling lines, so its rowspace containment should again force rank
-at most two.  These implications must be proved for the rowspace functor,
-not inferred from identities on marker space.
-
-The binary cyclic plane gives the sharp regression.  Containment in
-\(\Pi_{\rm cyc}\) forces
+Suppose the recursively pointed bottom object is contained in the
+level-five bad union.  The projective space in (17) is irreducible, while
+that bad union has the finite component ledger of Sections 2--5.  Hence
 \[
- a_0=\cdots=a_m=0,\qquad a_4=\cdots=a_{m+4}=0.
+\mathbf P(\operatorname{rowspace}\operatorname{Cat}_{m,4}(f))
+   \subset C                                                   \tag{18}
 \]
-For \(m\geq3\) the two index blocks cover every coefficient, so this
-component terminates after redundancy seven.  The exact
-\(\mathbf F_4\) affine count, agreeing with the reviewer's brute-force
-regression, is \(15,3,0,0\) nonzero solutions at
-\(j=6,7,8,9\), respectively: projectively these are exactly \(N_3\),
-\([e_3]\), and then the empty set.  This is the mechanism a repaired
-transport proof must reproduce.  If completed, it would imply
-\(\mathcal M_r=\varnothing\) in characteristic two for \(r\geq8\).
-That consequence is not yet promoted to the manuscript.
+for one irreducible component \(C\).  We now check every possibility.
+
+1. If \(C\) is the rank-two Hankel component, apply C536 inductively on
+   \(m\).  For every first contraction \(b=\iota_\lambda f\), the
+   \((m-1)\)-marker row space of \(b\) is contained in the same component.
+   The induction hypothesis puts every \(b\) in the upper rank-two scheme,
+   and C536's integral one-step identity
+   \(\operatorname{CFano}_n(\Sigma_{2,n-1})=\Sigma_{2,n}\)
+   then puts \(f\) in the persistent scheme.  The identical induction
+   with C536's consecutive-support formula gives precisely the Lucas
+   modular pullbacks and no third component.
+
+2. Away from characteristics two and three, \(C=V\) is the projected
+   Veronese surface and contains no projective line.  Thus (18) forces
+   the row space of (15) to have dimension one.  All \(2\times2\) minors
+   of the consecutive catalecticant vanish, so \(f\) is on the rank-one
+   normal rational curve and is already in the rank boundary.
+
+3. In characteristic three, \(C=\operatorname{Join}(e_2,C_4)\).
+   Any positive-dimensional linear subspace of this cone is one of its
+   rulings.  Move the ruling to \(\langle e_2,e_4\rangle\).  Applying the
+   two-row calculation of Section 4 to every adjacent pair of rows in
+   (15) successively kills \(a_0,\ldots,a_{m+3}\), leaving only
+   \(a_{m+4}\).  Undoing the frame gives
+   \(f=\mu\nu_{m+4}(t)\), again the rank-one/fixed-factor boundary.
+
+4. In characteristic two, containment in
+   \(\Pi_{\rm cyc}=(c_0,c_4)\) says that the first and last columns of
+   (15) vanish:
+   \[
+    a_0=\cdots=a_m=0,\qquad a_4=\cdots=a_{m+4}=0.             \tag{19}
+   \]
+   For \(m=1\) and \(m=2\), these are exactly the known \(N_3\) and
+   \([e_3]\) pullbacks.  For \(m\geq3\), the two blocks cover every
+   coefficient, so no projective point remains.  Consequently the
+   cyclic-plane descendant
+   \[
+          \mathcal M_r^{\rm cyc,2}=\varnothing
+          \quad\text{for every }r\geq8.                     \tag{20}
+   \]
+   The exact \(\mathbf F_4\) affine counts \(15,3,0,0\) at
+   \(j=6,7,8,9\) independently replay (19).  This does not erase fresh
+   higher Lucas carriers; in particular the degree-nine carrier
+   \(\mathbf P\langle e_2,\ldots,e_7\rangle\) remains nonempty.
+
+5. The ordered-Hessian components add nothing: C525's two consecutive
+   quadratic identities make the complementary ruling rank one, while
+   its Veronese ruling is exactly the persistent/Lucas pullback already
+   handled in item 1.  Vertical and horizontal factors are respectively
+   collision and fixed-factor components, already handled in Section 5.
+
+Thus every contained component is persistent, modular, collision, or rank
+boundary.  This proves \(\mathrm{SC}(j)\) for every \(j\geq6\).  Combining
+it with the printed transverse theorem makes the bound
+\[
+ q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor
+\]
+unconditional for split-free syndromes; the separate covering-radius
+premise is still required before calling them code deep holes.
 
 ## 7. Evidence and replay
 
@@ -431,13 +519,14 @@ python3 notes/2026-07-23-c525-ordered-hessian-arf-pullback-replay.py
 ```
 
 The dependency-free Python checker reconstructs (4), verifies the symmetric,
-exchanged, and anti-invariant diagonal cases and the Pluecker identities
+exchanged, and anti-invariant diagonal cases and the Plücker identities
 (6)--(7), checks every entry of
 (11)--(12), and independently exhausts rational \((1,1)\)-factorizations
 over \(\mathbf F_2,\mathbf F_3,\mathbf F_5\).  In each field their images
 equal the union of the symmetric-collision, exchanged-collision, cyclic,
 and characteristic-three diagonal branches.  These checks concern the
-bottom component model; they do not eliminate retained markers.
+bottom component model; the marker elimination is the geometric
+rowspace argument (15)--(18), not a finite-field computation.
 The checker also derives the binary \(15,3,0,0\) regression directly from
 the two forced index blocks.
 
@@ -457,13 +546,14 @@ documented command passed.
 
 ## 8. Paper recommendation
 
-Do not change the C545 manuscript: its \(\mathrm{SC}(j)\) hypothesis is
-correctly retained.  The Grassmannian bridge is
-a valid ingredient for a companion paper, but it is a restatement of the
-level-five component classification until the rowspace/marker-elimination
-step in Section 6 is proved.  Any future companion should print the
-anti-invariant characteristic-three diagonal case and describe \(3\) only
-as the minimal denominator of this elimination presentation.
+The rowspace repair clears the mathematical gate for printing
+\(\mathrm{SC}(j)\) as a theorem.  The manuscript version must include,
+rather than merely cite, (15)--(18), the anti-invariant
+characteristic-three diagonal case, the seven generators (9a), the
+characteristic-three ruling computation, and the distinction between
+\(\mathbf Z[1/3]\) equality on the \(D\)-open and literal saturation over
+\(\mathbf Z[1/6]\).  The integer \(3\) must be described only as minimal
+for this elimination presentation.
 
 ## Mystery ledger
 
@@ -472,22 +562,20 @@ as the minimal denominator of this elimination presentation.
 | Whether the bottom non-cyclic component survives | settled negatively | The corrected UFD trichotomy gives symmetric collision, exchanged cyclic/collision, and the characteristic-three anti-invariant diagonal; (13) identifies the noncollision branch with C595's carrier. |
 | Whether the missing integral model exists | settled | The unreduced ordered-root incidence (4) and collision fibre product (5) are integral and commute with arbitrary base change. |
 | Whether one global residual colon ideal commutes with every fibre | settled negatively, without blocking the theorem | C535's nonflat-base-change obstruction is real.  C597 gets equality on the \(D\)-open over \(\mathbf Z[1/3]\), but the literal saturated equality with \(V\) holds over \(\mathbf Z[1/6]\); fibres \(2,3\) remain separate. |
-| Where the factors \(2\) and \(3\) originate | settled sharply | The Pluecker-to-syndrome bridge has minimal integer \(3\), witnessed in characteristic three.  The factor \(2\) enters only through C525/C595's inseparable/coherent-Fano step, so the composition still uses \(6\). |
+| Where the factors \(2\) and \(3\) originate | settled sharply | The Plücker-to-syndrome bridge has presentation-minimal integer \(3\), witnessed in characteristic three.  The factor \(2\) is required because the characteristic-two specialization of \(V\) has a \(D\)-supported component; the composition still uses \(6\). |
 | Whether characteristic two has a hidden inseparable component | settled | C525's complete ordered-Hessian degeneracy package pulls back only to persistent/Lucas or rank one. |
-| Whether characteristic three has a hidden wild component | settled | The true wild rulings force rank/fixed factor; the nonflat primitive Pluecker specialization is not used. |
-| Whether bottom identities transport to the upper syndrome | open, load-bearing | Marker substitution preserves identities on syndrome--marker space but does not eliminate marker variables.  Prove the catalecticant-rowspace closure statement in Section 6. |
-| Whether \(\mathrm{SC}(11)\) holds | open | The original proof is withdrawn; only \(\mathrm{SC}(6)\) and \(\mathrm{SC}(7)\) remain established by Proposition 6.7 and Corollary 6.14. |
-| Whether the uniform syndrome theorem is unconditional | no | It remains conditional on \(\mathrm{SC}(j)\), exactly as printed in C545. |
-| Whether binary modular components persist for \(r\geq8\) | strong candidate: no | The two forced coefficient blocks cover all indices for \(m\geq3\); the \(\mathbf F_4\) regression gives \(15,3,0,0\) affine solutions at \(j=6,7,8,9\).  Promotion requires the rowspace transport proof. |
-| Whether C545 should be reopened | settled negatively for C597 | The manuscript already states the correct conditional theorem and should remain unchanged. |
+| Whether characteristic three has a hidden wild component | settled | The true wild rulings force rank/fixed factor; the nonflat primitive Plücker specialization is not used. |
+| Whether bottom identities transport to the upper syndrome | settled | Products of distinct markers are dense in the binary-form parameter space, so attainable bottom contractions close to the projectivized catalecticant row space (17); irreducibility then reduces containment to one bottom component. |
+| Whether \(\mathrm{SC}(11)\) holds | settled | The componentwise rowspace calculation proves the stronger \(\mathrm{SC}(j)\) for every \(j\geq6\). |
+| Whether the uniform syndrome theorem is unconditional | settled | Substituting the proved stable-component theorem into the printed transverse argument removes its geometric hypothesis; the radius premise remains separate. |
+| Whether the binary cyclic-plane descendant persists for \(r\geq8\) | settled negatively | The two forced coefficient blocks (19) cover all indices for \(m\geq3\); the \(\mathbf F_4\) regression is \(15,3,0,0\).  Fresh higher Lucas carriers, including the degree-nine carrier, are not removed. |
+| Whether the manuscript theorem is printable | yes, after the listed repairs | The proof must retain the explicit rowspace lemma, component checks, definitions, generators, vertical calculations, and denominator qualification. |
 
 ## Closeout assessment
 
-The specialist review preserves the integral
-\(\operatorname{Gr}(2,4)\) bridge but rejects its promotion to an
-all-level theorem.  The missing operation is elimination of retained
-markers, not another bottom-component calculation.  The highest-EV repair
-is the catalecticant-rowspace closure theorem followed by uniform line
-containment in each level-five component.  The binary coefficient blocks
-give the sharp regression target and predict that the modular components
-terminate after redundancy seven.
+The specialist review correctly rejected substitution as marker
+elimination.  The repair is (17): the dense marker-product locus closes to
+the full catalecticant row space.  Irreducibility and the explicit
+component checks then prove the all-level theorem.  The binary coefficient
+blocks additionally show that the modular component terminates after
+redundancy seven.

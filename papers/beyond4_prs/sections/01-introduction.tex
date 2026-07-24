@@ -1,15 +1,17 @@
 \section{Introduction}
 
-This paper has two principal contributions.  First, it gives the
+This paper has three principal contributions.  First, it gives the
 complete all-field classification at redundancy five, the first case
 left open by the known classification through redundancy four.
 Second, it introduces coherent polar flags: a marked contraction
 method that propagates splitting information to higher redundancies
 without forgetting the factor needed for a squarefree lift.  This
 gives complete all-field syndrome classifications at redundancies six
-and seven.  We use deep-hole syndromes because their Hankel systems
-make both the base classification and the propagation mechanism
-visible.
+and seven.  Third, a catalecticant-rowspace reduction and an integral
+bottom-component calculation prove that every recursively pointed
+contained component is persistent or modular.  We use deep-hole
+syndromes because their Hankel systems make the base classification,
+propagation mechanism, and contained-component geometry visible.
 
 The mechanism is the elementary identity
 \[
@@ -22,10 +24,9 @@ The mechanism is the elementary identity
  \lambda\nmid g
 \]
 when \(g\) is squarefree.  Retaining \(\lambda\) is therefore the
-essential coherence condition.  If the contained bad scheme has no
-component outside the persistent and modular loci through redundancy
-\(r\), Theorem~\ref{thm:uniform-transverse} closes the transverse branch
-for
+essential coherence condition.  Theorem~\ref{thm:stable-component-headline}
+classifies the contained components, and
+Theorem~\ref{thm:uniform-transverse} closes the transverse branch for
 \[
  q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
 \]
@@ -131,7 +132,9 @@ The following statements hold.
       directions of $\PRS(q-5)$ are exactly the persistent tangent and
       conjugate-secant families, the exceptional orbits listed for
       $q=7,8,9,11,13$, and, when $q=2^m$ with odd $m\geq5$, one
-      characteristic-two nucleus orbit.
+      characteristic-two nucleus orbit.  Here \(m\geq5\) avoids double
+      counting: \(m=3\), or \(q=8\), is already the
+      \(|\mathcal O|=9\) row of the exceptional table.
 \item The displayed finite domains through $q=32$ have the certified
       split-free classification stated in Section~\ref{sec:r67}.
       Together with the structural theorem, these finite
@@ -160,6 +163,28 @@ becomes a deep-hole classification only when
 $\rho(\PRS(q-6))=6$.  Table~\ref{tab:classification-status} places the
 split-free result, radius gate, deep-hole conclusion, and remaining
 field gap in separate columns for each redundancy.
+
+\begin{theorem}[Stable components and the uniform transverse consequence]
+\label{thm:stable-component-headline}
+The stable-component assertion \(\mathrm{SC}(j)\) holds for every
+\(j\geq6\).  In characteristic two, the modular component descended
+from the R5 cyclic plane is empty for every \(r\geq8\).  Consequently,
+if
+\[
+ q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor ,
+\]
+every split-free redundancy-\(r\) syndrome belongs to
+\(\mathcal P_r\cup\mathcal M_r\).  Calling these directions code deep holes
+still requires the separate covering-radius equality
+\(\rho(\PRS(q+1-r))=r-1\).
+\end{theorem}
+
+Theorem~\ref{thm:stable-component-headline} is the third principal
+contribution.  Its proof is given in Section~\ref{sec:polar}: products of
+the retained markers are dense in the full binary-form parameter space,
+so the bottom contractions close to the projectivized row space of a
+consecutive catalecticant.  Irreducibility reduces containment to one
+bottom component, and each component is then treated explicitly.
 
 \paragraph{Relation to previous work.}
 The tangent and conjugate-secant families and the coding/normal-rational

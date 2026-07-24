@@ -57,6 +57,20 @@ BUNDLES = (
         ),
     ),
     (
+        "Certificate SC",
+        "stable-components",
+        (
+            ("generator-checker", "2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "2026-07-24-c597-r10-integral-bad-scheme-sc11.py", "rederive"),
+            ("certificate", "2026-07-24-c597-r10-integral-bad-scheme-sc11.json", "2026-07-24-c597-r10-integral-bad-scheme-sc11.json", "compare"),
+            ("scheme-checker", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sing", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sing", "rederive"),
+            ("checksum", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sha256", "2026-07-24-c597-r10-integral-bad-scheme-sc11.sha256", "compare"),
+            ("fano-generator-checker", "2026-07-24-c595-stable-component-fano-elimination.py", "2026-07-24-c595-stable-component-fano-elimination.py", "rederive"),
+            ("fano-certificate", "2026-07-24-c595-stable-component-fano-elimination.json", "2026-07-24-c595-stable-component-fano-elimination.json", "compare"),
+            ("fano-scheme-checker", "2026-07-24-c595-stable-component-fano-elimination.sing", "2026-07-24-c595-stable-component-fano-elimination.sing", "rederive"),
+            ("fano-checksum", "2026-07-24-c595-stable-component-fano-elimination.sha256", "2026-07-24-c595-stable-component-fano-elimination.sha256", "compare"),
+        ),
+    ),
+    (
         "Certificate R8",
         "r8",
         (

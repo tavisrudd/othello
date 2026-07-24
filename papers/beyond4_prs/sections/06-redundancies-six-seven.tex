@@ -226,7 +226,9 @@ For the representative $e_3$,
 \[
        W_{e_3}=\langle1,t,t^4\rangle.
 \]
-The root differences of $A+Bt+Ct^4$ lie in the kernel of
+If \(C=0\), the member \(A+Bt+Ct^4\) has degree at most one and
+cannot have four distinct roots.  Assume \(C\ne0\).  The root
+differences of $A+Bt+Ct^4$ then lie in the kernel of
 $u\mapsto u^4+(B/C)u$.  Four distinct rational roots exist exactly
 when all roots of $u^3=B/C$ are rational, equivalently when
 $3\mid q-1$, which for $q=2^m$ means $m$ is even.  The stabilizer of
@@ -348,6 +350,9 @@ the persistent locus of size $q(q+1)^2/2$, together with:
 \item one characteristic-two nucleus orbit of size $q+1$ when
       $q=2^m$ and odd $m\geq5$.
 \end{enumerate}
+The lower bound \(m\geq5\) avoids double counting: the remaining odd
+case \(m=3\), namely \(q=8\), is already the
+\(|\mathcal O|=9\) row of the exceptional table.
 There are no other exceptional orbits.  The complete persistent orbit
 law is $T/T^5$ modulo inversion and Frobenius, with a tangent
 fixed/nonzero split exactly in characteristic five.

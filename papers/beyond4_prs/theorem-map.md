@@ -11,7 +11,7 @@ paper makes no claim below the displayed threshold.
 | C491 | Complete redundancy-five classification | complete classification | every prime power `q >= 7`; sporadic orbits exactly at `7,8,9,11,13,17,19` | characteristic-free Hankel/cubic-cover proof plus exhaustive finite certificates |
 | C498 | Redundancy-six classification | complete classification | every prime power `q >= 7`; small exceptional tables at `7,8,9,11,13`; recurring binary nucleus orbit for odd `m >= 5` | polar-line proof plus bounded census and semilinear normal-form certificate |
 | C509 | Redundancy-seven split-free syndrome classification | complete all-field classification; deep-hole promotion only with the radius gate; repaired two-step proof independently confirmed | finite certificate through `q=32`; geometric continuation from `q>=37`; genuine deep holes only for `q >= 11`; the `q=7,8,9` radius gate is not supplied | explicit degree-16 second-marker scheme, pointed linear-gcd and \(S_3\) bottom packages, characteristic-free contained rank-two proposition, and orbit-reduced finite certificate |
-| C512 | Polar-flag construction and effective transverse induction | unconditional construction and uniform ordinary rank-two containment; conditional all-redundancy transverse classification | if \(\mathrm{SC}(j)\) holds for \(6\leq j\leq r\), then \(q\geq6r-15+\lfloor2\sqrt{6r-17}\rfloor\) leaves only the persistent/modular loci; if \(p>r-1\), only the persistent tangent/conjugate-secant families remain | characteristic-free construction, uniform collision and linear modular-pullback lemmas, the R5 genus-one bottom cover with six deletions per marker, and the sharp parameter budget \(3r-5\); no census |
+| C512/C536/C595/C597 | Polar flags, stable components, and effective transverse induction | unconditional all-redundancy contained-component and transverse classification | \(\mathrm{SC}(j)\) holds for every \(j\geq6\); \(q\geq6r-15+\lfloor2\sqrt{6r-17}\rfloor\) leaves only the persistent/modular loci; if \(p>r-1\), only the persistent tangent/conjugate-secant families remain | catalecticant-rowspace transport, integral rank-two/Lucas pullback, Grassmannian factorization, Plücker bridge, coherent-Fano identities, vertical-fibre calculations, and the sharp parameter budget \(3r-5\) |
 | C513 | Redundancy-eight theorem | unconditional high-field classification | `q >= 43`; `CC(7,1)` and `LP(6,1)` are proved; no statement about extra orbits below `43` | explicit recursive lower-carrier equations, geometric-`S3` three-marker cover, direct gcd-one treatment, uniform contained/collision propositions, and modular-lift calculation |
 | C542 | Redundancy-eight Lean boundary | conditional synthesis and arithmetic, not a full formalization | integer Hasse--Weil cutoff `42`, first prime-power field order `43`, budgets `30` and `14`, persistent count/orbit/cocycle terminals, and only the proved characteristic-seven `q=7,49` boundary | projective three-marker contraction, exact affine factorization through the symmetric marker cubic, prime-power and finite-field synthesis implications, import-only gate, and standard-axiom audit; concrete geometry, coding identification, group actions, and covering radius remain explicit inputs |
 | C516 | Redundancy-nine theorem | unconditional high-field classification | `q >= 53`; no full bounded-field classification | four-marker proof, residual identities, explicit six-slice Bezout identity, rational-base polynomial and degree bound, `CC(8,1)`, and exact `q=49` carrier closure |
@@ -27,6 +27,8 @@ paper makes no claim below the displayed threshold.
 
 - `thm:r5`: complete redundancy-five classification.
 - `thm:spine`: classification spine, with all-field and high-field clauses separated.
+- `thm:stable-component-headline`: all-level stable-component classification
+  and the uniform transverse consequence.
 - `thm:polar-construction`: intrinsic polar-flag construction and squarefree lifting.
 - `thm:induction`: one-step polar escape from an explicit lower package;
   multistep flags require a new package at each intermediate level.
@@ -41,6 +43,8 @@ paper makes no claim below the displayed threshold.
 ## Excluded claims
 
 - No arbitrary-redundancy Reed–Solomon deep-hole classification.
+- No assertion that characteristic two has no higher modular carriers;
+  only the R5 cyclic-plane descendant terminates after redundancy seven.
 - No complete redundancy-eight or redundancy-nine bounded-field classification.
 - No promotion of the redundancy-seven `q=7,8,9` split-free tables to code deep holes without a
   covering-radius proof.
