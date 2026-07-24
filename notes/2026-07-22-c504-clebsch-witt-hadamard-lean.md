@@ -2,7 +2,7 @@
 
 **Lane:** `clebsch`
 
-**Status:** repaired and exact-validation green; awaiting user-launched post-fix review
+**Status:** complete; exact-validation green and independent post-fix review `GO`
 
 This file is both the cold-read task specification and the durable result report. Complete it in
 place with exact theorem names, artifacts, validation, axiom evidence, trust boundaries, judgment
@@ -249,7 +249,12 @@ inconsistent.  The current repair adds the missing carrier, square-membership, i
 literal normalizer checks; narrows “automorphism” to the exact finite assignment certificate
 actually checked; and adds the exact predecessor crosswalk and one authoritative timing table.
 Exact validation and repaired source hashes are recorded above.  The repair commit pin is recorded
-below; the required user-launched post-fix review remains outstanding.
+above.  The first post-fix pass found one remaining report-only provenance error: the crosswalk
+assigned the exact extended generator and targets to C464.  Commit `1aac9554` corrected the rows so
+C464 owns the punctured `[11,6,5]` data, C469 the parity-extension/Hadamard boundary, and C470 the
+exact 6×12 extended generator and targets.  The reviewer confirmed that this commit changed only
+the report, left the validated Lean surface byte-identical, matched the predecessor certificate
+schemas, and returned final `GO`.
 
 ### Mystery ledger
 
