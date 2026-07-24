@@ -1297,6 +1297,23 @@ commands, toolchain versions, SHA-256 digests, theorem names, and frozen
 outputs.  The import-only gate
 \path{lean/RelativeConicArcs/Gates/Relconic.lean} is the kernel-checking
 entry point for precisely the results used here.
+The pinned versions are Lean \(4.32.0\)-rc1, Lake
+\texttt{5.0.0-src+b4812ae}, and Mathlib revision
+\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  From the supplement's
+\path{lean/} directory, the exact replay is
+\[
+\begin{split}
+&\texttt{nix develop --command lake exe cache get},\\[-2pt]
+&\texttt{nix develop --command env LEAN\_NUM\_THREADS=1}\\[-2pt]
+&\qquad\texttt{lake build RelativeConicArcs.Gates.Relconic}.
+\end{split}
+\]
+Success is exit status zero with a final Lake success report for the named
+gate; the gate itself has no runtime output.  With fetched dependencies, a
+direct single-thread elaboration took \(26\) seconds on the development
+host.  A fresh replay should allow \(30\) minutes, \(8\) GiB of RAM, and
+\(10\) GiB of free disk.  The largest generated \(q=16\) leaves have a
+measured peak of approximately \(1.3\) GiB each.
 
 \begin{itemize}[leftmargin=1.5em]
 \item The companion Lean library checks the general theorem chain with
@@ -1324,7 +1341,11 @@ Running
 regenerates and checks the certificate.  Singular Gr\"obner bases and
 module lifts remain trusted executions.  A second monomial order and a
 direct \(\F_8\) incidence construction provide independent checks; abstract
-two-class completeness is the cited theorem of Mathon.
+two-class completeness is the cited theorem of Mathon.  The
+odd-characteristic computation saturates by
+\(x_9(x_9-1)\), the normalized arc-nondegeneracy factor, and the checked
+rational module lifts have no denominator prime other than \(2\); hence
+their unit relations survive in every odd characteristic.
 
 Lean also proves the operational asymptotic statement that every constant
 below \(3/2\) is eventually a lower bound; its literal \texttt{liminf}
@@ -1333,7 +1354,9 @@ wrapper assumes coboundedness.
 For the \(q=16\) exclusion, the supplement contains the source generator
 \path{papers/arcs_complete_outside_conic/search_rhoc16.cpp}, its frozen
 report \path{search_rhoc16_output.txt}, and their SHA-256
-digests.  Each certified transition carries an invertible matrix and
+digests.  The nine-line report is only a generation summary, not the
+certificate: the proof objects are the emitted Lean transition and leaf
+modules consumed by the gate.  Each certified transition carries an invertible matrix and
 checked source--target scalar equalities.  The Lean checker separately
 verifies that these transitions cover every legal augmentation of the
 standard four-frame.  At the leaves it checks either six independent

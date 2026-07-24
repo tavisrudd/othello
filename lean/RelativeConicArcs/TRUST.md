@@ -53,6 +53,28 @@ The checker and all concrete field laws use Lean's kernel-reduced `decide`.  No 
 arc, disjointness, and canonical-coverage leaves solely to bound build memory; the aggregate
 theorem composes their checked propositions.
 
+## Toolchain and exact replay
+
+The checked toolchain is Lean `4.32.0-rc1` (Lake `5.0.0-src+b4812ae`), pinned by
+`lean-toolchain`, with Mathlib revision
+`571b8a8e54219b4d393f75f4b8653fac08197fcc` pinned by `lake-manifest.json`.
+From the repository's `lean/` directory, fetch the pinned Mathlib cache and build the
+paper-facing closure with:
+
+```text
+nix develop --command lake exe cache get
+nix develop --command env LEAN_NUM_THREADS=1 \
+  lake build RelativeConicArcs.Gates.Relconic
+```
+
+Success means exit status zero and a final Lake success report for
+`RelativeConicArcs.Gates.Relconic`; the import-only gate has no runtime output.  A direct
+single-thread elaboration of the gate against fetched dependencies took 26 seconds on the
+development host.  For a fresh replay, allow 30 minutes, 8 GiB of RAM, and 10 GiB of free disk.
+The largest generated q=16 leaves have a measured peak of approximately 1.3 GiB each; the
+single-thread command above prevents concurrent leaf peaks.  These resource figures are an
+execution envelope, not part of the mathematical claim.
+
 ## Frozen witness provenance
 
 Source verifier:
@@ -62,9 +84,9 @@ SHA-256:
 `e9508958d604e68c6c3d09fd3afadfaa8a3126508a51f1dfa993e7a7aed5d36a`
 
 The q=5 four-frame is checked separately in `ExampleChecks/Q5.lean`; its displayed coordinates
-are the image of the C187 frame under an invertible matrix carrying its nonsingular conic to the
-standard conic.  The remaining coordinate lists in `Examples.lean` are copied verbatim from the
-general verifier:
+are the image of the standard four-frame under an invertible matrix carrying its nonsingular
+conic to the standard conic.  The remaining coordinate lists in `Examples.lean` are copied
+verbatim from the general verifier:
 
 - `q=8`: six points over `F₂[a]/(a³+a+1)`, binary polynomial-basis encoding;
 - `q=9`: six points over `F₃[a]/(a²+1)`, encoding `a₀+3a₁`;
@@ -134,6 +156,7 @@ Frozen report:
 SHA-256:
 `6989079b5cb64b0e57d5c42b872093fff99f861300b8fbb909daef450c15cc63`
 
+The nine-line frozen report is a generation summary, not the transition or leaf certificate.
 The generator enumerates all projective caps extending the standard four-frame and emits four
 layers of locally checked transitions.  Each row contains an explicit invertible matrix and a
 source/target/scalar equality for every selected point; lightweight `StepBook` modules reference
