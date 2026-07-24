@@ -307,16 +307,20 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   C417/C448/C473/C474/C480/C486/C487 torsor-Rosetta close with actual finite root torsors,
   explicit mixed-verification certificate interfaces, an eleven-terminal gate, exact replay
   ledger, and final independent-review `GO`
-  ([report](../2026-07-22-c505-clebsch-torsor-rosetta-lean.md)); C507 owns direct finite witnesses for the
-  interface-heavy theta/Arf, scoped Weil-Weyl, quantum-erasure, and conditionally adopted C471
-  rows.  Their exact trust and exclusion boundaries are frozen in
+  ([report](../2026-07-22-c505-clebsch-torsor-rosetta-lean.md)); C507 has closed the finite
+  theta/Arf, scoped Fourier, monomial/fixed-party quantum-erasure, and `A5` bitorsor interfaces
+  with a repaired twenty-two-terminal standard-axiom gate and final post-fix independent-review
+  `GO`.  Scalar-extended eigenspace multiplicities, the true common ambient Weil restriction,
+  arbitrary LU classification, and the unadopted C471 Paper-1 shadow remain explicitly external
+  ([report](../2026-07-22-c507-clebsch-passage-interfaces-lean.md)).  Their exact trust and
+  exclusion boundaries are frozen in
   [`2026-07-20-clebsch-lean-formalization-plan.md`](../2026-07-20-clebsch-lean-formalization-plan.md)
-  and their queued task briefs.  C503--C507 were reserved as one block in commit `5fa7dc97`.
+  and their task reports.  C503--C507 were reserved as one block in commit `5fa7dc97`.
 - **C320 is active as an early incremental foundation and remains the release-blocking
   trust-ledger capstone:** by explicit user authorization it has begun deterministic manuscript
-  statement extraction, fail-closed manifest validation, and reviewed-slice intake while C505
-  awaits its final review and C507 is underway.  After every paper-adopted C420--C428, C494, and
-  C503--C507 slice is final, it must publish one claim-by-claim ledger with exact
+  statement extraction, fail-closed manifest validation, and reviewed-slice intake.  All
+  Paper-adopted C420--C428, C494, and C503--C507 slices are now final; C320 must publish one
+  claim-by-claim ledger with exact
   theorem/gate/axiom evidence, external
   certificate and cited-input boundaries, a pinned commit, and one verify-all entry point. No
   replacement-spine claim is called Lean-formalized before this reconciliation and independent

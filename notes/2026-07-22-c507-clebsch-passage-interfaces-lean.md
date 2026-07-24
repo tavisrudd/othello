@@ -247,13 +247,24 @@ Mystery ledger:
 - [x] `ej` + `tt` closeout and mystery ledger completed.
 - [x] User-launched independent review.
 - [x] Resolution or narrowing of every review finding.
-- [ ] User-launched post-fix review after any implementation change.
-- [ ] Recorded final `GO`.
+- [x] User-launched post-fix review after implementation changes.
+- [x] Recorded final `GO`.
 
 The initial independent review returned `NO GO` with three high findings.  Finding 1 is resolved
 by the gated `fourierSupport_signed_transpose` and linked kernel--image theorem.  Finding 2 is
 resolved by adding rank-eight/rank-sixteen weighted adjoints and the missing rank-eight trace,
 while explicitly narrowing scalar-extended eigenspace multiplicities to the external boundary.
 Finding 3 is resolved by deleting the tautological direct-sum theorem and leaving the true
-common-ambient restriction claim external.  A user-launched post-fix review is required before
-final `GO`.
+common-ambient restriction claim external.
+
+The user-launched post-fix reviewer returned final `GO` on repaired commit `9a388b41`.  It
+independently confirmed the signed-transpose/source-dual seam, all three square/trace/weighted-
+adjoint packages, the narrowed eigenspace boundary, removal of the artificial common carrier,
+twenty-two-terminal gate coverage, standard-axiom audit, exact-target run
+`run-20260724-014627-5b069c89`, artifact hashes, source replay record, C471 exclusion,
+referee-facing prose, and C320 delta.  No further review is required unless the implementation
+changes.
+
+The discovery-track closeout found no genuinely incidental observation: every question surfaced
+by the implementation and both reviews concerned a required theorem or trust boundary and is
+already resolved or recorded in the task-owned mystery ledger.
