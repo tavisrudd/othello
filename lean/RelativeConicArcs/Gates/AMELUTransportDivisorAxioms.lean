@@ -1,0 +1,27 @@
+import RelativeConicArcs.Gates.AMELUTransportDivisor
+
+/-!
+# Axiom audit for the four-copy transport divisor
+
+This audit prints the dependencies of the cycle-cover factorizations, the
+quotient-coordinate divisor, the characteristic-seven merger, the three
+transport determinant factorizations, and the merged orbit counts.
+-/
+
+open RelativeConicArcs.AMELU
+
+#print axioms negativeSignedCyclePolynomial_factor
+#print axioms positiveSignedCyclePolynomial_factor
+#print axioms axialCyclePolynomial_factor
+#print axioms reducedTransportDivisor_eq_zero_iff_three_factors
+#print axioms reducedTransportDivisor_eq_zero_iff_z
+#print axioms signedTransportFactor_sub_two_mul_axial
+#print axioms signedTransportFactor_eq_two_mul_axial_of_charSeven
+#print axioms reducedTransportDivisor_eq_two_mul_axial_sq_of_charSeven
+#print axioms TransportCycleCoverInputs.negativeSigned_det_factor
+#print axioms TransportCycleCoverInputs.positiveSigned_det_factor
+#print axioms TransportCycleCoverInputs.axial_det_factor
+#print axioms TransportRankBridgeInputs.matchingRank_eq_twenty_of_transportRank_eq_eight
+#print axioms TransportRankBridgeInputs.matchingRank_eq_twentyOne_of_transportRank_eq_nine
+#print axioms TransportOrbitGeometryInputs.card_axial_union_negative
+#print axioms TransportOrbitGeometryInputs.card_axial_union_positive
