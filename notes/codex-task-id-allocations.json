@@ -962,8 +962,17 @@
       "last": 589,
       "purpose": "Gateway lane: cross-avatar field-dependence of the icosahedral six-arc/Clebsch gateway object and unifying-paper scoping",
       "sequence": 107
+    },
+    {
+      "count": 1,
+      "first": 590,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 590,
+      "purpose": "complete the CSS stabilizer interface and arc-MDS-AME-projective coherence bridges",
+      "sequence": 108
     }
   ],
-  "next_id": 590,
+  "next_id": 591,
   "schema": "codex-task-id-allocations-v1"
 }
