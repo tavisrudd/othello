@@ -40,6 +40,15 @@ are shallow.  The remaining R8 hypothesis is now the explicitly named
 pointed lower package `LP(6,1)`, whose recursive equations and monodromy
 checks are not supplied by the C513 certificate.
 
+A subsequent proof pass closes that final R8 hypothesis in
+`notes/2026-07-23-c538-lp61-pointed-lower-package.md`.  It prints the
+recursive rank/gcd, cyclic/wild/inseparable, branch, and marker-collision
+equations; proves that the complementary identity twist is C491's
+geometrically integral `S3` `(2,2)` curve; derives the three-marker
+deletion degree `30`; and treats exact-gcd-one strata directly.  The
+redundancy-eight theorem is therefore unconditional for `q>=43`, pending
+the ordinary independent cold-read gate.
+
 The editorial/reproducibility read confirmed that the source already used
 `q>=43` consistently, isolated the real `kappa` inconsistency, recommended a
 shorter abstract, notation/terminology, stable public certificate names, a

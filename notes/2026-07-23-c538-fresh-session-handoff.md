@@ -48,8 +48,11 @@ The important mathematical status is:
 4. `CC(7,1)` is also closed.  The binary central lift is empty, an identically
    colliding five-dimensional `g^4_6` is impossible, and the characteristic
    three/five nucleus lifts are shallow in the R8 range.
-5. R8 is still conditional, but **only** on the explicitly named pointed
-   lower splitting package `LP(6,1)`.
+5. R8 is unconditional for `q >= 43`.  The pointed lower package
+   `LP(6,1)` now has explicit recursive rank/gcd, cyclic/wild/inseparable,
+   branch, and marker-collision equations; the geometric-`S3` identity
+   twist and deletion degree `30`; direct gcd-one treatments; and two
+   independent adversarial passes.
 6. R9 retains its contained-component, six-slice, and rational-base gates.
 7. The ordered-Hessian effective corollary retains its root-compatible
    pullback and global bad-union polynomial gates.
@@ -58,26 +61,21 @@ The important mathematical status is:
 
 ## Highest-EV next action
 
-Close `LP(6,1)`.  This is the exact remaining R8 gate and would make the
-`q >= 43` redundancy-eight classification unconditional.
+Close the R9 six-slice and rational-base gate.  Print the six reduced
+discriminants, their Bézout identity, every multiple-root branch
+polynomial, and one nonzero rational-base polynomial with its exact degree
+accounting.  This is now the nearest fixed-level theorem blocker; the
+ordered-Hessian global bad-union polynomial remains the other open
+mathematical gate.
 
-The task is not another contained-line calculation.  It is to construct the
-full pointed R7 lower package used after three contractions:
+`LP(6,1)` is closed in
+`notes/2026-07-23-c538-lp61-pointed-lower-package.md`.  Do not reopen its
+generic monodromy calculation without a concrete inconsistency.
 
-1. print equations for every recursive cyclic, wild, inseparable, gcd, and
-   branch stratum;
-2. prove the required identity-Frobenius twists are geometrically integral,
-   or give the exact alternative treatment for each exceptional stratum;
-3. prove the genus and total three-marker deletion bound `delta=30`;
-4. show that each rational point outside the deletions gives a split
-   squarefree quintic avoiding the prescribed marker;
-5. update the R8 theorem from conditional to unconditional only after all
-   four items survive an adversarial read.
-
-The current C513 generator/replay verifies nuclei, modular supports, shallow
-witnesses, thresholds, and numerical collision budgets.  It does **not**
-provide the missing recursive equations or monodromy proofs.  Do not promote
-certificate regression into that geometric theorem.
+The C513 generator/replay verifies nuclei, modular supports, shallow
+witnesses, thresholds, and numerical collision budgets.  The separate
+`LP(6,1)` report supplies the geometric theorem; certificate regression was
+not promoted into monodromy evidence.
 
 ## Principal files
 

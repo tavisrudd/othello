@@ -29,9 +29,11 @@ and immutable-release gates.  Source-report extraction expanded the R5/R6 and Lu
 but also exposed genuine open gates.  A follow-up rank--nullity argument has now closed
 the characteristic-free rank-two contained-line identity and the R7 all-field continuation.
 The central-lift, collision, and modular arguments now also close `CC(7,1)`.
-The full R8 pointed lower package `LP(6,1)`, the printed R9
-six-slice/base-selection algebra, and one global ordered-Hessian bad-union polynomial at the claimed
-degree remain open.  The manuscript states the affected R8--R9 continuations and effective Hessian
+The explicit two-old-marker recursion, geometric-`S3` identity twist, and
+direct gcd-one treatment close the full R8 pointed lower package `LP(6,1)`;
+the redundancy-eight theorem is unconditional for `q>=43`.  The printed R9
+six-slice/base-selection algebra and one global ordered-Hessian bad-union polynomial at the claimed
+degree remain open.  The manuscript states the affected R9 continuation and effective Hessian
 corollary conditionally rather than treating these as proved certificate inputs.  The development
 monorepo is not published; any eventual release is a reviewed paper-only fresh-history export.
 C545 remains the DOI route but is blocked until those gates close.  C539 establishes the shared

@@ -120,6 +120,15 @@ Consequently:
 
 This is the lower splitting package required by C512 at `(m,s)=(6,1)`.
 
+**Referee-facing closure (C538).**  The original paragraph above recorded the
+correct generic curve and deletion count but did not itself print the
+recursive cyclic, wild, inseparable, gcd-one, branch, and marker-collision
+pullbacks.  `notes/2026-07-23-c538-lp61-pointed-lower-package.md` now supplies
+those equations and their containment degrees, proves the geometric-`S3`
+identity twist, treats the exact-gcd-one strata directly, and verifies the
+two-old-marker recursion.  Thus `LP(6,1)` is proved rather than imported
+from the C513 certificate.
+
 ## 3. Transverse and collision budgets
 
 The first-polar line of a septic meets the lower catalecticant rank-at-most-two carrier in degree
