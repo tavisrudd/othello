@@ -21,8 +21,8 @@ claimed by this local bundle.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `206e3090e272405c6d50c5607ed903a4f423d8718435a97e2ae4b2190773b6f5` |
-| Local built PDF bytes | `305684` |
+| Local built PDF SHA-256 | `fb3dd8d477e96af1854d51d0a6153f8046d9f11519ad0d92abcf6b21c675cf3e` |
+| Local built PDF bytes | `306748` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -37,10 +37,10 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `deaeadd1d556e30bcda84633f6461abb5b1e0dffa7f9e17d88daf63e1a3cdf63` | 16389 |
-| `EVIDENCE-ROWS.md` | `19a604a32ef6b85a671b76f54473fa4c138cdcd3d2b2a6728c9b0332e8904883` | 10788 |
-| `package_evidence_bundle.py` | `63800ade4708f681c20090587035013fb5bd53efaad133ba39a317182f4bab55` | 14686 |
-| `verify.py` | `dd9212ce619030f98e284f6e849e1a6ffb2cdf71289c5d020abceffeb577e7f0` | 5219 |
+| `EVIDENCE-MANIFEST.json` | `132d006e87022c01cd230d728fcd87294707372ad05673e47d5038e52f0c0014` | 16666 |
+| `EVIDENCE-ROWS.md` | `600a52518d7bb6d2eda1669acdcfb84fc06f92710c79f6e251703f1942eda69f` | 10963 |
+| `package_evidence_bundle.py` | `e5e61b53c6a17c5a670131132e86cb07e6b5dcffe02aaedcee11a03f543dbc70` | 14755 |
+| `verify.py` | `7a945645742e8f5e3f3db3056bafb3e7638450bbfc212ae058a2efac22cf88c5` | 7402 |
 
 Verify the complete local bundle from the paper directory:
 
@@ -50,6 +50,10 @@ python3 supplement/verify.py
 
 Add `--replay` to run every paper-local replay, including the compiled
 R9-49 comparison.
+
+Add `--release` to require the immutable repository, revision, archive, DOI,
+reviewed-PDF, and two-reader signoff fields.  It is expected to fail while any
+field remains an external publication step.
 
 Predecessor manifests are historical evidence and are not rewritten.  This
 release-level manifest supersedes their packaging defects by hashing the exact

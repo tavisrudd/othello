@@ -8,8 +8,8 @@ proofs, claim-level trust map, statement-adequacy boundary, public
 classification records, certificate schema, literature audit, and rendered
 referee-polish gates are closed.  The aggregate Lean import, axiom-audit, and
 manuscript-reconciliation gates are also closed.  DOI publication remains
-gated on an independent final reader, a clean public export/replay, immutable
-identifiers, and author/account confirmation.  This merged paper supersedes the former plan for a
+gated on two independent specialist readers, a clean public export/replay,
+immutable identifiers, and author/account confirmation.  This merged paper supersedes the former plan for a
 redundancy-five-only manuscript.
 
 ## Build
@@ -29,6 +29,8 @@ under `sections/`; `main.tex` is the build driver described in
 `sections/README.md`.  Public certificates and release material are under
 `supplement/`.  Run `python3 supplement/verify.py` for the local manifest and
 classification-record check, or add `--replay` for every paper-local replay.
+Add `--release` only for the immutable public candidate; it rejects unresolved
+repository, revision, archive, DOI, PDF, and independent-reader fields.
 
 ## Results
 
@@ -91,9 +93,9 @@ A release described as proof-complete requires:
 9. target-policy check;
 10. cold-prose and adversarial review.
 
-The present draft passes the local proof and supplement-schema gates but not
-the aggregate formalization, clean public replay, immutable-release, or
-author/account gates.
+The present draft passes the local proof, supplement-schema, and aggregate
+formalization gates but not the independent-reader, clean public replay,
+immutable-release, or author/account gates.
 
 ## Rapid priority record
 

@@ -361,6 +361,14 @@
       "sha256": "f5f2c67026435227fa17db122619e66b1291de034e419b93128c26b6939a7a77"
     },
     {
+      "bytes": 1990,
+      "path": "FINAL-READER-SIGNOFF.md",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Independent final-reader signoff",
+      "sha256": "fee499c8ddfd37227a24c901998b42cd4aa7dee1ca4dff45150d5781550e387a"
+    },
+    {
       "bytes": 12797,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
@@ -393,20 +401,20 @@
       "sha256": "cb4f36cbf065d4013ef9f05d51229271dda7c8e942049cabb025aef72bbe37c1"
     },
     {
-      "bytes": 14686,
+      "bytes": 14755,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "63800ade4708f681c20090587035013fb5bd53efaad133ba39a317182f4bab55"
+      "sha256": "e5e61b53c6a17c5a670131132e86cb07e6b5dcffe02aaedcee11a03f543dbc70"
     },
     {
-      "bytes": 5219,
+      "bytes": 7402,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "dd9212ce619030f98e284f6e849e1a6ffb2cdf71289c5d020abceffeb577e7f0"
+      "sha256": "7a945645742e8f5e3f3db3056bafb3e7638450bbfc212ae058a2efac22cf88c5"
     },
     {
       "bytes": 17225,

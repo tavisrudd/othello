@@ -135,6 +135,7 @@ PUBLIC_SUPPLEMENT_FILES = (
     ("Reproduction guide", "REPRODUCING.md"),
     ("Residual-slice data", "R9-SLICE-DATA.md"),
     ("Lean statement-adequacy source", "LEAN-STATEMENTS.md"),
+    ("Independent final-reader signoff", "FINAL-READER-SIGNOFF.md"),
 )
 
 AUXILIARY_COPIES = (

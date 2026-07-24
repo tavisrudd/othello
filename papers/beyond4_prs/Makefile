@@ -1,5 +1,8 @@
 LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
+SOURCE_DATE_EPOCH ?= 1784886946
+export SOURCE_DATE_EPOCH
+export FORCE_SOURCE_DATE = 1
 TEX_SOURCES := main.tex $(wildcard sections/*.tex) $(wildcard appendices/*.tex)
 PDF_BASENAME := prs-beyond-redundancy-four
 PDF := $(PDF_BASENAME).pdf

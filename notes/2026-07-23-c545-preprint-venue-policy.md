@@ -2,6 +2,31 @@
 
 **Lane:** `reed-solomon` · **Date checked:** 2026-07-23
 
+## 2026-07-24 release recheck
+
+The route remains policy-compatible but operationally blocked.
+
+- The current IEEE Author Center page still lists arXiv and TechRxiv as
+  approved preprint locations and states that IEEE does not treat posting
+  there as prior publication.
+- The current IEEE Information Theory Society submission page still
+  encourages authors to post submitted papers on arXiv.
+- IEEE's current TechRxiv product page still describes an open, moderated,
+  pre-review repository.  The direct TechRxiv service again returned HTTP
+  403 from this environment, so account access, submission availability,
+  license choice, withdrawal terms, and DOI issuance remain unconfirmed.
+- An older official IEEE TechRxiv page says that TechRxiv papers receive a
+  DOI.  Because the live submission interface is inaccessible and the
+  current product page does not itself state the DOI behavior, that older
+  statement does not close the upload-time operational gate.
+- Crossref's current guidance continues to treat a preprint and a later
+  version of record as separate citable objects with linked metadata.
+
+Therefore the approved planning route remains one identical author-approved
+PDF and metadata record on arXiv and TechRxiv, but no DOI-bearing upload is
+authorized until the live account confirms the TechRxiv behavior.  ArXiv
+alone remains policy-compatible but does not satisfy C545's DOI objective.
+
 ## Decision boundary
 
 The provisional journal family is **IEEE Transactions on Information

@@ -77,6 +77,49 @@ def check_release_manifest() -> None:
     print("verified release-manifest local artifact rows")
 
 
+def check_public_release_gate() -> None:
+    manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
+    signoff = (SUPPLEMENT / "FINAL-READER-SIGNOFF.md").read_text(encoding="utf-8")
+    main = (PAPER / "main.tex").read_text(encoding="utf-8")
+
+    def field(label: str) -> str:
+        match = re.search(
+            rf"^\| {re.escape(label)} \| (.+) \|$",
+            manifest,
+            flags=re.MULTILINE,
+        )
+        if match is None:
+            raise SystemExit(f"missing release-manifest field: {label}")
+        return match.group(1).strip().strip("`")
+
+    required_patterns = {
+        "Paper-export repository URL": r"https://.+",
+        "Release tag": r"\S+",
+        "Release commit": r"[0-9a-f]{40}",
+        "Public Lean revision": r"[0-9a-f]{40}",
+        "Public Q25 certificate revision": r"[0-9a-f]{40}",
+        "Archive identifier": r"\S+",
+        "DOI": r"10\.\d{4,9}/\S+",
+        "Source archive SHA-256": r"[0-9a-f]{64}",
+        "Source archive bytes": r"[1-9]\d*",
+        "PDF SHA-256": r"[0-9a-f]{64}",
+        "PDF bytes": r"[1-9]\d*",
+    }
+    for label, pattern in required_patterns.items():
+        if re.fullmatch(pattern, field(label)) is None:
+            raise SystemExit(f"public release gate is unresolved: {label}")
+
+    if field("PDF SHA-256") != field("Local built PDF SHA-256"):
+        raise SystemExit("public PDF hash differs from the reviewed local candidate")
+    if field("PDF bytes") != field("Local built PDF bytes"):
+        raise SystemExit("public PDF byte count differs from the reviewed local candidate")
+    if "pending" in signoff.lower() or signoff.lower().count("verdict: green.") != 2:
+        raise SystemExit("independent final-reader signoff is incomplete")
+    if "Unrefereed preprint" not in main:
+        raise SystemExit("the manuscript is not visibly labelled as an unrefereed preprint")
+    print("verified public release metadata and final-reader gate")
+
+
 def check_bundle() -> None:
     run([sys.executable, "supplement/package_evidence_bundle.py", "--check"])
     run([sys.executable, "supplement/build_classification_records.py", "--check"])
@@ -148,10 +191,17 @@ def main() -> None:
         action="store_true",
         help="also run every paper-local replay, including the R9-49 Rust replay",
     )
+    parser.add_argument(
+        "--release",
+        action="store_true",
+        help="require immutable public metadata and two independent reader signoffs",
+    )
     args = parser.parse_args()
     check_bundle()
     if args.replay:
         replay()
+    if args.release:
+        check_public_release_gate()
 
 
 if __name__ == "__main__":
