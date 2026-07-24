@@ -42,8 +42,11 @@ certificate schema, role-based literature audit, sectioned source, and
 rendered exposition gates.  Its final local referee-polish pass removes all
 manual equation tags, prints the full R9 six-section cover in Appendix A,
 adds the R8 exhaustiveness table and two hard-step diagrams, expands the five
-named proof pressure points, and supplies a single supplement verifier.  The
-clean manuscript is now 41 pages.  The development monorepo is not published; any
+named proof pressure points, and supplies a single supplement verifier.  A
+follow-up typography pass splits the central dependency map into two readable
+tables, adds a compact referee roadmap, bounds the fixed-redundancy recognition
+complexity precisely, completes recent-preprint metadata, and removes the sparse
+last bibliography page.  The clean manuscript is now 40 pages.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545 remains
 active but release is blocked on C542--C544 aggregate formalization, an
 independent final reader, a clean public replay/export, immutable identifiers,

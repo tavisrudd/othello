@@ -80,60 +80,95 @@ branch is not a consequence of the transverse sieve.}
 
 \begin{table}[H]
 \centering
-\scriptsize
-\caption{Dependency map for the headline results.  ``Printed'' means
-proved in the article; certificates close only the displayed finite
-domains, and the radius column is a logically separate promotion from
-split-free syndromes to code deep holes.}
+\small
+\caption{Mathematical dependency map.}
 \label{tab:dependency-map}
-\begin{tabular}{p{0.065\textwidth}p{0.22\textwidth}p{0.22\textwidth}
-                p{0.20\textwidth}p{0.105\textwidth}}
+\begin{tabular}{p{0.09\textwidth}p{0.48\textwidth}p{0.31\textwidth}}
 \toprule
-Result & Printed geometric argument & Imported input &
-Electronic evidence & Conclusion and radius gate\\
+Result & Printed geometric argument & Imported input\\
 \midrule
-R5 &
-Hankel dictionary; gcd strata; cyclic descent; integral $(2,2)$
+R5 & Hankel dictionary; gcd strata; cyclic descent; integral $(2,2)$
 fiber square and point bound &
 lower tangent/secant families; high-rate radius theorem; singular-curve
-bound &
-R5 census, canonical representatives, stabilizers, Frobenius links,
-and independent replay for the finite bridge &
-complete deep-hole classification for every $q\geq7$\\
-R6 &
-one-marker polar line; ordinary and binary contained components;
+bound\\
+R6 & one-marker polar line; ordinary and binary contained components;
 transverse escape &
-R5 lower package and radius gate &
-R6 census and normal-form reconstruction &
-complete deep-hole classification for every $q\geq7$\\
-R7 &
-two-marker contraction; contained rank-two theorem; transverse escape &
-R5/R6 lower packages; separate covering-radius result &
-R7 split-free census through the finite bridge &
-complete split-free classification; deep where $\rho=6$, in particular
-$q\geq11$\\
-R8 &
-three-marker cover; explicit contained and collision calculations;
+R5 lower package and radius gate\\
+R7 & two-marker contraction; contained rank-two theorem; transverse
+escape &
+R5/R6 lower packages; separate covering-radius result\\
+R8 & three-marker cover; explicit contained and collision calculations;
 point-count budget &
-proved lower packages &
-R8 algebra and nucleus regression &
-persistent-family classification for $q\geq43$\\
-R9 &
-four-marker cover; six-slice identity; characteristic-seven carrier;
-point-count budget &
-proved lower packages; quartic normal forms where invoked &
-R9 and R9-49 replays; Lean checks residual algebra, synthesis
-implication, and integer budgets &
-persistent-family classification for $q\geq53$\\
-Char.~2 &
-ordered-Hessian strata; root-compatible pullback; linearized and
-Artin--Schreier covers &
-normal-rational-curve nuclei and standard finite-field theory &
-Hessian, Lucas, and $e_7$ regressions &
-component and $e_7$ results only; no R10 classification\\
+proved lower packages\\
+R9 & four-marker cover; six-slice identity; characteristic-seven
+carrier; point-count budget &
+proved lower packages; quartic normal forms where invoked\\
+Modular & ordered-Hessian strata; root-compatible pullback; linearized
+and Artin--Schreier covers &
+normal-rational-curve nuclei and standard finite-field theory\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Conclusions, electronic evidence, and scope boundaries.  The
+radius gate is logically separate from the split-free classification,
+and each certificate closes only its displayed finite or algebraic
+domain.}
+\label{tab:dependency-evidence}
+\begin{tabular}{p{0.09\textwidth}p{0.29\textwidth}p{0.50\textwidth}}
+\toprule
+Result & Conclusion and radius gate & Evidence and boundary\\
+\midrule
+R5 & complete deep-hole classification for every $q\geq7$ &
+The census, canonical representatives, stabilizers, Frobenius links,
+and independent replay close the finite bridge.  They do not supply
+the all-field cubic-cover argument or radius theorem.\\
+R6 & complete deep-hole classification for every $q\geq7$ &
+The finite census and normal-form reconstruction do not replace the
+contained/transverse proof or all-field continuation.\\
+R7 & complete split-free classification; deep where $\rho=6$, in
+particular $q\geq11$ &
+The split-free census closes the finite bridge, not the structural
+continuation or covering-radius promotion.\\
+R8 & persistent-family classification for $q\geq43$ &
+The algebra and nucleus regression are not an ambient census or a
+replacement for the printed component theorem.\\
+R9 & persistent-family classification for $q\geq53$ &
+Residual and R9-49 replays check bounded algebra; Lean checks the
+synthesis implication and integer budgets.  Integrality, rational
+points, PRS identification, exhaustion, and the group action remain
+printed mathematics.\\
+Modular & component and $e_7$ results only; no R10 classification &
+The Hessian, Lucas, and $e_7$ regressions do not replace the geometric
+component proofs.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Referee roadmap.}
+The shortest route to the headline R5 theorem is
+Lemma~\ref{lem:hankel} and Corollary~\ref{cor:splitfree}, followed by
+the radius gate and gcd strata in Propositions
+\ref{prop:r5-radius}--\ref{prop:r5-gcd1}, the cubic incidence in
+Proposition~\ref{prop:r5-incidence}, the cyclic and $S_3$ analyses in
+Lemmas~\ref{lem:cyclic}--\ref{lem:s3}, and the finite bridge in
+Proposition~\ref{prop:r5-bridge}.  Tables~\ref{tab:r5sporadic} and
+\ref{tab:r5-sanity} make the bounded-field output locally identifiable
+and numerically auditable.
+
+The later R6 and R7 proofs use the R5 splitting cover as their bottom
+package; R8 and R9 then use those proved lower packages recursively.
+Section~\ref{sec:polar} may be read as the abstract mechanism linking
+these levels.  The ordered-Hessian and Lucas analyses in
+Sections~\ref{sec:hessian} and~\ref{sec:lucas} are logically separate
+after the dictionary and can be read independently of the R8/R9 point
+counts.  Running the supplement is required only to reproduce the
+finite bridges, canonical orbit records, and regression or formal
+checks identified in Table~\ref{tab:dependency-evidence}; it is not a
+substitute for any printed geometric argument.
 
 The proofs now follow these arrows in order: dictionary, redundancy-five
 base cover, polar construction, contained components, transverse point

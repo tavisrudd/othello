@@ -7,16 +7,22 @@ Date: 2026-07-24
 The manuscript-local response to the new cold review is complete.  The
 paper remains one integrated work for the release candidate; no split,
 external upload, DOI request, or repository publication was attempted.
-The revised PDF is a clean 41-page build.
+The revised PDF is a clean 40-page build.
 
 ## Changes
 
 - Rewrote the abstract opening so the all-field redundancy-five
   classification is unmistakably the headline result.
-- Replaced the two dense overview tables by a single printed dependency
-  map.  It separates printed geometry, imported inputs, electronic
-  evidence, and covering-radius promotion for R5--R9 and the
-  characteristic-two results.
+- Replaced the dense five-column overview table by two coordinated,
+  readable tables.  The first isolates mathematical dependencies and
+  imported inputs; the second isolates conclusions, electronic
+  evidence, radius gates, and scope boundaries.  Neither table is
+  compressed to script-size type.
+- Added a compact referee roadmap immediately after the tables.  It
+  gives the shortest R5 proof chain, identifies the later recursive
+  dependencies, marks the independently readable characteristic-two
+  sections, and says exactly which finite claims require the
+  supplement.
 - Corrected the stale overview descriptions of R8 and R9: both are
   unconditional classifications in their stated high-field ranges,
   not conditional targets.
@@ -24,6 +30,11 @@ The revised PDF is a clean 41-page build.
   the one-column MDS-extension payoff, exact projective counts, the
   fixed-redundancy recognition procedure, its linear-algebra cost, and
   the boundary between recognition and general decoding.
+- Sharpened the complexity statement: the displayed cubic bound counts
+  online field operations at the fixed redundancies in the paper,
+  treats bounded-degree factorization and frozen orbit tables as
+  fixed-degree work, excludes preprocessing and field construction,
+  and is not a uniform arbitrary-redundancy decoder bound.
 - Printed all 17 sporadic redundancy-five syndrome representatives,
   orbit sizes, stabilizers, and nontrivial Frobenius fusions.
 - Added an independent-total table comparing direct syndrome
@@ -33,6 +44,9 @@ The revised PDF is a clean 41-page build.
   with explicit-family, generalized-projective, even-characteristic,
   and recent MDS-extension work.  The literature audit records the read
   depth and cache evidence for the additions.
+- Completed the arXiv metadata for the recent preprints used for
+  novelty and imported inputs, including stable URLs and exact version
+  dates; journal metadata remains in place where the work is published.
 - Reduced the main-text verification apparatus: removed the redundant
   trust-route diagram, moved the statement-adequacy appendix out of the
   printed paper, and condensed the Lean discussion to its exact
@@ -53,10 +67,12 @@ classification records: PASS
 verified classification-record hashes
 ```
 
-The rendered review checked the dependency map and the exceptional
-representative inventory.  Neither table clips or escapes the page.
-The canonical PDF has 41 pages, 285515 bytes, and SHA-256
-`7096ae2899c4f4d880647d8c093a5848a6113d466c93cfaa600388771bd1671a`.
+The rendered review checked both dependency tables, the referee
+roadmap, the exceptional representative inventory, and the final two
+pages.  Nothing clips or escapes the page.  Small bibliography type
+compresses the formerly sparse final reference page without shrinking
+Table 2.  The canonical PDF has 40 pages, 287415 bytes, and SHA-256
+`0556a9a22767f3216125588b5398e2eb2d1cc414dbd48532e9c8771b6c86db92`.
 
 ## Submission architecture
 
@@ -123,14 +139,16 @@ artifact that a referee can actually cite.
   export/replay, immutable identifiers, and author confirmation remain
   required.
 - **Bibliography breadth:** improved from 15 to 19 claim-specific
-  sources, but a venue-specific final pass remains appropriate.  No
-  negative novelty claim is licensed beyond the recorded search
-  boundary.
+  sources, and the recent preprints now have stable identifiers,
+  version dates, and URLs.  A venue-specific final pass remains
+  appropriate.  No negative novelty claim is licensed beyond the
+  recorded search boundary.
 
 ## Vibe check
 
 Good and materially less fragile: the paper now presents its evidence
-at the same granularity a skeptical referee will inspect.  The dominant
+at the same granularity a skeptical referee will inspect, and the
+highest-value overview material is visually easy to scan.  The dominant
 risk has shifted to independent audit and release discipline, with the
 one-paper/two-paper choice a strategic upside rather than a manuscript
 defect.

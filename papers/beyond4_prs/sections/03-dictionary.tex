@@ -79,12 +79,16 @@ representatives printed in Table~\ref{tab:r5sporadic} and recorded in
 the supplement.
 
 For each fixed redundancy treated here, constructing and row-reducing
-the Hankel matrix costs $O(r^3)$ field operations, after which the
-persistent and modular tests are constant-size linear algebra and
-quadratic factorization.  The exceptional finite tables add only an
-orbit-normalization lookup.  This is a recognition algorithm for the
-proved classifications, not a general decoder and not a uniform
-arbitrary-redundancy theorem.  A direct witness search would instead
+the Hankel matrix and performing the listed family-membership tests
+costs $O(r^3)$ field operations.  This count treats factorization of
+the displayed bounded-degree forms and access to the exceptional orbit
+tables as fixed-degree work.  It excludes field construction, bit
+complexity, and the one-time generation and certification of those
+tables; an implementation may also charge separately for its chosen
+orbit-normalization routine.  Thus the bound describes the online
+linear-algebra stage at the fixed redundancies proved here.  It is not
+an end-to-end uniform arbitrary-$r$ complexity claim, a general
+decoder, or a preprocessing bound.  A direct witness search would instead
 inspect the projective members of the $(r-3)$-dimensional system
 $W_f$ and factor degree-$(r-2)$ forms; coherent polar induction is the
 mechanism that replaces that ambient search in the levels proved
