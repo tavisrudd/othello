@@ -836,8 +836,17 @@
       "last": 549,
       "purpose": "prove private-vertex boundary truncation and measure residual signature quotient",
       "sequence": 93
+    },
+    {
+      "count": 1,
+      "first": 550,
+      "kind": "reservation",
+      "lane": "crowns",
+      "last": 550,
+      "purpose": "derive C548 four-copy divisor and multiplicities from the permutation-cover/sheaf holonomy mechanism",
+      "sequence": 94
     }
   ],
-  "next_id": 550,
+  "next_id": 551,
   "schema": "codex-task-id-allocations-v1"
 }
