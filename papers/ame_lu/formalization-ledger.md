@@ -24,6 +24,12 @@ The declaration-level comparison with the manuscript is recorded in
 `RelativeConicArcs.Gates.AMELUAggregateAxioms`, and the checked toolchain is
 Lean `v4.32.0-rc1`.
 
+The aggregate audit reports only `propext`, `Classical.choice`, and
+`Quot.sound` outside the marginal graph census.  The exhaustive
+`native_decide` proofs of the 455 marginal triples, 60 stars, and 15 perfect
+matchings additionally expose their three declaration-local native axioms;
+no other audited terminal depends on native evaluation.
+
 The stabilizer dictionary exits through
 `RelativeConicArcs.Gates.AMELUStabilizerDictionary` and
 `RelativeConicArcs.Gates.AMELUStabilizerDictionaryAxioms`.  Its paper-facing

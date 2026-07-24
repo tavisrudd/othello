@@ -29,8 +29,13 @@ Lean `v4.32.0-rc1`.
 
 The aggregate imports every declaration named above in one environment.
 Except for the three explicitly identified finite graph cardinalities, the
-audited terminals use ordinary kernel elaboration.  The native
-cardinality checks are exhaustive over the finite types defined in
+audited terminals report only `propext`, `Classical.choice`, and
+`Quot.sound`.  The three exhaustive native checks additionally report the
+declaration-local axioms
+`card_marginalTriples._native.native_decide.ax_1_1`,
+`card_marginalStars._native.native_decide.ax_1_1`, and
+`card_perfectMatchings._native.native_decide.ax_1_1`.  These cardinality
+checks range over the finite types defined in
 `RelativeConicArcs.AMELU.MarginalMoment`; they do not import generated data
 or an external certificate.
 
