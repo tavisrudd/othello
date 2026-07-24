@@ -1,6 +1,6 @@
 # C541 — Lean closure for coherent polar induction and redundancies six/seven
 
-**Lane:** `reed-solomon` · **Status:** queued after C539
+**Lane:** `reed-solomon` · **Status:** complete
 
 ## Objective
 
@@ -20,3 +20,5 @@ redundancy-seven applications at their exact all-field theorem boundaries.
 
 Acceptance requires stable public modules, import gates, scoped builds, exact axiom audits, and
 paper-ledger reconciliation.  Before any Lean operation, read `lean/AGENTS.md` completely.
+
+Result: `notes/2026-07-23-c541-prs-polar-induction-redundancy-six-seven-lean.md`.

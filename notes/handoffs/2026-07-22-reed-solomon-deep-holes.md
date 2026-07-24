@@ -4,7 +4,7 @@
 
 **Date:** 2026-07-23
 
-**Status:** C475--C499, C509--C510, C512--C519, C525, C529, C530, C538, C539, and C540 complete. C519 found the
+**Status:** C475--C499, C509--C510, C512--C519, C525, C529, C530, C538--C541 complete. C519 found the
 characteristic-two doubled-quadric obstruction; C525 replaces it by the ordered-Hessian `(2,2)`
 model and proves that its complete constrained degeneracy pullback is exactly the persistent
 catalecticant/Lucas-nucleus carrier union.  Outside it, the effective base threshold is
@@ -45,13 +45,16 @@ adds the R8 exhaustiveness table and two hard-step diagrams, expands the five
 named proof pressure points, and supplies a single supplement verifier.  The
 clean manuscript is now 41 pages.  The development monorepo is not published; any
 eventual release is a reviewed paper-only fresh-history export.  C545 remains
-active but release is blocked on C541--C544 aggregate formalization, an
+active but release is blocked on C542--C544 aggregate formalization, an
 independent final reader, a clean public replay/export, immutable identifiers,
 and author/account confirmation.  C539 establishes the shared
 paper-facing Lean foundation and exact coverage ledger. C540 checks the redundancy-five Hankel
 algebra and projective scaling, family/count arithmetic from stated hypotheses, the transcribed
 candidate sporadic table and its internal arithmetic, and a finite-field-bound conditional
-synthesis theorem with external certificate semantics still visible; C541--C544 close the
+synthesis theorem with external certificate semantics still visible. C541 formalizes projective
+and iterated polar contraction, forbidden-marker lifting, the modular-nucleus contraction kernel,
+the effective contained/transverse engine, exact R6/R7 thresholds and orbit arithmetic, and the
+checked finite-summary bridges; C542--C544 close the
 remaining degree-specific and aggregate package.
 C531 still owns the remaining intrinsic degree-nine carrier
 strata and C532 the resulting redundancy-ten theorem, but neither is a manuscript or preprint gate.
@@ -679,7 +682,7 @@ C530's prescribed nonconstant Artin--Schreier/extra-monodromy stop before other 
 | C545 | proof-complete preprint and DOI after second-draft gates | active; local manuscript/literature/public-record gates closed; release blocked | C540--C544 aggregate, independent reader, clean export/replay, immutable release bundle, author confirmation | public timestamp/DOI for Version 1 of the same work under verified venue policy | priority record without duplicate publication |
 | C539 | shared beyond-four PRS Lean foundation | complete | common extensional Hankel/contraction/synthesis interface, constructive negation boundary, separate radius- and witness-based classification routes, C517 adapter, exact coverage ledger, green import and axiom gates | formalization spine |
 | C540 | redundancy-five Lean closure | complete | C491 theorem/certificates | Hankel/projective-scaling algebra; family/count arithmetic from stated hypotheses; transcribed candidate sporadic table with internally checked arithmetic; finite-field-bound conditional synthesis gate with external semantic validation; standard-axiom audit | formal headline boundary |
-| C541 | polar induction and redundancy-six/seven Lean closure | queued after C539 | C498/C509/C512 theorem packages | coherent-polar engine, fixed-level terminals, exceptional certificate gates | formal middle-level boundary |
+| C541 | polar induction and redundancy-six/seven Lean closure | complete | C498/C509/C512 theorem packages | projective/iterated polar engine; forbidden-marker and modular kernels; exact `29;7+6` and `37;4+8` terminals; R6/R7 finite-summary gates | formal middle-level boundary |
 | C542 | redundancy-eight Lean closure | queued after C541 | C513 theorem package | three-marker `q>=43` synthesis and exact orbit terminal | formal redundancy-eight boundary |
 | C543 | characteristic-two Hessian/Lucas Lean closure | queued after C539 | C519/C525/C529/C530 theorem packages | ordered-Hessian carrier and proved Lucas arithmetic terminals | formal modular boundary |
 | C544 | beyond-four PRS aggregate Lean gate | queued after C540--C543 | all new terminals plus C517 | aggregate build, axiom audit, referee-facing closure, manuscript reconciliation | paper trust boundary |
@@ -743,9 +746,9 @@ history.
 
 ## Next command
 
-`go C541`
+`go C542`
 
 (C545 has closed the local manuscript, public-record, literature, and rendered
-gates but cannot close the release while C541--C544 remain open. Continue with
-the polar-induction and redundancy-six/seven formal package at C541; return to C545 only after the aggregate
+gates but cannot close the release while C542--C544 remain open. Continue with
+the redundancy-eight formal package at C542; return to C545 only after the aggregate
 C544 reconciliation.  No external upload is authorized.)
