@@ -188,6 +188,16 @@ MDS code. Thus exteriority alone gives only
 $\cC(\F_{11})\subseteq\cU(A)$; the arc hypothesis selects the Clebsch
 branch, and Proposition~\ref{prop:deep-holes-conic} proves equality.
 
+The displayed hexagon is the arc $K_2$ of Storme and Van~Maldeghem
+\cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
+square in the base field~\cite[Theorem~1]{Dye1991}. Dye proves uniqueness,
+stabilizer $A_5$, and the unique associated polarity; in the displayed
+coordinates its conic is $\cC$. His calculation also shows that the six
+vertices lie on no conic in characteristic $11$
+\cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem
+record that the arc is incomplete at $q=11$~\cite[Prop.~13]{SVM1995}, so the
+associated redundancy-three code has covering radius three.
+
 \begin{theorem}[Universal chord defect]
 \label{lem:chord-defect}
 Let $A$ be a $k$-arc in $\PG(2,q)$ with $k\ge4$. Let $n_i$ count the
@@ -240,9 +250,10 @@ For $k=6$, writing $c(A)=n_3$ gives
  0\le c(A)\le15,\qquad
  c(A)=(q-6)(q-9)
 \]
-when $|\cU(A)|=q+1$. In particular, at $q=11$ the fifteen chords have
-$45$ disjoint pairs and ten triple concurrences; they cover $115$ of the
-$127$ off-arc points and leave exactly twelve uncovered.
+when $|\cU(A)|=q+1$. For the displayed Clebsch hexagon, Dye's ten
+Brianchon points give $c(A)=10$; its fifteen chords have $45$ disjoint
+pairs, cover $115$ of the $127$ off-arc points, and leave exactly twelve
+uncovered.
 \end{corollary}
 
 \begin{proof}
@@ -260,20 +271,11 @@ lines split equally into secants and passants (the nucleus has none). The
 $k-1$ chords through a vertex therefore give $q\ge2k-3$.
 
 For $k=6$, one has $r=3$ and $t(A)=n_3=c(A)$, giving the displayed
-specialization. At $q=11$, the two moments read
-$\sum i n_i=150$ and $\sum\binom{i}{2}n_i=45$; the forced value $c(A)=10$
-then gives $n_1+n_2+n_3=115$.
+specialization. For the displayed arc, Dye's Brianchon theorem gives
+$c(A)=10$~\cite[Theorem~1, pp.~275--276]{Dye1991}. At $q=11$, the two
+moments read $\sum i n_i=150$ and $\sum\binom{i}{2}n_i=45$, whence
+$n_1+n_2+n_3=115$.
 \end{proof}
-
-This is the arc $K_2$ of Storme and Van~Maldeghem
-\cite[Props.~11--12]{SVM1995} and Dye's synthetic hexagon when $5$ is a
-square in the base field~\cite[Theorem~1]{Dye1991}. Dye proves uniqueness,
-stabilizer $A_5$, and the unique associated polarity; in the displayed
-coordinates its conic is $\cC$. His calculation also shows that the six
-vertices lie on no conic in characteristic $11$
-\cite[Theorem~2, pp.~277--278; p.~281]{Dye1991}. Storme and Van~Maldeghem
-record that the arc is incomplete at $q=11$~\cite[Prop.~13]{SVM1995}, so the
-associated redundancy-three code has covering radius three.
 
 \section{The code and its projective syndrome locus}
 \label{sec:code}
@@ -368,6 +370,9 @@ H&A_4&D_5&S_3&C_5&V_4&C_3\\ \hline
 \text{points with stabilizer conjugate to }H&0&6&10&12&15&0
 \end{array}
 \]
+For the third row, a $D_5$ fixes one $C_5$ eigenline and exchanges the other
+two; the unique $C_3$ line is already fixed by its $S_3$ normalizer; and
+$A_4$ permutes the three $V_4$ eigenlines without fixing one.
 By orbit--stabilizer, the third row already gives the orbits of lengths
 $6$, $10$, $12$, and $15$; only points with exact stabilizer $C_2$ remain.
 It remains to account for exact $C_2$ stabilizers. Each involution lies in
@@ -391,12 +396,12 @@ The covering radius of $C$ is three, and
 \end{proposition}
 
 \begin{proof}
-Corollary~\ref{cor:conic-filling-window} gives $|\cU(A)|=12$, while Dye's
-edge criterion gives $\cC(\F_{11})\subseteq\cU(A)$
-\cite[discussion preceding Theorem~6, p.~281]{Dye1991}; see also
-\cite[pp.~143, 146]{BSW1992}. Since $|\cC(\F_{11})|=12$, equality follows.
-The arc--coset dictionary identifies this set with the projective deep-hole
-syndrome locus, and its nonemptiness gives covering radius three.
+Corollary~\ref{cor:conic-filling-window} gives $|\cU(A)|=12$. This set is
+$G$-invariant and disjoint from the six-point orbit $A$, so
+Proposition~\ref{prop:a5-point-orbits} identifies it with the unique
+twelve-point orbit $\cC(\F_{11})$. The arc--coset dictionary identifies this
+set with the projective deep-hole syndrome locus, and its nonemptiness gives
+covering radius three.
 \end{proof}
 
 \begin{corollary}[Directions, cosets, leaders, and received words]

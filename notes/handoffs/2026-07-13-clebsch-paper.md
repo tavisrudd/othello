@@ -33,6 +33,9 @@ classifies conic filling through seven points, and reduces the eight-point case 
 $q\in\{13,16,17,19\}$ while cutting two pages of non-feeding census
 material. The regenerated nineteen-row release surface and its fifteen-check
 clean replay are green.
+The final dependency audit explicitly attributes the Clebsch-only
+$c(A)=10$ value to Dye, restores the point-orbit subtraction, and uses that
+orbit proposition in the uncovered-conic proof.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has

@@ -298,9 +298,9 @@ def components_by_row(
             ],
         ),
         12: (
-            "Lean checks the displayed witness and syndrome-conic equality; the exhaustive replay supplies an independent coordinate reconstruction.",
+            "The manuscript obtains the twelve-point count from Dye's Brianchon value and the universal defect formula, then identifies the invariant orbit; Lean and the exhaustive replay check the displayed witness independently.",
             [
-                conceptual("code--arc dictionary", CLASSICAL_CODE, "The displayed witness calculation is kernel checked."),
+                conceptual("Brianchon count, point orbit, and code--arc dictionary", CLASSICAL_DYE + CLASSICAL_CODE, "The manuscript routes the count through row 24 and the conic identification through row 11."),
                 lean("witness MDS code and projective distance-three locus", ["code_locus"], axioms),
                 replay("independent coordinate witness", ["check_rigidity_degenerate_conic.py"], frame_coverage, "The replay verifies the displayed Clebsch class and uncovered conic.", direct_coordinates),
             ],
@@ -372,6 +372,7 @@ def components_by_row(
             "The manuscript proves the universal chord-defect identity, quadratic barrier, and passant window; Lean checks the six-arc specialization and an explicit Sylvester distance-two clique certificate.",
             [
                 conceptual("universal secant moments and conic-filling window", ["No external input; complete double count and standard passant counts in the manuscript"], "The identity, defect bound, quadratic barrier, and two-sided field-size window are proved for every k in the manuscript."),
+                conceptual("Clebsch q=11 specialization", CLASSICAL_DYE, "Only the displayed Clebsch specialization uses Dye's ten Brianchon points; it is not asserted for an arbitrary six-arc."),
                 lean("six-arc chord-defect algebra and geometric bridge", ["defect_bridge", "chord_identity"], axioms),
                 conceptual("Sylvester graph and distance-two interpretation", CLASSICAL_SYLVESTER, "The explicit distance-two clique certificate is kernel checked."),
                 lean("Sylvester distance-two clique obstruction", ["field_order"], axioms),

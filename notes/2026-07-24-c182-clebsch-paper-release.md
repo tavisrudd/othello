@@ -26,6 +26,12 @@ worked there, and the later uncovered-locus proof delegates to it.  The
 result is a warning-free 18-page manuscript, two pages shorter than the
 preceding release candidate.
 
+A final dependency audit makes Dye's $c(A)=10$ input explicitly
+Clebsch-specific, restores the subgroup-overgroup subtraction underlying the
+$A_5$ orbit table, and routes the conic identification through that orbit
+proposition.  The $K_2$ identification again immediately follows the
+displayed hexagon it names.
+
 ## Verification
 
 - The universal identity and the $k=8$ sieve were independently rederived
