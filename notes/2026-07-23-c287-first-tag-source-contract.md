@@ -64,12 +64,19 @@ portfolio-wide default target list.
 
 - **Candidate exact copies:** all 51 inventoried Lean sources are content-addressed candidates, but
   none is admitted as referee-ready until its whole-file public-prose review passes.
-- **Required public rewrites:** 10 files cite private `notes/` or handoff paths. Three of those also
-  contain task IDs: `ProjectiveCap/PlaneOutcome.lean`,
-  `ProjectiveCap/IntrusionCalculus.lean`, and
-  `ProjectiveCap/HyperbolicQuadricMirror.lean`. These reverse references violate the public Lean
-  boundary and must be replaced with self-contained mathematical prose or stable public literature
-  by the source owners before export.
+- **Required public rewrites:** 17 files contain definite private workflow residue. Ten cite
+  private `notes/` or handoff paths:
+  `FiniteGeom.lean`, `FiniteGeom/Code.lean`, `FiniteGeom/Completion.lean`,
+  `FiniteGeom/Hypergraph.lean`, `FiniteGeom/MomentCurve.lean`,
+  `ProjectiveCap/ConicLocalization.lean`, `ProjectiveCap/EscapeParity.lean`,
+  `ProjectiveCap/HyperbolicQuadricMirror.lean`, `ProjectiveCap/IntrusionCalculus.lean`, and
+  `ProjectiveCap/PlaneOutcome.lean`. Three of those contain task IDs. Seven more use workflow
+  language such as a lane, formalization-plan decision, unfinished algebraic task, or `WP-1`/`WP-2`:
+  `FiniteGeom/ColumnCode.lean`, `FiniteGeom/EvalCode.lean`,
+  `FiniteGeom/EvalCodeInstance.lean`, `FiniteGeom/Weight.lean`,
+  `ProjectiveCap/FrameGridBridge.lean`, `ProjectiveCap/GridMirror.lean`, and
+  `Sumfree/RankCounts.lean`. These references must be replaced with self-contained mathematical
+  prose or stable public literature by the source owners before export.
 - **Infrastructure rewrite:** the public `lakefile.toml` must declare only the four libraries above
   and the exact Mathlib pin. The matching `lean-toolchain` is an exact copy. README, license,
   public gate map, proof ledger, provenance document, and final source manifest are new public
@@ -83,7 +90,7 @@ against all 51 source files.
 
 ## Next gate
 
-Obtain source-owner rewrites for the ten reverse-referencing modules and complete the whole-closure
+Obtain source-owner rewrites for the 17 workflow-bearing modules and complete the whole-closure
 referee review. Then regenerate the inventory, verify that only reviewed changes altered hashes,
 stage the exact source set with its public infrastructure rewrites, and run the clean public build
 only in a confirmed quiet build-owner window.

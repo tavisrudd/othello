@@ -132,12 +132,12 @@ plan.
 The first-tag candidate contract now resolves the `FiniteGeom` umbrella and six declared positive
 mirror targets to a content-addressed 51-file / 12,987-code-line inventory. Its 41 external imports
 are all Mathlib, and it reaches none of Q16, Q25, or `ProjectiveCap/CertData`. Public-prose scanning
-found ten files with private note or handoff references, three of which contain task IDs; source
-owners must rewrite and review those modules before C287 exports them. Report:
+found ten files with private note or handoff references and seven more with definite workflow
+residue; source owners must rewrite and review those 17 modules before C287 exports them. Report:
 [`../2026-07-23-c287-first-tag-source-contract.md`](../2026-07-23-c287-first-tag-source-contract.md).
 
 **Next:** while existing Lean runs remain active, finish the 51-file referee review and coordinate
-the ten source-owner public rewrites. Do not export certificate payloads before C318/C319/C324 and
+the 17 source-owner public rewrites. Do not export certificate payloads before C318/C319/C324 and
 the recorded Q16/Q11/Q13 trust gates; do not elaborate or build until a confirmed quiet build-owner
 window. The first commits must include reviewed source manifests and public rewrites, not
 scaffold-only history.

@@ -65,7 +65,8 @@ The candidate first-tag contract is now content-addressed in
 `notes/2026-07-23-c287-first-tag-source-contract.md`. Its seven declared roots resolve to 51 Lean
 files and 12,987 code lines, with 41 external imports all supplied by Mathlib and no heavyweight
 certificate-family source. Ten closure files still cite private notes or handoffs, including three
-with task IDs, so source-owner public rewrites and the whole-closure referee review precede export.
+with task IDs; seven more contain other definite workflow residue. All 17 need source-owner public
+rewrites, and the whole-closure referee review precedes export.
 
 Each tag's export unit is the reviewed union of the paper-facing import closures admitted by that
 tag. It is never the private `lean/` directory. The repository may grow only by a new reviewed
