@@ -452,6 +452,32 @@ def run_singular_lift(design: tuple[Matching, ...]) -> dict[str, object]:
     }
 
 
+def run_singular_basis(
+    design: tuple[Matching, ...], characteristic: int, ordering: str
+) -> tuple[str, ...]:
+    base = singular_program(design, characteristic, ordering).splitlines()
+    completed = subprocess.run(
+        ["Singular", "-q"],
+        input="\n".join(
+            [
+                base[0],
+                base[1],
+                "ideal G=std(I);",
+                "print(G);",
+                "quit;",
+            ]
+        ),
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    return tuple(
+        line.strip().removesuffix(",")
+        for line in completed.stdout.splitlines()
+        if line.strip()
+    )
+
+
 def prime_divisors(value: int) -> tuple[int, ...]:
     divisors = []
     candidate = 2
@@ -517,6 +543,21 @@ def generate() -> dict[str, object]:
         )
         integral_lifts.append(lift)
     assert all(lift["denominator_primes"] == [2] for lift in integral_lifts)
+    classical_char2_lex_basis = run_singular_basis(designs[0], 2, "lp")
+    assert classical_char2_lex_basis == (
+        "y9^5+y9^4+y9^3+y9",
+        "x9+y9^3",
+        "y8+x9^2+x9*y9+x9+y9^2+y9",
+        "x8+y8+x9+y9",
+        "y7+x8+y8*x9+x9",
+        "x7+y8",
+        "y6+x8",
+        "x6+y6+x7+y7",
+        "y5+x9",
+        "x5+y7",
+        "y4+x6",
+        "x4+y9",
+    )
     return {
         "schema": "c574-match10-v1",
         "realization_chart": {
@@ -537,6 +578,8 @@ def generate() -> dict[str, object]:
         },
         "algebraic_checks": algebraic_checks,
         "integral_lifts": integral_lifts,
+        "classical_char2_lex_basis": classical_char2_lex_basis,
+        "classical_char2_arc_factor": "y9^3+y9+1",
         "overlarge_solutions_containing_fixed_design": len(solutions),
         "agl32_orbit_sizes": [len(orbit) for orbit in orbits],
         "classes": [

@@ -7,8 +7,9 @@
 **Status:** complete. There are exactly two abstract classes. The classical class is realized in
 \(\operatorname{PG}(2,8)\) by the regular hyperoval and is compatible with the prescribed conic;
 the Mathon non-hyperoval class is not rank-three realizable over any field, while the classical
-class is not rank-three realizable in odd characteristic. In particular, neither class is
-rank-three realizable over \(\mathbf F_{37}\).
+class is rank-three realizable over a field exactly when the field has characteristic two and
+contains \(\mathbf F_8\). In particular, neither class is rank-three realizable over
+\(\mathbf F_{37}\).
 
 ## Result
 
@@ -37,8 +38,14 @@ The post-completion `ej` pass gives the exact characteristic obstruction:
 - \(D_{\mathrm H}\) has no rank-three realization over any field of odd characteristic;
 - \(D_{\mathrm M}\) has no rank-three realization over any field.
 
-The first statement is sharp at the characteristic level because \(D_{\mathrm H}\) is realized
-over \(\mathbf F_8\). The report does not classify which characteristic-two fields admit it.
+The third `ej` pass closes the remaining field-of-definition boundary:
+\[
+ D_{\mathrm H}\text{ is realizable over }K
+ \quad\Longleftrightarrow\quad
+ \operatorname{char}K=2\text{ and }\mathbf F_8\subseteq K.
+\]
+For finite fields, \(D_{\mathrm H}\) is therefore realizable over
+\(\mathbf F_{2^m}\) exactly when \(3\mid m\).
 
 ## Abstract classification
 
@@ -112,6 +119,18 @@ The identities therefore reduce over every field of odd characteristic. They for
 characteristic-two unit-ideal certificate for \(D_{\mathrm M}\) proves that \(D_{\mathrm M}\)
 has no rank-three realization over any field.
 
+Finally, the lexicographic characteristic-two basis for \(D_{\mathrm H}\) is triangular. Its first
+equation is
+\[
+ y_9^5+y_9^4+y_9^3+y_9
+ =y_9(y_9+1)(y_9^3+y_9+1).
+\]
+The roots \(0,1\) are exactly the two repeated-frame degeneracies. Thus every arc realization
+forces \(y_9^3+y_9+1=0\), whose irreducibility over \(\mathbf F_2\) forces
+\(\mathbf F_8\subseteq K\). Conversely, the direct regular-hyperoval construction over
+\(\mathbf F_8\), followed by scalar extension, realizes the design over every such \(K\).
+The JSON records all twelve equations of the triangular basis.
+
 ## Literature record
 
 Opening summary: **0 sources were read at full text; 3 sources were read partially.** The
@@ -164,11 +183,10 @@ sha256sum -c ../notes/2026-07-24-c574-match10-rank-three-realizability.sha256
 The JSON contains the two overlarge-design representatives, both \(63\)-block matching designs,
 the direct \(\mathbf F_8\) design and transporter, both monomial-order algebraic checks in
 characteristics \(2\) and \(37\), and the verified rational lift-matrix hashes and denominator-prime
-sets. The trusted boundary is exact integer/finite-field arithmetic, canonical exhaustive
+sets, together with the twelve-equation characteristic-two lexicographic basis. The trusted boundary is exact integer/finite-field arithmetic, canonical exhaustive
 enumeration, and Singular Gröbner bases and module lifts. The second monomial order and the
 independent direct \(\mathbf F_8\) incidence construction are the replays. The computation does not
-claim that Mathon's primary proof was read or classify which characteristic-two fields realize
-\(D_{\mathrm H}\).
+claim that Mathon's primary proof was read.
 
 ## `ej` + `tt` closeout
 
@@ -179,7 +197,8 @@ classes fail in every odd characteristic and hence that \(D_{\mathrm M}\) fails 
 The Tao-style normalization check removed any need
 to invoke uniqueness of hyperovals in \(\operatorname{PG}(2,8)\): the direct algebraic obstruction
 eliminates the second abstract class, while the explicit regular hyperoval supplies and identifies
-the first.
+the first. The third pass factors the surviving characteristic-two realization scheme and proves
+that containing \(\mathbf F_8\) is necessary as well as sufficient.
 
 ## Mystery ledger
 
@@ -191,5 +210,5 @@ the first.
 - **Conic compatibility:** settled directly for the surviving regular hyperoval.
 - **Wider characteristic spectrum:** settled at the characteristic level. Both classes fail in
   odd characteristic; \(D_{\mathrm M}\) also fails in characteristic two and hence over every
-  field. The exact characteristic-two field-of-definition spectrum of \(D_{\mathrm H}\) remains
-  outside C574.
+  field. The characteristic-two field-of-definition spectrum of \(D_{\mathrm H}\) is also settled:
+  precisely the fields containing \(\mathbf F_8\). No genuine realizability mystery remains.
