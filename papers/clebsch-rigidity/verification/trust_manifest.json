@@ -92,7 +92,7 @@
         }
       ],
       "id": "rigidity-headline",
-      "paper_location": "source line 109",
+      "paper_location": "source line 110",
       "route": "mixed",
       "row": 2,
       "source": {
@@ -165,7 +165,7 @@
         }
       ],
       "id": "prop-a5-point-orbits",
-      "paper_location": "source line 234",
+      "paper_location": "source line 235",
       "route": "mixed",
       "row": 11,
       "source": {
@@ -258,7 +258,7 @@
         }
       ],
       "id": "prop-deep-holes-conic",
-      "paper_location": "source line 304",
+      "paper_location": "source line 305",
       "route": "mixed",
       "row": 12,
       "source": {
@@ -274,7 +274,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-named-variety",
-      "paper_location": "source line 339",
+      "paper_location": "source line 340",
       "route": "conceptual-cited-inputs",
       "row": 13,
       "source": {
@@ -322,7 +322,7 @@
         }
       ],
       "id": "prop-deep-hole-orbit",
-      "paper_location": "source line 376",
+      "paper_location": "source line 377",
       "route": "mixed",
       "row": 14,
       "source": {
@@ -449,7 +449,7 @@
         }
       ],
       "id": "prop-decoding-oracle",
-      "paper_location": "source line 427",
+      "paper_location": "source line 428",
       "route": "mixed",
       "row": 15,
       "source": {
@@ -464,7 +464,7 @@
         "No external input; complete combinatorial proof in the manuscript"
       ],
       "id": "lem-six-arc-line-bound",
-      "paper_location": "source line 514",
+      "paper_location": "source line 515",
       "route": "conceptual-cited-inputs",
       "row": 16,
       "source": {
@@ -542,7 +542,7 @@
         }
       ],
       "id": "thm-rigidity",
-      "paper_location": "source line 554",
+      "paper_location": "source line 555",
       "route": "mixed",
       "row": 17,
       "source": {
@@ -586,7 +586,7 @@
         "soundness_bridge": "The replay evaluates homogeneous forms degree by degree on every uncovered locus; its imported canonical-class generator is hash-pinned alongside it."
       },
       "id": "prop-low-degree-rigidity",
-      "paper_location": "source line 657",
+      "paper_location": "source line 658",
       "route": "exact-replay",
       "row": 18,
       "source": {
@@ -602,7 +602,7 @@
         "Hirschfeld 1998, the plane arc/covering-radius dictionary"
       ],
       "id": "cor-monomial-characterization",
-      "paper_location": "source line 682",
+      "paper_location": "source line 683",
       "route": "conceptual-cited-inputs",
       "row": 19,
       "source": {
@@ -658,7 +658,7 @@
         "soundness_bridge": "The scripts exhaust all conics, one-point perturbations, and displayed automorphism orbits."
       },
       "id": "thm-gap",
-      "paper_location": "source line 738",
+      "paper_location": "source line 739",
       "route": "exact-replay",
       "row": 20,
       "source": {
@@ -674,7 +674,7 @@
         "Dye 1991, Theorems 1 and 3, pages 275--278"
       ],
       "id": "prop-brianchon-support",
-      "paper_location": "source line 899",
+      "paper_location": "source line 900",
       "route": "conceptual-cited-inputs",
       "row": 21,
       "source": {
@@ -755,7 +755,7 @@
         }
       ],
       "id": "cor-decoder-brianchon",
-      "paper_location": "source line 949",
+      "paper_location": "source line 950",
       "route": "mixed",
       "row": 22,
       "source": {
@@ -814,7 +814,7 @@
         }
       ],
       "id": "prop-invariant-support-bipartition",
-      "paper_location": "source line 968",
+      "paper_location": "source line 969",
       "route": "mixed",
       "row": 23,
       "source": {
@@ -875,7 +875,7 @@
         }
       ],
       "id": "lem-chord-defect",
-      "paper_location": "source line 1017",
+      "paper_location": "source line 1018",
       "route": "mixed",
       "row": 24,
       "source": {
@@ -963,7 +963,7 @@
         }
       ],
       "id": "thm-why11",
-      "paper_location": "source line 1050",
+      "paper_location": "source line 1051",
       "route": "mixed",
       "row": 25,
       "source": {
@@ -1041,7 +1041,7 @@
         }
       ],
       "id": "prop-clebsch-family-uncovered",
-      "paper_location": "source line 1097",
+      "paper_location": "source line 1098",
       "route": "mixed",
       "row": 26,
       "source": {
@@ -1141,7 +1141,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1157",
+      "paper_location": "source line 1158",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1185,7 +1185,7 @@
         "soundness_bridge": "The scripts regenerate projective classes, stabilizers, uncovered counts, nearest-conic discrepancies, and least vanishing degrees."
       },
       "id": "fifteen-class-census-table",
-      "paper_location": "source line 590",
+      "paper_location": "source line 591",
       "route": "exact-replay",
       "row": 58,
       "source": {
@@ -1203,9 +1203,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "3a58346d083d5fe40df883cc8fc8045ba3a444eb74b076b4f902da2dbcee6209"
+    "sha256": "362e947a842958c6208aed479708e2926077c6b7e2a3ba01a3080787760e1247"
   },
-  "manuscript_sha256": "17c6deff3ef29f03d9aeb98fd700cb4a1ef343f0f3f3fd5c19741decd5925c9a",
+  "manuscript_sha256": "d2f8b362237eb627166d7bb032cfbaa14375350dd5f9bd07ce1a3f5a0ec797d9",
   "public_documents": [
     {
       "path": "README.md",
@@ -1245,7 +1245,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "aa586b5864b3b0a107d87b4307398e35e2cf4b09ceba98392964ebe4dfff61b2"
+    "sha256": "4fcf539118f616963ec441e7f1fdce54b9c4539a365beaf3d988bc3896e997c7"
   },
   "verify_all": {
     "checker_output_certificate": {
@@ -1455,7 +1455,7 @@
     "output": {
       "path": "verification/verify-release-output.json",
       "repository": "paper",
-      "sha256": "6b59e85768f5cc0b65126dbd0a0f3899d948a5d04dfdfef819283c331024609a"
+      "sha256": "607a8b75ffbbbdc8405e1a96374e690173bb39ab790b86112c0284a5d2106ca3"
     },
     "verification_tools": [
       {
