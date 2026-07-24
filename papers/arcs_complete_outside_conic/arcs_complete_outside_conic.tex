@@ -55,7 +55,8 @@ lower bound \(L_2(q)\), and in particular
 \]
 Vanishing defect turns the concurrence points of disjoint secants into a
 matching design, giving equality rigidity and quantitative stability; for
-ten points equality occurs only in \(\PG(2,8)\), and the concurrence
+ten points equality occurs only for zero-defect \(\cC\)-complete ten-arcs
+in \(\PG(2,8)\), and the concurrence
 design is the regular-hyperoval design.  Projective averaging transfers
 ordinary complete arcs to upper bounds in the relative problem.  Explicit
 witnesses attain \(L_2(q)\) for \(q=5,8,9,11\).  Finally, a kernel-checked
@@ -429,8 +430,9 @@ $r(x)$-edge matching $M_x$ in $K_k$, and
 Here $K_{M_x}$ is the clique whose vertices are the edges of $M_x$.
 
 If $\Delta_{\cH}(A)=0$, every $M_x$ in this decomposition has
-$m=\lfloor k/2\rfloor$ edges.  Thus the family $(M_x)_{r(x)=m}$ is a simple
-$\operatorname{MATCH}(k,m,1)$ design.  If
+$m=\lfloor k/2\rfloor$ edges.  The family is simple: a repeated matching
+would repeat each of its pairs of edges, contradicting $\lambda=1$.  Thus
+$(M_x)_{r(x)=m}$ is a simple $\operatorname{MATCH}(k,m,1)$ design.  If
 $Z=\{x\notin A:r(x)=m\}$, then
 \[
  |Z|=\frac{3\binom{k}{4}}{\binom{m}{2}}
@@ -486,7 +488,8 @@ At an off-hole centre of index $r$,
 \[
  \binom r2\le\frac{m-1}{2}(r-1)(m-r),
 \]
-For a hole centre whose clique contributes to \(E_{\rm bad}\), the
+where \(\binom r2\) is the edge count of the concurrence clique at that
+centre.  For a hole centre whose clique contributes to \(E_{\rm bad}\), the
 definition gives \(2\le r\le m-1\), and its defect weight \(r(m-r)\)
 is at least the off-hole weight \((r-1)(m-r)\).  Hole centres of index
 \(m\) are excluded from \(E_{\rm bad}\) and contribute nothing to its
@@ -718,6 +721,9 @@ L_1(q)&4&5&5&6&6&7&7&7\\
 L_2(q)&4&6&6&6&7&8&8&8
 \end{array}
 \]
+The entries at \(q=13,17,19\) are lower bounds only.  The present work
+supplies neither witnesses attaining these bounds nor nonexistence proofs,
+so the corresponding exact values remain undetermined here.
 Thus the second-moment correction alone proves, for example, that a
 $\cC$-complete arc in $\PG(2,16)$ has at least eight points.
 
@@ -1295,9 +1301,9 @@ witness in Appendix~\ref{app:witnesses} gives the matching upper bound.
 \label{sec:reconstruction}
 
 This coda does not apply to the \(\cC\)-complete arcs studied above:
-they satisfy \(U(A)\subseteq\cC\), and in the square-root range \(k<q\)
-the first-moment covering inequality gives
-\(\binom{k}{2}\ge q+1\), opposite to the strict hypothesis below.
+they satisfy \(U(A)\subseteq\cC\), and the first-moment covering
+inequality gives \(\binom{k}{2}\ge q+1\), opposite to the strict
+hypothesis below.
 
 For fixed arc length and sufficiently large \(q\), the ordinary-uncovered
 locus remembers its parent arc.  The inverse map has two elementary stages.
