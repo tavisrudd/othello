@@ -827,8 +827,17 @@
       "last": 548,
       "purpose": "prove the C397 four-copy contraction rank-drop divisor and explain its 96/192 multiplicities",
       "sequence": 92
+    },
+    {
+      "count": 1,
+      "first": 549,
+      "kind": "reservation",
+      "lane": "cap",
+      "last": 549,
+      "purpose": "prove private-vertex boundary truncation and measure residual signature quotient",
+      "sequence": 93
     }
   ],
-  "next_id": 549,
+  "next_id": 550,
   "schema": "codex-task-id-allocations-v1"
 }
