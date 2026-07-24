@@ -225,6 +225,141 @@ merely reconstruct the original seven-point configuration with no extra
 constraint on sparse concurrence patterns.  This is a plausible fresh C item,
 but it is not allocated here.
 
+## Post-closeout `ej2`: locality is too dilute; the tangent locus is global
+
+The seven-point proposal is not the best first test.  At zero concurrence
+defect, C555 gives
+\[
+ T:=\sum_{S\in\binom A6}t(S)=(m-2)\binom{k}{4}.
+\]
+Among all \(15\binom{k}{6}\) marked perfect matchings on six-subsets, the
+vanishing-coordinate density is therefore
+\[
+ \frac{T}{15\binom{k}{6}}
+ =
+ \begin{cases}
+ 1/(k-5),&k\text{ even},\\
+ 1/(k-4),&k\text{ odd}.
+ \end{cases}
+\]
+It tends to zero at the target scale.  A fixed six- or seven-point overlap
+identity therefore sees the extremal matching structure only with
+\(O(1/k)\) density; without a separate concentration theorem it cannot force
+an asymptotic correction.  The useful object must be conditioned on entire
+maximum matching cliques.
+
+Two such cliques still impose no hidden holonomy.  Normalize their concurrence
+centres to
+\[
+ x=(1,0,0),\qquad y=(0,1,0)
+\]
+and separate their possible common matching edge on \(xy\).  Work off \(xy\)
+with points \((u,v,1)\).  Secants through \(x\) pair points
+with the same \(v\), while secants through \(y\) pair points with the same
+\(u\).  Every alternating cycle of their two matchings has the form
+\[
+\begin{aligned}
+ &(u_1,v_1),(u_2,v_1),(u_2,v_2),(u_3,v_2),\ldots,\\
+ &(u_r,v_r),(u_1,v_r),
+\end{aligned}
+\]
+with the \(u_i,v_i\) otherwise free on a Zariski-open arc locus.  Thus
+pair-of-matching cycle invariants, including a direct C475-style four-cycle
+quotient, reconstruct row--column coordinates but give no rank-three
+obstruction.
+
+Three centres are not yet a convincing replacement.  For noncollinear centres
+normalized to the coordinate points, their matchings pair equal values of
+\[
+ v,\qquad u,\qquad u/v.
+\]
+There is already an adverse scalable ansatz: take the row--column cycle cells
+\[
+ (u_i,v_i),\ (u_i,v_{i+1})
+\]
+and a homothetic copy
+\[
+ (a u_i,a v_i),\ (a u_i,a v_{i+1}).
+\]
+Every row, column, and represented slope then occurs exactly twice.  Whether
+generic parameters avoid every unintended collinear triple needs a separate
+check, but this is enough to demote the three-centre test: the pairing
+conditions themselves plainly admit unbounded combinatorial families.
+
+The higher-value reformulation is global and is already present in the C554
+data.  Let \(\tau_A(x)\) be the number of tangent lines from an outside point
+\(x\) to the \(k\)-arc \(A\).  Partitioning \(A\) by the lines through \(x\)
+gives the exact identity
+\[
+ k=2r(x)+\tau_A(x).
+\]
+Consequently a maximum-index centre \(r(x)=m=\lfloor k/2\rfloor\) is exactly
+
+\[
+\begin{cases}
+\text{a tangent-free outside point},&k\text{ even},\\
+\text{an outside point on exactly one tangent},&k\text{ odd}.
+\end{cases}
+\]
+
+At zero defect, C554 does not merely supply a sparse sample of such points.  It
+forces
+\[
+ \#\{x:\tau_A(x)=0\}=(k-1)(k-3)\quad(k\ \text{even})
+\]
+or
+\[
+ \#\{x:\tau_A(x)=1\}=k(k-2)\quad(k\ \text{odd}).
+\]
+This \(\asymp k^2\) low-tangent locus is the non-dilute rank-three object that
+the six-point determinant failed to expose.  Dually, it asks how the tangent
+lines of an arc can leave so many points uncovered, or singly covered, while
+the arc remains disjoint from the prescribed conic.
+
+There is a sharper dual package.  Let \(\mathcal T_A\subset\PG(2,q)^*\) be the
+set of dual points representing all tangent lines of \(A\).  Each point of
+\(A\) lies on \(q+2-k\) tangents, so
+\[
+ |\mathcal T_A|=k(q+2-k).
+\]
+For \(x\notin A\), the dual line \(x^*\) meets \(\mathcal T_A\) in
+\(\tau_A(x)\) points; for \(x\in A\), it meets it in \(q+2-k\) points.  The
+zero-defect condition \(r(x)\in\{0,1,m\}\) therefore makes
+\(\mathcal T_A\) a four-intersection set, with line-intersection spectrum
+contained in
+\[
+ \{q+2-k,\,0,\,k-2,\,k\}\quad(k\text{ even})
+\]
+and
+\[
+ \{q+2-k,\,1,\,k-2,\,k\}\quad(k\text{ odd}).
+\]
+In particular, two tangents with distinct contact points cannot meet in an
+ordinary double point: their intersection lies on \(k-2\) or \(k\) tangents
+regardless of parity.  The associated projective incidence code is
+correspondingly a few-weight code.  This exposes a concrete route for
+finite-geometry polynomial or code-weight tools that the local Gale covariant
+could not see.
+
+The best unallocated gate is therefore a tangent-arrangement/envelope
+falsifier:
+
+1. classify or rule out tangent-derived four-intersection sets with the above
+   size and spectrum, using incidence moments, polynomial methods, or
+   few-weight-code constraints;
+2. test whether the exact low-multiplicity line counts force a low-degree
+   carrier or a hyperoval-type exceptional family;
+3. couple any such rigidity to disjointness from the prescribed conic;
+4. **GO** toward C556 only if this yields positive defect or a carrier
+   invariant; **NO-GO** if general-position tangent arrangements attain the
+   required \(\asymp k^2\) loci.
+
+This does not assert an available classification theorem; a
+Segre-lemma/tangent-envelope and few-intersection-set literature audit would be
+part of the gate.  It replaces both the seven-point overlap and the raw
+three-centre classification as the highest-value next lower-bound experiment.
+It remains unallocated, and C556 remains gated.
+
 ## Mystery ledger
 
 | Feature | Disposition |
@@ -234,7 +369,10 @@ but it is not allocated here.
 | Could nonlinear functions of the per-six-set count \(t(S)\) be new? | **Open but not promoted:** pair overlaps do couple centres, but existing totals do not force them; a new geometric compatibility theorem is already needed. |
 | Does the determinant calculation retain anything beyond concurrence support? | **Settled positively by the post-closeout `ej`:** the full homogeneous vector \(\widetilde{\boldsymbol\kappa}(S)\) is a nonconstant Gale-invariant covariant and projectivizes off its zero-defect base locus. |
 | What is the covariant's base locus? | **Settled:** simultaneous vanishing of all fifteen coordinates is exactly the six-point all-matching concurrence design forced by zero defect, hence the \(\F_4\)-hyperoval configuration in the Desarguesian case. |
-| Can overlapping \(\boldsymbol\kappa\)-vectors obstruct sparse concurrence patterns? | **Open behind an exact seven-point gate:** one must find a rank/minor relation beyond Plücker reconstruction and C555. |
+| Can fixed six-/seven-point \(\boldsymbol\kappa\)-overlaps force an asymptotic correction? | **Deprioritized by `ej2`:** their zero-coordinate density is only \(1/(k-5)\) or \(1/(k-4)\), so locality needs an unavailable concentration theorem. |
+| Do two maximum-matching centres impose cycle holonomy? | **Settled negatively by `ej2`:** after normalization they are arbitrary row--column alternating cycles on a Zariski-open arc locus. |
+| Do three maximum-matching centres give the missing gate? | **Deprioritized:** simultaneous row, column, and slope pairings have an explicit scalable combinatorial ansatz; generic arc realizability is not checked. |
+| Where is the first non-dilute compatibility object? | **Open at the dual tangent set:** zero defect makes the \(k(q+2-k)\) tangents a four-intersection set and requires \((k-1)(k-3)\) zero-secants of it for even \(k\), or \(k(k-2)\) one-secants for odd \(k\). |
 | Does C592 open C556? | **No:** no carrier or rank invariant independent of C554--C555 was exposed. |
 
 ## Evidence and trust boundary
