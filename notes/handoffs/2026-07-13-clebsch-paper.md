@@ -12,16 +12,16 @@
 ## Current verdict
 
 Paper I, *Deep-hole rigidity of the Clebsch hexagon code*, is a
-warning-free 19-page candidate with a fresh referee-style `GO`. It lives in
-`papers/clebsch-rigidity/`. C575 pinned its exact 17-page base at
-`7d258dcd`, pinned the 37-page fallback at `5a82e80d`, and partitioned all
-58 fallback trust rows. C576 applied only the approved Paper I backports and
-printed the exact nineteen-row Paper I claim map.
+warning-free 19-page candidate with a complete nineteen-row release surface
+and a green clean replay. It lives in `papers/clebsch-rigidity/`. C320 is
+still live at the mandatory user-launched independent-review gate; the
+implementing agent's pre-review verdict is `READY FOR INDEPENDENT REVIEW`,
+not final `GO`.
 
 The active order is strict:
 
-1. **C320:** build and independently review the Paper I verification/release
-   surface.
+1. **C320:** obtain the user-launched independent review, repair every
+   finding, and obtain the separately launched post-fix `GO`.
 2. **C182:** archive and release Paper I.
 3. **C577:** build and referee-test standalone Paper II after Paper I is
    submission-ready.
@@ -50,7 +50,7 @@ The authoritative split records are:
 
 | role | root | status |
 |---|---|---|
-| Paper I | `papers/clebsch-rigidity/` | active candidate; C320 next |
+| Paper I | `papers/clebsch-rigidity/` | release surface green; C320 independent review next |
 | Paper II | `papers/clebsch-factorization/` | compilable spine; C577 gated behind Paper I |
 | Paper III | `papers/clebsch-passages/` | exploratory spine; C579 gated behind Paper II |
 | mega-paper fallback | `papers/clebsch-hexagon-code/` | preserved unchanged with its 58-row/18-check evidence surface |
@@ -91,9 +91,14 @@ make -B clebsch-rigidity
 Inspect `papers/clebsch-rigidity/clebsch_rigidity.log`, not the fallback
 Clebsch log.
 
-## C320 — next cold-start task
+## C320 — current independent-review gate
 
-C320 now means **Paper I only**. Start from:
+C320 means **Paper I only**. The implementation and clean replay are complete
+in `notes/2026-07-20-c320-clebsch-trust-ledger.md`. The exact formal source
+pin is `bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`; the manifest is
+`papers/clebsch-rigidity/verification/trust_manifest.json`.
+
+The independent reviewer starts from:
 
 - `papers/clebsch-rigidity/clebsch_rigidity.tex`;
 - the nineteen rows `2, 11--26, 29, 58` in
@@ -101,18 +106,20 @@ C320 now means **Paper I only**. Start from:
 - the exact manuscript-facing map in C576's report;
 - the broad fallback ledger only as a source of candidate evidence routes.
 
-C320 must:
+C320's implemented surface:
 
-1. generate a Paper I statement-identity extraction and nineteen-row
-   manifest from the final Paper I source;
-2. admit only Lean gates, cited inputs, checkers, and certificates actually
-   used by those nineteen rows;
-3. create a Paper I aggregate gate and clean release runner without
-   weakening or overwriting the fallback surface;
-4. verify hashes, toolchain pins, axiom audit, clean replay, and manuscript
-   correspondence;
-5. repair every issue and obtain the required user-launched independent
-   post-fix `GO`.
+1. has the exact nineteen-row statement identity and manifest;
+2. admits 24 Lean terminals and ten release-local exact checkers, with no
+   Paper II, Paper III, or Singular route;
+3. has a separate aggregate gate, axiom audit, canonical checker-output
+   certificate, and fifteen-check clean release runner;
+4. pins hashes, toolchains, the exact formal source commit, and manuscript
+   correspondence while preserving the fallback surface byte-for-byte.
+
+The implementing agent must not launch or simulate the reviewer. The user
+now launches the independent cold review. Any finding blocks completion and
+requires a fix plus a separately user-launched post-fix review; only its final
+`GO` advances to C182.
 
 The previous C320 `NO-GO`, 58-row manifest, 29-statement extraction, and
 18-check replay belong to the mega-paper fallback. They are provenance and

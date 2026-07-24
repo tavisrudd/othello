@@ -2,7 +2,8 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; active scope reset to focused Paper I after C576 `GO`
+**Status:** implemented and clean-replayed; awaiting the user-launched
+independent review required before final `GO`
 
 This file is both the cold-read task specification and the required durable result report. Complete
 it in place. C320 is not an editorial summary: it is the authoritative claim-by-claim ledger that
@@ -41,6 +42,165 @@ C321 is expected not to trigger because Paper I retains no load-bearing
 Singular claim; close that condition only after checking the final nineteen
 rows. The final Paper I surface still requires the user-launched independent
 review and post-fix `GO` specified in the closing protocol below.
+
+## Paper I implementation — ready for independent review
+
+**Date:** 2026-07-24
+
+**Pre-review verdict:** `READY FOR INDEPENDENT REVIEW`, not final `GO`.
+
+The focused Paper I surface was built from the manuscript rather than by
+filtering the fallback manifest. It is committed in
+`bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`,
+`3d1eac40`, and `573e0ef8`. The first commit is the exact pinned formal
+source commit; the later commits only repin and harden the Paper I release
+surface.
+
+### Frozen artifacts
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| `papers/clebsch-rigidity/clebsch_rigidity.tex` | 68,072 | `21ed256547cea391ec1555bc58e8549d66ce9052e9beee1f9cffe8e3c5e3e56a` |
+| `papers/clebsch-rigidity/clebsch_rigidity.pdf` | 175,777 | `eb661537689069d88ae0d295246eef1d9bd3f9eb5be301ce7964467baf63c7b3` |
+| `papers/clebsch-rigidity/verification/statement_identity.json` | 15,522 | `629389ef318fec6d31491020191f6d5617776872f636a8d6da63eb06cda082d8` |
+| `papers/clebsch-rigidity/verification/trust_manifest.json` | 55,944 | `b3af1f7cefeafa0b7e69b260e1f898bbf89b254a88f767955756ece99c853560` |
+| `papers/clebsch-rigidity/verification/checker_outputs.json` | 1,716 | `d9595a11734de303b21b3a214419e2c76668fa8b97353e44c914ef1077bc0b56` |
+| `papers/clebsch-rigidity/verification/verify-release-output.json` | 1,263 | `d51911b8b1e61aec3c682d9ab765cfb0cb03639893c30a692d0ff3f2937a1a74` |
+| `papers/clebsch-rigidity/verification/verify_release.py` | 10,275 | `25bd088646de27d4cce9acccb18891cf8b9c237a0fa523e9c2a69adaa865f849` |
+| `lean/RelativeConicArcs/Gates/ClebschRigidityTrust.lean` | 3,436 | `dce51b42bfb384950bbffa756a87c3aabccfda03502d19545988f52aca32cb69` |
+| `lean/verification/clebsch_rigidity_trust/axiom-audit.txt` | 3,365 | `ef031beeb322b7bd217651aec0b1822b231a01991c1652e21e048bc9f5305767` |
+
+The statement identity contains exactly rows `2, 11--26, 29, 58`: one
+introductory headline, seventeen theorem-like environments, and the complete
+census sentence. Every row carries verbatim TeX, a source line, and a digest.
+The manifest assigns four rows to a purely conceptual/cited route, three to a
+pure exact-replay route, and twelve to explicit mixed decompositions.
+
+### Formal trust boundary
+
+The Paper I gate imports only the modules used for the explicit `q=11`
+action, code and decoder, the Dye rigidity seam, chord moments, the
+Sylvester obstruction, and the small-arc bridge. Its 24 terminals have
+exactly five axiom names in the tracked audit:
+
+- `propext`, `Classical.choice`, and `Quot.sound`;
+- `RelativeConicArcs.ClebschDye.dye1991_brianchon_bound`; and
+- `RelativeConicArcs.ClebschDye.dye1991_equality_classification`.
+
+Only the last two are external mathematical inputs. The source now identifies
+them with R. H. Dye, *Hexagons, conics, \(A_5\) and
+\(\mathrm{PSL}_2(K)\)*, Theorems 1 and 3, pages 275--278,
+doi:10.1112/jlms/s2-44.2.270. No native execution, `sorry`, Singular result,
+Paper II terminal, or Paper III terminal enters the gate.
+
+The first fresh build exposed a stale `linarith` normalization failure in
+`ClebschChordDefect.clebsch_uncovered_formula`. The repair replaces that
+tactic call by an explicit equality followed by `ring`; the theorem type is
+unchanged. The exact target then built, the downstream Dye consequence built,
+and the new aggregate target passed its trace-only gate.
+
+### Executable evidence and clean replay
+
+The ten Paper I-owned exact checkers and the pinned Nix environment now live
+under `papers/clebsch-rigidity/`. Their finite domains and residual trust are
+recorded per claim. The low-degree checker deliberately shares the global
+checker's canonical class generator; the manifest records that this is a
+shared-key consistency check rather than a second independent class
+enumeration.
+
+`checker_outputs.json` is the compact certificate of each checker's canonical
+stdout SHA-256, byte count, and line count. Its first regeneration exposed a
+noncanonical wall-time line in `check_global_conic_gap.py`; removing that line
+made two independent pinned-environment runs byte-identical at
+`fdd0b0f389110860ab535d0228d4bac1c9ca780995cfe7efaab829d38e219775`.
+The other nine checker outputs were already stable.
+
+From `papers/clebsch-rigidity/`, the exact release command is:
+
+```text
+nix develop --command python3 verification/verify_release.py \
+  --lean-root ../../lean
+```
+
+The committed clean replay passed in 3 minutes 39 seconds. It ran fifteen
+checks: verification-tool tests, statement identity, an isolated warning-free
+19-page manuscript build, manifest regeneration, all ten exact replays, and
+the Paper I Lean gate. It matched the tracked deterministic output and left
+every Paper I scholarly path unchanged. The runner verifies the exact formal
+source pathset against pinned commit
+`bf4fb39ab3c3b06c3f82c2c90d37077d7aa4c520`, so unrelated dirty Lean paths
+cannot either block the replay or enter its trust boundary.
+
+One initial unwrapped Nix provisioning command exceeded the command-output
+budget and was aborted. Its replacement ran through `run-quiet` and passed;
+no claim or recorded artifact depends on the aborted invocation.
+
+### Reconciliation judgments and repairs
+
+1. **Release-local evidence.** The ten selected checkers were copied
+   byte-for-byte from the fallback evidence root before Paper I-specific
+   audit. Only stale workflow prose, the `q=19` theorem-number message, and
+   the noncanonical runtime line were changed. Their current hashes, imports,
+   and outputs are Paper I-local.
+2. **Narrow terminal admission.** Chord identity, Clebsch-family formula,
+   field-order boundary, and geometric defect bridge use separate terminal
+   groups. A row does not inherit unrelated terminals merely because they
+   occur in one source module.
+3. **Exact classical seam.** The rigidity rows are kernel checked relative
+   to the two named Dye axioms; the \(A_5\) and geometric naming clauses remain
+   cited inputs rather than upgraded Lean claims.
+4. **Replay independence.** Decoder, support, automorphism, global, local,
+   and low-degree imports are hash-pinned transitively. Shared implementation
+   is disclosed instead of being called independent.
+5. **Source cleanliness.** The manuscript's stale internal lane comment was
+   removed. The public verification artifacts contain no task IDs, agents,
+   sessions, private paths, or later-paper evidence.
+6. **Formal identity.** The old shared commit `43c403b...` cannot identify a
+   gate created later. Paper I therefore pins the exact new formal source
+   commit `bf4fb39a...`.
+
+The broad fallback surface remains byte-for-byte unchanged:
+
+- statement identity:
+  `f2be08486f4233ead54e744b7d51d5fcf2e52088df2ef784f8fe84e56404f4ee`;
+- trust manifest:
+  `f7520505f6703a349a0ed54c6ba298112ccba0a3a4d984f83f4dc365ee2d8324`;
+- release output:
+  `bc8b58f30bb63ecae39ad42f898899fa39047f95180ab2ff419073c95da5db90`;
+- fallback aggregate gate:
+  `839b45842f6cd88259e5f3fda67076240d18638aa7e76d6e79011a9a3b685bcb`.
+
+C321 is closed as not triggered. Paper I has no load-bearing Singular claim,
+the release flake contains no Singular package, and no admitted command or
+manifest row invokes Singular.
+
+### Pre-review `ej` + `tt` pass
+
+The cheap upgrades were to make checker stdout part of the verified
+certificate, pin the exact post-gate formal commit, narrow the Lean cleanliness
+check to the scholarly source pathset, and turn the two Dye assumptions into
+fully cited public declarations. These upgrades found and repaired one real
+formal build failure, one nondeterministic replay output, one stale
+manuscript workflow comment, and one invalid old formal pin before review.
+
+A demanding referee can now move in both directions: from each published row
+to its exact route and artifacts, and from every admitted terminal or checker
+back to a unique Paper I row. The remaining high-value action is genuinely
+independent review, not another implementing-agent polish pass.
+
+### Mystery ledger
+
+- **Settled — formal axiom boundary.** The only nonstandard axioms are the two
+  precisely cited Dye inputs.
+- **Settled — replay determinism.** Every exact checker has canonical tracked
+  stdout identity; wall time is excluded.
+- **Settled — C321.** No Singular route or package remains.
+- **Settled — fallback preservation.** All four fallback surface hashes match
+  their frozen values.
+- **Open — independent adequacy review.** The implementing agent cannot satisfy
+  this gate. The user must launch the cold reviewer, and any finding requires
+  a fix followed by a separately user-launched post-fix review. C320 stays
+  live until that reviewer records final `GO`.
 
 ## Preserved mega-paper ledger — fallback evidence only
 
@@ -810,21 +970,21 @@ items do not satisfy the focused Paper I gate.
 
 ## Current Paper I closing checklist
 
-- [ ] Extract and hash every Paper I theorem-like environment and separately
+- [x] Extract and hash every Paper I theorem-like environment and separately
   published claim from `papers/clebsch-rigidity/clebsch_rigidity.tex`.
-- [ ] Reconcile the extraction exactly with C575 rows
+- [x] Reconcile the extraction exactly with C575 rows
   `2, 11--26, 29, 58`; account for every adopted claim once.
-- [ ] Assign one exact conceptual, cited, Lean, certificate, replay, or mixed
+- [x] Assign one exact conceptual, cited, Lean, certificate, replay, or mixed
   route per row; admit no Paper II/III route.
-- [ ] Verify theorem adequacy against actual Lean types and definitions,
+- [x] Verify theorem adequacy against actual Lean types and definitions,
   including axioms, imports, and the paper-to-formal correspondence.
-- [ ] Verify every executable row's finite domain, completeness argument,
+- [x] Verify every executable row's finite domain, completeness argument,
   checker semantics, hashes, independent replay, and residual trust.
-- [ ] Build a Paper I aggregate gate, axiom audit, clean verify-all command,
+- [x] Build a Paper I aggregate gate, axiom audit, clean verify-all command,
   and deterministic output without changing either source repository.
-- [ ] Preserve the mega-paper manifest, gate, extraction, and release output
+- [x] Preserve the mega-paper manifest, gate, extraction, and release output
   byte-for-byte as a separate fallback surface.
-- [ ] Confirm C321 is not triggered, or interpose it before release if a
+- [x] Confirm C321 is not triggered, or interpose it before release if a
   load-bearing Singular route appears.
 - [ ] Repair every issue found by the user-launched independent reviewer and
   obtain the required post-fix `GO`.
