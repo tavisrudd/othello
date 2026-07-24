@@ -273,6 +273,135 @@ contained bad scheme at redundancy \(j\) has no component outside
 statement and contains no field-size threshold.
 \end{definition}
 
+\begin{theorem}[Stable-component classification]
+\label{thm:stable-component}
+The assertion \(\mathrm{SC}(j)\) holds for every \(j\geq6\).
+\end{theorem}
+
+\begin{proof}
+We give the integral component calculation.  Let
+\(\mathbf G=\operatorname{Gr}(2,\Gamma^3E)\) over
+\(\operatorname{Spec}\mathbf Z\), and write
+\[
+ (z_0,\ldots,z_5)=(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23}),
+ \qquad z_0z_5-z_1z_4+z_2z_3=0.
+\]
+After dividing the alternating evaluation determinant of a cubic
+pencil by the diagonal bracket, its ordered-root incidence is
+\begin{equation}\label{eq:stable-root-incidence}
+\begin{aligned}
+G_z(t,s)={}&z_0+z_1(t+s)+z_2(t^2+ts+s^2)+z_3ts\\
+            &+z_4ts(t+s)+z_5t^2s^2.
+\end{aligned}
+\end{equation}
+Its homogenization is intrinsic on
+\(\PP(E^\vee)\times\PP(E^\vee)\).  We retain the closed collision
+incidence before taking any residual; this is necessary in the
+nonflat fibres of characteristics two and three.
+
+Over an algebraically closed field, a reducible moving part of
+\(G_z\) either has a vertical or horizontal factor, hence a fixed-root
+or collision component, or splits into two \((1,1)\) factors.
+Symmetry under \(t\leftrightarrow s\) leaves two cases.  If both
+factors are symmetric,
+\[
+ L=a+b(t+s)+cts,\qquad M=A+B(t+s)+Cts,
+\]
+then substitution in the Pluecker relation gives
+\begin{equation}\label{eq:stable-symmetric-factors}
+ z_0z_5-z_1z_4+z_2z_3=(ac-b^2)(AC-B^2).
+\end{equation}
+One factor therefore has rank one and again yields a collision
+component.  If the factors are exchanged,
+\[
+ L=a+bt+cs+dts,\qquad G_z=L(t,s)L(s,t),
+\]
+then
+\begin{equation}\label{eq:stable-exchanged-factors}
+ z_0z_5-z_1z_4+z_2z_3
+ =(ad-bc)(ad-b^2+bc-c^2).
+\end{equation}
+The first factor gives the same rank-one alternative; the second is
+the cyclic branch.  Unique factorization makes
+\eqref{eq:stable-symmetric-factors}--\eqref{eq:stable-exchanged-factors}
+exhaustive, including repeated factors.
+
+It remains to identify and eliminate that branch without losing a
+vertical fibre.  For a bottom syndrome \(c=(c_0,\ldots,c_4)\), put
+\[
+ H_c=\begin{pmatrix}c_0&c_1&c_2&c_3\\
+                     c_1&c_2&c_3&c_4\end{pmatrix},
+ \qquad
+ D=\det\begin{pmatrix}
+c_0&c_1&c_2\\c_1&c_2&c_3\\c_2&c_3&c_4
+\end{pmatrix}.
+\]
+On the rank-two open, the six \(2\times2\) minors of \(H_c\) are the
+Pluecker coordinates in (20).  Let \(J\) be the pullback of the
+noncollision factor in (22), and let \(V=(V_1,\ldots,V_7)\) be the
+primitive cyclic projected-Veronese ideal.  Direct integral expansion
+gives
+\begin{equation}\label{eq:stable-integral-bridge}
+                  J\subset V,\qquad 3DV\subset J,
+\end{equation}
+and an integer standard-basis calculation shows that the factor \(3\)
+is minimal.  Thus
+\begin{equation}\label{eq:stable-saturation}
+ \begin{aligned}
+ (J:D^\infty)=(V:D^\infty)\quad\hbox{over }\mathbf Z[1/3],
+ \qquad
+ (J:D^\infty)=V\quad\hbox{over }\mathbf Z[1/6].
+\end{aligned}
+\end{equation}
+The explicit \(6\times7\) coefficient matrix certifying (23) is
+included in Certificate SC of the supplement.
+
+The coherent-Fano pullback of \(V\) has no residual component.
+Indeed, for a pointed lower syndrome \(d=(d_0,\ldots,d_5)\), substitute
+\(c_i=xd_i+yd_{i+1}\) into the seven generators and let
+\(\mathfrak F\) be the ideal of their coefficients in \(x,y\).
+If \(H_1,\ldots,H_4\) are the maximal minors, in column order, of the
+consecutive \(3\times4\) Hankel matrix of \(d\), coefficient expansion
+gives
+\begin{equation}\label{eq:stable-fano-certificate}
+\begin{aligned}
+6H_1&=-3F_{4,0}-2F_{5,1}+F_{6,2}-6F_{7,3},\\
+6H_2&=-6F_{3,0}+9F_{4,1}+6F_{5,2}-3F_{6,3},\\
+6H_3&=-3F_{2,0}+6F_{3,1}-9F_{4,2}-6F_{5,3},\\
+6H_4&=-6F_{1,0}+F_{2,1}-2F_{3,2}+3F_{4,3}.
+\end{aligned}
+\end{equation}
+Here \(F_{i,k}\) is the coefficient of \(x^{3-k}y^k\) in
+\(V_i(c(x,y))\).  Hence over \(\mathbf Z[1/6]\) the cyclic Fano locus is
+contained in the persistent Hankel locus.
+
+The two vertical fibres close separately.  In characteristic two the
+pullback of the Pluecker cyclic ideal has the true cyclic plane
+\((c_0,c_4)\) and a second component contained in \(D=0\).  The former
+pulls back coherently to the declared nucleus plus a persistent
+component.  The inseparable ordered-Hessian chart adds only the
+persistent Veronese, the two tangent-quadric rulings, and collision;
+under the consecutive-Hankel constraint these are persistent, Lucas,
+rank one, or collision.  In characteristic three the actual wild
+closure is the join of the cubic nucleus with the quartic normal
+rational curve.  Its contained lines are rulings, and the
+consecutive-Hankel equations put every ruling in the rank or
+fixed-factor boundary.  Thus no cyclic or wild residual remains in
+any characteristic.
+
+Finally, old-marker contraction only substitutes integral linear
+forms for the \(c_i\) in
+\eqref{eq:stable-integral-bridge}--\eqref{eq:stable-fano-certificate};
+it does not change the component ledger.
+Proposition~\ref{prop:contained-rank-two} accounts for the
+persistent and Lucas pullbacks, Lemma~\ref{lem:uniform-collision}
+accounts for collision, and an identically fixed marker lies in the
+gcd/rank boundary.  The displayed factorization, bridge, and Fano
+identities exhaust and eliminate every remaining branch.  Hence every
+contained polar line belongs to
+\(\mathcal P_j\cup\mathcal M_j\) for all \(j\geq6\).
+\end{proof}
+
 The rank-one boundary, ordinary rank-two component, collision
 alternative, and modular pullback are uniform by
 Proposition~\ref{prop:contained-rank-two} and
@@ -281,9 +410,8 @@ Lemmas~\ref{lem:uniform-collision} and
 possibilities are exactly the characteristic-three R5 case and the
 characteristic-two R6 case treated in
 Propositions~\ref{prop:r5-bridge} and \ref{prop:r6-degrees}.
-Thus, after those two base cases, \(\mathrm{SC}(j)\) is the remaining
-content of \(\mathrm{CC}(j-1,1;\mathcal P_j\cup\mathcal M_j)\).
-Section~\ref{sec:r67} proves it at redundancies six and seven.
+Thus, after those two base cases, Theorem~\ref{thm:stable-component}
+identifies the complete contained list at every level.
 
 \begin{theorem}[One-step polar escape]\label{thm:induction}
 Let \(f\in S_n(\F_q)\) have a one-step lower package as in
@@ -338,8 +466,7 @@ point is included instead in the deletion degree.
 
 \begin{theorem}[Uniform transverse threshold]
 \label{thm:uniform-transverse}
-Fix a redundancy \(r\geq6\).  At every intermediate redundancy
-\(6\leq j\leq r\), assume \(\mathrm{SC}(j)\).  If
+Fix a redundancy \(r\geq6\).  If
 \[
  q\geq Q_r:=
  6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor ,
@@ -396,11 +523,11 @@ the first prime powers meeting them are \(23,29,37\).  Thus the former
 threshold table consisted of three evaluations of one formula with
 \(Q_r=6r+O(\sqrt r)\).  The same calculation recovers the verified
 R6 and R7 parameter bounds \(13\) and \(16\).  In general the
-parameter line is nonbinding; the arbitrary-redundancy obstruction is
-the stable-component assertion.
+parameter line is nonbinding; Theorem~\ref{thm:stable-component}
+supplies the component assertion uniformly.
 Propositions~\ref{prop:r6-contained} and
 Corollary~\ref{cor:r7-contained} discharge the required assertions at
-redundancies six and seven.
+redundancies six and seven independently.
 
 \subsection{Contained-component calculations}
 

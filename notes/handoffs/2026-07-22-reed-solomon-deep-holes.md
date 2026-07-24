@@ -75,21 +75,20 @@ and the final missing cross-reference at
 pointed-collision exclusions.  The exact repair and mystery ledger are in
 `notes/2026-07-24-c545-r7-two-step-review-repair.md`.  External
 certificate/replay packaging remains separately owned.  The development monorepo is not published; any
-eventual release is a reviewed paper-only fresh-history export.  C545's
-next referee pass promotes the already uniform transverse argument:
-conditional on the stable-component assertions `SC(j)` for
-`6<=j<=r`,
-every split-free redundancy-`r` syndrome above
-`6r-15+floor(2 sqrt(6r-17))` lies in the declared persistent/modular
-list.  The second specialist graded the paper A (93) overall.  Its final
+eventual release is a reviewed paper-only fresh-history export.  C545 now
+prints C597's proof that `SC(j)` holds for every `j>=6`, including the
+integral Grassmannian factorization, minimal-three bridge, combined
+denominator-six coherent-Fano identities, and separate binary/ternary
+fibres.  Thus every split-free redundancy-`r` syndrome above
+`6r-15+floor(2 sqrt(6r-17))` lies unconditionally in the declared
+persistent/modular list; the covering-radius premise remains separate.
+The second specialist graded the paper A (93) overall.  Its final
 structural pass proves collision separability outside exactly
 `(j,p)=(5,3),(6,2)`, proves that transverse modular pullbacks have
 degree at most one, and restores the uniform sharp parameter bound
-`3r-5`.  Thus `SC(j)`---no additional contained component---is the
-only arbitrary-level hypothesis.  It has no field threshold, so the
-conditional theorem is not circular.  The verified R6/R7 budgets and
+`3r-5`.  The verified R6/R7 budgets and
 headlines are unchanged.  Its large-characteristic corollary says that,
-when `char(F_q)>r-1`, `SC(6),...,SC(r)` and the threshold leave exactly
+when `char(F_q)>r-1`, the threshold leaves exactly
 the persistent tangent/conjugate-secant list.
 The repeated R6/R7 marker-equals-fixed-root minors are replaced by one
 marker--ramification lemma.  The recurrence interpretation and exact
@@ -177,12 +176,13 @@ C525/C595, so the combined integer remains \(6\).  The binary and ternary
 fibres are exactly C525's
 ordered-Hessian persistent/Lucas locus and C595's wild rank/fixed-factor
 locus.  Therefore \(\mathrm{SC}(j)\) holds for every \(j\geq6\), with
-uniform \(N_j=6\).  The printed uniform transverse theorem is now
+uniform \(N_j=6\).  The printed uniform transverse theorem is
 unconditional: above
 \(6r-15+\lfloor2\sqrt{6r-17}\rfloor\), every split-free
-redundancy-\(r\) syndrome is persistent or modular.  Paper promotion
-remains gated on a claim-specific literature audit, independent specialist
-review, and explicit reopening of C545.
+redundancy-\(r\) syndrome is persistent or modular.  C597 is integrated
+into C545 under the reopened scope as public Certificate SC; the canonical
+and IEEE review builds are 30/23 pages and the local 66-artifact evidence
+gate passes.
 C500's redundancy-five-only paper plan is superseded by C538's broader merger.
 C498 now closes the all-field redundancy-six
 classification, including intrinsic small exceptional semilinear normal forms;

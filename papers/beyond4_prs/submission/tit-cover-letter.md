@@ -12,14 +12,18 @@ five over every prime power and gives exact projective counts.  Its second
 principal contribution is coherent polar induction, a marked contraction
 method that preserves the squarefree-lifting datum lost by ordinary
 contraction.  This gives all-field syndrome classifications at redundancies
-six and seven and explicit high-field classifications at redundancies eight
-and nine, while keeping every covering-radius boundary separate.
+six and seven.  Its third principal contribution is an integral
+stable-component theorem: at every redundancy, the recursively pointed bad
+scheme has no component outside the persistent and modular loci.  Combined
+with coherent polar induction, this confines every split-free
+redundancy-\(r\) syndrome to those loci above an explicit linear-scale field
+threshold, while keeping every covering-radius boundary separate.
 
 We believe the manuscript fits the Transactions because its main conclusions
 are coding-theoretic classifications and its geometric method supplies a new
 mechanism for analyzing higher-redundancy projective Reed--Solomon codes.  The
-paper also identifies the exact characteristic-two modular carriers that
-prevent a persistent-family-only statement.
+paper also identifies why characteristic-dependent modular carriers prevent
+a persistent-family-only statement.
 
 The conceptual arguments are accompanied by an electronic supplement with
 canonical finite-field records, deterministic replays, checksums, and a

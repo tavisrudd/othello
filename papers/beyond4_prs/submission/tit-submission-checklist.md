@@ -7,7 +7,7 @@ instructions on 2026-07-24.
 
 - [x] Regular-paper topic is within coding theory and information theory.
 - [x] IEEEtran single-column review build exists.
-- [x] Submission build is 22 pages, below the 50-page limit.
+- [x] Submission build is 23 pages, below the 50-page limit.
 - [x] Abstract is one paragraph, self-contained, and below 250 words.
 - [x] Abstract contains no unexplained abbreviation, citation, display, or
   table.

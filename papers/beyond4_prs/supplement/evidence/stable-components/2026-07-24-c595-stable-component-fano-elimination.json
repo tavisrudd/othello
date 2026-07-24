@@ -1,0 +1,195 @@
+{
+  "cleared_denominator_certificate": {
+    "consequence": "After saturation by the lower persistent Hankel ideal, the cyclic Fano residual is empty over Z[1/6].",
+    "identity": "6*H[j] = sum_i lift[j][i]*F[i]",
+    "integer_N": 6,
+    "lift_by_minor_zero_based": [
+      [
+        [
+          12,
+          -3
+        ],
+        [
+          17,
+          -2
+        ],
+        [
+          22,
+          1
+        ],
+        [
+          27,
+          -6
+        ]
+      ],
+      [
+        [
+          8,
+          -6
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          23,
+          -3
+        ]
+      ],
+      [
+        [
+          4,
+          -3
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          14,
+          -9
+        ],
+        [
+          19,
+          -6
+        ]
+      ],
+      [
+        [
+          0,
+          -6
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          10,
+          -2
+        ],
+        [
+          15,
+          3
+        ]
+      ]
+    ],
+    "minimal_common_integer": true,
+    "minimality_controls": {
+      "1": {
+        "outside_span_mod_2": true,
+        "outside_span_mod_3": true
+      },
+      "2": {
+        "outside_span_mod_2": true,
+        "outside_span_mod_3": false
+      },
+      "3": {
+        "outside_span_mod_2": true,
+        "outside_span_mod_3": false
+      },
+      "4": {
+        "outside_span_mod_2": true,
+        "outside_span_mod_3": true
+      }
+    }
+  },
+  "first_unresolved_application": {
+    "contracted_coordinates": "d_i=a_(i+5)-s1*a_(i+4)+s2*a_(i+3)-s3*a_(i+2)+s4*a_(i+1)-s5*a_i",
+    "cyclic_residual": "empty after declared saturation on D(6)",
+    "old_marker_count": 5,
+    "redundancy": 11,
+    "remaining_obstruction": "No integral generator ideal is available for the non-cyclic positive-moduli R10 lower carrier, so full SC(11) cannot yet be saturated or certified."
+  },
+  "integral_model": {
+    "carrier_generator_count": 7,
+    "coordinate_order": [
+      "x",
+      "y",
+      "d0",
+      "d1",
+      "d2",
+      "d3",
+      "d4",
+      "d5"
+    ],
+    "persistent_hankel_minors": [
+      "1*d0*d2*d4-1*d0*d3^2-1*d1^2*d4+2*d1*d2*d3-1*d2^3",
+      "1*d0*d2*d5-1*d0*d3*d4-1*d1^2*d5+1*d1*d2*d4+1*d1*d3^2-1*d2^2*d3",
+      "1*d0*d3*d5-1*d0*d4^2-1*d1*d2*d5+1*d1*d3*d4+1*d2^2*d4-1*d2*d3^2",
+      "1*d1*d3*d5-1*d1*d4^2-1*d2^2*d5+2*d2*d3*d4-1*d3^3"
+    ],
+    "polar_coefficient_count": 28,
+    "polar_coefficients": [
+      "1*d1*d4^2-3*d2*d3*d4+2*d3^3",
+      "2*d1*d4*d5-3*d2*d3*d5-2*d2*d4^2+3*d3^2*d4",
+      "1*d1*d5^2-1*d2*d4*d5-3*d3^2*d5+3*d3*d4^2",
+      "1*d2*d5^2-3*d3*d4*d5+2*d4^3",
+      "1*d0*d4^2+2*d1*d3*d4-9*d2^2*d4+6*d2*d3^2",
+      "2*d0*d4*d5+2*d1*d3*d5+3*d1*d4^2-9*d2^2*d5-4*d2*d3*d4+6*d3^3",
+      "1*d0*d5^2+4*d1*d4*d5-16*d2*d3*d5+8*d2*d4^2+3*d3^2*d4",
+      "1*d1*d5^2+2*d2*d4*d5-9*d3^2*d5+6*d3*d4^2",
+      "1*d0*d3*d4-3*d1*d2*d4+2*d1*d3^2",
+      "1*d0*d3*d5+1*d0*d4^2-3*d1*d2*d5+2*d1*d3*d4-3*d2^2*d4+2*d2*d3^2",
+      "1*d0*d4*d5-2*d1*d3*d5+3*d1*d4^2-3*d2^2*d5+1*d2*d3*d4",
+      "1*d1*d4*d5-3*d2*d3*d5+2*d2*d4^2",
+      "1*d0*d3^2-1*d1^2*d4",
+      "2*d0*d3*d4-1*d1^2*d5-2*d1*d2*d4+1*d1*d3^2",
+      "1*d0*d4^2-2*d1*d2*d5+2*d1*d3*d4-1*d2^2*d4",
+      "1*d1*d4^2-1*d2^2*d5",
+      "1*d0*d1*d4-3*d0*d2*d3+2*d1^2*d3",
+      "1*d0*d1*d5-2*d0*d2*d4-3*d0*d3^2+3*d1^2*d4+1*d1*d2*d3",
+      "1*d0*d2*d5-3*d0*d3*d4+1*d1^2*d5+2*d1*d2*d4-3*d1*d3^2+2*d2^2*d3",
+      "1*d1*d2*d5-3*d1*d3*d4+2*d2^2*d4",
+      "1*d0^2*d4+2*d0*d1*d3-9*d0*d2^2+6*d1^2*d2",
+      "1*d0^2*d5+4*d0*d1*d4-16*d0*d2*d3+8*d1^2*d3+3*d1*d2^2",
+      "2*d0*d1*d5+2*d0*d2*d4-9*d0*d3^2+3*d1^2*d4-4*d1*d2*d3+6*d2^3",
+      "1*d1^2*d5+2*d1*d2*d4-9*d1*d3^2+6*d2^2*d3",
+      "1*d0^2*d3-3*d0*d1*d2+2*d1^3",
+      "1*d0^2*d4-1*d0*d1*d3-3*d0*d2^2+3*d1^2*d2",
+      "2*d0*d1*d4-3*d0*d2*d3-2*d1^2*d3+3*d1*d2^2",
+      "1*d1^2*d4-3*d1*d2*d3+2*d2^3"
+    ]
+  },
+  "regression": {
+    "R6": {
+      "characteristic_2": "the true cyclic plane pulls back to (d0,d1,d4,d5), the declared nucleus line",
+      "characteristic_3": "the wild-cone Fano locus is contained in the rank/fixed-factor boundary",
+      "generic_residual": "empty after persistent saturation",
+      "infinity": "both x^3 and y^3 endpoint coefficients are retained"
+    },
+    "R7": {
+      "characteristic_2": "the lower nucleus line pulls back to the central point e3",
+      "persistent": "J_6=I_6 integrally",
+      "residual": "none"
+    }
+  },
+  "schema": "c595-stable-component-fano-elimination-v1",
+  "small_characteristic_controls": {
+    "2": {
+      "cyclic_points_outside_persistent_or_modular": 0,
+      "modular_points_in_cyclic_fano": 3,
+      "projective_cyclic_fano_points": 12,
+      "projective_persistent_points": 15
+    },
+    "3": {
+      "cyclic_points_outside_persistent_or_modular": 0,
+      "modular_points_in_cyclic_fano": 0,
+      "projective_cyclic_fano_points": 4,
+      "projective_persistent_points": 40
+    },
+    "5": {
+      "cyclic_points_outside_persistent_or_modular": 0,
+      "modular_points_in_cyclic_fano": 0,
+      "projective_cyclic_fano_points": 6,
+      "projective_persistent_points": 156
+    }
+  },
+  "trusted_boundary": {
+    "python": "reconstructs all integral polynomials, checks the Z identities, and exhausts projective F_p points for p=2,3,5",
+    "singular": "checks characteristic-zero and small-characteristic minimal primes and the exact R6/R7 ideal equalities"
+  }
+}
