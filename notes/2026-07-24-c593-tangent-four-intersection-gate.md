@@ -98,6 +98,64 @@ has exact weight \(k(q+2-k)\).  This supplies a precise code-classification
 target; it is not yet an obstruction, since existing hull weight ranges must
 be checked at the target scale \(k\asymp\sqrt{2q}\).
 
+## Transversal-design sharpening
+
+Put \(h=q+2-k\).  The tangent set splits into \(k\) groups
+\[
+ \mathcal T_a=\mathcal T_A\cap a^*,\qquad |\mathcal T_a|=h
+ \quad(a\in A).
+\]
+A dual line not among the \(a^*\) contains at most one point of each group.
+At zero defect, every line through points of two different groups is therefore
+either a full \(k\)-transversal or a \((k-2)\)-transversal missing exactly the
+two contacts joined by its unique primal secant.  For each missing pair there
+are
+\[
+ d=\begin{cases}h,&k\text{ even},\\h-1,&k\text{ odd}\end{cases}
+\]
+such partial transversals.  Counting pairs between any two fixed groups gives
+the number \(F\) of full transversals:
+\[
+ F=h^2-\binom{k-2}{2}d.
+\]
+All full transversals are dual to index-zero points of the prescribed conic,
+so they belong to its distinguished dual-conic line family.  This is more
+structured than an abstract four-character set: it is an embedded
+group-divisible transversal design with prescribed missing pairs.
+
+The closest classical bridge would be a resolution of the C554 maximum-
+matching focus family.  Such a resolution selects \(k-1\) pairwise
+edge-disjoint matching blocks covering \(K_k\), hence makes \(A\) a
+generalized hyperfocused arc in the standard sense.  Regularity alone does not
+prove that a resolution exists.
+
+As a bounded falsifier, both certified abstract \(\operatorname{MATCH}(10,5,1)\)
+classes from C574 do contain a resolution.  The deterministic certificate
+selects and directly verifies nine disjoint blocks in each of the two
+63-block designs.  Thus the resolution gate survives the two known ten-point
+classes; it does not distinguish the rank-three-realizable classical class
+from the field-uniformly impossible Mathon class.
+
+Replay from the repository root:
+
+```bash
+python3 notes/2026-07-24-c593-tangent-four-intersection-gate.py --check
+sha256sum -c notes/2026-07-24-c593-tangent-four-intersection-gate.sha256
+```
+
+The load-bearing input is the committed C574 JSON certificate (77,761 bytes,
+SHA-256
+`ce83bb36f5dcaf8161a8e28a26878e009e74e24c6393576b5b1bb3c0c938ec95`).
+The C593 generator is 3,811 bytes with SHA-256
+`346c2cf13e79c825764d00d414655f910cc4e7174a2bc4b666368b5653d554ee`;
+its canonical JSON output is 6,067 bytes with SHA-256
+`0b7809574ce719061d4d9753dda2c2b8beff9716532be1f2b9c2f46eeda9c407`.
+The checker trusts Python's JSON parser and integer/set operations.  Direct
+union of the nine selected matchings independently verifies that every one of
+the 45 edges occurs exactly once.  This finite existence result proves neither
+that every matching design is resolvable nor that a resolution is
+geometrically embedded.
+
 ## Acceptance gate
 
 1. Identify the closest primary-source classification theorems and verify
@@ -131,3 +189,4 @@ hypotheses have been checked against this tangent-derived set.
 | Does tangent contact impose more than the abstract spectrum? | Open; this is the likely source of any genuine carrier obstruction. |
 | Can exact rigidity improve the asymptotic lower bound by itself? | No: a quantitative stability gap for the displayed weighted distance is required. |
 | Does the binary hull identity hit a classified weight range? | Open: the relevant word has weight \(k(q+2-k)\asymp q^{3/2}\), so small-weight results may not reach it. |
+| Must the regular focus family contain a generalized-hyperfocused resolution? | Open in general; both certified \(k=10\) classes pass the bounded existence test, so resolution alone does not detect rank-three realizability. |
