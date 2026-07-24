@@ -198,7 +198,7 @@
         }
       ],
       "id": "statement-thm-headline-rigidity-phase",
-      "paper_location": "theorem at source line 252",
+      "paper_location": "theorem at source line 249",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-rigidity-phase",
@@ -633,7 +633,7 @@
         }
       ],
       "id": "statement-thm-headline-balanced",
-      "paper_location": "theorem at source line 274",
+      "paper_location": "theorem at source line 271",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-balanced",
@@ -1089,7 +1089,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression and recovery"
+          "subclaim": "six-profile compression"
         },
         {
           "cited_inputs": [
@@ -1099,7 +1099,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and recovery maps are kernel checked."
+          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
         },
         {
           "lean": {
@@ -1181,7 +1181,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression and recovery"
+          "subclaim": "six-profile compression"
         },
         {
           "cited_inputs": [
@@ -1191,7 +1191,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and recovery maps are kernel checked."
+          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
         },
         {
           "lean": {
@@ -1273,7 +1273,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression and recovery"
+          "subclaim": "singleton matching-row recovery"
         },
         {
           "cited_inputs": [
@@ -1283,7 +1283,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and recovery maps are kernel checked."
+          "unconditional_remainder": "The terminal recovers a frozen matching-table row only; no row-to-geometric-parent bridge is asserted."
         },
         {
           "cited_inputs": [
@@ -1297,12 +1297,12 @@
         }
       ],
       "id": "statement-thm-headline-depth",
-      "paper_location": "theorem at source line 288",
+      "paper_location": "theorem at source line 285",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-depth",
         "kind": "theorem-environment",
-        "sha256": "da3b439974dff0dd7bb3aee513f27e7c0bbd5760909c29649f6ce41171a05e77"
+        "sha256": "0331bde4b84148b9455276b64f0b774d6d04893d4dfb166a72914e2cddb2a977"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -1552,7 +1552,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression and recovery"
+          "subclaim": "six-profile compression"
         },
         {
           "cited_inputs": [
@@ -1562,7 +1562,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and recovery maps are kernel checked."
+          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
         }
       ],
       "id": "thm-headline-depth-clause-3",
@@ -1657,7 +1657,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression and recovery"
+          "subclaim": "six-profile compression"
         },
         {
           "cited_inputs": [
@@ -1667,7 +1667,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and recovery maps are kernel checked."
+          "unconditional_remainder": "The orbit arrays, ranks, and label separation are kernel checked."
         }
       ],
       "id": "thm-headline-depth-clause-4",
@@ -1762,7 +1762,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "six-profile compression and recovery"
+          "subclaim": "singleton matching-row recovery"
         },
         {
           "cited_inputs": [
@@ -1772,7 +1772,7 @@
           ],
           "route": "conceptual-cited-inputs",
           "subclaim": "double-coset group names",
-          "unconditional_remainder": "The orbit arrays, ranks, and recovery maps are kernel checked."
+          "unconditional_remainder": "The terminal recovers a frozen matching-table row only; no row-to-geometric-parent bridge is asserted."
         }
       ],
       "id": "thm-headline-depth-clause-5",
@@ -1780,8 +1780,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "eea6f45eb7c0a54553ec38acccae66c328531b119e0e80f97584453aec2b269b",
-        "tex": "The singleton profiles recover the unordered golden matching pair;\na choice of sheet and its singleton decoration recovers a Clebsch parent."
+        "sha256": "346eeaa1195a66c1ed3a38314a7929440cc3aef21f8afd8baf165e7c9c8f9265",
+        "tex": "The singleton profiles recover the unordered $H_3$ matching pair.\nA choice of sheet and its singleton decoration recovers the corresponding\nrow of the frozen matching table.  No geometric-parent identification\nis asserted."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -2175,7 +2175,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "rank-three arithmetic gluing"
+          "subclaim": "fixed-child table-row quotient"
         },
         {
           "computation": {
@@ -2200,10 +2200,10 @@
             "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
             "independent_replay": "Primary generators and separately written replay programs are both executed by verify.py.",
             "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
-            "soundness_bridge": "The bundle checks the exact matching orbits, determinant swaps, and fixed-child quotient."
+            "soundness_bridge": "The bundle checks the 22-row action and its two-point quotient."
           },
           "route": "exact-replay-certificate",
-          "subclaim": "finite gluing and fixed-child replay"
+          "subclaim": "finite fixed-child row replay"
         },
         {
           "cited_inputs": [
@@ -2212,17 +2212,17 @@
             "Classical Mathieu group names attached after literal finite closure"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "classical group and number-field semantics",
-          "unconditional_remainder": "The finite comparison maps are checked exactly."
+          "subclaim": "geometric-parent boundary",
+          "unconditional_remainder": "No equivalence between the table rows and geometric Clebsch parents is asserted."
         }
       ],
       "id": "statement-thm-headline-gluing",
-      "paper_location": "theorem at source line 313",
+      "paper_location": "theorem at source line 312",
       "route": "mixed",
       "source": {
         "claim_key": "thm:headline-gluing",
         "kind": "theorem-environment",
-        "sha256": "d35b96ba0ebfc9599d02efae87c16f54249ea0b0cd1aff6e034de8f7d221328b"
+        "sha256": "4601831954ce174f8a85ecf5f74adf4c472c39d21fe7f65df6b5b732711c234e"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -2625,7 +2625,7 @@
             }
           },
           "route": "full-trust-lean",
-          "subclaim": "rank-three arithmetic gluing"
+          "subclaim": "fixed-child table-row quotient"
         },
         {
           "computation": {
@@ -2650,10 +2650,10 @@
             "coverage": "All displayed finite fields, group elements, matching orbits, and matrices are exhausted; no sampling is used.",
             "independent_replay": "Primary generators and separately written replay programs are both executed by verify.py.",
             "residual_trust": "Exact Python integer and finite-field arithmetic plus the classical semantic identifications stated in the manuscript.",
-            "soundness_bridge": "The bundle checks the exact matching orbits, determinant swaps, and fixed-child quotient."
+            "soundness_bridge": "The bundle checks the 22-row action and its two-point quotient."
           },
           "route": "exact-replay-certificate",
-          "subclaim": "finite gluing and fixed-child replay"
+          "subclaim": "finite fixed-child row replay"
         },
         {
           "cited_inputs": [
@@ -2662,8 +2662,8 @@
             "Classical Mathieu group names attached after literal finite closure"
           ],
           "route": "conceptual-cited-inputs",
-          "subclaim": "classical group and number-field semantics",
-          "unconditional_remainder": "The finite comparison maps are checked exactly."
+          "subclaim": "geometric-parent boundary",
+          "unconditional_remainder": "No equivalence between the table rows and geometric Clebsch parents is asserted."
         }
       ],
       "id": "thm-headline-gluing-clause-3",
@@ -2671,8 +2671,8 @@
       "route": "mixed",
       "source": {
         "kind": "verbatim",
-        "sha256": "18c16719f5e2d64b8285c750ccbfd8b751680cca6341f4d1701a7598986d115d",
-        "tex": "The fixed conic child has a twenty-two-parent fibre whose intrinsic\ntwo-point quotient is the same free orientation torsor detected by the\nsheet character; choosing a point is exactly one bit of decoration."
+        "sha256": "f28dd588eea3830014019606676c09e2ff4286a2850ac18c47c01abb97835925",
+        "tex": "The fixed-child certificate has a twenty-two-row model whose\nintrinsic two-point quotient is the same free orientation torsor detected\nby the sheet character; choosing a point is exactly one bit of table-row\ndecoration.  No identification of the rows with geometric parents is\nasserted."
       },
       "trust_boundary": "This row routes one separately stated numbered subclaim."
     },
@@ -2683,7 +2683,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-prop-a5-point-orbits",
-      "paper_location": "proposition at source line 425",
+      "paper_location": "proposition at source line 443",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:a5-point-orbits",
@@ -2725,7 +2725,7 @@
         }
       ],
       "id": "statement-prop-deep-holes-conic",
-      "paper_location": "proposition at source line 495",
+      "paper_location": "proposition at source line 513",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-holes-conic",
@@ -2741,7 +2741,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-cor-named-variety",
-      "paper_location": "corollary at source line 530",
+      "paper_location": "corollary at source line 548",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "cor:named-variety",
@@ -2769,7 +2769,7 @@
               {
                 "path": "check_decoding.py",
                 "repository": "paper",
-                "sha256": "24f42397f4e2b7e32109d44fc2caeb6ec1991476c3bffc6143d61f8364305cb6"
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
               }
             ],
             "checker": "python3 check_decoding.py",
@@ -2783,7 +2783,7 @@
         }
       ],
       "id": "statement-prop-deep-hole-orbit",
-      "paper_location": "proposition at source line 567",
+      "paper_location": "proposition at source line 585",
       "route": "mixed",
       "source": {
         "claim_key": "prop:deep-hole-orbit",
@@ -2810,7 +2810,7 @@
               {
                 "path": "check_decoding.py",
                 "repository": "paper",
-                "sha256": "24f42397f4e2b7e32109d44fc2caeb6ec1991476c3bffc6143d61f8364305cb6"
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
               }
             ],
             "checker": "python3 check_decoding.py",
@@ -2824,7 +2824,7 @@
         }
       ],
       "id": "statement-prop-decoding-oracle",
-      "paper_location": "proposition at source line 615",
+      "paper_location": "proposition at source line 633",
       "route": "mixed",
       "source": {
         "claim_key": "prop:decoding-oracle",
@@ -2840,7 +2840,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-six-arc-line-bound",
-      "paper_location": "lemma at source line 702",
+      "paper_location": "lemma at source line 720",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:six-arc-line-bound",
@@ -2882,12 +2882,12 @@
         }
       ],
       "id": "statement-thm-rigidity",
-      "paper_location": "theorem at source line 737",
+      "paper_location": "theorem at source line 755",
       "route": "mixed",
       "source": {
         "claim_key": "thm:rigidity",
         "kind": "theorem-environment",
-        "sha256": "6506260324f3add3c5e21db312a8fde4501eb23d5f6a4be2779f373c65fd5922"
+        "sha256": "1baf96033b14a99413f702c22140ed8f4758ed61dad4a1b86be5263200f2c2b5"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -2907,7 +2907,7 @@
         "soundness_bridge": "The checker exhausts all normalized classes and exact evaluation ranks."
       },
       "id": "statement-prop-low-degree-rigidity",
-      "paper_location": "proposition at source line 805",
+      "paper_location": "proposition at source line 825",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "prop:low-degree-rigidity",
@@ -2923,7 +2923,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-corollary-aec192b0d5224cce",
-      "paper_location": "corollary at source line 830",
+      "paper_location": "corollary at source line 850",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "corollary:aec192b0d5224cce",
@@ -2954,7 +2954,7 @@
         "soundness_bridge": "The scripts exhaust all conics and all stated one-point perturbations."
       },
       "id": "statement-thm-gap",
-      "paper_location": "theorem at source line 879",
+      "paper_location": "theorem at source line 899",
       "route": "exact-replay-certificate",
       "source": {
         "claim_key": "thm:gap",
@@ -2981,7 +2981,7 @@
               {
                 "path": "check_decoding.py",
                 "repository": "paper",
-                "sha256": "24f42397f4e2b7e32109d44fc2caeb6ec1991476c3bffc6143d61f8364305cb6"
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
               }
             ],
             "checker": "python3 check_decoding.py",
@@ -2995,7 +2995,7 @@
         }
       ],
       "id": "statement-prop-brianchon-support",
-      "paper_location": "proposition at source line 1017",
+      "paper_location": "proposition at source line 1037",
       "route": "mixed",
       "source": {
         "claim_key": "prop:brianchon-support",
@@ -3022,7 +3022,7 @@
               {
                 "path": "check_decoding.py",
                 "repository": "paper",
-                "sha256": "24f42397f4e2b7e32109d44fc2caeb6ec1991476c3bffc6143d61f8364305cb6"
+                "sha256": "d0b2fa749e0025e9db43dd0433768d4c49a1681283675af25aeca1dd8c2c0cd8"
               }
             ],
             "checker": "python3 check_decoding.py",
@@ -3036,7 +3036,7 @@
         }
       ],
       "id": "statement-cor-decoder-brianchon",
-      "paper_location": "corollary at source line 1067",
+      "paper_location": "corollary at source line 1087",
       "route": "mixed",
       "source": {
         "claim_key": "cor:decoder-brianchon",
@@ -3082,7 +3082,7 @@
         }
       ],
       "id": "statement-prop-chirality",
-      "paper_location": "proposition at source line 1083",
+      "paper_location": "proposition at source line 1103",
       "route": "mixed",
       "source": {
         "claim_key": "prop:chirality",
@@ -3098,7 +3098,7 @@
         "Jurrius--Pellikaan 2015 Proposition 3.11 and Theorems 5.3, 5.7"
       ],
       "id": "statement-lem-chord-defect",
-      "paper_location": "lemma at source line 1132",
+      "paper_location": "lemma at source line 1152",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "lem:chord-defect",
@@ -3140,7 +3140,7 @@
         }
       ],
       "id": "statement-thm-why11",
-      "paper_location": "theorem at source line 1162",
+      "paper_location": "theorem at source line 1182",
       "route": "mixed",
       "source": {
         "claim_key": "thm:why11",
@@ -3181,7 +3181,7 @@
         }
       ],
       "id": "statement-prop-clebsch-family-uncovered",
-      "paper_location": "proposition at source line 1209",
+      "paper_location": "proposition at source line 1229",
       "route": "mixed",
       "source": {
         "claim_key": "prop:clebsch-family-uncovered",
@@ -3222,7 +3222,7 @@
         }
       ],
       "id": "statement-prop-h3-arrangement",
-      "paper_location": "proposition at source line 1279",
+      "paper_location": "proposition at source line 1299",
       "route": "mixed",
       "source": {
         "claim_key": "prop:h3-arrangement",
@@ -3263,7 +3263,7 @@
         }
       ],
       "id": "statement-thm-small-k-conic-filling",
-      "paper_location": "theorem at source line 1358",
+      "paper_location": "theorem at source line 1378",
       "route": "mixed",
       "source": {
         "claim_key": "thm:small-k-conic-filling",
@@ -3279,7 +3279,7 @@
         "Exact displayed Tate-cycle and divided-transfer matrix calculations"
       ],
       "id": "statement-prop-modular-depth-plane",
-      "paper_location": "proposition at source line 1567",
+      "paper_location": "proposition at source line 1614",
       "route": "conceptual-cited-inputs",
       "source": {
         "claim_key": "prop:modular-depth-plane",
@@ -3367,7 +3367,7 @@
         }
       ],
       "id": "statement-lem-rank-three-splitting",
-      "paper_location": "lemma at source line 1622",
+      "paper_location": "lemma at source line 1669",
       "route": "mixed",
       "source": {
         "claim_key": "lem:rank-three-splitting",
@@ -3430,7 +3430,7 @@
         }
       ],
       "id": "statement-prop-mod40-reciprocity",
-      "paper_location": "proposition at source line 1728",
+      "paper_location": "proposition at source line 1776",
       "route": "mixed",
       "source": {
         "claim_key": "prop:mod40-reciprocity",
@@ -3557,7 +3557,7 @@
         }
       ],
       "id": "statement-thm-four-sheet-holonomy",
-      "paper_location": "theorem at source line 1779",
+      "paper_location": "theorem at source line 1827",
       "route": "mixed",
       "source": {
         "claim_key": "thm:four-sheet-holonomy",
@@ -3796,7 +3796,7 @@
         }
       ],
       "id": "statement-lem-sign-torsor-no-section",
-      "paper_location": "lemma at source line 1896",
+      "paper_location": "lemma at source line 1944",
       "route": "mixed",
       "source": {
         "claim_key": "lem:sign-torsor-no-section",
@@ -4739,12 +4739,12 @@
         }
       ],
       "id": "statement-thm-torsor-rosetta-close",
-      "paper_location": "theorem at source line 1927",
+      "paper_location": "theorem at source line 1975",
       "route": "mixed",
       "source": {
         "claim_key": "thm:torsor-rosetta-close",
         "kind": "theorem-environment",
-        "sha256": "69b93d89d87d63b619846167a919d542441746c36b5eae06cec3d57de72e5675"
+        "sha256": "8be4278175a8cfd92048052a96b99d51e55b0c4440ba5b0b68ee797f2fedd0a7"
       },
       "trust_boundary": "The route covers the exact extracted environment; numbered clauses are split below where present."
     },
@@ -5804,7 +5804,7 @@
           }
         }
       },
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "full-trust-lean",
       "source": {
         "kind": "verbatim",
@@ -5863,7 +5863,7 @@
           }
         }
       },
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "full-trust-lean",
       "source": {
         "kind": "verbatim",
@@ -5945,7 +5945,7 @@
           }
         }
       },
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "full-trust-lean",
       "source": {
         "kind": "verbatim",
@@ -5955,7 +5955,7 @@
       "trust_boundary": "The row is bounded to its displayed finite or conditional scope."
     },
     {
-      "id": "survival-depth-parent",
+      "id": "survival-depth-row",
       "lean": {
         "audit": {
           "path": "RelativeConicArcs/Gates/ClebschPaperTrust.lean",
@@ -6034,12 +6034,12 @@
           }
         }
       },
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "full-trust-lean",
       "source": {
         "kind": "verbatim",
-        "sha256": "aa4e95e190212a78b18dfc051bb7aae80e85734919394e34f103385a77818891",
-        "tex": "singleton depth profile&decorated parent&the six displayed"
+        "sha256": "3e8dad6812ca3c1700e27bc8a9fb6efc83d216b978bdc482df374408cb098bed",
+        "tex": "singleton depth profile&decorated matching row&the six displayed"
       },
       "trust_boundary": "The row is bounded to its displayed finite or conditional scope."
     },
@@ -6152,7 +6152,7 @@
         }
       ],
       "id": "survival-design-shadow",
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
@@ -6215,7 +6215,7 @@
         }
       ],
       "id": "survival-mod40",
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
@@ -6314,7 +6314,7 @@
         }
       ],
       "id": "survival-theta",
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
@@ -6413,7 +6413,7 @@
         }
       ],
       "id": "survival-quantum",
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
@@ -6522,7 +6522,7 @@
         }
       ],
       "id": "survival-fourier",
-      "paper_location": "survival and erasure ledger",
+      "paper_location": "retention and loss table",
       "route": "mixed",
       "source": {
         "kind": "verbatim",
@@ -6536,7 +6536,7 @@
     "commit": "43c403b23e7cb6b9d66dda01bb43a91bec9ea465",
     "url": "https://github.com/tavisrudd/finitegeom"
   },
-  "manuscript_sha256": "c74034e72389080c29a3300c0fd5f86abc9aa0e3e854c2aa45ed53bfa3a86568",
+  "manuscript_sha256": "4d1067754da20a4535b90601751a840f6ae7fb3443da02c3ae39e7419a006df8",
   "reproducibility_environment": {
     "flake": {
       "path": "flake.nix",

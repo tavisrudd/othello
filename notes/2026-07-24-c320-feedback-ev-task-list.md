@@ -72,3 +72,43 @@ The highest-value next sequence is:
 The rigidity paper is mathematically strong. Its principal submission risk comes from later
 machinery carrying more semantic and editorial weight than the prose and formal terminals
 currently support.
+
+## Scope triage without splitting the paper
+
+The user has retained the single-paper architecture. The following are therefore move-or-cut
+proposals, not automatic deletions:
+
+1. Keep the rank-three `A_3/B_3/H_3` theorem because it explains the exceptional fields, but give
+   it one uniform proof path and compress secondary orbit vocabulary.
+2. Keep the determinant-sign transport lemma in the body. Move any carrier in the twelve-row
+   dictionary that lacks a displayed action and semantic bridge to a verification appendix or
+   notes.
+3. Treat four-sheet holonomy as the first removal candidate if page pressure remains: it is a
+   certified retention boundary, not part of matching-row reconstruction.
+4. Move the relative-cubic Tate-plane appendix to the reconstruction sequel or notes unless the
+   revised body uses its non-identification essentially.
+5. Compress the theta, fixed-party quantum, Fourier, Witt--Hadamard, and Mathieu passages to a
+   short boundary table. Move their full statements and interpretive discussion to a companion
+   paper or reproducibility notes.
+
+## Natural carrier for the hidden code
+
+Retain the hidden-code plan, but do not carry it in conspicuous metaphorical prose. The natural
+carrier is the explicit matching-row appendix already needed to repair the independent-review
+blocker:
+
+- print the twenty-two matching rows and one valid representative pair for each;
+- state openly that the representative pairs are a fixed, non-canonical gauge with no invariant
+  meaning;
+- encode the first camera-ready track across the two eleven-row sheets as
+  `CONTRACROST` / `IPUNCTUSGEB`, yielding `CONTRACROSTIPUNCTUSGEB`;
+- let only those representative choices carry the payload, never invariant numbers, moments,
+  orbit sizes, theorem wording, or regenerated certificate data;
+- pin every chosen representative and verify both its mathematical validity and the decoded
+  payload; and
+- press the payload only after acceptance, with proactive editor disclosure and independent
+  removability, as required by the adopted red-team disposition.
+
+This makes the carrier do ordinary mathematical work: the same table exposes the finite recovery
+map that the referee requested. The paper needs no Hofstadter aside, ignition line, printed hash,
+or anomalous prose to advertise concealment.

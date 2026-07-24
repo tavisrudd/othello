@@ -167,6 +167,15 @@ def main() -> None:
 
     all_triples = {frozenset(triple) for triple in combinations(range(6), 3)}
     assert len(all_triples) == 20
+    example_syndrome = (1, 0, 0)
+    example_leader = (7, 4, 1, 0, 0, 0)
+    assert example_syndrome in leaders
+    assert distance[example_syndrome] == 3
+    assert example_leader in leaders[example_syndrome]
+    assert len(leaders[example_syndrome]) == 20
+    assert {
+        hamming_support(word) for word in leaders[example_syndrome]
+    } == all_triples
     for target, minimum in distance.items():
         supports = {hamming_support(word) for word in leaders[target]}
         assert len(supports) == len(leaders[target])

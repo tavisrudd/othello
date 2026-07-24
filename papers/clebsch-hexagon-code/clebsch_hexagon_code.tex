@@ -29,8 +29,8 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\A}{A_5}
 
-\title{Factorization memory in the Clebsch hexagon code:\\
-forgetting, cubic orientation, and parent reconstruction}
+\title{Deep-hole rigidity and factorization memory\\
+in the Clebsch hexagon code}
 \author{Tavis Rudd}
 \date{Working draft --- July 2026}
 
@@ -38,32 +38,27 @@ forgetting, cubic orientation, and parent reconstruction}
 \maketitle
 
 \begin{abstract}
-We study when the maximum-distance syndrome geometry of a projective MDS
-code remembers the projective system that produced it.  Among six-arcs of
-$\PG(2,11)$, conic containment of the projective deep-hole locus
-characterizes the Clebsch hexagon and recovers its $A_5$ stabilizer.  We
-place this rigidity theorem in the rank-three Coxeter family $A_3,B_3,H_3$:
-for Coxeter number $h$, the reflection-complement code has a common exact
-distance law, and at $q=h+1$ its support is the full rational conic.
+We characterize the exceptional non-GRS $[6,3,4]_{11}$ MDS code by the
+algebraic geometry of its maximum-distance syndromes.  Among all six-arcs
+of $\PG(2,11)$, containment of the projective deep-hole syndrome locus in
+a conic is equivalent to membership in the Clebsch class; the locus is
+then the twelve rational points of a nonsingular conic and the stabilizer
+is $A_5$.  A line bound, a chord-defect identity, and Dye's Brianchon
+theorem prove the geometric implication.  An exact census supplies the
+sharp numerical gap and the small-arc classification.
 
-The conic child nevertheless forgets how its points were paired into
-secants.  Differences of canonically scaled secant products are divisible
-by the conic equation and define quotient configurations of ranks
-$3,6,10$.  For $B_3$ and $H_3$, the two factorization sheets are the unique
-complementary halves with equal first and second moments.  Their signed
-moments vanish in degrees one and two, while the first surviving moment is
-cubic and realizes the outer orientation character.  In the $H_3$ case,
-$A_4\backslash\mathrm{PGL}_2(11)/A_5$ yields six depth profiles of sizes
-$1,4,6/1,4,6$; the singleton profiles recover the matching and, with its
-decoration, the Clebsch parent.
+Passing to the conic code forgets the pairing of its points into secants.
+We recover finite matching data by dividing differences of canonically
+scaled secant products by the conic equation.  The resulting quotient
+configurations have ranks $3,6,10$ in the rank-three Coxeter cases
+$A_3,B_3,H_3$.  In the $B_3$ and $H_3$ cases, moment conditions recover
+two complementary factorization sheets up to interchange, a signed cubic
+orients them, and six explicit $H_3$ incidence profiles recover the
+corresponding matching-table row.
 
-We finally determine which natural passages retain this orientation and
-which erase it.  Cross-sheet designs yield certified quadratic-residue and
-perfect-code shadows, and golden reduction obeys an exact visible/fused law
-modulo $40$, whereas finite theta signatures and fixed-party quantum
-equivalence do not distinguish the sheets.  The structural statements are
-Lean-formalized at their stated boundaries, and the finite claims have
-deterministic certificates and independent replay.
+The conceptual arguments are separated from exact finite computations.
+The latter have deterministic certificates and independent replay; the
+stated formal boundaries are checked in Lean.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Clebsch hexagon; MDS code; deep hole; finite
@@ -149,8 +144,10 @@ The lost data reappears in the conic ideal: differences of matching-secant
 products, divided by the conic equation, form a finite quotient
 configuration.  Its first two moments recover the unique unordered pair of
 factorization sheets, its signed cubic orients that pair, and a six-profile
-double-coset compression recovers a decorated parent from either singleton
-profile.  Here \emph{orientation} means a choice in a two-element
+double-coset compression recovers the corresponding decorated matching row
+from either singleton profile.  The further identification of such a row
+with a geometric Clebsch parent is not part of this theorem.  Here
+\emph{orientation} means a choice in a two-element
 $C_2$-torsor of sheets.  It is distinct from the intrinsic unordered
 support bipartition recovered by decoder ambiguity, and has no implied
 quantum-information or chiral-polytope meaning.
@@ -201,7 +198,7 @@ Further paper-specific additions are the explicit $\mathrm{PGL}_3(\F_{11})$
 bridge from the reduced $H_3$ fivefold points to the displayed code, its
 specialization to this code's decoder strata, the joint $A_3/B_3/H_3$
 conic phase, and the composition of conic-ideal division, balanced
-recovery, cubic orientation, depth compression, and parent reconstruction.
+recovery, cubic orientation, depth compression, and matching-row recovery.
 Raw one-factorizations, the $5,14,22$ marker fibres, matching-design
 interpretations, and coarse Hadamard orbitals are classical inputs.
 
@@ -228,7 +225,7 @@ code, with no preferred pairing, parent, or orientation.  Figure
 \node[box,right=9mm of q] (s) {unordered\\$11+11$ sheets};
 \node[box,below=10mm of s] (o) {oriented\\sheet};
 \node[box,left=9mm of o] (d) {six profiles\\$1,4,6/1,4,6$};
-\node[box,left=9mm of d] (r) {decorated\\parent};
+\node[box,left=9mm of d] (r) {decorated\\matching row};
 \draw[->] (p) -- node[edge label,above=6mm]{forgets} (c);
 \draw[->] (c) -- node[edge label,above=6mm]{divide by $Q$} (q);
 \draw[->] (q) -- node[edge label,above=6mm]{moments $1,2$} (s);
@@ -236,10 +233,10 @@ code, with no preferred pairing, parent, or orientation.  Figure
 \draw[->] (o) -- node[edge label,above=6mm]{depth map} (d);
 \draw[->] (d) -- node[edge label,above=6mm]{singleton} (r);
 \end{tikzpicture}
-\caption{The reconstruction arc.  The arrows are respectively a forgetting
+\caption{The matching-data recovery arc.  The arrows are respectively a forgetting
 map, an ideal-quotient construction, intrinsic recovery of an unordered
-partition, a torsor orientation, a profile map, and decorated
-reconstruction; they are not all linear quotients.}
+partition, a torsor orientation, a profile map, and decorated table-row
+recovery; they are not all linear quotients.}
 \label{fig:reconstruction-arc}
 \end{figure}
 
@@ -300,8 +297,10 @@ sizes $1,4,6$, with profiles
 $v_1,v_4,v_6,-v_1,-v_4,-v_6$.
 \item The profile map has rank two and four-dimensional linear kernel,
 while separating all six labels as a set.
-\item The singleton profiles recover the unordered golden matching pair;
-a choice of sheet and its singleton decoration recovers a Clebsch parent.
+\item The singleton profiles recover the unordered $H_3$ matching pair.
+A choice of sheet and its singleton decoration recovers the corresponding
+row of the frozen matching table.  No geometric-parent identification
+is asserted.
 \item In characteristic eleven the depth plane is
 $P(1)^{A_4}/\operatorname{soc}P(1)$, where the projective cover $P(1)$
 has Loewy dimensions $1\mid9\mid1$.  The three positive profile rays
@@ -318,9 +317,11 @@ two silver and two golden sheets, respectively.
 \item In the $H_3$ case the two displayed $A_5$ stabilizers meet in
 $A_4$, generate $\mathrm{PSL}_2(11)$, and are exchanged by an outer
 projectivity carried by the rational $S_4/A_4$ hinge.
-\item The fixed conic child has a twenty-two-parent fibre whose intrinsic
-two-point quotient is the same free orientation torsor detected by the
-sheet character; choosing a point is exactly one bit of decoration.
+\item The fixed-child certificate has a twenty-two-row model whose
+intrinsic two-point quotient is the same free orientation torsor detected
+by the sheet character; choosing a point is exactly one bit of table-row
+decoration.  No identification of the rows with geometric parents is
+asserted.
 \end{enumerate}
 \end{theorem}
 
@@ -341,13 +342,11 @@ hypotheses used by these arguments.  They are supporting certificates; the
 preceding structures explain the headline theorems.
 
 \paragraph{Independence and extension.}
-The unlabelled child admits no equivariant selector of a parent, whereas a
-marked matching supplies exactly the one bit needed to make the selection.
-In Hofstadter's terms~\cite[``Contracrostipunctus'']{Hofstadter1979}, the
-unlabelled child is a record that no equivariant record player can play:
-decorations are styli, and the lattice $22\to6\to2\to1$ lets different
-styli play different tracks.  This is independence from the unlabelled
-theory and decidability in a one-bit extension, not undecidability.
+The unlabelled child admits no equivariant selector of a matching row,
+whereas a marked matching supplies the one bit needed to choose between
+the two sheets.  Thus the obstruction is the absence of an equivariant
+section, and the marked extension resolves exactly that two-valued
+ambiguity.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -401,8 +400,16 @@ associated redundancy-three code has covering radius three.
 \section{The code and its projective syndrome locus}
 \label{sec:code}
 
-Form the $3\times6$ matrix $H$ whose columns are (representatives of) the
-six points of $A$, and let
+Take the parity-check matrix
+\[
+ H=
+ \begin{pmatrix}
+  1&1&1&1&0&1\\
+ 10&9&4&8&1&1\\
+  0&1&7&5&4&7
+ \end{pmatrix},
+\]
+whose columns are the six displayed points of $A$, and let
 \[
  C=\{c\in\F_{11}^6:Hc^{\mathsf T}=0\}
 \]
@@ -419,6 +426,17 @@ hypothesis~\cite[Def.~6.1, Thm.~6.3]{DMP2021}. Each uncovered direction
 $x$ lifts to $q-1$ weight-three cosets, and each has
 $\binom{6}{3}=20$ minimum-weight leaders. Geometrically, the same condition says
 that adjoining $x$ as a seventh column preserves the MDS property.
+
+For example, $s=(1,0,0)$ lies on $\cC$ and is therefore uncovered.
+The error
+\[
+ e=(7,4,1,0,0,0)
+\]
+satisfies $He^{\mathsf T}=s$.  No error of weight one or two has syndrome
+$s$, while the twenty triples of coordinate positions each support one
+weight-three leader.  Thus this single syndrome exhibits the complete
+dictionary: its projective direction is a conic point, its coset has
+distance three, and its nearest-codeword ambiguity has size twenty.
 
 The stabilizer already forces the small point sets that will occur.
 
@@ -742,7 +760,8 @@ For a six-arc $A\subset\PG(2,11)$, the following are equivalent:
 degenerate);
 \item $\cU(A)$ is exactly the set of $\F_{11}$-points of a nonsingular
 conic;
-\item $|\cU(A)|\le15$ (in fact, $|\cU(A)|=12$);
+\item $|\cU(A)|\le15$;
+\item $|\cU(A)|=12$;
 \item $A$ is $\mathrm{PGL}(3,11)$-equivalent to the Clebsch hexagon;
 \item the stabilizer of $A$ in $\mathrm{PGL}(3,11)$ contains $A_5$.
 \end{enumerate}
@@ -766,9 +785,9 @@ hexagon has at most ten Brianchon points and that the equality cases form a
 single $\mathrm{PGL}_3(K)$-orbit~\cite[\S2.2--2.3, Theorem~1,
 pp.~275--276]{Dye1991}. Hence $c(A)\le10$, so $|\cU(A)|\ge12$; equality
 holds throughout, $c(A)=10$, and $A$ is a Clebsch hexagon. This proves
-(i)$\Rightarrow$(iv). Proposition~\ref{prop:deep-holes-conic} and
-projective equivariance give (iv)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
-stabilizer theorem gives (iv)$\Rightarrow$(v), and Storme and
+(i)$\Rightarrow$(v). Proposition~\ref{prop:deep-holes-conic} and
+projective equivariance give (v)$\Rightarrow$(ii)$\Rightarrow$(i). Dye's
+stabilizer theorem gives (v)$\Rightarrow$(vi), and Storme and
 Van~Maldeghem's finite-plane classification gives the converse.
 
 It remains only to connect the numerical condition (iii). Any ordered four
@@ -794,7 +813,8 @@ multiplicities are
 \]
 The six representatives attaining $12$ form the single Clebsch class;
 every other class has at least $16$ extension points. Thus
-(iii)$\Leftrightarrow$(iv), completing the equivalence. The exhaustive
+(iii)$\Leftrightarrow$(v), while (iv) is the exact value in that class.
+This completes the equivalence. The exhaustive
 calculation is therefore used for the size-gap clause, not for the conic
 containment implication.
 \end{proof}
@@ -842,7 +862,7 @@ to the Clebsch hexagon. A projectivity between two unordered parity-check
 column sets lifts, after choosing column representatives, to a row operation
 together with a coordinate permutation and nonzero coordinate scalings;
 these are exactly a monomial code equivalence. The converse is immediate,
-and the stabilizer statement is clause~(v) of the theorem.
+and the stabilizer statement is clause~(vi) of the theorem.
 \end{proof}
 
 \begin{remark}[Sharpness of the degree threshold]
@@ -1431,7 +1451,7 @@ so that
 For four endpoints, the Pl\"ucker relation gives the polynomial identity
 \[
  L_{ab}L_{cd}-L_{ac}L_{bd}
-   =[a,d][b,c]\,Q.                                      \tag{9.1}
+   =[a,d][b,c]\,Q.                                      \tag{8.1}
 \]
 Thus a switch of two matching edges changes the secant product by a
 multiple of $Q$.  Iterating switches proves equality of the restrictions
@@ -1453,19 +1473,19 @@ reduction of the three displayed Coxeter matching orbits gives
  &A_3&B_3&H_3\\ \hline
 \text{matching-orbit size}&5&14&22\\
 \operatorname{rank}\langle\Phi(M)-\Phi(N)\rangle&3&6&10.
-\end{array}                                             \tag{9.2}
+\end{array}                                             \tag{8.2}
 \]
 The symbolic conic Laplacian decomposes the degree-$1,2,4$ homogeneous
-pieces into harmonic and radial parts at the stated characteristics; (9.1)
+pieces into harmonic and radial parts at the stated characteristics; (8.1)
 is the bridge placing switch differences in the radial summand.  The
 symbolic dimension formulas do not imply the finite factorization-image
-ranks in (9.2); those ranks require the displayed coordinate calculation.
+ranks in (8.2); those ranks require the displayed coordinate calculation.
 
 \paragraph{Proof of Theorem \ref{thm:headline-balanced}(B1--B2).}
 The pullback formula and Pl\"ucker identity prove (B1).  The generic
 augmentation-kernel calculation controls the one-dimensional translation
 lost by choosing $M_0$.  Exact row reduction of the three coordinate
-configurations gives (9.2), proving (B2).  The trust table in
+configurations gives (8.2), proving (B2).  The trust table in
 Section~\ref{sec:verification} separates the symbolic identity, the
 kernel-checked finite ranks, and the classical identification of the
 coordinate orbits with the named Coxeter matchings.
@@ -1492,7 +1512,7 @@ span of coordinatewise products of pairs of functions in $L$.  The finite
 decoders on each sheet prove
 \[
  L^{\circ2}=
- \left\{(u,v):\sum_{\Omega_+}u=\sum_{\Omega_-}v\right\}. \tag{10.1}
+ \left\{(u,v):\sum_{\Omega_+}u=\sum_{\Omega_-}v\right\}. \tag{9.1}
 \]
 The annihilator of the hyperplane on the right is the line spanned by the
 sheet-sign vector.  Therefore a pointwise $\{\pm1\}$ weight annihilates all
@@ -1504,7 +1524,7 @@ An involution exchanges $\Omega_+$ and $\Omega_-$ and negates the six
 compressed profile vectors.  Consequently every even signed profile
 moment vanishes.  On the positive profiles the primitive relation is
 \[
- v_1+4v_4+6v_6=0,                                      \tag{10.2}
+ v_1+4v_4+6v_6=0,                                      \tag{9.2}
 \]
 which kills the signed barycentre.  A displayed cubic coordinate is
 nonzero in both the $B_3$ and $H_3$ configurations.  Hence degrees one and
@@ -1521,8 +1541,8 @@ $\mathrm{PGL}_2(q)$ is a named group-theoretic input.
 
 \paragraph{Proof of Theorem \ref{thm:headline-balanced}(B3) and
 Theorem \ref{thm:headline-depth}(C1--C2).}
-Equation (10.1) and its annihilator calculation prove balanced uniqueness.
-The antipodal identity and (10.2) prove the even and linear cancellations.
+Equation (9.1) and its annihilator calculation prove balanced uniqueness.
+The antipodal identity and (9.2) prove the even and linear cancellations.
 For the displayed profile coordinate, the first possible odd survivor is
 \[
   2\bigl((-6)^3+4(-3)^3+6(3)^3\bigr)=6\ne0\pmod {11},
@@ -1531,29 +1551,56 @@ so degree three survives.  The relative-invariant lemma gives the kernel
 stabilizer.  All statements remain valid after an affine change of the
 quotient coordinates by the first-survival formula.
 
-\section{Six depth profiles and parent reconstruction}
+\section{Six depth profiles and matching-row reconstruction}
 \label{sec:depth}
 
-Put $G=\mathrm{PGL}_2(11)$, let $H=A_5$ stabilize one golden matching, and
+Put $G=\mathrm{PGL}_2(11)$, let $H=A_5$ stabilize one $H_3$ matching, and
 let $K=A_4$ be the common subgroup selected by an edge decoration.  The
 finite two-sided action has six $K$--$H$ relation cells.  Its $K$-orbits
 on each $H$-sheet have sizes $1,4,6$.  One secant-incidence recount on a
 representative of each cell gives the six distinct profiles
 \[
- v_1,\ v_4,\ v_6,\ -v_1,\ -v_4,\ -v_6.                \tag{11.1}
+ v_1,\ v_4,\ v_6,\ -v_1,\ -v_4,\ -v_6.                \tag{10.1}
 \]
-The positive three satisfy (10.2) and two plane equations.  The resulting
+Their coordinates are
+\[
+\begin{aligned}
+v_1&=(-6,0,12,-12),\\
+v_4&=(-3,3,0,3),\\
+v_6&=(3,-2,-2,0).
+\end{aligned}
+\]
+The subscripts record the orbit sizes.  The four coordinates are signed
+differences of zero counts on the oriented relation pairs
+$(R_1,R_{10})$, $(R_3,R_{13})$, $(R_6,R_{14})$, and
+$(R_9,R_{11})$.  For example, the positive singleton has zero-count row
+\[
+ (0,6;\ 0,0;\ 12,0;\ 0,12),
+\]
+whose four differences give $v_1$.  Reversing every oriented pair gives
+the negative singleton and the profile $-v_1$.  The other two positive
+orbits have sizes four and six and give $v_4$ and $v_6$; the opposite
+sheet gives their negatives.
+
+The positive three satisfy (9.2) and two plane equations.  The resulting
 linear map from the six relation indicators has rank two and kernel
-dimension four, but (11.1) shows that its restriction to the set of six
+dimension four, but (10.1) shows that its restriction to the set of six
 labels is injective.  Linear rank loss therefore does not imply loss of the
 finite label.
 
 The singleton cells supply the reconstruction.  The positive and negative
-singletons identify the two golden matchings, so without a choice the
-profile data recover their unordered pair.  Choosing a sheet and its
-singleton selects the matching decoration required by the explicit parent
-reconstruction map.  The conclusion is a parent with that decoration; an
-unmarked conic alone supplies neither the sheet nor the singleton.
+singletons identify the two $H_3$ matching rows, so without a choice the
+profile data recover their unordered pair.  On the six displayed labels,
+the recovery map is the inverse of (10.1):
+\[
+ v_1\longmapsto M_+,\qquad -v_1\longmapsto M_-,
+\]
+where $M_+$ and $M_-$ are the two singleton rows of the frozen matching
+table.  Choosing
+a sheet and its singleton therefore selects one decorated row.  The
+kernel-checked terminal proves this finite table-row recovery; identifying
+that row with a geometric Clebsch parent would require an additional
+row-to-geometry bridge and is not claimed here.
 
 The characteristic-eleven permutation module gives an intrinsic
 explanation of the rank drop.  On one sheet the degree-eleven permutation
@@ -1590,11 +1637,11 @@ balanced relations and fixes the latter socle.
 \paragraph{Proof of Theorem \ref{thm:headline-depth}(C3--C6) and
 Proposition~\ref{prop:modular-depth-plane}.}
 The exact generator permutations partition all twenty-two matchings into
-the six orbits of (11.1); the representative recounts are constant on
+the six orbits of (10.1); the representative recounts are constant on
 those orbits.  Row reduction gives the rank and kernel dimensions, and
 direct comparison proves set-theoretic separation.  The two singleton
-recovery maps give the unordered matching pair, after which the
-matching-decorated recovery theorem returns the parent.  Projectivity,
+recovery maps give the unordered matching pair, after which the chosen
+singleton returns its decorated row in the frozen table.  Projectivity,
 the local two-dimensional commuting algebra, and exactness of
 $A_4$-fixed points give the $1\mid9\mid1$ quotient: the $A_5$ stabilizer
 has order prime to eleven, so its induced degree-eleven permutation module
@@ -1602,7 +1649,7 @@ is projective; two-transitivity makes its commuting algebra
 $\F_{11}[I,J]$, and $J^2=11J=0$ makes that algebra local.  The module is
 therefore the indecomposable projective cover $P(1)$.  Its three
 $A_4$-orbit sums have one-dimensional all-ones socle, and quotienting by
-it gives the rank-two depth plane.  Since (10.2) spans the rational
+it gives the rank-two depth plane.  Since (9.2) spans the rational
 relation space and $\gcd(1,4,6)=1$, it is the unique primitive positive
 dependence.
 
@@ -1663,12 +1710,13 @@ Theorem~\ref{thm:headline-gluing}(D2).  The exact finite closure does not by
 itself prove the spinor-norm or number-field names attached to the rational
 model.
 
-Above the fixed full-conic child, the twenty-two explicitly reconstructed
-parents form two eleven-element orbits under the determinant character.
+In the fixed-child certificate, the twenty-two table rows form two
+eleven-element orbits under the determinant character.
 The quotient by the kernel action is a free two-point set.  The same sign
 character controls the matching sheets, the outer transporter, and the
 fixed-child quotient.  There is no invariant point, while a chosen point
-selects one sheet and hence one decorated parent.
+selects one sheet and hence one decorated row.  The certificate does not
+identify those rows with geometric Clebsch parents.
 
 \paragraph{Proof of Theorem \ref{thm:headline-gluing}.}
 The frozen reduction polynomials, matching permutations, and group
@@ -1679,7 +1727,7 @@ the free quotient, proving (D3).  The classical group and rational spinor
 interpretations are precisely the cited-input boundary recorded in
 Section~\ref{sec:verification}.
 
-\section{The survival and erasure ledger}
+\section{Retention and loss under finite passages}
 \label{sec:survival}
 
 The orientation torsor is not preserved by every natural passage.  The
@@ -1694,7 +1742,7 @@ quotient moments $1,2$&unordered sheets&unique balanced complementary
 halves in the displayed $B_3,H_3$ configurations\\
 signed cubic&orientation&first survivor among signed tensor moments and
 their linear shadows\\
-singleton depth profile&decorated parent&the six displayed
+singleton depth profile&decorated matching row&the six displayed
 $A_4\backslash G/H$ labels\\
 quadratic-residue/Witt design&finite shadow&exact incidence, code,
 full-support, secant, and Hadamard tables\\
@@ -1760,7 +1808,7 @@ equivalence.  It does not classify arbitrary complex local unitaries or
 assert a canonical geometric reconstruction of every state.
 
 The fixed four-sheet contraction has a sharper partial-retention boundary.
-It is not a step in the Clebsch-parent reconstruction above.  Consider the
+It is not a step in the matching-row reconstruction above.  Consider the
 ordered six-column pencil
 \[
 \begin{aligned}
@@ -1924,7 +1972,7 @@ uniqueness.  The two choices of $x$ are therefore precisely the two
 possible markings.
 \end{proof}
 
-\begin{theorem}[Torsor Rosetta: one class and one forced outer swap]
+\begin{theorem}[Determinant-sign transport and the forced outer swap]
 \label{thm:torsor-rosetta-close}
 Let $T_q$ denote the determinant-sign torsor for the split rank-three
 working primes.  The following statements hold.
@@ -2228,16 +2276,17 @@ quadratic-coinvariant, and ordered-rank-flag tests likewise leave no
 canonical bridge.  Thus the positive statement is source intrinsicity;
 the non-identification is a proved scope boundary.
 
-\section*{Appendix: Headline statement adequacy}
-\addcontentsline{toc}{section}{Appendix: Headline statement adequacy}
+\section*{Appendix: Headline statement extraction and identity}
+\addcontentsline{toc}{section}{Appendix: Headline statement extraction and identity}
 \label{app:adequacy}
 
 The deterministic extraction in
 \path{verification/statement_adequacy.json} preserves the exact \TeX{}
 of every theorem-like environment, its label or content-addressed key,
-source line, and SHA-256 digest.  The following printed summary records the
-intended adequacy boundary of the headline blocks; the machine-readable
-trust manifest splits every numbered clause into its own route.
+source line, and SHA-256 digest.  This artifact establishes textual identity,
+not semantic adequacy.  The following printed summary records the intended
+trust boundary of the headline blocks; the machine-readable trust manifest
+splits every numbered clause into its own route.
 
 \begin{table}[H]
 \centering
@@ -2269,7 +2318,7 @@ independent exact replay
 integral cubic, or all-prime classification\\
 \bottomrule
 \end{tabular}
-\caption{Human-readable headline adequacy summary.  The exact terminal,
+\caption{Human-readable headline trust-boundary summary.  The exact terminal,
 axiom, file-hash, citation, and residual-trust data are in the manifest.}
 \end{table}
 
@@ -2283,7 +2332,8 @@ Secant-product differences vanish on the child but survive after division
 by its equation; their quotient configuration recovers the unique
 unordered sheets from second moments, orients them in degree three,
 compresses them to six double-coset profiles, and recovers a decorated
-parent from the singleton fibres.
+matching-table row from the singleton fibres.  A further geometric-parent
+identification is neither used nor claimed.
 
 The rank-three Coxeter phase explains why this chain belongs to a complete
 small family.  The reflection-complement codes for $A_3,B_3,H_3$ obey one
@@ -2303,9 +2353,9 @@ quotient spaces into small Weil modules.  Orientation is carried by
 specific comparison data, not by every natural invariant of the objects.
 Likewise, the four-sheet contraction retains only the two resonance fibres
 of Theorem~\ref{thm:four-sheet-holonomy}; it does not recover its pencil and
-does not participate in parent reconstruction.
+does not participate in matching-row reconstruction.
 
-The torsor-Rosetta theorem identifies both the object and its finite
+The determinant-sign transport theorem identifies both the object and its finite
 mechanism.  At the split working primes the missing bit is obtained by
 determinant-sign descent: every available two-valued carrier is a
 $G$-set with the same quotient character, so the transport lemma forces
@@ -2429,11 +2479,6 @@ V.~Guruswami and A.~Vardy,
 \newblock Maximum-likelihood decoding of Reed--Solomon codes is NP-hard,
 \newblock \emph{IEEE Transactions on Information Theory} \textbf{51}(7)
 (2005), 2249--2256.
-
-\bibitem{Hofstadter1979}
-D.~R.~Hofstadter,
-\newblock \emph{G\"odel, Escher, Bach: An Eternal Golden Braid},
-\newblock Basic Books, New York, 1979.
 
 \bibitem{Hirschfeld1998}
 J.~W.~P.~Hirschfeld,

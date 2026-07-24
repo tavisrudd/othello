@@ -1,7 +1,7 @@
 # The Clebsch hexagon code: reproducibility sources
 
 This directory contains the manuscript sources and the exact executable replays cited in
-Section 7. Python checks use only the standard library unless their module documentation says
+Section 13. Python checks use only the standard library unless their module documentation says
 otherwise. The Singular calculation is invoked through its fail-closed shell wrapper.
 
 ## Canonical six-arc class labels

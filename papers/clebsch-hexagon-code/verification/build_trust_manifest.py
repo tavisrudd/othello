@@ -330,13 +330,36 @@ def components_for_clause(label: str, index: int) -> list[dict[str, object]]:
     if label == "thm:headline-depth":
         if index in (1, 2):
             return [lean_component("signed-moment filtration", ["moments", "balanced"])]
-        if index in (3, 4, 5):
+        if index in (3, 4):
             return [
-                lean_component("six-profile compression and recovery", ["depth"]),
-                conceptual_component("double-coset group names", CLASSICAL_INPUTS, "The orbit arrays, ranks, and recovery maps are kernel checked."),
+                lean_component("six-profile compression", ["depth"]),
+                conceptual_component("double-coset group names", CLASSICAL_INPUTS, "The orbit arrays, ranks, and label separation are kernel checked."),
+            ]
+        if index == 5:
+            return [
+                lean_component("singleton matching-row recovery", ["depth"]),
+                conceptual_component(
+                    "double-coset group names",
+                    CLASSICAL_INPUTS,
+                    "The terminal recovers a frozen matching-table row only; no row-to-geometric-parent bridge is asserted.",
+                ),
             ]
         return [conceptual_component("projective-cover and primitive-ray statement", MODULAR_INPUTS, "The manuscript gives the projectivity, locality, fixed-point, and orbit--stabilizer deductions.")]
     if label == "thm:headline-gluing":
+        if index == 3:
+            return [
+                lean_component("fixed-child table-row quotient", ["gluing", "torsor"]),
+                computation_component(
+                    "finite fixed-child row replay",
+                    "torsor",
+                    "The bundle checks the 22-row action and its two-point quotient.",
+                ),
+                conceptual_component(
+                    "geometric-parent boundary",
+                    TORSOR_INPUTS,
+                    "No equivalence between the table rows and geometric Clebsch parents is asserted.",
+                ),
+            ]
         return [
             lean_component("rank-three arithmetic gluing", ["gluing", "torsor"]),
             computation_component("finite gluing and fixed-child replay", "torsor", "The bundle checks the exact matching orbits, determinant swaps, and fixed-child quotient."),
@@ -577,9 +600,9 @@ def main() -> None:
             "signed cubic&orientation&first survivor among signed tensor moments and",
             [lean_component("cubic-first orientation", ["moments", "balanced"])],
         ),
-        "depth-parent": (
-            "singleton depth profile&decorated parent&the six displayed",
-            [lean_component("singleton recovery", ["depth"])],
+        "depth-row": (
+            "singleton depth profile&decorated matching row&the six displayed",
+            [lean_component("singleton matching-row recovery", ["depth"])],
         ),
         "design-shadow": (
             "quadratic-residue/Witt design&finite shadow&exact incidence, code,",
@@ -626,7 +649,7 @@ def main() -> None:
             claim(
                 f"survival-{name}",
                 verbatim_source(snippet),
-                "survival and erasure ledger",
+                "retention and loss table",
                 "The row is bounded to its displayed finite or conditional scope.",
                 components,
             )
