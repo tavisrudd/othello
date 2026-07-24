@@ -36505,6 +36505,20 @@
   },
   "schema": "c396-holonomy-completeness-v1",
   "symbolic": {
+    "degree_eight_cover": {
+      "branch_values": [
+        "infinity",
+        "0",
+        "-1/4",
+        "225/256"
+      ],
+      "factorization": "t -> y=t+t^-1-2 -> z=(y-y^-1)^2/16",
+      "quadratic_at_recovery_value": "2589151/810000=17^4*31/30^4",
+      "tetrahedral_parameter": "-1",
+      "tetrahedral_to_grs_gap": "289/256=17^2/2^8",
+      "tetrahedral_y": "-4",
+      "tetrahedral_z": "225/256"
+    },
     "derived_ratio_histogram": {
       "(2z+1)^2/z^2": 24,
       "-1/z": 144,
@@ -36537,6 +36551,21 @@
       240,
       264
     ],
+    "signed_bracket_double_cover": {
+      "characteristic_17_value": "-2",
+      "characteristic_31_value": "-1",
+      "tetrahedral_w": "15/16",
+      "w": "B/A=-(y-y^-1)/4",
+      "w_preserving_y_actions": [
+        "y",
+        "-y^-1"
+      ],
+      "w_reversing_y_actions": [
+        "-y",
+        "y^-1"
+      ],
+      "z": "w^2"
+    },
     "signed_bracket_product_multiset": {
       "+A": 3,
       "+B": 2,

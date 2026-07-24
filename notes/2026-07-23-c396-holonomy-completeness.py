@@ -674,6 +674,23 @@ def symbolic_holonomy_certificate() -> dict[str, object]:
     expected_boundary = qmul((Fraction(4),), qmul(grs_polynomial, grs_polynomial))
     if boundary_identity != expected_boundary:
         raise AssertionError("z=-1/4 boundary identity failed")
+    tetrahedral_z = Fraction(225, 256)
+    tetrahedral_w = Fraction(15, 16)
+    if tetrahedral_w**2 != tetrahedral_z:
+        raise AssertionError("signed bracket coordinate does not square to z")
+    tetrahedral_grs_gap = tetrahedral_z + Fraction(1, 4)
+    if tetrahedral_grs_gap != Fraction(17**2, 2**8):
+        raise AssertionError("tetrahedral/GRS branch collision identity failed")
+    recovery_value = -1 / tetrahedral_z
+    quadratic_at_recovery = (
+        recovery_value**2
+        - 8 * recovery_value
+        + 8
+        - 16 * tetrahedral_z
+        - 1 / tetrahedral_z
+    )
+    if quadratic_at_recovery != Fraction(17**4 * 31, 30**4):
+        raise AssertionError("tetrahedral holonomy-bin collision identity failed")
     return {
         "parameter": {
             "A": [int(value) for value in a_polynomial],
@@ -696,6 +713,24 @@ def symbolic_holonomy_certificate() -> dict[str, object]:
             "quadratic": "X^2-8X+(8-16z-1/z)",
         },
         "grs_boundary_identity": "4*B^2+A^2=4*(t^4-4t^3+7t^2-4t+1)^2",
+        "degree_eight_cover": {
+            "factorization": "t -> y=t+t^-1-2 -> z=(y-y^-1)^2/16",
+            "branch_values": ["infinity", "0", "-1/4", "225/256"],
+            "tetrahedral_parameter": "-1",
+            "tetrahedral_y": "-4",
+            "tetrahedral_z": "225/256",
+            "tetrahedral_to_grs_gap": "289/256=17^2/2^8",
+            "quadratic_at_recovery_value": "2589151/810000=17^4*31/30^4",
+        },
+        "signed_bracket_double_cover": {
+            "w": "B/A=-(y-y^-1)/4",
+            "z": "w^2",
+            "w_preserving_y_actions": ["y", "-y^-1"],
+            "w_reversing_y_actions": ["-y", "y^-1"],
+            "tetrahedral_w": "15/16",
+            "characteristic_17_value": "-2",
+            "characteristic_31_value": "-1",
+        },
         "recovery_multiplicities": [144, 168, 240, 264],
     }
 
@@ -1017,6 +1052,17 @@ def build_certificate() -> dict[str, object]:
         for row in q13["projective_classes"]
     ):
         raise AssertionError("q=13 moment collision missing")
+    q31 = next(row for row in rows if row["field"]["order"] == 31)
+    tetrahedral_class = next(
+        row for row in q31["projective_classes"] if 30 in row["parameters"]
+    )
+    if (
+        tetrahedral_class["parameters"] != [12, 13, 18, 19, 30]
+        or tetrahedral_class["z"] != 1
+        or tetrahedral_class["holonomy_z_recovery_bin"]
+        != {"value": 30, "multiplicity": 240}
+    ):
+        raise AssertionError("q=31 tetrahedral holonomy-bin collision missing")
     return {
         "schema": "c396-holonomy-completeness-v1",
         "input": {"path": INPUT.name, "sha256": INPUT_SHA256},

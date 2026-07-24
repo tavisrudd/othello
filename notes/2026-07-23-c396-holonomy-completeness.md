@@ -105,6 +105,71 @@ projective/monomial/LC class meets this pencil in at most eight parameters, coun
 multiplicity over the algebraic closure. The four `y` relations and the quadratic
 `t+t^-1=y+2` explain those eight sheets.
 
+## Second-order Tao pass: one cover explains both exceptional primes
+
+The degree-eight map is not a featureless quotient. It factors as
+
+```text
+t -> y=t+t^-1-2 -> z=(y-y^-1)^2/16
+```
+
+with degrees two and four. The second map is branched over `z=0,-1/4,infinity`.
+The first map is branched at `t=1,-1`; `t=1` maps to the already-degenerate point
+`y=0`, while `t=-1` is C395's nondegenerate tetrahedral specialization and supplies
+the fourth branch value
+
+```text
+y(-1)=-4,             z_* = z(-1)=225/256.
+```
+
+This exposes exact mechanisms behind both arithmetic symmetry jumps found independently in
+C395. First,
+
+```text
+z_* - (-1/4) = 289/256 = 17^2/2^8.
+```
+
+Thus in characteristic `17` the tetrahedral branch collides with the GRS reconstruction
+boundary. This is exactly the characteristic where C395 found the simultaneous tetrahedral
+`S_4` and GRS jump.
+
+Second, let
+
+```text
+Q_z(X)=X^2-8X+(8-16z-1/z)
+```
+
+be the polynomial for the two weight-96 holonomy bins. At the tetrahedral branch,
+
+```text
+Q_z*(-1/z_*) = 2589151/810000 = 17^4*31/30^4.
+```
+
+After the inadmissible denominator characteristics `3,5` and the characteristic-17 GRS
+collision are removed, characteristic `31` is therefore exactly where the weight-144 recovery
+bin meets one weight-96 bin, producing multiplicity `240`. The direct certificate confirms
+that the `F_31` class `{12,13,18,19,30}` has `z=1` and recovery bin
+`(-1,240)`. This matches C395's non-GRS tetrahedral `A_5` stabilizer enhancement.
+
+The bin collision does not by itself prove a general theorem that every such collision forces
+`A_5`; C395 independently proves that stabilizer. What it does prove is that the same scalar
+cover and the same holonomy spectrum locate both exceptional characteristics exactly, rather
+than merely reproducing them by census.
+
+There is also a latent two-sheeted refinement before the final square:
+
+```text
+w(t)=B(t)/A(t)=-(y-y^-1)/4,             z=w^2.
+```
+
+Of the four exact `y`-symmetries, `y -> y,-y^-1` preserve `w`, while
+`y -> -y,y^-1` reverse it. Thus `w` is an exact signed bracket coordinate on an index-two
+refinement of the projective quotient, although it is not needed for the all-party-permutation LC
+classification. At the tetrahedral point `w_*=15/16`; it reduces to `-2` in characteristic `17`
+and `-1` in characteristic `31`. This is the same algebraic *shape* as the determinant-sign and
+Gale-sheet torsors elsewhere in the programme. Identifying these covers is a concrete open theorem,
+not assumed here.
+
 ## Why the holonomy signature recovers `z`
 
 For every holonomy matrix `M`, form the conjugacy-and-inversion invariant
@@ -181,8 +246,8 @@ sha256sum -c notes/2026-07-23-c396-holonomy-completeness.sha256
 
 | artifact | bytes | SHA-256 |
 |:---|---:|:---|
-| checker `.py` | 39,319 | `42c1074798e3c0a052a9280361fc565e50228be08909da952933b380db4e0680` |
-| certificate `.json` | 748,820 | `9158a9b37fb6232f110a1f011eba49a80dff0e1dcce3f377c7cb7fe8feb84ec9` |
+| checker `.py` | 41,305 | `b536913531c7393e92633b2c6521df50aa32a823a95cc4e92285a0955cc8fa49` |
+| certificate `.json` | 749,580 | `04b791acae107d24c81c589059c8a310c01e6feaac9c4713bdb1e9d323e29031` |
 
 The standard-library checker imports the hash-pinned C395 finite-field implementation. It
 verifies:
@@ -190,6 +255,8 @@ verifies:
 - the ten symbolic bracket-product identities;
 - all 450 rational-function holonomy ratios and the exact `90/144/24/96/96` split;
 - the GRS boundary identity;
+- the four branch values of the degree-eight cover, the characteristic-17 branch collision,
+  and the characteristic-31 recovery-bin collision;
 - canonical projective classes, independent pairwise projectivity tests, and explicit formula
   projectivities for every same-`z` parameter in each replay field;
 - independent direct-Lagrangian holonomy and moment calculations in the marked fields; and
@@ -236,18 +303,58 @@ non-GRS boundary is essential—at `z=-1/4`, precisely the GRS quartic, the reco
 | Why a 450-entry signature can be complete on a one-parameter pencil | **Settled:** its derived ratio histogram contains the unique `-1/z` recovery bin. |
 | How large a pencil class can be | **Settled by the Tao pass:** `deg z=8`, so a geometric projective/monomial/LC fibre has at most eight parameters counted with multiplicity. |
 | Why the proof excludes GRS members | **Settled sharply:** `z=-1/4` is exactly the GRS quartic, where the full derived-ratio histogram collapses to `4^450`. |
+| Why characteristic `17` has the tetrahedral `S_4`/GRS jump | **Settled:** the nondegenerate branch value `z_*=225/256` collides with `-1/4` precisely because their gap is `17^2/2^8`. |
+| Why characteristic `31` has the non-GRS tetrahedral `A_5` jump | **Settled at the invariant mechanism level:** `Q_z*(-1/z_*)=17^4*31/30^4`, so the recovery and weight-96 bins fuse to multiplicity `240` exactly there; C395 independently supplies the `A_5` stabilizer theorem. |
 | Whether holonomy classifies arbitrary LC or LU orbits | **Outside C396 and not implied:** C397 owns the operational Clifford classification; arbitrary LU completeness is not claimed. |
 
 No genuine C396 mystery remains.
 
-## Literature and ownership boundary
+## Boundary map: what is known and where to push
 
-No external paper was newly read for C396, and no novelty or priority claim is made. C374's source
-audit remains authoritative for the Pauli/Lagrangian holonomy construction and its LC covariance;
-C384's audit remains authoritative for polynomial LU invariants and the finite q=11 pencil.
-Classical bracket invariants of six points are used here through a direct determinant calculation,
-not claimed as new invariant theory.
+The theorem closes its stated LC problem, but it exposes several larger frontiers. They are not
+equally speculative:
+
+| frontier | known boundary | C396 contribution | next push and plausible proof route |
+|:---|:---|:---|:---|
+| **The q=13 LU collision** | Equal marginal moments need not imply LU equivalence; general LU and LC equivalence differ for stabilizer states. | The two classes have the same tested LU moment but different `z`, hence are not LC-equivalent. | **Decide actual LU equivalence.** Put both states into a common Schmidt/minimal-support normal form and solve the residual six one-site unitary equations exactly. A proof that every solution normalizes the local Pauli frames would upgrade the collision to LU-inequivalence; an exceptional solution would be a six-party non-Clifford LU identification. |
+| **LU=LC on the whole pencil** | Complete LC invariants exist abstractly, while general LU=LC is false. Existing sufficient criteria are largely qubit/graph-state results and do not automatically settle this odd-prime family. | Holonomy gives a complete and explicit LC coordinate `z`. | **Prove or refute LU=LC for admitted `H_t`.** Generalize the minimal-support rigidity argument to odd prime powers: show that the overlapping weight-four reduced stabilizer frames force each local unitary to permute Weyl axes. This would turn C396 into an arbitrary-LU classification theorem. |
+| **All six-arcs, not one pencil** | The ambient quotient of six ordered points in `P^2` is four-dimensional and classically understood through brackets, the Igusa quartic, and Gale duality. | On a one-dimensional locus, the 450 holonomies reduce to one quotient coordinate and are complete. | **Recover the full moduli point from holonomy.** Express the holonomy trace ring in the five classical mystic-pentagon coordinates, then test generic birationality and identify the exceptional divisor. This is the natural general completeness theorem; a finite census cannot substitute for the function-field calculation. |
+| **Why symmetry jumps occur** | Automorphism strata of the associated cubic surfaces are classified in all characteristics, but tame primes `17,31` are not generic anomalies of that classification. | Two exact reductions of the pencil's cover/spectrum locate the independent `S_4`/GRS and `A_5` jumps. | **Make the mechanism scheme-theoretic.** Embed the `z`-line in the six-point/cubic-surface moduli space, intersect it with stabilizer strata, and compute the integral discriminant. This should decide whether `17` and `31` are the complete set of good-characteristic enhancement primes and explain the group enlargement, not just its spectral shadow. |
+| **Non-GRS MDS/AME families** | Constructing and classifying non-GRS MDS codes remains active; broad MDS classification is open. | One non-GRS `[6,3,4]_q` family now has an all-odd-field equivalence quotient and LC classifier. | **Move beyond length six or this normal form.** Start with a structured twisted/non-GRS MDS family, construct its AME state, and ask whether minimal-support holonomies generate its projective invariant field. The proof target is a family theorem, not more isolated field enumerations. |
+| **Smaller operational witnesses** | Abstract complete LC invariant sets can be very large; marginal moments can collide. | A 450-entry signature contains a canonically multiplicity-marked `-1/z` bin. | **Compress the witness.** Find the smallest party-symmetric subset or low-degree polynomial in marginal transition data that still recovers `z`, and prove minimality. This would turn the classification into a practical measurement/certification protocol. |
+| **Exceptional-bin arithmetic** | Specialization can merge invariant values; no searched source gives this histogram's collision discriminant. | The recovery-bin proof handles every modular collision, with the tetrahedral `31` fusion now explicit. | **Classify the entire collision divisor.** Take resultants among all five bin values, factor them over `Z[z]`, and match every component with geometric degeneracy or stabilizer enhancement. This is a bounded algebraic project and a good first attack on the scheme-theoretic goal. |
+
+The recommended order is: (1) solve the q=13 LU pair; (2) prove the odd-prime minimal-support
+rigidity needed for LU=LC on the pencil; (3) compute the full bin-collision discriminant and map the
+`z`-line into the classical six-point quotient; then (4) attempt generic holonomy completeness on
+the four-dimensional six-arc moduli space. The first two decide the quantum meaning of the result;
+the latter two decide its invariant-theoretic reach.
+
+## Literature boundary and novelty calibration
+
+A focused audit changes the framing, not the theorem. Storme--Van Maldeghem's 1995 paper
+(read depth: partial full text, §4.2.4, Propositions 10--13 and Remark 2) constructs and proves
+uniqueness of the `A5` six-arc and explicitly records its ten Brianchon points and five triangles.
+Thus C396's `F_31` member is the classical Clebsch hexagon; neither that configuration nor its
+`10+5` incidence is new.
+
+Howard--Millson--Snowden--Vakil (read depth: full text, §§1--2) own the ambient bracket,
+outer-`S6`, Igusa-quartic, and Gale-sheet invariant theory of six points in `P^2`
+([arXiv:0710.5916](https://arxiv.org/abs/0710.5916)). Van den Nest--Dehaene--De Moor
+(read depth: full text) own abstract complete LC invariant families for stabilizer states
+([arXiv:quant-ph/0410165](https://arxiv.org/abs/quant-ph/0410165)). These sources do not contain
+C396's transition holonomy or its pencil quotient.
+
+The complete audit, including source-by-source depths, cache hashes, the 154-record OpenAlex screen,
+the partially screened Crossref set, explicit coverage gaps, and the PRS/Clebsch/crowns overlap map,
+is `2026-07-23-c396-tt2-literature-frontier-audit.md`. Within that bounded coverage, no exact
+predecessor was located for `z(t)`, its holonomy recovery, or the common `17/31` arithmetic
+mechanism. This is not a priority proof. The defensible wording is a **new-looking restricted
+synthesis**: classical six-point invariant geometry becomes an explicit LC classifier for this
+AME/MDS pencil, and one scalar cover explains two independently proved exceptional
+specializations. No claim is made to new Clebsch geometry, ambient six-point invariant theory,
+general MDS classification, or arbitrary-LU classification.
 
 C395 retains the all-odd-field arc/GRS arithmetic. C374 retains the invariant definitions and
 covariance proofs. C396 owns only the exact parameter quotient, the q=13 moment failure, and the
-holonomy-completeness theorem for this displayed non-GRS pencil.
+holonomy-completeness and exceptional-prime mechanism for this displayed non-GRS pencil.
