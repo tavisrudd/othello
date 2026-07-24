@@ -14,8 +14,11 @@ Give Paper 1's interface-heavy survival/forgetting rows an honest mixed-verifica
 
 - C451: formalize the finite matching/Lagrangian incidence and Arf computations used to show that
   the tested parity data does not detect the sheet;
-- C455: formalize the explicit matrix restrictions, adjoint/square/eigenspace identities, and
-  common ambient operator witness, without importing Weil naming by assertion;
+- C455: formalize the explicit matrix restrictions and their adjoint, square, and trace
+  identities.  Following independent review, eigenspace multiplicities and the claim that the
+  two restrictions come from one ambient Fourier operator remain external: the finite tables do
+  not by themselves supply those semantic interfaces, and no tautological direct-sum carrier may
+  substitute for them;
 - C456/C467: formalize the explicit state/code maps, finite bitorsor actions, and sheet-erasing
   equivalence witness, without claiming a classification of arbitrary LU invariants;
 - C471, only if its compact Paper-1 shadow sentence remains adopted: formalize the exact mod-three
@@ -58,7 +61,7 @@ The bounded mixed-verification package is implemented as:
 - `RelativeConicArcs.ClebschPassageInterfacesData`, a definitions-only literal-data leaf;
 - `RelativeConicArcs.ClebschPassageInterfaces`, the theorem-bearing checker and interface; and
 - `RelativeConicArcs.Gates.ClebschPassageInterfaces`, the import-only gate and
-  nineteen-terminal axiom audit.
+  twenty-two-terminal axiom audit.
 
 The exact formal exits are:
 
@@ -71,18 +74,19 @@ The exact formal exits are:
    quadratic value zero and at q=11 by weight six with quadratic value one; both sheet labels
    give identical tables.
 3. `rankEightFourier_square`, `rankSixteenFourier_square`, `signedFourier_square`,
+   `rankEightFourier_weighted_adjoint`, `rankSixteenFourier_weighted_adjoint`,
    `signedFourier_weighted_adjoint`, and `Fourier_restriction_traces_zero` check the raw
-   `8 x 8`, `16 x 16`, and signed `4 x 4` restrictions.  Their squares are `1331I`; the signed
-   block is adjoint for norms `120,120,240,240`; and the rank-sixteen and signed traces vanish.
-   `common_finite_operator_restriction_witness` packages the rank-eight and rank-sixteen
-   matrices as invariant summands of one explicit finite direct-sum carrier.
+   `8 x 8`, `16 x 16`, and signed `4 x 4` restrictions.  Their squares are `1331I`; all three
+   are adjoint for their displayed orbit-indicator norm forms; and all three traces vanish.
 4. `monomialTransport_bijective`, `monomial_column_intertwiner`, and
    `monomialTransport_kernel_equivalence` check the displayed permutation/scaling map between
    the parameter-eight and parameter-four parity checks.  The proof uses checked transport,
    inverse, row-intertwiner, and inverse-row-intertwiner matrix identities.
-5. `fourierSupportParam_injective` and `fixedParty_fourier_support_equivalence` prove that the
-   signed source dual is exactly the target code kernel.  A checked left inverse and the exact
-   decomposition
+5. `fourierSupport_signed_transpose` and
+   `signedSourceDualParam_eq_fourierSupportParam` identify the support matrix entrywise with
+   `diag(-1,-1,-1,-1,+1,+1) H_8^T`.  Then `fourierSupportParam_injective` and
+   `fixedParty_fourier_support_equivalence` prove that this signed source dual is exactly the
+   target code kernel.  A checked left inverse and the exact decomposition
    `S R + K H_4 = I_6` replace word sampling and establish the complete kernel--image equality.
 6. `markedSymmetry_card`, `marked_actions_commute`, and
    `marked_actions_free_transitive` formalize the regular left/right actions of
@@ -98,11 +102,13 @@ orbits, identify the bitorsor carrier with the enumerated 60 projective maps, or
 hyperelliptic divisor-theoretic interpretation of the binary subset model.  Those are
 hash-pinned certificate or cited-input boundaries.
 
-The formal Fourier statements are integer matrix statements.  After adjoining a square root of
-`1331`, square plus trace gives the reported `4+4`, `8+8`, and `2+2` eigenspace splits by the
-standard distinct-root argument; the package does not construct the ambient `1331`-dimensional
-Schrodinger space, fix a Gauss phase, or assert Weil naming.  Its direct-sum carrier is only a
-simultaneous finite restriction witness.
+The formal Fourier statements are integer matrix statements.  The reported `4+4`, `8+8`, and
+`2+2` eigenspace splits require scalar extension and the standard distinct-root/trace argument;
+that eigenspace theorem remains external.  The package does not construct the ambient
+`1331`-dimensional Schrodinger space, prove that the rank-eight and rank-sixteen tables are
+restrictions of one ambient operator, fix a Gauss phase, or assert Weil naming.  The initial
+tautological direct-sum carrier was removed after review because it supplied no evidence for the
+common-ambient claim.
 
 Character orthogonality converts `fixedParty_fourier_support_equivalence` into the exact
 equal-amplitude state-vector equality in the source certificate.  Lean does not formalize complex
@@ -129,8 +135,9 @@ certificate-backed outside this gate unless the manuscript owner later adopts th
   weight.  Reconstructing all frozen matchings in Lean would enlarge the artifact without
   strengthening the Paper-1 conclusion that the tested parity erases the sheet.
 - The Fourier layer reuses the independently reviewed rank-eight checker and copies only the
-  adopted rank-sixteen and signed matrices.  The semantic ambient Weil identification remains
-  external rather than being encoded as an assertion.
+  adopted rank-sixteen and signed matrices.  It now checks all three weighted adjoints and traces.
+  Eigenspace multiplicities and the semantic common-ambient Weil identification remain external
+  rather than being encoded as assertions.
 - The code layer was strengthened during closeout from coordinate algebra to explicit inverse and
   decomposition matrices.  In particular, `S R + K H_4=I` makes the fixed-party support equality
   a complete linear theorem, not a `1331`-word sample.
@@ -143,8 +150,8 @@ certificate-backed outside this gate unless the manuscript owner later adopts th
 | artifact | SHA-256 |
 |:--|:--|
 | `lean/RelativeConicArcs/ClebschPassageInterfacesData.lean` | `54d3236c3b4bf8a360c1b3468b484bbcffcd148a5b2707a55ebdbc556c4cdfd6` |
-| `lean/RelativeConicArcs/ClebschPassageInterfaces.lean` | `2aa80d54900ae0129cbc89235514f2c23bc9c39ad593edb71ea8b635166dfef3` |
-| `lean/RelativeConicArcs/Gates/ClebschPassageInterfaces.lean` | `0c9352cb12cce18b9b15032a75707611dbbb0b2a69a2d8d6cff38f0238a7d334` |
+| `lean/RelativeConicArcs/ClebschPassageInterfaces.lean` | `43bf231eca84f30473af7af58cce044f8c5534a6f59db85cbf760a2383c2fb64` |
+| `lean/RelativeConicArcs/Gates/ClebschPassageInterfaces.lean` | `0297f429b1488dbcd2d1516569052443a23d5ca48c2fe24e8963f265be62778d` |
 
 The four adopted source manifests passed, and their deterministic checkers replayed successfully:
 
@@ -167,13 +174,13 @@ search.
 
 ### Validation and axiom audit
 
-The guarded definitions-only leaf and theorem checker passed.  Exact-target queue
-`run-20260724-012641-0c272361` built
+The guarded definitions-only leaf and repaired theorem checker passed.  Exact-target queue
+`run-20260724-014627-5b069c89` built
 `RelativeConicArcs.ClebschPassageInterfaces` and
 `RelativeConicArcs.Gates.ClebschPassageInterfaces`, then passed the trace-only aggregate gate.
-Peak recorded RSS was 2,251,872 KiB for the checker and 1,797,212 KiB for the gate.
+Peak recorded RSS was 2,397,336 KiB for the checker and 1,796,400 KiB for the gate.
 
-All nineteen `#print axioms` probes report only `propext`, `Classical.choice`, and `Quot.sound`,
+All twenty-two `#print axioms` probes report only `propext`, `Classical.choice`, and `Quot.sound`,
 or a subset; the two matching-signature terminals use no axioms.  No `sorry`, custom axiom,
 native-decision axiom, or opaque oracle occurs.
 
@@ -186,9 +193,11 @@ was already audited and accepted through `RelativeConicArcs.Gates.ClebschSchemeF
 ### `ej` + `tt` closeout and mystery ledger
 
 The closeout pass replaced coordinate-only support proofs by explicit matrix inverse and
-decomposition certificates, added the injectivity terminal for the signed dual map, exposed the
-rank-sixteen/signed trace identities, and made the finite common-carrier qualification explicit.
-These are cheap task-owned upgrades that sharpen both the positive map and the nonclaim boundary.
+decomposition certificates and added the injectivity terminal.  Independent review then exposed
+three overclaims.  The repair added the missing entrywise signed-transpose identity, all missing
+weighted-adjoint and rank-eight trace checks, removed the vacuous direct-sum carrier, and narrowed
+eigenspace/common-ambient semantics to the external boundary.  These upgrades sharpen both the
+positive map and the nonclaim boundary.
 
 Mystery ledger:
 
@@ -213,12 +222,14 @@ Mystery ledger:
 > `RelativeConicArcs.Gates.ClebschPassageInterfaces`.  The gate kernel-checks the genus-three and
 > genus-five theta-quadratic value counts, the complete frozen same-sheet Lagrangian-intersection
 > signatures and their sheet erasure, the rank-eight/rank-sixteen/signed Fourier square and
-> trace identities with signed weighted adjointness, the exact monomial parity-check transport,
-> the complete fixed-party signed-dual kernel--image equivalence, and the regular
-> `alternatingGroup (Fin 5)` bitorsor laws.  Its nineteen terminals use only `propext`,
+> trace identities with all three weighted adjoints, the exact monomial parity-check transport,
+> the entrywise signed-transpose identity and complete fixed-party signed-dual kernel--image
+> equivalence, and the regular `alternatingGroup (Fin 5)` bitorsor laws.  Its twenty-two terminals
+> use only `propext`,
 > `Classical.choice`, and `Quot.sound`, or a subset.  Projective reconstruction of the matching
 > tables and 60 maps, theta-divisor semantics and superspeciality, ambient Schrodinger/Weil
-> normalization, complex state normalization, arbitrary LU classification, and all
+> normalization, common-ambient restriction and eigenspace-multiplicity theorems, complex state
+> normalization, arbitrary LU classification, and all
 > Golay/Hadamard uniqueness or degeneration names remain external certificate or cited-input
 > boundaries.  The conditional C471 mod-three sentence is not adopted in Paper 1 and is not
 > exported by this gate.
@@ -231,14 +242,18 @@ Mystery ledger:
 - [x] Exact finite domains and semantic boundaries visible in theorem types and docstrings.
 - [x] Definitions-only data leaf and theorem-bearing checker separated.
 - [x] Exact-target gate and aggregate trace passed.
-- [x] Nineteen-terminal standard-axiom audit.
+- [x] Twenty-two-terminal standard-axiom audit.
 - [x] Referee-facing prose/name/closure audit passed.
 - [x] `ej` + `tt` closeout and mystery ledger completed.
-- [ ] User-launched independent review.
-- [ ] Resolution or narrowing of every review finding.
+- [x] User-launched independent review.
+- [x] Resolution or narrowing of every review finding.
 - [ ] User-launched post-fix review after any implementation change.
 - [ ] Recorded final `GO`.
 
-Implementation is ready for the required user-launched independent review.  The task remains open
-until that reviewer returns `GO` (and, after any repair, the required post-fix review also returns
-`GO`).
+The initial independent review returned `NO GO` with three high findings.  Finding 1 is resolved
+by the gated `fourierSupport_signed_transpose` and linked kernel--image theorem.  Finding 2 is
+resolved by adding rank-eight/rank-sixteen weighted adjoints and the missing rank-eight trace,
+while explicitly narrowing scalar-extended eigenspace multiplicities to the external boundary.
+Finding 3 is resolved by deleting the tautological direct-sum theorem and leaving the true
+common-ambient restriction claim external.  A user-launched post-fix review is required before
+final `GO`.

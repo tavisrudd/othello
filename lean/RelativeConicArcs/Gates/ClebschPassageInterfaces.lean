@@ -4,13 +4,14 @@ import RelativeConicArcs.ClebschPassageInterfaces
 # Import gate for finite passage interfaces
 
 This gate exports finite theta-value counts and matching-intersection signatures, exact Fourier
-matrix square and weighted-adjoint identities, explicit monomial and signed-dual code transports,
-and the regular sixty-element bitorsor interface.
+matrix square, trace, and weighted-adjoint identities, explicit monomial and signed-dual code
+transports, and the regular sixty-element bitorsor interface.
 
 The gate does not export superspeciality, a theta-characteristic classification theorem, a Weil
-or Schrodinger normalization, arbitrary local-unitary classification, a canonical geometric
-identification of the sixty bitorsor elements, or any Golay, Hadamard, or Lagrangian uniqueness
-statement.  Those semantic names remain external inputs.
+or Schrodinger normalization, a common ambient Fourier carrier, eigenspace-multiplicity theorems,
+arbitrary local-unitary classification, a canonical geometric identification of the sixty
+bitorsor elements, or any Golay, Hadamard, or Lagrangian uniqueness statement.  Those semantic
+names remain external inputs.
 -/
 
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.genusThree_theta_value_counts
@@ -22,11 +23,14 @@ statement.  Those semantic names remain external inputs.
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.rankSixteenFourier_square
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.signedFourier_square
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.signedFourier_weighted_adjoint
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.rankEightFourier_weighted_adjoint
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.rankSixteenFourier_weighted_adjoint
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.Fourier_restriction_traces_zero
-#print axioms RelativeConicArcs.ClebschPassageInterfaces.common_finite_operator_restriction_witness
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.monomialTransport_bijective
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.monomial_column_intertwiner
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.monomialTransport_kernel_equivalence
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.fourierSupport_signed_transpose
+#print axioms RelativeConicArcs.ClebschPassageInterfaces.signedSourceDualParam_eq_fourierSupportParam
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.fourierSupportParam_injective
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.fixedParty_fourier_support_equivalence
 #print axioms RelativeConicArcs.ClebschPassageInterfaces.markedSymmetry_card

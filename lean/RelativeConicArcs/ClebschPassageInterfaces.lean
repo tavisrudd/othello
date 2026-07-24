@@ -14,11 +14,11 @@ rank-sixteen and signed restrictions are checked here, including weighted adjoin
 golden parity-check matrices are related both by an explicit monomial transport with party
 permutation and by a fixed-party signed dual-code transport.
 
-The common finite operator constructed below is only a simultaneous carrier for the two displayed
-restriction matrices.  Identifying it with a normalized Fourier transform, choosing a
-Schrodinger normalization, or naming its projective class as a Weil operator are external
-interpretations.  Likewise, character-sum orthogonality turns the signed dual-code equality into
-an equal-phase state-vector equality, but arbitrary local-unitary classification is not asserted.
+Identifying the rank-eight and rank-sixteen matrices as restrictions of one ambient normalized
+Fourier transform, choosing a Schrodinger normalization, or naming its projective class as a Weil
+operator are external interpretations; no artificial direct-sum carrier is used as a substitute.
+Likewise, character-sum orthogonality turns the signed dual-code equality into an equal-phase
+state-vector equality, but arbitrary local-unitary classification is not asserted.
 -/
 
 namespace RelativeConicArcs
@@ -75,6 +75,9 @@ theorem theta_signature_erases_sheet :
 
 /-! ## Explicit Fourier restrictions -/
 
+private def listSquareMatrix (n : Nat) (a : List (List ℤ)) : Matrix (Fin n) (Fin n) ℤ :=
+  fun i j ↦ (a.getD i.val []).getD j.val 0
+
 /-- The independently reconstructed rank-eight restriction squares to `1331` times the
 identity. -/
 theorem rankEightFourier_square :
@@ -101,27 +104,33 @@ theorem signedFourier_weighted_adjoint :
   funext i j
   fin_cases i <;> fin_cases j <;> norm_num [signedNorms, signedFourier]
 
-/-- Both explicit integer restrictions have trace zero, the finite trace identity underlying
-their equal plus/minus multiplicities after adjoining a square root of `1331`. -/
+/-- The rank-eight restriction is self-adjoint for its orbit-indicator norm form. -/
+theorem rankEightFourier_weighted_adjoint :
+    (fun i j : Fin 8 ↦
+      ClebschSchemeFourier.valencies.getD i.val 0 *
+        listSquareMatrix 8 ClebschSchemeFourier.firstEigenmatrix i j) =
+    (fun i j : Fin 8 ↦
+      listSquareMatrix 8 ClebschSchemeFourier.firstEigenmatrix j i *
+        ClebschSchemeFourier.valencies.getD j.val 0) := by
+  decide
+
+/-- The rank-sixteen restriction is self-adjoint for its orbit-indicator norm form. -/
+theorem rankSixteenFourier_weighted_adjoint :
+    (fun i j : Fin 16 ↦
+      rankSixteenNorms.getD i.val 0 * listSquareMatrix 16 rankSixteenFourier i j) =
+    (fun i j : Fin 16 ↦
+      listSquareMatrix 16 rankSixteenFourier j i * rankSixteenNorms.getD j.val 0) := by
+  decide
+
+/-- All three explicit integer restrictions have trace zero.  The associated eigenspace
+multiplicities require the standard distinct-root argument after scalar extension and are not
+exported as finite table identities. -/
 theorem Fourier_restriction_traces_zero :
+    (List.ofFn fun i : Fin 8 ↦
+      (ClebschSchemeFourier.firstEigenmatrix.getD i.val []).getD i.val 0).sum = 0 ∧
     (List.ofFn fun i : Fin 16 ↦ (rankSixteenFourier.getD i.val []).getD i.val 0).sum = 0 ∧
     (∑ i : Fin 4, signedFourier i i) = 0 := by
   decide
-
-private def listSquareMatrix (n : Nat) (a : List (List ℤ)) : Matrix (Fin n) (Fin n) ℤ :=
-  fun i j ↦ (a.getD i.val []).getD j.val 0
-
-/-- A single finite operator on the direct sum of the eight- and sixteen-coordinate spaces has
-the two frozen matrices as literal invariant restrictions.  This is an algebraic common-carrier
-witness, not a semantic identification of the carrier with a function space. -/
-theorem common_finite_operator_restriction_witness :
-    ∃ T : (Fin 8 → ℤ) × (Fin 16 → ℤ) → (Fin 8 → ℤ) × (Fin 16 → ℤ),
-      (∀ x, T (x, 0) =
-        (Matrix.mulVec (listSquareMatrix 8 ClebschSchemeFourier.firstEigenmatrix) x, 0)) ∧
-      (∀ y, T (0, y) = (0, Matrix.mulVec (listSquareMatrix 16 rankSixteenFourier) y)) := by
-  exact ⟨fun p ↦
-    (Matrix.mulVec (listSquareMatrix 8 ClebschSchemeFourier.firstEigenmatrix) p.1,
-      Matrix.mulVec (listSquareMatrix 16 rankSixteenFourier) p.2), by simp, by simp⟩
 
 /-! ## Monomial and fixed-party support transports -/
 
@@ -200,6 +209,28 @@ theorem monomialTransport_kernel_equivalence (x : Fin 6 → F11) :
 def fourierSupportParam (x : Fin 3 → F11) : Fin 6 → F11 :=
   Matrix.mulVec fourierSupportMatrix x
 
+/-- The signed transpose of the parameter-eight parity check. -/
+def signedSourceDualParam (x : Fin 3 → F11) : Fin 6 → F11 :=
+  fun i ↦ fourierSupportSigns i * Matrix.mulVec (pencilCheck 8).transpose x i
+
+/-- The support matrix is literally the four-minus, two-plus signed transpose of the
+parameter-eight parity check. -/
+theorem fourierSupport_signed_transpose :
+    fourierSupportMatrix =
+      fun i j ↦ fourierSupportSigns i * pencilCheck 8 j i := by
+  decide
+
+/-- The matrix parametrization and the signed-source-dual parametrization agree pointwise. -/
+theorem signedSourceDualParam_eq_fourierSupportParam (x : Fin 3 → F11) :
+    signedSourceDualParam x = fourierSupportParam x := by
+  rw [fourierSupportParam, fourierSupport_signed_transpose]
+  ext i
+  simp only [signedSourceDualParam, Matrix.mulVec, dotProduct, Matrix.transpose_apply,
+    Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro j _
+  ring
+
 /-- Coordinates recovered from a word in the target code. -/
 def fourierSupportRecover (y : Fin 6 → F11) : Fin 3 → F11 :=
   Matrix.mulVec fourierSupportRecoverMatrix y
@@ -224,22 +255,26 @@ theorem fourierSupportParam_injective : Function.Injective fourierSupportParam :
 used by character orthogonality in the state-vector calculation. -/
 theorem fixedParty_fourier_support_equivalence (y : Fin 6 → F11) :
     Matrix.mulVec (pencilCheck 4) y = 0 ↔
-      ∃ x : Fin 3 → F11, y = fourierSupportParam x := by
-  constructor
-  · intro h
-    refine ⟨fourierSupportRecover y, ?_⟩
-    calc
-      y = Matrix.mulVec (1 : Matrix (Fin 6) (Fin 6) F11) y := by simp
-      _ = Matrix.mulVec
-          (fourierSupportMatrix * fourierSupportRecoverMatrix +
-            fourierSupportCorrection * pencilCheck 4) y := by
-              rw [fourierSupport_decomposition]
-      _ = fourierSupportParam (fourierSupportRecover y) := by
-        rw [Matrix.add_mulVec, ← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec, h]
-        simp [fourierSupportParam, fourierSupportRecover]
-  · rintro ⟨x, rfl⟩
-    rw [fourierSupportParam, Matrix.mulVec_mulVec, fourierSupport_in_kernel]
-    simp
+      ∃ x : Fin 3 → F11, y = signedSourceDualParam x := by
+  have hsupport :
+      Matrix.mulVec (pencilCheck 4) y = 0 ↔
+        ∃ x : Fin 3 → F11, y = fourierSupportParam x := by
+    constructor
+    · intro h
+      refine ⟨fourierSupportRecover y, ?_⟩
+      calc
+        y = Matrix.mulVec (1 : Matrix (Fin 6) (Fin 6) F11) y := by simp
+        _ = Matrix.mulVec
+            (fourierSupportMatrix * fourierSupportRecoverMatrix +
+              fourierSupportCorrection * pencilCheck 4) y := by
+                rw [fourierSupport_decomposition]
+        _ = fourierSupportParam (fourierSupportRecover y) := by
+          rw [Matrix.add_mulVec, ← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec, h]
+          simp [fourierSupportParam, fourierSupportRecover]
+    · rintro ⟨x, rfl⟩
+      rw [fourierSupportParam, Matrix.mulVec_mulVec, fourierSupport_in_kernel]
+      simp
+  simpa only [signedSourceDualParam_eq_fourierSupportParam] using hsupport
 
 /-! ## Finite bitorsor interface -/
 
