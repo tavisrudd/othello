@@ -250,6 +250,31 @@ the C423 rank statements, C424 sheet-recovery statements, C425 profile statement
 Fourier-table statements separate: their composition is the paper mechanism, not a single theorem
 whose import upgrades every semantic bridge.
 
+## C321 trigger audit: current Singular dependency
+
+The protected manuscript has exactly one load-bearing Singular-dependent statement.  The
+sharpness remark after low-degree rigidity says that class `C02` has an 18-point uncovered locus
+equal to the rational points of a **smooth absolutely irreducible plane quartic of genus three**.
+The evidence decomposes as follows:
+
+- `check_low_degree_loci.py` independently regenerates the class and quartic, checks the exact
+  rational zero locus, and exhausts all projective linear and quadratic possible divisors.  Since
+  a reducible quartic has a factor of degree one or two, this is an exact non-CAS certificate of
+  irreducibility over `F_11`.
+- `check_low_degree_loci.sing` computes the Jacobian ideal and checks its zero-dimensional
+  colength `27`, which is the current sole executable support for geometric smoothness.
+- genus three then follows conceptually from the standard genus formula for a smooth plane
+  quartic; the manuscript currently attributes both smoothness and genus to the Singular
+  companion.
+
+Therefore C321 has mandatory scope **if the smooth/genus-three sharpness sentence survives the
+replacement manuscript**: replace the Jacobian/Groebner calculation with an independently
+specified exact certificate and checker, then cite the standard genus formula separately.  C321
+has no mandatory Paper-1 work for irreducibility or the 18-point equality, because the Python
+replay already checks those without Singular.  Removing or weakening the smooth/genus clause before
+release is the only route that makes this C321 item non-load-bearing; merely retaining Singular as
+an “independent check” does not satisfy C320's final trust route.
+
 ## Initial reconciliation judgments
 
 1. **Begin early without weakening the release gate.**  The alternative was to leave C320 wholly

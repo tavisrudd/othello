@@ -325,6 +325,11 @@ from the former `clebsch-next` lane is now crowns-owned; the historical handoff 
   particular, C421 proves only the `Fin 4` switch base plus arbitrary-size reversibility;
   C426 treats Krein/intersection equality and the 877-fusion census as external exact certificates
   unless their separate kernel checker leaves actually land.
+- **C321 has one conditional mandatory target identified by C320:** if the protected manuscript's
+  smooth genus-three `C02` quartic sharpness sentence survives, replace the sole load-bearing
+  Singular Jacobian-ideal smoothness check with an independently specified exact
+  certificate/checker.  The Python replay already owns irreducibility and the 18-point equality;
+  deleting or weakening the smooth/genus clause removes this mandatory target.
 - The campaign is mixed-verification by design: C399's current Lean arithmetic terminals and
   reproducible incidence/conic certificates are the entry boundary. Every new finite leaf requires
   a checker theorem, provenance, hash, independent replay, and explicit axiom audit; otherwise its
