@@ -72,6 +72,9 @@ docstring review before export. The failed gate is recorded in
 `notes/2026-07-24-c287-first-tag-referee-review.md`; the source-owner dispatch contract and
 deletion-first API recommendations are in
 `notes/2026-07-24-c287-source-owner-rewrite-packet.md`.
+The user approved recommendations A1 and B1 on 2026-07-24. C553 in the `cap` lane owns the
+17-module source rewrite, deletion of the two wrapper modules, consumer migration, and semantic
+docstring pass; C287 resumes with regenerated inventory and trust-spine audits after that commit.
 
 The theorem-level audit in `notes/2026-07-23-c287-first-tag-theorem-ledger.md` shows that the adopted
 human manuscript terminals need 26 files / 8,954 code lines; the advertised but uncited

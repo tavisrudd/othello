@@ -1,8 +1,9 @@
 # C287 first-tag source-owner rewrite packet
 
 **Lane**: `build-sys`
-**Status**: READY FOR SOURCE-OWNER DECISIONS; no mathematical source changed
+**Status**: A1/B1 APPROVED; dispatched as C553; no mathematical source changed
 **Source-owner lane**: `cap`
+**Decision**: delete both status-bearing wrapper modules and add no compatibility aliases
 
 ## Dispatch boundary
 
