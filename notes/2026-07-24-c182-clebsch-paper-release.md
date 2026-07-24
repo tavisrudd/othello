@@ -44,10 +44,12 @@ $A\cap\mathcal Q(\mathbb F_q)=\varnothing$, moves projective equivariance to
 the point where the degenerate-conic branch uses it, and aligns the named
 rows of the mathematical and executable dependency tables.  It also records
 that four, rather than one, non-Clebsch classes have least vanishing degree
-four.  Finally, Dye's Theorem 1 confirms that the Clebsch construction is
-available over $\mathbb F_9$ because $5=-1$ is a square there; the family
+four.  Finally, Dye's construction is available over $\mathbb F_9$ because
+$5=-1$ is a square there and the characteristic is three; the family
 formula then recovers completeness at $q=9$, independently of the
-Sylvester-graph exclusion of conic filling.
+Sylvester-graph exclusion of conic filling.  The other root $q=5$ lies in
+the exceptional characteristic and is not an instance of the paper's
+associated-conic construction.
 
 ## Verification
 

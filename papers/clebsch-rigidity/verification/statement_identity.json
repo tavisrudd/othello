@@ -175,7 +175,7 @@
       "kind": "theorem-environment",
       "row": 29,
       "sha256": "15ffdd2d510e4eb0040aeb92b8c95e021dfba0d2e3fb39cbcea5c813e304a2b2",
-      "source_line": 1144,
+      "source_line": 1147,
       "tex": "\\begin{theorem}[Conic-filling loci through eight points]\n\\label{thm:small-k-conic-filling}\nLet $A$ be a $k$-arc in $\\PG(2,q)$, where $q$ is a prime power and\n$4\\le k\\le8$, and suppose that $\\cU(A)$ is the full set of\n$\\F_q$-rational points of a nonsingular conic. If $k\\le7$, then\n\\[\n (k,q)=(4,5)\\qquad\\text{or}\\qquad(k,q)=(6,11).\n\\]\nIn the first case $A$ is a projective four-frame; in the second it is a\nClebsch hexagon. Conversely, both cases occur. If $k=8$, then\n\\[\n q\\in\\{13,17,19\\}.\n\\]\n\\end{theorem}",
       "title": "Conic-filling loci through eight points"
     },
@@ -190,5 +190,5 @@
   ],
   "schema": "clebsch-rigidity-statement-identity-v1",
   "source": "clebsch_rigidity.tex",
-  "source_sha256": "e72eca09b75e7d4f404068e9c5a458b734a8d91894faa0a8d7502e74e7b60649"
+  "source_sha256": "b3092c09b36df0f160982694a9550473d1373cf69fa3c66218b08e1d8d72a72a"
 }

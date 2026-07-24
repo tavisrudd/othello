@@ -41,9 +41,11 @@ The closing copy-edit removes the unused discrepancy column and stale
 perturbation-checker reference and adds the exact secant-covering
 reformulation.  The final referee pass adds its necessary
 $A\cap\mathcal Q(\mathbb F_q)=\varnothing$ clause, aligns the two dependency
-tables, records all four non-Clebsch degree-four classes, and uses Dye's
-existence theorem to identify the complete $q=9$ Clebsch specialization of
-$|\mathcal U(K)|=q^2-14q+45$.
+tables, records all four non-Clebsch degree-four classes, and identifies the
+complete $q=9$ Clebsch specialization of
+$|\mathcal U(K)|=q^2-14q+45$.  The $q=5$ root is explicitly separated as
+an exceptional-characteristic counting degeneration, not an instance of
+the associated-conic construction.
 
 The remaining C182 blocker is external publication packaging. The previously
 cited GitHub artifact URL is not publicly reachable, and this workspace has
@@ -323,6 +325,11 @@ Use C399 as the conic-phase prelude and C403/C406/C411 with selective C412
 upgrades. Credit Edge and Dye for the exceptional configurations and avoid
 novelty claims for the raw `5/14/22` marker spaces, parent ambiguity, the
 `B_3` `3+6` split, or conic--GRS identification.
+
+Treat the specialist review's proposed `SC(j)` repair as an unverified
+hypothesis, not a patch: independently derive and check every
+characteristic, equivariance, and quantifier condition before it enters
+Paper II.
 
 Primary planning inputs:
 

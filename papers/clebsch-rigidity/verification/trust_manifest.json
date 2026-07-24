@@ -1207,7 +1207,7 @@
         }
       ],
       "id": "thm-small-k-conic-filling",
-      "paper_location": "source line 1144",
+      "paper_location": "source line 1147",
       "route": "mixed",
       "row": 29,
       "source": {
@@ -1269,9 +1269,9 @@
   "manuscript_pdf": {
     "path": "clebsch_rigidity.pdf",
     "repository": "paper",
-    "sha256": "e92604300ecbdf9b622db5dc64b0da6c9fd67072dc303bd82bb49bbac03b66e4"
+    "sha256": "e2cce9781555e849f04e3d7669f639980f04d6284f64a87c3507ca3e8becb7f4"
   },
-  "manuscript_sha256": "e72eca09b75e7d4f404068e9c5a458b734a8d91894faa0a8d7502e74e7b60649",
+  "manuscript_sha256": "b3092c09b36df0f160982694a9550473d1373cf69fa3c66218b08e1d8d72a72a",
   "public_documents": [
     {
       "path": "README.md",
@@ -1311,7 +1311,7 @@
   "statement_identity": {
     "path": "verification/statement_identity.json",
     "repository": "paper",
-    "sha256": "5926fdb757fe30b1493243650a100e71dbae250476ed05d9019e14bc700a7f15"
+    "sha256": "95c8dcb341c22b85f757bf9ad170222449d91fcca13af3f0c862d127d41e6181"
   },
   "verify_all": {
     "checker_output_certificate": {
