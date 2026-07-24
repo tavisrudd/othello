@@ -6,7 +6,7 @@ This standard-library checker hardens the finite computations originally supplie
 frame-normalized seven-arc searches at q=11 and q=13.
 
 It does *not* prove the universal chord-moment algebra for k=4,5,7.  That argument is a separate
-mathematical proof in the C187 report; the computations here verify the surviving finite leaves.
+mathematical proof in the manuscript; the computations here verify the surviving finite leaves.
 """
 
 from __future__ import annotations

@@ -3249,7 +3249,7 @@
               {
                 "path": "check_small_k_conic_filling.py",
                 "repository": "paper",
-                "sha256": "2aa2187ce53867ea3e3f823463e71c42f9537594f4603a7091edbf063bf1b67c"
+                "sha256": "9d8991c583b0dc9fcc972e6560e41b163d06836cffa6f029dd80d2b5a1c94379"
               }
             ],
             "checker": "python3 check_small_k_conic_filling.py",

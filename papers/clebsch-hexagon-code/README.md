@@ -46,6 +46,5 @@ python3 verification/verify_release.py --lean-root /path/to/shared-lean
 The runner verifies the Lean checkout against the pinned commit before executing the aggregate
 trust gate.
 
-The immutable release produced by task C182 will extend this file with the frozen environment,
-complete replay command list, expected success sentinels, typical runtimes, licenses, commit and
-release identifiers, and the archive manifest.
+The immutable archival release will extend this file with expected success sentinels, typical
+runtimes, licenses, release identifiers, and the archive manifest.
